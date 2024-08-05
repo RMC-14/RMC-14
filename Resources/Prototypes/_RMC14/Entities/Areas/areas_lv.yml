@@ -1,0 +1,751 @@
+﻿- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaLv624
+  suffix: LV Area
+  components:
+#  - type: Sprite
+#    state: lv-626
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#6C6767D8'
+
+- type: entity
+  parent: RMCAreaLv624
+  id: RMCAreaLv624Ground
+  name: Ground
+  components:
+  - type: Sprite
+    state: green
+
+- type: entity
+  parent: RMCAreaLv624Ground
+  id: RMCAreaLv624GroundJungle
+  components:
+  - type: Area
+    minimapColor: '#2B5B2BEE'
+
+- type: entity
+  parent: RMCAreaLv624GroundJungle
+  id: RMCAreaLv624GroundJungleSouthEastJungle
+  name: Southeast Jungle
+  components:
+  - type: Sprite
+    state: southeast
+
+- type: entity
+  parent: RMCAreaLv624GroundJungle
+  id: RMCAreaLv624GroundJungleSouthCentralJungle
+  name: Southern Central Jungle
+  components:
+  - type: Sprite
+    state: south
+
+- type: entity
+  parent: RMCAreaLv624GroundJungle
+  id: RMCAreaLv624GroundJungleSouthWestJungle
+  name: Southwest Jungle
+  components:
+  - type: Sprite
+    state: southwest
+
+- type: entity
+  parent:
+  - RMCAreaLv624GroundJungleSouthWestJungle
+  - RMCAreaGlass
+  id: RMCAreaLv624GroundJungleSouthWestJungleCeiling
+
+- type: entity
+  parent: RMCAreaLv624GroundJungle
+  id: RMCAreaLv624GroundJungleWestJungle
+  name: Western Jungle
+  components:
+  - type: Sprite
+    state: west
+  - type: Area
+    resinAllowed: false
+
+- type: entity
+  parent:
+  - RMCAreaLv624GroundJungleWestJungle
+  - RMCAreaGlass
+  id: RMCAreaLv624GroundJungleWestJungleCeiling
+
+- type: entity
+  parent: RMCAreaLv624GroundJungle
+  id: RMCAreaLv624GroundJungleEastJungle
+  name: Eastern Jungle
+  components:
+  - type: Sprite
+    state: east
+
+- type: entity
+  parent: RMCAreaLv624GroundJungle
+  id: RMCAreaLv624GroundJungleNorthWestJungle
+  name: Northwest Jungle
+  components:
+  - type: Sprite
+    state: northwest
+
+- type: entity
+  parent: RMCAreaLv624GroundJungle
+  id: RMCAreaLv624GroundJungleNorthJungle
+  name: Northern Jungle
+  components:
+  - type: Sprite
+    state: north
+
+- type: entity
+  parent: RMCAreaLv624GroundJungle
+  id: RMCAreaLv624GroundJungleNorthEastJungle
+  name: Northeast Jungle
+  components:
+  - type: Sprite
+    state: northeast
+
+- type: entity
+  parent: RMCAreaLv624GroundJungle
+  id: RMCAreaLv624GroundJungleCentralJungle
+  name: Central Jungle
+  components:
+  - type: Sprite
+    state: central
+
+- type: entity
+  parent: RMCAreaLv624GroundJungle
+  id: RMCAreaLv624GroundJungleWestCentralJungle
+  name: West Central Jungle
+  components:
+  - type: Sprite
+    state: west
+
+- type: entity
+  parent: RMCAreaLv624GroundJungle
+  id: RMCAreaLv624GroundJungleEastCentralJungle
+  name: East Central Jungle
+  components:
+  - type: Sprite
+    state: east
+
+- type: entity
+  parent: RMCAreaLv624Ground
+  id: RMCAreaLv624GroundBarrens
+  name: Barrens
+  components:
+  - type: Sprite
+    state: yellow
+
+- type: entity
+  parent: RMCAreaLv624GroundBarrens
+  id: RMCAreaLv624GroundBarrensWestBarrens
+  name: Western Barrens
+  components:
+  - type: Sprite
+    state: west
+
+- type: entity
+  parent:
+  - RMCAreaLv624GroundBarrensWestBarrens
+  - RMCAreaGlass
+  id: RMCAreaLv624GroundBarrensWestBarrensCeiling
+
+- type: entity
+  parent: RMCAreaLv624GroundBarrens
+  id: RMCAreaLv624GroundBarrensEastBarrens
+  name: Eastern Barrens
+  components:
+  - type: Sprite
+    state: east
+
+- type: entity
+  parent:
+  - RMCAreaLv624GroundBarrensEastBarrens
+  - RMCAreaGlass
+  id: RMCAreaLv624GroundBarrensEastBarrensCeiling
+
+- type: entity
+  parent: RMCAreaLv624GroundBarrens
+  id: RMCAreaLv624GroundBarrensContainers
+  name: Containers
+  components:
+  - type: Sprite
+    state: blue-red
+
+- type: entity
+  parent: RMCAreaLv624GroundBarrens
+  id: RMCAreaLv624GroundBarrensNorthEastBarrens
+  name: North Eastern Barrens
+  components:
+  - type: Sprite
+    state: northeast
+
+- type: entity
+  parent:
+  - RMCAreaLv624GroundBarrensNorthEastBarrens
+  - RMCAreaGlass
+  id: RMCAreaLv624GroundBarrensNorthEastBarrensCeiling
+
+- type: entity
+  parent: RMCAreaLv624GroundBarrens
+  id: RMCAreaLv624GroundBarrensSouthWestBarrens
+  name: South Western Barrens
+  components:
+  - type: Sprite
+    state: southwest
+
+- type: entity
+  parent: RMCAreaLv624GroundBarrens
+  id: RMCAreaLv624GroundBarrensCentralBarrens
+  name: Central Barrens
+  components:
+  - type: Sprite
+    state: away1
+
+- type: entity
+  parent: RMCAreaLv624GroundBarrens
+  id: RMCAreaLv624GroundBarrensSouthEasternBarrens
+  name: South Eastern Barrens
+  components:
+  - type: Sprite
+    state: southeast
+
+- type: entity
+  parent: RMCAreaLv624GroundBarrens
+  id: RMCAreaLv624GroundBarrensSouthEasternJungleBarrens
+  name: South East Jungle Barrens
+  components:
+  - type: Sprite
+    state: southeast
+
+- type: entity
+  parent: RMCAreaLv624Ground
+  id: RMCAreaLv624GroundRiver
+  name: River
+  components:
+  - type: Sprite
+    state: blueold
+
+- type: entity
+  parent: RMCAreaLv624GroundRiver
+  id: RMCAreaLv624GroundRiverWestRiver
+  name: Western River
+  components:
+  - type: Sprite
+    state: blueold
+
+- type: entity
+  parent: RMCAreaLv624GroundRiver
+  id: RMCAreaLv624GroundRiverCentralRiver
+  name: Central River
+  components:
+  - type: Sprite
+    state: purple
+
+- type: entity
+  parent: RMCAreaLv624GroundRiver
+  id: RMCAreaLv624GroundRiverEastRiver
+  name: Eastern River
+  components:
+  - type: Sprite
+    state: bluenew
+
+- type: entity
+  parent: RMCAreaLv624Ground
+  id: RMCAreaLv624GroundColony
+  name: Weyland-Yutani Compound
+  components:
+  - type: Sprite
+    state: green
+
+- type: entity
+  parent: RMCAreaLv624GroundColony
+  id: RMCAreaLv624GroundColonyNorthNexusRoad
+  name: North Nexus Road
+  components:
+  - type: Sprite
+    state: north
+
+- type: entity
+  parent: RMCAreaLv624GroundColony
+  id: RMCAreaLv624GroundColonySouthMedbayRoad
+  name: South Medbay Road
+  components:
+  - type: Sprite
+    state: south
+
+- type: entity
+  parent: RMCAreaLv624GroundColony
+  id: RMCAreaLv624GroundColonySouthNexusRoad
+  name: South Nexus Road
+  components:
+  - type: Sprite
+    state: south
+
+- type: entity
+  parent: RMCAreaLv624GroundColony
+  id: RMCAreaLv624GroundColonyWestNexusRoad
+  name: West Nexus Road
+  components:
+  - type: Sprite
+    state: west
+
+- type: entity
+  parent: RMCAreaLv624GroundColony
+  id: RMCAreaLv624GroundColonyNorthTcommsRoad
+  name: North T-Comms Road
+  components:
+  - type: Sprite
+    state: north
+
+- type: entity
+  parent: RMCAreaLv624GroundColony
+  id: RMCAreaLv624GroundColonyWestTcommsRoad
+  name: West T-Comms Road
+  components:
+  - type: Sprite
+    state: west
+
+- type: entity
+  parent:
+  - RMCAreaLv624GroundColony
+  - RMCAreaUndergroundMetalAllowCAS
+  id: RMCAreaLv624GroundColonyTelecomm
+  name: LZ1 Communications Relay
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: ass_line
+  - type: Area
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaLv624GroundColonyTelecomm
+  id: RMCAreaLv624GroundColonyTelecommCargo
+  name: Far North Storage Dome Communications Relay
+
+- type: entity
+  parent:
+  - RMCAreaLv624GroundColonyTelecomm
+  - RMCAreaNone
+  id: RMCAreaLv624GroundColonyTelecommSwLz1
+  name: South-West LZ1 Communications Relay
+
+- type: entity
+  parent: RMCAreaLv624GroundColonyTelecomm
+  id: RMCAreaLv624GroundColonyTelecommTcommdome
+  name: Telecomms Dome Communications Relay
+
+- type: entity
+  parent:
+  - RMCAreaLv624GroundColonyTelecommTcommdome
+  - RMCAreaNone
+  id: RMCAreaLv624GroundColonyTelecommTcommdomeSouth
+  name: South Telecomms Dome Communications Relay
+
+- type: entity
+  parent:
+  - RMCAreaLv624GroundColonyTelecomm
+  - RMCAreaNone
+  id: RMCAreaLv624GroundColonyTelecommSwLz2
+  name: South-West LZ2 Communications Relay
+
+- type: entity
+  parent:
+  - RMCAreaLv624Ground
+  - RMCAreaUndergroundBlockCAS
+  id: RMCAreaLv624GroundCaves
+  name: Caves
+  components:
+  - type: Sprite
+    state: cave
+  - type: Area
+    minimapColor: '#3F3C3CEF'
+
+- type: entity
+  parent: RMCAreaLv624GroundCaves
+  id: RMCAreaLv624GroundCavesWestCaves
+  name: Western Caves
+  components:
+  - type: Sprite
+    state: away1
+
+- type: entity
+  parent: RMCAreaLv624GroundCaves
+  id: RMCAreaLv624GroundCavesSouthWestCaves
+  name: South Western Caves
+  components:
+  - type: Sprite
+    state: red
+
+- type: entity
+  parent: RMCAreaLv624GroundCaves
+  id: RMCAreaLv624GroundCavesEastCaves
+  name: Eastern Caves
+  components:
+  - type: Sprite
+    state: away
+
+- type: entity
+  parent: RMCAreaLv624GroundCaves
+  id: RMCAreaLv624GroundCavesCentralCaves
+  name: Central Caves
+  components:
+  - type: Sprite
+    state: away4
+
+- type: entity
+  parent: RMCAreaLv624GroundCaves
+  id: RMCAreaLv624GroundCavesNorthWestCaves
+  name: North Western Caves
+  components:
+  - type: Sprite
+    state: cave
+
+- type: entity
+  parent: RMCAreaLv624GroundCaves
+  id: RMCAreaLv624GroundCavesNorthEastCaves
+  name: North Eastern Caves
+  components:
+  - type: Sprite
+    state: cave
+
+- type: entity
+  parent: RMCAreaLv624GroundCaves
+  id: RMCAreaLv624GroundCavesNorthCentralCaves
+  name: North Central Caves
+  components:
+  - type: Sprite
+    state: away3
+
+- type: entity
+  parent: RMCAreaLv624GroundCaves
+  id: RMCAreaLv624GroundCavesSouthCentralCaves
+  name: South Central Caves
+  components:
+  - type: Sprite
+    state: away2
+
+- type: entity
+  parent: RMCAreaLv624GroundCaves
+  id: RMCAreaLv624GroundCavesSouthEastCaves
+  name: South East Caves
+  components:
+  - type: Sprite
+    state: away2
+
+- type: entity
+  parent: RMCAreaLv624GroundCaves
+  id: RMCAreaLv624GroundCavesSandTemple
+  name: Sand Temple
+  components:
+  - type: Sprite
+    state: bluenew
+
+- type: entity
+  parent: RMCAreaLv624GroundCavesSandTemple
+  id: RMCAreaLv624GroundCavesSandTemplePowered
+  name: Sand Temple - Powered
+  components:
+  - type: Sprite
+    state: green
+
+- type: entity
+  parent:
+  - RMCAreaLv624
+  - RMCAreaProtectionMetal
+  id: RMCAreaLv624Lazarus
+  name: Lazarus
+  components:
+  - type: Sprite
+    state: green
+
+- type: entity
+  parent:
+  - RMCAreaLv624Lazarus
+  - RMCAreaNone
+  id: RMCAreaLv624LazarusLandingZones
+  components:
+  - type: Area
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaLv624LazarusLandingZones
+  id: RMCAreaLv624LazarusLandingZonesLz1
+  name: Alamo Landing Zone
+
+- type: entity
+  parent: RMCAreaLv624LazarusLandingZones
+  id: RMCAreaLv624LazarusLandingZonesLz2
+  name: Normandy Landing Zone
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusCorporateDome
+  name: Corporate Dome
+  components:
+  - type: Sprite
+    state: green
+
+- type: entity
+  parent:
+  - RMCAreaLv624Lazarus
+  - RMCAreaGlass
+  id: RMCAreaLv624LazarusYggdrasil
+  name: Yggdrasil Tree
+  components:
+  - type: Sprite
+    state: atmos
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusMedbay
+  name: Medbay
+  components:
+  - type: Sprite
+    state: medbay
+  - type: Area
+    minimapColor: '#3DBF75EE'
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusArmory
+  name: Armory
+  components:
+  - type: Sprite
+    state: armory
+  - type: Area
+    minimapColor: '#A22D2DEE'
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusSecurity
+  name: Security
+  components:
+  - type: Sprite
+    state: security
+  - type: Area
+    minimapColor: '#A22D2DEE'
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusCaptain
+  name: Commandant's Quarters
+  components:
+  - type: Sprite
+    state: captain
+  - type: Area
+    minimapColor: '#2D3FA2EE'
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusHop
+  name: Head of Personnel's Office
+  components:
+  - type: Sprite
+    state: head_quarters
+  - type: Area
+    minimapColor: '#2D3FA2EE'
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusKitchen
+  name: Kitchen
+  components:
+  - type: Sprite
+    state: kitchen
+  - type: Area
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusCanteen
+  name: Canteen
+  components:
+  - type: Sprite
+    state: cafeteria
+  - type: Area
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusMainHall
+  name: Main Hallway
+  components:
+  - type: Sprite
+    state: hallc1
+  - type: Area
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusToilet
+  name: Dormitory Toilet
+  components:
+  - type: Sprite
+    state: toilet
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusChapel
+  name: Chapel
+  components:
+  - type: Sprite
+    state: chapel
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusSleepMale
+  name: Male Dorm
+  components:
+  - type: Sprite
+    state: sleep
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusSleepFemale
+  name: Female Dorm
+  components:
+  - type: Sprite
+    state: sleep
+  - type: Area
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusQuart
+  name: Quartermasters
+  components:
+  - type: Sprite
+    state: quart
+  - type: Area
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusQuartstorage
+  name: Cargo Bay
+  components:
+  - type: Sprite
+    state: quartstorage
+  - type: Area
+    resinAllowed: false
+
+- type: entity
+  parent:
+  - RMCAreaLv624LazarusQuartstorage
+  - RMCAreaNone
+  id: RMCAreaLv624LazarusQuartstorageOutdoors
+  name: Cargo Bay Area
+  components:
+  - type: Sprite
+    state: purple
+  - type: Area
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusEngineering
+  name: Engineering
+  components:
+  - type: Sprite
+    state: engine_smes
+  - type: Area
+    minimapColor: '#C19504E7'
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusComms
+  name: Communications Relay
+  components:
+  - type: Sprite
+    state: tcomsatcham
+  - type: Area
+    minimapColor: '#C19504E7'
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusSecureStorage
+  name: Secure Storage
+  components:
+  - type: Sprite
+    state: storage
+  - type: Area
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusRobotics
+  name: Robotics
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: ass_line
+  - type: Area
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusResearch
+  name: Research Lab
+  components:
+  - type: Sprite
+    state: toxlab
+  - type: Area
+    minimapColor: '#812DA2EE'
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusFitness
+  name: Fitness Room
+  components:
+  - type: Sprite
+    state: fitness
+
+- type: entity
+  parent:
+  - RMCAreaLv624Lazarus
+  - RMCAreaGlass
+  id: RMCAreaLv624LazarusHydroponics
+  name: Hydroponics
+  components:
+  - type: Sprite
+    state: hydro
+
+- type: entity
+  abstract: true
+  parent: RMCAreaLv624
+  id: RMCAreaLv624Landing
+
+- type: entity
+  parent: RMCAreaLv624Landing
+  id: RMCAreaLv624LandingConsole
+  name: LZ1 'Nexus'
+  components:
+  - type: Sprite
+    state: tcomsatcham
+
+- type: entity
+  parent: RMCAreaLv624Landing
+  id: RMCAreaLv624LandingConsole2
+  name: LZ2 'Robotics'
+  components:
+  - type: Sprite
+    state: tcomsatcham
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusCrashedShip
+  name: Crashed Ship
+  components:
+  - type: Sprite
+    state: syndie-ship
+
+- type: entity
+  parent: RMCAreaLv624Lazarus
+  id: RMCAreaLv624LazarusCrashedShipContainers
+  name: Crashed Ship Containers
+  components:
+  - type: Sprite
+    state: syndie-ship
