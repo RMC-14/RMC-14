@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: thymol-blue
-  changes:
-  - message: Added barbed wire! Place them onto barricades to make sure the enemy
-      can't just break through without a cost!
-    type: Add
-  id: 16
-  time: '2024-01-09T07:40:57.0000000+00:00'
 - author: nikthechampiongr
   changes:
   - message: Added the Move Order.
@@ -4279,5 +4272,18 @@
   id: 515
   time: '2024-08-04T23:13:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3530
+- author: DrSmugleaf
+  changes:
+  - message: Fixed nested marines not being able to see anything.
+    type: Fix
+  - message: Fixed xenonids being able to attack marines that are both nested and
+      infected.
+    type: Fix
+  - message: Fixed the client sometimes falsely showing the red color flash effect
+      when attacking something that they can't, like allied xenonids.
+    type: Fix
+  id: 516
+  time: '2024-08-05T03:08:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3540
 Name: RMC14
 Order: -1
