@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.DoAfter;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
@@ -22,6 +23,7 @@ public sealed class CMStorageSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
 
     private readonly List<EntityUid> _toRemove = new();
 
@@ -107,6 +109,9 @@ public sealed class CMStorageSystem : EntitySystem
         {
             return false;
         }
+
+        if (comp.SkipInHand && _hands.IsHolding(entity, uid))
+            return false;
 
         var ev = new OpenStorageDoAfterEvent(GetNetEntity(uid), GetNetEntity(entity), silent);
         var doAfter = new DoAfterArgs(EntityManager, entity, comp.Duration, ev, uid)
@@ -201,7 +206,11 @@ public sealed class CMStorageSystem : EntitySystem
                 var current = _transform.GetMoverCoordinates(user);
 
                 if (!_transform.InRange(origin, current, 0.1f))
+                {
+                    if (TryComp<StorageCloseOnMoveComponent>(uid, out var comp) && comp.SkipInHand && _hands.IsHolding(user, uid))
+                        continue;
                     _toRemove.Add(user);
+                }
             }
 
             foreach (var user in _toRemove)

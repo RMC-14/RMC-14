@@ -7,4 +7,7 @@ public sealed partial class StorageOpenDoAfterComponent : Component
 {
     [DataField, AutoNetworkedField]
     public TimeSpan Duration = TimeSpan.FromSeconds(2);
+
+    [DataField, AutoNetworkedField]
+    public bool SkipInHand = false;
 }
