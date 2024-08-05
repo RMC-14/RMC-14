@@ -127,6 +127,12 @@
       - LightReplacer
       - EntrenchingTool
   - type: FixedItemSizeStorage
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
 
 - type: entity
   parent: CMBeltBase

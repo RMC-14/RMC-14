@@ -11,7 +11,7 @@ using static Content.Shared.Storage.StorageComponent;
 
 namespace Content.Shared._RMC14.Storage;
 
-public sealed class CMStorageSystem : EntitySystem
+public sealed class RMCStorageSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
@@ -25,8 +25,12 @@ public sealed class CMStorageSystem : EntitySystem
 
     private readonly List<EntityUid> _toRemove = new();
 
+    private EntityQuery<StorageComponent> _storageQuery;
+
     public override void Initialize()
     {
+        _storageQuery = GetEntityQuery<StorageComponent>();
+
         SubscribeLocalEvent<StorageFillComponent, CMStorageItemFillEvent>(OnStorageFillItem);
 
         SubscribeLocalEvent<StorageOpenDoAfterComponent, OpenStorageDoAfterEvent>(OnStorageOpenDoAfter);
@@ -169,6 +173,41 @@ public sealed class CMStorageSystem : EntitySystem
         }
 
         return false;
+    }
+
+    public bool CanInsertStorageLimit(Entity<LimitedStorageComponent?, StorageComponent?> limited, EntityUid toInsert, out LocId popup)
+    {
+        popup = default;
+        if (!Resolve(limited, ref limited.Comp1, false) ||
+            !_storageQuery.Resolve(limited, ref limited.Comp2, false))
+        {
+            return true;
+        }
+
+        foreach (var limit in limited.Comp1.Limits)
+        {
+            if (!_whitelist.IsWhitelistPass(limit.Whitelist, toInsert))
+                continue;
+
+            var storedCount = 0;
+            foreach (var stored in limited.Comp2.StoredItems.Keys)
+            {
+                if (!_whitelist.IsWhitelistPass(limit.Whitelist, stored))
+                    continue;
+
+                storedCount++;
+                if (storedCount >= limit.Count)
+                    break;
+            }
+
+            if (storedCount < limit.Count)
+                continue;
+
+            popup = limit.Popup == default ? "rmc-storage-limit-cant-fit" : limit.Popup;
+            return false;
+        }
+
+        return true;
     }
 
     public override void Update(float frameTime)
