@@ -2,6 +2,7 @@
   parent: RMCAreaBase
   id: RMCAreaSpace
   name: Space
+  suffix: Space Area
   components:
   - type: Area
     avoidBioscan: False

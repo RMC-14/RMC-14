@@ -1,0 +1,351 @@
+﻿- type: entity
+  parent:
+  - RMCAreaBase
+  - RMCAreaGlass
+  id: RMCAreaFiorina
+  name: Fiorina Orbital Penitentiary - Science Annex
+  suffix: Fiorina Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_fiorina.rsi
+    state: fiorina
+  - type: Area
+    buildSpecial: true
+    minimapColor: '#6C6767D8'
+
+- type: entity
+  parent:
+  - RMCAreaFiorina
+  - RMCAreaMax
+  id: RMCAreaFiorinaOob
+  name: Fiorina - Out Of Bounds
+  components:
+  - type: Sprite
+    state: oob
+  - type: Area
+    resinAllowed: false
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+
+- type: entity
+  parent:
+  - RMCAreaFiorina
+  - RMCAreaProtectionMetal
+  id: RMCAreaFiorinaMaintenance
+  name: Fiorina - Maintenance
+  components:
+  - type: Sprite
+    state: maints
+
+- type: entity
+  parent:
+  - RMCAreaFiorina
+  - RMCAreaUndergroundMetalBlockCAS
+  id: RMCAreaFiorinaTumor
+  name: Fiorina - Resin Tumor
+  components:
+  - type: Sprite
+    state: tumor0
+
+- type: entity
+  parent: RMCAreaFiorinaTumor
+  id: RMCAreaFiorinaTumorDeep
+  components:
+  - type: Sprite
+    state: tumor0-deep
+
+- type: entity
+  parent: RMCAreaFiorinaTumor
+  id: RMCAreaFiorinaTumorFiberbush
+  name: Fiorina - Fiberbush Infestation
+  components:
+  - type: Sprite
+    state: tumor-fiberbush
+
+- type: entity
+  parent: RMCAreaFiorinaTumor
+  id: RMCAreaFiorinaTumorShip
+  name: Fiorina - Scavenger Ship 'NSV Renault'
+  components:
+  - type: Sprite
+    state: tumor1
+  - type: Area
+    minimapColor: '#885A04E7'
+
+- type: entity
+  parent: RMCAreaFiorinaTumor
+  id: RMCAreaFiorinaTumorCivres
+  name: Fiorina - Green Block Residences
+  components:
+  - type: Sprite
+    state: tumor0
+
+- type: entity
+  parent: RMCAreaFiorinaTumor
+  id: RMCAreaFiorinaTumorAuxEngi
+  name: Fiorina - Engineering Sector
+  components:
+  - type: Sprite
+    state: tumor2
+  - type: Area
+    minimapColor: '#C19504E7'
+
+- type: entity
+  parent: RMCAreaFiorinaTumor
+  id: RMCAreaFiorinaTumorServers
+  name: Fiorina - Research Servers
+  components:
+  - type: Sprite
+    state: tumor2
+  - type: Area
+    minimapColor: '#812DA2EE'
+
+- type: entity
+  parent: RMCAreaFiorinaTumor
+  id: RMCAreaFiorinaTumorIceLab
+  name: Fiorina - Cryogenic Research Labs
+  components:
+  - type: Sprite
+    state: tumor3
+  - type: Area
+    minimapColor: '#812DA2EE'
+
+- type: entity
+  parent:
+  - RMCAreaFiorina
+  - RMCAreaGlass
+  id: RMCAreaFiorinaLz
+  name: Fiorina - LZ
+  components:
+  - type: Sprite
+    state: lz
+  - type: Area
+    minimapColor: '#EBE5E5E3'
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaFiorinaLz
+  id: RMCAreaFiorinaLzNearLzI
+  name: Fiorina - LZ1 Aux Port
+
+- type: entity
+  parent: RMCAreaFiorinaLz
+  id: RMCAreaFiorinaLzNearLzII
+  name: Fiorina - LZ2 Prison Port
+
+- type: entity
+  parent: RMCAreaFiorinaLz
+  id: RMCAreaFiorinaLzConsoleI
+  name: Fiorina - LZ1 Control Console
+  components:
+  - type: Sprite
+    state: lz1
+
+- type: entity
+  parent: RMCAreaFiorinaLz
+  id: RMCAreaFiorinaLzConsoleII
+  name: Fiorina - LZ2 Control Console
+  components:
+  - type: Sprite
+    state: lz2
+
+- type: entity
+  parent: RMCAreaShuttleDrop1
+  id: RMCAreaShuttleDrop1PrisonV3
+  name: Fiorina - Dropship Alamo Landing Zone
+  components:
+  - type: Sprite
+    state: shuttle
+  - type: Area
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaShuttleDrop2
+  id: RMCAreaShuttleDrop2PrisonV3
+  name: Fiorina - Normandy Landing Zone
+  components:
+  - type: Sprite
+    state: shuttle2
+  - type: Area
+    resinAllowed: false
+
+- type: entity
+  parent:
+  - RMCAreaFiorina
+  - RMCAreaGlass
+  id: RMCAreaFiorinaStation
+  name: Fiorina - Station Interior
+  components:
+  - type: Sprite
+    state: station0
+
+- type: entity
+  parent: RMCAreaFiorinaStation
+  id: RMCAreaFiorinaStationLowsec
+  name: Fiorina - Low Security Cells
+  components:
+  - type: Sprite
+    state: station1
+
+- type: entity
+  parent: RMCAreaFiorinaStation
+  id: RMCAreaFiorinaStationPowerRing
+  name: Fiorina - Engineering Ring
+  components:
+  - type: Sprite
+    state: power0
+  - type: Area
+    minimapColor: '#C19504E7'
+
+- type: entity
+  parent: RMCAreaFiorinaStation
+  id: RMCAreaFiorinaStationDisco
+  name: Fiorina - Disco Storage
+  components:
+  - type: Sprite
+    state: disco
+
+- type: entity
+  parent: RMCAreaFiorinaStation
+  id: RMCAreaFiorinaStationFlightDeck
+  name: Fiorina - Flight Deck
+  components:
+  - type: Sprite
+    state: police_line
+
+- type: entity
+  parent: RMCAreaFiorinaStation
+  id: RMCAreaFiorinaStationSecurity
+  name: Fiorina - Security Hub
+  components:
+  - type: Sprite
+    state: security_hub
+  - type: Area
+    minimapColor: '#A22D2DEE'
+
+- type: entity
+  parent: RMCAreaFiorinaStationSecurity
+  id: RMCAreaFiorinaStationSecurityWardens
+  name: Fiorina - Warden's Office
+  components:
+  - type: Sprite
+    state: wardens
+  - type: Area
+    minimapColor: '#A22D2DEE'
+
+- type: entity
+  parent: RMCAreaFiorinaStation
+  id: RMCAreaFiorinaStationBotany
+  name: Fiorina - Botany Growtrays
+  components:
+  - type: Sprite
+    state: botany
+  - type: Area
+    minimapColor: '#812DA2EE'
+
+- type: entity
+  parent: RMCAreaFiorinaStation
+  id: RMCAreaFiorinaStationPark
+  name: Fiorina - Park
+  components:
+  - type: Sprite
+    state: station0
+
+- type: entity
+  parent: RMCAreaFiorinaStation
+  id: RMCAreaFiorinaStationTransitHub
+  name: Fiorina - Transit Hub
+  components:
+  - type: Sprite
+    state: station1
+
+- type: entity
+  parent: RMCAreaFiorinaStation
+  id: RMCAreaFiorinaStationCentralRing
+  name: Fiorina - Central Ring
+  components:
+  - type: Sprite
+    state: station2
+
+- type: entity
+  parent: RMCAreaFiorinaStation
+  id: RMCAreaFiorinaStationChapel
+  name: Fiorina - Chapel
+  components:
+  - type: Sprite
+    state: station3
+
+- type: entity
+  parent: RMCAreaFiorinaStation
+  id: RMCAreaFiorinaStationCivresBlue
+  name: Fiorina - Blue Block Residences
+  components:
+  - type: Sprite
+    state: station1
+
+- type: entity
+  parent: RMCAreaFiorinaStation
+  id: RMCAreaFiorinaStationMedbay
+  name: Fiorina - Medical Bay
+  components:
+  - type: Sprite
+    state: station4
+  - type: Area
+    minimapColor: '#3DBF75EE'
+
+- type: entity
+  parent: RMCAreaFiorinaStation
+  id: RMCAreaFiorinaStationResearchCells
+  name: Fiorina - Research Cellblock
+  components:
+  - type: Sprite
+    state: station0
+  - type: Area
+    minimapColor: '#812DA2EE'
+
+- type: entity
+  parent: RMCAreaFiorinaStation
+  id: RMCAreaFiorinaStationTelecomm
+  name: Fiorina - Communications Relay
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: ass_line
+  - type: Area
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaFiorinaStationTelecomm
+  id: RMCAreaFiorinaStationTelecommLz1Cargo
+  name: Fiorina - LZ1 Cargo Communications Relay
+
+- type: entity
+  parent: RMCAreaFiorinaStationTelecomm
+  id: RMCAreaFiorinaStationTelecommLz1Containers
+  name: Fiorina - LZ1 Containers Communications Relay
+
+- type: entity
+  parent: RMCAreaFiorinaStationTelecomm
+  id: RMCAreaFiorinaStationTelecommLz1Tram
+  name: Fiorina - LZ1 Aux Port Communications Relay
+
+- type: entity
+  parent: RMCAreaFiorinaStationTelecomm
+  id: RMCAreaFiorinaStationTelecommLz1Engineering
+  name: Fiorina - Engineering Primary Communications Relay
+
+- type: entity
+  parent: RMCAreaFiorinaStationTelecomm
+  id: RMCAreaFiorinaStationTelecommLz2Engineering
+  name: Fiorina - Engineering Secondary Communications Relay
+
+- type: entity
+  parent: RMCAreaFiorinaStationTelecomm
+  id: RMCAreaFiorinaStationTelecommLz2North
+  name: Fiorina - LZ2 North Communications Relay
+
+- type: entity
+  parent: RMCAreaFiorinaStationTelecomm
+  id: RMCAreaFiorinaStationTelecommLz2Maint
+  name: Fiorina - Backup Communications Relay
