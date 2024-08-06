@@ -639,6 +639,7 @@
   parent: CMBoxMagazineBase
   id: CMBoxMagazineRevolverM44Empty
   name: magazine box (M44 x 16)
+  description: A box for holding many speedloaders with a carrying handle.
   components:
   - type: Construction
     graph: CMBoxMagazine
@@ -678,6 +679,7 @@
   parent: CMBoxMagazineBase
   id: CMBoxMagazineRevolverM44MarksmanEmpty
   name: magazine box (M44 MK x 16)
+  description: A box for holding many speedloaders with a carrying handle, these ones are loaded with Marksman Rounds.
   components:
   - type: Construction
     graph: CMBoxMagazine
