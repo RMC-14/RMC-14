@@ -122,6 +122,14 @@
   - type: ShowHealthIcons # TODO RMC14 Hack
     damageContainers:
     - Biological
+  - type: SquadArmor
+    layer: Helmet
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
+      state: std-helmet-medic
+    leaderRsi:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
+      state: sql-helmet-medic
 
 - type: entity
   parent: ArmorHelmetM10
