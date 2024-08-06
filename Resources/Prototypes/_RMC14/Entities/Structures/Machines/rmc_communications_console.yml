@@ -36,6 +36,9 @@
   name: overwatch console
   description: State of the art machinery for giving orders to a squad.
   components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: overwatch
   - type: ActivatableUI
     key: enum.OverwatchConsoleUI.Key
   - type: ActivatableUIRequiresAccess
