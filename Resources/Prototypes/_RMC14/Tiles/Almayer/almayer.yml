@@ -38,6 +38,7 @@
   parent: CMFloorSteel
   id: RMCFloorPlatingNoBuild
   name: tiles-cm-plating
+  sprite: /Textures/_RMC14/Tiles/shiva/plating.png
 
 - type: tile
   parent: CMFloorSteel
