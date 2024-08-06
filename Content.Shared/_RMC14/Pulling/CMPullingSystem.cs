@@ -88,9 +88,11 @@ public sealed class CMPullingSystem : EntitySystem
             return;
 
         Entity<XenoParasiteComponent> comp = (target, paraComp);
-        args.Cancelled = true;
 
-        _parasite.Infect(comp, user, false, true);
+        if (!_parasite.Infect(comp, user, false, true))
+            return;
+
+        args.Cancelled = true;
 
         var puller = user;
         var pulled = target;
