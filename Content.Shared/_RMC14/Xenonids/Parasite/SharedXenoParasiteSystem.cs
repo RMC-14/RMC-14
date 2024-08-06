@@ -330,7 +330,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                     _inventory.TryUnequip(victim, victim, slot.ID, force: true);
 
                     if (_net.IsServer)
-                        _popup.PopupEntity(Loc.GetString("rmc-xeno-infect-success-mask", ("target", victim), ("mask", slot.ContainedEntity)), victim);
+                        _popup.PopupEntity(Loc.GetString("rmc-xeno-infect-success-mask", ("target", victim), ("mask", slot.ContainedEntity.Value)), victim);
                 }
             }
         }
