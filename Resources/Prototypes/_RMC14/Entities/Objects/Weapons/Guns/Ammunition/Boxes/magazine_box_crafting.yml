@@ -329,6 +329,18 @@
         amount: 1
         doAfter: 1
 
+    # M44
+    - to: CMBoxMagazineRevolverM44Empty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 1
+    - to: CMBoxMagazineRevolverM44MarksmanEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 1
+    
 
   # Why the fuck do you even need these nodes???
 
