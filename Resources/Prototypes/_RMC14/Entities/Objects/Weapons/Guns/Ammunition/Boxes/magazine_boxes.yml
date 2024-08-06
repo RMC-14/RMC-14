@@ -632,3 +632,83 @@
       whitelist:
         tags:
         - RMCMagazinePistolSU6
+
+# M44 Revolver
+
+- type: entity
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineRevolverM44Empty
+  name: magazine box (M44 x 16)
+  components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazineRevolverM44Empty
+  - type: Sprite
+    layers:
+    - state: base_m44 
+    - state: magaz_reg 
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_m44 
+    - state: base_type_m44_reg 
+    - state: base_m44_lid 
+      map: [ "lid" ]
+    - state: lid_type_m44_reg 
+      map: [ "lid_stripe" ]
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCSpeedLoaderM44
+
+- type: entity
+  parent: CMBoxMagazineRevolverM44Empty
+  id: CMBoxMagazineRevolverM44
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCSpeedLoaderM44
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCSpeedLoaderM44
+
+- type: entity
+  parent: CMBoxMagazineBase
+  id: CMBoxMagazineRevolverM44MarksmanEmpty
+  name: magazine box (M44 MK x 16)
+  components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: CMBoxMagazineRevolverM44Empty
+  - type: Sprite
+    layers:
+    - state: base_m44 
+    - state: magaz_reg 
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_m44 
+    - state: base_type_m44_mark
+    - state: base_m44_lid 
+      map: [ "lid" ]
+    - state: lid_type_m44_mark
+      map: [ "lid_stripe" ]
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCSpeedLoaderM44
+
+- type: entity
+  parent: CMBoxMagazineRevolverM44MarksmanEmpty
+  id: CMBoxMagazineRevolverMarksmanM44
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCSpeedLoader44Marksman
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCSpeedLoaderM44
