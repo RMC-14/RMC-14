@@ -323,7 +323,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
         if (_inventory.TryGetContainerSlotEnumerator(victim, out var slots, SlotFlags.MASK))
         {
-            EntityUid slotItem = null;
+            EntityUid? slotItem = null;
             while (slots.MoveNext(out var slot))
             {
                 if (slot.ContainedEntity != null)
