@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added the requisitions elevator and ASRS console.
-    type: Add
-  id: 19
-  time: '2024-01-30T18:25:35.082850+00:00'
-  url: null
-- author: DrSmugleaf
-  changes:
-  - message: Added falling down the requisitions elevator.
-    type: Add
-  id: 20
-  time: '2024-01-31T02:07:36.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/961
 - author: Tunguso4ka
   changes:
   - message: Glass, Reinforced glass, phoron and phoron glass was ported from the
@@ -4284,5 +4270,20 @@
   id: 518
   time: '2024-08-06T03:04:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3553
+- author: Rainbeon
+  changes:
+  - message: Surgical Line and Synth Graft now notify the patient that someone is
+      trying to treat them.
+    type: Add
+  id: 519
+  time: '2024-08-06T03:06:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3556
+- author: Rainbeon
+  changes:
+  - message: Xenonids are now able to see the hive core through walls.
+    type: Add
+  id: 520
+  time: '2024-08-06T03:06:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3555
 Name: RMC14
 Order: -1
