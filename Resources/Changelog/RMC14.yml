@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Glass, Reinforced glass, phoron and phoron glass was ported from the
-      CMSS13.
-    type: Add
-  id: 21
-  time: '2024-02-06T06:09:16.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/968
-- author: Tunguso4ka
-  changes:
-  - message: Beakers has been added to the game!
-    type: Add
-  id: 22
-  time: '2024-02-08T06:14:33.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/969
 - author: MetalSage
   changes:
   - message: Added M2132 machete
@@ -4285,5 +4270,21 @@
   id: 520
   time: '2024-08-06T03:06:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3555
+- author: Vermidia
+  changes:
+  - message: Opening backpacks in hand is now instant, and doesn't close as long as
+      you keep them inhand
+    type: Tweak
+  id: 521
+  time: '2024-08-06T03:11:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3544
+- author: Sigil
+  changes:
+  - message: Hopefully fixed guns shrinking when you put size-changing attachments
+      on them. If you encounter this bug after this is merged, report it.
+    type: Fix
+  id: 522
+  time: '2024-08-06T03:10:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3551
 Name: RMC14
 Order: -1
