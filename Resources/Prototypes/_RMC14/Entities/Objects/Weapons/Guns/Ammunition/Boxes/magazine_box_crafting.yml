@@ -203,6 +203,36 @@
     state: base_su6
   objectType: Item
 
+# M44
+- type: construction
+  parent: RMC
+  name: Magazine Box (M44 Reg)
+  id: CMBoxMagazineRevolverM44Empty
+  graph: CMBoxMagazine
+  startNode: start
+  targetNode: CMBoxMagazineRevolverM44Empty
+  category: construction-category-cm-box-magazine
+  description: A box for holding many speedloaders with a carrying handle.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_m54
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Magazine Box (M44 Mark)
+  id: CMBoxMagazineRevolverM44MarksmanEmpty
+  graph: CMBoxMagazine
+  startNode: start
+  targetNode: CMBoxMagazineRevolverM44MarksmanEmpty
+  category: construction-category-cm-box-magazine
+  description: A box for holding many marksman speedloaders with a carrying handle.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_m54
+  objectType: Item
+
+
   # Construct graphs
 - type: constructionGraph
   parent: RMC
@@ -343,3 +373,9 @@
   # SU-6
   - node: RMCBoxMagazinePistolSU6Empty
     entity: RMCBoxMagazinePistolSU6Empty
+
+  # M44
+  - node: CMBoxMagazineRevolverM44Empty
+    entity: CMBoxMagazineRevolverM44Empty
+  - node: CMBoxMagazineRevolverM44MarksmanEmpty
+    entity: CMBoxMagazineRevolverM44MarksmanEmpty
