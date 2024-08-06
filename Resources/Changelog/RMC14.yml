@@ -1,10 +1,4 @@
 ﻿Entries:
-- author: irroZ, Whisper
-  changes:
-  - message: Added lobby art.
-    type: Add
-  id: 18
-  time: '2024-01-03T19:07:20.0000000+00:00'
 - author: DrSmugleaf
   changes:
   - message: Added the requisitions elevator and ASRS console.
@@ -4283,5 +4277,12 @@
   id: 517
   time: '2024-08-05T03:43:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3542
+- author: Vermidia
+  changes:
+  - message: Xenos can no longer nest the dead.
+    type: Fix
+  id: 518
+  time: '2024-08-06T03:04:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3553
 Name: RMC14
 Order: -1
