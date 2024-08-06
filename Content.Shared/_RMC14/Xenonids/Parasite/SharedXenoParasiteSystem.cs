@@ -323,18 +323,16 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
         if (_inventory.TryGetContainerSlotEnumerator(victim, out var slots, SlotFlags.MASK))
         {
-            EntityUid? slotItem = null;
             while (slots.MoveNext(out var slot))
             {
                 if (slot.ContainedEntity != null)
                 {
                     _inventory.TryUnequip(victim, victim, slot.ID, force: true);
-                    slotItem = slot.ContainedEntity;
+
+                    if (_net.IsServer)
+                        _popup.PopupEntity(Loc.GetString("rmc-xeno-infect-success-mask", ("target", victim), ("mask", slot.ContainedEntity)), victim);
                 }
             }
-
-            if (slotItem != null && _net.IsServer)
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-infect-success-mask", ("target", victim), ("mask", slotItem)), victim);
         }
 
         if (_net.IsServer &&
