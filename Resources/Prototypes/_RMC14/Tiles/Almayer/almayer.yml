@@ -35,10 +35,10 @@
   isSubfloor: true
 
 - type: tile
-  parent: CMFloorSteel
+  parent: CMFloorPlating
   id: RMCFloorPlatingNoBuild
   name: tiles-cm-plating
-  sprite: /Textures/_RMC14/Tiles/shiva/plating.png
+  sprite: /Textures/_RMC14/Tiles/floors/plating.png
 
 - type: tile
   parent: CMFloorSteel

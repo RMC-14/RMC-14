@@ -8,7 +8,9 @@
     - Wallmount
   components:
   - type: Transform
-    anchored: true
+    anchored: false
+  - type: Physics
+    bodyType: Static
   - type: Clickable
   - type: InteractionOutline
   - type: WallMount
@@ -53,23 +55,30 @@
             volume: -8
   - type: RMCCamera
     id: RMCSurveillanceCameraAlmayer
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
-  parent: BaseComputer
+  parent: CMBaseStructure
   id: RMCMonitorCameraAlmayer
   name: ship security cameras
   description: Used to access the various cameras on the station.
   suffix: Almayer
   components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
     state: security_cam
     layers: []
-  - type: RMCCameraComputer
-    id: RMCSurveillanceCameraAlmayer
+  - type: InteractionOutline
   - type: ActivatableUI
     key: enum.RMCCameraUiKey.Key
   - type: UserInterface
     interfaces:
       enum.RMCCameraUiKey.Key:
         type: RMCCameraBui
+  - type: RMCCameraComputer
+    id: RMCSurveillanceCameraAlmayer
