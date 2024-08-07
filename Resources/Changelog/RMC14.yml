@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Simyon
-  changes:
-  - message: Suiciding will now result in ghosting, keeping your body alive.
-    type: Tweak
-  id: 27
-  time: '2024-02-24T22:26:31.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/990
 - author: DrSmugleaf
   changes:
   - message: Added Word of the Queen action.
@@ -4284,5 +4277,12 @@
   id: 526
   time: '2024-08-07T23:44:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3455
+- author: FungiFellow
+  changes:
+  - message: Added Penlights into the Med Essential Bundle
+    type: Add
+  id: 527
+  time: '2024-08-07T23:49:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3538
 Name: RMC14
 Order: -1
