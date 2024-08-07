@@ -72,6 +72,8 @@
   name: UA-577 spaceborne gauss turret
   description: A fully-automated defence turret with mid-range targeting capabilities. Armed with a modified M32-S Autocannon and an internal belt feed.
   components:
+  - type: Corrodible
+    isCorrodible: false
   - type: NpcFactionMember
     factions:
     - UNMC
