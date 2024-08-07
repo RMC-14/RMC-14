@@ -40,7 +40,4 @@ public sealed partial class HiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool GotOvipositorPopup;
-
-    [DataField, AutoNetworkedField]
-    public Dictionary<ProtoId<AlertPrototype>, List<NetEntity>> Trackers = [];
 }

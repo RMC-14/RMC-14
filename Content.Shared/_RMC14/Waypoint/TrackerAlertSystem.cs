@@ -5,7 +5,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Waypoint;
 
-public sealed class TrackerAlertSystem : EntitySystem
+public sealed partial class TrackerAlertSystem : EntitySystem
 {
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -42,6 +42,9 @@ public sealed class TrackerAlertSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
+        InititlizeLists();
+
         SubscribeLocalEvent<RMCTrackerAlertComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<RMCTrackerAlertComponent, ComponentRemove>(OnComponentRemove);
 

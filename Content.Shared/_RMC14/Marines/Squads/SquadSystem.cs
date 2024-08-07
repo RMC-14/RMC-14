@@ -31,7 +31,6 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public ImmutableArray<EntityPrototype> SquadPrototypes { get; private set; }
     public ImmutableArray<JobPrototype> SquadRolePrototypes { get; private set; }
@@ -59,7 +58,6 @@ public sealed class SquadSystem : EntitySystem
         SubscribeLocalEvent<SquadMemberComponent, GetMarineIconEvent>(OnSquadRoleGetIcon);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-        SubscribeLocalEvent<SquadMemberComponent, GetTrackerAlertEntriesEvent>(OnGetTrackerAlertEntries);
 
         RefreshSquadPrototypes();
     }
@@ -164,74 +162,6 @@ public sealed class SquadSystem : EntitySystem
         SquadRolePrototypes = jobBuilder.ToImmutable();
     }
 
-    #region TrackerAlert
-
-    private void OnGetTrackerAlertEntries(Entity<SquadMemberComponent> ent, ref GetTrackerAlertEntriesEvent args)
-    {
-        if (!TryComp(ent.Comp.Squad, out SquadTeamComponent? squad))
-            return;
-
-        if (!TryGetTrackers((ent.Comp.Squad.Value, squad), args.AlertPrototype, out var trackers))
-        {
-            _popup.PopupPredicted("No trackers to open", ent, ent);
-            return;
-        }
-
-        var alertPrototype = args.AlertPrototype;
-
-        args.Entries.AddRange(trackers.Select(uid =>
-            new TrackerAlertEntry(GetNetEntity(uid), Name(uid), MetaData(uid).EntityPrototype?.ID, alertPrototype)));
-    }
-
-    private bool TryGetTrackers(Entity<SquadTeamComponent?> ent,
-        ProtoId<AlertPrototype> alertProto,
-        [NotNullWhen(true)] out List<EntityUid>? trackers)
-    {
-        trackers = null;
-        if (!Resolve(ent, ref ent.Comp))
-            return false;
-
-        if (ent.Comp.Trackers.TryGetValue(alertProto, out var netTrackers))
-        {
-            trackers = GetEntityList(netTrackers);
-            return true;
-        }
-
-        return false;
-    }
-
-    private void AddTracker(Entity<RMCTrackerAlertTargetComponent?> ent, Entity<SquadTeamComponent?> hiveEnt)
-    {
-        if (!Resolve(ent, ref ent.Comp) ||
-            !Resolve(hiveEnt, ref hiveEnt.Comp))
-            return;
-
-        var tracker = ent.Comp;
-        var hive = hiveEnt.Comp;
-
-        var trackers = hive.Trackers.GetOrNew(tracker.AlertPrototype);
-        trackers.Add(GetNetEntity(ent));
-    }
-
-    private void RemoveTracker(Entity<RMCTrackerAlertTargetComponent?> ent, Entity<SquadTeamComponent?> squadEnt)
-    {
-        if (!Resolve(ent, ref ent.Comp) ||
-            !Resolve(squadEnt, ref squadEnt.Comp))
-            return;
-
-        var tracker = ent.Comp;
-        var hive = squadEnt.Comp;
-
-        if (hive.Trackers.TryGetValue(tracker.AlertPrototype, out var trackers))
-        {
-            trackers.Remove(GetNetEntity(ent));
-            if (trackers.Count == 0)
-                hive.Trackers.Remove(tracker.AlertPrototype);
-        }
-    }
-
-    #endregion
-
     public bool TryGetSquad(EntProtoId prototype, out Entity<SquadTeamComponent> squad)
     {
         var squadQuery = EntityQueryEnumerator<SquadTeamComponent, MetaDataComponent>();
@@ -310,7 +240,7 @@ public sealed class SquadSystem : EntitySystem
             oldSquad.Members.Remove(marine);
 
             if (tracker != null)
-                RemoveTracker((marine, tracker), (member.Squad.Value, oldSquad));
+                RaiseLocalEvent(member.Squad.Value, new RemoveFromTrackerListEvent(marine));
         }
 
         member.Squad = team;
@@ -338,7 +268,7 @@ public sealed class SquadSystem : EntitySystem
         RaiseLocalEvent(marine, ref ev);
 
         if (tracker != null)
-            AddTracker((marine, tracker), team);
+            RaiseLocalEvent(team.Owner, new AddToTrackerListEvent(marine));
     }
 
     private void MarineSetTitle(EntityUid marine, string title)
