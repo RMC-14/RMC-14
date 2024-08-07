@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added Word of the Queen action.
-    type: Add
-  id: 28
-  time: '2024-03-01T01:34:08.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/991
 - author: KittenColony
   changes:
   - message: Marine Radiophones, a military grade walkie talkie.
@@ -4284,5 +4277,14 @@
   id: 527
   time: '2024-08-07T23:49:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3538
+- author: DrSmugleaf
+  changes:
+  - message: Added CMO Pandi Fackler and Jermaine 'Bait' McClune figurines.
+    type: Add
+  - message: Patrons will now spawn with their figurine in-hand or in their backpack.
+    type: Add
+  id: 528
+  time: '2024-08-07T23:50:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3579
 Name: RMC14
 Order: -1
