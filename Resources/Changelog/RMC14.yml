@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Stock parts have been ported.
-    type: Add
-  id: 24
-  time: '2024-02-08T10:44:46.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/975
 - author: Verification31
   changes:
   - message: Clothing crates have been added to the game.
@@ -4284,5 +4277,12 @@
   id: 523
   time: '2024-08-07T00:29:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3546
+- author: Vermidia
+  changes:
+  - message: Vaulting is no longer cancelled by damage
+    type: Fix
+  id: 524
+  time: '2024-08-07T22:46:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3569
 Name: RMC14
 Order: -1
