@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Verification31
-  changes:
-  - message: Clothing crates have been added to the game.
-    type: Add
-  id: 25
-  time: '2024-02-11T07:08:22.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/977
 - author: MetalSage
   changes:
   - message: Added Medical Requisitions
@@ -4284,5 +4277,12 @@
   id: 524
   time: '2024-08-07T22:46:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3569
+- author: KalimbaMachine
+  changes:
+  - message: Allow Lighters to be stored in cigarette packs!
+    type: Tweak
+  id: 525
+  time: '2024-08-07T22:49:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3522
 Name: RMC14
 Order: -1
