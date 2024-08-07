@@ -636,7 +636,7 @@
 # M44 Revolver
 
 - type: entity
-  parent: RMCBoxMagazineBase
+  parent: CMBoxMagazineBase
   id: RMCBoxMagazineRevolverM44Empty
   name: speedloader box (M44 x 16)
   description: A box for holding many speedloaders with a carrying handle.
