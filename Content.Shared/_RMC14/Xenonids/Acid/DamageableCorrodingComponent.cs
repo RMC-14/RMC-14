@@ -1,21 +1,23 @@
 ﻿using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Content.Shared.Damage;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
-[RegisterComponent, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(SharedXenoAcidSystem))]
 public sealed partial class DamageableCorrodingComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid Acid;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float Dps;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public DamageSpecifier Damage;
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextDamageAt;
+
 }
