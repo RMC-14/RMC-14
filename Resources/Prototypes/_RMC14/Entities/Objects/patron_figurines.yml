@@ -384,3 +384,14 @@
     state: shawn_fox
   - type: PatronFigurine
     id: 92d1d8d3-8091-495f-9940-24fb973de3ed
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronPandiFackler
+  name: CMO Pandi Fackler figurine
+  description: "A small and kind Redsuko, a rare race of felinid with the markings and characteristics of a Red Panda. Pacifist by nature, she’s often found healing others in the medical bay"
+  components:
+  - type: Sprite
+    state: pandi_fackler
+  - type: PatronFigurine
+    id: 124176dc-34e2-4115-a178-07e11cca3b6b
