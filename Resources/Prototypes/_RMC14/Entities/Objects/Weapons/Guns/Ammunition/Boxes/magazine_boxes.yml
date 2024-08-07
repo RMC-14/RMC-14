@@ -636,14 +636,14 @@
 # M44 Revolver
 
 - type: entity
-  parent: CMBoxMagazineBase
-  id: CMBoxMagazineRevolverM44Empty
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineRevolverM44Empty
   name: speedloader box (M44 x 16)
   description: A box for holding many speedloaders with a carrying handle.
   components:
   - type: Construction
-    graph: CMBoxMagazine
-    node: CMBoxMagazineRevolverM44Empty
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineRevolverM44Empty
   - type: Sprite
     layers:
     - state: base_m44 
@@ -663,8 +663,8 @@
         - RMCSpeedLoaderM44
 
 - type: entity
-  parent: CMBoxMagazineRevolverM44Empty
-  id: CMBoxMagazineRevolverM44
+  parent: RMCBoxMagazineRevolverM44Empty
+  id: RMCBoxMagazineRevolverM44
   suffix: Filled
   components:
   - type: CMItemSlots
@@ -676,14 +676,14 @@
         - RMCSpeedLoaderM44
 
 - type: entity
-  parent: CMBoxMagazineBase
-  id: CMBoxMagazineRevolverM44MarksmanEmpty
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineRevolverM44MarksmanEmpty
   name: speedloader box (Marksman M44 x 16)
   description: A box for holding many speedloaders with a carrying handle, these ones are loaded with Marksman Rounds.
   components:
   - type: Construction
-    graph: CMBoxMagazine
-    node: CMBoxMagazineRevolverM44MarksmanEmpty
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineRevolverM44MarksmanEmpty
   - type: Sprite
     layers:
     - state: base_m44 
@@ -703,8 +703,8 @@
         - RMCSpeedLoaderM44
 
 - type: entity
-  parent: CMBoxMagazineRevolverM44MarksmanEmpty
-  id: CMBoxMagazineRevolverMarksmanM44
+  parent: RMCBoxMagazineRevolverM44MarksmanEmpty
+  id: RMCBoxMagazineRevolverMarksmanM44
   suffix: Filled
   components:
   - type: CMItemSlots

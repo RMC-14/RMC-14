@@ -207,10 +207,10 @@
 - type: construction
   parent: RMC
   name: Magazine Box (M44 Reg)
-  id: CMBoxMagazineRevolverM44Empty
-  graph: CMBoxMagazine
+  id: RMCBoxMagazineRevolverM44Empty
+  graph: RMCBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineRevolverM44Empty
+  targetNode: RMCBoxMagazineRevolverM44Empty
   category: construction-category-cm-box-magazine
   description: A box for holding many speedloaders with a carrying handle.
   icon:
@@ -221,10 +221,10 @@
 - type: construction
   parent: RMC
   name: Magazine Box (M44 Mark)
-  id: CMBoxMagazineRevolverM44MarksmanEmpty
-  graph: CMBoxMagazine
+  id: RMCBoxMagazineRevolverM44MarksmanEmpty
+  graph: RMCBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineRevolverM44MarksmanEmpty
+  targetNode: RMCBoxMagazineRevolverM44MarksmanEmpty
   category: construction-category-cm-box-magazine
   description: A box for holding many marksman speedloaders with a carrying handle.
   icon:
@@ -330,12 +330,12 @@
         doAfter: 1
 
     # M44
-    - to: CMBoxMagazineRevolverM44Empty
+    - to: RMCBoxMagazineRevolverM44Empty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
-    - to: CMBoxMagazineRevolverM44MarksmanEmpty
+    - to: RMCBoxMagazineRevolverM44MarksmanEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
@@ -387,7 +387,7 @@
     entity: RMCBoxMagazinePistolSU6Empty
 
   # M44
-  - node: CMBoxMagazineRevolverM44Empty
-    entity: CMBoxMagazineRevolverM44Empty
-  - node: CMBoxMagazineRevolverM44MarksmanEmpty
-    entity: CMBoxMagazineRevolverM44MarksmanEmpty
+  - node: RMCBoxMagazineRevolverM44Empty
+    entity: RMCBoxMagazineRevolverM44Empty
+  - node: RMCBoxMagazineRevolverM44MarksmanEmpty
+    entity: RMCBoxMagazineRevolverM44MarksmanEmpty

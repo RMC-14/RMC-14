@@ -171,13 +171,13 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxMagazineRevolverM44
+    - id: RMCBoxMagazineRevolverM44
 
 - type: entity
   parent: CMCrateAmmo
   id: RMCCrateBoxMagazineM44RevolverMarksman
-  name: Speedloader box (M44 Marksman, 16x loaders)
+  name: Speedloader box (Marksman M44, 16x loaders)
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxMagazineRevolverMarksmanM44
+    - id: RMCBoxMagazineRevolverMarksmanM44
