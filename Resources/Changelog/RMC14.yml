@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: KittenColony
-  changes:
-  - message: Marine Radiophones, a military grade walkie talkie.
-    type: Add
-  - message: Marker Flares, light up the night.
-    type: Add
-  id: 29
-  time: '2024-03-03T08:08:21.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/980
 - author: Whisper
   changes:
   - message: Add more fills to cm medical pouches
@@ -4286,5 +4277,12 @@
   id: 528
   time: '2024-08-07T23:50:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3579
+- author: Vermidia
+  changes:
+  - message: You can use a machete or throwing knife while devoured
+    type: Tweak
+  id: 529
+  time: '2024-08-07T23:53:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3566
 Name: RMC14
 Order: -1
