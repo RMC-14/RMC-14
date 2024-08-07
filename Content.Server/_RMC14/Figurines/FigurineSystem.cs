@@ -91,7 +91,7 @@ public sealed class FigurineSystem : EntitySystem
                 if (_allFigurines.ContainsKey(figurine.Id))
                     Log.Error($"Duplicate id {figurine.Id} found for figurine {prototype.ID}");
 
-                _allFigurines[figurine.Id] = figurine.Id;
+                _allFigurines[figurine.Id] = prototype.ID;
             }
         }
 
