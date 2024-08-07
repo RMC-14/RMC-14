@@ -52,7 +52,7 @@
   components:
   - type: SouthernAccent
 
-  - type: trait
+- type: trait
   id: ScottishAccent
   name: trait-scottish-accent-name
   description: trait-scottish-accent-desc
