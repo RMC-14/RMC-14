@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: MetalSage
-  changes:
-  - message: Added Medical Requisitions
-    type: Add
-  id: 26
-  time: '2024-02-21T18:00:02.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/983
 - author: Simyon
   changes:
   - message: Suiciding will now result in ghosting, keeping your body alive.
@@ -4284,5 +4277,12 @@
   id: 525
   time: '2024-08-07T22:49:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3522
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added marine armor light visuals
+    type: Add
+  id: 526
+  time: '2024-08-07T23:44:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3455
 Name: RMC14
 Order: -1
