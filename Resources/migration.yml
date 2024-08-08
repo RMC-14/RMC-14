@@ -589,6 +589,14 @@ CMPouchSling: RMCPouchSling
 
 # 2024-07-31
 CMGroundsideOperationsConsole: RMCGroundsideOperationsConsole
+ToolboxEmergency: RMCToolboxEmergency
+ToolboxEmergencyFilled: RMCToolboxEmergencyFilled
+ToolboxElectrical: RMCToolboxElectrical
+ToolboxElectricalFilled: RMCToolboxElectricalFilled
+ToolboxMechanical: RMCToolboxMechanical
+ToolboxMechanicalFilled: RMCToolboxMechanicalFilled
+Bucket: RMCBucket
+CMBucket: RMCBucket
 
 #2024-08-08 Changed a bunch of IDs and dunno whats mapped in so please trim excess when convienient
 CMCrateBoxMagazineRifleM54C: RMCCrateBoxMagazineRifleM54C
