@@ -425,7 +425,7 @@ CMCrateBoxMagazinePistol88m4AP: RMCCrateBoxMagazinePistolM77AP
 CMBoxMagazinePistol88m4AP: RMCBoxMagazinePistolM77AP
 CMCartridgePistol88m4AP: CMCartridgePistolM77AP
 CMCrateBoxMagazinePistolVP78: RMCCrateBoxMagazinePistolMK80
-CMCrateVP78: CMCrateMK80
+CMCrateVP78: RMCCrateMK80
 CMBoxMagazinePistolVP78: RMCBoxMagazinePistolMK80
 CMMagazinePistolVP78: CMMagazinePistolMK80
 CMWeaponPistolVP78: CMWeaponPistolMK80
@@ -665,7 +665,6 @@ CMCrateSupplyJanitor: RMCCrateSupplyJanitor
 CMCrateSuppliesCrayons: RMCCrateSuppliesCrayons    
 CMCrateM54C: RMCCrateM54C
 CMCrateM54CE2: RMCCrateM54CE2
-CMCrateMK80: RMCCrateMK80
 CMCrateSU6: RMCCrateSU6     
 CMCrateMagazineM96SMixed: RMCCrateMagazineM96SMixed
 CMCrateMagazineM96SStandard: RMCCrateMagazineM96SStandard
