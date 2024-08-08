@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: ike709
   changes:
-  - message: Added cargo crates for boxes of crayons and empty boxes
-    type: Add
-  id: 32
-  time: '2024-04-10T06:10:15.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/1140
-- author: ike709
-  changes:
   - message: Added a cargo crate for the M54CE2
     type: Add
   id: 33
@@ -4286,5 +4279,13 @@
   id: 531
   time: '2024-08-08T00:29:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3390
+- author: Tunguso4ka
+  changes:
+  - message: Added undershirts and underwear markings, check your Marking customization
+      menu!
+    type: Add
+  id: 532
+  time: '2024-08-08T00:40:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3499
 Name: RMC14
 Order: -1
