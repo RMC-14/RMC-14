@@ -84,3 +84,47 @@
 #    contents:
 #    - id: RMCRocket84mmWhitePhosphorous
 #      amount: 3
+
+- type: entity
+  parent: CMCrateAmmo
+  id: RMCCrateMagazineM4SPRCustomMixed
+  name: M4SPR Scout Mixed Magazine Crate (regular x2, incendiary x2, impact x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleM4SPRA19
+      amount: 2
+    - id: RMCMagazineRifleM4SPRA19 # TODO rmc14 RMCMagazineRifleM4SPRA19Impact
+      amount: 2
+    - id: RMCMagazineRifleM4SPRA19 # TODO rmc14 RMCMagazineRifleM4SPRA19Incendiary
+      amount: 2
+
+- type: entity
+  parent: CMCrateAmmo
+  id: RMCCrateMagazineM4SPRCustomStandard
+  name: M4SPR Scout Magazine Crate (x5)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleM4SPRA19
+      amount: 5
+
+- type: entity
+  parent: CMCrateAmmo
+  id: RMCCrateMagazineM4SPRCustomImpact
+  name: M4SPR Scout Impact Magazine Crate (x3)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleM4SPRA19 # TODO rmc14 CMMagazineSniperM96SFlak
+      amount: 3
+
+- type: entity
+  parent: CMCrateAmmo
+  id: CMCrateMagazineM4SPRCustomIncendiary
+  name: M4SPR Scout Incendiary Magazine Crate (x3)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleM4SPRA19 # TODO rmc14 CMMagazineSniperM96SIncendiary
+      amount: 3

@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Added Corporate Liaison role.
-    type: Add
-  id: 31
-  time: '2024-04-05T04:28:31.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/998
-- author: ike709
-  changes:
-  - message: Added cargo crates for boxes of crayons and empty boxes
-    type: Add
-  id: 32
-  time: '2024-04-10T06:10:15.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/1140
 - author: ike709
   changes:
   - message: Added a cargo crate for the M54CE2
@@ -4284,5 +4270,22 @@
   id: 530
   time: '2024-08-07T23:58:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3573
+- author: Lank
+  changes:
+  - message: Added the Scout Weapon Specialist, and their associated gear.
+    type: Add
+  - message: Added A19 Mags for the M4SPR Custom to the requisition console.
+    type: Add
+  id: 531
+  time: '2024-08-08T00:29:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3390
+- author: Tunguso4ka
+  changes:
+  - message: Added undershirts and underwear markings, check your Marking customization
+      menu!
+    type: Add
+  id: 532
+  time: '2024-08-08T00:40:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3499
 Name: RMC14
 Order: -1

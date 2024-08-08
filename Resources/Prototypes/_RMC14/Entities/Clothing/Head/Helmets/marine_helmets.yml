@@ -194,7 +194,7 @@
 # M3-S Scout Spec
 - type: entity
   parent: ArmorHelmetM10
-  id: CMArmorHelmetM3Scout
+  id: RMCArmorHelmetM3Scout
   name: M3-S helmet
   description: A custom helmet from the M3 series designed to be lightweight and used for recon missions.
   components:
@@ -205,7 +205,7 @@
 
 # M3-G4 Grenadier Spec
 - type: entity
-  parent: CMArmorHelmetM3Scout
+  parent: RMCArmorHelmetM3Scout
   id: RMCArmorHelmetM3G4
   name: M3-G4 helmet
   description: Pairs with the M3-G4 heavy grenadier plating. A distant cousin of the experimental B18 defensive helmet. # As such, it also resists some parasite latching attempts.

@@ -145,9 +145,12 @@
     damageCoefficient: 0
     worn: false
 
+- type: Tag
+  id: RMCScoutArmor
+
 - type: entity
   parent: CMArmorM3Medium
-  id: CMArmorM3Scout
+  id: RMCArmorM3Scout
   name: M3-S light armor
   description: A custom set of M3 armor designed for Marine Scouts.
   components:
@@ -155,6 +158,14 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/scout.rsi
   - type: Corrodible
     isCorrodible: false
+  - type: ClothingSpeedModifier # light armor speed
+    walkModifier: .814
+    sprintModifier: .814
+  - type: CMArmor
+    armor: 25
+  - type: Tag
+    tags:
+      - RMCScoutArmor
 
 - type: entity
   parent: CMArmorM3Medium
