@@ -35,7 +35,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMBoxIngredients
+      - id: RMCBoxIngredients
         amount: 5
 
 
