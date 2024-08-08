@@ -47,6 +47,7 @@
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseDoctor ]
+  - type: VictimBurst
 
 - type: startingGear
   id: RMCGearCorpseDoctor
@@ -69,6 +70,7 @@
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseEngineer ]
+  - type: VictimBurst
 
 - type: startingGear
   id: RMCGearCorpseEngineer
@@ -94,6 +96,7 @@
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseScientist ]
+  - type: VictimBurst
 
 - type: startingGear
   id: RMCGearCorpseScientist
@@ -118,6 +121,7 @@
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseMiner ]
+  - type: VictimBurst
 
 - type: startingGear
   id: RMCGearCorpseMiner
@@ -142,6 +146,7 @@
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseSecurity ]
+  - type: VictimBurst
 
 - type: startingGear
   id: RMCGearCorpseSecurity
@@ -166,6 +171,7 @@
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseDeputy ]
+  - type: VictimBurst
 
 - type: startingGear
   id: RMCGearCorpseDeputy
@@ -186,6 +192,7 @@
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseLiaison ]
+  - type: VictimBurst
 
 - type: startingGear
   id: RMCGearCorpseLiaison
