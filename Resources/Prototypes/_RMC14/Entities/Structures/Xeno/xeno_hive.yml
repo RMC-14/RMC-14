@@ -44,8 +44,8 @@
     prototype: CMXenoLesserDrone
   - type: HiveConstructionUnique
     id: HiveCoreXeno
-  - type: ModifyHiveLimits
-    construction:
+  #- type: ModifyHiveLimits
+    #construction:
       #HiveClusterXeno: 8
       # TODO other structures wyci
   - type: WarpPoint
