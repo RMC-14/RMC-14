@@ -45,7 +45,7 @@
     id: CMIDCardChiefEngineer
     ears: CMHeadsetCE
     belt: CMBeltUtilityFilled
-    pocket1: CMPouchElectronics
+    pocket1: RMCPouchElectronics
 
 - type: entity
   parent: CMSpawnPointJobBase

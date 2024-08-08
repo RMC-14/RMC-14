@@ -351,3 +351,58 @@
   - type: PatronFigurine
     id: b7fd4e27-04f8-4303-8a3c-03ca18b38ced
 
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAlexGregory
+  name: Alex Gregory figurine
+  description: "A prominent Nanotrasen Captain. You think you might have seen him before."
+  components:
+  - type: Sprite
+    state: alex_gregory
+  - type: PatronFigurine
+    id: 34bc0234-d7bf-44cc-a2ef-fb8fd1abf1b5
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMadelynnBuzzLewis
+  name: Madelynn 'Buzz' Lewis figurine
+  description: "Best chef on the field."
+  components:
+  - type: Sprite
+    state: madelynn_buzz_lewis
+  - type: PatronFigurine
+    id: 70a4a27d-25d8-4172-8e8a-91fbf085ef37
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronShawnFox
+  name: Shawn Fox figurine
+  description: "The figurine smells of ..news.."
+  components:
+  - type: Sprite
+    state: shawn_fox
+  - type: PatronFigurine
+    id: 92d1d8d3-8091-495f-9940-24fb973de3ed
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronPandiFackler
+  name: CMO Pandi Fackler figurine
+  description: "A small and kind Redsuko, a rare race of felinid with the markings and characteristics of a Red Panda. Pacifist by nature, she’s often found healing others in the medical bay"
+  components:
+  - type: Sprite
+    state: pandi_fackler
+  - type: PatronFigurine
+    id: 124176dc-34e2-4115-a178-07e11cca3b6b
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJermaineBaitMcClune
+  name: Jermaine 'Bait' McClune figurine
+  description: "Let's see... e-barrels, smarties, drums, plasteel, cardboard, rockets, HEDP, cells, and a LOT of metal..."
+  components:
+  - type: Sprite
+    state: jermaine_bait_mcclune
+  - type: PatronFigurine
+    id: 6f980172-002b-4574-8f3c-f9fead1f11a1

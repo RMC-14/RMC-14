@@ -31,6 +31,9 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: RMCNightVisionVisible
+    priority: -1
+    transparency: 0.2
   - type: HiveCore
   - type: GhostRole
     name: roles-lesser-drone-name
@@ -45,6 +48,8 @@
     construction:
       #HiveClusterXeno: 8
       # TODO other structures wyci
+  - type: WarpPoint
+    location: hive core
 
 - type: entity
   parent: BaseXenoConstruct
@@ -97,26 +102,9 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: RMCNightVisionVisible
+    priority: -1
+    transparency: 0.1
   - type: HiveConstructionNode
     plasmaCost: 1000
     spawn: HiveCoreXeno
-
-- type: entity
-  parent: BaseXenoConstructionNode
-  id: HiveClusterXenoConstructionNode
-  name: hive cluster
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Xenos/hive_cluster.rsi
-    state: cluster
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 300
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-  - type: HiveConstructionNode
-    plasmaCost: 500
-    spawn: HiveClusterXeno

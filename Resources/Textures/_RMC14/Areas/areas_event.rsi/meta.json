@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f45a88e058d85816ca3f3898237051b9b69c5e25/icons/turf/areas_event.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "event"
+    },
+    {
+      "name": "event_nopower"
+    },
+    {
+      "name": "event_dyn"
+    },
+    {
+      "name": "event_dyn_nopower"
+    },
+    {
+      "name": "event_dyn_lit"
+    },
+    {
+      "name": "event_dyn_lit_nopower"
+    },
+    {
+      "name": "building"
+    },
+    {
+      "name": "metal"
+    },
+    {
+      "name": "metal_nopower"
+    },
+    {
+      "name": "metal_dyn"
+    },
+    {
+      "name": "metal_dyn_nopower"
+    },
+    {
+      "name": "metal_dyn_lit"
+    },
+    {
+      "name": "metal_dyn_lit_nopower"
+    },
+    {
+      "name": "underground"
+    },
+    {
+      "name": "under"
+    },
+    {
+      "name": "under_nopower"
+    },
+    {
+      "name": "under_dyn"
+    },
+    {
+      "name": "under_dyn_nopower"
+    },
+    {
+      "name": "under_dyn_lit"
+    },
+    {
+      "name": "under_dyn_lit_nopower"
+    },
+    {
+      "name": "underground_no_cas"
+    },
+    {
+      "name": "undercas"
+    },
+    {
+      "name": "undercas_nopower"
+    },
+    {
+      "name": "undercas_dyn"
+    },
+    {
+      "name": "undercas_dyn_nopower"
+    },
+    {
+      "name": "undercas_dyn_lit"
+    },
+    {
+      "name": "undercas_dyn_lit_nopower"
+    },
+    {
+      "name": "deep_underground"
+    },
+    {
+      "name": "deep"
+    },
+    {
+      "name": "deep_nopower"
+    },
+    {
+      "name": "deep_dyn"
+    },
+    {
+      "name": "deep_dyn_nopower"
+    },
+    {
+      "name": "deep_dyn_lit"
+    },
+    {
+      "name": "deep_dyn_lit_nopower"
+    }
+  ]
+}

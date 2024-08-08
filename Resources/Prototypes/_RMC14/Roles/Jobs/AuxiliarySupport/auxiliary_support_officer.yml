@@ -56,8 +56,8 @@
     shoes: CMBootsBlack
     id: CMIDCardASO
     ears: RMCHeadsetMarineCommandAlternative
-    pocket1: CMPouchGeneralLarge
-    pocket2: CMPouchGeneralLarge
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -14,6 +14,9 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - SmartGunOperator
+  overwatchSortPriority: -2
+  overwatchShowName: true
+  overwatchRoleName: Smart Gun Operator
   special:
   - !type:AddComponentSpecial
     components:
@@ -24,11 +27,11 @@
         RMCSkillSmartGun: 1
     - type: CMVendorUser
       points: 45
+    - type: SquadArmorWearer
 
 - type: startingGear
   id: CMGearSmartGunOperator
   equipment:
-    jumpsuit: JumpsuitMarine # TODO RMC14 all squad roles should spawn with no jumpsuit but still have clothes on
     id: CMDogtagSmartGunOperator
 
 - type: startingGear

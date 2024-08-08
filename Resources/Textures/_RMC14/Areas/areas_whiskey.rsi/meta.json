@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/8630bd7f6bbd044ce36e2729d009e3c10209e60e/icons/turf/area_whiskey.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "cic"
+    },
+    {
+      "name": "livingspace"
+    },
+    {
+      "name": "lane1n"
+    },
+    {
+      "name": "lane1s"
+    },
+    {
+      "name": "lane2n"
+    },
+    {
+      "name": "lane2s"
+    },
+    {
+      "name": "lane3n"
+    },
+    {
+      "name": "lane3s"
+    },
+    {
+      "name": "lane4n"
+    },
+    {
+      "name": "lane4s"
+    },
+    {
+      "name": "north"
+    },
+    {
+      "name": "farnorth"
+    },
+    {
+      "name": "northwest"
+    },
+    {
+      "name": "northeast"
+    },
+    {
+      "name": "south"
+    },
+    {
+      "name": "farsouth"
+    },
+    {
+      "name": "veryfarsouth"
+    },
+    {
+      "name": "platform"
+    },
+    {
+      "name": "bunker"
+    },
+    {
+      "name": "engineering"
+    },
+    {
+      "name": "req"
+    },
+    {
+      "name": "medical"
+    },
+    {
+      "name": "p1"
+    },
+    {
+      "name": "p2"
+    },
+    {
+      "name": "p3"
+    },
+    {
+      "name": "p4"
+    },
+    {
+      "name": "p5"
+    },
+    {
+      "name": "mortarpit"
+    },
+    {
+      "name": "outside"
+    },
+    {
+      "name": "rock"
+    },
+    {
+      "name": "tunnel"
+    },
+    {
+      "name": "caves"
+    },
+    {
+      "name": "caveswest"
+    },
+    {
+      "name": "caveseast"
+    },
+    {
+      "name": "river"
+    },
+    {
+      "name": "rivere"
+    },
+    {
+      "name": "riverw"
+    }
+  ]
+}

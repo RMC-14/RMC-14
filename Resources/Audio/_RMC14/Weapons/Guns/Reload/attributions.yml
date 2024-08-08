@@ -107,3 +107,25 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/7853d79df1827a2a4907fb3162b6319662dbc1ba/sound/weapons/handling/smg_unload.ogg"
+  
+- files: ["shell_load1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/f2b3774f6ca9173e76e7783d88e3c2f765cd385f/sound/weapons/shell_load1.ogg"
+  
+- files: ["shell_load2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/f2b3774f6ca9173e76e7783d88e3c2f765cd385f/sound/weapons/shell_load2.ogg"
+  
+- files: ["shell_load3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/f2b3774f6ca9173e76e7783d88e3c2f765cd385f/sound/weapons/shell_load3.ogg"
+  
+- files: ["shell_load4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/f2b3774f6ca9173e76e7783d88e3c2f765cd385f/sound/weapons/shell_load4.ogg"
+  
+  

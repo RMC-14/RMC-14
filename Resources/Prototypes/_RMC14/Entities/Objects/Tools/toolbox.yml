@@ -1,0 +1,43 @@
+﻿- type: entity
+  parent: ToolboxBase
+  abstract: true
+  id: RMCToolboxBase
+  components:
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,13,1
+  - type: FixedItemSizeStorage
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/toolbox_pickup.ogg
+
+- type: entity
+  parent: [RMCToolboxBase, ToolboxEmergency]
+  id: RMCToolboxEmergency
+  suffix: RMC14 # TODO RMC14 sprite
+
+- type: entity
+  parent: [RMCToolboxEmergency, ToolboxEmergencyFilled]
+  id: RMCToolboxEmergencyFilled
+  suffix: RMC14, Filled # TODO RMC14 sprite and fill
+
+- type: entity
+  parent: [RMCToolboxBase, ToolboxElectrical]
+  id: RMCToolboxElectrical
+  suffix: RMC14 # TODO RMC14 sprite
+
+- type: entity
+  parent: [RMCToolboxElectrical, ToolboxElectricalFilled]
+  id: RMCToolboxElectricalFilled
+  suffix: RMC14, Filled # TODO RMC14 sprite and fill
+
+- type: entity
+  parent: [RMCToolboxBase, ToolboxMechanical]
+  id: RMCToolboxMechanical
+  suffix: RMC14 # TODO RMC14 sprite
+
+- type: entity
+  parent: [RMCToolboxMechanical, ToolboxMechanicalFilled]
+  id: RMCToolboxMechanicalFilled
+  suffix: RMC14, Filled # TODO RMC14 sprite and fill

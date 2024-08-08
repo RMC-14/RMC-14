@@ -1,0 +1,25 @@
+﻿- type: entity
+  parent: RMCBaseEquipmentCase
+  id: CMSmartGunOperatorEquipmentCase
+  name: ML66A smart gun system case
+  description: "A large case containing an ML66A Smartgun, ML66A combat harness, head mounted sight and powerpack.\n\nNOTE: You cannot put items back inside this case."
+  components:
+  - type: Sprite
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: smartgun
+      map: [ label ]
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,13,1
+  - type: StorageFill
+    contents:
+    - id: RMCGlassesSmartGunSight
+    - id: RMCSmartGun
+    - id: RMCPowerCellSmartgun
+    - id: CMArmorSmartGunCombatHarness
+    - id: RMCMagazineSmartGun
+    - id: RMCMagazineSmartGun
+    - id: RMCMagazineSmartGun

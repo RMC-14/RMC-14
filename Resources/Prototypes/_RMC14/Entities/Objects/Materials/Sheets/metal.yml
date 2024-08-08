@@ -1,4 +1,19 @@
 # Metal
+
+- type: material
+  id: CMSteel
+  stackEntity: CMSheetMetal
+  name: materials-metal
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/metal.rsi, state: metal }
+  price: 0.05
+
+- type: stack
+  id: CMSteel
+  name: metal
+  icon: { sprite: /Textures/_RMC14/Objects/Materials/Sheets/metal.rsi, state: metal }
+  spawn: CMSheetMetal
+  maxCount: 50
+
 - type: entity
   abstract: true
   parent: SheetMetalBase
@@ -29,16 +44,14 @@
       stackType: CMSteel
       baseLayer: base
       layerStates:
-        - steel
-        - steel_2
-        - steel_3
-        - steel_4
+        - metal
+        - metal_2
+        - metal_3
+        - metal_4
     - type: Sprite
-      state: steel_4
       layers:
-        - state: steel_4
+        - state: metal_4
           map: ["base"]
-
 
 - type: entity
   parent: CMSheetMetal
@@ -46,7 +59,7 @@
   suffix: "10"
   components:
     - type: Sprite
-      state: steel2
+      state: metal_2
     - type: Stack
       stackType: CMSteel
       count: 10
@@ -57,7 +70,7 @@
   suffix: "30"
   components:
     - type: Sprite
-      state: steel2
+      state: metal_3
     - type: Stack
       stackType: CMSteel
       count: 30
@@ -68,7 +81,7 @@
   suffix: "50"
   components:
     - type: Sprite
-      state: steel2
+      state: metal_4
     - type: Stack
       stackType: CMSteel
       count: 50
@@ -79,12 +92,27 @@
   suffix: Single
   components:
     - type: Sprite
-      state: steel
+      state: metal
     - type: Stack
       stackType: CMSteel
       count: 1
 
 # Plasteel
+
+- type: material
+  id: CMPlasteel
+  stackEntity: CMSheetPlasteel
+  name: materials-plasteel
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/plasteel.rsi, state: plasteel }
+  color: "#696969"
+  price: 0.28
+
+- type: stack
+  id: CMPlasteel
+  name: plasteel
+  icon: { sprite: /Textures/_RMC14/Objects/Materials/Sheets/plasteel.rsi, state: plasteel }
+  spawn: CMSheetPlasteel
+  maxCount: 40
 
 - type: entity
   parent: CMSheetMetalBase
@@ -108,7 +136,6 @@
         - plasteel_4
     - type: Sprite
       sprite: _RMC14/Objects/Materials/Sheets/plasteel.rsi
-      state: plasteel_4
       layers:
         - state: plasteel_4
           map: ["base"]

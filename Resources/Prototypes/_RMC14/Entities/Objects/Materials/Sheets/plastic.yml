@@ -1,0 +1,69 @@
+# Plastic
+
+- type: material
+  id: RMCPlastic
+  stackEntity: RMCSheetPlastic
+  name: materials-plastic
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/plastic.rsi, state: plastic }
+  price: 0.2
+
+- type: stack
+  id: RMCPlastic
+  name: plastic
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/plastic.rsi, state: plastic }
+  spawn: RMCSheetPlastic
+  maxCount: 50
+
+- type: entity
+  parent: SheetOtherBase
+  id: RMCSheetPlastic
+  name: plastic
+  description: Plastic is a synthetic polymer, manufactured from organic and inorganic components into a malleable and light fabric. It can be used for a wide range of objects.
+  suffix: Full
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Materials/Sheets/plastic.rsi
+    layers:
+    - state: plastic_4
+      map: ["base"]
+  - type: Item
+    size: Normal
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      RMCPlastic: 100
+  - type: Stack
+    stackType: RMCPlastic
+    count: 50
+    baseLayer: base
+    layerStates:
+    - plastic
+    - plastic_2
+    - plastic_3
+    - plastic_4
+  - type: Appearance
+  - type: Tag
+    tags:
+    - Sheet
+
+- type: entity
+  parent: RMCSheetPlastic
+  id: RMCSheetPlastic10
+  suffix: 10
+  components:
+  - type: Sprite
+    state: plastic_2
+  - type: Stack
+    stackType: RMCPlastic
+    count: 10
+
+- type: entity
+  parent: RMCSheetPlastic
+  id: RMCSheetPlastic1
+  suffix: Single
+  components:
+  - type: Sprite
+    state: plastic
+  - type: Stack
+    stackType: RMCPlastic
+    count: 1

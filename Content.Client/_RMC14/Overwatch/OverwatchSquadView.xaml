@@ -1,0 +1,146 @@
+﻿<controls:OverwatchSquadView
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Overwatch"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    VerticalExpand="True">
+    <BoxContainer Orientation="Vertical" VerticalExpand="True">
+        <PanelContainer>
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
+            </PanelContainer.PanelOverride>
+            <BoxContainer Orientation="Horizontal" Margin="5">
+                <Label Name="OverwatchLabel" Access="Public" Text="Overwatch" />
+                <Control HorizontalExpand="True" />
+                <Button Name="OperatorButton" Access="Public" StyleClasses="OpenBoth" />
+                <Button Name="StopOverwatchButton" Access="Public" Text="Stop Overwatch" StyleClasses="OpenBoth" />
+            </BoxContainer>
+        </PanelContainer>
+        <BoxContainer Orientation="Vertical" Margin="0 10">
+            <Label Text="Squad Roles" />
+            <BoxContainer Orientation="Horizontal">
+                <BoxContainer Name="RolesContainer" Access="Public" Orientation="Horizontal" />
+                <Control HorizontalExpand="True" />
+            </BoxContainer>
+        </BoxContainer>
+        <TabContainer Name="Tabs" Access="Public" VerticalExpand="True">
+            <BoxContainer Name="SquadMonitor" Access="Public" Orientation="Vertical"
+                          VerticalExpand="True">
+                <PanelContainer VerticalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Vertical" VerticalExpand="True">
+                        <PanelContainer>
+                            <PanelContainer.PanelOverride>
+                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="0 0 0 1" />
+                            </PanelContainer.PanelOverride>
+                            <BoxContainer Orientation="Horizontal" Margin="5">
+                                <Label Text="Monitor" />
+                                <Control HorizontalExpand="True" />
+                                <Button Name="ShowLocationButton" Access="Public"
+                                        Text="Shown: all" StyleClasses="OpenBoth"
+                                        ModulateSelfOverride="#D3B400" MinWidth="165" />
+                                <Button Name="ShowDeadButton" Access="Public"
+                                        Text="Show dead" StyleClasses="OpenBoth"
+                                        ModulateSelfOverride="#D3B400" MinWidth="105" />
+                                <Button Name="ShowHiddenButton" Access="Public"
+                                        Text="Hide hidden" StyleClasses="OpenBoth"
+                                        ModulateSelfOverride="#D3B400" MinWidth="120" />
+                                <Button Name="TransferMarineButton" Access="Public"
+                                        Text="Transfer marine" StyleClasses="OpenBoth"
+                                        ModulateSelfOverride="#D3B400" Visible="False" />
+                            </BoxContainer>
+                        </PanelContainer>
+                        <BoxContainer Orientation="Vertical" Margin="5"
+                                      VerticalExpand="True">
+                            <LineEdit Name="SearchBar" Access="Public" HorizontalExpand="True" Margin="0 0 0 5"
+                                      PlaceHolder="Search..." />
+                            <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
+                                <BoxContainer Orientation="Horizontal">
+                                    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                        <PanelContainer>
+                                            <PanelContainer.PanelOverride>
+                                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
+                                            </PanelContainer.PanelOverride>
+                                            <BoxContainer Orientation="Horizontal">
+                                                <Control HorizontalExpand="True" />
+                                                <Label Text="Name" HorizontalAlignment="Center" />
+                                                <Control HorizontalExpand="True" />
+                                            </BoxContainer>
+                                        </PanelContainer>
+                                        <BoxContainer Name="Names" Access="Public" Orientation="Vertical" />
+                                    </BoxContainer>
+                                    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                        <PanelContainer>
+                                            <PanelContainer.PanelOverride>
+                                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
+                                            </PanelContainer.PanelOverride>
+                                            <BoxContainer Orientation="Horizontal">
+                                                <Control HorizontalExpand="True" />
+                                                <Label Text="Role" HorizontalAlignment="Center" />
+                                                <Control HorizontalExpand="True" />
+                                            </BoxContainer>
+                                        </PanelContainer>
+                                        <BoxContainer Name="Roles" Access="Public" Orientation="Vertical" />
+                                    </BoxContainer>
+                                    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                        <PanelContainer>
+                                            <PanelContainer.PanelOverride>
+                                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
+                                            </PanelContainer.PanelOverride>
+                                            <BoxContainer Orientation="Horizontal">
+                                                <Control HorizontalExpand="True" />
+                                                <Label Text="State" HorizontalAlignment="Center" />
+                                                <Control HorizontalExpand="True" />
+                                            </BoxContainer>
+                                        </PanelContainer>
+                                        <BoxContainer Name="States" Access="Public" Orientation="Vertical" />
+                                    </BoxContainer>
+                                    <BoxContainer Orientation="Vertical" HorizontalExpand="True" Visible="False">
+                                        <PanelContainer>
+                                            <PanelContainer.PanelOverride>
+                                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
+                                            </PanelContainer.PanelOverride>
+                                            <BoxContainer Orientation="Horizontal">
+                                                <Control HorizontalExpand="True" />
+                                                <Label Text="Location" HorizontalAlignment="Center" />
+                                                <Control HorizontalExpand="True" />
+                                            </BoxContainer>
+                                        </PanelContainer>
+                                        <BoxContainer Name="Locations" Access="Public" Orientation="Vertical" />
+                                    </BoxContainer>
+                                    <BoxContainer Orientation="Vertical" HorizontalExpand="True" Visible="False">
+                                        <PanelContainer>
+                                            <PanelContainer.PanelOverride>
+                                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
+                                            </PanelContainer.PanelOverride>
+                                            <BoxContainer Orientation="Horizontal">
+                                                <Control HorizontalExpand="True" />
+                                                <Label Text="SL Dist." HorizontalAlignment="Center" />
+                                                <Control HorizontalExpand="True" />
+                                            </BoxContainer>
+                                        </PanelContainer>
+                                        <BoxContainer Name="Distances" Access="Public" Orientation="Vertical" />
+                                    </BoxContainer>
+                                    <BoxContainer Orientation="Vertical" MinWidth="30">
+                                        <PanelContainer>
+                                            <PanelContainer.PanelOverride>
+                                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
+                                            </PanelContainer.PanelOverride>
+                                            <BoxContainer Orientation="Horizontal">
+                                                <Control HorizontalExpand="True" />
+                                                <Label Text=" " HorizontalAlignment="Center" />
+                                                <Control HorizontalExpand="True" />
+                                            </BoxContainer>
+                                        </PanelContainer>
+                                        <BoxContainer Name="Buttons" Access="Public" Orientation="Vertical" />
+                                    </BoxContainer>
+                                </BoxContainer>
+                            </ScrollContainer>
+                        </BoxContainer>
+                    </BoxContainer>
+                </PanelContainer>
+            </BoxContainer>
+        </TabContainer>
+    </BoxContainer>
+</controls:OverwatchSquadView>

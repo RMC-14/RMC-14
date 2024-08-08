@@ -191,42 +191,42 @@
 #        amount: 15
     - name: Pouches
       entries:
-      - id: CMPouchBayonet
+      - id: RMCPouchBayonet
         name: Bayonet Sheath (Full)
         amount: 15
-      - id: CMPouchFirstAidSplintsGauzeOintment
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: First-Aid Pouch (Splints, Gauze, Ointment)
         amount: 15
-      - id: CMPouchFirstAidPills
+      - id: RMCPouchFirstAidPills
         name: First-Aid Pouch (Pill Packets)
         amount: 15
-      - id: CMPouchFlareFilled
+      - id: RMCPouchFlareFilled
         name: Flare Pouch (Full)
         amount: 15
-      - id: CMPouchDocumentSmall
+      - id: RMCPouchDocumentSmall
         amount: 15
-      - id: CMPouchMagazine
+      - id: RMCPouchMagazine
         amount: 15
-      - id: CMPouchShotgun
+      - id: RMCPouchShotgun
         amount: 15
-      - id: CMPouchGeneralMedium
+      - id: RMCPouchGeneralMedium
         amount: 15
-      - id: CMPouchMagazinePistol
+      - id: RMCPouchMagazinePistol
         amount: 15
-      - id: CMPouchPistol
+      - id: RMCPouchPistol
         amount: 15
     - name: Restricted Pouches
       entries:
-      - id: CMPouchConstruction
+      - id: RMCPouchConstruction
         amount: 1
-      - id: CMPouchExplosive
+      - id: RMCPouchExplosive
         amount: 1
-      - id: CMPouchFirstResponder
+      - id: RMCPouchFirstResponder
         name: First Responder Pouch (Empty)
         amount: 2
-      - id: CMPouchMagazinePistolLarge
+      - id: RMCPouchMagazinePistolLarge
         amount: 2
-      - id: CMPouchTools
+      - id: RMCPouchTools
         amount: 1
 #      - id: Sling Pouch
 #        amount: 1
@@ -288,7 +288,7 @@
     - name: Armor-Piercing Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP
-        amount: 3
+        amount: 4
       - id: CMMagazineSMGM63AP
         amount: 3
       - id: CMMagazineRifleM54CAP
@@ -296,13 +296,11 @@
     - name: Extended Ammunition
       entries:
       - id: CMMagazineSMGM63Ext
-        amount: 1
+        amount: 2
       - id: CMMagazineRifleM54CExt
-        amount: 1
+        amount: 2
     - name: Special Ammunition
       entries:
-      #- id: CMDrumSmartGunM56
-      #  amount: 1
       - id: RMCMagazineSmartGun
         amount: 1
       #- id: CMSpeedLoaderM44Heavy
@@ -312,9 +310,9 @@
     - name: Restricted Firearm Ammunition
       entries:
       - id: CMMagazinePistolMK80
-        amount: 5
+        amount: 6
       - id: RMCMagazinePistolSU6
-        amount: 5
+        amount: 6
       #- id: CMIncineratorTankM240
       #  amount: 3
       #- id: CMMagazineDrumM56D
@@ -394,7 +392,7 @@
 #      - id: CMScabbardMacheteFull
 #        amount: 5
       - id: RMCBinoculars
-        amount: 5
+        amount: 1
       #- id: CMFoldingBarricadesMB6x3
       #  amount: 2
       #- id: CMSparePDTLBattleBuddyKit
@@ -449,7 +447,7 @@
       - id: RMCAttachmentGyroscopicStabilizer
         amount: 2
       - id: RMCAttachmentLaserSight
-        amount: 4
+        amount: 3
 #      - id: CMAttachmentMiniFlamethrower
 #        amount: 2
 #      - id: CMAttachmentXMVESG1FlamerNozzle
@@ -459,7 +457,7 @@
 #      - id: CMAttachmentUnderbarrelExtinguisher
 #        amount: 2
       - id: RMCAttachmentVerticalGrip
-        amount: 4
+        amount: 3
     - name: Stock
       entries:
       - id: RMCAttachmentM42A2WoodenStock
