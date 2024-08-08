@@ -208,7 +208,7 @@
   parent: RMC
   name: Magazine Box (M44 Reg)
   id: RMCBoxMagazineRevolverM44Empty
-  graph: RMCBoxMagazine
+  graph: CMBoxMagazine
   startNode: start
   targetNode: RMCBoxMagazineRevolverM44Empty
   category: construction-category-cm-box-magazine
@@ -222,7 +222,7 @@
   parent: RMC
   name: Magazine Box (M44 Mark)
   id: RMCBoxMagazineRevolverM44MarksmanEmpty
-  graph: RMCBoxMagazine
+  graph: CMBoxMagazine
   startNode: start
   targetNode: RMCBoxMagazineRevolverM44MarksmanEmpty
   category: construction-category-cm-box-magazine
