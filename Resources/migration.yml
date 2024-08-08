@@ -635,7 +635,7 @@ CMCrateSandbagsConstructionKit: RMCCrateSandbagsConstructionKit
 CMCrateMetalSheets: RMCCrateMetalSheets
 CMCratePlasteelSheets: RMCCratePlasteelSheets    
 CMCrateGlassSheets: RMCCrateGlassSheets
-CMCrateWoodenPlanks: RMCCrateWoodenPlanks
+#CMCrateWoodenPlanks: RMCCrateWoodenPlanks
 CMCrateFoldingBarricades: RMCCrateFoldingBarricades
 CMCrateSuperconductingMagneticCoil: RMCCrateSuperconductingMagneticCoil
 CMCrateElectricalMaintenance: RMCCrateElectricalMaintenance
