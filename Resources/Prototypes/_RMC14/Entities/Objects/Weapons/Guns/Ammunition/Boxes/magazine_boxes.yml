@@ -642,7 +642,7 @@
   description: A box for holding many speedloaders with a carrying handle.
   components:
   - type: Construction
-    graph: RMCBoxMagazine
+    graph: CMBoxMagazine
     node: RMCBoxMagazineRevolverM44Empty
   - type: Sprite
     layers:
@@ -676,13 +676,13 @@
         - RMCSpeedLoaderM44
 
 - type: entity
-  parent: RMCBoxMagazineBase
+  parent: CMBoxMagazineBase
   id: RMCBoxMagazineRevolverM44MarksmanEmpty
   name: speedloader box (Marksman M44 x 16)
   description: A box for holding many speedloaders with a carrying handle, these ones are loaded with Marksman Rounds.
   components:
   - type: Construction
-    graph: RMCBoxMagazine
+    graph: CMBoxMagazine
     node: RMCBoxMagazineRevolverM44MarksmanEmpty
   - type: Sprite
     layers:
