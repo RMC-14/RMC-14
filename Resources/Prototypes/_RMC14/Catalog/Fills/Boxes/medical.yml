@@ -27,7 +27,7 @@
 - type: entity
   name: body bag box
   parent: RMCBoxCardboard
-  id: RMCBoxBodyBag
+  id: CMBoxBodyBag
   description: Contains body bags.
   components:
   - type: StorageFill
