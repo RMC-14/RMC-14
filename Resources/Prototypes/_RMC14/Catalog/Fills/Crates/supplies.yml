@@ -48,7 +48,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMBucket
+    - id: RMCBucket
       amount: 5
     - id: CMMop
       amount: 1
