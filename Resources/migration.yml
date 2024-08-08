@@ -711,3 +711,5 @@ CMCrateSecurePhoron: RMCCrateSecurePhoron
 CMBoxBodyBag: RMCBoxBodyBag
 CMBoxLatexGloves: RMCBoxLatexGloves
 CMBoxSyringe: RMCBoxSyringe
+CMBoxSterileMask: RMCBoxSterileMask
+CMBoxPillCanister: RMCBoxPillCanister
