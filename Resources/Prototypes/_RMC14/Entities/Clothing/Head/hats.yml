@@ -62,6 +62,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_black.rsi
 
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretGreen
+  name: UNMC beret
+  suffix: Green
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_green.rsi
+
 # Caps
 - type: entity
   parent: ClothingHeadBase

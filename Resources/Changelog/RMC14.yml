@@ -1,57 +1,6 @@
 ﻿Entries:
 - author: Tunguso4ka
   changes:
-  - message: Stock parts have been ported.
-    type: Add
-  id: 24
-  time: '2024-02-08T10:44:46.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/975
-- author: Verification31
-  changes:
-  - message: Clothing crates have been added to the game.
-    type: Add
-  id: 25
-  time: '2024-02-11T07:08:22.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/977
-- author: MetalSage
-  changes:
-  - message: Added Medical Requisitions
-    type: Add
-  id: 26
-  time: '2024-02-21T18:00:02.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/983
-- author: Simyon
-  changes:
-  - message: Suiciding will now result in ghosting, keeping your body alive.
-    type: Tweak
-  id: 27
-  time: '2024-02-24T22:26:31.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/990
-- author: DrSmugleaf
-  changes:
-  - message: Added Word of the Queen action.
-    type: Add
-  id: 28
-  time: '2024-03-01T01:34:08.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/991
-- author: KittenColony
-  changes:
-  - message: Marine Radiophones, a military grade walkie talkie.
-    type: Add
-  - message: Marker Flares, light up the night.
-    type: Add
-  id: 29
-  time: '2024-03-03T08:08:21.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/980
-- author: Whisper
-  changes:
-  - message: Add more fills to cm medical pouches
-    type: Add
-  id: 30
-  time: '2024-03-03T10:47:54.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/978
-- author: Tunguso4ka
-  changes:
   - message: Added Corporate Liaison role.
     type: Add
   id: 31
@@ -4284,5 +4233,56 @@
   id: 523
   time: '2024-08-07T00:29:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3546
+- author: Vermidia
+  changes:
+  - message: Vaulting is no longer cancelled by damage
+    type: Fix
+  id: 524
+  time: '2024-08-07T22:46:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3569
+- author: KalimbaMachine
+  changes:
+  - message: Allow Lighters to be stored in cigarette packs!
+    type: Tweak
+  id: 525
+  time: '2024-08-07T22:49:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3522
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added marine armor light visuals
+    type: Add
+  id: 526
+  time: '2024-08-07T23:44:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3455
+- author: FungiFellow
+  changes:
+  - message: Added Penlights into the Med Essential Bundle
+    type: Add
+  id: 527
+  time: '2024-08-07T23:49:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3538
+- author: DrSmugleaf
+  changes:
+  - message: Added CMO Pandi Fackler and Jermaine 'Bait' McClune figurines.
+    type: Add
+  - message: Patrons will now spawn with their figurine in-hand or in their backpack.
+    type: Add
+  id: 528
+  time: '2024-08-07T23:50:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3579
+- author: Vermidia
+  changes:
+  - message: You can use a machete or throwing knife while devoured
+    type: Tweak
+  id: 529
+  time: '2024-08-07T23:53:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3566
+- author: blueDev2
+  changes:
+  - message: Corpsmen helmets allow medics to change holocards by examination
+    type: Fix
+  id: 530
+  time: '2024-08-07T23:58:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3573
 Name: RMC14
 Order: -1
