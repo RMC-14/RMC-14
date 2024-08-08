@@ -8,8 +8,8 @@
       - id: RMCSurgicalTray
       - id: CMMaskGasMedical
       - id: CMScrubsGreen
-      - id: CMBoxSterileMask
-      - id: CMBoxLatexGloves
+      - id: RMCBoxSterileMask
+      - id: RMCBoxLatexGloves
       - id: CMAnestheticTankFilled
 
 - type: entity
@@ -19,7 +19,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMBoxBodyBag
+      - id: RMCBoxBodyBag
         amount: 4
 
 - type: entity
@@ -58,8 +58,8 @@
   components:
   - type: StorageFill
     contents: # TODO RMC14 missing bottles
-      - id: CMBoxPillCanister
-      - id: CMBoxSyringe
+      - id: RMCBoxPillCanister
+      - id: RMCBoxSyringe
       - id: CMBottleInaprovaline
       - id: CMBottleDylovene
       - id: CMBottleBicaridine
@@ -81,7 +81,7 @@
   components:
   - type: StorageFill
     contents: # TODO RMC14 missing pill bottles
-      - id: CMBoxPillCanister
+      - id: RMCBoxPillCanister
         amount: 2
       - id: CMPillCanisterInaprovaline
         amount: 2
