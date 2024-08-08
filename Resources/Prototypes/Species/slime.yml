@@ -44,7 +44,8 @@
       defaultMarkings: [ RMCUnderwearBoxers ]
     Undershirt:
       points: 1
-      required: false
+      required: true
+      defaultMarkings: [ RMCUndershirtStandard ]
     Legs:
       points: 4
       required: false

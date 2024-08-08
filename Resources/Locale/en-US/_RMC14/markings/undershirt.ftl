@@ -21,3 +21,6 @@ marking-RMCUndershirtSports-c_sports = Bra
 
 marking-RMCUndershirtStrapless = Bra (Strapless)
 marking-RMCUndershirtStrapless-c_strapless = Bra
+
+marking-RMCUndershirtNone = None
+marking-RMCUndershirtNone-blank = None

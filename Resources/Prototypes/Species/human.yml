@@ -60,6 +60,7 @@
     Undershirt:
       points: 1
       required: false
+      defaultMarkings: [ RMCUndershirtStandard ]
     Legs:
       points: 2
       required: false
