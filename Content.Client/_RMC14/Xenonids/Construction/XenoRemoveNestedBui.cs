@@ -1,8 +1,12 @@
 using Content.Client._RMC14.Xenonids.UI;
+using JetBrains.Annotations;
+using Robust.Shared.Utility;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using static Robust.Client.UserInterface.Controls.BaseButton;
 
-namespace Content.Client._RMC14.Xenonids.Construction
+namespace Content.Client._RMC14.Xenonids.Construction.Nest
 {
+    [UsedImplicitly]
     public sealed class XenoRemoveNestedBui : BoundUserInterface
     {
         [ViewVariables]
@@ -17,7 +21,7 @@ namespace Content.Client._RMC14.Xenonids.Construction
             _window = new XenoRemoveNestedWindow();
             _window.OnClose += Close;
 
-            _window.ConfirmButton.OnPressed += _ => Close();
+            _window.ConfirmButton.OnPressed += _ => RemoveNested();
 
             _window.OpenCentered();
         }
