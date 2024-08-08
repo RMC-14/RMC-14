@@ -679,7 +679,6 @@ CMBoxShotgunFlechette: RMCBoxShotgunFlechette
 CMBoxShotgunIncendiaryBuckshot: RMCBoxShotgunIncendiaryBuckshot
 CMBoxMRE: RMCBoxMRE
 CMBoxPackFlare: RMCBoxPackFlare
-CMBoxPillCanister: RMCBoxPillCanister
 CMCrateBase: RMCCrateBase
 CMCrateLarge: RMCCrateLarge
 CMCrateWeldable: RMCCrateWeldable
