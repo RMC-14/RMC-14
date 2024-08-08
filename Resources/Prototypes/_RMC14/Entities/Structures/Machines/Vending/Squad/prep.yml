@@ -26,11 +26,11 @@
         recommended: true
     - name: Primary ammunition
       entries:
-      - id: CMBoxShotgunFlechette
+      - id: RMCBoxShotgunFlechette
         amount: 4
-      - id: CMBoxShotgunBuckshot
+      - id: RMCBoxShotgunBuckshot
         amount: 10
-      - id: CMBoxShotgunSlugs
+      - id: RMCBoxShotgunSlugs
         amount: 10
       - id: CMMagazineRifleM4SPR
         amount: 15
@@ -346,7 +346,7 @@
       entries:
       - id: CMMRE
         amount: 5
-      - id: CMBoxMRE
+      - id: RMCBoxMRE
         amount: 1
     - name: Tools
       entries:
@@ -369,9 +369,9 @@
 #      #  amount: 1
       - id: RMCFlashlight # Combat Flashlight
         amount: 5
-#      #- id: CMBoxFlashlights
+#      #- id: RMCBoxFlashlights
 #      #  amount: 1
-      - id: CMBoxPackFlare
+      - id: RMCBoxPackFlare
         amount: 1
       - id: CMPackFlare
         amount: 10
