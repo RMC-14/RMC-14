@@ -412,7 +412,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 continue;
 
             // 20 seconds before burst, spawn the larva
-            if (infected.BurstAt - TimeSpan.FromSeconds(20) < time && infected.SpawnedLarva == null)
+            if (infected.BurstAt - infected.SpawnLarvaBefore < time && infected.SpawnedLarva == null)
             {
                 var spawned = SpawnAtPosition(infected.BurstSpawn, xform.Coordinates);
                 _xeno.SetHive(spawned, infected.Hive);

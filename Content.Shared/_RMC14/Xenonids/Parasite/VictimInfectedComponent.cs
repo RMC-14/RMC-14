@@ -14,6 +14,9 @@ namespace Content.Shared._RMC14.Xenonids.Parasite;
 [Access(typeof(SharedXenoParasiteSystem))]
 public sealed partial class VictimInfectedComponent : Component
 {
+    /// <summary>
+    ///     Textures for how progressed the larva is. Used by xenonid hud.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public SpriteSpecifier[] InfectedIcons =
     [
@@ -26,12 +29,21 @@ public sealed partial class VictimInfectedComponent : Component
         new Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_hud.rsi"), "infected6")
     ];
 
+    /// <summary>
+    ///     The container ID of where the larva is stored.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public string LarvaContainerId = "rmc_larva_container";
 
+    /// <summary>
+    ///     The uid of the larva that is spawned.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? SpawnedLarva;
 
+    /// <summary>
+    ///     How long it takes for the parasite to fall off the victim's mask.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan FallOffDelay = TimeSpan.FromSeconds(35);
 
@@ -41,8 +53,17 @@ public sealed partial class VictimInfectedComponent : Component
     [DataField, AutoNetworkedField]
     public bool FellOff;
 
+    /// <summary>
+    ///     How long it takes for the larva to burst out of the victim.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan BurstDelay = TimeSpan.FromMinutes(8);
+
+    /// <summary>
+    ///     When the larva should be spawned before burst.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan SpawnLarvaBefore = TimeSpan.FromSeconds(20);
 
     [DataField, AutoNetworkedField]
     public TimeSpan AttachedAt;
@@ -50,18 +71,30 @@ public sealed partial class VictimInfectedComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan BurstAt;
 
+    /// <summary>
+    ///     How fast the larva incubates.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public float IncubationMultiplier = 1;
 
+    /// <summary>
+    ///     The entity which is spawned during the infection process.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId BurstSpawn = "CMXenoLarva";
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier BurstSound = new SoundCollectionSpecifier("XenoChestBurst");
 
+    /// <summary>
+    ///     Used by larva removal surgery.
+    /// </summary>
     [DataField, AutoNetworkedField, Access(typeof(SharedCMSurgerySystem))]
     public bool RootsCut;
 
+    /// <summary>
+    ///     What hive the larva is from.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? Hive;
 
