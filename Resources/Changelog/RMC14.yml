@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: ike709
-  changes:
-  - message: Added a cargo crate for the M54CE2
-    type: Add
-  id: 33
-  time: '2024-04-10T06:59:53.0000000+00:00'
-  url: https://api.github.com/repos/RMC-14/RMC-14/pulls/1141
 - author: Froffy025
   changes:
   - message: Added filled lockers
@@ -4287,5 +4280,19 @@
   id: 532
   time: '2024-08-08T00:40:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3499
+- author: gorillagaming
+  changes:
+  - message: The selected planet now updates correctely
+    type: Fix
+  id: 533
+  time: '2024-08-08T00:56:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3331
+- author: P-MCT
+  changes:
+  - message: Added Scottish trait/accent.
+    type: Add
+  id: 534
+  time: '2024-08-08T00:03:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3561
 Name: RMC14
 Order: -1
