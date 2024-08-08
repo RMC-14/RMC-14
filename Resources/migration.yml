@@ -671,9 +671,6 @@ CMCrateMagazineM96SStandard: RMCCrateMagazineM96SStandard
 CMCrateMagazineM96SFlak: RMCCrateMagazineM96SFlak
 CMCrateMagazineM96SIncendiary: RMCCrateMagazineM96SIncendiary
 CMCrateMagazineM4SPRCustomIncendiary: RMCCrateMagazineM4SPRCustomIncendiary
-#CMBoxMagazineBase: RMCBoxMagazineBase
-#CMBoxMREBase: RMCBoxMREBase
-#CMBoxPackFlareBase: RMCBoxPackFlareBase
 CMBoxShotgunBuckshot: RMCBoxShotgunBuckshot
 CMBoxShotgunSlugs: RMCBoxShotgunSlugs
 CMBoxShotgunBeanbag: RMCBoxShotgunBeanbag
@@ -681,7 +678,6 @@ CMBoxShotgunIncendiary: RMCBoxShotgunIncendiary
 CMBoxShotgunFlechette: RMCBoxShotgunFlechette
 CMBoxShotgunIncendiaryBuckshot: RMCBoxShotgunIncendiaryBuckshot
 CMBoxMRE: RMCBoxMRE
-CMBoxFlashlights: RMCBoxFlashlights
 CMBoxPackFlare: RMCBoxPackFlare
 CMBoxPillCanister: RMCBoxPillCanister
 CMCrateBase: RMCCrateBase
