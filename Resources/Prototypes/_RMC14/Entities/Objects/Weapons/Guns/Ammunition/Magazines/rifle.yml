@@ -203,6 +203,27 @@
     - CMMagazineRifle
     - CMMagazineRifleM4SPRExt
 
+# M4SPR A19 HV 
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineRifleM4SPRA19
+  name: "M4SPR A19 magazine (high-velocity)"
+  description: "A magazine of high-velocity A19 rounds for use in the M4SPR battle rifle."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleM4SPRA19
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifleM4SPRA19
+    proto: RMCCartridgeRifleM4SPRA19
+    capacity: 18
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4spr.rsi
+
 - type: Tag
   id: CMMagazineRifle
 
@@ -214,3 +235,6 @@
 
 - type: Tag
   id: CMMagazineRifleM4SPR
+
+- type: Tag
+  id: RMCMagazineRifleM4SPRA19

@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Rules.CrashLand;
@@ -137,6 +137,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         _crashLandableQuery = GetEntityQuery<CrashLandableComponent>();
         _xenoNestedQuery = GetEntityQuery<XenoNestedComponent>();
 
+        SubscribeLocalEvent<LoadingMapsEvent>(OnMapLoading);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<RulePlayerSpawningEvent>(OnRulePlayerSpawning);
         SubscribeLocalEvent<PlayerSpawningEvent>(OnPlayerSpawning,
@@ -176,6 +177,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     {
         if (ev.WasModified<EntityPrototype>())
             ReloadPrototypes();
+    }
+
+    private void OnMapLoading(LoadingMapsEvent ev)
+    {
+        SelectRandomPlanet();
+        //Just in case the info text is not updated previousely
+        GameTicker.UpdateInfoText();
     }
 
     private void OnRulePlayerSpawning(RulePlayerSpawningEvent ev)
@@ -481,8 +489,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
-        if (!_autoBalance)
+        if (!_autoBalance) {
+            //Just to make sure the planet gets reset
+            ResetSelectedPlanet();
             return;
+        }
 
         var rules = QueryAllRules();
         while (rules.MoveNext(out var comp, out _))
@@ -521,6 +532,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             break;
         }
+        ResetSelectedPlanet();
     }
 
     private void OnMobStateChanged<T>(Entity<T> ent, ref MobStateChangedEvent args) where T : IComponent?
@@ -839,20 +851,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     {
         var mapId = _mapManager.CreateMap();
 
-        SelectedPlanetMap = _random.Pick(_planetMaps.Split(","));
-        SelectedPlanetMapName = SelectedPlanetMap.Replace("/Maps/_RMC14/", "").Replace(".yml", "");
-
-        // TODO RMC14 save these somewhere and avert the shitcode
-        SelectedPlanetMapName = SelectedPlanetMapName switch
-        {
-            "lv624" => "LV-624",
-            "solaris" => "Solaris Ridge",
-            "prison" => "Fiorina Science Annex",
-            "shiva" => "Shivas Snowball",
-            _ => SelectedPlanetMapName,
-        };
-
-        if (!_mapLoader.TryLoad(mapId, SelectedPlanetMap, out var grids))
+        //Just in case the planet was not selected before now
+        if (!_mapLoader.TryLoad(mapId, SelectRandomPlanet(), out var grids))
             return false;
 
         EnsureComp<RMCPlanetComponent>(_mapManager.GetMapEntityId(mapId));
@@ -1107,6 +1107,30 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         }
     }
 
+    private string SelectRandomPlanet()
+    {
+        if (SelectedPlanetMap != null)
+            return string.Empty;
+        SelectedPlanetMap = _random.Pick(_planetMaps.Split(","));
+        SelectedPlanetMapName = SelectedPlanetMap.Replace("/Maps/_RMC14/", "").Replace(".yml", "");
+
+        // TODO RMC14 save these somewhere and avert the shitcode
+        SelectedPlanetMapName = SelectedPlanetMapName switch
+        {
+            "lv624" => "LV-624",
+            "solaris" => "Solaris Ridge",
+            "prison" => "Fiorina Science Annex",
+            "shiva" => "Shivas Snowball",
+            _ => SelectedPlanetMapName,
+        };
+        return SelectedPlanetMap;
+    }
+
+    private void ResetSelectedPlanet()
+    {
+        SelectedPlanetMap = null;
+        SelectedPlanetMapName = null;
+    }
     private string GetRandomOperationName()
     {
         var name = string.Empty;

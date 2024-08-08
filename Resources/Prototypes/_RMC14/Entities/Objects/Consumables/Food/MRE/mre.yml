@@ -92,6 +92,10 @@
     - id: CMElectroMatchbook
       orGroup: matchbook
   - type: FixedItemSizeStorage
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   abstract: true

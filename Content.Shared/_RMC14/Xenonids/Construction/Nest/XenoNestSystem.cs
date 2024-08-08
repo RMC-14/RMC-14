@@ -332,6 +332,14 @@ public sealed class XenoNestSystem : EntitySystem
             return false;
         }
 
+        if (_mobState.IsDead(victim))
+        {
+            if (!silent)
+                _popup.PopupClient(Loc.GetString("rmc-xeno-nest-failed-dead", ("target", victim)), surface, user);
+
+            return false;
+        }
+
         if (!Resolve(surface, ref surface.Comp))
         {
             if (!silent)

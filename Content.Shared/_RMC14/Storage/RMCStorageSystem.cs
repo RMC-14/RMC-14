@@ -1,5 +1,7 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.DoAfter;
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
@@ -22,6 +24,7 @@ public sealed class RMCStorageSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
 
     private readonly List<EntityUid> _toRemove = new();
 
@@ -37,6 +40,8 @@ public sealed class RMCStorageSystem : EntitySystem
 
         SubscribeLocalEvent<StorageSkillRequiredComponent, StorageInteractAttemptEvent>(OnStorageSkillOpenAttempt);
         SubscribeLocalEvent<StorageSkillRequiredComponent, DumpableDoAfterEvent>(OnDumpableDoAfter, before: [typeof(DumpableSystem)]);
+
+        SubscribeLocalEvent<StorageCloseOnMoveComponent, GotEquippedEvent>(OnStorageEquip);
 
         Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, sub =>
         {
@@ -112,6 +117,9 @@ public sealed class RMCStorageSystem : EntitySystem
             return false;
         }
 
+        if (comp.SkipInHand && _hands.IsHolding(entity, uid))
+            return false;
+
         var ev = new OpenStorageDoAfterEvent(GetNetEntity(uid), GetNetEntity(entity), silent);
         var doAfter = new DoAfterArgs(EntityManager, entity, comp.Duration, ev, uid)
         {
@@ -154,11 +162,19 @@ public sealed class RMCStorageSystem : EntitySystem
         if (_timing.ApplyingState)
             return;
 
+        if (ent.Comp.SkipInHand && _hands.IsHolding(args.Actor, ent))
+            return;
+
         var user = args.Actor;
         var coordinates = GetNetCoordinates(_transform.GetMoverCoordinates(user));
         EnsureComp<StorageOpenComponent>(ent).OpenedAt[user] = coordinates;
     }
-
+    private void OnStorageEquip(Entity<StorageCloseOnMoveComponent> ent, ref GotEquippedEvent args)
+    {
+        _ui.CloseUi(ent.Owner, StorageUiKey.Key, args.Equipee);
+        if (TryComp<StorageOpenComponent>(ent, out var comp))
+            comp.OpenedAt.Remove(args.Equipee);
+    }
     private void OnCloseOnMoveUIClosed(Entity<StorageOpenComponent> ent, ref BoundUIClosedEvent args)
     {
         ent.Comp.OpenedAt.Remove(args.Actor);

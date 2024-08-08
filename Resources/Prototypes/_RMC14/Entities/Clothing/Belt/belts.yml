@@ -146,6 +146,7 @@
     sprite: _RMC14/Objects/Clothing/Belt/knife.rsi
   - type: ItemSlots
   - type: CMHolster
+  - type: UsableWhileDevoured
   - type: CMItemSlots
     cooldown: 1
     cooldownPopup: You need to wait before drawing another knife!

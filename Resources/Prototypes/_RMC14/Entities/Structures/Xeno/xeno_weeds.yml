@@ -246,6 +246,9 @@
   - type: ImmuneToUnarmed
   - type: WallMount
     arc: 360
+  - type: RMCNightVisionVisible
+    priority: -1
+    transparency: 0.2
 
 - type: edgeSpreader
   id: XenoWeeds
