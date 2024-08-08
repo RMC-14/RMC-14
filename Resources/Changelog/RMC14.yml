@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: non-barbed sandbags are climable
-    type: Add
-  id: 36
-  time: '2024-04-12T08:49:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1183
-- author: Whisper
-  changes:
-  - message: Fixed some guns still using bolting
-    type: Fix
-  - message: Pistols have an ammo counter now
-    type: Fix
-  id: 37
-  time: '2024-04-12T10:47:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1185
 - author: DrSmugleaf
   changes:
   - message: Fixed moving corroding objects leaving the acid visual effect behind.
@@ -4291,5 +4275,25 @@
   id: 535
   time: '2024-08-08T02:44:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3582
+- author: FungiFellow
+  changes:
+  - message: Added M44 Speedloader Boxes
+    type: Add
+  - message: Cargo Can Order M44 Reg and Marksman Rounds
+    type: Add
+  id: 536
+  time: '2024-08-08T02:59:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3559
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being able to attack or shoot while lying down. This includes beds
+      and roller beds.
+    type: Fix
+  - message: You now drop your items when lying down. Remember to holster your gun,
+      or grab the marine's gun if you are a corpsman.
+    type: Fix
+  id: 537
+  time: '2024-08-08T02:59:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3584
 Name: RMC14
 Order: -1
