@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: Froffy025
-  changes:
-  - message: Added filled lockers
-    type: Add
-  id: 34
-  time: '2024-04-12T08:32:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1182
-- author: DrSmugleaf
-  changes:
-  - message: Added Queen ovipositor and eggs.
-    type: Add
-  - message: Added two hands to xenos that can only hold eggs and parasites.
-    type: Add
-  id: 35
-  time: '2024-04-12T10:24:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1184
 - author: Whisper
   changes:
   - message: non-barbed sandbags are climable
@@ -4294,5 +4278,18 @@
   id: 534
   time: '2024-08-08T00:03:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3561
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the chemical dispenser and chemmaster having no skill check. They
+      now have a skill requirement of medical 3 (Nurse, Doctor, Researcher CMO, XO,
+      CO, but excludes the Hospital Corpsman).
+    type: Fix
+  - message: Fixed the overwatch console having no skill check. It now has a skill
+      requirement of overwatch 1 (SO, XO, CO, Warden, ASO, pilots, IO, CE, CMO, CMP,
+      SEA and QM)
+    type: Fix
+  id: 535
+  time: '2024-08-08T02:44:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3582
 Name: RMC14
 Order: -1
