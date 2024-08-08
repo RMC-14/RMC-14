@@ -31,8 +31,17 @@ public sealed class RMCTeleporterSystem : EntitySystem
             return;
         }
 
-        var coords = _transform.GetMapCoordinates(ent);
-        coords = coords.Offset(ent.Comp.Adjust);
-        _transform.SetMapCoordinates(args.OtherEntity, coords);
+        var user = _transform.GetMapCoordinates(args.OtherEntity);
+        var teleporter = _transform.GetMapCoordinates(ent);
+        if (user.MapId != teleporter.MapId)
+            return;
+
+        var diff = user.Position - teleporter.Position;
+        if (diff.Length() > 10)
+            return;
+
+        teleporter = teleporter.Offset(diff);
+        teleporter = teleporter.Offset(ent.Comp.Adjust);
+        _transform.SetMapCoordinates(args.OtherEntity, teleporter);
     }
 }
