@@ -1,34 +1,34 @@
 ﻿# m54c
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateBoxMagazineRifleM54C
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineRifleM54C
   name: Magazine box (M54C, 10x regular mags)
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxMagazineRifleM54C
+    - id: RMCBoxMagazineRifleM54C
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateBoxMagazineRifleM54CAP
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineRifleM54CAP
   name: Magazine box (M54C, 10x AP mags)
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxMagazineRifleM54CAP
+    - id: RMCBoxMagazineRifleM54CAP
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateBoxMagazineRifleM54CExt
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineRifleM54CExt
   name: Magazine box (M54C, 8x extended mags)
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxMagazineRifleM54CExt
+    - id: RMCBoxMagazineRifleM54CExt
 
 # m54ce2
 - type: entity
-  parent: CMCrateAmmo
+  parent: RMCCrateAmmo
   id: RMCCrateMagazineRifleM54CE2
   name: M54CE2 HAR Magazines crate (HAR ammo box x2)
   components:
@@ -39,102 +39,102 @@
 
 # m4spr
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateBoxMagazineRifleM4SPR
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineRifleM4SPR
   name: Magazine box (M4SPR, 16x regular mags)
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxMagazineRifleM4SPR
+    - id: RMCBoxMagazineRifleM4SPR
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateBoxMagazineRifleM4SPRAP
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineRifleM4SPRAP
   name: Magazine box (M4SPR, 16x AP mags)
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxMagazineRifleM4SPRAP
+    - id: RMCBoxMagazineRifleM4SPRAP
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateBoxMagazineRifleM4SPRExt
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineRifleM4SPRExt
   name: Magazine box (M4SPR, 12x extended mags)
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxMagazineRifleM4SPRExt
+    - id: RMCBoxMagazineRifleM4SPRExt
 
 # m63
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateBoxMagazineSMGM63
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineSMGM63
   name: Magazine box (M63, 12x regular mags)
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxMagazineSMGM63
+    - id: RMCBoxMagazineSMGM63
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateBoxMagazineSMGM63AP
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineSMGM63AP
   name: Magazine box (M63, 12x AP mags)
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxMagazineSMGM63AP
+    - id: RMCBoxMagazineSMGM63AP
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateBoxMagazineSMGM63Ext
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineSMGM63Ext
   name: Magazine box (M63, 12x regular mags)
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxMagazineSMGM63Ext
+    - id: RMCBoxMagazineSMGM63Ext
 
 # m1984
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateBoxMagazinePistolM1984
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazinePistolM1984
   name: Magazine box (M1984, 16x regular mags)
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxMagazinePistolM1984
+    - id: RMCBoxMagazinePistolM1984
 
 #- type: entity # TODO RMC14 needs ammo mags completed, box is done
-#  parent: CMCrateAmmo
-#  id: CMCrateBoxMagazinePistolM1984AP
+#  parent: RMCCrateAmmo
+#  id: RMCCrateBoxMagazinePistolM1984AP
 #  name: Magazine box (M1984, 16x AP mags)
 #  components:
 #  - type: StorageFill
 #    contents:
-#    - id: CMBoxMagazinePistolM1984AP
+#    - id: RMCBoxMagazinePistolM1984AP
 
 # M77
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateBoxMagazinePistolM77AP
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazinePistolM77AP
   name: Magazine box (M77 AP, 16x mags)
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxMagazinePistolM77AP
+    - id: RMCBoxMagazinePistolM77AP
 
 # MK80
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateBoxMagazinePistolMK80
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazinePistolMK80
   name: Magazine box (MK80, 16x mags)
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxMagazinePistolMK80
+    - id: RMCBoxMagazinePistolMK80
 
 # Smart Gun
 - type: entity
-  parent: CMCrateAmmo
+  parent: RMCCrateAmmo
   id: RMCCrateBatterySmartGun
   name: ML66A smart gun battery crate (4x)
   components:
@@ -144,7 +144,7 @@
       amount: 4
 
 - type: entity
-  parent: CMCrateAmmo
+  parent: RMCCrateAmmo
   id: RMCCrateMagazineSmartGun
   name: ML66A smart gun drum crate (2x)
   components:
@@ -155,7 +155,7 @@
 
 # Smart Pistol
 - type: entity
-  parent: CMCrateAmmo
+  parent: RMCCrateAmmo
   id: RMCCrateBoxMagazineSmartPistol
   name: Magazine box (SU-6, 16x mags)
   components:
@@ -165,7 +165,7 @@
 
 # M44 Revolver
 - type: entity
-  parent: CMCrateAmmo
+  parent: RMCCrateAmmo
   id: RMCCrateBoxMagazineM44Revolver
   name: Speedloader box (M44, 16x loaders)
   components:
@@ -174,7 +174,7 @@
     - id: RMCBoxMagazineRevolverM44
 
 - type: entity
-  parent: CMCrateAmmo
+  parent: RMCCrateAmmo
   id: RMCCrateBoxMagazineM44RevolverMarksman
   name: Speedloader box (Marksman M44, 16x loaders)
   components:
