@@ -21,3 +21,16 @@
         Piercing: 30
   - type: CMArmorPiercing
     amount: 40
+
+- type: entity
+  parent: BulletRifle10x24mm
+  id: BulletRifle458
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 104
+  - type: CMArmorPiercing
+    amount: 10
+  - type: GunStacksProjectile
