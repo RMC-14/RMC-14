@@ -636,7 +636,7 @@ CMCrateMetalSheets: RMCCrateMetalSheets
 CMCratePlasteelSheets: RMCCratePlasteelSheets    
 CMCrateGlassSheets: RMCCrateGlassSheets
 #CMCrateWoodenPlanks: RMCCrateWoodenPlanks
-CMCrateFoldingBarricades: RMCCrateFoldingBarricades
+#CMCrateFoldingBarricades: RMCCrateFoldingBarricades
 CMCrateSuperconductingMagneticCoil: RMCCrateSuperconductingMagneticCoil
 CMCrateElectricalMaintenance: RMCCrateElectricalMaintenance
 CMCrateMechanicalMaintenance: RMCCrateMechanicalMaintenance
