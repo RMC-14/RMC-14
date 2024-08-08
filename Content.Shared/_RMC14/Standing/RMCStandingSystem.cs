@@ -1,4 +1,5 @@
-﻿using Content.Shared.Hands.EntitySystems;
+﻿using Content.Shared.Buckle.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
@@ -13,15 +14,18 @@ public sealed class RMCStandingSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<DropItemsOnRestComponent, DownedEvent>(OnDropDowned);
+        SubscribeLocalEvent<DropItemsOnRestComponent, BuckledEvent>(OnDropBuckled);
         SubscribeLocalEvent<DropItemsOnRestComponent, PickupAttemptEvent>(CancelIfResting);
         SubscribeLocalEvent<DropItemsOnRestComponent, IsEquippingAttemptEvent>(OnDropIsEquippingAttempt);
         SubscribeLocalEvent<DropItemsOnRestComponent, IsUnequippingAttemptEvent>(OnDropIsUnequippingAttempt);
         SubscribeLocalEvent<DropItemsOnRestComponent, AttackAttemptEvent>(CancelIfResting);
     }
 
-    private void OnDropDowned(Entity<DropItemsOnRestComponent> drop, ref DownedEvent args)
+    private void OnDropBuckled(Entity<DropItemsOnRestComponent> drop, ref BuckledEvent args)
     {
+        if (!_standing.IsDown(drop))
+            return;
+
         foreach (var hand in _hands.EnumerateHands(drop))
         {
             _hands.TryDrop(drop, hand);
