@@ -19,4 +19,7 @@ public sealed partial class XenoActiveChargingSpitComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId Projectile = "XenoChargedSpitProjectile";
+
+    [DataField]
+    public bool DidPopup;
 }
