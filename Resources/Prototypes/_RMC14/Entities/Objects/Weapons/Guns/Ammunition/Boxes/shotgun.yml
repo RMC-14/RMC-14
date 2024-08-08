@@ -9,6 +9,8 @@
   - type: BallisticAmmoProvider
     proto: CMShellShotgunBase
     capacity: 25
+    soundInsert:
+      collection: CMShotgunLoad
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/shotgun_boxes.rsi
   - type: CMAmmoBox
