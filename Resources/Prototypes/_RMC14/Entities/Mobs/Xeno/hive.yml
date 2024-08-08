@@ -7,4 +7,4 @@
   - type: Hive
     constructionLimits:
       HiveCoreXeno: 1
-      HiveClusterXeno: 0 # unlocked by hive core
+      #HiveClusterXeno: 0 # unlocked by hive core

@@ -43,7 +43,7 @@
     id: HiveCoreXeno
   - type: ModifyHiveLimits
     construction:
-      HiveClusterXeno: 8
+      #HiveClusterXeno: 8
       # TODO other structures wyci
 
 - type: entity

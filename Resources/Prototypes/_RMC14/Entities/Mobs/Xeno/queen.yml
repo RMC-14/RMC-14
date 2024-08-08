@@ -68,7 +68,7 @@
     - DoorXenoResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
-    - HiveClusterXenoConstructionNode
+    #- HiveClusterXenoConstructionNode
   - type: XenoDevour
   - type: XenoPheromones
     pheromonesMultiplier: 4

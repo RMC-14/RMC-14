@@ -56,7 +56,7 @@
     - DoorXenoResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
-    - HiveClusterXenoConstructionNode
+    #- HiveClusterXenoConstructionNode
   - type: XenoDevour
   - type: XenoEvolution
     canEvolveWithoutGranter: true

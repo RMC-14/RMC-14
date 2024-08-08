@@ -45,7 +45,7 @@
   - type: XenoConstruction
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
-    - HiveClusterXenoConstructionNode
+    #- HiveClusterXenoConstructionNode
   - type: XenoPheromones
     pheromonesMultiplier: 2
   - type: XenoPlasma
