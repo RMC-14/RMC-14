@@ -599,7 +599,7 @@ CMCrateBoxMagazineRifleM4SPRAP: RMCCrateBoxMagazineRifleM4SPRAP
 CMCrateBoxMagazineSMGM63: RMCCrateBoxMagazineSMGM63
 CMCrateBoxMagazineSMGM63AP: RMCCrateBoxMagazineSMGM63AP
 CMCrateBoxMagazinePistolM1984: RMCCrateBoxMagazinePistolM1984
-CMCrateBoxMagazinePistolM1984AP: RMCCrateBoxMagazinePistolM1984AP    
+#CMCrateBoxMagazinePistolM1984AP: RMCCrateBoxMagazinePistolM1984AP    
 CMCrateBoxShellsShotgunSlugs: RMCCrateBoxShellsShotgunSlugs      
 CMCrateBoxShellsShotgunBuckshot: RMCCrateBoxShellsShotgunBuckshot      
 CMCrateBoxShellsShotgunFlechette: RMCCrateBoxShellsShotgunFlechette
