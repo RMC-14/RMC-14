@@ -39,7 +39,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private int _characterLimit = 1000;
-    public SoundSpecifier DefaultAnnouncementSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/Marine/notice2.ogg");
+    public readonly SoundSpecifier DefaultAnnouncementSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/Marine/notice2.ogg");
 
     public override void Initialize()
     {

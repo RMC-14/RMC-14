@@ -26,7 +26,7 @@ public sealed class MarineAnnounceCommand : IConsoleCommand
         }
         else
         {
-            var message = string.Join(' ', new ArraySegment<string>(args, 1, args.Length-1));
+            var message = string.Join(' ', args[1..]);
             _marineAnnounce.AnnounceHighCommand(message, args[0]);
         }
         shell.WriteLine("Sent!");
