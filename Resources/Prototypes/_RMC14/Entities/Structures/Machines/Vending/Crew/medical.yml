@@ -71,10 +71,6 @@
         name: satchel
       - id: CMBackpackMedical
       - id: CMSatchelMedical
-    - name: Mask
-      choices: { CMMask: 1 }
-      entries:
-      - id: CMMaskSterile
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
