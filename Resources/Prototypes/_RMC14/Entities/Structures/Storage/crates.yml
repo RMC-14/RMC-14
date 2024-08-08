@@ -677,7 +677,7 @@
 
 - type: entity
   parent: RMCCrateSecure
-  id: RMCCrateSecureSurgery
+  id: CMCrateSecureSurgery
   name: surgery crate
   description: A surgery crate.
   components:
