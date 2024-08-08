@@ -671,7 +671,7 @@ CMCrateMagazineM96SStandard: RMCCrateMagazineM96SStandard
 CMCrateMagazineM96SFlak: RMCCrateMagazineM96SFlak
 CMCrateMagazineM96SIncendiary: RMCCrateMagazineM96SIncendiary
 CMCrateMagazineM4SPRCustomIncendiary: RMCCrateMagazineM4SPRCustomIncendiary
-CMBoxMagazineBase: RMCBoxMREBase
+#CMBoxMagazineBase: RMCBoxMagazineBase
 CMBoxMREBase: RMCBoxMREBase
 CMBoxPackFlareBase: RMCBoxPackFlareBase
 CMBoxShotgunBuckshot: RMCBoxShotgunBuckshot
