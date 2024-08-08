@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed moving corroding objects leaving the acid visual effect behind.
-    type: Fix
-  id: 38
-  time: '2024-04-13T08:11:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1209
-- author: DrSmugleaf
-  changes:
   - message: Fixed xenos not being able to add plasma to hive cores to build them.
     type: Fix
   id: 39
@@ -4295,5 +4288,13 @@
   id: 537
   time: '2024-08-08T02:59:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3584
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenonids being able to build resin structures on top of nested
+      marines.
+    type: Fix
+  id: 538
+  time: '2024-08-08T12:13:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3585
 Name: RMC14
 Order: -1

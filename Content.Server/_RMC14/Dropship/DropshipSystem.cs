@@ -336,7 +336,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         foreach (var primaryLZCandidate in GetPrimaryLZCandidates())
         {
-            if (TryDesignatePrimaryLZ(default, primaryLZCandidate, new MarineCommunicationsComputerComponent().Sound))
+            if (TryDesignatePrimaryLZ(default, primaryLZCandidate))
                 break;
         }
     }
