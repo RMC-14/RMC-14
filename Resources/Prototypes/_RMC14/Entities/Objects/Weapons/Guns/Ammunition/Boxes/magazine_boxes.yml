@@ -632,3 +632,85 @@
       whitelist:
         tags:
         - RMCMagazinePistolSU6
+
+# M44 Revolver
+
+- type: entity
+  parent: CMBoxMagazineBase
+  id: RMCBoxMagazineRevolverM44Empty
+  name: speedloader box (M44 x 16)
+  description: A box for holding many speedloaders with a carrying handle.
+  components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: RMCBoxMagazineRevolverM44Empty
+  - type: Sprite
+    layers:
+    - state: base_m44 
+    - state: magaz_reg 
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_m44 
+    - state: base_type_m44_reg 
+    - state: base_m44_lid 
+      map: [ "lid" ]
+    - state: lid_type_m44_reg 
+      map: [ "lid_stripe" ]
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCSpeedLoaderM44
+
+- type: entity
+  parent: RMCBoxMagazineRevolverM44Empty
+  id: RMCBoxMagazineRevolverM44
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCSpeedLoaderM44
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCSpeedLoaderM44
+
+- type: entity
+  parent: CMBoxMagazineBase
+  id: RMCBoxMagazineRevolverM44MarksmanEmpty
+  name: speedloader box (Marksman M44 x 16)
+  description: A box for holding many speedloaders with a carrying handle, these ones are loaded with Marksman Rounds.
+  components:
+  - type: Construction
+    graph: CMBoxMagazine
+    node: RMCBoxMagazineRevolverM44MarksmanEmpty
+  - type: Sprite
+    layers:
+    - state: base_m44 
+    - state: magaz_reg 
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_m44 
+    - state: base_type_m44_mark
+    - state: base_m44_lid 
+      map: [ "lid" ]
+    - state: lid_type_m44_mark
+      map: [ "lid_stripe" ]
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCSpeedLoaderM44
+
+- type: entity
+  parent: RMCBoxMagazineRevolverM44MarksmanEmpty
+  id: RMCBoxMagazineRevolverMarksmanM44
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCSpeedLoader44Marksman
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCSpeedLoaderM44

@@ -44,6 +44,11 @@
         crate: RMCCrateMagazineSmartGun
       - cost: 4000
         crate: RMCCrateBoxMagazineSmartPistol
+      - cost: 2000
+        crate: RMCCrateBoxMagazineM44Revolver
+      - cost: 3000
+        crate: RMCCrateBoxMagazineM44RevolverMarksman
+
     - name: Attachments
       entries:
       - cost: 3000
