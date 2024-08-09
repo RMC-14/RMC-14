@@ -331,8 +331,24 @@
       #  amount: 2
       #- id: XM51 Magazine (16g)
       #  amount: 3
-    - name: Shotgun shell boxes # I don't think we have those yet
-      entries: [ ]
+    - name: Boxes
+      entries:
+      - id: CMBoxMagazineRifleM4SPR
+        amount: 3
+      - id: CMBoxMagazineRifleM54C
+        amount: 9
+      - id: CMBoxMagazineSMGM63
+        amount: 8
+      - id: CMBoxMagazinePistolM1984
+        amount: 6
+      - id: CMBoxMagazinePistolM77AP
+        amount: 3
+      - id: CMBoxMagazineRifleM4SPRAP
+      - id: CMBoxMagazineSMGM63AP
+      - id: CMBoxMagazineRifleM54CAP
+      - id: CMBoxMagazineSMGM63Ext
+      - id: CMBoxMagazineRifleM54CExt
+      # TODO: add shotgun shell boxes
       #- id: Shotgun Shell Box (Buckshot x 100)
       #  amount: 4
       #- id: Shotgun Shell Box (Flechette x 100)
@@ -340,7 +356,6 @@
       #- id: Shotgun Shell Box (Slugs x 100)
       #  amount: 4
       #- id: Shotgun Shell Box (16g) (Breaching x 120)
-      #  amount: 1
 
  #ATTACHMENTS VENDOR
 
