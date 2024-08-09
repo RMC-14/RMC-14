@@ -277,6 +277,8 @@
     recoilUnwielded: 2
     scatterWielded: 6
     baseFireRate: 2.86
+  - type: RMCWeaponDamageFalloff
+    falloffMultiplier: 0
   - type: WieldDelay
     baseDelay: 0.2
   - type: WieldableSpeedModifiers

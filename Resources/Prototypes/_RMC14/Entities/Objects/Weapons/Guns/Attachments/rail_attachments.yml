@@ -176,7 +176,11 @@
     requireWielding: true
     attachment: true
     useInHand: true
-    delay: 0
+    zoomLevels:
+    - zoom: 1
+      offset: 15
+      allowMovement: false
+      doAfter: 0
 
 - type: entity
   parent: RMCAttachmentScopeBase
@@ -196,14 +200,17 @@
     actionDesc: An AEGIS S8 telescopic eye piece. Fixed at 4x zoom.
   - type: AttachableToggleableSimpleActivate
   - type: Scope
-    zoom: 1.6
-    offset: 14
+    zoomLevels:
+    - zoom: 1.6
+      offset: 14
+      allowMovement: false
+      doAfter: 0
   - type: AttachableSpeedMods
     modifiers:
-      - conditions:
-          wieldedOnly: true
-        walk: -0.23
-        sprint: -0.35
+    - conditions:
+        wieldedOnly: true
+      walk: -0.23
+      sprint: -0.35
   - type: AttachableWieldDelayMods
     modifiers:
     - delay: 0.4
@@ -266,14 +273,17 @@
     actionDesc: An AEGIS S4 telescoping eye piece. Fixed at a modest 2x zoom.
   - type: AttachableToggleableSimpleActivate
   - type: Scope
-    offset: 13
-    allowMovement: true
+    zoomLevels:
+    - zoom: 1
+      offset: 13
+      allowMovement: true
+      doAfter: 0
   - type: AttachableSpeedMods
     modifiers:
-      - conditions:
-          activeOnly: true
-        walk: -0.31
-        sprint: -0.448
+    - conditions:
+        activeOnly: true
+      walk: -0.31
+      sprint: -0.448
   - type: AttachableWieldDelayMods
     modifiers:
     - delay: 0.4
@@ -311,7 +321,11 @@
     actionName: Look through WeYa S4 2x Advanced Telescopic Mini-Scope
     actionDesc: An AEGIS S4 telescoping eye piece, custom-tuned by WeYa scientists to be as ergonomic as possible.
   - type: Scope
-    offset: 14
+    zoomLevels:
+    - zoom: 1
+      offset: 14
+      allowMovement: true
+      doAfter: 0
   - type: AttachableSpeedMods
     modifiers: []
 
@@ -340,7 +354,7 @@
   parent: RMCAttachmentS42xTelescopicMiniscope
   id: RMCAttachmentB8SmartScope
   name: B8 smart-scope
-  description: An experimental B8 Smart-Scope. Based on the technologies used in the Smart Gun by AEGIS, this sight has integrated IFF systems. It can only attach to the M4SPR Battle Rifle. # TODO RMC14 and M44 Combat Revolver.
+  description: An experimental B8 Smart-Scope. Based on the technologies used in the Smart Gun by AEGIS, this sight has integrated IFF systems. It can only attach to the M4SPR Battle Rifle and the M44 Combat Revolver.
   components:
   - type: Sprite
     state: iffbarrel
@@ -377,14 +391,48 @@
     - RMCAttachmentRail
     - RMCM96SIntegratedScope
   - type: AttachableToggleable
+    breakOnMove: false
+    actionsToRelayWhitelist:
+      tags:
+      - RMCActionCycleZoomLevel
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: m96s-scope
     actionName: Look through M96S Integrated Scope
     actionDesc: Lets you see further.
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      walk: -0.31
+      sprint: -0.448
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - fireDelayFlat: 0.1
+    - conditions:
+        activeOnly: true
+      fireDelayFlat: 0.25
+      accuracyAddMult: 0.35
+      damageFalloffAddMult: -0.4
+    - conditions:
+        wieldedOnly: true
+        inactiveOnly: true
+      accuracyAddMult: -0.05
+    - conditions:
+        unwieldedOnly: true
+      accuracyMovementPenaltyAddMult: 2
   - type: Scope
-    zoom: 1.25 # TODO RMC14 2x and 4x zoom
-    delay: 1
+    zoomLevels:
+    - name: 4x
+      zoom: 1.6
+      offset: 14
+      allowMovement: false
+      doAfter: 0
+    - name: 2x
+      zoom: 1
+      offset: 14
+      allowMovement: true
+      doAfter: 0
 
 - type: Tag
   id: RMCAttachmentRail
