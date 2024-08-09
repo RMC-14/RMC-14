@@ -15,29 +15,83 @@
 - type: entity
   parent: [RMCToolboxBase, ToolboxEmergency]
   id: RMCToolboxEmergency
-  suffix: RMC14 # TODO RMC14 sprite
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/Toolboxes/toolbox_red.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Tools/Toolboxes/toolbox_red.rsi
+  suffix: RMC14 
 
 - type: entity
+  name: emergency toolbox
   parent: [RMCToolboxEmergency, ToolboxEmergencyFilled]
   id: RMCToolboxEmergencyFilled
-  suffix: RMC14, Filled # TODO RMC14 sprite and fill
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMCrowbar
+      - id: CMWelderSmall
+      - id: CMRadioHandheld
+      - id: CMFireExtinguisherPortable
+      # Random lighting item orGroup
+      - id: RMCFlashlight
+        orGroup: LightingItem
+      - id: CMFlare
+        orGroup: LightingItem
+  suffix: RMC14, Filled 
 
 - type: entity
+  name: electrical toolbox
   parent: [RMCToolboxBase, ToolboxElectrical]
   id: RMCToolboxElectrical
-  suffix: RMC14 # TODO RMC14 sprite
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/Toolboxes/toolbox_yellow.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Tools/Toolboxes/toolbox_yellow.rsi
+  suffix: RMC14
 
 - type: entity
   parent: [RMCToolboxElectrical, ToolboxElectricalFilled]
   id: RMCToolboxElectricalFilled
-  suffix: RMC14, Filled # TODO RMC14 sprite and fill
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMScrewdriver
+      - id: CMCrowbar
+      - id: CMWirecutter
+      - id: RMCCableCoil
+      - id: RMCCableCoil
+      - id: CMHandsInsulated
+        prob: 0.05
+        orGroup: GlovesOrWires
+      - id: RMCCableCoil
+        orGroup: GlovesOrWires
+  suffix: RMC14, Filled 
 
 - type: entity
+  name: mechanical toolbox
   parent: [RMCToolboxBase, ToolboxMechanical]
   id: RMCToolboxMechanical
-  suffix: RMC14 # TODO RMC14 sprite
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/Toolboxes/toolbox_blue.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Tools/Toolboxes/toolbox_blue.rsi
+  suffix: RMC14
 
 - type: entity
   parent: [RMCToolboxMechanical, ToolboxMechanicalFilled]
   id: RMCToolboxMechanicalFilled
-  suffix: RMC14, Filled # TODO RMC14 sprite and fill
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMCrowbar
+      - id: CMWrench
+      - id: CMWelder
+      - id: CMWirecutter
+      - id: CMScrewdriver
+  suffix: RMC14, Filled 
