@@ -168,7 +168,7 @@
   parent: CMCigarettePackLuckySloths
   id: CMCigarettePackWeYaGold
   name: We-Ya gold packet
-  description: Building Better Worlds, and rolling better cigarettes. These fancy cigarettes are We-Ya's entry into the market. Comes backed by a fierce legal team.
+  description: Paving Better Worlds, and rolling better cigarettes. These fancy cigarettes are We-Ya's entry into the market. Comes backed by a fierce legal team.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/we_ya_gold_packet.rsi
