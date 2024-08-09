@@ -36,7 +36,7 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
         SubscribeLocalEvent<GhillieSuitComponent, GhillieSuitDoAfterEvent>(OnDoAfter);
 
         SubscribeLocalEvent<RMCPassiveStealthComponent, MoveEvent>(OnMove);
-        SubscribeLocalEvent<GunComponent, AttemptShootEvent>(OnAttemptShoot);
+        SubscribeLocalEvent<EntityActiveInvisibleComponent, AttemptShootEvent>(OnAttemptShoot);
     }
 
     private void OnGetItemActions(Entity<GhillieSuitComponent> ent, ref GetItemActionsEvent args)
@@ -163,20 +163,23 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
             SetCloakEnabled(suit.Value, user, false);
     }
 
-    private void OnAttemptShoot(Entity<GunComponent> ent, ref AttemptShootEvent args)
+    private void OnAttemptShoot(Entity<EntityActiveInvisibleComponent> ent, ref AttemptShootEvent args)
     {
         var user = args.User;
         var suit = FindSuit(user);
+        var comp = ent.Comp;
 
         if (args.Cancelled)
             return;
         if (suit == null)
             return;
+        if (ent.Owner != user)
+            return;
 
-        if (suit.Value.Comp.Enabled && TryComp<EntityActiveInvisibleComponent>(user, out var invisible))
+        if (suit.Value.Comp.Enabled)
         {
-            invisible.Opacity = 0;
-            Dirty(user, invisible);
+            comp.Opacity = 0;
+            Dirty(user, comp);
         }
     }
 }
