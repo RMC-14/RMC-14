@@ -48,7 +48,7 @@
     restrictWeapons: true
     whitelist:
       components:
-      - Marine
+      - ScoutWhitelist
     cloakSound: /Audio/_RMC14/Effects/Cloak/cloak_scout_on.ogg
     uncloakSound: /Audio/_RMC14/Effects/Cloak/cloak_scout_off.ogg
 

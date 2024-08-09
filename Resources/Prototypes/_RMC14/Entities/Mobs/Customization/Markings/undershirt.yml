@@ -109,3 +109,17 @@
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: c_strapless
+
+- type: marking
+  id: RMCUndershirtNone
+  bodyPart: Chest
+  markingCategory: Undershirt
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, Slime]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/undershirt.rsi
+    state: blank

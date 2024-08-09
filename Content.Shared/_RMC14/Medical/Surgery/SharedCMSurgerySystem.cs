@@ -91,7 +91,11 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
 
     private void OnLarvaValid(Entity<CMSurgeryLarvaConditionComponent> ent, ref CMSurgeryValidEvent args)
     {
-        if (!HasComp<VictimInfectedComponent>(args.Body))
+        if (!TryComp(args.Body, out VictimInfectedComponent? infected))
+            args.Cancelled = true;
+
+        // The larva has fully developed and surgery is now impossible
+        if (infected != null && infected.SpawnedLarva != null)
             args.Cancelled = true;
     }
 
