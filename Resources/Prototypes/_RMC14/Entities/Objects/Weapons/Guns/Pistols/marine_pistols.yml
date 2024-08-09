@@ -49,6 +49,7 @@
     containers:
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
+  - type: RMCAmmoEject
   - type: MagazineVisuals
     magState: mag
     steps: 1
