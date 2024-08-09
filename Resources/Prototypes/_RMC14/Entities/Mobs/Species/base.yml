@@ -112,6 +112,8 @@
       enum.CMMobStateActionsUI.Key:
         type: CMGhostActionBui
         requireInputValidation: false
+      enum.TrackerAlertUIKey.Key: # Seems a little jank since only shows when equipping a marine headset for trackers
+        type: TrackerAlertSelectionBui
   - type: Infectable
   - type: Tackleable
   - type: Tackle

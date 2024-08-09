@@ -13,7 +13,7 @@ namespace Content.Server.Alert.Click
     [DataDefinition]
     public sealed partial class StopBeingPulled : IAlertClick
     {
-        public void AlertClicked(EntityUid player)
+        public void AlertClicked(EntityUid player, AlertPrototype alert)
         {
             var entityManager = IoCManager.Resolve<IEntityManager>();
 

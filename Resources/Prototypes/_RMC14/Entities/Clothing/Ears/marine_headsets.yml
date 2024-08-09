@@ -1,6 +1,11 @@
 - type: entity
   parent: RMCHeadsetShip
   id: RMCHeadsetMarine
+  components:
+  - type: RMCTrackerAlertGranterClothing
+    alerts:
+      SquadTracker:
+        alertPrototype: SquadTracker
 
 # Alpha
 - type: entity

@@ -152,6 +152,8 @@
         type: XenoOrderConstructionBui
       enum.XenoWordQueenUI.Key:
         type: XenoWordQueenBui
+      enum.TrackerAlertUIKey.Key:
+        type: TrackerAlertSelectionBui
   - type: TypingIndicator
     proto: alien
   - type: MovedByPressure
@@ -227,6 +229,12 @@
     - enum.VendingMachineUiKey.Key
     - enum.PaperUiKey.Key
   - type: ActiveInputMover
+  - type: RMCTrackerAlert
+    alerts:
+      HiveTracker:
+        alertPrototype: HiveTracker
+      ResinMarkerTracker:
+        alertPrototype: ResinMarkerTracker
 
 - type: entity
   abstract: true

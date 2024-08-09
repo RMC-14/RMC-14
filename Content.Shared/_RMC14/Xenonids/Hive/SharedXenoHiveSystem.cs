@@ -1,6 +1,8 @@
-﻿using Content.Shared._RMC14.NightVision;
+using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared.Alert;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
@@ -36,8 +38,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         if (args.NewMobState != MobState.Dead)
             return;
 
-        if (TryComp(ent, out XenoComponent? xeno) &&
-            TryComp(xeno.Hive, out HiveComponent? hive))
+        if (TryComp(ent, out XenoComponent? xeno) && TryComp(xeno.Hive, out HiveComponent? hive))
         {
             hive.LastQueenDeath = _timing.CurTime;
             Dirty(xeno.Hive.Value, hive);
@@ -141,5 +142,38 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             return false;
 
         return hive.Comp.TierLimits.TryGetValue(tier, out value);
+    }
+
+    public bool TryGetTrackers(Entity<HiveComponent?> ent,
+        ProtoId<AlertPrototype> alertProto,
+        [NotNullWhen(true)] out List<EntityUid>? trackers)
+    {
+        trackers = null;
+        if (!Resolve(ent, ref ent.Comp))
+            return false;
+
+        if (ent.Comp.Trackers.TryGetValue(alertProto, out var netTrackers))
+        {
+            trackers = GetEntityList(netTrackers);
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool RemoveTracker(Entity<HiveComponent?> ent, ProtoId<AlertPrototype> alertProto, EntityUid xeno)
+    {
+        if (!Resolve(ent, ref ent.Comp))
+            return false;
+
+        if (!ent.Comp.Trackers.TryGetValue(alertProto, out var trackers))
+            return false;
+
+        trackers.Remove(GetNetEntity(xeno));
+        if (trackers.Count == 0)
+            ent.Comp.Trackers.Remove(alertProto);
+
+        return true;
+
     }
 }

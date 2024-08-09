@@ -1,0 +1,9 @@
+﻿<PanelContainer xmlns="https://spacestation14.io"
+                Name="BackgroundColorPanel">
+    <BoxContainer Orientation="Horizontal"
+                  HorizontalExpand="True"
+                  SeparationOverride="4">
+        <EntityPrototypeView Name="EntityPrototypeView" SetSize="32 32" />
+        <Label Name="NameLabel" HorizontalExpand="True" ClipText="True"/>
+    </BoxContainer>
+</PanelContainer>

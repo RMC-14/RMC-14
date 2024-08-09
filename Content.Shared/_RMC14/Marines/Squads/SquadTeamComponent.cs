@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Access;
+using Content.Shared.Alert;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -21,4 +22,7 @@ public sealed partial class SquadTeamComponent : Component
 
     [DataField]
     public HashSet<EntityUid> Members = new();
+
+    [DataField]
+    public Dictionary<ProtoId<AlertPrototype>, List<NetEntity>> Trackers = [];
 }

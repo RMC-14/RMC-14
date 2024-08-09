@@ -9,6 +9,7 @@
         /// Invoked on server side when user clicks an alert.
         /// </summary>
         /// <param name="player"></param>
-        void AlertClicked(EntityUid player);
+        /// <param name="alert"></param>
+        void AlertClicked(EntityUid player, AlertPrototype alert);
     }
 }
