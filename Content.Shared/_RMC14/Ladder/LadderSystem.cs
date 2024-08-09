@@ -123,7 +123,7 @@ public sealed class LadderSystem : EntitySystem
 
         args.Handled = true;
 
-        if (ent.Comp.Other is not { } other)
+        if (ent.Comp.Other is not { } other || TerminatingOrDeleted(ent.Comp.Other))
             return;
 
         var user = args.User;
