@@ -1,4 +1,4 @@
-﻿using Content.Shared.Actions;
+using Content.Shared.Actions;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 
@@ -14,4 +14,7 @@ public sealed partial class XenoCorrosiveAcidEvent : EntityTargetActionEvent
 
     [DataField]
     public TimeSpan Time = TimeSpan.FromSeconds(150);
+
+    [DataField]
+    public AcidStrength Strength = AcidStrength.Normal;
 }

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoAcidNormal
   name: Corrosive Acid (100)  # TODO RMC14 proper plasma costs
@@ -13,6 +13,7 @@
       acidId: XenoAcidNormal
       plasmaCost: 100
       time: 150
+      strength: 1
     checkCanInteract: false
 
 - type: entity
@@ -30,6 +31,7 @@
       acidId: XenoAcidWeak
       plasmaCost: 75
       time: 375
+      strength: 0
     checkCanInteract: false
 
 - type: entity
@@ -47,6 +49,7 @@
       acidId: XenoAcidStrong
       plasmaCost: 125
       time: 60
+      strength: 2
     checkCanInteract: false
 
 - type: entity
