@@ -36,6 +36,19 @@
                             </PanelContainer.PanelOverride>
                             <BoxContainer Orientation="Horizontal" Margin="5">
                                 <Label Text="Monitor" />
+                                <Control HorizontalExpand="True" />
+                                <Button Name="ShowLocationButton" Access="Public"
+                                        Text="Shown: all" StyleClasses="OpenBoth"
+                                        ModulateSelfOverride="#D3B400" MinWidth="165" />
+                                <Button Name="ShowDeadButton" Access="Public"
+                                        Text="Show dead" StyleClasses="OpenBoth"
+                                        ModulateSelfOverride="#D3B400" MinWidth="105" />
+                                <Button Name="ShowHiddenButton" Access="Public"
+                                        Text="Hide hidden" StyleClasses="OpenBoth"
+                                        ModulateSelfOverride="#D3B400" MinWidth="120" />
+                                <Button Name="TransferMarineButton" Access="Public"
+                                        Text="Transfer marine" StyleClasses="OpenBoth"
+                                        ModulateSelfOverride="#D3B400" Visible="False" />
                             </BoxContainer>
                         </PanelContainer>
                         <BoxContainer Orientation="Vertical" Margin="5"
@@ -108,6 +121,19 @@
                                             </BoxContainer>
                                         </PanelContainer>
                                         <BoxContainer Name="Distances" Access="Public" Orientation="Vertical" />
+                                    </BoxContainer>
+                                    <BoxContainer Orientation="Vertical" MinWidth="30">
+                                        <PanelContainer>
+                                            <PanelContainer.PanelOverride>
+                                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
+                                            </PanelContainer.PanelOverride>
+                                            <BoxContainer Orientation="Horizontal">
+                                                <Control HorizontalExpand="True" />
+                                                <Label Text=" " HorizontalAlignment="Center" />
+                                                <Control HorizontalExpand="True" />
+                                            </BoxContainer>
+                                        </PanelContainer>
+                                        <BoxContainer Name="Buttons" Access="Public" Orientation="Vertical" />
                                     </BoxContainer>
                                 </BoxContainer>
                             </ScrollContainer>

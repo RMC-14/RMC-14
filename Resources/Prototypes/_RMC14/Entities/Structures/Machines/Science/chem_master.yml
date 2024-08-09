@@ -16,6 +16,9 @@
     state: mixer_loaded
   - type: Machine
     board: CMCircuitboardChemMaster
+  - type: RequiresSkill
+    skills:
+      RMCSkillMedical: 3
   - type: ActivatableUIBlacklist
     blacklist:
       components:

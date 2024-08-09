@@ -48,6 +48,7 @@
   - type: Tag
     tags:
     - BypassInteractionRangeChecks
+  - type: ActiveInputMover
 
 - type: entity
   id: ActionGhostBoo

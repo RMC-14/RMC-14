@@ -167,6 +167,7 @@
     alert: XenoNightVision
     overlay: true
   - type: ParalyzeOnPullAttemptImmune
+  - type: InfectOnPullAttemptImmune
   - type: GhostTakeoverAvailable
   - type: GhostRole
     makeSentient: true

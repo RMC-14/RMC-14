@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Content.Client.Message;
-using Content.Client.UserInterface.ControlExtensions;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared.Mobs;
@@ -28,12 +27,14 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
     [ViewVariables]
     private OverwatchConsoleWindow? _window;
 
+    private readonly OverwatchConsoleSystem _overwatchConsole;
     private readonly SquadSystem _squad;
 
     private readonly Dictionary<NetEntity, OverwatchSquadView> _squadViews = new();
 
     public OverwatchConsoleBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
+        _overwatchConsole = EntMan.System<OverwatchConsoleSystem>();
         _squad = EntMan.System<SquadSystem>();
     }
 
@@ -62,8 +63,11 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
 
     private void RefreshState(OverwatchConsoleBuiState s)
     {
-        if (_window == null)
+        if (_window == null ||
+            !EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? console))
+        {
             return;
+        }
 
         _window.SquadsContainer.DisposeAllChildren();
 
@@ -98,63 +102,46 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                 monitor.Roles.DisposeAllChildren();
                 monitor.States.DisposeAllChildren();
                 monitor.RolesContainer.DisposeAllChildren();
+                monitor.Buttons.DisposeAllChildren();
             }
             else
             {
                 monitor = new OverwatchSquadView();
                 monitor.Visible = squad.Id == activeSquad;
                 monitor.OperatorButton.OnPressed += _ => SendPredictedMessage(new OverwatchConsoleTakeOperatorBuiMsg());
+                monitor.SearchBar.OnTextChanged += _ => monitor.UpdateResults(
+                    console.Location,
+                    console.ShowDead,
+                    console.ShowHidden,
+                    marines,
+                    console
+                );
+
+                monitor.ShowLocationButton.Label.ModulateSelfOverride = Color.Black;
+                monitor.ShowLocationButton.OnPressed += _ =>
+                {
+                    var location = console.Location == null
+                        ? OverwatchLocation.Min
+                        : console.Location + 1;
+
+                    if (location > OverwatchLocation.Max)
+                        location = null;
+
+                    SendPredictedMessage(new OverwatchConsoleSetLocationBuiMsg(location));
+                };
+
+                monitor.ShowDeadButton.Label.ModulateSelfOverride = Color.Black;
+                monitor.ShowDeadButton.OnPressed += _ =>
+                    SendPredictedMessage(new OverwatchConsoleShowDeadBuiMsg(!console.ShowDead));
+
+                monitor.ShowHiddenButton.Label.ModulateSelfOverride = Color.Black;
+                monitor.ShowHiddenButton.OnPressed += _ =>
+                    SendPredictedMessage(new OverwatchConsoleShowHiddenBuiMsg(!console.ShowHidden));
+
+                monitor.TransferMarineButton.Label.ModulateSelfOverride = Color.Black;
 
                 _squadViews[squad.Id] = monitor;
                 _window.SquadViewContainer.AddChild(monitor);
-
-                monitor.SearchBar.OnTextChanged += args =>
-                {
-                    static void MakeAllVisible(Control control)
-                    {
-                        foreach (var child in control.Children)
-                        {
-                            child.Visible = true;
-                        }
-                    }
-
-                    static void MakeControlVisible(Control control, int index, bool visible)
-                    {
-                        if (index >= control.ChildCount)
-                            return;
-
-                        control.GetChild(index).Visible = visible;
-                    }
-
-                    static void MakeViewVisible(OverwatchSquadView view, int index, bool visible)
-                    {
-                        MakeControlVisible(view.Names, index, visible);
-                        MakeControlVisible(view.Roles, index, visible);
-                        MakeControlVisible(view.States, index, visible);
-                        MakeControlVisible(view.Locations, index, visible);
-                        MakeControlVisible(view.Distances, index, visible);
-                    }
-
-                    var text = args.Text;
-                    if (string.IsNullOrWhiteSpace(text))
-                    {
-                        MakeAllVisible(monitor.Names);
-                        MakeAllVisible(monitor.Roles);
-                        MakeAllVisible(monitor.States);
-                        MakeAllVisible(monitor.Locations);
-                        MakeAllVisible(monitor.Distances);
-                        return;
-                    }
-
-                    for (var i = 0; i < monitor.Names.ChildCount; i++)
-                    {
-                        var name = monitor.Names.GetChild(i);
-                        var role = monitor.Roles.GetChild(i);
-                        var visible = name.ChildrenContainText(text) || role.ChildrenContainText(text);
-
-                        MakeViewVisible(monitor, i, visible);
-                    }
-                };
             }
 
             monitor.OverwatchLabel.Text = $"{squad.Name} Overwatch | Dashboard";
@@ -245,6 +232,35 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                 panel = CreatePanel(50);
                 panel.AddChild(state);
                 monitor.States.AddChild(panel);
+
+                var hideButton = new Button
+                {
+                    MaxWidth = 25,
+                    MaxHeight = 25,
+                    VerticalAlignment = VAlignment.Top,
+                    StyleClasses = { "OpenBoth" },
+                    Text = "-",
+                    ModulateSelfOverride = Color.FromHex("#BB1F1D"),
+                    ToolTip = "Hide marine",
+                };
+
+                if (_overwatchConsole.IsHidden((Owner, console), marine.Marine))
+                {
+                    hideButton.Text = "+";
+                    hideButton.ModulateSelfOverride = Color.FromHex("#248E34");
+                    hideButton.ToolTip = "Show marine";
+                }
+
+                hideButton.OnPressed += _ =>
+                {
+                    var hidden = !_overwatchConsole.IsHidden((Owner, console), marine.Marine);
+                    SendPredictedMessage(new OverwatchConsoleHideBuiMsg(marine.Marine, hidden));
+                };
+
+                panel = CreatePanel(50);
+                hideButton.Margin = margin;
+                panel.AddChild(hideButton);
+                monitor.Buttons.AddChild(panel);
             }
 
             // TODO RMC14 change squad leader
@@ -386,7 +402,9 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                     },
                 },
             });
+
             monitor.RolesContainer.AddChild(totalPanel);
+            monitor.UpdateResults(console.Location, console.ShowDead, console.ShowHidden, marines, console);
         }
 
         UpdateView();
@@ -394,8 +412,11 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
 
     private void UpdateView()
     {
-        if (_window == null)
+        if (_window == null ||
+            !EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? console))
+        {
             return;
+        }
 
         var activeSquad = GetActiveSquad();
         if (activeSquad == null)
@@ -418,6 +439,21 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
             squad.OperatorButton.Text = consoleOperator == null
                 ? string.Empty
                 : $"Operator - {consoleOperator}";
+
+            squad.ShowLocationButton.Text = console.Location switch
+            {
+                OverwatchLocation.Planet => "Shown: planetside",
+                OverwatchLocation.Ship => "Shown: shipside",
+                _ => "Shown: all",
+            };
+
+            squad.ShowDeadButton.Text = console.ShowDead
+                ? "Hide dead"
+                : "Show dead";
+
+            squad.ShowHiddenButton.Text = console.ShowHidden
+                ? "Hide hidden"
+                : "Show hidden";
         }
     }
 
@@ -455,7 +491,8 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
 
     public void Refresh()
     {
-        UpdateView();
+        if (State is OverwatchConsoleBuiState s)
+            RefreshState(s);
     }
 
     protected override void Dispose(bool disposing)

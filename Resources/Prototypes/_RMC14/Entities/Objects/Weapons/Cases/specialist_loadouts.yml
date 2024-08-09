@@ -96,3 +96,45 @@
   - type: CMChangeUserOnVend
     addComponents:
     - type: DemoSpecWhitelist
+
+- type: entity
+  parent: RMCBaseEquipmentCase
+  id: RMCScoutSpecEquipmentCase
+  name: scout equipment case
+  description: "A large case containing an M4RA battle rifle, M3-S light armor and helmet, M4RA battle sight, M68 thermal cloak, V3 reactive thermal tarp, ammunition and additional pieces of equipment.\nNOTE: You cannot put items back inside this case."
+  components:
+  - type: Sprite
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: scout
+      map: [ label ]
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,33,1 # 17 items total
+  - type: StorageFill
+    contents:
+    - id: RMCArmorM3Scout
+    - id: RMCArmorHelmetM3Scout
+    - id: RMCGlassesM4SPRBattleSight
+    - id: RMCMagazineRifleM4SPRA19
+    - id: RMCMagazineRifleM4SPRA19 
+    - id: RMCMagazineRifleM4SPRA19 
+    - id: RMCMagazineRifleM4SPRA19 
+    - id: RMCMagazineRifleM4SPRA19 # TODO: RMCMagazineRifleM4SPRA19Incendiary
+    - id: RMCMagazineRifleM4SPRA19 # TODO: RMCMagazineRifleM4SPRA19Incendiary
+    - id: RMCMagazineRifleM4SPRA19 # TODO: RMCMagazineRifleM4SPRA19Impact
+    - id: RMCMagazineRifleM4SPRA19 # TODO: RMCMagazineRifleM4SPRA19Impact
+    - id: RMCBackpackScout
+    - id: CMWeaponPistolMK80
+    - id: CMMagazinePistolMK80
+    - id: CMMagazinePistolMK80
+    - id: WeaponRifleM4SPRCustom
+    - id: RMCThermalTarpFolded
+#    - id: RMCPlasticExplosives
+#      amount: 2
+#    - id: CMBinoculars
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: ScoutWhitelist

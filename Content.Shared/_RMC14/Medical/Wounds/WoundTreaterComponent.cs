@@ -57,6 +57,9 @@ public sealed partial class WoundTreaterComponent : Component
     public LocId? OthersPopup;
 
     [DataField, AutoNetworkedField]
+    public LocId? TargetStartPopup;
+
+    [DataField, AutoNetworkedField]
     public LocId? UserFinishPopup;
 
     [DataField, AutoNetworkedField]
