@@ -127,5 +127,9 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/f2b3774f6ca9173e76e7783d88e3c2f765cd385f/sound/weapons/shell_load4.ogg"
-  
-  
+
+- files: ["M5_load.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken and modified from Sonniss.com and adobe sound effects"
+  source: "https://www.adobe.com/products/audition/offers/adobeauditiondlcsfx.html" 
+          "https://sonniss.com/gameaudiogdc"

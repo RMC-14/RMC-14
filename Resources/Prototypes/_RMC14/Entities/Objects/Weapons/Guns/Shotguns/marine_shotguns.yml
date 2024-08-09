@@ -91,6 +91,7 @@
           - RMCAttachmentBarrelCharger
           - RMCAttachmentRecoilCompensator
           - RMCM5Bayonet
+          - RMCAttachmentExtendedBarrel
       rmc-aslot-rail:
         whitelist:
           tags:
