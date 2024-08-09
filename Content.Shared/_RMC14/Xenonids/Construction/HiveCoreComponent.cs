@@ -34,4 +34,11 @@ public sealed partial class HiveCoreComponent : Component
 
     [DataField]
     public TimeSpan NextLesserDroneCooldown = TimeSpan.FromSeconds(125);
+
+    /// <summary>
+    /// How long a new construct can be made after the core is destroyed.
+    /// Only applies to this core's hive for xeno v xeno.
+    /// </summary>
+    [DataField]
+    public TimeSpan NewConstructCooldown = TimeSpan.FromMinutes(5);
 }

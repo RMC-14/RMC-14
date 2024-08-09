@@ -34,9 +34,25 @@ public sealed partial class HiveComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan? LastQueenDeath;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public TimeSpan NewQueenCooldown = TimeSpan.FromMinutes(5);
 
     [DataField, AutoNetworkedField]
     public bool GotOvipositorPopup;
+
+    /// <summary>
+    /// Set when the hive core is destroyed, this is when new constructs can be made.
+    /// Once it expires an announcement is made.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan? NextConstructAllowed;
+
+    /// <summary>
+    /// How many of each hive construction can be built.
+    /// If it reaches 0 it can no longer be built.
+    /// If an entity being constructed is not present it will be logged as an error,
+    /// use 0 to allow it to be constructed later.
+    /// </summary>
+    [DataField(required: true), AutoNetworkedField]
+    public Dictionary<EntProtoId, int> ConstructionLimits = new();
 }

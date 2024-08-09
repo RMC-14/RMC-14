@@ -4,7 +4,6 @@ using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
-using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -16,16 +15,23 @@ namespace Content.Shared._RMC14.Xenonids.Hive;
 public abstract class SharedXenoHiveSystem : EntitySystem
 {
     [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] protected readonly IGameTiming Timing = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedNightVisionSystem _nightVision = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
+
+    private EntityQuery<HiveComponent> _query;
+    private EntityQuery<HiveMemberComponent> _memberQuery;
 
     public override void Initialize()
     {
+        base.Initialize();
+
+        _query = GetEntityQuery<HiveComponent>();
+        _memberQuery = GetEntityQuery<HiveMemberComponent>();
+
         SubscribeLocalEvent<HiveComponent, MapInitEvent>(OnMapInit);
 
         SubscribeLocalEvent<XenoEvolutionGranterComponent, MobStateChangedEvent>(OnGranterMobStateChanged);
@@ -37,9 +43,9 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             return;
 
         if (TryComp(ent, out XenoComponent? xeno) &&
-            TryComp(xeno.Hive, out HiveComponent? hive))
+            _query.TryComp(xeno.Hive, out var hive))
         {
-            hive.LastQueenDeath = _timing.CurTime;
+            hive.LastQueenDeath = Timing.CurTime;
             Dirty(xeno.Hive.Value, hive);
         }
     }
@@ -72,74 +78,162 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         ent.Comp.AnnouncementsLeft.Sort();
     }
 
-    public void CreateHive(string name)
+    /// <summary>
+    /// Tries to get the hive from a member, returning null if it has no hive or it is invalid.
+    /// </summary>
+    /// <remarks>
+    /// TODO: remove Hive from XenoComponent so this can be used with xenos too.
+    /// </remarks>
+    public Entity<HiveComponent>? GetHive(Entity<HiveMemberComponent?> member)
     {
-        if (_net.IsClient)
-            return;
+        if (!_memberQuery.Resolve(member, ref member.Comp))
+            return null;
 
-        var ent = Spawn(null, MapCoordinates.Nullspace);
-        EnsureComp<HiveComponent>(ent);
-        _metaData.SetEntityName(ent, name);
+        if (member.Comp.Hive is not {} uid || TerminatingOrDeleted(uid))
+            return null;
+
+        if (!_query.TryComp(uid, out var comp))
+            return null;
+
+        return (uid, comp);
     }
 
-    public void SetHive(Entity<HiveMemberComponent> member, EntityUid? hive)
+    /// <summary>
+    /// Sets the hive for a member, if it is different.
+    /// If it does not have HiveMemberComponent this method adds it.
+    /// </summary>
+    public void SetHive(Entity<HiveMemberComponent?> member, EntityUid? hive)
     {
-        if (member.Comp.Hive == hive)
+        var comp = member.Comp ?? EnsureComp<HiveMemberComponent>(member);
+
+        if (comp.Hive == hive)
             return;
 
-        member.Comp.Hive = hive;
-        Dirty(member);
+        comp.Hive = hive;
+        Dirty(member, comp);
     }
 
     public void SetSeeThroughContainers(Entity<HiveComponent?> hive, bool see)
     {
-        if (!Resolve(hive, ref hive.Comp, false))
+        if (!_query.Resolve(hive, ref hive.Comp, false))
             return;
 
         hive.Comp.SeeThroughContainers = see;
-        var xenos = EntityQueryEnumerator<XenoComponent>();
-        while (xenos.MoveNext(out var uid, out var xeno))
+        var xenos = EntityQueryEnumerator<XenoComponent, NightVisionComponent>();
+        while (xenos.MoveNext(out var uid, out var xeno, out var nv))
         {
             if (xeno.Hive != hive)
                 continue;
 
-            _nightVision.SetSeeThroughContainers(uid, see);
+            _nightVision.SetSeeThroughContainers((uid, nv), see);
         }
     }
 
     public void AnnounceNeedsOvipositorToSameHive(Entity<XenoComponent?> xeno)
     {
-        if (!Resolve(xeno, ref xeno.Comp, false))
+        // TODO: GetHive when not stored on XenoComponent
+        if (!Resolve(xeno, ref xeno.Comp, false) || xeno.Comp.Hive is not {} hiveUid)
             return;
 
-        if (!TryComp(xeno.Comp.Hive, out HiveComponent? hive) ||
-            hive.GotOvipositorPopup)
-        {
+        if (!_query.TryComp(hiveUid, out var hive) || hive.GotOvipositorPopup)
             return;
-        }
 
         hive.GotOvipositorPopup = true;
-        Dirty(xeno.Comp.Hive.Value, hive);
+        Dirty(hiveUid, hive);
 
         var msg = "Enough time has passed, we require the Queen in oviposition for evolution.";
         var xenos = EntityQueryEnumerator<ActorComponent, XenoComponent>();
         while (xenos.MoveNext(out var uid, out _, out var otherXeno))
         {
-            if (uid == xeno.Owner || xeno.Comp.Hive != otherXeno.Hive)
+            if (uid == xeno.Owner || xeno.Comp.Hive != hiveUid)
                 continue;
 
             _popup.PopupEntity(msg, uid, uid, PopupType.LargeCaution);
         }
 
-        _xenoAnnounce.AnnounceToHive(default, xeno.Comp.Hive.Value, msg);
+        _xenoAnnounce.AnnounceToHive(default, hiveUid, msg);
     }
 
     public bool TryGetTierLimit(Entity<HiveComponent?> hive, int tier, out FixedPoint2 value)
     {
         value = default;
-        if (!Resolve(hive, ref hive.Comp, false))
+        if (!_query.Resolve(hive, ref hive.Comp, false))
             return false;
 
         return hive.Comp.TierLimits.TryGetValue(tier, out value);
+    }
+
+    /// <summary>
+    /// Reserve a construct id, preventing construction of the same type if the limit reaches 0.
+    /// </summary>
+    public bool ReserveConstruct(Entity<HiveComponent> hive, EntProtoId id)
+    {
+        var limits = hive.Comp.ConstructionLimits;
+        if (!limits.TryGetValue(id, out var limit))
+        {
+            Log.Error($"Tried to reserve a construct {id} that was not specified in the hive prototype!");
+            return false;
+        }
+
+        if (limit < 1)
+            return false;
+
+        limits[id] = limit - 1;
+        Dirty(hive);
+        return true;
+    }
+
+    /// <summary>
+    /// Check if a new construct can be made without reserving one.
+    /// </summary>
+    public bool CanConstruct(Entity<HiveComponent> hive, EntProtoId id)
+    {
+        var limits = hive.Comp.ConstructionLimits;
+        if (!limits.TryGetValue(id, out var limit))
+        {
+            Log.Error($"Tried to check if a construct {id} can be made that was not specified in the hive prototype!");
+            return false;
+        }
+
+        return limit > 0;
+    }
+
+    /// <summary>
+    /// Adjust a construct's limit by some value.
+    /// </summary>
+    /// <remarks>
+    /// Intentionally allows going negative to prevent exploiting something and making infinite structures, where going 0 could allow it.
+    /// </remarks>
+    public void AdjustConstructLimit(Entity<HiveComponent> hive, EntProtoId id, int add)
+    {
+        var limits = hive.Comp.ConstructionLimits;
+        if (!limits.TryGetValue(id, out var limit))
+        {
+            Log.Error($"Tried to adjust a construct {id}'s limit that was not specified in the hive prototype!");
+            return;
+        }
+
+        limits[id] = limit + add;
+        Dirty(hive);
+    }
+
+    /// <summary>
+    /// Checks if constructing is on cooldown from the hive core being destroyed.
+    /// </summary>
+    public bool IsConstructionOnCooldown(Entity<HiveComponent> hive)
+    {
+        if (hive.Comp.NextConstructAllowed is not {} cooldown)
+            return false;
+
+        return Timing.CurTime < cooldown;
+    }
+
+    /// <summary>
+    /// Used by hive core system when hive core dies to set construction cooldown.
+    /// </summary>
+    public void StartCoreDeathCooldown(Entity<HiveComponent> hive, TimeSpan cooldown)
+    {
+        hive.Comp.NextConstructAllowed = Timing.CurTime + cooldown;
+        Dirty(hive);
     }
 }
