@@ -55,8 +55,6 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
         if (args.Handled)
             return;
 
-        args.Handled = true;
-
         var user = args.Performer;
         var comp = ent.Comp;
 
@@ -66,6 +64,8 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
             _popup.PopupClient(popup, user, user, PopupType.SmallCaution);
             return;
         }
+
+        args.Handled = true;
 
         if (!comp.Enabled)
         {
