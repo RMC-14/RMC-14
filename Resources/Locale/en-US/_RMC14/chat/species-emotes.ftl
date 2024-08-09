@@ -9,3 +9,5 @@ rmc-emote-meow = meows.
 rmc-emote-mew = mews.
 rmc-emote-growl = growls.
 rmc-emote-purr = purrs.
+
+rmc-emote-name-warcry = Warcry

@@ -22,9 +22,9 @@
     proto: lizard
   - type: Vocal
     sounds:
-      Male: MaleReptilian
-      Female: FemaleReptilian
-      Unsexed: MaleReptilian
+      Male: RMCMaleReptilian
+      Female: RMCFemaleReptilian
+      Unsexed: RMCMaleReptilian
   - type: Wagging
   - type: MeleeWeapon
     soundHit:
