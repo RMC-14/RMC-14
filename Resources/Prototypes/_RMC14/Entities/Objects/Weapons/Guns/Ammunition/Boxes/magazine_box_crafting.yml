@@ -4,10 +4,10 @@
 - type: construction
   parent: RMC
   name: Magazine Box (M54C Reg)
-  id: CMBoxMagazineRifleM54C
-  graph: CMBoxMagazine
+  id: RMCBoxMagazineRifleM54C
+  graph: RMCBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineRifleM54CEmpty
+  targetNode: RMCBoxMagazineRifleM54CEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M54C mags.
   icon:
@@ -18,10 +18,10 @@
 - type: construction
   parent: RMC
   name: Magazine Box (M54C AP)
-  id: CMBoxMagazineRifleM54CAP
-  graph: CMBoxMagazine
+  id: RMCBoxMagazineRifleM54CAP
+  graph: RMCBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineRifleM54CAPEmpty
+  targetNode: RMCBoxMagazineRifleM54CAPEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M54C mags.
   icon:
@@ -32,10 +32,10 @@
 - type: construction
   parent: RMC
   name: Magazine Box (M54C Ext)
-  id: CMBoxMagazineRifleM54CExt
-  graph: CMBoxMagazine
+  id: RMCBoxMagazineRifleM54CExt
+  graph: RMCBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineRifleM54CExtEmpty
+  targetNode: RMCBoxMagazineRifleM54CExtEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain extended M54C mags.
   icon:
@@ -47,10 +47,10 @@
 - type: construction
   parent: RMC
   name: Magazine Box (M63 Reg)
-  id: CMBoxMagazineSMGM63
-  graph: CMBoxMagazine
+  id: RMCBoxMagazineSMGM63
+  graph: RMCBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineSMGM63Empty
+  targetNode: RMCBoxMagazineSMGM63Empty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M63 mags.
   icon:
@@ -61,10 +61,10 @@
 - type: construction
   parent: RMC
   name: Magazine Box (M63 AP)
-  id: CMBoxMagazineSMGM63AP
-  graph: CMBoxMagazine
+  id: RMCBoxMagazineSMGM63AP
+  graph: RMCBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineSMGM63APEmpty
+  targetNode: RMCBoxMagazineSMGM63APEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M63 mags.
   icon:
@@ -75,10 +75,10 @@
 - type: construction
   parent: RMC
   name: Magazine Box (M63 Ext)
-  id: CMBoxMagazineSMGM63Ext
-  graph: CMBoxMagazine
+  id: RMCBoxMagazineSMGM63Ext
+  graph: RMCBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineSMGM63ExtEmpty
+  targetNode: RMCBoxMagazineSMGM63ExtEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain extended M63 mags.
   icon:
@@ -90,10 +90,10 @@
 - type: construction
   parent: RMC
   name: Magazine Box (M4SPR Reg)
-  id: CMBoxMagazineRifleM4SPR
-  graph: CMBoxMagazine
+  id: RMCBoxMagazineRifleM4SPR
+  graph: RMCBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineRifleM4SPREmpty
+  targetNode: RMCBoxMagazineRifleM4SPREmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M4SPR mags.
   icon:
@@ -104,10 +104,10 @@
 - type: construction
   parent: RMC
   name: Magazine Box (M4SPR AP)
-  id: CMBoxMagazineRifleM4SPRAP
-  graph: CMBoxMagazine
+  id: RMCBoxMagazineRifleM4SPRAP
+  graph: RMCBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineRifleM4SPRAPEmpty
+  targetNode: RMCBoxMagazineRifleM4SPRAPEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M4SPR mags.
   icon:
@@ -118,10 +118,10 @@
 - type: construction
   parent: RMC
   name: Magazine Box (M4SPR Ext)
-  id: CMBoxMagazineRifleM4SPRExt
-  graph: CMBoxMagazine
+  id: RMCBoxMagazineRifleM4SPRExt
+  graph: RMCBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazineRifleM4SPRExtEmpty
+  targetNode: RMCBoxMagazineRifleM4SPRExtEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain extended M4SPR mags.
   icon:
@@ -133,10 +133,10 @@
 - type: construction
   parent: RMC
   name: Magazine Box (M1984 Reg)
-  id: CMBoxMagazinePistolM1984
-  graph: CMBoxMagazine
+  id: RMCBoxMagazinePistolM1984
+  graph: RMCBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazinePistolM1984Empty
+  targetNode: RMCBoxMagazinePistolM1984Empty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M1984 mags.
   icon:
@@ -147,10 +147,10 @@
 #- type: construction
 #  parent: RMC
 #  name: Magazine Box (M1984 AP)
-#  id: CMBoxMagazinePistolM1984AP
-#  graph: CMBoxMagazine
+#  id: RMCBoxMagazinePistolM1984AP
+#  graph: RMCBoxMagazine
 #  startNode: start
-#  targetNode: CMBoxMagazinePistolM1984APEmpty
+#  targetNode: RMCBoxMagazinePistolM1984APEmpty
 #  category: construction-category-cm-box-magazine
 #  description: A magazine box that can contain armor piercing M1984 mags.
 #  icon:
@@ -162,10 +162,10 @@
 - type: construction
   parent: RMC
   name: Magazine Box (M77 AP)
-  id: CMBoxMagazinePistolM77AP
-  graph: CMBoxMagazine
+  id: RMCBoxMagazinePistolM77AP
+  graph: RMCBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazinePistolM77APEmpty
+  targetNode: RMCBoxMagazinePistolM77APEmpty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M77 mags.
   icon:
@@ -177,10 +177,10 @@
 - type: construction
   parent: RMC
   name: Magazine Box (MK80 Reg)
-  id: CMBoxMagazinePistolMK80
-  graph: CMBoxMagazine
+  id: RMCBoxMagazinePistolMK80
+  graph: RMCBoxMagazine
   startNode: start
-  targetNode: CMBoxMagazinePistolMK80Empty
+  targetNode: RMCBoxMagazinePistolMK80Empty
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular MK80 mags.
   icon:
@@ -193,7 +193,7 @@
   parent: RMC
   name: Magazine Box (SU-6 Reg)
   id: RMCBoxMagazinePistolSU6
-  graph: CMBoxMagazine
+  graph: RMCBoxMagazine
   startNode: start
   targetNode: RMCBoxMagazinePistolSU6Empty
   category: construction-category-cm-box-magazine
@@ -208,7 +208,7 @@
   parent: RMC
   name: Magazine Box (M44 Reg)
   id: RMCBoxMagazineRevolverM44Empty
-  graph: CMBoxMagazine
+  graph: RMCBoxMagazine
   startNode: start
   targetNode: RMCBoxMagazineRevolverM44Empty
   category: construction-category-cm-box-magazine
@@ -222,7 +222,7 @@
   parent: RMC
   name: Magazine Box (M44 Mark)
   id: RMCBoxMagazineRevolverM44MarksmanEmpty
-  graph: CMBoxMagazine
+  graph: RMCBoxMagazine
   startNode: start
   targetNode: RMCBoxMagazineRevolverM44MarksmanEmpty
   category: construction-category-cm-box-magazine
@@ -236,87 +236,87 @@
   # Construct graphs
 - type: constructionGraph
   parent: RMC
-  id: CMBoxMagazine
+  id: RMCBoxMagazine
   start: start
   graph:
   - node: start
     edges:
 
     # M54C
-    - to: CMBoxMagazineRifleM54CEmpty
+    - to: RMCBoxMagazineRifleM54CEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
-    - to: CMBoxMagazineRifleM54CAPEmpty
+    - to: RMCBoxMagazineRifleM54CAPEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
-    - to: CMBoxMagazineRifleM54CExtEmpty
+    - to: RMCBoxMagazineRifleM54CExtEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
 
     # M63
-    - to: CMBoxMagazineSMGM63Empty
+    - to: RMCBoxMagazineSMGM63Empty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
-    - to: CMBoxMagazineSMGM63APEmpty
+    - to: RMCBoxMagazineSMGM63APEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
-    - to: CMBoxMagazineSMGM63ExtEmpty
+    - to: RMCBoxMagazineSMGM63ExtEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
 
     # M4SPR
-    - to: CMBoxMagazineRifleM4SPREmpty
+    - to: RMCBoxMagazineRifleM4SPREmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
 
-    - to: CMBoxMagazineRifleM4SPRAPEmpty
+    - to: RMCBoxMagazineRifleM4SPRAPEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
 
-    - to: CMBoxMagazineRifleM4SPRExtEmpty
+    - to: RMCBoxMagazineRifleM4SPRExtEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
 
     # M1984
-    - to: CMBoxMagazinePistolM1984Empty
+    - to: RMCBoxMagazinePistolM1984Empty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
 
-#    - to: CMBoxMagazinePistolM1984APEmpty
+#    - to: RMCBoxMagazinePistolM1984APEmpty
 #      steps:
 #      - material: RMCSheetCardboard
 #        amount: 1
 #        doAfter: 1
 
     # M77AP
-    - to: CMBoxMagazinePistolM77APEmpty
+    - to: RMCBoxMagazinePistolM77APEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
 
     # MK80
-    - to: CMBoxMagazinePistolMK80Empty
+    - to: RMCBoxMagazinePistolMK80Empty
       steps:
       - material: RMCSheetCardboard
         amount: 1
@@ -345,42 +345,42 @@
   # Why the fuck do you even need these nodes???
 
   # M54C
-  - node: CMBoxMagazineRifleM54CEmpty
-    entity: CMBoxMagazineRifleM54CEmpty
-  - node: CMBoxMagazineRifleM54CAPEmpty
-    entity: CMBoxMagazineRifleM54CAPEmpty
-  - node: CMBoxMagazineRifleM54CExtEmpty
-    entity: CMBoxMagazineRifleM54CExtEmpty
+  - node: RMCBoxMagazineRifleM54CEmpty
+    entity: RMCBoxMagazineRifleM54CEmpty
+  - node: RMCBoxMagazineRifleM54CAPEmpty
+    entity: RMCBoxMagazineRifleM54CAPEmpty
+  - node: RMCBoxMagazineRifleM54CExtEmpty
+    entity: RMCBoxMagazineRifleM54CExtEmpty
 
   # M63
-  - node: CMBoxMagazineSMGM63Empty
-    entity: CMBoxMagazineSMGM63Empty
-  - node: CMBoxMagazineSMGM63APEmpty
-    entity: CMBoxMagazineSMGM63APEmpty
-  - node: CMBoxMagazineSMGM63ExtEmpty
-    entity: CMBoxMagazineSMGM63ExtEmpty
+  - node: RMCBoxMagazineSMGM63Empty
+    entity: RMCBoxMagazineSMGM63Empty
+  - node: RMCBoxMagazineSMGM63APEmpty
+    entity: RMCBoxMagazineSMGM63APEmpty
+  - node: RMCBoxMagazineSMGM63ExtEmpty
+    entity: RMCBoxMagazineSMGM63ExtEmpty
 
   # M4SPR
-  - node: CMBoxMagazineRifleM4SPREmpty
-    entity: CMBoxMagazineRifleM4SPREmpty
-  - node: CMBoxMagazineRifleM4SPRAPEmpty
-    entity: CMBoxMagazineRifleM4SPRAPEmpty
-  - node: CMBoxMagazineRifleM4SPRExtEmpty
-    entity: CMBoxMagazineRifleM4SPRExtEmpty
+  - node: RMCBoxMagazineRifleM4SPREmpty
+    entity: RMCBoxMagazineRifleM4SPREmpty
+  - node: RMCBoxMagazineRifleM4SPRAPEmpty
+    entity: RMCBoxMagazineRifleM4SPRAPEmpty
+  - node: RMCBoxMagazineRifleM4SPRExtEmpty
+    entity: RMCBoxMagazineRifleM4SPRExtEmpty
 
   # M1984
-  - node: CMBoxMagazinePistolM1984Empty
-    entity: CMBoxMagazinePistolM1984Empty
-#  - node: CMBoxMagazinePistolM1984APEmpty
-#    entity: CMBoxMagazinePistolM1984APEmpty
+  - node: RMCBoxMagazinePistolM1984Empty
+    entity: RMCBoxMagazinePistolM1984Empty
+#  - node: RMCBoxMagazinePistolM1984APEmpty
+#    entity: RMCBoxMagazinePistolM1984APEmpty
 
   # M77AP
-  - node: CMBoxMagazinePistolM77APEmpty
-    entity: CMBoxMagazinePistolM77APEmpty
+  - node: RMCBoxMagazinePistolM77APEmpty
+    entity: RMCBoxMagazinePistolM77APEmpty
 
   # MK80
-  - node: CMBoxMagazinePistolMK80Empty
-    entity: CMBoxMagazinePistolMK80Empty
+  - node: RMCBoxMagazinePistolMK80Empty
+    entity: RMCBoxMagazinePistolMK80Empty
 
   # SU-6
   - node: RMCBoxMagazinePistolSU6Empty

@@ -1,7 +1,7 @@
 - type: entity
   abstract: true
   parent: AmmoProviderShotgunShell
-  id: CMBoxShotgunBase
+  id: RMCBoxShotgunBase
   name: box of shotgun shells
   components:
   - type: Item
@@ -17,18 +17,18 @@
   - type: Appearance
   - type: Tag
     tags:
-    - CMBoxShotgunShells
+    - RMCBoxShotgunShells
   - type: InteractedBlacklist
     blacklist:
       components:
       - Xeno
 
 - type: Tag
-  id: CMBoxShotgunShells
+  id: RMCBoxShotgunShells
 
 - type: entity
-  parent: CMBoxShotgunBase
-  id: CMBoxShotgunBuckshot
+  parent: RMCBoxShotgunBase
+  id: RMCBoxShotgunBuckshot
   name: box of buckshot shells
   description: A box filled with buckshot spread shotgun shells. 12 Gauge.
   components:
@@ -41,8 +41,8 @@
       map: [ "enum.CMAmmoBoxLayers.Ammo" ]
 
 - type: entity
-  parent: CMBoxShotgunBase
-  id: CMBoxShotgunSlugs
+  parent: RMCBoxShotgunBase
+  id: RMCBoxShotgunSlugs
   name: box of shotgun slugs
   description: A box filled with heavy shotgun shells. A timeless classic. 12 Gauge.
   components:
@@ -55,8 +55,8 @@
       map: [ "enum.CMAmmoBoxLayers.Ammo" ]
 
 - type: entity
-  parent: CMBoxShotgunBase
-  id: CMBoxShotgunIncendiary
+  parent: RMCBoxShotgunBase
+  id: RMCBoxShotgunIncendiary
   name: box of incendiary slugs
   description: A box filled with self-detonating incendiary shotgun rounds. 12 Gauge.
   components:
@@ -69,8 +69,8 @@
       map: [ "enum.CMAmmoBoxLayers.Ammo" ]
 
 - type: entity
-  parent: CMBoxShotgunBase
-  id: CMBoxShotgunBeanbag
+  parent: RMCBoxShotgunBase
+  id: RMCBoxShotgunBeanbag
   name: box of beanbag slugs
   description: A box filled with beanbag shotgun shells used for non-lethal crowd control. 12 Gauge.
   components:
@@ -83,8 +83,8 @@
       map: [ "enum.CMAmmoBoxLayers.Ammo" ]
 
 - type: entity
-  parent: CMBoxShotgunBase
-  id: CMBoxShotgunFlechette
+  parent: RMCBoxShotgunBase
+  id: RMCBoxShotgunFlechette
   name: box of flechette shells
   description: A box filled with flechette shotgun shells. 12 Gauge.
   components:
@@ -97,8 +97,8 @@
       map: [ "enum.CMAmmoBoxLayers.Ammo" ]
 
 - type: entity
-  parent: CMBoxShotgunBase
-  id: CMBoxShotgunIncendiaryBuckshot
+  parent: RMCBoxShotgunBase
+  id: RMCBoxShotgunIncendiaryBuckshot
   name: box of incendiary buckshots
   description: A box filled with self-detonating buckshot incendiary shotgun rounds. 12 Gauge.
   components:

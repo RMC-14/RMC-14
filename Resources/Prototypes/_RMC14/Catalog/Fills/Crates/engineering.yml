@@ -1,6 +1,6 @@
 - type: entity
-  id: CMCrateEmptySandbags
-  parent: CMCrateConstruction
+  id: RMCCrateEmptySandbags
+  parent: RMCCrateConstruction
   name: empty sandbags crate
   components:
   - type: StorageFill
@@ -8,8 +8,8 @@
       - id: CMSandbagEmpty50
 
 - type: entity
-  id: CMCrateSandbagsConstructionKit
-  parent: CMCrateConstruction
+  id: RMCCrateSandbagsConstructionKit
+  parent: RMCCrateConstruction
   name: sandbags construction kit
   components:
   - type: StorageFill
@@ -19,8 +19,8 @@
         amount: 2
 
 - type: entity
-  id: CMCrateMetalSheets
-  parent: CMCrateConstruction
+  id: RMCCrateMetalSheets
+  parent: RMCCrateConstruction
   name: metal sheets crate
   components:
   - type: StorageFill
@@ -28,8 +28,8 @@
       - id: CMSheetMetal
 
 - type: entity
-  id: CMCratePlasteelSheets
-  parent: CMCrateConstruction
+  id: RMCCratePlasteelSheets
+  parent: RMCCrateConstruction
   name: plasteel sheets crate
   components:
   - type: StorageFill
@@ -37,8 +37,8 @@
       - id: CMSheetPlasteel
 
 - type: entity
-  id: CMCrateGlassSheets
-  parent: CMCrateConstruction
+  id: RMCCrateGlassSheets
+  parent: RMCCrateConstruction
   name: glass sheets crate
   components:
   - type: StorageFill
@@ -46,8 +46,8 @@
       - id: CMSheetGlass
 
 #- type: entity
-#  id: CMCrateWoodenPlanks
-#  parent: CMCrateConstruction
+#  id: RMCCrateWoodenPlanks
+#  parent: RMCCrateConstruction
 #  name: wooden planks crate
 #  components:
 #  - type: StorageFill
@@ -55,8 +55,8 @@
   #   - id: CMMaterialWoodPlank # TODO RMC14 add wood material
 
 #- type: entity # TODO RMC14 add folding barricades
-#  id: CMCrateFoldingBarricades
-#  parent: CMCrateConstruction
+#  id: RMCCrateFoldingBarricades
+#  parent: RMCCrateConstruction
 #  name: folding metal barricades crate
 #  components:
 #  - type: StorageFill
@@ -65,8 +65,8 @@
 #        amount: 3
 
 - type: entity
-  parent: CMCrateConstruction
-  id: CMCrateSuperconductingMagneticCoil
+  parent: RMCCrateConstruction
+  id: RMCCrateSuperconductingMagneticCoil
   name: superconducting magnetic coil crate
   components:
   - type: StorageFill
@@ -74,8 +74,8 @@
       - id: CMStockPartSMESCoil
 
 - type: entity
-  id: CMCrateElectricalMaintenance
-  parent: CMCrateConstruction
+  id: RMCCrateElectricalMaintenance
+  parent: RMCCrateConstruction
   name: electrical maintenance crate
   components:
   - type: StorageFill
@@ -90,8 +90,8 @@
         amount: 2
 
 - type: entity
-  id: CMCrateMechanicalMaintenance
-  parent: CMCrateConstruction
+  id: RMCCrateMechanicalMaintenance
+  parent: RMCCrateConstruction
   name: mechanical maintenance crate
   components:
   - type: StorageFill
@@ -106,8 +106,8 @@
         amount: 1
 
 #- type: entity # TODO RMC14 probably not relevant to rmc14 but will leave it here in case we want it
-#  id: CMCrateInflatableBarriers
-#  parent: CMCrateConstruction
+#  id: RMCCrateInflatableBarriers
+#  parent: RMCCrateConstruction
 #  name: inflatable barriers crate
 #  components:
 #  - type: StorageFill
@@ -119,8 +119,8 @@
 #      #max stack - 10. Making 1 stack would be easier and good
 
 - type: entity
-  id: CMCrateReplacementLights
-  parent: CMCrateConstruction
+  id: RMCCrateReplacementLights
+  parent: RMCCrateConstruction
   name: replacement lights crate
   components:
   - type: StorageFill # TODO RMC14 this could probably be replaced with cm entities but it's fine for now
@@ -131,8 +131,8 @@
         amount: 2 #12 bulbs in 1 box, so making 21 bulbs is hard and makes no sense
 
 - type: entity
-  id: CMCratePacmanParts
-  parent: CMCrateConstruction
+  id: RMCCratePacmanParts
+  parent: RMCCrateConstruction
   name: pacman portable generator parts
   components:
   - type: StorageFill
@@ -143,8 +143,8 @@
         amount: 2
 
 - type: entity
-  id: CMCrateSuperPacmanParts
-  parent: CMCrateConstruction
+  id: RMCCrateSuperPacmanParts
+  parent: RMCCrateConstruction
   name: super pacman portable generator parts
   components:
   - type: StorageFill
@@ -155,8 +155,8 @@
         amount: 4
 
 - type: entity
-  id: CMCrateFlashlights
-  parent: CMCrateConstruction
+  id: RMCCrateFlashlights
+  parent: RMCCrateConstruction
   name: flashlights crate
   components:
   - type: StorageFill
@@ -165,8 +165,8 @@
         amount: 8
 
 - type: entity
-  id: CMCrateHighCapacityPowerCell
-  parent: CMCrateConstruction
+  id: RMCCrateHighCapacityPowerCell
+  parent: RMCCrateConstruction
   name: high-capacity power cell crate
   components:
   - type: StorageFill

@@ -263,11 +263,11 @@
     sections:
     - name: Regular ammunition
       entries:
-      - id: CMBoxShotgunBuckshot
+      - id: RMCBoxShotgunBuckshot
         amount: 40
-      - id: CMBoxShotgunFlechette
+      - id: RMCBoxShotgunFlechette
         amount: 40
-      - id: CMBoxShotgunSlugs
+      - id: RMCBoxShotgunSlugs
         amount: 40
       - id: CMMagazineRifleM4SPR
         amount: 45

@@ -3,8 +3,8 @@
 
 # /datum/supply_packs/internals
 - type: entity
-  parent: CMCrateSupply
-  id: CMCrateSupplyInternals
+  parent: RMCCrateSupply
+  id: RMCCrateSupplyInternals
   name: oxygen internals crate (x3 masks, x3 tanks)
   components:
   - type: StorageFill
@@ -16,8 +16,8 @@
 
 # /datum/supply_packs/evacuation
 - type: entity
-  parent: CMCrateSupply
-  id: CMCrateSupplyEvacuation
+  parent: RMCCrateSupply
+  id: RMCCrateSupplyEvacuation
   name: emergency equipment (x2 toolbox, x2 hazard vest, x5 oxygen tank, x5 masks)
   components:
   - type: StorageFill
@@ -31,8 +31,8 @@
 
 # /datum/supply_packs/boxes
 - type: entity
-  id: CMCrateSuppliesBoxes
-  parent: CMCrateSupply
+  id: RMCCrateSuppliesBoxes
+  parent: RMCCrateSupply
   name: cardboard sheets (x50) #empty boxes (x10)
   components:
   - type: StorageFill
@@ -42,8 +42,8 @@
 
 # /datum/supply_packs/janitor
 - type: entity
-  parent: CMCrateSupply
-  id: CMCrateSupplyJanitor
+  parent: RMCCrateSupply
+  id: RMCCrateSupplyJanitor
   name: assorted janitorial supplies
   components:
   - type: StorageFill
@@ -69,8 +69,8 @@
 
 # /datum/supply_packs/crayons
 - type: entity
-  id: CMCrateSuppliesCrayons
-  parent: CMCrateSupply
+  id: RMCCrateSuppliesCrayons
+  parent: RMCCrateSupply
   name: boxes of crayons
   components:
   - type: StorageFill
