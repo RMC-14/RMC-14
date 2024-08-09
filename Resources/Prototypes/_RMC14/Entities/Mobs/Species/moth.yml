@@ -5,8 +5,13 @@
   name: Urist C.M McFluff
   suffix: RMC14
   components:
+  - type: Bloodstream
+    bloodReagent: RMCInsectBlood
   - type: HumanoidAppearance
     species: Moth
+    hideLayersOnEquip:
+    - Snout
+    - HeadTop
   - type: ZombieAccentOverride
     accent: zombieMoth
   - type: Speech
@@ -24,6 +29,8 @@
       Brute:
         sprite: Mobs/Effects/brute_damage.rsi
         color: "#808A51"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
   - type: Sprite
     noRot: true
     drawdepth: Mobs

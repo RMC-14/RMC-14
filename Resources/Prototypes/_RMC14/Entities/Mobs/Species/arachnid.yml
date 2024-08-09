@@ -5,6 +5,8 @@
   id: CMMobArachnid
   suffix: RMC14
   components:
+  - type: Bloodstream
+    bloodReagent: RMCCopperBlood
   - type: HumanoidAppearance
     species: Arachnid
   - type: DamageVisuals
@@ -12,6 +14,8 @@
       Brute:
         sprite: Mobs/Effects/brute_damage.rsi
         color: "#162581"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
   - type: Speech
     speechVerb: Arachnid
     speechSounds: Arachnid
@@ -23,10 +27,6 @@
       Unsexed: UnisexArachnid
   - type: TypingIndicator
     proto: spider
-  - type: MeleeWeapon
-    animation: WeaponArcBite
-    soundHit:
-      collection: AlienClaw
   - type: Sprite # I'd prefer if these maps were better. Insert map pun here.
     layers:
     - map: [ "enum.HumanoidVisualLayers.Chest" ]

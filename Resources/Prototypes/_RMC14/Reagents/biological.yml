@@ -1,0 +1,47 @@
+﻿- type: reagent
+  parent: Blood
+  id: RMCInsectBlood
+  name: reagent-name-insect-blood
+  group: Biological
+  desc: reagent-desc-insect-blood
+  flavor: horrible
+  color: "#808A51"
+  recognizable: true
+  physicalDesc: reagent-physical-desc-slimy
+  slippery: false
+
+- type: reagent
+  parent: Blood
+  id: RMCSlimeBlood
+  name: reagent-name-slime
+  group: Biological
+  desc: reagent-desc-slime
+  flavor: slimy
+  color: "#2cf274"
+  recognizable: true
+  physicalDesc: reagent-physical-desc-viscous
+  slippery: false
+
+- type: reagent
+  parent: Blood
+  id: RMCSapBlood
+  name: reagent-name-sap
+  group: Biological
+  desc: reagent-desc-sap
+  flavor: sweet
+  color: "#cd7314"
+  recognizable: true
+  physicalDesc: reagent-physical-desc-sticky
+  slippery: false
+
+- type: reagent
+  parent: Blood
+  id: RMCCopperBlood
+  name: reagent-name-hemocyanin-blood
+  group: Biological
+  desc: reagent-desc-hemocyanin-blood
+  flavor: metallic
+  color: "#162581"
+  recognizable: true
+  physicalDesc: reagent-physical-desc-metallic
+  slippery: false
