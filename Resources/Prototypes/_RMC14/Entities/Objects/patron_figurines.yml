@@ -135,7 +135,7 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronChikiSugimoto
-  name: Chiki Sugimoto figurine
+  name: Chiki Suzuki figurine
   description: “Hi! Me Chiki!”
   components:
   - type: Sprite
