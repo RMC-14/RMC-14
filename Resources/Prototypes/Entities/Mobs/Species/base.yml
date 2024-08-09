@@ -185,6 +185,9 @@
     interactSuccessString: hugging-success-generic
     interactSuccessSound: /Audio/Effects/thudswoosh.ogg
     messagePerceivedByOthers: hugging-success-generic-others
+    userBlacklist: # RMC14: dont let xenos hug marines
+      components:
+      - Xeno
   - type: CanHostGuardian
   - type: NpcFactionMember
     factions:

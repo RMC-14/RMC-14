@@ -4,6 +4,7 @@ using Content.Shared.Interaction.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Whitelist; // RMC14
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
@@ -15,6 +16,7 @@ namespace Content.Shared.Interaction;
 
 public sealed class InteractionPopupSystem : EntitySystem
 {
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!; // RMC14
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
@@ -54,6 +56,9 @@ public sealed class InteractionPopupSystem : EntitySystem
         EntityUid user)
     {
         if (args.Handled || user == target)
+            return;
+
+        if (_whitelist.IsBlacklistPass(component.UserBlacklist, user)) // RMC14
             return;
 
         //Handling does nothing and this thing annoyingly plays way too often.
