@@ -411,6 +411,18 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             if (_net.IsClient)
                 continue;
 
+            // 20 seconds before burst, spawn the larva
+            if (infected.BurstAt - infected.SpawnLarvaBefore < time && infected.SpawnedLarva == null)
+            {
+                var spawned = SpawnAtPosition(infected.BurstSpawn, xform.Coordinates);
+                _xeno.SetHive(spawned, infected.Hive);
+
+                var larvaContainer = _container.EnsureContainer<ContainerSlot>(uid, infected.LarvaContainerId);
+                _container.Insert(spawned, larvaContainer);
+
+                infected.SpawnedLarva = spawned;
+            }
+
             if (infected.BurstAt > time)
             {
                 // Embryo dies if unrevivable when dead
@@ -436,19 +448,38 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 }
 
                 // Warn on the last to final stage of a burst
-                if (!infected.DidBurstWarning && stage == infected.FinalStage - 1)
+                if (!infected.DidBurstWarning && stage == infected.BurstWarningStart)
                 {
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon-self"), uid, uid, PopupType.MediumCaution);
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon", ("victim", uid)), uid, Filter.PvsExcept(uid), true, PopupType.MediumCaution);
-                    _jitter.DoJitter(uid, infected.JitterTime * 6, false);
+                    
+                    var knockdownTime = infected.BaseKnockdownTime * 75;
+                    _jitter.DoJitter(uid, knockdownTime, false);
+                    _stun.TryParalyze(uid, knockdownTime, false);
+                    _status.TryAddStatusEffect(uid, "TemporaryBlindness", knockdownTime, true, "TemporaryBlindness");
                     infected.DidBurstWarning = true;
+
                     continue;
                 }
+
                 // Symptoms only start after the IntialSymptomStart is passed (by default, 2)
                 // And continue until burst time is reached
-                // TODO after burst time is reached, the larva is made and stage set to 6, have wait time for someone to take the larva.
-                // During this stage the victim should be in intense pain, and auto-burst after some time
-                if (stage >= infected.FinalSymptomsStart)
+                if (stage >= infected.BurstWarningStart)
+                {
+                    if (_random.Prob(infected.InsanePainChance * frameTime))
+                    {
+                        var random = _random.Pick(new List<string> { "one", "two", "three", "four", "five" });
+                        var message = Loc.GetString("rmc-xeno-infection-insanepain-" + random);
+                        _popup.PopupEntity(message, uid, uid, PopupType.LargeCaution);
+
+                        var knockdownTime = infected.BaseKnockdownTime * 10;
+                        _jitter.DoJitter(uid, knockdownTime, false);
+                        _stun.TryParalyze(uid, knockdownTime, false);
+                        _status.TryAddStatusEffect(uid, "TemporaryBlindness", knockdownTime, true, "TemporaryBlindness");
+                        _damage.TryChangeDamage(uid, infected.InfectionDamage, true, false);
+                    }
+                }
+                else if (stage >= infected.FinalSymptomsStart)
                 {
                     if (_random.Prob(infected.MajorPainChance * frameTime))
                     {
@@ -485,7 +516,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                         RaiseLocalEvent(uid, ref ev);
                     }
 
-                    if (_random.Prob((infected.ShakesChance * 5 / 6) * frameTime))
+                    if (_random.Prob(infected.ShakesChance * 5 / 6 * frameTime))
                         InfectionShakes(uid, infected, infected.BaseKnockdownTime * 2, infected.JitterTime * 2);
                 }
                 else if (stage >= infected.InitialSymptomsStart)
@@ -504,17 +535,17 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
             RemCompDeferred<VictimInfectedComponent>(uid);
 
-            var spawned = SpawnAtPosition(infected.BurstSpawn, xform.Coordinates);
-            infected.CurrentStage = 6;
-            Dirty(uid, infected);
+            if (_container.TryGetContainer(uid, infected.LarvaContainerId, out var container))
+                _container.EmptyContainer(container);
 
-            _xeno.SetHive(spawned, infected.Hive);
+            Dirty(uid, infected);
 
             EnsureComp<VictimBurstComponent>(uid);
 
             _audio.PlayPvs(infected.BurstSound, uid);
         }
     }
+
     // Shakes chances decrease as symptom stages progress, and they get longer
     private void InfectionShakes(EntityUid victim, VictimInfectedComponent infected, TimeSpan knockdownTime, TimeSpan jitterTime)
     {

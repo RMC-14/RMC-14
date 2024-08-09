@@ -55,7 +55,8 @@
       defaultMarkings: [ RMCUnderwearBoxers ]
     Undershirt:
       points: 1
-      required: false
+      required: true
+      defaultMarkings: [ RMCUndershirtStandard ]
     HeadTop:
       points: 2
       required: false

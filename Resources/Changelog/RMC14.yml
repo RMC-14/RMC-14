@@ -1,20 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed xenos not being able to add plasma to hive cores to build them.
-    type: Fix
-  id: 39
-  time: '2024-04-13T08:19:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1211
-- author: DrSmugleaf
-  changes:
-  - message: Fixed runners being able to pull while leaping.
-    type: Fix
-  id: 40
-  time: '2024-04-13T08:09:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1208
-- author: DrSmugleaf
-  changes:
   - message: Added xeno UI and night vision.
     type: Add
   - message: Removed stamina from xenos.
@@ -4296,5 +4282,19 @@
   id: 538
   time: '2024-08-08T12:13:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3585
+- author: Dutch-VanDerLinde
+  changes:
+  - message: The ghostrole for larvae will now appear 20 seconds before the host bursts
+    type: Tweak
+  id: 539
+  time: '2024-08-09T01:50:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3410
+- author: Sypher98
+  changes:
+  - message: Breaching charges now fit in the explosives pouch
+    type: Tweak
+  id: 540
+  time: '2024-08-09T01:51:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3589
 Name: RMC14
 Order: -1

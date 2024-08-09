@@ -271,6 +271,7 @@
     whitelist:
       tags:
       - Grenade
+      - RMCExplosiveBreachingCharge
   - type: FixedItemSizeStorage
 
 
