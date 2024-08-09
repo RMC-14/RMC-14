@@ -1,38 +1,40 @@
-using Content.Client._RMC14.Xenonids.UI;
 using JetBrains.Annotations;
-using Robust.Shared.Utility;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
-using static Robust.Client.UserInterface.Controls.BaseButton;
 
-namespace Content.Client._RMC14.Xenonids.Construction.Nest
+namespace Content.Client._RMC14.Xenonids.Construction.Nest;
+
+[UsedImplicitly]
+public sealed class XenoRemoveNestedBui : BoundUserInterface
 {
-    [UsedImplicitly]
-    public sealed class XenoRemoveNestedBui : BoundUserInterface
+    [ViewVariables]
+    private XenoRemoveNestedWindow? _window;
+
+    public XenoRemoveNestedBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
-        [ViewVariables]
-        private XenoRemoveNestedWindow? _window;
+    }
 
-        public XenoRemoveNestedBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-        {
-        }
+    protected override void Open()
+    {
+        _window = new XenoRemoveNestedWindow();
+        _window.OnClose += Close;
 
-        protected override void Open()
-        {
-            _window = new XenoRemoveNestedWindow();
-            _window.OnClose += Close;
+        _window.ConfirmButton.OnPressed += _ => RemoveNested();
 
-            _window.ConfirmButton.OnPressed += _ => RemoveNested();
+        _window.OpenCentered();
+    }
 
-            _window.OpenCentered();
-        }
+    private void RemoveNested()
+    {
+        if (_window == null)
+            return;
+        var msg = new XenoRemoveNestedBuiMsg(true);
+        SendPredictedMessage(msg);
+        _window.Close();
+    }
 
-        private void RemoveNested()
-        {
-            if (_window == null)
-                return;
-            var msg = new XenoRemoveNestedBuiMsg(true);
-            SendPredictedMessage(msg);
-            _window.Close();
-        }
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+            _window?.Dispose();
     }
 }

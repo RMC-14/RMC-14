@@ -152,6 +152,8 @@
         type: XenoOrderConstructionBui
       enum.XenoWordQueenUI.Key:
         type: XenoWordQueenBui
+      enum.XenoRemoveNestedUI.Key:
+        type: XenoRemoveNestedBui
   - type: TypingIndicator
     proto: alien
   - type: MovedByPressure
