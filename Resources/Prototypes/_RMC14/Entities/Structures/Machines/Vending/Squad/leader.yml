@@ -103,8 +103,8 @@
     #  points: 7
       - id: RMCPouchToolsFill
         points: 5
-    #- id: CMWeldingGoggles
-    #  points: 5
+      - id: RMCWeldingGoggles
+        points: 5
     - name: Explosives
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
@@ -347,4 +347,4 @@
     contents:
     - id: RMCPouchConstructionFillLowGrade
     - id: RMCPouchElectronicsFill
-#    - id: RMCGogglesWelding # TODO RMC14 welding goggles
+    - id: RMCWeldingGoggles

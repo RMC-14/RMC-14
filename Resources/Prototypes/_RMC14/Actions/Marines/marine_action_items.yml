@@ -38,3 +38,19 @@
       sprite: _RMC14/Actions/scope_actions.rsi
       state: sniperscope
     event: !type:AttachableToggleActionEvent
+
+- type: entity
+  parent: ActionMarineBase
+  id: CMActionToggleEyeProtection
+  name: Toggle welding protection
+  description: Lower/raise welding protection.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
+      state: icon_up
+    iconOn:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
+      state: icon_down
+    event: !type:ToggleActionEvent
+    useDelay: 0.25

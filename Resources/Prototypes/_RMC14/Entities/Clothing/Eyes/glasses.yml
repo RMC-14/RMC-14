@@ -141,3 +141,22 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Prescription_ballistic_goggles.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Prescription_ballistic_goggles.rsi
+
+- type: entity
+  parent: ClothingEyesBase
+  id: RMCWeldingGoggles
+  name: Welding goggles
+  description: A pair of welding goggles. Provides protection from eye damage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
+  - type: RMCEyeProtectionItem
+    raisedEquippedPrefix: up
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCEyeProtectionItemVisuals.Active:
+        icon:
+          True: { state: icon_on }
+          False: { state: icon }
