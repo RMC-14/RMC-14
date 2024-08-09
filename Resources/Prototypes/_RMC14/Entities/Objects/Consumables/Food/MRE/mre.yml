@@ -80,7 +80,7 @@
     - id: CMDrinkWEYAWaterBottle30
     - id: CMFortuneCookie
       prob: 0.333
-    - id: CMCigarettePackLuckySloths
+    - id: CMCigarettePackLuckySlothsMini
     - id: CMMatchBook
       orGroup: matchbook
     - id: CMBrownMatchBook
