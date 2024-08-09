@@ -2,7 +2,7 @@
   name: zippo lighter
   description: A fancy steel Zippo lighter. Ignite in style.
   parent: FlippoLighter
-  id: CMZippo
+  id: RMCZippo
   components:
   - type: Sprite
     sprite:  _RMC14/Objects/Tools/Lighters/zippo.rsi
@@ -23,8 +23,8 @@
 - type: entity
   name: We-Ya executive zippo lighter
   description: A remarkable Zippo lighter embellished in the Company's black and gold shade.
-  parent: CMZippo
-  id: CMZippoExec
+  parent: RMCZippo
+  id: RMCZippoExec
   components:
   - type: Sprite
     sprite:  _RMC14/Objects/Tools/Lighters/execzippo.rsi

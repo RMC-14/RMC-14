@@ -2,7 +2,7 @@
   name: match box
   description: matchbox
   parent: Matchbox
-  id: CMMatchbox
+  id: RMCMatchbox
   components:
   - type: Sprite
     sprite:  _RMC14/Objects/Consumable/Smokeables/Matchboxes/matchbox.rsi

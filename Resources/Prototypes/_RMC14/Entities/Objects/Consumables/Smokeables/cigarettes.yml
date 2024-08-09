@@ -51,7 +51,7 @@
 
 - type: entity
   parent: CigPackBase
-  id: CMCigarettePackLuckySloths
+  id: RMCCigarettePackLuckySloths
   name: lucky sloths packet
   description: Lucky Sloths Means Fine Tobacco! 9/10 doctors agree on Lucky Sloths...as the leading cause of marine lung cancer.
   components:
@@ -165,8 +165,8 @@
       - Xeno
 
 - type: entity
-  parent: CMCigarettePackLuckySloths
-  id: CMCigarettePackWeYaGold
+  parent: RMCCigarettePackLuckySloths
+  id: RMCCigarettePackWeYaGold
   name: We-Ya gold packet
   description: Paving Better Worlds, and rolling better cigarettes. These fancy cigarettes are Weston-Yamada's entry into the market. Comes backed by a fierce legal team.
   components:
@@ -174,8 +174,8 @@
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/we_ya_gold_packet.rsi
 
 - type: entity
-  parent: CMCigarettePackLuckySloths
-  id: CMCigarettePackExecutiveSelect
+  parent: RMCCigarettePackLuckySloths
+  id: RMCCigarettePackExecutiveSelect
   name: executive select packet
   description: These cigarettes are the height of luxury. They're smooth, they're cool, and they smell like victory...and cigarette smoke.
   components:

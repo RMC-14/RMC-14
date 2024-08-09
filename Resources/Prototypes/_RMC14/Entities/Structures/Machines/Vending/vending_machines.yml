@@ -194,10 +194,10 @@
 - type: vendingMachineInventory
   id: CMVendorCigs
   startingInventory:
-    CMCigarettePackLuckySloths: 50 
-    CMTarbackCase: 15
+    RMCCigarettePackLuckySloths: 50 
+    RMCTarbackCase: 15
     Lighter: 25
-    CMZippo: 10
+    RMCZippo: 10
 
 
 # Security
