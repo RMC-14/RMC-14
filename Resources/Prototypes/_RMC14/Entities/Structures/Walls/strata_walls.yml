@@ -1,0 +1,67 @@
+﻿- type: entity
+  parent: CMBaseWallInvincible
+  id: RCMWallStrataIce
+  name: ice columns
+  description: An absolutely massive collection of columns made of ice. The longer you stare, the deeper the ice seems to go.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/strata_ice.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/strata_ice.rsi
+    state: strata_ice
+  - type: Tag
+    tags:
+    - Wall
+  - type: IconSmooth
+    key: walls
+    base: strata_ice
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RCMWallShivaInvincibleColony
+  name: ribbed outpost walls
+  description: A thick and chunky metal wall that is, just by virtue of its placement and imposing presence, entirely indestructible.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/strata_outpost_ribbed.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/strata_outpost_ribbed.rsi
+    state: strata_hull
+  - type: Tag
+    tags:
+    - Wall
+  - type: IconSmooth
+    key: walls
+    base: strata_ribbed_outpost_
+
+- type: entity
+  parent: CMWallMetal
+  id: RCMWallStrataColony
+  name: bare outpost walls
+  description: A thick and chunky metal wall. The surface is barren and imposing.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/strata_outpost_bare.rsi
+    state: strata_bare_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/strata_outpost_bare.rsi
+    state: strata_bare_outpost_
+  - type: IconSmooth
+    key: walls
+    base: strata_bare_outpost_
+
+- type: entity
+  parent: CMWallReinforced
+  id: RCMWallStrataReinforcedColony
+  name: ribbed outpost walls
+  description: A thick and chunky metal wall covered in jagged ribs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/strata_outpost_ribbed.rsi
+    state: strata_ribbed_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/strata_outpost_ribbed.rsi
+    state: strata_ribbed_outpost_
+  - type: IconSmooth
+    key: walls
+    base: strata_ribbed_outpost_
