@@ -336,3 +336,22 @@
     state: wall_broke
   - type: Occluder
     enabled: false
+
+# Hunter Walls
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallHunter
+  name: Hunter Wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hunter.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hunter.rsi
+    state: metal
+  - type: Tag
+    tags:
+    - Wall
+  - type: IconSmooth
+    key: walls
+    base: metal
