@@ -1,4 +1,4 @@
-﻿- type: gamePreset
+- type: gamePreset
   id: CMDistressSignal
   alias:
   - distresssignal
@@ -9,3 +9,16 @@
   showInVote: false
   rules:
   - CMDistressSignal
+
+- type: gamePreset
+  id: CMExtended
+  alias:
+  - extended
+  - cmextended
+  - cmext
+  - beachepisode
+  name: rmc-extended-title
+  description: rmc-extended-description
+  showInVote: false
+  rules:
+  - CMExtended
