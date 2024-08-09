@@ -9,7 +9,7 @@
     hideOnToggle: true
 
 - type: entity
-  parent: CMBaseMask
+  parent: ClothingMaskGas
   id: CMMaskGas
   name: gas mask
   description: A face-covering mask that can be connected to an air supply. Filters harmful gases from the air.
