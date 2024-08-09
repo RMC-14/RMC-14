@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Areas;
+using Content.Shared.GameTicking;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -8,13 +10,19 @@ namespace Content.Shared._RMC14.Camera;
 // we would be using the upstream system for cameras IF IT WAS NOT ABOMINABLE DOGSHIT
 public abstract class SharedRMCCameraSystem : EntitySystem
 {
+    [Dependency] private readonly AreaSystem _area = default!;
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly HashSet<EntProtoId> _refresh = new();
 
+    private readonly Dictionary<string, int> _cameraNames = new();
+
     public override void Initialize()
     {
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
+
         SubscribeLocalEvent<RMCCameraComponent, MapInitEvent>(OnCameraMapInit);
         SubscribeLocalEvent<RMCCameraComponent, ComponentRemove>(OnCameraRemove);
         SubscribeLocalEvent<RMCCameraComponent, EntityTerminatingEvent>(OnCameraTerminating);
@@ -35,10 +43,23 @@ public abstract class SharedRMCCameraSystem : EntitySystem
             });
     }
 
+    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
+    {
+        _cameraNames.Clear();
+    }
+
     private void OnCameraMapInit(Entity<RMCCameraComponent> ent, ref MapInitEvent args)
     {
         if (ent.Comp.Id is { } id)
             _refresh.Add(id);
+
+        if (!_area.TryGetArea(ent, out var area))
+            return;
+
+        var areaName = Name(area);
+        var count = _cameraNames.GetValueOrDefault(areaName);
+        _metaData.SetEntityName(ent, $"{Name(area)} #{++count}");
+        _cameraNames[areaName] = count;
     }
 
     private void OnCameraRemove(Entity<RMCCameraComponent> ent, ref ComponentRemove args)

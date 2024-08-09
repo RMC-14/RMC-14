@@ -1,6 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 using Content.Client.Eye;
+using Content.Client.Message;
 using Content.Shared._RMC14.Camera;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client._RMC14.Camera;
@@ -64,11 +66,18 @@ public sealed class RMCCameraBui : BoundUserInterface
 
             var id = ids[i];
             var name = names[i];
+            var buttonLabel = new RichTextLabel
+            {
+                RectClipContent = true,
+                HorizontalAlignment = Control.HAlignment.Left,
+            };
+            buttonLabel.SetMarkupPermissive($"[font size=11][color=white]{name}[/color][/font]");
             var button = new Button
             {
-                Text = name,
                 StyleClasses = { "OpenBoth" },
                 ToggleMode = true,
+                TextAlign = Label.AlignMode.Left,
+                Children = { buttonLabel },
             };
 
             button.Pressed = id == currentNetCamera;
@@ -82,6 +91,7 @@ public sealed class RMCCameraBui : BoundUserInterface
             };
 
             _window.CamerasContainer.AddChild(button);
+            button.TextAlign = Label.AlignMode.Left;
         }
 
         RefreshSearch();

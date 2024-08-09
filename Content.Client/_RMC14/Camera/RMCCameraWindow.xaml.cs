@@ -15,4 +15,3 @@ public sealed partial class RMCCameraWindow : DefaultWindow
         Viewport.Eye = new FixedEye();
     }
 }
-
