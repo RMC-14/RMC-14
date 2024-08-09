@@ -1,5 +1,4 @@
-﻿# TODO RMC14 make these decals (that look correct)
-- type: tile
+﻿- type: tile
   abstract: true
   parent: CMTileBase
   id: CMFloorSteelSterileGreenBase

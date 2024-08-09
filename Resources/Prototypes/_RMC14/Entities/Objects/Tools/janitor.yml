@@ -108,3 +108,7 @@
     contents:
     - id: CMLightTube
       amount: 0
+
+- type: entity
+  parent: SprayBottleSpaceCleaner
+  id: RMCSprayBottleSpaceCleaner # TODO RMC14

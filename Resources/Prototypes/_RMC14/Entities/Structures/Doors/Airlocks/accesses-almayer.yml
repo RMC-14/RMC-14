@@ -205,3 +205,12 @@
   components:
   - type: AccessReader
     access: [ [ "CMAccessMedical" ], [ "CMAccessCommand" ] ]
+
+# Liaison
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockLiaisonLocked
+  suffix: Liaison, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessWeYa" ] ]

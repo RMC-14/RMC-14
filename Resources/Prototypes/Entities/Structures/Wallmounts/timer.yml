@@ -97,6 +97,8 @@
   - type: ContainerFill
     containers:
       board: [ BrigTimerElectronics ]
+  - type: ApcPowerReceiver
+    needsPower: false # TODO RMC14 power
 
 # Construction Frame
 

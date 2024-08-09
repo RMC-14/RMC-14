@@ -1,0 +1,20 @@
+﻿- type: tile
+  parent: CMFloorSteel
+  id: RMCFloorPlatingStriped
+  name: tiles-rmc-striped
+  sprite: /Textures/_RMC14/Tiles/almayer/plating_striped_0.png
+
+- type: tile
+  parent: RMCFloorPlatingStriped
+  id: RMCFloorPlatingStripedEast
+  sprite: /Textures/_RMC14/Tiles/almayer/plating_striped_2.png
+
+- type: tile
+  parent: RMCFloorPlatingStriped
+  id: RMCFloorPlatingStripedNorth
+  sprite: /Textures/_RMC14/Tiles/almayer/plating_striped_1.png
+
+- type: tile
+  parent: RMCFloorPlatingStriped
+  id: RMCFloorPlatingStripedWest
+  sprite: /Textures/_RMC14/Tiles/almayer/plating_striped_3.png
