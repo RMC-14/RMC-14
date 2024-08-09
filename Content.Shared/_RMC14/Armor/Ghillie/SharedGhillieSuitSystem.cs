@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.Whitelist;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.Inventory;
@@ -8,6 +9,9 @@ using Content.Shared.Item.ItemToggle;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared._RMC14.Stealth;
+using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Systems;
 
 namespace Content.Shared._RMC14.Armor.Ghillie;
 
@@ -19,7 +23,7 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
 
     public override void Initialize()
@@ -31,19 +35,15 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
         SubscribeLocalEvent<GhillieSuitComponent, GotUnequippedEvent>(OnUnequipped);
         SubscribeLocalEvent<GhillieSuitComponent, GhillieSuitDoAfterEvent>(OnDoAfter);
 
-        SubscribeLocalEvent<MarineComponent, MoveEvent>(OnMove);
+        SubscribeLocalEvent<RMCPassiveStealthComponent, MoveEvent>(OnMove);
+        SubscribeLocalEvent<GunComponent, AttemptShootEvent>(OnAttemptShoot);
     }
 
-    /// <summary>
-    /// Only add the action if the user has sufficient skills
-    /// </summary>
     private void OnGetItemActions(Entity<GhillieSuitComponent> ent, ref GetItemActionsEvent args)
     {
         var comp = ent.Comp;
 
         if (args.InHands || !_inventory.InSlotWithFlags((ent, null, null), SlotFlags.OUTERCLOTHING))
-            return;
-        if (!_skills.HasSkills(args.User, in comp.SkillRequired))
             return;
 
         args.AddAction(ref comp.Action, comp.ActionId);
@@ -60,10 +60,17 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
         var user = args.Performer;
         var comp = ent.Comp;
 
+        if (!_whitelist.IsValid(comp.Whitelist, user))
+        {
+            var popup = Loc.GetString("cm-gun-unskilled", ("gun", ent.Owner));
+            _popup.PopupClient(popup, user, user, PopupType.SmallCaution);
+            return;
+        }
+
         if (!comp.Enabled)
         {
             var ev = new GhillieSuitDoAfterEvent();
-            var doAfterEventArgs = new DoAfterArgs(EntityManager, user, comp.CloakDelay, ev, ent.Owner)
+            var doAfterEventArgs = new DoAfterArgs(EntityManager, user, comp.UseDelay, ev, ent.Owner)
             {
                 BreakOnMove = true,
                 BreakOnDamage = true,
@@ -117,9 +124,15 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
         var comp = ent.Comp;
 
         if (enable)
-            EntityManager.AddComponents(user, comp.Components);
+        {
+            EntityManager.AddComponents(user, comp.AddComponentsOnEnable);
+            EntityManager.RemoveComponents(user, comp.AddComponentsOnDisable);
+        }
         else
-            EntityManager.RemoveComponents(user, comp.Components);
+        {
+            EntityManager.AddComponents(user, comp.AddComponentsOnDisable);
+            EntityManager.RemoveComponents(user, comp.AddComponentsOnEnable);
+        }
 
         comp.Enabled = enable;
         Dirty(ent);
@@ -140,7 +153,7 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
         return null;
     }
 
-    private void OnMove(Entity<MarineComponent> ent, ref MoveEvent args)
+    private void OnMove(Entity<RMCPassiveStealthComponent> ent, ref MoveEvent args)
     {
         var user = ent.Owner;
         var suit = FindSuit(user);
@@ -148,5 +161,22 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
 
         if (suit != null && length > 0)
             SetCloakEnabled(suit.Value, user, false);
+    }
+
+    private void OnAttemptShoot(Entity<GunComponent> ent, ref AttemptShootEvent args)
+    {
+        var user = args.User;
+        var suit = FindSuit(user);
+
+        if (args.Cancelled)
+            return;
+        if (suit == null)
+            return;
+
+        if (suit.Value.Comp.Enabled && TryComp<EntityActiveInvisibleComponent>(user, out var invisible))
+        {
+            invisible.Opacity = 0;
+            Dirty(user, invisible);
+        }
     }
 }

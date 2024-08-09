@@ -235,11 +235,17 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghille.rsi
   - type: GhillieSuit
-    components:
-    - type: StealthOnShoot
-    - type: Stealth
-      minVisibility: 0.05
-      lastVisibility: 0.05
+    addComponentsOnEnable:
+    - type: RMCPassiveStealth
+      toggleable: false
+      minOpacity: 0.05
+      delay: 5.0
+    - type: EntityIFFComponent
+    addComponentsOnDisable:
+    - type: RMCNightVisionVisible
+    whitelist:
+      components:
+      - SniperWhitelist
 
 # Smart Gun
 - type: entity
