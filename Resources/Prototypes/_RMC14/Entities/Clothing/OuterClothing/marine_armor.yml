@@ -236,6 +236,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghille.rsi
   - type: GhillieSuit
     addComponentsOnEnable:
+    - type: EntityActiveInvisibleComponent
+      opacity: 0.05
     - type: RMCPassiveStealth
       toggleable: true
       minOpacity: 0.05
