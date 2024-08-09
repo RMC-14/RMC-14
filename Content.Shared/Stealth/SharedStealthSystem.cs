@@ -2,7 +2,6 @@ using Content.Shared.Examine;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Stealth.Components;
-using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.GameStates;
 using Robust.Shared.Timing;
 
@@ -26,8 +25,6 @@ public abstract class SharedStealthSystem : EntitySystem
         SubscribeLocalEvent<StealthComponent, ExamineAttemptEvent>(OnExamineAttempt);
         SubscribeLocalEvent<StealthComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<StealthComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<StealthOnShootComponent, ShotAttemptedEvent>(OnShotAttempted);
-        SubscribeLocalEvent<StealthOnShootComponent, GetVisibilityModifiersEvent>(OnGetVisibilityModifiers);
     }
 
     private void OnExamineAttempt(EntityUid uid, StealthComponent component, ExamineAttemptEvent args)
@@ -132,12 +129,6 @@ public abstract class SharedStealthSystem : EntitySystem
         args.FlatModifier += mod;
     }
 
-    private void OnGetVisibilityModifiers(EntityUid uid, StealthOnShootComponent component, GetVisibilityModifiersEvent args)
-    {
-        var mod = args.SecondsSinceUpdate * component.PassiveVisibilityRate;
-        args.FlatModifier += mod;
-    }
-
     /// <summary>
     /// Modifies the visibility based on the delta provided.
     /// </summary>
@@ -216,14 +207,5 @@ public abstract class SharedStealthSystem : EntitySystem
             SecondsSinceUpdate = secondsSinceUpdate;
             FlatModifier = flatModifier;
         }
-    }
-
-    private void OnShotAttempted(EntityUid uid, StealthOnShootComponent component, ref ShotAttemptedEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        var delta = component.ShootVisibilityRate;
-        ModifyVisibility(uid, delta);
     }
 }
