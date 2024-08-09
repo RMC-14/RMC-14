@@ -808,6 +808,10 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("species");
 
+                    b.Property<int>("SquadPriority")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("squad_priority");
+
                     b.HasKey("Id")
                         .HasName("PK_profile");
 
