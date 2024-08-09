@@ -7,14 +7,18 @@
   id: CMPamphlet
   name: instructional pamphlet
   description: A pamphlet used to quickly impart vital knowledge.
-  suffix: NOT IMPLEMENTED
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/pamphlets.rsi
     state: pamphlet_written
   - type: Item
     size: Tiny
-
+  - type: SkillPamphlet
+    whitelists:
+    - popup: rmc-pamphlets-cant-use
+      restrictions:
+        components:  
+        - Marine
 
 # SKILLS
 
@@ -28,6 +32,9 @@
   components:
   - type: Sprite
     state: pamphlet_medical
+  - type: SkillPamphlet
+    addSkills: 
+      RMCSkillMedical: 1
 
 # gives miniengie skill
 - type: entity
@@ -38,6 +45,9 @@
   components:
   - type: Sprite
     state: pamphlet_construction
+  - type: SkillPamphlet
+    addSkills: 
+      RMCSkillEngineer: 1
 
 # gives jtac skill
 - type: entity
@@ -48,6 +58,9 @@
   components:
   - type: Sprite
     state: pamphlet_jtac
+  - type: SkillPamphlet
+    addSkills: 
+      RMCSkillJtac: 1
 
 # gives spotter skill / bypasses limit
 - type: entity
@@ -55,6 +68,7 @@
   id: CMPamphletSpotter
   name: spotter instructional pamphlet
   description: A pamphlet used to quickly impart vital knowledge. This one has the image of a pair of binoculars on it.
+  suffix: NOT IMPLEMENTED
   components:
   - type: Sprite
     state: pamphlet_spotter
@@ -65,6 +79,7 @@
   id: CMPamphletPowerloader
   name: powerloader instructional pamphlet
   description: A pamphlet used to quickly impart vital knowledge. This one has a powerloader insignia. The title reads 'Moving freight and squishing heads - a practical guide to Caterpillar P-5000 Work Loader'.
+  suffix: NOT IMPLEMENTED
   components:
   - type: Sprite
     state: pamphlet_powerloader
@@ -78,6 +93,10 @@
   components:
   - type: Sprite
     state: pamphlet_jtac
+  - type: SkillPamphlet
+    addSkills: 
+      RMCSkillPolice: 1
+    bypassLimit: true
 
 # gives surgery skill / bypasses limit
 - type: entity
@@ -88,6 +107,10 @@
   components:
   - type: Sprite
     state: pamphlet_medical
+  - type: SkillPamphlet
+    addSkills: 
+      RMCSkillSurgery: 1
+    bypassLimit: true
 
 # gives intel skill / bypasses limit
 - type: entity
@@ -98,6 +121,10 @@
   components:
   - type: Sprite
     state: pamphlet_reading
+  - type: SkillPamphlet
+    addSkills: 
+      RMCSkillIntel: 1
+    bypassLimit: true
 
 
 # LANGUAGE / bypasses limit
@@ -108,6 +135,7 @@
   id: CMPamphletLanguage
   name: translation pamphlet
   description: A pamphlet used by lazy Marine interpreters to quickly learn new languages on the spot.
+  suffix: NOT IMPLEMENTED
 
 # gives japanese language
 - type: entity

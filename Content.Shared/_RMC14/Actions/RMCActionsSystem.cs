@@ -32,13 +32,12 @@ public sealed class RMCActionsSystem : EntitySystem
 
         foreach (var (actionId, _) in _actions.GetActions(performer))
         {
-            if (!_actionSharedCooldownQuery.TryComp(actionId, out var shared) ||
-                !shared.Ids.Overlaps(action.Comp.Ids))
-            {
+            if (!_actionSharedCooldownQuery.TryComp(actionId, out var shared))
                 continue;
-            }
 
-            _actions.SetIfBiggerCooldown(actionId, action.Comp.Cooldown);
+            // Same ID or primary ID found in subset of other action's ids
+            if ((shared.Id != null && shared.Id == action.Comp.Id) || (action.Comp.Id != null && shared.Ids.Contains(action.Comp.Id.Value)))
+                _actions.SetIfBiggerCooldown(actionId, action.Comp.Cooldown);
         }
     }
 }

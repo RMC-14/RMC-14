@@ -119,7 +119,7 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
             }
         }
 
-        xenos.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
+        xenos.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
 
         _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos));
     }
@@ -168,18 +168,18 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
 
     private void RemoveWatcher(EntityUid toRemove)
     {
-        if (TryComp(toRemove, out XenoWatchingComponent? watching))
-        {
-            if (TryComp(watching.Watching, out XenoWatchedComponent? watched))
-            {
-                watched.Watching.Remove(toRemove);
-                if (watched.Watching.Count == 0)
-                    RemCompDeferred<XenoWatchedComponent>(watching.Watching.Value);
-            }
+        if (!TryComp(toRemove, out XenoWatchingComponent? watching))
+            return;
 
-            watching.Watching = null;
-            RemCompDeferred<XenoWatchingComponent>(toRemove);
+        if (TryComp(watching.Watching, out XenoWatchedComponent? watched))
+        {
+            watched.Watching.Remove(toRemove);
+            if (watched.Watching.Count == 0)
+                RemCompDeferred<XenoWatchedComponent>(watching.Watching.Value);
         }
+
+        watching.Watching = null;
+        RemCompDeferred<XenoWatchingComponent>(toRemove);
     }
 
     private bool HasQueenPopup(EntityUid xeno)

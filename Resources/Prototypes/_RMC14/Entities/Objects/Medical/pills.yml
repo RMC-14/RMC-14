@@ -16,12 +16,12 @@
     skilledExamineContains: cm-pill-contains
     skilledExamineNone: cm-pill-contains-none
     skills:
-      medical: 1
+      RMCSkillMedical: 1
   - type: ExamineRequiresSkill
     unskilledExamine: cm-pill-contents-unknown
     skilledExamine: cm-pill-contents-none
     skills:
-      medical: 1
+      RMCSkillMedical: 1
   - type: Pill
   - type: Food
     forceFeedDelay: 1

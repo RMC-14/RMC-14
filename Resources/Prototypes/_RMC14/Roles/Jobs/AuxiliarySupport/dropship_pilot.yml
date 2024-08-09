@@ -18,15 +18,16 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      firearms: 1
-      intel: 1
-      jtac: 2
-      leadership: 1
-      medical: 2
-      overwatch: 1
-      pilot: 2
-      powerLoader: 2
-      surgery: 1
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillIntel: 1
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPilot: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillSurgery: 1
     - type: MarineOrders
 
 - type: startingGear

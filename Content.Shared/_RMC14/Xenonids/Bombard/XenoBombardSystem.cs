@@ -1,6 +1,8 @@
 using System.Numerics;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Projectiles;
+using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.DoAfter;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -20,6 +22,8 @@ public sealed class XenoBombardSystem : EntitySystem
     [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCProjectileSystem _rmcProjectile = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly XenoProjectileSystem _xenoProjectile = default!;
 
     public override void Initialize()
     {
@@ -36,6 +40,9 @@ public sealed class XenoBombardSystem : EntitySystem
             return;
 
         args.Handled = true;
+
+        if (!_xenoPlasma.HasPlasmaPopup(ent.Owner, ent.Comp.PlasmaCost))
+            return;
 
         var direction = target.Position - source.Position;
         if (direction.Length() > ent.Comp.Range)
@@ -65,6 +72,9 @@ public sealed class XenoBombardSystem : EntitySystem
 
         args.Handled = true;
 
+        if (!_xenoPlasma.TryRemovePlasmaPopup(ent.Owner, ent.Comp.PlasmaCost))
+            return;
+
         if (_net.IsClient)
             return;
 
@@ -74,6 +84,8 @@ public sealed class XenoBombardSystem : EntitySystem
 
         var direction = args.Coordinates.Position - source.Position;
         var projectile = Spawn(ent.Comp.Projectile, source);
+        _xenoProjectile.SetSameHive(projectile, ent.Owner);
+
         var max = EnsureComp<ProjectileMaxRangeComponent>(projectile);
         _rmcProjectile.SetMaxRange((projectile, max), direction.Length());
 

@@ -107,6 +107,9 @@
         DoorVisualState.DoorOpen:
           DoorOpen: { state: disposal-open }
           DoorClosed: { state: disposal-closed }
+  - type: Anchorable
+    flags:
+    - Anchorable
 
 - type: entity
   id: ToiletDirtyWater

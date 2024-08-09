@@ -17,21 +17,24 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - HospitalCorpsman
+  overwatchSortPriority: -1
+  overwatchRoleName: Hospital Corpsmen
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      firearms: 1
-      jtac: 1
-      medical: 2
-      surgery: 1
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillJtac: 1
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1
     - type: CMVendorUser
       points: 45
+    - type: SquadArmorWearer
 
 - type: startingGear
   id: CMGearHospitalCorpsman
   equipment:
-    jumpsuit: CMJumpsuitMarineMedic # TODO RMC14 all squad roles should spawn with no jumpsuit but still have clothes on
     back: CMSatchelMarineMedic
     id: CMDogtagHospitalCorpsman
 

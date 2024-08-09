@@ -72,6 +72,8 @@
       - Multitool
       - Flashlight
       - PowerCell
+      - CMFireExtinguisherPortable
+      - RMCExplosiveBreachingCharge
 #      - # TODO nailgun, circuit board
       components:
       - Welder
@@ -114,6 +116,7 @@
       - CMMagazinePistol
       - RMCMagazineRevolver
       - PowerCell
+      - CMFireExtinguisherPortable
 #      - # TODO RMC14 handful of shotgun shells
 #      - # TODO nailgun, circuit board
       components:
@@ -124,6 +127,12 @@
       - LightReplacer
       - EntrenchingTool
   - type: FixedItemSizeStorage
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
 
 - type: entity
   parent: CMBeltBase
@@ -137,6 +146,7 @@
     sprite: _RMC14/Objects/Clothing/Belt/knife.rsi
   - type: ItemSlots
   - type: CMHolster
+  - type: UsableWhileDevoured
   - type: CMItemSlots
     cooldown: 1
     cooldownPopup: You need to wait before drawing another knife!
@@ -289,7 +299,7 @@
   - type: Storage
     maxItemSize: Normal
     grid:
-    - 0,0,11,2 # 12 slots
+    - 0,0,11,3 # 12 slots
     whitelist:
       tags:
       - Grenade

@@ -43,9 +43,15 @@ public sealed class StunShakeableSystem : EntitySystem
 
         shakeableUser.LastShake = time;
         Dirty(user, shakeableUser);
-
-        _statusEffects.TryRemoveStatusEffect(target, "Stun");
-        _statusEffects.TryRemoveStatusEffect(target, "KnockedDown");
+        // Only remove muted & blindness if they're at the same timer
+        // Simulating how in CM-13 you can wake up unconscious people (knockedout - knocked down, stunned, blinded, and muted)
+        if (_statusEffects.TryGetTime(target, "Muted", out var timeMute) && _statusEffects.TryGetTime(target, "TemporaryBlindness", out var timeBlind) && timeMute == timeBlind)
+        {
+            _statusEffects.TryRemoveTime(target, "Muted", ent.Comp.DurationRemoved);
+            _statusEffects.TryRemoveTime(target, "TemporaryBlindness", ent.Comp.DurationRemoved);
+        }
+        _statusEffects.TryRemoveTime(target, "Stun", ent.Comp.DurationRemoved);
+        _statusEffects.TryRemoveTime(target, "KnockedDown", ent.Comp.DurationRemoved);
         RemCompDeferred<TackledRecentlyComponent>(target);
 
         var userPopup = Loc.GetString("rmc-shake-awake-user", ("target", target));

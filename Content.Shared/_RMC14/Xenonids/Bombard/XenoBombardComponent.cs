@@ -1,3 +1,4 @@
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -10,6 +11,9 @@ public sealed partial class XenoBombardComponent : Component
 {
     [DataField, AutoNetworkedField]
     public int Range = 10;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 PlasmaCost = 200;
 
     [DataField, AutoNetworkedField]
     public TimeSpan Delay = TimeSpan.FromSeconds(4.5);

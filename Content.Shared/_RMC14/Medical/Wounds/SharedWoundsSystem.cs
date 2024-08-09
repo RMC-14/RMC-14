@@ -226,7 +226,7 @@ public abstract class SharedWoundsSystem : EntitySystem
         }
 
         var targetName = Identity.Name(target, EntityManager, user);
-        var hasSkills = _skills.HasSkills(user, in treater.Comp.Skills);
+        var hasSkills = _skills.HasAllSkills(user, treater.Comp.Skills);
         if (!treater.Comp.CanUseUnskilled && !hasSkills)
         {
             if (doPopups)
@@ -347,6 +347,9 @@ public abstract class SharedWoundsSystem : EntitySystem
                 delay += scaledDoAfter;
             }
         }
+
+        if (user != target && treater.Comp.TargetStartPopup != null)
+            _popup.PopupEntity(Loc.GetString(treater.Comp.TargetStartPopup, ("user", user)), target, target);
 
         var ev = new TreatWoundDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, treater, target, treater)

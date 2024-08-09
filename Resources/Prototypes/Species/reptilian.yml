@@ -49,6 +49,14 @@
       points: 1
       required: true
       defaultMarkings: [ LizardSnoutRound ]
+    Underwear:
+      points: 1
+      required: true
+      defaultMarkings: [ RMCUnderwearBoxers ]
+    Undershirt:
+      points: 1
+      required: true
+      defaultMarkings: [ RMCUndershirtStandard ]
     HeadTop:
       points: 2
       required: false

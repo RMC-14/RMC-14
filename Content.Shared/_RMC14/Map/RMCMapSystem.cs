@@ -16,7 +16,7 @@ public sealed class RMCMapSystem : EntitySystem
     public readonly ImmutableArray<Direction> CardinalDirections = ImmutableArray.Create(
         Direction.South,
         Direction.East,
-        Direction.South,
+        Direction.North,
         Direction.West
     );
 
@@ -34,6 +34,22 @@ public sealed class RMCMapSystem : EntitySystem
         }
 
         var coords = ent.ToCoordinates();
+        if (offset != null)
+            coords = coords.Offset(offset.Value);
+
+        var indices = _map.CoordinatesToTile(gridId, gridComp, coords);
+        var anchored = _map.GetAnchoredEntitiesEnumerator(gridId, gridComp, indices);
+        return new RMCAnchoredEntitiesEnumerator(_transform, anchored, facing);
+    }
+
+    public RMCAnchoredEntitiesEnumerator GetAnchoredEntitiesEnumerator(EntityCoordinates coords, Direction? offset = null, DirectionFlag facing = DirectionFlag.None)
+    {
+        if (_transform.GetGrid(coords) is not { } gridId ||
+            !_mapGridQuery.TryComp(gridId, out var gridComp))
+        {
+            return RMCAnchoredEntitiesEnumerator.Empty;
+        }
+
         if (offset != null)
             coords = coords.Offset(offset.Value);
 

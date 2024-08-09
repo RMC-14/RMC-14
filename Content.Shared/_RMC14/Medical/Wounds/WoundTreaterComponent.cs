@@ -39,7 +39,7 @@ public sealed partial class WoundTreaterComponent : Component
     public bool CanUseUnskilled;
 
     [DataField, AutoNetworkedField]
-    public Skills Skills;
+    public Dictionary<EntProtoId<SkillDefinitionComponent>, int> Skills = new();
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? TreatBeginSound;
@@ -55,6 +55,9 @@ public sealed partial class WoundTreaterComponent : Component
 
     [DataField, AutoNetworkedField]
     public LocId? OthersPopup;
+
+    [DataField, AutoNetworkedField]
+    public LocId? TargetStartPopup;
 
     [DataField, AutoNetworkedField]
     public LocId? UserFinishPopup;

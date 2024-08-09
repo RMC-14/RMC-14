@@ -57,6 +57,8 @@
       orGroup: snack
     - id: CMMREComponentMeatballs
       orGroup: snack
+    - id: RMCMREComponentMeatzels
+      orGroup: snack
     - id: CMMREComponentPretzels
       orGroup: snack
     - id: CMMREComponentPeanuts
@@ -90,6 +92,10 @@
     - id: CMElectroMatchbook
       orGroup: matchbook
   - type: FixedItemSizeStorage
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   abstract: true

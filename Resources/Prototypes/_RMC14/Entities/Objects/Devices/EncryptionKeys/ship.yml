@@ -259,6 +259,12 @@
     - MarineEngineer
     - MarineMedical
     - MarineRequisition
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
     defaultChannel: MarineMilitaryPolice
   - type: Sprite
     state: cmp_key

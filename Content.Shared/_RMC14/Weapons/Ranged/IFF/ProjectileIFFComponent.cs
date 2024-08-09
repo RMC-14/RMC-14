@@ -9,4 +9,7 @@ public sealed partial class ProjectileIFFComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
     public EntProtoId<IFFFactionComponent>? Faction;
+
+    [DataField, AutoNetworkedField]
+    public bool Enabled;
 }

@@ -3,12 +3,14 @@
   id: CMBaseWeaponGun
   components:
   - type: GunUnskilledPenalty
+  - type: GunIFF
+    enabled: false
   - type: Clothing
     quickEquip: false
   - type: GunSkilledRecoil
     setRecoil: 0
     skills:
-      firearms: 1
+      RMCSkillFirearms: 1
   - type: UseDelay
     delay: 0
   - type: WieldDelay
@@ -18,3 +20,9 @@
     damage:
       types:
         Blunt: 5
+  - type: EmitSoundOnPickup
+    sound:
+      collection: RMCEquipGun
+  - type: EmitSoundOnLand
+    sound:
+      collection: RMCRustleGun

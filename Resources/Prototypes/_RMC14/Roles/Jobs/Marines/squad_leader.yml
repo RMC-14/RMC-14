@@ -14,29 +14,34 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - SquadLeader
+  overwatchSortPriority: -5
+  overwatchShowName: true
+  overwatchRoleName: Squad Leader
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      construction: 2
-      cqc: 1
-      endurance: 2
-      engineer: 2
-      firearms: 1
-      fireman: 1
-      intel: 1
-      jtac: 2
-      leadership: 1
-      medical: 1
-      vehicle: 1
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 1
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillIntel: 1
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 1
+        RMCSkillVehicles: 1
     - type: CMVendorUser
       points: 45
     - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
 
 - type: startingGear
   id: CMGearSquadLeader
   equipment:
-    jumpsuit: JumpsuitMarine # TODO RMC14 all squad roles should spawn with no jumpsuit but still have clothes on
     back: CMSatchelMarine
     id: CMDogtagSquadLeader
 
