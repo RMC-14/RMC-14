@@ -185,9 +185,9 @@
       entries:
     #- id: CMM240IncineratorUnit
     #  points: 18
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 8
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 12
     #- id: CMM79GrenadeLauncher
     #  points: 18

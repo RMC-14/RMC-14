@@ -59,6 +59,10 @@
   name: M44 combat revolver
   description: A bulky revolver, occasionally carried by assault troops and officers in the Marine Corps, as well as civilian law enforcement. Fires .44 Magnum rounds.
   components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponRevolverM44
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m44.rsi
   - type: Clothing

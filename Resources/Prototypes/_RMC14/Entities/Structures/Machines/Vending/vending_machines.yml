@@ -222,10 +222,11 @@
   id: CMVendorSec
   startingInventory: # TODO RMC14
     CMHandcuffs: 8
-    Zipties: 10
+    RMCZipties: 10
+    RMCBola: 10
     GrenadeFlashBang: 4
     RMCWeaponTaser: 4
-    # Pepper spray 4
+    TearGasGrenade: 4 # Pepper spray 4
     CMStunbaton: 4
     RMCFlashlight: 4
     CMBeltSecurityMP: 10
