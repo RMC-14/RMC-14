@@ -125,7 +125,6 @@
         - SmallMobMask
         layer:
         - MachineLayer
-  - type: EntityStorage
   - type: PlaceableSurface
     isPlaceable: false
   - type: Damageable
@@ -140,9 +139,6 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Appearance
-  - type: EntityStorageVisuals
-    stateDoorOpen: base
-    stateDoorClosed: closed
   - type: PaperLabel
     labelSlot:
       insertVerbText: Attach Label
@@ -154,7 +150,6 @@
     containers:
       entity_storage: !type:Container
       paper_label: !type:ContainerSlot
-  - type: ItemSlots
   - type: StaticPrice
     price: 50
 
