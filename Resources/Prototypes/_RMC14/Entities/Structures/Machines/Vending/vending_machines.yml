@@ -5,6 +5,11 @@
   name: Vendomat
   description: A generic vending machine.
   components:
+  - type: Transform
+    anchored: false
+    noRot: true
+  - type: Physics
+    bodyType: Static
   - type: AmbientOnPowered
   - type: AmbientSound
     volume: -9
@@ -12,11 +17,6 @@
     enabled: false
     sound:
       path: /Audio/Ambience/Objects/vending_machine_hum.ogg
-  - type: Physics
-    bodyType: Static
-  - type: Transform
-    anchored: true
-    noRot: true
   - type: Fixtures
     fixtures:
       fix1:
@@ -99,10 +99,6 @@
   name: Hot Drinks machine
   description: A vending machine which dispenses hot drinks.
   components:
-  - type: Transform
-    anchored: false
-  - type: Physics
-    bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/coffee.rsi
   - type: VendingMachine
@@ -124,10 +120,6 @@
   name: Hot Foods Machine
   description: A vending machine full of ready to cook meals, mhmmmm taste the nutritional goodness!
   components:
-  - type: Transform
-    anchored: false
-  - type: Physics
-    bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/snack.rsi
   - type: VendingMachine
@@ -155,10 +147,6 @@
   name: Bobda Softdrinks
   description: A softdrink vendor provided by Bobda Soda Company, Havana.
   components:
-  - type: Transform
-    anchored: false
-  - type: Physics
-    bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/cola.rsi
   - type: VendingMachine
@@ -198,10 +186,6 @@
   name: Cigarette Machine
   description: If you want to get cancer, might as well do it in style!
   components:
-  - type: Transform
-    anchored: false
-  - type: Physics
-    bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/cigs.rsi
   - type: VendingMachine
