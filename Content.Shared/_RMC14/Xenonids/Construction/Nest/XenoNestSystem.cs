@@ -48,6 +48,7 @@ public sealed class XenoNestSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private EntityQuery<OccluderComponent> _occluderQuery;
     private EntityQuery<XenoNestComponent> _xenoNestQuery;
@@ -94,6 +95,12 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestedComponent, IsEquippingAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, IsUnequippingAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, GetInfectedIncubationMultiplierEvent>(OnInNestGetInfectedIncubationMultiplier);
+        SubscribeLocalEvent<XenoNestedComponent, ComponentStartup>(OnNestedAdd);
+
+        Subs.BuiEvents<XenoNestableComponent>(XenoRemoveNestedUI.Key, subs =>
+        {
+            subs.Event<XenoRemoveNestedBuiMsg>(OnRemoveNestedBuiMsg);
+        });
     }
 
     private void OnXenoGetUsedEntity(Entity<XenoComponent> ent, ref GetUsedEntityEvent args)
