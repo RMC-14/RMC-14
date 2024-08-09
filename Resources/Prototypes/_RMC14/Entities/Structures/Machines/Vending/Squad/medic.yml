@@ -256,8 +256,8 @@
       - id: RMCPouchShotgun
       - id: RMCPouchMedical
         recommended: true
-      #- id: RMCPouchMedkit
-#        recommended: true
+      - id: RMCPouchMedkit
+        recommended: true
       #- id: CMPressurizedReagentCanisterPouchBicaridine
 #        recommended: true
       #- id: CMPressurizedReagentCanisterPouchKelotane

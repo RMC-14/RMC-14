@@ -400,7 +400,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/medkit.rsi
-  - type: Storage # TODO RMC14 medical skill 2 only
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+  - type: Storage
     grid:
     - 0,0,13,1 #7 slots
     whitelist:
