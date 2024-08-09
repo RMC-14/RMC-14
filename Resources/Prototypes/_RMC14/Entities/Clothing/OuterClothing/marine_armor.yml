@@ -237,10 +237,11 @@
   - type: GhillieSuit
     addComponentsOnEnable:
     - type: RMCPassiveStealth
-      toggleable: false
+      toggleable: true
       minOpacity: 0.05
       delay: 5.0
-    - type: EntityIFFComponent
+      enabled: true
+    - type: EntityIFF
     addComponentsOnDisable:
     - type: RMCNightVisionVisible
     whitelist:
