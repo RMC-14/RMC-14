@@ -32,7 +32,7 @@
     edges:
     - to: finish
       steps:
-      - material: Cable
+      - material: RMCCable
         amount: 2
         doAfter: 2
 

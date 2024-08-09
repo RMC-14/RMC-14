@@ -15,6 +15,9 @@
   - type: Item
     size: Tiny
     sprite: _RMC14/Objects/Tools/screwdriver.rsi
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/screwdriver_pickup.ogg
 
 - type: entity
   parent: Wirecutter
@@ -33,6 +36,9 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Tools/wirecutters.rsi
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/wirecutter_pickup.ogg
 
 - type: entity
   parent: Wrench
@@ -48,6 +54,9 @@
     storedSprite:
       sprite: _RMC14/Objects/Tools/wrench.rsi
       state: icon
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/wrench_pickup.ogg
 
 - type: entity
   parent: Multitool
@@ -63,6 +72,9 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Tools/multitool.rsi
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/multitool_pickup.ogg
 
 - type: entity
   parent: Crowbar
@@ -77,6 +89,9 @@
     storedSprite:
       sprite: _RMC14/Objects/Tools/crowbar.rsi
       state: icon
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/crowbar_pickup.ogg
 
 - type: entity
   parent: CMCrowbar

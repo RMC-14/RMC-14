@@ -14,7 +14,8 @@ public readonly record struct Squad(EntProtoId Id, bool Exists, int Members);
 public readonly record struct Xeno(EntProtoId Proto);
 
 [Serializable, NetSerializable]
-public sealed class RMCAdminEuiState(
+[Virtual]
+public class RMCAdminEuiState(
     List<Hive> hives,
     List<Squad> squads,
     List<Xeno> xenos,
@@ -27,6 +28,59 @@ public sealed class RMCAdminEuiState(
     public readonly List<Xeno> Xenos = xenos;
     public readonly int Marines = marines;
     public readonly Dictionary<string, float> MarinesPerXeno = marinesPerXeno;
+}
+
+[Serializable, NetSerializable]
+public sealed class RMCAdminEuiTargetState(
+    List<Hive> hives,
+    List<Squad> squads,
+    List<Xeno> xenos,
+    int marines,
+    Dictionary<string, float> marinesPerXeno,
+    List<(string Name, bool Present)> specialistSkills,
+    int points,
+    Dictionary<string, int> extraPoints
+) : RMCAdminEuiState(hives, squads, xenos, marines, marinesPerXeno)
+{
+    public readonly List<(string Name, bool Present)> SpecialistSkills = specialistSkills;
+    public readonly int Points = points;
+    public readonly Dictionary<string, int> ExtraPoints = extraPoints;
+}
+
+[Serializable, NetSerializable]
+public sealed class RMCAdminSetVendorPointsMsg(int points) : EuiMessageBase
+{
+    public readonly int Points = points;
+}
+
+[Serializable, NetSerializable]
+public sealed class RMCAdminSetSpecialistVendorPointsMsg(int points) : EuiMessageBase
+{
+    public readonly int Points = points;
+}
+
+[Serializable, NetSerializable]
+public sealed class RMCAdminAddSpecSkillMsg(string component) : EuiMessageBase
+{
+    public readonly string Component = component;
+}
+
+[Serializable, NetSerializable]
+public sealed class RMCAdminRemoveSpecSkillMsg(string component) : EuiMessageBase
+{
+    public readonly string Component = component;
+}
+
+[Serializable, NetSerializable]
+public sealed class RMCAdminCreateSquadMsg(EntProtoId squadId) : EuiMessageBase
+{
+    public readonly EntProtoId SquadId = squadId;
+}
+
+[Serializable, NetSerializable]
+public sealed class RMCAdminAddToSquadMsg(EntProtoId squadId) : EuiMessageBase
+{
+    public readonly EntProtoId SquadId = squadId;
 }
 
 [Serializable, NetSerializable]
@@ -51,18 +105,6 @@ public sealed class RMCAdminTransformHumanoidMsg(string speciesId) : EuiMessageB
 public sealed class RMCAdminTransformXenoMsg(EntProtoId xenoId) : EuiMessageBase
 {
     public readonly EntProtoId XenoId = xenoId;
-}
-
-[Serializable, NetSerializable]
-public sealed class RMCAdminCreateSquadMsg(EntProtoId squadId) : EuiMessageBase
-{
-    public readonly EntProtoId SquadId = squadId;
-}
-
-[Serializable, NetSerializable]
-public sealed class RMCAdminAddToSquadMsg(EntProtoId squadId) : EuiMessageBase
-{
-    public readonly EntProtoId SquadId = squadId;
 }
 
 [Serializable, NetSerializable]

@@ -66,3 +66,43 @@
   components:
   - type: Foldable
     folded: true
+
+- type: entity
+  parent: CMBodyBag
+  id: RMCThermalTarp # TODO RMC14 This needs to halt infected timers or something
+  name: V3 reactive thermal tarp
+  description: A more compact and improved version of the V2 thermal tarp, intended primarily for the transportation of deceased or wounded marines. It has improved cloaking technology than earlier models, allowing it to cloak to a greater degree and faster, but can only be used with special training.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/bodybags.rsi
+    layers:
+    - state: scouttarp_closed
+      map: ["unfoldedLayer", "enum.StorageVisualLayers.Base"]
+    - state: scouttarp_folded
+      map: ["foldedLayer"]
+      visible: false
+    - state: scouttarp_open
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: paper
+      sprite: _RMC14/Objects/Medical/bodybags.rsi
+      map: ["enum.PaperLabelVisuals.Layer"]
+  - type: Icon
+    sprite: _RMC14/Objects/Medical/bodybags.rsi
+    state: scouttarp_closed
+  - type: RMCPassiveStealth
+    toggleable: true
+    minOpacity: 0.05
+    delay: 1.5
+    whitelist:
+      components:
+      - ScoutWhitelist
+  - type: EntityStorageVisuals
+    stateDoorOpen: scouttarp_open
+
+- type: entity
+  parent: RMCThermalTarp
+  id: RMCThermalTarpFolded
+  suffix: folded
+  components:
+  - type: Foldable
+    folded: true

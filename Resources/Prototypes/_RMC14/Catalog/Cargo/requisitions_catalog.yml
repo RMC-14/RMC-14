@@ -44,6 +44,11 @@
         crate: RMCCrateMagazineSmartGun
       - cost: 4000
         crate: RMCCrateBoxMagazineSmartPistol
+      - cost: 2000
+        crate: RMCCrateBoxMagazineM44Revolver
+      - cost: 3000
+        crate: RMCCrateBoxMagazineM44RevolverMarksman
+
     - name: Attachments
       entries:
       - cost: 3000
@@ -222,3 +227,12 @@
         crate: RMCCrateM5DemoSpecAntiArmor
 #      - cost: 3000
 #        crate: RMCCrateM5DemoSpecWhitePhosphorous
+      - cost: 4000
+        crate: RMCCrateMagazineM4SPRCustomMixed
+      - cost: 3000
+        crate: RMCCrateMagazineM4SPRCustomStandard
+#      - cost: 3000 These ones are straight downgrades and thus shouldn't be for sale
+#        crate: RMCCrateMagazineM4SPRCustomImpact
+#      - cost: 3000
+#        crate: CMCrateMagazineM4SPRCustomIncendiary
+#      - cost: 4000

@@ -1,4 +1,5 @@
 # Glass
+
 - type: material
   id: CMGlass
   stackEntity: CMSheetGlass
@@ -7,13 +8,12 @@
   color: "#a8ccd7"
   price: 0.075
 
-- type: material
-  id: CMReinforcedGlass
-  stackEntity: CMSheetGlassReinforced
-  name: materials-reinforced-glass
-  icon: { sprite: _RMC14/Objects/Materials/Sheets/reinf_glass.rsi, state: rglass }
-  color: "#549bb0"
-  price: 0.16
+- type: stack
+  id: CMGlass
+  name: glass
+  icon: { sprite: /Textures/_RMC14/Objects/Materials/Sheets/glass.rsi, state: glass }
+  spawn: CMSheetGlass
+  maxCount: 50
 
 - type: entity
   parent: SheetGlassBase
@@ -65,7 +65,23 @@
     stackType: CMGlass
     count: 1
 
+
 # Glass Reinforced
+
+- type: material
+  id: CMReinforcedGlass
+  stackEntity: CMSheetGlassReinforced
+  name: materials-reinforced-glass
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/reinf_glass.rsi, state: rglass }
+  color: "#549bb0"
+  price: 0.16
+
+- type: stack
+  id: CMGlassReinforced
+  name: reinforced glass
+  icon: { sprite: /Textures/_RMC14/Objects/Materials/Sheets/reinf_glass.rsi, state: rglass }
+  spawn: CMSheetGlassReinforced
+  maxCount: 50
 
 - type: entity
   parent: CMSheetGlassBase
@@ -109,7 +125,23 @@
     stackType: CMGlassReinforced
     count: 1
 
+
 # Phoron glass
+
+- type: material
+  id: CMPhoronGlass
+  stackEntity: CMSheetGlassPhoron
+  name: materials-phoron-glass
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/phoron_glass.rsi, state: phoronglass }
+  color: "#b35989"
+  price: 0.30
+
+- type: stack
+  id: CMGlassPhoron
+  name: phoron glass
+  icon: { sprite: /Textures/_RMC14/Objects/Materials/Sheets/phoron_glass.rsi, state: phoronglass }
+  spawn: CMSheetGlassPhoron
+  maxCount: 50
 
 - type: entity
   parent: CMSheetGlassBase
@@ -150,7 +182,23 @@
     stackType: CMGlassPhoron
     count: 1
 
+
 # Phoron Reinforced Glass
+
+- type: material
+  id: CMPhoronGlassReinforced
+  stackEntity: CMSheetGlassPhoronReinforced
+  name: materials-reinforced-phoron-glass
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/phoron_reinf_glass.rsi, state: phoronrglass }
+  color: "#8c4069"
+  price: 0.40
+
+- type: stack
+  id: CMGlassPhoronReinforced
+  name: reinforced phoron glass
+  icon: { sprite: /Textures/_RMC14/Objects/Materials/Sheets/phoron_reinf_glass.rsi, state: phoronrglass }
+  spawn: CMSheetGlassPhoronReinforced
+  maxCount: 50
 
 - type: entity
   parent: CMSheetGlassBase

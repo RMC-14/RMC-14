@@ -1,0 +1,10 @@
+- type: entity
+  abstract: true
+  parent: ClothingUniformBase
+  id: RMCUniformBase
+  components:
+  - type: Clothing
+    equipSound:
+      path: /Audio/_RMC14/Handling/clothing_on.ogg
+    unequipSound:
+      path: /Audio/_RMC14/Handling/clothing_off.ogg

@@ -2,10 +2,12 @@
 using Content.Client.Eui;
 using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Eui;
 using Content.Shared.Humanoid.Prototypes;
 using JetBrains.Annotations;
+using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 using static Robust.Client.UserInterface.Controls.ItemList;
@@ -27,6 +29,7 @@ public sealed class RMCAdminEui : BaseEui
 
     private RMCAdminWindow _adminWindow = default!;
     private RMCCreateHiveWindow? _createHiveWindow;
+    private bool _isFirstState = true;
 
     public override void Opened()
     {
@@ -88,6 +91,12 @@ public sealed class RMCAdminEui : BaseEui
             _adminWindow.TransformTab.Container.AddChild(row);
         }
 
+        _adminWindow.MarineTab.PointsSpinBox.ValueChanged +=
+            args => SendMessage(new RMCAdminSetVendorPointsMsg(args.Value));
+
+        _adminWindow.MarineTab.SpecialistPointsSpinBox.ValueChanged +=
+            args => SendMessage(new RMCAdminSetSpecialistVendorPointsMsg(args.Value));
+
         _adminWindow.OpenCentered();
     }
 
@@ -128,7 +137,7 @@ public sealed class RMCAdminEui : BaseEui
 
     public override void HandleState(EuiStateBase state)
     {
-        if (state is not RMCAdminEuiState s)
+        if (state is not RMCAdminEuiTargetState s)
             return;
 
         _adminWindow.XenoTab.HiveList.Clear();
@@ -138,11 +147,42 @@ public sealed class RMCAdminEui : BaseEui
             list.Add(new Item(list)
             {
                 Text = hive.Name,
-                Metadata = hive
+                Metadata = hive,
             });
         }
 
-        _adminWindow.SquadsTab.Squads.DisposeAllChildren();
+        _adminWindow.MarineTab.SpecialistSkills.DisposeAllChildren();
+        foreach (var comp in s.SpecialistSkills)
+        {
+            var specButton = new Button
+            {
+                Text = comp.Name,
+                ToggleMode = true,
+                StyleClasses = { "OpenBoth" },
+            };
+
+            specButton.Pressed = comp.Present;
+            specButton.OnPressed += args =>
+            {
+                if (args.Button.Pressed)
+                    SendMessage(new RMCAdminAddSpecSkillMsg(comp.Name));
+                else
+                    SendMessage(new RMCAdminRemoveSpecSkillMsg(comp.Name));
+            };
+
+            _adminWindow.MarineTab.SpecialistSkills.AddChild(specButton);
+        }
+
+        // TODO RMC14 if we don't do this the value jitters a lot, would be better to refresh on unfocus but i aint got time for that
+        if (_isFirstState)
+        {
+            _adminWindow.MarineTab.PointsSpinBox.OverrideValue(s.Points);
+
+            var specialistPoints = s.ExtraPoints.GetValueOrDefault(SharedCMAutomatedVendorSystem.SpecialistPoints);
+            _adminWindow.MarineTab.SpecialistPointsSpinBox.OverrideValue(specialistPoints);
+        }
+
+        _adminWindow.MarineTab.Squads.DisposeAllChildren();
         foreach (var squad in s.Squads)
         {
             var squadRow = new RMCSquadRow()
@@ -171,8 +211,10 @@ public sealed class RMCAdminEui : BaseEui
                 color
             );
 
-            _adminWindow.SquadsTab.Squads.AddChild(squadRow);
+            _adminWindow.MarineTab.Squads.AddChild(squadRow);
         }
+
+        _isFirstState = false;
     }
 
     public override void Closed()

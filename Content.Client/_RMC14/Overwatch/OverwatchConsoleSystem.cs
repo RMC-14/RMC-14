@@ -12,13 +12,20 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
 
     private void OnOverwatchAfterState(Entity<OverwatchConsoleComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        if (!TryComp(ent, out UserInterfaceComponent? ui))
-            return;
-
-        foreach (var bui in ui.ClientOpenInterfaces.Values)
+        try
         {
-            if (bui is OverwatchConsoleBui overwatchUi)
-                overwatchUi.Refresh();
+            if (!TryComp(ent, out UserInterfaceComponent? ui))
+                return;
+
+            foreach (var bui in ui.ClientOpenInterfaces.Values)
+            {
+                if (bui is OverwatchConsoleBui overwatchUi)
+                    overwatchUi.Refresh();
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error refreshing {nameof(OverwatchConsoleBui)}\n{e}");
         }
     }
 }
