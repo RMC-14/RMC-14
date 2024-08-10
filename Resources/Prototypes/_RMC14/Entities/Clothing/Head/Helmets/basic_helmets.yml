@@ -1,4 +1,4 @@
-﻿# riot
+# riot
 - type: entity
   parent: ClothingHeadBase
   id: ArmorHelmetRiot
@@ -13,9 +13,6 @@
     armor: 20 # 30 melee, 10 bullet
     explosionArmor: 0
   - type: CMHardArmor
-  - type: HideLayerClothing
-    slots:
-    - HeadTop
 
 - type: entity
   parent: ArmorHelmetRiot
