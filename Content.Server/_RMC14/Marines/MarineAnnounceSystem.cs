@@ -224,15 +224,16 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     public override void AnnounceARES(
         EntityUid? source,
         string message,
-        SoundSpecifier? sound = null
+        SoundSpecifier? sound = null,
+        LocId? announcement = null
         )
     {
-        base.AnnounceARES(source, message, sound);
+        base.AnnounceARES(source, message, sound, announcement);
 
+        announcement ??= "rmc-announcement-ares-message";
+        message = Loc.GetString(announcement, ("message", FormattedMessage.EscapeText(message)));
 
-        message = Loc.GetString("rmc-announcement-ares-message", ("message", FormattedMessage.EscapeText(message)));
-
-        AnnounceToMarines(message);
+        AnnounceToMarines(message, sound);
         _adminLogs.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(source):player} ARES announced message: {message}");
     }
 }

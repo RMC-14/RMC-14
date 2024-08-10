@@ -28,4 +28,14 @@ public sealed class AreaSystem : EntitySystem
         area = default;
         return false;
     }
+
+    public bool BioscanBlocked(EntityUid coordinates, out Entity<AreaComponent>? area)
+    {
+        area = null;
+        if (!TryGetArea(coordinates, out var coordinatesArea))
+            return false;
+
+        area = coordinatesArea;
+        return coordinatesArea.Comp.AvoidBioscan;
+    }
 }

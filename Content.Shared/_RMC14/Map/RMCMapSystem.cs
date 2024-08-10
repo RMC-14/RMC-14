@@ -27,19 +27,7 @@ public sealed class RMCMapSystem : EntitySystem
 
     public RMCAnchoredEntitiesEnumerator GetAnchoredEntitiesEnumerator(EntityUid ent, Direction? offset = null, DirectionFlag facing = DirectionFlag.None)
     {
-        if (_transform.GetGrid(ent) is not { } gridId ||
-            !_mapGridQuery.TryComp(gridId, out var gridComp))
-        {
-            return RMCAnchoredEntitiesEnumerator.Empty;
-        }
-
-        var coords = ent.ToCoordinates();
-        if (offset != null)
-            coords = coords.Offset(offset.Value);
-
-        var indices = _map.CoordinatesToTile(gridId, gridComp, coords);
-        var anchored = _map.GetAnchoredEntitiesEnumerator(gridId, gridComp, indices);
-        return new RMCAnchoredEntitiesEnumerator(_transform, anchored, facing);
+        return GetAnchoredEntitiesEnumerator(ent.ToCoordinates(), offset, facing);
     }
 
     public RMCAnchoredEntitiesEnumerator GetAnchoredEntitiesEnumerator(EntityCoordinates coords, Direction? offset = null, DirectionFlag facing = DirectionFlag.None)

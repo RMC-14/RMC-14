@@ -17,6 +17,7 @@ using Content.Server.Spawners.Components;
 using Content.Server.Spawners.EntitySystems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared._RMC14.Bioscan;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
@@ -66,8 +67,8 @@ namespace Content.Server._RMC14.Rules;
 
 public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignalRuleComponent>
 {
-    [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
+    [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IBanManager _bans = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
@@ -126,8 +127,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private EntityQuery<CrashLandableComponent> _crashLandableQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
 
+    [ViewVariables]
     public string? SelectedPlanetMap { get; private set; }
+
+    [ViewVariables]
     public string? SelectedPlanetMapName { get; private set; }
+
+    [ViewVariables]
     public string? OperationName { get; private set; }
 
     public override void Initialize()
@@ -205,6 +211,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             }
 
             SpawnAdminFaxArea();
+
+            var bioscan = Spawn(null, MapCoordinates.Nullspace);
+            EnsureComp<BioscanComponent>(bioscan);
 
             var xenoSpawnPoints = new List<EntityUid>();
             var spawnQuery = AllEntityQuery<XenoSpawnPointComponent>();
@@ -1110,7 +1119,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private string SelectRandomPlanet()
     {
         if (SelectedPlanetMap != null)
-            return string.Empty;
+            return SelectedPlanetMap;
+
         SelectedPlanetMap = _random.Pick(_planetMaps.Split(","));
         SelectedPlanetMapName = SelectedPlanetMap.Replace("/Maps/_RMC14/", "").Replace(".yml", "");
 

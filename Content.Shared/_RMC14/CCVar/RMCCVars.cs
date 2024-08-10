@@ -125,4 +125,19 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<string> RMCAdminFaxAreaMap =
         CVarDef.Create("rmc.admin_fax_area_map", "Maps/_RMC14/admin_fax.yml", CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCBioscanInitialDelaySeconds =
+        CVarDef.Create("rmc.bioscan_initial_delay_seconds", 300, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCBioscanCheckDelaySeconds =
+        CVarDef.Create("rmc.bioscan_check_delay_seconds", 60, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCBioscanMinimumCooldownSeconds =
+        CVarDef.Create("rmc.bioscan_minimum_cooldown_seconds", 300, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCBioscanBaseCooldownSeconds =
+        CVarDef.Create("rmc.bioscan_base_cooldown_seconds", 1800, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCBioscanVariance =
+        CVarDef.Create("rmc.bioscan_variance", 2, CVar.REPLICATED | CVar.SERVER);
 }

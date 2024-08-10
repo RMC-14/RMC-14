@@ -1,4 +1,8 @@
-﻿command-description-vendorpoints-get = Gets the points that a marine has left to purchase items with at an automated vendor.
+﻿command-description-bioscan-marine = Manually triggers an ARES bioscan to announce to marines where xenos are and how many are left.
+command-description-bioscan-xeno = Manually triggers a Queen Mother bioscan to announce to xenos where marines are and how many are left.
+command-description-bioscan-all = Manually triggers an ARES and Queen Mother bioscans to announce to both xenos and marines where each other are and how many are left.
+
+command-description-vendorpoints-get = Gets the points that a marine has left to purchase items with at an automated vendor.
 command-description-vendorpoints-getspecialist = Gets the points that a Weapons Specialist has left to purchase items with at their gear rack.
 command-description-vendorpoints-set = Sets the points that a marine or group of marines have to purchase items with at an automated vendor.
 command-description-vendorpoints-setspecialist = Sets the points that a Weapons Specialist or group of Weapons Specialists have to purchase items with at their gear rack.
