@@ -133,7 +133,7 @@
   - type: ItemSlots
     slots:
       pouch:
-        name: Pouch
+        name: Combat toolbelt holster
 #        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
 #        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
         whitelist:
@@ -344,7 +344,6 @@
     - 0,0,13,1 # 7 slots
     whitelist:
       tags:
-      - RMCSmartPistol
       - RMCMagazinePistolSU6
   - type: FixedItemSizeStorage
   - type: Tag
@@ -361,7 +360,7 @@
 #        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
         whitelist:
           tags:
-          - Sidearm
+          - RMCSmartPistol
 #          - FlareGun
   - type: CMHolster
   - type: CMItemSlots
