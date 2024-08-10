@@ -5,8 +5,6 @@
   name: Urist C.M McFluff
   suffix: RMC14
   components:
-  - type: Bloodstream
-    bloodReagent: RMCInsectBlood
   - type: HumanoidAppearance
     species: Moth
     hideLayersOnEquip:
