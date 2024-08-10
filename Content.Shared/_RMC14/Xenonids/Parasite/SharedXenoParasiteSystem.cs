@@ -321,21 +321,22 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         if (!CanInfectPopup(parasite, victim, parasite, popup, force))
             return false;
 
-        if (_inventory.TryGetContainerSlotEnumerator(victim, out var slots, SlotFlags.MASK))
+        if (_inventory.TryGetContainerSlotEnumerator(victim, out var maskSlots, SlotFlags.MASK))
         {
-            EntityUid? maskEntity = null;
-
-            while (slots.MoveNext(out var slot))
+            while (maskSlots.MoveNext(out var mask))
             {
-                if (slot.ContainedEntity != null)
-                {
-                    _inventory.TryUnequip(victim, victim, slot.ID, force: true);
-                    maskEntity = slot.ContainedEntity.Value;
-                }
+                if (mask.ContainedEntity != null)
+                    TryRipOffClothing(victim, mask.ContainedEntity.Value, mask.ID);
             }
+        }
 
-            if (_net.IsServer && maskEntity != null)
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-infect-success-mask", ("target", victim), ("mask", maskEntity)), victim);
+        if (_inventory.TryGetContainerSlotEnumerator(victim, out var headSlots, SlotFlags.HEAD))
+        {
+            while (headSlots.MoveNext(out var head))
+            {
+                if (head.ContainedEntity != null)
+                    TryRipOffClothing(victim, head.ContainedEntity.Value, head.ID);
+            }
         }
 
         if (_net.IsServer &&
@@ -451,7 +452,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 {
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon-self"), uid, uid, PopupType.MediumCaution);
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon", ("victim", uid)), uid, Filter.PvsExcept(uid), true, PopupType.MediumCaution);
-                    
+
                     var knockdownTime = infected.BaseKnockdownTime * 75;
                     _jitter.DoJitter(uid, knockdownTime, false);
                     _stun.TryParalyze(uid, knockdownTime, false);
@@ -559,5 +560,18 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes-self"), victim, victim, PopupType.MediumCaution);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.MediumCaution);
         _damage.TryChangeDamage(victim, infected.InfectionDamage, true, false);
+    }
+
+    /// <summary>
+    ///     Tries to rip off an entity's clothing item.
+    ///     TODO: Parasite resistance
+    /// </summary>
+    private void TryRipOffClothing(EntityUid victim, EntityUid clothing, string slotID)
+    {
+        var popupMessage = Loc.GetString("rmc-xeno-infect-success", ("target", victim), ("clothing", clothing));
+        _inventory.TryUnequip(victim, victim, slotID, force: true);
+
+        if (_net.IsServer)
+            _popup.PopupEntity(popupMessage, victim);
     }
 }
