@@ -112,7 +112,7 @@
       - CableCoil
       - Multitool
       - Flashlight
-      - Sidearm
+#      - Sidearm
       - CMMagazinePistol
       - RMCMagazineRevolver
       - PowerCell
@@ -127,6 +127,21 @@
       - LightReplacer
       - EntrenchingTool
   - type: FixedItemSizeStorage
+  - type: ContainerContainer
+    containers:
+      pouch: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      pouch:
+        name: Pouch
+#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
+#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        whitelist:
+          tags:
+          - Sidearm
+#          - FlareGun
+  - type: CMHolster
+  - type: CMItemSlots
 
 - type: entity
   parent: CMBeltBase
@@ -335,3 +350,18 @@
   - type: Tag
     tags:
     - RMCSmartPistolHolster
+  - type: ContainerContainer
+    containers:
+      pouch: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      pouch:
+        name: Smart pistol holster
+#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
+#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        whitelist:
+          tags:
+          - Sidearm
+#          - FlareGun
+  - type: CMHolster
+  - type: CMItemSlots
