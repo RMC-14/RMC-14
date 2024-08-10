@@ -1,5 +1,6 @@
 ﻿using Content.Shared.Actions;
 using Content.Shared.Alert;
+using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Rounding;
 using Content.Shared.Toggleable;
@@ -13,6 +14,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
 
     public override void Initialize()
     {
@@ -58,6 +60,11 @@ public abstract class SharedNightVisionSystem : EntitySystem
         if (args.InHands || !ent.Comp.Toggleable)
             return;
 
+        // Item not in a position for being able to affect vision
+        if (!(_inventory.InSlotWithFlags((ent,null,null), SlotFlags.MASK) ||
+                _inventory.InSlotWithFlags((ent,null,null), SlotFlags.EYES)))
+            return;
+
         args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId);
     }
 
@@ -77,6 +84,10 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
     private void OnNightVisionItemGotUnequipped(Entity<NightVisionItemComponent> ent, ref GotUnequippedEvent args)
     {
+        // Item was not in an activatable slot
+        if ((args.SlotFlags != SlotFlags.MASK) && (args.SlotFlags != SlotFlags.EYES))
+            return;
+
         DisableNightVisionItem(ent, args.Equipee);
     }
 
@@ -138,6 +149,11 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
     private void EnableNightVisionItem(Entity<NightVisionItemComponent> item, EntityUid user)
     {
+        // Check if item is in an activatable position
+        if (!(_inventory.InSlotWithFlags((item,null,null), SlotFlags.MASK) ||
+            _inventory.InSlotWithFlags((item,null,null), SlotFlags.EYES)))
+            return;
+
         DisableNightVisionItem(item, item.Comp.User);
 
         item.Comp.User = user;
