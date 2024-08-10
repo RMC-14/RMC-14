@@ -83,7 +83,6 @@
       sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
       state: sql-helmet
 
-
 - type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10MP
