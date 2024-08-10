@@ -7,9 +7,6 @@
   components:
   - type: HumanoidAppearance
     species: Moth
-    hideLayersOnEquip:
-    - Snout
-    - HeadTop
   - type: ZombieAccentOverride
     accent: zombieMoth
   - type: Speech
