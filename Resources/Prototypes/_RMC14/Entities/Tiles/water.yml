@@ -61,5 +61,5 @@
     layers:
     - state: seadeep
   - type: SpeedModifierContacts
-    walkSpeedModifier: 0.125
-    sprintSpeedModifier: 0.125
+    walkSpeedModifier: 0.25
+    sprintSpeedModifier: 0.25
