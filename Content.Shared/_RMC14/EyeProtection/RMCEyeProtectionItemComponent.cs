@@ -36,7 +36,7 @@ public sealed partial class RMCEyeProtectionItemComponent : Component
     ///  Is welding protection enabled?
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), DataField("toggled"), AutoNetworkedField]
-    public bool Toggled = true;
+    public bool Toggled = false;
 
     /// <summary>
     /// Equipped prefix for raised form

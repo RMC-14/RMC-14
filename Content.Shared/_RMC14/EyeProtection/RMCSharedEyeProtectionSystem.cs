@@ -134,7 +134,12 @@ namespace Content.Shared._RMC14.EyeProtection
 
         private void OnEyeProtectionItemGotEquipped(Entity<RMCEyeProtectionItemComponent> ent, ref GotEquippedEvent args)
         {
-            EnableEyeProtectionItem(ent, args.Equipee);
+            if (!TryComp<ClothingComponent>(ent.Owner, out var clothingComp))
+                return;
+
+            // Display correct sprite, if applicable
+            if (ent.Comp.RaisedEquippedPrefix != null)
+                _clothingSystem.SetEquippedPrefix(ent.Owner, ent.Comp.RaisedEquippedPrefix, clothingComp);
         }
 
         private void OnEyeProtectionItemGotUnequipped(Entity<RMCEyeProtectionItemComponent> ent, ref GotUnequippedEvent args)
@@ -174,7 +179,9 @@ namespace Content.Shared._RMC14.EyeProtection
 
             // Check if already enabled
             if (TryComp(user, out RMCEyeProtectionComponent? eyeProt))
-                return;
+            {
+                RemComp<RMCEyeProtectionComponent>(user);
+            }
 
             item.Comp.User = user;
             item.Comp.Toggled = true;
@@ -187,15 +194,15 @@ namespace Content.Shared._RMC14.EyeProtection
 
             _appearance.SetData(item, RMCEyeProtectionItemVisuals.Active, true);
 
+            _actions.SetToggled(item.Comp.Action, true);
+
             Dirty(item);
 
             if (!_timing.ApplyingState)
             {
-                eyeProt = EnsureComp<RMCEyeProtectionComponent>(user);
+                eyeProt = EnsureComp<RMCEyeProtectionComponent>(user); // This should happen as late as possible
                 Dirty(user, eyeProt);
             }
-
-            _actions.SetToggled(item.Comp.Action, true);
         }
 
         protected void DisableEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid? user)
@@ -204,25 +211,24 @@ namespace Content.Shared._RMC14.EyeProtection
                 !TryComp<ItemComponent>(item.Owner, out var itemComp))
                 return;
 
+            // Can't disable what isn't there
+            if (!TryComp(user, out RMCEyeProtectionComponent? eyeProt))
+                return;
+
             item.Comp.User = null;
             item.Comp.Toggled = false;
 
-            // Display correct sprite
+            // Display correct sprite, if applicable
             if (item.Comp.RaisedEquippedPrefix != null)
-            {
                 _clothingSystem.SetEquippedPrefix(item.Owner, item.Comp.RaisedEquippedPrefix, clothingComp);
-            }
 
             _appearance.SetData(item, RMCEyeProtectionItemVisuals.Active, false);
 
+            _actions.SetToggled(item.Comp.Action, false);
+
             Dirty(item);
 
-            if (TryComp(user, out RMCEyeProtectionComponent? eyeProt))
-            {
-                RemCompDeferred<RMCEyeProtectionComponent>(user.Value);
-            }
-
-            _actions.SetToggled(item.Comp.Action, false);
+            RemComp<RMCEyeProtectionComponent>(user.Value);
         }
 
         private void ToggleEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid user)
