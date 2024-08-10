@@ -27,7 +27,6 @@ namespace Content.Shared._RMC14.EyeProtection
         [Dependency] private readonly IGameTiming _timing = default!;
         [Dependency] private readonly ClothingSystem _clothingSystem = default!;
         [Dependency] private readonly InventorySystem _inventory = default!;
-        [Dependency] private readonly IEntityManager _entManager = default!;
 
         public override void Initialize()
         {
