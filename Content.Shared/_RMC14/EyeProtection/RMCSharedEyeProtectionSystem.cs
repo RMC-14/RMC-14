@@ -26,6 +26,7 @@ namespace Content.Shared._RMC14.EyeProtection
         [Dependency] private readonly AlertsSystem _alerts = default!;
         [Dependency] private readonly IGameTiming _timing = default!;
         [Dependency] private readonly ClothingSystem _clothingSystem = default!;
+        [Dependency] private readonly InventorySystem _inventory = default!;
         [Dependency] private readonly IEntityManager _entManager = default!;
 
         public override void Initialize()
@@ -113,7 +114,13 @@ namespace Content.Shared._RMC14.EyeProtection
             if (args.InHands || !ent.Comp.Toggleable)
                 return;
 
+            // Item not in a position for protecting eyes
+            if (!(_inventory.InSlotWithFlags((ent,null,null), SlotFlags.MASK) ||
+                    _inventory.InSlotWithFlags((ent,null,null), SlotFlags.EYES)))
+                return;
+
             args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId);
+            Dirty(ent);
         }
 
         private void OnEyeProtectionItemToggle(Entity<RMCEyeProtectionItemComponent> ent, ref ToggleActionEvent args)
@@ -132,6 +139,10 @@ namespace Content.Shared._RMC14.EyeProtection
 
         private void OnEyeProtectionItemGotUnequipped(Entity<RMCEyeProtectionItemComponent> ent, ref GotUnequippedEvent args)
         {
+            // Item was not in a position for protecting eyes
+            if ((args.SlotFlags != SlotFlags.MASK) && (args.SlotFlags != SlotFlags.EYES))
+                return;
+
             DisableEyeProtectionItem(ent, args.Equipee);
         }
 
@@ -179,24 +190,20 @@ namespace Content.Shared._RMC14.EyeProtection
             EyeProtectionChanged(ent);
         }
 
-        private void ToggleEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid user)
-        {
-            if (item.Comp.Toggled == true && item.Comp.Toggleable)
-            {
-                DisableEyeProtectionItem(item, item.Comp.User);
-                return;
-            }
-
-            EnableEyeProtectionItem(item, user);
-        }
-
         private void EnableEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid user)
         {
             if (!TryComp<ClothingComponent>(item.Owner, out var clothingComp) ||
                 !TryComp<ItemComponent>(item.Owner, out var itemComp))
                 return;
 
-            DisableEyeProtectionItem(item, item.Comp.User);
+            // Check if item not in a position for protecting eyes
+            if (!(_inventory.InSlotWithFlags((item,null,null), SlotFlags.MASK) ||
+                _inventory.InSlotWithFlags((item,null,null), SlotFlags.EYES)))
+                return;
+
+            // Check if already enabled
+            if (TryComp(user, out RMCEyeProtectionComponent? eyeProt))
+                return;
 
             item.Comp.User = user;
             item.Comp.Toggled = true;
@@ -209,9 +216,11 @@ namespace Content.Shared._RMC14.EyeProtection
 
             _appearance.SetData(item, RMCEyeProtectionItemVisuals.Active, true);
 
+            Dirty(item);
+
             if (!_timing.ApplyingState)
             {
-                var eyeProt = EnsureComp<RMCEyeProtectionComponent>(user);
+                eyeProt = EnsureComp<RMCEyeProtectionComponent>(user);
                 eyeProt.State = EyeProtectionState.On;
                 Dirty(user, eyeProt);
             }
@@ -219,21 +228,11 @@ namespace Content.Shared._RMC14.EyeProtection
             _actions.SetToggled(item.Comp.Action, true);
         }
 
-        protected virtual void EyeProtectionChanged(Entity<RMCEyeProtectionComponent> ent)
-        {
-        }
-
-        protected virtual void EyeProtectionRemoved(Entity<RMCEyeProtectionComponent> ent)
-        {
-        }
-
         protected void DisableEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid? user)
         {
             if (!TryComp<ClothingComponent>(item.Owner, out var clothingComp) ||
                 !TryComp<ItemComponent>(item.Owner, out var itemComp))
                 return;
-
-            _actions.SetToggled(item.Comp.Action, false);
 
             item.Comp.User = null;
             item.Comp.Toggled = false;
@@ -243,15 +242,35 @@ namespace Content.Shared._RMC14.EyeProtection
             {
                 _clothingSystem.SetEquippedPrefix(item.Owner, item.Comp.RaisedEquippedPrefix, clothingComp);
             }
-            Dirty(item);
 
             _appearance.SetData(item, RMCEyeProtectionItemVisuals.Active, false);
+
+            Dirty(item);
 
             if (TryComp(user, out RMCEyeProtectionComponent? eyeProt))
             {
                 RemCompDeferred<RMCEyeProtectionComponent>(user.Value);
             }
 
+            _actions.SetToggled(item.Comp.Action, false);
         }
+
+        private void ToggleEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid user)
+        {
+            if (!item.Comp.Toggleable)
+                return;
+
+            if (item.Comp.Toggled)
+                DisableEyeProtectionItem(item, item.Comp.User);
+            else
+                EnableEyeProtectionItem(item, user);
+
+            return;
+        }
+
+        protected virtual void EyeProtectionChanged(Entity<RMCEyeProtectionComponent> ent) { }
+
+        protected virtual void EyeProtectionRemoved(Entity<RMCEyeProtectionComponent> ent) { }
+
     }
 }
