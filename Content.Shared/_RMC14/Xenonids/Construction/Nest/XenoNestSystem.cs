@@ -95,7 +95,6 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestedComponent, IsEquippingAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, IsUnequippingAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, GetInfectedIncubationMultiplierEvent>(OnInNestGetInfectedIncubationMultiplier);
-        SubscribeLocalEvent<XenoNestedComponent, ComponentStartup>(OnNestedAdd);
 
         Subs.BuiEvents<XenoNestableComponent>(XenoRemoveNestedUI.Key, subs =>
         {
