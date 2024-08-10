@@ -7,6 +7,8 @@
   components:
   - type: HumanoidAppearance
     species: Diona
+    hideLayersOnEquip:
+    - HeadTop
   - type: Icon
     sprite: Mobs/Species/Diona/parts.rsi
     state: full

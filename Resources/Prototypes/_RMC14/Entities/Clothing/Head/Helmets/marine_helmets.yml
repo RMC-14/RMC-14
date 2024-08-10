@@ -5,6 +5,17 @@
   name: M10 pattern marine helmet
   description: A standard M10 Pattern Helmet. The inside label, along with washing information, reads, 'The difference between an open-casket and closed-casket funeral. Wear on head for best results.'. There is a built-in camera on the right side.
   components:
+  - type: Foldable
+    unfoldVerbText : "rmc-untuck"
+    foldVerbText: "rmc-tuck"
+    canFoldInsideContainer: true
+  - type: FoldableClothing
+    foldedHideLayers:
+    - Hair
+    - HeadTop
+    - HeadSide
+    unfoldedHideLayers: []
+  - type: HideLayerClothing
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/standard.rsi
   - type: Clothing
@@ -71,6 +82,7 @@
     leaderRsi:
       sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
       state: sql-helmet
+
 
 - type: entity
   parent: ArmorHelmetM10
