@@ -21,7 +21,7 @@ public sealed partial class RMCEyeProtectionItemComponent : Component
     ///  Action ID for toggling welding protection
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntProtoId ActionId = "CMActionToggleEyeProtection";
+    public EntProtoId ActionId = "RMCActionToggleEyeProtection";
 
     [DataField, AutoNetworkedField]
     public EntityUid? Action;

@@ -41,7 +41,7 @@
 
 - type: entity
   parent: ActionMarineBase
-  id: CMActionToggleEyeProtection
+  id: RMCActionToggleEyeProtection
   name: Toggle welding protection
   description: Lower/raise welding protection.
   components:
