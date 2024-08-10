@@ -1,0 +1,15 @@
+- type: guideEntry
+  parent: RMC
+  id: CMMarineLaw
+  name: cm-guide-entry-rules-marine-law
+  text: "/ServerInfo/Guidebook/_RMC14/Law/CMMarineLaw.xml"
+  priority: 3
+  children:
+  - CMMarineLawDefinitions
+
+- type: guideEntry
+  parent: RMC
+  id: CMMarineLawDefinitions
+  name: rmc-guide-entry-marine-law-Definitions
+  text: "/ServerInfo/Guidebook/_RMC14/Law/CMMarineLawDefinitions.xml"
+  priority: 0
