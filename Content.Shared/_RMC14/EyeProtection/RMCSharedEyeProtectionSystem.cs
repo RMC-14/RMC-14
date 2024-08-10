@@ -161,35 +161,6 @@ namespace Content.Shared._RMC14.EyeProtection
             DisableEyeProtectionItem(ent, ent.Comp.User);
         }
 
-        public void Toggle(Entity<RMCEyeProtectionComponent?> ent)
-        {
-            if (!Resolve(ent, ref ent.Comp))
-                return;
-
-            ent.Comp.State = ent.Comp.State switch
-            {
-                EyeProtectionState.Off => EyeProtectionState.On,
-                EyeProtectionState.On => EyeProtectionState.Off,
-                _ => throw new ArgumentOutOfRangeException()
-            };
-
-            Dirty(ent);
-            UpdateAlert((ent, ent.Comp));
-        }
-
-        private void UpdateAlert(Entity<RMCEyeProtectionComponent> ent)
-        {
-            if (ent.Comp.Alert is { } alert)
-            {
-                var level = MathF.Max((int) EyeProtectionState.Off, (int) ent.Comp.State);
-                var max = _alerts.GetMaxSeverity(alert);
-                var severity = max - ContentHelpers.RoundToLevels(level, (int) EyeProtectionState.On, max + 1);
-                _alerts.ShowAlert(ent, alert, (short) severity);
-            }
-
-            EyeProtectionChanged(ent);
-        }
-
         private void EnableEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid user)
         {
             if (!TryComp<ClothingComponent>(item.Owner, out var clothingComp) ||
@@ -221,7 +192,6 @@ namespace Content.Shared._RMC14.EyeProtection
             if (!_timing.ApplyingState)
             {
                 eyeProt = EnsureComp<RMCEyeProtectionComponent>(user);
-                eyeProt.State = EyeProtectionState.On;
                 Dirty(user, eyeProt);
             }
 

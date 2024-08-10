@@ -15,19 +15,6 @@ public sealed partial class RMCEyeProtectionComponent : Component
     [DataField]
     public ProtoId<AlertPrototype>? Alert;
 
-    /// <summary>
-    ///     Is eye protection enabled?
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public EyeProtectionState State = EyeProtectionState.On;
-
     [DataField, AutoNetworkedField]
     public bool Overlay;
-}
-
-[Serializable, NetSerializable]
-public enum EyeProtectionState
-{
-    Off,
-    On
 }

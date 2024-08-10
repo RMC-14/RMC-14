@@ -41,9 +41,7 @@ public sealed class RMCEyeProtectionOverlay : Overlay
         if (!_entityManager.TryGetComponent<RMCEyeProtectionComponent>(playerEntity, out var eyeProtComp))
             return false;
 
-        _eyeProtComponent = eyeProtComp;
-
-        return (_eyeProtComponent.State == EyeProtectionState.On);
+        return true;
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -56,8 +54,7 @@ public sealed class RMCEyeProtectionOverlay : Overlay
         if (playerEntity == null)
             return;
 
-        if (!_entityManager.TryGetComponent(_playerManager.LocalEntity, out RMCEyeProtectionComponent? eyeProt) ||
-            eyeProt.State == EyeProtectionState.Off)
+        if (!_entityManager.TryGetComponent(_playerManager.LocalEntity, out RMCEyeProtectionComponent? eyeProt))
         {
             return;
         }
