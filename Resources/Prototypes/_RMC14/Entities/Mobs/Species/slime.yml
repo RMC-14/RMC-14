@@ -5,8 +5,6 @@
   name: Urist C.M McSlime
   suffix: RMC14
   components:
-  - type: Bloodstream
-    bloodReagent: RMCSlimeBlood
   - type: HumanoidAppearance
     species: SlimePerson
   - type: Icon
