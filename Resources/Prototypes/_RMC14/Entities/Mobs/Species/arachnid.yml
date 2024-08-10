@@ -27,6 +27,10 @@
       Unsexed: UnisexArachnid
   - type: TypingIndicator
     proto: spider
+  - type: MeleeWeapon
+    animation: WeaponArcBite
+    soundHit:
+      collection: AlienClaw
   - type: Sprite # I'd prefer if these maps were better. Insert map pun here.
     layers:
     - map: [ "enum.HumanoidVisualLayers.Chest" ]
