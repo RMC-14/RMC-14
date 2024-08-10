@@ -143,6 +143,10 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     private void OnSlotsActivateInWorld(Entity<CMItemSlotsComponent> ent, ref ActivateInWorldEvent args)
     {
+        // No quick unholstering belts
+        if (_inventory.InSlotWithFlags((ent,null,null), SlotFlags.BELT))
+            return;
+
         PickupSlot(args.User, ent);
     }
 
