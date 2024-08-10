@@ -1,4 +1,4 @@
-﻿using Content.Shared.Damage;
+using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
@@ -275,7 +275,9 @@ public sealed class BarricadeSystem : EntitySystem
         var ev = new EntrenchingToolDoAfterEvent(GetNetCoordinates(coordinates));
         var doAfter = new DoAfterArgs(EntityManager, user, tool.Comp.DigDelay, ev, tool, used: tool)
         {
-            BreakOnMove = true
+            BreakOnMove = true,
+            NeedHand = true,
+            BreakOnHandChange = true
         };
 
         _doAfter.TryStartDoAfter(doAfter);
