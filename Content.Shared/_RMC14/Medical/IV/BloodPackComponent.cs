@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
@@ -59,7 +59,7 @@ public sealed partial class BloodPackComponent : Component
 
     // TODO RMC-14 blood types
     [DataField, AutoNetworkedField]
-    public string[] TransferableReagents = ["Blood", "RMCCopperBlood", "RMCSlimeBlood", "RMCSapBlood", "RMCInsectBlood"];
+    public string[] TransferableReagents = ["Blood"];
 }
 
 [Serializable, NetSerializable]
