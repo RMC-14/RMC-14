@@ -3,7 +3,7 @@ using Robust.Shared.Physics.Events;
 
 namespace Content.Shared._RMC14.Buckle;
 
-public sealed class CMBuckleSystem : EntitySystem
+public sealed class RMCBuckleSystem : EntitySystem
 {
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
 

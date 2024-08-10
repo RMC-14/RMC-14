@@ -27,7 +27,7 @@
 - type: entity
   parent: JumpsuitMarine
   id: CMScrubsBlue
-  name: medical scrubs
+  name: blue medical scrubs
   description: They're made of a special fiber that provides minor protection against biohazards. These are in blue
   components:
   - type: Sprite
@@ -38,6 +38,7 @@
 - type: entity
   parent: CMScrubsBlue
   id: CMScrubsGreen
+  name: green medical scrubs
   description: It's made of a special fiber that provides minor protection against biohazards. This one is in dark green.
   components:
   - type: Sprite
@@ -48,12 +49,24 @@
 - type: entity
   parent: CMScrubsBlue
   id: CMScrubsPurple
-  description: 
+  name: purple medical scrubs
+  description: It's made of a special fiber that provides minor protection against biohazards. This one is in purple.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/purple.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/purple.rsi
+    
+- type: entity
+  parent: CMScrubsBlue
+  id: CMScrubsOrange
+  name: orange medical scrubs
+  description: It's made of a special fiber that provides minor protection against biohazards. This one is in dark orange.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/orange.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/orange.rsi
 
 - type: entity
   parent: CMScrubsBlue

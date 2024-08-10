@@ -589,3 +589,17 @@ CMPouchSling: RMCPouchSling
 
 # 2024-07-31
 CMGroundsideOperationsConsole: RMCGroundsideOperationsConsole
+
+# 2024-08-08
+ToolboxEmergency: RMCToolboxEmergency
+ToolboxEmergencyFilled: RMCToolboxEmergencyFilled
+ToolboxElectrical: RMCToolboxElectrical
+ToolboxElectricalFilled: RMCToolboxElectricalFilled
+ToolboxMechanical: RMCToolboxMechanical
+ToolboxMechanicalFilled: RMCToolboxMechanicalFilled
+Bucket: RMCBucket
+CMBucket: RMCBucket
+
+# 2024-08-09
+CMFogWall: RMCFogWall25
+CMFogWallShort: RMCFogWall15

@@ -51,3 +51,11 @@
   description: trait-southern-desc
   components:
   - type: SouthernAccent
+
+- type: trait
+  id: ScottishAccent
+  name: trait-scottish-accent-name
+  description: trait-scottish-accent-desc
+  components:
+  - type: ReplacementAccent
+    accent: dwarf
