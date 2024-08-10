@@ -63,9 +63,6 @@
       components:
       - Xeno
   - type: OverwatchCamera
-  - type: HideLayerClothing
-    slots:
-    - HeadTop
   - type: SquadArmor
     layer: Helmet
     rsi:
