@@ -1,0 +1,42 @@
+- type: guideEntry
+  parent: RMC
+  id: CMMarineLaw
+  name: cm-guide-entry-rules-marine-law
+  text: "/ServerInfo/Guidebook/_RMC14/Law/CMMarineLaw.xml"
+  priority: 3
+  children:
+  - CMMarineLawDefinitions
+  - CMMarineLawProcedures
+
+- type: guideEntry
+  parent: RMC
+  id: CMMarineLawDefinitions
+  name: rmc-guide-entry-marine-law-definitions
+  text: "/ServerInfo/Guidebook/_RMC14/Law/CMMarineLawDefinitions.xml"
+  priority: 0
+
+# Procedures
+- type: guideEntry
+  parent: RMC
+  id: CMMarineLawProcedures
+  name: rmc-guide-entry-marine-law-procedures
+  text: "/ServerInfo/Guidebook/_RMC14/Law/CMMarineLawProcedures.xml"
+  priority: 1
+  children:
+  - CMMarineLawArresting
+  - CMMarineLawCharging
+
+- type: guideEntry
+  parent: RMC
+  id: CMMarineLawArresting
+  name: rmc-guide-entry-marine-law-arresting
+  text: "/ServerInfo/Guidebook/_RMC14/Law/CMMarineLawArresting.xml"
+  priority: 0
+
+- type: guideEntry
+  parent: RMC
+  id: CMMarineLawCharging
+  name: rmc-guide-entry-marine-law-charging
+  text: "/ServerInfo/Guidebook/_RMC14/Law/CMMarineLawCharging.xml"
+  priority: 1
+
