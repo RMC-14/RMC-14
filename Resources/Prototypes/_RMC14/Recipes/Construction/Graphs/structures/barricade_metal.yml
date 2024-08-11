@@ -55,7 +55,7 @@
         action:
           !type:SpawnPrototype
           prototype: BarbedWire1
-        amount: 1
+          amount: 1
       - !type:DeleteEntity
       conditions:
       - !type:EntityAnchored
@@ -130,7 +130,7 @@
           action:
             !type:SpawnPrototype
             prototype: BarbedWire1
-          amount: 1
+            amount: 1
         - !type:DeleteEntity
       conditions:
         - !type:EntityAnchored
@@ -181,7 +181,7 @@
         action:
           !type:SpawnPrototype
           prototype: BarbedWire1
-        amount: 1
+          amount: 1
       - !type:DeleteEntity
       conditions:
       - !type:EntityAnchored
@@ -232,7 +232,7 @@
         action:
           !type:SpawnPrototype
           prototype: BarbedWire1
-        amount: 1
+          amount: 1
       - !type:DeleteEntity
       conditions:
       - !type:EntityAnchored
