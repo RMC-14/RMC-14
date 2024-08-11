@@ -162,7 +162,7 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-    #- id: CMG8AGeneralUtilityPouch
+      - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
         recommended: true
     #- id: CMM276GeneralPistolHolsterRig
