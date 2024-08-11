@@ -1,22 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed larvas and parasites bumping open doors when crawling under them.
-    type: Fix
-  - message: Fixed larvas and parasites having hands.
-    type: Fix
-  id: 42
-  time: '2024-04-13T10:41:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1219
-- author: Whisper
-  changes:
-  - message: grenades no longer explode eachother
-    type: Tweak
-  id: 43
-  time: '2024-04-14T01:28:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1224
-- author: DrSmugleaf
-  changes:
   - message: Added surgery skills to the appropriate roles.
     type: Add
   id: 44
@@ -4294,5 +4278,20 @@
   id: 541
   time: '2024-08-09T23:48:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3595
+- author: Whisper
+  changes:
+  - message: Added Astor Debb figurine.
+    type: Add
+  id: 542
+  time: '2024-08-11T01:03:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3602
+- author: Rainbeon
+  changes:
+  - message: Fixed Spitter/Boiler's Spray Acid ability not costing plasma to use.
+      It now correctly costs 40 plasma.
+    type: Fix
+  id: 543
+  time: '2024-08-11T01:08:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3605
 Name: RMC14
 Order: -1
