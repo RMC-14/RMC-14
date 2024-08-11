@@ -906,6 +906,9 @@
     state: "84"
   - type: Icon
     state: "84"
+  - type: Occluder
+    enabled: false
+  - type: DropshipWeaponPoint
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -916,6 +919,9 @@
     state: "85"
   - type: Icon
     state: "85"
+  - type: Occluder
+    enabled: false
+  - type: DropshipWeaponPoint
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -970,6 +976,9 @@
     state: "90"
   - type: Icon
     state: "90"
+  - type: Occluder
+    enabled: false
+  - type: DropshipWeaponPoint
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -980,6 +989,9 @@
     state: "91"
   - type: Icon
     state: "91"
+  - type: Occluder
+    enabled: false
+  - type: DropshipWeaponPoint
 
 - type: entity
   parent: CMBaseAlamoWall

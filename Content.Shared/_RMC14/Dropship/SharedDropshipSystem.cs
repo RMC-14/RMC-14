@@ -9,7 +9,6 @@ using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
-using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 
@@ -35,6 +34,10 @@ public abstract class SharedDropshipSystem : EntitySystem
         SubscribeLocalEvent<DropshipNavigationComputerComponent, AfterActivatableUIOpenEvent>(OnNavigationOpen);
 
         SubscribeLocalEvent<DropshipTerminalComponent, ActivateInWorldEvent>(OnDropshipTerminalActivateInWorld);
+
+        SubscribeLocalEvent<DropshipWeaponPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
+        SubscribeLocalEvent<DropshipWeaponPointComponent, ComponentRemove>(OnAttachmentPointRemove);
+        SubscribeLocalEvent<DropshipWeaponPointComponent, EntityTerminatingEvent>(OnAttachmentPointTerminating);
 
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key,
             subs =>
@@ -165,6 +168,36 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
 
         _popup.PopupEntity("There are no available dropships! Wait a moment.", user, user, PopupType.LargeCaution);
+    }
+
+    private void OnAttachmentPointMapInit(Entity<DropshipWeaponPointComponent> ent, ref MapInitEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (TryGetGridDropship(ent, out var dropship))
+        {
+            dropship.Comp.AttachmentPoints.Add(ent);
+            Dirty(dropship);
+        }
+    }
+
+    private void OnAttachmentPointRemove(Entity<DropshipWeaponPointComponent> ent, ref ComponentRemove args)
+    {
+        if (TryGetGridDropship(ent, out var dropship))
+        {
+            dropship.Comp.AttachmentPoints.Remove(ent);
+            Dirty(dropship);
+        }
+    }
+
+    private void OnAttachmentPointTerminating(Entity<DropshipWeaponPointComponent> ent, ref EntityTerminatingEvent args)
+    {
+        if (TryGetGridDropship(ent, out var dropship))
+        {
+            dropship.Comp.AttachmentPoints.Remove(ent);
+            Dirty(dropship);
+        }
     }
 
     private void OnDropshipNavigationLaunchMsg(Entity<DropshipNavigationComputerComponent> ent,
@@ -324,5 +357,20 @@ public abstract class SharedDropshipSystem : EntitySystem
 
             yield return (uid, metaData);
         }
+    }
+
+    public bool TryGetGridDropship(EntityUid point, out Entity<DropshipComponent> dropship)
+    {
+        if (TryComp(point, out TransformComponent? xform) &&
+            xform.GridUid is { } grid &&
+            !TerminatingOrDeleted(grid) &&
+            TryComp(xform.GridUid, out DropshipComponent? dropshipComp))
+        {
+            dropship = (grid, dropshipComp);
+            return true;
+        }
+
+        dropship = default;
+        return false;
     }
 }

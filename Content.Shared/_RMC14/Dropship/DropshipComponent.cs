@@ -33,4 +33,7 @@ public sealed partial class DropshipComponent : Component
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     public TimeSpan LastLocked;
+
+    [DataField, AutoNetworkedField]
+    public HashSet<EntityUid> AttachmentPoints = new();
 }

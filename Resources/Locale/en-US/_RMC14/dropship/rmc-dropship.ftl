@@ -1,5 +1,30 @@
 ﻿rmc-dropship-pre-flight-fueling = The shuttle is still undergoing pre-flight fueling and cannot depart yet. Please wait another {$minutes} minutes before trying again.
 
+rmc-dropship-weapons-title = Weapons Console
+
+rmc-dropship-weapons-main-screen-text = U.N.M.C
+  Dropship Weapons Control System
+  V 0.1
+
+rmc-dropship-weapons-equip = EQUIP
+rmc-dropship-weapons-fire-mission = F-MISS
+rmc-dropship-weapons-target = TARGET
+rmc-dropship-weapons-maps = MAPS
+rmc-dropship-weapons-cams = CAMS
+rmc-dropship-weapons-cancel = CANCEL
+rmc-dropship-weapons-exit = EXIT
+
+rmc-dropship-weapons-offset-calibration = Offset Calibration
+
+rmc-dropship-weapons-fire = FIRE
+rmc-dropship-weapons-strike = STRIKE
+rmc-dropship-weapons-vector = VECTOR
+
+rmc-dropship-weapons-night-vision-on = NV-ON
+rmc-dropship-weapons-night-vision-off = NV-OFF
+
+rmc-dropship-weapons-weapon = WEAPON
+
 rmc-dropship-fabricator-title = Part Fabricator
 rmc-dropship-fabricator-points = Points: {$points}
 rmc-dropship-fabricator-equipment = [bold]Equipment[/bold]
