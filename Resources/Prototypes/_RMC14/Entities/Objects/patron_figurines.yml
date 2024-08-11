@@ -417,3 +417,14 @@
     state: astor_debb
   - type: PatronFigurine
     id: 2dc63fb1-f830-4b0a-9eea-c8007fd09e6d
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNesartOnan
+  name: Nesart Onan figurine
+  description: "Blood loss is no joke! Come get some bandages from your local med bay today!"
+  components:
+  - type: Sprite
+    state: nesart_onan
+  - type: PatronFigurine
+    id: 0e3c7afc-4366-48a1-af0c-a9a8c1ecf0e6
