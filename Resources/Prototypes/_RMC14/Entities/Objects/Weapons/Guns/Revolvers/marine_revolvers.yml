@@ -102,3 +102,7 @@
       rmc-aslot-rail: 0, 0.185
       rmc-aslot-stock: -0.59375, 0.09375
       rmc-aslot-underbarrel: 0.375, -0.155
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponRevolverM44

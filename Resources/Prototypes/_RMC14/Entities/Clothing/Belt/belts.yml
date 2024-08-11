@@ -353,8 +353,26 @@
     whitelist:
       tags:
       - CMMagazinePistol
+    blacklist:
+      tags:
+      - RMCMagazinePistolSU6
   - type: FixedItemSizeStorage
-  # todo: add holster
+  - type: ContainerContainer
+    containers:
+      pouch: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      pouch:
+        name: General pistol holster
+#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
+#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        whitelist:
+          tags:
+          - CMWeaponPistolM1984
+          - CMWeaponPistolM77
+          - RMCMK80
+  - type: CMHolster
+  - type: CMItemSlots
 
 - type: entity
   parent: CMBeltMarine
@@ -374,7 +392,20 @@
       tags:
       - RMCMagazineRevolver
   - type: FixedItemSizeStorage
-  # todo: add holster
+  - type: ContainerContainer
+    containers:
+      pouch: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      pouch:
+        name: General revolver holster
+#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
+#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        whitelist:
+          tags:
+          - RMCWeaponRevolverM44
+  - type: CMHolster
+  - type: CMItemSlots
 
 - type: entity
   parent: CMBeltMarine
@@ -389,9 +420,26 @@
   - type: Storage # holds up to 2 mags plus gun
     maxItemSize: Normal
     grid:
-    - 0,0,5,1 # 3 slots
+    - 0,0,3,1 # 2 slots
     whitelist:
       tags:
       - CMMagazineSmg
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMMagazineSmg
   - type: FixedItemSizeStorage
-  # todo: add holster
+  - type: ContainerContainer
+    containers:
+      pouch: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      pouch:
+        name: M63 holster
+#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
+#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        whitelist:
+          tags:
+          - WeaponSMGM63
+  - type: CMHolster
+  - type: CMItemSlots
