@@ -321,12 +321,17 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         if (!CanInfectPopup(parasite, victim, parasite, popup, force))
             return false;
 
+        var doPopup = true;
+
         if (_inventory.TryGetContainerSlotEnumerator(victim, out var maskSlots, SlotFlags.MASK))
         {
             while (maskSlots.MoveNext(out var mask))
             {
                 if (mask.ContainedEntity != null)
-                    TryRipOffClothing(victim, mask.ContainedEntity.Value, mask.ID);
+                {
+                    TryRipOffClothing(victim, mask.ContainedEntity.Value, mask.ID, doPopup);
+                    doPopup = false;
+                }
             }
         }
 
@@ -335,7 +340,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             while (headSlots.MoveNext(out var head))
             {
                 if (head.ContainedEntity != null)
-                    TryRipOffClothing(victim, head.ContainedEntity.Value, head.ID);
+                    TryRipOffClothing(victim, head.ContainedEntity.Value, head.ID, doPopup);
             }
         }
 
@@ -566,12 +571,12 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
     ///     Tries to rip off an entity's clothing item.
     ///     TODO: Parasite resistance
     /// </summary>
-    private void TryRipOffClothing(EntityUid victim, EntityUid clothing, string slotID)
+    private void TryRipOffClothing(EntityUid victim, EntityUid clothing, string slotID, bool doPopup = true)
     {
         var popupMessage = Loc.GetString("rmc-xeno-infect-success", ("target", victim), ("clothing", clothing));
         _inventory.TryUnequip(victim, victim, slotID, force: true);
 
-        if (_net.IsServer)
+        if (_net.IsServer && doPopup)
             _popup.PopupEntity(popupMessage, victim);
     }
 }
