@@ -1,3 +1,4 @@
+using Content.Shared.Inventory;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -31,6 +32,13 @@ public sealed partial class RMCEyeProtectionItemComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Toggleable = true;
+
+    /// <summary>
+    /// Which slots can the welding protection status be changed from?
+    /// Currently supports only one slot at a time
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public SlotFlags SlotFlags { get; set; } = SlotFlags.EYES;
 
     /// <summary>
     ///  Is welding protection enabled?

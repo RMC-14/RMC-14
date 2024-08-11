@@ -114,8 +114,7 @@ namespace Content.Shared._RMC14.EyeProtection
                 return;
 
             // Item not in a position for protecting eyes
-            if (!(_inventory.InSlotWithFlags((ent,null,null), SlotFlags.MASK) ||
-                    _inventory.InSlotWithFlags((ent,null,null), SlotFlags.EYES)))
+            if (ent.Comp.SlotFlags != args.SlotFlags)
                 return;
 
             args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId);
@@ -133,18 +132,24 @@ namespace Content.Shared._RMC14.EyeProtection
 
         private void OnEyeProtectionItemGotEquipped(Entity<RMCEyeProtectionItemComponent> ent, ref GotEquippedEvent args)
         {
+            // Item not in a position for protecting eyes
+            if (ent.Comp.SlotFlags != args.SlotFlags)
+                return;
+
             if (!TryComp<ClothingComponent>(ent.Owner, out var clothingComp))
                 return;
 
             // Display correct sprite, if applicable
             if (ent.Comp.RaisedEquippedPrefix != null)
                 _clothingSystem.SetEquippedPrefix(ent.Owner, ent.Comp.RaisedEquippedPrefix, clothingComp);
+
+            //EnableEyeProtectionItem(ent, args.Equipee);
         }
 
         private void OnEyeProtectionItemGotUnequipped(Entity<RMCEyeProtectionItemComponent> ent, ref GotUnequippedEvent args)
         {
-            // Item was not in a position for protecting eyes
-            if ((args.SlotFlags != SlotFlags.MASK) && (args.SlotFlags != SlotFlags.EYES))
+            // Item not in a position for protecting eyes
+            if (ent.Comp.SlotFlags != args.SlotFlags)
                 return;
 
             DisableEyeProtectionItem(ent, args.Equipee);
@@ -167,13 +172,7 @@ namespace Content.Shared._RMC14.EyeProtection
 
         private void EnableEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid user)
         {
-            if (!TryComp<ClothingComponent>(item.Owner, out var clothingComp) ||
-                !TryComp<ItemComponent>(item.Owner, out var itemComp))
-                return;
-
-            // Check if item not in a position for protecting eyes
-            if (!(_inventory.InSlotWithFlags((item,null,null), SlotFlags.MASK) ||
-                _inventory.InSlotWithFlags((item,null,null), SlotFlags.EYES)))
+            if (!TryComp<ClothingComponent>(item.Owner, out var clothingComp))
                 return;
 
             // Check if already enabled
@@ -206,8 +205,7 @@ namespace Content.Shared._RMC14.EyeProtection
 
         protected void DisableEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid? user)
         {
-            if (!TryComp<ClothingComponent>(item.Owner, out var clothingComp) ||
-                !TryComp<ItemComponent>(item.Owner, out var itemComp))
+            if (!TryComp<ClothingComponent>(item.Owner, out var clothingComp))
                 return;
 
             // Can't disable what isn't there
