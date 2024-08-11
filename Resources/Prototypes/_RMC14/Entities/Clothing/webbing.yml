@@ -154,3 +154,44 @@
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
+
+- type: entity
+  parent: CMWebbingBase
+  id: CMWebbingHolster
+  name: shoulder holster
+  description: A handgun holster with an attached pouch, allowing two magazines or speedloaders to be stored along with it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster.rsi
+    state: holster
+  - type: Webbing
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster.rsi
+      state: equipped
+    components:
+    - type: Storage
+      grid:
+      - 0,0,3,1 #2 slots
+      whitelist:
+        tags:
+        - CMMagazinePistol
+        - RMCMagazineRevolver
+    - type: FixedItemSizeStorage
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+  - type: ContainerContainer
+    containers:
+      pouch: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      pouch:
+        name: Shoulder holster
+#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
+#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        whitelist:
+          tags:
+          - Sidearm
+#          - FlareGun
+  - type: CMHolster
+  - type: CMItemSlots

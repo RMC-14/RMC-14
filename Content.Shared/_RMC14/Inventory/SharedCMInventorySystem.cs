@@ -143,6 +143,10 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     private void OnSlotsActivateInWorld(Entity<CMItemSlotsComponent> ent, ref ActivateInWorldEvent args)
     {
+        // If storage item has holster, open storage instead of unholstering
+        if (HasComp<StorageComponent>(ent))
+            return;
+
         PickupSlot(args.User, ent);
     }
 
