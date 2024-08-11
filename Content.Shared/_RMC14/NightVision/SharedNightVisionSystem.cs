@@ -60,9 +60,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
         if (args.InHands || !ent.Comp.Toggleable)
             return;
 
-        // Item not in a position for being able to affect vision
-        if (!(_inventory.InSlotWithFlags((ent,null,null), SlotFlags.MASK) ||
-                _inventory.InSlotWithFlags((ent,null,null), SlotFlags.EYES)))
+        if (ent.Comp.SlotFlags != args.SlotFlags)
             return;
 
         args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId);
@@ -79,13 +77,15 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
     private void OnNightVisionItemGotEquipped(Entity<NightVisionItemComponent> ent, ref GotEquippedEvent args)
     {
-        ToggleNightVisionItem(ent, args.Equipee);
+        if (ent.Comp.SlotFlags != args.SlotFlags)
+            return;
+
+        EnableNightVisionItem(ent, args.Equipee);
     }
 
     private void OnNightVisionItemGotUnequipped(Entity<NightVisionItemComponent> ent, ref GotUnequippedEvent args)
     {
-        // Item was not in an activatable slot
-        if ((args.SlotFlags != SlotFlags.MASK) && (args.SlotFlags != SlotFlags.EYES))
+        if (ent.Comp.SlotFlags != args.SlotFlags)
             return;
 
         DisableNightVisionItem(ent, args.Equipee);
@@ -149,11 +149,6 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
     private void EnableNightVisionItem(Entity<NightVisionItemComponent> item, EntityUid user)
     {
-        // Check if item is in an activatable position
-        if (!(_inventory.InSlotWithFlags((item,null,null), SlotFlags.MASK) ||
-            _inventory.InSlotWithFlags((item,null,null), SlotFlags.EYES)))
-            return;
-
         DisableNightVisionItem(item, item.Comp.User);
 
         item.Comp.User = user;
