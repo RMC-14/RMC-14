@@ -335,3 +335,63 @@
   - type: Tag
     tags:
     - RMCSmartPistolHolster
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltHolsterPistol
+  name: M276 pattern general pistol holster rig
+  description: The M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+  - type: Storage # holds up to 6 mags plus gun
+    maxItemSize: Normal
+    grid:
+    - 0,0,11,1 # 6 slots
+    whitelist:
+      tags:
+      - CMMagazinePistol
+  - type: FixedItemSizeStorage
+  # todo: add holster
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltHolsterRevolver
+  name: M276 pattern general revolver holster rig
+  description: he M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version is universal and adjustable for different revolvers, along with six small pouches for speedloaders. It smells faintly of hay.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+  - type: Storage # holds up to 6 mags plus gun
+    maxItemSize: Normal
+    grid:
+    - 0,0,11,1 # 6 slots
+    whitelist:
+      tags:
+      - RMCMagazineRevolver
+  - type: FixedItemSizeStorage
+  # todo: add holster
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltHolsterSMG
+  name: M276 pattern M63 holster rig
+  description: Special issue variant of the M276 designed to holster a M63 submachine gun and two spare magazines. Uncommonly issued to USCM support and specialist personnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_smg.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_smg.rsi
+  - type: Storage # holds up to 2 mags plus gun
+    maxItemSize: Normal
+    grid:
+    - 0,0,5,1 # 3 slots
+    whitelist:
+      tags:
+      - CMMagazineSmg
+  - type: FixedItemSizeStorage
+  # todo: add holster
