@@ -47,6 +47,7 @@
         name: M276 knife rig (full)
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch
       #    CMM276M82FHolsterRig #TODO: Make this
       #    CMM276ShotgunShellLoadingRig #TODO: Make this

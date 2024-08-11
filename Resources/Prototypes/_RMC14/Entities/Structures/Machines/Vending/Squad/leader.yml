@@ -241,6 +241,7 @@
       - id: CMBeltMedical
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch
     #- id: CMM276M82FHolsterRig
     #- id: CMM276ShotgunShellLoadingRig

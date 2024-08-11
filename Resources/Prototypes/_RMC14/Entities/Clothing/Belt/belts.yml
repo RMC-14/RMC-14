@@ -408,15 +408,40 @@
   - type: CMItemSlots
 
 - type: entity
-  parent: CMBeltMarine
-  id: RMCBeltHolsterSMGPouch
+  parent: ClothingBeltBase # Can't have storage slots on this one
+  id: RMCBeltHolsterSMG
   name: M276 pattern M63 holster rig
-  description: Special issue variant of the M276 designed to holster a M63 submachine gun and two spare magazines. Uncommonly issued to USCM support and specialist personnel.
+  description: Special issue variant of the M276 designed to holster a M63 submachine gun.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_smg.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/holster_smg.rsi
+  - type: ContainerContainer
+    containers:
+      pouch: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      pouch:
+        name: M63 holster
+#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
+#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        whitelist:
+          tags:
+          - WeaponSMGM63
+  - type: CMHolster
+  - type: CMItemSlots
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltHolsterSMGPouch
+  name: M276 pattern M63 holster rig and pouch
+  description: Special issue variant of the M276 designed to holster a M63 submachine gun and two spare magazines. Uncommonly issued to USCM support and specialist personnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_smg_pouch.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_smg_pouch.rsi
   - type: Storage # holds up to 2 mags plus gun
     maxItemSize: Normal
     grid:
