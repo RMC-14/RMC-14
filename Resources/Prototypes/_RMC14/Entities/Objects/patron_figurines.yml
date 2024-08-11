@@ -135,7 +135,7 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronChikiSugimoto
-  name: Chiki Sugimoto figurine
+  name: Chiki Suzuki figurine
   description: “Hi! Me Chiki!”
   components:
   - type: Sprite
@@ -406,3 +406,14 @@
     state: jermaine_bait_mcclune
   - type: PatronFigurine
     id: 6f980172-002b-4574-8f3c-f9fead1f11a1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAstorDebb
+  name: Astor Debb figurine
+  description: "Full-time demolitionist, she moves with a purpose, wielding her ~Magic Missile~"
+  components:
+  - type: Sprite
+    state: astor_debb
+  - type: PatronFigurine
+    id: 2dc63fb1-f830-4b0a-9eea-c8007fd09e6d
