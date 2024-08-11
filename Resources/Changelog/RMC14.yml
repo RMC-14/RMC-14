@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added surgery skills to the appropriate roles.
-    type: Add
-  id: 44
-  time: '2024-04-13T06:33:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1206
-- author: DrSmugleaf
-  changes:
   - message: Fixed not being able to use the hf2 health analyzer on others.
     type: Fix
   id: 45
@@ -4293,5 +4286,12 @@
   id: 543
   time: '2024-08-11T01:08:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3605
+- author: DrSmugleaf
+  changes:
+  - message: Added Mazy 'The Fortress' Tusji figurine.
+    type: Add
+  id: 544
+  time: '2024-08-11T03:52:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3613
 Name: RMC14
 Order: -1
