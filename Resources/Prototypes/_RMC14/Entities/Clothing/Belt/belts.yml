@@ -409,7 +409,7 @@
 
 - type: entity
   parent: CMBeltMarine
-  id: RMCBeltHolsterSMG
+  id: RMCBeltHolsterSMGPouch
   name: M276 pattern M63 holster rig
   description: Special issue variant of the M276 designed to holster a M63 submachine gun and two spare magazines. Uncommonly issued to USCM support and specialist personnel.
   components:

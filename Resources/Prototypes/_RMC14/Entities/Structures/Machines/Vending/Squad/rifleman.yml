@@ -43,11 +43,11 @@
       entries:
       - id: CMBeltMarine
         recommended: true
-      #    CMM276GeneralPistolHolsterRig #TODO: Make this
       - id: CMBeltKnifeFilled
         name: M276 knife rig (full)
-      #    CMM276M63HolsterRig #TODO: Make this
-      #    CMM276M44HolsterRig #TODO: Make this
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterSMGPouch
       #    CMM276M82FHolsterRig #TODO: Make this
       #    CMM276ShotgunShellLoadingRig #TODO: Make this
       - id: CMBeltUtility
