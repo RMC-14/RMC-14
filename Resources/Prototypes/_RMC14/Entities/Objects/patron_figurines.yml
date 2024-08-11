@@ -406,3 +406,14 @@
     state: jermaine_bait_mcclune
   - type: PatronFigurine
     id: 6f980172-002b-4574-8f3c-f9fead1f11a1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMazyTheFortressTusji
+  name: Mazy 'The Fortress' Tusji figurine
+  description: "This figurine is covered in chew marks and acid burns, yet remains recognizable and unbroken."
+  components:
+  - type: Sprite
+    state: mazy_the_fortress_tusji
+  - type: PatronFigurine
+    id: 05443bd1-e84b-4782-9f03-c2b4af96b109
