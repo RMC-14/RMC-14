@@ -141,3 +141,23 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Prescription_ballistic_goggles.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Prescription_ballistic_goggles.rsi
+
+- type: entity
+  parent: ClothingEyesBase
+  id: RMCGogglesBallisticSquad
+  name: Advanced ballistic goggles
+  description: Cutting edge UNMC goggles. Advanced polymers and expensive nanotechnology allow the goggles to link with the wearer's armor and change the color of the lenses to match their squad designation. The lenses are invisible when worn by the unworthy.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/squad_ballistic_goggles.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/squad_ballistic_goggles.rsi
+  - type: SquadArmor
+    layer: Goggles
+    rsi: 
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/squad_ballistic_goggles.rsi
+      state: lenses
+    leaderRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/squad_ballistic_goggles.rsi
+      state: lenses
+
