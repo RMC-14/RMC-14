@@ -140,4 +140,10 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCBioscanVariance =
         CVarDef.Create("rmc.bioscan_variance", 2, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCDropshipFabricatorStartingPoints =
+        CVarDef.Create("rmc.dropship_fabricator_starting_points", 10000, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCDropshipFabricatorGainEverySeconds =
+        CVarDef.Create("rmc.dropship_fabricator_gain_every", 3.33333f, CVar.REPLICATED | CVar.SERVER);
 }
