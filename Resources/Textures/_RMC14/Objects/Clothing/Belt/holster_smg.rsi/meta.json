@@ -11,6 +11,15 @@
       "name": "icon"
     },
     {
+      "name": "icon-w-gun"
+    },
+    {
+      "name": "half"
+    },
+    {
+      "name": "full"
+    },
+    {
       "name": "equipped-BELT",
       "directions": 4
     },
