@@ -11,6 +11,7 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoAnnounceDeathComponent, MobStateChangedEvent>(OnAnnounceDeathMobStateChanged);
+		SubscribeLocalEvent<XenoAnnounceDeathComponent, ChasmFallingEvent>(OnChasmFalling);
     }
 
     private void OnAnnounceDeathMobStateChanged(Entity<XenoAnnounceDeathComponent> ent, ref MobStateChangedEvent args)
@@ -23,6 +24,11 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
         else
             AnnounceSameHive(ent.Owner, Loc.GetString(ent.Comp.Message, ("xeno", ent.Owner)), color: ent.Comp.Color);
     }
+	
+	private void OnChasmFalling(Entity<XenoAnnounceDeathComponent> ent, ref ChasmFallingEvent args)
+	{
+		AnnounceSameHive(ent.Owner, Loc.GetString(ent.Comp.Message, ("xeno", ent.Owner)), color: ent.Comp.Color);
+	}
 
     public string WrapHive(string message, Color? color = null)
     {
