@@ -350,6 +350,6 @@
     - belt
     sprite: _RMC14/Objects/Clothing/Belt/sparepouch.rsi
   - type: Storage
-    maxItemSize: Medium
+    maxItemSize: Normal
     grid:
     - 0,0,8,1 # 9 slots
