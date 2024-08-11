@@ -654,6 +654,7 @@
 - type: entity
   parent: CMBaseAlamoWall
   id: CMAlamoWall61
+  name: port wing weapon attach point
   suffix: 61
   components:
   - type: Sprite
@@ -662,6 +663,8 @@
     state: "61"
   - type: Occluder
     enabled: false
+  - type: InteractionOutline
+  - type: DropshipWeaponPoint
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -696,6 +699,7 @@
 - type: entity
   parent: CMBaseAlamoWall
   id: CMAlamoWall65
+  name: starboard wing weapon attach point
   suffix: 65
   components:
   - type: Sprite
@@ -704,6 +708,8 @@
     state: "65"
   - type: Occluder
     enabled: false
+  - type: InteractionOutline
+  - type: DropshipWeaponPoint
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -900,6 +906,7 @@
 - type: entity
   parent: CMBaseAlamoWall
   id: CMAlamoWall84
+  name: port fore weapon attach point
   suffix: 84
   components:
   - type: Sprite
@@ -908,11 +915,19 @@
     state: "84"
   - type: Occluder
     enabled: false
+  - type: InteractionOutline
   - type: DropshipWeaponPoint
+
+- type: entity
+  parent: CMAlamoWall84
+  id: CMAlamoWall84Flipped
+  name: starboard fore weapon attach point
+  suffix: 84, Flipped
 
 - type: entity
   parent: CMBaseAlamoWall
   id: CMAlamoWall85
+  name: electronic system attach point
   suffix: 85
   components:
   - type: Sprite
@@ -921,7 +936,11 @@
     state: "85"
   - type: Occluder
     enabled: false
-  - type: DropshipWeaponPoint
+
+- type: entity
+  parent: CMAlamoWall85
+  id: CMAlamoWall85Flipped
+  suffix: 85, Flipped
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -978,7 +997,6 @@
     state: "90"
   - type: Occluder
     enabled: false
-  - type: DropshipWeaponPoint
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -991,7 +1009,6 @@
     state: "91"
   - type: Occluder
     enabled: false
-  - type: DropshipWeaponPoint
 
 - type: entity
   parent: CMBaseAlamoWall
