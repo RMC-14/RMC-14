@@ -344,6 +344,17 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m1984 # TODO RMC14 per-gun underlay
+      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      visible: false
+    - state: icon-front
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
   - type: Storage # holds up to 6 mags plus gun
@@ -382,6 +393,17 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m44r # TODO RMC14 per-gun underlay
+      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      visible: false
+    - state: icon-front
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
   - type: Storage # holds up to 6 mags plus gun
@@ -415,6 +437,12 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_smg.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m63
+      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      visible: false
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/holster_smg.rsi
   - type: ContainerContainer
@@ -440,6 +468,18 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_smg_pouch.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m63
+      offset: -0.345, 0.0
+      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      visible: false
+    - state: icon-front
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/holster_smg_pouch.rsi
   - type: Storage # holds up to 2 mags plus gun
