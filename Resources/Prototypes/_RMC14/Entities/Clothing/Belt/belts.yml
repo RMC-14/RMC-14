@@ -577,7 +577,6 @@
       offset: -0.345, 0.0
       map: [ "enum.CMItemSlotsLayers.Filled" ]
       visible: false
-    - state: icon-front
     - state: half
       map: [ "openLayer" ]
     - state: full
