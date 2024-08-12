@@ -99,6 +99,8 @@
 #        points: 10
       - id: RMCExplosiveBreachingCharge
         points: 10
+      - id: RMCSiegeMaul
+        points: 12
 #      - id: ES-11 Mobile Fuel Canister
 #        points: 10
       - id: CMWelderSmall
