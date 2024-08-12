@@ -95,6 +95,8 @@
       - id: RMCExplosiveBreachingCharge
         points: 7
         recommended: true
+      - id: RMCSiegeMaul
+        points: 12
       - id: CMSandbagEmpty25
         name: sandbags x25
         points: 10
