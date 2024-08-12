@@ -164,6 +164,14 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster.rsi
     state: holster
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,3,1 #2 slots
+    whitelist:
+      tags:
+      - CMMagazinePistol
+      - RMCMagazineRevolver
   - type: Webbing
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster.rsi
