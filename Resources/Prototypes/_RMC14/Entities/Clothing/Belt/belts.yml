@@ -352,4 +352,4 @@
   - type: Storage
     maxItemSize: Normal
     grid:
-    - 0,0,8,1 # 9 slots
+    - 0,0,9,1 # 9 slots
