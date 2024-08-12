@@ -38,6 +38,8 @@
         RMCSkillOverwatch: 1
         RMCSkillPolice: 2
     - type: MarineOrders
+    - type: CMVendorUser
+      points: 45
 
 - type: startingGear
   id: CMGearChiefMP
