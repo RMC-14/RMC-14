@@ -1,8 +1,8 @@
 - type: entity
   parent: BaseKnife
   id: RMCSiegeMaul
-  name: "G&M 28"
-  description: ""
+  name: "G&M 28 Breacher"
+  description: "The G&M 28 Breacher is the latest in the line of deconstruction tools. After one particular incident involving a split head the UNMC started contracting G&M"
 - type: MeleeWeapon
   wideAnimationRotation: -135
   attackRate: 1.5
