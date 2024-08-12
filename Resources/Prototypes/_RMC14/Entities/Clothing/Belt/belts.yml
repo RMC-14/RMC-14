@@ -571,12 +571,12 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_flaregun.rsi
     layers:
-    - state: icon
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: m82f
-      offset: -0.345, 0.0
+      offset: -0.06, 0.0
       map: [ "enum.CMItemSlotsLayers.Filled" ]
       visible: false
+    - state: icon
     - state: half
       map: [ "openLayer" ]
     - state: full
@@ -584,13 +584,11 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/holster_flaregun.rsi
   - type: Storage
-    maxItemSize: Normal
     grid:
-    - 0,0,3,1 # 2 slots
+    - 0,0,19,3 # 20 flares
     whitelist:
       tags:
       - Flare # todo: replace with flaregun ammo
-  - type: FixedItemSizeStorage
   - type: ContainerContainer
     containers:
       pouch: !type:ContainerSlot
