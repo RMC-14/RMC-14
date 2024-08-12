@@ -1,0 +1,559 @@
+# Staff Officer #
+
+# Equipment Vend
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechStaffOfficerEquipment
+  name: ColMarTech Staff Officer Equipment Rack
+  description: An automated equipment vendor for Staff Officers
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCommand" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMStaffOfficer
+    sections:
+    - name: Standard Equipment
+      takeAll: CMStandard # I'm not sure what this does.
+      entries:
+      - id: CMBootsBlackFilled
+      - id: RMCHeadsetMarineCommand
+      - id: CMMRE
+    - name: Standard Equipment
+      takeAll: CMUniform
+      entries:
+      - id: CMJumpsuitBO
+        name: Service uniform
+      #- id: CMJumpSuitOperations # TODO: Port Operations Uniform
+      - id: CMHandsBlackMarine
+    - name: Jacket
+      choices: { CMCoat: 1}
+      entries:
+      - id: CMCoatOfficer
+    - name: Hat
+      choices: { CMHat: 1 }
+      entries:
+      - id: CMHeadBeret
+      - id: CMHeadBeretTan
+      - id: CMHeadCap # TODO: Port Patrol Cap
+      #- id: CMOfficerCap # TODO: Port OfficerCap
+      #- id: CMServicePeakedCap # TODO: Port Service Peaked Cap
+    - name: Personal Sidearm
+      choices: { CMWeapon: 1 }
+      entries:
+      - id: RMCWeaponRevolverM44
+      - id: CMWeaponPistolM1984
+      - id: CMWeaponPistolMK80
+    - name: Other Supplies
+      entries:
+      - id: RMCBinoculars
+        points: 5
+      #- id: RMCRangeFinder # TODO RMC14 Rangefinder
+      #- id: RMCLaserDesignator # TODO RMC14 LaserDesignator
+      - id: RMCFlashlight
+        points: 1
+      #- id: RMCMotionDetector # TODO RMC14 Motion Detector
+      - id: SprayBottleSpaceCleaner
+        points: 2
+      - id: RMCWhistle
+        points: 5
+
+# Armoury Vend
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechStaffOfficerEquipment
+  name: ColMarTech Staff Officer Armory Equipment Rack # This is a general-use armoury vend for CIC.
+  description: An automated combat equipment vendor for Staff Officers.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCommand" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+  - type: CMAutomatedVendor
+    jobs: # Yes, it says "Staff Officer" equipment but Command Staff generally arm themselves from this vend for Hijack.
+    - CMStaffOfficer
+    - CMMilitaryPolice # For whatever isn't inside the Honor Guard set
+    - CMAuxiliarySupportOfficer
+    - CMPilotGunship
+    - CMPilotDropship
+    - CMChiefMP
+    - CMChiefEngineer
+    - CMCMO
+    - CMQuartermaster # Not sure if they count as real command staff
+    - CMSeniorEnlistedAdvisor
+    sections:
+    - name: Combat Equipment
+      takeAll: CMCombatEquipment
+      entries:
+      - id: CMArmorM4 # TODO: Port Officer Armour
+      - id: ArmorHelmetM10 # TODO: Port Officer Helmet
+      - id: CMBootsBlackFilled
+      - id: CMHandsBlackMarine
+      - id: CMMRE
+      #- id: CMAviatorShades # TODO RMC14 Port Aviator Shades
+      - id: RMCM5Bayonet
+    - name: Specilisation Kit
+      choices: { CMBundle: 1 }
+      entries:
+      - id: CMVendorBundleCombatTechnicianEssentials
+      - id: CMVendorBundleSquadMedicalEssentials
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      #- id: CMBeltGeneralUtility # TODO RMC14 Utility Storage Belt
+      - id: CMBeltMarine
+      #- id: CMBeltShotgunRig # TODO RMC14 Shotgun Belt
+      - id: CMBeltUtilityBelt # TODO: Check this comes filled.
+      - id: CMBeltMedicBag # TODO: Check this comes filled.
+      - id: CMBeltMedical # TODO: Check this comes filled.
+      #- id: CMBeltM39 # TODO RMC14 M39 Belt
+      - id: CMBeltUtilityCombat # TODO: Check this comes filled
+      #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+      - id: RMCBeltGrenade
+    - name: Pouches
+      choices: { CMPouches: 2 }
+      entries:
+      - id: RMCPouchFirstAidInjectors
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+      - id: RMCPouchFirstAidPills
+      - id: RMCPouchGeneralLarge
+      - id: RMCPouchMagazineLarge
+      #- id: RMCPouchShotgunLarge # TODO RMC14 Large Shotgun Pouch
+      - id: RMCPouchMagazinePistolLarge
+      - id: RMCPouchMedical
+      - id: RMCPouchMedkit
+      - id: RMCPouchPistol
+      #- id: RMCPouchSling # TODO RMC14 Sling Pouch
+                           # This has a comment saying "implement this", going to leave it commented out.
+      - id: RMCPouchToolsFill
+      - id: RMCPouchConstruction
+      - id: RMCPouchElectronicsFill
+      - id: RMCPouchFlareFilled
+      #- id: RMCPouchFuelTank # TODO RMC14 Fuel Tank Pouch
+    - name: Mask
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif
+    - name: Other Supplies
+      entries:
+      - id: ClothingEyesGlassesMeson
+        points: 5
+      - id: CMHandsInsulated
+        points: 3
+      - id: CMEntrenchingTool
+        points: 1
+      - id: RMCAttachmentMagneticHarness # Not sure why it's in here twice.
+        points: 12
+      #- id: RMCBackpackRadioTelephone # TODO RMC14 Radio Telephone Pack (RTO FTL Pack)
+      #  points: 15
+      #- id: RMCMotionDetector # TODO RMC14 Motion Detector
+      #  points: 5
+      #- id: RMCScabbardMacheteFilled # TODO RMC14 Machete Scabbard
+      - id: RMCBinoculars
+        points: 5
+      #- id: RMCRangefinder # TODO RMC14 Rangefinder
+      #  points: 8
+      #- id: RMCLaserDesignator # TODO RMC14 Laser Designator
+      #  points: 12
+      #- id: RMCFultonRecoveryDevice # TODO RMC14 Fulton Recovery
+      - id: SprayBottleSpaceCleaner
+        points: 2
+      - id: RMCWhistle
+        points: 5
+      - id: RMCFlashlight
+        points: 1
+
+
+# Executive Officer #
+
+# Drip Vendor
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechExecutiveOfficerEquipment
+  name: ColMarTech Executive Officer Equipment Rack
+  description: An automated equipment rack for the Executive Officer. It features a sizeable selection of equipment meant only for the second in command of a ship.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCommand" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMExecutiveOfficer
+    sections:
+    - name: Combat Equipment
+      takeAll: CMEquipment
+      entries:
+      - id: CMArmorM4 # TODO: Port Officer Armour
+      - id: ArmorHelmetM10 # TODO: Port Officer Helmet
+      - id: CMBootsBlackFilled
+      - id: CMHandsBlackMarine
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMHeadsetSeniorCommand
+      - id: CMSatchel
+      - id: CMMRE
+    # - name: Uniform # TODO: Port this.
+    #   choices: { CMUniform: 1 }
+    #   entries:
+    #   - id: CMJumpsuitXOService
+    #   - id: CMJumpsuitXOOperations
+    #   - id: CMJumpsuitXOFormal
+    - name: Personal Weapon
+      choices: { CMWeapon: 1 }
+      entries:
+      - id: CMWeaponPistolMK80
+      - id: CMWeaponPistolM1984
+      - id: CMWeaponPistolM77
+      - id: RMCWeaponRevolverM44
+    - name: Eyewear
+      choices: { CMEyewear: 1 }
+      entries:
+      - id: RMCGlassesMedicalHUDGlasses
+      - id: CMGlassesSecurity
+      #- id: CMShades # TODO: Port this.
+      #- id: CMAviatorShades # TODO: Port this.
+    # - name: Patches # TODO RMC14 Make Patches
+    #   entries:
+    #   - id: CMUNMCPatch
+    #   - id: CMFallingFalconsPatch
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      #- id: CMBeltGeneralUtility # TODO RMC14 Utility Storage Belt
+      - id: CMBeltMarine
+      #- id: CMBeltShotgunRig # TODO RMC14 Shotgun Belt
+      - id: CMBeltUtilityBelt # TODO: Check this comes filled.
+      - id: CMBeltUtilityCombat # TODO: Check this comes filled.
+      - id: CMBeltMedicBag # TODO: Check this comes filled.
+      #- id: CMBeltM39 # TODO RMC14 M39 Belt
+      #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+      - id: RMCBeltGrenade
+      - id: CMBeltSecurityMPFilled
+    - name: Pouches
+      choices: { CMPouches: 2 }
+      entries:
+      - id: RMCPouchFirstAidInjectors
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+      - id: RMCPouchFirstAidPills
+      - id: RMCPouchGeneralLarge
+      - id: RMCPouchMagazineLarge
+      #- id: RMCPouchShotgunLarge # TODO RMC14 Large Shotgun Pouch
+      - id: RMCPouchMagazinePistolLarge
+      - id: RMCPouchMedical
+      - id: RMCPouchMedkit
+      - id: RMCPouchPistol
+      #- id: RMCPouchSling # TODO RMC14 Sling Pouch
+                           # This has a comment saying "implement this", going to leave it commented out.
+      - id: RMCPouchToolsFill
+      - id: RMCPouchConstruction
+      - id: RMCPouchElectronicsFill
+      - id: RMCPouchFlareFilled
+      #- id: RMCPouchFuelTank # TODO RMC14 Fuel Tank Pouch
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBlack
+      - id: CMWebbingBrown
+      #- id: CMWebbingDrop # TODO RMC14 Drop Pouch Webbing
+      - id: CMWebbing
+      #- id: CMWebbingHolster # TODO RMC14 Shoulder Holster Webbing
+
+# Weapon Vendor
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechExecutiveOfficerWeapon
+  name: ColMarTech Executive Officer Weapon Rack
+  description: An automated weapons rack for the Executive Officer. It features a decent selection of weaponry meant only for the second in command of a ship.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCommand" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMExecutiveOfficer
+    sections:
+    - name: Captain's Primary
+      choices: { CMPrimary: 1 }
+      entries:
+      - id: WeaponRifleM54C # TODO RMC14 MK1 Pulse Rifle needs to replace this; as well as the magazines below.
+      - id: WeaponShotgunM42A2
+    - name: Primary Ammunition
+      entries:
+      - id: CMMagazineRifleM54C
+        points: 40
+      - id: CMMagazineRifleM54CAP
+        points: 60
+      - id: CMBoxShotgunBuckshot
+        points: 20
+      - id: CMBoxShotgunSlugs
+        points: 20
+      - id: CMBoxShotgunFlechette
+        points: 20
+    - name: Specilisation Kit
+      choices: { CMBundle: 1 }
+      entries:
+      - id: CMVendorBundleSquadMedicalEssentials
+      - id: CMVendorBundleCombatTechnicianEssentials
+    - name: Explosives
+      entries:
+      - id: CMPacketGrenadeHighExplosiveFilled
+        points: 15
+      - id: CMPacketGrenadeFragFilled
+        points: 15
+      #- id: CMPacketGrenadeWPFilled # TODO RMC14 White Phosphorus (WP) Grenades
+      #  points: 15
+    - name: Rail Attachments
+      entries:
+      - id: RMCAttachmentMagneticHarness
+        points: 12
+      - id: RMCAttachmentS5RedDotSight
+        points: 15
+      - id: RMCAttachmentS6ReflexSight
+        points: 15
+      - id: RMCAttachmentS42xTelescopicMiniscope
+        points: 15
+    - name: Underbarrel Attachments
+      entries:
+      - id: RMCAttachmentLaserSight
+        points: 15
+      - id: RMCAttachmentAngledGrip
+        points: 15
+      - id: RMCAttachmentVerticalGrip
+        points: 15
+      - id: ShotgunRMCAttachmentU7Underbarrel
+        points: 15
+      - id: RMCAttachmentUnderbarrelExtinguisher # TODO: Check this works, prototype looks sussy
+        points: 15
+      - id: RMCAttachmentMK1GrenadeLauncher
+        points: 15 # TODO Check this price.
+    - name: Barrel Attachments
+      entries:
+      - id: RMCAttachmentExtendedBarrel
+        points: 15
+      - id: RMCAttachmentRecoilCompensator
+        points: 15
+      - id: RMCAttachmentSuppressor
+        points: 15
+    - name: Other Supplies
+      entries:
+      - id: ClothingEyesGlassesMeson
+        points: 5
+      - id: CMHandsInsulated
+        points: 3
+      - id: CMEntrenchingTool
+        points: 1
+      - id: RMCAttachmentMagneticHarness # Not sure why it's in here twice.
+        points: 12
+      #- id: RMCBackpackRadioTelephone # TODO RMC14 Radio Telephone Pack (RTO FTL Pack)
+      #  points: 15
+      #- id: RMCMotionDetector # TODO RMC14 Motion Detector
+      #  points: 5
+      #- id: RMCScabbardMacheteFilled # TODO RMC14 Machete Scabbard
+      - id: RMCBinoculars
+        points: 5
+      #- id: RMCRangefinder # TODO RMC14 Rangefinder
+      #  points: 8
+      #- id: RMCLaserDesignator # TODO RMC14 Laser Designator
+      #  points: 12
+      #- id: RMCFultonRecoveryDevice # TODO RMC14 Fulton Recovery
+      - id: SprayBottleSpaceCleaner
+        points: 2
+      - id: RMCWhistle
+        points: 5
+      - id: RMCFlashlight
+        points: 1
+
+
+# Commanding Officer #
+
+# Drip Vend
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCommandingOfficerEquipment
+  name: ColMarTech Commanding Officer Equipment Rack
+  description: An automated equipment vendor for the Commanding Officer. Contains a prime selection of equipment for only the UNMC's top officers.
+  components:
+  - type: AccessReader
+    access:
+    - [ "ShipMasterAccess" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMCommandingOfficer
+    sections:
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMHeadsetSeniorCommand
+      - id: CMMRE
+    - name: Officer's Uniform # In CM13; this is in the preferences section. # TODO RMC14 Loadouts
+      entries:
+      - id: CMJumpsuitCO
+      - id: CMJumpsuitCOFormalBlack
+      - id: CMJumpsuitCOFormalWhite
+      - id: CMJumpsuitCOService
+  # - name: Commanding Officer Essentials Kit #TODO: Make this.
+  #   takeAll: CMBundle
+  #   entries:
+  #   - id: CMCommandingOfficerEssentialsBundle # TODO RMC14 Megaphone , Paper Map , Laser Designator
+    - name: Bags
+      choices: { CMBag: 1 }
+      entries:
+      - id: CMBackpackCommand
+      #- id: CMSatchelCommandSecure # TODO RMC14 Secure Satchel (ID LOCK)
+    - name: Combat Equipment
+      takeAll: CMCombatEquipment
+      entries:
+      - id: CMArmorM4 # TODO: Port CO Armour
+      - id: ArmorHelmetM10 # TODO: Port CO Helmet
+      - id: CMHandsBlackMarine # TODO: Port CO Gloves
+      - id: CMBootsBlackFilled
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBlack
+      - id: CMWebbingBrown
+    #- id: CMTacticalWaistcoat # TODO Port Waistcoat
+    #- id: CMWebbingDrop # TODO RMC14 Drop Pouch Webbing
+      - id: CMWebbing
+    #- id: CMWebbingHolster # TODO RMC14 Shoulder Holster Webbing
+    - name: Huds
+      choices: { CMHud: 1 }
+      entries:
+      - id: RMCGlassesMedicalHUDGlasses
+      - id: CMGlassesSecurity
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      #- id: General Utility Pouch # TODO RMC14 G8-A General Utility Pouch
+      - id: CMBeltSecurityMPFilled
+      - id: CMBeltMedicBag
+      - id: CMBeltUtilityCombat
+      #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+    - name: Pouches
+      choices: { CMPouch: 2 }
+      entries:
+      - id: RMCPouchFirstAidInjectors
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+      - id: RMCPouchFirstAidPills
+      - id: RMCPouchMedkit
+      - id: RMCPouchAutoinjectorFill
+      - id: RMCPouchGeneralLarge
+      - id: RMCPouchMagazinePistolLarge
+      - id: RMCPouchMagazineLarge
+      - id: RMCPouchPistol
+      #- id: RMCPouchShotgunLarge # TODO RMC14 Large Shotgun Pouch
+      - id: RMCPouchToolsFill
+
+# Weapon Vend
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCommandingOfficerWeapon
+  name: ColMarTech Commanding Officer Weapon Rack
+  description: An automated weapons rack for the Commanding Officer. It features a robust selection of weaponry meant only for the UNMC's top officers.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCommand" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMCommandingOfficer
+    sections:
+    - name: Commander's Primary
+      choices: { CMProtagGun: 1 }
+      entries:
+      - id: WeaponRifleM54C # TODO RMC14 Port M46C Protag Gun
+        name: Captain's M54C
+      - id: RMCSmartGun # TODO RMC14 Port M56C Smart Protag Gun
+        name: Captain's Smartgun
+    - name: Primary Ammunition
+      entries:
+      - id: CMMagazineRifleM54C # TODO RMC14 Port MK1 Pulse Rifle
+        points: 30
+      - id: CMMagazineRifleM54CAP # TODO RMC14 Port Mk1 Pulse Rifle
+        points: 40
+      - id: CMMagazineRifleM54CExt
+        points: 20
+      # - id: CMMagazineRifleM54CAP # When MK1 is ported; replace above commented mags with MK1 variants and uncomment this.
+      #   points: 20
+      - id: RMCMagazineSmartGun
+        points: 20
+    # - name: Sidearm Ammunition # TODO RMC14 Port CO Sidearm
+    #   entries:
+    #   - id: CMMagazineMateba
+    #     points: 15
+    #   - id: CMMagazineMatebaAP
+    #     points: 20
+    #   - id: CMMagazineDesertEagle
+    #     points: 15
+    #   - id: CMMagazineDesertEagleAP
+    #     points: 20
+    - name: Shotgun Ammunition
+      entries:
+      - id: CMBoxShotgunBuckshot
+        points: 20
+      - id: CMBoxShotgunSlugs
+        points: 20
+      - id: CMBoxShotgunFlechette
+        points: 20
+    - name: Special Ammunition
+      entries:
+      #- id: M54C Incendiary Magazine
+      #- id: M54C Rubber Magazine
+      - id: CMBoxShotgunBeanbag
+        points: 10
+    - name: Explosives
+      entries:
+      - id: CMPacketGrenadeHighExplosiveFilled
+        points: 15
+      - id: CMPacketGrenadeFragFilled
+        points: 15
+      #- id: CMPacketGrenadesWPFilled # TODO RMC14 Port White Phosphorus (WP) Grenades
+      #- id: CMPacketGrenadesElectroshockFilled # TODO RMC14 Port Electroshock Grenades
+    - name: Rail Attachments
+      entries:
+      - id: RMCAttachmentS5RedDotSight
+        points: 15
+      - id: RMCAttachmentS6ReflexSight
+        points: 15
+      - id: RMCAttachmentS42xTelescopicMiniscope
+        points: 15
+    # - name: Helmet Visors # TODO RMC14 Port Helmet Visors
+    #   entries:
+    #   - id: CMHelmetVisor
+    - name: Underbarrel Attachments
+      entries:
+      - id: RMCAttachmentLaserSight
+        points: 15
+      - id: RMCAttachmentAngledGrip
+        points: 15
+      - id: RMCAttachmentVerticalGrip
+        points: 15
+      - id: ShotgunRMCAttachmentU7Underbarrel
+        points: 15
+      - id: RMCAttachmentUnderbarrelExtinguisher # TODO: Check this works, prototype looks sussy
+        points: 15
+      - id: RMCAttachmentMK1GrenadeLauncher
+        points: 5
+    - name: Barrel Attachments
+      entries:
+      - id: RMCAttachmentExtendedBarrel
+        points: 15
+      - id: RMCAttachmentRecoilCompensator
+        points: 15
+      - id: RMCAttachmentSuppressor
+        points: 15
