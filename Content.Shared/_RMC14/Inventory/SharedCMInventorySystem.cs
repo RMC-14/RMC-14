@@ -469,6 +469,28 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 return true;
         }
 
+        // Check webbing holster
+        if (TryComp(item, out WebbingClothingComponent? webClothComp))
+        {
+            if (_webbing.HasWebbing(webClothComp.Owner, out var webComp))
+            {
+                if (HasComp<CMHolsterComponent>(webComp))
+                {
+                    if (TryComp(webComp, out CMItemSlotsComponent? webHolster) &&
+                        webHolster.Cooldown is { } cooldown &&
+                        _timing.CurTime < webHolster.LastEjectAt + cooldown)
+                    {
+                        stop = true;
+                        _popup.PopupPredicted(webHolster.CooldownPopup, user, user, PopupType.SmallCaution);
+                        return false;
+                    }
+
+                    if (PickupSlot(user, webComp))
+                        return true;
+                }
+            }
+        }
+
         var ev = new IsUnholsterableEvent();
         RaiseLocalEvent(item, ref ev);
 
