@@ -66,7 +66,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechStaffOfficerEquipment
-  name: ColMarTech Staff Officer Armory Equipment Rack # This is a general-use armoury vend for CIC.
+  name: ColMarTech Staff Officer Armory Equipment Rack
   description: An automated combat equipment vendor for Staff Officers.
   components:
   - type: AccessReader
@@ -75,17 +75,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
-    jobs: # Yes, it says "Staff Officer" equipment but Command Staff generally arm themselves from this vend for Hijack.
+    jobs:
     - CMStaffOfficer
-    - CMMilitaryPolice # For whatever isn't inside the Honor Guard set
-    - CMAuxiliarySupportOfficer
-    - CMPilotGunship
-    - CMPilotDropship
-    - CMChiefMP
-    - CMChiefEngineer
-    - CMCMO
-    - CMQuartermaster # Not sure if they count as real command staff
-    - CMSeniorEnlistedAdvisor
     sections:
     - name: Combat Equipment
       takeAll: CMCombatEquipment
