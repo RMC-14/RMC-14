@@ -3,35 +3,42 @@
   id: RMCSiegeMaul
   name: "G&M 28 Breacher"
   description: "The G&M 28 Breacher is the latest in the line of deconstruction tools. After one particular incident involving a split head the UNMC started contracting G&M"
-- type: MeleeWeapon
-  wideAnimationRotation: -135
-  attackRate: 1.8
-  damage:
-    types:
-      Slash: 250
-- type: DamageOtherOnHit
-  damage:
-    types:
-      Slash: 20
-- type: CMArmorPiercing
-  amount: 35
-- type: Wieldable
-- type: MeleeRequiresWield
-- type: WieldableSpeedModifiers
-  baseWalk: 0.9
-  baseSprint: 0.7
-- type: WieldDelay
-  baseDelay: 0.3
-- type: RMCMagneticItem
-- type: Item
-  size: Ginormous 
-- type: Sprite
-  sprite: _RMC14/Objects/Weapons/Melee/m&s_28_breacher.rsi
-  state: icon
-- type: Clothing
-  slots:
-  - suitStorage
-  - Back
-  sprite: _RMC14/Objects/Weapons/Melee/Melee/m&s_28_breacher.rsi
-- type: DisarmMalus
-  malus: 0.225
+  components:
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 1.8
+    damage:
+      types:
+        Slash: 250
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 20
+  - type: CMArmorPiercing
+    amount: 35
+  - type: Wieldable
+  - type: MeleeRequiresWield
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.9
+    baseSprint: 0.9
+  - type: WieldDelay
+    baseDelay: 0.3
+  - type: RMCMagneticItem
+  - type: Item
+    size: Ginormous 
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/m&s_28_breacher.rsi
+    state: icon
+  - type: Clothing
+    slots:
+    - suitStorage
+    - Back
+    sprite: _RMC14/Objects/Weapons/Melee/m&s_28_breacher.rsi
+  - type: DisarmMalus
+    malus: 0.225
+  - type: Tag
+    tags:
+    - Maul
+
+- type: Tag
+  id: Maul
