@@ -11,7 +11,6 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoAnnounceDeathComponent, MobStateChangedEvent>(OnAnnounceDeathMobStateChanged);
-		SubscribeLocalEvent<XenoAnnounceDeathComponent, ChasmFallingEvent>(OnChasmFalling);
     }
 
     private void OnAnnounceDeathMobStateChanged(Entity<XenoAnnounceDeathComponent> ent, ref MobStateChangedEvent args)
