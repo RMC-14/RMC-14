@@ -33,8 +33,6 @@
         RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
     - type: MarineOrders
-    - type: CMVendorUser
-      points: 45
 
 - type: startingGear
   id: CMGearCMO

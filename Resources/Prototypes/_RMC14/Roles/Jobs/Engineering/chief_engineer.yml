@@ -33,8 +33,6 @@
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
     - type: MarineOrders
-    - type: CMVendorUser
-      points: 45
   hidden: true # TODO RMC14
 
 - type: startingGear

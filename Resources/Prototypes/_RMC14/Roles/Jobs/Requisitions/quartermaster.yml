@@ -31,8 +31,6 @@
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
     - type: MarineOrders
-    - type: CMVendorUser
-      points: 45
 
 
 - type: startingGear
