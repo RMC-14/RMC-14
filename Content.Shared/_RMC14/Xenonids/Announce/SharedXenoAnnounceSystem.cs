@@ -3,6 +3,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
+using Content.Shared.Chasm;
 
 namespace Content.Shared._RMC14.Xenonids.Announce;
 
