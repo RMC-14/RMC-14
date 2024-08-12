@@ -3,7 +3,6 @@ using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
-using Content.Shared.Chasm;
 
 namespace Content.Shared._RMC14.Xenonids.Announce;
 
@@ -25,11 +24,6 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
         else
             AnnounceSameHive(ent.Owner, Loc.GetString(ent.Comp.Message, ("xeno", ent.Owner)), color: ent.Comp.Color);
     }
-	
-	private void OnChasmFalling(Entity<XenoAnnounceDeathComponent> ent, ref ChasmFallingEvent args)
-	{
-		AnnounceSameHive(ent.Owner, Loc.GetString(ent.Comp.Message, ("xeno", ent.Owner)), color: ent.Comp.Color);
-	}
 
     public string WrapHive(string message, Color? color = null)
     {
