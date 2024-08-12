@@ -1,12 +1,12 @@
 ﻿<Document>
   # Marine Law
   Command and MP are required to both enforce the law and abide by it.
-  - [textlink=". Definitions" link="CMMarineLawDefinitions"]
-  - [textlink=". Immunities" link=""]
-  - [textlink=". Procedures" link=""]
-  - [textlink=". Crimes" link=""]
-  - [textlink=". Prisoner Rights" link=""]
-  - [textlink=". Special Circumstances" link=""]
-  - [textlink=". Synthetics" link=""]
-  - [textlink=". Commanding Officer Provisions" link=""]
+  - [textlink="ODefinitions" link="CMMarineLawDefinitions"]
+  - [textlink="XImmunities" link=""]
+  - [textlink="OProcedures" link="CMMarineLawProcedures"]
+  - [textlink="XCrimes" link=""]
+  - [textlink="XPrisoner Rights" link=""]
+  - [textlink="XSpecial Circumstances" link=""]
+  - [textlink="XSynthetics" link=""]
+  - [textlink="XCommanding Officer Provisions" link=""]
 </Document>

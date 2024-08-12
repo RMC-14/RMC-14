@@ -25,6 +25,7 @@
   children:
   - CMMarineLawArresting
   - CMMarineLawCharging
+  - CMMarineLawNJP
 
 - type: guideEntry
   parent: RMC
@@ -39,4 +40,11 @@
   name: rmc-guide-entry-marine-law-charging
   text: "/ServerInfo/Guidebook/_RMC14/Law/CMMarineLawCharging.xml"
   priority: 1
+
+- type: guideEntry
+  parent: RMC
+  id: CMMarineLawNJP
+  name: rmc-guide-entry-marine-law-njp
+  text: "/ServerInfo/Guidebook/_RMC14/Law/CMMarineLawNJP.xml"
+  priority: 2
 
