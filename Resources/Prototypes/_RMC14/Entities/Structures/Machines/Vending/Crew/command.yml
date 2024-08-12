@@ -17,7 +17,7 @@
     - CMStaffOfficer
     sections:
     - name: Standard Equipment
-      takeAll: CMStandard # I'm not sure what this does.
+      takeAll: CMStandard
       entries:
       - id: CMBootsBlackFilled
       - id: RMCHeadsetMarineCommand
