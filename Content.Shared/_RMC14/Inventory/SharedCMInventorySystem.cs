@@ -546,4 +546,14 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
         return (filled, slots.Comp.Slots.Count);
     }
+
+    public bool IsEmpty(Entity<ItemSlotsComponent?> slots)
+    {
+        (int filled, int total) = GetItemSlotsFilled(slots);
+
+        if (filled == 0)
+            return true;
+
+        return false;
+    }
 }

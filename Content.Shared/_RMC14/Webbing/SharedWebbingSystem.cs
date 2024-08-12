@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Item;
@@ -48,9 +49,16 @@ public abstract class SharedWebbingSystem : EntitySystem
             Act = () => Detach(clothing, user)
         });
 
-        // For webbing holsters
+        // Check if webbing holster
         if (!HasComp<CMHolsterComponent>(webComp) ||
             !HasComp<CMItemSlotsComponent>(webComp))
+            return;
+
+        if(!TryComp(webComp, out ItemSlotsComponent? itemSlotsComp))
+            return;
+
+        // Check if holster has gun
+        if (_cmInventory.IsEmpty(itemSlotsComp.Owner))
             return;
 
         args.Verbs.Add(new InteractionVerb
