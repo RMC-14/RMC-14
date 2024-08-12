@@ -37,6 +37,8 @@
         points: 2
       - id: RMCPowerCellHigh
         points: 3
+      - id: RMCSiegeMaul
+        points: 12
       - id: CMSheetMetal10
         name: metal x10
         points: 5
