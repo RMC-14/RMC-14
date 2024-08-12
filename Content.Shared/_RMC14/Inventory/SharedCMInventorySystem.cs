@@ -500,6 +500,11 @@ public abstract class SharedCMInventorySystem : EntitySystem
         return _hands.TryPickup(user, item);
     }
 
+    public bool Unholster(EntityUid user, EntityUid item)
+    {
+        return Unholster(user, item, out _);
+    }
+
     public bool TryEquipClothing(EntityUid user, Entity<ClothingComponent> clothing)
     {
         foreach (var order in _quickEquipOrder)

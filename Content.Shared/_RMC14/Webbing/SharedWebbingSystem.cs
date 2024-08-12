@@ -5,6 +5,7 @@ using Content.Shared.Item;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Verbs;
+using Content.Shared._RMC14.Inventory;
 using Robust.Shared.Containers;
 using static Content.Shared._RMC14.Webbing.WebbingTransferComponent;
 
@@ -16,6 +17,7 @@ public abstract class SharedWebbingSystem : EntitySystem
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
+    [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
 
     public override void Initialize()
     {
@@ -36,7 +38,7 @@ public abstract class SharedWebbingSystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract)
             return;
 
-        if (!HasWebbing((clothing, clothing), out _))
+        if (!HasWebbing((clothing, clothing), out var webComp))
             return;
 
         var user = args.User;
@@ -45,6 +47,18 @@ public abstract class SharedWebbingSystem : EntitySystem
             Text = "Remove webbing",
             Act = () => Detach(clothing, user)
         });
+
+        // For webbing holsters
+        if (!HasComp<CMHolsterComponent>(webComp) ||
+            !HasComp<CMItemSlotsComponent>(webComp))
+            return;
+
+        args.Verbs.Add(new InteractionVerb
+        {
+            Text = "Unholster gun",
+            Act = () => _cmInventory.Unholster(user, webComp)
+        });
+
     }
 
     public bool HasWebbing(Entity<WebbingClothingComponent?> clothing, out Entity<WebbingComponent> webbing)
