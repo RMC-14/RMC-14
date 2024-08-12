@@ -41,9 +41,9 @@
       - id: CMSatchelSecurity
     - name: Belt
       choices: { CMBelt: 1 }
-      entries: []
-#     - id: CMM276GeneralPistolHolsterRig
-#     - id: CMM276M44HolsterRig
+      entries:
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
 #     - M276 G8-A General Utility Pouch
     - name: Pouches
       choices: { RMCPouch: 2 }
@@ -113,9 +113,9 @@
       - id: CMSatchelSecurity
     - name: Belt
       choices: { CMBelt: 1 }
-      entries: []
-#     - id: CMM276GeneralPistolHolsterRig
-#     - id: CMM276M44HolsterRig
+      entries:
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
 #     - M276 G8-A General Utility Pouch
     - name: Pouches
       choices: { RMCPouch: 2 }

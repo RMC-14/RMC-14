@@ -121,7 +121,7 @@
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch
-    #- id: CMM276M82FHolsterRig
+    #- id: RMCBeltHolsterFlareGun
     #- id: CMM276ShotgunShellLoadingRig
     - name: Pouches
       choices: { RMCPouch: 2 }

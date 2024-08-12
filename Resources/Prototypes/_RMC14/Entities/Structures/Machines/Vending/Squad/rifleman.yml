@@ -49,7 +49,7 @@
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch
-      #    CMM276M82FHolsterRig #TODO: Make this
+      #    RMCBeltHolsterFlareGun #TODO: Make this
       #    CMM276ShotgunShellLoadingRig #TODO: Make this
       - id: CMBeltUtility
       - id: RMCBeltGrenade
