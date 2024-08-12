@@ -417,7 +417,7 @@
     state: mazy_the_fortress_tusji
   - type: PatronFigurine
     id: 05443bd1-e84b-4782-9f03-c2b4af96b109
-    
+
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronAstorDebb
