@@ -127,8 +127,8 @@
       #  amount: 20
     - name: Belts
       entries:
-      #- id: G8-A General Utility Pouch
-      #   amount: 2
+      - id: RMCBeltUtilityGeneral
+        amount: 2
       - id: CMBeltMarine
         amount: 15
       #- id: M276 General Pistol Holster Rig
