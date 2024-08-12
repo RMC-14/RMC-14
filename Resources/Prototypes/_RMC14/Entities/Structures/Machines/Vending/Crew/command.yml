@@ -65,15 +65,15 @@
 
 - type: entity
   parent: ColMarTechBase
-  id: ColMarTechStaffOfficerEquipment
-  name: ColMarTech Staff Officer Armory Equipment Rack
+  id: ColMarTechStaffOfficerWeapon
+  name: ColMarTech Staff Officer Armory Weapon Rack
   description: An automated combat equipment vendor for Staff Officers.
   components:
   - type: AccessReader
     access:
     - [ "CMAccessCommand" ]
   - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
     jobs:
     - CMStaffOfficer
@@ -368,7 +368,7 @@
 
 # Commanding Officer #
 
-# Drip Vend
+# Equipment Vend
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCommandingOfficerEquipment
@@ -389,12 +389,6 @@
       entries:
       - id: CMHeadsetSeniorCommand
       - id: CMMRE
-    - name: Officer's Uniform # In CM13; this is in the preferences section. # TODO RMC14 Loadouts
-      entries:
-      - id: CMJumpsuitCO
-      - id: CMJumpsuitCOFormalBlack
-      - id: CMJumpsuitCOFormalWhite
-      - id: CMJumpsuitCOService
   # - name: Commanding Officer Essentials Kit #TODO: Make this.
   #   takeAll: CMBundle
   #   entries:
