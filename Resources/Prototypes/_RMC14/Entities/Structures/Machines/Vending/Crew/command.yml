@@ -368,6 +368,61 @@
 
 # Commanding Officer #
 
+# Clothing Vend
+
+- type:
+  parent: ColMarTechBase
+  id: ColMarTechCommandingOfficerClothing
+  name: ColMarTech Commanding Officer Clothing Rack
+  description: An automated closet hooked up to a colossal storage of standard-issue dress uniform variants.
+  components:
+  - type: AccessReader
+    access:
+    - [ "ShipMasterAccess" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMCommandingOfficer
+    sections:
+    - name: Utility
+      entries:
+      - id: JumpsuitMarine # This is called "SCM Uniform" need to check what it is.
+      - id: CMJumpsuitBO
+      #- id: CMJumpsuitOperations # TODO: Port Operations Uniform
+      - id: CMHeadCapCO
+      - id: CMHeadBeretCO
+      - id: CMBootsBlackFilled
+      - id: CMHandsBlackMarine
+    - name: Utility Extras
+      entries:
+      #- id: CMSunglasses # TODO: Port Sunglasses
+      #- id: CMPersonalShades # TODO RMC14 Port Personal Shades
+      #- id: CMAviatorShades # TODO RMC14 Port Aviator Shades
+      - id: Marine RPG glasses
+    - name: Service
+      entries:
+      - id: CMJumpsuitCOService
+      - id: CMJumpsuitCOFormalWhite
+      - id: CMJumpsuitCOFormalBlack
+      - id: CMCoatOfficer # TODO: Check this is the service variant
+      - id: CMCoatMP
+      - id: RMCShoesLaceup
+      - id: RMCShoesLaceupBrown # RMC Addition
+    - name: Service Headwear
+      entries:
+      - id: CMHeadBeretCO
+      #- id: CMHeadBeretCOWhite # TODO: Port White Beret
+      - id: CMHeadBeretCOBlack
+      - id: CMHeadCap # TODO: Check this is the service variant. If so, parent and rename.
+    - name: Service Extras
+      entries:
+      - id: CMCoatCOBomber
+    # - name: Dress  # TODO: Check if this is locked to Council Members; this seems weird for a CO to be able to wear
+    #   entries:
+    # - name: Dress Headwear
+    # - name: Dress Extras
+
 # Equipment Vend
 - type: entity
   parent: ColMarTechBase
