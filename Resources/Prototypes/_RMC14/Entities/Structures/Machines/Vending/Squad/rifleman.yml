@@ -84,6 +84,8 @@
       entries:
       - id: CMEntrenchingTool
         points: 5
+      - id: RMCSiegeMaul
+        points: 15
       - id: CMSandbagEmpty25
         name: sandbags x25
         points: 20
