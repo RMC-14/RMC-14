@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Input;
+using Content.Shared._RMC14.Webbing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Hands.Components;
@@ -8,6 +9,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
+using Content.Shared.Storage;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
@@ -21,6 +23,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedWebbingSystem _webbing = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -277,6 +280,33 @@ public abstract class SharedCMInventorySystem : EntitySystem
                     itemSlot.ContainerSlot != null)
                 {
                     validSlots.Add(new HolsterSlot(priority, true, null, (clothing, slotComp), ItemSlot: itemSlot));
+                    continue;
+                }
+
+                // If the slot item has a WebbingClothingComponent
+                // and has a webbing
+                //  which contains a CMHolsterComponent
+                //  and contains an ItemSlotsComponent
+                //  and insert succeeds
+                //  then return
+                if (TryComp(clothing, out WebbingClothingComponent? webClothComp))
+                {
+                    // Get webbing component if able
+                    if (!_webbing.HasWebbing(webClothComp.Owner, out var webComp))
+                        continue;
+
+                    if (HasComp<CMHolsterComponent>(webComp) &&
+                        HasComp<CMItemSlotsComponent>(webComp) &&
+                        SlotCanInteract(user, webComp, out var webSlotComp) &&
+                        TryGetAvailableSlot((webComp, webSlotComp),
+                            item,
+                            user,
+                            out var webItemSlot,
+                            emptyOnly: true) &&
+                        webItemSlot.ContainerSlot != null)
+                    {
+                        validSlots.Add(new HolsterSlot(priority, true, null, (webComp, webSlotComp), ItemSlot: webItemSlot));
+                    }
                 }
             }
         }
