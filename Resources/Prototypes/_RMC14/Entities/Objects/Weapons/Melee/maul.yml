@@ -24,11 +24,14 @@
   baseDelay: 0.3
 - type: RMCMagneticItem
 - type: Item
-  size: Ginormous
-  sprite: 
+  size: Ginormous 
+- type: Sprite
+  sprite: _RMC14/Objects/Weapons/Melee/m&s_28_breacher.rsi
+  state: icon
 - type: Clothing
   slots:
   - suitStorage
   - Back
+  sprite: _RMC14/Objects/Weapons/Melee/Melee/m&s_28_breacher.rsi
 - type: DisarmMalus
   malus: 0.225
