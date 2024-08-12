@@ -250,7 +250,7 @@ public sealed class XenoEggSystem : EntitySystem
     private void OnXenoEggInteractUsing(Entity<XenoEggComponent> egg, ref InteractUsingEvent args)
     {
         // Doesn't check hive or if a xeno is doing it
-        if (!HasComp<XenoParasiteComponent>(args.Used) || _rmcHands.IsPickupByAllowed(egg.Owner, args.User))
+        if (!HasComp<XenoParasiteComponent>(args.Used) || _rmcHands.IsPickupByAllowed(args.Used, args.User))
             return;
 
         args.Handled = true;
