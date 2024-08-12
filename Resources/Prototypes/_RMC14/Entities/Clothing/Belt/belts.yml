@@ -561,3 +561,48 @@
           - WeaponSMGM63
   - type: CMHolster
   - type: CMItemSlots
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltHolsterFlareGun
+  name: M276 pattern M82F flare gun holster rig
+  description: The M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version is for the M82F flare gun.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_flaregun.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m82f
+      offset: -0.345, 0.0
+      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      visible: false
+    - state: icon-front
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_flaregun.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,3,1 # 2 slots
+    whitelist:
+      tags:
+      - Flare # todo: replace with flaregun ammo
+  - type: FixedItemSizeStorage
+  - type: ContainerContainer
+    containers:
+      pouch: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      pouch:
+        name: M82F holster
+#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
+#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        whitelist:
+          tags:
+          - Sidearm # todo: replace with flaregun
+  - type: CMHolster
+  - type: CMItemSlots
