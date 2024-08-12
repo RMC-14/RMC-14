@@ -25,6 +25,7 @@
 - type: RMCMagneticItem
 - type: Item
   size: Ginormous
+  sprite: 
 - type: Clothing
   slots:
   - suitStorage
