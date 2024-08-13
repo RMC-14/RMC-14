@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed not being able to use the hf2 health analyzer on others.
-    type: Fix
-  id: 45
-  time: '2024-04-14T00:13:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1223
 - author: Whisper
   changes:
   - message: Guns no longer start with mags.
@@ -4293,5 +4286,15 @@
   id: 544
   time: '2024-08-11T03:52:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3613
+- author: Vermidia
+  changes:
+  - message: Larva and parasites can no longer nest hosts
+    type: Fix
+  - message: Xenos that can't put up parasites can no longer infect with them or put
+      them back into eggs by pulling them.
+    type: Fix
+  id: 545
+  time: '2024-08-13T00:42:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3638
 Name: RMC14
 Order: -1
