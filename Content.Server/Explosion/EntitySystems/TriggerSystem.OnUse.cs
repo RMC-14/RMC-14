@@ -4,6 +4,7 @@ using Content.Shared.Examine;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
+using Content.Shared.Tag;
 using Content.Shared.Verbs;
 
 namespace Content.Server.Explosion.EntitySystems;
@@ -11,6 +12,7 @@ namespace Content.Server.Explosion.EntitySystems;
 public sealed partial class TriggerSystem
 {
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private readonly TagSystem _tagSystem = default!;
 
     private void InitializeOnUse()
     {
@@ -160,6 +162,8 @@ public sealed partial class TriggerSystem
 
         if (component.DoPopup)
             _popupSystem.PopupEntity(Loc.GetString("trigger-activated", ("device", uid)), args.User, args.User);
+
+        _tagSystem.AddTag(uid, "TimerTriggered");
 
         StartTimer((uid, component), args.User);
 

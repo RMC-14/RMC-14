@@ -335,6 +335,9 @@
     whitelist:
       tags:
       - RMCGrenadeM40
+    blacklist:
+      tags:
+      - TimerTriggered
     capacity: 3
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
