@@ -45,4 +45,7 @@
     interfaces:
       enum.OverwatchConsoleUI.Key:
         type: OverwatchConsoleBui
+  - type: RequiresSkill
+    skills:
+      RMCSkillOverwatch: 1
   - type: OverwatchConsole

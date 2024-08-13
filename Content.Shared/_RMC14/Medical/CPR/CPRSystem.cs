@@ -156,7 +156,7 @@ public sealed class CPRSystem : EntitySystem
         var target = args.Args.Target;
         var performer = args.Args.Performer;
 
-        if (_mobState.IsAlive(ent) || _rotting.IsRotten(ent))
+        if (_mobState.IsAlive(target) || _rotting.IsRotten(target))
         {
             args.Args.Cancelled = true;
             return;
@@ -164,7 +164,7 @@ public sealed class CPRSystem : EntitySystem
 
         if (!ent.Comp.IsToggled)
         {
-            _popups.PopupClient(Loc.GetString("cm-crp-take-off-mask", ("target", target)), target, performer);
+            _popups.PopupClient(Loc.GetString("cm-cpr-take-off-mask", ("target", target)), target, performer);
             args.Args.Cancelled = true;
         }
     }

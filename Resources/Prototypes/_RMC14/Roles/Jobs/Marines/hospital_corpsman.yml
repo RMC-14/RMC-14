@@ -35,7 +35,6 @@
 - type: startingGear
   id: CMGearHospitalCorpsman
   equipment:
-    jumpsuit: CMJumpsuitMarineMedic # TODO RMC14 all squad roles should spawn with no jumpsuit but still have clothes on
     back: CMSatchelMarineMedic
     id: CMDogtagHospitalCorpsman
 

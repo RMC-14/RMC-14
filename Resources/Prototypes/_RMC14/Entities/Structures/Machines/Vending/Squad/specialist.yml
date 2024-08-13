@@ -19,23 +19,23 @@
     sections:
     - name: Weapons Specialist Sets
       choices: { SquadSpecKit: 1 }
-      sharedSpecLimit: 2 # 2 as requested until Scout and Pyro are added
+      sharedSpecLimit: 2 # 2 as requested until Pyro is added
       entries:
       - id: RMCDemoSpecEquipmentCase
       - id: RMCGrenadeSpecEquipmentCase
       #  points: 0
       #- id: PyroSet
       #  points: 0
-      #- id: ScoutSet
+      - id: RMCScoutSpecEquipmentCase
       - id: CMSniperEquipmentCase
     - name: Extra Scout Ammunition
-      entries: [ ]
-    #- id: A19HighVelocityImpactMagazine
-    #  points: 40
-    #- id: A19HighVelocityIncendiaryMagazine
-    #  points: 40
-    #- id: A19HighVelocityMagazine
-    #  points: 40
+      entries:
+#      - id: RMCMagazineRifleM4SPRA19 # TODO rmc14 CMMagazineSniperM96SFlak
+#        points: 40
+#      - id: RMCMagazineRifleM4SPRA19 # TODO rmc14 CMMagazineSniperM96SIncendiary
+#        points: 40
+      - id: RMCMagazineRifleM4SPRA19
+        points: 40
     - name: Extra Sniper Ammunition
       entries:
 #      - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak

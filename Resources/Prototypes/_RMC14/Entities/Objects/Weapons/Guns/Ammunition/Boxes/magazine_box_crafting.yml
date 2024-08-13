@@ -203,6 +203,36 @@
     state: base_su6
   objectType: Item
 
+# M44
+- type: construction
+  parent: RMC
+  name: Magazine Box (M44 Reg)
+  id: RMCBoxMagazineRevolverM44Empty
+  graph: CMBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazineRevolverM44Empty
+  category: construction-category-cm-box-magazine
+  description: A box for holding many speedloaders with a carrying handle.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_m54
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Magazine Box (M44 Mark)
+  id: RMCBoxMagazineRevolverM44MarksmanEmpty
+  graph: CMBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazineRevolverM44MarksmanEmpty
+  category: construction-category-cm-box-magazine
+  description: A box for holding many marksman speedloaders with a carrying handle.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_m54
+  objectType: Item
+
+
   # Construct graphs
 - type: constructionGraph
   parent: RMC
@@ -299,6 +329,18 @@
         amount: 1
         doAfter: 1
 
+    # M44
+    - to: RMCBoxMagazineRevolverM44Empty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 1
+    - to: RMCBoxMagazineRevolverM44MarksmanEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 1
+    
 
   # Why the fuck do you even need these nodes???
 
@@ -343,3 +385,9 @@
   # SU-6
   - node: RMCBoxMagazinePistolSU6Empty
     entity: RMCBoxMagazinePistolSU6Empty
+
+  # M44
+  - node: RMCBoxMagazineRevolverM44Empty
+    entity: RMCBoxMagazineRevolverM44Empty
+  - node: RMCBoxMagazineRevolverM44MarksmanEmpty
+    entity: RMCBoxMagazineRevolverM44MarksmanEmpty

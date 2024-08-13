@@ -4,8 +4,164 @@
   id: RMCBaseArmor
   abstract: true
   components:
+  - type: Sprite
+    state: icon # default state used by most inheritors
+  - type: Item
+    size: Huge
   - type: CMDefibrillatorBlocked
     popup: cm-defib-take-off-armor
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
   - type: Clothing
     equipSound:
-      collection: RMCEquipArmor
+      path: /Audio/_RMC14/Machines/armor_equip.ogg
+
+- type: entity
+  parent: RMCBaseArmor
+  id: RMCBaseMarineArmor
+  abstract: true
+  components:
+  - type: Clothing
+    equipDelay: 2
+    unequipDelay: 2
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 # 3 slots
+    whitelist:
+      tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - Sidearm
+      - Knife
+      - Flashlight
+      - MRE
+      - Grenade
+      - CMAutoInjector
+      - Cigarette
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - Syringe
+      - Hypospray
+      - CMOintment
+      - Brutepack
+      - CMBurnKit
+      - CMTraumaKit
+      - Bottle
+      - Pill
+      - PowerCell
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - MRE
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+  - type: WieldSlowdownCompensation
+    walk: 0.08
+    sprint: 0.136
+  - type: RMCNameItemOnVend
+    item: Armor
+  - type: CMHardArmor
+  - type: RMCBulkyArmor
+  - type: RMCMagneticArmor
+  - type: SquadArmor
+    layer: Armor
+    rsi:
+      sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: std-armor
+    leaderRsi:
+      sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: sql-armor
+
+- type: entity
+  parent: RMCBaseMarineArmor
+  id: RMCBaseMarineArmorLight
+  abstract: true
+  components:
+  - type: Item
+    heldPrefix: off
+  - type: Sprite
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: lamp-off
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: lamp-on
+      visible: false
+      map: [ "light" ]
+  - type: Clothing
+    equippedPrefix: off
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING
+      - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+        state: lamp-off
+  - type: Appearance
+  - type: ToggleableLightVisuals
+    spriteLayer: light
+    clothingVisuals:
+      outerClothing:
+      - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+        state: lamp-on
+  - type: PointLight
+    enabled: false
+    radius: 4
+    softness: 5
+    autoRot: true
+    netsync: false
+  - type: HandheldLight
+    addPrefix: true
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
+    turnOffSound:
+      path: /Audio/_RMC14/Machines/suitlight_off.ogg
+    turnOnSound:
+      path: /Audio/_RMC14/Machines/suitlight_on.ogg
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      id: radiating
+      interpolate: Linear
+      maxDuration: 2.0
+      startValue: 3.0
+      endValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+      reverseWhenFinished: true
+    - !type:PulseBehaviour
+      id: blinking
+      interpolate: Nearest
+      maxDuration: 1.0
+      minValue: 0.1
+      maxValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+  - type: Battery
+    maxCharge: 600 #lights drain 3/s but recharge of 2 makes this 1/s. Therefore 600 is 10 minutes of light.
+    startingCharge: 600
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 2 #recharge of 2 makes total drain 1w / s so max charge is 1:1 with time. Time to fully charge should be 5 minutes. Having recharge gives light an extended flicker period which gives you some warning to return to light area.

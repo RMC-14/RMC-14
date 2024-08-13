@@ -1,0 +1,29 @@
+- type: entity
+  id: ActionToggleMarineHud
+  name: Toggle Marine Hud
+  description: Toggle marine icons.
+  components:
+  - type: InstantAction
+    checkCanInteract: false
+    icon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudsquad_co
+    iconOn:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudsquad_co
+    event: !type:ToggleMarineHudActionEvent
+
+- type: entity
+  id: ActionToggleXenoHud
+  name: Toggle Xeno Hud
+  description: Toggle xeno health and plasma bars.
+  components:
+  - type: InstantAction
+    checkCanInteract: false
+    icon:
+      sprite: _RMC14/Interface/Alerts/xeno_health.rsi
+      state: health_full
+    iconOn:
+      sprite: _RMC14/Interface/Alerts/xeno_health.rsi
+      state: health_full
+    event: !type:ToggleXenoHudActionEvent
