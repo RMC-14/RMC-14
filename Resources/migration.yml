@@ -603,3 +603,6 @@ CMBucket: RMCBucket
 # 2024-08-09
 CMFogWall: RMCFogWall25
 CMFogWallShort: RMCFogWall15
+
+# 2024-08-12
+CMSeatBase: CMChair
