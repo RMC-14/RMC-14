@@ -409,6 +409,17 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMazyTheFortressTusji
+  name: Mazy 'The Fortress' Tusji figurine
+  description: "This figurine is covered in chew marks and acid burns, yet remains recognizable and unbroken."
+  components:
+  - type: Sprite
+    state: mazy_the_fortress_tusji
+  - type: PatronFigurine
+    id: 05443bd1-e84b-4782-9f03-c2b4af96b109
+
+- type: entity
+  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronAstorDebb
   name: Astor Debb figurine
   description: "Full-time demolitionist, she moves with a purpose, wielding her ~Magic Missile~"
@@ -417,6 +428,17 @@
     state: astor_debb
   - type: PatronFigurine
     id: 2dc63fb1-f830-4b0a-9eea-c8007fd09e6d
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNesartOnan
+  name: Nesart Onan figurine
+  description: "Blood loss is no joke! Come get some bandages from your local med bay today!"
+  components:
+  - type: Sprite
+    state: nesart_onan
+  - type: PatronFigurine
+    id: 0e3c7afc-4366-48a1-af0c-a9a8c1ecf0e6
 
 - type: entity
   parent: RMCBaseFigurinePatron

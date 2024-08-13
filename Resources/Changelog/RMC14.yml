@@ -1,34 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added surgery skills to the appropriate roles.
-    type: Add
-  id: 44
-  time: '2024-04-13T06:33:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1206
-- author: DrSmugleaf
-  changes:
-  - message: Fixed not being able to use the hf2 health analyzer on others.
-    type: Fix
-  id: 45
-  time: '2024-04-14T00:13:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1223
-- author: Whisper
-  changes:
-  - message: Guns no longer start with mags.
-    type: Fix
-  id: 46
-  time: '2024-04-14T00:35:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1220
-- author: Whisper
-  changes:
-  - message: shotguns no longer try to cycle when wielding
-    type: Fix
-  id: 47
-  time: '2024-04-13T10:31:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1221
-- author: DrSmugleaf
-  changes:
   - message: Marines will now be knocked down by developed alive xenos when trying
       to pull them.
     type: Add
@@ -4293,5 +4265,36 @@
   id: 543
   time: '2024-08-11T01:08:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3605
+- author: DrSmugleaf
+  changes:
+  - message: Added Mazy 'The Fortress' Tusji figurine.
+    type: Add
+  id: 544
+  time: '2024-08-11T03:52:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3613
+- author: Vermidia
+  changes:
+  - message: Larva and parasites can no longer nest hosts
+    type: Fix
+  - message: Xenos that can't put up parasites can no longer infect with them or put
+      them back into eggs by pulling them.
+    type: Fix
+  id: 545
+  time: '2024-08-13T00:42:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3638
+- author: coolmankid12345
+  changes:
+  - message: Marine icons and Xeno plasma/health for spectators to see
+    type: Add
+  id: 546
+  time: '2024-08-13T00:51:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3340
+- author: Whisper
+  changes:
+  - message: Added Nesart Onan, updated Satoru Suzuki figurines.
+    type: Add
+  id: 547
+  time: '2024-08-13T00:51:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3615
 Name: RMC14
 Order: -1
