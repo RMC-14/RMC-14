@@ -31,13 +31,13 @@
   - type: Item
     size: Ginormous 
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Melee/m&s_28_breacher.rsi
+    sprite: _RMC14/Objects/Weapons/Melee/g&m_28_breacher.rsi
     state: icon
   - type: Clothing
     slots:
     - suitStorage
     - Back
-    sprite: _RMC14/Objects/Weapons/Melee/m&s_28_breacher.rsi
+    sprite: _RMC14/Objects/Weapons/Melee/g&m_28_breacher.rsi
   - type: DisarmMalus
     malus: 0.225
   - type: Tag
