@@ -72,6 +72,10 @@
     damage:
       types:
         Slash: 50
+  - type: UsableWhileDevoured
+    damage:
+      types:
+        Slash: 3
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Weapons/Melee/m11_knife.rsi
@@ -106,6 +110,10 @@
     damage:
       types:
         Slash: 4
+  - type: UsableWhileDevoured
+    damage:
+      types:
+        Slash: 21
   - type: Item
     size: Large
     sprite: _RMC14/Objects/Weapons/Melee/machete.rsi

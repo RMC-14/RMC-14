@@ -1,4 +1,5 @@
-﻿using Content.Shared.IdentityManagement;
+﻿using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Components;
@@ -24,10 +25,12 @@ public sealed class CMPullingSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<ParalyzeOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
+        SubscribeLocalEvent<InfectOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
 
         SubscribeLocalEvent<SlowOnPullComponent, PullStartedMessage>(OnSlowPullStarted);
         SubscribeLocalEvent<SlowOnPullComponent, PullStoppedMessage>(OnSlowPullStopped);
@@ -62,20 +65,41 @@ public sealed class CMPullingSystem : EntitySystem
 
         _stun.TryParalyze(user, ent.Comp.Duration, true);
 
-        foreach (var session in Filter.Pvs(user).Recipients)
+        var puller = user;
+        var pulled = target;
+        var othersMessage = Loc.GetString("rmc-pull-paralyze-others", ("puller", puller), ("pulled", pulled));
+        var selfMessage = Loc.GetString("rmc-pull-paralyze-self", ("puller", puller), ("pulled", pulled));
+
+        _popup.PopupPredicted(selfMessage, othersMessage, puller, puller, PopupType.MediumCaution);
+    }
+
+    private void OnParalyzeOnPullAttempt(Entity<InfectOnPullAttemptComponent> ent, ref PullAttemptEvent args)
+    {
+        var user = args.PullerUid;
+        var target = args.PulledUid;
+        if (target != ent.Owner ||
+            HasComp<InfectOnPullAttemptImmuneComponent>(user) ||
+            _mobState.IsDead(ent))
         {
-            if (session.AttachedEntity is not { } recipient)
-                continue;
-
-            var puller = Identity.Name(user, EntityManager, recipient);
-            var pulled = Identity.Name(ent, EntityManager, recipient);
-            var message = $"{puller} tried to pull {pulled} but instead gets a tail swipe to the head!";
-
-            if (args.PullerUid == recipient)
-                _popup.PopupClient(message, user, recipient, PopupType.MediumCaution);
-            else
-                _popup.PopupEntity(message, user, recipient, PopupType.MediumCaution);
+            return;
         }
+
+        if (!TryComp<XenoParasiteComponent>(target, out var paraComp))
+            return;
+
+        Entity<XenoParasiteComponent> comp = (target, paraComp);
+
+        if (!_parasite.Infect(comp, user, false, true))
+            return;
+
+        args.Cancelled = true;
+
+        var puller = user;
+        var pulled = target;
+        var othersMessage = Loc.GetString("rmc-pull-infect-others", ("puller", puller), ("pulled", pulled));
+        var selfMessage = Loc.GetString("rmc-pull-infect-self", ("puller", puller), ("pulled", pulled));
+
+        _popup.PopupPredicted(selfMessage, othersMessage, puller, puller, PopupType.MediumCaution);
     }
 
     private void OnSlowPullStarted(Entity<SlowOnPullComponent> ent, ref PullStartedMessage args)

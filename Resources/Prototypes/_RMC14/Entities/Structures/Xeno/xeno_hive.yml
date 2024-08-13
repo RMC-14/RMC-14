@@ -21,6 +21,9 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: RMCNightVisionVisible
+    priority: -1
+    transparency: 0.2
   - type: HiveCore
   - type: GhostRole
     name: roles-lesser-drone-name
@@ -57,9 +60,14 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: RMCNightVisionVisible
+    priority: -1
+    transparency: 0.1
   - type: HiveConstructionNode
     initialPlasmaCost: 400
     plasmaCost: 1000
     spawn: HiveCoreXeno
   - type: HiveConstructionUnique
     id: HiveCoreXeno
+  - type: WarpPoint
+    location: hive core
