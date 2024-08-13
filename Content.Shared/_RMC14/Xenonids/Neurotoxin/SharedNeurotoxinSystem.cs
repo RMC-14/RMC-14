@@ -142,7 +142,6 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
 
             if (_random.Prob(coughChance * frameTime))
             {
-                // TODO RMC14 make em cough - same as above
                 EnsureComp<CoughedBloodComponent>(uid, out var bloodCough);
                 bloodCough.ExpireTime = time + neuro.BloodCoughDuration;
                 _damage.TryChangeDamage(uid, neuro.CoughDamage); // TODO RMC-14 specifically chest damage
