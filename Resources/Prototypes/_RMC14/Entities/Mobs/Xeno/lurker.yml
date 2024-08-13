@@ -57,6 +57,9 @@
     knockdownRequiresInvisibility: true
   - type: XenoTurnInvisible
   - type: XenoCripplingStrike
+    damage:
+      groups:
+        Brute: 7 # 20% of base damage
   - type: MeleeWeapon
     attackRate: 0.75
     damage:

@@ -1,4 +1,6 @@
 ﻿using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared.Coordinates;
+using Content.Shared.Damage;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
@@ -15,6 +17,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {
@@ -37,6 +40,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
         active.ExpireAt = _timing.CurTime + xeno.Comp.ActiveDuration;
         active.SpeedMultiplier = xeno.Comp.SpeedMultiplier;
         active.SlowDuration = xeno.Comp.SlowDuration;
+        active.Damage = xeno.Comp.Damage;
 
         Dirty(xeno, active);
 
@@ -61,12 +65,17 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
             victim.ExpireAt = _timing.CurTime + xeno.Comp.SlowDuration;
             victim.SpeedMultiplier = xeno.Comp.SpeedMultiplier;
 
+            _damageable.TryChangeDamage(entity, xeno.Comp.Damage);
+
             Dirty(entity, victim);
 
             _movementSpeed.RefreshMovementSpeedModifiers(entity);
 
             var message = Loc.GetString("cm-xeno-crippling-strike-hit", ("target", entity));
             _popup.PopupClient(message, entity, xeno);
+
+            if (_net.IsServer)
+                SpawnAttachedTo(xeno.Comp.Effect, entity.ToCoordinates());
 
             RemCompDeferred<XenoActiveCripplingStrikeComponent>(xeno);
             break;
