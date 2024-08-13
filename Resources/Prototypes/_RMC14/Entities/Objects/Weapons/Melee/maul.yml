@@ -6,7 +6,7 @@
   components:
   - type: MeleeWeapon
     wideAnimationRotation: -135
-    attackRate: 1.8
+    attackRate: 0.8
     damage:
       types:
         Slash: 90
@@ -34,10 +34,10 @@
     sprite: _RMC14/Objects/Weapons/Melee/g&m_28_breacher.rsi
     state: icon
   - type: Clothing
+    quickEquip: false
     slots:
+    - back
     - suitStorage
-    - Back
-    sprite: _RMC14/Objects/Weapons/Melee/g&m_28_breacher.rsi
   - type: DisarmMalus
     malus: 0.225
   - type: Tag
