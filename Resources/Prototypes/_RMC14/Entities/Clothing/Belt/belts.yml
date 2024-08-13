@@ -282,7 +282,7 @@
 - type: entity
   parent: CMBeltMarine
   id: CMBeltSmartGunOperatorPistol
-  name: M802 pattern smartgunner sidearm rig
+  name: M802 pattern smart gun operator sidearm rig
   description: The M802 is a limited-issue mark of USCM load-bearing equipment, designed to carry smartgun ammunition and a sidearm.
   components:
   - type: Sprite
