@@ -91,8 +91,8 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronIanthaAtikson
-  name: Iantha Atikson figurine
-  description: Everyone's favorite Reqqie! Just don't ask for crayons...
+  name: Iantha Atikson
+  description: This Figurine of a Quartermaster, despite it's inanimate nature, seems to stare back at you with cold, refined calculation. That glossy look in those fake eyes make you feel uncomfortable, and you get the impression that you're just another number to her.
   components:
   - type: Sprite
     state: Iantha_Atikson
@@ -417,7 +417,7 @@
     state: mazy_the_fortress_tusji
   - type: PatronFigurine
     id: 05443bd1-e84b-4782-9f03-c2b4af96b109
-    
+
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronAstorDebb
@@ -428,3 +428,25 @@
     state: astor_debb
   - type: PatronFigurine
     id: 2dc63fb1-f830-4b0a-9eea-c8007fd09e6d
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNesartOnan
+  name: Nesart Onan figurine
+  description: "Blood loss is no joke! Come get some bandages from your local med bay today!"
+  components:
+  - type: Sprite
+    state: nesart_onan
+  - type: PatronFigurine
+    id: 0e3c7afc-4366-48a1-af0c-a9a8c1ecf0e6
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDaltonHarris
+  name: Dalton Harris figurine
+  description: Former NFSD sergeant, but through some weird military loopholes ended up on the Almayer.
+  components:
+  - type: Sprite
+    state: dalton_harris
+  - type: PatronFigurine
+    id: 443ae72d-bfbb-4997-8170-08e599676c70
