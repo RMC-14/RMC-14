@@ -106,11 +106,15 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     {
         var comp = member.Comp ?? EnsureComp<HiveMemberComponent>(member);
 
-        if (comp.Hive == hive)
+        var old = comp.Hive;
+        if (old == hive)
             return;
 
         comp.Hive = hive;
         Dirty(member, comp);
+
+        var ev = new HiveChangedEvent(hive, old);
+        RaiseLocalEvent(member, ref ev);
     }
 
     public void SetSeeThroughContainers(Entity<HiveComponent?> hive, bool see)
@@ -237,3 +241,9 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         Dirty(hive);
     }
 }
+
+/// <summary>
+/// Raised on an entity after its hive is changed.
+/// </summary>
+[ByRefEvent]
+public record struct HiveChangedEvent(EntityUid? Hive, EntityUid? OldHive);

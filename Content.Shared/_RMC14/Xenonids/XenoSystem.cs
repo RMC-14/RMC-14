@@ -217,13 +217,16 @@ public sealed class XenoSystem : EntitySystem
 
     public void SetHive(Entity<XenoComponent?> xeno, Entity<HiveComponent?>? hive)
     {
-        if (!Resolve(xeno, ref xeno.Comp))
+        if (!Resolve(xeno, ref xeno.Comp) || xeno.Comp.Hive == hive?.Owner)
             return;
+
+        var ev = new HiveChangedEvent(hive, xeno.Comp.Hive);
 
         if (hive == null)
         {
             xeno.Comp.Hive = null;
             Dirty(xeno, xeno.Comp);
+            RaiseLocalEvent(xeno, ref ev);
             return;
         }
 
@@ -234,6 +237,9 @@ public sealed class XenoSystem : EntitySystem
         xeno.Comp.Hive = hive;
         Dirty(xeno, xeno.Comp);
 
+        RaiseLocalEvent(xeno, ref ev);
+
+        // TODO: make this a HiveChangedEvent handler
         _nightVision.SetSeeThroughContainers(xeno.Owner, hiveEnt.Comp.SeeThroughContainers);
     }
 
