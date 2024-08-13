@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Xenonids.Plasma;
+﻿using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Movement.Systems;
@@ -25,6 +26,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
 
         SubscribeLocalEvent<XenoActiveCripplingStrikeComponent, MeleeHitEvent>(OnXenoCripplingStrikeHit);
 
+        SubscribeLocalEvent<VictimCripplingStrikeSlowedComponent, DamageModifyEvent>(OnVictimCripplingModify, before: [typeof(CMArmorSystem)]);
         SubscribeLocalEvent<VictimCripplingStrikeSlowedComponent, RefreshMovementSpeedModifiersEvent>(OnVictimCripplingRefreshSpeed);
         SubscribeLocalEvent<VictimCripplingStrikeSlowedComponent, ComponentRemove>(OnVictimCripplingRemove);
     }
@@ -40,7 +42,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
         active.ExpireAt = _timing.CurTime + xeno.Comp.ActiveDuration;
         active.SpeedMultiplier = xeno.Comp.SpeedMultiplier;
         active.SlowDuration = xeno.Comp.SlowDuration;
-        active.Damage = xeno.Comp.Damage;
+        active.DamageMult = xeno.Comp.DamageMult;
 
         Dirty(xeno, active);
 
@@ -64,8 +66,8 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
 
             victim.ExpireAt = _timing.CurTime + xeno.Comp.SlowDuration;
             victim.SpeedMultiplier = xeno.Comp.SpeedMultiplier;
-
-            _damageable.TryChangeDamage(entity, xeno.Comp.Damage);
+            victim.DamageMult = xeno.Comp.DamageMult;
+            victim.WasHit = false;
 
             Dirty(entity, victim);
 
@@ -81,6 +83,16 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
             break;
         }
     }
+
+    private void OnVictimCripplingModify(Entity<VictimCripplingStrikeSlowedComponent> victim, ref DamageModifyEvent args)
+    {
+        if (!victim.Comp.WasHit)
+        {
+            args.Damage *= victim.Comp.DamageMult;
+            victim.Comp.WasHit = true;
+        }
+    }
+
 
     private void OnVictimCripplingRefreshSpeed(Entity<VictimCripplingStrikeSlowedComponent> victim, ref RefreshMovementSpeedModifiersEvent args)
     {

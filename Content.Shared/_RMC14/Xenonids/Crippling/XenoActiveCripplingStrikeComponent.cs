@@ -20,7 +20,7 @@ public sealed partial class XenoActiveCripplingStrikeComponent : Component
     public TimeSpan SlowDuration = TimeSpan.FromSeconds(5);
 
     [DataField, AutoNetworkedField]
-    public DamageSpecifier Damage = new();
+    public float DamageMult = 1.2f;
 
     [DataField, AutoNetworkedField]
     public EntProtoId Effect = "RMCEffectCripple";

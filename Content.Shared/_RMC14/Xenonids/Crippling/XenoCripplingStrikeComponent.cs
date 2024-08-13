@@ -8,8 +8,8 @@ namespace Content.Shared._RMC14.Xenonids.Crippling;
 [Access(typeof(XenoCripplingStrikeSystem))]
 public sealed partial class XenoCripplingStrikeComponent : Component
 {
-    [DataField]
-    public DamageSpecifier Damage = new();
+    [DataField, AutoNetworkedField]
+    public float DamageMult = 1.2f;
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 PlasmaCost = 20;
