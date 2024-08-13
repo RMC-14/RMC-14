@@ -30,8 +30,46 @@ public abstract class SharedWebbingSystem : EntitySystem
 
     private void OnWebbingClothingInteractUsing(Entity<WebbingClothingComponent> clothing, ref InteractUsingEvent args)
     {
-        if (Attach(clothing, args.Used))
-            args.Handled = true;
+        // Check if clothing item has webbing
+        //  If no, attempt to attach webbing
+        //   If successful, return
+        //  If yes, check if webbing has holster
+        //   If yes, attempt to insert into holster and check if it succeeds
+        //    If yes, return
+        //    If no, attempt to insert item into webbing (same function as attaching)
+
+        if (!HasWebbing(args.Used, out var webbing))
+        {
+            if (Attach(clothing, args.Used))
+            {
+                args.Handled = true;
+                return;
+            }
+        }
+
+        if (HasComp<CMHolsterComponent>(webbing) &&
+            HasComp<CMItemSlotsComponent>(webbing))
+        {
+
+        }
+
+
+        // Check if used item was webbing
+        // If yes, attempt to attach webbing
+        // If no, check if target item already has webbing
+        //  If yes, check if target item has holster
+        //   If yes, attempt to holster used item
+
+
+        if (HasComp<WebbingComponent>(args.Used))
+        {
+            if (Attach(clothing, args.Used))
+                args.Handled = true;
+        }
+        else
+        {
+
+        }
     }
 
     private void OnWebbingClothingGetVerbs(Entity<WebbingClothingComponent> clothing, ref GetVerbsEvent<InteractionVerb> args)
@@ -64,7 +102,7 @@ public abstract class SharedWebbingSystem : EntitySystem
         args.Verbs.Add(new InteractionVerb
         {
             Text = "Unholster gun",
-            Act = () => _cmInventory.Unholster(user, webComp)
+            Act = () => _cmInventory.TryUnholster(user, webComp)
         });
 
     }

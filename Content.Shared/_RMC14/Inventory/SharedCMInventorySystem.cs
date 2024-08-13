@@ -500,9 +500,15 @@ public abstract class SharedCMInventorySystem : EntitySystem
         return _hands.TryPickup(user, item);
     }
 
-    public bool Unholster(EntityUid user, EntityUid item)
+    public bool TryUnholster(EntityUid user, EntityUid item)
     {
         return Unholster(user, item, out _);
+    }
+
+    public bool TryHolster(EntityUid user, EntityUid item, EntityUid holster)
+    {
+        // TODO: IMPLEMENT THIS
+        return false;
     }
 
     public bool TryEquipClothing(EntityUid user, Entity<ClothingComponent> clothing)
