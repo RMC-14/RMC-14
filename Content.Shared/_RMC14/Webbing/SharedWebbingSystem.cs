@@ -38,6 +38,19 @@ public abstract class SharedWebbingSystem : EntitySystem
         //    If yes, return
         //    If no, attempt to insert item into webbing (same function as attaching)
 
+        if (_cmInventory.TryHolster(args.User, args.Used, clothing))
+        {
+            args.Handled = true;
+            return;
+        }
+
+        if (Attach(clothing, args.Used))
+        {
+            args.Handled = true;
+            return;
+        }
+
+        /*
         if (!HasWebbing(args.Used, out var webbing))
         {
             if (Attach(clothing, args.Used))
@@ -52,24 +65,13 @@ public abstract class SharedWebbingSystem : EntitySystem
         {
 
         }
-
+        */
 
         // Check if used item was webbing
         // If yes, attempt to attach webbing
         // If no, check if target item already has webbing
         //  If yes, check if target item has holster
         //   If yes, attempt to holster used item
-
-
-        if (HasComp<WebbingComponent>(args.Used))
-        {
-            if (Attach(clothing, args.Used))
-                args.Handled = true;
-        }
-        else
-        {
-
-        }
     }
 
     private void OnWebbingClothingGetVerbs(Entity<WebbingClothingComponent> clothing, ref GetVerbsEvent<InteractionVerb> args)
