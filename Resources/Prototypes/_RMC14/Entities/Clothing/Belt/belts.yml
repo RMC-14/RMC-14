@@ -291,7 +291,7 @@
     - state: icon
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: m1984 # TODO RMC14 per-gun underlay
-      offset: 0.15, 0.0
+      offset: 0.15625, 0.0
       map: [ "enum.CMItemSlotsLayers.Filled" ]
       visible: false
     - state: icon-front
@@ -525,7 +525,7 @@
     - state: icon
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: m63
-      offset: -0.345, 0.0
+      offset: -0.34375, 0.0
       map: [ "enum.CMItemSlotsLayers.Filled" ]
       visible: false
     - state: icon-front
@@ -573,7 +573,7 @@
     layers:
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: m82f
-      offset: -0.06, 0.0
+      offset: -0.0625, 0.0
       map: [ "enum.CMItemSlotsLayers.Filled" ]
       visible: false
     - state: icon
