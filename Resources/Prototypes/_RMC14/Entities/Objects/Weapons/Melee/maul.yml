@@ -9,11 +9,15 @@
     attackRate: 1.8
     damage:
       types:
-        Slash: 250
+        Slash: 90
   - type: DamageOtherOnHit
     damage:
       types:
         Slash: 20
+  - type: DamageMultipliers
+    multipliers:
+      Turf: 6
+      Breaching: 6
   - type: CMArmorPiercing
     amount: 35
   - type: Wieldable
