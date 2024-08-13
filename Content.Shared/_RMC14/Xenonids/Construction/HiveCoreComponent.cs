@@ -37,7 +37,8 @@ public sealed partial class HiveCoreComponent : Component
 
     /// <summary>
     /// How long a new construct can be made after the core is destroyed.
-    /// Only applies to this core's hive for xeno v xeno.
+    /// Only applies to this core's hive, so for xeno v xeno it will work.
+    /// Since distress call only has 1 hive it behaves like a global cooldown anyway.
     /// </summary>
     [DataField]
     public TimeSpan NewConstructCooldown = TimeSpan.FromMinutes(5);

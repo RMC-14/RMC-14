@@ -65,9 +65,9 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
             if (_announce.Count == 0)
                 continue;
 
+            // TODO: loc
             var popup = $"The Hive can now support: {string.Join(", ", _announce)}";
-            // below is commented out because it used to not do anything, now it works but isnt localized so i think its best to have a dedicated pr look at it
-            //_xenoAnnounce.AnnounceTohive(hiveId, popup, hive.AnnounceSound, PopupType.Large);
+            _xenoAnnounce.AnnounceTohive(hiveId, popup, hive.AnnounceSound, PopupType.Large);
         }
     }
 

@@ -421,7 +421,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             _prototype.HasIndex(args.Choice))
         {
             action.Icon = new SpriteSpecifier.EntityPrototype(args.Choice);
-            Dirty(xeno);
+            Dirty(xeno, action);
         }
     }
 
