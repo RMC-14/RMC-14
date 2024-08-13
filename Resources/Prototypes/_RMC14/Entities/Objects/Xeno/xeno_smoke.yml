@@ -83,7 +83,7 @@
     spawn: RMCSmokeNeurotoxin
     range: 3
   - type: NeurotoxinInjector
-    neuroPerSecond: 12
+    neuroPerSecond: 30
     affectsDead: false
     affectsInfectedNested: false
     toxinDamage:
