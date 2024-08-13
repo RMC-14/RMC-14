@@ -2,7 +2,7 @@
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.XAML;
 
-namespace Content.Client._RMC14.Dropship.Weapons;
+namespace Content.Client._RMC14.Dropship.Weapon;
 
 [GenerateTypedNameReferences]
 public sealed partial class DropshipWeaponsButtonSeparator : Control

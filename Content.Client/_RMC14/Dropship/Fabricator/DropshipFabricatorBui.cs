@@ -1,10 +1,10 @@
 ﻿using Content.Client.Message;
 using Content.Shared._RMC14.Dropship.Fabricator;
-using Content.Shared.Prototypes;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
+using static Content.Shared._RMC14.Dropship.Fabricator.DropshipFabricatorPrintableComponent;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 
 namespace Content.Client._RMC14.Dropship.Fabricator;
@@ -34,8 +34,7 @@ public sealed class DropshipFabricatorBui : BoundUserInterface
         _window.EquipmentLabel.SetMarkupPermissive(Loc.GetString("rmc-dropship-fabricator-equipment"));
         _window.AmmoLabel.SetMarkupPermissive(Loc.GetString("rmc-dropship-fabricator-ammo"));
 
-        if (EntMan.TryGetComponent(Owner, out DropshipFabricatorComponent? fabricator))
-            _window.PointsLabel.Text = Loc.GetString("rmc-dropship-fabricator-points", ("points", fabricator.Points));
+        Refresh();
 
         foreach (var id in _system.Printables)
         {
@@ -67,13 +66,22 @@ public sealed class DropshipFabricatorBui : BoundUserInterface
                 HorizontalExpand = true,
             };
 
-            if (printableProto.HasComponent<DropshipWeaponComponent>(_compFactory))
+            if (printable.Category == CategoryType.Equipment)
                 _window.EquipmentContainer.AddChild(container);
             else
                 _window.AmmoContainer.AddChild(container);
         }
 
         _window.OpenCentered();
+    }
+
+    public void Refresh()
+    {
+        if (_window is not { Disposed: false })
+            return;
+
+        if (EntMan.TryGetComponent(Owner, out DropshipFabricatorComponent? fabricator))
+            _window.PointsLabel.Text = Loc.GetString("rmc-dropship-fabricator-points", ("points", fabricator.Points));
     }
 
     protected override void Dispose(bool disposing)

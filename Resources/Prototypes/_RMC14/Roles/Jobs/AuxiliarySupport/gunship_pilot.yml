@@ -29,7 +29,6 @@
         RMCSkillPowerLoader: 2
         RMCSkillSurgery: 1
     - type: MarineOrders
-  hidden: true # TODO RMC14
 
 - type: startingGear
   id: CMGearPilotGunship

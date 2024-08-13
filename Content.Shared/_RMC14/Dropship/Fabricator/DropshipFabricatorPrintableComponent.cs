@@ -11,4 +11,13 @@ public sealed partial class DropshipFabricatorPrintableComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan Delay = TimeSpan.FromSeconds(10);
+
+    [DataField, AutoNetworkedField]
+    public CategoryType Category;
+
+    public enum CategoryType
+    {
+        Equipment,
+        Ammo,
+    }
 }

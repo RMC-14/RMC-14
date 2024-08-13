@@ -664,6 +664,7 @@
   - type: Occluder
     enabled: false
   - type: InteractionOutline
+  - type: Clickable
   - type: DropshipWeaponPoint
 
 - type: entity
@@ -709,6 +710,7 @@
   - type: Occluder
     enabled: false
   - type: InteractionOutline
+  - type: Clickable
   - type: DropshipWeaponPoint
 
 - type: entity
@@ -916,6 +918,7 @@
   - type: Occluder
     enabled: false
   - type: InteractionOutline
+  - type: Clickable
   - type: DropshipWeaponPoint
 
 - type: entity

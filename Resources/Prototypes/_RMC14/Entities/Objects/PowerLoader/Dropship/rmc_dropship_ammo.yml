@@ -1,0 +1,36 @@
+﻿- type: entity
+  abstract: true
+  parent: RMCDropshipAttachmentBase
+  id: RMCDropshipAttachmentAmmo
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/dropship_ammo.rsi
+  - type: DropshipFabricatorPrintable
+    category: Ammo
+    cost: 275
+  - type: DropshipAmmo
+    rounds: 400
+    maxRounds: 400
+
+- type: entity
+  abstract: true
+  parent: RMCDropshipAttachmentBase
+  id: RMCDropshipAttachmentAmmoGAU
+  components:
+  - type: Sprite
+    state: 30mm_crate
+  - type: DropshipFabricatorPrintable
+    category: Ammo
+    cost: 275
+  - type: DropshipAmmo
+    rounds: 400
+    maxRounds: 400
+    roundsPerShot: 40
+    damage:
+      groups:
+        Brute: 105
+    armorPiercing: 10
+    weapon: RMCDropshipAttachmentGau21Cannon
+    soundCockpit: /Audio/_RMC14/Dropship/gau_incockpit.ogg
+    soundGround: /Audio/_RMC14/Dropship/gau.ogg
+    soundImpact: /Audio/_RMC14/Dropship/gauimpact.ogg

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Immutable;
 using Content.Shared.Coordinates;
 using Content.Shared.Directions;
+using Content.Shared.Maps;
+using Content.Shared.Physics;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 
@@ -9,7 +11,9 @@ namespace Content.Shared._RMC14.Map;
 public sealed class RMCMapSystem : EntitySystem
 {
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
 
     private EntityQuery<MapGridComponent> _mapGridQuery;
 
@@ -62,5 +66,13 @@ public sealed class RMCMapSystem : EntitySystem
             return false;
 
         return true;
+    }
+
+    public bool IsTileBlocked(EntityCoordinates coordinates, CollisionGroup group = CollisionGroup.Impassable)
+    {
+        if (!coordinates.TryGetTileRef(out var turf, EntityManager, _mapManager))
+            return false;
+
+        return _turf.IsTileBlocked(turf.Value, group);
     }
 }

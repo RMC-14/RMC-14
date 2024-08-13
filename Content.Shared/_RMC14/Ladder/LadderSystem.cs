@@ -169,7 +169,7 @@ public sealed class LadderSystem : EntitySystem
                 continue;
 
             if (_toUpdateIds.TryGetValue(id, out var old))
-                Log.Error($"Found ladder {ToPrettyString(entity)} with duplicate ID {id}, previous ladder: {ToPrettyString(old)}");
+                Log.Error($"Found {ToPrettyString(entity)} with duplicate ID {id}, previous ladder: {ToPrettyString(old)}");
 
             _toUpdateIds[id] = entity;
         }
@@ -189,7 +189,7 @@ public sealed class LadderSystem : EntitySystem
                 continue;
 
             if (ladder.Other is { } old)
-                Log.Error($"Found ladder {ToPrettyString(toUpdate)} with duplicate ID {toUpdate.Comp.Id}, previous ladder: {ToPrettyString(old)}");
+                Log.Error($"Found {ToPrettyString(toUpdate)} with duplicate ID {toUpdate.Comp.Id}, previous ladder: {ToPrettyString(old)}");
 
             ladder.Other = toUpdate;
             Dirty(uid, ladder);

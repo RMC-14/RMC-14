@@ -8,7 +8,6 @@ using Content.Server.Shuttles.Systems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
-using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
@@ -61,6 +60,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
         SubscribeLocalEvent<DropshipComponent, FTLStartedEvent>(OnRefreshUI);
         SubscribeLocalEvent<DropshipComponent, FTLCompletedEvent>(OnFTLCompleted);
         SubscribeLocalEvent<DropshipComponent, FTLUpdatedEvent>(OnRefreshUI);
+
+        SubscribeLocalEvent<DropshipInFlyByComponent, FTLCompletedEvent>(OnInFlyByFTLCompleted);
 
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key,
             subs =>
@@ -118,6 +119,11 @@ public sealed class DropshipSystem : SharedDropshipSystem
         RefreshUI();
     }
 
+    private void OnInFlyByFTLCompleted(Entity<DropshipInFlyByComponent> ent, ref FTLCompletedEvent args)
+    {
+        RemCompDeferred<DropshipInFlyByComponent>(ent);
+    }
+
     private void OnDropshipNavigationLockdownMsg(Entity<DropshipNavigationComputerComponent> ent, ref DropshipLockdownMsg args)
     {
         if (_transform.GetGrid(ent.Owner) is not { } grid ||
@@ -168,6 +174,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         if (dropship.Destination == destination)
         {
+            // TODO RMC14 flyby ensure comp
             Log.Warning($"Tried to launch {ToPrettyString(shuttle.Value)} to its current destination {ToPrettyString(destination)}.");
             return false;
         }

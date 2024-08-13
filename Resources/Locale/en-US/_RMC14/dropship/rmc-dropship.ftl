@@ -6,6 +6,31 @@ rmc-dropship-weapons-main-screen-text = U.N.M.C
   Dropship Weapons Control System
   V 0.1
 
+rmc-dropship-weapons-weapon-selected = {$weapon}
+  No ammo
+rmc-dropship-weapons-weapon-selected-ammo = {$weapon}
+  {$ammo}
+  Ammo {$rounds} / {$maxRounds}
+
+rmc-dropship-weapons-target-strike = Target Acquisition
+
+  Strike mode: {$mode}
+
+  Strike configuration {$weapon}
+
+  Target selected: {$target}
+
+  Offset {$xOffset},{$yOffset}
+
+#  Attack Vector {$vector}
+
+#  Offset 0,0
+
+#  Guidance computer INCOMPLETE
+
+rmc-dropship-weapons-equip-weapon-ammo = {$weapon}
+  {$rounds} rounds
+
 rmc-dropship-weapons-equip = EQUIP
 rmc-dropship-weapons-fire-mission = F-MISS
 rmc-dropship-weapons-target = TARGET

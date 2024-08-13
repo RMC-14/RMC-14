@@ -4,7 +4,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Utility;
 
-namespace Content.Client._RMC14.Dropship.Weapons;
+namespace Content.Client._RMC14.Dropship.Weapon;
 
 [GenerateTypedNameReferences]
 public sealed partial class DropshipWeaponsButton : Button
@@ -22,7 +22,7 @@ public sealed partial class DropshipWeaponsButton : Button
         return new StyleBoxFlat
         {
             BackgroundColor = Color.FromHex("#222222"),
-            BorderColor = Color.FromHex("#00AE3A"),
+            BorderColor = Color.FromHex("#00FF36"),
             BorderThickness = new Thickness(3),
         };
     }

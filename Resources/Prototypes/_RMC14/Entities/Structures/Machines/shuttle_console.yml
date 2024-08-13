@@ -73,13 +73,16 @@
   - type: ActivatableUI
     key: enum.DropshipTerminalWeaponsUi.Key
   - type: AccessReader
-    access: [ [ "CMAccessDropship" ], [ "CMAccessSquadLeaderPrep" ] ]
+    access: [ [ "CMAccessPilot" ], [ "CMAccessSquadLeaderPrep" ] ]
   - type: ActivatableUIRequiresAccess
   - type: UserInterface
     interfaces:
       enum.DropshipTerminalWeaponsUi.Key:
         type: DropshipWeaponsBui
   - type: DropshipTerminalWeapons
+  - type: RequiresSkill
+    skills:
+      RMCSkillPilot: 1
 
 - type: entity
   parent: MarkerBase

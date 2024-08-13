@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Xenonids;
@@ -10,6 +11,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Robust.Shared.Configuration;
+using Robust.Shared.Containers;
 using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Dropship;
@@ -18,6 +20,7 @@ public abstract class SharedDropshipSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -29,6 +32,8 @@ public abstract class SharedDropshipSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<DropshipComponent, MapInitEvent>(OnDropshipMapInit);
+
         SubscribeLocalEvent<DropshipNavigationComputerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<DropshipNavigationComputerComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
         SubscribeLocalEvent<DropshipNavigationComputerComponent, AfterActivatableUIOpenEvent>(OnNavigationOpen);
@@ -36,8 +41,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         SubscribeLocalEvent<DropshipTerminalComponent, ActivateInWorldEvent>(OnDropshipTerminalActivateInWorld);
 
         SubscribeLocalEvent<DropshipWeaponPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
-        SubscribeLocalEvent<DropshipWeaponPointComponent, ComponentRemove>(OnAttachmentPointRemove);
-        SubscribeLocalEvent<DropshipWeaponPointComponent, EntityTerminatingEvent>(OnAttachmentPointTerminating);
+        SubscribeLocalEvent<DropshipWeaponPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
 
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key,
             subs =>
@@ -52,6 +56,22 @@ public abstract class SharedDropshipSystem : EntitySystem
             });
 
         Subs.CVar(_config, RMCCVars.RMCDropshipInitialDelayMinutes, v => _dropshipInitialDelay = TimeSpan.FromMinutes(v), true);
+    }
+
+    private void OnDropshipMapInit(Entity<DropshipComponent> ent, ref MapInitEvent args)
+    {
+        var children = Transform(ent).ChildEnumerator;
+        while (children.MoveNext(out var uid))
+        {
+            if (TerminatingOrDeleted(uid))
+                continue;
+
+            if (HasComp<DropshipWeaponPointComponent>(uid))
+                ent.Comp.AttachmentPoints.Add(uid);
+        }
+
+        var ev = new DropshipMapInitEvent();
+        RaiseLocalEvent(ent, ref ev);
     }
 
     private void OnMapInit(Entity<DropshipNavigationComputerComponent> ent, ref MapInitEvent args)
@@ -191,7 +211,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
     }
 
-    private void OnAttachmentPointTerminating(Entity<DropshipWeaponPointComponent> ent, ref EntityTerminatingEvent args)
+    private void OnAttachmentPointRemove<T>(Entity<DropshipWeaponPointComponent> ent, ref T args)
     {
         if (TryGetGridDropship(ent, out var dropship))
         {
@@ -359,9 +379,9 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
     }
 
-    public bool TryGetGridDropship(EntityUid point, out Entity<DropshipComponent> dropship)
+    public bool TryGetGridDropship(EntityUid ent, out Entity<DropshipComponent> dropship)
     {
-        if (TryComp(point, out TransformComponent? xform) &&
+        if (TryComp(ent, out TransformComponent? xform) &&
             xform.GridUid is { } grid &&
             !TerminatingOrDeleted(grid) &&
             TryComp(xform.GridUid, out DropshipComponent? dropshipComp))
@@ -372,5 +392,22 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         dropship = default;
         return false;
+    }
+
+    public bool IsWeaponAttached(Entity<DropshipWeaponComponent?> weapon)
+    {
+        if (!Resolve(weapon, ref weapon.Comp, false) ||
+            !TryGetGridDropship(weapon, out var dropship))
+        {
+            return false;
+        }
+
+        if (!_container.TryGetContainingContainer((weapon, null), out var container) ||
+            !dropship.Comp.AttachmentPoints.Contains(container.Owner))
+        {
+            return false;
+        }
+
+        return true;
     }
 }

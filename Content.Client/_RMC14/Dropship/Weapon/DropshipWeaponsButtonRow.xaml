@@ -1,7 +1,7 @@
 ﻿<controls:DropshipWeaponsButtonRow
     xmlns="https://spacestation14.io"
-    xmlns:controls="clr-namespace:Content.Client._RMC14.Dropship.Weapons"
-    SeparationOverride="29">
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Dropship.Weapon"
+    SeparationOverride="28">
     <Control Name="PaddingStart" />
     <controls:DropshipWeaponsButton Name="One" Access="Public" />
     <controls:DropshipWeaponsButton Name="Two" Access="Public" />

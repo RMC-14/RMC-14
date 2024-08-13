@@ -1,7 +1,12 @@
-﻿using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Dropship.Weapon;
+using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates;
+using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -13,9 +18,11 @@ using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Containers;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using static Content.Shared.Interaction.SharedInteractionSystem;
+using static Content.Shared.Physics.CollisionGroup;
 
 namespace Content.Shared._RMC14.PowerLoader;
 
@@ -25,10 +32,12 @@ public sealed class PowerLoaderSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedMoverController _mover = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
@@ -52,6 +61,8 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, PickupAttemptEvent>(OnGrabbablePickupAttempt);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, AfterInteractEvent>(OnGrabbableAfterInteract);
+        SubscribeLocalEvent<PowerLoaderGrabbableComponent, BeforeRangedInteractEvent>(OnGrabbableBeforeRangedInteract);
+        SubscribeLocalEvent<PowerLoaderGrabbableComponent, DropshipAttachWeaponDoAfterEvent>(OnDropshipAttachWeapon);
     }
 
     private void OnPowerLoaderMapInit(Entity<PowerLoaderComponent> ent, ref MapInitEvent args)
@@ -208,9 +219,11 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         var source = ent.Owner.ToCoordinates();
         var coords = _transform.GetMoverCoordinates(args.ClickLocation);
+        coords = coords.SnapToGrid(EntityManager, _mapManager);
         if (!source.TryDistance(EntityManager, coords, out var distance))
             return;
 
+        args.Handled = true;
         if (distance < 0.5f)
         {
             var msg = Loc.GetString("rmc-power-loader-too-close");
@@ -233,10 +246,93 @@ public sealed class PowerLoaderSystem : EntitySystem
             return;
         }
 
-        args.Handled = true;
+        if (_rmcMap.IsTileBlocked(coords, Impassable | InteractImpassable | MobLayer))
+        {
+            var msg = Loc.GetString("rmc-power-loader-cant-drop-occupied", ("drop", ent));
+            foreach (var buckled in GetBuckled((user, loader)))
+            {
+                _popup.PopupClient(msg, ent, buckled, PopupType.SmallCaution);
+            }
+
+            return;
+        }
+
         var used = args.Used;
         _container.Remove(used, container, destination: coords, localRotation: Angle.Zero);
         SyncHands((user, loader));
+    }
+
+    private void OnGrabbableBeforeRangedInteract(Entity<PowerLoaderGrabbableComponent> ent, ref BeforeRangedInteractEvent args)
+    {
+        if (args.Target is not { } target)
+            return;
+
+        args.Handled = true;
+
+        var user = new Entity<PowerLoaderComponent?>(args.User, null);
+        var used = args.Used;
+        if (!CanAttachPopup(ref user, target, used, out var delay, out _))
+            return;
+
+        var ev = new DropshipAttachWeaponDoAfterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, target, used)
+        {
+            BreakOnMove = true,
+        };
+        _doAfter.TryStartDoAfter(doAfter);
+    }
+
+    private void OnDropshipAttachWeapon(Entity<PowerLoaderGrabbableComponent> ent, ref DropshipAttachWeaponDoAfterEvent args)
+    {
+        if (args.Cancelled ||
+            args.Handled ||
+            args.Target is not { } target ||
+            args.Used is not { } used)
+        {
+            return;
+        }
+
+        var user = new Entity<PowerLoaderComponent?>(args.User, null);
+        if (!CanAttachPopup(ref user, target, used, out _, out var slot))
+            return;
+
+        _container.Insert(used, slot);
+
+        if (user.Comp != null)
+            SyncHands((user, user.Comp));
+    }
+
+    private bool CanAttachPopup(
+        ref Entity<PowerLoaderComponent?> user,
+        EntityUid target,
+        EntityUid used,
+        out TimeSpan delay,
+        [NotNullWhen(true)] out ContainerSlot? slot)
+    {
+        delay = default;
+        slot = default;
+        if (!Resolve(user, ref user.Comp, false) ||
+            !TryComp(used, out DropshipWeaponComponent? weapon) ||
+            !TryComp(target, out DropshipWeaponPointComponent? point))
+        {
+            return false;
+        }
+
+        slot = _container.EnsureContainer<ContainerSlot>(target, point.WeaponContainerSlotId);
+        if (slot.ContainedEntity == null)
+        {
+            delay = weapon.AttachDelay;
+            return true;
+        }
+
+        var msg = Loc.GetString("rmc-power-loader-occupied-weapon");
+        foreach (var buckled in GetBuckled((user, user.Comp)))
+        {
+            _popup.PopupClient(msg, target, buckled, PopupType.SmallCaution);
+        }
+
+        slot = default;
+        return false;
     }
 
     private bool CanPickupPopup(
