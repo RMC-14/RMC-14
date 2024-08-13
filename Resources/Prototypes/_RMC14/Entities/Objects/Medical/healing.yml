@@ -175,6 +175,7 @@
     userPopup: cm-surgical-line-user-popup
     targetPopup: cm-surgical-line-target-popup
     othersPopup: cm-surgical-line-others-popup
+    targetStartPopup: cm-surgical-line-start-target-popup
     userFinishPopup: cm-surgical-line-finish-user-popup
     targetFinishPopup: cm-surgical-line-finish-target-popup
     othersFinishPopup: cm-surgical-line-finish-others-popup
@@ -216,6 +217,7 @@
     userPopup: cm-synthgraft-user-popup
     targetPopup: cm-synthgraft-target-popup
     othersPopup: cm-synthgraft-others-popup
+    targetStartPopup: cm-synthgraft-start-target-popup
     userFinishPopup: cm-synthgraft-finish-user-popup
     targetFinishPopup: cm-synthgraft-finish-target-popup
     othersFinishPopup: cm-synthgraft-finish-others-popup
