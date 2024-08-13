@@ -252,7 +252,7 @@
   parent: ActionXenoBase
   id: ActionXenoCripplingStrike
   name: Crippling Strike (20) # TODO RMC14 proper plasma costs
-  description: Temporarily charge up a melee attack that will slow the first enemy it hits.
+  description: Temporarily charge up a melee attack that will slow the first enemy it hits and do 20% more damage.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
