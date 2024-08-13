@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Guns no longer start with mags.
-    type: Fix
-  id: 46
-  time: '2024-04-14T00:35:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1220
-- author: Whisper
-  changes:
-  - message: shotguns no longer try to cycle when wielding
-    type: Fix
-  id: 47
-  time: '2024-04-13T10:31:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1221
 - author: DrSmugleaf
   changes:
   - message: Marines will now be knocked down by developed alive xenos when trying
@@ -4296,5 +4282,19 @@
   id: 545
   time: '2024-08-13T00:42:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3638
+- author: coolmankid12345
+  changes:
+  - message: Marine icons and Xeno plasma/health for spectators to see
+    type: Add
+  id: 546
+  time: '2024-08-13T00:51:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3340
+- author: Whisper
+  changes:
+  - message: Added Nesart Onan, updated Satoru Suzuki figurines.
+    type: Add
+  id: 547
+  time: '2024-08-13T00:51:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3615
 Name: RMC14
 Order: -1
