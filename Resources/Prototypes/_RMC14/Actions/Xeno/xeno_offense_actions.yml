@@ -418,7 +418,10 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: shift_spit_acid_glob
-    event: !type:XenoBombardToggleActionEvent
+    iconOn:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: shift_spit_neuro_glob
+    event: !type:XenoGasToggleActionEvent
     useDelay: 1
 
 - type: entity

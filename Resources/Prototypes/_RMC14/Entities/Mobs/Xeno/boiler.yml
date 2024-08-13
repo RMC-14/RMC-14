@@ -30,7 +30,7 @@
     - ActionXenoTailStabCorrosive
     - ActionXenoAcidStrong
     - ActionXenoBombard
-#    - ActionXenoToggleGasType
+    - ActionXenoToggleGasType
     - ActionXenoSprayAcidBoiler
     - ActionXenoZoom
     - ActionXenoAcidShroud
@@ -57,6 +57,7 @@
     doAfter: 0.5
   - type: XenoBombard
   - type: XenoAcidShroud
+  - type: XenoGasToggle
   - type: XenoTailStab
     inject:
       RMCMolecularAcid: 1 # TODO RMC14 2
