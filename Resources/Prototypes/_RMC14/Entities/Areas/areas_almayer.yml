@@ -3,6 +3,7 @@
   - RMCAreaBase
   - RMCAreaProtectionMetal
   id: RMCAreaAlmayer
+  suffix: Almayer Area
   components:
   - type: Sprite
     sprite: _RMC14/Areas/areas_almayer.rsi

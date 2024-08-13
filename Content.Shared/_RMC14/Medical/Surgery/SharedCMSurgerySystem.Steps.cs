@@ -168,7 +168,8 @@ public abstract partial class SharedCMSurgerySystem
     private void OnCutLarvaRootsStep(Entity<CMSurgeryCutLarvaRootsStepComponent> ent, ref CMSurgeryStepEvent args)
     {
         if (TryComp(args.Body, out VictimInfectedComponent? infected) &&
-            infected.BurstAt > _timing.CurTime)
+            infected.BurstAt > _timing.CurTime &&
+            infected.SpawnedLarva == null)
         {
             infected.RootsCut = true;
         }
@@ -177,6 +178,11 @@ public abstract partial class SharedCMSurgerySystem
     private void OnCutLarvaRootsCheck(Entity<CMSurgeryCutLarvaRootsStepComponent> ent, ref CMSurgeryStepCompleteCheckEvent args)
     {
         if (!TryComp(args.Body, out VictimInfectedComponent? infected) || !infected.RootsCut)
+            args.Cancelled = true;
+
+        // The larva has fully developed and surgery is now impossible
+        // TODO: Surgery should still be possible, but the fully developed larva should escape while also saving the hosts life
+        if (infected != null && infected.SpawnedLarva != null)
             args.Cancelled = true;
     }
 

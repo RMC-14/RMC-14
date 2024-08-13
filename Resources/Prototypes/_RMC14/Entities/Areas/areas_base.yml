@@ -10,7 +10,7 @@
   parent: MarkerBase
   id: RMCAreaBase
   name: area
-  suffix: area
+  suffix: Area
   placement:
     mode: SnapgridCenter
     snap:
