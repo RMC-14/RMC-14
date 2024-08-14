@@ -14,6 +14,8 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Weapons/Guns/m82-f_flare_gun.rsi
+  - type: GunIFF
+    enabled: true
   - type: Gun
     projectileSpeed: 30
     fireRate: 8
@@ -28,6 +30,9 @@
     whitelist:
       tags:
         - Flare
+    blacklist:
+      tags: 
+        - FlareLit
     proto: CMFlare
     capacity: 1
     soundInsert:
@@ -45,7 +50,7 @@
     - Belt
     - suitStorage
   - type: RMCNameItemOnVend
-    item: PrimaryGun
+    item: Sidearm
   - type: Tag
     tags:
     - RMCFlareGun
