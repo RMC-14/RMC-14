@@ -64,7 +64,8 @@
   name: flare
   parent: CMFlare
   id: CMFlareLit 
-  - type: Projectile # Gonna need to make more projectile versions for other flares, parent this one
+  components:
+  - type: Projectile # Gonna need to make more projectile versions for other flares
     deleteOnCollide: false
     onlyCollideWhenShot: true
     damage:
