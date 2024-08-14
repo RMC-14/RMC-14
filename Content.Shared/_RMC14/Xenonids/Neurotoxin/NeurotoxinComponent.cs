@@ -71,6 +71,6 @@ public sealed partial class NeurotoxinComponent : Component
     [DataField, AutoNetworkedField]
     public ProtoId<EmotePrototype> PainId = "Scream"; // TODO custom pain emote
 
-	[DataField, AutoNetworkedField]
-	public TimeSpan BloodCoughDuration = TimeSpan.FromSeconds(1);
+    [DataField, AutoNetworkedField]
+    public TimeSpan BloodCoughDuration = TimeSpan.FromSeconds(1);
 }
