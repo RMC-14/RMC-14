@@ -18,10 +18,10 @@ public sealed partial class NeurotoxinComponent : Component
     public float StaminaDamagePerSecond = 7;
 
     [DataField, AutoNetworkedField]
-    public float DizzyStrength = 1.2f;
+    public float DizzyStrength = 12;
 
     [DataField, AutoNetworkedField]
-    public float DizzyStrengthOnStumble = 5.5f;
+    public float DizzyStrengthOnStumble = 55;
 
     [DataField, AutoNetworkedField]
     public TimeSpan LastMessage;
