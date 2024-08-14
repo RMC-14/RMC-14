@@ -21,7 +21,7 @@
     - to: start
       completed:
       - !type:SpawnPrototype
-        prototype: CMPlasteel1
+        prototype: CMSheetPlasteel1
         amount: 6
       - !type:DeleteEntity
       conditions:
