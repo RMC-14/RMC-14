@@ -15,8 +15,10 @@ public sealed class XenoGasToggleSystem : EntitySystem
 
     private void OnToggleType(Entity<XenoGasToggleComponent> xeno, ref XenoGasToggleActionEvent args)
     {
-        if (!_timing.IsFirstTimePredicted)
+        if (args.Handled)
             return;
+
+        args.Handled = true;
         xeno.Comp.IsNeurotoxin = !xeno.Comp.IsNeurotoxin;
         _actions.SetToggled(args.Action, xeno.Comp.IsNeurotoxin);
         Dirty(xeno);
