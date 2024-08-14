@@ -99,7 +99,7 @@
       #- id: CMBeltGeneralUtility # TODO RMC14 Utility Storage Belt
       - id: CMBeltMarine
       #- id: CMBeltShotgunRig # TODO RMC14 Shotgun Belt
-      - id: CMBeltUtilityBelt # TODO: Check this comes filled.
+      - id: CMBeltUtility # TODO: Check this comes filled.
       - id: CMBeltMedicBag # TODO: Check this comes filled.
       - id: CMBeltMedical # TODO: Check this comes filled.
       #- id: CMBeltM39 # TODO RMC14 M39 Belt
@@ -222,7 +222,7 @@
       #- id: CMBeltGeneralUtility # TODO RMC14 Utility Storage Belt
       - id: CMBeltMarine
       #- id: CMBeltShotgunRig # TODO RMC14 Shotgun Belt
-      - id: CMBeltUtilityBelt # TODO: Check this comes filled.
+      - id: CMBeltUtility # TODO: Check this comes filled.
       - id: CMBeltUtilityCombat # TODO: Check this comes filled.
       - id: CMBeltMedicBag # TODO: Check this comes filled.
       #- id: CMBeltM39 # TODO RMC14 M39 Belt
