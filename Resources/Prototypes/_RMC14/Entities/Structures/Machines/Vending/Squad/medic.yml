@@ -233,7 +233,7 @@
         recommended: true
       #- id: CMM276M63HolsterRig
       #- id: CMM276M44HolsterRig
-      #- id: CMM276M82FHolsterRig
+      - id: RMCBeltHolsterFlareGun
       #- id: CMM276ShotgunShellLoadingRig
       - id: RMCBeltGrenade
     - name: Pouches

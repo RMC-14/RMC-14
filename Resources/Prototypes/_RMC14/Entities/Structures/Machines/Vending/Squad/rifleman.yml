@@ -48,7 +48,7 @@
         name: M276 knife rig (full)
       #    CMM276M63HolsterRig #TODO: Make this
       #    CMM276M44HolsterRig #TODO: Make this
-      #    CMM276M82FHolsterRig #TODO: Make this
+      - id: RMCBeltHolsterFlareGun
       #    CMM276ShotgunShellLoadingRig #TODO: Make this
       - id: CMBeltUtility
       - id: RMCBeltGrenade
