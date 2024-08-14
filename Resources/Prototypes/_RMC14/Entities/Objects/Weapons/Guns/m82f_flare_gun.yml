@@ -1,7 +1,7 @@
 - type: entity
   name: M82-F flare gun
   parent: RMCBaseWeaponShotgun
-  id: RMCFlareGun
+  id: RMCM82FFlareGun
   description: A flare gun issued to JTAC operators to use with flares. Comes with a miniscope. One shot, one... life saved?
   components:
   - type: Sprite
