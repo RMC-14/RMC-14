@@ -12,7 +12,7 @@
     spentDesc: expendable-light-spent-flare-desc
     glowDuration: 600
     fadeOutDuration: 30
-    iconStateSpent: flare_spent
+    iconStateSpent: flare_spent #Being spent should add a tag or somesuch
     turnOnBehaviourID: turn_on
     fadeOutBehaviourID: fade_out
     litSound:
@@ -29,6 +29,11 @@
         visible: false
       - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
         state: overlay
+  - type: CartridgeAmmo
+    proto: CMFlareLit
+    deleteOnSpawn: true
+    soundEject:
+      collection: ShellEject
   - type: Icon
     sprite: _RMC14/Objects/Misc/flares.rsi
     state: icon
@@ -55,6 +60,31 @@
         startValue: 7.0
         endValue: 1.0
 
+- type: entity
+  name: flare
+  parent: CMFlare
+  id: CMFlareLit 
+  - type: Projectile
+    deleteOnCollide: false
+    onlyCollideWhenShot: true
+    damage:
+      types:
+        Heat: 10
+  - type: IgniteOnCollide
+    fireStacks: 1.5 #CM13 applies more stacks but firecode is fucky
+  - type: PointLight
+    enabled: true
+    color: "#FA644B"
+    radius: 1
+    energy: 5.0
+  - type: Tag
+    tags:
+    - FlareLit
+
+    
+- type: Tag
+  id: FlareLit
+  
 - type: entity
   abstract: true
   parent: CMBoxMagazineBase
