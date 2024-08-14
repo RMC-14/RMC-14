@@ -39,6 +39,8 @@
     devolvesTo:
     - CMXenoDefender
   - type: XenoDevour
+  - type: SlowOnPull
+    multiplier: 0.625
   - type: XenoPunch
     damage:
       types:

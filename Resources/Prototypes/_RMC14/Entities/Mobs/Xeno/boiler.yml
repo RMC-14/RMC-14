@@ -81,7 +81,5 @@
     radius: 1.8
     softness: 1
     autoRot: true
-  - type: SlowOnPull
-    multiplier: 0.5
   - type: RMCXenoDamageVisuals
     prefix: boiler
