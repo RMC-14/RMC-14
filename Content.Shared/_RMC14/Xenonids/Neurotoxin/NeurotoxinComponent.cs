@@ -12,10 +12,10 @@ public sealed partial class NeurotoxinComponent : Component
     public float NeurotoxinAmount = 0;
 
     [DataField, AutoNetworkedField]
-    public float DepletionPerSecond = 5;
+    public float DepletionPerSecond = 1;
 
     [DataField, AutoNetworkedField]
-    public float StaminaDamagePerSecond = 35;
+    public float StaminaDamagePerSecond = 7;
 
     [DataField, AutoNetworkedField]
     public float DizzyStrength = 1.2f;

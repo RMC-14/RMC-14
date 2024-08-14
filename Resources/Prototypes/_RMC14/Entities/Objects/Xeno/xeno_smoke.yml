@@ -83,15 +83,15 @@
     spawn: RMCSmokeNeurotoxin
     range: 3
   - type: NeurotoxinInjector
-    neuroPerSecond: 30
+    neuroPerSecond: 6
     affectsDead: false
     affectsInfectedNested: false
     toxinDamage:
         groups:
-          Toxin: 10
+          Toxin: 2
     oxygenDamage:
         types:
-          Asphyxiation: 750
+          Asphyxiation: 150
     coughDamage:
         groups:
           Brute: 5
