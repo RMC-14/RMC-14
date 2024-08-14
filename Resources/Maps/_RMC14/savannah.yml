@@ -2220,7 +2220,7 @@ entities:
       pos: 47.5,-25.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -15041.722
+      secondsUntilStateChange: -15406.864
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -2482,7 +2482,7 @@ entities:
       pos: -50.5,-10.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -36126.855
+      secondsUntilStateChange: -36491.996
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -2781,7 +2781,7 @@ entities:
       pos: -22.5,7.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -29632.576
+      secondsUntilStateChange: -29997.719
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -9000,6 +9000,7 @@ entities:
     - type: MetaData
       name: Savannah Charlie-Delta Prep
     - type: Transform
+      rot: 1.5707963267948966 rad
       pos: 60.5,-18.5
       parent: 1
   - uid: 6634
@@ -9007,6 +9008,7 @@ entities:
     - type: MetaData
       name: Savannah Alpha-Bravo Prep
     - type: Transform
+      rot: 1.5707963267948966 rad
       pos: 60.5,3.5
       parent: 1
 - proto: CMEncryptionKeyCommand
@@ -12605,6 +12607,141 @@ entities:
     components:
     - type: Transform
       pos: 40.72791,-12.3935795
+      parent: 1
+  - uid: 15780
+    components:
+    - type: Transform
+      pos: -35.5,-11.5
+      parent: 1
+  - uid: 15781
+    components:
+    - type: Transform
+      pos: -40.5,-9.5
+      parent: 1
+  - uid: 15782
+    components:
+    - type: Transform
+      pos: -39.5,-5.5
+      parent: 1
+  - uid: 15783
+    components:
+    - type: Transform
+      pos: -40.60164,-9.4263315
+      parent: 1
+  - uid: 15784
+    components:
+    - type: Transform
+      pos: -40.407192,-9.588369
+      parent: 1
+  - uid: 15785
+    components:
+    - type: Transform
+      pos: -40.495155,-6.455406
+      parent: 1
+  - uid: 15786
+    components:
+    - type: Transform
+      pos: -35.434536,-11.594122
+      parent: 1
+  - uid: 15787
+    components:
+    - type: Transform
+      pos: -23.254404,-2.4461248
+      parent: 1
+  - uid: 15788
+    components:
+    - type: Transform
+      pos: -29.729824,0.7618128
+      parent: 1
+  - uid: 15789
+    components:
+    - type: Transform
+      pos: -26.498343,1.1044054
+      parent: 1
+  - uid: 15790
+    components:
+    - type: Transform
+      pos: -26.655748,0.3960721
+      parent: 1
+  - uid: 15791
+    components:
+    - type: Transform
+      pos: -29.163942,-6.4860573
+      parent: 1
+  - uid: 15792
+    components:
+    - type: Transform
+      pos: -28.405552,-6.911983
+      parent: 1
+  - uid: 15793
+    components:
+    - type: Transform
+      pos: -33.499252,-8.233516
+      parent: 1
+  - uid: 15794
+    components:
+    - type: Transform
+      pos: -36.570618,-8.043701
+      parent: 1
+  - uid: 15795
+    components:
+    - type: Transform
+      pos: -48.904175,-11.583041
+      parent: 1
+  - uid: 15796
+    components:
+    - type: Transform
+      pos: -58.303406,-3.5328445
+      parent: 1
+  - uid: 15797
+    components:
+    - type: Transform
+      pos: -58.414516,-3.4078445
+      parent: 1
+  - uid: 15798
+    components:
+    - type: Transform
+      pos: -71.05494,-6.6831975
+      parent: 1
+  - uid: 15799
+    components:
+    - type: Transform
+      pos: -70.89753,-6.7248645
+      parent: 1
+  - uid: 15800
+    components:
+    - type: Transform
+      pos: -69.260155,-11.638918
+      parent: 1
+  - uid: 15801
+    components:
+    - type: Transform
+      pos: -32.479748,-23.24628
+      parent: 1
+  - uid: 15802
+    components:
+    - type: Transform
+      pos: 7.559679,-27.435999
+      parent: 1
+  - uid: 15803
+    components:
+    - type: Transform
+      pos: 18.49731,-26.497936
+      parent: 1
+  - uid: 15804
+    components:
+    - type: Transform
+      pos: 40.753124,-12.502988
+      parent: 1
+  - uid: 15805
+    components:
+    - type: Transform
+      pos: 33.547813,9.451644
+      parent: 1
+  - uid: 15806
+    components:
+    - type: Transform
+      pos: 33.693645,9.347478
       parent: 1
 - proto: CMPenClicky
   entities:
