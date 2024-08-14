@@ -177,7 +177,7 @@
   startNode: start
   targetNode: nodePlasteel
   category: construction-category-cm-structures
-  description: A military-grade harded plasteel barricade.
+  description: A military-grade hardened plasteel barricade.
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
