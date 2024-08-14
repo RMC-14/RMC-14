@@ -56,7 +56,7 @@
   - type: XenoDevour
   - type: XenoHide
   - type: SlowOnPull
-    multiplier: 0.8125
+    multiplier: 0.80
   - type: XenoLeap
     delay: 0
     knockdownTime: 2

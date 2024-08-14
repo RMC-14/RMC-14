@@ -40,7 +40,7 @@
     - CMXenoDefender
   - type: XenoDevour
   - type: SlowOnPull
-    multiplier: 0.625
+    multiplier: 0.58
   - type: XenoPunch
     damage:
       types:
