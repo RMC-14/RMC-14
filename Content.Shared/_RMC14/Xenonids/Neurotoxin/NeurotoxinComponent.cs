@@ -42,16 +42,13 @@ public sealed partial class NeurotoxinComponent : Component
     public TimeSpan LastStumbleTime;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan SecondsToBlindByOne = TimeSpan.FromSeconds(3);
+    public TimeSpan BlindTime = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]
     public TimeSpan MinimumDelayBetweenEvents = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
     public TimeSpan LastAccentTime;
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan LastBlindTime;
 
     [DataField, AutoNetworkedField]
     public DamageSpecifier ToxinDamage = new();

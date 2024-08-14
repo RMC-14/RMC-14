@@ -37,7 +37,6 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
     [Dependency] private readonly SharedSlurredSystem _slurred = default!;
     [Dependency] private readonly SharedStutteringSystem _stutter = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly BlindableSystem _blinding = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!; //It's how this fakes movement
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
@@ -91,7 +90,6 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 if (!EnsureComp<NeurotoxinComponent>(marine, out var builtNeurotoxin))
                 {
                     builtNeurotoxin.LastMessage = time;
-                    builtNeurotoxin.LastBlindTime = time;
                     builtNeurotoxin.LastAccentTime = time;
                     builtNeurotoxin.LastStumbleTime = time;
                 }
@@ -253,12 +251,10 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
             // TODO RMC14 Hallucinations would and be checked and then done through a function
             // Will need...alot of work
         }
-        // Might need adjusting if they become blind too fast or too slow
-        if (neurotoxin.NeurotoxinAmount >= 20 && (currTime - neurotoxin.LastBlindTime) >= neurotoxin.SecondsToBlindByOne)
-        {
-            neurotoxin.LastBlindTime = currTime;
 
-            _blinding.AdjustEyeDamage((victim, null), 1);
+        if (neurotoxin.NeurotoxinAmount >= 20)
+        {
+            _statusEffects.TryAddStatusEffect(victim, "TemporaryBlindness", neurotoxin.BlindTime, true, "TemporaryBlindness");
         }
 
         if (neurotoxin.NeurotoxinAmount >= 27)
@@ -266,7 +262,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
             // TODO RMC14 gives weldervision too
             _statusEffects.TryAddStatusEffect(victim, "Muted", neurotoxin.DazeLength, true, "Muted");
             _damage.TryChangeDamage(victim, neurotoxin.ToxinDamage * frameTime);
-            // TODO RMC14 starts to make em deaf
+            // TODO RMC14 tempoarary deafness
         }
 
         if (neurotoxin.NeurotoxinAmount >= 50)
