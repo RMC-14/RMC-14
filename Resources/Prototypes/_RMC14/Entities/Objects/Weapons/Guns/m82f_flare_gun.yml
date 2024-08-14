@@ -46,3 +46,10 @@
     - suitStorage
   - type: RMCNameItemOnVend
     item: PrimaryGun
+  - type: Tag
+    tags:
+    - RMCFlareGun
+    - Sidearm
+
+- type: Tag
+  id: RMCFlareGun
