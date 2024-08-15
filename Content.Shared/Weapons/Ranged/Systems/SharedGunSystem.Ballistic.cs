@@ -166,7 +166,7 @@ public abstract partial class SharedGunSystem
             args.Cancelled)
         {
             Popup(
-                Loc.GetString("gun-ballistic-transfer-primed",
+                Loc.GetString("gun-ballistic-transfer-cancelled",
                     ("entity", uid)),
                 uid,
                 args.User);
