@@ -50,7 +50,7 @@
   - type: BreechLoaded
     needOpenClose: true
   - type: ShootAtFixedPoint
-    shootArcProj: false
+    shootArcProj: true
   - type: Wieldable
   - type: ContainerContainer
     containers:
