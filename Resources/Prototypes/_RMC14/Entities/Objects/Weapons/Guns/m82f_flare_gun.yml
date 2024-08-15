@@ -28,11 +28,15 @@
       path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: BallisticAmmoProvider
     whitelist:
+      components:
+      - type: Item
+      heldPrefix: unlit
       tags:
-        - Flare
+      - Flare
     blacklist:
+      iconStateSpent: flare_spent
       tags: 
-        - FlareLit
+      - FlareLit
     proto: CMFlare
     capacity: 1
     soundInsert:
