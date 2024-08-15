@@ -49,6 +49,15 @@ public abstract class SharedCMMeleeWeaponSystem : EntitySystem
         if (!_meleeWeaponQuery.HasComp(args.Tool))
             return;
 
+        if (_xenoQuery.HasComp(ent.Owner))
+        {
+            if (TryComp<MeleeXenoMultiplerComponent>(args.Tool, out var damageComp))
+            {
+                args.Damage = args.Damage * damageComp.Multiplier;
+                return;
+            }
+        }
+
         if (_xenoQuery.HasComp(args.Origin))
         {
             args.Damage = new DamageSpecifier(ent.Comp.XenoDamage);
