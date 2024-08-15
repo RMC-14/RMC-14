@@ -95,7 +95,7 @@
     volume: 0
     range: 7
     sound:
-      path: /Audio/Items/Flare/flare_on.ogg
+      path: /Audio/Items/Flare/flare_burn.ogg
       params:
         loop: true
   - type: IgniteOnCollide
