@@ -58,18 +58,11 @@
   - type: AttachableHolder
     slots:
       rmc-aslot-rail:
+        locked: true
         startingAttachable: RMCAttachmentS42xTelescopicMiniscope 
         whitelist:
           tags:
-          - RMCAttachmentRailFlashlight
-          - RMCAttachmentMagneticHarness
-          - RMCAttachmentS5RedDotSight
-          - RMCAttachmentS6ReflexSight
-          - RMCAttachmentS84xTelescopicScope
           - RMCAttachmentS42xTelescopicMiniscope
-  - type: AttachableHolderVisuals
-    offsets:
-      rmc-aslot-rail: 12, 20 # Offset needs aligning
 
 - type: Tag
   id: RMCFlareGun
