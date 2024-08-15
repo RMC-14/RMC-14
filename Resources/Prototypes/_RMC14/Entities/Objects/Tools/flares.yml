@@ -32,8 +32,6 @@
   - type: CartridgeAmmo
     proto: CMFlareLit
     deleteOnSpawn: true
-    soundEject:
-      collection: ShellEject
   - type: Icon
     sprite: _RMC14/Objects/Misc/flares.rsi
     state: icon
