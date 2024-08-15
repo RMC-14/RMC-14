@@ -16,6 +16,9 @@
     fillBaseName: hypospray
     emptySpriteName: hypospray
     changeColor: true
+  - type: Hypospray
+    onlyAffectsMobs: false
+    injectOnly: true
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Medical/hypospray.rsi
