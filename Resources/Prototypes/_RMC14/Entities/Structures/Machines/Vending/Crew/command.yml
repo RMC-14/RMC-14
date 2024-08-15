@@ -506,7 +506,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessCommand" ]
+    - [ "ShipMasterAccess" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
