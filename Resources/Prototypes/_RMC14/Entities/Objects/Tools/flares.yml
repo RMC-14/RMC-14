@@ -99,8 +99,6 @@
       path: /Audio/Items/Flare/flare_burn.ogg
       params:
         loop: true
-  - type: IgniteOnCollide
-    fireStacks: 1
   - type: PointLight
     color: "#FA644B"
     radius: 1.0
