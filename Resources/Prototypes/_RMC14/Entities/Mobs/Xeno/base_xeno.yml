@@ -228,6 +228,9 @@
     - enum.PaperUiKey.Key
   - type: ActiveInputMover
   - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 50
 
 - type: entity
   abstract: true
