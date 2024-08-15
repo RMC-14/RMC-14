@@ -272,7 +272,12 @@ public sealed class XenoSpitSystem : EntitySystem
                 continue;
 
             RemCompDeferred<XenoActiveChargingSpitComponent>(uid);
-            _popup.PopupClient(Loc.GetString("cm-xeno-charge-spit-expire"), uid, uid, PopupType.SmallCaution);
+
+            if (!charging.DidPopup)
+            {
+                charging.DidPopup = true;
+                _popup.PopupClient(Loc.GetString("cm-xeno-charge-spit-expire"), uid, uid, PopupType.SmallCaution);
+            }
         }
 
         var acidedQuery = EntityQueryEnumerator<UserAcidedComponent>();

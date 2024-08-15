@@ -42,6 +42,22 @@ public sealed class RMCMapSystem : EntitySystem
         return new RMCAnchoredEntitiesEnumerator(_transform, anchored, facing);
     }
 
+    public RMCAnchoredEntitiesEnumerator GetAnchoredEntitiesEnumerator(EntityCoordinates coords, Direction? offset = null, DirectionFlag facing = DirectionFlag.None)
+    {
+        if (_transform.GetGrid(coords) is not { } gridId ||
+            !_mapGridQuery.TryComp(gridId, out var gridComp))
+        {
+            return RMCAnchoredEntitiesEnumerator.Empty;
+        }
+
+        if (offset != null)
+            coords = coords.Offset(offset.Value);
+
+        var indices = _map.CoordinatesToTile(gridId, gridComp, coords);
+        var anchored = _map.GetAnchoredEntitiesEnumerator(gridId, gridComp, indices);
+        return new RMCAnchoredEntitiesEnumerator(_transform, anchored, facing);
+    }
+
     public bool TryGetTileRefForEnt(EntityUid ent, out Entity<MapGridComponent> grid, out TileRef tile)
     {
         grid = default;

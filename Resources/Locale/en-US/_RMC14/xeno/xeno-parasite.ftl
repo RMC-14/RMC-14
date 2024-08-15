@@ -4,5 +4,5 @@ rmc-xeno-failed-target-dead = We can't infect the dead!
 rmc-xeno-infect-success = The parasite smashes against {$target}'s mask and rips it off!
 rmc-xeno-failed-parasite-dead = We can't infect with a dead child!
 
-rmc-xeno-parasite-dead = [italic]{CAPITALIZE(SUBJECT($parasite))} {CONJUGATE-BE($parasite)} not moving.[/italic]
+rmc-xeno-parasite-dead = {CAPITALIZE(SUBJECT($parasite))} {CONJUGATE-BE($parasite)} not moving.
 rmc-xeno-parasite-announce-infect = We sense that {$xeno} has infected a host!

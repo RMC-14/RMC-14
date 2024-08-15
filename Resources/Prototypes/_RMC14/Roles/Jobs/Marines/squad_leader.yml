@@ -36,11 +36,12 @@
     - type: CMVendorUser
       points: 45
     - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
 
 - type: startingGear
   id: CMGearSquadLeader
   equipment:
-    jumpsuit: JumpsuitMarine # TODO RMC14 all squad roles should spawn with no jumpsuit but still have clothes on
     back: CMSatchelMarine
     id: CMDogtagSquadLeader
 

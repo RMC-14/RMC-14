@@ -1,0 +1,125 @@
+- type: marking
+  id: RMCUndershirtStandard
+  bodyPart: Chest
+  markingCategory: Undershirt
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Moth, Slime]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/undershirt.rsi
+    state: t_undershirt
+
+- type: marking
+  id: RMCUndershirtSleeveless
+  bodyPart: Chest
+  markingCategory: Undershirt
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, Slime]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/undershirt.rsi
+    state: t_undershirt_sleeveless
+
+- type: marking
+  id: RMCUndershirtRolled
+  bodyPart: Chest
+  markingCategory: Undershirt
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Moth, Slime]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/undershirt.rsi
+    state: t_rolled_undershirt
+
+- type: marking
+  id: RMCUndershirtRolledSleeveless
+  bodyPart: Chest
+  markingCategory: Undershirt
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, Slime]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/undershirt.rsi
+    state: t_rolled_undershirt_sleeveless
+
+- type: marking
+  id: RMCUndershirtLong
+  bodyPart: Chest
+  markingCategory: Undershirt
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Moth, Slime]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/undershirt.rsi
+    state: t_long_undershirt
+
+- type: marking
+  id: RMCUndershirtClassic
+  bodyPart: Chest
+  markingCategory: Undershirt
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, Slime]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/undershirt.rsi
+    state: c_classic
+
+- type: marking
+  id: RMCUndershirtSports
+  bodyPart: Chest
+  markingCategory: Undershirt
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, Slime]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/undershirt.rsi
+    state: c_sports
+
+- type: marking
+  id: RMCUndershirtStrapless
+  bodyPart: Chest
+  markingCategory: Undershirt
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, Slime]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/undershirt.rsi
+    state: c_strapless
+
+- type: marking
+  id: RMCUndershirtNone
+  bodyPart: Chest
+  markingCategory: Undershirt
+  coloring:
+    default:
+      type:
+        !type:SimpleColoring
+          color: "#FFFFFF"
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, Slime]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/undershirt.rsi
+    state: blank

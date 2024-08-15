@@ -25,6 +25,9 @@
         - ReagentId: WeldingFuel
           Quantity: 100
         maxVol: 100 # TODO RMC14 40 when welders are fixed
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/weldingtool_pickup.ogg
 
 - type: entity
   parent: CMWelder

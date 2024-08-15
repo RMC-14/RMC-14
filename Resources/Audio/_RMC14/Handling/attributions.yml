@@ -1,0 +1,94 @@
+- files: ["armorequip_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/armorequip_1.ogg"
+
+- files: ["armorequip_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/armorequip_2.ogg"
+
+- files: ["clothing_on.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/clothing_off.ogg"
+
+- files: ["clothing_off.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/clothing_off.ogg"
+
+- files: ["gunequip1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/gunequip1.ogg"
+
+- files: ["gunequip2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/gunequip2.ogg"
+
+- files: ["gunequip3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/gunequip3.ogg"
+
+- files: ["paper_drop.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/paper_drop.ogg"
+
+- files: ["paper_pickup.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/paper_pickup.ogg"
+
+- files: ["gunrustle1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/effects/gunrustle1.ogg"
+
+- files: ["gunrustle2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/effects/gunrustle2.ogg"
+
+- files: ["gunrustle3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/effects/gunrustle3.ogg"
+
+- files: ["crowbar_pickup.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/crowbar_pickup.ogg"
+
+- files: ["multitool_pickup.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/multitool_pickup.ogg"
+
+- files: ["screwdriver_pickup.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/screwdriver_pickup.ogg"
+
+- files: ["toolbox_pickup.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/toolbox_pickup.ogg"
+
+- files: ["weldingtool_pickup.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/weldingtool_pickup.ogg"
+
+- files: ["wirecutter_pickup.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/wirecutter_pickup.ogg"
+
+- files: ["wrench_pickup.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/wrench_pickup.ogg"

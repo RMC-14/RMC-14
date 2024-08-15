@@ -28,11 +28,11 @@
         RMCSkillVehicles: 1
     - type: CMVendorUser
       points: 45
+    - type: SquadArmorWearer
 
 - type: startingGear
   id: CMGearCombatTech
   equipment:
-    jumpsuit: CMJumpsuitMarineEngineer # TODO RMC14 all squad roles should spawn with no jumpsuit but still have clothes on
     back: CMSatchelMarineTech
     id: CMDogtagCombatTech
 
