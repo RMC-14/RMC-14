@@ -6,7 +6,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/m82-f_flare_gun.rsi
-    layers:
   - type: Sprite
     layers:
     - state: base
@@ -59,7 +58,7 @@
   - type: AttachableHolder
     slots:
       rmc-aslot-rail:
-        startingAttachable: RMCAttachmentS42xTelescopicMiniscope #TODO: Add flare gun modifiers for the Miniscope
+        startingAttachable: RMCAttachmentS42xTelescopicMiniscope 
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
@@ -70,7 +69,7 @@
           - RMCAttachmentS42xTelescopicMiniscope
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-rail: -0.03, 0.185 # Offset needs aligning
+      rmc-aslot-rail: 12, 20 # Offset needs aligning
 
 - type: Tag
   id: RMCFlareGun
