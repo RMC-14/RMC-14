@@ -53,7 +53,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
 
-
     private static readonly ImmutableArray<Direction> Directions = Enum.GetValues<Direction>()
         .Where(d => d != Direction.Invalid)
         .ToImmutableArray();
