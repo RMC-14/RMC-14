@@ -1,6 +1,6 @@
 - type: entity
   name: M82-F flare gun
-  parent: RMCBaseWeaponShotgun
+  parent: [BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder]
   id: RMCM82FFlareGun
   description: A flare gun issued to JTAC operators to use with flares. Comes with a miniscope. One shot, one... life saved?
   components:
@@ -17,7 +17,7 @@
   - type: GunIFF
     enabled: true
   - type: Gun
-    projectileSpeed: 30
+    projectileSpeed: 40
     fireRate: 8
     selectedMode: SemiAuto
     availableModes:
@@ -28,15 +28,12 @@
       path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: BallisticAmmoProvider
     whitelist:
-      components:
-      - type: Item
-      heldPrefix: unlit
       tags:
       - Flare
     blacklist:
-      iconStateSpent: flare_spent
       tags: 
       - FlareLit
+      - Trash
     proto: CMFlare
     capacity: 1
     soundInsert:
