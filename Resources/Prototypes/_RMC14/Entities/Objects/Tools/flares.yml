@@ -60,10 +60,26 @@
 
 - type: entity
   name: flare
-  parent: CMFlare
+  suffix: Projectile
   id: CMFlareLit 
+  description: A red Marine issued flare. There are instructions on the side, it reads 'pull cord, make light'.
   components:
-  - type: Projectile # Gonna need more projectile versions for other flare types, parent this one
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    layers:
+    - state: flare
+    - state: flare_flame
+      color: "#FFA7A7"
+      visible: true
+    - state: overlay
+  - type: Item
+    size: Small
+  - type: IgnitionSource
+    ignited: true
+    temperature: 1000
+  - type: TimedDespawn
+    lifetime: 630
+  - type: Projectile # Gonna need more projectile versions for other flare types
     deleteOnCollide: false
     onlyCollideWhenShot: true
     damage:
@@ -71,10 +87,20 @@
         Heat: 10
   - type: IgniteOnCollide
     fireStacks: 1.5 #CM13 applies more stacks but firecode is fucky
+  -- type: AmbientSound
+    enabled: true
+    volume: 0
+    range: 7
+    sound:
+      path: /Audio/Items/Flare/flare_on.ogg
+      params:
+        loop: true
+  - type: IgniteOnCollide
+    fireStacks: 1
   - type: PointLight
     enabled: true
     color: "#FA644B"
-    radius: 1
+    radius: 1.0
     energy: 5.0
   - type: Tag
     tags:
