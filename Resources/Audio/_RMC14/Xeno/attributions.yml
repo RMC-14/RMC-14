@@ -266,7 +266,7 @@
 - files: ["alien_talk1.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
-  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/voice/alien_talk1.ogg"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/voice/alien_talk.ogg"
 
 - files: ["alien_talk2.ogg"]
   license: "CC-BY-SA-3.0"
