@@ -370,7 +370,7 @@
 
 # Clothing Vend
 
-- type:
+- type: entity
   parent: ColMarTechBase
   id: ColMarTechCommandingOfficerClothing
   name: ColMarTech Commanding Officer Clothing Rack
