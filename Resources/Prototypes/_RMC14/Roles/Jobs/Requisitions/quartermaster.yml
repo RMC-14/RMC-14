@@ -32,7 +32,6 @@
         RMCSkillPowerLoader: 2
     - type: MarineOrders
 
-
 - type: startingGear
   id: CMGearQuartermaster
   equipment:
