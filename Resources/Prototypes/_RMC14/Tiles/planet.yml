@@ -23,12 +23,12 @@
   sprite: /Textures/_RMC14/Tiles/planet/desert/desert.png
   variants: 6
   placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
+  - 90.0
+  - 2.0
+  - 2.0
+  - 2.0
+  - 2.0
+  - 2.0
 
 - type: tile
   parent: CMPlanetBase
