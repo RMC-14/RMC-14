@@ -8,8 +8,6 @@
     sprite: _RMC14/Objects/Weapons/Guns/m82-f_flare_gun.rsi
     layers:
     - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: base
       map: [ "enum.BreechVisuals.Open" ]
   - type: Appearance
   - type: GenericVisualizer
