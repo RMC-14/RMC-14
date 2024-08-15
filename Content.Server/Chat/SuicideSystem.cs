@@ -65,10 +65,6 @@ public sealed class SuicideSystem : EntitySystem
     /// </summary>
     public bool Suicide(EntityUid victim)
     {
-        // Can't suicide if it is disabled
-        if (!_canSuicide)
-            return false;
-
         // Can't suicide if we're already dead
         if (!TryComp<MobStateComponent>(victim, out var mobState) || _mobState.IsDead(victim, mobState))
             return false;
@@ -78,7 +74,7 @@ public sealed class SuicideSystem : EntitySystem
 
         // Suicide is considered a fail if the user wasn't able to ghost
         // Suiciding with the CannotSuicide tag will ghost the player but not kill the body
-        if (!suicideGhostEvent.Handled || _tagSystem.HasTag(victim, "CannotSuicide"))
+        if (!suicideGhostEvent.Handled || _tagSystem.HasTag(victim, "CannotSuicide") || !_canSuicide)
             return false;
 
         _adminLogger.Add(LogType.Mind, $"{EntityManager.ToPrettyString(victim):player} is attempting to suicide");
