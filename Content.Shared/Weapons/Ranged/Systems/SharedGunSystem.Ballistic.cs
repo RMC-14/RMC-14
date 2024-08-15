@@ -91,7 +91,7 @@ public abstract partial class SharedGunSystem
         if (_whitelistSystem.IsWhitelistFailOrNull(component.Whitelist, args.Used))
             return;
 
-        //Prevent grenades or other primed ordanance from being loaded into weapons.
+        //Prevent primed grenades or other primed ordanance from being loaded into weapons.
         if (HasComp<ActiveTimerTriggerComponent>(args.Used))
         {
             Popup(
