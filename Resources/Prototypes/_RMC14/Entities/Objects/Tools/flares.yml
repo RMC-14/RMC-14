@@ -87,7 +87,7 @@
         Heat: 10
   - type: IgniteOnCollide
     fireStacks: 1.5 #CM13 applies more stacks but firecode is fucky
-  -- type: AmbientSound
+  - type: AmbientSound
     enabled: true
     volume: 0
     range: 7
