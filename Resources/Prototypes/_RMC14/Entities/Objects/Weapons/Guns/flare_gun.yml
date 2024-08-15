@@ -9,6 +9,9 @@
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
+    - state: base
+      map: [ "enum.BreechVisuals.Open" ]
+  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.BreechVisuals.Open:
@@ -19,6 +22,7 @@
     size: Small
   - type: GunIFF
     enabled: true
+  - type: AmmoCounter
   - type: Gun
     projectileSpeed: 40
     fireRate: 8
@@ -30,7 +34,7 @@
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: BallisticAmmoProvider
-    cycleable: false
+    cycleable: true
     whitelist:
       tags:
       - Flare
@@ -48,7 +52,7 @@
   - type: BreechLoaded
     needOpenClose: true
   - type: ShootAtFixedPoint
-    shootArcProj: true
+    shootArcProj: false
   - type: Wieldable
   - type: ContainerContainer
     containers:
