@@ -35,9 +35,6 @@
     whitelist:
       tags:
       - LauncherCompatibleGrenade
-    blacklist:
-      tags:
-      - TimerTriggered
     capacity: 1
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
@@ -119,9 +116,6 @@
     whitelist:
       tags:
       - LauncherCompatibleGrenade
-    blacklist:
-      tags:
-      - TimerTriggered
     capacity: 1
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/m79_reload.ogg

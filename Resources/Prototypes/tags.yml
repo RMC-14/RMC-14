@@ -1246,9 +1246,6 @@
   id: TimerSignalElectronics
 
 - type: Tag
-  id: TimerTriggered
-
-- type: Tag
   id: Toolbox
 
 - type: Tag

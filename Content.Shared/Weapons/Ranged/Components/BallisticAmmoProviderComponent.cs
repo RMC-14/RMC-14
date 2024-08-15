@@ -29,9 +29,6 @@ public sealed partial class BallisticAmmoProviderComponent : Component
     [ViewVariables(VVAccess.ReadWrite), DataField]
     public EntityWhitelist? Whitelist;
 
-    [ViewVariables(VVAccess.ReadWrite), DataField]
-    public EntityWhitelist? Blacklist;
-
     public Container Container = default!;
 
     // TODO: Make this use stacks when the typeserializer is done.
