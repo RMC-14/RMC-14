@@ -8,10 +8,10 @@
   },
   "states": [
     {
-      "name": "icon"
+      "name": "sheathe"
     },
     {
-      "name": "full"
+      "name": "sheathe-shotgun"
     },
     {
       "name": "equipped-BACK",
@@ -26,15 +26,7 @@
       "directions": 4
     },
     {
-      "name": "inhand-right-full",
-      "directions": 4
-    },
-    {
       "name": "inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "inhand-left-full",
       "directions": 4
     }
   ]
