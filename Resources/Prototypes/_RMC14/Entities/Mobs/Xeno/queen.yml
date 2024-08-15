@@ -62,6 +62,7 @@
     unlockAt: 0
   - type: XenoAcid
   - type: XenoConstruction
+    isSlowAnimation: true
     canBuild:
     - WallXenoResin
     - WallXenoMembrane

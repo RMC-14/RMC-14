@@ -40,6 +40,7 @@
   - type: XenoAcid
   - type: XenoConstruction
     buildDelay: 4
+    isSlowAnimation: true
     canBuild:
     - WallXenoResin
     - WallXenoMembrane

@@ -53,6 +53,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
 
+
     private static readonly ImmutableArray<Direction> Directions = Enum.GetValues<Direction>()
         .Where(d => d != Direction.Invalid)
         .ToImmutableArray();
@@ -205,7 +206,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (attempt.Cancelled)
             return;
 
-        var effectID = XenoStructuresAnimation + choice;
+        var effectID = XenoStructuresAnimation + choice + (xeno.Comp.IsSlowAnimation ? "Slow" : "");
         var coordinates = GetNetCoordinates(args.Target);
         var entityCoords = GetCoordinates(coordinates);
         EntityUid? effect = null;

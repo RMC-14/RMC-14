@@ -73,3 +73,33 @@
     state: door
   - type: TimedDespawn
     lifetime: 2
+
+- type: entity
+  parent: RMCEffectWallXenoResin
+  id: RMCEffectWallXenoResinSlow
+  noSpawn: true
+  components:
+  - type: Sprite
+    state: wallslow
+  - type: TimedDespawn
+    lifetime: 4
+
+- type: entity
+  parent: RMCEffectWallXenoMembrane
+  id: RMCEffectWallXenoMembraneSlow
+  noSpawn: true
+  components:
+  - type: Sprite
+    state: membraneslow
+  - type: TimedDespawn
+    lifetime: 4
+
+- type: entity
+  parent: RMCEffectDoorXenoResin
+  id: RMCEffectDoorXenoResinSlow
+  noSpawn: true
+  components:
+  - type: Sprite
+    state: doorslow
+  - type: TimedDespawn
+    lifetime: 4  

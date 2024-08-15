@@ -42,4 +42,7 @@ public sealed partial class XenoConstructionComponent : Component
     {
         Params = AudioParams.Default.WithVolume(-10f)
     };
+
+    [DataField, AutoNetworkedField]
+    public bool IsSlowAnimation = false;
 }
