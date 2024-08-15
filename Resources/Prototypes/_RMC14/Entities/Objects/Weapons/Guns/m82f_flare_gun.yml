@@ -1,7 +1,7 @@
 - type: entity
   name: M82-F flare gun
-  parent: [BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder]
-  id: RMCFlareGun
+  parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
+  id: RMCM82FFlareGun
   description: A flare gun issued to JTAC operators to use with flares. Comes with a miniscope. One shot, one... life saved?
   components:
   - type: Sprite
@@ -13,7 +13,6 @@
       map: ["enum.GunVisualLayers.Base"]
   - type: Item
     size: Small
-    sprite: _RMC14/Objects/Weapons/Guns/m82-f_flare_gun.rsi
   - type: GunIFF
     enabled: true
   - type: Gun
@@ -27,6 +26,7 @@
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: BallisticAmmoProvider
+    cycleable: false
     whitelist:
       tags:
       - Flare
@@ -56,6 +56,21 @@
     tags:
     - RMCFlareGun
     - Sidearm
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentS42xTelescopicMiniscope #TODO: Add flare gun modifiers for the Miniscope
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: -0.03, 0.185 # Offset needs aligning
 
 - type: Tag
   id: RMCFlareGun
