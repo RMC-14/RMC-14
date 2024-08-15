@@ -381,6 +381,6 @@
 #        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
         whitelist:
           tags:
-          - RMCFlareGun
+          - RMCM82FFlareGun
   - type: CMHolster
   - type: CMItemSlots
