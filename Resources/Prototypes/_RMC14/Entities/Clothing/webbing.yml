@@ -154,3 +154,41 @@
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
+
+- type: entity
+  parent: CMWebbingBase
+  id: CMWebbingPouch
+  name: drop pouch
+  description: A convenient pouch to carry loose items around.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/drop_pouch.rsi
+    state: webbing
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,7,1   # up to 4 small or 8 tiny items
+    blacklist:
+      components:
+      - Bible
+      tags:
+      - CMFirstAidKit
+      - CMBoxStorage
+  - type: Webbing
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Webbing/drop_pouch.rsi
+      state: equipped
+    components:
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+      - 0,0,7,1   # up to 4 small or 8 tiny items
+      blacklist:
+        components:
+        - Bible
+        tags:
+        - CMFirstAidKit
+        - CMBoxStorage
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false

@@ -153,8 +153,8 @@
         points: 15
       - id: CMWebbingBlack
         points: 15
-    #- id: CMDropPouch
-    #  points: 15
+      - id: CMWebbingPouch
+        points: 15
     #- id: CMShoulderHolster
     #  points: 15
     #- id: CMScabbardMacheteFull
