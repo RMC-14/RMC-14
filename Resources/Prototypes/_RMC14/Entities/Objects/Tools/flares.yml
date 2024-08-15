@@ -72,6 +72,9 @@
       color: "#FFA7A7"
       visible: true
     - state: overlay
+  - type: Icon
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    state: icon
   - type: Item
     size: Small
   - type: IgnitionSource
@@ -98,7 +101,6 @@
   - type: IgniteOnCollide
     fireStacks: 1
   - type: PointLight
-    enabled: true
     color: "#FA644B"
     radius: 1.0
     energy: 5.0
