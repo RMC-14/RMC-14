@@ -38,7 +38,6 @@
       - Flare
     blacklist:
       tags: 
-      - FlareLit
       - Trash
     proto: CMFlare
     capacity: 1
