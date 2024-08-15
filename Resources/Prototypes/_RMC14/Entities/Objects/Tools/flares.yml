@@ -12,7 +12,7 @@
     spentDesc: expendable-light-spent-flare-desc
     glowDuration: 600
     fadeOutDuration: 30
-    iconStateSpent: flare_spent #Being spent should add a tag or somesuch
+    iconStateSpent: flare_spent
     turnOnBehaviourID: turn_on
     fadeOutBehaviourID: fade_out
     litSound:
@@ -63,7 +63,7 @@
   parent: CMFlare
   id: CMFlareLit 
   components:
-  - type: Projectile # Gonna need to make more projectile versions for other flare types
+  - type: Projectile # Gonna need more projectile versions for other flare types, parent this one
     deleteOnCollide: false
     onlyCollideWhenShot: true
     damage:
