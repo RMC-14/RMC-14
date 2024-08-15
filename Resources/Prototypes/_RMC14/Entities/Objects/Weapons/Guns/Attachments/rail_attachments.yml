@@ -290,7 +290,14 @@
       accuracyAddMult: -0.05
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: 2 #TODO: Add flare gun modifiers when it's implemented.
+      accuracyMovementPenaltyAddMult: 2 
+    - conditions:
+        activeOnly: true
+        whitelist:
+          tags:
+          - RMCFlareGun
+        walk: -0.2
+        sprint: -0.3
 
 - type: entity
   parent: RMCAttachmentS42xTelescopicMiniscope
