@@ -29,6 +29,9 @@ public sealed class SuicideSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly SharedSuicideSystem _suicide = default!;
+    [Dependency] private readonly IConfigurationManager _configuration = default!;
+
+    private bool _canSuicide = false;
 
     public override void Initialize()
     {
@@ -37,6 +40,22 @@ public sealed class SuicideSystem : EntitySystem
         SubscribeLocalEvent<DamageableComponent, SuicideEvent>(OnDamageableSuicide);
         SubscribeLocalEvent<MobStateComponent, SuicideEvent>(OnEnvironmentalSuicide);
         SubscribeLocalEvent<MindContainerComponent, SuicideGhostEvent>(OnSuicideGhost);
+
+        _configuration.OnValueChanged(CCVars.ICEnableSuicide, OnSuicideEnabledChanged, true);
+    }
+
+    public override void Shutdown()
+    {
+        base.Shutdown();
+        _configuration.UnsubValueChanged(CCVars.ICEnableSuicide, OnSuicideEnabledChanged);
+    }
+
+    /// <summary>
+    /// Ran when the suicide cvar is changed
+    /// </summary>
+    private void OnSuicideEnabledChanged(bool enabled)
+    {
+        _canSuicide = enabled;
     }
 
     /// <summary>
@@ -46,6 +65,10 @@ public sealed class SuicideSystem : EntitySystem
     /// </summary>
     public bool Suicide(EntityUid victim)
     {
+        // Can't suicide if it is disabled
+        if (!_canSuicide)
+            return false;
+
         // Can't suicide if we're already dead
         if (!TryComp<MobStateComponent>(victim, out var mobState) || _mobState.IsDead(victim, mobState))
             return false;
