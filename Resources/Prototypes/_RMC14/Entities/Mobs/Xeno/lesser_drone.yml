@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoLesserDrone
   name: Lesser Drone
   description: An alien drone. Looks... smaller.

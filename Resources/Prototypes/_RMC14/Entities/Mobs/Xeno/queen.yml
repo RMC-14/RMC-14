@@ -2,6 +2,7 @@
   parent:
   - CMXenoDeveloped
   - CMXenoTail
+  - RMCXenoSpeechSounds
   id: CMXenoQueen
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
