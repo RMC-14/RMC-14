@@ -84,6 +84,8 @@
   - type: Tag
     tags:
     - ThrowingKnife
+  - type: Execution
+    doAfterDuration: 6.0
 
 - type: Tag
   id: ThrowingKnife
