@@ -59,6 +59,7 @@
         endValue: 1.0
 
 - type: entity
+  parent: BaseItem
   name: flare
   suffix: Projectile
   id: CMFlareLit 
@@ -106,11 +107,7 @@
     energy: 5.0
   - type: Tag
     tags:
-    - FlareLit
-
-    
-- type: Tag
-  id: FlareLit
+    - Trash
   
 - type: entity
   abstract: true
