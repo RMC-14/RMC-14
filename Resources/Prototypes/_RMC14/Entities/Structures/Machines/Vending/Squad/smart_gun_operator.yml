@@ -59,8 +59,8 @@
         points: 15
     - name: Clothing Items
       entries:
-    #- id: CMScabbardMacheteFull
-    #  points: 6
+      - id: RMCScabbardMacheteSGFilled
+        points: 15
     #- id: CMFuelTankStrapPouch
     #  points: 5
       - id: RMCPouchGeneralLarge

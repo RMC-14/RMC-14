@@ -120,8 +120,8 @@
     #  points: 24
     - name: Clothing Items
       entries:
-    #- id: CMScabbardMacheteFull
-    #  points: 6
+      - id: RMCScabbardMacheteFilled
+        points: 6
       - id: RMCPouchMacheteFilled
         points: 8
     #- id: CMMarineRadioTelephonePack
@@ -205,7 +205,7 @@
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
-    #- id: CMScabbardMacheteFull
+      - id: RMCScabbardMacheteFilled
       - id: CMBackpackMarineTech
       - id: CMSatchelMarineTech
       - id: CMBackpackWelder
