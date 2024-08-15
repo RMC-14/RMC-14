@@ -80,6 +80,7 @@
     quickEquip: false
     slots:
     - back
+  - type: ClothingIgnoreBlockBackpack
   - type: ClothingRequireEquipped
     whitelist:
       components:
