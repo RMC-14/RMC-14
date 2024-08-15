@@ -21,7 +21,6 @@
     sprite: _RMC14/Objects/Medical/hypospray.rsi
   - type: Hypospray
     transferAmount: 5
-    onlyAffectsMobs: false
     injectOnly: true
     injectSound: /Audio/_RMC14/Medical/hypospray.ogg
   - type: Appearance
