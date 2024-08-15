@@ -76,7 +76,7 @@
     sprite: _RMC14/Objects/Clothing/Back/Scabbards/machete_sg.rsi
     state: sheath
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Back/Scabbards/machete_h5.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Scabbards/machete_sg.rsi
     quickEquip: false
     slots:
     - back
@@ -106,7 +106,7 @@
     sprite: _RMC14/Objects/Clothing/Back/Scabbards/shotgun.rsi
     state: sheath
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Back/Scabbards/machete_h5.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Scabbards/shotgun.rsi
     quickEquip: false
     slots:
     - back
