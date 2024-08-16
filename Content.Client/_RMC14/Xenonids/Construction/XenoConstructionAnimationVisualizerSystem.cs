@@ -40,8 +40,7 @@ public sealed class XenoConstructionAnimationVisualizerSystem : EntitySystem
     private void Animate(SpriteComponent sprite, object layerKey, int frame)
     {
         if (!sprite.LayerExists(layerKey) ||
-            sprite[layerKey] is not Layer layer ||
-            layer.ActualState?.DelayCount is not { } delays)
+            sprite[layerKey] is not Layer layer)
         {
             return;
         }
