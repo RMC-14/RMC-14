@@ -1,23 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added attaching parasites by clicking downed marines with or as them.
-    type: Add
-  - message: parasites can only infect through a leap if it is done within a very
-      short range of the target.
-    type: Tweak
-  id: 61
-  time: '2024-04-20T06:14:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1254
-- author: Whisper
-  changes:
-  - message: Xenos no longer melt own structures with acid.
-    type: Fix
-  id: 62
-  time: '2024-04-20T06:20:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1256
-- author: DrSmugleaf
-  changes:
   - message: Xeno armor now only reduces brute damage.
     type: Fix
   id: 63
@@ -4280,5 +4263,20 @@
   id: 560
   time: '2024-08-16T08:58:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3685
+- author: DrSmugleaf
+  changes:
+  - message: Added a popup when someone else throws something.
+    type: Add
+  id: 561
+  time: '2024-08-16T12:40:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3688
+- author: Vermidia
+  changes:
+  - message: Fixed some xeno pull speeds. Runner pulls faster, boiler pulls the same
+      as most xenos, and warrior pulls a little slower then they used to.
+    type: Fix
+  id: 562
+  time: '2024-08-16T12:39:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3650
 Name: RMC14
 Order: -1
