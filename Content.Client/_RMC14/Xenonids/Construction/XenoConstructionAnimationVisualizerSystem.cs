@@ -42,7 +42,7 @@ public sealed class XenoConstructionAnimationVisualizerSystem : EntitySystem
 
         for (int i = 0; i < frames.Frames.Count; i++)
         {
-            keys.Add(new KeyFrame(frames.Frames[i], (i + 1) * (float) frameCounter));
+            keys.Add(new KeyFrame(frames.Frames[i], i * (float) frameCounter));
         }
 
         AnimationTrackSpriteFlick track = new() { LayerKey = XenoConstructionVisualLayers.Animation };
