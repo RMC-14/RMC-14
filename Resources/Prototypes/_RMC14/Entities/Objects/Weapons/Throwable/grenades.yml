@@ -45,9 +45,11 @@
 - type: entity
   parent: CMGrenadeBase
   id: CMGrenadeSmoke
-  name: M40 smoke grenade
+  name: M40 HSDP smoke grenade
   description: The M40 HSDP is a small, but powerful smoke grenade. Based off the same platform as the M40 HEDP. It is set to detonate in 2 seconds.
   components:
+  - type: OnUseTimerTrigger
+    delay: 2
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40smoke.rsi
   - type: SmokeOnTrigger

@@ -50,12 +50,8 @@ public sealed class XenoBombardSystem : EntitySystem
 
         _audio.PlayPredicted(ent.Comp.PrepareSound, ent, ent);
 
-        var ev = new XenoBombardDoAfterEvent
-        {
-            ActionId = GetNetEntity(args.Action),
-            Coordinates = target,
-        };
-        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent) { BreakOnMove = true };
+        var ev = new XenoBombardDoAfterEvent { Coordinates = target, };
+        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent, args.Action) { BreakOnMove = true };
         _doAfter.TryStartDoAfter(doAfter);
 
         var selfMessage = Loc.GetString("rmc-glob-start-self");
@@ -67,7 +63,7 @@ public sealed class XenoBombardSystem : EntitySystem
 
     private void OnBombardDoAfter(Entity<XenoBombardComponent> ent, ref XenoBombardDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled)
+        if (args.Cancelled || args.Handled || args.Target is not { } action)
             return;
 
         args.Handled = true;
@@ -91,7 +87,7 @@ public sealed class XenoBombardSystem : EntitySystem
 
         _gun.ShootProjectile(projectile, direction, Vector2.Zero, ent, ent);
         _audio.PlayEntity(ent.Comp.ShootSound, ent, ent);
-        _rmcActions.ActivateSharedCooldown(GetEntity(args.ActionId), ent);
+        _rmcActions.ActivateSharedCooldown(action, ent);
 
         var selfMessage = Loc.GetString("rmc-glob-shoot-self");
         _popup.PopupClient(selfMessage, ent, ent);

@@ -1,165 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed larvas and parasites bumping open doors when crawling under them.
-    type: Fix
-  - message: Fixed larvas and parasites having hands.
-    type: Fix
-  id: 42
-  time: '2024-04-13T10:41:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1219
-- author: Whisper
-  changes:
-  - message: grenades no longer explode eachother
-    type: Tweak
-  id: 43
-  time: '2024-04-14T01:28:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1224
-- author: DrSmugleaf
-  changes:
-  - message: Added surgery skills to the appropriate roles.
-    type: Add
-  id: 44
-  time: '2024-04-13T06:33:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1206
-- author: DrSmugleaf
-  changes:
-  - message: Fixed not being able to use the hf2 health analyzer on others.
-    type: Fix
-  id: 45
-  time: '2024-04-14T00:13:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1223
-- author: Whisper
-  changes:
-  - message: Guns no longer start with mags.
-    type: Fix
-  id: 46
-  time: '2024-04-14T00:35:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1220
-- author: Whisper
-  changes:
-  - message: shotguns no longer try to cycle when wielding
-    type: Fix
-  id: 47
-  time: '2024-04-13T10:31:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1221
-- author: DrSmugleaf
-  changes:
-  - message: Marines will now be knocked down by developed alive xenos when trying
-      to pull them.
-    type: Add
-  id: 48
-  time: '2024-04-14T05:49:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1232
-- author: Whisper
-  changes:
-  - message: catwalks rotate correctly now
-    type: Fix
-  id: 49
-  time: '2024-04-14T06:20:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1225
-- author: Froffy025
-  changes:
-  - message: Fixed pistols spawning with a magazine included.
-    type: Fix
-  id: 50
-  time: '2024-04-16T06:19:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1236
-- author: Whisper
-  changes:
-  - message: Xenos (and humanoids) no longer trigger stepping on glass shards
-    type: Tweak
-  id: 51
-  time: '2024-04-17T07:34:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1243
-- author: DrSmugleaf
-  changes:
-  - message: Fixed admin ghosts not being able to pull xenos.
-    type: Fix
-  id: 52
-  time: '2024-04-18T20:56:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1248
-- author: Whisper
-  changes:
-  - message: Xenos have AI and ghost role takeover
-    type: Add
-  id: 53
-  time: '2024-04-18T21:25:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1249
-- author: DrSmugleaf
-  changes:
-  - message: Fixed evolution cooldowns for defender, drone, lurker, runner, sentinel,
-      spitter and warrior.
-    type: Fix
-  id: 54
-  time: '2024-04-18T21:30:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1250
-- author: DrSmugleaf
-  changes:
-  - message: Added examine text to pump shotguns that tell you how to pump it.
-    type: Add
-  - message: Added popups when the user is unable to shoot, either from needing to
-      pump a shotgun or needing to wait before shooting again.
-    type: Add
-  - message: Pump shotguns now have a delay between shots instead of a delay between
-      pumps.
-    type: Tweak
-  - message: Pumping now requires the gun to have at least one bullet left.
-    type: Fix
-  id: 55
-  time: '2024-04-18T23:23:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1247
-- author: DrSmugleaf
-  changes:
-  - message: Changed all item and storage sizes to be consistent with CMSS13.
-    type: Tweak
-  id: 56
-  time: '2024-04-19T02:27:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1244
-- author: Whisper
-  changes:
-  - message: Xenos can wideswing with spacebar.
-    type: Add
-  id: 57
-  time: '2024-04-19T02:52:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1241
-- author: DrSmugleaf
-  changes:
-  - message: Added hold and move order actions to all marine roles with leadership
-      skill.
-    type: Add
-  - message: Fixed marine orders applying to dead marines.
-    type: Fix
-  - message: Fixed marine order effects not being multiplied by the giver's leadership
-      skill.
-    type: Fix
-  - message: Fixed marine order effects being inconsistent when multiple of the same
-      type are given at once.
-    type: Fix
-  - message: Made the cooldown, range, and duration of marine orders consistent with
-      CMSS13.
-    type: Tweak
-  id: 58
-  time: '2024-04-19T06:22:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1252
-- author: DrSmugleaf
-  changes:
-  - message: Backpacks now have a two second delay before opening and will close if
-      the user moves to counterbalance their larger storage. This does not include
-      satchels, pouches or any other kind of storage.
-    type: Add
-  id: 59
-  time: '2024-04-20T01:20:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1253
-- author: DrSmugleaf
-  changes:
-  - message: Fixed inconsistent range when leaping as a runner or parasite.
-    type: Fix
-  id: 60
-  time: '2024-04-20T05:01:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1257
-- author: DrSmugleaf
-  changes:
   - message: Added attaching parasites by clicking downed marines with or as them.
     type: Add
   - message: parasites can only infect through a leap if it is done within a very
@@ -4294,5 +4135,150 @@
   id: 541
   time: '2024-08-09T23:48:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3595
+- author: Whisper
+  changes:
+  - message: Added Astor Debb figurine.
+    type: Add
+  id: 542
+  time: '2024-08-11T01:03:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3602
+- author: Rainbeon
+  changes:
+  - message: Fixed Spitter/Boiler's Spray Acid ability not costing plasma to use.
+      It now correctly costs 40 plasma.
+    type: Fix
+  id: 543
+  time: '2024-08-11T01:08:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3605
+- author: DrSmugleaf
+  changes:
+  - message: Added Mazy 'The Fortress' Tusji figurine.
+    type: Add
+  id: 544
+  time: '2024-08-11T03:52:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3613
+- author: Vermidia
+  changes:
+  - message: Larva and parasites can no longer nest hosts
+    type: Fix
+  - message: Xenos that can't put up parasites can no longer infect with them or put
+      them back into eggs by pulling them.
+    type: Fix
+  id: 545
+  time: '2024-08-13T00:42:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3638
+- author: coolmankid12345
+  changes:
+  - message: Marine icons and Xeno plasma/health for spectators to see
+    type: Add
+  id: 546
+  time: '2024-08-13T00:51:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3340
+- author: Whisper
+  changes:
+  - message: Added Nesart Onan, updated Satoru Suzuki figurines.
+    type: Add
+  id: 547
+  time: '2024-08-13T00:51:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3615
+- author: crystalHex
+  changes:
+  - message: Fixed being able to use nightvision items in pockets.
+    type: Fix
+  id: 548
+  time: '2024-08-13T01:05:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3612
+- author: MACMAN2003
+  changes:
+  - message: Fixed a pixel offset on the welder chestrig.
+    type: Fix
+  id: 549
+  time: '2024-08-13T01:06:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3619
+- author: DrSmugleaf
+  changes:
+  - message: Added Dalton Harris figurine.
+    type: Add
+  id: 550
+  time: '2024-08-13T01:24:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3640
+- author: Whisper
+  changes:
+  - message: Added Chad Scott, Worships-The-Gods figurines
+    type: Add
+  id: 551
+  time: '2024-08-16T03:24:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3670
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added xeno speech sounds
+    type: Add
+  id: 552
+  time: '2024-08-16T03:38:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3679
+- author: Vermidia
+  changes:
+  - message: Fixed auto-injectors being able to draw from containers.
+    type: Fix
+  id: 553
+  time: '2024-08-16T03:39:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3681
+- author: Vermidia
+  changes:
+  - message: Xenos will no longer look stunned if killed by an AP rocket.
+    type: Fix
+  - message: Defenders will no longer look stunned if hit by an AP rocket while fortified.
+    type: Fix
+  id: 554
+  time: '2024-08-16T03:39:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3680
+- author: Vermidia
+  changes:
+  - message: Added plasteel barricades, craftable with 6 plasteel. They have more
+      health than normal barricades but take longer to set up.
+    type: Add
+  id: 555
+  time: '2024-08-16T03:45:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3661
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed duplicate traits in the character Traits tab. Check to make sure
+      that your selected traits are still correct!
+    type: Fix
+  id: 556
+  time: '2024-08-16T03:43:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3606
+- author: blueDev2
+  changes:
+  - message: Double doors no longer have solid hitboxes on one half of the door when
+      open.
+    type: Fix
+  id: 557
+  time: '2024-08-16T03:44:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3662
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the Queen making no stomp sound when pulled. By making her unable
+      to be pulled while alive, not stunned and not knocked down. You did this to
+      yourselves. This is the best you are getting for now because I don't feel like
+      ahelping more people about it while I go fix footstep sound code.
+    type: Fix
+  id: 558
+  time: '2024-08-16T03:43:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3683
+- author: crystalHex
+  changes:
+  - message: Added descriptions to squad leader's kits.
+    type: Tweak
+  id: 559
+  time: '2024-08-16T06:29:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3686
+- author: DrSmugleaf
+  changes:
+  - message: Added Sukuna Kurze figurine.
+    type: Add
+  id: 560
+  time: '2024-08-16T08:58:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3685
 Name: RMC14
 Order: -1
