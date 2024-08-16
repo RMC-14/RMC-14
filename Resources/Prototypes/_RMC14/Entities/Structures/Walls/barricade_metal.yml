@@ -41,6 +41,11 @@
             visible: false
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: InvulnerabilityTime
+    whitelist:
+      components:
+      - Xeno
+    hitsToInvulnerability: 3
 
 # Metal Barricade Tree
 - type: entity
