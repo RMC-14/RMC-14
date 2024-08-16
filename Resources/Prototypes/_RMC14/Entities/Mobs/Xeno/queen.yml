@@ -162,4 +162,4 @@
       - Xeno
     exceptEffects:
     - Stun
-    - Knockeddown
+    - KnockedDown
