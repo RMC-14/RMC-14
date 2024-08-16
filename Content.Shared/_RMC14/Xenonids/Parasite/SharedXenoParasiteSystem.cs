@@ -321,6 +321,9 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         if (!CanInfectPopup(parasite, victim, parasite, popup, force))
             return false;
 
+        var pos = _transform.GetWorldPosition(victim);
+        _transform.SetWorldPosition(parasite, pos);
+
         if (!TryRipOffClothing(victim, SlotFlags.HEAD))
             return false;
         if (!TryRipOffClothing(victim, SlotFlags.MASK, false))

@@ -34,7 +34,7 @@ public sealed class CMPullingSystem : EntitySystem
         _preventPulledWhileAliveQuery = GetEntityQuery<PreventPulledWhileAliveComponent>();
 
         SubscribeLocalEvent<ParalyzeOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
-        SubscribeLocalEvent<InfectOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
+        SubscribeLocalEvent<InfectOnPullAttemptComponent, PullAttemptEvent>(OnInfectOnPullAttempt);
 
         SubscribeLocalEvent<SlowOnPullComponent, PullStartedMessage>(OnSlowPullStarted);
         SubscribeLocalEvent<SlowOnPullComponent, PullStoppedMessage>(OnSlowPullStopped);
@@ -81,7 +81,7 @@ public sealed class CMPullingSystem : EntitySystem
         _popup.PopupPredicted(selfMessage, othersMessage, puller, puller, PopupType.MediumCaution);
     }
 
-    private void OnParalyzeOnPullAttempt(Entity<InfectOnPullAttemptComponent> ent, ref PullAttemptEvent args)
+    private void OnInfectOnPullAttempt(Entity<InfectOnPullAttemptComponent> ent, ref PullAttemptEvent args)
     {
         var user = args.PullerUid;
         var target = args.PulledUid;
@@ -96,11 +96,10 @@ public sealed class CMPullingSystem : EntitySystem
             return;
 
         Entity<XenoParasiteComponent> comp = (target, paraComp);
+        args.Cancelled = true;
 
         if (!_parasite.Infect(comp, user, false, true))
             return;
-
-        args.Cancelled = true;
 
         var puller = user;
         var pulled = target;
