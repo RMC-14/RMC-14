@@ -202,6 +202,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/scout.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/scout.rsi
+  - type: ParasiteResistance
+    probability: 0.2
 
 # M3-G4 Grenadier Spec
 - type: entity
@@ -217,6 +219,8 @@
   - type: CMArmor
     armor: 25
     explosionArmor: 50
+  - type: ParasiteResistance
+    probability: 0.6
 
 # M35 Pyro Spec
 - type: entity
@@ -229,6 +233,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m35.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m35.rsi
+  - type: ParasiteResistance
+    probability: 0.2
 
 # M45 Sniper Spec
 - type: entity
@@ -241,6 +247,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m45.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m45.rsi
+  - type: ParasiteResistance
+    probability: 0.2
 
 # M3-T Demo Spec
 - type: entity
@@ -253,4 +261,6 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/t_demo.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/t_demo.rsi
+  - type: ParasiteResistance
+    probability: 0.2
 # TODO RMC14 Give hearing protection component if ear damage is added
