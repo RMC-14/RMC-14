@@ -96,7 +96,7 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestedComponent, IsUnequippingAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, GetInfectedIncubationMultiplierEvent>(OnInNestGetInfectedIncubationMultiplier);
 
-        Subs.BuiEvents<XenoNestableComponent>(XenoRemoveNestedUI.Key, subs =>
+        Subs.BuiEvents<XenoComponent>(XenoRemoveNestedUI.Key, subs =>
         {
             subs.Event<XenoRemoveNestedBuiMsg>(OnRemoveNestedBuiMsg);
         });
@@ -126,7 +126,10 @@ public sealed class XenoNestSystem : EntitySystem
 
     private void OnNestedActivateInWorld(Entity<XenoNestableComponent> target, ref ActivateInWorldEvent args)
     {
-        TryStartUnNesting(args.User, target.Owner);
+        if (!TryComp(args.User, out XenoComponent? xenoComp))
+            return;
+        var castUser = (Entity<XenoComponent>) args.User!;
+        TryStartUnNesting(castUser, target.Owner);
     }
 
     private void OnNestRemove(Entity<XenoNestComponent> ent, ref ComponentRemove args)
@@ -243,11 +246,12 @@ public sealed class XenoNestSystem : EntitySystem
         }
     }
 
-    private void OnRemoveNestedBuiMsg(Entity<XenoNestableComponent> nestable, ref XenoRemoveNestedBuiMsg args)
+    private void OnRemoveNestedBuiMsg(Entity<XenoComponent> user, ref XenoRemoveNestedBuiMsg args)
     {
+        _ui.CloseUi(user.Owner, XenoRemoveNestedUI.Key, user);
         if (!args.RemoveNested)
             return;
-        var target = nestable.Owner;
+        var target = new EntityUid(args.NestableTarget);
         if (_net.IsClient)
             return;
         DetachNested(null, target);
@@ -345,7 +349,7 @@ public sealed class XenoNestSystem : EntitySystem
         }
     }
 
-    private void TryStartUnNesting(EntityUid user, EntityUid target)
+    private void TryStartUnNesting(Entity<XenoComponent> user, EntityUid target)
     {
         if (!CanBeUnNested(user, target))
             return;
@@ -371,8 +375,9 @@ public sealed class XenoNestSystem : EntitySystem
         else
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-nest-unsecuring-active-self", ("target", target)), user, user);
+            _ui.TryOpenUi(target, XenoRemoveNestedUI.Key, user);
+            _ui.SetUiState(target, XenoRemoveNestedUI.Key, new RemoveNestedState(target.Id));
         }
-        _ui.TryOpenUi(user, XenoRemoveNestedUI.Key, user);
         //var doAfter = new DoAfterArgs(EntityManager, user, doafterTime, ev, target)
         //_doAfter.TryStartDoAfter(doAfter);
     }
