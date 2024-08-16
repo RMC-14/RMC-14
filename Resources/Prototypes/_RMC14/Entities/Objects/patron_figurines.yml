@@ -450,3 +450,14 @@
     state: dalton_harris
   - type: PatronFigurine
     id: 443ae72d-bfbb-4997-8170-08e599676c70
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSukunaKurze
+  name: Sukuna Kurze figurine
+  description: "This man is fueled by root beer and patriotism, and brother we're all outta root beer..."
+  components:
+  - type: Sprite
+    state: sukuna_kurze
+  - type: PatronFigurine
+    id: 3b608dbd-db50-4310-a017-83626e056257
