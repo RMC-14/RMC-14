@@ -45,7 +45,7 @@ public sealed class XenoConstructionAnimationVisualizerSystem : EntitySystem
         {
             return;
         }
-        layer.SetAutoAnimated(layer.AnimationFrame < frame ? true : false);
+        layer.SetAutoAnimated(layer.AnimationFrame < frame);
     }
 
     public override void FrameUpdate(float frameTime)
