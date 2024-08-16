@@ -172,6 +172,7 @@
       tags:
       - CMMagazinePistol
       - RMCMagazineRevolver
+  - type: FixedItemSizeStorage
   - type: Webbing
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster.rsi
