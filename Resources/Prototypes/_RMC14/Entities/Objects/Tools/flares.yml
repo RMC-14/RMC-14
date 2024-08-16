@@ -109,8 +109,8 @@
         loop: true
   - type: PointLight
     color: "#FA644B"
-    radius: 5.0
-    energy: 10.0
+    radius: 6.0
+    energy: 12.0
   - type: Tag
     tags:
     - Trash
