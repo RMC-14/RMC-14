@@ -8,8 +8,5 @@ namespace Content.Shared._RMC14.Xenonids.Bombard;
 public sealed partial class XenoBombardDoAfterEvent : SimpleDoAfterEvent
 {
     [DataField]
-    public NetEntity ActionId;
-
-    [DataField]
     public MapCoordinates Coordinates;
 }
