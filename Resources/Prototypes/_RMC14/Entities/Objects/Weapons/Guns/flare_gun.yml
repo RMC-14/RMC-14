@@ -23,7 +23,7 @@
   - type: AmmoCounter
   - type: Gun
     projectileSpeed: 40
-    fireRate: 8
+    fireRate: 1
     selectedMode: SemiAuto
     availableModes:
       - SemiAuto
