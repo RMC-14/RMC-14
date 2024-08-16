@@ -1,0 +1,75 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelStrataBlueBase
+  name: tiles-cm-default-blue
+
+- type: tile
+  parent: CMFloorSteelStrataBlueBase
+  id: CMFloorSteelStrataBlue1
+  sprite: /Textures/_RMC14/Tiles/planet/strata/blue_1.png
+
+- type: tile
+  parent: CMFloorSteelStrataBlueBase
+  id: CMFloorSteelStrataBlue2
+  sprite: /Textures/_RMC14/Tiles/planet/strata/blue_2.png
+
+- type: tile
+  parent: CMFloorSteelStrataBlueBase
+  id: CMFloorSteelStrataBlue3
+  sprite: /Textures/_RMC14/Tiles/planet/strata/blue_3.png
+
+- type: tile
+  parent: CMFloorSteelStrataBlueBase
+  id: CMFloorSteelStrataBlue4
+  sprite: /Textures/_RMC14/Tiles/planet/strata/blue_4.png
+
+- type: tile
+  parent: CMFloorSteelStrataBlueBase
+  id: CMFloorSteelStrataBlue5
+  sprite: /Textures/_RMC14/Tiles/planet/strata/blue_5.png
+
+- type: tile
+  parent: CMFloorSteelStrataBlueBase
+  id: CMFloorSteelStrataBlue6
+  sprite: /Textures/_RMC14/Tiles/planet/strata/blue_6.png
+
+- type: tile
+  parent: CMFloorSteelStrataBlueBase
+  id: CMFloorSteelStrataBlue7
+  sprite: /Textures/_RMC14/Tiles/planet/strata/blue_7.png
+
+- type: tile
+  parent: CMFloorSteelStrataBlueBase
+  id: CMFloorSteelStrataBlue8
+  sprite: /Textures/_RMC14/Tiles/planet/strata/blue_8.png
+
+- type: tile
+  parent: CMFloorSteelStrataBlueBase
+  id: CMFloorSteelStrataBlue9
+  sprite: /Textures/_RMC14/Tiles/planet/strata/blue_9.png
+
+- type: tile
+  parent: CMFloorSteelStrataBlueBase
+  id: CMFloorSteelStrataBlue10
+  sprite: /Textures/_RMC14/Tiles/planet/strata/blue_10.png
+
+- type: tile
+  parent: CMFloorSteelStrataBlueBase
+  id: CMFloorSteelStrataBlue11
+  sprite: /Textures/_RMC14/Tiles/planet/strata/blue_11.png
+
+- type: tile
+  parent: CMFloorSteelStrataBlueBase
+  id: CMFloorSteelStrataBlue12
+  sprite: /Textures/_RMC14/Tiles/planet/strata/blue_12.png
+
+- type: tile
+  parent: CMFloorSteelStrataBlueBase
+  id: CMFloorSteelStrataBlue13
+  sprite: /Textures/_RMC14/Tiles/planet/strata/blue_13.png
+
+- type: tile
+  parent: CMFloorSteelStrataBlueBase
+  id: CMFloorSteelStrataBlue14
+  sprite: /Textures/_RMC14/Tiles/planet/strata/blue_14.png

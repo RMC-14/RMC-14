@@ -133,3 +133,93 @@
   footstepSounds:
     collection: FootstepGrass
   itemDrop: FloorTileItemAstroGrass
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelCement1
+  sprite: /Textures/_RMC14/Tiles/floors/cement1.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelCement2
+  sprite: /Textures/_RMC14/Tiles/floors/cement2.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelCement3
+  sprite: /Textures/_RMC14/Tiles/floors/cement3.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelCement4
+  sprite: /Textures/_RMC14/Tiles/floors/cement4.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelCement5
+  sprite: /Textures/_RMC14/Tiles/floors/cement5.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelCement6
+  sprite: /Textures/_RMC14/Tiles/floors/cement6.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelCement7
+  sprite: /Textures/_RMC14/Tiles/floors/cement7.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelCement8
+  sprite: /Textures/_RMC14/Tiles/floors/cement8.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelCement9
+  sprite: /Textures/_RMC14/Tiles/floors/cement9.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelCement10
+  sprite: /Textures/_RMC14/Tiles/floors/cement10.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelCement11
+  sprite: /Textures/_RMC14/Tiles/floors/cement11.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelCement12
+  sprite: /Textures/_RMC14/Tiles/floors/cement12.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelCement13
+  sprite: /Textures/_RMC14/Tiles/floors/cement13.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelCement14
+  sprite: /Textures/_RMC14/Tiles/floors/cement14.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelCement15
+  sprite: /Textures/_RMC14/Tiles/floors/cement15.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelCement16
+  sprite: /Textures/_RMC14/Tiles/floors/cement16.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelCement17
+  sprite: /Textures/_RMC14/Tiles/floors/cement17.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelCement18
+  sprite: /Textures/_RMC14/Tiles/floors/cement18.png
