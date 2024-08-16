@@ -58,7 +58,8 @@
         startValue: 7.0
         endValue: 1.0
 
-# Projectile Versions of Flares, TODO: Add Signal Flare version when CAS is implemented
+# Projectile Versions of Flares
+# TODO: Add Signal Flare version when CAS is implemented and shooting flares into the air when roofs exist
 
 - type: entity
   parent: BaseItem
