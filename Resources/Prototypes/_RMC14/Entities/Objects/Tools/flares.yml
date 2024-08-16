@@ -58,6 +58,8 @@
         startValue: 7.0
         endValue: 1.0
 
+# Projectile Versions of Flares, TODO: Add Signal Flare version when CAS is implemented
+
 - type: entity
   parent: BaseItem
   name: flare
@@ -107,6 +109,8 @@
       path: /Audio/Items/Flare/flare_burn.ogg
       params:
         loop: true
+        volume: -10
+        maxDistance: 5
   - type: PointLight
     color: "#FA644B"
     radius: 6.0
