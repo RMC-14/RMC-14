@@ -28,27 +28,4 @@ public sealed class RMCCameraSystem : SharedRMCCameraSystem
             Log.Error($"Error refreshing {nameof(RMCCameraBui)}\n{e}");
         }
     }
-
-    // public override void Update(float frameTime)
-    // {
-    //     var query = EntityQueryEnumerator<RMCActiveCameraComponent>();
-    //     while (query.MoveNext(out var uid, out var camera))
-    //     {
-    //         if (camera.Computer is not { } computer ||
-    //             TerminatingOrDeleted(computer))
-    //         {
-    //             RemCompDeferred<RMCActiveCameraComponent>(uid);
-    //             continue;
-    //         }
-    //
-    //         if (!TryComp(computer, out UserInterfaceComponent? ui))
-    //             return;
-    //
-    //         foreach (var bui in ui.ClientOpenInterfaces.Values)
-    //         {
-    //             if (bui is RMCCameraBui evolutionBui)
-    //                 evolutionBui.RefreshCamera(uid);
-    //         }
-    //     }
-    // }
 }

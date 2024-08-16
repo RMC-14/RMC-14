@@ -7,8 +7,8 @@ namespace Content.Shared._RMC14.Dropship;
 public sealed partial class DropshipWeaponPointComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public string WeaponContainerSlotId = "rmc_dropship_weapon_point_weapon_container";
+    public string WeaponContainerSlotId = "rmc_dropship_weapon_point_weapon_container_slot";
 
     [DataField, AutoNetworkedField]
-    public string AmmoContainerSlotId = "rmc_dropship_weapon_point_ammo_container";
+    public string AmmoContainerSlotId = "rmc_dropship_weapon_point_ammo_container_slot";
 }

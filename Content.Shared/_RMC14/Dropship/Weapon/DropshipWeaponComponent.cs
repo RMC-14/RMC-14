@@ -18,7 +18,7 @@ public sealed partial class DropshipWeaponComponent : Component
     public TimeSpan FireDelay = TimeSpan.FromSeconds(2);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan NextFireAt;
+    public TimeSpan? NextFireAt;
 
     [DataField, AutoNetworkedField]
     public bool FireInTransport;

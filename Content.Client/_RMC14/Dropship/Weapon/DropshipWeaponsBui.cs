@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Content.Client.Eye;
 using Content.Client.UserInterface.ControlExtensions;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.Weapon;
@@ -18,12 +19,16 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
     private DropshipWeaponsWindow? _window;
 
     private readonly ContainerSystem _container;
+    private readonly EyeLerpingSystem _eyeLerping;
     private readonly DropshipSystem _system;
     private readonly DropshipWeaponSystem _weaponSystem;
+
+    private EntityUid? _oldEye;
 
     public DropshipWeaponsBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _container = EntMan.System<ContainerSystem>();
+        _eyeLerping = EntMan.System<EyeLerpingSystem>();
         _system = EntMan.System<DropshipSystem>();
         _weaponSystem = EntMan.System<DropshipWeaponSystem>();
     }
@@ -118,13 +123,53 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
         string TargetAcquisition()
         {
             var weapon = EntMan.GetEntity(compScreen.Weapon);
-            var target = EntMan.GetEntity(terminal.Target);
             return Loc.GetString("rmc-dropship-weapons-target-strike",
                 ("mode", compScreen.Weapon == null ? "NONE" : "WEAPON"),
                 ("weapon", weapon == null ? "" : weapon),
-                ("target", target == null ? "NONE" : target),
+                ("target", terminal.Target == null ? "NONE" : terminal.Target.Value),
                 ("xOffset", terminal.Offset.X),
                 ("yOffset", terminal.Offset.Y));
+        }
+
+        void AddTargets(
+            out DropshipWeaponsButtonData? previous,
+            out DropshipWeaponsButtonData? next)
+        {
+            previous = default;
+            next = default;
+
+            var firstTarget = terminal.TargetsPage * 5;
+            var targets = terminal.Targets;
+            if (targets.Count <= 5)
+                firstTarget = 0;
+            else if (firstTarget > targets.Count - 5)
+                firstTarget = targets.Count - 5;
+
+            DropshipWeaponsButtonData? GetTargetData(int index)
+            {
+                if (!targets.TryGetValue(index, out var target))
+                    return null;
+
+                var msg = new DropshipTerminalWeaponsTargetsSelectMsg(target.Id);
+                return new DropshipWeaponsButtonData(target.Name, _ => SendPredictedMessage(msg));
+            }
+
+            if (firstTarget > 0)
+            {
+                previous = ButtonAction("^", _ => SendPredictedMessage(new DropshipTerminalWeaponsTargetsPreviousMsg(first)));
+            }
+
+            if (firstTarget + 4 < targets.Count - 1)
+            {
+                next = ButtonAction("v", _ => SendPredictedMessage(new DropshipTerminalWeaponsTargetsNextMsg(first)));
+            }
+
+            var one = GetTargetData(firstTarget);
+            var two = GetTargetData(firstTarget + 1);
+            var three = GetTargetData(firstTarget + 2);
+            var four = GetTargetData(firstTarget + 3);
+            var five = GetTargetData(firstTarget + 4);
+            screen.RightRow.SetData(one, two, three, four, five);
         }
 
         var equip = Button("equip", Equip);
@@ -144,6 +189,9 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
         screen.ScreenLabel.Text = Loc.GetString("rmc-dropship-weapons-main-screen-text");
         screen.ScreenLabel.VerticalAlignment = VAlignment.Stretch;
         screen.ScreenLabel.Margin = new Thickness();
+        screen.ScreenLabel.Visible = true;
+
+        screen.Viewport.Visible = false;
 
         ClearNames(screen);
         switch (compScreen.State)
@@ -163,14 +211,14 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
                 void AddWeaponEntry(DropshipWeaponsButtonData? data)
                 {
                     if (data?.Weapon is not { } netWeapon ||
-                        !EntMan.TryGetEntity(netWeapon, out var weapon))
+                        !EntMan.TryGetEntity(netWeapon, out var weaponEnt))
                     {
                         return;
                     }
 
-                    var rounds = _weaponSystem.GetWeaponRounds(weapon.Value);
+                    var rounds = _weaponSystem.GetWeaponRounds(weaponEnt.Value);
                     text.AppendLine(Loc.GetString("rmc-dropship-weapons-equip-weapon-ammo",
-                        ("weapon", weapon),
+                        ("weapon", weaponEnt),
                         ("rounds", rounds)));
                     text.AppendLine();
                 }
@@ -186,22 +234,29 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
                 break;
             }
             case Target:
-                screen.BottomRow.SetData(exit);
-                screen.TopRow.SetData(fire);
+            {
+                AddTargets(out var previous, out var next);
+                screen.BottomRow.SetData(exit, five: next);
+                screen.TopRow.SetData(fire, five: previous);
                 // TODO RMC14 left two vector
                 screen.LeftRow.SetData(strike);
                 screen.ScreenLabel.Text = TargetAcquisition();
                 break;
+            }
             case Strike:
-                screen.BottomRow.SetData(exit);
-                screen.TopRow.SetData(fire);
+            {
+                AddTargets(out var previous, out var next);
+                screen.BottomRow.SetData(exit, five: next);
+                screen.TopRow.SetData(fire, five: previous);
                 screen.LeftRow.SetData(cancel, weapon);
                 screen.ScreenLabel.Text = TargetAcquisition();
                 break;
+            }
             case StrikeWeapon:
             {
-                screen.TopRow.SetData(fire);
-                screen.BottomRow.SetData(exit);
+                AddTargets(out var previous, out var next);
+                screen.BottomRow.SetData(exit, five: next);
+                screen.TopRow.SetData(fire, five: previous);
                 TryGetWeapons(first, out var one, out var two, out var three, out var four);
                 screen.LeftRow.SetData(cancel, one, two, three, four);
                 screen.ScreenLabel.Text = TargetAcquisition();
@@ -214,7 +269,7 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
                 {
                     if (_weaponSystem.TryGetWeaponAmmo(selectedWeapon.Value, out var ammo))
                     {
-                        screen.ScreenLabel.Text = Loc.GetString("rmc-dropship-weapons-weapon-selected",
+                        screen.ScreenLabel.Text = Loc.GetString("rmc-dropship-weapons-weapon-selected-ammo",
                             ("weapon", selectedWeapon.Value),
                             ("ammo", ammo),
                             ("rounds", ammo.Comp.Rounds),
@@ -233,6 +288,22 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
                 break;
             case Cams:
                 // screen.LeftRow.SetData(nightVisionOn, nightVisionOff);
+                screen.ScreenLabel.Visible = false;
+
+                if (_oldEye != null && _oldEye != terminal.Target)
+                    _eyeLerping.RemoveEye(_oldEye.Value);
+
+                _oldEye = terminal.Target;
+                if (terminal.Target is { } terminalTarget)
+                {
+                    if (!EntMan.HasComponent<LerpingEyeComponent>(terminalTarget))
+                        _eyeLerping.AddEye(terminalTarget);
+
+                    if (EntMan.TryGetComponent(terminalTarget, out EyeComponent? eye))
+                        screen.Viewport.Eye = eye.Eye;
+                }
+
+                screen.Viewport.Visible = true;
                 screen.BottomRow.SetData(exit);
                 break;
             default:

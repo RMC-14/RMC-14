@@ -202,15 +202,6 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
     }
 
-    private void OnAttachmentPointRemove(Entity<DropshipWeaponPointComponent> ent, ref ComponentRemove args)
-    {
-        if (TryGetGridDropship(ent, out var dropship))
-        {
-            dropship.Comp.AttachmentPoints.Remove(ent);
-            Dirty(dropship);
-        }
-    }
-
     private void OnAttachmentPointRemove<T>(Entity<DropshipWeaponPointComponent> ent, ref T args)
     {
         if (TryGetGridDropship(ent, out var dropship))
@@ -325,8 +316,7 @@ public abstract class SharedDropshipSystem : EntitySystem
 
     public bool TryDesignatePrimaryLZ(
         EntityUid actor,
-        EntityUid lz
-        )
+        EntityUid lz)
     {
         if (!HasComp<DropshipDestinationComponent>(lz))
         {

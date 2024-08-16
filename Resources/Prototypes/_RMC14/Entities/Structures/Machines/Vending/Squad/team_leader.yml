@@ -218,10 +218,12 @@
   name: essential fireteam leader utilities
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Devices/binoculars.rsi # TODO RMC14 laser designator icon
-    state: binoculars
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    layers:
+    - state: rangefinder
+    - state: laser_cas
   - type: CMVendorBundle
     bundle:
-    - CMPackFlare # TODO RMC14 signal flares when we have any use for damn signals
-    - CMPackFlare # TODO RMC14 signal flares when we have any use for damn signals
-    - RMCBinoculars # TODO RMC14 laser designator when see above
+    - CMPackFlareCAS
+    - CMPackFlareCAS
+    - RMCLaserDesignator

@@ -18,6 +18,8 @@
         - FullTileMask
         layer:
         - GlassAirlockLayer
+  - type: InteractionOutline
+  - type: Clickable
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic

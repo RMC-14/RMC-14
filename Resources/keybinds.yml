@@ -611,3 +611,7 @@ binds:
 - function: CMXenoWideSwing
   type: State
   key: Space
+- function: RMCLaserTarget
+  type: State
+  key: MouseLeft
+  mod1: Control

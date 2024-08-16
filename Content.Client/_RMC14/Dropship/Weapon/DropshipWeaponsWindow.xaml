@@ -3,7 +3,7 @@
     xmlns:controls="clr-namespace:Content.Client._RMC14.Dropship.Weapon"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     Title="{Loc 'rmc-dropship-weapons-title'}"
-    MinSize="1400 700">
+    MinSize="1420 700">
     <PanelContainer>
         <PanelContainer.PanelOverride>
             <graphics:StyleBoxFlat BackgroundColor="#040404" />

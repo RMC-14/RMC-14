@@ -146,4 +146,7 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCDropshipFabricatorGainEverySeconds =
         CVarDef.Create("rmc.dropship_fabricator_gain_every", 3.33333f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCDropshipCASDebug =
+        CVarDef.Create("rmc.dropship_cas_debug", false, CVar.REPLICATED | CVar.SERVER);
 }

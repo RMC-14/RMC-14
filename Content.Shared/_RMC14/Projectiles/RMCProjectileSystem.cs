@@ -62,7 +62,8 @@ public sealed class RMCProjectileSystem : EntitySystem
             return;
 
         var coordinates = transform.Coordinates;
-        if (ent.Comp.Origin is { } origin &&
+        if (ent.Comp.ProjectileAdjust &&
+            ent.Comp.Origin is { } origin &&
             coordinates.TryDelta(EntityManager, _transform, origin, out var delta) &&
             delta.Length() > 0)
         {

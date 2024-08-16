@@ -22,6 +22,7 @@
             <BoxContainer Name="Columns" Access="Public" Orientation="Horizontal">
                 <BoxContainer Name="FirstVersion" Access="Public" Orientation="Vertical" HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Current version" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Close air support" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Fireteam Leader" Text="More equipment in the fireteam leader's equipment and gear racks" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Squad Leader" Text="More equipment in the squad leader's equipment and gear racks" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Smart Gun Operator" Text="Stay behind marines and fire past friendlies and into the enemy!" />
@@ -81,7 +82,6 @@
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Emergency responders" Text="A faction that randomly spawns, with their own objectives" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Orbital bombardment" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Intelligence officer" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Close air support" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Mortars" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Chemical research" Text="Chemicals with random recipes, ingredients and effects" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Dropship modifications" Text="" />

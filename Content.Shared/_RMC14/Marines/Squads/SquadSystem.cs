@@ -73,7 +73,6 @@ public sealed class SquadSystem : EntitySystem
         }));
     }
 
-
     private void OnSquadMemberMapInit(Entity<SquadMemberComponent> ent, ref MapInitEvent args)
     {
         _membersToUpdate.Add(ent);
@@ -166,6 +165,19 @@ public sealed class SquadSystem : EntitySystem
 
         squad = default;
         return false;
+    }
+
+    public bool TryGetMemberSquad(Entity<SquadMemberComponent?> member, out Entity<SquadTeamComponent> squad)
+    {
+        squad = default;
+        if (!Resolve(member, ref member.Comp, false))
+            return false;
+
+        if (!TryComp(member.Comp.Squad, out SquadTeamComponent? team))
+            return false;
+
+        squad = (member.Comp.Squad.Value, team);
+        return true;
     }
 
     public bool TryEnsureSquad(EntProtoId id, out Entity<SquadTeamComponent> squad)

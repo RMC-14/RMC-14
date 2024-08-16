@@ -2,7 +2,7 @@
 
 rmc-dropship-weapons-title = Weapons Console
 
-rmc-dropship-weapons-main-screen-text = U.N.M.C
+rmc-dropship-weapons-main-screen-text = U.N.M.C.
   Dropship Weapons Control System
   V 0.1
 

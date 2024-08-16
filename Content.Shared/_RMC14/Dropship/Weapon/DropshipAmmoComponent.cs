@@ -2,7 +2,6 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Dropship.Weapon;
 
@@ -11,7 +10,13 @@ namespace Content.Shared._RMC14.Dropship.Weapon;
 public sealed partial class DropshipAmmoComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int MaxSpread = 3;
+    public TimeSpan AttachDelay = TimeSpan.FromSeconds(5);
+
+    [DataField, AutoNetworkedField]
+    public int TargetSpread = 3;
+
+    [DataField, AutoNetworkedField]
+    public int BulletSpread = 3;
 
     [DataField(required: true), AutoNetworkedField]
     public int Rounds = 400;
@@ -32,6 +37,12 @@ public sealed partial class DropshipAmmoComponent : Component
     public EntProtoId<DropshipWeaponComponent> Weapon = new("");
 
     [DataField, AutoNetworkedField]
+    public TimeSpan TravelTime = TimeSpan.FromSeconds(10);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan SoundTravelTime = TimeSpan.FromSeconds(1.1);
+
+    [DataField, AutoNetworkedField]
     public SoundSpecifier? SoundCockpit;
 
     [DataField, AutoNetworkedField]
@@ -40,6 +51,6 @@ public sealed partial class DropshipAmmoComponent : Component
     [DataField, AutoNetworkedField]
     public SoundSpecifier? SoundImpact;
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan LastImpactSoundAt;
+    [DataField, AutoNetworkedField]
+    public EntProtoId ImpactEffect = "RMCEffectExplosionParticle";
 }

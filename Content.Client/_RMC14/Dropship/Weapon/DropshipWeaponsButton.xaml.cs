@@ -14,7 +14,6 @@ public sealed partial class DropshipWeaponsButton : Button
     public DropshipWeaponsButton()
     {
         RobustXamlLoader.Load(this);
-        Label.ModulateSelfOverride = Color.White;
     }
 
     private StyleBoxFlat ActiveStyleBox()

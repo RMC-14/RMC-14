@@ -1,4 +1,6 @@
 ﻿using Content.Shared._RMC14.Map;
+using Content.Shared.Coordinates;
+using Robust.Shared.Map;
 
 namespace Content.Shared._RMC14.Areas;
 
@@ -13,7 +15,7 @@ public sealed class AreaSystem : EntitySystem
         _areaQuery = GetEntityQuery<AreaComponent>();
     }
 
-    public bool TryGetArea(EntityUid coordinates, out Entity<AreaComponent> area)
+    public bool TryGetArea(EntityCoordinates coordinates, out Entity<AreaComponent> area)
     {
         var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(coordinates);
         while (anchored.MoveNext(out var uid))
@@ -29,6 +31,11 @@ public sealed class AreaSystem : EntitySystem
         return false;
     }
 
+    public bool TryGetArea(EntityUid coordinates, out Entity<AreaComponent> area)
+    {
+        return TryGetArea(coordinates.ToCoordinates(), out area);
+    }
+
     public bool BioscanBlocked(EntityUid coordinates, out Entity<AreaComponent>? area)
     {
         area = null;
@@ -37,5 +44,13 @@ public sealed class AreaSystem : EntitySystem
 
         area = coordinatesArea;
         return coordinatesArea.Comp.AvoidBioscan;
+    }
+
+    public bool CanCAS(EntityCoordinates coordinates)
+    {
+        if (!TryGetArea(coordinates, out var area))
+            return false;
+
+        return area.Comp.CAS;
     }
 }

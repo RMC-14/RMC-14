@@ -422,7 +422,7 @@ entities:
     - type: BecomesStation
       id: Dev
     - type: SpreaderGrid
-      updateAccumulator: 0.16687922
+      updateAccumulator: 0.016997298
     - type: GridPathfinding
   - uid: 962
     components:
@@ -2620,7 +2620,7 @@ entities:
       pos: 13.5,10.5
       parent: 179
     - type: Door
-      secondsUntilStateChange: -5003.4805
+      secondsUntilStateChange: -5030.6265
       state: Opening
   - uid: 26
     components:
@@ -3119,6 +3119,13 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: CMComputerDropshipWeapons
+  entities:
+  - uid: 1339
+    components:
+    - type: Transform
+      pos: -4.5,-13.5
+      parent: 179
 - proto: CMCrateScience
   entities:
   - uid: 177
@@ -7734,6 +7741,13 @@ entities:
     components:
     - type: Transform
       pos: 7.1447573,15.900927
+      parent: 179
+- proto: RMCDropshipAttachmentAmmoGAU
+  entities:
+  - uid: 1338
+    components:
+    - type: Transform
+      pos: -6.5,-9.5
       parent: 179
 - proto: RMCDropshipAttachmentGau21Cannon
   entities:

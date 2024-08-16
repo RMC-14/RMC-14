@@ -19,17 +19,18 @@ public sealed partial class DropshipWeaponsButtonRow : BoxContainer
         {
             case LayoutOrientation.Horizontal:
                 PaddingStart.HorizontalExpand = true;
-                PaddingEnd.HorizontalExpand = true;
-
                 PaddingStart.VerticalExpand = false;
+
+                PaddingEnd.HorizontalExpand = true;
                 PaddingEnd.VerticalExpand = false;
                 break;
             case LayoutOrientation.Vertical:
                 PaddingStart.HorizontalExpand = false;
-                PaddingEnd.HorizontalExpand = false;
-
                 PaddingStart.VerticalExpand = true;
+
+                PaddingEnd.HorizontalExpand = false;
                 PaddingEnd.VerticalExpand = true;
+                SetHeight = 500;
                 break;
         }
     }
@@ -53,7 +54,12 @@ public sealed partial class DropshipWeaponsButtonRow : BoxContainer
         static string Wrap(LocId? loc)
         {
             var text = loc == null ? string.Empty : Loc.GetString(loc);
-            return $"[font size=9][color=white]{text}[/color][/font]";
+            var size = 9;
+            // TODO RMC14 FIXME my kingdom for mono font
+            if (text == "WEAPON")
+                size = 8;
+
+            return $"[font size={size}][color=white]{text}[/color][/font]";
         }
 
         button.RichLabel.SetMarkupPermissive(Wrap(data?.Text));

@@ -26,4 +26,5 @@ public sealed class CMKeyFunctions
     public static readonly BoundKeyFunction CMHolsterTertiary = "CMHolsterTertiary";
     public static readonly BoundKeyFunction CMHolsterQuaternary = "CMHolsterQuaternary";
     public static readonly BoundKeyFunction CMXenoWideSwing = "CMXenoWideSwing";
+    public static readonly BoundKeyFunction RMCLaserTarget = "RMCLaserTarget";
 }

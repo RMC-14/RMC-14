@@ -58,6 +58,9 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<PowerLoaderComponent, UserActivateInWorldEvent>(OnUserActivateInWorld);
         SubscribeLocalEvent<PowerLoaderComponent, PowerLoaderGrabDoAfterEvent>(OnGrabDoAfter);
         SubscribeLocalEvent<PowerLoaderComponent, GetUsedEntityEvent>(OnGetUsedEntity);
+        SubscribeLocalEvent<PowerLoaderComponent, DropshipDetachWeaponDoAfterEvent>(OnDetachWeapon);
+
+        SubscribeLocalEvent<DropshipWeaponPointComponent, InteractHandEvent>(OnPointInteractHand);
 
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, PickupAttemptEvent>(OnGrabbablePickupAttempt);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, AfterInteractEvent>(OnGrabbableAfterInteract);
@@ -155,6 +158,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, ent, delay, ev, ent, args.Target)
         {
             BreakOnMove = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
         };
 
         _doAfter.TryStartDoAfter(doAfter);
@@ -195,6 +199,36 @@ public sealed class PowerLoaderSystem : EntitySystem
             args.Used = container.ContainedEntities[index];
             break;
         }
+    }
+
+    private void OnDetachWeapon(Entity<PowerLoaderComponent> ent, ref DropshipDetachWeaponDoAfterEvent args)
+    {
+
+    }
+
+    private void OnPointInteractHand(Entity<DropshipWeaponPointComponent> ent, ref InteractHandEvent args)
+    {
+        if (!TryComp(args.User, out PowerLoaderComponent? loader))
+            return;
+
+        BaseContainer? container;
+        if (_container.TryGetContainer(ent, ent.Comp.AmmoContainerSlotId, out var ammoContainer) &&
+            ammoContainer.ContainedEntities.Count > 0)
+        {
+            container = ammoContainer;
+            return;
+        }
+        else if (_container.TryGetContainer(ent, ent.Comp.WeaponContainerSlotId, out var weaponContainer) &&
+                 weaponContainer.ContainedEntities.Count > 0)
+        {
+            container = weaponContainer;
+        }
+        else
+        {
+            return;
+        }
+
+        args.Handled = true;
     }
 
     private void OnGrabbablePickupAttempt(Entity<PowerLoaderGrabbableComponent> ent, ref PickupAttemptEvent args)
@@ -278,6 +312,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, target, used)
         {
             BreakOnMove = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
         };
         _doAfter.TryStartDoAfter(doAfter);
     }
@@ -312,20 +347,46 @@ public sealed class PowerLoaderSystem : EntitySystem
         delay = default;
         slot = default;
         if (!Resolve(user, ref user.Comp, false) ||
-            !TryComp(used, out DropshipWeaponComponent? weapon) ||
             !TryComp(target, out DropshipWeaponPointComponent? point))
         {
             return false;
         }
 
-        slot = _container.EnsureContainer<ContainerSlot>(target, point.WeaponContainerSlotId);
-        if (slot.ContainedEntity == null)
+        string slotId;
+        string msg;
+        if (TryComp(used, out DropshipWeaponComponent? weapon))
         {
+            slotId = point.WeaponContainerSlotId;
             delay = weapon.AttachDelay;
-            return true;
+            msg = Loc.GetString("rmc-power-loader-occupied-weapon");
+        }
+        else if (TryComp(used, out DropshipAmmoComponent? ammo))
+        {
+            slotId = point.AmmoContainerSlotId;
+            delay = ammo.AttachDelay;
+            msg = Loc.GetString("rmc-power-loader-occupied-ammo");
+
+            if (!_container.TryGetContainer(target, point.WeaponContainerSlotId, out var weaponContainer) ||
+                weaponContainer.ContainedEntities.Count == 0)
+            {
+                msg = Loc.GetString("rmc-power-loader-ammo-no-weapon");
+                foreach (var buckled in GetBuckled((user, user.Comp)))
+                {
+                    _popup.PopupClient(msg, target, buckled, PopupType.SmallCaution);
+                }
+
+                return false;
+            }
+        }
+        else
+        {
+            return false;
         }
 
-        var msg = Loc.GetString("rmc-power-loader-occupied-weapon");
+        slot = _container.EnsureContainer<ContainerSlot>(target, slotId);
+        if (slot.ContainedEntity == null)
+            return true;
+
         foreach (var buckled in GetBuckled((user, user.Comp)))
         {
             _popup.PopupClient(msg, target, buckled, PopupType.SmallCaution);

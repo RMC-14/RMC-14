@@ -14,7 +14,7 @@ public sealed partial class DropshipTerminalWeaponsComponent : Component
     public Screen ScreenTwo;
 
     [DataField, AutoNetworkedField]
-    public NetEntity? Target;
+    public EntityUid? Target;
 
     [DataField, AutoNetworkedField]
     public Vector2i Offset;
@@ -22,10 +22,23 @@ public sealed partial class DropshipTerminalWeaponsComponent : Component
     [DataField, AutoNetworkedField]
     public Vector2i OffsetLimit = new(12, 12);
 
+    [DataField, AutoNetworkedField]
+    public List<TargetEnt> Targets = new();
+
+    [DataField, AutoNetworkedField]
+    public int TargetsPage;
+
     [DataRecord]
     [Serializable, NetSerializable]
     public record struct Screen(
         DropshipTerminalWeaponsScreen State,
         NetEntity? Weapon
+    );
+
+    [DataRecord]
+    [Serializable, NetSerializable]
+    public readonly record struct TargetEnt(
+        NetEntity Id,
+        string Name
     );
 }
