@@ -6,7 +6,7 @@
     anchored: True
   - type: Sprite
     drawdepth: Effects
-    sprite: /Textures/_RMC14/Effects/xeno_structure_animations/wall.rsi
+    sprite: /Textures/_RMC14/Effects/xeno_structure_animations.rsi
     layers:
     - map: ["enum.XenoConstructionVisualLayers.Animation"]
   - type: TimedDespawn
@@ -14,6 +14,7 @@
   - type: Tag
     tags:
     - HideContextMenu
+  - type: XenoConstructionAnimation
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
@@ -21,30 +22,10 @@
   noSpawn: true
   components:
   - type: Sprite
-    sprite: /Textures/_RMC14/Effects/xeno_structure_animations/thick.rsi
-    state: thick1
-  - type: XenoConstructFrames
-    frames:
-    - thick1
-    - thick2
-    - thick3
-    - thick4
-    - thick5
-    - thick6
-    - thick7
-    - thick8
-    - thick9
-    - thick10
-    - thick11
-    - thick12
-    - thick13
-    - thick14
-    - thick15
-    - thick16
-    - thick17
-    - thick18
-    - thick19
-    - thick20
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: thick
+      autoAnimated: false
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
@@ -52,30 +33,10 @@
   noSpawn: true
   components:
   - type: Sprite
-    sprite: /Textures/_RMC14/Effects/xeno_structure_animations/thickmembrane.rsi
-    state: thickmembrane1
-  - type: XenoConstructFrames
-    frames:
-    - thickmembrane1
-    - thickmembrane2
-    - thickmembrane3
-    - thickmembrane4
-    - thickmembrane5
-    - thickmembrane6
-    - thickmembrane7
-    - thickmembrane8
-    - thickmembrane9
-    - thickmembrane10
-    - thickmembrane11
-    - thickmembrane12
-    - thickmembrane13
-    - thickmembrane14
-    - thickmembrane15
-    - thickmembrane16
-    - thickmembrane17
-    - thickmembrane18
-    - thickmembrane19
-    - thickmembrane20
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: thickmembrane
+      autoAnimated: false
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
@@ -83,30 +44,10 @@
   noSpawn: true
   components:
   - type: Sprite
-    sprite: /Textures/_RMC14/Effects/xeno_structure_animations/thickdoor.rsi
-    state: thickdoor1
-  - type: XenoConstructFrames
-    frames:
-    - thickdoor1
-    - thickdoor2
-    - thickdoor3
-    - thickdoor4
-    - thickdoor5
-    - thickdoor6
-    - thickdoor7
-    - thickdoor8
-    - thickdoor9
-    - thickdoor10
-    - thickdoor11
-    - thickdoor12
-    - thickdoor13
-    - thickdoor14
-    - thickdoor15
-    - thickdoor16
-    - thickdoor17
-    - thickdoor18
-    - thickdoor19
-    - thickdoor20
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: thickresin
+      autoAnimated: false
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
@@ -114,30 +55,10 @@
   noSpawn: true
   components:
   - type: Sprite
-    sprite: /Textures/_RMC14/Effects/xeno_structure_animations/wall.rsi
-    state: wall1
-  - type: XenoConstructFrames
-    frames:
-    - wall1
-    - wall2
-    - wall3
-    - wall4
-    - wall5
-    - wall6
-    - wall7
-    - wall8
-    - wall9
-    - wall10
-    - wall11
-    - wall12
-    - wall13
-    - wall14
-    - wall15
-    - wall16
-    - wall17
-    - wall18
-    - wall19
-    - wall20
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: wall
+      autoAnimated: false
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
@@ -145,30 +66,10 @@
   noSpawn: true
   components:
   - type: Sprite
-    sprite: /Textures/_RMC14/Effects/xeno_structure_animations/membrane.rsi
-    state: membrane1
-  - type: XenoConstructFrames
-    frames:
-    - membrane1
-    - membrane2
-    - membrane3
-    - membrane4
-    - membrane5
-    - membrane6
-    - membrane7
-    - membrane8
-    - membrane9
-    - membrane10
-    - membrane11
-    - membrane12
-    - membrane13
-    - membrane14
-    - membrane15
-    - membrane16
-    - membrane17
-    - membrane18
-    - membrane19
-    - membrane20
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: membrane
+      autoAnimated: false
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
@@ -176,27 +77,7 @@
   noSpawn: true
   components:
   - type: Sprite
-    sprite: /Textures/_RMC14/Effects/xeno_structure_animations/door.rsi
-    state: door1
-  - type: XenoConstructFrames
-    frames:
-    - door1
-    - door2
-    - door3
-    - door4
-    - door5
-    - door6
-    - door7
-    - door8
-    - door9
-    - door10
-    - door11
-    - door12
-    - door13
-    - door14
-    - door15
-    - door16
-    - door17
-    - door18
-    - door19
-    - door20
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: door
+      autoAnimated: false

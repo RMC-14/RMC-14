@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Robust.Client.GameObjects;
 using Robust.Client.Animations;
 using static Robust.Client.Animations.AnimationTrackSpriteFlick;
+using static Robust.Client.GameObjects.SpriteComponent;
 
 namespace Content.Client._RMC14.Xenonids.Construction;
 
@@ -15,12 +16,6 @@ public sealed class XenoConstructionAnimationVisualizerSystem : EntitySystem
     {
         base.Initialize();
         SubscribeNetworkEvent<XenoConstructionAnimationStartEvent>(OnAnimateResinBuilding);
-        SubscribeLocalEvent<XenoConstructFramesComponent, AnimationCompletedEvent>(OnAnimationFinished);
-    }
-
-    private void OnAnimationFinished(Entity<XenoConstructFramesComponent> ent, ref AnimationCompletedEvent args)
-    {
-        QueueDel(ent);
     }
 
     private void OnAnimateResinBuilding(XenoConstructionAnimationStartEvent ev)
@@ -28,7 +23,7 @@ public sealed class XenoConstructionAnimationVisualizerSystem : EntitySystem
         if (!TryGetEntity(ev.Effect, out var eff) ||
         !TryGetEntity(ev.Xeno, out var entity) ||
         !TryComp(entity, out XenoConstructionComponent? comp) ||
-        !TryComp(eff, out XenoConstructFramesComponent? frames))
+        !TryComp(eff, out XenoConstructionAnimationComponent? timing))
         {
             return;
         }
@@ -36,28 +31,51 @@ public sealed class XenoConstructionAnimationVisualizerSystem : EntitySystem
         if (_animation.HasRunningAnimation(eff.Value, ResinAnimationKey))
             return;
 
-        List<KeyFrame> keys = new();
+        if (!TryComp<SpriteComponent>(eff, out var sprite))
+            return;
 
-        double frameCounter = (comp.BuildDelay.TotalSeconds / frames.Frames.Count) / 6;
+        sprite.LayerMapTryGet(XenoConstructionVisualLayers.Animation, out var layer);
+        var state = sprite.LayerGetState(layer);
 
-        for (int i = 0; i < frames.Frames.Count; i++)
-        {
-            keys.Add(new KeyFrame(frames.Frames[i], i * (float) frameCounter));
-        }
-
-        AnimationTrackSpriteFlick track = new() { LayerKey = XenoConstructionVisualLayers.Animation };
-        track.KeyFrames.AddRange(keys);
+        timing.AnimationTime = comp.BuildDelay;
+        if(sprite.TryGetLayer(layer, out var aLayer) && aLayer.ActualState != null)
+            timing.TotalFrames = aLayer.ActualState.DelayCount;
 
         var build = new Animation
         {
             Length = comp.BuildDelay,
             AnimationTracks =
             {
-                track,
+                new AnimationTrackSpriteFlick()
+                {
+                    LayerKey = XenoConstructionVisualLayers.Animation,
+                    KeyFrames = { new KeyFrame(state, 0) },
+                },
             },
         };
-
-
         _animation.Play(eff.Value, build, ResinAnimationKey);
+    }
+    private void Animate(SpriteComponent sprite, object layerKey, XenoConstructionAnimationComponent comp)
+    {
+        if (!sprite.LayerExists(layerKey) ||
+            sprite[layerKey] is not Layer layer ||
+            layer.ActualState?.DelayCount is not { } delays)
+        {
+            return;
+        }
+        layer.SetAutoAnimated(false);
+        layer.AnimationFrame = (int) ((comp.AnimationTime.TotalSeconds - layer.AnimationTimeLeft) * comp.TotalFrames);
+    }
+
+    public override void FrameUpdate(float frameTime)
+    {
+        base.FrameUpdate(frameTime);
+
+        var elevatorQuery = EntityQueryEnumerator<XenoConstructionAnimationComponent, SpriteComponent>();
+        while (elevatorQuery.MoveNext(out var effect, out var sprite))
+        {
+            Animate(sprite, XenoConstructionVisualLayers.Animation, effect);
+        }
+
     }
 }
