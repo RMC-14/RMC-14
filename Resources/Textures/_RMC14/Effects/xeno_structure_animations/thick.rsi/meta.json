@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/20db6e3fc344d59ed9502ee7626d9fea89674713/icons/mob/xenos/effects.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "thick1"
+    },
+    {
+      "name": "thick2"
+    },
+    {
+      "name": "thick3"
+    },
+    {
+      "name": "thick4"
+    },
+    {
+      "name": "thick5"
+    },
+    {
+      "name": "thick6"
+    },
+    {
+      "name": "thick7"
+    },
+    {
+      "name": "thick8"
+    },
+    {
+      "name": "thick9"
+    },
+    {
+      "name": "thick10"
+    },
+    {
+      "name": "thick11"
+    },
+    {
+      "name": "thick12"
+    },
+    {
+      "name": "thick13"
+    },
+    {
+      "name": "thick14"
+    },
+    {
+      "name": "thick15"
+    },
+    {
+      "name": "thick16"
+    },
+    {
+      "name": "thick17"
+    },
+    {
+      "name": "thick18"
+    },
+    {
+      "name": "thick19"
+    },
+    {
+      "name": "thick20"
+    }
+  ]
+}
