@@ -277,7 +277,7 @@ public sealed class BarricadeSystem : EntitySystem
         {
             BreakOnMove = true,
             NeedHand = true,
-            BreakOnHandChange = true
+            BreakOnHandChange = true,
         };
 
         _doAfter.TryStartDoAfter(doAfter);
