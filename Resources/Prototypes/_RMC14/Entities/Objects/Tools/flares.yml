@@ -83,8 +83,7 @@
     temperature: 1000
   - type: TimedDespawn
     lifetime: 630
-  - type: Projectile # Gonna need more projectile versions for other flare types
-    deleteOnCollide: false
+  - type: DamageOtherOnHit
     onlyCollideWhenShot: true
     damage:
       types:
@@ -101,8 +100,8 @@
         loop: true
   - type: PointLight
     color: "#FA644B"
-    radius: 1.0
-    energy: 5.0
+    radius: 5.0
+    energy: 10.0
   - type: Tag
     tags:
     - Trash
