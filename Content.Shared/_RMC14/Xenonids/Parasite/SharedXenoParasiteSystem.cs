@@ -572,7 +572,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                         if (_net.IsServer && doPopup)
                         {
                             var popupMessage = Loc.GetString("rmc-xeno-infect-fail", ("target", victim), ("clothing", containedEntity));
-                            _popup.PopupEntity(popupMessage, victim);
+                            _popup.PopupEntity(popupMessage, victim, PopupType.SmallCaution);
                         }
 
                         return false;
@@ -584,7 +584,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                         if (_net.IsServer && doPopup)
                         {
                             var popupMessage = Loc.GetString("rmc-xeno-infect-success", ("target", victim), ("clothing", containedEntity));
-                            _popup.PopupEntity(popupMessage, victim);
+                            _popup.PopupEntity(popupMessage, victim, PopupType.MediumCaution);
                         }
 
                         return true;
