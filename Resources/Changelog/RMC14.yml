@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Backpacks now have a two second delay before opening and will close if
-      the user moves to counterbalance their larger storage. This does not include
-      satchels, pouches or any other kind of storage.
-    type: Add
-  id: 59
-  time: '2024-04-20T01:20:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1253
-- author: DrSmugleaf
-  changes:
   - message: Fixed inconsistent range when leaping as a runner or parasite.
     type: Fix
   id: 60
@@ -4282,5 +4273,12 @@
   id: 558
   time: '2024-08-16T03:43:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3683
+- author: crystalHex
+  changes:
+  - message: Added descriptions to squad leader's kits.
+    type: Tweak
+  id: 559
+  time: '2024-08-16T06:29:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3686
 Name: RMC14
 Order: -1
