@@ -472,3 +472,14 @@
     state: worships-the-gods
   - type: PatronFigurine
     id: 5dcc5fac-1983-43be-a6ff-9d8a5ae38157
+    
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSukunaKurze
+  name: Sukuna Kurze figurine
+  description: "This man is fueled by root beer and patriotism, and brother we're all outta root beer..."
+  components:
+  - type: Sprite
+    state: sukuna_kurze
+  - type: PatronFigurine
+    id: 3b608dbd-db50-4310-a017-83626e056257
