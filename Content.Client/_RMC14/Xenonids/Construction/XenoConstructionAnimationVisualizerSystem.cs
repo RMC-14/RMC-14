@@ -38,7 +38,7 @@ public sealed class XenoConstructionAnimationVisualizerSystem : EntitySystem
 
         List<KeyFrame> keys = new();
 
-        double frameCounter = (comp.BuildDelay.TotalSeconds / frames.Frames.Count);
+        double frameCounter = (comp.BuildDelay.TotalSeconds / frames.Frames.Count) / 6;
 
         for (int i = 0; i < frames.Frames.Count; i++)
         {
