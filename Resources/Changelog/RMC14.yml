@@ -1,54 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added examine text to pump shotguns that tell you how to pump it.
-    type: Add
-  - message: Added popups when the user is unable to shoot, either from needing to
-      pump a shotgun or needing to wait before shooting again.
-    type: Add
-  - message: Pump shotguns now have a delay between shots instead of a delay between
-      pumps.
-    type: Tweak
-  - message: Pumping now requires the gun to have at least one bullet left.
-    type: Fix
-  id: 55
-  time: '2024-04-18T23:23:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1247
-- author: DrSmugleaf
-  changes:
-  - message: Changed all item and storage sizes to be consistent with CMSS13.
-    type: Tweak
-  id: 56
-  time: '2024-04-19T02:27:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1244
-- author: Whisper
-  changes:
-  - message: Xenos can wideswing with spacebar.
-    type: Add
-  id: 57
-  time: '2024-04-19T02:52:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1241
-- author: DrSmugleaf
-  changes:
-  - message: Added hold and move order actions to all marine roles with leadership
-      skill.
-    type: Add
-  - message: Fixed marine orders applying to dead marines.
-    type: Fix
-  - message: Fixed marine order effects not being multiplied by the giver's leadership
-      skill.
-    type: Fix
-  - message: Fixed marine order effects being inconsistent when multiple of the same
-      type are given at once.
-    type: Fix
-  - message: Made the cooldown, range, and duration of marine orders consistent with
-      CMSS13.
-    type: Tweak
-  id: 58
-  time: '2024-04-19T06:22:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1252
-- author: DrSmugleaf
-  changes:
   - message: Backpacks now have a two second delay before opening and will close if
       the user moves to counterbalance their larger storage. This does not include
       satchels, pouches or any other kind of storage.
@@ -4296,5 +4248,39 @@
   id: 554
   time: '2024-08-16T03:39:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3680
+- author: Vermidia
+  changes:
+  - message: Added plasteel barricades, craftable with 6 plasteel. They have more
+      health than normal barricades but take longer to set up.
+    type: Add
+  id: 555
+  time: '2024-08-16T03:45:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3661
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed duplicate traits in the character Traits tab. Check to make sure
+      that your selected traits are still correct!
+    type: Fix
+  id: 556
+  time: '2024-08-16T03:43:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3606
+- author: blueDev2
+  changes:
+  - message: Double doors no longer have solid hitboxes on one half of the door when
+      open.
+    type: Fix
+  id: 557
+  time: '2024-08-16T03:44:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3662
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the Queen making no stomp sound when pulled. By making her unable
+      to be pulled while alive, not stunned and not knocked down. You did this to
+      yourselves. This is the best you are getting for now because I don't feel like
+      ahelping more people about it while I go fix footstep sound code.
+    type: Fix
+  id: 558
+  time: '2024-08-16T03:43:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3683
 Name: RMC14
 Order: -1
