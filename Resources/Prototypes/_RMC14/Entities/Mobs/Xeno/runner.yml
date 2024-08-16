@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoRunner
   name: Runner
   description: A small red alien that looks like it could run fairly quickly...

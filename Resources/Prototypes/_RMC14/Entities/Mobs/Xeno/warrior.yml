@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoWarrior
   name: Warrior
   description: A beefy alien with an armored carapace.
