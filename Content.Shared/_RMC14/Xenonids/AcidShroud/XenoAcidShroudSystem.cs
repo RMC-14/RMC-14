@@ -18,18 +18,21 @@ public sealed class XenoAcidShroudSystem : EntitySystem
     private void OnAcidShroudAction(Entity<XenoAcidShroudComponent> ent, ref XenoAcidShroudActionEvent args)
     {
         args.Handled = true;
-        var ev = new XenoAcidShroudDoAfterEvent { ActionId = GetNetEntity(args.Action), };
-        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.DoAfter, ev, ent) { BreakOnMove = true };
+        var ev = new XenoAcidShroudDoAfterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.DoAfter, ev, ent, args.Action)
+        {
+            BreakOnMove = true,
+        };
         _doAfter.TryStartDoAfter(doAfter);
     }
 
     private void OnAcidShroudDoAfter(Entity<XenoAcidShroudComponent> ent, ref XenoAcidShroudDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled)
+        if (args.Cancelled || args.Handled || args.Target is not { } action)
             return;
 
         args.Handled = true;
         SpawnAtPosition(ent.Comp.Spawn, ent.Owner.ToCoordinates());
-        _rmcActions.ActivateSharedCooldown(GetEntity(args.ActionId), ent);
+        _rmcActions.ActivateSharedCooldown(action, ent);
     }
 }
