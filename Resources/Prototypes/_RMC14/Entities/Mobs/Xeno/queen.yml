@@ -157,3 +157,10 @@
     - ActionXenoScreech
   - type: RMCXenoDamageVisuals
     prefix: queen
+  - type: PreventPulledWhileAlive
+    whitelist:
+      components:
+      - Xeno
+    exceptEffects:
+    - Stun
+    - KnockedDown
