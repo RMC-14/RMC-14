@@ -224,6 +224,7 @@
       - id: CMArmorB12
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
+      - id: RMCBoxZiptie
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
