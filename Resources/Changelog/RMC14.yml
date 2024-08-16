@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed inconsistent range when leaping as a runner or parasite.
-    type: Fix
-  id: 60
-  time: '2024-04-20T05:01:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1257
-- author: DrSmugleaf
-  changes:
   - message: Added attaching parasites by clicking downed marines with or as them.
     type: Add
   - message: parasites can only infect through a leap if it is done within a very
@@ -4280,5 +4273,12 @@
   id: 559
   time: '2024-08-16T06:29:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3686
+- author: DrSmugleaf
+  changes:
+  - message: Added Sukuna Kurze figurine.
+    type: Add
+  id: 560
+  time: '2024-08-16T08:58:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3685
 Name: RMC14
 Order: -1
