@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Xenos (and humanoids) no longer trigger stepping on glass shards
-    type: Tweak
-  id: 51
-  time: '2024-04-17T07:34:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1243
 - author: DrSmugleaf
   changes:
   - message: Fixed admin ghosts not being able to pull xenos.
@@ -4295,5 +4288,12 @@
   id: 550
   time: '2024-08-13T01:24:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3640
+- author: Whisper
+  changes:
+  - message: Added Chad Scott, Worships-The-Gods figurines
+    type: Add
+  id: 551
+  time: '2024-08-16T03:24:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3670
 Name: RMC14
 Order: -1
