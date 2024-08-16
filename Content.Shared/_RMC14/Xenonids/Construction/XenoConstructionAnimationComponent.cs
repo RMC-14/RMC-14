@@ -6,9 +6,12 @@ namespace Content.Shared._RMC14.Xenonids.Construction;
 public sealed partial class XenoConstructionAnimationComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public TimeSpan AnimationTime = TimeSpan.FromSeconds(1);
+    public TimeSpan AnimationTimeFinished = TimeSpan.FromSeconds(1);
 
-	[DataField, AutoNetworkedField]
-	public int TotalFrames = 0;
+    [DataField, AutoNetworkedField]
+    public TimeSpan AnimationTime= TimeSpan.FromSeconds(1);
+
+    [DataField, AutoNetworkedField]
+    public int TotalFrames = 0;
 
 }

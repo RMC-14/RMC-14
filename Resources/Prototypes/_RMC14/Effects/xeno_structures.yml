@@ -25,7 +25,6 @@
     layers:
     - map: ["enum.XenoConstructionVisualLayers.Animation"]
       state: thick
-      autoAnimated: false
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
@@ -36,7 +35,6 @@
     layers:
     - map: ["enum.XenoConstructionVisualLayers.Animation"]
       state: thickmembrane
-      autoAnimated: false
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
@@ -46,8 +44,7 @@
   - type: Sprite
     layers:
     - map: ["enum.XenoConstructionVisualLayers.Animation"]
-      state: thickresin
-      autoAnimated: false
+      state: thickdoor
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
@@ -58,7 +55,6 @@
     layers:
     - map: ["enum.XenoConstructionVisualLayers.Animation"]
       state: wall
-      autoAnimated: false
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
@@ -69,7 +65,6 @@
     layers:
     - map: ["enum.XenoConstructionVisualLayers.Animation"]
       state: membrane
-      autoAnimated: false
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
@@ -80,4 +75,3 @@
     layers:
     - map: ["enum.XenoConstructionVisualLayers.Animation"]
       state: door
-      autoAnimated: false

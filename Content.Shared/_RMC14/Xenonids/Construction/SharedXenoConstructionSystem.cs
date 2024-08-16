@@ -233,7 +233,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoSecreteStructureDoAfter(Entity<XenoConstructionComponent> xeno, ref XenoSecreteStructureDoAfterEvent args)
     {
-        if (args.Cancelled && _net.IsServer && args.Effect != null)
+        if (_net.IsServer && args.Effect != null)
             QueueDel(EntityManager.GetEntity(args.Effect));
 
         if (args.Handled || args.Cancelled)
