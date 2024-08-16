@@ -9,7 +9,7 @@ public sealed partial class XenoConstructionAnimationComponent : Component
     public TimeSpan AnimationTimeFinished = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan AnimationTime= TimeSpan.FromSeconds(1);
+    public TimeSpan AnimationTime = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
     public int TotalFrames = 0;

@@ -1,8 +1,6 @@
 ﻿using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Robust.Client.GameObjects;
-using Robust.Client.Animations;
-using static Robust.Client.Animations.AnimationTrackSpriteFlick;
 using static Robust.Client.GameObjects.SpriteComponent;
 using Robust.Shared.Timing;
 
@@ -12,7 +10,6 @@ public sealed class XenoConstructionAnimationVisualizerSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
 
-    private const string ResinAnimationKey = "resin_build";
     public override void Initialize()
     {
         base.Initialize();
