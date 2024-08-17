@@ -344,6 +344,10 @@
       "directions": 4
     },
     {
+      "name": "85_flipped",
+      "directions": 4
+    },
+    {
       "name": "86",
       "directions": 4
     },
