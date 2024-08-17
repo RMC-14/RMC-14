@@ -152,20 +152,83 @@
       #  recommended: true
 
 # Weapon Rack
-# - type: entity
-#   parent: ColMarTechBase
-#   id: ColMarTechStaffOfficerWeapon
-#   name: ColMarTech Dropship Crew Weapon Rack
-#   description: An automated combat equipment vendor for Dropship Crew
-#   components:
-#   - type: AccessReader
-#     access:
-#     - [ "CMAccessDropship" ]
-#   - type: Sprite
-#     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
-#   - type: CMAutomatedVendor
-#     jobs:
-#     - CMDropshipCrewChief
-#     - CMPilotDropship
-#     - CMPilotGunship
-#     sections:
+ - type: entity
+   parent: ColMarTechBase
+   id: ColMarTechStaffOfficerWeapon
+   name: ColMarTech Dropship Crew Weapon Rack
+   description: An automated combat equipment vendor for Dropship Crew
+   components:
+   - type: AccessReader
+     access:
+     - [ "CMAccessDropship" ]
+   - type: Sprite
+     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
+   - type: CMAutomatedVendor
+     jobs:
+     - CMDropshipCrewChief
+     - CMPilotDropship
+     - CMPilotGunship
+     sections:
+     - name: Primary Firearms
+       entries:
+       - id: WeaponRifleM4SPR
+         amount: 4
+       - id: WeaponSMGM63
+         amount: 4
+       - id: WeaponShotgunM42A2
+         amount: 4
+       - id: WeaponRifleM54C
+         amount: 4
+     - name: Primary Ammunition
+       entries:
+       - id: CMBoxShotgunBuckshot
+         amount: 12
+       - id: CMBoxShotgunFlechette
+         amount: 12
+       - id: CMBoxShotgunSlugs
+         amount: 12
+       - id: CMMagazineRifleM4SPR
+         amount: 24
+       - id: CMMagazineSMGM63
+         amount: 24
+       - id: CMMagazineRifleM54C
+         amount: 24
+     - name: Sidearms
+       entries:
+       - id: CMWeaponPistolM77
+         amount: 4
+       - id: RMCWeaponRevolverM44
+         amount: 4
+       - id: CMWeaponPistolMK80 # TODO: Revisit this, I have no idea what pistols are renamed.
+         amount: 4
+      #- id: CMWeaponM82F # TODO RMC14 Flare Gun
+      #  amount: 4
+     - name: Sidearm Ammunition
+       entries:
+       - id: CMMagazinePistolM77AP
+         amount: 20
+       - id: RMCSpeedLoaderM44
+         amount: 20
+       - id: CMMagazinePistolMK80
+         amount: 20
+       #- id: CMMagazinePistolMK80AP # TODO RMC14 Pistol AP varieties
+       # amount: 14
+       #- id: CMMagazinePistolMK80HP # TODO RMC14 Pistol AP varieties
+       # amount: 14
+       #- id: CMMagazinePistolVP78 # Same rounds as the MK80 but I'm not sure why a different pistols mag is in here.
+     - name: Attachments
+       entries:
+       - id: RMCAttachmentRailFlashlight
+         amount: 8
+      #  - id: RMCAttachmentUnderBarrelFlashlight # TODO RMC14 Underbarrel flashlight grip
+      #    amount: 4
+     - name: Utilities
+       entries:
+       - id: RMCFlashlight
+         amount: 4
+       - id: RMCM5Bayonet
+         amount: 4
+      #  - id: RMCPackFlareSignal # TODO RMC14 Signal Flares
+      #    amount: 1
+       - id: CMPackFlare
+         amount: 10
