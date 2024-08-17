@@ -263,7 +263,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         if (distance < 0.5f)
         {
             var msg = Loc.GetString("rmc-power-loader-too-close");
-            foreach (var buckled in GetBuckled((user, loader)))
+            foreach (var buckled in GetBuckled(user))
             {
                 _popup.PopupClient(msg, ent, buckled, PopupType.SmallCaution);
             }
@@ -274,7 +274,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         if (distance > InteractionRange)
         {
             var msg = Loc.GetString("rmc-power-loader-too-far");
-            foreach (var buckled in GetBuckled((user, loader)))
+            foreach (var buckled in GetBuckled(user))
             {
                 _popup.PopupClient(msg, ent, buckled, PopupType.SmallCaution);
             }
@@ -287,7 +287,7 @@ public sealed class PowerLoaderSystem : EntitySystem
             _rmcMap.TileHasStructure(coords))
         {
             var msg = Loc.GetString("rmc-power-loader-cant-drop-occupied", ("drop", ent));
-            foreach (var buckled in GetBuckled((user, loader)))
+            foreach (var buckled in GetBuckled(user))
             {
                 _popup.PopupClient(msg, ent, buckled, PopupType.SmallCaution);
             }
@@ -367,7 +367,7 @@ public sealed class PowerLoaderSystem : EntitySystem
             QueueDel(contained);
 
             var msg = Loc.GetString("rmc-power-loader-discard-empty", ("ammo", contained));
-            foreach (var buckled in GetBuckled((user, user.Comp)))
+            foreach (var buckled in GetBuckled(user))
             {
                 _popup.PopupClient(msg, buckled, PopupType.Medium);
             }
@@ -417,7 +417,7 @@ public sealed class PowerLoaderSystem : EntitySystem
                 weaponContainer.ContainedEntities.Count == 0)
             {
                 msg = Loc.GetString("rmc-power-loader-ammo-no-weapon");
-                foreach (var buckled in GetBuckled((user, user.Comp)))
+                foreach (var buckled in GetBuckled(user))
                 {
                     _popup.PopupClient(msg, target, buckled, PopupType.SmallCaution);
                 }
@@ -434,7 +434,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         if (slot.ContainedEntity == null)
             return true;
 
-        foreach (var buckled in GetBuckled((user, user.Comp)))
+        foreach (var buckled in GetBuckled(user))
         {
             _popup.PopupClient(msg, target, buckled, PopupType.SmallCaution);
         }
@@ -460,7 +460,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         if (!HasFreeHands(user))
         {
             var msg = Loc.GetString("rmc-power-loader-cant-grab-full", ("mech", user.Owner));
-            foreach (var buckled in GetBuckled((user, user.Comp)))
+            foreach (var buckled in GetBuckled(user))
             {
                 _popup.PopupClient(msg, target, buckled, PopupType.SmallCaution);
             }
@@ -483,7 +483,7 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         if (slot == null)
         {
-            foreach (var buckled in GetBuckled((user, user.Comp)))
+            foreach (var buckled in GetBuckled(user))
             {
                 var msg = Loc.GetString("rmc-power-loader-nothing-attached");
                 _popup.PopupClient(msg, user, buckled, PopupType.SmallCaution);
@@ -522,7 +522,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         return true;
     }
 
-    private IEnumerable<EntityUid> GetBuckled(Entity<PowerLoaderComponent> loader)
+    private IEnumerable<EntityUid> GetBuckled(EntityUid loader)
     {
         if (!TryComp(loader, out StrapComponent? strap))
             yield break;
