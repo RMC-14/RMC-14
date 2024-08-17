@@ -5,14 +5,14 @@
     "y": 32
   },
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/41109aa6eebf87892e41b61418b7b06b279d04b6/icons/obj/structures/barricades.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5cf465e72efb6beccd2b78bf263072816a2a60ad/icons/obj/structures/barricades.dmi",
   "states": [
     {
-      "name": "plasteel_wire",
+      "name": "folding_plasteel_wire",
       "directions": 4
     },
     {
-      "name": "plasteel_closed_wire",
+      "name": "folding_plasteel_closed_wire",
       "directions": 4
     },
     {
@@ -40,11 +40,11 @@
       "directions": 4
     },
     {
-      "name": "plasteel_closed",
+      "name": "folding_plasteel_closed",
       "directions": 4
     },
     {
-      "name": "plasteel",
+      "name": "folding_plasteel",
       "directions": 4
     },
     {
@@ -140,6 +140,14 @@
     },
     {
       "name": "wire_rail",
+      "directions": 4
+    },
+    {
+      "name": "plasteel",
+      "directions": 4
+    },
+    {
+      "name": "plasteel_wire",
       "directions": 4
     }
   ]
