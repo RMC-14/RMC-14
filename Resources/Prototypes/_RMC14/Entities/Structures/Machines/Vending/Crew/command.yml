@@ -377,7 +377,7 @@
         points: 15
       - id: RMCAttachmentVerticalGrip
         points: 15
-      - id: ShotgunRMCAttachmentU7Underbarrel
+      - id: RMCAttachmentU7UnderbarrelShotgun
         points: 15
       - id: RMCAttachmentUnderbarrelExtinguisher
         points: 15
@@ -404,7 +404,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "ShipMasterAccess" ]
+    - [ "CMAccessCO" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
@@ -424,7 +424,7 @@
       #- id: CMSunglasses # TODO: Port Sunglasses
       #- id: CMPersonalShades # TODO RMC14 Port Personal Shades
       #- id: CMAviatorShades # TODO RMC14 Port Aviator Shades
-      - id: Marine RPG glasses
+      - id: RMCGlassesMarineRpg
     - name: Service
       entries:
       - id: CMJumpsuitCOService
@@ -457,7 +457,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "ShipMasterAccess" ]
+    - [ "CMAccessCO" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
@@ -541,7 +541,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "ShipMasterAccess" ]
+    - [ "CMAccessCO" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
@@ -621,7 +621,7 @@
         points: 15
       - id: RMCAttachmentVerticalGrip
         points: 15
-      - id: ShotgunRMCAttachmentU7Underbarrel
+      - id: RMCAttachmentU7UnderbarrelShotgun
         points: 15
       - id: RMCAttachmentUnderbarrelExtinguisher # TODO: Check this works, prototype looks sussy
         points: 15
