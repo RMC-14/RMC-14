@@ -24,7 +24,7 @@ public sealed class StunShakeableSystem : EntitySystem
     private void OnStunShakeableInteractHand(Entity<StunShakeableComponent> ent, ref InteractHandEvent args)
     {
         var user = args.User;
-        if (!TryComp(user, out StunShakeableUserComponent? shakeableUser))
+        if (user == args.Target || !TryComp(user, out StunShakeableUserComponent? shakeableUser))
             return;
 
         var target = args.Target;
