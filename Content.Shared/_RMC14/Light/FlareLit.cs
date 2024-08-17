@@ -1,9 +1,10 @@
 using Content.Server.Light.ExpendableLightSystem;
 using Content.Shared.Tag;
+using Content.Server.Light.EntitySystems.ExpendableLightSystem;
 
-namespace Content.Shared._RMC14.Light;
+﻿namespace Content.Shared._RMC14.Light;
 
-public sealed class FlareLitSystem : EntitySystem
+public sealed class FlareLitSystem : EntitySystems
 {
   public override void Initialize()
   {
