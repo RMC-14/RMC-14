@@ -1,4 +1,6 @@
 ﻿using Content.Shared._RMC14.Tackle;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
@@ -9,6 +11,7 @@ namespace Content.Shared._RMC14.ShakeStun;
 
 public sealed class StunShakeableSystem : EntitySystem
 {
+    [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -63,5 +66,7 @@ public sealed class StunShakeableSystem : EntitySystem
         var othersPopup = Loc.GetString("rmc-shake-awake-others", ("user", user), ("target", target));
         var others = Filter.PvsExcept(target).RemovePlayerByAttachedEntity(user);
         _popup.PopupEntity(othersPopup, target, others, true);
+
+        _adminLogs.Add(LogType.RMCStunShake, $"{ToPrettyString(user)} shook {target} out of a stun.");
     }
 }
