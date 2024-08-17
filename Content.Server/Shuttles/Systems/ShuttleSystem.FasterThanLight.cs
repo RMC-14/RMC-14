@@ -859,12 +859,22 @@ public sealed partial class ShuttleSystem
         var aabbs = new List<Box2>(manager.Fixtures.Count);
         var tileSet = new List<(Vector2i, Tile)>();
 
+        var tiles = new HashSet<Vector2i>();
+        if (TryComp(uid, out MapGridComponent? shuttleGrid))
+        {
+            var enumerator = _maps.GetAllTilesEnumerator(uid, shuttleGrid);
+            while (enumerator.MoveNext(out var tile))
+            {
+                tiles.Add(tile.Value.GridIndices);
+            }
+        }
+
         foreach (var fixture in manager.Fixtures.Values)
         {
             if (!fixture.Hard)
                 continue;
 
-            var aabb = fixture.Shape.ComputeAABB(transform, 0);
+            var aabb = _physics.GetWorldAABB(uid, xform: xform);
 
             // Shift it slightly
             aabb = aabb.Translated(-grid.TileSizeHalfVector);
@@ -893,6 +903,11 @@ public sealed partial class ShuttleSystem
 
                 if (_bodyQuery.TryGetComponent(ent, out var mob))
                 {
+                    var position = _transform.GetMapCoordinates(ent);
+                    var diff = position.Position - aabb.Center;
+                    if (!tiles.Contains(diff.Floored()))
+                        continue;
+
                     _logger.Add(LogType.Gib, LogImpact.Extreme, $"{ToPrettyString(ent):player} got gibbed by the shuttle" +
                                                                 $" {ToPrettyString(uid)} arriving from FTL at {xform.Coordinates:coordinates}");
                     var gibs = _bobby.GibBody(ent, body: mob);
