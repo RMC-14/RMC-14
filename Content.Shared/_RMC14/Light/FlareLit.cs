@@ -1,10 +1,9 @@
-using Content.Server.Light.ExpendableLightSystem;
+using Content.Server.ExpendableLightSystem;
 using Content.Shared.Tag;
-using Content.Server.Light.EntitySystems.ExpendableLightSystem;
 
-namespace Content.Server.Light.EntitySystems
+namespace Content.Shared._RMC14.Light;
 
-public sealed class FlareLitSystem : EntitySystems
+public sealed class FlareLitSystem : EntitySystem
 {
   public override void Initialize()
   {
@@ -13,5 +12,4 @@ public sealed class FlareLitSystem : EntitySystems
       _tagSystem.AddTag(ent, "Trash");
     }
   }
-}
 /// ExpendableLightSystem Already marks Fading/Spent as Trash, this is just to add it to Lit Flares
