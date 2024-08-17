@@ -1,4 +1,3 @@
-using Content.Server.ExpendableLightSystem;
 using Content.Shared.Light.Components;
 using Content.Server.Light.Components;
 using Content.Client.Light.Components;
