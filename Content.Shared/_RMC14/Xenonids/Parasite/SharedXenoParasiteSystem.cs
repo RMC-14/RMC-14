@@ -437,7 +437,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             {
                 // Embryo dies if unrevivable when dead
                 // Kill the embryo if we've rotted or are a simplemob
-                if (_mobState.IsDead(uid) && (HasComp<InfectStopOnDeathComponent>(uid) || _rotting.IsRotten(uid)))
+                if (_mobState.IsDead(uid) && (HasComp<InfectStopOnDeathComponent>(uid) || _rotting.IsRotten(uid)) && infected.SpawnedLarva == null)
                 {
                     RemCompDeferred<VictimInfectedComponent>(uid);
                     continue;
