@@ -27,6 +27,7 @@ command-description-removeinvalidweeds = Removes any weeds that should not have 
 
 command-description-skills-get = Gets the level of a specific skill for a marine.
 command-description-skills-set = Sets the level of a specific skill for a marine or group of marines.
+command-description-skills-all = Sets the level of all skills for a marine or group of marines.
 
 command-description-squad-get = Gets the squad ID of a marine.
 command-description-squad-getname = Gets the squad name of a marine.
