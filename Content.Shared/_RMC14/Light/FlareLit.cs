@@ -3,7 +3,7 @@ using Content.Shared.Tag;
 
 namespace Content.Shared._RMC14.Light;
 
-public sealed class FlareLitSystem : ExpendableLightSystem
+public sealed class FlareLitSystem : SharedExpendableLightComponent
 {
   public override void Initialize()
   {
