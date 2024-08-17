@@ -437,9 +437,12 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             {
                 // Embryo dies if unrevivable when dead
                 // Kill the embryo if we've rotted or are a simplemob
-                if (_mobState.IsDead(uid) && (HasComp<InfectStopOnDeathComponent>(uid) || _rotting.IsRotten(uid)) && infected.SpawnedLarva == null)
+                if (_mobState.IsDead(uid) && (HasComp<InfectStopOnDeathComponent>(uid) || _rotting.IsRotten(uid)))
                 {
-                    RemCompDeferred<VictimInfectedComponent>(uid);
+                    if (infected.SpawnedLarva != null)
+                        Burst((uid, infected));
+                    else
+                        RemCompDeferred<VictimInfectedComponent>(uid);
                     continue;
                 }
                 // Stasis slows this, while nesting makes it happen sooner
