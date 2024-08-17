@@ -228,8 +228,8 @@
     - name: Personal Weapon
       choices: { CMWeapon: 1 }
       entries:
-      - id: CMWeaponPistolMK80
-        recommended: true
+      - id: CMWeaponPistolMK80  # These all come inside belts; but these don't exist so...
+        recommended: true       # TODO RMC14 Pistol Belt Fills
       - id: CMWeaponPistolM1984
       - id: CMWeaponPistolM77
       - id: RMCWeaponRevolverM44
