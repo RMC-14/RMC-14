@@ -141,7 +141,6 @@ namespace Content.Client.Input
             human.AddFunction(CMKeyFunctions.CMHolsterTertiary);
             human.AddFunction(CMKeyFunctions.CMHolsterQuaternary);
             human.AddFunction(CMKeyFunctions.CMXenoWideSwing);
-            human.AddFunction(CMKeyFunctions.RMCLaserTarget);
         }
     }
 }

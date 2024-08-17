@@ -23,8 +23,8 @@
   parent: RMCBinoculars
   id: RMCLaserDesignator
   name: laser designator
-  description: "A budget laser designator with one mode: target marking for CAS with IR laser. Ctrl + Click a tile to target something."
-  # TODO RMC14 "A laser designator with two modes: target marking for CAS with IR laser and rangefinding. Ctrl + Click turf to target something. Ctrl + Click designator to stop lasing. Alt + Click designator to switch modes."
+  description: "A budget laser designator with one mode: target marking for CAS with IR laser. Click a tile to target something."
+  # TODO RMC14 "A laser designator with two modes: target marking for CAS with IR laser and rangefinding. Click turf to target something. Ctrl + Click designator to stop lasing. Alt + Click designator to switch modes."
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
@@ -32,6 +32,20 @@
     - state: rangefinder
     - state: laser_cas
   - type: LaserDesignator
+  - type: UseDelay
+    delay: 1
+
+- type: entity
+  parent: RMCLaserDesignator
+  id: RMCLaserDesignatorScout
+  name: scout laser designator
+  description: "An improved laser designator, issued to USCM scouts, with one mode: target marking for CAS with IR laser. Click a tile to target something."
+  # TODO RMC14 "An improved laser designator, issued to USCM scouts, with two modes: target marking for CAS with IR laser and rangefinding. Click turf to target something. Ctrl + Click designator to stop lasing. Alt + Click designator to switch modes."
+  components:
+  - type: LaserDesignator
+    delay: 3
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   id: RMCLaserDesignatorTarget

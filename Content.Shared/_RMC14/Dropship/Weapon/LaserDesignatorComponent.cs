@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -28,4 +29,10 @@ public sealed partial class LaserDesignatorComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId<LaserDesignatorTargetComponent> TargetSpawn = "RMCLaserDesignatorTarget";
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? TargetSound = new SoundPathSpecifier("/Audio/_RMC14/Binoculars/nightvision.ogg");
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? AcquireSound = new SoundPathSpecifier("/Audio/_RMC14/Binoculars/binoctarget.ogg");
 }

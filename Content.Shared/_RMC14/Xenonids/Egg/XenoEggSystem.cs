@@ -169,7 +169,7 @@ public sealed class XenoEggSystem : EntitySystem
         if (!args.CanReach)
         {
             if (_timing.IsFirstTimePredicted)
-                _popup.PopupCoordinates("You can't reach there!", args.ClickLocation, Filter.Local(), true);
+                _popup.PopupCoordinates(Loc.GetString("cm-xeno-cant-reach-there"), args.ClickLocation, Filter.Local(), true);
 
             return;
         }

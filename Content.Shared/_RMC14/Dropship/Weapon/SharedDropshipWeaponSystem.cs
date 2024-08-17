@@ -2,29 +2,28 @@
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Hands;
-using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Rules;
-using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.GameTicking;
-using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Hands;
 using Content.Shared.IgnitionSource;
+using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
+using Content.Shared.Timing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
-using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -48,7 +47,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -60,6 +58,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     private static readonly EntProtoId DropshipTargetMarker = "RMCLaserDropshipTarget";
 
@@ -76,7 +75,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<FlareSignalComponent, ExaminedEvent>(OnFlareSignalExamined);
 
         SubscribeLocalEvent<LaserDesignatorComponent, MapInitEvent>(OnLaserDesignatorMapInit);
-        SubscribeLocalEvent<LaserDesignatorComponent, LaserTargetEvent>(OnLaserDesignatorTarget);
+        SubscribeLocalEvent<LaserDesignatorComponent, AfterInteractEvent>(OnLaserDesignatorAfterInteract);
         SubscribeLocalEvent<LaserDesignatorComponent, LaserDesignatorDoAfterEvent>(OnLaserDesignatorDoAfter);
         SubscribeLocalEvent<LaserDesignatorComponent, ExaminedEvent>(OnLaserDesignatorExamined);
 
@@ -84,6 +83,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<ActiveLaserDesignatorComponent, EntityTerminatingEvent>(OnLaserDesignatorRemove);
         SubscribeLocalEvent<ActiveLaserDesignatorComponent, DroppedEvent>(OnLaserDesignatorDropped);
         SubscribeLocalEvent<ActiveLaserDesignatorComponent, RMCDroppedEvent>(OnLaserDesignatorDropped);
+        SubscribeLocalEvent<ActiveLaserDesignatorComponent, GotUnequippedHandEvent>(OnLaserDesignatorDropped);
+        SubscribeLocalEvent<ActiveLaserDesignatorComponent, HandDeselectedEvent>(OnLaserDesignatorDropped);
 
         SubscribeLocalEvent<LaserDesignatorTargetComponent, ComponentRemove>(OnLaserDesignatorTargetRemove);
         SubscribeLocalEvent<LaserDesignatorTargetComponent, EntityTerminatingEvent>(OnLaserDesignatorTargetRemove);
@@ -114,11 +115,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             });
 
         Subs.CVar(_config, RMCCVars.RMCDropshipCASDebug, v => _casDebug = v, true);
-
-        CommandBinds.Builder
-            .Bind(CMKeyFunctions.RMCLaserTarget,
-                new PointerInputCmdHandler(TryLaserTarget, outsidePrediction: true))
-            .Register<UniqueActionSystem>();
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -167,42 +163,51 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         Dirty(ent);
     }
 
-    private void OnLaserDesignatorTarget(Entity<LaserDesignatorComponent> ent, ref LaserTargetEvent args)
+    private void OnLaserDesignatorAfterInteract(Entity<LaserDesignatorComponent> ent, ref AfterInteractEvent args)
     {
         var user = args.User;
-        if (!args.Coordinates.IsValid(EntityManager))
+        var coordinates = args.ClickLocation.SnapToGrid(EntityManager, _mapManager);
+        if (!coordinates.IsValid(EntityManager))
             return;
 
         args.Handled = true;
 
         string msg;
-        var grid = _transform.GetGrid(args.Coordinates);
+        var grid = _transform.GetGrid(coordinates);
         if (!HasComp<RMCPlanetComponent>(grid))
         {
             msg = Loc.GetString("rmc-laser-designator-not-surface");
-            _popup.PopupCoordinates(msg, args.Coordinates, user, PopupType.SmallCaution);
+            _popup.PopupClient(msg, coordinates, user, PopupType.SmallCaution);
             return;
         }
 
         if (HasComp<ActiveLaserDesignatorComponent>(ent))
         {
             msg = Loc.GetString("rmc-laser-designator-already-targeting");
-            _popup.PopupCoordinates(msg, args.Coordinates, user, PopupType.SmallCaution);
+            _popup.PopupClient(msg, coordinates, user, PopupType.SmallCaution);
             return;
         }
 
-        if (!_examine.InRangeUnOccluded(user, args.Coordinates, ent.Comp.Range))
+        if (!_examine.InRangeUnOccluded(user, coordinates, ent.Comp.Range))
         {
             msg = Loc.GetString("rmc-laser-designator-out-of-range");
-            _popup.PopupCoordinates(msg, args.Coordinates, user, PopupType.SmallCaution);
+            _popup.PopupClient(msg, coordinates, user, PopupType.SmallCaution);
             return;
         }
 
-        if (!_area.CanCAS(args.Coordinates))
+        if (!_area.CanCAS(coordinates))
         {
             msg = Loc.GetString("rmc-laser-designator-not-cas");
-            _popup.PopupCoordinates(msg, args.Coordinates, user, PopupType.SmallCaution);
+            _popup.PopupClient(msg, coordinates, user, PopupType.SmallCaution);
             return;
+        }
+
+        if (TryComp(ent, out UseDelayComponent? useDelay))
+        {
+            if (_useDelay.IsDelayed((ent, useDelay)))
+                return;
+
+            _useDelay.TryResetDelay(ent, component: useDelay);
         }
 
         var delay = ent.Comp.Delay;
@@ -212,7 +217,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (delay < ent.Comp.MinimumDelay)
             delay = ent.Comp.MinimumDelay;
 
-        var ev = new LaserDesignatorDoAfterEvent(GetNetCoordinates(args.Coordinates));
+        var ev = new LaserDesignatorDoAfterEvent(GetNetCoordinates(coordinates));
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent)
         {
             BreakOnMove = true,
@@ -223,7 +228,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (_doAfter.TryStartDoAfter(doAfter))
         {
             msg = Loc.GetString("rmc-laser-designator-start");
-            _popup.PopupCoordinates(msg, args.Coordinates, user, PopupType.Medium);
+            _popup.PopupClient(msg, coordinates, user, PopupType.Medium);
+            _audio.PlayPredicted(ent.Comp.TargetSound, ent, user);
         }
     }
 
@@ -240,6 +246,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         var msg = Loc.GetString("rmc-laser-designator-acquired");
         _popup.PopupClient(msg, coords, user, PopupType.Medium);
+        _audio.PlayPredicted(ent.Comp.AcquireSound, ent, user);
 
         if (_net.IsClient)
             return;
@@ -573,26 +580,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         RefreshWeaponsUI(ent);
         Dirty(ent);
-    }
-
-    private bool TryLaserTarget(ICommonSession? session, EntityCoordinates coords, EntityUid uid)
-    {
-        if (_net.IsClient)
-            return false;
-
-        if (session?.AttachedEntity is not { } ent ||
-            !coords.IsValid(EntityManager))
-        {
-            return false;
-        }
-
-        if (!_hands.TryGetActiveItem(ent, out var item))
-            return false;
-
-        coords = coords.SnapToGrid(EntityManager, _mapManager);
-        var ev = new LaserTargetEvent(ent, coords, uid.IsValid() ? uid : null);
-        RaiseLocalEvent(item.Value, ref ev);
-        return ev.Handled;
     }
 
     protected virtual void RefreshWeaponsUI(Entity<DropshipTerminalWeaponsComponent> terminal)
