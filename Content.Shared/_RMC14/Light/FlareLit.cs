@@ -1,5 +1,5 @@
-using Content.Server.SharedExpendableLightComponent.Components;
-using Content.Server.ExpendableLightSystem;
+using Content.Server.SharedExpendableLightComponent.cs;
+using Content.Server.ExpendableLightSystem.cs;
 using Content.Shared.Tag;
 
 namespace Content.Shared._RMC14.Light;
