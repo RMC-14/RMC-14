@@ -152,7 +152,7 @@
       #  recommended: true
 
 # Weapon Rack
- - type: entity
+-  type: entity
    parent: ColMarTechBase
    id: ColMarTechStaffOfficerWeapon
    name: ColMarTech Dropship Crew Weapon Rack
