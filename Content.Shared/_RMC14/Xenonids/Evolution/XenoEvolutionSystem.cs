@@ -591,9 +591,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 continue;
             }
 
-            if (HasComp<BursterComponent>(uid))
-                continue;
-
             if (comp.Points < comp.Max || roundDuration < _evolutionAccumulatePointsBefore)
             {
                 if (needsOvipositor && comp.RequiresGranter && !hasGranter)
