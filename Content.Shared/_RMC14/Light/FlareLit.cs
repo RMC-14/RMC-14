@@ -2,7 +2,7 @@ using Content.Server.Light.ExpendableLightSystem;
 using Content.Shared.Tag;
 using Content.Server.Light.EntitySystems.ExpendableLightSystem;
 
-﻿namespace Content.Shared._RMC14.Light;
+namespace Content.Server.Light.EntitySystems
 
 public sealed class FlareLitSystem : EntitySystems
 {
