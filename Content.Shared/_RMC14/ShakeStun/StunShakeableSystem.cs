@@ -35,6 +35,9 @@ public sealed class StunShakeableSystem : EntitySystem
             return;
         }
 
+        if (user == target)
+            return;
+
         args.Handled = true;
 
         var time = _timing.CurTime;
