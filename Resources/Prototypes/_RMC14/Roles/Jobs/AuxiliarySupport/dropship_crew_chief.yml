@@ -32,7 +32,7 @@
         RMCSkillSurgery: 1
     - type: MarineOrders
     - type: CMVendorUser
-      points: 120
+      points: 45
   hidden: false
 
 - type: startingGear
