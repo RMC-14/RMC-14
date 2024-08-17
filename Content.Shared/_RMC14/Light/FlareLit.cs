@@ -1,4 +1,4 @@
-using Content.Server.Light;
+using Content.Server.ExpendableLightSystem;
 using Content.Shared.Tag;
 
 namespace Content.Shared._RMC14.Light;
