@@ -60,10 +60,10 @@ public sealed partial class VictimInfectedComponent : Component
     public TimeSpan BurstDelay = TimeSpan.FromMinutes(8);
 
     /// <summary>
-    ///     When the larva should be spawned before burst.
+    ///     When the larva should be kicked out after the intial burst time.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan SpawnLarvaBefore = TimeSpan.FromSeconds(20);
+    public TimeSpan AutoBurstTime = TimeSpan.FromSeconds(60);
 
     [DataField, AutoNetworkedField]
     public TimeSpan AttachedAt;
@@ -114,7 +114,7 @@ public sealed partial class VictimInfectedComponent : Component
     public int FinalSymptomsStart = 4;
 
     [DataField]
-    public int BurstWarningStart = 5;
+    public int BurstWarningStart = 6;
 
     [DataField]
     public float ShakesChance = 0.08f;
