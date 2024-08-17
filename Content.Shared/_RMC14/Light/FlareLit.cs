@@ -1,6 +1,3 @@
-using Content.Shared.Light.Components;
-using Content.Server.Light.Components;
-using Content.Client.Light.Components;
 using Content.Shared.Light.Components.SharedExpendableLightComponent;
 using Content.Shared.Tag;
 
