@@ -30,3 +30,12 @@
     skills:
       all:
         RMCSkillPilot: 1
+    weaponAttachedSprite:
+      sprite: _RMC14/Objects/dropship_attachments.rsi
+      state: 30mm_cannon_installed
+    ammoAttachedSprite:
+      sprite: _RMC14/Objects/dropship_attachments.rsi
+      state: 30mm_cannon_loaded0
+    ammoEmptyAttachedSprite:
+      sprite: _RMC14/Objects/dropship_attachments.rsi
+      state: 30mm_cannon_loaded1

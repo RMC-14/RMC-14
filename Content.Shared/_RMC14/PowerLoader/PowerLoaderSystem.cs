@@ -31,6 +31,7 @@ namespace Content.Shared._RMC14.PowerLoader;
 
 public sealed class PowerLoaderSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -69,8 +70,8 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, PickupAttemptEvent>(OnGrabbablePickupAttempt);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, AfterInteractEvent>(OnGrabbableAfterInteract);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, BeforeRangedInteractEvent>(OnGrabbableBeforeRangedInteract);
-        SubscribeLocalEvent<PowerLoaderGrabbableComponent, DropshipAttachDoAfterEvent>(OnDropshipAttachWeapon);
-        SubscribeLocalEvent<PowerLoaderGrabbableComponent, DropshipDetachDoAfterEvent>(OnDropshipDetachWeapon);
+        SubscribeLocalEvent<PowerLoaderGrabbableComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
+        SubscribeLocalEvent<PowerLoaderGrabbableComponent, DropshipDetachDoAfterEvent>(OnDropshipDetach);
 
         SubscribeLocalEvent<ActivePowerLoaderPilotComponent, PreventCollideEvent>(OnActivePilotPreventCollide);
     }
@@ -324,7 +325,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
-    private void OnDropshipAttachWeapon(Entity<PowerLoaderGrabbableComponent> ent, ref DropshipAttachDoAfterEvent args)
+    private void OnDropshipAttach(Entity<PowerLoaderGrabbableComponent> ent, ref DropshipAttachDoAfterEvent args)
     {
         if (args.Cancelled ||
             args.Handled ||
@@ -342,9 +343,11 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         if (user.Comp != null)
             SyncHands((user, user.Comp));
+
+        SyncAppearance(target);
     }
 
-    private void OnDropshipDetachWeapon(Entity<PowerLoaderGrabbableComponent> ent, ref DropshipDetachDoAfterEvent args)
+    private void OnDropshipDetach(Entity<PowerLoaderGrabbableComponent> ent, ref DropshipDetachDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled || args.Target is not { } target)
             return;
@@ -377,6 +380,8 @@ public sealed class PowerLoaderSystem : EntitySystem
             PickUp((user, user.Comp), contained);
             SyncHands((user, user.Comp));
         }
+
+        SyncAppearance(target);
     }
 
     private void OnActivePilotPreventCollide(Entity<ActivePowerLoaderPilotComponent> ent, ref PreventCollideEvent args)
@@ -629,6 +634,57 @@ public sealed class PowerLoaderSystem : EntitySystem
                 SyncHands(loader);
                 return;
             }
+        }
+    }
+
+    private void SyncAppearance(Entity<DropshipWeaponPointComponent?> point)
+    {
+        if (!Resolve(point, ref point.Comp, false))
+            return;
+
+        if (!_container.TryGetContainer(point, point.Comp.WeaponContainerSlotId, out var weaponContainer) ||
+            weaponContainer.ContainedEntities.Count == 0)
+        {
+            _appearance.SetData(point, DropshipWeaponVisuals.Sprite, "");
+            _appearance.SetData(point, DropshipWeaponVisuals.State, "");
+            return;
+        }
+
+        var hasAmmo = false;
+        var hasRounds = false;
+        if (_container.TryGetContainer(point, point.Comp.AmmoContainerSlotId, out var ammoContainer))
+        {
+            foreach (var contained in ammoContainer.ContainedEntities)
+            {
+                if (TryComp(contained, out DropshipAmmoComponent? ammo))
+                {
+                    hasAmmo = true;
+
+                    // TODO RMC14 partial reloads? or hide it anyways if below the threshold
+                    if (ammo.Rounds >= ammo.RoundsPerShot)
+                        hasRounds = true;
+                }
+            }
+        }
+
+        foreach (var contained in weaponContainer.ContainedEntities)
+        {
+            if (!TryComp(contained, out DropshipWeaponComponent? weapon))
+                continue;
+
+            SpriteSpecifier.Rsi? rsi;
+            if (hasAmmo && hasRounds)
+                rsi = weapon.AmmoAttachedSprite;
+            else if (hasAmmo)
+                rsi = weapon.AmmoEmptyAttachedSprite;
+            else
+                rsi = weapon.WeaponAttachedSprite;
+
+            if (rsi == null)
+                continue;
+
+            _appearance.SetData(point, DropshipWeaponVisuals.Sprite, rsi.RsiPath.ToString());
+            _appearance.SetData(point, DropshipWeaponVisuals.State, rsi.RsiState);
         }
     }
 

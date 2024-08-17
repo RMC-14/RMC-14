@@ -658,7 +658,9 @@
   suffix: 61
   components:
   - type: Sprite
-    state: "61"
+    layers:
+    - state: "61"
+    - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
   - type: Icon
     state: "61"
   - type: Occluder
@@ -704,7 +706,9 @@
   suffix: 65
   components:
   - type: Sprite
-    state: "65"
+    layers:
+    - state: "65"
+    - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
   - type: Icon
     state: "65"
   - type: Occluder
@@ -912,7 +916,9 @@
   suffix: 84
   components:
   - type: Sprite
-    state: "84"
+    layers:
+    - state: "84"
+    - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
   - type: Icon
     state: "84"
   - type: Occluder
@@ -926,6 +932,11 @@
   id: CMAlamoWall84Flipped
   name: starboard fore weapon attach point
   suffix: 84, Flipped
+  components:
+  - type: Sprite
+    layers:
+    - state: "84_flipped"
+    - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -944,6 +955,11 @@
   parent: CMAlamoWall85
   id: CMAlamoWall85Flipped
   suffix: 85, Flipped
+  components:
+  - type: Sprite
+    layers:
+    - state: "85_flipped"
+    - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
 
 - type: entity
   parent: CMBaseAlamoWall

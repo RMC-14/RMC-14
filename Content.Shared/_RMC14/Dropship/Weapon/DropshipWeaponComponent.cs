@@ -1,6 +1,8 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Dropship.Weapon;
 
@@ -25,4 +27,20 @@ public sealed partial class DropshipWeaponComponent : Component
 
     [DataField, AutoNetworkedField]
     public SkillWhitelist? Skills;
+
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi? WeaponAttachedSprite;
+
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi? AmmoAttachedSprite;
+
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi? AmmoEmptyAttachedSprite;
+}
+
+[Serializable, NetSerializable]
+public enum DropshipWeaponVisuals
+{
+    Sprite,
+    State,
 }
