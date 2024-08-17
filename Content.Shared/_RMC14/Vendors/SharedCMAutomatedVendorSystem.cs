@@ -9,6 +9,7 @@ using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
+using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
@@ -44,7 +45,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     {
         SubscribeLocalEvent<CMAutomatedVendorComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
 
-        SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedHandEvent>(OnRecentlyGotEquippedHand);
+        SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedHandEvent>(OnRecentlyGotEquipped);
+        SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedEvent>(OnRecentlyGotEquipped);
 
         Subs.BuiEvents<CMAutomatedVendorComponent>(CMAutomatedVendorUI.Key, subs =>
         {
@@ -93,7 +95,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         args.Cancel();
     }
 
-    private void OnRecentlyGotEquippedHand(Entity<RMCRecentlyVendedComponent> ent, ref GotEquippedHandEvent args)
+    private void OnRecentlyGotEquipped<T>(Entity<RMCRecentlyVendedComponent> ent, ref T args)
     {
         RemCompDeferred<WallMountComponent>(ent);
     }
@@ -307,25 +309,22 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
 
         var spawn = SpawnNextToOrDrop(toVend, vendor);
-        var grabbed = Grab(player, spawn);
-        if (!grabbed)
+        var recently = EnsureComp<RMCRecentlyVendedComponent>(spawn);
+        var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(spawn);
+        while (anchored.MoveNext(out var uid))
         {
-            var recently = EnsureComp<RMCRecentlyVendedComponent>(spawn);
-            var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(spawn);
-            while (anchored.MoveNext(out var uid))
-            {
-                recently.PreventCollide.Add(uid);
-            }
-
-            Dirty(spawn, recently);
-
-            var mount = EnsureComp<WallMountComponent>(spawn);
-            mount.Arc = Angle.FromDegrees(360);
-            Dirty(spawn, mount);
-
-            if (TryComp(spawn, out TransformComponent? xform))
-                _transform.SetLocalPosition(spawn, xform.LocalPosition + offset, xform);
+            recently.PreventCollide.Add(uid);
         }
+
+        Dirty(spawn, recently);
+
+        var mount = EnsureComp<WallMountComponent>(spawn);
+        mount.Arc = Angle.FromDegrees(360);
+        Dirty(spawn, mount);
+
+        var grabbed = Grab(player, spawn);
+        if (!grabbed && TryComp(spawn, out TransformComponent? xform))
+            _transform.SetLocalPosition(spawn, xform.LocalPosition + offset, xform);
 
         var ev = new RMCAutomatedVendedUserEvent(spawn);
         RaiseLocalEvent(player, ref ev);
