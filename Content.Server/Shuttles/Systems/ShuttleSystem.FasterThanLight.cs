@@ -4,6 +4,7 @@ using System.Numerics;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Station.Events;
+using Content.Shared._RMC14.Areas;
 using Content.Shared.Body.Components;
 using Content.Shared.Buckle.Components;
 using Content.Shared.CCVar;
@@ -899,7 +900,7 @@ public sealed partial class ShuttleSystem
                     continue;
                 }
 
-                if (HasComp<FTLBeaconComponent>(ent))
+                if (HasComp<FTLBeaconComponent>(ent) || HasComp<AreaComponent>(ent))
                     continue;
 
                 QueueDel(ent);

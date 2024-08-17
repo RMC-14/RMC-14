@@ -145,8 +145,14 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.dropship_fabricator_starting_points", 10000, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCDropshipFabricatorGainEverySeconds =
-        CVarDef.Create("rmc.dropship_fabricator_gain_every", 3.33333f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.dropship_fabricator_gain_every_seconds", 3.33333f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<bool> RMCDropshipCASDebug =
         CVarDef.Create("rmc.dropship_cas_debug", false, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCDropshipFlyByTimeSeconds =
+        CVarDef.Create("rmc.dropship_fly_by_time_seconds", 100, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCDropshipHijackTravelTimeSeconds =
+        CVarDef.Create("rmc.dropship_hijack_travel_time_seconds", 180, CVar.REPLICATED | CVar.SERVER);
 }

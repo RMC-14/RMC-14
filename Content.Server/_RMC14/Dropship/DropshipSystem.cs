@@ -8,10 +8,12 @@ using Content.Server.Shuttles.Systems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared.Administration.Logs;
+using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.Doors.Components;
 using Content.Shared.Interaction;
@@ -35,6 +37,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
@@ -45,6 +48,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private EntityQuery<DoorBoltComponent> _doorBoltQuery;
 
     private TimeSpan _lzPrimaryAutoDelay;
+    private TimeSpan _flyByTime;
+    private TimeSpan _hijackTravelTime;
 
     public override void Initialize()
     {
@@ -70,6 +75,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
             });
 
         Subs.CVar(_config, RMCCVars.RMCLandingZonePrimaryAutoMinutes, v => _lzPrimaryAutoDelay = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCDropshipFlyByTimeSeconds, v => _flyByTime = TimeSpan.FromSeconds(v), true);
+        Subs.CVar(_config, RMCCVars.RMCDropshipHijackTravelTimeSeconds, v => _hijackTravelTime = TimeSpan.FromSeconds(v), true);
     }
 
     private void OnActivateInWorld(Entity<DropshipNavigationComputerComponent> ent, ref ActivateInWorldEvent args)
@@ -191,6 +198,33 @@ public sealed class DropshipSystem : SharedDropshipSystem
             Dirty(destination, newDestination);
         }
 
+        if (hyperspaceTime == null)
+        {
+            if (hijack)
+            {
+                hyperspaceTime = (float) _hijackTravelTime.TotalSeconds;
+            }
+            else
+            {
+                var hasSkill = user != null && _skills.HasSkill(user.Value, computer.Comp.Skill, computer.Comp.SkillLevel);
+                var rechargeMultiplier = hasSkill ? computer.Comp.SkillRechargeMultiplier : 1f;
+                if (dropship.Destination == destination)
+                {
+                    hyperspaceTime = (float) _flyByTime.TotalSeconds;
+                    if (hasSkill)
+                        hyperspaceTime *= computer.Comp.SkillFlyByMultiplier;
+                }
+                else
+                {
+                    hyperspaceTime = _shuttle.DefaultTravelTime;
+                    if (hasSkill)
+                        hyperspaceTime *= computer.Comp.SkillTravelMultiplier;
+                }
+
+                dropship.RechargeTime = TimeSpan.FromSeconds(_config.GetCVar(CCVars.FTLCooldown) * rechargeMultiplier);
+            }
+        }
+
         dropship.Destination = destination;
         Dirty(shuttle.Value, dropship);
 
@@ -201,6 +235,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
             destCoords = destCoords.Offset(-physics.LocalCenter);
 
         destCoords = destCoords.Offset(new Vector2(-0.5f, -0.5f));
+
         _shuttle.FTLToCoordinates(shuttle.Value, shuttleComp, destCoords, rotation, startupTime: startupTime, hyperspaceTime: hyperspaceTime);
 
         if (user != null && hijack)
@@ -334,6 +369,21 @@ public sealed class DropshipSystem : SharedDropshipSystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        var dropships = EntityQueryEnumerator<DropshipComponent, FTLComponent>();
+        while (dropships.MoveNext(out var uid, out var dropship, out var ftl))
+        {
+            if (!dropship.Crashed || dropship.AnnouncedCrash)
+                continue;
+
+            if (ftl.State != FTLState.Arriving)
+                continue;
+
+            dropship.AnnouncedCrash = true;
+            Dirty(uid, dropship);
+
+            _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-announcement-emergency-dropship-crash"), dropship.CrashWarningSound);
+        }
 
         if (Count<PrimaryLandingZoneComponent>() > 0)
             return;
