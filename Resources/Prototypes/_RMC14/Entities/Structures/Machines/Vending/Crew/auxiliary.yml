@@ -154,7 +154,7 @@
 # Weapon Rack
 -  type: entity
    parent: ColMarTechBase
-   id: ColMarTechStaffOfficerWeapon
+   id: ColMarTechFlightCrewWeapon
    name: ColMarTech Dropship Crew Weapon Rack
    description: An automated combat equipment vendor for Dropship Crew
    components:
