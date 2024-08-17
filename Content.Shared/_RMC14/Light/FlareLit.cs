@@ -12,4 +12,5 @@ public sealed class FlareLitSystem : EntitySystem
       _tagSystem.AddTag(ent, "Trash");
     }
   }
+}
 /// ExpendableLightSystem Already marks Fading/Spent as Trash, this is just to add it to Lit Flares
