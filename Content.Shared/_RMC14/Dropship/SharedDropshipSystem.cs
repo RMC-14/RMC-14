@@ -222,17 +222,10 @@ public abstract class SharedDropshipSystem : EntitySystem
             return;
         }
 
-        if (!TryComp(destination, out DropshipDestinationComponent? destinationComp))
+        if (!HasComp<DropshipDestinationComponent>(destination))
         {
             Log.Warning(
                 $"{ToPrettyString(args.Actor)} tried to launch to invalid dropship destination {ToPrettyString(destination)}");
-            return;
-        }
-
-        if (destinationComp.Ship != null)
-        {
-            Log.Warning(
-                $"{ToPrettyString(args.Actor)} tried to launch to occupied dropship destination {ToPrettyString(destination)}");
             return;
         }
 
