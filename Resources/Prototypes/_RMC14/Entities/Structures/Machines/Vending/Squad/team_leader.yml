@@ -224,6 +224,6 @@
     - state: laser_cas
   - type: CMVendorBundle
     bundle:
-    - CMPackFlareCAS
-    - CMPackFlareCAS
+    - RMCPackFlareCAS
+    - RMCPackFlareCAS
     - RMCLaserDesignator

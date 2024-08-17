@@ -661,6 +661,7 @@
     layers:
     - state: "61"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
   - type: Icon
     state: "61"
   - type: Occluder
@@ -668,6 +669,8 @@
   - type: InteractionOutline
   - type: Clickable
   - type: DropshipWeaponPoint
+    dirOffset: Clockwise
+  - type: Appearance
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -709,6 +712,7 @@
     layers:
     - state: "65"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
   - type: Icon
     state: "65"
   - type: Occluder
@@ -716,6 +720,8 @@
   - type: InteractionOutline
   - type: Clickable
   - type: DropshipWeaponPoint
+    dirOffset: CounterClockwise
+  - type: Appearance
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -919,6 +925,7 @@
     layers:
     - state: "84"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
   - type: Icon
     state: "84"
   - type: Occluder
@@ -926,6 +933,8 @@
   - type: InteractionOutline
   - type: Clickable
   - type: DropshipWeaponPoint
+    dirOffset: Flip
+  - type: Appearance
 
 - type: entity
   parent: CMAlamoWall84
@@ -937,6 +946,7 @@
     layers:
     - state: "84_flipped"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -960,6 +970,7 @@
     layers:
     - state: "85_flipped"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
 
 - type: entity
   parent: CMBaseAlamoWall

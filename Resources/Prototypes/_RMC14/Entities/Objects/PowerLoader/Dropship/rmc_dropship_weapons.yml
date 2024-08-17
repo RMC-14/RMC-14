@@ -6,6 +6,8 @@
   - type: DropshipFabricatorPrintable
     category: Equipment
     cost: 400
+  - type: PowerLoaderGrabbable
+    delay: 1
   - type: DropshipWeapon
     skills:
       all:
@@ -33,9 +35,9 @@
     weaponAttachedSprite:
       sprite: _RMC14/Objects/dropship_attachments.rsi
       state: 30mm_cannon_installed
-    ammoAttachedSprite:
+    ammoEmptyAttachedSprite:
       sprite: _RMC14/Objects/dropship_attachments.rsi
       state: 30mm_cannon_loaded0
-    ammoEmptyAttachedSprite:
+    ammoAttachedSprite:
       sprite: _RMC14/Objects/dropship_attachments.rsi
       state: 30mm_cannon_loaded1

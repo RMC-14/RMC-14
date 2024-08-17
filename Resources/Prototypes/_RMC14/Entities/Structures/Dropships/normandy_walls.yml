@@ -621,6 +621,7 @@
     layers:
     - state: "61"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
   - type: Icon
     state: "61"
 
@@ -664,6 +665,7 @@
     layers:
     - state: "65"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
   - type: Icon
     state: "65"
 
@@ -857,6 +859,7 @@
     layers:
     - state: "84"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
   - type: Icon
     state: "84"
 
@@ -870,6 +873,7 @@
     layers:
     - state: "84_flipped"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall85]
@@ -891,6 +895,7 @@
     layers:
     - state: "85_flipped"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall86]

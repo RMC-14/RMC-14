@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.IgnitionSource;
@@ -90,6 +91,12 @@ namespace Content.Server.Light.EntitySystems
         /// </summary>
         public bool TryActivate(Entity<ExpendableLightComponent> ent)
         {
+            if (HasComp<FlareSignalComponent>(ent) &&
+                HasComp<DropshipTargetComponent>(ent))
+            {
+                return false;
+            }
+
             var component = ent.Comp;
             if (!component.Activated && component.CurrentState == ExpendableLightState.BrandNew)
             {

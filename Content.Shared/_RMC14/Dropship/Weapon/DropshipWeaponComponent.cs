@@ -32,10 +32,10 @@ public sealed partial class DropshipWeaponComponent : Component
     public SpriteSpecifier.Rsi? WeaponAttachedSprite;
 
     [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi? AmmoAttachedSprite;
+    public SpriteSpecifier.Rsi? AmmoEmptyAttachedSprite;
 
     [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi? AmmoEmptyAttachedSprite;
+    public SpriteSpecifier.Rsi? AmmoAttachedSprite;
 }
 
 [Serializable, NetSerializable]

@@ -175,7 +175,7 @@
 
 - type: entity
   parent: CMPackFlareBase
-  id: CMPackFlareCAS
+  id: RMCPackFlareCAS
   suffix: Filled
   components:
   - type: Sprite

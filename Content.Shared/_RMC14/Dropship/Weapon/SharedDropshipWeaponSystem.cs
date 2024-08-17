@@ -1,7 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
@@ -18,14 +17,18 @@ using Content.Shared.IgnitionSource;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
+using Content.Shared.Light.Components;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
+using Content.Shared.Throwing;
 using Content.Shared.Timing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -52,7 +55,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly CMHandsSystem _rmcHands = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -73,6 +76,10 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<FlareSignalComponent, IgnitionEvent>(OnFlareSignalIgnition);
         SubscribeLocalEvent<FlareSignalComponent, GettingPickedUpAttemptEvent>(OnFlareSignalPickupAttempt);
         SubscribeLocalEvent<FlareSignalComponent, ExaminedEvent>(OnFlareSignalExamined);
+        SubscribeLocalEvent<FlareSignalComponent, DroppedEvent>(OnFlareSignalDropped);
+        SubscribeLocalEvent<FlareSignalComponent, ThrownEvent>(OnFlareSignalThrown);
+        SubscribeLocalEvent<FlareSignalComponent, StopThrowEvent>(OnFlareSignalStopThrow);
+        SubscribeLocalEvent<FlareSignalComponent, ContainerGettingInsertedAttemptEvent>(OnFlareSignalContainerGettingInsertedAttempt);
 
         SubscribeLocalEvent<LaserDesignatorComponent, MapInitEvent>(OnLaserDesignatorMapInit);
         SubscribeLocalEvent<LaserDesignatorComponent, AfterInteractEvent>(OnLaserDesignatorAfterInteract);
@@ -124,20 +131,10 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void OnFlareSignalIgnition(Entity<FlareSignalComponent> ent, ref IgnitionEvent args)
     {
-        if (!args.Ignite)
-        {
-            RemCompDeferred<DropshipTargetComponent>(ent);
+        if (args.Ignite)
             return;
-        }
 
-        var id = _nextId++;
-        var abbreviation = Loc.GetString("rmc-laser-designator-target-abbreviation", ("id", id));
-        if (_rmcHands.TryGetHolder(ent, out var holder))
-            abbreviation = GetUserAbbreviation(holder, id);
-
-        var target = new DropshipTargetComponent { Abbreviation = abbreviation };
-        AddComp(ent, target, true);
-        Dirty(ent, target);
+        RemCompDeferred<DropshipTargetComponent>(ent);
     }
 
     private void OnFlareSignalPickupAttempt(Entity<FlareSignalComponent> ent, ref GettingPickedUpAttemptEvent args)
@@ -145,7 +142,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (IsFlareBurning(ent))
+        if (IsFlareLit(ent))
             args.Cancel();
     }
 
@@ -155,6 +152,31 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         {
             args.PushMarkup(Loc.GetString("rmc-laser-designator-signal-flare-examine"));
         }
+    }
+
+    private void OnFlareSignalDropped(Entity<FlareSignalComponent> ent, ref DroppedEvent args)
+    {
+        StartTrackingActiveFlare(ent, args.User);
+    }
+
+    private void OnFlareSignalThrown(Entity<FlareSignalComponent> ent, ref ThrownEvent args)
+    {
+        StartTrackingActiveFlare(ent, args.User);
+    }
+
+    private void OnFlareSignalStopThrow(Entity<FlareSignalComponent> ent, ref StopThrowEvent args)
+    {
+        if (HasComp<DropshipTargetComponent>(ent))
+            _physics.SetBodyType(ent, BodyType.Static);
+    }
+
+    private void OnFlareSignalContainerGettingInsertedAttempt(Entity<FlareSignalComponent> ent, ref ContainerGettingInsertedAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (IsFlareLit(ent))
+            args.Cancel();
     }
 
     private void OnLaserDesignatorMapInit(Entity<LaserDesignatorComponent> ent, ref MapInitEvent args)
@@ -577,14 +599,14 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void OnWeaponsTargetsPrevious(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsTargetsPreviousMsg args)
     {
-        ent.Comp.TargetsPage = Math.Max(0, ent.Comp.TargetsPage--);
+        ent.Comp.TargetsPage = Math.Max(0, ent.Comp.TargetsPage - 1);
         Dirty(ent);
         RefreshWeaponsUI(ent);
     }
 
     private void OnWeaponsTargetsNext(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsTargetsNextMsg args)
     {
-        ent.Comp.TargetsPage = Math.Min(ent.Comp.Targets.Count % 5, ent.Comp.TargetsPage--);
+        ent.Comp.TargetsPage = Math.Min(ent.Comp.Targets.Count % 5, ent.Comp.TargetsPage + 1);
         Dirty(ent);
         RefreshWeaponsUI(ent);
     }
@@ -695,11 +717,73 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         }
     }
 
-    protected abstract bool IsFlareBurning(EntityUid ent);
+    private void StartTrackingActiveFlare(Entity<FlareSignalComponent> ent, EntityUid? user)
+    {
+        if (EnsureComp(ent, out ActiveFlareSignalComponent active))
+            return;
+
+        if (_net.IsClient)
+            return;
+
+        var id = _nextId++;
+        active.Abbreviation = Loc.GetString("rmc-laser-designator-target-abbreviation", ("id", id));
+        if (user != null)
+            active.Abbreviation = GetUserAbbreviation(user.Value, id);
+    }
+
+    private bool IsFlareLit(EntityUid flare)
+    {
+        return TryComp(flare, out ExpendableLightComponent? expendable) && expendable.Activated;
+    }
+
+    private bool TryActivateSignalFlareTarget(Entity<ActiveFlareSignalComponent> ent)
+    {
+        if (HasComp<DropshipTargetComponent>(ent))
+            return true;
+
+        if (!IsFlareLit(ent))
+            return false;
+
+        var target = new DropshipTargetComponent { Abbreviation = ent.Comp.Abbreviation };
+        AddComp(ent, target, true);
+        Dirty(ent, target);
+
+        _physics.SetBodyType(ent, BodyType.Static);
+
+        return true;
+    }
 
     public override void Update(float frameTime)
     {
         var time = _timing.CurTime;
+        var activeFlares = EntityQueryEnumerator<ActiveFlareSignalComponent, TransformComponent>();
+        while (activeFlares.MoveNext(out var uid, out var active, out var xform))
+        {
+            active.LastCoordinates.Enqueue(GetNetCoordinates(xform.Coordinates));
+            Dirty(uid, active);
+            if (active.LastCoordinates.Count < 10)
+                continue;
+
+            active.LastCoordinates.Dequeue();
+            var all = true;
+            foreach (var last in active.LastCoordinates)
+            {
+                if (!_transform.InRange(GetCoordinates(last), xform.Coordinates, 0.01f))
+                {
+                    all = false;
+                    break;
+                }
+            }
+
+            if (!all)
+                continue;
+
+            if (!TryActivateSignalFlareTarget((uid, active)))
+                continue;
+
+            RemCompDeferred<ActiveFlareSignalComponent>(uid);
+        }
+
         var inFlight = EntityQueryEnumerator<AmmoInFlightComponent>();
         while (inFlight.MoveNext(out var uid, out var flight))
         {

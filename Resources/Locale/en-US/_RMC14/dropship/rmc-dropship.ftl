@@ -50,6 +50,9 @@ rmc-dropship-weapons-night-vision-off = NV-OFF
 
 rmc-dropship-weapons-weapon = WEAPON
 
+rmc-dropship-weapons-previous = ^
+rmc-dropship-weapons-next = v
+
 rmc-dropship-weapons-fire-no-weapon = No weapon selected.
 rmc-dropship-weapons-fire-not-flying = Dropships can only fire fire while in flight.
 rmc-dropship-weapons-fire-not-skilled = You don't have the training to fire this weapon!

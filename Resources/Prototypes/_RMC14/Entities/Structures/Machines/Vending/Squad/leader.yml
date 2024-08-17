@@ -99,8 +99,8 @@
         name: sandbags x25
         points: 10
         recommended: true
-    #- id: CMSignalFlarePack
-    #  points: 7
+      - id: RMCPackFlareCAS
+        points: 7
       - id: RMCPouchToolsFill
         points: 5
     #- id: CMWeldingGoggles
@@ -294,7 +294,7 @@
   - type: CMVendorBundle
     bundle:
     - RMCExplosiveBreachingCharge # TODO RMC14 plastic explosives
-    - CMPackFlareCAS
+    - RMCPackFlareCAS
     - RMCLaserDesignator
     - CMFireExtinguisher
 

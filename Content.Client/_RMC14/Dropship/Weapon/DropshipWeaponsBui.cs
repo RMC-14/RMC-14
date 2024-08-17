@@ -156,12 +156,12 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
 
             if (firstTarget > 0)
             {
-                previous = ButtonAction("^", _ => SendPredictedMessage(new DropshipTerminalWeaponsTargetsPreviousMsg(first)));
+                previous = ButtonAction("previous", _ => SendPredictedMessage(new DropshipTerminalWeaponsTargetsPreviousMsg(first)));
             }
 
             if (firstTarget + 4 < targets.Count - 1)
             {
-                next = ButtonAction("v", _ => SendPredictedMessage(new DropshipTerminalWeaponsTargetsNextMsg(first)));
+                next = ButtonAction("next", _ => SendPredictedMessage(new DropshipTerminalWeaponsTargetsNextMsg(first)));
             }
 
             var one = GetTargetData(firstTarget);

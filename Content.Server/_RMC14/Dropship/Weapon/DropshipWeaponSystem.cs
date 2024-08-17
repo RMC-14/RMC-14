@@ -1,5 +1,4 @@
-﻿using Content.Server.Light.Components;
-using Content.Shared._RMC14.Dropship.Weapon;
+﻿using Content.Shared._RMC14.Dropship.Weapon;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 
@@ -33,10 +32,5 @@ public sealed class DropshipWeaponSystem : SharedDropshipWeaponSystem
             return;
 
         _viewSubscriber.RemoveViewSubscriber(target, actor.Comp.PlayerSession);
-    }
-
-    protected override bool IsFlareBurning(EntityUid ent)
-    {
-        return TryComp(ent, out ExpendableLightComponent? light) && light.Activated;
     }
 }
