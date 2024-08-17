@@ -1,4 +1,4 @@
-using Content.Shared.Light.Components.ExpendableLightSystem;
+using Content.Shared.Light.Components.SharedExpendableLightComponent;
 using Content.Shared.Tag;
 
 namespace Content.Shared._RMC14.Light;
