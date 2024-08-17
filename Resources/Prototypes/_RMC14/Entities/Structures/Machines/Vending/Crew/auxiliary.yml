@@ -199,7 +199,7 @@
          amount: 4
        - id: RMCWeaponRevolverM44
          amount: 4
-       - id: CMWeaponPistolMK80 # TODO: Revisit this, I have no idea what pistols are renamed.
+       - id: CMWeaponPistolM1984
          amount: 4
       #- id: CMWeaponM82F # TODO RMC14 Flare Gun
       #  amount: 4
@@ -209,13 +209,13 @@
          amount: 20
        - id: RMCSpeedLoaderM44
          amount: 20
-       - id: CMMagazinePistolMK80
+       - id: CMMagazinePistolM1984
          amount: 20
-       #- id: CMMagazinePistolMK80AP # TODO RMC14 Pistol AP varieties
+       #- id: CMMagazinePistolM1984AP # TODO RMC14 Pistol AP varieties
        # amount: 14
        #- id: CMMagazinePistolMK80HP # TODO RMC14 Pistol AP varieties
        # amount: 14
-       #- id: CMMagazinePistolVP78 # Same rounds as the MK80 but I'm not sure why a different pistols mag is in here.
+       #- id: CMMagazinePistolVP78 # Same rounds as the M1984 but I'm not sure why a different pistols mag is in here.
      - name: Attachments
        entries:
        - id: RMCAttachmentRailFlashlight
