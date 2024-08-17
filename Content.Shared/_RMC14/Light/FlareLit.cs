@@ -1,4 +1,3 @@
-using Content.Server.SharedExpendableLightComponent.cs;
 using Content.Server.ExpendableLightSystem.cs;
 using Content.Shared.Tag;
 
