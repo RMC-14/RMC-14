@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
@@ -20,7 +21,9 @@ using Content.Shared.Popups;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 using static Content.Shared.Interaction.SharedInteractionSystem;
 using static Content.Shared.Physics.CollisionGroup;
 
@@ -28,11 +31,13 @@ namespace Content.Shared._RMC14.PowerLoader;
 
 public sealed class PowerLoaderSystem : EntitySystem
 {
+    [Dependency] private readonly SharedBuckleSystem _buckle = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedMoverController _mover = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -58,19 +63,20 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<PowerLoaderComponent, UserActivateInWorldEvent>(OnUserActivateInWorld);
         SubscribeLocalEvent<PowerLoaderComponent, PowerLoaderGrabDoAfterEvent>(OnGrabDoAfter);
         SubscribeLocalEvent<PowerLoaderComponent, GetUsedEntityEvent>(OnGetUsedEntity);
-        SubscribeLocalEvent<PowerLoaderComponent, DropshipDetachWeaponDoAfterEvent>(OnDetachWeapon);
 
-        SubscribeLocalEvent<DropshipWeaponPointComponent, InteractHandEvent>(OnPointInteractHand);
+        SubscribeLocalEvent<DropshipWeaponPointComponent, ActivateInWorldEvent>(OnPointActivateInWorld);
 
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, PickupAttemptEvent>(OnGrabbablePickupAttempt);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, AfterInteractEvent>(OnGrabbableAfterInteract);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, BeforeRangedInteractEvent>(OnGrabbableBeforeRangedInteract);
-        SubscribeLocalEvent<PowerLoaderGrabbableComponent, DropshipAttachWeaponDoAfterEvent>(OnDropshipAttachWeapon);
+        SubscribeLocalEvent<PowerLoaderGrabbableComponent, DropshipAttachDoAfterEvent>(OnDropshipAttachWeapon);
+        SubscribeLocalEvent<PowerLoaderGrabbableComponent, DropshipDetachDoAfterEvent>(OnDropshipDetachWeapon);
+
+        SubscribeLocalEvent<ActivePowerLoaderPilotComponent, PreventCollideEvent>(OnActivePilotPreventCollide);
     }
 
     private void OnPowerLoaderMapInit(Entity<PowerLoaderComponent> ent, ref MapInitEvent args)
     {
-        _container.EnsureContainer<Container>(ent, ent.Comp.ContainerId);
         _container.EnsureContainer<Container>(ent, ent.Comp.VirtualContainerId);
     }
 
@@ -133,6 +139,7 @@ public sealed class PowerLoaderSystem : EntitySystem
     {
         var buckle = args.Buckle;
         var relay = EnsureComp<InteractionRelayComponent>(buckle);
+        EnsureComp<ActivePowerLoaderPilotComponent>(buckle);
 
         _mover.SetRelay(buckle, ent);
         _interaction.SetRelay(buckle, ent, relay);
@@ -143,8 +150,10 @@ public sealed class PowerLoaderSystem : EntitySystem
     private void OnUnstrapped(Entity<PowerLoaderComponent> ent, ref UnstrappedEvent args)
     {
         var buckle = args.Buckle;
+        RemCompDeferred<ActivePowerLoaderPilotComponent>(buckle);
         RemCompDeferred<RelayInputMoverComponent>(buckle);
         RemCompDeferred<InteractionRelayComponent>(buckle);
+
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
         DeleteVirtuals(ent, buckle);
     }
@@ -169,66 +178,60 @@ public sealed class PowerLoaderSystem : EntitySystem
         if (args.Cancelled || args.Handled || args.Target is not { } target)
             return;
 
-        if (!CanPickupPopup(ent, target, out _))
-            return;
-
-        var container = _container.EnsureContainer<Container>(ent, ent.Comp.ContainerId);
-        _container.Insert(target, container);
-        SyncHands(ent);
+        PickUp(ent, target);
     }
 
     private void OnGetUsedEntity(Entity<PowerLoaderComponent> ent, ref GetUsedEntityEvent args)
     {
-        var container = _container.EnsureContainer<Container>(ent, ent.Comp.ContainerId);
         foreach (var buckled in GetBuckled(ent))
         {
             if (!TryComp(buckled, out HandsComponent? hands))
                 continue;
 
-            if (!_hands.TryGetActiveHand((buckled, hands), out var hand))
+            if (!_hands.TryGetActiveHand((buckled, hands), out var hand) ||
+                !TryComp(hand.HeldEntity, out VirtualItemComponent? virtualItem) ||
+                !TryComp(virtualItem.BlockingEntity, out PowerLoaderVirtualItemComponent? item))
+            {
                 continue;
+            }
 
-            var sorted = hands.SortedHands;
-            var index = sorted.IndexOf(hand.Name);
-            if (index == -1)
-                continue;
+            foreach (var contained in _hands.EnumerateHeld(ent))
+            {
+                if (contained == item.Grabbed)
+                {
+                    args.Used = item.Grabbed;
+                    return;
+                }
+            }
 
-            if (index >= container.ContainedEntities.Count)
-                continue;
-
-            args.Used = container.ContainedEntities[index];
+            args.Used = null;
             break;
         }
     }
 
-    private void OnDetachWeapon(Entity<PowerLoaderComponent> ent, ref DropshipDetachWeaponDoAfterEvent args)
-    {
-
-    }
-
-    private void OnPointInteractHand(Entity<DropshipWeaponPointComponent> ent, ref InteractHandEvent args)
+    private void OnPointActivateInWorld(Entity<DropshipWeaponPointComponent> ent, ref ActivateInWorldEvent args)
     {
         if (!TryComp(args.User, out PowerLoaderComponent? loader))
             return;
 
-        BaseContainer? container;
-        if (_container.TryGetContainer(ent, ent.Comp.AmmoContainerSlotId, out var ammoContainer) &&
-            ammoContainer.ContainedEntities.Count > 0)
-        {
-            container = ammoContainer;
-            return;
-        }
-        else if (_container.TryGetContainer(ent, ent.Comp.WeaponContainerSlotId, out var weaponContainer) &&
-                 weaponContainer.ContainedEntities.Count > 0)
-        {
-            container = weaponContainer;
-        }
-        else
+        args.Handled = true;
+
+        var user = new Entity<PowerLoaderComponent?>(args.User, loader);
+        var target = args.Target;
+        if (!CanDetachPopup(ref user, args.Target, out var delay, out var slot) ||
+            slot.ContainedEntity is not { } contained)
         {
             return;
         }
 
-        args.Handled = true;
+        var ev = new DropshipDetachDoAfterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, args.User, delay, ev, contained, target)
+        {
+            BreakOnMove = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+        };
+
+        _doAfter.TryStartDoAfter(doAfter);
     }
 
     private void OnGrabbablePickupAttempt(Entity<PowerLoaderGrabbableComponent> ent, ref PickupAttemptEvent args)
@@ -247,8 +250,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         if (!TryComp(user, out PowerLoaderComponent? loader))
             return;
 
-        var container = _container.EnsureContainer<Container>(user, loader.ContainerId);
-        if (!container.ContainedEntities.Contains(ent))
+        if (!_hands.IsHolding(user, ent))
             return;
 
         var source = ent.Owner.ToCoordinates();
@@ -280,7 +282,9 @@ public sealed class PowerLoaderSystem : EntitySystem
             return;
         }
 
-        if (_rmcMap.IsTileBlocked(coords, Impassable | InteractImpassable | MobLayer))
+        var group = Impassable | MidImpassable | HighImpassable | InteractImpassable | MobLayer;
+        if (_rmcMap.IsTileBlocked(coords, group) ||
+            _rmcMap.TileHasStructure(coords))
         {
             var msg = Loc.GetString("rmc-power-loader-cant-drop-occupied", ("drop", ent));
             foreach (var buckled in GetBuckled((user, loader)))
@@ -292,8 +296,11 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
 
         var used = args.Used;
-        _container.Remove(used, container, destination: coords, localRotation: Angle.Zero);
-        SyncHands((user, loader));
+        if (_hands.TryDrop(user, used, coords, false))
+        {
+            _transform.AnchorEntity((used, Transform(used)));
+            SyncHands((user, loader));
+        }
     }
 
     private void OnGrabbableBeforeRangedInteract(Entity<PowerLoaderGrabbableComponent> ent, ref BeforeRangedInteractEvent args)
@@ -308,7 +315,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         if (!CanAttachPopup(ref user, target, used, out var delay, out _))
             return;
 
-        var ev = new DropshipAttachWeaponDoAfterEvent();
+        var ev = new DropshipAttachDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, target, used)
         {
             BreakOnMove = true,
@@ -317,7 +324,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
-    private void OnDropshipAttachWeapon(Entity<PowerLoaderGrabbableComponent> ent, ref DropshipAttachWeaponDoAfterEvent args)
+    private void OnDropshipAttachWeapon(Entity<PowerLoaderGrabbableComponent> ent, ref DropshipAttachDoAfterEvent args)
     {
         if (args.Cancelled ||
             args.Handled ||
@@ -335,6 +342,46 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         if (user.Comp != null)
             SyncHands((user, user.Comp));
+    }
+
+    private void OnDropshipDetachWeapon(Entity<PowerLoaderGrabbableComponent> ent, ref DropshipDetachDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled || args.Target is not { } target)
+            return;
+
+        args.Handled = true;
+
+        var user = new Entity<PowerLoaderComponent?>(args.User, null);
+        if (!CanDetachPopup(ref user, target, out _, out var slot) ||
+            slot.ContainedEntity is not { } contained)
+        {
+            return;
+        }
+
+        _container.Remove(contained, slot);
+
+        // TODO RMC14 partial ammo transfers between boxes, only delete if 0
+        if (TryComp(contained, out DropshipAmmoComponent? ammo) &&
+            ammo.Rounds < ammo.RoundsPerShot)
+        {
+            QueueDel(contained);
+
+            var msg = Loc.GetString("rmc-power-loader-discard-empty", ("ammo", contained));
+            foreach (var buckled in GetBuckled((user, user.Comp)))
+            {
+                _popup.PopupClient(msg, buckled, PopupType.Medium);
+            }
+        }
+        else if (user.Comp != null)
+        {
+            PickUp((user, user.Comp), contained);
+            SyncHands((user, user.Comp));
+        }
+    }
+
+    private void OnActivePilotPreventCollide(Entity<ActivePowerLoaderPilotComponent> ent, ref PreventCollideEvent args)
+    {
+        args.Cancelled = true;
     }
 
     private bool CanAttachPopup(
@@ -396,6 +443,63 @@ public sealed class PowerLoaderSystem : EntitySystem
         return false;
     }
 
+    private bool CanDetachPopup(
+        ref Entity<PowerLoaderComponent?> user,
+        EntityUid target,
+        out TimeSpan delay,
+        [NotNullWhen(true)] out ContainerSlot? slot)
+    {
+        delay = default;
+        slot = default;
+        if (!Resolve(user, ref user.Comp, false) ||
+            !TryComp(target, out DropshipWeaponPointComponent? point))
+        {
+            return false;
+        }
+
+        if (!HasFreeHands(user))
+        {
+            var msg = Loc.GetString("rmc-power-loader-cant-grab-full", ("mech", user.Owner));
+            foreach (var buckled in GetBuckled((user, user.Comp)))
+            {
+                _popup.PopupClient(msg, target, buckled, PopupType.SmallCaution);
+            }
+
+            return false;
+        }
+
+        if (_container.TryGetContainer(target, point.AmmoContainerSlotId, out var ammoContainer) &&
+            ammoContainer.ContainedEntities.Count > 0)
+        {
+            slot = (ContainerSlot) ammoContainer;
+            delay = CompOrNull<DropshipAmmoComponent>(slot.ContainedEntity)?.AttachDelay ?? TimeSpan.Zero;
+        }
+        else if (_container.TryGetContainer(target, point.WeaponContainerSlotId, out var weaponContainer) &&
+                 weaponContainer.ContainedEntities.Count > 0)
+        {
+            slot = (ContainerSlot) weaponContainer;
+            delay = CompOrNull<DropshipWeaponComponent>(slot.ContainedEntity)?.AttachDelay ?? TimeSpan.Zero;
+        }
+
+        if (slot == null)
+        {
+            foreach (var buckled in GetBuckled((user, user.Comp)))
+            {
+                var msg = Loc.GetString("rmc-power-loader-nothing-attached");
+                _popup.PopupClient(msg, user, buckled, PopupType.SmallCaution);
+            }
+
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool HasFreeHands(Entity<PowerLoaderComponent?> user)
+    {
+        return _hands.EnumerateHands(user).Any(h => h.HeldEntity == null);
+    }
+
     private bool CanPickupPopup(
         Entity<PowerLoaderComponent> loader,
         Entity<PowerLoaderGrabbableComponent?> grabbable,
@@ -405,8 +509,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         if (!Resolve(grabbable, ref grabbable.Comp, false))
             return false;
 
-        var container = _container.EnsureContainer<Container>(loader, loader.Comp.ContainerId);
-        if (container.ContainedEntities.Count >= loader.Comp.ContainerLimit)
+        if (!HasFreeHands((loader, loader)))
         {
             var msg = Loc.GetString("rmc-power-loader-cant-grab-full", ("mech", loader));
             foreach (var buckled in GetBuckled(loader))
@@ -446,29 +549,46 @@ public sealed class PowerLoaderSystem : EntitySystem
             }
         }
 
-        var container = _container.EnsureContainer<Container>(loader, loader.Comp.ContainerId);
-        var toSpawn = new List<EntProtoId<VirtualItemComponent>>();
-        foreach (var contained in container.ContainedEntities)
+        var toSpawn = new List<(EntityUid? Grabbed, EntProtoId<VirtualItemComponent> Virtual, string? Name, HandLocation Location)>();
+        foreach (var hand in _hands.EnumerateHands(loader))
         {
-            if (_powerLoaderGrabbableQuery.TryComp(contained, out var grabbable))
-                toSpawn.Add(virtualContainer.ContainedEntities.Count == 0 ? grabbable.VirtualRight : grabbable.VirtualLeft);
+            if (hand.HeldEntity is not { } held)
+            {
+                var virtualSide = hand.Location == HandLocation.Right
+                    ? loader.Comp.VirtualRight
+                    : loader.Comp.VirtualLeft;
+
+                toSpawn.Add((null, virtualSide, null, hand.Location));
+                continue;
+            }
+
+            if (_powerLoaderGrabbableQuery.TryComp(held, out var grabbable))
+            {
+                var id = hand.Location == HandLocation.Right ? grabbable.VirtualRight : grabbable.VirtualLeft;
+                var name = Name(held);
+                toSpawn.Add((held, id, name, hand.Location));
+            }
         }
 
-        if (toSpawn.Count == 0)
-            toSpawn.Add(loader.Comp.VirtualRight);
-
-        if (toSpawn.Count == 1)
-            toSpawn.Add(loader.Comp.VirtualLeft);
-
-        foreach (var spawn in toSpawn)
+        foreach (var (grabbed, spawnVirtual, name, location) in toSpawn)
         {
-            if (!TrySpawnInContainer(spawn, loader, loader.Comp.VirtualContainerId, out var virtualEnt))
+            if (!TrySpawnInContainer(spawnVirtual, loader, loader.Comp.VirtualContainerId, out var virtualEnt))
                 continue;
+
+            var loaderVirtual = EnsureComp<PowerLoaderVirtualItemComponent>(virtualEnt.Value);
+            loaderVirtual.Grabbed = grabbed;
+            Dirty(virtualEnt.Value, loaderVirtual);
+
+            if (name != null)
+                _metaData.SetEntityName(virtualEnt.Value, name);
 
             foreach (var buckled in GetBuckled(loader))
             {
-                if (_virtualItem.TrySpawnVirtualItemInHand(virtualEnt.Value, buckled, out var virt))
+                if (_hands.EnumerateHands(buckled).TryFirstOrDefault(h => h.Location == location, out var hand) &&
+                    _virtualItem.TrySpawnVirtualItemInHand(virtualEnt.Value, buckled, out var virt, empty: hand))
+                {
                     EnsureComp<UnremoveableComponent>(virt.Value);
+                }
             }
         }
     }
@@ -490,6 +610,39 @@ public sealed class PowerLoaderSystem : EntitySystem
                 continue;
 
             DeleteVirtuals(loader, buckled);
+        }
+    }
+
+    private void PickUp(Entity<PowerLoaderComponent> loader, EntityUid target)
+    {
+        if (!CanPickupPopup(loader, target, out _))
+            return;
+
+        foreach (var buckled in GetBuckled(loader))
+        {
+            if (_hands.GetActiveHand(buckled) is not { } active)
+                continue;
+
+            if (_hands.EnumerateHands(loader).TryFirstOrDefault(h => h.Location == active.Location, out var loaderHand))
+            {
+                _hands.DoPickup(loader, loaderHand, target);
+                SyncHands(loader);
+                return;
+            }
+        }
+    }
+
+    public override void Update(float frameTime)
+    {
+        var pilots = EntityQueryEnumerator<ActivePowerLoaderPilotComponent>();
+        while (pilots.MoveNext(out var uid, out _))
+        {
+            if (!TryComp(uid, out BuckleComponent? buckle) ||
+                !HasComp<PowerLoaderComponent>(buckle.BuckledTo))
+            {
+                _buckle.Unbuckle(uid, null);
+                RemCompDeferred<ActivePowerLoaderPilotComponent>(uid);
+            }
         }
     }
 }

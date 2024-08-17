@@ -19,12 +19,6 @@ public sealed partial class PowerLoaderComponent : Component
     public float SpeedPerSkill = 1.2f;
 
     [DataField, AutoNetworkedField]
-    public string ContainerId = "rmc_power_loader_cargo";
-
-    [DataField, AutoNetworkedField]
-    public int ContainerLimit = 2;
-
-    [DataField, AutoNetworkedField]
     public string VirtualContainerId = "rmc_power_loader_cargo_virtual";
 
     [DataField, AutoNetworkedField]

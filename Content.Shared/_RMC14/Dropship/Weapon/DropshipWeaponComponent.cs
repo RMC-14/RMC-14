@@ -24,5 +24,5 @@ public sealed partial class DropshipWeaponComponent : Component
     public bool FireInTransport;
 
     [DataField, AutoNetworkedField]
-    public SkillWhitelist Skills;
+    public SkillWhitelist? Skills;
 }

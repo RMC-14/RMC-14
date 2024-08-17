@@ -419,7 +419,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         var actor = args.Actor;
         ref var screen = ref args.First ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
         if (screen.Weapon is not { } netWeapon)
+        {
+            var msg = Loc.GetString("rmc-dropship-weapons-fire-no-weapon");
+            _popup.PopupClient(msg, actor, PopupType.SmallCaution);
             return;
+        }
 
         if (!TryGetEntity(netWeapon, out var weapon) ||
             !TryComp(weapon, out DropshipWeaponComponent? weaponComp))
@@ -432,9 +436,13 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         Entity<DropshipComponent> dropship = default;
         if (!_casDebug)
         {
-            if (!_dropship.TryGetGridDropship(weapon.Value, out dropship) ||
-                !HasComp<FTLComponent>(dropship))
+            if (!_dropship.TryGetGridDropship(weapon.Value, out dropship))
+                return;
+
+            if (!HasComp<FTLComponent>(dropship))
             {
+                var msg = Loc.GetString("rmc-dropship-weapons-fire-not-flying");
+                _popup.PopupClient(msg, actor, PopupType.SmallCaution);
                 return;
             }
         }
@@ -458,19 +466,36 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             return;
         }
 
+        if (!_casDebug && weaponComp.Skills != null && !_skills.HasSkills(actor, weaponComp.Skills))
+        {
+            var msg = Loc.GetString("rmc-laser-designator-not-skilled");
+            _popup.PopupClient(msg, actor);
+            return;
+        }
+
         if (!_casDebug &&
             !weaponComp.FireInTransport &&
             !HasComp<DropshipInFlyByComponent>(dropship))
         {
+            // TODO RMC14 fire mission only weapons
             return;
         }
 
         var time = _timing.CurTime;
         if (time < weaponComp.NextFireAt)
+        {
+            var msg = Loc.GetString("rmc-dropship-weapons-fire-cooldown", ("weapon", weapon));
+            _popup.PopupClient(msg, actor);
             return;
+        }
 
-        if (!TryGetWeaponAmmo((weapon.Value, weaponComp), out var ammo))
+        if (!TryGetWeaponAmmo((weapon.Value, weaponComp), out var ammo) ||
+            ammo.Comp.Rounds < ammo.Comp.RoundsPerShot)
+        {
+            var msg = Loc.GetString("rmc-dropship-weapons-fire-no-ammo", ("weapon", weapon));
+            _popup.PopupClient(msg, actor);
             return;
+        }
 
         if (ammo.Comp.Rounds < ammo.Comp.RoundsPerShot)
             return;

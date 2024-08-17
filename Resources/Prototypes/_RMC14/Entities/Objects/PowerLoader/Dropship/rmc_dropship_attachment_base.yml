@@ -3,10 +3,14 @@
   parent: CMBaseStructure
   id: RMCDropshipAttachmentBase
   components:
+  - type: Transform
+    anchored: true
   - type: Corrodible
     isCorrodible: false
   - type: Sprite
     sprite: _RMC14/Objects/dropship_attachments.rsi
+  - type: Physics
+    bodyType: Dynamic
   - type: Fixtures
     fixtures:
       fix1:
@@ -37,4 +41,5 @@
   - type: PowerLoaderGrabbable
     virtualRight: RMCVirtualDropshipGearRight
     virtualLeft: RMCVirtualDropshipGearLeft
+  - type: Item
 # TODO RMC14 make these climbable when we have single climb technology

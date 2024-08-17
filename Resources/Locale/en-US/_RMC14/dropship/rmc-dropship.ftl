@@ -50,6 +50,12 @@ rmc-dropship-weapons-night-vision-off = NV-OFF
 
 rmc-dropship-weapons-weapon = WEAPON
 
+rmc-dropship-weapons-fire-no-weapon = No weapon selected.
+rmc-dropship-weapons-fire-not-flying = Dropships can only fire fire while in flight.
+rmc-dropship-weapons-fire-not-skilled = You don't have the training to fire this weapon!
+rmc-dropship-weapons-fire-no-ammo = {$weapon} has no ammo.
+rmc-dropship-weapons-fire-cooldown = {$weapon} just fired, wait for it to cool down.
+
 rmc-dropship-fabricator-title = Part Fabricator
 rmc-dropship-fabricator-points = Points: {$points}
 rmc-dropship-fabricator-equipment = [bold]Equipment[/bold]

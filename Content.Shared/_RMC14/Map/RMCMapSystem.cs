@@ -3,8 +3,10 @@ using Content.Shared.Coordinates;
 using Content.Shared.Directions;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
+using Content.Shared.Tag;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Map;
 
@@ -12,8 +14,11 @@ public sealed class RMCMapSystem : EntitySystem
 {
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+
+    private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
 
     private EntityQuery<MapGridComponent> _mapGridQuery;
 
@@ -74,5 +79,17 @@ public sealed class RMCMapSystem : EntitySystem
             return false;
 
         return _turf.IsTileBlocked(turf.Value, group);
+    }
+
+    public bool TileHasStructure(EntityCoordinates coordinates)
+    {
+        var anchored = GetAnchoredEntitiesEnumerator(coordinates);
+        while (anchored.MoveNext(out var uid))
+        {
+            if (_tag.HasTag(uid, StructureTag))
+                return true;
+        }
+
+        return false;
     }
 }

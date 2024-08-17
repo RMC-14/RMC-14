@@ -4,4 +4,4 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.PowerLoader;
 
 [Serializable, NetSerializable]
-public sealed partial class DropshipAttachWeaponDoAfterEvent : SimpleDoAfterEvent;
+public sealed partial class DropshipAttachDoAfterEvent : SimpleDoAfterEvent;
