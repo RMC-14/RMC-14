@@ -1,14 +1,26 @@
 ﻿<Document>
   # Marine Law
-  Command and MP are required to both enforce the law and abide by it.
-  Should MPs disagree on cases, Marine Law rank structure must be followed.
+
+  ## Basics
+  - Marine law applies to all personnel in the vicinity of the operation or aboard the UNMC warship, including hostile factions and other organizations not explicitly excempt.
+  - Command and MP are required to both enforce the law and abide by it.
+  - Should MPs disagree on cases, Marine Law rank structure must be followed.
   - Provost > Commanding Officer > CMP > Warden > MP
-  - [textlink="ODefinitions" link="CMMarineLawDefinitions"]
-  - [textlink="XImmunities" link=""]
-  - [textlink="OProcedures" link="CMMarineLawProcedures"]
-  - [textlink="XCrimes" link=""]
-  - [textlink="XPrisoner Rights" link=""]
-  - [textlink="XSpecial Circumstances" link=""]
-  - [textlink="XSynthetics" link=""]
-  - [textlink="XCommanding Officer Provisions" link=""]
+  - On UNMC warships and operations, the law is enforced by the [color=#ff000d][bold]MP[/bold][/color]s and [color=#8B0000][bold]Chief MP[/bold][/color], and they operate independently from the normal command structure ONLY in matters related to the enforcement of the Law.
+  - The [color=#00CBFE][bold]Commanding Officer[/bold][/color] of the warship has the final say on law enforcement within their operational area unless overseen by higher officials of the [color=#ffa500][bold]Provost Marshal Office[/bold][/color] or High Command.
+  - [color=#ff000d][bold]MP[/bold][/color] may, at their discretion, ignore Minor Crimes unless they are ordered to enforce one.
+  - [color=#ff000d][bold]MP[/bold][/color] cannot be ordered to ignore Minor Crimes.
+  - [color=#ff000d][bold]MP[/bold][/color] breaking the law in any capacity cannot be ignored.
+
+
+  ## Law and Related
+  - [textlink="Definitions" link="CMMarineLawDefinitions"]
+  - [textlink="Procedures" link="CMMarineLawProcedures"]
+  - [textlink="Crimes" link=""]
+  - [textlink="Prisoner Rights" link=""]
+  - [textlink="Special Circumstances" link=""]
+  - [textlink="Synthetics" link=""]
+  - [textlink="Commanding Officer Provisions" link=""]
+
+  ## Standard Operating Procedure
 </Document>
