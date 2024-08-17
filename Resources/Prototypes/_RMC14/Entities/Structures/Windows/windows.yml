@@ -367,8 +367,8 @@
                 min: 1
                 max: 1
           - !type:ChangeConstructionNodeBehavior
-            node: windowFrameWoodReinforced
+            node: windowFrameWood
   - type: RMCWallExplosionDeletable
   - type: Construction
-    graph: RMCWindowWoodReinforced
+    graph: RMCWindowWood
     node: windowWoodReinforced
