@@ -179,6 +179,9 @@
       whitelist:
         tags:
         - Flare
+      blacklist:
+        tags: 
+        - Trash
   - type: Sprite
     sprite: _RMC14/Objects/Storage/boxes.rsi
     layers:
