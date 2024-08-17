@@ -54,9 +54,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly SharedXenoHiveSystem _xenoHive = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-	[Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
-	private TimeSpan _evolutionPointsRequireOvipositorAfter;
+    private TimeSpan _evolutionPointsRequireOvipositorAfter;
     private TimeSpan _evolutionAccumulatePointsBefore;
 
     private readonly HashSet<EntityUid> _climbable = new();
