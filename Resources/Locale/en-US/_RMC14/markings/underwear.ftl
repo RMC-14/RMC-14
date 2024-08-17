@@ -1,6 +1,9 @@
 marking-RMCUnderwearBoxers = Boxers
 marking-RMCUnderwearBoxers-c_boxers = Boxers
 
+marking-RMCUnderwearBoxersBlue = Blue Boxers
+marking-RMCUnderwearBoxersBlue-d_boxers = Blue Boxers
+
 marking-RMCUnderwearBriefs = Briefs
 marking-RMCUnderwearBriefs-c_briefs = Briefs
 
