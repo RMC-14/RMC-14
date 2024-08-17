@@ -12,7 +12,10 @@ public sealed partial class DropshipNavigationComputerComponent : Component
     public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillPilot";
 
     [DataField, AutoNetworkedField]
-    public int SkillLevel = 2;
+    public int MultiplierSkillLevel = 2;
+
+    [DataField, AutoNetworkedField]
+    public int FlyBySkillLevel = 2;
 
     [DataField, AutoNetworkedField]
     public float SkillFlyByMultiplier = 1.5f;

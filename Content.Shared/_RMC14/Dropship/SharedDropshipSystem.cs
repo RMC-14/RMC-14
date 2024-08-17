@@ -3,6 +3,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -25,6 +26,7 @@ public abstract class SharedDropshipSystem : EntitySystem
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
@@ -214,11 +216,12 @@ public abstract class SharedDropshipSystem : EntitySystem
     private void OnDropshipNavigationLaunchMsg(Entity<DropshipNavigationComputerComponent> ent,
         ref DropshipNavigationLaunchMsg args)
     {
-        _ui.CloseUi(ent.Owner, DropshipNavigationUiKey.Key, args.Actor);
+        var user = args.Actor;
+        _ui.CloseUi(ent.Owner, DropshipNavigationUiKey.Key, user);
 
         if (!TryGetEntity(args.Target, out var destination))
         {
-            Log.Warning($"{ToPrettyString(args.Actor)} tried to launch to invalid dropship destination {args.Target}");
+            Log.Warning($"{ToPrettyString(user)} tried to launch to invalid dropship destination {args.Target}");
             return;
         }
 
@@ -229,7 +232,7 @@ public abstract class SharedDropshipSystem : EntitySystem
             return;
         }
 
-        FlyTo(ent, destination.Value, args.Actor);
+        FlyTo(ent, destination.Value, user);
     }
 
     private void OnHijackerDestinationChosenMsg(Entity<DropshipNavigationComputerComponent> ent,

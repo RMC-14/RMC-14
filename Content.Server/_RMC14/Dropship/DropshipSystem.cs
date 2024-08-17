@@ -17,6 +17,7 @@ using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.Doors.Components;
 using Content.Shared.Interaction;
+using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Robust.Server.Audio;
@@ -36,6 +37,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
     [Dependency] private readonly DoorSystem _door = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -181,7 +183,17 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         var newDestination = CompOrNull<DropshipDestinationComponent>(destination);
         if (dropship.Destination == destination)
+        {
+            if (user != null && !_skills.HasSkill(user.Value, computer.Comp.Skill, computer.Comp.FlyBySkillLevel))
+            {
+                var msg = Loc.GetString("rmc-dropship-flyby-no-skill");
+                _popup.PopupEntity(msg, user.Value, user.Value, PopupType.MediumCaution);
+                return false;
+            }
+
             EnsureComp<DropshipInFlyByComponent>(dropshipId.Value);
+        }
+
         else if (!hijack && newDestination != null && newDestination.Ship != null)
         {
             Log.Warning($"{ToPrettyString(user)} tried to launch to occupied dropship destination {ToPrettyString(destination)}");
@@ -207,7 +219,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
             }
             else
             {
-                var hasSkill = user != null && _skills.HasSkill(user.Value, computer.Comp.Skill, computer.Comp.SkillLevel);
+                var hasSkill = user != null && _skills.HasSkill(user.Value, computer.Comp.Skill, computer.Comp.MultiplierSkillLevel);
                 var rechargeMultiplier = hasSkill ? computer.Comp.SkillRechargeMultiplier : 1f;
                 if (dropship.Destination == destination)
                 {

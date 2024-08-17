@@ -59,6 +59,8 @@ rmc-dropship-weapons-fire-not-skilled = You don't have the training to fire this
 rmc-dropship-weapons-fire-no-ammo = {$weapon} has no ammo.
 rmc-dropship-weapons-fire-cooldown = {$weapon} just fired, wait for it to cool down.
 
+rmc-dropship-flyby-no-skill = You don't have the skill to perform a flyby.
+
 rmc-dropship-fabricator-title = Part Fabricator
 rmc-dropship-fabricator-points = Points: {$points}
 rmc-dropship-fabricator-equipment = [bold]Equipment[/bold]
