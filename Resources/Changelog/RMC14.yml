@@ -1,17 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed parasites being able to melee attack and tackle.
-    type: Fix
-  - message: Fixed parasites being able to infect dead marines.
-    type: Fix
-  - message: Leaping xenos can now only hit a max of one marine in a single leap.
-    type: Tweak
-  id: 85
-  time: '2024-04-28T00:55:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2034
-- author: DrSmugleaf
-  changes:
   - message: Chestbursters can no longer burst out of dead marines.
     type: Fix
   id: 86
@@ -4432,5 +4421,14 @@
   id: 584
   time: '2024-08-18T12:10:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3708
+- author: crystalHex
+  changes:
+  - message: Added bipods to requisitions vendor.
+    type: Tweak
+  - message: Added missing attachment crates to requisitions catalog.
+    type: Tweak
+  id: 585
+  time: '2024-08-18T20:07:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3709
 Name: RMC14
 Order: -1
