@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Fixed burning marines and xenos being able to set others on fire.
-    type: Fix
-  id: 78
-  time: '2024-04-26T10:01:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2020
 - author: DrSmugleaf
   changes:
   - message: Fixed larva getting stuck when evolving under tables and doors.
@@ -4156,7 +4149,8 @@
   url: https://github.com/RMC-14/RMC-14/pull/3650
 - author: Vermidia
   changes:
-  - message: Barricades can now only be hit a maximum of three times per second by xenos. Same for resin structures and marines.
+  - message: Barricades can now only be hit a maximum of three times per second by
+      xenos. Same for resin structures and marines.
     type: Fix
   id: 563
   time: '2024-08-18T04:11:53.0000000+00:00'
@@ -4282,5 +4276,14 @@
   id: 577
   time: '2024-08-18T05:03:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3626
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenonids not being able to open hypersleep chambers, body bags,
+      closets, morgues and crematoriums. Xehonids still cannot close them nor be inserted
+      into them.
+    type: Fix
+  id: 578
+  time: '2024-08-18T05:21:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3703
 Name: RMC14
 Order: -1
