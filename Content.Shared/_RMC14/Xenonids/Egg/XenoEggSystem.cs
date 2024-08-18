@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Hands;
+using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -18,6 +18,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StepTrigger.Components;
 using Content.Shared.StepTrigger.Systems;
+using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -40,13 +41,14 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
-	[Dependency] private readonly CMHandsSystem _rmcHands = default!;
+    [Dependency] private readonly CMHandsSystem _rmcHands = default!;
 
 	private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
 	private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
@@ -434,6 +436,7 @@ public sealed class XenoEggSystem : EntitySystem
         }
 
         _parasite.Infect((spawned.Value, parasite), tripper, force: true);
+        _stun.TryParalyze(tripper, egg.Comp.KnockdownTime, true);
         return true;
     }
 
