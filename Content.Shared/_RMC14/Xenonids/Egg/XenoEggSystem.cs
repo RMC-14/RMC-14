@@ -50,8 +50,8 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly CMHandsSystem _rmcHands = default!;
 
-	  private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
-	  private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
+	private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
+	private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
 
     private EntityQuery<StepTriggerComponent> _stepTriggerQuery;
 
