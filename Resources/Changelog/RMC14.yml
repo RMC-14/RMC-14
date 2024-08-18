@@ -1,33 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: The xeno Queen can no longer catch fire.
-    type: Add
-  - message: The xeno Ravager is now immune to damage dealt by catching fire.
-    type: Add
-  - message: Xenos can now drop and roll to resist fire by clicking the fire status
-      alert.
-    type: Add
-  id: 68
-  time: '2024-04-21T04:30:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1291
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xeno construction range being inconsistent depending on where you
-      click on a tile.
-    type: Fix
-  - message: Increased xeno construction range from 1 tile to 1.9 tiles.
-    type: Tweak
-  - message: Xeno construction now require weeds on the tile.
-    type: Tweak
-  - message: If a location isn't valid for xeno construction, the action will remain
-      selected but show a popup for why it is not valid.
-    type: Tweak
-  id: 69
-  time: '2024-04-22T03:48:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1293
-- author: DrSmugleaf
-  changes:
   - message: Medically-unskilled marines now have a 3 second do after delay when using
       auto-injectors, except for the emergency one.
     type: Tweak
@@ -4279,5 +4252,29 @@
   id: 567
   time: '2024-08-18T04:17:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3649
+- author: diraven
+  changes:
+  - message: Xeno acid corrosion system was reworked and extended.
+    type: Add
+  - message: Flares now lose their burn time rather than disappear after a set amount
+      of time if corroded.
+    type: Add
+  - message: Barricades are now damaged over time rather than disappear after a set
+      amount of time if corroded.
+    type: Add
+  - message: Slightly nerfed acid corrosion times for them to be closer to CM13 values.
+    type: Tweak
+  id: 568
+  time: '2024-08-18T04:20:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3062
+- author: Vermidia
+  changes:
+  - message: Larva auto-burst time has been upped to 60 (from 20) seconds
+    type: Fix
+  - message: Larva can now move to burst immediately from their host
+    type: Fix
+  id: 569
+  time: '2024-08-18T04:21:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3700
 Name: RMC14
 Order: -1
