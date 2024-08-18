@@ -101,7 +101,7 @@
     TimerTrigger: 4
     ProximitySensor: 4
     RemoteSignaller: 4
-    Bucket: 6
+    RMCBucket: 6
     CMStockPartMatterBin: 8
     CMStockPartManipulatorMicro: 8
     CMStockPartCapacitor: 8

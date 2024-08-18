@@ -1,21 +1,20 @@
 using Content.Shared._RMC14.Chemistry;
-using Content.Shared._RMC14.Stealth;
-using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared._RMC14.NightVision;
+using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.Actions;
-using Content.Shared.Whitelist;
+using Content.Shared.Explosion.Components.OnTrigger;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
-using Content.Shared.Interaction.Events;
-using Content.Shared.Explosion.Components.OnTrigger;
-using Robust.Shared.Timing;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Armor.ThermalCloak;
 
@@ -76,6 +75,9 @@ public sealed class ThermalCloakSystem : EntitySystem
 
     private void OnEquipped(Entity<ThermalCloakComponent> ent, ref GotEquippedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (!_inventory.InSlotWithFlags((ent, null, null), SlotFlags.BACK))
             return;
 
@@ -103,6 +105,7 @@ public sealed class ThermalCloakSystem : EntitySystem
         {
             var activeInvisibility = EnsureComp<EntityActiveInvisibleComponent>(user);
             activeInvisibility.Opacity = ent.Comp.Opacity;
+            Dirty(user, activeInvisibility);
 
             ent.Comp.Enabled = true;
             turnInvisible.Enabled = true;

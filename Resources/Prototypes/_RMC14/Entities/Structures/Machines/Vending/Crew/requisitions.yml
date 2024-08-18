@@ -223,8 +223,8 @@
         amount: 2
       #- id: Rangefinder
       #   amount: 1
-      #- id: Laser Designator
-      #  amount: 1
+      - id: RMCLaserDesignator
+        amount: 1
       #- id: Welding Goggles
       #  amount: 3
       - id: CMFireExtinguisherPortable

@@ -63,7 +63,7 @@
         Brute: 40
   - type: CrusherShield
   - type: XenoShield
-  - type: Tackle
+  - type: Tackle # min: 2, max: 6
     threshold: 5
     stun: 5
     chance: 0.25

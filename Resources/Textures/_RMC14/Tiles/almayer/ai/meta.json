@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/29bfb8501be93dde3c2eececfcf60ae82b0e32df/icons/turf/floors/aicore.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "ai_floor1"
+    },
+    {
+      "name": "ai_floor2",
+      "delays": [
+        [
+          0.2,
+          0.4,
+          0.2,
+          0.7,
+          0.2,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "ai_floor3",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.5,
+          0.4,
+          0.2,
+          0.7
+        ]
+      ]
+    },
+    {
+      "name": "ai_plates"
+    },
+    {
+      "name": "ai_silver",
+      "directions": 8
+    },
+    {
+      "name": "ai_silvercorner",
+      "directions": 4
+    },
+    {
+      "name": "ai_arrow",
+      "directions": 4
+    },
+    {
+      "name": "ai_cargo"
+    },
+    {
+      "name": "w_ai_floor1"
+    },
+    {
+      "name": "w_ai_floor2",
+      "delays": [
+        [
+          0.2,
+          0.4,
+          0.2,
+          0.7,
+          0.2,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "w_ai_floor3",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.5,
+          0.4,
+          0.2,
+          0.7
+        ]
+      ]
+    },
+    {
+      "name": "w_ai_plates"
+    },
+    {
+      "name": "w_ai_silver",
+      "directions": 8
+    },
+    {
+      "name": "w_ai_silvercorner",
+      "directions": 4
+    },
+    {
+      "name": "w_ai_arrow",
+      "directions": 4
+    },
+    {
+      "name": "w_ai_cargo"
+    },
+    {
+      "name": "plating"
+    },
+    {
+      "name": "ai_catwalk"
+    },
+    {
+      "name": "ai_plating_catwalk"
+    },
+    {
+      "name": "w_ai_catwalk"
+    },
+    {
+      "name": "w_ai_plating_catwalk"
+    }
+  ]
+}
