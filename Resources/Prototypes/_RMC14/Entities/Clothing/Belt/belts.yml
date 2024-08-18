@@ -288,6 +288,59 @@
 
 - type: entity
   parent: CMBeltMarine
+  id: CMBeltSmartGunOperatorPistol
+  name: M802 pattern smart gun operator sidearm rig
+  description: The M802 is a limited-issue mark of USCM load-bearing equipment, designed to carry smartgun ammunition and a sidearm.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator_pistol.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m1984 # TODO RMC14 per-gun underlay
+      offset: 0.15625, 0.0
+      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      visible: false
+    - state: icon-front
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator_pistol.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,7,1 # 4 slots
+    whitelist:
+      tags:
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - RMCMagazineSmartGun
+#      - # TODO RMC14 shotgun handfuls
+      - Flare
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCMagazineSmartGun
+  - type: ContainerContainer
+    containers:
+      pouch: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      pouch:
+        name: Sidearm holster
+#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
+#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        whitelist:
+          tags:
+          - Sidearm
+  - type: CMHolster
+  - type: CMItemSlots
+
+- type: entity
+  parent: CMBeltMarine
   id: RMCBeltGrenade
   name: M276 pattern M40 grenade rig
   description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is designed to carry up to 12 of the M40 series of grenades.
@@ -342,3 +395,176 @@
   - type: Tag
     tags:
     - RMCSmartPistolHolster
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltHolsterPistol
+  name: M276 pattern general pistol holster rig
+  description: The M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m1984 # TODO RMC14 per-gun underlay
+      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      visible: false
+    - state: icon-front
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+  - type: Storage # holds up to 6 mags plus gun
+    maxItemSize: Normal
+    grid:
+    - 0,0,11,1 # 6 slots
+    whitelist:
+      tags:
+      - CMMagazinePistol
+    blacklist:
+      tags:
+      - RMCMagazinePistolSU6
+  - type: FixedItemSizeStorage
+  - type: ContainerContainer
+    containers:
+      pouch: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      pouch:
+        name: General pistol holster
+#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
+#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        whitelist:
+          tags:
+          - CMWeaponPistolM1984
+          - CMWeaponPistolM77
+          - RMCMK80
+  - type: CMHolster
+  - type: CMItemSlots
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltHolsterRevolver
+  name: M276 pattern general revolver holster rig
+  description: he M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version is universal and adjustable for different revolvers, along with six small pouches for speedloaders. It smells faintly of hay.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m44r # TODO RMC14 per-gun underlay
+      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      visible: false
+    - state: icon-front
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+  - type: Storage # holds up to 6 mags plus gun
+    maxItemSize: Normal
+    grid:
+    - 0,0,11,1 # 6 slots
+    whitelist:
+      tags:
+      - RMCMagazineRevolver
+  - type: FixedItemSizeStorage
+  - type: ContainerContainer
+    containers:
+      pouch: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      pouch:
+        name: General revolver holster
+#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
+#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        whitelist:
+          tags:
+          - RMCWeaponRevolverM44
+  - type: CMHolster
+  - type: CMItemSlots
+
+- type: entity
+  parent: ClothingBeltBase # Can't have storage slots on this one
+  id: RMCBeltHolsterSMG
+  name: M276 pattern M63 holster rig
+  description: Special issue variant of the M276 designed to holster a M63 submachine gun.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_smg.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m63
+      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      visible: false
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_smg.rsi
+  - type: ContainerContainer
+    containers:
+      pouch: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      pouch:
+        name: M63 holster
+#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
+#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        whitelist:
+          tags:
+          - WeaponSMGM63
+  - type: CMHolster
+  - type: CMItemSlots
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltHolsterSMGPouch
+  name: M276 pattern M63 holster rig and pouch
+  description: Special issue variant of the M276 designed to holster a M63 submachine gun and two spare magazines. Uncommonly issued to USCM support and specialist personnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_smg_pouch.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m63
+      offset: -0.34375, 0.0
+      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      visible: false
+    - state: icon-front
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_smg_pouch.rsi
+  - type: Storage # holds up to 2 mags plus gun
+    maxItemSize: Normal
+    grid:
+    - 0,0,3,1 # 2 slots
+    whitelist:
+      tags:
+      - CMMagazineSmg
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMMagazineSmg
+  - type: FixedItemSizeStorage
+  - type: ContainerContainer
+    containers:
+      pouch: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      pouch:
+        name: M63 holster
+#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
+#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        whitelist:
+          tags:
+          - WeaponSMGM63
+  - type: CMHolster
+  - type: CMItemSlots

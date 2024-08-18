@@ -122,6 +122,16 @@
       amount: 2
 
 - type: entity
+  parent: CMBeltSmartGunOperatorPistol
+  id: CMBeltSmartGunOperatorPistolFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSmartGun
+      amount: 2
+
+- type: entity
   parent: RMCBeltSmartPistol
   id: RMCBeltSmartPistolFilled
   suffix: Filled

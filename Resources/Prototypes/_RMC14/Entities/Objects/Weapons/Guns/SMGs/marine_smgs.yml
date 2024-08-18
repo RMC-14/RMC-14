@@ -48,6 +48,9 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63.rsi
+  - type: Tag
+    tags:
+    - WeaponSMGM63
   - type: Gun
     shotsPerBurst: 3
     soundGunshot:

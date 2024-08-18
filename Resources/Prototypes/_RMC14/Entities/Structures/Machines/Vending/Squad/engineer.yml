@@ -219,10 +219,11 @@
       entries:
     #- id: CMG8AGeneralUtilityPouch
       - id: CMBeltMarine
-    #- id: CMM276GeneralPistolHolsterRig
-    #- id: CMM276M63HolsterRig
-    #- id: CMM276M44HolsterRig
-    #- id: CMM276M82FHolsterRig
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterSMG
+      - id: RMCBeltHolsterSMGPouch
+    #- id: RMCBeltHolsterFlareGun
     #- id: CMM276ShotgunShellLoadingRig
     #- id: CMM276MortarOperatorBelt
       - id: CMBeltUtilityFilled

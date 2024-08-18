@@ -11,17 +11,12 @@
       "name": "icon"
     },
     {
-      "name": "icon-front"
-    },
-    {
-      "name": "half"
-    },
-    {
-      "name": "full"
-    },
-    {
       "name": "equipped-BELT",
       "directions": 4
+    },
+    {
+        "name": "full-equipped-BELT",
+        "directions": 4
     },
     {
       "name": "inhand-right",
