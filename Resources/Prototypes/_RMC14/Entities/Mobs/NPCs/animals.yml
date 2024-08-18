@@ -19,16 +19,10 @@
   - type: GhostRole
     prob: 0
   - type: Respirator
-    damage:
-      types:
-        Asphyxiation: 0
-    damageRecovery:
-      types:
-        Asphyxiation: 0
+    damage: {}
+    damageRecovery: {}
   - type: Barotrauma
-    damage:
-      types:
-        Blunt: 0
+    damage: {}
 
 
 - type: entity
@@ -39,16 +33,10 @@
   - type: GhostRole
     prob: 0
   - type: Respirator
-    damage:
-      types:
-        Asphyxiation: 0
-    damageRecovery:
-      types:
-        Asphyxiation: 0
+    damage: {}
+    damageRecovery: {}
   - type: Barotrauma
-    damage:
-      types:
-        Blunt: 0
+    damage: {}
 
 - type: entity
   parent: MobMouse
