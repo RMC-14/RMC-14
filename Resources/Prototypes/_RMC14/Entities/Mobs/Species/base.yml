@@ -198,3 +198,4 @@
             visible: true
   - type: ActiveInputMover
   - type: DropItemsOnRest
+  - type: UserBlockShootingInsideContainers
