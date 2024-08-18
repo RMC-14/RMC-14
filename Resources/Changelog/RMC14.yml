@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenos being scannable with the hf2 health analyzer.
-    type: Fix
-  id: 88
-  time: '2024-04-28T00:55:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2033
 - author: Whisper
   changes:
   - message: You can now craft metal rods
@@ -4432,5 +4425,13 @@
   id: 587
   time: '2024-08-18T20:13:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3610
+- author: DrSmugleaf
+  changes:
+  - message: Fixed tall flood lights and broken tall flood lights being unanchorable
+      and movable.
+    type: Fix
+  id: 588
+  time: '2024-08-18T20:28:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3714
 Name: RMC14
 Order: -1
