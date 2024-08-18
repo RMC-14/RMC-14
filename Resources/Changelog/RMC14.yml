@@ -1,17 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed being able to hit friendly xenos with a tail stab and being able
-      to hit marines with it through walls.
-    type: Fix
-  - message: The xeno tail stab can now hit 3 marines maximum and has a one second
-      cooldown if it misses.
-    type: Tweak
-  id: 84
-  time: '2024-04-27T02:35:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2028
-- author: DrSmugleaf
-  changes:
   - message: Fixed parasites being able to melee attack and tackle.
     type: Fix
   - message: Fixed parasites being able to infect dead marines.
@@ -4435,5 +4424,13 @@
   id: 583
   time: '2024-08-18T10:49:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3574
+- author: DrSmugleaf
+  changes:
+  - message: The CMP temporarily has access to the regular MP equipment rack until
+      their own is added.
+    type: Tweak
+  id: 584
+  time: '2024-08-18T12:10:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3708
 Name: RMC14
 Order: -1
