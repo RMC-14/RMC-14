@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Marines now spawn in starving in distress signal rounds.
-    type: Tweak
-  id: 87
-  time: '2024-04-28T00:56:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2037
-- author: DrSmugleaf
-  changes:
   - message: Fixed xenos being scannable with the hf2 health analyzer.
     type: Fix
   id: 88
@@ -4430,5 +4423,14 @@
   id: 586
   time: '2024-08-18T20:09:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3620
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Parasites now rip off marine's helmets.
+    type: Add
+  - message: The heavy grenadier weapon specialist's helmet now resists parasite attacks.
+    type: Add
+  id: 587
+  time: '2024-08-18T20:13:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3610
 Name: RMC14
 Order: -1
