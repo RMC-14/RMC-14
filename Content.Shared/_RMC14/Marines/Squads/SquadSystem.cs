@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Linq;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Clothing;
@@ -64,7 +65,11 @@ public sealed class SquadSystem : EntitySystem
         }
 
         var rsi = wearer.Leader ? ent.Comp.LeaderRsi : ent.Comp.Rsi;
-        args.Layers.Add(($"enum.{nameof(SquadArmorLayers)}.{ent.Comp.Layer}", new PrototypeLayerData
+        var layer = $"enum.{nameof(SquadArmorLayers)}.{ent.Comp.Layer}";
+        if (args.Layers.Any(l => l.Item1 == layer))
+            return;
+
+        args.Layers.Add((layer, new PrototypeLayerData
         {
             RsiPath = rsi.RsiPath.ToString(),
             State = rsi.RsiState,
