@@ -21,6 +21,7 @@ using Content.Shared.Popups;
 using Content.Shared.Prototypes;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
+using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
@@ -52,6 +53,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly SharedXenoHiveSystem _xenoHive = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     private TimeSpan _evolutionPointsRequireOvipositorAfter;
     private TimeSpan _evolutionAccumulatePointsBefore;
@@ -317,6 +319,14 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         if (!_prototypes.TryIndex(newXeno, out var prototype))
             return true;
+
+        if(_container.IsEntityInContainer(xeno))
+        {
+            if (doPopup)
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-failed-bad-location"), xeno, xeno, PopupType.MediumCaution);
+
+            return false;
+        }
 
         // TODO RMC14 revive jelly when added should not bring back dead queens
         if (prototype.TryGetComponent(out XenoEvolutionCappedComponent? capped, _compFactory) &&
