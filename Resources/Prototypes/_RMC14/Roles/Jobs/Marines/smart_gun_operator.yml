@@ -69,6 +69,7 @@
   components:
   - type: SquadSpawner
     squad: SquadAlpha
+    role: CMSmartGunOperator
 
 - type: entity
   parent: CMSpawnPointSmartGunOperator
@@ -77,6 +78,7 @@
   components:
   - type: SquadSpawner
     squad: SquadBravo
+    role: CMSmartGunOperator
 
 - type: entity
   parent: CMSpawnPointSmartGunOperator
@@ -85,6 +87,7 @@
   components:
   - type: SquadSpawner
     squad: SquadCharlie
+    role: CMSmartGunOperator
 
 - type: entity
   parent: CMSpawnPointSmartGunOperator
@@ -93,4 +96,5 @@
   components:
   - type: SquadSpawner
     squad: SquadDelta
+    role: CMSmartGunOperator
 

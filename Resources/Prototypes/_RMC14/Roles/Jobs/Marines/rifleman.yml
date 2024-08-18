@@ -62,6 +62,7 @@
   components:
   - type: SquadSpawner
     squad: SquadAlpha
+    role: CMRifleman
 
 - type: entity
   parent: CMSpawnPointRifleman
@@ -70,6 +71,7 @@
   components:
   - type: SquadSpawner
     squad: SquadBravo
+    role: CMRifleman
 
 - type: entity
   parent: CMSpawnPointRifleman
@@ -78,6 +80,7 @@
   components:
   - type: SquadSpawner
     squad: SquadCharlie
+    role: CMRifleman
 
 - type: entity
   parent: CMSpawnPointRifleman
@@ -86,3 +89,4 @@
   components:
   - type: SquadSpawner
     squad: SquadDelta
+    role: CMRifleman
