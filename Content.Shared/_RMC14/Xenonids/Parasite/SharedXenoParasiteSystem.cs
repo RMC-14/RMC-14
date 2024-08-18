@@ -600,14 +600,14 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
                     if (resistance != null && resistance.Count < resistance.MaxCount)
                     {
+                        resistance.Count += 1;
+                        Dirty(containedEntity.Value, resistance);
+
                         if (_net.IsServer && doPopup)
                         {
                             var popupMessage = Loc.GetString("rmc-xeno-infect-fail", ("target", victim), ("clothing", containedEntity));
                             _popup.PopupEntity(popupMessage, victim, PopupType.SmallCaution);
                         }
-
-                        resistance.Count += 1;
-                        Dirty(containedEntity.Value, resistance);
 
                         return false;
                     }
