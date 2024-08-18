@@ -2240,7 +2240,7 @@ entities:
       pos: 47.5,-25.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -16158.43
+      secondsUntilStateChange: -16702.705
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -2502,7 +2502,7 @@ entities:
       pos: -50.5,-10.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -37243.56
+      secondsUntilStateChange: -37787.832
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -2801,7 +2801,7 @@ entities:
       pos: -22.5,7.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -30749.285
+      secondsUntilStateChange: -31293.56
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -3372,11 +3372,6 @@ entities:
       parent: 1
 - proto: CMAutolathe
   entities:
-  - uid: 1127
-    components:
-    - type: Transform
-      pos: 0.5,2.5
-      parent: 1
   - uid: 1129
     components:
     - type: Transform
@@ -3386,6 +3381,11 @@ entities:
     components:
     - type: Transform
       pos: 42.5,-15.5
+      parent: 1
+  - uid: 15859
+    components:
+    - type: Transform
+      pos: 4.5,2.5
       parent: 1
 - proto: CMBarricadeTurnstile
   entities:
@@ -90826,6 +90826,13 @@ entities:
     components:
     - type: Transform
       pos: 26.5,-1.5
+      parent: 1
+- proto: RMCDropshipFabricator
+  entities:
+  - uid: 1127
+    components:
+    - type: Transform
+      pos: 0.5,2.5
       parent: 1
 - proto: RMCFoodSnackHotdog
   entities:
