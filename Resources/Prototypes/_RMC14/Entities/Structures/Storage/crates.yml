@@ -767,7 +767,7 @@
     access: [["CMAccessResearch"],["CMAccessEngineering"]]
 
 - type: entity
-  parent: CMCrateWeldable
+  parent: RMCCrateWeldable
   id: RMCCrateMinecart
   name: minecart
   description: Essentially a big metal bucket on wheels. This one has a modern plastic shroud.

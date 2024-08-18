@@ -9,7 +9,7 @@
   components:
   - type: AccessReader
     access:
-    - [ "CMAccessDropship" ]
+    - [ "CMAccessPilot" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
@@ -181,11 +181,11 @@
          amount: 4
      - name: Primary Ammunition
        entries:
-       - id: CMBoxShotgunBuckshot
+       - id: RMCBoxShotgunBuckshot
          amount: 12
-       - id: CMBoxShotgunFlechette
+       - id: RMCBoxShotgunFlechette
          amount: 12
-       - id: CMBoxShotgunSlugs
+       - id: RMCBoxShotgunSlugs
          amount: 12
        - id: CMMagazineRifleM4SPR
          amount: 24

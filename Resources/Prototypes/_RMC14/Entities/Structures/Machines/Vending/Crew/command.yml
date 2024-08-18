@@ -335,11 +335,11 @@
       - id: CMMagazineRifleM54CAP
         points: 60
         recommended: true
-      - id: CMBoxShotgunBuckshot
+      - id: RMCBoxShotgunBuckshot
         points: 20
-      - id: CMBoxShotgunSlugs
+      - id: RMCBoxShotgunSlugs
         points: 20
-      - id: CMBoxShotgunFlechette
+      - id: RMCBoxShotgunFlechette
         points: 20
     - name: Specilisation Kit
       choices: { CMBundle: 1 }
@@ -583,17 +583,17 @@
     #     points: 20
     - name: Shotgun Ammunition
       entries:
-      - id: CMBoxShotgunBuckshot
+      - id: RMCBoxShotgunBuckshot
         points: 20
-      - id: CMBoxShotgunSlugs
+      - id: RMCBoxShotgunSlugs
         points: 20
-      - id: CMBoxShotgunFlechette
+      - id: RMCBoxShotgunFlechette
         points: 20
     - name: Special Ammunition
       entries:
       #- id: M54C Incendiary Magazine
       #- id: M54C Rubber Magazine
-      - id: CMBoxShotgunBeanbag
+      - id: RMCBoxShotgunBeanbag
         points: 10
     - name: Explosives
       entries:
