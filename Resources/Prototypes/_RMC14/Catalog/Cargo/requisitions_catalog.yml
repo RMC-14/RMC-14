@@ -48,15 +48,14 @@
         crate: RMCCrateBoxMagazineM44Revolver
       - cost: 3000
         crate: RMCCrateBoxMagazineM44RevolverMarksman
-
     - name: Attachments
       entries:
       - cost: 3000
         crate: RMCCrateAttachmentSmartScope
       - cost: 2000
         crate: RMCCrateAttachmentRailFlashlight
-      - cost: 3000
-        crate: RMCCrateAttachmentRedDot
+#      - cost: 3000
+#        crate: RMCCrateAttachmentRedDot
       - cost: 3000
         crate: RMCCrateAttachmentTelescopicScope
       - cost: 3000
