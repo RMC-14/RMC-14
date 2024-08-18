@@ -187,8 +187,8 @@
       - id: CMBeltKnifeFilled
         name: M276 Knife Rig (Full)
         amount: 15
-#      - id: M276 G8-A General Utility Pouch
-#        amount: 15
+      - id: RMCBeltUtilityGeneral
+        amount: 15
     - name: Pouches
       entries:
       - id: RMCPouchBayonet

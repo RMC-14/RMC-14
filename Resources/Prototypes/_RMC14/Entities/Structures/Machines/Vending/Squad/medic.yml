@@ -97,7 +97,8 @@
       - id: CMStasisBagFolded
         points: 6
     #    CMPressurizedReagentCanisterPouchEMPTY: 3P
-    #    CMG8AGeneralUtilityPouch: 15P
+      - id: RMCBeltUtilityGeneral
+        points: 15
     #    CMMS11SmartRefillTank: 6P
     - name: Explosives
       entries:

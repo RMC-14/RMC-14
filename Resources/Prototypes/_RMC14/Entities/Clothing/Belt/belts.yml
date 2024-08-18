@@ -342,3 +342,21 @@
   - type: Tag
     tags:
     - RMCSmartPistolHolster
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCBeltUtilityGeneral
+  name: M276 G8-A general utility pouch
+  description: A small, lightweight pouch that can be clipped onto M3 Pattern armor to provide additional storage. The newer G8-A model, while uncomfortable, can also be clipped around the waist.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/sparepouch.rsi
+  - type: Clothing
+    slots:
+    - suitStorage
+    - belt
+    sprite: _RMC14/Objects/Clothing/Belt/sparepouch.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,9,1 # 9 slots
