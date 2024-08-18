@@ -1,7 +1,7 @@
-﻿using Content.Server.Light.Components;
-using Content.Shared._RMC14.Entrenching;
+﻿using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Light.Components;
 
 namespace Content.Server._RMC14.Xenonids.Acid;
 
