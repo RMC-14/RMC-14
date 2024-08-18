@@ -22,6 +22,8 @@
       skills:
         RMCSkillFirearms: 0
         RMCSkillVehicles: 1
+    - type: CMVendorUser
+      points: 50
 
 - type: startingGear
   id: CMGearLiaison

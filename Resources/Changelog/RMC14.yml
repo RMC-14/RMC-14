@@ -1,297 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added surgery skills to the appropriate roles.
-    type: Add
-  id: 44
-  time: '2024-04-13T06:33:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1206
-- author: DrSmugleaf
-  changes:
-  - message: Fixed not being able to use the hf2 health analyzer on others.
-    type: Fix
-  id: 45
-  time: '2024-04-14T00:13:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1223
-- author: Whisper
-  changes:
-  - message: Guns no longer start with mags.
-    type: Fix
-  id: 46
-  time: '2024-04-14T00:35:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1220
-- author: Whisper
-  changes:
-  - message: shotguns no longer try to cycle when wielding
-    type: Fix
-  id: 47
-  time: '2024-04-13T10:31:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1221
-- author: DrSmugleaf
-  changes:
-  - message: Marines will now be knocked down by developed alive xenos when trying
-      to pull them.
-    type: Add
-  id: 48
-  time: '2024-04-14T05:49:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1232
-- author: Whisper
-  changes:
-  - message: catwalks rotate correctly now
-    type: Fix
-  id: 49
-  time: '2024-04-14T06:20:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1225
-- author: Froffy025
-  changes:
-  - message: Fixed pistols spawning with a magazine included.
-    type: Fix
-  id: 50
-  time: '2024-04-16T06:19:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1236
-- author: Whisper
-  changes:
-  - message: Xenos (and humanoids) no longer trigger stepping on glass shards
-    type: Tweak
-  id: 51
-  time: '2024-04-17T07:34:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1243
-- author: DrSmugleaf
-  changes:
-  - message: Fixed admin ghosts not being able to pull xenos.
-    type: Fix
-  id: 52
-  time: '2024-04-18T20:56:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1248
-- author: Whisper
-  changes:
-  - message: Xenos have AI and ghost role takeover
-    type: Add
-  id: 53
-  time: '2024-04-18T21:25:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1249
-- author: DrSmugleaf
-  changes:
-  - message: Fixed evolution cooldowns for defender, drone, lurker, runner, sentinel,
-      spitter and warrior.
-    type: Fix
-  id: 54
-  time: '2024-04-18T21:30:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1250
-- author: DrSmugleaf
-  changes:
-  - message: Added examine text to pump shotguns that tell you how to pump it.
-    type: Add
-  - message: Added popups when the user is unable to shoot, either from needing to
-      pump a shotgun or needing to wait before shooting again.
-    type: Add
-  - message: Pump shotguns now have a delay between shots instead of a delay between
-      pumps.
-    type: Tweak
-  - message: Pumping now requires the gun to have at least one bullet left.
-    type: Fix
-  id: 55
-  time: '2024-04-18T23:23:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1247
-- author: DrSmugleaf
-  changes:
-  - message: Changed all item and storage sizes to be consistent with CMSS13.
-    type: Tweak
-  id: 56
-  time: '2024-04-19T02:27:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1244
-- author: Whisper
-  changes:
-  - message: Xenos can wideswing with spacebar.
-    type: Add
-  id: 57
-  time: '2024-04-19T02:52:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1241
-- author: DrSmugleaf
-  changes:
-  - message: Added hold and move order actions to all marine roles with leadership
-      skill.
-    type: Add
-  - message: Fixed marine orders applying to dead marines.
-    type: Fix
-  - message: Fixed marine order effects not being multiplied by the giver's leadership
-      skill.
-    type: Fix
-  - message: Fixed marine order effects being inconsistent when multiple of the same
-      type are given at once.
-    type: Fix
-  - message: Made the cooldown, range, and duration of marine orders consistent with
-      CMSS13.
-    type: Tweak
-  id: 58
-  time: '2024-04-19T06:22:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1252
-- author: DrSmugleaf
-  changes:
-  - message: Backpacks now have a two second delay before opening and will close if
-      the user moves to counterbalance their larger storage. This does not include
-      satchels, pouches or any other kind of storage.
-    type: Add
-  id: 59
-  time: '2024-04-20T01:20:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1253
-- author: DrSmugleaf
-  changes:
-  - message: Fixed inconsistent range when leaping as a runner or parasite.
-    type: Fix
-  id: 60
-  time: '2024-04-20T05:01:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1257
-- author: DrSmugleaf
-  changes:
-  - message: Added attaching parasites by clicking downed marines with or as them.
-    type: Add
-  - message: parasites can only infect through a leap if it is done within a very
-      short range of the target.
-    type: Tweak
-  id: 61
-  time: '2024-04-20T06:14:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1254
-- author: Whisper
-  changes:
-  - message: Xenos no longer melt own structures with acid.
-    type: Fix
-  id: 62
-  time: '2024-04-20T06:20:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1256
-- author: DrSmugleaf
-  changes:
-  - message: Xeno armor now only reduces brute damage.
-    type: Fix
-  id: 63
-  time: '2024-04-20T07:34:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1281
-- author: DrSmugleaf
-  changes:
-  - message: You can no longer see through containers with the night vision overlay.
-    type: Fix
-  id: 64
-  time: '2024-04-20T08:17:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1283
-- author: Whisper
-  changes:
-  - message: Xeno eggs now burn!
-    type: Add
-  id: 65
-  time: '2024-04-20T12:35:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1285
-- author: DrSmugleaf
-  changes:
-  - message: All non-cm guidebook entries and construction recipes have been removed.
-    type: Tweak
-  id: 66
-  time: '2024-04-20T23:02:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1282
-- author: DrSmugleaf
-  changes:
-  - message: Added tackling on disarm. Successfully disarming a marine 4 times in
-      a row with less than 4 seconds passing between each disarm will result in them
-      getting knocked down and stunned for 5 seconds. The disarms needed and stun
-      duration vary per xeno caste.
-    type: Add
-  id: 67
-  time: '2024-04-21T02:43:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1287
-- author: DrSmugleaf
-  changes:
-  - message: The xeno Queen can no longer catch fire.
-    type: Add
-  - message: The xeno Ravager is now immune to damage dealt by catching fire.
-    type: Add
-  - message: Xenos can now drop and roll to resist fire by clicking the fire status
-      alert.
-    type: Add
-  id: 68
-  time: '2024-04-21T04:30:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1291
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xeno construction range being inconsistent depending on where you
-      click on a tile.
-    type: Fix
-  - message: Increased xeno construction range from 1 tile to 1.9 tiles.
-    type: Tweak
-  - message: Xeno construction now require weeds on the tile.
-    type: Tweak
-  - message: If a location isn't valid for xeno construction, the action will remain
-      selected but show a popup for why it is not valid.
-    type: Tweak
-  id: 69
-  time: '2024-04-22T03:48:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1293
-- author: DrSmugleaf
-  changes:
-  - message: Medically-unskilled marines now have a 3 second do after delay when using
-      auto-injectors, except for the emergency one.
-    type: Tweak
-  id: 70
-  time: '2024-04-22T04:29:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1294
-- author: Whisper
-  changes:
-  - message: Xenos do not take bloodloss damage anymore
-    type: Fix
-  id: 71
-  time: '2024-04-22T06:07:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1295
-- author: DrSmugleaf
-  changes:
-  - message: Fixed some xeno sprites being off-center.
-    type: Fix
-  - message: Fixed some xeno hitboxes being too small.
-    type: Fix
-  id: 72
-  time: '2024-04-22T09:56:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1297
-- author: DrSmugleaf
-  changes:
-  - message: Added xenos being able to nest marines onto weeded walls and resin walls.
-    type: Add
-  id: 73
-  time: '2024-04-24T03:45:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1302
-- author: DrSmugleaf
-  changes:
-  - message: Added dropship piloting.
-    type: Add
-  id: 74
-  time: '2024-04-25T03:22:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1308
-- author: DrSmugleaf
-  changes:
-  - message: Added distress signal gamemode.
-    type: Add
-  id: 75
-  time: '2024-04-26T05:08:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1916
-- author: Whisper
-  changes:
-  - message: Fixed the fire rate for the M77 and service pistols.
-    type: Fix
-  id: 76
-  time: '2024-04-26T10:00:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2019
-- author: Whisper
-  changes:
-  - message: Fixed not being able to store the M96S in the suit storage slot.
-    type: Fix
-  id: 77
-  time: '2024-04-26T10:00:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2014
-- author: Whisper
-  changes:
-  - message: Fixed burning marines and xenos being able to set others on fire.
-    type: Fix
-  id: 78
-  time: '2024-04-26T10:01:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2020
-- author: DrSmugleaf
-  changes:
   - message: Fixed larva getting stuck when evolving under tables and doors.
     type: Fix
   id: 79
@@ -4293,5 +4002,288 @@
   id: 543
   time: '2024-08-11T01:08:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3605
+- author: DrSmugleaf
+  changes:
+  - message: Added Mazy 'The Fortress' Tusji figurine.
+    type: Add
+  id: 544
+  time: '2024-08-11T03:52:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3613
+- author: Vermidia
+  changes:
+  - message: Larva and parasites can no longer nest hosts
+    type: Fix
+  - message: Xenos that can't put up parasites can no longer infect with them or put
+      them back into eggs by pulling them.
+    type: Fix
+  id: 545
+  time: '2024-08-13T00:42:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3638
+- author: coolmankid12345
+  changes:
+  - message: Marine icons and Xeno plasma/health for spectators to see
+    type: Add
+  id: 546
+  time: '2024-08-13T00:51:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3340
+- author: Whisper
+  changes:
+  - message: Added Nesart Onan, updated Satoru Suzuki figurines.
+    type: Add
+  id: 547
+  time: '2024-08-13T00:51:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3615
+- author: crystalHex
+  changes:
+  - message: Fixed being able to use nightvision items in pockets.
+    type: Fix
+  id: 548
+  time: '2024-08-13T01:05:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3612
+- author: MACMAN2003
+  changes:
+  - message: Fixed a pixel offset on the welder chestrig.
+    type: Fix
+  id: 549
+  time: '2024-08-13T01:06:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3619
+- author: DrSmugleaf
+  changes:
+  - message: Added Dalton Harris figurine.
+    type: Add
+  id: 550
+  time: '2024-08-13T01:24:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3640
+- author: Whisper
+  changes:
+  - message: Added Chad Scott, Worships-The-Gods figurines
+    type: Add
+  id: 551
+  time: '2024-08-16T03:24:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3670
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added xeno speech sounds
+    type: Add
+  id: 552
+  time: '2024-08-16T03:38:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3679
+- author: Vermidia
+  changes:
+  - message: Fixed auto-injectors being able to draw from containers.
+    type: Fix
+  id: 553
+  time: '2024-08-16T03:39:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3681
+- author: Vermidia
+  changes:
+  - message: Xenos will no longer look stunned if killed by an AP rocket.
+    type: Fix
+  - message: Defenders will no longer look stunned if hit by an AP rocket while fortified.
+    type: Fix
+  id: 554
+  time: '2024-08-16T03:39:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3680
+- author: Vermidia
+  changes:
+  - message: Added plasteel barricades, craftable with 6 plasteel. They have more
+      health than normal barricades but take longer to set up.
+    type: Add
+  id: 555
+  time: '2024-08-16T03:45:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3661
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed duplicate traits in the character Traits tab. Check to make sure
+      that your selected traits are still correct!
+    type: Fix
+  id: 556
+  time: '2024-08-16T03:43:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3606
+- author: blueDev2
+  changes:
+  - message: Double doors no longer have solid hitboxes on one half of the door when
+      open.
+    type: Fix
+  id: 557
+  time: '2024-08-16T03:44:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3662
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the Queen making no stomp sound when pulled. By making her unable
+      to be pulled while alive, not stunned and not knocked down. You did this to
+      yourselves. This is the best you are getting for now because I don't feel like
+      ahelping more people about it while I go fix footstep sound code.
+    type: Fix
+  id: 558
+  time: '2024-08-16T03:43:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3683
+- author: crystalHex
+  changes:
+  - message: Added descriptions to squad leader's kits.
+    type: Tweak
+  id: 559
+  time: '2024-08-16T06:29:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3686
+- author: DrSmugleaf
+  changes:
+  - message: Added Sukuna Kurze figurine.
+    type: Add
+  id: 560
+  time: '2024-08-16T08:58:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3685
+- author: DrSmugleaf
+  changes:
+  - message: Added a popup when someone else throws something.
+    type: Add
+  id: 561
+  time: '2024-08-16T12:40:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3688
+- author: Vermidia
+  changes:
+  - message: Fixed some xeno pull speeds. Runner pulls faster, boiler pulls the same
+      as most xenos, and warrior pulls a little slower then they used to.
+    type: Fix
+  id: 562
+  time: '2024-08-16T12:39:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3650
+- author: Vermidia
+  changes:
+  - message: Barricades can now only be hit a maximum of three times per second by
+      xenos. Same for resin structures and marines.
+    type: Fix
+  id: 563
+  time: '2024-08-18T04:11:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3684
+- author: Vermidia
+  changes:
+  - message: Fixed hyposprays being able to draw from containers. Use a bottle on
+      it to refill it.
+    type: Fix
+  id: 564
+  time: '2024-08-18T04:19:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3669
+- author: blueDev2
+  changes:
+  - message: Drone evolution to queen cooldown after queen death is properly indicated
+      in the popup.
+    type: Fix
+  id: 565
+  time: '2024-08-18T04:18:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3701
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being able to shoot from within body bags and other containers.
+    type: Fix
+  id: 566
+  time: '2024-08-18T04:18:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3702
+- author: Vermidia
+  changes:
+  - message: Added Boiler's neurotoxin gas, which is more oriented for capturing and
+      causes a slew of chaotic effects if it builds up enough.
+    type: Add
+  id: 567
+  time: '2024-08-18T04:17:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3649
+- author: diraven
+  changes:
+  - message: Xeno acid corrosion system was reworked and extended.
+    type: Add
+  - message: Flares now lose their burn time rather than disappear after a set amount
+      of time if corroded.
+    type: Add
+  - message: Barricades are now damaged over time rather than disappear after a set
+      amount of time if corroded.
+    type: Add
+  - message: Slightly nerfed acid corrosion times for them to be closer to CM13 values.
+    type: Tweak
+  id: 568
+  time: '2024-08-18T04:20:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3062
+- author: Vermidia
+  changes:
+  - message: Larva auto-burst time has been upped to 60 (from 20) seconds
+    type: Fix
+  - message: Larva can now move to burst immediately from their host
+    type: Fix
+  id: 569
+  time: '2024-08-18T04:21:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3700
+- author: Dutch-VanDerLinde
+  changes:
+  - message: You can now give most jumpsuits an alternative look by folding them.
+    type: Add
+  id: 570
+  time: '2024-08-18T04:31:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3659
+- author: DangerRevolution
+  changes:
+  - message: Added the Commanding Officer's equipment and weapon vendors.
+    type: Add
+  - message: Added the Executive Officer's equipment and weapon vendors.
+    type: Add
+  - message: Added the Staff Officer's equipment and weapon vendors
+    type: Add
+  - message: Added the Pilot & Dropship Crew Chiefs' equipment and weapon vendors.
+    type: Add
+  id: 571
+  time: '2024-08-18T04:37:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3629
+- author: Vermidia
+  changes:
+  - message: Fixed the Lurker's Crippling Strike not doing 20% extra damage, and added
+      a visual effect on the person hit.
+    type: Fix
+  id: 572
+  time: '2024-08-18T04:45:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3639
+- author: MACMAN2003
+  changes:
+  - message: Added special ballistic goggles that change color to match the squad
+      of the wearer.
+    type: Add
+  id: 573
+  time: '2024-08-18T04:52:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3622
+- author: crystalHex
+  changes:
+  - message: Added the drop pouch.
+    type: Add
+  id: 574
+  time: '2024-08-18T04:56:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3678
+- author: blueDev2
+  changes:
+  - message: Barricades now drop mats based on remaining health when deconstructed.
+      Barbed barricades drop barbed wires when deconstructed
+    type: Fix
+  id: 575
+  time: '2024-08-18T04:59:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3621
+- author: Vermidia
+  changes:
+  - message: You can choose to tuck in features (like hair, moth antenna, etc) on
+      helmets.
+    type: Add
+  id: 576
+  time: '2024-08-18T05:00:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3600
+- author: Rainbeon
+  changes:
+  - message: You can now view player character descriptions from much further away.
+    type: Tweak
+  id: 577
+  time: '2024-08-18T05:03:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3626
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenonids not being able to open hypersleep chambers, body bags,
+      closets, morgues and crematoriums. Xehonids still cannot close them nor be inserted
+      into them.
+    type: Fix
+  id: 578
+  time: '2024-08-18T05:21:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3703
 Name: RMC14
 Order: -1

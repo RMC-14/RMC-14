@@ -99,8 +99,8 @@
         amount: 2
       - id: CMWebbing
         amount: 5
-      #- id: Drop Pouch
-      #   amount: 2
+      - id: CMWebbingPouch
+        amount: 2
       #- id: Shoulder Holster
       #  amount: 2
       #- id: Knife Webbing
@@ -263,11 +263,11 @@
     sections:
     - name: Regular ammunition
       entries:
-      - id: CMBoxShotgunBuckshot
+      - id: RMCBoxShotgunBuckshot
         amount: 40
-      - id: CMBoxShotgunFlechette
+      - id: RMCBoxShotgunFlechette
         amount: 40
-      - id: CMBoxShotgunSlugs
+      - id: RMCBoxShotgunSlugs
         amount: 40
       - id: CMMagazineRifleM4SPR
         amount: 45

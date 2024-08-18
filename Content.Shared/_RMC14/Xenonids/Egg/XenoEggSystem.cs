@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Marines;
+﻿using Content.Shared._RMC14.Hands;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -45,8 +46,9 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+	[Dependency] private readonly CMHandsSystem _rmcHands = default!;
 
-    private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
+	private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
 
     private EntityQuery<StepTriggerComponent> _stepTriggerQuery;
 
@@ -248,7 +250,7 @@ public sealed class XenoEggSystem : EntitySystem
     private void OnXenoEggInteractUsing(Entity<XenoEggComponent> egg, ref InteractUsingEvent args)
     {
         // Doesn't check hive or if a xeno is doing it
-        if (!HasComp<XenoParasiteComponent>(args.Used))
+        if (!HasComp<XenoParasiteComponent>(args.Used) || !_rmcHands.IsPickupByAllowed(args.Used, args.User))
             return;
 
         args.Handled = true;

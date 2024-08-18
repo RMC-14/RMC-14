@@ -84,8 +84,8 @@
 
 - type: entity
   abstract: true
-  parent: CMBoxMagazineBase
-  id: CMBoxPackFlareBase
+  parent: RMCBoxMagazineBase
+  id: RMCBoxPackFlareBase
   name: box of M94 flare packs
   description: A box of M94 marking flare packs, to brighten up your day.
   components:
@@ -115,8 +115,8 @@
           Full: { state: magaz_flares, visible: true }
 
 - type: entity
-  parent: CMBoxPackFlareBase
-  id: CMBoxPackFlare
+  parent: RMCBoxPackFlareBase
+  id: RMCBoxPackFlare
   suffix: Filled
   components:
   - type: CMItemSlots

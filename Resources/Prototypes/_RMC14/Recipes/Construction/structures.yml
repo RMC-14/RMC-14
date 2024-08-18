@@ -171,6 +171,24 @@
 
 - type: construction
   parent: RMC
+  name: Plasteel Barricade
+  id: RMCBarricadePlasteel
+  graph: BarricadePlasteelGraph
+  startNode: start
+  targetNode: nodePlasteel
+  category: construction-category-cm-structures
+  description: A military-grade hardened plasteel barricade.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
+    state: plasteel
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
   name: Wooden Barricade
   id: RMCBarricadeWood
   graph: BarricadeWoodGraph
@@ -273,7 +291,7 @@
   canBuildInImpassable: false
   icon:
     sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
-    state: plasteel
+    state: folding_plasteel
   conditions:
     - !type:TileNotBlocked
 

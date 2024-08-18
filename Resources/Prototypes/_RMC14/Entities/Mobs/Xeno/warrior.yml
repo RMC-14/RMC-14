@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoWarrior
   name: Warrior
   description: A beefy alien with an armored carapace.
@@ -39,6 +40,8 @@
     devolvesTo:
     - CMXenoDefender
   - type: XenoDevour
+  - type: SlowOnPull
+    multiplier: 0.56
   - type: XenoPunch
     damage:
       types:

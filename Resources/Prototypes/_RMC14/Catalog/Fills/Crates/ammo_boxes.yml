@@ -1,31 +1,31 @@
 ﻿# This is for boxes of loose rounds, not magazines.
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateBoxShellsShotgunSlugs
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxShellsShotgunSlugs
   name: Shell box (100x slug shells)
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxShotgunSlugs
+    - id: RMCBoxShotgunSlugs
       amount: 4 # TODO RMC14 boxes
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateBoxShellsShotgunBuckshot
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxShellsShotgunBuckshot
   name: Shell box (100x buckshot shells)
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxShotgunBuckshot
+    - id: RMCBoxShotgunBuckshot
       amount: 4 # TODO RMC14 boxes
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateBoxShellsShotgunFlechette
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxShellsShotgunFlechette
   name: Shell box (100x flechette shells)
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxShotgunFlechette
+    - id: RMCBoxShotgunFlechette
       amount: 4 # TODO RMC14 boxes
