@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Xeno armor now only reduces brute damage.
-    type: Fix
-  id: 63
-  time: '2024-04-20T07:34:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1281
-- author: DrSmugleaf
-  changes:
   - message: You can no longer see through containers with the night vision overlay.
     type: Fix
   id: 64
@@ -4278,5 +4271,13 @@
   id: 562
   time: '2024-08-16T12:39:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3650
+- author: Vermidia
+  changes:
+  - message: Barricades now have a short invulnerability time if they take too many
+      hits from xenos in a small period. Same for resin and marines.
+    type: Fix
+  id: 563
+  time: '2024-08-18T04:11:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3684
 Name: RMC14
 Order: -1
