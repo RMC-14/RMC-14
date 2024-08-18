@@ -422,7 +422,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         var query = QueryActiveRules();
         while (query.MoveNext(out _, out _, out var comp, out _))
         {
-            if (comp.MaxJobsPerSquad.Count == 0 && comp is CMDistressSignalRuleComponent)
+            if (comp.MaxJobsPerSquad.Count == 0)
             {
                 var allJobs = _stationJob.GetRoundStartJobs(ev.Station!.Value);
                 var marineDepartment = _prototypes.Index<DepartmentPrototype>("CMSquad");
