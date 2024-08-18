@@ -381,7 +381,7 @@
         points: 15
       - id: RMCAttachmentUnderbarrelExtinguisher
         points: 15
-      - id: RMCAttachmentMK1GrenadeLauncher
+      - id: RMCAttachmentU1GrenadeLauncher
         points: 5
     - name: Barrel Attachments
       entries:
@@ -627,7 +627,7 @@
         points: 15
       #- id: RMCAttachmentUnderbarrelFlamethrower # TODO RMC14 Underbarrel FLamethrower
       #  points: 15
-      - id: RMCAttachmentMK1GrenadeLauncher
+      - id: RMCAttachmentU1GrenadeLauncher
         points: 5
     - name: Barrel Attachments
       entries:

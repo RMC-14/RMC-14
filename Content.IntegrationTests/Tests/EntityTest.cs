@@ -245,6 +245,7 @@ namespace Content.IntegrationTests.Tests
 
                 "EvenSmoke",
                 "SpawnOnTerminate",
+                "DropshipFabricator"
             };
 
             Assert.That(server.CfgMan.GetCVar(CVars.NetPVS), Is.False);
