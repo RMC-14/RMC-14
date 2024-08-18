@@ -116,8 +116,8 @@
         amount: 1
       - id: CMWebbing
         amount: 2
-#      - id: Drop Pouch
-#        amount: 1
+      - id: CMWebbingPouch
+        amount: 1
 #      - id: Shoulder Holster
 #        amount: 1
     - name: Armor
