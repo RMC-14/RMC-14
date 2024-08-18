@@ -1,0 +1,28 @@
+- type: entity
+  parent: CMMobHuman
+  id: RMCHumanCorpse
+  save: false
+  name: unidentified corpse
+  description: I think they're dead.
+  suffix: RMC14, Dead
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: Damageable
+    damage:
+      types:
+        Bloodloss: 36
+        Asphyxiation: 44
+        Slash: 77
+        Blunt: 43
+#  - type: Loadout # it seems that cm-ss13 doesnt use this loadout
+#    prototypes: [ RMCGearCorpse ]
+
+- type: startingGear
+  id: RMCGearCorpse
+  equipment:
+    jumpsuit: CMJumpsuitColonist
+    back: CMSatchel
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+# TODO RMC14 random equipment and weapon
