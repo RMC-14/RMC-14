@@ -4,11 +4,12 @@ using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Ladder;
 
-public sealed class LadderSystem : EntitySystem
+public abstract class SharedLadderSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -19,10 +20,12 @@ public sealed class LadderSystem : EntitySystem
     private readonly HashSet<Entity<LadderComponent>> _toUpdate = new();
     private readonly Dictionary<string, Entity<LadderComponent>> _toUpdateIds = new();
 
+    private EntityQuery<ActorComponent> _actorQuery;
     private EntityQuery<LadderComponent> _ladderQuery;
 
     public override void Initialize()
     {
+        _actorQuery = GetEntityQuery<ActorComponent>();
         _ladderQuery = GetEntityQuery<LadderComponent>();
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
@@ -100,6 +103,9 @@ public sealed class LadderSystem : EntitySystem
             var othersMessage = Loc.GetString("rmc-ladder-start-climbing-others", ("user", user));
             _popup.PopupPredicted(selfMessage, othersMessage, user, user);
         }
+
+        if (_actorQuery.TryComp(user, out var actor))
+            AddViewer(ent, actor.PlayerSession);
     }
 
     private void OnLadderDoAfterAttempt(Entity<LadderComponent> ent, ref DoAfterAttemptEvent<LadderDoAfterEvent> args)
@@ -118,6 +124,10 @@ public sealed class LadderSystem : EntitySystem
 
     private void OnLadderDoAfter(Entity<LadderComponent> ent, ref LadderDoAfterEvent args)
     {
+        var user = args.User;
+        if (_actorQuery.TryComp(user, out var actor))
+            RemoveViewer(ent, actor.PlayerSession);
+
         if (args.Cancelled || args.Handled)
             return;
 
@@ -126,7 +136,6 @@ public sealed class LadderSystem : EntitySystem
         if (ent.Comp.Other is not { } other || TerminatingOrDeleted(ent.Comp.Other))
             return;
 
-        var user = args.User;
         _transform.SetCoordinates(user, _transform.GetMoverCoordinates(other));
 
         var selfMessage = Loc.GetString("rmc-ladder-finish-climbing-self");
@@ -148,6 +157,14 @@ public sealed class LadderSystem : EntitySystem
         }
 
         ent.Comp.Other = null;
+    }
+
+    protected virtual void AddViewer(Entity<LadderComponent> ent, ICommonSession player)
+    {
+    }
+
+    protected virtual void RemoveViewer(Entity<LadderComponent> ent, ICommonSession player)
+    {
     }
 
     public override void Update(float frameTime)
