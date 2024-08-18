@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Xenos do not take bloodloss damage anymore
-    type: Fix
-  id: 71
-  time: '2024-04-22T06:07:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1295
 - author: DrSmugleaf
   changes:
   - message: Fixed some xeno sprites being off-center.
@@ -4275,5 +4268,18 @@
   id: 570
   time: '2024-08-18T04:31:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3659
+- author: DangerRevolution
+  changes:
+  - message: Added the Commanding Officer's equipment and weapon vendors.
+    type: Add
+  - message: Added the Executive Officer's equipment and weapon vendors.
+    type: Add
+  - message: Added the Staff Officer's equipment and weapon vendors
+    type: Add
+  - message: Added the Pilot & Dropship Crew Chiefs' equipment and weapon vendors.
+    type: Add
+  id: 571
+  time: '2024-08-18T04:37:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3629
 Name: RMC14
 Order: -1
