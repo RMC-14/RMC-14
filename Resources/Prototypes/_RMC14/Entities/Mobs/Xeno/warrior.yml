@@ -64,7 +64,7 @@
     damage:
       groups:
         Brute: 35
-  - type: Tackle
+  - type: Tackle # min: 2, max: 4
     threshold: 4
     stun: 5
   - type: XenoLifesteal

@@ -41,6 +41,11 @@
             visible: false
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: InvulnerabilityTime
+    whitelist:
+      components:
+      - Xeno
+    hitsToInvulnerability: 3
 
 # Metal Barricade Tree
 - type: entity
@@ -297,6 +302,18 @@
     - type: Sprite
       layers:
       - state: hr_kutjevo
+      - map: [ "acided" ]
+    - type: Construction
+      graph: BarricadeHandrailGraph
+      node: nodeHandrail
+
+- type: entity
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeWireRail
+  components:
+    - type: Sprite
+      layers:
+      - state: wire_rail
       - map: [ "acided" ]
     - type: Construction
       graph: BarricadeHandrailGraph

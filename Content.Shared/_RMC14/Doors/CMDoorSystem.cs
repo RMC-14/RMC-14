@@ -70,11 +70,11 @@ public sealed class CMDoorSystem : EntitySystem
             return;
 
         button.Comp.LastUse = time;
-        var buttonName = Name(button);
+        var buttonName = button.Comp.Id ?? Name(button);
         var buttonTransform = Transform(button);
 
         var doors = EntityQueryEnumerator<RMCPodDoorComponent, DoorComponent, TransformComponent, MetaDataComponent>();
-        while (doors.MoveNext(out var door, out _, out var doorComp, out var doorTransform, out var metaData))
+        while (doors.MoveNext(out var door, out var podDoor, out var doorComp, out var doorTransform, out var metaData))
         {
             if (TerminatingOrDeleted(door))
                 continue;
@@ -82,7 +82,8 @@ public sealed class CMDoorSystem : EntitySystem
             if (buttonTransform.MapID != doorTransform.MapID)
                 continue;
 
-            if (buttonName != metaData.EntityName)
+            var id = podDoor.Id ?? metaData.EntityName;
+            if (buttonName != id)
                 continue;
 
             if (doorComp.State == DoorState.Open)

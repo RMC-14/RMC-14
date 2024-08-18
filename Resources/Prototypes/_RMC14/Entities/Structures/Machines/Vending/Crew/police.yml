@@ -14,6 +14,7 @@
   - type: CMAutomatedVendor
     jobs:
     - CMMilitaryPolice
+    - CMChiefMP # TODO RMC14 chief mp vendor
     sections:
     - name: Police Set (Mandatory)
       entries:

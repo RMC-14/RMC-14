@@ -123,5 +123,6 @@ public enum LogType
     RMCXenoOrderConstructionPlasma = RMCMarineAnnounce + 9,
     RMCXenoOrderConstructionComplete = RMCMarineAnnounce + 10,
     RMCPrimaryLZ = RMCMarineAnnounce + 11,
-    RMCDropshipLaunch = RMCMarineAnnounce + 12
+    RMCDropshipLaunch = RMCMarineAnnounce + 12,
+    RMCStunShake = RMCMarineAnnounce + 13,
 }

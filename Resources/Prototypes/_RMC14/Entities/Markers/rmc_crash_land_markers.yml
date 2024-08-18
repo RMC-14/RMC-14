@@ -16,7 +16,9 @@
           bounds: "-0.49,-0.49,0.49,0.49"
         density: 1500
         mask:
-        - AllMask
+        - MobMask
+        - MobLayer
         layer:
-        - AllMask
+        - MobMask
+        - MobLayer
   - type: CrashLandOnTouch

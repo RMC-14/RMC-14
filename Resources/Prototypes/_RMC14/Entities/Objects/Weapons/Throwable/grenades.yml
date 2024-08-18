@@ -52,9 +52,9 @@
     delay: 2
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40smoke.rsi
-  - type: SmokeOnTrigger
-    duration: 30
-    spreadAmount: 50
+  - type: SpawnOnTerminate
+    spawn: RMCSmoke
+    projectileAdjust: false
   - type: SoundOnTrigger
     sound: /Audio/Effects/smoke.ogg
   - type: DeleteOnTrigger
@@ -67,6 +67,29 @@
     - LauncherCompatibleGrenade
     - RMCGrenadeM40
   - type: Ammo
+
+- type: entity
+  parent: Smoke
+  id: RMCSmoke
+  components:
+  - type: Transform
+    anchored: true
+  - type: Occluder
+  - type: Sprite
+    sprite: _RMC14/Effects/smoke.rsi
+    state: smoke2
+  - type: TimedDespawn
+    lifetime: 10
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Appearance
+  - type: ActiveEdgeSpreader
+  - type: EdgeSpreader
+    id: RMCSmokeAcid
+  - type: EvenSmoke
+    spawn: RMCSmoke
+    range: 3
 
 - type: entity
   parent: CMGrenadeHighExplosive
@@ -110,7 +133,7 @@
     state: grenade
   - type: TimedDespawn
     lifetime: 0.6
-  
+
 - type: entity
   id: RMCExplosionEffectGrenadeShockWave
   components:

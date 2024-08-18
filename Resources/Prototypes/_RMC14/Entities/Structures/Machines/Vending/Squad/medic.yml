@@ -163,13 +163,15 @@
       - id: RMCBinoculars
         points: 5
     #    CMRangeFinder: 10P
-    #    CMLaserDesignator: 15P
+      - id: RMCLaserDesignator
+        points: 15
     - name: Helmet Optics
       entries: [ ]
     #    CMWeldingVisor: 5P
     - name: Pamphlets
-      entries: [ ]
-    #    CMPamphletJTAC: 15P
+      entries:
+      - id: CMPamphletJTAC
+        points: 15
     #    CMPamphletEngineering: 15P
     - name: Radio Keys
       entries:
@@ -278,7 +280,7 @@
       - id: CMWebbingBlack
       #- id: CMShoulderHolster
       - id: CMWebbing
-    #- id: CMDropPouch
+      - id: CMWebbingPouch
     - name: Mask
       choices: { CMMask: 1 }
       entries:
