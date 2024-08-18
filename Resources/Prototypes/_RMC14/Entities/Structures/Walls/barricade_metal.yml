@@ -307,6 +307,18 @@
       graph: BarricadeHandrailGraph
       node: nodeHandrail
 
+- type: entity
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeWireRail
+  components:
+    - type: Sprite
+      layers:
+      - state: wire_rail
+      - map: [ "acided" ]
+    - type: Construction
+      graph: BarricadeHandrailGraph
+      node: nodeHandrail
+
 # Metal Barricade Doors
 - type: entity
   parent: CMBarricadeBase
