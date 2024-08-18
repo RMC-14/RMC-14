@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added dropship piloting.
-    type: Add
-  id: 74
-  time: '2024-04-25T03:22:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1308
-- author: DrSmugleaf
-  changes:
   - message: Added distress signal gamemode.
     type: Add
   id: 75
@@ -4281,5 +4274,12 @@
   id: 573
   time: '2024-08-18T04:52:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3622
+- author: crystalHex
+  changes:
+  - message: Added the drop pouch.
+    type: Add
+  id: 574
+  time: '2024-08-18T04:56:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3678
 Name: RMC14
 Order: -1
