@@ -225,7 +225,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
         if (time - neurotoxin.LastMessage >= neurotoxin.TimeBetweenMessages)
         {
             neurotoxin.LastMessage = time;
-            _popup.PopupEntity(Loc.GetString(message), victim, poptype);
+            _popup.PopupEntity(Loc.GetString(message), victim, victim, poptype);
         }
     }
 
