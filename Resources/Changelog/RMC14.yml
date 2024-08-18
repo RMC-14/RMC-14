@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Whisper
   changes:
-  - message: Fixed not being able to store the M96S in the suit storage slot.
-    type: Fix
-  id: 77
-  time: '2024-04-26T10:00:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2014
-- author: Whisper
-  changes:
   - message: Fixed burning marines and xenos being able to set others on fire.
     type: Fix
   id: 78
@@ -4283,5 +4276,12 @@
   id: 576
   time: '2024-08-18T05:00:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3600
+- author: Rainbeon
+  changes:
+  - message: You can now view player character descriptions from much further away.
+    type: Tweak
+  id: 577
+  time: '2024-08-18T05:03:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3626
 Name: RMC14
 Order: -1
