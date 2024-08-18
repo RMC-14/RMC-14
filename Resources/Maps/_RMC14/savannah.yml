@@ -2240,7 +2240,7 @@ entities:
       pos: 47.5,-25.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -16702.705
+      secondsUntilStateChange: -16861.68
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -2502,7 +2502,7 @@ entities:
       pos: -50.5,-10.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -37787.832
+      secondsUntilStateChange: -37946.81
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -2801,7 +2801,7 @@ entities:
       pos: -22.5,7.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -31293.56
+      secondsUntilStateChange: -31452.535
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -29058,14 +29058,7 @@ entities:
       parent: 1
 - proto: ColMarTechStaffOfficerEquipment
   entities:
-  - uid: 15854
-    components:
-    - type: Transform
-      pos: -25.5,-12.5
-      parent: 1
-- proto: ColMarTechStaffOfficerWeapon
-  entities:
-  - uid: 15853
+  - uid: 6301
     components:
     - type: Transform
       pos: -24.5,-12.5
@@ -90898,6 +90891,18 @@ entities:
     components:
     - type: Transform
       pos: -49.216324,2.7877839
+      parent: 1
+- proto: RMCMechPowerLoader
+  entities:
+  - uid: 15853
+    components:
+    - type: Transform
+      pos: 3.5,2.5
+      parent: 1
+  - uid: 15854
+    components:
+    - type: Transform
+      pos: 37.5,-17.5
       parent: 1
 - proto: RMCOverwatchConsole
   entities:
