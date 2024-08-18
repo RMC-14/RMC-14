@@ -1,215 +1,215 @@
 ﻿- type: guideEntry
   parent: RMC
-  id: CMOverview
-  name: cm-guide-entry-rules
+  id: RMCOverview
+  name: rmc-guide-entry-rules
   priority: 0
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Overview.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/RMCOverview.xml"
   ruleEntry: false
   children:
-  - CMBanTypes
-  - CMBanDurations
-  - CMZeroTolerance
-  - CMLanguage
-  - CMMultikey
-  - CMRulesEscalation
-  - CMMetaknowledge
-  - CMKindness
-  - CMMetagrudging
-  - CMMutinies
-  - CMCommandRoles
-  - CMHigherStandards
-  - CMLethalForce
-  - CMLethalForceConsequences
-  - CMProtectDetainees
-  - CMGeneralRoleplayStandards
-  - CMMarineRoleplayStandards
-  - CMMarineDeployment
-  - CMCommandRoleplay
-  - CMXenoRoleplay
-  - CMSurvivorRoleplay
-  - CMHostileFactionRoleplay
-  - CMCommandChain
+  - RMCBanTypes
+  - RMCBanDurations
+  - RMCZeroTolerance
+  - RMCLanguage
+  - RMCMultikey
+  - RMCRulesEscalation
+  - RMCMetaknowledge
+  - RMCKindness
+  - RMCMetagrudging
+  - RMCMutinies
+  - RMCCommandRoles
+  - RMCHigherStandards
+  - RMCLethalForce
+  - RMCLethalForceConsequences
+  - RMCProtectDetainees
+  - RMCGeneralRoleplayStandards
+  - RMCMarineRoleplayStandards
+  - RMCMarineDeployment
+  - RMCCommandRoleplay
+  - RMCXenoRoleplay
+  - RMCSurvivorRoleplay
+  - RMCHostileFactionRoleplay
+  - RMCCommandChain
 
 - type: guideEntry
   parent: RMC
-  id: CMBanTypes
-  name: cm-guide-entry-rules-ban-types
+  id: RMCBanTypes
+  name: rmc-guide-entry-rules-ban-types
   priority: 2
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/CMBanTypes.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/RMCBanTypes.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMBanDurations
-  name: cm-guide-entry-rules-ban-durations
+  id: RMCBanDurations
+  name: rmc-guide-entry-rules-ban-durations
   priority: 3
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/CMBanDurations.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/RMCBanDurations.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMZeroTolerance
-  name: cm-guide-entry-rules-zero-tolerance
+  id: RMCZeroTolerance
+  name: rmc-guide-entry-rules-zero-tolerance
   priority: 4
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/ZeroTolerance.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/RMCZeroTolerance.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMLanguage
-  name: cm-guide-entry-rules-language
+  id: RMCLanguage
+  name: rmc-guide-entry-rules-language
   priority: 5
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/CMLanguage.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/RMCLanguage.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMMultikey
-  name: cm-guide-entry-rules-multikey
+  id: RMCMultikey
+  name: rmc-guide-entry-rules-multikey
   priority: 6
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/CMMultikey.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/RMCMultikey.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMRulesEscalation
-  name: cm-guide-entry-rules-escalation
+  id: RMCRulesEscalation
+  name: rmc-guide-entry-rules-escalation
   priority: 7
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/CMRulesEscalation.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/RMCRulesEscalation.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMMetaknowledge
-  name: cm-guide-entry-rules-metaknowledge
+  id: RMCMetaknowledge
+  name: rmc-guide-entry-rules-metaknowledge
   priority: 8
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/CMMetaknowledge.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/RMCMetaknowledge.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMKindness
-  name: cm-guide-entry-rules-kindness
+  id: RMCKindness
+  name: rmc-guide-entry-rules-kindness
   priority: 9
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/CMKindness.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/RMCKindness.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMMetagrudging
-  name: cm-guide-entry-rules-metagrudging
+  id: RMCMetagrudging
+  name: rmc-guide-entry-rules-metagrudging
   priority: 10
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/CMMetagrudging.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/RMCMetagrudging.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMMutinies
-  name: cm-guide-entry-rules-mutinies
+  id: RMCMutinies
+  name: rmc-guide-entry-rules-mutinies
   priority: 11
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Mutiny/CMMutinies.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/Mutiny/RMCMutinies.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMCommandRoles
-  name: cm-guide-entry-rules-command-roles
+  id: RMCCommandRoles
+  name: rmc-guide-entry-rules-command-roles
   priority: 13
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/CMCommandRoles.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/Core/RMCCommandRoles.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMHigherStandards
-  name: cm-guide-entry-rules-higher-standards
+  id: RMCHigherStandards
+  name: rmc-guide-entry-rules-higher-standards
   priority: 14
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/MilitaryCommand/CMHigherStandards.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/MilitaryCommand/RMCHigherStandards.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMLethalForce
-  name: cm-guide-entry-rules-lethal-force
+  id: RMCLethalForce
+  name: rmc-guide-entry-rules-lethal-force
   priority: 15
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/MilitaryCommand/CMLethalForce.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/MilitaryCommand/RMCLethalForce.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMLethalForceConsequences
-  name: cm-guide-entry-rules-lethal-force-consequences
+  id: RMCLethalForceConsequences
+  name: rmc-guide-entry-rules-lethal-force-consequences
   priority: 16
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/MilitaryCommand/CMLethalForceConsequences.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/MilitaryCommand/RMCLethalForceConsequences.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMProtectDetainees
-  name: cm-guide-entry-rules-protect-detainees
+  id: RMCProtectDetainees
+  name: rmc-guide-entry-rules-protect-detainees
   priority: 17
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/MilitaryCommand/CMProtectDetainees.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/MilitaryCommand/RMCProtectDetainees.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMGeneralRoleplayStandards
-  name: cm-guide-entry-rules-general-roleplay-standards
+  id: RMCGeneralRoleplayStandards
+  name: rmc-guide-entry-rules-general-roleplay-standards
   priority: 18
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/CMGeneralRoleplayStandards.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/RMCGeneralRoleplayStandards.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMMarineRoleplayStandards
-  name: cm-guide-entry-rules-marine-roleplay-standards
+  id: RMCMarineRoleplayStandards
+  name: rmc-guide-entry-rules-marine-roleplay-standards
   priority: 19
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/CMMarineRoleplayStandards.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/RMCMarineRoleplayStandards.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMMarineDeployment
-  name: cm-guide-entry-rules-marine-deployment
+  id: RMCMarineDeployment
+  name: rmc-guide-entry-rules-marine-deployment
   priority: 20
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/CMMarineDeployment.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/RMCMarineDeployment.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMCommandRoleplay
-  name: cm-guide-entry-rules-command-roleplay
+  id: RMCCommandRoleplay
+  name: rmc-guide-entry-rules-command-roleplay
   priority: 21
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/CMCommandRoleplay.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/RMCCommandRoleplay.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMXenoRoleplay
-  name: cm-guide-entry-rules-xeno-roleplay
+  id: RMCXenoRoleplay
+  name: rmc-guide-entry-rules-xeno-roleplay
   priority: 22
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/CMXenoRoleplay.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/RMCXenoRoleplay.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMSurvivorRoleplay
-  name: cm-guide-entry-rules-survivor-roleplay
+  id: RMCSurvivorRoleplay
+  name: rmc-guide-entry-rules-survivor-roleplay
   priority: 23
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/CMSurvivorRoleplay.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/RMCSurvivorRoleplay.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMHostileFactionRoleplay
-  name: cm-guide-entry-rules-hostile-faction-roleplay
+  id: RMCHostileFactionRoleplay
+  name: rmc-guide-entry-rules-hostile-faction-roleplay
   priority: 24
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/CMHostileFactionRoleplay.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/RMCHostileFactionRoleplay.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMCommandChain
-  name: cm-guide-entry-rules-command-chain
+  id: RMCCommandChain
+  name: rmc-guide-entry-rules-command-chain
   priority: 25
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/CMCommandChain.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/RMCCommandChain.xml"

@@ -1,50 +1,50 @@
 - type: guideEntry
   parent: RMC
-  id: CMMarineLaw
-  name: cm-guide-entry-rules-marine-law
-  text: "/ServerInfo/Guidebook/_RMC14/Law/CMMarineLaw.xml"
+  id: RMCMarineLaw
+  name: rmc-guide-entry-rules-marine-law
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLaw.xml"
   priority: 3
   children:
-  - CMMarineLawDefinitions
-  - CMMarineLawProcedures
+  - RMCMarineLawDefinitions
+  - RMCMarineLawProcedures
 
 - type: guideEntry
   parent: RMC
-  id: CMMarineLawDefinitions
+  id: RMCMarineLawDefinitions
   name: rmc-guide-entry-marine-law-definitions
-  text: "/ServerInfo/Guidebook/_RMC14/Law/CMMarineLawDefinitions.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawDefinitions.xml"
   priority: 0
 
 # Procedures
 - type: guideEntry
   parent: RMC
-  id: CMMarineLawProcedures
+  id: RMCMarineLawProcedures
   name: rmc-guide-entry-marine-law-procedures
-  text: "/ServerInfo/Guidebook/_RMC14/Law/CMMarineLawProcedures.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawProcedures.xml"
   priority: 1
   children:
-  - CMMarineLawArresting
-  - CMMarineLawCharging
-  - CMMarineLawNJP
+  - RMCMarineLawArresting
+  - RMCMarineLawCharging
+  - RMCMarineLawNJP
 
 - type: guideEntry
   parent: RMC
-  id: CMMarineLawArresting
+  id: RMCMarineLawArresting
   name: rmc-guide-entry-marine-law-arresting
-  text: "/ServerInfo/Guidebook/_RMC14/Law/CMMarineLawArresting.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawArresting.xml"
   priority: 0
 
 - type: guideEntry
   parent: RMC
-  id: CMMarineLawCharging
+  id: RMCMarineLawCharging
   name: rmc-guide-entry-marine-law-charging
-  text: "/ServerInfo/Guidebook/_RMC14/Law/CMMarineLawCharging.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCharging.xml"
   priority: 1
 
 - type: guideEntry
   parent: RMC
-  id: CMMarineLawNJP
+  id: RMCMarineLawNJP
   name: rmc-guide-entry-marine-law-njp
-  text: "/ServerInfo/Guidebook/_RMC14/Law/CMMarineLawNJP.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawNJP.xml"
   priority: 2
 
