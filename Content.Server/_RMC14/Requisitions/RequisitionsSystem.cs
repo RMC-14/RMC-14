@@ -206,10 +206,15 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         return closest;
     }
 
+    private int GetElevatorCapacity(Entity<RequisitionsElevatorComponent> elevator)
+    {
+        var side = (int) MathF.Floor(elevator.Comp.Radius * 2 + 1);
+        return side * side;
+    }
+
     private bool IsFull(Entity<RequisitionsElevatorComponent> elevator)
     {
-        var side = elevator.Comp.Radius * 2 + 1;
-        return elevator.Comp.Orders.Count >= side * side;
+        return elevator.Comp.Orders.Count >= GetElevatorCapacity(elevator);
     }
 
     private void SendUIState(Entity<RequisitionsComputerComponent> computer)
@@ -360,9 +365,11 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             var coordinates = _transform.GetMoverCoordinates(elevator);
             var xOffset = comp.Radius;
             var yOffset = comp.Radius;
+            int remainingDeliveries = GetElevatorCapacity(elevator);
             foreach (var order in comp.Orders)
             {
                 var crate = SpawnAtPosition(order.Crate, coordinates.Offset(new Vector2(xOffset, yOffset)));
+                remainingDeliveries--;
 
                 foreach (var prototype in order.Entities)
                 {
@@ -384,6 +391,34 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             }
 
             comp.Orders.Clear();
+
+            var query = EntityQueryEnumerator<RequisitionsCustomDeliveryComponent>();
+
+            while (query.MoveNext(out var entityUid, out var deliveryComp))
+            {
+                // If elevator is full, abort and break out of the loop. Any remaining custom deliveries will be on
+                // the next elevator shipment.
+                if (remainingDeliveries <= 0)
+                    break;
+
+                // Remove the component so it doesn't get "delivered" again next elevator cycle.
+                RemCompDeferred<RequisitionsCustomDeliveryComponent>(entityUid);
+
+                // Teleport to the spot.
+                _transform.SetCoordinates(entityUid, coordinates.Offset(new Vector2(xOffset, yOffset)));
+                remainingDeliveries--; // Decrement available delivery slots count.
+
+                // Update the next spot to teleport to.
+                yOffset--;
+                if (yOffset < -comp.Radius)
+                {
+                    yOffset = comp.Radius;
+                    xOffset--;
+                }
+
+                if (xOffset < -comp.Radius)
+                    xOffset = comp.Radius;
+            }
         }
     }
 

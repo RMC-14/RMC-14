@@ -105,6 +105,10 @@ public sealed class RMCCVars : CVars
     public static readonly CVarDef<float> RMCLandingZonePrimaryAutoMinutes =
         CVarDef.Create("rmc.landing_zone_primary_auto_minutes", 25f, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCCorrosiveAcidTickDelaySeconds =
+        CVarDef.Create("rmc.corrosive_acid_tick_delay_seconds", 10, CVar.REPLICATED | CVar.SERVER);
+    public static readonly CVarDef<string> RMCCorrosiveAcidDamageType =
+        CVarDef.Create("rmc.corrosive_acid_damage_type", "Heat", CVar.REPLICATED | CVar.SERVER);
     public static readonly CVarDef<int> RMCTailStabMaxTargets =
         CVarDef.Create("rmc.tail_stab_max_targets", 1, CVar.REPLICATED | CVar.SERVER);
 

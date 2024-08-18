@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Xenonids.GasToggle;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Projectile;
@@ -29,7 +30,7 @@ public sealed class XenoBombardSystem : EntitySystem
     {
         SubscribeLocalEvent<XenoBombardComponent, XenoBombardActionEvent>(OnBombard);
         SubscribeLocalEvent<XenoBombardComponent, XenoBombardDoAfterEvent>(OnBombardDoAfter);
-        SubscribeLocalEvent<XenoBombardComponent, XenoBombardToggleActionEvent>(OnToggleType);
+        SubscribeLocalEvent<XenoBombardComponent, XenoGasToggleActionEvent>(OnToggleType);
     }
 
     private void OnBombard(Entity<XenoBombardComponent> ent, ref XenoBombardActionEvent args)
@@ -96,7 +97,7 @@ public sealed class XenoBombardSystem : EntitySystem
         _popup.PopupEntity(othersMessage, ent, Filter.PvsExcept(ent), true, PopupType.MediumCaution);
     }
 
-    private void OnToggleType(Entity<XenoBombardComponent> ent, ref XenoBombardToggleActionEvent args)
+    private void OnToggleType(Entity<XenoBombardComponent> ent, ref XenoGasToggleActionEvent args)
     {
         if (ent.Comp.Projectiles.Length == 0)
             return;

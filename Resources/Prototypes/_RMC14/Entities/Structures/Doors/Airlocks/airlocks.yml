@@ -193,3 +193,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/prep_door_delta.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: RMCAirlockStrata
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/strata_door.rsi

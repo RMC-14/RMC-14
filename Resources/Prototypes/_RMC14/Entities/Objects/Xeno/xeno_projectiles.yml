@@ -181,3 +181,17 @@
     layers:
     - state: neuro_glob
       shader: unshaded
+  - type: TimedDespawn
+    lifetime: 10
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false
+  - type: SmokeOnTrigger
+    smokePrototype: RMCSmokeNeurotoxin
+    duration: 30
+    spreadAmount: 50
+  - type: SpawnOnTerminate
+    spawn: RMCSmokeNeurotoxin
+    popup: rmc-glob-land
+    popupType: LargeCaution
+  - type: ProjectileMaxRange
+    max: 10

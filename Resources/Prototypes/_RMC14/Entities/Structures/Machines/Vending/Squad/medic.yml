@@ -278,7 +278,7 @@
       - id: CMWebbingBlack
       #- id: CMShoulderHolster
       - id: CMWebbing
-    #- id: CMDropPouch
+      - id: CMWebbingPouch
     - name: Mask
       choices: { CMMask: 1 }
       entries:

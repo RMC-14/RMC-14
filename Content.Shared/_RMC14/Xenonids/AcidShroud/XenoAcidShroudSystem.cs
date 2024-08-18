@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Xenonids.GasToggle;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 
@@ -13,6 +14,7 @@ public sealed class XenoAcidShroudSystem : EntitySystem
     {
         SubscribeLocalEvent<XenoAcidShroudComponent, XenoAcidShroudActionEvent>(OnAcidShroudAction);
         SubscribeLocalEvent<XenoAcidShroudComponent, XenoAcidShroudDoAfterEvent>(OnAcidShroudDoAfter);
+        SubscribeLocalEvent<XenoAcidShroudComponent, XenoGasToggleActionEvent>(OnToggleType);
     }
 
     private void OnAcidShroudAction(Entity<XenoAcidShroudComponent> ent, ref XenoAcidShroudActionEvent args)
@@ -34,5 +36,20 @@ public sealed class XenoAcidShroudSystem : EntitySystem
         args.Handled = true;
         SpawnAtPosition(ent.Comp.Spawn, ent.Owner.ToCoordinates());
         _rmcActions.ActivateSharedCooldown(action, ent);
+    }
+
+    private void OnToggleType(Entity<XenoAcidShroudComponent> ent, ref XenoGasToggleActionEvent args)
+    {
+        if (ent.Comp.Gases.Length == 0)
+            return;
+
+        var index = Array.IndexOf(ent.Comp.Gases, ent.Comp.Spawn);
+        if (index == -1 || index >= ent.Comp.Gases.Length - 1)
+            index = 0;
+        else
+            index++;
+
+        ent.Comp.Spawn = ent.Comp.Gases[index];
+        Dirty(ent);
     }
 }
