@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using Content.Client.Eye;
 using Content.Client.Message;
+using Content.Client.UserInterface.ControlExtensions;
 using Content.Shared._RMC14.Camera;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
@@ -108,8 +109,7 @@ public sealed class RMCCameraBui : BoundUserInterface
             if (control is not Button button)
                 continue;
 
-            button.Visible = button.Text == null ||
-                             button.Text.Contains(_window.SearchBar.Text, StringComparison.OrdinalIgnoreCase);
+            button.Visible = button.ChildrenContainText(_window.SearchBar.Text);
         }
     }
 
