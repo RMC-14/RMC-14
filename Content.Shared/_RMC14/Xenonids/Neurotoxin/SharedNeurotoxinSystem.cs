@@ -118,7 +118,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
 
             //Basic Effects
             _stamina.TakeStaminaDamage(uid, neuro.StaminaDamagePerSecond * frameTime);
-            _drunk.TryApplyDrunkenness(uid, neuro.DizzyStrength, false);
+            _statusEffects.TryAddStatusEffect<DrunkComponent>(uid, "Drunk", neuro.DizzyStrength, true);
 
             NeurotoxinNonStackingEffects(uid, neuro, time, out var coughChance, out var stumbleChance);
             NeurotoxinStackingEffects(uid, neuro, frameTime, time);
@@ -133,7 +133,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 _popup.PopupEntity(Loc.GetString("rmc-stumble"), uid, uid, PopupType.MediumCaution);
                 _statusEffects.TryAddStatusEffect(uid, "Muted", neuro.DazeLength * 5, true, "Muted");
                 _jitter.DoJitter(uid, neuro.StumbleJitterTime, true);
-                _drunk.TryApplyDrunkenness(uid, neuro.DizzyStrengthOnStumble, false);
+                _statusEffects.TryAddStatusEffect<DrunkComponent>(uid, "Drunk", neuro.DizzyStrengthOnStumble, true);
                 var ev = new NeurotoxinEmoteEvent() { Emote = neuro.PainId };
                 RaiseLocalEvent(uid, ev);
             }
