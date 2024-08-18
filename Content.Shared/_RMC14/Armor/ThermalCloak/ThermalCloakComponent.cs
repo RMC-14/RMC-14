@@ -1,7 +1,7 @@
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Audio;
 
 namespace Content.Shared._RMC14.Armor.ThermalCloak;
 
@@ -20,7 +20,7 @@ public sealed partial class ThermalCloakComponent : Component
     public TimeSpan ForcedCooldown = TimeSpan.FromSeconds(10);
 
     [DataField, AutoNetworkedField]
-    public float Opacity = 0.1f;
+    public float Opacity = 0.15f;
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? CloakSound;
