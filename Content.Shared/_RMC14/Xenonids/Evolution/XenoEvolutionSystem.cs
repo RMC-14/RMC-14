@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Egg;
@@ -158,7 +158,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             var msg = Loc.GetString("rmc-xeno-evolution-cant-evolve-recent-queen-death-minutes",
                 ("minutes", left.Minutes),
                 ("seconds", left.Seconds));
-            if (left.Minutes == 1)
+            if (left.Minutes == 0)
             {
                 msg = Loc.GetString("rmc-xeno-evolution-cant-evolve-recent-queen-death-seconds",
                     ("seconds", left.Seconds));
