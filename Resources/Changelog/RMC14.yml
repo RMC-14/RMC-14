@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed some xeno sprites being off-center.
-    type: Fix
-  - message: Fixed some xeno hitboxes being too small.
-    type: Fix
-  id: 72
-  time: '2024-04-22T09:56:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1297
-- author: DrSmugleaf
-  changes:
   - message: Added xenos being able to nest marines onto weeded walls and resin walls.
     type: Add
   id: 73
@@ -4281,5 +4272,13 @@
   id: 571
   time: '2024-08-18T04:37:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3629
+- author: Vermidia
+  changes:
+  - message: Fixed the Lurker's Crippling Strike not doing 20% extra damage, and added
+      a visual effect on the person hit.
+    type: Fix
+  id: 572
+  time: '2024-08-18T04:45:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3639
 Name: RMC14
 Order: -1
