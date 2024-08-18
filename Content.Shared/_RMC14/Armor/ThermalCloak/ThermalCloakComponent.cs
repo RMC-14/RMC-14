@@ -20,7 +20,7 @@ public sealed partial class ThermalCloakComponent : Component
     public TimeSpan ForcedCooldown = TimeSpan.FromSeconds(10);
 
     [DataField, AutoNetworkedField]
-    public float Opacity = 0.15f;
+    public float Opacity = 0.1f;
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? CloakSound;
