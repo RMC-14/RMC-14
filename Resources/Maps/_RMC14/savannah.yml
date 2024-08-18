@@ -2240,7 +2240,7 @@ entities:
       pos: 47.5,-25.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -15874.814
+      secondsUntilStateChange: -16158.43
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -2502,7 +2502,7 @@ entities:
       pos: -50.5,-10.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -36959.945
+      secondsUntilStateChange: -37243.56
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -2801,7 +2801,7 @@ entities:
       pos: -22.5,7.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -30465.67
+      secondsUntilStateChange: -30749.285
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -11953,18 +11953,6 @@ entities:
     - type: Transform
       pos: 17.5,-24.5
       parent: 1
-- proto: CMLockerStaff
-  entities:
-  - uid: 6862
-    components:
-    - type: Transform
-      pos: -24.5,-12.5
-      parent: 1
-  - uid: 6863
-    components:
-    - type: Transform
-      pos: -28.5,-12.5
-      parent: 1
 - proto: CMLockerWarden
   entities:
   - uid: 6868
@@ -12241,11 +12229,6 @@ entities:
     - type: Transform
       pos: -57.37493,-19.409649
       parent: 1
-  - uid: 1117
-    components:
-    - type: Transform
-      pos: -39.43414,-19.424377
-      parent: 1
   - uid: 1119
     components:
     - type: Transform
@@ -12283,6 +12266,16 @@ entities:
         Sincerely, your
 
         Clown Party Suits Company
+  - uid: 6793
+    components:
+    - type: Transform
+      pos: -39.47417,-22.415037
+      parent: 1
+  - uid: 6863
+    components:
+    - type: Transform
+      pos: -39.59917,-22.446287
+      parent: 1
   - uid: 7733
     components:
     - type: Transform
@@ -12302,6 +12295,61 @@ entities:
     components:
     - type: Transform
       pos: -64.38419,4.6742234
+      parent: 1
+  - uid: 15842
+    components:
+    - type: Transform
+      pos: -36.463642,-6.7229176
+      parent: 1
+  - uid: 15843
+    components:
+    - type: Transform
+      pos: -40.510517,-9.332293
+      parent: 1
+  - uid: 15844
+    components:
+    - type: Transform
+      pos: -39.635517,-5.4729176
+      parent: 1
+  - uid: 15845
+    components:
+    - type: Transform
+      pos: -24.604267,-7.5354176
+      parent: 1
+  - uid: 15846
+    components:
+    - type: Transform
+      pos: -28.494892,-7.0041676
+      parent: 1
+  - uid: 15847
+    components:
+    - type: Transform
+      pos: -28.307392,-7.1291676
+      parent: 1
+  - uid: 15848
+    components:
+    - type: Transform
+      pos: -29.557392,-14.457293
+      parent: 1
+  - uid: 15849
+    components:
+    - type: Transform
+      pos: -29.432392,-14.426043
+      parent: 1
+  - uid: 15850
+    components:
+    - type: Transform
+      pos: -35.526142,-3.2930713
+      parent: 1
+  - uid: 15851
+    components:
+    - type: Transform
+      pos: -35.416767,-3.1836963
+      parent: 1
+  - uid: 15852
+    components:
+    - type: Transform
+      pos: -35.354267,-3.1368213
       parent: 1
 - proto: CMPaperBin10
   entities:
@@ -12542,6 +12590,11 @@ entities:
     - type: Transform
       pos: -46.38012,8.286322
       parent: 1
+  - uid: 1117
+    components:
+    - type: Transform
+      pos: -39.41167,-22.430662
+      parent: 1
   - uid: 1132
     components:
     - type: Transform
@@ -12581,6 +12634,41 @@ entities:
     components:
     - type: Transform
       pos: -47.93093,3.5687158
+      parent: 1
+  - uid: 15835
+    components:
+    - type: Transform
+      pos: -44.34917,-22.524412
+      parent: 1
+  - uid: 15836
+    components:
+    - type: Transform
+      pos: -39.521046,-22.555662
+      parent: 1
+  - uid: 15837
+    components:
+    - type: Transform
+      pos: -32.521046,-12.102537
+      parent: 1
+  - uid: 15838
+    components:
+    - type: Transform
+      pos: -29.28667,-14.290037
+      parent: 1
+  - uid: 15839
+    components:
+    - type: Transform
+      pos: -24.666767,-7.40928
+      parent: 1
+  - uid: 15840
+    components:
+    - type: Transform
+      pos: -36.401142,-6.90928
+      parent: 1
+  - uid: 15841
+    components:
+    - type: Transform
+      pos: -36.479267,-6.893655
       parent: 1
 - proto: CMPenFountain
   entities:
@@ -14162,16 +14250,6 @@ entities:
     - type: Transform
       pos: -36.5,4.5
       parent: 1
-  - uid: 613
-    components:
-    - type: Transform
-      pos: -41.5,-19.5
-      parent: 1
-  - uid: 614
-    components:
-    - type: Transform
-      pos: -39.5,-19.5
-      parent: 1
   - uid: 615
     components:
     - type: Transform
@@ -14808,14 +14886,7 @@ entities:
   - uid: 6790
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -44.5,-19.5
-      parent: 1
-  - uid: 6793
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -36.5,-19.5
+      pos: -36.5,-22.5
       parent: 1
   - uid: 6802
     components:
@@ -14852,6 +14923,11 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -61.5,0.5
+      parent: 1
+  - uid: 6862
+    components:
+    - type: Transform
+      pos: -39.5,-22.5
       parent: 1
   - uid: 6932
     components:
@@ -15047,6 +15123,16 @@ entities:
     components:
     - type: Transform
       pos: 48.5,2.5
+      parent: 1
+  - uid: 15833
+    components:
+    - type: Transform
+      pos: -41.5,-22.5
+      parent: 1
+  - uid: 15834
+    components:
+    - type: Transform
+      pos: -44.5,-22.5
       parent: 1
 - proto: CMTableAlmayer
   entities:
@@ -28328,6 +28414,27 @@ entities:
     - type: Transform
       pos: 43.5,-15.5
       parent: 1
+- proto: ColMarTechCommandingOfficerClothing
+  entities:
+  - uid: 15830
+    components:
+    - type: Transform
+      pos: -30.5,-2.5
+      parent: 1
+- proto: ColMarTechCommandingOfficerEquipment
+  entities:
+  - uid: 15831
+    components:
+    - type: Transform
+      pos: -29.5,-2.5
+      parent: 1
+- proto: ColMarTechCommandingOfficerWeapon
+  entities:
+  - uid: 15832
+    components:
+    - type: Transform
+      pos: -28.5,-2.5
+      parent: 1
 - proto: ColMarTechCrewCombatCorrespondent
   entities:
   - uid: 1276
@@ -28358,6 +28465,30 @@ entities:
     components:
     - type: Transform
       pos: 36.5,10.5
+      parent: 1
+- proto: ColMarTechDropshipCrewEquipment
+  entities:
+  - uid: 15855
+    components:
+    - type: Transform
+      pos: -39.5,-19.5
+      parent: 1
+  - uid: 15858
+    components:
+    - type: Transform
+      pos: -44.5,-19.5
+      parent: 1
+- proto: ColMarTechDropshipCrewWeapon
+  entities:
+  - uid: 15856
+    components:
+    - type: Transform
+      pos: -36.5,-19.5
+      parent: 1
+  - uid: 15857
+    components:
+    - type: Transform
+      pos: -41.5,-19.5
       parent: 1
 - proto: ColMarTechEquipment
   entities:
@@ -28460,6 +28591,20 @@ entities:
     components:
     - type: Transform
       pos: 61.5,11.5
+      parent: 1
+- proto: ColMarTechExecutiveOfficerEquipment
+  entities:
+  - uid: 613
+    components:
+    - type: Transform
+      pos: -29.5,-12.5
+      parent: 1
+- proto: ColMarTechExecutiveOfficerWeapon
+  entities:
+  - uid: 614
+    components:
+    - type: Transform
+      pos: -28.5,-12.5
       parent: 1
 - proto: ColMarTechFLEquipment
   entities:
@@ -28915,6 +29060,20 @@ entities:
     components:
     - type: Transform
       pos: 69.5,11.5
+      parent: 1
+- proto: ColMarTechStaffOfficerEquipment
+  entities:
+  - uid: 15854
+    components:
+    - type: Transform
+      pos: -25.5,-12.5
+      parent: 1
+- proto: ColMarTechStaffOfficerWeapon
+  entities:
+  - uid: 15853
+    components:
+    - type: Transform
+      pos: -24.5,-12.5
       parent: 1
 - proto: ColMarTechSurplus
   entities:
