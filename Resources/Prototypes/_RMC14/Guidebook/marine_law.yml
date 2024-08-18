@@ -26,6 +26,7 @@
   - RMCMarineLawArresting
   - RMCMarineLawCharging
   - RMCMarineLawNJP
+  - RMCMarineLawLethal
 
 - type: guideEntry
   parent: RMC
@@ -46,5 +47,12 @@
   id: RMCMarineLawNJP
   name: rmc-guide-entry-marine-law-njp
   text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawNJP.xml"
+  priority: 2
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawLethal
+  name: rmc-guide-entry-marine-law-lethal
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawLethal.xml"
   priority: 2
 
