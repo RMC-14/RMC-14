@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Medically-unskilled marines now have a 3 second do after delay when using
-      auto-injectors, except for the emergency one.
-    type: Tweak
-  id: 70
-  time: '2024-04-22T04:29:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1294
 - author: Whisper
   changes:
   - message: Xenos do not take bloodloss damage anymore
@@ -4276,5 +4268,12 @@
   id: 569
   time: '2024-08-18T04:21:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3700
+- author: Dutch-VanDerLinde
+  changes:
+  - message: You can now give most jumpsuits an alternative look by folding them.
+    type: Add
+  id: 570
+  time: '2024-08-18T04:31:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3659
 Name: RMC14
 Order: -1
