@@ -29,3 +29,11 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+- type: entity
+  parent: CMEffectStomp
+  id: RMCEffectCripple
+  noSpawn: true
+  components:
+  - type: TimedDespawn
+    lifetime: 5
