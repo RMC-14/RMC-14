@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Whisper
   changes:
-  - message: Fixed the fire rate for the M77 and service pistols.
-    type: Fix
-  id: 76
-  time: '2024-04-26T10:00:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2019
-- author: Whisper
-  changes:
   - message: Fixed not being able to store the M96S in the suit storage slot.
     type: Fix
   id: 77
@@ -4282,5 +4275,13 @@
   id: 575
   time: '2024-08-18T04:59:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3621
+- author: Vermidia
+  changes:
+  - message: You can choose to tuck in features (like hair, moth antenna, etc) on
+      helmets.
+    type: Add
+  id: 576
+  time: '2024-08-18T05:00:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3600
 Name: RMC14
 Order: -1
