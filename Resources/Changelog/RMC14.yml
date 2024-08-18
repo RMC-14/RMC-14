@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added xenos being able to nest marines onto weeded walls and resin walls.
-    type: Add
-  id: 73
-  time: '2024-04-24T03:45:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1302
-- author: DrSmugleaf
-  changes:
   - message: Added dropship piloting.
     type: Add
   id: 74
@@ -4280,5 +4273,13 @@
   id: 572
   time: '2024-08-18T04:45:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3639
+- author: MACMAN2003
+  changes:
+  - message: Added special ballistic goggles that change color to match the squad
+      of the wearer.
+    type: Add
+  id: 573
+  time: '2024-08-18T04:52:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3622
 Name: RMC14
 Order: -1
