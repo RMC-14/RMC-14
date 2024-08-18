@@ -579,7 +579,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
     private void OnTryMove(Entity<BursterComponent> burster, ref MoveInputEvent args)
     {
-        if(TryComp<VictimInfectedComponent>(burster.Comp.BurstFrom, out var infected))
+        if (TryComp<VictimInfectedComponent>(burster.Comp.BurstFrom, out var infected))
             Burst((burster.Comp.BurstFrom, infected));
     }
 
@@ -598,13 +598,16 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 {
                     TryComp(containedEntity, out ParasiteResistanceComponent? resistance);
 
-                    if (resistance != null && _random.Prob(resistance.Probability))
+                    if (resistance != null && resistance.Count < resistance.MaxCount)
                     {
                         if (_net.IsServer && doPopup)
                         {
                             var popupMessage = Loc.GetString("rmc-xeno-infect-fail", ("target", victim), ("clothing", containedEntity));
                             _popup.PopupEntity(popupMessage, victim, PopupType.SmallCaution);
                         }
+
+                        resistance.Count += 1;
+                        Dirty(containedEntity.Value, resistance);
 
                         return false;
                     }
