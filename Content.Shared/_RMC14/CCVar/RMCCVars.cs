@@ -64,7 +64,7 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.auto_balance_min", 3f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCAutoBalanceMax =
-        CVarDef.Create("rmc.auto_balance_max", 6.75f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.auto_balance_max", 7.5f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCPatronLobbyMessageTimeSeconds =
         CVarDef.Create("rmc.patron_lobby_message_time_seconds", 30, CVar.REPLICATED | CVar.SERVER);
@@ -79,7 +79,7 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.requisitions_starting_balance", 50000, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCRequisitionsBalanceGain =
-        CVarDef.Create("rmc.requisitions_balance_gain", 700, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.requisitions_balance_gain", 1000, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<string> RMCDiscordToken =
         CVarDef.Create("rmc.discord_token", "", CVar.SERVER | CVar.SERVERONLY | CVar.CONFIDENTIAL);
