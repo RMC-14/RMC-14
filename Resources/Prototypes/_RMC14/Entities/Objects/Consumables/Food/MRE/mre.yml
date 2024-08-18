@@ -80,7 +80,7 @@
     - id: CMDrinkWEYAWaterBottle30
     - id: CMFortuneCookie
       prob: 0.333
-    - id: CMCigarettePackLuckySloths
+    - id: CMCigarettePackLuckySlothsMini
     - id: CMMatchBook
       orGroup: matchbook
     - id: CMBrownMatchBook
@@ -89,7 +89,7 @@
       orGroup: matchbook
     - id: CMElectroMatchbook
       orGroup: matchbook
-    - id: CMElectroMatchbook
+    - id: CMExecutiveWEYAMatchbook
       orGroup: matchbook
   - type: FixedItemSizeStorage
   - type: InteractedBlacklist
