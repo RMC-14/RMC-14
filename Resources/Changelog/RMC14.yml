@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added distress signal gamemode.
-    type: Add
-  id: 75
-  time: '2024-04-26T05:08:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1916
 - author: Whisper
   changes:
   - message: Fixed the fire rate for the M77 and service pistols.
@@ -4281,5 +4274,13 @@
   id: 574
   time: '2024-08-18T04:56:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3678
+- author: blueDev2
+  changes:
+  - message: Barricades now drop mats based on remaining health when deconstructed.
+      Barbed barricades drop barbed wires when deconstructed
+    type: Fix
+  id: 575
+  time: '2024-08-18T04:59:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3621
 Name: RMC14
 Order: -1
