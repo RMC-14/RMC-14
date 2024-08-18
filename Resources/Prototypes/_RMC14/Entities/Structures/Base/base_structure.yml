@@ -39,6 +39,11 @@
   - type: RMCNightVisionVisible
     priority: -1
     transparency: 0.2
+  - type: InvulnerabilityTime
+    whitelist:
+      components:
+      - Marine
+    hitsToInvulnerability: 3
 
 - type: entity
   id: CMCorrodible
