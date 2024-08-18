@@ -6,7 +6,6 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
@@ -252,7 +251,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
 
         if (neurotoxin.NeurotoxinAmount >= 20)
         {
-            _statusEffects.TryAddStatusEffect(victim, "TemporaryBlindness", neurotoxin.BlindTime, true, "TemporaryBlindness");
+            // _statusEffects.TryAddStatusEffect(victim, "TemporaryBlindness", neurotoxin.BlindTime, true, "TemporaryBlindness");
         }
 
         if (neurotoxin.NeurotoxinAmount >= 27)
