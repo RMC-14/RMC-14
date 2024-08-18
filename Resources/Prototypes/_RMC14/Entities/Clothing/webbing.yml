@@ -174,7 +174,7 @@
       - Bible
       tags:
       - CMFirstAidKit
-      - CMBoxStorage
+      - RMCBoxStorage
   - type: Webbing
     playerSprite:
       sprite: _RMC14/Objects/Clothing/Webbing/drop_pouch.rsi
@@ -189,7 +189,7 @@
         - Bible
         tags:
         - CMFirstAidKit
-        - CMBoxStorage
+        - RMCBoxStorage
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
