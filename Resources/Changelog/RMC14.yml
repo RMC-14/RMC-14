@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed larva getting stuck when evolving under tables and doors.
-    type: Fix
-  id: 79
-  time: '2024-04-26T10:02:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2022
-- author: Whisper
-  changes:
-  - message: Fixed marines being able to take temperature damage.
-    type: Fix
-  id: 80
-  time: '2024-04-26T10:01:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2021
 - author: Whisper
   changes:
   - message: Fixed damage and armor piercing values for all shotgun ammo types.
@@ -4285,5 +4271,20 @@
   id: 578
   time: '2024-08-18T05:21:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3703
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xeno eggs being buildable on top of normal doors.
+    type: Fix
+  id: 579
+  time: '2024-08-18T07:06:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3705
+- author: DrSmugleaf
+  changes:
+  - message: Fixed some cases where the Defender's tail sweep was able to hit through
+      walls. This reduces the range from 1.5 tiles to 1.25.
+    type: Fix
+  id: 580
+  time: '2024-08-18T07:06:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3704
 Name: RMC14
 Order: -1
