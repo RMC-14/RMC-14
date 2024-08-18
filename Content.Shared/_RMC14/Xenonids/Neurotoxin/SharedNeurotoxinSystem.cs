@@ -6,7 +6,6 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Drunk;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs.Systems;
@@ -30,7 +29,6 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly StaminaSystem _stamina = default!;
-    [Dependency] private readonly SharedDrunkSystem _drunk = default!; // Used in place of dizziness
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
