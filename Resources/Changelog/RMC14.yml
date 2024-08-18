@@ -4156,8 +4156,7 @@
   url: https://github.com/RMC-14/RMC-14/pull/3650
 - author: Vermidia
   changes:
-  - message: Barricades now have a short invulnerability time if they take too many
-      hits from xenos in a small period. Same for resin and marines.
+  - message: Barricades can now only be hit a maximum of three times per second by xenos. Same for resin structures and marines.
     type: Fix
   id: 563
   time: '2024-08-18T04:11:53.0000000+00:00'
