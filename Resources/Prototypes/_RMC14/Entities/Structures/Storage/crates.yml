@@ -765,3 +765,22 @@
   components:
   - type: AccessReader
     access: [["CMAccessResearch"],["CMAccessEngineering"]]
+
+- type: entity
+  parent: CMCrateWeldable
+  id: RMCCrateMinecart
+  name: minecart
+  description: Essentially a big metal bucket on wheels. This one has a modern plastic shroud.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/minecart.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/minecart.rsi
