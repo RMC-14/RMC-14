@@ -1,37 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: You can no longer see through containers with the night vision overlay.
-    type: Fix
-  id: 64
-  time: '2024-04-20T08:17:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1283
-- author: Whisper
-  changes:
-  - message: Xeno eggs now burn!
-    type: Add
-  id: 65
-  time: '2024-04-20T12:35:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1285
-- author: DrSmugleaf
-  changes:
-  - message: All non-cm guidebook entries and construction recipes have been removed.
-    type: Tweak
-  id: 66
-  time: '2024-04-20T23:02:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1282
-- author: DrSmugleaf
-  changes:
-  - message: Added tackling on disarm. Successfully disarming a marine 4 times in
-      a row with less than 4 seconds passing between each disarm will result in them
-      getting knocked down and stunned for 5 seconds. The disarms needed and stun
-      duration vary per xeno caste.
-    type: Add
-  id: 67
-  time: '2024-04-21T02:43:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/1287
-- author: DrSmugleaf
-  changes:
   - message: The xeno Queen can no longer catch fire.
     type: Add
   - message: The xeno Ravager is now immune to damage dealt by catching fire.
@@ -4279,5 +4248,36 @@
   id: 563
   time: '2024-08-18T04:11:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3684
+- author: Vermidia
+  changes:
+  - message: Fixed hyposprays being able to draw from containers. Use a bottle on
+      it to refill it.
+    type: Fix
+  id: 564
+  time: '2024-08-18T04:19:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3669
+- author: blueDev2
+  changes:
+  - message: Drone evolution to queen cooldown after queen death is properly indicated
+      in the popup.
+    type: Fix
+  id: 565
+  time: '2024-08-18T04:18:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3701
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being able to shoot from within body bags and other containers.
+    type: Fix
+  id: 566
+  time: '2024-08-18T04:18:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3702
+- author: Vermidia
+  changes:
+  - message: Added Boiler's neurotoxin gas, which is more oriented for capturing and
+      causes a slew of chaotic effects if it builds up enough.
+    type: Add
+  id: 567
+  time: '2024-08-18T04:17:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3649
 Name: RMC14
 Order: -1
