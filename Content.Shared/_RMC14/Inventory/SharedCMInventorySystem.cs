@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Input;
+using Content.Shared._RMC14.Webbing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Hands.Components;
@@ -8,6 +9,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
+using Content.Shared.Storage;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
@@ -21,6 +23,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedWebbingSystem _webbing = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -143,6 +146,10 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     private void OnSlotsActivateInWorld(Entity<CMItemSlotsComponent> ent, ref ActivateInWorldEvent args)
     {
+        // If storage item has holster, open storage instead of unholstering
+        if (HasComp<StorageComponent>(ent))
+            return;
+
         PickupSlot(args.User, ent);
     }
 
@@ -273,6 +280,33 @@ public abstract class SharedCMInventorySystem : EntitySystem
                     itemSlot.ContainerSlot != null)
                 {
                     validSlots.Add(new HolsterSlot(priority, true, null, (clothing, slotComp), ItemSlot: itemSlot));
+                    continue;
+                }
+
+                // If the slot item has a WebbingClothingComponent
+                // and has a webbing
+                //  which contains a CMHolsterComponent
+                //  and contains an ItemSlotsComponent
+                //  and insert succeeds
+                //  then return
+                if (TryComp(clothing, out WebbingClothingComponent? webClothComp))
+                {
+                    // Get webbing component if able
+                    if (!_webbing.HasWebbing(webClothComp.Owner, out var webbing))
+                        continue;
+
+                    if (HasComp<CMHolsterComponent>(webbing) &&
+                        HasComp<CMItemSlotsComponent>(webbing) &&
+                        SlotCanInteract(user, webbing, out var webSlotComp) &&
+                        TryGetAvailableSlot((webbing, webSlotComp),
+                            item,
+                            user,
+                            out var webItemSlot,
+                            emptyOnly: true) &&
+                        webItemSlot.ContainerSlot != null)
+                    {
+                        validSlots.Add(new HolsterSlot(priority, true, null, (webbing, webSlotComp), ItemSlot: webItemSlot));
+                    }
                 }
             }
         }
@@ -435,6 +469,28 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 return true;
         }
 
+        // Check webbing holster
+        if (TryComp(item, out WebbingClothingComponent? webClothComp))
+        {
+            if (_webbing.HasWebbing(webClothComp.Owner, out var webComp))
+            {
+                if (HasComp<CMHolsterComponent>(webComp))
+                {
+                    if (TryComp(webComp, out CMItemSlotsComponent? webHolster) &&
+                        webHolster.Cooldown is { } cooldown &&
+                        _timing.CurTime < webHolster.LastEjectAt + cooldown)
+                    {
+                        stop = true;
+                        _popup.PopupPredicted(webHolster.CooldownPopup, user, user, PopupType.SmallCaution);
+                        return false;
+                    }
+
+                    if (PickupSlot(user, webComp))
+                        return true;
+                }
+            }
+        }
+
         var ev = new IsUnholsterableEvent();
         RaiseLocalEvent(item, ref ev);
 
@@ -442,6 +498,42 @@ public abstract class SharedCMInventorySystem : EntitySystem
             return false;
 
         return _hands.TryPickup(user, item);
+    }
+
+    public bool TryUnholster(EntityUid user, EntityUid item)
+    {
+        return Unholster(user, item, out _);
+    }
+
+    // For trying to holster to webbing
+    public bool TryHolster(EntityUid user, EntityUid item, Entity<WebbingComponent> webbing)
+    {
+        if (!HasComp<CMHolsterComponent>(webbing) ||
+            !HasComp<CMItemSlotsComponent>(webbing))
+            return false;
+
+        if (!SlotCanInteract(user, webbing, out var webSlotComp) ||
+            !TryGetAvailableSlot((webbing, webSlotComp),
+                item,
+                user,
+                out var webItemSlot,
+                emptyOnly: true) ||
+            webItemSlot.ContainerSlot == null)
+            return false;
+
+        if (!TryComp(webbing, out ItemSlotsComponent? itemSlotComp))
+            return false;
+
+        return _itemSlots.TryInsert(itemSlotComp.Owner, webItemSlot, item, user, excludeUserAudio: true);
+    }
+
+    // For trying to holster to clothing that has a webbing
+    public bool TryHolster(EntityUid user, EntityUid item, Entity<WebbingClothingComponent> webClothing)
+    {
+        if (!_webbing.HasWebbing(webClothing.Owner, out var webbing))
+            return false;
+
+        return TryHolster(user, item, webbing);
     }
 
     public bool TryEquipClothing(EntityUid user, Entity<ClothingComponent> clothing)
@@ -484,5 +576,15 @@ public abstract class SharedCMInventorySystem : EntitySystem
         }
 
         return (filled, slots.Comp.Slots.Count);
+    }
+
+    public bool IsEmpty(Entity<ItemSlotsComponent?> slots)
+    {
+        (int filled, int total) = GetItemSlotsFilled(slots);
+
+        if (filled == 0)
+            return true;
+
+        return false;
     }
 }
