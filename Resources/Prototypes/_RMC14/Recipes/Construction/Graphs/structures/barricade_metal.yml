@@ -20,9 +20,42 @@
     edges:
     - to: start
       completed:
-      - !type:SpawnPrototype
-        prototype: CMSheetMetal1
-        amount: 4
+      - !type:ConditionalAction
+        condition:
+          !type:MinHealth
+          threshold: 1
+          byProportion: true
+        action:
+          !type:SpawnPrototype
+          prototype: CMSheetMetal1
+          amount: 4
+        else:
+          !type:ConditionalAction
+          condition:
+            !type:MinHealth
+            threshold: 0.78
+            byProportion: true
+          action:
+            !type:SpawnPrototype
+            prototype: CMSheetMetal1
+            amount: 3
+          else:
+            !type:ConditionalAction
+            condition:
+              !type:MinHealth
+              threshold: 0.56
+              byProportion: true
+            action:
+              !type:SpawnPrototype
+              prototype: CMSheetMetal1
+              amount: 2
+      - !type:ConditionalAction
+        condition:
+          !type:IsBarbed
+        action:
+          !type:SpawnPrototype
+          prototype: BarbedWire1
+          amount: 1
       - !type:DeleteEntity
       conditions:
       - !type:EntityAnchored
@@ -62,9 +95,42 @@
     edges:
     - to: start
       completed:
-        - !type:SpawnPrototype
-          prototype: CMSheetMetal1
-          amount: 4
+        - !type:ConditionalAction
+          condition:
+            !type:MinHealth
+            threshold: 1
+            byProportion: true
+          action:
+            !type:SpawnPrototype
+            prototype: CMSheetMetal1
+            amount: 4
+          else:
+            !type:ConditionalAction
+            condition:
+              !type:MinHealth
+              threshold: 0.78
+              byProportion: true
+            action:
+              !type:SpawnPrototype
+              prototype: CMSheetMetal1
+              amount: 3
+            else:
+              !type:ConditionalAction
+              condition:
+                !type:MinHealth
+                threshold: 0.56
+                byProportion: true
+              action:
+                !type:SpawnPrototype
+                prototype: CMSheetMetal1
+                amount: 2
+        - !type:ConditionalAction
+          condition:
+            !type:IsBarbed
+          action:
+            !type:SpawnPrototype
+            prototype: BarbedWire1
+            amount: 1
         - !type:DeleteEntity
       conditions:
         - !type:EntityAnchored
@@ -80,9 +146,42 @@
     edges:
     - to: start
       completed:
-      - !type:SpawnPrototype
-        prototype: CMSheetMetal1
-        amount: 4
+      - !type:ConditionalAction
+        condition:
+          !type:MinHealth
+          threshold: 1
+          byProportion: true
+        action:
+          !type:SpawnPrototype
+          prototype: CMSheetMetal1
+          amount: 4
+        else:
+          !type:ConditionalAction
+          condition:
+            !type:MinHealth
+            threshold: 0.78
+            byProportion: true
+          action:
+            !type:SpawnPrototype
+            prototype: CMSheetMetal1
+            amount: 3
+          else:
+            !type:ConditionalAction
+            condition:
+              !type:MinHealth
+              threshold: 0.56
+              byProportion: true
+            action:
+              !type:SpawnPrototype
+              prototype: CMSheetMetal1
+              amount: 2
+      - !type:ConditionalAction
+        condition:
+          !type:IsBarbed
+        action:
+          !type:SpawnPrototype
+          prototype: BarbedWire1
+          amount: 1
       - !type:DeleteEntity
       conditions:
       - !type:EntityAnchored
@@ -98,9 +197,42 @@
     edges:
     - to: start
       completed:
-      - !type:SpawnPrototype
-        prototype: CMSheetMetal1
-        amount: 4
+      - !type:ConditionalAction
+        condition:
+          !type:MinHealth
+          threshold: 1
+          byProportion: true
+        action:
+          !type:SpawnPrototype
+          prototype: CMSheetMetal1
+          amount: 4
+        else:
+          !type:ConditionalAction
+          condition:
+            !type:MinHealth
+            threshold: 0.78
+            byProportion: true
+          action:
+            !type:SpawnPrototype
+            prototype: CMSheetMetal1
+            amount: 3
+          else:
+            !type:ConditionalAction
+            condition:
+              !type:MinHealth
+              threshold: 0.56
+              byProportion: true
+            action:
+              !type:SpawnPrototype
+              prototype: CMSheetMetal1
+              amount: 2
+      - !type:ConditionalAction
+        condition:
+          !type:IsBarbed
+        action:
+          !type:SpawnPrototype
+          prototype: BarbedWire1
+          amount: 1
       - !type:DeleteEntity
       conditions:
       - !type:EntityAnchored

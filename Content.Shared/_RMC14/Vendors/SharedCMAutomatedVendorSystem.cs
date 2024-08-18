@@ -1,17 +1,21 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.Inventory;
+using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Webbing;
 using Content.Shared.Access.Components;
 using Content.Shared.Clothing.Components;
+using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
+using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.UserInterface;
+using Content.Shared.Wall;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -30,6 +34,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedWebbingSystem _webbing = default!;
 
@@ -39,6 +44,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<CMAutomatedVendorComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
+
+        SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedHandEvent>(OnRecentlyGotEquipped);
+        SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedEvent>(OnRecentlyGotEquipped);
 
         Subs.BuiEvents<CMAutomatedVendorComponent>(CMAutomatedVendorUI.Key, subs =>
         {
@@ -85,6 +93,11 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         _popup.PopupClient(Loc.GetString("cm-vending-machine-access-denied"), vendor, args.User);
         args.Cancel();
+    }
+
+    private void OnRecentlyGotEquipped<T>(Entity<RMCRecentlyVendedComponent> ent, ref T args)
+    {
+        RemCompDeferred<WallMountComponent>(ent);
     }
 
     protected virtual void OnVendBui(Entity<CMAutomatedVendorComponent> vendor, ref CMVendorVendBuiMsg args)
@@ -296,7 +309,21 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
 
         var spawn = SpawnNextToOrDrop(toVend, vendor);
-        if (!Grab(player, spawn) && TryComp(spawn, out TransformComponent? xform))
+        var recently = EnsureComp<RMCRecentlyVendedComponent>(spawn);
+        var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(spawn);
+        while (anchored.MoveNext(out var uid))
+        {
+            recently.PreventCollide.Add(uid);
+        }
+
+        Dirty(spawn, recently);
+
+        var mount = EnsureComp<WallMountComponent>(spawn);
+        mount.Arc = Angle.FromDegrees(360);
+        Dirty(spawn, mount);
+
+        var grabbed = Grab(player, spawn);
+        if (!grabbed && TryComp(spawn, out TransformComponent? xform))
             _transform.SetLocalPosition(spawn, xform.LocalPosition + offset, xform);
 
         var ev = new RMCAutomatedVendedUserEvent(spawn);

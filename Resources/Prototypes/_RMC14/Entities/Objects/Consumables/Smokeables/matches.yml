@@ -1,14 +1,54 @@
 - type: entity
   name: match box
+  description: matchbox
   parent: Matchbox
-  id: CMMatchbox
+  id: RMCMatchbox
   components:
+  - type: Sprite
+    sprite:  _RMC14/Objects/Consumable/Smokeables/Matchboxes/matchbox.rsi
+    layers:
+    - state: matchbox
+    - state: matchbox-open
+      map: ["openLayer"]
+    - state: matchbox1
+      map: ["matchbox1"]
+      visible: false
+    - state: matchbox2
+      map: ["matchbox2"]
+      visible: false
+    - state: matchbox3
+      map: ["matchbox3"]
+      visible: false
+    - state: matchbox4
+      map: ["matchbox4"]
+      visible: false
+    - state: matchbox5
+      map: ["matchbox5"]
+      visible: false
+    - state: matchbox6
+      map: ["matchbox6"]
+      visible: false
+  - type: Item
+    sprite: Objects/Tools/matches.rsi
+    heldPrefix: matchbox
+    size: Small
   - type: Storage
     grid:
-    - 0,0,2,1
+    - 0,0,5,1
     whitelist:
       tags:
       - Matchstick
+  - type: ItemCounter
+    count:
+      tags: [Matchstick]
+    composite: true
+    layerStates:
+    - matchbox1
+    - matchbox2
+    - matchbox3
+    - matchbox4
+    - matchbox5
+    - matchbox6
   - type: InteractedBlacklist
     blacklist:
       components:

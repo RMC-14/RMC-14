@@ -14,6 +14,7 @@ using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
@@ -39,6 +40,7 @@ public sealed partial class ClimbSystem : VirtualController
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedStunSystem _stunSystem = default!;
     [Dependency] private readonly SharedTransformSystem _xformSystem = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     private const string ClimbingFixtureName = "climb";
     private const int ClimbingCollisionGroup = (int) (CollisionGroup.TableLayer | CollisionGroup.LowImpassable);
@@ -446,6 +448,12 @@ public sealed partial class ClimbSystem : VirtualController
         if (!_interactionSystem.InRangeUnobstructed(user, target, component.Range))
         {
             reason = Loc.GetString("comp-climbable-cant-reach");
+            return false;
+        }
+
+        if (_container.IsEntityInContainer(user))
+        {
+            reason = Loc.GetString("comp-climbable-cant-climb-contained");
             return false;
         }
 

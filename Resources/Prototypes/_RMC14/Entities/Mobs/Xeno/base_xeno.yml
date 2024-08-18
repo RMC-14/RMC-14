@@ -330,6 +330,13 @@
       types:
         Heat: 3
 
+- type: entity
+  abstract: true
+  id: RMCXenoSpeechSounds
+  components:
+  - type: Speech
+    speechSounds: Xenonid
+
 - type: speechVerb
   id: Xeno
   name: chat-speech-verb-name-default

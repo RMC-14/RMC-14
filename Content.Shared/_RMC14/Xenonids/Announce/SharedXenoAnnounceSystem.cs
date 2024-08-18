@@ -64,4 +64,19 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
 
         AnnounceToHive(xeno, hive, message, sound, popup, color);
     }
+
+    public void AnnounceAll(EntityUid source,
+        string message,
+        SoundSpecifier? sound = null,
+        PopupType? popup = null)
+    {
+        Announce(
+            source,
+            Filter.Empty().AddWhereAttachedEntity(HasComp<XenoComponent>),
+            message,
+            message,
+            sound,
+            popup
+        );
+    }
 }

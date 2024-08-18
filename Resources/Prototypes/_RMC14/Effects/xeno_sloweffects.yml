@@ -1,0 +1,39 @@
+- type: entity
+  id: CMEffectSelfStomp
+  noSpawn: true
+  components:
+  - type: TimedDespawn
+    lifetime: 1.6
+  - type: Sprite
+    sprite: _RMC14/Effects/xeno_selfstomp.rsi
+    noRot: true
+    state: stomp
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  id: CMEffectStomp
+  noSpawn: true
+  components:
+  - type: TimedDespawn
+    lifetime: 1.6
+  - type: Sprite
+    sprite: _RMC14/Effects/xeno_stomp.rsi
+    noRot: true
+    state: stomp
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: CMEffectStomp
+  id: RMCEffectCripple
+  noSpawn: true
+  components:
+  - type: TimedDespawn
+    lifetime: 5

@@ -2,25 +2,30 @@
   id: RMCUnderwearBoxers
   bodyPart: Chest
   markingCategory: Underwear
-  coloring:
-    default:
-      type:
-        !type:SimpleColoring
-          color: "#FFFFFF"
+  forcedColoring: true
+  RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, Slime]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
     state: c_boxers
 
 - type: marking
+  id: RMCUnderwearBoxersBlue
+  bodyPart: Chest
+  markingCategory: Underwear
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, Slime]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: d_boxers
+
+- type: marking
   id: RMCUnderwearLowriders
   bodyPart: Chest
   markingCategory: Underwear
-  coloring:
-    default:
-      type:
-        !type:SimpleColoring
-          color: "#FFFFFF"
+  forcedColoring: true
+  RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, Slime]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
@@ -30,11 +35,8 @@
   id: RMCUnderwearBriefs
   bodyPart: Chest
   markingCategory: Underwear
-  coloring:
-    default:
-      type:
-        !type:SimpleColoring
-          color: "#FFFFFF"
+  forcedColoring: true
+  RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, Slime]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
@@ -44,11 +46,8 @@
   id: RMCUnderwearSatin
   bodyPart: Chest
   markingCategory: Underwear
-  coloring:
-    default:
-      type:
-        !type:SimpleColoring
-          color: "#FFFFFF"
+  forcedColoring: true
+  RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, Slime]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
@@ -58,11 +57,8 @@
   id: RMCUnderwearTanga
   bodyPart: Chest
   markingCategory: Underwear
-  coloring:
-    default:
-      type:
-        !type:SimpleColoring
-          color: "#FFFFFF"
+  forcedColoring: true
+  RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, Slime]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
