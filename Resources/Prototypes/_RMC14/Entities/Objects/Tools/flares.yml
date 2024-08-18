@@ -75,7 +75,8 @@
       sprite: _RMC14/Objects/Misc/flares.rsi
       state: overlay
   - type: Icon
-    sprite: _RMC14/Objects/Misc/flares_cas.rsi
+    sprite: _RMC14/Objects/Misc/cas_flares.rsi
+    state: flare
   - type: PointLight
     color: "#64FA4B"
   - type: FlareSignal

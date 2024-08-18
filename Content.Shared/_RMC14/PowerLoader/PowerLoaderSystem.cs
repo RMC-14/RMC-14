@@ -554,7 +554,7 @@ public sealed class PowerLoaderSystem : EntitySystem
             }
         }
 
-        var toSpawn = new List<(EntityUid? Grabbed, EntProtoId<VirtualItemComponent> Virtual, string? Name, HandLocation Location)>();
+        var toSpawn = new List<(EntityUid? Grabbed, EntProtoId Virtual, string? Name, HandLocation Location)>();
         foreach (var hand in _hands.EnumerateHands(loader))
         {
             if (hand.HeldEntity is not { } held)

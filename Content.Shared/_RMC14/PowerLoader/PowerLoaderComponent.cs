@@ -1,5 +1,4 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared.Inventory.VirtualItem;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -22,8 +21,8 @@ public sealed partial class PowerLoaderComponent : Component
     public string VirtualContainerId = "rmc_power_loader_cargo_virtual";
 
     [DataField, AutoNetworkedField]
-    public EntProtoId<VirtualItemComponent> VirtualRight = "RMCVirtualPowerLoaderRight";
+    public EntProtoId VirtualRight = "RMCVirtualPowerLoaderRight";
 
     [DataField, AutoNetworkedField]
-    public EntProtoId<VirtualItemComponent> VirtualLeft = "RMCVirtualPowerLoaderLeft";
+    public EntProtoId VirtualLeft = "RMCVirtualPowerLoaderLeft";
 }
