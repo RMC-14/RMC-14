@@ -69,7 +69,7 @@
       groups:
         Brute: 25
   - type: Tackle # min: 2, max: 6
-    threshold: 4
+    threshold: 5
     stun: 9
     chance: 0.45
   - type: MovementSpeedModifier

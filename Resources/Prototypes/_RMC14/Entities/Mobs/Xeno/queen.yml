@@ -87,7 +87,7 @@
         Brute: 40
   - type: XenoOvipositorCapable
   - type: Tackle # min: 2, max: 6
-    threshold: 3
+    threshold: 4
     stun: 11
     chance: 0.55
   - type: Fixtures
