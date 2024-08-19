@@ -69,7 +69,6 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestSurfaceComponent, InteractHandEvent>(OnSurfaceInteractHand);
         SubscribeLocalEvent<XenoNestableComponent, ActivateInWorldEvent>(OnNestedActivateInWorld);
         SubscribeLocalEvent<XenoNestSurfaceComponent, DoAfterAttemptEvent<XenoNestEvent>>(OnSurfaceDoAfterAttempt);
-       // SubscribeLocalEvent<XenoNestedComponent, XenoUnNestEvent>(OnUnNestNestableEvent);
         SubscribeLocalEvent<XenoNestSurfaceComponent, XenoNestEvent>(OnNestSurfaceDoAfter);
         SubscribeLocalEvent<XenoNestSurfaceComponent, CanDropTargetEvent>(OnSurfaceCanDropTarget);
         SubscribeLocalEvent<XenoNestSurfaceComponent, DragDropTargetEvent>(OnSurfaceDragDropTarget);
@@ -125,14 +124,6 @@ public sealed class XenoNestSystem : EntitySystem
     }
 
     private void OnNestedActivateInWorld(Entity<XenoNestableComponent> target, ref ActivateInWorldEvent args)
-    {
-        if (!TryComp(args.User, out XenoComponent? xenoComp))
-            return;
-        var castUser = (Entity<XenoComponent>) args.User!;
-        TryStartUnNesting(castUser, target.Owner);
-    }
-
-    private void OnNestSurfaceActivateInWorld(Entity<XenoNestSurfaceComponent> target, ref ActivateInWorldEvent args)
     {
         if (!TryComp(args.User, out XenoComponent? xenoComp))
             return;
