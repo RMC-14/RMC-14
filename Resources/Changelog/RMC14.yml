@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Automated vendors will now try to automatically equip items or put them
-      in the user's hands before dropping them on the ground.
-    type: Add
-  id: 90
-  time: '2024-04-28T12:21:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2041
 - author: DangerRevolution
   changes:
   - message: Added JTAC Radio Key
@@ -4361,5 +4353,12 @@
   id: 589
   time: '2024-08-19T00:25:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3717
+- author: DrSmugleaf
+  changes:
+  - message: Fixed some areas on LV and other planets incorrectly blocking CAS.
+    type: Fix
+  id: 590
+  time: '2024-08-19T02:59:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3732
 Name: RMC14
 Order: -1
