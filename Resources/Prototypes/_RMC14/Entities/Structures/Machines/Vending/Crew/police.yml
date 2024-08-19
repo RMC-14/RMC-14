@@ -17,6 +17,7 @@
     - CMChiefMP # TODO RMC14 chief mp vendor
     sections:
     - name: Police Set (Mandatory)
+      takeAll: CMPoliceSet
       entries:
       - id: RMCVendorBundleMilitaryPoliceApparel
     - name: Standard Equipment
@@ -89,6 +90,7 @@
     - CMMilitaryWarden
     sections:
     - name: Police Set (Mandatory)
+      takeAll: CMPoliceSet
       entries:
       - id: RMCVendorBundleMilitaryPoliceApparel
     - name: Standard Equipment
