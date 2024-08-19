@@ -80,6 +80,7 @@
       - Marine
   - type: TimedDespawn
     lifetime: 0.18
+  - type: UncloakOnHit
 
 - type: entity
   id: XenoSlowingSpitProjectile
@@ -97,6 +98,7 @@
     armorResistsKnockdown: true
   - type: XenoProjectile
     deleteOnFriendlyXeno: true
+  - type: UncloakOnHit
 
 - type: entity
   id: XenoScatteredSpitProjectile
@@ -116,6 +118,7 @@
     armorResistsKnockdown: false
   - type: XenoProjectile
     deleteOnFriendlyXeno: true
+  - type: UncloakOnHit
 
 - type: entity
   id: XenoBoneChipsProjectile
