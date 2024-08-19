@@ -159,9 +159,9 @@
   description: A green USCM issued signal flare. The telemetry computer works on chemical reaction that releases smoke and light and thus works only while the flare is burning.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Misc/cas_flares.rsi
+    sprite: _RMC14/Objects/Misc/flares.rsi
     layers:
-    - state: flare-on
+    - state: flare
     - state: flare_flame
       color: "#A7FFA7"
       visible: true
