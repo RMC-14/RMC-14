@@ -1,6 +1,7 @@
 using Content.Server.Actions;
 using Content.Server.Chat.Systems;
 using Content.Shared._RMC14.Marines.Orders;
+using Content.Shared.Actions;
 using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Marines.Orders;
@@ -26,11 +27,26 @@ public sealed class MarineOrdersSystem : SharedMarineOrdersSystem
         // is issued for some reason the order that was pressed uses its delays and does not care about its cooldown
         // being set.
         // TODO RMC14 implement focus order effects
-        // _actions.AddAction(ent, ref comp.FocusActionEntity, comp.FocusAction);
-        // _actions.SetUseDelay(comp.FocusActionEntity, comp.Cooldown);
+        /** _actions.AddAction(ent, ref comp.FocusActionEntity, comp.FocusAction);
+        if (TryComp(comp.FocusAction, out InstantActionComponent? focusInstantActionComp))
+        {
+            focusInstantActionComp.CheckCanInteract = false;
+        }
+        _actions.SetUseDelay(comp.FocusActionEntity, comp.Cooldown);
+        **/
+
         _actions.AddAction(ent, ref comp.HoldActionEntity, comp.HoldAction);
+        if (TryComp(comp.HoldActionEntity, out InstantActionComponent? holdInstantActionComp))
+        {
+            holdInstantActionComp.CheckCanInteract = false;
+        }
         _actions.SetUseDelay(comp.HoldActionEntity, comp.Cooldown);
+
         _actions.AddAction(ent, ref comp.MoveActionEntity, comp.MoveAction);
+        if (TryComp(comp.MoveActionEntity, out InstantActionComponent? moveInstantActionComp))
+        {
+            moveInstantActionComp.CheckCanInteract = false;
+        }
         _actions.SetUseDelay(comp.MoveActionEntity, comp.Cooldown);
     }
 
