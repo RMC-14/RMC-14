@@ -276,6 +276,11 @@
         sprint: -0.448
   - type: AttachableWieldDelayMods
     modifiers:
+    - conditions:
+        activeOnly: true
+        blacklist:
+          tags:
+          - RMCFlareGun
     - delay: 0.4
   - type: AttachableWeaponRangedMods
     modifiers:
@@ -290,8 +295,8 @@
       accuracyAddMult: -0.05
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: 2 #TODO: Add flare gun modifiers when it's implemented.
-
+      accuracyMovementPenaltyAddMult: 2 
+    
 - type: entity
   parent: RMCAttachmentS42xTelescopicMiniscope
   id: RMCAttachmentS42xAdvancedTelescopicMiniscope
