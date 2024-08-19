@@ -152,7 +152,7 @@
     - Trash
 
 - type: entity
-  name: signal flare # Not parented to the basic flare because we don't want the item component on here
+  name: signal flare 
   suffix: Projectile
   id: RMCFlareCASLit 
   description: A green USCM issued signal flare. The telemetry computer works on chemical reaction that releases smoke and light and thus works only while the flare is burning.
@@ -168,6 +168,8 @@
   - type: Icon
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
     state: icon
+  - type: Item
+    size: Small
   - type: IgnitionSource
     ignited: true
     temperature: 1000
