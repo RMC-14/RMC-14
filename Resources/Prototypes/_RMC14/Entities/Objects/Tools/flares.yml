@@ -162,11 +162,10 @@
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
     layers:
     - state: flare-on
-    sprite: _RMC14/Objects/Misc/flares.rsi
-    layers:
-    - state: overlay
     - state: flare_flame
       color: "#A7FFA7"
+      visible: true
+    - state: overlay
   - type: Icon
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
     state: icon
