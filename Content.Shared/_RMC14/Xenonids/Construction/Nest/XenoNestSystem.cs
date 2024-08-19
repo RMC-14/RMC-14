@@ -359,8 +359,6 @@ public sealed class XenoNestSystem : EntitySystem
             return;
         }
         DetachNested(null, target);
-        //var doAfter = new DoAfterArgs(EntityManager, user, doafterTime, ev, target)
-        //_doAfter.TryStartDoAfter(doAfter);
     }
 
     private bool CanBeNested(EntityUid user,
@@ -395,7 +393,7 @@ public sealed class XenoNestSystem : EntitySystem
         return true;
     }
 
-    private bool CanBeUnNested(EntityUid user, EntityUid target) // potentially add surface to allow targeting surface for action , Entity<XenoNestSurfaceComponent?> surface
+    private bool CanBeUnNested(EntityUid user, EntityUid target)
     {
         if (HasComp<XenoNestedComponent>(target) && HasComp<XenoComponent>(user))
             return true;
