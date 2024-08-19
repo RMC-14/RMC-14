@@ -22,6 +22,13 @@
     sprite: _RMC14/Areas/areas.rsi
     state: blank
   - type: Area
+    CAS: true
+    fulton: true
+    lasing: true
+    mortar: true
+    medevac: true
+    OB: true
+    supplyDrop: true
   - type: PlacementReplacement
     key: rmc_areas
 
@@ -98,7 +105,7 @@
   name: protection 3
   components:
   - type: Area
-    cas: false
+    CAS: false
 
 - type: entity
   parent: RMCAreaProtectionThree

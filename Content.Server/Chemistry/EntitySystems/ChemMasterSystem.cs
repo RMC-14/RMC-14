@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Server.Chemistry.Components;
 using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.Labels;
@@ -18,8 +20,6 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 
 namespace Content.Server.Chemistry.EntitySystems
 {
@@ -41,7 +41,7 @@ namespace Content.Server.Chemistry.EntitySystems
         [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
 
         [ValidatePrototypeId<EntityPrototype>]
-        private const string PillPrototypeId = "Pill";
+        private const string PillPrototypeId = "CMPill";
 
         public override void Initialize()
         {

@@ -52,7 +52,7 @@
     damage:
       groups:
         Brute: 45
-  - type: Tackle
+  - type: Tackle # min: 2, max: 5
     threshold: 4
     stun: 9
     chance: 0.35

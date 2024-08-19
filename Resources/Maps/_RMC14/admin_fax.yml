@@ -3,7 +3,7 @@ meta:
   postmapinit: false
 tilemap:
   0: Space
-  1: CMFloorAI
+  1: RMCFloorAI
   97: CMFloorSteelPlanetBlack
   113: CMFloorSteelPlanetDarkBlue0
   114: CMFloorSteelPlanetDarkBlue1

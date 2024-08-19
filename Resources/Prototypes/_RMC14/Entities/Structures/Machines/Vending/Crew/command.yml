@@ -135,8 +135,11 @@
       #- id: RMCPouchDocuments # TODO RMC14 Documents Pouch
       - id: RMCPouchElectronicsFill
       - id: RMCPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
       - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
+        name: first-aid pouch (pills)
       - id: RMCPouchFirstResponder
       - id: RMCPouchFlareFilled
       #- id: RMCPouchFuelTank # TODO RMC14 Fuel Tank Pouch
@@ -271,8 +274,11 @@
       choices: { CMPouches: 2 }
       entries:
       - id: RMCPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
       - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
+        name: first-aid pouch (pills)
         recommended: true
       - id: RMCPouchGeneralLarge
       - id: RMCPouchMagazineLarge
@@ -381,7 +387,7 @@
         points: 15
       - id: RMCAttachmentUnderbarrelExtinguisher
         points: 15
-      - id: RMCAttachmentMK1GrenadeLauncher
+      - id: RMCAttachmentU1GrenadeLauncher
         points: 5
     - name: Barrel Attachments
       entries:
@@ -520,8 +526,11 @@
       choices: { CMPouch: 2 }
       entries:
       - id: RMCPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
       - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
+        name: first-aid pouch (pills)
         recommended: true
       - id: RMCPouchMedkit
       - id: RMCPouchAutoinjectorFill
@@ -554,7 +563,7 @@
       - id: WeaponRifleM54C # TODO RMC14 Port M46C Protag Gun
         name: Commander's M54C
         recommended: true # TODO RMC14 Make choices: colour the options brown
-      - id: CMSmartGunOperatorEquipmentCase # TODO RMC14 Port M56C Smart Protag Gun
+      - id: CMSmartGunOperatorEquipmentCaseBelt # TODO RMC14 Port M56C Smart Protag Gun
         name: Commander's Smartgun
         recommended: true # TODO RMC14 Make choices: colour the options brown
     - name: Primary Ammunition
@@ -627,7 +636,7 @@
         points: 15
       #- id: RMCAttachmentUnderbarrelFlamethrower # TODO RMC14 Underbarrel FLamethrower
       #  points: 15
-      - id: RMCAttachmentMK1GrenadeLauncher
+      - id: RMCAttachmentU1GrenadeLauncher
         points: 5
     - name: Barrel Attachments
       entries:

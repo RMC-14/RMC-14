@@ -262,6 +262,11 @@ public sealed class SkillsSystem : EntitySystem
         return ent.Comp.Skills.GetValueOrDefault(skill);
     }
 
+    public bool HasSkills(Entity<SkillsComponent?> ent, SkillWhitelist whitelist)
+    {
+        return HasAllSkills(ent, whitelist.All);
+    }
+
     public bool HasAllSkills(Entity<SkillsComponent?> ent, Dictionary<EntProtoId<SkillDefinitionComponent>, int> required)
     {
         if (HasComp<BypassSkillChecksComponent>(ent))

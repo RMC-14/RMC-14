@@ -1,4 +1,6 @@
-﻿namespace Content.Shared._RMC14.Rules;
+﻿using Robust.Shared.GameStates;
 
-[RegisterComponent]
+namespace Content.Shared._RMC14.Rules;
+
+[RegisterComponent, NetworkedComponent]
 public sealed partial class RMCPlanetComponent : Component;

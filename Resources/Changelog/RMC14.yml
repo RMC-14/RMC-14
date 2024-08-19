@@ -1,87 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Fixed damage and armor piercing values for all shotgun ammo types.
-    type: Fix
-  id: 81
-  time: '2024-04-26T10:00:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2017
-- author: DangerRevolution
-  changes:
-  - message: Added Encryption Keys to Vendors
-    type: Add
-  id: 82
-  time: '2024-04-27T01:07:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2025
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenos not being able to pry doors by left clicking on them.
-    type: Fix
-  - message: Xenos can now pry open doors in 5 seconds.
-    type: Tweak
-  id: 83
-  time: '2024-04-27T01:39:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2023
-- author: DrSmugleaf
-  changes:
-  - message: Fixed being able to hit friendly xenos with a tail stab and being able
-      to hit marines with it through walls.
-    type: Fix
-  - message: The xeno tail stab can now hit 3 marines maximum and has a one second
-      cooldown if it misses.
-    type: Tweak
-  id: 84
-  time: '2024-04-27T02:35:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2028
-- author: DrSmugleaf
-  changes:
-  - message: Fixed parasites being able to melee attack and tackle.
-    type: Fix
-  - message: Fixed parasites being able to infect dead marines.
-    type: Fix
-  - message: Leaping xenos can now only hit a max of one marine in a single leap.
-    type: Tweak
-  id: 85
-  time: '2024-04-28T00:55:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2034
-- author: DrSmugleaf
-  changes:
-  - message: Chestbursters can no longer burst out of dead marines.
-    type: Fix
-  id: 86
-  time: '2024-04-28T00:56:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2036
-- author: DrSmugleaf
-  changes:
-  - message: Marines now spawn in starving in distress signal rounds.
-    type: Tweak
-  id: 87
-  time: '2024-04-28T00:56:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2037
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenos being scannable with the hf2 health analyzer.
-    type: Fix
-  id: 88
-  time: '2024-04-28T00:55:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2033
-- author: Whisper
-  changes:
-  - message: You can now craft metal rods
-    type: Add
-  - message: cm entities now use RMC14 rods
-    type: Fix
-  id: 89
-  time: '2024-04-28T01:56:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2024
-- author: DrSmugleaf
-  changes:
-  - message: Automated vendors will now try to automatically equip items or put them
-      in the user's hands before dropping them on the ground.
-    type: Add
-  id: 90
-  time: '2024-04-28T12:21:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2041
 - author: DangerRevolution
   changes:
   - message: Added JTAC Radio Key
@@ -4265,7 +4182,7 @@
 - author: DrSmugleaf
   changes:
   - message: Fixed xenonids not being able to open hypersleep chambers, body bags,
-      closets, morgues and crematoriums. Xehonids still cannot close them nor be inserted
+      closets, morgues and crematoriums. Xenonids still cannot close them nor be inserted
       into them.
     type: Fix
   id: 578
@@ -4286,5 +4203,162 @@
   id: 580
   time: '2024-08-18T07:06:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3704
+- author: DrSmugleaf
+  changes:
+  - message: Added close air support and the GAU-21 30mm cannon. This is done by pilots
+      through the weapons controls console in the dropships, by targeting a signal
+      flare or laser designator target in an area that has a weak enough roof to allow
+      CAS to shoot through it. Weapons can be loaded onto the dropships' wings and
+      front attachment points with a power-loader, and the weapons and ammo fabricated
+      at the dropship part fabricator.
+    type: Add
+  - message: Added laser designators and JTAC pamphlets for points to the vendor of
+      each squad role. SLs and FTLs get the skill by default and the designator and
+      signal flares for free in their kits, but can also buy additional ones.
+    type: Add
+  - message: Added bioscans. These happen between every 5 to 30 minutes and tell each
+      side how many are left on the other side, and one of their locations.
+    type: Add
+  - message: Opened up the second floor of the Almayer. Click the ladders or walk
+      up the stairs to move between the two.
+    type: Add
+  - message: Added security cameras to the Almayer. Command and MP can watch these
+      in the ship security cameras console.
+    type: Add
+  - message: Filled out some missing things on the first floor of the Almayer. Report
+      on the bugs channel or through AHelp if anything has gone missing.
+    type: Add
+  - message: Added two missing chem masters to the chemistry room in medbay.
+    type: Add
+  - message: Added a proper brig to the Almayer, found on the left of its second floor
+      with brig timers. These brig timers will eventually be replaced with the ones
+      from 13.
+    type: Add
+  - message: Implemented piloting skill affecting dropship travel and recharge time.
+      Having a Pilot skill of 2 (Dropship/Gunship pilot, ASO, and SEA, but not DCC)
+      reduces travel time by 50%, recharge time by 25%, and increases fly-by time
+      by 50%.
+    type: Add
+  - message: Every role now spawns where they are intended to. The MP brig is on the
+      far left of the second floor, and the CIC (Overwatch consoles) is located towards
+      the center of the second floor. Every squad role now spawns on the same spot
+      depending on the role, with specs and squad leaders on the left for example.
+    type: Tweak
+  - message: Increased the amount of tackles that a Hivelord, Lurker, Spitter and
+      Queen need to bring down a marine. Hivelord now requires 4, up from 3, Lurker
+      requires 5, up from 4, Queen requires 4, up from 3, and Spitter requires 5,
+      up from 4.
+    type: Tweak
+  - message: Fixed dropship hijack using the same time as regular travel. It now takes
+      3 minutes for the dropship to arrive during a hijack, and has a warning when
+      it is about to do so.
+    type: Fix
+  - message: Fixed windoors taking damage from humanoid unarmed attacks.
+    type: Fix
+  - message: Fixed beds being movable and unintentionally healing a small amount of
+      damage.
+    type: Fix
+  - message: Fixed the soda and booze dispensers being unpowered.
+    type: Fix
+  - message: Fixed large crates being able to store mobs inside them.
+    type: Fix
+  - message: Fixed smoke grenade smoke spreading slower than intended and farther
+      than intended.
+    type: Fix
+  - message: Fixed being able to remove tackle stacks from yourself while not stunned
+      by shaking yourself up.
+    type: Fix
+  - message: Fixed medbay staff (nurses, doctors, researcher and the CMO) being able
+      to equip m5 riot control armor.
+    type: Fix
+  - message: Fixed bullets not hitting the hive core.
+    type: Fix
+  - message: Fixed throwing things into a disposal unit having a chance to miss.
+    type: Fix
+  - message: Fixed dropships not deleting all racks and walls when landing.
+    type: Fix
+  - message: Fixed being able to fit jugs in satchels and backpacks.
+    type: Fix
+  - message: Fixed secure windoors being damageable with bare hands.
+    type: Fix
+  id: 581
+  time: '2024-08-18T07:06:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3574
+- author: Rainbeon
+  changes:
+  - message: Armed grenades can no longer be inserted into Grenade Launchers.
+    type: Fix
+  id: 582
+  time: '2024-08-18T11:24:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3646
+- author: DrSmugleaf
+  changes:
+  - message: The CMP temporarily has access to the regular MP equipment rack until
+      their own is added.
+    type: Tweak
+  id: 583
+  time: '2024-08-18T12:10:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3708
+- author: crystalHex
+  changes:
+  - message: Added bipods to requisitions vendor.
+    type: Tweak
+  - message: Added missing attachment crates to requisitions catalog.
+    type: Tweak
+  id: 584
+  time: '2024-08-18T20:07:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3709
+- author: crystalHex
+  changes:
+  - message: Added the M276 G8-A general utility pouch to the appropriate vendors.
+    type: Add
+  id: 585
+  time: '2024-08-18T20:09:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3620
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Parasites now rip off marine's helmets.
+    type: Add
+  - message: The heavy grenadier weapon specialist's helmet now resists parasite attacks.
+    type: Add
+  id: 586
+  time: '2024-08-18T20:13:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3610
+- author: DrSmugleaf
+  changes:
+  - message: Fixed tall flood lights and broken tall flood lights being unanchorable
+      and movable.
+    type: Fix
+  id: 587
+  time: '2024-08-18T20:28:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3714
+- author: DrSmugleaf
+  changes:
+  - message: Fixed MP not having access to the brig timers.
+    type: Fix
+  - message: Fixed pulling bugging out on stairs and ladders. If you need to drag
+      something through the stairs, push it through first for now. Ladders don't allow
+      you to push things through.
+    type: Fix
+  - message: Temporarily removed blindness from neurotoxin until we can check if its
+      working properly.
+    type: Fix
+  id: 588
+  time: '2024-08-19T00:14:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3714
+- author: Vermidia
+  changes:
+  - message: fix neurotoxin dizziness lasting forever
+    type: Fix
+  id: 589
+  time: '2024-08-19T00:25:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3717
+- author: DrSmugleaf
+  changes:
+  - message: Fixed some areas on LV and other planets incorrectly blocking CAS.
+    type: Fix
+  id: 590
+  time: '2024-08-19T02:59:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3732
 Name: RMC14
 Order: -1
