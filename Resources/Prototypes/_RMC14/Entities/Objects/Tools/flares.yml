@@ -152,7 +152,7 @@
     - Trash
 
 - type: entity
-  parent: CMFlareLit
+  parent: RMCFlareLit
   name: signal flare
   suffix: Projectile
   id: RMCFlareCASLit 
