@@ -14,6 +14,17 @@
       "name": "flare_spent"
     },
     {
+      "name": "flare_burn",
+      "delays": [
+        [
+          0.05,
+          0.05,
+          0.05,
+          0.05
+        ]
+      ]
+    },
+    {
       "name": "flare-on",
       "delays": [
         [
