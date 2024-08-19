@@ -90,7 +90,7 @@
     glowDuration: 180
 
 # Projectile Versions of Flares
-# TODO: Add Signal Flare version when CAS is implemented and shooting flares into the air when roofs exist
+# TODO: Add Shooting flares into the air, has increased range and lower duration. Does not function in roofed areas
 
 - type: entity
   parent: BaseItem
