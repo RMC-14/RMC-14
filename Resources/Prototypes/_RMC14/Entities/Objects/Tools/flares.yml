@@ -30,7 +30,7 @@
       - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
         state: overlay
   - type: CartridgeAmmo
-    proto: CMFlareLit
+    proto: RMCFlareLit
     deleteOnSpawn: true
   - type: Icon
     sprite: _RMC14/Objects/Misc/flares.rsi
@@ -58,6 +58,37 @@
         startValue: 7.0
         endValue: 1.0
 
+- type: entity
+  parent: CMFlare
+  id: RMCFlareCAS
+  name: signal flare
+  description: A green USCM issued signal flare. The telemetry computer works on chemical reaction that releases smoke and light and thus works only while the flare is burning.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/cas_flares.rsi
+    layers:
+    - map: [ "enum.ExpendableLightVisualLayers.Base" ]
+      state: flare
+    - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+      sprite: _RMC14/Objects/Misc/flares.rsi
+      state: flare_flame
+      color: "#A7FFA7"
+      visible: false
+    - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
+      sprite: _RMC14/Objects/Misc/flares.rsi
+      state: overlay
+  - type: Icon
+    sprite: _RMC14/Objects/Misc/cas_flares.rsi
+    state: flare
+  - type: CartridgeAmmo
+    proto: RMCFlareCASLit
+    deleteOnSpawn: true
+  - type: PointLight
+    color: "#64FA4B"
+  - type: FlareSignal
+  - type: ExpendableLight
+    glowDuration: 180
+
 # Projectile Versions of Flares
 # TODO: Add Signal Flare version when CAS is implemented and shooting flares into the air when roofs exist
 
@@ -65,7 +96,7 @@
   parent: BaseItem
   name: flare
   suffix: Projectile
-  id: CMFlareLit 
+  id: RMCFlareLit 
   description: A red Marine issued flare. There are instructions on the side, it reads 'pull cord, make light'.
   components:
   - type: Sprite
@@ -119,34 +150,35 @@
   - type: Tag
     tags:
     - Trash
-  
+
 - type: entity
-  parent: CMFlare
-  id: RMCFlareCAS
+  parent: CMFlareLit
   name: signal flare
+  suffix: Projectile
+  id: RMCFlareCASLit 
   description: A green USCM issued signal flare. The telemetry computer works on chemical reaction that releases smoke and light and thus works only while the flare is burning.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
     layers:
-    - map: [ "enum.ExpendableLightVisualLayers.Base" ]
-      state: flare
-    - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
-      sprite: _RMC14/Objects/Misc/flares.rsi
-      state: flare_flame
+    - state: flare
+    - state: flare_flame
       color: "#A7FFA7"
-      visible: false
-    - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
-      sprite: _RMC14/Objects/Misc/flares.rsi
-      state: overlay
+      visible: true
+    - state: overlay
   - type: Icon
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
-    state: flare
+    state: icon
+  - type: FlareSignal
+  - type: TimedDespawn
+    lifetime: 180
   - type: PointLight
     color: "#64FA4B"
-  - type: FlareSignal
-  - type: ExpendableLight
-    glowDuration: 180
+    radius: 6.0
+    energy: 12.0
+
+    
+# Flare Boxes
 
 - type: entity
   abstract: true
