@@ -112,6 +112,8 @@
       enum.CMMobStateActionsUI.Key:
         type: CMGhostActionBui
         requireInputValidation: false
+      enum.XenoRemoveNestedUI.Key:
+        type: XenoRemoveNestedBui
   - type: Infectable
   - type: Tackleable
   - type: Tackle

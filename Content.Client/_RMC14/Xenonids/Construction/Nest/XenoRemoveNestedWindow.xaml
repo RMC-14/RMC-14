@@ -4,8 +4,8 @@
     Title="Confirmation"
     MinSize="410 150">
     <BoxContainer Orientation="Vertical">
-        <Label Text ="The target is still alive and kicking!" Align="Center"/>
-        <Label Text ="Are we sure we want to remove them from the nest?" Align="Center" VerticalExpand="True"/>
+        <Label Text ="{Loc 'cm-xeno-nest-remove-nested-confirm-line1'}" Align="Center"/>
+        <Label Text ="{Loc 'cm-xeno-nest-remove-nested-confirm-line2'}" Align="Center" VerticalExpand="True"/>
         <Control VerticalExpand="True"/>
         <BoxContainer Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="10" Margin="5 5 10 5">
             <Button Name="DenyButton" Access="Public" MinHeight="35" Text="No" StyleClasses="ButtonColorDefaultRed" HorizontalAlignment="Left"/>

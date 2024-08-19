@@ -132,6 +132,14 @@ public sealed class XenoNestSystem : EntitySystem
         TryStartUnNesting(castUser, target.Owner);
     }
 
+    private void OnNestSurfaceActivateInWorld(Entity<XenoNestSurfaceComponent> target, ref ActivateInWorldEvent args)
+    {
+        if (!TryComp(args.User, out XenoComponent? xenoComp))
+            return;
+        var castUser = (Entity<XenoComponent>) args.User!;
+        TryStartUnNesting(castUser, target.Owner);
+    }
+
     private void OnNestRemove(Entity<XenoNestComponent> ent, ref ComponentRemove args)
     {
         DetachNested(ent, ent.Comp.Nested);
@@ -354,30 +362,12 @@ public sealed class XenoNestSystem : EntitySystem
         if (!CanBeUnNested(user, target))
             return;
 
-        foreach (var session in Filter.PvsExcept(user).Recipients)
+        if (!_mobState.IsDead(target) && !_mobState.IsCritical(target))
         {
-            if (session.AttachedEntity is not { } recipient)
-                continue;
-            if (recipient == target)
-            {
-                _popup.PopupEntity(Loc.GetString("cm-xeno-nest-unsecuring-target", ("user", user)), user, recipient, PopupType.MediumCaution);
-            }
-            else
-            {
-                _popup.PopupEntity(Loc.GetString("cm-xeno-nest-unsecuring-observer", ("user", user), ("target", target)), user, recipient);
-            }
-        }
-
-        if (_mobState.IsDead(target) || _mobState.IsCritical(target))
-        {
-            _popup.PopupClient(Loc.GetString("cm-xeno-nest-unsecuring-inactive-self", ("target", target)), user, user);
-        }
-        else
-        {
-            _popup.PopupClient(Loc.GetString("cm-xeno-nest-unsecuring-active-self", ("target", target)), user, user);
-            _ui.TryOpenUi(target, XenoRemoveNestedUI.Key, user);
             _ui.SetUiState(target, XenoRemoveNestedUI.Key, new RemoveNestedState(target.Id));
+            return;
         }
+        DetachNested(null, target);
         //var doAfter = new DoAfterArgs(EntityManager, user, doafterTime, ev, target)
         //_doAfter.TryStartDoAfter(doAfter);
     }
