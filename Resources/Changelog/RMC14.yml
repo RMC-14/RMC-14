@@ -4349,5 +4349,17 @@
   id: 587
   time: '2024-08-18T20:28:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3714
+- author: DrSmugleaf
+  changes:
+  - message: Fixed MP not having access to the brig timers.
+    type: Fix
+  - message: Fixed pulling bugging out on stairs and ladders. If you need to drag something through the stairs, push it through first for now.
+      Ladders don't allow you to push things through.
+    type: Fix
+  - message: Temporarily removed blindness from neurotoxin until we can check if its working properly.
+    type: Fix
+  id: 588
+  time: '2024-08-19T00:14:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3714
 Name: RMC14
 Order: -1
