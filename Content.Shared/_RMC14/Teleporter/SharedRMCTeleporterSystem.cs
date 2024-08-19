@@ -1,5 +1,7 @@
 ﻿using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
+using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Pulling.Systems;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
@@ -8,6 +10,7 @@ namespace Content.Shared._RMC14.Teleporter;
 
 public abstract class SharedRMCTeleporterSystem : EntitySystem
 {
+    [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
@@ -44,6 +47,18 @@ public abstract class SharedRMCTeleporterSystem : EntitySystem
         var diff = user.Position - teleporter.Position;
         if (diff.Length() > 10)
             return;
+
+        if (TryComp(args.OtherEntity, out PullerComponent? puller) &&
+            TryComp(puller.Pulling, out PullableComponent? pullable))
+        {
+            _pulling.TryStopPull(puller.Pulling.Value, pullable, user: args.OtherEntity);
+        }
+
+        if (TryComp(args.OtherEntity, out PullableComponent? otherPullable) &&
+            otherPullable.Puller != null)
+        {
+            _pulling.TryStopPull(args.OtherEntity, otherPullable, otherPullable.Puller.Value);
+        }
 
         teleporter = teleporter.Offset(diff);
         teleporter = teleporter.Offset(ent.Comp.Adjust);
