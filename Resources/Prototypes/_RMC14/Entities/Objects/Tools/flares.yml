@@ -161,7 +161,10 @@
   - type: Sprite
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
     layers:
-    - state: flare
+    - state: flare-on
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    - state: overlay
+    - state: flare_flame
   - type: Icon
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
     state: icon
