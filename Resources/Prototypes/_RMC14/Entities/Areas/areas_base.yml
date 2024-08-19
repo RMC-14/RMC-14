@@ -105,7 +105,7 @@
   name: protection 3
   components:
   - type: Area
-    cas: false
+    CAS: false
 
 - type: entity
   parent: RMCAreaProtectionThree
