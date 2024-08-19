@@ -1,0 +1,3 @@
+﻿- type: entity
+  parent: Dropper
+  id: RMCDropper # TODO RMC14

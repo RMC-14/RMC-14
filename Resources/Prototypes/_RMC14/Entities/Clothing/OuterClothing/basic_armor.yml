@@ -19,6 +19,7 @@
   - type: CMHardArmor
   - type: RMCNameItemOnVend
     item: Armor
+  - type: RMCBulkyArmor
 
 - type: entity
   parent: CMArmorRiot

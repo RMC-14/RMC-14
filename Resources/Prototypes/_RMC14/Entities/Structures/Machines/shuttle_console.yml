@@ -8,6 +8,7 @@
     drawdepth: SmallObjects
   - type: Corrodible
     isCorrodible: false
+  - type: InteractionOutline
 
 - type: entity
   parent: CMComputerDropship
@@ -21,7 +22,7 @@
   - type: ActivatableUI
     key: enum.DropshipNavigationUiKey.Key
   - type: AccessReader
-    access: [["CMAccessPilot"]]
+    access: [ [ "CMAccessPilot" ] ]
   - type: ActivatableUIRequiresAccess
   - type: UserInterface
     interfaces:
@@ -69,6 +70,19 @@
   components:
   - type: Sprite
     state: consoleright
+  - type: ActivatableUI
+    key: enum.DropshipTerminalWeaponsUi.Key
+  - type: AccessReader
+    access: [ [ "CMAccessPilot" ], [ "CMAccessSquadLeaderPrep" ] ]
+  - type: ActivatableUIRequiresAccess
+  - type: UserInterface
+    interfaces:
+      enum.DropshipTerminalWeaponsUi.Key:
+        type: DropshipWeaponsBui
+  - type: DropshipTerminalWeapons
+  - type: RequiresSkill
+    skills:
+      RMCSkillPilot: 1
 
 - type: entity
   parent: MarkerBase

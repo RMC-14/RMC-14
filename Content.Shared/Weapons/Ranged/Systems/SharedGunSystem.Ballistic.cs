@@ -1,5 +1,6 @@
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.Explosion.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Verbs;
@@ -89,6 +90,18 @@ public abstract partial class SharedGunSystem
 
         if (_whitelistSystem.IsWhitelistFailOrNull(component.Whitelist, args.Used))
             return;
+
+        //Prevent primed grenades or other primed ordanance from being loaded into weapons.
+        if (HasComp<ActiveTimerTriggerComponent>(args.Used))
+        {
+            Popup(
+                Loc.GetString("gun-ballistic-transfer-primed",
+                    ("ammoEntity", args.Used)),
+                uid,
+                args.User);
+
+            return;
+        }
 
         if (GetBallisticShots(component) >= component.Capacity)
             return;

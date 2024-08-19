@@ -23,6 +23,7 @@ gun-ballistic-transfer-invalid = {CAPITALIZE(THE($ammoEntity))} won't fit inside
 gun-ballistic-transfer-empty = {CAPITALIZE(THE($entity))} is already empty!
 gun-ballistic-transfer-target-full = {CAPITALIZE(THE($entity))} is already fully loaded!
 gun-ballistic-transfer-cancelled = Your reload was interrupted!
+gun-ballistic-transfer-primed = You can't load a primed {$ammoEntity}!
 
 # CartridgeAmmo
 gun-cartridge-spent = It is [color=red]spent[/color].

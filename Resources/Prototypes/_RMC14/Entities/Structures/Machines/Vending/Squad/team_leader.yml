@@ -162,7 +162,7 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-    #- id: CMG8AGeneralUtilityPouch
+      - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
         recommended: true
     #- id: CMM276GeneralPistolHolsterRig
@@ -205,7 +205,7 @@
         recommended: true
       #- id: CMShoulderHolster
       - id: CMWebbing
-    #- id: CMDropPouch
+      - id: CMWebbingPouch
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -218,10 +218,12 @@
   name: essential fireteam leader utilities
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Devices/binoculars.rsi # TODO RMC14 laser designator icon
-    state: binoculars
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    layers:
+    - state: rangefinder
+    - state: laser_cas
   - type: CMVendorBundle
     bundle:
-    - CMPackFlare # TODO RMC14 signal flares when we have any use for damn signals
-    - CMPackFlare # TODO RMC14 signal flares when we have any use for damn signals
-    - RMCBinoculars # TODO RMC14 laser designator when see above
+    - RMCPackFlareCAS
+    - RMCPackFlareCAS
+    - RMCLaserDesignator

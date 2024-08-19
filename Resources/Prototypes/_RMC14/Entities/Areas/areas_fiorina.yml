@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent:
-  - RMCAreaBase
   - RMCAreaGlass
+  - RMCAreaBase
   id: RMCAreaFiorina
   name: Fiorina Orbital Penitentiary - Science Annex
   suffix: Fiorina Area
@@ -15,8 +15,8 @@
 
 - type: entity
   parent:
-  - RMCAreaFiorina
   - RMCAreaMax
+  - RMCAreaFiorina
   id: RMCAreaFiorinaOob
   name: Fiorina - Out Of Bounds
   components:
@@ -30,8 +30,8 @@
 
 - type: entity
   parent:
-  - RMCAreaFiorina
   - RMCAreaProtectionMetal
+  - RMCAreaFiorina
   id: RMCAreaFiorinaMaintenance
   name: Fiorina - Maintenance
   components:
@@ -40,8 +40,8 @@
 
 - type: entity
   parent:
-  - RMCAreaFiorina
   - RMCAreaUndergroundMetalBlockCAS
+  - RMCAreaFiorina
   id: RMCAreaFiorinaTumor
   name: Fiorina - Resin Tumor
   components:
@@ -113,8 +113,8 @@
 
 - type: entity
   parent:
-  - RMCAreaFiorina
   - RMCAreaGlass
+  - RMCAreaFiorina
   id: RMCAreaFiorinaLz
   name: Fiorina - LZ
   components:
@@ -172,8 +172,8 @@
 
 - type: entity
   parent:
-  - RMCAreaFiorina
   - RMCAreaGlass
+  - RMCAreaFiorina
   id: RMCAreaFiorinaStation
   name: Fiorina - Station Interior
   components:

@@ -1,6 +1,6 @@
 ﻿- type: entity
-  parent: CMCrateAmmo
-  id: CMCrateMagazineM96SMixed
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineM96SMixed
   name: M96S Sniper Mixed Magazine Crate (marksman x2, flak x2, incendiary x2)
   components:
   - type: StorageFill
@@ -13,8 +13,8 @@
       amount: 2
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateMagazineM96SStandard
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineM96SStandard
   name: M96S Sniper Standard Magazine Crate (x5)
   components:
   - type: StorageFill
@@ -23,8 +23,8 @@
       amount: 5
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateMagazineM96SFlak
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineM96SFlak
   name: M96S Sniper Flak Magazine Crate (x5)
   components:
   - type: StorageFill
@@ -33,8 +33,8 @@
       amount: 5
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateMagazineM96SIncendiary
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineM96SIncendiary
   name: M96S Sniper Incendiary Magazine Crate (x5)
   components:
   - type: StorageFill
@@ -43,7 +43,7 @@
       amount: 5
 
 - type: entity
-  parent: CMCrateAmmo
+  parent: RMCCrateAmmo
   id: RMCCrateM5DemoSpecMixed
   name: M5-ATL Mixed Crate (HE x2, AP x1) # TODO RMC14 replace 1 HE with WP
   components:
@@ -55,7 +55,7 @@
       amount: 1
 
 - type: entity
-  parent: CMCrateAmmo
+  parent: RMCCrateAmmo
   id: RMCCrateM5DemoSpecHighExplosive
   name: M5-ATL High Explosives Crate (HE x3)
   components:
@@ -65,7 +65,7 @@
       amount: 3
 
 - type: entity
-  parent: CMCrateAmmo
+  parent: RMCCrateAmmo
   id: RMCCrateM5DemoSpecAntiArmor
   name: M5-ATL Anti-Armor Crate (AP x3)
   components:
@@ -76,7 +76,7 @@
 
 # TODO RMC14 M5 84mm White Phosphorous
 #- type: entity
-#  parent: CMCrateAmmo
+#  parent: RMCCrateAmmo
 #  id: RMCCrateM5DemoSpecWhitePhosphorous
 #  name: M5-ATL White Phosphorous Crate (HE x3)
 #  components:
@@ -86,7 +86,7 @@
 #      amount: 3
 
 - type: entity
-  parent: CMCrateAmmo
+  parent: RMCCrateAmmo
   id: RMCCrateMagazineM4SPRCustomMixed
   name: M4SPR Scout Mixed Magazine Crate (regular x2, incendiary x2, impact x2)
   components:
@@ -100,7 +100,7 @@
       amount: 2
 
 - type: entity
-  parent: CMCrateAmmo
+  parent: RMCCrateAmmo
   id: RMCCrateMagazineM4SPRCustomStandard
   name: M4SPR Scout Magazine Crate (x5)
   components:
@@ -110,7 +110,7 @@
       amount: 5
 
 - type: entity
-  parent: CMCrateAmmo
+  parent: RMCCrateAmmo
   id: RMCCrateMagazineM4SPRCustomImpact
   name: M4SPR Scout Impact Magazine Crate (x3)
   components:
@@ -120,8 +120,8 @@
       amount: 3
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateMagazineM4SPRCustomIncendiary
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineM4SPRCustomIncendiary
   name: M4SPR Scout Incendiary Magazine Crate (x3)
   components:
   - type: StorageFill

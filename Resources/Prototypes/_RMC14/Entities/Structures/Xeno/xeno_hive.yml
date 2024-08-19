@@ -5,6 +5,16 @@
   components: # TODO RMC14 block ob, mortar and air strikes
   - type: Transform
     anchored: true # TODO RMC14 cooldown if destroyed
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        layer:
+        - BulletImpassable
+        density: 200
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/hive_core.rsi
     state: core

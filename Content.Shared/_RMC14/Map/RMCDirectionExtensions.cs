@@ -26,4 +26,9 @@ public static class RMCDirectionExtensions
                 throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
         }
     }
+
+    public static bool IsCardinal(this Direction direction)
+    {
+        return direction is Direction.North or Direction.East or Direction.South or Direction.West;
+    }
 }

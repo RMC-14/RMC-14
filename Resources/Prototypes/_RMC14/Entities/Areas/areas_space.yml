@@ -15,8 +15,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBase
   - RMCAreaProtectionMetal
+  - RMCAreaBase
   id: RMCAreaAdmin
   name: Admin room
   components:
@@ -55,8 +55,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBase
   - RMCAreaProtectionMetal
+  - RMCAreaBase
   id: RMCAreaCentcom
   name: abandoned Centcom
   components:
@@ -75,8 +75,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBase
   - RMCAreaProtectionMetal
+  - RMCAreaBase
   id: RMCAreaTdome
   name: abandoned Thunderdome
   components:

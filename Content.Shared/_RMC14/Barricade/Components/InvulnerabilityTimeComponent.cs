@@ -1,0 +1,26 @@
+﻿using Content.Shared.Whitelist;
+using Robust.Shared.GameStates;
+
+namespace Content.Shared._RMC14.Barricade;
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class InvulnerabilityTimeComponent : Component
+{
+    /// <summary>
+    /// Whitelist and blacklist control if we actually count hits and cancel damage
+    /// </summary>
+    [DataField(required: true), AutoNetworkedField]
+    public EntityWhitelist Whitelist = default!;
+
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? Blacklist = null;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan ExpiryTime = TimeSpan.FromSeconds(1);
+
+    [DataField, AutoNetworkedField]
+    public Queue<TimeSpan> AttacksToExpire = new();
+
+    [DataField(required: true), AutoNetworkedField]
+    public int HitsToInvulnerability;
+}
