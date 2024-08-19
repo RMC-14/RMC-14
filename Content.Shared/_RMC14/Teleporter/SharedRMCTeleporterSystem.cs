@@ -51,7 +51,7 @@ public abstract class SharedRMCTeleporterSystem : EntitySystem
         if (TryComp(args.OtherEntity, out PullerComponent? puller) &&
             TryComp(puller.Pulling, out PullableComponent? pullable))
         {
-            _pulling.TryStopPull(puller.Pulling.Value, pullable, user: args.OtherEntity);
+            _pulling.TryStopPull(puller.Pulling.Value, pullable, args.OtherEntity);
         }
 
         if (TryComp(args.OtherEntity, out PullableComponent? otherPullable) &&
