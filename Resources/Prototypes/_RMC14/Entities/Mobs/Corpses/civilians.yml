@@ -1,0 +1,253 @@
+# Prisoner
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpsePrisoner
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpsePrisoner ]
+
+- type: startingGear
+  id: RMCGearCorpsePrisoner
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorOrange # TODO RMC14 colored uniform
+    back: CMSatchel
+    shoes: RMCShoesOrange
+    id: CMIDCardColonist
+  storage:
+    back:
+    - RMCM5Bayonet
+    # Radio
+
+# Chef
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseChef
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseChef ]
+
+- type: startingGear
+  id: RMCGearCorpseChef
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitChef
+    back: CMSatchel
+    shoes: RMCShoesBlack
+    head: ClothingHeadHatChef
+    outerClothing: ClothingUniformJumpsuitChef
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+#  storage:
+#    back:
+#    # radio
+
+# Doctor
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseDoctor
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseDoctor ]
+  - type: VictimBurst
+
+- type: startingGear
+  id: RMCGearCorpseDoctor
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitMedicalDoctor
+    back: CMSatchelMedical
+    shoes: CMBootsBlackFilled
+    eyes: RMCGlassesMedicalHUDGlasses
+    gloves: CMHandsLatex
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+#  storage:
+#    back:
+#    # radio
+
+# Engineer
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseEngineer
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseEngineer ]
+  - type: VictimBurst
+
+- type: startingGear
+  id: RMCGearCorpseEngineer
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitEngineering
+    back: CMSatchelEngineer
+    shoes: CMBootsBlackFilled
+#    head: hard hat
+#    eyes: welding
+    gloves: CMHandsInsulated
+#    outerClothing: hazard vest
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+    belt: CMBeltUtilityFilled
+#  storage:
+#    back:
+#    # radio
+
+# Scientist
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseScientist
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseScientist ]
+  - type: VictimBurst
+
+- type: startingGear
+  id: RMCGearCorpseScientist
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitVirology
+    back: CMSatchelMedical
+    shoes: CMBootsBlackFilled
+    gloves: CMHandsLatex
+    outerClothing: ClothingOuterCoatLab
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+#  storage:
+#    back:
+#    # radio
+#    # motion detector
+#    # good research notes
+
+# Miner
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseMiner
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseMiner ]
+  - type: VictimBurst
+
+- type: startingGear
+  id: RMCGearCorpseMiner
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+    back: CMBackpackEngineer
+    shoes: CMBootsBlackFilled
+#    head: Hard Hat
+#    outerClothing: Hazard Vest
+    id:  CMIDCardColonist
+    ears: CMHeadsetColony
+    pocket1: RMCPouchToolsFill
+  storage:
+    back:
+    - RMCFlashlightLantern
+#    # radio
+
+# Security
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseSecurity
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseSecurity ]
+  - type: VictimBurst
+
+- type: startingGear
+  id: RMCGearCorpseSecurity
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSec
+    back: CMBackpackSecurity
+    shoes: RMCShoesJackboots
+    eyes: CMGlassesSecurity
+    gloves: CMHandsBlackMarine
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+    belt: CMBeltSecurityMPFilled
+  storage:
+    back:
+    - RMCM5Bayonet
+#    # radio
+
+# Marshal Bureau Deputy
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseDeputy
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseDeputy ]
+  - type: VictimBurst
+
+- type: startingGear
+  id: RMCGearCorpseDeputy
+  equipment:
+    jumpsuit: RMCJumpsuitMarshal
+    back: CMSatchelSecurity
+    shoes: CMBootsBlackFilled
+    head: RMCHeadCapBureau
+    eyes: CMGlassesSecurity
+    id: RMCIDCardDeputy
+    ears: CMHeadsetColony
+#    belt: /obj/item/storage/belt/gun/m4a3/heavy
+
+# Corporate Liaison
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseLiaison
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseLiaison ]
+  - type: VictimBurst
+
+- type: startingGear
+  id: RMCGearCorpseLiaison
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonField
+    back: CMSatchel
+    shoes: RMCShoesLaceup
+#    eyes: aviators
+    id: CMIDCardLiaison
+    ears: RMCHeadsetDistressWeYa
+#    belt: /obj/item/storage/belt/gun/m4a3/mod88
+#  storage:
+#    back:
+#    # radio
+
+# Prison Guard
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpsePrisonGuard
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpsePrisonGuard ]
+
+- type: startingGear
+  id: RMCGearCorpsePrisonGuard
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSec
+    back: CMSatchelSecurity
+    shoes: RMCShoesJackboots
+    gloves: CMHandsBlackMarine
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+#  storage:
+#    back:
+#    # radio
+
+# Colonist
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseColonist
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseColonist ]
+
+- type: startingGear
+  id: RMCGearCorpseColonist
+  equipment:
+    jumpsuit: CMJumpsuitColonist
+    back: CMSatchel
+    shoes: CMBootsBlack
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+
+- type: entity
+  parent: RMCHumanCorpseColonist
+  id: RMCHumanCorpseColonistBurst
+  components:
+  - type: VictimBurst

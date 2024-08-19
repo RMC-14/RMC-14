@@ -1,0 +1,32 @@
+﻿- type: entity
+  parent: BaseMachinePowered
+  id: RMCDropshipFabricator
+  name: dropship part fabricator
+  description: A large automated 3D printer for producing dropship parts. # You can recycle parts or ammo in it, and get 80% of your points back, by clicking it while holding them in a powerloader claw. # TODO RMC14
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/dropship_fabricator.rsi
+    layers:
+    - map: [ "base" ]
+      state: drone_fab_idle
+      offset: 0.5, 0
+  - type: DropshipFabricator
+  - type: ApcPowerReceiver
+    needsPower: false # TODO RMC14 power
+  - type: UserInterface
+    interfaces:
+      enum.DropshipFabricatorUi.Key:
+        type: DropshipFabricatorBui
+  - type: ActivatableUI
+    key: enum.DropshipFabricatorUi.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "CMAccessDropship" ] ]
+  - type: GenericVisualizer
+    visuals:
+      enum.DropshipFabricatorVisuals.State:
+        base:
+          enum.DropshipFabricatorState.Idle: { state: drone_fab_idle }
+          enum.DropshipFabricatorState.Fabricating: { state: drone_fab_active }

@@ -52,6 +52,9 @@
     ears: CMHeadsetAlphaMedic
     belt: CMBeltMedicBagFilled
 
+- type: playTimeTracker
+  id: CMJobHospitalCorpsman
+
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointHospitalCorpsman
@@ -65,6 +68,40 @@
       state: green
     - state: hospital_corpsman
 
-- type: playTimeTracker
-  id: CMJobHospitalCorpsman
+- type: entity
+  parent: CMSpawnPointHospitalCorpsman
+  id: CMSpawnPointHospitalCorpsmanAlpha
+  suffix: Alpha
+  components:
+  - type: SquadSpawner
+    squad: SquadAlpha
+    role: CMHospitalCorpsman
+
+- type: entity
+  parent: CMSpawnPointHospitalCorpsman
+  id: CMSpawnPointHospitalCorpsmanBravo
+  suffix: Bravo
+  components:
+  - type: SquadSpawner
+    squad: SquadBravo
+    role: CMHospitalCorpsman
+
+- type: entity
+  parent: CMSpawnPointHospitalCorpsman
+  id: CMSpawnPointHospitalCorpsmanCharlie
+  suffix: Charlie
+  components:
+  - type: SquadSpawner
+    squad: SquadCharlie
+    role: CMHospitalCorpsman
+
+- type: entity
+  parent: CMSpawnPointHospitalCorpsman
+  id: CMSpawnPointHospitalCorpsmanDelta
+  suffix: Delta
+  components:
+  - type: SquadSpawner
+    squad: SquadDelta
+    role: CMHospitalCorpsman
+
 

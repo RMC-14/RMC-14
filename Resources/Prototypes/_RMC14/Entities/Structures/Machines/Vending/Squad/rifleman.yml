@@ -51,6 +51,7 @@
       #    CMM276M82FHolsterRig #TODO: Make this
       #    CMM276ShotgunShellLoadingRig #TODO: Make this
       - id: CMBeltUtility
+      - id: RMCBeltUtilityGeneral
       - id: RMCBeltGrenade
     - name: Pouches
       choices: { RMCPouch: 2 }
@@ -153,8 +154,8 @@
         points: 15
       - id: CMWebbingBlack
         points: 15
-    #- id: CMDropPouch
-    #  points: 15
+      - id: CMWebbingPouch
+        points: 15
     #- id: CMShoulderHolster
     #  points: 15
     #- id: CMScabbardMacheteFull
@@ -191,8 +192,8 @@
         points: 5
     #- id: CMRangeFinder
     #  points: 10
-    #- id: CMLaserDesignator
-    #  points: 15
+      - id: RMCLaserDesignator
+        points: 15
     - name: Helmet Optics
       entries: [ ]
     #- id: CMMedicalHelmetOptic
@@ -200,9 +201,9 @@
     #- id: CMWeldingVisor
     #  points: 5
     - name: Pamphlets
-      entries: [ ]
-    #- id: CMPamphletJTAC
-    #  points: 15
+      entries:
+      - id: CMPamphletJTAC
+        points: 15
     #- id: CMPamphletEngineering
     #  points: 15
     - name: Radio Keys

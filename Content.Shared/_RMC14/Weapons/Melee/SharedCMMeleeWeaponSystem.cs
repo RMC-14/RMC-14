@@ -40,6 +40,9 @@ public abstract class SharedCMMeleeWeaponSystem : EntitySystem
 
     private void OnImmuneToUnarmedGettingAttacked(Entity<ImmuneToUnarmedComponent> ent, ref GettingAttackedAttemptEvent args)
     {
+        if (!ent.Comp.ApplyToXenos && _xenoQuery.HasComp(args.Attacker))
+            return;
+
         if (args.Attacker == args.Weapon)
             args.Cancelled = true;
     }

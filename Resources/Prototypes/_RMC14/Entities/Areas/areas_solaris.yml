@@ -26,8 +26,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredGround
   - RMCAreaProtectionMetal
+  - RMCAreaBigredGround
   id: RMCAreaBigredGroundGarageWorkshop
   name: Garage Workshop
   components:
@@ -509,8 +509,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Caves
   - RMCAreaUndergroundMetalBlockCAS
+  - RMCAreaBigredv2Caves
   id: RMCAreaBigredv2CavesLambda
   components:
   - type: Area
@@ -550,8 +550,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2
   - RMCAreaUndergroundBlockCAS
+  - RMCAreaBigredv2
   id: RMCAreaBigredv2LambdaCaves
   name: Lambda Lab Caves
   components:
@@ -560,8 +560,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaUndergroundAllowCAS
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideLambdaCaveCas
   name: Lambda Lockdown Caves Entrance
   components:
@@ -580,8 +580,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2
   - RMCAreaMax
+  - RMCAreaBigredv2
   id: RMCAreaBigredv2Oob
   name: Big Red Out of Bounds
   components:
@@ -597,8 +597,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2
   - RMCAreaNone
+  - RMCAreaBigredv2
   id: RMCAreaBigredv2Outside
   name: Colony Grounds
   components:
@@ -625,8 +625,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2OutsideNw
   - RMCAreaGlass
+  - RMCAreaBigredv2OutsideNw
   id: RMCAreaBigredv2OutsideNwCeiling
 
 - type: entity
@@ -691,8 +691,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2
   - RMCAreaUndergroundBlockCAS
+  - RMCAreaBigredv2
   id: RMCAreaBigredv2Caves
   name: Unknown Area
   components:
@@ -711,14 +711,14 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Caves
   - RMCAreaUndergroundMetalBlockCAS
+  - RMCAreaBigredv2Caves
   id: RMCAreaBigredv2CavesEta
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaNone
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideEta
   name: Eta Labs Compound
   components:
@@ -759,8 +759,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaProtectionMetal
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideCargo
   name: Cargo
   components:
@@ -771,8 +771,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaProtectionMetal
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideGeneralStore
   name: General Store
   components:
@@ -781,8 +781,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaProtectionMetal
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideMarshalOffice
   name: Marshal Offices
   components:
@@ -793,8 +793,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaProtectionMetal
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideMedical
   name: Hospital
   components:
@@ -805,8 +805,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaProtectionMetal
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideAdminBuilding
   name: Administration
   components:
@@ -817,8 +817,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaProtectionMetal
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideFiltrationPlant
   name: Filtration Plant
   components:
@@ -829,8 +829,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaUndergroundMetalAllowCAS
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideVirology
   name: Virology Lab
   components:
@@ -842,8 +842,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaProtectionMetal
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideDorms
   name: Dormitories
   components:
@@ -852,8 +852,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaProtectionMetal
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideBar
   name: Bar
   components:
@@ -862,8 +862,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaProtectionMetal
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideChapel
   name: Chapel
   components:
@@ -872,8 +872,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaProtectionMetal
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideHydroponics
   name: Hydroponics
   components:
@@ -882,8 +882,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaProtectionMetal
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideLibrary
   name: Library
   components:
@@ -892,8 +892,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaProtectionMetal
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideOfficeComplex
   name: Office Complex
   components:
@@ -902,8 +902,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaGlass
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideSpacePort
   name: Space Port
   components:
@@ -914,8 +914,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaNone
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideSpacePortLz2
   name: Cargo Landing Pad
   components:
@@ -927,8 +927,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaUndergroundMetalAllowCAS
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideTelecomm
   name: LZ1 Communications Relay
   components:
@@ -975,8 +975,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaProtectionMetal
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideEngineering
   name: Engineering Complex
   components:
@@ -985,8 +985,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaProtectionMetal
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideStorage
   name: Storage
   components:
@@ -995,8 +995,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaProtectionMetal
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideSolarPlant
   name: Solar Power Plant
   components:
@@ -1005,8 +1005,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaProtectionMetal
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideAtmos
   name: Atmospheric Stabilizer
   components:
@@ -1015,8 +1015,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaProtectionMetal
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideGeneralOffices
   name: General Offices
   components:
@@ -1025,8 +1025,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2
   - RMCAreaUndergroundBlockCAS
+  - RMCAreaBigredv2
   id: RMCAreaBigredv2CavesVirology
   name: Virology Caves
   components:
@@ -1035,8 +1035,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2
   - RMCAreaUndergroundBlockCAS
+  - RMCAreaBigredv2
   id: RMCAreaBigredv2CavesSw
   name: Southwestern Caves
   components:
@@ -1045,8 +1045,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2
   - RMCAreaUndergroundBlockCAS
+  - RMCAreaBigredv2
   id: RMCAreaBigredv2CavesResearch
   name: Wey-Yu Research Lab Caves
   components:
@@ -1057,8 +1057,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2
   - RMCAreaUndergroundBlockCAS
+  - RMCAreaBigredv2
   id: RMCAreaBigredv2CavesSe
   name: Southeastern Caves
   components:
@@ -1067,8 +1067,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2
   - RMCAreaUndergroundBlockCAS
+  - RMCAreaBigredv2
   id: RMCAreaBigredv2CavesEast
   name: Eastern Caves
   components:
@@ -1077,8 +1077,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2
   - RMCAreaUndergroundBlockCAS
+  - RMCAreaBigredv2
   id: RMCAreaBigredv2CavesNorth
   name: Northern Caves
   components:
@@ -1107,8 +1107,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaUndergroundAllowCAS
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideLz1NorthCas
   name: Northern Caves Entrance
   components:
@@ -1117,8 +1117,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaUndergroundAllowCAS
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideLz1TelecommCas
   name: Virology Caves Entrance
   components:
@@ -1127,8 +1127,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaUndergroundAllowCAS
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideLz2WestCas
   name: Southwestern Caves Entrance
   components:
@@ -1137,8 +1137,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaUndergroundAllowCAS
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideLz2SouthCas
   name: ETA Lockdown Caves Entrance
   components:
@@ -1147,8 +1147,8 @@
 
 - type: entity
   parent:
-  - RMCAreaBigredv2Outside
   - RMCAreaUndergroundAllowCAS
+  - RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideFiltrationCaveCas
   name: Filtration Lockdown Caves Entrance
   components:

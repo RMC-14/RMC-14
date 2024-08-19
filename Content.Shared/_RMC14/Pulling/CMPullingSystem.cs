@@ -1,5 +1,4 @@
 ﻿using Content.Shared._RMC14.Xenonids.Parasite;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Components;
@@ -7,10 +6,10 @@ using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Player;
 using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Pulling;
@@ -20,17 +19,22 @@ public sealed class CMPullingSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
+
+    private EntityQuery<PreventPulledWhileAliveComponent> _preventPulledWhileAliveQuery;
 
     public override void Initialize()
     {
+        _preventPulledWhileAliveQuery = GetEntityQuery<PreventPulledWhileAliveComponent>();
+
         SubscribeLocalEvent<ParalyzeOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
-        SubscribeLocalEvent<InfectOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
+        SubscribeLocalEvent<InfectOnPullAttemptComponent, PullAttemptEvent>(OnInfectOnPullAttempt);
 
         SubscribeLocalEvent<SlowOnPullComponent, PullStartedMessage>(OnSlowPullStarted);
         SubscribeLocalEvent<SlowOnPullComponent, PullStoppedMessage>(OnSlowPullStopped);
@@ -42,6 +46,10 @@ public sealed class CMPullingSystem : EntitySystem
         SubscribeLocalEvent<BlockPullingDeadComponent, PullAttemptEvent>(OnBlockDeadPullAttempt);
         SubscribeLocalEvent<BlockPullingDeadComponent, PullStartedMessage>(OnBlockDeadPullStarted);
         SubscribeLocalEvent<BlockPullingDeadComponent, PullStoppedMessage>(OnBlockDeadPullStopped);
+
+        SubscribeLocalEvent<PreventPulledWhileAliveComponent, PullAttemptEvent>(OnPreventPulledWhileAliveAttempt);
+        SubscribeLocalEvent<PreventPulledWhileAliveComponent, PullStartedMessage>(OnPreventPulledWhileAliveStart);
+        SubscribeLocalEvent<PreventPulledWhileAliveComponent, PullStoppedMessage>(OnPreventPulledWhileAliveStop);
     }
 
     private void OnParalyzeOnPullAttempt(Entity<ParalyzeOnPullAttemptComponent> ent, ref PullAttemptEvent args)
@@ -73,7 +81,7 @@ public sealed class CMPullingSystem : EntitySystem
         _popup.PopupPredicted(selfMessage, othersMessage, puller, puller, PopupType.MediumCaution);
     }
 
-    private void OnParalyzeOnPullAttempt(Entity<InfectOnPullAttemptComponent> ent, ref PullAttemptEvent args)
+    private void OnInfectOnPullAttempt(Entity<InfectOnPullAttemptComponent> ent, ref PullAttemptEvent args)
     {
         var user = args.PullerUid;
         var target = args.PulledUid;
@@ -88,11 +96,10 @@ public sealed class CMPullingSystem : EntitySystem
             return;
 
         Entity<XenoParasiteComponent> comp = (target, paraComp);
+        args.Cancelled = true;
 
         if (!_parasite.Infect(comp, user, false, true))
             return;
-
-        args.Cancelled = true;
 
         var puller = user;
         var pulled = target;
@@ -177,6 +184,55 @@ public sealed class CMPullingSystem : EntitySystem
             RemCompDeferred<BlockPullingDeadActiveComponent>(ent);
     }
 
+    private void OnPreventPulledWhileAliveAttempt(Entity<PreventPulledWhileAliveComponent> ent, ref PullAttemptEvent args)
+    {
+        if (args.PulledUid != ent.Owner)
+            return;
+
+        if (!CanPullPreventPulledWhileAlive((ent, ent), args.PullerUid))
+        {
+            var msg = Loc.GetString("rmc-prevent-pull-alive", ("target", ent));
+            _popup.PopupClient(msg, ent, args.PullerUid, PopupType.SmallCaution);
+            args.Cancelled = true;
+        }
+    }
+
+    private void OnPreventPulledWhileAliveStart(Entity<PreventPulledWhileAliveComponent> ent, ref PullStartedMessage args)
+    {
+        if (args.PulledUid != ent.Owner)
+            return;
+
+        EnsureComp<ActivePreventPulledWhileAliveComponent>(ent);
+    }
+
+    private void OnPreventPulledWhileAliveStop(Entity<PreventPulledWhileAliveComponent> ent, ref PullStoppedMessage args)
+    {
+        if (args.PulledUid != ent.Owner)
+            return;
+
+        RemCompDeferred<ActivePreventPulledWhileAliveComponent>(ent);
+    }
+
+    private bool CanPullPreventPulledWhileAlive(Entity<PreventPulledWhileAliveComponent?> pulled, EntityUid user)
+    {
+        if (!Resolve(pulled, ref pulled.Comp, false))
+            return true;
+
+        if (!_mobState.IsAlive(pulled))
+            return true;
+
+        if (!_whitelist.IsWhitelistPassOrNull(pulled.Comp.Whitelist, user))
+            return true;
+
+        foreach (var effect in pulled.Comp.ExceptEffects)
+        {
+            if (_statusEffects.HasStatusEffect(pulled, effect))
+                return true;
+        }
+
+        return false;
+    }
+
     public override void Update(float frameTime)
     {
         var blockDeadActive = EntityQueryEnumerator<BlockPullingDeadActiveComponent, PullerComponent>();
@@ -190,6 +246,18 @@ public sealed class CMPullingSystem : EntitySystem
 
             if (_mobState.IsDead(pulling))
                 _pulling.TryStopPull(pulling, pullable, uid);
+        }
+
+        var preventPulledWhileAlive = EntityQueryEnumerator<ActivePreventPulledWhileAliveComponent, PreventPulledWhileAliveComponent, PullableComponent>();
+        while (preventPulledWhileAlive.MoveNext(out var uid, out _, out var prevent, out var pullable))
+        {
+            if (pullable.Puller is not { } puller ||
+                CanPullPreventPulledWhileAlive((uid, prevent), puller))
+            {
+                continue;
+            }
+
+            _pulling.TryStopPull(uid, pullable);
         }
     }
 }

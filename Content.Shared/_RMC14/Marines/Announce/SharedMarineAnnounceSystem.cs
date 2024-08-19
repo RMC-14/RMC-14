@@ -44,7 +44,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     public virtual void AnnounceARES(
         EntityUid? source,
         string message,
-        SoundSpecifier? sound = null
+        SoundSpecifier? sound = null,
+        LocId? announcement = null
         )
     {
     }

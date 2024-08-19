@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoCarrier
   name: Carrier
   description: A strange-looking alien creature. It carries a number of scuttling jointed crablike creatures.
@@ -58,7 +59,7 @@
     damage:
       groups:
         Brute: 27.5
-  - type: Tackle
+  - type: Tackle # min: 2, max: 4
     threshold: 3
     stun: 9
     chance: 0.50

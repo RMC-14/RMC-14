@@ -115,7 +115,7 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-    #- id: CMG8AGeneralUtilityPouch
+      - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
     #- id: CMM276GeneralPistolHolsterRig
     #- id: CMM276M63HolsterRig
@@ -152,7 +152,7 @@
       - id: CMWebbingBlack
       #- id: CMShoulderHolster
       - id: CMWebbing
-    #- id: CMDropPouch
+      - id: CMWebbingPouch
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -200,14 +200,18 @@
       entries:
       - id: RMCBinoculars
         points: 5
+      - id: RMCLaserDesignator
+        points: 15
     - name: Helmet Optics
       entries: [ ]
     #- id: CMMedicalHelmetOptic
     #- id: CMWeldingVisor
     - name: Pamphlets
-      entries: [ ]
-    #- id: CMPamphletJTAC
+      entries:
+      - id: CMPamphletJTAC
+        points: 15
     #- id: CMPamphletEngineering
+    #  points: 15
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer

@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoLesserDrone
   name: Lesser Drone
   description: An alien drone. Looks... smaller.
@@ -54,7 +55,7 @@
     damage:
       groups:
         Brute: 20
-  - type: Tackle
+  - type: Tackle  # min: 4, max: 5
     threshold: 5
     stun: 5
   - type: WhitelistPickup

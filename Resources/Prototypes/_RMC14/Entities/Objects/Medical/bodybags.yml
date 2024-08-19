@@ -21,7 +21,7 @@
     state: bodybag_closed
   - type: EntityStorageVisuals
     stateDoorOpen: bodybag_open
-  - type: InteractedBlacklist
+  - type: InsertBlacklist
     blacklist:
       components:
       - Xeno

@@ -27,6 +27,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -211,7 +212,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         EntityUid? effect = null;
 
         if (_prototype.TryIndex(effectID, out var effectProto) && _net.IsServer)
+        {
             effect = Spawn(effectID, entityCoords);
+            RaiseNetworkEvent(new XenoConstructionAnimationStartEvent(GetNetEntity(effect.Value), GetNetEntity(xeno)), Filter.PvsExcept(effect.Value));
+        }
 
         var ev = new XenoSecreteStructureDoAfterEvent(coordinates, choice, GetNetEntity(effect));
         args.Handled = true;
@@ -229,7 +233,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoSecreteStructureDoAfter(Entity<XenoConstructionComponent> xeno, ref XenoSecreteStructureDoAfterEvent args)
     {
-        if (args.Cancelled && _net.IsServer && args.Effect != null)
+        if (_net.IsServer && args.Effect != null)
             QueueDel(EntityManager.GetEntity(args.Effect));
 
         if (args.Handled || args.Cancelled)
