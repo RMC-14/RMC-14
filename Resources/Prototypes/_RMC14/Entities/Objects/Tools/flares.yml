@@ -277,6 +277,8 @@
 - type: entity
   parent: CMPackFlareBase
   id: RMCPackFlareCAS
+  name: M89-S Signal Flare Pack
+  description: A packet of eight M89-S Signal Marking Flares. Used to designate areas for CAS
   suffix: Filled
   components:
   - type: Sprite
