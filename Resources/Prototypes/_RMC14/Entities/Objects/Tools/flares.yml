@@ -165,6 +165,7 @@
     sprite: _RMC14/Objects/Misc/flares.rsi
     - state: overlay
     - state: flare_flame
+      color: "#A7FFA7"
   - type: Icon
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
     state: icon
