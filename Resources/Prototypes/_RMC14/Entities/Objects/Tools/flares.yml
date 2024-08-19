@@ -163,6 +163,7 @@
     layers:
     - state: flare-on
     sprite: _RMC14/Objects/Misc/flares.rsi
+    layers:
     - state: overlay
     - state: flare_flame
       color: "#A7FFA7"
@@ -177,7 +178,6 @@
     radius: 6.0
     energy: 12.0
 
-    
 # Flare Boxes
 
 - type: entity
