@@ -152,6 +152,7 @@
     - Trash
 
 - type: entity
+  parent: RMCFlareLit
   name: signal flare 
   suffix: Projectile
   id: RMCFlareCASLit 
@@ -168,47 +169,14 @@
   - type: Icon
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
     state: icon
-  - type: Item
-    size: Small
-  - type: IgnitionSource
-    ignited: true
-    temperature: 1000
   - type: TimedDespawn
     lifetime: 180
   - type: ActiveFlareSignal
-  - type: Fixtures
-    fixtures:
-      projectile:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.1,-0.1,0.1,0.1"
-        mask:
-          - BulletImpassable
-  - type: Projectile
-    deleteOnCollide: false
-    onlyCollideWhenShot: true
-    damage:
-      types:
-        Heat: 10
-  - type: IgniteOnCollide
-    fireStacks: 1.5 #CM13 applies more stacks but firecode is fucky
-  - type: AmbientSound
-    enabled: true
-    volume: 0
-    range: 7
-    sound:
-      path: /Audio/Items/Flare/flare_burn.ogg
-      params:
-        loop: true
-        volume: -10
-        maxDistance: 5
   - type: PointLight
     color: "#64FA4B"
     radius: 6.0
     energy: 12.0
-  - type: Tag
-    tags:
-    - Trash
+  
 
 # Flare Boxes
 
