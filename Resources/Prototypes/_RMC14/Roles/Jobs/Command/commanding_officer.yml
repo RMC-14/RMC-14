@@ -7,22 +7,31 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMSquad
-    time: 180000 # 50 hours
+    time: 126000 # 35 hours, any roles
+  - !type:RoleTimeRequirement
+    role: CMJobSquadLeader
+    time: 54000 # 15 hours
   - !type:TotalJobsTimeRequirement
     group: CMJobsEngineering
     time: 36000 # 10 hours
   - !type:DepartmentTimeRequirement
     department: CMMilitaryPolice
-    time: 180000 # 50 hours
+    time: 108000 # 30 hours
+  - !type:RoleTimeRequirement
+    role: CMJobMilitaryWarden
+    time: 36000 # 10 hours, you need 5 to get CMP either way
+  - !type:RoleTimeRequirement
+    role: CMJobChiefMP
+    time: 36000 # 10 hours
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 36000 # 10 hours
   - !type:DepartmentTimeRequirement
     department: CMCommand
-    time: 180000 # 50 hours
+    time: 72000 # 20 hours, either in SO or XO
   - !type:RoleTimeRequirement
     role: CMJobExecutiveOfficer
-    time: 180000 # 50 hours
+    time: 108000 # 30 hours, minimum time in an explicitly commander position
   weight: 10
   startingGear: CMGearCommandingOfficer
   icon: "CMJobIconCommandingOfficer"

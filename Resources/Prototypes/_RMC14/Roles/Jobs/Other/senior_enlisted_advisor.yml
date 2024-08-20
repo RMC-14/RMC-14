@@ -7,19 +7,22 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMSquad
-    time: 108000 # 30 hours
+    time: 54000 # 15 hours
   - !type:TotalJobsTimeRequirement
     group: CMJobsEngineering
     time: 36000 # 10 hours
   - !type:DepartmentTimeRequirement
     department: CMMilitaryPolice
-    time: 108000 # 30 hours
+    time: 54000 # 15 hours
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 54000 # 15 hours
   - !type:DepartmentTimeRequirement
     department: CMCommand
     time: 54000 # 15 hours
+  - !type:DepartmentTimeRequirement
+    department: CMRequisitions
+    time: 36000 # 10 hours
   weight: 5
   startingGear: CMGearSeniorEnlistedAdvisor
   icon: "CMJobIconSEA"
