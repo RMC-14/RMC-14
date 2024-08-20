@@ -862,10 +862,10 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 continue;
             }
 
-            flight.PlayGroundSoundAt ??= ammo.SoundTravelTime;
+            flight.PlayGroundSoundAt ??= _timing.CurTime + ammo.SoundTravelTime;
             Dirty(uid, flight);
 
-            if (time < flight.PlayGroundSoundAt)
+            if (time >= flight.PlayGroundSoundAt)
             {
                 _audio.PlayPvs(ammo.SoundGround, flight.Target);
                 TryQueueDel(uid);
