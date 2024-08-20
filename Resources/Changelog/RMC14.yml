@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: DangerRevolution
-  changes:
-  - message: Added JTAC Radio Key
-    type: Add
-  - message: Add We-Ya radio key
-    type: Add
-  id: 91
-  time: '2024-04-30T06:37:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2043
 - author: DrSmugleaf
   changes:
   - message: Add xeno hivemind chat.
@@ -4360,5 +4351,13 @@
   id: 590
   time: '2024-08-19T02:59:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3732
+- author: Whisper
+  changes:
+  - message: Fixed larva speech sounds being heard globally (stereo instead of mono),
+      resulting in them being "too loud".
+    type: Fix
+  id: 591
+  time: '2024-08-20T11:14:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3750
 Name: RMC14
 Order: -1
