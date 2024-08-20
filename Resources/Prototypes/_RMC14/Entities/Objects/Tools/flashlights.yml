@@ -86,11 +86,11 @@
         map: [ "light" ]
   - type: Item
     size: Tiny
-  - type: Clothing # Would be nice to get this sprited
-    quickEquip: false
+  - type: Clothing
     slots:
-    - HEAD
-    - neck
+      - mask
+      - neck
+      - head
 
 - type: entity
   parent: RMCFlashlightBase
