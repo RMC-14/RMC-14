@@ -1,27 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Add xeno hivemind chat.
-    type: Add
-  id: 92
-  time: '2024-05-01T03:23:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2049
-- author: DrSmugleaf
-  changes:
-  - message: The parasite now rips off the victim's mask on infect.
-    type: Fix
-  id: 93
-  time: '2024-05-02T05:25:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2050
-- author: DrSmugleaf
-  changes:
-  - message: Replaced the pilot officer with the dropship and gunship pilots.
-    type: Add
-  id: 94
-  time: '2024-05-03T01:08:07.363042+00:00'
-  url: null
-- author: DrSmugleaf
-  changes:
   - message: The xeno Queen is now able to hijack the dropship.
     type: Add
   id: 95
@@ -4359,5 +4338,33 @@
   id: 591
   time: '2024-08-20T11:14:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3750
+- author: DrSmugleaf
+  changes:
+  - message: Fixed crash land damage bypassing the damage limit of 719, making those
+      that are crash-landed unrevivable.
+    type: Fix
+  id: 592
+  time: '2024-08-20T11:34:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3758
+- author: DrSmugleaf
+  changes:
+  - message: Fixed dropships being able to shoot their weapons while recharging or
+      launching.
+    type: Fix
+  - message: Fixed some rounds automatically choosing the hangar bays as primary landing
+      zone on round-start, making it impossible for xenos to call down a dropship
+      for hijack.
+    type: Fix
+  id: 593
+  time: '2024-08-20T11:34:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3759
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the We-Ya-Med plus, chem, and marinemed not regenerating their
+      reagents.
+    type: Fix
+  id: 594
+  time: '2024-08-20T11:35:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3760
 Name: RMC14
 Order: -1
