@@ -331,3 +331,9 @@
   - RMCAreaSavannah
   id: RMCAreaSavannahPressSEA
   name: Press and SEA Offices
+
+- type: entity
+  parent:
+  - RMCAreaSavannah
+  id: RMCAreaSavannahBriefing
+  name: Briefing
