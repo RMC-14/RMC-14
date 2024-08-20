@@ -20,6 +20,7 @@ using Content.Shared.Item;
 using Content.Shared.Light.Components;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
+using Content.Shared.Shuttles.Systems;
 using Content.Shared.Throwing;
 using Content.Shared.Timing;
 using Robust.Shared.Audio.Systems;
@@ -461,7 +462,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (!_dropship.TryGetGridDropship(weapon.Value, out dropship))
                 return;
 
-            if (!HasComp<FTLComponent>(dropship))
+            if (!TryComp(dropship, out FTLComponent? ftl) ||
+                (ftl.State != FTLState.Travelling && ftl.State != FTLState.Arriving))
             {
                 var msg = Loc.GetString("rmc-dropship-weapons-fire-not-flying");
                 _popup.PopupClient(msg, actor, PopupType.SmallCaution);
