@@ -9535,7 +9535,7 @@ entities:
     - type: MetaData
       name: Savannah Dock A (Starboard)
     - type: Transform
-      pos: 14.5,5.5
+      pos: 14.5,6.5
       parent: 1
 - proto: CMDropshipHijackDestination
   entities:
@@ -95279,8 +95279,6 @@ entities:
   entities:
   - uid: 17301
     components:
-    - type: MetaData
-      name: Briefing West
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -15.5,-7.5
@@ -95291,8 +95289,6 @@ entities:
       fixtures: {}
   - uid: 17302
     components:
-    - type: MetaData
-      name: Briefing South-East
     - type: Transform
       pos: -2.5,-1.5
       parent: 1
@@ -95302,8 +95298,6 @@ entities:
       fixtures: {}
   - uid: 17303
     components:
-    - type: MetaData
-      name: Briefing North-East
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -2.5,-13.5
@@ -95333,8 +95327,6 @@ entities:
       fixtures: {}
   - uid: 17306
     components:
-    - type: MetaData
-      name: CIC
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -31.5,-10.5
@@ -95345,8 +95337,6 @@ entities:
       fixtures: {}
   - uid: 17307
     components:
-    - type: MetaData
-      name: Prison
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -60.5,-17.5
@@ -95357,8 +95347,6 @@ entities:
       fixtures: {}
   - uid: 17308
     components:
-    - type: MetaData
-      name: Brig East
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -50.5,-7.5
@@ -95369,8 +95357,6 @@ entities:
       fixtures: {}
   - uid: 17309
     components:
-    - type: MetaData
-      name: Brig West
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -66.5,-10.5
@@ -95381,8 +95367,6 @@ entities:
       fixtures: {}
   - uid: 17310
     components:
-    - type: MetaData
-      name: MP Preparations
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -62.5,-1.5
@@ -95393,8 +95377,6 @@ entities:
       fixtures: {}
   - uid: 17312
     components:
-    - type: MetaData
-      name: Pilots Workshop
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -4.5,9.5
@@ -95405,8 +95387,6 @@ entities:
       fixtures: {}
   - uid: 17313
     components:
-    - type: MetaData
-      name: Requisition West
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 26.5,-17.5
@@ -95417,8 +95397,6 @@ entities:
       fixtures: {}
   - uid: 17314
     components:
-    - type: MetaData
-      name: Requisition East
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 36.5,-14.5
@@ -95429,8 +95407,6 @@ entities:
       fixtures: {}
   - uid: 17315
     components:
-    - type: MetaData
-      name: Canteen
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 49.5,-17.5
@@ -95471,8 +95447,6 @@ entities:
       fixtures: {}
   - uid: 17319
     components:
-    - type: MetaData
-      name: Alpha Cryo
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 54.5,15.5
@@ -95483,8 +95457,6 @@ entities:
       fixtures: {}
   - uid: 17320
     components:
-    - type: MetaData
-      name: Bravo Cryo
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 61.5,15.5
@@ -95495,8 +95467,6 @@ entities:
       fixtures: {}
   - uid: 17321
     components:
-    - type: MetaData
-      name: Charlie Cryo
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 54.5,-30.5
@@ -95507,8 +95477,6 @@ entities:
       fixtures: {}
   - uid: 17322
     components:
-    - type: MetaData
-      name: Delta Cryo
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 61.5,-30.5
@@ -95519,8 +95487,6 @@ entities:
       fixtures: {}
   - uid: 17323
     components:
-    - type: MetaData
-      name: Atmos (Port)
     - type: Transform
       pos: 82.5,-24.5
       parent: 1
@@ -95530,8 +95496,6 @@ entities:
       fixtures: {}
   - uid: 17324
     components:
-    - type: MetaData
-      name: Engineering North
     - type: Transform
       pos: 78.5,-11.5
       parent: 1
@@ -95541,8 +95505,6 @@ entities:
       fixtures: {}
   - uid: 17325
     components:
-    - type: MetaData
-      name: Engineering South
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 78.5,-3.5
@@ -95553,8 +95515,6 @@ entities:
       fixtures: {}
   - uid: 17326
     components:
-    - type: MetaData
-      name: Engineering Engine Core
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 92.5,-7.5
@@ -95565,8 +95525,6 @@ entities:
       fixtures: {}
   - uid: 17329
     components:
-    - type: MetaData
-      name: Atmos (Starboard)
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 83.5,9.5
@@ -95577,8 +95535,6 @@ entities:
       fixtures: {}
   - uid: 17330
     components:
-    - type: MetaData
-      name: Charlie Preparations
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 55.5,-18.5
@@ -95589,8 +95545,6 @@ entities:
       fixtures: {}
   - uid: 17331
     components:
-    - type: MetaData
-      name: Alpha Preparations
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 55.5,3.5
@@ -95601,8 +95555,6 @@ entities:
       fixtures: {}
   - uid: 17332
     components:
-    - type: MetaData
-      name: Bravo Preparations
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 65.5,3.5
@@ -95613,8 +95565,6 @@ entities:
       fixtures: {}
   - uid: 17333
     components:
-    - type: MetaData
-      name: Delta Preparations
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 65.5,-18.5
@@ -95625,8 +95575,6 @@ entities:
       fixtures: {}
   - uid: 17334
     components:
-    - type: MetaData
-      name: Dock B (Port)
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 24.5,-22.5
@@ -95637,8 +95585,6 @@ entities:
       fixtures: {}
   - uid: 17335
     components:
-    - type: MetaData
-      name: Dock A (Starboard)
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 24.5,8.5
