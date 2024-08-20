@@ -833,7 +833,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 var target = _transform.ToMapCoordinates(flight.Target).Offset(spread);
                 Spawn(ammo.ImpactEffect, target, rotation: _random.NextAngle());
 
-                _entityLookup.GetEntitiesInRange(target, 0.49f, _damageables);
+                _entityLookup.GetEntitiesInRange(target, 0.49f, _damageables, LookupFlags.Uncontained);
                 foreach (var damageable in _damageables)
                 {
                     _damageable.TryChangeDamage(
