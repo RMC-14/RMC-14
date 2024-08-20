@@ -7,22 +7,22 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMSquad
-    time: 54000 # 15 hours
+    time: 180000 # 50 hours
   - !type:TotalJobsTimeRequirement
     group: CMJobsEngineering
     time: 36000 # 10 hours
   - !type:DepartmentTimeRequirement
     department: CMMilitaryPolice
-    time: 36000 # 10 hours
+    time: 180000 # 50 hours
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 36000 # 10 hours
   - !type:DepartmentTimeRequirement
     department: CMCommand
-    time: 36000 # 10 hours
+    time: 180000 # 50 hours
   - !type:RoleTimeRequirement
     role: CMJobExecutiveOfficer
-    time: 36000 #10 hrs
+    time: 180000 # 50 hours
   weight: 10
   startingGear: CMGearCommandingOfficer
   icon: "CMJobIconCommandingOfficer"
