@@ -661,7 +661,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 },
             };
 
-            _damageable.TryChangeDamage(crashLandable, damage, true);
+            _damageable.TryChangeDamage(crashLandable, damage);
             _transform.SetMapCoordinates(crashLandable, _transform.ToMapCoordinates(targetCoords));
             break;
         }
