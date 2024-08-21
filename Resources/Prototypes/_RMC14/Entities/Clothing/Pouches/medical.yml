@@ -247,7 +247,7 @@
       - PillCanister
       - CMTraumaKit
       - CMBurnKit
-      - Ointment
+      - CMOintment
       - Brutepack
       - CMBloodPack
       #      - TODO RMC14 splint
@@ -255,6 +255,7 @@
       - CMFireExtinguisherPortable
       - CMRollerBed
       - BodyBag
+      - PillPacket
       components:
       - Hypospray
   - type: FixedItemSizeStorage
