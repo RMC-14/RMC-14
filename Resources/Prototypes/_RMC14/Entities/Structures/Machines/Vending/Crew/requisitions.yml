@@ -57,8 +57,8 @@
       #  amount: 2
       #- id: M79 Grenade Launcher
       #  amount: 3
-      #- id: XM51 Breaching Scattergun
-      #  amount: 3
+      - id: RMCXM51Case
+        amount: 3
     - name: Explosives
       entries:
       #- id: M15 Fragmentation Grenade

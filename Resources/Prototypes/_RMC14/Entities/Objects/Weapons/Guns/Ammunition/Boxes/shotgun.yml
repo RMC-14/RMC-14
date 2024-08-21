@@ -109,3 +109,23 @@
     - state: incendiarybuck_e
     - state: incendiarybuck
       map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+
+- type: entity
+  parent: RMCBoxShotgunBase
+  id: RMCBoxShotgunBreaching
+  name: box of breaching shells
+  description: A box filled with breaching shotgun shells. 16 Gauge.
+  components:
+  - type: BallisticAmmoProvider
+    proto: RMCShellShotgunBreaching
+  - type: Sprite
+    layers:
+    - state: breaching_e
+    - state: breaching
+      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+  - type: Tag
+    tags:
+    - RMCBoxShotgunBreaching
+
+- type: Tag
+  id: RMCBoxShotgunBreaching

@@ -95,3 +95,20 @@
   name: incendiary buckshot shell
   #components: #TODO RMC14 add burning
 
+- type: entity
+  parent: CMPelletShotgunBase
+  id: RMCPelletShotgunBreaching
+  name: breaching shell
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
+    layers:
+    - state: flechette
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 25
+        Structural: 500
+  - type: TimedDespawn
+    lifetime: 0.075

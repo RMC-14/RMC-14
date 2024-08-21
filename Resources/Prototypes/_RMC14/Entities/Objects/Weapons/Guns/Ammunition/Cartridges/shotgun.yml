@@ -102,5 +102,29 @@
   - type: CartridgeAmmo
     proto: CMPelletShotgunIncendiaryBuckshot
 
+- type: entity
+  parent: CMShellShotgunBase
+  id: RMCShellShotgunBreaching
+  name: handful of breaching shells
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi
+    layers:
+    - state: breaching_shell_1
+  - type: CartridgeAmmo
+    count: 3
+    spread: 5
+    proto: RMCPelletShotgunBreaching
+    deleteOnSpawn: true
+    soundEject:
+      collection: ShellEject
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCShellShotgunBreaching
+
 - type: Tag
   id: CMShellShotgun
+
+- type: Tag
+  id: RMCShellShotgunBreaching
