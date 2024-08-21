@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Dropship.Weapon;
 
@@ -8,4 +8,7 @@ public sealed partial class DropshipTargetComponent : Component
 {
     [DataField, AutoNetworkedField]
     public string Abbreviation = string.Empty;
+
+    [DataField, AutoNetworkedField]
+    public bool IsTargetableByWeapons = true;
 }

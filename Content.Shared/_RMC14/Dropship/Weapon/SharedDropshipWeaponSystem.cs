@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Inventory;
@@ -668,6 +668,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         return 0;
     }
 
+    /// <summary>
+    /// Checks if a target is valid for being fired upon
+    /// </summary>
     private bool IsValidTarget(Entity<DropshipTargetComponent?> ent)
     {
         if (!Resolve(ent, ref ent.Comp, false))
@@ -676,7 +679,10 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         var xform = Transform(ent);
         if (!_casDebug && !HasComp<RMCPlanetComponent>(xform.GridUid))
             return false;
-
+        if (!ent.Comp.IsTargetableByWeapons)
+        {
+            return false;
+        }
         return true;
     }
 
