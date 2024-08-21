@@ -92,11 +92,6 @@
 
 - type: tile
   parent: RMCFloorCoagulationWestBase
-  id: RMCFloorCoagulationWest3
-  sprite: /Textures/_RMC14/Tiles/planet/coagulation/0_3.png
-
-- type: tile
-  parent: RMCFloorCoagulationWestBase
   id: RMCFloorCoagulationWest4
   sprite: /Textures/_RMC14/Tiles/planet/coagulation/0_4.png
 
@@ -166,11 +161,6 @@
 - type: tile
   parent: RMCFloorCoagulationEastBase
   id: RMCFloorCoagulationEast1
-
-- type: tile
-  parent: RMCFloorCoagulationEastBase
-  id: RMCFloorCoagulationEast2
-  sprite: /Textures/_RMC14/Tiles/planet/coagulation/8_2.png
 
 - type: tile
   parent: RMCFloorCoagulationEastBase
