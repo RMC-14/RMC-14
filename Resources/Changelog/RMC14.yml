@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: The hf2 health analyzer now automatically updates every second.
-    type: Tweak
-  - message: Added a delay to using the hf2 health analyzer for medically unskilled
-      marines.
-    type: Tweak
-  id: 99
-  time: '2024-05-08T12:30:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2083
-- author: DrSmugleaf
-  changes:
   - message: Xenos are now unable to hit each other, their eggs, weeds, nests and
       dead things.
     type: Tweak
@@ -4371,5 +4361,12 @@
   id: 598
   time: '2024-08-21T08:53:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3773
+- author: DrSmugleaf
+  changes:
+  - message: Added The Soil of Martyrs figurine.
+    type: Add
+  id: 599
+  time: '2024-08-21T08:55:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3770
 Name: RMC14
 Order: -1
