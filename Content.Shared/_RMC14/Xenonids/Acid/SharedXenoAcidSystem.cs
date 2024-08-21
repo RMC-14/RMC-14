@@ -146,6 +146,12 @@ public abstract class SharedXenoAcidSystem : EntitySystem
                 _damageable.TryChangeDamage(uid, damageableCorrodingComponent.Damage, true);
                 damageableCorrodingComponent.NextDamageAt = time.Add(TimeSpan.FromSeconds(CorrosiveAcidTickDelaySeconds));
             }
+
+            if (time > damageableCorrodingComponent.AcidExpiresAt)
+            {
+                QueueDel(damageableCorrodingComponent.Acid);
+                RemCompDeferred<DamageableCorrodingComponent>(uid);
+            }
         }
 
         var timedCorrodingQuery = EntityQueryEnumerator<TimedCorrodingComponent>();
