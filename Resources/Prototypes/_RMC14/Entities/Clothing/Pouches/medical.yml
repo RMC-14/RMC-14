@@ -109,7 +109,7 @@
       - PillCanister
       - CMTraumaKit
       - CMBurnKit
-      - Ointment
+      - CMOintment
       - Brutepack
       - CMBloodPack
       #      - TODO RMC14 splint
@@ -119,6 +119,7 @@
       #      - TODO RMC14 syringe cases
       - CMSurgicalLine
       - CMSynthGraft
+      - PillPacket
       components:
       - Hypospray
   - type: FixedItemSizeStorage
