@@ -485,3 +485,14 @@
     state: sukuna_kurze
   - type: PatronFigurine
     id: 3b608dbd-db50-4310-a017-83626e056257
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSethSleeper
+  name: Seth Sleeper figurine
+  description: "The type of guy to bring a pillow to a gunfight."
+  components:
+  - type: Sprite
+    state: seth_sleeper
+  - type: PatronFigurine
+    id: 909c243e-6fb8-42ed-a477-d48571fccff2
