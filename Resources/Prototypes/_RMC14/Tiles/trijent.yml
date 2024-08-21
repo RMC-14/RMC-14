@@ -2,6 +2,7 @@
 
 - type: tile
   abstract: true
+  parent: CMPlanetBase
   id: RMCPlanetRedDesertBase
   name: tiles-rmc-red-desert
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert1.png
