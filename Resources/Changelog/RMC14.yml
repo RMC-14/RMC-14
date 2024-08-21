@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Xenos are now unable to hit each other, their eggs, weeds, nests and
-      dead things.
-    type: Tweak
-  id: 100
-  time: '2024-05-09T10:02:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2087
-- author: DrSmugleaf
-  changes:
   - message: Grown xeno eggs will now automatically try to infect any marines that
       come within melee range of them.
     type: Add
@@ -4368,5 +4360,12 @@
   id: 599
   time: '2024-08-21T08:55:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3770
+- author: diraven
+  changes:
+  - message: Corrosive acid can't be applied to barricades multiple times any more.
+    type: Fix
+  id: 600
+  time: '2024-08-21T23:50:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3786
 Name: RMC14
 Order: -1
