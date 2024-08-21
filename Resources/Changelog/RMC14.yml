@@ -1,55 +1,4 @@
 ﻿Entries:
-- author: DangerRevolution
-  changes:
-  - message: Added JTAC Radio Key
-    type: Add
-  - message: Add We-Ya radio key
-    type: Add
-  id: 91
-  time: '2024-04-30T06:37:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2043
-- author: DrSmugleaf
-  changes:
-  - message: Add xeno hivemind chat.
-    type: Add
-  id: 92
-  time: '2024-05-01T03:23:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2049
-- author: DrSmugleaf
-  changes:
-  - message: The parasite now rips off the victim's mask on infect.
-    type: Fix
-  id: 93
-  time: '2024-05-02T05:25:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2050
-- author: DrSmugleaf
-  changes:
-  - message: Replaced the pilot officer with the dropship and gunship pilots.
-    type: Add
-  id: 94
-  time: '2024-05-03T01:08:07.363042+00:00'
-  url: null
-- author: DrSmugleaf
-  changes:
-  - message: The xeno Queen is now able to hijack the dropship.
-    type: Add
-  id: 95
-  time: '2024-05-03T08:02:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2058
-- author: DrSmugleaf
-  changes:
-  - message: Added xeno hud to see the health and plasma of all xenos on screen.
-    type: Add
-  id: 96
-  time: '2024-05-05T00:05:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2060
-- author: Whisper
-  changes:
-  - message: Vending machines require respective access.
-    type: Add
-  id: 97
-  time: '2024-05-07T01:39:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2069
 - author: DrSmugleaf
   changes:
   - message: Added breathing, footstep and dying sounds to the xeno Queen.
@@ -4360,5 +4309,67 @@
   id: 590
   time: '2024-08-19T02:59:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3732
+- author: Whisper
+  changes:
+  - message: Fixed larva speech sounds being heard globally (stereo instead of mono),
+      resulting in them being "too loud".
+    type: Fix
+  id: 591
+  time: '2024-08-20T11:14:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3750
+- author: DrSmugleaf
+  changes:
+  - message: Fixed crash land damage bypassing the damage limit of 719, making those
+      that are crash-landed unrevivable.
+    type: Fix
+  id: 592
+  time: '2024-08-20T11:34:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3758
+- author: DrSmugleaf
+  changes:
+  - message: Fixed dropships being able to shoot their weapons while recharging or
+      launching.
+    type: Fix
+  - message: Fixed some rounds automatically choosing the hangar bays as primary landing
+      zone on round-start, making it impossible for xenos to call down a dropship
+      for hijack.
+    type: Fix
+  id: 593
+  time: '2024-08-20T11:34:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3759
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the We-Ya-Med plus, chem, and marinemed not regenerating their
+      reagents.
+    type: Fix
+  id: 594
+  time: '2024-08-20T11:35:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3760
+- author: DrSmugleaf
+  changes:
+  - message: Fixed no ground sound playing after all bullets land with the GAU-21.
+    type: Fix
+  - message: Fixed the ghost of dropship ammo shot in the past lingering around and
+      lagging the server.
+    type: Fix
+  id: 595
+  time: '2024-08-20T11:59:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3761
+- author: DrSmugleaf
+  changes:
+  - message: Fixed CAS fire exploding grenades and destroying everything in your pockets.
+    type: Fix
+  id: 596
+  time: '2024-08-20T12:11:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3762
+- author: Vermidia
+  changes:
+  - message: Fixed First responder pouch not holding pill packets and ointment
+    type: Fix
+  - message: Fixed Medical pouch not holding ointment, pill packets, and penlights
+    type: Fix
+  id: 597
+  time: '2024-08-21T03:28:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3769
 Name: RMC14
 Order: -1

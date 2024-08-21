@@ -11,6 +11,7 @@
   - type: DropshipAmmo
     rounds: 400
     maxRounds: 400
+    soundGround: null
 
 - type: entity
   parent: RMCDropshipAttachmentAmmo
@@ -33,7 +34,7 @@
     armorPiercing: 10
     weapon: RMCDropshipAttachmentGau21Cannon
     soundCockpit: /Audio/_RMC14/Dropship/gau_incockpit.ogg
-    soundGround: /Audio/_RMC14/Dropship/gau.ogg
+    soundGround: null
     soundImpact:
       path: /Audio/_RMC14/Dropship/gauimpact.ogg
       params:
@@ -56,6 +57,7 @@
         Brute: 80
     armorPiercing: 40
     travelTime: 6
+    soundGround: null
 
 - type: entity
   id: RMCEffectExplosionParticle
