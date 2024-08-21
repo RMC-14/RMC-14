@@ -82,10 +82,19 @@
     state: sorokyne
 
 - type: entity
-  parent: RMCSorokyneSign
+  parent: RMCBaseLandingSign
   id: RMCNewVaraderoSign
   name: New Varadero landing sign
-  description: A large sign that reads 'New Varadero'. Its always sunny here!"
+  description: A large sign that reads 'New Varadero'. Its always sunny here!
   components:
   - type: Sprite
     state: new_varadero
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCFortBicepSign
+  name: Fort Bicep sign
+  description: A large sign that reads 'Fort Bicep, T-COMMS'.
+  components:
+  - type: Sprite
+    state: fort_biceps
