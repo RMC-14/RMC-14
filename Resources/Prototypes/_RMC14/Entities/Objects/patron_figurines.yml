@@ -488,6 +488,17 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronTheSoilofMartyrs
+  name: The Soil of Martyrs figurine
+  description: "It used to be green."
+  components:
+  - type: Sprite
+    state: the_soil_of_martyrs
+  - type: PatronFigurine
+    id: 7486e344-c4b1-4d84-a3a8-8e8c94aa3c7e
+    
+- type: entity
+  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronSethSleeper
   name: Seth Sleeper figurine
   description: "The type of guy to bring a pillow to a gunfight."
