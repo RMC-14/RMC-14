@@ -3,8 +3,9 @@
   id: RMCAreaLv624
   suffix: LV Area
   components:
-#  - type: Sprite
-#    state: lv-626
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: blank
   - type: Area
     buildSpecial: true
     powerNet: ground
