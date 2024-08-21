@@ -20,6 +20,7 @@ using Content.Shared.Item;
 using Content.Shared.Light.Components;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
+using Content.Shared.Shuttles.Systems;
 using Content.Shared.Throwing;
 using Content.Shared.Timing;
 using Robust.Shared.Audio.Systems;
@@ -461,7 +462,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (!_dropship.TryGetGridDropship(weapon.Value, out dropship))
                 return;
 
-            if (!HasComp<FTLComponent>(dropship))
+            if (!TryComp(dropship, out FTLComponent? ftl) ||
+                (ftl.State != FTLState.Travelling && ftl.State != FTLState.Arriving))
             {
                 var msg = Loc.GetString("rmc-dropship-weapons-fire-not-flying");
                 _popup.PopupClient(msg, actor, PopupType.SmallCaution);
@@ -833,7 +835,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 var target = _transform.ToMapCoordinates(flight.Target).Offset(spread);
                 Spawn(ammo.ImpactEffect, target, rotation: _random.NextAngle());
 
-                _entityLookup.GetEntitiesInRange(target, 0.49f, _damageables);
+                _entityLookup.GetEntitiesInRange(target, 0.49f, _damageables, LookupFlags.Uncontained);
                 foreach (var damageable in _damageables)
                 {
                     _damageable.TryChangeDamage(
@@ -860,10 +862,10 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 continue;
             }
 
-            flight.PlayGroundSoundAt ??= ammo.SoundTravelTime;
+            flight.PlayGroundSoundAt ??= _timing.CurTime + ammo.SoundTravelTime;
             Dirty(uid, flight);
 
-            if (time < flight.PlayGroundSoundAt)
+            if (time >= flight.PlayGroundSoundAt)
             {
                 _audio.PlayPvs(ammo.SoundGround, flight.Target);
                 TryQueueDel(uid);
