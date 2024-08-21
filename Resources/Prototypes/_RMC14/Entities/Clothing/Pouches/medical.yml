@@ -113,7 +113,7 @@
       - Brutepack
       - CMBloodPack
       #      - TODO RMC14 splint
-      #      - TODO RMC14 penlight
+      - RMCPenlight
       - CMAutoInjector
       - CMFireExtinguisherPortable
       #      - TODO RMC14 syringe cases
@@ -164,7 +164,7 @@
       tags:
       - CMTraumaKit
       - CMBurnKit
-      - Ointment
+      - CMOintment
       - Brutepack
       - CMBloodPack
       #      - TODO RMC14 splint
@@ -414,7 +414,7 @@
       - PillCanister
       - CMTraumaKit
       - CMBurnKit
-      - Ointment
+      - CMOintment
       - Brutepack
       - CMBloodPack
       #      - TODO RMC14 splint
