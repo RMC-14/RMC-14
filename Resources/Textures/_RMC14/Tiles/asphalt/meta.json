@@ -1,0 +1,197 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/turf/floors/asphalt.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "asphalt"
+    },
+    {
+      "name": "asphalt1"
+    },
+    {
+      "name": "asphalt2"
+    },
+    {
+      "name": "asphalt3"
+    },
+    {
+      "name": "asphalt4"
+    },
+    {
+      "name": "asphalt5"
+    },
+    {
+      "name": "asphalt6"
+    },
+    {
+      "name": "asphalt7"
+    },
+    {
+      "name": "asphalt8"
+    },
+    {
+      "name": "asphalt9"
+    },
+    {
+      "name": "asphalt10"
+    },
+    {
+      "name": "asphalt11"
+    },
+    {
+      "name": "asphalt12"
+    },
+    {
+      "name": "asphalt13"
+    },
+    {
+      "name": "asphalt14"
+    },
+    {
+      "name": "asphalt15"
+    },
+    {
+      "name": "asphalt16"
+    },
+    {
+      "name": "asphalt17"
+    },
+    {
+      "name": "cement1"
+    },
+    {
+      "name": "cement2"
+    },
+    {
+      "name": "cement3"
+    },
+    {
+      "name": "cement4"
+    },
+    {
+      "name": "cement5"
+    },
+    {
+      "name": "cement6"
+    },
+    {
+      "name": "cement7"
+    },
+    {
+      "name": "cement8"
+    },
+    {
+      "name": "cement9"
+    },
+    {
+      "name": "cement10"
+    },
+    {
+      "name": "cement11"
+    },
+    {
+      "name": "cement12"
+    },
+    {
+      "name": "cement13"
+    },
+    {
+      "name": "cement14"
+    },
+    {
+      "name": "cement15"
+    },
+    {
+      "name": "cement16"
+    },
+    {
+      "name": "cement17"
+    },
+    {
+      "name": "cement18"
+    },
+    {
+      "name": "cement19"
+    },
+    {
+      "name": "cement20"
+    },
+    {
+      "name": "special_stonetile"
+    },
+    {
+      "name": "cement_sunbleached1"
+    },
+    {
+      "name": "cement_sunbleached2"
+    },
+    {
+      "name": "cement_sunbleached3"
+    },
+    {
+      "name": "cement_sunbleached4"
+    },
+    {
+      "name": "cement_sunbleached5"
+    },
+    {
+      "name": "cement_sunbleached6"
+    },
+    {
+      "name": "cement_sunbleached7"
+    },
+    {
+      "name": "cement_sunbleached8"
+    },
+    {
+      "name": "cement_sunbleached9"
+    },
+    {
+      "name": "cement_sunbleached10"
+    },
+    {
+      "name": "cement_sunbleached11"
+    },
+    {
+      "name": "cement_sunbleached12"
+    },
+    {
+      "name": "cement_sunbleached13"
+    },
+    {
+      "name": "cement_sunbleached14"
+    },
+    {
+      "name": "cement_sunbleached15"
+    },
+    {
+      "name": "cement_sunbleached16"
+    },
+    {
+      "name": "cement_sunbleached17"
+    },
+    {
+      "name": "cement_sunbleached18"
+    },
+    {
+      "name": "cement_sunbleached19"
+    },
+    {
+      "name": "cement_sunbleached20"
+    },
+    {
+      "name": "sunbleached_asphalt"
+    },
+    {
+      "name": "tile"
+    },
+    {
+      "name": "asphalt_old"
+    }
+  ]
+}
