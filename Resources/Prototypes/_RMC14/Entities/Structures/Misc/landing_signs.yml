@@ -14,7 +14,7 @@
 - type: entity
   parent: RMCBaseLandingSign
   id: RMCLazarusLandingSign
-  name: Lazarus Landing sign
+  name: Lazarus landing sign
   description: A large sign reading 'lazarus landing por-' the rest of it is smeared in blood.
   components:
   - type: Sprite
