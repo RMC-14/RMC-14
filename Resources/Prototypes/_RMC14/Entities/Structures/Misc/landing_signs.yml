@@ -7,8 +7,7 @@
   components:
   - type: InteractionOutline
   - type: Sprite
-    drawdepth: Objects
-    sprite: _RMC14/Objects/Structures/landing_signs.rsi
+    sprite: _RMC14/Structures/landing_signs.rsi
   - type: AnimationPlayer
 
 - type: entity
