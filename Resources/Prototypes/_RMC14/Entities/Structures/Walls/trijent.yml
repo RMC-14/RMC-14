@@ -42,3 +42,10 @@
   - type: IconSmooth
     key: walls
     base: chigusa
+
+- type: entity
+  parent: CMWallRock
+  id: RMCWallRockTrijent
+  components:
+  - type: Sprite
+    color: "#994a16"
