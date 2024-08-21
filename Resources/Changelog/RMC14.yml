@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Vending machines require respective access.
-    type: Add
-  id: 97
-  time: '2024-05-07T01:39:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2069
-- author: DrSmugleaf
-  changes:
-  - message: Added breathing, footstep and dying sounds to the xeno Queen.
-    type: Add
-  id: 98
-  time: '2024-05-08T12:17:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2082
 - author: DrSmugleaf
   changes:
   - message: The hf2 health analyzer now automatically updates every second.
@@ -4369,5 +4355,21 @@
   id: 596
   time: '2024-08-20T12:11:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3762
+- author: Vermidia
+  changes:
+  - message: Fixed First responder pouch not holding pill packets and ointment
+    type: Fix
+  - message: Fixed Medical pouch not holding ointment, pill packets, and penlights
+    type: Fix
+  id: 597
+  time: '2024-08-21T03:28:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3769
+- author: DrSmugleaf
+  changes:
+  - message: Added Seth Sleeper figurine.
+    type: Add
+  id: 598
+  time: '2024-08-21T08:53:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3773
 Name: RMC14
 Order: -1
