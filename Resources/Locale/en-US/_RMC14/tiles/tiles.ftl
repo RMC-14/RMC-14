@@ -31,6 +31,7 @@ tiles-cm-grass = grass tile
 tiles-cm-dirt-grass = dirt grass tile
 tiles-cm-rock = rock tile
 tiles-rmc-red-desert = red desert tile
+tiles-rmc-desert-water-shore = shore
 
 tiles-rmc-asphalt = asphalt tile
 tiles-rmc-cement = cement tile
