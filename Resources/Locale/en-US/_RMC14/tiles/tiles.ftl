@@ -32,6 +32,9 @@ tiles-cm-dirt-grass = dirt grass tile
 tiles-cm-rock = rock tile
 tiles-rmc-red-desert = red desert tile
 
+tiles-rmc-asphalt = asphalt tile
+tiles-rmc-cement = cement tile
+
 tiles-cm-default-alpha = alpha metal tile
 tiles-cm-default-bravo = bravo metal tile
 tiles-cm-default-charlie = charlie metal tile

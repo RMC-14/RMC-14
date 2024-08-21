@@ -3,6 +3,9 @@
   id: RMCAreaBigred
   suffix: Deprecated Solaris Area
   components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: blank
   - type: Area
     buildSpecial: true
     powerNet: ground
@@ -575,6 +578,9 @@
   id: RMCAreaBigredv2
   suffix: Solaris Area
   components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: blank
   - type: Area
     buildSpecial: true
 

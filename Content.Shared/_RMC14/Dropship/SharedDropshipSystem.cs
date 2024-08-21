@@ -1,9 +1,8 @@
 ﻿using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.Weapon;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
-using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -26,7 +25,6 @@ public abstract class SharedDropshipSystem : EntitySystem
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
@@ -326,8 +324,8 @@ public abstract class SharedDropshipSystem : EntitySystem
             return false;
         }
 
-        if (HasComp<AlmayerComponent>(_transform.GetGrid(lz)) ||
-            HasComp<AlmayerComponent>(_transform.GetMap(lz)))
+        if (!HasComp<RMCPlanetComponent>(_transform.GetGrid(lz)) &&
+            !HasComp<RMCPlanetComponent>(_transform.GetMap(lz)))
         {
             Log.Warning($"{ToPrettyString(actor)} tried to designate entity {ToPrettyString(lz)} on the warship as primary LZ!");
             return false;
@@ -358,8 +356,11 @@ public abstract class SharedDropshipSystem : EntitySystem
         var landingZoneQuery = EntityQueryEnumerator<DropshipDestinationComponent, MetaDataComponent, TransformComponent>();
         while (landingZoneQuery.MoveNext(out var uid, out _, out var metaData, out var xform))
         {
-            if (HasComp<AlmayerComponent>(xform.ParentUid) || HasComp<AlmayerComponent>(xform.MapUid))
+            if (!HasComp<RMCPlanetComponent>(xform.ParentUid) &&
+                !HasComp<RMCPlanetComponent>(xform.MapUid))
+            {
                 continue;
+            }
 
             yield return (uid, metaData);
         }

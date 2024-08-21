@@ -148,10 +148,10 @@
         - Paper
   - type: ContainerContainer
     containers:
-      entity_storage: !type:Container
       paper_label: !type:ContainerSlot
   - type: StaticPrice
     price: 50
+  - type: ItemSlots
 
 
 # Weldable
