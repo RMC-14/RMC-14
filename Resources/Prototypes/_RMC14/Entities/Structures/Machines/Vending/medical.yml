@@ -22,6 +22,8 @@
   name: We-Ya-Med Plus
   description: Medical pharmaceutical dispenser. Provided by We-Ya Pharmaceuticals Division(TM).
   components:
+  - type: Transform
+    anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/med.rsi
     layers:
@@ -145,6 +147,8 @@
   name: We-Ya-Chem Plus
   description: Medical chemistry dispenser. Provided by We-Ya Pharmaceuticals Division(TM).
   components:
+  - type: Transform
+    anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/med.rsi
     layers:
@@ -200,6 +204,8 @@
   name: ColMarTech MarineMed
   description: Medical Pharmaceutical dispenser with basic medical supplies for marines.
   components:
+  - type: Transform
+    anchored: true
   - type: Fixtures
     fixtures:
       fix1:

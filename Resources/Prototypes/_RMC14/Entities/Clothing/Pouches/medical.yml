@@ -109,16 +109,17 @@
       - PillCanister
       - CMTraumaKit
       - CMBurnKit
-      - Ointment
+      - CMOintment
       - Brutepack
       - CMBloodPack
       #      - TODO RMC14 splint
-      #      - TODO RMC14 penlight
+      - RMCPenlight
       - CMAutoInjector
       - CMFireExtinguisherPortable
       #      - TODO RMC14 syringe cases
       - CMSurgicalLine
       - CMSynthGraft
+      - PillPacket
       components:
       - Hypospray
   - type: FixedItemSizeStorage
@@ -164,7 +165,7 @@
       tags:
       - CMTraumaKit
       - CMBurnKit
-      - Ointment
+      - CMOintment
       - Brutepack
       - CMBloodPack
       #      - TODO RMC14 splint
@@ -247,7 +248,7 @@
       - PillCanister
       - CMTraumaKit
       - CMBurnKit
-      - Ointment
+      - CMOintment
       - Brutepack
       - CMBloodPack
       #      - TODO RMC14 splint
@@ -255,6 +256,7 @@
       - CMFireExtinguisherPortable
       - CMRollerBed
       - BodyBag
+      - PillPacket
       components:
       - Hypospray
   - type: FixedItemSizeStorage
@@ -413,7 +415,7 @@
       - PillCanister
       - CMTraumaKit
       - CMBurnKit
-      - Ointment
+      - CMOintment
       - Brutepack
       - CMBloodPack
       #      - TODO RMC14 splint
