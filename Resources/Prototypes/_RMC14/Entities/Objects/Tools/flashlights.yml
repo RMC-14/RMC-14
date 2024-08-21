@@ -87,7 +87,8 @@
   - type: Item
     size: Tiny
   - type: Tag
-    tags: RMCPenlight
+    tags:
+    - RMCPenlight
 
 - type: Tag
   id: RMCPenlight
