@@ -53,22 +53,22 @@
 
 - type: entity
   parent:
-  - RMCAreaShiva
   - RMCAreaNone
+  - RMCAreaShiva
   id: RMCAreaShivaExterior
   name: Shiva's Snowball - Exterior
 
 - type: entity
   parent:
-  - RMCAreaShiva
   - RMCAreaUndergroundAllowCAS
+  - RMCAreaShiva
   id: RMCAreaShivaInterior
   name: Shiva's Snowball - Interior
 
 - type: entity
   parent:
-  - RMCAreaShivaInterior
   - RMCAreaMax
+  - RMCAreaShivaInterior
   id: RMCAreaShivaInteriorOob
   name: Shiva's Snowball - Out Of Bounds
   components:
@@ -280,8 +280,8 @@
 
 - type: entity
   parent:
-  - RMCAreaShivaInterior
   - RMCAreaUndergroundMetalBlockCAS
+  - RMCAreaShivaInterior
   id: RMCAreaShivaInteriorCaves
   name: Shiva's Snowball - Caves
   components:
@@ -342,8 +342,8 @@
 
 - type: entity
   parent:
-  - RMCAreaShivaInterior
   - RMCAreaUndergroundMetalAllowCAS
+  - RMCAreaShivaInterior
   id: RMCAreaShivaInteriorColony
   name: Shiva's Snowball - Colony MegaStruct(TM)
   components:
@@ -404,8 +404,8 @@
 
 - type: entity
   parent:
-  - RMCAreaShivaInteriorColony
   - RMCAreaGlass
+  - RMCAreaShivaInteriorColony
   id: RMCAreaShivaInteriorColonyDeck
   name: Shiva's Snowball - Colony MegaStruct(TM) Open Deck
   components:

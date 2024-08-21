@@ -2,6 +2,8 @@
 using Content.Shared.DoAfter;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
+using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -14,6 +16,7 @@ public abstract class SharedLadderSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -113,9 +116,15 @@ public abstract class SharedLadderSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        var user = args.DoAfter.Args.User.ToCoordinates();
+        var user = args.DoAfter.Args.User;
+        if (TryComp(user, out PullerComponent? puller) &&
+            TryComp(puller.Pulling, out PullableComponent? pullable))
+        {
+            _pulling.TryStopPull(puller.Pulling.Value, pullable, user);
+        }
+
         var target = ent.Owner.ToCoordinates();
-        if (user.TryDistance(EntityManager, _transform, target, out var distance) &&
+        if (user.ToCoordinates().TryDistance(EntityManager, _transform, target, out var distance) &&
             distance > ent.Comp.Range)
         {
             args.Cancel();
