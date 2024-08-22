@@ -8,7 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
-using Content.Shared._RMC14.LinkAccount;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -55,6 +54,7 @@ namespace Content.Server.Database
                     .ThenInclude(l => l.Groups)
                     .ThenInclude(group => group.Loadouts)
                 .Include(p => p.Profiles).ThenInclude(p => p.NamedItems)
+                .Include(p => p.Profiles).ThenInclude(p => p.SquadPriority)
                 .AsSingleQuery()
                 .SingleOrDefaultAsync(p => p.UserId == userId.UserId, cancel);
 
@@ -107,6 +107,7 @@ namespace Content.Server.Database
                     .ThenInclude(l => l.Groups)
                     .ThenInclude(group => group.Loadouts)
                 .Include(p => p.NamedItems)
+                .Include(p => p.SquadPriority)
                 .AsSplitQuery()
                 .SingleOrDefault(h => h.Slot == slot);
 
@@ -117,6 +118,8 @@ namespace Content.Server.Database
                     .Preference
                     .Include(p => p.Profiles)
                     .ThenInclude(p => p.NamedItems)
+                    .Include(p => p.Profiles)
+                    .ThenInclude(p => p.SquadPriority)
                     .SingleAsync(p => p.UserId == userId.UserId);
 
                 prefs.Profiles.Add(newProfile);
@@ -200,7 +203,7 @@ namespace Content.Server.Database
                 sex = sexVal;
 
             var spawnPriority = (SpawnPriorityPreference) profile.SpawnPriority;
-            var squadPriority = (SquadPriorityPreference) profile.SquadPriority;
+            var squadPriority = profile.SquadPriority?.Squad;
 
             var gender = sex == Sex.Male ? Gender.Male : Gender.Female;
             if (Enum.TryParse<Gender>(profile.Gender, true, out var genderVal))
@@ -301,7 +304,7 @@ namespace Content.Server.Database
             profile.EyeColor = appearance.EyeColor.ToHex();
             profile.SkinColor = appearance.SkinColor.ToHex();
             profile.SpawnPriority = (int) humanoid.SpawnPriority;
-            profile.SquadPriority = (int) humanoid.SquadPriority;
+            profile.SquadPriority = new RMCSquadPriority { Squad = humanoid.SquadPriority };
             profile.Markings = markings;
             profile.Slot = slot;
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
@@ -360,7 +363,7 @@ namespace Content.Server.Database
                 PrimaryGunName = humanoid.NamedItems.PrimaryGunName,
                 SidearmName = humanoid.NamedItems.SidearmName,
                 HelmetName = humanoid.NamedItems.HelmetName,
-                ArmorName = humanoid.NamedItems.ArmorName
+                ArmorName = humanoid.NamedItems.ArmorName,
             };
 
             return profile;

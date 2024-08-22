@@ -40,13 +40,6 @@ humanoid-profile-editor-preference-spawn-priority-none = None
 humanoid-profile-editor-preference-spawn-priority-arrivals = Arrivals
 humanoid-profile-editor-preference-spawn-priority-cryosleep = Cryosleep
 
-# Squad priority
-humanoid-profile-editor-preference-squad-priority-none = None
-humanoid-profile-editor-preference-squad-priority-alpha = Alpha
-humanoid-profile-editor-preference-squad-priority-bravo = Bravo
-humanoid-profile-editor-preference-squad-priority-charlie = Charlie
-humanoid-profile-editor-preference-squad-priority-delta = Delta
-
 humanoid-profile-editor-jobs-amount-in-department-tooltip = Jobs in the {$departmentName} department
 humanoid-profile-editor-department-jobs-label = {$departmentName} jobs
 humanoid-profile-editor-antags-tab = Antags

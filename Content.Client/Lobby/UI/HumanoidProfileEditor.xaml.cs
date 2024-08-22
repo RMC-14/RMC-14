@@ -11,6 +11,7 @@ using Content.Client.Sprite;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Guidebook;
 using Content.Shared._RMC14.LinkAccount;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared.CCVar;
@@ -362,15 +363,32 @@ namespace Content.Client.Lobby.UI
 
             #region SquadPriority
 
-            foreach ( var value in Enum.GetValues<SquadPriorityPreference>())
+            SquadPriorityButton.AddItem(Loc.GetString("loadout-none"), 0);
+            var squad = _entManager.System<SquadSystem>();
+            for (var i = 0; i < squad.SquadPrototypes.Length; i++)
             {
-                SquadPriorityButton.AddItem(Loc.GetString($"humanoid-profile-editor-preference-squad-priority-{value.ToString().ToLower()}"), (int) value);
+                var squadProto = squad.SquadPrototypes[i];
+                if (!squadProto.TryGetComponent(out SquadTeamComponent? team) ||
+                    !team.RoundStart)
+                {
+                    continue;
+                }
+
+                SquadPriorityButton.AddItem(squadProto.Name, i + 1);
             }
 
             SquadPriorityButton.OnItemSelected += args =>
             {
                 SquadPriorityButton.SelectId(args.Id);
-                setSquadPriority((SquadPriorityPreference) args.Id);
+
+                if (args.Id == 0)
+                {
+                    SetSquadPriority(null);
+                    return;
+                }
+
+                if (squad.SquadPrototypes.TryGetValue(args.Id - 1, out var proto))
+                    SetSquadPriority(proto.ID);
             };
 
             #endregion SquadPriority
@@ -1273,7 +1291,7 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
-        private void setSquadPriority(SquadPriorityPreference newSquadPriority)
+        private void SetSquadPriority(EntProtoId<SquadTeamComponent>? newSquadPriority)
         {
             Profile = Profile?.WithSquadPriorityPreference(newSquadPriority);
             SetDirty();
@@ -1478,7 +1496,16 @@ namespace Content.Client.Lobby.UI
                 return;
             }
 
-            SquadPriorityButton.SelectId((int) Profile.SquadPriority);
+            var index = 0;
+            if (Profile.SquadPriority is { } priority)
+            {
+                var squads = new List<EntityPrototype>(_entManager.System<SquadSystem>().SquadPrototypes)
+                    .Select(s => s.ID)
+                    .ToList();
+                index = squads.IndexOf(priority.Id) + 1;
+            }
+
+            SquadPriorityButton.SelectId(index);
         }
 
         private void UpdateHairPickers()

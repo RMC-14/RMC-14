@@ -54,6 +54,7 @@ namespace Content.Server.Database
         public DbSet<RMCPatronRoundEndMarineShoutout> RMCPatronRoundEndMarineShoutouts { get; set; } = default!;
         public DbSet<RMCPatronRoundEndXenoShoutout> RMCPatronRoundEndXenoShoutouts { get; set; } = default!;
         public DbSet<RMCRoleTimerExclude> RMCRoleTimerExcludes { get; set; } = default!;
+        public DbSet<RMCSquadPriority> RMCSquadPriorities { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -441,7 +442,6 @@ namespace Content.Server.Database
         public string EyeColor { get; set; } = null!;
         public string SkinColor { get; set; } = null!;
         public int SpawnPriority { get; set; } = 0;
-        public int SquadPriority { get; set; } = 0;
         public List<Job> Jobs { get; } = new();
         public List<Antag> Antags { get; } = new();
         public List<Trait> Traits { get; } = new();
@@ -452,7 +452,8 @@ namespace Content.Server.Database
 
         public int PreferenceId { get; set; }
         public Preference Preference { get; set; } = null!;
-        public RMCNamedItems? NamedItems { get; set; } = default!;
+        public RMCNamedItems? NamedItems { get; set; }
+        public RMCSquadPriority? SquadPriority { get; set; }
     }
 
     public class Job

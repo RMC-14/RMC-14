@@ -228,7 +228,20 @@ public sealed class SquadSystem : EntitySystem
 
         var member = EnsureComp<SquadMemberComponent>(marine);
         if (_squadTeamQuery.TryComp(member.Squad, out var oldSquad))
+        {
             oldSquad.Members.Remove(marine);
+
+            if (_mind.TryGetMind(marine, out var mindId, out _) &&
+                _job.MindTryGetJobId(mindId, out var currentJob) &&
+                currentJob != null)
+            {
+                if (oldSquad.Roles.TryGetValue(currentJob.Value, out var oldJobs) &&
+                    oldJobs > 0)
+                {
+                    oldSquad.Roles[currentJob.Value] = oldJobs - 1;
+                }
+            }
+        }
 
         member.Squad = team;
         member.Background = team.Comp.Background;
@@ -251,6 +264,12 @@ public sealed class SquadSystem : EntitySystem
         Dirty(marine, grant);
 
         team.Comp.Members.Add(marine);
+        if (job != null)
+        {
+            team.Comp.Roles.TryGetValue(job.Value, out var roles);
+            team.Comp.Roles[job.Value] = roles + 1;
+        }
+
         var ev = new SquadMemberUpdatedEvent();
         RaiseLocalEvent(marine, ref ev);
     }

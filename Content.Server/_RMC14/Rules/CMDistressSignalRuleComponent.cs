@@ -14,13 +14,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public List<EntProtoId> SquadIds = ["SquadAlpha", "SquadBravo", "SquadCharlie", "SquadDelta"];
 
     [DataField]
-    public Dictionary<ProtoId<JobPrototype>, int?> MaxJobsPerSquad = new();
-
-    [DataField]
     public Dictionary<EntProtoId, EntityUid> Squads = new();
-
-    // [DataField]
-    // public Dictionary<ProtoId<JobPrototype>, int> NextSquad = new();
 
     [DataField]
     public EntityUid XenoMap;

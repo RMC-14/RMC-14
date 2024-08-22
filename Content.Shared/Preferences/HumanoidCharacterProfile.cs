@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Text.RegularExpressions;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
@@ -105,10 +106,10 @@ namespace Content.Shared.Preferences
         public SpawnPriorityPreference SpawnPriority { get; private set; } = SpawnPriorityPreference.None;
 
         /// <summary>
-        /// When spawning into a squad role, what squad is prefferred.
+        /// When spawning into a squad role, what squad is preferred.
         /// </summary>
         [DataField]
-        public SquadPriorityPreference SquadPriority { get; private set; } = SquadPriorityPreference.None;
+        public EntProtoId<SquadTeamComponent>? SquadPriority { get; private set; }
 
         /// <summary>
         /// <see cref="_jobPriorities"/>
@@ -144,7 +145,7 @@ namespace Content.Shared.Preferences
             Gender gender,
             HumanoidCharacterAppearance appearance,
             SpawnPriorityPreference spawnPriority,
-            SquadPriorityPreference squadPriority,
+            EntProtoId<SquadTeamComponent>? squadPriority,
             Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities,
             PreferenceUnavailableMode preferenceUnavailable,
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
@@ -320,9 +321,9 @@ namespace Content.Shared.Preferences
             return new(this) { SpawnPriority = spawnPriority };
         }
 
-        public HumanoidCharacterProfile WithSquadPriorityPreference(SquadPriorityPreference squadPriority)
+        public HumanoidCharacterProfile WithSquadPriorityPreference(EntProtoId<SquadTeamComponent>? squadPriority)
         {
-            return new(this) { SquadPriority = squadPriority};
+            return new(this) { SquadPriority = squadPriority };
         }
 
         public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<ProtoId<JobPrototype>, JobPriority>> jobPriorities)
@@ -500,6 +501,7 @@ namespace Content.Shared.Preferences
         {
             var configManager = collection.Resolve<IConfigurationManager>();
             var prototypeManager = collection.Resolve<IPrototypeManager>();
+            var compFactory = collection.Resolve<IComponentFactory>();
 
             if (!prototypeManager.TryIndex(Species, out var speciesPrototype) || speciesPrototype.RoundStart == false)
             {
@@ -589,16 +591,6 @@ namespace Content.Shared.Preferences
                 _ => SpawnPriorityPreference.None // Invalid enum values.
             };
 
-            var squadPriority = SquadPriority switch
-            {
-                SquadPriorityPreference.None => SquadPriorityPreference.None,
-                SquadPriorityPreference.Alpha => SquadPriorityPreference.Alpha,
-                SquadPriorityPreference.Bravo => SquadPriorityPreference.Bravo,
-                SquadPriorityPreference.Charlie => SquadPriorityPreference.Charlie,
-                SquadPriorityPreference.Delta => SquadPriorityPreference.Delta,
-                _ => SquadPriorityPreference.None
-            };
-
             var priorities = new Dictionary<ProtoId<JobPrototype>, JobPriority>(JobPriorities
                 .Where(p => prototypeManager.TryIndex<JobPrototype>(p.Key, out var job) && job.SetPreference && p.Value switch
                 {
@@ -635,7 +627,13 @@ namespace Content.Shared.Preferences
             Gender = gender;
             Appearance = appearance;
             SpawnPriority = spawnPriority;
-            SquadPriority = squadPriority;
+
+            if (!prototypeManager.TryIndex(SquadPriority, out var squad) ||
+                !squad.TryGetComponent(out SquadTeamComponent? team, compFactory) ||
+                !team.RoundStart)
+            {
+                SquadPriority = null;
+            }
 
             _jobPriorities.Clear();
 
@@ -759,7 +757,7 @@ namespace Content.Shared.Preferences
             hashCode.Add((int)Gender);
             hashCode.Add(Appearance);
             hashCode.Add((int)SpawnPriority);
-            hashCode.Add((int)SquadPriority);
+            hashCode.Add(SquadPriority);
             hashCode.Add((int)PreferenceUnavailable);
             hashCode.Add(NamedItems);
             return hashCode.ToHashCode();
