@@ -62,7 +62,7 @@
   parent: CMFlare
   id: RMCFlareCAS
   name: signal flare
-  description: A green USCM issued signal flare. The telemetry computer works on chemical reaction that releases smoke and light and thus works only while the flare is burning.
+  description: A green UNMC issued signal flare. The telemetry computer works on chemical reaction that releases smoke and light and thus works only while the flare is burning.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
@@ -277,8 +277,8 @@
 - type: entity
   parent: CMPackFlareBase
   id: RMCPackFlareCAS
-  name: M89-S Signal Flare Pack
-  description: A packet of eight M89-S Signal Marking Flares. Used to designate areas for CAS
+  name: M89-S signal flare pack
+  description: A packet of eight M89-S Signal Marking Flares.
   suffix: Filled
   components:
   - type: Sprite
