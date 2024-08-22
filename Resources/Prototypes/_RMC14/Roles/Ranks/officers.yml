@@ -1,0 +1,26 @@
+﻿- type: rank
+  name: Major
+  shortenedName: Maj
+  jobs: [CMCommandingOfficer]
+
+- type: rank
+  name: Captain
+  shortenedName: CPT
+  jobs: [CMExecutiveOfficer]
+
+- type: rank
+  name: First Lieutenant
+  shortenedName: 1stLT
+  jobs:
+  - CMAuxiliarySupportOfficer
+  - CMChiefMP
+  - CMCMO
+
+- type: rank
+  name: Second Lieutenant
+  shortenedName: 2ndLT
+  jobs:
+  - CMStaffOfficer
+  - CMPilotDropship
+  - CMPilotGunship
+  - CMDoctor

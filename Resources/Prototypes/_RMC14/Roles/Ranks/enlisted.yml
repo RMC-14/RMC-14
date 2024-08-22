@@ -1,0 +1,38 @@
+﻿- type: rank
+  name: Gunnery Sergeant
+  shortenedName: GySGT
+  jobs: [CMSeniorEnlistedAdvisor, CMQuartermaster]
+
+- type: rank
+  name: Staff Sergeant
+  shortenedName: SSGT
+  jobs: [CMMilitaryWarden, CMDropshipCrewChief]
+
+- type: rank
+  name: Sergeant
+  shortenedName: SGT
+  jobs: [CMSquadLeader, CMMilitaryPolice]
+
+- type: rank
+  name: Corporal
+  shortenedName: CPL
+  jobs: [CMFireteamLeader]
+
+- type: rank
+  name: Lance Corporal
+  shortenedName: LCPL
+  jobs:
+  - CMWeaponsSpecialist
+  - CMSmartGunOperator
+  - CMHospitalCorpsman
+  - CMNurse
+
+- type: rank
+  name: Private First Class
+  shortenedName: PFC
+  jobs: [CMCombatTech, CMCargoTech]
+
+- type: rank
+  name: Private
+  shortenedName: PVT
+  jobs: [CMRifleman]
