@@ -28,6 +28,8 @@
       sprite: Mobs/Customization/masking_helpers.rsi
       state: unisex_full
       visible: false
+    - map: [ "enum.HumanoidVisualLayers.Underwear" ]
+    - map: [ "enum.HumanoidVisualLayers.Undershirt" ]
     - map: ["jumpsuit"]
     - map: ["enum.HumanoidVisualLayers.LFoot"]
     - map: ["enum.HumanoidVisualLayers.RFoot"]
@@ -319,6 +321,8 @@
       sprite: Mobs/Customization/masking_helpers.rsi
       state: unisex_full
       visible: false
+    - map: ["enum.HumanoidVisualLayers.Undershirt"]
+    - map: ["enum.HumanoidVisualLayers.Underwear"]
     - map: ["jumpsuit"]
     - map: ["enum.HumanoidVisualLayers.LFoot"]
     - map: ["enum.HumanoidVisualLayers.RFoot"]
