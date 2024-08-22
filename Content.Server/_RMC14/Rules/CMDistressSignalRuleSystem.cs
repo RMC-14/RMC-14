@@ -441,8 +441,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         var query = QueryActiveRules();
         while (query.MoveNext(out _, out _, out var comp, out _))
         {
-            var squadPriority = ev.HumanoidCharacterProfile?.SquadPriority;
-            if (GetSpawner(comp, job, squadPriority) is not { } spawnerInfo)
+            var squadPreference = ev.HumanoidCharacterProfile?.SquadPreference;
+            if (GetSpawner(comp, job, squadPreference) is not { } spawnerInfo)
                 return;
 
             var (spawner, squad) = spawnerInfo;

@@ -361,9 +361,9 @@ namespace Content.Client.Lobby.UI
 
             #endregion SpawnPriority
 
-            #region SquadPriority
+            #region SquadPreference
 
-            SquadPriorityButton.AddItem(Loc.GetString("loadout-none"), 0);
+            SquadPreferenceButton.AddItem(Loc.GetString("loadout-none"), 0);
             var squad = _entManager.System<SquadSystem>();
             for (var i = 0; i < squad.SquadPrototypes.Length; i++)
             {
@@ -374,24 +374,24 @@ namespace Content.Client.Lobby.UI
                     continue;
                 }
 
-                SquadPriorityButton.AddItem(squadProto.Name, i + 1);
+                SquadPreferenceButton.AddItem(squadProto.Name, i + 1);
             }
 
-            SquadPriorityButton.OnItemSelected += args =>
+            SquadPreferenceButton.OnItemSelected += args =>
             {
-                SquadPriorityButton.SelectId(args.Id);
+                SquadPreferenceButton.SelectId(args.Id);
 
                 if (args.Id == 0)
                 {
-                    SetSquadPriority(null);
+                    SetSquadPreference(null);
                     return;
                 }
 
                 if (squad.SquadPrototypes.TryGetValue(args.Id - 1, out var proto))
-                    SetSquadPriority(proto.ID);
+                    SetSquadPreference(proto.ID);
             };
 
-            #endregion SquadPriority
+            #endregion SquadPreference
 
             #region Eyes
 
@@ -811,7 +811,7 @@ namespace Content.Client.Lobby.UI
             UpdateGenderControls();
             UpdateSkinColor();
             UpdateSpawnPriorityControls();
-            UpdateSquadPriorityControls();
+            UpdateSquadPreferenceControls();
             UpdateAgeEdit();
             UpdateEyePickers();
             UpdateSaveButton();
@@ -1291,9 +1291,9 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
-        private void SetSquadPriority(EntProtoId<SquadTeamComponent>? newSquadPriority)
+        private void SetSquadPreference(EntProtoId<SquadTeamComponent>? newSquadPreference)
         {
-            Profile = Profile?.WithSquadPriorityPreference(newSquadPriority);
+            Profile = Profile?.WithSquadPreference(newSquadPreference);
             SetDirty();
         }
 
@@ -1489,7 +1489,7 @@ namespace Content.Client.Lobby.UI
             SpawnPriorityButton.SelectId((int) Profile.SpawnPriority);
         }
 
-        private void UpdateSquadPriorityControls()
+        private void UpdateSquadPreferenceControls()
         {
             if (Profile == null)
             {
@@ -1497,7 +1497,7 @@ namespace Content.Client.Lobby.UI
             }
 
             var index = 0;
-            if (Profile.SquadPriority is { } priority)
+            if (Profile.SquadPreference is { } priority)
             {
                 var squads = new List<EntityPrototype>(_entManager.System<SquadSystem>().SquadPrototypes)
                     .Select(s => s.ID)
@@ -1505,7 +1505,7 @@ namespace Content.Client.Lobby.UI
                 index = squads.IndexOf(priority.Id) + 1;
             }
 
-            SquadPriorityButton.SelectId(index);
+            SquadPreferenceButton.SelectId(index);
         }
 
         private void UpdateHairPickers()

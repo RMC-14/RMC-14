@@ -109,7 +109,7 @@ namespace Content.Shared.Preferences
         /// When spawning into a squad role, what squad is preferred.
         /// </summary>
         [DataField]
-        public EntProtoId<SquadTeamComponent>? SquadPriority { get; private set; }
+        public EntProtoId<SquadTeamComponent>? SquadPreference { get; private set; }
 
         /// <summary>
         /// <see cref="_jobPriorities"/>
@@ -145,7 +145,7 @@ namespace Content.Shared.Preferences
             Gender gender,
             HumanoidCharacterAppearance appearance,
             SpawnPriorityPreference spawnPriority,
-            EntProtoId<SquadTeamComponent>? squadPriority,
+            EntProtoId<SquadTeamComponent>? squadPreference,
             Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities,
             PreferenceUnavailableMode preferenceUnavailable,
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
@@ -161,7 +161,7 @@ namespace Content.Shared.Preferences
             Gender = gender;
             Appearance = appearance;
             SpawnPriority = spawnPriority;
-            SquadPriority = squadPriority;
+            SquadPreference = squadPreference;
             _jobPriorities = jobPriorities;
             PreferenceUnavailable = preferenceUnavailable;
             _antagPreferences = antagPreferences;
@@ -195,7 +195,7 @@ namespace Content.Shared.Preferences
                 other.Gender,
                 other.Appearance.Clone(),
                 other.SpawnPriority,
-                other.SquadPriority,
+                other.SquadPreference,
                 new Dictionary<ProtoId<JobPrototype>, JobPriority>(other.JobPriorities),
                 other.PreferenceUnavailable,
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
@@ -321,9 +321,9 @@ namespace Content.Shared.Preferences
             return new(this) { SpawnPriority = spawnPriority };
         }
 
-        public HumanoidCharacterProfile WithSquadPriorityPreference(EntProtoId<SquadTeamComponent>? squadPriority)
+        public HumanoidCharacterProfile WithSquadPreference(EntProtoId<SquadTeamComponent>? squadPriority)
         {
-            return new(this) { SquadPriority = squadPriority };
+            return new(this) { SquadPreference = squadPriority };
         }
 
         public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<ProtoId<JobPrototype>, JobPriority>> jobPriorities)
@@ -487,7 +487,7 @@ namespace Content.Shared.Preferences
             if (Species != other.Species) return false;
             if (PreferenceUnavailable != other.PreferenceUnavailable) return false;
             if (SpawnPriority != other.SpawnPriority) return false;
-            if (SquadPriority != other.SquadPriority) return false;
+            if (SquadPreference != other.SquadPreference) return false;
             if (!_jobPriorities.SequenceEqual(other._jobPriorities)) return false;
             if (!_antagPreferences.SequenceEqual(other._antagPreferences)) return false;
             if (!_traitPreferences.SequenceEqual(other._traitPreferences)) return false;
@@ -628,11 +628,11 @@ namespace Content.Shared.Preferences
             Appearance = appearance;
             SpawnPriority = spawnPriority;
 
-            if (!prototypeManager.TryIndex(SquadPriority, out var squad) ||
+            if (!prototypeManager.TryIndex(SquadPreference, out var squad) ||
                 !squad.TryGetComponent(out SquadTeamComponent? team, compFactory) ||
                 !team.RoundStart)
             {
-                SquadPriority = null;
+                SquadPreference = null;
             }
 
             _jobPriorities.Clear();
@@ -757,7 +757,7 @@ namespace Content.Shared.Preferences
             hashCode.Add((int)Gender);
             hashCode.Add(Appearance);
             hashCode.Add((int)SpawnPriority);
-            hashCode.Add(SquadPriority);
+            hashCode.Add(SquadPreference);
             hashCode.Add((int)PreferenceUnavailable);
             hashCode.Add(NamedItems);
             return hashCode.ToHashCode();

@@ -1210,22 +1210,6 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("rmc_role_timer_excludes", (string)null);
                 });
 
-            modelBuilder.Entity("Content.Server.Database.RMCSquadPriority", b =>
-                {
-                    b.Property<int>("ProfileId")
-                        .HasColumnType("integer")
-                        .HasColumnName("profile_id");
-
-                    b.Property<string>("Squad")
-                        .HasColumnType("text")
-                        .HasColumnName("squad");
-
-                    b.HasKey("ProfileId")
-                        .HasName("PK_rmc_squad_priorities");
-
-                    b.ToTable("rmc_squad_priorities", (string)null);
-                });
-
             modelBuilder.Entity("Content.Server.Database.RoleWhitelist", b =>
                 {
                     b.Property<Guid>("PlayerUserId")
@@ -2105,18 +2089,6 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Player");
                 });
 
-            modelBuilder.Entity("Content.Server.Database.RMCSquadPriority", b =>
-                {
-                    b.HasOne("Content.Server.Database.Profile", "Profile")
-                        .WithOne("SquadPriority")
-                        .HasForeignKey("Content.Server.Database.RMCSquadPriority", "ProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_rmc_squad_priorities_profile_profile_id");
-
-                    b.Navigation("Profile");
-                });
-
             modelBuilder.Entity("Content.Server.Database.RoleWhitelist", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", "Player")
@@ -2357,8 +2329,6 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Loadouts");
 
                     b.Navigation("NamedItems");
-
-                    b.Navigation("SquadPriority");
 
                     b.Navigation("Traits");
                 });

@@ -57,7 +57,7 @@
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-preferred-squad-label'}" />
                                     <Control HorizontalExpand="True" />
-                                    <OptionButton Name="SquadPriorityButton" HorizontalAlignment="Right" />
+                                    <OptionButton Name="SquadPreferenceButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
                                 <userInterface:BlueHorizontalSeparator Margin="0 5" />
                                 <!-- Species -->
