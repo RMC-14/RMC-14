@@ -6,12 +6,6 @@
   playTimeTracker: CMJobSquadLeader
   requirements:
   - !type:RoleTimeRequirement
-    role: CMJobWeaponsSpecialist
-    time: 3600 # 1 hour
-  - !type:RoleTimeRequirement
-    role: CMJobSmartGunOperator
-    time: 3600 # 1 hour
-  - !type:RoleTimeRequirement
     role: CMJobHospitalCorpsman
     time: 3600 # 1 hour
   - !type:RoleTimeRequirement
