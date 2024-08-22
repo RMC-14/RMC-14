@@ -2,18 +2,26 @@
 using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Light.Components;
+using Robust.Shared.Timing;
+using Robust.Shared.Configuration;
+using Content.Shared._RMC14.CCVar;
 
 namespace Content.Server._RMC14.Xenonids.Acid;
 
 public sealed class XenoAcidSystem : SharedXenoAcidSystem
 {
+	[Dependency] private readonly IGameTiming _timing = default!;
+	[Dependency] private readonly IConfigurationManager _config = default!;
 
-    public override void Initialize()
+	private int CorrosiveAcidDamageTimeSeconds;
+	public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<ExpendableLightComponent, CorrodingEvent>(OnExpendableLightCorrodingEvent);
         SubscribeLocalEvent<BarricadeComponent, CorrodingEvent>(OnBarricadeCorrodingEvent);
+
+        Subs.CVar(_config, RMCCVars.RMCCorrosiveAcidDamageTimeSeconds, obj => CorrosiveAcidDamageTimeSeconds = obj, true);
     }
 
     private void OnExpendableLightCorrodingEvent(Entity<ExpendableLightComponent> target, ref CorrodingEvent args)
@@ -34,6 +42,7 @@ public sealed class XenoAcidSystem : SharedXenoAcidSystem
             Acid = args.Acid,
             Dps = args.Dps,
             Damage = new(PrototypeManager.Index<DamageTypePrototype>(CorrosiveAcidDamageTypeStr), args.Dps * CorrosiveAcidTickDelaySeconds),
+            AcidExpiresAt = _timing.CurTime + TimeSpan.FromSeconds(CorrosiveAcidDamageTimeSeconds),
         });
 
         args.Cancelled = true;
