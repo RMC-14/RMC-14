@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Grown xeno eggs will now automatically try to infect any marines that
-      come within melee range of them.
-    type: Add
-  id: 101
-  time: '2024-05-09T09:59:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2086
-- author: DrSmugleaf
-  changes:
   - message: Added the autolathe with cm specific recipes.
     type: Add
   id: 102
@@ -4367,5 +4359,12 @@
   id: 600
   time: '2024-08-21T23:50:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3786
+- author: MetalSage
+  changes:
+  - message: Added supply crates containing M4 and B12 armor
+    type: Add
+  id: 601
+  time: '2024-08-22T00:08:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3776
 Name: RMC14
 Order: -1
