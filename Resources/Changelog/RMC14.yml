@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Xeno Drones can now evolve to Queen.
-    type: Add
-  id: 104
-  time: '2024-05-11T05:43:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2096
 - author: DangerRevolution
   changes:
   - message: Added the Coif
@@ -4365,5 +4358,12 @@
   id: 603
   time: '2024-08-22T00:43:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3772
+- author: MetalSage
+  changes:
+  - message: Add high capacity beaker, dropper, grinder, nanomed
+    type: Add
+  id: 604
+  time: '2024-08-22T00:54:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3779
 Name: RMC14
 Order: -1
