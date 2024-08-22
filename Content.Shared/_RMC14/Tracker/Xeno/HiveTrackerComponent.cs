@@ -12,9 +12,9 @@ public sealed partial class HiveTrackerComponent : Component
     [DataField, AutoNetworkedField]
     public ProtoId<AlertPrototype> Alert = "HiveTracker";
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan UpdateAt;
 
-    [DataField, AutoNetworkedField]
-    public TimeSpan UpdateEvery;
+    [DataField]
+    public TimeSpan UpdateEvery = TimeSpan.FromSeconds(1);
 }

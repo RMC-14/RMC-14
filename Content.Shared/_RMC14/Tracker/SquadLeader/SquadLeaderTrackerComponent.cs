@@ -12,9 +12,9 @@ public sealed partial class SquadLeaderTrackerComponent : Component
     [DataField, AutoNetworkedField]
     public ProtoId<AlertPrototype> Alert = "SquadTracker";
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan UpdateAt;
 
-    [DataField, AutoNetworkedField]
-    public TimeSpan UpdateEvery;
+    [DataField]
+    public TimeSpan UpdateEvery = TimeSpan.FromSeconds(1);
 }

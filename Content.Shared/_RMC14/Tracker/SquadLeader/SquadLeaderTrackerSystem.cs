@@ -66,6 +66,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        _squadLeaders.Clear();
         var leaders = EntityQueryEnumerator<SquadLeaderComponent, SquadMemberComponent>();
         while (leaders.MoveNext(out var uid, out _, out var member))
         {
@@ -83,11 +84,11 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
                 continue;
 
             tracker.UpdateAt = time + tracker.UpdateEvery;
-            Dirty(uid, tracker);
 
             if (member.Squad is not { } squad ||
                 !_squadLeaders.TryGetValue(squad, out var leader))
             {
+                _alerts.ShowAlert(uid, tracker.Alert, TrackerSystem.CenterSeverity);
                 continue;
             }
 

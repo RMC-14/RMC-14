@@ -90,11 +90,11 @@ public sealed class HiveTrackerSystem : EntitySystem
                 continue;
 
             tracker.UpdateAt = time + tracker.UpdateEvery;
-            Dirty(uid, tracker);
 
             if (xeno.Hive is not { } hive ||
                 !_hiveLeaders.TryGetValue(hive, out var leader))
             {
+                _alerts.ShowAlert(uid, tracker.Alert, TrackerSystem.CenterSeverity);
                 continue;
             }
 
