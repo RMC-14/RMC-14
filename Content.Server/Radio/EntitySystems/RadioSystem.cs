@@ -1,3 +1,4 @@
+using Content.Server._RMC14.Marines.Roles.Ranks;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
@@ -29,6 +30,7 @@ public sealed class RadioSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private readonly RankSystem _rankSystem = default!;
 
     // set used to prevent radio feedback loops.
     private readonly HashSet<string> _messages = new();
@@ -81,6 +83,8 @@ public sealed class RadioSystem : EntitySystem
         var name = TryComp(messageSource, out VoiceMaskComponent? mask) && mask.Enabled
             ? mask.VoiceName
             : MetaData(messageSource).EntityName;
+
+        name = _rankSystem.GetSpeakerRankName(messageSource) ?? name;
 
         name = FormattedMessage.EscapeText(name);
 

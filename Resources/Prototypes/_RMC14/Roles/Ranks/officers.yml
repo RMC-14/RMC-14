@@ -1,14 +1,17 @@
 ﻿- type: rank
+  id: RMCRankMajor
   name: Major
   shortenedName: Maj
   jobs: [CMCommandingOfficer]
 
 - type: rank
+  id: RMCRankCaptain
   name: Captain
   shortenedName: CPT
   jobs: [CMExecutiveOfficer]
 
 - type: rank
+  id: RMCRankFirstLT
   name: First Lieutenant
   shortenedName: 1stLT
   jobs:
@@ -17,6 +20,7 @@
   - CMCMO
 
 - type: rank
+  id: RMCRankSecondLT
   name: Second Lieutenant
   shortenedName: 2ndLT
   jobs:

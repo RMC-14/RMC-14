@@ -1,34 +1,26 @@
-﻿using Content.Shared.Access.Systems;
-using Content.Shared.Clothing;
-using Content.Shared.Mind;
-using Content.Shared.Roles;
-using Content.Shared.Roles.Jobs;
+﻿using Content.Shared.Clothing;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Marines.Roles.Ranks;
 
 public abstract class SharedRankSystem : EntitySystem
 {
-    [Dependency] private readonly SharedJobSystem _job = default!;
-    [Dependency] private readonly SharedIdCardSystem _idCardSystem = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
-
-    private EntityQuery<RankComponent> _ranksQuery;
 
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<RankComponent, ClothingGotEquippedEvent>(OnEquip);
         SubscribeLocalEvent<RankComponent, ClothingGotUnequippedEvent>(OnUnequip);
-
-        SubscribeLocalEvent<MarineComponent, StartingGearEquippedEvent>(OnStartingGear);
     }
 
     private void OnEquip(Entity<RankComponent> ent, ref ClothingGotEquippedEvent args)
     {
-        var user = args.Wearer;
+        var rank = ent.Comp.Rank;
 
-        SetRank(user, ent.Comp);
+        if (rank != null)
+            SetRank(args.Wearer, rank.Value);
     }
 
     private void OnUnequip(Entity<RankComponent> ent, ref ClothingGotUnequippedEvent args)
@@ -36,45 +28,21 @@ public abstract class SharedRankSystem : EntitySystem
         RemCompDeferred<RankComponent>(args.Wearer);
     }
 
-    private void OnStartingGear(Entity<MarineComponent> ent, ref StartingGearEquippedEvent args)
+    /// <summary>
+    ///     Sets a mob's rank from the given RankPrototype.
+    /// </summary>
+    public void SetRank(EntityUid uid, RankPrototype from)
     {
-        var marine = ent.Owner;
-
-        if (_idCardSystem.TryGetIdCard(marine, out var idcard))
-        {
-            var idCardEntity = idcard.Owner;
-            var rankComp = EnsureComp<RankComponent>(idCardEntity);
-
-            if (!_mind.TryGetMind(marine, out var mindId, out _) || !_job.MindTryGetJobId(mindId, out var jobId))
-                return;
-
-            foreach (var proto in _prototypes.EnumeratePrototypes<RankPrototype>())
-            {
-                foreach (var job in proto.Jobs)
-                {
-                    if (job == jobId)
-                    {
-                        rankComp.Rank = proto.ID;
-                        Dirty(idCardEntity, rankComp);
-                        break;
-                    }
-                    else
-                        continue;
-                }
-            }
-
-            SetRank(marine, rankComp);
-        }
+        SetRank(uid, from.ID);
     }
 
     /// <summary>
-    ///     Sets a mob's rank from the given RankComponent.
+    ///     Sets a mob's rank from the given RankPrototype.
     /// </summary>
-    public void SetRank(EntityUid uid, RankComponent from)
+    public void SetRank(EntityUid uid, ProtoId<RankPrototype> from)
     {
         var comp = EnsureComp<RankComponent>(uid);
-
-        comp.Rank = from.Rank;
+        comp.Rank = from;
         Dirty(uid, comp);
     }
 
@@ -83,10 +51,18 @@ public abstract class SharedRankSystem : EntitySystem
     /// </summary>
     public RankPrototype? GetRank(EntityUid uid)
     {
-        if (!_ranksQuery.TryComp(uid, out var rankComponent))
-            return null;
+        if (TryComp<RankComponent>(uid, out var component))
+            return GetRank(component);
 
-        if (_prototypes.TryIndex<RankPrototype>(rankComponent.Rank, out var rankProto) && rankProto != null)
+        return null;
+    }
+
+    /// <summary>
+    ///     Gets a RankPrototype from a RankComponent.
+    /// </summary>
+    public RankPrototype? GetRank(RankComponent component)
+    {
+        if (_prototypes.TryIndex<RankPrototype>(component.Rank, out var rankProto) && rankProto != null)
             return rankProto;
 
         return null;
