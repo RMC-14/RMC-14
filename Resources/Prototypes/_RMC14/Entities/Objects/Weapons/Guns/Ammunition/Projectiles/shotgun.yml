@@ -11,6 +11,9 @@
     - state: bullet
       shader: unshaded
   - type: Projectile
+  - type: ProjectileSpread
+    count: 6
+    spread: 15
 
 - type: entity
   parent: CMPelletShotgunBase
@@ -26,6 +29,10 @@
     damage:
       types:
         Blunt: 65
+  - type: ProjectileSpread
+    proto: CMPelletShotgunBuckshot
+    count: 4
+    spread: 20
 
 - type: entity
   parent: CMPelletShotgunBase
@@ -43,6 +50,10 @@
         Blunt: 70
   - type: CMArmorPiercing
     amount: 20
+  - type: ProjectileSpread
+    proto: CMPelletShotgunSlug
+    count: 1
+    spread: 5
 
 - type: entity
   parent: CMPelletShotgunBase
@@ -55,6 +66,10 @@
     damage:
       types:
         Heat: 55
+  - type: ProjectileSpread
+    proto: CMPelletShotgunIncendiary
+    count: 1
+    spread: 5
   # todo rmc14 add burning
 
 - type: entity
@@ -71,6 +86,10 @@
     damage: {}
   - type: StaminaDamageOnCollide
     damage: 45
+  - type: ProjectileSpread
+    proto: CMPelletShotgunBeanbag
+    count: 1
+    spread: 5
 
 - type: entity
   parent: CMPelletShotgunBase
@@ -88,10 +107,17 @@
     damage:
       types:
         Blunt: 30
+  - type: ProjectileSpread
+    proto: CMPelletShotgunFlechette
+    count: 3
 
 - type: entity
   parent: CMPelletShotgunBuckshot
   id: CMPelletShotgunIncendiaryBuckshot
   name: incendiary buckshot shell
-  #components: #TODO RMC14 add burning
+  components: # TODO RMC14 add burning
+  - type: ProjectileSpread
+    proto: CMPelletShotgunIncendiaryBuckshot
+    count: 4
+    spread: 20
 

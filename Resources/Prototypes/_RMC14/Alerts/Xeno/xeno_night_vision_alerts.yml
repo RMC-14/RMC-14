@@ -11,4 +11,4 @@
   description: Click to change how you see in the dark.
   minSeverity: 0
   maxSeverity: 2
-  onClick: !type:ToggleNightVision
+  clickEvent: !type:ToggleNightVisionAlertEvent

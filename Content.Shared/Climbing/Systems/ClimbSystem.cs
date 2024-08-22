@@ -35,12 +35,12 @@ public sealed partial class ClimbSystem : VirtualController
     [Dependency] private readonly FixtureSystem _fixtureSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private readonly SharedContainerSystem _containers = default!;
     [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedStunSystem _stunSystem = default!;
     [Dependency] private readonly SharedTransformSystem _xformSystem = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     private const string ClimbingFixtureName = "climb";
     private const int ClimbingCollisionGroup = (int) (CollisionGroup.TableLayer | CollisionGroup.LowImpassable);
@@ -451,9 +451,9 @@ public sealed partial class ClimbSystem : VirtualController
             return false;
         }
 
-        if (_container.IsEntityInContainer(user))
+        if (_containers.IsEntityInContainer(user))
         {
-            reason = Loc.GetString("comp-climbable-cant-climb-contained");
+            reason = Loc.GetString("comp-climbable-cant-reach");
             return false;
         }
 
@@ -489,6 +489,12 @@ public sealed partial class ClimbSystem : VirtualController
 
         if (!_interactionSystem.InRangeUnobstructed(user, target, component.Range, predicate: Ignored)
             || !_interactionSystem.InRangeUnobstructed(user, dragged, component.Range, predicate: Ignored))
+        {
+            reason = Loc.GetString("comp-climbable-cant-reach");
+            return false;
+        }
+
+        if (_containers.IsEntityInContainer(user) || _containers.IsEntityInContainer(dragged))
         {
             reason = Loc.GetString("comp-climbable-cant-reach");
             return false;
