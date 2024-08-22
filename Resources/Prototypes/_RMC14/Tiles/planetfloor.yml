@@ -133,3 +133,4 @@
   footstepSounds:
     collection: FootstepGrass
   itemDrop: FloorTileItemAstroGrass
+  canDig: true

@@ -8,3 +8,47 @@
       path: /Audio/_RMC14/Handling/clothing_on.ogg
     unequipSound:
       path: /Audio/_RMC14/Handling/clothing_off.ogg
+  - type: WebbingClothing
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: Sprite
+    state: null
+    layers:
+    - state: icon
+    - map: [ "enum.WebbingVisualLayers.Base" ]
+  - type: Tag
+    tags:
+    - ClothMade
+    - WhitelistChameleon
+
+- type: entity
+  abstract: true
+  parent: RMCUniformBase
+  id: RMCFoldableUniformBase
+  components:
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-jacket-verb-unfold
+    foldVerbText: rmc-jacket-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
+
+- type: entity
+  abstract: true
+  parent: RMCUniformBase
+  id: RMCUniformSuitCoordsBase
+  components:
+  - type: SuitSensor
+    controlsLocked: true
+    randomMode: false
+    mode: SensorCords
+
+- type: entity
+  abstract: true
+  parent: [RMCUniformBase, RMCUniformSuitCoordsBase]
+  id: RMCMarineUniformBase
+  components:
+  - type: CMArmor
+    armor: 10

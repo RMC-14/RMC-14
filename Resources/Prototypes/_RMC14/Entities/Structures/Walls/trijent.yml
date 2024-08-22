@@ -1,0 +1,51 @@
+- type: entity
+  parent: CMWallMetal
+  id: RMCWallHangar
+  name: hangar wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hangar.rsi
+    state: hangar
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hangar.rsi
+    state: hangar
+  - type: IconSmooth
+    key: walls
+    base: hangar
+
+- type: entity
+  parent: CMWallReinforced
+  id: RMCWallBunker
+  name: bunker wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/bunker.rsi
+    state: bunker
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/bunker.rsi
+    state: bunker
+  - type: IconSmooth
+    key: walls
+    base: bunker
+
+- type: entity
+  parent: CMWallReinforced
+  id: RMCWallChigusa
+  name: facility wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/chigusa.rsi
+    state: chigusa
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/chigusa.rsi
+    state: chigusa
+  - type: IconSmooth
+    key: walls
+    base: chigusa
+
+- type: entity
+  parent: CMWallRock
+  id: RMCWallRockTrijent
+  components:
+  - type: Sprite
+    color: "#994a16"

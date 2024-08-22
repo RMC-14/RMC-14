@@ -1,5 +1,4 @@
-﻿using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared._RMC14.Medical.Surgery.Conditions;
+﻿using Content.Shared._RMC14.Medical.Surgery.Conditions;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
 using Content.Shared._RMC14.Medical.Surgery.Tools;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -168,7 +167,8 @@ public abstract partial class SharedCMSurgerySystem
     private void OnCutLarvaRootsStep(Entity<CMSurgeryCutLarvaRootsStepComponent> ent, ref CMSurgeryStepEvent args)
     {
         if (TryComp(args.Body, out VictimInfectedComponent? infected) &&
-            infected.BurstAt > _timing.CurTime)
+            infected.BurstAt > _timing.CurTime &&
+            infected.SpawnedLarva == null)
         {
             infected.RootsCut = true;
         }
@@ -178,13 +178,19 @@ public abstract partial class SharedCMSurgerySystem
     {
         if (!TryComp(args.Body, out VictimInfectedComponent? infected) || !infected.RootsCut)
             args.Cancelled = true;
+
+        // The larva has fully developed and surgery is now impossible
+        // TODO: Surgery should still be possible, but the fully developed larva should escape while also saving the hosts life
+        if (infected != null && infected.SpawnedLarva != null)
+            args.Cancelled = true;
     }
 
     private void OnSurgeryTargetStepChosen(Entity<CMSurgeryTargetComponent> ent, ref CMSurgeryStepChosenBuiMsg args)
     {
         var user = args.Actor;
         if (GetEntity(args.Entity) is not { Valid: true } body ||
-            !IsSurgeryValid(body, args.Part, args.Surgery, args.Step, out var surgery, out var part, out var step))
+            GetEntity(args.Part) is not { Valid: true } targetPart ||
+            !IsSurgeryValid(body, targetPart, args.Surgery, args.Step, out var surgery, out var part, out var step))
         {
             return;
         }
@@ -213,10 +219,10 @@ public abstract partial class SharedCMSurgerySystem
         if (TryComp(body, out TransformComponent? xform))
             _rotateToFace.TryFaceCoordinates(user, _transform.GetMapCoordinates(body, xform).Position);
 
-        var ev = new CMSurgeryDoAfterEvent(GetNetEntity(part), args.Surgery, args.Step);
-        var doAfter = new DoAfterArgs(EntityManager, user, 2, ev, body, body)
+        var ev = new CMSurgeryDoAfterEvent(args.Surgery, args.Step);
+        var doAfter = new DoAfterArgs(EntityManager, user, 2, ev, body, part)
         {
-            BreakOnMove = true
+            BreakOnMove = true,
         };
         _doAfter.TryStartDoAfter(doAfter);
     }

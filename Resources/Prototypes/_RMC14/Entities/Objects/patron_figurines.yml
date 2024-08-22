@@ -7,6 +7,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/patron_figurines.rsi
     scale: 0.5, 0.5
+  - type: Item
+    size: Tiny
   - type: Figurine
 
 - type: entity
@@ -91,8 +93,8 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronIanthaAtikson
-  name: Iantha Atikson figurine
-  description: Everyone's favorite Reqqie! Just don't ask for crayons...
+  name: Iantha Atikson
+  description: This Figurine of a Quartermaster, despite it's inanimate nature, seems to stare back at you with cold, refined calculation. That glossy look in those fake eyes make you feel uncomfortable, and you get the impression that you're just another number to her.
   components:
   - type: Sprite
     state: Iantha_Atikson
@@ -135,7 +137,7 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronChikiSugimoto
-  name: Chiki Sugimoto figurine
+  name: Chiki Suzuki figurine
   description: “Hi! Me Chiki!”
   components:
   - type: Sprite
@@ -362,3 +364,146 @@
     state: alex_gregory
   - type: PatronFigurine
     id: 34bc0234-d7bf-44cc-a2ef-fb8fd1abf1b5
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMadelynnBuzzLewis
+  name: Madelynn 'Buzz' Lewis figurine
+  description: "Best chef on the field."
+  components:
+  - type: Sprite
+    state: madelynn_buzz_lewis
+  - type: PatronFigurine
+    id: 70a4a27d-25d8-4172-8e8a-91fbf085ef37
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronShawnFox
+  name: Shawn Fox figurine
+  description: "The figurine smells of ..news.."
+  components:
+  - type: Sprite
+    state: shawn_fox
+  - type: PatronFigurine
+    id: 92d1d8d3-8091-495f-9940-24fb973de3ed
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronPandiFackler
+  name: CMO Pandi Fackler figurine
+  description: "A small and kind Redsuko, a rare race of felinid with the markings and characteristics of a Red Panda. Pacifist by nature, she’s often found healing others in the medical bay"
+  components:
+  - type: Sprite
+    state: pandi_fackler
+  - type: PatronFigurine
+    id: 124176dc-34e2-4115-a178-07e11cca3b6b
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJermaineBaitMcClune
+  name: Jermaine 'Bait' McClune figurine
+  description: "Let's see... e-barrels, smarties, drums, plasteel, cardboard, rockets, HEDP, cells, and a LOT of metal..."
+  components:
+  - type: Sprite
+    state: jermaine_bait_mcclune
+  - type: PatronFigurine
+    id: 6f980172-002b-4574-8f3c-f9fead1f11a1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMazyTheFortressTusji
+  name: Mazy 'The Fortress' Tusji figurine
+  description: "This figurine is covered in chew marks and acid burns, yet remains recognizable and unbroken."
+  components:
+  - type: Sprite
+    state: mazy_the_fortress_tusji
+  - type: PatronFigurine
+    id: 05443bd1-e84b-4782-9f03-c2b4af96b109
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAstorDebb
+  name: Astor Debb figurine
+  description: "Full-time demolitionist, she moves with a purpose, wielding her ~Magic Missile~"
+  components:
+  - type: Sprite
+    state: astor_debb
+  - type: PatronFigurine
+    id: 2dc63fb1-f830-4b0a-9eea-c8007fd09e6d
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNesartOnan
+  name: Nesart Onan figurine
+  description: "Blood loss is no joke! Come get some bandages from your local med bay today!"
+  components:
+  - type: Sprite
+    state: nesart_onan
+  - type: PatronFigurine
+    id: 0e3c7afc-4366-48a1-af0c-a9a8c1ecf0e6
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDaltonHarris
+  name: Dalton Harris figurine
+  description: Former NFSD sergeant, but through some weird military loopholes ended up on the Almayer.
+  components:
+  - type: Sprite
+    state: dalton_harris
+  - type: PatronFigurine
+    id: 443ae72d-bfbb-4997-8170-08e599676c70
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronChadScott
+  name: Chad Scott figurine
+  description: "\"This is Chad Scott, last survivor of the warship, signing off.\""
+  components:
+  - type: Sprite
+    state: chad_scott
+  - type: PatronFigurine
+    id: c5883d99-a0ae-41b0-8539-feab4ba9f12a
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronWorships-The-Gods
+  name: Worships-The-Gods figurine
+  description: Just a Silly Lizzy.
+  components:
+  - type: Sprite
+    state: worships-the-gods
+  - type: PatronFigurine
+    id: 5dcc5fac-1983-43be-a6ff-9d8a5ae38157
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSukunaKurze
+  name: Sukuna Kurze figurine
+  description: "This man is fueled by root beer and patriotism, and brother we're all outta root beer..."
+  components:
+  - type: Sprite
+    state: sukuna_kurze
+  - type: PatronFigurine
+    id: 3b608dbd-db50-4310-a017-83626e056257
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronTheSoilofMartyrs
+  name: The Soil of Martyrs figurine
+  description: "It used to be green."
+  components:
+  - type: Sprite
+    state: the_soil_of_martyrs
+  - type: PatronFigurine
+    id: 7486e344-c4b1-4d84-a3a8-8e8c94aa3c7e
+    
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSethSleeper
+  name: Seth Sleeper figurine
+  description: "The type of guy to bring a pillow to a gunfight."
+  components:
+  - type: Sprite
+    state: seth_sleeper
+  - type: PatronFigurine
+    id: 909c243e-6fb8-42ed-a477-d48571fccff2

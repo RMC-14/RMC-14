@@ -1,0 +1,47 @@
+﻿<controls:DropshipWeaponsWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Dropship.Weapon"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Title="{Loc 'rmc-dropship-weapons-title'}"
+    MinSize="1420 700">
+    <PanelContainer>
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#040404" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Horizontal">
+            <controls:DropshipWeaponsScreen Name="ScreenOne" Access="Public"
+                                            HorizontalExpand="True" VerticalExpand="True" />
+            <BoxContainer Orientation="Vertical" Margin="0 10">
+                <BoxContainer Orientation="Horizontal">
+                    <Control HorizontalExpand="True" />
+                    <Button Name="OffsetUpButton" Access="Public" StyleClasses="OpenBoth"
+                            SetSize="28 29" />
+                    <Control HorizontalExpand="True" />
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal">
+                    <Button Name="OffsetLeftButton" Access="Public" StyleClasses="OpenBoth"
+                            HorizontalExpand="True" />
+                    <Button Name="ResetOffsetButton" Access="Public" Text=" "
+                            StyleClasses="OpenBoth" HorizontalExpand="True" />
+                    <Button Name="OffsetRightButton" Access="Public" StyleClasses="OpenBoth"
+                            HorizontalExpand="True" />
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal">
+                    <Control HorizontalExpand="True" />
+                    <Button Name="OffsetDownButton" Access="Public" StyleClasses="OpenBoth"
+                            SetSize="28 29" />
+                    <Control HorizontalExpand="True" />
+                </BoxContainer>
+                <PanelContainer Margin="0 10 0 0">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BackgroundColor="#606060" BorderColor="#FFFFFF"
+                                               BorderThickness="1" />
+                    </PanelContainer.PanelOverride>
+                    <Label Name="OffsetCalibrationLabel" Access="Public" Align="Center" />
+                </PanelContainer>
+            </BoxContainer>
+            <controls:DropshipWeaponsScreen Name="ScreenTwo" Access="Public"
+                                            HorizontalExpand="True" VerticalExpand="True" />
+        </BoxContainer>
+    </PanelContainer>
+</controls:DropshipWeaponsWindow>

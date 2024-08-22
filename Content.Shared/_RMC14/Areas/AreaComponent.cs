@@ -6,7 +6,7 @@ namespace Content.Shared._RMC14.Areas;
 [Access(typeof(AreaSystem))]
 public sealed partial class AreaComponent : Component
 {
-    [DataField, AutoNetworkedField]
+    [DataField("CAS"), AutoNetworkedField]
     public bool CAS;
 
     [DataField, AutoNetworkedField]
@@ -21,7 +21,7 @@ public sealed partial class AreaComponent : Component
     [DataField, AutoNetworkedField]
     public bool Medevac;
 
-    [DataField, AutoNetworkedField]
+    [DataField("OB"), AutoNetworkedField]
     public bool OB;
 
     [DataField, AutoNetworkedField]

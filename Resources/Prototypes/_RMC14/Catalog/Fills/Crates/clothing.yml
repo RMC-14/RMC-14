@@ -1,6 +1,6 @@
 - type: entity
-  id: CMCrateClothingLargePouches
-  parent: CMCrateWeldable
+  id: RMCCrateClothingLargePouches
+  parent: RMCCrateWeldable
   name: large pouches crate (2x Pistol, Magazine, General)
   components:
   - type: StorageFill
@@ -13,8 +13,8 @@
         amount: 2
 
 - type: entity
-  id: CMCrateClothingMedicalPouches
-  parent: CMCrateWeldable
+  id: RMCCrateClothingMedicalPouches
+  parent: RMCCrateWeldable
   name: medical pouches crate (1x firstaid, medical, syringe, medkit)
   components:
   - type: StorageFill
@@ -31,8 +31,8 @@
         amount: 1
 
 - type: entity
-  id: CMCrateClothingWebbing
-  parent: CMCrateWeldable
+  id: RMCCrateClothingWebbing
+  parent: RMCCrateWeldable
   name: webbing crate (x4)
   components:
   - type: StorageFill
@@ -41,8 +41,8 @@
         amount: 4
 
 - type: entity
-  id: CMCrateClothingOfficerOutfit
-  parent: CMCrateWeldable
+  id: RMCCrateClothingOfficerOutfit
+  parent: RMCCrateWeldable
   name: officer outfit crate
   components:
   - type: StorageFill

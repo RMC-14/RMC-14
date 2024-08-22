@@ -2,6 +2,10 @@
 
 namespace Content.Shared._RMC14.Weapons.Melee;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedCMMeleeWeaponSystem))]
-public sealed partial class ImmuneToUnarmedComponent : Component;
+public sealed partial class ImmuneToUnarmedComponent : Component
+{
+    [DataField, AutoNetworkedField]
+    public bool ApplyToXenos;
+}

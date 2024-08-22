@@ -111,6 +111,17 @@ public enum LogType
     /// </summary>
     InteractUsing = 92,
 
+    /// <summary>
+    /// Storage & entity-storage related interactions
+    /// </summary>
+    Storage = 93,
+
+    /// <summary>
+    /// A player got hit by an explosion and was dealt damage.
+    /// </summary>
+    ExplosionHit = 94,
+
+
     RMCMarineAnnounce = 10000,
     RMCXenoAnnounce = RMCMarineAnnounce + 1,
     RMCNamedItem = RMCMarineAnnounce + 2,
@@ -123,5 +134,6 @@ public enum LogType
     RMCXenoOrderConstructionPlasma = RMCMarineAnnounce + 9,
     RMCXenoOrderConstructionComplete = RMCMarineAnnounce + 10,
     RMCPrimaryLZ = RMCMarineAnnounce + 11,
-    RMCDropshipLaunch = RMCMarineAnnounce + 12
+    RMCDropshipLaunch = RMCMarineAnnounce + 12,
+    RMCStunShake = RMCMarineAnnounce + 13,
 }

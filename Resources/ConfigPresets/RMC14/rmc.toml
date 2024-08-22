@@ -56,16 +56,17 @@ level = 1
 enabled = false
 
 [net]
-tickrate = 20
+tickrate = 15
 port = 1212
 bindto = "::,0.0.0.0"
 max_connections = 1024
-sendbuffersize = 262142
+receivebuffersize = 262142
+sendbuffersize = 524284
 
 [physics]
 maxlinvelocity = 45
 grid_splitting = false
-target_minimum_tickrate = 100
+target_minimum_tickrate = 90
 
 [replay]
 auto_record = true

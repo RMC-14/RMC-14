@@ -14,7 +14,7 @@
       - Bible
       tags:
       - CMFirstAidKit
-      - CMBoxStorage
+      - RMCBoxStorage
 
 
 # Medium General Pouch
@@ -123,7 +123,7 @@
     - id: RMCFlashlight
     - id: CMCrowbarRed
     - id: CMWelder
-    - id: CableApcStack
+    - id: RMCCableCoil
     - id: RadioHandheld
     - id: RMCM5Bayonet
 
@@ -232,12 +232,12 @@
     - 0,0,1,1 #5 slots (1 temporarily)
     whitelist:
       tags:
-      - CMBoxShotgunShells
+      - RMCBoxShotgunShells
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
     items:
       tags:
-      - CMBoxShotgunShells
+      - RMCBoxShotgunShells
     #whitelist: # TODO RMC14 make shotshells
 
 
@@ -271,6 +271,7 @@
     whitelist:
       tags:
       - Grenade
+      - RMCExplosiveBreachingCharge
   - type: FixedItemSizeStorage
 
 
@@ -501,7 +502,7 @@
     - id: CMScrewdriver
     - id: CMWirecutter
     - id: CMCrowbar
-    - id: CableApcStack
+    - id: RMCCableCoil
     - id: CMMultitool
     - id: CMWrench
 

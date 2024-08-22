@@ -73,7 +73,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
             state = mobState.CurrentState;
 
         Resolve(entity, ref input, ref thrown, ref leaping, ref knocked, false);
-        if (knocked != null)
+        if (knocked != null && state != MobState.Dead)
             state = MobState.Critical;
 
         if (sprite is not { BaseRSI: { } rsi } ||

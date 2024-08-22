@@ -7,6 +7,7 @@ using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Explosion;
 using Content.Shared.Explosion.Components;
+using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Projectiles;
@@ -21,10 +22,9 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using TimedDespawnComponent = Robust.Shared.Spawners.TimedDespawnComponent;
-
 namespace Content.Server.Explosion.EntitySystems;
 
-public sealed partial class ExplosionSystem
+public sealed partial class ExplosionSystem : SharedExplosionSystem
 {
     [Dependency] private readonly FlammableSystem _flammableSystem = default!;
 
@@ -451,15 +451,13 @@ public sealed partial class ExplosionSystem
                 if (damage.GetTotal() > 0 && TryComp<ActorComponent>(entity, out var actorComponent))
                 {
                     // Log damage to player entities only, cause this will create a massive amount of log spam otherwise.
-                    var damageStr = string.Join(", ", damage.DamageDict.Select(entry => $"{entry.Key}: {entry.Value}"));
-
                     if (cause != null)
                     {
-                        _adminLogger.Add(LogType.Explosion, $"{ToPrettyString(cause)} exploded at {epicenter:coordinates} and dealt {damageStr} damage to {ToPrettyString(entity)}.");
+                        _adminLogger.Add(LogType.ExplosionHit, LogImpact.Medium, $"Explosion of {ToPrettyString(cause):actor} dealt {damage.GetTotal()} damage to {ToPrettyString(entity):subject}");
                     }
                     else
                     {
-                        _adminLogger.Add(LogType.Explosion, LogImpact.Medium, $"Explosion at {epicenter:coordinates} dealt {damageStr} damage to {ToPrettyString(entity)}.");
+                        _adminLogger.Add(LogType.ExplosionHit, LogImpact.Medium, $"Explosion at {epicenter:epicenter} dealt {damage.GetTotal()} damage to {ToPrettyString(entity):subject}");
                     }
 
                 }

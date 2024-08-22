@@ -9,6 +9,7 @@ using Content.Shared._RMC14.Waypoint;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Rest;
@@ -59,9 +60,11 @@ public sealed class XenoSystem : EntitySystem
     private EntityQuery<MarineComponent> _marineQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<MobThresholdsComponent> _mobThresholdsQuery;
+    private EntityQuery<XenoFriendlyComponent> _xenoFriendlyQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
     private EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
     private EntityQuery<XenoRecoveryPheromonesComponent> _xenoRecoveryQuery;
+    private EntityQuery<VictimInfectedComponent> _victimInfectedQuery;
 
     private float _xenoDamageDealtMultiplier;
     private float _xenoDamageReceivedMultiplier;
@@ -76,9 +79,11 @@ public sealed class XenoSystem : EntitySystem
         _marineQuery = GetEntityQuery<MarineComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
         _mobThresholdsQuery = GetEntityQuery<MobThresholdsComponent>();
+        _xenoFriendlyQuery = GetEntityQuery<XenoFriendlyComponent>();
         _xenoNestedQuery = GetEntityQuery<XenoNestedComponent>();
         _xenoPlasmaQuery = GetEntityQuery<XenoPlasmaComponent>();
         _xenoRecoveryQuery = GetEntityQuery<XenoRecoveryPheromonesComponent>();
+        _victimInfectedQuery = GetEntityQuery<VictimInfectedComponent>();
 
         SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit);
         SubscribeLocalEvent<XenoComponent, MobStateChangedEvent>(OnMobStateChanged);
@@ -209,8 +214,15 @@ public sealed class XenoSystem : EntitySystem
 
         // TODO RMC14 different hives
         // TODO RMC14 this still falsely plays the hit red flash effect on xenos if others are hit in a wide swing
-        if (HasComp<XenoFriendlyComponent>(target) ||
+        if (_xenoFriendlyQuery.HasComp(target) ||
             _mobState.IsDead(target))
+        {
+            args.Cancel();
+            return;
+        }
+
+        if (_xenoNestedQuery.HasComp(target) &&
+            _victimInfectedQuery.HasComp(target))
         {
             args.Cancel();
         }

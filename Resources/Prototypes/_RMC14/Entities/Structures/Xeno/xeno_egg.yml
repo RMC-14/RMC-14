@@ -65,3 +65,5 @@
     intersectRatio: 0.5
   - type: RMCNightVisionVisible
     priority: -1
+  - type: Corrodible
+    isCorrodible: false

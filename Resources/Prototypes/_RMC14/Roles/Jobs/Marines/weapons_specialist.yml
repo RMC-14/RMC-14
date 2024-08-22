@@ -39,7 +39,6 @@
 - type: startingGear
   id: CMGearWeaponsSpecialist
   equipment:
-    jumpsuit: JumpsuitMarine # TODO RMC14 all squad roles should spawn with no jumpsuit but still have clothes on
     back: CMSatchelMarine
     id: CMDogtagWeaponsSpecialist
 
@@ -55,6 +54,9 @@
     id: CMDogtagWeaponsSpecialist
     ears: CMHeadsetAlpha
 
+- type: playTimeTracker
+  id: CMJobWeaponsSpecialist
+
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointWeaponsSpecialist
@@ -68,5 +70,39 @@
       state: green
     - state: weapons_specialist
 
-- type: playTimeTracker
-  id: CMJobWeaponsSpecialist
+- type: entity
+  parent: CMSpawnPointWeaponsSpecialist
+  id: CMSpawnPointWeaponsSpecialistAlpha
+  suffix: Alpha
+  components:
+  - type: SquadSpawner
+    squad: SquadAlpha
+    role: CMWeaponsSpecialist
+
+- type: entity
+  parent: CMSpawnPointWeaponsSpecialist
+  id: CMSpawnPointWeaponsSpecialistBravo
+  suffix: Bravo
+  components:
+  - type: SquadSpawner
+    squad: SquadBravo
+    role: CMWeaponsSpecialist
+
+- type: entity
+  parent: CMSpawnPointWeaponsSpecialist
+  id: CMSpawnPointWeaponsSpecialistCharlie
+  suffix: Charlie
+  components:
+  - type: SquadSpawner
+    squad: SquadCharlie
+    role: CMWeaponsSpecialist
+
+- type: entity
+  parent: CMSpawnPointWeaponsSpecialist
+  id: CMSpawnPointWeaponsSpecialistDelta
+  suffix: Delta
+  components:
+  - type: SquadSpawner
+    squad: SquadDelta
+    role: CMWeaponsSpecialist
+

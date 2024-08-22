@@ -348,6 +348,9 @@ public abstract class SharedWoundsSystem : EntitySystem
             }
         }
 
+        if (user != target && treater.Comp.TargetStartPopup != null)
+            _popup.PopupEntity(Loc.GetString(treater.Comp.TargetStartPopup, ("user", user)), target, target);
+
         var ev = new TreatWoundDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, treater, target, treater)
         {

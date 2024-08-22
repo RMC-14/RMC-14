@@ -58,6 +58,9 @@ public abstract class SharedNightVisionSystem : EntitySystem
         if (args.InHands || !ent.Comp.Toggleable)
             return;
 
+        if (ent.Comp.SlotFlags != args.SlotFlags)
+            return;
+
         args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId);
     }
 
@@ -72,11 +75,17 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
     private void OnNightVisionItemGotEquipped(Entity<NightVisionItemComponent> ent, ref GotEquippedEvent args)
     {
-        ToggleNightVisionItem(ent, args.Equipee);
+        if (ent.Comp.SlotFlags != args.SlotFlags)
+            return;
+
+        EnableNightVisionItem(ent, args.Equipee);
     }
 
     private void OnNightVisionItemGotUnequipped(Entity<NightVisionItemComponent> ent, ref GotUnequippedEvent args)
     {
+        if (ent.Comp.SlotFlags != args.SlotFlags)
+            return;
+
         DisableNightVisionItem(ent, args.Equipee);
     }
 

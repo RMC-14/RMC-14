@@ -26,11 +26,11 @@
         recommended: true
     - name: Primary ammunition
       entries:
-      - id: CMBoxShotgunFlechette
+      - id: RMCBoxShotgunFlechette
         amount: 4
-      - id: CMBoxShotgunBuckshot
+      - id: RMCBoxShotgunBuckshot
         amount: 10
-      - id: CMBoxShotgunSlugs
+      - id: RMCBoxShotgunSlugs
         amount: 10
       - id: CMMagazineRifleM4SPR
         amount: 15
@@ -116,8 +116,8 @@
         amount: 1
       - id: CMWebbing
         amount: 2
-#      - id: Drop Pouch
-#        amount: 1
+      - id: CMWebbingPouch
+        amount: 1
 #      - id: Shoulder Holster
 #        amount: 1
     - name: Armor
@@ -187,8 +187,8 @@
       - id: CMBeltKnifeFilled
         name: M276 Knife Rig (Full)
         amount: 15
-#      - id: M276 G8-A General Utility Pouch
-#        amount: 15
+      - id: RMCBeltUtilityGeneral
+        amount: 15
     - name: Pouches
       entries:
       - id: RMCPouchBayonet
@@ -241,6 +241,8 @@
     - name: Miscellaneous
       entries:
       - id: RMCGogglesBallistic
+        amount: 10
+      - id: RMCGogglesBallisticSquad
         amount: 10
       - id: RMCGogglesM1A1Ballistic
         amount: 10
@@ -346,7 +348,7 @@
       entries:
       - id: CMMRE
         amount: 5
-      - id: CMBoxMRE
+      - id: RMCBoxMRE
         amount: 1
     - name: Tools
       entries:
@@ -369,14 +371,14 @@
 #      #  amount: 1
       - id: RMCFlashlight # Combat Flashlight
         amount: 5
-#      #- id: CMBoxFlashlights
+#      #- id: RMCBoxFlashlights
 #      #  amount: 1
-      - id: CMBoxPackFlare
+      - id: RMCBoxPackFlare
         amount: 1
       - id: CMPackFlare
         amount: 10
-#      #- id: CMSignalFlarePackM89S
-#      #  amount: 1
+      - id: RMCPackFlareCAS
+        amount: 1
     - name: Miscellaneous
       entries:
       #- id: CMEngineerKit

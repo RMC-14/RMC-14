@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Xenonids.GasToggle;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Projectile;
@@ -29,7 +30,7 @@ public sealed class XenoBombardSystem : EntitySystem
     {
         SubscribeLocalEvent<XenoBombardComponent, XenoBombardActionEvent>(OnBombard);
         SubscribeLocalEvent<XenoBombardComponent, XenoBombardDoAfterEvent>(OnBombardDoAfter);
-        SubscribeLocalEvent<XenoBombardComponent, XenoBombardToggleActionEvent>(OnToggleType);
+        SubscribeLocalEvent<XenoBombardComponent, XenoGasToggleActionEvent>(OnToggleType);
     }
 
     private void OnBombard(Entity<XenoBombardComponent> ent, ref XenoBombardActionEvent args)
@@ -50,12 +51,8 @@ public sealed class XenoBombardSystem : EntitySystem
 
         _audio.PlayPredicted(ent.Comp.PrepareSound, ent, ent);
 
-        var ev = new XenoBombardDoAfterEvent
-        {
-            ActionId = GetNetEntity(args.Action),
-            Coordinates = target,
-        };
-        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent) { BreakOnMove = true };
+        var ev = new XenoBombardDoAfterEvent { Coordinates = target, };
+        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent, args.Action) { BreakOnMove = true };
         _doAfter.TryStartDoAfter(doAfter);
 
         var selfMessage = Loc.GetString("rmc-glob-start-self");
@@ -67,7 +64,7 @@ public sealed class XenoBombardSystem : EntitySystem
 
     private void OnBombardDoAfter(Entity<XenoBombardComponent> ent, ref XenoBombardDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled)
+        if (args.Cancelled || args.Handled || args.Target is not { } action)
             return;
 
         args.Handled = true;
@@ -91,7 +88,7 @@ public sealed class XenoBombardSystem : EntitySystem
 
         _gun.ShootProjectile(projectile, direction, Vector2.Zero, ent, ent);
         _audio.PlayEntity(ent.Comp.ShootSound, ent, ent);
-        _rmcActions.ActivateSharedCooldown(GetEntity(args.ActionId), ent);
+        _rmcActions.ActivateSharedCooldown(action, ent);
 
         var selfMessage = Loc.GetString("rmc-glob-shoot-self");
         _popup.PopupClient(selfMessage, ent, ent);
@@ -100,7 +97,7 @@ public sealed class XenoBombardSystem : EntitySystem
         _popup.PopupEntity(othersMessage, ent, Filter.PvsExcept(ent), true, PopupType.MediumCaution);
     }
 
-    private void OnToggleType(Entity<XenoBombardComponent> ent, ref XenoBombardToggleActionEvent args)
+    private void OnToggleType(Entity<XenoBombardComponent> ent, ref XenoGasToggleActionEvent args)
     {
         if (ent.Comp.Projectiles.Length == 0)
             return;
