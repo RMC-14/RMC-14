@@ -1,3 +1,5 @@
+using Content.Client.Actions;
+using Content.Client.Mapping;
 using Content.Client._RMC14.Mapping;
 using Content.Client.Markers;
 using JetBrains.Annotations;
@@ -12,6 +14,7 @@ internal sealed class MappingClientSideSetupCommand : LocalizedCommands
 {
     [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
     [Dependency] private readonly ILightManager _lightManager = default!;
+    [Dependency] private readonly IStateManager _stateManager = default!;
 
     public override string Command => "mappingclientsidesetup";
 
