@@ -1,5 +1,6 @@
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.Explosion.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Verbs;
@@ -28,18 +29,60 @@ public abstract partial class SharedGunSystem
         SubscribeLocalEvent<BallisticAmmoProviderComponent, InteractUsingEvent>(OnBallisticInteractUsing);
         SubscribeLocalEvent<BallisticAmmoProviderComponent, AfterInteractEvent>(OnBallisticAfterInteract);
         SubscribeLocalEvent<BallisticAmmoProviderComponent, AmmoFillDoAfterEvent>(OnBallisticAmmoFillDoAfter);
+        SubscribeLocalEvent<BallisticAmmoProviderComponent, DelayedAmmoInsertDoAfterEvent>(OnBallisticDelayedAmmoInsertDoAfter);
+        SubscribeLocalEvent<BallisticAmmoProviderComponent, DelayedCycleDoAfterEvent>(OnBallisticDelayedCycleDoAfter);
         SubscribeLocalEvent<BallisticAmmoProviderComponent, UseInHandEvent>(OnBallisticUse);
     }
 
+    /// <summary>
+    ///  Use in hand. Calls ManualCycle to remove a round if component.Cycleable is true.
+    ///  Separate because ManualCycle can also be called by the get-ballistic-cycle verb.
+    ///  Using the weapon in hand is much faster than using the verb, but the verb still works even if that's overridden.
+    /// </summary>
     private void OnBallisticUse(EntityUid uid, BallisticAmmoProviderComponent component, UseInHandEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || !component.Cycleable)
             return;
 
-        ManualCycle(uid, component, TransformSystem.GetMapCoordinates(uid), args.User);
+        if (component.CycleDelay > 0)
+            BallisticCycleDelayCheck(uid, component, args.User);
+        else // If there's no custom CycleDelay on this component by default, immediately cycle.
+            ManualCycle(uid, component, TransformSystem.GetMapCoordinates(uid), args.User);
+
         args.Handled = true;
     }
 
+    private void BallisticCycleDelayCheck(EntityUid uid, BallisticAmmoProviderComponent component, EntityUid user)
+    {
+        // Handling cycleDelay and DoAfter here sinceboth UseInHandEvent and Verb need to do these checks.
+        TimeSpan cycleDelayConverted;
+
+        if (component.CycleDelay > 0)
+        {
+            Popup(
+                Loc.GetString("gun-ballistic-cycle-delayed",
+                    ("entity", uid)),
+                    uid,
+                    user);
+
+            cycleDelayConverted = TimeSpan.FromSeconds(component.CycleDelay);
+            _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, cycleDelayConverted, new DelayedCycleDoAfterEvent(), used: uid, target: uid, eventTarget: uid)
+            {
+                BreakOnMove = true,
+                BreakOnDamage = false,
+                NeedHand = true
+            });
+        }
+        else
+            ManualCycle(uid, component, TransformSystem.GetMapCoordinates(uid), user);
+    }
+
+    /// <summary>
+    /// Interact with a BallisticAmmoProvider using something else in hand, usually to load it with loose cartridges or other ammo.
+    /// Includes both magazines and some guns that take ammo directly, like shotguns and launchers.
+    /// Uses InsertDelay instead of FillDelay, which defaults to 0. InsertDelay > 0 makes loading a DoAfter channel, even with Ammo components.
+    /// If transferring from another BallisticAmmoProvider, OnBallisticAfterInteract takes precedence and uses FillDelay instead.
+    /// </summary>
     private void OnBallisticInteractUsing(EntityUid uid, BallisticAmmoProviderComponent component, InteractUsingEvent args)
     {
         if (args.Handled)
@@ -48,18 +91,44 @@ public abstract partial class SharedGunSystem
         if (_whitelistSystem.IsWhitelistFailOrNull(component.Whitelist, args.Used))
             return;
 
+        //Prevent primed grenades or other primed ordanance from being loaded into weapons.
+        if (HasComp<ActiveTimerTriggerComponent>(args.Used))
+        {
+            Popup(
+                Loc.GetString("gun-ballistic-transfer-primed",
+                    ("ammoEntity", args.Used)),
+                uid,
+                args.User);
+
+            return;
+        }
+
         if (GetBallisticShots(component) >= component.Capacity)
             return;
 
-        component.Entities.Add(args.Used);
-        Containers.Insert(args.Used, component.Container);
-        // Not predicted so
-        Audio.PlayPredicted(component.SoundInsert, uid, args.User);
+        TimeSpan insertDelayConverted;
+
+        if (component.InsertDelay > 0)
+        {
+            insertDelayConverted = TimeSpan.FromSeconds(component.InsertDelay);
+            _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, insertDelayConverted, new DelayedAmmoInsertDoAfterEvent(), used: args.Used, target: args.Target, eventTarget: uid)
+            {
+                BreakOnMove = true,
+                BreakOnDamage = false,
+                NeedHand = true
+            });
+        }
+        else // If there's no custom InsertDelay on this component, immediately load the ammo in. Shotguns and mag-filling.
+        {
+            ManualLoad(uid, component, args.Used, args.User);
+        }
         args.Handled = true;
-        UpdateBallisticAppearance(uid, component);
-        Dirty(uid, component);
     }
 
+    /// <summary>
+    /// Interacting with a BallisticAmmoProvider with another one, to transfer ammo.
+    /// Uses FillDelay, defaulting to 0.5s
+    /// </summary>
     private void OnBallisticAfterInteract(EntityUid uid, BallisticAmmoProviderComponent component, AfterInteractEvent args)
     {
         if (args.Handled ||
@@ -76,11 +145,12 @@ public abstract partial class SharedGunSystem
 
         args.Handled = true;
 
+        // Continuous loading
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, component.FillDelay, new AmmoFillDoAfterEvent(), used: uid, target: args.Target, eventTarget: uid)
         {
             BreakOnMove = true,
             BreakOnDamage = false,
-            NeedHand = true
+            NeedHand = true,
         });
     }
 
@@ -91,8 +161,16 @@ public abstract partial class SharedGunSystem
 
         if (Deleted(args.Target) ||
             !TryComp<BallisticAmmoProviderComponent>(args.Target, out var target) ||
-            target.Whitelist == null)
+            target.Whitelist == null ||
+            args.Cancelled)
+        {
+            Popup(
+                Loc.GetString("gun-ballistic-transfer-cancelled",
+                    ("entity", uid)),
+                uid,
+                args.User);
             return;
+        }
 
         if (target.Entities.Count + target.UnspawnedCount == target.Capacity)
         {
@@ -113,7 +191,7 @@ public abstract partial class SharedGunSystem
                 args.User);
             return;
         }
-
+        // Simulates using a single ammo entity on the other BAP, loading it in.
         void SimulateInsertAmmo(EntityUid ammo, EntityUid ammoProvider, EntityCoordinates coordinates)
         {
             var evInsert = new InteractUsingEvent(args.User, ammo, ammoProvider, coordinates);
@@ -155,6 +233,87 @@ public abstract partial class SharedGunSystem
         var moreSpace = target.Entities.Count + target.UnspawnedCount < target.Capacity;
         var moreAmmo = component.Entities.Count + component.UnspawnedCount > 0;
         args.Repeat = moreSpace && moreAmmo;
+
+        // Delete the source BAP if it has the flag and is empty after trying to load. Maybe useful for shell handfuls.
+        if (component.DeleteWhenEmpty && (component.Entities.Count == 0))
+            Del(uid);
+
+    }
+
+    private void OnBallisticDelayedAmmoInsertDoAfter(EntityUid uid, BallisticAmmoProviderComponent component, DelayedAmmoInsertDoAfterEvent args)
+    {
+        // Check the DoAfter wasn't cancelled and nothing's missing.
+        if (Deleted(args.Target) ||
+            !TryComp<BallisticAmmoProviderComponent>(args.Target, out var target) ||
+            target.Whitelist == null ||
+            args.Cancelled)
+        {
+            Popup(
+                Loc.GetString("gun-ballistic-transfer-cancelled",
+                    ("entity", uid)),
+                uid,
+                args.User);
+            return;
+        }
+        // Check if full.
+        if (target.Entities.Count + target.UnspawnedCount == target.Capacity)
+        {
+            Popup(
+                Loc.GetString("gun-ballistic-transfer-target-full",
+                    ("entity", args.Target)),
+                args.Target,
+                args.User);
+            return;
+        }
+
+        if (args.Used is not null)
+        {
+            ManualLoad(uid, component, args.Used.Value, args.User);
+            args.Handled = true;
+            return;
+        }
+        args.Handled = false;
+    }
+
+    private void ManualLoad(EntityUid uid, BallisticAmmoProviderComponent component, EntityUid used, EntityUid user)
+    {
+        // Reused function moved here.
+        component.Entities.Add(used);
+        Containers.Insert(used, component.Container);
+        // Not predicted so
+        Audio.PlayPredicted(component.SoundInsert, uid, user);
+        UpdateBallisticAppearance(uid, component);
+        Dirty(uid, component);
+        return;
+    }
+
+    private void OnBallisticDelayedCycleDoAfter(EntityUid uid, BallisticAmmoProviderComponent component, DelayedCycleDoAfterEvent args)
+    {
+        // Check the DoAfter wasn't interrupted and the target BAP still exists.
+        if (Deleted(uid) ||
+            args.Cancelled)
+        {
+            Popup(
+                Loc.GetString("gun-ballistic-cycle-delayed-cancelled",
+                    ("entity", uid)),
+                uid,
+                args.User);
+            return;
+        }
+        // Check if empty.
+        if (component.Entities.Count + component.UnspawnedCount == 0)
+        {
+            Popup(
+                Loc.GetString("gun-ballistic-cycle-delayed-empty",
+                    ("entity", uid)),
+                uid,
+                args.User);
+            return;
+        }
+
+        ManualCycle(uid, component, TransformSystem.GetMapCoordinates(uid), args.User);
+
+        args.Handled = true;
     }
 
     private void OnBallisticVerb(EntityUid uid, BallisticAmmoProviderComponent component, GetVerbsEvent<Verb> args)
@@ -167,8 +326,8 @@ public abstract partial class SharedGunSystem
             args.Verbs.Add(new Verb()
             {
                 Text = Loc.GetString("gun-ballistic-cycle"),
-                Disabled = GetBallisticShots(component) == 0,
-                Act = () => ManualCycle(uid, component, TransformSystem.GetMapCoordinates(uid), args.User),
+                Disabled = (GetBallisticShots(component) == 0),
+                Act = () => BallisticCycleDelayCheck(uid, component, args.User),
             });
 
         }
@@ -276,6 +435,17 @@ public abstract partial class SharedGunSystem
         Appearance.SetData(uid, AmmoVisuals.AmmoCount, GetBallisticShots(component), appearance);
         Appearance.SetData(uid, AmmoVisuals.AmmoMax, component.Capacity, appearance);
     }
+
+    public void SetBallisticUnspawned(Entity<BallisticAmmoProviderComponent> entity, int count)
+    {
+        if (entity.Comp.UnspawnedCount == count)
+            return;
+
+        entity.Comp.UnspawnedCount = count;
+        UpdateBallisticAppearance(entity.Owner, entity.Comp);
+        UpdateAmmoCount(entity.Owner);
+        Dirty(entity);
+    }
 }
 
 /// <summary>
@@ -283,5 +453,21 @@ public abstract partial class SharedGunSystem
 /// </summary>
 [Serializable, NetSerializable]
 public sealed partial class AmmoFillDoAfterEvent : SimpleDoAfterEvent
+{
+}
+
+/// <summary>
+/// DoAfter event for filling a ballistic ammo provider directly while InsertDelay > 0.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class DelayedAmmoInsertDoAfterEvent : SimpleDoAfterEvent
+{
+}
+
+/// <summary>
+/// DoAfter event for cycling a ballistic ammo provider while CycleDelay > 0.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class DelayedCycleDoAfterEvent : SimpleDoAfterEvent
 {
 }

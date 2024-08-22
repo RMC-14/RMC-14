@@ -5,6 +5,11 @@
   name: Vendomat
   description: A generic vending machine.
   components:
+  - type: Transform
+    anchored: false
+    noRot: true
+  - type: Physics
+    bodyType: Static
   - type: AmbientOnPowered
   - type: AmbientSound
     volume: -9
@@ -12,11 +17,6 @@
     enabled: false
     sound:
       path: /Audio/Ambience/Objects/vending_machine_hum.ogg
-  - type: Physics
-    bodyType: Static
-  - type: Transform
-    anchored: true
-    noRot: true
   - type: Fixtures
     fixtures:
       fix1:
@@ -128,16 +128,16 @@
 - type: vendingMachineInventory
   id: CMVendorSnack
   startingInventory: # TODO RMC14
-    FoodBurgerPlain: 12
-    #Burrito 12
-    #Hot Dog 12
-    FoodSnackRaisins: 12 #kepler crisps 12
-    FoodSnackCnDs: 12 #kepler crisps flameshot 12
-    FoodSnackPistachios: 12 #we-ya chips pepper 12
-    FoodSnackChocolate: 12 #eat bar 12
-    #booniebas 6
-    #chunk 6
-    #barcardine 6
+    RMCFoodSnackCheeseburgerPackaged: 12
+    RMCFoodSnackBurritoPackaged: 12
+    RMCFoodSnackHotdogPackaged: 12
+    RMCFoodSnackKeplarCrisps: 12
+    RMCFoodSnackKeplarFlamehotCrisps: 12
+    RMCFoodSnackChipsPepper: 12
+    RMCFoodSnackEATBar: 12
+    RMCFoodSnackBoonie: 6
+    RMCFoodSnackCHUNK: 6
+    RMCFoodSnackBarcaridine: 6
 
 
 # Cola
@@ -194,11 +194,10 @@
 - type: vendingMachineInventory
   id: CMVendorCigs
   startingInventory:
-    CMCigPackBlack: 50 #TODO RMC14 lucky sloths
-    CMCigarCase: 20 #TODO RMC14 tarbacktube
-    CMMatchbox: 15
+    RMCCigarettePackLuckySloths: 50 
+    RMCTarbackCase: 15
     Lighter: 25
-    #TODO RMC14 Zippo 10
+    RMCZippo: 10
 
 
 # Security

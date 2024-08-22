@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoCrusher
   name: Crusher
   description: A huge alien with an enormous armored crest.
@@ -30,7 +31,7 @@
     - ActionXenoTailStab
     - ActionXenoCharge
     - ActionXenoStomp
-    #    - ActionXenoDefensiveShield
+    - ActionXenoDefensiveShield
     - ActionXenoDevolve
     tier: 3
     hudOffset: 0,0.375
@@ -60,9 +61,12 @@
     damage:
       groups:
         Brute: 40
-  - type: Tackle
+  - type: CrusherShield
+  - type: XenoShield
+  - type: Tackle # min: 2, max: 6
     threshold: 5
     stun: 5
+    chance: 0.25
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.66
     baseSprintSpeed: 3

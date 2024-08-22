@@ -5,7 +5,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.Damage;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(CMDamageableSystem))]
+[Access(typeof(SharedRMCDamageableSystem))]
 public sealed partial class DamageMobStateComponent : Component
 {
     [DataField, AutoNetworkedField]

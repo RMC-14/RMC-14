@@ -1,7 +1,9 @@
 tiles-cm-default = metal tile
 tiles-cm-default-no-weeds = metal tile (no weeds)
 tiles-rmc-underplating-no-weeds = plating (no weeds)
+tiles-rmc-empty = empty space
 tiles-cm-plate = metal plate tile
+tiles-rmc-mono = mono tile
 tiles-cm-office = office tile
 tiles-cm-sterile = metal sterile tile
 tiles-cm-sterile-dark = dark metal sterile tile
@@ -13,7 +15,6 @@ tiles-cm-white-sterile = white metal sterile tile
 tiles-cm-green-sterile = green metal sterile tile
 tiles-cm-freezer = freezer tile
 tiles-cm-black = black metal tile
-tiles-cm-ai = ai-room tile
 tiles-cm-tcomms = tcommunications tile
 tiles-cm-cargo = cargo tile
 tiles-cm-plating = plating tile
@@ -30,6 +31,11 @@ tiles-cm-grass = grass tile
 tiles-cm-dirt-grass = dirt grass tile
 tiles-cm-rock = rock tile
 tiles-rmc-red-desert = red desert tile
+tiles-rmc-desert-water-shore = shore
+tiles-rmc-coagulation = coagulation
+
+tiles-rmc-asphalt = asphalt tile
+tiles-rmc-cement = cement tile
 
 tiles-cm-default-alpha = alpha metal tile
 tiles-cm-default-bravo = bravo metal tile
@@ -44,3 +50,8 @@ tiles-cm-default-red = red metal tile
 tiles-cm-default-yellow = yellow metal tile
 
 tiles-cm-floor = floor
+
+tiles-rmc-striped = striped tile
+tiles-rmc-research = research containment tile
+tiles-rmc-tcomms = tcomms tile
+tiles-rmc-outer-hull = outer hull tile

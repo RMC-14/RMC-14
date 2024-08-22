@@ -10,7 +10,7 @@ namespace Content.Shared._RMC14.Xenonids.Spray;
 public sealed partial class SprayAcidedComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public DamageSpecifier DamagePerSecond = new();
+    public DamageSpecifier Damage = new();
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan ExpireAt;

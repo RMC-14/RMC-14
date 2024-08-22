@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
@@ -55,11 +55,11 @@ public sealed partial class BloodPackComponent : Component
     public ProtoId<EmotePrototype> RipEmote = "Scream";
 
     [DataField, AutoNetworkedField]
-    public Skills SkillRequired = new() { Surgery = 1 };
+    public Dictionary<EntProtoId<SkillDefinitionComponent>, int> SkillRequired = new() { ["RMCSkillSurgery"] = 1 };
 
-	// TODO RMC-14 blood types
-	[DataField, AutoNetworkedField]
-	public string[] TransferableReagents = ["Blood"];
+    // TODO RMC-14 blood types
+    [DataField, AutoNetworkedField]
+    public string[] TransferableReagents = ["Blood"];
 }
 
 [Serializable, NetSerializable]

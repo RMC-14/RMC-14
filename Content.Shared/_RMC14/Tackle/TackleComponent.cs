@@ -14,4 +14,7 @@ public sealed partial class TackleComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan Stun = TimeSpan.FromSeconds(5);
+
+    [DataField, AutoNetworkedField]
+    public float Chance = 0.35f;
 }

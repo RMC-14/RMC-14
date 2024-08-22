@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: CMDisposalUnit
   parent: DisposalUnit
   name: disposal unit
@@ -24,3 +24,9 @@
   - type: ApcPowerReceiver
     powerLoad: 0
     needsPower: false
+  - type: ThrowInsertContainer
+    probability: 0
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

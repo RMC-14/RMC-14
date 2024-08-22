@@ -165,13 +165,16 @@ public sealed class CMArmorSystem : EntitySystem
         var ev = new CMGetArmorEvent(SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING);
         RaiseLocalEvent(ent, ref ev);
 
+        var armorPiercing = args.ArmorPiercing;
         if (args.Tool != null)
         {
-            var piercingEv = new CMGetArmorPiercingEvent();
+            var piercingEv = new CMGetArmorPiercingEvent(ent);
             RaiseLocalEvent(args.Tool.Value, ref piercingEv);
-            ev.Armor -= piercingEv.Piercing;
-            ev.Bio -= piercingEv.Piercing;
+            armorPiercing += piercingEv.Piercing;
         }
+
+        ev.Armor -= armorPiercing;
+        ev.Bio -= armorPiercing;
 
         if (args.Origin is { } origin)
         {

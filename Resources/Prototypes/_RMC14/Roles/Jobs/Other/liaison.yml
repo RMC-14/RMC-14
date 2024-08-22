@@ -14,19 +14,23 @@
   supervisors: cm-job-supervisors-we-ya
   accessGroups:
   - MarineMain
+  - RMCWeYa
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      firearms: 0
-      vehicles: 1
+      skills:
+        RMCSkillFirearms: 0
+        RMCSkillVehicles: 1
+    - type: CMVendorUser
+      points: 50
 
 - type: startingGear
   id: CMGearLiaison
   equipment:
     jumpsuit: CMJumpsuitLiaisonBlack
     back: CMSatchel
-    shoes: CMShoesLaceup
+    shoes: RMCShoesLaceup
     id: CMIDCardLiaison
     ears: RMCHeadsetLiaison
 

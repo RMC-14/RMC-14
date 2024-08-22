@@ -21,6 +21,7 @@
     sprite: _RMC14/Objects/Medical/hypospray.rsi
   - type: Hypospray
     transferAmount: 5
+    injectOnly: true
     injectSound: /Audio/_RMC14/Medical/hypospray.ogg
   - type: Appearance
   - type: SolutionContainerManager
@@ -32,6 +33,9 @@
   - type: Tag
     tags:
     - Hypospray
+  - type: MedicallyUnskilledDoAfter
+    min: 2
+    doAfter: 3
 
 - type: Tag
   id: Hypospray

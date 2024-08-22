@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoDrone
   name: Drone
   description: An alien drone.
@@ -72,7 +73,7 @@
     plasma: 1000
     maxPlasma: 1000
     plasmaRegenOnWeeds: 4.5
-  - type: Tackle
+  - type: Tackle # min: 2, max: 4
     threshold: 4
     stun: 7
   - type: WhitelistPickup

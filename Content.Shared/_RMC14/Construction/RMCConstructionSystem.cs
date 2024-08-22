@@ -29,7 +29,7 @@ public sealed class RMCConstructionSystem : EntitySystem
 
         SubscribeLocalEvent<RMCConstructionAttemptEvent>(OnConstructionAttempt);
 
-        SubscribeLocalEvent<DropshipComponent, MapInitEvent>(OnDropshipMapInit);
+        SubscribeLocalEvent<DropshipComponent, DropshipMapInitEvent>(OnDropshipMapInit);
 
         SubscribeLocalEvent<RMCDropshipBlockedComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<RMCDropshipBlockedComponent, AnchorAttemptEvent>(OnAnchorAttempt);
@@ -46,7 +46,7 @@ public sealed class RMCConstructionSystem : EntitySystem
         }
     }
 
-    private void OnDropshipMapInit(Entity<DropshipComponent> ent, ref MapInitEvent args)
+    private void OnDropshipMapInit(Entity<DropshipComponent> ent, ref DropshipMapInitEvent args)
     {
         _toCreate.Clear();
 

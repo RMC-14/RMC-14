@@ -1,11 +1,13 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
+using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
@@ -33,24 +35,33 @@ public sealed class XenoNestSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly OccluderSystem _occluder = default!;
+    [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly IMapManager _map = default!;
-    [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
 
-    private EntityQuery<XenoWeedableComponent> _xenoWeedable;
+    private EntityQuery<OccluderComponent> _occluderQuery;
+    private EntityQuery<XenoNestComponent> _xenoNestQuery;
+    private EntityQuery<XenoNestSurfaceComponent> _xenoNestSurfaceQuery;
+    private EntityQuery<XenoWeedableComponent> _xenoWeedableQuery;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        _xenoWeedable = GetEntityQuery<XenoWeedableComponent>();
+        _occluderQuery = GetEntityQuery<OccluderComponent>();
+        _xenoNestQuery = GetEntityQuery<XenoNestComponent>();
+        _xenoNestSurfaceQuery = GetEntityQuery<XenoNestSurfaceComponent>();
+        _xenoWeedableQuery = GetEntityQuery<XenoWeedableComponent>();
 
         SubscribeLocalEvent<XenoComponent, GetUsedEntityEvent>(OnXenoGetUsedEntity);
 
@@ -66,6 +77,7 @@ public sealed class XenoNestSystem : EntitySystem
 
         SubscribeLocalEvent<XenoNestableComponent, BeforeRangedInteractEvent>(OnNestableBeforeRangedInteract);
 
+        SubscribeLocalEvent<XenoNestedComponent, ComponentStartup>(OnNestedAdd);
         SubscribeLocalEvent<XenoNestedComponent, ComponentRemove>(OnNestedRemove);
         SubscribeLocalEvent<XenoNestedComponent, PreventCollideEvent>(OnNestedPreventCollide);
         SubscribeLocalEvent<XenoNestedComponent, PullAttemptEvent>(OnNestedPullAttempt);
@@ -80,7 +92,6 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestedComponent, IsEquippingAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, IsUnequippingAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, GetInfectedIncubationMultiplierEvent>(OnInNestGetInfectedIncubationMultiplier);
-        SubscribeLocalEvent<XenoNestedComponent, ComponentStartup>(OnNestedAdd);
     }
 
     private void OnXenoGetUsedEntity(Entity<XenoComponent> ent, ref GetUsedEntityEvent args)
@@ -124,12 +135,12 @@ public sealed class XenoNestSystem : EntitySystem
         TryStartNesting(args.User, (args.Target.Value, surface), args.Used);
     }
 
-	private void OnNestedAdd(Entity<XenoNestedComponent> ent, ref ComponentStartup args)
-	{
-		_parasite.RefreshIncubationMultipliers(ent.Owner);
-	}
+    private void OnNestedAdd(Entity<XenoNestedComponent> ent, ref ComponentStartup args)
+    {
+        _parasite.RefreshIncubationMultipliers(ent.Owner);
+    }
 
-	private void OnNestedRemove(Entity<XenoNestedComponent> ent, ref ComponentRemove args)
+    private void OnNestedRemove(Entity<XenoNestedComponent> ent, ref ComponentRemove args)
     {
         DetachNested(null, ent);
         _actionBlocker.UpdateCanMove(ent);
@@ -177,7 +188,7 @@ public sealed class XenoNestSystem : EntitySystem
             Direction.East => new Vector2(0.5f, 0),
             Direction.North => new Vector2(0, 0.5f),
             Direction.West => new Vector2(-0.5f, 0),
-            _ => Vector2.Zero
+            _ => Vector2.Zero,
         };
 
         var nest = SpawnAttachedTo(ent.Comp.Nest, nestCoordinates);
@@ -239,7 +250,7 @@ public sealed class XenoNestSystem : EntitySystem
     private void OnSurfaceTerminating(Entity<XenoNestSurfaceComponent> ent, ref EntityTerminatingEvent args)
     {
         if (!TerminatingOrDeleted(ent.Comp.Weedable) &&
-            _xenoWeedable.TryComp(ent.Comp.Weedable, out var weedable) &&
+            _xenoWeedableQuery.TryComp(ent.Comp.Weedable, out var weedable) &&
             weedable.Entity == ent)
         {
             weedable.Entity = null;
@@ -269,15 +280,15 @@ public sealed class XenoNestSystem : EntitySystem
         args.Cancel();
     }
 
-	private void OnInNestGetInfectedIncubationMultiplier(Entity<XenoNestedComponent> ent, ref GetInfectedIncubationMultiplierEvent args)
+    private void OnInNestGetInfectedIncubationMultiplier(Entity<XenoNestedComponent> ent, ref GetInfectedIncubationMultiplierEvent args)
     {
         if (ent.Comp.Running)
             args.Multiply(ent.Comp.IncubationMultiplier);
-	}
+    }
 
-	private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
+    private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
     {
-        if (!HasComp<XenoComponent>(user) ||
+        if (!HasComp<XenoComponent>(user) || !HasComp<HandsComponent>(user) ||
             !CanNestPopup(user, victim, surface, out _))
         {
             return;
@@ -320,6 +331,14 @@ public sealed class XenoNestSystem : EntitySystem
         {
             if (!silent)
                 _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed", ("target", victim)), surface, user);
+
+            return false;
+        }
+
+        if (_mobState.IsDead(victim))
+        {
+            if (!silent)
+                _popup.PopupClient(Loc.GetString("rmc-xeno-nest-failed-dead", ("target", victim)), surface, user);
 
             return false;
         }
@@ -457,5 +476,67 @@ public sealed class XenoNestSystem : EntitySystem
 
         RemCompDeferred<XenoNestedComponent>(nested);
         QueueDel(nest);
+    }
+
+    private bool TryGetNestedWallOccluder(Entity<XenoNestedComponent> nested, out Entity<OccluderComponent> occluder)
+    {
+        occluder = default;
+        if (!_xenoNestQuery.TryComp(nested.Comp.Nest, out var nest))
+            return false;
+
+        if (nest.Surface is not { } surface)
+            return false;
+
+        if (_occluderQuery.TryComp(surface, out var occluderComp))
+        {
+            occluder = (surface, occluderComp);
+            return true;
+        }
+
+        if (_xenoNestSurfaceQuery.TryComp(surface, out var nestSurface) &&
+            _occluderQuery.TryComp(nestSurface.Weedable, out occluderComp))
+        {
+            occluder = (nestSurface.Weedable.Value, occluderComp);
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool HasAdjacentNestFacing(EntityCoordinates coordinates)
+    {
+        foreach (var cardinal in _rmcMap.CardinalDirections)
+        {
+            var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(coordinates, cardinal);
+            var opposite = cardinal.GetOpposite();
+            while (anchored.MoveNext(out var uid))
+            {
+                if (!_xenoNestSurfaceQuery.TryComp(uid, out var surface))
+                    continue;
+
+                if (surface.Nests.TryGetValue(opposite, out var nest) &&
+                    !TerminatingOrDeleted(nest))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public override void Update(float frameTime)
+    {
+        if (_net.IsServer)
+            return;
+
+        if (_player.LocalEntity is not { } ent)
+            return;
+
+        if (TryComp(ent, out XenoNestedComponent? nested) &&
+            TryGetNestedWallOccluder((ent, nested), out var occluder))
+        {
+            _occluder.SetEnabled(occluder, false, occluder);
+        }
     }
 }

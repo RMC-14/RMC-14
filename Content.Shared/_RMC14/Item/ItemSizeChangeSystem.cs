@@ -47,25 +47,20 @@ public sealed partial class ItemSizeChangeSystem : EntitySystem
     private void OnMapInit(Entity<ItemSizeChangeComponent> item, ref MapInitEvent args)
     {
         InitItem(item);
+        RefreshItemSizeModifiers((item.Owner, item.Comp));
     }
 
     public void RefreshItemSizeModifiers(Entity<ItemSizeChangeComponent?> item)
     {
         if (item.Comp == null)
-        {
-            if (!TryComp(item.Owner, out ItemSizeChangeComponent? sizeChangeComponent))
-            {
-                item.Comp = EnsureComp<ItemSizeChangeComponent>(item.Owner);
-                InitItem((item.Owner, item.Comp));
-            }
-            else
-                item.Comp = sizeChangeComponent;
-        }
-
-        if (!TryComp(item.Owner, out ItemComponent? itemComponent))
+            item.Comp = EnsureComp<ItemSizeChangeComponent>(item.Owner);
+        else if (!InitItem((item.Owner, item.Comp)))
             return;
 
-        var ev = new GetItemSizeModifiersEvent(item.Comp.BaseSize);
+        if (item.Comp == null || item.Comp.BaseSize == null)
+            return;
+
+        var ev = new GetItemSizeModifiersEvent(item.Comp.BaseSize.Value);
         RaiseLocalEvent(item.Owner, ref ev);
 
         ev.Size = Math.Clamp(ev.Size, 0, _sortedSizes.Count > 0 ? _sortedSizes.Count - 1 : 0);
@@ -73,15 +68,33 @@ public sealed partial class ItemSizeChangeSystem : EntitySystem
         if (_sortedSizes.Count <= ev.Size)
             return;
 
-        _itemSystem.SetSize(item, _sortedSizes[ev.Size], itemComponent);
+        _itemSystem.SetSize(item, _sortedSizes[ev.Size]);
     }
 
-    private void InitItem(Entity<ItemSizeChangeComponent> item)
+    private bool InitItem(Entity<ItemSizeChangeComponent> item, bool onlyNull = false)
     {
-        if (!TryComp(item.Owner, out ItemComponent? itemComponent) || !_prototypeManager.TryIndex(itemComponent.Size, out ItemSizePrototype? prototype))
-            return;
+        if (!onlyNull && item.Comp.BaseSize != null)
+            return true;
 
-        item.Comp.BaseSize = _sortedSizes.IndexOf(prototype);
+        if (_sortedSizes.Count <= 0)
+        {
+            InitItemSizes();
+
+            if (_sortedSizes.Count <= 0)
+                return false;
+        }
+
+        if (!TryComp(item.Owner, out ItemComponent? itemComponent) || !_prototypeManager.TryIndex(itemComponent.Size, out ItemSizePrototype? prototype))
+            return false;
+
+        var size = _sortedSizes.IndexOf(prototype);
+
+        if (size < 0)
+            return false;
+
+        item.Comp.BaseSize = size;
         Dirty(item);
+
+        return true;
     }
 }

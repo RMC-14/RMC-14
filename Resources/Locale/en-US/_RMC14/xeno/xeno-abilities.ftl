@@ -26,6 +26,7 @@ rmc-xeno-evolution-cant-evolve-damaged = We must be at full health to evolve.
 rmc-xeno-evolution-cant-devolve-damaged = We are too weak to deevolve, we must regain our health first.
 rmc-xeno-evolution-cant-evolve-recent-queen-death-minutes = We must wait about {$minutes} minutes and {$seconds} seconds for the hive to recover from the previous Queen's death.
 rmc-xeno-evolution-cant-evolve-recent-queen-death-seconds = We must wait about {$seconds} seconds for the hive to recover from the previous Queen's death.
+rmc-xeno-evolution-failed-bad-location = We can't evolve here.
 
 # Fortify
 cm-xeno-fortify-cant-headbutt = You can't headbutt while fortifying!
@@ -112,3 +113,9 @@ cm-xeno-invisibility-expire = We feel our invisibility end!
 # Ovipositor
 cm-xeno-ovipositor-attach = We start attaching to the ovipositor.
 cm-xeno-ovipositor-detach = We start detaching from the ovipositor.
+
+# Defensive Shield
+rmc-xeno-defensive-shield-end = We feel our enhanced shield end!
+rmc-xeno-defensive-shield-resist-end = Our immunity to explosion damage ends!
+rmc-xeno-defensive-shield-activate = {$user} hunkers down and bolsters its defenses!
+rmc-xeno-defensive-shield-activate-self = We hunker down and bolster our defenses!

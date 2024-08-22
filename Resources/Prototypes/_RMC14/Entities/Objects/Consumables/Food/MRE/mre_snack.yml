@@ -27,6 +27,16 @@
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodMeatballs
+    
+- type: entity
+  parent: CMMRESnackComponentBase
+  id: RMCMREComponentMeatzels
+  name: MRE component (meatzels)
+  description: An MRE snack component. Contains a light snack in case you weren't feeling terribly hungry. This one is.. meatzels ?
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCMREFoodMeatzels
 
 - type: entity
   parent: CMMRESnackComponentBase
@@ -80,7 +90,7 @@
   parent: CMMREFoodSnack
   id: CMMREFoodBiscuit
   name: biscuit
-  description: The contents of a Marine Standard issue MRE. This one is biscuit.
+  description: The contents of a Marine Standard issue MRE. This one is a biscuit.
   components:
   - type: Sprite
     state: biscuit
@@ -96,6 +106,18 @@
   components:
   - type: Sprite
     state: meatballs
+  - type: FlavorProfile
+    flavors:
+    - Meatballs
+
+- type: entity
+  parent: CMMREFoodSnack
+  id: RMCMREFoodMeatzels
+  name: meatzels
+  description: The contents of a Marine Standard issue MRE. This one is.. meatzels ?
+  components:
+  - type: Sprite
+    state: meatzels
   - type: FlavorProfile
     flavors:
     - Meatballs

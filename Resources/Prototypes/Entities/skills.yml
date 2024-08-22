@@ -1,0 +1,127 @@
+﻿- type: entity
+  abstract: true
+  id: RMCSkillBase
+  components:
+  - type: SkillDefinition
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillAntagonist
+  name: Antagonist
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillConstruction
+  name: Construction
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillCqc
+  name: Cqc
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillDomestics
+  name: Domestics
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillEndurance
+  name: Endurance
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillEngineer
+  name: Engineer
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillExecution
+  name: Execution
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillFirearms
+  name: Firearms
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillFireman
+  name: Fireman
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillIntel
+  name: Intel
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillJtac
+  name: Jtac
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillLeadership
+  name: Leadership
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillMedical
+  name: Medical
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillMeleeWeapons
+  name: MeleeWeapons
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillNavigations
+  name: Navigations
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillOverwatch
+  name: Overwatch
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillPilot
+  name: Pilot
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillPolice
+  name: Police
+
+# Forklift certified
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillPowerLoader
+  name: PowerLoader
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillResearch
+  name: Research
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillSmartGun
+  name: SmartGun
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillSpecialistWeapons
+  name: SpecialistWeapons
+
+# No longer a week away
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillSurgery
+  name: Surgery
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillVehicles
+  name: Vehicles

@@ -48,8 +48,8 @@
     gloves: RMCHandsVeteranPMC
     jumpsuit: RMCJumpsuitVeteranPMC
     # outerClothing: /obj/item/clothing/suit/storage/marine/veteran/pmc/light
-    shoes: CMBootsBlackFilled
+    shoes: RMCBootsPMCFilled
     id: RMCIDCardPMC
     ears: RMCHeadsetDistressPMC
-    pocket1: CMPouchFirstAidSplintsGauzeOintment
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
     pocket2: CMWeaponPistolM77

@@ -3,6 +3,7 @@ using Content.Server.Administration;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Administration;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed;
 using Robust.Shared.Toolshed.Syntax;
 
@@ -16,12 +17,8 @@ public sealed class SkillsCommand : ToolshedCommand
     [CommandImplementation("get")]
     public int Get([PipedArgument] EntityUid marine, [CommandArgument] SkillType skill)
     {
-        var skillComp = EntityManager.GetComponentOrNull<SkillsComponent>(marine);
-        if (skillComp == null)
-            return 0;
-
-        var skills = skillComp.Skills;
-        return (int) (typeof(Skills).GetProperty(skill.Value)?.GetValue(skills) ?? 0);
+        _skills ??= GetSys<SkillsSystem>();
+        return _skills.GetSkill(marine, skill.Value);
     }
 
     [CommandImplementation("set")]
@@ -35,12 +32,34 @@ public sealed class SkillsCommand : ToolshedCommand
             return marine;
 
         _skills ??= GetSys<SkillsSystem>();
-        var skillsComp = EnsureComp<SkillsComponent>(marine);
-        object skills = skillsComp.Skills;
-        var levelValue = level.Evaluate(ctx);
-        typeof(Skills).GetProperty(skill.Value)?.SetValue(skills, levelValue);
 
-        _skills.SetSkills((marine, skillsComp), (Skills) skills);
+        var levelValue = level.Evaluate(ctx);
+        _skills.SetSkill(marine, skill.Value, levelValue);
+
+        return marine;
+    }
+
+    [CommandImplementation("all")]
+    public EntityUid All(
+        [CommandInvocationContext] IInvocationContext ctx,
+        [PipedArgument] EntityUid marine,
+        [CommandArgument] ValueRef<int> level)
+    {
+        if (!HasComp<MarineComponent>(marine))
+            return marine;
+
+        _skills ??= GetSys<SkillsSystem>();
+
+        var levelValue = level.Evaluate(ctx);
+        var skills = new Dictionary<EntProtoId<SkillDefinitionComponent>, int>();
+
+        foreach (var skill in _skills.Skills)
+        {
+            skills[skill] = levelValue;
+        }
+
+        _skills.SetSkills(marine, skills);
+
         return marine;
     }
 
@@ -52,5 +71,14 @@ public sealed class SkillsCommand : ToolshedCommand
         [CommandArgument] ValueRef<int> level)
     {
         return marines.Select(marine => Set(ctx, marine, skill, level));
+    }
+
+    [CommandImplementation("all")]
+    public IEnumerable<EntityUid> All(
+        [CommandInvocationContext] IInvocationContext ctx,
+        [PipedArgument] IEnumerable<EntityUid> marines,
+        [CommandArgument] ValueRef<int> level)
+    {
+        return marines.Select(marine => All(ctx, marine, level));
     }
 }

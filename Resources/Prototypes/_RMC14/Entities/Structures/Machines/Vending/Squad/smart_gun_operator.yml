@@ -23,7 +23,7 @@
       choices: { CMGunAttachments: 1 }
       entries:
 #      - id: RMCAttachmentLaserSight # TODO RMC14 when other pistols are available here
-      - id: RMCAttachmentS5RedDotSight
+#      - id: RMCAttachmentS5RedDotSight # Uncomment when accuracy is implemented.
       - id: RMCAttachmentS6ReflexSight
     - name: Explosives
       entries:
@@ -63,7 +63,7 @@
     #  points: 6
     #- id: CMFuelTankStrapPouch
     #  points: 5
-      - id: CMPouchGeneralLarge
+      - id: RMCPouchGeneralLarge
         points: 6
     - name: Utilities
       entries:
@@ -78,13 +78,13 @@
       - id: RMCPowerCellSmartgun
         points: 15
     - name: Binoculars
-      entries: [ ]
-    #- id: CMBinoculars
-    #  points: 5
+      entries:
+      - id: RMCBinoculars
+        points: 5
     #- id: CMRangeFinder
     #  points: 10
-    #- id: CMLaserDesignator
-    #  points: 15
+      - id: RMCLaserDesignator
+        points: 15
     - name: Helmet Optics
       entries: [ ]
     #- id: CMMedicalHelmetOptic
@@ -92,9 +92,9 @@
     #- id: CMWeldingVisor
     #  points: 5
     - name: Pamphlets
-      entries: [ ]
-    #- id: CMPamphletJTAC
-    #  points: 15
+      entries:
+      - id: CMPamphletJTAC
+        points: 15
     #- id: CMPamphletEngineering
     #  points: 15
     - name: Radio Keys
@@ -135,27 +135,27 @@
      #- id: CMM802SmartGunOperatorSidearmBeltFilled
       - id: CMBeltSmartGunOperatorFilled
     - name: Pouches
-      choices: { CMPouch: 2 }
+      choices: { RMCPouch: 2 }
       entries:
-      - id: CMPouchFlareFilled
-        name: Flare pouch (Filled)
-#      - id: CMPouchElectronics # TODO RMC14
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchFlareFilled
+        name: Flare pouch (Full)
+#      - id: RMCPouchElectronics # TODO RMC14
+      - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
         recommended: true
-      - id: CMPouchFirstAidSplintsGauzeOintment
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
         recommended: true
-      - id: CMPouchFirstAidPills
+      - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
         recommended: true
-      - id: CMPouchMagazinePistolLarge
+      - id: RMCPouchMagazinePistolLarge
         recommended: true
-      - id: CMPouchMagazine
-      - id: CMPouchShotgun
-      - id: CMPouchGeneralMedium
-      - id: CMPouchPistol
-      - id: CMPouchMacheteFilled
+      - id: RMCPouchMagazine
+      - id: RMCPouchShotgun
+      - id: RMCPouchGeneralMedium
+      - id: RMCPouchPistol
+      - id: RMCPouchMacheteFilled
     #- id: CMSlingPouch
     - name: Accessories
       choices: { CMAccessories: 1 }
@@ -165,8 +165,9 @@
       - id: CMWebbingBlack
     #- id: CMShoulderHolster
       - id: CMWebbing
-    #- id: CMDropPouch
+      - id: CMWebbingPouch
     - name: Mask
+      choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif

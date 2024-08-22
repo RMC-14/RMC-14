@@ -1,0 +1,41 @@
+﻿- type: entity
+  parent:
+  - RMCAreaProtectionMetal
+  - RMCAreaBase
+  id: RMCAreaSupply
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: blank
+
+- type: entity
+  parent: RMCAreaSupply
+  id: RMCAreaSupplyStation
+  name: Supply Shuttle
+  components:
+  - type: Sprite
+    state: shuttle3
+
+- type: entity
+  parent: RMCAreaSupply
+  id: RMCAreaSupplyDock
+  name: Supply Shuttle
+  components:
+  - type: Sprite
+    state: shuttle3
+
+- type: entity
+  parent: RMCAreaSupply
+  id: RMCAreaSupplyStationVehicle
+  name: Vehicle ASRS
+  components:
+  - type: Sprite
+    state: shuttle3
+
+- type: entity
+  parent: RMCAreaSupply
+  id: RMCAreaSupplyDockVehicle
+  name: Vehicle ASRS
+  components:
+  - type: Sprite
+    state: shuttle3

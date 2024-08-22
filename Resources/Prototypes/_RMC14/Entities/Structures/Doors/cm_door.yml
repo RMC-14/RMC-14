@@ -137,6 +137,8 @@
   - type: PryUnpowered
   - type: RMCDropshipBlocked
   - type: RMCWallExplosionDeletable
+  - type: DamageMultiplierFlags
+    flags: Breaching
 
 - type: entity
   abstract: true

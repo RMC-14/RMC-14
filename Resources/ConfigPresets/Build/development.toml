@@ -5,6 +5,10 @@ lobbyenabled = false
 map = "CMDev"
 role_timers = false
 
+[ghost]
+role_time = 0.5
+quick_lottery = true
+
 [gateway]
 generator_enabled = false
 
@@ -28,3 +32,6 @@ preload_grids = false
 
 [admin]
 see_own_notes = true
+
+[rmc]
+planet_maps = "/Maps/_RMC14/solaris.yml,/Maps/_RMC14/prison.yml,/Maps/_RMC14/shiva.yml"

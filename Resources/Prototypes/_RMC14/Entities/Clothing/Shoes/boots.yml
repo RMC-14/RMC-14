@@ -1,20 +1,31 @@
 # Dress Shoes
 - type: entity
-  parent: ClothingShoesBase
-  id: CMShoesLaceup
-  name: laceup shoes
-  description: The height of fashion, and they're pre-polished!
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Shoes/laceup.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Shoes/laceup.rsi
-
-- type: entity
-  parent: CMShoesLaceup
+  parent: RMCShoesLaceup
   id: CMShoesLaceupCommander
   name: commanding officer dress shoes
   description: Has special soles for better trampling those underneath.
+
+- type: entity
+  abstract: true
+  id: RMCItemSlotM5Bayonet
+  suffix: Filled
+  components:
+  - type: ContainerContainer
+    containers:
+      item: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      item:
+        name: cm-knife
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        whitelist:
+          tags:
+          - Knife
+        startingItem: RMCM5Bayonet
+  - type: CMItemSlots
+    startingItem: RMCM5Bayonet
+  - type: Appearance
 
 # Black Boots
 - type: entity
@@ -24,14 +35,13 @@
   description: Standard issue combat boots for combat scenarios or combat situations. All combat, all the time.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Shoes/Marines/black.rsi
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/black.rsi
     layers:
     - state: icon
     - state: filled
       map: [ "enum.CMItemSlotsLayers.Filled" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Shoes/Marines/black.rsi
-  - type: Matchbox
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/black.rsi
   - type: ContainerContainer
     containers:
       item: !type:ContainerSlot
@@ -39,28 +49,20 @@
     slots:
       item:
         name: cm-knife
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
         whitelist:
           tags:
           - Knife
+  - type: Matchbox
   - type: CMHolster
   - type: CMItemSlots
   - type: UsableWhileDevoured
 
 - type: entity
-  parent: CMBootsBlack
+  parent: [RMCItemSlotM5Bayonet, CMBootsBlack]
   id: CMBootsBlackFilled
   suffix: Filled
-  components:
-  - type: ItemSlots
-    slots:
-      item:
-        name: cm-knife
-        whitelist:
-          tags:
-          - Knife
-        startingItem: RMCM5Bayonet
-  - type: CMItemSlots
-    startingItem: RMCM5Bayonet
 
 # Brown Boots
 - type: entity
@@ -69,17 +71,14 @@
   description: Standard issue combat boots for combat scenarios or combat situations. All combat, all the time. These are brown.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Shoes/Marines/brown.rsi
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/brown.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Shoes/Marines/brown.rsi
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/brown.rsi
 
 - type: entity
-  parent: CMBootsBrown
+  parent: [RMCItemSlotM5Bayonet, CMBootsBrown]
   id: CMBootsBrownFilled
   suffix: Filled
-  components:
-  - type: CMItemSlots
-    startingItem: RMCM5Bayonet
 
 # Jungle Boots
 - type: entity
@@ -89,14 +88,85 @@
   description: Don't go walkin' slow, the devil's on the loose.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Shoes/Marines/jungle.rsi
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/jungle.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Shoes/Marines/jungle.rsi
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/jungle.rsi
 
 - type: entity
-  parent: CMBootsJungle
+  parent: [RMCItemSlotM5Bayonet, CMBootsJungle]
   id: CMBootsJungleFilled
   suffix: Filled
+
+# Corporate
+- type: entity
+  parent: [RMCItemSlotM5Bayonet, CMBootsBlack]
+  id: RMCBootsCorporate
+  name: rugged boots
+  description: These synth-leather boots seem high quality when first worn, but quickly detoriate, especially in the environments the corporate security members these are issued to operate in. Still, better than nothing.
+
+
+# PMC 
+- type: entity
+  parent: CMBootsBlack
+  id: RMCBootsPMC
+  name: polished shoes
+  description: The height of fashion, but these look to be woven with protective fiber.
   components:
-  - type: CMItemSlots
-    startingItem: RMCM5Bayonet
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/jackboots.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/jackboots.rsi
+
+- type: entity
+  parent: [RMCItemSlotM5Bayonet, RMCBootsPMC]
+  id: RMCBootsPMCFilled
+  suffix: Filled
+
+# PMC Commando
+- type: entity
+  parent: RMCBootsPMC
+  id: RMCBootsPMCCommando
+  name: PMC commando boots
+  description: A pair of heavily armored, acid-resistant boots.
+
+- type: entity
+  parent: [RMCItemSlotM5Bayonet, RMCBootsPMCCommando]
+  id: RMCBootsPMCCommandoFilled
+  suffix: Filled
+
+# Van Bandolier
+- type: entity
+  parent: [RMCItemSlotM5Bayonet, RMCBootsPMC]
+  id: RMCBootsVanBandolier
+  name: hiking boots
+  description: Over stone, over ice, through sun and sand, mud and snow, into raging water and hungry bog, these will never let you down.
+
+# CBRN
+- type: entity
+  parent: [RMCItemSlotM5Bayonet, RMCBootsPMCCommando]
+  id: RMCBootsCBRN
+  name: M3 MOPP boots
+  description: M3 MOPP boots have been designed to protect the wearer from contact with any possible infection vectors or hazardous substances that may have contaminated the area of operations. This includes further enhancements in conjunction with the standard durability of M3 boots, reducing the probability of punctures or cuts as well as the effects of radiation.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/cbrn.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/cbrn.rsi
+
+
+# Royal Marines
+- type: entity
+  parent: CMBootsBlack
+  id: RMCBootsRoyal
+  name: L10 pattern combat boots
+  description: Standard issue combat boots for combat scenarios or combat situations. Used by the threa sun empires royal marines commando units.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/rmc.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/rmc.rsi
+
+- type: entity
+  parent: [RMCItemSlotM5Bayonet, RMCBootsRoyal]
+  id: RMCBootsRoyalFilled
+  suffix: Filled

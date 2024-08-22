@@ -16,6 +16,7 @@ public sealed class NightVisionOverlay : Overlay
 
     private readonly ContainerSystem _container;
     private readonly TransformSystem _transform;
+    private readonly EntityQuery<XenoComponent> _xenoQuery;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
@@ -27,6 +28,7 @@ public sealed class NightVisionOverlay : Overlay
 
         _container = _entity.System<ContainerSystem>();
         _transform = _entity.System<TransformSystem>();
+        _xenoQuery = _entity.GetEntityQuery<XenoComponent>();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -49,14 +51,20 @@ public sealed class NightVisionOverlay : Overlay
                 eye?.Position.MapId,
                 eyeRot,
                 nightVision.SeeThroughContainers,
-                visible.Priority));
+                visible.Priority,
+                visible.Transparency));
         }
 
         _entries.Sort(SortPriority);
 
         foreach (var entry in _entries)
         {
-            Render(entry.Ent, entry.Map, handle, entry.EyeRot, entry.NightVisionSeeThroughContainers);
+            Render(entry.Ent,
+                entry.Map,
+                handle,
+                entry.EyeRot,
+                entry.NightVisionSeeThroughContainers,
+                entry.Transparency);
         }
 
         handle.SetTransform(Matrix3x2.Identity);
@@ -71,20 +79,30 @@ public sealed class NightVisionOverlay : Overlay
         MapId? map,
         DrawingHandleWorld handle,
         Angle eyeRot,
-        bool seeThroughContainers)
+        bool seeThroughContainers,
+        float? transparency)
     {
         var (uid, sprite, xform) = ent;
         if (xform.MapID != map)
             return;
 
-        var seeThrough = seeThroughContainers && !_entity.HasComponent<XenoComponent>(uid);
-        if (!seeThrough && _container.IsEntityOrParentInContainer(uid))
+        var seeThrough = seeThroughContainers && !_xenoQuery.HasComp(uid);
+        if (!seeThrough && _container.IsEntityOrParentInContainer(uid, xform: xform))
             return;
 
-        var position = _transform.GetWorldPosition(xform);
-        var rotation = _transform.GetWorldRotation(xform);
+        var (position, rotation) = _transform.GetWorldPositionRotation(xform);
 
+        var colorCache = sprite.Color;
+        if (transparency != null)
+        {
+            var color = sprite.Color * Color.White.WithAlpha(transparency.Value);
+            sprite.Color = color;
+        }
         sprite.Render(handle, eyeRot, rotation, position: position);
+        if (transparency != null)
+        {
+            sprite.Color = colorCache;
+        }
     }
 }
 
@@ -93,4 +111,5 @@ public record struct NightVisionRenderEntry(
     MapId? Map,
     Angle EyeRot,
     bool NightVisionSeeThroughContainers,
-    int Priority);
+    int Priority,
+    float? Transparency);

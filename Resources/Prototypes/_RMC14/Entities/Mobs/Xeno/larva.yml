@@ -57,6 +57,9 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 3.7
     baseSprintSpeed: 6.7
+  - type: Speech
+    speechSounds: XenonidLarva
+
 # For surgeries/failed incubations
 - type: entity
   id: RMCXenoEmbryo

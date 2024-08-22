@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/c67c5213507a19e10e252ef2898d94354c0709bf/icons/obj/items/binoculars.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "binoculars_civ"
+    },
+    {
+      "name": "binoculars_laser_civ"
+    },
+    {
+      "name": "binoculars_range_civ"
+    },
+    {
+      "name": "designator_b"
+    },
+    {
+      "name": "designator_r"
+    },
+    {
+      "name": "designator_e"
+    },
+    {
+      "name": "d_designator_b"
+    },
+    {
+      "name": "d_designator_r"
+    },
+    {
+      "name": "d_designator_e"
+    },
+    {
+      "name": "las_r",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "las_b",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "laslock_r",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "laslock_b",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "binoculars"
+    },
+    {
+      "name": "s_binoculars"
+    },
+    {
+      "name": "d_binoculars"
+    },
+    {
+      "name": "u_binoculars"
+    },
+    {
+      "name": "c_binoculars"
+    },
+    {
+      "name": "rangefinder"
+    },
+    {
+      "name": "s_rangefinder"
+    },
+    {
+      "name": "d_rangefinder"
+    },
+    {
+      "name": "u_rangefinder"
+    },
+    {
+      "name": "c_rangefinder"
+    },
+    {
+      "name": "laser_cas"
+    },
+    {
+      "name": "laser_range"
+    },
+    {
+      "name": "laser_spotter"
+    },
+    {
+      "name": "spotter_overlay"
+    }
+  ]
+}

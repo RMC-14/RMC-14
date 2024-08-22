@@ -1,0 +1,25 @@
+- type: entity
+  parent: BaseStorageItem
+  id: RMCBriefcase
+  name: briefcase
+  description: It's made of AUTHENTIC faux-leather and has a price-tag still attached. Its owner must be a real professional.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/Briefcases/brown.rsi
+    state: icon
+  - type: Item
+    size: Large
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,17,1 # 16
+  - type: Tag
+    tags:
+    - Briefcase
+
+- type: entity
+  parent: RMCBriefcase
+  id: RMCBriefcaseStowAway
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/Briefcases/suit.rsi

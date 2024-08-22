@@ -29,7 +29,10 @@
   - type: ApcPowerReceiver
     needsPower: false # TODO RMC14
     powerLoad: 0
-  - type: ActivatableUIBlacklist
+  - type: RequiresSkill
+    skills:
+      RMCSkillMedical: 3
+  - type: InteractedBlacklist
     blacklist:
       components:
       - Xeno

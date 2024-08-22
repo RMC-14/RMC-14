@@ -75,6 +75,9 @@ namespace Content.Client.Input
             human.AddFunction(ContentKeyFunctions.OpenBackpack);
             human.AddFunction(ContentKeyFunctions.OpenBelt);
             human.AddFunction(ContentKeyFunctions.MouseMiddle);
+            human.AddFunction(ContentKeyFunctions.RotateObjectClockwise);
+            human.AddFunction(ContentKeyFunctions.RotateObjectCounterclockwise);
+            human.AddFunction(ContentKeyFunctions.FlipObject);
             human.AddFunction(ContentKeyFunctions.ArcadeUp);
             human.AddFunction(ContentKeyFunctions.ArcadeDown);
             human.AddFunction(ContentKeyFunctions.ArcadeLeft);
@@ -134,6 +137,7 @@ namespace Content.Client.Input
             human.AddFunction(CMKeyFunctions.RMCActivateAttachableStock);
             human.AddFunction(CMKeyFunctions.RMCActivateAttachableUnderbarrel);
             human.AddFunction(CMKeyFunctions.RMCFieldStripHeldItem);
+            human.AddFunction(CMKeyFunctions.RMCCycleFireMode);
             human.AddFunction(CMKeyFunctions.CMUniqueAction);
             human.AddFunction(CMKeyFunctions.CMHolsterPrimary);
             human.AddFunction(CMKeyFunctions.CMHolsterSecondary);
