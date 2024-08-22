@@ -172,6 +172,7 @@
   - type: TimedDespawn
     lifetime: 180
   - type: ActiveFlareSignal
+  - type: FlareSignal
   - type: PointLight
     color: "#64FA4B"
     radius: 6.0
