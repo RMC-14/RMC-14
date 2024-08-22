@@ -1,0 +1,5 @@
+﻿- type: rank
+  id: RMCRankJuniorExecutive
+  name: Junior Executive
+  shortenedName: Jr. Exec.
+  jobs: [CMLiaison]

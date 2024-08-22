@@ -2,33 +2,41 @@
   id: RMCRankGunnerySergeant
   name: Gunnery Sergeant
   shortenedName: GySGT
-  jobs: [CMSeniorEnlistedAdvisor, CMQuartermaster]
+  jobs:
+  - CMSeniorEnlistedAdvisor
+  - CMQuartermaster
 
 - type: rank
   id: RMCRankStaffSergeant
   name: Staff Sergeant
   shortenedName: SSGT
-  jobs: [CMMilitaryWarden, CMDropshipCrewChief]
+  jobs:
+  - CMSquadLeader
+  - CMMilitaryWarden
 
 - type: rank
   id: RMCRankSergeant
   name: Sergeant
   shortenedName: SGT
-  jobs: [CMSquadLeader, CMMilitaryPolice]
+  jobs:
+  - CMDropshipCrewChief
+  - CMMilitaryPolice
 
 - type: rank
   id: RMCRankCorporal
   name: Corporal
   shortenedName: CPL
-  jobs: [CMFireteamLeader]
+  jobs:
+  - CMFireteamLeader
+  - CMWeaponsSpecialist
+  - CMSmartGunOperator
 
 - type: rank
   id: RMCRankLanceCorporal
   name: Lance Corporal
   shortenedName: LCPL
   jobs:
-  - CMWeaponsSpecialist
-  - CMSmartGunOperator
+  - CMCombatTech
   - CMHospitalCorpsman
   - CMNurse
 
@@ -36,10 +44,4 @@
   id: RMCRankPrivateFirstClass
   name: Private First Class
   shortenedName: PFC
-  jobs: [CMCombatTech, CMCargoTech]
-
-- type: rank
-  id: RMCRankPrivate
-  name: Private
-  shortenedName: PVT
-  jobs: [CMRifleman]
+  jobs: [CMRifleman, CMCargoTech]
