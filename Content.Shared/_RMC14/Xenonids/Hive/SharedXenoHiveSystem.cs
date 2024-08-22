@@ -143,37 +143,4 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
         return hive.Comp.TierLimits.TryGetValue(tier, out value);
     }
-
-    public bool TryGetTrackers(Entity<HiveComponent?> ent,
-        ProtoId<AlertPrototype> alertProto,
-        [NotNullWhen(true)] out List<EntityUid>? trackers)
-    {
-        trackers = null;
-        if (!Resolve(ent, ref ent.Comp))
-            return false;
-
-        if (ent.Comp.Trackers.TryGetValue(alertProto, out var netTrackers))
-        {
-            trackers = GetEntityList(netTrackers);
-            return true;
-        }
-
-        return false;
-    }
-
-    public bool RemoveTracker(Entity<HiveComponent?> ent, ProtoId<AlertPrototype> alertProto, EntityUid xeno)
-    {
-        if (!Resolve(ent, ref ent.Comp))
-            return false;
-
-        if (!ent.Comp.Trackers.TryGetValue(alertProto, out var trackers))
-            return false;
-
-        trackers.Remove(GetNetEntity(xeno));
-        if (trackers.Count == 0)
-            ent.Comp.Trackers.Remove(alertProto);
-
-        return true;
-
-    }
 }

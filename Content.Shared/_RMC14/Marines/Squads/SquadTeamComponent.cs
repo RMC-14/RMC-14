@@ -22,7 +22,4 @@ public sealed partial class SquadTeamComponent : Component
 
     [DataField]
     public HashSet<EntityUid> Members = new();
-
-    [DataField]
-    public Dictionary<ProtoId<AlertPrototype>, List<NetEntity>> Trackers = [];
 }
