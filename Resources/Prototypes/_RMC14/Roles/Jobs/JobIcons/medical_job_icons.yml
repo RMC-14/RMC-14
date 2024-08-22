@@ -1,25 +1,25 @@
-- type: statusIcon
+- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconCMO
   icon:
     sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_cmo
 
-- type: statusIcon
+- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconDoctor
   icon:
     sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_doctor
 
-- type: statusIcon
+- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconNurse
   icon:
     sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_nurse
 
-- type: statusIcon
+- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconResearcher
   icon:

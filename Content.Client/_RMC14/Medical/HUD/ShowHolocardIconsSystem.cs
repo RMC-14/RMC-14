@@ -12,17 +12,10 @@ public sealed class ShowHolocardIconsSystem : EquipmentHudSystem<HolocardScanner
 {
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
-    [ValidatePrototypeId<StatusIconPrototype>]
-    private const string Urgent = "UrgentHolocardIcon";
-
-    [ValidatePrototypeId<StatusIconPrototype>]
-    private const string Emergency = "EmergencyHolocardIcon";
-
-    [ValidatePrototypeId<StatusIconPrototype>]
-    private const string Xeno = "XenoHolocardIcon";
-
-    [ValidatePrototypeId<StatusIconPrototype>]
-    private const string Permadead = "PermaHolocardIcon";
+    private static readonly ProtoId<HealthIconPrototype> Urgent = "UrgentHolocardIcon";
+    private static readonly ProtoId<HealthIconPrototype> Emergency = "EmergencyHolocardIcon";
+    private static readonly ProtoId<HealthIconPrototype> Xeno = "XenoHolocardIcon";
+    private static readonly ProtoId<HealthIconPrototype> Permadead = "PermaHolocardIcon";
 
     public override void Initialize()
     {

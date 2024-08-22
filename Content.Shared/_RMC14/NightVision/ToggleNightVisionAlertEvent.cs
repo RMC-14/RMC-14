@@ -3,7 +3,7 @@
 namespace Content.Shared._RMC14.NightVision;
 
 [DataDefinition]
-public sealed partial class ToggleNightVision : IAlertClick
+public sealed partial class ToggleNightVisionAlertEvent : BaseAlertEvent
 {
     public void AlertClicked(EntityUid player)
     {

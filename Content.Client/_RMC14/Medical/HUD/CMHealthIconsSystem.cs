@@ -13,26 +13,13 @@ public sealed class CMHealthIconsSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
-    [ValidatePrototypeId<StatusIconPrototype>]
-    private const string Healthy = "CMHealthIconHealthy";
-
-    [ValidatePrototypeId<StatusIconPrototype>]
-    private const string DeadDefib = "CMHealthIconDeadDefib";
-
-    [ValidatePrototypeId<StatusIconPrototype>]
-    private const string DeadClose = "CMHealthIconDeadClose";
-
-    [ValidatePrototypeId<StatusIconPrototype>]
-    private const string DeadAlmost = "CMHealthIconDeadClose";
-
-    [ValidatePrototypeId<StatusIconPrototype>]
-    private const string DeadDNR = "CMHealthIconDeadDNR";
-
-    [ValidatePrototypeId<StatusIconPrototype>]
-    private const string Dead = "CMHealthIconDead";
-
-    [ValidatePrototypeId<StatusIconPrototype>]
-    private const string HCDead = "CMHealthIconDead";
+    private static readonly ProtoId<HealthIconPrototype> Healthy = "CMHealthIconHealthy";
+    private static readonly ProtoId<HealthIconPrototype> DeadDefib = "CMHealthIconDeadDefib";
+    private static readonly ProtoId<HealthIconPrototype> DeadClose = "CMHealthIconDeadClose";
+    private static readonly ProtoId<HealthIconPrototype> DeadAlmost = "CMHealthIconDeadClose";
+    private static readonly ProtoId<HealthIconPrototype> DeadDNR = "CMHealthIconDeadDNR";
+    private static readonly ProtoId<HealthIconPrototype> Dead = "CMHealthIconDead";
+    private static readonly ProtoId<HealthIconPrototype> HCDead = "CMHealthIconDead";
 
     public StatusIconData GetDeadIcon()
     {
