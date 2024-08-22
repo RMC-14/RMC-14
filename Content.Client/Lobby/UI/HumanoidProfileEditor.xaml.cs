@@ -1497,12 +1497,12 @@ namespace Content.Client.Lobby.UI
             }
 
             var index = 0;
-            if (Profile.SquadPreference is { } priority)
+            if (Profile.SquadPreference is { } preference)
             {
                 var squads = new List<EntityPrototype>(_entManager.System<SquadSystem>().SquadPrototypes)
                     .Select(s => s.ID)
                     .ToList();
-                index = squads.IndexOf(priority.Id) + 1;
+                index = squads.IndexOf(preference.Id) + 1;
             }
 
             SquadPreferenceButton.SelectId(index);

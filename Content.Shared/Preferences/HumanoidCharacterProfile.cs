@@ -321,9 +321,9 @@ namespace Content.Shared.Preferences
             return new(this) { SpawnPriority = spawnPriority };
         }
 
-        public HumanoidCharacterProfile WithSquadPreference(EntProtoId<SquadTeamComponent>? squadPriority)
+        public HumanoidCharacterProfile WithSquadPreference(EntProtoId<SquadTeamComponent>? squadPreference)
         {
-            return new(this) { SquadPreference = squadPriority };
+            return new(this) { SquadPreference = squadPreference };
         }
 
         public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<ProtoId<JobPrototype>, JobPriority>> jobPriorities)
