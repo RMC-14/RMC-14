@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Bullets no longer hit mobs that are in crit, unless they are directly
-      clicked on while shooting.
-    type: Tweak
-  id: 103
-  time: '2024-05-11T05:42:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2094
-- author: DrSmugleaf
-  changes:
   - message: Xeno Drones can now evolve to Queen.
     type: Add
   id: 104
@@ -4366,5 +4358,12 @@
   id: 602
   time: '2024-08-22T00:34:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3784
+- author: Vermidia
+  changes:
+  - message: Fixed corrosive ccid on barricades not expiring after 45 seconds.
+    type: Fix
+  id: 603
+  time: '2024-08-22T00:43:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3772
 Name: RMC14
 Order: -1
