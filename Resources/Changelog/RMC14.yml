@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added the autolathe with cm specific recipes.
-    type: Add
-  id: 102
-  time: '2024-05-09T10:48:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2085
-- author: DrSmugleaf
-  changes:
   - message: Bullets no longer hit mobs that are in crit, unless they are directly
       clicked on while shooting.
     type: Tweak
@@ -4366,5 +4359,12 @@
   id: 601
   time: '2024-08-22T00:08:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3776
+- author: Tunguso4ka
+  changes:
+  - message: Signal Flare pack now has the correct name.
+    type: Fix
+  id: 602
+  time: '2024-08-22T00:34:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3784
 Name: RMC14
 Order: -1
