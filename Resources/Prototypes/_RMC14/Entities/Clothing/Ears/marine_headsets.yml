@@ -2,10 +2,7 @@
   parent: RMCHeadsetShip
   id: RMCHeadsetMarine
   components:
-  - type: RMCTrackerAlertGranterClothing
-    alerts:
-      SquadTracker:
-        alertPrototype: SquadTracker
+  - type: GrantSquadLeaderTracker
 
 # Alpha
 - type: entity

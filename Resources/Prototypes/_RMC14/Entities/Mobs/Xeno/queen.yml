@@ -164,6 +164,3 @@
     exceptEffects:
     - Stun
     - KnockedDown
-  - type: RMCTrackerAlertTarget
-    alertPrototype: HiveTracker
-    priority: 1

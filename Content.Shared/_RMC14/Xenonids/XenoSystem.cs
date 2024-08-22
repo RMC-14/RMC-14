@@ -1,11 +1,9 @@
-﻿using System.Linq;
-using Content.Shared._RMC14.CCVar;
+﻿using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Vendors;
-using Content.Shared._RMC14.Waypoint;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -21,19 +19,16 @@ using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Lathe;
-using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
-using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Standing;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Xenonids;
 
@@ -51,9 +46,6 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
 
     private EntityQuery<AffectableByWeedsComponent> _affectableQuery;
     private EntityQuery<DamageableComponent> _damageableQuery;
@@ -86,7 +78,6 @@ public sealed class XenoSystem : EntitySystem
         _victimInfectedQuery = GetEntityQuery<VictimInfectedComponent>();
 
         SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit);
-        SubscribeLocalEvent<XenoComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<XenoComponent, GetAccessTagsEvent>(OnXenoGetAdditionalAccess);
         SubscribeLocalEvent<XenoComponent, NewXenoEvolvedEvent>(OnNewXenoEvolved);
         SubscribeLocalEvent<XenoComponent, XenoDevolvedEvent>(OnXenoDevolved);
@@ -97,25 +88,12 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, GetMeleeDamageEvent>(OnXenoGetMeleeDamage);
         SubscribeLocalEvent<XenoComponent, DamageModifyEvent>(OnXenoDamageModify);
         SubscribeLocalEvent<XenoComponent, RefreshMovementSpeedModifiersEvent>(OnXenoRefreshSpeed);
-        SubscribeLocalEvent<XenoComponent, GetTrackerAlertEntriesEvent>(OnGetTrackerAlertEntries);
-        SubscribeLocalEvent<XenoComponent, TrackerAlertVisibleAttemptEvent>(OnTrackerAlertVisibleAttempt);
 
         Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoSpeedMultiplier, UpdateXenoSpeedMultiplier, true);
 
         UpdatesAfter.Add(typeof(SharedXenoPheromonesSystem));
-    }
-
-    private void OnTrackerAlertVisibleAttempt(Entity<XenoComponent> ent, ref TrackerAlertVisibleAttemptEvent args)
-    {
-        // Has a queen
-        if (ent.Comp.Hive != null &&
-            _xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1,
-                entity => TryComp(entity, out XenoComponent? queenXeno) && queenXeno.Hive == ent.Comp.Hive))
-            return;
-
-        args.Cancelled = true;
     }
 
     private void OnXenoMapInit(Entity<XenoComponent> xeno, ref MapInitEvent args)
@@ -134,49 +112,6 @@ public sealed class XenoSystem : EntitySystem
 
         if (!MathHelper.CloseTo(_xenoSpeedMultiplier, 1))
             _movementSpeed.RefreshMovementSpeedModifiers(xeno);
-    }
-
-    private void OnMobStateChanged(Entity<XenoComponent> ent, ref MobStateChangedEvent args)
-    {
-        RaiseLocalEvent(ent, new XenoMobStateChangedEvent(args));
-
-        var hive = ent.Comp.Hive;
-        if (hive == null)
-            return;
-
-        switch (args.NewMobState)
-        {
-            case MobState.Dead:
-                RemoveTracker(ent.Owner, hive.Value);
-                break;
-            case MobState.Alive or MobState.Critical:
-                AddTracker(ent.Owner, hive.Value);
-                break;
-        }
-    }
-
-    private void RemoveTracker(Entity<RMCTrackerAlertTargetComponent?> xenoEnt, Entity<HiveComponent?> hiveEnt)
-    {
-        if (!Resolve(xenoEnt, ref xenoEnt.Comp) ||
-            !Resolve(hiveEnt, ref hiveEnt.Comp))
-            return;
-
-        var tracker = xenoEnt.Comp;
-
-        _hive.RemoveTracker(hiveEnt, tracker.AlertPrototype, xenoEnt);
-    }
-
-    private void AddTracker(Entity<RMCTrackerAlertTargetComponent?> xenoEnt, Entity<HiveComponent?> hiveEnt)
-    {
-        if (!Resolve(xenoEnt, ref xenoEnt.Comp) ||
-            !Resolve(hiveEnt, ref hiveEnt.Comp))
-            return;
-
-        var tracker = xenoEnt.Comp;
-        var hive = hiveEnt.Comp;
-
-        var trackers = hive.Trackers.GetOrNew(tracker.AlertPrototype);
-        trackers.Add(GetNetEntity(xenoEnt));
     }
 
     private void OnXenoGetAdditionalAccess(Entity<XenoComponent> xeno, ref GetAccessTagsEvent args)
@@ -274,22 +209,6 @@ public sealed class XenoSystem : EntitySystem
             _movementSpeed.RefreshMovementSpeedModifiers(uid, comp);
         }
     }
-    private void OnGetTrackerAlertEntries(Entity<XenoComponent> ent, ref GetTrackerAlertEntriesEvent args)
-    {
-        if (!TryComp(ent.Comp.Hive, out HiveComponent? hive))
-            return;
-
-        if (!_hive.TryGetTrackers((ent.Comp.Hive.Value, hive), args.AlertPrototype, out var trackers))
-        {
-            _popup.PopupPredicted("No trackers to open", ent, ent);
-            return;
-        }
-
-        var alertPrototype = args.AlertPrototype;
-
-        args.Entries.AddRange(trackers.Select(uid =>
-            new TrackerAlertEntry(GetNetEntity(uid), Name(uid), MetaData(uid).EntityPrototype?.ID, alertPrototype)));
-    }
 
     public void MakeXeno(Entity<XenoComponent?> xeno)
     {
@@ -300,10 +219,6 @@ public sealed class XenoSystem : EntitySystem
     {
         if (!Resolve(xeno, ref xeno.Comp))
             return;
-
-        var tracker = CompOrNull<RMCTrackerAlertTargetComponent>(xeno);
-        if (tracker != null && xeno.Comp.Hive != null)
-            RemoveTracker((xeno, tracker), xeno.Comp.Hive.Value);
 
         if (hive == null)
         {
@@ -317,9 +232,6 @@ public sealed class XenoSystem : EntitySystem
             return;
 
         xeno.Comp.Hive = hive;
-        if (tracker != null)
-            AddTracker((xeno, tracker), (hiveEnt, hive));
-
         Dirty(xeno, xeno.Comp);
 
         _nightVision.SetSeeThroughContainers(xeno.Owner, hiveEnt.Comp.SeeThroughContainers);

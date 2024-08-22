@@ -23,8 +23,8 @@
   - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
     state: trackon-southwest
   name: Xenonid Tracker
-  description: Tracks the Queen or other xenonid.
-  onClick: !type:SelectTrackerAlertTarget  { }
+  description: Tracks the Queen.
+#  clickEvent: !type:SelectTrackerAlertEvent
   minSeverity: 0
   maxSeverity: 10
 
@@ -54,7 +54,7 @@
     state: trackon-southwest
   name: Resin Marker Tracker
   description: Tracks a Resin Marker placed by the Queen or a Hive Leader.
-  onClick: !type:SelectTrackerAlertTarget  { }
+#  clickEvent: !type:SelectTrackerAlertEvent
   minSeverity: 0
   maxSeverity: 10
 
@@ -83,7 +83,7 @@
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
     state: trackon-southwest
   name: Marine Squad Tracker
-  description: Tracks the Squad Leader or Fireteam Leader.
-  onClick: !type:SelectTrackerAlertTarget  { }
+  description: Tracks the Squad Leader.
+#  clickEvent: !type:SelectTrackerAlertEvent
   minSeverity: 0
   maxSeverity: 10
