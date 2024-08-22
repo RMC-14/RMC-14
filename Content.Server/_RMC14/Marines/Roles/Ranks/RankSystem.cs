@@ -28,18 +28,6 @@ public sealed class RankSystem : SharedRankSystem
         args.Name = name;
     }
 
-    public string? GetSpeakerRankName(EntityUid uid)
-    {
-        var rank = GetRank(uid);
-        if (rank == null)
-            return null;
-
-        var shortRank = rank.ShortenedName;
-        var finalName = shortRank + " " + Name(uid);
-
-        return finalName;
-    }
-
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
         var uid = ev.Mob;
@@ -63,6 +51,10 @@ public sealed class RankSystem : SharedRankSystem
                     {
                         SetRank(idCardEntity, rankPrototype);
                         SetRank(uid, rankPrototype);
+
+                        var rank = GetSpeakerFullRankName(uid) ?? string.Empty;
+                        _idCardSystem.TryChangeFullName(idCardEntity, rank);
+
                         break;
                     }
                 }

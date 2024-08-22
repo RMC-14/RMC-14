@@ -184,11 +184,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         SoundSpecifier? sound = null
         )
     {
-        var rank = string.Empty;
-        var rankProto = _rankSystem.GetRank(sender);
-
-        if (rankProto != null)
-            rank = rankProto.Name;
+        var rank = _rankSystem.GetSpeakerFullRankName(sender) ?? string.Empty;
 
         author ??= Loc.GetString("rmc-announcement-author"); // Get "Command" fluent string if author==null
         var name = Name(sender);

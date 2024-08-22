@@ -67,4 +67,28 @@ public abstract class SharedRankSystem : EntitySystem
 
         return null;
     }
+
+    public string? GetSpeakerRankName(EntityUid uid)
+    {
+        var rank = GetRank(uid);
+        if (rank == null)
+            return null;
+
+        var shortRank = rank.ShortenedName;
+        var finalName = shortRank + " " + Name(uid);
+
+        return finalName;
+    }
+
+    public string? GetSpeakerFullRankName(EntityUid uid)
+    {
+        var rank = GetRank(uid);
+        if (rank == null)
+            return null;
+
+        var rankName = rank.Name;
+        var finalName = rankName + " " + Name(uid);
+
+        return finalName;
+    }
 }
