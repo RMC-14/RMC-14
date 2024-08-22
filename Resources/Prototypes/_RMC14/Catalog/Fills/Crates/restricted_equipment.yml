@@ -1,7 +1,7 @@
 - type: entity
   id: RMCCrateRestrictedEquipmentArmorM4
   parent: RMCCrateWeldable
-  name: M4 pattern marine armor crate
+  name: M4 pattern marine armor crate (x1 helmet, x1 armor)
   components:
   - type: StorageFill
     contents:
@@ -11,7 +11,7 @@
 - type: entity
   id: RMCCrateRestrictedEquipmentArmorB12
   parent: RMCCrateWeldable
-  name: B12 pattern marine armor crate.
+  name: B12 pattern marine armor crate (x1 helmet, x1 armor)
   components:
   - type: StorageFill
     contents:

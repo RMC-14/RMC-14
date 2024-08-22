@@ -184,9 +184,9 @@
         crate: RMCCrateResearchPhoron
     - name: Restricted Equipment
       entries:
-      - cost: 2100
+      - cost: 2000
         crate: RMCCrateRestrictedEquipmentArmorM4
-      - cost: 2100
+      - cost: 2000
         crate: RMCCrateRestrictedEquipmentArmorB12
     - name: Supplies
       entries:
