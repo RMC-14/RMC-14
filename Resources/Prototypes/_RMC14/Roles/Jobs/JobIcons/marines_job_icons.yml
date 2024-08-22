@@ -1,39 +1,39 @@
-- type: statusIcon
+- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconCombatTech
   icon:
     sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_engi
 
-- type: statusIcon
+- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconFireteamLeader
   icon:
     sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_tl
 
-- type: statusIcon
+- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconHospitalCorpsman
   icon:
     sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_med
 
-- type: statusIcon
+- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconSmartGunOperator
   icon:
     sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_gun
 
-- type: statusIcon
+- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconSquadLeader
   icon:
     sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_leader
 
-- type: statusIcon
+- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconWeaponsSpecialist
   icon:
