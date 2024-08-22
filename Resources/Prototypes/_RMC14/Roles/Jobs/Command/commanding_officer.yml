@@ -32,6 +32,9 @@
   - !type:RoleTimeRequirement
     role: CMJobExecutiveOfficer
     time: 108000 # 30 hours, minimum time in an explicitly commander position
+  - !type:DepartmentTimeRequirement
+    department: CMRequisitions
+    time: 18000 # 5 hours
   weight: 10
   startingGear: CMGearCommandingOfficer
   icon: "CMJobIconCommandingOfficer"
