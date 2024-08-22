@@ -51,10 +51,6 @@ public sealed class RankSystem : SharedRankSystem
                     {
                         SetRank(idCardEntity, rankPrototype);
                         SetRank(uid, rankPrototype);
-
-                        var rank = GetSpeakerFullRankName(uid) ?? string.Empty;
-                        _idCardSystem.TryChangeFullName(idCardEntity, rank);
-
                         break;
                     }
                 }

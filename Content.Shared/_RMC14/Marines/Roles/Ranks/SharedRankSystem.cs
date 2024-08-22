@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Clothing;
+using Content.Shared.Examine;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Marines.Roles.Ranks;
@@ -68,27 +69,36 @@ public abstract class SharedRankSystem : EntitySystem
         return null;
     }
 
-    public string? GetSpeakerRankName(EntityUid uid)
+    /// <summary>
+    ///     Gets the rank name of a given mob.
+    /// </summary>
+    public string? GetRankString(EntityUid uid, bool isShort = false)
     {
         var rank = GetRank(uid);
         if (rank == null)
             return null;
 
-        var shortRank = rank.ShortenedName;
-        var finalName = shortRank + " " + Name(uid);
+        if (isShort)
+            return rank.ShortenedName;
+        else
+            return rank.Name;
+    }
 
-        return finalName;
+    public string? GetSpeakerRankName(EntityUid uid)
+    {
+        var rank = GetRankString(uid, true);
+        if (rank == null)
+            return null;
+
+        return rank + " " + Name(uid);
     }
 
     public string? GetSpeakerFullRankName(EntityUid uid)
     {
-        var rank = GetRank(uid);
+        var rank = GetRankString(uid);
         if (rank == null)
             return null;
 
-        var rankName = rank.Name;
-        var finalName = rankName + " " + Name(uid);
-
-        return finalName;
+        return rank + " " + Name(uid);;
     }
 }
