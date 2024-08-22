@@ -112,7 +112,7 @@
     layers:
     - state: breaching_shell_1
   - type: CartridgeAmmo
-    count: 3
+    count: 4
     spread: 5
     proto: RMCPelletShotgunBreaching
     deleteOnSpawn: true

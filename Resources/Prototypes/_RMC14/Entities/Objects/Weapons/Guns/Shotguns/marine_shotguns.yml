@@ -150,9 +150,8 @@
     recoilWielded: 2
     recoilUnwielded: 4
     scatterWielded: 10
-    scatterUnwielded: 10
-    baseFireRate: 0.5
-    burstScatterMult: 5
+    scatterUnwielded: 30
+    baseFireRate: 0.625
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -163,8 +162,6 @@
         whitelist:
           tags:
           - RMCMagazineShotgunXM51
-  - type: GunDamageModifier
-    multiplier: 1.1
   - type: PumpAction
   - type: AttachableHolder
     slots:

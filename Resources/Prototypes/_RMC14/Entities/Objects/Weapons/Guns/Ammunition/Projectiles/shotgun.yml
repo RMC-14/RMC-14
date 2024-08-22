@@ -108,7 +108,7 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 25
-        Structural: 500
+        Blunt: 20
+        Structural: 375
   - type: TimedDespawn
     lifetime: 0.075
