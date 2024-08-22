@@ -40,9 +40,6 @@ public sealed class RankSystem : SharedRankSystem
         {
             var idCardEntity = idcard.Owner;
 
-            if (jobId == null)
-                return;
-
             foreach (var rankPrototype in _prototypes.EnumeratePrototypes<RankPrototype>())
             {
                 foreach (var job in rankPrototype.Jobs)
