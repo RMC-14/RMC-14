@@ -472,3 +472,137 @@
         amount: 2
       - id: RMCAttachmentM44MagnumSharpshooterStock
         amount: 2
+
+# Senior Enlisted Advisor
+#TODO Add Choices to SEA Vendors
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechSEA
+  name: ColMarTech SEA equipment rack
+  description: An automated rack hooked up to a colossal storage of Senior Enlisted Advisor standard-issue equipment.
+  suffix: SEA
+  components:
+  - type: AccessReader
+    access: [["CMAccessSEA"]]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+  - type: CMAutomatedVendor
+    sections: # TODO RMC14
+    - name: STANDARD EQUIPMENT
+      entries:
+      - id: CMJumpsuitBO
+        amount: 2
+      - id: RMCHeadsetSEA
+        amount: 2
+      - id: CMBootsBlackFilled
+        amount: 4
+      - id: CMBootsBrownFilled
+        amount: 4
+      - id: CMSatchel
+        amount: 2
+      - id: CMCoatOfficer
+        amount: 2
+    - name: GLOVES
+      entries:
+      - id: CMHandsBlackMarine
+        amount: 4
+      - id: CMHandsInsulated
+        amount: 4
+    - name: BELTS
+      entries:
+      - id: RMCBeltUtilityGeneral
+        amount: 2
+      - id: CMBeltMedicBagFilled
+        amount: 2
+      - id: CMBeltUtilityFilled
+        amount: 2
+      - id: CMBeltUtilityCombatFilled
+        amount: 2
+    - name: POUCHES
+      entries:
+      - id: RMCPouchAutoinjectorFill
+        amount: 2
+      - id: RMCPouchGeneralLarge
+        amount: 2
+      - id: RMCPouchMagazineLarge
+        amount: 2
+      - id: RMCPouchMagazinePistolLarge
+        amount: 2
+      - id: RMCPouchShotgun #Change to Large Shotgun Pouch when released
+        amount: 2
+        #Medical Kit Pouch
+      - id: RMCPouchPistol
+        amount: 2
+      - id: RMCPouchSling
+        amount: 2
+    - name: COMBAT ARMOR
+      entries:
+      - id: CMArmorM3VLBallistics
+        amount: 2
+      - id: CMArmorM3Light
+        amount: 2
+      - id: CMArmorM3Medium
+        amount: 2
+        #Bulletproof Vest
+        #USCM Service Jacket
+    - name: EYEWEAR
+      entries:
+        #Welding Goggles
+      - id: RMCGlassesMedicalHUDGlasses
+        amount: 2
+        #Prescription Medical HUD Glasses
+      - id: CMGlassesSecurity
+        amount: 2
+      - id: RMCGlassesMarineRpg
+        amount: 2
+        #Sunglasses
+    - name: ACCESSORIES
+      entries:
+      - id: CMWebbingBrown
+        amount: 2
+      - id: CMWebbingBlack
+        amount: 2
+        #Shoulder Holster
+      - id: CMWebbing
+        amount: 2
+      - id: CMWebbingPouch
+        amount: 2
+    - name: HEADWEAR
+      entries:
+      - id: CMHeadCapDrill
+        amount: 2
+      - id: ArmorHelmetM10
+        amount: 2
+
+
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechGunsSEA
+  name: ColMarTech SEA weapon rack
+  description: An automated gear rack for the Senior Enlisted Advisor
+  suffix: SEA
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
+  - type: AccessReader
+    access: [["CMAccessSEA"]]
+  - type: CMAutomatedVendor
+    sections:
+    - name: PERSONAL PRIMARY
+      entries:
+      - id: WeaponRifleM54C
+        amount: 2
+    - name: SPARE AMMUNITION
+      entries:
+      - id: CMMagazineRifleM54C
+        amount: 10
+    - name: GUN ATTACHMENTS
+      entries:
+      - id: RMCAttachmentLaserSight
+        amount: 2
+        #Red-Dot Sight
+      - id: RMCAttachmentS6ReflexSight
+        amount: 2
+      - id: RMCAttachmentRailFlashlight
+        amount: 2
