@@ -1,6 +1,7 @@
 ﻿- type: department
   parent: CMDepartmentBase
   id: CMRequisitions
+  name: department-CMRequisitions
   description: cm-department-Requisitions-description
   color: "#5F4519"
   roles:

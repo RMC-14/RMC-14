@@ -115,9 +115,9 @@
     enabled: false
   - type: PoweredLight
     bulb: Tube
-    damage:
-      types:
-        Heat: 2
+    unarmedHitShock: 0
+  - type: DamageOnInteract
+    damage: {}
   - type: ContainerContainer
     containers:
       light_bulb: !type:ContainerSlot
@@ -199,9 +199,9 @@
     enabled: true
   - type: PoweredLight
     hasLampOnSpawn: CMLightTube
-    damage:
-      types:
-        Heat: 2
+    unarmedHitShock: 0
+  - type: DamageOnInteract
+    damage: {}
   - type: AmbientOnPowered
   - type: AmbientSound
     volume: -15
@@ -348,9 +348,9 @@
     offset: "0, -0.5"
   - type: PoweredLight
     bulb: Bulb
-    damage:
-      types:
-        Heat: 2
+    unarmedHitShock: 0
+  - type: DamageOnInteract
+    damage: {}
   - type: ContainerContainer
     containers:
       light_bulb: !type:ContainerSlot
@@ -397,9 +397,9 @@
     enabled: true
   - type: PoweredLight
     hasLampOnSpawn: CMLightBulb
-    damage:
-      types:
-        Heat: 2
+    unarmedHitShock: 0
+  - type: DamageOnInteract
+    damage: {}
   - type: AmbientOnPowered
   - type: AmbientSound
     volume: -15

@@ -221,7 +221,8 @@
           Quantity: 12
   - type: Item
   - type: Food
-    trash: RMCFoodPacketKeplerCrispsTrash
+    trash:
+    - RMCFoodPacketKeplerCrispsTrash
 
 - type: entity
   parent: RMCFoodSnackBase
@@ -249,7 +250,8 @@
           Quantity: 8
   - type: Item
   - type: Food
-    trash: RMCFoodPacketKeplerCrispsFlamehotTrash
+    trash:
+    - RMCFoodPacketKeplerCrispsFlamehotTrash
 
 - type: entity
   parent: RMCFoodSnackBase
@@ -274,7 +276,8 @@
           Quantity: 1
   - type: Item
   - type: Food
-    trash: RMCFoodPacketPepperChipsTrash
+    trash:
+    - RMCFoodPacketPepperChipsTrash
 
 # Packaged Hot Foods
 
@@ -425,7 +428,8 @@
           Quantity: 1
   - type: Item
   - type: Food
-    trash: RMCFoodPacketEATBarTrash
+    trash:
+    - RMCFoodPacketEATBarTrash
 
 # Trash
 
