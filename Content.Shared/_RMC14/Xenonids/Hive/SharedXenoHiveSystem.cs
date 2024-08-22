@@ -1,8 +1,6 @@
-using System.Diagnostics.CodeAnalysis;
-using Content.Shared._RMC14.NightVision;
+﻿using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Evolution;
-using Content.Shared.Alert;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
@@ -38,7 +36,8 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         if (args.NewMobState != MobState.Dead)
             return;
 
-        if (TryComp(ent, out XenoComponent? xeno) && TryComp(xeno.Hive, out HiveComponent? hive))
+        if (TryComp(ent, out XenoComponent? xeno) &&
+            TryComp(xeno.Hive, out HiveComponent? hive))
         {
             hive.LastQueenDeath = _timing.CurTime;
             Dirty(xeno.Hive.Value, hive);

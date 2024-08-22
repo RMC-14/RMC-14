@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.NightVision;
 [DataDefinition]
 public sealed partial class ToggleNightVisionAlertEvent : BaseAlertEvent
 {
-    public void AlertClicked(EntityUid player, AlertPrototype alert)
+    public void AlertClicked(EntityUid player)
     {
         var entities = IoCManager.Resolve<IEntityManager>();
         entities.System<SharedNightVisionSystem>().Toggle(player);

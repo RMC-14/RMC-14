@@ -1,4 +1,4 @@
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Rules.CrashLand;
@@ -158,7 +158,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         SubscribeLocalEvent<MarineComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<MarineComponent, ComponentRemove>(OnCompRemove);
 
-        SubscribeLocalEvent<XenoComponent, XenoMobStateChangedEvent>(OnXenoMobStateChanged);
+        SubscribeLocalEvent<XenoComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<XenoComponent, ComponentRemove>(OnCompRemove);
 
         SubscribeLocalEvent<XenoEvolutionGranterComponent, MapInitEvent>(OnMapInit);
@@ -546,12 +546,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             break;
         }
         ResetSelectedPlanet();
-    }
-
-    private void OnXenoMobStateChanged(Entity<XenoComponent> ent, ref XenoMobStateChangedEvent args)
-    {
-        if (args.MobStateEvent.NewMobState == MobState.Dead)
-            CheckRoundShouldEnd();
     }
 
     private void OnMobStateChanged<T>(Entity<T> ent, ref MobStateChangedEvent args) where T : IComponent?
