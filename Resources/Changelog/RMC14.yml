@@ -4365,5 +4365,28 @@
   id: 604
   time: '2024-08-22T00:54:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3779
+- author: ShadowCommander, DrSmugleaf
+  changes:
+  - message: Added Squad Leader tracker for marines and xenonid Queen tracker for xenonids.
+    type: Add
+  id: 605
+  time: '2024-08-22T23:18:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3492
+- author: tsp01, DrSmugleaf
+  changes:
+  - message: Added squad preference in character customization.
+    type: Add
+  - message: Fixed squads being able to have multiple SLs, SGOs, or weapons specs if one cryos and another one late-joins.
+    type: Fix
+  id: 606
+  time: '2024-08-23T00:16:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3237
+- author: CaasGit
+  changes:
+  - message: Fax Machines now print local files using the CMPaper sprite.
+    type: Fix
+  id: 607
+  time: '2024-08-23T00:31:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3790
 Name: RMC14
 Order: -1
