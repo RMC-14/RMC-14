@@ -1,0 +1,1 @@
+﻿rmc-rank-component-examine = { CAPITALIZE(SUBJECT($user)) } { CONJUGATE-BE($user) } of the rank of { $rank }.

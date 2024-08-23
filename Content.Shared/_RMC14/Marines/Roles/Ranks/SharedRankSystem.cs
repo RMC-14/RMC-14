@@ -27,16 +27,21 @@ public abstract class SharedRankSystem : EntitySystem
 
     private void OnUnequip(Entity<RankComponent> ent, ref ClothingGotUnequippedEvent args)
     {
-        RemCompDeferred<RankComponent>(args.Wearer);
+        RemComp<RankComponent>(args.Wearer);
     }
 
     private void OnRankExamined(Entity<RankComponent> ent, ref ExaminedEvent args)
     {
         using (args.PushGroup(nameof(SharedRankSystem), 1))
         {
+            var user = ent.Owner;
             var rank = GetRankString(ent.Owner);
+
             if (rank != null)
-                args.PushMarkup(rank);
+            {
+                var finalString = Loc.GetString("rmc-rank-component-examine", ("user", user), ("rank", rank));
+                args.PushMarkup(finalString);
+            }
         }
     }
 
