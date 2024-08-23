@@ -7,6 +7,9 @@
   components:
   - type: HumanoidAppearance
     species: Felinid
+    hideLayersOnEquip:
+    - Hair
+    - HeadTop
   - type: Sprite
     drawdepth: Mobs
     scale: 0.8, 0.8

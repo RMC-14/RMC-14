@@ -1,0 +1,339 @@
+- type: entity
+  parent:
+  - RMCAreaProtectionMetal
+  - RMCAreaBase
+  id: RMCAreaSavannah
+  suffix: Savannah Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/savannah.rsi
+    state: savannah
+  - type: Area
+    powerNet: almayer
+    hijackEvacuationArea: false
+    hijackEvacuationWeight: 0
+    hijackEvacuationType: null
+
+# MAINTS
+
+- type: entity
+  parent:
+  - RMCAreaSavannah
+  id: RMCAreaSavannahMaints
+  abstract: true
+  name: Maints
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/savannah.rsi
+    state: other
+
+- type: entity
+  parent:
+  - RMCAreaSavannahMaints
+  id: RMCAreaSavannahMaintsStarboardBow
+  name: Starboard Bow Maints
+
+- type: entity
+  parent:
+  - RMCAreaSavannahMaints
+  id: RMCAreaSavannahMaintsPortBow
+  name: Port Bow Maints
+
+- type: entity
+  parent:
+  - RMCAreaSavannahMaints
+  id: RMCAreaSavannahMaintsStarboardBeam
+  name: Starboard Beam Maints
+
+- type: entity
+  parent:
+  - RMCAreaSavannahMaints
+  id: RMCAreaSavannahMaintsPortBeam
+  name: Port Beam Maints
+
+- type: entity
+  parent:
+  - RMCAreaSavannahMaints
+  id: RMCAreaSavannahMaintsStarboardQuarter
+  name: Starboard Quarter Maints
+
+- type: entity
+  parent:
+  - RMCAreaSavannahMaints
+  id: RMCAreaSavannahMaintsPortQuarter
+  name: Port Quarter Maints
+
+# Corridors
+
+- type: entity
+  parent:
+  - RMCAreaSavannah
+  id: RMCAreaSavannahCorridorAmidship
+  name: Amidship Corridor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/savannah.rsi
+    state: other
+
+# BRIG
+
+- type: entity
+  parent:
+  - RMCAreaSavannah
+  id: RMCAreaSavannahBrig
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/savannah.rsi
+    state: security
+
+- type: entity
+  parent:
+  - RMCAreaSavannahBrig
+  id: RMCAreaSavannahBrigBow
+  name: Brig Bow
+
+- type: entity
+  parent:
+  - RMCAreaSavannahBrig
+  id: RMCAreaSavannahBrigCorridors
+  name: Brig Corridors
+
+- type: entity
+  parent:
+  - RMCAreaSavannahBrig
+  id: RMCAreaSavannahBrigPrison
+  name: Brig Prison
+
+- type: entity
+  parent:
+  - RMCAreaSavannahBrig
+  id: RMCAreaSavannahBrigPrep
+  name: Brig Preparations
+
+- type: entity
+  parent:
+  - RMCAreaSavannahBrig
+  id: RMCAreaSavannahStarboardPointDefense
+  name: Starboard Point Defense
+
+- type: entity
+  parent:
+  - RMCAreaSavannahBrig
+  id: RMCAreaSavannahPortPointDefense
+  name: Port Point Defense
+
+# COMMAND
+
+- type: entity
+  parent:
+  - RMCAreaSavannah
+  id: RMCAreaSavannahCommand
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/savannah.rsi
+    state: command
+  - type: Area
+    minimapColor: '#2D3FA2EE'
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+
+- type: entity
+  parent:
+  - RMCAreaSavannahCommand
+  id: RMCAreaSavannahLiaison
+  name: Liaison Office
+
+- type: entity
+  parent:
+  - RMCAreaSavannahCommand
+  id: RMCAreaSavannahPilotBunks
+  name: Pilot Bunks
+
+- type: entity
+  parent:
+  - RMCAreaSavannahCommand
+  id: RMCAreaSavannahOfficerBunks
+  name: Officer Bunks
+
+- type: entity
+  parent:
+  - RMCAreaSavannahCommand
+  id: RMCAreaSavannahCommandingOfficer
+  name: Commanding Officer Bunks
+
+- type: entity
+  parent:
+  - RMCAreaSavannahCommand
+  id: RMCAreaSavannahCICCorridor
+  name: CIC Corridor
+
+- type: entity
+  parent:
+  - RMCAreaSavannahCommand
+  id: RMCAreaSavannahCIC
+  name: Combat Information Centre
+
+# MEDICAL
+
+- type: entity
+  parent:
+  - RMCAreaSavannah
+  id: RMCAreaSavannahMedical
+  name: Medical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/savannah.rsi
+    state: medical
+
+- type: entity
+  parent:
+  - RMCAreaSavannahMedical
+  id: RMCAreaSavannahMedicalResearch
+  name: Research
+
+# Auxiliary
+
+- type: entity
+  parent:
+  - RMCAreaSavannah
+  id: RMCAreaSavannahAuxiliary
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/savannah.rsi
+    state: requi
+
+- type: entity
+  parent:
+  - RMCAreaSavannahAuxiliary
+  id: RMCAreaSavannahHangar
+  name: Hangar
+
+- type: entity
+  parent:
+  - RMCAreaSavannahAuxiliary
+  id: RMCAreaSavannahPilotsRoom
+  name: Pilots Room
+
+- type: entity
+  parent:
+  - RMCAreaSavannahAuxiliary
+  id: RMCAreaSavannahRequisitions
+  name: Requisitions
+
+- type: entity
+  parent:
+  - RMCAreaSavannahAuxiliary
+  id: RMCAreaSavannahCanteen
+  name: Canteen
+
+# PREP
+
+- type: entity
+  parent:
+  - RMCAreaSavannah
+  id: RMCAreaSavannahAlphaBravo
+  name: Alpha-Bravo Preparation
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/savannah.rsi
+    state: alpha_bravo
+
+- type: entity
+  parent:
+  - RMCAreaSavannah
+  id: RMCAreaSavannahAlpha
+  name: Alpha Preparation
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/savannah.rsi
+    state: alpha
+
+- type: entity
+  parent:
+  - RMCAreaSavannah
+  id: RMCAreaSavannahBravo
+  name: Bravo Preparation
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/savannah.rsi
+    state: bravo
+
+- type: entity
+  parent:
+  - RMCAreaSavannah
+  id: RMCAreaSavannahCharlieDelta
+  name: Charlie-Delta Preparation
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/savannah.rsi
+    state: charlie_delta
+
+- type: entity
+  parent:
+  - RMCAreaSavannah
+  id: RMCAreaSavannahCharlie
+  name: Charlie Preparation
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/savannah.rsi
+    state: charlie
+
+- type: entity
+  parent:
+  - RMCAreaSavannah
+  id: RMCAreaSavannahDelta
+  name: Delta Preparation
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/savannah.rsi
+    state: delta
+
+# ENGI
+
+- type: entity
+  parent:
+  - RMCAreaSavannah
+  id: RMCAreaSavannahEngineering
+  name: Engineering
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/savannah.rsi
+    state: engineering
+  - type: Area
+    minimapColor: '#C19504E7'
+
+- type: entity
+  parent:
+  - RMCAreaSavannahEngineering
+  id: RMCAreaSavannahEngineeringGenerator
+  name: Engineering Generator
+
+- type: entity
+  parent:
+  - RMCAreaSavannahEngineering
+  id: RMCAreaSavannahAtmosStarboard
+  name: Starboard Atmos
+
+- type: entity
+  parent:
+  - RMCAreaSavannahEngineering
+  id: RMCAreaSavannahAtmosPort
+  name: Port Atmos
+
+# OTHER
+
+- type: entity
+  parent:
+  - RMCAreaSavannah
+  id: RMCAreaSavannahPressSEA
+  name: Press and SEA Offices
+
+- type: entity
+  parent:
+  - RMCAreaSavannah
+  id: RMCAreaSavannahBriefing
+  name: Briefing

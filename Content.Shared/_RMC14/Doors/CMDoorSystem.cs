@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Access.Systems;
 using Content.Shared.Directions;
@@ -70,11 +70,11 @@ public sealed class CMDoorSystem : EntitySystem
             return;
 
         button.Comp.LastUse = time;
-        var buttonName = Name(button);
+        var buttonName = button.Comp.Id ?? Name(button);
         var buttonTransform = Transform(button);
 
         var doors = EntityQueryEnumerator<RMCPodDoorComponent, DoorComponent, TransformComponent, MetaDataComponent>();
-        while (doors.MoveNext(out var door, out _, out var doorComp, out var doorTransform, out var metaData))
+        while (doors.MoveNext(out var door, out var podDoor, out var doorComp, out var doorTransform, out var metaData))
         {
             if (TerminatingOrDeleted(door))
                 continue;
@@ -82,7 +82,8 @@ public sealed class CMDoorSystem : EntitySystem
             if (buttonTransform.MapID != doorTransform.MapID)
                 continue;
 
-            if (buttonName != metaData.EntityName)
+            var id = podDoor.Id ?? metaData.EntityName;
+            if (buttonName != id)
                 continue;
 
             if (doorComp.State == DoorState.Open)
@@ -143,6 +144,7 @@ public sealed class CMDoorSystem : EntitySystem
 
                 var sound = door.OpenSound;
                 door.OpenSound = null;
+                door.Partial = false;
                 _doors.StartOpening(anchored.Value, door);
                 door.OpenSound = sound;
             }
@@ -172,6 +174,7 @@ public sealed class CMDoorSystem : EntitySystem
 
                 var sound = door.CloseSound;
                 door.CloseSound = null;
+                door.Partial = false;
                 _doors.StartClosing(anchored.Value, door);
                 door.CloseSound = sound;
             }

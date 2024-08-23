@@ -3,8 +3,9 @@
   id: RMCAreaLv624
   suffix: LV Area
   components:
-#  - type: Sprite
-#    state: lv-626
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: blank
   - type: Area
     buildSpecial: true
     powerNet: ground
@@ -51,8 +52,8 @@
 
 - type: entity
   parent:
-  - RMCAreaLv624GroundJungleSouthWestJungle
   - RMCAreaGlass
+  - RMCAreaLv624GroundJungleSouthWestJungle
   id: RMCAreaLv624GroundJungleSouthWestJungleCeiling
 
 - type: entity
@@ -67,8 +68,8 @@
 
 - type: entity
   parent:
-  - RMCAreaLv624GroundJungleWestJungle
   - RMCAreaGlass
+  - RMCAreaLv624GroundJungleWestJungle
   id: RMCAreaLv624GroundJungleWestJungleCeiling
 
 - type: entity
@@ -145,8 +146,8 @@
 
 - type: entity
   parent:
-  - RMCAreaLv624GroundBarrensWestBarrens
   - RMCAreaGlass
+  - RMCAreaLv624GroundBarrensWestBarrens
   id: RMCAreaLv624GroundBarrensWestBarrensCeiling
 
 - type: entity
@@ -159,8 +160,8 @@
 
 - type: entity
   parent:
-  - RMCAreaLv624GroundBarrensEastBarrens
   - RMCAreaGlass
+  - RMCAreaLv624GroundBarrensEastBarrens
   id: RMCAreaLv624GroundBarrensEastBarrensCeiling
 
 - type: entity
@@ -181,8 +182,8 @@
 
 - type: entity
   parent:
-  - RMCAreaLv624GroundBarrensNorthEastBarrens
   - RMCAreaGlass
+  - RMCAreaLv624GroundBarrensNorthEastBarrens
   id: RMCAreaLv624GroundBarrensNorthEastBarrensCeiling
 
 - type: entity
@@ -252,7 +253,7 @@
 - type: entity
   parent: RMCAreaLv624Ground
   id: RMCAreaLv624GroundColony
-  name: Weyland-Yutani Compound
+  name: We-Ya Compound
   components:
   - type: Sprite
     state: green
@@ -307,8 +308,8 @@
 
 - type: entity
   parent:
-  - RMCAreaLv624GroundColony
   - RMCAreaUndergroundMetalAllowCAS
+  - RMCAreaLv624GroundColony
   id: RMCAreaLv624GroundColonyTelecomm
   name: LZ1 Communications Relay
   components:
@@ -325,8 +326,8 @@
 
 - type: entity
   parent:
-  - RMCAreaLv624GroundColonyTelecomm
   - RMCAreaNone
+  - RMCAreaLv624GroundColonyTelecomm
   id: RMCAreaLv624GroundColonyTelecommSwLz1
   name: South-West LZ1 Communications Relay
 
@@ -337,22 +338,22 @@
 
 - type: entity
   parent:
-  - RMCAreaLv624GroundColonyTelecommTcommdome
   - RMCAreaNone
+  - RMCAreaLv624GroundColonyTelecommTcommdome
   id: RMCAreaLv624GroundColonyTelecommTcommdomeSouth
   name: South Telecomms Dome Communications Relay
 
 - type: entity
   parent:
-  - RMCAreaLv624GroundColonyTelecomm
   - RMCAreaNone
+  - RMCAreaLv624GroundColonyTelecomm
   id: RMCAreaLv624GroundColonyTelecommSwLz2
   name: South-West LZ2 Communications Relay
 
 - type: entity
   parent:
-  - RMCAreaLv624Ground
   - RMCAreaUndergroundBlockCAS
+  - RMCAreaLv624Ground
   id: RMCAreaLv624GroundCaves
   name: Caves
   components:
@@ -451,8 +452,8 @@
 
 - type: entity
   parent:
-  - RMCAreaLv624
   - RMCAreaProtectionMetal
+  - RMCAreaLv624
   id: RMCAreaLv624Lazarus
   name: Lazarus
   components:
@@ -461,8 +462,8 @@
 
 - type: entity
   parent:
-  - RMCAreaLv624Lazarus
   - RMCAreaNone
+  - RMCAreaLv624Lazarus
   id: RMCAreaLv624LazarusLandingZones
   components:
   - type: Area
@@ -488,8 +489,8 @@
 
 - type: entity
   parent:
-  - RMCAreaLv624Lazarus
   - RMCAreaGlass
+  - RMCAreaLv624Lazarus
   id: RMCAreaLv624LazarusYggdrasil
   name: Yggdrasil Tree
   components:
@@ -632,8 +633,8 @@
 
 - type: entity
   parent:
-  - RMCAreaLv624LazarusQuartstorage
   - RMCAreaNone
+  - RMCAreaLv624LazarusQuartstorage
   id: RMCAreaLv624LazarusQuartstorageOutdoors
   name: Cargo Bay Area
   components:
@@ -705,8 +706,8 @@
 
 - type: entity
   parent:
-  - RMCAreaLv624Lazarus
   - RMCAreaGlass
+  - RMCAreaLv624Lazarus
   id: RMCAreaLv624LazarusHydroponics
   name: Hydroponics
   components:

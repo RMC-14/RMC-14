@@ -41,6 +41,11 @@
             visible: false
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: InvulnerabilityTime
+    whitelist:
+      components:
+      - Xeno
+    hitsToInvulnerability: 3
 
 # Metal Barricade Tree
 - type: entity
@@ -302,6 +307,18 @@
       graph: BarricadeHandrailGraph
       node: nodeHandrail
 
+- type: entity
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeWireRail
+  components:
+    - type: Sprite
+      layers:
+      - state: wire_rail
+      - map: [ "acided" ]
+    - type: Construction
+      graph: BarricadeHandrailGraph
+      node: nodeHandrail
+
 # Metal Barricade Doors
 - type: entity
   parent: CMBarricadeBase
@@ -390,73 +407,3 @@
       - Xeno
   - type: UseDelay
     delay: 0.3
-
-- type: entity
-  parent: CMBarricadeMetalDoor
-  id: CMBarricadePlasteelDoor
-  name: folding plasteel barricade
-  description: A tough folding plasteel barricade stronger than its metal counterpart. Can be closed and opened at a moment's notice. Repair with a welder.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
-    layers:
-    - state: plasteel
-      map: ["enum.DoorVisualLayers.Base"]
-    - map: [ "acided" ]
-    drawdepth: WallTops
-  - type: Repairable
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 800
-      behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          CMSheetPlasteel1:
-            min: 4
-            max: 4
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: GenericVisualizer
-    visuals:
-      enum.BarbedWireVisualLayers.Wire:
-        barbWired:
-          UnWired: { state: plasteel_closed_wire, visible: false }
-          WiredClosed: { state: plasteel_wire, visible: true }
-          WiredOpen: { state: plasteel_closed_wire, visible: true }
-      enum.SprayAcidedVisuals.Acided:
-        acided:
-          True:
-            sprite: _RMC14/Effects/xeno_spray_acid.rsi
-            state: acid
-            visible: true
-          False:
-            visible: false
-  - type: Door
-    openSpriteState: plasteel_closed
-    closedSpriteState: plasteel
-    canPry: false
-    occludes: false
-    changeAirtight: false
-    bumpOpen: false
-    clickOpen: true
-    canCrush: false
-    closeTimeOne: 0
-    closeTimeTwo: 0
-    openTimeOne: 0
-    openTimeTwo: 0
-    openingAnimationTime: 0
-    closingAnimationTime: 0
-    # Allow you to close barricades while people are standing on them or multiple are wrenched in the same tile
-    performCollisionCheck: false
-    openSound:
-      path: /Audio/Items/ratchet.ogg
-    closeSound:
-      path: /Audio/Items/ratchet.ogg
-  - type: Construction
-    graph: BarricadePlasteelDoorGraph
-    node: nodeBarricadePlasteelDoor

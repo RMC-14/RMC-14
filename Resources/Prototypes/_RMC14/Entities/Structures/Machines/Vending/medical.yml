@@ -22,6 +22,8 @@
   name: We-Ya-Med Plus
   description: Medical pharmaceutical dispenser. Provided by We-Ya Pharmaceuticals Division(TM).
   components:
+  - type: Transform
+    anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/med.rsi
     layers:
@@ -145,6 +147,8 @@
   name: We-Ya-Chem Plus
   description: Medical chemistry dispenser. Provided by We-Ya Pharmaceuticals Division(TM).
   components:
+  - type: Transform
+    anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/med.rsi
     layers:
@@ -186,7 +190,7 @@
       - id: CMBeakerLarge
         name: Beaker, Large (120 units)
         amount: 3
-      - id: CMBoxPillCanister
+      - id: RMCBoxPillCanister
         amount: 2
       - id: Dropper # TODO RMC14 cm dropper
         amount: 3
@@ -200,6 +204,8 @@
   name: ColMarTech MarineMed
   description: Medical Pharmaceutical dispenser with basic medical supplies for marines.
   components:
+  - type: Transform
+    anchored: true
   - type: Fixtures
     fixtures:
       fix1:
@@ -231,9 +237,10 @@
       - Hypospray
   - type: CMAutomatedVendor
     sections:
-#    - name: Autoinjectors
-#      entries: [ ]
-    #- id: CMFirstAidInjector
+    - name: Autoinjectors
+      entries:
+      - id: CMTricordrazineAutoInjectorNoSkill
+        amount: 5
     #- id: CMPainStopAutoinjector
     - name: Devices
       entries:
@@ -241,7 +248,7 @@
         amount: 3
     - name: Field Supplies
       entries:
-      - id: CMFireExtinguisher # TODO RMC14 portable
+      - id: CMFireExtinguisherPortable
         amount: 5
       - id: CMOintment10
         amount: 7
@@ -249,6 +256,59 @@
         amount: 7
 #      - id: CMMedicalSplints5
 #        amount: 7
+
+- type: entity
+  parent: ColMarTechBase
+  id: RMCNanoMed
+  name: NanoMed
+  description: A wall-mounted medical equipment dispenser.
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.38,-0.5,0.35,0.5"
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        density: 200
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Machines/VendingMachines/nanomed.rsi
+    layers:
+    - state: "off"
+    - state: "normal-unshaded"
+  - type: CMSolutionRefiller
+    current: 250
+    max: 250
+    recharge: 125 # TODO RMC14 auto-restock items as well if round is >= 20 minutes in
+    rechargeCooldown: 4
+    reagents:
+    - CMTricordrazine
+#    - CMTramadol # TODO RMC14
+    whitelist:
+      components:
+      - Hypospray
+  - type: CMAutomatedVendor
+    sections:
+    - name: Supplies
+      entries:
+      # - id: CMPainStopAutoinjector
+      #   amount: 2
+      - id: CMTricordrazineAutoInjectorNoSkill
+        amount: 2
+      - id: CMGauze10
+        amount: 4
+      - id: CMOintment10
+        amount: 4
+      # - id: CMMedicalSplints5
+      #   amount: 4
+    - name: Utility
+      entries:
+      - id: CMHealthAnalyzer
+        amount: 3
 
 - type: entity
   parent: ColMarTechBase

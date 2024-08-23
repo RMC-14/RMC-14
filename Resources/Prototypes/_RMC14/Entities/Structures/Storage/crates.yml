@@ -1,7 +1,7 @@
 # Base
 - type: entity
   parent: BaseStructureDynamic
-  id: CMCrateBase
+  id: RMCCrateBase
   name: crate
   description: A rectangular metal crate.
   components:
@@ -91,7 +91,7 @@
 
 - type: entity
   parent: BaseStructureDynamic
-  id: CMCrateLarge
+  id: RMCCrateLarge
   name: large crate
   description: A hefty wooden crate.
   components:
@@ -125,7 +125,6 @@
         - SmallMobMask
         layer:
         - MachineLayer
-  - type: EntityStorage
   - type: PlaceableSurface
     isPlaceable: false
   - type: Damageable
@@ -140,9 +139,6 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Appearance
-  - type: EntityStorageVisuals
-    stateDoorOpen: base
-    stateDoorClosed: closed
   - type: PaperLabel
     labelSlot:
       insertVerbText: Attach Label
@@ -152,24 +148,23 @@
         - Paper
   - type: ContainerContainer
     containers:
-      entity_storage: !type:Container
       paper_label: !type:ContainerSlot
-  - type: ItemSlots
   - type: StaticPrice
     price: 50
+  - type: ItemSlots
 
 
 # Weldable
 - type: entity
-  parent: CMCrateBase
-  id: CMCrateWeldable
+  parent: RMCCrateBase
+  id: RMCCrateWeldable
   components:
   - type: Weldable
   - type: ResistLocker
 
 - type: entity
-  parent: CMCrateWeldable
-  id: CMCrateAlpha
+  parent: RMCCrateWeldable
+  id: RMCCrateAlpha
   name: alpha squad crate
   description: A crate with alpha squad's symbol on it.
   components:
@@ -191,8 +186,8 @@
     sprite: _RMC14/Structures/Storage/Crates/alpha.rsi
 
 - type: entity
-  parent: CMCrateWeldable
-  id: CMCrateBravo
+  parent: RMCCrateWeldable
+  id: RMCCrateBravo
   name: bravo squad crate
   description: A crate with bravo squad's symbol on it.
   components:
@@ -214,8 +209,8 @@
     sprite: _RMC14/Structures/Storage/Crates/bravo.rsi
 
 - type: entity
-  parent: CMCrateWeldable
-  id: CMCrateCharlie
+  parent: RMCCrateWeldable
+  id: RMCCrateCharlie
   name: charlie squad crate
   description: A crate with charlie squad's symbol on it.
   components:
@@ -237,8 +232,8 @@
     sprite: _RMC14/Structures/Storage/Crates/charlie.rsi
 
 - type: entity
-  parent: CMCrateWeldable
-  id: CMCrateDelta
+  parent: RMCCrateWeldable
+  id: RMCCrateDelta
   name: delta squad crate
   description: A crate with delta squad's symbol on it.
   components:
@@ -260,8 +255,8 @@
     sprite: _RMC14/Structures/Storage/Crates/delta.rsi
 
 - type: entity
-  parent: CMCrateWeldable
-  id: CMCrateAmmo
+  parent: RMCCrateWeldable
+  id: RMCCrateAmmo
   name: ammunitions crate
   description: An ammunitions crate.
   components:
@@ -283,8 +278,8 @@
     sprite: _RMC14/Structures/Storage/Crates/ammo.rsi
 
 - type: entity
-  parent: CMCrateWeldable
-  id: CMCrateGreen
+  parent: RMCCrateWeldable
+  id: RMCCrateGreen
   name: green crate
   description: A standard green storage crate employed by the Marines. These things are so common, just about anything could be inside.
   components:
@@ -306,8 +301,8 @@
     sprite: _RMC14/Structures/Storage/Crates/green.rsi
 
 - type: entity
-  parent: CMCrateWeldable
-  id: CMCrateConstruction
+  parent: RMCCrateWeldable
+  id: RMCCrateConstruction
   name: construction crate
   description: A construction crate.
   components:
@@ -329,8 +324,8 @@
     sprite: _RMC14/Structures/Storage/Crates/construction.rsi
 
 - type: entity
-  parent: CMCrateWeldable
-  id: CMCrateExplosives
+  parent: RMCCrateWeldable
+  id: RMCCrateExplosives
   name: explosives crate
   description: An explosives crate.
   components:
@@ -352,8 +347,8 @@
     sprite: _RMC14/Structures/Storage/Crates/explosives.rsi
 
 - type: entity
-  parent: CMCrateWeldable
-  id: CMCrateFreezer
+  parent: RMCCrateWeldable
+  id: RMCCrateFreezer
   name: freezer crate
   description: A freezer crate.
   components:
@@ -375,8 +370,8 @@
     sprite: _RMC14/Structures/Storage/Crates/freezer.rsi
 
 - type: entity
-  parent: CMCrateWeldable
-  id: CMCrateHydro
+  parent: RMCCrateWeldable
+  id: RMCCrateHydro
   name: hydroponics crate
   description: All you need to destroy those pesky weeds and pests.
   components:
@@ -398,8 +393,8 @@
     sprite: _RMC14/Structures/Storage/Crates/hydro.rsi
 
 - type: entity
-  parent: CMCrateWeldable
-  id: CMCrateInternals
+  parent: RMCCrateWeldable
+  id: RMCCrateInternals
   name: internals crate
   description: An internals crate.
   components:
@@ -421,8 +416,8 @@
     sprite: _RMC14/Structures/Storage/Crates/oxygen.rsi
 
 - type: entity
-  parent: CMCrateWeldable
-  id: CMCratePlastic
+  parent: RMCCrateWeldable
+  id: RMCCratePlastic
   name: plastic crate
   description: A rectangular plastic crate.
   components:
@@ -444,8 +439,8 @@
     sprite: _RMC14/Structures/Storage/Crates/plastic.rsi
 
 - type: entity
-  parent: CMCrateWeldable
-  id: CMCrateRadiation
+  parent: RMCCrateWeldable
+  id: RMCCrateRadiation
   name: radioactive gear crate
   description: A crate with a radiation sign on it.
   components:
@@ -467,8 +462,8 @@
     sprite: _RMC14/Structures/Storage/Crates/radioactive.rsi
 
 - type: entity
-  parent: CMCrateWeldable
-  id: CMCrateScience
+  parent: RMCCrateWeldable
+  id: RMCCrateScience
   name: science crate
   description: A science crate.
   components:
@@ -490,8 +485,8 @@
     sprite: _RMC14/Structures/Storage/Crates/science.rsi
 
 - type: entity
-  parent: CMCrateWeldable
-  id: CMCrateSupply
+  parent: RMCCrateWeldable
+  id: RMCCrateSupply
   name: supply crate
   description: A supply crate.
   components:
@@ -513,8 +508,8 @@
     sprite: _RMC14/Structures/Storage/Crates/supply.rsi
 
 - type: entity
-  parent: CMCrateWeldable
-  id: CMCrateWeapons
+  parent: RMCCrateWeldable
+  id: RMCCrateWeapons
   name: weapons crate
   description: A weapons crate.
   components:
@@ -536,8 +531,8 @@
     sprite: _RMC14/Structures/Storage/Crates/weapons.rsi
 
 - type: entity
-  parent: CMCrateWeldable
-  id: CMCrateMedical
+  parent: RMCCrateWeldable
+  id: RMCCrateMedical
   name: medical crate
   description: A medical crate.
   components:
@@ -560,8 +555,8 @@
 
 # Secure
 - type: entity
-  parent: CMCrateWeldable
-  id: CMCrateSecure
+  parent: RMCCrateWeldable
+  id: RMCCrateSecure
   name: secure crate
   description: A secure crate.
   suffix: Secure
@@ -592,8 +587,8 @@
     access: [["CMAccessRequisitions"]]
 
 - type: entity
-  parent: CMCrateSecure
-  id: CMCrateSecureAmmo
+  parent: RMCCrateSecure
+  id: RMCCrateSecureAmmo
   name: secure ammunitions crate
   description: A secure ammunitions crate.
   components:
@@ -618,8 +613,8 @@
     sprite: _RMC14/Structures/Storage/Crates/secure_ammo.rsi
 
 - type: entity
-  parent: CMCrateSecure
-  id: CMCrateSecureExplosives
+  parent: RMCCrateSecure
+  id: RMCCrateSecureExplosives
   name: explosives crate
   description: An explosives crate.
   components:
@@ -644,14 +639,14 @@
     sprite: _RMC14/Structures/Storage/Crates/secure_explosives.rsi
 
 - type: entity
-  parent: CMCrateSecureAmmo
-  id: CMCrateSecureGear
+  parent: RMCCrateSecureAmmo
+  id: RMCCrateSecureGear
   name: gear crate
   description: A secure gear crate.
 
 - type: entity
-  parent: CMCrateSecure
-  id: CMCrateSecureHydro
+  parent: RMCCrateSecure
+  id: RMCCrateSecureHydro
   name: secure hydroponics crate
   description: A crate with a lock on it, painted in the scheme of the station's botanists.
   components:
@@ -676,7 +671,7 @@
     sprite: _RMC14/Structures/Storage/Crates/secure_hydro.rsi
 
 - type: entity
-  parent: CMCrateSecure
+  parent: RMCCrateSecure
   id: CMCrateSecureSurgery
   name: surgery crate
   description: A surgery crate.
@@ -704,8 +699,8 @@
     access: [["CMAccessRequisitions"],["CMAccessMedical"]]
 
 - type: entity
-  parent: CMCrateSecure
-  id: CMCrateSecureWeapons
+  parent: RMCCrateSecure
+  id: RMCCrateSecureWeapons
   name: weapons crate
   description: A secure weapons crate.
   components:
@@ -730,8 +725,8 @@
     sprite: _RMC14/Structures/Storage/Crates/secure_weapons.rsi
 
 - type: entity
-  parent: CMCrateSecure
-  id: CMCrateSecureWeYa
+  parent: RMCCrateSecure
+  id: RMCCrateSecureWeYa
   name: secure We-Ya crate
   description: A secure crate with a We-Ya insignia on it.
   components:
@@ -758,10 +753,29 @@
     access: [["CMAccessRequisitions"], ["CMAccessCorp"]]
 
 - type: entity
-  parent: CMCrateSecure
+  parent: RMCCrateSecure
   id: RMCCrateSecurePhoron
   name: phoron crate
   description: A phoron crate.
   components:
   - type: AccessReader
     access: [["CMAccessResearch"],["CMAccessEngineering"]]
+
+- type: entity
+  parent: RMCCrateWeldable
+  id: RMCCrateMinecart
+  name: minecart
+  description: Essentially a big metal bucket on wheels. This one has a modern plastic shroud.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/minecart.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/minecart.rsi

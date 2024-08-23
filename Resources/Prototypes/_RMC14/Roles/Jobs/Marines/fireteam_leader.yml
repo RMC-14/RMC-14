@@ -47,6 +47,9 @@
     id: CMDogtagFireteamLeader
     ears: CMHeadsetAlphaTeamLeader
 
+- type: playTimeTracker
+  id: CMJobFireteamLeader
+
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointFireteamLeader
@@ -60,5 +63,39 @@
       state: green
     - state: fireteam_leader
 
-- type: playTimeTracker
-  id: CMJobFireteamLeader
+- type: entity
+  parent: CMSpawnPointFireteamLeader
+  id: CMSpawnPointFireteamLeaderAlpha
+  suffix: Alpha
+  components:
+  - type: SquadSpawner
+    squad: SquadAlpha
+    role: CMFireteamLeader
+
+- type: entity
+  parent: CMSpawnPointFireteamLeader
+  id: CMSpawnPointFireteamLeaderBravo
+  suffix: Bravo
+  components:
+  - type: SquadSpawner
+    squad: SquadBravo
+    role: CMFireteamLeader
+
+- type: entity
+  parent: CMSpawnPointFireteamLeader
+  id: CMSpawnPointFireteamLeaderCharlie
+  suffix: Charlie
+  components:
+  - type: SquadSpawner
+    squad: SquadCharlie
+    role: CMFireteamLeader
+
+- type: entity
+  parent: CMSpawnPointFireteamLeader
+  id: CMSpawnPointFireteamLeaderDelta
+  suffix: Delta
+  components:
+  - type: SquadSpawner
+    squad: SquadDelta
+    role: CMFireteamLeader
+

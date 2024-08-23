@@ -28,7 +28,7 @@ cm-department-AuxiliarySupport-description = The Auxiliary support personnel are
 
 # other
 department-CMOther = Other
-cm-department-Other-Description = ""
+cm-department-Other-description = ""
 
 # survivor
 department-CMSurvivor = Survivor

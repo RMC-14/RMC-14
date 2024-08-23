@@ -111,26 +111,37 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
         _window.DestinationsContainer.DisposeAllChildren();
 
-        _destinations.Clear();
-        foreach (var destination in destinations.Destinations)
+        DropshipButton DestinationButton(string name, bool disabled, Action onPressed)
         {
             var button = new DropshipButton();
-            var name = destination.Name;
-            if (destination.Primary)
-                name += $" (Primary)";
 
             button.Text = name;
-            button.Disabled = destination.Occupied;
+            button.Disabled = disabled;
             button.BorderColor = Color.Transparent;
             button.BorderThickness = new Thickness(0);
             button.Button.ToggleMode = true;
             button.Button.OnPressed += _ =>
             {
-                SetCancelLaunchDisabled(false);
-                _selected = destination.Id;
-                ResetDestinationButtons();
                 button.Text = $"> {name}";
+                SetCancelLaunchDisabled(false);
+                onPressed();
+                ResetDestinationButtons();
             };
+
+            return button;
+        }
+
+        if (destinations.FlyBy is { } flyBy)
+            _window.DestinationsContainer.AddChild(DestinationButton("Flyby", false, () => _selected = flyBy));
+
+        _destinations.Clear();
+        foreach (var destination in destinations.Destinations)
+        {
+            var name = destination.Name;
+            if (destination.Primary)
+                name += " (Primary)";
+
+            var button = DestinationButton(name, destination.Occupied, () => _selected = destination.Id);
 
             _destinations[button] = name;
             _window.DestinationsContainer.AddChild(button);
