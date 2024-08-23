@@ -14,6 +14,7 @@ public abstract class SharedRankSystem : EntitySystem
 
         SubscribeLocalEvent<RankComponent, ClothingGotEquippedEvent>(OnEquip);
         SubscribeLocalEvent<RankComponent, ClothingGotUnequippedEvent>(OnUnequip);
+        SubscribeLocalEvent<RankComponent, ExaminedEvent>(OnRankExamined);
     }
 
     private void OnEquip(Entity<RankComponent> ent, ref ClothingGotEquippedEvent args)
@@ -27,6 +28,16 @@ public abstract class SharedRankSystem : EntitySystem
     private void OnUnequip(Entity<RankComponent> ent, ref ClothingGotUnequippedEvent args)
     {
         RemCompDeferred<RankComponent>(args.Wearer);
+    }
+
+    private void OnRankExamined(Entity<RankComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(SharedRankSystem), 1))
+        {
+            var rank = GetRankString(ent.Owner);
+            if (rank != null)
+                args.PushMarkup(rank);
+        }
     }
 
     /// <summary>
@@ -99,6 +110,6 @@ public abstract class SharedRankSystem : EntitySystem
         if (rank == null)
             return null;
 
-        return rank + " " + Name(uid);;
+        return rank + " " + Name(uid);
     }
 }

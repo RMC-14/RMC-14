@@ -1,5 +1,4 @@
-﻿using Content.Shared._RMC14.Marines.Roles.Ranks;
-using Content.Shared.Access.Components;
+﻿using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
@@ -14,7 +13,6 @@ public sealed class CMExamineSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly HealthExaminableSystem _healthExaminable = default!;
     [Dependency] private readonly IdExaminableSystem _idExaminable = default!;
-    [Dependency] private readonly SharedRankSystem _rankSystem = default!;
 
     public override void Initialize()
     {
@@ -36,10 +34,7 @@ public sealed class CMExamineSystem : EntitySystem
         using (args.PushGroup(nameof(CMExamineSystem), 1))
         {
             if (_idExaminable.GetInfo(ent) is { } info)
-            {
-                var finalInfo = _rankSystem.GetRankString(ent.Owner) + " " + info ?? info;
-                args.PushMarkup(finalInfo);
-            }
+                args.PushMarkup(info);
         }
     }
 
