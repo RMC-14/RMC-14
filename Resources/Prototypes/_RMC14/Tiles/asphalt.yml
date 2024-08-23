@@ -1,5 +1,18 @@
 # in this file: Asphalt(_, 1..17), Cement(1..20), CementSunBleached(1..20)
 
+# Asphalt
+- type: tile
+  parent: CMFloorSteel
+  id: RMCFloorAsphaltTile
+  name: tiles-rmc-asphalt
+  sprite: /Textures/_RMC14/Tiles/asphalt/tile.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: RMCFloorAsphaltSunBleached
+  name: tiles-rmc-asphalt
+  sprite: /Textures/_RMC14/Tiles/asphalt/sunbleached_asphalt.png
+
 # Asphalt Tiles
 - type: tile
   parent: CMFloorSteel

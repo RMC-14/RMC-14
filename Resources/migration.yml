@@ -134,7 +134,6 @@ DrinkGoldschlagerGlass: DrinkGildlagerGlass
 
 # 2024-01-07
 ClosetBase: ClosetSteelBase
-MonkeyCubeBox: VariantCubeBox
 
 # 2024-01-08
 SalvagePartsT4Spawner: SalvageLootSpawner
@@ -216,6 +215,10 @@ VehicleJanicartDestroyed: null
 # 2024-02-01
 YellowOxygenTank: OxygenTank
 YellowOxygenTankFilled: OxygenTankFilled
+
+# 2024-02-12
+FoodDonutBlumpkin: FoodDonutBluePumpkin
+FoodDonutJellyBlumpkin: FoodDonutJellyBluePumpkin
 
 # 2024-02-19
 Drone: null
@@ -389,7 +392,7 @@ ShrapnelProjectile: CMProjectileShrapnel
 CMAutoLathe: CMAutolathe
 
 # 2024-06-15
-ClothingOuterCoatInspector: ClothingOuterCoatDetectiveLoadout
+ClothingOuterCoatInspector: ClothingOuterCoatJensen
 
 # 2024-06-22
 CMSpawnPointSmartGunner: CMSpawnPointSmartGunOperator
@@ -518,6 +521,49 @@ IntercomAssesmbly: IntercomAssembly
 # 2024-07-1
 CMDispenserChem : RMCDispenserChem
 
+# 2024-07-7
+SignScience1: SignScience
+SignScience2: SignScience
+SignXenobio2: SignXenobio
+SignXenolab: SignXenobio
+SignToxins2: SignToxins
+SignMinerDock: SignShipDock
+SignChemistry1: SignChem
+SignChemistry2: SignChem
+SignCourt: SignLawyer
+SignAtmosMinsky: SignAtmos
+SignDrones: SignMaterials
+SignShield: null # what was this even for?
+SignHydro2: SignHydro1
+SignHydro3: SignHydro1
+
+# 2024-07-27
+LogicGate: LogicGateOr
+
+# 2024-08-08
+MaterialReclaimer: null
+MaterialReclaimerMachineCircuitboard: null
+
+# 2024-08-11
+FoodTacoBeef: FoodTacoShell
+FoodTacoChicken: FoodTacoShell
+FoodTacoFish: FoodTacoShell
+FoodTacoBeefSupreme: FoodTacoShell
+FoodTacoChickenSupreme: FoodTacoShell
+FoodTacoRat: FoodTacoShell
+
+FoodMeatHumanKebab: FoodKebabSkewer
+FoodMeatLizardtailKebab: FoodKebabSkewer
+FoodMeatRatKebab: FoodKebabSkewer
+FoodMeatRatdoubleKebab: FoodKebabSkewer
+FoodMeatSnakeKebab: FoodKebabSkewer
+FoodMeatHawaiianKebab: FoodKebabSkewer
+FoodMeatKebab: FoodKebabSkewer
+FoodMeatFiestaKebab: FoodKebabSkewer
+
+# 2024-08-19
+ClothingNeckShockCollar: ClothingBackpackElectropack
+
 # 2024-07-10
 CMLamp: RMCLamp
 
@@ -609,41 +655,41 @@ CMCrateBoxMagazineRifleM4SPRAP: RMCCrateBoxMagazineRifleM4SPRAP
 CMCrateBoxMagazineSMGM63: RMCCrateBoxMagazineSMGM63
 CMCrateBoxMagazineSMGM63AP: RMCCrateBoxMagazineSMGM63AP
 CMCrateBoxMagazinePistolM1984: RMCCrateBoxMagazinePistolM1984
-#CMCrateBoxMagazinePistolM1984AP: RMCCrateBoxMagazinePistolM1984AP    
-CMCrateBoxShellsShotgunSlugs: RMCCrateBoxShellsShotgunSlugs      
-CMCrateBoxShellsShotgunBuckshot: RMCCrateBoxShellsShotgunBuckshot      
+#CMCrateBoxMagazinePistolM1984AP: RMCCrateBoxMagazinePistolM1984AP
+CMCrateBoxShellsShotgunSlugs: RMCCrateBoxShellsShotgunSlugs
+CMCrateBoxShellsShotgunBuckshot: RMCCrateBoxShellsShotgunBuckshot
 CMCrateBoxShellsShotgunFlechette: RMCCrateBoxShellsShotgunFlechette
 CMCrateBoxMagazinePistolM77AP: RMCCrateBoxMagazinePistolM77AP
 CMCrateBoxMagazinePistolMK80: RMCCrateBoxMagazinePistolMK80
-CMCrateAttachmentSmartScope: RMCCrateAttachmentSmartScope     
-CMCrateAttachmentRailFlashlight: RMCCrateAttachmentRailFlashlight 
+CMCrateAttachmentSmartScope: RMCCrateAttachmentSmartScope
+CMCrateAttachmentRailFlashlight: RMCCrateAttachmentRailFlashlight
 CMCrateAttachmentRedDot: RMCCrateAttachmentRedDot
 CMCrateAttachmentTelescopicScope: RMCCrateAttachmentTelescopicScope
 CMCrateAttachmentMiniScope: RMCCrateAttachmentMiniScope
-CMCrateAttachmentMagneticHarness: RMCCrateAttachmentMagneticHarness     
+CMCrateAttachmentMagneticHarness: RMCCrateAttachmentMagneticHarness
 CMCrateAttachmentSuppressor: RMCCrateAttachmentSuppressor
-CMCrateAttachmentExtendedBarrel: RMCCrateAttachmentExtendedBarrel   
-CMCrateAttachmentCompensator: RMCCrateAttachmentCompensator 
-CMCrateAttachmentForegrip: RMCCrateAttachmentForegrip 
-CMCrateAttachmentGyro: RMCCrateAttachmentGyro 
+CMCrateAttachmentExtendedBarrel: RMCCrateAttachmentExtendedBarrel
+CMCrateAttachmentCompensator: RMCCrateAttachmentCompensator
+CMCrateAttachmentForegrip: RMCCrateAttachmentForegrip
+CMCrateAttachmentGyro: RMCCrateAttachmentGyro
 CMCrateAttachmentBipod: RMCCrateAttachmentBipod
 CMCrateAttachmentUnderbarrelShotgun: RMCCrateAttachmentUnderbarrelShotgun
 CMCrateAttachmentUnderbarrelExtinguisher: RMCCrateAttachmentUnderbarrelExtinguisher
 CMCrateAttachmentUnderbarrelFlamer: RMCCrateAttachmentUnderbarrelFlamer
 CMCrateAttachmentBurstfire: RMCCrateAttachmentBurstfire
 CMCrateAttachmentAllStocks: RMCCrateAttachmentAllStocks
-CMCrateAttachmentRevolverStock: RMCCrateAttachmentRevolverStock 
+CMCrateAttachmentRevolverStock: RMCCrateAttachmentRevolverStock
 CMCrateAttachmentRifleStock: RMCCrateAttachmentRifleStock
 CMCrateAttachmentShotgunStock: RMCCrateAttachmentShotgunStock
 CMCrateAttachmentSmgStock: RMCCrateAttachmentSmgStock
 CMCrateClothingLargePouches: RMCCrateClothingLargePouches
 CMCrateClothingMedicalPouches: RMCCrateClothingMedicalPouches
 CMCrateClothingWebbing: RMCCrateClothingWebbing
-CMCrateClothingOfficerOutfit: RMCCrateClothingOfficerOutfit  
+CMCrateClothingOfficerOutfit: RMCCrateClothingOfficerOutfit
 CMCrateEmptySandbags: RMCCrateEmptySandbags
 CMCrateSandbagsConstructionKit: RMCCrateSandbagsConstructionKit
 CMCrateMetalSheets: RMCCrateMetalSheets
-CMCratePlasteelSheets: RMCCratePlasteelSheets    
+CMCratePlasteelSheets: RMCCratePlasteelSheets
 CMCrateGlassSheets: RMCCrateGlassSheets
 #CMCrateWoodenPlanks: RMCCrateWoodenPlanks
 #CMCrateFoldingBarricades: RMCCrateFoldingBarricades
@@ -654,28 +700,28 @@ CMCrateMechanicalMaintenance: RMCCrateMechanicalMaintenance
 CMCrateReplacementLights: RMCCrateReplacementLights
 CMCratePacmanParts: RMCCratePacmanParts
 CMCrateSuperPacmanParts: RMCCrateSuperPacmanParts
-CMCrateFlashlights: RMCCrateFlashlights      
+CMCrateFlashlights: RMCCrateFlashlights
 CMCrateHighCapacityPowerCell: RMCCrateHighCapacityPowerCell
 CMCrateGrenadesHighExplosive: RMCCrateGrenadesHighExplosive
 CMCrateGrenadesFrag: RMCCrateGrenadesFrag
 CMCrateFoodDonuts: RMCCrateFoodDonuts
-CMCrateFoodMRE: RMCCrateFoodMRE 
+CMCrateFoodMRE: RMCCrateFoodMRE
 CMCrateFoodPizza: RMCCrateFoodPizza
 CMCrateFoodIngredients: RMCCrateFoodIngredients
-CMCrateMedicalSurgery: RMCCrateMedicalSurgery      
-CMCrateMedicalBodyBag: RMCCrateMedicalBodyBag      
+CMCrateMedicalSurgery: RMCCrateMedicalSurgery
+CMCrateMedicalBodyBag: RMCCrateMedicalBodyBag
 CMCrateMedicalStasisBag: RMCCrateMedicalStasisBag
 CMCrateMedicalFirstAid: RMCCrateMedicalFirstAid
-CMCrateMedicalFilled: RMCCrateMedicalFilled      
+CMCrateMedicalFilled: RMCCrateMedicalFilled
 CMCrateMedicalPill: RMCCrateMedicalPill
 CMCrateSupplyInternals: RMCCrateSupplyInternals
 CMCrateSupplyEvacuation: RMCCrateSupplyEvacuation
 CMCrateSuppliesBoxes: RMCCrateSuppliesBoxes
-CMCrateSupplyJanitor: RMCCrateSupplyJanitor   
-CMCrateSuppliesCrayons: RMCCrateSuppliesCrayons    
+CMCrateSupplyJanitor: RMCCrateSupplyJanitor
+CMCrateSuppliesCrayons: RMCCrateSuppliesCrayons
 CMCrateM54C: RMCCrateM54C
 CMCrateM54CE2: RMCCrateM54CE2
-CMCrateSU6: RMCCrateSU6     
+CMCrateSU6: RMCCrateSU6
 CMCrateMagazineM96SMixed: RMCCrateMagazineM96SMixed
 CMCrateMagazineM96SStandard: RMCCrateMagazineM96SStandard
 CMCrateMagazineM96SFlak: RMCCrateMagazineM96SFlak
