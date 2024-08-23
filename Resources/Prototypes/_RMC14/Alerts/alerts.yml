@@ -1,0 +1,86 @@
+- type: alert
+  id: HiveTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackoff
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-center
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-south
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-southeast
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-east
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-northeast
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-north
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-northwest
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-west
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-southwest
+  name: Xenonid Tracker
+  description: Tracks the Queen.
+#  clickEvent: !type:SelectTrackerAlertEvent
+  minSeverity: 0
+  maxSeverity: 10
+
+- type: alert
+  id: ResinMarkerTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackoff
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-center
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-south
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-southeast
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-east
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-northeast
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-north
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-northwest
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-west
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_tracker.rsi
+    state: trackon-southwest
+  name: Resin Marker Tracker
+  description: Tracks a Resin Marker placed by the Queen or a Hive Leader.
+#  clickEvent: !type:SelectTrackerAlertEvent
+  minSeverity: 0
+  maxSeverity: 10
+
+- type: alert
+  id: SquadTracker
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackoff
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-direct
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-south
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-southeast
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-east
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-northeast
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-north
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-northwest
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-west
+  - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
+    state: trackon-southwest
+  name: Marine Squad Tracker
+  description: Tracks the Squad Leader.
+#  clickEvent: !type:SelectTrackerAlertEvent
+  minSeverity: 0
+  maxSeverity: 10
