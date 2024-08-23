@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added gas mask to vendors
-    type: Add
-  id: 109
-  time: '2024-05-11T08:01:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2102
 - author: DrSmugleaf
   changes:
   - message: parasites and lesser drones now slowly die without weeds.
@@ -4376,5 +4369,13 @@
   id: 608
   time: '2024-08-23T02:04:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3799
+- author: DrSmugleaf
+  changes:
+  - message: Examining a dropship weapon attach point will now tell you what gun and
+      ammo it has loaded, and how many rounds it has left.
+    type: Add
+  id: 609
+  time: '2024-08-23T02:44:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3800
 Name: RMC14
 Order: -1
