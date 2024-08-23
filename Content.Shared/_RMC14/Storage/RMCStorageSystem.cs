@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory.Events;
@@ -75,7 +76,8 @@ public sealed class RMCStorageSystem : EntitySystem
             tries++;
 
             // TODO RMC14 make this error if this is a cm-specific storage
-            Log.Warning($"Storage {ToPrettyString(storage)} can't fit {ToPrettyString(args.Item)}");
+            if (CMPrototypeExtensions.FilterCM)
+                Log.Warning($"Storage {ToPrettyString(storage)} can't fit {ToPrettyString(args.Item)}");
 
             foreach (var shape in _item.GetItemShape((storage, args.Storage), (args.Item, args.Item)))
             {
