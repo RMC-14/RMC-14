@@ -1,0 +1,29 @@
+﻿<controls:RMCCameraWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Camera"
+    xmlns:vp="clr-namespace:Content.Client.Viewport"
+    Title="Ship Security Cameras">
+    <BoxContainer Orientation="Horizontal">
+        <BoxContainer Orientation="Vertical" VerticalExpand="True"
+                      MinWidth="300">
+            <LineEdit Name="SearchBar" Access="Public" PlaceHolder="Search for a camera"/>
+            <ScrollContainer HScrollEnabled="False" VScrollEnabled="True"
+                             HorizontalExpand="True" VerticalExpand="True">
+                <BoxContainer Name="CamerasContainer" Access="Public" Orientation="Vertical"
+                              HorizontalExpand="True" VerticalExpand="True" />
+            </ScrollContainer>
+        </BoxContainer>
+        <BoxContainer Orientation="Vertical" SizeFlagsStretchRatio="3"
+                      HorizontalExpand="True" VerticalExpand="True">
+            <BoxContainer Orientation="Horizontal" Margin="5">
+                <Label Name="CameraName" Access="Public" HorizontalExpand="True" />
+                <Button Name="PreviousCameraButton" Access="Public" StyleClasses="OpenBoth" />
+                <Button Name="NextCameraButton" Access="Public" StyleClasses="OpenBoth" />
+            </BoxContainer>
+            <Control HorizontalExpand="True" VerticalExpand="True" Margin="5">
+                <vp:ScalingViewport Name="Viewport" Access="Public" MouseFilter="Ignore"
+                                    MinSize="600 600" HorizontalExpand="True" VerticalExpand="True" />
+            </Control>
+        </BoxContainer>
+    </BoxContainer>
+</controls:RMCCameraWindow>

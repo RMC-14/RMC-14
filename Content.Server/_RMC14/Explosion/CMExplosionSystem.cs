@@ -1,10 +1,10 @@
 ﻿using Content.Server.Explosion.EntitySystems;
 using Content.Server.Popups;
-using Content.Server.Sticky.Events;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Voicelines;
 using Content.Shared.Humanoid;
 using Content.Shared.Popups;
+using Content.Shared.Sticky;
 using Robust.Server.Audio;
 using Robust.Shared.Player;
 

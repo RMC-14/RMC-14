@@ -22,7 +22,7 @@
     RMCFlashlight: 4
     ClothingHeadHatHardhatBlue: 4
     CMHandsInsulated: 4
-    ClothingBeltUtility: 4
+    CMBeltUtility: 4
     ClothingEyesGlassesMeson: 4
     ClothingHeadHatWelding: 4
     trayScanner: 4
@@ -101,7 +101,7 @@
     TimerTrigger: 4
     ProximitySensor: 4
     RemoteSignaller: 4
-    Bucket: 6
+    RMCBucket: 6
     CMStockPartMatterBin: 8
     CMStockPartManipulatorMicro: 8
     CMStockPartCapacitor: 8

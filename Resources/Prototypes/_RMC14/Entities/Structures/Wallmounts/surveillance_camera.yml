@@ -1,0 +1,85 @@
+﻿- type: entity
+  id: RMCSurveillanceCameraAlmayer
+  name: ship-grade camera
+  description: It's used to monitor rooms.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Clickable
+  - type: InteractionOutline
+  - type: WallMount
+  - type: ApcPowerReceiver
+    needsPower: false # TODO RMC14 power
+  - type: ExtensionCableReceiver
+  - type: Eye
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Wallmounts/camera.rsi
+    layers:
+    - map: [ "enum.SurveillanceCameraVisualsKey.Layer" ]
+      state: camera
+      cycle: true
+  - type: Appearance
+  - type: SurveillanceCameraVisuals
+    sprites:
+      Active: camera
+      Disabled: camera
+      InUse: camera1
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -8
+  - type: RMCCamera
+    id: RMCSurveillanceCameraAlmayer
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  parent: CMBaseStructure
+  id: RMCMonitorCameraAlmayer
+  name: ship security cameras
+  description: Used to access the various cameras on the station.
+  suffix: Almayer
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: security_cam
+    layers: []
+  - type: InteractionOutline
+  - type: ActivatableUI
+    key: enum.RMCCameraUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.RMCCameraUiKey.Key:
+        type: RMCCameraBui
+  - type: RMCCameraComputer
+    id: RMCSurveillanceCameraAlmayer

@@ -62,11 +62,11 @@
     #- id: CMFultonDeviceStack
     #  points: 5
     - name: Binoculars
-      entries: [ ]
+      entries:
     #- id: CMRangeFinder
     #  points: 3
-    #- id: CMLaserDesignator
-    #  points: 5
+      - id: RMCLaserDesignator
+        points: 5
     - name: Helmet Optics
       entries: [ ]
     #- id: CMWeldingVisor
@@ -99,8 +99,8 @@
         name: sandbags x25
         points: 10
         recommended: true
-    #- id: CMSignalFlarePack
-    #  points: 7
+      - id: RMCPackFlareCAS
+        points: 7
       - id: RMCPouchToolsFill
         points: 5
     #- id: CMWeldingGoggles
@@ -234,7 +234,7 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-    #- id: CMG8AGeneralUtilityPouch
+      - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
         recommended: true
     #- id: CMM276GeneralPistolHolsterRig
@@ -276,7 +276,7 @@
         recommended: true
       #- id: CMShoulderHolster
       - id: CMWebbing
-    #- id: CMDropPouch
+      - id: CMWebbingPouch
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -294,14 +294,15 @@
   - type: CMVendorBundle
     bundle:
     - RMCExplosiveBreachingCharge # TODO RMC14 plastic explosives
-    - CMPackFlare # TODO RMC14 signal flares when we have any use for damn signals
-    - RMCBinoculars # TODO RMC14 laser designator when see above
+    - RMCPackFlareCAS
+    - RMCLaserDesignator
     - CMFireExtinguisher
 
 - type: entity
   parent: RMCKitBase
   id: RMCKitRifleM4SPR
   name: M4SPR marksman kit
+  description: Contains a M45SPR rifle, a 4x telescopic scope, a suppressor, an extended barrel and 2 AP magazines.
   components:
   - type: Storage
     maxItemSize: Huge
@@ -320,6 +321,7 @@
   parent: RMCKitBase
   id: RMCKitCM54C
   name: M54C rifle kit
+  description: Contains a M54C rifle, an angled grip, a suppressor, an extended barrel and 2 AP magazines.
   components:
   - type: Storage
     maxItemSize: Huge
@@ -338,6 +340,7 @@
   parent: RMCKitBase
   id: RMCKitEngineering
   name: engineering supply kit
+  description: Contains a construction pouch with 50 steel, 30 plasteel and 15 barbed wire, and an electronics pouch with three high-capacity power cells.
   components:
   - type: Storage
     maxItemSize: Huge

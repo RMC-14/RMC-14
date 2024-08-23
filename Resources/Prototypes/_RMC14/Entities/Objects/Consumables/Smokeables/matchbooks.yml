@@ -6,7 +6,7 @@
   description: A small book of cheap paper matches. Good luck getting them to light. Made by Lucky Sloths, but you'll be anything but lucky when you burn your hand trying to light a match on this.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Smokeables/matchbook.rsi
+    sprite: _RMC14/Objects/Consumable/Smokeables/Matchboxes/matchbook.rsi
     layers:
     - state: mpacket
     - state: mpacket0
@@ -31,7 +31,7 @@
       visible: false
   - type: Item
     size: Tiny
-    sprite: _RMC14/Objects/Consumable/Smokeables/matchbook.rsi
+    sprite: _RMC14/Objects/Consumable/Smokeables/Matchboxes/matchbook.rsi
     heldPrefix: null
   - type: Storage
     grid:
@@ -68,9 +68,9 @@
   description: A small book of cheap paper matches. Good luck getting them to light. Made with generic brown paper.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Smokeables/brown_matchbook.rsi
+    sprite: _RMC14/Objects/Consumable/Smokeables/Matchboxes/brown_matchbook.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Smokeables/brown_matchbook.rsi
+    sprite: _RMC14/Objects/Consumable/Smokeables/Matchboxes/brown_matchbook.rsi
 
 - type: entity
   parent: CMMatchBook
@@ -79,9 +79,9 @@
   description: A small book of expensive paper matches. These ones light almost every time!
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Smokeables/brown_matchbook.rsi
+    sprite: _RMC14/Objects/Consumable/Smokeables/Matchboxes/executive_select_matchbook.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Smokeables/brown_matchbook.rsi
+    sprite: _RMC14/Objects/Consumable/Smokeables/Matchboxes/executive_select_matchbook.rsi
 
 - type: entity
   parent: CMMatchBook
@@ -90,9 +90,9 @@
   description: A small book of cheap paper matches. Good luck getting them to light.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Smokeables/brown_matchbook.rsi
+    sprite: _RMC14/Objects/Consumable/Smokeables/Matchboxes/electro_matchbook.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Smokeables/brown_matchbook.rsi
+    sprite: _RMC14/Objects/Consumable/Smokeables/Matchboxes/electro_matchbook.rsi
 
 - type: entity
   parent: CMMatchBook
@@ -101,6 +101,6 @@
   description: A small book of expensive paper matches. These ones light almost every time, or so the packaging claims.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Smokeables/brown_matchbook.rsi
+    sprite: _RMC14/Objects/Consumable/Smokeables/Matchboxes/we_ya_matchbook.rsi
   - type: Item
-    sprite: _RMC14/Objects/Consumable/Smokeables/brown_matchbook.rsi
+    sprite: _RMC14/Objects/Consumable/Smokeables/Matchboxes/we_ya_matchbook.rsi

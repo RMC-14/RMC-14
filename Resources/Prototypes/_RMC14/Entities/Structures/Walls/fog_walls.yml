@@ -1,9 +1,9 @@
 ﻿# TODO RMC14 make a central system to manage these instead of ticking them all separately
 - type: entity
-  id: CMFogWall
+  id: RMCFogWallPermanent
   name: dense fog
-  description: It looks way too dangerous to traverse. Best wait until it has cleared up.
-  suffix: 25 minutes
+  description: It looks way too dangerous to traverse.
+  suffix: Permanent
   placement:
     mode: SnapgridCenter
     snap:
@@ -30,13 +30,20 @@
         layer:
         - WallLayer
         density: 1000
-  - type: TimedDespawn
-    lifetime: 1500
   - type: Occluder
 
 - type: entity
-  parent: CMFogWall
-  id: CMFogWallShort
+  parent: RMCFogWallPermanent
+  id: RMCFogWall25
+  description: It looks way too dangerous to traverse. Best wait until it has cleared up.
+  suffix: 25 minutes
+  components:
+  - type: TimedDespawn
+    lifetime: 1500
+
+- type: entity
+  parent: RMCFogWall25
+  id: RMCFogWall15
   suffix: 15 minutes
   components:
   - type: TimedDespawn

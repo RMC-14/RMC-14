@@ -50,6 +50,9 @@
     ears: CMHeadsetAlphaEngineer
     belt: CMBeltUtilityCombatFilled
 
+- type: playTimeTracker
+  id: CMJobCombatTech
+
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointCombatTech
@@ -63,5 +66,39 @@
       state: green
     - state: combat_tech
 
-- type: playTimeTracker
-  id: CMJobCombatTech
+- type: entity
+  parent: CMSpawnPointCombatTech
+  id: CMSpawnPointCombatTechAlpha
+  suffix: Alpha
+  components:
+  - type: SquadSpawner
+    squad: SquadAlpha
+    role: CMCombatTech
+
+- type: entity
+  parent: CMSpawnPointCombatTech
+  id: CMSpawnPointCombatTechBravo
+  suffix: Bravo
+  components:
+  - type: SquadSpawner
+    squad: SquadBravo
+    role: CMCombatTech
+
+- type: entity
+  parent: CMSpawnPointCombatTech
+  id: CMSpawnPointCombatTechCharlie
+  suffix: Charlie
+  components:
+  - type: SquadSpawner
+    squad: SquadCharlie
+    role: CMCombatTech
+
+- type: entity
+  parent: CMSpawnPointCombatTech
+  id: CMSpawnPointCombatTechDelta
+  suffix: Delta
+  components:
+  - type: SquadSpawner
+    squad: SquadDelta
+    role: CMCombatTech
+

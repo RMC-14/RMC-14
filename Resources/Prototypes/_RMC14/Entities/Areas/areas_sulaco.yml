@@ -1,14 +1,18 @@
 ﻿- type: entity
   parent:
-  - RMCAreaBase
   - RMCAreaProtectionMetal
+  - RMCAreaBase
   id: RMCAreaShuttle
   suffix: Sulaco Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: blank
 
 - type: entity
   parent:
-  - RMCAreaShuttle
   - RMCAreaReinforcedMetal
+  - RMCAreaShuttle
   id: RMCAreaShuttleDrop1
   components:
   - type: Area
@@ -83,8 +87,8 @@
 
 - type: entity
   parent:
-  - RMCAreaShuttle
   - RMCAreaReinforcedMetal
+  - RMCAreaShuttle
   id: RMCAreaShuttleDrop2
   components:
   - type: Area

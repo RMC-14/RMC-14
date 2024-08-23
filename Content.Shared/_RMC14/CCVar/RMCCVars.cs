@@ -64,7 +64,7 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.auto_balance_min", 3f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCAutoBalanceMax =
-        CVarDef.Create("rmc.auto_balance_max", 6.75f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.auto_balance_max", 8f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCPatronLobbyMessageTimeSeconds =
         CVarDef.Create("rmc.patron_lobby_message_time_seconds", 30, CVar.REPLICATED | CVar.SERVER);
@@ -76,10 +76,10 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.discord_account_linking_message_link", "", CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCRequisitionsStartingBalance =
-        CVarDef.Create("rmc.requisitions_starting_balance", 50000, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.requisitions_starting_balance", 80000, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCRequisitionsBalanceGain =
-        CVarDef.Create("rmc.requisitions_balance_gain", 700, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.requisitions_balance_gain", 1500, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<string> RMCDiscordToken =
         CVarDef.Create("rmc.discord_token", "", CVar.SERVER | CVar.SERVERONLY | CVar.CONFIDENTIAL);
@@ -105,6 +105,15 @@ public sealed class RMCCVars : CVars
     public static readonly CVarDef<float> RMCLandingZonePrimaryAutoMinutes =
         CVarDef.Create("rmc.landing_zone_primary_auto_minutes", 25f, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCCorrosiveAcidTickDelaySeconds =
+        CVarDef.Create("rmc.corrosive_acid_tick_delay_seconds", 10, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<string> RMCCorrosiveAcidDamageType =
+        CVarDef.Create("rmc.corrosive_acid_damage_type", "Heat", CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCCorrosiveAcidDamageTimeSeconds =
+        CVarDef.Create("rmc.corrosive_acid_damage_time_seconds", 45, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<int> RMCTailStabMaxTargets =
         CVarDef.Create("rmc.tail_stab_max_targets", 1, CVar.REPLICATED | CVar.SERVER);
 
@@ -125,4 +134,34 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<string> RMCAdminFaxAreaMap =
         CVarDef.Create("rmc.admin_fax_area_map", "Maps/_RMC14/admin_fax.yml", CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCBioscanInitialDelaySeconds =
+        CVarDef.Create("rmc.bioscan_initial_delay_seconds", 300, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCBioscanCheckDelaySeconds =
+        CVarDef.Create("rmc.bioscan_check_delay_seconds", 60, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCBioscanMinimumCooldownSeconds =
+        CVarDef.Create("rmc.bioscan_minimum_cooldown_seconds", 300, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCBioscanBaseCooldownSeconds =
+        CVarDef.Create("rmc.bioscan_base_cooldown_seconds", 1800, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCBioscanVariance =
+        CVarDef.Create("rmc.bioscan_variance", 2, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCDropshipFabricatorStartingPoints =
+        CVarDef.Create("rmc.dropship_fabricator_starting_points", 20000, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCDropshipFabricatorGainEverySeconds =
+        CVarDef.Create("rmc.dropship_fabricator_gain_every_seconds", 3.33333f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCDropshipCASDebug =
+        CVarDef.Create("rmc.dropship_cas_debug", false, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCDropshipFlyByTimeSeconds =
+        CVarDef.Create("rmc.dropship_fly_by_time_seconds", 100, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCDropshipHijackTravelTimeSeconds =
+        CVarDef.Create("rmc.dropship_hijack_travel_time_seconds", 180, CVar.REPLICATED | CVar.SERVER);
 }

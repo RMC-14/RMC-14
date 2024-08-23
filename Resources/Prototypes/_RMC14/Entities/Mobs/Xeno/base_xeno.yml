@@ -227,6 +227,7 @@
     - enum.VendingMachineUiKey.Key
     - enum.PaperUiKey.Key
   - type: ActiveInputMover
+  - type: HiveTracker
 
 - type: entity
   abstract: true
@@ -329,6 +330,13 @@
     damage: #per second, scales with number of fire 'stacks'
       types:
         Heat: 3
+
+- type: entity
+  abstract: true
+  id: RMCXenoSpeechSounds
+  components:
+  - type: Speech
+    speechSounds: Xenonid
 
 - type: speechVerb
   id: Xeno

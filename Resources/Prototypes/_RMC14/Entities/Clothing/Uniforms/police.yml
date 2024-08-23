@@ -7,8 +7,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/standard.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/standard.rsi
 
 - type: entity
   parent: CMJumpsuitMP
@@ -16,19 +14,15 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/black.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/black.rsi
 
 # Military Warden
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCMarineUniformBase
   id: CMJumpsuitWarden
   name: military warden uniform
   description: Standard-issue Military Warden uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Warden/standard.rsi
-  - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Warden/standard.rsi
 
 - type: entity
@@ -39,8 +33,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Warden/blue.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/Warden/blue.rsi
 
 - type: entity
   parent: CMJumpsuitWarden
@@ -49,8 +41,6 @@
   description: A standard-issue warden uniform.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Warden/red.rsi
-  - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Warden/red.rsi
 
 - type: entity
@@ -61,8 +51,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Warden/corporate.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/Warden/corporate.rsi
 
 - type: entity
   parent: CMJumpsuitWarden
@@ -71,8 +59,6 @@
   description: A navy variant of warden uniform.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Warden/navy.rsi
-  - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Warden/navy.rsi
 
 - type: entity
@@ -83,18 +69,14 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Warden/tan.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/Warden/tan.rsi
 
 # Warrant Officer / CMP
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCMarineUniformBase
   id: CMJumpsuitWO
   name: chief MP uniform
   description: A uniform typically worn by a Chief MP of the UNMC. It has shards of light Kevlar to help protect against stabbing weapons, bullets, and shrapnel from explosions. This uniform includes a small EMF distributor to help nullify energy-based weapon fire, along with a hazmat chemical filter woven throughout the material to ward off biological and radiation hazards.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/wo.rsi
-  - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/wo.rsi
 

@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Hands;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -17,6 +18,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StepTrigger.Components;
 using Content.Shared.StepTrigger.Systems;
+using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -39,14 +41,17 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly CMHandsSystem _rmcHands = default!;
 
-    private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
+	private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
+	private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
 
     private EntityQuery<StepTriggerComponent> _stepTriggerQuery;
 
@@ -169,7 +174,7 @@ public sealed class XenoEggSystem : EntitySystem
         if (!args.CanReach)
         {
             if (_timing.IsFirstTimePredicted)
-                _popup.PopupCoordinates("You can't reach there!", args.ClickLocation, Filter.Local(), true);
+                _popup.PopupCoordinates(Loc.GetString("cm-xeno-cant-reach-there"), args.ClickLocation, Filter.Local(), true);
 
             return;
         }
@@ -207,7 +212,7 @@ public sealed class XenoEggSystem : EntitySystem
             }
 
             if (HasComp<XenoConstructComponent>(uid) ||
-                _tags.HasTag(uid.Value, StructureTag))
+                _tags.HasAnyTag(uid.Value, StructureTag, AirlockTag))
             {
                 var msg = Loc.GetString("cm-xeno-egg-blocked");
                 _popup.PopupClient(msg, uid.Value, user, PopupType.SmallCaution);
@@ -248,7 +253,7 @@ public sealed class XenoEggSystem : EntitySystem
     private void OnXenoEggInteractUsing(Entity<XenoEggComponent> egg, ref InteractUsingEvent args)
     {
         // Doesn't check hive or if a xeno is doing it
-        if (!HasComp<XenoParasiteComponent>(args.Used))
+        if (!HasComp<XenoParasiteComponent>(args.Used) || !_rmcHands.IsPickupByAllowed(args.Used, args.User))
             return;
 
         args.Handled = true;
@@ -431,6 +436,7 @@ public sealed class XenoEggSystem : EntitySystem
         }
 
         _parasite.Infect((spawned.Value, parasite), tripper, force: true);
+        _stun.TryParalyze(tripper, egg.Comp.KnockdownTime, true);
         return true;
     }
 

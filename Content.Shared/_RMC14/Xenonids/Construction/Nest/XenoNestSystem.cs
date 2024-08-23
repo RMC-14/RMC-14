@@ -7,6 +7,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
+using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
@@ -287,7 +288,7 @@ public sealed class XenoNestSystem : EntitySystem
 
     private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
     {
-        if (!HasComp<XenoComponent>(user) ||
+        if (!HasComp<XenoComponent>(user) || !HasComp<HandsComponent>(user) ||
             !CanNestPopup(user, victim, surface, out _))
         {
             return;

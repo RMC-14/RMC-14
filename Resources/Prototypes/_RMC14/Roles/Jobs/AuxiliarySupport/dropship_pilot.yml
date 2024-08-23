@@ -29,6 +29,8 @@
         RMCSkillPowerLoader: 2
         RMCSkillSurgery: 1
     - type: MarineOrders
+    - type: CMVendorUser
+      points: 45
 
 - type: startingGear
   id: CMGearPilotDropship

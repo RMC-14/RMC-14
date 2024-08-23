@@ -31,6 +31,8 @@
         RMCSkillPowerLoader: 2
         RMCSkillSurgery: 1
     - type: MarineOrders
+    - type: CMVendorUser
+      points: 45
   hidden: false
 
 - type: startingGear

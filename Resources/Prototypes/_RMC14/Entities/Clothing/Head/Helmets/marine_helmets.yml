@@ -1,6 +1,6 @@
 # m10
 - type: entity
-  parent: ClothingHeadBase
+  parent: RMCHelmetBase
   id: ArmorHelmetM10
   name: M10 pattern marine helmet
   description: A standard M10 Pattern Helmet. The inside label, along with washing information, reads, 'The difference between an open-casket and closed-casket funeral. Wear on head for best results.'. There is a built-in camera on the right side.
@@ -217,6 +217,8 @@
   - type: CMArmor
     armor: 25
     explosionArmor: 50
+  - type: ParasiteResistance
+    maxCount: 6
 
 # M35 Pyro Spec
 - type: entity
@@ -252,5 +254,4 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/t_demo.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/t_demo.rsi
-# TODO RMC14 Give hearing protection component if ear damage is added
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/t_demo.rsi # TODO RMC14 Give hearing protection component if ear damage is added

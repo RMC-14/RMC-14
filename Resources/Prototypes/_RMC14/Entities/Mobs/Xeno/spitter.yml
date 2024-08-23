@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoSpitter
   name: Spitter
   description: A gross, oozing alien of some kind.
@@ -67,8 +68,8 @@
     damage:
       groups:
         Brute: 25
-  - type: Tackle
-    threshold: 4
+  - type: Tackle # min: 2, max: 6
+    threshold: 5
     stun: 9
     chance: 0.45
   - type: MovementSpeedModifier

@@ -2,6 +2,7 @@
   parent:
   - CMXenoDeveloped
   - CMXenoTail
+  - RMCXenoSpeechSounds
   id: CMXenoQueen
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
@@ -85,8 +86,8 @@
       groups:
         Brute: 40
   - type: XenoOvipositorCapable
-  - type: Tackle
-    threshold: 3
+  - type: Tackle # min: 2, max: 6
+    threshold: 4
     stun: 11
     chance: 0.55
   - type: Fixtures
@@ -156,3 +157,10 @@
     - ActionXenoScreech
   - type: RMCXenoDamageVisuals
     prefix: queen
+  - type: PreventPulledWhileAlive
+    whitelist:
+      components:
+      - Xeno
+    exceptEffects:
+    - Stun
+    - KnockedDown

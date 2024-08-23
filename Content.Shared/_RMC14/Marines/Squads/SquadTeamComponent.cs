@@ -1,4 +1,4 @@
-﻿using Content.Shared.Access;
+using Content.Shared.Access;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
