@@ -9,7 +9,7 @@
     group: CMDepartmentsHuman
     time: 36000 # 10 hours
   ranks:
-  - RMCRankCivilan
+  - RMCRankCivilian
   startingGear: CMGearCorrespondent
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
