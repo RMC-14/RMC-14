@@ -35,7 +35,7 @@ public abstract class SharedRankSystem : EntitySystem
         using (args.PushGroup(nameof(SharedRankSystem), 1))
         {
             var user = ent.Owner;
-            var rank = GetRankString(ent.Owner);
+            var rank = GetRankString(user);
 
             if (rank != null)
             {
