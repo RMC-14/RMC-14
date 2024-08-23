@@ -26,6 +26,9 @@
     blacklist:
       components:
       - Xeno
+  - type: FaxMachine
+    printPaperId: CMPaper
+    printOfficePaperId: CMPaper
 
 - type: entity
   parent: CMFax
