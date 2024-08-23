@@ -20,6 +20,11 @@
   - !type:DepartmentTimeRequirement
     department: CMCommand
     time: 18000 # 5 hours
+  ranks:
+  - RMCRankSEASergeantMajor
+  - RMCRankSEAFirstSergeant
+  - RMCRankSEAMasterSergeant
+  - RMCBaseRankGunnerySergeant
   weight: 5
   startingGear: CMGearSeniorEnlistedAdvisor
   icon: "CMJobIconSEA"

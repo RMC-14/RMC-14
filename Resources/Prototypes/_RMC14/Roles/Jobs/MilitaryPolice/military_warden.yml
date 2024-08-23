@@ -8,6 +8,10 @@
   - !type:DepartmentTimeRequirement
     department: CMMilitaryPolice
     time: 36000 # 10 hours
+  ranks:
+  - RMCRankMilitaryWardenGunnerySergeant
+  - RMCRankMilitaryWardenStaffSergeant
+  - RMCBaseRankSergeant
   weight: 5
   startingGear: CMGearMilitaryWarden
   icon: "CMJobIconMilitaryWarden"

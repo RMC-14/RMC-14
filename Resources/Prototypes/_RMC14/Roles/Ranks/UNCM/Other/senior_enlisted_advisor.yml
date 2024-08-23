@@ -1,0 +1,23 @@
+- type: rank
+  parent: RMCBaseRankSergeantMajor
+  id: RMCRankSEASergeantMajor
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSeniorEnlistedAdvisor
+    time: 630000 # 175 hours
+
+- type: rank
+  parent: RMCBaseRankFirstSergeant
+  id: RMCRankSEAFirstSergeant
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSeniorEnlistedAdvisor
+    time: 252000 # 70 hours
+
+- type: rank
+  parent: RMCBaseRankMasterSergeant
+  id: RMCRankSEAMasterSergeant
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSeniorEnlistedAdvisor
+    time: 90000 # 25 hours

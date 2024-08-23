@@ -8,6 +8,10 @@
   - !type:DepartmentTimeRequirement
     department: CMRequisitions
     time: 36000 # 10 hours
+  ranks:
+  - RMCRankQuartermasterMasterSergeant
+  - RMCRankQuartmasterGunnerySergeant
+  - RMCBaseRankStaffSergeant
   weight: 5
   startingGear: CMGearQuartermaster
   icon: "CMJobIconQuartermaster"

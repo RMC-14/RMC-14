@@ -1,0 +1,15 @@
+- type: rank
+  parent: RMCBaseRankMasterSergeant
+  id: RMCRankQuartermasterMasterSergeant
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobQuartermaster
+    time: 252000 # 70 hours
+
+- type: rank
+  parent: RMCBaseRankGunnerySergeant
+  id: RMCRankQuartmasterGunnerySergeant
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobQuartermaster
+    time: 36000 # 10 hours

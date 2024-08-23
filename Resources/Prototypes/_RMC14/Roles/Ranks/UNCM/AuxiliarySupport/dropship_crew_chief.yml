@@ -1,0 +1,15 @@
+﻿- type: rank
+  parent: RMCBaseRankStaffSergeant
+  id: RMCRankDCCStaffSergeant
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobDropshipCrewChief
+    time: 270000 # 70 hours
+
+- type: rank
+  parent: RMCBaseRankSergeant
+  id: RMCRankDCCSergeant
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobDropshipCrewChief
+    time: 270000 # 10 hours

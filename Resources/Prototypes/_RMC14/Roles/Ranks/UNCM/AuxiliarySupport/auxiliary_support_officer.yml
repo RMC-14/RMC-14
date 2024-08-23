@@ -1,0 +1,7 @@
+﻿- type: rank
+  parent: RMCBaseRankCaptain
+  id: RMCRankASOCaptain
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobAuxiliarySupportOfficer
+    time: 630000 # 175 hours

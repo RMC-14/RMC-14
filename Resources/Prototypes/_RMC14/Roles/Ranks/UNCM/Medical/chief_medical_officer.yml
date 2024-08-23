@@ -1,0 +1,7 @@
+﻿- type: rank
+  parent: RMCBaseRankFirstLT
+  id: RMCRankChiefMedicalOfficerFirstLT
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobCMO
+    time: 36000 # 10 hours
