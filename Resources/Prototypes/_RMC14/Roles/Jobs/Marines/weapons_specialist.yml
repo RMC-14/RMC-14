@@ -8,6 +8,10 @@
   - !type:DepartmentTimeRequirement
     department: CMSquad
     time: 18000 # 5 hours
+  ranks:
+  - RMCRankWeaponsSpecialistSergeant
+  - RMCRankWeaponsSpecialistCorporal
+  - RMCBaseRankLanceCorporal
   startingGear: CMGearWeaponsSpecialist
   icon: "CMJobIconWeaponsSpecialist"
   joinNotifyCrew: false

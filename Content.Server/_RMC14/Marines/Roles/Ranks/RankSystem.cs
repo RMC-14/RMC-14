@@ -63,12 +63,26 @@ public sealed class RankSystem : SharedRankSystem
 
             foreach (var rank in ranks)
             {
+                var failed = false;
+
                 if (_prototypes.TryIndex<RankPrototype>(rank, out var rankPrototype) && rankPrototype != null)
                 {
-                    if (rankPrototype.Requirement.Check(_entityManager, _prototypes, ev.Profile, playTimes, out _))
+                    var requirements = rankPrototype.Requirements;
+
+                    if (requirements != null)
+                    {
+                        foreach (var req in requirements)
+                        {
+                            if (!req.Check(_entityManager, _prototypes, ev.Profile, playTimes, out _))
+                                failed = true;
+                        }
+                    }
+
+                    if (!failed)
                     {
                         SetRank(idCardEntity, rankPrototype);
                         SetRank(uid, rankPrototype);
+                        break;
                     }
                 }
             }

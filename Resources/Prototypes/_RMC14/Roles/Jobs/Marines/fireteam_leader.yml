@@ -8,6 +8,10 @@
   - !type:DepartmentTimeRequirement
     department: CMSquad
     time: 28800 # 8 hours
+  ranks:
+  - RMCRankFTLSergeant
+  - RMCRankFTLCorporal
+  - RMCBaseRankLanceCorporal
   startingGear: CMGearFireteamLeader
   icon: "CMJobIconFireteamLeader"
   joinNotifyCrew: false

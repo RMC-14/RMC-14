@@ -11,6 +11,10 @@
   - !type:DepartmentTimeRequirement
     department: CMSquad
     time: 3600 # 1 hour
+  ranks:
+  - RMCRankCorpsmanCorporal
+  - RMCRankCorpsmanLanceCorporal
+  - RMCBaseRankPrivateFirstClass
   startingGear: CMGearHospitalCorpsman
   icon: "CMJobIconHospitalCorpsman"
   joinNotifyCrew: false

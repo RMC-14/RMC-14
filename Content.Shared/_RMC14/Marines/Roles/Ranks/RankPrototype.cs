@@ -35,7 +35,6 @@ public sealed partial class RankPrototype : IPrototype, IInheritingPrototype
     [DataField(required: true)]
     public string ShortenedName { get; set; } = default!;
 
-    [NeverPushInheritance]
     [DataField]
-    public JobRequirement Requirement = default!;
+    public HashSet<JobRequirement>? Requirements { get; set; }
 }

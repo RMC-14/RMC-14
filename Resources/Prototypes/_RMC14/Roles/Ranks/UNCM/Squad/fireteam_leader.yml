@@ -1,0 +1,15 @@
+- type: rank
+  parent: RMCBaseRankSergeant
+  id: RMCRankFTLSergeant
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMFireteamLeader
+    time: 252000 # 70 hours
+
+- type: rank
+  parent: RMCBaseRankLanceCorporal
+  id: RMCRankFTLCorporal
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMFireteamLeader
+    time: 36000 # 10 hours

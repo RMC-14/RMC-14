@@ -8,6 +8,10 @@
   - !type:DepartmentTimeRequirement
     department: CMSquad
     time: 36000 # 10 hours
+  ranks:
+  - RMCRankSquadLeaderGunnerySergeant
+  - RMCRankSquadLeaderStaffSergeant
+  - RMCBaseRankSergeant
   startingGear: CMGearSquadLeader
   icon: "CMJobIconSquadLeader"
   joinNotifyCrew: false

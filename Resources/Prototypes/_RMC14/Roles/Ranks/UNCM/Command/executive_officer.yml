@@ -1,0 +1,3 @@
+﻿- type: rank
+  parent: RMCBaseRankCaptain
+  id: RMCRankCaptainXO

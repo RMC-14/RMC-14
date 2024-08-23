@@ -8,6 +8,10 @@
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
+  ranks:
+  - RMCRankRiflemanLanceCorporal
+  - RMCRankRiflemanPrivateFirstClass
+  - RMCBaseRankPrivate
   accessGroups:
   - Rifleman
   special:

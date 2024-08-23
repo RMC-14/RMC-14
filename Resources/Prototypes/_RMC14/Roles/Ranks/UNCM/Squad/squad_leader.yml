@@ -1,0 +1,15 @@
+- type: rank
+  parent: RMCBaseRankGunnerySergeant
+  id: RMCRankSquadLeaderGunnerySergeant
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSquadLeader
+    time: 252000 # 70 hours
+
+- type: rank
+  parent: RMCBaseRankStaffSergeant
+  id: RMCRankSquadLeaderStaffSergeant
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSquadLeader
+    time: 36000 # 10 hours

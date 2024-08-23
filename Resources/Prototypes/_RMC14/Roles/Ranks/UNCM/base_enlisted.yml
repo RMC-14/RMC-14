@@ -1,0 +1,49 @@
+﻿- type: rank
+  id: RMCBaseRankSergeantMajor
+  name: Sergeant Major
+  shortenedName: SGM
+
+- type: rank
+  id: RMCBaseRankFirstSergeant
+  name: First Sergeant
+  shortenedName: 1stSGT
+
+- type: rank
+  id: RMCBaseRankMasterSergeant
+  name: Master Sergeant
+  shortenedName: MSGT
+
+- type: rank
+  id: RMCBaseRankGunnerySergeant
+  name: Gunnery Sergeant
+  shortenedName: GySGT
+
+- type: rank
+  id: RMCBaseRankStaffSergeant
+  name: Staff Sergeant
+  shortenedName: SSGT
+
+- type: rank
+  id: RMCBaseRankSergeant
+  name: Sergeant
+  shortenedName: SGT
+
+- type: rank
+  id: RMCBaseRankCorporal
+  name: Corporal
+  shortenedName: CPL
+
+- type: rank
+  id: RMCBaseRankLanceCorporal
+  name: Lance Corporal
+  shortenedName: LCPL
+
+- type: rank
+  id: RMCBaseRankPrivateFirstClass
+  name: Private First Class
+  shortenedName: PFC
+
+- type: rank
+  id: RMCBaseRankPrivate
+  name: Private
+  shortenedName: PVT

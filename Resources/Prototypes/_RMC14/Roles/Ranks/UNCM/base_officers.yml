@@ -1,0 +1,14 @@
+﻿- type: rank
+  id: RMCBaseRankCaptain
+  name: Captain
+  shortenedName: CPT
+
+- type: rank
+  id: RMCBaseRankFirstLT
+  name: First Lieutenant
+  shortenedName: 1stLT
+
+- type: rank
+  id: RMCBaseRankSecondLT
+  name: Second Lieutenant
+  shortenedName: 2ndLT
