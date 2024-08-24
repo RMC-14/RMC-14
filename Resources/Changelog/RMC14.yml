@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Ported stanbaton, flash and handcuffs from CMSS3
-    type: Add
-  id: 121
-  time: '2024-05-28T12:36:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2170
 - author: DrSmugleaf
   changes:
   - message: Added treatable wounds and passive healing when they are treated.
@@ -4381,5 +4374,15 @@
   id: 620
   time: '2024-08-24T08:12:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3816
+- author: DrSmugleaf
+  changes:
+  - message: Fixed ammo boxes not being light-attackable with left click.
+    type: Fix
+  - message: Fixed lobby messages not being displayed for players still in the lobby
+      mid-round.
+    type: Fix
+  id: 621
+  time: '2024-08-24T10:49:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3817
 Name: RMC14
 Order: -1
