@@ -327,7 +327,7 @@ namespace Content.Shared.Interaction
             if (!_itemQuery.HasComp(target))
                 return false;
 
-            var combatEv = new CombatModeShouldHandInteractEvent();
+            var combatEv = new CombatModeShouldHandInteractEvent(user);
             RaiseLocalEvent(target.Value, ref combatEv);
 
             if (combatEv.Cancelled)
@@ -1383,5 +1383,5 @@ namespace Content.Shared.Interaction
     /// </summary>
     /// <param name="Cancelled">Whether the hand interaction should be cancelled.</param>
     [ByRefEvent]
-    public record struct CombatModeShouldHandInteractEvent(bool Cancelled = false);
+    public record struct CombatModeShouldHandInteractEvent(EntityUid User, bool Cancelled = false);
 }
