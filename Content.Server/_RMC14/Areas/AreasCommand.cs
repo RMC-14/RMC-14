@@ -8,11 +8,11 @@ using Robust.Shared.Toolshed;
 namespace Content.Server._RMC14.Areas;
 
 [ToolshedCommand, AdminCommand(AdminFlags.Host)]
-public sealed class SaveAreasCommand : ToolshedCommand
+public sealed class AreasCommand : ToolshedCommand
 {
     private MapSystem? _map;
 
-    [CommandImplementation]
+    [CommandImplementation("save")]
     public void Save([CommandInvocationContext] IInvocationContext ctx)
     {
         _map = GetSys<MapSystem>();
