@@ -1,7 +1,7 @@
 - type: construction
   name: Modify Flashlight
   id: RMCFlashlightModify
-  graph: RMCFlashlight
+  graph: RMCFlashLightGraph
   startNode: start
   targetNode: RMCFlashlight
   category: construction-category-cm-utilities
