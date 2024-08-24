@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Full health bars are no longer shown on the medical HUD.
-    type: Tweak
-  id: 116
-  time: '2024-05-19T03:58:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2157
-- author: DrSmugleaf
-  changes:
   - message: Added xeno death sounds and xeno pull knockdown sound.
     type: Add
   id: 117
@@ -4382,5 +4375,12 @@
   id: 615
   time: '2024-08-24T07:12:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3791
+- author: DrSmugleaf
+  changes:
+  - message: Hopefully fix an error that makes some round starts lag to death.
+    type: Fix
+  id: 616
+  time: '2024-08-24T07:20:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3813
 Name: RMC14
 Order: -1
