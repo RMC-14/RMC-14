@@ -141,7 +141,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/tech.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/tech.rsi
-  - type: RMCEyeProtectionItem # TODO RMC14 toggleable
+  - type: RMCEyeProtectionItem
+    raisedEquippedPrefix: up  # TODO implement actual helmet overlays (this is a temporary hack)
     slots:
     - head
     popupName: welding visor
