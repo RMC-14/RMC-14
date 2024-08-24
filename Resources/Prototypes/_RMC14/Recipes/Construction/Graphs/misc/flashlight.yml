@@ -22,7 +22,6 @@
             - !type:SpawnPrototype
               prototype: RMCAttachmentRailFlashlight
               amount: 1
-            - !type:DeleteEntity {}
           steps:
             - tool: Screwing
               doAfter: 1
