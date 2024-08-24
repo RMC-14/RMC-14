@@ -6,7 +6,7 @@
   startNode: start
   targetNode: Flashlight
   category: construction-category-cm-utilities
-  description: Alter a Flashlight into a Weapon Attachment and Vice Versa
+  description: Alter a Flashlight into a Rail Light Weapon Attachment
   icon:
     sprite: _RMC14/Objects/Tools/Light/flashlight.rsi
     state: flashlight
