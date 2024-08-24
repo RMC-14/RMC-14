@@ -18,6 +18,11 @@
       entity: RMCAttachmentRailFlashlight
       edges:
         - to: LightGrip
+          completed:
+            - !type:SpawnPrototype
+              prototype: RMCAttachmentRailFlashlight
+              amount: 1
+            - !type:DeleteEntity {}
           steps:
             - tool: Screwing
               doAfter: 1
@@ -26,6 +31,11 @@
       entity: RMCAttachmentFlashlightGrip
       edges:
         - to: Flashlight
+          completed:
+            - !type:SpawnPrototype
+              prototype: RMCAttachmentFlashlightGrip
+              amount: 1
+            - !type:DeleteEntity {}
           steps:
             - tool: Screwing
               doAfter: 1
