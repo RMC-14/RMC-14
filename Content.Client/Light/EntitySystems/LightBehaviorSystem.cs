@@ -1,9 +1,9 @@
 using System.Linq;
 using Content.Client.Light.Components;
-using Robust.Client.GameObjects;
 using Robust.Client.Animations;
-using Robust.Shared.Random;
+using Robust.Client.GameObjects;
 using Robust.Shared.Animations;
+using Robust.Shared.Random;
 
 namespace Content.Client.Light.EntitySystems;
 
@@ -68,7 +68,7 @@ public sealed class LightBehaviorSystem : EntitySystem
             var propertyValue = AnimationHelper.GetAnimatableProperty(light, property);
             if (propertyValue != null)
             {
-                entity.Comp.OriginalPropertyValues.Add(property, propertyValue);
+                entity.Comp.OriginalPropertyValues[property] = propertyValue;
             }
         }
         else
