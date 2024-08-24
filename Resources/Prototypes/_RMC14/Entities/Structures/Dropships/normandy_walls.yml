@@ -615,6 +615,7 @@
   parent: [CMBaseNormandyWall, CMAlamoWall61]
   id: CMNormandyWall61
   name: port wing weapon attach point
+  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 61
   components:
   - type: Sprite
@@ -659,6 +660,7 @@
   parent: [CMBaseNormandyWall, CMAlamoWall65]
   id: CMNormandyWall65
   name: starboard wing weapon attach point
+  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 65
   components:
   - type: Sprite
@@ -853,6 +855,7 @@
   parent: [CMBaseNormandyWall, CMAlamoWall84]
   id: CMNormandyWall84
   name: port fore weapon attach point
+  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 84
   components:
   - type: Sprite
@@ -867,6 +870,7 @@
   parent: [CMNormandyWall84, CMAlamoWall84Flipped]
   id: CMNormandyWall84Flipped
   name: starboard fore weapon attach point
+  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 84, Flipped
   components:
   - type: Sprite
@@ -879,6 +883,7 @@
   parent: [CMBaseNormandyWall, CMAlamoWall85]
   id: CMNormandyWall85
   name: electronic system attach point
+  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 85
   components:
   - type: Sprite

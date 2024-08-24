@@ -227,6 +227,7 @@
     - enum.VendingMachineUiKey.Key
     - enum.PaperUiKey.Key
   - type: ActiveInputMover
+  - type: HiveTracker
 
 - type: entity
   abstract: true

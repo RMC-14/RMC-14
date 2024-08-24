@@ -142,7 +142,7 @@ public class AreaImporter
                         _ => "# TODO RMC14 areas",
                     };
 
-                    parents.Add(parent);
+                    parents.Insert(0, parent);
                 }
                 else if (TryExtract(powerNet, out result))
                 {

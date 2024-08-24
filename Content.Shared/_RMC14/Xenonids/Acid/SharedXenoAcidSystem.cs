@@ -122,7 +122,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             return false;
         }
 
-        if (HasComp<TimedCorrodingComponent>(target))
+        if (HasComp<TimedCorrodingComponent>(target) || HasComp<DamageableCorrodingComponent>(target))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-acid-already-corroding", ("target", target)), xeno, xeno);
             return false;
@@ -145,6 +145,12 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             {
                 _damageable.TryChangeDamage(uid, damageableCorrodingComponent.Damage, true);
                 damageableCorrodingComponent.NextDamageAt = time.Add(TimeSpan.FromSeconds(CorrosiveAcidTickDelaySeconds));
+            }
+
+            if (time > damageableCorrodingComponent.AcidExpiresAt)
+            {
+                QueueDel(damageableCorrodingComponent.Acid);
+                RemCompDeferred<DamageableCorrodingComponent>(uid);
             }
         }
 

@@ -18,6 +18,8 @@
     Head: MobMothHead
     Snout: MobHumanoidAnyMarking
     Chest: MobMothTorso
+    Underwear: MobHumanoidAnyMarking
+    Undershirt: MobHumanoidAnyMarking
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
