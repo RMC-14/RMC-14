@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added quick holster and unholster keys.
-    type: Add
-  id: 120
-  time: '2024-05-23T13:03:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2166
 - author: Tunguso4ka
   changes:
   - message: Ported stanbaton, flash and handcuffs from CMSS3
@@ -4381,5 +4374,12 @@
   id: 619
   time: '2024-08-24T08:04:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3814
+- author: DrSmugleaf
+  changes:
+  - message: Added Bred Dahne figurine.
+    type: Add
+  id: 620
+  time: '2024-08-24T08:12:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3816
 Name: RMC14
 Order: -1
