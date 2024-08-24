@@ -39,7 +39,7 @@ public sealed class ShowHolocardIconsSystem : EquipmentHudSystem<HolocardScanner
         var icons = new List<StatusIconData>();
         if (TryGetHolocardData(entity.Comp.HolocardStatus, out var holocardData) && holocardData.HolocardIcon != null)
         {
-            var holocardIconPrototype = _prototypes.Index<StatusIconPrototype>(holocardData.HolocardIcon);
+            var holocardIconPrototype = _prototypes.Index(holocardData.HolocardIcon.Value);
             icons.Add(holocardIconPrototype);
         }
         return icons;

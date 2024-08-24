@@ -23,7 +23,7 @@ public sealed class CMHealthIconsSystem : EntitySystem
 
     public StatusIconData GetDeadIcon()
     {
-        return _prototype.Index<StatusIconPrototype>(Dead);
+        return _prototype.Index<HealthIconPrototype>(Dead);
     }
 
     public IReadOnlyList<StatusIconData> GetIcons(Entity<DamageableComponent> damageable)
@@ -37,7 +37,7 @@ public sealed class CMHealthIconsSystem : EntitySystem
             _mobState.IsCritical(damageable) ||
             !_mobState.IsDead(damageable))
         {
-            icons.Add(_prototype.Index<StatusIconPrototype>(Healthy));
+            icons.Add(_prototype.Index(Healthy));
             return icons;
         }
 
@@ -45,7 +45,7 @@ public sealed class CMHealthIconsSystem : EntitySystem
         {
             if (CompOrNull<SSDIndicatorComponent>(damageable)?.IsSSD ?? false)
             {
-                icons.Add(_prototype.Index<StatusIconPrototype>(DeadDNR));
+                icons.Add(_prototype.Index(DeadDNR));
                 return icons;
             }
         }
@@ -54,17 +54,17 @@ public sealed class CMHealthIconsSystem : EntitySystem
         if (!TryComp(damageable, out PerishableComponent? perishable) ||
             perishable.Stage <= 1)
         {
-            icons.Add(_prototype.Index<StatusIconPrototype>(DeadDefib));
+            icons.Add(_prototype.Index(DeadDefib));
             return icons;
         }
         else if (perishable.Stage == 2)
         {
-            icons.Add(_prototype.Index<StatusIconPrototype>(DeadClose));
+            icons.Add(_prototype.Index(DeadClose));
             return icons;
         }
         else if (perishable.Stage == 3)
         {
-            icons.Add(_prototype.Index<StatusIconPrototype>(DeadAlmost));
+            icons.Add(_prototype.Index(DeadAlmost));
             return icons;
         }
 

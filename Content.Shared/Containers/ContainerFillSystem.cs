@@ -1,5 +1,8 @@
 using System.Numerics;
+using Content.Shared._RMC14.Storage;
 using Content.Shared.EntityTable;
+using Content.Shared.Item;
+using Content.Shared.Storage;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 
@@ -58,6 +61,7 @@ public sealed class ContainerFillSystem : EntitySystem
         var xform = Transform(ent);
         var coords = new EntityCoordinates(ent, Vector2.Zero);
 
+        var storage = CompOrNull<StorageComponent>(ent);
         foreach (var (containerId, table) in ent.Comp.Containers)
         {
             if (!_containerSystem.TryGetContainer(ent, containerId, out var container, containerComp))
@@ -70,6 +74,12 @@ public sealed class ContainerFillSystem : EntitySystem
             foreach (var proto in spawns)
             {
                 var spawn = Spawn(proto, coords);
+                if (storage != null && TryComp(spawn, out ItemComponent? item))
+                {
+                    var ev = new CMStorageItemFillEvent((spawn, item), storage);
+                    RaiseLocalEvent(ent, ref ev);
+                }
+
                 if (!_containerSystem.Insert(spawn, container, containerXform: xform))
                 {
                     Log.Error($"Entity {ToPrettyString(ent)} with a {nameof(EntityTableContainerFillComponent)} failed to insert an entity: {ToPrettyString(spawn)}.");
