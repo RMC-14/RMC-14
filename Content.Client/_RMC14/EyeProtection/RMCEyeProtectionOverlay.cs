@@ -15,7 +15,12 @@ public sealed class RMCEyeProtectionOverlay : Overlay
     public override bool RequestScreenTexture => true;
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
     private readonly ShaderInstance _eyeProtShader;
-    private float _zoom;
+
+    private Vector3 _color = new Vector3(0f, 0f, 0f);
+    private float _outerRadius;
+    private float _innerRadius;
+    private float _darknessAlphaOuter = 1.0f;
+    private float _darknessAlphaInner = 0.0f;
 
     private RMCEyeProtectionComponent _eyeProtComponent = default!;
 
@@ -23,7 +28,7 @@ public sealed class RMCEyeProtectionOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
 
-        _eyeProtShader = _prototypeManager.Index<ShaderPrototype>("CircleMask").InstanceUnique();
+        _eyeProtShader = _prototypeManager.Index<ShaderPrototype>("GradientCircleMask").InstanceUnique();
     }
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
@@ -41,8 +46,6 @@ public sealed class RMCEyeProtectionOverlay : Overlay
 
         if (!_entityManager.TryGetComponent<RMCEyeProtectionComponent>(playerEntity, out var eyeProtComp))
             return false;
-
-        _zoom = eyeProtComp.Zoom;
 
         return true;
     }
@@ -62,13 +65,39 @@ public sealed class RMCEyeProtectionOverlay : Overlay
             return;
         }
 
-        if (_entityManager.TryGetComponent<EyeComponent>(playerEntity, out var content))
+        if (!_entityManager.TryGetComponent<EyeComponent>(playerEntity, out var content))
         {
-            _eyeProtShader?.SetParameter("Zoom", _zoom * content.Zoom.X);
+            return;
         }
 
         var handle = args.WorldHandle;
-        var viewport = args.WorldBounds;
+        var viewport = args.WorldAABB;
+        var viewportHeight = args.ViewportBounds.Height;
+
+        // Default view distance from top to bottom of screen in tiles
+        var maxTilesHeight = 8.5f;
+        // Actual height of viewport in tiles, accounting for zoom (clamped to 1.0 to account for farsight)
+        var actualTilesHeight = maxTilesHeight * (content.Zoom.X <= 1.0f ? content.Zoom.X : 1.0f);
+
+        var outerRadiusRatio = (maxTilesHeight - eyeProt.ImpairFull) / actualTilesHeight / 2;
+        var innerRadiusRatio = (maxTilesHeight - eyeProt.ImpairFull - eyeProt.ImpairPartial) / actualTilesHeight / 2;
+
+        _innerRadius = innerRadiusRatio * viewportHeight;
+        _outerRadius = outerRadiusRatio * viewportHeight;
+        _darknessAlphaInner = eyeProt.AlphaInner;
+        _darknessAlphaOuter = eyeProt.AlphaOuter;
+
+        // Shouldn't be time-variant
+        _eyeProtShader.SetParameter("time", 0.0f);
+        // Outside area should be black
+        _eyeProtShader.SetParameter("color", _color);
+        _eyeProtShader.SetParameter("darknessAlphaInner", _darknessAlphaInner);
+        _eyeProtShader.SetParameter("darknessAlphaOuter", _darknessAlphaOuter);
+        // Radius should stay constant
+        _eyeProtShader.SetParameter("outerCircleRadius", _outerRadius);
+        _eyeProtShader.SetParameter("outerCircleMaxRadius", _outerRadius);
+        _eyeProtShader.SetParameter("innerCircleRadius", _innerRadius);
+        _eyeProtShader.SetParameter("innerCircleMaxRadius", _innerRadius);
 
         handle.UseShader(_eyeProtShader);
         handle.DrawRect(viewport, Color.White);

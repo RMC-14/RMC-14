@@ -19,8 +19,24 @@ public sealed partial class RMCEyeProtectionComponent : Component
     public bool Overlay;
 
     /// <summary>
-    ///     The strength of the sight restriction
+    ///     Radius of full sight restriction in tiles counted from screen edge
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), DataField("zoom"), AutoNetworkedField]
-    public float Zoom = 0.20f;
+    [ViewVariables(VVAccess.ReadWrite), DataField("impairFull"), AutoNetworkedField]
+    public float ImpairFull = 3.0f;
+    /// <summary>
+    ///     Radius of partial sight restriction in tiles counted from edge of full sight restriction
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite), DataField("impairPartial"), AutoNetworkedField]
+    public float ImpairPartial = 2.0f;
+
+    /// <summary>
+    ///     Alpha component of full sight restriction
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite), DataField("alphaOuter"), AutoNetworkedField]
+    public float AlphaOuter = 1.0f;
+    /// <summary>
+    ///     Alpha component of unrestricted sight; the alpha of partial sight restriction is a gradient between this and AlphaOuter
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite), DataField("alphaInner"), AutoNetworkedField]
+    public float AlphaInner = 0.0f;
 }
