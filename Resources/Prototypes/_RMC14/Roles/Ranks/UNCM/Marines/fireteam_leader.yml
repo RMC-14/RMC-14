@@ -3,7 +3,7 @@
   id: RMCRankFTLSergeant
   requirements:
   - !type:RoleTimeRequirement
-    role: CMFireteamLeader
+    role: CMJobFireteamLeader
     time: 252000 # 70 hours
 
 - type: rank
