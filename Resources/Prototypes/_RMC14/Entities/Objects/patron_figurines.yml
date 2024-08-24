@@ -518,3 +518,14 @@
     state: lance_victors
   - type: PatronFigurine
     id: 17b357c5-1148-4ec5-ba53-d1f76c424d84
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBredDahne
+  name: Bred Dahne figurine
+  description: "Gluten Free"
+  components:
+  - type: Sprite
+    state: bred_dahne
+  - type: PatronFigurine
+    id: 6631b2a1-2adf-4f83-962a-d8e251f770e0
