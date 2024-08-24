@@ -12,7 +12,6 @@
               icon:
                 sprite: _RMC14/Objects/Tools/Light/flashlight.rsi
                 state: flashlight
-            - tool: Screwing
               doAfter: 1
               
     - node: RailLight
