@@ -18,12 +18,10 @@
     - node: RailLight
       entity: RMCAttachmentRailFlashlight
       edges:
-       - to: start
-         completed:
-           - !type:SpawnPrototype
-             prototype: RMCFlashLight
-              amount: 1
-           - !type:DeleteEntity {}
+       - to: Flashlight
          steps:
            - tool: Screwing
              doAfter: 1
+
+    - node: Flashlight
+      entity: RMCFlashlight
