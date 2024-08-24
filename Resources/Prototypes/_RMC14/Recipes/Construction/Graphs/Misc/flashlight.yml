@@ -1,0 +1,44 @@
+- type: constructionGraph
+  id: RMCFlashLightGraph
+  start: start
+  graph:
+
+  - node: start
+    edges:
+    - to: RailLight
+      steps:
+      - tool: Screwing
+        doAfter: 1
+
+  - node: RailLight
+    entity: RMCFlashlight
+    actions:
+    - !type:SpawnPrototype
+      prototype: RMCAttachmentRailFlashlight
+    edges:
+    - to: RMCAttachmentFlashlightGrip
+      steps:
+      - tool: Screwing
+        doAfter: 1
+
+  - node: RMCAttachmentFlashlightGrip
+    entity: RMCAttachmentRailFlashlight
+    actions:
+    - !type:SpawnPrototype
+      prototype: RMCAttachmentFlashlightGrip
+    edges:
+    - to: wiredCase
+      steps:
+      - tool: Screwing
+        doAfter: 1
+
+  - node: RMCFlashlight
+    entity: RMCAttachmentFlashlightGrip
+    actions:
+    - !type:SpawnPrototype
+      prototype: RMCFlashlight
+    edges:
+    - to: start
+      steps:
+      - tool: Screwing
+        doAfter: 1
