@@ -4,12 +4,15 @@
   start: start
   graph:
     - node: start
-      entity: RMCFlashLight
       edges:
         - to: RailLight
           steps:
-          - tool: Screwing
-            doAfter: 1
+            - tag: Flashlight
+              name: flashlight
+              icon:
+                sprite: _RMC14/Objects/Tools/Light/flashlight.rsi
+                state: flashlight
+              doAfter: 1
               
     - node: RailLight
       entity: RMCAttachmentRailFlashlight
