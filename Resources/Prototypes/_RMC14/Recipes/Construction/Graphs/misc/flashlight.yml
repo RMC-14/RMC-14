@@ -8,6 +8,11 @@
     edges:
     - to: RailLight
       steps:
+      - tag: Flashlight
+        icon:
+          sprite: _RMC14/Objects/Tools/Light/flashlight.rsi
+          state: flashlight
+        name: flashlight
       - tool: Screwing
         doAfter: 1
 
