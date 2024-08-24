@@ -55,6 +55,18 @@ public sealed class RMCMapSystem : EntitySystem
         return new RMCAnchoredEntitiesEnumerator(_transform, anchored, facing);
     }
 
+    public bool HasAnchoredEntityEnumerator<T>(EntityCoordinates coords, Direction? offset = null, DirectionFlag facing = DirectionFlag.None) where T : IComponent
+    {
+        var anchored = GetAnchoredEntitiesEnumerator(coords, offset, facing);
+        while (anchored.MoveNext(out var uid))
+        {
+            if (HasComp<T>(uid))
+                return true;
+        }
+
+        return false;
+    }
+
     public bool TryGetTileRefForEnt(EntityUid ent, out Entity<MapGridComponent> grid, out TileRef tile)
     {
         grid = default;
