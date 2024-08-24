@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added all cm chemicals to the guidebook.
-    type: Add
-  id: 119
-  time: '2024-05-23T12:08:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2168
-- author: DrSmugleaf
-  changes:
   - message: Added quick holster and unholster keys.
     type: Add
   id: 120
@@ -4381,5 +4374,12 @@
   id: 618
   time: '2024-08-24T08:02:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3765
+- author: Whisper
+  changes:
+  - message: Added Lance Victors figurine.
+    type: Add
+  id: 619
+  time: '2024-08-24T08:04:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3814
 Name: RMC14
 Order: -1
