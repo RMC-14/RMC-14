@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added treatable wounds and passive healing when they are treated.
-    type: Add
-  - message: Implemented the trauma kit, burn kit, gauze, ointment, surgical line
-      and synthgraft.
-    type: Add
-  id: 122
-  time: '2024-05-31T22:37:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2174
-- author: DrSmugleaf
-  changes:
   - message: Added xeno roles and playtime trackers.
     type: Add
   id: 123
@@ -4384,5 +4374,15 @@
   id: 621
   time: '2024-08-24T10:49:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3817
+- author: DrSmugleaf
+  changes:
+  - message: Fixed unholstering your gun with F not working.
+    type: Fix
+  - message: Fixed Russian accent being very difficult for cyrillic language speakers
+      to read, by removing the A to cyrillic D conversion.
+    type: Fix
+  id: 622
+  time: '2024-08-24T12:05:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3818
 Name: RMC14
 Order: -1
