@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Ported the effects of all existing medicines.
-    type: Add
-  - message: Added all times to the We-Ya-Med Plus except for painkillers, splints
-      and peridaxon.
-    type: Add
-  id: 118
-  time: '2024-05-22T00:40:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2163
-- author: DrSmugleaf
-  changes:
   - message: Added all cm chemicals to the guidebook.
     type: Add
   id: 119
@@ -4384,5 +4374,12 @@
   id: 617
   time: '2024-08-24T07:57:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3815
+- author: Tunguso4ka
+  changes:
+  - message: North of Solaris Marshal's now have cave wall.
+    type: Add
+  id: 618
+  time: '2024-08-24T08:02:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3765
 Name: RMC14
 Order: -1
