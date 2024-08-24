@@ -25,4 +25,4 @@
               doAfter: 1
 
     - node: Flashlight
-      entity: RMCFlashlight
+      entity: RMCFlashlightEmpty
