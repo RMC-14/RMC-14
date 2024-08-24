@@ -57,33 +57,27 @@ public sealed class RankSystem : SharedRankSystem
             playTimes ??= new Dictionary<string, TimeSpan>();
         }
 
-        if (_idCardSystem.TryFindIdCard(uid, out var idcard))
+        foreach (var rank in ranks)
         {
-            var idCardEntity = idcard.Owner;
+            var failed = false;
 
-            foreach (var rank in ranks)
+            if (_prototypes.TryIndex<RankPrototype>(rank, out var rankPrototype) && rankPrototype != null)
             {
-                var failed = false;
+                var requirements = rankPrototype.Requirements;
 
-                if (_prototypes.TryIndex<RankPrototype>(rank, out var rankPrototype) && rankPrototype != null)
+                if (requirements != null)
                 {
-                    var requirements = rankPrototype.Requirements;
-
-                    if (requirements != null)
+                    foreach (var req in requirements)
                     {
-                        foreach (var req in requirements)
-                        {
-                            if (!req.Check(_entityManager, _prototypes, ev.Profile, playTimes, out _))
-                                failed = true;
-                        }
+                        if (!req.Check(_entityManager, _prototypes, ev.Profile, playTimes, out _))
+                            failed = true;
                     }
+                }
 
-                    if (!failed)
-                    {
-                        SetRank(idCardEntity, rankPrototype);
-                        SetRank(uid, rankPrototype);
-                        break;
-                    }
+                if (!failed)
+                {
+                    SetRank(uid, rankPrototype);
+                    break;
                 }
             }
         }

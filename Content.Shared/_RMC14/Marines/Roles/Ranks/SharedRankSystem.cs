@@ -12,22 +12,7 @@ public abstract class SharedRankSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RankComponent, ClothingGotEquippedEvent>(OnEquip);
-        SubscribeLocalEvent<RankComponent, ClothingGotUnequippedEvent>(OnUnequip);
         SubscribeLocalEvent<RankComponent, ExaminedEvent>(OnRankExamined);
-    }
-
-    private void OnEquip(Entity<RankComponent> ent, ref ClothingGotEquippedEvent args)
-    {
-        var rank = ent.Comp.Rank;
-
-        if (rank != null)
-            SetRank(args.Wearer, rank.Value);
-    }
-
-    private void OnUnequip(Entity<RankComponent> ent, ref ClothingGotUnequippedEvent args)
-    {
-        RemComp<RankComponent>(args.Wearer);
     }
 
     private void OnRankExamined(Entity<RankComponent> ent, ref ExaminedEvent args)
@@ -100,6 +85,9 @@ public abstract class SharedRankSystem : EntitySystem
             return rank.Name;
     }
 
+    /// <summary>
+    ///     Gets the prefix rank name. (ex. Maj John Marine)
+    /// </summary>
     public string? GetSpeakerRankName(EntityUid uid)
     {
         var rank = GetRankString(uid, true);
@@ -109,6 +97,9 @@ public abstract class SharedRankSystem : EntitySystem
         return rank + " " + Name(uid);
     }
 
+    /// <summary>
+    ///     Gets the prefix full name. (ex. Major John Marine)
+    /// </summary>
     public string? GetSpeakerFullRankName(EntityUid uid)
     {
         var rank = GetRankString(uid);
