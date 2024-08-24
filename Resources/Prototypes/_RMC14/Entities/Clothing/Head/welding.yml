@@ -1,0 +1,30 @@
+# Welding mask(s)
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCWeldingMaskBase
+  name: welding mask
+  abstract: true
+  components:
+  - type: Item
+    storedRotation: 0
+  - type: IngestionBlocker
+  - type: FlashImmunity
+  - type: IdentityBlocker
+  - type: RMCEyeProtectionItem
+    raisedEquippedPrefix: up
+    slots:
+    - head
+  - type: HideLayerClothing
+    slots:
+    - Snout
+
+- type: entity
+  parent: RMCWeldingMaskBase
+  id: RMCWeldingMask
+  name: welding mask
+  description: A head-mounted face cover designed to protect the wearer completely from space-arc eye.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/welding.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/welding.rsi
