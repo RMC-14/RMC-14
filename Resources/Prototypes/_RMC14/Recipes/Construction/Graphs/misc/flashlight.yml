@@ -13,8 +13,6 @@
                 sprite: _RMC14/Objects/Tools/Light/flashlight.rsi
                 state: flashlight
               doAfter: 1
-            - tool: Screwing
-              doAfter: 1
               
     - node: RailLight
       entity: RMCAttachmentRailFlashlight
