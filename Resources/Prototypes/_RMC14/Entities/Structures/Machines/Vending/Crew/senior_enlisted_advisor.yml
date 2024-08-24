@@ -96,7 +96,7 @@
     - name: Ammunition
       entries:
       - id: CMMagazineRifleM54C
-        amount: 10
+        points: 9
     - name: Gun Attachments
       choices: { CMAttachments: 1 }
       entries:
