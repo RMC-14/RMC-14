@@ -173,3 +173,14 @@ public sealed class RMCRoleTimerExclude
 
     public string Tracker { get; set; } = default!;
 }
+
+[Table("rmc_squad_preferences")]
+public sealed class RMCSquadPreference
+{
+    [Key, ForeignKey("Player")]
+    public int ProfileId { get; set; }
+
+    public Profile Profile { get; set; } = default!;
+
+    public string? Squad { get; set; } // EntProtoId<SquadTeamComponent>
+}

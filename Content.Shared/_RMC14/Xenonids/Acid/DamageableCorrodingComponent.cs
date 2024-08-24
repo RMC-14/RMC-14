@@ -20,4 +20,7 @@ public sealed partial class DamageableCorrodingComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextDamageAt;
 
+    [DataField, AutoNetworkedField]
+    public TimeSpan AcidExpiresAt;
+
 }

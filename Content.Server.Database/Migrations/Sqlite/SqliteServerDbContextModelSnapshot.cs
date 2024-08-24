@@ -1151,6 +1151,22 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("rmc_role_timer_excludes", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCSquadPreference", b =>
+                {
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("profile_id");
+
+                    b.Property<string>("Squad")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("squad");
+
+                    b.HasKey("ProfileId")
+                        .HasName("PK_rmc_squad_preferences");
+
+                    b.ToTable("rmc_squad_preferences", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.RoleWhitelist", b =>
                 {
                     b.Property<Guid>("PlayerUserId")
@@ -2008,6 +2024,18 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Player");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCSquadPreference", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithOne("SquadPreference")
+                        .HasForeignKey("Content.Server.Database.RMCSquadPreference", "ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_squad_preferences_profile_profile_id");
+
+                    b.Navigation("Profile");
+                });
+
             modelBuilder.Entity("Content.Server.Database.RoleWhitelist", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", "Player")
@@ -2248,6 +2276,8 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Loadouts");
 
                     b.Navigation("NamedItems");
+
+                    b.Navigation("SquadPreference");
 
                     b.Navigation("Traits");
                 });

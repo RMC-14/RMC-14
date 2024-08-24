@@ -135,6 +135,7 @@
 #    - id: RMCPlasticExplosives
 #      amount: 2
     - id: RMCLaserDesignatorScout
+    - id: RMCScoutShoes
   - type: CMChangeUserOnVend
     addComponents:
     - type: ScoutWhitelist

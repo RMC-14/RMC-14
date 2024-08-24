@@ -8,3 +8,4 @@
     anchored: false
   - type: Physics
     bodyType: Static
+    canCollide: false

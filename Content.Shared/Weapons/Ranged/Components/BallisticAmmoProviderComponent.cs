@@ -1,3 +1,4 @@
+using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
@@ -6,7 +7,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Weapons.Ranged.Components;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, Access(typeof(SharedGunSystem))]
 public sealed partial class BallisticAmmoProviderComponent : Component
 {
     [ViewVariables(VVAccess.ReadWrite), DataField]
@@ -32,6 +33,7 @@ public sealed partial class BallisticAmmoProviderComponent : Component
     public Container Container = default!;
 
     // TODO: Make this use stacks when the typeserializer is done.
+    // Realistically just point to the container.
     [DataField, AutoNetworkedField]
     public List<EntityUid> Entities = new();
 
@@ -54,7 +56,7 @@ public sealed partial class BallisticAmmoProviderComponent : Component
     /// DoAfter delay for filling a bullet into another ballistic ammo provider.
     /// </summary>
     [DataField]
-    public double FillDelay = 0.5;
+    public TimeSpan FillDelay = TimeSpan.FromSeconds(0.5);
 
     /// <summary>
     /// DoAfter delay for loading a ballistic ammo provider directly from an ammo component. Happens after FillDelay.

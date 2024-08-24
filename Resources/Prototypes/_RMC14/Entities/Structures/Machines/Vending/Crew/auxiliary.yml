@@ -100,7 +100,7 @@
         points: 10
       - id: RMCAttachmentGyroscopicStabilizer
         points: 10
-      - id: RMCAttachmentLaserLightModule
+      - id: RMCAttachmentLaserSight
         points: 10
       - id: RMCAttachmentU7UnderbarrelShotgun # This is called "Masterkey" in flight vend; not sure if accurate.
         points: 10
