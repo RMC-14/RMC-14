@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory.Events;
@@ -34,7 +35,7 @@ public sealed class RMCStorageSystem : EntitySystem
     {
         _storageQuery = GetEntityQuery<StorageComponent>();
 
-        SubscribeLocalEvent<StorageFillComponent, CMStorageItemFillEvent>(OnStorageFillItem);
+        SubscribeLocalEvent<StorageComponent, CMStorageItemFillEvent>(OnStorageFillItem);
 
         SubscribeLocalEvent<StorageOpenDoAfterComponent, OpenStorageDoAfterEvent>(OnStorageOpenDoAfter);
 
@@ -65,7 +66,7 @@ public sealed class RMCStorageSystem : EntitySystem
             args.Handled = true;
     }
 
-    private void OnStorageFillItem(Entity<StorageFillComponent> storage, ref CMStorageItemFillEvent args)
+    private void OnStorageFillItem(Entity<StorageComponent> storage, ref CMStorageItemFillEvent args)
     {
         var tries = 0;
         while (!_storage.CanInsert(storage, args.Item, out var reason) &&
@@ -75,9 +76,9 @@ public sealed class RMCStorageSystem : EntitySystem
             tries++;
 
             // TODO RMC14 make this error if this is a cm-specific storage
-            Log.Warning($"Storage {ToPrettyString(storage)} can't fit {ToPrettyString(args.Item)}");
+            if (CMPrototypeExtensions.FilterCM)
+                Log.Warning($"Storage {ToPrettyString(storage)} can't fit {ToPrettyString(args.Item)}");
 
-            var modified = false;
             foreach (var shape in _item.GetItemShape((storage, args.Storage), (args.Item, args.Item)))
             {
                 var grid = args.Storage.Grid;
@@ -95,11 +96,7 @@ public sealed class RMCStorageSystem : EntitySystem
                     expanded.Top = shape.Top;
 
                 grid[^1] = expanded;
-                modified = true;
             }
-
-            if (modified)
-                Dirty(storage);
         }
     }
 
