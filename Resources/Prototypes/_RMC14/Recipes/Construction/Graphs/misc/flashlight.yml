@@ -1,50 +1,39 @@
 - type: constructionGraph
-  parent: RMC
   id: RMCFlashLightGraph
   start: start
   graph:
-
-  - node: start
-    edges:
-    - to: RailLight
-      steps:
-      - tag: Flashlight
-        icon:
-          sprite: _RMC14/Objects/Tools/Light/flashlight.rsi
-          state: flashlight
-        name: flashlight
-      - tool: Screwing
-        doAfter: 1
-
-  - node: RailLight
-    entity: RMCFlashlight
-    actions:
-    - !type:SpawnPrototype
-      prototype: RMCAttachmentRailFlashlight
-    edges:
-    - to: RMCAttachmentFlashlightGrip
-      steps:
-      - tool: Screwing
-        doAfter: 1
-
-  - node: RMCAttachmentFlashlightGrip
-    entity: RMCAttachmentRailFlashlight
-    actions:
-    - !type:SpawnPrototype
-      prototype: RMCAttachmentFlashlightGrip
-    edges:
-    - to: wiredCase
-      steps:
-      - tool: Screwing
-        doAfter: 1
-
-  - node: RMCFlashlight
-    entity: RMCAttachmentFlashlightGrip
-    actions:
-    - !type:SpawnPrototype
-      prototype: RMCFlashlight
-    edges:
-    - to: start
-      steps:
-      - tool: Screwing
-        doAfter: 1
+    - node: start
+      edges:
+        - to: RailLight
+          steps:
+            - node: start
+              edges:
+            - to: RailLight
+              steps:
+              - tag: Flashlight
+                icon:
+                name: flashlight
+                  sprite: _RMC14/Objects/Tools/Light/flashlight.rsi
+                  state: flashlight
+            - tool: Screwing
+              doAfter: 1
+              
+        
+    - node: RailLight
+      entity: RMCAttachmentRailFlashlight
+      edges:
+        - to: LightGrip
+          steps:
+            - tool: Screwing
+              doAfter: 1
+              
+    - node: LightGrip
+      entity: RMCAttachmentFlashlightGrip
+      edges:
+        - to: Flashlight
+          steps:
+            - tool: Screwing
+              doAfter: 1
+        
+    - node: Flashlight
+      entity: RMCFlashLight
