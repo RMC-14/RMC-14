@@ -31,7 +31,7 @@ public sealed class XenoRemoveNestedBui : BoundUserInterface
             return;
         var msg = new XenoRemoveNestedBuiMsg(true, _nestableTarget);
         SendPredictedMessage(msg);
-        _window.Close();
+        //_window.Close();
     }
     protected override void UpdateState(BoundUserInterfaceState state)
     {

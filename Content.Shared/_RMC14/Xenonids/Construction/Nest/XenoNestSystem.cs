@@ -126,7 +126,7 @@ public sealed class XenoNestSystem : EntitySystem
 
     private void OnNestedActivateInWorld(Entity<XenoNestableComponent> target, ref ActivateInWorldEvent args)
     {
-        if (!TryComp(args.User, out XenoComponent? xenoComp))
+        if (!HasComp<XenoComponent>(args.User))
             return;
         var castUser = (Entity<XenoComponent>) args.User!;
         TryStartUnNesting(castUser, target.Owner);
@@ -248,6 +248,7 @@ public sealed class XenoNestSystem : EntitySystem
 
     private void OnRemoveNestedBuiMsg(Entity<XenoComponent> user, ref XenoRemoveNestedBuiMsg args)
     {
+        _popup.PopupEntity("OnRemoveNestedBuiMsg", user);
         _ui.CloseUi(user.Owner, XenoRemoveNestedUI.Key, user);
         if (!args.RemoveNested)
             return;
@@ -356,6 +357,7 @@ public sealed class XenoNestSystem : EntitySystem
 
         if (!_mobState.IsDead(target) && !_mobState.IsCritical(target))
         {
+            _ui.TryOpenUi(target, XenoRemoveNestedUI.Key, user);
             _ui.SetUiState(target, XenoRemoveNestedUI.Key, new RemoveNestedState(target.Id));
             return;
         }
