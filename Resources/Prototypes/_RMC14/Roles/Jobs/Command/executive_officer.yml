@@ -9,7 +9,7 @@
     department: CMCommand
     time: 18000 # 5 hours
   ranks:
-  - RMCRankCaptainXO
+  - RMCBaseRankCaptain
   weight: 5
   startingGear: CMGearStaffOfficer
   icon: "CMJobIconExecutiveOfficer"
