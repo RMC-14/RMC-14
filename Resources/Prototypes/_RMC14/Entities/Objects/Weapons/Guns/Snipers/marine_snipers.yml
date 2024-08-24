@@ -50,7 +50,7 @@
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_sniper.ogg
   - type: RMCSelectiveFire
     recoilWielded: 1
-    scatterWielded: 6
+    scatterWielded: 0
     baseFireRate: 0.667
   - type: WieldDelay
     baseDelay: 1.2
