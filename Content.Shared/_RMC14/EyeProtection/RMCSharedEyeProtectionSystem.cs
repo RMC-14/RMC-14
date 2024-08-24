@@ -182,7 +182,8 @@ namespace Content.Shared._RMC14.EyeProtection
             // Check if already enabled
             if (TryComp(user, out RMCEyeProtectionComponent? eyeProt))
             {
-                RemComp<RMCEyeProtectionComponent>(user);
+                return; // To prevent multiple items being enabled at once
+                //RemComp<RMCEyeProtectionComponent>(user);
             }
 
             item.Comp.User = user;
@@ -228,10 +229,6 @@ namespace Content.Shared._RMC14.EyeProtection
             if (!TryComp<ClothingComponent>(ent, out var clothingComp))
                 return;
 
-            // Can't disable what isn't there
-            if (!TryComp(user, out RMCEyeProtectionComponent? eyeProt))
-                return;
-
             // Display pop-up
             if (item.Comp.PopupName != null)
             {
@@ -259,7 +256,9 @@ namespace Content.Shared._RMC14.EyeProtection
 
             Dirty(item);
 
-            RemComp<RMCEyeProtectionComponent>(user.Value);
+            // Can't disable what isn't there
+            if (TryComp(user, out RMCEyeProtectionComponent? eyeProt))
+                RemComp<RMCEyeProtectionComponent>(user.Value);
         }
 
         private void ToggleEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid user)
