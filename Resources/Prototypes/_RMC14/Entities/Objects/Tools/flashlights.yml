@@ -70,6 +70,9 @@
         map: [ "light" ]
   - type: Item
     size: Small
+  - type: Construction
+    graph: RMCFlashLightGraph
+    node: Flashlight
 
 - type: entity
   parent: RMCFlashlightBase
