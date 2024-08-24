@@ -141,6 +141,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/tech.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/tech.rsi
+  - type: EyeProtection # This cancels out the upstream RequiresEyeProtection on welders
   - type: RMCEyeProtectionItem
     raisedEquippedPrefix: up  # TODO implement actual helmet overlays (this is a temporary hack)
     slots:

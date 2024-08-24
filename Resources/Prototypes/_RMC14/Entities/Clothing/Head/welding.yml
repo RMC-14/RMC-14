@@ -10,6 +10,7 @@
   - type: IngestionBlocker
   - type: FlashImmunity
   - type: IdentityBlocker
+  - type: EyeProtection # This cancels out the upstream RequiresEyeProtection on welders
   - type: RMCEyeProtectionItem
     raisedEquippedPrefix: up
     slots:
