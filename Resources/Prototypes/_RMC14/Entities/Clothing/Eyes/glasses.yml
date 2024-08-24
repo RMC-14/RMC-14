@@ -145,7 +145,7 @@
 - type: entity
   parent: ClothingEyesBase
   id: RMCWeldingGoggles
-  name: Welding goggles
+  name: welding goggles
   description: A pair of welding goggles. Provides protection from eye damage.
   components:
   - type: Sprite

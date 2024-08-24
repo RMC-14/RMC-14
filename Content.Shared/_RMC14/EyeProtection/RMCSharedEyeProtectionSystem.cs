@@ -8,6 +8,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Popups;
 using Content.Shared.Rounding;
 using Content.Shared.StatusEffect;
 using Content.Shared.Toggleable;
@@ -27,6 +28,7 @@ namespace Content.Shared._RMC14.EyeProtection
         [Dependency] private readonly IGameTiming _timing = default!;
         [Dependency] private readonly ClothingSystem _clothingSystem = default!;
         [Dependency] private readonly InventorySystem _inventory = default!;
+        [Dependency] private readonly SharedPopupSystem _popup = default!;
 
         public override void Initialize()
         {
@@ -172,7 +174,9 @@ namespace Content.Shared._RMC14.EyeProtection
 
         private void EnableEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid user)
         {
-            if (!TryComp<ClothingComponent>(item.Owner, out var clothingComp))
+            var ent = item.Owner;
+
+            if (!TryComp<ClothingComponent>(ent, out var clothingComp))
                 return;
 
             // Check if already enabled
@@ -184,15 +188,21 @@ namespace Content.Shared._RMC14.EyeProtection
             item.Comp.User = user;
             item.Comp.Toggled = true;
 
-            // Display correct sprite
+            // Display correct worn sprite
             if (item.Comp.RaisedEquippedPrefix != null)
             {
-                _clothingSystem.SetEquippedPrefix(item.Owner, null, clothingComp);
+                _clothingSystem.SetEquippedPrefix(ent, null, clothingComp);
             }
 
+            // Update icon
             _appearance.SetData(item, RMCEyeProtectionItemVisuals.Active, true);
 
+            // Update action
             _actions.SetToggled(item.Comp.Action, true);
+
+            // Display pop-up
+            var msg = Loc.GetString("rmc-weld-protection-down", ("protection", ent));
+            _popup.PopupClient(msg, ent, user, PopupType.Small);
 
             Dirty(item);
 
@@ -205,22 +215,30 @@ namespace Content.Shared._RMC14.EyeProtection
 
         protected void DisableEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid? user)
         {
-            if (!TryComp<ClothingComponent>(item.Owner, out var clothingComp))
+            var ent = item.Owner;
+
+            if (!TryComp<ClothingComponent>(ent, out var clothingComp))
                 return;
 
             // Can't disable what isn't there
             if (!TryComp(user, out RMCEyeProtectionComponent? eyeProt))
                 return;
 
+            // Display pop-up
+            var msg = Loc.GetString("rmc-weld-protection-up", ("protection", ent));
+            _popup.PopupClient(msg, ent, item.Comp.User, PopupType.Small);
+
             item.Comp.User = null;
             item.Comp.Toggled = false;
 
-            // Display correct sprite, if applicable
+            // Display correct worn sprite, if applicable
             if (item.Comp.RaisedEquippedPrefix != null)
-                _clothingSystem.SetEquippedPrefix(item.Owner, item.Comp.RaisedEquippedPrefix, clothingComp);
+                _clothingSystem.SetEquippedPrefix(ent, item.Comp.RaisedEquippedPrefix, clothingComp);
 
+            // Update icon
             _appearance.SetData(item, RMCEyeProtectionItemVisuals.Active, false);
 
+            // Update action
             _actions.SetToggled(item.Comp.Action, false);
 
             Dirty(item);
