@@ -38,7 +38,7 @@ public sealed partial class RMCEyeProtectionItemComponent : Component
     /// Currently supports only one slot at a time
     /// </summary>
     [DataField, AutoNetworkedField]
-    public SlotFlags SlotFlags { get; set; } = SlotFlags.EYES;
+    public SlotFlags Slots { get; set; } = SlotFlags.EYES;
 
     /// <summary>
     ///  Is welding protection enabled?
@@ -51,4 +51,10 @@ public sealed partial class RMCEyeProtectionItemComponent : Component
     /// </summary>
     [DataField]
     public string? RaisedEquippedPrefix;
+
+    /// <summary>
+    /// Name to display in pop-up messages (mainly for helmets and other equipment with integrated welding protection)
+    /// </summary>
+    [DataField]
+    public string? PopupName;
 }

@@ -116,7 +116,7 @@ namespace Content.Shared._RMC14.EyeProtection
                 return;
 
             // Item not in a position for protecting eyes
-            if (ent.Comp.SlotFlags != args.SlotFlags)
+            if (ent.Comp.Slots != args.SlotFlags)
                 return;
 
             args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId);
@@ -135,7 +135,7 @@ namespace Content.Shared._RMC14.EyeProtection
         private void OnEyeProtectionItemGotEquipped(Entity<RMCEyeProtectionItemComponent> ent, ref GotEquippedEvent args)
         {
             // Item not in a position for protecting eyes
-            if (ent.Comp.SlotFlags != args.SlotFlags)
+            if (ent.Comp.Slots != args.SlotFlags)
                 return;
 
             if (!TryComp<ClothingComponent>(ent.Owner, out var clothingComp))
@@ -151,7 +151,7 @@ namespace Content.Shared._RMC14.EyeProtection
         private void OnEyeProtectionItemGotUnequipped(Entity<RMCEyeProtectionItemComponent> ent, ref GotUnequippedEvent args)
         {
             // Item not in a position for protecting eyes
-            if (ent.Comp.SlotFlags != args.SlotFlags)
+            if (ent.Comp.Slots != args.SlotFlags)
                 return;
 
             DisableEyeProtectionItem(ent, args.Equipee);
@@ -201,8 +201,16 @@ namespace Content.Shared._RMC14.EyeProtection
             _actions.SetToggled(item.Comp.Action, true);
 
             // Display pop-up
-            var msg = Loc.GetString("rmc-weld-protection-down", ("protection", ent));
-            _popup.PopupClient(msg, ent, user, PopupType.Small);
+            if (item.Comp.PopupName != null)
+            {
+                var msg = Loc.GetString("rmc-weld-protection-down", ("protection", item.Comp.PopupName));
+                _popup.PopupClient(msg, ent, user, PopupType.Small);
+            }
+            else
+            {
+                var msg = Loc.GetString("rmc-weld-protection-down", ("protection", ent));
+                _popup.PopupClient(msg, ent, user, PopupType.Small);
+            }
 
             Dirty(item);
 
@@ -225,8 +233,16 @@ namespace Content.Shared._RMC14.EyeProtection
                 return;
 
             // Display pop-up
-            var msg = Loc.GetString("rmc-weld-protection-up", ("protection", ent));
-            _popup.PopupClient(msg, ent, item.Comp.User, PopupType.Small);
+            if (item.Comp.PopupName != null)
+            {
+                var msg = Loc.GetString("rmc-weld-protection-up", ("protection", item.Comp.PopupName));
+                _popup.PopupClient(msg, ent, user, PopupType.Small);
+            }
+            else
+            {
+                var msg = Loc.GetString("rmc-weld-protection-up", ("protection", ent));
+                _popup.PopupClient(msg, ent, user, PopupType.Small);
+            }
 
             item.Comp.User = null;
             item.Comp.Toggled = false;

@@ -141,7 +141,16 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/tech.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/tech.rsi
-  - type: EyeProtection # TODO RMC14 toggleable
+  - type: RMCEyeProtectionItem # TODO RMC14 toggleable
+    slots:
+    - head
+    popupName: welding visor
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCEyeProtectionItemVisuals.Active:
+        icon:
+          True: { state: icon }
+          False: { state: icon_raised }
 
 # M11
 - type: entity
