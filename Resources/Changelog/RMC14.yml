@@ -1,39 +1,4 @@
 ﻿Entries:
-- author: DangerRevolution
-  changes:
-  - message: Added the Coif
-    type: Add
-  id: 105
-  time: '2024-05-11T05:49:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2046
-- author: Whisper
-  changes:
-  - message: Added the coif mask to vendors
-    type: Add
-  id: 106
-  time: '2024-05-11T07:51:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2097
-- author: Whisper
-  changes:
-  - message: Added insuls to vendors
-    type: Add
-  id: 107
-  time: '2024-05-11T07:53:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2100
-- author: Whisper
-  changes:
-  - message: Added sterile mask to vendor
-    type: Add
-  id: 108
-  time: '2024-05-11T07:52:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2098
-- author: Whisper
-  changes:
-  - message: Added gas mask to vendors
-    type: Add
-  id: 109
-  time: '2024-05-11T08:01:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2102
 - author: DrSmugleaf
   changes:
   - message: parasites and lesser drones now slowly die without weeds.
@@ -4365,5 +4330,52 @@
   id: 604
   time: '2024-08-22T00:54:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3779
+- author: ShadowCommander, DrSmugleaf
+  changes:
+  - message: Added Squad Leader tracker for marines and xenonid Queen tracker for
+      xenonids.
+    type: Add
+  id: 605
+  time: '2024-08-22T23:18:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3492
+- author: tsp01, DrSmugleaf
+  changes:
+  - message: Added squad preference in character customization.
+    type: Add
+  - message: Fixed squads being able to have multiple SLs, SGOs, or weapons specs
+      if one cryos and another one late-joins.
+    type: Fix
+  id: 606
+  time: '2024-08-23T00:16:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3237
+- author: CaasGit
+  changes:
+  - message: Fax Machines now print local files using the CMPaper sprite.
+    type: Fix
+  id: 607
+  time: '2024-08-23T00:31:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3790
+- author: DrSmugleaf
+  changes:
+  - message: Fixed stopping targeting with a laser designator stopping already in-flight
+      GAU-21 bullets from arriving after they have already been fired.
+    type: Fix
+  - message: Fixed the ground sound after the GAU-21 bullets have all arrived not
+      playing, or playing so loudly that it CAS's your eardrums.
+    type: Fix
+  - message: Actually fixed the ghost of ammo long shot past from sticking around
+      lagging the server.
+    type: Fix
+  id: 608
+  time: '2024-08-23T02:04:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3799
+- author: DrSmugleaf
+  changes:
+  - message: Examining a dropship weapon attach point will now tell you what gun and
+      ammo it has loaded, and how many rounds it has left.
+    type: Add
+  id: 609
+  time: '2024-08-23T02:44:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3800
 Name: RMC14
 Order: -1
