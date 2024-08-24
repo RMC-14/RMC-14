@@ -1,4 +1,5 @@
 - type: constructionGraph
+  parent: RMC
   id: RMCFlashLightGraph
   start: start
   graph:
