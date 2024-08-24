@@ -15,6 +15,7 @@ public sealed class RMCEyeProtectionOverlay : Overlay
     public override bool RequestScreenTexture => true;
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
     private readonly ShaderInstance _eyeProtShader;
+    private float _zoom;
 
     private RMCEyeProtectionComponent _eyeProtComponent = default!;
 
@@ -41,6 +42,8 @@ public sealed class RMCEyeProtectionOverlay : Overlay
         if (!_entityManager.TryGetComponent<RMCEyeProtectionComponent>(playerEntity, out var eyeProtComp))
             return false;
 
+        _zoom = eyeProtComp.Zoom;
+
         return true;
     }
 
@@ -61,7 +64,7 @@ public sealed class RMCEyeProtectionOverlay : Overlay
 
         if (_entityManager.TryGetComponent<EyeComponent>(playerEntity, out var content))
         {
-            _eyeProtShader?.SetParameter("Zoom", 0.20f * content.Zoom.X);
+            _eyeProtShader?.SetParameter("Zoom", _zoom * content.Zoom.X);
         }
 
         var handle = args.WorldHandle;
