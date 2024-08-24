@@ -131,6 +131,9 @@
     coldDamageThreshold: 260
     currentTemperature: 310.15
     specificHeat: 42
+  - type: TemperatureSpeed
+    thresholds:
+      273: 1
   - type: ThermalRegulator
     metabolismHeat: 800
     radiatedHeat: 100

@@ -1,13 +1,15 @@
 using System.Linq;
+using Content.Shared._RMC14.Examine;
+using Content.Shared._RMC14.UserInterface;
 using Content.Shared.Administration.Logs;
-using Content.Shared.UserInterface;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
-using Robust.Shared.Player;
+using Content.Shared.UserInterface;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Player;
 using static Content.Shared.Paper.PaperComponent;
 
 namespace Content.Shared.Paper;
@@ -22,6 +24,8 @@ public sealed class PaperSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly CMExamineSystem _rmcExamine = default!;
+    [Dependency] private readonly RMCUserInterfaceSystem _rmcUI = default!;
 
     public override void Initialize()
     {
@@ -71,6 +75,9 @@ public sealed class PaperSystem : EntitySystem
         if (!args.IsInDetailsRange)
             return;
 
+        if (!_rmcExamine.CanExamine(entity.Owner, args.Examiner))
+            return;
+
         using (args.PushGroup(nameof(PaperComponent)))
         {
             if (entity.Comp.Content != "")
@@ -99,6 +106,9 @@ public sealed class PaperSystem : EntitySystem
 
     private void OnInteractUsing(Entity<PaperComponent> entity, ref InteractUsingEvent args)
     {
+        if (!_rmcUI.CanOpenUI(entity.Owner, args.User, PaperUiKey.Key))
+            return;
+
         // only allow editing if there are no stamps or when using a cyberpen
         var editable = entity.Comp.StampedBy.Count == 0 || _tagSystem.HasTag(args.Used, "WriteIgnoreStamps");
         if (_tagSystem.HasTag(args.Used, "Write") && editable)

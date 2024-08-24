@@ -21,7 +21,6 @@ public sealed class RussianAccentSystem : EntitySystem
 
             accentedMessage[i] = c switch
             {
-                'A' => 'Д',
                 'b' => 'в',
                 'N' => 'И',
                 'n' => 'и',
