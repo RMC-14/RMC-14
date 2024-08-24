@@ -13,6 +13,8 @@
 - type: tile
   parent: RMCFloorAIGlowing
   id: RMCFloorAIGlowingNoBuild
+  blockAnchoring: true
+  blockConstruction: true
 
 - type: tile
   parent: RMCFloorAIGlowing
@@ -27,6 +29,8 @@
 - type: tile
   parent: RMCFloorAI
   id: RMCFloorAINoBuild
+  blockAnchoring: true
+  blockConstruction: true
 
 - type: tile
   parent: RMCFloorAINoBuild

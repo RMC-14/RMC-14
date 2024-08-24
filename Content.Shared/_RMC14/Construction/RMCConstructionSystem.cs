@@ -2,9 +2,11 @@
 using Content.Shared.Construction.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Doors.Components;
+using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
@@ -15,6 +17,7 @@ namespace Content.Shared._RMC14.Construction;
 public sealed class RMCConstructionSystem : EntitySystem
 {
     [Dependency] private readonly FixtureSystem _fixture = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -38,8 +41,27 @@ public sealed class RMCConstructionSystem : EntitySystem
 
     private void OnConstructionAttempt(ref RMCConstructionAttemptEvent ev)
     {
-        if (_transform.GetGrid(ev.Location) is { } grid &&
-            HasComp<DropshipComponent>(grid))
+        if (ev.Cancelled)
+            return;
+
+        if (_transform.GetGrid(ev.Location) is not { } gridId)
+            return;
+
+        if (HasComp<DropshipComponent>(gridId))
+        {
+            ev.Popup = Loc.GetString("rmc-construction-not-proper-surface", ("construction", ev.PrototypeName));
+            ev.Cancelled = true;
+            return;
+        }
+
+        if (!TryComp(gridId, out MapGridComponent? grid))
+            return;
+
+        var indices = _map.TileIndicesFor(gridId, grid, ev.Location);
+        if (!_map.TryGetTileDef(grid, indices, out var def))
+            return;
+
+        if (def is ContentTileDefinition { BlockConstruction: true })
         {
             ev.Popup = Loc.GetString("rmc-construction-not-proper-surface", ("construction", ev.PrototypeName));
             ev.Cancelled = true;
@@ -85,25 +107,50 @@ public sealed class RMCConstructionSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (_transform.GetGrid(ent.Owner) is not { } grid)
+        if (_transform.GetGrid(ent.Owner) is not { } gridId)
             return;
 
-        if (HasComp<DropshipComponent>(grid))
+        if (HasComp<DropshipComponent>(gridId))
+        {
+            var msg = Loc.GetString("rmc-construction-not-proper-surface", ("construction", Name(ent)));
+            _popup.PopupClient(msg, ent, args.User);
+            args.Cancel();
+            return;
+        }
+
+        if (!TryComp(gridId, out MapGridComponent? grid))
+            return;
+
+        var indices = _map.TileIndicesFor(gridId, grid, ent.Owner.ToCoordinates());
+        if (!_map.TryGetTileDef(grid, indices, out var def))
+            return;
+
+        if (def is ContentTileDefinition { BlockAnchoring: true })
         {
             var msg = Loc.GetString("rmc-construction-not-proper-surface", ("construction", Name(ent)));
             _popup.PopupClient(msg, ent, args.User);
             args.Cancel();
         }
     }
+
     private void OnUserAnchored(Entity<RMCDropshipBlockedComponent> ent, ref UserAnchoredEvent args)
     {
-        if (!TryComp(ent.Owner, out TransformComponent? xform) ||
-            !HasComp<DropshipComponent>(xform.GridUid))
+        var xform = Transform(ent);
+        if (HasComp<DropshipComponent>(xform.GridUid))
         {
+            _transform.Unanchor(ent.Owner, xform);
             return;
         }
 
-        _transform.Unanchor(ent.Owner, xform);
+        if (!TryComp(xform.GridUid, out MapGridComponent? grid))
+            return;
+
+        var indices = _map.TileIndicesFor(xform.GridUid.Value, grid, ent.Owner.ToCoordinates());
+        if (!_map.TryGetTileDef(grid, indices, out var def))
+            return;
+
+        if (def is ContentTileDefinition { BlockAnchoring: true })
+            _transform.Unanchor(ent.Owner, xform);
     }
 
     public bool CanConstruct(EntityUid? user)
