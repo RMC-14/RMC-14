@@ -76,8 +76,8 @@ public sealed class RMCEyeProtectionOverlay : Overlay
 
         // Default view distance from top to bottom of screen in tiles
         var maxTilesHeight = 8.5f;
-        // Actual height of viewport in tiles, accounting for zoom (clamped to 1.0 to account for farsight)
-        var actualTilesHeight = maxTilesHeight * (content.Zoom.X <= 1.0f ? content.Zoom.X : 1.0f);
+        // Actual height of viewport in tiles, accounting for zoom
+        var actualTilesHeight = maxTilesHeight * content.Zoom.X;
 
         var outerRadiusRatio = (maxTilesHeight - eyeProt.ImpairFull) / actualTilesHeight / 2;
         var innerRadiusRatio = (maxTilesHeight - eyeProt.ImpairFull - eyeProt.ImpairPartial) / actualTilesHeight / 2;
