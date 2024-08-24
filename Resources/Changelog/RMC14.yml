@@ -1,33 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added whistle
-    type: Add
-  id: 111
-  time: '2024-05-11T08:35:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2103
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xeno actions sometimes starting out of order.
-    type: Fix
-  id: 112
-  time: '2024-05-12T10:15:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2106
-- author: DrSmugleaf
-  changes:
-  - message: The M83 grenade launcher's grenades now land exactly where the user clicks
-      and have a short delay before exploding.
-    type: Tweak
-  id: 113
-  time: '2024-05-13T20:58:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2133
-- author: Tunguso4ka
-  changes:
-  - message: Ported chem, booze, soda dispensers and chem master.
-    type: Add
-  id: 114
-  time: '2024-05-14T23:38:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2142
 - author: DrSmugleaf
   changes:
   - message: Marines can now cut their way out of a xeno while devoured.
@@ -4377,5 +4348,39 @@
   id: 610
   time: '2024-08-24T07:03:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3812
+- author: Vermidia
+  changes:
+  - message: Fixed monkeys suffocating while nested.
+    type: Fix
+  id: 611
+  time: '2024-08-24T07:05:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3706
+- author: FungiFellow
+  changes:
+  - message: You can no longer buy laserlight Modules from the pilot vendors, replaced
+      with laser sight
+    type: Fix
+  id: 612
+  time: '2024-08-24T07:05:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3789
+- author: Lank
+  changes:
+  - message: Scout now hides external markings (wings, frills, tails, etc.) while
+      cloaked, and is slightly less visible overall.
+    type: Tweak
+  - message: Scout's A19 magazines now have a unique sprite.
+    type: Tweak
+  - message: Scout is now correctly not decloaked by acid spit.
+    type: Fix
+  id: 613
+  time: '2024-08-24T07:06:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3743
+- author: FungiFellow
+  changes:
+  - message: Infiltrator Boots are now part of WS Scout Kit
+    type: Add
+  id: 614
+  time: '2024-08-24T07:07:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3740
 Name: RMC14
 Order: -1
