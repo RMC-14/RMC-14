@@ -3,7 +3,7 @@
   id: RMCFlashlightModify
   graph: RMCFlashLightGraph
   startNode: start
-  targetNode: RMCFlashlight
+  targetNode: Flashlight
   category: construction-category-cm-utilities
   description: Alter a Flashlight into a Weapon Attachment and Vice Versa
   icon: { sprite: _RMC14/Objects/Tools/Light/flashlight.rsi, state: flashlight }
