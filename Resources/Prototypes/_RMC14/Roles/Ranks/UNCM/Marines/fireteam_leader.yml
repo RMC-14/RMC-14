@@ -11,5 +11,5 @@
   id: RMCRankFTLCorporal
   requirements:
   - !type:RoleTimeRequirement
-    role: CMFireteamLeader
+    role: CMJobFireteamLeader
     time: 36000 # 10 hours
