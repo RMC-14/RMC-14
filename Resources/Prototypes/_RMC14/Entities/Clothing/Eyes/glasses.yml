@@ -152,6 +152,7 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
+  - type: EyeProtection # This cancels out the upstream RequiresEyeProtection on welders
   - type: RMCEyeProtectionItem
     raisedEquippedPrefix: up
   - type: GenericVisualizer

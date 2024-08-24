@@ -28,6 +28,7 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/weldingtool_pickup.ogg
+  - type: RMCRequiresEyeProtection
 
 - type: entity
   parent: CMWelder
