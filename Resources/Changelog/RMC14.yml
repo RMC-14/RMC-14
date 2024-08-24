@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added xeno death sounds and xeno pull knockdown sound.
-    type: Add
-  id: 117
-  time: '2024-05-20T02:18:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2160
-- author: DrSmugleaf
-  changes:
   - message: Ported the effects of all existing medicines.
     type: Add
   - message: Added all times to the We-Ya-Med Plus except for painkillers, splints
@@ -4382,5 +4375,14 @@
   id: 616
   time: '2024-08-24T07:20:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3813
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being able to build and anchor constructions on stairs.
+    type: Fix
+  - message: Lowered the pointing delay back down from 2 seconds to 1 second.
+    type: Tweak
+  id: 617
+  time: '2024-08-24T07:57:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3815
 Name: RMC14
 Order: -1
