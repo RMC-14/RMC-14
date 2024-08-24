@@ -17,27 +17,12 @@
     - node: RailLight
       entity: RMCAttachmentRailFlashlight
       edges:
-        - to: LightGrip
-          completed:
-            - !type:SpawnPrototype
-              prototype: RMCAttachmentRailFlashlight
+       - to: start
+         completed:
+           - !type:SpawnPrototype
+             prototype: RMCFlashLight
               amount: 1
-          steps:
-            - tool: Screwing
-              doAfter: 1
-              
-    - node: LightGrip
-      entity: RMCAttachmentFlashlightGrip
-      edges:
-        - to: Flashlight
-          completed:
-            - !type:SpawnPrototype
-              prototype: RMCAttachmentFlashlightGrip
-              amount: 1
-            - !type:DeleteEntity {}
-          steps:
-            - tool: Screwing
-              doAfter: 1
-        
-    - node: Flashlight
-      entity: RMCFlashLight
+           - !type:DeleteEntity {}
+         steps:
+           - tool: Screwing
+             doAfter: 1
