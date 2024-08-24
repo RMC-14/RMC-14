@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Marines can now cut their way out of a xeno while devoured.
-    type: Add
-  id: 115
-  time: '2024-05-15T02:52:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2144
-- author: DrSmugleaf
-  changes:
   - message: Full health bars are no longer shown on the medical HUD.
     type: Tweak
   id: 116
@@ -4382,5 +4375,12 @@
   id: 614
   time: '2024-08-24T07:07:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3740
+- author: KalimbaMachine
+  changes:
+  - message: Added SEA Equipment and Gun Racks!
+    type: Add
+  id: 615
+  time: '2024-08-24T07:12:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3791
 Name: RMC14
 Order: -1
