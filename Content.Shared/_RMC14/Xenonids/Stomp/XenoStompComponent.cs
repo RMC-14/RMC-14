@@ -21,6 +21,9 @@ public sealed partial class XenoStompComponent : Component
     public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(0.2);
 
     [DataField, AutoNetworkedField]
+    public float ShortRange = 0.5f;
+
+    [DataField, AutoNetworkedField]
     public float Range = 2;
 
     [DataField, AutoNetworkedField]

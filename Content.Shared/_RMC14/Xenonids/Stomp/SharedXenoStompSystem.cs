@@ -31,6 +31,7 @@ public sealed class XenoStompSystem : EntitySystem
     }
 
     private readonly HashSet<Entity<MarineComponent>> _receivers = new();
+    private readonly HashSet<Entity<MarineComponent>> _shortReceivers = new();
 
     private void OnXenoStompAction(Entity<XenoStompComponent> xeno, ref XenoStompActionEvent args)
     {
@@ -52,7 +53,9 @@ public sealed class XenoStompSystem : EntitySystem
             return;
 
         _receivers.Clear();
+        _shortReceivers.Clear();
         _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.Range, _receivers);
+        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ShortRange, _shortReceivers);
 
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
@@ -67,16 +70,16 @@ public sealed class XenoStompSystem : EntitySystem
                 SpawnAttachedTo(xeno.Comp.Effect, receiver.Owner.ToCoordinates());
         }
 
-        foreach (var receiver in _receivers)
+        foreach (var shortReceiver in _shortReceivers)
         {
-            if (_mobState.IsDead(receiver))
+            if (_mobState.IsDead(shortReceiver))
                 continue;
 
-            var damage = _damageable.TryChangeDamage(receiver, xeno.Comp.Damage);
+            var damage = _damageable.TryChangeDamage(shortReceiver, xeno.Comp.Damage);
             if (damage?.GetTotal() > FixedPoint2.Zero)
             {
-                var filter = Filter.Pvs(receiver, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
-                _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { receiver }, filter);
+                var filter = Filter.Pvs(shortReceiver, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
+                _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { shortReceiver }, filter);
             }
         }
 
