@@ -6,6 +6,5 @@
   targetNode: RMCFlashlight
   category: construction-category-cm-utilities
   description: Alter a Flashlight into a Weapon Attachment and Vice Versa
-  icon:
-    icon: { sprite: _RMC14/Objects/Tools/Light/flashlight.rsi, state: flashlight }
+  icon: { sprite: _RMC14/Objects/Tools/Light/flashlight.rsi, state: flashlight }
   objectType: Item
