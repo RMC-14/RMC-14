@@ -19,7 +19,7 @@ public sealed class RMCWhistleSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly UseDelaySystem _useDelaySystem = default!;
+    [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     public override void Initialize()
     {
@@ -53,9 +53,10 @@ public sealed class RMCWhistleSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (TryComp<UseDelayComponent>(uid, out var useDelay))
+        if (TryComp<UseDelayComponent>(uid, out var useDelayComp))
         {
-            _actions.SetCooldown(component.Action, useDelay.Delay);
+            _useDelay.SetLength(uid, useDelayComp.Delay);
+            _useDelay.TryResetDelay((uid, useDelayComp));
         }
 
         TryMakeLoudWhistle(uid, args.Performer, component);
