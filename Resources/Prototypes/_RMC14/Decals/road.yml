@@ -62,14 +62,7 @@
   id: RMCDecalRoadEdgeCorner3
   sprite:
     sprite: _RMC14/Decals/road.rsi
-    state: road_edge_decal8- type: decal
-  parent: RMCDecalRoadBase
-  id: RMCDecalRoadStop
-  sprite:
-    sprite: _RMC14/Decals/road.rsi
-    state: stop_decal
-
-
+    state: road_edge_decal8
 
 - type: decal
   parent: RMCDecalRoadBase
