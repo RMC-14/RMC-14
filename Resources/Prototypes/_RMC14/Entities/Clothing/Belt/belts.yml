@@ -138,7 +138,6 @@
       - LightReplacer
       - EntrenchingTool
   - type: FixedItemSizeStorage
-<<<<<<< HEAD
   - type: ContainerContainer
     containers:
       pouch: !type:ContainerSlot
@@ -154,14 +153,6 @@
 #          - FlareGun
   - type: CMHolster
   - type: CMItemSlots
-=======
-  - type: LimitedStorage
-    limits:
-    - popup: rmc-storage-limit-one-gun
-      whitelist:
-        components:
-        - Gun
->>>>>>> master
 
 - type: entity
   parent: CMBeltBase
