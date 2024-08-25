@@ -1,4 +1,4 @@
-﻿using Content.Shared.Damage;
+using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -9,9 +9,6 @@ namespace Content.Shared._RMC14.Dropship.Weapon;
 [Access(typeof(SharedDropshipWeaponSystem))]
 public sealed partial class DropshipAmmoComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public TimeSpan AttachDelay = TimeSpan.FromSeconds(5);
-
     [DataField, AutoNetworkedField]
     public int TargetSpread = 3;
 

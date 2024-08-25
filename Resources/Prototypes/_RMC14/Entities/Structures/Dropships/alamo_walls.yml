@@ -671,6 +671,9 @@
   - type: DropshipWeaponPoint
     dirOffset: Clockwise
   - type: Appearance
+  - type: Tag
+    tags:
+    - RMCDropshipWeaponPoint
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -722,6 +725,9 @@
   - type: DropshipWeaponPoint
     dirOffset: CounterClockwise
   - type: Appearance
+  - type: Tag
+    tags:
+    - RMCDropshipWeaponPoint
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -935,6 +941,9 @@
   - type: DropshipWeaponPoint
     dirOffset: Flip
   - type: Appearance
+  - type: Tag
+    tags:
+    - RMCDropshipWeaponPoint
 
 - type: entity
   parent: CMAlamoWall84

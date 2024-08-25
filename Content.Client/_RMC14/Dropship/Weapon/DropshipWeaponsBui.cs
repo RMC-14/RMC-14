@@ -1,7 +1,8 @@
-﻿using System.Text;
+using System.Text;
 using Content.Client.Eye;
 using Content.Client.UserInterface.ControlExtensions;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Weapon;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;

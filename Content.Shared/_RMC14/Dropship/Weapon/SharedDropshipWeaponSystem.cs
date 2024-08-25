@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
