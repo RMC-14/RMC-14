@@ -360,3 +360,7 @@
     maxItemSize: Normal
     grid:
     - 0,0,9,1 # 9 slots
+    blacklist:
+      tags:
+      - CMFirstAidKit # TODO RMC14 medical skill
+  #      - EngineerKit # TODO RMC14
