@@ -1,7 +1,7 @@
 - type: entity
   name: box
   parent: BoxBase
-  id: CMBoxCardboard
+  id: RMCBoxCardboard
   description: It's just an ordinary box.
   components:
   - type: Sprite
@@ -16,11 +16,11 @@
     - 0,0,13,1
   - type: Tag
     tags:
-    - CMBoxStorage
+    - RMCBoxStorage
   - type: InteractedBlacklist
     blacklist:
       components:
       - Xeno
 
 - type: Tag
-  id: CMBoxStorage
+  id: RMCBoxStorage

@@ -12,6 +12,12 @@ rmc-xeno-infection-majorpain-chest = Your chest hurts badly.
 rmc-xeno-infection-majorpain-breathing = It becomes difficult to breathe.
 rmc-xeno-infection-majorpain-heart = Your heart starts beating rapidly, and each beat is painful.
 
+rmc-xeno-infection-insanepain-one = IT'S IN YOUR INSIDES!
+rmc-xeno-infection-insanepain-two = IT'S GNAWING YOU!
+rmc-xeno-infection-insanepain-three = MAKE IT STOP!
+rmc-xeno-infection-insanepain-four = YOU ARE GOING TO DIE!
+rmc-xeno-infection-insanepain-five = IT'S TEARING YOU APART!
+
 rmc-xeno-infection-burst-soon = {CAPITALIZE($victim)} starts shaking violently!
 rmc-xeno-infection-burst-soon-self = You feel something crawling through your insides!
 

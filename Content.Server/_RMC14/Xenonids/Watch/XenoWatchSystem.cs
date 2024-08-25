@@ -124,7 +124,7 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
         _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos));
     }
 
-    protected override void Watch(Entity<XenoComponent?, ActorComponent?, EyeComponent?> watcher, Entity<XenoComponent?> toWatch)
+    public override void Watch(Entity<XenoComponent?, ActorComponent?, EyeComponent?> watcher, Entity<XenoComponent?> toWatch)
     {
         base.Watch(watcher, toWatch);
 

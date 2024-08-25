@@ -22,5 +22,6 @@ public sealed partial class SquadArmorComponent : Component
 public enum SquadArmorLayers
 {
     Helmet,
+    Goggles,
     Armor,
 }

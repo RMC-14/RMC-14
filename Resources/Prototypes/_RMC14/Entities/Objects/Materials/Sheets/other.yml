@@ -114,12 +114,30 @@
 
 - type: entity
   parent: RMCSheetCardboard
+  id: RMCSheetCardboard30
+  suffix: 30, RMC
+  components:
+  - type: Stack
+    stackType: RMCSheetCardboard
+    count: 30
+
+- type: entity
+  parent: RMCSheetCardboard
   id: RMCSheetCardboard25
   suffix: 25, RMC
   components:
   - type: Stack
     stackType: RMCSheetCardboard
     count: 25
+
+- type: entity
+  parent: RMCSheetCardboard
+  id: RMCSheetCardboard10
+  suffix: 10, RMC
+  components:
+  - type: Stack
+    stackType: RMCSheetCardboard
+    count: 10
 
 - type: entity
   parent: RMCSheetCardboard

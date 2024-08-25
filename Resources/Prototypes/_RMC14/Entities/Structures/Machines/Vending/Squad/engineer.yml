@@ -152,16 +152,16 @@
         points: 5
     #- id: CMRangeFinder
     #  points: 10
-    #- id: CMLaserDesignator
-    #  points: 15
+      - id: RMCLaserDesignator
+        points: 15
     - name: Helmet Optics
       entries: [ ]
     #- id: CMMedicalHelmetOptic
     #  points: 12
     - name: Pamphlets
-      entries: [ ]
-    #- id: CMPamphletJTAC
-    #  points: 15
+      entries:
+      - id: CMPamphletJTAC
+        points: 15
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyIntel
@@ -217,7 +217,7 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-    #- id: CMG8AGeneralUtilityPouch
+      - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
     #- id: CMM276GeneralPistolHolsterRig
     #- id: CMM276M63HolsterRig
@@ -261,7 +261,7 @@
         recommended: true
       #- id: CMShoulderHolster
       - id: CMWebbing
-    #- id: CMDropPouch
+      - id: CMWebbingPouch
     - name: Mask
       choices: { CMMask: 1 }
       entries:

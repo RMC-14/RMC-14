@@ -99,8 +99,8 @@
         amount: 2
       - id: CMWebbing
         amount: 5
-      #- id: Drop Pouch
-      #   amount: 2
+      - id: CMWebbingPouch
+        amount: 2
       #- id: Shoulder Holster
       #  amount: 2
       #- id: Knife Webbing
@@ -127,8 +127,8 @@
       #  amount: 20
     - name: Belts
       entries:
-      #- id: G8-A General Utility Pouch
-      #   amount: 2
+      - id: RMCBeltUtilityGeneral
+        amount: 2
       - id: CMBeltMarine
         amount: 15
       #- id: M276 General Pistol Holster Rig
@@ -223,8 +223,8 @@
         amount: 2
       #- id: Rangefinder
       #   amount: 1
-      #- id: Laser Designator
-      #  amount: 1
+      - id: RMCLaserDesignator
+        amount: 1
       #- id: Welding Goggles
       #  amount: 3
       - id: CMFireExtinguisherPortable
@@ -263,11 +263,11 @@
     sections:
     - name: Regular ammunition
       entries:
-      - id: CMBoxShotgunBuckshot
+      - id: RMCBoxShotgunBuckshot
         amount: 40
-      - id: CMBoxShotgunFlechette
+      - id: RMCBoxShotgunFlechette
         amount: 40
-      - id: CMBoxShotgunSlugs
+      - id: RMCBoxShotgunSlugs
         amount: 40
       - id: CMMagazineRifleM4SPR
         amount: 45
@@ -387,8 +387,8 @@
       entries:
       - id: RMCAttachmentAngledGrip
         amount: 7
-      #- id: RMCAttachmentBipod
-      #  amount: 7
+      - id: RMCAttachmentBipod
+        amount: 7
       - id: RMCAttachmentBurstFireAssembly
         amount: 5
       - id: RMCAttachmentGyroscopicStabilizer

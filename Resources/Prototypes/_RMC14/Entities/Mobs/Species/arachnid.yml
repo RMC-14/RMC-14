@@ -12,6 +12,8 @@
       Brute:
         sprite: Mobs/Effects/brute_damage.rsi
         color: "#162581"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
   - type: Speech
     speechVerb: Arachnid
     speechSounds: Arachnid
@@ -47,6 +49,8 @@
       sprite: Mobs/Customization/masking_helpers.rsi
       state: unisex_full
       visible: false
+    - map: [ "enum.HumanoidVisualLayers.Underwear" ]
+    - map: [ "enum.HumanoidVisualLayers.Undershirt" ]
     - map: [ "jumpsuit" ]
     - map: [ "enum.HumanoidVisualLayers.LFoot" ]
     - map: [ "enum.HumanoidVisualLayers.RFoot" ]

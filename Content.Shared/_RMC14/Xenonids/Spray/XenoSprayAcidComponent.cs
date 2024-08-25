@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -11,6 +12,9 @@ public sealed partial class XenoSprayAcidComponent : Component
 {
     [DataField, AutoNetworkedField]
     public EntProtoId Acid = "XenoAcidSprayWeak";
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 PlasmaCost = 40;
 
     [DataField, AutoNetworkedField]
     public TimeSpan Delay = TimeSpan.FromSeconds(0.2);

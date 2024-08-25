@@ -41,6 +41,15 @@
     - state: intercom-p
     - state: intercom
       map: ["enum.PowerDeviceVisualLayers.Powered"]
+      shader: unshaded
+    - state: broadcasting
+      map: ["enum.RadioDeviceVisualLayers.Broadcasting"]
+      shader: unshaded
+      visible: false
+    - state: speaker
+      map: ["enum.RadioDeviceVisualLayers.Speaker"]
+      shader: unshaded
+      visible: false
   - type: Transform
     noRot: false
     anchored: true

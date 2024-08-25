@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoDefender
   name: Defender
   description: A alien with an armored crest.
@@ -66,7 +67,7 @@
     damage:
       groups:
         Brute: 27.5
-  - type: Tackle
+  - type: Tackle # min: 2, max: 4
     threshold: 4
     stun: 5
   - type: Fixtures

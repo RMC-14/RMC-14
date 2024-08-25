@@ -12,8 +12,6 @@
   - type: CartridgeAmmo
     proto: RMCProjectileRocket84mm
     deleteOnSpawn: false
-    count: 1
-    spread: 0
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/m5spec.rsi
     layers:
@@ -85,8 +83,6 @@
   - type: CartridgeAmmo
     proto: RMCProjectileRocket84mmAntiArmor
     deleteOnSpawn: false
-    count: 1
-    spread: 0
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/m5spec.rsi
     layers:

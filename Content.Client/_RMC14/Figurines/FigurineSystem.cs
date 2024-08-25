@@ -10,7 +10,6 @@ using Robust.Client.UserInterface;
 using Robust.Shared.Timing;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
-using Color = Robust.Shared.Maths.Color;
 
 namespace Content.Client._RMC14.Figurines;
 
@@ -105,7 +104,7 @@ public sealed class FigurineSystem : EntitySystem
                                 Angle.Zero,
                                 overrideDirection: result.Direction);
                         },
-                        Color.Transparent);
+                        null);
 
                     queued.Texture.CopyPixelsToMemory<Rgba32>(image =>
                     {

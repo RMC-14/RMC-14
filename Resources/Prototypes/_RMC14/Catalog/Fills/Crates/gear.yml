@@ -1,0 +1,9 @@
+﻿- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateGearPackFlareCAS
+  name: signal flare packs crate (x4)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPackFlareCAS
+      amount: 4

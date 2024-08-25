@@ -14,8 +14,10 @@
   - type: CMAutomatedVendor
     jobs:
     - CMMilitaryPolice
+    - CMChiefMP # TODO RMC14 chief mp vendor
     sections:
     - name: Police Set (Mandatory)
+      takeAll: CMPoliceSet
       entries:
       - id: RMCVendorBundleMilitaryPoliceApparel
     - name: Standard Equipment
@@ -41,10 +43,10 @@
       - id: CMSatchelSecurity
     - name: Belt
       choices: { CMBelt: 1 }
-      entries: []
+      entries:
 #     - id: CMM276GeneralPistolHolsterRig
 #     - id: CMM276M44HolsterRig
-#     - M276 G8-A General Utility Pouch
+      - id: RMCBeltUtilityGeneral
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -88,6 +90,7 @@
     - CMMilitaryWarden
     sections:
     - name: Police Set (Mandatory)
+      takeAll: CMPoliceSet
       entries:
       - id: RMCVendorBundleMilitaryPoliceApparel
     - name: Standard Equipment
@@ -113,10 +116,10 @@
       - id: CMSatchelSecurity
     - name: Belt
       choices: { CMBelt: 1 }
-      entries: []
+      entries:
+      - id: RMCBeltUtilityGeneral
 #     - id: CMM276GeneralPistolHolsterRig
 #     - id: CMM276M44HolsterRig
-#     - M276 G8-A General Utility Pouch
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:

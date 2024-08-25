@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Storage;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(CMStorageSystem))]
+[Access(typeof(RMCStorageSystem))]
 public sealed partial class StorageSkillRequiredComponent : Component
 {
     [DataField, AutoNetworkedField]

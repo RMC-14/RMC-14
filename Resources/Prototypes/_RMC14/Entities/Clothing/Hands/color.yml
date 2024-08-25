@@ -9,8 +9,6 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/insulated.rsi
   - type: Insulated
-  - type: GloveHeatResistance
-    heatResistance: 1400
   - type: Fiber
     fiberMaterial: fibers-insulative
     fiberColor: fibers-brown

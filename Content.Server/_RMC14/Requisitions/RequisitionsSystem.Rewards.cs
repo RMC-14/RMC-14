@@ -1,13 +1,12 @@
-using Content.Shared.Containers.ItemSlots;
-using Content.Server.Chat.Systems;
+using System.Linq;
 using Content.Server.Labels.Components;
-using Content.Server.Paper;
 using Content.Shared._RMC14.Requisitions.Components;
+using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Paper;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
-using System.Linq;
 
 namespace Content.Server._RMC14.Requisitions
 {
@@ -82,14 +81,13 @@ namespace Content.Server._RMC14.Requisitions
                 _metaSystem.SetEntityName(printedPaper, Loc.GetString(
                     "requisition-paper-print-name", ("name", orderName)));
 
-                _paperSystem.SetContent(printedPaper, Loc.GetString(
+                _paperSystem.SetContent((printedPaper, paper), Loc.GetString(
                         "requisition-paper-print-manifest",
                         ("containerName", orderName.ToUpper()),
                         ("content", contentList.ToMarkup()),
                         ("weight", weight),
                         ("lot", lotNum),
-                        ("serialNumber", $"{serialNum:000000}")),
-                      paper);
+                        ("serialNumber", $"{serialNum:000000}")));
 
                 // attempt to attach the label to the item
                 if (TryComp<PaperLabelComponent>(requisitionOrder, out var label))

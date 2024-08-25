@@ -7,8 +7,9 @@
     snap:
     - Wallmount
   components:
-  - type: Transform
-    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false
   - type: Sprite
     drawdepth: SmallObjects
     sprite: _RMC14/Objects/door_button.rsi

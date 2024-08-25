@@ -56,7 +56,7 @@ public sealed class HolocardSystem : EntitySystem
         if (!_skills.HasSkill(args.User, SkillType, MinimumRequiredSkill))
             return;
 
-        var scanEvent = new HolocardScanEvent(false, SlotFlags.EYES);
+        var scanEvent = new HolocardScanEvent(false, SlotFlags.EYES | SlotFlags.HEAD);
         RaiseLocalEvent(args.User, ref scanEvent);
         if (!scanEvent.CanScan)
             return;

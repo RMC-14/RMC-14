@@ -49,6 +49,7 @@
   - type: XenoLeap
     knockdownTime: 1
   - type: XenoParasite
+  - type: InfectOnPullAttempt
   - type: Item
     size: Invalid
   - type: WhitelistPickupBy
@@ -69,6 +70,7 @@
         volume: -12
   - type: IdentityBlocker
   - type: Clothing
+    quickEquip: false
     slots: [mask]
     sprite: _RMC14/Mobs/Xenonids/Parasite/parasite_mask.rsi
   - type: HideLayerClothing

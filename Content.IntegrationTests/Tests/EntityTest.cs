@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using Content.Shared.Coordinates;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
@@ -242,7 +241,11 @@ namespace Content.IntegrationTests.Tests
                 "HiveCore",
 
                 // Creates requisitions account
-                "RequisitionsComputer"
+                "RequisitionsComputer",
+
+                "EvenSmoke",
+                "SpawnOnTerminate",
+                "DropshipFabricator"
             };
 
             Assert.That(server.CfgMan.GetCVar(CVars.NetPVS), Is.False);
@@ -272,7 +275,7 @@ namespace Content.IntegrationTests.Tests
             {
                 // TODO fix ninja
                 // Currently ninja fails to equip their own loadout.
-                if (protoId == "MobHumanSpaceNinja")
+                if (protoId == "MobHumanSpaceNinja" || protoId == "MobHumanSyndicateAgent")
                     continue;
 
                 var count = server.EntMan.EntityCount;

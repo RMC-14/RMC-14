@@ -4,6 +4,8 @@
   components:
   - type: Storage
     whitelist:
+      components:
+      - RMCLighter
       tags:
       - Cigarette
   - type: InteractedBlacklist

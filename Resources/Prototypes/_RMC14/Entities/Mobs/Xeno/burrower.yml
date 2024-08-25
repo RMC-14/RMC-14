@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoBurrower
   name: Burrower
   description: A beefy alien with sharp claws.
@@ -54,7 +55,7 @@
     damage:
       groups:
         Brute: 27.5
-  - type: Tackle
+  - type: Tackle # min: 3, max: 5
     threshold: 4
     stun: 9
     chance: 0.40

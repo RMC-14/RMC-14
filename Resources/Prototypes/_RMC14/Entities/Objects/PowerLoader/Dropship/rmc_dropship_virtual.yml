@@ -1,0 +1,36 @@
+﻿- type: entity
+  id: RMCVirtualPowerLoaderRight
+  name: power loader right hydraulic claw
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/power_loader_clamps.rsi
+    state: loader_clamp_right
+
+- type: entity
+  parent: VirtualItem
+  id: RMCVirtualPowerLoaderLeft
+  name: power loader left hydraulic claw
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/power_loader_clamps.rsi
+    state: loader_clamp
+
+- type: entity
+  parent: RMCVirtualPowerLoaderRight
+  id: RMCVirtualDropshipGearRight
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/power_loader_clamps.rsi
+    state: ds_gear_right
+
+- type: entity
+  parent: RMCVirtualPowerLoaderLeft
+  id: RMCVirtualDropshipGearLeft
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/power_loader_clamps.rsi
+    state: ds_gear

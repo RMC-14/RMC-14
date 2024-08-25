@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Mobs;
 using Content.Shared.Damage;
 using Content.Shared.Ghost;
 using Content.Shared.Mobs;
@@ -84,9 +85,15 @@ public sealed class XenoHudOverlay : Overlay
                            ghost.CanGhostInteract;
         var isXeno = _entity.HasComponent<XenoComponent>(_players.LocalEntity);
 
-        if (!isXeno && !isAdminGhost)
-            return;
-
+        if (!_entity.HasComponent<CMGhostXenoHudComponent>(_players.LocalEntity))
+        {
+            if (!isXeno && !isAdminGhost)
+                return;
+        }
+        else
+        {
+            isXeno = true;
+        }
         var handle = args.WorldHandle;
         var eyeRot = args.Viewport.Eye?.Rotation ?? default;
 

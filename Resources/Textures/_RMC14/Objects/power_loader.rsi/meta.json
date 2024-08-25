@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/bf507b617175e0838cb80714ae003325540ba037/icons/obj/vehicles/powerloader.dmi",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "powerloader",
+      "directions": 4
+    },
+    {
+      "name": "powerloader_jd",
+      "directions": 4
+    },
+    {
+      "name": "powerloader_ft",
+      "directions": 4
+    },
+    {
+      "name": "powerloader_open",
+      "directions": 4
+    },
+    {
+      "name": "powerloader_open_jd",
+      "directions": 4
+    },
+    {
+      "name": "powerloader_open_ft",
+      "directions": 4
+    },
+    {
+      "name": "wreck"
+    },
+    {
+      "name": "wreck_jd"
+    },
+    {
+      "name": "wreck_ft"
+    },
+    {
+      "name": "powerloader_overlay",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.3,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.3,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.3,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "powerloader_overlay_jd",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.3,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.3,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.3,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "powerloader_overlay_ft",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.3,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.3,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.3,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.3,
+          0.1
+        ]
+      ]
+    }
+  ]
+}

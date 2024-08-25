@@ -68,6 +68,14 @@
       "directions": 4
     },
     {
+      "name": "kutjevo_platform_sm_corner",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_platform_sm_round",
+      "directions": 4
+    },
+    {
       "name": "kutjevo_platform_sm_deco",
       "directions": 4
     },

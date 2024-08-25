@@ -30,6 +30,37 @@
         acts: [ "Destruction" ]
 
 - type: entity
+  parent: BaseBeakerMetallic
+  id: RMCBeakerBaseMetallic
+  abstract: true
+  components:
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpillBehavior
+        solution: beaker
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMShardGlass:
+            min: 1
+            max: 1
+        transferForensics: true
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
   parent: CMBeakerBase
   id: CMBeaker
   name: beaker
@@ -74,6 +105,33 @@
   - type: SolutionContainerVisuals
     maxFillLevels: 5
     fillBaseName: beakerlarge
+  - type: Spillable
+    solution: beaker
+  - type: StaticPrice
+    price: 20
+
+- type: entity
+  parent: RMCBeakerBaseMetallic
+  id: RMCBeakerHighCapacity 
+  name: high-capacity beaker
+  description: A beaker with an enlarged holding capacity, made with blue-tinted plexiglass in order to withstand greater pressure. Can hold up to 300 units.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/high_capacity_beaker.rsi
+    layers:
+    - state: beakerbluespace
+    - state: beakerbluespace1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: Item
+    sprite: _RMC14/Objects/Medical/high_capacity_beaker.rsi
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 300
+  - type: SolutionContainerVisuals
+    maxFillLevels: 5
+    fillBaseName: beakerbluespace
   - type: Spillable
     solution: beaker
   - type: StaticPrice

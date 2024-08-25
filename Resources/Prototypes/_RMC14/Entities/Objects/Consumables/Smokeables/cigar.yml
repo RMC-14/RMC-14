@@ -1,0 +1,40 @@
+- type: entity
+  id: CMTarbackCigar
+  parent: Cigar
+  name: tarback cigar
+  description: "Tarbacks by Reisland Tobacco. The Surgeon General has declared that smoking Tarbacks can be hazardous to one’s health. Reisland Tobacco has declared that the Surgeon General is a bitch. Rolled in Columbia."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigars/tarback.rsi
+    state: unlit-icon
+  - type: Tag
+    tags:
+      - Cigar
+      - Trash
+  - type: Clothing
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigars/tarback.rsi
+    slots: [ mask ]
+    equippedPrefix: unlit
+  - type: Item
+    size: Tiny
+    sprite: Objects/Consumable/Smokeables/Cigars/cigar.rsi
+    heldPrefix: unlit
+
+- type: entity
+  id: CMTarbackCigarSpent
+  parent: CMTarbackCigar
+  suffix: spent
+  components:
+  - type: Sprite
+    state: burnt-icon
+  - type: Smokable
+    state: Burnt
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 20
+  - type: Tag
+    tags:
+      - Cigar
+      - Trash
+      - Burnt

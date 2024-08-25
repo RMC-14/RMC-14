@@ -7,7 +7,7 @@
   parent: CMFloorStripedBase
   id: CMFloorPlating
   name: tiles-cm-plating
-  sprite: /Textures/_RMC14/Tiles/almayer/plating.png
+  sprite: /Textures/_RMC14/Tiles/floors/plating.png
 
 - type: tile
   parent: CMFloorStripedBase

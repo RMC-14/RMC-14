@@ -88,7 +88,7 @@
   description: It's a timer for brig cells.
   components:
   - type: AccessReader
-    access: [["Security"]]
+    access: [["CMAccessBrig"]]
   - type: Construction
     graph: Timer
     node: brig
@@ -97,11 +97,13 @@
   - type: ContainerFill
     containers:
       board: [ BrigTimerElectronics ]
+  - type: ApcPowerReceiver
+    needsPower: false # TODO RMC14 power
 
 # Construction Frame
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   id: TimerFrame
   name: timer frame
   description: A construction frame for a timer.

@@ -75,3 +75,4 @@
     powerLoad: 0
     needsPower: false
   - type: RMCDropshipBlocked
+  - type: ImmuneToUnarmed

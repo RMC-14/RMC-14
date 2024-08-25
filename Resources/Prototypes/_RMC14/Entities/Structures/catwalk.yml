@@ -101,3 +101,45 @@
   - type: Icon
     sprite: _RMC14/Structures/catwalk.rsi
     state: monorailBend
+
+# Minecart Track
+
+- type: entity
+  parent: RMCMonorailStraight
+  id: RMCRailroadStraight
+  name: rails
+  description: Minecarts and rail vehicles go on these.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/catwalk.rsi
+    drawdepth: FloorTiles
+    state: railroadStraight
+  - type: Icon
+    sprite: _RMC14/Structures/catwalk.rsi
+    state: railroadStraight
+
+- type: entity
+  parent: RMCRailroadStraight
+  id: RMCRailroadBend
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/catwalk.rsi
+    drawdepth: FloorTiles
+    state: railroadBend
+  - type: Icon
+    sprite: _RMC14/Structures/catwalk.rsi
+    state: railroadBend
+
+- type: entity
+  parent: RMCRailroadStraight
+  id: RMCRailroadBumper
+  name: rail bumpers
+  description: This (usually) stops minecarts and other rail vehicles at the end of a line of track.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/catwalk.rsi
+    drawdepth: FloorTiles
+    state: railroadBumper
+  - type: Icon
+    sprite: _RMC14/Structures/catwalk.rsi
+    state: railroadBumper

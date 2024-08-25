@@ -3,6 +3,7 @@
   id: RMCBaseAttachableHolder
   components:
   - type: AttachableHolder
+  - type: ItemSizeChange
   - type: ActivatableUI
     verbText: rmc-verb-strip-attachables
     verbOnly: true

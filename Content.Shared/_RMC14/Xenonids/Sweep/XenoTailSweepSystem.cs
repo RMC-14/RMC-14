@@ -59,7 +59,7 @@ public sealed class XenoTailSweepSystem : EntitySystem
             return;
 
         _hit.Clear();
-        _entityLookup.GetEntitiesInRange(transform.Coordinates, 1.5f, _hit);
+        _entityLookup.GetEntitiesInRange(transform.Coordinates, 1.25f, _hit);
 
         var origin = _transform.GetMapCoordinates(xeno);
         foreach (var marine in _hit)

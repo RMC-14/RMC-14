@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9d6826cfca155f055d1616ed287aaebe9196aae9/icons/obj/structures/props/almayer_props.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "equip_base"
+    },
+    {
+      "name": "equip_base_front"
+    },
+    {
+      "name": "equip_base_r_wing"
+    },
+    {
+      "name": "equip_base_l_wing"
+    }
+  ]
+}

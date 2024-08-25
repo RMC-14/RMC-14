@@ -2,7 +2,11 @@
   parent: RMCAreaBase
   id: RMCAreaSpace
   name: Space
+  suffix: Space Area
   components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: blank
   - type: Area
     avoidBioscan: False
     noTunnel: True
@@ -11,15 +15,20 @@
 - type: entity
   parent: RMCAreaBase
   id: RMCAreaEngine
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: blank
 
 - type: entity
   parent:
-  - RMCAreaBase
   - RMCAreaProtectionMetal
+  - RMCAreaBase
   id: RMCAreaAdmin
   name: Admin room
   components:
   - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
     state: start
 
 - type: entity
@@ -50,16 +59,18 @@
   name: start area
   components:
   - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
     state: start
 
 - type: entity
   parent:
-  - RMCAreaBase
   - RMCAreaProtectionMetal
+  - RMCAreaBase
   id: RMCAreaCentcom
   name: abandoned Centcom
   components:
   - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
     state: centcom
 
 - type: entity
@@ -74,12 +85,13 @@
 
 - type: entity
   parent:
-  - RMCAreaBase
   - RMCAreaProtectionMetal
+  - RMCAreaBase
   id: RMCAreaTdome
   name: abandoned Thunderdome
   components:
   - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
     state: thunder
   - type: Area
     avoidBioscan: False

@@ -39,6 +39,11 @@
   - type: RMCNightVisionVisible
     priority: -1
     transparency: 0.2
+  - type: InvulnerabilityTime
+    whitelist:
+      components:
+      - Marine
+    hitsToInvulnerability: 3
 
 - type: entity
   id: CMCorrodible
@@ -122,3 +127,38 @@
     damageCoefficient: 12.5 # Walls take 15x explosive damage, resin walls reduce that by 15%
   - type: DamageMultiplierFlags
     flags: Turf
+
+# Invisible Wall
+
+- type: entity
+  id: RMCWallInvisibleBulletPassible
+  name: wall blocker
+  suffix: Projectile Passible
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: PlacementReplacement
+    key: walls
+  - type: Occluder
+    enabled: false
+  - type: Airtight
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - InteractImpassable
+        density: 1000
+  - type: RMCDropshipBlocked
+

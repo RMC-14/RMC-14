@@ -39,7 +39,7 @@
   parent: CMWallMetal
   id: RCMWallShivaFab
   name: prefabricated structure wall
-  description: This structure is made of metal support rods and robust poly-kevlon plastics. A derivative of the stuff used in UA ballistics vests, UNMC and SPP uniforms. These walls are pulled taught and have been reinforced into a more permanent structure.
+  description: This structure is made of metal support rods and robust poly-kevlon plastics. A derivative of the stuff used in UA ballistics vests, UNMC and SPP uniforms. These walls are pulled taut and have been reinforced into a more permanent structure.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/shiva_fab.rsi

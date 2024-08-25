@@ -7,6 +7,9 @@ namespace Content.Shared._RMC14.Doors;
 [Access(typeof(CMDoorSystem))]
 public sealed partial class RMCDoorButtonComponent : Component
 {
+    [DataField, AutoNetworkedField]
+    public string? Id;
+
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastUse;
 

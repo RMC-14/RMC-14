@@ -1,6 +1,6 @@
 - type: entity
-  id: CMCrateFoodDonuts
-  parent: CMCratePlastic
+  id: RMCCrateFoodDonuts
+  parent: RMCCratePlastic
   name: donuts crate
   components:
   - type: StorageFill
@@ -9,8 +9,8 @@
         amount: 5
 
 - type: entity
-  id: CMCrateFoodMRE
-  parent: CMCratePlastic
+  id: RMCCrateFoodMRE
+  parent: RMCCratePlastic
   name: Marine MRE crate
   components:
   - type: StorageFill
@@ -19,8 +19,8 @@
         amount: 2
 
 - type: entity
-  id: CMCrateFoodPizza
-  parent: CMCratePlastic
+  id: RMCCrateFoodPizza
+  parent: RMCCratePlastic
   name: pizza ready-to-eat crate
   components:
   - type: StorageFill
@@ -29,13 +29,13 @@
         amount: 3
 
 - type: entity
-  id: CMCrateFoodIngredients
-  parent: CMCratePlastic
+  id: RMCCrateFoodIngredients
+  parent: RMCCratePlastic
   name: ingredients crate
   components:
   - type: StorageFill
     contents:
-      - id: CMBoxIngredients
+      - id: RMCBoxIngredients
         amount: 5
 
 

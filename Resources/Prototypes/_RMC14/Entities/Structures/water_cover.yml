@@ -1,0 +1,9 @@
+- type: entity
+  parent: CMCatwalk
+  id: RMCWaterCover
+  name: water cover
+  description: ""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/water_cover.rsi
+    state: icon

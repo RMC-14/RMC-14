@@ -1,138 +1,22 @@
-﻿# m3
+# m3
 - type: entity
-  parent: RMCBaseArmor
+  parent: RMCBaseMarineArmorLight
   id: CMArmorM3Medium
   name: M3 pattern marine armor
   description: A standard UNMC M3 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
-    layers:
-    - state: icon
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
-    equipDelay: 2
-    unequipDelay: 2
   - type: CMArmor
     armor: 20
     bio: 20
     explosionArmor: 15
-  - type: WieldSlowdownCompensation
-    walk: 0.08
-    sprint: 0.136
-  - type: ToggleableLightVisuals
-    spriteLayer: light
-  - type: PointLight
-    enabled: false
-    radius: 4
-    softness: 5
-    autoRot: true
-  - type: HandheldLight
-    addPrefix: true
-    blinkingBehaviourId: blinking
-    radiatingBehaviourId: radiating
-  - type: LightBehaviour
-    behaviours:
-    - !type:FadeBehaviour
-      id: radiating
-      interpolate: Linear
-      maxDuration: 2.0
-      startValue: 3.0
-      endValue: 2.0
-      isLooped: true
-      property: Radius
-      enabled: false
-      reverseWhenFinished: true
-    - !type:PulseBehaviour
-      id: blinking
-      interpolate: Nearest
-      maxDuration: 1.0
-      minValue: 0.1
-      maxValue: 2.0
-      isLooped: true
-      property: Radius
-      enabled: false
-  - type: Battery
-    maxCharge: 600 #lights drain 3/s but recharge of 2 makes this 1/s. Therefore 600 is 10 minutes of light.
-    startingCharge: 600
-  - type: BatterySelfRecharger
-    autoRecharge: true
-    autoRechargeRate: 2 #recharge of 2 makes total drain 1w / s so max charge is 1:1 with time. Time to fully charge should be 5 minutes. Having recharge gives light an extended flicker period which gives you some warning to return to light area.
-  - type: Item
-    size: Huge
-  - type: Storage
-    maxItemSize: Small
-    grid:
-    - 0,0,5,1 # 3 slots
-    whitelist:
-      tags:
-      - CMMagazineRifle
-      - CMMagazineSmg
-      - CMMagazineSniper
-      - CMMagazinePistol
-      - RMCMagazineRevolver
-      - Sidearm
-      - Knife
-      - Flashlight
-      - MRE
-      - Grenade
-      - CMAutoInjector
-      - Cigarette
-      - PillPacket
-      - PillCanister
-      - CMSurgicalCase
-      - Syringe
-      - Hypospray
-      - CMOintment
-      - Brutepack
-      - CMBurnKit
-      - CMTraumaKit
-      - Bottle
-      - Pill
-      - PowerCell
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
-        ents: [ ]
-  - type: UserInterface
-    interfaces:
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
   - type: ClothingSpeedModifier
     walkModifier: 0.727
     sprintModifier: 0.727
-  - type: CMHardArmor
-  - type: FixedItemSizeStorage
-  - type: IgnoreContentsSize
-    items:
-      tags:
-      - CMMagazineRifle
-      - CMMagazineSmg
-      - CMMagazineSniper
-      - CMMagazinePistol
-      - MRE
-      - PillPacket
-      - PillCanister
-      - CMSurgicalCase
-  - type: RMCNameItemOnVend
-    item: Armor
-  - type: RMCBulkyArmor
   - type: ExplosionResistance
     damageCoefficient: 0
     worn: false
-  - type: RMCMagneticArmor
-  - type: InteractedBlacklist
-    blacklist:
-      components:
-      - Xeno
-  - type: SquadArmor
-    layer: Armor
-    rsi:
-      sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
-      state: std-armor
-    leaderRsi:
-      sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
-      state: sql-armor
 
 - type: entity
   parent: CMArmorM3Medium
@@ -141,8 +25,6 @@
   description: A lightweight suit of carbon fiber body armor built for quick movement. Designed in a lovely forest green. Use it to toggle the built-in flashlight.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12.rsi
-  - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12.rsi
   - type: CMArmor
     armor: 25
@@ -156,8 +38,6 @@
   description: A heavier version of the standard M3 pattern armor, the armor is primarily designed to withstand ballistic, explosive, and internal damage, with the drawback of increased bulk and thus reduced movement speed, alongside little additional protection from standard blunt force impacts and biological threats.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod.rsi
-  - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod.rsi
   - type: CMArmor
     armor: 25
@@ -181,8 +61,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden.rsi
   - type: CMArmor
     bio: 15
 
@@ -194,8 +72,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo.rsi
 
 - type: entity
   parent: CMArmorM3Medium
@@ -204,8 +80,6 @@
   description: A custom set of M3 armor packed to the brim with padding, plating, and every form of ballistic protection under the sun. Used exclusively by Marine Grenadiers.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/g4.rsi
-  - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/g4.rsi
   - type: CMArmor
     armor: 25
@@ -221,8 +95,6 @@
   description: A custom set of M3 armor designed for users of long-ranged explosive weaponry. Provides better protection against explosives than standard M3 armor, while remaining nimble.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/t.rsi
-  - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/t.rsi
   - type: CMArmor
     explosionArmor: 30
@@ -240,8 +112,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light.rsi
   - type: CMArmor
     armor: 15
     bio: 15
@@ -254,31 +124,48 @@
     - 0,0,3,1 # 2 slots
 
 - type: entity
-  parent: CMArmorM3Light
+  parent: RMCBaseMarineArmor
   id: CMArmorPress
   name: press body armor
   description: Body armor used by war correspondents in battles and wars across the universe.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/press.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/press.rsi
+  - type: CMArmor
+    armor: 15
+    bio: 15
+    explosionArmor: 20
+  - type: ClothingSpeedModifier
+    walkModifier: .814
+    sprintModifier: .814
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+
+- type: Tag
+  id: RMCScoutArmor
 
 - type: entity
   parent: CMArmorM3Medium
-  id: CMArmorM3Scout
+  id: RMCArmorM3Scout
   name: M3-S light armor
   description: A custom set of M3 armor designed for Marine Scouts.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/scout.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/scout.rsi
   - type: Corrodible
     isCorrodible: false
+  - type: ClothingSpeedModifier # light armor speed
+    walkModifier: .814
+    sprintModifier: .814
+  - type: CMArmor
+    armor: 25
+  - type: Tag
+    tags:
+      - RMCScoutArmor
 
 - type: entity
   parent: CMArmorM3Medium
@@ -287,8 +174,6 @@
   description: Up until 2182 Marine non-combat personnel were issued non-standardized ballistics vests, though the lack of IMP compatibility and suit lamps proved time and time again inefficient. This modified M3-L shell is the result of a 6-year R&D program; It provides utility, protection, AND comfort to all Marine non-combat personnel.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl.rsi
-  - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl.rsi
   - type: CMArmor
     armor: 15
@@ -308,8 +193,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl_flak.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl_flak.rsi
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
@@ -322,8 +205,6 @@
   description: A well tinkered and crafted hybrid of Smart-Gunner mesh and M3 pattern plates. Robust, yet nimble, with room for all your pouches.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m4.rsi
-  - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m4.rsi
   - type: Storage
     maxItemSize: Small
@@ -341,8 +222,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m35.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m35.rsi
   - type: Corrodible
     isCorrodible: false
 
@@ -355,8 +234,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghille.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghille.rsi
 
 # Smart Gun
 - type: entity
@@ -366,8 +243,6 @@
   description: A heavy protective vest designed to be worn with the ML66A Smart Gun System. It has specially designed straps and reinforcement to carry the Smartgun and accessories.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a.rsi
-  - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a.rsi
   - type: Storage
     maxItemSize: Small
@@ -385,6 +260,7 @@
       - CMMagazineSmg
       - CMMagazineSniper
       - CMMagazinePistol
+      - RMCMagazineRevolver
       - Sidearm
       - Knife
       - Flashlight
@@ -419,8 +295,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp.rsi
   - type: CMArmor
     armor: 25
     bio: 15
@@ -444,6 +318,7 @@
       - CMMagazineSmg
       - CMMagazineSniper
       - CMMagazinePistol
+      - RMCMagazineRevolver
       - Sidearm
       - Knife
       - Flashlight

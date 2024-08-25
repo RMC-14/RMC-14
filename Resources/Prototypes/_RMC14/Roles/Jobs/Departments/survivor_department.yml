@@ -1,7 +1,8 @@
 ﻿- type: department
   parent: CMDepartmentBase
   id: CMSurvivor
-  description: cm-department-Civilians-description
+  name: department-CMSurvivor
+  description: cm-department-Survivor-description
   color: "#C38312"
   roles:
   - CMSurvivor

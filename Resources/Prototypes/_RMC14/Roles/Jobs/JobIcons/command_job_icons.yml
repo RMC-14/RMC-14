@@ -1,25 +1,25 @@
-﻿- type: statusIcon
+﻿- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconStaffOfficer
   icon:
     sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
     state: staff_officer
 
-- type: statusIcon
+- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconSEA
   icon:
     sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
     state: senior_enlisted_advisor
 
-- type: statusIcon
+- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconCommandingOfficer
   icon:
     sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_co
 
-- type: statusIcon
+- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconExecutiveOfficer
   icon:

@@ -85,6 +85,24 @@
 
 - type: entity
   parent: RMCBaseWindowFrame
+  id: RMCWindowFrameAI
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/ai_frame.rsi
+    state: ai_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/ai_frame.rsi
+    state: ai_frame0
+  - type: IconSmooth
+    key: walls
+    base: ai_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowAI
+    node: windowFrameAI
+
+- type: entity
+  parent: RMCBaseWindowFrame
   id: RMCWindowFrameColony
   components:
   - type: Sprite
@@ -118,3 +136,21 @@
   - type: Construction
     graph: RMCWindowColonyReinforced
     node: windowFrameColonyReinforced
+
+- type: entity
+  parent: RMCBaseWindowFrame
+  id: RMCWindowFrameWood
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/wood_frame.rsi
+    state: wood_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/wood_frame.rsi
+    state: wood_frame0
+  - type: IconSmooth
+    key: walls
+    base: wood_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowWood
+    node: windowFrameWood

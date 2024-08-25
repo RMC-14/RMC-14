@@ -18,6 +18,11 @@
   components:
   - type: GhostRole
     prob: 0
+  - type: Respirator
+    damage: {}
+    damageRecovery: {}
+  - type: Barotrauma
+    damage: {}
 
 
 - type: entity
@@ -27,6 +32,11 @@
   components:
   - type: GhostRole
     prob: 0
+  - type: Respirator
+    damage: {}
+    damageRecovery: {}
+  - type: Barotrauma
+    damage: {}
 
 - type: entity
   parent: MobMouse

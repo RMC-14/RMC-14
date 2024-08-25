@@ -86,6 +86,12 @@
         map: [ "light" ]
   - type: Item
     size: Tiny
+  - type: Tag
+    tags:
+    - RMCPenlight
+
+- type: Tag
+  id: RMCPenlight
 
 - type: entity
   parent: RMCFlashlightBase

@@ -3,14 +3,14 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCrewMedicalEquipment
-  name: ColMarTech Medical Equipment Rack
+  name: ColMarTech medical equipment rack
   description: An automated equipment vendor for the Medical Department.
   components:
   - type: AccessReader
     access:
     - [ "CMAccessMedical" ]
   - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/medical_equipment.rsi
   - type: CMAutomatedVendor
     jobs:
     - CMNurse
@@ -36,9 +36,10 @@
       choices: { CMUniform: 1 }
       entries:
       - id: CMScrubsNurse
-#      - id: Green Scrubs
-#      - id: Blue Scrubs
-#      - id: Purple Scrubs
+      - id: CMScrubsGreen
+      - id: CMScrubsBlue
+      - id: CMScrubsPurple
+      - id: CMScrubsOrange
 #    - name: Suit
 #      choices: { CMSuit: 1 }
 #      entries:

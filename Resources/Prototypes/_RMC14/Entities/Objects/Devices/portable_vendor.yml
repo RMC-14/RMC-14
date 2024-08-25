@@ -1,0 +1,104 @@
+- type: entity
+  parent: BaseItem
+  id: RMCPortableVendor
+  name: automated storage briefcase
+  description: A suitcase-sized automated storage and retrieval system. Designed to efficiently store and selectively dispense small items.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/Briefcases/secure.rsi
+    state: secure
+  - type: Item
+    size: Large
+  - type: Clickable
+  - type: UserInterface
+    interfaces:
+      enum.CMAutomatedVendorUI.Key:
+        type: CMAutomatedVendorBui
+  - type: ActivatableUI
+    key: enum.CMAutomatedVendorUI.Key
+  - type: ActivatableUIRequiresAccess
+  - type: Tag
+    tags:
+    - Briefcase
+
+- type: entity
+  parent: RMCPortableVendor
+  id: RMCPortableVendorCorporate
+  name: Weston-Yamada automated storage briefcase
+  description: A suitcase-sized automated storage and retrieval system. Designed to efficiently store and selectively dispense small items. This one has the Weston-Yamada logo stamped on its side.
+  components:
+  - type: CMAutomatedVendor
+    jobs:
+    - CMLiaison
+    sections:
+    - name: Incentives
+      entries:
+      #- id: /obj/item/handheld_distress_beacon/bodyguard
+      #  points: 50
+      #- id: /obj/item/handheld_distress_beacon/lawyer
+      #  points: 50
+      #- id: /obj/item/implanter/neurostim
+      #  points: 30
+      #- id: /obj/item/reagent_container/hypospray/autoinjector/ultrazine/liaison
+      #  points: 25
+      #- id: /obj/item/reagent_container/pill/cyanide
+      #  points: 20
+      #- id: /obj/item/trash/ceramic_plate
+      #  points: 10
+      - id: RMCSpaceCash1000 # TODO RMC14 counterfiet
+        name: $1000 USD, unmarked bills
+        points: 5
+      - id: CMEncryptionKeyWEYA
+        points: 5
+    - name: Smokables
+      entries:
+      - id: CigarGoldCase # TODO RMC14
+        points: 5
+      - id: CMCigarettePackLuckySlothsMini # TODO RMC14 WeYa cigarettes
+        points: 5
+      - id: FlippoEngravedLighter # TODO RMC14
+        points: 5
+    - name: Drinkables
+      entries:
+      - id: DrinkSakeBottleFull
+        points: 5
+      - id: CMDrinkCanAle # TODO RMC14 Aspen Beer
+        points: 5
+      - id: DrinkGlass
+        points: 1
+      - id: DrinkMugBlack # TODO RMC14 WeYa mug
+        points: 1
+    - name: Stationary
+      entries:
+      - id: CMPenClicky
+        points: 1
+      - id: CMPaper
+        points: 1
+      #- id: WeYa paper
+      #  points: 1
+      #- id: Carbon paper
+      #  points: 1
+      - id: CMClipboard
+        points: 1
+    - name: Misc
+      entries: []
+      #- id: Hollow cane
+      #  points: 15
+    - name: Ammo
+      entries: []
+      #- id: ES-4 stun mag
+      #  points: 10
+    - name: Radio keys
+      entries:
+      - id: CMEncryptionKeyAlpha
+        points: 15
+      - id: CMEncryptionKeyBravo
+        points: 15
+      - id: CMEncryptionKeyCharlie
+        points: 15
+      - id: CMEncryptionKeyDelta
+        points: 15
+      - id: CMEncryptionKeyEcho
+        points: 15
+      - id: CMEncryptionKeyColony
+        points: 20

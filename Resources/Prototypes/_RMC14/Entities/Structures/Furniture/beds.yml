@@ -5,11 +5,15 @@
   description: A mattress seated on a rectangular metallic frame. This is used to support a lying person in a comfortable manner, notably for regular sleep. Ancient technology, but still useful.
   components:
   - type: Transform
-    anchored: true
+    anchored: false
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/bed.rsi
     state: bed
   - type: InteractionOutline
+  - type: HealOnBuckle
+    damage: {}
 
 - type: entity
   parent: CMBed

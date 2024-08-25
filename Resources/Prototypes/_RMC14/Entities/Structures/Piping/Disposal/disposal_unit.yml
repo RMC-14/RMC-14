@@ -24,6 +24,8 @@
   - type: ApcPowerReceiver
     powerLoad: 0
     needsPower: false
+  - type: ThrowInsertContainer
+    probability: 0
   - type: InteractedBlacklist
     blacklist:
       components:

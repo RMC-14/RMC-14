@@ -1,0 +1,41 @@
+- type: entity
+  parent: CMFloorShallowWaterEntity
+  id: RMCEntityDesertWaterShallow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Tiles/planet/desert_water.rsi
+    layers:
+    - state: shallow
+
+- type: entity
+  parent: RMCEntityDesertWaterShallow
+  id: RMCEntityDesertWaterShallowCorner
+  components:
+  - type: Sprite
+    layers:
+    - state: shallow_corner
+
+- type: entity
+  parent: RMCEntityDesertWaterShallow
+  id: RMCEntityDesertWaterShallowCornerEdge
+  components:
+  - type: Sprite
+    layers:
+    - state: shallow_corner_edge
+
+- type: entity
+  parent: RMCEntityDesertWaterShallow
+  id: RMCEntityDesertWaterShallowEdge
+  components:
+  - type: Sprite
+    layers:
+    - state: shallow_edge
+
+- type: entity
+  parent: CMFloorDeepWaterEntity
+  id: RMCEntityDesertWaterDeep
+  components:
+  - type: Sprite
+    sprite: _RMC14/Tiles/planet/desert_water.rsi
+    layers:
+    - state: deep

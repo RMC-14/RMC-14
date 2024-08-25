@@ -1,6 +1,7 @@
 ﻿- type: department
   parent: CMDepartmentBase
   id: CMXeno
+  name: department-CMXeno
   description: cm-department-Xeno-description
   color: "#8b36a6"
   weight: 100

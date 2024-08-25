@@ -1,11 +1,11 @@
 - type: entity
   parent: CigPackBase
-  id: CMCigarettePackLuckySloths
+  id: CMCigarettePackLuckySlothsMini
   name: lucky sloths mini packet
   description: These four-packs of Luckies come in every MRE. They're not as good as the Habana Reals that come in the LACN MREs, but at least they're free.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Smokeables/lucky_sloths_4.rsi
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/lucky_sloths_4.rsi
     layers:
     - state: closed
     - state: open
@@ -48,3 +48,136 @@
     blacklist:
       components:
       - Xeno
+
+- type: entity
+  parent: CigPackBase
+  id: RMCCigarettePackLuckySloths
+  name: lucky sloths packet
+  description: Lucky Sloths Means Fine Tobacco! 9/10 doctors agree on Lucky Sloths...as the leading cause of marine lung cancer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/lucky_sloths.rsi
+    layers:
+    - state: closed
+    - state: open
+      map: ["openLayer"]
+      visible: false
+    - state: cig1
+      map: ["cig1"]
+      visible: false
+    - state: cig2
+      map: ["cig2"]
+      visible: false
+    - state: cig3
+      map: ["cig3"]
+      visible: false
+    - state: cig4
+      map: ["cig4"]
+      visible: false
+    - state: cig5
+      map: ["cig5"]
+      visible: false
+    - state: cig6
+      map: ["cig6"]
+      visible: false
+    - state: cig7
+      map: ["cig7"]
+      visible: false
+    - state: cig8
+      map: ["cig8"]
+      visible: false
+    - state: cig9
+      map: ["cig9"]
+      visible: false
+    - state: cig10
+      map: ["cig10"]
+      visible: false
+    - state: cig11
+      map: ["cig11"]
+      visible: false
+    - state: cig12
+      map: ["cig12"]
+      visible: false
+    - state: cig13
+      map: ["cig13"]
+      visible: false
+    - state: cig14
+      map: ["cig14"]
+      visible: false
+    - state: cig15
+      map: ["cig15"]
+      visible: false
+    - state: cig16
+      map: ["cig16"]
+      visible: false
+    - state: cig17
+      map: ["cig17"]
+      visible: false
+    - state: cig18
+      map: ["cig18"]
+      visible: false
+    - state: cig19
+      map: ["cig19"]
+      visible: false
+    - state: cig20
+      map: ["cig20"]
+      visible: false
+  - type: Storage
+    grid:
+    - 0,0,19,1
+    whitelist:
+      components:
+      - RMCLighter
+      tags:
+      - Cigarette
+  - type: StorageFill
+    contents:
+    - id: Cigarette
+      amount: 20
+  - type: ItemCounter
+    count:
+      tags: [Cigarette]
+    composite: true
+    layerStates:
+    - cig1
+    - cig2
+    - cig3
+    - cig4
+    - cig5
+    - cig6
+    - cig7
+    - cig8
+    - cig9
+    - cig10
+    - cig11
+    - cig12
+    - cig13
+    - cig14
+    - cig15
+    - cig16
+    - cig17
+    - cig18
+    - cig19
+    - cig20
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCCigarettePackLuckySloths
+  id: RMCCigarettePackWeYaGold
+  name: We-Ya gold packet
+  description: Paving Better Worlds, and rolling better cigarettes. These fancy cigarettes are Weston-Yamada's entry into the market. Comes backed by a fierce legal team.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/we_ya_gold_packet.rsi
+
+- type: entity
+  parent: RMCCigarettePackLuckySloths
+  id: RMCCigarettePackExecutiveSelect
+  name: executive select packet
+  description: These cigarettes are the height of luxury. They're smooth, they're cool, and they smell like victory...and cigarette smoke.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/executive_select.rsi

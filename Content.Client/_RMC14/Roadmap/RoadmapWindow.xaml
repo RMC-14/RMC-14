@@ -22,6 +22,9 @@
             <BoxContainer Name="Columns" Access="Public" Orientation="Horizontal">
                 <BoxContainer Name="FirstVersion" Access="Public" Orientation="Vertical" HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Current version" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Scout Kit" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Dropship modifications" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Close air support" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Fireteam Leader" Text="More equipment in the fireteam leader's equipment and gear racks" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Squad Leader" Text="More equipment in the squad leader's equipment and gear racks" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Smart Gun Operator" Text="Stay behind marines and fire past friendlies and into the enemy!" />
@@ -39,7 +42,6 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Crusher" />
-                    <controls:RoadmapItem ItemState="Partial" HeaderText="Boiler" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Fiorina Science Annex" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Spitter" Text="Protect your fellow Aliens with a corrosive acid spit, allowing you to damage hosts from a distance and deny areas or lanes of fire to them. Use your strong acid to quickly destroy equipment" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="USS LCS-14 Savannah" Text="A new ship map for marines to spawn on. Contributed by Tunguso4ka" />
@@ -47,6 +49,7 @@
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Larva removal surgery" Text="No longer a week away" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Treatable wounds" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="CPR and IVs" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Boiler" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Hivelord" Text="Shape the Hive to your will with a massive plasma reserve. Become one with weeds and sprint around weeded terrain like a Runner. Use pheromones to assist fellow Aliens" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Lurker" Text="Become the ultimate ambusher. Stalk behind the frontlines and on flanks, wound, capture and kill unsuspecting Marines. Harass support personnel" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Warrior" Text="Fight on the frontlines. Disable and capture lone prey. Punish reckless Marines by flinging them into Alien backlines. Act as one of the Hive's main line combatants" />
@@ -74,17 +77,14 @@
                     <controls:RoadmapItem ItemState="Planned" HeaderText="More weapons" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Communications objective" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Nuke endgame" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Specialist's Scout Kit" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Survivors" Text="A role that starts on the planet and must try to survive until rescued by the Marines" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Engineering staff" Text="Maintenance technician and the Chief Engineer" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Synthetics" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Emergency responders" Text="A faction that randomly spawns, with their own objectives" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Orbital bombardment" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Intelligence officer" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Close air support" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Mortars" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Chemical research" Text="Chemicals with random recipes, ingredients and effects" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Dropship modifications" Text="" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Xeno strains" Text="Variations of a xeno caste with different stats and abilities" />
                 </BoxContainer>
             </BoxContainer>

@@ -34,7 +34,7 @@
     idleState: autolathe
     runningState: autolathe_n
     staticRecipes:
-    - CMBucket
+    - RMCBucket
 #    - Janitorial bucket (10000 metal)
 #    - Flashlight (62 metal, 25 glass)
     - CMFireExtinguisher

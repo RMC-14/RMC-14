@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.OnCollide;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Coordinates;
@@ -32,6 +33,7 @@ public sealed class XenoSprayAcidSystem : EntitySystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
@@ -72,6 +74,9 @@ public sealed class XenoSprayAcidSystem : EntitySystem
 
         distance = MathF.Floor(distance);
         if (distance == 0)
+            return;
+
+        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
 
         var x = start.X;

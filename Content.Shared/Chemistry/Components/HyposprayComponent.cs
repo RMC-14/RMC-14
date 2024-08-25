@@ -32,6 +32,14 @@ public sealed partial class HyposprayComponent : Component
     public bool OnlyAffectsMobs = false;
 
     /// <summary>
+    /// If this can draw from containers in mob-only mode.
+    /// </summary>
+    [AutoNetworkedField]
+    [DataField]
+    public bool CanContainerDraw = true;
+
+
+    /// <summary>
     /// Whether or not the hypospray is able to draw from containers or if it's a single use
     /// device that can only inject.
     /// </summary>

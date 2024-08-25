@@ -422,6 +422,7 @@ entities:
     - type: BecomesStation
       id: Dev
     - type: SpreaderGrid
+      updateAccumulator: 0.016997298
     - type: GridPathfinding
   - uid: 962
     components:
@@ -567,33 +568,21 @@ entities:
     - type: Transform
       pos: -2.5,-14.5
       parent: 179
-    - type: DeviceLinkSink
-      links:
-      - 1013
   - uid: 697
     components:
     - type: Transform
       pos: 1.5,-14.5
       parent: 179
-    - type: DeviceLinkSink
-      links:
-      - 1014
   - uid: 698
     components:
     - type: Transform
       pos: 1.5,-16.5
       parent: 179
-    - type: DeviceLinkSink
-      links:
-      - 1014
   - uid: 984
     components:
     - type: Transform
       pos: -2.5,-16.5
       parent: 179
-    - type: DeviceLinkSink
-      links:
-      - 1013
 - proto: BoozeDispenser
   entities:
   - uid: 752
@@ -607,13 +596,6 @@ entities:
     components:
     - type: Transform
       pos: 5.163024,9.63072
-      parent: 179
-- proto: Bucket
-  entities:
-  - uid: 691
-    components:
-    - type: Transform
-      pos: 7.1447573,15.900927
       parent: 179
 - proto: CableApcExtension
   entities:
@@ -2638,7 +2620,7 @@ entities:
       pos: 13.5,10.5
       parent: 179
     - type: Door
-      secondsUntilStateChange: -4954.6494
+      secondsUntilStateChange: -5030.6265
       state: Opening
   - uid: 26
     components:
@@ -2717,6 +2699,13 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 16.5,15.5
+      parent: 179
+- proto: CMAlamoWall84Flipped
+  entities:
+  - uid: 1337
+    components:
+    - type: Transform
+      pos: -6.5,-5.5
       parent: 179
 - proto: CMApcLowCapacity
   entities:
@@ -3130,6 +3119,13 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: CMComputerDropshipWeapons
+  entities:
+  - uid: 1339
+    components:
+    - type: Transform
+      pos: -4.5,-13.5
+      parent: 179
 - proto: CMCrateScience
   entities:
   - uid: 177
@@ -3313,6 +3309,72 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 2.5,-5.5
+      parent: 179
+- proto: CMGrenadeFrag
+  entities:
+  - uid: 398
+    components:
+    - type: Transform
+      pos: -3.3969078,-1.2226596
+      parent: 179
+  - uid: 666
+    components:
+    - type: Transform
+      pos: -3.542741,-1.243493
+      parent: 179
+  - uid: 683
+    components:
+    - type: Transform
+      pos: -3.698991,-1.2330763
+      parent: 179
+  - uid: 1210
+    components:
+    - type: Transform
+      pos: -3.2406578,-1.2226596
+      parent: 179
+- proto: CMGrenadeHighExplosive
+  entities:
+  - uid: 188
+    components:
+    - type: Transform
+      pos: -3.2510743,-1.0143263
+      parent: 179
+  - uid: 436
+    components:
+    - type: Transform
+      pos: -3.698991,-1.0143263
+      parent: 179
+  - uid: 662
+    components:
+    - type: Transform
+      pos: -3.4073243,-1.0143263
+      parent: 179
+  - uid: 663
+    components:
+    - type: Transform
+      pos: -3.542741,-1.0143263
+      parent: 179
+- proto: CMGrenadeSmoke
+  entities:
+  - uid: 1211
+    components:
+    - type: Transform
+      pos: -3.698991,-1.4309931
+      parent: 179
+  - uid: 1212
+    components:
+    - type: Transform
+      pos: -3.5531578,-1.4414096
+      parent: 179
+  - uid: 1213
+    components:
+    - type: Transform
+      pos: -3.386491,-1.4414096
+      parent: 179
+  - uid: 1214
+    components:
+    - type: Transform
+      pos: -3.230241,-1.4309931
       parent: 179
 - proto: CMHandsInsulated
   entities:
@@ -3750,22 +3812,17 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -0.7047485,-3.4607978
       parent: 179
-- proto: CMMagazineSMGM63
+- proto: CMMagazineRifleM4SPR
   entities:
-  - uid: 1219
+  - uid: 1321
     components:
     - type: Transform
-      pos: -3.9967313,-3.3756955
+      pos: -1.4547485,-3.2941313
       parent: 179
-  - uid: 1220
+  - uid: 1322
     components:
     - type: Transform
-      pos: -4.205065,-3.3756955
-      parent: 179
-  - uid: 1221
-    components:
-    - type: Transform
-      pos: -4.423815,-3.3756955
+      pos: -1.121415,-3.3045478
       parent: 179
 - proto: CMMagazineRifleM54C
   entities:
@@ -3796,17 +3853,22 @@ entities:
     - type: Transform
       pos: -3.7406578,-0.2539096
       parent: 179
-- proto: CMMagazineRifleM4SPR
+- proto: CMMagazineSMGM63
   entities:
-  - uid: 1321
+  - uid: 1219
     components:
     - type: Transform
-      pos: -1.4547485,-3.2941313
+      pos: -3.9967313,-3.3756955
       parent: 179
-  - uid: 1322
+  - uid: 1220
     components:
     - type: Transform
-      pos: -1.121415,-3.3045478
+      pos: -4.205065,-3.3756955
+      parent: 179
+  - uid: 1221
+    components:
+    - type: Transform
+      pos: -4.423815,-3.3756955
       parent: 179
 - proto: CMMagazineSniperM96S
   entities:
@@ -3828,6 +3890,48 @@ entities:
     components:
     - type: Transform
       pos: 0.024418235,-3.4087145
+      parent: 179
+- proto: CMMarinePreparedMealChicken
+  entities:
+  - uid: 171
+    components:
+    - type: Transform
+      pos: 3.5615244,6.810526
+      parent: 179
+- proto: CMMarinePreparedMealCornbread
+  entities:
+  - uid: 340
+    components:
+    - type: Transform
+      pos: 3.551108,6.591776
+      parent: 179
+- proto: CMMarinePreparedMealPasta
+  entities:
+  - uid: 411
+    components:
+    - type: Transform
+      pos: 3.5719411,6.4146924
+      parent: 179
+- proto: CMMarinePreparedMealPizza
+  entities:
+  - uid: 429
+    components:
+    - type: Transform
+      pos: 3.5615244,6.216776
+      parent: 179
+- proto: CMMarinePreparedMealPork
+  entities:
+  - uid: 801
+    components:
+    - type: Transform
+      pos: 3.551108,6.0396924
+      parent: 179
+- proto: CMMarinePreparedMealTofu
+  entities:
+  - uid: 727
+    components:
+    - type: Transform
+      pos: 3.551108,5.675109
       parent: 179
 - proto: CMMultitool
   entities:
@@ -4769,48 +4873,6 @@ entities:
     components:
     - type: Transform
       pos: -5.8186073,-3.4815395
-      parent: 179
-- proto: CMMarinePreparedMealChicken
-  entities:
-  - uid: 171
-    components:
-    - type: Transform
-      pos: 3.5615244,6.810526
-      parent: 179
-- proto: CMMarinePreparedMealCornbread
-  entities:
-  - uid: 340
-    components:
-    - type: Transform
-      pos: 3.551108,6.591776
-      parent: 179
-- proto: CMMarinePreparedMealPasta
-  entities:
-  - uid: 411
-    components:
-    - type: Transform
-      pos: 3.5719411,6.4146924
-      parent: 179
-- proto: CMMarinePreparedMealPizza
-  entities:
-  - uid: 429
-    components:
-    - type: Transform
-      pos: 3.5615244,6.216776
-      parent: 179
-- proto: CMMarinePreparedMealPork
-  entities:
-  - uid: 801
-    components:
-    - type: Transform
-      pos: 3.551108,6.0396924
-      parent: 179
-- proto: CMMarinePreparedMealTofu
-  entities:
-  - uid: 727
-    components:
-    - type: Transform
-      pos: 3.551108,5.675109
       parent: 179
 - proto: CMVendorCola
   entities:
@@ -6770,27 +6832,18 @@ entities:
     - type: Transform
       pos: -2.5,-15.5
       parent: 179
-    - type: DeviceLinkSink
-      links:
-      - 699
   - uid: 259
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 1.5,-14.5
       parent: 179
-    - type: DeviceLinkSink
-      links:
-      - 983
   - uid: 463
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 1.5,-16.5
       parent: 179
-    - type: DeviceLinkSink
-      links:
-      - 983
   - uid: 677
     components:
     - type: Transform
@@ -6802,61 +6855,40 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -1.5,11.5
       parent: 179
-    - type: DeviceLinkSink
-      links:
-      - 722
   - uid: 720
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -0.5,11.5
       parent: 179
-    - type: DeviceLinkSink
-      links:
-      - 722
   - uid: 721
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 0.5,11.5
       parent: 179
-    - type: DeviceLinkSink
-      links:
-      - 722
   - uid: 985
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 1.5,-13.5
       parent: 179
-    - type: DeviceLinkSink
-      links:
-      - 983
   - uid: 989
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 1.5,-15.5
       parent: 179
-    - type: DeviceLinkSink
-      links:
-      - 983
   - uid: 990
     components:
     - type: Transform
       pos: -2.5,-13.5
       parent: 179
-    - type: DeviceLinkSink
-      links:
-      - 699
   - uid: 991
     components:
     - type: Transform
       pos: -2.5,-16.5
       parent: 179
-    - type: DeviceLinkSink
-      links:
-      - 699
 - proto: CrateHydroponicsSeeds
   entities:
   - uid: 754
@@ -7291,72 +7323,6 @@ entities:
         - 0
         - 0
         - 0
-- proto: CMGrenadeHighExplosive
-  entities:
-  - uid: 188
-    components:
-    - type: Transform
-      pos: -3.2510743,-1.0143263
-      parent: 179
-  - uid: 436
-    components:
-    - type: Transform
-      pos: -3.698991,-1.0143263
-      parent: 179
-  - uid: 662
-    components:
-    - type: Transform
-      pos: -3.4073243,-1.0143263
-      parent: 179
-  - uid: 663
-    components:
-    - type: Transform
-      pos: -3.542741,-1.0143263
-      parent: 179
-- proto: CMGrenadeFrag
-  entities:
-  - uid: 398
-    components:
-    - type: Transform
-      pos: -3.3969078,-1.2226596
-      parent: 179
-  - uid: 666
-    components:
-    - type: Transform
-      pos: -3.542741,-1.243493
-      parent: 179
-  - uid: 683
-    components:
-    - type: Transform
-      pos: -3.698991,-1.2330763
-      parent: 179
-  - uid: 1210
-    components:
-    - type: Transform
-      pos: -3.2406578,-1.2226596
-      parent: 179
-- proto: CMGrenadeSmoke
-  entities:
-  - uid: 1211
-    components:
-    - type: Transform
-      pos: -3.698991,-1.4309931
-      parent: 179
-  - uid: 1212
-    components:
-    - type: Transform
-      pos: -3.5531578,-1.4414096
-      parent: 179
-  - uid: 1213
-    components:
-    - type: Transform
-      pos: -3.386491,-1.4414096
-      parent: 179
-  - uid: 1214
-    components:
-    - type: Transform
-      pos: -3.230241,-1.4309931
-      parent: 179
 - proto: MachineAnomalyGenerator
   entities:
   - uid: 1071
@@ -7378,9 +7344,6 @@ entities:
     - type: Transform
       pos: 12.5,24.5
       parent: 179
-    - type: DeviceLinkSink
-      links:
-      - 1083
 - proto: MachineFrame
   entities:
   - uid: 533
@@ -7772,6 +7735,34 @@ entities:
     - type: Transform
       pos: 9.532393,18.446417
       parent: 179
+- proto: RMCBucket
+  entities:
+  - uid: 691
+    components:
+    - type: Transform
+      pos: 7.1447573,15.900927
+      parent: 179
+- proto: RMCDropshipAttachmentAmmoGAU
+  entities:
+  - uid: 1338
+    components:
+    - type: Transform
+      pos: -6.5,-9.5
+      parent: 179
+- proto: RMCDropshipAttachmentGau21Cannon
+  entities:
+  - uid: 1336
+    components:
+    - type: Transform
+      pos: -6.5,-8.5
+      parent: 179
+- proto: RMCMechPowerLoader
+  entities:
+  - uid: 1335
+    components:
+    - type: Transform
+      pos: -4.5,-5.5
+      parent: 179
 - proto: RubberStampCaptain
   entities:
   - uid: 982
@@ -8148,6 +8139,14 @@ entities:
     - type: Transform
       pos: -13.195735,9.730438
       parent: 179
+- proto: WeaponRifleM4SPR
+  entities:
+  - uid: 1320
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -1.808915,-3.4607978
+      parent: 179
 - proto: WeaponRifleM54C
   entities:
   - uid: 4
@@ -8166,14 +8165,6 @@ entities:
     components:
     - type: Transform
       pos: -3.4906578,0.19400707
-      parent: 179
-- proto: WeaponRifleM4SPR
-  entities:
-  - uid: 1320
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -1.808915,-3.4607978
       parent: 179
 - proto: WeaponShotgunM42A2
   entities:

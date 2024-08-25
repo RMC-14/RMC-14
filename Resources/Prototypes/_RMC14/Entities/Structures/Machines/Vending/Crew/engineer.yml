@@ -44,7 +44,7 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      #- id:G8-A General Utility Pouch
+      - id: RMCBeltUtilityGeneral
       - id: CMBeltUtilityFilled
         name: M276 Toolbelt Rig (Full)
     - name: Pouches

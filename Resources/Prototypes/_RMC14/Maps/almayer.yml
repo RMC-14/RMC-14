@@ -31,8 +31,8 @@
           #Auxiliary
           CMAuxiliarySupportOfficer: [1, 1]
 #          CMIntelOfficer: [4, 4]
-          CMPilotDropship: [2, 2] # TODO RMC14 1
-#          CMPilotGunship: [1, 1]
+          CMPilotDropship: [1, 1]
+          CMPilotGunship: [1, 1]
           CMDropshipCrewChief: [2, 2]
 
           #Engineering

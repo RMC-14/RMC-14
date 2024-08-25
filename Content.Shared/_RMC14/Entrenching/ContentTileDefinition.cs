@@ -8,4 +8,10 @@ public sealed partial class ContentTileDefinition
 
     [DataField]
     public bool WeedsSpreadable = true;
+
+    [DataField]
+    public bool BlockConstruction;
+
+    [DataField]
+    public bool BlockAnchoring;
 }

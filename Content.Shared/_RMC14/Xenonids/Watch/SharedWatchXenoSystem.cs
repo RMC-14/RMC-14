@@ -46,7 +46,7 @@ public abstract class SharedWatchXenoSystem : EntitySystem
     {
     }
 
-    protected virtual void Watch(Entity<XenoComponent?, ActorComponent?, EyeComponent?> watcher, Entity<XenoComponent?> toWatch)
+    public virtual void Watch(Entity<XenoComponent?, ActorComponent?, EyeComponent?> watcher, Entity<XenoComponent?> toWatch)
     {
     }
 

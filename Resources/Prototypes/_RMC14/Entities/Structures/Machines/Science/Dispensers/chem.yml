@@ -29,6 +29,9 @@
   - type: ApcPowerReceiver
     needsPower: false # TODO RMC14
     powerLoad: 0
+  - type: RequiresSkill
+    skills:
+      RMCSkillMedical: 3
   - type: InteractedBlacklist
     blacklist:
       components:

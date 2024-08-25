@@ -1,4 +1,10 @@
-﻿command-description-vendorpoints-get = Gets the points that a marine has left to purchase items with at an automated vendor.
+﻿command-description-areas-save = Save all mapped areas to the map.
+
+command-description-bioscan-marine = Manually triggers an ARES bioscan to announce to marines where xenos are and how many are left.
+command-description-bioscan-xeno = Manually triggers a Queen Mother bioscan to announce to xenos where marines are and how many are left.
+command-description-bioscan-all = Manually triggers an ARES and Queen Mother bioscans to announce to both xenos and marines where each other are and how many are left.
+
+command-description-vendorpoints-get = Gets the points that a marine has left to purchase items with at an automated vendor.
 command-description-vendorpoints-getspecialist = Gets the points that a Weapons Specialist has left to purchase items with at their gear rack.
 command-description-vendorpoints-set = Sets the points that a marine or group of marines have to purchase items with at an automated vendor.
 command-description-vendorpoints-setspecialist = Sets the points that a Weapons Specialist or group of Weapons Specialists have to purchase items with at their gear rack.
@@ -23,6 +29,7 @@ command-description-removeinvalidweeds = Removes any weeds that should not have 
 
 command-description-skills-get = Gets the level of a specific skill for a marine.
 command-description-skills-set = Sets the level of a specific skill for a marine or group of marines.
+command-description-skills-all = Sets the level of all skills for a marine or group of marines.
 
 command-description-squad-get = Gets the squad ID of a marine.
 command-description-squad-getname = Gets the squad name of a marine.

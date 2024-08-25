@@ -26,6 +26,7 @@ rmc-xeno-evolution-cant-evolve-damaged = We must be at full health to evolve.
 rmc-xeno-evolution-cant-devolve-damaged = We are too weak to deevolve, we must regain our health first.
 rmc-xeno-evolution-cant-evolve-recent-queen-death-minutes = We must wait about {$minutes} minutes and {$seconds} seconds for the hive to recover from the previous Queen's death.
 rmc-xeno-evolution-cant-evolve-recent-queen-death-seconds = We must wait about {$seconds} seconds for the hive to recover from the previous Queen's death.
+rmc-xeno-evolution-failed-bad-location = We can't evolve here.
 
 # Fortify
 cm-xeno-fortify-cant-headbutt = You can't headbutt while fortifying!

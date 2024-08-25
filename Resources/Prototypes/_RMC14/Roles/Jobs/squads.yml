@@ -6,6 +6,13 @@
     background:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad
+    maxRoles:
+      CMSquadLeader: 1
+      CMFireteamLeader: 2
+      CMWeaponsSpecialist: 1
+      CMSmartGunOperator: 1
+      CMCombatTech: 3
+      CMHospitalCorpsman: 4
 
 - type: entity
   parent: SquadBase
@@ -13,6 +20,7 @@
   name: Alpha
   components:
   - type: SquadTeam
+    roundStart: true
     color: "#E61919"
     accessLevels:
     - CMAccessAlpha
@@ -23,6 +31,7 @@
   name: Bravo
   components:
   - type: SquadTeam
+    roundStart: true
     color: "#FFC32D"
     accessLevels:
     - CMAccessBravo
@@ -33,6 +42,7 @@
   name: Charlie
   components:
   - type: SquadTeam
+    roundStart: true
     color: "#C864C8"
     accessLevels:
     - CMAccessCharlie
@@ -43,6 +53,7 @@
   name: Delta
   components:
   - type: SquadTeam
+    roundStart: true
     color: "#4148C8"
     accessLevels:
     - CMAccessDelta

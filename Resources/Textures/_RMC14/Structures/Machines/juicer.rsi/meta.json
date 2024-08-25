@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/4c03b0ed78e7565ec0fb4112f4f2e59421e239cc/icons/obj/structures/machinery/kitchen.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "juicer0"
+    },
+    {
+      "name": "juicer1"
+    }
+  ]
+}

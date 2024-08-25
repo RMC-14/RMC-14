@@ -1,0 +1,85 @@
+﻿- type: tile
+  parent: CMTileBase
+  id: RMCFloorAI
+  name: tiles-cm-ai
+  sprite: /Textures/_RMC14/Tiles/almayer/ai/ai_floor1.png
+
+- type: tile
+  parent: RMCFloorAI
+  id: RMCFloorAIGlowing
+  name: tiles-cm-ai-glowing
+  sprite: /Textures/_RMC14/Tiles/almayer/ai/ai_floor2_0.png
+
+- type: tile
+  parent: RMCFloorAIGlowing
+  id: RMCFloorAIGlowingNoBuild
+  blockAnchoring: true
+  blockConstruction: true
+
+- type: tile
+  parent: RMCFloorAIGlowing
+  id: RMCFloorAIGlowing3
+  sprite: /Textures/_RMC14/Tiles/almayer/ai/ai_floor3_0.png
+
+- type: tile
+  parent: RMCFloorAIGlowing
+  id: RMCFloorAIGlowing34Range
+  sprite: /Textures/_RMC14/Tiles/almayer/ai/ai_floor3_0.png
+
+- type: tile
+  parent: RMCFloorAI
+  id: RMCFloorAINoBuild
+  blockAnchoring: true
+  blockConstruction: true
+
+- type: tile
+  parent: RMCFloorAINoBuild
+  id: RMCFloorAINoBuildArrow
+  sprite: /Textures/_RMC14/Tiles/almayer/ai/ai_arrow_0.png
+
+- type: tile
+  parent: RMCFloorAINoBuildArrow
+  id: RMCFloorAINoBuildArrowEast
+  sprite: /Textures/_RMC14/Tiles/almayer/ai/ai_arrow_2.png
+
+- type: tile
+  parent: RMCFloorAINoBuildArrow
+  id: RMCFloorAINoBuildArrowWest
+  sprite: /Textures/_RMC14/Tiles/almayer/ai/ai_arrow_3.png
+
+- type: tile
+  parent: RMCFloorAINoBuildArrow
+  id: RMCFloorAINoBuildArrowNorth
+  sprite: /Textures/_RMC14/Tiles/almayer/ai/ai_arrow_1.png
+
+- type: tile
+  parent: RMCFloorAINoBuild
+  id: RMCFloorAINoBuildCargo
+  sprite: /Textures/_RMC14/Tiles/almayer/ai/ai_cargo.png
+
+- type: tile
+  parent: RMCFloorAINoBuild
+  id: RMCFloorAINoBuildFloor2
+  sprite: /Textures/_RMC14/Tiles/almayer/ai/ai_floor2_0.png
+
+- type: tile
+  parent: RMCFloorAINoBuild
+  id: RMCFloorAINoBuildPlates
+  sprite: /Textures/_RMC14/Tiles/almayer/ai/ai_plates.png
+
+- type: tile
+  abstract: true
+  parent: RMCFloorAINoBuild
+  id: RMCFloorAINoBuildSilver
+  sprite: /Textures/_RMC14/Tiles/almayer/ai/ai_silver_0.png
+
+- type: tile
+  parent: RMCFloorAINoBuildSilver
+  id: RMCFloorAINoBuildSilverEast
+  sprite: /Textures/_RMC14/Tiles/almayer/ai/ai_silver_2.png
+
+- type: tile
+  parent: RMCFloorAINoBuildSilver
+  id: RMCFloorAINoBuildSilverWest
+  sprite: /Textures/_RMC14/Tiles/almayer/ai/ai_silver_3.png
+

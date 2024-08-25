@@ -5,6 +5,11 @@
   name: Vendomat
   description: A generic vending machine.
   components:
+  - type: Transform
+    anchored: false
+    noRot: true
+  - type: Physics
+    bodyType: Static
   - type: AmbientOnPowered
   - type: AmbientSound
     volume: -9
@@ -12,11 +17,6 @@
     enabled: false
     sound:
       path: /Audio/Ambience/Objects/vending_machine_hum.ogg
-  - type: Physics
-    bodyType: Static
-  - type: Transform
-    anchored: true
-    noRot: true
   - type: Fixtures
     fixtures:
       fix1:
@@ -194,11 +194,10 @@
 - type: vendingMachineInventory
   id: CMVendorCigs
   startingInventory:
-    CMCigPackBlack: 50 #TODO RMC14 lucky sloths
-    CMCigarCase: 20 #TODO RMC14 tarbacktube
-    CMMatchbox: 15
+    RMCCigarettePackLuckySloths: 50
+    RMCTarbackCase: 15
     Lighter: 25
-    #TODO RMC14 Zippo 10
+    RMCZippo: 10
 
 
 # Security
@@ -269,7 +268,6 @@
     CMFirstAidKitFilled: 2
     CMBurnAidKitFilled: 2 #firstaid fire 2
     #MedkitRadiationFilled: 1 #firstaid rad 1
-    CMHeadsetAlpha: 6
     # Crew Monitor
 
 

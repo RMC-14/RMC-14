@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/884ab172389b6fc54ef063f5fbea5e8b0a0a2235/icons/mob/humans/underwear.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "c_boxers",
+      "directions": 4
+    },
+    {
+      "name": "c_lowriders",
+      "directions": 4
+    },
+    {
+      "name": "c_briefs",
+      "directions": 4
+    },
+    {
+      "name": "c_satin",
+      "directions": 4
+    },
+    {
+      "name": "c_tanga",
+      "directions": 4
+    },
+    {
+      "name": "j_boxers",
+      "directions": 4
+    },
+    {
+      "name": "j_lowriders",
+      "directions": 4
+    },
+    {
+      "name": "j_briefs",
+      "directions": 4
+    },
+    {
+      "name": "j_satin",
+      "directions": 4
+    },
+    {
+      "name": "j_tanga",
+      "directions": 4
+    },
+    {
+      "name": "s_boxers",
+      "directions": 4
+    },
+    {
+      "name": "s_lowriders",
+      "directions": 4
+    },
+    {
+      "name": "s_briefs",
+      "directions": 4
+    },
+    {
+      "name": "s_satin",
+      "directions": 4
+    },
+    {
+      "name": "s_tanga",
+      "directions": 4
+    },
+    {
+      "name": "d_boxers",
+      "directions": 4
+    },
+    {
+      "name": "d_lowriders",
+      "directions": 4
+    },
+    {
+      "name": "d_briefs",
+      "directions": 4
+    },
+    {
+      "name": "d_satin",
+      "directions": 4
+    },
+    {
+      "name": "d_tanga",
+      "directions": 4
+    }
+  ]
+}

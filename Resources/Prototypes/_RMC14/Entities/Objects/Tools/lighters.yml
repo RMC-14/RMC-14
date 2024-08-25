@@ -1,0 +1,30 @@
+- type: entity
+  name: zippo lighter
+  description: A fancy steel Zippo lighter. Ignite in style.
+  parent: FlippoLighter
+  id: RMCZippo
+  components:
+  - type: Sprite
+    sprite:  _RMC14/Objects/Tools/Lighters/zippo.rsi
+    layers:
+    - state: closed
+      map: ["base"]
+    - state: open
+      map: ["top"]
+      visible: false
+    - state: open
+      map: ["open"]
+      visible: false
+    - state: lighter_flame
+      map: ["flame"]
+      visible: false
+      shader: unshaded
+
+- type: entity
+  name: We-Ya executive zippo lighter
+  description: A remarkable Zippo lighter embellished in the Company's black and gold shade.
+  parent: RMCZippo
+  id: RMCZippoExec
+  components:
+  - type: Sprite
+    sprite:  _RMC14/Objects/Tools/Lighters/execzippo.rsi

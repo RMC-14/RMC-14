@@ -23,3 +23,15 @@
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/vehicle_seats.rsi
     state: pilot_chair
+
+- type: entity
+  parent: CMSeatBase
+  id: RMCSeatHunter
+  name: hunter chair
+  description: An exquisitely crafted chair for a large humanoid hunter.
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/vehicle_seats.rsi
+    state: chair

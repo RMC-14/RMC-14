@@ -19,5 +19,63 @@
     tags:
     - Binoculars
 
+- type: entity
+  parent: RMCBinoculars
+  id: RMCLaserDesignator
+  name: laser designator
+  description: "A budget laser designator with one mode: target marking for CAS with IR laser. Click a tile to target something."
+  # TODO RMC14 "A laser designator with two modes: target marking for CAS with IR laser and rangefinding. Click turf to target something. Ctrl + Click designator to stop lasing. Alt + Click designator to switch modes."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    layers:
+    - state: rangefinder
+    - state: laser_cas
+  - type: LaserDesignator
+  - type: UseDelay
+    delay: 1
+
+- type: entity
+  parent: RMCLaserDesignator
+  id: RMCLaserDesignatorScout
+  name: scout laser designator
+  description: "An improved laser designator, issued to USCM scouts, with one mode: target marking for CAS with IR laser. Click a tile to target something."
+  # TODO RMC14 "An improved laser designator, issued to USCM scouts, with two modes: target marking for CAS with IR laser and rangefinding. Click turf to target something. Ctrl + Click designator to stop lasing. Alt + Click designator to switch modes."
+  components:
+  - type: LaserDesignator
+    delay: 3
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  id: RMCLaserDesignatorTarget
+  name: laser
+  description: It's a laser to designate artillery targets, get away from it!
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Effects/laser.rsi
+    state: laser_target2
+  - type: LaserDesignatorTarget
+  - type: PointLight
+    enabled: true
+    radius: 3
+
+- type: entity
+  id: RMCLaserDropshipTarget
+  name: blinking laser
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Effects/laser.rsi
+    state: laser_target3
+  - type: PointLight
+    enabled: true
+    radius: 3
+  - type: TimedDespawn
+    lifetime: 1
+
 - type: Tag
   id: Binoculars

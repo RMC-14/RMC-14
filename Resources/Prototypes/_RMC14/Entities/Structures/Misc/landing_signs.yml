@@ -1,0 +1,100 @@
+- type: entity
+  parent: CMBaseStructureCorrodible
+  abstract: true
+  id: RMCBaseLandingSign
+  name: sign
+  description: A sign.
+  components:
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: OverMobs
+    sprite: _RMC14/Structures/landing_signs.rsi
+  - type: AnimationPlayer
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCLazarusLandingSign
+  name: Lazarus landing sign
+  description: A large sign reading 'lazarus landing por-' the rest of it is smeared in blood.
+  components:
+  - type: Sprite
+    state: laz_sign
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCSolarisRidgeSign
+  name: Solaris Ridge sign
+  description: A large sign that reads 'Solaris Ridge -', the rest of it is scraped away.
+  components:
+  - type: Sprite
+    state: red_sign
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCPrisonSign
+  name: UA Prison Docking sign
+  description: A large sign that reads 'UA Prison Docking -', the rest of it is obscured by claw marks.
+  components:
+  - type: Sprite
+    state: prison_sign
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCShivaIceSign
+  name: Shiva's Ice landing sign
+  description: A large sign that reads 'Shiva's Ice L-nding -', bullet holes and torn metal obscure the rest of the signage.
+  components:
+  - type: Sprite
+    state: ice_sign
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCTrijentSign
+  name: Trijent landing sign
+  description: A large sign that reads 'Trijent mining col-', with the rest being obscured by what looks to be dried blood, and damage.
+  components:
+  - type: Sprite
+    state: dam_sign
+
+- type: entity
+  parent: RMCTrijentSign
+  id: RMCTrijentSignAlt
+  description: A large sign that reads 'Trijent mining colony', with half the sign written in Japanese.
+  components:
+  - type: Sprite
+    state: dam_sign_2
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCSorokyneSign
+  name: Sorokyne landing sign
+  description: A large sign that reads 'Sorokyne - СОРОКІНО - POP. 110' The Company logo is proudly emblazoned in the corner. Don't eat the resin coated snow.
+  components:
+  - type: Sprite
+    state: sorokyne_1
+
+- type: entity
+  parent: RMCSorokyneSign
+  id: RMCSorokyneSignAlt
+  description: A large sign that reads 'Sorokyne - СОРОКІНО - POP. 110' The Company logo is proudly emblazoned in the corner. Someone has crudely written 'FUCK OFF' in teal paint across the majority of the sign.
+  components:
+  - type: Sprite
+    state: sorokyne
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCNewVaraderoSign
+  name: New Varadero landing sign
+  description: A large sign that reads 'New Varadero'. Its always sunny here!
+  components:
+  - type: Sprite
+    state: new_varadero
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCFortBicepSign
+  name: Fort Bicep sign
+  description: A large sign that reads 'Fort Bicep, T-COMMS'.
+  components:
+  - type: Sprite
+    state: fort_biceps

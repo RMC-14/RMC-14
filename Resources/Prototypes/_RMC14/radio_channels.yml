@@ -1,6 +1,6 @@
 # TODO RMC14 remove longrange once communications is in
 # High Command
-- type: radioChannel #USMC High Command, for events and such, basically CentComm channel
+- type: radioChannel #UNMC High Command, for events and such, basically CentComm channel
   id: MarineHighCommand
   name: chat-radio-marine-highcommand
   keycode: "z" #z in cm13

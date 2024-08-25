@@ -55,7 +55,9 @@
   description: You wear this on your back and put items into it.
   components:
   - type: StorageOpenDoAfter
+    skipInHand: true
   - type: StorageCloseOnMove
+    skipInHand: true
 
 - type: entity
   parent: CMBackpack

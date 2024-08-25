@@ -1,0 +1,7 @@
+- type: trait
+  id: CMSnoring
+  name: trait-snoring-name
+  description: trait-snoring-desc
+  category: RMCInconveniences
+  components:
+    - type: Snoring

@@ -1,4 +1,6 @@
-﻿using Content.Shared._RMC14.Xenonids.Projectile.Spit;
+﻿using Content.Shared._RMC14.Armor.ThermalCloak;
+using Content.Shared._RMC14.Xenonids.Projectile;
+using Content.Shared._RMC14.Xenonids.Projectile.Spit;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Stunnable;
@@ -15,6 +17,7 @@ public abstract class SharedOnCollideSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly ThermalCloakSystem _cloak = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly XenoSpitSystem _xenoSpit = default!;
 
@@ -44,6 +47,9 @@ public abstract class SharedOnCollideSystem : EntitySystem
 
         if (!ent.Comp.DamageDead && _mobState.IsDead(other))
             return;
+
+        if(HasComp<UncloakOnHitComponent>(ent.Owner))
+            _cloak.TrySetInvisibility(other, false, true);
 
         ent.Comp.Damaged.Add(other);
         Dirty(ent);

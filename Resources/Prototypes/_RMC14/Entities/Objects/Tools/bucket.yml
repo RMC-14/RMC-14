@@ -1,6 +1,6 @@
 - type: entity
   parent: BaseItem
-  id: CMBucket
+  id: RMCBucket
   name: bucket
   description: It's a bucket. Holds 120 units.
   components:
@@ -67,7 +67,7 @@
       - Xeno
 
 - type: entity
-  parent: CMBucket
+  parent: RMCBucket
   id: CMBucketMop
   name: mop bucket
   description: A larger bucket, typically used with a mop. Holds 240 units
@@ -89,7 +89,7 @@
         maxVol: 240
 
 - type: entity
-  parent: CMBucket
+  parent: RMCBucket
   id: CMBucketJani
   name: janitorial bucket
   description: It's a large bucket that fits in a janitorial cart. Holds 500 units.
