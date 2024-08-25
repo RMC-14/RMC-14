@@ -93,6 +93,7 @@
   forcedColoring: true
   RMCFollowSkinColor: false
   speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
+  sexRestriction: [Male]
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: blank
