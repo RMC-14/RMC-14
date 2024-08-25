@@ -41,9 +41,9 @@ public sealed class XenoMeleeSlowSystem : EntitySystem
 
             if (_net.IsServer)
             {
-				if (victim.Effect != null)
-					QueueDel(victim.Effect);
-				victim.Effect = SpawnAttachedTo(xeno.Comp.Effect, entity.ToCoordinates());
+                if (victim.Effect != null)
+                    QueueDel(victim.Effect);
+                victim.Effect = SpawnAttachedTo(xeno.Comp.Effect, entity.ToCoordinates());
             }
 
             Dirty(entity, victim);
