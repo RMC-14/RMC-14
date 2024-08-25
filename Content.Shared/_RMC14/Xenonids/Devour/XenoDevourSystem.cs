@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Marines.Armor;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates;
@@ -42,6 +43,7 @@ public sealed class XenoDevourSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly RMCSuitLightSystem _suitLightSystem = default!;
 
     private EntityQuery<DevouredComponent> _devouredQuery;
     private EntityQuery<XenoDevourComponent> _xenoDevourQuery;
@@ -111,6 +113,12 @@ public sealed class XenoDevourSystem : EntitySystem
     private void OnDevouredStartup(Entity<DevouredComponent> devoured, ref ComponentStartup args)
     {
         _blocker.UpdateCanMove(devoured);
+
+        var uid = devoured.Owner;
+        var suit = _suitLightSystem.FindSuit(uid);
+
+        if (suit != null)
+            _suitLightSystem.ShortLights(suit.Value.Owner, uid);
     }
 
     private void OnDevouredRemove(Entity<DevouredComponent> devoured, ref ComponentRemove args)
