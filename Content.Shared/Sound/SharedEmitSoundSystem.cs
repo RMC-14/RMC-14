@@ -1,3 +1,5 @@
+using Content.Shared.Actions;
+using Content.Shared.Actions.Events;
 using Content.Shared.Audio;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
@@ -48,6 +50,7 @@ public abstract class SharedEmitSoundSystem : EntitySystem
         SubscribeLocalEvent<EmitSoundOnPickupComponent, GotEquippedHandEvent>(OnEmitSoundOnPickup);
         SubscribeLocalEvent<EmitSoundOnDropComponent, DroppedEvent>(OnEmitSoundOnDrop);
         SubscribeLocalEvent<EmitSoundOnInteractUsingComponent, InteractUsingEvent>(OnEmitSoundOnInteractUsing);
+        SubscribeLocalEvent<EmitSoundOnActionComponent, SoundActionEvent>(OnEmitSoundOnAction);
 
         SubscribeLocalEvent<EmitSoundOnCollideComponent, StartCollideEvent>(OnEmitSoundOnCollide);
 
@@ -94,6 +97,14 @@ public abstract class SharedEmitSoundSystem : EntitySystem
     {
         // Intentionally not checking whether the interaction has already been handled.
         TryEmitSound(uid, component, args.User);
+
+        if (component.Handle)
+            args.Handled = true;
+    }
+
+    private void OnEmitSoundOnAction(EntityUid uid, EmitSoundOnActionComponent component, SoundActionEvent args)
+    {
+        TryEmitSound(uid, component, args.Performer);
 
         if (component.Handle)
             args.Handled = true;

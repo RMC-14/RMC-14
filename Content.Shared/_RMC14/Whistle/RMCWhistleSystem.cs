@@ -1,4 +1,5 @@
 using Content.Shared.Actions;
+using Content.Shared.Actions.Events;
 using Content.Shared.Coordinates;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
@@ -25,7 +26,7 @@ public sealed class RMCWhistleSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<RMCWhistleComponent, GetItemActionsEvent>(OnGetItemActions);
-        SubscribeLocalEvent<RMCWhistleComponent, WhistleActionEvent>(OnWhistleAction);
+        SubscribeLocalEvent<RMCWhistleComponent, SoundActionEvent>(OnWhistleAction);
         SubscribeLocalEvent<RMCWhistleComponent, UseInHandEvent>(OnUseInHand);
     }
 
@@ -41,13 +42,10 @@ public sealed class RMCWhistleSystem : EntitySystem
         if (args.SlotFlags == SlotFlags.POCKET)
             return;
 
-        if (TryComp<UseDelayComponent>(ent, out var useDelay))
-            _actions.SetUseDelay(comp.Action, useDelay.Delay);
-
         args.AddAction(ref comp.Action, comp.ActionId);
     }
 
-    public void OnWhistleAction(EntityUid uid, RMCWhistleComponent component, WhistleActionEvent args)
+    public void OnWhistleAction(EntityUid uid, RMCWhistleComponent component, SoundActionEvent args)
     {
         if (!_timing.IsFirstTimePredicted)
             return;
@@ -60,7 +58,7 @@ public sealed class RMCWhistleSystem : EntitySystem
             _actions.SetCooldown(component.Action, useDelay.Delay);
         }
 
-        _interaction.UseInHandInteraction(args.Performer, uid);
+        TryMakeLoudWhistle(uid, args.Performer, component);
         args.Handled = true;
     }
 
@@ -78,6 +76,7 @@ public sealed class RMCWhistleSystem : EntitySystem
         }
 
         TryMakeLoudWhistle(uid, args.User, component);
+
         args.Handled = true;
     }
 

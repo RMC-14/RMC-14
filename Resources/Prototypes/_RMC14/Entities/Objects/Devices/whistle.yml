@@ -16,6 +16,9 @@
   - type: EmitSoundOnUse
     sound:
       collection: TrenchWhistle
+  - type: EmitSoundOnAction
+    sound:
+      collection: TrenchWhistle
   - type: UseDelay
     delay: 10
   - type: RMCWhistle

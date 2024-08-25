@@ -50,4 +50,5 @@
     icon:
       sprite: _RMC14/Objects/Devices/whistle.rsi
       state: whistle
-    event: !type:WhistleActionEvent
+    event: !type:SoundActionEvent
+    useDelay: 10
