@@ -297,7 +297,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: BaseChemistryEmptyVial
+    - id: RMCVial
       amount: 3
 
 
@@ -389,7 +389,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: Syringe
+    - id: CMSyringe
       amount: 3
 
 
