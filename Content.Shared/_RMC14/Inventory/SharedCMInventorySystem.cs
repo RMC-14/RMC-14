@@ -7,8 +7,10 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
+using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
+using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
@@ -25,6 +27,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly SlotFlags[] _order =
@@ -268,16 +271,30 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 // And insert succeeds
                 // then return
                 if (HasComp<CMHolsterComponent>(clothing) &&
-                    HasComp<CMItemSlotsComponent>(clothing) &&
-                    SlotCanInteract(user, clothing, out var slotComp) &&
-                    TryGetAvailableSlot((clothing, slotComp),
-                        item,
-                        user,
-                        out var itemSlot,
-                        emptyOnly: true) &&
-                    itemSlot.ContainerSlot != null)
+                    HasComp<CMItemSlotsComponent>(clothing))
                 {
-                    validSlots.Add(new HolsterSlot(priority, true, null, (clothing, slotComp), ItemSlot: itemSlot));
+                    // If item has ItemSlots component, treat as pure holster
+                    if (SlotCanInteract(user, clothing, out var slotComp) &&
+                        TryGetAvailableSlot((clothing, slotComp),
+                            item,
+                            user,
+                            out var itemSlot,
+                            emptyOnly: true) &&
+                        itemSlot.ContainerSlot != null)
+                    {
+                        validSlots.Add(new HolsterSlot(priority, true, null, clothing, ItemSlot: itemSlot));
+                        continue;
+                    }
+
+                    // Otherwise try to insert into Storage, if possible
+                    if (TryComp(clothing, out StorageComponent? storageComp) &&
+                        TryComp(item, out ItemComponent? itemComp))
+                    {
+                        if (_storage.CanInsert(clothing, item, out _, storageComp : storageComp, item : itemComp))
+                        {
+                            validSlots.Add(new HolsterSlot(priority, true, null, clothing, null));
+                        }
+                    }
                 }
             }
         }
@@ -287,13 +304,29 @@ public abstract class SharedCMInventorySystem : EntitySystem
         foreach (var slot in validSlots)
         {
             // Try insert into holster
-            if (slot.ItemSlot != null &&
-                _itemSlots.TryInsert(slot.Ent, slot.ItemSlot, item, user, excludeUserAudio: true))
-                return;
+            if (slot.ItemSlot != null)
+            {
+                if (TryComp(slot.Uid, out ItemSlotsComponent? slotComp))
+                {
+                    if (_itemSlots.TryInsert(slot.Uid, slot.ItemSlot, item, user, excludeUserAudio: true))
+                        return;
+                }
+            }
+
+            // Try insert into storage
+            if (slot.Slot == null
+                && TryComp(slot.Uid, out StorageComponent? storageComp))
+            {
+                if (_storage.Insert(slot.Uid, item, out _, user, storageComp))
+                {
+                    // TODO: Store item uid in holster component so it can be unholstered later
+                    return;
+                }
+            }
 
             // Try equip to inventory slot
-            if (slot.Slot != null &&
-                _inventory.TryEquip(user, item, slot.Slot.ID, true))
+            if (slot.Slot != null
+                && _inventory.TryEquip(user, item, slot.Slot.ID, true))
                 return;
         }
 
@@ -304,7 +337,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         int Priority,
         bool IsHolster,
         ContainerSlot? Slot,
-        Entity<ItemSlotsComponent?> Ent,
+        EntityUid Uid,
         ItemSlot? ItemSlot) : IComparable<HolsterSlot>
     {
         public int CompareTo(HolsterSlot other)

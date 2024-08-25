@@ -124,6 +124,7 @@
       - CableCoil
       - Multitool
       - Flashlight
+      - Sidearm
       - CMMagazinePistol
       - RMCMagazineRevolver
       - PowerCell
@@ -138,19 +139,12 @@
       - LightReplacer
       - EntrenchingTool
   - type: FixedItemSizeStorage
-  - type: ContainerContainer
-    containers:
-      pouch: !type:ContainerSlot
-  - type: ItemSlots
-    slots:
-      pouch:
-        name: Combat toolbelt holster
-#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
-#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
-        whitelist:
-          tags:
-          - Sidearm
-#          - FlareGun
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
   - type: CMHolster
   - type: CMItemSlots
 
@@ -287,19 +281,12 @@
       - CMMortarShell
 #      - # TODO RMC14 pistol, revolver, flaregun
   - type: FixedItemSizeStorage
-  - type: ContainerContainer
-    containers:
-      pouch: !type:ContainerSlot
-  - type: ItemSlots
-    slots:
-      pouch:
-        name: Sidearm holster
-#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
-#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
-        whitelist:
-          tags:
-          - Sidearm
-#          - FlareGun
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - RMCWeaponPistolSU6
   - type: CMHolster
   - type: CMItemSlots
 
@@ -394,24 +381,18 @@
     - 0,0,13,1 # 7 slots
     whitelist:
       tags:
+      - RMCSmartPistol
       - RMCMagazinePistolSU6
-  - type: FixedItemSizeStorage
   - type: Tag
     tags:
     - RMCSmartPistolHolster
-  - type: ContainerContainer
-    containers:
-      pouch: !type:ContainerSlot
-  - type: ItemSlots
-    slots:
-      pouch:
-        name: Smart pistol holster
-#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
-#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
-        whitelist:
-          tags:
-          - RMCSmartPistol
-#          - FlareGun
+  - type: FixedItemSizeStorage
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - RMCWeaponPistolSU6
   - type: CMHolster
   - type: CMItemSlots
 
