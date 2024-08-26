@@ -267,6 +267,9 @@
     - state: vial
     - state: vial1
       map: ["enum.SolutionContainerLayers.Fill"]
+    - state: vial-lid
+      map: ["enum.OpenableVisuals.Layer"]
+      visible: false
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Medical/beaker.rsi
@@ -279,6 +282,19 @@
         maxVol: 30
   - type: Spillable
     solution: beaker
+  - type: Openable
+    opened: true
+    closeable: true
+    examineText: rmc-bottle-closed
+    openVerbText: rmc-bottle-remove-lid
+    closeVerbText: rmc-bottle-put-lid
+    sound: null
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: {visible: false}
+          False: {visible: true}
   - type: Vial
   - type: StaticPrice
     price: 10

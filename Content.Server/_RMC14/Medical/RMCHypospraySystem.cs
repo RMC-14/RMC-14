@@ -22,6 +22,7 @@ public sealed class RMCHypospraySystem : RMCSharedHypospraySystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly ReactiveSystem _reactiveSystem = default!;
+    [Dependency] private readonly SolutionTransferSystem _transfer = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -149,12 +150,19 @@ public sealed class RMCHypospraySystem : RMCSharedHypospraySystem
 
         var vial = container.ContainedEntities[0];
 
-        // Syringe and Drainable handling mostly copied from various places
+        // Syringe and Spikable handling mostly copied from various places
         // Might be better to convert some stuff to events later
 
         if (HasComp<InjectorComponent>(args.Used))
         {
             InjectorVialHandling(ent, vial, args.Used, args.User);
+            args.Handled = true;
+            return;
+        }
+
+        if (HasComp<SolutionSpikerComponent>(args.Used))
+        {
+            SpikableHandling(ent, vial, args.Used, args.User);
             args.Handled = true;
             return;
         }
@@ -170,31 +178,44 @@ public sealed class RMCHypospraySystem : RMCSharedHypospraySystem
 
         args.Handled = true;
 
-        var ev = new SolutionTransferAttemptEvent(args.Used, vial);
-        RaiseLocalEvent(args.Used, ref ev);
+        var amount = _transfer.Transfer(args.User, args.Used, soln.Value, vial, solm.Value, solt.TransferAmount);
 
-        if (ev.CancelReason is { } reason)
-        {
-            _popup.PopupEntity(reason, args.Used, args.User);
-            return;
-        }
-
-        var transferAmount = FixedPoint2.Min(solt.TransferAmount, soli.AvailableVolume);
-
-        if (transferAmount <= 0)
+        if (amount == 0 && soli.AvailableVolume == 0)
         {
             _popup.PopupEntity(Loc.GetString("rmc-hypospray-full", ("vial", vial)), ent, args.User);
             return;
         }
 
-        var adding = _solution.SplitSolution(soln.Value, transferAmount);
-
-        _solution.Refill(vial, solm.Value, adding);
-
-        _popup.PopupEntity(Loc.GetString("comp-solution-transfer-transfer-solution", ("amount", adding.Volume), ("target", vial)), args.User, args.User);
-
         Dirty(soln.Value);
         Dirty(solm.Value);
+
+        UpdateAppearance(ent);
+    }
+
+    private void SpikableHandling(Entity<RMCHyposprayComponent> ent, EntityUid vial, EntityUid spikable, EntityUid user)
+    {
+        if (!TryComp<SolutionSpikerComponent>(spikable, out var spike))
+            return;
+
+        if (!_solution.TryGetRefillableSolution(vial, out var targetSoln, out var targetSolution)
+    || !_solution.TryGetSolution(spikable, spike.SourceSolution, out _, out var sourceSolution))
+        {
+            return;
+        }
+
+        if (targetSolution.Volume == 0 && !spike.IgnoreEmpty)
+        {
+            _popup.PopupEntity(Loc.GetString(spike.PopupEmpty, ("spiked-entity", vial), ("spike-entity", spikable)), user, user);
+            return;
+        }
+
+        if (!_solution.ForceAddSolution(targetSoln.Value, sourceSolution))
+            return;
+
+        _popup.PopupEntity(Loc.GetString(spike.Popup, ("spiked-entity", vial), ("spike-entity", spikable)), user, user);
+        sourceSolution.RemoveAllSolution();
+        if (spike.Delete)
+            QueueDel(spikable);
 
         UpdateAppearance(ent);
     }
