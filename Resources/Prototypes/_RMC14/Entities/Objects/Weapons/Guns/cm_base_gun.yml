@@ -1,6 +1,5 @@
 ﻿- type: entity
   abstract: true
-  parent: RMCBaseMeleeWeapon
   id: CMBaseWeaponGun
   components:
   - type: GunUnskilledPenalty
