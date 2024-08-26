@@ -4,6 +4,11 @@
   shortenedName: SGM
 
 - type: rank
+  id: RMCBaseRankMasterGunnerySergeant
+  name: Master Gunnery Sergeant
+  shortenedName: MGySGT
+
+- type: rank
   id: RMCBaseRankFirstSergeant
   name: First Sergeant
   shortenedName: 1stSGT

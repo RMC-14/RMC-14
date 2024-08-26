@@ -22,6 +22,7 @@
     time: 18000 # 5 hours
   ranks:
   - RMCRankSEASergeantMajor
+  - RMCRankSEAMasterGunnerySergeant
   - RMCRankSEAFirstSergeant
   - RMCRankSEAMasterSergeant
   - RMCBaseRankGunnerySergeant
