@@ -22,12 +22,10 @@ public sealed class RMCHypospraySystem : RMCSharedHypospraySystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly ReactiveSystem _reactiveSystem = default!;
-    [Dependency] private readonly SolutionTransferSystem _transfer = default!;
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RMCHyposprayComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<RMCHyposprayComponent, TacticalReloadHyposprayDoAfterEvent>(OnTacticalReload);
         SubscribeLocalEvent<RMCHyposprayComponent, HyposprayDoAfterEvent>(OnHypoInject);
         SubscribeLocalEvent<RMCHyposprayComponent, RefilledSolutionEvent>(OnRefilled);
@@ -127,8 +125,10 @@ public sealed class RMCHypospraySystem : RMCSharedHypospraySystem
         _slots.TryInsertEmpty((ent, slots), args.Target.Value, args.User);
     }
 
-    private void OnInteractUsing(Entity<RMCHyposprayComponent> ent, ref InteractUsingEvent args)
+    protected override void OnInteractUsing(Entity<RMCHyposprayComponent> ent, ref InteractUsingEvent args)
     {
+        base.OnInteractUsing(ent, ref args);
+
         if (args.Handled)
             return;
 
@@ -141,12 +141,6 @@ public sealed class RMCHypospraySystem : RMCSharedHypospraySystem
         // Dont transfer when vial is used
         if (_slots.CanInsert(ent, args.Used, args.User, slots.Slots[ent.Comp.SlotId], true))
             return;
-
-        if(container.ContainedEntities.Count == 0)
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-hypospray-no-vial"), ent, args.User);
-            return;
-        }
 
         var vial = container.ContainedEntities[0];
 
@@ -166,30 +160,6 @@ public sealed class RMCHypospraySystem : RMCSharedHypospraySystem
             args.Handled = true;
             return;
         }
-
-        if (!_solution.TryGetRefillableSolution(vial, out var solm, out var soli))
-            return;
-
-        if (!_solution.TryGetDrainableSolution(args.Used, out var soln, out var solu))
-            return;
-
-        if (!TryComp<SolutionTransferComponent>(args.Used, out var solt))
-            return;
-
-        args.Handled = true;
-
-        var amount = _transfer.Transfer(args.User, args.Used, soln.Value, vial, solm.Value, solt.TransferAmount);
-
-        if (amount == 0 && soli.AvailableVolume == 0)
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-hypospray-full", ("vial", vial)), ent, args.User);
-            return;
-        }
-
-        Dirty(soln.Value);
-        Dirty(solm.Value);
-
-        UpdateAppearance(ent);
     }
 
     // Pretty much a direct copy of the spikablesystem with slight tweaks

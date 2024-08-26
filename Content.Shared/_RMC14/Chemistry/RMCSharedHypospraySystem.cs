@@ -33,6 +33,7 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
     [Dependency] protected readonly ItemSlotsSystem _slots = default!;
     [Dependency] protected readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] protected readonly UseDelaySystem _useDelay = default!;
+    [Dependency] protected readonly SolutionTransferSystem _transfer = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCHyposprayComponent, GetVerbsEvent<AlternativeVerb>>(AddSetTransferVerbs);
@@ -42,6 +43,7 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
         SubscribeLocalEvent<RMCHyposprayComponent, AfterInteractEvent>(OnInteractAfter);
         SubscribeLocalEvent<RMCHyposprayComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<RMCHyposprayComponent, ExaminedEvent>(OnExamine);
+        SubscribeLocalEvent<RMCHyposprayComponent, InteractUsingEvent>(OnInteractUsing);
 
     }
 
@@ -208,6 +210,55 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
             _doafter.TryStartDoAfter(argsu);
         }
     }
+
+    protected virtual void OnInteractUsing(Entity<RMCHyposprayComponent> ent, ref InteractUsingEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!_container.TryGetContainer(ent, ent.Comp.SlotId, out var container))
+            return;
+
+
+        if (!TryComp<ItemSlotsComponent>(ent, out var slots))
+            return;
+        // Dont transfer when vial is used
+        if (_slots.CanInsert(ent, args.Used, args.User, slots.Slots[ent.Comp.SlotId], true))
+            return;
+
+        var vial = container.ContainedEntities[0];
+
+        if (container.ContainedEntities.Count == 0)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-hypospray-no-vial"), ent, args.User);
+            return;
+        }
+
+        if (!_solution.TryGetRefillableSolution(vial, out var solm, out var soli))
+            return;
+
+        if (!_solution.TryGetDrainableSolution(args.Used, out var soln, out var solu))
+            return;
+
+        if (!TryComp<SolutionTransferComponent>(args.Used, out var solt))
+            return;
+
+        args.Handled = true;
+
+        var transferr = _transfer.Transfer(args.User, args.Used, soln.Value, vial, solm.Value, solt.TransferAmount);
+
+        if (transferr > 0)
+        {
+            var message = Loc.GetString("comp-solution-transfer-transfer-solution", ("amount", transferr), ("target", vial));
+            _popup.PopupClient(message, ent, args.User);
+        }
+
+        Dirty(soln.Value);
+        Dirty(solm.Value);
+
+        UpdateAppearance(ent);
+    }
+
 
     protected void UpdateAppearance(Entity<RMCHyposprayComponent> ent)
     {
