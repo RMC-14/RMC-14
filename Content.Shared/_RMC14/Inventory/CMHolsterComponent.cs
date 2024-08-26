@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+﻿using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Inventory;
 
@@ -12,4 +13,16 @@ public sealed partial class CMHolsterComponent : Component
     // List of entities that can be (un)holstered
     [DataField]
     public List<EntityUid> Contents = new();
+
+    /// <summary>
+    /// Sound played whenever an entity is inserted into holster.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier? InsertSound = new SoundPathSpecifier("/Audio/Weapons/Guns/MagIn/revolver_magin.ogg");
+
+    /// <summary>
+    /// Sound played whenever an entity is removed from holster.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier? EjectSound = new SoundPathSpecifier("/Audio/Weapons/Guns/MagOut/revolver_magout.ogg");
 }

@@ -268,8 +268,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
                 // If the slot item has a CMHolsterComponent
                 // And has a ItemSlotsComponent
-                // And insert succeeds
-                // then return
+                // Check whether it's a ItemSlots holster or a Storage holster
                 if (HasComp<CMHolsterComponent>(clothing) &&
                     HasComp<CMItemSlotsComponent>(clothing))
                 {
@@ -287,8 +286,8 @@ public abstract class SharedCMInventorySystem : EntitySystem
                     }
 
                     // Otherwise try to insert into Storage, if possible
-                    if (TryComp(clothing, out StorageComponent? storageComp) &&
-                        TryComp(item, out ItemComponent? itemComp))
+                    if (TryComp(clothing, out StorageComponent? storageComp)
+                        && TryComp(item, out ItemComponent? itemComp))
                     {
                         if (_storage.CanInsert(clothing, item, out _, storageComp : storageComp, item : itemComp))
                         {
@@ -317,9 +316,14 @@ public abstract class SharedCMInventorySystem : EntitySystem
             if (slot.Slot == null
                 && TryComp(slot.Uid, out StorageComponent? storageComp))
             {
-                if (_storage.Insert(slot.Uid, item, out _, user, storageComp))
+                if (_storage.CanInsert(slot.Uid, item, out _, storageComp)
+                    && TryComp(slot.Uid, out CMHolsterComponent? holsterComp))
                 {
                     // TODO: Store item uid in holster component so it can be unholstered later
+                    if (!holsterComp.Contents.Contains(item))
+                        holsterComp.Contents.Add(item);
+                    _storage.Insert(slot.Uid, item, out _, out _, user, storageComp, playSound: false);
+
                     return;
                 }
             }
@@ -455,11 +459,35 @@ public abstract class SharedCMInventorySystem : EntitySystem
         return false;
     }
 
+    // Check if holster empty
+    private bool IsHolsterEmpty(CMHolsterComponent holster)
+    {
+        return holster.Contents.Count == 0;
+    }
+
+    // Get last item inserted into holster (check if it's empty first!)
+    private EntityUid GetLastInserted(CMHolsterComponent holster)
+    {
+        return holster.Contents[holster.Contents.Count - 1];
+    }
+
     private bool Unholster(EntityUid user, EntityUid item, out bool stop)
     {
         stop = false;
-        if (HasComp<CMHolsterComponent>(item))
+        if (TryComp(item, out CMHolsterComponent? holsterComp))
         {
+            if (TryComp(item, out StorageComponent? storageComp)
+                && !IsHolsterEmpty(holsterComp))
+            {
+                var weapon = GetLastInserted(holsterComp);
+                if (_hands.TryPickup(user, weapon))
+                {
+                    holsterComp.Contents.Remove(weapon);
+                    return true;
+
+                }
+            }
+
             if (TryComp(item, out CMItemSlotsComponent? holster) &&
                 holster.Cooldown is { } cooldown &&
                 _timing.CurTime < holster.LastEjectAt + cooldown)

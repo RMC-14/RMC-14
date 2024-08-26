@@ -394,6 +394,8 @@
         components:
         - RMCWeaponPistolSU6
   - type: CMHolster
+    insertSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_sheathe.ogg
+    ejectSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_draw.ogg
   - type: CMItemSlots
 
 - type: entity
