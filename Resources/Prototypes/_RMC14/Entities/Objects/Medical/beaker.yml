@@ -92,6 +92,13 @@
     examineText: rmc-bottle-closed
     openVerbText: rmc-bottle-remove-lid
     closeVerbText: rmc-bottle-put-lid
+    sound: null
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: {visible: false}
+          False: {visible: true}
   - type: Spillable
     solution: beaker
   - type: StaticPrice
@@ -128,6 +135,13 @@
     examineText: rmc-bottle-closed
     openVerbText: rmc-bottle-remove-lid
     closeVerbText: rmc-bottle-put-lid
+    sound: null
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: {visible: false}
+          False: {visible: true}
   - type: Spillable
     solution: beaker
   - type: StaticPrice
@@ -164,6 +178,13 @@
     examineText: rmc-bottle-closed
     openVerbText: rmc-bottle-remove-lid
     closeVerbText: rmc-bottle-put-lid
+    sound: null
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: {visible: false}
+          False: {visible: true}
   - type: Spillable
     solution: beaker
   - type: StaticPrice
@@ -265,7 +286,8 @@
 - type: entity
   parent: RMCVial
   id: RMCVialTricordrazine
-  name: vial
+  name: tricordrazine vial
+  description: A small glass vial. Can hold up to 30 units. Contains Tricordrazine, a weak general use medicine for treating damage.
   suffix: Filled, Tricordrazine
   components:
   - type: SolutionContainerManager
@@ -275,3 +297,7 @@
         reagents:
         - ReagentId: CMTricordrazine
           Quantity: 30
+  - type: CMRefillableSolution
+    solution: beaker
+    reagents:
+      CMTricordrazine: 30

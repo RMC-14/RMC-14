@@ -18,7 +18,7 @@
     whitelist:
       tags:
       - DiscreteHealthAnalyzer
-      #      - TODO RMC14 CMDropper
+      - Dropper
       - Pill
       - Bottle
       - Syringe

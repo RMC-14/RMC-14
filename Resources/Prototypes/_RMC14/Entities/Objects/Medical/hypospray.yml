@@ -48,6 +48,9 @@
   - type: VialVisuals
   - type: RMCHypospray
     slotId: vial
+    tacticalSkills:
+      all:
+        RMCSkillMedical: 1
   - type: InteractedBlacklist
     blacklist:
       components:
@@ -55,6 +58,16 @@
 
 - type: Tag
   id: Hypospray
+
+- type: entity
+  parent: CMHypospray
+  id: CMHyposprayWithVial
+  suffix: Vial
+  components:
+  - type: ContainerFill
+    containers:
+      vial:
+      - RMCVial
 
 - type: entity
   parent: CMHypospray

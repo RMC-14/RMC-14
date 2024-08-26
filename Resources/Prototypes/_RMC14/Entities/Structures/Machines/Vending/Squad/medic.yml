@@ -272,7 +272,7 @@
       #- id: CMPressurizedReagentCanisterPouchEmpty
 #        recommended: true
       - id: RMCPouchPistol
-      #- id: CMVialPouchFull
+      - id: CMVialPouchFull
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
