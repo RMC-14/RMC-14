@@ -496,7 +496,7 @@
     state: the_soil_of_martyrs
   - type: PatronFigurine
     id: 7486e344-c4b1-4d84-a3a8-8e8c94aa3c7e
-    
+
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronSethSleeper
@@ -507,3 +507,25 @@
     state: seth_sleeper
   - type: PatronFigurine
     id: 909c243e-6fb8-42ed-a477-d48571fccff2
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLanceVictors
+  name: Lance Victors figurine
+  description: This detailed figurine of a Marine Corps Warden just LOOKS like it's going to bury you in paperwork. And it has an eye scar. Edgy.
+  components:
+  - type: Sprite
+    state: lance_victors
+  - type: PatronFigurine
+    id: 17b357c5-1148-4ec5-ba53-d1f76c424d84
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBredDahne
+  name: Bred Dahne figurine
+  description: "Gluten Free"
+  components:
+  - type: Sprite
+    state: bred_dahne
+  - type: PatronFigurine
+    id: 6631b2a1-2adf-4f83-962a-d8e251f770e0

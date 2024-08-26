@@ -27,8 +27,5 @@ comp-climbable-cant-interact = You can't do that!
 # Shown to you when your character isn't able to climb by their own actions
 comp-climbable-cant-climb = You are incapable of climbing!
 
-# Shown to you when your character isn't able to climb beause they are in a container
-comp-climbable-cant-climb-contained = You can't do that while inside there!
-
 # Shown to you when your character tries to force someone else who can't climb onto a climbable
 comp-climbable-target-cant-climb = { CAPITALIZE(THE($moved-user)) } can't go there!

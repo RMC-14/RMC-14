@@ -2208,7 +2208,7 @@ namespace Content.Shared.CCVar
         ///     The number of seconds that must pass for a single entity to be able to point at something again.
         /// </summary>
         public static readonly CVarDef<float> PointingCooldownSeconds =
-            CVarDef.Create("pointing.cooldown_seconds", 0.5f, CVar.SERVERONLY);
+            CVarDef.Create("pointing.cooldown_seconds", 1f, CVar.SERVERONLY);
 
         /*
          * DEBUG

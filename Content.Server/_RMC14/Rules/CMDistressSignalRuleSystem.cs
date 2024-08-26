@@ -117,10 +117,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [ViewVariables]
     public readonly Dictionary<string, float> MarinesPerXeno = new()
     {
-        ["/Maps/_RMC14/lv624.yml"] = 5f,
-        ["/Maps/_RMC14/solaris.yml"] = 7.5f,
+        ["/Maps/_RMC14/lv624.yml"] = 4.5f,
+        ["/Maps/_RMC14/solaris.yml"] = 8f,
         ["/Maps/_RMC14/prison.yml"] = 7.5f,
-        ["/Maps/_RMC14/shiva.yml"] = 7.5f,
+        ["/Maps/_RMC14/shiva.yml"] = 6.5f,
     };
 
     private readonly List<MapId> _almayerMaps = [];

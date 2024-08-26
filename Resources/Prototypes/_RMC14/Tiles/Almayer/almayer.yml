@@ -39,6 +39,8 @@
   id: RMCFloorPlatingNoBuild
   name: tiles-cm-plating
   sprite: /Textures/_RMC14/Tiles/almayer/plating.png
+  blockAnchoring: true
+  blockConstruction: true
 
 - type: tile
   parent: CMFloorSteel
@@ -48,6 +50,8 @@
 - type: tile
   parent: CMFloorSteel
   id: RMCFloorUnderplatingNoBuild
+  blockAnchoring: true
+  blockConstruction: true
 
 - type: tile
   parent: CMTileBase
@@ -58,6 +62,8 @@
 - type: tile
   parent: CMFloorPlate
   id: RMCFloorPlateNoBuild
+  blockAnchoring: true
+  blockConstruction: true
 
 - type: tile
   parent: CMTileBase
