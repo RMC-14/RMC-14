@@ -51,7 +51,7 @@ public abstract class SharedCMMeleeWeaponSystem : EntitySystem
             if (_whitelist.IsValid(comp.Whitelist, hit))
             {
                 var damage = args.BaseDamage * comp.Multiplier;
-                args.BonusDamage = damage;
+                args.BonusDamage += damage;
                 break;
             }
         }
