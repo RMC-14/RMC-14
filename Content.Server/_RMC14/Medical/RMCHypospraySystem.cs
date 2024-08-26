@@ -192,6 +192,7 @@ public sealed class RMCHypospraySystem : RMCSharedHypospraySystem
         UpdateAppearance(ent);
     }
 
+    // Pretty much a direct copy of the spikablesystem with slight tweaks
     private void SpikableHandling(Entity<RMCHyposprayComponent> ent, EntityUid vial, EntityUid spikable, EntityUid user)
     {
         if (!TryComp<SolutionSpikerComponent>(spikable, out var spike))
