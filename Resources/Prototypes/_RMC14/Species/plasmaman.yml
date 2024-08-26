@@ -8,6 +8,9 @@
   markingLimits: MobHumanMarkingLimits
   dollPrototype: RMCMobPlasmaman
   skinColoration: TintedHues
+  maleFirstNames: rmc_names_plasmaman_first
+  femaleFirstNames: rmc_names_plasmaman_first
+  lastNames: rmc_names_plasmaman_last
   sexes:
   - Unsexed
 
