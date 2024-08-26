@@ -229,7 +229,7 @@
     variation: 0.125
   sounds:
     Scream:
-      collection: CMFemaleScreams
+      collection: PlasmamanScreams
     Honk:
       collection: BikeHorn
     Whistle:
