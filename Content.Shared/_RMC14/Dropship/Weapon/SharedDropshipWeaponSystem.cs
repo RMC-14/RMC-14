@@ -126,6 +126,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.RMCDropshipCASDebug, v => _casDebug = v, true);
     }
 
+    public int GetNextTargetID()
+    {
+        return _nextId++;
+    }
+
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _nextId = 1;
@@ -183,7 +188,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void OnLaserDesignatorMapInit(Entity<LaserDesignatorComponent> ent, ref MapInitEvent args)
     {
-        ent.Comp.Id = _nextId++;
+        ent.Comp.Id = GetNextTargetID();
         Dirty(ent);
     }
 
@@ -734,7 +739,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var id = _nextId++;
+        var id = GetNextTargetID();
         active.Abbreviation = Loc.GetString("rmc-laser-designator-target-abbreviation", ("id", id));
         if (user != null)
             active.Abbreviation = GetUserAbbreviation(user.Value, id);
