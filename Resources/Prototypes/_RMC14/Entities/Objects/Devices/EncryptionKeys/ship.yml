@@ -158,6 +158,12 @@
     - MarineRequisition
     - MarineJTAC
     - MarineIntel
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
     defaultChannel: MarineCommand
 
 
