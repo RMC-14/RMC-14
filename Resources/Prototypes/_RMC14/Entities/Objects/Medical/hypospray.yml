@@ -20,10 +20,6 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Medical/hypospray.rsi
-#  - type: Hypospray
-#    transferAmount: 5
-#    injectOnly: true
-#    injectSound: /Audio/_RMC14/Medical/hypospray.ogg
   - type: Appearance
   - type: UseDelay
     delay: 0.333
