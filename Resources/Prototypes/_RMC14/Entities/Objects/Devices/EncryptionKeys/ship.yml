@@ -217,6 +217,13 @@
     - MarineMedical
     - MarineCommand
     - MarineIntel
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineEngineer
     defaultChannel: MarineMedical
 
 # Research
