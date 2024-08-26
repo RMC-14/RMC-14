@@ -28,7 +28,7 @@
 
 - type: entity
   parent: BaseSpeciesDummy
-  id: RMCMobPlasmaman
+  id: RMCMobPlasmamanDummy
   noSpawn: true
   components:
   - type: HumanoidAppearance

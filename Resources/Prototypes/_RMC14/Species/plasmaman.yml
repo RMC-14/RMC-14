@@ -6,7 +6,7 @@
   sprites: MobPlasmamanSprites
   defaultSkinTone: "#fff9e2"
   markingLimits: MobHumanMarkingLimits
-  dollPrototype: RMCMobPlasmaman
+  dollPrototype: RMCMobPlasmamanDummy
   skinColoration: TintedHues
   maleFirstNames: rmc_names_plasmaman_first
   femaleFirstNames: rmc_names_plasmaman_first
