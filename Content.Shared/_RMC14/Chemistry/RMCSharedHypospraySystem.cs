@@ -1,24 +1,22 @@
-﻿using Content.Shared.Chemistry;
+﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.DoAfter;
-using Content.Shared.FixedPoint;
-using Content.Shared.Popups;
-using Content.Shared.Verbs;
-using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared._RMC14.Medical.Refill;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.DoAfter;
+using Content.Shared.Examine;
+using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Popups;
 using Content.Shared.Timing;
+using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Network;
-using Content.Shared.Chemistry.Components.SolutionManager;
-using Content.Shared.Examine;
-
 
 namespace Content.Shared._RMC14.Chemistry;
 
@@ -44,13 +42,7 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
         SubscribeLocalEvent<RMCHyposprayComponent, AfterInteractEvent>(OnInteractAfter);
         SubscribeLocalEvent<RMCHyposprayComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<RMCHyposprayComponent, ExaminedEvent>(OnExamine);
-        SubscribeLocalEvent<RMCHyposprayComponent, RefilledSolutionEvent>(OnRefilled);
 
-    }
-
-    private void OnRefilled(Entity<RMCHyposprayComponent> ent, ref RefilledSolutionEvent args)
-    {
-        UpdateAppearance(ent);
     }
 
     private void OnExamine(Entity<RMCHyposprayComponent> ent, ref ExaminedEvent args)

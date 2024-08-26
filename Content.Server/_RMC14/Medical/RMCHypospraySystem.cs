@@ -1,18 +1,18 @@
 ﻿using Content.Shared._RMC14.Chemistry;
+using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Medical.Refill;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Forensics;
 using Content.Shared.Interaction;
-using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Timing;
-using Content.Shared.Administration.Logs;
 using Robust.Server.Audio;
-using Content.Server.Chemistry.Containers.EntitySystems;
 
 
 namespace Content.Server._RMC14.Medical;
@@ -29,6 +29,13 @@ public sealed class RMCHypospraySystem : RMCSharedHypospraySystem
         SubscribeLocalEvent<RMCHyposprayComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<RMCHyposprayComponent, TacticalReloadHyposprayDoAfterEvent>(OnTacticalReload);
         SubscribeLocalEvent<RMCHyposprayComponent, HyposprayDoAfterEvent>(OnHypoInject);
+        SubscribeLocalEvent<RMCHyposprayComponent, RefilledSolutionEvent>(OnRefilled);
+    }
+
+
+    private void OnRefilled(Entity<RMCHyposprayComponent> ent, ref RefilledSolutionEvent args)
+    {
+        UpdateAppearance(ent);
     }
 
     private void OnHypoInject(Entity<RMCHyposprayComponent> ent, ref HyposprayDoAfterEvent args)
