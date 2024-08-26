@@ -289,7 +289,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
                     if (TryComp(clothing, out StorageComponent? storageComp)
                         && TryComp(item, out ItemComponent? itemComp))
                     {
-                        if (_storage.CanInsert(clothing, item, out _, storageComp : storageComp, item : itemComp))
+                        if (_storage.CanInsert(clothing, item, out _))
                         {
                             validSlots.Add(new HolsterSlot(priority, true, null, clothing, null));
                         }
@@ -319,11 +319,10 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 if (_storage.CanInsert(slot.Uid, item, out _, storageComp)
                     && TryComp(slot.Uid, out CMHolsterComponent? holsterComp))
                 {
-                    // TODO: Store item uid in holster component so it can be unholstered later
                     if (!holsterComp.Contents.Contains(item))
                         holsterComp.Contents.Add(item);
                     _storage.Insert(slot.Uid, item, out _, out _, user, storageComp, playSound: false);
-
+                    // TODO: Play holster insert sound
                     return;
                 }
             }
@@ -483,8 +482,8 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 if (_hands.TryPickup(user, weapon))
                 {
                     holsterComp.Contents.Remove(weapon);
+                    stop = true;
                     return true;
-
                 }
             }
 
