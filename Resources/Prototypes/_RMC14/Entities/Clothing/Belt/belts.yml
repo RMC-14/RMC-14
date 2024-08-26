@@ -146,6 +146,8 @@
         components:
         - Gun
   - type: CMHolster
+    insertSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_sheathe.ogg
+    ejectSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_draw.ogg
   - type: CMItemSlots
 
 - type: entity
@@ -279,6 +281,7 @@
     whitelist:
       tags:
       - CMMortarShell
+      - Sidearm
 #      - # TODO RMC14 pistol, revolver, flaregun
   - type: FixedItemSizeStorage
   - type: LimitedStorage
@@ -288,6 +291,8 @@
         components:
         - Gun
   - type: CMHolster
+    insertSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_sheathe.ogg
+    ejectSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_draw.ogg
   - type: CMItemSlots
 
 - type: entity

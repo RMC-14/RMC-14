@@ -13,6 +13,7 @@ using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Timing;
@@ -22,6 +23,7 @@ namespace Content.Shared._RMC14.Inventory;
 public abstract class SharedCMInventorySystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -66,6 +68,9 @@ public abstract class SharedCMInventorySystem : EntitySystem
         SubscribeLocalEvent<CMItemSlotsComponent, ItemSlotEjectAttemptEvent>(OnSlotsEjectAttempt);
         SubscribeLocalEvent<CMItemSlotsComponent, EntInsertedIntoContainerMessage>(OnSlotsEntInsertedIntoContainer);
         SubscribeLocalEvent<CMItemSlotsComponent, EntRemovedFromContainerMessage>(OnSlotsEntRemovedFromContainer);
+
+        SubscribeLocalEvent<CMHolsterComponent, EntInsertedIntoContainerMessage>(OnEntInsertedIntoHolster);
+        SubscribeLocalEvent<CMHolsterComponent, EntRemovedFromContainerMessage>(OnEntRemovedFromHolster);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMHolsterPrimary,
@@ -168,12 +173,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     protected void OnSlotsEntInsertedIntoContainer(Entity<CMItemSlotsComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        if (TryComp(ent, out CMHolsterComponent? holster)
-            && TryComp(args.Entity, out CMHolsterableComponent? holsterable))
-        {
-            if (!holster.Contents.Contains(args.Entity))
-                holster.Contents.Add(args.Entity);
-        }
         ContentsUpdated(ent);
     }
 
@@ -181,18 +180,33 @@ public abstract class SharedCMInventorySystem : EntitySystem
     {
         if (!_timing.ApplyingState)
         {
-            if (TryComp(ent, out CMHolsterComponent? holsterComp)
-                && TryComp(args.Entity, out CMHolsterableComponent? holsterable))
-            {
-                if (holsterComp.Contents.Contains(args.Entity))
-                    holsterComp.Contents.Remove(args.Entity);
-            }
-
             ent.Comp.LastEjectAt = _timing.CurTime;
             Dirty(ent);
         }
 
         ContentsUpdated(ent);
+    }
+
+    protected void OnEntInsertedIntoHolster(Entity<CMHolsterComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        if (HasComp<CMHolsterableComponent>(args.Entity))
+        {
+            if (!ent.Comp.Contents.Contains(args.Entity))
+            {
+                ent.Comp.Contents.Add(args.Entity);
+            }
+        }
+    }
+
+    protected void OnEntRemovedFromHolster(Entity<CMHolsterComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        if (HasComp<CMHolsterableComponent>(args.Entity))
+        {
+            if (ent.Comp.Contents.Contains(args.Entity))
+            {
+                ent.Comp.Contents.Remove(args.Entity);
+            }
+        }
     }
 
     protected virtual void ContentsUpdated(Entity<CMItemSlotsComponent> ent)
@@ -335,7 +349,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
                     if (!holsterComp.Contents.Contains(item))
                         holsterComp.Contents.Add(item);
                     _storage.Insert(slot.Uid, item, out _, out _, user, storageComp, playSound: false);
-                    // TODO: Play holster insert sound
+                    _audio.PlayPredicted(holsterComp.InsertSound, item, user);
                     return;
                 }
             }
@@ -495,6 +509,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 if (_hands.TryPickup(user, weapon))
                 {
                     holsterComp.Contents.Remove(weapon);
+                    _audio.PlayPredicted(holsterComp.EjectSound, item, user);
                     stop = true;
                     return true;
                 }
