@@ -38,7 +38,31 @@
     state: head_m
 
 - type: humanoidBaseSprite
+  id: MobPlasmamanHeadMale
+  baseSprite:
+    sprite: _RMC14/Mobs/Plasmamen/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobPlasmamanHeadFemale
+  baseSprite:
+    sprite: _RMC14/Mobs/Plasmamen/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
   id: MobPlasmamanTorso
+  baseSprite:
+    sprite: _RMC14/Mobs/Plasmamen/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobPlasmamanTorsoMale
+  baseSprite:
+    sprite: _RMC14/Mobs/Plasmamen/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobPlasmamanTorsoFemale
   baseSprite:
     sprite: _RMC14/Mobs/Plasmamen/parts.rsi
     state: torso_m
