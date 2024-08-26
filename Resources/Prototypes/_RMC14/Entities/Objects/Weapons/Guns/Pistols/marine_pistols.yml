@@ -80,6 +80,7 @@
           tags:
           - RMCAttachmentBurstFireAssembly
           - RMCAttachmentLaserSight
+  - type: CMHolsterable
 
 - type: entity
   parent: CMWeaponPistolBase

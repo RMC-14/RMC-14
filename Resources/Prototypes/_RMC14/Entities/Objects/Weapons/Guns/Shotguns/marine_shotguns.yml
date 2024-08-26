@@ -58,6 +58,7 @@
   - type: Tag
     tags:
     - RMCWeaponShotgun
+  - type: CMHolsterable
 
 - type: entity
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]

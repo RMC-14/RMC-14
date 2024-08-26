@@ -49,6 +49,7 @@
     - conditions:
         unwieldedOnly: true
       accuracyAddMult: -0.05
+  - type: CMHolsterable
 
 - type: entity
   name: M11 throwing knife
@@ -84,6 +85,7 @@
   - type: Tag
     tags:
     - ThrowingKnife
+  - type: CMHolsterable
 
 - type: Tag
   id: ThrowingKnife
@@ -119,6 +121,7 @@
     sprite: _RMC14/Objects/Weapons/Melee/machete.rsi
   - type: DisarmMalus
     malus: 0.225
+  - type: CMHolsterable
 
 - type: Tag
   id: RMCM5Bayonet

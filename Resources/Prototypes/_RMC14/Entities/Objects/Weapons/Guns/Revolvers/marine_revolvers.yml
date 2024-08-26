@@ -52,6 +52,7 @@
     item: Sidearm
   - type: GunUnskilledPenalty
     angleIncrease: 5
+  - type: CMHolsterable
 
 - type: entity
   parent: RMCWeaponRevolverBase

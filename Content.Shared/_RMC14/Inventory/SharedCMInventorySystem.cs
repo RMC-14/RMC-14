@@ -168,6 +168,12 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     protected void OnSlotsEntInsertedIntoContainer(Entity<CMItemSlotsComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
+        if (TryComp(ent, out CMHolsterComponent? holster)
+            && TryComp(args.Entity, out CMHolsterableComponent? holsterable))
+        {
+            if (!holster.Contents.Contains(args.Entity))
+                holster.Contents.Add(args.Entity);
+        }
         ContentsUpdated(ent);
     }
 
@@ -175,6 +181,13 @@ public abstract class SharedCMInventorySystem : EntitySystem
     {
         if (!_timing.ApplyingState)
         {
+            if (TryComp(ent, out CMHolsterComponent? holsterComp)
+                && TryComp(args.Entity, out CMHolsterableComponent? holsterable))
+            {
+                if (holsterComp.Contents.Contains(args.Entity))
+                    holsterComp.Contents.Remove(args.Entity);
+            }
+
             ent.Comp.LastEjectAt = _timing.CurTime;
             Dirty(ent);
         }
