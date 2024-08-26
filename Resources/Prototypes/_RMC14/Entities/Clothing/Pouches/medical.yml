@@ -120,6 +120,7 @@
       - CMSurgicalLine
       - CMSynthGraft
       - PillPacket
+      - Hypospray
       components:
       - Hypospray
   - type: FixedItemSizeStorage
@@ -174,6 +175,7 @@
       - CMFireExtinguisherPortable
       - CMSurgicalLine
       - CMSynthGraft
+      - Hypospray
       components:
       - Hypospray
 
@@ -257,6 +259,7 @@
       - CMRollerBed
       - BodyBag
       - PillPacket
+      - Hypospray
       components:
       - Hypospray
   - type: FixedItemSizeStorage
@@ -429,6 +432,7 @@
       - CMRollerBed
       - BodyBag
 #      - TODO RMC14 fixovein
+      - Hypospray 
       components:
       - Hypospray
   - type: FixedItemSizeStorage

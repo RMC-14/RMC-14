@@ -38,6 +38,7 @@
       - CMSynthGraft
       - CMRollerBed
       - BodyBag
+      - Hypospray
       components:
       - Hypospray
   - type: Item
