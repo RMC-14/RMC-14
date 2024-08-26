@@ -64,6 +64,19 @@
   id: CMBootsBlackFilled
   suffix: Filled
 
+- type: entity
+  parent: CMBootsBlackFilled
+  id: RMCScoutShoes
+  name: infiltrator boots # Could probably use it's own sprite
+  description: A modified pair of combat boots, including several trimmed down areas and padded with cloth alongside some form of leather
+  components:
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepCatwalk #I dunno what a better sound effect would be, catwalk stands out so it's there to alert xenos if scout moves while they are close
+      params:
+        volume: -8
+        maxDistance: 0
+
 # Brown Boots
 - type: entity
   parent: CMBootsBlack

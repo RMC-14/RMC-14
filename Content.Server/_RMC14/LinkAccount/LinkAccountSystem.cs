@@ -113,9 +113,6 @@ public sealed class LinkAccountSystem : EntitySystem
         if (time < _nextLobbyMessageTime)
             return;
 
-        if (_gameTicker.RunLevel != GameRunLevel.PreRoundLobby)
-            return;
-
         _nextLobbyMessageTime = time + _timeBetweenLobbyMessages;
 
         if (_nextLobbyMessage is { } message)
