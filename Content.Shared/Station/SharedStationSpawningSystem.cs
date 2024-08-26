@@ -1,7 +1,9 @@
 using System.Linq;
+using Content.Shared._RMC14.Storage;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
+using Content.Shared.Item;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
 using Content.Shared.Storage;
@@ -140,6 +142,12 @@ public abstract class SharedStationSpawningSystem : EntitySystem
 
                     foreach (var ent in ents)
                     {
+                        if (TryComp(ent, out ItemComponent? item))
+                        {
+                            var ev = new CMStorageItemFillEvent((ent, item), storage);
+                            RaiseLocalEvent(slotEnt.Value, ref ev);
+                        }
+
                         _storage.Insert(slotEnt.Value, ent, out _, storageComp: storage, playSound: false);
                     }
                 }
