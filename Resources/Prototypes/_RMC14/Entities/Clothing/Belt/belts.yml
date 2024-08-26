@@ -102,7 +102,7 @@
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: m1984 # TODO RMC14 per-gun underlay
       offset: -0.3125, -0.09375
-      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
       visible: false
     - state: icon-front
     - state: half
@@ -149,6 +149,12 @@
     insertSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_sheathe.ogg
     ejectSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_draw.ogg
   - type: CMItemSlots
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: m1984, visible: false }
+          Full: { state: m1984, visible: true }
 
 - type: entity
   parent: CMBeltBase
@@ -267,7 +273,7 @@
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: m1984 # TODO RMC14 per-gun underlay
       offset: 0.375, 0
-      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
       visible: false
     - state: icon
     - state: half
@@ -294,6 +300,12 @@
     insertSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_sheathe.ogg
     ejectSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_draw.ogg
   - type: CMItemSlots
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: m1984, visible: false }
+          Full: { state: m1984, visible: true }
 
 - type: entity
   parent: CMBeltMarine
@@ -371,7 +383,7 @@
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: smartpistol
       offset: -0.1875, 0.0
-      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
       visible: false
     - state: icon-front
     - state: half
@@ -402,6 +414,12 @@
     insertSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_sheathe.ogg
     ejectSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_draw.ogg
   - type: CMItemSlots
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: smartpistol, visible: false }
+          Full: { state: smartpistol, visible: true }
 
 - type: entity
   parent: CMBeltBaseStorage

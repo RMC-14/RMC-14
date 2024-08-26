@@ -69,9 +69,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
         SubscribeLocalEvent<CMItemSlotsComponent, EntInsertedIntoContainerMessage>(OnSlotsEntInsertedIntoContainer);
         SubscribeLocalEvent<CMItemSlotsComponent, EntRemovedFromContainerMessage>(OnSlotsEntRemovedFromContainer);
 
-        SubscribeLocalEvent<CMHolsterComponent, EntInsertedIntoContainerMessage>(OnEntInsertedIntoHolster);
-        SubscribeLocalEvent<CMHolsterComponent, EntRemovedFromContainerMessage>(OnEntRemovedFromHolster);
-
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMHolsterPrimary,
                 InputCmdHandler.FromDelegate(session =>
@@ -173,6 +170,15 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     protected void OnSlotsEntInsertedIntoContainer(Entity<CMItemSlotsComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
+        if (TryComp(ent, out CMHolsterComponent? holster)
+            && HasComp<CMHolsterableComponent>(args.Entity))
+        {
+            if (!holster.Contents.Contains(args.Entity))
+            {
+                holster.Contents.Add(args.Entity);
+            }
+        }
+
         ContentsUpdated(ent);
     }
 
@@ -184,47 +190,46 @@ public abstract class SharedCMInventorySystem : EntitySystem
             Dirty(ent);
         }
 
+        if (TryComp(ent, out CMHolsterComponent? holster)
+            && HasComp<CMHolsterableComponent>(args.Entity))
+        {
+            if (holster.Contents.Contains(args.Entity))
+            {
+                holster.Contents.Remove(args.Entity);
+            }
+        }
+
         ContentsUpdated(ent);
-    }
-
-    protected void OnEntInsertedIntoHolster(Entity<CMHolsterComponent> ent, ref EntInsertedIntoContainerMessage args)
-    {
-        if (HasComp<CMHolsterableComponent>(args.Entity))
-        {
-            if (!ent.Comp.Contents.Contains(args.Entity))
-            {
-                ent.Comp.Contents.Add(args.Entity);
-            }
-        }
-    }
-
-    protected void OnEntRemovedFromHolster(Entity<CMHolsterComponent> ent, ref EntRemovedFromContainerMessage args)
-    {
-        if (HasComp<CMHolsterableComponent>(args.Entity))
-        {
-            if (ent.Comp.Contents.Contains(args.Entity))
-            {
-                ent.Comp.Contents.Remove(args.Entity);
-            }
-        }
     }
 
     protected virtual void ContentsUpdated(Entity<CMItemSlotsComponent> ent)
     {
-        var (filled, total) = GetItemSlotsFilled(ent.Owner);
-        CMItemSlotsVisuals visuals;
-        if (total == 0)
-            visuals = CMItemSlotsVisuals.Empty;
-        else if (filled >= total)
-            visuals = CMItemSlotsVisuals.Full;
-        else if (filled >= total * 0.666f)
-            visuals = CMItemSlotsVisuals.High;
-        else if (filled >= total * 0.333f)
-            visuals = CMItemSlotsVisuals.Medium;
-        else if (filled > 0)
-            visuals = CMItemSlotsVisuals.Low;
+        var (filled, total) = (0, 0);
+        CMItemSlotsVisuals visuals = CMItemSlotsVisuals.Empty;;
+
+        if (HasComp<StorageComponent>(ent)
+            && TryComp(ent, out CMHolsterComponent? holster))
+        {
+            if (!IsHolsterEmpty(holster))
+                visuals = CMItemSlotsVisuals.Full;
+        }
         else
-            visuals = CMItemSlotsVisuals.Empty;
+        {
+            (filled, total) = GetItemSlotsFilled(ent.Owner);
+
+            if (total == 0)
+                visuals = CMItemSlotsVisuals.Empty;
+            else if (filled >= total)
+                visuals = CMItemSlotsVisuals.Full;
+            else if (filled >= total * 0.666f)
+                visuals = CMItemSlotsVisuals.High;
+            else if (filled >= total * 0.333f)
+                visuals = CMItemSlotsVisuals.Medium;
+            else if (filled > 0)
+                visuals = CMItemSlotsVisuals.Low;
+            else
+                visuals = CMItemSlotsVisuals.Empty;
+        }
 
         _appearance.SetData(ent, CMItemSlotsLayers.Fill, visuals);
     }
@@ -486,13 +491,13 @@ public abstract class SharedCMInventorySystem : EntitySystem
     }
 
     // Check if holster empty
-    private bool IsHolsterEmpty(CMHolsterComponent holster)
+    private static bool IsHolsterEmpty(CMHolsterComponent holster)
     {
         return holster.Contents.Count == 0;
     }
 
     // Get last item inserted into holster (check if it's empty first!)
-    private EntityUid GetLastInserted(CMHolsterComponent holster)
+    private static EntityUid GetLastInserted(CMHolsterComponent holster)
     {
         return holster.Contents[holster.Contents.Count - 1];
     }

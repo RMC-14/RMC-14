@@ -6,6 +6,5 @@ namespace Content.Shared._RMC14.Inventory;
 public enum CMItemSlotsLayers
 {
     // TODO RMC14 replace Filled with Fill
-    Filled,
     Fill,
 }
