@@ -1,0 +1,6 @@
+- type: soundCollection
+  id: PlasmamanScreams
+  files:
+  - /Audio/_RMC14/Voice/Plasmaman/plasmaman_scream_1.ogg
+  - /Audio/_RMC14/Voice/Plasmaman/plasmaman_scream_2.ogg
+  - /Audio/_RMC14/Voice/Plasmaman/plasmaman_scream_3.ogg

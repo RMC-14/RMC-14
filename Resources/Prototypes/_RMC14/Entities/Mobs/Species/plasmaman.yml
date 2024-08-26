@@ -1,0 +1,35 @@
+- type: entity
+  save: false
+  parent: CMBaseMobSpeciesOrganic
+  id: RMCMobPlasmaman
+  name: Urist C.M. McPlasma
+  suffix: RMC14
+  components:
+  - type: HumanoidAppearance
+    species: Plasmaman
+  - type: Vocal
+    sounds:
+      Male: RMCUnisexPlasmaman
+      Unsexed: RMCUnisexPlasmaman
+      Female: RMCUnisexPlasmaman
+  - type: Icon
+    sprite: _RMC14/Mobs/Plasmamen/parts.rsi
+    state: full
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#555555AA"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
+  - type: SkeletonAccent
+  - type: Speech
+    speechVerb: Skeleton
+
+- type: entity
+  parent: BaseSpeciesDummy
+  id: RMCMobPlasmaman
+  noSpawn: true
+  components:
+  - type: HumanoidAppearance
+    species: Plasmaman

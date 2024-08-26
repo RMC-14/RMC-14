@@ -1,0 +1,89 @@
+- type: species
+  id: Plasmaman
+  name: species-name-plasmaman
+  roundStart: true
+  prototype: RMCMobPlasmaman
+  sprites: MobPlasmamanSprites
+  defaultSkinTone: "#fff9e2"
+  markingLimits: MobHumanMarkingLimits
+  dollPrototype: RMCMobPlasmaman
+  skinColoration: TintedHues
+  sexes:
+  - Unsexed
+
+- type: speciesBaseSprites
+  id: MobPlasmamanSprites
+  sprites:
+    Head: MobPlasmamanHead
+    Chest: MobPlasmamanTorso
+    Eyes: MobHumanoidEyes
+    Underwear: MobHumanoidAnyMarking
+    Undershirt: MobHumanoidAnyMarking
+    LArm: MobPlasmamanLArm
+    RArm: MobPlasmamanRArm
+    LHand: MobPlasmamanLHand
+    RHand: MobPlasmamanRHand
+    LLeg: MobPlasmamanRLeg
+    RLeg: MobHumanRLeg
+    LFoot: MobPlasmamanLFoot
+    RFoot: MobPlasmamanRFoot
+
+- type: humanoidBaseSprite
+  id: MobPlasmamanHead
+  baseSprite:
+    sprite: _RMC14/Mobs/Plasmamen/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobPlasmamanTorso
+  baseSprite:
+    sprite: _RMC14/Mobs/Plasmamen/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobPlasmamanLLeg
+  baseSprite:
+    sprite: _RMC14/Mobs/Plasmamen/parts.rsi
+    state: l_leg
+
+- type: humanoidBaseSprite
+  id: MobPlasmamanLArm
+  baseSprite:
+    sprite: _RMC14/Mobs/Plasmamen/parts.rsi
+    state: l_arm
+
+- type: humanoidBaseSprite
+  id: MobPlasmamanLHand
+  baseSprite:
+    sprite: _RMC14/Mobs/Plasmamen/parts.rsi
+    state: l_hand
+
+- type: humanoidBaseSprite
+  id: MobPlasmamanLFoot
+  baseSprite:
+    sprite: _RMC14/Mobs/Plasmamen/parts.rsi
+    state: l_foot
+
+- type: humanoidBaseSprite
+  id: MobPlasmamanRLeg
+  baseSprite:
+    sprite: _RMC14/Mobs/Plasmamen/parts.rsi
+    state: r_leg
+
+- type: humanoidBaseSprite
+  id: MobPlasmamanRArm
+  baseSprite:
+    sprite: _RMC14/Mobs/Plasmamen/parts.rsi
+    state: r_arm
+
+- type: humanoidBaseSprite
+  id: MobPlasmamanRHand
+  baseSprite:
+    sprite: _RMC14/Mobs/Plasmamen/parts.rsi
+    state: r_hand
+
+- type: humanoidBaseSprite
+  id: MobPlasmamanRFoot
+  baseSprite:
+    sprite: _RMC14/Mobs/Plasmamen/parts.rsi
+    state: r_foot
