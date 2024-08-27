@@ -9,18 +9,7 @@ public enum XenoRemoveNestedUI : byte
     Key
 }
 [Serializable, NetSerializable]
-public sealed class XenoRemoveNestedBuiMsg(bool removeNested, int nestableTarget) : BoundUserInterfaceMessage
+public sealed class XenoRemoveNestedBuiMsg() : BoundUserInterfaceMessage
 {
-    public readonly bool RemoveNested = removeNested;
-    public readonly int NestableTarget = nestableTarget;
 }
-[Serializable, NetSerializable]
-public sealed class RemoveNestedState : BoundUserInterfaceState
-{
-    public readonly int NestableTarget;
 
-    public RemoveNestedState(int target)
-    {
-        NestableTarget = target;
-    }
-}

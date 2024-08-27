@@ -29,17 +29,9 @@ public sealed class XenoRemoveNestedBui : BoundUserInterface
     {
         if (_window == null)
             return;
-        var msg = new XenoRemoveNestedBuiMsg(true, _nestableTarget);
+        var msg = new XenoRemoveNestedBuiMsg();
         SendPredictedMessage(msg);
         //_window.Close();
-    }
-    protected override void UpdateState(BoundUserInterfaceState state)
-    {
-        base.UpdateState(state);
-
-        var castState = (RemoveNestedState) state;
-        _window?.UpdateState(castState);
-        _nestableTarget = castState.NestableTarget;
     }
 
     protected override void Dispose(bool disposing)

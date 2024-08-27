@@ -12,9 +12,4 @@ public sealed partial class XenoRemoveNestedWindow : DefaultWindow
     {
         RobustXamlLoader.Load(this);
     }
-
-    public void UpdateState(RemoveNestedState state)
-    {
-
-    }
 }

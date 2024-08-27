@@ -248,11 +248,9 @@ public sealed class XenoNestSystem : EntitySystem
 
     private void OnRemoveNestedBuiMsg(Entity<XenoComponent> user, ref XenoRemoveNestedBuiMsg args)
     {
-        _popup.PopupEntity("OnRemoveNestedBuiMsg", user);
+
         _ui.CloseUi(user.Owner, XenoRemoveNestedUI.Key, user);
-        if (!args.RemoveNested)
-            return;
-        var target = new EntityUid(args.NestableTarget);
+        var target = new EntityUid(args.Entity.Id);
         if (_net.IsClient)
             return;
         DetachNested(null, target);
@@ -358,7 +356,6 @@ public sealed class XenoNestSystem : EntitySystem
         if (!_mobState.IsDead(target) && !_mobState.IsCritical(target))
         {
             _ui.TryOpenUi(target, XenoRemoveNestedUI.Key, user);
-            _ui.SetUiState(target, XenoRemoveNestedUI.Key, new RemoveNestedState(target.Id));
             return;
         }
         DetachNested(null, target);
@@ -389,7 +386,6 @@ public sealed class XenoNestSystem : EntitySystem
         {
             if (!silent)
                 _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed-cant-there"), surface, user);
-
             return false;
         }
 
