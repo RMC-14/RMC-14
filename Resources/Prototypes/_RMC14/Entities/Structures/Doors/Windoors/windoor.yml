@@ -79,4 +79,4 @@
   - type: RMCDropshipBlocked
   - type: ImmuneToUnarmed
   - type: AccessReader
-    containerAccessProvider:
+    containerAccessProvider: null
