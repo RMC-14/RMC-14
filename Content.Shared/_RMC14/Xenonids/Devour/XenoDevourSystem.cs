@@ -43,7 +43,6 @@ public sealed class XenoDevourSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly RMCSuitLightSystem _suitLightSystem = default!;
 
     private EntityQuery<DevouredComponent> _devouredQuery;
     private EntityQuery<XenoDevourComponent> _xenoDevourQuery;
@@ -113,12 +112,6 @@ public sealed class XenoDevourSystem : EntitySystem
     private void OnDevouredStartup(Entity<DevouredComponent> devoured, ref ComponentStartup args)
     {
         _blocker.UpdateCanMove(devoured);
-
-        var uid = devoured.Owner;
-        var suit = _suitLightSystem.FindSuit(uid);
-
-        if (suit != null)
-            _suitLightSystem.ShortLights(suit.Value.Owner, uid);
     }
 
     private void OnDevouredRemove(Entity<DevouredComponent> devoured, ref ComponentRemove args)
@@ -182,7 +175,7 @@ public sealed class XenoDevourSystem : EntitySystem
     private void OnDevouredIsUnequippingAttempt(Entity<DevouredComponent> devoured, ref IsUnequippingAttemptEvent args)
     {
         // if (!HasComp<UsableWhileDevouredComponent>(args.Equipment))
-            args.Cancel();
+        args.Cancel();
     }
 
     private void OnXenoCanDropTarget(Entity<XenoDevourComponent> xeno, ref CanDropTargetEvent args)
@@ -243,6 +236,9 @@ public sealed class XenoDevourSystem : EntitySystem
 
             _popup.PopupEntity(Loc.GetString("cm-xeno-devour-observer", ("user", xeno.Owner), ("target", target)), xeno, recipient, PopupType.MediumCaution);
         }
+
+        var ev = new XenoDevouredEvent(target, xeno.Owner);
+        RaiseLocalEvent(target, ref ev, true);
     }
 
     private void OnXenoRegurgitateAction(Entity<XenoDevourComponent> xeno, ref XenoRegurgitateActionEvent args)
@@ -498,3 +494,11 @@ public sealed class XenoDevourSystem : EntitySystem
         }
     }
 }
+
+/// <summary>
+/// Event that is raised whenever a mob is devoured by another mob
+/// </summary>
+/// <param name="Target">The Entity who was devoured</param>
+/// <param name="User">The Entity who caused the devouring</param>
+[ByRefEvent]
+public record struct XenoDevouredEvent(EntityUid Target, EntityUid User);
