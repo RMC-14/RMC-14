@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: The hive core now slowly produces lesser drones.
-    type: Add
-  id: 126
-  time: '2024-06-02T11:05:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2199
 - author: Whisper
   changes:
   - message: Added portable fire extinguisher
@@ -4385,5 +4378,12 @@
   id: 625
   time: '2024-08-27T00:29:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3843
+- author: crystalHex
+  changes:
+  - message: Added descriptions to bundles/kits.
+    type: Tweak
+  id: 626
+  time: '2024-08-27T00:30:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3834
 Name: RMC14
 Order: -1
