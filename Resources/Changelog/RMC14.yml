@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Whisper
   changes:
-  - message: Added portable fire extinguisher
-    type: Add
-  id: 127
-  time: '2024-06-03T11:14:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2219
-- author: Whisper
-  changes:
   - message: All primary weapons now have AP ammo
     type: Add
   id: 128
@@ -4385,5 +4378,12 @@
   id: 626
   time: '2024-08-27T00:30:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3834
+- author: MetalSage
+  changes:
+  - message: Fixed accesses on windoors
+    type: Fix
+  id: 627
+  time: '2024-08-27T09:09:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3854
 Name: RMC14
 Order: -1
