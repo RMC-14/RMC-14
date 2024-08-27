@@ -37,7 +37,7 @@
     needsPower: false
   - type: RMCDropshipBlocked
   - type: AccessReader
-    containerAccessProvider:
+    containerAccessProvider: null
 
 - type: entity
   parent: BaseSecureWindoor
