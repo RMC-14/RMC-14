@@ -44,7 +44,7 @@
   - type: UsableWhileDevoured
     damage:
       types:
-        Slash: 15
+        Slash: 10
   - type: AttachableVisuals
     rsi: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
     prefix: bayonet
@@ -122,7 +122,7 @@
   - type: UsableWhileDevoured
     damage:
       types:
-        Slash: 21
+        Slash: 14
   - type: Item
     size: Large
     sprite: _RMC14/Objects/Weapons/Melee/machete.rsi
