@@ -93,6 +93,9 @@ public sealed class RMCCVars : CVars
     public static readonly CVarDef<string> RMCPlanetMaps =
         CVarDef.Create("rmc.planet_maps", "/Maps/_RMC14/lv624.yml,/Maps/_RMC14/solaris.yml,/Maps/_RMC14/prison.yml,/Maps/_RMC14/shiva.yml", CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCPlanetCoordinateVariance =
+        CVarDef.Create("rmc.planet_coordinate_variance", 500, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<bool> RMCDrawStorageIconLabels =
         CVarDef.Create("rmc.draw_storage_icon_labels", true, CVar.REPLICATED | CVar.SERVER);
 

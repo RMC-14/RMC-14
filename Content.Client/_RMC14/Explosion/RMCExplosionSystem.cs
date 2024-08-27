@@ -2,4 +2,4 @@
 
 namespace Content.Client._RMC14.Explosion;
 
-public sealed class CMExplosionSystem : SharedCMExplosionSystem;
+public sealed class RMCExplosionSystem : SharedRMCExplosionSystem;

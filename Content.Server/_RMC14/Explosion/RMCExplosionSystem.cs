@@ -6,17 +6,18 @@ using Content.Shared.Humanoid;
 using Content.Shared.Popups;
 using Content.Shared.Sticky;
 using Robust.Server.Audio;
+using Robust.Shared.Map;
 using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Explosion;
 
-public sealed class CMExplosionSystem : SharedCMExplosionSystem
+public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly ExplosionSystem _explosion = default!;
     [Dependency] private readonly HumanoidVoicelinesSystem _humanoidVoicelines = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly TriggerSystem _trigger = default!;
-
 
     public override void Initialize()
     {
@@ -52,5 +53,40 @@ public sealed class CMExplosionSystem : SharedCMExplosionSystem
     private void OnExplosiveDeleteWallsStuck(Entity<RMCExplosiveDeleteWallsComponent> ent, ref EntityStuckEvent args)
     {
         _trigger.HandleTimerTrigger(ent, args.User, ent.Comp.Delay, ent.Comp.BeepInterval, null, null);
+    }
+
+    public override void QueueExplosion(
+        MapCoordinates epicenter,
+        string typeId,
+        float totalIntensity,
+        float slope,
+        float maxTileIntensity,
+        EntityUid? cause,
+        float tileBreakScale = 1f,
+        int maxTileBreak = int.MaxValue,
+        bool canCreateVacuum = true,
+        bool addLog = true)
+    {
+        _explosion.QueueExplosion(
+            epicenter,
+            typeId,
+            totalIntensity,
+            slope,
+            maxTileIntensity,
+            cause,
+            tileBreakScale,
+            maxTileBreak,
+            canCreateVacuum,
+            addLog
+        );
+    }
+
+    public override void TriggerExplosive(EntityUid uid,
+        bool delete = true,
+        float? totalIntensity = null,
+        float? radius = null,
+        EntityUid? user = null)
+    {
+        _explosion.TriggerExplosive(uid, null, delete, totalIntensity, radius, user);
     }
 }

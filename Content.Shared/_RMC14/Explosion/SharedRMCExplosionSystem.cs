@@ -1,10 +1,11 @@
 ﻿using Content.Shared.Coordinates;
 using Content.Shared.Throwing;
+using Robust.Shared.Map;
 using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Explosion;
 
-public abstract class SharedCMExplosionSystem : EntitySystem
+public abstract class SharedRMCExplosionSystem : EntitySystem
 {
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -21,8 +22,27 @@ public abstract class SharedCMExplosionSystem : EntitySystem
 
     private void OnExplosionEffectTriggered(Entity<CMExplosionEffectComponent> ent, ref CMExplosiveTriggeredEvent args)
     {
-        SpawnNextToOrDrop(ent.Comp.ShockWave, ent);
-        SpawnNextToOrDrop(ent.Comp.Explosion, ent);
+        DoEffect(ent);
+    }
+
+    private void OnDeleteWallsTriggered(Entity<RMCExplosiveDeleteWallsComponent> ent, ref CMExplosiveTriggeredEvent args)
+    {
+        _walls.Clear();
+        _entityLookup.GetEntitiesInRange(ent.Owner.ToCoordinates(), ent.Comp.Range, _walls);
+
+        foreach (var wall in _walls)
+        {
+            QueueDel(wall);
+        }
+    }
+
+    public void DoEffect(Entity<CMExplosionEffectComponent> ent)
+    {
+        if (ent.Comp.ShockWave is { } shockwave)
+            SpawnNextToOrDrop(shockwave, ent);
+
+        if (ent.Comp.Explosion is { } explosion)
+            SpawnNextToOrDrop(explosion, ent);
 
         if (ent.Comp.MaxShrapnel > 0)
         {
@@ -40,14 +60,34 @@ public abstract class SharedCMExplosionSystem : EntitySystem
         }
     }
 
-    private void OnDeleteWallsTriggered(Entity<RMCExplosiveDeleteWallsComponent> ent, ref CMExplosiveTriggeredEvent args)
+    public void TryDoEffect(Entity<CMExplosionEffectComponent?> ent)
     {
-        _walls.Clear();
-        _entityLookup.GetEntitiesInRange(ent.Owner.ToCoordinates(), ent.Comp.Range, _walls);
+        if (!Resolve(ent, ref ent.Comp, false))
+            return;
 
-        foreach (var wall in _walls)
-        {
-            QueueDel(wall);
-        }
+        DoEffect((ent, ent.Comp));
+    }
+
+    public virtual void QueueExplosion(
+        MapCoordinates epicenter,
+        string typeId,
+        float totalIntensity,
+        float slope,
+        float maxTileIntensity,
+        EntityUid? cause,
+        float tileBreakScale = 1f,
+        int maxTileBreak = int.MaxValue,
+        bool canCreateVacuum = true,
+        bool addLog = true)
+    {
+    }
+
+    public virtual void TriggerExplosive(
+        EntityUid uid,
+        bool delete = true,
+        float? totalIntensity = null,
+        float? radius = null,
+        EntityUid? user = null)
+    {
     }
 }

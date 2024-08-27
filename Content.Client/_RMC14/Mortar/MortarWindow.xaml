@@ -1,0 +1,38 @@
+﻿<controls:MortarWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Mortar"
+    Title="{Loc 'rmc-mortar-interface'}">
+    <BoxContainer Orientation="Vertical">
+        <BoxContainer Orientation="Horizontal">
+            <BoxContainer Orientation="Vertical">
+                <BoxContainer Orientation="Horizontal">
+                    <Label Text="{Loc 'rmc-mortar-target-x'}" />
+                    <SpinBox Name="TargetX" Access="Public" />
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal">
+                    <Label Text="{Loc 'rmc-mortar-target-y'}" />
+                    <SpinBox Name="TargetY" Access="Public" />
+                </BoxContainer>
+                <Button Name="SetTargetButton" Access="Public"
+                        Text="{Loc 'rmc-mortar-target-set'}" />
+            </BoxContainer>
+            <Button Name="ViewCameraButton" Access="Public"
+                    Text="{Loc 'rmc-mortar-view-camera'}" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <BoxContainer Orientation="Vertical" Margin="0 10 0 0">
+                <BoxContainer Orientation="Horizontal">
+                    <Label Text="{Loc 'rmc-mortar-target-x'}" />
+                    <SpinBox Name="DialX" Access="Public" />
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal">
+                    <Label Text="{Loc 'rmc-mortar-target-y'}" />
+                    <SpinBox Name="DialY" Access="Public" />
+                </BoxContainer>
+                <Button Name="SetOffsetButton" Access="Public"
+                        Text="{Loc 'rmc-mortar-offset-set'}" />
+            </BoxContainer>
+            <Control />
+        </BoxContainer>
+    </BoxContainer>
+</controls:MortarWindow>

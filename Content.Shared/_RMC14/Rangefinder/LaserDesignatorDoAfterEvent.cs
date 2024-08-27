@@ -2,7 +2,7 @@
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._RMC14.Dropship.Weapon;
+namespace Content.Shared._RMC14.Rangefinder;
 
 [Serializable, NetSerializable]
 public sealed partial class LaserDesignatorDoAfterEvent : SimpleDoAfterEvent

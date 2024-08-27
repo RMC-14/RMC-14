@@ -1,0 +1,38 @@
+﻿rmc-mortar-deploy-start = You start deploying {THE($mortar)}.
+rmc-mortar-deploy-end-not-planet = You deploy the M402 mortar portable kit. This is a bad idea.
+rmc-mortar-shell-busy = Someone else is currently using {THE($mortar)}
+rmc-mortar-not-aimed = {THE($mortar)} needs to be aimed first.
+rmc-mortar-target-invalid = You cannot fire {THE($mortar)} to this target.
+rmc-mortar-target-not-area = This area is out of bounds!
+rmc-mortar-target-covered = You cannot hit the target. It is probably underground.
+rmc-mortar-target-is-lz = You cannot bomb the landing zone!
+rmc-mortar-bad-idea = You realize how bad of an idea this is and quickly stop.
+rmc-mortar-cant-insert = You can't put {THE($shell)} in {THE($mortar)}!
+rmc-mortar-not-deployed = You need to deploy {THE($mortar)} first!
+rmc-mortar-less-accurate-with-range = [color=red]It will be less accurate the further away the target is![/color]
+rmc-mortar-target-start-self = You start adjusting {THE($mortar)}'s firing angle and distance to match the new coordinates.
+rmc-mortar-target-start-others = {$user} starts adjusting {THE($mortar)}'s firing angle and distance.
+rmc-mortar-target-finish-self = You finish adjusting {THE($mortar)}'s firing angle and distance to match the new coordinates.
+rmc-mortar-target-finish-others = {$user} finishes adjusting {THE($mortar)}'s firing angle and distance.
+
+rmc-mortar-shell-load-start-self = You start loading {THE($shell)} into {THE($mortar)}.
+rmc-mortar-shell-load-start-others = {$user} starts loading {THE($shell)} into {THE($mortar)}.
+rmc-mortar-shell-load-finish-self = You load {THE($shell)} into {THE($mortar)}.
+rmc-mortar-shell-fire = {THE($mortar)} fires!
+rmc-mortar-shell-warning = A SHELL IS COMING DOWN TO YOUR {$direction}
+rmc-mortar-shell-warning-above = A SHELL IS COMING DOWN RIGHT ABOVE YOU
+rmc-mortar-shell-impact-warning = A SHELL IS ABOUT TO IMPACT TO YOUR {$direction}
+rmc-mortar-shell-impact-warning-above = A SHELL IS ABOUT TO IMPACT
+
+rmc-mortar-interface = Mortar Interface
+
+rmc-mortar-target-x = Target X:
+rmc-mortar-target-y = Target Y:
+rmc-mortar-target-set = Set Target
+
+rmc-mortar-offset-x = X Offset:
+rmc-mortar-offset-y = Y Offset:
+rmc-mortar-offset-set = Dial Offset
+
+rmc-mortar-view-camera = View
+  Camera
