@@ -2,7 +2,7 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Rangefinder"
     xmlns:userInterface="clr-namespace:Content.Client._RMC14.UserInterface"
-    Title="{Loc 'rmc-rangefinder'}">
+    Title="{Loc 'rmc-rangefinder'}" MinSize="325 185">
     <BoxContainer Orientation="Vertical">
         <RichTextLabel Name="Header" Access="Public" />
         <userInterface:BlueHorizontalSeparator Margin="0 5" />

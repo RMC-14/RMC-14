@@ -37,6 +37,7 @@
     interfaces:
       enum.RangefinderUiKey.Key:
         type: RangefinderBui
+  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.RangefinderLayers.Layer:

@@ -26,6 +26,12 @@ public sealed partial class RangefinderComponent : Component
     public Vector2i? LastTarget;
 
     [DataField, AutoNetworkedField]
+    public string SwitchModeUseDelay = "rangefinder_mode";
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan SwitchModeDelay = TimeSpan.FromSeconds(0.5);
+
+    [DataField, AutoNetworkedField]
     public TimeSpan Delay = TimeSpan.FromSeconds(10);
 
     [DataField, AutoNetworkedField]

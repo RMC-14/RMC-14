@@ -17,4 +17,6 @@ rmc-laser-designator-target-abbreviation = {$id}
 rmc-laser-designator-examine-id = Tracking ID for CAS: {$id}.
 rmc-laser-designator-signal-flare-examine = [color=red]It cannot be picked back up while its burning.[/color]
 rmc-laser-designator-switch-mode = Switch to {$mode} mode
+rmc-laser-designator-in-rangefinder-mode = {CAPITALIZE(THE($item))} is currently set to range finder mode.
+rmc-laser-designator-in-designator-mode = {CAPITALIZE(THE($item))} is currently set to CAS marking mode.
 rmc-laser-designator-to-switch = [color=cyan]Alt + Click designator to switch modes.[/color]

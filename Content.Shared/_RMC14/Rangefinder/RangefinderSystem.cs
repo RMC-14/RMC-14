@@ -63,10 +63,18 @@ public sealed class RangefinderSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (rangefinder.Comp.CanDesignate)
-            rangefinder.Comp.Id = _dropshipWeapon.ComputeNextId();
+        var comp = rangefinder.Comp;
+        if (comp.CanDesignate)
+            comp.Id = _dropshipWeapon.ComputeNextId();
         else
-            rangefinder.Comp.Mode = RangefinderMode.Rangefinder;
+            comp.Mode = RangefinderMode.Rangefinder;
+
+        if (comp.SwitchModeDelay > TimeSpan.Zero)
+        {
+            _useDelay.SetLength(rangefinder.Owner,
+                comp.SwitchModeDelay,
+                comp.SwitchModeUseDelay);
+        }
 
         Dirty(rangefinder);
         UpdateAppearance(rangefinder);
@@ -194,14 +202,33 @@ public sealed class RangefinderSystem : EntitySystem
     {
         using (args.PushGroup(nameof(RangefinderComponent)))
         {
-            if (rangefinder.Comp.LastTarget is { } target)
-                args.PushText(Loc.GetString("rmc-rangefinder-examine", ("item", rangefinder), ("x", target.X), ("y", target.Y)));
+            var comp = rangefinder.Comp;
+            if (comp.LastTarget is { } target)
+                args.PushMarkup(Loc.GetString("rmc-rangefinder-examine", ("item", rangefinder), ("x", target.X), ("y", target.Y)));
 
-            if (rangefinder.Comp.Id is { } id)
-                args.PushText(Loc.GetString("rmc-laser-designator-examine-id", ("id", id)));
+            if (comp.Id is { } id)
+                args.PushMarkup(Loc.GetString("rmc-laser-designator-examine-id", ("id", id)));
 
-            if (rangefinder.Comp.CanDesignate)
-                args.PushText(Loc.GetString("rmc-laser-designator-to-switch"));
+            if (comp.CanDesignate)
+            {
+                switch (comp.Mode)
+                {
+                    case RangefinderMode.Rangefinder:
+                    {
+                        var msg = Loc.GetString("rmc-laser-designator-in-rangefinder-mode", ("item", rangefinder));
+                        args.PushMarkup(msg);
+                        break;
+                    }
+                    case Designator:
+                    {
+                        var msg = Loc.GetString("rmc-laser-designator-in-designator-mode", ("item", rangefinder));
+                        args.PushMarkup(msg);
+                        break;
+                    }
+                }
+
+                args.PushMarkup(Loc.GetString("rmc-laser-designator-to-switch"));
+            }
         }
     }
 
@@ -243,12 +270,16 @@ public sealed class RangefinderSystem : EntitySystem
 
     private void ChangeDesignatorMode(Entity<RangefinderComponent> rangefinder, RangefinderMode mode)
     {
+        if (!rangefinder.Comp.CanDesignate)
+            return;
+
+        var delay = rangefinder.Comp.SwitchModeUseDelay;
         if (TryComp(rangefinder, out UseDelayComponent? useDelay))
         {
-            if (_useDelay.IsDelayed((rangefinder, useDelay)))
+            if (_useDelay.IsDelayed((rangefinder, useDelay), delay))
                 return;
 
-            _useDelay.TryResetDelay(rangefinder, component: useDelay);
+            _useDelay.TryResetDelay(rangefinder, component: useDelay, id: delay);
         }
 
         rangefinder.Comp.Mode = mode;
