@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added mre box
-    type: Add
-  id: 125
-  time: '2024-06-02T08:37:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2186
 - author: DrSmugleaf
   changes:
   - message: The hive core now slowly produces lesser drones.
@@ -4384,5 +4377,13 @@
   id: 624
   time: '2024-08-27T00:25:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3830
+- author: Vermidia
+  changes:
+  - message: Added the Crusher's and Lurker's missing slow on hit. The Lurker's slow
+      only applies to knocked out marines.
+    type: Fix
+  id: 625
+  time: '2024-08-27T00:29:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3843
 Name: RMC14
 Order: -1
