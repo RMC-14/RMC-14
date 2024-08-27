@@ -529,3 +529,14 @@
     state: bred_dahne
   - type: PatronFigurine
     id: 6631b2a1-2adf-4f83-962a-d8e251f770e0
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDartingSleepyGroth
+  name: Darting 'Sleepy' Groth figurine
+  description: "\"Is it naptime yet..?\""
+  components:
+  - type: Sprite
+    state: darting_sleepy_groth
+  - type: PatronFigurine
+    id: 4d6e86d6-2811-402f-8d02-618709be6f75
