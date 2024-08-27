@@ -8,7 +8,7 @@
   suffix: Corp
   components:
   - type: AccessReader
-    access: [["CMAccessCorp"]] # TODO Add Access (Survivor, Trainee, All Executive & WeYa)
+    access: [["RMCAccessWeYa"]] # TODO Add Access (Survivor, Trainee, All Executive & WeYa)
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/corp_wardrobe.rsi
   - type: CMAutomatedVendor
