@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Marines.Armor;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.Clothing;
 using Content.Shared.Inventory;
 using Content.Shared.Light.Components;
 using Content.Shared.Mobs;
@@ -19,9 +20,15 @@ public sealed class RMCSuitLightSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<RMCSuitLightComponent, ClothingGotUnequippedEvent>(OnUnequip);
         SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<VictimInfectedComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<MarineComponent, XenoDevouredEvent>(OnDevour);
+    }
+
+    private void OnUnequip(Entity<RMCSuitLightComponent> ent, ref ClothingGotUnequippedEvent args)
+    {
+        ShortLights(ent.Owner, args.Wearer);
     }
 
     private void OnMobStateChanged(MobStateChangedEvent args)
@@ -63,7 +70,7 @@ public sealed class RMCSuitLightSystem : EntitySystem
             _lights.TurnOff(ent);
 
             var popup = Loc.GetString("rmc-suit-light-short");
-            _popup.PopupClient(popup, user);
+            _popup.PopupEntity(popup, user, user);
         }
     }
 
