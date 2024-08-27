@@ -81,6 +81,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCrewMaintenanceEssentials
   name: essential maintenance set
+  description: Contains a flashlight and a light replacer.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Janitorial/light_replacer.rsi
