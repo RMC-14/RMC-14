@@ -15,11 +15,11 @@ public sealed class RMCSuitLightSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<MarineComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<RMCSuitLightComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<VictimInfectedComponent, ComponentStartup>(OnComponentStartup);
     }
 
-    private void OnMobStateChanged(Entity<MarineComponent> ent, ref MobStateChangedEvent args)
+    private void OnMobStateChanged(Entity<RMCSuitLightComponent> ent, ref MobStateChangedEvent args)
     {
         var uid = ent.Owner;
 
