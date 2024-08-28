@@ -1,5 +1,6 @@
 using Robust.Shared.GameStates;
 using Content.Shared.Humanoid;
+using Content.Shared.Whistle;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Prototypes;
 
@@ -9,20 +10,8 @@ namespace Content.Shared._RMC14.Whistle;
 /// Spawn attached entity for entities in range with <see cref="HumanoidAppearanceComponent"/>.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class RMCWhistleComponent : Component
+public sealed partial class RMCWhistleComponent : WhistleComponent
 {
-    /// <summary>
-    /// Entity prototype to spawn
-    /// </summary>
-    [DataField]
-    public EntProtoId Effect = "WhistleExclamation";
-
-    /// <summary>
-    /// Range value.
-    /// </summary>
-    [DataField]
-    public float Distance = 0;
-
     [DataField, AutoNetworkedField]
     public EntProtoId ActionId = "RMCActionWhistle";
 

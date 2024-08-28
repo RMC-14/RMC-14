@@ -9,7 +9,7 @@ namespace Content.Shared.Whistle;
 /// Spawn attached entity for entities in range with <see cref="HumanoidAppearanceComponent"/>.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class WhistleComponent : Component
+public partial class WhistleComponent : Component
 {
     /// <summary>
     /// Entity prototype to spawn
