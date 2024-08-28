@@ -4,6 +4,7 @@
     types:
       Blunt: 5
       Heat: 5
+      Structural: 27
   tileBreakChance: [0, 0.5, 1]
   tileBreakIntensity: [0, 10, 30]
   tileBreakRerollReduction: 20
