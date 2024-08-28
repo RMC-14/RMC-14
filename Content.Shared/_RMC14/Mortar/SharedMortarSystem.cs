@@ -378,7 +378,7 @@ public abstract class SharedMortarSystem : EntitySystem
             var msg = distance < 1
                 ? Loc.GetString(warningAbove)
                 : Loc.GetString(warning, ("direction", direction));
-            _popup.PopupClient(msg, recipient, recipient, PopupType.LargeCaution);
+            _popup.PopupEntity(msg, recipient, recipient, PopupType.LargeCaution);
         }
     }
 
