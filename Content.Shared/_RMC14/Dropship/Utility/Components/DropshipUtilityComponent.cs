@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Marines.Skills;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
 using System;
@@ -27,4 +28,24 @@ public sealed partial class DropshipUtilityComponent : Component
 
     [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi? UtilityAttachedSprite;
+
+    /// <summary>
+    /// If true, this component will deal with showing the AttachedSprite as a simple sprite.
+    /// Otherwise, it is the duty of the specific Utility System Component to render the AttachedSprite.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool WillRender = true;
+
+    /// <summary>
+    /// Cached target of the weapons terminal
+    /// </summary>
+    [AutoNetworkedField]
+    public EntityUid? Target = null;
+}
+
+[Serializable, NetSerializable]
+public enum DropshipUtilityVisuals
+{
+    Sprite,
+    State,
 }
