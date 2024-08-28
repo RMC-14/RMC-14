@@ -51,6 +51,7 @@ public sealed class PowerLoaderSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly EntityManager _entityManager = default!;
 
     private EntityQuery<PowerLoaderGrabbableComponent> _powerLoaderGrabbableQuery;
 
@@ -78,12 +79,17 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<DropshipWeaponPointComponent, ActivateInWorldEvent>(OnPointActivateInWorld);
         SubscribeLocalEvent<DropshipUtilityPointComponent, ActivateInWorldEvent>(OnPointActivateInWorld);
 
-        SubscribeLocalEvent<PowerLoaderDetachableComponent, DropshipDetachDoAfterEvent>(OnDropshipDetach);
+        SubscribeLocalEvent<DropshipWeaponPointComponent, DropshipDetachDoAfterEvent>(OnDropshipDetach);
+        SubscribeLocalEvent<DropshipUtilityPointComponent, DropshipDetachDoAfterEvent>(OnDropshipDetach);
 
         // Attach events and doAfters
         SubscribeLocalEvent<PowerLoaderAttachableComponent, BeforeRangedInteractEvent>(OnAttachableBeforeRangedInteract);
 
-        SubscribeLocalEvent<PowerLoaderAttachableComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
+        SubscribeLocalEvent<DropshipWeaponPointComponent, GetAttachementSlotEvent>(OnGetSlot);
+        SubscribeLocalEvent<DropshipUtilityPointComponent, GetAttachementSlotEvent>(OnGetSlot);
+
+        SubscribeLocalEvent<DropshipWeaponPointComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
+        SubscribeLocalEvent<DropshipUtilityPointComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
     }
 
     private void OnPowerLoaderMapInit(Entity<PowerLoaderComponent> ent, ref MapInitEvent args)
@@ -241,7 +247,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
 
         var ev = new DropshipDetachDoAfterEvent(EntityManager.GetNetEntity(ent), EntityManager.GetNetEntity(contained));
-        var doAfter = new DoAfterArgs(EntityManager, args.User, detachableComponent.DetachDelay, ev, contained, target)
+        var doAfter = new DoAfterArgs(EntityManager, args.User, detachableComponent.DetachDelay, ev, target, target)
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
@@ -359,26 +365,9 @@ public sealed class PowerLoaderSystem : EntitySystem
         var user = new Entity<PowerLoaderComponent?>(args.User, null);
         var used = args.Used;
 
-
-        // Check the type of dropship attachment point the target is and check if the
-        // context allows for attachment.
-        // (From what I can tell, no event deals with this type of interaction and
-        // targets the interaction target, requiring this to be done)
-        ContainerSlot? slot = null;
-        if (TryComp(target, out DropshipWeaponPointComponent? weaponPointComp))
-        {
-            if (!CanAttachPopup(ref user, (target, weaponPointComp), used, out slot))
-            {
-                return;
-            }
-        }
-        else if (TryComp(target, out DropshipUtilityPointComponent? utilityPointComp))
-        {
-            if (!CanAttachPopup(ref user, (target, utilityPointComp), used, out slot))
-            {
-                return;
-            }
-        }
+        var slotEv = new GetAttachementSlotEvent(_entityManager.GetNetEntity(user), _entityManager.GetNetEntity(used));
+        RaiseLocalEvent(target, slotEv);
+        var slot = slotEv.Slot;
 
         if (slot is null)
         {
@@ -392,7 +381,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
 
         var ev = new DropshipAttachDoAfterEvent(EntityManager.GetNetEntity(target), EntityManager.GetNetEntity(used), slot.ID);
-        var doAfter = new DoAfterArgs(EntityManager, user, attachableComponent.AttachDelay, ev, ent, target, used)
+        var doAfter = new DoAfterArgs(EntityManager, user, attachableComponent.AttachDelay, ev, target, target, used)
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
@@ -400,7 +389,35 @@ public sealed class PowerLoaderSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
-    private void OnDropshipAttach(Entity<PowerLoaderAttachableComponent> ent, ref DropshipAttachDoAfterEvent args)
+    private void OnGetSlot(Entity<DropshipWeaponPointComponent> ent, ref GetAttachementSlotEvent args)
+    {
+        var user = new Entity<PowerLoaderComponent?>(_entityManager.GetEntity(args.User), null);
+        var used = _entityManager.GetEntity(args.Used);
+        if (used is null)
+        {
+            return;
+        }
+
+        CanAttachPopup(ref user, ent, used.Value, out var slot);
+        args.Slot = slot;
+    }
+
+    private void OnGetSlot(Entity<DropshipUtilityPointComponent> ent, ref GetAttachementSlotEvent args)
+    {
+        var user = new Entity<PowerLoaderComponent?>(_entityManager.GetEntity(args.User), null);
+        var used = _entityManager.GetEntity(args.Used);
+        if (used is null)
+        {
+            return;
+        }
+
+        CanAttachPopup(ref user, ent, used.Value, out var slot);
+        args.Slot = slot;
+    }
+
+
+
+    private void OnDropshipAttach(Entity<DropshipWeaponPointComponent> ent, ref DropshipAttachDoAfterEvent args)
     {
         if (args.Cancelled ||
             args.Handled ||
@@ -425,10 +442,38 @@ public sealed class PowerLoaderSystem : EntitySystem
         if (user.Comp != null)
             SyncHands((user, user.Comp));
 
-        SyncAppearance(target);
+        SyncAppearance(ent);
     }
 
-    private void OnDropshipDetach(Entity<PowerLoaderDetachableComponent> ent, ref DropshipDetachDoAfterEvent args)
+    private void OnDropshipAttach(Entity<DropshipUtilityPointComponent> ent, ref DropshipAttachDoAfterEvent args)
+    {
+        if (args.Cancelled ||
+            args.Handled ||
+            args.Target is not { } target ||
+            args.Used is not { } used)
+        {
+            return;
+        }
+
+        if (!TryComp(args.User, out PowerLoaderComponent? powerLoaderComp))
+        {
+            return;
+        }
+
+        var user = new Entity<PowerLoaderComponent>(args.User, powerLoaderComp);
+        var containerEntity = EntityManager.GetEntity(args.ContainerEntity);
+        var containedEntity = EntityManager.GetEntity(args.ContainedEntity);
+
+        var slot = _container.GetContainer(containerEntity, args.SlotId);
+        _container.Insert(containedEntity, slot);
+
+        if (user.Comp != null)
+            SyncHands((user, user.Comp));
+
+        SyncAppearance(ent);
+    }
+
+    private void OnDropshipDetach(Entity<DropshipWeaponPointComponent> ent, ref DropshipDetachDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled || args.Target is not { } target)
             return;
@@ -466,7 +511,36 @@ public sealed class PowerLoaderSystem : EntitySystem
             SyncHands((user, user.Comp));
         }
 
-        SyncAppearance(target);
+        SyncAppearance(ent);
+    }
+
+    private void OnDropshipDetach(Entity<DropshipUtilityPointComponent> ent, ref DropshipDetachDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled || args.Target is not { } target)
+            return;
+
+        if (!TryComp(args.User, out PowerLoaderComponent? powerLoaderComp))
+        {
+            return;
+        }
+
+
+        args.Handled = true;
+
+        var user = new Entity<PowerLoaderComponent>(args.User, powerLoaderComp);
+
+        var container = EntityManager.GetEntity(args.ContainerEntity);
+        var contained = EntityManager.GetEntity(args.ContainedEntity);
+
+        _container.RemoveEntity(container, contained);
+
+        if (user.Comp != null)
+        {
+            PickUp((user, user.Comp), contained);
+            SyncHands((user, user.Comp));
+        }
+
+        SyncAppearance(ent);
     }
 
     private void OnActivePilotPreventCollide(Entity<ActivePowerLoaderPilotComponent> ent, ref PreventCollideEvent args)
@@ -793,11 +867,8 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
     }
 
-    private void SyncAppearance(Entity<DropshipWeaponPointComponent?> point)
+    private void SyncAppearance(Entity<DropshipWeaponPointComponent> point)
     {
-        if (!Resolve(point, ref point.Comp, false))
-            return;
-
         if (!_container.TryGetContainer(point, point.Comp.WeaponContainerSlotId, out var weaponContainer) ||
             weaponContainer.ContainedEntities.Count == 0)
         {
@@ -842,6 +913,11 @@ public sealed class PowerLoaderSystem : EntitySystem
             _appearance.SetData(point, DropshipWeaponVisuals.Sprite, rsi.RsiPath.ToString());
             _appearance.SetData(point, DropshipWeaponVisuals.State, rsi.RsiState);
         }
+    }
+
+    private void SyncAppearance(Entity<DropshipUtilityPointComponent> point)
+    {
+
     }
 
     public override void Update(float frameTime)
