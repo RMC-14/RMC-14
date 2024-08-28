@@ -9,6 +9,32 @@
     layers:
     - map: [ "mortar" ]
       state: mortar_m402_carry
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+      mortar:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20
+        layer:
+        - Impassable
+        mask:
+        - Impassable
+        hard: false
+  - type: CollisionWake
+    enabled: false
+  - type: Anchorable
+    flags:
+    - Unanchorable
   - type: Item
     size: Huge
   - type: Corrodible
@@ -26,14 +52,20 @@
     interfaces:
       enum.MortarUiKey.Key:
         type: MortarBui
+      enum.RMCCameraUiKey.Key:
+        type: RMCCameraBui
   - type: ActivatableUI
     key: enum.MortarUiKey.Key
+  - type: RMCCameraComputer
+    id: RMCMortarKit
+    title: rmc-mortar-camera-title
+  - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.MortarVisualLayers.State:
         mortar:
-          enum.MortarVisuals.Item: { state: mortar_m402_carry }
-          enum.MortarVisuals.Deployed: { state: mortar_m402 }
+          Item: { state: mortar_m402_carry }
+          Deployed: { state: mortar_m402 }
   - type: InteractedBlacklist
     blacklist:
       components:
@@ -85,3 +117,34 @@
     sprite: _RMC14/Objects/Weapons/mortar.rsi
     state: mortar_ammo_flr
   - type: MortarShell
+  - type: MortarCameraShell
+
+- type: entity
+  id: RMCMortarFlare
+  name: illumination flare
+  description: It's really bright, and unreachable.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: PointLight
+    enabled: true
+    radius: 5
+  - type: RandomTimedDespawn
+    min: 270
+    max: 330
+
+- type: entity
+  id: RMCMortarCamera
+  name: para-cam
+  components:
+  - type: Transform
+    anchored: true
+  - type: Eye
+    drawFov: false
+  - type: RMCCamera
+    id: RMCMortarKit
+  - type: MortarCamera
+  - type: TimedDespawn
+    lifetime: 180

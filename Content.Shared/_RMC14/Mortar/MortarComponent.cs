@@ -45,4 +45,7 @@ public sealed partial class MortarComponent : Component
 
     [DataField, AutoNetworkedField]
     public int MaxDial = 10;
+
+    [DataField, AutoNetworkedField]
+    public string FixtureId = "mortar";
 }

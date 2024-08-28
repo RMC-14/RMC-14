@@ -1,4 +1,6 @@
-﻿using Content.Shared._RMC14.Explosion;
+﻿using Content.Shared._RMC14.Camera;
+using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Construction.Components;
@@ -9,9 +11,11 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -21,17 +25,23 @@ namespace Content.Shared._RMC14.Mortar;
 public abstract class SharedMortarSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly FixtureSystem _fixture = default!;
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private EntityQuery<TransformComponent> _transformQuery;
 
@@ -50,11 +60,14 @@ public abstract class SharedMortarSystem : EntitySystem
         SubscribeLocalEvent<MortarComponent, ExaminedEvent>(OnMortarExamined);
         SubscribeLocalEvent<MortarComponent, ActivatableUIOpenAttemptEvent>(OnMortarActivatableUIOpenAttempt);
 
+        SubscribeLocalEvent<MortarCameraShellComponent, MortarShellLandEvent>(OnMortarCameraShellLand);
+
         Subs.BuiEvents<MortarComponent>(MortarUiKey.Key,
             subs =>
             {
                 subs.Event<MortarTargetBuiMsg>(OnMortarTargetBui);
                 subs.Event<MortarDialBuiMsg>(OnMortarDialBui);
+                subs.Event<MortarViewCamerasMsg>(OnMortarViewCameras);
             });
     }
 
@@ -77,11 +90,15 @@ public abstract class SharedMortarSystem : EntitySystem
         mortar.Comp.Deployed = true;
         Dirty(mortar);
 
+        if (_fixture.GetFixtureOrNull(mortar, mortar.Comp.FixtureId) is { } fixture)
+            _physics.SetHard(mortar, fixture, true);
+
         _appearance.SetData(mortar, MortarVisualLayers.State, MortarVisuals.Deployed);
 
         var xform = Transform(mortar);
         var coordinates = _transform.GetMoverCoordinates(mortar, xform);
-        _transform.SetCoordinates(mortar, coordinates);
+        var rotation = Transform(user).LocalRotation.GetCardinalDir().ToAngle();
+        _transform.SetCoordinates(mortar, xform, coordinates, rotation);
         _transform.AnchorEntity((mortar, xform));
 
         if (!_rmcPlanet.IsOnPlanet(coordinates))
@@ -210,6 +227,10 @@ public abstract class SharedMortarSystem : EntitySystem
 
         mortar.Comp.Deployed = false;
         Dirty(mortar);
+
+        if (_fixture.GetFixtureOrNull(mortar, mortar.Comp.FixtureId) is { } fixture)
+            _physics.SetHard(mortar, fixture, false);
+
         _appearance.SetData(mortar, MortarVisualLayers.State, MortarVisuals.Item);
     }
 
@@ -230,6 +251,22 @@ public abstract class SharedMortarSystem : EntitySystem
             args.Cancel();
     }
 
+    private void OnMortarCameraShellLand(Entity<MortarCameraShellComponent> ent, ref MortarShellLandEvent args)
+    {
+        var coords = args.Coordinates;
+        _audio.PlayPvs(ent.Comp.Sound, coords);
+
+        var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(coords);
+        while (anchored.MoveNext(out var uid))
+        {
+            if (HasComp<MortarCameraComponent>(uid))
+                QueueDel(uid);
+        }
+
+        var flare = Spawn(ent.Comp.Flare, coords);
+        _metaData.SetEntityName(flare, Loc.GetString("rmc-mortar-camera-name", ("x", coords.X), ("y", coords.Y)));
+    }
+
     private void OnMortarTargetBui(Entity<MortarComponent> mortar, ref MortarTargetBuiMsg args)
     {
         Cap(ref args.Target.X, mortar.Comp.MaxTarget);
@@ -242,11 +279,12 @@ public abstract class SharedMortarSystem : EntitySystem
             BreakOnMove = true,
         };
 
-        _doAfter.TryStartDoAfter(doAfter);
-
-        var selfMsg = Loc.GetString("rmc-mortar-target-start-self", ("mortar", mortar));
-        var othersMsg = Loc.GetString("rmc-mortar-target-start-others", ("user", user), ("mortar", mortar));
-        _popup.PopupPredicted(selfMsg, othersMsg, user, user);
+        if (_doAfter.TryStartDoAfter(doAfter))
+        {
+            var selfMsg = Loc.GetString("rmc-mortar-target-start-self", ("mortar", mortar));
+            var othersMsg = Loc.GetString("rmc-mortar-target-start-others", ("user", user), ("mortar", mortar));
+            _popup.PopupPredicted(selfMsg, othersMsg, user, user);
+        }
     }
 
     private void OnMortarDialBui(Entity<MortarComponent> mortar, ref MortarDialBuiMsg args)
@@ -261,11 +299,17 @@ public abstract class SharedMortarSystem : EntitySystem
             BreakOnMove = true,
         };
 
-        _doAfter.TryStartDoAfter(doAfter);
+        if (_doAfter.TryStartDoAfter(doAfter))
+        {
+            var selfMsg = Loc.GetString("rmc-mortar-dial-start-self", ("mortar", mortar));
+            var othersMsg = Loc.GetString("rmc-mortar-dial-start-others", ("user", user), ("mortar", mortar));
+            _popup.PopupPredicted(selfMsg, othersMsg, user, user);
+        }
+    }
 
-        var selfMsg = Loc.GetString("rmc-mortar-dial-start-self", ("mortar", mortar));
-        var othersMsg = Loc.GetString("rmc-mortar-dial-start-others", ("user", user), ("mortar", mortar));
-        _popup.PopupPredicted(selfMsg, othersMsg, user, user);
+    private void OnMortarViewCameras(Entity<MortarComponent> ent, ref MortarViewCamerasMsg args)
+    {
+        _ui.OpenUi(ent.Owner, RMCCameraUiKey.Key, args.Actor);
     }
 
     private void DeployMortar(Entity<MortarComponent> mortar, EntityUid user)
@@ -379,6 +423,10 @@ public abstract class SharedMortarSystem : EntitySystem
             if (time >= active.LandAt)
             {
                 _transform.SetCoordinates(uid, active.Coordinates);
+
+                var ev = new MortarShellLandEvent(active.Coordinates);
+                RaiseLocalEvent(uid, ref ev);
+
                 _rmcExplosion.TriggerExplosive(uid);
 
                 if (!EntityManager.IsQueuedForDeletion(uid))

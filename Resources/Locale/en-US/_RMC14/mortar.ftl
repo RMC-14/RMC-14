@@ -14,6 +14,10 @@ rmc-mortar-target-start-self = You start adjusting {THE($mortar)}'s firing angle
 rmc-mortar-target-start-others = {$user} starts adjusting {THE($mortar)}'s firing angle and distance.
 rmc-mortar-target-finish-self = You finish adjusting {THE($mortar)}'s firing angle and distance to match the new coordinates.
 rmc-mortar-target-finish-others = {$user} finishes adjusting {THE($mortar)}'s firing angle and distance.
+rmc-mortar-dial-start-self = You start dialing {THE($mortar)}'s firing angle and distance to match the new coordinates.
+rmc-mortar-dial-start-others = {$user} starts dialing {THE($mortar)}'s firing angle and distance.
+rmc-mortar-dial-finish-self = You finish dialing {THE($mortar)}'s firing angle and distance to match the new coordinates.
+rmc-mortar-dial-finish-others = {$user} finishes dialing {THE($mortar)}'s firing angle and distance.
 
 rmc-mortar-shell-load-start-self = You start loading {THE($shell)} into {THE($mortar)}.
 rmc-mortar-shell-load-start-others = {$user} starts loading {THE($shell)} into {THE($mortar)}.
@@ -36,3 +40,6 @@ rmc-mortar-offset-set = Dial Offset
 
 rmc-mortar-view-camera = View
   Camera
+
+rmc-mortar-camera-title = Mortar Camera Interface
+rmc-mortar-camera-name = Para-Cam ({$x}):({$y})

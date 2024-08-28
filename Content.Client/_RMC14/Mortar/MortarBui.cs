@@ -26,5 +26,7 @@ public sealed class MortarBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 
         _window.SetOffsetButton.OnPressed += _ =>
             SendPredictedMessage(new MortarDialBuiMsg((_window.DialX.Value, _window.DialY.Value)));
+
+        _window.ViewCameraButton.OnPressed += _ => SendPredictedMessage(new MortarViewCamerasMsg());
     }
 }

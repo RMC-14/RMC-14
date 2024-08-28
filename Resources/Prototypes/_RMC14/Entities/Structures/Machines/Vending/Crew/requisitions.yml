@@ -115,8 +115,8 @@
       #  amount: 2
       - id: CMBackpackWelder
         amount: 2
-      #- id: Mortar Shell Backpack
-      #  amount: 1
+      - id: CMBackpackMortar
+        amount: 1
       - id: RMCSatchelWelder
         amount: 5
       #- id: IMP Ammo Rack
@@ -146,8 +146,8 @@
       #  amount: 2
       #- id: M276 Shotgun Shell Loading Rig
       #  amount: 10
-      #- id: M276 Mortar Operator Belt
-      #  amount: 2
+      - id: CMBeltMortar
+        amount: 2
     - name: Pouches
       entries:
       - id: RMCPouchAutoinjector

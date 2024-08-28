@@ -172,8 +172,14 @@
         crate: RMCCrateMedicalFilled
       - cost: 2100
         crate: RMCCrateMedicalPill
-#    - name: Mortar
-#      entries: []
+    - name: Mortar
+      entries:
+      - cost: 6000
+        crate: RMCCrateMortarKit
+      - cost: 2000
+        crate: RMCCrateMortarShellHE
+      - cost: 2000
+        crate: RMCCrateMortarShellFlare
 #    - name: Operations
 #      entries: []
 #    - name: Reagent tanks

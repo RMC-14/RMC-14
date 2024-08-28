@@ -22,11 +22,11 @@
         <BoxContainer Orientation="Horizontal">
             <BoxContainer Orientation="Vertical" Margin="0 10 0 0">
                 <BoxContainer Orientation="Horizontal">
-                    <Label Text="{Loc 'rmc-mortar-target-x'}" />
+                    <Label Text="{Loc 'rmc-mortar-offset-x'}" />
                     <SpinBox Name="DialX" Access="Public" />
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal">
-                    <Label Text="{Loc 'rmc-mortar-target-y'}" />
+                    <Label Text="{Loc 'rmc-mortar-offset-y'}" />
                     <SpinBox Name="DialY" Access="Public" />
                 </BoxContainer>
                 <Button Name="SetOffsetButton" Access="Public"

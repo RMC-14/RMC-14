@@ -1,7 +1,7 @@
-﻿namespace Content.Server._RMC14.Sentries;
+﻿namespace Content.Server._RMC14.Spawners;
 
 [RegisterComponent]
-[Access(typeof(RMCSentrySystem))]
+[Access(typeof(RMCSpawnerSystem))]
 public sealed partial class TimedDespawnOnLandingComponent : Component
 {
     [DataField]
