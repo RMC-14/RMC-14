@@ -22,7 +22,7 @@
   components:
   - type: CMVendorBundle
     bundle:
-    - ArmorHelmetM10 # TODO RMC14 M4
+    - CMArmorHelmetM12
     - CMVendorHeadsetSquadFTL
     - JumpsuitMarine
     - CMHandsBlackMarine
