@@ -44,6 +44,9 @@ public abstract class SharedDropshipSystem : EntitySystem
         SubscribeLocalEvent<DropshipWeaponPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
         SubscribeLocalEvent<DropshipWeaponPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
 
+        SubscribeLocalEvent<DropshipUtilityPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
+        SubscribeLocalEvent<DropshipUtilityPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
+ 
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key,
             subs =>
             {
@@ -203,7 +206,28 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
     }
 
+    private void OnAttachmentPointMapInit(Entity<DropshipUtilityPointComponent> ent, ref MapInitEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (TryGetGridDropship(ent, out var dropship))
+        {
+            dropship.Comp.AttachmentPoints.Add(ent);
+            Dirty(dropship);
+        }
+    }
+
     private void OnAttachmentPointRemove<T>(Entity<DropshipWeaponPointComponent> ent, ref T args)
+    {
+        if (TryGetGridDropship(ent, out var dropship))
+        {
+            dropship.Comp.AttachmentPoints.Remove(ent);
+            Dirty(dropship);
+        }
+    }
+
+    private void OnAttachmentPointRemove<T>(Entity<DropshipUtilityPointComponent> ent, ref T args)
     {
         if (TryGetGridDropship(ent, out var dropship))
         {
