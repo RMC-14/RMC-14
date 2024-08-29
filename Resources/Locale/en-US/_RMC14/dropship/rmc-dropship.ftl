@@ -59,6 +59,11 @@ rmc-dropship-weapons-fire-not-skilled = You don't have the training to fire this
 rmc-dropship-weapons-fire-no-ammo = {$weapon} has no ammo.
 rmc-dropship-weapons-fire-cooldown = {$weapon} just fired, wait for it to cool down.
 
+rmc-dropship-utility-activate-not-flying = Utility Systems can only activate while in flight.
+rmc-dropship-utility-not-flyby = {$utility} can only be used during flyby.
+rmc-dropship-utility-not-skilled = You don't have the training to use this system!
+rmc-dropship-utility-cooldown = {$utility} has been recently used, wait for it to cooldown.
+
 rmc-dropship-flyby-no-skill = You don't have the skill to perform a flyby.
 
 rmc-dropship-fabricator-title = Part Fabricator

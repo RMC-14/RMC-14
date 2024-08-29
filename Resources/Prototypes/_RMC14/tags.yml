@@ -75,3 +75,6 @@
 
 - type: Tag
   id: RMCDropshipWeaponPoint
+
+- type: Tag
+  id: RMCDropshipUtilityPoint

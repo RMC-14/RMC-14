@@ -1,1 +1,41 @@
+- type: entity
+  abstract: true
+  parent: RMCDropshipAttachmentBase
+  id: RMCDropshipAttachmentUtility
+  components:
+  - type: DropshipFabricatorPrintable
+    category: Equipment
+    cost: 400
+  - type: PowerLoaderGrabbable
+    delay: 1
+  - type: DropshipUtility
+    skills:
+      all:
+        RMCSkillPilot: 2
+  - type: PowerLoaderAttachable
+    attachDelay: 7
+    attachableTypes:
+    - RMCDropshipUtilityPoint
+  - type: PowerLoaderDetachable
+    detachDelay: 7
 
+# - type: entity
+#   parent: RMCDropshipAttachmentUtility
+#   id: RMCDropshipAttachmentMedevac
+#   name: RMU-4M Medevac System
+#   description: A winch system to lift injured marines on medical stretchers onto the dropship. Attaches to the crew served attach point at the back of the drop-ship.
+#   components:
+#   - type: Sprite
+#     layers:
+#     - state: medevac_system
+#       offset: 0.5, 0.5
+#   - type: DropshipFabricatorPrintable
+#     cost: 300
+#   - type: DropshipUtility
+#     activateDelay: 60
+#     activateInTransit: true
+#     skills:
+#       all:
+#         RMCSkillMedical: 2
+#   - type: Medivac
+#   - type: AnimationPlayer

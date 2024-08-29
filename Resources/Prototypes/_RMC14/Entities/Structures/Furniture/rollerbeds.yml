@@ -71,6 +71,14 @@
   - type: Appearance
 
 - type: entity
+  parent: CMRollerBed
+  id: RMCMedevacStretcher
+  name: Medevac stretcher
+  description: A collapsible stretcher that can be activated to send patients to an overhead dropship.
+  components:
+  - type: MedivacStretcher
+
+- type: entity
   parent: CMPortableSurgicalBed
   id: CMPortableSurgicalBedSpawnFolded
   suffix: folded
