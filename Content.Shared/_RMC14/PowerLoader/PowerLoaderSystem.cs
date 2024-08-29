@@ -367,7 +367,7 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         var slotEv = new GetAttachementSlotEvent(_entityManager.GetNetEntity(user), _entityManager.GetNetEntity(used));
         RaiseLocalEvent(target, slotEv);
-        var slot = slotEv.Slot;
+        var slot = _container.EnsureContainer<ContainerSlot>(target, slotEv.slotId);
 
         if (slot is null)
         {
@@ -398,8 +398,17 @@ public sealed class PowerLoaderSystem : EntitySystem
             return;
         }
 
-        CanAttachPopup(ref user, ent, used.Value, out var slot);
-        args.Slot = slot;
+        ContainerSlot? slot = null;
+        if (args.BeingAttached)
+            CanAttachPopup(ref user, ent, used.Value, out slot);
+        else
+            CanDetachPopup(ref user, ent, out slot);
+
+        if (slot is null)
+        {
+            return;
+        }
+        args.slotId = slot.ID;
     }
 
     private void OnGetSlot(Entity<DropshipUtilityPointComponent> ent, ref GetAttachementSlotEvent args)
@@ -411,8 +420,17 @@ public sealed class PowerLoaderSystem : EntitySystem
             return;
         }
 
-        CanAttachPopup(ref user, ent, used.Value, out var slot);
-        args.Slot = slot;
+        ContainerSlot? slot = null;
+        if (args.BeingAttached)
+            CanAttachPopup(ref user, ent, used.Value, out slot);
+        else
+            CanDetachPopup(ref user, ent, out slot);
+
+        if (slot is null)
+        {
+            return;
+        }
+        args.slotId = slot.ID;
     }
 
 
