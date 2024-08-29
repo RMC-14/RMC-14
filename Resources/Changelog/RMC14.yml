@@ -1,39 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added xeno roles and playtime trackers.
-    type: Add
-  id: 123
-  time: '2024-06-01T05:07:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2182
-- author: Errant
-  changes:
-  - message: Walking on resin/weeds now speeds up xenos and slows down everyone else.
-    type: Add
-  id: 124
-  time: '2024-06-02T09:41:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2201
-- author: Whisper
-  changes:
-  - message: Added mre box
-    type: Add
-  id: 125
-  time: '2024-06-02T08:37:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2186
-- author: DrSmugleaf
-  changes:
-  - message: The hive core now slowly produces lesser drones.
-    type: Add
-  id: 126
-  time: '2024-06-02T11:05:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2199
-- author: Whisper
-  changes:
-  - message: Added portable fire extinguisher
-    type: Add
-  id: 127
-  time: '2024-06-03T11:14:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2219
 - author: Whisper
   changes:
   - message: All primary weapons now have AP ammo
@@ -4384,5 +4349,41 @@
   id: 622
   time: '2024-08-24T12:05:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3818
+- author: Vermidia
+  changes:
+  - message: CMO now has squad and engi comms
+    type: Add
+  id: 623
+  time: '2024-08-27T00:16:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3846
+- author: Whisper
+  changes:
+  - message: Added Darting 'Sleepy' Groth figurine
+    type: Add
+  id: 624
+  time: '2024-08-27T00:25:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3830
+- author: Vermidia
+  changes:
+  - message: Added the Crusher's and Lurker's missing slow on hit. The Lurker's slow
+      only applies to knocked out marines.
+    type: Fix
+  id: 625
+  time: '2024-08-27T00:29:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3843
+- author: crystalHex
+  changes:
+  - message: Added descriptions to bundles/kits.
+    type: Tweak
+  id: 626
+  time: '2024-08-27T00:30:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3834
+- author: MetalSage
+  changes:
+  - message: Fixed accesses on windoors
+    type: Fix
+  id: 627
+  time: '2024-08-27T09:09:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3854
 Name: RMC14
 Order: -1
