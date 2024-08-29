@@ -13,17 +13,19 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Whistle;
 
-public sealed class RMCWhistleSystem : WhistleSystem
+public sealed class RMCWhistleSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private readonly WhistleSystem _whistle = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
+        SubscribeLocalEvent<RMCWhistleComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<RMCWhistleComponent, GetItemActionsEvent>(OnGetItemActions);
         SubscribeLocalEvent<RMCWhistleComponent, SoundActionEvent>(OnWhistleAction);
     }
@@ -52,13 +54,13 @@ public sealed class RMCWhistleSystem : WhistleSystem
             _useDelay.TryResetDelay((uid, useDelayComp));
         }
 
-        TryMakeLoudWhistle(uid, args.Performer, component);
+        _whistle.TryMakeLoudWhistle(uid, args.Performer);
         args.Handled = true;
     }
 
-    public override void OnUseInHand(EntityUid uid, WhistleComponent component, UseInHandEvent args)
+    public void OnUseInHand(EntityUid uid, RMCWhistleComponent component, UseInHandEvent args)
     {
-        base.OnUseInHand(uid, component, args);
+        _whistle.TryMakeLoudWhistle(uid, args.User);
 
         if (TryComp<UseDelayComponent>(uid, out var useDelay))
         {
