@@ -777,4 +777,4 @@ CMFogWallShort: RMCFogWall15
 CMSeatBase: CMChair
 
 # 2024-08-28
-RMCScrubsLightBlue: CMScrubsNurse
+CMScrubsNurse: RMCScrubsLightBlue
