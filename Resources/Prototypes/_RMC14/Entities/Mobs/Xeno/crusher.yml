@@ -63,6 +63,9 @@
         Brute: 40
   - type: CrusherShield
   - type: XenoShield
+  - type: XenoMeleeSlow
+    slowTime: 2
+    effect: RMCEffectCrusherSlow
   - type: Tackle # min: 2, max: 6
     threshold: 5
     stun: 5

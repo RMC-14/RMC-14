@@ -164,4 +164,7 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCDropshipHijackTravelTimeSeconds =
         CVarDef.Create("rmc.dropship_hijack_travel_time_seconds", 180, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCEntitiesLogDelete =
+        CVarDef.Create("rmc.entities_log_delete", false, CVar.SERVER | CVar.SERVERONLY);
 }
