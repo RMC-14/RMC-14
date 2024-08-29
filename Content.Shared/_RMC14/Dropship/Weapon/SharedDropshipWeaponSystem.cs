@@ -64,6 +64,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private readonly EntityManager _entityManager = default!;
 
     private static readonly EntProtoId DropshipTargetMarker = "RMCLaserDropshipTarget";
 
@@ -129,6 +130,25 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     public int GetNextTargetID()
     {
         return _nextId++;
+    }
+
+    private void SetTarget(Entity<DropshipTerminalWeaponsComponent> dropshipWeaponsTerminal, EntityUid? newTarget)
+    {
+        if (newTarget == dropshipWeaponsTerminal.Comp.Target)
+        {
+            return;
+        }
+        if (!_dropship.TryGetGridDropship(dropshipWeaponsTerminal, out var dropship))
+        {
+            return;
+        }
+        dropshipWeaponsTerminal.Comp.Target = newTarget;
+        var ev = new DropshipTargetChangedEvent(_entityManager.GetNetEntity(newTarget));
+
+        foreach (var attachmentPoint in dropship.Comp.AttachmentPoints)
+        {
+            RaiseLocalEvent(attachmentPoint, ev);
+        }
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -382,7 +402,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (terminal.Target == ent)
             {
                 RemovePvsActors((uid, terminal));
-                terminal.Target = null;
+                SetTarget((uid, terminal), null);
             }
 
             var span = CollectionsMarshal.AsSpan(terminal.Targets);
@@ -483,7 +503,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (!IsValidTarget(target))
         {
             RemovePvsActors(ent);
-            ent.Comp.Target = null;
+            SetTarget(ent, null);
             Dirty(ent);
             return;
         }
@@ -629,7 +649,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         }
 
         RemovePvsActors(ent);
-        ent.Comp.Target = target;
+        SetTarget(ent, target);
         _eye.SetOffset(target.Value, ent.Comp.Offset);
         AddPvsActors(ent);
 
