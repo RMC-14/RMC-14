@@ -99,7 +99,7 @@
     sprite: _RMC14/Objects/Weapons/mortar.rsi
     state: mortar_ammo_he
   - type: Explosive
-    explosionType: RMC
+    explosionType: RMCMortar
     maxIntensity: 30 # max 150 brute, 150 burn
     intensitySlope: 5
     totalIntensity: 800
@@ -128,6 +128,7 @@
     anchored: true
   - type: Physics
     bodyType: Static
+    canCollide: false
   - type: PointLight
     enabled: true
     radius: 5
