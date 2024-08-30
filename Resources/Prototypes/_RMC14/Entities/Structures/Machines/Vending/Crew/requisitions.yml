@@ -71,8 +71,8 @@
       #  amount: 4
       #- id: M40 HPDP White Phosphorus Smoke Grenade
       #  amount: 4
-      #- id: M40 HSDP Smoke Grenade
-      #  amount: 5
+      - id: CMGrenadeSmoke
+        amount: 5
       #- id: M74 AGM-Frag Airburst Grenade
       #  amount: 4
       #- id: M74 AGM-Incendiary Airburst Grenade
