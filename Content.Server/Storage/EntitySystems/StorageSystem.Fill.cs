@@ -59,6 +59,8 @@ public sealed partial class StorageSystem
                 continue;
             }
 
+            var ev = new CMStorageItemFillEvent((ent, itemComp), storage);
+            RaiseLocalEvent(entity, ref ev);
             items.Add((ent, itemComp));
         }
 

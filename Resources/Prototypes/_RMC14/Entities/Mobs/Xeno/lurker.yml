@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoLurker
   name: Lurker
   description: A beefy, fast alien with sharp claws.
@@ -57,13 +58,15 @@
     knockdownRequiresInvisibility: true
   - type: XenoTurnInvisible
   - type: XenoCripplingStrike
+  - type: XenoMeleeSlow
+    requiresKnockDown: true
   - type: MeleeWeapon
     attackRate: 0.75
     damage:
       groups:
         Brute: 35
-  - type: Tackle
-    threshold: 4
+  - type: Tackle # min: 2, max: 6
+    threshold: 5
     stun: 5
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.7

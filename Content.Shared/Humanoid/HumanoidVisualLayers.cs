@@ -6,6 +6,7 @@ namespace Content.Shared.Humanoid
     [Serializable, NetSerializable]
     public enum HumanoidVisualLayers : byte
     {
+        Special, // for the cat ears
         Tail,
         Hair,
         FacialHair,
@@ -20,6 +21,7 @@ namespace Content.Shared.Humanoid
         RArm,
         LArm,
         RHand,
+
         LHand,
         RLeg,
         LLeg,
@@ -29,5 +31,6 @@ namespace Content.Shared.Humanoid
         StencilMask,
         Ensnare,
         Fire,
+
     }
 }

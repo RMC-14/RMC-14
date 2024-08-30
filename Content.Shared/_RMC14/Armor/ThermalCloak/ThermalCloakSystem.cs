@@ -1,21 +1,21 @@
 using Content.Shared._RMC14.Chemistry;
-using Content.Shared._RMC14.Stealth;
-using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared._RMC14.NightVision;
+using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.Actions;
-using Content.Shared.Whitelist;
+using Content.Shared.Explosion.Components.OnTrigger;
+using Content.Shared.Humanoid;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
-using Content.Shared.Interaction.Events;
-using Content.Shared.Explosion.Components.OnTrigger;
-using Robust.Shared.Timing;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Armor.ThermalCloak;
 
@@ -25,6 +25,7 @@ namespace Content.Shared._RMC14.Armor.ThermalCloak;
 public sealed class ThermalCloakSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoidSystem = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -76,6 +77,9 @@ public sealed class ThermalCloakSystem : EntitySystem
 
     private void OnEquipped(Entity<ThermalCloakComponent> ent, ref GotEquippedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (!_inventory.InSlotWithFlags((ent, null, null), SlotFlags.BACK))
             return;
 
@@ -103,6 +107,7 @@ public sealed class ThermalCloakSystem : EntitySystem
         {
             var activeInvisibility = EnsureComp<EntityActiveInvisibleComponent>(user);
             activeInvisibility.Opacity = ent.Comp.Opacity;
+            Dirty(user, activeInvisibility);
 
             ent.Comp.Enabled = true;
             turnInvisible.Enabled = true;
@@ -120,6 +125,8 @@ public sealed class ThermalCloakSystem : EntitySystem
                 EnsureComp<EntityIFFComponent>(user);
 
             turnInvisible.UncloakTime = _timing.CurTime; // Just in case
+
+            ToggleLayers(user, ent.Comp.CloakedHideLayers, false);
 
             var popupOthers = Loc.GetString("rmc-cloak-activate-others", ("user", user));
             _popup.PopupPredicted(Loc.GetString("rmc-cloak-activate-self"), popupOthers, user, user, PopupType.Medium);
@@ -161,6 +168,8 @@ public sealed class ThermalCloakSystem : EntitySystem
                 var popupOthers = Loc.GetString("rmc-cloak-deactivate-others", ("user", user));
                 _popup.PopupPredicted(Loc.GetString("rmc-cloak-deactivate-self"), popupOthers, user, user, PopupType.Medium);
             }
+
+            ToggleLayers(user, ent.Comp.CloakedHideLayers, true);
 
             if (ent.Comp.HideNightVision)
                EnsureComp<RMCNightVisionVisibleComponent>(user);
@@ -228,5 +237,13 @@ public sealed class ThermalCloakSystem : EntitySystem
         }
 
         return null;
+    }
+
+    private void ToggleLayers(EntityUid equipee, HashSet<HumanoidVisualLayers> layers, bool showLayers)
+    {
+        foreach (HumanoidVisualLayers layer in layers)
+        {
+            _humanoidSystem.SetLayerVisibility(equipee, layer, showLayers);
+        }
     }
 }

@@ -5,6 +5,11 @@
 
 - type: tile
   parent: CMFloorSteel
+  id: CMFloorSteelPrisonBrightClean
+  sprite: /Textures/_RMC14/Tiles/prison/bright_clean.png
+
+- type: tile
+  parent: CMFloorSteel
   id: CMFloorSteelPrisonScorched
   sprite: /Textures/_RMC14/Tiles/prison/floorscorched.png
   variants: 2

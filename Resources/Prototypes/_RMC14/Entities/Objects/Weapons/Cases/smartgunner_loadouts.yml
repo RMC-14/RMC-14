@@ -23,3 +23,18 @@
     - id: RMCMagazineSmartGun
     - id: RMCMagazineSmartGun
     - id: RMCMagazineSmartGun
+
+- type: entity
+  parent: CMSmartGunOperatorEquipmentCase
+  id: CMSmartGunOperatorEquipmentCaseBelt
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,1
+  - type: StorageFill
+    contents:
+    - id: RMCGlassesSmartGunSight
+    - id: RMCSmartGun
+    - id: RMCPowerCellSmartgun
+    - id: CMArmorSmartGunCombatHarness
+    - id: CMBeltSmartGunOperatorFilled

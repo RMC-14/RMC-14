@@ -57,6 +57,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewCombatCorrespondent
   name: essential reporter's set
+  description: Contains a pen and a clipboard, a flashlight and binoculars.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/paper.rsi

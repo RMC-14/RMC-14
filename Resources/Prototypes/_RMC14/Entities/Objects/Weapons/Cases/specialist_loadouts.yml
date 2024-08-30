@@ -119,9 +119,9 @@
     - id: RMCArmorHelmetM3Scout
     - id: RMCGlassesM4SPRBattleSight
     - id: RMCMagazineRifleM4SPRA19
-    - id: RMCMagazineRifleM4SPRA19 
-    - id: RMCMagazineRifleM4SPRA19 
-    - id: RMCMagazineRifleM4SPRA19 
+    - id: RMCMagazineRifleM4SPRA19
+    - id: RMCMagazineRifleM4SPRA19
+    - id: RMCMagazineRifleM4SPRA19
     - id: RMCMagazineRifleM4SPRA19 # TODO: RMCMagazineRifleM4SPRA19Incendiary
     - id: RMCMagazineRifleM4SPRA19 # TODO: RMCMagazineRifleM4SPRA19Incendiary
     - id: RMCMagazineRifleM4SPRA19 # TODO: RMCMagazineRifleM4SPRA19Impact
@@ -134,7 +134,8 @@
     - id: RMCThermalTarpFolded
 #    - id: RMCPlasticExplosives
 #      amount: 2
-#    - id: CMBinoculars
+    - id: RMCLaserDesignatorScout
+    - id: RMCScoutShoes
   - type: CMChangeUserOnVend
     addComponents:
     - type: ScoutWhitelist

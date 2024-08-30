@@ -35,6 +35,8 @@
     spawn: RMCSmokeAcid
     range: 2
   - type: DamageOverTime
+    affectsDead: false
+    affectsInfectedNested: false
     damage:
       groups:
         Burn: 20
@@ -43,6 +45,63 @@
     barricadeDamage:
       types:
         Heat: 11.5
+
+- type: entity
+  id: RMCSmokeNeurotoxin
+  name: neurotoxin gas
+  noSpawn: true
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        mask:
+        - ItemMask
+        layer:
+        - SlipLayer
+  - type: Occluder
+  - type: Sprite
+    sprite: _RMC14/Effects/smoke.rsi
+    state: smoke2
+    color: "#FFBF58"
+  - type: TimedDespawn
+    lifetime: 10
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Appearance
+  - type: ActiveEdgeSpreader
+  - type: EdgeSpreader
+    id: RMCSmokeNeurotoxin
+  - type: EvenSmoke
+    spawn: RMCSmokeNeurotoxin
+    range: 3
+  - type: NeurotoxinInjector
+    neuroPerSecond: 6
+    affectsDead: false
+    affectsInfectedNested: false
+    toxinDamage:
+        groups:
+          Toxin: 2
+    oxygenDamage:
+        types:
+          Asphyxiation: 150
+    coughDamage:
+        groups:
+          Brute: 5
+  - type: DamageOverTime
+    affectsDead: false
+    affectsInfectedNested: false
+    damage:
+      types:
+        Asphyxiation: 5
+    barricadeDamage: {} # This is required...
 
 - type: entity
   parent: RMCSmokeAcid
@@ -54,6 +113,20 @@
     spawn: RMCSmokeAcidShroud
     range: 1
 
+- type: entity
+  parent: RMCSmokeNeurotoxin
+  id: RMCSmokeNeurotoxinShroud
+  name: neurotoxin gas
+  noSpawn: true
+  components:
+  - type: EvenSmoke
+    spawn: RMCSmokeNeurotoxinShroud
+    range: 1
+
 - type: edgeSpreader
   id: RMCSmokeAcid
+  updatesPerSecond: 2
+
+- type: edgeSpreader
+  id: RMCSmokeNeurotoxin
   updatesPerSecond: 2

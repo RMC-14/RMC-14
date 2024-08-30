@@ -51,14 +51,54 @@
         endValue: 7.0
       - !type:FadeBehaviour # burns out slower
         id: fade_out
-        maxDuration: 30.0
+        maxDuration: 570
         startValue: 7.0
         endValue: 1.0
 
 - type: entity
+  parent: CMFlare
+  id: RMCFlareCAS
+  name: signal flare
+  description: A green UNMC issued signal flare. The telemetry computer works on chemical reaction that releases smoke and light and thus works only while the flare is burning.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/cas_flares.rsi
+    layers:
+    - map: [ "enum.ExpendableLightVisualLayers.Base" ]
+      state: flare
+    - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+      sprite: _RMC14/Objects/Misc/flares.rsi
+      state: flare_flame
+      color: "#A7FFA7"
+      visible: false
+    - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
+      sprite: _RMC14/Objects/Misc/flares.rsi
+      state: overlay
+  - type: Icon
+    sprite: _RMC14/Objects/Misc/cas_flares.rsi
+    state: flare
+  - type: PointLight
+    color: "#64FA4B"
+  - type: FlareSignal
+  - type: ExpendableLight
+    glowDuration: 180
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour # faster then base flares
+      id: turn_on
+      maxDuration: 5.0
+      startValue: 2.5
+      endValue: 7.0
+    - !type:FadeBehaviour # burns out slower
+      id: fade_out
+      maxDuration: 150
+      startValue: 7.0
+      endValue: 1.0
+
+- type: entity
   abstract: true
-  parent: CMBoxMagazineBase
-  id: CMBoxPackFlareBase
+  parent: RMCBoxMagazineBase
+  id: RMCBoxPackFlareBase
   name: box of M94 flare packs
   description: A box of M94 marking flare packs, to brighten up your day.
   components:
@@ -88,8 +128,8 @@
           Full: { state: magaz_flares, visible: true }
 
 - type: entity
-  parent: CMBoxPackFlareBase
-  id: CMBoxPackFlare
+  parent: RMCBoxPackFlareBase
+  id: RMCBoxPackFlare
   suffix: Filled
   components:
   - type: CMItemSlots
@@ -145,3 +185,20 @@
   components:
   - type: CMItemSlots
     startingItem: CMFlare
+
+- type: entity
+  parent: CMPackFlareBase
+  id: RMCPackFlareCAS
+  name: M89-S signal flare pack
+  description: A packet of eight M89-S Signal Marking Flares.
+  suffix: Filled
+  components:
+  - type: Sprite
+    layers:
+    - state: m89_e
+      map: [ "emptyLayer" ]
+    - state: m89
+      map: [ "fullLayer" ]
+  - type: CMItemSlots
+    count: 8
+    startingItem: RMCFlareCAS

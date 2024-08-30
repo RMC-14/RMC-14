@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent:
-  - RMCAreaBase
   - RMCAreaGlass
+  - RMCAreaBase
   id: RMCAreaFiorina
   name: Fiorina Orbital Penitentiary - Science Annex
   suffix: Fiorina Area
@@ -15,8 +15,8 @@
 
 - type: entity
   parent:
-  - RMCAreaFiorina
   - RMCAreaMax
+  - RMCAreaFiorina
   id: RMCAreaFiorinaOob
   name: Fiorina - Out Of Bounds
   components:
@@ -30,8 +30,8 @@
 
 - type: entity
   parent:
-  - RMCAreaFiorina
   - RMCAreaProtectionMetal
+  - RMCAreaFiorina
   id: RMCAreaFiorinaMaintenance
   name: Fiorina - Maintenance
   components:
@@ -40,8 +40,8 @@
 
 - type: entity
   parent:
-  - RMCAreaFiorina
   - RMCAreaUndergroundMetalBlockCAS
+  - RMCAreaFiorina
   id: RMCAreaFiorinaTumor
   name: Fiorina - Resin Tumor
   components:
@@ -113,8 +113,8 @@
 
 - type: entity
   parent:
-  - RMCAreaFiorina
   - RMCAreaGlass
+  - RMCAreaFiorina
   id: RMCAreaFiorinaLz
   name: Fiorina - LZ
   components:
@@ -123,6 +123,7 @@
   - type: Area
     minimapColor: '#EBE5E5E3'
     resinAllowed: false
+    landingZone: true
 
 - type: entity
   parent: RMCAreaFiorinaLz
@@ -172,8 +173,8 @@
 
 - type: entity
   parent:
-  - RMCAreaFiorina
   - RMCAreaGlass
+  - RMCAreaFiorina
   id: RMCAreaFiorinaStation
   name: Fiorina - Station Interior
   components:
@@ -329,6 +330,9 @@
   parent: RMCAreaFiorinaStationTelecomm
   id: RMCAreaFiorinaStationTelecommLz1Tram
   name: Fiorina - LZ1 Aux Port Communications Relay
+  components:
+  - type: Area
+    landingZone: true
 
 - type: entity
   parent: RMCAreaFiorinaStationTelecomm

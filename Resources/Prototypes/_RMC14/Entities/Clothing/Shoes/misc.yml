@@ -17,3 +17,14 @@
     sprite: _RMC14/Objects/Clothing/Shoes/laceup_brown.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Shoes/laceup_brown.rsi
+
+- type: entity
+  parent: ClothingShoesBase
+  id: RMCShoesJackboots
+  name: jackboots
+  description: Security combat boots for combat scenarios or combat situations. All combat, all the time.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/jackboots.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/jackboots.rsi
