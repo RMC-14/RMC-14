@@ -4,6 +4,8 @@
   id: RMCBaseSentry
   name: turret
   components:
+  - type: Item
+    size: Normal
   - type: Clickable
   - type: InteractionOutline
   - type: Actions
