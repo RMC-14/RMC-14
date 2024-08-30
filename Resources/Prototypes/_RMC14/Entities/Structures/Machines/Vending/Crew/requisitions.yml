@@ -221,8 +221,8 @@
       #  amount: 4
       - id: RMCBinoculars
         amount: 2
-      #- id: Rangefinder
-      #   amount: 1
+      - id: RMCRangefinder
+        amount: 1
       - id: RMCLaserDesignator
         amount: 1
       #- id: Welding Goggles
@@ -235,10 +235,10 @@
       #  amount: 1
       #- id: Sentry Gun Network Laptop
       #   amount: 4
-      #- id: JTAC Pamphlet
-      #  amount: 1
-      #- id: Engineering Pamphlet
-      #  amount: 1
+      - id: CMPamphletJTAC
+        amount: 1
+      - id: CMPamphletEngineering
+        amount: 1
       #- id: Powerloader Certification
       #  amount: 1
       #- id: Spare PDT/L Battle Buddy Kit

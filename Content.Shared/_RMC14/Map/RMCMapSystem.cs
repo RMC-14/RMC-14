@@ -122,4 +122,9 @@ public sealed class RMCMapSystem : EntitySystem
         def = (ContentTileDefinition) defUncast;
         return true;
     }
+
+    public bool CanBuildOn(EntityCoordinates coordinates, CollisionGroup group = CollisionGroup.Impassable)
+    {
+        return !IsTileBlocked(coordinates, group) && !TileHasStructure(coordinates);
+    }
 }

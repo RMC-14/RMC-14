@@ -22,17 +22,10 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Sentries/normal_sentry.rsi
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
     drawdepth: Mobs
     layers:
     - state: normal_uac_sentry_on
-  - type: InteractionPopup
-    interactDelay: 0.2
-    successChance: 0.8
-    interactSuccessString: petting-success-generic
-    interactFailureString: petting-failure-generic
-    interactSuccessSound:
-      path: /Audio/Effects/double_beep.ogg
   - type: CombatMode
     toggleMouseRotator: false
   - type: Gun
@@ -50,8 +43,6 @@
     rootTask:
       task: RMCTurretCompound
     blackboard:
-      RotateSpeed: !type:Single
-        3.141
       SoundTargetInLOS: !type:SoundPathSpecifier
         path: /Audio/Effects/double_beep.ogg
       VisionRadius: !type:Single
@@ -72,6 +63,13 @@
   name: UA-577 spaceborne gauss turret
   description: A fully-automated defence turret with mid-range targeting capabilities. Armed with a modified M32-S Autocannon and an internal belt feed.
   components:
+  - type: InteractionPopup
+    interactDelay: 0.2
+    successChance: 0.8
+    interactSuccessString: petting-success-generic
+    interactFailureString: petting-failure-generic
+    interactSuccessSound:
+      path: /Audio/Effects/double_beep.ogg
   - type: Corrodible
     isCorrodible: false
   - type: NpcFactionMember

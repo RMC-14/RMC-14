@@ -103,6 +103,8 @@ public abstract class SharedMortarSystem : EntitySystem
 
         if (!_rmcPlanet.IsOnPlanet(coordinates))
             _popup.PopupClient(Loc.GetString("rmc-mortar-deploy-end-not-planet"), user, user, PopupType.MediumCaution);
+
+        _audio.PlayPredicted(mortar.Comp.DeploySound, mortar, user);
     }
 
     private void OnMortarTargetDoAfter(Entity<MortarComponent> mortar, ref TargetMortarDoAfterEvent args)
@@ -127,8 +129,9 @@ public abstract class SharedMortarSystem : EntitySystem
 
         mortar.Comp.Target = target;
 
-        var xOffset = (int) Math.Floor(Math.Abs(offset.X - position.X));
-        var yOffset = (int) Math.Floor(Math.Abs(offset.Y - position.Y));
+        var tilesPer = mortar.Comp.TilesPerOffset;
+        var xOffset = (int) Math.Floor(Math.Abs(offset.X - position.X) / tilesPer);
+        var yOffset = (int) Math.Floor(Math.Abs(offset.Y - position.Y) / tilesPer);
         mortar.Comp.Offset = (_random.Next(-xOffset, xOffset + 1), _random.Next(-yOffset, yOffset + 1));
 
         Dirty(mortar);
@@ -141,6 +144,9 @@ public abstract class SharedMortarSystem : EntitySystem
 
         args.Handled = true;
 
+        mortar.Comp.Dial = args.Vector;
+        Dirty(mortar);
+
         var user = args.User;
         var selfMsg = Loc.GetString("rmc-mortar-dial-finish-self", ("mortar", mortar));
         var othersMsg = Loc.GetString("rmc-mortar-dial-finish-others", ("user", user), ("mortar", mortar));
@@ -149,8 +155,8 @@ public abstract class SharedMortarSystem : EntitySystem
 
     private void OnMortarInteractUsing(Entity<MortarComponent> mortar, ref InteractUsingEvent args)
     {
-        var used = args.Used;
-        if (!TryComp(used, out MortarShellComponent? shell))
+        var shellId = args.Used;
+        if (!TryComp(shellId, out MortarShellComponent? shell))
             return;
 
         args.Handled = true;
@@ -158,23 +164,37 @@ public abstract class SharedMortarSystem : EntitySystem
         if (!HasSkillPopup(mortar, user, true))
             return;
 
-        if (!CanLoadPopup(mortar, (used, shell), user, out _, out _))
+        if (!CanLoadPopup(mortar, (shellId, shell), user, out _, out _))
             return;
 
         var ev = new LoadMortarShellDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, shell.LoadDelay, ev, mortar, mortar, used)
+        var doAfter = new DoAfterArgs(EntityManager, user, shell.LoadDelay, ev, mortar, mortar, shellId)
         {
             BreakOnMove = true,
             BreakOnHandChange = true,
         };
 
-        _doAfter.TryStartDoAfter(doAfter);
+        if (_doAfter.TryStartDoAfter(doAfter))
+        {
+            var selfMsg = Loc.GetString("rmc-mortar-shell-load-start-self", ("mortar", mortar), ("shell", shellId));
+            var othersMsg = Loc.GetString("rmc-mortar-shell-load-start-others",
+                ("user", user),
+                ("mortar", mortar),
+                ("shell", shellId));
+            _popup.PopupPredicted(selfMsg, othersMsg, mortar, user);
+
+            _audio.PlayPredicted(mortar.Comp.FireSound, mortar, user);
+        }
     }
 
     private void OnMortarLoadDoAfter(Entity<MortarComponent> mortar, ref LoadMortarShellDoAfterEvent args)
     {
         var user = args.User;
         if (args.Cancelled || args.Handled || args.Used is not { } shellId)
+            return;
+
+        args.Handled = true;
+        if (_net.IsClient)
             return;
 
         if (!TryComp(shellId, out MortarShellComponent? shell))
@@ -204,11 +224,19 @@ public abstract class SharedMortarSystem : EntitySystem
 
         AddComp(shellId, active, true);
 
-        var msg = Loc.GetString("rmc-mortar-shell-load-finish-self", ("mortar", mortar), ("shell", shellId));
-        _popup.PopupClient(msg, user, user);
+        var selfMsg = Loc.GetString("rmc-mortar-shell-load-finish-self", ("mortar", mortar), ("shell", shellId));
+        var othersMsg = Loc.GetString("rmc-mortar-shell-load-finish-others", ("user", user), ("mortar", mortar), ("shell", shellId));
+        _popup.PopupPredicted(selfMsg, othersMsg, user, user);
 
-        msg = Loc.GetString("rmc-mortar-shell-fire", ("mortar", mortar));
-        _popup.PopupClient(msg, mortar, user, PopupType.MediumCaution);
+        othersMsg = Loc.GetString("rmc-mortar-shell-fire", ("mortar", mortar));
+        _popup.PopupEntity(othersMsg, mortar, PopupType.MediumCaution);
+
+        var filter = Filter.Pvs(mortar);
+        _audio.PlayPvs(mortar.Comp.FireSound, mortar);
+
+        var ev = new MortarFiredEvent(GetNetEntity(mortar));
+        if (_net.IsServer)
+            RaiseNetworkEvent(ev, filter);
     }
 
     private void OnMortarUnanchorAttempt(Entity<MortarComponent> mortar, ref UnanchorAttemptEvent args)
@@ -263,8 +291,14 @@ public abstract class SharedMortarSystem : EntitySystem
                 QueueDel(uid);
         }
 
-        var flare = Spawn(ent.Comp.Flare, coords);
-        _metaData.SetEntityName(flare, Loc.GetString("rmc-mortar-camera-name", ("x", coords.X), ("y", coords.Y)));
+        Spawn(ent.Comp.Flare, coords);
+        var camera = Spawn(ent.Comp.Camera, coords);
+
+        if (_rmcPlanet.TryGetOffset(coords, out var offset))
+            coords = coords.Offset(offset);
+
+        var (x, y) = coords.Position;
+        _metaData.SetEntityName(camera, Loc.GetString("rmc-mortar-camera-name", ("x", (int) x), ("y", (int) y)));
     }
 
     private void OnMortarTargetBui(Entity<MortarComponent> mortar, ref MortarTargetBuiMsg args)
@@ -408,6 +442,7 @@ public abstract class SharedMortarSystem : EntitySystem
                     active.WarnRange,
                     "rmc-mortar-shell-warning",
                     "rmc-mortar-shell-warning-above");
+                _audio.PlayPvs(active.WarnSound, active.Coordinates);
             }
 
             if (!active.ImpactWarned && time >= active.ImpactWarnAt)

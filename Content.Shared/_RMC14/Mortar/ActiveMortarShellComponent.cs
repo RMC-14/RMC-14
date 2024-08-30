@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+﻿using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 
 namespace Content.Shared._RMC14.Mortar;
@@ -18,6 +19,9 @@ public sealed partial class ActiveMortarShellComponent : Component
 
     [DataField, AutoNetworkedField]
     public float WarnRange = 15;
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? WarnSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/gun_mortar_travel.ogg");
 
     [DataField, AutoNetworkedField]
     public TimeSpan ImpactWarnAt;

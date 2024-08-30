@@ -22,21 +22,26 @@ rmc-mortar-dial-finish-others = {$user} finishes dialing {THE($mortar)}'s firing
 rmc-mortar-shell-load-start-self = You start loading {THE($shell)} into {THE($mortar)}.
 rmc-mortar-shell-load-start-others = {$user} starts loading {THE($shell)} into {THE($mortar)}.
 rmc-mortar-shell-load-finish-self = You load {THE($shell)} into {THE($mortar)}.
-rmc-mortar-shell-fire = {THE($mortar)} fires!
+rmc-mortar-shell-fire = {CAPITALIZE(THE($mortar))} fires!
 rmc-mortar-shell-warning = A SHELL IS COMING DOWN TO YOUR {$direction}
 rmc-mortar-shell-warning-above = A SHELL IS COMING DOWN RIGHT ABOVE YOU
 rmc-mortar-shell-impact-warning = A SHELL IS ABOUT TO IMPACT TO YOUR {$direction}
-rmc-mortar-shell-impact-warning-above = A SHELL IS ABOUT TO IMPACT
+rmc-mortar-shell-impact-warning-above = A SHELL IS ABOUT TO IMPACT RIGHT ABOVE YOU
 
 rmc-mortar-interface = Mortar Interface
 
 rmc-mortar-target-x = Target X:
 rmc-mortar-target-y = Target Y:
 rmc-mortar-target-set = Set Target
+rmc-mortar-target-too-close = You cannot aim at this coordinate, it is too close to your mortar.
 
 rmc-mortar-offset-x = X Offset:
 rmc-mortar-offset-y = Y Offset:
 rmc-mortar-offset-set = Dial Offset
+rmc-mortar-offset-too-far = You cannot dial to this coordinate, it is too far away from the original target.
+rmc-mortar-offset-too-close = You cannot dial to this coordinate, it is too close to your mortar.
+rmc-mortar-offset-max = Max dial
+  offset: {$max}
 
 rmc-mortar-view-camera = View
   Camera

@@ -9,13 +9,14 @@ using Content.Server.NPC.Queries.Queries;
 using Content.Server.Nutrition.Components;
 using Content.Server.Nutrition.EntitySystems;
 using Content.Server.Storage.Components;
+using Content.Shared._RMC14.Interaction;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Hands.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Nutrition.Components;
@@ -53,6 +54,7 @@ public sealed class NPCUtilitySystem : EntitySystem
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly MobThresholdSystem _thresholdSystem = default!;
+    [Dependency] private readonly RMCInteractionSystem _rmcInteraction = default!;
 
     private EntityQuery<PuddleComponent> _puddleQuery;
     private EntityQuery<TransformComponent> _xformQuery;
@@ -355,6 +357,24 @@ public sealed class NPCUtilitySystem : EntitySystem
             case TargetIsNotDeadCon:
             {
                 return !_mobState.IsDead(targetUid) ? 1f : 0f;
+            }
+            case TargetXenoCon:
+            {
+                return HasComp<XenoComponent>(targetUid) ? 1f : 0f;
+            }
+            case CanFaceCon:
+            {
+                var ownerCoords = _transform.GetMapCoordinates(owner);
+                var targetCoords = _transform.GetMapCoordinates(targetUid);
+                if (ownerCoords.MapId != targetCoords.MapId)
+                    return 0f;
+
+                var vector = targetCoords.Position - ownerCoords.Position;
+                var angle = Angle.FromWorldVec(vector);
+                if (!_rmcInteraction.CanFaceMaxRotation(owner,angle))
+                    return 0f;
+
+                return 1f;
             }
             default:
                 throw new NotImplementedException();

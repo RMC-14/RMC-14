@@ -76,7 +76,7 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      #- id: CMWebbingDrop # TODO RMC14 Drop Pouch Webbing
+      - id: CMWebbingPouch
       - id: CMWebbing
       #- id: CMWebbingHolster # TODO RMC14 Shoulder Holster Webbing
     - name: Glasses

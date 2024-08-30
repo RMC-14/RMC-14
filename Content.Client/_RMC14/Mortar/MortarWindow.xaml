@@ -1,38 +1,41 @@
 ﻿<controls:MortarWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Mortar"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     Title="{Loc 'rmc-mortar-interface'}">
     <BoxContainer Orientation="Vertical">
         <BoxContainer Orientation="Horizontal">
             <BoxContainer Orientation="Vertical">
                 <BoxContainer Orientation="Horizontal">
-                    <Label Text="{Loc 'rmc-mortar-target-x'}" />
-                    <SpinBox Name="TargetX" Access="Public" />
+                    <Label Text="{Loc 'rmc-mortar-target-x'}" Margin="0 0 5 0" />
+                    <FloatSpinBox Name="TargetX" Access="Public" MinWidth="60" />
                 </BoxContainer>
-                <BoxContainer Orientation="Horizontal">
-                    <Label Text="{Loc 'rmc-mortar-target-y'}" />
-                    <SpinBox Name="TargetY" Access="Public" />
+                <BoxContainer Orientation="Horizontal" Margin="0 5 0 0">
+                    <Label Text="{Loc 'rmc-mortar-target-y'}" Margin="0 0 5 0" />
+                    <FloatSpinBox Name="TargetY" Access="Public" MinWidth="60" />
                 </BoxContainer>
-                <Button Name="SetTargetButton" Access="Public"
-                        Text="{Loc 'rmc-mortar-target-set'}" />
+                <Button Name="SetTargetButton" Access="Public" StyleClasses="OpenBoth"
+                        Text="{Loc 'rmc-mortar-target-set'}" Margin="0 5 0 0" />
             </BoxContainer>
-            <Button Name="ViewCameraButton" Access="Public"
-                    Text="{Loc 'rmc-mortar-view-camera'}" />
+            <Button Name="ViewCameraButton" Access="Public" StyleClasses="OpenBoth"
+                    Text="{Loc 'rmc-mortar-view-camera'}" Margin="10 0" />
         </BoxContainer>
+        <ui:BlueHorizontalSeparator Margin="0 10" />
         <BoxContainer Orientation="Horizontal">
-            <BoxContainer Orientation="Vertical" Margin="0 10 0 0">
+            <BoxContainer Orientation="Vertical">
                 <BoxContainer Orientation="Horizontal">
-                    <Label Text="{Loc 'rmc-mortar-offset-x'}" />
-                    <SpinBox Name="DialX" Access="Public" />
+                    <Label Text="{Loc 'rmc-mortar-offset-x'}" Margin="0 0 5 0" />
+                    <FloatSpinBox Name="DialX" Access="Public" MinWidth="60" />
                 </BoxContainer>
-                <BoxContainer Orientation="Horizontal">
-                    <Label Text="{Loc 'rmc-mortar-offset-y'}" />
-                    <SpinBox Name="DialY" Access="Public" />
+                <BoxContainer Orientation="Horizontal" Margin="0 5 0 0">
+                    <Label Text="{Loc 'rmc-mortar-offset-y'}" Margin="0 0 5 0" />
+                    <FloatSpinBox Name="DialY" Access="Public" MinWidth="60" />
                 </BoxContainer>
-                <Button Name="SetOffsetButton" Access="Public"
-                        Text="{Loc 'rmc-mortar-offset-set'}" />
+                <Button Name="SetOffsetButton" Access="Public" StyleClasses="OpenBoth"
+                        Text="{Loc 'rmc-mortar-offset-set'}" Margin="0 5 0 0" />
             </BoxContainer>
-            <Control />
+            <Label Name="MaxDialLabel" Access="Public" VerticalAlignment="Top"
+                   Margin="10 0" />
         </BoxContainer>
     </BoxContainer>
 </controls:MortarWindow>

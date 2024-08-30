@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Mortar;
@@ -47,5 +48,29 @@ public sealed partial class MortarComponent : Component
     public int MaxDial = 10;
 
     [DataField, AutoNetworkedField]
+    public int MinimumRange = 10;
+
+    [DataField, AutoNetworkedField]
     public string FixtureId = "mortar";
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan AnimationTime = TimeSpan.FromSeconds(0.3);
+
+    [DataField, AutoNetworkedField]
+    public string AnimationLayer = "mortar";
+
+    [DataField, AutoNetworkedField]
+    public string AnimationState = "mortar_m402_fire";
+
+    [DataField, AutoNetworkedField]
+    public string DeployedState = "mortar_m402";
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? DeploySound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/gun_mortar_unpack.ogg");
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? ReloadSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/gun_mortar_reload.ogg");
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? FireSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/gun_mortar_fire.ogg");
 }
