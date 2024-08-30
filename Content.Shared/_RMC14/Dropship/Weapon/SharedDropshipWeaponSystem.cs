@@ -182,7 +182,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void OnDropshipTargetMapInit(Entity<DropshipTargetComponent> ent, ref MapInitEvent args)
     {
-        EnsureComp<EyeComponent>(ent);
+        var eye = EnsureComp<EyeComponent>(ent);
+        _eye.SetDrawFov(ent, false, eye);
 
         var netEnt = GetNetEntity(ent);
         var terminals = EntityQueryEnumerator<DropshipTerminalWeaponsComponent>();
