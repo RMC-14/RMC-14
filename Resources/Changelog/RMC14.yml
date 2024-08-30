@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed marines getting stuck on hypersleep chambers at roundstart and
-      having their inventory visually disappear in certain spots.
-    type: Fix
-  id: 144
-  time: '2024-06-15T04:25:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2472
 - author: Sigil
   changes:
   - message: Reinforced girder removed from crafting menu, as it currently has no
@@ -4461,5 +4453,17 @@
   id: 643
   time: '2024-08-30T22:49:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3894
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Boiler gas spreading into itself and causing massive amounts of
+      lag. Re-enabled Boiler evolution.
+    type: Fix
+  - message: Fixed mortars and sentries not being attackable by xenoniods.
+    type: Fix
+  - message: Fixed Requisitions not being able to buy sentry magazines.
+    type: Fix
+  id: 644
+  time: '2024-08-30T22:59:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3897
 Name: RMC14
 Order: -1
