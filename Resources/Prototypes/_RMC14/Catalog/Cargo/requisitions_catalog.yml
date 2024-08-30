@@ -48,7 +48,6 @@
         crate: RMCCrateBoxMagazineM44Revolver
       - cost: 3000
         crate: RMCCrateBoxMagazineM44RevolverMarksman
-
     - name: Attachments
       entries:
       - cost: 3000
@@ -57,42 +56,42 @@
         crate: RMCCrateAttachmentRailFlashlight
 #      - cost: 3000
 #        crate: RMCCrateAttachmentRedDot
-#      - cost: 3000
-#        crate: RMCCrateAttachmentTelescopicScope
-#      - cost: 3000
-#        crate: RMCCrateAttachmentMiniScope
-#      - cost: 3000
-#        crate: RMCCrateAttachmentMagneticHarness
+      - cost: 3000
+        crate: RMCCrateAttachmentTelescopicScope
+      - cost: 3000
+        crate: RMCCrateAttachmentMiniScope
+      - cost: 3000
+        crate: RMCCrateAttachmentMagneticHarness
       - cost: 3000
         crate: RMCCrateAttachmentSuppressor
       - cost: 3000
         crate: RMCCrateAttachmentExtendedBarrel
       - cost: 3000
         crate: RMCCrateAttachmentCompensator
-#      - cost: 3000
-#        crate: RMCCrateAttachmentForegrip
-#      - cost: 3000
-#        crate: RMCCrateAttachmentGyro
-#      - cost: 3000
-#        crate: RMCCrateAttachmentBipod
+      - cost: 3000
+        crate: RMCCrateAttachmentForegrip
+      - cost: 3000
+        crate: RMCCrateAttachmentGyro
+      - cost: 3000
+        crate: RMCCrateAttachmentBipod
       - cost: 3000
         crate: RMCCrateAttachmentUnderbarrelShotgun
 #      - cost: 3000
 #        crate: RMCCrateAttachmentUnderbarrelExtinguisher
 #      - cost: 3000
 #        crate: RMCCrateAttachmentUnderbarrelFlamer
-#      - cost: 3000
-#        crate: RMCCrateAttachmentBurstfire
-#      - cost: 6000
-#        crate: RMCCrateAttachmentAllStocks
-#      - cost: 3000
-#        crate: RMCCrateAttachmentRevolverStock
-#      - cost: 3000
-#        crate: RMCCrateAttachmentRifleStock
-#      - cost: 3000
-#        crate: RMCCrateAttachmentShotgunStock
-#      - cost: 3000
-#        crate: RMCCrateAttachmentSmgStock
+      - cost: 3000
+        crate: RMCCrateAttachmentBurstfire
+      - cost: 6000
+        crate: RMCCrateAttachmentAllStocks
+      - cost: 3000
+        crate: RMCCrateAttachmentRevolverStock
+      - cost: 3000
+        crate: RMCCrateAttachmentRifleStock
+      - cost: 3000
+        crate: RMCCrateAttachmentShotgunStock
+      - cost: 3000
+        crate: RMCCrateAttachmentSmgStock
     - name: Clothing
       entries:
       - cost: 2000
@@ -101,6 +100,8 @@
         crate: RMCCrateClothingMedicalPouches
       - cost: 2000
         crate: RMCCrateClothingWebbing
+      - cost: 2000
+        crate: RMCCrateClothingWebbingPouch
       - cost: 3000
         crate: RMCCrateClothingOfficerOutfit
     - name: Engineering
@@ -155,8 +156,14 @@
         crate: RMCCrateFoodPizza
       - cost: 1000
         crate: RMCCrateFoodIngredients
-#    - name: Gear
-#      entries: []
+    - name: Gear
+      entries:
+      - cost: 2000
+        crate: RMCCrateGearBinoculars
+      - cost: 4000
+        crate: RMCCrateGearPackFlare
+      - cost: 6000
+        crate: RMCCrateGearPackFlareCAS
     - name: Medical
       entries:
       - cost: 3200
@@ -171,8 +178,14 @@
         crate: RMCCrateMedicalFilled
       - cost: 2100
         crate: RMCCrateMedicalPill
-#    - name: Mortar
-#      entries: []
+    - name: Mortar
+      entries:
+      - cost: 6000
+        crate: RMCCrateMortarKit
+      - cost: 2000
+        crate: RMCCrateMortarShellHE
+      - cost: 2000
+        crate: RMCCrateMortarShellFlare
 #    - name: Operations
 #      entries: []
 #    - name: Reagent tanks
@@ -181,8 +194,12 @@
       entries:
       - cost: 3000
         crate: RMCCrateResearchPhoron
-#    - name: Restricted Equipment
-#      entries: []
+    - name: Restricted Equipment
+      entries:
+      - cost: 2000
+        crate: RMCCrateRestrictedEquipmentArmorM4
+      - cost: 2000
+        crate: RMCCrateRestrictedEquipmentArmorB12
     - name: Supplies
       entries:
       - cost: 2000

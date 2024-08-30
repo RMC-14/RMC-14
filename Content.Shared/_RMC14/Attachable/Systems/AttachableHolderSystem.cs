@@ -226,6 +226,9 @@ public sealed class AttachableHolderSystem : EntitySystem
 
     private void OnAttachableHolderGetVerbs(Entity<AttachableHolderComponent> holder, ref GetVerbsEvent<EquipmentVerb> args)
     {
+        if (HasComp<XenoComponent>(args.User))
+            return;
+
         EnsureSlots(holder);
         var userUid = args.User;
 
@@ -458,7 +461,7 @@ public sealed class AttachableHolderSystem : EntitySystem
 
         var ev = new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Detached, userUid);
         RaiseLocalEvent(attachableUid, ref ev);
-        
+
         var holderEv = new AttachableHolderAttachablesAlteredEvent(attachableUid, slotId, AttachableAlteredType.Detached);
         RaiseLocalEvent(holder.Owner, ref holderEv);
 
@@ -594,7 +597,7 @@ public sealed class AttachableHolderSystem : EntitySystem
 
         if (!HasComp<AttachableToggleableComponent>(attachableUid))
             return;
-        
+
         if (!TryComp<AttachableToggleableComponent>(attachableUid, out var toggleableComponent))
             return;
 
@@ -668,7 +671,7 @@ public sealed class AttachableHolderSystem : EntitySystem
 
         return holder.Comp.Slots.ContainsKey(slotId);
     }
-    
+
     public bool TryGetHolder(EntityUid attachable, [NotNullWhen(true)] out EntityUid? holderUid)
     {
         if (!TryComp(attachable, out TransformComponent? transformComponent) ||
@@ -678,7 +681,7 @@ public sealed class AttachableHolderSystem : EntitySystem
             holderUid = null;
             return false;
         }
-        
+
         holderUid = transformComponent.ParentUid;
         return true;
     }

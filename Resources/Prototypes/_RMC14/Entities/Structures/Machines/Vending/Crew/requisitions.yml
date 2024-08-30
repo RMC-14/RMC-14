@@ -71,8 +71,8 @@
       #  amount: 4
       #- id: M40 HPDP White Phosphorus Smoke Grenade
       #  amount: 4
-      #- id: M40 HSDP Smoke Grenade
-      #  amount: 5
+      - id: CMGrenadeSmoke
+        amount: 5
       #- id: M74 AGM-Frag Airburst Grenade
       #  amount: 4
       #- id: M74 AGM-Incendiary Airburst Grenade
@@ -115,8 +115,8 @@
       #  amount: 2
       - id: CMBackpackWelder
         amount: 2
-      #- id: Mortar Shell Backpack
-      #  amount: 1
+      - id: CMBackpackMortar
+        amount: 1
       - id: RMCSatchelWelder
         amount: 5
       #- id: IMP Ammo Rack
@@ -127,8 +127,8 @@
       #  amount: 20
     - name: Belts
       entries:
-      #- id: G8-A General Utility Pouch
-      #   amount: 2
+      - id: RMCBeltUtilityGeneral
+        amount: 2
       - id: CMBeltMarine
         amount: 15
       #- id: M276 General Pistol Holster Rig
@@ -146,8 +146,8 @@
       #  amount: 2
       #- id: M276 Shotgun Shell Loading Rig
       #  amount: 10
-      #- id: M276 Mortar Operator Belt
-      #  amount: 2
+      - id: CMBeltMortar
+        amount: 2
     - name: Pouches
       entries:
       - id: RMCPouchAutoinjector
@@ -221,8 +221,8 @@
       #  amount: 4
       - id: RMCBinoculars
         amount: 2
-      #- id: Rangefinder
-      #   amount: 1
+      - id: RMCRangefinder
+        amount: 1
       - id: RMCLaserDesignator
         amount: 1
       - id: RMCWeldingGoggles
@@ -235,10 +235,10 @@
       #  amount: 1
       #- id: Sentry Gun Network Laptop
       #   amount: 4
-      #- id: JTAC Pamphlet
-      #  amount: 1
-      #- id: Engineering Pamphlet
-      #  amount: 1
+      - id: CMPamphletJTAC
+        amount: 1
+      - id: CMPamphletEngineer
+        amount: 1
       #- id: Powerloader Certification
       #  amount: 1
       #- id: Spare PDT/L Battle Buddy Kit
@@ -387,8 +387,8 @@
       entries:
       - id: RMCAttachmentAngledGrip
         amount: 7
-      #- id: RMCAttachmentBipod
-      #  amount: 7
+      - id: RMCAttachmentBipod
+        amount: 7
       - id: RMCAttachmentBurstFireAssembly
         amount: 5
       - id: RMCAttachmentGyroscopicStabilizer

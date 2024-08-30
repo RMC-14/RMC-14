@@ -115,7 +115,7 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-    #- id: CMG8AGeneralUtilityPouch
+      - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
     #- id: CMM276GeneralPistolHolsterRig
     #- id: CMM276M63HolsterRig
@@ -211,8 +211,8 @@
       entries:
       - id: CMPamphletJTAC
         points: 15
-    #- id: CMPamphletEngineering
-    #  points: 15
+      - id: CMPamphletEngineer
+        points: 15
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer

@@ -70,8 +70,9 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, PickupAttemptEvent>(OnGrabbablePickupAttempt);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, AfterInteractEvent>(OnGrabbableAfterInteract);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, BeforeRangedInteractEvent>(OnGrabbableBeforeRangedInteract);
-        SubscribeLocalEvent<PowerLoaderGrabbableComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
-        SubscribeLocalEvent<PowerLoaderGrabbableComponent, DropshipDetachDoAfterEvent>(OnDropshipDetach);
+        SubscribeLocalEvent<PowerLoaderGrabbableComponent, DropshipAttachDoAfterEvent>(OnGrabbableDropshipAttach);
+        SubscribeLocalEvent<PowerLoaderGrabbableComponent, DropshipDetachDoAfterEvent>(OnGrabbableDropshipDetach);
+        SubscribeLocalEvent<PowerLoaderGrabbableComponent, CombatModeShouldHandInteractEvent>(OnGrababbleShouldInteract);
 
         SubscribeLocalEvent<ActivePowerLoaderPilotComponent, PreventCollideEvent>(OnActivePilotPreventCollide);
     }
@@ -325,7 +326,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
-    private void OnDropshipAttach(Entity<PowerLoaderGrabbableComponent> ent, ref DropshipAttachDoAfterEvent args)
+    private void OnGrabbableDropshipAttach(Entity<PowerLoaderGrabbableComponent> ent, ref DropshipAttachDoAfterEvent args)
     {
         if (args.Cancelled ||
             args.Handled ||
@@ -347,7 +348,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         SyncAppearance(target);
     }
 
-    private void OnDropshipDetach(Entity<PowerLoaderGrabbableComponent> ent, ref DropshipDetachDoAfterEvent args)
+    private void OnGrabbableDropshipDetach(Entity<PowerLoaderGrabbableComponent> ent, ref DropshipDetachDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled || args.Target is not { } target)
             return;
@@ -382,6 +383,12 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
 
         SyncAppearance(target);
+    }
+
+    private void OnGrababbleShouldInteract(Entity<PowerLoaderGrabbableComponent> ent, ref CombatModeShouldHandInteractEvent args)
+    {
+        if (!HasComp<PowerLoaderComponent>(args.User))
+            args.Cancelled = true;
     }
 
     private void OnActivePilotPreventCollide(Entity<ActivePowerLoaderPilotComponent> ent, ref PreventCollideEvent args)

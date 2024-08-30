@@ -3,7 +3,7 @@
     xmlns:controls="clr-namespace:Content.Client._RMC14.Dropship.Fabricator"
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     Title="{Loc 'rmc-dropship-fabricator-title'}"
-    MinSize="900 450">
+    MinSize="950 450">
     <BoxContainer Orientation="Vertical">
         <Label Name="PointsLabel" Access="Public" Margin="0 0 0 10" />
         <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">
@@ -11,14 +11,16 @@
                 <RichTextLabel Name="EquipmentLabel" Access="Public" />
                 <ui:BlueHorizontalSeparator />
                 <ScrollContainer HScrollEnabled="False" VScrollEnabled="True" VerticalExpand="True">
-                    <BoxContainer Name="EquipmentContainer" Access="Public" VerticalAlignment="Top" />
+                    <BoxContainer Name="EquipmentContainer" Access="Public" Orientation="Vertical"
+                                  VerticalAlignment="Top" />
                 </ScrollContainer>
             </BoxContainer>
             <BoxContainer Orientation="Vertical" HorizontalExpand="True">
                 <RichTextLabel Name="AmmoLabel" Access="Public" />
                 <ui:BlueHorizontalSeparator />
                 <ScrollContainer HScrollEnabled="False" VScrollEnabled="True" VerticalExpand="True">
-                    <BoxContainer Name="AmmoContainer" Access="Public" VerticalAlignment="Top" />
+                    <BoxContainer Name="AmmoContainer" Access="Public" Orientation="Vertical"
+                                  VerticalAlignment="Top" />
                 </ScrollContainer>
             </BoxContainer>
         </BoxContainer>

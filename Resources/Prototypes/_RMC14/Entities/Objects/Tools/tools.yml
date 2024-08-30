@@ -75,6 +75,7 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/multitool_pickup.ogg
+  - type: Multitool
 
 - type: entity
   parent: Crowbar

@@ -101,9 +101,7 @@
     damage:
       types:
         Asphyxiation: 5
-    barricadeDamage: # This is required...
-      types:
-        Heat: 0
+    barricadeDamage: {} # This is required...
 
 - type: entity
   parent: RMCSmokeAcid

@@ -1,4 +1,6 @@
-﻿command-description-bioscan-marine = Manually triggers an ARES bioscan to announce to marines where xenos are and how many are left.
+﻿command-description-areas-save = Save all mapped areas to the map.
+
+command-description-bioscan-marine = Manually triggers an ARES bioscan to announce to marines where xenos are and how many are left.
 command-description-bioscan-xeno = Manually triggers a Queen Mother bioscan to announce to xenos where marines are and how many are left.
 command-description-bioscan-all = Manually triggers an ARES and Queen Mother bioscans to announce to both xenos and marines where each other are and how many are left.
 

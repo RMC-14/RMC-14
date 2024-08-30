@@ -7,7 +7,6 @@
 
 - type: entity
   abstract: true
-  parent: MarkerBase
   id: RMCAreaBase
   name: area
   suffix: Area
@@ -18,10 +17,17 @@
   components:
   - type: Transform
     anchored: true
-  - type: Sprite
-    sprite: _RMC14/Areas/areas.rsi
-    state: blank
+  - type: Marker
+  - type: Clickable
+  - type: InteractionOutline
   - type: Area
+    CAS: true
+    fulton: true
+    lasing: true
+    mortar: true
+    medevac: true
+    OB: true
+    supplyDrop: true
   - type: PlacementReplacement
     key: rmc_areas
 
@@ -98,7 +104,7 @@
   name: protection 3
   components:
   - type: Area
-    cas: false
+    CAS: false
 
 - type: entity
   parent: RMCAreaProtectionThree

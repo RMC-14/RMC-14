@@ -70,6 +70,7 @@
   components:
   - type: SquadSpawner
     squad: SquadAlpha
+    role: CMFireteamLeader
 
 - type: entity
   parent: CMSpawnPointFireteamLeader
@@ -78,6 +79,7 @@
   components:
   - type: SquadSpawner
     squad: SquadBravo
+    role: CMFireteamLeader
 
 - type: entity
   parent: CMSpawnPointFireteamLeader
@@ -86,6 +88,7 @@
   components:
   - type: SquadSpawner
     squad: SquadCharlie
+    role: CMFireteamLeader
 
 - type: entity
   parent: CMSpawnPointFireteamLeader
@@ -94,4 +97,5 @@
   components:
   - type: SquadSpawner
     squad: SquadDelta
+    role: CMFireteamLeader
 

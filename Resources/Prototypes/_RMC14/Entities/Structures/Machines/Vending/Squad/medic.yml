@@ -97,7 +97,8 @@
       - id: CMStasisBagFolded
         points: 6
     #    CMPressurizedReagentCanisterPouchEMPTY: 3P
-    #    CMG8AGeneralUtilityPouch: 15P
+      - id: RMCBeltUtilityGeneral
+        points: 15
     #    CMMS11SmartRefillTank: 6P
     - name: Explosives
       entries:
@@ -163,7 +164,8 @@
       entries:
       - id: RMCBinoculars
         points: 5
-    #    CMRangeFinder: 10P
+      - id: RMCRangefinder
+        points: 10
       - id: RMCLaserDesignator
         points: 15
     - name: Helmet Optics
@@ -173,7 +175,8 @@
       entries:
       - id: CMPamphletJTAC
         points: 15
-    #    CMPamphletEngineering: 15P
+      - id: CMPamphletEngineer
+        points: 15
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
@@ -272,7 +275,7 @@
       #- id: CMPressurizedReagentCanisterPouchEmpty
 #        recommended: true
       - id: RMCPouchPistol
-      #- id: CMVialPouchFull
+      - id: RMCPouchVialFill
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:

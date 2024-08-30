@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent:
-  - RMCAreaBase
   - RMCAreaProtectionMetal
+  - RMCAreaBase
   id: RMCAreaAlmayer
   suffix: Almayer Area
   components:
