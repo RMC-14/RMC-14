@@ -4,7 +4,9 @@ using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Rules;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.Components;
+using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
@@ -24,6 +26,7 @@ namespace Content.Shared._RMC14.Mortar;
 
 public abstract class SharedMortarSystem : EntitySystem
 {
+    [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -213,6 +216,8 @@ public abstract class SharedMortarSystem : EntitySystem
 
         if (!CanLoadPopup(mortar, (shellId, shell), user, out var travelTime, out var coordinates))
             return;
+
+        _adminLogs.Add(LogType.RMCMortar, LogImpact.High, $"Mortar {ToPrettyString(mortar)} shell {ToPrettyString(shellId)} shot by {ToPrettyString(user)} aimed at {coordinates}");
 
         var container = _container.EnsureContainer<Container>(mortar, mortar.Comp.ContainerId);
         if (!_container.Insert(shellId, container))
