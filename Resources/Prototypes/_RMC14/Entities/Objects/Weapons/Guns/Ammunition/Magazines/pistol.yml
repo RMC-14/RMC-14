@@ -129,7 +129,7 @@
   - type: Item
     size: Tiny
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m43.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4a3.rsi # Placeholder
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
