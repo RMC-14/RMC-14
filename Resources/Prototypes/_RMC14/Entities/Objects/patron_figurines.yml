@@ -435,7 +435,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronNesartOnan
   name: Nesart Onan figurine
-  description: "Blood loss is no joke! Come get some bandages from your local med bay today!"
+  description: "Blood loss is no joke! Come get some gauze from your local medbay today!"
   components:
   - type: Sprite
     state: nesart_onan
