@@ -241,3 +241,7 @@
 #      - cost: 3000
 #        crate: RMCCrateMagazineM4SPRCustomIncendiary
 #      - cost: 4000
+
+#        Black Market Orders
+#      - cost: 5 W-Y Funnybucks
+#        crate: RMCCrateD18
