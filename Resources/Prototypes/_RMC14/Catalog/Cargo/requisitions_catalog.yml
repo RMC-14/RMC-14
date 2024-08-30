@@ -100,6 +100,8 @@
         crate: RMCCrateClothingMedicalPouches
       - cost: 2000
         crate: RMCCrateClothingWebbing
+      - cost: 2000
+        crate: RMCCrateClothingWebbingPouch
       - cost: 3000
         crate: RMCCrateClothingOfficerOutfit
     - name: Engineering
@@ -156,6 +158,10 @@
         crate: RMCCrateFoodIngredients
     - name: Gear
       entries:
+      - cost: 2000
+        crate: RMCCrateGearBinoculars
+      - cost: 4000
+        crate: RMCCrateGearPackFlare
       - cost: 6000
         crate: RMCCrateGearPackFlareCAS
     - name: Medical
@@ -172,8 +178,14 @@
         crate: RMCCrateMedicalFilled
       - cost: 2100
         crate: RMCCrateMedicalPill
-#    - name: Mortar
-#      entries: []
+    - name: Mortar
+      entries:
+      - cost: 6000
+        crate: RMCCrateMortarKit
+      - cost: 2000
+        crate: RMCCrateMortarShellHE
+      - cost: 2000
+        crate: RMCCrateMortarShellFlare
 #    - name: Operations
 #      entries: []
 #    - name: Reagent tanks

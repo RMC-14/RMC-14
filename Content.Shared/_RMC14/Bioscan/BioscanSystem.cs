@@ -154,7 +154,7 @@ public sealed class BioscanSystem : EntitySystem
         return true;
     }
 
-    public void TryBioscanARES(ref TimeSpan lastMarine, ref int maxXenoAlive, SoundSpecifier sound, bool force)
+    public bool TryBioscanARES(ref TimeSpan lastMarine, ref int maxXenoAlive, SoundSpecifier sound, bool force)
     {
         var time = _timing.CurTime;
         if (TryBioscan<XenoComponent>(
@@ -183,7 +183,10 @@ public sealed class BioscanSystem : EntitySystem
             );
 
             _marineAnnounce.AnnounceARES(null, message, sound, "rmc-bioscan-ares-announcement");
+            return true;
         }
+
+        return false;
     }
 
     public void TryBioscanQueenMother(ref TimeSpan lastXeno, ref int maxMarineAlive, SoundSpecifier sound, bool force)

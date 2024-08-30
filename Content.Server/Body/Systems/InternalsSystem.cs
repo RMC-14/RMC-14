@@ -2,6 +2,7 @@ using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Components;
 using Content.Server.Popups;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
 using Content.Shared.DoAfter;
@@ -70,6 +71,9 @@ public sealed class InternalsSystem : EntitySystem
         Entity<InternalsComponent> ent,
         ref GetVerbsEvent<InteractionVerb> args)
     {
+        if (HasComp<XenoComponent>(args.User))
+            return;
+
         if (!args.CanAccess || !args.CanInteract || args.Hands is null)
             return;
 

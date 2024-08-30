@@ -51,6 +51,7 @@
     whitelist:
       components:
       - Hypospray
+      - Vial
       tags:
       - Bottle
   - type: CMAutomatedVendor # TODO RMC14 different ui style
@@ -127,7 +128,7 @@
         amount: 2
       - id: CMSynthGraft
         amount: 2
-      - id: CMHypospray # TODO RMC14 full of tricordrazine
+      - id: CMHyposprayFilledTricord
         amount: 2
       - id: CMHealthAnalyzer
         amount: 5
@@ -192,7 +193,7 @@
         amount: 3
       - id: RMCBoxPillCanister
         amount: 2
-      - id: Dropper # TODO RMC14 cm dropper
+      - id: RMCDropper
         amount: 3
       - id: CMSyringe
         amount: 7

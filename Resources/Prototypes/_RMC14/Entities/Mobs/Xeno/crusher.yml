@@ -73,5 +73,6 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.66
     baseSprintSpeed: 3
+  - type: XenoBrutalize
   - type: RMCXenoDamageVisuals
     prefix: crusher
