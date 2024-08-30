@@ -4,7 +4,6 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Construction.Components;
-using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
@@ -124,7 +123,7 @@ public abstract class SharedMortarSystem : EntitySystem
         var target = args.Vector;
         var position = _transform.GetMapCoordinates(mortar).Position;
         var offset = target;
-        if (_rmcPlanet.TryGetOffset(mortar.Owner.ToCoordinates(), out var planetOffset))
+        if (_rmcPlanet.TryGetOffset(_transform.GetMapCoordinates(mortar.Owner), out var planetOffset))
             offset -= planetOffset;
 
         mortar.Comp.Target = target;
@@ -218,7 +217,7 @@ public abstract class SharedMortarSystem : EntitySystem
 
         var active = new ActiveMortarShellComponent
         {
-            Coordinates = coordinates,
+            Coordinates = _transform.ToCoordinates(coordinates),
             WarnAt = time + travelTime,
             ImpactWarnAt = time + travelTime + shell.ImpactWarningDelay,
             LandAt = time + travelTime + shell.ImpactDelay,
@@ -283,16 +282,16 @@ public abstract class SharedMortarSystem : EntitySystem
 
     private void OnMortarCameraShellLand(Entity<MortarCameraShellComponent> ent, ref MortarShellLandEvent args)
     {
-        var coords = args.Coordinates;
-        _audio.PlayPvs(ent.Comp.Sound, coords);
+        _audio.PlayPvs(ent.Comp.Sound, args.Coordinates);
 
-        var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(coords);
+        var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(args.Coordinates);
         while (anchored.MoveNext(out var uid))
         {
             if (HasComp<MortarCameraComponent>(uid))
                 QueueDel(uid);
         }
 
+        var coords = _transform.ToMapCoordinates(args.Coordinates);
         Spawn(ent.Comp.Flare, coords);
         var camera = Spawn(ent.Comp.Camera, coords);
 
@@ -386,7 +385,7 @@ public abstract class SharedMortarSystem : EntitySystem
         Entity<MortarShellComponent> shell,
         EntityUid user,
         out TimeSpan travelTime,
-        out EntityCoordinates coordinates)
+        out MapCoordinates coordinates)
     {
         travelTime = default;
         coordinates = default;

@@ -1,4 +1,5 @@
-﻿using Content.Server._RMC14.Dropship;
+﻿using System.Numerics;
+using Content.Server._RMC14.Dropship;
 using Content.Server.Popups;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Map;
@@ -30,7 +31,7 @@ public sealed class MortarSystem : SharedMortarSystem
         Entity<MortarShellComponent> shell,
         EntityUid user,
         out TimeSpan travelTime,
-        out EntityCoordinates coordinates)
+        out MapCoordinates coordinates)
     {
         travelTime = default;
         coordinates = default;
@@ -50,7 +51,6 @@ public sealed class MortarSystem : SharedMortarSystem
             return false;
         }
 
-        coordinates = _transform.GetMoverCoordinates(mortar);
         var target = mortar.Comp.Target + mortar.Comp.Offset + mortar.Comp.Dial;
         if (target == Vector2i.Zero)
         {
@@ -58,10 +58,37 @@ public sealed class MortarSystem : SharedMortarSystem
             return false;
         }
 
+        var mortarCoordinates = _transform.GetMapCoordinates(mortar);
+        coordinates = new MapCoordinates(Vector2.Zero, mortarCoordinates.MapId);
+        _rmcPlanet.TryGetOffset(coordinates, out var offset);
+        if (_rmcPlanet.IsOnPlanet(coordinates))
+        {
+            travelTime = shell.Comp.TravelDelay;
+        }
+        else
+        {
+            if (!_dropship.AnyHijacked())
+            {
+                _popup.PopupEntity(Loc.GetString("rmc-mortar-bad-idea"), user, user, SmallCaution);
+                return false;
+            }
+
+            travelTime = shell.Comp.WarshipTravelDelay;
+        }
+
+        target -= offset;
+        coordinates = coordinates.Offset(target);
+
+        if ((mortarCoordinates.Position - coordinates.Position).Length() < mortar.Comp.MinimumRange)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-mortar-target-too-close"), user, user, SmallCaution);
+            return false;
+        }
+
         if (!_rmcMap.TryGetTileDef(coordinates, out var def) ||
             def.ID == ContentTileDefinition.SpaceID)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-mortar-not-aimed", ("mortar", mortar)), user, user, SmallCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-mortar-target-not-area"), user, user, SmallCaution);
             return false;
         }
 
@@ -83,28 +110,10 @@ public sealed class MortarSystem : SharedMortarSystem
             return false;
         }
 
-        _rmcPlanet.TryGetOffset(coordinates, out var offset);
-        if (_rmcPlanet.IsOnPlanet(coordinates))
-        {
-            travelTime = shell.Comp.TravelDelay;
-            var deviation = shell.Comp.PlanetDeviation;
-            var xDeviation = _random.Next(-deviation, deviation + 1);
-            var yDeviation = _random.Next(-deviation, deviation + 1);
-            offset += (xDeviation, yDeviation);
-        }
-        else
-        {
-            if (!_dropship.AnyHijacked())
-            {
-                _popup.PopupEntity(Loc.GetString("rmc-mortar-bad-idea"), user, user, SmallCaution);
-                return false;
-            }
-
-            travelTime = shell.Comp.WarshipTravelDelay;
-        }
-
-        target -= offset;
-        coordinates = coordinates.Offset(target);
+        var deviation = shell.Comp.PlanetDeviation;
+        var xDeviation = _random.Next(-deviation, deviation + 1);
+        var yDeviation = _random.Next(-deviation, deviation + 1);
+        coordinates = coordinates.Offset(new Vector2(xDeviation, yDeviation));
 
         if (_container.TryGetContainer(mortar, mortar.Comp.ContainerId, out var container) &&
             !_container.CanInsert(shell, container))

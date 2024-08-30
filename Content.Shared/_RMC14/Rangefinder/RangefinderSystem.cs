@@ -172,8 +172,9 @@ public sealed class RangefinderSystem : EntitySystem
 
         if (rangefinder.Comp.Mode == RangefinderMode.Rangefinder)
         {
-            var position = _transform.ToMapCoordinates(coords).Position.Floored();
-            if (_rmcPlanet.TryGetOffset(coords, out var offset))
+            var mapCoords = _transform.ToMapCoordinates(coords);
+            var position = mapCoords.Position.Floored();
+            if (_rmcPlanet.TryGetOffset(mapCoords, out var offset))
                 position += offset;
 
             rangefinder.Comp.LastTarget = position;

@@ -123,6 +123,11 @@ public sealed class RMCMapSystem : EntitySystem
         return true;
     }
 
+    public bool TryGetTileDef(MapCoordinates coordinates, [NotNullWhen(true)] out ContentTileDefinition? def)
+    {
+        return TryGetTileDef(_transform.ToCoordinates(coordinates), out def);
+    }
+
     public bool CanBuildOn(EntityCoordinates coordinates, CollisionGroup group = CollisionGroup.Impassable)
     {
         return !IsTileBlocked(coordinates, group) && !TileHasStructure(coordinates);

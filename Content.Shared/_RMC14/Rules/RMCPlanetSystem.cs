@@ -38,16 +38,22 @@ public sealed class RMCPlanetSystem : EntitySystem
         return false;
     }
 
-    public bool TryGetOffset(EntityCoordinates coordinates, out Vector2i offset)
+    public bool IsOnPlanet(MapCoordinates coordinates)
     {
-        if (_transform.GetGrid(coordinates) is { } gridId &&
+        return IsOnPlanet(_transform.ToCoordinates(coordinates));
+    }
+
+    public bool TryGetOffset(MapCoordinates coordinates, out Vector2i offset)
+    {
+        var entCoords = _transform.ToCoordinates(coordinates);
+        if (_transform.GetGrid(entCoords) is { } gridId &&
             TryComp(gridId, out RMCPlanetComponent? gridPlanet))
         {
             offset = gridPlanet.Offset;
             return true;
         }
 
-        if (_transform.GetMap(coordinates) is { } mapId &&
+        if (_transform.GetMap(entCoords) is { } mapId &&
             TryComp(mapId, out RMCPlanetComponent? mapPlanet))
         {
             offset = mapPlanet.Offset;
