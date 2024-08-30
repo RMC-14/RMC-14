@@ -104,6 +104,7 @@
     blacklist:
       components:
       - Xeno
+  - type: RMCRepairable
 
 - type: htnCompound
   id: RMCSentryCompound
