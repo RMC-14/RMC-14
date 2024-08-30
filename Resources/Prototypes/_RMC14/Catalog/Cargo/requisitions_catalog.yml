@@ -156,6 +156,10 @@
         crate: RMCCrateFoodIngredients
     - name: Gear
       entries:
+      - cost: 2000
+        crate: RMCCrateGearBinoculars
+      - cost: 4000
+        crate: RMCCrateGearPackFlare
       - cost: 6000
         crate: RMCCrateGearPackFlareCAS
     - name: Medical
