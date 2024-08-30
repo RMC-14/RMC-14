@@ -8,6 +8,7 @@ rmc-sentry-magazine-swap-start-others = {$user} begins swapping a new {$magazine
 rmc-sentry-magazine-swap-finish-user = You swap a new {$magazine} into {THE($sentry)}.
 rmc-sentry-magazine-swap-finish-others = {$user} swaps a new {$magazine} into {THE($sentry)}.
 rmc-sentry-limited-rotation = [color=red]It can only turn a maximum of {$degrees} degrees when firing.[/color]
+rmc-sentry-disassembled-with-multitool = It can be disassembled with a [color=cyan]multitool[/color].
 
 rmc-sentry-upgrade-not-item = You need to disassemble {THE($sentry)} with a multitool before upgrading it!
 rmc-sentry-upgrade-not-holding = You need to be holding an upgrade kit in your active hand to upgrade {THE($sentry)}!

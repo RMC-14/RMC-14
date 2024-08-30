@@ -252,6 +252,9 @@ public sealed class SentrySystem : EntitySystem
             {
                 var msg = Loc.GetString("rmc-sentry-limited-rotation", ("degrees", (int)ent.Comp.MaxDeviation.Degrees));
                 args.PushMarkup(msg);
+
+                msg = Loc.GetString("rmc-sentry-disassembled-with-multitool");
+                args.PushMarkup(msg);
             }
         }
     }
