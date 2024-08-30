@@ -126,6 +126,8 @@
       - CMCartridgePistol9mm
     proto: CMCartridgePistol9mm
     capacity: 7
+  - type: Item
+    size: Tiny
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m43.rsi
     layers:
