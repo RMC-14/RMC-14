@@ -1,23 +1,4 @@
 ﻿Entries:
-- author: Siigiil
-  changes:
-  - message: Vial pouches now use slots.
-    type: Fix
-  - message: Bayonet pouches can now actually hold the knives they spawn with and
-      the same delay as with the knife belt is applied when drawing from them.
-    type: Fix
-  - message: All pouches properly display their closed/open sprites.
-    type: Fix
-  id: 133
-  time: '2024-06-11T22:03:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2338
-- author: Siigiil
-  changes:
-  - message: The hotkey for pumping the shotgun has been added to the keybinds menu.
-    type: Add
-  id: 134
-  time: '2024-06-11T22:05:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2341
 - author: Hmeister
   changes:
   - message: Xenos now have a ghost role raffle.
@@ -4394,5 +4375,20 @@
   id: 632
   time: '2024-08-30T09:08:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3875
+- author: crystalHex
+  changes:
+  - message: Added the G8-A general utility belt and drop pouch to dropship crew and
+      command vendors.
+    type: Tweak
+  id: 633
+  time: '2024-08-30T09:11:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3864
+- author: KalimbaMachine
+  changes:
+  - message: Adds Corporate Liaison Wardrobe!
+    type: Add
+  id: 634
+  time: '2024-08-30T09:11:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3852
 Name: RMC14
 Order: -1
