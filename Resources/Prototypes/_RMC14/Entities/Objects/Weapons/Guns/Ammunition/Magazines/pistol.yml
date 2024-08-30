@@ -113,7 +113,7 @@
   parent: CMBaseMagazinePistol
   id: RMCagazinePistolD18
   name: M43 magazine (9mm)
-  description: A small D18 magazine storing 7 9mm bullets. How is it even this small?
+  description: A small D18 magazine storing seven 9mm bullets. How is it even this small?
   components:
   - type: Tag
     tags:
@@ -127,7 +127,7 @@
     proto: CMCartridgePistol9mm
     capacity: 7
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m1984.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m43.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
