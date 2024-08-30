@@ -2,6 +2,7 @@
 rmc-mortar-deploy-end-not-planet = You deploy the M402 mortar portable kit. This is a bad idea.
 rmc-mortar-shell-busy = Someone else is currently using {THE($mortar)}
 rmc-mortar-not-aimed = {CAPITALIZE(THE($mortar))} needs to be aimed first.
+rmc-mortar-covered = You probably shouldn't deploy {THE($mortar)} indoors.
 rmc-mortar-target-invalid = You cannot fire {THE($mortar)} to this target.
 rmc-mortar-target-not-area = This area is out of bounds!
 rmc-mortar-target-covered = You cannot hit the target. It is probably underground.
