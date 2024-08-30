@@ -30,13 +30,6 @@ public sealed partial class DropshipUtilityComponent : Component
     public SpriteSpecifier.Rsi? UtilityAttachedSprite;
 
     /// <summary>
-    /// If true, this component will deal with showing the AttachedSprite as a simple sprite.
-    /// Otherwise, it is the duty of the specific Utility System Component to render the AttachedSprite.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool WillRender = true;
-
-    /// <summary>
     /// Cached target of the weapons terminal
     /// </summary>
     [AutoNetworkedField]

@@ -935,7 +935,34 @@ public sealed class PowerLoaderSystem : EntitySystem
 
     private void SyncAppearance(Entity<DropshipUtilityPointComponent> point)
     {
+        if (!_container.TryGetContainer(point, point.Comp.UtilitySlotId, out var utilityContainer) ||
+            utilityContainer.ContainedEntities.Count == 0)
+        {
+            _appearance.SetData(point, DropshipUtilityVisuals.Sprite, "");
+            _appearance.SetData(point, DropshipUtilityVisuals.State, "");
+            return;
+        }
 
+        SpriteSpecifier.Rsi? rsi;
+
+        foreach (var contained in utilityContainer.ContainedEntities)
+        {
+            if (!TryComp(contained, out DropshipUtilityComponent? utility))
+            {
+                continue;
+            }
+
+            rsi = utility.UtilityAttachedSprite;
+
+            if (rsi is null)
+            {
+                continue;
+            }
+
+            _appearance.SetData(point, DropshipUtilityVisuals.Sprite, rsi.RsiPath.ToString());
+            _appearance.SetData(point, DropshipUtilityVisuals.State, rsi.RsiState);
+            return;
+        }
     }
 
     public override void Update(float frameTime)
