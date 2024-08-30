@@ -100,6 +100,8 @@
         crate: RMCCrateClothingMedicalPouches
       - cost: 2000
         crate: RMCCrateClothingWebbing
+      - cost: 2000
+        crate: RMCCrateClothingWebbingPouch
       - cost: 3000
         crate: RMCCrateClothingOfficerOutfit
     - name: Engineering
