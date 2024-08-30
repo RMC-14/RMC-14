@@ -61,6 +61,10 @@ public sealed class MortarSystem : SharedMortarSystem
         var mortarCoordinates = _transform.GetMapCoordinates(mortar);
         coordinates = new MapCoordinates(Vector2.Zero, mortarCoordinates.MapId);
         _rmcPlanet.TryGetOffset(coordinates, out var offset);
+
+        target -= offset;
+        coordinates = coordinates.Offset(target);
+
         if (_rmcPlanet.IsOnPlanet(coordinates))
         {
             travelTime = shell.Comp.TravelDelay;
@@ -75,9 +79,6 @@ public sealed class MortarSystem : SharedMortarSystem
 
             travelTime = shell.Comp.WarshipTravelDelay;
         }
-
-        target -= offset;
-        coordinates = coordinates.Offset(target);
 
         if ((mortarCoordinates.Position - coordinates.Position).Length() < mortar.Comp.MinimumRange)
         {
