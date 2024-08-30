@@ -22,7 +22,7 @@
         whitelist:
           tags:
           - Knife
-          - RMCWeaponPistolD18
+          - Holdout
         startingItem: RMCM5Bayonet
   - type: CMItemSlots
     startingItem: RMCM5Bayonet
@@ -55,7 +55,7 @@
         whitelist:
           tags:
           - Knife
-          - RMCWeaponPistolD18
+          - Holdout
   - type: Matchbox
   - type: CMHolster
   - type: CMItemSlots
