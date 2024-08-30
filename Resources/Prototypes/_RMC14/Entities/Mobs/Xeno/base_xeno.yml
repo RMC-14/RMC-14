@@ -184,6 +184,8 @@
     - KnockedDown
     - SlowedDown
   - type: ImmuneToClothingRequiredStepTrigger
+  - type: RequireProjectileTarget
+    active: false
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
     channels:
