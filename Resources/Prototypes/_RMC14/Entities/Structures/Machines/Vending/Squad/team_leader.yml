@@ -154,7 +154,7 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      - id: CMVendorBundleRiflemanApparel
+      - id: CMVendorBundleFireteamLeaderApparel
       - id: CMArmorM4
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
