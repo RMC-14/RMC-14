@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: All primary weapons now have AP ammo
-    type: Add
-  id: 128
-  time: '2024-06-04T22:04:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2236
-- author: Whisper
-  changes:
-  - message: Added large webbing.
-    type: Add
-  id: 129
-  time: '2024-06-05T08:55:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2244
-- author: Errant
-  changes:
-  - message: Added M94 flarepacks and boxes to vendors
-    type: Add
-  id: 130
-  time: '2024-06-06T10:26:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2317
 - author: ShadowCommander
   changes:
   - message: Fixed shotgun shell box not changing sprite when empty.
@@ -4385,5 +4364,27 @@
   id: 627
   time: '2024-08-27T09:09:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3854
+- author: Vermidia
+  changes:
+  - message: Fix mobs continuing to hold pulls on death
+    type: Fix
+  id: 628
+  time: '2024-08-30T09:03:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3877
+- author: Vermidia
+  changes:
+  - message: Added 2 new colors of doctor scrubs. Sprites are also updated and the
+      nurse's armband is now a separate item worn on your neck slot
+    type: Add
+  id: 629
+  time: '2024-08-30T09:03:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3868
+- author: crystalHex
+  changes:
+  - message: Added various crates to the requisitions catalog (flare packs, binoculars).
+    type: Tweak
+  id: 630
+  time: '2024-08-30T09:02:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3882
 Name: RMC14
 Order: -1
