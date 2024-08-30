@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Medically trained personnel can examine pills to see their chemical composition
-    type: Add
-  id: 141
-  time: '2024-06-13T20:14:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2413
 - author: Cu1r
   changes:
   - message: Added tiles necessary to port Fiorina Science Annex.
@@ -4407,5 +4400,66 @@
   id: 640
   time: '2024-08-30T09:32:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3641
+- author: DrSmugleaf
+  changes:
+  - message: Added the mortar and HE/Flare mortar shells. Used by anyone with an engineering
+      skill of 1, they are aimed to a coordinate obtained with the rangefinder and
+      dialled to account for the random offset, being able to shoot shells from very
+      far away. More shells and mortars can be bought in Requisitions.
+    type: Add
+  - message: Added the combat technician's sentry and upgrade kit to optionally upgrade
+      it to a mini-sentry. The regular sentry has more health and damage, but shoots
+      and deploys slower than the mini-sentry. The mini-sentry also doesn't block
+      movement. Each combat technician only gets access to one sentry.
+    type: Add
+  - message: Added the rangefinder, used to pinpoint coordinates for mortars.
+    type: Add
+  - message: Added the engineering pamphlet to vendors.
+    type: Add
+  - message: Fixed dead xenos blocking bullets.
+    type: Fix
+  - message: Fixed tiles on the Almayer's stairs teleport points being weedable and
+      allowing construction.
+    type: Fix
+  - message: Fixed explosions having a lower structural damage than intended.
+    type: Fix
+  - message: Fixed xenos not being able to open the scout weapons spec's reactive
+      thermal tarp.
+    type: Fix
+  - message: Fixed CAS fire popups sometimes incorrectly saying that the dropship
+      is not in flight when trying to fire on a location that has a CAS-proof roof.
+    type: Fix
+  - message: Fixed dropship cameras being FOV. They will now allow the pilot to see
+      everything around the target.
+    type: Fix
+  - message: Fixed the named items Patreon perk not renaming items that are bought
+      within a storage, such as the MK80 and SU-6 pistol cases.
+    type: Fix
+  - message: Fixed admin-triggered bioscans not resetting the time for the next bioscan,
+      sometimes leading to two bioscans in quick succession.
+    type: Fix
+  - message: Fixed the dropship arrival overlay being hidden by weeds.
+    type: Fix
+  - message: Fixed the QM not spawning with an approved stamp.
+    type: Fix
+  - message: Fixed the popup for a hive core already existing being displayed for
+      all players instead of just the xeno that tried to build it.
+    type: Fix
+  - message: Fixed worn armor with explosion armor not reducing explosion damage.
+    type: Fix
+  - message: Fixed the global RMC admin UI counting marines and xenos without a player
+      inside them.
+    type: Fix
+  - message: Fixed being able to stack barricades in the same direction and tile.
+    type: Fix
+  - message: Added the 5 missing smoke grenades in the Requisitions weapon vendor.
+    type: Fix
+  - message: Fixed some replays from very long rounds being cut off early.
+    type: Fix
+  - message: Fixed some items being considered contraband.
+    type: Fix
+  id: 641
+  time: '2024-08-30T11:38:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3885
 Name: RMC14
 Order: -1
