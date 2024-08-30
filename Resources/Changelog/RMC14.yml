@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Hmeister
-  changes:
-  - message: Xenos now have a ghost role raffle.
-    type: Tweak
-  id: 135
-  time: '2024-06-11T22:26:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2394
-- author: Sigil
-  changes:
-  - message: Hypersleep pods now function as cryo pods.
-    type: Add
-  id: 136
-  time: '2024-06-11T22:36:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2405
 - author: Whisper
   changes:
   - message: The guidebook now has basic entry pages for new players.
@@ -4390,5 +4376,20 @@
   id: 634
   time: '2024-08-30T09:11:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3852
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Armor lamps now turn off when the user dies, gets infected, devoured,
+      or unequips the armor.
+    type: Tweak
+  id: 635
+  time: '2024-08-30T09:18:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3858
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Melee weapons now do x1.5 extra damage against xenonids.
+    type: Add
+  id: 636
+  time: '2024-08-30T09:19:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3850
 Name: RMC14
 Order: -1
