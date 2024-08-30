@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Cu1r
-  changes:
-  - message: Added tiles necessary to port Fiorina Science Annex.
-    type: Add
-  id: 142
-  time: '2024-06-15T03:19:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2471
 - author: Hmeister
   changes:
   - message: Minor xeno description changes
@@ -4461,5 +4454,12 @@
   id: 641
   time: '2024-08-30T11:38:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3885
+- author: DrSmugleaf
+  changes:
+  - message: Added Sam Ali figurine.
+    type: Add
+  id: 642
+  time: '2024-08-30T12:50:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3889
 Name: RMC14
 Order: -1
