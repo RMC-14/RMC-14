@@ -44,7 +44,7 @@ public sealed partial class RangefinderComponent : Component
     public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillJtac";
 
     [DataField, AutoNetworkedField]
-    public EntProtoId<LaserDesignatorTargetComponent> RangefinderSpawn = "RMCRangefinderTarget";
+    public EntProtoId RangefinderSpawn = "RMCRangefinderTarget";
 
     [DataField, AutoNetworkedField]
     public EntProtoId<LaserDesignatorTargetComponent> DesignatorSpawn = "RMCLaserDesignatorTarget";

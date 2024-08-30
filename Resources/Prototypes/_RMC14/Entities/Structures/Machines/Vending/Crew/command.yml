@@ -66,7 +66,7 @@
       entries:
       - id: RMCBinoculars
         points: 5
-      - id: RMCRangeFinder
+      - id: RMCRangefinder
         points: 8
       - id: RMCLaserDesignator
         points: 12
