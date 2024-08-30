@@ -19,7 +19,7 @@
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
         whitelist:
           tags:
-          - RMCWeaponPistolD18
+          - Holdout
   - type: Matchbox
   - type: CMHolster
   - type: CMItemSlots
