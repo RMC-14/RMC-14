@@ -1,4 +1,5 @@
-﻿using Content.Shared.Actions;
+﻿using Content.Shared._RMC14.Scoping;
+using Content.Shared.Actions;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Movement.Components;
@@ -35,12 +36,16 @@ public sealed class FarSightSystem : EntitySystem
         if (args.Handled)
             return;
 
+        var user = args.Performer;
+
+        if (HasComp<ScopingComponent>(user))
+            return;
+
         args.Handled = true;
 
         ent.Comp.Enabled = !ent.Comp.Enabled;
         Dirty(ent);
 
-        var user = args.Performer;
         SetZoom(ent.Comp.Enabled, user, ent.Comp);
 
         _actions.SetToggled(ent.Comp.Action, ent.Comp.Enabled);

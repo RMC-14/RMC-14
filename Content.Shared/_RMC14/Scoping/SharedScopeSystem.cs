@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.FarSight;
 using Content.Shared.Actions;
 using Content.Shared.Camera;
 using Content.Shared.DoAfter;
@@ -20,6 +21,7 @@ namespace Content.Shared._RMC14.Scoping;
 public abstract partial class SharedScopeSystem : EntitySystem
 {
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
+    [Dependency] private readonly FarSightSystem _farSight = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedContentEyeSystem _contentEye = default!;
@@ -238,6 +240,11 @@ public abstract partial class SharedScopeSystem : EntitySystem
         scoping = EnsureComp<ScopingComponent>(user);
         scoping.Scope = scope;
         scoping.AllowMovement = scope.Comp.AllowMovement;
+
+        // To account for e.g. farsight
+        if (_contentEye.GetZoom(user, out var zoom))
+            scoping.PreviousZoom = zoom;
+
         Dirty(user, scoping);
 
         if (scope.Comp.Attachment && TryGetActiveEntity(scope, out var active))
@@ -263,6 +270,10 @@ public abstract partial class SharedScopeSystem : EntitySystem
         if (scope.Comp.User is not { } user)
             return false;
 
+        if (!TryComp(scope.Comp.User, out ScopingComponent? scoping))
+            return false;
+
+        var prevZoom = scoping.PreviousZoom;
         RemCompDeferred<ScopingComponent>(user);
 
         if (scope.Comp.Attachment && TryGetActiveEntity(scope, out var active))
@@ -276,7 +287,8 @@ public abstract partial class SharedScopeSystem : EntitySystem
         _popup.PopupClient(msgUser, user, user);
 
         _actionsSystem.SetToggled(scope.Comp.ScopingToggleActionEntity, false);
-        _contentEye.ResetZoom(user);
+        _contentEye.SetZoom(user, prevZoom, true);
+        //_contentEye.ResetZoom(user);
         return true;
     }
 
