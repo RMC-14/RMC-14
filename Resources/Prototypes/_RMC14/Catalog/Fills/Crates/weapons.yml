@@ -51,3 +51,12 @@
     contents:
     - id: RMCSmartPistolCase
       amount: 2
+
+- type: entity
+  id: RMCCrateD18
+  parent: RMCCrateWeapons
+  name: D18 Holdout Pistol Crate (x1)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCD18Case
