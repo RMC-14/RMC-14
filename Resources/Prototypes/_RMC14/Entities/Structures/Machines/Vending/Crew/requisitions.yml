@@ -237,7 +237,7 @@
       #   amount: 4
       - id: CMPamphletJTAC
         amount: 1
-      - id: CMPamphletEngineering
+      - id: CMPamphletEngineer
         amount: 1
       #- id: Powerloader Certification
       #  amount: 1
