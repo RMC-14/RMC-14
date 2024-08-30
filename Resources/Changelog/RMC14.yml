@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Timemaster99
-  changes:
-  - message: Fixed M54C Mk2 inhand and icon sprites
-    type: Fix
-  id: 140
-  time: '2024-06-13T08:09:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2425
 - author: blueDev2
   changes:
   - message: Medically trained personnel can examine pills to see their chemical composition
@@ -4404,5 +4397,15 @@
   id: 639
   time: '2024-08-30T09:28:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3884
+- author: Vermidia
+  changes:
+  - message: Added the Brutalizer passive to the Crusher, which gives her an AOE effect
+      that hits every nearby the first person hit at 40% damage. Attacks now reduce
+      the Crusher's Defensive Shield and Charge abilities' cooldowns, with additional
+      hits reducing Charge's even more.
+    type: Add
+  id: 640
+  time: '2024-08-30T09:32:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3641
 Name: RMC14
 Order: -1
