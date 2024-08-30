@@ -352,3 +352,50 @@
       rmc-aslot-barrel: 0.65, 0.09375
       rmc-aslot-rail: -0.15625, 0.15625
       rmc-aslot-underbarrel: 0.25, -0.3125
+
+- type: entity
+  parent: CMWeaponPistolBase
+  id: RMCWeaponPistolM43
+  name: M43 Hummingbird
+  description: The M43 Hummingbird Pistol was produced in the mid-2170s as a cheap and concealable firearm for CLF Sleeper Cell agents for assassinations and ambushes, and is able to be concealed in shoes and workboots.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m43.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m43.rsi
+  - type: RMCSelectiveFire
+    scatterWielded: 6
+    scatterUnwielded: 6
+    baseFireRate: 10
+    burstScatterMult: 3
+  - type: Item
+    size: Tiny
+  - type: GunDamageModifier
+    multiplier: 1.2
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolM43
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.625, 0.125
+      rmc-aslot-rail: -0.03, 0.185
+      
