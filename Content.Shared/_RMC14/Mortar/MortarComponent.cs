@@ -1,10 +1,11 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Mortar;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(SharedMortarSystem))]
 public sealed partial class MortarComponent : Component
 {
@@ -36,7 +37,7 @@ public sealed partial class MortarComponent : Component
     public Vector2i Dial;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan FireDelay;
+    public TimeSpan FireDelay = TimeSpan.FromSeconds(9);
 
     [DataField, AutoNetworkedField]
     public int TilesPerOffset = 20;
@@ -73,4 +74,10 @@ public sealed partial class MortarComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? FireSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/gun_mortar_fire.ogg");
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan? Cooldown;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan LastFiredAt;
 }

@@ -9,6 +9,7 @@ rmc-mortar-target-is-lz = You cannot bomb the landing zone!
 rmc-mortar-bad-idea = You realize how bad of an idea this is and quickly stop.
 rmc-mortar-cant-insert = You can't put {THE($shell)} in {THE($mortar)}!
 rmc-mortar-not-deployed = You need to deploy {THE($mortar)} first!
+rmc-mortar-fire-cooldown = {CAPITALIZE(THE($mortar))} barrel is still steaming hot. Wait a few seconds and stop firing it.
 rmc-mortar-less-accurate-with-range = [color=red]It will be less accurate the further away the target is![/color]
 rmc-mortar-target-start-self = You start adjusting {THE($mortar)}'s firing angle and distance to match the new coordinates.
 rmc-mortar-target-start-others = {$user} starts adjusting {THE($mortar)}'s firing angle and distance.

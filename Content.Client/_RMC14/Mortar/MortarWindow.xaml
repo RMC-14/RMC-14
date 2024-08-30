@@ -6,13 +6,11 @@
     <BoxContainer Orientation="Vertical">
         <BoxContainer Orientation="Horizontal">
             <BoxContainer Orientation="Vertical">
-                <BoxContainer Orientation="Horizontal">
+                <BoxContainer Name="TargetXContainer" Access="Public" Orientation="Horizontal">
                     <Label Text="{Loc 'rmc-mortar-target-x'}" Margin="0 0 5 0" />
-                    <FloatSpinBox Name="TargetX" Access="Public" MinWidth="60" />
                 </BoxContainer>
-                <BoxContainer Orientation="Horizontal" Margin="0 5 0 0">
+                <BoxContainer Name="TargetYContainer" Access="Public" Orientation="Horizontal" Margin="0 5 0 0">
                     <Label Text="{Loc 'rmc-mortar-target-y'}" Margin="0 0 5 0" />
-                    <FloatSpinBox Name="TargetY" Access="Public" MinWidth="60" />
                 </BoxContainer>
                 <Button Name="SetTargetButton" Access="Public" StyleClasses="OpenBoth"
                         Text="{Loc 'rmc-mortar-target-set'}" Margin="0 5 0 0" />
@@ -23,13 +21,11 @@
         <ui:BlueHorizontalSeparator Margin="0 10" />
         <BoxContainer Orientation="Horizontal">
             <BoxContainer Orientation="Vertical">
-                <BoxContainer Orientation="Horizontal">
+                <BoxContainer Name="DialXContainer" Access="Public" Orientation="Horizontal">
                     <Label Text="{Loc 'rmc-mortar-offset-x'}" Margin="0 0 5 0" />
-                    <FloatSpinBox Name="DialX" Access="Public" MinWidth="60" />
                 </BoxContainer>
-                <BoxContainer Orientation="Horizontal" Margin="0 5 0 0">
+                <BoxContainer Name="DialYContainer" Access="Public" Orientation="Horizontal" Margin="0 5 0 0">
                     <Label Text="{Loc 'rmc-mortar-offset-y'}" Margin="0 0 5 0" />
-                    <FloatSpinBox Name="DialY" Access="Public" MinWidth="60" />
                 </BoxContainer>
                 <Button Name="SetOffsetButton" Access="Public" StyleClasses="OpenBoth"
                         Text="{Loc 'rmc-mortar-offset-set'}" Margin="0 5 0 0" />

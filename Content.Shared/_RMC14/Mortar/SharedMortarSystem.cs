@@ -214,6 +214,8 @@ public abstract class SharedMortarSystem : EntitySystem
             return;
 
         var time = _timing.CurTime;
+        mortar.Comp.LastFiredAt = time;
+
         var active = new ActiveMortarShellComponent
         {
             Coordinates = coordinates,
