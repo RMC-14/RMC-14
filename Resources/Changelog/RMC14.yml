@@ -1,139 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added xeno roles and playtime trackers.
-    type: Add
-  id: 123
-  time: '2024-06-01T05:07:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2182
-- author: Errant
-  changes:
-  - message: Walking on resin/weeds now speeds up xenos and slows down everyone else.
-    type: Add
-  id: 124
-  time: '2024-06-02T09:41:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2201
-- author: Whisper
-  changes:
-  - message: Added mre box
-    type: Add
-  id: 125
-  time: '2024-06-02T08:37:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2186
-- author: DrSmugleaf
-  changes:
-  - message: The hive core now slowly produces lesser drones.
-    type: Add
-  id: 126
-  time: '2024-06-02T11:05:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2199
-- author: Whisper
-  changes:
-  - message: Added portable fire extinguisher
-    type: Add
-  id: 127
-  time: '2024-06-03T11:14:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2219
-- author: Whisper
-  changes:
-  - message: All primary weapons now have AP ammo
-    type: Add
-  id: 128
-  time: '2024-06-04T22:04:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2236
-- author: Whisper
-  changes:
-  - message: Added large webbing.
-    type: Add
-  id: 129
-  time: '2024-06-05T08:55:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2244
-- author: Errant
-  changes:
-  - message: Added M94 flarepacks and boxes to vendors
-    type: Add
-  id: 130
-  time: '2024-06-06T10:26:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2317
-- author: ShadowCommander
-  changes:
-  - message: Fixed shotgun shell box not changing sprite when empty.
-    type: Fix
-  id: 131
-  time: '2024-06-07T01:16:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2323
-- author: DrSmugleaf
-  changes:
-  - message: Added pill packets.
-    type: Add
-  id: 132
-  time: '2024-06-07T02:01:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2326
-- author: Siigiil
-  changes:
-  - message: Vial pouches now use slots.
-    type: Fix
-  - message: Bayonet pouches can now actually hold the knives they spawn with and
-      the same delay as with the knife belt is applied when drawing from them.
-    type: Fix
-  - message: All pouches properly display their closed/open sprites.
-    type: Fix
-  id: 133
-  time: '2024-06-11T22:03:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2338
-- author: Siigiil
-  changes:
-  - message: The hotkey for pumping the shotgun has been added to the keybinds menu.
-    type: Add
-  id: 134
-  time: '2024-06-11T22:05:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2341
-- author: Hmeister
-  changes:
-  - message: Xenos now have a ghost role raffle.
-    type: Tweak
-  id: 135
-  time: '2024-06-11T22:26:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2394
-- author: Sigil
-  changes:
-  - message: Hypersleep pods now function as cryo pods.
-    type: Add
-  id: 136
-  time: '2024-06-11T22:36:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2405
-- author: Whisper
-  changes:
-  - message: The guidebook now has basic entry pages for new players.
-    type: Add
-  - message: Added rifleman guidebook
-    type: Add
-  - message: Added drone guidebook
-    type: Add
-  id: 137
-  time: '2024-06-12T05:16:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2340
-- author: MetalSage
-  changes:
-  - message: Fixed xeno self cluttering
-    type: Fix
-  id: 138
-  time: '2024-06-12T21:48:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2410
-- author: K-Dynamic
-  changes:
-  - message: Bodies and perishables no longer produce ammonia
-    type: Tweak
-  id: 139
-  time: '2024-06-13T03:12:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2396
-- author: Timemaster99
-  changes:
-  - message: Fixed M54C Mk2 inhand and icon sprites
-    type: Fix
-  id: 140
-  time: '2024-06-13T08:09:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2425
 - author: blueDev2
   changes:
   - message: Medically trained personnel can examine pills to see their chemical composition
@@ -4384,5 +4249,163 @@
   id: 622
   time: '2024-08-24T12:05:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3818
+- author: Vermidia
+  changes:
+  - message: CMO now has squad and engi comms
+    type: Add
+  id: 623
+  time: '2024-08-27T00:16:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3846
+- author: Whisper
+  changes:
+  - message: Added Darting 'Sleepy' Groth figurine
+    type: Add
+  id: 624
+  time: '2024-08-27T00:25:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3830
+- author: Vermidia
+  changes:
+  - message: Added the Crusher's and Lurker's missing slow on hit. The Lurker's slow
+      only applies to knocked out marines.
+    type: Fix
+  id: 625
+  time: '2024-08-27T00:29:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3843
+- author: crystalHex
+  changes:
+  - message: Added descriptions to bundles/kits.
+    type: Tweak
+  id: 626
+  time: '2024-08-27T00:30:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3834
+- author: MetalSage
+  changes:
+  - message: Fixed accesses on windoors
+    type: Fix
+  id: 627
+  time: '2024-08-27T09:09:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3854
+- author: Vermidia
+  changes:
+  - message: Fix mobs continuing to hold pulls on death
+    type: Fix
+  id: 628
+  time: '2024-08-30T09:03:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3877
+- author: Vermidia
+  changes:
+  - message: Added 2 new colors of doctor scrubs. Sprites are also updated and the
+      nurse's armband is now a separate item worn on your neck slot
+    type: Add
+  id: 629
+  time: '2024-08-30T09:03:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3868
+- author: crystalHex
+  changes:
+  - message: Added various crates to the requisitions catalog (flare packs, binoculars).
+    type: Tweak
+  id: 630
+  time: '2024-08-30T09:02:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3882
+- author: crystalHex
+  changes:
+  - message: The fireteam leader now starts with the M12 helmet.
+    type: Fix
+  id: 631
+  time: '2024-08-30T09:06:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3876
+- author: crystalHex
+  changes:
+  - message: Xenos can no longer light flares on ground.
+    type: Fix
+  - message: Xenos can no longer remove webbings from jumpsuits.
+    type: Fix
+  - message: Xenos can no longer toggle attachables or internals.
+    type: Fix
+  - message: Xenos can no longer see or change gun fire modes.
+    type: Fix
+  - message: Xenos can no longer (attempt to) pray.
+    type: Fix
+  id: 632
+  time: '2024-08-30T09:08:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3875
+- author: crystalHex
+  changes:
+  - message: Added the G8-A general utility belt and drop pouch to dropship crew and
+      command vendors.
+    type: Tweak
+  id: 633
+  time: '2024-08-30T09:11:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3864
+- author: KalimbaMachine
+  changes:
+  - message: Adds Corporate Liaison Wardrobe!
+    type: Add
+  id: 634
+  time: '2024-08-30T09:11:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3852
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Armor lamps now turn off when the user dies, gets infected, devoured,
+      or unequips the armor.
+    type: Tweak
+  id: 635
+  time: '2024-08-30T09:18:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3858
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Melee weapons now do x1.5 extra damage against xenonids.
+    type: Add
+  id: 636
+  time: '2024-08-30T09:19:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3850
+- author: Vermidia
+  changes:
+  - message: Fixed Crusher stomp damaging marines more than half a tile away from
+      the crusher that aren't laying down
+    type: Fix
+  id: 637
+  time: '2024-08-30T09:22:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3823
+- author: Vermidia
+  changes:
+  - message: Hyposprays now have vials, which can be tactically reloaded by using
+      a hypo on one, or you can swap them in with a vial in hand.
+    type: Add
+  - message: You can now toggle a Hypospray's transfer amount.
+    type: Fix
+  - message: Hyposprays can't inject into beakers
+    type: Fix
+  - message: Hyposprays from We-Ya Meds now come with a vial of tricordizine. You
+      can use the vial or the hypo with the vial inserted on a We-Ya Med to refill
+      it.
+    type: Fix
+  - message: Vial pouches can now be selected by corpsman as a pouch option. Comes
+      with 6 vials
+    type: Add
+  - message: Droppers are now available in the We-Ya Med Plus
+    type: Add
+  - message: You can add lids to beakers, large beakers, and high capacity beakers
+    type: Fix
+  id: 638
+  time: '2024-08-30T09:27:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3842
+- author: crystalHex
+  changes:
+  - message: Added the drop pouch crate to requisitions catalog.
+    type: Tweak
+  id: 639
+  time: '2024-08-30T09:28:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3884
+- author: Vermidia
+  changes:
+  - message: Added the Brutalizer passive to the Crusher, which gives her an AOE effect
+      that hits every nearby the first person hit at 40% damage. Attacks now reduce
+      the Crusher's Defensive Shield and Charge abilities' cooldowns, with additional
+      hits reducing Charge's even more.
+    type: Add
+  id: 640
+  time: '2024-08-30T09:32:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3641
 Name: RMC14
 Order: -1

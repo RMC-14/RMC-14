@@ -287,6 +287,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewLeader
   name: essential SL kit
+  description: Contains a laser designator, a pack of signal flares, a breaching charge and a fire extinguisher.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Explosives/satchel_charge.rsi # TODO RMC14 plastic explosives icon
@@ -302,7 +303,7 @@
   parent: RMCKitBase
   id: RMCKitRifleM4SPR
   name: M4SPR marksman kit
-  description: Contains a M45SPR rifle, a 4x telescopic scope, a suppressor, an extended barrel and 2 AP magazines.
+  description: Contains a M4SPR rifle, a 4x telescopic scope, a suppressor, an extended barrel and 2 AP magazines.
   components:
   - type: Storage
     maxItemSize: Huge
@@ -340,7 +341,7 @@
   parent: RMCKitBase
   id: RMCKitEngineering
   name: engineering supply kit
-  description: Contains a construction pouch with 50 steel, 30 plasteel and 15 barbed wire, and an electronics pouch with three high-capacity power cells.
+  description: Contains a construction pouch with 50 metal, 30 plasteel and 15 barbed wire, and an electronics pouch with three high-capacity power cells.
   components:
   - type: Storage
     maxItemSize: Huge

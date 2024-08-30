@@ -118,8 +118,8 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      #- id: CMBeltGeneralUtility # TODO RMC14 Utility Storage Belt
-      #  recommended: true
+      - id: RMCBeltUtilityGeneral
+        recommended: true
       - id: CMBeltMarine
         recommended: true
       - id: CMBeltUtilityFilled
@@ -242,8 +242,8 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      #- id: CMBeltGeneralUtility # TODO RMC14 Utility Storage Belt
-      #  recommended: true
+      - id: RMCBeltUtilityGeneral
+        recommended: true
       - id: CMBeltSecurityMPFilled
         recommended: true
       - id: CMBeltMedicBag
@@ -514,8 +514,8 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      #- id: General Utility Pouch # TODO RMC14 G8-A General Utility Pouch
-      #  recommended: true
+      - id: RMCBeltUtilityGeneral
+        recommended: true
       - id: CMBeltSecurityMPFilled
         recommended: true
       - id: CMBeltMedicBag

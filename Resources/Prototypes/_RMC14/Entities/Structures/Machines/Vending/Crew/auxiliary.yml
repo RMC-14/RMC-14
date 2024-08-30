@@ -38,7 +38,7 @@
     - name: Belts
       choices: { CMBelt: 1 }
       entries:
-      #- id: CMBeltGeneralUtility # TODO RMC14 Utility Storage Belt
+      - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
       - id: CMBeltMedicBagFilled
         recommended: true

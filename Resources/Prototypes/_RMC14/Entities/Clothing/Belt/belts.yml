@@ -193,6 +193,7 @@
       - CMRollerBed
       - BodyBag
 #      - # TODO RMC14 latex gloves
+      - Hypospray
       components:
       - Hypospray
       - Defibrillator
