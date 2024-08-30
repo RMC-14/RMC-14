@@ -8,6 +8,7 @@ using Content.Shared.Maps;
 using Robust.Server.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 using static Content.Shared.Popups.PopupType;
 
 namespace Content.Server._RMC14.Mortar;
@@ -21,6 +22,7 @@ public sealed class MortarSystem : SharedMortarSystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     protected override bool CanLoadPopup(
@@ -38,6 +40,13 @@ public sealed class MortarSystem : SharedMortarSystem
         if (!mortar.Comp.Deployed)
         {
             _popup.PopupEntity(Loc.GetString("rmc-mortar-not-deployed", ("mortar", mortar)), user, user, SmallCaution);
+            return false;
+        }
+
+        var time = _timing.CurTime;
+        if (time < mortar.Comp.LastFiredAt + mortar.Comp.FireDelay)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-mortar-fire-cooldown", ("mortar", mortar)), user, user, SmallCaution);
             return false;
         }
 
