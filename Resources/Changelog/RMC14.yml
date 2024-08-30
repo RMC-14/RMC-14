@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: The guidebook now has basic entry pages for new players.
-    type: Add
-  - message: Added rifleman guidebook
-    type: Add
-  - message: Added drone guidebook
-    type: Add
-  id: 137
-  time: '2024-06-12T05:16:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2340
 - author: MetalSage
   changes:
   - message: Fixed xeno self cluttering
@@ -4391,5 +4380,13 @@
   id: 636
   time: '2024-08-30T09:19:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3850
+- author: Vermidia
+  changes:
+  - message: Fixed Crusher stomp damaging marines more than half a tile away from
+      the crusher that aren't laying down
+    type: Fix
+  id: 637
+  time: '2024-08-30T09:22:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3823
 Name: RMC14
 Order: -1
