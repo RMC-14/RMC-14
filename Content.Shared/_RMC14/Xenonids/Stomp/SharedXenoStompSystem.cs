@@ -24,9 +24,9 @@ public sealed class XenoStompSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-	[Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
 
-	public override void Initialize()
+    public override void Initialize()
     {
         base.Initialize();
 
@@ -34,7 +34,6 @@ public sealed class XenoStompSystem : EntitySystem
     }
 
     private readonly HashSet<Entity<MarineComponent>> _receivers = new();
-    private readonly HashSet<Entity<MarineComponent>> _shortReceivers = new();
 
     private void OnXenoStompAction(Entity<XenoStompComponent> xeno, ref XenoStompActionEvent args)
     {
@@ -56,7 +55,6 @@ public sealed class XenoStompSystem : EntitySystem
             return;
 
         _receivers.Clear();
-        _shortReceivers.Clear();
         _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.Range, _receivers);
 
         if (_net.IsServer)
