@@ -37,3 +37,19 @@
   components:
   - type: TimedDespawn
     lifetime: 5
+
+- type: entity
+  parent: CMEffectStomp
+  id: RMCEffectLurkerSlow
+  noSpawn: true
+  components:
+  - type: TimedDespawn
+    lifetime: 3.5
+
+- type: entity
+  parent: CMEffectStomp
+  id: RMCEffectCrusherSlow
+  noSpawn: true
+  components:
+  - type: TimedDespawn
+    lifetime: 2

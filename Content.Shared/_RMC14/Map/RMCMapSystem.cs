@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Coordinates;
 using Content.Shared.Directions;
 using Content.Shared.Maps;
@@ -67,12 +68,12 @@ public sealed class RMCMapSystem : EntitySystem
         return false;
     }
 
-    public bool TryGetTileRefForEnt(EntityUid ent, out Entity<MapGridComponent> grid, out TileRef tile)
+    public bool TryGetTileRefForEnt(EntityCoordinates ent, out Entity<MapGridComponent> grid, out TileRef tile)
     {
         grid = default;
         tile = default;
         if (_transform.GetGrid(ent) is not { } gridId ||
-            !_mapGridQuery.TryComp(ent, out var gridComp))
+            !_mapGridQuery.TryComp(gridId, out var gridComp))
         {
             return false;
         }
@@ -103,5 +104,32 @@ public sealed class RMCMapSystem : EntitySystem
         }
 
         return false;
+    }
+
+    public bool TryGetTileDef(EntityCoordinates coordinates, [NotNullWhen(true)] out ContentTileDefinition? def)
+    {
+        def = default;
+        if (_transform.GetGrid(coordinates) is not { } gridId ||
+            !TryComp(gridId, out MapGridComponent? grid))
+        {
+            return false;
+        }
+
+        var indices = _map.TileIndicesFor(gridId, grid, coordinates);
+        if (!_map.TryGetTileDef(grid, indices, out var defUncast))
+            return false;
+
+        def = (ContentTileDefinition) defUncast;
+        return true;
+    }
+
+    public bool TryGetTileDef(MapCoordinates coordinates, [NotNullWhen(true)] out ContentTileDefinition? def)
+    {
+        return TryGetTileDef(_transform.ToCoordinates(coordinates), out def);
+    }
+
+    public bool CanBuildOn(EntityCoordinates coordinates, CollisionGroup group = CollisionGroup.Impassable)
+    {
+        return !IsTileBlocked(coordinates, group) && !TileHasStructure(coordinates);
     }
 }

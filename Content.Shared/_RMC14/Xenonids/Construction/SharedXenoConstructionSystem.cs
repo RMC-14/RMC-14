@@ -666,7 +666,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             // server-only as the core may not be in the client's PVS bubble
             if (_net.IsServer)
-                _popup.PopupEntity(Loc.GetString("cm-xeno-unique-exists", ("choice", choiceProto.Name)), xeno, PopupType.MediumCaution);
+                _popup.PopupEntity(Loc.GetString("cm-xeno-unique-exists", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
 
             return false;
         }

@@ -124,6 +124,7 @@
       outerClothing:
       - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
         state: lamp-on
+  - type: RMCSuitLight
   - type: PointLight
     enabled: false
     radius: 4

@@ -58,6 +58,8 @@
     knockdownRequiresInvisibility: true
   - type: XenoTurnInvisible
   - type: XenoCripplingStrike
+  - type: XenoMeleeSlow
+    requiresKnockDown: true
   - type: MeleeWeapon
     attackRate: 0.75
     damage:

@@ -275,7 +275,7 @@ namespace Content.IntegrationTests.Tests
             {
                 // TODO fix ninja
                 // Currently ninja fails to equip their own loadout.
-                if (protoId == "MobHumanSpaceNinja" || protoId == "MobHumanSyndicateAgent")
+                if (protoId == "MobHumanSpaceNinja")
                     continue;
 
                 var count = server.EntMan.EntityCount;

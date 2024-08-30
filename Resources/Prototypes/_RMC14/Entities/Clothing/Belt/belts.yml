@@ -215,6 +215,7 @@
       - CMRollerBed
       - BodyBag
 #      - # TODO RMC14 latex gloves
+      - Hypospray
       components:
       - Hypospray
       - Defibrillator
@@ -283,11 +284,12 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/mortar.rsi
   - type: Storage
-    maxItemSize: Normal
+    maxItemSize: Huge
     whitelist:
       tags:
-      - CMMortarShell
       - Sidearm
+      components:
+      - MortarShell
 #      - # TODO RMC14 pistol, revolver, flaregun
   - type: FixedItemSizeStorage
   - type: LimitedStorage

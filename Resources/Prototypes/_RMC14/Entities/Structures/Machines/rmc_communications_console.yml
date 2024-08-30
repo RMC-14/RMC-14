@@ -1,4 +1,5 @@
 ﻿- type: entity
+  abstract: true
   parent: CMBaseStructure
   id: RMCCommunicationsConsoleBase
   components:
@@ -12,6 +13,8 @@
   - type: ApcPowerReceiver
     powerLoad: 0
     needsPower: false # TODO RMC14
+  - type: WallMount
+    arc: 360
 
 - type: entity
   parent: RMCCommunicationsConsoleBase

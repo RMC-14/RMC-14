@@ -98,6 +98,7 @@ public class AreaImporter
                 const string canBuildSpecial = "can_build_special =";
                 const string isResinAllowed = "is_resin_allowed =";
                 const string resinConstructionAllowed = "resin_construction_allowed =";
+                const string landingZone = "is_landing_zone =";
                 if (TryExtract(name, out var result))
                 {
                     areaName = result.Replace("\\improper", "").Replace("\"", "").Trim();
@@ -183,9 +184,18 @@ public class AreaImporter
                 else if (TryExtract(flagsArea, out result))
                 {
                     isDefault = false;
-                    area.Add((nameof(AreaComponent.AvoidBioscan), result.Contains("AREA_AVOID_BIOSCAN").ToString()));
-                    area.Add((nameof(AreaComponent.NoTunnel), result.Contains("AREA_NOTUNNEL").ToString()));
-                    area.Add((nameof(AreaComponent.Unweedable), result.Contains("AREA_UNWEEDABLE").ToString()));
+                    area.Add((
+                        nameof(AreaComponent.AvoidBioscan),
+                        result.Contains("AREA_AVOID_BIOSCAN").ToString().ToLowerInvariant()
+                    ));
+                    area.Add((
+                        nameof(AreaComponent.NoTunnel),
+                        result.Contains("AREA_NOTUNNEL").ToString().ToLowerInvariant()
+                    ));
+                    area.Add((
+                        nameof(AreaComponent.Unweedable),
+                        result.Contains("AREA_UNWEEDABLE").ToString().ToLowerInvariant()
+                    ));
                 }
                 else if (TryExtract(canBuildSpecial, out result))
                 {
@@ -201,6 +211,11 @@ public class AreaImporter
                 {
                     isDefault = false;
                     area.Add((nameof(AreaComponent.ResinConstructionAllowed), result.ToLowerInvariant()));
+                }
+                else if (TryExtract(landingZone, out result))
+                {
+                    isDefault = false;
+                    area.Add((nameof(AreaComponent.LandingZone), result.ToLowerInvariant()));
                 }
             }
 

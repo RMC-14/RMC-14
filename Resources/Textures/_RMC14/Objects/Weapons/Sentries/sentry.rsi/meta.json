@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/fc6beab41c447b91d2524b02fadeebfae13f26c1/icons/obj/structures/machinery/defenses/sentry.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "defense_base"
+    },
+    {
+      "name": "defense_base_off"
+    },
+    {
+      "name": "normal_uac_sentry",
+      "directions": 4
+    },
+    {
+      "name": "normal_uac_sentry_on",
+      "directions": 4
+    },
+    {
+      "name": "normal_uac_sentry_noammo",
+      "directions": 4
+    },
+    {
+      "name": "normal_uac_sentry_destroyed"
+    },
+    {
+      "name": "normal_uac_sentry_handheld"
+    },
+    {
+      "name": "dmr_uac_sentry",
+      "directions": 4
+    },
+    {
+      "name": "dmr_uac_sentry_on",
+      "directions": 4
+    },
+    {
+      "name": "dmr_uac_sentry_noammo",
+      "directions": 4
+    },
+    {
+      "name": "dmr_uac_sentry_destroyed"
+    },
+    {
+      "name": "dmr_uac_sentry_handheld"
+    },
+    {
+      "name": "shotgun_uac_sentry",
+      "directions": 4
+    },
+    {
+      "name": "shotgun_uac_sentry_on",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "shotgun_uac_sentry_noammo",
+      "directions": 4
+    },
+    {
+      "name": "shotgun_uac_sentry_destroyed"
+    },
+    {
+      "name": "shotgun_uac_sentry_handheld"
+    },
+    {
+      "name": "mini_uac_sentry",
+      "directions": 4
+    },
+    {
+      "name": "mini_uac_sentry_on",
+      "directions": 4
+    },
+    {
+      "name": "mini_uac_sentry_noammo",
+      "directions": 4,
+      "delays": [
+        [
+          0.3,
+          0.4
+        ],
+        [
+          0.3,
+          0.4
+        ],
+        [
+          0.3,
+          0.4
+        ],
+        [
+          0.3,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "mini_uac_sentry_destroyed"
+    },
+    {
+      "name": "mini_uac_sentry_handheld"
+    }
+  ]
+}

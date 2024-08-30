@@ -1,0 +1,19 @@
+﻿- type: entityCategory
+  id: DistressSignalNames
+  name: rmc-entity-category-name-distress-signal-names
+  hideSpawnMenu: true
+
+- type: entityCategory
+  id: Surgeries
+  name: rmc-entity-category-name-surgeries
+  hideSpawnMenu: true
+
+- type: entityCategory
+  id: SurgerySteps
+  name: rmc-entity-category-name-surgery-steps
+  hideSpawnMenu: true
+
+- type: entityCategory
+  id: Squads
+  name: rmc-entity-category-name-squads
+  hideSpawnMenu: true

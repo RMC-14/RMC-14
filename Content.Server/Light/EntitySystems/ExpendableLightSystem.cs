@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Dropship.Weapon;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.IgnitionSource;
@@ -192,7 +193,7 @@ namespace Content.Server.Light.EntitySystems
 
         private void AddIgniteVerb(Entity<ExpendableLightComponent> ent, ref GetVerbsEvent<ActivationVerb> args)
         {
-            if (!args.CanAccess || !args.CanInteract)
+            if (!args.CanAccess || !args.CanInteract || HasComp<XenoComponent>(args.User))
                 return;
 
             if (ent.Comp.CurrentState != ExpendableLightState.BrandNew)

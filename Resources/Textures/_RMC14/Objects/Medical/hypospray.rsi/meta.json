@@ -11,6 +11,9 @@
       "name": "hypospray"
     },
     {
+      "name": "empty"
+    },
+    {
       "name": "inhand-left",
       "directions": 4
     },

@@ -38,7 +38,7 @@
     - name: Belts
       choices: { CMBelt: 1 }
       entries:
-      #- id: CMBeltGeneralUtility # TODO RMC14 Utility Storage Belt
+      - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
       - id: CMBeltMedicBagFilled
         recommended: true
@@ -76,7 +76,7 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      #- id: CMWebbingDrop # TODO RMC14 Drop Pouch Webbing
+      - id: CMWebbingPouch
       - id: CMWebbing
       #- id: CMWebbingHolster # TODO RMC14 Shoulder Holster Webbing
     - name: Glasses

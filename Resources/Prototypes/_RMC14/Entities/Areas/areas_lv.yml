@@ -468,6 +468,7 @@
   components:
   - type: Area
     resinAllowed: false
+    landingZone: true
 
 - type: entity
   parent: RMCAreaLv624LazarusLandingZones

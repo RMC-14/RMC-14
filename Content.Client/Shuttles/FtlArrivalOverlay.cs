@@ -14,7 +14,7 @@ namespace Content.Client.Shuttles;
 /// </summary>
 public sealed class FtlArrivalOverlay : Overlay
 {
-    public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowEntities;
+    public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
     private EntityLookupSystem _lookups;
     private SharedMapSystem _maps;

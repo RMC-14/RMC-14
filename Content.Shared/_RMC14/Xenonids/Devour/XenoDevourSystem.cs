@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Marines.Armor;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates;
@@ -174,7 +175,7 @@ public sealed class XenoDevourSystem : EntitySystem
     private void OnDevouredIsUnequippingAttempt(Entity<DevouredComponent> devoured, ref IsUnequippingAttemptEvent args)
     {
         // if (!HasComp<UsableWhileDevouredComponent>(args.Equipment))
-            args.Cancel();
+        args.Cancel();
     }
 
     private void OnXenoCanDropTarget(Entity<XenoDevourComponent> xeno, ref CanDropTargetEvent args)
@@ -235,6 +236,9 @@ public sealed class XenoDevourSystem : EntitySystem
 
             _popup.PopupEntity(Loc.GetString("cm-xeno-devour-observer", ("user", xeno.Owner), ("target", target)), xeno, recipient, PopupType.MediumCaution);
         }
+
+        var ev = new XenoDevouredEvent(target, xeno.Owner);
+        RaiseLocalEvent(target, ref ev, true);
     }
 
     private void OnXenoRegurgitateAction(Entity<XenoDevourComponent> xeno, ref XenoRegurgitateActionEvent args)
@@ -490,3 +494,11 @@ public sealed class XenoDevourSystem : EntitySystem
         }
     }
 }
+
+/// <summary>
+/// Event that is raised whenever a mob is devoured by another mob
+/// </summary>
+/// <param name="Target">The Entity who was devoured</param>
+/// <param name="User">The Entity who caused the devouring</param>
+[ByRefEvent]
+public record struct XenoDevouredEvent(EntityUid Target, EntityUid User);

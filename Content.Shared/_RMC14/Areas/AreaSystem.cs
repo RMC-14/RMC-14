@@ -50,6 +50,14 @@ public sealed class AreaSystem : EntitySystem
     }
 
     public bool TryGetArea(
+        MapCoordinates coordinates,
+        [NotNullWhen(true)] out EntityPrototype? areaProto,
+        [NotNullWhen(true)] out AreaComponent? area)
+    {
+        return TryGetArea(_transform.ToCoordinates(coordinates), out areaProto, out area);
+    }
+
+    public bool TryGetArea(
         EntityUid coordinates,
         [NotNullWhen(true)] out EntityPrototype? areaProto,
         [NotNullWhen(true)] out AreaComponent? area)

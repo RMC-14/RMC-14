@@ -66,4 +66,7 @@ public sealed partial class AreaComponent : Component
 
     [DataField, AutoNetworkedField]
     public int ZLevel;
+
+    [DataField, AutoNetworkedField]
+    public bool LandingZone;
 }

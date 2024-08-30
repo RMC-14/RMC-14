@@ -202,6 +202,9 @@ public sealed partial class NPCCombatSystem
                 return;
             }
 
+#pragma warning disable RA0002
+            gun.Target = comp.Target;
+#pragma warning restore RA0002
             _gun.AttemptShoot(uid, gunUid, gun, targetCordinates);
         }
     }

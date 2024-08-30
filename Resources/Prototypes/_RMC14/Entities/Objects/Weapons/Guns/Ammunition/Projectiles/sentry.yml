@@ -1,0 +1,36 @@
+﻿- type: entity
+  parent: BaseBullet
+  id: CMBulletSentry10x50mm
+  name: bullet (10x50mm)
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    layers:
+    - state: bullet
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 20
+  - type: CMArmorPiercing
+    amount: 100
+  - type: DeleteXenoResinOnHit
+
+- type: entity
+  parent: BaseBullet
+  id: RMCBulletSentry
+  name: bullet (10x28mm)
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    layers:
+    - state: bullet
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+  - type: CMArmorPiercing
+    amount: 35

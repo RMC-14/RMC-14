@@ -158,6 +158,12 @@
     - MarineRequisition
     - MarineJTAC
     - MarineIntel
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
     defaultChannel: MarineCommand
 
 
@@ -217,6 +223,13 @@
     - MarineMedical
     - MarineCommand
     - MarineIntel
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineEngineer
     defaultChannel: MarineMedical
 
 # Research

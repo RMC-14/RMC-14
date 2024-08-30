@@ -917,6 +917,7 @@
     state: green
   - type: Area
     resinAllowed: false
+    landingZone: true
 
 - type: entity
   parent:
@@ -930,6 +931,7 @@
   - type: Area
     resinAllowed: false
     minimapColor: '#EBE5E5E3'
+    landingZone: true
 
 - type: entity
   parent:
@@ -943,41 +945,63 @@
     state: ass_line
   - type: Area
     resinAllowed: false
+    landingZone: true
 
 - type: entity
   parent: RMCAreaBigredv2OutsideTelecomm
   id: RMCAreaBigredv2OutsideTelecommLz2Cave
   name: Central Grounds Communications Relay
+  components:
+  - type: Area
+    landingZone: false
 
 - type: entity
   parent: RMCAreaBigredv2OutsideTelecomm
   id: RMCAreaBigredv2OutsideTelecommNCave
   name: North Cave Communications Relay
+  components:
+  - type: Area
+    landingZone: false
 
 - type: entity
   parent: RMCAreaBigredv2OutsideTelecomm
   id: RMCAreaBigredv2OutsideTelecommWarehouse
   name: Warehouse Communications Relay
+  components:
+  - type: Area
+    landingZone: false
 
 - type: entity
   parent: RMCAreaBigredv2OutsideTelecomm
   id: RMCAreaBigredv2OutsideTelecommSecurity
   name: Security Communications Relay
+  components:
+  - type: Area
+    landingZone: false
 
 - type: entity
   parent: RMCAreaBigredv2OutsideTelecomm
   id: RMCAreaBigredv2OutsideTelecommStore
   name: General Store Communications Relay
+  components:
+  - type: Area
+    landingZone: false
 
 - type: entity
   parent: RMCAreaBigredv2OutsideTelecomm
   id: RMCAreaBigredv2OutsideTelecommAdmin
   name: Administrative Communications Relay
+  components:
+  - type: Area
+    landingZone: false
 
 - type: entity
   parent: RMCAreaBigredv2OutsideTelecomm
   id: RMCAreaBigredv2OutsideTelecommEngi
   name: Engineering Communications Relay
+  components:
+  - type: Area
+    landingZone: false
 
 - type: entity
   parent:

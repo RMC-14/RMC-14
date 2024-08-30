@@ -83,3 +83,5 @@
         type: RMCCameraBui
   - type: RMCCameraComputer
     id: RMCSurveillanceCameraAlmayer
+  - type: WallMount
+    arc: 360

@@ -60,6 +60,7 @@
     - FootstepSound
     - DoorBumpOpener
   - type: Marine
+  - type: RMCSuitLight
   - type: HolocardState
   - type: Hunger
   - type: Thirst
