@@ -374,7 +374,7 @@
     multiplier: 1.2
   - type: Tag
     tags:
-    - RMCWeaponPistolD18
+    - Holdout
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -402,5 +402,5 @@
       rmc-aslot-barrel: 0.625, 0.125
       rmc-aslot-rail: -0.03, 0.185
       
-- type: Tag
-    id: RMCWeaponPistolD18
+- type: Tag # For stuff like the D18 and Holdout Pistol
+  id: Holdout
