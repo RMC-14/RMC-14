@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Hmeister
-  changes:
-  - message: Minor xeno description changes
-    type: Tweak
-  id: 143
-  time: '2024-06-15T03:24:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2469
 - author: DrSmugleaf
   changes:
   - message: Fixed marines getting stuck on hypersleep chambers at roundstart and
@@ -4461,5 +4454,12 @@
   id: 642
   time: '2024-08-30T12:50:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3889
+- author: Vermidia
+  changes:
+  - message: FTLs get insulated gloves as part of their kit
+    type: Fix
+  id: 643
+  time: '2024-08-30T22:49:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3894
 Name: RMC14
 Order: -1
