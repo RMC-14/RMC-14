@@ -265,12 +265,15 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void OnWeaponsFireMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsFireMsg args)
     {
+        if (_net.IsClient)
+            return;
+
         var actor = args.Actor;
         ref var screen = ref args.First ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
         if (screen.Weapon is not { } netWeapon)
         {
             var msg = Loc.GetString("rmc-dropship-weapons-fire-no-weapon");
-            _popup.PopupClient(msg, actor, PopupType.SmallCaution);
+            _popup.PopupCursor(msg, actor, PopupType.SmallCaution);
             return;
         }
 
@@ -292,7 +295,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 (ftl.State != FTLState.Travelling && ftl.State != FTLState.Arriving))
             {
                 var msg = Loc.GetString("rmc-dropship-weapons-fire-not-flying");
-                _popup.PopupClient(msg, actor, PopupType.SmallCaution);
+                _popup.PopupCursor(msg, actor, PopupType.SmallCaution);
                 return;
             }
         }
@@ -312,14 +315,14 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (!_casDebug && !_area.CanCAS(coordinates))
         {
             var msg = Loc.GetString("rmc-laser-designator-not-cas");
-            _popup.PopupClient(msg, actor);
+            _popup.PopupCursor(msg, actor);
             return;
         }
 
         if (!_casDebug && weaponComp.Skills != null && !_skills.HasSkills(actor, weaponComp.Skills))
         {
             var msg = Loc.GetString("rmc-laser-designator-not-skilled");
-            _popup.PopupClient(msg, actor);
+            _popup.PopupCursor(msg, actor);
             return;
         }
 
@@ -335,7 +338,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (time < weaponComp.NextFireAt)
         {
             var msg = Loc.GetString("rmc-dropship-weapons-fire-cooldown", ("weapon", weapon));
-            _popup.PopupClient(msg, actor);
+            _popup.PopupCursor(msg, actor);
             return;
         }
 
@@ -343,7 +346,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             ammo.Comp.Rounds < ammo.Comp.RoundsPerShot)
         {
             var msg = Loc.GetString("rmc-dropship-weapons-fire-no-ammo", ("weapon", weapon));
-            _popup.PopupClient(msg, actor);
+            _popup.PopupCursor(msg, actor);
             return;
         }
 
@@ -353,7 +356,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         ammo.Comp.Rounds -= ammo.Comp.RoundsPerShot;
         Dirty(ammo);
 
-        _audio.PlayPredicted(ammo.Comp.SoundCockpit, weapon.Value, ent);
+        _audio.PlayPvs(ammo.Comp.SoundCockpit, weapon.Value);
         weaponComp.NextFireAt = time + weaponComp.FireDelay;
         Dirty(weapon.Value, weaponComp);
 
