@@ -355,9 +355,9 @@
 
 - type: entity
   parent: CMWeaponPistolBase
-  id: RMCWeaponPistolM43
-  name: M43 Hummingbird
-  description: The M43 Hummingbird Pistol was produced in the mid-2170s as a cheap and concealable firearm for CLF Sleeper Cell agents for assassinations and ambushes, and is able to be concealed in shoes and workboots.
+  id: RMCWeaponPistolD18
+  name: D18 Hummingbird
+  description: The D18 Hummingbird Pistol was produced in the mid-2170s as a cheap and concealable firearm for CLF Sleeper Cell agents for assassinations and ambushes, and is able to be concealed in shoes and workboots.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m43.rsi
@@ -381,7 +381,7 @@
         priority: 2
         whitelist:
           tags:
-          - RMCMagazinePistolM43
+          - RMCMagazinePistolD18
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
