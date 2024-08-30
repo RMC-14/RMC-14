@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: MetalSage
-  changes:
-  - message: Fixed xeno self cluttering
-    type: Fix
-  id: 138
-  time: '2024-06-12T21:48:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2410
 - author: K-Dynamic
   changes:
   - message: Bodies and perishables no longer produce ammonia
@@ -4388,5 +4381,28 @@
   id: 637
   time: '2024-08-30T09:22:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3823
+- author: Vermidia
+  changes:
+  - message: Hyposprays now have vials, which can be tactically reloaded by using
+      a hypo on one, or you can swap them in with a vial in hand.
+    type: Add
+  - message: You can now toggle a Hypospray's transfer amount.
+    type: Fix
+  - message: Hyposprays can't inject into beakers
+    type: Fix
+  - message: Hyposprays from We-Ya Meds now come with a vial of tricordizine. You
+      can use the vial or the hypo with the vial inserted on a We-Ya Med to refill
+      it.
+    type: Fix
+  - message: Vial pouches can now be selected by corpsman as a pouch option. Comes
+      with 6 vials
+    type: Add
+  - message: Droppers are now available in the We-Ya Med Plus
+    type: Add
+  - message: You can add lids to beakers, large beakers, and high capacity beakers
+    type: Fix
+  id: 638
+  time: '2024-08-30T09:27:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3842
 Name: RMC14
 Order: -1
