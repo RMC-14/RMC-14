@@ -13,7 +13,8 @@ public sealed class XenoMeleeSlowSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
-    public override void Initialize()
+	[Dependency] private readonly XenoSystem _xeno = default!;
+	public override void Initialize()
     {
         SubscribeLocalEvent<XenoMeleeSlowComponent, MeleeHitEvent>(OnHit);
 
@@ -28,8 +29,10 @@ public sealed class XenoMeleeSlowSystem : EntitySystem
 
         foreach (var entity in args.HitEntities)
         {
+            [if (!_xeno.CanHitLiving(entity))
+                return;
 
-            if (xeno.Comp.RequiresKnockDown && !_standing.IsDown(entity))
+			if (xeno.Comp.RequiresKnockDown && !_standing.IsDown(entity))
                 return;
 
             var victim = EnsureComp<XenoSlowedComponent>(entity);
