@@ -290,7 +290,6 @@
       - Sidearm
       components:
       - MortarShell
-#      - # TODO RMC14 pistol, revolver, flaregun
   - type: FixedItemSizeStorage
   - type: LimitedStorage
     limits:
