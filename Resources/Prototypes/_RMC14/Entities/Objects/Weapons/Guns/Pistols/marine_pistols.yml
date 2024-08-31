@@ -375,6 +375,7 @@
   - type: Tag
     tags:
     - Holdout
+    - RMCWeaponPistolD18
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -404,3 +405,6 @@
       
 - type: Tag # For stuff like the D18 and Holdout Pistol
   id: Holdout
+  
+- type: Tag
+  id: RMCWeaponPistolD18
