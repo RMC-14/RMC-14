@@ -1,6 +1,5 @@
 using Robust.Shared.GameStates;
 using Content.Shared.Humanoid;
-using Content.Shared.Whistle;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Whistle;
