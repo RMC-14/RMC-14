@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Overwatch;
+﻿using Content.Shared._RMC14.NightVision;
+using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.Scoping;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
@@ -10,6 +11,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
     [Dependency] private readonly SharedScopeSystem _scope = default!;
+    [Dependency] private readonly SharedNightVisionSystem _nightVision = default!;
 
     public override void Initialize()
     {
@@ -56,6 +58,12 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         // To stop using scopes through the overwatch console
         if (TryComp(watcher.Owner, out ScopingComponent? scope))
             _scope.UserStopScoping((watcher.Owner, scope));
+
+        // To disable night-vision while using console
+        if (TryComp(watcher.Owner, out NightVisionComponent? nightVision))
+        {
+            _nightVision.DisableNightVisionItem(nightVision.Item, watcher.Owner);
+        }
 
         _eye.SetTarget(watcher, toWatch, watcher);
         _viewSubscriber.AddViewSubscriber(toWatch, watcher.Comp1.PlayerSession);

@@ -23,6 +23,10 @@ public sealed partial class NightVisionComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool SeeThroughContainers;
+
+    // The item responsible for granting the user nightvision, if not innate
+    [ViewVariables, AutoNetworkedField]
+    public EntityUid Item;
 }
 
 [Serializable, NetSerializable]

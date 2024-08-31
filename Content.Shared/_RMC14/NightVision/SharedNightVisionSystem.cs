@@ -169,6 +169,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
         {
             var nightVision = EnsureComp<NightVisionComponent>(user);
             nightVision.State = NightVisionState.Full;
+            nightVision.Item = item.Owner;
             Dirty(user, nightVision);
         }
 
@@ -181,6 +182,14 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
     protected virtual void NightVisionRemoved(Entity<NightVisionComponent> ent)
     {
+    }
+
+    public void DisableNightVisionItem(EntityUid item, EntityUid? user)
+    {
+        if (!TryComp(item, out NightVisionItemComponent? comp))
+            return;
+
+        DisableNightVisionItem((item, comp), user);
     }
 
     protected void DisableNightVisionItem(Entity<NightVisionItemComponent> item, EntityUid? user)
