@@ -15,7 +15,7 @@ public sealed partial class XenoMeleeSlowComponent : Component
     public bool RequiresKnockDown = false;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 SpeedMultiplier = 0.87f;
+    public FixedPoint2 SpeedMultiplier = FixedPoint2.New(0.87);
 
     [DataField, AutoNetworkedField]
     public EntProtoId Effect = "RMCEffectLurkerSlow";
