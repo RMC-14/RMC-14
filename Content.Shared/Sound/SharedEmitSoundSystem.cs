@@ -102,11 +102,11 @@ public abstract class SharedEmitSoundSystem : EntitySystem
             args.Handled = true;
     }
 
-    private void OnEmitSoundOnAction(EntityUid uid, EmitSoundOnActionComponent component, SoundActionEvent args)
+    private void OnEmitSoundOnAction(Entity<EmitSoundOnActionComponent> ent, ref SoundActionEvent args)
     {
-        TryEmitSound(uid, component, args.Performer);
+        TryEmitSound(ent, ent, args.Performer);
 
-        if (component.Handle)
+        if (ent.Comp.Handle)
             args.Handled = true;
     }
 
