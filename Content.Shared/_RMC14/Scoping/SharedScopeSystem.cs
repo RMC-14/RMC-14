@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.FarSight;
+using Content.Shared._RMC14.Overwatch;
 using Content.Shared.Actions;
 using Content.Shared.Camera;
 using Content.Shared.DoAfter;
@@ -91,6 +92,10 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
     private void OnGetActions(Entity<ScopeComponent> ent, ref GetItemActionsEvent args)
     {
+        // No scoping while watching through the console
+        if (HasComp<OverwatchWatchingComponent>(args.User))
+            return;
+
         args.AddAction(ref ent.Comp.ScopingToggleActionEntity, ent.Comp.ScopingToggleAction);
     }
 
@@ -107,6 +112,8 @@ public abstract partial class SharedScopeSystem : EntitySystem
     {
         if (args.Handled || !args.Complex || !ent.Comp.UseInHand)
             return;
+
+
 
         args.Handled = true;
         ToggleScoping(ent, args.User);
@@ -210,6 +217,9 @@ public abstract partial class SharedScopeSystem : EntitySystem
     protected virtual Direction? StartScoping(Entity<ScopeComponent> scope, EntityUid user)
     {
         if (!CanScopePopup(scope, user))
+            return null;
+
+        if (HasComp<OverwatchWatchingComponent>(user))
             return null;
 
         // TODO RMC14 make this work properly with rotations

@@ -88,7 +88,7 @@ public partial class SharedScopeSystem
         UserStopScoping(ent);
     }
 
-    private void UserStopScoping(Entity<ScopingComponent> ent)
+    public void UserStopScoping(Entity<ScopingComponent> ent)
     {
         var scope = ent.Comp.Scope;
         RemCompDeferred<ScopingComponent>(ent);

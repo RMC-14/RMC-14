@@ -1,4 +1,5 @@
-﻿using Content.Shared.Actions;
+﻿using Content.Shared._RMC14.Overwatch;
+using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Rounding;
@@ -153,6 +154,10 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
     private void EnableNightVisionItem(Entity<NightVisionItemComponent> item, EntityUid user)
     {
+        // No night-vision through overwatch consoles
+        if (HasComp<OverwatchWatchingComponent>(user))
+            return;
+
         DisableNightVisionItem(item, item.Comp.User);
 
         item.Comp.User = user;

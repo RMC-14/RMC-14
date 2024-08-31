@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Scoping;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
