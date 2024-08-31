@@ -1,5 +1,3 @@
-using Content.Shared.Actions;
-using Content.Shared.Actions.Events;
 using Content.Shared.Audio;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
