@@ -52,9 +52,11 @@
     - id: RMCSmartPistolCase
       amount: 2
 
+#Black Market
+
 - type: entity
   id: RMCCrateD18
-  parent: RMCCrateWeapons
+  parent: CMCrateWeapons
   name: D18 Holdout Pistol Crate (x1)
   components:
   - type: StorageFill
