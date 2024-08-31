@@ -68,11 +68,10 @@
   description: A fairly decorated and ceremonial box containing a CLF D18 and a single additional magazine for it. I guess those CLF folk really care about their craftsmanship and prose rather than practicality, eh?
   components:
   - type: Sprite
-    noRot: true
+    noRot: false
     sprite: _RMC14/Objects/Storage/D18case.rsi
     layers:
     - state: closed
-      map: [ base ]
   - type: Icon
     sprite: _RMC14/Objects/Storage/D18case.rsi
     state: closed
