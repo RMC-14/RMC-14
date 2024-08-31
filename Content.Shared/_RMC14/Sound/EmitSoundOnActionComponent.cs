@@ -1,6 +1,7 @@
 using Robust.Shared.GameStates;
+using Content.Shared.Sound.Components;
 
-namespace Content.Shared.Sound.Components;
+namespace Content.Shared._RMC14.Sound;
 
 /// <summary>
 /// Simple sound emitter that emits sound on InstantAction
