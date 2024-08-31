@@ -32,30 +32,30 @@ public sealed class RMCWhistleSystem : EntitySystem
         args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId);
     }
 
-    public void OnWhistleAction(EntityUid uid, RMCWhistleComponent comp, SoundActionEvent args)
+    public void OnWhistleAction(Entity<RMCWhistleComponent> ent, ref SoundActionEvent args)
     {
         if (!_timing.IsFirstTimePredicted || args.Handled)
             return;
 
-        TryWhistle(uid, comp, args.Performer);
+        TryWhistle(ent, args.Performer);
         args.Handled = true;
     }
 
-    public void OnUseInHand(EntityUid uid, RMCWhistleComponent comp, UseInHandEvent args)
+    public void OnUseInHand(Entity<RMCWhistleComponent> ent, ref UseInHandEvent args)
     {
-        TryWhistle(uid, comp, args.User);
+        TryWhistle(ent, args.User);
         args.Handled = true;
     }
 
-    public void TryWhistle(EntityUid uid, RMCWhistleComponent comp, EntityUid user)
+    public void TryWhistle(Entity<RMCWhistleComponent> ent, EntityUid user)
     {
-        _whistle.TryMakeLoudWhistle(uid, user);
+        _whistle.TryMakeLoudWhistle(ent, user);
 
-        if (TryComp<UseDelayComponent>(uid, out var useDelay))
+        if (TryComp<UseDelayComponent>(ent, out var useDelay))
         {
-            _actions.SetCooldown(comp.Action, useDelay.Delay);
-            _useDelay.SetLength(uid, useDelay.Delay);
-            _useDelay.TryResetDelay((uid, useDelay));
+            _actions.SetCooldown(ent.Comp.Action, useDelay.Delay);
+            _useDelay.SetLength(ent.Owner, useDelay.Delay);
+            _useDelay.TryResetDelay((ent.Owner, useDelay));
         }
     }
 }

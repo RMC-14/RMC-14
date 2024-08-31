@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.Whistle;
 /// Spawn attached entity for entities in range with <see cref="HumanoidAppearanceComponent"/>.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class RMCWhistleComponent : WhistleComponent
+public sealed partial class RMCWhistleComponent : Component
 {
     [DataField, AutoNetworkedField]
     public EntProtoId ActionId = "RMCActionWhistle";

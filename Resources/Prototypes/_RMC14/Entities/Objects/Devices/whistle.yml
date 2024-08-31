@@ -21,5 +21,6 @@
       collection: TrenchWhistle
   - type: UseDelay
     delay: 10
+  - type: Whistle
+    distance: 15
   - type: RMCWhistle
-    distance: 15 # Let your enemies hear the sound of death approaching
