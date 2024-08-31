@@ -1,22 +1,4 @@
 ﻿Entries:
-- author: Sigil
-  changes:
-  - message: Reinforced girder removed from crafting menu, as it currently has no
-      use.
-    type: Remove
-  - message: Where possible, changed the material requirements and construction steps
-      for objects marines can build to match their CMSS13 versions.
-    type: Tweak
-  - message: Made girders and other constructible objects drop the RMC14 versions
-      of materials.
-    type: Fix
-  - message: Made catwalks snap to the grid properly.
-    type: Fix
-  - message: Made airlocks properly change their appearance during construction.
-    type: Fix
-  id: 145
-  time: '2024-06-15T04:40:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2400
 - author: Whisper
   changes:
   - message: Jungle walls are invincible
@@ -4465,5 +4447,12 @@
   id: 644
   time: '2024-08-30T22:59:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3897
+- author: Vermidia
+  changes:
+  - message: Fix larva burst in bags being stuck in said bags
+    type: Fix
+  id: 645
+  time: '2024-08-31T23:53:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3899
 Name: RMC14
 Order: -1
