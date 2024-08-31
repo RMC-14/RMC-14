@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.NightVision;
+﻿using Content.Shared._RMC14.FarSight;
+using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.Scoping;
 using Robust.Server.GameObjects;
@@ -10,8 +11,10 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
 {
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
-    [Dependency] private readonly SharedScopeSystem _scope = default!;
+    [Dependency] private readonly FarSightSystem _farSight = default!;
     [Dependency] private readonly SharedNightVisionSystem _nightVision = default!;
+    [Dependency] private readonly SharedScopeSystem _scope = default!;
+
 
     public override void Initialize()
     {
@@ -63,6 +66,12 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         if (TryComp(watcher.Owner, out NightVisionComponent? nightVision))
         {
             _nightVision.DisableNightVisionItem(nightVision.Item, watcher.Owner);
+        }
+
+        // To disable far-sight when using consoles
+        if (TryComp(watcher.Owner, out FarSightComponent? farSight))
+        {
+            _farSight.SetFarSightItem(farSight.Item, watcher.Owner, false);
         }
 
         _eye.SetTarget(watcher, toWatch, watcher);
