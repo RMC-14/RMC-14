@@ -464,7 +464,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon", ("victim", uid)), uid, Filter.PvsExcept(uid), true, PopupType.MediumCaution);
 
                     var knockdownTime = infected.BaseKnockdownTime * 75;
-                    InfectionShakes(uid, infected, knockdownTime, knockdownTime, false);
+                    InfectionShakes(uid, infected, knockdownTime, infected.JitterTime, false);
                     infected.DidBurstWarning = true;
 
                     continue;
@@ -590,13 +590,16 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             if (_net.IsServer &&
                 TryComp(victim, out InfectableComponent? infectable) &&
                 TryComp(victim, out HumanoidAppearanceComponent? appearance) &&
-                infectable.PreburstSound.TryGetValue(appearance.Sex, out var sound))
+                infectable.PreburstSound.TryGetValue(appearance.Sex, out var sound) &&
+                !_mobState.IsIncapacitated(victim))
             {
                 var filter = Filter.Pvs(victim);
                 _audio.PlayEntity(sound, filter, victim, true);
             }
 
             _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, victim, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.LargeCaution);
+            InfectionShakes(victim, comp, comp.BaseKnockdownTime, comp.JitterTime * 1.2, false);
 
             var messageLarva = Loc.GetString("rmc-xeno-infection-burst-now-xeno", ("victim", Identity.Entity(victim, EntityManager)));
             _popup.PopupEntity(messageLarva, spawnedLarva, spawnedLarva, PopupType.MediumCaution);
