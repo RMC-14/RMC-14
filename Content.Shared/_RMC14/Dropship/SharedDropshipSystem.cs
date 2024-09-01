@@ -72,6 +72,9 @@ public abstract class SharedDropshipSystem : EntitySystem
 
             if (HasComp<DropshipWeaponPointComponent>(uid))
                 ent.Comp.AttachmentPoints.Add(uid);
+
+            if (HasComp<DropshipUtilityPointComponent>(uid))
+                ent.Comp.AttachmentPoints.Add(uid);
         }
 
         var ev = new DropshipMapInitEvent();
