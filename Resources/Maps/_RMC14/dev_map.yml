@@ -2707,6 +2707,13 @@ entities:
     - type: Transform
       pos: -6.5,-5.5
       parent: 179
+- proto: RMCUtilityAttachmentPoint
+  entities:
+  - uid: 2000
+    components:
+    - type: Transform
+      pos: -5.5,-5.5
+      parent: 179
 - proto: CMApcLowCapacity
   entities:
   - uid: 753
