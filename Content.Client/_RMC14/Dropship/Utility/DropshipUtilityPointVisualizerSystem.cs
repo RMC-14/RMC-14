@@ -25,20 +25,36 @@ public sealed partial class DropshipUtilityPointVisualizerSystem : VisualizerSys
             return;
         }
 
-        if (!spriteComp.LayerMapTryGet(DropshipUtilityPointLayers.Layer, out var layer))
-            return;
-
-        if (string.IsNullOrWhiteSpace(sprite) || string.IsNullOrWhiteSpace(state) || !component.WillRender)
+        if (!spriteComp.LayerMapTryGet(DropshipUtilityPointLayers.AttachementBase, out var attachementBase))
         {
-            spriteComp.LayerSetVisible(layer, false);
+            return;
+        }
+        if (!spriteComp.LayerMapTryGet(DropshipUtilityPointLayers.AttachedUtility, out var attachedUtility))
+        {
+            spriteComp.LayerSetVisible(attachementBase, true);
+            //spriteComp.LayerSetVisible(attachedUtility, false);
             return;
         }
 
-        spriteComp.LayerSetSprite(layer, new SpriteSpecifier.Rsi(new ResPath(sprite), state));
+        if (!component.WillRender)
+        {
+            spriteComp.LayerSetVisible(attachementBase, false);
+            spriteComp.LayerSetVisible(attachedUtility, false);
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(sprite) || string.IsNullOrWhiteSpace(state))
+        {
+            spriteComp.LayerSetVisible(attachementBase, true);
+            spriteComp.LayerSetVisible(attachedUtility, false);
+            return;
+        }
+
+        spriteComp.LayerSetSprite(attachedUtility, new SpriteSpecifier.Rsi(new ResPath(sprite), state));
 
         //if (Enum.TryParse<SpriteComponent.DirectionOffset>(component.DirOffset, true, out var dir))
-            //spriteComp.LayerSetDirOffset(layer, dir);
-
-        spriteComp.LayerSetVisible(layer, true);
+        //spriteComp.LayerSetDirOffset(layer, dir);
+        spriteComp.LayerSetVisible(attachementBase, false);
+        spriteComp.LayerSetVisible(attachedUtility, true);
     }
 }

@@ -24,5 +24,6 @@ public sealed partial class DropshipUtilityPointComponent : Component
 [Serializable, NetSerializable]
 public enum DropshipUtilityPointLayers
 {
-    Layer,
+    AttachementBase,
+    AttachedUtility
 }
