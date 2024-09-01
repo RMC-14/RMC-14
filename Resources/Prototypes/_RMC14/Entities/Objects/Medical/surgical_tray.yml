@@ -23,15 +23,13 @@
     grid:
     - 0,0,13,3 # 14 slots
     whitelist:
+      tags:
+      - CMTraumaKit
+      - CMSurgicalLine
+      - CMSynthGraft
       components:
-      - CMScalpel
-      - CMHemostat
-      - CMRetractor
-      - CMBoneGel
-      - CMSurgicalDrill
-      - CMBoneSaw
-      - CMCautery
-      - CMBoneSetter
+      - CMSurgeryTool
+# TODO Should also be able to have PICT FixOVein and Nanopaste
 
 - type: entity
   parent: RMCSurgicalTrayEmpty
@@ -41,11 +39,18 @@
   components:
   - type: StorageFill
     contents:
+#   - PICT System
     - id: CMScalpel
     - id: CMHemostat
     - id: CMRetractor
-    - id: CMBoneGel
-    - id: CMSurgicalDrill
-    - id: CMCircularSaw
+    - id: CMTraumaKit10
     - id: CMCautery
+    - id: CMCircularSaw
+    - id: CMSurgicalDrill
+    - id: CMBoneGel
     - id: CMBonesetter
+#   - FixOVein
+#   - Nanopaste
+    - id: CMSurgicalLine
+    - id: CMSynthGraft
+
