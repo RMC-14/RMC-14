@@ -565,6 +565,12 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         var victim = burstFrom.Owner;
         var comp = burstFrom.Comp;
 
+        if (comp.IsBursting)
+            return;
+
+        comp.IsBursting = true;
+        Dirty(victim, comp);
+
         if (comp.SpawnedLarva == null)
             return;
 

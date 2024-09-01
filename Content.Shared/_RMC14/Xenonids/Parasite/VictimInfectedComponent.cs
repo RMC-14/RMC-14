@@ -140,6 +140,9 @@ public sealed partial class VictimInfectedComponent : Component
     [DataField]
     public bool DidBurstWarning = false;
 
+    [DataField, AutoNetworkedField]
+    public bool IsBursting = false;
+
     [DataField]
     public TimeSpan BaseKnockdownTime = TimeSpan.FromSeconds(1);
 
