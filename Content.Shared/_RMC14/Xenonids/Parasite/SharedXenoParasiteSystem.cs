@@ -568,28 +568,32 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         if (comp.SpawnedLarva == null)
             return;
 
-        var doAfterEventArgs = new DoAfterArgs(EntityManager, comp.SpawnedLarva.Value, TimeSpan.FromSeconds(3), new LarvaBurstDoAfterEvent(), victim, target: victim)
+        var spawnedLarva = comp.SpawnedLarva.Value;
+
+        var doAfterEventArgs = new DoAfterArgs(EntityManager, spawnedLarva, comp.BurstDoAfterTime, new LarvaBurstDoAfterEvent(), victim, target: victim)
         {
             NeedHand = false,
-            BreakOnMove = true,
-            BreakOnHandChange = false,
             BreakOnDamage = false,
-            Hidden = true
+            BreakOnMove = false,
+            Hidden = true,
+            BlockDuplicate = true
         };
-
-        if (_net.IsServer &&
-            TryComp(victim, out InfectableComponent? infectable) &&
-            TryComp(victim, out HumanoidAppearanceComponent? appearance) &&
-            infectable.PreburstSound.TryGetValue(appearance.Sex, out var sound))
-        {
-            var filter = Filter.Pvs(victim);
-            _audio.PlayEntity(sound, filter, victim, true);
-        }
 
         if (_doAfter.TryStartDoAfter(doAfterEventArgs))
         {
-            var message = Loc.GetString("rmc-xeno-larva-burst", ("victim", Identity.Entity(victim, EntityManager)));
-            _popup.PopupClient(message, comp.SpawnedLarva, PopupType.MediumCaution);
+            if (_net.IsServer &&
+                TryComp(victim, out InfectableComponent? infectable) &&
+                TryComp(victim, out HumanoidAppearanceComponent? appearance) &&
+                infectable.PreburstSound.TryGetValue(appearance.Sex, out var sound))
+            {
+                var filter = Filter.Pvs(victim);
+                _audio.PlayEntity(sound, filter, victim, true);
+            }
+
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, victim, PopupType.MediumCaution);
+
+            var messageLarva = Loc.GetString("rmc-xeno-infection-burst-now-xeno", ("victim", Identity.Entity(victim, EntityManager)));
+            _popup.PopupEntity(messageLarva, spawnedLarva, spawnedLarva, PopupType.MediumCaution);
         }
     }
 

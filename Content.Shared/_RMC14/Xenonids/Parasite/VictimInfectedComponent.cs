@@ -157,4 +157,10 @@ public sealed partial class VictimInfectedComponent : Component
 
     [DataField]
     public DamageSpecifier InfectionDamage = new() { DamageDict = new() { { "Blunt", 1 } } };
+
+    /// <summary>
+    ///     How long the do-after of the larva bursting is.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan BurstDoAfterTime = TimeSpan.FromSeconds(3);
 }

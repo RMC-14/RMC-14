@@ -5,7 +5,5 @@ rmc-xeno-infect-success = The parasite smashes against {$target}'s {$clothing} a
 rmc-xeno-infect-fail = The parasite smashes against {$target}'s {$clothing}!
 rmc-xeno-failed-parasite-dead = We can't infect with a dead child!
 
-rmc-xeno-larva-burst = We start bursting out of {THE($victim)}'s chest!
-
 rmc-xeno-parasite-dead = {CAPITALIZE(SUBJECT($parasite))} {CONJUGATE-BE($parasite)} not moving.
 rmc-xeno-parasite-announce-infect = We sense that {$xeno} has infected a host!
