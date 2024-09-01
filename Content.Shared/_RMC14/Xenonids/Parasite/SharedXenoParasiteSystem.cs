@@ -587,21 +587,19 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
         if (_doAfter.TryStartDoAfter(doAfterEventArgs))
         {
-            if (_net.IsServer)
+            if (_net.IsServer &&
+                TryComp(victim, out InfectableComponent? infectable) &&
+                TryComp(victim, out HumanoidAppearanceComponent? appearance) &&
+                infectable.PreburstSound.TryGetValue(appearance.Sex, out var sound))
             {
-                if (TryComp(victim, out InfectableComponent? infectable) &&
-                    TryComp(victim, out HumanoidAppearanceComponent? appearance) &&
-                    infectable.PreburstSound.TryGetValue(appearance.Sex, out var sound))
-                {
-                    var filter = Filter.Pvs(victim);
-                    _audio.PlayEntity(sound, filter, victim, true);
-                }
-
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, victim, PopupType.MediumCaution);
-
-                var messageLarva = Loc.GetString("rmc-xeno-infection-burst-now-xeno", ("victim", Identity.Entity(victim, EntityManager)));
-                _popup.PopupEntity(messageLarva, spawnedLarva, spawnedLarva, PopupType.MediumCaution);
+                var filter = Filter.Pvs(victim);
+                _audio.PlayEntity(sound, filter, victim, true);
             }
+
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, victim, PopupType.MediumCaution);
+
+            var messageLarva = Loc.GetString("rmc-xeno-infection-burst-now-xeno", ("victim", Identity.Entity(victim, EntityManager)));
+            _popup.PopupEntity(messageLarva, spawnedLarva, spawnedLarva, PopupType.MediumCaution);
         }
     }
 
