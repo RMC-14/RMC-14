@@ -576,20 +576,6 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
         var spawnedLarva = comp.SpawnedLarva.Value;
 
-        if (_net.IsServer &&
-            TryComp(victim, out InfectableComponent? infectable) &&
-            TryComp(victim, out HumanoidAppearanceComponent? appearance) &&
-            infectable.PreburstSound.TryGetValue(appearance.Sex, out var sound))
-        {
-            var filter = Filter.Pvs(victim);
-            _audio.PlayEntity(sound, filter, victim, true);
-        }
-
-        _popup.PopupClient(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, PopupType.MediumCaution);
-
-        var messageLarva = Loc.GetString("rmc-xeno-infection-burst-now-xeno", ("victim", Identity.Entity(victim, EntityManager)));
-        _popup.PopupClient(messageLarva, spawnedLarva, PopupType.MediumCaution);
-
         var doAfterEventArgs = new DoAfterArgs(EntityManager, spawnedLarva, comp.BurstDoAfterDelay, new LarvaBurstDoAfterEvent(), victim, target: victim)
         {
             NeedHand = false,
@@ -599,7 +585,24 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             BlockDuplicate = true
         };
 
-        _doAfter.TryStartDoAfter(doAfterEventArgs);
+        if (_doAfter.TryStartDoAfter(doAfterEventArgs))
+        {
+            if (_net.IsServer)
+            {
+                if (TryComp(victim, out InfectableComponent? infectable) &&
+                    TryComp(victim, out HumanoidAppearanceComponent? appearance) &&
+                    infectable.PreburstSound.TryGetValue(appearance.Sex, out var sound))
+                {
+                    var filter = Filter.Pvs(victim);
+                    _audio.PlayEntity(sound, filter, victim, true);
+                }
+
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, victim, PopupType.MediumCaution);
+
+                var messageLarva = Loc.GetString("rmc-xeno-infection-burst-now-xeno", ("victim", Identity.Entity(victim, EntityManager)));
+                _popup.PopupEntity(messageLarva, spawnedLarva, spawnedLarva, PopupType.MediumCaution);
+            }
+        }
     }
 
     private void OnBurst(Entity<VictimInfectedComponent> ent, ref LarvaBurstDoAfterEvent args)
