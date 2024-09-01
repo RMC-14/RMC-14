@@ -1,8 +1,7 @@
 - type: entity
   parent: CMSurgicalCase
-  id: RMCSurgicalTray
+  id: RMCSurgicalTrayEmpty
   name: surgical tray
-  suffix: Filled, All Tools
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Storage/surgical_tray.rsi
@@ -18,7 +17,7 @@
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,5,1 # 3 slots
+    - 0,0,5,1 # 8 slots
     whitelist:
       components:
       - CMScalpel
@@ -29,6 +28,13 @@
       - CMBoneSaw
       - CMCautery
       - CMBoneSetter
+
+- type: entity
+  parent: RMCSurgicalTrayEmpty
+  id: RMCSurgicalTray
+  name: surgical tray
+  suffix: Filled, All Tools
+  components:
   - type: StorageFill
     contents:
     - id: CMScalpel

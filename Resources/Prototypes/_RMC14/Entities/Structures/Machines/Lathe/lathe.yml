@@ -86,7 +86,7 @@
     whitelist:
       tags:
       - Metal
-      - Sheet
+      - RMCGlass
   - type: Destructible
     thresholds:
     - trigger:
@@ -116,3 +116,5 @@
     price: 800
   - type: Machine
     board: CMAutolatheMachineCircuitboard
+  - type: Corrodible
+    isCorrodible: false
