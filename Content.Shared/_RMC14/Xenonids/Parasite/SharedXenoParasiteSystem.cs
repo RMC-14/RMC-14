@@ -598,9 +598,12 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 _audio.PlayEntity(sound, filter, victim, true);
             }
 
+            var shakeFilter = Filter.PvsExcept(victim);
+            shakeFilter.RemoveWhereAttachedEntity(HasComp<XenoComponent>); // not visible to xenos
+
             // Force infection shakes even while dead, bigger popup
             _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, victim, PopupType.MediumCaution);
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.LargeCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, shakeFilter, true, PopupType.LargeCaution);
             _jitter.DoJitter(victim, comp.JitterTime * 2.5, false);
 
             var messageLarva = Loc.GetString("rmc-xeno-infection-burst-now-xeno", ("victim", Identity.Entity(victim, EntityManager)));
