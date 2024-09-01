@@ -481,7 +481,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                         _popup.PopupEntity(message, uid, uid, PopupType.LargeCaution);
 
                         var knockdownTime = infected.BaseKnockdownTime * 2;
-                        var jitterTime = infected.BaseKnockdownTime * 0.5;
+                        var jitterTime = infected.JitterTime * 0;
                         InfectionShakes(uid, infected, knockdownTime, jitterTime, false);
                     }
                 }
@@ -598,9 +598,10 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 _audio.PlayEntity(sound, filter, victim, true);
             }
 
+            // Force infection shakes even while dead, bigger popup
             _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, victim, PopupType.MediumCaution);
             _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.LargeCaution);
-            InfectionShakes(victim, comp, comp.BaseKnockdownTime * 10, comp.JitterTime * 1.2, false);
+            _jitter.DoJitter(victim, comp.JitterTime * 2.5, false);
 
             var messageLarva = Loc.GetString("rmc-xeno-infection-burst-now-xeno", ("victim", Identity.Entity(victim, EntityManager)));
             _popup.PopupEntity(messageLarva, spawnedLarva, spawnedLarva, PopupType.MediumCaution);
