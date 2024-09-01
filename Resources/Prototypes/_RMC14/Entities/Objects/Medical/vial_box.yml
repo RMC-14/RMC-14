@@ -5,7 +5,7 @@
   id: RMCVialBox
   components:
   - type: Sprite
-    sprite: _RMC14\Objects\Storage\vial_box.rsi
+    sprite: _RMC14/Objects/Storage/vial_box.rsi
     layers:
     - state: vialbox
     - state: vialbox1
@@ -27,7 +27,7 @@
       map: ["vialbox6"]
       visible: false
   - type: Item
-    sprite: _RMC14\Objects\Storage\vial_box.rsi
+    sprite: _RMC14/Objects/Storage/vial_box.rsi
     size: Normal
   - type: Storage
     hideStackVisualsWhenClosed: false
