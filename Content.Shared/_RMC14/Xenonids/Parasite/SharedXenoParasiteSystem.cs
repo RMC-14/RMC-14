@@ -599,7 +599,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
             _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, victim, PopupType.MediumCaution);
             _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.LargeCaution);
-            InfectionShakes(victim, comp, comp.BaseKnockdownTime, comp.JitterTime * 1.2, false);
+            InfectionShakes(victim, comp, comp.BaseKnockdownTime * 10, comp.JitterTime * 1.2, false);
 
             var messageLarva = Loc.GetString("rmc-xeno-infection-burst-now-xeno", ("victim", Identity.Entity(victim, EntityManager)));
             _popup.PopupEntity(messageLarva, spawnedLarva, spawnedLarva, PopupType.MediumCaution);
