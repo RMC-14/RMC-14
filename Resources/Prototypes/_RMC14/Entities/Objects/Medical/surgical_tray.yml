@@ -16,8 +16,8 @@
   - type: Tag # to not inherit case tags
     tags: []
   - type: CMStorageVisualizer
-    storageClosed: cover
-    storageOpen: empty
+    storageClosed: empty
+    storageOpen: cover
   - type: Storage
     maxItemSize: Small
     grid:
