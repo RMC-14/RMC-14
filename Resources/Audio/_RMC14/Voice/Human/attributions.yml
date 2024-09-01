@@ -82,3 +82,24 @@
   license: "CC-BY-SA-3.0"
   copyright: "https://github.com/cmss13-devs/cmss13/commit/2b6f77936d1e4b114832c12598ac42947bdfc1a6"
   source: "https://github.com/cmss13-devs/cmss13/blob/92c1793b233955ef8bcd0eaee139736d340c374e/sound/voice/human_male_scream_5.ogg"
+
+- files:
+  - female_preburst1.ogg
+  - female_preburst2.ogg
+  - female_preburst3.ogg
+  - female_preburst4.ogg
+  - female_preburst5.ogg
+  - female_preburst6.ogg
+  - female_preburst7.ogg
+  - male_preburst1.ogg
+  - male_preburst2.ogg
+  - male_preburst3.ogg
+  - male_preburst4.ogg
+  - male_preburst5.ogg
+  - male_preburst6.ogg
+  - male_preburst7.ogg
+  - male_preburst8.ogg
+  - male_preburst9.ogg
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from TerraGov-Marine-Corps"
+  source: "https://github.com/tgstation/TerraGov-Marine-Corps/commit/fbeb798561cdc6b5fd32fa412b5b9ea251dfc894"
