@@ -6,14 +6,18 @@
   - type: Sprite
     sprite: _RMC14/Objects/Storage/surgical_tray.rsi
     layers:
-    - state: surgical_tray
+    - state: surgical_tray_base
+    - state: surgical_tray_cover
+      map: [ "cover" ]
     - state: surgical_tray_empty
-      map: [ "openLayer" ]
-      visible: false
+      map: [ "empty" ]
   - type: Item
     size: Large
   - type: Tag # to not inherit case tags
     tags: []
+  - type: CMStorageVisualizer
+    storageClosed: cover
+    storageOpen: empty
   - type: Storage
     maxItemSize: Small
     grid:
