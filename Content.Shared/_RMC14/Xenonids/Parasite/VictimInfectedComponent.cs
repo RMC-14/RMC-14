@@ -165,5 +165,5 @@ public sealed partial class VictimInfectedComponent : Component
     ///     How long the do-after of the larva bursting takes.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan BurstDoAfterDelay = TimeSpan.FromSeconds(4);
+    public TimeSpan BurstDoAfterDelay = TimeSpan.FromSeconds(3);
 }
