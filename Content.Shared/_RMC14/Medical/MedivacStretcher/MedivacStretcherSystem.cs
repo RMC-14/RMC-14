@@ -121,14 +121,16 @@ public sealed partial class MedivacStretcherSystem : EntitySystem
 
     private void ActivateBeacon(EntityUid stretcher, EntityUid user)
     {
+        EntityCoordinates stretcherCoords = stretcher.ToCoordinates();
         if (!_areas.CanCAS(stretcher.ToCoordinates().SnapToGrid(_entites, _mapManager)))
         {
-            _popup.PopupClient(Loc.GetString("rmc-medivac-area-not-cas"), user);
+            _popup.PopupClient(Loc.GetString("rmc-medivac-area-not-cas"), stretcherCoords, user);
         }
 
         if (!TryComp(stretcher, out StrapComponent? strapComp) ||
             !strapComp.BuckledEntities.Any())
         {
+            _popup.PopupClient(Loc.GetString("rmc-medivac-area-no-patient"), stretcherCoords, user);
             return;
         }
 
@@ -144,7 +146,7 @@ public sealed partial class MedivacStretcherSystem : EntitySystem
         };
         AddComp(stretcher, targetComp, true);
 
-        _popup.PopupClient(Loc.GetString("rmc-medivac-activate-beacon"), user);
+        _popup.PopupClient(Loc.GetString("rmc-medivac-activate-beacon"), stretcherCoords, user);
     }
 
     private string GetMedivacAbbreviation(int id)

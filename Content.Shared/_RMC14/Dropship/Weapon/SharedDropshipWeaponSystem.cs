@@ -68,7 +68,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private static readonly EntProtoId DropshipTargetMarker = "RMCLaserDropshipTarget";
 
-    private bool _casDebug;
+    public bool CasDebug;
     private readonly HashSet<Entity<DamageableComponent>> _damageables = new();
     private int _nextId = 1;
 
@@ -124,7 +124,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 subs.Event<DropshipTerminalWeaponsTargetsSelectMsg>(OnWeaponsTargetsSelect);
             });
 
-        Subs.CVar(_config, RMCCVars.RMCDropshipCASDebug, v => _casDebug = v, true);
+        Subs.CVar(_config, RMCCVars.RMCDropshipCASDebug, v => CasDebug = v, true);
     }
 
     public int GetNextTargetID()
@@ -483,7 +483,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         }
 
         Entity<DropshipComponent> dropship = default;
-        if (!_casDebug)
+        if (!CasDebug)
         {
             if (!_dropship.TryGetGridDropship(weapon.Value, out dropship))
                 return;
@@ -509,21 +509,21 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         }
 
         var coordinates = target.ToCoordinates().SnapToGrid(EntityManager, _mapManager);
-        if (!_casDebug && !_area.CanCAS(coordinates))
+        if (!CasDebug && !_area.CanCAS(coordinates))
         {
             var msg = Loc.GetString("rmc-laser-designator-not-cas");
             _popup.PopupClient(msg, actor);
             return;
         }
 
-        if (!_casDebug && weaponComp.Skills != null && !_skills.HasSkills(actor, weaponComp.Skills))
+        if (!CasDebug && weaponComp.Skills != null && !_skills.HasSkills(actor, weaponComp.Skills))
         {
             var msg = Loc.GetString("rmc-laser-designator-not-skilled");
             _popup.PopupClient(msg, actor);
             return;
         }
 
-        if (!_casDebug &&
+        if (!CasDebug &&
             !weaponComp.FireInTransport &&
             !HasComp<DropshipInFlyByComponent>(dropship))
         {
@@ -703,7 +703,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             return false;
 
         var xform = Transform(ent);
-        if (!_casDebug && !HasComp<RMCPlanetComponent>(xform.GridUid))
+        if (!CasDebug && !HasComp<RMCPlanetComponent>(xform.GridUid))
             return false;
         if (!ent.Comp.IsTargetableByWeapons)
         {

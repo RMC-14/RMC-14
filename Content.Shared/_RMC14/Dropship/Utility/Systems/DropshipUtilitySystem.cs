@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Utility;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
@@ -24,12 +25,14 @@ public sealed partial class DropshipUtilitySystem : EntitySystem
     [Dependency] private readonly SharedDropshipSystem _dropship = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedDropshipWeaponSystem _dropshipWeapon = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<DropshipUtilityPointComponent, DropshipTargetChangedEvent>(OnTargetChange);
+        SubscribeLocalEvent<DropshipUtilityPointComponent, InteractHandEvent>(OnInteract);
     }
 
     private void OnTargetChange(Entity<DropshipUtilityPointComponent> ent, ref DropshipTargetChangedEvent args)
@@ -42,6 +45,24 @@ public sealed partial class DropshipUtilitySystem : EntitySystem
             return;
         }
         utilityComp.Target = _entityManager.GetEntity(args.DropshipTarget);
+    }
+
+    /// <summary>
+    /// Pass interaction events to the utility entity stored within the Utility Point
+    /// </summary>
+    private void OnInteract(Entity<DropshipUtilityPointComponent> ent, ref InteractHandEvent args)
+    {
+        var slot = _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.UtilitySlotId);
+        var utilityEntity = slot.ContainedEntity;
+        if (utilityEntity is null ||
+    !TryComp(utilityEntity, out DropshipUtilityComponent? utilityComp))
+        {
+            return;
+        }
+
+        var ev = new InteractHandEvent(args.User, utilityEntity.Value);
+        RaiseLocalEvent(utilityEntity.Value, ev);
+        args.Handled = ev.Handled;
     }
 
     public bool IsActivatable(Entity<DropshipUtilityComponent> ent, EntityUid user, [NotNullWhen(false)] out string? popup)
@@ -57,6 +78,12 @@ public sealed partial class DropshipUtilitySystem : EntitySystem
         {
             popup = "";
             return false;
+        }
+
+        if (_dropshipWeapon.CasDebug)
+        {
+            popup = null;
+            return true;
         }
 
         if (!TryComp(dropship, out FTLComponent? ftl) ||

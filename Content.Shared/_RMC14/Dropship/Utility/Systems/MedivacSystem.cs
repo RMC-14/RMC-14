@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Utility;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared.Coordinates;
@@ -33,9 +34,14 @@ public sealed partial class MedivacSystem : EntitySystem
 
     private void OnInteract(Entity<MedivacComponent> ent, ref InteractHandEvent args)
     {
-        if (!TryComp(ent.Owner, out DropshipUtilityComponent? utilComp) ||
-            utilComp.Target is null)
+        if (!TryComp(ent.Owner, out DropshipUtilityComponent? utilComp))
         {
+            return;
+        }
+        EntityCoordinates targetCoord = ent.Owner.ToCoordinates();
+        if (utilComp.Target is null)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-medivac-no-target"), targetCoord, args.User);
             return;
         }
 
@@ -43,7 +49,7 @@ public sealed partial class MedivacSystem : EntitySystem
 
         if (!_dropshipUtility.IsActivatable(dropshipUtilEnt, args.User, out var popup))
         {
-            _popup.PopupClient(popup, args.User, PopupType.SmallCaution);
+            _popup.PopupClient(popup, targetCoord, args.User);
             return;
         }
 
@@ -55,10 +61,5 @@ public sealed partial class MedivacSystem : EntitySystem
         {
             _dropshipUtility.ResetActivationCooldown(dropshipUtilEnt);
         }
-    }
-
-    private void UpdateAppearance(Entity<MedivacComponent?, AppearanceComponent?> ent)
-    {
-        
     }
 }
