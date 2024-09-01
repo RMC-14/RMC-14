@@ -570,7 +570,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
         var spawnedLarva = comp.SpawnedLarva.Value;
 
-        var doAfterEventArgs = new DoAfterArgs(EntityManager, spawnedLarva, comp.BurstDoAfterTime, new LarvaBurstDoAfterEvent(), victim, target: victim)
+        var doAfterEventArgs = new DoAfterArgs(EntityManager, spawnedLarva, comp.BurstDoAfterDelay, new LarvaBurstDoAfterEvent(), victim, target: victim)
         {
             NeedHand = false,
             BreakOnDamage = false,
