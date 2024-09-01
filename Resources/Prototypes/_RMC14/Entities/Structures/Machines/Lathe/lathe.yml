@@ -33,6 +33,7 @@
   - type: Lathe
     idleState: autolathe
     runningState: autolathe_n
+    producingSound: /Audio/_RMC14/Machines/print.ogg
     staticRecipes:
     - RMCBucket
 #    - Janitorial bucket (10000 metal)

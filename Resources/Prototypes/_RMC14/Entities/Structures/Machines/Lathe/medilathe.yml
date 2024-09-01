@@ -42,9 +42,10 @@
     runningState: medilathe_n
     unlitIdleState: medilathe_u
     unlitRunningState: medilathe_n_u
+    producingSound: /Audio/_RMC14/Machines/print.ogg
     staticRecipes:
     - CMBeaker
-    - CMLargeBeaker
+    - CMBeakerLarge
 #    - Drinking glass (625 glass)
     - CMSyringe
     - RMCDropper
@@ -56,7 +57,7 @@
 #    - EZ Autoinjector (E-U) (300 Plastic)
 #    - EZ Autoinjector (E-VS) (300 Plastic)
 #    - EZ Autoinjector (E-S) (300 Plastic)
-#    - EZ Autoinjector (E-T) (300 Plastic)- 
+#    - EZ Autoinjector (E-T) (300 Plastic)
 #    - EZ Autoinjector (E-M) (300 Plastic)
 #    - EZ Autoinjector (E-L) (300 Plastic)
 #    - EZ Autoinjector (E-XL) (300 Plastic)
