@@ -596,10 +596,10 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                 _audio.PlayEntity(sound, filter, victim, true);
             }
 
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, victim, PopupType.MediumCaution);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, PopupType.MediumCaution);
 
             var messageLarva = Loc.GetString("rmc-xeno-infection-burst-now-xeno", ("victim", Identity.Entity(victim, EntityManager)));
-            _popup.PopupEntity(messageLarva, spawnedLarva, spawnedLarva, PopupType.MediumCaution);
+            _popup.PopupClient(messageLarva, spawnedLarva, PopupType.MediumCaution);
         }
     }
 
