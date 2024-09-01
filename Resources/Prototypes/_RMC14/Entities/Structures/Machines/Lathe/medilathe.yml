@@ -112,3 +112,7 @@
     noRot: false
   - type: Corrodible
     isCorrodible: false
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
