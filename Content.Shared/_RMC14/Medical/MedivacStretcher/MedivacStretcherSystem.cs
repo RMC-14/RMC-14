@@ -101,8 +101,8 @@ public sealed partial class MedivacStretcherSystem : EntitySystem
         {
             return;
         }
-        var medivacCordinates = _entites.GetCoordinates(args.MedivacCordinates);
-        _transformSystem.SetCoordinates(buckled.Value, medivacCordinates);
+        //_transformSystem.SetCoordinates(buckled.Value, medivacCordinates);
+        _transformSystem.PlaceNextTo(buckled.Value, _entites.GetEntity(args.MedivacEntity));
         args.SucessfulMedivac = true;
 
         RemCompDeferred<DropshipTargetComponent>(ent);

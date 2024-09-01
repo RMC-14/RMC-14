@@ -16,14 +16,14 @@ namespace Content.Shared._RMC14.Dropship.Utility;
 public sealed partial class MedivacEvent : EntityEventArgs
 {
     /// <summary>
-    /// Where to medivac a patient
+    /// The medivac point
     /// </summary>
-    public NetCoordinates MedivacCordinates;
+    public NetEntity MedivacEntity;
 
     public bool SucessfulMedivac = false;
 
-    public MedivacEvent(NetCoordinates medivacCordinates)
+    public MedivacEvent(NetEntity medivacEntity)
     {
-        MedivacCordinates = medivacCordinates;
+        MedivacEntity = medivacEntity;
     }
 }

@@ -53,8 +53,7 @@ public sealed partial class MedivacSystem : EntitySystem
             return;
         }
 
-        var medivacNetCoordinates = _entityManager.GetNetCoordinates(ent.Owner.ToCoordinates().SnapToGrid(_entityManager, _mapManager));
-        var ev = new MedivacEvent(medivacNetCoordinates);
+        var ev = new MedivacEvent(_entityManager.GetNetEntity(args.Target));
         RaiseLocalEvent(utilComp.Target.Value, ev);
 
         if (ev.SucessfulMedivac)

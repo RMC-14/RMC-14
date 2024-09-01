@@ -60,7 +60,7 @@ public sealed partial class DropshipUtilitySystem : EntitySystem
             return;
         }
 
-        var ev = new InteractHandEvent(args.User, utilityEntity.Value);
+        var ev = new InteractHandEvent(args.User, args.Target);
         RaiseLocalEvent(utilityEntity.Value, ev);
         args.Handled = ev.Handled;
     }
