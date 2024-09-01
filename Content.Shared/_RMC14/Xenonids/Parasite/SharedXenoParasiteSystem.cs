@@ -480,8 +480,9 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
                         var message = Loc.GetString("rmc-xeno-infection-insanepain-" + random);
                         _popup.PopupEntity(message, uid, uid, PopupType.LargeCaution);
 
-                        var knockdownTime = infected.BaseKnockdownTime * 10;
-                        InfectionShakes(uid, infected, knockdownTime, knockdownTime, false);
+                        var knockdownTime = infected.BaseKnockdownTime * 2;
+                        var jitterTime = infected.BaseKnockdownTime * 0.5;
+                        InfectionShakes(uid, infected, knockdownTime, jitterTime, false);
                     }
                 }
                 else if (stage >= infected.FinalSymptomsStart)
