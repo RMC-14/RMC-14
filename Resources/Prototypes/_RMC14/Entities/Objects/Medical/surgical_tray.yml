@@ -17,7 +17,7 @@
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,5,1 # 8 slots
+    - 0,0,13,3 # 14 slots
     whitelist:
       components:
       - CMScalpel

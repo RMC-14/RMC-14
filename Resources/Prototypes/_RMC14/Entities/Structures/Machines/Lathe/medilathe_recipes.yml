@@ -1,10 +1,10 @@
-﻿# Divide original costs by 20 each - that's how glass and plastic works
+﻿# Divide original costs by 37.5 each - except plastic which is 20
 - type: latheRecipe
   id: CMSyringe
   result: CMSyringe
   completetime: 4
   materials:
-    CMGlass: 8 # 150
+    CMGlass: 4 # 150
 
 - type: latheRecipe
   id: RMCDropper
@@ -19,7 +19,7 @@
   completetime: 4
   materials:
     RMCPlastic: 63 # 1250
-    CMGlass: 13 # 250
+    CMGlass: 7 # 250
 
 - type: latheRecipe
   id: CMBloodPack
@@ -33,7 +33,7 @@
   result: RMCBeakerHighCapacity
   completetime: 4
   materials:
-    CMGlass: 500 # 10000
+    CMGlass: 267 # 10000
 
 - type: latheRecipe
   id: CMBonesetter
