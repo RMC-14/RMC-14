@@ -26,8 +26,9 @@
       takeAll: CMUniform
       entries:
       - id: CMJumpsuitBO
-        name: Service Uniform
-      - id: CMJumpSuitOperations
+        name: service uniform
+      - id: CMJumpsuitOperations
+        name: operations uniform
         recommended: true
       - id: CMHandsBlackMarine
     - name: Jacket
