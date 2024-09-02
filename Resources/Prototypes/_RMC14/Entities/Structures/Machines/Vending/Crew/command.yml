@@ -430,9 +430,9 @@
       - id: CMHandsBlackMarine
     - name: Utility Extras
       entries:
-      - id: CMSunglasses # TODO: Port Sunglasses
-      - id: CMSunglassesBig # TODO RMC14 Port Personal Shades
-      - id: RMCGlassesAviators # TODO RMC14 Port Aviator Shades
+      - id: CMSunglasses
+      - id: CMSunglassesBig
+      - id: RMCGlassesAviators
       - id: RMCGlassesMarineRpg
     - name: Service
       entries:
@@ -446,7 +446,7 @@
     - name: Service Headwear
       entries:
       - id: CMHeadBeretCO
-      #- id: CMHeadBeretCOWhite # TODO: Port White Beret
+      - id: CMHeadBeretCOWhite
       - id: CMHeadBeretCOBlack
       - id: CMHeadCap # TODO: Check this is the service variant. If so, parent and rename.
     - name: Service Extras
