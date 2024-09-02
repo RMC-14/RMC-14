@@ -187,7 +187,7 @@
     state: icon
   - type: TimedDespawn
     lifetime: 180
-  - type: ActiveFlareSignal
+#  - type: ActiveFlareSignal The Signal Flare Projectile is bugged due to ActiveSignalFlare being fucky, invisible from the CAS Monitor and crashing upon spawn
   - type: PointLight
     color: "#64FA4B"
     radius: 6.0
