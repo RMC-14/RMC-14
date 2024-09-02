@@ -25,10 +25,7 @@ public sealed class RMCClothingSystem : EntitySystem
 
     private void OnNoClothingSlowUpdate<T>(Entity<NoClothingSlowdownComponent> ent, ref T args) where T : EntityEventArgs
     {
-        if (!_inventory.TryGetSlotEntity(ent, ent.Comp.Slot, out _))
-            ent.Comp.Active = true;
-        else
-            ent.Comp.Active = false;
+        ent.Comp.Active = !_inventory.TryGetSlotEntity(ent, ent.Comp.Slot, out _);
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
     }
 
