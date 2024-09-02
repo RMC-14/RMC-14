@@ -27,8 +27,8 @@
       entries:
       - id: CMJumpsuitBO
         name: Service Uniform
-      #- id: CMJumpSuitOperations # TODO: Port Operations Uniform
-      #  recommended: true
+      - id: CMJumpSuitOperations
+        recommended: true
       - id: CMHandsBlackMarine
     - name: Jacket
       choices: { CMCoat: 1}
@@ -423,7 +423,7 @@
     - name: Utility
       entries:
       - id: CMJumpsuitBO
-      #- id: CMJumpsuitOperations # TODO: Port Operations Uniform
+      - id: CMJumpsuitOperations
       - id: CMHeadCapCO
       - id: CMHeadBeretCO
       - id: CMBootsBlackFilled

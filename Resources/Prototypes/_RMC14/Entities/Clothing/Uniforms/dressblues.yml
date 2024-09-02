@@ -24,7 +24,7 @@
   description: The undershirt and trousers of the legendary Marine dress blues, virtually unchanged since the 19th century. This variant features black trousers and a large Blood Stripe, worn by general officers.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/HighCommand/general.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/DressBlues/general.rsi
 
 
 
