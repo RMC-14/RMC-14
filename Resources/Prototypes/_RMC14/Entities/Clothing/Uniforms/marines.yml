@@ -193,7 +193,7 @@
   parent: JumpsuitMarine
   id: CMJumpsuitOperations
   name: marine operations uniform
-  description: An operations uniform worn by members of the USCM. Do the corps proud. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  description: An operations uniform worn by members of the marines. Do the corps proud. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/operations.rsi
