@@ -56,11 +56,23 @@
   parent: CMHeadBeret
   id: CMHeadBeretCOBlack
   name: CO's beret
+  description: A black beret with the Major insignia emblazoned on it. Its sleek black color commands power and exudes class.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_black.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadBeretCOWhite
+  name: CO's beret
+  description: A white beret with the Major insignia emblazoned on it. Its dazzling white color commands power and exudes class.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_white.rsi
 
 - type: entity
   parent: CMHeadBeret
@@ -232,3 +244,26 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/orange.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/orange.rsi
+
+# Dress blues
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadDressBlues
+  name: marine dress blues cover
+  description: The combination cover of the legendary Marine dress blues, virtually unchanged since the 19th century. The polished logo sits proudly on the white cloth.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/DressBlues/enlisted.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/DressBlues/enlisted.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadDressBluesOfficer
+  name: marine dress blues officer cover
+  description: The combination cover of the legendary Marine dress blues, virtually unchanged since the 19th century. Features a gold stripe and silvered logo, emblematic of an officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/DressBlues/officer.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/DressBlues/officer.rsi

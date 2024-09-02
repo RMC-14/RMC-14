@@ -79,9 +79,12 @@
       entries:
       - id: RMCGlassesMarineRpg #Placeholder
         amount: 1
-#      - id: BiMex Shades
-#      - id: Aviator Shades
-#      - id: Sunglasses
+      - id: CMSunglassesBig
+        amount: 1
+      - id: RMCGlassesAviators
+        amount: 1
+      - id: CMSunglasses
+        amount: 1
 #      - id: Prescription Sunglasses
 #      - id: Prescription Glasses
     - name: Gloves

@@ -106,7 +106,7 @@
       - id: CMBootsBlackFilled
       - id: CMHandsBlackMarine
       - id: CMMRE
-      #- id: CMAviatorShades # TODO RMC14 Port Aviator Shades
+      - id: RMCGlassesAviators # TODO RMC14 Port Aviator Shades
       - id: RMCM5Bayonet
     - name: Specialisation Kit
       choices: { CMBundle: 1 }
@@ -268,7 +268,7 @@
       - id: CMGlassesSecurity
       #- id: CMShades # TODO: Port this.
     #    recommended: true
-      #- id: CMAviatorShades # TODO: Port this.
+      - id: RMCGlassesAviators # TODO: Port this.
     # - name: Patches # TODO RMC14 Make Patches
     #   entries:
     #   - id: CMUNMCPatch
@@ -430,9 +430,9 @@
       - id: CMHandsBlackMarine
     - name: Utility Extras
       entries:
-      #- id: CMSunglasses # TODO: Port Sunglasses
-      #- id: CMPersonalShades # TODO RMC14 Port Personal Shades
-      #- id: CMAviatorShades # TODO RMC14 Port Aviator Shades
+      - id: CMSunglasses # TODO: Port Sunglasses
+      - id: CMSunglassesBig # TODO RMC14 Port Personal Shades
+      - id: RMCGlassesAviators # TODO RMC14 Port Aviator Shades
       - id: RMCGlassesMarineRpg
     - name: Service
       entries:

@@ -1,0 +1,11 @@
+
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetGeneral
+  name: armored general's cap
+  description: A sturdy general officer's cap. More protective than it seems. Please don't ditch this for a helmet like a punk.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/general.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/general.rsi
