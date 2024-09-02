@@ -1,9 +1,0 @@
-
-- type: entity
-  parent: RMCMarineUniformBase
-  id: CMJumpsuitGeneral
-  name: general's uniform
-  description: A uniform worn by a fleet general. It comes in a shade of deep black, and has a light shimmer to it. The weave looks strong enough to provide some light protections.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Command/general.rsi

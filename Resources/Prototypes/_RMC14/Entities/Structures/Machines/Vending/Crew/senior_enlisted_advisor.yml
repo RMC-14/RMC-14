@@ -60,7 +60,7 @@
       #Prescription Medical HUD Glasses
       - id: CMGlassesSecurity
       - id: RMCGlassesMarineRpg #Sunglasses Placeholder
-      - id: CMSunglasses
+      - id: RMCSunglasses
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:

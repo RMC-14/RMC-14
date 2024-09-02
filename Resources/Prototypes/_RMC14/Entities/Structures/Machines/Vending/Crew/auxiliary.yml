@@ -82,7 +82,7 @@
     - name: Glasses
       choices: { CMGlasses: 1 }
       entries:
-      - id: CMSunglasses
+      - id: RMCSunglasses
         recommended: true
       - id: RMCGlassesMedicalHUDGlasses
         recommended: true

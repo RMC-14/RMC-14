@@ -165,6 +165,20 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/service.rsi
 
+# Executive officer
+
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitXOFormal
+  name: marine formal service uniform
+  description: A formal service uniform typically worn by marines of the USCM. Still practicable while still being more formal than the standard service uniform.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/formal_service.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+
 # Officer
 - type: entity
   parent: RMCMarineUniformBase
@@ -259,3 +273,14 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/colonist.rsi
+
+# High Command
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: CMJumpsuitGeneral
+  name: general's uniform
+  description: A uniform worn by a fleet general. It comes in a shade of deep black, and has a light shimmer to it. The weave looks strong enough to provide some light protections.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/general.rsi
