@@ -1,0 +1,228 @@
+﻿- type: entity
+  parent: BaseItem
+  abstract: true
+  id: RMCBaseSentry
+  name: turret
+  components:
+  - type: Item
+    size: Normal
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Actions
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+      sentry:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20
+        layer:
+        - Impassable
+        mask:
+        - Impassable
+        hard: false
+  - type: CollisionWake
+    enabled: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - map: [ "base" ]
+    - map: [ "sentry" ]
+      state: normal_uac_sentry_handheld
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    state: normal_uac_sentry_handheld
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SentryLayers.Layer:
+        base:
+          Item: { state: "" }
+          Off: { state: defense_base_off }
+          On: { state: defense_base }
+        sentry:
+          Item: { state: normal_uac_sentry_handheld }
+          Off: { state: normal_uac_sentry_noammo }
+          On: { state: normal_uac_sentry_on }
+  - type: CombatMode
+    toggleMouseRotator: false
+  - type: Gun
+    fireRate: 2.5
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
+  - type: MagazineAmmoProvider
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+  - type: HTN
+    rootTask:
+      task: RMCSentryCompound
+    blackboard:
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Effects/double_beep.ogg
+      VisionRadius: !type:Single
+        5.0
+  - type: MouseRotator
+    angleTolerance: 5
+    rotationSpeed: 180
+    simple4DirMode: false
+  - type: NoRotateOnInteract
+  - type: NoRotateOnMove
+  - type: GunIFF
+    enabled: true
+    intrinsic: true
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: UserInterface
+    interfaces:
+      enum.SentryUiKey.Key:
+        type: SentryUpgradeBui
+  - type: Sentry
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: RMCRepairable
+
+- type: htnCompound
+  id: RMCSentryCompound
+  branches:
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:UtilityOperator
+        proto: RMCNearbyGunXenos
+
+    - !type:HTNPrimitiveTask
+      preconditions:
+      - !type:KeyExistsPrecondition
+        key: Target
+      - !type:TargetInRangePrecondition
+        targetKey: Target
+        # TODO: Non-scuffed
+        rangeKey: RangedRange
+      - !type:TargetInLOSPrecondition
+        targetKey: Target
+        rangeKey: RangedRange
+      operator: !type:GunOperator
+        targetKey: Target
+        requireLOS: true
+        targetState: Critical
+      services:
+      - !type:UtilityService
+        id: RangedService
+        proto: RMCNearbyGunXenos
+        key: Target
+
+- type: utilityQuery
+  id: RMCNearbyGunXenos
+  query:
+  - !type:NearbyHostilesQuery
+  considerations:
+  - !type:TargetXenoCon
+    curve: !type:BoolCurve
+  - !type:TargetIsNotDeadCon
+    curve: !type:BoolCurve
+  - !type:TargetDistanceCon
+    curve: !type:PresetCurve
+      preset: TargetDistance
+  - !type:TargetAccessibleCon
+    curve: !type:BoolCurve
+  - !type:TargetInLOSOrCurrentCon
+    curve: !type:BoolCurve
+  - !type:CanFaceCon
+    curve: !type:BoolCurve
+
+- type: entity
+  parent: BaseItem
+  id: RMCEngineeringUpgrade
+  name: engineering upgrade kit
+  description: A kit used to upgrade the defenses of an engineer's sentry. Back in 1980 when the machines tried to break free, it was a single android who laid them low. Now their technology is used widely on the rim.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/engineering_kit.rsi
+    state: icon
+  - type: SentryUpgradeItem
+
+- type: entity
+  parent: RMCBaseSentry
+  id: RMCSentry
+  name: UN 571-C sentry gun
+  description: A deployable, semi-automated turret with AI targeting capabilities. Armed with an M30 Autocannon and a 500-round drum magazine.
+  components:
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    state: normal_uac_sentry_handheld
+  - type: NpcFactionMember
+    factions:
+    - UNMC
+  - type: UserIFF
+    faction: FactionMarine
+
+- type: entity
+  parent: RMCSentry
+  id: RMCSentryMini
+  name: UN 512-M mini sentry
+  description: A compact version of the UNMC defenses. Designed for quick deployment of the associated type in the field.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - map: [ "sentry" ]
+      state: mini_uac_sentry_handheld
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    state: mini_uac_sentry_handheld
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SentryLayers.Layer:
+        sentry:
+          Item: { state: mini_uac_sentry_handheld }
+          Off: { state: mini_uac_sentry_noammo }
+          On: { state: mini_uac_sentry_on }
+  - type: Gun
+    fireRate: 6.66
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: GunDamageModifier
+    multiplier: 0.4
+  - type: Sentry
+    deployDelay: 0.75
+    undeployDelay: 0.75
+    upgrades: null
+    deployFixture: null

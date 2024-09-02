@@ -61,8 +61,8 @@ target_minimum_tickrate = 90
 
 [replay]
 auto_record = true
-max_compressed_size = 2097152
-max_uncompressed_size = 4194304
+max_compressed_size = 4194304
+max_uncompressed_size = 8388608
 auto_record_temp_dir = "recording"
 auto_record_name = "done/{year}_{month}_{day}-{hour}_{minute}-round_{round}.zip"
 

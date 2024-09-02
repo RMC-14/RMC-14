@@ -119,7 +119,7 @@ public sealed class RMCGlobalAdminEui : BaseEui
             _window.Squads.AddChild(squadRow);
         }
 
-        _window.MarinesLabel.Text = $"Total marines alive: {s.Marines}";
+        _window.MarinesLabel.Text = $"Total marine players alive: {s.Marines}";
 
         var xenoTiers = new Dictionary<int, int>();
         foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
@@ -149,7 +149,7 @@ public sealed class RMCGlobalAdminEui : BaseEui
             });
         }
 
-        _window.XenosLabel.Text = $"Total xenonids alive: {s.Xenos.Count}";
+        _window.XenosLabel.Text = $"Total xenonid players alive: {s.Xenos.Count}";
     }
 
     private void OnRefresh(ButtonEventArgs args)
