@@ -1,0 +1,154 @@
+﻿- type: entity
+  parent: BaseItem
+  id: RMCMortarKit
+  name: M402 mortar portable kit
+  description: A manual, crew-operated mortar system intended to rain down 80mm goodness on anything it's aimed at. Needs to be set down first.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/mortar.rsi
+    layers:
+    - map: [ "mortar" ]
+      state: mortar_m402_carry
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+      mortar:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20
+        layer:
+        - Impassable
+        mask:
+        - Impassable
+        hard: false
+  - type: CollisionWake
+    enabled: false
+  - type: Anchorable
+    flags:
+    - Unanchorable
+  - type: Item
+    size: Huge
+  - type: Corrodible
+    isCorrodible: false
+  - type: Mortar
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: UserInterface
+    interfaces:
+      enum.MortarUiKey.Key:
+        type: MortarBui
+      enum.RMCCameraUiKey.Key:
+        type: RMCCameraBui
+  - type: ActivatableUI
+    key: enum.MortarUiKey.Key
+  - type: RMCCameraComputer
+    id: RMCMortarKit
+    title: rmc-mortar-camera-title
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.MortarVisualLayers.State:
+        mortar:
+          Item: { state: mortar_m402_carry }
+          Deployed: { state: mortar_m402 }
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCMortarShellBase
+  name: 80mm mortar shell
+  description: An unlabeled 80mm mortar shell, probably a casing.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/mortar.rsi
+    state: mortar_ammo_cas
+  - type: Item
+    size: Huge
+  - type: MortarShell
+
+- type: entity
+  parent: RMCMortarShellBase
+  id: RMCMortarShellHE
+  name: 80mm high explosive mortar shell
+  description: An 80mm mortar shell, loaded with a high explosive charge.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/mortar.rsi
+    state: mortar_ammo_he
+  - type: Explosive
+    explosionType: RMCMortar
+    maxIntensity: 30 # max 150 brute, 150 burn
+    intensitySlope: 5
+    totalIntensity: 800
+    canCreateVacuum: false
+  - type: CMExplosionEffect
+  - type: MortarShell
+
+- type: entity
+  parent: RMCMortarShellBase
+  id: RMCMortarShellFlare
+  name: 80mm flare/camera mortar shell
+  description: An 80mm mortar shell, loaded with an illumination flare / camera combo, attached to a parachute.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/mortar.rsi
+    state: mortar_ammo_flr
+  - type: MortarShell
+  - type: MortarCameraShell
+
+- type: entity
+  id: RMCMortarFlare
+  name: illumination flare
+  description: It's really bright, and unreachable.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: PointLight
+    enabled: true
+    radius: 5
+  - type: RandomTimedDespawn
+    min: 270
+    max: 330
+
+- type: entity
+  id: RMCMortarCamera
+  name: para-cam
+  components:
+  - type: Transform
+    anchored: true
+  - type: Eye
+    drawFov: false
+  - type: RMCCamera
+    id: RMCMortarKit
+  - type: MortarCamera
+  - type: TimedDespawn
+    lifetime: 180

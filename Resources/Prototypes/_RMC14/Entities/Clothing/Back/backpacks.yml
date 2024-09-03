@@ -141,8 +141,8 @@
     grid:
     - 0,0,15,1
     whitelist:
-      tags:
-      - CMMortarShell
+      components:
+      - MortarShell
   - type: FixedItemSizeStorage
 
 - type: entity

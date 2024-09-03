@@ -1,5 +1,29 @@
 ﻿- type: entity
   parent: RMCCrateAmmo
+  id: RMCCrateGearBinoculars
+  name: mixed binoculars crate (2x per, 6x total)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBinoculars
+      amount: 2
+    - id: RMCLaserDesignator
+      amount: 2
+    - id: RMCRangefinder
+      amount: 2
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateGearPackFlare
+  name: flare packs crate (x20)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxPackFlare
+      amount: 2
+
+- type: entity
+  parent: RMCCrateAmmo
   id: RMCCrateGearPackFlareCAS
   name: signal flare packs crate (x4)
   components:

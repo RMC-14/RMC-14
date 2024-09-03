@@ -11,6 +11,7 @@ using Content.Client.Sprite;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Guidebook;
 using Content.Shared._RMC14.LinkAccount;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared.CCVar;
@@ -359,6 +360,38 @@ namespace Content.Client.Lobby.UI
             };
 
             #endregion SpawnPriority
+
+            #region SquadPreference
+
+            SquadPreferenceButton.AddItem(Loc.GetString("loadout-none"), 0);
+            var squad = _entManager.System<SquadSystem>();
+            for (var i = 0; i < squad.SquadPrototypes.Length; i++)
+            {
+                var squadProto = squad.SquadPrototypes[i];
+                if (!squadProto.TryGetComponent(out SquadTeamComponent? team) ||
+                    !team.RoundStart)
+                {
+                    continue;
+                }
+
+                SquadPreferenceButton.AddItem(squadProto.Name, i + 1);
+            }
+
+            SquadPreferenceButton.OnItemSelected += args =>
+            {
+                SquadPreferenceButton.SelectId(args.Id);
+
+                if (args.Id == 0)
+                {
+                    SetSquadPreference(null);
+                    return;
+                }
+
+                if (squad.SquadPrototypes.TryGetValue(args.Id - 1, out var proto))
+                    SetSquadPreference(proto.ID);
+            };
+
+            #endregion SquadPreference
 
             #region Eyes
 
@@ -778,6 +811,7 @@ namespace Content.Client.Lobby.UI
             UpdateGenderControls();
             UpdateSkinColor();
             UpdateSpawnPriorityControls();
+            UpdateSquadPreferenceControls();
             UpdateAgeEdit();
             UpdateEyePickers();
             UpdateSaveButton();
@@ -1257,6 +1291,12 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
+        private void SetSquadPreference(EntProtoId<SquadTeamComponent>? newSquadPreference)
+        {
+            Profile = Profile?.WithSquadPreference(newSquadPreference);
+            SetDirty();
+        }
+
         public bool IsDirty
         {
             get => _isDirty;
@@ -1447,6 +1487,25 @@ namespace Content.Client.Lobby.UI
             }
 
             SpawnPriorityButton.SelectId((int) Profile.SpawnPriority);
+        }
+
+        private void UpdateSquadPreferenceControls()
+        {
+            if (Profile == null)
+            {
+                return;
+            }
+
+            var index = 0;
+            if (Profile.SquadPreference is { } preference)
+            {
+                var squads = new List<EntityPrototype>(_entManager.System<SquadSystem>().SquadPrototypes)
+                    .Select(s => s.ID)
+                    .ToList();
+                index = squads.IndexOf(preference.Id) + 1;
+            }
+
+            SquadPreferenceButton.SelectId(index);
         }
 
         private void UpdateHairPickers()

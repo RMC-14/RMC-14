@@ -21,17 +21,44 @@
 
 - type: entity
   parent: RMCBinoculars
+  id: RMCRangefinder
+  name: rangefinder
+  description: "A pair of binoculars with a rangefinding function. Click a tile to acquire it's coordinates."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    layers:
+    - state: rangefinder
+    - map: [ "light" ]
+  - type: Rangefinder
+  - type: UseDelay
+    delay: 1
+  - type: UserInterface
+    interfaces:
+      enum.RangefinderUiKey.Key:
+        type: RangefinderBui
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RangefinderLayers.Layer:
+        light:
+          Rangefinder: { state: laser_range }
+          Designator: { state: laser_cas }
+
+- type: entity
+  parent: RMCRangefinder
   id: RMCLaserDesignator
   name: laser designator
-  description: "A budget laser designator with one mode: target marking for CAS with IR laser. Click a tile to target something."
-  # TODO RMC14 "A laser designator with two modes: target marking for CAS with IR laser and rangefinding. Click turf to target something. Ctrl + Click designator to stop lasing. Alt + Click designator to switch modes."
+  description: "A laser designator with two modes: target marking for CAS with IR laser and rangefinding. Click a tile to target something."
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
     layers:
     - state: rangefinder
     - state: laser_cas
-  - type: LaserDesignator
+  - type: Rangefinder
+    mode: Designator
+    canDesignate: true
   - type: UseDelay
     delay: 1
 
@@ -39,28 +66,35 @@
   parent: RMCLaserDesignator
   id: RMCLaserDesignatorScout
   name: scout laser designator
-  description: "An improved laser designator, issued to USCM scouts, with one mode: target marking for CAS with IR laser. Click a tile to target something."
-  # TODO RMC14 "An improved laser designator, issued to USCM scouts, with two modes: target marking for CAS with IR laser and rangefinding. Click turf to target something. Ctrl + Click designator to stop lasing. Alt + Click designator to switch modes."
+  description: "An improved laser designator, issued to USCM scouts, with two modes: target marking for CAS with IR laser and rangefinding. Click a tile to target something."
   components:
-  - type: LaserDesignator
+  - type: Rangefinder
     delay: 3
   - type: Corrodible
     isCorrodible: false
 
 - type: entity
-  id: RMCLaserDesignatorTarget
+  id: RMCRangefinderTarget
   name: laser
-  description: It's a laser to designate artillery targets, get away from it!
   components:
   - type: Transform
     anchored: true
   - type: Sprite
     sprite: _RMC14/Effects/laser.rsi
-    state: laser_target2
-  - type: LaserDesignatorTarget
+    state: laser_target_coordinate
   - type: PointLight
     enabled: true
     radius: 3
+
+- type: entity
+  parent: RMCRangefinderTarget
+  id: RMCLaserDesignatorTarget
+  description: It's a laser to designate artillery targets, get away from it!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Effects/laser.rsi
+    state: laser_target2
+  - type: LaserDesignatorTarget
 
 - type: entity
   id: RMCLaserDropshipTarget
