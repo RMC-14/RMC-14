@@ -115,6 +115,12 @@ public sealed partial class MedivacStretcherSystem : EntitySystem
             return;
         }
 
+        if (TryComp(ent.Owner, out FoldableComponent? foldComp) &&
+            foldComp.IsFolded)
+        {
+            return;
+        }
+
         ActivateBeacon(args.Target, args.User);
         args.Handled = true;
     }
