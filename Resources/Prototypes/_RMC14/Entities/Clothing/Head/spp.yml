@@ -91,6 +91,8 @@
       visible: false
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/SPP/ushanka.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
   - type: FoldableClothing
     foldedEquippedPrefix: up
     foldedHeldPrefix: up
