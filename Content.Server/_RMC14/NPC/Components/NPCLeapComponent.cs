@@ -1,5 +1,5 @@
 ﻿using Content.Shared.Actions;
-using Robust.Shared.Map;
+using System.Numerics;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.NPC.Components;
@@ -20,7 +20,7 @@ public sealed partial class NPCLeapComponent : Component
     public ushort? CurrentDoAfter;
 
     [ViewVariables]
-    public EntityCoordinates Destination;
+    public Vector2 Destination;
 
     [ViewVariables(VVAccess.ReadWrite)]
     public float LeapDistance = 3.5f;

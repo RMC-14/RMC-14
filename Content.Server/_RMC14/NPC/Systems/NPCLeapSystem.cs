@@ -6,8 +6,6 @@ using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Robust.Shared.Timing;
 using Content.Shared.Coordinates;
-using System.Numerics;
-using Robust.Shared.Map;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map.Components;
 
@@ -83,15 +81,9 @@ public sealed partial class NPCLeapSystem : EntitySystem
 
                 var worldPos = _transform.GetWorldPosition(xform);
                 var targetPos = _transform.GetWorldPosition(targetXform);
-                if (!TryComp<MapGridComponent>(_transform.GetGrid(comp.Destination), out var map))
-                {
-                    comp.Status = LeapStatus.TargetUnreachable;
-                    continue;
-                }
 
-                var destinationPos = _map.LocalToWorld(uid, map, comp.Destination.Position);
-
-                var distance = (targetPos - worldPos).Length();
+                var destinationPos = comp.Destination;
+;
                 var range = (destinationPos - worldPos).Length();
 
                 if (!_interaction.InRangeUnobstructed(uid, comp.Target, range))
@@ -102,7 +94,9 @@ public sealed partial class NPCLeapSystem : EntitySystem
                     continue;
                 }
 
-                var angle = (targetPos - worldPos).ToAngle() - (destinationPos - worldPos).ToAngle();
+                var targetDir = (targetPos - worldPos).Normalized();
+                var destDir = (destinationPos - worldPos).Normalized();
+                var angle = Angle.ShortestDistance(new Angle(targetDir), new Angle(destDir));
 
                 if (Math.Abs(angle) > Angle.FromDegrees(comp.MaxAngleDegrees))
                 {
@@ -131,15 +125,15 @@ public sealed partial class NPCLeapSystem : EntitySystem
                 var worldPos = _transform.GetWorldPosition(xform);
                 var targetPos = _transform.GetWorldPosition(targetXform);
 
-                var destination = (targetPos - worldPos).Normalized() * comp.LeapDistance;
+                var destination = targetPos + (targetPos - worldPos).Normalized() * comp.LeapDistance;
 
-                comp.Destination = uid.ToCoordinates(destination);
+                comp.Destination = destination;
 
                 if (action.Event != null)
                 {
                     action.Event.Performer = uid;
                     action.Event.Action = xeno.Actions[comp.ActionId];
-                    action.Event.Target = comp.Destination;
+                    action.Event.Target = uid.ToCoordinates(destination - targetPos);
                 }
 
                 comp.CurrentDoAfter = after.NextId;
