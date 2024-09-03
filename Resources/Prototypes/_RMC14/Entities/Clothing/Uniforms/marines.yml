@@ -82,7 +82,7 @@
   description: A standard-issue cargo tech uniform.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Supply/argo_tech.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Supply/cargo_tech.rsi
 
 # MessTech / Chef
 - type: entity
@@ -181,13 +181,16 @@
 
 # Officer
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: JumpsuitMarine
   id: CMJumpsuitBO
   name: marine service uniform
   description: A service uniform worn by members of the marines. Do the corps proud. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/bo.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
 
 - type: entity
   parent: JumpsuitMarine
@@ -264,6 +267,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/T-shirt/gray.rsi
 
+# Survivors
+
 # Colonist
 - type: entity
   parent: RMCMarineUniformBase
@@ -272,10 +277,24 @@
   description: A stylish gray-green jumpsuit - standard issue for colonists.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/colonist.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/colonist.rsi
+
+# Marine
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitSurvivorMarine
+  name: UNMC uniform
+  description: Torn, Burned and blood stained. This uniform has seen much more than you could possibly imagine.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/recon_marine.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
 
 # High Command
 
+# General
 - type: entity
   parent: RMCMarineUniformBase
   id: CMJumpsuitGeneral
