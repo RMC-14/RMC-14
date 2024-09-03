@@ -17,7 +17,7 @@ public sealed class XenoRemoveNestedBui : BoundUserInterface
     {
         _window = new XenoRemoveNestedWindow();
         _window.OnClose += Close;
-
+        _window.DenyButton.OnPressed += _ => DenyRemoveNested();
         _window.ConfirmButton.OnPressed += _ => RemoveNested();
 
         _window.OpenCentered();
@@ -29,6 +29,13 @@ public sealed class XenoRemoveNestedBui : BoundUserInterface
             return;
         var msg = new XenoRemoveNestedBuiMsg();
         SendPredictedMessage(msg);
+    }
+
+    private void DenyRemoveNested()
+    {
+        if (_window == null)
+            return;
+        _window.Close();
     }
 
     protected override void Dispose(bool disposing)
