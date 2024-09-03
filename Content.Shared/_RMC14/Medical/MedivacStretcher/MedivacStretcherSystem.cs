@@ -131,6 +131,7 @@ public sealed partial class MedivacStretcherSystem : EntitySystem
         if (!_areas.CanCAS(stretcher.ToCoordinates().SnapToGrid(_entites, _mapManager)))
         {
             _popup.PopupClient(Loc.GetString("rmc-medivac-area-not-cas"), stretcherCoords, user);
+            return;
         }
 
         if (!TryComp(stretcher, out StrapComponent? strapComp) ||
