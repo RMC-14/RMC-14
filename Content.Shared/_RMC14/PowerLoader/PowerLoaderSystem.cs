@@ -277,7 +277,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
 
         var ev = new DropshipDetachDoAfterEvent(EntityManager.GetNetEntity(ent), EntityManager.GetNetEntity(contained));
-        var doAfter = new DoAfterArgs(EntityManager, args.User, detachableComponent.DetachDelay, ev, contained, target)
+        var doAfter = new DoAfterArgs(EntityManager, args.User, detachableComponent.DetachDelay, ev, target, target)
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
