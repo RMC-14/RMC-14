@@ -44,8 +44,14 @@
       - RMCScoutArmor
     denyReason: rmc-wear-scout-armor-required
   - type: ThermalCloak
-    opacity: 0.04
+    opacity: 0.03 # Put to 0.03 for testing
     restrictWeapons: true
+    cloakedHideLayers:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Tail
+    - Snout # I don't know if this is hugely problematic but better safe than sorry
     whitelist:
       components:
       - ScoutWhitelist

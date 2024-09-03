@@ -2,20 +2,16 @@ using System.Runtime.InteropServices;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
-using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Rangefinder;
 using Content.Shared._RMC14.Rules;
-using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
-using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.GameTicking;
-using Content.Shared.Hands;
 using Content.Shared.IgnitionSource;
-using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Light.Components;
@@ -23,7 +19,6 @@ using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.Throwing;
-using Content.Shared.Timing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
@@ -47,13 +42,10 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedDropshipSystem _dropship = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -83,21 +75,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<FlareSignalComponent, ThrownEvent>(OnFlareSignalThrown);
         SubscribeLocalEvent<FlareSignalComponent, StopThrowEvent>(OnFlareSignalStopThrow);
         SubscribeLocalEvent<FlareSignalComponent, ContainerGettingInsertedAttemptEvent>(OnFlareSignalContainerGettingInsertedAttempt);
-
-        SubscribeLocalEvent<LaserDesignatorComponent, MapInitEvent>(OnLaserDesignatorMapInit);
-        SubscribeLocalEvent<LaserDesignatorComponent, AfterInteractEvent>(OnLaserDesignatorAfterInteract);
-        SubscribeLocalEvent<LaserDesignatorComponent, LaserDesignatorDoAfterEvent>(OnLaserDesignatorDoAfter);
-        SubscribeLocalEvent<LaserDesignatorComponent, ExaminedEvent>(OnLaserDesignatorExamined);
-
-        SubscribeLocalEvent<ActiveLaserDesignatorComponent, ComponentRemove>(OnLaserDesignatorRemove);
-        SubscribeLocalEvent<ActiveLaserDesignatorComponent, EntityTerminatingEvent>(OnLaserDesignatorRemove);
-        SubscribeLocalEvent<ActiveLaserDesignatorComponent, DroppedEvent>(OnLaserDesignatorDropped);
-        SubscribeLocalEvent<ActiveLaserDesignatorComponent, RMCDroppedEvent>(OnLaserDesignatorDropped);
-        SubscribeLocalEvent<ActiveLaserDesignatorComponent, GotUnequippedHandEvent>(OnLaserDesignatorDropped);
-        SubscribeLocalEvent<ActiveLaserDesignatorComponent, HandDeselectedEvent>(OnLaserDesignatorDropped);
-
-        SubscribeLocalEvent<LaserDesignatorTargetComponent, ComponentRemove>(OnLaserDesignatorTargetRemove);
-        SubscribeLocalEvent<LaserDesignatorTargetComponent, EntityTerminatingEvent>(OnLaserDesignatorTargetRemove);
 
         SubscribeLocalEvent<DropshipTerminalWeaponsComponent, MapInitEvent>(OnTerminalMapInit);
         SubscribeLocalEvent<DropshipTerminalWeaponsComponent, BoundUIOpenedEvent>(OnTerminalBUIOpened);
@@ -206,156 +183,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             args.Cancel();
     }
 
-    private void OnLaserDesignatorMapInit(Entity<LaserDesignatorComponent> ent, ref MapInitEvent args)
-    {
-        ent.Comp.Id = GetNextTargetID();
-        Dirty(ent);
-    }
-
-    private void OnLaserDesignatorAfterInteract(Entity<LaserDesignatorComponent> ent, ref AfterInteractEvent args)
-    {
-        var user = args.User;
-        var coordinates = args.ClickLocation.SnapToGrid(EntityManager, _mapManager);
-        if (!coordinates.IsValid(EntityManager))
-            return;
-
-        args.Handled = true;
-
-        string msg;
-        var grid = _transform.GetGrid(coordinates);
-        if (!HasComp<RMCPlanetComponent>(grid))
-        {
-            msg = Loc.GetString("rmc-laser-designator-not-surface");
-            _popup.PopupClient(msg, coordinates, user, PopupType.SmallCaution);
-            return;
-        }
-
-        if (HasComp<ActiveLaserDesignatorComponent>(ent))
-        {
-            msg = Loc.GetString("rmc-laser-designator-already-targeting");
-            _popup.PopupClient(msg, coordinates, user, PopupType.SmallCaution);
-            return;
-        }
-
-        if (!_examine.InRangeUnOccluded(user, coordinates, ent.Comp.Range))
-        {
-            msg = Loc.GetString("rmc-laser-designator-out-of-range");
-            _popup.PopupClient(msg, coordinates, user, PopupType.SmallCaution);
-            return;
-        }
-
-        if (!_area.CanCAS(coordinates))
-        {
-            msg = Loc.GetString("rmc-laser-designator-not-cas");
-            _popup.PopupClient(msg, coordinates, user, PopupType.SmallCaution);
-            return;
-        }
-
-        if (TryComp(ent, out UseDelayComponent? useDelay))
-        {
-            if (_useDelay.IsDelayed((ent, useDelay)))
-                return;
-
-            _useDelay.TryResetDelay(ent, component: useDelay);
-        }
-
-        var delay = ent.Comp.Delay;
-        var skill = _skills.GetSkill(user, ent.Comp.Skill);
-        delay -= skill * ent.Comp.TimePerSkillLevel;
-
-        if (delay < ent.Comp.MinimumDelay)
-            delay = ent.Comp.MinimumDelay;
-
-        var ev = new LaserDesignatorDoAfterEvent(GetNetCoordinates(coordinates));
-        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent)
-        {
-            BreakOnMove = true,
-            NeedHand = true,
-            BreakOnHandChange = true,
-        };
-
-        if (_doAfter.TryStartDoAfter(doAfter))
-        {
-            msg = Loc.GetString("rmc-laser-designator-start");
-            _popup.PopupClient(msg, coordinates, user, PopupType.Medium);
-            _audio.PlayPredicted(ent.Comp.TargetSound, ent, user);
-        }
-    }
-
-    private void OnLaserDesignatorDoAfter(Entity<LaserDesignatorComponent> ent, ref LaserDesignatorDoAfterEvent args)
-    {
-        var user = args.User;
-        if (args.Cancelled || args.Handled)
-            return;
-
-        args.Handled = true;
-        var coords = GetCoordinates(args.Coordinates);
-        if (!coords.IsValid(EntityManager))
-            return;
-
-        var msg = Loc.GetString("rmc-laser-designator-acquired");
-        _popup.PopupClient(msg, coords, user, PopupType.Medium);
-        _audio.PlayPredicted(ent.Comp.AcquireSound, ent, user);
-
-        if (_net.IsClient)
-            return;
-
-        var active = EnsureComp<ActiveLaserDesignatorComponent>(ent);
-        TryQueueDel(active.Target);
-
-        coords = _transform.GetMoverCoordinates(coords);
-        active.Target = Spawn(ent.Comp.TargetSpawn, coords);
-        active.Origin = _transform.GetMoverCoordinates(ent);
-        Dirty(ent, active);
-
-        var targetEnt = active.Target.Value;
-        var target = EnsureComp<LaserDesignatorTargetComponent>(targetEnt);
-        target.Id = ent.Comp.Id;
-        Dirty(targetEnt, target);
-
-        var id = ent.Comp.Id;
-        var name = Loc.GetString("rmc-laser-designator-target-name", ("id", id));
-        var abbreviation = GetUserAbbreviation(user, id);
-        if (_squad.TryGetMemberSquad(user, out var squad))
-            name = Loc.GetString("rmc-laser-designator-target-name-squad", ("squad", squad), ("id", ent.Comp.Id));
-
-        var dropshipTarget = new DropshipTargetComponent { Abbreviation = abbreviation };
-        AddComp(targetEnt, dropshipTarget, true);
-        Dirty(targetEnt, dropshipTarget);
-
-        _metaData.SetEntityName(targetEnt, name);
-    }
-
-    private void OnLaserDesignatorExamined(Entity<LaserDesignatorComponent> ent, ref ExaminedEvent args)
-    {
-        using (args.PushGroup(nameof(LaserDesignatorComponent)))
-        {
-            args.PushText(Loc.GetString("rmc-laser-designator-examine-id", ("id", ent.Comp.Id)));
-        }
-    }
-
-    private void OnLaserDesignatorRemove<T>(Entity<ActiveLaserDesignatorComponent> ent, ref T args)
-    {
-        if (_net.IsClient)
-            return;
-
-        Del(ent.Comp.Target);
-    }
-
-    private void OnLaserDesignatorDropped<T>(Entity<ActiveLaserDesignatorComponent> ent, ref T args)
-    {
-        RemCompDeferred<ActiveLaserDesignatorComponent>(ent);
-    }
-
-    private void OnLaserDesignatorTargetRemove<T>(Entity<LaserDesignatorTargetComponent> ent, ref T args)
-    {
-        if (TryComp(ent.Comp.LaserDesignator, out ActiveLaserDesignatorComponent? designator))
-        {
-            designator.Target = null;
-            Dirty(ent.Comp.LaserDesignator.Value, designator);
-        }
-    }
-
     private void OnTerminalMapInit(Entity<DropshipTerminalWeaponsComponent> ent, ref MapInitEvent args)
     {
         var targets = new List<TargetEnt>();
@@ -382,7 +209,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void OnDropshipTargetMapInit(Entity<DropshipTargetComponent> ent, ref MapInitEvent args)
     {
-        EnsureComp<EyeComponent>(ent);
+        var eye = EnsureComp<EyeComponent>(ent);
+        _eye.SetDrawFov(ent, false, eye);
 
         var netEnt = GetNetEntity(ent);
         var terminals = EntityQueryEnumerator<DropshipTerminalWeaponsComponent>();
@@ -465,12 +293,15 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void OnWeaponsFireMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsFireMsg args)
     {
+        if (_net.IsClient)
+            return;
+
         var actor = args.Actor;
         ref var screen = ref args.First ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
         if (screen.Weapon is not { } netWeapon)
         {
             var msg = Loc.GetString("rmc-dropship-weapons-fire-no-weapon");
-            _popup.PopupClient(msg, actor, PopupType.SmallCaution);
+            _popup.PopupCursor(msg, actor, PopupType.SmallCaution);
             return;
         }
 
@@ -492,7 +323,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 (ftl.State != FTLState.Travelling && ftl.State != FTLState.Arriving))
             {
                 var msg = Loc.GetString("rmc-dropship-weapons-fire-not-flying");
-                _popup.PopupClient(msg, actor, PopupType.SmallCaution);
+                _popup.PopupCursor(msg, actor, PopupType.SmallCaution);
                 return;
             }
         }
@@ -508,18 +339,18 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             return;
         }
 
-        var coordinates = target.ToCoordinates().SnapToGrid(EntityManager, _mapManager);
+        var coordinates = _transform.GetMoverCoordinates(target).SnapToGrid(EntityManager, _mapManager);
         if (!CasDebug && !_area.CanCAS(coordinates))
         {
             var msg = Loc.GetString("rmc-laser-designator-not-cas");
-            _popup.PopupClient(msg, actor);
+            _popup.PopupCursor(msg, actor);
             return;
         }
 
         if (!CasDebug && weaponComp.Skills != null && !_skills.HasSkills(actor, weaponComp.Skills))
         {
             var msg = Loc.GetString("rmc-laser-designator-not-skilled");
-            _popup.PopupClient(msg, actor);
+            _popup.PopupCursor(msg, actor);
             return;
         }
 
@@ -535,7 +366,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (time < weaponComp.NextFireAt)
         {
             var msg = Loc.GetString("rmc-dropship-weapons-fire-cooldown", ("weapon", weapon));
-            _popup.PopupClient(msg, actor);
+            _popup.PopupCursor(msg, actor);
             return;
         }
 
@@ -543,7 +374,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             ammo.Comp.Rounds < ammo.Comp.RoundsPerShot)
         {
             var msg = Loc.GetString("rmc-dropship-weapons-fire-no-ammo", ("weapon", weapon));
-            _popup.PopupClient(msg, actor);
+            _popup.PopupCursor(msg, actor);
             return;
         }
 
@@ -553,7 +384,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         ammo.Comp.Rounds -= ammo.Comp.RoundsPerShot;
         Dirty(ammo);
 
-        _audio.PlayPredicted(ammo.Comp.SoundCockpit, weapon.Value, ent);
+        _audio.PlayPvs(ammo.Comp.SoundCockpit, weapon.Value);
         weaponComp.NextFireAt = time + weaponComp.FireDelay;
         Dirty(weapon.Value, weaponComp);
 
@@ -712,7 +543,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         return true;
     }
 
-    private string GetUserAbbreviation(EntityUid user, int id)
+    public string GetUserAbbreviation(EntityUid user, int id)
     {
         var abbreviation = Loc.GetString("rmc-laser-designator-target-abbreviation", ("id", id));
         if (_squad.TryGetMemberSquad(user, out var squad))
@@ -759,7 +590,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var id = GetNextTargetID();
+        var id = ComputeNextId();
         active.Abbreviation = Loc.GetString("rmc-laser-designator-target-abbreviation", ("id", id));
         if (user != null)
             active.Abbreviation = GetUserAbbreviation(user.Value, id);
@@ -785,6 +616,18 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         _physics.SetBodyType(ent, BodyType.Static);
 
         return true;
+    }
+
+    public int ComputeNextId()
+    {
+        return _nextId++;
+    }
+
+    public void MakeDropshipTarget(EntityUid ent, string abbreviation)
+    {
+        var dropshipTarget = new DropshipTargetComponent { Abbreviation = abbreviation };
+        AddComp(ent, dropshipTarget, true);
+        Dirty(ent, dropshipTarget);
     }
 
     public override void Update(float frameTime)
@@ -839,7 +682,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
             if (flight.Marker != null)
             {
-                TryQueueDel(flight.Marker);
+                QueueDel(flight.Marker);
                 flight.Marker = null;
                 Dirty(uid, flight);
             }
@@ -857,8 +700,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
                 if (!TryComp(flight.Ammo, out ammo))
                 {
-                    TryQueueDel(flight.Marker);
-                    TryQueueDel(uid);
+                    QueueDel(flight.Marker);
+                    QueueDel(uid);
                     continue;
                 }
 
@@ -889,8 +732,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
             if (!TryComp(flight.Ammo, out ammo))
             {
-                TryQueueDel(flight.Marker);
-                TryQueueDel(uid);
+                QueueDel(flight.Marker);
+                QueueDel(uid);
                 continue;
             }
 
@@ -900,7 +743,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (time >= flight.PlayGroundSoundAt)
             {
                 _audio.PlayPvs(ammo.SoundGround, flight.Target);
-                TryQueueDel(uid);
+                QueueDel(uid);
             }
         }
 

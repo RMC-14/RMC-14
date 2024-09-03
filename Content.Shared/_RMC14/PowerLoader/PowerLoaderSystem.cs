@@ -74,6 +74,7 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, PickupAttemptEvent>(OnGrabbablePickupAttempt);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, AfterInteractEvent>(OnGrabbableAfterInteract);
+        SubscribeLocalEvent<PowerLoaderGrabbableComponent, CombatModeShouldHandInteractEvent>(OnGrababbleShouldInteract);
 
         // Detach events and doAfters
         SubscribeLocalEvent<DropshipWeaponPointComponent, ActivateInWorldEvent>(OnPointActivateInWorld);
@@ -559,6 +560,12 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
 
         SyncAppearance(ent);
+    }
+
+    private void OnGrababbleShouldInteract(Entity<PowerLoaderGrabbableComponent> ent, ref CombatModeShouldHandInteractEvent args)
+    {
+        if (!HasComp<PowerLoaderComponent>(args.User))
+            args.Cancelled = true;
     }
 
     private void OnActivePilotPreventCollide(Entity<ActivePowerLoaderPilotComponent> ent, ref PreventCollideEvent args)

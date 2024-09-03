@@ -8,7 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
-using Content.Shared._RMC14.LinkAccount;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -29,6 +28,8 @@ namespace Content.Server.Database
     public abstract class ServerDbBase
     {
         private readonly ISawmill _opsLog;
+
+        public event Action<DatabaseNotification>? OnNotificationReceived;
 
         /// <param name="opsLog">Sawmill to trace log database operations to.</param>
         public ServerDbBase(ISawmill opsLog)
@@ -53,6 +54,7 @@ namespace Content.Server.Database
                     .ThenInclude(l => l.Groups)
                     .ThenInclude(group => group.Loadouts)
                 .Include(p => p.Profiles).ThenInclude(p => p.NamedItems)
+                .Include(p => p.Profiles).ThenInclude(p => p.SquadPreference)
                 .AsSingleQuery()
                 .SingleOrDefaultAsync(p => p.UserId == userId.UserId, cancel);
 
@@ -105,6 +107,7 @@ namespace Content.Server.Database
                     .ThenInclude(l => l.Groups)
                     .ThenInclude(group => group.Loadouts)
                 .Include(p => p.NamedItems)
+                .Include(p => p.SquadPreference)
                 .AsSplitQuery()
                 .SingleOrDefault(h => h.Slot == slot);
 
@@ -115,6 +118,8 @@ namespace Content.Server.Database
                     .Preference
                     .Include(p => p.Profiles)
                     .ThenInclude(p => p.NamedItems)
+                    .Include(p => p.Profiles)
+                    .ThenInclude(p => p.SquadPreference)
                     .SingleAsync(p => p.UserId == userId.UserId);
 
                 prefs.Profiles.Add(newProfile);
@@ -198,6 +203,7 @@ namespace Content.Server.Database
                 sex = sexVal;
 
             var spawnPriority = (SpawnPriorityPreference) profile.SpawnPriority;
+            var squadPreference = profile.SquadPreference?.Squad;
 
             var gender = sex == Sex.Male ? Gender.Male : Gender.Female;
             if (Enum.TryParse<Gender>(profile.Gender, true, out var genderVal))
@@ -258,6 +264,7 @@ namespace Content.Server.Database
                     markings
                 ),
                 spawnPriority,
+                squadPreference,
                 jobs,
                 (PreferenceUnavailableMode) profile.PreferenceUnavailable,
                 antags.ToHashSet(),
@@ -297,6 +304,7 @@ namespace Content.Server.Database
             profile.EyeColor = appearance.EyeColor.ToHex();
             profile.SkinColor = appearance.SkinColor.ToHex();
             profile.SpawnPriority = (int) humanoid.SpawnPriority;
+            profile.SquadPreference = new RMCSquadPreference { Squad = humanoid.SquadPreference };
             profile.Markings = markings;
             profile.Slot = slot;
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
@@ -355,7 +363,7 @@ namespace Content.Server.Database
                 PrimaryGunName = humanoid.NamedItems.PrimaryGunName,
                 SidearmName = humanoid.NamedItems.SidearmName,
                 HelmetName = humanoid.NamedItems.HelmetName,
-                ArmorName = humanoid.NamedItems.ArmorName
+                ArmorName = humanoid.NamedItems.ArmorName,
             };
 
             return profile;
@@ -445,13 +453,16 @@ namespace Content.Server.Database
             await db.DbContext.SaveChangesAsync();
         }
 
-        protected static async Task<ServerBanExemptFlags?> GetBanExemptionCore(DbGuard db, NetUserId? userId)
+        protected static async Task<ServerBanExemptFlags?> GetBanExemptionCore(
+            DbGuard db,
+            NetUserId? userId,
+            CancellationToken cancel = default)
         {
             if (userId == null)
                 return null;
 
             var exemption = await db.DbContext.BanExemption
-                .SingleOrDefaultAsync(e => e.UserId == userId.Value.UserId);
+                .SingleOrDefaultAsync(e => e.UserId == userId.Value.UserId, cancellationToken: cancel);
 
             return exemption?.Flags;
         }
@@ -482,11 +493,11 @@ namespace Content.Server.Database
             await db.DbContext.SaveChangesAsync();
         }
 
-        public async Task<ServerBanExemptFlags> GetBanExemption(NetUserId userId)
+        public async Task<ServerBanExemptFlags> GetBanExemption(NetUserId userId, CancellationToken cancel)
         {
-            await using var db = await GetDb();
+            await using var db = await GetDb(cancel);
 
-            var flags = await GetBanExemptionCore(db, userId);
+            var flags = await GetBanExemptionCore(db, userId, cancel);
             return flags ?? ServerBanExemptFlags.None;
         }
 
@@ -1885,6 +1896,16 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             public abstract ServerDbContext DbContext { get; }
 
             public abstract ValueTask DisposeAsync();
+        }
+
+        protected void NotificationReceived(DatabaseNotification notification)
+        {
+            OnNotificationReceived?.Invoke(notification);
+        }
+
+        public virtual void Shutdown()
+        {
+
         }
     }
 }

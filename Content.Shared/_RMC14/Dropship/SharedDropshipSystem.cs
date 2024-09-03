@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
+using Content.Shared.Examine;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -46,7 +47,8 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         SubscribeLocalEvent<DropshipUtilityPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
         SubscribeLocalEvent<DropshipUtilityPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
- 
+         SubscribeLocalEvent<DropshipWeaponPointComponent, ExaminedEvent>(OnAttachmentExamined);
+
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key,
             subs =>
             {
@@ -239,6 +241,27 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
     }
 
+    private void OnAttachmentExamined(Entity<DropshipWeaponPointComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(DropshipWeaponPointComponent)))
+        {
+            if (TryGetPointContained(ent, ent.Comp.WeaponContainerSlotId, out var weapon))
+                args.PushText(Loc.GetString("rmc-dropship-weapons-point-gun", ("weapon", weapon)));
+
+            if (TryGetPointContained(ent, ent.Comp.AmmoContainerSlotId, out var ammo))
+            {
+                args.PushText(Loc.GetString("rmc-dropship-weapons-point-ammo", ("ammo", ammo)));
+
+                if (TryComp(ammo, out DropshipAmmoComponent? ammoComp))
+                {
+                    args.PushText(Loc.GetString("rmc-dropship-weapons-rounds-left",
+                        ("current", ammoComp.Rounds),
+                        ("max", (ammoComp.MaxRounds))));
+                }
+            }
+        }
+    }
+
     private void OnDropshipNavigationLaunchMsg(Entity<DropshipNavigationComputerComponent> ent,
         ref DropshipNavigationLaunchMsg args)
     {
@@ -423,6 +446,22 @@ public abstract class SharedDropshipSystem : EntitySystem
             return false;
         }
 
+        return true;
+    }
+
+    private bool TryGetPointContained(
+        Entity<DropshipWeaponPointComponent> point,
+        string containerId,
+        out EntityUid contained)
+    {
+        contained = default;
+        if (!_container.TryGetContainer(point, containerId, out var container) ||
+            container.ContainedEntities.Count == 0)
+        {
+            return false;
+        }
+
+        contained = container.ContainedEntities[0];
         return true;
     }
 }

@@ -50,16 +50,34 @@
   parent: CMScrubsBlue
   id: CMScrubsOrange
   name: orange medical scrubs
-  description: It's made of a special fiber that provides minor protection against biohazards. This one is in dark orange.
+  description: It's made of a special fiber that provides minor protection against biohazards. This one is in prisoner orange.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/orange.rsi
 
 - type: entity
   parent: CMScrubsBlue
-  id: CMScrubsNurse
-  name: nurse scrubs
-  description: Standard-issue nurse scrubs.
+  id: RMCScrubsLightBlue
+  name: light blue medical scrubs
+  description: It's made of a special fiber that provides minor protection against biohazards. This one is in light blue.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/nurse.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/lightblue.rsi
+
+- type: entity
+  parent: CMScrubsBlue
+  id: RMCScrubsOlive
+  name: olive medical scrubs
+  description: It's made of a special fiber that provides minor protection against biohazards. This one is in olive green.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/olive.rsi
+
+- type: entity
+  parent: CMScrubsBlue
+  id: RMCScrubsGrey
+  name: grey medical scrubs
+  description: It's made of a special fiber that provides minor protection against biohazards. This one is in mundane grey.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/grey.rsi

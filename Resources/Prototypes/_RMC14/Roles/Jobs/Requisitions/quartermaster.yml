@@ -44,6 +44,8 @@
     ears: CMHeadsetQM
     pocket1: RMCPouchGeneralMedium
     pocket2: CMFlash
+  inhand:
+  - CMStampApproved
 
 - type: entity
   parent: CMSpawnPointJobBase

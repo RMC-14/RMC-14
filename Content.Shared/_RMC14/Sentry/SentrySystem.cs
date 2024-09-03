@@ -1,0 +1,482 @@
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using Content.Shared._RMC14.Interaction;
+using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.NPC;
+using Content.Shared._RMC14.Tools;
+using Content.Shared.DoAfter;
+using Content.Shared.Examine;
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Interaction;
+using Content.Shared.Interaction.Components;
+using Content.Shared.Interaction.Events;
+using Content.Shared.Item;
+using Content.Shared.Popups;
+using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Systems;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
+using Robust.Shared.Map;
+using Robust.Shared.Network;
+using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
+
+namespace Content.Shared._RMC14.Sentry;
+
+public sealed class SentrySystem : EntitySystem
+{
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly FixtureSystem _fixture = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCInteractionSystem _rmcInteraction = default!;
+    [Dependency] private readonly SharedRMCNPCSystem _rmcNpc = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+
+    private readonly HashSet<EntityUid> _toUpdate = new();
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<SentryComponent, MapInitEvent>(OnSentryMapInit);
+        SubscribeLocalEvent<SentryComponent, PickupAttemptEvent>(OnSentryPickupAttempt);
+        SubscribeLocalEvent<SentryComponent, UseInHandEvent>(OnSentryUseInHand);
+        SubscribeLocalEvent<SentryComponent, SentryDeployDoAfterEvent>(OnSentryDeployDoAfter);
+        SubscribeLocalEvent<SentryComponent, ActivateInWorldEvent>(OnSentryActivateInWorld);
+        SubscribeLocalEvent<SentryComponent, AttemptShootEvent>(OnSentryAttemptShoot);
+        SubscribeLocalEvent<SentryComponent, InteractUsingEvent>(OnSentryInteractUsing);
+        SubscribeLocalEvent<SentryComponent, SentryInsertMagazineDoAfterEvent>(OnSentryInsertMagazineDoAfter);
+        SubscribeLocalEvent<SentryComponent, SentryDisassembleDoAfterEvent>(OnSentryDisassembleDoAfter);
+        SubscribeLocalEvent<SentryComponent, ExaminedEvent>(OnSentryExamined);
+        SubscribeLocalEvent<SentryComponent, CombatModeShouldHandInteractEvent>(OnSentryShouldInteract);
+
+        Subs.BuiEvents<SentryComponent>(SentryUiKey.Key,
+            subs =>
+            {
+                subs.Event<SentryUpgradeBuiMsg>(OnSentryUpgradeBuiMsg);
+            });
+    }
+
+    private void OnSentryMapInit(Entity<SentryComponent> sentry, ref MapInitEvent args)
+    {
+        _toUpdate.Add(sentry);
+
+        if (sentry.Comp.StartingMagazine is { } magazine)
+        {
+            TrySpawnInContainer(magazine, sentry, sentry.Comp.ContainerSlotId, out _);
+        }
+    }
+
+    private void OnSentryPickupAttempt(Entity<SentryComponent> sentry, ref PickupAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (sentry.Comp.Mode != SentryMode.Item)
+            args.Cancel();
+    }
+
+    private void OnSentryUseInHand(Entity<SentryComponent> sentry, ref UseInHandEvent args)
+    {
+        args.Handled = true;
+
+        if (!CanDeployPopup(sentry, args.User, out _, out _))
+            return;
+
+        var ev = new SentryDeployDoAfterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, args.User, sentry.Comp.DeployDelay, ev, sentry)
+        {
+            BreakOnMove = true,
+        };
+
+        _doAfter.TryStartDoAfter(doAfter);
+    }
+
+    private void OnSentryDeployDoAfter(Entity<SentryComponent> sentry, ref SentryDeployDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        args.Handled = true;
+        if (!CanDeployPopup(sentry, args.User, out var coordinates, out var angle))
+            return;
+
+        sentry.Comp.Mode = SentryMode.Off;
+        Dirty(sentry);
+
+        var xform = Transform(sentry);
+        _transform.SetCoordinates(sentry, xform, coordinates, angle);
+        _transform.AnchorEntity(sentry, xform);
+
+        _rmcInteraction.SetMaxRotation(sentry.Owner, angle, sentry.Comp.MaxDeviation);
+        UpdateState(sentry);
+    }
+
+    private void OnSentryActivateInWorld(Entity<SentryComponent> sentry, ref ActivateInWorldEvent args)
+    {
+        ref var mode = ref sentry.Comp.Mode;
+        if (mode == SentryMode.Item)
+            return;
+
+        args.Handled = true;
+
+        var user = args.User;
+        switch (mode)
+        {
+            case SentryMode.Off:
+            {
+                mode = SentryMode.On;
+                var msg = Loc.GetString("rmc-sentry-on", ("sentry", sentry));
+                _popup.PopupClient(msg, sentry, user);
+                break;
+            }
+            default:
+            {
+                mode = SentryMode.Off;
+                var msg = Loc.GetString("rmc-sentry-off", ("sentry", sentry));
+                _popup.PopupClient(msg, sentry, user);
+                break;
+            }
+        }
+
+        Dirty(sentry);
+        UpdateState(sentry);
+    }
+
+    private void OnSentryAttemptShoot(Entity<SentryComponent> ent, ref AttemptShootEvent args)
+    {
+        if (args.User != ent.Owner)
+            args.Cancelled = true;
+    }
+
+    private void OnSentryInteractUsing(Entity<SentryComponent> sentry, ref InteractUsingEvent args)
+    {
+        var user = args.User;
+        var used = args.Used;
+        if (TryComp(used, out SentryUpgradeItemComponent? upgrade))
+        {
+            OpenUpgradeMenu(sentry, (used, upgrade), user);
+            return;
+        }
+
+        if (HasComp<MultitoolComponent>(used))
+        {
+            StartDisassemble(sentry, user);
+            return;
+        }
+
+        if (!HasComp<BallisticAmmoProviderComponent>(used))
+            return;
+
+        args.Handled = true;
+
+        if (!CanInsertMagazinePopup(sentry, user, used, out _))
+            return;
+
+        var delay = sentry.Comp.MagazineDelay;
+        var skill = _skills.GetSkill(user, sentry.Comp.Skill);
+        var multipliers = sentry.Comp.SkillMagazineDelayMultipliers;
+        if (!multipliers.TryGetValue(skill, out var multiplier))
+            multiplier = multipliers.Length == 0 ? 1 : multipliers[^1];
+
+        delay *= multiplier;
+        var ev = new SentryInsertMagazineDoAfterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, sentry, used: used)
+        {
+            BreakOnMove = true,
+        };
+
+        if (_doAfter.TryStartDoAfter(doAfter))
+        {
+            var selfMsg = Loc.GetString("rmc-sentry-magazine-swap-start-user", ("magazine", used), ("sentry", sentry));
+            var othersMsg = Loc.GetString("rmc-sentry-magazine-swap-start-others", ("user", user), ("magazine", used), ("sentry", sentry));
+            _popup.PopupPredicted(selfMsg, othersMsg, user, user);
+        }
+    }
+
+    private void OnSentryInsertMagazineDoAfter(Entity<SentryComponent> sentry, ref SentryInsertMagazineDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled || args.Used is not { } used)
+            return;
+
+        args.Handled = true;
+
+        var user = args.User;
+        if (!CanInsertMagazinePopup(sentry, user, used, out var slot))
+            return;
+
+        _container.EmptyContainer(slot, destination: _transform.GetMoverCoordinates(user));
+        if (!_container.Insert(used, slot))
+            return;
+
+        var selfMsg = Loc.GetString("rmc-sentry-magazine-swap-finish-user", ("magazine", used), ("sentry", sentry));
+        var othersMsg = Loc.GetString("rmc-sentry-magazine-swap-finish-others", ("user", user), ("magazine", used), ("sentry", sentry));
+        _popup.PopupPredicted(selfMsg, othersMsg, user, user);
+
+        _audio.PlayPredicted(sentry.Comp.MagazineSwapSound, sentry, user);
+    }
+
+    private void OnSentryDisassembleDoAfter(Entity<SentryComponent> sentry, ref SentryDisassembleDoAfterEvent args)
+    {
+        var user = args.User;
+        if (args.Cancelled || args.Handled)
+            return;
+
+        args.Handled = true;
+
+        sentry.Comp.Mode = SentryMode.Item;
+
+        RemCompDeferred<MaxRotationComponent>(sentry);
+        _transform.Unanchor(sentry.Owner, Transform(sentry));
+
+        UpdateState(sentry);
+
+        var selfMsg = Loc.GetString("rmc-sentry-disassemble-finish-self", ("sentry", sentry));
+        var othersMsg = Loc.GetString("rmc-sentry-disassemble-finish-others", ("user", user), ("sentry", sentry));
+        _popup.PopupPredicted(selfMsg, othersMsg, sentry, user);
+    }
+
+    private void OnSentryExamined(Entity<SentryComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(SentryComponent)))
+        {
+            if (ent.Comp.MaxDeviation < Angle.FromDegrees(180))
+            {
+                var msg = Loc.GetString("rmc-sentry-limited-rotation", ("degrees", (int)ent.Comp.MaxDeviation.Degrees));
+                args.PushMarkup(msg);
+
+                msg = Loc.GetString("rmc-sentry-disassembled-with-multitool");
+                args.PushMarkup(msg);
+            }
+        }
+    }
+
+    private void OnSentryShouldInteract(Entity<SentryComponent> ent, ref CombatModeShouldHandInteractEvent args)
+    {
+        args.Cancelled = true;
+    }
+
+    private void OnSentryUpgradeBuiMsg(Entity<SentryComponent> sentry, ref SentryUpgradeBuiMsg args)
+    {
+        _ui.CloseUi(sentry.Owner, SentryUiKey.Key);
+
+        var user = args.Actor;
+        var upgrade = args.Upgrade;
+        Entity<SentryUpgradeItemComponent> item = default;
+        if (upgrade == default ||
+            !CanUpgradePopup(sentry, ref item, user, upgrade))
+        {
+            return;
+        }
+
+        if (_net.IsClient)
+            return;
+
+        var coordinates = _transform.GetMapCoordinates(sentry);
+        var rotation = _transform.GetWorldRotation(sentry);
+
+        QueueDel(item);
+        QueueDel(sentry);
+        Spawn(upgrade, coordinates, rotation: rotation);
+    }
+
+    private void UpdateState(Entity<SentryComponent> sentry)
+    {
+        var fixture = sentry.Comp.DeployFixture is { } fixtureId ? _fixture.GetFixtureOrNull(sentry, fixtureId) : null;
+        switch (sentry.Comp.Mode)
+        {
+            case SentryMode.Item:
+                if (fixture != null)
+                    _physics.SetHard(sentry, fixture, false);
+
+                _rmcNpc.SleepNPC(sentry);
+                _appearance.SetData(sentry, SentryLayers.Layer, SentryMode.Item);
+                break;
+            case SentryMode.Off:
+                if (fixture != null)
+                    _physics.SetHard(sentry, fixture, true);
+
+                _rmcNpc.SleepNPC(sentry);
+                _appearance.SetData(sentry, SentryLayers.Layer, SentryMode.Off);
+                break;
+            case SentryMode.On:
+                if (fixture != null)
+                    _physics.SetHard(sentry, fixture, true);
+
+                _rmcNpc.WakeNPC(sentry);
+                _appearance.SetData(sentry, SentryLayers.Layer, SentryMode.On);
+                break;
+        }
+    }
+
+    private bool CanDeployPopup(
+        Entity<SentryComponent> sentry,
+        EntityUid user,
+        out EntityCoordinates coordinates,
+        out Angle rotation)
+    {
+        coordinates = default;
+        rotation = default;
+        if (!HasSkillPopup(sentry, user))
+            return false;
+
+        var moverCoordinates = _transform.GetMoverCoordinateRotation(user, Transform(user));
+        coordinates = moverCoordinates.Coords;
+        rotation = moverCoordinates.worldRot.GetCardinalDir().ToAngle();
+
+        var direction = rotation.GetCardinalDir();
+        coordinates = coordinates.Offset(direction.ToVec());
+        if (!_rmcMap.CanBuildOn(coordinates))
+        {
+            var msg = Loc.GetString("rmc-sentry-need-open-area", ("sentry", sentry));
+            _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool CanInsertMagazinePopup(
+        Entity<SentryComponent> sentry,
+        EntityUid user,
+        EntityUid used,
+        [NotNullWhen(true)] out ContainerSlot? slot)
+    {
+        slot = null;
+        if (!HasSkillPopup(sentry, user))
+            return false;
+
+        slot = _container.EnsureContainer<ContainerSlot>(sentry, sentry.Comp.ContainerSlotId);
+        if (!_container.CanInsert(used, slot, true))
+        {
+            var msg = Loc.GetString("rmc-sentry-magazine-invalid", ("item", used));
+            _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        if (TryComp(slot.ContainedEntity, out BallisticAmmoProviderComponent? ammo) &&
+            ammo.Count > 0 &&
+            !HasComp<BypassInteractionChecksComponent>(user))
+        {
+            var msg = Loc.GetString("rmc-sentry-magazine-swap-not-empty");
+            _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool HasSkillPopup(Entity<SentryComponent> sentry, EntityUid user)
+    {
+        if (_skills.HasSkill(user, sentry.Comp.Skill, sentry.Comp.SkillLevel))
+            return true;
+
+        var msg = Loc.GetString("rmc-skills-no-training", ("target", sentry));
+        _popup.PopupClient(msg, sentry, user, PopupType.SmallCaution);
+        return false;
+    }
+
+    private void OpenUpgradeMenu(
+        Entity<SentryComponent> sentry,
+        Entity<SentryUpgradeItemComponent> upgrade,
+        EntityUid user)
+    {
+        if (!CanUpgradePopup(sentry, ref upgrade, user, null))
+            return;
+
+        _ui.OpenUi(sentry.Owner, SentryUiKey.Key, user);
+    }
+
+    private bool CanUpgradePopup(
+        Entity<SentryComponent> sentry,
+        ref Entity<SentryUpgradeItemComponent> upgradeItem,
+        EntityUid user,
+        EntProtoId? upgrade)
+    {
+        if (sentry.Comp.Upgrades is not { Length: > 0 } upgrades)
+        {
+            var msg = Loc.GetString("rmc-sentry-upgrade-not-upgradeable", ("sentry", sentry));
+            _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        if (sentry.Comp.Mode != SentryMode.Item)
+        {
+            var msg = Loc.GetString("rmc-sentry-upgrade-not-item", ("sentry", sentry));
+            _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        if (upgradeItem == default)
+        {
+            if (!_hands.TryGetActiveItem(user, out var active) ||
+                !TryComp(active, out SentryUpgradeItemComponent? upgradeComp))
+            {
+                var msg = Loc.GetString("rmc-sentry-upgrade-not-holding", ("sentry", sentry));
+                _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
+                return false;
+            }
+
+            upgradeItem = (active.Value, upgradeComp);
+        }
+
+        if (upgrade != null && !upgrades.Contains(upgrade.Value))
+        {
+            Log.Warning(
+                $"{ToPrettyString(user)} tried to upgrade sentry {ToPrettyString(sentry)} to invalid upgrade {upgrade.Value}");
+            return false;
+        }
+
+        return true;
+    }
+
+    private void StartDisassemble(Entity<SentryComponent> sentry, EntityUid user)
+    {
+        if (sentry.Comp.Mode == SentryMode.Item)
+            return;
+
+        var ev = new SentryDisassembleDoAfterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, user, sentry.Comp.UndeployDelay, ev, sentry)
+        {
+            BreakOnMove = true,
+        };
+
+        if (_doAfter.TryStartDoAfter(doAfter))
+        {
+            var selfMsg = Loc.GetString("rmc-sentry-disassemble-start-self", ("sentry", sentry));
+            var othersMsg = Loc.GetString("rmc-sentry-disassemble-start-others", ("user", user), ("sentry", sentry));
+            _popup.PopupPredicted(selfMsg, othersMsg, sentry, user);
+        }
+    }
+
+    public override void Update(float frameTime)
+    {
+        if (_net.IsClient)
+        {
+            _toUpdate.Clear();
+            return;
+        }
+
+        try
+        {
+            foreach (var id in _toUpdate)
+            {
+                if (TryComp(id, out SentryComponent? sentry))
+                    UpdateState((id, sentry));
+            }
+        }
+        finally
+        {
+            _toUpdate.Clear();
+        }
+    }
+}

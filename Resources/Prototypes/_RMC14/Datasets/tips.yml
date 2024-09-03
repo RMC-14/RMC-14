@@ -66,6 +66,10 @@
   - "The M2C heavy machine gunner belt rig can also carry C4, breaching charges, and most tools."
   - "You can always multitask as Medic, such as by using pills or healing kits at the same time as defibrillator."
   - "The nuclear ordnance requires BOTH communication towers to be actively held to decrypt the nuclear codes."
+  - "Be careful when firing an Orbital Bombardment, Close Air Support, or the Mortar. Make sure you're not about to blow up the entire marine push."
+  - "Never inject a marine you haven't scanned! You might overdose them; ESPECIALLY so with an emergency autoinjector."
+  - "Any marine can perform CPR. On dead marines, this will increase the time they have until they become unrevivable."
+  - "Boilers emit light - not every glow from around the corner is friendly!"
 # Xeno Tips
   - "Acid pillars can be sneakily placed next to a door in order to surprise marines."
   - "Alien structures like clusters, walls, or pillars are vital to your victory, be it as cover or to delay and funnel marines."
@@ -162,7 +166,6 @@
   #- It is almost always faster to do surgery manually than in the autodoc.
   #- To check your skills, go to the IC tab and click "view skills".
   #- Functioning night vision goggles can be recharged with batteries. Broken night vision goggles can be repaired by an Engineer with a screwdriver. Not the loadout ones though, those cannot be fixed.
-  #- Any marine can perform CPR. On dead marines, this will increase the time they have until they become unrevivable.
   #- If you've been pounced on and your squad is unloading into the target, you can hit the 'rest' button to stay down so you don't get filled with lead after getting up.
   #- You can check the landing zone as a marine in the status panel.
   #- Be careful! Barricades block grenades, and indeed all thrown items, from the front if they're barbed up.
@@ -180,9 +183,7 @@
   #- You can link plasteel barricades together using a crowbar. First click one, and then click one adjacent. Repeat as needed.
   #- Reflective walls will bounce back non-IFF bullets, including rockets. Try not to shoot them.
   #- Vary your loadout! Doing the same thing every round gets old fast. Try out the pistols, or carry flares.
-  #- Be careful when firing an Orbital Bombardment, Close Air Support, or the Mortar. Make sure you're not about to blow up the entire marine push.
   #- The Orbital Bombardment is always closer than it looks.
-  #- Never inject a marine you haven't scanned! You might overdose them; ESPECIALLY so with an emergency autoinjector.
   #- If another marine is stunned, you can click on them with help intent with an open hand to shake them up faster.
   #- Never place barricades facing each other - Not only does this block bullets, both barricades are damaged at once if one is slashed!
   #- Examine your gun and click \\[See combat statistics\\] to view information such as damage for your weapon.
@@ -205,7 +206,6 @@
   #- A misloaded OB can deviate severely from the intended target area - ensure you load them correctly!
   #- The XO and CO are trained in Power Loader use and engineering, and can load the OB.
   #- You can change what your SL tracker beacon is tracking by right clicking on your headset and clicking "Switch Tracker Target".
-  #- Boilers emit light - not every glow from around the corner is friendly!
   #- The amount of items in Requisitions and Squad Preparations depend on how many players readied up at the start of the round.
   #- You can carry a variety of items inside your helmet - from gauze and cigarettes to flares and screwdrivers.
   #- Flamethrowers! Green fire is weak but has a lot of utility, such as melting through armor and being instantly extinguishable. Queens and Ravagers are flameproof. Most flamethrower damage comes from the initial burst, not the flame on the ground. Don't forget you have an underbarrel extinguisher.

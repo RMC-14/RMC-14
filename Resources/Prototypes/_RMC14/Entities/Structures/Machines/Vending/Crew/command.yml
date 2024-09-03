@@ -66,9 +66,11 @@
       entries:
       - id: RMCBinoculars
         points: 5
-      #- id: RMCRangeFinder # TODO RMC14 Rangefinder
-      #- id: RMCLaserDesignator # TODO RMC14 LaserDesignator
-      #  recommended: true
+      - id: RMCRangefinder
+        points: 8
+      - id: RMCLaserDesignator
+        points: 12
+        recommended: true
       - id: RMCFlashlight
         points: 1
         recommended: true
@@ -106,7 +108,7 @@
       - id: CMMRE
       #- id: CMAviatorShades # TODO RMC14 Port Aviator Shades
       - id: RMCM5Bayonet
-    - name: Specilisation Kit
+    - name: Specialisation Kit
       choices: { CMBundle: 1 }
       entries:
       - id: CMVendorBundleCombatTechnicianEssentials
@@ -116,8 +118,8 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      #- id: CMBeltGeneralUtility # TODO RMC14 Utility Storage Belt
-      #  recommended: true
+      - id: RMCBeltUtilityGeneral
+        recommended: true
       - id: CMBeltMarine
         recommended: true
       - id: CMBeltUtilityFilled
@@ -161,7 +163,7 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      #- id: CMWebbingDrop # TODO RMC14 Drop Pouch Webbing
+      - id: CMWebbingPouch
       - id: CMWebbing
       #- id: CMWebbingHolster # TODO RMC14 Shoulder Holster Webbing
     - name: Mask
@@ -179,10 +181,11 @@
       #  points: 15
       - id: RMCBinoculars
         points: 5
-      #- id: RMCRangefinder # TODO RMC14 Rangefinder
-      #  points: 8
-      #- id: RMCLaserDesignator # TODO RMC14 Laser Designator
-      #  points: 12
+      - id: RMCRangefinder
+        points: 8
+      - id: RMCLaserDesignator
+        points: 12
+        recommended: true
       #- id: RMCDataDetector # TODO RMC14 Data Detector
       #  points: 5
       #- id: RMCFultonRecoveryDevice # TODO RMC14 Fulton Recovery
@@ -239,8 +242,8 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      #- id: CMBeltGeneralUtility # TODO RMC14 Utility Storage Belt
-      #  recommended: true
+      - id: RMCBeltUtilityGeneral
+        recommended: true
       - id: CMBeltSecurityMPFilled
         recommended: true
       - id: CMBeltMedicBag
@@ -301,7 +304,7 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      #- id: CMWebbingDrop # TODO RMC14 Drop Pouch Webbing
+      - id: CMWebbingPouch
       - id: CMWebbing
       #- id: CMWebbingHolster # TODO RMC14 Shoulder Holster Webbing
     - name: Hats
@@ -499,7 +502,7 @@
         recommended: true
       - id: CMWebbingBlack
     #- id: CMTacticalWaistcoat # TODO Port Waistcoat
-    #- id: CMWebbingDrop # TODO RMC14 Drop Pouch Webbing
+      - id: CMWebbingPouch
       - id: CMWebbing
     #- id: CMWebbingHolster # TODO RMC14 Shoulder Holster Webbing
     - name: Huds
@@ -511,8 +514,8 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      #- id: General Utility Pouch # TODO RMC14 G8-A General Utility Pouch
-      #  recommended: true
+      - id: RMCBeltUtilityGeneral
+        recommended: true
       - id: CMBeltSecurityMPFilled
         recommended: true
       - id: CMBeltMedicBag

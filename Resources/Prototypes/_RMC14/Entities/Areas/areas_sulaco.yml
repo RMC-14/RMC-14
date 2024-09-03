@@ -4,6 +4,10 @@
   - RMCAreaBase
   id: RMCAreaShuttle
   suffix: Sulaco Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: blank
 
 - type: entity
   parent:
@@ -16,6 +20,7 @@
     avoidBioscan: False
     noTunnel: True
     unweedable: False
+    landingZone: true
 
 - type: entity
   parent: RMCAreaShuttleDrop1
@@ -92,6 +97,7 @@
     avoidBioscan: False
     noTunnel: True
     unweedable: False
+    landingZone: true
 
 - type: entity
   parent: RMCAreaShuttleDrop2

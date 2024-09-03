@@ -102,23 +102,25 @@
     whitelist:
       tags:
       - DiscreteHealthAnalyzer
-      #      - TODO RMC14 CMDropper
+      - Dropper
       - Pill
       - Bottle
       - Syringe
       - PillCanister
       - CMTraumaKit
       - CMBurnKit
-      - Ointment
+      - CMOintment
       - Brutepack
       - CMBloodPack
       #      - TODO RMC14 splint
-      #      - TODO RMC14 penlight
+      - RMCPenlight
       - CMAutoInjector
       - CMFireExtinguisherPortable
       #      - TODO RMC14 syringe cases
       - CMSurgicalLine
       - CMSynthGraft
+      - PillPacket
+      - Hypospray
       components:
       - Hypospray
   - type: FixedItemSizeStorage
@@ -164,7 +166,7 @@
       tags:
       - CMTraumaKit
       - CMBurnKit
-      - Ointment
+      - CMOintment
       - Brutepack
       - CMBloodPack
       #      - TODO RMC14 splint
@@ -173,6 +175,7 @@
       - CMFireExtinguisherPortable
       - CMSurgicalLine
       - CMSynthGraft
+      - Hypospray
       components:
       - Hypospray
 
@@ -247,7 +250,7 @@
       - PillCanister
       - CMTraumaKit
       - CMBurnKit
-      - Ointment
+      - CMOintment
       - Brutepack
       - CMBloodPack
       #      - TODO RMC14 splint
@@ -255,6 +258,8 @@
       - CMFireExtinguisherPortable
       - CMRollerBed
       - BodyBag
+      - PillPacket
+      - Hypospray
       components:
       - Hypospray
   - type: FixedItemSizeStorage
@@ -280,12 +285,12 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/vial.rsi
   - type: Storage
-    maxItemSize: Tiny
+    maxItemSize: Small
     grid:
     - 0,0,11,1 #6 slots
     whitelist:
       components:
-      - FitsInDispenser
+      - Vial
   - type: FixedItemSizeStorage
 
 - type: entity
@@ -295,8 +300,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: BaseChemistryEmptyVial
-      amount: 3
+    - id: RMCVial
+      amount: 6
 
 
 # Chemist Pouch
@@ -387,8 +392,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: Syringe
-      amount: 3
+    - id: CMSyringe
+      amount: 6
 
 
 # MedKit Pouch
@@ -406,14 +411,14 @@
     whitelist:
       tags:
       - DiscreteHealthAnalyzer
-      #      - TODO RMC14 dropper
+      - Dropper
       - Pill
       - Bottle
       - Syringe
       - PillCanister
       - CMTraumaKit
       - CMBurnKit
-      - Ointment
+      - CMOintment
       - Brutepack
       - CMBloodPack
       #      - TODO RMC14 splint
@@ -427,6 +432,7 @@
       - CMRollerBed
       - BodyBag
 #      - TODO RMC14 fixovein
+      - Hypospray 
       components:
       - Hypospray
   - type: FixedItemSizeStorage
