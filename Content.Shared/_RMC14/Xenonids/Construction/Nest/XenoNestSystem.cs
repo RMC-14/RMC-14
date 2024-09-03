@@ -96,7 +96,7 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestedComponent, IsUnequippingAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, GetInfectedIncubationMultiplierEvent>(OnInNestGetInfectedIncubationMultiplier);
 
-        Subs.BuiEvents<XenoComponent>(XenoRemoveNestedUI.Key, subs =>
+        Subs.BuiEvents<XenoNestedComponent>(XenoRemoveNestedUI.Key, subs =>
         {
             subs.Event<XenoRemoveNestedBuiMsg>(OnRemoveNestedBuiMsg);
         });
@@ -129,7 +129,7 @@ public sealed class XenoNestSystem : EntitySystem
         if (!HasComp<XenoComponent>(args.User))
             return;
         var castUser = (Entity<XenoComponent>) args.User!;
-        TryStartUnNesting(castUser, target.Owner);
+        TryStartRemoveNested(castUser, target.Owner);
     }
 
     private void OnNestRemove(Entity<XenoNestComponent> ent, ref ComponentRemove args)
@@ -246,11 +246,10 @@ public sealed class XenoNestSystem : EntitySystem
         }
     }
 
-    private void OnRemoveNestedBuiMsg(Entity<XenoComponent> user, ref XenoRemoveNestedBuiMsg args)
+    private void OnRemoveNestedBuiMsg(Entity<XenoNestedComponent> target, ref XenoRemoveNestedBuiMsg args)
     {
-
-        _ui.CloseUi(user.Owner, XenoRemoveNestedUI.Key, user);
-        var target = new EntityUid(args.Entity.Id);
+        var user = new EntityUid(args.Actor.Id);
+        _ui.CloseUi(target.Owner, XenoRemoveNestedUI.Key, user);
         if (_net.IsClient)
             return;
         DetachNested(null, target);
@@ -348,7 +347,7 @@ public sealed class XenoNestSystem : EntitySystem
         }
     }
 
-    private void TryStartUnNesting(Entity<XenoComponent> user, EntityUid target)
+    private void TryStartRemoveNested(Entity<XenoComponent> user, EntityUid target)
     {
         if (!CanBeUnNested(user, target))
             return;
