@@ -48,6 +48,13 @@
         minKey: MinimumIdleTime
         maxKey: MaximumIdleTime
 
+    - !type:HTNPrimitiveTask
+      preconditions:
+      - !type:KeyExistsPrecondition
+        key: IdleTime
+      operator: !type:WaitOperator
+        key: IdleTime
+
       services:
       - !type:UtilityService
         id: LeapService

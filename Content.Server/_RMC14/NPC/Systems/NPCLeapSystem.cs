@@ -1,13 +1,12 @@
-﻿using Content.Server._RMC14.NPC.Components;
-using Content.Server.DoAfter;
+﻿using Content.Server.DoAfter;
 using Content.Server.Interaction;
-using Content.Shared._RMC14.Xenonids;
+using Content.Server._RMC14.NPC.Components;
 using Content.Shared.Actions;
-using Content.Shared.DoAfter;
-using Robust.Shared.Timing;
 using Content.Shared.Coordinates;
+using Content.Shared.DoAfter;
+using Content.Shared._RMC14.Xenonids;
 using Robust.Server.GameObjects;
-using Robust.Shared.Map.Components;
+using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.NPC.Systems;
 
@@ -18,7 +17,6 @@ public sealed partial class NPCLeapSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly DoAfterSystem _doafter = default!;
-    [Dependency] private readonly MapSystem _map = default!;
 
     private EntityQuery<TransformComponent> _xformQuery;
 
@@ -42,7 +40,7 @@ public sealed partial class NPCLeapSystem : EntitySystem
         var query = EntityQueryEnumerator<NPCLeapComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var comp, out var xform))
         {
-            if (comp.Status == LeapStatus.Unspecified)
+            if (comp.Status == LeapStatus.Unspecified || comp.Status == LeapStatus.Finished)
                 continue;
 
             if (!_xformQuery.TryGetComponent(comp.Target, out var targetXform))
