@@ -96,7 +96,7 @@ public sealed partial class NPCLeapSystem : EntitySystem
                 var destDir = (destinationPos - worldPos).Normalized();
                 var angle = Angle.ShortestDistance(new Angle(targetDir), new Angle(destDir));
 
-                if (Math.Abs(angle) > Angle.FromDegrees(comp.MaxAngleDegrees))
+                if (angle > Angle.FromDegrees(comp.MaxAngleDegrees))
                 {
                     _doafter.Cancel(after.DoAfters[comp.CurrentDoAfter.Value].Id);
                     comp.CurrentDoAfter = null;
@@ -126,6 +126,9 @@ public sealed partial class NPCLeapSystem : EntitySystem
                 var destination = targetPos + (targetPos - worldPos).Normalized() * comp.LeapDistance;
 
                 comp.Destination = destination;
+
+                //Just in case
+                xform.LocalRotation = 0;
 
                 if (action.Event != null)
                 {
