@@ -86,6 +86,8 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi
 
+# Dutch's Dozen
+
 - type: entity
   parent: JumpsuitMarine
   id: RMCJumpsuitDutch # This is technically originally split into two items, but only the sprites are different between them
@@ -110,3 +112,37 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Dutch/bandolier.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Dutch/bandolier.rsi
+
+# Mercenaries
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitMercenaryHeavy
+  name: mercenary fatigues
+  description: A thick, beige suit with a red armband. There is an unknown symbol is emblazed on the suit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/heavy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/heavy.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitMercenaryMiner
+  name: mercenary miner fatigues
+  description: A beige suit with a red armband. It looks a little thin, like it wasn't designed for protection. There is an unknown symbol is emblazed on the suit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/miner.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/miner.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitMercenaryEngineer
+  name: mercenary engineer fatigues
+  description: A blue suit with yellow accents, used by engineers. There is an unknown symbol is emblazed on the suit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/engi.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/engi.rsi
