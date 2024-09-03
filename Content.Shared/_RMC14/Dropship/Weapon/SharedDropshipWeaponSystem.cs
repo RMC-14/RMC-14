@@ -19,6 +19,7 @@ using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.Throwing;
+using Content.Shared.Timing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
@@ -102,11 +103,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             });
 
         Subs.CVar(_config, RMCCVars.RMCDropshipCASDebug, v => CasDebug = v, true);
-    }
-
-    public int GetNextTargetID()
-    {
-        return _nextId++;
     }
 
     private void SetTarget(Entity<DropshipTerminalWeaponsComponent> dropshipWeaponsTerminal, EntityUid? newTarget)

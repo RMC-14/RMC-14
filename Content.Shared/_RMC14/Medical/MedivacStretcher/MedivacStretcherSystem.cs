@@ -47,7 +47,7 @@ public sealed partial class MedivacStretcherSystem : EntitySystem
 
     private void OnInit(Entity<MedivacStretcherComponent> ent, ref ComponentInit args)
     {
-        ent.Comp.Id = _dropshipWeaponSystem.GetNextTargetID();
+        ent.Comp.Id = _dropshipWeaponSystem.ComputeNextId();
     }
 
     private void OnExamine(Entity<MedivacStretcherComponent> ent, ref ExaminedEvent args)
