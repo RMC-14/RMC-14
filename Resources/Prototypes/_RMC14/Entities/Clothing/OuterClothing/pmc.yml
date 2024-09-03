@@ -98,7 +98,7 @@
   parent: CMArmorSmartGunCombatHarness
   id: CMArmorSmartGunCombatHarnessPMC
   name: PMC gun operator armor
-  descriprion: A modification of the standard Armat Systems M3 armor. Hooked up with harnesses and straps allowing the user to carry a ML66A Smart Gun.
+  description: A modification of the standard Armat Systems M3 armor. Hooked up with harnesses and straps allowing the user to carry a ML66A Smart Gun.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/heavy.rsi
@@ -110,12 +110,12 @@
   parent: CMArmorSmartGunCombatHarnessPMC
   id: CMArmorSmartGunCombatHarnessPMCCommando
   name: M5Xg exoskeleton gun operator armor
-  descriprion: A complex system of overlapping plates intended to render the wearer all but impervious to small arms fire. A passive exoskeleton supports the weight of the armor, allowing a human to carry its massive bulk. This variant is designed to support ML66A Smart Gun.
+  description: A complex system of overlapping plates intended to render the wearer all but impervious to small arms fire. A passive exoskeleton supports the weight of the armor, allowing a human to carry its massive bulk. This variant is designed to support ML66A Smart Gun.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/commando.rsi
   - type: CMArmor
-    armor: 50 # CLOTHING_ARMOR_HIGH (melee); CLOTHING_ARMOR_ULTRAHIGH (bullets); going with the bullet value until more damage types get implemented (more likely to be hit by bullets than melee)
+    armor: 40 # CLOTHING_ARMOR_HIGH (melee); CLOTHING_ARMOR_ULTRAHIGH (bullets); going with an intermediate value until more damage types get implemented (more likely to be hit by bullets than melee)
     explosionArmor: 40 # CLOTHING_ARMOR_VERYHIGH
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_MEDIUM
     walkModifier: 0.727
@@ -132,7 +132,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/commando.rsi
   - type: CMArmor
-    armor: 50 # CLOTHING_ARMOR_VERYHIGH (melee); CLOTHING_ARMOR_ULTRAHIGH (bullets); going with the bullet value until more damage types get implemented (more likely to be hit by bullets than melee)
+    armor: 45 # CLOTHING_ARMOR_VERYHIGH (melee); CLOTHING_ARMOR_ULTRAHIGH (bullets); going with an intermediate value until more damage types get implemented (more likely to be hit by bullets than melee)
     explosionArmor: 40 # CLOTHING_ARMOR_VERYHIGH
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_MEDIUM
     walkModifier: 0.727

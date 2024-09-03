@@ -80,7 +80,7 @@
     walkModifier: 0.68
     sprintModifier: 0.68
   - type: CMArmor
-    armor: 35 # CLOTHING_ARMOR_HIGHPLUS (bullets), CLOTHING_ARMOR_MEDIUMHIGH (melee)
+    armor: 30 # CLOTHING_ARMOR_HIGHPLUS (bullets), CLOTHING_ARMOR_MEDIUMHIGH (melee); choosing an intermediate value until more damage types are implemented
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 30 # CLOTHING_ARMOR_HIGH
   - type: Storage
@@ -141,7 +141,7 @@
 # Iron Bear
 - type: entity
   parent: CMArmorM3Medium
-  id: CMArmorM4PMC
+  id: CMArmorSPPBear
   name: H1 Iron Bears vest
   description: A protective vest worn by Iron Bears mercenaries.
   components:
