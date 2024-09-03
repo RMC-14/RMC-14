@@ -357,7 +357,9 @@ public sealed class XenoNestSystem : EntitySystem
             _ui.TryOpenUi(target, XenoRemoveNestedUI.Key, user);
             return;
         }
-        DetachNested(null, target);
+        if (_net.IsClient)
+            return;
+        DetachNested(null, target); // If target is dead or crit we can just remove them without risk, so it happens immediately.
     }
 
     private bool CanBeNested(EntityUid user,

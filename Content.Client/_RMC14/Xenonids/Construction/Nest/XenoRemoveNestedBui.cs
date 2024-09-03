@@ -6,8 +6,6 @@ namespace Content.Client._RMC14.Xenonids.Construction.Nest;
 [UsedImplicitly]
 public sealed class XenoRemoveNestedBui : BoundUserInterface
 {
-
-    private int _nestableTarget;
     [ViewVariables]
     private XenoRemoveNestedWindow? _window;
 
@@ -31,7 +29,6 @@ public sealed class XenoRemoveNestedBui : BoundUserInterface
             return;
         var msg = new XenoRemoveNestedBuiMsg();
         SendPredictedMessage(msg);
-        //_window.Close();
     }
 
     protected override void Dispose(bool disposing)
