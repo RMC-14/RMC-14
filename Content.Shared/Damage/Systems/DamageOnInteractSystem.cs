@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Light;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage.Components;
 using Content.Shared.Database;
@@ -66,6 +67,12 @@ public sealed class DamageOnInteractSystem : EntitySystem
         if (totalDamage != null && totalDamage.AnyPositive())
         {
             args.Handled = true;
+
+            var ev = new LightBurnHandAttemptEvent(args.User, entity);
+            RaiseLocalEvent(ref ev);
+            if (ev.Cancelled)
+                return;
+
             _adminLogger.Add(LogType.Damaged, $"{ToPrettyString(args.User):user} injured their hand by interacting with {ToPrettyString(args.Target):target} and received {totalDamage.GetTotal():damage} damage");
             _audioSystem.PlayPredicted(entity.Comp.InteractSound, args.Target, args.User);
 

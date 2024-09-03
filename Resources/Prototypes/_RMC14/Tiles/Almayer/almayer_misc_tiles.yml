@@ -3,6 +3,8 @@
   id: RMCFloorEmpty
   name: tiles-rmc-empty
   sprite: /Textures/_RMC14/Tiles/floors/black.png
+  blockAnchoring: true
+  blockConstruction: true
   weedsSpreadable: false
 
 - type: tile

@@ -54,6 +54,7 @@ namespace Content.Server.Database
         public DbSet<RMCPatronRoundEndMarineShoutout> RMCPatronRoundEndMarineShoutouts { get; set; } = default!;
         public DbSet<RMCPatronRoundEndXenoShoutout> RMCPatronRoundEndXenoShoutouts { get; set; } = default!;
         public DbSet<RMCRoleTimerExclude> RMCRoleTimerExcludes { get; set; } = default!;
+        public DbSet<RMCSquadPreference> RMCSquadPreferences { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -451,7 +452,8 @@ namespace Content.Server.Database
 
         public int PreferenceId { get; set; }
         public Preference Preference { get; set; } = null!;
-        public RMCNamedItems? NamedItems { get; set; } = default!;
+        public RMCNamedItems? NamedItems { get; set; }
+        public RMCSquadPreference? SquadPreference { get; set; }
     }
 
     public class Job

@@ -38,7 +38,7 @@
     - name: Belts
       choices: { CMBelt: 1 }
       entries:
-      #- id: CMBeltGeneralUtility # TODO RMC14 Utility Storage Belt
+      - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
       - id: CMBeltMedicBagFilled
         recommended: true
@@ -76,7 +76,7 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      #- id: CMWebbingDrop # TODO RMC14 Drop Pouch Webbing
+      - id: CMWebbingPouch
       - id: CMWebbing
       #- id: CMWebbingHolster # TODO RMC14 Shoulder Holster Webbing
     - name: Glasses
@@ -100,7 +100,7 @@
         points: 10
       - id: RMCAttachmentGyroscopicStabilizer
         points: 10
-      - id: RMCAttachmentLaserLightModule
+      - id: RMCAttachmentLaserSight
         points: 10
       - id: RMCAttachmentU7UnderbarrelShotgun # This is called "Masterkey" in flight vend; not sure if accurate.
         points: 10

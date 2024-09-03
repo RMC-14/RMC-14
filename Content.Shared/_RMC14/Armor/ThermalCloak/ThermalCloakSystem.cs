@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.Actions;
 using Content.Shared.Explosion.Components.OnTrigger;
+using Content.Shared.Humanoid;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
@@ -24,6 +25,7 @@ namespace Content.Shared._RMC14.Armor.ThermalCloak;
 public sealed class ThermalCloakSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoidSystem = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -124,6 +126,8 @@ public sealed class ThermalCloakSystem : EntitySystem
 
             turnInvisible.UncloakTime = _timing.CurTime; // Just in case
 
+            ToggleLayers(user, ent.Comp.CloakedHideLayers, false);
+
             var popupOthers = Loc.GetString("rmc-cloak-activate-others", ("user", user));
             _popup.PopupPredicted(Loc.GetString("rmc-cloak-activate-self"), popupOthers, user, user, PopupType.Medium);
             _audio.PlayPvs(ent.Comp.CloakSound, user);
@@ -164,6 +168,8 @@ public sealed class ThermalCloakSystem : EntitySystem
                 var popupOthers = Loc.GetString("rmc-cloak-deactivate-others", ("user", user));
                 _popup.PopupPredicted(Loc.GetString("rmc-cloak-deactivate-self"), popupOthers, user, user, PopupType.Medium);
             }
+
+            ToggleLayers(user, ent.Comp.CloakedHideLayers, true);
 
             if (ent.Comp.HideNightVision)
                EnsureComp<RMCNightVisionVisibleComponent>(user);
@@ -231,5 +237,13 @@ public sealed class ThermalCloakSystem : EntitySystem
         }
 
         return null;
+    }
+
+    private void ToggleLayers(EntityUid equipee, HashSet<HumanoidVisualLayers> layers, bool showLayers)
+    {
+        foreach (HumanoidVisualLayers layer in layers)
+        {
+            _humanoidSystem.SetLayerVisibility(equipee, layer, showLayers);
+        }
     }
 }

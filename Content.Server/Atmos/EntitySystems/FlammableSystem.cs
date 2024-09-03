@@ -6,6 +6,7 @@ using Content.Server.Stunnable;
 using Content.Server.Temperature.Components;
 using Content.Server.Temperature.Systems;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Xenonids.Projectile.Spit;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Alert;
 using Content.Shared.Atmos;
@@ -50,6 +51,7 @@ namespace Content.Server.Atmos.EntitySystems
         [Dependency] private readonly AudioSystem _audio = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
+        [Dependency] private readonly XenoSpitSystem _xenoSpit = default!;
 
         private EntityQuery<InventoryComponent> _inventoryQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -259,6 +261,7 @@ namespace Content.Server.Atmos.EntitySystems
                 return;
 
             Resist(ent, ent);
+            _xenoSpit.Resist(ent.Owner);
             args.Handled = true;
         }
 

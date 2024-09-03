@@ -20,6 +20,7 @@
     avoidBioscan: False
     noTunnel: True
     unweedable: False
+    landingZone: true
 
 - type: entity
   parent: RMCAreaShuttleDrop1
@@ -96,6 +97,7 @@
     avoidBioscan: False
     noTunnel: True
     unweedable: False
+    landingZone: true
 
 - type: entity
   parent: RMCAreaShuttleDrop2

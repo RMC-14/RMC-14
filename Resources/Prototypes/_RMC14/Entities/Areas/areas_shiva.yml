@@ -200,6 +200,7 @@
   - type: Area
     resinAllowed: false
     minimapColor: '#EBE5E5E3'
+    landingZone: true
 
 - type: entity
   parent: RMCAreaShivaExterior
@@ -211,6 +212,7 @@
   - type: Area
     resinAllowed: false
     minimapColor: '#EBE5E5E3'
+    landingZone: true
 
 - type: entity
   parent: RMCAreaShivaExterior
@@ -494,6 +496,8 @@
   components:
   - type: Sprite
     state: bar1
+  - type: Area
+    landingZone: true
 
 - type: entity
   parent: RMCAreaShivaInterior

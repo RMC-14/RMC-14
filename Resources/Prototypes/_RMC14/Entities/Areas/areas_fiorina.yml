@@ -123,6 +123,7 @@
   - type: Area
     minimapColor: '#EBE5E5E3'
     resinAllowed: false
+    landingZone: true
 
 - type: entity
   parent: RMCAreaFiorinaLz
@@ -329,6 +330,9 @@
   parent: RMCAreaFiorinaStationTelecomm
   id: RMCAreaFiorinaStationTelecommLz1Tram
   name: Fiorina - LZ1 Aux Port Communications Relay
+  components:
+  - type: Area
+    landingZone: true
 
 - type: entity
   parent: RMCAreaFiorinaStationTelecomm
