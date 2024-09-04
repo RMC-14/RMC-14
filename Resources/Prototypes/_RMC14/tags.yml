@@ -69,3 +69,6 @@
 
 - type: Tag
   id: RMCRocketAmmo84mm
+
+- type: Tag
+  id: RMCGlass
