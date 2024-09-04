@@ -233,6 +233,5 @@
   - type: Sentry
     deployDelay: 0.75
     undeployDelay: 0.75
-    assumedMaxHealth: 150
     upgrades: null
     deployFixture: null
