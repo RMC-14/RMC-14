@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Whisper
   changes:
-  - message: Xenos now have death text on examine.
-    type: Add
-  id: 147
-  time: '2024-06-15T06:40:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2474
-- author: Whisper
-  changes:
   - message: Greatly reduced the speed thirst occurs
     type: Tweak
   id: 148
@@ -4458,5 +4451,12 @@
   id: 646
   time: '2024-09-04T20:41:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3937
+- author: Vermidia
+  changes:
+  - message: Fix Lifesaver Bag not starting with an epinephrine autoinjector
+    type: Fix
+  id: 647
+  time: '2024-09-04T21:07:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3905
 Name: RMC14
 Order: -1
