@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.NPC;
 using Content.Shared._RMC14.Tools;
+using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
@@ -13,6 +14,7 @@ using Content.Shared.Interaction.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Popups;
+using Content.Shared.Tools.Systems;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
@@ -42,6 +44,8 @@ public sealed class SentrySystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly SharedToolSystem _tools = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
 
@@ -134,6 +138,15 @@ public sealed class SentrySystem : EntitySystem
         {
             case SentryMode.Off:
             {
+                foreach (var defense in _entityLookup.GetEntitiesInRange<SentryComponent>(_transform.GetMapCoordinates(sentry), sentry.Comp.DefenseCheckRange)) // TODO RMC14 more general defense check
+                {
+                    if (sentry != defense && defense.Comp.Mode == SentryMode.On)
+                    {
+                        var ret = Loc.GetString("rmc-sentry-too-close", ("defense", defense));
+                        _popup.PopupClient(ret, sentry, user);
+                        return;
+                    }
+                }
                 mode = SentryMode.On;
                 var msg = Loc.GetString("rmc-sentry-on", ("sentry", sentry));
                 _popup.PopupClient(msg, sentry, user);
@@ -171,6 +184,30 @@ public sealed class SentrySystem : EntitySystem
         if (HasComp<MultitoolComponent>(used))
         {
             StartDisassemble(sentry, user);
+            return;
+        }
+
+        if (_tools.HasQuality(used, "Screwing"))
+        {
+            if (sentry.Comp.Mode == SentryMode.Off)
+            {
+                if (_net.IsServer)
+                {
+                    _transform.SetWorldRotation(sentry, _transform.GetWorldRotation(sentry) + Angle.FromDegrees(90));
+                    _rmcInteraction.SetMaxRotation(sentry.Owner, Transform(sentry).LocalRotation.GetCardinalDir().ToAngle(), sentry.Comp.MaxDeviation);
+                    UpdateState(sentry);
+                }
+                args.Handled = true;
+            }
+            else
+            {
+                string ret;
+                if(sentry.Comp.Mode == SentryMode.On)
+                    ret = Loc.GetString("rmc-sentry-active-norot", ("sentry", sentry));
+                else
+                    ret = Loc.GetString("rmc-sentry-item-norot", ("sentry", sentry));
+                _popup.PopupClient(ret, sentry, user);
+            }
             return;
         }
 
@@ -251,11 +288,17 @@ public sealed class SentrySystem : EntitySystem
         {
             if (ent.Comp.MaxDeviation < Angle.FromDegrees(180))
             {
-                var msg = Loc.GetString("rmc-sentry-limited-rotation", ("degrees", (int)ent.Comp.MaxDeviation.Degrees));
-                args.PushMarkup(msg);
+                var rot = Loc.GetString("rmc-sentry-limited-rotation", ("degrees", (int)ent.Comp.MaxDeviation.Degrees));
+                args.PushMarkup(rot);
+            }
 
-                msg = Loc.GetString("rmc-sentry-disassembled-with-multitool");
-                args.PushMarkup(msg);
+            var msg = Loc.GetString("rmc-sentry-disassembled-with-multitool");
+            args.PushMarkup(msg);
+
+            if (ent.Comp.Mode == SentryMode.Off)
+            {
+                var scw = Loc.GetString("rmc-sentry-rotate-with-screwdriver");
+                args.PushMarkup(scw);
             }
         }
     }

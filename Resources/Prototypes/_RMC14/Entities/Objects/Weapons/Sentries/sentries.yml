@@ -101,6 +101,15 @@
     interfaces:
       enum.SentryUiKey.Key:
         type: SentryUpgradeBui
+  - type: HealthExaminable
+    locPrefix: sentry
+    examinableTypes:
+    - Blunt
+    - Slash
+    - Piercing
+    - Heat
+    - Shock
+  - type: ShortExamine
   - type: Sentry
   - type: InteractedBlacklist
     blacklist:
@@ -224,5 +233,6 @@
   - type: Sentry
     deployDelay: 0.75
     undeployDelay: 0.75
+    assumedMaxHealth: 150
     upgrades: null
     deployFixture: null
