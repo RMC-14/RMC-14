@@ -50,7 +50,7 @@ health-examinable-sentry-Heat-25 = [color=orange]{CAPITALIZE(SUBJECT($target))} 
 health-examinable-sentry-Heat-50 = [color=red]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} almost melted![/color]
 health-examinable-sentry-Heat-75 = [color=crimson]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} barely recognizable![/color]
 
-health-examinable-sentry-Shock-10 = [color=yellow]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-HAVE($target)} been slightly worn away.[/color]
-health-examinable-sentry-Shock-25 = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-HAVE($target)} burn marks on {POSS-ADJ($target)} surface.[/color]
-health-examinable-sentry-Shock-50 = [color=red]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} heavily charred![/color]
+health-examinable-sentry-Shock-10 = [color=yellow]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-HAVE($target)} {CONJUGATE-HAVE($target)} a few scorch marks.[/color]
+health-examinable-sentry-Shock-25 = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-HAVE($target)} {CONJUGATE-BE($target)} is lightly charred.[/color]
+health-examinable-sentry-Shock-50 = [color=red]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} {CONJUGATE-BE($target)} letting off sparks![/color]
 health-examinable-sentry-Shock-75 = [color=crimson]{CAPITALIZE(SUBJECT($target))} can barely function![/color]
