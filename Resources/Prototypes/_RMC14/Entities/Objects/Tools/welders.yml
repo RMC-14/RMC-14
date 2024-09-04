@@ -19,6 +19,12 @@
   - type: Welder
     fuelConsumption: 0.06 # TODO RMC14 chang ethis when welders are fixed
     fuelLitCost: 0
+  - type: ItemToggle
+    predictable: false
+    soundActivate:
+      path: /Audio/_RMC14/Handling/weldingtool_on.ogg
+    soundDeactivate:
+      path: /Audio/_RMC14/Handling/weldingtool_off.ogg
   - type: GenericVisualizer
     visuals:
       enum.ToggleVisuals.Toggled:
