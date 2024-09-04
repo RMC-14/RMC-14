@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Greatly reduced the speed thirst occurs
-    type: Tweak
-  id: 148
-  time: '2024-06-15T07:49:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2477
 - author: DrSmugleaf
   changes:
   - message: Added the shotgun shell pouch to the surplus uniform vendor.
@@ -4458,5 +4451,21 @@
   id: 647
   time: '2024-09-04T21:07:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3905
+- author: Vermidia
+  changes:
+  - message: Medilathe, useable by med staff and makes various medical supplies out
+      of plastic, such as hyposprays, high-capacity beakers, and stasis bags.
+    type: Add
+  - message: Vial Storage Boxes, which can storage 6 vials or auto-injectors
+    type: Add
+  - message: Fix Chem Plus sprite being wrong
+    type: Fix
+  - message: Fix surgical tray slots being too few
+    type: Fix
+  - message: Lathes are no longer acidable
+    type: Fix
+  id: 648
+  time: '2024-09-04T21:09:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3904
 Name: RMC14
 Order: -1
