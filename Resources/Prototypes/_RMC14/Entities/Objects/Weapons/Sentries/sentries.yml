@@ -101,6 +101,15 @@
     interfaces:
       enum.SentryUiKey.Key:
         type: SentryUpgradeBui
+  - type: HealthExaminable
+    locPrefix: sentry
+    examinableTypes:
+    - Blunt
+    - Slash
+    - Piercing
+    - Heat
+    - Shock
+  - type: ShortExamine
   - type: Sentry
   - type: InteractedBlacklist
     blacklist:
