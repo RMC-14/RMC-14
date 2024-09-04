@@ -59,35 +59,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Correspondent/red.rsi
 
-# Other factions
-
-- type: entity
-  parent: JumpsuitMarine
-  id: RMCJumpsuitMarsoc
-  name: special operative uniform # TODO: find more appropriate name
-  description: A black uniform for elite Marine personnel. Designed to be comfortable and help blend into dark environments.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/marsoc.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/marsoc.rsi
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
-
-- type: entity
-  parent: RMCMarineUniformBase
-  id: RMCJumpsuitFreelancer
-  name: freelancer fatigues
-  description: A set of loose-fitting fatigues, perfect for an informal mercenary. Smells like gunpowder, apple pie, and covered in grease and sake stains.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi
-
 # Dutch's Dozen
-
 - type: entity
   parent: JumpsuitMarine
   id: RMCJumpsuitDutch # This is technically originally split into two items, but only the sprites are different between them
@@ -146,3 +118,43 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/engi.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/engi.rsi
+
+
+# Other factions
+
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitMarsoc
+  name: special operative uniform # TODO: find more appropriate name
+  description: A black uniform for elite Marine personnel. Designed to be comfortable and help blend into dark environments.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/marsoc.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/marsoc.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitFreelancer
+  name: freelancer fatigues
+  description: A set of loose-fitting fatigues, perfect for an informal mercenary. Smells like gunpowder, apple pie, and covered in grease and sake stains.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi
+
+# "Civilian"
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitCivilian
+  name: gray utility uniform
+  description: A stylish gray jumpsuit - standard issue for civilian support personnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/civilian.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/civilian.rsi

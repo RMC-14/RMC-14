@@ -267,7 +267,7 @@
   description: Based on the M3 pattern employed by the UNMC, the UN-M1 body armor is employed by security, riot control and union-busting teams. While robust against melee and bullet attacks, it critically lacks coverage of the legs and arms.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/un_riot.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/riot.rsi
   - type: CMArmor
     armor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
@@ -316,5 +316,3 @@
     armor: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 50 # CLOTHING_ARMOR_ULTRAHIGH
     bio: 75 # CLOTHING_ARMOR_GIGAHIGHPLUS
-
-
