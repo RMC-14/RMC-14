@@ -10,7 +10,6 @@ rmc-sentry-magazine-swap-finish-others = {$user} swaps a new {$magazine} into {T
 rmc-sentry-limited-rotation = [color=red]It can only turn a maximum of {$degrees} degrees when firing.[/color]
 rmc-sentry-disassembled-with-multitool = It can be disassembled with a [color=cyan]multitool[/color].
 rmc-sentry-rotate-with-screwdriver = It can be rotated with a [color=cyan]screwdriver[/color].
-rmc-sentry-health = It has [color=green]{$amount}/{$max}[/color] health.
 rmc-sentry-too-close = This is too close to {INDEFINITE($defense)} {$defense}!
 rmc-sentry-active-norot = {CAPITALIZE(THE($sentry))} is currently active. The motors will prevent you from rotating it safely.
 rmc-sentry-item-norot = You can't rotate it like this!
