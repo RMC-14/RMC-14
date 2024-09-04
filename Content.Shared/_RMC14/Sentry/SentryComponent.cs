@@ -48,7 +48,7 @@ public sealed partial class SentryComponent : Component
     public string ContainerSlotId = "gun_magazine";
 
     [DataField, AutoNetworkedField]
-    public EntProtoId[]? Upgrades = ["RMCSentryMini"];
+    public EntProtoId[]? Upgrades = ["RMCSentryMini", "RMCSentrySniper", "RMCSentryOmni"];
 }
 
 [Serializable, NetSerializable]
