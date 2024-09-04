@@ -20,6 +20,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -190,12 +191,13 @@ public sealed class SentrySystem : EntitySystem
         {
             if (sentry.Comp.Mode == SentryMode.Off)
             {
-                if (_net.IsServer)
-                {
-                    _transform.SetWorldRotation(sentry, _transform.GetWorldRotation(sentry) + Angle.FromDegrees(90));
-                    _rmcInteraction.SetMaxRotation(sentry.Owner, Transform(sentry).LocalRotation.GetCardinalDir().ToAngle(), sentry.Comp.MaxDeviation);
-                    UpdateState(sentry);
-                }
+                _transform.SetWorldRotation(sentry, _transform.GetWorldRotation(sentry) + Angle.FromDegrees(90));
+                _rmcInteraction.SetMaxRotation(sentry.Owner, Transform(sentry).LocalRotation.GetCardinalDir().ToAngle(), sentry.Comp.MaxDeviation);
+                UpdateState(sentry);
+                _audio.PlayPredicted(sentry.Comp.ScrewdriverSound, sentry, user);
+                var selfMsg = Loc.GetString("rmc-sentry-rotate-self", ("sentry", sentry));
+                var othersMsg = Loc.GetString("rmc-sentry-rotate-others", ("user", user), ("sentry", sentry));
+                _popup.PopupPredicted(selfMsg, othersMsg, user, user);
                 args.Handled = true;
             }
             else

@@ -18,6 +18,9 @@ rmc-sentry-upgrade-not-item = You need to disassemble {THE($sentry)} with a mult
 rmc-sentry-upgrade-not-holding = You need to be holding an upgrade kit in your active hand to upgrade {THE($sentry)}!
 rmc-sentry-upgrade-not-upgradeable = You can't upgrade {THE($sentry)}!
 
+rmc-sentry-rotate-self = You rotate {THE($sentry)}.
+rmc-sentry-rotate-others = {$user} rotates {THE($sentry)}.
+
 rmc-sentry-disassemble-start-self = You begin disassembling {THE($sentry)}.
 rmc-sentry-disassemble-start-others = {$user} begins disassembling {THE($sentry)}.
 rmc-sentry-disassemble-finish-self = You disassemble {THE($sentry)}.

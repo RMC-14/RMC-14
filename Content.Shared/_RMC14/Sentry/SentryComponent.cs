@@ -27,6 +27,9 @@ public sealed partial class SentryComponent : Component
     public int DefenseCheckRange = 2;
 
     [DataField, AutoNetworkedField]
+    public SoundSpecifier? ScrewdriverSound = new SoundPathSpecifier("/Audio/Items/screwdriver.ogg");
+
+    [DataField, AutoNetworkedField]
     public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillEngineer";
 
     [DataField, AutoNetworkedField]
