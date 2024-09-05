@@ -71,4 +71,7 @@
   id: RMCRocketAmmo84mm
 
 - type: Tag
+  id: RMCGlass
+
+- type: Tag
   id: Scabbard
