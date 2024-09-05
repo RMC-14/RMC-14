@@ -14,7 +14,7 @@
       visible: false
       shader: unshaded
   - type: Item
-    size: Small # TODO RMC14 large when toggled on
+    size: Small
     sprite: _RMC14/Objects/Tools/welder.rsi
   - type: Welder
     fuelConsumption: 0.06 # TODO RMC14 chang ethis when welders are fixed
@@ -56,16 +56,50 @@
   - type: Blowtorch
 
 - type: entity
-  parent: CMWelder
+  parent: BaseItem # Note, doesn't inherit from welder because it doesn't need eye protection
   id: CMWelderSmall
   name: ME3 hand welder
   description: A compact, handheld welding torch used by the Marines for cutting and welding jobs on the field. Due to the small size and slow strength, its function is limited compared to a full-sized technician's blowtorch.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Tools/welder_hand.rsi
+    layers:
+    - state: icon
+      map: ["enum.ToggleVisuals.Toggled"]
+    - state: welder_on
+      map: ["enum.ToggleVisuals.Layer"]
+      visible: false
+      shader: unshaded
   - type: Item
-    size: Small # TODO RMC14 large when toggled on
+    size: Small
     sprite: _RMC14/Objects/Tools/welder_hand.rsi
+  - type: Welder
+    fuelConsumption: 0.06 # TODO RMC14 chang ethis when welders are fixed
+    fuelLitCost: 0
+  - type: ItemToggle
+    predictable: false
+    soundActivate:
+      path: /Audio/_RMC14/Handling/weldingtool_on.ogg
+    soundDeactivate:
+      path: /Audio/_RMC14/Handling/weldingtool_off.ogg
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Toggled:
+          True: { visible: false }
+          False: { visible: true }
+        enum.ToggleVisuals.Layer:
+          True: { visible: true }
+          False: { visible: false }
+  - type: ToggleableLightVisuals
+    spriteLayer: on
+    inhandVisuals:
+      left:
+      - state: inhand-left-on
+        shader: unshaded
+      right:
+      - state: inhand-right-on
+        shader: unshaded
   - type: SolutionContainerManager
     solutions:
       Welder:
@@ -73,3 +107,55 @@
         - ReagentId: WeldingFuel
           Quantity: 12.5
         maxVol: 12.5 # TODO RMC14 5 when welders are fixed
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/weldingtool_pickup.ogg
+  - type: Blowtorch
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/welder_drop.ogg
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit:
+      path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
+      params:
+        variation: 0.250
+        volume: -10
+    activatedSoundOnHitNoDamage:
+      path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
+      params:
+        variation: 0.250
+        volume: -12
+    deactivatedSoundOnHitNoDamage:
+      collection: MetalThud
+    activatedDamage:
+        types:
+            Heat: 8
+  - type: ItemToggleSize
+    activatedSize: Large
+  - type: UseDelay
+  - type: MeleeWeapon
+    wideAnimationRotation: -90
+    damage:
+      types:
+        Blunt: 5 #i mean... i GUESS you could use it like that
+    soundHit:
+      collection: MetalThud
+  - type: RefillableSolution
+    solution: Welder
+  - type: Tool
+    useSound:
+      collection: Welder
+    qualities: Welding
+  - type: PointLight
+    enabled: false
+    radius: 1.5
+    color: orange
+    netsync: false
+  - type: Appearance
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 200
+  - type: StaticPrice
+    price: 40
+  - type: IgnitionSource
+    temperature: 700
