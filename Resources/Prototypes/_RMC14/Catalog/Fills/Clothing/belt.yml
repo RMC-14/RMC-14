@@ -69,7 +69,8 @@
       amount: 2
     - id: CMTraumaKit10
       amount: 2
-    # TODO RMC14 adrenaline autoinjector
+    - id: CMEpinephrineAutoInjector
+      amount: 1
     - id: CMDexalinPlusAutoInjector
       amount: 1
     # TODO RMC14 oxycodone autoinjector

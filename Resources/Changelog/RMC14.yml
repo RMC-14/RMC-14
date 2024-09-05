@@ -1,96 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Jungle walls are invincible
-    type: Fix
-  id: 146
-  time: '2024-06-15T06:40:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2475
-- author: Whisper
-  changes:
-  - message: Xenos now have death text on examine.
-    type: Add
-  id: 147
-  time: '2024-06-15T06:40:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2474
-- author: Whisper
-  changes:
-  - message: Greatly reduced the speed thirst occurs
-    type: Tweak
-  id: 148
-  time: '2024-06-15T07:49:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2477
-- author: DrSmugleaf
-  changes:
-  - message: Added the shotgun shell pouch to the surplus uniform vendor.
-    type: Add
-  - message: parasites can now also click-drag themselves onto targets to infect them,
-      or be click-dragged by other castes that are normally able to pick up parasites.
-    type: Add
-  - message: Fixed tackling having unlimited range.
-    type: Fix
-  - message: Fixed the xeno hud disappearing when a parasite is held by a xeno in
-      view.
-    type: Fix
-  - message: Fixed dead xenos showing up the Watch Xenonid action window.
-    type: Fix
-  - message: Fixed blood dispensers being unpowered and having upstream blood bags
-      instead of cm blood bags.
-    type: Fix
-  - message: Fixed marines being able to use Succumb and Last Words to deny a xeno
-      capture.
-    type: Fix
-  - message: Fixed barricades having no interaction outline.
-    type: Fix
-  - message: Fixed there being no range check for surgery tools, full sandbag building,
-      health scanning, wound treatment, infecting and nesting.
-    type: Fix
-  - message: Fixed xenos being able to access the human construction menu.
-    type: Fix
-  - message: Fixed xeno structures being much slower to destroy with melee weapons
-      than intended, for both marines and xenos.
-    type: Fix
-  - message: Resin doors now require support in the form of a wall, resin membrane
-      or other resin door to build, and will collapse if that support is destroyed.
-    type: Fix
-  - message: Fixed the sound that resin structures make when hit by a melee attack
-      being incorrect.
-    type: Fix
-  - message: Fixed being able to Transfer Plasma to a xeno caste that does not use
-      any.
-    type: Fix
-  - message: Fixed being able to toggle iv mode, pump a shotgun and remove webbing
-      while in crit and other states that normally block interactions.
-    type: Fix
-  - message: Rotting no longer deals blunt and cellular damage.
-    type: Fix
-  - message: Fix Dexalin and Dexalin Plus not healing airloss damage caused by low
-      blood.
-    type: Fix
-  - message: Water bottles can no longer be destroyed.
-    type: Tweak
-  - message: Added examine test to IV drips for their mode, target and contents.
-    type: Tweak
-  - message: IV drips now display their mode in the popup when being attached.
-    type: Tweak
-  - message: Changed all round-end outcome messages to be more descriptive of what
-      happened during the round.
-    type: Tweak
-  - message: All bullets are now much faster.
-    type: Tweak
-  - message: Marines that are trained in firearms skill no longer have any camera
-      recoil when firing a wielded gun.
-    type: Tweak
-  - message: Added a search bar to the xeno watch window.
-    type: Tweak
-  - message: You can now see nearby chat bubbles while watching another xeno.
-    type: Tweak
-  - message: Humanoids are now slower to pull around, except when they are on a roller
-      bed.
-    type: Tweak
-  id: 149
-  time: '2024-06-15T09:07:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2476
 - author: amo020
   changes:
   - message: Added the M79 grenade launcher prototype
@@ -4454,5 +4362,46 @@
   id: 645
   time: '2024-08-31T23:53:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3899
+- author: Vermidia
+  changes:
+  - message: You can now get a general idea of a sentries health by examining it
+    type: Fix
+  - message: Fixed being able to activate sentries right next to other active sentries
+    type: Fix
+  - message: You can rotate placed sentries with a screwdriver
+    type: Fix
+  id: 646
+  time: '2024-09-04T20:41:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3937
+- author: Vermidia
+  changes:
+  - message: Fix Lifesaver Bag not starting with an epinephrine autoinjector
+    type: Fix
+  id: 647
+  time: '2024-09-04T21:07:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3905
+- author: Vermidia
+  changes:
+  - message: Medilathe, useable by med staff and makes various medical supplies out
+      of plastic, such as hyposprays, high-capacity beakers, and stasis bags.
+    type: Add
+  - message: Vial Storage Boxes, which can storage 6 vials or auto-injectors
+    type: Add
+  - message: Fix Chem Plus sprite being wrong
+    type: Fix
+  - message: Fix surgical tray slots being too few
+    type: Fix
+  - message: Lathes are no longer acidable
+    type: Fix
+  id: 648
+  time: '2024-09-04T21:09:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3904
+- author: Vermidia
+  changes:
+  - message: Marines not wearing shoes slows them down
+    type: Fix
+  id: 649
+  time: '2024-09-04T21:10:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3910
 Name: RMC14
 Order: -1
