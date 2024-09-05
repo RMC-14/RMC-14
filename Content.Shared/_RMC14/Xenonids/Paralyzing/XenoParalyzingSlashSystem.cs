@@ -46,7 +46,7 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
 
         foreach (var entity in args.HitEntities)
         {
-            if (!_xeno.CanHitLiving(xeno, entity) ||
+            if (!_xeno.CanAbilityAttackTarget(xeno, entity) ||
                 HasComp<VictimBeingParalyzedComponent>(entity))
             {
                 continue;

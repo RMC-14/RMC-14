@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Chat.Prototypes;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
@@ -554,7 +555,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         if (!popups)
             return;
         _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes-self"), victim, victim, PopupType.MediumCaution);
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.MediumCaution);        
+        _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.MediumCaution);
     }
 
     private void Burst(Entity<VictimInfectedComponent> burstFrom)
@@ -563,11 +564,14 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             return;
         RemCompDeferred<VictimInfectedComponent>(burstFrom);
 
+        if (!TryComp(burstFrom, out TransformComponent? xform))
+            return;
+
         if (_container.TryGetContainer(burstFrom, burstFrom.Comp.LarvaContainerId, out var container))
         {
             foreach (var larva in container.ContainedEntities)
                 RemCompDeferred<BursterComponent>(larva);
-            _container.EmptyContainer(container);
+            _container.EmptyContainer(container, destination: xform.Coordinates);
         }
 
         Dirty(burstFrom, burstFrom.Comp);

@@ -1,5 +1,14 @@
 - type: entity
-  parent: [ BaseKnife, RMCAttachableBase ]
+  abstract: true
+  id: RMCBaseMeleeWeapon
+  components:
+  - type: MeleeDamageMultiplier
+    whitelist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: [ RMCBaseMeleeWeapon, BaseKnife, RMCAttachableBase ]
   id: RMCM5Bayonet
   name: "M5 'Night Raider' bayonet"
   description: The standard-issue bayonet of the Marines. You can slide this knife into your boots. # TODO RMC14 , or attach it to the end of a rifle.
@@ -35,7 +44,7 @@
   - type: UsableWhileDevoured
     damage:
       types:
-        Slash: 15
+        Slash: 10
   - type: AttachableVisuals
     rsi: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
     prefix: bayonet
@@ -52,7 +61,7 @@
 
 - type: entity
   name: M11 throwing knife
-  parent: BaseKnife
+  parent: [ RMCBaseMeleeWeapon, BaseKnife]
   id: CMM11Knife
   description: A military knife designed to be thrown at the enemy.
   components:
@@ -89,7 +98,7 @@
   id: ThrowingKnife
 
 - type: entity
-  parent: BaseKnife
+  parent: [ RMCBaseMeleeWeapon, BaseKnife]
   id: CMM2132Machete
   name: M2132 machete
   description: Latest issue of the Marine Machete.
@@ -113,7 +122,7 @@
   - type: UsableWhileDevoured
     damage:
       types:
-        Slash: 21
+        Slash: 14
   - type: Item
     size: Large
     sprite: _RMC14/Objects/Weapons/Melee/machete.rsi

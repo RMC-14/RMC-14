@@ -39,8 +39,11 @@
   id: RMCFloorPlatingNoBuild
   name: tiles-cm-plating
   sprite: /Textures/_RMC14/Tiles/almayer/plating.png
+  baseTurf: ""
+  deconstructTools: [ ]
   blockAnchoring: true
   blockConstruction: true
+  weedsSpreadable: false
 
 - type: tile
   parent: CMFloorSteel
@@ -50,8 +53,11 @@
 - type: tile
   parent: CMFloorSteel
   id: RMCFloorUnderplatingNoBuild
+  baseTurf: ""
+  deconstructTools: [ ]
   blockAnchoring: true
   blockConstruction: true
+  weedsSpreadable: false
 
 - type: tile
   parent: CMTileBase
@@ -62,8 +68,11 @@
 - type: tile
   parent: CMFloorPlate
   id: RMCFloorPlateNoBuild
+  baseTurf: ""
+  deconstructTools: [ ]
   blockAnchoring: true
   blockConstruction: true
+  weedsSpreadable: false
 
 - type: tile
   parent: CMTileBase
