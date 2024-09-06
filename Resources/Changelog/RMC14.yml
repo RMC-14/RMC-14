@@ -1,19 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed anyone that was ever put into a stasis bag being unable to process
-      medicine ever again.
-    type: Fix
-  - message: Fixed bleeding being much stronger than intended.
-    type: Fix
-  - message: Fixed humanoids only being able to metabolize a maximum of 3 different
-      medicines at once.
-    type: Fix
-  id: 155
-  time: '2024-06-16T05:18:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2487
-- author: DrSmugleaf
-  changes:
   - message: Fixed counting infected marines as alive towards round end conditions.
     type: Fix
   - message: Fixed weeds spreading onto water.
@@ -4399,5 +4386,13 @@
   id: 654
   time: '2024-09-06T08:47:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3953
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Queen/SL trackers not accounting for the player's camera rotation.
+      Having your camera rotated will now change where the tracker points.
+    type: Fix
+  id: 655
+  time: '2024-09-06T09:04:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3954
 Name: RMC14
 Order: -1
