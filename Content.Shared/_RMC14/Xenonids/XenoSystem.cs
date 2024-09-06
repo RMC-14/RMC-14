@@ -339,16 +339,19 @@ public sealed class XenoSystem : EntitySystem
             xeno.NextRegenTime = time + xeno.RegenCooldown;
             Dirty(uid, xeno);
 
-            if (!_affectableQuery.TryComp(uid, out var affectable) ||
-                !affectable.OnXenoWeeds)
+            if (!xeno.HealOffWeeds)
             {
-                if (_xenoPlasmaQuery.TryComp(uid, out var plasma))
+                if (!_affectableQuery.TryComp(uid, out var affectable) ||
+                    !affectable.OnXenoWeeds)
                 {
-                    var amount = FixedPoint2.Max(plasma.PlasmaRegenOffWeeds * plasma.MaxPlasma / 100 / 2, 0.01);
-                    _xenoPlasma.RegenPlasma((uid, plasma), amount);
-                }
+                    if (_xenoPlasmaQuery.TryComp(uid, out var plasma))
+                    {
+                        var amount = FixedPoint2.Max(plasma.PlasmaRegenOffWeeds * plasma.MaxPlasma / 100 / 2, 0.01);
+                        _xenoPlasma.RegenPlasma((uid, plasma), amount);
+                    }
 
-                continue;
+                    continue;
+                }
             }
 
             var heal = GetWeedsHealAmount((uid, xeno));
