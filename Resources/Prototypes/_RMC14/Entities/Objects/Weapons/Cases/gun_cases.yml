@@ -71,7 +71,7 @@
     size: Small
   - type: Sprite
     noRot: false
-    sprite: _RMC14/Objects/Storage/D18case.rsi
+    sprite: _RMC14/Objects/Storage/D18case.rsi # Needs proper 'closed' Sprites, Open/Closed are identical atm
     layers:
     - state: closed
   - type: Icon
