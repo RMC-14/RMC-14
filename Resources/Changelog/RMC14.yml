@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dorragon
-  changes:
-  - message: Riot armor
-    type: Add
-  id: 161
-  time: '2024-06-18T02:21:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2485
 - author: geraeumig
   changes:
   - message: Added ability to scope in with M96S rifle
@@ -4366,5 +4359,12 @@
   id: 660
   time: '2024-09-06T11:26:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3947
+- author: DrSmugleaf
+  changes:
+  - message: Fixed shotgun slug ammo not firing any projectiles.
+    type: Fix
+  id: 661
+  time: '2024-09-06T12:10:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3959
 Name: RMC14
 Order: -1
