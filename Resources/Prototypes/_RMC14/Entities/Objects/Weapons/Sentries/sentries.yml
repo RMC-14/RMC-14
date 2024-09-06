@@ -230,7 +230,7 @@
 - type: entity
   parent: RMCSentry
   id: RMCSentrySniper
-  name: UN 725-D Sniper Sentry
+  name: UN 725-D sniper sentry
   description: A fully-automated defence turret with long-range targeting capabilities. Armed with a modified M32-S Autocannon and an internal belt feed.
   components:
   - type: Sprite
@@ -248,6 +248,10 @@
   - type: GenericVisualizer
     visuals:
       enum.SentryLayers.Layer:
+        base:
+          Item: { state: "" }
+          Off: { state: defense_base_off }
+          On: { state: defense_base }
         sentry:
           Item: { state: dmr_uac_sentry_handheld }
           Off: { state: dmr_uac_sentry_noammo }
@@ -268,8 +272,6 @@
   - type: GunDamageModifier
     multiplier: 4
   - type: HTN
-    rootTask:
-      task: RMCSentryCompound
     blackboard:
       SoundTargetInLOS: !type:SoundPathSpecifier
         path: /Audio/Effects/double_beep.ogg
@@ -299,6 +301,10 @@
   - type: GenericVisualizer
     visuals:
       enum.SentryLayers.Layer:
+        base:
+          Item: { state: "" }
+          Off: { state: defense_base_off }
+          On: { state: defense_base }
         sentry:
           Item: { state: omni_uad_sentry_handheld }
           Off: { state: omni_uad_sentry_noammo }
@@ -306,8 +312,6 @@
   - type: GunDamageModifier
     multiplier: 0.7
   - type: HTN
-    rootTask:
-      task: RMCSentryCompound
     blackboard:
       SoundTargetInLOS: !type:SoundPathSpecifier
         path: /Audio/Effects/double_beep.ogg
