@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Whisper
   changes:
-  - message: Two missing bags from the corpsmen vendor have been added.
-    type: Fix
-  id: 151
-  time: '2024-06-15T23:05:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2480
-- author: Whisper
-  changes:
   - message: Rules tweak; MP may not arrest outside of FOB and flagship unless in
       a chase.
     type: Tweak
@@ -4406,5 +4399,12 @@
   id: 650
   time: '2024-09-06T08:02:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3951
+- author: Whisper
+  changes:
+  - message: Added Walks-The-Graves figurine.
+    type: Add
+  id: 651
+  time: '2024-09-06T08:03:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3932
 Name: RMC14
 Order: -1
