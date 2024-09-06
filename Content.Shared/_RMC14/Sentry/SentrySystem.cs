@@ -20,7 +20,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
-using Robust.Shared.Player;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -75,9 +74,9 @@ public sealed class SentrySystem : EntitySystem
         _toUpdate.Add(sentry);
 
         if (sentry.Comp.StartingMagazine is { } magazine)
-        {
             TrySpawnInContainer(magazine, sentry, sentry.Comp.ContainerSlotId, out _);
-        }
+
+        UpdateState(sentry);
     }
 
     private void OnSentryPickupAttempt(Entity<SentryComponent> sentry, ref PickupAttemptEvent args)

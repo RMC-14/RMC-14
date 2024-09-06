@@ -38,6 +38,7 @@
     noRot: true
     layers:
     - map: [ "base" ]
+      state: defense_base_off
     - map: [ "sentry" ]
       state: normal_uac_sentry_handheld
   - type: Icon
@@ -48,9 +49,9 @@
     visuals:
       enum.SentryLayers.Layer:
         base:
-          Item: { state: "" }
-          Off: { state: defense_base_off }
-          On: { state: defense_base }
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off, visible: true }
+          On: { state: defense_base, visible: true }
         sentry:
           Item: { state: normal_uac_sentry_handheld }
           Off: { state: normal_uac_sentry_noammo }
@@ -248,6 +249,7 @@
     noRot: true
     layers:
     - map: [ "base" ]
+      state: defense_base_off
     - map: [ "sentry" ]
       state: dmr_uac_sentry_handheld
   - type: Icon
@@ -258,9 +260,9 @@
     visuals:
       enum.SentryLayers.Layer:
         base:
-          Item: { state: "" }
-          Off: { state: defense_base_off }
-          On: { state: defense_base }
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off, visible: true }
+          On: { state: defense_base, visible: true }
         sentry:
           Item: { state: dmr_uac_sentry_handheld }
           Off: { state: dmr_uac_sentry_noammo }
@@ -301,6 +303,7 @@
     noRot: true
     layers:
     - map: [ "base" ]
+      state: defense_base_off
     - map: [ "sentry" ]
       state: omni_uad_sentry_handheld
   - type: Icon
@@ -311,9 +314,9 @@
     visuals:
       enum.SentryLayers.Layer:
         base:
-          Item: { state: "" }
-          Off: { state: defense_base_off }
-          On: { state: defense_base }
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off, visible: true }
+          On: { state: defense_base, visible: true }
         sentry:
           Item: { state: omni_uad_sentry_handheld }
           Off: { state: omni_uad_sentry_noammo }
