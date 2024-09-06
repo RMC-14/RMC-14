@@ -11,7 +11,6 @@ using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
-using Content.Shared.Movement.Components;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Robust.Shared.Audio.Systems;
@@ -48,12 +47,10 @@ public abstract class SharedMortarSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
-    private EntityQuery<InputMoverComponent> _inputMoverQuery;
     private EntityQuery<TransformComponent> _transformQuery;
 
     public override void Initialize()
     {
-        _inputMoverQuery = GetEntityQuery<InputMoverComponent>();
         _transformQuery = GetEntityQuery<TransformComponent>();
 
         SubscribeLocalEvent<MortarComponent, UseInHandEvent>(OnMortarUseInHand, before: [typeof(ActivatableUISystem)]);
@@ -442,12 +439,6 @@ public abstract class SharedMortarSystem : EntitySystem
             var distance = distanceVec.Length();
             if (distance > range)
                 continue;
-
-            if (_inputMoverQuery.TryComp(recipient, out var inputMover) &&
-                inputMover.RelativeRotation != Angle.Zero)
-            {
-                distanceVec = (-inputMover.RelativeRotation).RotateVec(distanceVec);
-            }
 
             var direction = distanceVec.GetDir().ToString().ToUpperInvariant();
             var msg = distance < 1
