@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: amo020
-  changes:
-  - message: Added the M79 grenade launcher prototype
-    type: Add
-  id: 150
-  time: '2024-06-15T22:13:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2470
 - author: Whisper
   changes:
   - message: Two missing bags from the corpsmen vendor have been added.
@@ -4403,5 +4396,15 @@
   id: 649
   time: '2024-09-04T21:10:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3910
+- author: DrSmugleaf
+  changes:
+  - message: Fixed some areas incorrectly allowing or prohibiting mortar fire and
+      placement. For example, the buildings in Solaris now correctly block a mortar
+      from being deployed inside, but don't prevent one placed outside firing a shell
+      into the building.
+    type: Fix
+  id: 650
+  time: '2024-09-06T08:02:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3951
 Name: RMC14
 Order: -1
