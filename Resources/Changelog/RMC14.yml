@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed not being able to use blood packs manually without an IV.
-    type: Fix
-  id: 154
-  time: '2024-06-16T05:07:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2483
-- author: DrSmugleaf
-  changes:
   - message: Fixed anyone that was ever put into a stasis bag being unable to process
       medicine ever again.
     type: Fix
@@ -4396,5 +4389,15 @@
   id: 653
   time: '2024-09-06T08:28:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3952
+- author: DrSmugleaf
+  changes:
+  - message: Added being able to see what's on the other side of the stairs that transport
+      you between the two floors of the Almayer.
+    type: Add
+  - message: Fixed not being able to pull things through the Almayer stairs.
+    type: Fix
+  id: 654
+  time: '2024-09-06T08:47:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3953
 Name: RMC14
 Order: -1
