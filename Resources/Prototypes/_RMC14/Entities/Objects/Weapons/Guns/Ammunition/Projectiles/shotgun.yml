@@ -11,9 +11,6 @@
     - state: bullet
       shader: unshaded
   - type: Projectile
-  - type: ProjectileSpread
-    count: 6
-    spread: 15
 
 - type: entity
   parent: CMPelletShotgunBase
@@ -50,10 +47,6 @@
         Blunt: 70
   - type: CMArmorPiercing
     amount: 20
-  - type: ProjectileSpread
-    proto: CMPelletShotgunSlug
-    count: 1
-    spread: 5
 
 - type: entity
   parent: CMPelletShotgunBase
@@ -66,10 +59,6 @@
     damage:
       types:
         Heat: 55
-  - type: ProjectileSpread
-    proto: CMPelletShotgunIncendiary
-    count: 1
-    spread: 5
   # todo rmc14 add burning
 
 - type: entity
@@ -86,10 +75,6 @@
     damage: {}
   - type: StaminaDamageOnCollide
     damage: 45
-  - type: ProjectileSpread
-    proto: CMPelletShotgunBeanbag
-    count: 1
-    spread: 5
 
 - type: entity
   parent: CMPelletShotgunBase
@@ -110,6 +95,7 @@
   - type: ProjectileSpread
     proto: CMPelletShotgunFlechette
     count: 3
+    spread: 15
 
 - type: entity
   parent: CMPelletShotgunBuckshot
