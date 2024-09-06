@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed resin structures taking more damage from guns than intended.
-    type: Fix
-  id: 158
-  time: '2024-06-16T19:55:06.0000000+00:00'
-  url: null
-- author: DrSmugleaf
-  changes:
   - message: Fixed sentinel spits not shooting out when clicking on and behind walls.
     type: Fix
   id: 159
@@ -4365,5 +4358,12 @@
   id: 657
   time: '2024-09-06T09:20:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3956
+- author: DrSmugleaf
+  changes:
+  - message: Fixed security cameras on Savannah not having names.
+    type: Fix
+  id: 658
+  time: '2024-09-06T10:22:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3957
 Name: RMC14
 Order: -1
