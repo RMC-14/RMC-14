@@ -402,7 +402,7 @@ public abstract class SharedMortarSystem : EntitySystem
             return false;
 
         if (_area.TryGetArea(mortar, out _, out var area) &&
-            !area.Mortar)
+            !area.MortarPlacement)
         {
             _popup.PopupClient(Loc.GetString("rmc-mortar-covered", ("mortar", mortar)), user, user, PopupType.SmallCaution);
             return false;

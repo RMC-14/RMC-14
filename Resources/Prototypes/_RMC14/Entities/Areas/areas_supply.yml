@@ -1,12 +1,6 @@
 ﻿- type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBase
+  parent: RMCAreaBase
   id: RMCAreaSupply
-  components:
-  - type: Sprite
-    sprite: _RMC14/Areas/areas.rsi
-    state: blank
 
 - type: entity
   parent: RMCAreaSupply

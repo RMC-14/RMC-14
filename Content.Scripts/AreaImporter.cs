@@ -59,6 +59,19 @@ public class AreaImporter
             var rsi = new Rsi();
             string? areaName = null;
             var isDefault = true;
+
+            void SetAreaComp(AreaField key, bool value)
+            {
+                var keyStr = key.ToString();
+                for (var i = area.Count - 1; i >= 0; i--)
+                {
+                    if (area[i].Key == keyStr)
+                        area.RemoveAt(i);
+                }
+
+                area.Add((keyStr, value.ToString().ToLowerInvariant()));
+            }
+
             while (lines.TryPeek(out var next) && !next.StartsWith(areaPrefix))
             {
                 lines.Dequeue();
@@ -116,34 +129,79 @@ public class AreaImporter
                     isDefault = false;
                     rsi = new Rsi(
                         rsi.RsiPath,
-                        result
+                        result.ToLowerInvariant()
                     );
                 }
                 else if (TryExtract(ceiling, out result))
                 {
-                    var parent = result switch
+                    switch (result)
                     {
-                        "CEILING_NO_PROTECTION" => "RMCAreaProtectionZero",
-                        "CEILING_NONE" => "RMCAreaNone",
-                        "CEILING_GLASS" => "RMCAreaGlass",
-                        "CEILING_PROTECTION_TIER_1" => "RMCAreaProtectionOne",
-                        "CEILING_METAL" => "RMCAreaProtectionMetal",
-                        "CEILING_PROTECTION_TIER_2" => "RMCAreaProtectionTwo",
-                        "CEILING_UNDERGROUND_ALLOW_CAS" => "RMCAreaUndergroundAllowCAS",
-                        "CEILING_UNDERGROUND_METAL_ALLOW_CAS" => "RMCAreaUndergroundMetalAllowCAS",
-                        "CEILING_PROTECTION_TIER_3" => "RMCAreaProtectionThree",
-                        "CEILING_UNDERGROUND_BLOCK_CAS" => "RMCAreaUndergroundBlockCAS",
-                        "CEILING_UNDERGROUND_METAL_BLOCK_CAS" => "RMCAreaUndergroundMetalBlockCAS",
-                        "CEILING_PROTECTION_TIER_4" => "RMCAreaProtectionFour",
-                        "CEILING_DEEP_UNDERGROUND" => "RMCAreaDeepUnderground",
-                        "CEILING_DEEP_UNDERGROUND_METAL" => "RMCAreaDeepUndergroundMetal",
-                        "CEILING_REINFORCED_METAL" => "RMCAreaReinforcedMetal",
-                        "CEILING_RESIN" => "RMCAreaResin",
-                        "CEILING_MAX" => "RMCAreaMax",
-                        _ => "# TODO RMC14 areas",
-                    };
-
-                    parents.Insert(0, parent);
+                        case "CEILING_NO_PROTECTION":
+                        case "CEILING_NONE":
+                        case "CEILING_GLASS":
+                            SetAreaComp(AreaField.CAS, true);
+                            SetAreaComp(AreaField.fulton, true);
+                            SetAreaComp(AreaField.mortarPlacement, true);
+                            SetAreaComp(AreaField.mortarFire, true);
+                            SetAreaComp(AreaField.lasing, true);
+                            SetAreaComp(AreaField.medevac, true);
+                            SetAreaComp(AreaField.OB, true);
+                            SetAreaComp(AreaField.supplyDrop, true);
+                            break;
+                        case "CEILING_PROTECTION_TIER_1":
+                        case "CEILING_METAL":
+                            SetAreaComp(AreaField.CAS, true);
+                            SetAreaComp(AreaField.fulton, true);
+                            SetAreaComp(AreaField.mortarPlacement, false);
+                            SetAreaComp(AreaField.mortarFire, true);
+                            SetAreaComp(AreaField.lasing, false);
+                            SetAreaComp(AreaField.medevac, false);
+                            SetAreaComp(AreaField.OB, true);
+                            SetAreaComp(AreaField.supplyDrop, true);
+                            break;
+                        case "CEILING_PROTECTION_TIER_2":
+                        case "CEILING_UNDERGROUND_METAL_ALLOW_CAS":
+                        case "CEILING_UNDERGROUND_ALLOW_CAS":
+                            SetAreaComp(AreaField.CAS, true);
+                            SetAreaComp(AreaField.fulton, false);
+                            SetAreaComp(AreaField.mortarPlacement, false);
+                            SetAreaComp(AreaField.mortarFire, false);
+                            SetAreaComp(AreaField.lasing, false);
+                            SetAreaComp(AreaField.medevac, false);
+                            SetAreaComp(AreaField.OB, true);
+                            SetAreaComp(AreaField.supplyDrop, false);
+                            break;
+                        case "CEILING_PROTECTION_TIER_3":
+                        case "CEILING_UNDERGROUND_BLOCK_CAS":
+                        case "CEILING_UNDERGROUND_METAL_BLOCK_CAS":
+                            SetAreaComp(AreaField.CAS, false);
+                            SetAreaComp(AreaField.fulton, false);
+                            SetAreaComp(AreaField.lasing, false);
+                            SetAreaComp(AreaField.mortarPlacement, false);
+                            SetAreaComp(AreaField.mortarFire, false);
+                            SetAreaComp(AreaField.medevac, false);
+                            SetAreaComp(AreaField.OB, true);
+                            SetAreaComp(AreaField.supplyDrop, false);
+                            break;
+                        case "CEILING_PROTECTION_TIER_4":
+                        case "CEILING_DEEP_UNDERGROUND":
+                        case "CEILING_DEEP_UNDERGROUND_METAL":
+                        case "CEILING_REINFORCED_METAL":
+                        case "CEILING_RESIN":
+                        case "CEILING_MAX":
+                            SetAreaComp(AreaField.CAS, false);
+                            SetAreaComp(AreaField.fulton, false);
+                            SetAreaComp(AreaField.lasing, false);
+                            SetAreaComp(AreaField.mortarPlacement, false);
+                            SetAreaComp(AreaField.mortarFire, false);
+                            SetAreaComp(AreaField.medevac, false);
+                            SetAreaComp(AreaField.OB, false);
+                            SetAreaComp(AreaField.supplyDrop, false);
+                            break;
+                        default:
+                            Console.WriteLine($"Found unknown ceiling {ceiling}");
+                            break;
+                    }
                 }
                 else if (TryExtract(powerNet, out result))
                 {
@@ -280,9 +338,13 @@ public class AreaImporter
                     var areaComp = new YamlMappingNode();
                     areaComp.Add("type", "Area");
 
-                    foreach (var (key, value) in area.Comp)
+                    foreach (var tuple in area.Comp)
                     {
-                        areaComp.Add(CamelCaseNamingConvention.Instance.Apply(key), value);
+                        var (key, value) = tuple;
+                        if (!key.All(char.IsUpper))
+                            key = CamelCaseNamingConvention.Instance.Apply(key);
+
+                        areaComp.Add(key, value);
                     }
 
                     components.Add(areaComp);
@@ -326,6 +388,20 @@ public class AreaImporter
         Rsi Rsi,
         bool IsDefault
     );
+
+    public enum AreaField
+    {
+        // ReSharper disable InconsistentNaming
+        CAS,
+        fulton,
+        lasing,
+        mortarPlacement,
+        mortarFire,
+        medevac,
+        OB,
+        supplyDrop,
+        // ReSharper restore InconsistentNaming
+    }
 
     private const string Colors = @"";
 
