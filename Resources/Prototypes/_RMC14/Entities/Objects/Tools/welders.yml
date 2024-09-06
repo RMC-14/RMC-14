@@ -8,16 +8,41 @@
     sprite: _RMC14/Objects/Tools/welder.rsi
     layers:
     - state: icon
-    - state: welder_flame
+      map: ["enum.ToggleVisuals.Toggled"]
+    - state: welder_on
       map: ["enum.ToggleVisuals.Layer"]
-      shader: unshaded
       visible: false
+      shader: unshaded
   - type: Item
-    size: Small # TODO RMC14 large when toggled on
+    size: Small
     sprite: _RMC14/Objects/Tools/welder.rsi
   - type: Welder
     fuelConsumption: 0.06 # TODO RMC14 chang ethis when welders are fixed
     fuelLitCost: 0
+  - type: ItemToggle
+    predictable: false
+    soundActivate:
+      path: /Audio/_RMC14/Handling/weldingtool_on.ogg
+    soundDeactivate:
+      path: /Audio/_RMC14/Handling/weldingtool_off.ogg
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Toggled:
+          True: { visible: false }
+          False: { visible: true }
+        enum.ToggleVisuals.Layer:
+          True: { visible: true }
+          False: { visible: false }
+  - type: ToggleableLightVisuals
+    spriteLayer: on
+    inhandVisuals:
+      left:
+      - state: inhand-left-on
+        shader: unshaded
+      right:
+      - state: inhand-right-on
+        shader: unshaded
   - type: SolutionContainerManager
     solutions:
       Welder:
@@ -31,11 +56,16 @@
   - type: Blowtorch
 
 - type: entity
-  parent: CMWelder
+  parent: CMWelder # TODO doesn't need eye protection but can only weld vents
   id: CMWelderSmall
   name: ME3 hand welder
   description: A compact, handheld welding torch used by the Marines for cutting and welding jobs on the field. Due to the small size and slow strength, its function is limited compared to a full-sized technician's blowtorch.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/welder_hand.rsi
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Tools/welder_hand.rsi
   - type: SolutionContainerManager
     solutions:
       Welder:
