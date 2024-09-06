@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
+using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
@@ -215,7 +216,8 @@ public sealed class XenoEggSystem : EntitySystem
             }
 
             if (HasComp<XenoConstructComponent>(uid) ||
-                _tags.HasAnyTag(uid.Value, StructureTag, AirlockTag))
+                _tags.HasAnyTag(uid.Value, StructureTag, AirlockTag) ||
+                HasComp<StrapComponent>(uid))
             {
                 var msg = Loc.GetString("cm-xeno-egg-blocked");
                 _popup.PopupClient(msg, uid.Value, user, PopupType.SmallCaution);
