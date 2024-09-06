@@ -76,6 +76,28 @@
 
 - type: entity
   parent: CMHeadBeret
+  id: CMHeadBeretCOLtCol
+  name: CO's lieutenant colonel beret
+  description: A blue beret with the Lieutenant Colonel's insignia emblazoned on it. Its blue color symbolizes loyalty, confidence, and politics - the core components of a true Colonel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_ltcol.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_ltcol.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadBeretCOCol
+  name: CO's colonel beret
+  description: A dark blue, custom-tailored beret signifying The Colonel. Definitely not an alias for a General.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_col.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_col.rsi
+
+- type: entity
+  parent: CMHeadBeret
   id: RMCHeadBeretGreen
   name: UNMC beret
   suffix: Green
