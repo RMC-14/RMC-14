@@ -12,7 +12,7 @@
     powerNet: almayer
     hijackEvacuationArea: false
     hijackEvacuationWeight: 0
-    hijackEvacuationType: null
+    hijackEvacuationType: None
 
 # MAINTS
 

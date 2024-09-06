@@ -28,6 +28,7 @@
     hudOffset: -0.1,0.125
     tier: 0
     unlockAt: 0
+    healOffWeeds: true
   - type: XenoPlasma
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
