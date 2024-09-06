@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added unique xeno death emote
-    type: Add
-  id: 157
-  time: '2024-06-16T09:42:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2495
 - author: DrSmugleaf
   changes:
   - message: Fixed resin structures taking more damage from guns than intended.
@@ -4364,5 +4357,13 @@
   id: 656
   time: '2024-09-06T09:09:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3955
+- author: DrSmugleaf
+  changes:
+  - message: Fixed larva not healing off weeds. They will now heal regardless of whether
+      or not they are on weeds.
+    type: Fix
+  id: 657
+  time: '2024-09-06T09:20:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3956
 Name: RMC14
 Order: -1
