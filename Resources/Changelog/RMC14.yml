@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Made puddles smaller and spread less easily, requiring a lot more liquid
-      to do anything.
-    type: Tweak
-  id: 153
-  time: '2024-06-16T05:06:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2484
 - author: DrSmugleaf
   changes:
   - message: Fixed not being able to use blood packs manually without an IV.
@@ -4397,5 +4389,12 @@
   id: 652
   time: '2024-09-06T08:08:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3933
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the loading screen showing non-RMC14 tips.
+    type: Fix
+  id: 653
+  time: '2024-09-06T08:28:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3952
 Name: RMC14
 Order: -1
