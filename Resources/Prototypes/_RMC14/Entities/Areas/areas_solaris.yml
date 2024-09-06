@@ -3,9 +3,6 @@
   id: RMCAreaBigred
   suffix: Deprecated Solaris Area
   components:
-  - type: Sprite
-    sprite: _RMC14/Areas/areas.rsi
-    state: blank
   - type: Area
     buildSpecial: true
     powerNet: ground
@@ -28,14 +25,21 @@
     state: blue
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBigredGround
+  parent: RMCAreaBigredGround
   id: RMCAreaBigredGroundGarageWorkshop
   name: Garage Workshop
   components:
   - type: Sprite
     state: green
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaBigredGround
@@ -74,7 +78,6 @@
   name: Central Hallway
   components:
   - type: Sprite
-    sprite: _RMC14/Areas/areas.rsi
     state: hallc2
 
 - type: entity
@@ -118,7 +121,6 @@
     state: medbay
 
 - type: entity
-  abstract: true
   parent: RMCAreaBigredGround
   id: RMCAreaBigredGroundMedical
 
@@ -136,7 +138,6 @@
   name: Central Hallway
   components:
   - type: Sprite
-    sprite: _RMC14/Areas/areas.rsi
     state: hallc3
 
 - type: entity
@@ -511,12 +512,18 @@
     state: blank
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundMetalBlockCAS
-  - RMCAreaBigredv2Caves
+  parent: RMCAreaBigredv2Caves
   id: RMCAreaBigredv2CavesLambda
   components:
   - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
     minimapColor: '#812DA2EE'
 
 - type: entity
@@ -552,25 +559,38 @@
     state: lam_xeno
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundBlockCAS
-  - RMCAreaBigredv2
+  parent: RMCAreaBigredv2
   id: RMCAreaBigredv2LambdaCaves
   name: Lambda Lab Caves
   components:
   - type: Sprite
     state: caves_lambda
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundAllowCAS
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideLambdaCaveCas
   name: Lambda Lockdown Caves Entrance
   components:
   - type: Sprite
     state: decontamination
   - type: Area
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: false
     minimapColor: '#A22D2DEE'
 
 - type: entity
@@ -578,16 +598,11 @@
   id: RMCAreaBigredv2
   suffix: Solaris Area
   components:
-  - type: Sprite
-    sprite: _RMC14/Areas/areas.rsi
-    state: blank
   - type: Area
     buildSpecial: true
 
 - type: entity
-  parent:
-  - RMCAreaMax
-  - RMCAreaBigredv2
+  parent: RMCAreaBigredv2
   id: RMCAreaBigredv2Oob
   name: Big Red Out of Bounds
   components:
@@ -595,21 +610,36 @@
     sprite: _RMC14/Areas/areas_kutjevo.rsi
     state: oob
   - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
     resinAllowed: false
-    avoidBioscan: False
-    noTunnel: True
-    unweedable: False
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
     buildSpecial: false
 
 - type: entity
-  parent:
-  - RMCAreaNone
-  - RMCAreaBigredv2
+  parent: RMCAreaBigredv2
   id: RMCAreaBigredv2Outside
   name: Colony Grounds
   components:
   - type: Sprite
     state: red
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -630,9 +660,7 @@
     resinAllowed: false
 
 - type: entity
-  parent:
-  - RMCAreaGlass
-  - RMCAreaBigredv2OutsideNw
+  parent: RMCAreaBigredv2OutsideNw
   id: RMCAreaBigredv2OutsideNwCeiling
 
 - type: entity
@@ -696,15 +724,21 @@
     resinAllowed: false
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundBlockCAS
-  - RMCAreaBigredv2
+  parent: RMCAreaBigredv2
   id: RMCAreaBigredv2Caves
   name: Unknown Area
   components:
   - type: Sprite
     state: bluenew
   - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
     minimapColor: '#3F3C3CEF'
 
 - type: entity
@@ -716,20 +750,25 @@
     state: bluenew
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundMetalBlockCAS
-  - RMCAreaBigredv2Caves
+  parent: RMCAreaBigredv2Caves
   id: RMCAreaBigredv2CavesEta
 
 - type: entity
-  parent:
-  - RMCAreaNone
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideEta
   name: Eta Labs Compound
   components:
   - type: Sprite
     state: yellow
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaBigredv2CavesEta
@@ -764,179 +803,273 @@
     state: eta_research
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideCargo
   name: Cargo
   components:
   - type: Sprite
     state: storage
   - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
     resinAllowed: false
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideGeneralStore
   name: General Store
   components:
   - type: Sprite
     state: blueold
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideMarshalOffice
   name: Marshal Offices
   components:
   - type: Sprite
     state: brig
   - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
     minimapColor: '#A22D2DEE'
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideMedical
   name: Hospital
   components:
   - type: Sprite
     state: cmo
   - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
     minimapColor: '#3DBF75EE'
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideAdminBuilding
   name: Administration
   components:
   - type: Sprite
     state: bridge
   - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
     minimapColor: '#2D3FA2EE'
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideFiltrationPlant
   name: Filtration Plant
   components:
   - type: Sprite
     state: atmos
   - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
     minimapColor: '#C19504E7'
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundMetalAllowCAS
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideVirology
   name: Virology Lab
   components:
   - type: Sprite
-    sprite: _RMC14/Areas/areas.rsi
     state: lp
   - type: Area
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: false
     minimapColor: '#3DBF75EE'
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideDorms
   name: Dormitories
   components:
   - type: Sprite
     state: fitness
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideBar
   name: Bar
   components:
   - type: Sprite
     state: bar
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideChapel
   name: Chapel
   components:
   - type: Sprite
     state: courtroom
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideHydroponics
   name: Hydroponics
   components:
   - type: Sprite
     state: garden
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideLibrary
   name: Library
   components:
   - type: Sprite
     state: library
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideOfficeComplex
   name: Office Complex
   components:
   - type: Sprite
     state: explored
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
-  parent:
-  - RMCAreaGlass
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideSpacePort
   name: Space Port
   components:
   - type: Sprite
     state: green
   - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
     resinAllowed: false
     landingZone: true
 
 - type: entity
-  parent:
-  - RMCAreaNone
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideSpacePortLz2
   name: Cargo Landing Pad
   components:
   - type: Sprite
     state: green
   - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
     resinAllowed: false
-    minimapColor: '#EBE5E5E3'
     landingZone: true
+    minimapColor: '#EBE5E5E3'
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundMetalAllowCAS
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideTelecomm
   name: LZ1 Communications Relay
   components:
@@ -944,6 +1077,14 @@
     sprite: _RMC14/Areas/areas.rsi
     state: ass_line
   - type: Area
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: false
     resinAllowed: false
     landingZone: true
 
@@ -1004,116 +1145,192 @@
     landingZone: false
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideEngineering
   name: Engineering Complex
   components:
   - type: Sprite
     state: engine
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideStorage
   name: Storage
   components:
   - type: Sprite
     state: storage
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideSolarPlant
   name: Solar Power Plant
   components:
   - type: Sprite
     state: substation
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideAtmos
   name: Atmospheric Stabilizer
   components:
   - type: Sprite
     state: party
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideGeneralOffices
   name: General Offices
   components:
   - type: Sprite
     state: storage
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundBlockCAS
-  - RMCAreaBigredv2
+  parent: RMCAreaBigredv2
   id: RMCAreaBigredv2CavesVirology
   name: Virology Caves
   components:
   - type: Sprite
     state: caves_virology
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundBlockCAS
-  - RMCAreaBigredv2
+  parent: RMCAreaBigredv2
   id: RMCAreaBigredv2CavesSw
   name: Southwestern Caves
   components:
   - type: Sprite
     state: caves_sw
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundBlockCAS
-  - RMCAreaBigredv2
+  parent: RMCAreaBigredv2
   id: RMCAreaBigredv2CavesResearch
   name: Wey-Yu Research Lab Caves
   components:
   - type: Sprite
     state: caves_research
   - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
     minimapColor: '#2D1342EE'
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundBlockCAS
-  - RMCAreaBigredv2
+  parent: RMCAreaBigredv2
   id: RMCAreaBigredv2CavesSe
   name: Southeastern Caves
   components:
   - type: Sprite
     state: caves_se
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundBlockCAS
-  - RMCAreaBigredv2
+  parent: RMCAreaBigredv2
   id: RMCAreaBigredv2CavesEast
   name: Eastern Caves
   components:
   - type: Sprite
     state: caves_east
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundBlockCAS
-  - RMCAreaBigredv2
+  parent: RMCAreaBigredv2
   id: RMCAreaBigredv2CavesNorth
   name: Northern Caves
   components:
   - type: Sprite
     state: caves_north
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -1136,51 +1353,86 @@
   name: LZ2 'Cargo'
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundAllowCAS
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideLz1NorthCas
   name: Northern Caves Entrance
   components:
   - type: Sprite
     state: garden
+  - type: Area
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundAllowCAS
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideLz1TelecommCas
   name: Virology Caves Entrance
   components:
   - type: Sprite
     state: garden
+  - type: Area
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundAllowCAS
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideLz2WestCas
   name: Southwestern Caves Entrance
   components:
   - type: Sprite
     state: garden
+  - type: Area
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundAllowCAS
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideLz2SouthCas
   name: ETA Lockdown Caves Entrance
   components:
   - type: Sprite
     state: garden
+  - type: Area
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundAllowCAS
-  - RMCAreaBigredv2Outside
+  parent: RMCAreaBigredv2Outside
   id: RMCAreaBigredv2OutsideFiltrationCaveCas
   name: Filtration Lockdown Caves Entrance
   components:
   - type: Sprite
     state: garden
+  - type: Area
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: false

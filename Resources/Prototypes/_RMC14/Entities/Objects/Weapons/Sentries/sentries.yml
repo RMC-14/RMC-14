@@ -38,6 +38,7 @@
     noRot: true
     layers:
     - map: [ "base" ]
+      state: defense_base_off
     - map: [ "sentry" ]
       state: normal_uac_sentry_handheld
   - type: Icon
@@ -48,9 +49,9 @@
     visuals:
       enum.SentryLayers.Layer:
         base:
-          Item: { state: "" }
-          Off: { state: defense_base_off }
-          On: { state: defense_base }
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off, visible: true }
+          On: { state: defense_base, visible: true }
         sentry:
           Item: { state: normal_uac_sentry_handheld }
           Off: { state: normal_uac_sentry_noammo }
@@ -235,3 +236,99 @@
     undeployDelay: 0.75
     upgrades: null
     deployFixture: null
+
+- type: entity
+  parent: RMCSentry
+  id: RMCSentrySniper
+  name: UN 725-D sniper sentry
+  description: A fully-automated defence turret with long-range targeting capabilities. Armed with a modified M32-S Autocannon and an internal belt feed.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - map: [ "base" ]
+      state: defense_base_off
+    - map: [ "sentry" ]
+      state: dmr_uac_sentry_handheld
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    state: dmr_uac_sentry_handheld
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SentryLayers.Layer:
+        base:
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off, visible: true }
+          On: { state: defense_base, visible: true }
+        sentry:
+          Item: { state: dmr_uac_sentry_handheld }
+          Off: { state: dmr_uac_sentry_noammo }
+          On: { state: dmr_uac_sentry_on }
+  - type: Gun
+    fireRate: 0.8
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: GunDamageModifier
+    multiplier: 4
+  - type: HTN
+    blackboard:
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Effects/double_beep.ogg
+      VisionRadius: !type:Single
+        10.0
+  - type: Sentry
+    upgrades: null
+
+- type: entity
+  parent: RMCSentry
+  id: RMCSentryOmni
+  name: UN 571-D omnidirectional sentry gun
+  description: A deployable, semi-automated turret with 360 degree range AI targeting capabilities. Armed with an M30 Autocannon and a 500-round drum magazine.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - map: [ "base" ]
+      state: defense_base_off
+    - map: [ "sentry" ]
+      state: omni_uad_sentry_handheld
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    state: omni_uad_sentry_handheld
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SentryLayers.Layer:
+        base:
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off, visible: true }
+          On: { state: defense_base, visible: true }
+        sentry:
+          Item: { state: omni_uad_sentry_handheld }
+          Off: { state: omni_uad_sentry_noammo }
+          On: { state: omni_uad_sentry_on }
+  - type: GunDamageModifier
+    multiplier: 0.7
+  - type: HTN
+    blackboard:
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Effects/double_beep.ogg
+      VisionRadius: !type:Single
+        4.0
+  - type: Sentry
+    upgrades: null
+    maxDeviation: 180
