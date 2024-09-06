@@ -551,3 +551,13 @@
     state: sam_ali
   - type: PatronFigurine
     id: 0739904f-e90f-463f-9797-d26d59bbacd7
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronWalks-The-Graves
+  name: Walks-The-Graves figurine
+  components:
+  - type: Sprite
+    state: walks-the-graves
+  - type: PatronFigurine
+    id: 025821e4-ae36-49ff-9bdb-a80654ce0dc4
