@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenos sometimes not healing while on weeds.
-    type: Fix
-  id: 160
-  time: '2024-06-16T21:50:06.0000000+00:00'
-  url: null
 - author: Dorragon
   changes:
   - message: Riot armor
@@ -4366,5 +4359,12 @@
   id: 659
   time: '2024-09-06T10:49:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3958
+- author: Rainbeon
+  changes:
+  - message: Resized Felinids to normal size.
+    type: Tweak
+  id: 660
+  time: '2024-09-06T11:26:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3947
 Name: RMC14
 Order: -1
