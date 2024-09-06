@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed sentinel spits not shooting out when clicking on and behind walls.
-    type: Fix
-  id: 159
-  time: '2024-06-16T20:08:06.0000000+00:00'
-  url: null
-- author: DrSmugleaf
-  changes:
   - message: Fixed xenos sometimes not healing while on weeds.
     type: Fix
   id: 160
@@ -4365,5 +4358,13 @@
   id: 658
   time: '2024-09-06T10:22:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3957
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenonid eggs being able to be placed under vendors, lockers, crates,
+      chairs, etc.
+    type: Fix
+  id: 659
+  time: '2024-09-06T10:49:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3958
 Name: RMC14
 Order: -1
