@@ -11,6 +11,10 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/deputy.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/deputy.rsi
+  - type: CMArmor
+    armor: 15
+    bio: 10
+    explosionArmor: 10
 
 - type: entity
   parent: RMCCoatBureauDeputy
@@ -37,6 +41,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/jacket_general.rsi
   - type: CMArmor
     armor: 35
+    bio: 10
     explosionArmor: 40
   - type: ExplosionResistance
     damageCoefficient: 0

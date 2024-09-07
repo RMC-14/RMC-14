@@ -9,6 +9,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Provost/medium.rsi
   - type: CMArmor
     armor: 20 # CLOTHING_ARMOR_MEDIUM
+    bio: 15
     explosionArmor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
     walkModifier: 0.814
@@ -16,6 +17,39 @@
   - type: Storage
     grid:
     - 0,0,5,1 # 3 slots
+    maxItemSize: Small
+    whitelist:
+      components:
+      - Gun
+      - BallisticAmmoProvider
+      - Stunbaton
+#      - # TODO RMC14 motion detector, walkman
+      tags:
+      - Handcuffs
+      - CMMagazineRifle # same as marine armor
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - Sidearm
+      - Knife
+      - Flashlight
+      - Grenade
+      - MRE
+      - CMAutoInjector
+      - Cigarette
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - Syringe
+      - Hypospray
+      - CMOintment
+      - Brutepack
+      - CMBurnKit
+      - CMTraumaKit
+      - Bottle
+      - Pill
+      - PowerCell
 
 - type: entity
   parent: RMCArmorProvost
@@ -37,6 +71,39 @@
   - type: Storage
     grid:
     - 0,0,7,1 # 4 slots
+    maxItemSize: Small
+    whitelist:
+      components:
+      - Gun
+      - BallisticAmmoProvider
+      - Stunbaton
+#      - # TODO RMC14 motion detector, walkman
+      tags:
+      - Handcuffs
+      - CMMagazineRifle # same as marine armor
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - Sidearm
+      - Knife
+      - Flashlight
+      - Grenade
+      - MRE
+      - CMAutoInjector
+      - Cigarette
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - Syringe
+      - Hypospray
+      - CMOintment
+      - Brutepack
+      - CMBurnKit
+      - CMTraumaKit
+      - Bottle
+      - Pill
+      - PowerCell
 
 - type: entity
   parent: RMCArmorProvost
@@ -47,8 +114,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Provost/light.rsi
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
-    walkModifier: 0.814
-    sprintModifier: 0.814
+    walkModifier: 0.897
+    sprintModifier: 0.897
 
 - type: entity
   parent: RMCArmorProvost
@@ -63,6 +130,39 @@
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
+    maxItemSize: Small
+    whitelist:
+      components:
+      - Gun
+      - BallisticAmmoProvider
+      - Stunbaton
+#      - # TODO RMC14 motion detector, walkman
+      tags:
+      - Handcuffs
+      - CMMagazineRifle # same as marine armor
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - Sidearm
+      - Knife
+      - Flashlight
+      - Grenade
+      - MRE
+      - CMAutoInjector
+      - Cigarette
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - Syringe
+      - Hypospray
+      - CMOintment
+      - Brutepack
+      - CMBurnKit
+      - CMTraumaKit
+      - Bottle
+      - Pill
+      - PowerCell
 
 # Special agent
 # TODO: implement storage whitelist for this
@@ -76,7 +176,41 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Provost/special.rsi
   - type: CMArmor
     armor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    bio: 20
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
+    maxItemSize: Small
+    whitelist:
+      components:
+      - Gun
+      - BallisticAmmoProvider
+      - Stunbaton
+#      - # TODO RMC14 motion detector, walkman
+      tags:
+      - Handcuffs
+      - CMMagazineRifle # same as marine armor
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - Sidearm
+      - Knife
+      - Flashlight
+      - Grenade
+      - MRE
+      - CMAutoInjector
+      - Cigarette
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - Syringe
+      - Hypospray
+      - CMOintment
+      - Brutepack
+      - CMBurnKit
+      - CMTraumaKit
+      - Bottle
+      - Pill
+      - PowerCell
