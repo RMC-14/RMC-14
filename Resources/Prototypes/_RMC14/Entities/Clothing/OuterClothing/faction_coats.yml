@@ -15,6 +15,37 @@
     armor: 15
     bio: 10
     explosionArmor: 10
+  - type: Storage
+    grid:
+    - 0,0,3,1 # 2 slots
+    maxItemSize: Small
+    whitelist:
+      tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - Sidearm
+      - Knife
+      - Flashlight
+      - MRE
+      - Grenade
+      - CMAutoInjector
+      - Cigarette
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - Syringe
+      - Hypospray
+      - CMOintment
+      - Brutepack
+      - CMBurnKit
+      - CMTraumaKit
+      - Bottle
+      - Pill
+      - PowerCell
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: RMCCoatBureauDeputy
