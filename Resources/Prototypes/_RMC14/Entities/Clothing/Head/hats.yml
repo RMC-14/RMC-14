@@ -322,3 +322,24 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/DressBlues/officer.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/DressBlues/officer.rsi
+
+# The squad beret
+# TODO: display the squad badge one the item icon as well
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretSquad
+  name: squad beret
+  description: For those who want to show pride and have nothing to lose (in their head, at least).
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+  - type: SquadArmor
+    layer: Helmet
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+      state: badge
+    leaderRsi:
+      sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+      state: badge
