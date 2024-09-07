@@ -126,3 +126,6 @@
       rmc-aslot-rail: 0.032, 0.155
       rmc-aslot-stock: -0.81, 0.032
       rmc-aslot-underbarrel: 0.25, -0.25
+  - type: Tag
+    tags:
+    - M63

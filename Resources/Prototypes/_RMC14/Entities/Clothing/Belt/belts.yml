@@ -117,6 +117,8 @@
       - RMCMagazineRevolver
       - PowerCell
       - CMFireExtinguisherPortable
+      - M63
+      - CMMagazineSMGM63
 #      - # TODO RMC14 handful of shotgun shells
 #      - # TODO nailgun, circuit board
       components:
