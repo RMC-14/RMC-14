@@ -124,8 +124,8 @@
     - id: RMCMagazineRifleM4SPRA19
     - id: RMCMagazineRifleM4SPRA19 # TODO: RMCMagazineRifleM4SPRA19Incendiary
     - id: RMCMagazineRifleM4SPRA19 # TODO: RMCMagazineRifleM4SPRA19Incendiary
-    - id: RMCMagazineRifleM4SPRA19 # TODO: RMCMagazineRifleM4SPRA19Impact
-    - id: RMCMagazineRifleM4SPRA19 # TODO: RMCMagazineRifleM4SPRA19Impact
+    - id: RMCCartridgeRifleM4SPRA19Impact
+    - id: RMCCartridgeRifleM4SPRA19Impact
     - id: RMCBackpackScout
     - id: CMWeaponPistolMK80
     - id: CMMagazinePistolMK80

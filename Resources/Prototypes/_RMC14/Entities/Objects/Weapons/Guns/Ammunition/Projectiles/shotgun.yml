@@ -30,6 +30,8 @@
     proto: CMPelletShotgunBuckshot
     count: 4
     spread: 20
+  - type: RMCStunOnHit
+    
 
 - type: entity
   parent: CMPelletShotgunBase
@@ -47,6 +49,11 @@
         Blunt: 70
   - type: CMArmorPiercing
     amount: 20
+  - type: RMCStunOnHit
+    maxRange: 6
+    stunTime: 0.5
+    superSlowTime: 1
+    slowTime: 3
 
 - type: entity
   parent: CMPelletShotgunBase

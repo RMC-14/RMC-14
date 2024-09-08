@@ -24,12 +24,30 @@
 
 - type: entity
   parent: BaseBullet
-  id: BulletRifleM4SPRA19
+  id: BulletRifleM4SPRA19 # No falloff
   noSpawn: true
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 58
+        Piercing: 55
   - type: CMArmorPiercing
     amount: 35
+
+- type: entity
+  parent: BaseBullet
+  id: BulletRifleM4SPRA19Impact
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: CMArmorPiercing
+    amount: 50
+  - type: RMCStunOnHit
+    maxRange: 32
+    losesEffectWithRange: true
+    stunTime: 0.5
+    superSlowTime: 2
+    slowTime: 5

@@ -76,3 +76,5 @@
   - type: HideLayerClothing
     slots:
     - Snout
+  - type: RMCSize
+    size: Small
