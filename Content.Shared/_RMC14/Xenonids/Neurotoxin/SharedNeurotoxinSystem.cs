@@ -121,7 +121,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 continue;
 
             //Basic Effects
-            _stamina.TakeStaminaDamage(uid, neuro.StaminaDamagePerSecond * frameTime);
+            _stamina.TakeStaminaDamage(uid, neuro.StaminaDamagePerSecond * frameTime, visual: false);
             _statusEffects.TryAddStatusEffect<DrunkComponent>(uid, "Drunk", neuro.DizzyStrength, true);
 
             NeurotoxinNonStackingEffects(uid, neuro, time, out var coughChance, out var stumbleChance);
