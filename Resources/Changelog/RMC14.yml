@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: geraeumig
-  changes:
-  - message: Added ability to scope in with M96S rifle
-    type: Add
-  id: 162
-  time: '2024-06-18T07:50:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2426
 - author: Vermidia
   changes:
   - message: The health analyzer now identifies chest-bursted marines as permanently
@@ -4366,5 +4359,12 @@
   id: 661
   time: '2024-09-06T12:10:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3959
+- author: Vermidia
+  changes:
+  - message: Fix crusher and lurker melee slows lasting for the rest of the round
+    type: Fix
+  id: 662
+  time: '2024-09-08T01:22:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3960
 Name: RMC14
 Order: -1
