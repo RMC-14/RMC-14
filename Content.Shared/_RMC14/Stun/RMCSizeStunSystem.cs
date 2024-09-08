@@ -96,9 +96,9 @@ public sealed class RMCSizeStunSystem : EntitySystem
 
             if (bullet.Comp.LosesEffectWithRange)
             {
-                stun -= TimeSpan.FromSeconds(distance / 200);
-                superSlow -= TimeSpan.FromSeconds(distance / 40);
-                slow -= TimeSpan.FromSeconds(distance / 20);
+                stun -= TimeSpan.FromSeconds(distance / 50);
+                superSlow -= TimeSpan.FromSeconds(distance / 10);
+                slow -= TimeSpan.FromSeconds(distance / 5);
             }
 
             _stun.TryParalyze(args.Target, stun, true);
