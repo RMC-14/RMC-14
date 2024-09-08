@@ -16,7 +16,7 @@ public sealed partial class RMCStunOnHitComponent : Component
     public bool LosesEffectWithRange = false;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan StunTime = TimeSpan.FromSeconds(0.7);
+    public TimeSpan StunTime = TimeSpan.FromSeconds(1.4);
 
     [DataField, AutoNetworkedField]
     public TimeSpan SuperSlowTime = TimeSpan.FromSeconds(2);

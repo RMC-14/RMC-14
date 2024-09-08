@@ -51,7 +51,7 @@
     amount: 20
   - type: RMCStunOnHit
     maxRange: 6
-    stunTime: 0.5
+    stunTime: 1
     superSlowTime: 2
     slowTime: 6
 
