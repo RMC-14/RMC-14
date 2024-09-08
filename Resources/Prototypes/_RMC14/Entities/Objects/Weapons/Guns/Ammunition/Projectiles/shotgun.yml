@@ -52,8 +52,8 @@
   - type: RMCStunOnHit
     maxRange: 6
     stunTime: 0.5
-    superSlowTime: 1
-    slowTime: 3
+    superSlowTime: 2
+    slowTime: 6
 
 - type: entity
   parent: CMPelletShotgunBase

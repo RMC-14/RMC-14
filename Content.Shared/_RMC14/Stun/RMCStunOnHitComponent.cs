@@ -19,8 +19,8 @@ public sealed partial class RMCStunOnHitComponent : Component
     public TimeSpan StunTime = TimeSpan.FromSeconds(0.7);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan SuperSlowTime = TimeSpan.FromSeconds(1);
+    public TimeSpan SuperSlowTime = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan SlowTime = TimeSpan.FromSeconds(2);
+    public TimeSpan SlowTime = TimeSpan.FromSeconds(4);
 }

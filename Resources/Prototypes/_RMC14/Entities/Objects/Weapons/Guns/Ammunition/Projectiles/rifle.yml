@@ -49,5 +49,5 @@
     maxRange: 32
     losesEffectWithRange: true
     stunTime: 0.5
-    superSlowTime: 2
-    slowTime: 5
+    superSlowTime: 4
+    slowTime: 10
