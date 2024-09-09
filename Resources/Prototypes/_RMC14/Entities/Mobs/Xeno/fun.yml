@@ -31,9 +31,7 @@
   description: thas a fuckin rabid rouny plushy.
   components:
   - type: Sprite
-    sprite: Objects/Fun/toys.rsi
-    state: plushie_rouny
-  - type: Rotatable
+    sprite: _RMC14/Mobs/Xenonids/rabid_rouny_plush.rsi
   - type: XenoEvolution
     max: 300
     evolvesTo: [ ]
