@@ -236,6 +236,10 @@
   name: "M4SPR A19 magazine (high-velocity high impact)"
   description: "A magazine of high-velocity high impact A19 rounds for use in the M4SPR battle rifle."
   components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleM4SPRA19Impact
   - type: BallisticAmmoProvider
     proto: RMCCartridgeRifleM4SPRA19Impact
   - type: Sprite
@@ -262,3 +266,6 @@
 
 - type: Tag
   id: RMCMagazineRifleM4SPRA19
+
+- type: Tag
+  id: RMCMagazineRifleM4SPRA19Impact
