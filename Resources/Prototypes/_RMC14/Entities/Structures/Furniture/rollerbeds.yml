@@ -71,14 +71,6 @@
   - type: Appearance
 
 - type: entity
-  parent: CMRollerBed
-  id: RMCMedevacStretcher
-  name: Medevac stretcher
-  description: A collapsible stretcher that can be activated to send patients to an overhead dropship.
-  components:
-  - type: MedivacStretcher
-
-- type: entity
   parent: CMPortableSurgicalBed
   id: CMPortableSurgicalBedSpawnFolded
   suffix: folded
@@ -88,4 +80,102 @@
   - type: Strap
     enabled: false
 
+# Copied most of RollerBed prototype except for pullable
+- type: entity
+  parent: [BaseItem, BaseDeployFoldable]
+  id: RMCMedevacStretcher
+  name: Medevac stretcher
+  description: A collapsible stretcher that can be activated to send patients to an overhead dropship.
+  components:
+  - type: MedivacStretcher
+  - type: Transform
+    noRot: true
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/rollerbeds.rsi
+    noRot: true
+    layers:
+    - state: stretcher_down
+      map: ["unfoldedLayer"]
+    - state: stretcher_folded
+      map: ["foldedLayer"]
+      visible: false
+    - state: stretcher_box
+      map: ["buckledLayer"]
+      visible: false
+    - state: beacon_active_up
+      map: ["buckledBeaconLayer"]
+      visible: false
+    - state: winched_stretcher
+      map: ["stretcherAnimatedLayer"]
+      visible: false
+  - type: MovedByPressure
+  - type: DamageOnHighSpeedImpact
+    soundHit:
+      collection: MetalThud
+  - type: InteractionOutline
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 80
+        mask:
+        - MobMask
+  - type: Damageable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 50
+        behaviors:
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              SheetSteel1:
+                min: 1
+                max: 1
+  - type: Strap
+    position: Down
+    rotation: -90
+    buckleOffset: "0,0.15"
+    unbuckleOffset: "0,0.15"
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.StrapVisuals.State:
+        buckledLayer:
+          True: {visible: true}
+          False: {visible: false}
+      enum.FoldedVisuals.State: # Copypasta from BaseFoldable b/c collections don't merge when overriding component prototypes.
+        foldedLayer:
+          True: {visible: true}
+          False: {visible: false}
+        unfoldedLayer:
+          True: {visible: false}
+          False: {visible: true}
+      enum.MedivacStretcherVisuals.BeaconState:
+        buckledBeaconLayer:
+          On: {visible: true}
+          Off: {visible: false}
+      enum.MedivacStretcherVisuals.MedivacingState:
+        buckledLayer:
+          True: {state: winched_stretcher}
+          False: {state: stretcher_box}
+  - type: StaticPrice
+    price: 120
+
+- type: entity
+  parent: RMCMedevacStretcher
+  id: RMCMedevacStretcherFolded
+  suffix: folded
+  components:
+  - type: Foldable
+    folded: true
+  - type: Strap
+    enabled: false
 # TODO RMC14 medevac stretcher

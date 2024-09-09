@@ -9,3 +9,5 @@ rmc-medivac-no-target = No target found
 rmc-medivac-target-abbreviation = M-{$id}
 
 rmc-medivac-stretcher-examine-id = Tracking ID for CAS: {$id}.
+
+rmc-medivac-stretcher-failure = Target stretcher is not properly setup

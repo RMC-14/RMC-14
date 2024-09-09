@@ -40,6 +40,10 @@ public sealed partial class DropshipUtilityPointVisualizerSystem : VisualizerSys
         {
             spriteComp.LayerSetVisible(attachementBase, false);
             spriteComp.LayerSetVisible(attachedUtility, false);
+            var ev = new AppearanceChangeEvent()
+            {
+                Sprite = spriteComp
+            };
             return;
         }
 

@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 namespace Content.Shared._RMC14.Dropship.Utility;
 
 /// <summary>
-/// Event applied onto a MedivacStretcher to send a humanoid entity
-/// to a target location
+/// Event applied onto a MedivacStretcher to prepare to send a humanoid entity
+/// to a target location. DOES NOT MOVE THE HUNANOID, for that <see cref="Content.Shared._RMC14.Dropship.Utility.Events.MedivacDoAfterEvent"/>>
 /// </summary>
 [Serializable, NetSerializable]
-public sealed partial class MedivacEvent : EntityEventArgs
+public sealed partial class PrepareMedivacEvent : EntityEventArgs
 {
     /// <summary>
     /// The medivac point
     /// </summary>
     public NetEntity MedivacEntity;
 
-    public bool SucessfulMedivac = false;
+    public bool ReadyForMedivac = false;
 
-    public MedivacEvent(NetEntity medivacEntity)
+    public PrepareMedivacEvent(NetEntity medivacEntity)
     {
         MedivacEntity = medivacEntity;
     }
