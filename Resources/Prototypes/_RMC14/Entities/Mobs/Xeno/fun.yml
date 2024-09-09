@@ -22,3 +22,18 @@
   - type: XenoEvolution
     max: 300
     evolvesTo: [ ]
+
+- type: entity
+  parent: CMXenoRunner
+  id: RMCXenoRounyPlushie
+  name: Rouny
+  suffix: RMC14
+  description: thas a fuckin rabid rouny plushy.
+  components:
+  - type: Sprite
+    sprite: Objects/Fun/toys.rsi
+    state: plushie_rouny
+  - type: Rotatable
+  - type: XenoEvolution
+    max: 300
+    evolvesTo: [ ]
