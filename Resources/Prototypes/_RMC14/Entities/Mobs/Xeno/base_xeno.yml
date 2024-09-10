@@ -150,6 +150,8 @@
         type: XenoPheromonesBui
       enum.XenoOrderConstructionUI.Key:
         type: XenoOrderConstructionBui
+      enum.XenoChooseFruitUI.Key:
+        type: XenoChooseFruitBui
       enum.XenoWordQueenUI.Key:
         type: XenoWordQueenBui
   - type: TypingIndicator

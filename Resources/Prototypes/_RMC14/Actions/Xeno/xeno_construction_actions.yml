@@ -69,3 +69,35 @@
   - type: XenoConstructionAction
     checkStructureSelected: false
     checkWeeds: false
+
+# For gardener/healer drone
+- type: entity
+  id: ActionXenoChooseFruit
+  parent: ActionXenoBase
+  name: Change Fruit
+  description: Choose a fruit to be planted with 'Plant Resin Fruit' action.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: blank
+    event: !type:XenoChooseFruitActionEvent
+  - type: XenoChooseFruitAction
+
+- type: entity
+  id: ActionXenoPlantFruit
+  parent: ActionXenoBase
+  name: Plant Resin Fruit (50)
+  description: Plant chosen resin fruit at the cost of health and plasma.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: gardener_plant
+    event: !type:XenoPlantFruitActionEvent
+    useDelay: 5
+  - type: XenoPlantFruitAction
+    checkFruitSelected: true
+    checkWeeds: true

@@ -539,7 +539,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         return null;
     }
 
-    private bool TileSolidAndNotBlocked(EntityCoordinates target)
+    public bool TileSolidAndNotBlocked(EntityCoordinates target)
     {
         return target.GetTileRef(EntityManager, _map) is { } tile &&
                !tile.IsSpace() &&
