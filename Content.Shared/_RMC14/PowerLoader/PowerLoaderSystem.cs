@@ -483,6 +483,11 @@ public sealed class PowerLoaderSystem : EntitySystem
         var containerEntity = EntityManager.GetEntity(args.ContainerEntity);
         var containedEntity = EntityManager.GetEntity(args.ContainedEntity);
 
+        if (TryComp(containedEntity, out DropshipUtilityComponent? utilityComp))
+        {
+            utilityComp.AttachmentPoint = containerEntity;
+        }
+
         var slot = _container.GetContainer(containerEntity, args.SlotId);
         _container.Insert(containedEntity, slot);
 
@@ -550,6 +555,11 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         var container = EntityManager.GetEntity(args.ContainerEntity);
         var contained = EntityManager.GetEntity(args.ContainedEntity);
+
+        if (TryComp(contained, out DropshipUtilityComponent? utilityComp))
+        {
+            utilityComp.AttachmentPoint = null;
+        }
 
         _container.RemoveEntity(container, contained);
 

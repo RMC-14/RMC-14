@@ -29,6 +29,8 @@ public sealed partial class DropshipUtilityComponent : Component
     [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi? UtilityAttachedSprite;
 
+    public EntityUid? AttachmentPoint;
+
     /// <summary>
     /// Cached target of the weapons terminal
     /// </summary>
