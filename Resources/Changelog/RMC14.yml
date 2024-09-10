@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: noisrevni-dev
-  changes:
-  - message: Added ASRS item search bar to ease supply crew searching for specific
-      item.
-    type: Add
-  id: 166
-  time: '2024-06-21T01:24:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2541
-- author: blueDev2
-  changes:
-  - message: Added Holocards
-    type: Add
-  id: 167
-  time: '2024-06-21T03:29:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2544
 - author: vero5123
   changes:
   - message: runners can not longer leap if resting
@@ -4360,5 +4345,19 @@
   id: 665
   time: '2024-09-10T22:18:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3928
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Updated LV-624's Research Landing Zone
+    type: Tweak
+  id: 666
+  time: '2024-09-10T22:21:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3975
+- author: crystalHex
+  changes:
+  - message: Whistles can now be used from the action bar.
+    type: Tweak
+  id: 667
+  time: '2024-09-10T22:20:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3838
 Name: RMC14
 Order: -1
