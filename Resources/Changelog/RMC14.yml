@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: vero5123
-  changes:
-  - message: runners can not longer leap if resting
-    type: Fix
-  id: 168
-  time: '2024-06-23T05:13:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2557
-- author: blueDev2
-  changes:
-  - message: Health scanner works through stasis bags
-    type: Tweak
-  id: 169
-  time: '2024-06-23T05:25:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2550
-- author: Dorragon
-  changes:
-  - message: Bonegel and bone setter description's and names
-    type: Fix
-  id: 170
-  time: '2024-06-23T05:32:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2555
 - author: MetalSage
   changes:
   - message: Added the Warrior's punch, fling and lunge actions.
@@ -4359,5 +4338,41 @@
   id: 667
   time: '2024-09-10T22:20:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3838
+- author: Sigil
+  changes:
+  - message: "You can now remove ammo from shotguns and grenade launchers. To do so,\
+      \ press the \"activate item in world\" hotkey \u2014 E by default. This hotkey\
+      \ also works for other weapons."
+    type: Add
+  id: 668
+  time: '2024-09-10T22:23:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3543
+- author: KalimbaMachine
+  changes:
+  - message: Clipboard Upgrades!
+    type: Tweak
+  id: 669
+  time: '2024-09-10T22:23:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3879
+- author: Vermidia
+  changes:
+  - message: Added ammo stuns. They don't impact big xenos (t3s, hivelord, queen)
+      or very small ones (parasites, larva) but apply stun and slowdown and knock
+      xenos back.
+    type: Add
+  - message: Added scout high impact ammo. It has a max effect range of 32 but gets
+      worse the farther the bullet travels.
+    type: Add
+  - message: Added stuns to buckshot and slug ammo, with slug giving worse effects
+      but having a better range.
+    type: Add
+  - message: Fixed some stun and slow timers being 1/2 as long as intended (stomp,
+      coughing blood, regurgitation)
+    type: Fix
+  - message: Neurotoxin no longer makes you blue
+    type: Fix
+  id: 670
+  time: '2024-09-10T22:22:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3965
 Name: RMC14
 Order: -1
