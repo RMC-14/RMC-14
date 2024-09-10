@@ -77,5 +77,7 @@
         density: 185
         layer:
         - BulletImpassable
+  - type: RMCSize
+    size: Big
 #  - type: RMCXenoDamageVisuals # TODO RMC14
 #    prefix: praetorian
