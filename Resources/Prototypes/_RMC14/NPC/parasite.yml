@@ -1,0 +1,220 @@
+﻿- type: htnCompound
+  id: RMCParasiteCompound
+  branches:
+  - tasks:
+    - !type:HTNCompoundTask
+      task: RMCParasiteLeap
+  - tasks:
+    - !type:HTNCompoundTask
+      task: RMCParasiteInfect
+  - tasks:
+    - !type:HTNCompoundTask
+      task: RMCParasiteIdle
+
+- type: htnCompound
+  id: RMCParasiteLeap
+  branches:
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:UtilityOperator
+        proto: RMCNearbyLeapInfectable
+
+    - !type:HTNPrimitiveTask
+      preconditions:
+      - !type:KeyExistsPrecondition
+        key: Target
+      - !type:TargetInRangePrecondition
+        targetKey: Target
+        rangeKey: VisionRadius
+      - !type:TargetInLOSPrecondition
+        targetKey: Target
+        rangeKey: VisionRadius
+      operator: !type:LeapOperator
+        targetKey: Target
+
+    - !type:HTNPrimitiveTask
+      operator: !type:SetFloatOperator
+        targetKey: MinimumIdleTime
+        amount: 5
+
+    - !type:HTNPrimitiveTask
+      operator: !type:SetFloatOperator
+        targetKey: MaximumIdleTime
+        amount: 15
+
+    - !type:HTNPrimitiveTask
+      operator: !type:RandomOperator
+        targetKey: IdleTime
+        minKey: MinimumIdleTime
+        maxKey: MaximumIdleTime
+
+    - !type:HTNPrimitiveTask
+      preconditions:
+      - !type:KeyExistsPrecondition
+        key: IdleTime
+      operator: !type:WaitOperator
+        key: IdleTime
+
+      services:
+      - !type:UtilityService
+        id: LeapService
+        proto: RMCNearbyLeapInfectable
+        key: Target
+
+- type: htnCompound
+  id: RMCParasiteInfect
+  branches:
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:UtilityOperator
+        proto: RMCNearbyDownInfectable
+        key: TargetDown
+
+    - !type:HTNPrimitiveTask
+      preconditions:
+      - !type:KeyExistsPrecondition
+        key: TargetDown
+      - !type:TargetInRangePrecondition
+        targetKey: TargetDown
+        rangeKey: InteractRange
+      - !type:TargetInLOSPrecondition
+        targetKey: TargetDown
+        rangeKey: InteractRange
+      operator: !type:InteractWithOperator
+        targetKey: TargetDown
+        expectDoAfter: true
+
+    - !type:HTNPrimitiveTask
+      operator: !type:SetFloatOperator
+        targetKey: MinimumIdleTime
+        amount: 5
+
+    - !type:HTNPrimitiveTask
+      operator: !type:SetFloatOperator
+        targetKey: MaximumIdleTime
+        amount: 15
+
+    - !type:HTNPrimitiveTask
+      operator: !type:RandomOperator
+        targetKey: IdleTime
+        minKey: MinimumIdleTime
+        maxKey: MaximumIdleTime
+
+    - !type:HTNPrimitiveTask
+      preconditions:
+      - !type:KeyExistsPrecondition
+        key: IdleTime
+      operator: !type:WaitOperator
+        key: IdleTime
+      services:
+      - !type:UtilityService
+        id: InfectService
+        proto: RMCNearbyDownInfectable
+        key: TargetDown
+
+- type: htnCompound
+  id: RMCParasiteIdle
+  branches:
+  - tasks:
+
+     - !type:HTNPrimitiveTask
+       operator: !type:SetFloatOperator
+         targetKey: MinimumIdleTime
+         amount: 15
+
+     - !type:HTNPrimitiveTask
+       operator: !type:SetFloatOperator
+         targetKey: MaximumIdleTime
+         amount: 25
+
+     - !type:HTNPrimitiveTask
+       operator: !type:RandomOperator
+         targetKey: IdleTime
+         minKey: MinimumIdleTime
+         maxKey: MaximumIdleTime
+
+     - !type:HTNPrimitiveTask
+       preconditions:
+       - !type:KeyExistsPrecondition
+         key: IdleTime
+       operator: !type:WaitOperator
+         key: IdleTime
+
+     - !type:HTNPrimitiveTask
+       operator: !type:UtilityOperator
+         proto: RMCNearbyEggs
+         key: Egg
+
+     - !type:HTNPrimitiveTask
+       preconditions:
+       - !type:KeyExistsPrecondition
+         key: Egg
+       - !type:TargetInRangePrecondition
+         targetKey: Egg
+         rangeKey: InteractRange
+       - !type:TargetInLOSPrecondition
+         targetKey: Egg
+         rangeKey: InteractRange
+       operator: !type:InteractWithOperator
+         targetKey: Egg
+
+       services:
+       - !type:UtilityService
+         id: EggService
+         proto: RMCNearbyEggs
+         key: Egg
+
+- type: utilityQuery
+  id: RMCNearbyLeapInfectable
+  query:
+  - !type:NearbyHostilesQuery
+  considerations:
+  - !type:TargetInfectableCon
+    curve: !type:BoolCurve
+  - !type:TargetIsNotDeadCon
+    curve: !type:BoolCurve
+  - !type:TargetIsStandingCon
+    curve: !type:BoolCurve
+  - !type:TargetDistanceCon
+    curve: !type:PresetCurve
+      preset: TargetDistance
+  - !type:TargetAccessibleCon
+    curve: !type:BoolCurve
+  - !type:TargetInLOSOrCurrentCon
+    curve: !type:BoolCurve
+
+- type: utilityQuery
+  id: RMCNearbyDownInfectable
+  query:
+  - !type:NearbyHostilesQuery
+  considerations:
+  - !type:TargetInfectableCon
+    curve: !type:BoolCurve
+  - !type:TargetIsNotDeadCon
+    curve: !type:BoolCurve
+  - !type:TargetIsDownCon
+    curve: !type:BoolCurve
+  - !type:TargetDistanceCon
+    curve: !type:PresetCurve
+      preset: TargetDistance
+  - !type:TargetAccessibleCon
+    curve: !type:BoolCurve
+  - !type:TargetInLOSOrCurrentCon
+    curve: !type:BoolCurve
+
+- type: utilityQuery
+  id: RMCNearbyEggs
+  query:
+  - !type:ComponentQuery
+    components:
+    - type: XenoEgg
+  considerations:
+  - !type:TargetOpenEggCon
+    curve: !type:BoolCurve
+  - !type:TargetDistanceCon
+    curve: !type:PresetCurve
+      preset: TargetDistance
+  - !type:TargetAccessibleCon
+    curve: !type:BoolCurve
+  - !type:TargetInLOSOrCurrentCon
+    curve: !type:BoolCurve

@@ -36,7 +36,7 @@ public record struct AttachableWeaponRangedModifierSet(
     AttachableModifierConditions? Conditions,
     FixedPoint2 AccuracyAddMult, // Not implemented yet. Added to have all the values already on our attachments, so whoever implements this doesn't need to dig through CM13. Remove this comment once implemented.
     FixedPoint2 AccuracyMovementPenaltyAddMult, // As above.
-    FixedPoint2 DamageFalloffAddMult, // As above.
+    FixedPoint2 DamageFalloffAddMult, // This affects the damage falloff of all shots fired by the weapon. Conversion to RMC: damage_falloff_mod
     double BurstScatterAddMult, // This affects scatter during burst and full-auto fire. Conversion to RMC: burst_scatter_mod
     int ShotsPerBurstFlat, // Modifies the maximum number of shots in a burst.
     FixedPoint2 DamageAddMult, // Additive multiplier to damage.
