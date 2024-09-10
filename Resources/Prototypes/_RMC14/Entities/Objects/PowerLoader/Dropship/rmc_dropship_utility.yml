@@ -37,7 +37,7 @@
       sprite: _RMC14/Objects/dropship_utility_attachments.rsi
       state: medevac_system_deployed
     activateDelay: 60
-    activateInTransit: true
+    activateInTransport: true
     skills:
       all:
         RMCSkillMedical: 2
