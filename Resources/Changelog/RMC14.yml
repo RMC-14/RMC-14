@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added all Lurker abilities and most of the Spitter's abilities.
-    type: Add
-  - message: Enabled the Spitter, Lurker and Warrior evolutions.
-    type: Add
-  id: 172
-  time: '2024-06-23T11:13:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2566
 - author: Whisper
   changes:
   - message: Added medical guidebook.
@@ -4398,5 +4389,12 @@
   id: 671
   time: '2024-09-10T22:26:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3422
+- author: CaasGit
+  changes:
+  - message: Allow for body bags to be health scanned.
+    type: Fix
+  id: 672
+  time: '2024-09-10T22:39:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3919
 Name: RMC14
 Order: -1
