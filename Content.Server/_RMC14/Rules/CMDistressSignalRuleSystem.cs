@@ -493,20 +493,19 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (distress.Result == DistressSignalRuleResult.None)
                 continue;
 
-            SoundSpecifier? audio = distress.Result switch
+            var audio = distress.Result switch
             {
                 DistressSignalRuleResult.None => null,
-                // TODO RMC14
-                // DistressSignalRuleResult.MajorMarineVictory => distress.MajorMarineAudio,
-                // DistressSignalRuleResult.MinorMarineVictory => distress.MinorMarineAudio,
-                // DistressSignalRuleResult.MajorXenoVictory => distress.MajorXenoAudio,
-                // DistressSignalRuleResult.MinorXenoVictory => distress.MinorXenoAudio,
+                DistressSignalRuleResult.MajorMarineVictory => distress.MajorMarineAudio,
+                DistressSignalRuleResult.MinorMarineVictory => distress.MinorMarineAudio,
+                DistressSignalRuleResult.MajorXenoVictory => distress.MajorXenoAudio,
+                DistressSignalRuleResult.MinorXenoVictory => distress.MinorXenoAudio,
                 // DistressSignalRuleResult.AllDied => distress.AllDiedAudio,
-                _ => null
+                _ => null,
             };
 
             if (audio != null)
-                _audio.PlayGlobal(_audio.GetSound(audio), Filter.Broadcast(), true, AudioParams.Default.WithVolume(0));
+                _audio.PlayGlobal(_audio.GetSound(audio), Filter.Broadcast(), true, AudioParams.Default.WithVolume(-4));
         }
     }
 
