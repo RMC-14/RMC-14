@@ -1,13 +1,14 @@
-rmc-medivac-activate-beacon-verb = Activate Medevac
+rmc-medevac-activate-beacon-verb = Activate Medevac
 
-rmc-medivac-area-not-cas = INVALID TARGET: stretcher must be visible from high altitude.
-rmc-medivac-activate-beacon = Stretcher beacon is now active.
-rmc-medivac-area-no-patient = No patient on the stretcher
+rmc-medevac-area-not-cas = INVALID TARGET: stretcher must be visible from high altitude.
+rmc-medevac-activate-beacon = Stretcher beacon is now active.
+rmc-medevac-inactivate-beacon = Stretcher beacon is now inactive.
+rmc-medevac-area-no-patient = No patient on the stretcher
 
-rmc-medivac-no-target = No target found
+rmc-medevac-no-target = No target found
 
-rmc-medivac-target-abbreviation = M-{$id}
+rmc-medevac-target-abbreviation = M-{$id}
 
-rmc-medivac-stretcher-examine-id = Tracking ID for CAS: {$id}.
+rmc-medevac-stretcher-examine-id = Tracking ID for CAS: {$id}.
 
-rmc-medivac-stretcher-failure = Target stretcher is not properly setup
+rmc-medevac-stretcher-failure = Target stretcher is not properly setup

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Content.Shared._RMC14.Dropship.Utility;
 
 [RegisterComponent]
-public sealed partial class MedivacComponent : Component
+public sealed partial class MedevacComponent : Component
 {
     public const string AnimationState = "medevac_system_active";
     public const string AnimationDelay = "medevac_system_delay";

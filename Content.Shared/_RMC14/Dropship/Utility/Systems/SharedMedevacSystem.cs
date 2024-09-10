@@ -1,8 +1,7 @@
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Utility;
-using Content.Shared._RMC14.Dropship.Utility.Events;
 using Content.Shared._RMC14.Dropship.Weapon;
-using Content.Shared._RMC14.Medical.MedivacStretcher;
+using Content.Shared._RMC14.Medical.MedevacStretcher;
 using Content.Shared._RMC14.Sprite;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
@@ -21,7 +20,7 @@ using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Dropship.Utility;
 
-public abstract partial class SharedMedivacSystem : EntitySystem
+public abstract partial class SharedMedevacSystem : EntitySystem
 {
     [Dependency] private readonly EntityManager _entityManager = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
@@ -31,7 +30,7 @@ public abstract partial class SharedMedivacSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedMedivacStretcherSystem _stretcherSystem = default!;
+    [Dependency] private readonly SharedMedevacStretcherSystem _stretcherSystem = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
 
@@ -39,17 +38,17 @@ public abstract partial class SharedMedivacSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MedivacComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<MedivacComponent, InteractHandEvent>(OnInteract);
-        //SubscribeLocalEvent<MedivacComponent, MedivacDoAfterEvent>(OnMedivacDoAfter);
+        SubscribeLocalEvent<MedevacComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<MedevacComponent, InteractHandEvent>(OnInteract);
+        //SubscribeLocalEvent<MedevacComponent, MedevacDoAfterEvent>(OnMedevacDoAfter);
     }
 
-    private void OnInit(Entity<MedivacComponent> ent, ref ComponentInit args)
+    private void OnInit(Entity<MedevacComponent> ent, ref ComponentInit args)
     {
-        _useDelay.SetLength(ent.Owner, ent.Comp.DelayLength, MedivacComponent.AnimationDelay);
+        _useDelay.SetLength(ent.Owner, ent.Comp.DelayLength, MedevacComponent.AnimationDelay);
     }
 
-    private void OnInteract(Entity<MedivacComponent> ent, ref InteractHandEvent args)
+    private void OnInteract(Entity<MedevacComponent> ent, ref InteractHandEvent args)
     {
         // This component should only be called via the utility attachement point passing the
         // InteractHandEvent. Direct intraction with this component should be ignored
@@ -71,7 +70,7 @@ public abstract partial class SharedMedivacSystem : EntitySystem
         EntityCoordinates targetCoord = ent.Owner.ToCoordinates();
         if (utilComp.Target is null)
         {
-            _popup.PopupClient(Loc.GetString("rmc-medivac-no-target"), targetCoord, args.User);
+            _popup.PopupClient(Loc.GetString("rmc-medevac-no-target"), targetCoord, args.User);
             return;
         }
 
@@ -84,23 +83,23 @@ public abstract partial class SharedMedivacSystem : EntitySystem
             return;
         }
 
-        var ev = new PrepareMedivacEvent(_entityManager.GetNetEntity(args.Target));
+        var ev = new PrepareMedevacEvent(_entityManager.GetNetEntity(args.Target));
         RaiseLocalEvent(utilComp.Target.Value, ev);
 
-        if (ev.ReadyForMedivac)
+        if (ev.ReadyForMedevac)
         {
             //_dropshipUtility.ResetActivationCooldown(dropshipUtilEnt);
-            _appearanceSystem.SetData(args.Target, DropshipUtilityVisuals.State, MedivacComponent.AnimationState);
+            _appearanceSystem.SetData(args.Target, DropshipUtilityVisuals.State, MedevacComponent.AnimationState);
             ent.Comp.IsActivated = true;
-            _useDelay.TryResetDelay(ent.Owner, id: MedivacComponent.AnimationDelay);
+            _useDelay.TryResetDelay(ent.Owner, id: MedevacComponent.AnimationDelay);
         }
         else
         {
-            _popup.PopupClient("rmc-medivac-stretcher-failure", targetCoord, args.User);
+            _popup.PopupClient("rmc-medevac-stretcher-failure", targetCoord, args.User);
         }
     }
 
-    private void OnMedivacDoAfter(Entity<MedivacComponent> ent)
+    private void OnMedevacDoAfter(Entity<MedevacComponent> ent)
     {
         if (!TryComp(ent.Owner, out DropshipUtilityComponent? utilComp))
         {
@@ -114,7 +113,7 @@ public abstract partial class SharedMedivacSystem : EntitySystem
         }
 
         if (target is null ||
-            !TryComp(target, out MedivacStretcherComponent? stretcherComp))
+            !TryComp(target, out MedevacStretcherComponent? stretcherComp))
         {
             return;
         }
@@ -128,7 +127,7 @@ public abstract partial class SharedMedivacSystem : EntitySystem
         {
             _appearanceSystem.SetData(utilAttachPointEntityUid.Value, DropshipUtilityVisuals.State, utilComp.UtilityAttachedSprite.RsiState);
         }
-        _stretcherSystem.Medivac(stretcherEnt, ent.Owner);
+        _stretcherSystem.Medevac(stretcherEnt, ent.Owner);
 
         _dropshipUtility.ResetActivationCooldown(dropshipUtilEnt);
     }
@@ -137,8 +136,8 @@ public abstract partial class SharedMedivacSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var medivacQuery = AllEntityQuery<MedivacComponent>();
-        while (medivacQuery.MoveNext(out EntityUid ent, out MedivacComponent? medicomp))
+        var medevacQuery = AllEntityQuery<MedevacComponent>();
+        while (medevacQuery.MoveNext(out EntityUid ent, out MedevacComponent? medicomp))
         {
             if (!TryComp(ent, out UseDelayComponent? delayComp))
             {
@@ -146,9 +145,9 @@ public abstract partial class SharedMedivacSystem : EntitySystem
             }
 
             if (medicomp.IsActivated &&
-                !_useDelay.IsDelayed((ent, delayComp), MedivacComponent.AnimationDelay))
+                !_useDelay.IsDelayed((ent, delayComp), MedevacComponent.AnimationDelay))
             {
-                OnMedivacDoAfter((ent, medicomp));
+                OnMedevacDoAfter((ent, medicomp));
             }
         }
     }

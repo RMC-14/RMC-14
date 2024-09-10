@@ -11,4 +11,4 @@ using System.Threading.Tasks;
 
 namespace Content.Client._RMC14.Dropship.Utility;
 
-public sealed partial class MedivacSystem : SharedMedivacSystem;
+public sealed partial class MedevacSystem : SharedMedevacSystem;

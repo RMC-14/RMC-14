@@ -87,7 +87,7 @@
   name: Medevac stretcher
   description: A collapsible stretcher that can be activated to send patients to an overhead dropship.
   components:
-  - type: MedivacStretcher
+  - type: MedevacStretcher
   - type: Transform
     noRot: true
   - type: Item
@@ -158,11 +158,11 @@
         unfoldedLayer:
           True: {visible: false}
           False: {visible: true}
-      enum.MedivacStretcherVisuals.BeaconState:
+      enum.MedevacStretcherVisuals.BeaconState:
         buckledBeaconLayer:
           On: {visible: true}
           Off: {visible: false}
-      enum.MedivacStretcherVisuals.MedivacingState:
+      enum.MedevacStretcherVisuals.MedevacingState:
         buckledLayer:
           True: {state: winched_stretcher}
           False: {state: stretcher_box}

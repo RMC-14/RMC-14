@@ -41,5 +41,5 @@
     skills:
       all:
         RMCSkillMedical: 2
-  - type: Medivac
+  - type: Medevac
   - type: AnimationPlayer

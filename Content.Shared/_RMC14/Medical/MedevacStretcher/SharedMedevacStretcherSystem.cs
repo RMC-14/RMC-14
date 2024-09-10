@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Dropship.Utility;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Medical.MedevacStretcher;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates;
@@ -24,9 +25,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Content.Shared._RMC14.Medical.MedivacStretcher;
+namespace Content.Shared._RMC14.Medical.MedevacStretcher;
 
-public abstract partial class SharedMedivacStretcherSystem : EntitySystem
+public abstract partial class SharedMedevacStretcherSystem : EntitySystem
 {
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly AreaSystem _areas = default!;
@@ -46,35 +47,35 @@ public abstract partial class SharedMedivacStretcherSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<MedivacStretcherComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<MedivacStretcherComponent, GetVerbsEvent<InteractionVerb>>(AddActivateBeaconVerb);
-        SubscribeLocalEvent<MedivacStretcherComponent, FoldedEvent>(OnFold);
-        SubscribeLocalEvent<MedivacStretcherComponent, PrepareMedivacEvent>(PrepareMedivac);
-        SubscribeLocalEvent<MedivacStretcherComponent, ExaminedEvent>(OnExamine);
-        SubscribeLocalEvent<MedivacStretcherComponent, InteractHandEvent>(OnInteract);
-        SubscribeLocalEvent<MedivacStretcherComponent, StrapAttemptEvent>(OnTryStrap);
+        SubscribeLocalEvent<MedevacStretcherComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<MedevacStretcherComponent, GetVerbsEvent<InteractionVerb>>(AddActivateBeaconVerb);
+        SubscribeLocalEvent<MedevacStretcherComponent, FoldedEvent>(OnFold);
+        SubscribeLocalEvent<MedevacStretcherComponent, PrepareMedevacEvent>(PrepareMedevac);
+        SubscribeLocalEvent<MedevacStretcherComponent, ExaminedEvent>(OnExamine);
+        SubscribeLocalEvent<MedevacStretcherComponent, InteractHandEvent>(OnInteract);
+        SubscribeLocalEvent<MedevacStretcherComponent, StrapAttemptEvent>(OnTryStrap);
     }
 
-    public void Medivac(Entity<MedivacStretcherComponent> ent, EntityUid medivacEntity)
+    public void Medevac(Entity<MedevacStretcherComponent> ent, EntityUid medevacEntity)
     {
         if (!TryComp(ent.Owner, out StrapComponent? strapComp))
         {
             return;
         }
-        var slot = _container.EnsureContainer<ContainerSlot>(ent.Owner, MedivacStretcherComponent.BuckledSlotId);
+        var slot = _container.EnsureContainer<ContainerSlot>(ent.Owner, MedevacStretcherComponent.BuckledSlotId);
 
         if (slot.ContainedEntity is not { } buckled)
         {
             return;
         }
-        _transformSystem.PlaceNextTo(buckled, medivacEntity);
+        _transformSystem.PlaceNextTo(buckled, medevacEntity);
         DeactivateBeacon(ent.Owner);
         _appearance.SetData(ent.Owner, StrapVisuals.State, false);
     }
 
-    private void Unstrap(Entity<MedivacStretcherComponent> ent, EntityUid user)
+    private void Unstrap(Entity<MedevacStretcherComponent> ent, EntityUid user)
     {
-        var slot = _container.EnsureContainer<ContainerSlot>(ent.Owner, MedivacStretcherComponent.BuckledSlotId);
+        var slot = _container.EnsureContainer<ContainerSlot>(ent.Owner, MedevacStretcherComponent.BuckledSlotId);
         if (slot.ContainedEntity is null)
         {
             return;
@@ -90,20 +91,20 @@ public abstract partial class SharedMedivacStretcherSystem : EntitySystem
         _container.Remove(slot.ContainedEntity.Value, slot);
     }
 
-    private void OnInit(Entity<MedivacStretcherComponent> ent, ref ComponentInit args)
+    private void OnInit(Entity<MedevacStretcherComponent> ent, ref ComponentInit args)
     {
         ent.Comp.Id = _dropshipWeaponSystem.ComputeNextId();
     }
 
-    private void OnExamine(Entity<MedivacStretcherComponent> ent, ref ExaminedEvent args)
+    private void OnExamine(Entity<MedevacStretcherComponent> ent, ref ExaminedEvent args)
     {
-        using (args.PushGroup(nameof(MedivacStretcherComponent)))
+        using (args.PushGroup(nameof(MedevacStretcherComponent)))
         {
-            args.PushText(Loc.GetString("rmc-medivac-stretcher-examine-id", ("id", ent.Comp.Id)));
+            args.PushText(Loc.GetString("rmc-medevac-stretcher-examine-id", ("id", ent.Comp.Id)));
         }
     }
 
-    private void AddActivateBeaconVerb(Entity<MedivacStretcherComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
+    private void AddActivateBeaconVerb(Entity<MedevacStretcherComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
     {
         var (uid, comp) = ent;
 
@@ -117,14 +118,14 @@ public abstract partial class SharedMedivacStretcherSystem : EntitySystem
         var @event = args;
         args.Verbs.Add(new InteractionVerb()
         {
-            Text = Loc.GetString("rmc-medivac-activate-beacon-verb"),
+            Text = Loc.GetString("rmc-medevac-activate-beacon-verb"),
             Act = () =>
             {
                 ActivateBeacon(@event.Target, @event.User);
             },
             Priority = 1
         });
-        var slot = _container.EnsureContainer<ContainerSlot>(ent.Owner, MedivacStretcherComponent.BuckledSlotId);
+        var slot = _container.EnsureContainer<ContainerSlot>(ent.Owner, MedevacStretcherComponent.BuckledSlotId);
         if (slot.Count > 0)
         {
             args.Verbs.Add(new InteractionVerb()
@@ -140,7 +141,7 @@ public abstract partial class SharedMedivacStretcherSystem : EntitySystem
         }
     }
 
-    private void OnFold(Entity<MedivacStretcherComponent> ent, ref FoldedEvent args)
+    private void OnFold(Entity<MedevacStretcherComponent> ent, ref FoldedEvent args)
     {
         if (args.IsFolded)
         {
@@ -148,24 +149,24 @@ public abstract partial class SharedMedivacStretcherSystem : EntitySystem
         }
     }
 
-    private void PrepareMedivac(Entity<MedivacStretcherComponent> ent, ref PrepareMedivacEvent args)
+    private void PrepareMedevac(Entity<MedevacStretcherComponent> ent, ref PrepareMedevacEvent args)
     {
         if (!TryComp(ent.Owner, out StrapComponent? strapComp))
         {
             return;
         }
 
-        var slot = _container.EnsureContainer<ContainerSlot>(ent.Owner, MedivacStretcherComponent.BuckledSlotId);
+        var slot = _container.EnsureContainer<ContainerSlot>(ent.Owner, MedevacStretcherComponent.BuckledSlotId);
 
         if (slot.ContainedEntity is not { } buckled)
         {
             return;
         }
-        _appearance.SetData(ent.Owner, MedivacStretcherVisuals.MedivacingState, true);
-        args.ReadyForMedivac = true;
+        _appearance.SetData(ent.Owner, MedevacStretcherVisuals.MedevacingState, true);
+        args.ReadyForMedevac = true;
     }
 
-    private void OnInteract(Entity<MedivacStretcherComponent> ent, ref InteractHandEvent args)
+    private void OnInteract(Entity<MedevacStretcherComponent> ent, ref InteractHandEvent args)
     {
         if (args.Handled)
         {
@@ -182,9 +183,9 @@ public abstract partial class SharedMedivacStretcherSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnTryStrap(Entity<MedivacStretcherComponent> ent, ref StrapAttemptEvent args)
+    private void OnTryStrap(Entity<MedevacStretcherComponent> ent, ref StrapAttemptEvent args)
     {
-        var slot = _container.EnsureContainer<ContainerSlot>(ent.Owner, MedivacStretcherComponent.BuckledSlotId);
+        var slot = _container.EnsureContainer<ContainerSlot>(ent.Owner, MedevacStretcherComponent.BuckledSlotId);
         _container.Insert(args.Buckle.Owner, slot);
         _appearance.SetData(ent.Owner, StrapVisuals.State, true);
 
@@ -219,31 +220,31 @@ public abstract partial class SharedMedivacStretcherSystem : EntitySystem
             (!_areas.TryGetArea(stretcher.ToCoordinates().SnapToGrid(_entites, _mapManager), out _, out var stretcherArea) ||
             !stretcherArea.Medevac))
         {
-            _popup.PopupClient(Loc.GetString("rmc-medivac-area-not-cas"), stretcherCoords, user);
+            _popup.PopupClient(Loc.GetString("rmc-medevac-area-not-cas"), stretcherCoords, user);
             return false;
         }
 
-        var slot = _container.EnsureContainer<ContainerSlot>(stretcher, MedivacStretcherComponent.BuckledSlotId);
+        var slot = _container.EnsureContainer<ContainerSlot>(stretcher, MedevacStretcherComponent.BuckledSlotId);
         if (!TryComp(stretcher, out StrapComponent? strapComp) ||
             slot.Count == 0)
         {
-            _popup.PopupClient(Loc.GetString("rmc-medivac-area-no-patient"), stretcherCoords, user);
+            _popup.PopupClient(Loc.GetString("rmc-medevac-area-no-patient"), stretcherCoords, user);
             return false;
         }
 
-        if (!TryComp(stretcher, out MedivacStretcherComponent? stretcherComp))
+        if (!TryComp(stretcher, out MedevacStretcherComponent? stretcherComp))
         {
             return false;
         }
 
         var targetComp = new DropshipTargetComponent()
         {
-            Abbreviation = GetMedivacAbbreviation(stretcherComp.Id),
+            Abbreviation = GetMedevacAbbreviation(stretcherComp.Id),
             IsTargetableByWeapons = false
         };
         AddComp(stretcher, targetComp, true);
-        _appearance.SetData(stretcher, MedivacStretcherVisuals.BeaconState, BeaconVisuals.On);
-        _popup.PopupClient(Loc.GetString("rmc-medivac-activate-beacon"), stretcherCoords, user);
+        _appearance.SetData(stretcher, MedevacStretcherVisuals.BeaconState, BeaconVisuals.On);
+        _popup.PopupClient(Loc.GetString("rmc-medevac-activate-beacon"), stretcherCoords, user);
         return true;
     }
 
@@ -254,23 +255,23 @@ public abstract partial class SharedMedivacStretcherSystem : EntitySystem
             return true;
         }
         RemCompDeferred<DropshipTargetComponent>(stretcher);
-        _appearance.SetData(stretcher, MedivacStretcherVisuals.BeaconState, BeaconVisuals.Off);
-        _appearance.SetData(stretcher, MedivacStretcherVisuals.MedivacingState, false);
+        _appearance.SetData(stretcher, MedevacStretcherVisuals.BeaconState, BeaconVisuals.Off);
+        _appearance.SetData(stretcher, MedevacStretcherVisuals.MedevacingState, false);
         return true;
     }
 
-    private string GetMedivacAbbreviation(int id)
+    private string GetMedevacAbbreviation(int id)
     {
-        return Loc.GetString("rmc-medivac-target-abbreviation", ("id", id));
+        return Loc.GetString("rmc-medevac-target-abbreviation", ("id", id));
     }
 
 }
 
 [Serializable, NetSerializable]
-public enum MedivacStretcherVisuals : byte
+public enum MedevacStretcherVisuals : byte
 {
     BeaconState,
-    MedivacingState
+    MedevacingState
 }
 
 [Serializable, NetSerializable]

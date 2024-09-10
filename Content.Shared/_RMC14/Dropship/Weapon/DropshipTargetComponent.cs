@@ -1,10 +1,10 @@
-using Content.Shared._RMC14.Medical.MedivacStretcher;
+using Content.Shared._RMC14.Medical.MedevacStretcher;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Dropship.Weapon;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access([typeof(SharedDropshipWeaponSystem), typeof(SharedMedivacStretcherSystem)])]
+[Access([typeof(SharedDropshipWeaponSystem), typeof(SharedMedevacStretcherSystem)])]
 public sealed partial class DropshipTargetComponent : Component
 {
     [DataField, AutoNetworkedField]
