@@ -1,32 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: The health analyzer now identifies chest-bursted marines as permanently
-      deceased
-    type: Add
-  id: 163
-  time: '2024-06-18T21:45:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2540
-- author: Nairodian
-  changes:
-  - message: Added the ability to deconstruct and make; chairs, fences, and light
-      fixtures.
-    type: Add
-  - message: Removed deconstruction for racks and crates.
-    type: Remove
-  id: 164
-  time: '2024-06-18T23:44:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2531
-- author: Sigil
-  changes:
-  - message: Added the systems for attachments.
-    type: Add
-  - message: Added the extended barrel, recoil compensator, suppressor, rail flashlight,
-      b8 smart-scope and underbarrel shotgun.
-    type: Add
-  id: 165
-  time: '2024-06-21T01:22:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2467
 - author: noisrevni-dev
   changes:
   - message: Added ASRS item search bar to ease supply crew searching for specific
@@ -4366,5 +4338,27 @@
   id: 662
   time: '2024-09-08T01:22:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3960
+- author: Vermidia
+  changes:
+  - message: Backpacks instant open on the floor
+    type: Fix
+  id: 663
+  time: '2024-09-10T22:17:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3969
+- author: Vermidia
+  changes:
+  - message: Fix Runner pull speed being much faster than it should be
+    type: Fix
+  id: 664
+  time: '2024-09-10T22:17:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3979
+- author: Vermidia
+  changes:
+  - message: Parasites now have AI. They will try to leap and infect nearby hosts,
+      and return to eggs on their own after some time.
+    type: Add
+  id: 665
+  time: '2024-09-10T22:18:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3928
 Name: RMC14
 Order: -1
