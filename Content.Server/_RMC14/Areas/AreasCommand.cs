@@ -55,7 +55,7 @@ public sealed class AreasCommand : ToolshedCommand
     [CommandImplementation("loadmortar")]
     public void LoadMortar()
     {
-        Load(a => a.Mortar);
+        Load(a => a.MortarFire);
     }
 
     private void Load(Predicate<AreaComponent> predicate)

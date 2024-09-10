@@ -75,3 +75,6 @@
 
 - type: Tag
   id: RMCDropshipUtilityPoint
+
+- type: Tag
+  id: RMCGlass

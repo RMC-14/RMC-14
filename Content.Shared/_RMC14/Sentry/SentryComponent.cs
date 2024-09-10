@@ -24,6 +24,12 @@ public sealed partial class SentryComponent : Component
     public TimeSpan MagazineDelay = TimeSpan.FromSeconds(7);
 
     [DataField, AutoNetworkedField]
+    public int DefenseCheckRange = 2;
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? ScrewdriverSound = new SoundPathSpecifier("/Audio/Items/screwdriver.ogg");
+
+    [DataField, AutoNetworkedField]
     public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillEngineer";
 
     [DataField, AutoNetworkedField]
@@ -48,7 +54,7 @@ public sealed partial class SentryComponent : Component
     public string ContainerSlotId = "gun_magazine";
 
     [DataField, AutoNetworkedField]
-    public EntProtoId[]? Upgrades = ["RMCSentryMini"];
+    public EntProtoId[]? Upgrades = ["RMCSentrySniper", "RMCSentryMini", "RMCSentryOmni"];
 }
 
 [Serializable, NetSerializable]

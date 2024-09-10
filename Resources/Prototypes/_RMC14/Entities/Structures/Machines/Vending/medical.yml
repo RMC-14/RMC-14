@@ -151,7 +151,7 @@
   - type: Transform
     anchored: true
   - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/med.rsi
+    sprite: _RMC14/Structures/Machines/VendingMachines/chem.rsi
     layers:
     - state: "off"
     - state: "normal-unshaded"
