@@ -4,12 +4,12 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
-  id: CMXenoDrone
+  id: CMXenoGardener
   name: Gardener
   description: An alien gardener drone.
   components:
   - type: GhostRole
-    name: cm-job-name-xeno-drone
+    name: cm-job-name-xeno-gardener
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Drone/gardener_drone.rsi # TODO: new sprite
   - type: MobState
@@ -27,13 +27,14 @@
       groups:
         Brute: 22.5
   - type: Xeno
-    role: CMXenoDrone
+    role: CMXenoGardener
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
     - ActionXenoPheromones
+    - ActionXenoOrderConstruction
     - ActionXenoPlantWeeds # TODO: replace with gardener weeds
     - ActionXenoPlantFruit
     - ActionXenoChooseFruit
@@ -48,6 +49,9 @@
     devolvesTo:
     - CMXenoLarva
   - type: XenoAcid
+  - type: XenoConstruction
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode
   - type: XenoFruitPlanter
     canPlant:
     - XenoFruitGreater
@@ -80,11 +84,13 @@
       components:
       - XenoParasite
       - XenoEgg
+      - XenoFruit
   - type: MultiHandedHolder
     items:
     - hands: 2
       whitelist:
         components:
+        - XenoParasite
         - XenoEgg
         - XenoFruit
   - type: RMCXenoDamageVisuals

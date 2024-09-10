@@ -45,31 +45,29 @@ namespace Content.Shared._RMC14.Xenonids.Fruit;
 public sealed class SharedXenoFruitSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly CMHandsSystem _rmcHands = default!;
     [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruct = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
-
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
 	private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
 	private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
@@ -88,13 +86,14 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         SubscribeLocalEvent<XenoChooseFruitActionComponent, XenoFruitChosenEvent>(OnActionFruitChosen);
 
         SubscribeLocalEvent<XenoFruitPlanterComponent, XenoPlantFruitActionEvent>(OnXenoPlantFruitAction);
-
+        SubscribeLocalEvent<XenoFruitPlanterComponent, XenoPlantFruitDoAfterEvent>(OnXenoPlantFruitDoAfter);
+/*
         SubscribeLocalEvent<XenoFruitComponent, AfterAutoHandleStateEvent>(OnXenoFruitAfterState);
         SubscribeLocalEvent<XenoFruitComponent, GettingPickedUpAttemptEvent>(OnXenoFruitPickedUpAttempt);
         SubscribeLocalEvent<XenoFruitComponent, InteractUsingEvent>(OnXenoFruitInteractUsing);
         SubscribeLocalEvent<XenoFruitComponent, AfterInteractEvent>(OnXenoFruitAfterInteract);
         SubscribeLocalEvent<XenoFruitComponent, ActivateInWorldEvent>(OnXenoFruitActivateInWorld);
-
+*/
         Subs.BuiEvents<XenoFruitPlanterComponent>(XenoChooseFruitUI.Key, subs =>
         {
             subs.Event<XenoChooseFruitBuiMsg>(OnXenoChooseFruitBui);
@@ -146,8 +145,49 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         if (attempt.Cancelled)
             return;
+
+        var coordinates = GetNetCoordinates(args.Target);
+        var ev = new XenoPlantFruitDoAfterEvent(coordinates, choice);
+        args.Handled = true;
+        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.PlantDelay, ev, xeno)
+        {
+            BreakOnMove = true
+        };
+
+        _doAfter.TryStartDoAfter(doAfter);
     }
 
+    private void OnXenoPlantFruitDoAfter(Entity<XenoFruitPlanterComponent> xeno, ref XenoPlantFruitDoAfterEvent args)
+    {
+        if (args.Handled || args.Cancelled)
+            return;
+
+        var coordinates = GetCoordinates(args.Coordinates);
+        if (!coordinates.IsValid(EntityManager) ||
+            !xeno.Comp.CanPlant.Contains(args.FruitId) ||
+            !CanPlantOnTilePopup(xeno, args.FruitId, GetCoordinates(args.Coordinates), true, true))
+        {
+            return;
+        }
+
+        if (GetFruitPlasmaCost(args.FruitId) is { } cost &&
+            !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
+        {
+            return;
+        }
+
+        args.Handled = true;
+
+        if (_net.IsServer)
+        {
+            var fruit = Spawn(args.FruitId, coordinates);
+            // TODO: add the fruit to the gardener's list
+            _adminLogs.Add(LogType.RMCXenoPlantFruit, $"Xeno {ToPrettyString(xeno):xeno} planted {ToPrettyString(fruit):fruit} at {coordinates}");
+        }
+
+        // TODO: check if gardener's limit exceeded; if yes, remove first planted fruit
+    }
+/*
     private void OnXenoFruitAfterState(Entity<XenoFruitComponent> fruit, ref AfterAutoHandleStateEvent args)
     {
         var ev = new XenoFruitStateChangedEvent();
@@ -156,7 +196,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
     private void OnXenoFruitPickedUpAttempt(Entity<XenoFruitComponent> fruit, ref GettingPickedUpAttemptEvent args)
     {
-        if (fruit.Comp.State != XenoFruitState.Item)
+        if (fruit.Comp.State == XenoFruitState.Growing)
             args.Cancel();
     }
 
@@ -174,7 +214,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     {
 
     }
-
+*/
     public FixedPoint2? GetFruitPlasmaCost(EntProtoId prototype)
     {
         if (_prototype.TryIndex(prototype, out var fruitChoice) &&

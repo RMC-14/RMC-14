@@ -11,7 +11,7 @@ namespace Content.Shared._RMC14.Xenonids.Fruit;
 public sealed partial class XenoFruitComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public XenoFruitState State;
+    public XenoFruitState State = XenoFruitState.Growing;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan? GrowAt;

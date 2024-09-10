@@ -53,6 +53,9 @@ public sealed class XenoChooseFruitBui : BoundUserInterface
                 _buttons.Add(fruitId, control);
             }
         }
+
+        Refresh();
+        _window.OpenCentered();
     }
 
     protected override void Dispose(bool disposing)
