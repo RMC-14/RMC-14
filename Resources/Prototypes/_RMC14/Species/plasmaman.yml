@@ -19,6 +19,7 @@
   id: MobPlasmamanSprites
   sprites:
     Head: MobPlasmamanHead
+    Eyes: MobPlasmamanEyes
     Chest: MobPlasmamanTorso
     Eyes: MobHumanoidEyes
     Underwear: MobHumanoidAnyMarking
@@ -62,6 +63,12 @@
     Arms:
       points: 2
       required: false
+
+- type: humanoidBaseSprite
+  id: MobPlasmamanEyes
+  baseSprite:
+    sprite: _RMC14/Mobs/Plasmamen/parts.rsi
+    state: eyes
 
 - type: humanoidBaseSprite
   id: MobPlasmamanHead
