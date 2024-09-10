@@ -13,6 +13,22 @@
 
 - type: entity
   parent: ActionMarineBase
+  id: RMCActionCycleZoomLevel
+  name: Cycle Zoom Level
+  description: Change the level of magnification of your optics.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _RMC14/Actions/scope_actions.rsi
+      state: sniperscope
+    event: !type:ScopeCycleZoomLevelEvent
+    useDelay: 0.25
+  - type: Tag
+    tags:
+    - RMCActionCycleZoomLevel
+
+- type: entity
+  parent: ActionMarineBase
   id: CMActionToggleScoutVision
   name: Toggle the M42 scout sight
   description: Allows you to see even in complete darkness.
@@ -52,3 +68,6 @@
       state: whistle
     event: !type:SoundActionEvent
     useDelay: 10
+
+- type: Tag
+  id: RMCActionCycleZoomLevel

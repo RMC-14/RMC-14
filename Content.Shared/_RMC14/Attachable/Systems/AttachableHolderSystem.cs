@@ -76,6 +76,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, GetItemSizeModifiersEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GetFireModeValuesEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GetFireModesEvent>(RelayEvent);
+        SubscribeLocalEvent<AttachableHolderComponent, GetDamageFalloffEvent>(RelayEvent);
 
 
         CommandBinds.Builder
