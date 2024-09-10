@@ -1,0 +1,35 @@
+﻿- type: entity
+  parent: BaseMagazineRifle
+  id: RMCMagazineSentry
+  name: "M30 ammo drum (10x28mm Caseless)"
+  description: "An ammo drum of 500 10x28mm caseless rounds for the UN 571-C Sentry Gun. Just feed it into the sentry gun's ammo port when its ammo is depleted."
+  components:
+  - type: Item
+    size: Normal
+  - type: Tag
+    tags:
+    - RMCMagazineSentry
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeSentry
+    proto: RMCCartridgeSentry
+    capacity: 500
+    cycleable: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/un571c.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: Appearance
+
+- type: Tag
+  id: RMCMagazineSentry

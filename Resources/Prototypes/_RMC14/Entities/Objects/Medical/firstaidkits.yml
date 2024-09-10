@@ -18,7 +18,7 @@
     whitelist:
       tags:
       - DiscreteHealthAnalyzer
-      #      - TODO RMC14 CMDropper
+      - Dropper
       - Pill
       - Bottle
       - Syringe
@@ -38,6 +38,7 @@
       - CMSynthGraft
       - CMRollerBed
       - BodyBag
+      - Hypospray
       components:
       - Hypospray
   - type: Item

@@ -269,6 +269,16 @@ binds:
   type: State
   key: MouseMiddle
   canFocus: true
+- function: RotateObjectClockwise
+  type: State
+  key: R
+- function: RotateObjectCounterclockwise
+  type: State
+  key: R
+  mod1: Shift
+- function: FlipObject
+  type: State
+  key: F
 - function: TextCursorLeft
   type: State
   key: Left
@@ -455,8 +465,8 @@ binds:
 - function: OpenDecalSpawnWindow
   type: State
   key: F8
-- function: OpenScoreboardWindow
-  type: State
+- function: ToggleRoundEndSummaryWindow
+  type: Toggle
   key: F9
 - function: OpenSandboxWindow
   type: State
@@ -540,10 +550,6 @@ binds:
 - function: Hotbar9
   type: State
   key: Num9
-
-
-
-# RMC14
 - function: MappingUnselect
   type: State
   key: MouseRight
@@ -574,6 +580,10 @@ binds:
   type: State
   key: MouseRight
   canFocus: true
+
+
+
+# RMC14
 - function: RMCActivateAttachableRail
   type: State
   key: G

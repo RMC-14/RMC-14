@@ -181,3 +181,13 @@
   - type: StorageFill
     contents:
     - id: RMCBoxMagazineRevolverMarksmanM44
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineSentry
+  name: UA 571-C sentry ammunition (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSentry
+      amount: 2

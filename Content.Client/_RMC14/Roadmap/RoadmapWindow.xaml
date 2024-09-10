@@ -22,6 +22,7 @@
             <BoxContainer Name="Columns" Access="Public" Orientation="Horizontal">
                 <BoxContainer Name="FirstVersion" Access="Public" Orientation="Vertical" HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Current version" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Mortars" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Scout Kit" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Dropship modifications" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Close air support" />
@@ -34,14 +35,15 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Weapon attachments" Text="Each weapon will be able to be customized with different attachments, changing the weapon's stats" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Demolitionist Kit" Text="SADAR!!!" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Sniper Kit" Text="Sniper loadout for the squad weapons specialist. On completion, its ghillie suit will let you become partially cloaked, and the rifle will have special actions" />
-                    <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Grenadier Kit" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Squad automated vendors" Text="Where the marine roles get their equipment at round start" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Requisitions" Text="Department that buys supplies for the rest of the marines" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Marine squad orders" Text="The move, focus and hold orders. These are orders that specific marine roles can use to give a temporary buff to every marine around them" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Firearms skill" Text="Each marine role has a different firearms skill. This impacts how accurate they are with guns" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
-                    <controls:RoadmapItem ItemState="Partial" HeaderText="Crusher" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Crusher" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Specialist's Grenadier Kit" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Smoke grenades" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Fiorina Science Annex" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Spitter" Text="Protect your fellow Aliens with a corrosive acid spit, allowing you to damage hosts from a distance and deny areas or lanes of fire to them. Use your strong acid to quickly destroy equipment" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="USS LCS-14 Savannah" Text="A new ship map for marines to spawn on. Contributed by Tunguso4ka" />
@@ -61,11 +63,10 @@
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Carrier" Text="Carry parasites around, allowing the Hive to impregnate new hosts on the move. Use pheromones to assist fellow Aliens" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Burrower" Text="Lay the foundations for resin traps in strategic locations or the Hive's flanks. Flank your way around the map with the tunnel ability and dig tunnels to allow for quick transportation of fellow Aliens from the hive to the frontlines" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Blood types" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Tier 3 xenos" Text="Praetorian, Boiler and Ravager" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Tier 3 xenos" Text="Praetorian and Ravager" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Limb damage" Text="Each limb on a marine will be able to take damage separately, being able to detach upon receiving too much damage and requiring individual treatment" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Pain and painkillers" Text="Wounds will cause pain which can be dulled with painkillers" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="More surgeries" Text="Foreign object removal, internal bleeding surgery, fractures" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Smoke grenades" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Bullet damage fall-off" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Construction skill" Text="Allows you to build more advanced constructs" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Engineering skill" Text="Allows you to repair and hack more advanced constructs" />
@@ -83,7 +84,6 @@
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Emergency responders" Text="A faction that randomly spawns, with their own objectives" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Orbital bombardment" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Intelligence officer" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Mortars" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Chemical research" Text="Chemicals with random recipes, ingredients and effects" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Xeno strains" Text="Variations of a xeno caste with different stats and abilities" />
                 </BoxContainer>

@@ -11,6 +11,7 @@
     anchored: false
   - type: Physics
     bodyType: Static
+    canCollide: false
   - type: Clickable
   - type: InteractionOutline
   - type: WallMount
@@ -82,3 +83,5 @@
         type: RMCCameraBui
   - type: RMCCameraComputer
     id: RMCSurveillanceCameraAlmayer
+  - type: WallMount
+    arc: 360

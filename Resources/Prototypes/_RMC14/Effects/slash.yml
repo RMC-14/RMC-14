@@ -1,0 +1,15 @@
+- type: entity
+  id: RMCEffectExtraSlash
+  noSpawn: true
+  components:
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: Sprite
+    sprite: _RMC14/Effects/attacks.rsi
+    noRot: true
+    state: slash
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu

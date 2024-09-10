@@ -115,6 +115,8 @@
     enabled: false
   - type: PoweredLight
     bulb: Tube
+    unarmedHitShock: 0
+  - type: DamageOnInteract
     damage:
       types:
         Heat: 2
@@ -199,6 +201,8 @@
     enabled: true
   - type: PoweredLight
     hasLampOnSpawn: CMLightTube
+    unarmedHitShock: 0
+  - type: DamageOnInteract
     damage:
       types:
         Heat: 2
@@ -348,6 +352,8 @@
     offset: "0, -0.5"
   - type: PoweredLight
     bulb: Bulb
+    unarmedHitShock: 0
+  - type: DamageOnInteract
     damage:
       types:
         Heat: 2
@@ -397,6 +403,8 @@
     enabled: true
   - type: PoweredLight
     hasLampOnSpawn: CMLightBulb
+    unarmedHitShock: 0
+  - type: DamageOnInteract
     damage:
       types:
         Heat: 2

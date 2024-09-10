@@ -81,8 +81,8 @@
       entries:
       - id: RMCBinoculars
         points: 5
-    #- id: CMRangeFinder
-    #  points: 10
+      - id: RMCRangefinder
+        points: 10
       - id: RMCLaserDesignator
         points: 15
     - name: Helmet Optics
@@ -95,8 +95,8 @@
       entries:
       - id: CMPamphletJTAC
         points: 15
-    #- id: CMPamphletEngineering
-    #  points: 15
+      - id: CMPamphletEngineer
+        points: 15
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer

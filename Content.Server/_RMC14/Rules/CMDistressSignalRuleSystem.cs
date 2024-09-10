@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Rules.CrashLand;
@@ -118,10 +117,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [ViewVariables]
     public readonly Dictionary<string, float> MarinesPerXeno = new()
     {
-        ["/Maps/_RMC14/lv624.yml"] = 4.25f,
-        ["/Maps/_RMC14/solaris.yml"] = 6.75f,
-        ["/Maps/_RMC14/prison.yml"] = 5.75f,
-        ["/Maps/_RMC14/shiva.yml"] = 6.75f,
+        ["/Maps/_RMC14/lv624.yml"] = 4.5f,
+        ["/Maps/_RMC14/solaris.yml"] = 8f,
+        ["/Maps/_RMC14/prison.yml"] = 7.5f,
+        ["/Maps/_RMC14/shiva.yml"] = 6.5f,
     };
 
     private readonly List<MapId> _almayerMaps = [];
@@ -214,6 +213,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 continue;
             }
 
+            SpawnSquads((uid, comp));
             SpawnAdminFaxArea();
 
             var bioscan = Spawn(null, MapCoordinates.Nullspace);
@@ -420,6 +420,15 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         }
     }
 
+    private void SpawnSquads(Entity<CMDistressSignalRuleComponent> rule)
+    {
+        foreach (var id in rule.Comp.SquadIds)
+        {
+            if (!rule.Comp.Squads.ContainsKey(id))
+                rule.Comp.Squads[id] = Spawn(id);
+        }
+    }
+
     private void OnPlayerSpawning(PlayerSpawningEvent ev)
     {
         if (ev.Job?.Prototype is not { } jobId ||
@@ -432,7 +441,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         var query = QueryActiveRules();
         while (query.MoveNext(out _, out _, out var comp, out _))
         {
-            if (GetSpawner(comp, job) is not { } spawnerInfo)
+            var squadPreference = ev.HumanoidCharacterProfile?.SquadPreference;
+            if (GetSpawner(comp, job, squadPreference) is not { } spawnerInfo)
                 return;
 
             var (spawner, squad) = spawnerInfo;
@@ -661,7 +671,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 },
             };
 
-            _damageable.TryChangeDamage(crashLandable, damage, true);
+            _damageable.TryChangeDamage(crashLandable, damage);
             _transform.SetMapCoordinates(crashLandable, _transform.ToMapCoordinates(targetCoords));
             break;
         }
@@ -804,7 +814,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (xenosAlive && !marinesAlive)
             {
                 distress.Result = DistressSignalRuleResult.MajorXenoVictory;
-                EndRound(distress);
+                EndRound();
                 continue;
             }
 
@@ -814,13 +824,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (distress.Hijack)
                 {
                     distress.Result = DistressSignalRuleResult.MinorXenoVictory;
-                    EndRound(distress);
+                    EndRound();
                     continue;
                 }
                 else
                 {
                     distress.Result = DistressSignalRuleResult.MajorMarineVictory;
-                    EndRound(distress);
+                    EndRound();
                     continue;
                 }
             }
@@ -828,7 +838,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (!xenosAlive && !marinesAlive)
             {
                 distress.Result = DistressSignalRuleResult.AllDied;
-                EndRound(distress);
+                EndRound();
                 continue;
             }
 
@@ -850,12 +860,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (_xenoEvolution.HasLiving<XenoComponent>(4))
                 {
                     distress.Result = DistressSignalRuleResult.MinorMarineVictory;
-                    EndRound(distress);
+                    EndRound();
                 }
                 else
                 {
                     distress.Result = DistressSignalRuleResult.MajorMarineVictory;
-                    EndRound(distress);
+                    EndRound();
                 }
             }
         }
@@ -968,34 +978,51 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         return spawners;
     }
 
-    private (EntProtoId Id, EntityUid Ent) NextSquad(ProtoId<JobPrototype> job, CMDistressSignalRuleComponent rule)
+    private (EntProtoId Id, EntityUid Ent) NextSquad(
+        ProtoId<JobPrototype> job,
+        CMDistressSignalRuleComponent rule,
+        EntProtoId<SquadTeamComponent>? preferred)
     {
-        // TODO RMC14 this biases people towards alpha as that's the first one, maybe not a problem once people can pick a preferred squad?
-        if (!rule.NextSquad.TryGetValue(job, out var next) ||
-            next >= rule.SquadIds.Count)
+        var squads = new List<(EntProtoId SquadId, EntityUid Squad, int Players)>();
+        foreach (var (squadId, squad) in rule.Squads)
         {
-            rule.NextSquad[job] = 0;
-            next = 0;
+            var players = 0;
+            if (TryComp(squad, out SquadTeamComponent? team))
+            {
+                var roles = team.Roles;
+                var maxRoles = team.MaxRoles;
+                if (roles.TryGetValue(job, out var currentPlayers))
+                    players = currentPlayers;
+
+                if (preferred != null &&
+                    preferred == squadId &&
+                    (!maxRoles.TryGetValue(job, out var max) || players < max))
+                {
+                    return (squadId, squad);
+                }
+            }
+
+            squads.Add((squadId, squad, players));
         }
 
-        var id = rule.SquadIds[next++];
-        rule.NextSquad[job] = next;
+        _random.Shuffle(squads);
+        squads.Sort((a, b) => a.Players.CompareTo(b.Players));
 
-        ref var squad = ref CollectionsMarshal.GetValueRefOrAddDefault(rule.Squads, id, out var exists);
-        if (!exists)
-            squad = Spawn(id);
-
-        return (id, squad);
+        var chosen = squads[0];
+        return (chosen.SquadId, chosen.Squad);
     }
 
-    private (EntityUid Spawner, EntityUid? Squad)? GetSpawner(CMDistressSignalRuleComponent rule, JobPrototype job)
+    private (EntityUid Spawner, EntityUid? Squad)? GetSpawner(
+        CMDistressSignalRuleComponent rule,
+        JobPrototype job,
+        EntProtoId<SquadTeamComponent>? preferred)
     {
         var allSpawners = GetSpawners();
         EntityUid? squad = null;
 
         if (job.HasSquad)
         {
-            var (squadId, squadEnt) = NextSquad(job, rule);
+            var (squadId, squadEnt) = NextSquad(job, rule, preferred);
             squad = squadEnt;
 
             if (allSpawners.Squad.TryGetValue(squadId, out var jobSpawners) &&
@@ -1098,12 +1125,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (_xenoEvolution.HasLiving<XenoComponent>(4))
             {
                 component.Result = DistressSignalRuleResult.MinorMarineVictory;
-                EndRound(component);
+                EndRound();
             }
             else
             {
                 component.Result = DistressSignalRuleResult.MajorMarineVictory;
-                EndRound(component);
+                EndRound();
             }
         }
     }
@@ -1221,7 +1248,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         }
     }
 
-    private void EndRound(CMDistressSignalRuleComponent comp)
+    private void EndRound()
     {
         _roundEnd.EndRound();
     }

@@ -106,7 +106,7 @@ public sealed class BioscanSystem : EntitySystem
                 continue;
 
             alive++;
-            var bioscanBlocked = _area.BioscanBlocked(uid, out var area);
+            var bioscanBlocked = _area.BioscanBlocked(uid, out var areaProto, out _);
             var mapId = xform.MapID;
             if (_warshipMaps.Contains(mapId))
             {
@@ -114,16 +114,16 @@ public sealed class BioscanSystem : EntitySystem
                 {
                     aliveShip++;
 
-                    if (area != null)
-                        _warshipAreas.Add(Name(area.Value));
+                    if (areaProto != null)
+                        _warshipAreas.Add(areaProto.Name);
                 }
             }
             else if (_planetMaps.Contains(mapId))
             {
                 alivePlanet++;
 
-                if (!bioscanBlocked && area != null)
-                    _planetAreas.Add(Name(area.Value));
+                if (!bioscanBlocked && areaProto != null)
+                    _planetAreas.Add(areaProto.Name);
             }
         }
 
@@ -154,7 +154,7 @@ public sealed class BioscanSystem : EntitySystem
         return true;
     }
 
-    public void TryBioscanARES(ref TimeSpan lastMarine, ref int maxXenoAlive, SoundSpecifier sound, bool force)
+    public bool TryBioscanARES(ref TimeSpan lastMarine, ref int maxXenoAlive, SoundSpecifier sound, bool force)
     {
         var time = _timing.CurTime;
         if (TryBioscan<XenoComponent>(
@@ -183,7 +183,10 @@ public sealed class BioscanSystem : EntitySystem
             );
 
             _marineAnnounce.AnnounceARES(null, message, sound, "rmc-bioscan-ares-announcement");
+            return true;
         }
+
+        return false;
     }
 
     public void TryBioscanQueenMother(ref TimeSpan lastXeno, ref int maxMarineAlive, SoundSpecifier sound, bool force)
