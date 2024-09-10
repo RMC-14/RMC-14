@@ -38,6 +38,9 @@ public sealed partial class XenoComponent : Component
     public float MaxHealthDivisorHeal = 65;
 
     [DataField, AutoNetworkedField]
+    public bool HealOffWeeds;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan RegenCooldown = TimeSpan.FromSeconds(1);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]

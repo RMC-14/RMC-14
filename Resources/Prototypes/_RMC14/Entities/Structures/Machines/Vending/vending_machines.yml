@@ -194,7 +194,7 @@
 - type: vendingMachineInventory
   id: CMVendorCigs
   startingInventory:
-    RMCCigarettePackLuckySloths: 50 
+    RMCCigarettePackLuckySloths: 50
     RMCTarbackCase: 15
     Lighter: 25
     RMCZippo: 10
@@ -268,7 +268,6 @@
     CMFirstAidKitFilled: 2
     CMBurnAidKitFilled: 2 #firstaid fire 2
     #MedkitRadiationFilled: 1 #firstaid rad 1
-    CMHeadsetAlpha: 6
     # Crew Monitor
 
 

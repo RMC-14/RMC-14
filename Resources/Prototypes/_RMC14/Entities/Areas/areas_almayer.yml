@@ -1,7 +1,5 @@
 ﻿- type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBase
+  parent: RMCAreaBase
   id: RMCAreaAlmayer
   suffix: Almayer Area
   components:
@@ -9,10 +7,18 @@
     sprite: _RMC14/Areas/areas_almayer.rsi
     state: almayer
   - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
     powerNet: almayer
     hijackEvacuationArea: false
     hijackEvacuationWeight: 0
-    hijackEvacuationType: null
+    hijackEvacuationType: None
 
 - type: entity
   parent: RMCAreaAlmayer
@@ -30,9 +36,9 @@
     state: cic
   - type: Area
     zLevel: 1
-    avoidBioscan: False
-    noTunnel: True
-    unweedable: False
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
 
 - type: entity
   parent: RMCAreaAlmayerCommand
@@ -53,9 +59,9 @@
     state: airoom
   - type: Area
     zLevel: 1
-    avoidBioscan: False
-    noTunnel: True
-    unweedable: True
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: true
     buildSpecial: false
     resinAllowed: false
     resinConstructionAllowed: false
@@ -89,9 +95,9 @@
     state: tcomms
   - type: Area
     zLevel: 1
-    avoidBioscan: False
-    noTunnel: True
-    unweedable: False
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
 
 - type: entity
   parent: RMCAreaAlmayerCommand
@@ -102,9 +108,9 @@
     state: selfdestruct
   - type: Area
     zLevel: 1
-    avoidBioscan: False
-    noTunnel: True
-    unweedable: False
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
 
 - type: entity
   parent: RMCAreaAlmayerCommand
@@ -145,6 +151,10 @@
 
 - type: entity
   parent: RMCAreaAlmayerEngineeringLower
+  id: RMCAreaAlmayerEngineeringLowerEngine
+
+- type: entity
+  parent: RMCAreaAlmayerEngineeringLowerEngine
   id: RMCAreaAlmayerEngineeringLowerEngineMonitoring
   name: Lower Deck Engine Reactor Monitoring
   components:
@@ -201,9 +211,9 @@
   id: RMCAreaAlmayerEngineeringUpperEngineeringNotunnel
   components:
   - type: Area
-    avoidBioscan: False
-    noTunnel: True
-    unweedable: False
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
 
 - type: entity
   parent: RMCAreaAlmayerEngineering
@@ -310,9 +320,9 @@
   id: RMCAreaAlmayerShipboardWeaponRoomNotunnel
   components:
   - type: Area
-    avoidBioscan: False
-    noTunnel: True
-    unweedable: False
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
 
 - type: entity
   parent: RMCAreaAlmayerShipboard
@@ -1224,9 +1234,9 @@
     state: science
   - type: Area
     zLevel: 1
-    avoidBioscan: True
-    noTunnel: True
-    unweedable: False
+    avoidBioscan: true
+    noTunnel: true
+    unweedable: false
 
 - type: entity
   parent: RMCAreaAlmayerMedicalContainmentCell
@@ -1274,7 +1284,6 @@
     zLevel: 2
 
 - type: entity
-  abstract: true
   parent: RMCAreaAlmayer
   id: RMCAreaAlmayerSquads
 
@@ -1351,10 +1360,6 @@
 - type: entity
   parent: RMCAreaAlmayer
   id: RMCAreaAlmayerPowered
-  name: Powered
-  components:
-  - type: Sprite
-    state: selfdestruct
 
 - type: entity
   parent: RMCAreaAlmayerPowered
@@ -1365,9 +1370,9 @@
     state: selfdestruct
   - type: Area
     zLevel: 2
-    avoidBioscan: True
-    noTunnel: True
-    unweedable: False
+    avoidBioscan: true
+    noTunnel: true
+    unweedable: false
 
 - type: entity
   parent: RMCAreaAlmayerEngineering
@@ -1376,9 +1381,9 @@
   - type: Sprite
     state: selfdestruct
   - type: Area
-    avoidBioscan: False
-    noTunnel: True
-    unweedable: False
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
 
 - type: entity
   parent: RMCAreaAlmayer
@@ -1438,9 +1443,9 @@
     state: lifeboat
   - type: Area
     zLevel: 1
-    avoidBioscan: False
-    noTunnel: True
-    unweedable: False
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
 
 - type: entity
   parent: RMCAreaAlmayer
@@ -1450,9 +1455,9 @@
     sprite: _RMC14/Areas/areas.rsi
     state: shuttle2
   - type: Area
-    avoidBioscan: False
-    noTunnel: True
-    unweedable: False
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
 
 - type: entity
   parent: RMCAreaAlmayerEvacuation

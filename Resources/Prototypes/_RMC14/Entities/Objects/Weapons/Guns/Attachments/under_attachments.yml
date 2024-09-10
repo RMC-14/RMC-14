@@ -267,6 +267,9 @@
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
+  - type: RMCAmmoEject
+    containerID: ballistic-ammo
+    ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
   - type: BallisticAmmoProvider
     cycleable: false
     whitelist:
@@ -327,6 +330,10 @@
     containers:
       ballistic-ammo: !type:Container
         ents: []
+  - type: RMCAmmoEject
+    containerID: ballistic-ammo
+    ejectSound:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
   - type: AmmoCounter
   - type: Gun
     projectileSpeed: 20
