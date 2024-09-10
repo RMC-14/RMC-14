@@ -60,3 +60,29 @@
     - id: CMMagazineRifleM54CE2 # Replace with a holotargeting mag once that ammo is implemented.
     - id: RMCAttachmentRailFlashlight
     - id: RMCAttachmentBipod
+
+- type: entity
+  parent: RMCBaseGunCase
+  id: RMCXM51Case
+  name: XM51 breaching scattergun case
+  description: A gun case containing the XM51 Breaching Scattergun. Comes with two spare magazines, two spare shell boxes, an optional stock and a belt to holster the weapon.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,9,1
+    whitelist:
+      tags:
+      - RMCAttachmentXM51Stock
+      - RMCWeaponShotgunXM51
+      - RMCMagazineShotgunXM51
+      - RMCBoxShotgunBreaching
+  - type: StorageFill
+    contents:
+    # - id: TODO M276 pattern XM51 holster rig
+    - id: RMCAttachmentXM51Stock
+    - id: RMCWeaponShotgunXM51
+    - id: RMCMagazineShotgunXM51
+      amount: 3
+    - id: RMCBoxShotgunBreaching
+      amount: 2
