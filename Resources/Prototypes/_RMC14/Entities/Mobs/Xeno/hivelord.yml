@@ -85,5 +85,7 @@
       whitelist:
         components:
         - XenoEgg
+  - type: RMCSize
+    size: Big
   - type: RMCXenoDamageVisuals
     prefix: hivelord
