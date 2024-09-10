@@ -90,6 +90,12 @@ public sealed partial class DropshipUtilitySystem : EntitySystem
             return false;
         }
 
+        if (_timing.CurTime < ent.Comp.NextActivateAt)
+        {
+            popup = Loc.GetString("rmc-dropship-utility-cooldown", ("utility", ent.Owner));
+            return false;
+        }
+
         if (_dropshipWeapon.CasDebug)
         {
             popup = null;
@@ -109,13 +115,6 @@ public sealed partial class DropshipUtilitySystem : EntitySystem
             popup = Loc.GetString("rmc-dropship-utility-not-flyby", ("utility", ent.Owner));
             return false;
         }
-
-        if (_timing.CurTime < ent.Comp.NextActivateAt)
-        {
-            popup = Loc.GetString("rmc-dropship-utility-cooldown", ("utility", ent.Owner));
-            return false;
-        }
-
         popup = null;
         return true;
     }

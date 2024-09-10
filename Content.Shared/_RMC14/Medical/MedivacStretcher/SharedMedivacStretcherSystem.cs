@@ -12,6 +12,7 @@ using Content.Shared.Foldable;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -37,6 +38,7 @@ public abstract partial class SharedMedivacStretcherSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public const int MinimumRequiredSkill = 2;
     public static readonly EntProtoId<SkillDefinitionComponent> SkillType = "RMCSkillMedical";
@@ -53,7 +55,7 @@ public abstract partial class SharedMedivacStretcherSystem : EntitySystem
         SubscribeLocalEvent<MedivacStretcherComponent, StrapAttemptEvent>(OnTryStrap);
     }
 
-    public void Medivac(Entity<MedivacStretcherComponent> ent, EntityUid medivacEntiyt)
+    public void Medivac(Entity<MedivacStretcherComponent> ent, EntityUid medivacEntity)
     {
         if (!TryComp(ent.Owner, out StrapComponent? strapComp))
         {
@@ -65,10 +67,9 @@ public abstract partial class SharedMedivacStretcherSystem : EntitySystem
         {
             return;
         }
-        _transformSystem.PlaceNextTo(buckled, medivacEntiyt);
-        RemCompDeferred<DropshipTargetComponent>(ent);
-        _appearance.SetData(ent.Owner, MedivacStretcherVisuals.BeaconState, BeaconVisuals.Off);
-        _appearance.SetData(ent.Owner, MedivacStretcherVisuals.MedivacingState, false);
+        _transformSystem.PlaceNextTo(buckled, medivacEntity);
+        DeactivateBeacon(ent.Owner);
+        _appearance.SetData(ent.Owner, StrapVisuals.State, false);
     }
 
     private void Unstrap(Entity<MedivacStretcherComponent> ent)
@@ -78,6 +79,13 @@ public abstract partial class SharedMedivacStretcherSystem : EntitySystem
         {
             return;
         }
+
+        if (!TryComp(ent.Owner, out StrapComponent? strapComp))
+        {
+            return;
+        }
+        _audio.PlayPredicted(strapComp.UnbuckleSound, ent.Owner, null);
+
         _appearance.SetData(ent.Owner, StrapVisuals.State, false);
         _container.Remove(slot.ContainedEntity.Value, slot);
     }
@@ -179,6 +187,12 @@ public abstract partial class SharedMedivacStretcherSystem : EntitySystem
         var slot = _container.EnsureContainer<ContainerSlot>(ent.Owner, MedivacStretcherComponent.BuckledSlotId);
         _container.Insert(args.Buckle.Owner, slot);
         _appearance.SetData(ent.Owner, StrapVisuals.State, true);
+
+        if (!TryComp(ent.Owner, out StrapComponent? strapComp))
+        {
+            return;
+        }
+        _audio.PlayPredicted(strapComp.BuckleSound, args.Strap.Owner, args.User);
         args.Cancelled = true;
     }
 
