@@ -72,7 +72,7 @@ public abstract partial class SharedMedivacStretcherSystem : EntitySystem
         _appearance.SetData(ent.Owner, StrapVisuals.State, false);
     }
 
-    private void Unstrap(Entity<MedivacStretcherComponent> ent)
+    private void Unstrap(Entity<MedivacStretcherComponent> ent, EntityUid user)
     {
         var slot = _container.EnsureContainer<ContainerSlot>(ent.Owner, MedivacStretcherComponent.BuckledSlotId);
         if (slot.ContainedEntity is null)
@@ -84,7 +84,7 @@ public abstract partial class SharedMedivacStretcherSystem : EntitySystem
         {
             return;
         }
-        _audio.PlayPredicted(strapComp.UnbuckleSound, ent.Owner, null);
+        _audio.PlayPredicted(strapComp.UnbuckleSound, ent.Owner, user);
 
         _appearance.SetData(ent.Owner, StrapVisuals.State, false);
         _container.Remove(slot.ContainedEntity.Value, slot);
@@ -133,7 +133,7 @@ public abstract partial class SharedMedivacStretcherSystem : EntitySystem
                 Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/unbuckle.svg.192dpi.png")),
                 Act = () =>
                 {
-                    Unstrap(ent);
+                    Unstrap(ent, @event.User);
                 },
                 Priority = 1
             });
@@ -216,7 +216,8 @@ public abstract partial class SharedMedivacStretcherSystem : EntitySystem
         }
         EntityCoordinates stretcherCoords = stretcher.ToCoordinates();
         if (!_dropshipWeaponSystem.CasDebug &&
-            !_areas.CanCAS(stretcher.ToCoordinates().SnapToGrid(_entites, _mapManager)))
+            (!_areas.TryGetArea(stretcher.ToCoordinates().SnapToGrid(_entites, _mapManager), out _, out var stretcherArea) ||
+            !stretcherArea.Medevac))
         {
             _popup.PopupClient(Loc.GetString("rmc-medivac-area-not-cas"), stretcherCoords, user);
             return false;
