@@ -1,54 +1,54 @@
-﻿- type: rank
+- type: rank
   id: RMCBaseRankSergeantMajor
-  name: Sergeant Major
-  shortenedName: SGM
+  name: (E9E) Sergeant Major
+  shortenedName: (E9E) SGM
 
 - type: rank
   id: RMCBaseRankMasterGunnerySergeant
-  name: Master Gunnery Sergeant
-  shortenedName: MGySGT
+  name: (E9) Master Gunnery Sergeant
+  shortenedName: (E9) MGySGT
 
 - type: rank
   id: RMCBaseRankFirstSergeant
-  name: First Sergeant
-  shortenedName: 1stSGT
+  name: (E8E) First Sergeant
+  shortenedName: (E8E) 1stSGT
 
 - type: rank
   id: RMCBaseRankMasterSergeant
-  name: Master Sergeant
-  shortenedName: MSGT
+  name: (E8) Master Sergeant
+  shortenedName: (E8) MSGT
 
 - type: rank
   id: RMCBaseRankGunnerySergeant
-  name: Gunnery Sergeant
-  shortenedName: GySGT
+  name: (E7) Gunnery Sergeant
+  shortenedName: (E7) GySGT
 
 - type: rank
   id: RMCBaseRankStaffSergeant
-  name: Staff Sergeant
-  shortenedName: SSGT
+  name: (E6) Staff Sergeant
+  shortenedName: (E6) SSGT
 
 - type: rank
   id: RMCBaseRankSergeant
-  name: Sergeant
-  shortenedName: SGT
+  name: (E5) Sergeant
+  shortenedName: (E5) SGT
 
 - type: rank
   id: RMCBaseRankCorporal
-  name: Corporal
-  shortenedName: CPL
+  name: (E4) Corporal
+  shortenedName: (E4) CPL
 
 - type: rank
   id: RMCBaseRankLanceCorporal
-  name: Lance Corporal
-  shortenedName: LCPL
+  name: (E3) Lance Corporal
+  shortenedName: (E3) LCPL
 
 - type: rank
   id: RMCBaseRankPrivateFirstClass
-  name: Private First Class
-  shortenedName: PFC
+  name: (E2) Private First Class
+  shortenedName: (E2) PFC
 
 - type: rank
   id: RMCBaseRankPrivate
-  name: Private
-  shortenedName: PVT
+  name: (E1) Private
+  shortenedName: (E1) PVT
