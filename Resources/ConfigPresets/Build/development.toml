@@ -35,3 +35,4 @@ see_own_notes = true
 
 [rmc]
 planet_maps = "/Maps/_RMC14/solaris.yml,/Maps/_RMC14/prison.yml,/Maps/_RMC14/shiva.yml"
+planet_map_vote = false
