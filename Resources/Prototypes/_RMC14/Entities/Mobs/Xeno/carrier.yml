@@ -89,5 +89,7 @@
       components:
       - XenoParasite
       - XenoEgg
+  - type: RMCSize
+    size: Big
 #  - type: RMCXenoDamageVisuals # TODO RMC14
 #    prefix: carrier

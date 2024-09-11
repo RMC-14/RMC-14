@@ -7,6 +7,13 @@
     damage:
       types:
         Piercing: 40
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 24
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 7
+      falloff: 4
   - type: CMArmorPiercing
     amount: 5
 
@@ -30,6 +37,24 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 58
+        Piercing: 55
   - type: CMArmorPiercing
     amount: 35
+
+- type: entity
+  parent: BaseBullet
+  id: BulletRifleM4SPRA19Impact
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: CMArmorPiercing
+    amount: 50
+  - type: RMCStunOnHit
+    maxRange: 32
+    losesEffectWithRange: true
+    stunTime: 1
+    superSlowTime: 4
+    slowTime: 10

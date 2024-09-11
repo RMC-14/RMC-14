@@ -13,6 +13,7 @@ rmc-sentry-rotate-with-screwdriver = It can be rotated with a [color=cyan]screwd
 rmc-sentry-too-close = This is too close to {INDEFINITE($defense)} {$defense}!
 rmc-sentry-active-norot = {CAPITALIZE(THE($sentry))} is currently active. The motors will prevent you from rotating it safely.
 rmc-sentry-item-norot = You can't rotate it like this!
+rmc-sentry-magazine-does-not-fit = {CAPITALIZE(THE($magazine))} doesn't fit into {THE($sentry)}!
 
 rmc-sentry-upgrade-not-item = You need to disassemble {THE($sentry)} with a multitool before upgrading it!
 rmc-sentry-upgrade-not-holding = You need to be holding an upgrade kit in your active hand to upgrade {THE($sentry)}!

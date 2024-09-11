@@ -13,6 +13,7 @@ using Content.Shared.Interaction.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Popups;
+using Content.Shared.Tag;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -42,6 +43,7 @@ public sealed class SentrySystem : EntitySystem
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
@@ -214,6 +216,14 @@ public sealed class SentrySystem : EntitySystem
 
         if (!HasComp<BallisticAmmoProviderComponent>(used))
             return;
+
+        if (sentry.Comp.MagazineTag is { } magazineTag &&
+            !_tag.HasTag(used, magazineTag))
+        {
+            var msg = Loc.GetString("rmc-sentry-magazine-does-not-fit", ("sentry", sentry), ("magazine", used));
+            _popup.PopupClient(msg, sentry, user, PopupType.SmallCaution);
+            return;
+        }
 
         args.Handled = true;
 

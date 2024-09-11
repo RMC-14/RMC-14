@@ -45,7 +45,7 @@
   - type: Appearance
 
 - type: entity
-  parent: RMCBaseSpeedLoader44
+  parent: RMCSpeedLoaderM44
   id: RMCSpeedLoader44Marksman
   name: "M44 marksman speed loader (.44)"
   description: A revolver speed loader filled with Marksman ammo.
@@ -55,16 +55,14 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
-    - state: marksman-5
+    - state: base-5
       map: [ "enum.GunVisualLayers.Mag" ]
-  - type: MagazineVisuals
-    magState: marksman
-    steps: 6
-    zeroVisible: false
+    - state: base-unshaded-5
+      color: "#FF744F"
+      map: [ "enum.GunVisualLayers.MagUnshaded" ]
   - type: BallisticAmmoProvider
     proto: RMCCartridgeRevolver44Marksman
     capacity: 7
-  - type: Appearance
 
 - type: Tag
   id: RMCMagazineRevolver
