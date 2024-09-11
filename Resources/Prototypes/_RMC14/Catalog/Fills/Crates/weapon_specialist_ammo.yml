@@ -116,7 +116,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCCrateMagazineM4SPRCustomImpact
+    - id: RMCMagazineRifleM4SPRA19Impact
       amount: 3
 
 - type: entity
