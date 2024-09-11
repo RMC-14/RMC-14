@@ -61,7 +61,10 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private static readonly EntProtoId DropshipTargetMarker = "RMCLaserDropshipTarget";
 
-    public bool CasDebug;
+    public bool CasDebug
+    {
+        get; private set;
+    }
     private readonly HashSet<Entity<DamageableComponent>> _damageables = new();
     private int _nextId = 1;
 
