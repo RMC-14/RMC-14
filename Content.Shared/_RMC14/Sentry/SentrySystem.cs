@@ -5,7 +5,6 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.NPC;
 using Content.Shared._RMC14.Tools;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
