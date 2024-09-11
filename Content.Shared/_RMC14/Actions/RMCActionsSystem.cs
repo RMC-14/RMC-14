@@ -40,4 +40,47 @@ public sealed class RMCActionsSystem : EntitySystem
                 _actions.SetIfBiggerCooldown(actionId, action.Comp.Cooldown);
         }
     }
+
+    /// <summary>
+    /// Enable all events that have a shared cooldown with the provided action 
+    /// </summary>
+    public void EnableSharedCooldownEvents(Entity<ActionSharedCooldownComponent?> action, EntityUid performer)
+    {
+        SetStatusOfSharedCooldownEvents(action, performer, true);
+    }
+
+    /// <summary>
+    /// Disable all events that have a shared cooldown with the provided action 
+    /// </summary>
+    public void DisableSharedCooldownEvents(Entity<ActionSharedCooldownComponent?> action, EntityUid performer)
+    {
+        SetStatusOfSharedCooldownEvents(action, performer, false);
+    }
+
+    /// <summary>
+    /// Sets the enabled status of all events that have a shared cooldown with the provided action 
+    /// </summary>
+    private void SetStatusOfSharedCooldownEvents(Entity<ActionSharedCooldownComponent?> action, EntityUid performer, bool newStatus)
+    {
+        if (!Resolve(action, ref action.Comp, false))
+            return;
+
+        if (action.Comp.Cooldown == TimeSpan.Zero)
+            return;
+
+        foreach (var (actionId, comp) in _actions.GetActions(performer))
+        {
+            if (!_actionSharedCooldownQuery.TryComp(actionId, out var shared))
+                continue;
+
+            // Same ID or primary ID found in subset of other action's ids
+            if (!((shared.Id != null && shared.Id == action.Comp.Id) ||
+                (action.Comp.Id != null && shared.Ids.Contains(action.Comp.Id.Value))))
+            {
+                continue;
+            }
+
+            comp.Enabled = newStatus;
+        }
+    }
 }
