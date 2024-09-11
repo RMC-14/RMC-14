@@ -13,13 +13,6 @@ public sealed partial class DropshipUtilityPointComponent : Component
 
     [DataField, AutoNetworkedField]
     public string DirOffset;
-
-    /// <summary>
-    /// If true, this component will deal with showing the AttachedSprite as a simple sprite.
-    /// Otherwise, it is the duty of the specific Utility System Component to render the AttachedSprite.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool WillRender = true;
 }
 
 [Serializable, NetSerializable]

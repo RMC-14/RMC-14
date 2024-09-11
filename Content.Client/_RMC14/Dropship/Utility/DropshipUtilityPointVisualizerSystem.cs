@@ -36,17 +36,6 @@ public sealed partial class DropshipUtilityPointVisualizerSystem : VisualizerSys
             return;
         }
 
-        if (!component.WillRender)
-        {
-            spriteComp.LayerSetVisible(attachementBase, false);
-            spriteComp.LayerSetVisible(attachedUtility, false);
-            var ev = new AppearanceChangeEvent()
-            {
-                Sprite = spriteComp
-            };
-            return;
-        }
-
         if (string.IsNullOrWhiteSpace(sprite) || string.IsNullOrWhiteSpace(state))
         {
             spriteComp.LayerSetVisible(attachementBase, true);
