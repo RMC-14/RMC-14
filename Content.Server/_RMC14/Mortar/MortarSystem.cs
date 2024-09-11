@@ -105,7 +105,7 @@ public sealed class MortarSystem : SharedMortarSystem
             return false;
         }
 
-        if (!area.MortarFire)
+        if (!_area.CanMortarFire(_transform.ToCoordinates(coordinates)))
         {
             _popup.PopupEntity(Loc.GetString("rmc-mortar-target-covered"), user, user, SmallCaution);
             return false;
