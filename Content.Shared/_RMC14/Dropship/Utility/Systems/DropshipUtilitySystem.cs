@@ -35,16 +35,6 @@ public sealed partial class DropshipUtilitySystem : EntitySystem
         SubscribeLocalEvent<DropshipUtilityPointComponent, InteractHandEvent>(OnInteract);
     }
 
-    public void SetDefaultRender(Entity<DropshipUtilityPointComponent> ent, bool newValue)
-    {
-        ent.Comp.WillRender = newValue;
-    }
-
-    public bool GetDefaultRender(Entity<DropshipUtilityPointComponent> ent)
-    {
-        return ent.Comp.WillRender;
-    }
-
     private void OnTargetChange(Entity<DropshipUtilityPointComponent> ent, ref DropshipTargetChangedEvent args)
     {
         var slot = _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.UtilitySlotId);
