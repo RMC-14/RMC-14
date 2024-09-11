@@ -51,9 +51,7 @@
     state: southwest
 
 - type: entity
-  parent:
-  - RMCAreaGlass
-  - RMCAreaLv624GroundJungleSouthWestJungle
+  parent: RMCAreaLv624GroundJungleSouthWestJungle
   id: RMCAreaLv624GroundJungleSouthWestJungleCeiling
 
 - type: entity
@@ -67,9 +65,7 @@
     resinAllowed: false
 
 - type: entity
-  parent:
-  - RMCAreaGlass
-  - RMCAreaLv624GroundJungleWestJungle
+  parent: RMCAreaLv624GroundJungleWestJungle
   id: RMCAreaLv624GroundJungleWestJungleCeiling
 
 - type: entity
@@ -145,9 +141,7 @@
     state: west
 
 - type: entity
-  parent:
-  - RMCAreaGlass
-  - RMCAreaLv624GroundBarrensWestBarrens
+  parent: RMCAreaLv624GroundBarrensWestBarrens
   id: RMCAreaLv624GroundBarrensWestBarrensCeiling
 
 - type: entity
@@ -159,9 +153,7 @@
     state: east
 
 - type: entity
-  parent:
-  - RMCAreaGlass
-  - RMCAreaLv624GroundBarrensEastBarrens
+  parent: RMCAreaLv624GroundBarrensEastBarrens
   id: RMCAreaLv624GroundBarrensEastBarrensCeiling
 
 - type: entity
@@ -181,9 +173,7 @@
     state: northeast
 
 - type: entity
-  parent:
-  - RMCAreaGlass
-  - RMCAreaLv624GroundBarrensNorthEastBarrens
+  parent: RMCAreaLv624GroundBarrensNorthEastBarrens
   id: RMCAreaLv624GroundBarrensNorthEastBarrensCeiling
 
 - type: entity
@@ -253,7 +243,7 @@
 - type: entity
   parent: RMCAreaLv624Ground
   id: RMCAreaLv624GroundColony
-  name: We-Ya Compound
+  name: Weyland-Yutani Compound
   components:
   - type: Sprite
     state: green
@@ -307,16 +297,21 @@
     state: west
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundMetalAllowCAS
-  - RMCAreaLv624GroundColony
+  parent: RMCAreaLv624GroundColony
   id: RMCAreaLv624GroundColonyTelecomm
   name: LZ1 Communications Relay
   components:
   - type: Sprite
-    sprite: _RMC14/Areas/areas.rsi
     state: ass_line
   - type: Area
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: false
     resinAllowed: false
 
 - type: entity
@@ -325,9 +320,7 @@
   name: Far North Storage Dome Communications Relay
 
 - type: entity
-  parent:
-  - RMCAreaNone
-  - RMCAreaLv624GroundColonyTelecomm
+  parent: RMCAreaLv624GroundColonyTelecomm
   id: RMCAreaLv624GroundColonyTelecommSwLz1
   name: South-West LZ1 Communications Relay
 
@@ -337,29 +330,31 @@
   name: Telecomms Dome Communications Relay
 
 - type: entity
-  parent:
-  - RMCAreaNone
-  - RMCAreaLv624GroundColonyTelecommTcommdome
+  parent: RMCAreaLv624GroundColonyTelecommTcommdome
   id: RMCAreaLv624GroundColonyTelecommTcommdomeSouth
   name: South Telecomms Dome Communications Relay
 
 - type: entity
-  parent:
-  - RMCAreaNone
-  - RMCAreaLv624GroundColonyTelecomm
+  parent: RMCAreaLv624GroundColonyTelecomm
   id: RMCAreaLv624GroundColonyTelecommSwLz2
   name: South-West LZ2 Communications Relay
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundBlockCAS
-  - RMCAreaLv624Ground
+  parent: RMCAreaLv624Ground
   id: RMCAreaLv624GroundCaves
   name: Caves
   components:
   - type: Sprite
     state: cave
   - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
     minimapColor: '#3F3C3CEF'
 
 - type: entity
@@ -451,22 +446,35 @@
     state: green
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaLv624
+  parent: RMCAreaLv624
   id: RMCAreaLv624Lazarus
   name: Lazarus
   components:
   - type: Sprite
     state: green
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
-  parent:
-  - RMCAreaNone
-  - RMCAreaLv624Lazarus
+  parent: RMCAreaLv624Lazarus
   id: RMCAreaLv624LazarusLandingZones
   components:
   - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
     resinAllowed: false
     landingZone: true
 
@@ -489,14 +497,21 @@
     state: green
 
 - type: entity
-  parent:
-  - RMCAreaGlass
-  - RMCAreaLv624Lazarus
+  parent: RMCAreaLv624Lazarus
   id: RMCAreaLv624LazarusYggdrasil
   name: Yggdrasil Tree
   components:
   - type: Sprite
     state: atmos
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaLv624Lazarus
@@ -633,15 +648,21 @@
     resinAllowed: false
 
 - type: entity
-  parent:
-  - RMCAreaNone
-  - RMCAreaLv624LazarusQuartstorage
+  parent: RMCAreaLv624LazarusQuartstorage
   id: RMCAreaLv624LazarusQuartstorageOutdoors
   name: Cargo Bay Area
   components:
   - type: Sprite
     state: purple
   - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
     resinAllowed: false
 
 - type: entity
@@ -672,9 +693,9 @@
   - type: Sprite
     state: storage
   - type: Area
-    avoidBioscan: False
-    noTunnel: True
-    unweedable: False
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
 
 - type: entity
   parent: RMCAreaLv624Lazarus
@@ -706,17 +727,23 @@
     state: fitness
 
 - type: entity
-  parent:
-  - RMCAreaGlass
-  - RMCAreaLv624Lazarus
+  parent: RMCAreaLv624Lazarus
   id: RMCAreaLv624LazarusHydroponics
   name: Hydroponics
   components:
   - type: Sprite
     state: hydro
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
 
 - type: entity
-  abstract: true
   parent: RMCAreaLv624
   id: RMCAreaLv624Landing
 

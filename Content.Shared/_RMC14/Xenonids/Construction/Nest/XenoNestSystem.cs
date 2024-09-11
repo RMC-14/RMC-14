@@ -404,7 +404,7 @@ public sealed class XenoNestSystem : EntitySystem
         foreach (var dir in directions)
         {
             if (nestCoords.Offset(dir.ToVec()).GetTileRef(EntityManager, _map) is not { } tile ||
-                   _turf.IsTileBlocked(tile, CollisionGroup.Impassable))
+                _turf.IsTileBlocked(tile, CollisionGroup.Impassable))
             {
                 response ??= Loc.GetString("cm-xeno-nest-failed-cant-there");
                 continue;

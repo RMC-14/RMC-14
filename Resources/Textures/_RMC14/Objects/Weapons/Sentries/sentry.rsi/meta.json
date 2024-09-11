@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/fc6beab41c447b91d2524b02fadeebfae13f26c1/icons/obj/structures/machinery/defenses/sentry.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/fc6beab41c447b91d2524b02fadeebfae13f26c1/icons/obj/structures/machinery/defenses/sentry.dmi, modified by Vermidia for omni",
   "size": {
     "x": 32,
     "y": 32
@@ -132,6 +132,24 @@
     },
     {
       "name": "mini_uac_sentry_handheld"
+    },
+    {
+      "name": "omni_uad_sentry",
+      "directions": 4
+    },
+    {
+      "name": "omni_uad_sentry_on",
+      "directions": 4
+    },
+    {
+      "name": "omni_uad_sentry_noammo",
+      "directions": 4
+    },
+    {
+      "name": "omni_uad_sentry_destroyed"
+    },
+    {
+      "name": "omni_uad_sentry_handheld"
     }
   ]
 }
