@@ -28,18 +28,5 @@
     - Cartridge
     - RMCCartridgeSentry
 
-- type: entity
-  parent: CMShellShotgunBuckshot
-  id: RMCShellBuckshotSentry
-  name: handful of shotgun shell (12g)
-  components:
-  - type: Tag
-    tags:
-    - Cartridge
-    - RMCShellBuckshotSentry
-
 - type: Tag
   id: RMCCartridgeSentry
-
-- type: Tag
-  id: RMCShellBuckshotSentry

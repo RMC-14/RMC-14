@@ -9,4 +9,13 @@ public sealed partial class SentrySpikesComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
     public DamageSpecifier SpikeDamage = default!;
+
+    [DataField(required: true), AutoNetworkedField]
+    public string AnimationState;
+
+    [DataField(required: true), AutoNetworkedField]
+    public TimeSpan AnimationTime;
+
+	[DataField, AutoNetworkedField]
+	public string Layer = "sentry";
 }

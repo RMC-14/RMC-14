@@ -50,6 +50,8 @@
         crate: RMCCrateBoxMagazineM44RevolverMarksman
       - cost: 4000
         crate: RMCCrateBoxMagazineSentry
+      - cost: 4000
+        crate: RMCCrateBoxMagazineSentryShotgun
     - name: Attachments
       entries:
       - cost: 3000

@@ -5,6 +5,8 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.NPC;
 using Content.Shared._RMC14.Tools;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
@@ -49,6 +51,7 @@ public sealed class SentrySystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedToolSystem _tools = default!;
+    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
 
@@ -538,5 +541,16 @@ public sealed class SentrySystem : EntitySystem
         {
             _toUpdate.Clear();
         }
+    }
+
+    private void OnSentrySpikesAttacked(Entity<SentrySpikesComponent> sentry, ref AttackedEvent args)
+    {
+        if (!TryComp<SentryComponent>(sentry, out var senComp) || senComp.Mode != SentryMode.On)
+            return;
+
+        _damageableSystem.TryChangeDamage(args.User, sentry.Comp.SpikeDamage, origin: sentry, tool: sentry);
+        var self = Loc.GetString("rmc-sentry-spikes-self");
+        var others = Loc.GetString("rmc-sentry-spikes-others", ("target", args.User));
+        _popup.PopupPredicted(self, others, sentry, args.User, PopupType.SmallCaution);
     }
 }
