@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Cephalopod222
-  changes:
-  - message: Added new M54C sprites!
-    type: Add
-  id: 176
-  time: '2024-06-23T20:42:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2572
 - author: MACMAN2003
   changes:
   - message: Added weapon attachments to the ASRS requisition console.
@@ -4399,5 +4392,12 @@
   id: 675
   time: '2024-09-11T01:45:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3988
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Queen screech not unbuckling power loader operators.
+    type: Fix
+  id: 676
+  time: '2024-09-11T01:51:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3991
 Name: RMC14
 Order: -1
