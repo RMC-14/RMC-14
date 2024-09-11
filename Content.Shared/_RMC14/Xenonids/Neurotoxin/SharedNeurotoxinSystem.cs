@@ -38,6 +38,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!; //It's how this fakes movement
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _marines = new();
     public override void Initialize()
@@ -45,6 +46,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<NeurotoxinComponent, RejuvenateEvent>(OnRejuvenate);
         SubscribeLocalEvent<CoughedBloodComponent, RefreshMovementSpeedModifiersEvent>(OnCoughedBloodRefreshSpeed);
+        SubscribeLocalEvent<CoughedBloodComponent, ComponentRemove>(OnCoughedBloodRemove);
     }
 
     private void OnRejuvenate(Entity<NeurotoxinComponent> ent, ref RejuvenateEvent args)
@@ -58,7 +60,11 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
         args.ModifySpeed(multiplier, multiplier);
     }
 
-
+    private void OnCoughedBloodRemove(Entity<CoughedBloodComponent> victim, ref ComponentRemove args)
+    {
+        if (!TerminatingOrDeleted(victim))
+            _movementSpeed.RefreshMovementSpeedModifiers(victim);
+    }
 
     public override void Update(float frameTime)
     {
@@ -115,7 +121,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 continue;
 
             //Basic Effects
-            _stamina.TakeStaminaDamage(uid, neuro.StaminaDamagePerSecond * frameTime);
+            _stamina.TakeStaminaDamage(uid, neuro.StaminaDamagePerSecond * frameTime, visual: false);
             _statusEffects.TryAddStatusEffect<DrunkComponent>(uid, "Drunk", neuro.DizzyStrength, true);
 
             NeurotoxinNonStackingEffects(uid, neuro, time, out var coughChance, out var stumbleChance);
@@ -140,6 +146,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
             {
                 EnsureComp<CoughedBloodComponent>(uid, out var bloodCough);
                 bloodCough.ExpireTime = time + neuro.BloodCoughDuration;
+                _movementSpeed.RefreshMovementSpeedModifiers(uid);
                 _damage.TryChangeDamage(uid, neuro.CoughDamage); // TODO RMC-14 specifically chest damage
                 _popup.PopupEntity(Loc.GetString("rmc-bloodcough"), uid, uid, PopupType.MediumCaution);
                 var ev = new NeurotoxinEmoteEvent() { Emote = neuro.CoughId };
@@ -152,8 +159,11 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
 
         while (bloodCoughQuery.MoveNext(out var uid, out var cough))
         {
-            if(time > cough.ExpireTime)
+            if (time > cough.ExpireTime)
+            {
                 RemCompDeferred<CoughedBloodComponent>(uid);
+                _movementSpeed.RefreshMovementSpeedModifiers(uid);
+            }
         }
 
     }

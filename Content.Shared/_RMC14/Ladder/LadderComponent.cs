@@ -27,4 +27,7 @@ public sealed partial class LadderComponent : Component
 
     [DataField, AutoNetworkedField, AutoPausedField]
     public TimeSpan LastDoAfterTime;
+
+    [DataField, AutoNetworkedField]
+    public HashSet<EntityUid> Watching = new();
 }

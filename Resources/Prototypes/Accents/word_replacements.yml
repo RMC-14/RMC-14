@@ -220,7 +220,7 @@
     accent-dwarf-words-139: accent-dwarf-words-replace-139
     accent-dwarf-words-140: accent-dwarf-words-replace-140
     accent-dwarf-words-141: accent-dwarf-words-replace-141
-    accent-dwarf-words-142: accent-dwarf-words-replace-142
+    #accent-dwarf-words-142: accent-dwarf-words-replace-142 # RMC-14: Remove crusher from dwarf accent
     accent-dwarf-words-143: accent-dwarf-words-replace-143
     accent-dwarf-words-144: accent-dwarf-words-replace-144
     accent-dwarf-words-145: accent-dwarf-words-replace-145

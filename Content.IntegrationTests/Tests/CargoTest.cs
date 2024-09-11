@@ -6,9 +6,7 @@ using Content.Server.Cargo.Systems;
 using Content.Server.Nutrition.Components;
 using Content.Server.Nutrition.EntitySystems;
 using Content.Shared.Cargo.Prototypes;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Stacks;
-using Content.Shared.Tag;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
@@ -253,13 +251,16 @@ public sealed class CargoTest
     {
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
-
         var entManager = server.ResolveDependency<IEntityManager>();
-        var priceSystem = entManager.System<PricingSystem>();
 
-        var ent = entManager.SpawnEntity("StackEnt", MapCoordinates.Nullspace);
-        var price = priceSystem.GetPrice(ent);
-        Assert.That(price, Is.EqualTo(100.0));
+        await server.WaitAssertion(() =>
+        {
+            var priceSystem = entManager.System<PricingSystem>();
+
+            var ent = entManager.SpawnEntity("StackEnt", MapCoordinates.Nullspace);
+            var price = priceSystem.GetPrice(ent);
+            Assert.That(price, Is.EqualTo(100.0));
+        });
 
         await pair.CleanReturnAsync();
     }

@@ -1,0 +1,127 @@
+﻿- type: entity
+  parent: BaseStructure
+  abstract: true
+  id: RMCBaseTurret
+  name: turret
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Actions
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    drawdepth: Mobs
+    layers:
+    - state: normal_uac_sentry_on
+  - type: CombatMode
+    toggleMouseRotator: false
+  - type: Gun
+    fireRate: 6
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
+  # TODO: Power ammo provider?
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: CMCartridgeSentry10x50mm
+    capacity: 99999
+  - type: HTN
+    rootTask:
+      task: RMCTurretCompound
+    blackboard:
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Effects/double_beep.ogg
+      VisionRadius: !type:Single
+        9.0
+  - type: MouseRotator
+    angleTolerance: 5
+    rotationSpeed: 180
+    simple4DirMode: false
+  - type: NoRotateOnInteract
+  - type: NoRotateOnMove
+  - type: GunIFF
+    enabled: true
+    intrinsic: true
+
+- type: entity
+  parent: RMCBaseTurret
+  id: RMCTurretGaussSpaceborne
+  name: UA-577 spaceborne gauss turret
+  description: A fully-automated defence turret with mid-range targeting capabilities. Armed with a modified M32-S Autocannon and an internal belt feed.
+  components:
+  - type: InteractionPopup
+    interactDelay: 0.2
+    successChance: 0.8
+    interactSuccessString: petting-success-generic
+    interactFailureString: petting-failure-generic
+    interactSuccessSound:
+      path: /Audio/Effects/double_beep.ogg
+  - type: Corrodible
+    isCorrodible: false
+  - type: NpcFactionMember
+    factions:
+    - UNMC
+  - type: TimedDespawnOnLanding
+  - type: MarineIFF
+
+- type: htnCompound
+  id: RMCTurretCompound
+  branches:
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:UtilityOperator
+        proto: RMCNearbyGunTargets
+
+    - !type:HTNPrimitiveTask
+      preconditions:
+      - !type:KeyExistsPrecondition
+        key: Target
+      - !type:TargetInRangePrecondition
+        targetKey: Target
+        # TODO: Non-scuffed
+        rangeKey: RangedRange
+      - !type:TargetInLOSPrecondition
+        targetKey: Target
+        rangeKey: RangedRange
+      operator: !type:GunOperator
+        targetKey: Target
+        requireLOS: true
+        targetState: Critical
+      services:
+      - !type:UtilityService
+        id: RangedService
+        proto: RMCNearbyGunTargets
+        key: Target
+
+  - tasks:
+    - !type:HTNCompoundTask
+      task: IdleSpinCompound
+
+- type: utilityQuery
+  id: RMCNearbyGunTargets
+  query:
+  - !type:NearbyHostilesQuery
+  considerations:
+  - !type:TargetIsNotDeadCon
+    curve: !type:BoolCurve
+  - !type:TargetDistanceCon
+    curve: !type:PresetCurve
+      preset: TargetDistance
+  - !type:TargetAccessibleCon
+    curve: !type:BoolCurve
+  - !type:TargetInLOSOrCurrentCon
+    curve: !type:BoolCurve

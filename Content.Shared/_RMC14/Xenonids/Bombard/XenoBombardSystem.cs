@@ -1,7 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Actions;
-using Content.Shared._RMC14.Xenonids.GasToggle;
 using Content.Shared._RMC14.Projectiles;
+using Content.Shared._RMC14.Xenonids.GasToggle;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.DoAfter;
@@ -53,13 +53,14 @@ public sealed class XenoBombardSystem : EntitySystem
 
         var ev = new XenoBombardDoAfterEvent { Coordinates = target, };
         var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent, args.Action) { BreakOnMove = true };
-        _doAfter.TryStartDoAfter(doAfter);
+        if (_doAfter.TryStartDoAfter(doAfter))
+        {
+            var selfMessage = Loc.GetString("rmc-glob-start-self");
+            _popup.PopupClient(selfMessage, ent, ent);
 
-        var selfMessage = Loc.GetString("rmc-glob-start-self");
-        _popup.PopupClient(selfMessage, ent, ent);
-
-        var othersMessage = Loc.GetString("rmc-glob-start-others", ("user", ent));
-        _popup.PopupEntity(othersMessage, ent, Filter.PvsExcept(ent), true, PopupType.MediumCaution);
+            var othersMessage = Loc.GetString("rmc-glob-start-others", ("user", ent));
+            _popup.PopupEntity(othersMessage, ent, Filter.PvsExcept(ent), true, PopupType.MediumCaution);
+        }
     }
 
     private void OnBombardDoAfter(Entity<XenoBombardComponent> ent, ref XenoBombardDoAfterEvent args)

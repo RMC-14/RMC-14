@@ -60,6 +60,7 @@
     - FootstepSound
     - DoorBumpOpener
   - type: Marine
+  - type: RMCSuitLight
   - type: HolocardState
   - type: Hunger
   - type: Thirst
@@ -150,6 +151,9 @@
       types:
         Asphyxiation: -0.33
   - type: NoSlip
+  - type: NoClothingSlowdown
+  - type: RMCSize
+    size: Humanoid
   - type: AffectableByWeeds
   - type: UserIFF
   - type: UserLimitHits

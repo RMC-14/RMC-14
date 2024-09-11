@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Attachable.Systems;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
@@ -120,6 +121,9 @@ public sealed partial class AttachableToggleableComponent : Component
 
     [DataField, AutoNetworkedField]
     public string ActionDesc = "Toggle an attachable. If you're seeing this, someone forgot to set the description properly.";
+
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? ActionsToRelayWhitelist;
 
     [DataField, AutoNetworkedField]
     public SpriteSpecifier Icon = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Objects/Weapons/Guns/Attachments/rail.rsi"), "flashlight");

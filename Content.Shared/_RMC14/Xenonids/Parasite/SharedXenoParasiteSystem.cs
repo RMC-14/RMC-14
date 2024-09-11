@@ -554,7 +554,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         if (!popups)
             return;
         _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes-self"), victim, victim, PopupType.MediumCaution);
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.MediumCaution);        
+        _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.MediumCaution);
     }
 
     private void Burst(Entity<VictimInfectedComponent> burstFrom)
@@ -563,11 +563,14 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             return;
         RemCompDeferred<VictimInfectedComponent>(burstFrom);
 
+        if (!TryComp(burstFrom, out TransformComponent? xform))
+            return;
+
         if (_container.TryGetContainer(burstFrom, burstFrom.Comp.LarvaContainerId, out var container))
         {
             foreach (var larva in container.ContainedEntities)
                 RemCompDeferred<BursterComponent>(larva);
-            _container.EmptyContainer(container);
+            _container.EmptyContainer(container, destination: xform.Coordinates);
         }
 
         Dirty(burstFrom, burstFrom.Comp);
@@ -579,6 +582,9 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
     private void OnTryMove(Entity<BursterComponent> burster, ref MoveInputEvent args)
     {
+        if (!args.HasDirectionalMovement)
+            return;
+
         if (TryComp<VictimInfectedComponent>(burster.Comp.BurstFrom, out var infected))
             Burst((burster.Comp.BurstFrom, infected));
     }
