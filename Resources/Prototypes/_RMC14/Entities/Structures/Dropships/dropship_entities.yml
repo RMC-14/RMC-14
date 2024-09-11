@@ -41,7 +41,6 @@
   - type: InteractionOutline
   - type: Clickable
   - type: DropshipUtilityPoint
-    dirOffset: Clockwise
   - type: Appearance
   - type: Tag
     tags:
