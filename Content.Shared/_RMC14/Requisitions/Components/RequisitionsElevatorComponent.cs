@@ -70,7 +70,7 @@ public sealed partial class RequisitionsElevatorComponent : Component
     public TimeSpan ChasmCheckEvery = TimeSpan.FromSeconds(0.5);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
-    public TimeSpan NextChasmCheck = TimeSpan.FromSeconds(0.5);
+    public TimeSpan NextChasmCheck;
 }
 
 [Serializable, NetSerializable]
