@@ -94,7 +94,7 @@
     contents:
     - id: RMCMagazineRifleM4SPRA19
       amount: 2
-    - id: RMCCrateMagazineM4SPRCustomImpact
+    - id: RMCMagazineRifleM4SPRA19Impact
       amount: 2
     - id: RMCMagazineRifleM4SPRA19 # TODO rmc14 RMCMagazineRifleM4SPRA19Incendiary
       amount: 2
