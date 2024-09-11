@@ -29,6 +29,7 @@
   - RMCMarineLawLethal
   - RMCMarineLawSearches
   - RMCMarineLawDemotions
+  - RMCMarineLawExecutions
 
 - type: guideEntry
   parent: RMC
@@ -71,4 +72,11 @@
   name: rmc-guide-entry-marine-law-demotions
   text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawDemotions.xml"
   priority: 5
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawExecutions
+  name: rmc-guide-entry-marine-law-executions
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawExecutions.xml"
+  priority: 6
 

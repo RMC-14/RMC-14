@@ -6,3 +6,4 @@ rmc-guide-entry-marine-law-njp = NJPs
 rmc-guide-entry-marine-law-lethal = Lethal Force
 rmc-guide-entry-marine-law-searches = Searches
 rmc-guide-entry-marine-law-demotions = Demotions
+rmc-guide-entry-marine-law-executions = Executions
