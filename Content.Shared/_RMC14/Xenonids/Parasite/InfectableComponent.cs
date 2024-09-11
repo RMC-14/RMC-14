@@ -17,7 +17,7 @@ public sealed partial class InfectableComponent : Component
     [DataField, AutoNetworkedField]
     public Dictionary<Sex, SoundSpecifier> PreburstSound = new()
     {
-        [Sex.Male] = new SoundCollectionSpecifier("RMCMalePreburstScreams", AudioParams.Default.WithVariation(0.05f)),
-        [Sex.Female] = new SoundCollectionSpecifier("RMCFemalePreburstScreams", AudioParams.Default.WithVariation(0.05f))
+        [Sex.Male] = new SoundCollectionSpecifier("RMCMalePreburstScreams"),
+        [Sex.Female] = new SoundCollectionSpecifier("RMCFemalePreburstScreams")
     };
 }
