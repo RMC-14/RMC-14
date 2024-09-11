@@ -44,6 +44,8 @@
     prototype: CMXenoLesserDrone
   - type: HiveConstructionUnique
     id: HiveCoreXeno
+  - type: RoofingEntity
+    range: 10
 
 - type: entity
   id: HiveCoreXenoConstructionNode

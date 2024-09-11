@@ -57,7 +57,7 @@
   - type: XenoDevour
   - type: XenoHide
   - type: SlowOnPull
-    multiplier: 0.86
+    multiplier: 0.3
   - type: XenoLeap
     delay: 0
     knockdownTime: 2
@@ -85,5 +85,7 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.55
     baseSprintSpeed: 10
+  - type: RMCSize
+    size: SmallXeno
   - type: RMCXenoDamageVisuals
     prefix: runner
