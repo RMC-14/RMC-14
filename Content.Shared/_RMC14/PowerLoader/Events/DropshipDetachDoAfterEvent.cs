@@ -15,12 +15,4 @@ public sealed partial class DropshipDetachDoAfterEvent : SimpleDoAfterEvent
         ContainerEntity = containerEntity;
         ContainedEntity = containedEntity;
     }
-
-    public override DoAfterEvent Clone()
-    {
-        DropshipDetachDoAfterEvent newDoAfter = (DropshipDetachDoAfterEvent) base.Clone();
-        newDoAfter.ContainerEntity = this.ContainerEntity;
-        newDoAfter.ContainedEntity = this.ContainedEntity;
-        return newDoAfter;
-    }
 }
