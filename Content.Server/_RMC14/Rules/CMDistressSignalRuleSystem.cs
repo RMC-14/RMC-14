@@ -887,7 +887,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         var mapId = _mapManager.CreateMap();
 
         //Just in case the planet was not selected before now
-        if (!_mapLoader.TryLoad(mapId, SelectRandomPlanet(), out var grids))
+        var planet = SelectRandomPlanet();
+        _lastPlanetMap = planet;
+
+        if (!_mapLoader.TryLoad(mapId, planet, out var grids))
             return false;
 
         EnsureComp<RMCPlanetComponent>(_mapManager.GetMapEntityId(mapId));
