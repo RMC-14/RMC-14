@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed 5-slot webbings unintentionally being able to fit larger magazines.
-    type: Fix
-  id: 182
-  time: '2024-06-24T23:53:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2608
-- author: DrSmugleaf
-  changes:
   - message: The amount of marines per xeno has been lowered from 4 to 3. With 200
       players this means that 67 xenos will spawn round-start, instead of 50.
     type: Tweak
@@ -4391,5 +4384,12 @@
   id: 681
   time: '2024-09-11T08:58:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4000
+- author: DrSmugleaf
+  changes:
+  - message: Added Honkzee Beezs figurine.
+    type: Add
+  id: 682
+  time: '2024-09-11T09:24:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4003
 Name: RMC14
 Order: -1
