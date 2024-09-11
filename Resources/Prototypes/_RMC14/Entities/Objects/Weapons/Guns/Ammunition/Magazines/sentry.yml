@@ -35,7 +35,7 @@
   parent: BaseMagazineRifle
   id: RMCMagazineSentryShotgun
   name: "12g buckshot drum"
-  description: "An ammo drum of 50 12g buckshot drums for the UN 12-G Shotgun Sentry. Just feed it into the sentry gun's ammo port when its ammo is depleted."
+  description: "An ammo drum of 50 12g buckshot shells for the UN 12-G Shotgun Sentry. Just feed it into the sentry gun's ammo port when its ammo is depleted."
   components:
   - type: Tag
     tags:
