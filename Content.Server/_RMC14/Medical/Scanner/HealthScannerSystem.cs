@@ -107,7 +107,7 @@ public sealed class HealthScannerSystem : EntitySystem
     /// <returns></returns>
     private bool CanUseHealthScannerPopup(Entity<HealthScannerComponent> scanner, EntityUid user, ref EntityUid target)
     {
-        if (HasComp<CMStasisBagComponent>(target) && TryComp(target, out EntityStorageComponent? entityStorage))
+        if (HasComp<HealthScannableContainerComponent>(target) && TryComp(target, out EntityStorageComponent? entityStorage))
         {
             foreach (var entity in entityStorage.Contents.ContainedEntities)
             {

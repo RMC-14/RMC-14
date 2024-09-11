@@ -17,10 +17,12 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
+using Content.Shared.Mobs;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
+using Content.Shared.Stunnable;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -91,6 +93,10 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         SubscribeLocalEvent<DropshipWeaponPointComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
         SubscribeLocalEvent<DropshipUtilityPointComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
+        SubscribeLocalEvent<ActivePowerLoaderPilotComponent, PreventCollideEvent>(OnActivePilotPreventCollide);
+        SubscribeLocalEvent<ActivePowerLoaderPilotComponent, KnockedDownEvent>(OnActivePilotStunned);
+        SubscribeLocalEvent<ActivePowerLoaderPilotComponent, StunnedEvent>(OnActivePilotStunned);
+        SubscribeLocalEvent<ActivePowerLoaderPilotComponent, MobStateChangedEvent>(OnActivePilotMobStateChanged);
     }
 
     private void OnPowerLoaderMapInit(Entity<PowerLoaderComponent> ent, ref MapInitEvent args)
@@ -583,6 +589,17 @@ public sealed class PowerLoaderSystem : EntitySystem
         args.Cancelled = true;
     }
 
+    private void OnActivePilotStunned<T>(Entity<ActivePowerLoaderPilotComponent> ent, ref T args)
+    {
+        RemovePilot(ent);
+    }
+
+    private void OnActivePilotMobStateChanged(Entity<ActivePowerLoaderPilotComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState == MobState.Critical || args.NewMobState == MobState.Dead)
+            OnActivePilotStunned(ent, ref args);
+    }
+
     private bool CanAttachPopup(
         ref Entity<PowerLoaderComponent?> user,
         Entity<DropshipWeaponPointComponent> target,
@@ -982,16 +999,21 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
     }
 
+    private void RemovePilot(Entity<ActivePowerLoaderPilotComponent> active)
+    {
+        _buckle.Unbuckle(active.Owner, null);
+        RemCompDeferred<ActivePowerLoaderPilotComponent>(active);
+    }
+
     public override void Update(float frameTime)
     {
         var pilots = EntityQueryEnumerator<ActivePowerLoaderPilotComponent>();
-        while (pilots.MoveNext(out var uid, out _))
+        while (pilots.MoveNext(out var uid, out var active))
         {
             if (!TryComp(uid, out BuckleComponent? buckle) ||
                 !HasComp<PowerLoaderComponent>(buckle.BuckledTo))
             {
-                _buckle.Unbuckle(uid, null);
-                RemCompDeferred<ActivePowerLoaderPilotComponent>(uid);
+                RemovePilot((uid, active));
             }
         }
     }

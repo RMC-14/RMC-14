@@ -250,8 +250,8 @@
         crate: RMCCrateMagazineM4SPRCustomMixed
       - cost: 3000
         crate: RMCCrateMagazineM4SPRCustomStandard
-#      - cost: 3000 These ones are straight downgrades and thus shouldn't be for sale
-#        crate: RMCCrateMagazineM4SPRCustomImpact
+      - cost: 3000 
+        crate: RMCCrateMagazineM4SPRCustomImpact
 #      - cost: 3000
-#        crate: RMCCrateMagazineM4SPRCustomIncendiary
+#        crate: RMCCrateMagazineM4SPRCustomIncendiary These ones are straight downgrades and thus shouldn't be for sale
 #      - cost: 4000

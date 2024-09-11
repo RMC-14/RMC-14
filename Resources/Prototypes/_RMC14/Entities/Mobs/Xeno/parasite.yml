@@ -76,3 +76,11 @@
   - type: HideLayerClothing
     slots:
     - Snout
+  - type: RMCSize
+    size: Small
+  - type: HTN
+    rootTask:
+      task: RMCParasiteCompound
+    blackboard:
+      VisionRadius: !type:Single
+        3.0

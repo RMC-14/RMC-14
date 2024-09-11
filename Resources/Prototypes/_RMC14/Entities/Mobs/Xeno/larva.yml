@@ -60,6 +60,8 @@
     baseSprintSpeed: 6.7
   - type: Speech
     speechSounds: XenonidLarva
+  - type: RMCSize
+    size: Small
 
 # For surgeries/failed incubations
 - type: entity

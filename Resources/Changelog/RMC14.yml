@@ -1,118 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: The health analyzer now identifies chest-bursted marines as permanently
-      deceased
-    type: Add
-  id: 163
-  time: '2024-06-18T21:45:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2540
-- author: Nairodian
-  changes:
-  - message: Added the ability to deconstruct and make; chairs, fences, and light
-      fixtures.
-    type: Add
-  - message: Removed deconstruction for racks and crates.
-    type: Remove
-  id: 164
-  time: '2024-06-18T23:44:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2531
-- author: Sigil
-  changes:
-  - message: Added the systems for attachments.
-    type: Add
-  - message: Added the extended barrel, recoil compensator, suppressor, rail flashlight,
-      b8 smart-scope and underbarrel shotgun.
-    type: Add
-  id: 165
-  time: '2024-06-21T01:22:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2467
-- author: noisrevni-dev
-  changes:
-  - message: Added ASRS item search bar to ease supply crew searching for specific
-      item.
-    type: Add
-  id: 166
-  time: '2024-06-21T01:24:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2541
-- author: blueDev2
-  changes:
-  - message: Added Holocards
-    type: Add
-  id: 167
-  time: '2024-06-21T03:29:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2544
-- author: vero5123
-  changes:
-  - message: runners can not longer leap if resting
-    type: Fix
-  id: 168
-  time: '2024-06-23T05:13:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2557
-- author: blueDev2
-  changes:
-  - message: Health scanner works through stasis bags
-    type: Tweak
-  id: 169
-  time: '2024-06-23T05:25:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2550
-- author: Dorragon
-  changes:
-  - message: Bonegel and bone setter description's and names
-    type: Fix
-  id: 170
-  time: '2024-06-23T05:32:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2555
-- author: MetalSage
-  changes:
-  - message: Added the Warrior's punch, fling and lunge actions.
-    type: Add
-  - message: Added the Crusher's charge and stomp actions.
-    type: Add
-  - message: Added the Queen's gut and screech actions.
-    type: Add
-  - message: Defender headbutt action now requires a marine target to be used.
-    type: Fix
-  id: 171
-  time: '2024-06-23T08:03:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2324
-- author: DrSmugleaf
-  changes:
-  - message: Added all Lurker abilities and most of the Spitter's abilities.
-    type: Add
-  - message: Enabled the Spitter, Lurker and Warrior evolutions.
-    type: Add
-  id: 172
-  time: '2024-06-23T11:13:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2566
-- author: Whisper
-  changes:
-  - message: Added medical guidebook.
-    type: Add
-  id: 173
-  time: '2024-06-23T11:17:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2567
-- author: vero5123
-  changes:
-  - message: Adds a short move delay to the Runner after hitting a pounce.
-    type: Tweak
-  id: 174
-  time: '2024-06-23T11:25:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2559
-- author: vero5123
-  changes:
-  - message: Defender can no longer pull and headbutt at the same time
-    type: Fix
-  id: 175
-  time: '2024-06-23T11:25:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2558
-- author: Cephalopod222
-  changes:
-  - message: Added new M54C sprites!
-    type: Add
-  id: 176
-  time: '2024-06-23T20:42:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2572
 - author: MACMAN2003
   changes:
   - message: Added weapon attachments to the ASRS requisition console.
@@ -4366,5 +4252,152 @@
   id: 662
   time: '2024-09-08T01:22:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3960
+- author: Vermidia
+  changes:
+  - message: Backpacks instant open on the floor
+    type: Fix
+  id: 663
+  time: '2024-09-10T22:17:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3969
+- author: Vermidia
+  changes:
+  - message: Fix Runner pull speed being much faster than it should be
+    type: Fix
+  id: 664
+  time: '2024-09-10T22:17:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3979
+- author: Vermidia
+  changes:
+  - message: Parasites now have AI. They will try to leap and infect nearby hosts,
+      and return to eggs on their own after some time.
+    type: Add
+  id: 665
+  time: '2024-09-10T22:18:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3928
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Updated LV-624's Research Landing Zone
+    type: Tweak
+  id: 666
+  time: '2024-09-10T22:21:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3975
+- author: crystalHex
+  changes:
+  - message: Whistles can now be used from the action bar.
+    type: Tweak
+  id: 667
+  time: '2024-09-10T22:20:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3838
+- author: Sigil
+  changes:
+  - message: "You can now remove ammo from shotguns and grenade launchers. To do so,\
+      \ press the \"activate item in world\" hotkey \u2014 E by default. This hotkey\
+      \ also works for other weapons."
+    type: Add
+  id: 668
+  time: '2024-09-10T22:23:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3543
+- author: KalimbaMachine
+  changes:
+  - message: Clipboard Upgrades!
+    type: Tweak
+  id: 669
+  time: '2024-09-10T22:23:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3879
+- author: Vermidia
+  changes:
+  - message: Added ammo stuns. They don't impact big xenos (t3s, hivelord, queen)
+      or very small ones (parasites, larva) but apply stun and slowdown and knock
+      xenos back.
+    type: Add
+  - message: Added scout high impact ammo. It has a max effect range of 32 but gets
+      worse the farther the bullet travels.
+    type: Add
+  - message: Added stuns to buckshot and slug ammo, with slug giving worse effects
+      but having a better range.
+    type: Add
+  - message: Fixed some stun and slow timers being 1/2 as long as intended (stomp,
+      coughing blood, regurgitation)
+    type: Fix
+  - message: Neurotoxin no longer makes you blue
+    type: Fix
+  id: 670
+  time: '2024-09-10T22:22:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3965
+- author: Sigil
+  changes:
+  - message: The M96S integrated scope can now toggle between 2x and 4x magnification.
+      The former allows you to move while aiming.
+    type: Add
+  - message: 'Damage falloff for bullets added. In broad strokes: The further you
+      are from your target, the less damage your shots will do. Notable weapons and
+      attachments: M63 bullets start rapidly losing damage past 4 tiles, the M4SPR
+      removes falloff from its ammo, M96S ammo has no falloff, buckshot becomes useless
+      at 4 tiles, slugs at 8 and flechettes at 12, active scopes reduce falloff and
+      the silencer increases it.'
+    type: Add
+  - message: The masterkey now deals massively increased damage to walls, doors and
+      certain other structures. Its damage to other targets has been reduced to its
+      intended values. The primary pellet now deals 55 damage, while the three additional
+      ones deal 20 each.
+    type: Tweak
+  - message: Brought all scope doafters in line with how they are on CM.
+    type: Tweak
+  - message: A weapon with a magnetic harness attached no longer becomes immune to
+      gravity if you throw it while something else is in your suit storage.
+    type: Fix
+  - message: Buckshot, slugs and flechettes now do piercing damage instead of blunt.
+    type: Fix
+  - message: The masterkey can no longer be fired when the gun it's attached to is
+      not wielded.
+    type: Fix
+  - message: The bipod can no longer be instantly deployed on glass shards.
+    type: Fix
+  - message: The masterkey can no longer use ammo other than buckshot.
+    type: Fix
+  - message: The arm brace now properly deactivates when swapped out while still active,
+      and doesn't permanently glue the SMG to your arm.
+    type: Fix
+  id: 671
+  time: '2024-09-10T22:26:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3422
+- author: CaasGit
+  changes:
+  - message: Allow for body bags to be health scanned.
+    type: Fix
+  id: 672
+  time: '2024-09-10T22:39:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3919
+- author: DrSmugleaf
+  changes:
+  - message: Fixed sentries being able to fit non-sentry magazines.
+    type: Fix
+  id: 673
+  time: '2024-09-10T22:56:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3982
+- author: DrSmugleaf
+  changes:
+  - message: Added being able to look through ladders without moving through them.
+      This can be done Alt+Clicking the ladder, or by dragging the ladder to yourself
+      like in SS13.
+    type: Add
+  id: 674
+  time: '2024-09-11T01:17:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3986
+- author: DrSmugleaf
+  changes:
+  - message: Fixed pressing shift undeploying your bipod, stopping overwatch, stopping
+      xenonid watch, etc.
+    type: Fix
+  id: 675
+  time: '2024-09-11T01:45:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3988
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Queen screech not unbuckling power loader operators.
+    type: Fix
+  id: 676
+  time: '2024-09-11T01:51:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3991
 Name: RMC14
 Order: -1

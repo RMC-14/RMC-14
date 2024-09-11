@@ -1,5 +1,5 @@
-using Content.Shared.Movement.Events;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Movement.Events;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
@@ -47,6 +47,9 @@ public abstract class SharedHyperSleepChamberSystem : EntitySystem
 
     private void OnMoveInput(Entity<InsideHyperSleepChamberComponent> ent, ref MoveInputEvent args)
     {
+        if (!args.HasDirectionalMovement)
+            return;
+
         if (_timing.ApplyingState)
             return;
 

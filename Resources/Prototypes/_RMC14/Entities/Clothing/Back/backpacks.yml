@@ -56,6 +56,7 @@
   components:
   - type: StorageOpenDoAfter
     skipInHand: true
+    skipOnGround: true
   - type: StorageCloseOnMove
     skipInHand: true
 

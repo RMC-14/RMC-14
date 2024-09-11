@@ -156,6 +156,8 @@
     proto: alien
   - type: MovedByPressure
   - type: NoSlip
+  - type: RMCSize
+    size: Xeno
   - type: Pullable
   - type: Speech
     speechVerb: Xeno
