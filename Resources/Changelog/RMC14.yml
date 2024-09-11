@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Raffle durations are now 10 seconds, down from 30, and don't extend when
-      more people join the raffle
-    type: Tweak
-  - message: There is no longer a 3 second delay to clicking the join raffle button.
-    type: Tweak
-  id: 179
-  time: '2024-06-24T01:32:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2590
 - author: Tunguso4ka
   changes:
   - message: Chem Dispenser temporary disabled, till the chem recipes added.
@@ -4391,5 +4381,16 @@
   id: 678
   time: '2024-09-11T03:00:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3993
+- author: DrSmugleaf
+  changes:
+  - message: Added sounds at round-end for each round outcome, made by Bolgarich.
+    type: Add
+  - message: Added planet map vote. In the lobby, a vote will be made for the next
+      planet map to play on. This excludes the planet map that was selected for the
+      last round.
+    type: Add
+  id: 679
+  time: '2024-09-11T07:40:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4001
 Name: RMC14
 Order: -1
