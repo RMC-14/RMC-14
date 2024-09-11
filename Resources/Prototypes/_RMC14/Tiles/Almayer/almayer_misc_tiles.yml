@@ -2,7 +2,7 @@
   parent: CMTileBase
   id: RMCFloorEmpty
   name: tiles-rmc-empty
-  sprite: /Textures/_RMC14/Tiles/floors/black.png
+  sprite: /Textures/_RMC14/Tiles/floors/blank.png
   blockAnchoring: true
   blockConstruction: true
   weedsSpreadable: false
