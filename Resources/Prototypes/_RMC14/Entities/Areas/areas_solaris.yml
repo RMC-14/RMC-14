@@ -662,6 +662,16 @@
 - type: entity
   parent: RMCAreaBigredv2OutsideNw
   id: RMCAreaBigredv2OutsideNwCeiling
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -752,6 +762,16 @@
 - type: entity
   parent: RMCAreaBigredv2Caves
   id: RMCAreaBigredv2CavesEta
+  components:
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
