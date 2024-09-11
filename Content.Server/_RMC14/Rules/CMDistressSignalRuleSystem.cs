@@ -1,9 +1,11 @@
+using System.Linq;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Rules.CrashLand;
 using Content.Server.Administration.Components;
 using Content.Server.Administration.Managers;
 using Content.Server.Atmos.EntitySystems;
+using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
@@ -16,6 +18,8 @@ using Content.Server.Spawners.Components;
 using Content.Server.Spawners.EntitySystems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Server.Voting;
+using Content.Server.Voting.Managers;
 using Content.Shared._RMC14.Bioscan;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
@@ -70,6 +74,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly AtmosphereSystem _atmosphere = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IBanManager _bans = default!;
+    [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ContainerSystem _containers = default!;
@@ -94,6 +99,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly IVoteManager _voteManager = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
 
@@ -118,8 +124,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     public readonly Dictionary<string, float> MarinesPerXeno = new()
     {
         ["/Maps/_RMC14/lv624.yml"] = 4.5f,
-        ["/Maps/_RMC14/solaris.yml"] = 8f,
-        ["/Maps/_RMC14/prison.yml"] = 7.5f,
+        ["/Maps/_RMC14/solaris.yml"] = 6.5f,
+        ["/Maps/_RMC14/prison.yml"] = 6.5f,
         ["/Maps/_RMC14/shiva.yml"] = 6.5f,
     };
 
@@ -128,6 +134,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private EntityQuery<CrashLandableComponent> _crashLandableQuery;
     private EntityQuery<HyperSleepChamberComponent> _hyperSleepChamberQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
+
+    private string? _lastPlanetMap;
 
     [ViewVariables]
     public string? SelectedPlanetMap { get; private set; }
@@ -493,26 +501,28 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (distress.Result == DistressSignalRuleResult.None)
                 continue;
 
-            SoundSpecifier? audio = distress.Result switch
+            var audio = distress.Result switch
             {
                 DistressSignalRuleResult.None => null,
-                // TODO RMC14
-                // DistressSignalRuleResult.MajorMarineVictory => distress.MajorMarineAudio,
-                // DistressSignalRuleResult.MinorMarineVictory => distress.MinorMarineAudio,
-                // DistressSignalRuleResult.MajorXenoVictory => distress.MajorXenoAudio,
-                // DistressSignalRuleResult.MinorXenoVictory => distress.MinorXenoAudio,
+                DistressSignalRuleResult.MajorMarineVictory => distress.MajorMarineAudio,
+                DistressSignalRuleResult.MinorMarineVictory => distress.MinorMarineAudio,
+                DistressSignalRuleResult.MajorXenoVictory => distress.MajorXenoAudio,
+                DistressSignalRuleResult.MinorXenoVictory => distress.MinorXenoAudio,
                 // DistressSignalRuleResult.AllDied => distress.AllDiedAudio,
-                _ => null
+                _ => null,
             };
 
             if (audio != null)
-                _audio.PlayGlobal(_audio.GetSound(audio), Filter.Broadcast(), true, AudioParams.Default.WithVolume(0));
+                _audio.PlayGlobal(_audio.GetSound(audio), Filter.Broadcast(), true, AudioParams.Default.WithVolume(-8));
         }
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
-        if (!_autoBalance) {
+        StartPlanetVote();
+
+        if (!_autoBalance)
+        {
             //Just to make sure the planet gets reset
             ResetSelectedPlanet();
             return;
@@ -555,6 +565,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             break;
         }
+
         ResetSelectedPlanet();
     }
 
@@ -876,7 +887,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         var mapId = _mapManager.CreateMap();
 
         //Just in case the planet was not selected before now
-        if (!_mapLoader.TryLoad(mapId, SelectRandomPlanet(), out var grids))
+        var planet = SelectRandomPlanet();
+        _lastPlanetMap = planet;
+
+        if (!_mapLoader.TryLoad(mapId, planet, out var grids))
             return false;
 
         EnsureComp<RMCPlanetComponent>(_mapManager.GetMapEntityId(mapId));
@@ -1194,17 +1208,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             return SelectedPlanetMap;
 
         SelectedPlanetMap = _random.Pick(_planetMaps.Split(","));
-        SelectedPlanetMapName = SelectedPlanetMap.Replace("/Maps/_RMC14/", "").Replace(".yml", "");
+        SelectedPlanetMapName = GetPlanetName(SelectedPlanetMap);
 
-        // TODO RMC14 save these somewhere and avert the shitcode
-        SelectedPlanetMapName = SelectedPlanetMapName switch
-        {
-            "lv624" => "LV-624",
-            "solaris" => "Solaris Ridge",
-            "prison" => "Fiorina Science Annex",
-            "shiva" => "Shivas Snowball",
-            _ => SelectedPlanetMapName,
-        };
         return SelectedPlanetMap;
     }
 
@@ -1213,6 +1218,60 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         SelectedPlanetMap = null;
         SelectedPlanetMapName = null;
     }
+
+    private string GetPlanetName(string planet)
+    {
+        // TODO RMC14 save these somewhere and avert the shitcode
+        var name = planet.Replace("/Maps/_RMC14/", "").Replace(".yml", "");
+        return name switch
+        {
+            "lv624" => "LV-624",
+            "solaris" => "Solaris Ridge",
+            "prison" => "Fiorina Science Annex",
+            "shiva" => "Shivas Snowball",
+            _ => name,
+        };
+    }
+
+    private void StartPlanetVote()
+    {
+        if (!_config.GetCVar(RMCCVars.RMCPlanetMapVote))
+            return;
+
+        var planets = MarinesPerXeno.Keys.ToList();
+        if (_lastPlanetMap != null)
+            planets.Remove(_lastPlanetMap);
+
+        var vote = new VoteOptions
+        {
+            Title = Loc.GetString("rmc-distress-signal-next-map-title"),
+            Options = planets.Select(p => ((string, object)) (GetPlanetName(p), p)).ToList(),
+            Duration = TimeSpan.FromMinutes(2),
+        };
+        vote.SetInitiatorOrServer(null);
+
+        var handle = _voteManager.CreateVote(vote);
+        handle.OnFinished += (_, args) =>
+        {
+            string picked;
+            if (args.Winner == null)
+            {
+                picked = (string) _random.Pick(args.Winners);
+                var msg = Loc.GetString("rmc-distress-signal-next-map-tie", ("picked", GetPlanetName(picked)));
+                _chatManager.DispatchServerAnnouncement(msg);
+            }
+            else
+            {
+                picked = (string) args.Winner;
+                var msg = Loc.GetString("rmc-distress-signal-next-map-win", ("winner", GetPlanetName(picked)));
+                _chatManager.DispatchServerAnnouncement(msg);
+            }
+
+            SelectedPlanetMap = picked;
+            SelectedPlanetMapName = GetPlanetName(picked);
+        };
+    }
+
     private string GetRandomOperationName()
     {
         var name = string.Empty;

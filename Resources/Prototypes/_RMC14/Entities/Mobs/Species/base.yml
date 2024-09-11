@@ -151,6 +151,9 @@
       types:
         Asphyxiation: -0.33
   - type: NoSlip
+  - type: NoClothingSlowdown
+  - type: RMCSize
+    size: Humanoid
   - type: AffectableByWeeds
   - type: UserIFF
   - type: UserLimitHits

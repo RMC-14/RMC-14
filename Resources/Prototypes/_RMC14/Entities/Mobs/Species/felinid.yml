@@ -12,7 +12,6 @@
     - HeadTop
   - type: Sprite
     drawdepth: Mobs
-    scale: 0.8, 0.8
   - type: Vocal
     sounds:
       Male: RMCMaleFelinid
@@ -25,6 +24,3 @@
   parent: BaseSpeciesDummy
   id: MobFelinidDummy
   noSpawn: true
-  components:
-  - type: Sprite
-    scale: 0.8, 0.8

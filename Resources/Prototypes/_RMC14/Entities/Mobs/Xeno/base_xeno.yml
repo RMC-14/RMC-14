@@ -156,6 +156,8 @@
     proto: alien
   - type: MovedByPressure
   - type: NoSlip
+  - type: RMCSize
+    size: Xeno
   - type: Pullable
   - type: Speech
     speechVerb: Xeno
@@ -228,6 +230,8 @@
     - enum.PaperUiKey.Key
   - type: ActiveInputMover
   - type: HiveTracker
+  - type: RequireProjectileTarget
+    active: false
 
 - type: entity
   abstract: true

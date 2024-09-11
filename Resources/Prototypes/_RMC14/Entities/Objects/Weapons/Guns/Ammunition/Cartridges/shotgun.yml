@@ -30,6 +30,11 @@
     - state: buckshot_shell_1
   - type: CartridgeAmmo
     proto: CMPelletShotgunBuckshot
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMShellShotgun
+    - RMCShellShotgunBuckshot
 
 - type: entity
   parent: CMShellShotgunBase
@@ -93,3 +98,6 @@
 
 - type: Tag
   id: CMShellShotgun
+
+- type: Tag
+  id: RMCShellShotgunBuckshot

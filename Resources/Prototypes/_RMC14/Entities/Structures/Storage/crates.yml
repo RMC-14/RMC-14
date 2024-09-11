@@ -779,3 +779,26 @@
       map: ["enum.WeldableLayers.BaseWelded"]
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/minecart.rsi
+
+- type: entity
+  parent: RMCCrateWeldable
+  id: RMCCrateMortarAmmo
+  name: mortar ammo crate
+  description: A crate containing live mortar shells with various payloads. DO NOT DROP. KEEP AWAY FROM FIRE SOURCES.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/mortar_ammo.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _RMC14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/weapons.rsi

@@ -36,7 +36,7 @@
   parent: RMCBarrelAttachmentBase
   id: RMCAttachmentBarrelCharger
   name: barrel charger
-  description: The lengthened barrel speeds up and stabilizes the bullet, increasing velocity. # and accuracy.
+  description: A hyper threaded barrel extender that fits to the muzzle of most firearms. Greatly increases projectile damage at the cost of firing speed.
   components:
   - type: Sprite
     state: hbarrel
@@ -86,17 +86,17 @@
       damageAddMult: -0.1
     - conditions:
         wieldedOnly: true
-      recoilFlat: -3 # TODO: Figure out recoil modifiers equivalent to CM.
+      recoilFlat: -3
     - conditions:
         unwieldedOnly: true
-      recoilFlat: -2 # TODO: Figure out recoil modifiers equivalent to CM.
+      recoilFlat: -2
 
 - type: entity
   parent: RMCBarrelAttachmentBase
   id: RMCAttachmentSuppressor
   name: suppressor
   description: "A small tube with exhaust ports to expel noise and gas.
-    Does not completely silence a weapon, but does make it much quieter and a little more accurate and stable at the cost of slightly reduced damage."
+    Does not completely silence a weapon, but does make it much quieter at the cost of slightly reduced damage."
   components:
   - type: Sprite
     state: suppressor

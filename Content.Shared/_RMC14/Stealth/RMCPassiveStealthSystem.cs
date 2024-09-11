@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Stealth;
 using Content.Shared.Foldable;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -59,10 +58,9 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
         if (TryComp<FoldableComponent>(ent.Owner, out var fold) && fold.IsFolded)
             return;
 
-        if(ent.Comp.Enabled == null)
-            ent.Comp.Enabled = false;
+        ent.Comp.Enabled ??= false;
 
-        if (!_whitelist.IsValid(ent.Comp.Whitelist, args.User))
+        if (!ent.Comp.Enabled.Value && !_whitelist.IsValid(ent.Comp.Whitelist, args.User))
         {
             var popup = Loc.GetString("rmc-skills-cant-use", ("item", ent.Owner));
             _popup.PopupClient(popup, args.User, args.User, PopupType.SmallCaution);

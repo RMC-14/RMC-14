@@ -13,8 +13,11 @@
 - type: tile
   parent: RMCFloorAIGlowing
   id: RMCFloorAIGlowingNoBuild
+  baseTurf: ""
+  deconstructTools: [ ]
   blockAnchoring: true
   blockConstruction: true
+  weedsSpreadable: false
 
 - type: tile
   parent: RMCFloorAIGlowing
@@ -29,8 +32,11 @@
 - type: tile
   parent: RMCFloorAI
   id: RMCFloorAINoBuild
+  baseTurf: ""
+  deconstructTools: [ ]
   blockAnchoring: true
   blockConstruction: true
+  weedsSpreadable: false
 
 - type: tile
   parent: RMCFloorAINoBuild
