@@ -92,6 +92,7 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         SubscribeLocalEvent<DropshipWeaponPointComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
         SubscribeLocalEvent<DropshipUtilityPointComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
+
         SubscribeLocalEvent<ActivePowerLoaderPilotComponent, PreventCollideEvent>(OnActivePilotPreventCollide);
         SubscribeLocalEvent<ActivePowerLoaderPilotComponent, KnockedDownEvent>(OnActivePilotStunned);
         SubscribeLocalEvent<ActivePowerLoaderPilotComponent, StunnedEvent>(OnActivePilotStunned);
@@ -373,7 +374,7 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         var slotEv = new GetAttachementSlotEvent(_entityManager.GetNetEntity(user), _entityManager.GetNetEntity(used));
         RaiseLocalEvent(target, slotEv);
-        var slot = _container.EnsureContainer<ContainerSlot>(target, slotEv.slotId);
+        var slot = _container.EnsureContainer<ContainerSlot>(target, slotEv.SlotId);
 
         if (slot is null)
         {
@@ -414,7 +415,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         {
             return;
         }
-        args.slotId = slot.ID;
+        args.SlotId = slot.ID;
     }
 
     private void OnGetSlot(Entity<DropshipUtilityPointComponent> ent, ref GetAttachementSlotEvent args)
@@ -436,7 +437,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         {
             return;
         }
-        args.slotId = slot.ID;
+        args.SlotId = slot.ID;
     }
 
 

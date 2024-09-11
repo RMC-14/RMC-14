@@ -26,7 +26,7 @@ public sealed partial class GetAttachementSlotEvent : EntityEventArgs
 
     public bool BeingAttached = true;
 
-    public string slotId = "";
+    public string SlotId = "";
 
     public GetAttachementSlotEvent(NetEntity user, NetEntity? used)
     {
