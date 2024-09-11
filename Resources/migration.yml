@@ -778,3 +778,27 @@ CMSeatBase: CMChair
 
 # 2024-08-28
 CMScrubsNurse: RMCScrubsLightBlue
+
+# 2024-09-10
+# Changed a bunch of upstream IDs to RMC ones
+ClothingMaskGas: CMMaskGas
+LampGold: RMCLamp
+Lamp: RMCLamp
+Lantern: RMCFlashlightLantern
+FlashlightLantern: RMCFlashlight
+SpawnMobMonkey: CMSpawnMobMonkey
+SalvageHumanCorpseSpawner: RMCSpawnerCorpseColonist
+PowerCellSmall: RMCPowerCellCrap
+PowerCellSmallPrinted: RMCPowerCellCrapEmpty
+PowerCellMedium: RMCPowerCell
+PowerCellMediumPrinted: RMCPowerCell
+PowerCellHigh: RMCPowerCellHigh
+PowerCellHighPrinted: RMCPowerCellHighEmpty
+PowerCellHyper: RMCPowerCellHyper
+PowerCellHyperPrinted: RMCPowerCellHyperEmpty
+UnfinishedMachineFrame: CMMachineFrameUnfinished
+MachineFrame: CMMachineFrame
+Autolathe: CMAutolathe
+Paper: CMPaper
+Pen: CMPen
+LuxuryPen: CMPenFountain
