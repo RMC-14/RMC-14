@@ -6,6 +6,7 @@
   - type: GunUnskilledPenalty
   - type: GunIFF
     enabled: false
+  - type: RMCWeaponDamageFalloff
   - type: Clothing
     quickEquip: false
   - type: GunSkilledRecoil

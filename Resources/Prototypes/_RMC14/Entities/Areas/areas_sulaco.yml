@@ -1,26 +1,26 @@
 ﻿- type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBase
+  parent: RMCAreaBase
   id: RMCAreaShuttle
   suffix: Sulaco Area
-  components:
-  - type: Sprite
-    sprite: _RMC14/Areas/areas.rsi
-    state: blank
 
 - type: entity
-  parent:
-  - RMCAreaReinforcedMetal
-  - RMCAreaShuttle
+  parent: RMCAreaShuttle
   id: RMCAreaShuttleDrop1
   components:
   - type: Area
     resinAllowed: false
-    avoidBioscan: False
-    noTunnel: True
-    unweedable: False
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
     landingZone: true
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
 
 - type: entity
   parent: RMCAreaShuttleDrop1
@@ -87,17 +87,23 @@
     state: away1
 
 - type: entity
-  parent:
-  - RMCAreaReinforcedMetal
-  - RMCAreaShuttle
+  parent: RMCAreaShuttle
   id: RMCAreaShuttleDrop2
   components:
   - type: Area
     resinAllowed: false
-    avoidBioscan: False
-    noTunnel: True
-    unweedable: False
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
     landingZone: true
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
 
 - type: entity
   parent: RMCAreaShuttleDrop2

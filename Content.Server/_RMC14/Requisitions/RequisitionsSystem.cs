@@ -7,6 +7,8 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
+using Content.Shared.Chasm;
+using Content.Shared.Coordinates;
 using Content.Shared.Database;
 using Content.Shared.Mobs.Components;
 using Content.Shared.UserInterface;
@@ -14,6 +16,7 @@ using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using static Content.Shared._RMC14.Requisitions.Components.RequisitionsElevatorMode;
@@ -24,9 +27,11 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 {
     [Dependency] private readonly IAdminLogManager _adminLogs = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly ChasmSystem _chasm = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly PhysicsSystem _physics = default!;
@@ -36,17 +41,23 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
     private static readonly EntProtoId AccountId = "RMCASRSAccount";
     private const string PaperRequisitionInvoice = "RMCPaperRequisitionInvoice";
 
+    private EntityQuery<ChasmComponent> _chasmQuery;
+    private EntityQuery<ChasmFallingComponent> _chasmFallingQuery;
+
     private int _starting;
     private int _gain;
+
+    private readonly HashSet<Entity<MobStateComponent>> _toPit = new();
 
     public override void Initialize()
     {
         base.Initialize();
 
+        _chasmQuery = GetEntityQuery<ChasmComponent>();
+        _chasmFallingQuery = GetEntityQuery<ChasmFallingComponent>();
+
         SubscribeLocalEvent<RequisitionsComputerComponent, MapInitEvent>(OnComputerMapInit);
         SubscribeLocalEvent<RequisitionsComputerComponent, BeforeActivatableUIOpenEvent>(OnComputerBeforeActivatableUIOpen);
-
-        SubscribeLocalEvent<RequisitionsElevatorComponent, EntityUnpausedEvent>(OnElevatorUnpaused);
 
         Subs.BuiEvents<RequisitionsComputerComponent>(RequisitionsUIKey.Key, subs =>
         {
@@ -62,12 +73,6 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
     {
         ent.Comp.Account = GetAccount();
         Dirty(ent);
-    }
-
-    private void OnElevatorUnpaused(Entity<RequisitionsElevatorComponent> ent, ref EntityUnpausedEvent args)
-    {
-        if (ent.Comp.ToggledAt is { } at)
-            ent.Comp.ToggledAt = at + args.PausedTime;
     }
 
     private void OnComputerBeforeActivatableUIOpen(Entity<RequisitionsComputerComponent> computer, ref BeforeActivatableUIOpenEvent args)
@@ -289,7 +294,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
     private void SetUILastInteracted(Entity<RequisitionsComputerComponent> computerEnt)
     {
         var query = EntityQueryEnumerator<RequisitionsComputerComponent>();
-        while (query.MoveNext(out var uid, out var otherComputer))
+        while (query.MoveNext(out _, out var otherComputer))
         {
             otherComputer.IsLastInteracted = false;
         }
@@ -341,8 +346,6 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         if (gearMode != null)
             UpdateGears(elevator, gearMode.Value);
 
-        Console.WriteLine(mode);
-        Console.WriteLine(nextMode);
         RequisitionsRailingMode? railingMode = (mode, nextMode) switch
         {
             (Lowered, _) => RequisitionsRailingMode.Raised,
@@ -394,7 +397,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 
             var query = EntityQueryEnumerator<RequisitionsCustomDeliveryComponent>();
 
-            while (query.MoveNext(out var entityUid, out var deliveryComp))
+            while (query.MoveNext(out var entityUid, out _))
             {
                 // If elevator is full, abort and break out of the loop. Any remaining custom deliveries will be on
                 // the next elevator shipment.
@@ -492,73 +495,108 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         var elevators = EntityQueryEnumerator<RequisitionsElevatorComponent>();
         while (elevators.MoveNext(out var uid, out var elevator))
         {
-            if (time > elevator.ToggledAt + elevator.ToggleDelay)
-            {
-                elevator.ToggledAt = null;
-                elevator.Busy = false;
-                Dirty(uid, elevator);
-                SendUIStateAll();
-                continue;
-            }
+            if (ProcessElevator((uid, elevator)))
+                updateUI = true;
 
-            if (elevator.ToggledAt == null)
+            if (!_chasmQuery.TryComp(uid, out var chasm))
                 continue;
 
-            TryPlayAudio((uid, elevator));
-
-            var delay = elevator.NextMode == Raising ? elevator.RaiseDelay : elevator.LowerDelay;
-            if (elevator.Mode == Preparing &&
-                elevator.NextMode != null &&
-                time > elevator.ToggledAt + delay)
-            {
-                SetMode((uid, elevator), elevator.NextMode.Value, null);
+            if (time < elevator.NextChasmCheck)
                 continue;
-            }
 
-            if (elevator.Mode == Lowering || elevator.Mode == Raising)
+            elevator.NextChasmCheck = time + elevator.ChasmCheckEvery;
+
+            if (_net.IsClient)
+                continue;
+
+            if (elevator.Mode != Raised && elevator.Mode != Preparing)
             {
-                var startDelay = delay + elevator.NextMode switch
+                _toPit.Clear();
+                _lookup.GetEntitiesInRange(uid.ToCoordinates(), elevator.Radius + 0.25f, _toPit);
+
+                foreach (var toPit in _toPit)
                 {
-                    Lowering => elevator.LowerDelay,
-                    Raising => elevator.RaiseDelay,
-                    _ => TimeSpan.Zero
-                };
+                    if (_chasmFallingQuery.HasComp(toPit))
+                        continue;
 
-                var moveDelay= startDelay + elevator.Mode switch
-                {
-                    Lowering => elevator.LowerDelay,
-                    Raising => elevator.RaiseDelay,
-                    _ => TimeSpan.Zero
-                };
-
-                if (time > elevator.ToggledAt + moveDelay)
-                {
-                    elevator.Audio = null;
-
-                    var mode = elevator.Mode switch
-                    {
-                        Raising => Raised,
-                        Lowering => Lowered,
-                        _ => elevator.Mode
-                    };
-                    SetMode((uid, elevator), mode, elevator.NextMode);
-
-                    SpawnOrders((uid, elevator));
-
-                    updateUI = true;
-                    continue;
-                }
-
-                if (elevator.Mode == Lowering &&
-                    time > elevator.ToggledAt + delay)
-                {
-                    if (Sell((uid, elevator)))
-                        updateUI = true;
+                    _chasm.StartFalling(uid, chasm, toPit);
+                    _audio.PlayEntity(chasm.FallingSound, toPit, uid);
                 }
             }
         }
 
         if (updateUI)
             SendUIStateAll();
+    }
+
+    private bool ProcessElevator(Entity<RequisitionsElevatorComponent> ent)
+    {
+        var time = _timing.CurTime;
+        var elevator = ent.Comp;
+        if (time > elevator.ToggledAt + elevator.ToggleDelay)
+        {
+            elevator.ToggledAt = null;
+            elevator.Busy = false;
+            Dirty(ent);
+            SendUIStateAll();
+            return false;
+        }
+
+        if (elevator.ToggledAt == null)
+            return false;
+
+        TryPlayAudio(ent);
+
+        var delay = elevator.NextMode == Raising ? elevator.RaiseDelay : elevator.LowerDelay;
+        if (elevator.Mode == Preparing &&
+            elevator.NextMode != null &&
+            time > elevator.ToggledAt + delay)
+        {
+            SetMode(ent, elevator.NextMode.Value, null);
+            return false;
+        }
+
+        if (elevator.Mode != Lowering && elevator.Mode != Raising)
+            return false;
+
+        var startDelay = delay + elevator.NextMode switch
+        {
+            Lowering => elevator.LowerDelay,
+            Raising => elevator.RaiseDelay,
+            _ => TimeSpan.Zero,
+        };
+
+        var moveDelay = startDelay + elevator.Mode switch
+        {
+            Lowering => elevator.LowerDelay,
+            Raising => elevator.RaiseDelay,
+            _ => TimeSpan.Zero,
+        };
+
+        if (time > elevator.ToggledAt + moveDelay)
+        {
+            elevator.Audio = null;
+
+            var mode = elevator.Mode switch
+            {
+                Raising => Raised,
+                Lowering => Lowered,
+                _ => elevator.Mode,
+            };
+            SetMode(ent, mode, elevator.NextMode);
+
+            SpawnOrders(ent);
+
+            return true;
+        }
+
+        if (elevator.Mode == Lowering &&
+            time > elevator.ToggledAt + delay)
+        {
+            if (Sell(ent))
+                return true;
+        }
+
+        return false;
     }
 }

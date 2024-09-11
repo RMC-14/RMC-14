@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Map;
+﻿using Content.Shared.Movement.Components;
+using Robust.Shared.Map;
 
 namespace Content.Shared._RMC14.Tracker;
 
@@ -20,6 +21,14 @@ public sealed class TrackerSystem : EntitySystem
         { Direction.SouthWest, 9 },
     };
 
+    private EntityQuery<InputMoverComponent> _inputMoverQuery;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        _inputMoverQuery = GetEntityQuery<InputMoverComponent>();
+    }
+
     public short GetAlertSeverity(EntityUid ent, MapCoordinates tracked)
     {
         var pos = _transform.GetMapCoordinates(ent);
@@ -27,8 +36,16 @@ public sealed class TrackerSystem : EntitySystem
             return CenterSeverity;
 
         var vec = tracked.Position - pos.Position;
-        return vec.Length() < 1
-            ? CenterSeverity
-            : AlertSeverity.GetValueOrDefault(vec.ToWorldAngle().GetDir(), CenterSeverity);
+        if (vec.Length() < 1)
+            return CenterSeverity;
+
+        if (_inputMoverQuery.TryComp(ent, out var inputMover) &&
+            inputMover.RelativeRotation != Angle.Zero)
+        {
+            vec = (-inputMover.RelativeRotation).RotateVec(vec);
+        }
+
+        var dir = vec.ToWorldAngle().GetDir();
+        return AlertSeverity.GetValueOrDefault(dir, CenterSeverity);
     }
 }

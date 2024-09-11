@@ -35,7 +35,7 @@ public sealed class XenoBrutalizeSystem : EntitySystem
         EntityUid? mainTarget = null;
         foreach (var ent in args.HitEntities)
         {
-            if (!_xeno.CanHitLiving(xeno, ent))
+            if (!_xeno.CanAbilityAttackTarget(xeno, ent))
                 continue;
 
             mainTarget = ent;
@@ -50,7 +50,7 @@ public sealed class XenoBrutalizeSystem : EntitySystem
 
         foreach (var extra in _entityLookup.GetEntitiesInRange<MobStateComponent>(_transform.GetMapCoordinates(mainTarget.Value), xeno.Comp.Range))
         {
-            if (!_xeno.CanHitLiving(xeno, extra) || _mobState.IsDead(extra))
+            if (!_xeno.CanAbilityAttackTarget(xeno, extra) || _mobState.IsDead(extra))
                 continue;
 
             if (args.HitEntities.Contains(extra))

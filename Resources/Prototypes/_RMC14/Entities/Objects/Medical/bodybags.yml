@@ -25,6 +25,7 @@
     blacklist:
       components:
       - Xeno
+  - type: HealthScannableContainer
 
 - type: entity
   parent: CMBodyBag

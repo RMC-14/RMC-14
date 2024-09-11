@@ -11,12 +11,12 @@
     - id: CMGlassesM42ScoutSight
     - id: CMMagazineSniperM96S
     - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
-    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
+      amount: 2
     - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
     - id: CMBackpackSniper
     - id: CMWeaponPistolMK80
     - id: CMMagazinePistolMK80
-    - id: CMMagazinePistolMK80
+      amount: 2
     - id: CMM96SSniperRifle
 #    - id: CMFacepaintSniper
 #    - id: CMSpotter
@@ -51,7 +51,7 @@
     - id: RMCArmorHelmetM3G4 # hugger protection
     - id: CMWeaponPistolMK80
     - id: CMMagazinePistolMK80
-    - id: CMMagazinePistolMK80
+      amount: 2
     - id: RMCBinoculars
   - type: CMChangeUserOnVend
     addComponents:
@@ -119,17 +119,15 @@
     - id: RMCArmorHelmetM3Scout
     - id: RMCGlassesM4SPRBattleSight
     - id: RMCMagazineRifleM4SPRA19
-    - id: RMCMagazineRifleM4SPRA19
-    - id: RMCMagazineRifleM4SPRA19
-    - id: RMCMagazineRifleM4SPRA19
+      amount: 4
     - id: RMCMagazineRifleM4SPRA19 # TODO: RMCMagazineRifleM4SPRA19Incendiary
-    - id: RMCMagazineRifleM4SPRA19 # TODO: RMCMagazineRifleM4SPRA19Incendiary
-    - id: RMCMagazineRifleM4SPRA19 # TODO: RMCMagazineRifleM4SPRA19Impact
-    - id: RMCMagazineRifleM4SPRA19 # TODO: RMCMagazineRifleM4SPRA19Impact
+      amount: 2
+    - id: RMCMagazineRifleM4SPRA19Impact
+      amount: 2
     - id: RMCBackpackScout
     - id: CMWeaponPistolMK80
     - id: CMMagazinePistolMK80
-    - id: CMMagazinePistolMK80
+      amount: 2
     - id: WeaponRifleM4SPRCustom
     - id: RMCThermalTarpFolded
 #    - id: RMCPlasticExplosives
