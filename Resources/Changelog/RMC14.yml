@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Chem Dispenser temporary disabled, till the chem recipes added.
-    type: Tweak
-  id: 180
-  time: '2024-06-24T19:22:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2610
 - author: DrSmugleaf
   changes:
   - message: Xenonids now accumulate evolution points past their max in the first
@@ -4392,5 +4385,13 @@
   id: 679
   time: '2024-09-11T07:40:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4001
+- author: DrSmugleaf
+  changes:
+  - message: Added the xenonid hive core's missing ability to block CAS and mortar
+      fire within a 10 tile radius.
+    type: Add
+  id: 680
+  time: '2024-09-11T08:56:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4002
 Name: RMC14
 Order: -1
