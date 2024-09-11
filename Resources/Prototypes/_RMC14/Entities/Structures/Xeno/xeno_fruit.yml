@@ -65,8 +65,10 @@
   - type: Corrodible
     isCorrodible: false
   - type: XenoFruit
-    costHealth: 50
     costPlasma: 100
+    costHealth: # :(
+      types:
+        Brute: 50
 
 
 
@@ -80,7 +82,7 @@
     itemState: fruit_lesser_item
     growingState: fruit_lesser_immature
     grownState: fruit_lesser
-    growAt: 15
+    growTime: 15
     costPlasma: 50
 
 - type: entity
@@ -93,7 +95,7 @@
     itemState: fruit_greater_item
     growingState: fruit_greater_immature
     grownState: fruit_greater
-    growAt: 30
+    growTime: 30
 
 - type: entity
   parent: XenoFruitBase
@@ -105,7 +107,7 @@
     itemState: fruit_unstable_item
     growingState: fruit_unstable_immature
     grownState: fruit_unstable
-    growAt: 45
+    growTime: 45
 
 - type: entity
   parent: XenoFruitBase
@@ -117,7 +119,7 @@
     itemState: fruit_spore_item
     growingState: fruit_spore_immature
     grownState: fruit_spore
-    growAt: 15
+    growTime: 15
 
 - type: entity
   parent: XenoFruitBase
@@ -129,7 +131,7 @@
     itemState: fruit_speed_item
     growingState: fruit_speed_immature
     grownState: fruit_speed
-    growAt: 35
+    growTime: 35
 
 - type: entity
   parent: XenoFruitBase
@@ -141,4 +143,4 @@
     itemState: fruit_plasma_item
     growingState: fruit_plasma_immature
     grownState: fruit_plasma
-    growAt: 25
+    growTime: 25

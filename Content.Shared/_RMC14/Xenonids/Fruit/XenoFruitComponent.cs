@@ -1,3 +1,4 @@
+using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -17,6 +18,9 @@ public sealed partial class XenoFruitComponent : Component
     public TimeSpan? GrowAt;
 
     [DataField, AutoNetworkedField]
+    public TimeSpan GrowTime = TimeSpan.FromSeconds(15);
+
+    [DataField, AutoNetworkedField]
     public string ItemState = "fruit_lesser_item";
 
     [DataField, AutoNetworkedField]
@@ -28,8 +32,8 @@ public sealed partial class XenoFruitComponent : Component
     [DataField, AutoNetworkedField]
     public FixedPoint2 CostPlasma = 100;
 
-    [DataField, AutoNetworkedField]
-    public FixedPoint2 CostHealth = 50;
+    [DataField(required: true), AutoNetworkedField]
+    public DamageSpecifier CostHealth = default!;
 
     [DataField, AutoNetworkedField]
     public EntityUid? Hive;

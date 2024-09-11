@@ -11,6 +11,7 @@ using Content.Shared.Actions.Events;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates.Helpers;
+using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -47,6 +48,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
@@ -87,13 +89,12 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         SubscribeLocalEvent<XenoFruitPlanterComponent, XenoPlantFruitActionEvent>(OnXenoPlantFruitAction);
         SubscribeLocalEvent<XenoFruitPlanterComponent, XenoPlantFruitDoAfterEvent>(OnXenoPlantFruitDoAfter);
-/*
+
         SubscribeLocalEvent<XenoFruitComponent, AfterAutoHandleStateEvent>(OnXenoFruitAfterState);
         SubscribeLocalEvent<XenoFruitComponent, GettingPickedUpAttemptEvent>(OnXenoFruitPickedUpAttempt);
-        SubscribeLocalEvent<XenoFruitComponent, InteractUsingEvent>(OnXenoFruitInteractUsing);
         SubscribeLocalEvent<XenoFruitComponent, AfterInteractEvent>(OnXenoFruitAfterInteract);
-        SubscribeLocalEvent<XenoFruitComponent, ActivateInWorldEvent>(OnXenoFruitActivateInWorld);
-*/
+        SubscribeLocalEvent<XenoFruitComponent, ComponentShutdown>(OnXenoFruitShutdown);
+
         Subs.BuiEvents<XenoFruitPlanterComponent>(XenoChooseFruitUI.Key, subs =>
         {
             subs.Event<XenoChooseFruitBuiMsg>(OnXenoChooseFruitBui);
@@ -133,6 +134,11 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
     private void OnXenoPlantFruitAction(Entity<XenoFruitPlanterComponent> xeno, ref XenoPlantFruitActionEvent args)
     {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+
         if (xeno.Comp.FruitChoice is not { } choice ||
             !CanPlantOnTilePopup(xeno, choice, args.Target, true, true))
         {
@@ -148,7 +154,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         var coordinates = GetNetCoordinates(args.Target);
         var ev = new XenoPlantFruitDoAfterEvent(coordinates, choice);
-        args.Handled = true;
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.PlantDelay, ev, xeno)
         {
             BreakOnMove = true
@@ -180,14 +185,38 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         if (_net.IsServer)
         {
-            var fruit = Spawn(args.FruitId, coordinates);
-            // TODO: add the fruit to the gardener's list
-            _adminLogs.Add(LogType.RMCXenoPlantFruit, $"Xeno {ToPrettyString(xeno):xeno} planted {ToPrettyString(fruit):fruit} at {coordinates}");
-        }
+            var entity = Spawn(args.FruitId, coordinates);
+            var fruit = EnsureComp<XenoFruitComponent>(entity);
+            var xform = EnsureComp<TransformComponent>(entity);
 
-        // TODO: check if gardener's limit exceeded; if yes, remove first planted fruit
+            _transform.SetCoordinates(entity, coordinates);
+            _transform.SetLocalRotation(entity, 0);
+
+            SetFruitState((entity, fruit), XenoFruitState.Growing);
+            _transform.AnchorEntity(entity, xform);
+
+            // Add the fruit to the planter's list and vice-versa
+            if (!xeno.Comp.PlantedFruit.Contains(entity))
+                xeno.Comp.PlantedFruit.Add(entity);
+
+            fruit.Planter = xeno.Owner;
+
+            if (xeno.Comp.PlantedFruit.Count > xeno.Comp.MaxFruitAllowed)
+            {
+                _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-limit-exceeded"), coordinates, xeno);
+                var removedFruit = xeno.Comp.PlantedFruit[0];
+                xeno.Comp.PlantedFruit.Remove(removedFruit);
+                QueueDel(removedFruit);
+            }
+
+            // TODO: update action icon to display number of planted fruit?
+
+            var popupOthers = Loc.GetString("rmc-xeno-fruit-plant-success-others", ("xeno", xeno));
+            _popup.PopupPredicted(Loc.GetString("rmc-xeno-fruit-plant-success-self"), popupOthers, xeno, xeno);
+            _adminLogs.Add(LogType.RMCXenoPlantFruit, $"Xeno {ToPrettyString(xeno):xeno} planted {ToPrettyString(entity):entity} at {coordinates}");
+        }
     }
-/*
+
     private void OnXenoFruitAfterState(Entity<XenoFruitComponent> fruit, ref AfterAutoHandleStateEvent args)
     {
         var ev = new XenoFruitStateChangedEvent();
@@ -196,25 +225,140 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
     private void OnXenoFruitPickedUpAttempt(Entity<XenoFruitComponent> fruit, ref GettingPickedUpAttemptEvent args)
     {
-        if (fruit.Comp.State == XenoFruitState.Growing)
+        if (!TryComp(fruit.Owner, out TransformComponent? xform) ||
+            !HasComp<XenoFruitPlanterComponent>(fruit.Owner))
+        {
             args.Cancel();
+            return;
+        }
+
+        // Only pick up fully grown or already harvested fruit
+        if (fruit.Comp.State == XenoFruitState.Growing)
+        {
+            args.Cancel();
+            return;
+        }
+
+        if (fruit.Comp.State != XenoFruitState.Item)
+        {
+            _transform.Unanchor(fruit.Owner, xform);
+            SetFruitState(fruit, XenoFruitState.Item);
+        }
     }
 
     private void OnXenoFruitAfterInteract(Entity<XenoFruitComponent> fruit, ref AfterInteractEvent args)
     {
+        if (fruit.Comp.State != XenoFruitState.Item)
+        {
+            return;
+        }
 
+        var user = args.User;
+        if (!args.CanReach)
+        {
+            if (_timing.IsFirstTimePredicted)
+                _popup.PopupCoordinates(Loc.GetString("cm-xeno-cant-reach-there"), args.ClickLocation, Filter.Local(), true);
+
+            return;
+        }
+
+        if (HasComp<MarineComponent>(user))
+        {
+            // TODO: figure out what to do when marines interact with the fruit
+            if (!args.Handled)
+            {
+                _hands.TryDrop(user, fruit, args.ClickLocation);
+            }
+            args.Handled = true;
+            return;
+        }
+
+        if (HasComp<XenoComponent>(user))
+        {
+            // TODO: feed fruit to xeno
+            if (!args.Handled)
+            {
+
+            }
+            args.Handled = true;
+            return;
+        }
     }
 
-    private void OnXenoFruitActivateInWorld(Entity<XenoFruitComponent> fruit, ref ActivateInWorldEvent args)
+    private void OnXenoFruitShutdown(Entity<XenoFruitComponent> fruit, ref ComponentShutdown args)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
 
+        if (fruit.Comp.Planter is not { } planter)
+            return;
+
+        if (!TryComp(planter, out XenoFruitPlanterComponent? planterComp))
+            return;
+
+        if (!planterComp.PlantedFruit.Contains(fruit.Owner))
+            return;
+
+        planterComp.PlantedFruit.Remove(fruit.Owner);
     }
 
-    private void OnXenoFruitInteractUsing(Entity<XenoFruitComponent> fruit, ref InteractUsingEvent args)
+    private void SetFruitState(Entity<XenoFruitComponent> fruit, XenoFruitState state)
     {
+        fruit.Comp.State = state;
+        Dirty(fruit);
 
+        var ev = new XenoFruitStateChangedEvent();
+        RaiseLocalEvent(fruit, ref ev);
+    }
+
+    public override void Update(float frameTime)
+    {
+        if (_net.IsClient)
+            return;
+
+        var time = _timing.CurTime;
+
+        // TODO: make fruit grow
+        var fruitQuery = EntityQueryEnumerator<XenoFruitComponent, TransformComponent>();
+        while (fruitQuery.MoveNext(out var uid, out var fruit, out var xform))
+        {
+            if (fruit.State != XenoFruitState.Growing)
+                continue;
+
+            fruit.GrowAt ??= time + fruit.GrowTime;
+
+            if (time < fruit.GrowAt)
+                continue;
+
+            SetFruitState((uid, fruit), XenoFruitState.Grown);
+        }
+    }
+/*
+    public DamageSpecifier? GetFruitHealthost(EntProtoId prototype)
+    {
+        if (_prototype.TryIndex(prototype, out var fruitChoice) &&
+            fruitChoice.TryGetComponent(out XenoFruitComponent? fruit, _compFactory))
+        {
+            return fruit.CostHealth;
+        }
+
+        return null;
     }
 */
+    private DamageSpecifier? GetFruitHealthCost(EntProtoId? fruit)
+    {
+        if (fruit is { } choice)
+        {
+            if (_prototype.TryIndex(fruit, out var fruitChoice) &&
+                fruitChoice.TryGetComponent(out XenoFruitComponent? fruitComp, _compFactory))
+            {
+                return fruitComp.CostHealth;
+            }
+        }
+
+        return null;
+    }
+
     public FixedPoint2? GetFruitPlasmaCost(EntProtoId prototype)
     {
         if (_prototype.TryIndex(prototype, out var fruitChoice) &&
@@ -250,53 +394,72 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         return true;
     }
 
-    private bool CanPlantOnTilePopup(Entity<XenoFruitPlanterComponent> xeno, EntProtoId? fruitChoice, EntityCoordinates target, bool checkFruitSelected, bool checkWeeds)
+    private bool CanPlantOnTilePopup(Entity<XenoFruitPlanterComponent> xeno,
+        EntProtoId? fruitChoice, EntityCoordinates target,
+        bool checkFruitSelected, bool checkWeeds)
     {
+        // Fruit not selected
         if (checkFruitSelected && fruitChoice == null)
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-fruit-failed-select-fruit"), target, xeno);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-select-fruit"), target, xeno);
             return false;
         }
 
+        // Target not on grid
         if (_transform.GetGrid(target) is not { } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-fruit-failed-cant-plant"), target, xeno);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-cant-plant"), target, xeno);
             return false;
         }
 
+        // Target not on weeds
         target = target.SnapToGrid(EntityManager, _map);
         if (checkWeeds && !_xenoWeeds.IsOnWeeds((gridId, grid), target))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-fruit-failed-need-weeds"), target, xeno);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-need-weeds"), target, xeno);
             return false;
         }
 
+        // Target out of range
         if (!InRangePopup(xeno, target, xeno.Comp.PlantRange.Float()))
             return false;
 
+        // Target blocked
         if (!_xenoConstruct.TileSolidAndNotBlocked(target))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-fruit-failed-cant-plant"), target, xeno);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-cant-plant"), target, xeno);
             return false;
         }
 
+        // Target already has xeno construction or egg on it
         var tile = _mapSystem.CoordinatesToTile(gridId, grid, target);
         var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
         while (anchored.MoveNext(out var uid))
         {
             if (_xenoConstructQuery.HasComp(uid) || _xenoEggQuery.HasComp(uid))
             {
-                _popup.PopupClient(Loc.GetString("cm-xeno-fruit-failed-cant-plant"), target, xeno);
+                _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-cant-plant"), target, xeno);
                 return false;
             }
         }
+
+        // TODO: check if fruit planted nearby already
+        // TODO: check for weed nodes as well
+        // TODO: and resin holes (when implemented)
+        // TODO: and whether the weeds even belong to our hive
 
         if (checkFruitSelected &&
             GetFruitPlasmaCost(fruitChoice) is { } cost &&
             !_xenoPlasma.HasPlasmaPopup(xeno.Owner, cost))
         {
             return false;
+        }
+
+        if (GetFruitHealthCost(fruitChoice) is { } healthCost)
+        {
+            _damageable.TryChangeDamage(xeno.Owner, healthCost,
+            ignoreResistances: true, interruptsDoAfters: false);
         }
 
         return true;
