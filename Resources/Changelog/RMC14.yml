@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Xenonids now accumulate evolution points past their max in the first
-      15 minutes of the round, making it easier for round-start xenonids to choose
-      their evolution as soon as the castes are unlocked.
-    type: Tweak
-  id: 181
-  time: '2024-06-24T23:53:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2612
-- author: DrSmugleaf
-  changes:
   - message: Fixed 5-slot webbings unintentionally being able to fit larger magazines.
     type: Fix
   id: 182
@@ -4393,5 +4384,12 @@
   id: 680
   time: '2024-09-11T08:56:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4002
+- author: CyberTropic
+  changes:
+  - message: Grenade packets have an empty graphic.
+    type: Fix
+  id: 681
+  time: '2024-09-11T08:58:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4000
 Name: RMC14
 Order: -1
