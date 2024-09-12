@@ -23,6 +23,11 @@
     blacklist:
       components:
       - Xeno
+  - type: Appearance
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+    storageEmpty: emptyLayer
 
 - type: entity
   parent: CMPacketBase
@@ -31,7 +36,11 @@
   description: It contains three HEDP high explosive grenades.
   components:
   - type: Sprite
-    state: hedp_packet
+    layers:
+    - state: hedp_packet
+      map: [ "closedLayer" ]
+    - state: hedp_packet_e
+      map: [ "openLayer", "emptyLayer" ]
 
 - type: entity
   parent: CMPacketGrenadeHighExplosive
@@ -44,6 +53,7 @@
     - id: CMGrenadeHighExplosive
       amount: 3
 
+
 - type: entity
   parent: CMPacketBase
   id: CMPacketGrenadeFrag
@@ -51,7 +61,11 @@
   description: It contains three HEFA grenades. Don't tell the HEFA order.
   components:
   - type: Sprite
-    state: hefa_packet
+    layers:
+    - state: hefa_packet
+      map: [ "closedLayer" ]
+    - state: hefa_packet_e
+      map: [ "openLayer", "emptyLayer" ]
 
 - type: entity
   parent: CMPacketGrenadeFrag

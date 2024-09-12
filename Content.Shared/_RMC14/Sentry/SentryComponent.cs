@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.Tag;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -55,6 +56,9 @@ public sealed partial class SentryComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId[]? Upgrades = ["RMCSentrySniper", "RMCSentryMini", "RMCSentryOmni"];
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<TagPrototype>? MagazineTag = "RMCMagazineSentry";
 }
 
 [Serializable, NetSerializable]

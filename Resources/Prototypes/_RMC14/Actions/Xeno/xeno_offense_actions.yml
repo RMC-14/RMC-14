@@ -406,6 +406,7 @@
     event: !type:XenoBombardActionEvent
     range: 10
     checkCanAccess: false
+    useDelay: 1
   - type: ActionSharedCooldown
     id: ActionXenoBombard
     ids:
