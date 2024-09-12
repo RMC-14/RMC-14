@@ -1,0 +1,12 @@
+ent-ClothingUniformJumpskirtCentcomOfficial = юбка-костюм офицера Центком
+    .desc = Это костюм с юбкой, который носят офицеры Центком высшего звена.
+ent-ClothingUniformJumpskirtCentcomOfficer = водолазка с юбкой Центком
+    .desc = Версия водолазки Центком с юбкой, более редкая и востребованная, чем оригинал.
+ent-ClothingUniformJumpskirtElegantMaid = элегантная форма горничной
+    .desc = Назови меня хозяином и принеси пивчански.
+ent-ClothingUniformColorJumpskirtRainbow = радужная юбка-комбинезон
+    .desc = Разноцветная юбка-комбинезон!
+ent-ClothingUniformJumpskirtPsychologist = юбка-костюм психолога
+    .desc = Я не теряю вещи. Я кладу вещи в места, которые потом ускользают от меня.
+ent-ClothingUniformJumpskirtSchool = школьная юбка
+    .desc = Стильная и удобная школьная юбка.
