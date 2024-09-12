@@ -24,7 +24,7 @@ public sealed partial class XenoDevourComponent : Component
     public TimeSpan RegurgitateAfter = TimeSpan.FromSeconds(60);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan RegurgitationStun = TimeSpan.FromSeconds(2);
+    public TimeSpan RegurgitationStun = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
     public EntProtoId RegurgitateEffect = "RMCEffectFreeze";

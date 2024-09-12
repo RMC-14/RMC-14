@@ -19,14 +19,14 @@ public sealed class XenoScreechSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
 
+    private readonly HashSet<Entity<MarineComponent>> _receivers = new();
+
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<XenoScreechComponent, XenoScreechActionEvent>(OnXenoScreechAction);
     }
-
-    private readonly HashSet<Entity<MarineComponent>> _receivers = new();
 
     private void OnXenoScreechAction(Entity<XenoScreechComponent> xeno, ref XenoScreechActionEvent args)
     {

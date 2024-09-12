@@ -165,7 +165,7 @@
   parent: RMCUnderAttachmentBase
   id: RMCAttachmentGyroscopicStabilizer
   name: gyroscopic stabilizer
-  description: A set of weights and balances to stabilize the weapon when fired with one hand. Slightly decreases firing speed.
+  description: A set of weights and balances to stabilize the weapon when fired with one hand. Decreases firing speed.
   components:
   - type: Sprite
     state: gyro
@@ -260,22 +260,29 @@
         volume: -2
   - type: RMCSelectiveFire
     baseFireRate: 0.476
+  - type: GunDamageModifier
+    multiplier: 0.85
+  - type: RMCExtraProjectilesDamageMods
+    damageMultiplier: 0.36
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
+  - type: RMCAmmoEject
+    containerID: ballistic-ammo
+    ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
   - type: BallisticAmmoProvider
     cycleable: false
     whitelist:
       tags:
-      - CMShellShotgun
+      - RMCShellShotgunBuckshot
     capacity: 5
     proto: null
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
-#  - type: GunDamageMultipliers
-#    multipliers:
-#      Turf: 5
-#      Breaching: 10.8
+  - type: GunDamageMultipliers
+    multipliers:
+      Turf: 5
+      Breaching: 10.8
   - type: UniqueAction
   - type: PumpAction
   - type: UseDelay
@@ -283,6 +290,7 @@
     userOnly: true
     attachedOnly: true
     supercedeHolder: true
+    wieldedUseOnly: true
     activatePopupText: attachable-popup-switch-to-generic
     deactivatePopupText: attachable-popup-switch-from-generic
     activateSound:
@@ -322,6 +330,10 @@
     containers:
       ballistic-ammo: !type:Container
         ents: []
+  - type: RMCAmmoEject
+    containerID: ballistic-ammo
+    ejectSound:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
   - type: AmmoCounter
   - type: Gun
     projectileSpeed: 20
@@ -529,7 +541,7 @@
         wieldedOnly: true
       accuracyAddMult: 0.05
       recoilFlat: -1
-      scatterFlat: -1
+      scatterFlat: -2
 
 - type: entity
   parent: RMCAttachmentFlashlightGrip
@@ -564,11 +576,11 @@
     - conditions:
         wieldedOnly: true
       recoilFlat: -1
-      scatterFlat: -1
+      scatterFlat: -2
     - conditions:
         unwieldedOnly: true
       accuracyMovementPenaltyAddMult: -1
-      scatterFlat: -2
+      scatterFlat: -4
 
 - type: Tag
   id: RMCAttachmentUnderbarrel

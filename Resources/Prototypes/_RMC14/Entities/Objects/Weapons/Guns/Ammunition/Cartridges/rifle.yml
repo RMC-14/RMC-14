@@ -49,5 +49,21 @@
   - type: CartridgeAmmo
     proto: BulletRifleM4SPRA19
 
+- type: entity
+  parent: RMCCartridgeRifleM4SPRA19
+  id: RMCCartridgeRifleM4SPRA19Impact
+  name: cartridge (A19 high-velocity high impact)
+  description: A high-velocity high impact A19 cartridge. Fits in M4SPR custom magazines.
+  components:
+  - type: Tag
+    tags:
+      - Cartridge
+      - RMCCartridgeRifleM4SPRA19Impact
+  - type: CartridgeAmmo
+    proto: BulletRifleM4SPRA19Impact
+
 - type: Tag
   id: RMCCartridgeRifleM4SPRA19
+
+- type: Tag
+  id: RMCCartridgeRifleM4SPRA19Impact
