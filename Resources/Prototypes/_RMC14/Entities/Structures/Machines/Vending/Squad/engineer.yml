@@ -215,7 +215,6 @@
       - id: CMBackpackWelder
         recommended: true
       - id: RMCSatchelWelder
-        recommended: true
       - id: RMCSatchelWelderChestrig
         recommended: true
     - name: Belt
@@ -228,7 +227,7 @@
     #- id: CMM276M44HolsterRig
     #- id: CMM276M82FHolsterRig
     #- id: CMM276ShotgunShellLoadingRig
-    #- id: CMM276MortarOperatorBelt
+      - id: CMBeltMortar
       - id: CMBeltUtilityFilled
         recommended: true
       - id: RMCBeltGrenade

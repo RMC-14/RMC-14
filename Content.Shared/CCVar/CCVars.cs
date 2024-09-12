@@ -500,7 +500,7 @@ namespace Content.Shared.CCVar
             CVarDef.Create("tips.in_game_frequency", 60f * 60);
 
         public static readonly CVarDef<string> LoginTipsDataset =
-            CVarDef.Create("tips.login_dataset", "Tips");
+            CVarDef.Create("tips.login_dataset", "CM_Tips");
 
         /// <summary>
         ///     The chance for Tippy to replace a normal tip message.

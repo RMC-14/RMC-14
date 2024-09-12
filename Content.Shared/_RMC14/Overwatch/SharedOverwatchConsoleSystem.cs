@@ -67,6 +67,9 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
     private void OnWatchingMoveInput(Entity<OverwatchWatchingComponent> ent, ref MoveInputEvent args)
     {
+        if (!args.HasDirectionalMovement)
+            return;
+
         if (_net.IsClient && _player.LocalEntity == ent.Owner && _player.LocalSession != null)
             Unwatch(ent.Owner, _player.LocalSession);
         else if (TryComp(ent, out ActorComponent? actor))

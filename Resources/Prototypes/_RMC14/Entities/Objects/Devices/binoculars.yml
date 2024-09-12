@@ -11,10 +11,11 @@
     state: binoculars
   - type: Scope
     useInHand: true
-    allowMovement: true
-    delay: 0
-    zoom: 1.6 # same stats of 4x telescopic scope
-    offset: 14
+    zoomLevels:
+    - zoom: 1.6
+      offset: 14
+      allowMovement: true
+      doAfter: 0
   - type: Tag
     tags:
     - Binoculars
@@ -66,7 +67,7 @@
   parent: RMCLaserDesignator
   id: RMCLaserDesignatorScout
   name: scout laser designator
-  description: "An improved laser designator, issued to USCM scouts, with two modes: target marking for CAS with IR laser and rangefinding. Click a tile to target something."
+  description: "An improved laser designator, issued to UNMC scouts, with two modes: target marking for CAS with IR laser and rangefinding. Click a tile to target something."
   components:
   - type: Rangefinder
     delay: 3

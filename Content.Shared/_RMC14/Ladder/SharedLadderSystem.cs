@@ -1,10 +1,13 @@
 ﻿using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
+using Content.Shared.DragDrop;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
+using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Verbs;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -14,7 +17,9 @@ namespace Content.Shared._RMC14.Ladder;
 public abstract class SharedLadderSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -35,10 +40,16 @@ public abstract class SharedLadderSystem : EntitySystem
 
         SubscribeLocalEvent<LadderComponent, MapInitEvent>(OnLadderMapInit);
         SubscribeLocalEvent<LadderComponent, ComponentRemove>(OnLadderRemove);
-        SubscribeLocalEvent<LadderComponent, EntityTerminatingEvent>(OnLadderTerminating);
+        SubscribeLocalEvent<LadderComponent, EntityTerminatingEvent>(OnLadderRemove);
         SubscribeLocalEvent<LadderComponent, ActivateInWorldEvent>(OnLadderActivateInWorld);
         SubscribeLocalEvent<LadderComponent, DoAfterAttemptEvent<LadderDoAfterEvent>>(OnLadderDoAfterAttempt);
         SubscribeLocalEvent<LadderComponent, LadderDoAfterEvent>(OnLadderDoAfter);
+        SubscribeLocalEvent<LadderComponent, GetVerbsEvent<AlternativeVerb>>(OnLadderGetAltVerbs);
+        SubscribeLocalEvent<LadderComponent, CanDropDraggedEvent>(OnLadderCanDropDragged);
+        SubscribeLocalEvent<LadderComponent, CanDragEvent>(OnLadderCanDrag);
+        SubscribeLocalEvent<LadderComponent, DragDropDraggedEvent>(OnLadderDragDropDragged);
+
+        SubscribeLocalEvent<LadderWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -51,14 +62,24 @@ public abstract class SharedLadderSystem : EntitySystem
         _toUpdate.Add(ent);
     }
 
-    private void OnLadderRemove(Entity<LadderComponent> ent, ref ComponentRemove args)
+    private void OnLadderRemove<T>(Entity<LadderComponent> ent, ref T args)
     {
-        OnRemoveLadder(ent);
-    }
+        foreach (var watching in ent.Comp.Watching)
+        {
+            if (TerminatingOrDeleted(watching))
+                continue;
 
-    private void OnLadderTerminating(Entity<LadderComponent> ent, ref EntityTerminatingEvent args)
-    {
-        OnRemoveLadder(ent);
+            RemCompDeferred<LadderWatchingComponent>(watching);
+        }
+
+        if (!TerminatingOrDeleted(ent.Comp.Other) &&
+            _ladderQuery.TryComp(ent.Comp.Other, out var otherLadder))
+        {
+            otherLadder.Other = null;
+            Dirty(ent.Comp.Other.Value, otherLadder);
+        }
+
+        ent.Comp.Other = null;
     }
 
     private void OnLadderActivateInWorld(Entity<LadderComponent> ent, ref ActivateInWorldEvent args)
@@ -156,16 +177,55 @@ public abstract class SharedLadderSystem : EntitySystem
         Dirty(ent);
     }
 
-    private void OnRemoveLadder(Entity<LadderComponent> ent)
+    private void OnLadderGetAltVerbs(Entity<LadderComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
-        if (!TerminatingOrDeleted(ent.Comp.Other) &&
-            _ladderQuery.TryComp(ent.Comp.Other, out var otherLadder))
+        if (ent.Comp.Other is not { } other)
+            return;
+
+        var user = args.User;
+        args.Verbs.Add(new AlternativeVerb
         {
-            otherLadder.Other = null;
-            Dirty(ent.Comp.Other.Value, otherLadder);
+            Priority = 100,
+            Act = () => Watch(user, other),
+            Text = Loc.GetString("rmc-ladder-look-through"),
+        });
+    }
+
+    private void OnLadderCanDropDragged(Entity<LadderComponent> ent, ref CanDropDraggedEvent args)
+    {
+        if (args.User != args.Target)
+            return;
+
+        args.Handled = true;
+        args.CanDrop = true;
+    }
+
+    private void OnLadderCanDrag(Entity<LadderComponent> ent, ref CanDragEvent args)
+    {
+        args.Handled = true;
+    }
+
+    private void OnLadderDragDropDragged(Entity<LadderComponent> ent, ref DragDropDraggedEvent args)
+    {
+        if (ent.Comp.Other is not { } other ||
+            args.User != args.Target)
+        {
+            return;
         }
 
-        ent.Comp.Other = null;
+        args.Handled = true;
+        Watch(args.User, other);
+    }
+
+    private void OnWatchingMoveInput(Entity<LadderWatchingComponent> ent, ref MoveInputEvent args)
+    {
+        if (!args.HasDirectionalMovement)
+            return;
+
+        if (_net.IsClient && _player.LocalEntity == ent.Owner && _player.LocalSession != null)
+            Unwatch(ent.Owner, _player.LocalSession);
+        else if (TryComp(ent, out ActorComponent? actor))
+            Unwatch(ent.Owner, actor.PlayerSession);
     }
 
     protected virtual void AddViewer(Entity<LadderComponent> ent, ICommonSession player)
@@ -174,6 +234,18 @@ public abstract class SharedLadderSystem : EntitySystem
 
     protected virtual void RemoveViewer(Entity<LadderComponent> ent, ICommonSession player)
     {
+    }
+
+    protected virtual void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<LadderComponent?> toWatch)
+    {
+    }
+
+    protected virtual void Unwatch(Entity<EyeComponent?> watcher, ICommonSession player)
+    {
+        if (!Resolve(watcher, ref watcher.Comp))
+            return;
+
+        _eye.SetTarget(watcher, watcher, watcher);
     }
 
     public override void Update(float frameTime)

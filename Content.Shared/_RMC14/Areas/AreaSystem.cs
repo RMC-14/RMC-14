@@ -78,6 +78,49 @@ public sealed class AreaSystem : EntitySystem
         if (!TryGetArea(coordinates, out _, out var area))
             return false;
 
+        if (IsRoofed(coordinates, r => !r.Comp.CanCAS))
+            return false;
+
         return area.CAS;
+    }
+
+    public bool CanMortarFire(EntityCoordinates coordinates)
+    {
+        if (!TryGetArea(coordinates, out _, out var area))
+            return false;
+
+        if (IsRoofed(coordinates, r => !r.Comp.CanMortar))
+            return false;
+
+        return area.MortarFire;
+    }
+
+    public bool CanMortarPlacement(EntityCoordinates coordinates)
+    {
+        if (!TryGetArea(coordinates, out _, out var area))
+            return false;
+
+        if (IsRoofed(coordinates, r => !r.Comp.CanMortar))
+            return false;
+
+        return area.MortarPlacement;
+    }
+
+    private bool IsRoofed(EntityCoordinates coordinates, Predicate<Entity<RoofingEntityComponent>> predicate)
+    {
+        var roofs = EntityQueryEnumerator<RoofingEntityComponent>();
+        while (roofs.MoveNext(out var uid, out var roof))
+        {
+            if (!predicate((uid, roof)))
+                continue;
+
+            if (coordinates.TryDistance(EntityManager, uid.ToCoordinates(), out var distance) &&
+                distance <= roof.Range)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

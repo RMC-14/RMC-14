@@ -13,12 +13,15 @@ using Content.Shared.Interaction.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Popups;
+using Content.Shared.Tag;
+using Content.Shared.Tools.Systems;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -40,8 +43,11 @@ public sealed class SentrySystem : EntitySystem
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly SharedToolSystem _tools = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
 
@@ -71,9 +77,9 @@ public sealed class SentrySystem : EntitySystem
         _toUpdate.Add(sentry);
 
         if (sentry.Comp.StartingMagazine is { } magazine)
-        {
             TrySpawnInContainer(magazine, sentry, sentry.Comp.ContainerSlotId, out _);
-        }
+
+        UpdateState(sentry);
     }
 
     private void OnSentryPickupAttempt(Entity<SentryComponent> sentry, ref PickupAttemptEvent args)
@@ -134,6 +140,15 @@ public sealed class SentrySystem : EntitySystem
         {
             case SentryMode.Off:
             {
+                foreach (var defense in _entityLookup.GetEntitiesInRange<SentryComponent>(_transform.GetMapCoordinates(sentry), sentry.Comp.DefenseCheckRange)) // TODO RMC14 more general defense check
+                {
+                    if (sentry != defense && defense.Comp.Mode == SentryMode.On)
+                    {
+                        var ret = Loc.GetString("rmc-sentry-too-close", ("defense", defense));
+                        _popup.PopupClient(ret, sentry, user);
+                        return;
+                    }
+                }
                 mode = SentryMode.On;
                 var msg = Loc.GetString("rmc-sentry-on", ("sentry", sentry));
                 _popup.PopupClient(msg, sentry, user);
@@ -174,8 +189,41 @@ public sealed class SentrySystem : EntitySystem
             return;
         }
 
+        if (_tools.HasQuality(used, "Screwing"))
+        {
+            if (sentry.Comp.Mode == SentryMode.Off)
+            {
+                _transform.SetWorldRotation(sentry, _transform.GetWorldRotation(sentry) + Angle.FromDegrees(90));
+                _rmcInteraction.SetMaxRotation(sentry.Owner, Transform(sentry).LocalRotation.GetCardinalDir().ToAngle(), sentry.Comp.MaxDeviation);
+                UpdateState(sentry);
+                _audio.PlayPredicted(sentry.Comp.ScrewdriverSound, sentry, user);
+                var selfMsg = Loc.GetString("rmc-sentry-rotate-self", ("sentry", sentry));
+                var othersMsg = Loc.GetString("rmc-sentry-rotate-others", ("user", user), ("sentry", sentry));
+                _popup.PopupPredicted(selfMsg, othersMsg, user, user);
+                args.Handled = true;
+            }
+            else
+            {
+                string ret;
+                if(sentry.Comp.Mode == SentryMode.On)
+                    ret = Loc.GetString("rmc-sentry-active-norot", ("sentry", sentry));
+                else
+                    ret = Loc.GetString("rmc-sentry-item-norot", ("sentry", sentry));
+                _popup.PopupClient(ret, sentry, user);
+            }
+            return;
+        }
+
         if (!HasComp<BallisticAmmoProviderComponent>(used))
             return;
+
+        if (sentry.Comp.MagazineTag is { } magazineTag &&
+            !_tag.HasTag(used, magazineTag))
+        {
+            var msg = Loc.GetString("rmc-sentry-magazine-does-not-fit", ("sentry", sentry), ("magazine", used));
+            _popup.PopupClient(msg, sentry, user, PopupType.SmallCaution);
+            return;
+        }
 
         args.Handled = true;
 
@@ -251,11 +299,17 @@ public sealed class SentrySystem : EntitySystem
         {
             if (ent.Comp.MaxDeviation < Angle.FromDegrees(180))
             {
-                var msg = Loc.GetString("rmc-sentry-limited-rotation", ("degrees", (int)ent.Comp.MaxDeviation.Degrees));
-                args.PushMarkup(msg);
+                var rot = Loc.GetString("rmc-sentry-limited-rotation", ("degrees", (int)ent.Comp.MaxDeviation.Degrees));
+                args.PushMarkup(rot);
+            }
 
-                msg = Loc.GetString("rmc-sentry-disassembled-with-multitool");
-                args.PushMarkup(msg);
+            var msg = Loc.GetString("rmc-sentry-disassembled-with-multitool");
+            args.PushMarkup(msg);
+
+            if (ent.Comp.Mode == SentryMode.Off)
+            {
+                var scw = Loc.GetString("rmc-sentry-rotate-with-screwdriver");
+                args.PushMarkup(scw);
             }
         }
     }
@@ -291,7 +345,10 @@ public sealed class SentrySystem : EntitySystem
 
     private void UpdateState(Entity<SentryComponent> sentry)
     {
-        var fixture = sentry.Comp.DeployFixture is { } fixtureId ? _fixture.GetFixtureOrNull(sentry, fixtureId) : null;
+        var fixture = sentry.Comp.DeployFixture is { } fixtureId && TryComp(sentry, out FixturesComponent? fixtures)
+            ? _fixture.GetFixtureOrNull(sentry, fixtureId, fixtures)
+            : null;
+
         switch (sentry.Comp.Mode)
         {
             case SentryMode.Item:

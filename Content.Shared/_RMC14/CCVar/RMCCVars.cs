@@ -170,4 +170,7 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCEntitiesLogDelete =
         CVarDef.Create("rmc.entities_log_delete", false, CVar.SERVER | CVar.SERVERONLY);
+
+    public static readonly CVarDef<bool> RMCPlanetMapVote =
+        CVarDef.Create("rmc.planet_map_vote", true, CVar.SERVER | CVar.SERVERONLY);
 }
