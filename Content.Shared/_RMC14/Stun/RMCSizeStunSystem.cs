@@ -1,4 +1,5 @@
-﻿using Content.Shared.ActionBlocker;
+﻿using System.Numerics;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
@@ -9,7 +10,6 @@ using Content.Shared.Throwing;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
-using System.Numerics;
 
 namespace Content.Shared._RMC14.Stun;
 
