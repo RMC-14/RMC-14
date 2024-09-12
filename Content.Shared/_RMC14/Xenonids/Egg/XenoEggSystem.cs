@@ -532,10 +532,10 @@ public sealed class XenoEggSystem : EntitySystem
         var uid = args.User;
 
         // if it doesn't have an actor and we can't reach it then don't add the verb
-        if (!EntityManager.TryGetComponent(uid, out ActorComponent? actor))
+        if (!TryComp(uid, out ActorComponent? actor))
             return;
 
-        if (!EntityManager.TryGetComponent(uid, out GhostComponent? ghostComp))
+        if (!TryComp(uid, out GhostComponent? ghostComp))
             return;
 
         if (ent.Comp.State == XenoEggState.Opened || ent.Comp.State == XenoEggState.Growing)
