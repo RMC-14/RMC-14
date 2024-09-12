@@ -17,7 +17,15 @@
         mask:
         - MobMask
         layer:
-        - MobLayer
+        - Opaque
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        density: 185
+        restitution: 0.0
+        layer:
+        - BulletImpassable
   - type: SolutionContainerManager
   - type: InjectableSolution
     solution: chemicals
