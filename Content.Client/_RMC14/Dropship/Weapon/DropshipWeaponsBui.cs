@@ -57,8 +57,6 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
         _window.ResetOffsetButton.OnPressed += _ =>
             SendPredictedMessage(new DropshipTerminalWeaponsResetOffsetMsg());
 
-        _window.OffsetCalibrationLabel.Text = "Offset\nCalibration";
-
         _window.ScreenOne.TopRow.Refresh();
         _window.ScreenOne.LeftRow.Refresh();
         _window.ScreenOne.RightRow.Refresh();
