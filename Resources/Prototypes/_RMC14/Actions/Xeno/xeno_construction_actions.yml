@@ -97,7 +97,6 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: gardener_plant
     event: !type:XenoPlantFruitActionEvent
-    useDelay: 5
   - type: XenoPlantFruitAction
     checkFruitSelected: true
     checkWeeds: true

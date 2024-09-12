@@ -1,5 +1,6 @@
 using Content.Client._RMC14.Xenonids.UI;
 using Content.Shared._RMC14.Xenonids.Fruit;
+using Content.Shared._RMC14.Xenonids.Fruit.Components;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;

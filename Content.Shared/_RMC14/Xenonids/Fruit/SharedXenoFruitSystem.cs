@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Fruit.Components;
 using Content.Shared._RMC14.Xenonids.Fruit.Events;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
@@ -30,6 +31,7 @@ using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Prototypes;
 using Content.Shared.Tag;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -45,30 +47,33 @@ namespace Content.Shared._RMC14.Xenonids.Fruit;
 
 public sealed class SharedXenoFruitSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IMapManager _map = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
+
+    [Dependency] private readonly CMHandsSystem _rmcHands = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly TagSystem _tags = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
+
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly CMHandsSystem _rmcHands = default!;
-    [Dependency] private readonly TagSystem _tags = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruct = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
 
 	private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
@@ -94,6 +99,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         SubscribeLocalEvent<XenoFruitComponent, GettingPickedUpAttemptEvent>(OnXenoFruitPickedUpAttempt);
         SubscribeLocalEvent<XenoFruitComponent, AfterInteractEvent>(OnXenoFruitAfterInteract);
         SubscribeLocalEvent<XenoFruitComponent, ComponentShutdown>(OnXenoFruitShutdown);
+        SubscribeLocalEvent<XenoFruitComponent, EntityTerminatingEvent>(OnXenoFruitTerminating);
 
         Subs.BuiEvents<XenoFruitPlanterComponent>(XenoChooseFruitUI.Key, subs =>
         {
@@ -154,7 +160,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         var coordinates = GetNetCoordinates(args.Target);
         var ev = new XenoPlantFruitDoAfterEvent(coordinates, choice);
-        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.PlantDelay, ev, xeno)
+        var doAfter = new DoAfterArgs(EntityManager, xeno.Owner, xeno.Comp.PlantDelay, ev, xeno)
         {
             BreakOnMove = true
         };
@@ -181,6 +187,17 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             return;
         }
 
+        // Only start cooldown if planting successful
+        foreach (var (actionId, _) in _actions.GetActions(xeno))
+        {
+            if (TryComp(actionId, out XenoPlantFruitActionComponent? action))
+            {
+                _actions.SetCooldown(actionId, action.PlantCooldown);
+            }
+        }
+
+        _audio.PlayPredicted(xeno.Comp.PlantSound, coordinates, xeno);
+
         args.Handled = true;
 
         if (_net.IsServer)
@@ -203,17 +220,21 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
             if (xeno.Comp.PlantedFruit.Count > xeno.Comp.MaxFruitAllowed)
             {
-                _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-limit-exceeded"), coordinates, xeno);
+                _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-limit-exceeded"), coordinates, xeno.Owner);
                 var removedFruit = xeno.Comp.PlantedFruit[0];
                 xeno.Comp.PlantedFruit.Remove(removedFruit);
                 QueueDel(removedFruit);
             }
 
+            // Deduct health
+            _damageable.TryChangeDamage(xeno.Owner, fruit.CostHealth,
+                ignoreResistances: true, interruptsDoAfters: false);
+
             // TODO: update action icon to display number of planted fruit?
 
-            var popupOthers = Loc.GetString("rmc-xeno-fruit-plant-success-others", ("xeno", xeno));
-            _popup.PopupPredicted(Loc.GetString("rmc-xeno-fruit-plant-success-self"), popupOthers, xeno, xeno);
-            _adminLogs.Add(LogType.RMCXenoPlantFruit, $"Xeno {ToPrettyString(xeno):xeno} planted {ToPrettyString(entity):entity} at {coordinates}");
+            var popupOthers = Loc.GetString("rmc-xeno-fruit-plant-success-others", ("xeno", xeno.Owner));
+            _popup.PopupPredicted(Loc.GetString("rmc-xeno-fruit-plant-success-self"), popupOthers, xeno.Owner, xeno.Owner);
+            _adminLogs.Add(LogType.RMCXenoPlantFruit, $"Xeno {ToPrettyString(xeno.Owner):xeno} planted {ToPrettyString(entity):entity} at {coordinates}");
         }
     }
 
@@ -285,7 +306,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         }
     }
 
-    private void OnXenoFruitShutdown(Entity<XenoFruitComponent> fruit, ref ComponentShutdown args)
+    private void XenoFruitRemoved(Entity<XenoFruitComponent> fruit)
     {
         if (!_timing.IsFirstTimePredicted)
             return;
@@ -300,6 +321,16 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             return;
 
         planterComp.PlantedFruit.Remove(fruit.Owner);
+    }
+
+    private void OnXenoFruitShutdown(Entity<XenoFruitComponent> fruit, ref ComponentShutdown args)
+    {
+        XenoFruitRemoved(fruit);
+    }
+
+    private void OnXenoFruitTerminating(Entity<XenoFruitComponent> fruit, ref EntityTerminatingEvent args)
+    {
+        XenoFruitRemoved(fruit);
     }
 
     private void SetFruitState(Entity<XenoFruitComponent> fruit, XenoFruitState state)
@@ -333,18 +364,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             SetFruitState((uid, fruit), XenoFruitState.Grown);
         }
     }
-/*
-    public DamageSpecifier? GetFruitHealthost(EntProtoId prototype)
-    {
-        if (_prototype.TryIndex(prototype, out var fruitChoice) &&
-            fruitChoice.TryGetComponent(out XenoFruitComponent? fruit, _compFactory))
-        {
-            return fruit.CostHealth;
-        }
 
-        return null;
-    }
-*/
     private DamageSpecifier? GetFruitHealthCost(EntProtoId? fruit)
     {
         if (fruit is { } choice)
@@ -381,13 +401,13 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         return null;
     }
 
-    private bool InRangePopup(EntityUid xeno, EntityCoordinates target, float range)
+    private bool InRangePopup(Entity<XenoFruitPlanterComponent> xeno, EntityCoordinates target, float range)
     {
-        var origin = _transform.GetMoverCoordinates(xeno);
+        var origin = _transform.GetMoverCoordinates(xeno.Owner);
         target = target.SnapToGrid(EntityManager, _map);
         if (!_transform.InRange(origin, target, range))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-cant-reach-there"), target, xeno);
+            _popup.PopupClient(Loc.GetString("cm-xeno-cant-reach-there"), target, xeno.Owner);
             return false;
         }
 
@@ -401,7 +421,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         // Fruit not selected
         if (checkFruitSelected && fruitChoice == null)
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-select-fruit"), target, xeno);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-select-fruit"), target, xeno.Owner);
             return false;
         }
 
@@ -409,7 +429,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         if (_transform.GetGrid(target) is not { } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-cant-plant"), target, xeno);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-cant-plant"), target, xeno.Owner);
             return false;
         }
 
@@ -417,7 +437,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         target = target.SnapToGrid(EntityManager, _map);
         if (checkWeeds && !_xenoWeeds.IsOnWeeds((gridId, grid), target))
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-need-weeds"), target, xeno);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-need-weeds"), target, xeno.Owner);
             return false;
         }
 
@@ -428,7 +448,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         // Target blocked
         if (!_xenoConstruct.TileSolidAndNotBlocked(target))
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-cant-plant"), target, xeno);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-cant-plant"), target, xeno.Owner);
             return false;
         }
 
@@ -439,7 +459,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         {
             if (_xenoConstructQuery.HasComp(uid) || _xenoEggQuery.HasComp(uid))
             {
-                _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-cant-plant"), target, xeno);
+                _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-cant-plant"), target, xeno.Owner);
                 return false;
             }
         }
@@ -454,12 +474,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             !_xenoPlasma.HasPlasmaPopup(xeno.Owner, cost))
         {
             return false;
-        }
-
-        if (GetFruitHealthCost(fruitChoice) is { } healthCost)
-        {
-            _damageable.TryChangeDamage(xeno.Owner, healthCost,
-            ignoreResistances: true, interruptsDoAfters: false);
         }
 
         return true;

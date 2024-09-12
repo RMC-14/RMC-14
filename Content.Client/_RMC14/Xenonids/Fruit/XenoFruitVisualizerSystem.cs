@@ -1,4 +1,5 @@
-using Content.Shared._RMC14.Xenonids.Fruit;
+using Content.Shared._RMC14.Xenonids.Fruit.Components;
+using Content.Shared._RMC14.Xenonids.Fruit.Events;
 using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Xenonids.Fruit;

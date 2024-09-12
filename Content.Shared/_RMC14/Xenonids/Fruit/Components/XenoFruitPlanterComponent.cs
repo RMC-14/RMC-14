@@ -3,7 +3,7 @@ using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._RMC14.Xenonids.Fruit;
+namespace Content.Shared._RMC14.Xenonids.Fruit.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 [Access(typeof(SharedXenoFruitSystem))]
@@ -19,7 +19,7 @@ public sealed partial class XenoFruitPlanterComponent : Component
     public EntProtoId? FruitChoice;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan PlantDelay = TimeSpan.FromSeconds(4);
+    public TimeSpan PlantDelay = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier PlantSound = new SoundCollectionSpecifier("RMCResinBuild")
@@ -34,4 +34,7 @@ public sealed partial class XenoFruitPlanterComponent : Component
     // List of fruit planted by entity with this component
     [DataField, AutoNetworkedField]
     public List<EntityUid> PlantedFruit = new();
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId ActionId = "ActionXenoPlantFruit";
 }
