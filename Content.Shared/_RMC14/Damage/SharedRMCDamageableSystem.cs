@@ -310,7 +310,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         }
 
         // if this ever runs on the client then Dirty() needs to be added back when
-        // DamageOverTimeComponent.NextDamageAt is modified
+        // the NextDamageAt fields are modified
         if (_net.IsClient)
             return;
 
