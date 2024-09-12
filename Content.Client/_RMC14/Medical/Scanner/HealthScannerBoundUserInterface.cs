@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Medical.HUD.Systems;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.Atmos.Rotting;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -36,12 +37,14 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
     private readonly ShowHolocardIconsSystem _holocardIcons;
     private readonly SkillsSystem _skills;
     private readonly SharedWoundsSystem _wounds;
+    private readonly SharedRottingSystem _rot;
 
     public HealthScannerBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _holocardIcons = _entities.System<ShowHolocardIconsSystem>();
         _skills = _entities.System<SkillsSystem>();
         _wounds = _entities.System<SharedWoundsSystem>();
+        _rot = _entities.System<SharedRottingSystem>();
     }
 
     protected override void Open()
@@ -91,7 +94,7 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
             _window.HealthBar.MinValue = 0;
             _window.HealthBar.MaxValue = 100;
 
-            if (_entities.HasComponent<VictimBurstComponent>(target))
+            if (_entities.HasComponent<VictimBurstComponent>(target) || _rot.IsRotten(target))
             {
                 _window.HealthBar.Value = 0;
                 _window.HealthBarText.Text = "Permanently deceased";
