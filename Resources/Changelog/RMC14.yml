@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: vero5123
-  changes:
-  - message: increased the required damage threshold to destroy weed nodes
-    type: Tweak
-  id: 188
-  time: '2024-06-25T03:40:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2560
-- author: vero5123
-  changes:
-  - message: fixes barricades not being rotatable
-    type: Fix
-  id: 189
-  time: '2024-06-25T04:03:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2556
 - author: DrSmugleaf
   changes:
   - message: Fixed marines not being able to move after being un-nested.
@@ -4392,5 +4378,19 @@
   id: 687
   time: '2024-09-12T08:32:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4020
+- author: DrSmugleaf
+  changes:
+  - message: Fixed mortars making the firing sound when reloading.
+    type: Fix
+  id: 688
+  time: '2024-09-12T13:09:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4021
+- author: DrSmugleaf
+  changes:
+  - message: Added poison gas to the landing zones that goes away on first drop.
+    type: Add
+  id: 689
+  time: '2024-09-12T13:09:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4022
 Name: RMC14
 Order: -1
