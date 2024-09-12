@@ -20,6 +20,7 @@ using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Server.Voting;
 using Content.Server.Voting.Managers;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Bioscan;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
@@ -904,6 +905,21 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         rule.Comp.XenoMap = grids[0];
 
         _mapManager.SetMapPaused(mapId, false);
+
+        // TODO RMC14 this should be delayed by 3 minutes + 13 second warning for immersion
+        if (rule.Comp.LandingZoneGas is { } gas && TryComp(rule.Comp.XenoMap, out AreaGridComponent? areaGrid))
+        {
+            foreach (var (indices, areaProto) in areaGrid.Areas)
+            {
+                if (areaProto.TryGet(out var area, _prototypes, _compFactory) &&
+                    area.LandingZone)
+                {
+                    var coordinates = _mapSystem.ToCoordinates(rule.Comp.XenoMap, indices);
+                    Spawn(gas, coordinates);
+                }
+            }
+        }
+
         return true;
     }
 
