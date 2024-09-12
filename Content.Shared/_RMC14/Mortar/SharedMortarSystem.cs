@@ -192,7 +192,7 @@ public abstract class SharedMortarSystem : EntitySystem
                 ("shell", shellId));
             _popup.PopupPredicted(selfMsg, othersMsg, mortar, user);
 
-            _audio.PlayPredicted(mortar.Comp.FireSound, mortar, user);
+            _audio.PlayPredicted(mortar.Comp.ReloadSound, mortar, user);
         }
     }
 
