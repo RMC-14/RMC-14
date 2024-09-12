@@ -24,7 +24,6 @@
   components:
   - type: GhostRole
     prob: 0
-  - type: PressureImmunity
 
 - type: entity
   parent: [MobKobold, RMCSmallHost]
