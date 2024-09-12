@@ -1,8 +1,8 @@
-hc-none-description = Patient has no active holocard
-hc-urgent-description = Patient has non-life threatening injuries requiring surgery
-hc-emergency-description = Patient has life threatening injuries
-hc-permadead-description = Patient is permanently deceased
-hc-xeno-description = Patient is impregnated with a xeno larva
+hc-none-description = Patient has no active holocard.
+hc-urgent-description = Patient needs non-urgent surgery.
+hc-emergency-description = Patient needs life-saving treatment.
+hc-permadead-description = Patient is permanently deceased.
+hc-xeno-description = Patient is infected with a xeno embryo.
 
 hc-none-name = None
 hc-urgent-name = Urgent

@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using Content.Client._RMC14.Medical.HUD;
 using Content.Client.Message;
+using Content.Client.Stylesheets;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.HUD;
 using Content.Shared._RMC14.Medical.HUD.Components;
@@ -16,6 +17,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Temperature;
 using JetBrains.Annotations;
+using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
@@ -96,11 +98,13 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
 
             if (_entities.HasComponent<VictimBurstComponent>(target) || _rot.IsRotten(target))
             {
-                _window.HealthBar.Value = 0;
+                _window.HealthBar.Value = 100;
+                _window.HealthBar.ModulateSelfOverride = Color.Red;
                 _window.HealthBarText.Text = "Permanently deceased";
             }
             else
             {
+                _window.HealthBar.ModulateSelfOverride = null;
                 //Scale negative values with how close to death we are - if we have a different crit and dead state
                 if (damage < 0 && thresholdsSystem.TryGetDeadThreshold(target, out var deadThreshold) &&
                     deadThreshold != threshold)
@@ -130,13 +134,19 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
         }
 
         if (_entities.TryGetComponent(target, out HolocardStateComponent? holocardComponent) &&
-            _holocardIcons.TryGetDescription((target, holocardComponent), out var description))
+            _holocardIcons.TryGetDescription((target, holocardComponent), out var description) &&
+            _holocardIcons.TryGetHolocardColor((target, holocardComponent), out var color))
         {
             _window.HolocardDescription.Text = description;
+            if (_window.HolocardPanel.PanelOverride is StyleBoxFlat panel)
+                panel.BackgroundColor = color.Value;
         }
         else
         {
             _window.HolocardDescription.Text = Loc.GetString("hc-none-description");
+            _window.HolocardPanel.ModulateSelfOverride = null;
+            if (_window.HolocardPanel.PanelOverride is StyleBoxFlat panel)
+                panel.BackgroundColor = Color.Transparent;
         }
 
         _window.ChemicalsContainer.DisposeAllChildren();
