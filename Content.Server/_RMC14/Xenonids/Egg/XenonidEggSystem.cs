@@ -69,7 +69,7 @@ public sealed class XenonidEggSystem : EntitySystem
             return;
 
         // Must have been dead for 3 minutes
-        if ((int)_gameTiming.RealTime.Subtract(ghostComp.TimeOfDeath).TotalSeconds < 180)
+        if (_gameTiming.RealTime.Subtract(ghostComp.TimeOfDeath) < TimeSpan.FromMinutes(3))
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-ghost-need-time"), user, user, PopupType.MediumCaution);
             return;
