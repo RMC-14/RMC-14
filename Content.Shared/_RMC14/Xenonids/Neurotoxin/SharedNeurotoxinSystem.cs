@@ -17,6 +17,7 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Throwing;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -39,8 +40,9 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
     [Dependency] private readonly ThrowingSystem _throwing = default!; //It's how this fakes movement
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+	[Dependency] private readonly SharedPhysicsSystem _physics = default!;
 
-    private readonly HashSet<Entity<MarineComponent>> _marines = new();
+	private readonly HashSet<Entity<MarineComponent>> _marines = new();
     public override void Initialize()
     {
         base.Initialize();
@@ -131,8 +133,12 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
             {
                 neuro.LastStumbleTime = time;
                 // This is how we randomly move them - by throwing
-                if(_blocker.CanMove(uid))
-                    _throwing.TryThrow(uid, _random.NextAngle().ToVec().Normalized(), 1, animated: false, playSound: false, doSpin: false);
+                if (_blocker.CanMove(uid))
+                {
+					_physics.SetLinearVelocity(args.Target, Vector2.Zero);
+					_physics.SetAngularVelocity(args.Target, 0f);
+					_throwing.TryThrow(uid, _random.NextAngle().ToVec().Normalized(), 1, animated: false, playSound: false, doSpin: false);
+                }
                 _popup.PopupEntity(Loc.GetString("rmc-stumble-others", ("victim", uid)), uid, Filter.PvsExcept(uid), true, PopupType.SmallCaution);
                 _popup.PopupEntity(Loc.GetString("rmc-stumble"), uid, uid, PopupType.MediumCaution);
                 _statusEffects.TryAddStatusEffect(uid, "Muted", neuro.DazeLength * 5, true, "Muted");
