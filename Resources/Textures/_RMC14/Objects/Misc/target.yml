@@ -1,6 +1,6 @@
 - type: entity
-  id: RMCTargetHuman
   parent: TargetHuman
+  id: RMCTargetHuman
   suffix: RMC
   components:
   - type: Destructible
