@@ -43,7 +43,7 @@ public sealed class CMHealthIconsSystem : EntitySystem
 
         if (_mobState.IsDead(damageable))
         {
-            if (TryComp<MindCheckComponent>(damageable, out var mind) && !mind.HasMindOrGhost)
+            if (TryComp<MindCheckComponent>(damageable, out var mind) && !mind.ActiveMindOrGhost)
             {
                 icons.Add(_prototype.Index(DeadDNR));
                 return icons;

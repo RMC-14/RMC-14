@@ -8,5 +8,5 @@ public sealed partial class MindCheckComponent : Component
 {
     [ViewVariables(VVAccess.ReadWrite)]
     [AutoNetworkedField]
-    public bool HasMindOrGhost = false;
+    public bool ActiveMindOrGhost = false;
 }
