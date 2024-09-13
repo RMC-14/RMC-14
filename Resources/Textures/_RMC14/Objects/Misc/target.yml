@@ -47,7 +47,7 @@
     state: target_c
 
 - type: entity
-  name: strange target
+  name: felinid target
   id: RMCTargetStrange
   parent: RMCTargetHuman
   description: A shooting target. This one is a Felinid.
