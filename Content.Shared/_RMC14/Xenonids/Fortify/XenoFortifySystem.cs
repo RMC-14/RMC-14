@@ -144,10 +144,10 @@ public sealed class XenoFortifySystem : EntitySystem
 
         if (TryComp<RMCSizeComponent>(xeno, out var size))
         {
-			xeno.Comp.OriginalSize = size.Size;
-			size.Size = xeno.Comp.FortifySize;
-			Dirty((xeno.Owner, size));
-		}
+            xeno.Comp.OriginalSize = size.Size;
+            size.Size = xeno.Comp.FortifySize;
+            Dirty(xeno.Owner, size);
+        }
 
         _fixtures.TryCreateFixture(xeno, xeno.Comp.Shape, FixtureId, hard: true, collisionLayer: (int) WallLayer);
         _transform.AnchorEntity((xeno, Transform(xeno)));
@@ -162,10 +162,10 @@ public sealed class XenoFortifySystem : EntitySystem
         if (TryComp<RMCSizeComponent>(xeno, out var size))
         {
             size.Size = xeno.Comp.OriginalSize ?? RMCSizes.Xeno;
-			Dirty((xeno.Owner, size));
-		}
+            Dirty(xeno.Owner, size);
+        }
 
-		_fixtures.DestroyFixture(xeno, FixtureId);
+        _fixtures.DestroyFixture(xeno, FixtureId);
         _transform.Unanchor(xeno, Transform(xeno));
 
         FortifyUpdated(xeno);

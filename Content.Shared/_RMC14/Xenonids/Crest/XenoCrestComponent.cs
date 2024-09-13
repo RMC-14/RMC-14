@@ -22,6 +22,6 @@ public sealed partial class XenoCrestComponent : Component
     [DataField, AutoNetworkedField]
     public RMCSizes CrestSize = RMCSizes.Big;
 
-	[DataField, AutoNetworkedField]
-	public RMCSizes? OriginalSize;
+    [DataField, AutoNetworkedField]
+    public RMCSizes? OriginalSize;
 }

@@ -28,9 +28,9 @@ public sealed partial class XenoFortifyComponent : Component
     [DataField]
     public IPhysShape Shape = new PhysShapeCircle(0.49f);
 
-	[DataField, AutoNetworkedField]
-	public RMCSizes FortifySize = RMCSizes.Immobile;
+    [DataField, AutoNetworkedField]
+    public RMCSizes FortifySize = RMCSizes.Immobile;
 
-	[DataField, AutoNetworkedField]
-	public RMCSizes? OriginalSize;
+    [DataField, AutoNetworkedField]
+    public RMCSizes? OriginalSize;
 }
