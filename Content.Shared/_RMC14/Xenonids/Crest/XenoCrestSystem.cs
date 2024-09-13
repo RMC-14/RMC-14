@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared._RMC14.Xenonids.Sweep;
@@ -43,7 +44,19 @@ public sealed class XenoCrestSystem : EntitySystem
 
         args.Handled = true;
 
-        xeno.Comp.Lowered = !xeno.Comp.Lowered;
+		if (TryComp<RMCSizeComponent>(xeno, out var size))
+		{
+            if (!xeno.Comp.Lowered)
+            {
+                xeno.Comp.OriginalSize = size.Size;
+                size.Size = xeno.Comp.CrestSize;
+            }
+            else
+				size.Size = xeno.Comp.OriginalSize ?? RMCSizes.Xeno;
+			Dirty((xeno.Owner, size));
+		}
+
+		xeno.Comp.Lowered = !xeno.Comp.Lowered;
         Dirty(xeno);
 
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);
