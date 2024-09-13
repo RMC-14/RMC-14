@@ -2,9 +2,6 @@ using Content.Shared.Ghost;
 using Content.Shared.Actions;
 using Content.Shared._RMC14.Mobs;
 using Content.Shared.Overlays;
-using Content.Shared.Weapons.Melee;
-using Content.Shared.Damage.Prototypes;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Mobs
 {
