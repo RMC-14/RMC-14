@@ -1,9 +1,10 @@
-﻿using Content.Shared._RMC14.Xenonids;
+﻿using Content.Shared._RMC14.Connection;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.SSDIndicator;
 using Content.Shared.StatusIcon;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Medical.HUD;
@@ -43,7 +44,7 @@ public sealed class CMHealthIconsSystem : EntitySystem
 
         if (_mobState.IsDead(damageable))
         {
-            if (CompOrNull<SSDIndicatorComponent>(damageable)?.IsSSD ?? false)
+            if (TryComp<MindCheckComponent>(damageable, out var mind) && !mind.HasMindOrGhost)
             {
                 icons.Add(_prototype.Index(DeadDNR));
                 return icons;
