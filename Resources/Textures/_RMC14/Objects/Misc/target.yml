@@ -25,3 +25,33 @@
           collection: MetalBreak
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+
+- type: entity
+  name: syndicate target
+  id: RMCTargetSyndicate
+  parent: RMCTargetHuman
+  description: A shooting target. This one is a syndicate agent.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Security/target.rsi
+    state: target_s
+
+- type: entity
+  name: clown target
+  id: RMCTargetClown
+  parent: RMCTargetHuman
+  description: A shooting target. This one is a clown.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Security/target.rsi
+    state: target_c
+
+- type: entity
+  name: strange target
+  id: RMCTargetStrange
+  parent: RMCTargetHuman
+  description: A shooting target. This one is a Felinid.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Security/target.rsi
+    state: target_f
