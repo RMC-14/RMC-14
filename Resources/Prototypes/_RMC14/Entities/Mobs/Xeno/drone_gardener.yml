@@ -35,7 +35,8 @@
     - ActionXenoTailStab
     - ActionXenoPheromones
     - ActionXenoOrderConstruction
-    - ActionXenoPlantWeeds # TODO: replace with gardener weeds
+    - ActionXenoPlantWeeds
+    # - ActionXenoPlantWeedsHardy # TODO: implement gardener weeds
     - ActionXenoPlantFruit
     - ActionXenoChooseFruit
     # - ActionXenoResinSurge # TODO: implement resin surge
@@ -94,5 +95,4 @@
         - XenoEgg
         - XenoFruit
   - type: RMCXenoDamageVisuals
-    prefix: gardener_drone
-
+    prefix: drone
