@@ -89,11 +89,17 @@
   - type: Sprite
     layers:
     - state: ointment
+      map: ["case"]
     - state: kit_empty
       map: [ "openLayer" ]
       visible: false
   - type: Item
     heldPrefix: ointment
+  - type: RandomSprite
+    available:
+      - case:
+          ointment: ""
+          firefirstaid: ""
 
 - type: entity
   parent: CMBurnAidKit
