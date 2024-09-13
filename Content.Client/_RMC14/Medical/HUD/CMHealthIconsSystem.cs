@@ -4,7 +4,6 @@ using Content.Shared.Atmos.Rotting;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.StatusIcon;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Medical.HUD;
