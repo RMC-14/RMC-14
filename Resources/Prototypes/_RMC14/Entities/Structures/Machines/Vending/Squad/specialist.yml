@@ -30,7 +30,7 @@
       - id: CMSniperEquipmentCase
     - name: Extra Scout Ammunition
       entries:
-      - id: RMCCartridgeRifleM4SPRA19Impact
+      - id: RMCMagazineRifleM4SPRA19Impact
         points: 40
 #      - id: RMCMagazineRifleM4SPRA19 # TODO rmc14 RMCMagazineRifleM4SPRA19Incendiary
 #        points: 40

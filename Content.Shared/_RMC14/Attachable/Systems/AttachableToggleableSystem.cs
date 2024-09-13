@@ -1,7 +1,6 @@
 using System.Numerics;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
-using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
@@ -73,7 +72,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
         SubscribeLocalEvent<AttachableToggleablePreventShootComponent, AttachableAlteredEvent>(OnAttachableAltered,
             after: new[] { typeof(AttachableModifiersSystem) });
-        
+
         SubscribeLocalEvent<AttachableGunPreventShootComponent, AttemptShootEvent>(OnAttemptShoot);
     }
 
@@ -175,7 +174,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
                 preventShootComponent.PreventShoot = false;
                 break;
         }
-        
+
         Dirty(args.Holder, preventShootComponent);
     }
 #endregion
@@ -257,9 +256,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
     {
         if (!attachable.Comp.Attached)
             return;
-        
+
         args.Args.Handled = true;
-        
+
         if (!attachable.Comp.NeedHand || !attachable.Comp.Active)
             return;
 
@@ -278,9 +277,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
     {
         if (!attachable.Comp.Attached)
             return;
-        
+
         args.Args.Handled = true;
-        
+
         if (attachable.Comp.NeedHand && attachable.Comp.Active)
             Toggle(attachable, args.Args.User, attachable.Comp.DoInterrupt);
 
@@ -291,7 +290,10 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
     private void OnAttachableMovementLockedMoveInput(Entity<AttachableMovementLockedComponent> user, ref MoveInputEvent args)
     {
-        foreach (EntityUid attachableUid in user.Comp.AttachableList)
+        if (!args.HasDirectionalMovement)
+            return;
+
+        foreach (var attachableUid in user.Comp.AttachableList)
         {
             if (!TryComp(attachableUid, out AttachableToggleableComponent? toggleableComponent) ||
                 !toggleableComponent.Active ||
@@ -299,7 +301,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
             {
                 continue;
             }
-            
+
             Toggle((attachableUid, toggleableComponent), user.Owner, toggleableComponent.DoInterrupt);
         }
 
@@ -560,7 +562,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
                 _attachableHolderSystem.SetSupercedingAttachable(holder, null);
             return;
         }
-        
+
         if (attachable.Comp.BreakOnMove && userUid != null)
         {
             var movementLockedComponent = EnsureComp<AttachableMovementLockedComponent>(userUid.Value);
@@ -606,7 +608,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         {
             return;
         }
-        
+
         FinishToggle(
             attachable,
             (holderUid.Value, holderComponent),
@@ -688,10 +690,10 @@ public sealed class AttachableToggleableSystem : EntitySystem
     {
         if (ent.Comp.Action is not { } action)
             return;
-        
+
         if (!TryComp(action, out InstantActionComponent? actionComponent) || actionComponent.AttachedEntity != user)
             return;
-        
+
         _actionsSystem.RemoveProvidedAction(user, ent, action);
     }
 

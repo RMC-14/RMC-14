@@ -1,136 +1,4 @@
 ﻿Entries:
-- author: vero5123
-  changes:
-  - message: Adds a short move delay to the Runner after hitting a pounce.
-    type: Tweak
-  id: 174
-  time: '2024-06-23T11:25:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2559
-- author: vero5123
-  changes:
-  - message: Defender can no longer pull and headbutt at the same time
-    type: Fix
-  id: 175
-  time: '2024-06-23T11:25:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2558
-- author: Cephalopod222
-  changes:
-  - message: Added new M54C sprites!
-    type: Add
-  id: 176
-  time: '2024-06-23T20:42:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2572
-- author: MACMAN2003
-  changes:
-  - message: Added weapon attachments to the ASRS requisition console.
-    type: Add
-  id: 177
-  time: '2024-06-23T21:23:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2570
-- author: DrSmugleaf
-  changes:
-  - message: Enabled the Warrior > Crusher evolution.
-    type: Add
-  - message: Fixed the spitter's xeno spit being able to hurt other xenos.
-    type: Fix
-  - message: Fixed the M54C's AP and Extended mags not being able to fit into some
-      storages.
-    type: Fix
-  - message: Tackle stacks no longer expire while downed, making it easier to keep
-      a tackled target down.
-    type: Tweak
-  - message: Fog walls now occlude vision.
-    type: Tweak
-  id: 178
-  time: '2024-06-24T01:20:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2589
-- author: DrSmugleaf
-  changes:
-  - message: Raffle durations are now 10 seconds, down from 30, and don't extend when
-      more people join the raffle
-    type: Tweak
-  - message: There is no longer a 3 second delay to clicking the join raffle button.
-    type: Tweak
-  id: 179
-  time: '2024-06-24T01:32:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2590
-- author: Tunguso4ka
-  changes:
-  - message: Chem Dispenser temporary disabled, till the chem recipes added.
-    type: Tweak
-  id: 180
-  time: '2024-06-24T19:22:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2610
-- author: DrSmugleaf
-  changes:
-  - message: Xenonids now accumulate evolution points past their max in the first
-      15 minutes of the round, making it easier for round-start xenonids to choose
-      their evolution as soon as the castes are unlocked.
-    type: Tweak
-  id: 181
-  time: '2024-06-24T23:53:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2612
-- author: DrSmugleaf
-  changes:
-  - message: Fixed 5-slot webbings unintentionally being able to fit larger magazines.
-    type: Fix
-  id: 182
-  time: '2024-06-24T23:53:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2608
-- author: DrSmugleaf
-  changes:
-  - message: The amount of marines per xeno has been lowered from 4 to 3. With 200
-      players this means that 67 xenos will spawn round-start, instead of 50.
-    type: Tweak
-  id: 183
-  time: '2024-06-24T23:58:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2613
-- author: CaasGit
-  changes:
-  - message: Blood bags do not print text when you're clearly out of range.
-    type: Fix
-  id: 184
-  time: '2024-06-25T00:01:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2595
-- author: rain
-  changes:
-  - message: M-marine-s n-now s-tutter less-s.
-    type: Tweak
-  id: 185
-  time: '2024-06-25T01:29:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2596
-- author: CaasGit
-  changes:
-  - message: Add medical hud to corpsman helmets.
-    type: Add
-  id: 186
-  time: '2024-06-25T02:39:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2616
-- author: krose124
-  changes:
-  - message: Parent marine armor (the medium one) speed mult .9 -> .85
-    type: Tweak
-  - message: EOD armor (the heavy one) speed mult .8 -> .75
-    type: Tweak
-  - message: Explicit speed value on M3-L (the light one) speed multiplier as 1
-    type: Add
-  id: 187
-  time: '2024-06-25T02:41:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2611
-- author: vero5123
-  changes:
-  - message: increased the required damage threshold to destroy weed nodes
-    type: Tweak
-  id: 188
-  time: '2024-06-25T03:40:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2560
-- author: vero5123
-  changes:
-  - message: fixes barricades not being rotatable
-    type: Fix
-  id: 189
-  time: '2024-06-25T04:03:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2556
 - author: DrSmugleaf
   changes:
   - message: Fixed marines not being able to move after being un-nested.
@@ -4396,5 +4264,133 @@
   id: 673
   time: '2024-09-10T22:56:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3982
+- author: DrSmugleaf
+  changes:
+  - message: Added being able to look through ladders without moving through them.
+      This can be done Alt+Clicking the ladder, or by dragging the ladder to yourself
+      like in SS13.
+    type: Add
+  id: 674
+  time: '2024-09-11T01:17:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3986
+- author: DrSmugleaf
+  changes:
+  - message: Fixed pressing shift undeploying your bipod, stopping overwatch, stopping
+      xenonid watch, etc.
+    type: Fix
+  id: 675
+  time: '2024-09-11T01:45:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3988
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Queen screech not unbuckling power loader operators.
+    type: Fix
+  id: 676
+  time: '2024-09-11T01:51:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3991
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Boiler Bombard popup spam, it now has a 1 second cooldown between
+      attempts.
+    type: Fix
+  id: 677
+  time: '2024-09-11T03:00:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3994
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the elevator not killing you after vaulting the railing into a
+      lowered or lowering elevator.
+    type: Fix
+  id: 678
+  time: '2024-09-11T03:00:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3993
+- author: DrSmugleaf
+  changes:
+  - message: Added sounds at round-end for each round outcome, made by Bolgarich.
+    type: Add
+  - message: Added planet map vote. In the lobby, a vote will be made for the next
+      planet map to play on. This excludes the planet map that was selected for the
+      last round.
+    type: Add
+  id: 679
+  time: '2024-09-11T07:40:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4001
+- author: DrSmugleaf
+  changes:
+  - message: Added the xenonid hive core's missing ability to block CAS and mortar
+      fire within a 10 tile radius.
+    type: Add
+  id: 680
+  time: '2024-09-11T08:56:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4002
+- author: CyberTropic
+  changes:
+  - message: Grenade packets have an empty graphic.
+    type: Fix
+  id: 681
+  time: '2024-09-11T08:58:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4000
+- author: DrSmugleaf
+  changes:
+  - message: Added Honkzee Beezs figurine.
+    type: Add
+  id: 682
+  time: '2024-09-11T09:24:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4003
+- author: Vermidia
+  changes:
+  - message: Sniper sentry only does 2x as much damage as a normal sentry
+    type: Fix
+  id: 683
+  time: '2024-09-11T22:53:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4005
+- author: DrSmugleaf
+  changes:
+  - message: Fixed a rare case that made an invisible scout spec visible.
+    type: Fix
+  id: 684
+  time: '2024-09-12T05:53:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4016
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Updated LV-624's hydro, medical, fitness cargo bay, landing zone one,
+      and nexus.
+    type: Tweak
+  id: 685
+  time: '2024-09-12T05:57:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4009
+- author: DrSmugleaf
+  changes:
+  - message: Renamed offset calibration to camera offset in the dropship weapons window,
+      added a tooltip to clarify that it does not affect direct bombardment. Also
+      fixed the reset offset button being too small by FIVE PIXELS.
+    type: Tweak
+  id: 686
+  time: '2024-09-12T06:55:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4017
+- author: DrSmugleaf
+  changes:
+  - message: Added LV's missing random fog breaks. Every round that LV is chosen as
+      the planet map, one of three spots in the fog will randomly be chosen to be
+      opened up at round-start, located at the far west of the river, the far east,
+      and the bridge near the middle.
+    type: Add
+  id: 687
+  time: '2024-09-12T08:32:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4020
+- author: DrSmugleaf
+  changes:
+  - message: Fixed mortars making the firing sound when reloading.
+    type: Fix
+  id: 688
+  time: '2024-09-12T13:09:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4021
+- author: DrSmugleaf
+  changes:
+  - message: Added poison gas to the landing zones that goes away on first drop.
+    type: Add
+  id: 689
+  time: '2024-09-12T13:09:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4022
 Name: RMC14
 Order: -1
