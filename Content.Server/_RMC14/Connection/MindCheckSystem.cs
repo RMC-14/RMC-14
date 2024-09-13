@@ -19,8 +19,10 @@ public sealed class MindCheckSystem : EntitySystem
         SubscribeLocalEvent<MindCheckComponent, MindAddedMessage>(OnMindChanged);
         SubscribeLocalEvent<MindCheckComponent, MindRemovedMessage>(OnMindChanged);
         SubscribeLocalEvent<MindCheckComponent, MindUnvisitedMessage>(OnMindStateChange);
+        SubscribeLocalEvent<MindCheckComponent, PlayerAttachedEvent>(OnMindStateChange);
+		SubscribeLocalEvent<MindCheckComponent, PlayerDetachedEvent>(OnMindStateChange);
 
-        _player.PlayerStatusChanged += PlayerStatusChanged;
+		_player.PlayerStatusChanged += PlayerStatusChanged;
     }
 
     private void OnMindChanged<T>(Entity<MindCheckComponent> ent, ref T args) where T : MindEvent
