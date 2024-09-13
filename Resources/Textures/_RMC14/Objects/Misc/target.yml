@@ -1,8 +1,32 @@
 - type: entity
-  parent: TargetHuman
   id: RMCTargetHuman
+  parent: BaseStructureDynamic
+  abstract: true
   suffix: RMC
   components:
+  - type: Sprite
+    sprite: Objects/Specific/Security/target.rsi
+    state: target_stake
+    noRot: true
+  - type: Repairable
+  - type: DamagePopup
+    allowTypeChange: true
+    damagePopupType: Combined
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 200
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+  - type: InteractionOutline
+  - type: Physics
+  - type: Damageable
+    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
