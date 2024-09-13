@@ -2,12 +2,9 @@
 using Content.Server.Interaction;
 using Content.Server._RMC14.NPC.Components;
 using Content.Shared.Actions;
-using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared._RMC14.Xenonids;
-using Robust.Server.GameObjects;
 using Robust.Shared.Timing;
-using Robust.Shared.Map;
 
 namespace Content.Server._RMC14.NPC.Systems;
 
