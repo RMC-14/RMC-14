@@ -232,6 +232,20 @@
     state: base_m54
   objectType: Item
 
+# Shotgun
+- type: construction
+  parent: RMC
+  name: Magazine Box (Buckshot)
+  id: RMCBoxMagazineShotgunBuckshotEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazineShotgunBuckshotEmpty
+  category: construction-category-cm-box-magazine
+  description: A box for holding other, smaller, boxes of shotgun shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_buck
+  objectType: Item
 
   # Construct graphs
 - type: constructionGraph
@@ -341,6 +355,12 @@
         amount: 1
         doAfter: 1
     
+    # Shotgun
+    - to: RMCBoxMagazineShotgunBuckshotEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 1
 
   # Why the fuck do you even need these nodes???
 
@@ -391,3 +411,8 @@
     entity: RMCBoxMagazineRevolverM44Empty
   - node: RMCBoxMagazineRevolverM44MarksmanEmpty
     entity: RMCBoxMagazineRevolverM44MarksmanEmpty
+    
+  # Shotgun
+  - node: RMCBoxMagazineShotgunBuckshotEmpty
+    entity: RMCBoxMagazineShotgunBuckshotEmpty
+  

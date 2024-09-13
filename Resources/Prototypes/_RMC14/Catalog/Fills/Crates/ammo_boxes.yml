@@ -17,8 +17,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxShotgunBuckshot
-      amount: 4 # TODO RMC14 boxes
+    - id: RMCBoxMagazineShotgunBuckshot
+      amount: 1
 
 - type: entity
   parent: RMCCrateAmmo

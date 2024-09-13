@@ -714,3 +714,43 @@
       whitelist:
         tags:
         - RMCSpeedLoaderM44
+
+# Shotgun
+- type: entity
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineShotgunBuckshotEmpty
+  name: buckshot case
+  description: A box for holding other, smaller, boxes of shotgun shells.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineShotgunBuckshotEmpty
+  - type: Sprite
+    layers:
+    - state: base_buck
+    - state: magaz_reg
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_type
+    - state: base_buck_lid
+      map: [ "lid" ]
+    - state: lid_type
+      map: [ "lid_stripe" ]
+  - type: CMItemSlots
+    count: 4
+    slot:
+      whitelist:
+        tags:
+        - RMCBoxShotgunShells
+
+- type: entity
+  parent: RMCBoxMagazineShotgunBuckshotEmpty
+  id: RMCBoxMagazineShotgunBuckshot
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCBoxShotgunBuckshot
+    count: 4
+    slot:
+      whitelist:
+        tags:
+        - RMCBoxShotgunShells
