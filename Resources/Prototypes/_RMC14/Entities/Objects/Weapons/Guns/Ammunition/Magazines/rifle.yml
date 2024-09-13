@@ -242,6 +242,9 @@
     - RMCMagazineRifleM4SPRA19Impact
   - type: BallisticAmmoProvider
     proto: RMCCartridgeRifleM4SPRA19Impact
+    whitelist:
+      tags:
+      - RMCCartridgeRifleM4SPRA19Impact
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4spra19.rsi
     layers:
