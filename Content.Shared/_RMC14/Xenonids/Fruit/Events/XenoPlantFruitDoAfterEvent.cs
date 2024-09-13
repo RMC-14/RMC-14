@@ -11,13 +11,9 @@ public sealed partial class XenoPlantFruitDoAfterEvent : DoAfterEvent
     [DataField]
     public NetCoordinates Coordinates;
 
-    [DataField]
-    public EntProtoId FruitId = "XenoFruitLesser";
-
-    public XenoPlantFruitDoAfterEvent(NetCoordinates coordinates, EntProtoId fruitId)
+    public XenoPlantFruitDoAfterEvent(NetCoordinates coordinates)
     {
         Coordinates = coordinates;
-        FruitId = fruitId;
     }
 
     public override DoAfterEvent Clone()

@@ -70,7 +70,7 @@
     checkStructureSelected: false
     checkWeeds: false
 
-# For gardener/healer drone
+# For gardener drone
 - type: entity
   id: ActionXenoChooseFruit
   parent: ActionXenoBase
@@ -88,7 +88,7 @@
 - type: entity
   id: ActionXenoPlantFruit
   parent: ActionXenoBase
-  name: Plant Resin Fruit (50)
+  name: Plant Resin Fruit (100)
   description: Plant chosen resin fruit at the cost of health and plasma.
   components:
   - type: WorldTargetAction
@@ -98,5 +98,23 @@
       state: gardener_plant
     event: !type:XenoPlantFruitActionEvent
   - type: XenoPlantFruitAction
-    checkFruitSelected: true
     checkWeeds: true
+    plasmaCost: 100
+    healthCost: # :(
+      groups:
+        Brute: 50
+
+# For healer drone
+- type: entity
+  id: ActionXenoPlantFruitLesser
+  parent: ActionXenoPlantFruit
+  name: Plant Resin Fruit (50)
+  description: Plant resin fruit at the cost of health and plasma.
+  components:
+  - type: XenoPlantFruitAction
+    checkWeeds: true
+    plasmaCost: 50
+    healthCost: # :(
+      groups:
+        Brute: 50
+

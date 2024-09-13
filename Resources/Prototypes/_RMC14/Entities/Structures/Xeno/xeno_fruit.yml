@@ -65,10 +65,6 @@
   - type: Corrodible
     isCorrodible: false
   - type: XenoFruit
-    costPlasma: 100
-    costHealth: # :(
-      types:
-        Brute: 50
 
 
 
@@ -83,7 +79,6 @@
     growingState: fruit_lesser_immature
     grownState: fruit_lesser
     growTime: 15
-    costPlasma: 50
 
 - type: entity
   parent: XenoFruitLesser
@@ -120,7 +115,6 @@
     growingState: fruit_spore_immature
     grownState: fruit_spore
     growTime: 15
-
 - type: entity
   parent: XenoFruitBase
   id: XenoFruitSpeed

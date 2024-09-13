@@ -34,7 +34,4 @@ public sealed partial class XenoFruitPlanterComponent : Component
     // List of fruit planted by entity with this component
     [DataField, AutoNetworkedField]
     public List<EntityUid> PlantedFruit = new();
-
-    [DataField, AutoNetworkedField]
-    public EntProtoId ActionId = "ActionXenoPlantFruit";
 }

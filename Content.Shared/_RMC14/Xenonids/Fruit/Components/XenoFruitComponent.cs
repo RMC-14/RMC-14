@@ -30,12 +30,6 @@ public sealed partial class XenoFruitComponent : Component
     public string GrownState = "fruit_lesser";
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 CostPlasma = 100;
-
-    [DataField(required: true), AutoNetworkedField]
-    public DamageSpecifier CostHealth = default!;
-
-    [DataField, AutoNetworkedField]
     public EntityUid? Hive;
 
     // entity who planted the given fruit

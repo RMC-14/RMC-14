@@ -52,24 +52,16 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
 
-    [Dependency] private readonly CMHandsSystem _rmcHands = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly TagSystem _tags = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
 
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -140,13 +132,25 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
     private void OnXenoPlantFruitAction(Entity<XenoFruitPlanterComponent> xeno, ref XenoPlantFruitActionEvent args)
     {
-        if (args.Handled)
+        if (xeno.Comp.FruitChoice is not { } fruitChoice)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-select-fruit"), args.Target, xeno.Owner);
             return;
+        }
 
-        args.Handled = true;
+        var checkWeeds = true;
 
-        if (xeno.Comp.FruitChoice is not { } choice ||
-            !CanPlantOnTilePopup(xeno, choice, args.Target, true, true))
+        // Check if given action can plant off weeds
+        foreach (var (actionId, _) in _actions.GetActions(xeno))
+        {
+            if (TryComp(actionId, out XenoPlantFruitActionComponent? action))
+            {
+                checkWeeds = action.CheckWeeds;
+                break;
+            }
+        }
+
+        if (!CanPlantOnTilePopup(xeno, fruitChoice, args.Target, checkWeeds))
         {
             return;
         }
@@ -159,7 +163,8 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             return;
 
         var coordinates = GetNetCoordinates(args.Target);
-        var ev = new XenoPlantFruitDoAfterEvent(coordinates, choice);
+        var ev = new XenoPlantFruitDoAfterEvent(coordinates);
+        args.Handled = true;
         var doAfter = new DoAfterArgs(EntityManager, xeno.Owner, xeno.Comp.PlantDelay, ev, xeno)
         {
             BreakOnMove = true
@@ -173,26 +178,28 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         if (args.Handled || args.Cancelled)
             return;
 
+        var chosenFruitId = xeno.Comp.FruitChoice;
+
         var coordinates = GetCoordinates(args.Coordinates);
-        if (!coordinates.IsValid(EntityManager) ||
-            !xeno.Comp.CanPlant.Contains(args.FruitId) ||
-            !CanPlantOnTilePopup(xeno, args.FruitId, GetCoordinates(args.Coordinates), true, true))
+        if (!coordinates.IsValid(EntityManager))
         {
             return;
         }
 
-        if (GetFruitPlasmaCost(args.FruitId) is { } cost &&
-            !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
-        {
-            return;
-        }
-
-        // Only start cooldown if planting successful
+        // Only deduct health and set cooldown if plasma removal succeeds
         foreach (var (actionId, _) in _actions.GetActions(xeno))
         {
             if (TryComp(actionId, out XenoPlantFruitActionComponent? action))
             {
+                if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, action.PlasmaCost))
+                {
+                    _popup.PopupClient(Loc.GetString("cm-xeno-not-enough-plasma"), coordinates, xeno.Owner);
+                    return;
+                }
+
+                _damageable.TryChangeDamage(xeno.Owner, action.HealthCost, interruptsDoAfters: false);
                 _actions.SetCooldown(actionId, action.PlantCooldown);
+                break;
             }
         }
 
@@ -202,7 +209,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         if (_net.IsServer)
         {
-            var entity = Spawn(args.FruitId, coordinates);
+            var entity = Spawn(chosenFruitId, coordinates);
             var fruit = EnsureComp<XenoFruitComponent>(entity);
             var xform = EnsureComp<TransformComponent>(entity);
 
@@ -226,14 +233,11 @@ public sealed class SharedXenoFruitSystem : EntitySystem
                 QueueDel(removedFruit);
             }
 
-            // Deduct health
-            _damageable.TryChangeDamage(xeno.Owner, fruit.CostHealth,
-                ignoreResistances: true, interruptsDoAfters: false);
-
             // TODO: update action icon to display number of planted fruit?
 
-            var popupOthers = Loc.GetString("rmc-xeno-fruit-plant-success-others", ("xeno", xeno.Owner));
-            _popup.PopupPredicted(Loc.GetString("rmc-xeno-fruit-plant-success-self"), popupOthers, xeno.Owner, xeno.Owner);
+            var popupOthers = Loc.GetString("rmc-xeno-fruit-plant-success-others", ("xeno", xeno));
+            var popupSelf = Loc.GetString("rmc-xeno-fruit-plant-success-self");
+            _popup.PopupPredicted(popupSelf, popupOthers, xeno.Owner, xeno.Owner);
             _adminLogs.Add(LogType.RMCXenoPlantFruit, $"Xeno {ToPrettyString(xeno.Owner):xeno} planted {ToPrettyString(entity):entity} at {coordinates}");
         }
     }
@@ -365,63 +369,37 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         }
     }
 
-    private DamageSpecifier? GetFruitHealthCost(EntProtoId? fruit)
-    {
-        if (fruit is { } choice)
-        {
-            if (_prototype.TryIndex(fruit, out var fruitChoice) &&
-                fruitChoice.TryGetComponent(out XenoFruitComponent? fruitComp, _compFactory))
-            {
-                return fruitComp.CostHealth;
-            }
-        }
-
-        return null;
-    }
-
-    public FixedPoint2? GetFruitPlasmaCost(EntProtoId prototype)
-    {
-        if (_prototype.TryIndex(prototype, out var fruitChoice) &&
-            fruitChoice.TryGetComponent(out XenoFruitComponent? fruit, _compFactory))
-        {
-            return fruit.CostPlasma;
-        }
-
-        return null;
-    }
-
-    private FixedPoint2? GetFruitPlasmaCost(EntProtoId? fruit)
-    {
-        if (fruit is { } choice &&
-            GetFruitPlasmaCost(choice) is { } cost)
-        {
-            return cost;
-        }
-
-        return null;
-    }
-
     private bool InRangePopup(Entity<XenoFruitPlanterComponent> xeno, EntityCoordinates target, float range)
     {
         var origin = _transform.GetMoverCoordinates(xeno.Owner);
-        target = target.SnapToGrid(EntityManager, _map);
+        target = target.SnapToGrid(EntityManager, _mapSystem);
         if (!_transform.InRange(origin, target, range))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-cant-reach-there"), target, xeno.Owner);
             return false;
         }
 
         return true;
     }
 
-    private bool CanPlantOnTilePopup(Entity<XenoFruitPlanterComponent> xeno,
-        EntProtoId? fruitChoice, EntityCoordinates target,
-        bool checkFruitSelected, bool checkWeeds)
+    public bool TileHasFruit(Entity<MapGridComponent> grid, EntityCoordinates coordinates)
     {
-        // Fruit not selected
-        if (checkFruitSelected && fruitChoice == null)
+        var tile = _mapSystem.TileIndicesFor(grid.Owner, grid.Comp, coordinates);
+        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid.Owner, grid.Comp, tile);
+        while (anchored.MoveNext(out var uid))
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-select-fruit"), target, xeno.Owner);
+            if (HasComp<XenoFruitComponent>(uid))
+                return true;
+        }
+        return false;
+    }
+
+    private bool CanPlantOnTilePopup(Entity<XenoFruitPlanterComponent> xeno,
+        EntProtoId? fruitChoice, EntityCoordinates target, bool checkWeeds)
+    {
+        // Target out of range
+        if (!InRangePopup(xeno, target, xeno.Comp.PlantRange.Float()))
+        {
+            _popup.PopupClient(Loc.GetString("cm-xeno-cant-reach-there"), target, xeno.Owner);
             return false;
         }
 
@@ -441,9 +419,23 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             return false;
         }
 
-        // Target out of range
-        if (!InRangePopup(xeno, target, xeno.Comp.PlantRange.Float()))
+        // TODO RMC14: check if weeds belong to our hive
+
+        // TODO RMC14: check for resin holes
+
+        // Target directly on weed node
+        if (_xenoWeeds.IsOnWeeds((gridId, grid), target, true))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-weeds-source"), target, xeno.Owner);
             return false;
+        }
+
+        // Target on another fruit
+        if (TileHasFruit((gridId, grid), target))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-fruit-close"), target, xeno.Owner);
+            return false;
+        }
 
         // Target blocked
         if (!_xenoConstruct.TileSolidAndNotBlocked(target))
@@ -462,18 +454,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
                 _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-failed-cant-plant"), target, xeno.Owner);
                 return false;
             }
-        }
-
-        // TODO: check if fruit planted nearby already
-        // TODO: check for weed nodes as well
-        // TODO: and resin holes (when implemented)
-        // TODO: and whether the weeds even belong to our hive
-
-        if (checkFruitSelected &&
-            GetFruitPlasmaCost(fruitChoice) is { } cost &&
-            !_xenoPlasma.HasPlasmaPopup(xeno.Owner, cost))
-        {
-            return false;
         }
 
         return true;
