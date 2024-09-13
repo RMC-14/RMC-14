@@ -148,7 +148,7 @@
         crate: RMCCrateGrenadesFrag
       - cost: 4000
         crate: RMCCrateGrenadesFragOld
-      - cost: 5000
+      - cost: 4000
         crate: RMCCrateBreachingCharges
     - name: Food
       entries:
