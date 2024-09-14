@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Marines will now experience symptoms of being infected.
-    type: Add
-  id: 201
-  time: '2024-06-27T06:49:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2553
 - author: Zarq0
   changes:
   - message: Made phoron bars grindable.
@@ -4391,5 +4384,15 @@
   id: 700
   time: '2024-09-14T21:35:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4027
+- author: DrSmugleaf
+  changes:
+  - message: Made the humanoid bullet hitbox slightly smaller (0.35 > 0.25), making
+      humanoids slightly harder to hit with bullets, specially when one is far behind
+      you. You will still shoot someone if they are too close behind you, to prevent
+      stacking. This change doesn't affect xenonid projectiles.
+    type: Tweak
+  id: 701
+  time: '2024-09-14T21:41:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4018
 Name: RMC14
 Order: -1
