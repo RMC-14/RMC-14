@@ -168,7 +168,7 @@
   id: ActionXenoDefensiveShield
   parent: ActionXenoBase
   name: Defensive Shield (50)
-  description: Gain a temporary shield that blocks the next 200 damage (and is immune to explosive damage) that lasts 7 seconds. Any damage that impacts the shield is reduced by 10 before processing. Cooldown is partially refunded upon attacking an enemy.
+  description: Gain a temporary shield that blocks the next 200 damage (and is immune to explosive damage) that lasts 7 seconds. Any damage that impacts the shield is reduced by 10 before processing. [color=green]Cooldown is partially refunded upon attacking an enemy.[/color]
   components:
   - type: InstantAction
     itemIconStyle: NoItem
