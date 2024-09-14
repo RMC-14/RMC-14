@@ -88,12 +88,12 @@
   components:
   - type: Sprite
     layers:
-    - state: ointment
+    - state: firefirstaid
     - state: kit_empty
       map: [ "openLayer" ]
       visible: false
   - type: Item
-    heldPrefix: ointment
+    heldPrefix: firefirstaid
 
 - type: entity
   parent: CMBurnAidKit

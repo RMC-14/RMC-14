@@ -20,6 +20,7 @@ using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Server.Voting;
 using Content.Server.Voting.Managers;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Bioscan;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
@@ -123,10 +124,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [ViewVariables]
     public readonly Dictionary<string, float> MarinesPerXeno = new()
     {
-        ["/Maps/_RMC14/lv624.yml"] = 4.5f,
-        ["/Maps/_RMC14/solaris.yml"] = 6.5f,
-        ["/Maps/_RMC14/prison.yml"] = 6.5f,
-        ["/Maps/_RMC14/shiva.yml"] = 6.5f,
+        ["/Maps/_RMC14/lv624.yml"] = 7.5f,
+        ["/Maps/_RMC14/solaris.yml"] = 7.5f,
+        ["/Maps/_RMC14/prison.yml"] = 7.5f,
+        ["/Maps/_RMC14/shiva.yml"] = 7.5f,
     };
 
     private readonly List<MapId> _almayerMaps = [];
@@ -904,6 +905,21 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         rule.Comp.XenoMap = grids[0];
 
         _mapManager.SetMapPaused(mapId, false);
+
+        // TODO RMC14 this should be delayed by 3 minutes + 13 second warning for immersion
+        if (rule.Comp.LandingZoneGas is { } gas && TryComp(rule.Comp.XenoMap, out AreaGridComponent? areaGrid))
+        {
+            foreach (var (indices, areaProto) in areaGrid.Areas)
+            {
+                if (areaProto.TryGet(out var area, _prototypes, _compFactory) &&
+                    area.LandingZone)
+                {
+                    var coordinates = _mapSystem.ToCoordinates(rule.Comp.XenoMap, indices);
+                    Spawn(gas, coordinates);
+                }
+            }
+        }
+
         return true;
     }
 
