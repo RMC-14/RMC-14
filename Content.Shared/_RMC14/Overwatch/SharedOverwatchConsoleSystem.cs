@@ -7,6 +7,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Events;
+using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
@@ -40,6 +41,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIOpenedEvent>(OnBUIOpened);
 
         SubscribeLocalEvent<OverwatchWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
+        SubscribeLocalEvent<OverwatchWatchingComponent, AttackedEvent>(OnWatchingAttacked);
 
         SubscribeLocalEvent<SquadMemberComponent, SquadMemberUpdatedEvent>(OnSquadMemberUpdated);
 
@@ -70,10 +72,12 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (!args.HasDirectionalMovement)
             return;
 
-        if (_net.IsClient && _player.LocalEntity == ent.Owner && _player.LocalSession != null)
-            Unwatch(ent.Owner, _player.LocalSession);
-        else if (TryComp(ent, out ActorComponent? actor))
-            Unwatch(ent.Owner, actor.PlayerSession);
+        TryLocalUnwatch(ent);
+    }
+
+    private void OnWatchingAttacked(Entity<OverwatchWatchingComponent> ent, ref AttackedEvent args)
+    {
+        TryLocalUnwatch(ent);
     }
 
     private void OnSquadMemberUpdated(Entity<SquadMemberComponent> ent, ref SquadMemberUpdatedEvent args)
@@ -238,5 +242,13 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     public bool IsHidden(Entity<OverwatchConsoleComponent> console, NetEntity marine)
     {
         return console.Comp.Hidden.Contains(marine);
+    }
+
+    private void TryLocalUnwatch(Entity<OverwatchWatchingComponent> ent)
+    {
+        if (_net.IsClient && _player.LocalEntity == ent.Owner && _player.LocalSession != null)
+            Unwatch(ent.Owner, _player.LocalSession);
+        else if (TryComp(ent, out ActorComponent? actor))
+            Unwatch(ent.Owner, actor.PlayerSession);
     }
 }
