@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Autoinjectors no longer inject into containers, use refillable bottles
-      instead.
-    type: Fix
-  id: 194
-  time: '2024-06-26T05:42:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2633
-- author: AeraAuling
-  changes:
-  - message: Added Felinids
-    type: Add
-  id: 195
-  time: '2024-06-26T07:27:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2561
 - author: DrSmugleaf
   changes:
   - message: Added Toolshed commands for skills, vendor points, squads and evolution
@@ -4387,5 +4372,20 @@
   id: 693
   time: '2024-09-14T01:12:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4033
+- author: Vermidia
+  changes:
+  - message: Ghosts can now see health bars and icons, and xeno pheromones
+    type: Add
+  id: 694
+  time: '2024-09-14T20:42:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4032
+- author: Vermidia
+  changes:
+  - message: Fixed forced movement (ammo stuns, neurotoxin stumbles) keeping your
+      momentum
+    type: Fix
+  id: 695
+  time: '2024-09-14T20:42:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4023
 Name: RMC14
 Order: -1
