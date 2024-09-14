@@ -22,16 +22,25 @@ public sealed partial class XenoFruitPlanterComponent : Component
     public TimeSpan PlantDelay = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
+    public TimeSpan HarvestDelay = TimeSpan.FromSeconds(1.5f);
+
+    [DataField, AutoNetworkedField]
     public SoundSpecifier PlantSound = new SoundCollectionSpecifier("RMCResinBuild")
     {
         Params = AudioParams.Default.WithVolume(-10f)
     };
 
-    // Maximum number of fruit allowed for entity with this component
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier HarvestSound = new SoundCollectionSpecifier("XenoResinBreak")
+    {
+        Params = AudioParams.Default.WithVolume(-10f)
+    };
+
+    // Maximum number of fruit allowed for planter
     [DataField, AutoNetworkedField]
     public int MaxFruitAllowed = 3;
 
-    // List of fruit planted by entity with this component
+    // List of fruit planted by planter
     [DataField, AutoNetworkedField]
     public List<EntityUid> PlantedFruit = new();
 }

@@ -2,7 +2,7 @@
   parent: BaseItem
   id: XenoFruitBase
   abstract: true
-  name: xeno fruit
+  name: resin fruit
   placement:
     mode: SnapgridCenter
     snap:
@@ -42,7 +42,7 @@
     - state: fruit_lesser_immature
       map: [ "enum.XenoFruitLayers.Base" ]
   - type: Item
-    size: Ginormous
+    size: Large
   - type: Damageable
     damageContainer: StructuralXeno
   - type: Destructible
@@ -115,6 +115,7 @@
     growingState: fruit_spore_immature
     grownState: fruit_spore
     growTime: 15
+
 - type: entity
   parent: XenoFruitBase
   id: XenoFruitSpeed
