@@ -1,11 +1,18 @@
 - type: entity
   name: human target
   id: RMCTargetHuman
-  parent: TargetHuman
   abstract: true
   description: A shooting target. This one is a Human.
   suffix: RMC
   components:
+  - type: Sprite
+    sprite: Objects/Specific/Security/target.rsi
+    state: target_h
+    noRot: true
+  - type: Repairable
+  - type: DamagePopup
+    allowTypeChange: true
+    damagePopupType: Combined
   - type: Fixtures
     fixtures:
       fix1:
