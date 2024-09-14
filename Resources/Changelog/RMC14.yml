@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added Toolshed commands for skills, vendor points, squads and evolution
-      points.
-    type: Add
-  id: 196
-  time: '2024-06-26T08:40:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2636
 - author: Siigiil
   changes:
   - message: Fixed attachment actions not being properly removed.
@@ -4387,5 +4379,16 @@
   id: 695
   time: '2024-09-14T20:42:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4023
+- author: DrSmugleaf
+  changes:
+  - message: Fixed combat technicians not being able to access the tool storage machine
+      in their preparation room.
+    type: Fix
+  - message: Fixed Boiler gas sometimes being able to damage you more than once per
+      tick.
+    type: Fix
+  id: 696
+  time: '2024-09-14T20:54:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4046
 Name: RMC14
 Order: -1
