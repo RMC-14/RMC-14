@@ -127,7 +127,7 @@ public sealed partial class NPCLeapSystem : EntitySystem
 
                 var addedDis = (targetPos.Position - worldPos.Position).Normalized() * comp.LeapDistance;
 
-                var destination = targetPos.WithPosition(targetPos.Position + addedDis);
+                var destination = worldPos.WithPosition(worldPos.Position + addedDis);
 
                 comp.Destination = destination;
 
