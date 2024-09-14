@@ -16,8 +16,5 @@ public sealed partial class XenoEggRetrieverComponent : Component
     public const string EggContainerId = "eggs";
 
     [DataField]
-    public EntProtoId EggPrototype = "XenoEgg";
-
-    [DataField]
-    public int MaxEggs = 7;
+    public int MaxEggs = 8;
 }
