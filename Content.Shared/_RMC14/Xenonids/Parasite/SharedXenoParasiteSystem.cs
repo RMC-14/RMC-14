@@ -563,14 +563,13 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             return;
         RemCompDeferred<VictimInfectedComponent>(burstFrom);
 
-        if (!TryComp(burstFrom, out TransformComponent? xform))
-            return;
+        var coords = _transform.GetMoverCoordinates(burstFrom);
 
         if (_container.TryGetContainer(burstFrom, burstFrom.Comp.LarvaContainerId, out var container))
         {
             foreach (var larva in container.ContainedEntities)
                 RemCompDeferred<BursterComponent>(larva);
-            _container.EmptyContainer(container, destination: xform.Coordinates);
+            _container.EmptyContainer(container, destination: coords);
         }
 
         Dirty(burstFrom, burstFrom.Comp);
