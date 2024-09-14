@@ -22,7 +22,7 @@
         mask:
         - FullTileMask
         layer:
-        - WallLayer
+        - MobLayer
   - type: InteractionOutline
   - type: Physics
   - type: Damageable
