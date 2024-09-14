@@ -363,6 +363,18 @@
     },
     {
       "name": "magaz_flashlight"
+    },    
+	{
+      "name": "magaz_buck_1"
+    },
+    {
+      "name": "magaz_buck_2"
+    },
+    {
+      "name": "magaz_buck_3"
+    },
+    {
+      "name": "magaz_buck"
     },
     {
       "name": "boxes_and_lids"

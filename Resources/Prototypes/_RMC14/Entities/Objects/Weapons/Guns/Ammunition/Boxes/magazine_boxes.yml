@@ -87,6 +87,31 @@
           Medium: { state: magaz_hv_2, visible: true }
           High: { state: magaz_hv_3, visible: true }
           Full: { state: magaz_hv, visible: true }
+          
+          
+- type: entity
+  abstract: true
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineShotgunBase
+  name: generic magazine box (? x ?)"
+  description: A box of magazines.
+  components:
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: magaz_buck, visible: false }
+          Low: { state: magaz_buck_1, visible: true }
+          Medium: { state: magaz_buck_2, visible: true }
+          High: { state: magaz_buck_3, visible: true }
+          Full: { state: magaz_buck, visible: true }
 
 # M54C
 - type: entity
@@ -717,7 +742,7 @@
 
 # Shotgun
 - type: entity
-  parent: RMCBoxMagazineBase
+  parent: RMCBoxMagazineShotgunBase
   id: RMCBoxMagazineShotgunBuckshotEmpty
   name: buckshot case
   description: A box for holding other, smaller, boxes of shotgun shells.
@@ -728,12 +753,12 @@
   - type: Sprite
     layers:
     - state: base_buck
-    - state: magaz_reg
+    - state: magaz_buck
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: base_type
+    - state: base_type_reg
     - state: base_buck_lid
       map: [ "lid" ]
-    - state: lid_type
+    - state: lid_type_reg
       map: [ "lid_stripe" ]
   - type: CMItemSlots
     count: 4
