@@ -28,6 +28,9 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
 
     private void OnInit(Entity<RMCPassiveStealthComponent> ent, ref ComponentInit args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (Paused(ent.Owner))
             return;
 
