@@ -1,158 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: The amount of marines per xeno has been lowered from 4 to 3. With 200
-      players this means that 67 xenos will spawn round-start, instead of 50.
-    type: Tweak
-  id: 183
-  time: '2024-06-24T23:58:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2613
-- author: CaasGit
-  changes:
-  - message: Blood bags do not print text when you're clearly out of range.
-    type: Fix
-  id: 184
-  time: '2024-06-25T00:01:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2595
-- author: rain
-  changes:
-  - message: M-marine-s n-now s-tutter less-s.
-    type: Tweak
-  id: 185
-  time: '2024-06-25T01:29:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2596
-- author: CaasGit
-  changes:
-  - message: Add medical hud to corpsman helmets.
-    type: Add
-  id: 186
-  time: '2024-06-25T02:39:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2616
-- author: krose124
-  changes:
-  - message: Parent marine armor (the medium one) speed mult .9 -> .85
-    type: Tweak
-  - message: EOD armor (the heavy one) speed mult .8 -> .75
-    type: Tweak
-  - message: Explicit speed value on M3-L (the light one) speed multiplier as 1
-    type: Add
-  id: 187
-  time: '2024-06-25T02:41:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2611
-- author: vero5123
-  changes:
-  - message: increased the required damage threshold to destroy weed nodes
-    type: Tweak
-  id: 188
-  time: '2024-06-25T03:40:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2560
-- author: vero5123
-  changes:
-  - message: fixes barricades not being rotatable
-    type: Fix
-  id: 189
-  time: '2024-06-25T04:03:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2556
-- author: DrSmugleaf
-  changes:
-  - message: Fixed marines not being able to move after being un-nested.
-    type: Fix
-  - message: Fixed marines falling down if they die while nested, and not falling
-      down once un-nested after being killed..
-    type: Fix
-  id: 190
-  time: '2024-06-25T11:19:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2621
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the Queen not detaching from the ovipositor on crit or death.
-    type: Fix
-  - message: Added popups to the Queen when starting to attach to or detach from the
-      ovipositor.
-    type: Tweak
-  id: 191
-  time: '2024-06-25T11:20:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2622
-- author: DrSmugleaf
-  changes:
-  - message: Fixed duplicate lurker invisibility expired and hive core not enough
-      plasma popups.
-    type: Fix
-  id: 192
-  time: '2024-06-25T12:56:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2623
-- author: CaasGit
-  changes:
-  - message: blood bags no longer attempt to poke random objects
-    type: Fix
-  id: 193
-  time: '2024-06-26T04:29:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2615
-- author: Whisper
-  changes:
-  - message: Autoinjectors no longer inject into containers, use refillable bottles
-      instead.
-    type: Fix
-  id: 194
-  time: '2024-06-26T05:42:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2633
-- author: AeraAuling
-  changes:
-  - message: Added Felinids
-    type: Add
-  id: 195
-  time: '2024-06-26T07:27:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2561
-- author: DrSmugleaf
-  changes:
-  - message: Added Toolshed commands for skills, vendor points, squads and evolution
-      points.
-    type: Add
-  id: 196
-  time: '2024-06-26T08:40:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2636
-- author: Siigiil
-  changes:
-  - message: Fixed attachment actions not being properly removed.
-    type: Fix
-  - message: Fixed the attachment offsets for the M54.
-    type: Fix
-  id: 197
-  time: '2024-06-26T23:37:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2571
-- author: DrSmugleaf
-  changes:
-  - message: Ghosting while in crit will now give you a warning that you won't be
-      able to return to your body. Ghosting while dead will still allow you to return
-      if defibbed.
-    type: Tweak
-  - message: Replaced succumb, last words and fake death with the new ghost action.
-    type: Tweak
-  id: 198
-  time: '2024-06-27T05:04:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2644
-- author: DrSmugleaf
-  changes:
-  - message: Humanoid voicelines can now be individually toggled for each species.
-    type: Tweak
-  id: 199
-  time: '2024-06-27T05:04:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2641
-- author: DrSmugleaf
-  changes:
-  - message: Fixed webbing sometimes not opening until reattached or taking multiple
-      attempts to open.
-    type: Fix
-  id: 200
-  time: '2024-06-27T05:08:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2640
-- author: Vermidia
-  changes:
-  - message: Marines will now experience symptoms of being infected.
-    type: Add
-  id: 201
-  time: '2024-06-27T06:49:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2553
 - author: Zarq0
   changes:
   - message: Made phoron bars grindable.
@@ -4391,5 +4237,162 @@
   id: 682
   time: '2024-09-11T09:24:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4003
+- author: Vermidia
+  changes:
+  - message: Sniper sentry only does 2x as much damage as a normal sentry
+    type: Fix
+  id: 683
+  time: '2024-09-11T22:53:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4005
+- author: DrSmugleaf
+  changes:
+  - message: Fixed a rare case that made an invisible scout spec visible.
+    type: Fix
+  id: 684
+  time: '2024-09-12T05:53:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4016
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Updated LV-624's hydro, medical, fitness cargo bay, landing zone one,
+      and nexus.
+    type: Tweak
+  id: 685
+  time: '2024-09-12T05:57:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4009
+- author: DrSmugleaf
+  changes:
+  - message: Renamed offset calibration to camera offset in the dropship weapons window,
+      added a tooltip to clarify that it does not affect direct bombardment. Also
+      fixed the reset offset button being too small by FIVE PIXELS.
+    type: Tweak
+  id: 686
+  time: '2024-09-12T06:55:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4017
+- author: DrSmugleaf
+  changes:
+  - message: Added LV's missing random fog breaks. Every round that LV is chosen as
+      the planet map, one of three spots in the fog will randomly be chosen to be
+      opened up at round-start, located at the far west of the river, the far east,
+      and the bridge near the middle.
+    type: Add
+  id: 687
+  time: '2024-09-12T08:32:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4020
+- author: DrSmugleaf
+  changes:
+  - message: Fixed mortars making the firing sound when reloading.
+    type: Fix
+  id: 688
+  time: '2024-09-12T13:09:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4021
+- author: DrSmugleaf
+  changes:
+  - message: Added poison gas to the landing zones that goes away on first drop.
+    type: Add
+  id: 689
+  time: '2024-09-12T13:09:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4022
+- author: Vermidia
+  changes:
+  - message: Fixed the health analyzer not showing permanently dead on rotted corpses
+    type: Fix
+  - message: Permanently dead and holocards on the analyzer are now colorful.
+    type: Tweak
+  id: 690
+  time: '2024-09-14T01:09:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4024
+- author: Vermidia
+  changes:
+  - message: Fix larva getting stuck after bursting
+    type: Fix
+  id: 691
+  time: '2024-09-14T01:12:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4034
+- author: FungiFellow
+  changes:
+  - message: Animals no longer Suffocate
+    type: Fix
+  id: 692
+  time: '2024-09-14T01:13:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4004
+- author: Vermidia
+  changes:
+  - message: Defenders with lowered crests will no longer be affected by ammo stuns
+    type: Fix
+  id: 693
+  time: '2024-09-14T01:12:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4033
+- author: Vermidia
+  changes:
+  - message: Ghosts can now see health bars and icons, and xeno pheromones
+    type: Add
+  id: 694
+  time: '2024-09-14T20:42:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4032
+- author: Vermidia
+  changes:
+  - message: Fixed forced movement (ammo stuns, neurotoxin stumbles) keeping your
+      momentum
+    type: Fix
+  id: 695
+  time: '2024-09-14T20:42:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4023
+- author: DrSmugleaf
+  changes:
+  - message: Fixed combat technicians not being able to access the tool storage machine
+      in their preparation room.
+    type: Fix
+  - message: Fixed Boiler gas sometimes being able to damage you more than once per
+      tick.
+    type: Fix
+  id: 696
+  time: '2024-09-14T20:54:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4046
+- author: DrSmugleaf
+  changes:
+  - message: Made the bonus Requisitions starting money added on top of the regular
+      starting cash properly scale with player count instead of being flat.
+    type: Tweak
+  - message: Getting attacked will now kick you out of the Overwatch console view,
+      making you immediately realize your peril.
+    type: Tweak
+  - message: Hopefully fix the bug that sometimes causes your game to die at the sight
+      of a reactive thermal tarp.
+    type: Fix
+  id: 697
+  time: '2024-09-14T21:26:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4047
+- author: Vermidia
+  changes:
+  - message: Added extra Signal Flare packs to the FTL vendor
+    type: Add
+  id: 698
+  time: '2024-09-14T21:34:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4048
+- author: DrSmugleaf
+  changes:
+  - message: Temporarily doubled sniper spec bullet damage from 70 to 140 until aimed
+      shot is implemented.
+    type: Tweak
+  id: 699
+  time: '2024-09-14T21:35:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4049
+- author: Vermidia
+  changes:
+  - message: Fix medical HUD showing DNR even if you can still return to your body
+    type: Fix
+  id: 700
+  time: '2024-09-14T21:35:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4027
+- author: DrSmugleaf
+  changes:
+  - message: Made the humanoid bullet hitbox slightly smaller (0.35 > 0.25), making
+      humanoids slightly harder to hit with bullets, specially when one is far behind
+      you. You will still shoot someone if they are too close behind you, to prevent
+      stacking. This change doesn't affect xenonid projectiles.
+    type: Tweak
+  id: 701
+  time: '2024-09-14T21:41:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4018
 Name: RMC14
 Order: -1

@@ -21,6 +21,7 @@
         mask:
         - Impassable
         - BulletImpassable
+        - XenoProjectileImpassable
   - type: Projectile
     impactEffect: XenoProjectileImpactEffect
     damage: {}

@@ -82,5 +82,8 @@ public sealed class XenoStompSystem : EntitySystem
                 }
             }
         }
+
+        if (_net.IsServer)
+            SpawnAttachedTo(xeno.Comp.SelfEffect, xeno.Owner.ToCoordinates());
     }
 }
