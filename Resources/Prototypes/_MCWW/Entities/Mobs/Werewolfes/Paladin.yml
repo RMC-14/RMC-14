@@ -1,0 +1,26 @@
+﻿- type: entity
+  id: MCWWPaladin
+  parent: CMBaseMobSpeciesOrganic
+  name: Паладин
+  description: Гейский паладин
+  components:
+  - type: Sprite
+    sprite: _MCWW/Mobs/Werewolfes/Paladin.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      700: Critical
+      800: Dead
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 40
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.66
+    baseSprintSpeed: 3
+  - type: XenoBrutalize
