@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed marines not being able to move after being un-nested.
-    type: Fix
-  - message: Fixed marines falling down if they die while nested, and not falling
-      down once un-nested after being killed..
-    type: Fix
-  id: 190
-  time: '2024-06-25T11:19:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2621
-- author: DrSmugleaf
-  changes:
   - message: Fixed the Queen not detaching from the ovipositor on crit or death.
     type: Fix
   - message: Added popups to the Queen when starting to attach to or detach from the
@@ -4392,5 +4382,14 @@
   id: 689
   time: '2024-09-12T13:09:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4022
+- author: Vermidia
+  changes:
+  - message: Fixed the health analyzer not showing permanently dead on rotted corpses
+    type: Fix
+  - message: Permanently dead and holocards on the analyzer are now colorful.
+    type: Tweak
+  id: 690
+  time: '2024-09-14T01:09:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4024
 Name: RMC14
 Order: -1
