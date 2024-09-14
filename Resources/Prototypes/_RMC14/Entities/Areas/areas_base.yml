@@ -17,6 +17,9 @@
   components:
   - type: Transform
     anchored: true
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: unknown
   - type: Marker
   - type: Clickable
   - type: InteractionOutline
@@ -24,7 +27,8 @@
     CAS: true
     fulton: true
     lasing: true
-    mortar: true
+    mortarPlacement: true
+    mortarFire: true
     medevac: true
     OB: true
     supplyDrop: true

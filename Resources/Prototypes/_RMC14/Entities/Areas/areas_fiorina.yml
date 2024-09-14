@@ -1,7 +1,5 @@
 ﻿- type: entity
-  parent:
-  - RMCAreaGlass
-  - RMCAreaBase
+  parent: RMCAreaBase
   id: RMCAreaFiorina
   name: Fiorina Orbital Penitentiary - Science Annex
   suffix: Fiorina Area
@@ -11,42 +9,70 @@
     state: fiorina
   - type: Area
     buildSpecial: true
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
     minimapColor: '#6C6767D8'
 
 - type: entity
-  parent:
-  - RMCAreaMax
-  - RMCAreaFiorina
+  parent: RMCAreaFiorina
   id: RMCAreaFiorinaOob
   name: Fiorina - Out Of Bounds
   components:
   - type: Sprite
     state: oob
   - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
     resinAllowed: false
-    avoidBioscan: False
-    noTunnel: True
-    unweedable: False
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
 
 - type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaFiorina
+  parent: RMCAreaFiorina
   id: RMCAreaFiorinaMaintenance
   name: Fiorina - Maintenance
   components:
   - type: Sprite
     state: maints
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
-  parent:
-  - RMCAreaUndergroundMetalBlockCAS
-  - RMCAreaFiorina
+  parent: RMCAreaFiorina
   id: RMCAreaFiorinaTumor
   name: Fiorina - Resin Tumor
   components:
   - type: Sprite
     state: tumor0
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
   parent: RMCAreaFiorinaTumor
@@ -112,18 +138,24 @@
     minimapColor: '#812DA2EE'
 
 - type: entity
-  parent:
-  - RMCAreaGlass
-  - RMCAreaFiorina
+  parent: RMCAreaFiorina
   id: RMCAreaFiorinaLz
   name: Fiorina - LZ
   components:
   - type: Sprite
     state: lz
   - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    landingZone: true
     minimapColor: '#EBE5E5E3'
     resinAllowed: false
-    landingZone: true
 
 - type: entity
   parent: RMCAreaFiorinaLz
@@ -172,14 +204,21 @@
     resinAllowed: false
 
 - type: entity
-  parent:
-  - RMCAreaGlass
-  - RMCAreaFiorina
+  parent: RMCAreaFiorina
   id: RMCAreaFiorinaStation
   name: Fiorina - Station Interior
   components:
   - type: Sprite
     state: station0
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaFiorinaStation

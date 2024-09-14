@@ -4,6 +4,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
+using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
@@ -26,6 +27,7 @@ public sealed class RMCStorageSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
 
     private readonly List<EntityUid> _toRemove = new();
 
@@ -115,6 +117,9 @@ public sealed class RMCStorageSystem : EntitySystem
         }
 
         if (comp.SkipInHand && _hands.IsHolding(entity, uid))
+            return false;
+
+        if (comp.SkipOnGround && !_inventory.TryGetContainingSlot(uid, out var _))
             return false;
 
         var ev = new OpenStorageDoAfterEvent(GetNetEntity(uid), GetNetEntity(entity), silent);

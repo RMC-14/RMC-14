@@ -51,6 +51,9 @@ public sealed class RMCSmokeSystem : SharedRMCSmokeSystem
         foreach (var tile in _tiles)
         {
             var coords = _map.GridTileToLocal(tile.Tile.GridUid, tile.Grid, tile.Tile.GridIndices);
+            if (_rmcMap.HasAnchoredEntityEnumerator<EvenSmokeComponent>(coords))
+                continue;
+
             var smoke = SpawnAtPosition(ent.Comp.Spawn, coords);
             if (_evenSmokeQuery.TryComp(smoke, out var smokeComp))
                 smokeComp.Range = ent.Comp.Range - 1;
