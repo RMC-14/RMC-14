@@ -1,8 +1,12 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
+using Content.Shared._RMC14.Map;
 using Content.Shared.Coordinates;
+using Content.Shared.Maps;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Areas;
 
@@ -11,7 +15,9 @@ public sealed class AreaSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
 
     private EntityQuery<AreaGridComponent> _areaGridQuery;
     private EntityQuery<MapGridComponent> _mapGridQuery;
@@ -20,6 +26,51 @@ public sealed class AreaSystem : EntitySystem
     {
         _areaGridQuery = GetEntityQuery<AreaGridComponent>();
         _mapGridQuery = GetEntityQuery<MapGridComponent>();
+
+        SubscribeLocalEvent<AreaGridComponent, MapInitEvent>(OnAreaGridMapInit);
+    }
+
+    private void OnAreaGridMapInit(Entity<AreaGridComponent> ent, ref MapInitEvent args)
+    {
+        ent.Comp.Colors.Clear();
+
+        var done = new HashSet<Vector2>();
+        foreach (var kvp in ent.Comp.Areas)
+        {
+            var (indices, areaProto) = kvp;
+            if (!done.Add(indices))
+                continue;
+
+            if (!areaProto.TryGet(out var area, _prototypes, _compFactory) ||
+                area.MinimapColor == default)
+            {
+                continue;
+            }
+
+            var xAdjacent = 0;
+            var x = indices.X;
+            while (ent.Comp.Areas.GetValueOrDefault((++x, indices.Y)) == areaProto)
+            {
+                xAdjacent++;
+                done.Add(new Vector2(x, indices.Y));
+            }
+
+            var xAdjacentMinus = 0;
+            x = indices.X;
+            while (ent.Comp.Areas.GetValueOrDefault((--x, indices.Y)) == areaProto)
+            {
+                xAdjacentMinus++;
+                done.Add(new Vector2(x, indices.Y));
+            }
+
+            var bottom = new Vector2(indices.X - xAdjacentMinus, indices.Y);
+            var right = new Vector2(indices.X + 1 + xAdjacent, indices.Y);
+            var top = new Vector2(indices.X - xAdjacentMinus, indices.Y + 1);
+            var left = new Vector2(indices.X + 1 + xAdjacent, indices.Y + 1);
+            ent.Comp.Colors.GetOrNew(Color.FromSrgb(area.MinimapColor)).AddRange([bottom, right, top, left]);
+        }
+
+        Dirty(ent);
     }
 
     public bool TryGetArea(

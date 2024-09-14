@@ -1,7 +1,13 @@
+using System.Linq;
+using System.Numerics;
+using System.Runtime.InteropServices;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
+using Content.Shared._RMC14.Areas;
+using Content.Shared.Atmos;
 using Content.Shared.Input;
 using Content.Shared.Pinpointer;
+using JetBrains.Annotations;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
@@ -14,10 +20,6 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
-using System.Numerics;
-using JetBrains.Annotations;
-using Content.Shared.Atmos;
-using System.Linq;
 using Robust.Shared.Utility;
 
 namespace Content.Client.Pinpointer.UI;
@@ -29,6 +31,7 @@ namespace Content.Client.Pinpointer.UI;
 public partial class NavMapControl : MapGridControl
 {
     [Dependency] private IResourceCache _cache = default!;
+    [Dependency] private readonly IClyde _clyde = default!;
     private readonly SharedTransformSystem _transformSystem;
     private readonly SharedNavMapSystem _navMapSystem;
 
@@ -47,7 +50,7 @@ public partial class NavMapControl : MapGridControl
 
     public List<(Vector2, Vector2)> TileLines = new();
     public List<(Vector2, Vector2)> TileRects = new();
-    public List<(Vector2[], Color)> TilePolygons = new();
+    public List<List<DrawVertexUV2DColor>> TilePolygons = new();
 
     // Default colors
     public Color WallColor = new(102, 217, 102);
@@ -112,6 +115,8 @@ public partial class NavMapControl : MapGridControl
         Pressed = true,
     };
 
+    private readonly Texture _whiteTexture;
+
     public NavMapControl() : base(MinDisplayedRange, MaxDisplayedRange, DefaultDisplayedRange)
     {
         IoCManager.InjectDependencies(this);
@@ -174,6 +179,7 @@ public partial class NavMapControl : MapGridControl
             Recentering = true;
         };
 
+        _whiteTexture = Texture.White;
         ForceNavMapUpdate();
     }
 
@@ -228,7 +234,7 @@ public partial class NavMapControl : MapGridControl
             {
                 if (!blip.Selectable)
                     continue;
-                
+
                 var currentDistance = (_transformSystem.ToMapCoordinates(blip.Coordinates).Position - worldPosition).Length();
 
                 if (closestDistance < currentDistance || currentDistance * MinimapScale > MaxSelectableDistance)
@@ -305,17 +311,14 @@ public partial class NavMapControl : MapGridControl
         // Draw floor tiles
         if (TilePolygons.Any())
         {
-            Span<Vector2> verts = new Vector2[8];
-
-            foreach (var (polygonVerts, polygonColor) in TilePolygons)
+            foreach (var polygonVertsList in TilePolygons)
             {
-                for (var i = 0; i < polygonVerts.Length; i++)
+                var polygonVertsSpan = CollectionsMarshal.AsSpan(polygonVertsList);
+                for (var i = 0; i < polygonVertsSpan.Length; i += 6000)
                 {
-                    var vert = polygonVerts[i] - offset;
-                    verts[i] = ScalePosition(new Vector2(vert.X, -vert.Y));
+                    var max = Math.Min(i + 6000, polygonVertsSpan.Length);
+                    handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, _whiteTexture, polygonVertsSpan[i..max]);
                 }
-
-                handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, verts[..polygonVerts.Length], polygonColor);
             }
         }
 
@@ -460,10 +463,39 @@ public partial class NavMapControl : MapGridControl
 
     private void UpdateNavMapFloorTiles()
     {
+        DrawVertexUV2DColor Scale(Vector2 vector, float scale, Vector2 midPoint, Vector2 offset, Color color)
+        {
+            vector = new Vector2(vector.X, vector.Y) - offset;
+            return new DrawVertexUV2DColor(ScalePosition(vector with { Y = -vector.Y }, scale, midPoint), color);
+        }
+
+        Span<Vector2> verts = new Vector2[8];
+        if (EntManager.TryGetComponent(MapUid, out AreaGridComponent? areaGrid))
+        {
+            var scale = MinimapScale;
+            var midPoint = MidPointVector;
+            var offset = Vector2.Zero;
+            foreach (var (color, vertices) in areaGrid.Colors)
+            {
+                var polygons = new List<DrawVertexUV2DColor>();
+                var verticesSpan = CollectionsMarshal.AsSpan(vertices);
+                for (var i = 0; i + 4 <= verticesSpan.Length; i += 4)
+                {
+                    var bottom = Scale(verticesSpan[i], scale, midPoint, offset, color);
+                    var right = Scale(verticesSpan[i + 1], scale, midPoint, offset, color);
+                    var top = Scale(verticesSpan[i + 2], scale, midPoint, offset, color);
+                    var left = Scale(verticesSpan[i + 3], scale, midPoint, offset, color);
+                    polygons.AddRange([bottom, right, top, top, left, right]);
+                }
+
+                TilePolygons.Add(polygons);
+            }
+
+            return;
+        }
+
         if (_fixtures == null)
             return;
-
-        var verts = new Vector2[8];
 
         foreach (var fixture in _fixtures.Fixtures.Values)
         {
@@ -476,7 +508,7 @@ public partial class NavMapControl : MapGridControl
                 verts[i] = new Vector2(MathF.Round(vert.X), MathF.Round(vert.Y));
             }
 
-            TilePolygons.Add((verts[..poly.VertexCount], TileColor));
+            // TilePolygons.Add((verts[..poly.VertexCount], TileColor));
         }
     }
 

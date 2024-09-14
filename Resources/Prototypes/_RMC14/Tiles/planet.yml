@@ -66,6 +66,7 @@
   id: CMPlanetSand
   name: tiles-cm-sand
   sprite: /Textures/_RMC14/Tiles/planet/sand.png
+  color: "#9c906dc2"
 
 - type: tile
   parent: CMPlanetBase
