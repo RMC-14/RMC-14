@@ -1,17 +1,8 @@
 - type: entity
   id: RMCTargetHuman
-  parent: BaseStructureDynamic
-  abstract: true
+  parent: TargetHuman
   suffix: RMC
   components:
-  - type: Sprite
-    sprite: Objects/Specific/Security/target.rsi
-    state: target_h
-    noRot: true
-  - type: Repairable
-  - type: DamagePopup
-    allowTypeChange: true
-    damagePopupType: Combined
   - type: Fixtures
     fixtures:
       fix1:
