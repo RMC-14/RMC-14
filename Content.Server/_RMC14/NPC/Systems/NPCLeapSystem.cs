@@ -2,10 +2,8 @@
 using Content.Server.Interaction;
 using Content.Server._RMC14.NPC.Components;
 using Content.Shared.Actions;
-using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared._RMC14.Xenonids;
-using Robust.Server.GameObjects;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.NPC.Systems;
@@ -77,12 +75,16 @@ public sealed partial class NPCLeapSystem : EntitySystem
                     continue;
                 }
 
-                var worldPos = _transform.GetWorldPosition(xform);
-                var targetPos = _transform.GetWorldPosition(targetXform);
+                var worldPos = _transform.GetMoverCoordinates(uid);
+                var targetPos = _transform.GetMoverCoordinates(comp.Target);
 
                 var destinationPos = comp.Destination;
 ;
-                var range = (destinationPos - worldPos).Length();
+                if (!worldPos.TryDistance(EntityManager, targetPos, out var range))
+                {
+                    comp.Status = LeapStatus.Unspecified;
+                    continue;
+                }
 
                 if (!_interaction.InRangeUnobstructed(uid, comp.Target, range))
                 {
@@ -92,8 +94,8 @@ public sealed partial class NPCLeapSystem : EntitySystem
                     continue;
                 }
 
-                var targetDir = (targetPos - worldPos).Normalized();
-                var destDir = (destinationPos - worldPos).Normalized();
+                var targetDir = (targetPos.Position - worldPos.Position).Normalized();
+                var destDir = (destinationPos.Position - worldPos.Position).Normalized();
                 var angle = Angle.ShortestDistance(new Angle(targetDir), new Angle(destDir));
 
                 if (angle > Angle.FromDegrees(comp.MaxAngleDegrees))
@@ -120,21 +122,20 @@ public sealed partial class NPCLeapSystem : EntitySystem
                     continue;
                 }
 
-                var worldPos = _transform.GetWorldPosition(xform);
-                var targetPos = _transform.GetWorldPosition(targetXform);
+                var worldPos = _transform.GetMoverCoordinates(uid);
+                var targetPos = _transform.GetMoverCoordinates(comp.Target);
 
-                var destination = targetPos + (targetPos - worldPos).Normalized() * comp.LeapDistance;
+                var addedDis = (targetPos.Position - worldPos.Position).Normalized() * comp.LeapDistance;
+
+                var destination = worldPos.WithPosition(worldPos.Position + addedDis);
 
                 comp.Destination = destination;
-
-                //Just in case
-                xform.LocalRotation = 0;
 
                 if (action.Event != null)
                 {
                     action.Event.Performer = uid;
                     action.Event.Action = xeno.Actions[comp.ActionId];
-                    action.Event.Target = uid.ToCoordinates(destination - targetPos);
+                    action.Event.Target = destination;
                 }
 
                 comp.CurrentDoAfter = after.NextId;
