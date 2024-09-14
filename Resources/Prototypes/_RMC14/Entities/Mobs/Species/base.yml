@@ -18,6 +18,7 @@
         - MobMask
         layer:
         - Opaque
+        - XenoProjectileImpassable
       fix2:
         shape:
           !type:PhysShapeCircle
