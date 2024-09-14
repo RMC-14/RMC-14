@@ -1,39 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed marines not being able to move after being un-nested.
-    type: Fix
-  - message: Fixed marines falling down if they die while nested, and not falling
-      down once un-nested after being killed..
-    type: Fix
-  id: 190
-  time: '2024-06-25T11:19:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2621
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the Queen not detaching from the ovipositor on crit or death.
-    type: Fix
-  - message: Added popups to the Queen when starting to attach to or detach from the
-      ovipositor.
-    type: Tweak
-  id: 191
-  time: '2024-06-25T11:20:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2622
-- author: DrSmugleaf
-  changes:
-  - message: Fixed duplicate lurker invisibility expired and hive core not enough
-      plasma popups.
-    type: Fix
-  id: 192
-  time: '2024-06-25T12:56:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2623
-- author: CaasGit
-  changes:
-  - message: blood bags no longer attempt to poke random objects
-    type: Fix
-  id: 193
-  time: '2024-06-26T04:29:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2615
 - author: Whisper
   changes:
   - message: Autoinjectors no longer inject into containers, use refillable bottles
@@ -4392,5 +4357,35 @@
   id: 689
   time: '2024-09-12T13:09:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4022
+- author: Vermidia
+  changes:
+  - message: Fixed the health analyzer not showing permanently dead on rotted corpses
+    type: Fix
+  - message: Permanently dead and holocards on the analyzer are now colorful.
+    type: Tweak
+  id: 690
+  time: '2024-09-14T01:09:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4024
+- author: Vermidia
+  changes:
+  - message: Fix larva getting stuck after bursting
+    type: Fix
+  id: 691
+  time: '2024-09-14T01:12:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4034
+- author: FungiFellow
+  changes:
+  - message: Animals no longer Suffocate
+    type: Fix
+  id: 692
+  time: '2024-09-14T01:13:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4004
+- author: Vermidia
+  changes:
+  - message: Defenders with lowered crests will no longer be affected by ammo stuns
+    type: Fix
+  id: 693
+  time: '2024-09-14T01:12:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4033
 Name: RMC14
 Order: -1
