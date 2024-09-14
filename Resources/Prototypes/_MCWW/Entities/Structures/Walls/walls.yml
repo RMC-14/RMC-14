@@ -1,0 +1,110 @@
+- type: entity
+  parent: CMCorrodible
+  id: MsBaseStructure
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+  - type: Pullable
+  - type: Tag
+    tags:
+      - Structure
+
+- type: entity
+  abstract: true
+  parent: MsBaseStructure
+  id: MSBaseWall
+  name: БазоваяСтена
+  description: Хмм, оказывается кадеты внутри не серые
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: RangedDamageSound
+    soundGroups:
+      Brute:
+        collection:
+          MetalBulletImpact
+    soundTypes:
+      Heat:
+        collection:
+          MetalLaserImpact
+  - type: Tag
+    tags:
+    - Wall
+  - type: Sprite
+    drawdepth: Walls
+  - type: Icon
+    state: full
+  - type: PlacementReplacement
+    key: walls
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+        - MidImpassable
+        - LowImpassable
+        density: 55
+  - type: Occluder
+  - type: Airtight
+  - type: StaticPrice
+    price: 75
+  - type: RadiationBlocker
+    resistance: 2
+  - type: BlockWeather
+
+
+- type: entity
+  parent: MSBaseWall
+  id: MSWallWhiteBrick
+  name: Белая стена
+  description: 2
+  components:
+  - type: Tag
+    tags:
+      - Wall
+  - type: Sprite
+    sprite: _MCWW/Structures/Walls/MSbrick.rsi
+  - type: Icon
+    sprite: _MCWW/Structures/Walls/MSbrick.rsi
+  - type: RCDDeconstructable
+    cost: 6
+    delay: 8
+    fx: EffectRCDDeconstruct8
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Girder:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Occluder
+    enabled: false
+
+
+  - type: IconSmooth
+    key: bricks
+    base: brick
