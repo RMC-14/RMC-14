@@ -11,6 +11,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Maps;
 using Content.Shared.Mind;
@@ -22,12 +23,14 @@ using Content.Shared.StepTrigger.Components;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
+using Robust.Shared.Containers;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 using static Content.Shared.Physics.CollisionGroup;
 
 namespace Content.Shared._RMC14.Xenonids.Egg;
@@ -46,6 +49,7 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly CMHandsSystem _rmcHands = default!;
     [Dependency] private readonly TagSystem _tags = default!;
@@ -72,6 +76,7 @@ public sealed class XenoEggSystem : EntitySystem
 
         SubscribeLocalEvent<XenoEggComponent, AfterAutoHandleStateEvent>(OnXenoEggAfterState);
         SubscribeLocalEvent<XenoEggComponent, GettingPickedUpAttemptEvent>(OnXenoEggPickedUpAttempt);
+        SubscribeLocalEvent<XenoEggComponent, UseInHandEvent>(OnXenoEggUseInHand);
         SubscribeLocalEvent<XenoEggComponent, InteractUsingEvent>(OnXenoEggInteractUsing);
         SubscribeLocalEvent<XenoEggComponent, AfterInteractEvent>(OnXenoEggAfterInteract);
         SubscribeLocalEvent<XenoEggComponent, ActivateInWorldEvent>(OnXenoEggActivateInWorld);
@@ -166,6 +171,13 @@ public sealed class XenoEggSystem : EntitySystem
             args.Cancel();
     }
 
+    private void OnXenoEggUseInHand(Entity<XenoEggComponent> egg, ref UseInHandEvent args)
+    {
+        var ev = new XenoEggUseInHandEvent(_entities.GetNetEntity(egg.Owner));
+        RaiseLocalEvent(args.User, ev);
+        args.Handled = ev.Handled;
+    }
+
     private void OnXenoEggAfterInteract(Entity<XenoEggComponent> egg, ref AfterInteractEvent args)
     {
         if (egg.Comp.State != XenoEggState.Item ||
@@ -255,6 +267,13 @@ public sealed class XenoEggSystem : EntitySystem
 
     private void OnXenoEggActivateInWorld(Entity<XenoEggComponent> egg, ref ActivateInWorldEvent args)
     {
+        // Prevent attempt to open the egg during a UseInHand Event
+        if (!TryComp(egg.Owner, out TransformComponent? transformComp) ||
+            !transformComp.Anchored)
+        {
+            return;
+        }
+
         // TODO RMC14 multiple hive support
         if (!HasComp<XenoParasiteComponent>(args.User) && (!HasComp<XenoComponent>(args.User) || !HasComp<HandsComponent>(args.User)))
             return;

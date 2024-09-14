@@ -59,7 +59,7 @@ rmc-xeno-pheromones-help =
     Pheromones provide a buff to all Xenos in range at the cost of some stored plasma every second, as follows:
 
     Frenzy (Red) - Increased run speed, damage and chance to knock off headhunter masks.
-    
+
     Warding (Green) - While in critical state, increased maximum negative health and slower off weed bleedout.
 
     Recovery (Blue) - Increased plasma and health regeneration.
@@ -113,6 +113,16 @@ cm-xeno-invisibility-expire = We feel our invisibility end!
 # Ovipositor
 cm-xeno-ovipositor-attach = We start attaching to the ovipositor.
 cm-xeno-ovipositor-detach = We start detaching from the ovipositor.
+
+# Retrieve Egg
+cm-xeno-retrieve-egg-no-eggs = We don't have any eggs stored!
+cm-xeno-retrieve-egg-too-many-eggs = We don't have space to store any more eggs!
+cm-xeno-retrieve-egg-stash-egg = We put the egg into our internal storage.
+
+# Throw Parasite
+cm-xeno-throw-parasite-no-parasites = We don't have any parasites stored!
+cm-xeno-throw-parasite-too-many-parasites = We don't have space to store any more parasites!
+cm-xeno-throw-parasite-stash-parasite = We put the parasite into our internal storage.
 
 # Defensive Shield
 rmc-xeno-defensive-shield-end = We feel our enhanced shield end!

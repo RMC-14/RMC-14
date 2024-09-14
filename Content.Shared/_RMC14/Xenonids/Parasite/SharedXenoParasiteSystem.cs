@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Pheromones;
+using Content.Shared.Actions;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Coordinates;
@@ -36,6 +37,7 @@ namespace Content.Shared._RMC14.Xenonids.Parasite;
 
 public abstract class SharedXenoParasiteSystem : EntitySystem
 {
+    [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
