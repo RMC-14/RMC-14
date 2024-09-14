@@ -91,6 +91,9 @@ public sealed class ThermalCloakSystem : EntitySystem
 
     private void OnUnequipped(Entity<ThermalCloakComponent> ent, ref GotUnequippedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (_inventory.InSlotWithFlags((ent, null, null), SlotFlags.BACK))
             return;
 
