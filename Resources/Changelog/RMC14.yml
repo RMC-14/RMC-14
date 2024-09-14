@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Siigiil
-  changes:
-  - message: Fixed attachment actions not being properly removed.
-    type: Fix
-  - message: Fixed the attachment offsets for the M54.
-    type: Fix
-  id: 197
-  time: '2024-06-26T23:37:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2571
 - author: DrSmugleaf
   changes:
   - message: Ghosting while in crit will now give you a warning that you won't be
@@ -4390,5 +4381,19 @@
   id: 696
   time: '2024-09-14T20:54:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4046
+- author: DrSmugleaf
+  changes:
+  - message: Made the bonus Requisitions starting money added on top of the regular
+      starting cash properly scale with player count instead of being flat.
+    type: Tweak
+  - message: Getting attacked will now kick you out of the Overwatch console view,
+      making you immediately realize your peril.
+    type: Tweak
+  - message: Hopefully fix the bug that sometimes causes your game to die at the sight
+      of a reactive thermal tarp.
+    type: Fix
+  id: 697
+  time: '2024-09-14T21:26:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4047
 Name: RMC14
 Order: -1
