@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "warrior",
+      "directions": 4
+    }
+  ]
+}
