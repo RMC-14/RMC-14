@@ -281,7 +281,7 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: GunDamageModifier
-    multiplier: 4
+    multiplier: 2
   - type: HTN
     blackboard:
       SoundTargetInLOS: !type:SoundPathSpecifier

@@ -24,11 +24,17 @@ public sealed class RMCSpawnerSystem : EntitySystem
 
     private void OnDropshipLandedOnPlanet(ref DropshipLandedOnPlanetEvent ev)
     {
-        var query = EntityQueryEnumerator<TimedDespawnOnLandingComponent>();
-        while (query.MoveNext(out var uid, out var comp))
+        var timedQuery = EntityQueryEnumerator<TimedDespawnOnLandingComponent>();
+        while (timedQuery.MoveNext(out var uid, out var comp))
         {
             EnsureComp<TimedDespawnComponent>(uid).Lifetime = comp.Lifetime;
             RemCompDeferred<TimedDespawnOnLandingComponent>(uid);
+        }
+
+        var deleteQuery = EntityQueryEnumerator<DeleteOnLandingComponent>();
+        while (deleteQuery.MoveNext(out var uid, out _))
+        {
+            QueueDel(uid);
         }
     }
 
