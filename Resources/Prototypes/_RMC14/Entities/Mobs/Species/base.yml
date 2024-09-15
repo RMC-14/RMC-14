@@ -17,7 +17,16 @@
         mask:
         - MobMask
         layer:
-        - MobLayer
+        - Opaque
+        - XenoProjectileImpassable
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        density: 185
+        restitution: 0.0
+        layer:
+        - BulletImpassable
   - type: SolutionContainerManager
   - type: InjectableSolution
     solution: chemicals
@@ -185,6 +194,7 @@
   - type: CrashLandable
   - type: StunShakeable
   - type: StunShakeableUser
+  - type: MindCheck
   - type: GenericVisualizer
     visuals:
       enum.CreamPiedVisuals.Creamed:

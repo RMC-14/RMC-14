@@ -13,6 +13,7 @@ rmc-sentry-rotate-with-screwdriver = It can be rotated with a [color=cyan]screwd
 rmc-sentry-too-close = This is too close to {INDEFINITE($defense)} {$defense}!
 rmc-sentry-active-norot = {CAPITALIZE(THE($sentry))} is currently active. The motors will prevent you from rotating it safely.
 rmc-sentry-item-norot = You can't rotate it like this!
+rmc-sentry-magazine-does-not-fit = {CAPITALIZE(THE($magazine))} doesn't fit into {THE($sentry)}!
 
 rmc-sentry-upgrade-not-item = You need to disassemble {THE($sentry)} with a multitool before upgrading it!
 rmc-sentry-upgrade-not-holding = You need to be holding an upgrade kit in your active hand to upgrade {THE($sentry)}!
@@ -28,7 +29,7 @@ rmc-sentry-disassemble-finish-others = {$user} disassembles {THE($sentry)}.
 
 rmc-sentry-unanchor-is-on = {CAPITALIZE(THE($sentry))} is currently active. The motors will prevent you from unanchoring it safely.
 
-health-examinable-sentry-none = It's in pristine condition.
+health-examinable-sentry-none = {CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} in pristine condition.
 
 health-examinable-sentry-Blunt-10 = [color=yellow]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-HAVE($target)} a few dents.[/color]
 health-examinable-sentry-Blunt-25 = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} a bit beat up.[/color]
@@ -47,10 +48,10 @@ health-examinable-sentry-Piercing-75 = [color=crimson]{CAPITALIZE(SUBJECT($targe
 
 health-examinable-sentry-Heat-10 = [color=yellow]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-HAVE($target)} spots of corrosion.[/color]
 health-examinable-sentry-Heat-25 = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} starting to corrode.[/color]
-health-examinable-sentry-Heat-50 = [color=red]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} almost melted![/color]
+health-examinable-sentry-Heat-50 = [color=red]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-HAVE($target)} almost melted![/color]
 health-examinable-sentry-Heat-75 = [color=crimson]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} barely recognizable![/color]
 
-health-examinable-sentry-Shock-10 = [color=yellow]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-HAVE($target)} {CONJUGATE-HAVE($target)} a few scorch marks.[/color]
-health-examinable-sentry-Shock-25 = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-HAVE($target)} {CONJUGATE-BE($target)} is lightly charred.[/color]
-health-examinable-sentry-Shock-50 = [color=red]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} {CONJUGATE-BE($target)} letting off sparks![/color]
+health-examinable-sentry-Shock-10 = [color=yellow]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-HAVE($target)} a few scorch marks.[/color]
+health-examinable-sentry-Shock-25 = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} lightly charred.[/color]
+health-examinable-sentry-Shock-50 = [color=red]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} letting off sparks![/color]
 health-examinable-sentry-Shock-75 = [color=crimson]{CAPITALIZE(SUBJECT($target))} can barely function![/color]

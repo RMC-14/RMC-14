@@ -561,3 +561,14 @@
     state: walks-the-graves
   - type: PatronFigurine
     id: 025821e4-ae36-49ff-9bdb-a80654ce0dc4
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronHonkzeeBeezs
+  name: Honkzee Beezs figurine
+  description: "\"Wowies, marines eated more crayons than honkzee!\"\nThis figurine is horrifically unbalanced."
+  components:
+  - type: Sprite
+    state: honkzee_beezs
+  - type: PatronFigurine
+    id: f47ec457-4c44-4a3d-aad6-0d5a7c78f94e

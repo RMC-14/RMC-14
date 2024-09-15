@@ -53,6 +53,16 @@
 - type: entity
   parent: RMCAreaLv624GroundJungleSouthWestJungle
   id: RMCAreaLv624GroundJungleSouthWestJungleCeiling
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaLv624GroundJungle
@@ -67,6 +77,16 @@
 - type: entity
   parent: RMCAreaLv624GroundJungleWestJungle
   id: RMCAreaLv624GroundJungleWestJungleCeiling
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaLv624GroundJungle
@@ -143,6 +163,16 @@
 - type: entity
   parent: RMCAreaLv624GroundBarrensWestBarrens
   id: RMCAreaLv624GroundBarrensWestBarrensCeiling
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaLv624GroundBarrens
@@ -155,6 +185,16 @@
 - type: entity
   parent: RMCAreaLv624GroundBarrensEastBarrens
   id: RMCAreaLv624GroundBarrensEastBarrensCeiling
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaLv624GroundBarrens
@@ -175,6 +215,16 @@
 - type: entity
   parent: RMCAreaLv624GroundBarrensNorthEastBarrens
   id: RMCAreaLv624GroundBarrensNorthEastBarrensCeiling
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaLv624GroundBarrens
@@ -323,6 +373,16 @@
   parent: RMCAreaLv624GroundColonyTelecomm
   id: RMCAreaLv624GroundColonyTelecommSwLz1
   name: South-West LZ1 Communications Relay
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaLv624GroundColonyTelecomm
@@ -333,11 +393,31 @@
   parent: RMCAreaLv624GroundColonyTelecommTcommdome
   id: RMCAreaLv624GroundColonyTelecommTcommdomeSouth
   name: South Telecomms Dome Communications Relay
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaLv624GroundColonyTelecomm
   id: RMCAreaLv624GroundColonyTelecommSwLz2
   name: South-West LZ2 Communications Relay
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaLv624Ground

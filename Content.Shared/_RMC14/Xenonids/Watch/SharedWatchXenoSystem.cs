@@ -26,6 +26,9 @@ public abstract class SharedWatchXenoSystem : EntitySystem
 
     private void OnXenoMoveInput(Entity<XenoComponent> xeno, ref MoveInputEvent args)
     {
+        if (!args.HasDirectionalMovement)
+            return;
+
         if (_net.IsClient && _player.LocalEntity == xeno.Owner && _player.LocalSession != null)
             Unwatch(xeno.Owner, _player.LocalSession);
         else if (TryComp(xeno, out ActorComponent? actor))
