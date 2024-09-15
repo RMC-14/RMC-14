@@ -11,7 +11,7 @@
   - type: LandAtCursor
   - type: Tag
     tags:
-    - Spear
+    - pitchforks
   - type: Fixtures
     fixtures:
       fix1:
@@ -30,10 +30,7 @@
   - type: Sprite
     sprite: _MCWW/Objects/Weapons/Melee/pitchforks.rsi
     layers:
-    - state: spear
-    - state: spear1
-      map: ["enum.SolutionContainerLayers.Fill"]
-      visible: false
+    - state: pitchforks
   - type: MeleeWeapon
     wideAnimationRotation: -135
     damage:
@@ -57,16 +54,6 @@
   - type: Construction
     graph: Spear
     node: spear
-  - type: SolutionContainerManager
-    solutions:
-      melee:
-        maxVol: 2
-  - type: MeleeChemicalInjector
-    solution: melee
-  - type: RefillableSolution
-    solution: melee
-  - type: InjectableSolution
-    solution: melee
   - type: SolutionInjectOnEmbed
     transferAmount: 2
     solution: melee
@@ -109,10 +96,3 @@
         Blunt: 5
   - type: UseDelay
   - type: Appearance
-  - type: SolutionContainerVisuals
-    maxFillLevels: 1
-    fillBaseName: spear
-    inHandsFillBaseName: -fill-
-    inHandsMaxFillLevels: 1
-    equippedFillBaseName: -fill-
-    equippedMaxFillLevels: 1
