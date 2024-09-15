@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Zarq0
-  changes:
-  - message: Made phoron bars grindable.
-    type: Tweak
-  - message: Added phoron as a reagent.
-    type: Add
-  id: 202
-  time: '2024-06-28T00:35:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2647
 - author: Sigil
   changes:
   - message: The grenade launcher now properly fires over creatures and objects.
@@ -4394,5 +4385,12 @@
   id: 701
   time: '2024-09-14T21:41:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4018
+- author: DrSmugleaf
+  changes:
+  - message: Updated the Roadmap.
+    type: Tweak
+  id: 702
+  time: '2024-09-15T03:54:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4054
 Name: RMC14
 Order: -1
