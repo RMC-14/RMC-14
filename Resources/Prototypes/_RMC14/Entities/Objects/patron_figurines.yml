@@ -566,7 +566,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronHonkzeeBeezs
   name: Honkzee Beezs figurine
-  description: "\"Wowies, marines eated more crayons than honkzee!\""
+  description: "\"Wowies, marines eated more crayons than honkzee!\"\nThis figurine is horrifically unbalanced."
   components:
   - type: Sprite
     state: honkzee_beezs

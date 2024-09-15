@@ -1,8 +1,12 @@
 ﻿using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
+using Content.Shared.Physics;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Damage;
 
@@ -10,17 +14,17 @@ namespace Content.Shared._RMC14.Damage;
 [Access(typeof(SharedRMCDamageableSystem))]
 public sealed partial class DamageOverTimeComponent : Component
 {
-    [DataField(required: true), AutoNetworkedField]
-    public DamageSpecifier Damage = new();
+    [DataField, AutoNetworkedField]
+    public DamageSpecifier? Damage;
 
     [DataField, AutoNetworkedField]
-    public DamageSpecifier? ArmorPiercingDamage = new();
-
-    [DataField(required: true), AutoNetworkedField]
-    public DamageSpecifier BarricadeDamage = new();
+    public DamageSpecifier? ArmorPiercingDamage;
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? BarricadeSound = new SoundCollectionSpecifier("XenoAcidSizzle");
+    public DamageSpecifier? BarricadeDamage;
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? BarricadeSound = new SoundCollectionSpecifier("XenoAcidSizzle", AudioParams.Default.WithVolume(-3));
 
     [DataField, AutoNetworkedField]
     public TimeSpan DamageEvery = TimeSpan.FromSeconds(1);
@@ -35,8 +39,27 @@ public sealed partial class DamageOverTimeComponent : Component
     public bool AffectsInfectedNested;
 
     [DataField, AutoNetworkedField]
-    public ProtoId<EmotePrototype>? Emote = "Cough";
+    public List<ProtoId<EmotePrototype>>? Emotes = new() { "Cough" };
 
     [DataField, AutoNetworkedField]
     public string? Popup;
+
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? Whitelist;
+
+    [DataField, AutoNetworkedField]
+    public List<DamageMultiplier>? Multipliers;
+
+    [DataField, AutoNetworkedField]
+    public CollisionGroup Collision = CollisionGroup.MobLayer | CollisionGroup.MobMask;
+
+    [DataField, AutoNetworkedField]
+    public bool InitDamaged;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId? DuplicateId;
+
+    [DataRecord]
+    [Serializable, NetSerializable]
+    public readonly record struct DamageMultiplier(FixedPoint2 Multiplier, EntityWhitelist Whitelist);
 }

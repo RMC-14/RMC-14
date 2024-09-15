@@ -21,8 +21,8 @@
                 <BoxContainer Orientation="Horizontal">
                     <Button Name="OffsetLeftButton" Access="Public" StyleClasses="OpenBoth"
                             HorizontalExpand="True" />
-                    <Button Name="ResetOffsetButton" Access="Public" Text=" "
-                            StyleClasses="OpenBoth" HorizontalExpand="True" />
+                    <Button Name="ResetOffsetButton" Access="Public"
+                            StyleClasses="OpenBoth" HorizontalExpand="True" MinWidth="28" />
                     <Button Name="OffsetRightButton" Access="Public" StyleClasses="OpenBoth"
                             HorizontalExpand="True" />
                 </BoxContainer>
@@ -32,12 +32,13 @@
                             SetSize="28 29" />
                     <Control HorizontalExpand="True" />
                 </BoxContainer>
-                <PanelContainer Margin="0 10 0 0">
+                <PanelContainer Margin="0 10 0 0" MouseFilter="Pass"
+                                ToolTip="{Loc 'rmc-dropship-weapons-offset-calibration-does-not-affect-direct-bombardment'}">
                     <PanelContainer.PanelOverride>
                         <graphics:StyleBoxFlat BackgroundColor="#606060" BorderColor="#FFFFFF"
                                                BorderThickness="1" />
                     </PanelContainer.PanelOverride>
-                    <Label Name="OffsetCalibrationLabel" Access="Public" Align="Center" />
+                    <Label Align="Center" Text="{Loc 'rmc-dropship-weapons-offset-calibration'}" />
                 </PanelContainer>
             </BoxContainer>
             <controls:DropshipWeaponsScreen Name="ScreenTwo" Access="Public"

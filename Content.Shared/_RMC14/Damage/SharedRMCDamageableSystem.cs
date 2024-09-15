@@ -1,7 +1,6 @@
 ﻿using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -9,7 +8,6 @@ using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared.Armor;
 using Content.Shared.Blocking;
 using Content.Shared.Chat.Prototypes;
-using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
@@ -20,8 +18,11 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Borgs;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Events;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -32,9 +33,10 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -42,19 +44,28 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly List<string> _types = [];
-    private readonly HashSet<Entity<MarineComponent>> _marines = new();
 
     private EntityQuery<BarricadeComponent> _barricadeQuery;
     private EntityQuery<DamageableComponent> _damageableQuery;
+    private EntityQuery<DamageOverTimeComponent> _damageOverTimeQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;
+    private EntityQuery<VictimInfectedComponent> _victimInfectedQuery;
+    private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
 
     public override void Initialize()
     {
         _barricadeQuery = GetEntityQuery<BarricadeComponent>();
         _damageableQuery = GetEntityQuery<DamageableComponent>();
+        _damageOverTimeQuery = GetEntityQuery<DamageOverTimeComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
+        _victimInfectedQuery = GetEntityQuery<VictimInfectedComponent>();
+        _xenoNestedQuery = GetEntityQuery<XenoNestedComponent>();
 
         SubscribeLocalEvent<DamageMobStateComponent, MapInitEvent>(OnDamageMobStateMapInit);
+
+        SubscribeLocalEvent<DamageOverTimeComponent, StartCollideEvent>(OnDamageOverTimeStartCollide);
+
+        SubscribeLocalEvent<UserDamageOverTimeComponent, EndCollideEvent>(OnDamageOverTimeEndCollide);
 
         SubscribeLocalEvent<DamageMultiplierFlagsComponent, DamageModifyEvent>(OnMultiplierFlagsDamageModify,
             after:
@@ -70,7 +81,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
             after:
             [
                 typeof(SharedArmorSystem), typeof(BlockingSystem), typeof(InventorySystem), typeof(SharedBorgSystem),
-                typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem)
+                typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem),
             ]);
     }
 
@@ -80,10 +91,37 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         Dirty(ent);
     }
 
+    private void OnDamageOverTimeStartCollide(Entity<DamageOverTimeComponent> ent, ref StartCollideEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        var other = args.OtherEntity;
+        if (CanDamage(ent, other))
+            EnsureComp<UserDamageOverTimeComponent>(other);
+    }
+
+    private void OnDamageOverTimeEndCollide(Entity<UserDamageOverTimeComponent> ent, ref EndCollideEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        foreach (var contact in _physics.GetContactingEntities(ent, approximate: true))
+        {
+            if (_damageOverTimeQuery.HasComp(contact))
+                return;
+        }
+
+        RemCompDeferred<UserDamageOverTimeComponent>(ent);
+    }
+
     private void OnMultiplierFlagsDamageModify(Entity<DamageMultiplierFlagsComponent> ent, ref DamageModifyEvent args)
     {
-        if (!_damageableQuery.TryComp(ent, out var damageable) || !TryComp(args.Tool, out DamageMultipliersComponent? multComponent))
+        if (!_damageableQuery.HasComp(ent) ||
+            !TryComp(args.Tool, out DamageMultipliersComponent? multComponent))
+        {
             return;
+        }
 
         foreach (var flag in multComponent.Multipliers.Keys)
         {
@@ -92,7 +130,6 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 
             args.Damage *= multComponent.Multipliers[flag];
         }
-
     }
 
     private void OnGunDamageMultipliersAmmoShot(Entity<GunDamageMultipliersComponent> ent, ref AmmoShotEvent args)
@@ -201,6 +238,47 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     {
     }
 
+    private bool CanDamage(Entity<DamageOverTimeComponent> damage, Entity<MobStateComponent?> target)
+    {
+        if (damage.Comp.BarricadeDamage != null && _barricadeQuery.HasComp(target))
+            return true;
+
+        if (!Resolve(target, ref target.Comp, false))
+            return false;
+
+        if (!_entityWhitelist.IsWhitelistPassOrNull(damage.Comp.Whitelist, target))
+            return false;
+
+        if (!damage.Comp.AffectsDead && _mobState.IsDead(target))
+            return false;
+
+        if (!damage.Comp.AffectsInfectedNested &&
+            _xenoNestedQuery.HasComp(target) &&
+            _victimInfectedQuery.HasComp(target))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    private void DoDamage(Entity<DamageOverTimeComponent> damageEnt, EntityUid target, DamageSpecifier damage, bool ignoreResistances = false)
+    {
+        if (damageEnt.Comp.Multipliers is { } multipliers)
+        {
+            foreach (var multiplier in multipliers)
+            {
+                if (_entityWhitelist.IsWhitelistPass(multiplier.Whitelist, target))
+                {
+                    _damageable.TryChangeDamage(target, damage * multiplier.Multiplier, ignoreResistances);
+                    return;
+                }
+            }
+        }
+
+        _damageable.TryChangeDamage(target, damage, ignoreResistances);
+    }
+
     public override void Update(float frameTime)
     {
         var time = _timing.CurTime;
@@ -231,56 +309,101 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
             }
         }
 
+        // if this ever runs on the client then Dirty() needs to be added back when
+        // the NextDamageAt fields are modified
         if (_net.IsClient)
             return;
 
         var damageOverTimeQuery = EntityQueryEnumerator<DamageOverTimeComponent>();
         while (damageOverTimeQuery.MoveNext(out var uid, out var damage))
         {
-            if (time < damage.NextDamageAt)
+            if (time >= damage.NextDamageAt)
+            {
+                damage.NextDamageAt = time + damage.DamageEvery;
+
+                var anchoredEnumerator = _rmcMap.GetAnchoredEntitiesEnumerator(uid);
+                while (anchoredEnumerator.MoveNext(out var anchored))
+                {
+                    if (!_barricadeQuery.HasComp(anchored))
+                        continue;
+
+                    if (damage.BarricadeDamage == null)
+                        continue;
+
+                    var userDamage = EnsureComp<UserDamageOverTimeComponent>(anchored);
+                    if (time < userDamage.NextDamageAt)
+                        continue;
+
+                    userDamage.NextDamageAt = time;
+                    DoDamage((uid, damage), anchored, damage.BarricadeDamage);
+
+                    // EXTREMELY FAITHFUL REMAKE
+                    // (i don't want to track this properly right now please god get me out of spitter/boiler code)
+                    if (_random.Prob(0.75f))
+                        _audio.PlayPvs(damage.BarricadeSound, anchored);
+                }
+            }
+
+            if (damage.InitDamaged)
                 continue;
 
-            damage.NextDamageAt = time + damage.DamageEvery;
-            Dirty(uid, damage);
-
-            _marines.Clear();
-            _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), 0.5f, _marines);
-            foreach (var marine in _marines)
+            damage.InitDamaged = true;
+            foreach (var contact in _physics.GetEntitiesIntersectingBody(uid, (int) damage.Collision))
             {
-                if (!damage.AffectsDead && _mobState.IsDead(marine))
+                if (CanDamage((uid, damage), contact))
+                    EnsureComp<UserDamageOverTimeComponent>(contact);
+            }
+        }
+
+        var userDamageOverTimeQuery = EntityQueryEnumerator<UserDamageOverTimeComponent>();
+        while (userDamageOverTimeQuery.MoveNext(out var user, out var userDamage))
+        {
+            if (time < userDamage.NextDamageAt)
+                continue;
+
+            var contacts = _physics.GetEntitiesIntersectingBody(user, (int) userDamage.Collision);
+            if (contacts.Count == 0)
+            {
+                RemCompDeferred<UserDamageOverTimeComponent>(user);
+                continue;
+            }
+
+            foreach (var contact in contacts)
+            {
+                if (!_damageOverTimeQuery.TryComp(contact, out var damage))
+                    continue;
+
+                if (!damage.AffectsDead && _mobState.IsDead(user))
                     continue;
 
                 if (!damage.AffectsInfectedNested &&
-                    HasComp<XenoNestedComponent>(marine) &&
-                    HasComp<VictimInfectedComponent>(marine))
+                    _xenoNestedQuery.HasComp(user) &&
+                    _victimInfectedQuery.HasComp(user))
                 {
                     continue;
                 }
 
-                _damageable.TryChangeDamage(marine, damage.Damage);
-
-                if (damage.ArmorPiercingDamage != null)
-                    _damageable.TryChangeDamage(marine, damage.ArmorPiercingDamage, true);
-
-                if (damage.Emote is { } emote)
-                    DoEmote(marine, emote);
-
-                if (damage.Popup is { } popup)
-                    _popup.PopupEntity(popup, marine, marine);
-            }
-
-            var anchoredEnumerator = _rmcMap.GetAnchoredEntitiesEnumerator(uid);
-            while (anchoredEnumerator.MoveNext(out var anchored))
-            {
-                if (!_barricadeQuery.HasComp(anchored))
+                if (!_entityWhitelist.IsWhitelistPassOrNull(damage.Whitelist, user))
                     continue;
 
-                _damageable.TryChangeDamage(anchored, damage.BarricadeDamage);
+                userDamage.NextDamageAt = time + userDamage.DamageEvery;
 
-                // EXTREMELY FAITHFUL REMAKE
-                // (i don't want to track this properly right now please god get me out of spitter/boiler code)
-                if (_random.Prob(0.75f))
-                    _audio.PlayPvs(damage.BarricadeSound, uid);
+                if (damage.Damage != null)
+                    DoDamage((contact, damage), user, damage.Damage);
+
+                if (damage.ArmorPiercingDamage != null)
+                    DoDamage((contact, damage), user, damage.ArmorPiercingDamage, true);
+
+                if (damage.Emotes is { Count: > 0 } emotes)
+                {
+                    var emote = _random.Pick(emotes);
+                    DoEmote(user, emote);
+                }
+
+                if (damage.Popup is { } popup && _random.Prob(0.5f))
+                    _popup.PopupEntity(popup, user, user, PopupType.SmallCaution);
+
+                break;
             }
         }
     }
