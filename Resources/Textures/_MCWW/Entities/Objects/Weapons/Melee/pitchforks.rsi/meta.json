@@ -1,32 +1,38 @@
 {
   "version": 1,
-  "license": null,
-  "copyright": null,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/commit/e1142f20f5e4661cb6845cfcf2dd69f864d67432",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "pitchforks"
+      "name": "spear"
     },
     {
-      "name": "wielded-inhand-left"
+      "name": "inhand-left",
+      "directions": 4
     },
     {
-      "name": "wielded-inhand-right"
+      "name": "inhand-right",
+      "directions": 4
     },
     {
-      "name": "inhand-right"
+      "name": "wielded-inhand-left",
+      "directions": 4
     },
     {
-      "name": "inhand-left"
+      "name": "wielded-inhand-left-fill-1",
+      "directions": 4
     },
     {
-      "name": "equipped-SUITSTORAGE"
+      "name": "equipped-BACKPACK",
+      "directions": 4
     },
     {
-      "name": "equipped-BACKPACK"
+      "name": "equipped-SUITSTORAGE",
+      "directions": 4
     }
   ]
 }
