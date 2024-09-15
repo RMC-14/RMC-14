@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 4,
+    "y": 13
+  },
+  "states": [
+    {
+      "name": "base"
+    }
+  ]
+}
