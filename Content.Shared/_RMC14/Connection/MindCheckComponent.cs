@@ -10,10 +10,10 @@ public sealed partial class MindCheckComponent : Component
     [AutoNetworkedField]
     public bool ActiveMindOrGhost = false;
 
-	[ViewVariables(VVAccess.ReadWrite)]
-	public TimeSpan CheckEvery = TimeSpan.FromSeconds(30);
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan CheckEvery = TimeSpan.FromSeconds(30);
 
-	[ViewVariables(VVAccess.ReadWrite)]
-	[AutoNetworkedField]
-	public TimeSpan NextCheck;
+    [ViewVariables(VVAccess.ReadWrite)]
+    [AutoNetworkedField]
+    public TimeSpan NextCheck;
 }
