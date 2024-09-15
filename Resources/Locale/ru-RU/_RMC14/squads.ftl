@@ -1,9 +1,9 @@
-squad-alpha = Alpha Squad
-squad-bravo = Bravo Squad
-squad-charlie = Charlie Squad
-squad-delta = Delta Squad
+squad-alpha = Огненные рыцари
+squad-bravo = Золотые инженеры
+squad-charlie = Увёртюрные крысы
+squad-delta = Волкобои
 
-squad-alpha-name = Alpha {$name}
-squad-bravo-name = Bravo {$name}
-squad-charlie-name = Charlie {$name}
-squad-delta-name = Delta {$name}
+squad-alpha-name = Огненный {$name}
+squad-bravo-name = Золотой {$name}
+squad-charlie-name = Увёртюрный {$name}
+squad-delta-name = Волкобой {$name}

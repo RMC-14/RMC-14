@@ -2,10 +2,10 @@
 cm-xeno-not-enough-plasma = You don't have enough plasma!
 
 # Construction
-cm-xeno-choose-resin-structure = Choose Resin Structure
-cm-xeno-order-construction = Build Structure
+cm-xeno-choose-resin-structure = Выбрать структуру
+cm-xeno-order-construction = Построить структуру
 cm-xeno-too-close-to-other-node = This is too close to {THE($target)}!
-cm-xeno-requires-more-plasma = {THE($construction)} requires {$plasma} more plasma.
+cm-xeno-requires-more-plasma = Для {THE($construction)} надо ещё {$plasma} плазмы.
 cm-xeno-construction-plasma-left = A {$construction} construction is designated here. It requires [color=cyan]{$plasma}[/color] more plasma.
 cm-xeno-cant-reach-there = You can't reach there!
 cm-xeno-cant-build-in-self = You can't build structures that close!
@@ -59,7 +59,7 @@ rmc-xeno-pheromones-help =
     Pheromones provide a buff to all Xenos in range at the cost of some stored plasma every second, as follows:
 
     Frenzy (Red) - Increased run speed, damage and chance to knock off headhunter masks.
-    
+
     Warding (Green) - While in critical state, increased maximum negative health and slower off weed bleedout.
 
     Recovery (Blue) - Increased plasma and health regeneration.
