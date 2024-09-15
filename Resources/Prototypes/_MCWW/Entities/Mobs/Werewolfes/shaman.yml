@@ -37,9 +37,9 @@
     hungerPerDomainUse: 0
 
 - type: entity
-  id: ActionRatKingRaiseArmy
-  name: Raise Army
-  description: Spend some hunger to summon an allied rat to help defend you.
+  id: MSWWActionRatKingRaiseArmy
+  name: Призвать волка
+  description: Используя свою духовную энергию вы взываете к своей стае и призываете волка
   components:
   - type: InstantAction
     useDelay: 0.1
@@ -47,15 +47,3 @@
       sprite: Interface/Actions/actions_rat_king.rsi
       state: ratKingArmy
     event: !type:RatKingRaiseArmyActionEvent
-
-- type: entity
-  id: ActionRatKingDomain
-  name: Rat King's Domain
-  description: Spend some hunger to release a cloud of ammonia into the air.
-  components:
-  - type: InstantAction
-    useDelay: 0.1
-    icon:
-      sprite: Interface/Actions/actions_rat_king.rsi
-      state: ratKingDomain
-    event: !type:RatKingDomainActionEvent
