@@ -16,8 +16,8 @@
           !type:PhysShapeCircle
           radius: 0.5
         hard: false
-        mask:
-        - MobLayer
+        layer:
+        - SmallMobLayer
   - type: CollisionWake
     enabled: false
   - type: Flammable
@@ -27,7 +27,7 @@
         Heat: 3
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_resin_trap.rsi
-    drawdepth: SmallMobs
+    drawdepth: FloorTiles
     layers:
     - state: trap0
       map: [ "enum.XenoResinHoleLayers.Base" ]

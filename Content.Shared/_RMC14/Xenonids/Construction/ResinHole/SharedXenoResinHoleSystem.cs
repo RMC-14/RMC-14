@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.ShakeStun;
+using Content.Shared._RMC14.Xenonids.Bombard;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -64,7 +65,7 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, XenoPlaceResinHoleActionEvent>(OnPlaceXenoResinHole);
         SubscribeLocalEvent<XenoComponent, XenoPlaceResinHoleDestroyWeedSourceDoAfterEvent>(OnCompleteRemoveWeedSource);
 
-        SubscribeLocalEvent<XenoResinHoleComponent, InteractUsingEvent>(OnPlaceParasiteInXenoResinHole);
+        SubscribeLocalEvent<XenoResinHoleComponent, InteractUsingEvent>(OnPlaceParasiteInXenoResinHole, [typeof(SharedXenoParasiteSystem)]);
         SubscribeLocalEvent<XenoResinHoleComponent, XenoPlaceParasiteInHoleDoAfterEvent>(OnPlaceParasiteInXenoResinHoleDoAfter);
 
         SubscribeLocalEvent<XenoResinHoleComponent, InteractHandEvent>(OnEmptyHandInteract);
@@ -165,6 +166,7 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
             BreakOnHandChange = true,
         };
         _doAfter.TryStartDoAfter(doAfterArgs);
+        args.Handled = true;
     }
 
     private void OnPlaceParasiteInXenoResinHoleDoAfter(Entity<XenoResinHoleComponent> resinHole, ref XenoPlaceParasiteInHoleDoAfterEvent args)
@@ -208,6 +210,10 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
         if (resinHoleSlot.ContainedEntity is not EntityUid possibleParasite)
         {
             // TODO: Add boiler and praetorian logic of adding acid/gas
+            if (HasComp<XenoBombardComponent>(args.User))
+            {
+
+            }
             return;
         }
 
