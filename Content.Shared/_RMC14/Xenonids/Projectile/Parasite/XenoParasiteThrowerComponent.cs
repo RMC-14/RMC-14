@@ -17,4 +17,7 @@ public sealed partial class XenoParasiteThrowerComponent : Component
 
     [DataField]
     public int MaxParasites = 16;
+
+    [DataField]
+    public TimeSpan ThrownParasiteStunDuration = TimeSpan.FromSeconds(5);
 }

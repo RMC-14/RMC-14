@@ -5,8 +5,10 @@ using Content.Shared.Actions;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
@@ -31,6 +33,7 @@ public sealed partial class XenoParasiteThrowerSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
 
 
     public override void Initialize()
@@ -41,6 +44,7 @@ public sealed partial class XenoParasiteThrowerSystem : EntitySystem
         SubscribeLocalEvent<XenoParasiteThrowerComponent, UserActivateInWorldEvent>(OnXenoParasiteThrowerUseInHand);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoDevolveBuiMsg>(OnXenoDevolveDoAfter);
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, MobStateChangedEvent>(OnDeathMobStateChanged);
     }
 
     private void OnToggleParasiteThrow(Entity<XenoParasiteThrowerComponent> xeno, ref XenoThrowParasiteActionEvent args)
@@ -94,6 +98,7 @@ public sealed partial class XenoParasiteThrowerSystem : EntitySystem
         {
             _hands.TryDrop(ent);
             _throw.TryThrow(heldEntity, target);
+            _stun.TryParalyze(heldEntity, comp.ThrownParasiteStunDuration, true);
             return;
         }
 
@@ -153,6 +158,13 @@ public sealed partial class XenoParasiteThrowerSystem : EntitySystem
 
     private void OnXenoDevolveDoAfter(Entity<XenoParasiteThrowerComponent> xeno, ref XenoDevolveBuiMsg args)
     {
+        DropAllStoredParasites(xeno);
+    }
+
+    private void OnDeathMobStateChanged(Entity<XenoParasiteThrowerComponent> xeno, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState != MobState.Dead)
+            return;
         DropAllStoredParasites(xeno);
     }
 
