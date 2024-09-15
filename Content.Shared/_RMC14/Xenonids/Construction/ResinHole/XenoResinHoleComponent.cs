@@ -1,0 +1,46 @@
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Content.Shared._RMC14.Xenonids.Construction.ResinHole;
+
+[RegisterComponent]
+public sealed partial class XenoResinHoleComponent : Component
+{
+    public const string HoleSlotId = "hole_slot";
+
+    [DataField]
+    public TimeSpan StepStunDuration = TimeSpan.FromSeconds(2.0);
+
+    [DataField]
+    public TimeSpan AddParasiteDelay = TimeSpan.FromSeconds(3.0);
+
+    [DataField]
+    public TimeSpan AddFluidDelay = TimeSpan.FromSeconds(3.0);
+}
+
+[Serializable, NetSerializable]
+public enum XenoResinHoleLayers
+{
+    Base
+}
+
+[Serializable, NetSerializable]
+public enum XenoResinHoleVisuals
+{
+    Contained
+}
+
+[Serializable, NetSerializable]
+public enum ContainedTrap
+{
+    Empty,
+    Parasite,
+    NeuroticGas,
+    AcidGas,
+    AcidSplash
+}

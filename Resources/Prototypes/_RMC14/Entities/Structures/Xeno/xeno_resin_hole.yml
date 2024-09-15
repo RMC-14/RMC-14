@@ -1,0 +1,68 @@
+- type: entity
+  parent: BaseItem
+  id: XenoResinHole
+  name: Resin Hole
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Fixtures
+    fixtures:
+      resin_hole:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.5
+        hard: false
+        mask:
+        - MobLayer
+  - type: CollisionWake
+    enabled: false
+  - type: Flammable
+    fireSpread: false
+    damage:
+      types:
+        Heat: 3
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_resin_trap.rsi
+    drawdepth: SmallMobs
+    layers:
+    - state: trap0
+      map: [ "enum.XenoResinHoleLayers.Base" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.XenoResinHoleVisuals.Contained:
+        enum.XenoResinHoleLayers.Base:
+          Empty: {state: trap0}
+          Parasite: {state: trap1}
+          NeuroticGas: {state: trapgas}
+          AcidGas: {state: trapacid2}
+          AcidSplash: {state: trapacid1}
+  - type: Appearance
+  - type: XenoResinHole
+  - type: Damageable
+    damageContainer: StructuralXeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Heat
+        damage: 10
+      behaviors:
+      - !type:BurnBodyBehavior { }
+  - type: XenoFriendly
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+    intersectRatio: 0.5
+  - type: RMCNightVisionVisible
+    priority: -1
+  - type: Corrodible
+    isCorrodible: false
+  - type: XenoConstruct
+    destroyWeeds: false

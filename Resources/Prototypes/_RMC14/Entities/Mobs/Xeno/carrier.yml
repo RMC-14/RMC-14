@@ -32,7 +32,7 @@
     - ActionXenoOrderConstruction
     - ActionXenoPheromones
     - ActionXenoPlantWeeds
-    #    - ActionXenoResinHole
+    - ActionXenoResinHole
     - ActionXenoThrowParasite
     - ActionXenoRetrieveEgg
     #    - ActionXenoParasiteReserve
