@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "brick0",
+      "directions": 4
+    },
+    {
+      "name": "brick1",
+      "directions": 4
+    },
+    {
+      "name": "brick2",
+      "directions": 4
+    },
+    {
+      "name": "brick3",
+      "directions": 4
+    },
+    {
+      "name": "brick4",
+      "directions": 4
+    },
+    {
+      "name": "brick5",
+      "directions": 4
+    },
+    {
+      "name": "brick6",
+      "directions": 4
+    },
+    {
+      "name": "brick7",
+      "directions": 4
+    },
+    {
+      "name": "full"
+    }
+  ]
+}

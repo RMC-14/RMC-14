@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 64,
+    "y": 72
+  },
+  "states": [
+    {
+      "name": "dead"
+    },
+    {
+      "name": "alive",
+      "directions": 4
+    },
+    {
+      "name": "crit"
+    }
+  ]
+}
