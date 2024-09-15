@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Sigil
-  changes:
-  - message: The grenade launcher now properly fires over creatures and objects.
-    type: Fix
-  id: 203
-  time: '2024-06-28T00:43:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2618
 - author: Noisrevni
   changes:
   - message: Added requisitions paperwork reward system, now supply crew can send
@@ -4392,5 +4385,12 @@
   id: 702
   time: '2024-09-15T03:54:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4054
+- author: Kadeo64
+  changes:
+  - message: Lurkers are now able to knock down in 4 shoves.
+    type: Tweak
+  id: 703
+  time: '2024-09-15T07:50:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4030
 Name: RMC14
 Order: -1
