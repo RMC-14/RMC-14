@@ -19,7 +19,7 @@ public sealed class CMHealthIconsSystem : EntitySystem
     private static readonly ProtoId<HealthIconPrototype> DeadAlmost = "CMHealthIconDeadAlmost";
     private static readonly ProtoId<HealthIconPrototype> DeadDNR = "CMHealthIconDeadDNR";
     private static readonly ProtoId<HealthIconPrototype> Dead = "CMHealthIconDead";
-    private static readonly ProtoId<HealthIconPrototype> HCDead = "CMHealthIconDead";
+    private static readonly ProtoId<HealthIconPrototype> HCDead = "CMHealthIconHCDead";
 
     public StatusIconData GetDeadIcon()
     {
