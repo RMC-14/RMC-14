@@ -208,3 +208,20 @@
     deselectOnMiss: false
     repeat: true
     range: 30
+
+- type: entity
+  id: ActionXenoParasiteReserve
+  parent: ActionXenoBase
+  name: Reserve Parasite
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: reserve_parasite
+    event: !type:XenoReserveParasiteActionEvent
+    useDelay: 1
+  - type: UserInterface
+    interfaces:
+      enum.XenoReserveParasiteChangeUIKey.Key:
+        type: ReserveParasitesBoundUserInterface

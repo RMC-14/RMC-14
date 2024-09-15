@@ -15,6 +15,11 @@ public sealed partial class XenoParasiteThrowerComponent : Component
 {
     public const string ParasiteContainerId = "parasites";
 
+    public int ReservedParasites = 0;
+
+    [DataField]
+    public double ParasiteGhostRoleProbability = 0.25;
+
     [DataField]
     public int MaxParasites = 16;
 

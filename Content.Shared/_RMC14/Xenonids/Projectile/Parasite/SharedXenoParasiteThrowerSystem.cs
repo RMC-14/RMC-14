@@ -12,6 +12,7 @@ using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 
-public sealed partial class XenoParasiteThrowerSystem : EntitySystem
+public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -34,17 +35,27 @@ public sealed partial class XenoParasiteThrowerSystem : EntitySystem
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
+    [Serializable, NetSerializable]
+    public enum XenoReserveParasiteChangeUIKey : byte
+    {
+        Key
+    }
 
     public override void Initialize()
     {
         base.Initialize();
 
+
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoThrowParasiteActionEvent>(OnToggleParasiteThrow);
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoReserveParasiteActionEvent>(OnSetReserve);
+
         SubscribeLocalEvent<XenoParasiteThrowerComponent, UserActivateInWorldEvent>(OnXenoParasiteThrowerUseInHand);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoDevolveBuiMsg>(OnXenoDevolveDoAfter);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, MobStateChangedEvent>(OnDeathMobStateChanged);
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoChangeParasiteReserveEvent>(OnChangeParasiteReserve);
     }
 
     private void OnToggleParasiteThrow(Entity<XenoParasiteThrowerComponent> xeno, ref XenoThrowParasiteActionEvent args)
@@ -102,17 +113,12 @@ public sealed partial class XenoParasiteThrowerSystem : EntitySystem
             return;
         }
 
-        if (parasiteContainer.Count == 0)
-        {
-            _popup.PopupClient(Loc.GetString("cm-xeno-throw-parasite-no-parasites"), ent, ent);
-        }
+        GetParasiteFromInventory(ent, parasiteContainer, comp.ParasiteGhostRoleProbability);
+    }
 
-        if (!parasiteContainer.ContainedEntities.TryFirstOrNull(out var parasite))
-        {
-            return;
-        }
-
-        _hands.TryPickupAnyHand(ent, parasite.Value);
+    private void OnSetReserve(Entity<XenoParasiteThrowerComponent> xeno, ref XenoReserveParasiteActionEvent args)
+    {
+        _ui.OpenUi(args.Action, XenoReserveParasiteChangeUIKey.Key, xeno.Owner);
     }
 
     private void OnXenoParasiteThrowerUseInHand(Entity<XenoParasiteThrowerComponent> xeno, ref UserActivateInWorldEvent args)
@@ -168,6 +174,16 @@ public sealed partial class XenoParasiteThrowerSystem : EntitySystem
         DropAllStoredParasites(xeno);
     }
 
+    private void OnChangeParasiteReserve(Entity<XenoParasiteThrowerComponent> xeno, ref XenoChangeParasiteReserveEvent args)
+    {
+        if (!_container.TryGetContainer(xeno.Owner, XenoParasiteThrowerComponent.ParasiteContainerId, out var parasiteContainer))
+        {
+            return;
+        }
+        xeno.Comp.ReservedParasites = args.NewReserve;
+        SetReservedParasites(parasiteContainer, args.NewReserve);
+    }
+
     private bool DropAllStoredParasites(Entity<XenoParasiteThrowerComponent> xeno)
     {
         if (!_container.TryGetContainer(xeno.Owner, XenoParasiteThrowerComponent.ParasiteContainerId, out var parasiteContainer))
@@ -179,5 +195,15 @@ public sealed partial class XenoParasiteThrowerSystem : EntitySystem
             _transform.PlaceNextTo(xeno.Owner, parasite);
         }
         return true;
+    }
+
+    protected virtual void GetParasiteFromInventory(EntityUid ent, BaseContainer parasiteContainer, double addGhostRoleProb)
+    {
+
+    }
+
+    protected virtual void SetReservedParasites(BaseContainer parasiteContainer, int reserveCount)
+    {
+
     }
 }
