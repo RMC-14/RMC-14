@@ -5,6 +5,7 @@ using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
@@ -36,7 +37,7 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
         SubscribeLocalEvent<XenoEggRetrieverComponent, XenoEggUseInHandEvent>(OnXenoRetrieverUseInHand);
         SubscribeLocalEvent<XenoEggRetrieverComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
         SubscribeLocalEvent<XenoEggRetrieverComponent, XenoDevolveBuiMsg>(OnXenoDevolveDoAfter);
-
+        SubscribeLocalEvent<XenoEggRetrieverComponent, MobStateChangedEvent>(OnDeathMobStateChanged);
     }
 
     private void OnXenoRetrieveEgg(Entity<XenoEggRetrieverComponent> eggRetriever, ref XenoRetrieveEggActionEvent args)
@@ -125,6 +126,13 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
 
     private void OnXenoDevolveDoAfter(Entity<XenoEggRetrieverComponent> eggRetriever, ref XenoDevolveBuiMsg args)
     {
+        DropAllStoredEggs(eggRetriever);
+    }
+
+    private void OnDeathMobStateChanged(Entity<XenoEggRetrieverComponent> eggRetriever, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState != MobState.Dead)
+            return;
         DropAllStoredEggs(eggRetriever);
     }
 
