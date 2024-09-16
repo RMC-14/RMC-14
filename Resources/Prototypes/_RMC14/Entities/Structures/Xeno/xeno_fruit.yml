@@ -65,6 +65,8 @@
   - type: Corrodible
     isCorrodible: false
   - type: XenoFruit
+    consumeDelay: 5
+    canConsumeAtFull: true
 
 
 
@@ -79,30 +81,59 @@
     growingState: fruit_lesser_immature
     grownState: fruit_lesser
     growTime: 15
+    canConsumeAtFull: false
+    effects:
+    - type: XenoFruitEffectHeal
+      healAmount: # :(
+        groups:
+          Brute: 50
 
 - type: entity
   parent: XenoFruitLesser
   id: XenoFruitGreater
   name: greater resin fruit
-  description: A fruit that can be eaten to immediately recover health, and give a strong regeneration effect for a few seconds.
+  description: A fruit that can be eaten to immediately recover health, and a strong regeneration effect for a few seconds.
   components:
   - type: XenoFruit
     itemState: fruit_greater_item
     growingState: fruit_greater_immature
     grownState: fruit_greater
     growTime: 30
+    canConsumeAtFull: false
+    effects:
+    - type: XenoFruitEffectHeal
+      healAmount: # :(
+        groups:
+          Brute: 75
+    - type: XenoFruitEffectRegen
+      tickCount: 5 # 100 health over 5 seconds
+      regenPerTick: # :(
+        groups:
+          Brute: 20
+
 
 - type: entity
   parent: XenoFruitBase
   id: XenoFruitUnstable
   name: unstable resin fruit
-  description: A fruit that can be eaten to gain a strong overshield effect, and give a small regeneration for several seconds.
+  description: A fruit that can be eaten to gain a strong overshield effect, and a small regeneration for several seconds.
   components:
   - type: XenoFruit
     itemState: fruit_unstable_item
     growingState: fruit_unstable_immature
     grownState: fruit_unstable
     growTime: 45
+    effects:
+    - type: XenoFruitEffectRegen
+      tickCount: 15 # 75 health over 15 seconds
+      regenPerTick: # :(
+        groups:
+          Brute: 5
+    - type: XenoFruitEffectShield
+      duration: 60
+      shieldAmount: 200
+      shieldDecay: 10
+      shieldRatio: 0.3
 
 - type: entity
   parent: XenoFruitBase
@@ -115,6 +146,12 @@
     growingState: fruit_spore_immature
     grownState: fruit_spore
     growTime: 15
+    effects:
+    - type: XenoFruitEffectCooldown
+      reductionMax: 0.25
+      reductionPerSlash: 0.05
+  - type: XenoPheromones
+    pheromonesMultiplier: 1
 
 - type: entity
   parent: XenoFruitBase
@@ -127,6 +164,10 @@
     growingState: fruit_speed_immature
     grownState: fruit_speed
     growTime: 35
+    effects:
+    - type: XenoFruitEffectSpeed
+      duration: 15
+      speedModifer: 0.4
 
 - type: entity
   parent: XenoFruitBase
@@ -139,3 +180,8 @@
     growingState: fruit_plasma_immature
     grownState: fruit_plasma
     growTime: 25
+    effects:
+    - type: XenoFruitEffectPlasma
+      tickPeriod: 3 # 240 plasma over 15 seconds, 48 plasma every 3 seconds
+      regenPerTick: 48
+      tickCount: 5

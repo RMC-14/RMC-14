@@ -150,8 +150,8 @@
         type: XenoPheromonesBui
       enum.XenoOrderConstructionUI.Key:
         type: XenoOrderConstructionBui
-      enum.XenoChooseFruitUI.Key:
-        type: XenoChooseFruitBui
+      enum.XenoFruitChooseUI.Key:
+        type: XenoFruitChooseBui
       enum.XenoWordQueenUI.Key:
         type: XenoWordQueenBui
   - type: TypingIndicator
@@ -313,6 +313,16 @@
       location: Right
     - name: Left Hand
       location: Left
+  - type: WhitelistPickup
+    whitelist:
+      components:
+      - XenoFruit
+  - type: MultiHandedHolder
+    items:
+    - hands: 2
+      whitelist:
+        components:
+        - XenoFruit
   - type: ParalyzeOnPullAttempt
 
 - type: entity

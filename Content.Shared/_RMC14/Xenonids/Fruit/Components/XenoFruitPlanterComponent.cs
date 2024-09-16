@@ -1,5 +1,5 @@
-using Robust.Shared.Audio;
 using Content.Shared.FixedPoint;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -19,19 +19,7 @@ public sealed partial class XenoFruitPlanterComponent : Component
     public EntProtoId? FruitChoice;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan PlantDelay = TimeSpan.FromSeconds(1);
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan HarvestDelay = TimeSpan.FromSeconds(1.5f);
-
-    [DataField, AutoNetworkedField]
     public SoundSpecifier PlantSound = new SoundCollectionSpecifier("RMCResinBuild")
-    {
-        Params = AudioParams.Default.WithVolume(-10f)
-    };
-
-    [DataField, AutoNetworkedField]
-    public SoundSpecifier HarvestSound = new SoundCollectionSpecifier("XenoResinBreak")
     {
         Params = AudioParams.Default.WithVolume(-10f)
     };

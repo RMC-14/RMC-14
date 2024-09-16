@@ -87,6 +87,7 @@ rmc-xeno-rest-cant-stomp = You can't stomp while resting!
 rmc-xeno-rest-cant-gut = You can't gut while resting!
 rmc-xeno-rest-cant-screech = You can't screech while resting!
 rmc-xeno-rest-cant-secrete = You can't secrete while resting!
+rmc-xeno-rest-cant-plant = You can't plant while resting!
 
 # Toggle Crest Defense
 cm-xeno-toggle-crest-cant-fortify = You can't fortify while your crest is lowered!
@@ -121,4 +122,4 @@ rmc-xeno-defensive-shield-activate = {$user} hunkers down and bolsters its defen
 rmc-xeno-defensive-shield-activate-self = We hunker down and bolster our defenses!
 
 # Fruit
-cm-xeno-choose-resin-fruit = Choose Resin Fruit
+rmc-xeno-choose-resin-fruit = Choose Resin Fruit

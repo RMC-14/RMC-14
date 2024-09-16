@@ -37,8 +37,8 @@
     - ActionXenoOrderConstruction
     - ActionXenoPlantWeeds
     # - ActionXenoPlantWeedsHardy # TODO: implement gardener weeds
-    - ActionXenoPlantFruit
-    - ActionXenoChooseFruit
+    - ActionXenoFruitPlant
+    - ActionXenoFruitChoose
     # - ActionXenoResinSurge # TODO: implement resin surge
     - ActionXenoTransferPlasma
     - ActionXenoDevolve

@@ -137,5 +137,5 @@ public enum LogType
     RMCDropshipLaunch = RMCMarineAnnounce + 12,
     RMCStunShake = RMCMarineAnnounce + 13,
     RMCMortar = RMCMarineAnnounce + 14,
-    RMCXenoPlantFruit = RMCMarineAnnounce + 15,
+    RMCXenoFruitPlant = RMCMarineAnnounce + 15,
 }
