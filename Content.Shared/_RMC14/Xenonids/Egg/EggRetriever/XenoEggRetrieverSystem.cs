@@ -59,7 +59,8 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
 
             foreach (var possibleEgg in clickedEntities)
             {
-                if (!HasComp<XenoEggComponent>(possibleEgg))
+                if (!HasComp<XenoEggComponent>(possibleEgg) ||
+                    Transform(possibleEgg).Anchored)
                 {
                     continue;
                 }
