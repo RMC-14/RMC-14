@@ -375,7 +375,31 @@
     },
     {
       "name": "magaz_buck"
+    },	
+	{
+      "name": "magaz_slug_1"
     },
+    {
+      "name": "magaz_slug_2"
+    },
+    {
+      "name": "magaz_slug_3"
+    },
+    {
+      "name": "magaz_slug"
+    },
+	{
+      "name": "magaz_flech_1"
+    },
+    {
+      "name": "magaz_flech_2"
+    },
+    {
+      "name": "magaz_flech_3"
+    },
+    {
+      "name": "magaz_flech"
+	},
     {
       "name": "boxes_and_lids"
     },

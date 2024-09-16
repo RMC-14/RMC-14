@@ -25,6 +25,12 @@
 
 - type: Tag
   id: RMCBoxShotgunShells
+- type: Tag
+  id: RMCBoxShotgunBuckshot
+- type: Tag
+  id: RMCBoxShotgunSlugs
+- type: Tag
+  id: RMCBoxShotgunFlechette
 
 - type: entity
   parent: RMCBoxShotgunBase
@@ -32,6 +38,9 @@
   name: box of buckshot shells
   description: A box filled with buckshot spread shotgun shells. 12 Gauge.
   components:
+  - type: Tag
+    tags:
+    - RMCBoxShotgunBuckshot
   - type: BallisticAmmoProvider
     proto: CMShellShotgunBuckshot
   - type: Sprite
@@ -46,6 +55,9 @@
   name: box of shotgun slugs
   description: A box filled with heavy shotgun shells. A timeless classic. 12 Gauge.
   components:
+  - type: Tag
+    tags:
+    - RMCBoxShotgunSlugs
   - type: BallisticAmmoProvider
     proto: CMShellShotgunSlugs
   - type: Sprite
@@ -88,6 +100,9 @@
   name: box of flechette shells
   description: A box filled with flechette shotgun shells. 12 Gauge.
   components:
+  - type: Tag
+    tags:
+    - RMCBoxShotgunFlechette
   - type: BallisticAmmoProvider
     proto: CMShellShotgunFlechette
   - type: Sprite

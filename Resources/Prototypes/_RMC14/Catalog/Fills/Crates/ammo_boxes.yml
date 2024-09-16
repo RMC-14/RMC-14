@@ -7,8 +7,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxShotgunSlugs
-      amount: 4 # TODO RMC14 boxes
+    - id: RMCBoxMagazineShotgunSlugs
+      amount: 1
 
 - type: entity
   parent: RMCCrateAmmo
@@ -27,5 +27,5 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxShotgunFlechette
-      amount: 4 # TODO RMC14 boxes
+    - id: RMCBoxMagazineShotgunFlechette
+      amount: 1

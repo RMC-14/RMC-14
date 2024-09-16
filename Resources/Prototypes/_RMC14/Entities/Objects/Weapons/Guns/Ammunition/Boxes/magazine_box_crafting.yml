@@ -235,7 +235,7 @@
 # Shotgun
 - type: construction
   parent: RMC
-  name: Magazine Box (Buckshot)
+  name: Magazine Box (M42 Buckshot)
   id: RMCBoxMagazineShotgunBuckshotEmpty
   graph: RMCBoxMagazine
   startNode: start
@@ -245,6 +245,34 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_buck
+  objectType: Item
+  
+- type: construction
+  parent: RMC
+  name: Magazine Box (M42 Slugs)
+  id: RMCBoxMagazineShotgunSlugsEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazineShotgunSlugsEmpty
+  category: construction-category-cm-box-magazine
+  description: A box for holding other, smaller, boxes of shotgun shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_slug
+  objectType: Item
+  
+- type: construction
+  parent: RMC
+  name: Magazine Box (M42 Flechette)
+  id: RMCBoxMagazineShotgunFlechetteEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazineShotgunFlechetteEmpty
+  category: construction-category-cm-box-magazine
+  description: A box for holding other, smaller, boxes of shotgun shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_flech
   objectType: Item
 
   # Construct graphs
@@ -361,6 +389,11 @@
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
+    - to: RMCBoxMagazineShotgunSlugsEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 1
 
   # Why the fuck do you even need these nodes???
 
@@ -415,4 +448,8 @@
   # Shotgun
   - node: RMCBoxMagazineShotgunBuckshotEmpty
     entity: RMCBoxMagazineShotgunBuckshotEmpty
+  - node: RMCBoxMagazineShotgunSlugsEmpty
+    entity: RMCBoxMagazineShotgunSlugsEmpty
+  - node: RMCBoxMagazineShotgunFlechetteEmpty
+    entity: RMCBoxMagazineShotgunFlechetteEmpty
   
