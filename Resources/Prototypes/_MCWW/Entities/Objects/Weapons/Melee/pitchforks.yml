@@ -2,7 +2,7 @@
   name: Вилы
   parent: [ RMCBaseMeleeWeapon, BaseKnife]
   id: MSWWpitchforks
-  description: Вилы
+  description: Трёхзубые вилы которыми в основном собирают сено
   components:
   - type: Sprite
     sprite: _MCWW/Entities/Objects/Weapons/Melee/pitchforks.rsi
