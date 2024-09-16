@@ -103,6 +103,8 @@
         acts: [ "Destruction" ]
   - type: Occluder
     enabled: false
+  - type: Climbable
+    climbdelay: 20
 
 
   - type: IconSmooth
