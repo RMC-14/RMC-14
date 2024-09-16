@@ -13,16 +13,19 @@ using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
+using Content.Shared.Item;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
+using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
+using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -33,7 +36,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Parasite;
 
-public abstract class SharedXenoParasiteSystem : EntitySystem
+public abstract partial class SharedXenoParasiteSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
@@ -68,6 +71,9 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         SubscribeLocalEvent<XenoParasiteComponent, CanDragEvent>(OnParasiteCanDrag);
         SubscribeLocalEvent<XenoParasiteComponent, CanDropDraggedEvent>(OnParasiteCanDropDragged);
         SubscribeLocalEvent<XenoParasiteComponent, DragDropDraggedEvent>(OnParasiteDragDropDragged);
+        SubscribeLocalEvent<XenoParasiteComponent, ThrowItemAttemptEvent>(OnParasiteTryThrow);
+        SubscribeLocalEvent<XenoParasiteComponent, PullAttemptEvent>(OnParasiteTryPull);
+        SubscribeLocalEvent<XenoParasiteComponent, GettingPickedUpAttemptEvent>(OnParasiteTryPickup);
 
         SubscribeLocalEvent<ParasiteSpentComponent, MapInitEvent>(OnParasiteSpentMapInit);
         SubscribeLocalEvent<ParasiteSpentComponent, UpdateMobStateEvent>(OnParasiteSpentUpdateMobState,
@@ -86,6 +92,8 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         SubscribeLocalEvent<VictimBurstComponent, ExaminedEvent>(OnVictimBurstExamine);
 
         SubscribeLocalEvent<BursterComponent, MoveInputEvent>(OnTryMove);
+        IntializeAI();
+
     }
 
     private void OnInfectableActivate(Entity<InfectableComponent> ent, ref ActivateInWorldEvent args)
@@ -178,6 +186,31 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
         StartInfect(ent, args.Target, args.User);
         args.Handled = true;
+    }
+
+    private void OnParasiteTryThrow(Entity<XenoParasiteComponent> ent, ref ThrowItemAttemptEvent args)
+    {
+        //Only checked on the action so parasite thrower should still work
+        _popup.PopupEntity(Loc.GetString("rmc-xeno-parasite-nothrow", ("parasite", ent)), args.User, args.User, PopupType.SmallCaution);
+        args.Cancelled = true;
+    }
+
+    private void OnParasiteTryPull(Entity<XenoParasiteComponent> ent, ref PullAttemptEvent args)
+    {
+        if (HasComp<ParasiteAIComponent>(ent) && !HasComp<InfectableComponent>(args.PullerUid))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-parasite-nonplayer-pull", ("parasite", ent)), ent, args.PullerUid, PopupType.SmallCaution);
+            args.Cancelled = true;
+        }
+    }
+
+    private void OnParasiteTryPickup(Entity<XenoParasiteComponent> ent, ref GettingPickedUpAttemptEvent args)
+    {
+        if (!HasComp<ParasiteAIComponent>(ent))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-parasite-player-pickup", ("parasite", ent)), ent, args.User, PopupType.SmallCaution);
+            args.Cancel();
+        }
     }
 
     protected virtual void ParasiteLeapHit(Entity<XenoParasiteComponent> parasite)
@@ -394,7 +427,15 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+
         var time = _timing.CurTime;
+        var aiQuery = EntityQueryEnumerator<ParasiteAIComponent>();
+        while(aiQuery.MoveNext(out var uid, out var ai))
+        {
+            if (!_mobState.IsDead(uid))
+                CheckTimers((uid, ai), time);
+        }
+
         var query = EntityQueryEnumerator<VictimInfectedComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var infected, out var xform))
         {

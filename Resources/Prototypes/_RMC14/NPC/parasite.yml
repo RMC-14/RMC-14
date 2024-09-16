@@ -1,5 +1,5 @@
 ﻿- type: htnCompound
-  id: RMCParasiteCompound
+  id: RMCParasiteActiveCompound
   branches:
   - tasks:
     - !type:HTNCompoundTask
@@ -7,9 +7,13 @@
   - tasks:
     - !type:HTNCompoundTask
       task: RMCParasiteInfect
+
+- type: htnCompound
+  id: RMCParasiteDyingCompound
+  branches:
   - tasks:
     - !type:HTNCompoundTask
-      task: RMCParasiteIdle
+      task: RMCParasiteEgg # TODO RMC14 Resin Hole and Eggmorpher function
 
 - type: htnCompound
   id: RMCParasiteLeap
@@ -34,19 +38,8 @@
 
     - !type:HTNPrimitiveTask
       operator: !type:SetFloatOperator
-        targetKey: MinimumIdleTime
-        amount: 5
-
-    - !type:HTNPrimitiveTask
-      operator: !type:SetFloatOperator
-        targetKey: MaximumIdleTime
-        amount: 15
-
-    - !type:HTNPrimitiveTask
-      operator: !type:RandomOperator
         targetKey: IdleTime
-        minKey: MinimumIdleTime
-        maxKey: MaximumIdleTime
+        amount: 5
 
     - !type:HTNPrimitiveTask
       preconditions:
@@ -86,19 +79,8 @@
 
     - !type:HTNPrimitiveTask
       operator: !type:SetFloatOperator
-        targetKey: MinimumIdleTime
-        amount: 5
-
-    - !type:HTNPrimitiveTask
-      operator: !type:SetFloatOperator
-        targetKey: MaximumIdleTime
-        amount: 15
-
-    - !type:HTNPrimitiveTask
-      operator: !type:RandomOperator
         targetKey: IdleTime
-        minKey: MinimumIdleTime
-        maxKey: MaximumIdleTime
+        amount: 5
 
     - !type:HTNPrimitiveTask
       preconditions:
@@ -113,33 +95,9 @@
         key: TargetDown
 
 - type: htnCompound
-  id: RMCParasiteIdle
+  id: RMCParasiteEgg
   branches:
   - tasks:
-
-     - !type:HTNPrimitiveTask
-       operator: !type:SetFloatOperator
-         targetKey: MinimumIdleTime
-         amount: 15
-
-     - !type:HTNPrimitiveTask
-       operator: !type:SetFloatOperator
-         targetKey: MaximumIdleTime
-         amount: 25
-
-     - !type:HTNPrimitiveTask
-       operator: !type:RandomOperator
-         targetKey: IdleTime
-         minKey: MinimumIdleTime
-         maxKey: MaximumIdleTime
-
-     - !type:HTNPrimitiveTask
-       preconditions:
-       - !type:KeyExistsPrecondition
-         key: IdleTime
-       operator: !type:WaitOperator
-         key: IdleTime
-
      - !type:HTNPrimitiveTask
        operator: !type:UtilityOperator
          proto: RMCNearbyEggs

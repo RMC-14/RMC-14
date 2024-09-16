@@ -7,3 +7,11 @@ rmc-xeno-failed-parasite-dead = We can't infect with a dead child!
 
 rmc-xeno-parasite-dead = {CAPITALIZE(SUBJECT($parasite))} {CONJUGATE-BE($parasite)} not moving.
 rmc-xeno-parasite-announce-infect = We sense that {$xeno} has infected a host!
+
+rmc-xeno-parasite-nothrow = We can't throw {$parasite} safely!
+rmc-xeno-parasite-player-pickup = {CAPITALIZE($parasite)} can handle herself!
+rmc-xeno-parasite-nonplayer-pull = Pulling {$parasite} might hurt her!
+
+rmc-xeno-parasite-ai-active = {CAPITALIZE(SUBJECT($parasite))} seems to be active.
+rmc-xeno-parasite-ai-idle = {CAPITALIZE(SUBJECT($parasite))} is resting.
+rmc-xeno-parasite-ai-dying = [color=red]{CAPITALIZE(SUBJECT($parasite))} needs to return to safety![/color]
