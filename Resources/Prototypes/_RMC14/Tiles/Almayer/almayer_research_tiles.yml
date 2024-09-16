@@ -1,0 +1,40 @@
+﻿- type: tile
+  abstract: true
+  parent: CMFloorSteel
+  id: RMCFloorResearchContainment
+  name: tiles-rmc-research
+
+- type: tile
+  parent: RMCFloorResearchContainment
+  id: RMCFloorResearchContainmentEast
+  sprite: /Textures/_RMC14/Tiles/almayer/containment_corner_2.png
+
+- type: tile
+  parent: RMCFloorResearchContainment
+  id: RMCFloorResearchContainmentNorth
+  sprite: /Textures/_RMC14/Tiles/almayer/containment_corner_1.png
+
+- type: tile
+  parent: RMCFloorResearchContainment
+  id: RMCFloorResearchContainmentCornerVar1ContainmentCornerVariant2
+  sprite: /Textures/_RMC14/Tiles/almayer/containment_corner_variant_2_0.png
+
+- type: tile
+  parent: RMCFloorResearchContainment
+  id: RMCFloorResearchContainmentCornerVar1East
+  sprite: /Textures/_RMC14/Tiles/almayer/containment_corner_variant_1_0.png
+
+- type: tile
+  parent: RMCFloorResearchContainment
+  id: RMCFloorResearchContainmentEntranceWest
+  sprite: /Textures/_RMC14/Tiles/almayer/containment_entrance_3.png
+
+- type: tile
+  parent: RMCFloorResearchContainment
+  id: RMCFloorResearchContainmentFloor2North
+  sprite: /Textures/_RMC14/Tiles/almayer/containment_floor_2_1.png
+
+- type: tile
+  parent: RMCFloorResearchContainment
+  id: RMCFloorResearchContainmentFloor2West
+  sprite: /Textures/_RMC14/Tiles/almayer/containment_floor_2_3.png

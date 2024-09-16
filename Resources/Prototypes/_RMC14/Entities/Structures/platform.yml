@@ -184,6 +184,24 @@
     state: kutjevo_platform_sm
 
 - type: entity
+  parent: CMPlatformCorner
+  id: RMCPlatformKutjevoSMCorner
+  name: raised metal edge
+  description: A raised level of metal, often used to elevate areas above others, or construct bridges. You could probably climb it.
+  components:
+  - type: Sprite
+    state: kutjevo_platform_sm_corner
+
+- type: entity
+  parent: RMCPlatformRound
+  id: RMCPlatformKutjevoSMRound
+  name: raised metal edge
+  description: A raised level of metal, often used to elevate areas above others, or construct bridges. You could probably climb it.
+  components:
+  - type: Sprite
+    state: kutjevo_platform_sm_round
+
+- type: entity
   parent: CMPlatform
   id: RMCPlatformKutjevoStairRight
   name: raised metal edge

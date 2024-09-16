@@ -10,6 +10,12 @@
   - type: RMCNightVisionVisible
   - type: InfectStopOnDeath
   - type: CrashLandable
+  - type: PressureImmunity
+  - type: Respirator 
+    minSaturation: 5.0
+  - type: Temperature
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
 
 - type: entity
   parent: [MobMonkey, RMCSmallHost]
@@ -18,7 +24,6 @@
   components:
   - type: GhostRole
     prob: 0
-
 
 - type: entity
   parent: [MobKobold, RMCSmallHost]
@@ -36,6 +41,12 @@
   - type: GhostRole
     prob: 0
   - type: CrashLandable
+  - type: PressureImmunity
+  - type: Respirator 
+    minSaturation: 5.0
+  - type: Temperature
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
 
 - type: entity
   parent: MobMouse1
@@ -44,6 +55,12 @@
   components:
   - type: GhostRole
     prob: 0
+  - type: PressureImmunity
+  - type: Respirator 
+    minSaturation: 5.0
+  - type: Temperature
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
 
 - type: entity
   parent: MobMouse2
@@ -52,6 +69,12 @@
   components:
   - type: GhostRole
     prob: 0
+  - type: PressureImmunity
+  - type: Respirator 
+    minSaturation: 5.0
+  - type: Temperature
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
 
 - type: entity
   parent: MobCorgiPuppy
@@ -63,7 +86,13 @@
     follow: true
     location: Mister Wiggles
   - type: CrashLandable
-
+  - type: PressureImmunity
+  - type: Respirator 
+    minSaturation: 5.0
+  - type: Temperature
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
+    
 - type: entity
   parent: MobCatCalico
   id: CMMobJones
@@ -74,6 +103,12 @@
     follow: true
     location: Jones
   - type: CrashLandable
+  - type: PressureImmunity
+  - type: Respirator 
+    minSaturation: 5.0
+  - type: Temperature
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
 
 # Spawners
 

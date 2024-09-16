@@ -1,7 +1,8 @@
+using Content.Shared.Humanoid;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Audio;
 
 namespace Content.Shared._RMC14.Armor.ThermalCloak;
 
@@ -36,6 +37,12 @@ public sealed partial class ThermalCloakComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool BlockFriendlyFire = true;
+
+    /// <summary>
+    /// Layers to hide while cloaked
+    /// </summary>
+    [DataField]
+    public HashSet<HumanoidVisualLayers> CloakedHideLayers = new();
 
     /// <summary>
     /// Amount of time after uncloaking weapons remain locked

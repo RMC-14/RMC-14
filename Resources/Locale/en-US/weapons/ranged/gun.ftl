@@ -6,6 +6,7 @@ gun-selected-mode = Selected {$mode}
 gun-disabled = You can't use guns!
 gun-clumsy = The gun blows up in your face!
 gun-set-fire-mode = Set to {$mode}
+gun-magazine-whitelist-fail = That won't fit into the gun!
 
 # SelectiveFire
 gun-SemiAuto = semi-auto
@@ -23,6 +24,7 @@ gun-ballistic-transfer-invalid = {CAPITALIZE(THE($ammoEntity))} won't fit inside
 gun-ballistic-transfer-empty = {CAPITALIZE(THE($entity))} is already empty!
 gun-ballistic-transfer-target-full = {CAPITALIZE(THE($entity))} is already fully loaded!
 gun-ballistic-transfer-cancelled = Your reload was interrupted!
+gun-ballistic-transfer-primed = You can't load a primed {$ammoEntity}!
 
 # CartridgeAmmo
 gun-cartridge-spent = It is [color=red]spent[/color].

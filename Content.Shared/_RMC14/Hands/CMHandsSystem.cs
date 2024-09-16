@@ -3,11 +3,13 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Item;
 using Content.Shared.Mobs;
 using Content.Shared.Whitelist;
+using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Hands;
 
 public sealed class CMHandsSystem : EntitySystem
 {
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
@@ -73,6 +75,19 @@ public sealed class CMHandsSystem : EntitySystem
         if (user.Comp != null && !_whitelist.IsValid(user.Comp.Whitelist, item.Owner))
             return false;
 
+        return true;
+    }
+
+    public bool TryGetHolder(EntityUid item, out EntityUid user)
+    {
+        user = default;
+        if (!_container.TryGetContainingContainer((item, null), out var container))
+            return false;
+
+        if (!_hands.IsHolding(container.Owner, item))
+            return false;
+
+        user = container.Owner;
         return true;
     }
 }

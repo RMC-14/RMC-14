@@ -81,10 +81,10 @@
       entries:
       - id: RMCBinoculars
         points: 5
-    #- id: CMRangeFinder
-    #  points: 10
-    #- id: CMLaserDesignator
-    #  points: 15
+      - id: RMCRangefinder
+        points: 10
+      - id: RMCLaserDesignator
+        points: 15
     - name: Helmet Optics
       entries: [ ]
     #- id: CMMedicalHelmetOptic
@@ -92,11 +92,11 @@
     #- id: CMWeldingVisor
     #  points: 5
     - name: Pamphlets
-      entries: [ ]
-    #- id: CMPamphletJTAC
-    #  points: 15
-    #- id: CMPamphletEngineering
-    #  points: 15
+      entries:
+      - id: CMPamphletJTAC
+        points: 15
+      - id: CMPamphletEngineer
+        points: 15
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
@@ -165,7 +165,7 @@
       - id: CMWebbingBlack
     #- id: CMShoulderHolster
       - id: CMWebbing
-    #- id: CMDropPouch
+      - id: CMWebbingPouch
     - name: Mask
       choices: { CMMask: 1 }
       entries:

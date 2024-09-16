@@ -1,4 +1,5 @@
-﻿using Content.Shared.Popups;
+﻿using Content.Shared.FixedPoint;
+using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Whitelist;
 using Robust.Shared.Network;
@@ -18,6 +19,9 @@ public sealed class RMCProjectileSystem : EntitySystem
         SubscribeLocalEvent<DeleteOnCollideComponent, StartCollideEvent>(OnDeleteOnCollideStartCollide);
         SubscribeLocalEvent<ModifyTargetOnHitComponent, ProjectileHitEvent>(OnModifyTargetOnHit);
         SubscribeLocalEvent<ProjectileMaxRangeComponent, MapInitEvent>(OnProjectileMaxRangeMapInit);
+
+        SubscribeLocalEvent<RMCProjectileDamageFalloffComponent, MapInitEvent>(OnFalloffProjectileMapInit);
+        SubscribeLocalEvent<RMCProjectileDamageFalloffComponent, ProjectileHitEvent>(OnFalloffProjectileHit);
 
         SubscribeLocalEvent<SpawnOnTerminateComponent, MapInitEvent>(OnSpawnOnTerminatingMapInit);
         SubscribeLocalEvent<SpawnOnTerminateComponent, EntityTerminatingEvent>(OnSpawnOnTerminatingTerminate);
@@ -44,6 +48,46 @@ public sealed class RMCProjectileSystem : EntitySystem
         Dirty(ent);
     }
 
+    private void OnFalloffProjectileMapInit(Entity<RMCProjectileDamageFalloffComponent> projectile, ref MapInitEvent args)
+    {
+        projectile.Comp.ShotFrom = _transform.GetMoverCoordinates(projectile.Owner);
+        Dirty(projectile);
+    }
+
+    private void OnFalloffProjectileHit(Entity<RMCProjectileDamageFalloffComponent> projectile, ref ProjectileHitEvent args)
+    {
+        if (projectile.Comp.ShotFrom == null || projectile.Comp.MinRemainingDamageMult < 0)
+            return;
+
+        var distance = (_transform.GetMoverCoordinates(args.Target).Position - projectile.Comp.ShotFrom.Value.Position).Length();
+        var minDamage = args.Damage.GetTotal() * projectile.Comp.MinRemainingDamageMult;
+
+        foreach (var threshold in projectile.Comp.Thresholds)
+        {
+            var pastEffectiveRange = distance - threshold.Range;
+
+            if (pastEffectiveRange <= 0)
+                continue;
+
+            var totalDamage = args.Damage.GetTotal();
+
+            if (totalDamage <= minDamage)
+                break;
+
+            var extraMult = threshold.IgnoreModifiers ? 1 : projectile.Comp.WeaponMult;
+            var minMult = FixedPoint2.Min(minDamage / totalDamage, 1);
+
+            args.Damage *= FixedPoint2.Clamp((totalDamage - pastEffectiveRange * threshold.Falloff * extraMult) / totalDamage, minMult, 1);
+
+        }
+    }
+
+    public void SetProjectileFalloffWeaponMult(Entity<RMCProjectileDamageFalloffComponent> projectile, FixedPoint2 mult)
+    {
+        projectile.Comp.WeaponMult = mult;
+        Dirty(projectile);
+    }
+
     private void OnSpawnOnTerminatingMapInit(Entity<SpawnOnTerminateComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.Origin = _transform.GetMoverCoordinates(ent);
@@ -62,7 +106,8 @@ public sealed class RMCProjectileSystem : EntitySystem
             return;
 
         var coordinates = transform.Coordinates;
-        if (ent.Comp.Origin is { } origin &&
+        if (ent.Comp.ProjectileAdjust &&
+            ent.Comp.Origin is { } origin &&
             coordinates.TryDelta(EntityManager, _transform, origin, out var delta) &&
             delta.Length() > 0)
         {

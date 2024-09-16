@@ -16,6 +16,7 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Administration;
 using Content.Shared.Eui;
 using Content.Shared.Mobs.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.Reflection;
 using Robust.Shared.Utility;
 
@@ -90,8 +91,8 @@ public sealed class RMCAdminEui : BaseEui
 
         var mobState = entities.System<MobStateSystem>();
         var xenos = new List<Xeno>();
-        var xenoQuery = entities.EntityQueryEnumerator<XenoComponent, MetaDataComponent>();
-        while (xenoQuery.MoveNext(out var uid, out _, out var metaData))
+        var xenoQuery = entities.EntityQueryEnumerator<ActorComponent, XenoComponent, MetaDataComponent>();
+        while (xenoQuery.MoveNext(out var uid, out _, out _, out var metaData))
         {
             if (metaData.EntityPrototype is not { } proto)
                 continue;
@@ -103,8 +104,8 @@ public sealed class RMCAdminEui : BaseEui
         }
 
         var marines = 0;
-        var marinesQuery = entities.EntityQueryEnumerator<MarineComponent>();
-        while (marinesQuery.MoveNext(out var uid, out _))
+        var marinesQuery = entities.EntityQueryEnumerator<ActorComponent, MarineComponent>();
+        while (marinesQuery.MoveNext(out var uid, out _, out _))
         {
             if (mobState.IsDead(uid))
                 continue;

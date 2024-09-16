@@ -10,8 +10,6 @@
     layers:
     - state: buckshot_shell_1
   - type: CartridgeAmmo
-    count: 6
-    spread: 15
     proto: CMPelletShotgunBuckshot
     deleteOnSpawn: true
     soundEject:
@@ -32,8 +30,11 @@
     - state: buckshot_shell_1
   - type: CartridgeAmmo
     proto: CMPelletShotgunBuckshot
-    count: 4
-    spread: 20
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMShellShotgun
+    - RMCShellShotgunBuckshot
 
 - type: entity
   parent: CMShellShotgunBase
@@ -45,8 +46,6 @@
     layers:
     - state: slug_shell_1
   - type: CartridgeAmmo
-    count: 1
-    spread: 5
     proto: CMPelletShotgunSlug
 
 - type: entity
@@ -59,8 +58,6 @@
     layers:
     - state: incendiary_slug_1
   - type: CartridgeAmmo
-    count: 1
-    spread: 5
     proto: CMPelletShotgunIncendiary
 
 - type: entity
@@ -73,8 +70,6 @@
     layers:
     - state: beanbag_slug_1
   - type: CartridgeAmmo
-    count: 1
-    spread: 5
     proto: CMPelletShotgunBeanbag
 
 - type: entity
@@ -88,7 +83,6 @@
     - state: flechette_shell_1
   - type: CartridgeAmmo
     proto: CMPelletShotgunFlechette
-    count: 3
 
 - type: entity
   parent: CMShellShotgunBuckshot
@@ -104,3 +98,6 @@
 
 - type: Tag
   id: CMShellShotgun
+
+- type: Tag
+  id: RMCShellShotgunBuckshot

@@ -1,5 +1,5 @@
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitPizza
   name: pizza delivery uniform
   description: An ill-fitting, slightly stained uniform for a pizza delivery pilot. Smells of cheese.
@@ -10,7 +10,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/pizza.rsi
 
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitMarshal
   name: marshal uniform
   description: A pair of off-white slacks and a blue button-down shirt with a dark brown tie; the standard uniform of the Marshals.
@@ -22,7 +22,7 @@
 
 # Correspondent
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCMarineUniformBase
   id: RMCJumpsuitCorrespondent
   name: correspodent uniform
   description: Standard-issue correspodents's uniform.
