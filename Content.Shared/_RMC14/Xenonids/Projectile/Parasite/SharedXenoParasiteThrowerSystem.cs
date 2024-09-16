@@ -11,6 +11,7 @@ using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Shared.Containers;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
@@ -36,6 +37,7 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     [Serializable, NetSerializable]
     public enum XenoReserveParasiteChangeUIKey : byte
@@ -118,7 +120,14 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
 
     private void OnSetReserve(Entity<XenoParasiteThrowerComponent> xeno, ref XenoReserveParasiteActionEvent args)
     {
-        _ui.OpenUi(args.Action, XenoReserveParasiteChangeUIKey.Key, xeno.Owner);
+        if (args.Handled)
+        {
+            return;
+        }
+
+        _ui.OpenUi(args.Action, XenoReserveParasiteChangeUIKey.Key, xeno.Owner, _net.IsClient);
+
+        args.Handled = true;
     }
 
     private void OnXenoParasiteThrowerUseInHand(Entity<XenoParasiteThrowerComponent> xeno, ref UserActivateInWorldEvent args)
