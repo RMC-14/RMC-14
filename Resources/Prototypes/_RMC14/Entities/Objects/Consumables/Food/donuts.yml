@@ -47,7 +47,7 @@
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:NestedSelector
-        tableId: DonutBoxTable
+        tableId: RMCDonutTable
         rolls: !type:ConstantNumberSelector
           value: 6
   - type: Appearance
@@ -59,11 +59,11 @@
       - Donut
 
 - type: entityTable
-  id: DonutBoxTable
+  id: RMCDonutTable
   table: !type:GroupSelector
     children:
     - !type:GroupSelector
-      weight: 1
+      weight: 0.6
       children:
       - id: RMCFoodDonut
     - !type:GroupSelector
