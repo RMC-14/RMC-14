@@ -104,7 +104,7 @@
   - type: Occluder
     enabled: false
   - type: Climbable
-    climbdelay: 20
+    ClimbDelay: 20 # Почему не работает? туду
 
 
   - type: IconSmooth
