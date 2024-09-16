@@ -10,7 +10,7 @@ namespace Content.Client._RMC14.Xenonids.Fruit;
 
 
 [UsedImplicitly]
-public sealed class XenoChooseFruitBui : BoundUserInterface
+public sealed class XenoFruitChooseBui : BoundUserInterface
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
@@ -20,9 +20,9 @@ public sealed class XenoChooseFruitBui : BoundUserInterface
     private readonly Dictionary<EntProtoId, XenoChoiceControl> _buttons = new();
 
     [ViewVariables]
-    private XenoChooseFruitWindow? _window;
+    private XenoFruitChooseWindow? _window;
 
-    public XenoChooseFruitBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    public XenoFruitChooseBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _sprite = EntMan.System<SpriteSystem>();
         _xenoFruit = EntMan.System<SharedXenoFruitSystem>();
@@ -30,7 +30,7 @@ public sealed class XenoChooseFruitBui : BoundUserInterface
 
     protected override void Open()
     {
-        _window = new XenoChooseFruitWindow();
+        _window = new XenoFruitChooseWindow();
         _window.OnClose += Close;
 
         _buttons.Clear();
@@ -48,7 +48,7 @@ public sealed class XenoChooseFruitBui : BoundUserInterface
                 var name = fruit.Name;
 
                 control.Set(name, _sprite.Frame0(fruit));
-                control.Button.OnPressed += _ => SendPredictedMessage(new XenoChooseFruitBuiMsg(fruitId));
+                control.Button.OnPressed += _ => SendPredictedMessage(new XenoFruitChooseBuiMsg(fruitId));
 
                 _window.FruitContainer.AddChild(control);
                 _buttons.Add(fruitId, control);

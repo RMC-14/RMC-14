@@ -6,9 +6,9 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._RMC14.Xenonids.Fruit;
 
 [GenerateTypedNameReferences]
-public sealed partial class XenoChooseFruitWindow : DefaultWindow
+public sealed partial class XenoFruitChooseWindow : DefaultWindow
 {
-    public XenoChooseFruitWindow()
+    public XenoFruitChooseWindow()
     {
         RobustXamlLoader.Load(this);
     }

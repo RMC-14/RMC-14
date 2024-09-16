@@ -6,7 +6,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Xenonids.Fruit.Events;
 
 [Serializable, NetSerializable]
-public sealed partial class XenoHarvestFruitDoAfterEvent : DoAfterEvent
+public sealed partial class XenoFruitHarvestDoAfterEvent : DoAfterEvent
 
 {
     public override DoAfterEvent Clone()

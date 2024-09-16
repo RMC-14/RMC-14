@@ -4,16 +4,16 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Xenonids.Fruit;
 
-public sealed class XenoChooseFruitSystem : EntitySystem
+public sealed class XenoFruitChooseSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<XenoFruitPlanterComponent, AfterAutoHandleStateEvent>(OnXenoConstructionAfterState);
+        SubscribeLocalEvent<XenoFruitPlanterComponent, AfterAutoHandleStateEvent>(OnXenoFruitAfterState);
     }
 
-    private void OnXenoConstructionAfterState(Entity<XenoFruitPlanterComponent> ent, ref AfterAutoHandleStateEvent args)
+    private void OnXenoFruitAfterState(Entity<XenoFruitPlanterComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         if (!_timing.IsFirstTimePredicted)
             return;
@@ -23,7 +23,7 @@ public sealed class XenoChooseFruitSystem : EntitySystem
 
         foreach (var bui in ui.ClientOpenInterfaces.Values)
         {
-            if (bui is XenoChooseFruitBui chooseUi)
+            if (bui is XenoFruitChooseBui chooseUi)
                 chooseUi.Refresh();
         }
     }
