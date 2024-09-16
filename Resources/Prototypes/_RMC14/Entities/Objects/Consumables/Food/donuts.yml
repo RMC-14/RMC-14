@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: FoodBoxDonut
+  parent: [ BoxCardboard, BaseBagOpenClose ]
   id: RMCBoxDonut
   name: Yum! donuts
   description: A box of mouth-watering "Yum!" brand donuts
@@ -44,44 +44,32 @@
     size: Normal
     sprite: _RMC14/Objects/Storage/donutbox.rsi
   - type: FixedItemSizeStorage
-  - type: StorageFill
-    contents:
-    - id: RMCFoodDonutFrosted
-      probability: 0.4
-      orGroup: Donut1
-    - id: RMCFoodDonut
-      orGroup: Donut1
-    - id: RMCFoodDonutFrosted
-      probability: 0.4
-      orGroup: Donut2
-    - id: RMCFoodDonut
-      orGroup: Donut2
-    - id: RMCFoodDonutFrosted
-      probability: 0.4
-      orGroup: Donut3
-    - id: RMCFoodDonut
-      orGroup: Donut3
-    - id: RMCFoodDonutFrosted
-      probability: 0.4
-      orGroup: Donut4
-    - id: RMCFoodDonut
-      orGroup: Donut4
-    - id: RMCFoodDonutFrosted
-      probability: 0.4
-      orGroup: Donut5
-    - id: RMCFoodDonut
-      orGroup: Donut5
-    - id: RMCFoodDonutFrosted
-      probability: 0.4
-      orGroup: Donut6
-    - id: RMCFoodDonut
-      orGroup: Donut6
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:NestedSelector
+        tableId: DonutBoxTable
+        rolls: !type:ConstantNumberSelector
+          value: 6
+  - type: Appearance
   - type: Storage
     grid:
     - 0,0,11,1 #6 slots
     whitelist:
       tags:
       - Donut
+
+- type: entityTable
+  id: DonutBoxTable
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector
+      weight: 1
+      children:
+      - id: RMCFoodDonut
+    - !type:GroupSelector
+      weight: 0.4
+      children:
+      - id: RMCFoodDonutFrosted
 
 - type: entity
   parent: FoodInjectableBase
