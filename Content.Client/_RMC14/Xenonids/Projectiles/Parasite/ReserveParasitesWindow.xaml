@@ -1,5 +1,5 @@
 <DefaultWindow
-    SetSize="250 300"
+    SetSize="250 120"
     Margin="4 0"
     xmlns="https://spacestation14.io">
     <BoxContainer Orientation="Vertical">

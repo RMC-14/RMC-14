@@ -29,6 +29,7 @@ public sealed partial class ReserveParasitesBoundUserInterface : BoundUserInterf
     {
         base.Dispose(disposing);
         if (!disposing) return;
+        _window?.Dispose();
     }
 
     public void ChangeReserve(int newReserve)
