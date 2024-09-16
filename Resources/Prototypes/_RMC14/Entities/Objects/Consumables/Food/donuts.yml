@@ -63,11 +63,11 @@
   table: !type:GroupSelector
     children:
     - !type:GroupSelector
-      weight: 0.6
+      weight: 60
       children:
       - id: RMCFoodDonut
     - !type:GroupSelector
-      weight: 0.4
+      weight: 40
       children:
       - id: RMCFoodDonutFrosted
 
