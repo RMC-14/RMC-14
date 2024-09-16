@@ -1,13 +1,18 @@
 ﻿- type: entity
   id: MCWWLadder
-  parent: MSBaseWall
   name: Лесница
   description: Деревянная приставная лестница по которой можно залесть
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
   components:
   - type: Sprite
     sprite: _MCWW/Structures/ladder.rsi
+    state: ladder
   - type: Icon
     sprite: _MCWW/Structures/ladder.rsi
+    state: ladder
   - type: Destructible
     thresholds:
     - trigger:

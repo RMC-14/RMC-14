@@ -1,41 +1,24 @@
 - type: entity
   name: Вилы
-  parent: [BaseItem, BaseMinorContraband]
+  parent: [ RMCBaseMeleeWeapon, BaseKnife]
   id: MSWWpitchforks
-  description: Definition of a Classic. Keeping murder affordable since 200,000 BCE.
+  description: Вилы
   components:
-  - type: EmbeddableProjectile
-    offset: -0.15,0.0
+  - type: Sprite
+    sprite: _MCWW/Entities/Objects/Weapons/Melee/pitchforks.rsi
+    state: icon
   - type: ThrowingAngle
     angle: 225
-  - type: LandAtCursor
-  - type: Tag
-    tags:
-    - pitchforks
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape: !type:PolygonShape
-          vertices:
-            - -0.40,-0.30
-            - -0.30,-0.40
-            - 0.40,0.30
-            - 0.30,0.40
-        density: 20
-        mask:
-        - ItemMask
-        restitution: 0.3
-        friction: 0.2
-  - type: Sharp
-  - type: Sprite
-    sprite: _MCWW/Objects/Weapons/Melee/pitchforks.rsi
-    layers:
-    - state: pitchforks
+  - type: Clothing
+    slots:
+    - back
+    - suitStorage
+    sprite: _MCWW/Entities/Objects/Weapons/Melee/pitchforks.rsi
   - type: MeleeWeapon
     wideAnimationRotation: -135
     damage:
       types:
-        Piercing: 12
+        Slash: 5
     angle: 0
     animation: WeaponArcThrust
     soundHit:
@@ -43,56 +26,22 @@
   - type: DamageOtherOnHit
     damage:
       types:
-        Piercing: 15
+        Slash: 200
+  - type: UsableWhileDevoured
+    damage:
+      types:
+        Slash: 3
   - type: Item
     size: Ginormous
-  - type: Clothing
-    quickEquip: false
-    slots:
-    - back
-    - suitStorage
-  - type: Construction
-    graph: Spear
-    node: spear
-  - type: SolutionInjectOnEmbed
-    transferAmount: 2
-    solution: melee
-  - type: SolutionTransfer
-    maxTransferAmount: 2
+  - type: DisarmMalus
+    malus: 0.225
+  - type: Tag
+    tags:
+    - ThrowingKnife
   - type: Wieldable
   - type: IncreaseDamageOnWield
     damage:
       types:
         Piercing: 4
-  - type: Damageable
-    damageContainer: Inorganic
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 30 #excess damage avoids cost of spawning entities.
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 20
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-          params:
-            volume: -4
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          PartRodMetal1:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: DamageOnLand
-    damage:
-      types:
-        Blunt: 5
-  - type: UseDelay
-  - type: Appearance
+  - type: EmbeddableProjectile
+    offset: -0.15,0.0

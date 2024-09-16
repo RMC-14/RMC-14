@@ -103,6 +103,8 @@
         acts: [ "Destruction" ]
   - type: Occluder
     enabled: false
+  - type: Climbable
+    ClimbDelay: 20 # Почему не работает? туду
 
 
   - type: IconSmooth
