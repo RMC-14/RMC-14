@@ -3,12 +3,12 @@
   "license": null,
   "copyright": null,
   "size": {
-    "x": 4,
-    "y": 13
+    "x": 96,
+    "y": 32
   },
   "states": [
     {
-      "name": "base"
+      "name": "grenade"
     }
   ]
 }
