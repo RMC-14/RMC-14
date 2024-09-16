@@ -1,6 +1,7 @@
 using Content.Server.Ghost.Roles;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Hands.Systems;
+using Content.Server.Popups;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared.Hands.Components;
 using Content.Shared.Mind.Components;
@@ -18,18 +19,27 @@ namespace Content.Server._RMC14.Xenonids.Projectile.Parasite;
 
 public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly GhostRoleSystem _ghostRole = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
-    protected override void GetParasiteFromInventory(EntityUid ent, BaseContainer parasiteContainer, double addGhostRoleProb)
+    protected override void GetParasiteFromInventory(Entity<XenoParasiteThrowerComponent> xeno, out string? msg)
     {
-        base.GetParasiteFromInventory(ent, parasiteContainer, addGhostRoleProb);
+        var (ent, comp) = xeno;
+        var addGhostRoleProb = comp.ParasiteGhostRoleProbability;
 
-        if (parasiteContainer.Count == 0)
+        if (!_container.TryGetContainer(ent, XenoParasiteThrowerComponent.ParasiteContainerId, out var parasiteContainer))
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-throw-parasite-no-parasites"), ent, ent);
+            msg = null;
+            return;
+        }
+        base.GetParasiteFromInventory(xeno, out _);
+
+        var curParasiteCount = parasiteContainer.Count;
+        if (curParasiteCount == 0)
+        {
+            msg = Loc.GetString("cm-xeno-throw-parasite-no-parasites");
             return;
         }
 
@@ -37,6 +47,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
 
         if (parasite is null)
         {
+            msg = null;
             return;
         }
 
@@ -46,6 +57,9 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         }
 
         _hands.TryPickupAnyHand(ent, parasite.Value);
+        --curParasiteCount;
+
+        msg = Loc.GetString("cm-xeno-throw-parasite-unstash-parasite", ("cur_parasites", curParasiteCount), ("max_parasites", comp.MaxParasites));
 
         if (TryComp(ent, out XenoParasiteThrowerComponent? throwerComp))
         {

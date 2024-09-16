@@ -101,6 +101,8 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
 
             if (tileHasParasites)
             {
+                var stashMsg = Loc.GetString("cm-xeno-throw-parasite-stash-parasite", ("cur_parasites", parasiteContainer.Count), ("max_parasites", comp.MaxParasites));
+                _popup.PopupClient(stashMsg, ent, ent);
                 return;
             }
         }
@@ -111,11 +113,12 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
         {
             _hands.TryDrop(ent);
             _throw.TryThrow(heldEntity, target);
-            _stun.TryParalyze(heldEntity, comp.ThrownParasiteStunDuration, true);
+            _stun.TryStun(heldEntity, comp.ThrownParasiteStunDuration, true);
             return;
         }
 
-        GetParasiteFromInventory(ent, parasiteContainer, comp.ParasiteGhostRoleProbability);
+        GetParasiteFromInventory(xeno, out var msg);
+        _popup.PopupEntity(msg, ent, ent);
     }
 
     private void OnSetReserve(Entity<XenoParasiteThrowerComponent> xeno, ref XenoReserveParasiteActionEvent args)
@@ -162,7 +165,8 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
         }
 
         _container.Insert(target, parasiteContainer);
-        _popup.PopupClient(Loc.GetString("cm-xeno-throw-parasite-stash-parasite"), ent, ent);
+        var msg = Loc.GetString("cm-xeno-throw-parasite-stash-parasite", ("cur_parasites", parasiteContainer.Count), ("max_parasites", comp.MaxParasites));
+        _popup.PopupClient(msg, ent, ent);
         args.Handled = true;
     }
 
@@ -206,9 +210,9 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
         return true;
     }
 
-    protected virtual void GetParasiteFromInventory(EntityUid ent, BaseContainer parasiteContainer, double addGhostRoleProb)
+    protected virtual void GetParasiteFromInventory(Entity<XenoParasiteThrowerComponent> xeno, out string? msg)
     {
-
+        msg = null;
     }
 
     protected virtual void SetReservedParasites(BaseContainer parasiteContainer, int reserveCount)

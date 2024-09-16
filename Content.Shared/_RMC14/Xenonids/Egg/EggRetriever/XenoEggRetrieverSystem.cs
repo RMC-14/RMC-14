@@ -78,6 +78,8 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
 
             if (tileHasEggs)
             {
+                var stashMsg = Loc.GetString("cm-xeno-retrieve-egg-stash-egg", ("cur_eggs", eggContainer.Count), ("max_eggs", comp.MaxEggs));
+                _popup.PopupClient(stashMsg, ent, ent);
                 return;
             }
         }
@@ -94,6 +96,8 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
         }
 
         _hands.TryPickupAnyHand(ent, egg.Value);
+        var unstashMsg = Loc.GetString("cm-xeno-retrieve-egg-unstash-egg", ("cur_eggs", eggContainer.Count), ("max_eggs", comp.MaxEggs));
+        _popup.PopupClient(unstashMsg, ent, ent);
     }
 
     private void OnXenoRetrieverUseInHand(Entity<XenoEggRetrieverComponent> eggRetriever, ref XenoEggUseInHandEvent args)
@@ -116,7 +120,8 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
         }
 
         _container.Insert(_entities.GetEntity(args.UsedEgg), eggContainer);
-        _popup.PopupClient(Loc.GetString("cm-xeno-retrieve-egg-stash-egg"), ent, ent);
+        var msg = Loc.GetString("cm-xeno-retrieve-egg-stash-egg", ("cur_eggs", eggContainer.Count), ("max_eggs", comp.MaxEggs));
+        _popup.PopupClient(msg, ent, ent);
         args.Handled = true;
     }
 
