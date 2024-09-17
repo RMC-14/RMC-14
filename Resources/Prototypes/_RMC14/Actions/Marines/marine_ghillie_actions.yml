@@ -8,7 +8,7 @@
     icon:
       sprite: _RMC14/Actions/marine_sniper_actions.rsi
       state: prepare_position
-    useDelay: 5
+    useDelay: 8
     priority: -9
     itemIconStyle: NoItem
     event: !type:ToggleActionEvent
