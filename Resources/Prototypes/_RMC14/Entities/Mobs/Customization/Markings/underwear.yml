@@ -1,69 +1,65 @@
 - type: marking
   id: RMCUnderwearBoxers
-  bodyPart: Chest
+  bodyPart: Underwear
   markingCategory: Underwear
-  coloring:
-    default:
-      type:
-        !type:SimpleColoring
-          color: "#FFFFFF"
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, Slime]
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
     state: c_boxers
 
 - type: marking
-  id: RMCUnderwearLowriders
-  bodyPart: Chest
+  id: RMCUnderwearBoxersBlue
+  bodyPart: Underwear
   markingCategory: Underwear
-  coloring:
-    default:
-      type:
-        !type:SimpleColoring
-          color: "#FFFFFF"
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, Slime]
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: d_boxers
+
+- type: marking
+  id: RMCUnderwearLowriders
+  bodyPart: Underwear
+  markingCategory: Underwear
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
     state: c_lowriders
 
 - type: marking
   id: RMCUnderwearBriefs
-  bodyPart: Chest
+  bodyPart: Underwear
   markingCategory: Underwear
-  coloring:
-    default:
-      type:
-        !type:SimpleColoring
-          color: "#FFFFFF"
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, Slime]
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
     state: c_briefs
 
 - type: marking
   id: RMCUnderwearSatin
-  bodyPart: Chest
+  bodyPart: Underwear
   markingCategory: Underwear
-  coloring:
-    default:
-      type:
-        !type:SimpleColoring
-          color: "#FFFFFF"
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, Slime]
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
     state: c_satin
 
 - type: marking
   id: RMCUnderwearTanga
-  bodyPart: Chest
+  bodyPart: Underwear
   markingCategory: Underwear
-  coloring:
-    default:
-      type:
-        !type:SimpleColoring
-          color: "#FFFFFF"
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, Slime]
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
     state: c_tanga

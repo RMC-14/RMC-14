@@ -221,7 +221,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (!Resolve(uid, ref component, false))
             return new DamageSpecifier();
 
-        var ev = new GetMeleeDamageEvent(uid, new (component.Damage), new(), user);
+        var ev = new GetMeleeDamageEvent(uid, new(component.Damage), new(), user, component.ResistanceBypass);
         RaiseLocalEvent(uid, ref ev);
 
         return DamageSpecifier.ApplyModifierSets(ev.Damage, ev.Modifiers);
@@ -247,6 +247,17 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         RaiseLocalEvent(uid, ref ev);
 
         return ev.DamageModifier * ev.Multipliers;
+    }
+
+    public bool GetResistanceBypass(EntityUid uid, EntityUid user, MeleeWeaponComponent? component = null)
+    {
+        if (!Resolve(uid, ref component))
+            return false;
+
+        var ev = new GetMeleeDamageEvent(uid, new(component.Damage), new(), user, component.ResistanceBypass);
+        RaiseLocalEvent(uid, ref ev);
+
+        return ev.ResistanceBypass;
     }
 
     public bool TryGetWeapon(EntityUid entity, out EntityUid weaponUid, [NotNullWhen(true)] out MeleeWeaponComponent? melee)
@@ -446,6 +457,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         // If I do not come back later to fix Light Attacks being Heavy Attacks you can throw me in the spider pit -Errant
         var damage = GetDamage(meleeUid, user, component) * GetHeavyDamageModifier(meleeUid, user, component);
         var target = GetEntity(ev.Target);
+        var resistanceBypass = GetResistanceBypass(meleeUid, user, component);
 
         // For consistency with wide attacks stuff needs damageable.
         if (Deleted(target) ||
@@ -490,7 +502,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         var weapon = GetEntity(ev.Weapon);
 
-        Interaction.DoContactInteraction(weapon, target);
+        // We skip weapon -> target interaction, as forensics system applies DNA on hit
         Interaction.DoContactInteraction(user, weapon);
 
         // If the user is using a long-range weapon, this probably shouldn't be happening? But I'll interpret melee as a
@@ -502,7 +514,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         RaiseLocalEvent(target.Value, attackedEvent);
 
         var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEvent.BonusDamage, hitEvent.ModifiersList);
-        var damageResult = Damageable.TryChangeDamage(target, modifiedDamage, origin:user, tool: meleeUid);
+        var damageResult = Damageable.TryChangeDamage(target, modifiedDamage, origin:user, ignoreResistances:resistanceBypass, tool: meleeUid);
 
         if (damageResult is {Empty: false})
         {
@@ -621,7 +633,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         // For stuff that cares about it being attacked.
         foreach (var target in targets)
         {
-            Interaction.DoContactInteraction(weapon, target);
+            // We skip weapon -> target interaction, as forensics system applies DNA on hit
 
             // If the user is using a long-range weapon, this probably shouldn't be happening? But I'll interpret melee as a
             // somewhat messy scuffle. See also, light attacks.

@@ -1,4 +1,14 @@
+- files: ["bioscan.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/bioscan.ogg"
+
+- files: ["dropship_emergency.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/dropship_emergency.ogg"
+
 - files: ["hijack.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "cmss13"
-  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/AI/hijack.ogg"
+  source: "https://github.com/cmss13-devs/cmss13/21e6447cc08aea502f671c819fdbcecbb85e6028master/sound/AI/hijack.ogg"

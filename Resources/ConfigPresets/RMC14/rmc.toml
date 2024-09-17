@@ -49,29 +49,20 @@ patreon = "https://www.patreon.com/RMC14"
 #website = ""
 #wiki = ""
 
-[log]
-path = "logs"
-format = "log_%(date)s-%(time)s.txt"
-level = 1
-enabled = false
-
 [net]
 tickrate = 15
 port = 1212
 bindto = "::,0.0.0.0"
-max_connections = 1024
-receivebuffersize = 262142
-sendbuffersize = 524284
 
 [physics]
-maxlinvelocity = 45
 grid_splitting = false
+maxlinvelocity = 45 # TODO RMC14 62 when we don't get tunneling, change in GunComponent too
 target_minimum_tickrate = 90
 
 [replay]
 auto_record = true
-max_compressed_size = 2097152
-max_uncompressed_size = 4194304
+max_compressed_size = 4194304
+max_uncompressed_size = 8388608
 auto_record_temp_dir = "recording"
 auto_record_name = "done/{year}_{month}_{day}-{hour}_{minute}-round_{round}.zip"
 
@@ -89,12 +80,3 @@ enabled = true
 # This is the address and port the status server binds to.
 # The port is by default set based on net.port so it will follow what you set there.
 bind = "*:1212"
-
-[metrics]
-host = "*"
-port = 44880
-enabled = true
-
-[loki]
-address = "http://10.8.0.1:3100"
-enabled = true

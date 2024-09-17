@@ -9,17 +9,21 @@ using Content.Server.NPC.Queries.Queries;
 using Content.Server.Nutrition.Components;
 using Content.Server.Nutrition.EntitySystems;
 using Content.Server.Storage.Components;
+using Content.Shared._RMC14.Interaction;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Hands.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
+using Content.Shared.Standing;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
@@ -53,6 +57,8 @@ public sealed class NPCUtilitySystem : EntitySystem
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly MobThresholdSystem _thresholdSystem = default!;
+    [Dependency] private readonly RMCInteractionSystem _rmcInteraction = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
 
     private EntityQuery<PuddleComponent> _puddleQuery;
     private EntityQuery<TransformComponent> _xformQuery;
@@ -265,7 +271,7 @@ public sealed class NPCUtilitySystem : EntitySystem
             }
             case TargetDistanceCon:
             {
-                var radius = blackboard.GetValueOrDefault<float>(NPCBlackboard.VisionRadius, EntityManager);
+                var radius = blackboard.GetValueOrDefault<float>(blackboard.GetVisionRadiusKey(EntityManager), EntityManager);
 
                 if (!TryComp(targetUid, out TransformComponent? targetXform) ||
                     !TryComp(owner, out TransformComponent? xform))
@@ -310,13 +316,13 @@ public sealed class NPCUtilitySystem : EntitySystem
             }
             case TargetInLOSCon:
             {
-                var radius = blackboard.GetValueOrDefault<float>(NPCBlackboard.VisionRadius, EntityManager);
+                var radius = blackboard.GetValueOrDefault<float>(blackboard.GetVisionRadiusKey(EntityManager), EntityManager);
 
                 return _examine.InRangeUnOccluded(owner, targetUid, radius + 0.5f, null) ? 1f : 0f;
             }
             case TargetInLOSOrCurrentCon:
             {
-                var radius = blackboard.GetValueOrDefault<float>(NPCBlackboard.VisionRadius, EntityManager);
+                var radius = blackboard.GetValueOrDefault<float>(blackboard.GetVisionRadiusKey(EntityManager), EntityManager);
                 const float bufferRange = 0.5f;
 
                 if (blackboard.TryGetValue<EntityUid>("Target", out var currentTarget, EntityManager) &&
@@ -356,6 +362,40 @@ public sealed class NPCUtilitySystem : EntitySystem
             {
                 return !_mobState.IsDead(targetUid) ? 1f : 0f;
             }
+            case TargetXenoCon:
+            {
+                return HasComp<XenoComponent>(targetUid) ? 1f : 0f;
+            }
+            case CanFaceCon:
+            {
+                var ownerCoords = _transform.GetMapCoordinates(owner);
+                var targetCoords = _transform.GetMapCoordinates(targetUid);
+                if (ownerCoords.MapId != targetCoords.MapId)
+                    return 0f;
+
+                var vector = targetCoords.Position - ownerCoords.Position;
+                var angle = Angle.FromWorldVec(vector);
+                if (!_rmcInteraction.CanFaceMaxRotation(owner,angle))
+                    return 0f;
+
+                return 1f;
+            }
+            case TargetInfectableCon:
+            {
+                return HasComp<InfectableComponent>(targetUid) && !HasComp<VictimInfectedComponent>(targetUid) ? 1f : 0f;
+            }
+            case TargetOpenEggCon:
+            {
+                return TryComp<XenoEggComponent>(targetUid, out var egg) && egg.State == XenoEggState.Opened ? 1f : 0f;
+            }
+            case TargetIsDownCon:
+            {
+                return _standing.IsDown(targetUid) ? 1f : 0f;
+            }
+            case TargetIsStandingCon:
+            {
+                return _standing.IsDown(targetUid) ? 0f : 1f;
+            }
             default:
                 throw new NotImplementedException();
         }
@@ -380,7 +420,7 @@ public sealed class NPCUtilitySystem : EntitySystem
     private void Add(NPCBlackboard blackboard, HashSet<EntityUid> entities, UtilityQuery query)
     {
         var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
-        var vision = blackboard.GetValueOrDefault<float>(NPCBlackboard.VisionRadius, EntityManager);
+        var vision = blackboard.GetValueOrDefault<float>(blackboard.GetVisionRadiusKey(EntityManager), EntityManager);
 
         switch (query)
         {
@@ -495,6 +535,26 @@ public sealed class NPCUtilitySystem : EntitySystem
                         _entityList.Add(ent);
                         break;
                     }
+                }
+
+                foreach (var ent in _entityList)
+                {
+                    entities.Remove(ent);
+                }
+
+                break;
+            }
+            case RemoveAnchoredFilter:
+            {
+                _entityList.Clear();
+
+                foreach (var ent in entities)
+                {
+                    if (!TryComp(ent, out TransformComponent? xform))
+                        continue;
+
+                    if (xform.Anchored)
+                        _entityList.Add(ent);
                 }
 
                 foreach (var ent in _entityList)

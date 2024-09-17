@@ -24,6 +24,10 @@ public sealed class AttachablePreventDropSystem : EntitySystem
             case AttachableAlteredType.Deactivated:
                 RemCompDeferred<UnremoveableComponent>(args.Holder);
                 break;
+
+            case AttachableAlteredType.DetachedDeactivated:
+                RemCompDeferred<UnremoveableComponent>(args.Holder);
+                break;
         }
     }
 }

@@ -17,12 +17,16 @@
 - type: speciesBaseSprites
   id: MobHumanSprites
   sprites:
+    Special: MobHumanoidAnyMarking
     Head: MobHumanHead
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
     Chest: MobHumanTorso
+    Underwear: MobHumanoidAnyMarking
+    Undershirt: MobHumanoidAnyMarking
     Eyes: MobHumanoidEyes
+    HeadTop: MobHumanoidAnyMarking
     LArm: MobHumanLArm
     RArm: MobHumanRArm
     LHand: MobHumanLHand
@@ -35,6 +39,9 @@
 - type: markingPoints
   id: MobHumanMarkingLimits
   points:
+    Special: # the cat ear joke
+      points: 0
+      required: false
     Hair:
       points: 1
       required: false
@@ -47,8 +54,8 @@
     Tail: # the cat tail joke
       points: 0
       required: false
-    HeadTop: # the cat ear joke
-      points: 0
+    HeadTop:
+      points: 1
       required: false
     Chest:
       points: 1
@@ -56,7 +63,7 @@
     Underwear:
       points: 1
       required: true
-      defaultMarkings: [ RMCUnderwearBoxers ]
+      defaultMarkings: [ RMCUnderwearBoxersBlue ]
     Undershirt:
       points: 1
       required: true

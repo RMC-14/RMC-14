@@ -7,6 +7,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
+using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
@@ -287,7 +288,7 @@ public sealed class XenoNestSystem : EntitySystem
 
     private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)
     {
-        if (!HasComp<XenoComponent>(user) ||
+        if (!HasComp<XenoComponent>(user) || !HasComp<HandsComponent>(user) ||
             !CanNestPopup(user, victim, surface, out _))
         {
             return;
@@ -403,7 +404,7 @@ public sealed class XenoNestSystem : EntitySystem
         foreach (var dir in directions)
         {
             if (nestCoords.Offset(dir.ToVec()).GetTileRef(EntityManager, _map) is not { } tile ||
-                   _turf.IsTileBlocked(tile, CollisionGroup.Impassable))
+                _turf.IsTileBlocked(tile, CollisionGroup.Impassable))
             {
                 response ??= Loc.GetString("cm-xeno-nest-failed-cant-there");
                 continue;

@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Mobs;
 using Content.Shared.Damage;
 using Content.Shared.Ghost;
 using Content.Shared.Mobs;
@@ -83,10 +84,19 @@ public sealed class XenoHudOverlay : Overlay
         var isAdminGhost = _entity.TryGetComponent(_players.LocalEntity, out GhostComponent? ghost) &&
                            ghost.CanGhostInteract;
         var isXeno = _entity.HasComponent<XenoComponent>(_players.LocalEntity);
+        var isGhost = false;
 
-        if (!isXeno && !isAdminGhost)
-            return;
-
+        if (!_entity.HasComponent<CMGhostXenoHudComponent>(_players.LocalEntity))
+        {
+            if (!isXeno && !isAdminGhost)
+                return;
+        }
+        else
+        {
+            if (_entity.HasComponent<CMGhostXenoHudComponent>(_players.LocalEntity))
+                isGhost = true;
+            isXeno = true;
+        }
         var handle = args.WorldHandle;
         var eyeRot = args.Viewport.Eye?.Rotation ?? default;
 
@@ -98,7 +108,8 @@ public sealed class XenoHudOverlay : Overlay
         if (isXeno)
         {
             DrawBars(in args, scaleMatrix, rotationMatrix);
-            DrawDeadIcon(in args, scaleMatrix, rotationMatrix);
+            if (!isGhost)
+                DrawDeadIcon(in args, scaleMatrix, rotationMatrix);
         }
 
         if (isXeno || isAdminGhost)

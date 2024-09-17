@@ -1,0 +1,65 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelPrisonDarkBrown3Base
+  name: tiles-cm-default-brown
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkBrown3Base
+  id: CMFloorSteelPrisonDarkBrown3South
+  sprite: /Textures/_RMC14/Tiles/prison/darkbrown3_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkBrown3Base
+  id: CMFloorSteelPrisonDarkBrown3North
+  sprite: /Textures/_RMC14/Tiles/prison/darkbrown3_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkBrown3Base
+  id: CMFloorSteelPrisonDarkBrown3East
+  sprite: /Textures/_RMC14/Tiles/prison/darkbrown3_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkBrown3Base
+  id: CMFloorSteelPrisonDarkBrown3West
+  sprite: /Textures/_RMC14/Tiles/prison/darkbrown3_3.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkBrown3Base
+  id: CMFloorSteelPrisonDarkBrown3SouthEast
+  sprite: /Textures/_RMC14/Tiles/prison/darkbrown3_4.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkBrown3Base
+  id: CMFloorSteelPrisonDarkBrown3SouthWest
+  sprite: /Textures/_RMC14/Tiles/prison/darkbrown3_5.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkBrown3Base
+  id: CMFloorSteelPrisonDarkBrown3NorthEast
+  sprite: /Textures/_RMC14/Tiles/prison/darkbrown3_6.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkBrown3Base
+  id: CMFloorSteelPrisonDarkBrown3NorthWest
+  sprite: /Textures/_RMC14/Tiles/prison/darkbrown3_7.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkBrown3Base
+  id: CMFloorSteelPrisonDarkBrown3CornersSouthEast
+  sprite: /Textures/_RMC14/Tiles/prison/darkbrowncorners3_0.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkBrown3Base
+  id: CMFloorSteelPrisonDarkBrown3CornersNorthEast
+  sprite: /Textures/_RMC14/Tiles/prison/darkbrowncorners3_1.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkBrown3Base
+  id: CMFloorSteelPrisonDarkBrown3CornersNorthWest
+  sprite: /Textures/_RMC14/Tiles/prison/darkbrowncorners3_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonDarkBrown3Base
+  id: CMFloorSteelPrisonDarkBrown3CornersSouthWest
+  sprite: /Textures/_RMC14/Tiles/prison/darkbrowncorners3_3.png

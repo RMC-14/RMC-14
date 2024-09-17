@@ -49,8 +49,8 @@ public sealed class HealthScannerSystem : EntitySystem
         }
 
         var delay = _skills.GetDelay(args.User, scanner);
-        var ev = new HealthScannerDoAfterEvent(GetNetEntity(target));
-        var doAfter = new DoAfterArgs(EntityManager, args.User, delay, ev, scanner, null, scanner)
+        var ev = new HealthScannerDoAfterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, args.User, delay, ev, scanner, target, scanner)
         {
             BreakOnMove = true,
             AttemptFrequency = AttemptFrequency.EveryTick
@@ -68,8 +68,10 @@ public sealed class HealthScannerSystem : EntitySystem
     private void OnDoAfterAttempt(Entity<HealthScannerComponent> ent, ref DoAfterAttemptEvent<HealthScannerDoAfterEvent> args)
     {
         var doAfter = args.DoAfter.Args;
-        var targetEntity = GetEntity(args.Event.Scanned);
-        if (!CanUseHealthScannerPopup(ent, doAfter.User, ref targetEntity))
+        if (doAfter.Target is not { } target)
+            return;
+
+        if (!CanUseHealthScannerPopup(ent, doAfter.User, ref target))
         {
             args.Cancel();
             return;
@@ -82,7 +84,7 @@ public sealed class HealthScannerSystem : EntitySystem
 
     private void OnDoAfter(Entity<HealthScannerComponent> scanner, ref HealthScannerDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled)
+        if (args.Cancelled || args.Handled || args.Target is not { } target)
             return;
 
         args.Handled = true;
@@ -90,7 +92,8 @@ public sealed class HealthScannerSystem : EntitySystem
         if (TryComp(scanner, out UseDelayComponent? useDelay))
             _useDelay.TryResetDelay((scanner, useDelay));
 
-        scanner.Comp.Target = GetEntity(args.Scanned);
+        scanner.Comp.Target = target;
+        Dirty(scanner);
 
         _audio.PlayPvs(scanner.Comp.Sound, scanner);
         _ui.OpenUi(scanner.Owner, HealthScannerUIKey.Key, args.User);
@@ -104,7 +107,7 @@ public sealed class HealthScannerSystem : EntitySystem
     /// <returns></returns>
     private bool CanUseHealthScannerPopup(Entity<HealthScannerComponent> scanner, EntityUid user, ref EntityUid target)
     {
-        if (HasComp<CMStasisBagComponent>(target) && TryComp(target, out EntityStorageComponent? entityStorage))
+        if (HasComp<HealthScannableContainerComponent>(target) && TryComp(target, out EntityStorageComponent? entityStorage))
         {
             foreach (var entity in entityStorage.Contents.ContainedEntities)
             {

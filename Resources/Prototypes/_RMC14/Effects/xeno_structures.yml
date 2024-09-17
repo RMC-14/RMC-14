@@ -7,12 +7,14 @@
   - type: Sprite
     drawdepth: Effects
     sprite: /Textures/_RMC14/Effects/xeno_structure_animations.rsi
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
   - type: TimedDespawn
-    lifetime: 1.5
+    lifetime: 5.0
   - type: Tag
     tags:
     - HideContextMenu
-  - type: AnimationPlayer
+  - type: XenoConstructionAnimation
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
@@ -20,9 +22,9 @@
   noSpawn: true
   components:
   - type: Sprite
-    state: thick
-  - type: TimedDespawn
-    lifetime: 1
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: thick
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
@@ -30,9 +32,9 @@
   noSpawn: true
   components:
   - type: Sprite
-    state: thickmembrane
-  - type: TimedDespawn
-    lifetime: 1
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: thickmembrane
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
@@ -40,9 +42,9 @@
   noSpawn: true
   components:
   - type: Sprite
-    state: thickdoor
-  - type: TimedDespawn
-    lifetime: 1
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: thickdoor
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
@@ -50,9 +52,9 @@
   noSpawn: true
   components:
   - type: Sprite
-    state: wall
-  - type: TimedDespawn
-    lifetime: 2
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: wall
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
@@ -60,9 +62,9 @@
   noSpawn: true
   components:
   - type: Sprite
-    state: membrane
-  - type: TimedDespawn
-    lifetime: 2
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: membrane
 
 - type: entity
   parent: RMCBaseEffectXenoStructure
@@ -70,6 +72,6 @@
   noSpawn: true
   components:
   - type: Sprite
-    state: door
-  - type: TimedDespawn
-    lifetime: 2
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: door
