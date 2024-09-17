@@ -1,16 +1,11 @@
-using Content.Shared._RMC14.Marines;
-using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Whitelist;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.Inventory;
-using Content.Shared.Inventory.Events;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
-using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared._RMC14.Stealth;
-using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Item.ItemToggle.Components;
@@ -23,7 +18,7 @@ namespace Content.Shared._RMC14.Armor.Ghillie;
 /// <summary>
 /// Handles the ghillie suit's prepare position ability.
 /// </summary>
-public sealed class SharedGhillieSuitSystem : EntitySystem
+public abstract class SharedGhillieSuitSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
