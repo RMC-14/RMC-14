@@ -128,8 +128,10 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
         Dirty(user, invis);
 
         EnsureComp<EntityIFFComponent>(user);
-
         RemCompDeferred<RMCNightVisionVisibleComponent>(user);
+
+        comp.Enabled = true;
+        Dirty(ent);
     }
 
     /// <summary>
