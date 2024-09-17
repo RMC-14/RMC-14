@@ -14,3 +14,5 @@ rmc-xeno-egg-return-user = We place the child back into the egg.
 rmc-xeno-egg-return-self = {CAPITALIZE($parasite)} crawls back into the egg.
 rmc-xeno-egg-return = {CAPITALIZE($user)} slides {$parasite} back into the egg.
 
+rmc-xeno-egg-throw-xeno = Throwing the egg would break it!
+rmc-xeno-egg-throw = That's a bad idea.

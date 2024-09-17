@@ -22,6 +22,7 @@ using Content.Shared.StepTrigger.Components;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
+using Content.Shared.Throwing;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -54,8 +55,8 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
 
-	private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
-	private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
+    private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
+    private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
 
     private EntityQuery<StepTriggerComponent> _stepTriggerQuery;
 
@@ -77,6 +78,7 @@ public sealed class XenoEggSystem : EntitySystem
         SubscribeLocalEvent<XenoEggComponent, ActivateInWorldEvent>(OnXenoEggActivateInWorld);
         SubscribeLocalEvent<XenoEggComponent, StepTriggerAttemptEvent>(OnXenoEggStepTriggerAttempt);
         SubscribeLocalEvent<XenoEggComponent, StepTriggeredOffEvent>(OnXenoEggStepTriggered);
+        SubscribeLocalEvent<XenoEggComponent, ThrowItemAttemptEvent>(OnXenoEggTryThrow);
     }
 
     private void OnXenoGrowOvipositorAction(Entity<XenoComponent> xeno, ref XenoGrowOvipositorActionEvent args)
@@ -164,6 +166,15 @@ public sealed class XenoEggSystem : EntitySystem
     {
         if (egg.Comp.State != XenoEggState.Item)
             args.Cancel();
+    }
+
+    private void OnXenoEggTryThrow(Entity<XenoEggComponent> ent, ref ThrowItemAttemptEvent args)
+    {
+        if (HasComp<XenoComponent>(args.User))
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-throw-xeno"), args.User, args.User, PopupType.SmallCaution);
+        else
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-throw"), args.User, args.User, PopupType.SmallCaution);
+        args.Cancelled = true;
     }
 
     private void OnXenoEggAfterInteract(Entity<XenoEggComponent> egg, ref AfterInteractEvent args)
