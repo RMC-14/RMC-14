@@ -1,0 +1,16 @@
+- type: entity
+  id: CMWWHavyKik
+  parent: ActionXenoBase
+  name: Тяжёлый замах
+  description: Вы делаете тяжёлый замах и бьёте изо всех сил
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: tail_attack
+    event: !type:XenoTailStabEvent
+    range: 15
+    useDelay: 10
+    checkCanAccess: false
+  - type: XenoTailStabAction

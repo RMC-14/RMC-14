@@ -38,12 +38,9 @@
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
-    - ActionXenoWatch
-    - ActionXenoTailStab
-    - ActionXenoCharge
+    - CMWWHavyKik
+    - ActionXenoToggleCrest
     - ActionXenoStomp
-    - ActionXenoDefensiveShield
-    - ActionXenoDevolve
     tier: 3
     hudOffset: 0,0.375
     unlockAt: 900 # 15 minutes
