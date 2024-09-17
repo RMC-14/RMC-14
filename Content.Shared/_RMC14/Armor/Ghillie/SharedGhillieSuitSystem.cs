@@ -124,7 +124,7 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
         var invis = EnsureComp<RMCPassiveStealthComponent>(user);
         invis.MinOpacity = comp.Opacity;
         invis.Delay = comp.InvisibilityDelay;
-        invis.Enabled = false;
+        invis.Enabled = true;
         Dirty(user, invis);
 
         EnsureComp<EntityIFFComponent>(user);
