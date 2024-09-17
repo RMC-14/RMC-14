@@ -94,6 +94,7 @@
   - type: InputMover
   - type: LagCompensation
   - type: MobMover
+  - type: Emoting
   - type: Actions
   - type: Alerts
   - type: Appearance
@@ -161,6 +162,7 @@
   - type: Pullable
   - type: Speech
     speechVerb: Xeno
+    allowedEmotes: [ "Growl", "Hiss", "XenoRoar", "XenoHelp", "XenoTailSwipe" ]
   - type: GhostOnMove
     mustBeDead: true
   - type: WhitelistPickup

@@ -1,11 +1,13 @@
 ﻿using System.Numerics;
 using Content.Shared.Access;
 using Content.Shared.Alert;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Roles;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared._RMC14.Xenonids;
 
@@ -75,4 +77,9 @@ public sealed partial class XenoComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool SpawnAtLeaderPoint;
+
+    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EmoteSoundsPrototype>)), AutoNetworkedField]
+    public string? EmoteSounds = "Xeno";
+
+    public EmoteSoundsPrototype? Sounds;
 }
