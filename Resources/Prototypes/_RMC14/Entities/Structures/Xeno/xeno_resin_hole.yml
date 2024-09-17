@@ -1,5 +1,4 @@
 - type: entity
-  parent: BaseItem
   id: XenoResinHole
   name: Resin Hole
   placement:
@@ -7,10 +6,25 @@
     snap:
     - Wall
   components:
+  - type: Clickable
   - type: Transform
     anchored: true
+  - type: Physics
+    bodyType: Dynamic
+    fixedRotation: false
   - type: Fixtures
     fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        layer:
+        - BulletImpassable
+        restitution: 0.3
+        friction: 0.2
       resin_hole:
         shape:
           !type:PhysShapeCircle
@@ -18,6 +32,8 @@
         hard: false
         layer:
         - SmallMobLayer
+        mask:
+        - MobLayer
   - type: CollisionWake
     enabled: false
   - type: Flammable
@@ -68,3 +84,4 @@
     isCorrodible: false
   - type: XenoConstruct
     destroyWeeds: false
+  - type: RequireProjectileTarget
