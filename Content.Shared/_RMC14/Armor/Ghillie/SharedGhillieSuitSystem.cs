@@ -16,6 +16,7 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Armor.Ghillie;
 
@@ -31,6 +32,7 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -127,6 +129,7 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
         invis.MinOpacity = comp.Opacity;
         invis.Delay = comp.InvisibilityDelay;
         invis.Enabled = true;
+        invis.ToggleTime = _timing.CurTime;
         Dirty(user, invis);
 
         EnsureComp<EntityIFFComponent>(user);
@@ -165,18 +168,21 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
     private void OnAttemptShoot(Entity<EntityActiveInvisibleComponent> ent, ref AttemptShootEvent args)
     {
         var user = ent.Owner;
-        var suit = FindSuit(user);
         var comp = ent.Comp;
+        var suit = FindSuit(user);
 
         if (args.Cancelled)
             return;
         if (suit == null)
             return;
 
-        if (_toggle.IsActivated(suit.Value.Owner))
+        if (_toggle.IsActivated(suit.Value.Owner) && TryComp<RMCPassiveStealthComponent>(user, out var invis))
         {
             comp.Opacity = 0;
-            Dirty(user, comp);
+            Dirty(ent);
+
+            invis.ToggleTime = _timing.CurTime;
+            Dirty(user, invis);
         }
     }
 }
