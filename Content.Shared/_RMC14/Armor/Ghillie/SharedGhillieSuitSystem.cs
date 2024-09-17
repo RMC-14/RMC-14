@@ -90,6 +90,8 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
         else
         {
             EnsureComp<RMCNightVisionVisibleComponent>(user);
+            RemCompDeferred<EntityIFFComponent>(user);
+            RemCompDeferred<RMCPassiveStealthComponent>(user);
 
             if (comp.Enabled)
             {

@@ -243,11 +243,6 @@
   - type: ToggleClothing
     disableOnUnequip: true
     action: RMCActionGhilliePreparePosition
-  - type: ComponentToggler
-    parent: true
-    removeComponents:
-    - type: RMCPassiveStealth
-    - type: EntityIFF
 
 # Smart Gun
 - type: entity
