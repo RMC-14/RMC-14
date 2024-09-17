@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Linq;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Clothing;
@@ -64,7 +65,11 @@ public sealed class SquadSystem : EntitySystem
         }
 
         var rsi = wearer.Leader ? ent.Comp.LeaderRsi : ent.Comp.Rsi;
-        args.Layers.Add(($"enum.{nameof(SquadArmorLayers)}.{ent.Comp.Layer}", new PrototypeLayerData
+        var layer = $"enum.{nameof(SquadArmorLayers)}.{ent.Comp.Layer}";
+        if (args.Layers.Any(l => l.Item1 == layer))
+            return;
+
+        args.Layers.Add((layer, new PrototypeLayerData
         {
             RsiPath = rsi.RsiPath.ToString(),
             State = rsi.RsiState,
@@ -72,7 +77,6 @@ public sealed class SquadSystem : EntitySystem
             Visible = true,
         }));
     }
-
 
     private void OnSquadMemberMapInit(Entity<SquadMemberComponent> ent, ref MapInitEvent args)
     {
@@ -168,6 +172,19 @@ public sealed class SquadSystem : EntitySystem
         return false;
     }
 
+    public bool TryGetMemberSquad(Entity<SquadMemberComponent?> member, out Entity<SquadTeamComponent> squad)
+    {
+        squad = default;
+        if (!Resolve(member, ref member.Comp, false))
+            return false;
+
+        if (!TryComp(member.Comp.Squad, out SquadTeamComponent? team))
+            return false;
+
+        squad = (member.Comp.Squad.Value, team);
+        return true;
+    }
+
     public bool TryEnsureSquad(EntProtoId id, out Entity<SquadTeamComponent> squad)
     {
         if (!_prototypes.TryIndex(id, out var prototype) ||
@@ -211,7 +228,20 @@ public sealed class SquadSystem : EntitySystem
 
         var member = EnsureComp<SquadMemberComponent>(marine);
         if (_squadTeamQuery.TryComp(member.Squad, out var oldSquad))
+        {
             oldSquad.Members.Remove(marine);
+
+            if (_mind.TryGetMind(marine, out var mindId, out _) &&
+                _job.MindTryGetJobId(mindId, out var currentJob) &&
+                currentJob != null)
+            {
+                if (oldSquad.Roles.TryGetValue(currentJob.Value, out var oldJobs) &&
+                    oldJobs > 0)
+                {
+                    oldSquad.Roles[currentJob.Value] = oldJobs - 1;
+                }
+            }
+        }
 
         member.Squad = team;
         member.Background = team.Comp.Background;
@@ -234,6 +264,12 @@ public sealed class SquadSystem : EntitySystem
         Dirty(marine, grant);
 
         team.Comp.Members.Add(marine);
+        if (job != null)
+        {
+            team.Comp.Roles.TryGetValue(job.Value, out var roles);
+            team.Comp.Roles[job.Value] = roles + 1;
+        }
+
         var ev = new SquadMemberUpdatedEvent();
         RaiseLocalEvent(marine, ref ev);
     }

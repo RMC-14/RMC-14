@@ -67,6 +67,21 @@
     sprite: _RMC14/Structures/Doors/Airlocks/maint_door.rsi
 
 - type: entity
+  parent: CMAirlockMaint
+  id: CMAirlockMaintReinforced
+  name: reinforced maintenance hatch
+  suffix: Reinforced
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
   parent: CMAirlock
   id: CMAirlockSecure
   name: secure airlock
@@ -193,3 +208,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/prep_door_delta.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: RMCAirlockStrata
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/strata_door.rsi

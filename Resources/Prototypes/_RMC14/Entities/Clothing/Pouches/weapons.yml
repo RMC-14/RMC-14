@@ -53,8 +53,8 @@
     slots:
       pouch:
         name: Pouch
-#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
-#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        insertSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_sheathe.ogg 
+        ejectSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_draw.ogg
         whitelist:
           tags:
           - Sidearm

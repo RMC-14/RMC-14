@@ -15,6 +15,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableGetExamineDataEvent>(OnRangedModsGetExamineData);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetFireModesEvent>>(OnRangedGetFireModes);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetFireModeValuesEvent>>(OnRangedModsGetFireModeValues);
+        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetDamageFalloffEvent>>(OnRangedModsGetDamageFalloff);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetGunDamageModifierEvent>>(OnRangedModsGetGunDamage);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GunRefreshModifiersEvent>>(OnRangedModsRefreshModifiers);
     }
@@ -63,6 +64,10 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
         if (modSet.ProjectileSpeedFlat != 0)
             result.Add(Loc.GetString("rmc-attachable-examine-ranged-projectile-speed",
                 ("colour", modifierExamineColour), ("sign", modSet.ProjectileSpeedFlat > 0 ? '+' : ""), ("projectileSpeed", modSet.ProjectileSpeedFlat)));
+
+        if (modSet.DamageFalloffAddMult != 0)
+            result.Add(Loc.GetString("rmc-attachable-examine-ranged-damage-falloff",
+                ("colour", modifierExamineColour), ("sign", modSet.DamageFalloffAddMult > 0 ? '+' : ""), ("falloff", modSet.DamageFalloffAddMult)));
 
         return result;
     }
@@ -126,9 +131,20 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
         }
     }
 
+    private void OnRangedModsGetDamageFalloff(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableRelayedEvent<GetDamageFalloffEvent> args)
+    {
+        foreach (var modSet in attachable.Comp.Modifiers)
+        {
+            if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
+                continue;
+
+            args.Args.FalloffMultiplier += modSet.DamageFalloffAddMult;
+        }
+    }
+
     private void OnRangedModsGetGunDamage(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableRelayedEvent<GetGunDamageModifierEvent> args)
     {
-        foreach(var modSet in attachable.Comp.Modifiers)
+        foreach (var modSet in attachable.Comp.Modifiers)
         {
             if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
                 continue;
@@ -139,7 +155,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
 
     private void OnRangedModsGetFireModeValues(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableRelayedEvent<GetFireModeValuesEvent> args)
     {
-        foreach(var modSet in attachable.Comp.Modifiers)
+        foreach (var modSet in attachable.Comp.Modifiers)
         {
             if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
                 continue;
