@@ -89,6 +89,7 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
             EnsureComp<RMCNightVisionVisibleComponent>(user);
             RemCompDeferred<EntityIFFComponent>(user);
             RemCompDeferred<RMCPassiveStealthComponent>(user);
+            RemCompDeferred<EntityActiveInvisibleComponent>(user);
 
             if (comp.Enabled)
             {
@@ -106,7 +107,6 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
     private void OnDoAfter(Entity<GhillieSuitComponent> ent, ref GhillieSuitDoAfterEvent args)
     {
         var user = args.User;
-        var suit = ent.Owner;
         var comp = ent.Comp;
 
         if (args.Cancelled)
@@ -173,7 +173,7 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
 
         if (_toggle.IsActivated(suit.Value.Owner) && TryComp<RMCPassiveStealthComponent>(user, out var invis))
         {
-            comp.Opacity = 0;
+            comp.Opacity = 1;
             Dirty(ent);
 
             invis.ToggleTime = _timing.CurTime;
