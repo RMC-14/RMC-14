@@ -203,9 +203,11 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
         {
             return false;
         }
-        foreach (var parasite in parasiteContainer.ContainedEntities)
+
+        List<EntityUid> containedEntitiesCopy = new(parasiteContainer.ContainedEntities.ToList());
+        foreach (var parasite in containedEntitiesCopy)
         {
-            _transform.PlaceNextTo(xeno.Owner, parasite);
+            _transform.DropNextTo(parasite, xeno.Owner);
         }
         return true;
     }

@@ -148,9 +148,12 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
         {
             return false;
         }
-        foreach (var egg in eggContainer.ContainedEntities)
+
+        List<EntityUid> containedEntitiesCopy = new(eggContainer.ContainedEntities.ToList());
+
+        foreach (var egg in containedEntitiesCopy)
         {
-            _transform.PlaceNextTo(xeno.Owner, egg);
+            _transform.DropNextTo(egg, xeno.Owner);
         }
         return true;
     }
