@@ -26,6 +26,8 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly ItemToggleSystem _toggle = default!;
+    [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     public override void Initialize()
     {
@@ -132,7 +134,10 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
         var user = ent.Owner;
         var suit = FindSuit(user);
 
-        SetCloakEnabled(suit.Value, user, false);
+        if (suit == null)
+            return;
+
+        _toggle.TryDeactivate(suit.Value.Owner, user);
     }
 
     private void OnAttemptShoot(Entity<EntityActiveInvisibleComponent> ent, ref AttemptShootEvent args)
@@ -148,7 +153,7 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
         if (ent.Owner != user)
             return;
 
-        if (suit.Value.Comp.Enabled)
+        if (_toggle.IsActivated(suit.Value.Owner))
         {
             comp.Opacity = 0;
             Dirty(user, comp);
