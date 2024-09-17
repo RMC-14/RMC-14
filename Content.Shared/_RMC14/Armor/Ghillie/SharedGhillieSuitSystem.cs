@@ -12,6 +12,7 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Movement.Events;
 
 namespace Content.Shared._RMC14.Armor.Ghillie;
 
@@ -30,24 +31,12 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<GhillieSuitComponent, GetItemActionsEvent>(OnGetItemActions);
         SubscribeLocalEvent<GhillieSuitComponent, GhillieActionEvent>(OnGhillieAction);
         SubscribeLocalEvent<GhillieSuitComponent, GotUnequippedEvent>(OnUnequipped);
         SubscribeLocalEvent<GhillieSuitComponent, GhillieSuitDoAfterEvent>(OnDoAfter);
 
-        SubscribeLocalEvent<RMCPassiveStealthComponent, MoveEvent>(OnMove);
+        SubscribeLocalEvent<RMCPassiveStealthComponent, MoveInputEvent>(OnMove);
         SubscribeLocalEvent<EntityActiveInvisibleComponent, AttemptShootEvent>(OnAttemptShoot);
-    }
-
-    private void OnGetItemActions(Entity<GhillieSuitComponent> ent, ref GetItemActionsEvent args)
-    {
-        var comp = ent.Comp;
-
-        if (args.InHands || !_inventory.InSlotWithFlags((ent, null, null), SlotFlags.OUTERCLOTHING))
-            return;
-
-        args.AddAction(ref comp.Action, comp.ActionId);
-        Dirty(ent);
     }
 
     private void OnGhillieAction(Entity<GhillieSuitComponent> ent, ref GhillieActionEvent args)
@@ -74,9 +63,8 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
             {
                 BreakOnMove = true,
                 BreakOnDamage = true,
-                AttemptFrequency = AttemptFrequency.EveryTick,
                 CancelDuplicate = true,
-                DuplicateCondition = DuplicateConditions.None
+                DuplicateCondition = DuplicateConditions.SameTool
             };
 
             if (_doAfter.TryStartDoAfter(doAfterEventArgs))
@@ -121,20 +109,6 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
     /// </summary>
     public void SetCloakEnabled(Entity<GhillieSuitComponent> ent, EntityUid user, bool enable)
     {
-        var comp = ent.Comp;
-
-        if (enable)
-        {
-            EntityManager.AddComponents(user, comp.AddComponentsOnEnable);
-            EntityManager.RemoveComponents(user, comp.AddComponentsOnDisable);
-        }
-        else
-        {
-            EntityManager.AddComponents(user, comp.AddComponentsOnDisable);
-            EntityManager.RemoveComponents(user, comp.AddComponentsOnEnable);
-        }
-
-        comp.Enabled = enable;
         Dirty(ent);
     }
 
@@ -153,14 +127,12 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
         return null;
     }
 
-    private void OnMove(Entity<RMCPassiveStealthComponent> ent, ref MoveEvent args)
+    private void OnMove(Entity<RMCPassiveStealthComponent> ent, ref MoveInputEvent args)
     {
         var user = ent.Owner;
         var suit = FindSuit(user);
-        var length = (args.NewPosition.Position - args.OldPosition.Position).Length();
 
-        if (suit != null && length > 0)
-            SetCloakEnabled(suit.Value, user, false);
+        SetCloakEnabled(suit.Value, user, false);
     }
 
     private void OnAttemptShoot(Entity<EntityActiveInvisibleComponent> ent, ref AttemptShootEvent args)

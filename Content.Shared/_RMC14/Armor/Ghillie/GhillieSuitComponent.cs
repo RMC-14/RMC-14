@@ -14,29 +14,8 @@ namespace Content.Shared._RMC14.Armor.Ghillie;
 public sealed partial class GhillieSuitComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public bool Enabled = false;
-
-    [DataField, AutoNetworkedField]
     public TimeSpan UseDelay = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
     public EntityWhitelist Whitelist = new();
-
-    [DataField, AutoNetworkedField]
-    public EntProtoId ActionId = "RMCActionGhilliePreparePosition";
-
-    [DataField, AutoNetworkedField]
-    public EntityUid? Action;
-
-    /// <summary>
-    /// Components to remove when the suit is disabled, add when enabled.
-    /// </summary>
-    [DataField(required: true)]
-    public ComponentRegistry AddComponentsOnEnable = new();
-
-    /// <summary>
-    /// Components to remove when the suit is enabled, add when disabled.
-    /// </summary>
-    [DataField(required: true)]
-    public ComponentRegistry AddComponentsOnDisable = new();
 }
