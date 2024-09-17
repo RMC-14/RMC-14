@@ -90,6 +90,7 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
             RemCompDeferred<EntityIFFComponent>(user);
             RemCompDeferred<RMCPassiveStealthComponent>(user);
             RemCompDeferred<EntityActiveInvisibleComponent>(user);
+            RemCompDeferred<EntityTurnInvisibleComponent>(user);
 
             if (comp.Enabled)
             {
