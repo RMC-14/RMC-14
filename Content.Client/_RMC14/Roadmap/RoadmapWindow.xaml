@@ -41,6 +41,7 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Firearms skill" Text="Each marine role has a different firearms skill. This impacts how accurate they are with guns" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Bullet damage fall-off" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Crusher" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Specialist's Grenadier Kit" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Smoke grenades" />
@@ -60,14 +61,18 @@
                 </BoxContainer>
                 <BoxContainer Name="SecondVersion" Access="Public" Orientation="Vertical"  HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Upcoming" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Carrier" Text="Carry parasites around, allowing the Hive to impregnate new hosts on the move. Use pheromones to assist fellow Aliens" />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Carrier" Text="Carry parasites around, allowing the Hive to impregnate new hosts on the move. Use pheromones to assist fellow Aliens" />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Praetorian" Text="Tier 3 xeno" />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Tactical Map" Text="A view of the planet map that shows the location of other members of your faction, and lets you plan strategies" />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Power and evacuation" Text="Power simulation will allow marines to restore power to the colony if they secure the colony's reactors, with evacuation allowing them to fuel the lifeboats and flee the warship if hijacked" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Burrower" Text="Lay the foundations for resin traps in strategic locations or the Hive's flanks. Flank your way around the map with the tunnel ability and dig tunnels to allow for quick transportation of fellow Aliens from the hive to the frontlines" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Blood types" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Tier 3 xenos" Text="Praetorian and Ravager" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Ravager" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Engineering staff" Text="Maintenance technician and the Chief Engineer" />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Survivors" Text="A role that starts on the planet and must try to survive until rescued by the Marines" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Limb damage" Text="Each limb on a marine will be able to take damage separately, being able to detach upon receiving too much damage and requiring individual treatment" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Pain and painkillers" Text="Wounds will cause pain which can be dulled with painkillers" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="More surgeries" Text="Foreign object removal, internal bleeding surgery, fractures" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Bullet damage fall-off" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Construction skill" Text="Allows you to build more advanced constructs" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Engineering skill" Text="Allows you to repair and hack more advanced constructs" />
                 </BoxContainer>
@@ -78,8 +83,6 @@
                     <controls:RoadmapItem ItemState="Planned" HeaderText="More weapons" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Communications objective" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Nuke endgame" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Survivors" Text="A role that starts on the planet and must try to survive until rescued by the Marines" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Engineering staff" Text="Maintenance technician and the Chief Engineer" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Synthetics" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Emergency responders" Text="A faction that randomly spawns, with their own objectives" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Orbital bombardment" />

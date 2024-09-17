@@ -1,4 +1,5 @@
-﻿using Content.Shared.ActionBlocker;
+﻿using System.Numerics;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
@@ -7,6 +8,7 @@ using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Stun;
@@ -23,6 +25,8 @@ public sealed class RMCSizeStunSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -80,6 +84,10 @@ public sealed class RMCSizeStunSystem : EntitySystem
         //Knockback
         if (_blocker.CanMove(args.Target))
         {
+
+            _physics.SetLinearVelocity(args.Target, Vector2.Zero);
+            _physics.SetAngularVelocity(args.Target, 0f);
+
             var direction = (_transform.GetMoverCoordinates(args.Target).Position - bullet.Comp.ShotFrom.Value.Position).Normalized();
 
             _throwing.TryThrow(args.Target, direction, 1, animated: false, playSound: false, doSpin: false);

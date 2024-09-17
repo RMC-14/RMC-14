@@ -97,6 +97,8 @@
       entries:
 #      - id: Plastic Explosive
 #        points: 10
+      - id: RMCPackFlareCAS
+        points: 5
       - id: RMCExplosiveBreachingCharge
         points: 10
 #      - id: ES-11 Mobile Fuel Canister

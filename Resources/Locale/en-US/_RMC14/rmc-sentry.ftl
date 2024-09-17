@@ -29,7 +29,7 @@ rmc-sentry-disassemble-finish-others = {$user} disassembles {THE($sentry)}.
 
 rmc-sentry-unanchor-is-on = {CAPITALIZE(THE($sentry))} is currently active. The motors will prevent you from unanchoring it safely.
 
-health-examinable-sentry-none = {CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} in pristine condition.
+health-examinable-sentry-none = It is in pristine condition.
 
 health-examinable-sentry-Blunt-10 = [color=yellow]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-HAVE($target)} a few dents.[/color]
 health-examinable-sentry-Blunt-25 = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} a bit beat up.[/color]

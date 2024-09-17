@@ -32,6 +32,7 @@ namespace Content.Server._RMC14.Mobs
             _actions.AddAction(uid, ref comp.ToggleXenoHudEntity, comp.ToggleXenoHud);
 
             EnsureComp<CMGhostMarineHudComponent>(uid);
+            EnsureComp<ShowHealthIconsComponent>(uid);
             EnsureComp<CMGhostXenoHudComponent>(uid);
         }
 
@@ -42,11 +43,13 @@ namespace Content.Server._RMC14.Mobs
             if (HasComp<CMGhostMarineHudComponent>(uid))
             {
                 RemComp<CMGhostMarineHudComponent>(uid);
+                RemCompDeferred<ShowHealthIconsComponent>(uid);
                 _actions.SetToggled(comp.ToggleMarineHudEntity, true);
             }
             else
             {
                 AddComp<CMGhostMarineHudComponent>(uid);
+                EnsureComp<ShowHealthIconsComponent>(uid);
                 _actions.SetToggled(comp.ToggleMarineHudEntity, false);
             }
         }
