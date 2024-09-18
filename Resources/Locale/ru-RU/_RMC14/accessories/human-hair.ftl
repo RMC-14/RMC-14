@@ -1,8 +1,8 @@
-marking-HumanHairShorterLongBedhead = Shorter Long Bedhead (RMC)
+marking-HumanHairShorterLongBedhead = Короткий Длинный кроватеголовый (RMC)
 
 marking-RMCHumanHairCrew = Crewcut (RMC)
 
-marking-RMCHumanHairShort = Short Hair (RMC)
+marking-RMCHumanHairShort = Короткие волосы (RMC)
 
 marking-RMCHumanHairCut = Cut Hair (RMC)
 
