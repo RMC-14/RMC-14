@@ -3,31 +3,31 @@ rmc-attachable-holder-strip-ui-empty-slot = nothing
 
 rmc-verb-strip-attachables = Strip Attachables
 
-rmc-aslot-barrel = Barrel
-rmc-aslot-rail = Rail
+rmc-aslot-barrel = Ствол
+rmc-aslot-rail = Рельса
 rmc-aslot-stock = Stock
-rmc-aslot-underbarrel = Underbarrel
+rmc-aslot-underbarrel = Подствольник
 
-rmc-attachable-activation-fail-not-wielded = {CAPITALIZE(THE($holder))} must be wielded to activate {THE($attachable)}!
+rmc-attachable-activation-fail-not-wielded = {$holder} надо держать в двух руках, что бы использовать {$attachable}!
 rmc-attachable-activation-fail-not-held = {CAPITALIZE(THE($holder))} must be held to activate {THE($attachable)}!
 rmc-attachable-activation-fail-not-owned = {CAPITALIZE(THE($holder))} must be held or equipped by you to activate {THE($attachable)}!
 
 rmc-attachable-shoot-fail-not-wielded = {CAPITALIZE(THE($holder))} must be wielded to shoot {THE($attachable)}!
 
-rmc-attachable-verb-toggle = Toggle {THE($attachable)}
+rmc-attachable-verb-toggle = Переключить {$attachable}
 
-attachable-popup-activate-generic = You activate {THE($attachable)}.
-attachable-popup-deactivate-generic = You deactivate {THE($attachable)}.
+attachable-popup-activate-generic = Вы включили {$attachable}.
+attachable-popup-deactivate-generic = Вы отключили {$attachable}.
 
-attachable-popup-activate-deploy-on-generic = You deploy {THE($attachable)} on {THE($surface)}.
-attachable-popup-activate-deploy-on-ground = You deploy {THE($attachable)} on the ground.
+attachable-popup-activate-deploy-on-generic = Вы поставили {$attachable} на {$surface}.
+attachable-popup-activate-deploy-on-ground = Вы поставили {THE($attachable)} на землю.
 attachable-popup-deactivate-retract = You retract {THE($attachable)}.
 
 attachable-popup-activate-unfold = You unfold {THE($attachable)}.
 attachable-popup-deactivate-collapse = You collapse {THE($attachable)}.
 
-attachable-popup-activate-lock = You lock {THE($attachable)}.
-attachable-popup-deactivate-unlock = You unlock {THE($attachable)}.
+attachable-popup-activate-lock = Вы заблокировали {THE($attachable)}.
+attachable-popup-deactivate-unlock = Вы раздлокировали {THE($attachable)}.
 
 attachable-popup-switch-to-generic = You switch to using {THE($attachable)}.
 attachable-popup-switch-from-generic = You stop using {THE($attachable)}.
