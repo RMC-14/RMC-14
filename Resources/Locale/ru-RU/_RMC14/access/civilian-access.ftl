@@ -1,1 +1,1 @@
-﻿cm-access-press = Press
+﻿cm-access-press = Пресса
