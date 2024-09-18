@@ -32,12 +32,12 @@ public sealed class MarineOverlay : Overlay
         _sprite = _entity.System<SpriteSystem>();
         _transform = _entity.System<TransformSystem>();
 
-        _shader = _prototype.Index<ShaderPrototype>("unshaded").Instance();
+        _shader = _prototype.Index<ShaderPrototype>("shaded").Instance();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        if (!_entity.HasComponent<CMGhostMarineHudComponent>(_players.LocalEntity) &&
+        if (!_entity.HasComponent<ShowMarineIconsComponent>(_players.LocalEntity) &&
             !_entity.HasComponent<MarineComponent>(_players.LocalEntity))
         {
             return;
