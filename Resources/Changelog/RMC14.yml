@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Zarq0
-  changes:
-  - message: Ported Meralyne, Imidazoline and Clonexadone from CM13.
-    type: Add
-  id: 205
-  time: '2024-06-28T03:33:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2642
 - author: DrSmugleaf
   changes:
   - message: Added Squad creation and moving marines between squads to the admin menu.
@@ -4391,5 +4384,13 @@
   id: 704
   time: '2024-09-15T22:51:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4057
+- author: DrSmugleaf
+  changes:
+  - message: Fixed examine sometimes flickering and closing until you examine something
+      around you.
+    type: Fix
+  id: 705
+  time: '2024-09-16T21:09:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4068
 Name: RMC14
 Order: -1
