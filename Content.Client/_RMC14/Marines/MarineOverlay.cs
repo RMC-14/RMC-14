@@ -37,11 +37,8 @@ public sealed class MarineOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        if (!_entity.HasComponent<ShowMarineIconsComponent>(_players.LocalEntity) &&
-            !_entity.HasComponent<MarineComponent>(_players.LocalEntity))
-        {
+        if (!_entity.HasComponent<ShowMarineIconsComponent>(_players.LocalEntity))
             return;
-        }
 
         var handle = args.WorldHandle;
 
