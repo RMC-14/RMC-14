@@ -1,1 +1,1 @@
-﻿rmc-wear-scout-armor-required = You must have your M3-S armor equipped to wear this.
+﻿rmc-wear-scout-armor-required = У вас стойкое ощющение, что без спец креплений M3-S у вас не получится ничего сделать, вы думаете, что надо одеть M3-S.
