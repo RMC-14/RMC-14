@@ -1,2 +1,2 @@
-﻿cm-access-dropship = Dropship
+﻿cm-access-dropship = Шатлы
 
