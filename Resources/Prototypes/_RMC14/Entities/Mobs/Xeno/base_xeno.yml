@@ -70,7 +70,7 @@
     sound:
       collection: XenoDeath
       params:
-        volume: -12
+        volume: -4
   - type: HealthExaminable
     examinableTypes:
     - Blunt
