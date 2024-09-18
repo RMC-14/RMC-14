@@ -1,9 +1,9 @@
-﻿rmc-cloak-activate-self = You activate your cloak's camouflage.
-rmc-cloak-activate-others = {$user} vanishes into thin air!
-rmc-cloak-deactivate-self = Your cloak's camouflage has deactivated!
-rmc-cloak-deactivate-others = {$user} shimmers into existence!
-rmc-cloak-forced-deactivate-self = Your cloak fizzles out!
-rmc-cloak-forced-deactivate-others = {$user}'s cloak fizzles out!
+﻿rmc-cloak-activate-self = Вы сливаетесь с окружающим миром.
+rmc-cloak-activate-others = {$user} растворяется в воздухе!
+rmc-cloak-deactivate-self = Вы проявляетесь обратно!
+rmc-cloak-deactivate-others = {$user} появляется из неоткуда!
+rmc-cloak-forced-deactivate-self = Ваш плащ искрит!
+rmc-cloak-forced-deactivate-others = {$user} начинает появлятся из неоткуда и искрить!
 
 rmc-cloak-attempt-shoot = Your cloak prevents you from shooting!
 rmc-cloak-attempt-prime = Your cloak prevents you from arming the grenade!
