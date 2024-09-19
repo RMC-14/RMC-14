@@ -53,6 +53,26 @@
         acts: [ "Destruction" ]
 
 - type: entity
+  name: xenonid target
+  id: RMCTargetXeno
+  parent: RMCTargetHuman
+  description: A shooting target. This one is a xenonid.
+  components:
+  - type: Sprite
+    sprite: 
+    state: target_q
+
+- type: entity
+  name: xenonid target
+  id: RMCTargetArmored
+  parent: RMCTargetHuman
+  description: A shooting target. This one is an armored human.
+  components:
+  - type: Sprite
+    sprite: 
+    state: target_a
+
+- type: entity
   name: syndicate target
   id: RMCTargetSyndicate
   parent: RMCTargetHuman
