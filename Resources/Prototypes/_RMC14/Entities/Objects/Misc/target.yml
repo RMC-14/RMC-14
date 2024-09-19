@@ -59,7 +59,7 @@
   description: A shooting target. This one is a xenonid.
   components:
   - type: Sprite
-    sprite: 
+    sprite: _RMC14/Objects/Misc/target.rsi
     state: target_q
 
 - type: entity
@@ -69,7 +69,7 @@
   description: A shooting target. This one is an armored human.
   components:
   - type: Sprite
-    sprite: 
+    sprite: _RMC14/Objects/Misc/target.rsi
     state: target_a
 
 - type: entity
