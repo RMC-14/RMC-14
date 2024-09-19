@@ -1,9 +1,6 @@
-using System.Linq;
 using System.Numerics;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
-using Content.Shared._RMC14.Areas;
-using Content.Shared.Atmos;
 using Content.Shared.Input;
 using Content.Shared.Pinpointer;
 using JetBrains.Annotations;
@@ -19,10 +16,6 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
-using Color = Robust.Shared.Maths.Color;
 
 namespace Content.Client.Pinpointer.UI;
 
@@ -32,15 +25,11 @@ namespace Content.Client.Pinpointer.UI;
 [UsedImplicitly, Virtual]
 public partial class NavMapControl : MapGridControl
 {
-    [Dependency] private IResourceCache _cache = default!;
-    [Dependency] private readonly IClyde _clyde = default!;
+    [Dependency] private readonly IEntityManager _entManager = default!;
     private readonly SharedTransformSystem _transformSystem;
-    private readonly SharedNavMapSystem _navMapSystem;
 
     public EntityUid? Owner;
     public EntityUid? MapUid;
-
-    protected override bool Draggable => true;
 
     // Actions
     public event Action<NetEntity?>? TrackedEntitySelectedAction;
@@ -49,11 +38,7 @@ public partial class NavMapControl : MapGridControl
     // Tracked data
     public Dictionary<EntityCoordinates, (bool Visible, Color Color)> TrackedCoordinates = new();
     public Dictionary<NetEntity, NavMapBlip> TrackedEntities = new();
-
-    public List<(Vector2, Vector2)> TileLines = new();
-    public List<(Vector2, Vector2)> TileRects = new();
-    public List<List<DrawVertexUV2DColor>> TilePolygons = new();
-    public Texture? _texture;
+    public Dictionary<Vector2i, List<NavMapLine>>? TileGrid = default!;
 
     // Default colors
     public Color WallColor = new(102, 217, 102);
@@ -62,26 +47,23 @@ public partial class NavMapControl : MapGridControl
     // Constants
     protected float UpdateTime = 1.0f;
     protected float MaxSelectableDistance = 10f;
+    protected float RecenterMinimum = 0.05f;
     protected float MinDragDistance = 5f;
     protected static float MinDisplayedRange = 8f;
     protected static float MaxDisplayedRange = 128f;
     protected static float DefaultDisplayedRange = 48f;
-    protected float MinmapScaleModifier = 0.075f;
-    protected float FullWallInstep = 0.165f;
-    protected float ThinWallThickness = 0.165f;
-    protected float ThinDoorThickness = 0.30f;
 
     // Local variables
-    private float _updateTimer = 1.0f;
-    private Dictionary<Color, Color> _sRGBLookUp = new();
-    protected Color BackgroundColor;
-    protected float BackgroundOpacity = 0.9f;
+    private Vector2 _offset;
+    private bool _draggin;
+    private Vector2 _startDragPosition = default!;
+    private bool _recentering = false;
+    private float _updateTimer = 0.25f;
+    private Dictionary<Color, Color> _sRGBLookUp = new Dictionary<Color, Color>();
+    public Color _backgroundColor;
+    public float _backgroundOpacity = 0.9f;
     private int _targetFontsize = 8;
-
-    private Dictionary<Vector2i, Vector2i> _horizLines = new();
-    private Dictionary<Vector2i, Vector2i> _horizLinesReversed = new();
-    private Dictionary<Vector2i, Vector2i> _vertLines = new();
-    private Dictionary<Vector2i, Vector2i> _vertLinesReversed = new();
+    private IResourceCache _cache;
 
     // Components
     private NavMapComponent? _navMap;
@@ -94,7 +76,6 @@ public partial class NavMapControl : MapGridControl
     private readonly Label _zoom = new()
     {
         VerticalAlignment = VAlignment.Top,
-        HorizontalExpand = true,
         Margin = new Thickness(8f, 8f),
     };
 
@@ -103,7 +84,6 @@ public partial class NavMapControl : MapGridControl
         Text = Loc.GetString("navmap-recenter"),
         VerticalAlignment = VAlignment.Top,
         HorizontalAlignment = HAlignment.Right,
-        HorizontalExpand = true,
         Margin = new Thickness(8f, 4f),
         Disabled = true,
     };
@@ -111,23 +91,19 @@ public partial class NavMapControl : MapGridControl
     private readonly CheckBox _beacons = new()
     {
         Text = Loc.GetString("navmap-toggle-beacons"),
+        Margin = new Thickness(4f, 0f),
         VerticalAlignment = VAlignment.Center,
         HorizontalAlignment = HAlignment.Center,
-        HorizontalExpand = true,
-        Margin = new Thickness(4f, 0f),
-        Pressed = true,
+        Pressed = false,
     };
-
-    private readonly Texture _whiteTexture;
 
     public NavMapControl() : base(MinDisplayedRange, MaxDisplayedRange, DefaultDisplayedRange)
     {
         IoCManager.InjectDependencies(this);
+        _cache = IoCManager.Resolve<IResourceCache>();
 
-        _transformSystem = EntManager.System<SharedTransformSystem>();
-        _navMapSystem = EntManager.System<SharedNavMapSystem>();
-
-        BackgroundColor = Color.FromSrgb(TileColor.WithAlpha(BackgroundOpacity));
+        _transformSystem = _entManager.System<SharedTransformSystem>();
+        _backgroundColor = Color.FromSrgb(TileColor.WithAlpha(_backgroundOpacity));
 
         RectClipContent = true;
         HorizontalExpand = true;
@@ -141,27 +117,17 @@ public partial class NavMapControl : MapGridControl
                 BorderColor = StyleNano.PanelDark
             },
             VerticalExpand = false,
-            HorizontalExpand = true,
-            SetWidth = 650f,
             Children =
             {
-                new BoxContainer()
-                {
-                    Orientation = BoxContainer.LayoutOrientation.Horizontal,
-                    Children =
-                    {
-                        _zoom,
-                        _beacons,
-                        _recenter
-                    }
-                }
+                _zoom,
+                _beacons,
+                _recenter,
             }
         };
 
         var topContainer = new BoxContainer()
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
-            HorizontalExpand = true,
             Children =
             {
                 topPanel,
@@ -179,20 +145,21 @@ public partial class NavMapControl : MapGridControl
 
         _recenter.OnPressed += args =>
         {
-            Recentering = true;
+            _recentering = true;
         };
 
-        _whiteTexture = Texture.White;
         ForceNavMapUpdate();
+    }
+
+    public void ForceRecenter()
+    {
+        _recentering = true;
     }
 
     public void ForceNavMapUpdate()
     {
-        EntManager.TryGetComponent(MapUid, out _navMap);
-        EntManager.TryGetComponent(MapUid, out _grid);
-        EntManager.TryGetComponent(MapUid, out _xform);
-        EntManager.TryGetComponent(MapUid, out _physics);
-        EntManager.TryGetComponent(MapUid, out _fixtures);
+        _entManager.TryGetComponent(MapUid, out _navMap);
+        _entManager.TryGetComponent(MapUid, out _grid);
 
         UpdateNavMap();
     }
@@ -200,14 +167,28 @@ public partial class NavMapControl : MapGridControl
     public void CenterToCoordinates(EntityCoordinates coordinates)
     {
         if (_physics != null)
-            Offset = new Vector2(coordinates.X, coordinates.Y) - _physics.LocalCenter;
+            _offset = new Vector2(coordinates.X, coordinates.Y) - _physics.LocalCenter;
 
         _recenter.Disabled = false;
+    }
+
+    protected override void KeyBindDown(GUIBoundKeyEventArgs args)
+    {
+        base.KeyBindDown(args);
+
+        if (args.Function == EngineKeyFunctions.Use)
+        {
+            _startDragPosition = args.PointerLocation.Position;
+            _draggin = true;
+        }
     }
 
     protected override void KeyBindUp(GUIBoundKeyEventArgs args)
     {
         base.KeyBindUp(args);
+
+        if (args.Function == EngineKeyFunctions.Use)
+            _draggin = false;
 
         if (args.Function == EngineKeyFunctions.UIClick)
         {
@@ -218,16 +199,16 @@ public partial class NavMapControl : MapGridControl
                 return;
 
             // If the cursor has moved a significant distance, exit
-            if ((StartDragPosition - args.PointerLocation.Position).Length() > MinDragDistance)
+            if ((_startDragPosition - args.PointerLocation.Position).Length() > MinDragDistance)
                 return;
 
             // Get the clicked position
-            var offset = Offset + _physics.LocalCenter;
+            var offset = _offset + _physics.LocalCenter;
             var localPosition = args.PointerLocation.Position - GlobalPixelPosition;
 
             // Convert to a world position
-            var unscaledPosition = (localPosition - MidPointVector) / MinimapScale;
-            var worldPosition = Vector2.Transform(new Vector2(unscaledPosition.X, -unscaledPosition.Y) + offset, _transformSystem.GetWorldMatrix(_xform));
+            var unscaledPosition = (localPosition - MidpointVector) / MinimapScale;
+            var worldPosition = _transformSystem.GetWorldMatrix(_xform).Transform(new Vector2(unscaledPosition.X, -unscaledPosition.Y) + offset);
 
             // Find closest tracked entity in range
             var closestEntity = NetEntity.Invalid;
@@ -238,7 +219,7 @@ public partial class NavMapControl : MapGridControl
                 if (!blip.Selectable)
                     continue;
 
-                var currentDistance = (_transformSystem.ToMapCoordinates(blip.Coordinates).Position - worldPosition).Length();
+                var currentDistance = (blip.Coordinates.ToMapPos(_entManager, _transformSystem) - worldPosition).Length();
 
                 if (closestDistance < currentDistance || currentDistance * MinimapScale > MaxSelectableDistance)
                     continue;
@@ -270,8 +251,15 @@ public partial class NavMapControl : MapGridControl
     {
         base.MouseMove(args);
 
-        if (Offset != Vector2.Zero)
+        if (!_draggin)
+            return;
+
+        _recentering = false;
+        _offset -= new Vector2(args.Relative.X, -args.Relative.Y) / MidPoint * WorldRange;
+
+        if (_offset != Vector2.Zero)
             _recenter.Disabled = false;
+
         else
             _recenter.Disabled = true;
     }
@@ -281,102 +269,140 @@ public partial class NavMapControl : MapGridControl
         base.Draw(handle);
 
         // Get the components necessary for drawing the navmap
-        EntManager.TryGetComponent(MapUid, out _navMap);
-        EntManager.TryGetComponent(MapUid, out _grid);
-        EntManager.TryGetComponent(MapUid, out _xform);
-        EntManager.TryGetComponent(MapUid, out _physics);
-        EntManager.TryGetComponent(MapUid, out _fixtures);
-
-        if (_navMap == null || _grid == null || _xform == null)
-            return;
+        _entManager.TryGetComponent(MapUid, out _navMap);
+        _entManager.TryGetComponent(MapUid, out _grid);
+        _entManager.TryGetComponent(MapUid, out _xform);
+        _entManager.TryGetComponent(MapUid, out _physics);
+        _entManager.TryGetComponent(MapUid, out _fixtures);
 
         // Map re-centering
-        _recenter.Disabled = DrawRecenter();
+        if (_recentering)
+        {
+            var frameTime = Timing.FrameTime;
+            var diff = _offset * (float) frameTime.TotalSeconds;
 
-        // Update zoom text
-        _zoom.Text = Loc.GetString("navmap-zoom", ("value", $"{(DefaultDisplayedRange / WorldRange):0.0}"));
+            if (_offset.LengthSquared() < RecenterMinimum)
+            {
+                _offset = Vector2.Zero;
+                _recentering = false;
+                _recenter.Disabled = true;
+            }
+            else
+            {
+                _offset -= diff * 5f;
+            }
+        }
 
-        // Update offset with physics local center
-        var offset = Offset;
+        _zoom.Text = Loc.GetString("navmap-zoom", ("value", $"{(DefaultDisplayedRange / WorldRange ):0.0}"));
+
+        if (_navMap == null || _xform == null)
+            return;
+
+        var offset = _offset;
 
         if (_physics != null)
             offset += _physics.LocalCenter;
 
-        var offsetVec = new Vector2(offset.X, -offset.Y);
-
-        // Wall sRGB
-        if (!_sRGBLookUp.TryGetValue(WallColor, out var wallsRGB))
+        // Draw tiles
+        if (_fixtures != null)
         {
-            wallsRGB = Color.ToSrgb(WallColor);
-            _sRGBLookUp[WallColor] = wallsRGB;
-        }
+            Span<Vector2> verts = new Vector2[8];
 
-        // Draw floor tiles
-        // if (TilePolygons.Any())
-        // {
-        //     foreach (var polygonVertsList in TilePolygons)
-        //     {
-        //         var polygonVertsSpan = CollectionsMarshal.AsSpan(polygonVertsList);
-        //         for (var i = 0; i < polygonVertsSpan.Length; i += 6000)
-        //         {
-        //             var max = Math.Min(i + 6000, polygonVertsSpan.Length);
-        //             handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, _whiteTexture, polygonVertsSpan[i..max]);
-        //         }
-        //     }
-        // }
-
-        if (_texture != null)
-        {
-            var size = Size.Y / _texture.Size.Y;
-            handle.DrawTextureRect(_texture, new UIBox2(Vector2.Zero, _texture.Size * size));
-        }
-
-        // Draw map lines
-        if (TileLines.Any())
-        {
-            var lines = new ValueList<Vector2>(TileLines.Count * 2);
-
-            foreach (var (o, t) in TileLines)
+            foreach (var fixture in _fixtures.Fixtures.Values)
             {
-                var origin = ScalePosition(o - offsetVec);
-                var terminus = ScalePosition(t - offsetVec);
+                if (fixture.Shape is not PolygonShape poly)
+                    continue;
 
-                lines.Add(origin);
-                lines.Add(terminus);
+                for (var i = 0; i < poly.VertexCount; i++)
+                {
+                    var vert = poly.Vertices[i] - offset;
+
+                    verts[i] = Scale(new Vector2(vert.X, -vert.Y));
+                }
+
+                handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, verts[..poly.VertexCount], TileColor);
+            }
+        }
+
+        var area = new Box2(-WorldRange, -WorldRange, WorldRange + 1f, WorldRange + 1f).Translated(offset);
+
+        // Drawing lines can be rather expensive due to the number of neighbors that need to be checked in order
+        // to figure out where they should be drawn. However, we don't *need* to do check these every frame.
+        // Instead, lets periodically update where to draw each line and then store these points in a list.
+        // Then we can just run through the list each frame and draw the lines without any extra computation.
+
+        // Draw walls
+        if (TileGrid != null && TileGrid.Count > 0)
+        {
+            var walls = new ValueList<Vector2>();
+
+            foreach ((var chunk, var chunkedLines) in TileGrid)
+            {
+                var offsetChunk = new Vector2(chunk.X, chunk.Y) * SharedNavMapSystem.ChunkSize;
+
+                if (offsetChunk.X < area.Left - SharedNavMapSystem.ChunkSize || offsetChunk.X > area.Right)
+                    continue;
+
+                if (offsetChunk.Y < area.Bottom - SharedNavMapSystem.ChunkSize || offsetChunk.Y > area.Top)
+                    continue;
+
+                foreach (var chunkedLine in chunkedLines)
+                {
+                    var start = Scale(chunkedLine.Origin - new Vector2(offset.X, -offset.Y));
+                    var end = Scale(chunkedLine.Terminus - new Vector2(offset.X, -offset.Y));
+
+                    walls.Add(start);
+                    walls.Add(end);
+                }
             }
 
-            if (lines.Count > 0)
-                handle.DrawPrimitives(DrawPrimitiveTopology.LineList, lines.Span, wallsRGB);
+            if (walls.Count > 0)
+            {
+                if (!_sRGBLookUp.TryGetValue(WallColor, out var sRGB))
+                {
+                    sRGB = Color.ToSrgb(WallColor);
+                    _sRGBLookUp[WallColor] = sRGB;
+                }
+
+                handle.DrawPrimitives(DrawPrimitiveTopology.LineList, walls.Span, sRGB);
+            }
         }
 
-        // Draw map rects
-        if (TileRects.Any())
+        var airlockBuffer = Vector2.One * (MinimapScale / 2.25f) * 0.75f;
+        var airlockLines = new ValueList<Vector2>();
+        var foobarVec = new Vector2(1, -1);
+
+        foreach (var airlock in _navMap.Airlocks)
         {
-            var rects = new ValueList<Vector2>(TileRects.Count * 8);
+            var position = airlock.Position - offset;
+            position = Scale(position with { Y = -position.Y });
+            airlockLines.Add(position + airlockBuffer);
+            airlockLines.Add(position - airlockBuffer * foobarVec);
 
-            foreach (var (lt, rb) in TileRects)
+            airlockLines.Add(position + airlockBuffer);
+            airlockLines.Add(position + airlockBuffer * foobarVec);
+
+            airlockLines.Add(position - airlockBuffer);
+            airlockLines.Add(position + airlockBuffer * foobarVec);
+
+            airlockLines.Add(position - airlockBuffer);
+            airlockLines.Add(position - airlockBuffer * foobarVec);
+
+            airlockLines.Add(position + airlockBuffer * -Vector2.UnitY);
+            airlockLines.Add(position - airlockBuffer * -Vector2.UnitY);
+        }
+
+        if (airlockLines.Count > 0)
+        {
+            if (!_sRGBLookUp.TryGetValue(WallColor, out var sRGB))
             {
-                var leftTop = ScalePosition(lt - offsetVec);
-                var rightBottom = ScalePosition(rb - offsetVec);
-
-                var rightTop = new Vector2(rightBottom.X, leftTop.Y);
-                var leftBottom = new Vector2(leftTop.X, rightBottom.Y);
-
-                rects.Add(leftTop);
-                rects.Add(rightTop);
-                rects.Add(rightTop);
-                rects.Add(rightBottom);
-                rects.Add(rightBottom);
-                rects.Add(leftBottom);
-                rects.Add(leftBottom);
-                rects.Add(leftTop);
+                sRGB = Color.ToSrgb(WallColor);
+                _sRGBLookUp[WallColor] = sRGB;
             }
 
-            if (rects.Count > 0)
-                handle.DrawPrimitives(DrawPrimitiveTopology.LineList, rects.Span, wallsRGB);
+            handle.DrawPrimitives(DrawPrimitiveTopology.LineList, airlockLines.Span, sRGB);
         }
 
-        // Invoke post wall drawing action
         if (PostWallDrawingAction != null)
             PostWallDrawingAction.Invoke(handle);
 
@@ -386,16 +412,16 @@ public partial class NavMapControl : MapGridControl
             var rectBuffer = new Vector2(5f, 3f);
 
             // Calculate font size for current zoom level
-            var fontSize = (int) Math.Round(1 / WorldRange * DefaultDisplayedRange * UIScale * _targetFontsize, 0);
+            var fontSize = (int) Math.Round(1 / WorldRange * DefaultDisplayedRange * UIScale * _targetFontsize , 0);
             var font = new VectorFont(_cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Bold.ttf"), fontSize);
 
-            foreach (var beacon in _navMap.Beacons.Values)
+            foreach (var beacon in _navMap.Beacons)
             {
                 var position = beacon.Position - offset;
-                position = ScalePosition(position with { Y = -position.Y });
+                position = Scale(position with { Y = -position.Y });
 
                 var textDimensions = handle.GetDimensions(font, beacon.Text, 1f);
-                handle.DrawRect(new UIBox2(position - textDimensions / 2 - rectBuffer, position + textDimensions / 2 + rectBuffer), BackgroundColor);
+                handle.DrawRect(new UIBox2(position - textDimensions / 2 - rectBuffer, position + textDimensions / 2 + rectBuffer), _backgroundColor);
                 handle.DrawString(font, position - textDimensions / 2, beacon.Text, beacon.Color);
             }
         }
@@ -409,12 +435,12 @@ public partial class NavMapControl : MapGridControl
         {
             if (lit && value.Visible)
             {
-                var mapPos = _transformSystem.ToMapCoordinates(coord);
+                var mapPos = coord.ToMap(_entManager, _transformSystem);
 
                 if (mapPos.MapId != MapId.Nullspace)
                 {
-                    var position = Vector2.Transform(mapPos.Position, _transformSystem.GetInvWorldMatrix(_xform)) - offset;
-                    position = ScalePosition(new Vector2(position.X, -position.Y));
+                    var position = _transformSystem.GetInvWorldMatrix(_xform).Transform(mapPos.Position) - offset;
+                    position = Scale(new Vector2(position.X, -position.Y));
 
                     handle.DrawCircle(position, float.Sqrt(MinimapScale) * 2f, value.Color);
                 }
@@ -422,6 +448,8 @@ public partial class NavMapControl : MapGridControl
         }
 
         // Tracked entities (can use a supplied sprite as a marker instead; should probably just replace TrackedCoordinates with this eventually)
+        var iconVertexUVs = new Dictionary<(Texture, Color), ValueList<DrawVertexUV2D>>();
+
         foreach (var blip in TrackedEntities.Values)
         {
             if (blip.Blinks && !lit)
@@ -430,18 +458,39 @@ public partial class NavMapControl : MapGridControl
             if (blip.Texture == null)
                 continue;
 
-            var mapPos = _transformSystem.ToMapCoordinates(blip.Coordinates);
+            if (!iconVertexUVs.TryGetValue((blip.Texture, blip.Color), out var vertexUVs))
+                vertexUVs = new();
+
+            var mapPos = blip.Coordinates.ToMap(_entManager, _transformSystem);
 
             if (mapPos.MapId != MapId.Nullspace)
             {
-                var position = Vector2.Transform(mapPos.Position, _transformSystem.GetInvWorldMatrix(_xform)) - offset;
-                position = ScalePosition(new Vector2(position.X, -position.Y));
+                var position = _transformSystem.GetInvWorldMatrix(_xform).Transform(mapPos.Position) - offset;
+                position = Scale(new Vector2(position.X, -position.Y));
 
-                var scalingCoefficient = MinmapScaleModifier * float.Sqrt(MinimapScale);
-                var positionOffset = new Vector2(scalingCoefficient * blip.Texture.Width, scalingCoefficient * blip.Texture.Height);
+                var scalingCoefficient = 2.5f;
+                var positionOffset = scalingCoefficient * float.Sqrt(MinimapScale);
 
-                handle.DrawTextureRect(blip.Texture, new UIBox2(position - positionOffset, position + positionOffset), blip.Color);
+                vertexUVs.Add(new DrawVertexUV2D(new Vector2(position.X - positionOffset, position.Y - positionOffset), new Vector2(1f, 1f)));
+                vertexUVs.Add(new DrawVertexUV2D(new Vector2(position.X - positionOffset, position.Y + positionOffset), new Vector2(1f, 0f)));
+                vertexUVs.Add(new DrawVertexUV2D(new Vector2(position.X + positionOffset, position.Y - positionOffset), new Vector2(0f, 1f)));
+                vertexUVs.Add(new DrawVertexUV2D(new Vector2(position.X - positionOffset, position.Y + positionOffset), new Vector2(1f, 0f)));
+                vertexUVs.Add(new DrawVertexUV2D(new Vector2(position.X + positionOffset, position.Y - positionOffset), new Vector2(0f, 1f)));
+                vertexUVs.Add(new DrawVertexUV2D(new Vector2(position.X + positionOffset, position.Y + positionOffset), new Vector2(0f, 0f)));
             }
+
+            iconVertexUVs[(blip.Texture, blip.Color)] = vertexUVs;
+        }
+
+        foreach ((var (texture, color), var vertexUVs) in iconVertexUVs)
+        {
+            if (!_sRGBLookUp.TryGetValue(color, out var sRGB))
+            {
+                sRGB = Color.ToSrgb(color);
+                _sRGBLookUp[color] = sRGB;
+            }
+
+            handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, texture, vertexUVs.Span, sRGB);
         }
     }
 
@@ -460,301 +509,133 @@ public partial class NavMapControl : MapGridControl
 
     protected virtual void UpdateNavMap()
     {
-        // Clear stale values
-        TilePolygons.Clear();
-        TileLines.Clear();
-        TileRects.Clear();
-
-        UpdateNavMapFloorTiles();
-        UpdateNavMapWallLines();
-        UpdateNavMapAirlocks();
-    }
-
-    private void UpdateNavMapFloorTiles()
-    {
-        DrawVertexUV2DColor Scale(Vector2 vector, float scale, Vector2 midPoint, Vector2 offset, Color color)
-        {
-            vector = new Vector2(vector.X, vector.Y) - offset;
-            return new DrawVertexUV2DColor(ScalePosition(vector with { Y = -vector.Y }, scale, midPoint), color);
-        }
-
-        Span<Vector2> verts = new Vector2[8];
-        if (EntManager.TryGetComponent(MapUid, out AreaGridComponent? areaGrid) &&
-            areaGrid.Colors.Count > 0)
-        {
-            var min = Vector2i.Zero;
-            var max = Vector2i.Zero;
-            foreach (var position in areaGrid.Colors.Keys)
-            {
-                min = Vector2i.ComponentMin(min, position);
-                max = Vector2i.ComponentMax(max, position);
-            }
-
-            var width = max.X - min.X;
-            var height = max.Y - min.Y;
-            if (width <= 0 || height <= 0)
-                return;
-
-            var image = new Image<Rgba32>(max.X - min.X + 1, max.Y - min.Y + 1);
-            foreach (var (position, color) in areaGrid.Colors)
-            {
-                image[position.X - min.X, ((max.Y - min.Y) - (position.Y - min.Y))] = new Rgba32(color.R, color.G, color.B, color.A);
-            }
-
-            _texture = Texture.LoadFromImage(image);
-            return;
-        }
-
-        if (_fixtures == null)
-            return;
-
-        foreach (var fixture in _fixtures.Fixtures.Values)
-        {
-            if (fixture.Shape is not PolygonShape poly)
-                continue;
-
-            for (var i = 0; i < poly.VertexCount; i++)
-            {
-                var vert = poly.Vertices[i];
-                verts[i] = new Vector2(MathF.Round(vert.X), MathF.Round(vert.Y));
-            }
-
-            // TilePolygons.Add((verts[..poly.VertexCount], TileColor));
-        }
-    }
-
-    private void UpdateNavMapWallLines()
-    {
         if (_navMap == null || _grid == null)
             return;
 
-        // We'll use the following dictionaries to combine collinear wall lines
-        _horizLines.Clear();
-        _horizLinesReversed.Clear();
-        _vertLines.Clear();
-        _vertLinesReversed.Clear();
+        TileGrid = GetDecodedWallChunks(_navMap.Chunks, _grid);
+    }
 
-        const int southMask = (int) AtmosDirection.South << (int) NavMapChunkType.Wall;
-        const int eastMask = (int) AtmosDirection.East << (int) NavMapChunkType.Wall;
-        const int westMask = (int) AtmosDirection.West << (int) NavMapChunkType.Wall;
-        const int northMask = (int) AtmosDirection.North << (int) NavMapChunkType.Wall;
+    public Dictionary<Vector2i, List<NavMapLine>> GetDecodedWallChunks
+        (Dictionary<Vector2i, NavMapChunk> chunks,
+        MapGridComponent grid)
+    {
+        var decodedOutput = new Dictionary<Vector2i, List<NavMapLine>>();
 
-        foreach (var (chunkOrigin, chunk) in _navMap.Chunks)
+        foreach ((var chunkOrigin, var chunk) in chunks)
         {
-            for (var i = 0; i < SharedNavMapSystem.ArraySize; i++)
+            var list = new List<NavMapLine>();
+
+            // TODO: Okay maybe I should just use ushorts lmao...
+            for (var i = 0; i < SharedNavMapSystem.ChunkSize * SharedNavMapSystem.ChunkSize; i++)
             {
-                var tileData = chunk.TileData[i] & SharedNavMapSystem.WallMask;
-                if (tileData == 0)
+                var value = (int) Math.Pow(2, i);
+
+                var mask = chunk.TileData & value;
+
+                if (mask == 0x0)
                     continue;
 
-                tileData >>= (int) NavMapChunkType.Wall;
-
-                var relativeTile = SharedNavMapSystem.GetTileFromIndex(i);
-                var tile = (chunk.Origin * SharedNavMapSystem.ChunkSize + relativeTile) * _grid.TileSize;
-
-                if (tileData != SharedNavMapSystem.AllDirMask)
-                {
-                    AddRectForThinWall(tileData, tile);
-                    continue;
-                }
-
-                tile = tile with { Y = -tile.Y };
+                // Alright now we'll work out our edges
+                var relativeTile = SharedNavMapSystem.GetTile(mask);
+                var tile = (chunk.Origin * SharedNavMapSystem.ChunkSize + relativeTile) * grid.TileSize;
+                var position = new Vector2(tile.X, -tile.Y);
                 NavMapChunk? neighborChunk;
+                bool neighbor;
 
                 // North edge
-                var neighborData = 0;
-                if (relativeTile.Y != SharedNavMapSystem.ChunkSize - 1)
-                    neighborData = chunk.TileData[i+1];
-                else if (_navMap.Chunks.TryGetValue(chunkOrigin + Vector2i.Up, out neighborChunk))
-                    neighborData = neighborChunk.TileData[i + 1 - SharedNavMapSystem.ChunkSize];
-
-                if ((neighborData & southMask) == 0)
+                if (relativeTile.Y == SharedNavMapSystem.ChunkSize - 1)
                 {
-                    AddOrUpdateNavMapLine(tile + new Vector2i(0, -_grid.TileSize),
-                        tile + new Vector2i(_grid.TileSize, -_grid.TileSize), _horizLines,
-                        _horizLinesReversed);
+                    neighbor = chunks.TryGetValue(chunkOrigin + new Vector2i(0, 1), out neighborChunk) &&
+                                  (neighborChunk.TileData &
+                                   SharedNavMapSystem.GetFlag(new Vector2i(relativeTile.X, 0))) != 0x0;
+                }
+                else
+                {
+                    var flag = SharedNavMapSystem.GetFlag(relativeTile + new Vector2i(0, 1));
+                    neighbor = (chunk.TileData & flag) != 0x0;
+                }
+
+                if (!neighbor)
+                {
+                    // Add points
+                    list.Add(new NavMapLine(position + new Vector2(0f, -grid.TileSize), position + new Vector2(grid.TileSize, -grid.TileSize)));
                 }
 
                 // East edge
-                neighborData = 0;
-                if (relativeTile.X != SharedNavMapSystem.ChunkSize - 1)
-                    neighborData = chunk.TileData[i + SharedNavMapSystem.ChunkSize];
-                else if (_navMap.Chunks.TryGetValue(chunkOrigin + Vector2i.Right, out neighborChunk))
-                    neighborData = neighborChunk.TileData[i + SharedNavMapSystem.ChunkSize - SharedNavMapSystem.ArraySize];
-
-                if ((neighborData & westMask) == 0)
+                if (relativeTile.X == SharedNavMapSystem.ChunkSize - 1)
                 {
-                    AddOrUpdateNavMapLine(tile + new Vector2i(_grid.TileSize, -_grid.TileSize),
-                        tile + new Vector2i(_grid.TileSize, 0), _vertLines, _vertLinesReversed);
+                    neighbor = chunks.TryGetValue(chunkOrigin + new Vector2i(1, 0), out neighborChunk) &&
+                               (neighborChunk.TileData &
+                                SharedNavMapSystem.GetFlag(new Vector2i(0, relativeTile.Y))) != 0x0;
+                }
+                else
+                {
+                    var flag = SharedNavMapSystem.GetFlag(relativeTile + new Vector2i(1, 0));
+                    neighbor = (chunk.TileData & flag) != 0x0;
+                }
+
+                if (!neighbor)
+                {
+                    // Add points
+                    list.Add(new NavMapLine(position + new Vector2(grid.TileSize, -grid.TileSize), position + new Vector2(grid.TileSize, 0f)));
                 }
 
                 // South edge
-                neighborData = 0;
-                if (relativeTile.Y != 0)
-                    neighborData = chunk.TileData[i - 1];
-                else if (_navMap.Chunks.TryGetValue(chunkOrigin + Vector2i.Down, out neighborChunk))
-                    neighborData = neighborChunk.TileData[i - 1 + SharedNavMapSystem.ChunkSize];
-
-                if ((neighborData & northMask) == 0)
+                if (relativeTile.Y == 0)
                 {
-                    AddOrUpdateNavMapLine(tile, tile + new Vector2i(_grid.TileSize, 0), _horizLines,
-                        _horizLinesReversed);
+                    neighbor = chunks.TryGetValue(chunkOrigin + new Vector2i(0, -1), out neighborChunk) &&
+                               (neighborChunk.TileData &
+                                SharedNavMapSystem.GetFlag(new Vector2i(relativeTile.X, SharedNavMapSystem.ChunkSize - 1))) != 0x0;
+                }
+                else
+                {
+                    var flag = SharedNavMapSystem.GetFlag(relativeTile + new Vector2i(0, -1));
+                    neighbor = (chunk.TileData & flag) != 0x0;
+                }
+
+                if (!neighbor)
+                {
+                    // Add points
+                    list.Add(new NavMapLine(position + new Vector2(grid.TileSize, 0f), position));
                 }
 
                 // West edge
-                neighborData = 0;
-                if (relativeTile.X != 0)
-                    neighborData = chunk.TileData[i - SharedNavMapSystem.ChunkSize];
-                else if (_navMap.Chunks.TryGetValue(chunkOrigin + Vector2i.Left, out neighborChunk))
-                    neighborData = neighborChunk.TileData[i - SharedNavMapSystem.ChunkSize + SharedNavMapSystem.ArraySize];
-
-                if ((neighborData & eastMask) == 0)
+                if (relativeTile.X == 0)
                 {
-                    AddOrUpdateNavMapLine(tile + new Vector2i(0, -_grid.TileSize), tile, _vertLines,
-                        _vertLinesReversed);
+                    neighbor = chunks.TryGetValue(chunkOrigin + new Vector2i(-1, 0), out neighborChunk) &&
+                               (neighborChunk.TileData &
+                                SharedNavMapSystem.GetFlag(new Vector2i(SharedNavMapSystem.ChunkSize - 1, relativeTile.Y))) != 0x0;
+                }
+                else
+                {
+                    var flag = SharedNavMapSystem.GetFlag(relativeTile + new Vector2i(-1, 0));
+                    neighbor = (chunk.TileData & flag) != 0x0;
                 }
 
-                // Add a diagonal line for interiors. Unless there are a lot of double walls, there is no point combining these
-                TileLines.Add((tile + new Vector2(0, -_grid.TileSize), tile + new Vector2(_grid.TileSize, 0)));
-            }
-        }
-
-        // Record the combined lines
-        foreach (var (origin, terminal) in _horizLines)
-        {
-            TileLines.Add((origin, terminal));
-        }
-
-        foreach (var (origin, terminal) in _vertLines)
-        {
-            TileLines.Add((origin, terminal));
-        }
-    }
-
-    private void UpdateNavMapAirlocks()
-    {
-        if (_navMap == null || _grid == null)
-            return;
-
-        foreach (var chunk in _navMap.Chunks.Values)
-        {
-            for (var i = 0; i < SharedNavMapSystem.ArraySize; i++)
-            {
-                var tileData = chunk.TileData[i] & SharedNavMapSystem.AirlockMask;
-                if (tileData == 0)
-                    continue;
-
-                tileData >>= (int) NavMapChunkType.Airlock;
-
-                var relative = SharedNavMapSystem.GetTileFromIndex(i);
-                var tile = (chunk.Origin * SharedNavMapSystem.ChunkSize + relative) * _grid.TileSize;
-
-                // If the edges of an airlock tile are not all occupied, draw a thin airlock for each edge
-                if (tileData != SharedNavMapSystem.AllDirMask)
+                if (!neighbor)
                 {
-                    AddRectForThinAirlock(tileData, tile);
-                    continue;
+                    // Add point
+                    list.Add(new NavMapLine(position, position + new Vector2(0f, -grid.TileSize)));
                 }
 
-                // Otherwise add a single full tile airlock
-                TileRects.Add((new Vector2(tile.X + FullWallInstep, -tile.Y - FullWallInstep),
-                    new Vector2(tile.X - FullWallInstep + 1f, -tile.Y + FullWallInstep - 1)));
-
-                TileLines.Add((new Vector2(tile.X + 0.5f, -tile.Y - FullWallInstep),
-                    new Vector2(tile.X + 0.5f, -tile.Y + FullWallInstep - 1)));
+                // Draw a diagonal line for interiors.
+                list.Add(new NavMapLine(position + new Vector2(0f, -grid.TileSize), position + new Vector2(grid.TileSize, 0f)));
             }
+
+            decodedOutput.Add(chunkOrigin, list);
         }
+
+        return decodedOutput;
     }
 
-    private void AddRectForThinWall(int tileData, Vector2i tile)
+    protected Vector2 Scale(Vector2 position)
     {
-        var leftTop = new Vector2(-0.5f, 0.5f - ThinWallThickness);
-        var rightBottom = new Vector2(0.5f, 0.5f);
-
-        for (var i = 0; i < SharedNavMapSystem.Directions; i++)
-        {
-            var dirMask = 1 << i;
-            if ((tileData & dirMask) == 0)
-                continue;
-
-            var tilePosition = new Vector2(tile.X + 0.5f, -tile.Y - 0.5f);
-
-            // TODO NAVMAP
-            // Consider using faster rotation operations, given that these are always 90 degree increments
-            var angle = -((AtmosDirection) dirMask).ToAngle();
-            TileRects.Add((angle.RotateVec(leftTop) + tilePosition, angle.RotateVec(rightBottom) + tilePosition));
-        }
-    }
-
-    private void AddRectForThinAirlock(int tileData, Vector2i tile)
-    {
-        var leftTop = new Vector2(-0.5f + FullWallInstep, 0.5f - FullWallInstep - ThinDoorThickness);
-        var rightBottom = new Vector2(0.5f - FullWallInstep, 0.5f - FullWallInstep);
-        var centreTop = new Vector2(0f, 0.5f - FullWallInstep - ThinDoorThickness);
-        var centreBottom = new Vector2(0f, 0.5f - FullWallInstep);
-
-        for (var i = 0; i < SharedNavMapSystem.Directions; i++)
-        {
-            var dirMask = 1 << i;
-            if ((tileData & dirMask) == 0)
-                continue;
-
-            var tilePosition = new Vector2(tile.X + 0.5f, -tile.Y - 0.5f);
-            var angle = -((AtmosDirection) dirMask).ToAngle();
-            TileRects.Add((angle.RotateVec(leftTop) + tilePosition, angle.RotateVec(rightBottom) + tilePosition));
-            TileLines.Add((angle.RotateVec(centreTop) + tilePosition, angle.RotateVec(centreBottom) + tilePosition));
-        }
-    }
-
-    protected void AddOrUpdateNavMapLine(
-        Vector2i origin,
-        Vector2i terminus,
-        Dictionary<Vector2i, Vector2i> lookup,
-        Dictionary<Vector2i, Vector2i> lookupReversed)
-    {
-        Vector2i foundTermius;
-        Vector2i foundOrigin;
-
-        // Does our new line end at the beginning of an existing line?
-        if (lookup.Remove(terminus, out foundTermius))
-        {
-            DebugTools.Assert(lookupReversed[foundTermius] == terminus);
-
-            // Does our new line start at the end of an existing line?
-            if (lookupReversed.Remove(origin, out foundOrigin))
-            {
-                // Our new line just connects two existing lines
-                DebugTools.Assert(lookup[foundOrigin] == origin);
-                lookup[foundOrigin] = foundTermius;
-                lookupReversed[foundTermius] = foundOrigin;
-            }
-            else
-            {
-                // Our new line precedes an existing line, extending it further to the left
-                lookup[origin] = foundTermius;
-                lookupReversed[foundTermius] = origin;
-            }
-            return;
-        }
-
-        // Does our new line start at the end of an existing line?
-        if (lookupReversed.Remove(origin, out foundOrigin))
-        {
-            // Our new line just extends an existing line further to the right
-            DebugTools.Assert(lookup[foundOrigin] == origin);
-            lookup[foundOrigin] = terminus;
-            lookupReversed[terminus] = foundOrigin;
-            return;
-        }
-
-        // Completely disconnected line segment.
-        lookup.Add(origin, terminus);
-        lookupReversed.Add(terminus, origin);
+        return position * MinimapScale + MidpointVector;
     }
 
     protected Vector2 GetOffset()
     {
-        return Offset + (_physics?.LocalCenter ?? new Vector2());
+        return _offset + (_physics != null ? _physics.LocalCenter : new Vector2());
     }
 }
 
@@ -773,5 +654,17 @@ public struct NavMapBlip
         Color = color;
         Blinks = blinks;
         Selectable = selectable;
+    }
+}
+
+public struct NavMapLine
+{
+    public readonly Vector2 Origin;
+    public readonly Vector2 Terminus;
+
+    public NavMapLine(Vector2 origin, Vector2 terminus)
+    {
+        Origin = origin;
+        Terminus = terminus;
     }
 }
