@@ -101,14 +101,14 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             return;
         }
 
-        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
+        if (!_xenoPlasma.HasPlasmaPopup(xeno.Owner, args.PlasmaCost, false))
         {
             return;
         }
 
         if (_xenoWeeds.GetWeedsOnFloor((gridId, grid), location, true) is EntityUid weeds)
         {
-            var ev = new XenoPlaceResinHoleDestroyWeedSourceDoAfterEvent(args.Prototype);
+            var ev = new XenoPlaceResinHoleDestroyWeedSourceDoAfterEvent(args.Prototype, args.PlasmaCost);
             var doAfterArgs = new DoAfterArgs(_entities, xeno.Owner, args.DestroyWeedSourceDelay, ev, xeno.Owner, weeds)
             {
                 BlockDuplicate = true,
@@ -118,12 +118,14 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             _doAfter.TryStartDoAfter(doAfterArgs);
             return;
         }
+
+        _xenoPlasma.TryRemovePlasma(xeno.Owner, args.PlasmaCost);
         PlaceResinHole(xeno.Owner, location, args.Prototype);
     }
 
     private void OnCompleteRemoveWeedSource(Entity<XenoComponent> xeno, ref XenoPlaceResinHoleDestroyWeedSourceDoAfterEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || args.Cancelled)
         {
             return;
         }
@@ -134,7 +136,13 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         }
 
         var location = _transform.GetMoverCoordinates(xeno).SnapToGrid(_entities);
-        PlaceResinHole(xeno.Owner, location, args.Prototype);
+
+        if (!_xenoPlasma.HasPlasmaPopup(xeno.Owner, args.PlasmaCost, false))
+        {
+            return;
+        }
+        _xenoPlasma.TryRemovePlasma(xeno.Owner, args.PlasmaCost);
+        PlaceResinHole(xeno.Owner, location, args.ResinHolePrototype);
         QueueDel(args.Target);
     }
 
@@ -214,8 +222,16 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             return;
         }
 
-        if (comp.TrapPrototype is not EntProtoId possibleParasiteProto)
+        if (comp.TrapPrototype is not EntProtoId containedProto)
         {
+            if (TryComp(args.User, out XenoBombardComponent? bombardComp))
+            {
+                if (!_xenoPlasma.HasPlasmaPopup(args.User, bombardComp.PlasmaCost, false))
+                {
+                    return;
+                }
+            }
+
             var ev = new XenoPlaceFluidInHoleDoAfterEvent();
             var doAfterArgs = new DoAfterArgs(_entities, args.User, comp.AddFluidDelay, ev, ent)
             {
@@ -225,7 +241,12 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             return;
         }
 
-        _hands.TryPickupAnyHand(args.User, Spawn(possibleParasiteProto));
+        if (containedProto != XenoResinHoleComponent.ParasitePrototype)
+        {
+            return;
+        }
+
+        _hands.TryPickupAnyHand(args.User, Spawn(containedProto));
 
         comp.TrapPrototype = null;
         _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
@@ -244,6 +265,13 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         // TODO: Praetorian logic of adding acid spray
         if (TryComp(args.User, out XenoBombardComponent? bombardComp))
         {
+
+            if (!_xenoPlasma.HasPlasmaPopup(args.User, bombardComp.PlasmaCost, false))
+            {
+                return;
+            }
+            _xenoPlasma.TryRemovePlasma(args.User, bombardComp.PlasmaCost);
+
             comp.TrapPrototype = bombardComp.Projectile;
             switch (bombardComp.Projectile.Id)
             {

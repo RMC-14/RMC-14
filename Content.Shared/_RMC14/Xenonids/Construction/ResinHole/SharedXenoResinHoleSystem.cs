@@ -56,10 +56,12 @@ public sealed partial class XenoPlaceFluidInHoleDoAfterEvent : SimpleDoAfterEven
 [Serializable, NetSerializable]
 public sealed partial class XenoPlaceResinHoleDestroyWeedSourceDoAfterEvent : SimpleDoAfterEvent
 {
-    public EntProtoId Prototype;
+    public EntProtoId ResinHolePrototype;
+    public int PlasmaCost;
 
-    public XenoPlaceResinHoleDestroyWeedSourceDoAfterEvent(EntProtoId prototype)
+    public XenoPlaceResinHoleDestroyWeedSourceDoAfterEvent(EntProtoId resinHolePrototype, int plasmaCost)
     {
-        Prototype = prototype;
+        ResinHolePrototype = resinHolePrototype;
+        PlasmaCost = plasmaCost;
     }
 }
