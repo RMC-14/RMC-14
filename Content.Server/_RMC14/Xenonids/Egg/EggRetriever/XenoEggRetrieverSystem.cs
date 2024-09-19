@@ -1,33 +1,24 @@
+using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
-using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
-using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Content.Shared._RMC14.Xenonids.Egg.EggRetriever;
+namespace Content.Server._RMC14.Xenonids.Egg.EggRetriever;
 
 public sealed partial class XenoEggRetrieverSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedInteractionSystem _interact = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+
 
     public override void Initialize()
     {
@@ -45,11 +36,7 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
         var (ent, comp) = eggRetriever;
 
         var target = args.Target;
-
-        if (!_container.TryGetContainer(ent, XenoEggRetrieverComponent.EggContainerId, out var eggContainer))
-        {
-            return;
-        }
+        args.Handled = true;
 
         // If none of the entities on the selected, in-range tile are eggs, try to pull an egg out of inventory
         if (_interact.InRangeUnobstructed(ent, target))
@@ -67,37 +54,37 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
 
                 tileHasEggs = true;
 
-                if (eggContainer.Count >= comp.MaxEggs)
+                if (comp.CurEggs >= comp.MaxEggs)
                 {
-                    _popup.PopupClient(Loc.GetString("cm-xeno-retrieve-egg-too-many-eggs"), ent, ent);
+                    _popup.PopupEntity(Loc.GetString("cm-xeno-retrieve-egg-too-many-eggs"), ent, ent);
                     return;
                 }
 
-                _container.Insert(possibleEgg, eggContainer);
+                AddEgg(possibleEgg, eggRetriever);
             }
 
             if (tileHasEggs)
             {
-                var stashMsg = Loc.GetString("cm-xeno-retrieve-egg-stash-egg", ("cur_eggs", eggContainer.Count), ("max_eggs", comp.MaxEggs));
-                _popup.PopupClient(stashMsg, ent, ent);
+                var stashMsg = Loc.GetString("cm-xeno-retrieve-egg-stash-egg", ("cur_eggs", comp.CurEggs), ("max_eggs", comp.MaxEggs));
+                _popup.PopupEntity(stashMsg, ent, ent);
                 return;
             }
         }
 
-        if (eggContainer.Count == 0)
+        if (comp.CurEggs == 0)
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-retrieve-egg-no-eggs"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cm-xeno-retrieve-egg-no-eggs"), ent, ent);
             return;
         }
 
-        if (!eggContainer.ContainedEntities.TryFirstOrNull(out var egg))
+        if (RemoveEgg(eggRetriever) is not EntityUid newEgg)
         {
             return;
         }
+        _hands.TryPickupAnyHand(ent, newEgg);
 
-        _hands.TryPickupAnyHand(ent, egg.Value);
-        var unstashMsg = Loc.GetString("cm-xeno-retrieve-egg-unstash-egg", ("cur_eggs", eggContainer.Count), ("max_eggs", comp.MaxEggs));
-        _popup.PopupClient(unstashMsg, ent, ent);
+        var unstashMsg = Loc.GetString("cm-xeno-retrieve-egg-unstash-egg", ("cur_eggs", comp.CurEggs), ("max_eggs", comp.MaxEggs));
+        _popup.PopupEntity(unstashMsg, ent, ent);
     }
 
     private void OnXenoRetrieverUseInHand(Entity<XenoEggRetrieverComponent> eggRetriever, ref XenoEggUseInHandEvent args)
@@ -108,20 +95,17 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
             return;
         }
 
-        if (!_container.TryGetContainer(ent, XenoEggRetrieverComponent.EggContainerId, out var eggContainer))
+        if (comp.CurEggs >= comp.MaxEggs)
         {
+            _popup.PopupEntity(Loc.GetString("cm-xeno-retrieve-egg-too-many-eggs"), ent, ent);
             return;
         }
 
-        if (eggContainer.Count >= comp.MaxEggs)
-        {
-            _popup.PopupClient(Loc.GetString("cm-xeno-retrieve-egg-too-many-eggs"), ent, ent);
-            return;
-        }
 
-        _container.Insert(_entities.GetEntity(args.UsedEgg), eggContainer);
-        var msg = Loc.GetString("cm-xeno-retrieve-egg-stash-egg", ("cur_eggs", eggContainer.Count), ("max_eggs", comp.MaxEggs));
-        _popup.PopupClient(msg, ent, ent);
+        AddEgg(_entities.GetEntity(args.UsedEgg), eggRetriever);
+
+        var msg = Loc.GetString("cm-xeno-retrieve-egg-stash-egg", ("cur_eggs", comp.CurEggs), ("max_eggs", comp.MaxEggs));
+        _popup.PopupEntity(msg, ent, ent);
         args.Handled = true;
     }
 
@@ -144,18 +128,33 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
 
     private bool DropAllStoredEggs(Entity<XenoEggRetrieverComponent> xeno)
     {
-        if (!_container.TryGetContainer(xeno.Owner, XenoEggRetrieverComponent.EggContainerId, out var eggContainer))
+        for (var i = 0; i < xeno.Comp.CurEggs; ++i)
         {
-            return false;
-        }
-
-        List<EntityUid> containedEntitiesCopy = new(eggContainer.ContainedEntities.ToList());
-
-        foreach (var egg in containedEntitiesCopy)
-        {
-            _transform.DropNextTo(egg, xeno.Owner);
+            var newEgg = Spawn(xeno.Comp.EggPrototype);
+            _transform.DropNextTo(newEgg, xeno.Owner);
         }
         return true;
     }
 
+    /// <summary>
+    /// Delete the egg provided, increment XenoEggRetriever Component's CurEggs
+    /// Does not peform any checks.
+    /// </summary>
+    private void AddEgg(EntityUid egg, Entity<XenoEggRetrieverComponent> xeno)
+    {
+        xeno.Comp.CurEggs++;
+
+        QueueDel(egg);
+    }
+
+    /// <summary>
+    /// Spawn a egg, decrement XenoEggRetriever Component's CurEggs, and return the new egg.
+    /// Does not peform any checks.
+    /// </summary>
+    private EntityUid? RemoveEgg(Entity<XenoEggRetrieverComponent> xeno)
+    {
+        xeno.Comp.CurEggs--;
+
+        return Spawn(xeno.Comp.EggPrototype);
+    }
 }
