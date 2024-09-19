@@ -89,11 +89,9 @@
       components:
       - XenoParasite
       - XenoEgg
-  - type: ContainerContainer
-    containers:
-      eggs: !type:Container
-      parasites: !type:Container
   - type: XenoParasiteThrower
+  - type: Hands
+    throwRange: 4
   - type: XenoEggRetriever
   - type: RMCSize
     size: Big
