@@ -1,5 +1,6 @@
 ﻿using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
+using Content.Shared.Projectiles;
 using Content.Shared._RMC14.Armor;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
@@ -62,7 +63,11 @@ public sealed partial class XenoShieldSystem : EntitySystem
             RemoveShield(ent, ent.Comp.Shield);
         }
         else
+        {
+            if (HasComp<ProjectileComponent>(args.Tool) && args.Damage.DamageDict.ContainsKey("Piercing"))
+                _audio.PlayPredicted(ent.Comp.ShieldImpact, ent, null);
             args.Damage.ClampMax(0);
+        }
 
         Dirty(ent, ent.Comp);
     }
@@ -95,8 +100,8 @@ public sealed partial class XenoShieldSystem : EntitySystem
 
         shieldComp.Active = true;
 
-		Dirty(uid, shieldComp);
-	}
+        Dirty(uid, shieldComp);
+    }
 
     public void RemoveShield(EntityUid uid, ShieldType shieldType)
     {
