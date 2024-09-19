@@ -28,6 +28,9 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
 
     private void OnInit(Entity<RMCPassiveStealthComponent> ent, ref ComponentInit args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (Paused(ent.Owner))
             return;
 
@@ -37,6 +40,9 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
 
     private void OnFolded(Entity<RMCPassiveStealthComponent> ent, ref FoldedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (ent.Comp.Enabled == null)
             return;
 
@@ -52,6 +58,9 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
 
     private void OnToggle(Entity<RMCPassiveStealthComponent> ent, ref ActivateInWorldEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (!ent.Comp.Toggleable)
             return;
 

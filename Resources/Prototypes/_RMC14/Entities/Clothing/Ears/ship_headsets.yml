@@ -19,7 +19,6 @@
   - type: Item
     size: Small
 
-
 - type: entity
   parent: CMHeadset
   id: RMCHeadsetShip
@@ -30,7 +29,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyCommon
-
+  - type: GrantMarineIcons
 
 - type: entity
   parent: RMCHeadsetShip
