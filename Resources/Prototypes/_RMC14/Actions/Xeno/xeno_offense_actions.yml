@@ -377,6 +377,34 @@
     useDelay: 18
 
 - type: entity
+  id: ActionXenoBurrow
+  parent: ActionXenoBase
+  name: Burrow 
+  description: Burrow underground and wait there for a short amount of time, either to emerge and ambush prey or to tunnel away.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: stomp
+    event: !type:XenoStompActionEvent
+    useDelay: 60
+
+- type: entity
+  id: ActionXenoTremor
+  parent: ActionXenoBase
+  name: Tremor (100)
+  description: Tremor causes an area of effect stun in a 7x7 space around the burrower.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: stomp
+    event: !type:XenoTremorActionEvent
+    useDelay: 20
+
+- type: entity
   id: ActionXenoCharge
   parent: ActionXenoBase
   name: Charge (20)

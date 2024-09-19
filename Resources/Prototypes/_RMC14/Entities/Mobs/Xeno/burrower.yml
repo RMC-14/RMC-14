@@ -31,17 +31,23 @@
     - ActionXenoTailStab
     - ActionXenoAcidNormal
     - ActionXenoOrderConstruction
-    #    - ActionXenoDigTunnel
     - ActionXenoPlantWeeds
-    #    - ActionXenoBurrow
-    #    - ActionXenoTremor
+    - ActionXenoTremor
     - ActionXenoDevolve
     tier: 2
     hudOffset: 0,0.56
     unlockAt: 420 # 7 minutes
+  - type: XenoConstruction
+    canBuild:
+    - WallXenoResin
+    - WallXenoMembrane
+    - DoorXenoResin
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode
   - type: XenoDevolve
     devolvesTo:
     - CMXenoDrone
+  - type: XenoTremor
   - type: XenoPlasma
     plasma: 600
     maxPlasma: 600
