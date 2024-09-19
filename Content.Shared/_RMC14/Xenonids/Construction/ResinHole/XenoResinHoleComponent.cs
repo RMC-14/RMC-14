@@ -11,10 +11,19 @@ namespace Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 [RegisterComponent]
 public sealed partial class XenoResinHoleComponent : Component
 {
-    public const string HoleSlotId = "hole_slot";
+    public const string ParasitePrototype = "CMXenoParasite";
+
+    public const string AcidGasPrototype = "XenoBombardAcidProjectile";
+
+    public const string NeuroGasPrototype = "XenoBombardNeurotoxinProjectile";
+
+    /// <summary>
+    /// The entity to spawn on the trap when activated
+    /// </summary>
+    public EntProtoId? TrapPrototype = null;
 
     [DataField]
-    public TimeSpan StepStunDuration = TimeSpan.FromSeconds(2.0);
+    public TimeSpan StepStunDuration = TimeSpan.FromSeconds(2.5);
 
     [DataField]
     public TimeSpan AddParasiteDelay = TimeSpan.FromSeconds(3.0);
