@@ -1,10 +1,12 @@
 ﻿using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
 using Content.Shared._RMC14.Armor;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Shields;
 
@@ -13,6 +15,8 @@ public sealed partial class XenoShieldSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+
+    private static readonly ProtoId<DamageTypePrototype> ShieldSoundDamageType = "Piercing";
     public enum ShieldType
     {
         Generic,
@@ -64,7 +68,7 @@ public sealed partial class XenoShieldSystem : EntitySystem
         }
         else
         {
-            if (HasComp<ProjectileComponent>(args.Tool) && args.Damage.DamageDict.ContainsKey("Piercing"))
+            if (HasComp<ProjectileComponent>(args.Tool) && args.Damage.DamageDict.ContainsKey(ShieldSoundDamageType))
                 _audio.PlayPredicted(ent.Comp.ShieldImpact, ent, null);
             args.Damage.ClampMax(0);
         }
