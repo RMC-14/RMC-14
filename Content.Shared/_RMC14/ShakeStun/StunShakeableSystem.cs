@@ -5,6 +5,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -18,6 +19,7 @@ public sealed class StunShakeableSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     private static readonly ProtoId<StatusEffectPrototype> Stun = "Stun";
     private static readonly ProtoId<StatusEffectPrototype> KnockedDown = "KnockedDown";
@@ -70,7 +72,8 @@ public sealed class StunShakeableSystem : EntitySystem
         var targetPopup = Loc.GetString("rmc-shake-awake-target", ("user", user));
         _popup.PopupEntity(targetPopup, target, target);
 
-        _audio.PlayEntity(ent.Comp.ShakeSound, Filter.Empty().FromEntities(target), target, false);
+        if (_net.IsServer)
+            _audio.PlayEntity(ent.Comp.ShakeSound, Filter.Empty().FromEntities(target), target, false);
 
         var othersPopup = Loc.GetString("rmc-shake-awake-others", ("user", user), ("target", target));
         var others = Filter.PvsExcept(target).RemovePlayerByAttachedEntity(user);
