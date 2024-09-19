@@ -33,17 +33,17 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 1000000
+        damage: 9999998
       behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
-        damage: 5000000
+        damage: 9999999
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
-          CMSteel:
+          CMSheetMetal:
             min: 5
             max: 5
       - !type:PlaySoundBehavior
