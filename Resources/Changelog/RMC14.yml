@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Noisrevni
-  changes:
-  - message: Added requisitions paperwork reward system, now supply crew can send
-      stamped invoice to gain extra money for the ongoing operation.
-    type: Add
-  id: 204
-  time: '2024-06-28T01:32:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2409
-- author: Zarq0
-  changes:
-  - message: Ported Meralyne, Imidazoline and Clonexadone from CM13.
-    type: Add
-  id: 205
-  time: '2024-06-28T03:33:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2642
 - author: DrSmugleaf
   changes:
   - message: Added Squad creation and moving marines between squads to the admin menu.
@@ -4392,5 +4377,20 @@
   id: 703
   time: '2024-09-15T07:50:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4030
+- author: DrSmugleaf
+  changes:
+  - message: Fixed explosions not deleting smoke and Boiler gas.
+    type: Fix
+  id: 704
+  time: '2024-09-15T22:51:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4057
+- author: DrSmugleaf
+  changes:
+  - message: Fixed examine sometimes flickering and closing until you examine something
+      around you.
+    type: Fix
+  id: 705
+  time: '2024-09-16T21:09:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4068
 Name: RMC14
 Order: -1
