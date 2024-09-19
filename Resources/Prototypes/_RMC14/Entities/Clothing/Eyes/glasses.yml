@@ -74,7 +74,6 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ml66a_sight.rsi
   - type: NightVisionItem
     toggleable: false
-  - type: FarSightItem
   - type: ClothingRequireEquipped
     whitelist:
       components:
