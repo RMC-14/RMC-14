@@ -60,3 +60,24 @@
     skills:
       RMCSkillOverwatch: 1
   - type: OverwatchConsole
+
+- type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCTacticalMapTable
+  name: map table
+  description: A table that displays a map of the current operation location.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/map_table.rsi
+    state: maptable
+  - type: InteractionOutline
+  - type: ActivatableUI
+    key: enum.TacticalMapComputerUi.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "CMAccessCommand" ] ]
+  - type: UserInterface
+    interfaces:
+      enum.TacticalMapComputerUi.Key:
+        type: TacticalMapComputerBui
+  - type: TacticalMapComputer # TODO RMC14 access?/skill? check for editing map

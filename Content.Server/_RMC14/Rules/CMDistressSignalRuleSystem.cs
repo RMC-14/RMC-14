@@ -30,6 +30,7 @@ using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Spawners;
+using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
@@ -894,7 +895,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         if (!_mapLoader.TryLoad(mapId, planet, out var grids))
             return false;
 
-        EnsureComp<RMCPlanetComponent>(_mapManager.GetMapEntityId(mapId));
+        var map = _mapManager.GetMapEntityId(mapId);
+        EnsureComp<RMCPlanetComponent>(map);
+        EnsureComp<TacticalMapComponent>(map);
 
         if (grids.Count == 0)
             return false;

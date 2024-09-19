@@ -1,4 +1,21 @@
 ﻿<controls:TacticalMapWindow
     xmlns="https://spacestation14.io"
-    xmlns:controls="clr-namespace:Content.Client._RMC14.TacticalMap">
+    xmlns:controls="clr-namespace:Content.Client._RMC14.TacticalMap"
+    Title="Map" MinSize="600 600">
+    <TabContainer Name="Tabs" Access="Public">
+        <Control Name="MapTab" Access="Public">
+            <controls:TacticalMapControl Name="Map" Access="Public" />
+        </Control>
+        <BoxContainer Name="CanvasTab" Access="Public" Orientation="Vertical" Visible="False"
+                      HorizontalExpand="True" VerticalExpand="True">
+            <Label Text="Canvas Options" />
+            <BoxContainer Orientation="Horizontal">
+                <Button Name="UpdateCanvasButton" Access="Public" Text="Update Canvas" />
+                <Button Name="ClearCanvasButton" Access="Public" Text="Clear Canvas" />
+                <OptionButton Name="ColorsButton" Access="Public" />
+            </BoxContainer>
+            <controls:TacticalMapControl Name="Canvas" Access="Public" Stretch="Keep"
+                                         SetWidth="500" SetHeight="500" Drawing="True" />
+        </BoxContainer>
+    </TabContainer>
 </controls:TacticalMapWindow>

@@ -1,9 +1,9 @@
 ﻿using Robust.Shared.GameStates;
 
-namespace Content.Shared._RMC14.TacticalMap;
+namespace Content.Shared._RMC14.Areas;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(TacticalMapSystem))]
+[Access(typeof(AreaSystem))]
 public sealed partial class MinimapColorComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]

@@ -1,12 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Numerics;
-using Content.Shared._RMC14.Map;
 using Content.Shared.Coordinates;
 using Content.Shared.Maps;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Areas;
 
@@ -15,59 +12,65 @@ public sealed class AreaSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
 
     private EntityQuery<AreaGridComponent> _areaGridQuery;
     private EntityQuery<MapGridComponent> _mapGridQuery;
+    private EntityQuery<MinimapColorComponent> _minimapColorQuery;
 
     public override void Initialize()
     {
         _areaGridQuery = GetEntityQuery<AreaGridComponent>();
         _mapGridQuery = GetEntityQuery<MapGridComponent>();
+        _minimapColorQuery = GetEntityQuery<MinimapColorComponent>();
 
         SubscribeLocalEvent<AreaGridComponent, MapInitEvent>(OnAreaGridMapInit);
     }
 
     private void OnAreaGridMapInit(Entity<AreaGridComponent> ent, ref MapInitEvent args)
     {
+        if (!TryComp(ent, out MapGridComponent? mapGrid))
+            return;
+
         ent.Comp.Colors.Clear();
 
-        var done = new HashSet<Vector2>();
-        foreach (var kvp in ent.Comp.Areas)
+        var tiles = _map.GetAllTilesEnumerator(ent, mapGrid);
+        while (tiles.MoveNext(out var tileRefNullable))
         {
-            var (indices, areaProto) = kvp;
-            if (!done.Add(indices))
+            var tileRef = tileRefNullable.Value;
+            var pos = tileRef.GridIndices;
+            var anchoredEnumerator = _map.GetAnchoredEntitiesEnumerator(ent, mapGrid, pos);
+
+            var found = false;
+            while (anchoredEnumerator.MoveNext(out var anchored))
+            {
+                if (_minimapColorQuery.TryComp(anchored, out var minimapColor))
+                {
+                    ent.Comp.Colors[pos] = minimapColor.Color;
+                    found = true;
+                }
+            }
+
+            if (found)
                 continue;
 
-            if (!areaProto.TryGet(out var area, _prototypes, _compFactory) ||
-                area.MinimapColor == default)
+            var tile = tileRef.GetContentTileDefinition(_tile);
+            if (tile.MinimapColor != default)
             {
+                ent.Comp.Colors[pos] = tile.MinimapColor;
                 continue;
             }
 
-            var xAdjacent = 0;
-            var x = indices.X;
-            while (ent.Comp.Areas.GetValueOrDefault((++x, indices.Y)) == areaProto)
+            if (ent.Comp.Areas.TryGetValue(pos, out var area) &&
+                area.TryGet(out var areaComp, _prototypes, _compFactory) &&
+                areaComp.MinimapColor != default)
             {
-                xAdjacent++;
-                done.Add(new Vector2(x, indices.Y));
+                ent.Comp.Colors[pos] = areaComp.MinimapColor.WithAlpha(0.5f);
+                continue;
             }
 
-            var xAdjacentMinus = 0;
-            x = indices.X;
-            while (ent.Comp.Areas.GetValueOrDefault((--x, indices.Y)) == areaProto)
-            {
-                xAdjacentMinus++;
-                done.Add(new Vector2(x, indices.Y));
-            }
-
-            var bottom = new Vector2(indices.X - xAdjacentMinus, indices.Y);
-            var right = new Vector2(indices.X + 1 + xAdjacent, indices.Y);
-            var top = new Vector2(indices.X - xAdjacentMinus, indices.Y + 1);
-            var left = new Vector2(indices.X + 1 + xAdjacent, indices.Y + 1);
-            ent.Comp.Colors.GetOrNew(Color.FromSrgb(area.MinimapColor)).AddRange([bottom, right, top, left]);
+            ent.Comp.Colors[pos] = Color.FromHex("#6c6767d8");
         }
 
         Dirty(ent);

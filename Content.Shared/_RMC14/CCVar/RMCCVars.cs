@@ -173,4 +173,10 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCPlanetMapVote =
         CVarDef.Create("rmc.planet_map_vote", true, CVar.SERVER | CVar.SERVERONLY);
+
+    public static readonly CVarDef<int> RMCTacticalMapAnnounceCooldownSeconds =
+        CVarDef.Create("rmc.tactical_map_announce_cooldown_seconds", 240, CVar.SERVER | CVar.SERVERONLY);
+
+    public static readonly CVarDef<int> RMCTacticalMapLineLimit =
+        CVarDef.Create("rmc.tactical_map_line_limit", 1000, CVar.SERVER | CVar.REPLICATED);
 }

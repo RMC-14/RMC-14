@@ -15,6 +15,6 @@ public sealed partial class ContentTileDefinition
     [DataField]
     public bool BlockAnchoring;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public Color MinimapColor;
 }

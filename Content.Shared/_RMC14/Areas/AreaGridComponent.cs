@@ -1,5 +1,4 @@
-﻿using System.Numerics;
-using Robust.Shared.GameStates;
+﻿using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Areas;
@@ -12,5 +11,5 @@ public sealed partial class AreaGridComponent : Component
     public Dictionary<Vector2i, EntProtoId<AreaComponent>> Areas = new();
 
     [DataField, AutoNetworkedField]
-    public Dictionary<Color, List<Vector2>> Colors = new();
+    public Dictionary<Vector2i, Color> Colors = new();
 }

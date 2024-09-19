@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Numerics;
-using System.Runtime.InteropServices;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Content.Shared._RMC14.Areas;
@@ -21,6 +20,9 @@ using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using Color = Robust.Shared.Maths.Color;
 
 namespace Content.Client.Pinpointer.UI;
 
@@ -51,6 +53,7 @@ public partial class NavMapControl : MapGridControl
     public List<(Vector2, Vector2)> TileLines = new();
     public List<(Vector2, Vector2)> TileRects = new();
     public List<List<DrawVertexUV2DColor>> TilePolygons = new();
+    public Texture? _texture;
 
     // Default colors
     public Color WallColor = new(102, 217, 102);
@@ -309,17 +312,23 @@ public partial class NavMapControl : MapGridControl
         }
 
         // Draw floor tiles
-        if (TilePolygons.Any())
+        // if (TilePolygons.Any())
+        // {
+        //     foreach (var polygonVertsList in TilePolygons)
+        //     {
+        //         var polygonVertsSpan = CollectionsMarshal.AsSpan(polygonVertsList);
+        //         for (var i = 0; i < polygonVertsSpan.Length; i += 6000)
+        //         {
+        //             var max = Math.Min(i + 6000, polygonVertsSpan.Length);
+        //             handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, _whiteTexture, polygonVertsSpan[i..max]);
+        //         }
+        //     }
+        // }
+
+        if (_texture != null)
         {
-            foreach (var polygonVertsList in TilePolygons)
-            {
-                var polygonVertsSpan = CollectionsMarshal.AsSpan(polygonVertsList);
-                for (var i = 0; i < polygonVertsSpan.Length; i += 6000)
-                {
-                    var max = Math.Min(i + 6000, polygonVertsSpan.Length);
-                    handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, _whiteTexture, polygonVertsSpan[i..max]);
-                }
-            }
+            var size = Size.Y / _texture.Size.Y;
+            handle.DrawTextureRect(_texture, new UIBox2(Vector2.Zero, _texture.Size * size));
         }
 
         // Draw map lines
@@ -470,27 +479,29 @@ public partial class NavMapControl : MapGridControl
         }
 
         Span<Vector2> verts = new Vector2[8];
-        if (EntManager.TryGetComponent(MapUid, out AreaGridComponent? areaGrid))
+        if (EntManager.TryGetComponent(MapUid, out AreaGridComponent? areaGrid) &&
+            areaGrid.Colors.Count > 0)
         {
-            var scale = MinimapScale;
-            var midPoint = MidPointVector;
-            var offset = Vector2.Zero;
-            foreach (var (color, vertices) in areaGrid.Colors)
+            var min = Vector2i.Zero;
+            var max = Vector2i.Zero;
+            foreach (var position in areaGrid.Colors.Keys)
             {
-                var polygons = new List<DrawVertexUV2DColor>();
-                var verticesSpan = CollectionsMarshal.AsSpan(vertices);
-                for (var i = 0; i + 4 <= verticesSpan.Length; i += 4)
-                {
-                    var bottom = Scale(verticesSpan[i], scale, midPoint, offset, color);
-                    var right = Scale(verticesSpan[i + 1], scale, midPoint, offset, color);
-                    var top = Scale(verticesSpan[i + 2], scale, midPoint, offset, color);
-                    var left = Scale(verticesSpan[i + 3], scale, midPoint, offset, color);
-                    polygons.AddRange([bottom, right, top, top, left, right]);
-                }
-
-                TilePolygons.Add(polygons);
+                min = Vector2i.ComponentMin(min, position);
+                max = Vector2i.ComponentMax(max, position);
             }
 
+            var width = max.X - min.X;
+            var height = max.Y - min.Y;
+            if (width <= 0 || height <= 0)
+                return;
+
+            var image = new Image<Rgba32>(max.X - min.X + 1, max.Y - min.Y + 1);
+            foreach (var (position, color) in areaGrid.Colors)
+            {
+                image[position.X - min.X, ((max.Y - min.Y) - (position.Y - min.Y))] = new Rgba32(color.R, color.G, color.B, color.A);
+            }
+
+            _texture = Texture.LoadFromImage(image);
             return;
         }
 
