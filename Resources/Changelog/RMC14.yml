@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added Squad creation and moving marines between squads to the admin menu.
-    type: Add
-  id: 206
-  time: '2024-06-28T03:34:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2657
-- author: DrSmugleaf
-  changes:
-  - message: Added Discord account linking.
-    type: Add
-  - message: 'Added Patron perks: mention on the credits, OOC name color, named items,
-      figurines, lobby messages, and round end shoutout, depending on the tier.'
-    type: Add
-  id: 207
-  time: '2024-06-30T01:32:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2666
 - author: snebl
   changes:
   - message: Fixed damage modifiers not being applied on marine firearms.
@@ -4392,5 +4375,20 @@
   id: 705
   time: '2024-09-16T21:09:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4068
+- author: Rainbeon
+  changes:
+  - message: Changed most Xeno ability descriptions to give more complete and correct
+      information.
+    type: Tweak
+  id: 706
+  time: '2024-09-19T20:05:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4050
+- author: DummeHytteOst
+  changes:
+  - message: Binoculars can now be put in armor.
+    type: Add
+  id: 707
+  time: '2024-09-19T20:06:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4073
 Name: RMC14
 Order: -1
