@@ -18,7 +18,7 @@
     - CMCartridgeSmartGun10x30mm
 
 - type: entity
-  parent: BaseBullet
+  parent: CMBulletBase
   id: CMBulletSmartGun10x30mm
   name: bullet (10x30mm)
   noSpawn: true
