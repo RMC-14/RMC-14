@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: snebl
-  changes:
-  - message: Fixed damage modifiers not being applied on marine firearms.
-    type: Fix
-  id: 208
-  time: '2024-06-30T08:52:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2669
 - author: Zarq0
   changes:
   - message: Added a new requisition tab, Research.
@@ -4390,5 +4383,12 @@
   id: 707
   time: '2024-09-19T20:06:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4073
+- author: DummeHytteOst
+  changes:
+  - message: Added miscellaneous items to the XO weapon rack.
+    type: Add
+  id: 708
+  time: '2024-09-19T20:16:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4075
 Name: RMC14
 Order: -1
