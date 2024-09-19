@@ -33,13 +33,13 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100000000000000000000
+        damage: 10000000000
       behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
-        damage: 500000000000000000000
+        damage: 50000000000
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
