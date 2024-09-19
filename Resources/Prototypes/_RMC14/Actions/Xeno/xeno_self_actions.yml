@@ -65,7 +65,7 @@
   id: ActionXenoToggleCrest
   parent: ActionXenoBase
   name: Toggle Crest Defense
-  description: Increases your resistance to projectile damage but slows you down.
+  description: Increases your resistance to direct damage but slows you down.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -82,7 +82,7 @@
   id: ActionXenoFortify
   parent: ActionXenoBase
   name: Fortify
-  description: Become immobile and extremely resistant to projectile damage.
+  description: Become immobile and impassable to mobs, dramatically increasing your resistance to direct damage. Damage is further reduced from the direction you are facing.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -155,7 +155,7 @@
   id: ActionXenoTurnInvisible
   parent: ActionXenoBase
   name: Turn Invisible (20) # TODO RMC14 proper plasma costs
-  description: Become partially invisible for a short time or until you attack.
+  description: Become partially invisible for 30 seconds or until you attack. Increases your movement speed until the ability expires.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -168,7 +168,7 @@
   id: ActionXenoDefensiveShield
   parent: ActionXenoBase
   name: Defensive Shield (50)
-  description: Gain a temporary shield that blocks the next 200 damage (And is immune to explosive damage) lasting 7 seconds. Any damage that impacts the shield is reduced by 10 before processing.
+  description: Gain a temporary shield that blocks the next 200 damage (and is immune to explosive damage) that lasts 7 seconds. Any damage that impacts the shield is reduced by 10 before processing. [color=green]Cooldown is partially refunded upon attacking an enemy.[/color]
   components:
   - type: InstantAction
     itemIconStyle: NoItem
