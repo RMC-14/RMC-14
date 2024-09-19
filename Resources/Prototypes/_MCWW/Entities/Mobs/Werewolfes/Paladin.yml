@@ -6,10 +6,10 @@
   - RMCXenoSpeechSounds
   id: MCWWPaladin
   name: Паладин
-  description: Гейский паладин
+  description: Почему то у вас стойкое ощущение, что вы видели где то эту голову.
   components:
   - type: GhostRole
-    name: cm-job-name-xeno-crusher
+    name: Паладин
   - type: Sprite
     sprite: _MCWW/Mobs/Werewolfes/paladin.rsi
   - type: Fixtures
@@ -36,18 +36,16 @@
   - type: Xeno
     role: CMXenoCrusher
     actionIds:
-    - ActionXenoRest
-    - ActionXenoRegurgitate
     - CMWWHavyKik
-    - ActionXenoToggleCrest
-    - ActionXenoStomp
+    - CMWWUpshild
+    - CMWWStomp
     tier: 3
     hudOffset: 0,0.375
     unlockAt: 900 # 15 minutes
-  - type: XenoDevolve
-    devolvesTo:
-    - CMXenoWarrior
-  - type: XenoDevour
+  - type: XenoCrest
+    Armor: 30
+    SpeedMultiplier: 0.3
+    CrestSize: Immobile
   - type: XenoStomp
     damage:
       types:
@@ -59,28 +57,21 @@
         Structural: 750
   - type: XenoAnimateMovement
   - type: XenoPlasma
-    plasma: 400
-    maxPlasma: 400
-    plasmaRegenOnWeeds: 4
+    plasma: 0
+    maxPlasma: 0
+    plasmaRegenOnWeeds: 0
   - type: CMArmor
     armor: 30
     explosionArmor: 100
   - type: MeleeWeapon
+    animation: WeaponArcFist
     damage:
-      groups:
-        Brute: 40
-  - type: CrusherShield
+      types:
+        Blunt: 60
+        Structural: 100
   - type: XenoShield
-  - type: XenoMeleeSlow
-    slowTime: 2
-    effect: RMCEffectCrusherSlow
-  - type: Tackle # min: 2, max: 6
-    threshold: 5
-    stun: 5
-    chance: 0.25
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.66
     baseSprintSpeed: 3
-  - type: XenoBrutalize
   - type: RMCSize
-    size: Immobile
+    size: big

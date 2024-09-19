@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Stun;
 using Robust.Shared.GameStates;
 
+
 namespace Content.Shared._RMC14.Xenonids.Crest;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
@@ -11,10 +12,10 @@ public sealed partial class XenoCrestComponent : Component
     public bool Lowered;
 
     [DataField, AutoNetworkedField]
-    public int Armor = 5;
+    public int Armor;
 
     [DataField, AutoNetworkedField]
-    public float SpeedMultiplier = 0.70f;
+    public float SpeedMultiplier;
 
     [DataField, AutoNetworkedField]
     public string ImmuneToStatus = "Stun";

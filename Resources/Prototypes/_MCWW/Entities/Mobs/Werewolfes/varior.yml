@@ -1,0 +1,56 @@
+- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  id: CMXenoWarrior
+  name: Воин
+  description: Сошёл со страниц любовных романов и хороров
+  components:
+  - type: GhostRole
+    name: cm-job-name-xeno-warrior
+  - type: Sprite
+    sprite: _MCWW/Mobs/Werewolfes/varior.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.49
+        density: 185
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      500: Critical
+      600: Dead
+  - type: Xeno
+    role: CMXenoWarrior
+    actionIds:
+    - CMWWHavyKik
+    tier: 2
+    hudOffset: 0,0.25
+    unlockAt: 540 # 9 minutes
+  - type: SlowOnPull
+    multiplier: 0.56
+  - type: XenoPlasma
+    plasma: 0
+    maxPlasma: 0
+    plasmaRegenOnWeeds: 0
+  - type: CMArmor
+    armor: 20
+    explosionArmor: 40
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 35
+  - type: XenoLifesteal

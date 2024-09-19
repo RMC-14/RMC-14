@@ -1,0 +1,13 @@
+- type: entity
+  id: CMWWUpshild
+  parent: ActionXenoBase
+  name: Поднять щит
+  description: Вы поднимаете щит и начинаете принимать все удары на него
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: crest_defense
+    event: !type:XenoToggleCrestActionEvent
+    useDelay: 2
