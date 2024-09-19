@@ -24,7 +24,7 @@ namespace Content.Server._RMC14.Xenonids.Projectile.Parasite;
 public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly SharedInteractionSystem _interact = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
@@ -100,8 +100,8 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
             HasComp<XenoParasiteComponent>(heldEntity) &&
             !_mobState.IsDead(heldEntity))
         {
-            _hands.TryDrop(ent);
-            _throw.TryThrow(heldEntity, target);
+            _hands.ThrowHeldItem(xeno.Owner, target);
+
             _stun.TryStun(heldEntity, comp.ThrownParasiteStunDuration, true);
             return;
         }
