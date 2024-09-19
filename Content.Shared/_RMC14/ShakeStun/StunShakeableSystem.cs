@@ -68,6 +68,8 @@ public sealed class StunShakeableSystem : EntitySystem
         var targetPopup = Loc.GetString("rmc-shake-awake-target", ("user", user));
         _popup.PopupEntity(targetPopup, target, target);
 
+        _audio.PlayEntity(ent.Comp.ShakeSound, Filter.Empty().FromEntities(target), target, false);
+
         var othersPopup = Loc.GetString("rmc-shake-awake-others", ("user", user), ("target", target));
         var others = Filter.PvsExcept(target).RemovePlayerByAttachedEntity(user);
         _popup.PopupEntity(othersPopup, target, others, true);
