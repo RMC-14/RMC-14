@@ -1,34 +1,20 @@
 ﻿using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.TacticalMap;
 using JetBrains.Annotations;
-using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client._RMC14.TacticalMap;
 
 [UsedImplicitly]
-public sealed class TacticalMapComputerBui : BoundUserInterface
+public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-
     private TacticalMapWindow? _window;
     private bool _refreshed;
-
-    public TacticalMapComputerBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-    {
-        IoCManager.InjectDependencies(this);
-    }
 
     protected override void Open()
     {
         _window = this.CreateWindow<TacticalMapWindow>();
-
-        if (!EntMan.TryGetComponent(_player.LocalEntity, out TransformComponent? xform) ||
-            !EntMan.TryGetComponent(xform.MapUid, out AreaGridComponent? areaGrid))
-        {
-            return;
-        }
 
         TabContainer.SetTabTitle(_window.MapTab, "Map");
         TabContainer.SetTabVisible(_window.MapTab, true);
@@ -36,10 +22,15 @@ public sealed class TacticalMapComputerBui : BoundUserInterface
         TabContainer.SetTabTitle(_window.CanvasTab, "Canvas");
         TabContainer.SetTabVisible(_window.CanvasTab, true);
 
-        _window.UpdateTexture((xform.MapUid.Value, areaGrid));
+        if (EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer) &&
+            EntMan.TryGetComponent(computer.Map, out AreaGridComponent? areaGrid))
+        {
+            _window.UpdateTexture((computer.Map.Value, areaGrid));
+        }
+
         Refresh();
 
-        _window.UpdateCanvasButton.OnPressed += _ => SendPredictedMessage(new TacticalMapComputerUpdateCanvasMsg(_window.Canvas.Lines));
+        _window.UpdateCanvasButton.OnPressed += _ => SendPredictedMessage(new TacticalMapUpdateCanvasMsg(_window.Canvas.Lines));
     }
 
     public void Refresh()
@@ -57,10 +48,10 @@ public sealed class TacticalMapComputerBui : BoundUserInterface
         _window.Canvas.Lines.Clear();
         _window.Map.Lines.Clear();
 
-        if (EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer))
+        if (EntMan.TryGetComponent(Owner, out TacticalMapLinesComponent? lines))
         {
-            _window.Canvas.Lines.AddRange(computer.Lines);
-            _window.Map.Lines.AddRange(computer.Lines);
+            _window.Canvas.Lines.AddRange(lines.MarineLines);
+            _window.Map.Lines.AddRange(lines.MarineLines);
         }
 
         _refreshed = true;

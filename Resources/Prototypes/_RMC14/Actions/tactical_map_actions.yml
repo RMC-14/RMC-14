@@ -1,6 +1,7 @@
 ﻿- type: entity
+  abstract: true
   id: RMCActionOpenTacticalMap
-  name: Open Planet Map
+  name: Open Tactical Map
   components:
   - type: InstantAction
     itemIconStyle: NoItem

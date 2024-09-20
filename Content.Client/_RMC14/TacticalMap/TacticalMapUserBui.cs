@@ -1,40 +1,33 @@
 ﻿using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.TacticalMap;
 using JetBrains.Annotations;
-using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client._RMC14.TacticalMap;
 
 [UsedImplicitly]
-public sealed class TacticalMapUserBui : BoundUserInterface
+public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-
     private TacticalMapWindow? _window;
     private bool _refreshed;
-
-    public TacticalMapUserBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-    {
-        IoCManager.InjectDependencies(this);
-    }
 
     protected override void Open()
     {
         _window = this.CreateWindow<TacticalMapWindow>();
 
-        if (!EntMan.TryGetComponent(_player.LocalEntity, out TransformComponent? xform) ||
-            !EntMan.TryGetComponent(xform.MapUid, out AreaGridComponent? areaGrid))
-        {
-            return;
-        }
-
         TabContainer.SetTabTitle(_window.MapTab, "Map");
         TabContainer.SetTabVisible(_window.MapTab, true);
 
-        _window.UpdateTexture((xform.MapUid.Value, areaGrid));
+        if (EntMan.TryGetComponent(Owner, out TacticalMapUserComponent? user) &&
+            EntMan.TryGetComponent(user.Map, out AreaGridComponent? areaGrid))
+        {
+            _window.UpdateTexture((user.Map.Value, areaGrid));
+        }
+
         Refresh();
+
+        _window.UpdateCanvasButton.OnPressed += _ => SendPredictedMessage(new TacticalMapUpdateCanvasMsg(_window.Canvas.Lines));
     }
 
     public void Refresh()
@@ -46,23 +39,24 @@ public sealed class TacticalMapUserBui : BoundUserInterface
         _window.SetLineLimit(lineLimit);
         UpdateBlips();
 
-        _window.Map.Lines.Clear();
-        _window.Canvas.Lines.Clear();
-
         if (_refreshed)
             return;
 
-        var user = EntMan.GetComponentOrNull<TacticalMapUserComponent>(Owner);
-        if (user != null)
+        _window.Map.Lines.Clear();
+        _window.Canvas.Lines.Clear();
+
+        var lines = EntMan.GetComponentOrNull<TacticalMapLinesComponent>(Owner);
+        if (lines != null)
         {
-            _window.Map.Lines.AddRange(user.MarineLines);
-            _window.Map.Lines.AddRange(user.XenoLines);
+            _window.Map.Lines.AddRange(lines.MarineLines);
+            _window.Map.Lines.AddRange(lines.XenoLines);
+            _window.Canvas.Lines.AddRange(lines.MarineLines);
+            _window.Canvas.Lines.AddRange(lines.XenoLines);
         }
 
+        var user = EntMan.GetComponentOrNull<TacticalMapUserComponent>(Owner);
         if (user?.CanDraw ?? false)
         {
-            _window.Canvas.Lines.AddRange(user.MarineLines);
-            _window.Canvas.Lines.AddRange(user.XenoLines);
             TabContainer.SetTabTitle(_window.CanvasTab, "Canvas");
             TabContainer.SetTabVisible(_window.CanvasTab, true);
         }

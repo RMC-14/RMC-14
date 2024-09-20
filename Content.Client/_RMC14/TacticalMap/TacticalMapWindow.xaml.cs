@@ -29,7 +29,7 @@ public sealed partial class TacticalMapWindow : DefaultWindow
             if (Canvas.Lines.Count == 0)
                 return;
 
-            Canvas.Lines.RemoveAt(0);
+            Canvas.Lines.RemoveAt(Canvas.Lines.Count - 1);
         };
         Canvas.Color = Color.Black;
 

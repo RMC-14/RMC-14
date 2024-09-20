@@ -236,6 +236,7 @@
     active: false
   - type: TacticalMapTracked
   - type: TacticalMapUser
+    actionId: RMCActionOpenTacticalMapXeno
     xenos: true
 
 - type: entity

@@ -9,7 +9,7 @@ public enum TacticalMapComputerUi
 }
 
 [Serializable, NetSerializable]
-public sealed class TacticalMapComputerUpdateCanvasMsg(List<TacticalMapLine> lines) : BoundUserInterfaceMessage
+public sealed class TacticalMapUpdateCanvasMsg(List<TacticalMapLine> lines) : BoundUserInterfaceMessage
 {
     public readonly List<TacticalMapLine> Lines = lines;
 }

@@ -59,9 +59,12 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         _transformQuery = GetEntityQuery<TransformComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
 
+        SubscribeLocalEvent<TacticalMapComponent, MapInitEvent>(OnTacticalMapMapInit);
+
         SubscribeLocalEvent<TacticalMapUserComponent, MapInitEvent>(OnTacticalMapUserMapInit);
         SubscribeLocalEvent<TacticalMapUserComponent, OpenTacticalMapActionEvent>(OnTacticalMapUserOpenAction);
 
+        SubscribeLocalEvent<TacticalMapComputerComponent, MapInitEvent>(OnComputerMapInit);
         SubscribeLocalEvent<TacticalMapComputerComponent, BeforeActivatableUIOpenEvent>(OnComputerBeforeUIOpen);
 
         SubscribeLocalEvent<TacticalMapTrackedComponent, MapInitEvent>(OnTrackedMapInit);
@@ -80,13 +83,13 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         Subs.BuiEvents<TacticalMapComputerComponent>(TacticalMapComputerUi.Key,
             subs =>
             {
-                subs.Event<TacticalMapComputerUpdateCanvasMsg>(OnTacticalMapComputerUpdateCanvasMsg);
+                subs.Event<TacticalMapUpdateCanvasMsg>(OnTacticalMapComputerUpdateCanvasMsg);
             });
 
         Subs.BuiEvents<TacticalMapUserComponent>(TacticalMapUserUi.Key,
             subs =>
             {
-                subs.Event<TacticalMapComputerUpdateCanvasMsg>(OnTacticalMapUserUpdateCanvasMsg);
+                subs.Event<TacticalMapUpdateCanvasMsg>(OnTacticalMapUserUpdateCanvasMsg);
             });
 
         Subs.CVar(_config,
@@ -95,9 +98,31 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             true);
     }
 
+    private void OnTacticalMapMapInit(Entity<TacticalMapComponent> ent, ref MapInitEvent args)
+    {
+        var users = EntityQueryEnumerator<TacticalMapUserComponent>();
+        while (users.MoveNext(out var userId, out var userComp))
+        {
+            userComp.Map = ent;
+            Dirty(userId, userComp);
+        }
+
+        var computers = EntityQueryEnumerator<TacticalMapComputerComponent>();
+        while (computers.MoveNext(out var computerId, out var computerComp))
+        {
+            computerComp.Map = ent;
+            Dirty(computerId, computerComp);
+        }
+    }
+
     private void OnTacticalMapUserMapInit(Entity<TacticalMapUserComponent> ent, ref MapInitEvent args)
     {
         _actions.AddAction(ent, ref ent.Comp.Action, ent.Comp.ActionId);
+
+        if (TryGetTacticalMap(out var map))
+            ent.Comp.Map = map;
+
+        Dirty(ent);
     }
 
     private void OnTacticalMapUserOpenAction(Entity<TacticalMapUserComponent> ent, ref OpenTacticalMapActionEvent args)
@@ -106,6 +131,14 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             UpdateUserData(ent, map);
 
         _ui.TryOpenUi(ent.Owner, TacticalMapUserUi.Key, ent);
+    }
+
+    private void OnComputerMapInit(Entity<TacticalMapComputerComponent> ent, ref MapInitEvent args)
+    {
+        if (TryGetTacticalMap(out var map))
+            ent.Comp.Map = map;
+
+        Dirty(ent);
     }
 
     private void OnComputerBeforeUIOpen(Entity<TacticalMapComputerComponent> ent, ref BeforeActivatableUIOpenEvent args)
@@ -170,7 +203,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             UpdateTracked((ent, active));
     }
 
-    private void OnTacticalMapComputerUpdateCanvasMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapComputerUpdateCanvasMsg args)
+    private void OnTacticalMapComputerUpdateCanvasMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapUpdateCanvasMsg args)
     {
         var lines = args.Lines;
         if (lines.Count > LineLimit)
@@ -194,7 +227,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         UpdateCanvas(lines, true, false);
     }
 
-    private void OnTacticalMapUserUpdateCanvasMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapComputerUpdateCanvasMsg args)
+    private void OnTacticalMapUserUpdateCanvasMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapUpdateCanvasMsg args)
     {
         if (!ent.Comp.CanDraw)
             return;
@@ -215,7 +248,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             UpdateCanvas(lines, true, false);
 
         if (ent.Comp.Xenos)
-            UpdateCanvas(lines, true, false);
+            UpdateCanvas(lines, false, true);
     }
 
     private void UpdateActiveTracking(Entity<TacticalMapTrackedComponent> tracked, MobState mobState)
@@ -320,27 +353,32 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private void UpdateMapData(Entity<TacticalMapComputerComponent> computer, TacticalMapComponent map)
     {
         computer.Comp.Blips = map.MarineBlips;
-        computer.Comp.Lines = map.MarineLines;
         Dirty(computer);
+
+        var lines = EnsureComp<TacticalMapLinesComponent>(computer);
+        lines.MarineLines = map.MarineLines;
+        Dirty(computer, lines);
     }
 
     private void UpdateUserData(Entity<TacticalMapUserComponent> user, TacticalMapComponent map)
     {
+        var lines = EnsureComp<TacticalMapLinesComponent>(user);
         if (user.Comp.Marines)
         {
             user.Comp.MarineBlips = user.Comp.LiveUpdate ? map.MarineBlips : map.LastUpdateMarineBlips;
-            user.Comp.MarineLines = map.MarineLines;
-            user.Comp.XenoLines.Clear();
+            lines.MarineLines = map.MarineLines;
+            lines.XenoLines.Clear();
         }
 
         if (user.Comp.Xenos)
         {
             user.Comp.XenoBlips = user.Comp.LiveUpdate ? map.XenoBlips : map.LastUpdateXenoBlips;
-            user.Comp.XenoLines = map.XenoLines;
-            user.Comp.MarineLines.Clear();
+            lines.XenoLines = map.XenoLines;
+            lines.MarineLines.Clear();
         }
 
         Dirty(user);
+        Dirty(user, lines);
     }
 
     private void UpdateCanvas(List<TacticalMapLine> lines, bool marine, bool xeno)

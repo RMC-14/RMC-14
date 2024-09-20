@@ -1,4 +1,6 @@
-﻿using Robust.Shared.GameStates;
+﻿using Content.Shared._RMC14.Marines.Skills;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.TacticalMap;
@@ -8,11 +10,17 @@ namespace Content.Shared._RMC14.TacticalMap;
 public sealed partial class TacticalMapComputerComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public Dictionary<int, TacticalMapBlip> Blips = new();
+    public EntityUid? Map;
 
     [DataField, AutoNetworkedField]
-    public List<TacticalMapLine> Lines = new();
+    public Dictionary<int, TacticalMapBlip> Blips = new();
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextAnnounceAt;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillLeadership";
+
+    [DataField, AutoNetworkedField]
+    public int SkillLevel = 2;
 }

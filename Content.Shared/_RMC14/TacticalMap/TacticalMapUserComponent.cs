@@ -10,11 +10,14 @@ public sealed partial class TacticalMapUserComponent : Component
 {
     public override bool SendOnlyToOwner => true;
 
-    [DataField, AutoNetworkedField]
-    public EntProtoId ActionId = "RMCActionOpenTacticalMap";
+    [DataField(required: true), AutoNetworkedField]
+    public EntProtoId ActionId;
 
     [DataField, AutoNetworkedField]
     public EntityUid? Action;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? Map;
 
     [DataField, AutoNetworkedField]
     public bool LiveUpdate;
@@ -30,12 +33,6 @@ public sealed partial class TacticalMapUserComponent : Component
 
     [DataField, AutoNetworkedField]
     public Dictionary<int, TacticalMapBlip> XenoBlips = new();
-
-    [DataField, AutoNetworkedField]
-    public List<TacticalMapLine> MarineLines = new();
-
-    [DataField, AutoNetworkedField]
-    public List<TacticalMapLine> XenoLines = new();
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextAnnounceAt;
