@@ -53,6 +53,9 @@
     - bonusDamage:
         types:
           Slash: 20
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/Weapons/bladeslice.ogg
   - type: AttachableWeaponRangedMods
     modifiers:
     - conditions:

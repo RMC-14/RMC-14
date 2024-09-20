@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: RMCCrateExplosives
   id: RMCCrateGrenadesHighExplosive
   name: M40 HEDP blast grenades crate (x6)
@@ -17,6 +17,17 @@
     contents:
     - id: CMPacketGrenadeFragFilled
       amount: 2
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesSmoke
+  name: M40 HSDP smoke grenades crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPacketGrenadeSmokeFilled
+      amount: 2
+
 
 - type: entity
   parent: RMCCrateExplosives
