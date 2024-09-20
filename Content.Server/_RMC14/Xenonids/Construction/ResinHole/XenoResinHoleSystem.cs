@@ -224,12 +224,14 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
         if (comp.TrapPrototype is not EntProtoId containedProto)
         {
-            if (TryComp(args.User, out XenoBombardComponent? bombardComp))
+            if (!TryComp(args.User, out XenoBombardComponent? bombardComp))
             {
-                if (!_xenoPlasma.HasPlasmaPopup(args.User, bombardComp.PlasmaCost, false))
-                {
-                    return;
-                }
+                return;
+            }
+
+            if (!_xenoPlasma.HasPlasmaPopup(args.User, bombardComp.PlasmaCost, false))
+            {
+                return;
             }
 
             var ev = new XenoPlaceFluidInHoleDoAfterEvent();
