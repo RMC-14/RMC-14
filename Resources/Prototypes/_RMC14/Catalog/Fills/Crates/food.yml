@@ -5,7 +5,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: FoodBoxDonut
+      - id: RMCBoxDonut
         amount: 5
 
 - type: entity

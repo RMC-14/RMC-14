@@ -1,5 +1,5 @@
 - type: entity
-  parent: CMBaseStructureCorrodible
+  parent: [BaseStructureDynamic, CMBaseStructureCorrodible]
   abstract: true
   id: RMCBaseLandingSign
   name: sign

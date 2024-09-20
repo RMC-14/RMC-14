@@ -1,14 +1,20 @@
-﻿using Content.Shared._RMC14.Marines;
+﻿using System.Linq;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Rules;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
+using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Events;
+using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Overwatch;
@@ -20,6 +26,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
@@ -28,6 +36,10 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<OriginalRoleComponent> _originalRoleQuery;
     private EntityQuery<RMCPlanetComponent> _planetQuery;
+
+    private ProtoId<DamageGroupPrototype> _bruteGroup = "Brute";
+    private ProtoId<DamageGroupPrototype> _burnGroup = "Burn";
+    private ProtoId<DamageGroupPrototype> _toxinGroup = "Toxin";
 
     public override void Initialize()
     {
@@ -40,6 +52,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIOpenedEvent>(OnBUIOpened);
 
         SubscribeLocalEvent<OverwatchWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
+        SubscribeLocalEvent<OverwatchWatchingComponent, DamageChangedEvent>(OnWatchingDamageChanged);
 
         SubscribeLocalEvent<SquadMemberComponent, SquadMemberUpdatedEvent>(OnSquadMemberUpdated);
 
@@ -70,10 +83,31 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (!args.HasDirectionalMovement)
             return;
 
-        if (_net.IsClient && _player.LocalEntity == ent.Owner && _player.LocalSession != null)
-            Unwatch(ent.Owner, _player.LocalSession);
-        else if (TryComp(ent, out ActorComponent? actor))
-            Unwatch(ent.Owner, actor.PlayerSession);
+        TryLocalUnwatch(ent);
+    }
+
+    private void OnWatchingDamageChanged(Entity<OverwatchWatchingComponent> ent, ref DamageChangedEvent args)
+    {
+        if (!args.DamageIncreased || args.DamageDelta is not { } delta)
+            return;
+
+        var damage = delta.GetDamagePerGroup(_prototypes);
+        var bruteDamage = damage.GetValueOrDefault(_bruteGroup);
+        var burnDamage = damage.GetValueOrDefault(_burnGroup);
+        var toxinDamage = damage.GetValueOrDefault(_toxinGroup);
+        if (bruteDamage + burnDamage <= FixedPoint2.Zero && toxinDamage <= 10)
+            return;
+
+        TryLocalUnwatch(ent);
+
+        foreach (var (uiEnt, uiKey) in _ui.GetActorUis(ent.Owner).ToArray())
+        {
+            if (uiKey is OverwatchConsoleUI.Key)
+                _ui.CloseUi(uiEnt, uiKey, ent);
+        }
+
+        if (_net.IsServer)
+            _popup.PopupEntity("The pain kicked you out of the console!", ent, ent, PopupType.MediumCaution);
     }
 
     private void OnSquadMemberUpdated(Entity<SquadMemberComponent> ent, ref SquadMemberUpdatedEvent args)
@@ -238,5 +272,13 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     public bool IsHidden(Entity<OverwatchConsoleComponent> console, NetEntity marine)
     {
         return console.Comp.Hidden.Contains(marine);
+    }
+
+    private void TryLocalUnwatch(Entity<OverwatchWatchingComponent> ent)
+    {
+        if (_net.IsClient && _player.LocalEntity == ent.Owner && _player.LocalSession != null)
+            Unwatch(ent.Owner, _player.LocalSession);
+        else if (TryComp(ent, out ActorComponent? actor))
+            Unwatch(ent.Owner, actor.PlayerSession);
     }
 }

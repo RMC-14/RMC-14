@@ -1,0 +1,7 @@
+- type: soundCollection
+  id: RMCShieldImpact
+  files:
+  - /Audio/_RMC14/Bullets/shield_impact_c1.ogg
+  - /Audio/_RMC14/Bullets/shield_impact_c2.ogg
+  - /Audio/_RMC14/Bullets/shield_impact_c3.ogg
+  - /Audio/_RMC14/Bullets/shield_impact_c4.ogg
