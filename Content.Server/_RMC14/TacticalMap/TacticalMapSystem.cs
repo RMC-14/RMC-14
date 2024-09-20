@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using Content.Server._RMC14.Announce;
+using Content.Server._RMC14.Marines;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
@@ -26,12 +28,14 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
+    [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
 
     private EntityQuery<ActiveTacticalMapTrackedComponent> _activeTacticalMapTrackedQuery;
     private EntityQuery<MarineComponent> _marineQuery;
@@ -207,6 +211,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void OnTacticalMapUserUpdateCanvasMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapUpdateCanvasMsg args)
     {
+        var user = args.Actor;
         if (!ent.Comp.CanDraw)
             return;
 
@@ -223,15 +228,16 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         Dirty(ent);
 
         if (ent.Comp.Marines)
-            UpdateCanvas(lines, true, false);
+            UpdateCanvas(lines, true, false, user);
 
         if (ent.Comp.Xenos)
-            UpdateCanvas(lines, false, true);
+            UpdateCanvas(lines, false, true, user);
     }
 
     private void OnTacticalMapComputerUpdateCanvasMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapUpdateCanvasMsg args)
     {
-        if (!_skills.HasSkill(args.Actor, ent.Comp.Skill, ent.Comp.SkillLevel))
+        var user = args.Actor;
+        if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
             return;
 
         var lines = args.Lines;
@@ -253,7 +259,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             Dirty(uid, computer);
         }
 
-        UpdateCanvas(lines, true, false);
+        UpdateCanvas(lines, true, false, user);
     }
 
     private void UpdateActiveTracking(Entity<TacticalMapTrackedComponent> tracked, MobState mobState)
@@ -386,7 +392,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         Dirty(user, lines);
     }
 
-    private void UpdateCanvas(List<TacticalMapLine> lines, bool marine, bool xeno)
+    private void UpdateCanvas(List<TacticalMapLine> lines, bool marine, bool xeno, EntityUid user)
     {
         var maps = EntityQueryEnumerator<TacticalMapComponent>();
         while (maps.MoveNext(out var map))
@@ -397,12 +403,14 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             {
                 map.MarineLines = lines;
                 map.LastUpdateMarineBlips = map.MarineBlips.ToDictionary();
+                _marineAnnounce.AnnounceToMarines("The UNMC tactical map has been updated.");
             }
 
             if (xeno)
             {
                 map.XenoLines = lines;
                 map.LastUpdateXenoBlips = map.XenoBlips.ToDictionary();
+                _xenoAnnounce.AnnounceSameHive(user, "The Xenonid tactical map has been updated.");
             }
         }
     }
