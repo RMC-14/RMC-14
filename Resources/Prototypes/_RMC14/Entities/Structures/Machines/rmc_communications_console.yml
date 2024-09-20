@@ -56,10 +56,13 @@
     interfaces:
       enum.OverwatchConsoleUI.Key:
         type: OverwatchConsoleBui
+      enum.TacticalMapComputerUi.Key:
+        type: TacticalMapComputerBui
   - type: RequiresSkill
     skills:
       RMCSkillOverwatch: 1
   - type: OverwatchConsole
+  - type: TacticalMapComputer
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
@@ -80,4 +83,4 @@
     interfaces:
       enum.TacticalMapComputerUi.Key:
         type: TacticalMapComputerBui
-  - type: TacticalMapComputer # TODO RMC14 access?/skill? check for editing map
+  - type: TacticalMapComputer

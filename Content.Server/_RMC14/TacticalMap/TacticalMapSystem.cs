@@ -153,10 +153,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void OnComputerBeforeUIOpen(Entity<TacticalMapComputerComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
-        if (!TryGetTacticalMap(out var map))
-            return;
-
-        UpdateMapData(ent, map);
+        UpdateMapData((ent, ent));
     }
 
     private void OnTrackedMapInit(Entity<TacticalMapTrackedComponent> ent, ref MapInitEvent args)
@@ -352,29 +349,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             tacticalMap.XenoBlips[ent.Owner.Id] = blip;
             tacticalMap.MapDirty = true;
         }
-    }
-
-    private bool TryGetTacticalMap(out Entity<TacticalMapComponent> map)
-    {
-        var query = EntityQueryEnumerator<TacticalMapComponent>();
-        while (query.MoveNext(out var uid, out var mapComp))
-        {
-            map = (uid, mapComp);
-            return true;
-        }
-
-        map = default;
-        return false;
-    }
-
-    private void UpdateMapData(Entity<TacticalMapComputerComponent> computer, TacticalMapComponent map)
-    {
-        computer.Comp.Blips = map.MarineBlips;
-        Dirty(computer);
-
-        var lines = EnsureComp<TacticalMapLinesComponent>(computer);
-        lines.MarineLines = map.MarineLines;
-        Dirty(computer, lines);
     }
 
     private void UpdateUserData(Entity<TacticalMapUserComponent> user, TacticalMapComponent map)
