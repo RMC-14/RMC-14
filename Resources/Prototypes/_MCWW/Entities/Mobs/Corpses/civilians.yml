@@ -1,0 +1,56 @@
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseHunter
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseHunter ]
+  - type: VictimBurst
+
+- type: startingGear
+  id: RMCGearCorpseHunter
+  equipment:
+    jumpsuit: RMCJumpsuitMarshal
+    back: ClothingBackpackSatchelLeather
+    shoes: CMBootsBlackFilled
+    head: RMCHeadCapBureau
+    eyes: CMGlassesSecurity
+    id: RMCIDCardDeputy
+    ears: CMHeadsetColony
+
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseLumberjack
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseLumberjack ]
+  - type: VictimBurst
+
+- type: startingGear
+  id: RMCGearCorpseLumberjack
+  equipment:
+    jumpsuit: RMCJumpsuitMarshal
+    back: ClothingBackpackSatchelLeather
+    shoes: CMBootsBlackFilled
+    head: RMCHeadCapBureau
+    eyes: CMGlassesSecurity
+    id: RMCIDCardDeputy
+    ears: CMHeadsetColony
+
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpsePeasant
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpsePeasant ]
+  - type: VictimBurst
+
+- type: startingGear
+  id: RMCGearCorpsePeasant
+  equipment:
+    jumpsuit: RMCJumpsuitMarshal
+    back: ClothingBackpackSatchelLeather
+    shoes: ClothingShoesLeather
+    head: RMCHeadCapBureau
+    eyes: CMGlassesSecurity
+    id: RMCIDCardDeputy
+    ears: CMHeadsetColony

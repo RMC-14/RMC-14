@@ -4,12 +4,12 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
-  id: CMXenoWarrior
-  name: Воин
-  description: Сошёл со страниц любовных романов и хороров
+  id: MCWWWerewolfBerserker
+  name: Берсерк
+  description: Каждый удар наполняет его силой
   components:
   - type: GhostRole
-    name: cm-job-name-xeno-warrior
+    name: cm-job-name-werewolf-berserker
   - type: Sprite
     sprite: _MCWW/Mobs/Werewolfes/varior.rsi
   - type: MobState

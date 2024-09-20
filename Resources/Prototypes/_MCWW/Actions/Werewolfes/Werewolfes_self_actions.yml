@@ -7,7 +7,7 @@
   - type: InstantAction
     itemIconStyle: NoItem
     icon:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: crest_defense
+      sprite: _MCWW/Actions/werewolf_actions.rsi
+      state: attack
     event: !type:XenoToggleCrestActionEvent
     useDelay: 2

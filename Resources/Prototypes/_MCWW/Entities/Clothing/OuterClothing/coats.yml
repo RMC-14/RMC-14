@@ -1,0 +1,20 @@
+- type: entity
+  parent: [ClothingOuterWinterCoatToggleable, BaseCommandContraband]
+  id: MCWWClothingHunterCoat
+  name: Hunter coat
+  components:
+  - type: Sprite
+    sprite: Clothing/OuterClothing/WinterCoats/coat.rsi
+    layers:
+    - state: QM-icon
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: QM-inhand-left
+      right:
+      - state: QM-inhand-right
+  - type: Clothing
+    sprite: Clothing/OuterClothing/WinterCoats/coat.rsi
+    clothingVisuals:
+      outerClothing:
+      - state: QM-equipped-OUTERCLOTHING
