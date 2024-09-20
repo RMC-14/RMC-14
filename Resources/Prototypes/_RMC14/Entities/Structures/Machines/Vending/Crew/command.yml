@@ -536,7 +536,7 @@
         recommended: true
       - id: CMBeltSecurityMPFilled
         recommended: true
-      - id: CMBeltMedicBag
+      - id: CMBeltMedicBagFilled
         recommended: true
       - id: CMBeltMarine
         recommended: true
