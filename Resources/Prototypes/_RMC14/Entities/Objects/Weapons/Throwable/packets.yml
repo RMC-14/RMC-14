@@ -81,7 +81,7 @@
   parent: CMPacketBase
   id: RMCPacketGrenadeSmoke
   name: HSDP grenade packet
-  desciption: It contains three HSDP grenades.
+  description: It contains three HSDP smoke grenades.
   components:
   - type: Sprite
     layers:
