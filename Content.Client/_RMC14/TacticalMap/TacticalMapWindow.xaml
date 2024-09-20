@@ -16,7 +16,7 @@
                         HorizontalExpand="True" />
                 <Button Name="ClearCanvasButton" Access="Public" Text="Clear Canvas" StyleClasses="OpenBoth"
                         HorizontalExpand="True" />
-                <Button Name="UndoButton" Access="Public" Text="Clear Canvas" StyleClasses="OpenBoth"
+                <Button Name="UndoButton" Access="Public" Text="Undo" StyleClasses="OpenBoth"
                         HorizontalExpand="True" />
                 <OptionButton Name="ColorsButton" Access="Public" StyleClasses="OpenBoth"
                               HorizontalExpand="True" />

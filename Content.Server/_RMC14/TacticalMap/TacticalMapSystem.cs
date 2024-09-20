@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.TacticalMap;
@@ -26,6 +27,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -80,16 +82,16 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         SubscribeLocalEvent<RottingComponent, MapInitEvent>(OnRottingMapInit);
         SubscribeLocalEvent<RottingComponent, ComponentRemove>(OnRottingRemove);
 
-        Subs.BuiEvents<TacticalMapComputerComponent>(TacticalMapComputerUi.Key,
-            subs =>
-            {
-                subs.Event<TacticalMapUpdateCanvasMsg>(OnTacticalMapComputerUpdateCanvasMsg);
-            });
-
         Subs.BuiEvents<TacticalMapUserComponent>(TacticalMapUserUi.Key,
             subs =>
             {
                 subs.Event<TacticalMapUpdateCanvasMsg>(OnTacticalMapUserUpdateCanvasMsg);
+            });
+
+        Subs.BuiEvents<TacticalMapComputerComponent>(TacticalMapComputerUi.Key,
+            subs =>
+            {
+                subs.Event<TacticalMapUpdateCanvasMsg>(OnTacticalMapComputerUpdateCanvasMsg);
             });
 
         Subs.CVar(_config,
@@ -203,30 +205,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             UpdateTracked((ent, active));
     }
 
-    private void OnTacticalMapComputerUpdateCanvasMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapUpdateCanvasMsg args)
-    {
-        var lines = args.Lines;
-        if (lines.Count > LineLimit)
-            lines = lines[..LineLimit];
-
-        var time = _timing.CurTime;
-        if (time < ent.Comp.NextAnnounceAt)
-            return;
-
-        var nextAnnounce = time + _announceCooldown;
-        ent.Comp.NextAnnounceAt = nextAnnounce;
-        Dirty(ent);
-
-        var computers = EntityQueryEnumerator<TacticalMapComputerComponent>();
-        while (computers.MoveNext(out var uid, out var computer))
-        {
-            computer.NextAnnounceAt = nextAnnounce;
-            Dirty(uid, computer);
-        }
-
-        UpdateCanvas(lines, true, false);
-    }
-
     private void OnTacticalMapUserUpdateCanvasMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapUpdateCanvasMsg args)
     {
         if (!ent.Comp.CanDraw)
@@ -249,6 +227,33 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         if (ent.Comp.Xenos)
             UpdateCanvas(lines, false, true);
+    }
+
+    private void OnTacticalMapComputerUpdateCanvasMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapUpdateCanvasMsg args)
+    {
+        if (!_skills.HasSkill(args.Actor, ent.Comp.Skill, ent.Comp.SkillLevel))
+            return;
+
+        var lines = args.Lines;
+        if (lines.Count > LineLimit)
+            lines = lines[..LineLimit];
+
+        var time = _timing.CurTime;
+        if (time < ent.Comp.NextAnnounceAt)
+            return;
+
+        var nextAnnounce = time + _announceCooldown;
+        ent.Comp.NextAnnounceAt = nextAnnounce;
+        Dirty(ent);
+
+        var computers = EntityQueryEnumerator<TacticalMapComputerComponent>();
+        while (computers.MoveNext(out var uid, out var computer))
+        {
+            computer.NextAnnounceAt = nextAnnounce;
+            Dirty(uid, computer);
+        }
+
+        UpdateCanvas(lines, true, false);
     }
 
     private void UpdateActiveTracking(Entity<TacticalMapTrackedComponent> tracked, MobState mobState)

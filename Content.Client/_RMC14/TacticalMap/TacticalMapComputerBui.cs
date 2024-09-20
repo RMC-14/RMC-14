@@ -1,6 +1,8 @@
 ﻿using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.TacticalMap;
 using JetBrains.Annotations;
+using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 
@@ -9,6 +11,8 @@ namespace Content.Client._RMC14.TacticalMap;
 [UsedImplicitly]
 public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
+    [Dependency] private readonly IPlayerManager _player = default!;
+
     private TacticalMapWindow? _window;
     private bool _refreshed;
 
@@ -19,10 +23,21 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : BoundU
         TabContainer.SetTabTitle(_window.MapTab, "Map");
         TabContainer.SetTabVisible(_window.MapTab, true);
 
-        TabContainer.SetTabTitle(_window.CanvasTab, "Canvas");
-        TabContainer.SetTabVisible(_window.CanvasTab, true);
+        var computer = EntMan.GetComponentOrNull<TacticalMapComputerComponent>(Owner);
+        var skills = EntMan.System<SkillsSystem>();
+        if (computer != null &&
+            _player.LocalEntity is { } player &&
+            skills.HasSkill(player, computer.Skill, computer.SkillLevel))
+        {
+            TabContainer.SetTabTitle(_window.CanvasTab, "Canvas");
+            TabContainer.SetTabVisible(_window.CanvasTab, true);
+        }
+        else
+        {
+            TabContainer.SetTabVisible(_window.CanvasTab, false);
+        }
 
-        if (EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer) &&
+        if (computer != null &&
             EntMan.TryGetComponent(computer.Map, out AreaGridComponent? areaGrid))
         {
             _window.UpdateTexture((computer.Map.Value, areaGrid));
