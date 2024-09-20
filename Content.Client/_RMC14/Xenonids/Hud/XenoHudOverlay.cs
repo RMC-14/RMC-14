@@ -84,6 +84,7 @@ public sealed class XenoHudOverlay : Overlay
         var isAdminGhost = _entity.TryGetComponent(_players.LocalEntity, out GhostComponent? ghost) &&
                            ghost.CanGhostInteract;
         var isXeno = _entity.HasComponent<XenoComponent>(_players.LocalEntity);
+        var isGhost = false;
 
         if (!_entity.HasComponent<CMGhostXenoHudComponent>(_players.LocalEntity))
         {
@@ -92,6 +93,8 @@ public sealed class XenoHudOverlay : Overlay
         }
         else
         {
+            if (_entity.HasComponent<CMGhostXenoHudComponent>(_players.LocalEntity))
+                isGhost = true;
             isXeno = true;
         }
         var handle = args.WorldHandle;
@@ -105,7 +108,8 @@ public sealed class XenoHudOverlay : Overlay
         if (isXeno)
         {
             DrawBars(in args, scaleMatrix, rotationMatrix);
-            DrawDeadIcon(in args, scaleMatrix, rotationMatrix);
+            if (!isGhost)
+                DrawDeadIcon(in args, scaleMatrix, rotationMatrix);
         }
 
         if (isXeno || isAdminGhost)

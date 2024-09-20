@@ -89,6 +89,10 @@
   - type: ImmuneToUnarmed
   - type: CMIconSmooth
     smooth: true
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: XenoResinBreak
 #  - type: Physics
 #    bodyType: Static
 #  - type: FootstepModifier

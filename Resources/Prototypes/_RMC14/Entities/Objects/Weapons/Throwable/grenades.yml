@@ -90,6 +90,7 @@
   - type: EvenSmoke
     spawn: RMCSmoke
     range: 3
+  - type: DeleteOnExplosion
 
 - type: entity
   parent: CMGrenadeHighExplosive
