@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Zarq0
-  changes:
-  - message: Added a new requisition tab, Research.
-    type: Add
-  - message: Made phoron obtainable through requisitions.
-    type: Tweak
-  id: 209
-  time: '2024-06-30T09:35:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2663
 - author: DrSmugleaf
   changes:
   - message: Fixed bullets not hitting xenonid eggs.
@@ -4390,5 +4381,12 @@
   id: 708
   time: '2024-09-19T20:16:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4075
+- author: Vermidia
+  changes:
+  - message: Dropship fabricator printing is much faster
+    type: Tweak
+  id: 709
+  time: '2024-09-20T05:56:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4083
 Name: RMC14
 Order: -1
