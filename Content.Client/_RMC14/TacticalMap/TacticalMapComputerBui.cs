@@ -1,11 +1,9 @@
-﻿using System.Numerics;
-using Content.Shared._RMC14.Areas;
+﻿using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.TacticalMap;
 using JetBrains.Annotations;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using static Content.Shared._RMC14.TacticalMap.TacticalMapComponent;
 
 namespace Content.Client._RMC14.TacticalMap;
 
@@ -15,6 +13,7 @@ public sealed class TacticalMapComputerBui : BoundUserInterface
     [Dependency] private readonly IPlayerManager _player = default!;
 
     private TacticalMapWindow? _window;
+    private bool _refreshed;
 
     public TacticalMapComputerBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -26,8 +25,7 @@ public sealed class TacticalMapComputerBui : BoundUserInterface
         _window = this.CreateWindow<TacticalMapWindow>();
 
         if (!EntMan.TryGetComponent(_player.LocalEntity, out TransformComponent? xform) ||
-            !EntMan.TryGetComponent(xform.MapUid, out AreaGridComponent? areaGrid) ||
-            !EntMan.TryGetComponent(xform.MapUid, out TacticalMapComponent? tacticalMap))
+            !EntMan.TryGetComponent(xform.MapUid, out AreaGridComponent? areaGrid))
         {
             return;
         }
@@ -37,20 +35,35 @@ public sealed class TacticalMapComputerBui : BoundUserInterface
 
         TabContainer.SetTabTitle(_window.CanvasTab, "Canvas");
         TabContainer.SetTabVisible(_window.CanvasTab, true);
-        _window.Canvas.TextureScale = new Vector2(2, 2);
 
-        var lineLimit = EntMan.System<TacticalMapSystem>().LineLimit;
-        _window.SetLineLimit(lineLimit);
         _window.UpdateTexture((xform.MapUid.Value, areaGrid));
-        UpdateBlips();
+        Refresh();
 
         _window.UpdateCanvasButton.OnPressed += _ => SendPredictedMessage(new TacticalMapComputerUpdateCanvasMsg(_window.Canvas.Lines));
-        _window.Canvas.MouseFilter = Control.MouseFilterMode.Pass;
     }
 
     public void Refresh()
     {
+        if (_window is not { IsOpen: true })
+            return;
+
+        var lineLimit = EntMan.System<TacticalMapSystem>().LineLimit;
+        _window.SetLineLimit(lineLimit);
         UpdateBlips();
+
+        if (_refreshed)
+            return;
+
+        _window.Canvas.Lines.Clear();
+        _window.Map.Lines.Clear();
+
+        if (EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer))
+        {
+            _window.Canvas.Lines.AddRange(computer.Lines);
+            _window.Map.Lines.AddRange(computer.Lines);
+        }
+
+        _refreshed = true;
     }
 
     private void UpdateBlips()

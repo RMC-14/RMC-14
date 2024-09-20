@@ -9,9 +9,9 @@ public enum TacticalMapComputerUi
 }
 
 [Serializable, NetSerializable]
-public sealed class TacticalMapComputerUpdateCanvasMsg(Queue<TacticalMapLine> colors) : BoundUserInterfaceMessage
+public sealed class TacticalMapComputerUpdateCanvasMsg(List<TacticalMapLine> lines) : BoundUserInterfaceMessage
 {
-    public readonly Queue<TacticalMapLine> Colors = colors;
+    public readonly List<TacticalMapLine> Lines = lines;
 }
 
 [DataRecord]

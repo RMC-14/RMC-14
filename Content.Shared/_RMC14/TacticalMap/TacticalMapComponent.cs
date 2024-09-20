@@ -1,7 +1,5 @@
 ﻿using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.TacticalMap;
 
@@ -16,21 +14,23 @@ public sealed partial class TacticalMapComponent : Component
     public TimeSpan NextUpdate = TimeSpan.FromSeconds(1);
 
     [DataField]
-    public Dictionary<int, TacticalMapBlip> Marines = new();
+    public Dictionary<int, TacticalMapBlip> MarineBlips = new();
 
     [DataField]
-    public Dictionary<int, TacticalMapBlip> LastMarineUpdate = new();
+    public Dictionary<int, TacticalMapBlip> LastUpdateMarineBlips = new();
 
     [DataField]
-    public Dictionary<int, TacticalMapBlip> Xenos = new();
+    public Dictionary<int, TacticalMapBlip> XenoBlips = new();
 
     [DataField]
-    public Queue<TacticalMapLine> Colors = new();
+    public Dictionary<int, TacticalMapBlip> LastUpdateXenoBlips = new();
+
+    [DataField]
+    public List<TacticalMapLine> MarineLines = new();
+
+    [DataField]
+    public List<TacticalMapLine> XenoLines = new();
 
     [DataField]
     public bool MapDirty;
-
-    [DataRecord]
-    [Serializable, NetSerializable]
-    public readonly record struct TacticalMapBlip(Vector2i Indices, SpriteSpecifier.Rsi Image, Color Color, bool Undefibbable);
 }

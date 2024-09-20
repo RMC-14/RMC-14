@@ -11,7 +11,6 @@ using Robust.Shared.Input;
 using Robust.Shared.Utility;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
-using static Content.Shared._RMC14.TacticalMap.TacticalMapComponent;
 using Color = Robust.Shared.Maths.Color;
 
 namespace Content.Client._RMC14.TacticalMap;
@@ -24,7 +23,7 @@ public sealed partial class TacticalMapControl : TextureRect
     private Vector2i _delta;
     private bool _dragging;
     private Vector2i? _lastDrag;
-    public readonly Queue<TacticalMapLine> Lines = new();
+    public readonly List<TacticalMapLine> Lines = new();
     public int LineLimit;
     public bool Drawing { get; set; }
     public Color Color;
@@ -79,18 +78,14 @@ public sealed partial class TacticalMapControl : TextureRect
         if (Texture == null)
             return;
 
-        // var leftTop = Size.X > _texture.Size.X ? new Vector2((Size.X - _texture.Size.X) / 2, 0) : Vector2.Zero;
-        // var size = Size.Y / _texture.Size.Y;
-        // handle.DrawTextureRect(_texture, UIBox2.FromDimensions(leftTop, _texture.Size * size));
-
         var system = IoCManager.Resolve<IEntityManager>().System<SpriteSystem>();
         var backgroundRsi = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/map_blips.rsi"), "background");
         var undefibbableRsi = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/map_blips.rsi"), "undefibbable");
         var background = system.Frame0(backgroundRsi);
+        var draw = GetDrawDimensions(Texture);
+        var offset = new Vector2(draw.Left, draw.Top);
         if (_blips != null)
         {
-            var draw = GetDrawDimensions(Texture);
-            var offset = draw.Center;
             foreach (var blip in _blips)
             {
                 var position = blip.Indices + offset;
@@ -106,9 +101,9 @@ public sealed partial class TacticalMapControl : TextureRect
         var lineVectors = new Vector2[6];
         foreach (var line in Lines)
         {
-            var start = line.Start;
-            var end = line.End;
-            Vector2 diff = end - start;
+            var start = line.Start + offset;
+            var end = line.End + offset;
+            var diff = end - start;
             var box = Box2.CenteredAround(start + diff / 2, new Vector2(5, (int) diff.Length()));
             var boxRotated = new Box2Rotated(box, diff.ToWorldAngle(), start + diff / 2);
             lineVectors[0] = boxRotated.BottomLeft;
@@ -167,10 +162,10 @@ public sealed partial class TacticalMapControl : TextureRect
         if (Texture == null)
             return;
 
-        Lines.Enqueue(new TacticalMapLine(_lastDrag.Value, relative, Color));
+        Lines.Add(new TacticalMapLine(_lastDrag.Value, relative, Color));
         while (LineLimit >= 0 && Lines.Count > LineLimit)
         {
-            Lines.Dequeue();
+            Lines.RemoveAt(0);
         }
 
         _lastDrag = relative;

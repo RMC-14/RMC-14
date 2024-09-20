@@ -166,3 +166,6 @@
     exceptEffects:
     - Stun
     - KnockedDown
+  - type: TacticalMapUser
+    xenos: true
+    canDraw: true

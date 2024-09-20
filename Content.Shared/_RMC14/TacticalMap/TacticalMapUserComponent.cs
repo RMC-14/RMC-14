@@ -1,10 +1,10 @@
 ﻿using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using static Content.Shared._RMC14.TacticalMap.TacticalMapComponent;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.TacticalMap;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
 [Access(typeof(SharedTacticalMapSystem))]
 public sealed partial class TacticalMapUserComponent : Component
 {
@@ -30,4 +30,16 @@ public sealed partial class TacticalMapUserComponent : Component
 
     [DataField, AutoNetworkedField]
     public Dictionary<int, TacticalMapBlip> XenoBlips = new();
+
+    [DataField, AutoNetworkedField]
+    public List<TacticalMapLine> MarineLines = new();
+
+    [DataField, AutoNetworkedField]
+    public List<TacticalMapLine> XenoLines = new();
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan NextAnnounceAt;
+
+    [DataField, AutoNetworkedField]
+    public bool CanDraw;
 }
