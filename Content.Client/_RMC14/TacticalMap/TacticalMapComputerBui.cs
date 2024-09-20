@@ -57,6 +57,12 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : BoundU
         _window.SetLineLimit(lineLimit);
         UpdateBlips();
 
+        if (EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer))
+        {
+            _window.LastUpdateAt = computer.LastAnnounceAt;
+            _window.NextUpdateAt = computer.NextAnnounceAt;
+        }
+
         if (_refreshed)
             return;
 

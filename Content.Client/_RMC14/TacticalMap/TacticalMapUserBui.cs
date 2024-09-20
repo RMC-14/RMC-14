@@ -39,6 +39,13 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : BoundUserI
         _window.SetLineLimit(lineLimit);
         UpdateBlips();
 
+        var user = EntMan.GetComponentOrNull<TacticalMapUserComponent>(Owner);
+        if (user != null)
+        {
+            _window.LastUpdateAt = user.LastAnnounceAt;
+            _window.NextUpdateAt = user.NextAnnounceAt;
+        }
+
         if (_refreshed)
             return;
 
@@ -54,7 +61,6 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : BoundUserI
             _window.Canvas.Lines.AddRange(lines.XenoLines);
         }
 
-        var user = EntMan.GetComponentOrNull<TacticalMapUserComponent>(Owner);
         if (user?.CanDraw ?? false)
         {
             TabContainer.SetTabTitle(_window.CanvasTab, "Canvas");

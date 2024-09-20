@@ -22,6 +22,11 @@
                               HorizontalExpand="True" />
             </BoxContainer>
             <ui:BlueHorizontalSeparator />
+            <ProgressBar Name="CooldownBar" Access="Public" Visible="False"
+                         HorizontalExpand="True" MinHeight="25">
+                <Label Name="CooldownLabel" Access="Public"
+                       HorizontalAlignment="Center" />
+            </ProgressBar>
             <controls:TacticalMapControl Name="Canvas" Access="Public" Stretch="Keep"
                                          TextureScale="2 2" SetWidth="500" SetHeight="500"
                                          Drawing="True" MouseFilter="Pass" />

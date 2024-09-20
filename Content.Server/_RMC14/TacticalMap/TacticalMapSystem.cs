@@ -19,6 +19,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.UserInterface;
+using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
@@ -227,14 +228,15 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
 
         var nextAnnounce = time + _announceCooldown;
+        ent.Comp.LastAnnounceAt = time;
         ent.Comp.NextAnnounceAt = nextAnnounce;
         Dirty(ent);
 
         if (ent.Comp.Marines)
-            UpdateCanvas(lines, true, false, user);
+            UpdateCanvas(lines, true, false, user, ent.Comp.Sound);
 
         if (ent.Comp.Xenos)
-            UpdateCanvas(lines, false, true, user);
+            UpdateCanvas(lines, false, true, user, ent.Comp.Sound);
     }
 
     private void OnTacticalMapComputerUpdateCanvasMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapUpdateCanvasMsg args)
@@ -258,6 +260,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         var computers = EntityQueryEnumerator<TacticalMapComputerComponent>();
         while (computers.MoveNext(out var uid, out var computer))
         {
+            computer.LastAnnounceAt = time;
             computer.NextAnnounceAt = nextAnnounce;
             Dirty(uid, computer);
         }
@@ -395,7 +398,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         Dirty(user, lines);
     }
 
-    private void UpdateCanvas(List<TacticalMapLine> lines, bool marine, bool xeno, EntityUid user)
+    private void UpdateCanvas(List<TacticalMapLine> lines, bool marine, bool xeno, EntityUid user, SoundSpecifier? sound = null)
     {
         var maps = EntityQueryEnumerator<TacticalMapComponent>();
         while (maps.MoveNext(out var mapId, out var map))
@@ -406,7 +409,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             {
                 map.MarineLines = lines;
                 map.LastUpdateMarineBlips = map.MarineBlips.ToDictionary();
-                _marineAnnounce.AnnounceToMarines("The UNMC tactical map has been updated.");
+                _marineAnnounce.AnnounceARES(user, "The UNMC tactical map has been updated.", sound);
                 _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the marine tactical map for {{ToPrettyString(mapId)}}");
             }
 
@@ -414,7 +417,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             {
                 map.XenoLines = lines;
                 map.LastUpdateXenoBlips = map.XenoBlips.ToDictionary();
-                _xenoAnnounce.AnnounceSameHive(user, "The Xenonid tactical map has been updated.");
+                _xenoAnnounce.AnnounceSameHive(user, "The Xenonid tactical map has been updated.", sound);
                 _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the xenonid tactical map for {ToPrettyString(mapId)}");
             }
 

@@ -16,6 +16,9 @@ public sealed partial class TacticalMapComputerComponent : Component
     public Dictionary<int, TacticalMapBlip> Blips = new();
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan LastAnnounceAt;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextAnnounceAt;
 
     [DataField, AutoNetworkedField]
