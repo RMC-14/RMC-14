@@ -28,7 +28,7 @@
       resin_hole:
         shape:
           !type:PhysShapeCircle
-          radius: 0.5
+          radius: 1.5
         hard: false
         layer:
         - SmallMobLayer

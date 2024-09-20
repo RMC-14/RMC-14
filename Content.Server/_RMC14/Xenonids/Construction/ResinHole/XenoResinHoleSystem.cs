@@ -13,6 +13,7 @@ using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Database;
@@ -53,6 +54,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly TagSystem _tags = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
@@ -296,13 +298,31 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
     private void OnXenoResinHoleStepTriggerAttempt(Entity<XenoResinHoleComponent> resinHole, ref StepTriggerAttemptEvent args)
     {
-        if (CanTrigger(args.Tripper))
-            args.Continue = true;
+        var (ent, comp) = resinHole;
+
+        if (comp.TrapPrototype is null)
+        {
+            return;
+        }
+
+        if (comp.TrapPrototype == XenoResinHoleComponent.ParasitePrototype)
+        {
+            if (!_interaction.InRangeUnobstructed(args.Source, args.Tripper, comp.ParasiteActivationRange))
+            {
+                return;
+            }
+
+            args.Continue = HasComp<InfectableComponent>(args.Tripper) &&
+                !HasComp<VictimInfectedComponent>(args.Tripper);
+            return;
+        }
+
+        args.Continue = true;
     }
 
     private void OnXenoResinHoleStepTriggered(Entity<XenoResinHoleComponent> resinHole, ref StepTriggeredOffEvent args)
     {
-        if (ActivateTrap(resinHole))
+        if (resinHole.Comp.TrapPrototype == XenoResinHoleComponent.ParasitePrototype & ActivateTrap(resinHole))
         {
             _stun.TryParalyze(args.Tripper, resinHole.Comp.StepStunDuration, true);
         }
@@ -366,11 +386,6 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             return false;
         }
         return true;
-    }
-
-    private bool CanTrigger(EntityUid user)
-    {
-        return !_mobState.IsDead(user) && HasComp<MarineComponent>(user);
     }
 
     private void PlaceResinHole(EntityUid xeno, EntityCoordinates coords, EntProtoId resinHolePrototype)

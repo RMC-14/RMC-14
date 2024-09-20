@@ -30,6 +30,12 @@ public sealed partial class XenoResinHoleComponent : Component
 
     [DataField]
     public TimeSpan AddFluidDelay = TimeSpan.FromSeconds(3.0);
+
+    [DataField]
+    public float ParasiteActivationRange = 0.5f;
+
+    [DataField]
+    public float FluidActivationRange = 1.5f;
 }
 
 [Serializable, NetSerializable]
