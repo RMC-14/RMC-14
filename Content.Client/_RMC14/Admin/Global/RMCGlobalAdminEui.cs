@@ -43,30 +43,6 @@ public sealed class RMCGlobalAdminEui : BaseEui
         _window.Squads.DisposeAllChildren();
         _window.XenoTiers.DisposeAllChildren();
 
-        var marinesPerXeno = new BoxContainer
-        {
-            Orientation = LayoutOrientation.Vertical,
-            Children =
-            {
-                new Label { Text = "Marines per xeno " },
-            },
-        };
-
-        _window.CVars.AddChild(marinesPerXeno);
-
-        foreach (var (map, ratio) in s.MarinesPerXeno)
-        {
-            marinesPerXeno.AddChild(new BoxContainer
-            {
-                Orientation = LayoutOrientation.Vertical,
-                Children =
-                {
-                    new Label { Text = map },
-                    new Label { Text = $"{ratio:F2}" },
-                },
-            });
-        }
-
         foreach (var cVar in _config.GetRegisteredCVars())
         {
             if (!cVar.StartsWith("rmc.") || cVar.Contains("play_voicelines_"))

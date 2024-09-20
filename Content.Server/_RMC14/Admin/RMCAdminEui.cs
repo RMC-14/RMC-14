@@ -112,9 +112,7 @@ public sealed class RMCAdminEui : BaseEui
             marines++;
         }
 
-        var marinesPerXeno = entities.System<CMDistressSignalRuleSystem>().MarinesPerXeno.ToDictionary();
-
-        return new RMCAdminEuiState(hives, squads, xenos, marines, marinesPerXeno);
+        return new RMCAdminEuiState(hives, squads, xenos, marines);
     }
 
     public override EuiStateBase GetNewState()
@@ -151,7 +149,6 @@ public sealed class RMCAdminEui : BaseEui
             state.Squads,
             state.Xenos,
             state.Marines,
-            state.MarinesPerXeno,
             specialistSkills,
             points,
             extraPoints

@@ -19,15 +19,13 @@ public class RMCAdminEuiState(
     List<Hive> hives,
     List<Squad> squads,
     List<Xeno> xenos,
-    int marines,
-    Dictionary<string, float> marinesPerXeno
+    int marines
 ) : EuiStateBase
 {
     public readonly List<Hive> Hives = hives;
     public readonly List<Squad> Squads = squads;
     public readonly List<Xeno> Xenos = xenos;
     public readonly int Marines = marines;
-    public readonly Dictionary<string, float> MarinesPerXeno = marinesPerXeno;
 }
 
 [Serializable, NetSerializable]
@@ -36,11 +34,10 @@ public sealed class RMCAdminEuiTargetState(
     List<Squad> squads,
     List<Xeno> xenos,
     int marines,
-    Dictionary<string, float> marinesPerXeno,
     List<(string Name, bool Present)> specialistSkills,
     int points,
     Dictionary<string, int> extraPoints
-) : RMCAdminEuiState(hives, squads, xenos, marines, marinesPerXeno)
+) : RMCAdminEuiState(hives, squads, xenos, marines)
 {
     public readonly List<(string Name, bool Present)> SpecialistSkills = specialistSkills;
     public readonly int Points = points;
