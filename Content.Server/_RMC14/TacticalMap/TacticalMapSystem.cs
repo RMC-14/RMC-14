@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Content.Server._RMC14.Announce;
 using Content.Server._RMC14.Marines;
+using Content.Server.Administration.Logs;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
@@ -10,6 +11,7 @@ using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.Atmos.Rotting;
+using Content.Shared.Database;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
@@ -26,6 +28,7 @@ namespace Content.Server._RMC14.TacticalMap;
 public sealed class TacticalMapSystem : SharedTacticalMapSystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
@@ -395,7 +398,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private void UpdateCanvas(List<TacticalMapLine> lines, bool marine, bool xeno, EntityUid user)
     {
         var maps = EntityQueryEnumerator<TacticalMapComponent>();
-        while (maps.MoveNext(out var map))
+        while (maps.MoveNext(out var mapId, out var map))
         {
             map.MapDirty = true;
 
@@ -404,6 +407,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 map.MarineLines = lines;
                 map.LastUpdateMarineBlips = map.MarineBlips.ToDictionary();
                 _marineAnnounce.AnnounceToMarines("The UNMC tactical map has been updated.");
+                _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the marine tactical map for {{ToPrettyString(mapId)}}");
             }
 
             if (xeno)
@@ -411,7 +415,11 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 map.XenoLines = lines;
                 map.LastUpdateXenoBlips = map.XenoBlips.ToDictionary();
                 _xenoAnnounce.AnnounceSameHive(user, "The Xenonid tactical map has been updated.");
+                _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the xenonid tactical map for {ToPrettyString(mapId)}");
             }
+
+            var ev = new TacticalMapUpdatedEvent(lines.ToList(), user);
+            RaiseLocalEvent(ref ev);
         }
     }
 

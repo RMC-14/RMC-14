@@ -64,7 +64,7 @@ public sealed class RMCAdminEui : BaseEui
         _admin.OnPermsChanged -= OnAdminPermsChanged;
     }
 
-    public static RMCAdminEuiState CreateState(IEntityManager entities)
+    public static RMCAdminEuiState CreateState(IEntityManager entities, Guid tacticalMapLines)
     {
         var squadSys = entities.System<SquadSystem>();
         var hives = new List<Hive>();
@@ -112,12 +112,15 @@ public sealed class RMCAdminEui : BaseEui
             marines++;
         }
 
-        return new RMCAdminEuiState(hives, squads, xenos, marines);
+        var rmcAdmin = entities.System<RMCAdminSystem>();
+        var history = rmcAdmin.LinesDrawn.Reverse().Select(l => (l.Id, l.Actor, l.Round)).ToList();
+        var lines = rmcAdmin.LinesDrawn.FirstOrDefault(l => l.Item1 == tacticalMapLines);
+        return new RMCAdminEuiState(hives, squads, xenos, marines, history, lines);
     }
 
     public override EuiStateBase GetNewState()
     {
-        var state = CreateState(_entities);
+        var state = CreateState(_entities, default);
 
         _entities.TryGetEntity(_target, out var target);
         var specialistSkills = new List<(string Name, bool Present)>();
@@ -149,6 +152,8 @@ public sealed class RMCAdminEui : BaseEui
             state.Squads,
             state.Xenos,
             state.Marines,
+            state.TacticalMapHistory,
+            state.TacticalMapLines,
             specialistSkills,
             points,
             extraPoints
