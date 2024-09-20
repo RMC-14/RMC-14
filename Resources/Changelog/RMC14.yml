@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed bullets not hitting xenonid eggs.
-    type: Fix
-  id: 210
-  time: '2024-06-30T11:25:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2671
-- author: DrSmugleaf
-  changes:
   - message: Added the ability for xenonids to devolve.
     type: Add
   - message: Fixed xenos taking twice as long to evolve than intended.
@@ -4388,5 +4381,12 @@
   id: 709
   time: '2024-09-20T05:56:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4083
+- author: DummeHytteOst
+  changes:
+  - message: The lifesaver bag in the CO equipment vendor is now filled.
+    type: Fix
+  id: 710
+  time: '2024-09-20T08:42:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4086
 Name: RMC14
 Order: -1
