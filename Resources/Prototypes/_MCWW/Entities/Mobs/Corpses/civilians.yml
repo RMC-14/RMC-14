@@ -11,11 +11,9 @@
   equipment:
     jumpsuit: RMCJumpsuitMarshal
     back: ClothingBackpackSatchelLeather
-    shoes: CMBootsBlackFilled
-    head: RMCHeadCapBureau
-    eyes: CMGlassesSecurity
-    id: RMCIDCardDeputy
-    ears: CMHeadsetColony
+    shoes: MCWWHunterBoots
+    head: MCWWHunterCap
+    outerClothing: MCWWClothingHunterCoat
 
 - type: entity
   parent: RMCHumanCorpse
@@ -28,13 +26,10 @@
 - type: startingGear
   id: RMCGearCorpseLumberjack
   equipment:
-    jumpsuit: RMCJumpsuitMarshal
+    jumpsuit: ClothingUniformJumpsuitFlannel
     back: ClothingBackpackSatchelLeather
     shoes: CMBootsBlackFilled
     head: RMCHeadCapBureau
-    eyes: CMGlassesSecurity
-    id: RMCIDCardDeputy
-    ears: CMHeadsetColony
 
 - type: entity
   parent: RMCHumanCorpse
@@ -47,10 +42,6 @@
 - type: startingGear
   id: RMCGearCorpsePeasant
   equipment:
-    jumpsuit: RMCJumpsuitMarshal
     back: ClothingBackpackSatchelLeather
     shoes: ClothingShoesLeather
     head: RMCHeadCapBureau
-    eyes: CMGlassesSecurity
-    id: RMCIDCardDeputy
-    ears: CMHeadsetColony

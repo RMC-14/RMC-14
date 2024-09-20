@@ -18,3 +18,5 @@
     clothingVisuals:
       outerClothing:
       - state: QM-equipped-OUTERCLOTHING
+  - type: CMArmor
+    armor: 10

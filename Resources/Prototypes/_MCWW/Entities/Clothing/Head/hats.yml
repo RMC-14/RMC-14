@@ -30,5 +30,5 @@
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
   - type: FixedItemSizeStorage
-    - type: CMArmor
+  - type: CMArmor
     armor: 10
