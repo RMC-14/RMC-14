@@ -117,6 +117,8 @@
       components:
       - Xeno
   - type: RMCRepairable
+  - type: RMCNameItemOnVend
+    item: Sentry
 
 - type: htnCompound
   id: RMCSentryCompound
