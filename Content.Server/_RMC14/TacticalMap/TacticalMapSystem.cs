@@ -70,8 +70,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         SubscribeLocalEvent<TacticalMapComponent, MapInitEvent>(OnTacticalMapMapInit);
 
-        SubscribeLocalEvent<TacticalMapUserComponent, MapInitEvent>(OnTacticalMapUserMapInit);
-        SubscribeLocalEvent<TacticalMapUserComponent, OpenTacticalMapActionEvent>(OnTacticalMapUserOpenAction);
+        SubscribeLocalEvent<TacticalMapUserComponent, MapInitEvent>(OnUserMapInit);
+        SubscribeLocalEvent<TacticalMapUserComponent, OpenTacticalMapActionEvent>(OnUserOpenAction);
 
         SubscribeLocalEvent<TacticalMapComputerComponent, MapInitEvent>(OnComputerMapInit);
         SubscribeLocalEvent<TacticalMapComputerComponent, BeforeActivatableUIOpenEvent>(OnComputerBeforeUIOpen);
@@ -92,13 +92,15 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         Subs.BuiEvents<TacticalMapUserComponent>(TacticalMapUserUi.Key,
             subs =>
             {
-                subs.Event<TacticalMapUpdateCanvasMsg>(OnTacticalMapUserUpdateCanvasMsg);
+                subs.Event<BoundUIOpenedEvent>(OnUserBUIOpened);
+                subs.Event<BoundUIClosedEvent>(OnUserBUIClosed);
+                subs.Event<TacticalMapUpdateCanvasMsg>(OnUserUpdateCanvasMsg);
             });
 
         Subs.BuiEvents<TacticalMapComputerComponent>(TacticalMapComputerUi.Key,
             subs =>
             {
-                subs.Event<TacticalMapUpdateCanvasMsg>(OnTacticalMapComputerUpdateCanvasMsg);
+                subs.Event<TacticalMapUpdateCanvasMsg>(OnComputerUpdateCanvasMsg);
             });
 
         Subs.CVar(_config,
@@ -124,7 +126,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         }
     }
 
-    private void OnTacticalMapUserMapInit(Entity<TacticalMapUserComponent> ent, ref MapInitEvent args)
+    private void OnUserMapInit(Entity<TacticalMapUserComponent> ent, ref MapInitEvent args)
     {
         _actions.AddAction(ent, ref ent.Comp.Action, ent.Comp.ActionId);
 
@@ -134,7 +136,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         Dirty(ent);
     }
 
-    private void OnTacticalMapUserOpenAction(Entity<TacticalMapUserComponent> ent, ref OpenTacticalMapActionEvent args)
+    private void OnUserOpenAction(Entity<TacticalMapUserComponent> ent, ref OpenTacticalMapActionEvent args)
     {
         if (TryGetTacticalMap(out var map))
             UpdateUserData(ent, map);
@@ -209,7 +211,17 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             UpdateTracked((ent, active));
     }
 
-    private void OnTacticalMapUserUpdateCanvasMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapUpdateCanvasMsg args)
+    private void OnUserBUIOpened(Entity<TacticalMapUserComponent> ent, ref BoundUIOpenedEvent args)
+    {
+        EnsureComp<ActiveTacticalMapUserComponent>(ent);
+    }
+
+    private void OnUserBUIClosed(Entity<TacticalMapUserComponent> ent, ref BoundUIClosedEvent args)
+    {
+        RemCompDeferred<ActiveTacticalMapUserComponent>(ent);
+    }
+
+    private void OnUserUpdateCanvasMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapUpdateCanvasMsg args)
     {
         var user = args.Actor;
         if (!ent.Comp.CanDraw)
@@ -235,7 +247,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             UpdateCanvas(lines, false, true, user, ent.Comp.Sound);
     }
 
-    private void OnTacticalMapComputerUpdateCanvasMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapUpdateCanvasMsg args)
+    private void OnComputerUpdateCanvasMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapUpdateCanvasMsg args)
     {
         var user = args.Actor;
         if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
@@ -435,12 +447,9 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 UpdateMapData((computerId, computer), map);
             }
 
-            var users = EntityQueryEnumerator<TacticalMapUserComponent>();
-            while (users.MoveNext(out var userId, out var userComp))
+            var users = EntityQueryEnumerator<ActiveTacticalMapUserComponent, TacticalMapUserComponent>();
+            while (users.MoveNext(out var userId, out _, out var userComp))
             {
-                if (!_ui.IsUiOpen(userId, TacticalMapUserUi.Key))
-                    continue;
-
                 UpdateUserData((userId, userComp), map);
             }
         }
