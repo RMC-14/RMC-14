@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Set the default amount of marines per xeno back up to 4. 50 xenos per
-      200 players.
-    type: Tweak
-  - message: Decreased both the travel time and cooldown of dropships by 30 seconds.
-    type: Tweak
-  id: 218
-  time: '2024-07-01T03:05:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2681
-- author: DrSmugleaf
-  changes:
-  - message: Fixed power cell rechargers on the Almayer not being to recharge anything.
-    type: Fix
-  id: 219
-  time: '2024-07-01T03:07:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2688
 - author: Whisper
   changes:
   - message: You can now deconstruct magazine boxes into cardboard and craft new ones.
@@ -4384,5 +4367,39 @@
   id: 717
   time: '2024-09-21T05:22:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3674
+- author: DrSmugleaf
+  changes:
+  - message: Added the tactical map. This can be used to get a view of the current
+      planet map, and can be updated every 4 minutes by Command and the Queen to give
+      each side drawn directions and a static view of everyone else's position at
+      the time of the update. The tactical map can be opened with an action in your
+      bar, and Command can edit it by opening a map table in CIC.
+    type: Add
+  - message: Removed the auto-balancing system that adjusts marines per xeno depending
+      on round outcomes, as each individual update no longer has as big of an impact
+      on balance as they used to and the biggest difference right now is made by the
+      amount of players in the server.
+    type: Remove
+  - message: Added the missing job slot scaling feature that will adjust how many
+      of each marine role are available depending on how many marines are playing.
+      The scaling depends on the specific role, with the heaviest adjustments happening
+      to still unimplemented roles (mess technician and ordnance technician), but
+      will for example allow up to 5 staff officers with 160 or more marines, with
+      1 + 1 staff officer for each 40 marines, for a range of 2 to 5. The standard
+      4 specs and sgs are available at 60 marines or above, with a minimum of 2 of
+      each being available per round. This scaling won't affect research unlocking
+      spec slots in the future once implemented.
+    type: Fix
+  id: 718
+  time: '2024-09-21T07:08:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4094
+- author: DrSmugleaf
+  changes:
+  - message: Added Sentry name to the list of Patreon nameable items. The name will
+      persist between upgrades.
+    type: Add
+  id: 719
+  time: '2024-09-21T07:08:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4095
 Name: RMC14
 Order: -1
