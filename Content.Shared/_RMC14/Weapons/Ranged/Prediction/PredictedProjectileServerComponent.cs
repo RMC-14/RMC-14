@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.Weapons.Ranged.Prediction;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class PredictedProjectileServerComponent : Component
 {
-    public ICommonSession Shooter;
+    public ICommonSession? Shooter;
 
     [DataField, AutoNetworkedField]
     public int ClientId;

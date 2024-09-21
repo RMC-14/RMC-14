@@ -102,11 +102,20 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
 
     private void OnPredictedMapInit(Entity<PredictedProjectileServerComponent> ent, ref MapInitEvent args)
     {
+        if (ent.Comp.Shooter == null)
+        {
+            Log.Warning($"{nameof(PredictedProjectileServerComponent)} map initialized with a null shooter session!");
+            return;
+        }
+
         _predicted[(ent.Comp.Shooter.UserId, ent.Comp.ClientId)] = ent;
     }
 
     private void OnPredictedRemove<T>(Entity<PredictedProjectileServerComponent> ent, ref T args)
     {
+        if (ent.Comp.Shooter == null)
+            return;
+
         _predicted.Remove((ent.Comp.Shooter.UserId, ent.Comp.ClientId));
     }
 
@@ -173,7 +182,7 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
 
         MapCoordinates lowestCoordinate = default;
         var otherCoordinates = EntityCoordinates.Invalid;
-        var ping = projectile.Comp1.Shooter.Channel.Ping;
+        var ping = projectile.Comp1.Shooter?.Channel.Ping ?? 0;
         // Use 1.5 due to the trip buffer.
         var sentTime = _timing.CurTime - TimeSpan.FromMilliseconds(ping * 1.5);
         var pingTime = TimeSpan.FromMilliseconds(ping);
@@ -236,7 +245,7 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
             return;
         }
 
-        if (predictedProjectile.Shooter.UserId != player.UserId.UserId)
+        if (predictedProjectile.Shooter?.UserId != player.UserId.UserId)
             return;
 
         if (!_projectileQuery.TryComp(projectile, out var projectileComp) ||
