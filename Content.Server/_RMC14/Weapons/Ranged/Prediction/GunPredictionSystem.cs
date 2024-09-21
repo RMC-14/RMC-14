@@ -28,7 +28,6 @@ namespace Content.Server._RMC14.Weapons.Ranged.Prediction;
 public sealed class GunPredictionSystem : SharedGunPredictionSystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly LagCompensationSystem _lagCompensation = default!;
     [Dependency] private readonly GunSystem _gun = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;

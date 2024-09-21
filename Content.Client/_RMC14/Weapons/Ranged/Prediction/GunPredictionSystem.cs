@@ -11,6 +11,7 @@ using Robust.Client.Player;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
+using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
@@ -28,8 +29,8 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    private EntityQuery<IgnorePredictionHideComponent> _ignorePredictionHideQuery = default!;
-    private EntityQuery<SpriteComponent> _spriteQuery = default!;
+    private EntityQuery<IgnorePredictionHideComponent> _ignorePredictionHideQuery;
+    private EntityQuery<SpriteComponent> _spriteQuery;
 
     public override void Initialize()
     {
