@@ -2,4 +2,4 @@ using Content.Shared.Actions;
 
 namespace Content.Shared._RMC14.Xenonids.Fruit.Events;
 
-public sealed partial class XenoFruitPlantActionEvent : WorldTargetActionEvent;
+public sealed partial class XenoFruitPlantActionEvent : InstantActionEvent;

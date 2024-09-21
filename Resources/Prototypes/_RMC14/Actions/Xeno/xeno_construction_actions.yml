@@ -91,7 +91,7 @@
   name: Plant Resin Fruit (100)
   description: Plant chosen resin fruit at the cost of health and plasma.
   components:
-  - type: WorldTargetAction
+  - type: InstantAction
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi

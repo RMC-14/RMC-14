@@ -228,6 +228,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     // Fruit planting
     #region Planting
 
+    /*
     private bool InRangePopup(Entity<XenoFruitPlanterComponent> xeno, EntityCoordinates target, float range)
     {
         var origin = _transform.GetMoverCoordinates(xeno.Owner);
@@ -239,6 +240,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         return true;
     }
+    */
 
     public bool TileHasFruit(Entity<MapGridComponent> grid, EntityCoordinates coordinates)
     {
@@ -257,12 +259,14 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     {
         popup = Loc.GetString("rmc-xeno-fruit-plant-failed");
 
+        /*
         // Target out of range
         if (!InRangePopup(xeno, target, xeno.Comp.PlantRange.Float()))
         {
             popup = Loc.GetString("cm-xeno-cant-reach-there");
             return false;
         }
+        */
 
         // Target not on grid
         if (_transform.GetGrid(target) is not { } gridId ||
@@ -280,16 +284,16 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             return false;
         }
 
-        // TODO RMC14: check if weeds belong to our hive
-
-        // TODO RMC14: check for resin holes
-
         // Target directly on weed node
         if (_xenoWeeds.IsOnWeeds((gridId, grid), target, true))
         {
             popup = Loc.GetString("rmc-xeno-fruit-plant-failed-node");
             return false;
         }
+
+        // TODO: check if weeds belong to our hive
+
+        // TODO: check for resin holes
 
         // Target on another fruit
         if (TileHasFruit((gridId, grid), target))
@@ -298,12 +302,14 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             return false;
         }
 
+        /*
         // Target blocked
         if (!_xenoConstruct.TileSolidAndNotBlocked(target))
         {
             popup = Loc.GetString("rmc-xeno-fruit-plant-failed");
             return false;
         }
+        */
 
         // Target has egg, xeno construct or other obstruction on it
         var tile = _mapSystem.CoordinatesToTile(gridId, grid, target);
@@ -335,9 +341,11 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         // Check for selected fruit
         if (xeno.Comp.FruitChoice is not { } fruitChoice)
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-plant-failed-select"), args.Target, xeno.Owner);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-plant-failed-select"), xeno.Owner, xeno.Owner);
             return;
         }
+
+        var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager, _map);
 
         foreach (var (actionId, _) in _actions.GetActions(xeno))
         {
@@ -346,9 +354,9 @@ public sealed class SharedXenoFruitSystem : EntitySystem
                 continue;
 
             // Check if target location valid
-            if (!CanPlantOnTilePopup(xeno, args.Target, action.CheckWeeds, out var popup))
+            if (!CanPlantOnTilePopup(xeno, coordinates, action.CheckWeeds, out var popup))
             {
-                _popup.PopupClient(popup, args.Target, xeno.Owner);
+                _popup.PopupClient(popup, coordinates, xeno.Owner);
                 return;
             }
 
@@ -372,7 +380,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             break;
         }
 
-        var coordinates = args.Target;
         if (!coordinates.IsValid(EntityManager))
             return;
 
@@ -843,19 +850,24 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         foreach (var (actionId, _) in _actions.GetActions(user))
         {
-            if (!HasComp<ActionReducedUseDelayComponent>(actionId))
+            if (!TryComp(actionId, out ActionReducedUseDelayComponent? comp))
                 continue;
 
             var ev = new ActionReducedUseDelayEvent(amount);
             RaiseLocalEvent(actionId, ev);
+            Dirty(actionId, comp);
         }
     }
 
     private void OnXenoFruitEffectHasteHit(Entity<XenoFruitEffectHasteComponent> xeno, ref MeleeHitEvent args)
     {
+        if (args.Handled)
+            return;
+
         if (!args.IsHit || args.HitEntities.Count == 0)
             return;
 
+        var found = false;
         foreach (var entity in args.HitEntities)
         {
             if (!_xeno.CanAbilityAttackTarget(xeno, entity))
@@ -865,8 +877,12 @@ public sealed class SharedXenoFruitSystem : EntitySystem
                 mobState.CurrentState == MobState.Dead)
                 continue;
 
+            found = true;
             break;
         }
+
+        if (!found)
+            return;
 
         if (xeno.Comp.ReductionCurrent >= xeno.Comp.ReductionMax)
             return;
