@@ -29,6 +29,7 @@
     tier: 0
     unlockAt: 0
     healOffWeeds: true
+    emoteSounds: Larva
   - type: XenoPlasma
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
@@ -60,8 +61,13 @@
     baseSprintSpeed: 6.7
   - type: Speech
     speechSounds: XenonidLarva
+    allowedEmotes: [ "XenoRoar" ]
   - type: RMCSize
     size: Small
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: larva
 
 # For surgeries/failed incubations
 - type: entity

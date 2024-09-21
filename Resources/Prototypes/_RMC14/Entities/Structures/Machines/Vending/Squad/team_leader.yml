@@ -77,8 +77,8 @@
         points: 30
     - name: Clothing Items
       entries:
-    #- id: CMScabbardMacheteFull
-    #  points: 5
+      - id: RMCScabbardMacheteFilled
+        points: 5
       - id: RMCPouchMacheteFilled
         points: 15
     #- id: CMMarineRadioTelephonePack

@@ -50,6 +50,8 @@
         crate: RMCCrateBoxMagazineM44RevolverMarksman
       - cost: 4000
         crate: RMCCrateBoxMagazineSentry
+      - cost: 4000
+        crate: RMCCrateBoxMagazineSentryShotgun
     - name: Attachments
       entries:
       - cost: 3000
@@ -149,6 +151,8 @@
       # leaving this commented, as it is not parity, but we might want it in the future
       #- cost: 2000
       #  crate: RMCCrateGrenadesSmoke
+      - cost: 4000
+        crate: RMCCrateGrenadesFragOld
       - cost: 4000
         crate: RMCCrateBreachingCharges
     - name: Food

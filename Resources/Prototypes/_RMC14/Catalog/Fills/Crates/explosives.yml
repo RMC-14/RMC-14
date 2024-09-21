@@ -31,6 +31,16 @@
 
 - type: entity
   parent: RMCCrateExplosives
+  id: RMCCrateGrenadesFragOld
+  name: M15 fragmentation grenades crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPacketGrenadeFragOldFilled
+      amount: 2
+
+- type: entity
+  parent: RMCCrateExplosives
   id: RMCCrateBreachingCharges
   name: breaching charges crate (x4)
   components:

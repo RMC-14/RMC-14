@@ -16,6 +16,9 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - CMCMO
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: medic
   special:
   - !type:AddComponentSpecial
     components:

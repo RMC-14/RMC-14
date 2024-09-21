@@ -270,7 +270,7 @@ public sealed class SquadSystem : EntitySystem
             team.Comp.Roles[job.Value] = roles + 1;
         }
 
-        var ev = new SquadMemberUpdatedEvent();
+        var ev = new SquadMemberUpdatedEvent(team);
         RaiseLocalEvent(marine, ref ev);
     }
 

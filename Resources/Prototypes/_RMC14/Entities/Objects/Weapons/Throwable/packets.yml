@@ -99,3 +99,22 @@
     contents:
     - id: CMGrenadeSmoke
       amount: 3
+
+- type: entity
+  parent: CMPacketBase
+  id: CMPacketGrenadeFragOld
+  name: M15 frag grenade packet
+  description: It contains three M15 fragmentation grenades. Handle with care.
+  components:
+  - type: Sprite
+    state: m15_packet
+
+- type: entity
+  parent: CMPacketGrenadeFragOld
+  id: CMPacketGrenadeFragOldFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFragOld
+      amount: 3

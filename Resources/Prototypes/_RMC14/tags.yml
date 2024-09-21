@@ -72,3 +72,6 @@
 
 - type: Tag
   id: RMCGlass
+
+- type: Tag
+  id: Scabbard

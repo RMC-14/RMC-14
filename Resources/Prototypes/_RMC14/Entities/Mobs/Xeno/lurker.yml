@@ -73,3 +73,7 @@
     baseSprintSpeed: 5
   - type: RMCXenoDamageVisuals
     prefix: lurker
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: lurker

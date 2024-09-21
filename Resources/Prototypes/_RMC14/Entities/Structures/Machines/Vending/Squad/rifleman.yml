@@ -37,7 +37,7 @@
       - id: CMSatchelMarine
         name: satchel
         recommended: true
-      #- id: CMShotgunScabbard # TODO: Make a Scabbard
+      - id: RMCScabbardShotgun
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -158,8 +158,8 @@
         points: 15
     #- id: CMShoulderHolster
     #  points: 15
-    #- id: CMScabbardMacheteFull
-    #  points: 15
+      - id: RMCScabbardMacheteFilled
+        points: 15
       - id: RMCPouchMacheteFilled
         points: 15
     #- id: CMMarineRadioTelephonePack
