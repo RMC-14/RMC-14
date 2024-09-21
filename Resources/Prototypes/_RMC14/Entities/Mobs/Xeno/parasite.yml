@@ -84,3 +84,7 @@
     blackboard:
       VisionRadius: !type:Single
         3.0
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: parasite

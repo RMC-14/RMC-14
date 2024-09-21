@@ -89,4 +89,8 @@
         - XenoEgg
   - type: RMCXenoDamageVisuals
     prefix: drone
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: drone
 

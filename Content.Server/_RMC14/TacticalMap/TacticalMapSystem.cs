@@ -46,6 +46,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<RottingComponent> _rottingQuery;
     private EntityQuery<SquadTeamComponent> _squadTeamQuery;
+    private EntityQuery<TacticalMapIconComponent> _tacticalMapIconQuery;
     private EntityQuery<TacticalMapComponent> _tacticalMapQuery;
     private EntityQuery<TransformComponent> _transformQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
@@ -64,6 +65,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
         _rottingQuery = GetEntityQuery<RottingComponent>();
         _squadTeamQuery = GetEntityQuery<SquadTeamComponent>();
+        _tacticalMapIconQuery = GetEntityQuery<TacticalMapIconComponent>();
         _tacticalMapQuery = GetEntityQuery<TacticalMapComponent>();
         _transformQuery = GetEntityQuery<TransformComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
@@ -161,6 +163,9 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     {
         var state = _mobStateQuery.CompOrNull(ent)?.CurrentState ?? MobState.Alive;
         UpdateActiveTracking(ent, state);
+
+        if (TryComp(ent, out ActiveTacticalMapTrackedComponent? active))
+            _toUpdate.Add((ent, active));
     }
 
     private void OnTrackedMobStateChanged(Entity<TacticalMapTrackedComponent> ent, ref MobStateChangedEvent args)
@@ -306,6 +311,12 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void UpdateIcon(Entity<ActiveTacticalMapTrackedComponent> tracked)
     {
+        if (_tacticalMapIconQuery.TryComp(tracked, out var iconComp))
+        {
+            tracked.Comp.Icon = iconComp.Icon;
+            return;
+        }
+
         if (!_mind.TryGetMind(tracked, out var mindId, out _) ||
             !_job.MindTryGetJob(mindId, out _, out var jobProto) ||
             jobProto.MinimapIcon == null)
