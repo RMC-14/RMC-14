@@ -8,7 +8,7 @@
   - type: Transform
     anchored: false
   - type: Physics
-    bodyType: Dynamic
+    bodyType: Static
   - type: InteractionOutline
   - type: Sprite
     drawdepth: OverMobs
