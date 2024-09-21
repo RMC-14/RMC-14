@@ -10,5 +10,5 @@ namespace Content.Shared.Roles.Jobs;
 public sealed partial class JobComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
-    public ProtoId<JobPrototype>? Prototype;
+    public ProtoId<JobPrototype>? Prototype { get; set; }
 }

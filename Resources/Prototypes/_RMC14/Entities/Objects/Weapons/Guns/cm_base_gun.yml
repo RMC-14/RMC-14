@@ -28,3 +28,5 @@
   - type: EmitSoundOnLand
     sound:
       collection: RMCRustleGun
+  - type: Gun
+    meleeCooldownOnShoot: false

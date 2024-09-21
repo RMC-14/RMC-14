@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.NPC;
 using Content.Shared._RMC14.Tools;
+using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
@@ -15,6 +16,7 @@ using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Content.Shared.Tools.Systems;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
@@ -48,6 +50,7 @@ public sealed class SentrySystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedToolSystem _tools = default!;
+    [Dependency] private readonly DamageableSystem _damageableSystem = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
 
@@ -64,6 +67,8 @@ public sealed class SentrySystem : EntitySystem
         SubscribeLocalEvent<SentryComponent, SentryDisassembleDoAfterEvent>(OnSentryDisassembleDoAfter);
         SubscribeLocalEvent<SentryComponent, ExaminedEvent>(OnSentryExamined);
         SubscribeLocalEvent<SentryComponent, CombatModeShouldHandInteractEvent>(OnSentryShouldInteract);
+
+        SubscribeLocalEvent<SentrySpikesComponent, AttackedEvent>(OnSentrySpikesAttacked);
 
         Subs.BuiEvents<SentryComponent>(SentryUiKey.Key,
             subs =>
@@ -319,15 +324,15 @@ public sealed class SentrySystem : EntitySystem
         args.Cancelled = true;
     }
 
-    private void OnSentryUpgradeBuiMsg(Entity<SentryComponent> sentry, ref SentryUpgradeBuiMsg args)
+    private void OnSentryUpgradeBuiMsg(Entity<SentryComponent> oldSentry, ref SentryUpgradeBuiMsg args)
     {
-        _ui.CloseUi(sentry.Owner, SentryUiKey.Key);
+        _ui.CloseUi(oldSentry.Owner, SentryUiKey.Key);
 
         var user = args.Actor;
         var upgrade = args.Upgrade;
         Entity<SentryUpgradeItemComponent> item = default;
         if (upgrade == default ||
-            !CanUpgradePopup(sentry, ref item, user, upgrade))
+            !CanUpgradePopup(oldSentry, ref item, user, upgrade))
         {
             return;
         }
@@ -335,12 +340,15 @@ public sealed class SentrySystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var coordinates = _transform.GetMapCoordinates(sentry);
-        var rotation = _transform.GetWorldRotation(sentry);
+        var coordinates = _transform.GetMapCoordinates(oldSentry);
+        var rotation = _transform.GetWorldRotation(oldSentry);
 
         QueueDel(item);
-        QueueDel(sentry);
-        Spawn(upgrade, coordinates, rotation: rotation);
+        QueueDel(oldSentry);
+
+        var newSentry = Spawn(upgrade, coordinates, rotation: rotation);
+        var ev = new SentryUpgradedEvent(oldSentry, newSentry, user);
+        RaiseLocalEvent(newSentry, ref ev);
     }
 
     private void UpdateState(Entity<SentryComponent> sentry)
@@ -535,5 +543,16 @@ public sealed class SentrySystem : EntitySystem
         {
             _toUpdate.Clear();
         }
+    }
+
+    private void OnSentrySpikesAttacked(Entity<SentrySpikesComponent> sentry, ref AttackedEvent args)
+    {
+        if (!TryComp<SentryComponent>(sentry, out var senComp) || senComp.Mode != SentryMode.On)
+            return;
+
+        _damageableSystem.TryChangeDamage(args.User, sentry.Comp.SpikeDamage, origin: sentry, tool: sentry);
+        var self = Loc.GetString("rmc-sentry-spikes-self");
+        var others = Loc.GetString("rmc-sentry-spikes-others", ("target", args.User));
+        _popup.PopupPredicted(self, others, sentry, args.User, PopupType.SmallCaution);
     }
 }

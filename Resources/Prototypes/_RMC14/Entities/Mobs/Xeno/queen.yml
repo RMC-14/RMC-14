@@ -167,3 +167,7 @@
     exceptEffects:
     - Stun
     - KnockedDown
+  - type: TacticalMapUser
+    xenos: true
+    canDraw: true
+    liveUpdate: true
