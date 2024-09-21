@@ -811,3 +811,8 @@ TargetClown: RMCTargetClown
 
 # 2024-09-15
 FoodBoxDonut: RMCBoxDonut
+
+# 2024-09-20
+BoxHandcuff: RMCBoxHandcuffs
+Handcuffs: RMCHandcuffs
+VendingMachineSec: CMVendorSec

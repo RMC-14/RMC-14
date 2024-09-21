@@ -1,39 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added the ability for xenonids to devolve.
-    type: Add
-  - message: Fixed xenos taking twice as long to evolve than intended.
-    type: Fix
-  - message: Fixed drones not being able to evolve to Queen without enough points.
-      Evolution points are now ignored when evolving from Drone to Queen.
-    type: Fix
-  id: 211
-  time: '2024-06-30T11:31:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2670
-- author: vero5123
-  changes:
-  - message: adds a shockwave overlay effect.
-    type: Add
-  id: 212
-  time: '2024-06-30T18:48:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2631
-- author: DrSmugleaf
-  changes:
-  - message: Fixed humanoids and xenos being gibbed when receiving exclusively Blunt
-      (M40 HEDP) damage.
-    type: Fix
-  id: 213
-  time: '2024-06-30T23:56:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2676
-- author: DrSmugleaf
-  changes:
-  - message: Added 4 more medbay vendors to Savannah and surgery tools to its surgery
-      room.
-    type: Tweak
-  id: 214
-  time: '2024-07-01T00:09:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2678
 - author: vero5123
   changes:
   - message: Fixes shockwave shader when compatibility mode is enabled.
@@ -4388,5 +4353,33 @@
   id: 710
   time: '2024-09-20T08:42:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4086
+- author: DrSmugleaf
+  changes:
+  - message: Fixed not being able to immediately melee with a gun after shooting it.
+    type: Fix
+  id: 711
+  time: '2024-09-20T20:38:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4087
+- author: Vermidia
+  changes:
+  - message: Scout sight now comes with a medical HUD
+    type: Fix
+  id: 712
+  time: '2024-09-21T05:05:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4090
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Window frames are now deconstructed with a wrench rather than a welder
+    type: Tweak
+  id: 713
+  time: '2024-09-21T05:03:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4071
+- author: DummeHytteOst
+  changes:
+  - message: Added handcuff boxes.
+    type: Add
+  id: 714
+  time: '2024-09-21T05:04:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4092
 Name: RMC14
 Order: -1
