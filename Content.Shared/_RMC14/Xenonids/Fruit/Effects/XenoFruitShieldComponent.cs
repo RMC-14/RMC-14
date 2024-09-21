@@ -6,7 +6,7 @@ namespace Content.Shared._RMC14.Xenonids.Fruit.Effects;
 // Overshield (unstable resin fruit)
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
 [Access(typeof(SharedXenoFruitSystem))]
-public sealed partial class XenoFruitEffectShieldComponent : XenoFruitEffectBaseComponent
+public sealed partial class XenoFruitShieldComponent : XenoFruitDurationComponent
 {
     // Max overshield granted
     [DataField, AutoNetworkedField]
@@ -18,5 +18,5 @@ public sealed partial class XenoFruitEffectShieldComponent : XenoFruitEffectBase
 
     // Overshield decay rate
     [DataField, AutoNetworkedField]
-    public double ShieldDecay = 10f;
+    public FixedPoint2 ShieldDecay = 10f;
 }

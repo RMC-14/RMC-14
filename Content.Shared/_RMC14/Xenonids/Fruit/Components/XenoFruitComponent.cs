@@ -3,6 +3,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Content.Shared._RMC14.Xenonids.Fruit.Events;
 
 namespace Content.Shared._RMC14.Xenonids.Fruit.Components;
 
@@ -61,9 +62,9 @@ public sealed partial class XenoFruitComponent : Component
     [DataField, AutoNetworkedField]
     public bool CanConsumeAtFull = true;
 
-    // Components to add for the duration
-    [DataField(required: true)]
-    public ComponentRegistry Effects = new();
+    // Popup to display upon consumption
+    [DataField, AutoNetworkedField]
+    public LocId Popup = new LocId("rmc-xeno-fruit-effect-lesser");
 }
 
 [Serializable, NetSerializable]

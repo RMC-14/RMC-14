@@ -81,12 +81,10 @@
     growingState: fruit_lesser_immature
     grownState: fruit_lesser
     growTime: 15
+    popup: rmc-xeno-fruit-effect-lesser
     canConsumeAtFull: false
-    effects:
-    - type: XenoFruitEffectHeal
-      healAmount: # :(
-        groups:
-          Brute: 50
+  - type: XenoFruitHeal
+    healAmount: 50
 
 - type: entity
   parent: XenoFruitLesser
@@ -99,18 +97,14 @@
     growingState: fruit_greater_immature
     grownState: fruit_greater
     growTime: 30
+    popup: rmc-xeno-fruit-effect-greater
     canConsumeAtFull: false
-    effects:
-    - type: XenoFruitEffectHeal
-      healAmount: # :(
-        groups:
-          Brute: 75
-    - type: XenoFruitEffectRegen
-      tickCount: 5 # 100 health over 5 seconds
-      regenPerTick: # :(
-        groups:
-          Brute: 20
-
+  - type: XenoFruitHeal
+    healAmount: 75
+  - type: XenoFruitRegen
+    tickCount: 5      # 100 health over 5 seconds
+    tickPeriod: 1
+    regenPerTick: 20
 
 - type: entity
   parent: XenoFruitBase
@@ -123,17 +117,16 @@
     growingState: fruit_unstable_immature
     grownState: fruit_unstable
     growTime: 45
-    effects:
-    - type: XenoFruitEffectRegen
-      tickCount: 15 # 75 health over 15 seconds
-      regenPerTick: # :(
-        groups:
-          Brute: 5
-    - type: XenoFruitEffectShield
-      duration: 60
-      shieldAmount: 200
-      shieldDecay: 10
-      shieldRatio: 0.3
+    popup: rmc-xeno-fruit-effect-unstable
+  - type: XenoFruitRegen
+    tickCount: 15     # 75 health over 15 seconds
+    tickPeriod: 1
+    regenPerTick: 5
+  - type: XenoFruitShield
+    duration: 60
+    shieldAmount: 200
+    shieldDecay: 10
+    shieldRatio: 0.3
 
 - type: entity
   parent: XenoFruitBase
@@ -146,11 +139,12 @@
     growingState: fruit_spore_immature
     grownState: fruit_spore
     growTime: 15
-    effects:
-    - type: XenoFruitEffectCooldown
-      reductionMax: 0.25
-      reductionPerSlash: 0.05
-  - type: XenoPheromones
+    popup: rmc-xeno-fruit-effect-spore
+  - type: XenoFruitHaste
+    duration: 60
+    reductionMax: 0.25
+    reductionPerSlash: 0.05
+  - type: XenoPheromones  # TODO: Add component to actually make this work
     pheromonesMultiplier: 1
 
 - type: entity
@@ -164,10 +158,10 @@
     growingState: fruit_speed_immature
     grownState: fruit_speed
     growTime: 35
-    effects:
-    - type: XenoFruitEffectSpeed
-      duration: 15
-      speedModifer: 0.4
+    popup: rmc-xeno-fruit-effect-speed
+  - type: XenoFruitSpeed
+    duration: 15
+    speedModifer: 0.4
 
 - type: entity
   parent: XenoFruitBase
@@ -180,8 +174,8 @@
     growingState: fruit_plasma_immature
     grownState: fruit_plasma
     growTime: 25
-    effects:
-    - type: XenoFruitEffectPlasma
-      tickPeriod: 3 # 240 plasma over 15 seconds, 48 plasma every 3 seconds
-      regenPerTick: 48
-      tickCount: 5
+    popup: rmc-xeno-fruit-effect-plasma
+  - type: XenoFruitPlasma
+    tickCount: 5      # 240 plasma over 15 seconds
+    tickPeriod: 3
+    regenPerTick: 48
