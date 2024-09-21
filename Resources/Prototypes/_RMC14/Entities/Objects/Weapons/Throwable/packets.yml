@@ -85,7 +85,11 @@
   description: It contains three M15 fragmentation grenades. Handle with care.
   components:
   - type: Sprite
-    state: m15_packet
+    layers:
+    - state: m15_packet
+      map: [ "closedLayer" ]
+    - state: m15_packet_e
+      map: [ "openLayer", "emptyLayer" ]
 
 - type: entity
   parent: CMPacketGrenadeFragOld
