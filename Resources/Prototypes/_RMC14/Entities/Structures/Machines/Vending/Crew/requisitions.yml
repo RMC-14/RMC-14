@@ -61,8 +61,8 @@
       #  amount: 3
     - name: Explosives
       entries:
-      #- id: M15 Fragmentation Grenade
-      #  amount: 2
+      - id: CMGrenadeFragOld
+        amount: 2
       #- id: M20 Claymore Anti-Personnel Mine
       #  amount: 4
       - id: CMGrenadeHighExplosive

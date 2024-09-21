@@ -1,4 +1,4 @@
-﻿- type: entity # TODO RMC14 split these into per file categories and inherit all to ASRS
+- type: entity # TODO RMC14 split these into per file categories and inherit all to ASRS
   abstract: true
   id: CMCargoCatalog
   components:
@@ -148,6 +148,8 @@
         crate: RMCCrateGrenadesHighExplosive
       - cost: 3000
         crate: RMCCrateGrenadesFrag
+      - cost: 4000
+        crate: RMCCrateGrenadesFragOld
       - cost: 4000
         crate: RMCCrateBreachingCharges
     - name: Food
