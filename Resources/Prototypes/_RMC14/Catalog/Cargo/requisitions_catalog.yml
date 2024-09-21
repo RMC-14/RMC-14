@@ -146,8 +146,9 @@
         crate: RMCCrateGrenadesHighExplosive
       - cost: 3000
         crate: RMCCrateGrenadesFrag
-      - cost: 2000
-        crate: RMCCrateGrenadesSmoke
+      # leaving this commented, as it is not parity, but we might want it in the future
+      #- cost: 2000
+      #  crate: RMCCrateGrenadesSmoke
       - cost: 4000
         crate: RMCCrateBreachingCharges
     - name: Food
