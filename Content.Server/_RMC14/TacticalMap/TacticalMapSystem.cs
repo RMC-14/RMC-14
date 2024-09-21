@@ -6,7 +6,6 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
-using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
@@ -418,8 +417,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         }
 
         var time = _timing.CurTime;
-        var maps = EntityQueryEnumerator<TacticalMapComponent, RMCPlanetComponent>();
-        while (maps.MoveNext(out var map, out _))
+        var maps = EntityQueryEnumerator<TacticalMapComponent>();
+        while (maps.MoveNext(out var map))
         {
             if (!map.MapDirty || time < map.NextUpdate)
                 continue;
