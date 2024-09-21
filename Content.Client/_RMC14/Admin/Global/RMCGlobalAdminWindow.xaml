@@ -35,8 +35,7 @@
                 <Label Name="TacticalMapLabel" Access="Public" />
                 <ui:BlueHorizontalSeparator />
                 <tacticalMap:TacticalMapControl Name="TacticalMap" Access="Public"
-                                                Stretch="Keep" TextureScale="2 2"
-                                                SetWidth="500" SetHeight="500" />
+                                                Stretch="Keep" TextureScale="3 3" />
             </BoxContainer>
         </TabContainer>
         <Button Name="RefreshButton" Access="Public" Text="Refresh" HorizontalExpand="True" />

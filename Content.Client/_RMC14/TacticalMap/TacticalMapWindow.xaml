@@ -5,8 +5,7 @@
     Title="Map" MinSize="600 600">
     <TabContainer Name="Tabs" Access="Public">
         <BoxContainer Name="MapTab" Access="Public" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
-            <controls:TacticalMapControl Name="Map" Access="Public" Stretch="Keep" TextureScale="2 2"
-                                         SetWidth="500" SetHeight="500" />
+            <controls:TacticalMapControl Name="Map" Access="Public" Stretch="Keep" TextureScale="3 3" />
         </BoxContainer>
         <BoxContainer Name="CanvasTab" Access="Public" Orientation="Vertical" Visible="False"
                       HorizontalExpand="True" VerticalExpand="True">
@@ -28,8 +27,7 @@
                        HorizontalAlignment="Center" />
             </ProgressBar>
             <controls:TacticalMapControl Name="Canvas" Access="Public" Stretch="Keep"
-                                         TextureScale="2 2" SetWidth="500" SetHeight="500"
-                                         Drawing="True" MouseFilter="Pass" />
+                                         TextureScale="3 3" Drawing="True" MouseFilter="Pass" />
         </BoxContainer>
     </TabContainer>
 </controls:TacticalMapWindow>
