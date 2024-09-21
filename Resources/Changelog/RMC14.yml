@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Marines and xenos that are abandoned and left on the planet after a hijack
-      will no longer be counted for round end.
-    type: Fix
-  id: 222
-  time: '2024-07-01T04:10:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2691
-- author: DrSmugleaf
-  changes:
   - message: "Increased the M54C's initial accuracy and on short bursts while wielded.\
       \ Minimum spread from 15\xBA to 5\xBA, angle increase per shot from 5\xBA to\
       \ 1\xBA, angle decay per second from 5\xBA to 10\xBA."
@@ -4410,5 +4402,13 @@
   id: 721
   time: '2024-09-21T08:29:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4096
+- author: lapatison
+  changes:
+  - message: Added M15 fragmentation (hand) grenade. This grenade is stronger than
+      it's counterparts, but can't be used with grenade launchers.
+    type: Add
+  id: 722
+  time: '2024-09-21T08:35:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4031
 Name: RMC14
 Order: -1
