@@ -5,6 +5,9 @@
   - type: Sprite
     sprite: _RMC14/Effects/cloak.rsi
     drawdepth: Effects
+    noRot: true
+  - type: TimedDespawn
+    lifetime: 0.9
   - type: EffectVisuals
   - type: AnimationPlayer
   - type: Tag
