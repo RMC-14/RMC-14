@@ -39,7 +39,11 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
 
     private readonly Dictionary<(Guid, int), EntityUid> _predicted = new();
     private readonly List<(PredictedProjectileHitEvent Event, ICommonSession Player)> _predictedHits = new();
-    private bool _gunPredictionPreventCollision;
+    private bool _preventCollision;
+    private bool _logHits;
+    private float _coordinateDeviation;
+    private float _lowestCoordinateDeviation;
+    private float _aabbEnlargement;
 
     private EntityQuery<FixturesComponent> _fixturesQuery;
     private EntityQuery<LagCompensationComponent> _lagCompensationQuery;
@@ -70,7 +74,11 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
         SubscribeLocalEvent<PredictedProjectileServerComponent, PreventCollideEvent>(OnPredictedPreventCollide);
 
         Subs.CVar(_config, CVars.MaxLinVelocity, OnSendLinearVelocityAll);
-        Subs.CVar(_config, RMCCVars.RMCGunPredictionPreventCollision, v => _gunPredictionPreventCollision = v, true);
+        Subs.CVar(_config, RMCCVars.RMCGunPredictionPreventCollision, v => _preventCollision = v, true);
+        Subs.CVar(_config, RMCCVars.RMCGunPredictionLogHits, v => _logHits = v, true);
+        Subs.CVar(_config, RMCCVars.RMCGunPredictionCoordinateDeviation, v => _coordinateDeviation = v, true);
+        Subs.CVar(_config, RMCCVars.RMCGunPredictionLowestCoordinateDeviation, v => _lowestCoordinateDeviation = v, true);
+        Subs.CVar(_config, RMCCVars.RMCGunPredictionAabbEnlargement, v => _aabbEnlargement = v, true);
 
         _player.PlayerStatusChanged += OnPlayerStatusChanged;
     }
@@ -119,7 +127,7 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
 
     private void OnPredictedPreventCollide(Entity<PredictedProjectileServerComponent> ent, ref PreventCollideEvent args)
     {
-        if (!_gunPredictionPreventCollision)
+        if (!_preventCollision)
             return;
 
         if (args.Cancelled)
@@ -162,10 +170,6 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
     {
         var projectileCoordinates = _transform.GetMapCoordinates(projectile);
         var projectilePosition = projectileCoordinates.Position;
-        // var ping = projectile.Comp1.Shooter.Ping;
-        // ping = (short) (75 * 1.5); // TODO
-        // var projectileOffset = _physics.GetLinearVelocity(projectile, _transform.ToMapCoordinates(projectileCoordinates).Position) * ping / 1000f;
-        // projectileCoordinates = projectileCoordinates.Offset(projectileOffset);
 
         MapCoordinates lowestCoordinate = default;
         var otherCoordinates = EntityCoordinates.Invalid;
@@ -190,8 +194,8 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
             : _transform.ToMapCoordinates(otherCoordinates);
 
         if (clientCoordinates != null &&
-            (clientCoordinates.Value.InRange(otherMapCoordinates, 0.75f) ||
-             clientCoordinates.Value.InRange(lowestCoordinate, 0.5f)))
+            (clientCoordinates.Value.InRange(otherMapCoordinates, _coordinateDeviation) ||
+             clientCoordinates.Value.InRange(lowestCoordinate, _lowestCoordinateDeviation)))
         {
             otherMapCoordinates = clientCoordinates.Value;
         }
@@ -211,7 +215,7 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
             }
         }
 
-        bounds = bounds.Enlarged(0.3f);
+        bounds = bounds.Enlarged(_aabbEnlargement);
         if (bounds.Contains(projectilePosition))
             return true;
 
@@ -262,11 +266,14 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
                     (hit, otherLagComp, otherFixtures, otherPhysics, otherTransform),
                     clientPos))
             {
-                Log.Info("not hit");
+                if (_logHits)
+                    Log.Info("missed");
+
                 continue;
             }
 
-            Log.Info("hit");
+            if (_logHits)
+                Log.Info("hit");
 
             _projectile.ProjectileCollide((projectile, projectileComp, projectilePhysics), hit, true);
         }

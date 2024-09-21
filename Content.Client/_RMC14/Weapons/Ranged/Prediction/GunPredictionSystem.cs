@@ -131,10 +131,6 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
                 continue;
 
             var contacts = _physics.GetContactingEntities(uid, physics, true);
-            // var xenos = EntityManager.GetAllComponents(typeof(XenoComponent)).Where(x => !IsClientSide(x.Uid)).Select(e => (GetNetEntity(e.Uid), _transform.GetMapCoordinates(e.Uid))).ToHashSet();
-            // var ev = new PredictedProjectileHitEvent(uid.Id, xenos);
-            // RaiseNetworkEvent(ev);
-
             if (contacts.Count == 0)
                 continue;
 
