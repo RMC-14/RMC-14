@@ -280,7 +280,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             var totalXenos = (int) Math.Round(Math.Max(1, ev.PlayerPool.Count / _marinesPerXeno));
             var marines = ev.PlayerPool.Count - totalXenos;
-            if (marines > 0)
+            var jobSlotScaling = _config.GetCVar(RMCCVars.RMCJobSlotScaling);
+            if (marines > 0 && jobSlotScaling)
             {
                 var stations = EntityQueryEnumerator<StationJobsComponent, StationSpawningComponent>();
                 while (stations.MoveNext(out var stationId, out var stationJobs, out _))
