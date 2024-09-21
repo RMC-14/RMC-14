@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Cargo techs now spawn with an approval stamp.
-    type: Add
-  id: 232
-  time: '2024-07-02T02:22:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2736
 - author: JoeHammad
   changes:
   - message: fixed M4SPR box name
@@ -4419,5 +4412,13 @@
   id: 731
   time: '2024-09-21T21:36:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4113
+- author: DrSmugleaf
+  changes:
+  - message: Fixed tactical map drawing and blips positions being incorrect with UI
+      scales that aren't 100%
+    type: Fix
+  id: 732
+  time: '2024-09-21T21:50:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4115
 Name: RMC14
 Order: -1
