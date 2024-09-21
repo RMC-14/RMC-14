@@ -7,7 +7,7 @@
     drawdepth: Effects
     noRot: true
   - type: TimedDespawn
-    lifetime: 0.9
+    lifetime: 0.7
   - type: EffectVisuals
   - type: AnimationPlayer
   - type: Tag
