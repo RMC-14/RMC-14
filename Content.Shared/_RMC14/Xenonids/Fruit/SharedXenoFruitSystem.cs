@@ -228,20 +228,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     // Fruit planting
     #region Planting
 
-    /*
-    private bool InRangePopup(Entity<XenoFruitPlanterComponent> xeno, EntityCoordinates target, float range)
-    {
-        var origin = _transform.GetMoverCoordinates(xeno.Owner);
-        target = target.SnapToGrid(EntityManager, _map);
-        if (!_transform.InRange(origin, target, range))
-        {
-            return false;
-        }
-
-        return true;
-    }
-    */
-
     public bool TileHasFruit(Entity<MapGridComponent> grid, EntityCoordinates coordinates)
     {
         var tile = _mapSystem.TileIndicesFor(grid.Owner, grid.Comp, coordinates);
@@ -258,15 +244,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         EntityCoordinates target, bool checkWeeds, out string popup)
     {
         popup = Loc.GetString("rmc-xeno-fruit-plant-failed");
-
-        /*
-        // Target out of range
-        if (!InRangePopup(xeno, target, xeno.Comp.PlantRange.Float()))
-        {
-            popup = Loc.GetString("cm-xeno-cant-reach-there");
-            return false;
-        }
-        */
 
         // Target not on grid
         if (_transform.GetGrid(target) is not { } gridId ||
@@ -301,15 +278,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             popup = Loc.GetString("rmc-xeno-fruit-plant-failed-fruit");
             return false;
         }
-
-        /*
-        // Target blocked
-        if (!_xenoConstruct.TileSolidAndNotBlocked(target))
-        {
-            popup = Loc.GetString("rmc-xeno-fruit-plant-failed");
-            return false;
-        }
-        */
 
         // Target has egg, xeno construct or other obstruction on it
         var tile = _mapSystem.CoordinatesToTile(gridId, grid, target);
