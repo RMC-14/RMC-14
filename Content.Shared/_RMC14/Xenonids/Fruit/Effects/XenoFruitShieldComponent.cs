@@ -4,7 +4,7 @@ using Content.Shared.FixedPoint;
 namespace Content.Shared._RMC14.Xenonids.Fruit.Effects;
 
 // Overshield (unstable resin fruit)
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 [Access(typeof(SharedXenoFruitSystem))]
 public sealed partial class XenoFruitShieldComponent : XenoFruitDurationComponent
 {

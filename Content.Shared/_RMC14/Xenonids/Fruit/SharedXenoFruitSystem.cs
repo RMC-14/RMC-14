@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines;
@@ -19,7 +20,7 @@ using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
-using Content.Shared.Examine;
+using Content.Shared.Examine;      // TODO: Add examine texts for when fruit are ready to be harvested
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -51,11 +52,12 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Content.Shared.Physics.CollisionGroup;
 
+// TODO: clean up all the dependencies once everything's working
+
 namespace Content.Shared._RMC14.Xenonids.Fruit;
 
 public sealed class SharedXenoFruitSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -67,7 +69,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly TagSystem _tags = default!;
-    [Dependency] private readonly TemporarySpeedModifiersSystem _tempSpeed = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
@@ -87,12 +88,14 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 	private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
 	private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
 
+    private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<XenoConstructComponent> _xenoConstructQuery;
     private EntityQuery<XenoEggComponent> _xenoEggQuery;
     private EntityQuery<XenoWeedsComponent> _xenoWeedsQuery;
 
     public override void Initialize()
     {
+        _mobStateQuery = GetEntityQuery<MobStateComponent>();
         _xenoConstructQuery = GetEntityQuery<XenoConstructComponent>();
         _xenoEggQuery = GetEntityQuery<XenoEggComponent>();
         _xenoWeedsQuery = GetEntityQuery<XenoWeedsComponent>();
@@ -113,6 +116,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         // Fruit effects
         SubscribeLocalEvent<GardenerShieldComponent, RemovedShieldEvent>(OnShieldRemove);
         SubscribeLocalEvent<XenoFruitEffectRegenComponent, XenoFruitEffectRegenEvent>(OnXenoFruitEffectRegen);
+        SubscribeLocalEvent<XenoFruitEffectPlasmaComponent, XenoFruitEffectPlasmaEvent>(OnXenoFruitEffectPlasma);
         SubscribeLocalEvent<XenoFruitEffectSpeedComponent, RefreshMovementSpeedModifiersEvent>(OnXenoFruitSpeedRefresh);
         SubscribeLocalEvent<XenoFruitEffectSpeedComponent, ComponentShutdown>(OnXenoFruitEffectSpeedShutdown);
         SubscribeLocalEvent<XenoFruitEffectHasteComponent, MeleeHitEvent>(OnXenoFruitEffectHasteHit);
@@ -538,7 +542,12 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         // TODO RMC14: check for hive
 
-        // TODO RMC14: Check if xeno is already under the effects of a fruit
+        // Check if user is already under the effects of consumed fruit
+        if (HasComp<XenoFruitSpeedComponent>(fruit) && HasComp<XenoFruitEffectSpeedComponent>(user))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-effect-already"), user, user);
+            return false;
+        }
 
         // Check if fruit can be consumed at current (full) health
         if (!TryComp(user, out DamageableComponent? damage))
@@ -668,6 +677,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         var popupTarget = Loc.GetString("rmc-xeno-fruit-feed-success-target", ("user", user), ("fruit", fruit));
         var popupOthers = Loc.GetString("rmc-xeno-fruit-feed-success-others", ("user", user), ("target", target), ("fruit", fruit));
 
+        // TODO: make either this or the effect pop-up bigger to stop them from overlapping
         if (user != target)
         {
             _popup.PopupClient(popupTarget, target, target);
@@ -683,7 +693,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         ApplyFruitEffects(fruit, target);
 
         // Send pop-up to target describing effect
-        _popup.PopupClient(Loc.GetString(fruit.Comp.Popup), target, target);
+        _popup.PopupClient(Loc.GetString(fruit.Comp.Popup), target, target, PopupType.Medium);
 
         // If neither the user nor the target were the planter, inform the planter as well
         if (fruit.Comp.Planter is { } planter)
@@ -780,6 +790,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
     private void OnXenoFruitEffectSpeedShutdown(Entity<XenoFruitEffectSpeedComponent> xeno, ref ComponentShutdown ev)
     {
+        _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-effect-end"), xeno.Owner, xeno.Owner);
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);
     }
 
@@ -820,7 +831,24 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         comp.Duration = fruit.Comp.Duration;
         comp.ReductionMax = fruit.Comp.ReductionMax;
         comp.ReductionPerSlash = fruit.Comp.ReductionPerSlash;
-        comp.ReductionCurrent = 0;
+        // Only reset current reduction if user was not already under the effect
+        comp.ReductionCurrent = comp.ReductionCurrent != null ? comp.ReductionCurrent : 0;
+        // Mark as null for Update() to refresh end time in case user was already under the effect
+        comp.EndAt = null;
+    }
+
+    private void RefreshUseDelays(EntityUid user, FixedPoint2 amount)
+    {
+        // Reduces/resets the use-delays and cooldowns of all actions
+
+        foreach (var (actionId, _) in _actions.GetActions(user))
+        {
+            if (!HasComp<ActionReducedUseDelayComponent>(actionId))
+                continue;
+
+            var ev = new ActionReducedUseDelayEvent(amount);
+            RaiseLocalEvent(actionId, ev);
+        }
     }
 
     private void OnXenoFruitEffectHasteHit(Entity<XenoFruitEffectHasteComponent> xeno, ref MeleeHitEvent args)
@@ -830,8 +858,14 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         foreach (var entity in args.HitEntities)
         {
-            if (_xeno.CanAbilityAttackTarget(xeno, entity))
-                break;
+            if (!_xeno.CanAbilityAttackTarget(xeno, entity))
+                continue;
+
+            if (!_mobStateQuery.TryComp(entity, out var mobState) ||
+                mobState.CurrentState == MobState.Dead)
+                continue;
+
+            break;
         }
 
         if (xeno.Comp.ReductionCurrent >= xeno.Comp.ReductionMax)
@@ -840,11 +874,15 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         xeno.Comp.ReductionCurrent += xeno.Comp.ReductionPerSlash;
 
         // Reduce cooldowns and usedelays
+        RefreshUseDelays(xeno.Owner, xeno.Comp.ReductionCurrent);
     }
 
     private void OnXenoFruitEffectHasteShutdown(Entity<XenoFruitEffectHasteComponent> xeno, ref ComponentShutdown ev)
     {
+        _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-effect-end"), xeno.Owner, xeno.Owner);
+
         // Reset cooldowns and usedelays to default
+        RefreshUseDelays(xeno.Owner, 0);
     }
 
     #endregion
@@ -993,8 +1031,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             effect.TicksLeft--;
             effect.NextTickAt = time + effect.TickPeriod;
         }
-
     }
-
     #endregion
 }

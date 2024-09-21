@@ -68,9 +68,9 @@ rmc-xeno-fruit-effect-greater = We recover a bit from our injuries, and begin to
 rmc-xeno-fruit-effect-unstable = We feel our defense being bolstered, and begin to regenerate rapidly.
 rmc-xeno-fruit-effect-spore = We feel a frenzy coming onto us! Our abilities will cool off faster as we slash!
 rmc-xeno-fruit-effect-speed = The fruit invigorates us to move faster!
-rmc-xeno-fruit-effect-speed-already = We are already under the effects of this fruit, go out and kill!
-rmc-xeno-fruit-effect-speed-end = We feel the effects of the fruit wane...
 rmc-xeno-fruit-effect-plasma = The fruit boosts our plasma regeneration!
+rmc-xeno-fruit-effect-already = We are already under the effects of this fruit, go out and kill!
+rmc-xeno-fruit-effect-end = We feel the effects of the fruit wane...
 
 # Verbs
 rmc-xeno-fruit-verb-harvest = Harvest
