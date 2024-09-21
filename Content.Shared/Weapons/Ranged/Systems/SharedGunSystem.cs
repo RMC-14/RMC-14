@@ -483,6 +483,7 @@ public abstract partial class SharedGunSystem : EntitySystem
                         if (_netManager.IsServer || GunPrediction)
                         {
                             var uid = Spawn(cartridge.Prototype, fromEnt);
+                            shotProjectiles.Add(uid);
                             CreateAndFireProjectiles(uid, cartridge);
 
                             RaiseLocalEvent(ent!.Value, new AmmoShotEvent()
@@ -676,7 +677,7 @@ public abstract partial class SharedGunSystem : EntitySystem
                     var newuid = Spawn(ammoSpreadComp.Proto, fromEnt);
                     ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, gunUid, user);
                     shotProjectiles.Add(newuid);
-                    MarkPredicted(ammoEnt, i + 1);
+                    MarkPredicted(newuid, i + 1);
                 }
             }
             else
