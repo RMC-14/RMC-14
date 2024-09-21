@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Sentry;
 public sealed partial class SentrySpikesComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
-    public DamageSpecifier SpikeDamage = default!;
+    public DamageSpecifier SpikeDamage = new();
 
     [DataField(required: true), AutoNetworkedField]
     public string AnimationState;
