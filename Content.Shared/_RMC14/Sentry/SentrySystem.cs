@@ -319,15 +319,15 @@ public sealed class SentrySystem : EntitySystem
         args.Cancelled = true;
     }
 
-    private void OnSentryUpgradeBuiMsg(Entity<SentryComponent> sentry, ref SentryUpgradeBuiMsg args)
+    private void OnSentryUpgradeBuiMsg(Entity<SentryComponent> oldSentry, ref SentryUpgradeBuiMsg args)
     {
-        _ui.CloseUi(sentry.Owner, SentryUiKey.Key);
+        _ui.CloseUi(oldSentry.Owner, SentryUiKey.Key);
 
         var user = args.Actor;
         var upgrade = args.Upgrade;
         Entity<SentryUpgradeItemComponent> item = default;
         if (upgrade == default ||
-            !CanUpgradePopup(sentry, ref item, user, upgrade))
+            !CanUpgradePopup(oldSentry, ref item, user, upgrade))
         {
             return;
         }
@@ -335,12 +335,15 @@ public sealed class SentrySystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var coordinates = _transform.GetMapCoordinates(sentry);
-        var rotation = _transform.GetWorldRotation(sentry);
+        var coordinates = _transform.GetMapCoordinates(oldSentry);
+        var rotation = _transform.GetWorldRotation(oldSentry);
 
         QueueDel(item);
-        QueueDel(sentry);
-        Spawn(upgrade, coordinates, rotation: rotation);
+        QueueDel(oldSentry);
+
+        var newSentry = Spawn(upgrade, coordinates, rotation: rotation);
+        var ev = new SentryUpgradedEvent(oldSentry, newSentry, user);
+        RaiseLocalEvent(newSentry, ref ev);
     }
 
     private void UpdateState(Entity<SentryComponent> sentry)
