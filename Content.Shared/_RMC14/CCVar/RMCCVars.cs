@@ -177,4 +177,10 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCPlanetMapVote =
         CVarDef.Create("rmc.planet_map_vote", true, CVar.SERVER | CVar.SERVERONLY);
+
+    public static readonly CVarDef<bool> RMCGunPrediction =
+        CVarDef.Create("rmc.gun_prediction", true, CVar.SERVER | CVar.REPLICATED);
+
+    public static readonly CVarDef<bool> RMCGunPredictionPreventCollision =
+        CVarDef.Create("rmc.gun_prediction_prevent_collision", false, CVar.SERVER | CVar.REPLICATED);
 }
