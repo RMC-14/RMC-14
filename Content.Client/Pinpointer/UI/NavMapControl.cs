@@ -1,11 +1,7 @@
-using System.Linq;
-using System.Numerics;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
-using Content.Shared.Atmos;
 using Content.Shared.Input;
 using Content.Shared.Pinpointer;
-using JetBrains.Annotations;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
@@ -18,6 +14,10 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
+using System.Numerics;
+using JetBrains.Annotations;
+using Content.Shared.Atmos;
+using System.Linq;
 using Robust.Shared.Utility;
 
 namespace Content.Client.Pinpointer.UI;
@@ -228,7 +228,7 @@ public partial class NavMapControl : MapGridControl
             {
                 if (!blip.Selectable)
                     continue;
-
+                
                 var currentDistance = (_transformSystem.ToMapCoordinates(blip.Coordinates).Position - worldPosition).Length();
 
                 if (closestDistance < currentDistance || currentDistance * MinimapScale > MaxSelectableDistance)
