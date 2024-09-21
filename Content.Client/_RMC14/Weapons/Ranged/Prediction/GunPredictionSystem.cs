@@ -28,9 +28,15 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
+    private EntityQuery<IgnorePredictionHideComponent> _ignorePredictionHideQuery = default!;
+    private EntityQuery<SpriteComponent> _spriteQuery = default!;
+
     public override void Initialize()
     {
         base.Initialize();
+
+        _ignorePredictionHideQuery = GetEntityQuery<IgnorePredictionHideComponent>();
+        _spriteQuery = GetEntityQuery<SpriteComponent>();
 
         SubscribeLocalEvent<PhysicsUpdateBeforeSolveEvent>(OnBeforeSolve);
         SubscribeLocalEvent<PhysicsUpdateAfterSolveEvent>(OnAfterSolve);
@@ -112,7 +118,13 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
         if (!GunPrediction)
             return;
 
-        if (ent.Comp.ClientEnt == _player.LocalEntity && TryComp(ent, out SpriteComponent? sprite))
+        if (ent.Comp.ClientEnt != _player.LocalEntity)
+            return;
+
+        if (_ignorePredictionHideQuery.HasComp(ent))
+            return;
+
+        if (_spriteQuery.TryComp(ent, out var sprite))
             sprite.Visible = false;
     }
 
