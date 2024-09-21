@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Whisper
   changes:
-  - message: Lathes temporarily no longer need power.
-    type: Fix
-  id: 228
-  time: '2024-07-02T00:06:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2731
-- author: Whisper
-  changes:
   - message: Faxes and microwaves temporarily no longer require power.
     type: Fix
   id: 229
@@ -4416,5 +4409,12 @@
   id: 727
   time: '2024-09-21T18:32:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4099
+- author: DrSmugleaf
+  changes:
+  - message: Removed the Pacifist character trait.
+    type: Remove
+  id: 728
+  time: '2024-09-21T19:20:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4102
 Name: RMC14
 Order: -1
