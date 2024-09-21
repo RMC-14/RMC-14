@@ -4411,7 +4411,7 @@
   url: https://github.com/RMC-14/RMC-14/pull/4105
 - author: DrSmugleaf
   changes:
-  - message: Fixed sentries blocking bullets even when not aiming at them directly.
+  - message: Fixed sentries blocking grenades and bullets even when not aiming at them directly.
     type: Fix
   id: 730
   time: '2024-09-21T19:44:33.0000000+00:00'
