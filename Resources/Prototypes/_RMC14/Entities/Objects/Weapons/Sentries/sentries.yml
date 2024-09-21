@@ -119,6 +119,7 @@
   - type: RMCRepairable
   - type: RMCNameItemOnVend
     item: Sentry
+  - type: RequireProjectileTarget
 
 - type: htnCompound
   id: RMCSentryCompound
