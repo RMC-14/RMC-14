@@ -10,4 +10,7 @@ cm-xeno-nest-failed = {$target} can't be put into a nest!
 cm-xeno-nest-failed-target-resisting = {$target} is resisting, ground them!
 cm-xeno-nest-failed-cant-there = We can't create a nest there!
 cm-xeno-nest-failed-cant-already-there = There is already someone nested there!
+
+cm-xeno-nest-remove-nested-confirm-line1 = The target is still alive and kicking!
+cm-xeno-nest-remove-nested-confirm-line2 = Are we sure we want to remove them from the nest?
 rmc-xeno-nest-failed-dead = This host is dead.

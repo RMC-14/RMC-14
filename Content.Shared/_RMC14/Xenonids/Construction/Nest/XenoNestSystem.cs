@@ -1,5 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using Content.Shared.Actions;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Weeds;
@@ -48,6 +49,7 @@ public sealed class XenoNestSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private EntityQuery<OccluderComponent> _occluderQuery;
     private EntityQuery<XenoNestComponent> _xenoNestQuery;
@@ -66,8 +68,9 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, GetUsedEntityEvent>(OnXenoGetUsedEntity);
 
         SubscribeLocalEvent<XenoNestSurfaceComponent, InteractHandEvent>(OnSurfaceInteractHand);
-        SubscribeLocalEvent<XenoNestSurfaceComponent, DoAfterAttemptEvent<XenoNestDoAfterEvent>>(OnSurfaceDoAfterAttempt);
-        SubscribeLocalEvent<XenoNestSurfaceComponent, XenoNestDoAfterEvent>(OnNestSurfaceDoAfter);
+        SubscribeLocalEvent<XenoNestableComponent, ActivateInWorldEvent>(OnNestedActivateInWorld);
+        SubscribeLocalEvent<XenoNestSurfaceComponent, DoAfterAttemptEvent<XenoNestEvent>>(OnSurfaceDoAfterAttempt);
+        SubscribeLocalEvent<XenoNestSurfaceComponent, XenoNestEvent>(OnNestSurfaceDoAfter);
         SubscribeLocalEvent<XenoNestSurfaceComponent, CanDropTargetEvent>(OnSurfaceCanDropTarget);
         SubscribeLocalEvent<XenoNestSurfaceComponent, DragDropTargetEvent>(OnSurfaceDragDropTarget);
         SubscribeLocalEvent<XenoNestSurfaceComponent, EntityTerminatingEvent>(OnSurfaceTerminating);
@@ -92,6 +95,11 @@ public sealed class XenoNestSystem : EntitySystem
         SubscribeLocalEvent<XenoNestedComponent, IsEquippingAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, IsUnequippingAttemptEvent>(OnNestedCancel);
         SubscribeLocalEvent<XenoNestedComponent, GetInfectedIncubationMultiplierEvent>(OnInNestGetInfectedIncubationMultiplier);
+
+        Subs.BuiEvents<XenoNestedComponent>(XenoRemoveNestedUI.Key, subs =>
+        {
+            subs.Event<XenoRemoveNestedBuiMsg>(OnRemoveNestedBuiMsg);
+        });
     }
 
     private void OnXenoGetUsedEntity(Entity<XenoComponent> ent, ref GetUsedEntityEvent args)
@@ -114,6 +122,14 @@ public sealed class XenoNestSystem : EntitySystem
 
         args.Handled = true;
         TryStartNesting(args.User, ent, pulling);
+    }
+
+    private void OnNestedActivateInWorld(Entity<XenoNestableComponent> target, ref ActivateInWorldEvent args)
+    {
+        if (!HasComp<XenoComponent>(args.User))
+            return;
+        var castUser = (Entity<XenoComponent>) args.User!;
+        TryStartRemoveNested(castUser, target.Owner);
     }
 
     private void OnNestRemove(Entity<XenoNestComponent> ent, ref ComponentRemove args)
@@ -152,7 +168,7 @@ public sealed class XenoNestSystem : EntitySystem
             _standing.Down(ent);
     }
 
-    private void OnSurfaceDoAfterAttempt(Entity<XenoNestSurfaceComponent> ent, ref DoAfterAttemptEvent<XenoNestDoAfterEvent> args)
+    private void OnSurfaceDoAfterAttempt(Entity<XenoNestSurfaceComponent> ent, ref DoAfterAttemptEvent<XenoNestEvent> args)
     {
         if (args.DoAfter.Args.Target is not { } target ||
             TerminatingOrDeleted(target) ||
@@ -162,7 +178,7 @@ public sealed class XenoNestSystem : EntitySystem
         }
     }
 
-    private void OnNestSurfaceDoAfter(Entity<XenoNestSurfaceComponent> ent, ref XenoNestDoAfterEvent args)
+    private void OnNestSurfaceDoAfter(Entity<XenoNestSurfaceComponent> ent, ref XenoNestEvent args)
     {
         if (args.Cancelled || args.Handled)
             return;
@@ -230,6 +246,15 @@ public sealed class XenoNestSystem : EntitySystem
         }
     }
 
+    private void OnRemoveNestedBuiMsg(Entity<XenoNestedComponent> target, ref XenoRemoveNestedBuiMsg args)
+    {
+        var user = new EntityUid(args.Actor.Id);
+        _ui.CloseUi(target.Owner, XenoRemoveNestedUI.Key, user);
+        if (_net.IsClient)
+            return;
+        DetachNested(null, target);
+    }
+
     #region DragDrop
 
     private void OnSurfaceCanDropTarget(Entity<XenoNestSurfaceComponent> ent, ref CanDropTargetEvent args)
@@ -294,7 +319,7 @@ public sealed class XenoNestSystem : EntitySystem
             return;
         }
 
-        var ev = new XenoNestDoAfterEvent();
+        var ev = new XenoNestEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, surface.Comp.DoAfter, ev, surface, victim)
         {
             BreakOnMove = true,
@@ -322,6 +347,21 @@ public sealed class XenoNestSystem : EntitySystem
         }
     }
 
+    private void TryStartRemoveNested(Entity<XenoComponent> user, EntityUid target)
+    {
+        if (!CanBeUnNested(user, target))
+            return;
+
+        if (!_mobState.IsDead(target) && !_mobState.IsCritical(target))
+        {
+            _ui.TryOpenUi(target, XenoRemoveNestedUI.Key, user);
+            return;
+        }
+        if (_net.IsClient)
+            return;
+        DetachNested(null, target); // If target is dead or crit we can just remove them without risk, so it happens immediately.
+    }
+
     private bool CanBeNested(EntityUid user,
         EntityUid victim,
         Entity<XenoNestSurfaceComponent?> surface,
@@ -347,11 +387,17 @@ public sealed class XenoNestSystem : EntitySystem
         {
             if (!silent)
                 _popup.PopupClient(Loc.GetString("cm-xeno-nest-failed-cant-there"), surface, user);
-
             return false;
         }
 
         return true;
+    }
+
+    private bool CanBeUnNested(EntityUid user, EntityUid target)
+    {
+        if (HasComp<XenoNestedComponent>(target) && HasComp<XenoComponent>(user))
+            return true;
+        return false;
     }
 
     private bool CanNestPopup(EntityUid user,
