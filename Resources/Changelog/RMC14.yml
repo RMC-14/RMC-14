@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: vero5123
-  changes:
-  - message: Adds shockwave overlay to queen's screech
-    type: Add
-  id: 231
-  time: '2024-07-02T01:03:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2734
 - author: Whisper
   changes:
   - message: Cargo techs now spawn with an approval stamp.
@@ -4411,10 +4404,20 @@
   url: https://github.com/RMC-14/RMC-14/pull/4105
 - author: DrSmugleaf
   changes:
-  - message: Fixed sentries blocking grenades and bullets even when not aiming at them directly.
+  - message: Fixed sentries blocking grenades and bullets even when not aiming at
+      them directly.
     type: Fix
   id: 730
   time: '2024-09-21T19:44:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4106
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the M44 revolver not shooting anything.
+    type: Fix
+  - message: Fixed the grenade launcher's grenades being invisible for the shooter.
+    type: Fix
+  id: 731
+  time: '2024-09-21T21:36:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4113
 Name: RMC14
 Order: -1
