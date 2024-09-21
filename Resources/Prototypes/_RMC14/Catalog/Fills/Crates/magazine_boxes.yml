@@ -185,9 +185,19 @@
 - type: entity
   parent: RMCCrateAmmo
   id: RMCCrateBoxMagazineSentry
-  name: UA 571-C sentry ammunition (x2)
+  name: UN 571-C sentry ammunition (x2)
   components:
   - type: StorageFill
     contents:
     - id: RMCMagazineSentry
+      amount: 2
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineSentryShotgun
+  name: UN 12-G sentry shotgun ammunition (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSentryShotgun
       amount: 2

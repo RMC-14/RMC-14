@@ -22,5 +22,9 @@
             <Label Text="{Loc 'rmc-ui-named-armor'}" MinWidth="150" Align="Right" Margin="0 0 5 0" />
             <LineEdit Name="Armor" Access="Public" HorizontalExpand="True" />
         </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc 'rmc-ui-named-sentry'}" MinWidth="150" Align="Right" Margin="0 0 5 0" />
+            <LineEdit Name="Sentry" Access="Public" HorizontalExpand="True" />
+        </BoxContainer>
     </BoxContainer>
 </controls:NamedItemsPicker>

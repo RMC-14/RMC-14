@@ -18,6 +18,7 @@
     initialBeepDelay: 0
     beepInterval: 10
     doPopup: false
+  - type: IgnorePredictionHide
 
 - type: entity
   parent: CMGrenadeBase
@@ -118,6 +119,36 @@
     - Grenade
     - LauncherCompatibleGrenade
     - RMCGrenadeM40
+  - type: Ammo
+  - type: ClusterLimitHits
+  - type: CMExplosionEffect
+    maxShrapnel: 0
+  - type: CMVocalizeTrigger
+
+- type: entity
+  parent: CMGrenadeHighExplosive
+  id: CMGrenadeFragOld
+  name: M15 fragmentation grenade
+  description: An outdated UNMC Fragmentation Grenade. With decades of service in the UNMC, the old M15 Fragmentation Grenade is slowly being replaced by the slightly safer M40-series grenades. It is set to detonate in 4 seconds.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/m15frag.rsi
+  - type: Explosive
+    maxIntensity: 20
+    intensitySlope: 6
+    totalIntensity: 240
+    deleteAfterExplosion: false
+  - type: ClusterGrenade
+    fillPrototype: CMProjectileShrapnel
+    maxGrenadesCount: 48 #same as HEFA
+    grenadeType: enum.GrenadeType.Shoot
+    triggerGrenades: false
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: Tag
+    tags:
+    - Grenade
   - type: Ammo
   - type: ClusterLimitHits
   - type: CMExplosionEffect

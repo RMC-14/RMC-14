@@ -65,3 +65,7 @@
     chance: 0.50
   - type: RMCXenoDamageVisuals
     prefix: sentinel
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: sentinel

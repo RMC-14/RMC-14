@@ -17,7 +17,7 @@
       conditions:
       - !type:EntityAnchored {}
       steps:
-      - tool: Welding
+      - tool: Anchoring
         doAfter: 2
 
     - to: windowWood

@@ -23,8 +23,8 @@
     #  points: 18
     #- id: CMM40HPDPWhitePhosphorusPacketx3
     #  points: 18
-    #- id: CMM40HSDPSmokePacketx3
-    #  points: 9
+      - id: RMCPacketGrenadeSmokeFilled
+        points: 9
     #- id: CMM74AGMFragAirburstPacketx3
     #  points: 20
     #- id: CMM74AGMIncendiaryAirburstPacketx3
@@ -77,8 +77,8 @@
         points: 30
     - name: Clothing Items
       entries:
-    #- id: CMScabbardMacheteFull
-    #  points: 5
+      - id: RMCScabbardMacheteFilled
+        points: 5
       - id: RMCPouchMacheteFilled
         points: 15
     #- id: CMMarineRadioTelephonePack
