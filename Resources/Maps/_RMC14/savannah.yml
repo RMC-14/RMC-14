@@ -11347,7 +11347,7 @@ entities:
       pos: 47.5,-25.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -35002.76
+      secondsUntilStateChange: -35074.605
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -11599,7 +11599,7 @@ entities:
       pos: -50.5,-10.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -56087.887
+      secondsUntilStateChange: -56159.73
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -11912,7 +11912,7 @@ entities:
       pos: -22.5,7.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -49593.613
+      secondsUntilStateChange: -49665.457
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -14448,11 +14448,6 @@ entities:
     components:
     - type: Transform
       pos: -18.5,-15.5
-      parent: 1
-  - uid: 6071
-    components:
-    - type: Transform
-      pos: -18.5,-14.5
       parent: 1
   - uid: 6073
     components:
@@ -41449,6 +41444,15 @@ entities:
     - type: Transform
       pos: -57.5,2.5
       parent: 1
+- proto: CrayonWhite
+  entities:
+  - uid: 31
+    components:
+    - type: MetaData
+      name: spent crayon
+    - type: Transform
+      pos: -12.501979,-25.516708
+      parent: 1
 - proto: d6Dice
   entities:
   - uid: 7724
@@ -57904,13 +57908,6 @@ entities:
     - type: Transform
       pos: 93.5,4.5
       parent: 1
-- proto: RMCCrateSuppliesCrayons
-  entities:
-  - uid: 13571
-    components:
-    - type: Transform
-      pos: -12.5,-25.5
-      parent: 1
 - proto: RMCCurtainShower
   entities:
   - uid: 1220
@@ -57919,7 +57916,7 @@ entities:
       pos: -14.5,8.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -9004.285
+      secondsUntilStateChange: -9076.128
       state: Opening
 - proto: RMCDispenserChem
   entities:
