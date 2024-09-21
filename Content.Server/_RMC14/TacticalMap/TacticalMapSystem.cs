@@ -54,6 +54,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private readonly HashSet<Entity<ActiveTacticalMapTrackedComponent>> _toUpdate = new();
 
     private TimeSpan _announceCooldown;
+    private TimeSpan _mapUpdateEvery;
 
     public override void Initialize()
     {
@@ -108,6 +109,11 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         Subs.CVar(_config,
             RMCCVars.RMCTacticalMapAnnounceCooldownSeconds,
             v => _announceCooldown = TimeSpan.FromSeconds(v),
+            true);
+
+        Subs.CVar(_config,
+            RMCCVars.RMCTacticalMapUpdateEverySeconds,
+            v => _mapUpdateEvery = TimeSpan.FromSeconds(v),
             true);
     }
 
@@ -447,7 +453,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 continue;
 
             map.MapDirty = false;
-            map.NextUpdate = time + map.UpdateEvery;
+            map.NextUpdate = time + _mapUpdateEvery;
 
             var computers = EntityQueryEnumerator<TacticalMapComputerComponent>();
             while (computers.MoveNext(out var computerId, out var computer))

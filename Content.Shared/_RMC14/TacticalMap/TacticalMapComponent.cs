@@ -7,9 +7,6 @@ namespace Content.Shared._RMC14.TacticalMap;
 [Access(typeof(SharedTacticalMapSystem))]
 public sealed partial class TacticalMapComponent : Component
 {
-    [DataField]
-    public TimeSpan UpdateEvery = TimeSpan.FromSeconds(1);
-
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextUpdate = TimeSpan.FromSeconds(1);
 
