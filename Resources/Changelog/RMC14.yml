@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added Patron figurine for Fritz Vohlkson the Sniper Specialist.
-    type: Add
-  id: 224
-  time: '2024-07-01T04:33:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2693
 - author: Tunguso4ka
   changes:
   - message: Fire Team Leaders now have their own prep room on the Savannah!
@@ -4405,5 +4398,17 @@
   id: 723
   time: '2024-09-21T08:38:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4013
+- author: Vermidia
+  changes:
+  - message: All xenos minus parasites can now emote properly
+    type: Fix
+  - message: Xeno death noises are a bit louder now
+    type: Fix
+  - message: Xenos have emote sounds for roaring, growling, hissing, calling for help,
+      or swiping their tails
+    type: Add
+  id: 724
+  time: '2024-09-21T08:40:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4072
 Name: RMC14
 Order: -1
