@@ -33,8 +33,8 @@
     #  points: 30
     #- id: CMM40HPDPWhitePhosphorusPacketx3
     #  points: 30
-    #- id: CMM40HSDPSmokePacketx3
-    #  points: 15
+      - id: RMCPacketGrenadeSmokeFilled
+        points: 15
     #- id: CMM74AGM-FragAirburstPacketx3
     #  points: 20
     #- id: CMM74AGM-IncendiaryAirburstPacketx3
