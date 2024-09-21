@@ -63,17 +63,17 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : BoundU
             _window.NextUpdateAt = computer.NextAnnounceAt;
         }
 
+        _window.Map.Lines.Clear();
+
+        var lines = EntMan.GetComponentOrNull<TacticalMapLinesComponent>(Owner);
+        if (lines != null)
+            _window.Map.Lines.AddRange(lines.MarineLines);
+
         if (_refreshed)
             return;
 
-        _window.Canvas.Lines.Clear();
-        _window.Map.Lines.Clear();
-
-        if (EntMan.TryGetComponent(Owner, out TacticalMapLinesComponent? lines))
-        {
+        if (lines != null)
             _window.Canvas.Lines.AddRange(lines.MarineLines);
-            _window.Map.Lines.AddRange(lines.MarineLines);
-        }
 
         _refreshed = true;
     }

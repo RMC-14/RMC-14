@@ -1,18 +1,22 @@
 ﻿using Content.Shared._RMC14.TacticalMap;
+using Robust.Client.Player;
 
 namespace Content.Client._RMC14.TacticalMap;
 
 public sealed class TacticalMapSystem : SharedTacticalMapSystem
 {
+    [Dependency] private readonly IPlayerManager _player = default!;
+
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<TacticalMapUserComponent, AfterAutoHandleStateEvent>(OnUserState);
         SubscribeLocalEvent<TacticalMapComputerComponent, AfterAutoHandleStateEvent>(OnComputerState);
+        SubscribeLocalEvent<TacticalMapLinesComponent, AfterAutoHandleStateEvent>(OnLinesState);
     }
 
-    private void OnUserState(Entity<TacticalMapUserComponent> ent, ref AfterAutoHandleStateEvent args)
+    private void RefreshUser(EntityUid ent)
     {
         try
         {
@@ -31,7 +35,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         }
     }
 
-    private void OnComputerState(Entity<TacticalMapComputerComponent> ent, ref AfterAutoHandleStateEvent args)
+    private void RefreshComputer(EntityUid ent)
     {
         try
         {
@@ -48,5 +52,25 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         {
             Log.Error($"Error refreshing {nameof(TacticalMapComputerBui)}\n{e}");
         }
+    }
+
+    private void OnUserState(Entity<TacticalMapUserComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        if (_player.LocalEntity == ent)
+            RefreshUser(ent);
+    }
+
+    private void OnComputerState(Entity<TacticalMapComputerComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        RefreshComputer(ent);
+    }
+
+    private void OnLinesState(Entity<TacticalMapLinesComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        if (HasComp<TacticalMapUserComponent>(ent))
+            RefreshUser(ent);
+
+        if (HasComp<TacticalMapComputerComponent>(ent))
+            RefreshComputer(ent);
     }
 }
