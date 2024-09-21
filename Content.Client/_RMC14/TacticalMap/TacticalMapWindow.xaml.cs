@@ -14,12 +14,12 @@ public sealed partial class TacticalMapWindow : DefaultWindow
     private readonly List<(string Name, Color Color)> _colors = new()
     {
         ("Black", Color.Black),
-        ("Red", Color.Red),
-        ("Orange", Color.Orange),
-        ("Blue", Color.Blue),
-        ("Purple", Color.Purple),
-        ("Green", Color.Green),
-        ("Brown", Color.Brown),
+        ("Red", Color.FromHex("#F40002")),
+        ("Orange", Color.FromHex("#F39504")),
+        ("Blue", Color.FromHex("#015CF5")),
+        ("Purple", Color.FromHex("#BF00F1")),
+        ("Green", Color.FromHex("#00BB48")),
+        ("Brown", Color.FromHex("#5A3121")),
     };
 
     public TimeSpan LastUpdateAt;
