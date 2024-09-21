@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Scoping;
+using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
@@ -29,6 +30,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly SharedTacticalMapSystem _tacticalMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
@@ -60,6 +62,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         Subs.BuiEvents<OverwatchConsoleComponent>(OverwatchConsoleUI.Key, subs =>
         {
             subs.Event<OverwatchConsoleSelectSquadBuiMsg>(OnOverwatchSelectSquadBui);
+            subs.Event<OverwatchViewTacticalMapBuiMsg>(OnOverwatchViewTacticalMapBui);
             subs.Event<OverwatchConsoleTakeOperatorBuiMsg>(OnOverwatchTakeOperatorBui);
             subs.Event<OverwatchConsoleStopOverwatchBuiMsg>(OnOverwatchStopBui);
             subs.Event<OverwatchConsoleSetLocationBuiMsg>(OnOverwatchSetLocationBui);
@@ -135,6 +138,11 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         ent.Comp.Squad = args.Squad;
         ent.Comp.Operator = Identity.Name(args.Actor, EntityManager);
         Dirty(ent);
+    }
+
+    private void OnOverwatchViewTacticalMapBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchViewTacticalMapBuiMsg args)
+    {
+        _tacticalMap.OpenComputerMap(ent.Owner, args.Actor);
     }
 
     private void OnOverwatchTakeOperatorBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleTakeOperatorBuiMsg args)

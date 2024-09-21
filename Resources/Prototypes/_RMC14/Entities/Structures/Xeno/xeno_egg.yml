@@ -67,3 +67,8 @@
     priority: -1
   - type: Corrodible
     isCorrodible: false
+  - type: UserInterface
+    interfaces:
+      enum.XenoEggGhostUI.Key:
+        type: XenoEggGhostBui
+        requireInputValidation: false

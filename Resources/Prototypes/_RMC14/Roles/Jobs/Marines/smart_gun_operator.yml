@@ -17,6 +17,9 @@
   overwatchSortPriority: -2
   overwatchShowName: true
   overwatchRoleName: Smart Gun Operator
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: smartgunner
   special:
   - !type:AddComponentSpecial
     components:

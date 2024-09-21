@@ -19,6 +19,9 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - MarineMain
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: cic
   special:
   - !type:AddComponentSpecial
     components:

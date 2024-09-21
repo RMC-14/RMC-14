@@ -30,6 +30,7 @@
     contributesToVictory: false
     countedInSlots: false
     unlockAt: 0
+    emoteSounds: null
   - type: XenoPlasma
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
@@ -67,7 +68,7 @@
     sound:
       path: /Audio/_RMC14/Xeno/alien_parasite_dies.ogg
       params:
-        volume: -12
+        volume: -4
   - type: IdentityBlocker
   - type: Clothing
     quickEquip: false
@@ -76,6 +77,8 @@
   - type: HideLayerClothing
     slots:
     - Snout
+  - type: Speech
+    allowedEmotes: []
   - type: RMCSize
     size: Small
   - type: HTN
@@ -84,3 +87,7 @@
     blackboard:
       VisionRadius: !type:Single
         3.0
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: parasite

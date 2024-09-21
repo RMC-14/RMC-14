@@ -400,7 +400,25 @@
         points: 15
       - id: RMCAttachmentSuppressor
         points: 15
-
+    - name: Other Supplies
+      entries:
+      - id: CMHandsInsulated
+        points: 3
+      - id: RMCPouchMacheteFilled
+        points: 5
+      - id: CMEntrenchingTool
+        points: 1
+      - id: RMCBinoculars
+        points: 5
+      - id: RMCRangefinder
+        points: 8
+      - id: RMCLaserDesignator
+        points: 12
+      - id: RMCWhistle
+        points: 5
+      - id: RMCFlashlight
+        points: 1
+      
 # Commanding Officer #
 
 # Clothing Vend
@@ -518,7 +536,7 @@
         recommended: true
       - id: CMBeltSecurityMPFilled
         recommended: true
-      - id: CMBeltMedicBag
+      - id: CMBeltMedicBagFilled
         recommended: true
       - id: CMBeltMarine
         recommended: true

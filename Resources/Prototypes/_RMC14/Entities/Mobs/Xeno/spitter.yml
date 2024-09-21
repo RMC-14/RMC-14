@@ -77,3 +77,7 @@
     baseSprintSpeed: 3.5
   - type: RMCXenoDamageVisuals
     prefix: spitter
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: spitter

@@ -6,11 +6,14 @@ using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
+using Content.Shared.Ghost;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Maps;
 using Content.Shared.Mind;
@@ -22,11 +25,13 @@ using Content.Shared.StepTrigger.Components;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
+using Content.Shared.Verbs;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using static Content.Shared.Physics.CollisionGroup;
 
@@ -53,9 +58,10 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
-	private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
-	private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
+    private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
+    private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
 
     private EntityQuery<StepTriggerComponent> _stepTriggerQuery;
 
@@ -77,6 +83,7 @@ public sealed class XenoEggSystem : EntitySystem
         SubscribeLocalEvent<XenoEggComponent, ActivateInWorldEvent>(OnXenoEggActivateInWorld);
         SubscribeLocalEvent<XenoEggComponent, StepTriggerAttemptEvent>(OnXenoEggStepTriggerAttempt);
         SubscribeLocalEvent<XenoEggComponent, StepTriggeredOffEvent>(OnXenoEggStepTriggered);
+        SubscribeLocalEvent<XenoEggComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
     }
 
     private void OnXenoGrowOvipositorAction(Entity<XenoComponent> xeno, ref XenoGrowOvipositorActionEvent args)
@@ -324,7 +331,7 @@ public sealed class XenoEggSystem : EntitySystem
                !_mobState.IsDead(user);
     }
 
-    private bool Open(Entity<XenoEggComponent> egg, EntityUid? user, out EntityUid? spawned)
+    public bool Open(Entity<XenoEggComponent> egg, EntityUid? user, out EntityUid? spawned)
     {
         spawned = null;
         if (egg.Comp.State == XenoEggState.Opened)
@@ -519,4 +526,44 @@ public sealed class XenoEggSystem : EntitySystem
             SetEggState((uid, egg), XenoEggState.Grown);
         }
     }
+
+    private void OnGetVerbs(Entity<XenoEggComponent> ent, ref GetVerbsEvent<ActivationVerb> args)
+    {
+        var uid = args.User;
+
+        // if it doesn't have an actor and we can't reach it then don't add the verb
+        if (!TryComp(uid, out ActorComponent? actor))
+            return;
+
+        if (!TryComp(uid, out GhostComponent? ghostComp))
+            return;
+
+        if (ent.Comp.State == XenoEggState.Opened || ent.Comp.State == XenoEggState.Growing)
+            return;
+
+        var parasiteVerb = new ActivationVerb
+        {
+            Text = Loc.GetString("rmc-xeno-egg-ghost-verb"),
+            Act = () =>
+            {
+                _ui.TryOpenUi(ent.Owner, XenoEggGhostUI.Key, uid);
+            },
+
+            Impact = LogImpact.High,
+        };
+
+        args.Verbs.Add(parasiteVerb);
+    }
+}
+
+[Serializable, NetSerializable]
+public enum XenoEggGhostUI
+{
+    Key
+}
+
+[Serializable, NetSerializable]
+public sealed class XenoEggGhostBuiMsg() : BoundUserInterfaceMessage
+{
+
 }

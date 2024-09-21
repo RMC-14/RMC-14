@@ -14,7 +14,7 @@ using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Pulling;
 
-public sealed class CMPullingSystem : EntitySystem
+public sealed class RMCPullingSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -231,6 +231,18 @@ public sealed class CMPullingSystem : EntitySystem
         }
 
         return false;
+    }
+
+    public void TryStopUserPullIfPulling(EntityUid user, EntityUid target)
+    {
+        if (!TryComp(user, out PullerComponent? puller) ||
+            puller.Pulling != target ||
+            !TryComp(puller.Pulling, out PullableComponent? pullable))
+        {
+            return;
+        }
+
+        _pulling.TryStopPull(puller.Pulling.Value, pullable, user);
     }
 
     public override void Update(float frameTime)

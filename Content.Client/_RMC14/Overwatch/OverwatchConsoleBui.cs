@@ -108,6 +108,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
             {
                 monitor = new OverwatchSquadView();
                 monitor.Visible = squad.Id == activeSquad;
+                monitor.TacticalMapButton.OnPressed += _ => SendPredictedMessage(new OverwatchViewTacticalMapBuiMsg());
                 monitor.OperatorButton.OnPressed += _ => SendPredictedMessage(new OverwatchConsoleTakeOperatorBuiMsg());
                 monitor.SearchBar.OnTextChanged += _ => monitor.UpdateResults(
                     console.Location,
