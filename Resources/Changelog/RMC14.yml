@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Whisper
   changes:
-  - message: Faxes and microwaves temporarily no longer require power.
-    type: Fix
-  id: 229
-  time: '2024-07-02T00:09:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2732
-- author: Whisper
-  changes:
   - message: Fixed grenade launcher being one grenade short in capacity.
     type: Fix
   id: 230
@@ -4416,5 +4409,12 @@
   id: 728
   time: '2024-09-21T19:20:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4102
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being able to place and fire mortars on the warship.
+    type: Fix
+  id: 729
+  time: '2024-09-21T19:31:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4105
 Name: RMC14
 Order: -1
