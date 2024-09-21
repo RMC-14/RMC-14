@@ -37,6 +37,8 @@ public sealed class MarineOverlay : Overlay
         _sprite = _entity.System<SpriteSystem>();
         _transform = _entity.System<TransformSystem>();
 
+        _invisQuery = _entity.GetEntityQuery<EntityActiveInvisibleComponent>();
+
         _shader = _prototype.Index<ShaderPrototype>("shaded").Instance();
     }
 
