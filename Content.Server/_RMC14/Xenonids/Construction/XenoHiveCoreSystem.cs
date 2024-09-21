@@ -142,7 +142,7 @@ public sealed class XenoHiveCoreSystem : SharedXenoHiveCoreSystem
                 time >= core.HealAt)
             {
                 core.HealAt = time + core.HealEvery;
-                var damage = _rmcDamageable.DistributeTypesTotal((uid, damageable), core.Heal);
+                var damage = -_rmcDamageable.DistributeTypesTotal((uid, damageable), core.Heal);
                 _damageable.TryChangeDamage(uid, damage);
             }
         }
