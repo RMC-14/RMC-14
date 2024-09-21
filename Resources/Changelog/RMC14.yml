@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: You can now deconstruct magazine boxes into cardboard and craft new ones.
-    type: Add
-  id: 220
-  time: '2024-07-01T03:28:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2547
 - author: DrSmugleaf
   changes:
   - message: 'Added 2 Patron figurines: Fox Bridgeton and Kills-The-Mice. They will
@@ -4401,5 +4394,18 @@
   id: 719
   time: '2024-09-21T07:08:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4095
+- author: DrSmugleaf
+  changes:
+  - message: Fixed a Warrior stopping its pull not cancelling the stun and knockdown
+      from it. If a Warrior stops pulling someone after hitting them with a Lunge,
+      the target will now correctly instantly get up.
+    type: Fix
+  - message: Fixed Warrior Punch and Fling not cancelling pulls if done while pulling
+      the target. Punch and Fling will now correctly break your pull on the target
+      if you happen to be pulling them before using either ability.
+    type: Fix
+  id: 720
+  time: '2024-09-21T07:34:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4097
 Name: RMC14
 Order: -1
