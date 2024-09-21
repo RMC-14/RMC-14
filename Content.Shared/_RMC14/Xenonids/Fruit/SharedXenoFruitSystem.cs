@@ -1,8 +1,4 @@
 using Content.Shared._RMC14.Actions;
-using Content.Shared._RMC14.Hands;
-using Content.Shared._RMC14.Map;
-using Content.Shared._RMC14.Marines;
-using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Fruit.Components;
@@ -10,10 +6,8 @@ using Content.Shared._RMC14.Xenonids.Fruit.Effects;
 using Content.Shared._RMC14.Xenonids.Fruit.Events;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Shields;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
-using Content.Shared.Actions.Events;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates.Helpers;
@@ -25,34 +19,23 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.Item;
 using Content.Shared.Maps;
-using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
-using Content.Shared.Physics;
 using Content.Shared.Popups;
-using Content.Shared.Projectiles;
-using Content.Shared.Prototypes;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
-using Robust.Shared.Physics.Systems;
-using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Content.Shared.Physics.CollisionGroup;
-
-// TODO: clean up all the dependencies once everything's working
 
 namespace Content.Shared._RMC14.Xenonids.Fruit;
 
@@ -82,23 +65,16 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruct = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
 
 	private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
 	private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
 
     private EntityQuery<MobStateComponent> _mobStateQuery;
-    private EntityQuery<XenoConstructComponent> _xenoConstructQuery;
-    private EntityQuery<XenoEggComponent> _xenoEggQuery;
-    private EntityQuery<XenoWeedsComponent> _xenoWeedsQuery;
 
     public override void Initialize()
     {
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
-        _xenoConstructQuery = GetEntityQuery<XenoConstructComponent>();
-        _xenoEggQuery = GetEntityQuery<XenoEggComponent>();
-        _xenoWeedsQuery = GetEntityQuery<XenoWeedsComponent>();
 
         // Fruit choosing
         SubscribeLocalEvent<XenoFruitPlanterComponent, XenoFruitChooseActionEvent>(OnXenoFruitChooseAction);
