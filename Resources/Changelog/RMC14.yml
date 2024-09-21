@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: 'Added 2 Patron figurines: Fox Bridgeton and Kills-The-Mice. They will
-      appear on some tables if the dropship and planet map, and are randomly chosen.'
-    type: Add
-  id: 221
-  time: '2024-07-01T04:02:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2686
-- author: DrSmugleaf
-  changes:
   - message: Marines and xenos that are abandoned and left on the planet after a hijack
       will no longer be counted for round end.
     type: Fix
@@ -4407,5 +4399,16 @@
   id: 720
   time: '2024-09-21T07:34:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4097
+- author: DrSmugleaf
+  changes:
+  - message: Added gun prediction and lag compensation, aka removes the delay on firing
+      due to ping.
+    type: Add
+  - message: Fixed melee attack lag compensation not accounting for your ping, which
+      would make melee attacks done by players with higher ping more unreliable.
+    type: Fix
+  id: 721
+  time: '2024-09-21T08:29:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4096
 Name: RMC14
 Order: -1
