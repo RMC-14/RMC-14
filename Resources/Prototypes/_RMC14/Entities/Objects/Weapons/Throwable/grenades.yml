@@ -18,6 +18,7 @@
     initialBeepDelay: 0
     beepInterval: 10
     doPopup: false
+  - type: IgnorePredictionHide
 
 - type: entity
   parent: CMGrenadeBase

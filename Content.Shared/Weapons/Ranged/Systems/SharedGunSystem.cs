@@ -537,10 +537,8 @@ public abstract partial class SharedGunSystem : EntitySystem
 
                     Recoil(user, mapDirection, gun.CameraRecoilScalarModified);
 
-                    if (IsClientSide(ent!.Value))
-                        Del(ent.Value);
-                    else if (_netManager.IsClient)
-                        RemoveShootable(ent.Value);
+                    if (_netManager.IsClient)
+                        RemoveShootable(ent!.Value);
                     MarkPredicted(ent!.Value, 0);
                     break;
                 case HitscanPrototype hitscan:
