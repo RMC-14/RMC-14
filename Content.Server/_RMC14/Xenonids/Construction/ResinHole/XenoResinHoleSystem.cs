@@ -122,7 +122,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         }
 
         _xenoPlasma.TryRemovePlasma(xeno.Owner, args.PlasmaCost);
-        PlaceResinHole(xeno.Owner, location, args.Prototype);
+        PlaceResinHole(xeno, location, args.Prototype);
     }
 
     private void OnCompleteRemoveWeedSource(Entity<XenoComponent> xeno, ref XenoPlaceResinHoleDestroyWeedSourceDoAfterEvent args)
@@ -144,7 +144,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             return;
         }
         _xenoPlasma.TryRemovePlasma(xeno.Owner, args.PlasmaCost);
-        PlaceResinHole(xeno.Owner, location, args.ResinHolePrototype);
+        PlaceResinHole(xeno, location, args.ResinHolePrototype);
         QueueDel(args.Target);
     }
 
@@ -388,10 +388,13 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         return true;
     }
 
-    private void PlaceResinHole(EntityUid xeno, EntityCoordinates coords, EntProtoId resinHolePrototype)
+    private void PlaceResinHole(Entity<XenoComponent> xeno, EntityCoordinates coords, EntProtoId resinHolePrototype)
     {
         var resinHole = Spawn(resinHolePrototype, coords);
-        _adminLogs.Add(LogType.RMCXenoConstruct, $"Xeno {ToPrettyString(xeno):xeno} placed a resin hole at {coords}");
+        _adminLogs.Add(LogType.RMCXenoConstruct, $"Xeno {ToPrettyString(xeno.Owner):xeno} placed a resin hole at {coords}");
+
+        var resinHoleComp = EnsureComp<XenoResinHoleComponent>(resinHole);
+        resinHoleComp.Hive = xeno.Comp.Hive;
     }
 
     private bool ActivateTrap(Entity<XenoResinHoleComponent> resinHole)
@@ -410,9 +413,27 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         {
             _gun.ShootProjectile(trapEntity, new System.Numerics.Vector2(), new System.Numerics.Vector2(), resinHole);
         }
+        LocId activationMsgId = "";
+
+        switch (trapEntityProto)
+        {
+            case XenoResinHoleComponent.ParasitePrototype:
+                activationMsgId = "cm-xeno-construction-resin-hole-parasite-activate";
+                break;
+            case XenoResinHoleComponent.AcidGasPrototype:
+                activationMsgId = "cm-xeno-construction-resin-hole-acid-gas-activate";
+                break;
+            case XenoResinHoleComponent.NeuroGasPrototype:
+                activationMsgId = "cm-xeno-construction-resin-hole-neuro-gas-activate";
+                break;
+        }
+
+        var ev = new XenoResinHoleActivationEvent(activationMsgId);
+        RaiseLocalEvent(ent, ev);
 
         comp.TrapPrototype = null;
         _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
+
         return true;
     }
 }
