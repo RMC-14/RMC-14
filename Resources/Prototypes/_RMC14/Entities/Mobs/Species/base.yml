@@ -122,6 +122,8 @@
       enum.CMMobStateActionsUI.Key:
         type: CMGhostActionBui
         requireInputValidation: false
+      enum.TacticalMapUserUi.Key:
+        type: TacticalMapUserBui
   - type: Infectable
   - type: Tackleable
   - type: Tackle
@@ -216,3 +218,8 @@
   - type: ActiveInputMover
   - type: DropItemsOnRest
   - type: UserBlockShootingInsideContainers
+  - type: TacticalMapTracked
+    trackDead: true
+  - type: TacticalMapUser
+    actionId: RMCActionOpenTacticalMapMarine
+    marines: true

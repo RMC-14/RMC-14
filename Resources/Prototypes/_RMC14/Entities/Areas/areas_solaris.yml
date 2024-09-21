@@ -1286,7 +1286,7 @@
 - type: entity
   parent: RMCAreaBigredv2
   id: RMCAreaBigredv2CavesResearch
-  name: Wey-Yu Research Lab Caves
+  name: We-Ya Research Lab Caves
   components:
   - type: Sprite
     state: caves_research
