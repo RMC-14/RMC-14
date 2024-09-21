@@ -3,6 +3,9 @@
   id: CMXenoLurker
   name: cm-job-name-xeno-lurker
   playTimeTracker: CMJobXenoLurker
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: lurker
 
 - type: playTimeTracker
   id: CMJobXenoLurker

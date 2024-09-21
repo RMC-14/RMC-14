@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Rules.CrashLand;
+using Content.Server._RMC14.Stations;
 using Content.Server.Administration.Components;
 using Content.Server.Administration.Managers;
 using Content.Server.Atmos.EntitySystems;
@@ -30,6 +31,7 @@ using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Spawners;
+using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
@@ -96,7 +98,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCStationJobsSystem _rmcStationJobs = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
+    [Dependency] private readonly StationJobsSystem _stationJobs = default!;
     [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
@@ -114,21 +118,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private readonly HashSet<string> _operationSuffixes = new();
 
     private string _planetMaps = default!;
-    private float _defaultMarinesPerXeno;
-    private bool _autoBalance;
-    private float _autoBalanceStep;
-    private float _autoBalanceMin;
-    private float _autoBalanceMax;
+    private float _marinesPerXeno;
     private string _adminFaxAreaMap = string.Empty;
-
-    [ViewVariables]
-    public readonly Dictionary<string, float> MarinesPerXeno = new()
-    {
-        ["/Maps/_RMC14/lv624.yml"] = 7.5f,
-        ["/Maps/_RMC14/solaris.yml"] = 7.5f,
-        ["/Maps/_RMC14/prison.yml"] = 7.5f,
-        ["/Maps/_RMC14/shiva.yml"] = 7.5f,
-    };
 
     private readonly List<MapId> _almayerMaps = [];
 
@@ -139,7 +130,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private string? _lastPlanetMap;
 
     [ViewVariables]
-    public string? SelectedPlanetMap { get; private set; }
+    private string? SelectedPlanetMap { get; set; }
 
     [ViewVariables]
     public string? SelectedPlanetMapName { get; private set; }
@@ -181,11 +172,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         Subs.CVar(_config, RMCCVars.RMCFTLCrashLand, v => _crashLandEnabled = v, true);
         Subs.CVar(_config, RMCCVars.RMCPlanetMaps, v => _planetMaps = v, true);
-        Subs.CVar(_config, RMCCVars.CMMarinesPerXeno, v => _defaultMarinesPerXeno = v, true);
-        Subs.CVar(_config, RMCCVars.RMCAutoBalance, v => _autoBalance = v, true);
-        Subs.CVar(_config, RMCCVars.RMCAutoBalanceStep, v => _autoBalanceStep = v, true);
-        Subs.CVar(_config, RMCCVars.RMCAutoBalanceMax, v => _autoBalanceMax = v, true);
-        Subs.CVar(_config, RMCCVars.RMCAutoBalanceMin, v => _autoBalanceMin = v, true);
+        Subs.CVar(_config, RMCCVars.CMMarinesPerXeno, v => _marinesPerXeno = v, true);
         Subs.CVar(_config, RMCCVars.RMCAdminFaxAreaMap, v => _adminFaxAreaMap = v, true);
 
         ReloadPrototypes();
@@ -291,15 +278,33 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 return xenoEnt;
             }
 
-            var marinesPerXeno = _defaultMarinesPerXeno;
-            if (SelectedPlanetMap != null &&
-                !MarinesPerXeno.TryGetValue(SelectedPlanetMap, out marinesPerXeno))
+            var totalXenos = (int) Math.Round(Math.Max(1, ev.PlayerPool.Count / _marinesPerXeno));
+            var marines = ev.PlayerPool.Count - totalXenos;
+            var jobSlotScaling = _config.GetCVar(RMCCVars.RMCJobSlotScaling);
+            if (marines > 0 && jobSlotScaling)
             {
-                MarinesPerXeno[SelectedPlanetMap] = _defaultMarinesPerXeno;
-                marinesPerXeno = _defaultMarinesPerXeno;
+                var stations = EntityQueryEnumerator<StationJobsComponent, StationSpawningComponent>();
+                while (stations.MoveNext(out var stationId, out var stationJobs, out _))
+                {
+                    if (stationJobs.JobSlotScaling is not { } scalingProto)
+                        continue;
+
+                    // TODO RMC14 dont count survivors
+                    if (!scalingProto.TryGet(out var scalingComp, _prototypes, _compFactory))
+                        continue;
+
+                    foreach (var (job, scaling) in scalingComp.Jobs)
+                    {
+                        var slots = _rmcStationJobs.GetSlots(marines, scaling.Factor, scaling.C, scaling.Min, scaling.Max);
+                        if (scaling.Squad)
+                            slots *= 4;
+
+                        Log.Info($"Setting {job} to {slots} slots.");
+                        _stationJobs.TrySetJobSlot(stationId, job, slots, stationJobs: stationJobs);
+                    }
+                }
             }
 
-            var totalXenos = Math.Max(1, ev.PlayerPool.Count / marinesPerXeno);
             var xenoCandidates = new List<NetUserId>[Enum.GetValues<JobPriority>().Length];
             for (var i = 0; i < xenoCandidates.Length; i++)
             {
@@ -521,52 +526,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         StartPlanetVote();
-
-        if (!_autoBalance)
-        {
-            //Just to make sure the planet gets reset
-            ResetSelectedPlanet();
-            return;
-        }
-
-        var rules = QueryAllRules();
-        while (rules.MoveNext(out var comp, out _))
-        {
-            var adjust = comp.Result switch
-            {
-                DistressSignalRuleResult.None => 0,
-                DistressSignalRuleResult.MajorMarineVictory => -1,
-                DistressSignalRuleResult.MinorMarineVictory => -1,
-                DistressSignalRuleResult.MajorXenoVictory => 1,
-                DistressSignalRuleResult.MinorXenoVictory => 0, // hijack but all xenos die
-                DistressSignalRuleResult.AllDied => 0,
-                _ => throw new ArgumentOutOfRangeException(),
-            };
-
-            if (adjust == 0)
-                continue;
-
-            var value = _defaultMarinesPerXeno;
-            if (SelectedPlanetMap != null &&
-                MarinesPerXeno.TryGetValue(SelectedPlanetMap, out var mapValue))
-            {
-                value = mapValue;
-            }
-
-            value += adjust * _autoBalanceStep;
-            if (value > _autoBalanceMax)
-                value = _autoBalanceMax;
-            else if (value < _autoBalanceMin)
-                value = _autoBalanceMin;
-
-            if (SelectedPlanetMap == null)
-                _config.SetCVar(RMCCVars.CMMarinesPerXeno, value);
-            else
-                MarinesPerXeno[SelectedPlanetMap] = value;
-
-            break;
-        }
-
         ResetSelectedPlanet();
     }
 
@@ -894,7 +853,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         if (!_mapLoader.TryLoad(mapId, planet, out var grids))
             return false;
 
-        EnsureComp<RMCPlanetComponent>(_mapManager.GetMapEntityId(mapId));
+        var map = _mapManager.GetMapEntityId(mapId);
+        EnsureComp<RMCPlanetComponent>(map);
+        EnsureComp<TacticalMapComponent>(map);
 
         if (grids.Count == 0)
             return false;
@@ -1254,7 +1215,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         if (!_config.GetCVar(RMCCVars.RMCPlanetMapVote))
             return;
 
-        var planets = MarinesPerXeno.Keys.ToList();
+        var planets = _planetMaps.Split(",").ToList();
         if (_lastPlanetMap != null)
             planets.Remove(_lastPlanetMap);
 

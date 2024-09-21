@@ -29,6 +29,9 @@
   whitelisted: true
   accessGroups:
   - MarineMain
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: sea
   special:
   - !type:AddComponentSpecial
     components:
