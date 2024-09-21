@@ -1,0 +1,61 @@
+# xeno n larva
+- type: emoteSounds
+  id: Xeno
+  params:
+    variation: 0.125
+  sounds:
+    Growl:
+      collection: XenoGrowl
+    Hiss:
+      collection: XenoHiss
+    XenoRoar:
+      collection: XenoRoar
+    XenoHelp:
+      collection: XenoHelp
+    XenoTailSwipe:
+      collection: XenoTailSwipe
+
+- type: emoteSounds
+  id: Larva
+  params:
+    variation: 0.125
+  sounds:
+    XenoRoar:
+      collection: LarvaRoar
+
+- type: soundCollection
+  id: XenoGrowl
+  files:
+  - /Audio/_RMC14/Xeno/alien_growl1.ogg
+  - /Audio/_RMC14/Xeno/alien_growl2.ogg
+  - /Audio/_RMC14/Xeno/alien_growl3.ogg
+
+- type: soundCollection
+  id: XenoHiss
+  files:
+  - /Audio/_RMC14/Xeno/alien_hiss1.ogg
+  - /Audio/_RMC14/Xeno/alien_hiss2.ogg
+  - /Audio/_RMC14/Xeno/alien_hiss3.ogg
+
+- type: soundCollection
+  id: XenoRoar
+  files:
+  - /Audio/_RMC14/Xeno/alien_roar1.ogg
+  - /Audio/_RMC14/Xeno/alien_roar2.ogg
+  - /Audio/_RMC14/Xeno/alien_roar3.ogg
+  - /Audio/_RMC14/Xeno/alien_roar4.ogg
+  - /Audio/_RMC14/Xeno/alien_roar5.ogg
+  - /Audio/_RMC14/Xeno/alien_roar6.ogg
+
+- type: soundCollection
+  id: LarvaRoar
+  files:
+  - /Audio/_RMC14/Xeno/alien_roar_larva1.ogg
+  - /Audio/_RMC14/Xeno/alien_roar_larva2.ogg
+
+- type: soundCollection
+  id: XenoHelp
+  files:
+  - /Audio/_RMC14/Xeno/alien_help1.ogg
+  - /Audio/_RMC14/Xeno/alien_help2.ogg
+  - /Audio/_RMC14/Xeno/alien_help3.ogg
