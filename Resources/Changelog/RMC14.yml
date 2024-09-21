@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added the ability for xenonids to devolve.
-    type: Add
-  - message: Fixed xenos taking twice as long to evolve than intended.
-    type: Fix
-  - message: Fixed drones not being able to evolve to Queen without enough points.
-      Evolution points are now ignored when evolving from Drone to Queen.
-    type: Fix
-  id: 211
-  time: '2024-06-30T11:31:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2670
 - author: vero5123
   changes:
   - message: adds a shockwave overlay effect.
@@ -4388,5 +4376,12 @@
   id: 710
   time: '2024-09-20T08:42:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4086
+- author: DrSmugleaf
+  changes:
+  - message: Fixed not being able to immediately melee with a gun after shooting it.
+    type: Fix
+  id: 711
+  time: '2024-09-20T20:38:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4087
 Name: RMC14
 Order: -1
