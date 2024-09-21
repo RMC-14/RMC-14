@@ -37,7 +37,7 @@ public sealed partial class HiveCoreComponent : Component
     public TimeSpan NextLesserDroneCooldown = TimeSpan.FromSeconds(125);
 
     [DataField]
-    public FixedPoint2 Heal = 100;
+    public FixedPoint2 Heal = -100;
 
     [DataField]
     public TimeSpan HealEvery = TimeSpan.FromSeconds(10);

@@ -12,6 +12,7 @@ using Content.Shared.Destructible;
 using Content.Shared.FixedPoint;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Mobs.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -19,9 +20,11 @@ namespace Content.Server._RMC14.Xenonids.Construction;
 
 public sealed class XenoHiveCoreSystem : SharedXenoHiveCoreSystem
 {
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly XenoEvolutionSystem _evolution = default!;
     [Dependency] private readonly GhostRoleSystem _ghostRole = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly RMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
@@ -121,6 +124,9 @@ public sealed class XenoHiveCoreSystem : SharedXenoHiveCoreSystem
     {
         base.Update(frameTime);
 
+        if (_net.IsClient)
+            return;
+
         // TODO RMC14 lesser drone job bans
         // TODO RMC14 30 second delay to grabbing the next lesser drone role
         // TODO RMC14 hive specific
@@ -136,7 +142,8 @@ public sealed class XenoHiveCoreSystem : SharedXenoHiveCoreSystem
                 time >= core.HealAt)
             {
                 core.HealAt = time + core.HealEvery;
-                _rmcDamageable.DistributeTypesTotal((uid, damageable), core.Heal);
+                var damage = _rmcDamageable.DistributeTypesTotal((uid, damageable), core.Heal);
+                _damageable.TryChangeDamage(uid, damage);
             }
         }
     }
