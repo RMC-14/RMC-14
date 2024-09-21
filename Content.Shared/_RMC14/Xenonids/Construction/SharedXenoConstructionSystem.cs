@@ -29,6 +29,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Xenonids.Construction;
@@ -47,6 +48,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -660,15 +662,27 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         if (choice != null &&
-            _prototype.TryIndex(choice, out var choiceProto) &&
-            choiceProto.TryGetComponent(out HiveConstructionUniqueComponent? unique, _compFactory) &&
-            OtherUniqueExists(unique.Id))
+            _prototype.TryIndex(choice, out var choiceProto))
         {
-            // server-only as the core may not be in the client's PVS bubble
-            if (_net.IsServer)
-                _popup.PopupEntity(Loc.GetString("cm-xeno-unique-exists", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
+            if (choiceProto.TryGetComponent(out HiveConstructionUniqueComponent? unique, _compFactory) &&
+                OtherUniqueExists(unique.Id))
+            {
+                // server-only as the core may not be in the client's PVS bubble
+                if (_net.IsServer)
+                    _popup.PopupEntity(Loc.GetString("cm-xeno-unique-exists", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
 
-            return false;
+                return false;
+            }
+
+            if (TryComp(xeno, out XenoComponent? xenoComp) &&
+                TryComp(xenoComp.Hive, out HiveComponent? hive) &&
+                hive.NewCoreAt > _timing.CurTime)
+            {
+                if (_net.IsServer)
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-cant-build-new-yet", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
+
+                return false;
+            }
         }
 
         return true;

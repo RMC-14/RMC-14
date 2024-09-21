@@ -10,6 +10,7 @@ cm-xeno-construction-plasma-left = A {$construction} construction is designated 
 cm-xeno-cant-reach-there = You can't reach there!
 cm-xeno-cant-build-in-self = You can't build structures that close!
 cm-xeno-unique-exists = There's already a {$choice} built!
+rmc-xeno-cant-build-new-yet = We can't build a new {$choice} yet!
 
 # Evolve
 cm-xeno-available-evolutions = Available Evolutions

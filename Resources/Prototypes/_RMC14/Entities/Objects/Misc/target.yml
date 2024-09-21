@@ -1,0 +1,102 @@
+- type: entity
+  name: human target
+  id: RMCTargetHuman
+  parent: BaseStructureDynamic
+  description: A shooting target. This one is a Human.
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Security/target.rsi
+    state: target_h
+    noRot: true
+  - type: Repairable
+  - type: DamagePopup
+    allowTypeChange: true
+    damagePopupType: Combined
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 200
+        mask:
+        - FullTileMask
+        layer:
+        - MobLayer
+  - type: InteractionOutline
+  - type: Physics
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 9999998
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 9999999
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 5
+            max: 5
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  name: xenonid target
+  id: RMCTargetXeno
+  parent: RMCTargetHuman
+  description: A shooting target. This one is a xenonid.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/target.rsi
+    state: target_q
+
+- type: entity
+  name: xenonid target
+  id: RMCTargetArmored
+  parent: RMCTargetHuman
+  description: A shooting target. This one is an armored human.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/target.rsi
+    state: target_a
+
+- type: entity
+  name: syndicate target
+  id: RMCTargetSyndicate
+  parent: RMCTargetHuman
+  description: A shooting target. This one is a syndicate agent.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Security/target.rsi
+    state: target_s
+
+- type: entity
+  name: clown target
+  id: RMCTargetClown
+  parent: RMCTargetHuman
+  description: A shooting target. This one is a clown.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Security/target.rsi
+    state: target_c
+
+- type: entity
+  name: felinid target
+  id: RMCTargetStrange
+  parent: RMCTargetHuman
+  description: A shooting target. You aren't quite sure what this one is, but it seems to be extra robust.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Security/target.rsi
+    state: target_f

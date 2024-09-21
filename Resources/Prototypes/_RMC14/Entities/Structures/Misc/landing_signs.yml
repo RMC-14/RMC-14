@@ -5,6 +5,10 @@
   name: sign
   description: A sign.
   components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
   - type: InteractionOutline
   - type: Sprite
     drawdepth: OverMobs
