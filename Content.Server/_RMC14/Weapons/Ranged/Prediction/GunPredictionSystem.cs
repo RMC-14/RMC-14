@@ -184,9 +184,7 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
             if (pos.Item1 >= sentTime)
                 break;
             else if (lowestCoordinate == default && pos.Item1 >= sentTime - pingTime)
-            {
                 lowestCoordinate = _transform.ToMapCoordinates(pos.Item2);
-            }
         }
 
         var otherMapCoordinates = otherCoordinates == default
