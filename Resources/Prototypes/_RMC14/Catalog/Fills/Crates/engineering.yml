@@ -45,14 +45,14 @@
     contents:
       - id: CMSheetGlass
 
-#- type: entity
-#  id: RMCCrateWoodenPlanks
-#  parent: RMCCrateConstruction
-#  name: wooden planks crate
-#  components:
-#  - type: StorageFill
-#    contents:
-  #   - id: CMMaterialWoodPlank # TODO RMC14 add wood material
+- type: entity
+  id: RMCCrateWoodenPlanks
+  parent: RMCCrateConstruction
+  name: wooden planks crate
+  components:
+  - type: StorageFill
+    contents:
+     - id: RMCPlankWood
 
 #- type: entity # TODO RMC14 add folding barricades
 #  id: RMCCrateFoldingBarricades
