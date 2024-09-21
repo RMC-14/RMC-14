@@ -1,0 +1,129 @@
+#Base
+- type: entity
+  parent: [ Clothing, ClothingSlotBase ]
+  id: RMCScabbardBase
+  name: base scabbard
+  description: -- insert description here --
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Scabbards/machete_h5.rsi
+    state: sheath
+  - type: Item
+    size: Large
+  - type: ItemSlots
+    slots:
+      item:
+        name: Machete
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        whitelist:
+          tags:
+          - Machete
+  - type: ItemMapper
+    mapLayers:
+      sheath-machete:
+        whitelist:
+          tags:
+          - Machete
+  - type: Tag
+    tags:
+    - Scabbard
+  - type: Appearance
+  - type: UsableWhileDevoured
+  - type: CMHolster
+  - type: CMItemSlots
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCScabbardBase
+  id: RMCScabbardMachete
+  name: H5 pattern M2132 machete scabbard
+  description: A large leather scabbard used to carry a M2132 machete. It can be strapped to the back or the waist.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Scabbards/machete_h5.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Back/Scabbards/machete_h5.rsi
+    quickEquip: false
+    slots:
+    - back
+    - belt
+
+- type: entity
+  parent: RMCScabbardMachete
+  id: RMCScabbardMacheteFilled
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - CMM2132Machete
+
+- type: entity
+  parent: RMCScabbardBase
+  id: RMCScabbardMacheteSG
+  name: ML66A harness machete scabbard
+  description: A scabbard that connects to the ML66A combat harness for carrying a M2132 machete.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Scabbards/machete_sg.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Back/Scabbards/machete_sg.rsi
+    quickEquip: false
+    slots:
+    - back
+  - type: ClothingIgnoreBlockBackpack
+  - type: ClothingRequireEquipped
+    whitelist:
+      components:
+      - SmartGun
+
+- type: entity
+  parent: RMCScabbardMacheteSG
+  id: RMCScabbardMacheteSGFilled
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - CMM2132Machete
+
+- type: entity
+  parent: RMCScabbardBase
+  id: RMCScabbardShotgun
+  name: L44 M42A2 shotgun scabbard
+  description: A large leather holster fitted for UNMC-issue shotguns. It has harnesses that allow it to be secured to the back for easy storage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Scabbards/shotgun.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Back/Scabbards/shotgun.rsi
+    quickEquip: false
+    slots:
+    - back
+  - type: ItemSlots
+    slots:
+      item:
+        name: Shotgun
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        whitelist:
+          tags:
+          - RMCWeaponShotgun
+  - type: ItemMapper
+    mapLayers:
+      sheath-shotgun:
+        whitelist:
+          tags:
+          - RMCWeaponShotgun

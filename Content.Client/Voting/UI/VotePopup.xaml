@@ -1,4 +1,4 @@
-﻿<Control xmlns="https://spacestation14.io" MinWidth="300" MaxWidth="500">
+﻿<Control xmlns="https://spacestation14.io" MinWidth="300" MaxWidth="600">
     <PanelContainer StyleClasses="AngleRect" />
     <BoxContainer Margin="4" Orientation="Vertical">
         <Label Name="VoteCaller" />

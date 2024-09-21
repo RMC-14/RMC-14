@@ -7,6 +7,13 @@
     damage:
       types:
         Piercing: 34
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 4
+      falloff: 6
   - type: CMArmorPiercing
     amount: 5
 

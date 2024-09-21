@@ -89,5 +89,11 @@
       components:
       - XenoParasite
       - XenoEgg
+  - type: RMCSize
+    size: Big
 #  - type: RMCXenoDamageVisuals # TODO RMC14
 #    prefix: carrier
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: carrier

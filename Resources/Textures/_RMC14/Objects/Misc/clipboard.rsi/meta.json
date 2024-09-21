@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9ab207cd7ffba86a0411d7058645fb8f2a7895f3/icons/obj/items/paper.dmi, clipboard_paper modified by KalimbaMachine (Github) from cmss13 paper.dmi, inhand sprites modified by KalimbaMachine (Github) from nmajask (Github) for SS14's inhand sprites, equipped-BELT Made by KalimbaMachine (Github), clipboard_pen made by KalimbaMachine (Github)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "clipboard"
+    },
+    {
+      "name": "clipboard_over"
+    },
+    {
+      "name": "clipboard_paper"
+    },
+    {
+      "name": "clipboard_pen"
+    },
+    {
+      "name": "equipped-BELT",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
+}

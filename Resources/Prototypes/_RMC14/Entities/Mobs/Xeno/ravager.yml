@@ -81,5 +81,11 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
+  - type: RMCSize
+    size: Big
 #  - type: RMCXenoDamageVisuals # TODO RMC14
 #    prefix: ravager
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: ravager

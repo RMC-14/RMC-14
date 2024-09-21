@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Storage;
+using Content.Shared._RMC14.Storage;
 using Content.Shared.Storage;
 using Robust.Client.GameObjects;
 
@@ -26,7 +26,14 @@ public sealed class CMStorageVisualizerSystem : VisualizerSystem<CMStorageVisual
                 args.Sprite.LayerSetVisible(component.StorageOpen, false);
             if (component.StorageClosed != null)
                 args.Sprite.LayerSetVisible(component.StorageClosed, false);
+            if (component.StorageEmpty != null)
+                args.Sprite.LayerSetVisible(component.StorageEmpty, true);
             return;
+        }
+        else
+        {
+            if (component.StorageEmpty != null)
+                args.Sprite.LayerSetVisible(component.StorageEmpty, false);
         }
 
         // Open or closed

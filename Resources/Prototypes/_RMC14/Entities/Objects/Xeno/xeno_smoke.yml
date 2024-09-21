@@ -14,9 +14,9 @@
           !type:PhysShapeAabb
           bounds: "-0.4,-0.4,0.4,0.4"
         mask:
-        - ItemMask
+        - MobMask
         layer:
-        - SlipLayer
+        - MobLayer
   - type: Occluder
   - type: Sprite
     sprite: _RMC14/Effects/smoke.rsi
@@ -45,6 +45,10 @@
     barricadeDamage:
       types:
         Heat: 11.5
+    whitelist:
+      components:
+      - Marine
+  - type: DeleteOnExplosion # so this is supposed to be random depending on the explosion severity but uhhh hahAHAHA help
 
 - type: entity
   id: RMCSmokeNeurotoxin
@@ -62,9 +66,9 @@
           !type:PhysShapeAabb
           bounds: "-0.4,-0.4,0.4,0.4"
         mask:
-        - ItemMask
+        - MobMask
         layer:
-        - SlipLayer
+        - MobLayer
   - type: Occluder
   - type: Sprite
     sprite: _RMC14/Effects/smoke.rsi
@@ -101,7 +105,10 @@
     damage:
       types:
         Asphyxiation: 5
-    barricadeDamage: {} # This is required...
+    whitelist:
+      components:
+      - Marine
+  - type: DeleteOnExplosion
 
 - type: entity
   parent: RMCSmokeAcid

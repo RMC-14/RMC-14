@@ -77,5 +77,11 @@
         density: 185
         layer:
         - BulletImpassable
+  - type: RMCSize
+    size: Big
 #  - type: RMCXenoDamageVisuals # TODO RMC14
 #    prefix: praetorian
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: praetorian

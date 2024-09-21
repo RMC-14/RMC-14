@@ -1,11 +1,14 @@
 ﻿- type: entity
-  parent: Whistle
+  parent: BaseItem
   id: RMCWhistle
   name: whistle
   description: A metal pea-whistle. Can be blown while held, or worn in the mouth
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/whistle.rsi
+    state: whistle
+  - type: Item
+    size: Tiny
   - type: Clothing
     slots:
       - mask
@@ -13,7 +16,11 @@
   - type: EmitSoundOnUse
     sound:
       collection: TrenchWhistle
+  - type: EmitSoundOnAction
+    sound:
+      collection: TrenchWhistle
   - type: UseDelay
     delay: 10
   - type: Whistle
     distance: 15 # Let your enemies hear the sound of death approaching
+  - type: RMCWhistle
