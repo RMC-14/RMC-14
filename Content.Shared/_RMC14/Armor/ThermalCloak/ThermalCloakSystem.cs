@@ -139,7 +139,9 @@ public sealed class ThermalCloakSystem : EntitySystem
 
             var popupOthers = Loc.GetString("rmc-cloak-activate-others", ("user", user));
             _popup.PopupPredicted(Loc.GetString("rmc-cloak-activate-self"), popupOthers, user, user, PopupType.Medium);
-            _audio.PlayPvs(ent.Comp.CloakSound, user);
+
+            if (_net.IsServer)
+                _audio.PlayPvs(ent.Comp.CloakSound, user);
 
             return;
         }
@@ -185,20 +187,22 @@ public sealed class ThermalCloakSystem : EntitySystem
                 SpawnAttachedTo(ent.Comp.UncloakEffect, user.ToCoordinates());
 
             if (ent.Comp.HideNightVision)
-               EnsureComp<RMCNightVisionVisibleComponent>(user);
+                EnsureComp<RMCNightVisionVisibleComponent>(user);
 
             if (ent.Comp.BlockFriendlyFire)
                 RemCompDeferred<EntityIFFComponent>(user);
 
             RemCompDeferred<EntityActiveInvisibleComponent>(user);
-            _audio.PlayPvs(ent.Comp.UncloakSound, user);
+
+            if (_net.IsServer)
+                _audio.PlayPvs(ent.Comp.UncloakSound, user);
         }
     }
 
     public void TrySetInvisibility(EntityUid uid, bool enabling, bool forced, ThermalCloakComponent? component = null)
     {
         var cloak = FindWornCloak(uid);
-        if(cloak.HasValue)
+        if (cloak.HasValue)
             SetInvisibility(cloak.Value, uid, false, true);
     }
 
