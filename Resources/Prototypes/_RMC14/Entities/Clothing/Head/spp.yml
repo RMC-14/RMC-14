@@ -14,7 +14,7 @@
   parent: CMArmorHelmetM10Tech
   id: ArmorHelmetSPPEngineer
   name: SPP UM4-V helmet
-  description: This version of the UM4 helmet has a ballistic-glass visor, allowing for the UPP Engineers to safely weld, but by some reports hindering sight in the process.
+  description: This version of the UM4 helmet has a ballistic-glass visor, allowing for the SPP Engineers to safely weld, but by some reports hindering sight in the process.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/SPP/engi.rsi
@@ -25,7 +25,7 @@
   parent: ArmorHelmetSPP
   id: ArmorHelmetSPPHeavy
   name: SPP UH7 helmet
-  description: Like the UM4, this helmet is very resistant to ballistic damage, but both its flaws and benefits have been doubled. The few UPP Zhergeants that have lived past age 30 have all needed to retire from terminal neck problems caused from the stress of wearing this helmet.
+  description: Like the UM4, this helmet is very resistant to ballistic damage, but both its flaws and benefits have been doubled. The few SPP Zhergeants that have lived past age 30 have all needed to retire from terminal neck problems caused from the stress of wearing this helmet.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/SPP/heavy.rsi
