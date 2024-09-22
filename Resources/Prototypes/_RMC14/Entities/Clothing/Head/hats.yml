@@ -219,7 +219,7 @@
   parent: CMHeadCap
   id: CMHeadCapOfficer
   name: officer cap
-  description: A hat usually worn by officers in the USCM. While it provides no protection, some officers wear it in the field to make themselves more recognisable.
+  description: A hat usually worn by officers in the UNMC. While it provides no protection, some officers wear it in the field to make themselves more recognisable.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer.rsi

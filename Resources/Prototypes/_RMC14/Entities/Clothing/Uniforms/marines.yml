@@ -171,7 +171,7 @@
   parent: JumpsuitMarine
   id: CMJumpsuitXOFormal
   name: marine formal service uniform
-  description: A formal service uniform typically worn by marines of the USCM. Still practicable while still being more formal than the standard service uniform.
+  description: A formal service uniform typically worn by marines of the UNMC. Still practicable while still being more formal than the standard service uniform.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/formal_service.rsi

@@ -36,7 +36,7 @@
   parent: ArmorHelmetPMC
   id: ArmorHelmetPMCGunner
   name: PMC gun operator helmet
-  description: A modification of the standard Armat Systems M3 armor.
+  description: A modification of the standard M3 armor.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/PMC/heavy.rsi
@@ -81,7 +81,7 @@
   parent: ArmorHelmetPMC
   id: ArmorHelmetPMCRiot
   name: RC6 helmet
-  description: The standard UA Riot Control 6 helmet is of odd design, lacking a face shield by default (mounting points are available). The distinct white pattern and red emblem are synonymous with oppression throughout the rim.
+  description: The standard UN Riot Control 6 helmet is of odd design, lacking a face shield by default (mounting points are available). The distinct white pattern and red emblem are synonymous with oppression throughout the rim.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/PMC/riot.rsi

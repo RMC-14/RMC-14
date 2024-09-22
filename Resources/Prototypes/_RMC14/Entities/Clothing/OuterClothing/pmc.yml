@@ -3,7 +3,7 @@
   parent: CMArmorM3Medium
   id: RMCArmorM4PMC
   name: M4 pattern PMC armor
-  description: A modification of the standard Armat Systems M3 armor. Designed for high-profile security operators and corporate mercenaries in mind.
+  description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/pmc.rsi
@@ -71,7 +71,7 @@
   parent: RMCArmorM4PMC
   id: RMCArmorM4PMCLight
   name: M4 pattern light PMC armor
-  description: A modification of the standard Armat Systems M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. Has some armor plating removed for extra mobility.
+  description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. Has some armor plating removed for extra mobility.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/sniper.rsi
@@ -110,7 +110,7 @@
   parent: RMCArmorM4PMC
   id: RMCArmorM4PMCLeader
   name: M4 pattern PMC leader armor
-  description: A modification of the standard Armat Systems M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. This particular suit looks like it belongs to a high-ranking officer.
+  description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. This particular suit looks like it belongs to a high-ranking officer.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/officer.rsi
@@ -119,7 +119,7 @@
   parent: RMCArmorM4PMC
   id: RMCArmorM4PMCSniper
   name: M4 pattern PMC sniper armor
-  description: A modification of the standard Armat Systems M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. This particular suit looks like it belongs to a high-ranking officer.
+  description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. This particular suit looks like it belongs to a high-ranking officer.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/sniper.rsi
@@ -128,7 +128,7 @@
   parent: RMCArmorM4PMCLight
   id: RMCArmorM4PMCSynth
   name: M4 pattern PMC synthetic armor
-  description: A serious modification of the standard Armat Systems M3 armor. This variant was designed for PMC Support Units in the field, with every armor insert removed. It's designed with the idea of a high speed lifesaver in mind.
+  description: A serious modification of the standard M3 armor. This variant was designed for PMC Support Units in the field, with every armor insert removed. It's designed with the idea of a high speed lifesaver in mind.
   components:
   - type: Clothing
     equipDelay: 1
@@ -146,7 +146,7 @@
   parent: CMArmorSmartGunCombatHarness
   id: RMCArmorM4PMCSmartGunHarness
   name: PMC gun operator armor
-  description: A modification of the standard Armat Systems M3 armor. Hooked up with harnesses and straps allowing the user to carry a ML66A Smart Gun.
+  description: A modification of the standard M3 armor. Hooked up with harnesses and straps allowing the user to carry a ML66A Smart Gun.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/heavy.rsi
