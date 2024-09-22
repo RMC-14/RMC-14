@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: JoeHammad
-  changes:
-  - message: fixed M4SPR box name
-    type: Tweak
-  id: 233
-  time: '2024-07-02T06:09:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2739
 - author: Mattshark89
   changes:
   - message: Lesser Drone playtime now counts as drone caste playtime. For the Queen
@@ -4420,5 +4413,15 @@
   id: 732
   time: '2024-09-21T21:50:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4115
+- author: DrSmugleaf
+  changes:
+  - message: Fixed a visual bug that made it look like the requisitions elevator and
+      boiler gas blocked bullets for the shooter.
+    type: Fix
+  - message: Fixed xenonids being able to throw parasites.
+    type: Fix
+  id: 733
+  time: '2024-09-21T23:36:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4116
 Name: RMC14
 Order: -1
