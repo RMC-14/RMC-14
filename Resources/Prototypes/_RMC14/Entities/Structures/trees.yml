@@ -1,7 +1,6 @@
 - type: entity
   id: RMCBaseTree
   description: Yep, it's a tree.
-  abstract: true
   components:
   - type: SpriteFade
   - type: Clickable
@@ -54,7 +53,6 @@
 - type: entity
   parent: RMCBaseTree
   id: RMCBaseTreeSnow
-  abstract: true
   components:
   - type: Sprite
     sprite: Objects/Decoration/Flora/flora_treessnow.rsi
@@ -72,7 +70,6 @@
 - type: entity
   parent: RMCBaseTree
   id: RMCBaseTreeLarge
-  abstract: true
   components:
   - type: Sprite
     sprite: Objects/Decoration/Flora/flora_treeslarge.rsi
@@ -90,7 +87,6 @@
 - type: entity
   parent: RMCBaseTree
   id: RMCBaseTreeConifer
-  abstract: true
   components:
   - type: Sprite
     sprite: Objects/Decoration/Flora/flora_treesconifer.rsi
