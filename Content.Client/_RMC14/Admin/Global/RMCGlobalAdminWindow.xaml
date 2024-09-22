@@ -2,6 +2,8 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Admin.Global"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    xmlns:tacticalMap="clr-namespace:Content.Client._RMC14.TacticalMap"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     MinSize="600 500"
     Title="RMC Admin UI">
     <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
@@ -22,6 +24,18 @@
             <BoxContainer Name="XenosTab" Access="Public" Orientation="Vertical">
                 <BoxContainer Name="XenoTiers" Access="Public" Orientation="Vertical" />
                 <Label Name="XenosLabel" Access="Public" />
+            </BoxContainer>
+            <BoxContainer Name="TacticalMapTab" Access="Public" Orientation="Vertical"
+                          HorizontalExpand="True" VerticalExpand="True">
+                <ScrollContainer HScrollEnabled="False" VScrollEnabled="True" MinHeight="100">
+                    <BoxContainer Name="TacticalMapHistory" Access="Public"
+                                  Orientation="Vertical" />
+                </ScrollContainer>
+                <ui:BlueHorizontalSeparator />
+                <Label Name="TacticalMapLabel" Access="Public" />
+                <ui:BlueHorizontalSeparator />
+                <tacticalMap:TacticalMapControl Name="TacticalMap" Access="Public"
+                                                Stretch="Keep" TextureScale="3 3" />
             </BoxContainer>
         </TabContainer>
         <Button Name="RefreshButton" Access="Public" Text="Refresh" HorizontalExpand="True" />

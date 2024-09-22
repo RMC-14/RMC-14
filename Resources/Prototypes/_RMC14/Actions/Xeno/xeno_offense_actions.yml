@@ -127,7 +127,7 @@
   id: ActionXenoHeadbutt
   parent: ActionXenoBase
   name: Headbutt (10) # TODO RMC14 proper plasma costs
-  description: Charge in a direction and push back any enemies in your way.
+  description: Charge towards the targeted enemy and push back the first enemy hit.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -157,7 +157,7 @@
   id: ActionXenoSlowingSpit
   parent: ActionXenoBase
   name: Slowing Spit (20) # TODO RMC14 proper plasma costs
-  description: Launches a projectile that will slow the first enemy that it hits, and paralyze them if they have no armor.
+  description: Launches a damageless projectile that will slow the first enemy that it hits, and paralyze them if they have no armor.
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -173,7 +173,7 @@
   id: ActionXenoScatteredSpit
   parent: ActionXenoBase
   name: Scattered Spit (20) # TODO RMC14 proper plasma costs
-  description: Launches multiple projectiles that will briefly paralyze any enemies they hit.
+  description: Launches multiple damageless projectiles that will briefly paralyze any enemies they hit.
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -205,7 +205,7 @@
   id: ActionXenoChargeSpit
   parent: ActionXenoBase
   name: Charge Spit (50) # TODO RMC14 proper plasma costs
-  description: Charges up your next spit, making it deal more damage but have less range.
+  description: Charges up your next spit, making it deal more damage and coat the enemy in acid, but have less range. Increases your movement speed until the ability expires.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -219,7 +219,7 @@
   parent: ActionXenoBase
   id: ActionXenoSprayAcid
   name: Spray Acid (40)
-  description: Sprays acid along the ground in a line, covering tiles with it. [color=red]Will deal extra damage to barricades and anyone recently hit by a charged spit![/color]
+  description: Sprays acid along the ground in a line, covering tiles with it. [color=red]Will coat barricades in acid and significantly strengthen acid inflicted from Charge Spit![/color]
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -287,7 +287,7 @@
   id: ActionXenoPunch
   parent: ActionXenoBase
   name: Punch
-  description: Punches the targeted marine dealing a hefty amount of damage as well as slowing the target.
+  description: Punches the targeted enemy to deal a hefty amount of damage, slowing them and pushing them away.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -304,7 +304,7 @@
   id: ActionXenoFling
   parent: ActionXenoBase
   name: Fling
-  description: Flings the targeted marine a few tiles and damages them.
+  description: Flings the targeted enemy a few tiles, knocking them down and damaging them.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -321,7 +321,7 @@
   id: ActionXenoLunge
   parent: ActionXenoBase
   name: Lunge
-  description: Lunges the warrior towards the targeted marine and grabs them.
+  description: Lunges towards the targeted enemy and grabs the first enemy hit.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -366,7 +366,7 @@
   id: ActionXenoStomp
   parent: ActionXenoBase
   name: Stomp (30)
-  description: Slam the ground with a 5x5 AOE slow down that affects all hostiles in range.
+  description: Slam the ground with a 5x5 AOE, slowing down and disarming all enemies in range. Deals heavy damage to targets you are on top of.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -380,7 +380,7 @@
   id: ActionXenoCharge
   parent: ActionXenoBase
   name: Charge (20)
-  description: Click on a tile you want to charge at, after a brief non cancel-able windup time.
+  description: Click on a tile you want to charge at, after a brief non cancel-able windup time. [color=green]Cooldown is partially refunded upon attacking an enemy, scaling with the amount of enemies you cleave with your passive.[/color]
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -396,7 +396,7 @@
   parent: ActionXenoBase
   id: ActionXenoBombard
   name: Bombard (200)
-  description: Fire either an acidic glob after a delay. # TODO RMC14 or neurotoxic glob
+  description: Fire either an acidic or neurotoxic glob after a delay.
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -436,7 +436,7 @@
   parent: ActionXenoBase
   id: ActionXenoAcidShroud
   name: Acid Shroud
-  description: Create a small cloud of acid around you to cloak yourself. This will disable your other abilities for a short time to allow you to escape.
+  description: Create a small cloud of acidic or neurotoxic gas around you to cloak yourself. This will disable your other abilities for a short time to allow you to escape.
   components:
   - type: InstantAction
     itemIconStyle: NoItem

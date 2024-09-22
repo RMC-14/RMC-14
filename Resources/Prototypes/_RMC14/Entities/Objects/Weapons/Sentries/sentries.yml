@@ -26,9 +26,11 @@
           bounds: "-0.49,-0.49,0.49,0.49"
         density: 20
         layer:
-        - Impassable
+        - MidImpassable
+        - BulletImpassable
         mask:
-        - Impassable
+        - MidImpassable
+        - BulletImpassable
         hard: false
   - type: CollisionWake
     enabled: false
@@ -117,6 +119,9 @@
       components:
       - Xeno
   - type: RMCRepairable
+  - type: RMCNameItemOnVend
+    item: Sentry
+  - type: RequireProjectileTarget
 
 - type: htnCompound
   id: RMCSentryCompound
@@ -332,3 +337,63 @@
   - type: Sentry
     upgrades: null
     maxDeviation: 180
+
+- type: entity
+  parent: RMCSentry
+  id: RMCSentryShotgun
+  name: UN 12-G Shotgun Sentry
+  description: A deployable, semi-automated turret with specialized for close range combat. Protects itself with sturdier plating and steel tusks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - map: [ "base" ]
+      state: defense_base_off
+    - map: [ "sentry" ]
+      state: shotgun_uac_sentry_handheld
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    state: shotgun_uac_sentry_handheld
+  - type: Gun
+    fireRate: 0.4
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 250
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SentryLayers.Layer:
+        base:
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off, visible: true }
+          On: { state: defense_base, visible: true }
+        sentry:
+          Item: { state: shotgun_uac_sentry_handheld }
+          Off: { state: shotgun_uac_sentry_noammo }
+          On: { state: shotgun_uac_sentry_on }
+  - type: SentrySpikes
+    spikeDamage:
+      types:
+        Piercing: 20
+    animationState: shotgun_uac_sentry_on
+    animationTime: 1.4
+  - type: HTN
+    blackboard:
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Effects/double_beep.ogg
+      VisionRadius: !type:Single
+        3.0
+  - type: Sentry
+    upgrades: null
+    startingMagazine: RMCMagazineSentryShotgun
+    magazineTag: RMCMagazineSentryShotgun

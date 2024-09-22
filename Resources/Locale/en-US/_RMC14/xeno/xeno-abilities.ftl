@@ -10,6 +10,7 @@ cm-xeno-construction-plasma-left = A {$construction} construction is designated 
 cm-xeno-cant-reach-there = You can't reach there!
 cm-xeno-cant-build-in-self = You can't build structures that close!
 cm-xeno-unique-exists = There's already a {$choice} built!
+rmc-xeno-cant-build-new-yet = We can't build a new {$choice} yet!
 
 # Evolve
 cm-xeno-available-evolutions = Available Evolutions
@@ -59,7 +60,7 @@ rmc-xeno-pheromones-help =
     Pheromones provide a buff to all Xenos in range at the cost of some stored plasma every second, as follows:
 
     Frenzy (Red) - Increased run speed, damage and chance to knock off headhunter masks.
-    
+
     Warding (Green) - While in critical state, increased maximum negative health and slower off weed bleedout.
 
     Recovery (Blue) - Increased plasma and health regeneration.

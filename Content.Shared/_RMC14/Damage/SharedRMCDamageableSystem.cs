@@ -234,6 +234,21 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         return equal ?? new DamageSpecifier();
     }
 
+    public DamageSpecifier DistributeTypesTotal(Entity<DamageableComponent?> damageable, FixedPoint2 amount, DamageSpecifier? equal = null)
+    {
+        foreach (var group in _prototypes.EnumeratePrototypes<DamageGroupPrototype>())
+        {
+            var total = equal?.GetTotal() ?? FixedPoint2.Zero;
+            var left = amount - total;
+            if (left <= FixedPoint2.Zero)
+                break;
+
+            equal = DistributeHealing(damageable, group.ID, left, equal);
+        }
+
+        return equal ?? new DamageSpecifier();
+    }
+
     protected virtual void DoEmote(EntityUid ent, ProtoId<EmotePrototype> emote)
     {
     }

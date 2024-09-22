@@ -1059,6 +1059,11 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("character varying(20)")
                         .HasColumnName("primary_gun_name");
 
+                    b.Property<string>("SentryName")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("sentry_name");
+
                     b.Property<string>("SidearmName")
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)")

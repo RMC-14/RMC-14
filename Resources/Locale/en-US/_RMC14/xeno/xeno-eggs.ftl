@@ -14,5 +14,9 @@ rmc-xeno-egg-return-user = We place the child back into the egg.
 rmc-xeno-egg-return-self = {CAPITALIZE($parasite)} crawls back into the egg.
 rmc-xeno-egg-return = {CAPITALIZE($user)} slides {$parasite} back into the egg.
 
+rmc-xeno-egg-ghost-verb = Become parasite
+rmc-xeno-egg-ghost-need-time = You ghosted too recently. You cannot become a parasite until 3 minutes have passed.
+rmc-xeno-egg-ghost-confirm = Are you sure you want to become a parasite?
+
 rmc-xeno-egg-throw-xeno = Throwing the egg would break it!
 rmc-xeno-egg-throw = That's a bad idea.

@@ -3,6 +3,9 @@
   id: CMXenoBoiler
   name: cm-job-name-xeno-boiler
   playTimeTracker: CMJobXenoBoiler
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: boiler
 
 - type: playTimeTracker
   id: CMJobXenoBoiler

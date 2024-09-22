@@ -71,7 +71,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         SubscribeLocalEvent<XenoParasiteComponent, CanDragEvent>(OnParasiteCanDrag);
         SubscribeLocalEvent<XenoParasiteComponent, CanDropDraggedEvent>(OnParasiteCanDropDragged);
         SubscribeLocalEvent<XenoParasiteComponent, DragDropDraggedEvent>(OnParasiteDragDropDragged);
-        SubscribeLocalEvent<XenoParasiteComponent, ThrowItemAttemptEvent>(OnParasiteTryThrow);
+        SubscribeLocalEvent<XenoParasiteComponent, ThrowItemAttemptEvent>(OnParasiteThrowAttempt);
         SubscribeLocalEvent<XenoParasiteComponent, PullAttemptEvent>(OnParasiteTryPull);
         SubscribeLocalEvent<XenoParasiteComponent, GettingPickedUpAttemptEvent>(OnParasiteTryPickup);
 
@@ -188,32 +188,39 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnParasiteTryThrow(Entity<XenoParasiteComponent> ent, ref ThrowItemAttemptEvent args)
+    private void OnParasiteThrowAttempt(Entity<XenoParasiteComponent> ent, ref ThrowItemAttemptEvent args)
     {
-        //Only checked on the action so parasite thrower should still work
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-parasite-nothrow", ("parasite", ent)), args.User, args.User, PopupType.SmallCaution);
+        if (args.Cancelled)
+            return;
+
         args.Cancelled = true;
+
+        if (_net.IsClient)
+            return;
+
+        var user = args.User;
+        _popup.PopupEntity(Loc.GetString("rmc-xeno-cant-throw", ("target", ent)), user, user, PopupType.SmallCaution);
     }
 
-    private void OnParasiteTryPull(Entity<XenoParasiteComponent> ent, ref PullAttemptEvent args)
-    {
-        if (HasComp<ParasiteAIComponent>(ent) && !HasComp<InfectableComponent>(args.PullerUid))
-        {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-parasite-nonplayer-pull", ("parasite", ent)), ent, args.PullerUid, PopupType.SmallCaution);
-            args.Cancelled = true;
-        }
-    }
+	private void OnParasiteTryPull(Entity<XenoParasiteComponent> ent, ref PullAttemptEvent args)
+	{
+		if (HasComp<ParasiteAIComponent>(ent) && !HasComp<InfectableComponent>(args.PullerUid))
+		{
+			_popup.PopupClient(Loc.GetString("rmc-xeno-parasite-nonplayer-pull", ("parasite", ent)), ent, args.PullerUid, PopupType.SmallCaution);
+			args.Cancelled = true;
+		}
+	}
 
-    private void OnParasiteTryPickup(Entity<XenoParasiteComponent> ent, ref GettingPickedUpAttemptEvent args)
-    {
-        if (!HasComp<ParasiteAIComponent>(ent))
-        {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-parasite-player-pickup", ("parasite", ent)), ent, args.User, PopupType.SmallCaution);
-            args.Cancel();
-        }
-    }
+	private void OnParasiteTryPickup(Entity<XenoParasiteComponent> ent, ref GettingPickedUpAttemptEvent args)
+	{
+		if (!HasComp<ParasiteAIComponent>(ent))
+		{
+			_popup.PopupClient(Loc.GetString("rmc-xeno-parasite-player-pickup", ("parasite", ent)), ent, args.User, PopupType.SmallCaution);
+			args.Cancel();
+		}
+	}
 
-    protected virtual void ParasiteLeapHit(Entity<XenoParasiteComponent> parasite)
+	protected virtual void ParasiteLeapHit(Entity<XenoParasiteComponent> parasite)
     {
     }
 

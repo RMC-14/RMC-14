@@ -5,17 +5,16 @@
   whitelist:
     components:
     - Vocal
+    - Xeno
   blacklist:
     components:
     - BorgChassis
   available: false
-  icon: Interface/Actions/scream.png
+  icon: _RMC14/Actions/xeno_emotes.rsi/hiss.png
   chatMessages: ["rmc-emote-hiss"]
   chatTriggers:
     - hiss
     - hisses
-    - hisses.
-    - hisses!
     - hissing
     - hissed
 
@@ -35,18 +34,12 @@
   chatTriggers:
     - meow
     - meows
-    - meows.
-    - meows!
     - meowing
     - meowed
     - miau
     - miaus
-    - miaus.
-    - miaus!
     - nya
     - nyas
-    - nyas.
-    - nyas!
 
 - type: emote
   id: Mew
@@ -64,8 +57,6 @@
   chatTriggers:
     - mew
     - mews
-    - mews.
-    - mews!
     - mewing
     - mewed
 
@@ -76,17 +67,16 @@
   whitelist:
     components:
     - Vocal
+    - Xeno
   blacklist:
     components:
     - BorgChassis
   available: false
-  icon: Interface/Actions/scream.png
+  icon: _RMC14/Actions/xeno_emotes.rsi/growl.png
   chatMessages: ["rmc-emote-growl"]
   chatTriggers:
     - growl
     - growls
-    - growls.
-    - growls!
     - growling
     - growled
 
@@ -106,7 +96,5 @@
   chatTriggers:
     - purr
     - purrs
-    - purrs.
-    - purrs!
     - purring
     - purred
