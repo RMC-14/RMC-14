@@ -453,9 +453,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             return;
         }
 
-        // Mark as harvested to display correct pop-up later
-        fruit.Comp.IsHarvested = true;
-
         if (HasComp<XenoComponent>(args.User))
             _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-harvest-success-xeno", ("fruit", fruit)), args.User, args.User);
         else
@@ -483,13 +480,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         if (fruit.Comp.State == XenoFruitState.Growing)
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-pick-failed-not-mature", ("fruit", fruit)), user, user, PopupType.SmallCaution);
-            return false;
-        }
-
-        // Check if fruit is already being consumed by anyone
-        if (fruit.Comp.IsPicked)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-pick-failed-already", ("fruit", fruit)), user, user, PopupType.SmallCaution);
             return false;
         }
 
@@ -528,8 +518,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             _popup.PopupPredicted(popupSelf, popupOthers, user, user);
             return false;
         }
-
-        fruit.Comp.IsPicked = true;
 
         popupSelf = Loc.GetString("rmc-xeno-fruit-eat-start-self", ("fruit", fruit));
         popupOthers = Loc.GetString("rmc-xeno-fruit-eat-start-others", ("fruit", fruit), ("xeno", user));
@@ -590,8 +578,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             return false;
         }
 
-        fruit.Comp.IsPicked = true;
-
         popupSelf = Loc.GetString("rmc-xeno-fruit-feed-start-self", ("target", target), ("fruit", fruit));
         popupTarget = Loc.GetString("rmc-xeno-fruit-feed-start-target", ("user", user), ("fruit", fruit));
         popupOthers = Loc.GetString("rmc-xeno-fruit-feed-start-others", ("user", user), ("target", target), ("fruit", fruit));
@@ -604,10 +590,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     private void OnXenoFruitConsumeDoAfter(Entity<XenoFruitComponent> fruit, ref XenoFruitConsumeDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
-        {
-            fruit.Comp.IsPicked = false;
             return;
-        }
 
         args.Handled = true;
 

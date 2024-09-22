@@ -42,14 +42,6 @@ public sealed partial class XenoFruitComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? Planter;
 
-    // Is this fruit being harvested by any xeno?
-    [DataField, AutoNetworkedField]
-    public bool IsHarvested = false;
-
-    // Is this fruit being consumed by any xeno?
-    [DataField, AutoNetworkedField]
-    public bool IsPicked = false;
-
     // Fruit harvest do-after delay
     [DataField, AutoNetworkedField]
     public TimeSpan HarvestDelay = TimeSpan.FromSeconds(1.5f);
