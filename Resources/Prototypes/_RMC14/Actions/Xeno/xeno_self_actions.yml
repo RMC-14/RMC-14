@@ -182,7 +182,7 @@
   id: ActionXenoRetrieveEgg
   parent: ActionXenoBase
   name: Retrieve Egg
-  description: Retrieves an egg from your storage
+  description: Retrieves an egg from your storage.
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -198,6 +198,7 @@
   id: ActionXenoThrowParasite
   parent: ActionXenoBase
   name: Throw Parasite
+  description: Throw Parasite.
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem

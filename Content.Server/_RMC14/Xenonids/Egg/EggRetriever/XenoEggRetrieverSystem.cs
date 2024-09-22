@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared.Actions;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -18,6 +19,7 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly MetaDataSystem _meta = default!;
 
 
     public override void Initialize()
@@ -67,6 +69,8 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
             {
                 var stashMsg = Loc.GetString("cm-xeno-retrieve-egg-stash-egg", ("cur_eggs", comp.CurEggs), ("max_eggs", comp.MaxEggs));
                 _popup.PopupEntity(stashMsg, ent, ent);
+
+                _meta.SetEntityDescription(args.Action, Loc.GetString("cm-xeno-retrieve-egg-description", ("cur_eggs", comp.CurEggs), ("max_eggs", comp.MaxEggs)));
                 return;
             }
         }
@@ -85,6 +89,8 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
 
         var unstashMsg = Loc.GetString("cm-xeno-retrieve-egg-unstash-egg", ("cur_eggs", comp.CurEggs), ("max_eggs", comp.MaxEggs));
         _popup.PopupEntity(unstashMsg, ent, ent);
+
+        _meta.SetEntityDescription(args.Action, Loc.GetString("cm-xeno-retrieve-egg-description", ("cur_eggs", comp.CurEggs), ("max_eggs", comp.MaxEggs)));
     }
 
     private void OnXenoRetrieverUseInHand(Entity<XenoEggRetrieverComponent> eggRetriever, ref XenoEggUseInHandEvent args)
@@ -106,6 +112,25 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
 
         var msg = Loc.GetString("cm-xeno-retrieve-egg-stash-egg", ("cur_eggs", comp.CurEggs), ("max_eggs", comp.MaxEggs));
         _popup.PopupEntity(msg, ent, ent);
+
+        if (TryComp(ent, out ActionsContainerComponent? actContainer))
+        {
+            var actions = actContainer.Container.ContainedEntities;
+
+            foreach (var action in actions)
+            {
+                if (!TryComp(action, out WorldTargetActionComponent? worldActComp))
+                {
+                    continue;
+                }
+                if (worldActComp.Event is XenoRetrieveEggActionEvent)
+                {
+                    _meta.SetEntityDescription(action, Loc.GetString("cm-xeno-retrieve-egg-description", ("cur_eggs", comp.CurEggs), ("max_eggs", comp.MaxEggs)));
+                    break;
+                }
+            }
+        }
+
         args.Handled = true;
     }
 

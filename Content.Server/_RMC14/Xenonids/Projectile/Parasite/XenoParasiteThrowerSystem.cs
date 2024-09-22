@@ -34,6 +34,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly MetaDataSystem _meta = default!;
 
     public override void Initialize()
     {
@@ -92,6 +93,8 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
             {
                 var stashMsg = Loc.GetString("cm-xeno-throw-parasite-stash-parasite", ("cur_parasites", comp.CurParasites), ("max_parasites", comp.MaxParasites));
                 _popup.PopupEntity(stashMsg, ent, ent);
+
+                _meta.SetEntityDescription(args.Action, Loc.GetString("cm-xeno-throw-parasite-description", ("cur_parasites", comp.CurParasites), ("max_parasites", comp.MaxParasites)));
                 return;
             }
         }
@@ -120,6 +123,8 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
 
         var msg = Loc.GetString("cm-xeno-throw-parasite-unstash-parasite", ("cur_parasites", comp.CurParasites), ("max_parasites", comp.MaxParasites));
         _popup.PopupEntity(msg, ent, ent);
+
+        _meta.SetEntityDescription(args.Action, Loc.GetString("cm-xeno-throw-parasite-description", ("cur_parasites", comp.CurParasites), ("max_parasites", comp.MaxParasites)));
     }
 
     private void OnSetReserve(Entity<XenoParasiteThrowerComponent> xeno, ref XenoReserveParasiteActionEvent args)
@@ -164,6 +169,25 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
 
         var msg = Loc.GetString("cm-xeno-throw-parasite-stash-parasite", ("cur_parasites", comp.CurParasites), ("max_parasites", comp.MaxParasites));
         _popup.PopupEntity(msg, ent, ent);
+
+        if (TryComp(ent, out ActionsContainerComponent? actContainer))
+        {
+            var actions = actContainer.Container.ContainedEntities;
+
+            foreach (var action in actions)
+            {
+                if (!TryComp(action, out WorldTargetActionComponent? worldActComp))
+                {
+                    continue;
+                }
+                if (worldActComp.Event is XenoThrowParasiteActionEvent)
+                {
+                    _meta.SetEntityDescription(action, Loc.GetString("cm-xeno-throw-parasite-description", ("cur_parasites", comp.CurParasites), ("max_parasites", comp.MaxParasites)));
+                    break;
+                }
+            }
+        }
+
         args.Handled = true;
     }
 
