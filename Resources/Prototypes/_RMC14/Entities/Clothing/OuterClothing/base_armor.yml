@@ -41,7 +41,7 @@
       #TODO motion detector
       #TODO walkman
 
-# TODO PMC Armor has it's own list
+# TODO RMC14 PMC Armor has it's own list of allowed suit storage
 
 - type: entity
   abstract: true
