@@ -90,7 +90,7 @@
 
 - type: entity
   parent: CMBaseWall
-  name: super reinforced wall
+  name: reinforced wall
   id: CMWallSuperReinforced
   description: A huge chunk of reinforced metal used to separate rooms. Looks very robust.
   components:
