@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "palm1"
+    },
+    {
+      "name": "palm2"
+    }
+  ]
+}

@@ -43,3 +43,25 @@
   parent: CMFloorWoodBase
   id: CMFloorWoodBroken7
   sprite: /Textures/_RMC14/Tiles/almayer/wood-broken7.png
+
+- type: tile
+  parent: CMFloorWoodBase
+  id: RMCWood
+  suffix: "Indoors"
+  name: tiles-cm-wood
+  sprite: /Textures/_RMC14/Tiles/planet/wood/wood.png
+
+- type: tile
+  parent: CMFloorWoodBase
+  id: RMCWoodDamaged
+  suffix: "Indoors"
+  sprite: /Textures/_RMC14/Tiles/planet/wood/wood-broken.png
+  variants: 7
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0

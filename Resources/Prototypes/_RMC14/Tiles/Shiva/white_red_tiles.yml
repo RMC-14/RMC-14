@@ -66,5 +66,10 @@
 
 - type: tile
   parent: CMFloorSteelShivaWhiteRedBase
+  id: CMFloorSteelShivaWhiteRedFull0
+  sprite: /Textures/_RMC14/Tiles/shiva/wredfull_0.png
+
+- type: tile
+  parent: CMFloorSteelShivaWhiteRedBase
   id: CMFloorSteelShivaWhiteRedFull3
   sprite: /Textures/_RMC14/Tiles/shiva/wredfull_3.png
