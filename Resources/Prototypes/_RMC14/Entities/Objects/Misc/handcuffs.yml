@@ -1,6 +1,6 @@
 - type: entity
   parent: Handcuffs
-  id: CMHandcuffs
+  id: RMCHandcuffs
   name: handcuffs
   description: Use this to keep prisoners in line.
   components:

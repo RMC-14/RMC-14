@@ -6,6 +6,7 @@
   id: CMPlanetMarsCave
   name: tiles-cm-rock
   sprite: /Textures/_RMC14/Tiles/planet/bigred/mars_cave_1.png
+  minimapColor: "#6c6767d8"
 
 - type: tile
   parent: CMPlanetMarsCave
@@ -202,6 +203,7 @@
   name: tiles-cm-sand
   weedsSpreadable: false # TODO RMC14, semi spreadable
   sprite: /Textures/_RMC14/Tiles/planet/bigred/mars_sand_1.png
+  minimapColor: "#aa5f44cc"
 
 - type: tile
   parent: CMPlanetMarsSand

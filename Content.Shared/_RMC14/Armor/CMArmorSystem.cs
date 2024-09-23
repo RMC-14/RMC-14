@@ -144,6 +144,9 @@ public sealed class CMArmorSystem : EntitySystem
             if (slot.ContainedEntity == null)
                 continue;
 
+            if (HasComp<ClothingIgnoreBlockBackpackComponent>(slot.ContainedEntity))
+                return;
+
             args.Cancel();
             args.Reason = "rmc-block-backpack-cant-other";
             break;
@@ -154,6 +157,9 @@ public sealed class CMArmorSystem : EntitySystem
     {
         ref readonly var ev = ref args.Args.Event;
         if (ev.Cancelled)
+            return;
+
+        if (HasComp<ClothingIgnoreBlockBackpackComponent>(args.Args.Event.Equipment))
             return;
 
         if ((ev.SlotFlags & SlotFlags.BACK) == 0)

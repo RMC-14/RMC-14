@@ -13,6 +13,8 @@
     hijackEvacuationArea: false
     hijackEvacuationWeight: 0
     hijackEvacuationType: None
+    mortarPlacement: false
+    mortarFire: false # TODO RMC14 true
 
 # MAINTS
 
