@@ -13,6 +13,8 @@
     size: Tiny
     sprite: _RMC14/Objects/Misc/paper.rsi
   - type: Clothing
+    equippedPrefix: pen
+    sprite: _RMC14/Objects/Misc/paper.rsi
     quickEquip: false
     slots:
     - Suitstorage
