@@ -12,6 +12,10 @@
   - type: Item
     size: Tiny
     sprite: _RMC14/Objects/Misc/paper.rsi
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Suitstorage
 
 - type: entity
   parent: CMPen
