@@ -22,6 +22,8 @@
     damage:
       types:
         Blunt: 5
+    soundHit:
+      collection: GenericHit
   - type: EmitSoundOnPickup
     sound:
       collection: RMCEquipGun
@@ -30,3 +32,4 @@
       collection: RMCRustleGun
   - type: Gun
     meleeCooldownOnShoot: false
+    resetOnHandSelected: false
