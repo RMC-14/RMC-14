@@ -133,7 +133,7 @@ public partial class SharedGunSystem
                 return false;
             }
 
-            for (var i = 0; i <= component.Capacity - 1; i++)
+            for (var i = 0; i < component.Capacity; i++)
             {
                 var index = (component.CurrentIndex + i) % component.Capacity;
 
