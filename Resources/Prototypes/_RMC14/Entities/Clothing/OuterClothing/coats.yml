@@ -95,8 +95,8 @@
 - type: entity
   parent: RMCBaseJacket
   id: CMCoatASO
-  name: aso jacket
-  description: Standard-issue officer jacket.
+  name: auxiliary support officer jacket
+  description: A comfortable vest for officers who are expected to work long hours staring at rows of numbers and inspecting equipment from knives to torpedos to entire dropships.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso.rsi
@@ -107,8 +107,8 @@
 - type: entity
   parent: RMCBaseJacket
   id: CMCoatCO
-  name: commanding officer jacket
-  description: Standard-issue commanding officer jacket.
+  name: marine officer dress jacket
+  description: Dress Jacket worn by Commanding Officers of the UNMC.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/jacket.rsi
@@ -118,8 +118,8 @@
 - type: entity
   parent: CMCoatCO
   id: CMCoatCOBomber
-  name: commanding officer bomber
-  description: Standard-issue commanding officer bomber.
+  name: commanding officer bomber jacket
+  description: A bomber jacket resembling those worn by airmen of old. A classic, stylish choice for those in the higher ranks.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/bomber.rsi
@@ -129,8 +129,8 @@
 - type: entity
   parent: CMCoatCO
   id: CMCoatCOFormalBlack
-  name: formal commanding officer jacket
-  description: Standard-issue commanding officer jacket.
+  name: commanding officer gray dress jacket
+  description: A gray dress tunic for those occasions that mandate darker, more subdued colors. Combines sleek and subdued with gold accents.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_black.rsi
@@ -140,8 +140,8 @@
 - type: entity
   parent: CMCoatCO
   id: CMCoatCOFormalWhite
-  name: formal commanding officer jacket
-  description: Standard-issue commanding officer jacket.
+  name: commanding officer white dress jacket
+  description: A white dress tunic for hot-weather parades. Bright, unstained, and immaculate with gold accents.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_white.rsi
@@ -152,20 +152,18 @@
 - type: entity
   parent: RMCBaseJacket
   id: CMCoatOfficer
-  name: officer jacket
-  description: Standard-issue officer jacket.
+  name: marine service jacket
+  description: A service jacket typically worn by officers of the UNMC. 
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/officer.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/officer.rsi
 
-# Longcoat
+# Longcoat - This is the service jacket but for snow maps
 - type: entity
-  parent: RMCBaseJacket
+  parent: CMCoatOfficer
   id: CMCoatLong
-  name: long coat
-  description: Standard-issue coat.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/long_coat.rsi
