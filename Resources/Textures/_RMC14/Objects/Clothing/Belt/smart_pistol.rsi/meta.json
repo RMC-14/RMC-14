@@ -32,7 +32,7 @@
       "directions": 4
     },
     {
-      "name": "d_smartpistol_holster_g",
+      "name": "full-equipped-BELT",
       "directions": 4
     },
     {
@@ -40,7 +40,7 @@
       "directions": 4
     },
     {
-      "name": "smartpistol_holster_g",
+      "name": "full-equipped-SUITSTORAGE",
       "directions": 4
     }
   ]
