@@ -1,5 +1,6 @@
 # BaseJacket
 - type: entity
+  abstract: true
   parent: [ClothingOuterStorageBase, RMCAllowSuitStorageClothingJacket]
   id: RMCBaseJacket
   components:
