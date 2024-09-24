@@ -28,7 +28,7 @@
         layer:
         - MachineLayer
         density: 200
-  - type: Repairable
+  - type: Repairable #Todo make the repair order require "Screwdriver > Wirecutter > 5 wires > 1 metal > Screwdriver"
     doAfterDelay: 8
   - type: ActivatableUI
     key: enum.VendingMachineUiKey.Key
