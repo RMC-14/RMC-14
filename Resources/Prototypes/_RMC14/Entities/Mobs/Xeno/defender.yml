@@ -6,7 +6,7 @@
   - RMCXenoSpeechSounds
   id: CMXenoDefender
   name: Defender
-  description: An alien with an armored crest.
+  description: A alien with an armored crest.
   components:
   - type: GhostRole
     name: cm-job-name-xeno-defender
