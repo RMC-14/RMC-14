@@ -41,7 +41,7 @@
       - !type:EjectVendorItems
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 400  #raised the destrution trigger from 200dmg to 400dmg, to give some actual room for repairs, before they are completly destroyed, while preventing them from becomming indestuctible movable cover. 
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
