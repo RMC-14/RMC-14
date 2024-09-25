@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: ShadowCommander
-  changes:
-  - message: Added pouch fill level visuals.
-    type: Add
-  id: 236
-  time: '2024-07-02T08:15:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2737
 - author: DrSmugleaf
   changes:
   - message: Fixed grass being able to have weeds planted or spread onto it.
@@ -4422,5 +4415,13 @@
   id: 735
   time: '2024-09-25T06:28:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4121
+- author: DrSmugleaf
+  changes:
+  - message: Fixed a visual bug that made guns on semi-auto look like they were shooting
+      more bullets for the shooter than they were actually shooting.
+    type: Fix
+  id: 736
+  time: '2024-09-25T08:30:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4135
 Name: RMC14
 Order: -1
