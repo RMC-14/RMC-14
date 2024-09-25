@@ -250,6 +250,10 @@
     },
     {
       "name": "fountain_pen"
+    },
+    {
+      "name": "pen-equipped-SUITSTORAGE",
+      "directions": 4
     }
   ]
 }
