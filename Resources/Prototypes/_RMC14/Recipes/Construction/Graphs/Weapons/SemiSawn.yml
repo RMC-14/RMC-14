@@ -1,13 +1,13 @@
 - type: constructionGraph
   parent: RMC
-  id: SpearheadSemiSawn
+  id: M357SemiSawn
   start: start
   graph:
     - node: start
       edges:
-        - to: spearheadsemisawn
+        - to: M357semisawn
           steps:
             - tool: Sawing
               doAfter: 2
-    - node: spearheadsemisawn
-      entity: WeaponShotgunSpearheadHalfway
+    - node: M357semisawn
+      entity: WeaponShotgunM357Halfway
