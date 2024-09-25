@@ -299,8 +299,6 @@ public abstract partial class SharedGunSystem : EntitySystem
                 throw new ArgumentOutOfRangeException($"No implemented shooting behavior for {gun.SelectedMode}!");
         }
 
-        Log.Info(shots.ToString());
-
         var attemptEv = new AttemptShootEvent(user, null);
         RaiseLocalEvent(gunUid, ref attemptEv);
 
