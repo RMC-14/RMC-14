@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Coordinates;
+using Content.Shared.Maps;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
@@ -11,15 +12,27 @@ public sealed class AreaSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private EntityQuery<AreaGridComponent> _areaGridQuery;
     private EntityQuery<MapGridComponent> _mapGridQuery;
+    private EntityQuery<MinimapColorComponent> _minimapColorQuery;
+
+    private readonly List<EntityUid> _toRender = new();
 
     public override void Initialize()
     {
         _areaGridQuery = GetEntityQuery<AreaGridComponent>();
         _mapGridQuery = GetEntityQuery<MapGridComponent>();
+        _minimapColorQuery = GetEntityQuery<MinimapColorComponent>();
+
+        SubscribeLocalEvent<AreaGridComponent, MapInitEvent>(OnAreaGridMapInit);
+    }
+
+    private void OnAreaGridMapInit(Entity<AreaGridComponent> ent, ref MapInitEvent args)
+    {
+        _toRender.Add(ent);
     }
 
     public bool TryGetArea(
@@ -122,5 +135,66 @@ public sealed class AreaSystem : EntitySystem
         }
 
         return false;
+    }
+
+    public override void Update(float frameTime)
+    {
+        try
+        {
+            foreach (var ent in _toRender)
+            {
+                if (!TryComp(ent, out AreaGridComponent? areaGrid) ||
+                    !TryComp(ent, out MapGridComponent? mapGrid))
+                {
+                    continue;
+                }
+
+                areaGrid.Colors.Clear();
+
+                var tiles = _map.GetAllTilesEnumerator(ent, mapGrid);
+                while (tiles.MoveNext(out var tileRefNullable))
+                {
+                    var tileRef = tileRefNullable.Value;
+                    var pos = tileRef.GridIndices;
+                    var anchoredEnumerator = _map.GetAnchoredEntitiesEnumerator(ent, mapGrid, pos);
+
+                    var found = false;
+                    while (anchoredEnumerator.MoveNext(out var anchored))
+                    {
+                        if (_minimapColorQuery.TryComp(anchored, out var minimapColor))
+                        {
+                            areaGrid.Colors[pos] = minimapColor.Color;
+                            found = true;
+                        }
+                    }
+
+                    if (found)
+                        continue;
+
+                    var tile = tileRef.GetContentTileDefinition(_tile);
+                    if (tile.MinimapColor != default)
+                    {
+                        areaGrid.Colors[pos] = tile.MinimapColor;
+                        continue;
+                    }
+
+                    if (areaGrid.Areas.TryGetValue(pos, out var area) &&
+                        area.TryGet(out var areaComp, _prototypes, _compFactory) &&
+                        areaComp.MinimapColor != default)
+                    {
+                        areaGrid.Colors[pos] = areaComp.MinimapColor.WithAlpha(0.5f);
+                        continue;
+                    }
+
+                    areaGrid.Colors[pos] = Color.FromHex("#6c6767d8");
+                }
+
+                Dirty(ent, areaGrid);
+            }
+        }
+        finally
+        {
+            _toRender.Clear();
+        }
     }
 }

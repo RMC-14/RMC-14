@@ -72,3 +72,12 @@
 
 - type: Tag
   id: RMCGlass
+
+- type: Tag
+  id: Scabbard
+
+- type: Tag
+  id: RMCMacheteScabbard
+
+- type: Tag
+  id: RMCG8Pouch

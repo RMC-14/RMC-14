@@ -1,4 +1,4 @@
-﻿- type: entity # TODO RMC14 split these into per file categories and inherit all to ASRS
+- type: entity # TODO RMC14 split these into per file categories and inherit all to ASRS
   abstract: true
   id: CMCargoCatalog
   components:
@@ -50,6 +50,8 @@
         crate: RMCCrateBoxMagazineM44RevolverMarksman
       - cost: 4000
         crate: RMCCrateBoxMagazineSentry
+      - cost: 4000
+        crate: RMCCrateBoxMagazineSentryShotgun
     - name: Attachments
       entries:
       - cost: 3000
@@ -118,8 +120,8 @@
         crate: RMCCratePlasteelSheets
       - cost: 2000
         crate: RMCCrateGlassSheets
-#      - cost: 2000
-#        crate: RMCCrateWoodenPlanks
+      - cost: 2000
+        crate: RMCCrateWoodenPlanks
 #      - cost: 2000
 #        crate: RMCCrateFoldingBarricades
 #      - cost: 3000
@@ -146,6 +148,11 @@
         crate: RMCCrateGrenadesHighExplosive
       - cost: 3000
         crate: RMCCrateGrenadesFrag
+      # leaving this commented, as it is not parity, but we might want it in the future
+      #- cost: 2000
+      #  crate: RMCCrateGrenadesSmoke
+      - cost: 4000
+        crate: RMCCrateGrenadesFragOld
       - cost: 4000
         crate: RMCCrateBreachingCharges
     - name: Food

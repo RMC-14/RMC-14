@@ -1,6 +1,55 @@
+# BaseJacket
+- type: entity
+  abstract: true
+  parent: [ClothingOuterStorageBase, RMCAllowSuitStorageClothingJacket]
+  id: RMCBaseJacket
+  components:
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,3,1 # 2 slots
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - MRE
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+  
+- type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingJacket
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - RMCLighter
+      - Stunbaton
+      - Gun
+      tags:
+      - Handcuffs
+      - GasTank
+      - Flashlight
+      - CigPack
+      - Knife
+      - RMCG8Pouch
+      - Binoculars
+      - RMCMacheteScabbard
+      - Crowbar
+      - DiscreteHealthAnalyzer
+      - Pen
+      - Radio
+      #TODO Various holsters go here - 1984, m44, mateba
+      - RMCSmartPistolHolster
+
+# TODO RMC14 labcoat has it's own list
+
+# TODO RMC14 chef/medical apron have a shared list
+
 # ChiefMP
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: RMCBaseJacket
   id: CMCoatChiefMP
   name: chief military police service jacket
   description: A marine service jacket adopted for use by Military Police personnel on board Marine ships. Ironically most ships require their MP departments to use full armor, making these barely used by on duty MPs. Very popular among those who want to inexplicably smell like donuts.
@@ -12,7 +61,7 @@
 
 # Military Warden
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: RMCBaseJacket
   id: CMCoatWarden
   name: military warden service jacket
   description: A marine service jacket adopted for use by Military Wardens on board Marine ships. Ironically most ships require their MP departments to use full armor, making these barely used by on duty Wardens. The jacket of choice for looking all night at a set of monitors, while cigarette butts pile around you.
@@ -24,7 +73,7 @@
 
 # Military Police
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: RMCBaseJacket
   id: CMCoatMP
   name: military police service jacket
   description: A marine service jacket adopted for use by Military Police personnel on board Marine ships. Ironically most ships require their MP departments to use full armor, making these barely used by on duty MPs. This variant is also available to regular Marines, if they are willing to bear the shame.
@@ -36,7 +85,7 @@
 
 # Mess Seargeant/Tech
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: RMCBaseJacket
   id: CMCoatMessTech
   name: mess technician jacket
   description: Smells like vanilla. Signifies prestige and power, if a little flashy.
@@ -48,10 +97,10 @@
 
 # Auxiliary Supply Officer
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: RMCBaseJacket
   id: CMCoatASO
-  name: aso jacket
-  description: Standard-issue officer jacket.
+  name: auxiliary support officer jacket
+  description: A comfortable vest for officers who are expected to work long hours staring at rows of numbers and inspecting equipment from knives to torpedos to entire dropships.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso.rsi
@@ -60,10 +109,10 @@
 
 # Commanding Officer
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: RMCBaseJacket
   id: CMCoatCO
-  name: commanding officer jacket
-  description: Standard-issue commanding officer jacket.
+  name: marine officer dress jacket
+  description: Dress Jacket worn by Commanding Officers of the UNMC.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/jacket.rsi
@@ -73,8 +122,8 @@
 - type: entity
   parent: CMCoatCO
   id: CMCoatCOBomber
-  name: commanding officer bomber
-  description: Standard-issue commanding officer bomber.
+  name: commanding officer bomber jacket
+  description: A bomber jacket resembling those worn by airmen of old. A classic, stylish choice for those in the higher ranks.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/bomber.rsi
@@ -84,8 +133,8 @@
 - type: entity
   parent: CMCoatCO
   id: CMCoatCOFormalBlack
-  name: formal commanding officer jacket
-  description: Standard-issue commanding officer jacket.
+  name: commanding officer gray dress jacket
+  description: A gray dress tunic for those occasions that mandate darker, more subdued colors. Combines sleek and subdued with gold accents.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_black.rsi
@@ -95,8 +144,8 @@
 - type: entity
   parent: CMCoatCO
   id: CMCoatCOFormalWhite
-  name: formal commanding officer jacket
-  description: Standard-issue commanding officer jacket.
+  name: commanding officer white dress jacket
+  description: A white dress tunic for hot-weather parades. Bright, unstained, and immaculate with gold accents.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_white.rsi
@@ -105,22 +154,20 @@
 
 # Officer
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: RMCBaseJacket
   id: CMCoatOfficer
-  name: officer jacket
-  description: Standard-issue officer jacket.
+  name: marine service jacket
+  description: A service jacket typically worn by officers of the UNMC. 
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/officer.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/officer.rsi
 
-# Longcoat
+# Longcoat - This is the service jacket but for snow maps
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: CMCoatOfficer
   id: CMCoatLong
-  name: long coat
-  description: Standard-issue coat.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/long_coat.rsi
@@ -129,7 +176,7 @@
 
 # Correspondent
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: RMCBaseJacket
   id: RMCCoatCorrespondent
   name: combat correspondent jacket
   description: A jacket for the most fashionable war correspondents.

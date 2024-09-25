@@ -10,6 +10,9 @@
   supervisors: cm-job-supervisors-ce
   accessGroups:
   - MaintTech
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: engi
   special:
   - !type:AddComponentSpecial
     components:
