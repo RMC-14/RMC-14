@@ -63,6 +63,34 @@
     - RMCWeaponShotgun
 
 - type: entity
+  abstract: true
+  parent: RMCBaseWeaponShotgun
+  id: RMCBaseBreechloader
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Shotguns/db_shotgun.rsi
+    layers:
+    - state: base
+      map: [ "enum.BreechVisuals.Open" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.BreechVisuals.Open:
+        enum.BreechVisuals.Open:
+          True: { state: bolt-open }
+          False: { state: base }
+  - type: BallisticAmmoProvider
+    cycleable: true
+    capacity: 2
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
+      params:
+        volume: -2
+  - type: UniqueAction
+  - type: BreechLoaded
+    needOpenClose: false
+
+- type: entity
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
   name: M42A2 Pump Shotgun
   id: WeaponShotgunM42A2
@@ -118,6 +146,204 @@
       rmc-aslot-rail: -0.025, 0.125
       rmc-aslot-stock: -0.375, -0.029
       rmc-aslot-underbarrel: 0.25, -0.31
+
+- type: entity
+  parent: [ RMCBaseBreechloader, RMCBaseAttachableHolder ]
+  name: M357 Rival
+  id: WeaponShotgunM357
+  description: A double barrel shotgun produced by Aegis. Archaic, sturdy, affordable. Only holds two 12g shells at a time.
+  components:
+  - type: Sprite
+    sprite: 
+  - type: Clothing
+    sprite: 
+  - type: Gun
+    shotsPerBurst: 2
+  - type: ShootUseDelay
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 10
+    scatterUnwielded: 20
+    baseFireRate: 2
+    burstScatterMult: 1
+  - type: Construction
+    graph: M357SemiSawn
+    node: start
+    deconstructionTarget: null
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentDoubleBarrelShotgunStock
+        whitelist:
+          tags:
+          - RMCAttachmentDoubleBarrelShotgunStock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentGyroscopicStabilizer
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.81, 0.06
+      rmc-aslot-rail: -0.025, 0.125
+      rmc-aslot-stock: -0.375, -0.029
+      rmc-aslot-underbarrel: 0.25, -0.31
+
+- type: entity
+  parent: WeaponShotgunM357
+  name: Semi-sawn-off M357 Rival
+  id: WeaponShotgunM357Halfway
+  description: A double barrel shotgun produced by Aegis. Archaic, sturdy, affordable. For some reason it seems that someone tried to saw through the barrel and gave up halfway through. This probably isn't going to be the greatest gun for combat..
+  - type: Sprite
+    sprite: 
+  - type: Clothing
+    sprite: 
+  - type: ShootUseDelay
+  - type: RMCSelectiveFire
+    recoilWielded: 8
+    recoilUnwielded: 16
+    scatterWielded: 20
+    scatterUnwielded: 30 #Intended to have horrible stats
+    baseFireRate: 0.7
+    burstScatterMult: 8
+  - type: GunDamageModifier
+    multiplier: 0.85
+  - type: RMCExtraProjectilesDamageMods
+    damageMultiplier: 0.85
+  - type: Construction
+    graph: M357Sawn
+    node: start
+    deconstructionTarget: null
+
+- type: entity
+  parent: [ RMCBaseBreechloader, RMCBaseAttachableHolder ]
+  name: Sawn-Off M357 Rival
+  id: WeaponShotgunM357Sawn
+  description: A double barrel shotgun produced by Aegis. Archaic, sturdy, affordable. It has been artificially shortened to reduce range but increase damage and spread.
+  - type: Sprite
+    sprite: 
+  - type: Clothing
+    sprite: 
+  - type: Item
+    size: Normal
+  - type: GunDamageModifier
+    multiplier: 0.80
+  - type: RMCExtraProjectilesDamageMods
+    damageMultiplier: 1.5 
+  - type: RMCWeaponDamageFalloff
+    falloffMultiplier: 2 # Adjust as needed
+  - type: RMCSelectiveFire
+    recoilWielded: 3
+    recoilUnwielded: 5
+    scatterWielded: 10 
+    scatterUnwielded: 20
+    baseFireRate: 2
+    burstScatterMult: 1
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentDoubleBarrelShotgunStock
+        whitelist:
+          tags:
+          - RMCAttachmentDoubleBarrelShotgunStock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentGyroscopicStabilizer
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: -0.025, 0.125
+      rmc-aslot-stock: -0.375, -0.029
+      rmc-aslot-underbarrel: 0.25, -0.31
+
+- type: entity
+  parent: [ RMCBaseBreechloader, RMCBaseAttachableHolder ]
+  name: MOU53 break action shotgun
+  id: WeaponShotgunMOU53
+  description: A limited production Kerchner MOU53 triple break action classic. Respectable damage output at medium ranges, while the Aegis M42 is the king of CQC, the Kerchner MOU53 is what hits the broadside of that barn. This specific model cannot safely fire buckshot shells.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Shotguns/mou53.rsi
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Shotguns/mou53.rsi
+  - type: Gun
+    shotsPerBurst: 1
+  - type: ShootUseDelay
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 10
+    scatterUnwielded: 20
+    baseFireRate: 2
+    burstScatterMult: 1
+  - type: BallisticAmmoProvider
+    blacklist:
+      tags:
+      - RMCShellShotgunBuckshot
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentMOU53Stock
+        whitelist:
+          tags:
+          - RMCAttachmentMOU53Stock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentLaserSight
+           
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.81, 0.06
+      rmc-aslot-rail: -0.025, 0.125
+      rmc-aslot-stock: -0.375, -0.029
+      rmc-aslot-underbarrel: 0.25, -0.31
+
+
+- type: BallisticAmmoProvider
+  blacklist:
+      tags:
+      - RMCShellShotgunBuckshot
 
 - type: Tag
   id: RMCWeaponShotgun
