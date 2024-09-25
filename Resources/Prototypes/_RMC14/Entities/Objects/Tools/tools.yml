@@ -93,6 +93,11 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/crowbar_pickup.ogg
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Belt
+    - Suitstorage
 
 - type: entity
   parent: CMCrowbar

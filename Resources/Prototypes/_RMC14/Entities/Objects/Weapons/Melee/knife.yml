@@ -17,6 +17,7 @@
     slots:
     - mask
     - pocket
+    - suitstorage
     sprite: _RMC14/Objects/Weapons/Melee/m5_bayonet.rsi
   - type: Tag
     tags:

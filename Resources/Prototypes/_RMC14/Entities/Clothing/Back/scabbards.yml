@@ -55,6 +55,11 @@
     slots:
     - back
     - belt
+    - suitstorage
+  - type: Tag
+    tags:
+    - Scabbard
+    - RMCMacheteScabbard
 
 - type: entity
   parent: RMCScabbardMachete
