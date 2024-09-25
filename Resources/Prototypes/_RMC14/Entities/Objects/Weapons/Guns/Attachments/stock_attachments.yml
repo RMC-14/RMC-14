@@ -51,6 +51,9 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentM42A2WoodenStock
+  - bonusDamage:
+        types:
+          Blunt: 10
   - type: AttachableSpeedMods
     modifiers:
     - conditions:
@@ -73,6 +76,46 @@
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
+
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentMOU53Stock
+  name: 
+  description: A metal stock fitted specifically for the MOU53 break action shotgun.
+  components:
+  - type: Sprite
+    state: ou_stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentMOU53Stock
+  - bonusDamage:
+        types:
+          Blunt: 10
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      walk: -0.050
+      sprint: -0.10
+  - type: AttachableWieldDelayMods
+    modifiers:
+      - delay: 0.3
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.3
+      recoilFlat: -4
+      scatterFlat: -5
+    - conditions:
+        unwieldedOnly: true
+      accuracyMovementPenaltyAddMult: -1
+      accuracyAddMult: -0.1
+      recoilFlat: 2
+      scatterFlat: 5
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -546,3 +589,6 @@
 
 - type: Tag
   id: RMCAttachmentM44MagnumSharpshooterStock
+
+- type: Tag
+  id: RMCAttachmentMOU53Stock
