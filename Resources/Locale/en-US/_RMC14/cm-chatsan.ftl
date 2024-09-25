@@ -61,6 +61,12 @@ cm-chatsan-replacement-reptilian = scaled host
 cm-chatsan-word-reptilians = reptilians
 cm-chatsan-replacement-reptilians = scaled hosts
 
+cm-chatsan-word-plasmaman = plasmaman
+cm-chatsan-replacement-plasmaman = skeleton host
+
+cm-chatsan-word-plasmamen = plasmamen
+cm-chatsan-replacement-plasmamen = skeleton hosts
+
 cm-chatsan-word-dwarf = dwarf
 cm-chatsan-replacement-dwarf = short host
 
