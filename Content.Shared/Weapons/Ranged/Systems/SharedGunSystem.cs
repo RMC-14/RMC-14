@@ -299,6 +299,8 @@ public abstract partial class SharedGunSystem : EntitySystem
                 throw new ArgumentOutOfRangeException($"No implemented shooting behavior for {gun.SelectedMode}!");
         }
 
+        Log.Info(shots.ToString());
+
         var attemptEv = new AttemptShootEvent(user, null);
         RaiseLocalEvent(gunUid, ref attemptEv);
 
@@ -312,9 +314,6 @@ public abstract partial class SharedGunSystem : EntitySystem
             gun.NextFire = TimeSpan.FromSeconds(Math.Max(lastFire.TotalSeconds + SafetyNextFire, gun.NextFire.TotalSeconds));
             return null;
         }
-
-        if (!Timing.IsFirstTimePredicted)
-            return null;
 
         var fromCoordinates = Transform(user).Coordinates;
         // Remove ammo
@@ -331,6 +330,10 @@ public abstract partial class SharedGunSystem : EntitySystem
         // Even if we don't actually shoot update the ShotCounter. This is to avoid spamming empty sounds
         // where the gun may be SemiAuto or Burst.
         gun.ShotCounter += shots;
+        Dirty(gunUid, gun);
+
+        if (!Timing.IsFirstTimePredicted)
+            return null;
 
         if (ev.Ammo.Count <= 0)
         {
