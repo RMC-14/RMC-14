@@ -1,0 +1,8 @@
+# species
+- type: emoteSounds
+  parent: [RMCBaseMaleSounds, UnisexDiona]
+  id: RMCMaleDiona
+
+- type: emoteSounds
+  parent: [RMCBaseFemaleSounds, UnisexDiona]
+  id: RMCFemaleDiona
