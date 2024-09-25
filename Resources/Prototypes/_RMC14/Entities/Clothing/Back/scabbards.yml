@@ -55,6 +55,7 @@
     slots:
     - back
     - belt
+    - suitstorage
   - type: Tag
     tags:
     - Scabbard
