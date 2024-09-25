@@ -313,9 +313,6 @@ public abstract partial class SharedGunSystem : EntitySystem
             return null;
         }
 
-        if (!Timing.IsFirstTimePredicted)
-            return null;
-
         var fromCoordinates = Transform(user).Coordinates;
         // Remove ammo
         var ev = new TakeAmmoEvent(shots, new List<(EntityUid? Entity, IShootable Shootable)>(), fromCoordinates, user);
@@ -331,6 +328,10 @@ public abstract partial class SharedGunSystem : EntitySystem
         // Even if we don't actually shoot update the ShotCounter. This is to avoid spamming empty sounds
         // where the gun may be SemiAuto or Burst.
         gun.ShotCounter += shots;
+        Dirty(gunUid, gun);
+
+        if (!Timing.IsFirstTimePredicted)
+            return null;
 
         if (ev.Ammo.Count <= 0)
         {
