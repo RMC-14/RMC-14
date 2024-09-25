@@ -23,6 +23,7 @@ public enum CollisionGroup
     BulletImpassable   = 1 << 6, // 64 Can be hit by bullets
     InteractImpassable = 1 << 7, // 128 Blocks interaction/InRangeUnobstructed
     DoorPassable       = 1 << 8, // 256 Allows door to close over top, Like blast doors over conveyors for disposals rooms/cargo.
+    BarricadeImpassable = 1 << 26,
     XenoProjectileImpassable = 1 << 27,
     DropshipImpassable = 1 << 28,
 

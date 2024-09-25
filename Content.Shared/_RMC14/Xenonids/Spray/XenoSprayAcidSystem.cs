@@ -3,11 +3,13 @@ using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared.Actions;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
+using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Audio.Systems;
@@ -21,9 +23,11 @@ namespace Content.Shared._RMC14.Xenonids.Spray;
 
 public sealed class XenoSprayAcidSystem : EntitySystem
 {
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -51,6 +55,7 @@ public sealed class XenoSprayAcidSystem : EntitySystem
         _xenoSprayAcidQuery = GetEntityQuery<XenoSprayAcidComponent>();
 
         SubscribeLocalEvent<XenoSprayAcidComponent, XenoSprayAcidActionEvent>(OnSprayAcidAction);
+        SubscribeLocalEvent<XenoSprayAcidComponent, XenoSprayAcidDoAfter>(OnSprayAcidDoAfter);
 
         SubscribeLocalEvent<SprayAcidedComponent, MapInitEvent>(OnSprayAcidedMapInit);
         SubscribeLocalEvent<SprayAcidedComponent, ComponentRemove>(OnSprayAcidedRemove);
@@ -59,6 +64,16 @@ public sealed class XenoSprayAcidSystem : EntitySystem
 
     private void OnSprayAcidAction(Entity<XenoSprayAcidComponent> xeno, ref XenoSprayAcidActionEvent args)
     {
+        var ev = new XenoSprayAcidDoAfter(GetNetCoordinates(args.Target));
+        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.DoAfter, ev, xeno) { BreakOnMove = true };
+        _doAfter.TryStartDoAfter(doAfter);
+    }
+
+    private void OnSprayAcidDoAfter(Entity<XenoSprayAcidComponent> xeno, ref XenoSprayAcidDoAfter args)
+    {
+        if (args.Handled || args.Cancelled)
+            return;
+
         args.Handled = true;
         _audio.PlayPredicted(xeno.Comp.Sound, xeno, xeno);
 
@@ -66,7 +81,7 @@ public sealed class XenoSprayAcidSystem : EntitySystem
             return;
 
         var start = _mapSystem.AlignToGrid(_transform.GetMoverCoordinates(xeno.Owner.ToCoordinates()));
-        var end = _mapSystem.AlignToGrid(_transform.GetMoverCoordinates(args.Target));
+        var end = _mapSystem.AlignToGrid(_transform.GetMoverCoordinates(GetCoordinates(args.Coordinates)));
         var distanceX = end.X - start.X;
         var distanceY = end.Y - start.Y;
         if (!start.TryDistance(EntityManager, _transform, end, out var distance))
@@ -78,6 +93,12 @@ public sealed class XenoSprayAcidSystem : EntitySystem
 
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
+
+        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        {
+            if (action.BaseEvent is XenoSprayAcidActionEvent)
+                _actions.StartUseDelay(actionId);
+        }
 
         var x = start.X;
         var y = start.Y;

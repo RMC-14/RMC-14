@@ -119,8 +119,22 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: pounce
     event: !type:XenoLeapActionEvent
-    range: 15
     useDelay: 6
+    checkCanAccess: false
+
+- type: entity
+  parent: ActionXenoLeap
+  id: ActionXenoDash
+  name: Dash (40)
+  description: Dash a short distance towards a given location.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_dash
+    event: !type:XenoLeapActionEvent
+    useDelay: 11
     checkCanAccess: false
 
 - type: entity
@@ -159,7 +173,7 @@
   name: Slowing Spit (20) # TODO RMC14 proper plasma costs
   description: Launches a damageless projectile that will slow the first enemy that it hits, and paralyze them if they have no armor.
   components:
-  - type: WorldTargetAction
+  - type: EntityWorldTargetAction
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
@@ -175,7 +189,7 @@
   name: Scattered Spit (20) # TODO RMC14 proper plasma costs
   description: Launches multiple damageless projectiles that will briefly paralyze any enemies they hit.
   components:
-  - type: WorldTargetAction
+  - type: EntityWorldTargetAction
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
@@ -191,7 +205,7 @@
   name: Xeno Spit (25) # TODO RMC14 proper plasma costs
   description: Launches a projectile that will deal damage to the first enemy that it hits.
   components:
-  - type: WorldTargetAction
+  - type: EntityWorldTargetAction
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
@@ -233,12 +247,38 @@
 - type: entity
   parent: ActionXenoSprayAcid
   id: ActionXenoSprayAcidBoiler
+  description: Sprays acid along the ground in a line, covering tiles with it. [color=red]Will coat barricades in acid![/color]
   components:
   - type: WorldTargetAction
     useDelay: 10
   - type: ActionSharedCooldown
     ids:
     - ActionXenoAcidShroud
+
+- type: entity
+  parent: ActionXenoSprayAcid
+  id: ActionXenoSprayAcidPraetorian
+  description: Sprays acid along the ground in a line, covering tiles with it. [color=red]Will coat barricades in acid![/color]
+  components:
+  - type: WorldTargetAction
+    range: 7
+    useDelay: 10
+
+- type: entity
+  id: ActionXenoAcidBall
+  parent: ActionXenoBase
+  name: Acid Ball (80) # TODO RMC14 proper plasma costs
+  description: Throws a projectile that will explode into acid spit in all directions after a short delay.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_acid_ball
+    event: !type:XenoAcidBallActionEvent
+    useDelay: 18
+    range: 15
+    checkCanAccess: false
 
 - type: entity
   id: ActionXenoParalyzingSlash
@@ -274,7 +314,7 @@
   name: Bone Chips
   description: Launch a projectile that will damage and slow down the first enemy it hits.
   components:
-  - type: WorldTargetAction
+  - type: EntityWorldTargetAction
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi

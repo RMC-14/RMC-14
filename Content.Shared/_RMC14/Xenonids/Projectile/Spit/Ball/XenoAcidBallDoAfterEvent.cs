@@ -2,15 +2,15 @@
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._RMC14.Xenonids.Leap;
+namespace Content.Shared._RMC14.Xenonids.Projectile.Spit.Ball;
 
 [Serializable, NetSerializable]
-public sealed partial class XenoLeapDoAfterEvent : SimpleDoAfterEvent
+public sealed partial class XenoAcidBallDoAfterEvent : SimpleDoAfterEvent
 {
     [DataField]
     public NetCoordinates Coordinates;
 
-    public XenoLeapDoAfterEvent(NetCoordinates coordinates)
+    public XenoAcidBallDoAfterEvent(NetCoordinates coordinates)
     {
         Coordinates = coordinates;
     }
