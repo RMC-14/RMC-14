@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: ShadowCommander
   changes:
-  - message: Added empty sprite for the flare pack.
-    type: Add
-  id: 235
-  time: '2024-07-02T07:59:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2747
-- author: ShadowCommander
-  changes:
   - message: Added pouch fill level visuals.
     type: Add
   id: 236
@@ -4422,5 +4415,12 @@
   id: 734
   time: '2024-09-25T06:23:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4118
+- author: FungiFellow
+  changes:
+  - message: Removed Wood from Trees
+    type: Remove
+  id: 735
+  time: '2024-09-25T06:28:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4121
 Name: RMC14
 Order: -1
