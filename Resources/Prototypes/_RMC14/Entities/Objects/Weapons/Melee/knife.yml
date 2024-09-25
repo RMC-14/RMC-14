@@ -77,6 +77,7 @@
     damage:
       types:
         Slash: 5
+  - type: LandAtCursor
   - type: DamageOtherOnHit
     damage:
       types:
