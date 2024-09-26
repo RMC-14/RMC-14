@@ -30,7 +30,7 @@ namespace Content.Client.UserInterface.Systems.Alerts.Controls
             }
         }
 
-        public int ResourceMax
+        public int? ResourceMax
         {
             get => _resourceMax;
             set
@@ -43,7 +43,7 @@ namespace Content.Client.UserInterface.Systems.Alerts.Controls
             }
         }
 
-        public int ResourceCurrent
+        public int? ResourceCurrent
         {
             get => _resourceCurrent;
             set
@@ -57,8 +57,8 @@ namespace Content.Client.UserInterface.Systems.Alerts.Controls
         }
 
         private (TimeSpan Start, TimeSpan End)? _cooldown;
-        private int _resourceMax;
-        private int _resourceCurrent;
+        private int? _resourceMax;
+        private int? _resourceCurrent;
 
         private short? _severity;
         private readonly IGameTiming _gameTiming;
