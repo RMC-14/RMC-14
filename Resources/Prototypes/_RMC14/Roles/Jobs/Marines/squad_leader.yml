@@ -14,6 +14,12 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - SquadLeader
+  overwatchSortPriority: -5
+  overwatchShowName: true
+  overwatchRoleName: Squad Leader
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: leader
   special:
   - !type:AddComponentSpecial
     components:
@@ -33,11 +39,13 @@
     - type: CMVendorUser
       points: 45
     - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
+    - type: SquadLeader
 
 - type: startingGear
   id: CMGearSquadLeader
   equipment:
-    jumpsuit: JumpsuitMarine # TODO RMC14 all squad roles should spawn with no jumpsuit but still have clothes on
     back: CMSatchelMarine
     id: CMDogtagSquadLeader
 
@@ -53,6 +61,9 @@
     id: CMDogtagSquadLeader
     ears: CMHeadsetAlphaLeader
 
+- type: playTimeTracker
+  id: CMJobSquadLeader
+
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointSquadLeader
@@ -66,5 +77,39 @@
       state: green
     - state: squad_leader
 
-- type: playTimeTracker
-  id: CMJobSquadLeader
+- type: entity
+  parent: CMSpawnPointSquadLeader
+  id: CMSpawnPointSquadLeaderAlpha
+  suffix: Alpha
+  components:
+  - type: SquadSpawner
+    squad: SquadAlpha
+    role: CMSquadLeader
+
+- type: entity
+  parent: CMSpawnPointSquadLeader
+  id: CMSpawnPointSquadLeaderBravo
+  suffix: Bravo
+  components:
+  - type: SquadSpawner
+    squad: SquadBravo
+    role: CMSquadLeader
+
+- type: entity
+  parent: CMSpawnPointSquadLeader
+  id: CMSpawnPointSquadLeaderCharlie
+  suffix: Charlie
+  components:
+  - type: SquadSpawner
+    squad: SquadCharlie
+    role: CMSquadLeader
+
+- type: entity
+  parent: CMSpawnPointSquadLeader
+  id: CMSpawnPointSquadLeaderDelta
+  suffix: Delta
+  components:
+  - type: SquadSpawner
+    squad: SquadDelta
+    role: CMSquadLeader
+

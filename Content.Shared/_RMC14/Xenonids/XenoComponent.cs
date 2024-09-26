@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using Content.Shared.Access;
 using Content.Shared.Alert;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Roles;
 using Robust.Shared.GameStates;
@@ -38,6 +39,9 @@ public sealed partial class XenoComponent : Component
     public float MaxHealthDivisorHeal = 65;
 
     [DataField, AutoNetworkedField]
+    public bool HealOffWeeds;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan RegenCooldown = TimeSpan.FromSeconds(1);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
@@ -72,4 +76,9 @@ public sealed partial class XenoComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool SpawnAtLeaderPoint;
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<EmoteSoundsPrototype>? EmoteSounds = "Xeno";
+
+    public EmoteSoundsPrototype? Sounds;
 }

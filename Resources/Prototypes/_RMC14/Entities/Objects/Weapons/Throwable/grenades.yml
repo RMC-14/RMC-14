@@ -18,6 +18,7 @@
     initialBeepDelay: 0
     beepInterval: 10
     doPopup: false
+  - type: IgnorePredictionHide
 
 - type: entity
   parent: CMGrenadeBase
@@ -45,14 +46,16 @@
 - type: entity
   parent: CMGrenadeBase
   id: CMGrenadeSmoke
-  name: M40 smoke grenade
+  name: M40 HSDP smoke grenade
   description: The M40 HSDP is a small, but powerful smoke grenade. Based off the same platform as the M40 HEDP. It is set to detonate in 2 seconds.
   components:
+  - type: OnUseTimerTrigger
+    delay: 2
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m40smoke.rsi
-  - type: SmokeOnTrigger
-    duration: 30
-    spreadAmount: 50
+  - type: SpawnOnTerminate
+    spawn: RMCSmoke
+    projectileAdjust: false
   - type: SoundOnTrigger
     sound: /Audio/Effects/smoke.ogg
   - type: DeleteOnTrigger
@@ -65,6 +68,30 @@
     - LauncherCompatibleGrenade
     - RMCGrenadeM40
   - type: Ammo
+
+- type: entity
+  parent: Smoke
+  id: RMCSmoke
+  components:
+  - type: Transform
+    anchored: true
+  - type: Occluder
+  - type: Sprite
+    sprite: _RMC14/Effects/smoke.rsi
+    state: smoke2
+  - type: TimedDespawn
+    lifetime: 10
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Appearance
+  - type: ActiveEdgeSpreader
+  - type: EdgeSpreader
+    id: RMCSmokeAcid
+  - type: EvenSmoke
+    spawn: RMCSmoke
+    range: 3
+  - type: DeleteOnExplosion
 
 - type: entity
   parent: CMGrenadeHighExplosive
@@ -99,6 +126,36 @@
   - type: CMVocalizeTrigger
 
 - type: entity
+  parent: CMGrenadeHighExplosive
+  id: CMGrenadeFragOld
+  name: M15 fragmentation grenade
+  description: An outdated UNMC Fragmentation Grenade. With decades of service in the UNMC, the old M15 Fragmentation Grenade is slowly being replaced by the slightly safer M40-series grenades. It is set to detonate in 4 seconds.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/m15frag.rsi
+  - type: Explosive
+    maxIntensity: 20
+    intensitySlope: 6
+    totalIntensity: 240
+    deleteAfterExplosion: false
+  - type: ClusterGrenade
+    fillPrototype: CMProjectileShrapnel
+    maxGrenadesCount: 48 #same as HEFA
+    grenadeType: enum.GrenadeType.Shoot
+    triggerGrenades: false
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: Tag
+    tags:
+    - Grenade
+  - type: Ammo
+  - type: ClusterLimitHits
+  - type: CMExplosionEffect
+    maxShrapnel: 0
+  - type: CMVocalizeTrigger
+
+- type: entity
   id: CMExplosionEffectGrenade
   categories:
   - HideSpawnMenu
@@ -108,7 +165,7 @@
     state: grenade
   - type: TimedDespawn
     lifetime: 0.6
-  
+
 - type: entity
   id: RMCExplosionEffectGrenadeShockWave
   components:

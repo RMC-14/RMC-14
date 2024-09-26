@@ -14,6 +14,9 @@
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - Pilot
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: pilot
   special:
   - !type:AddComponentSpecial
     components:
@@ -29,7 +32,8 @@
         RMCSkillPowerLoader: 2
         RMCSkillSurgery: 1
     - type: MarineOrders
-  hidden: true # TODO RMC14
+    - type: CMVendorUser
+      points: 45
 
 - type: startingGear
   id: CMGearPilotGunship

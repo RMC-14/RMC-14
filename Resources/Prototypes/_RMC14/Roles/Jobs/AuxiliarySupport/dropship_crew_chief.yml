@@ -17,6 +17,9 @@
   supervisors: cm-job-supervisors-po
   accessGroups:
   - DropshipCrewChief
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: pilot
   special:
   - !type:AddComponentSpecial
     components:
@@ -31,6 +34,8 @@
         RMCSkillPowerLoader: 2
         RMCSkillSurgery: 1
     - type: MarineOrders
+    - type: CMVendorUser
+      points: 45
   hidden: false
 
 - type: startingGear

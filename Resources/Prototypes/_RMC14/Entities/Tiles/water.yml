@@ -49,6 +49,8 @@
       params:
         volume: 8
   - type: BlockWeeds
+  - type: MinimapColor
+    color: "#94b0d59c"
 
 - type: entity
   parent: CMFloorShallowWaterEntity
@@ -60,3 +62,6 @@
     sprite: _RMC14/Tiles/planet/water.rsi
     layers:
     - state: seadeep
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.25
+    sprintSpeedModifier: 0.25

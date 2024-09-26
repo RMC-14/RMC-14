@@ -2,6 +2,7 @@
 using System.Linq;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
+using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -21,13 +22,14 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Prototypes;
-using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Xenonids.Construction;
@@ -46,9 +48,11 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly XenoNestSystem _xenoNest = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
 
@@ -63,6 +67,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private EntityQuery<XenoConstructComponent> _xenoConstructQuery;
     private EntityQuery<XenoEggComponent> _xenoEggQuery;
     private EntityQuery<XenoWeedsComponent> _xenoWeedsQuery;
+
     private const string XenoStructuresAnimation = "RMCEffect";
 
     public override void Initialize()
@@ -209,7 +214,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         EntityUid? effect = null;
 
         if (_prototype.TryIndex(effectID, out var effectProto) && _net.IsServer)
+        {
             effect = Spawn(effectID, entityCoords);
+            RaiseNetworkEvent(new XenoConstructionAnimationStartEvent(GetNetEntity(effect.Value), GetNetEntity(xeno)), Filter.PvsExcept(effect.Value));
+        }
 
         var ev = new XenoSecreteStructureDoAfterEvent(coordinates, choice, GetNetEntity(effect));
         args.Handled = true;
@@ -227,7 +235,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoSecreteStructureDoAfter(Entity<XenoConstructionComponent> xeno, ref XenoSecreteStructureDoAfterEvent args)
     {
-        if (args.Cancelled && _net.IsServer && args.Effect != null)
+        if (_net.IsServer && args.Effect != null)
             QueueDel(EntityManager.GetEntity(args.Effect));
 
         if (args.Handled || args.Cancelled)
@@ -538,7 +546,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         return target.GetTileRef(EntityManager, _map) is { } tile &&
                !tile.IsSpace() &&
                tile.GetContentTileDefinition().Sturdy &&
-               !_turf.IsTileBlocked(tile, CollisionGroup.Impassable);
+               !_turf.IsTileBlocked(tile, CollisionGroup.Impassable) &&
+               !_xenoNest.HasAdjacentNestFacing(target);
     }
 
     private bool InRangePopup(EntityUid xeno, EntityCoordinates target, float range)
@@ -653,15 +662,27 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         if (choice != null &&
-            _prototype.TryIndex(choice, out var choiceProto) &&
-            choiceProto.TryGetComponent(out HiveConstructionUniqueComponent? unique, _compFactory) &&
-            OtherUniqueExists(unique.Id))
+            _prototype.TryIndex(choice, out var choiceProto))
         {
-            // server-only as the core may not be in the client's PVS bubble
-            if (_net.IsServer)
-                _popup.PopupEntity(Loc.GetString("cm-xeno-unique-exists", ("choice", choiceProto.Name)), xeno, PopupType.MediumCaution);
+            if (choiceProto.TryGetComponent(out HiveConstructionUniqueComponent? unique, _compFactory) &&
+                OtherUniqueExists(unique.Id))
+            {
+                // server-only as the core may not be in the client's PVS bubble
+                if (_net.IsServer)
+                    _popup.PopupEntity(Loc.GetString("cm-xeno-unique-exists", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
 
-            return false;
+                return false;
+            }
+
+            if (TryComp(xeno, out XenoComponent? xenoComp) &&
+                TryComp(xenoComp.Hive, out HiveComponent? hive) &&
+                hive.NewCoreAt > _timing.CurTime)
+            {
+                if (_net.IsServer)
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-cant-build-new-yet", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
+
+                return false;
+            }
         }
 
         return true;

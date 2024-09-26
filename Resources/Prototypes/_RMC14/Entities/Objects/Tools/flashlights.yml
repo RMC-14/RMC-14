@@ -54,6 +54,10 @@
     blacklist:
       components:
       - Xeno
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 - type: entity
   parent: RMCFlashlightBase
@@ -86,6 +90,12 @@
         map: [ "light" ]
   - type: Item
     size: Tiny
+  - type: Tag
+    tags:
+    - RMCPenlight
+
+- type: Tag
+  id: RMCPenlight
 
 - type: entity
   parent: RMCFlashlightBase

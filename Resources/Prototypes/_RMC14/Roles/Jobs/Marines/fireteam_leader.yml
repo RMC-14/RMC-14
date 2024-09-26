@@ -14,6 +14,11 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - FTL
+  overwatchSortPriority: -4
+  overwatchRoleName: Fire Team Leaders
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: tl
   special:
   - !type:AddComponentSpecial
     components:
@@ -25,11 +30,11 @@
         RMCSkillJtac: 3
     - type: CMVendorUser
       points: 45
+    - type: SquadArmorWearer
 
 - type: startingGear
   id: CMGearFireteamLeader
   equipment:
-    jumpsuit: JumpsuitMarine # TODO RMC14 all squad roles should spawn with no jumpsuit but still have clothes on
     back: CMSatchelMarine
     id: CMDogtagFireteamLeader
 
@@ -45,6 +50,9 @@
     id: CMDogtagFireteamLeader
     ears: CMHeadsetAlphaTeamLeader
 
+- type: playTimeTracker
+  id: CMJobFireteamLeader
+
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointFireteamLeader
@@ -58,5 +66,39 @@
       state: green
     - state: fireteam_leader
 
-- type: playTimeTracker
-  id: CMJobFireteamLeader
+- type: entity
+  parent: CMSpawnPointFireteamLeader
+  id: CMSpawnPointFireteamLeaderAlpha
+  suffix: Alpha
+  components:
+  - type: SquadSpawner
+    squad: SquadAlpha
+    role: CMFireteamLeader
+
+- type: entity
+  parent: CMSpawnPointFireteamLeader
+  id: CMSpawnPointFireteamLeaderBravo
+  suffix: Bravo
+  components:
+  - type: SquadSpawner
+    squad: SquadBravo
+    role: CMFireteamLeader
+
+- type: entity
+  parent: CMSpawnPointFireteamLeader
+  id: CMSpawnPointFireteamLeaderCharlie
+  suffix: Charlie
+  components:
+  - type: SquadSpawner
+    squad: SquadCharlie
+    role: CMFireteamLeader
+
+- type: entity
+  parent: CMSpawnPointFireteamLeader
+  id: CMSpawnPointFireteamLeaderDelta
+  suffix: Delta
+  components:
+  - type: SquadSpawner
+    squad: SquadDelta
+    role: CMFireteamLeader
+

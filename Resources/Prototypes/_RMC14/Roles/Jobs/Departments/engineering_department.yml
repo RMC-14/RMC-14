@@ -1,6 +1,7 @@
 ﻿- type: department
   parent: CMDepartmentBase
   id: CMEngineering
+  name: department-CMEngineering
   description: cm-department-Engineering-description
   color: "#A66300"
   roles:

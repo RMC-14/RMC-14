@@ -24,7 +24,7 @@
     sounds:
       Male: RMCMaleReptilian
       Female: RMCFemaleReptilian
-      Unsexed: RMCMaleReptilian
+      Unsexed: RMCUnisexReptilian
   - type: Wagging
   - type: MeleeWeapon
     soundHit:

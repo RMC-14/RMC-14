@@ -25,6 +25,9 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - ASO
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: cic
   special:
   - !type:AddComponentSpecial
     components:
@@ -56,8 +59,8 @@
     shoes: CMBootsBlack
     id: CMIDCardASO
     ears: RMCHeadsetMarineCommandAlternative
-    pocket1: CMPouchGeneralLarge
-    pocket2: CMPouchGeneralLarge
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
 
 - type: entity
   parent: CMSpawnPointJobBase

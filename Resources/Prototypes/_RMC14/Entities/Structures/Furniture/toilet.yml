@@ -11,7 +11,7 @@
   components:
   - type: Anchorable
     flags:
-    - Unanchorable
+    - Anchorable
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/toilet.rsi
     layers:
@@ -20,6 +20,7 @@
   #    - map: [ "DoorVisualState.DoorOpen" ]
   - type: Rotatable
   - type: Transform
+    anchored: true
     noRot: false
   - type: Strap
     whitelist:
@@ -33,10 +34,6 @@
     bodyType: Static
   - type: PlungerUse
   - type: Appearance
-  - type: SecretStash
-    secretPartName: secret-stash-part-toilet
-    examineStash: toilet-component-on-examine-found-hidden-item
-    openableStash: true
   - type: Drain
     autoDrain: false
   - type: StaticPrice

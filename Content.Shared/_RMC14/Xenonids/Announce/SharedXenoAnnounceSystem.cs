@@ -1,4 +1,5 @@
-﻿using Content.Shared.Mobs;
+﻿using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
@@ -17,7 +18,10 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
         if (args.NewMobState != MobState.Dead)
             return;
 
-        AnnounceSameHive(ent.Owner, Loc.GetString(ent.Comp.Message, ("xeno", ent.Owner)), color: ent.Comp.Color);
+        if(HasComp<ParasiteSpentComponent>(ent))
+            AnnounceSameHive(ent.Owner, Loc.GetString("rmc-xeno-parasite-announce-infect", ("xeno", ent.Owner)), color: ent.Comp.Color);
+        else
+            AnnounceSameHive(ent.Owner, Loc.GetString(ent.Comp.Message, ("xeno", ent.Owner)), color: ent.Comp.Color);
     }
 
     public string WrapHive(string message, Color? color = null)
@@ -59,5 +63,20 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
             return;
 
         AnnounceToHive(xeno, hive, message, sound, popup, color);
+    }
+
+    public void AnnounceAll(EntityUid source,
+        string message,
+        SoundSpecifier? sound = null,
+        PopupType? popup = null)
+    {
+        Announce(
+            source,
+            Filter.Empty().AddWhereAttachedEntity(HasComp<XenoComponent>),
+            message,
+            message,
+            sound,
+            popup
+        );
     }
 }

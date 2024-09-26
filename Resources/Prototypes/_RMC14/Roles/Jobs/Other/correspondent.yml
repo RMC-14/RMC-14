@@ -14,6 +14,9 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - CMCorrespondent
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: correspondent
   special:
   - !type:AddComponentSpecial
     components:
@@ -28,11 +31,11 @@
   equipment:
     jumpsuit: RMCJumpsuitCorrespondent
     outerClothing: RMCCoatCorrespondent
-    shoes: CMShoesLaceup
+    shoes: RMCShoesLaceup
     id: CMIDCardCorrespondent
     ears: CMHeadsetReporter
     #    belt: CMCamera TODO RMC14
-    pocket1: CMPouchGeneralLarge
+    pocket1: RMCPouchGeneralLarge
     pocket2: MicrophoneInstrument
 
 - type: entity

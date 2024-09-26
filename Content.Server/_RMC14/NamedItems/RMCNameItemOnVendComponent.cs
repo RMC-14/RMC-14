@@ -9,4 +9,7 @@ public sealed partial class RMCNameItemOnVendComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
     public RMCNamedItemType Item;
+
+    [DataField, AutoNetworkedField]
+    public string? Name;
 }

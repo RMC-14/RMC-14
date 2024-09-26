@@ -14,6 +14,10 @@
   supervisors: cm-job-supervisors-we-ya
   accessGroups:
   - MarineMain
+  - RMCWeYa
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: cl
   special:
   - !type:AddComponentSpecial
     components:
@@ -21,13 +25,15 @@
       skills:
         RMCSkillFirearms: 0
         RMCSkillVehicles: 1
+    - type: CMVendorUser
+      points: 50
 
 - type: startingGear
   id: CMGearLiaison
   equipment:
     jumpsuit: CMJumpsuitLiaisonBlack
     back: CMSatchel
-    shoes: CMShoesLaceup
+    shoes: RMCShoesLaceup
     id: CMIDCardLiaison
     ears: RMCHeadsetLiaison
 

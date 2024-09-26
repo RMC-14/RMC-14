@@ -12,4 +12,11 @@ public sealed partial class XenoAcidShroudComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId Spawn = "RMCSmokeAcidShroud";
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId[] Gases = new[]
+{
+        new EntProtoId("RMCSmokeAcidShroud"),
+        new EntProtoId("RMCSmokeNeurotoxinShroud"),
+    };
 }

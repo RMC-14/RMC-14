@@ -14,6 +14,12 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - SmartGunOperator
+  overwatchSortPriority: -2
+  overwatchShowName: true
+  overwatchRoleName: Smart Gun Operator
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: smartgunner
   special:
   - !type:AddComponentSpecial
     components:
@@ -24,11 +30,11 @@
         RMCSkillSmartGun: 1
     - type: CMVendorUser
       points: 45
+    - type: SquadArmorWearer
 
 - type: startingGear
   id: CMGearSmartGunOperator
   equipment:
-    jumpsuit: JumpsuitMarine # TODO RMC14 all squad roles should spawn with no jumpsuit but still have clothes on
     id: CMDogtagSmartGunOperator
 
 - type: startingGear
@@ -43,6 +49,9 @@
     id: CMDogtagSmartGunOperator
     ears: CMHeadsetAlpha
 
+- type: playTimeTracker
+  id: CMJobSmartGunOperator
+
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointSmartGunOperator
@@ -56,5 +65,39 @@
       state: green
     - state: smart_gun_operator
 
-- type: playTimeTracker
-  id: CMJobSmartGunOperator
+- type: entity
+  parent: CMSpawnPointSmartGunOperator
+  id: CMSpawnPointSmartGunOperatorAlpha
+  suffix: Alpha
+  components:
+  - type: SquadSpawner
+    squad: SquadAlpha
+    role: CMSmartGunOperator
+
+- type: entity
+  parent: CMSpawnPointSmartGunOperator
+  id: CMSpawnPointSmartGunOperatorBravo
+  suffix: Bravo
+  components:
+  - type: SquadSpawner
+    squad: SquadBravo
+    role: CMSmartGunOperator
+
+- type: entity
+  parent: CMSpawnPointSmartGunOperator
+  id: CMSpawnPointSmartGunOperatorCharlie
+  suffix: Charlie
+  components:
+  - type: SquadSpawner
+    squad: SquadCharlie
+    role: CMSmartGunOperator
+
+- type: entity
+  parent: CMSpawnPointSmartGunOperator
+  id: CMSpawnPointSmartGunOperatorDelta
+  suffix: Delta
+  components:
+  - type: SquadSpawner
+    squad: SquadDelta
+    role: CMSmartGunOperator
+

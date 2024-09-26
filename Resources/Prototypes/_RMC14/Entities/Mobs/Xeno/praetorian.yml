@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoPraetorian
   name: Praetorian
   description: A huge, looming beast of an alien.
@@ -54,7 +55,7 @@
     damage:
       groups:
         Brute: 40
-  - type: Tackle
+  - type: Tackle # min: 2, max: 5
     threshold: 3
     stun: 5
     chance: 0.45
@@ -76,5 +77,11 @@
         density: 185
         layer:
         - BulletImpassable
+  - type: RMCSize
+    size: Big
 #  - type: RMCXenoDamageVisuals # TODO RMC14
 #    prefix: praetorian
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: praetorian

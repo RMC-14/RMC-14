@@ -18,12 +18,15 @@
         RMCSkillFirearms: 1
     - type: CMVendorUser
       points: 45
+    - type: SquadArmorWearer
   hasIcon: false
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: private
 
 - type: startingGear
   id: CMGearRifleman
   equipment:
-    jumpsuit: JumpsuitMarine # TODO RMC14 all squad roles should spawn with no jumpsuit but still have clothes on
     back: CMSatchelMarine
     id: CMDogtagRifleman
 
@@ -39,6 +42,9 @@
     id: CMDogtagRifleman
     ears: CMHeadsetAlpha
 
+- type: playTimeTracker
+  id: CMJobRifleman
+
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointRifleman
@@ -52,5 +58,38 @@
       state: green
     - state: rifleman
 
-- type: playTimeTracker
-  id: CMJobRifleman
+- type: entity
+  parent: CMSpawnPointRifleman
+  id: CMSpawnPointRiflemanAlpha
+  suffix: Alpha
+  components:
+  - type: SquadSpawner
+    squad: SquadAlpha
+    role: CMRifleman
+
+- type: entity
+  parent: CMSpawnPointRifleman
+  id: CMSpawnPointRiflemanBravo
+  suffix: Bravo
+  components:
+  - type: SquadSpawner
+    squad: SquadBravo
+    role: CMRifleman
+
+- type: entity
+  parent: CMSpawnPointRifleman
+  id: CMSpawnPointRiflemanCharlie
+  suffix: Charlie
+  components:
+  - type: SquadSpawner
+    squad: SquadCharlie
+    role: CMRifleman
+
+- type: entity
+  parent: CMSpawnPointRifleman
+  id: CMSpawnPointRiflemanDelta
+  suffix: Delta
+  components:
+  - type: SquadSpawner
+    squad: SquadDelta
+    role: CMRifleman

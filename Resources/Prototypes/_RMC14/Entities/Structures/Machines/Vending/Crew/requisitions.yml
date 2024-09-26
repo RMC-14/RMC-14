@@ -61,8 +61,8 @@
       #  amount: 3
     - name: Explosives
       entries:
-      #- id: M15 Fragmentation Grenade
-      #  amount: 2
+      - id: CMGrenadeFragOld
+        amount: 2
       #- id: M20 Claymore Anti-Personnel Mine
       #  amount: 4
       - id: CMGrenadeHighExplosive
@@ -71,8 +71,8 @@
       #  amount: 4
       #- id: M40 HPDP White Phosphorus Smoke Grenade
       #  amount: 4
-      #- id: M40 HSDP Smoke Grenade
-      #  amount: 5
+      - id: CMGrenadeSmoke
+        amount: 5
       #- id: M74 AGM-Frag Airburst Grenade
       #  amount: 4
       #- id: M74 AGM-Incendiary Airburst Grenade
@@ -99,8 +99,8 @@
         amount: 2
       - id: CMWebbing
         amount: 5
-      #- id: Drop Pouch
-      #   amount: 2
+      - id: CMWebbingPouch
+        amount: 2
       #- id: Shoulder Holster
       #  amount: 2
       #- id: Knife Webbing
@@ -109,14 +109,14 @@
       entries:
       - id: CMBackpackMarine
         amount: 15
-      #- id: Shotgun Scabbard
-      #  amount: 10
+      - id: RMCScabbardShotgun
+        amount: 10
       #- id: Pyrotechnician G4-1 Fueltank
       #  amount: 2
       - id: CMBackpackWelder
         amount: 2
-      #- id: Mortar Shell Backpack
-      #  amount: 1
+      - id: CMBackpackMortar
+        amount: 1
       - id: RMCSatchelWelder
         amount: 5
       #- id: IMP Ammo Rack
@@ -127,8 +127,8 @@
       #  amount: 20
     - name: Belts
       entries:
-      #- id: G8-A General Utility Pouch
-      #   amount: 2
+      - id: RMCBeltUtilityGeneral
+        amount: 2
       - id: CMBeltMarine
         amount: 15
       #- id: M276 General Pistol Holster Rig
@@ -146,58 +146,58 @@
       #  amount: 2
       #- id: M276 Shotgun Shell Loading Rig
       #  amount: 10
-      #- id: M276 Mortar Operator Belt
-      #  amount: 2
+      - id: CMBeltMortar
+        amount: 2
     - name: Pouches
       entries:
-      - id: CMPouchAutoinjector
+      - id: RMCPouchAutoinjector
         amount: 1
-      #- id: CMPouchMedkit
+      #- id: RMCPouchMedkit
       #  amount: 2
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchFirstAidInjectors
         amount: 5
-      - id: CMPouchFirstResponder
+      - id: RMCPouchFirstResponder
         name: First Responder Pouch (Empty)
         amount: 2
-      - id: CMPouchSyringe
+      - id: RMCPouchSyringe
         amount: 2
-      - id: CMPouchToolsFill
+      - id: RMCPouchToolsFill
         name: Tools Pouch (Full)
         amount: 2
-      - id: CMPouchConstruction
+      - id: RMCPouchConstruction
         amount: 2
-      - id: CMPouchElectronics
+      - id: RMCPouchElectronics
         amount: 2
-      - id: CMPouchExplosive
+      - id: RMCPouchExplosive
         amount: 2
-      - id: CMPouchFlareFilled
+      - id: RMCPouchFlareFilled
         amount: 5
-      - id: CMPouchDocument
+      - id: RMCPouchDocument
         amount: 2
-      #- id: CMPouchSling
+      #- id: RMCPouchSling
       #  amount: 2
-      - id: CMPouchMacheteFilled
+      - id: RMCPouchMacheteFilled
         amount: 1
-      - id: CMPouchBayonet
+      - id: RMCPouchBayonet
         name: Bayonet Sheath (Full)
         amount: 2
-      - id: CMPouchGeneralMedium
+      - id: RMCPouchGeneralMedium
         amount: 2
-      - id: CMPouchMagazine
+      - id: RMCPouchMagazine
         amount: 5
-      - id: CMPouchShotgun
+      - id: RMCPouchShotgun
         amount: 5
-      - id: CMPouchPistol
+      - id: RMCPouchPistol
         amount: 5
-      - id: CMPouchMagazinePistolLarge
+      - id: RMCPouchMagazinePistolLarge
         amount: 5
       #- id: Fuel Tank Strap Pouch
       #  amount: 4
-      - id: CMPouchGeneralLarge
+      - id: RMCPouchGeneralLarge
         amount: 1
-      - id: CMPouchMagazineLarge
+      - id: RMCPouchMagazineLarge
         amount: 1
-      #- id: CMPouchShotgunLarge
+      #- id: RMCPouchShotgunLarge
       #  amount: 1
     - name: Miscellaneous
       entries:
@@ -211,8 +211,8 @@
       #   amount: 2
       - id: CMPackFlare
         amount: 10
-      #- id: Machete Scabbard (Full)
-      #  amount: 6
+      - id: RMCScabbardMacheteFilled
+        amount: 6
       #- id: MB-6 Folding Barricades (x3)
       #   amount: 3
       #- id: Motion Detector
@@ -221,10 +221,10 @@
       #  amount: 4
       - id: RMCBinoculars
         amount: 2
-      #- id: Rangefinder
-      #   amount: 1
-      #- id: Laser Designator
-      #  amount: 1
+      - id: RMCRangefinder
+        amount: 1
+      - id: RMCLaserDesignator
+        amount: 1
       #- id: Welding Goggles
       #  amount: 3
       - id: CMFireExtinguisherPortable
@@ -235,10 +235,10 @@
       #  amount: 1
       #- id: Sentry Gun Network Laptop
       #   amount: 4
-      #- id: JTAC Pamphlet
-      #  amount: 1
-      #- id: Engineering Pamphlet
-      #  amount: 1
+      - id: CMPamphletJTAC
+        amount: 1
+      - id: CMPamphletEngineer
+        amount: 1
       #- id: Powerloader Certification
       #  amount: 1
       #- id: Spare PDT/L Battle Buddy Kit
@@ -263,11 +263,11 @@
     sections:
     - name: Regular ammunition
       entries:
-      - id: CMBoxShotgunBuckshot
+      - id: RMCBoxShotgunBuckshot
         amount: 40
-      - id: CMBoxShotgunFlechette
+      - id: RMCBoxShotgunFlechette
         amount: 40
-      - id: CMBoxShotgunSlugs
+      - id: RMCBoxShotgunSlugs
         amount: 40
       - id: CMMagazineRifleM4SPR
         amount: 45
@@ -387,8 +387,8 @@
       entries:
       - id: RMCAttachmentAngledGrip
         amount: 7
-      #- id: RMCAttachmentBipod
-      #  amount: 7
+      - id: RMCAttachmentBipod
+        amount: 7
       - id: RMCAttachmentBurstFireAssembly
         amount: 5
       - id: RMCAttachmentGyroscopicStabilizer

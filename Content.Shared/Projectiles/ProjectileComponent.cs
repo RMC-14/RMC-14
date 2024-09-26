@@ -27,12 +27,6 @@ public sealed partial class ProjectileComponent : Component
     public EntityUid? Weapon;
 
     /// <summary>
-    ///     Ammo used to shoot this projectile.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public EntityUid? AmmoSource;
-
-    /// <summary>
     ///     The projectile spawns inside the shooter most of the time, this prevents entities from shooting themselves.
     /// </summary>
     [DataField, AutoNetworkedField]
@@ -77,7 +71,7 @@ public sealed partial class ProjectileComponent : Component
     /// <summary>
     ///     Whether this projectile has already damaged an entity.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool DamagedEntity;
 
     /// <summary>

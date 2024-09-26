@@ -55,7 +55,10 @@
   description: You wear this on your back and put items into it.
   components:
   - type: StorageOpenDoAfter
+    skipInHand: true
+    skipOnGround: true
   - type: StorageCloseOnMove
+    skipInHand: true
 
 - type: entity
   parent: CMBackpack
@@ -139,8 +142,8 @@
     grid:
     - 0,0,15,1
     whitelist:
-      tags:
-      - CMMortarShell
+      components:
+      - MortarShell
   - type: FixedItemSizeStorage
 
 - type: entity

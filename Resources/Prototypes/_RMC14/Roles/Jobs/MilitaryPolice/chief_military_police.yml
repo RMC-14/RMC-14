@@ -19,6 +19,9 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - CMP
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: mp
   special:
   - !type:AddComponentSpecial
     components:
@@ -53,7 +56,7 @@
     ears: CMHeadsetCMP
     belt: CMBeltSecurityMPFilled
     #    pocket1: TODO RMC14 tape recorder
-    pocket2: CMPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
 
 - type: entity
   parent: CMSpawnPointJobBase

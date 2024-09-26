@@ -1,0 +1,30 @@
+﻿<controls:OverwatchConsoleWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Overwatch"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Title="Overwatch Console"
+    MinSize="1000 500">
+    <Control Name="Wrapper" Access="Public" VerticalAlignment="Top">
+        <PanelContainer Name="OverwatchViewContainer" Access="Public">
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
+            </PanelContainer.PanelOverride>
+            <BoxContainer Orientation="Vertical">
+                <PanelContainer>
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="0 0 0 1" />
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Horizontal" Margin="0 10">
+                        <Control HorizontalExpand="True" />
+                        <RichTextLabel Name="OverwatchHeader" Access="Public" />
+                        <Control HorizontalExpand="True" />
+                    </BoxContainer>
+                </PanelContainer>
+                <BoxContainer Name="SquadsContainer" Orientation="Horizontal" Access="Public" HorizontalAlignment="Center"
+                              Margin="0 10" SeparationOverride="10" />
+            </BoxContainer>
+        </PanelContainer>
+        <BoxContainer Name="SquadViewContainer" Access="Public" Orientation="Vertical"
+                      Visible="False" />
+    </Control>
+</controls:OverwatchConsoleWindow>

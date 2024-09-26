@@ -5,13 +5,14 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Transform
+    anchored: true
   - type: Clickable
   - type: Sprite
     sprite: _RMC14/Structures/stairs.rsi
     state: p_stair_full
     drawdepth: FloorTiles
-  - type: Transform
-    anchored: true
+  - type: BlockWeeds
 
 - type: entity
   id: RMCStairsCorner

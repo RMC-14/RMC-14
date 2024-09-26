@@ -31,6 +31,7 @@ public sealed class CMArmorSystem : EntitySystem
         SubscribeLocalEvent<CMArmorComponent, DamageModifyEvent>(OnDamageModify);
         SubscribeLocalEvent<CMArmorComponent, CMGetArmorEvent>(OnGetArmor);
         SubscribeLocalEvent<CMArmorComponent, InventoryRelayedEvent<CMGetArmorEvent>>(OnGetArmorRelayed);
+        SubscribeLocalEvent<CMArmorComponent, InventoryRelayedEvent<GetExplosionResistanceEvent>>(OnGetExplosionResistanceRelayed);
         SubscribeLocalEvent<CMArmorComponent, GetExplosionResistanceEvent>(OnGetExplosionResistance);
         SubscribeLocalEvent<CMArmorComponent, GotEquippedEvent>(OnGotEquipped);
 
@@ -82,6 +83,18 @@ public sealed class CMArmorSystem : EntitySystem
         args.Args.Bio += armored.Comp.Bio;
     }
 
+    private void OnGetExplosionResistanceRelayed(Entity<CMArmorComponent> ent, ref InventoryRelayedEvent<GetExplosionResistanceEvent> args)
+    {
+        // TODO RMC14 unhalve this when we can calculate explosion damage better
+        var armor = ent.Comp.ExplosionArmor / 2;
+
+        if (armor <= 0)
+            return;
+
+        var resist = (float) Math.Pow(1.1, armor / 5.0);
+        args.Args.DamageCoefficient /= resist;
+    }
+
     private void OnGetExplosionResistance(Entity<CMArmorComponent> armored, ref GetExplosionResistanceEvent args)
     {
         // TODO RMC14 unhalve this when we can calculate explosion damage better
@@ -131,6 +144,9 @@ public sealed class CMArmorSystem : EntitySystem
             if (slot.ContainedEntity == null)
                 continue;
 
+            if (HasComp<ClothingIgnoreBlockBackpackComponent>(slot.ContainedEntity))
+                return;
+
             args.Cancel();
             args.Reason = "rmc-block-backpack-cant-other";
             break;
@@ -141,6 +157,9 @@ public sealed class CMArmorSystem : EntitySystem
     {
         ref readonly var ev = ref args.Args.Event;
         if (ev.Cancelled)
+            return;
+
+        if (HasComp<ClothingIgnoreBlockBackpackComponent>(args.Args.Event.Equipment))
             return;
 
         if ((ev.SlotFlags & SlotFlags.BACK) == 0)

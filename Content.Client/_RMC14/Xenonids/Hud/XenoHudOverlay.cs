@@ -1,9 +1,11 @@
 using System.Numerics;
 using Content.Client._RMC14.Medical.HUD;
 using Content.Client._RMC14.NightVision;
+using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Mobs;
 using Content.Shared.Damage;
 using Content.Shared.Ghost;
 using Content.Shared.Mobs;
@@ -44,6 +46,7 @@ public sealed class XenoHudOverlay : Overlay
     private readonly EntityQuery<MobThresholdsComponent> _mobThresholdsQuery;
     private readonly EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
     private readonly EntityQuery<TransformComponent> _xformQuery;
+    private readonly EntityQuery<XenoShieldComponent> _xenoShieldQuery;
 
     private readonly ShaderInstance _shader;
 
@@ -70,6 +73,7 @@ public sealed class XenoHudOverlay : Overlay
         _mobThresholdsQuery = _entity.GetEntityQuery<MobThresholdsComponent>();
         _xenoPlasmaQuery = _entity.GetEntityQuery<XenoPlasmaComponent>();
         _xformQuery = _entity.GetEntityQuery<TransformComponent>();
+        _xenoShieldQuery = _entity.GetEntityQuery<XenoShieldComponent>();
 
         _shader = _prototype.Index<ShaderPrototype>("unshaded").Instance();
         ZIndex = 1;
@@ -80,10 +84,19 @@ public sealed class XenoHudOverlay : Overlay
         var isAdminGhost = _entity.TryGetComponent(_players.LocalEntity, out GhostComponent? ghost) &&
                            ghost.CanGhostInteract;
         var isXeno = _entity.HasComponent<XenoComponent>(_players.LocalEntity);
+        var isGhost = false;
 
-        if (!isXeno && !isAdminGhost)
-            return;
-
+        if (!_entity.HasComponent<CMGhostXenoHudComponent>(_players.LocalEntity))
+        {
+            if (!isXeno && !isAdminGhost)
+                return;
+        }
+        else
+        {
+            if (_entity.HasComponent<CMGhostXenoHudComponent>(_players.LocalEntity))
+                isGhost = true;
+            isXeno = true;
+        }
         var handle = args.WorldHandle;
         var eyeRot = args.Viewport.Eye?.Rotation ?? default;
 
@@ -95,7 +108,8 @@ public sealed class XenoHudOverlay : Overlay
         if (isXeno)
         {
             DrawBars(in args, scaleMatrix, rotationMatrix);
-            DrawDeadIcon(in args, scaleMatrix, rotationMatrix);
+            if (!isGhost)
+                DrawDeadIcon(in args, scaleMatrix, rotationMatrix);
         }
 
         if (isXeno || isAdminGhost)
@@ -133,6 +147,7 @@ public sealed class XenoHudOverlay : Overlay
             {
                 UpdateHealth((uid, xeno, sprite, mobState), handle);
                 UpdatePlasma((uid, xeno, sprite), handle);
+                UpdateShields((uid, xeno, sprite), handle);
             }
         }
     }
@@ -258,6 +273,36 @@ public sealed class XenoHudOverlay : Overlay
         var bounds = sprite.Bounds;
         var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) texture.Height / EyeManager.PixelsPerMeter * bounds.Height + xeno.HudOffset.Y;
         var xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float) texture.Width / EyeManager.PixelsPerMeter * bounds.Width + xeno.HudOffset.X;
+
+        var position = new Vector2(xOffset, yOffset);
+        handle.DrawTexture(texture, position);
+    }
+
+    private void UpdateShields(Entity<XenoComponent, SpriteComponent> ent, DrawingHandleWorld handle)
+    {
+        var (uid, xeno, sprite) = ent;
+        if (!_xenoShieldQuery.TryComp(uid, out var comp))
+            return;
+
+        var mobThresholds = _mobThresholdsQuery.CompOrNull(uid);
+        _mobThresholds.TryGetThresholdForState(uid, MobState.Critical, out var critThresholdNullable, mobThresholds);
+        _mobThresholds.TryGetDeadThreshold(uid, out var deadThresholdNullable, mobThresholds);
+
+        critThresholdNullable ??= deadThresholdNullable;
+        if (critThresholdNullable == null)
+            return;
+
+        var shield = comp.ShieldAmount;
+        var max = critThresholdNullable.Value.Double();
+        var level = ContentHelpers.RoundToLevels(shield.Double(), max, 11);
+        var name = level > 0 ? $"{level * 10}" : "0";
+        var state = $"xenoshield{name}";
+        var icon = new Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_hud.rsi"), state);
+        var texture = _sprite.GetFrame(icon, _timing.CurTime);
+
+        var bounds = sprite.Bounds;
+        var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float)texture.Height / EyeManager.PixelsPerMeter * bounds.Height + xeno.HudOffset.Y;
+        var xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float)texture.Width / EyeManager.PixelsPerMeter * bounds.Width + xeno.HudOffset.X;
 
         var position = new Vector2(xOffset, yOffset);
         handle.DrawTexture(texture, position);

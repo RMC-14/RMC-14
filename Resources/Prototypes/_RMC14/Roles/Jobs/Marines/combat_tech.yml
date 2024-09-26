@@ -14,6 +14,11 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - CombatTech
+  overwatchSortPriority: 0
+  overwatchRoleName: Combat Technicians
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: engi
   special:
   - !type:AddComponentSpecial
     components:
@@ -26,11 +31,11 @@
         RMCSkillVehicles: 1
     - type: CMVendorUser
       points: 45
+    - type: SquadArmorWearer
 
 - type: startingGear
   id: CMGearCombatTech
   equipment:
-    jumpsuit: CMJumpsuitMarineEngineer # TODO RMC14 all squad roles should spawn with no jumpsuit but still have clothes on
     back: CMSatchelMarineTech
     id: CMDogtagCombatTech
 
@@ -48,6 +53,9 @@
     ears: CMHeadsetAlphaEngineer
     belt: CMBeltUtilityCombatFilled
 
+- type: playTimeTracker
+  id: CMJobCombatTech
+
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointCombatTech
@@ -61,5 +69,39 @@
       state: green
     - state: combat_tech
 
-- type: playTimeTracker
-  id: CMJobCombatTech
+- type: entity
+  parent: CMSpawnPointCombatTech
+  id: CMSpawnPointCombatTechAlpha
+  suffix: Alpha
+  components:
+  - type: SquadSpawner
+    squad: SquadAlpha
+    role: CMCombatTech
+
+- type: entity
+  parent: CMSpawnPointCombatTech
+  id: CMSpawnPointCombatTechBravo
+  suffix: Bravo
+  components:
+  - type: SquadSpawner
+    squad: SquadBravo
+    role: CMCombatTech
+
+- type: entity
+  parent: CMSpawnPointCombatTech
+  id: CMSpawnPointCombatTechCharlie
+  suffix: Charlie
+  components:
+  - type: SquadSpawner
+    squad: SquadCharlie
+    role: CMCombatTech
+
+- type: entity
+  parent: CMSpawnPointCombatTech
+  id: CMSpawnPointCombatTechDelta
+  suffix: Delta
+  components:
+  - type: SquadSpawner
+    squad: SquadDelta
+    role: CMCombatTech
+

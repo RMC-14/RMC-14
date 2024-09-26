@@ -16,6 +16,9 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - MarineMain
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: cic
   special:
   - !type:AddComponentSpecial
     components:
@@ -38,13 +41,15 @@
         RMCSkillSurgery: 1
         RMCSkillVehicles: 1
     - type: MarineOrders
+    - type: CMVendorUser
+      points: 120
 
 - type: startingGear
   id: CMGearExecutiveOfficer
   equipment:
     jumpsuit: CMJumpsuitBO
     back: CMSatchel
-    shoes: CMShoesLaceup
+    shoes: RMCShoesLaceup
     head: CMHeadCap
     outerClothing: CMCoatOfficer
     id: CMIDCardExecutiveOfficer

@@ -16,7 +16,7 @@
           map: [ "enum.SolutionContainerLayers.Fill" ]
           visible: false
     - type: Item
-      size: Normal
+      size: Huge
       sprite: Objects/Specific/Chemistry/jug.rsi
     - type: MixableSolution
       solution: beaker
@@ -72,7 +72,7 @@
         - !type:SpillBehavior { }
         - !type:SpawnEntitiesBehavior
           spawn:
-            SheetPlastic1:
+            RMCSheetPlastic1:
               min: 0
               max: 1
           transferForensics: true

@@ -10,6 +10,9 @@
   supervisors: cm-job-supervisors-qm
   accessGroups:
   - CMCargoTech
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: ct
   special:
   - !type:AddComponentSpecial
     components:
@@ -29,7 +32,7 @@
     gloves: CMHandsInsulated
     id: CMIDCardCargoTech
     ears: CMHeadsetRequisition
-    pocket1: CMPouchGeneralMedium
+    pocket1: RMCPouchGeneralMedium
     pocket2: CMStampApproved
 #    belt: TODO RMC14 M276 Pattern General Pistol Holster Rig Filled
 

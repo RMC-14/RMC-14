@@ -1,6 +1,7 @@
 ﻿- type: entity
   id: CMVendorBundleRiflemanApparel
   name: standard marine apparel
+  description: Contains a marine jumpsuit, a M10 helmet, a headset, combat gloves and combat boots.
   categories:
   - HideSpawnMenu
   components:
@@ -11,6 +12,7 @@
     bundle:
     - ArmorHelmetM10
     - CMVendorHeadsetSquad
+    - JumpsuitMarine
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -18,23 +20,27 @@
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleFireteamLeaderApparel
   name: standard marine apparel
+  description: Contains a marine jumpsuit, a M12 helmet, a headset, insulated gloves and combat boots.
   components:
   - type: CMVendorBundle
     bundle:
-    - ArmorHelmetM10 # TODO RMC14 M4
+    - CMArmorHelmetM12
     - CMVendorHeadsetSquadFTL
-    - CMHandsBlackMarine
+    - JumpsuitMarine
+    - CMHandsInsulated
     - CMBootsBlackFilled
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleSquadMedicalApparel
   name: standard marine apparel
+  description: Contains a corpsman jumpsuit, a M10 helmet, a headset, combat gloves and combat boots.
   components:
   - type: CMVendorBundle
     bundle:
     - CMArmorHelmetM10Medic # TODO RMC14 M4
     - CMVendorHeadsetSquadCorpsman
+    - CMJumpsuitMarineMedic
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -42,6 +48,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleSquadMedicalEssentials
   name: essential medical set
+  description: Contains a stasis bag, a defibrillator, a roller bed, medical tools, and two blood packs.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Medical/stasisbag.rsi
@@ -64,11 +71,13 @@
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCombatTechnicianApparel
   name: standard marine apparel
+  description: Contains a marine jumpsuit, a M10 helmet, a headset, insulated gloves and combat boots.
   components:
   - type: CMVendorBundle
     bundle:
     - CMArmorHelmetM10Tech # TODO RMC14 M4
     - CMVendorHeadsetSquadComTech
+    - CMJumpsuitMarineEngineer
     - CMHandsInsulated
     - CMBootsBlackFilled
 
@@ -76,6 +85,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCombatTechnicianEssentials
   name: essential engineer set
+  description: Contains 50 metal, 40 plasteel, 25 sandbags, a high-capacity power cell, an entrenching tool and a light replacer.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Bombs/c4.rsi
@@ -95,11 +105,13 @@
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleSquadLeaderApparel
   name: standard marine apparel
+  description: Contains a marine jumpsuit, a M11 helmet, a headset, combat gloves and combat boots.
   components:
   - type: CMVendorBundle
     bundle:
     - CMArmorHelmetM11 # TODO RMC14 M4
     - CMVendorHeadsetSquadLeader
+    - JumpsuitMarine
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -107,10 +119,12 @@
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleWeaponsSpecialistApparel
   name: standard marine apparel
+  description: Contains a marine jumpsuit, a headset, combat gloves and combat boots.
   components:
   - type: CMVendorBundle
     bundle:
     - CMVendorHeadsetSquad
+    - JumpsuitMarine
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -118,6 +132,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleMilitaryPoliceApparel
   name: Essential Police Set
+  description: Contains security HUD-glasses, a filled security belt and a M10 helmet.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
@@ -127,11 +142,12 @@
     - CMGlassesSecurity
     - CMBeltSecurityMPFilled
     - CMArmorHelmetM10MP
-    
+
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCrewMedicalEssentialsNurse
   name: essential medical set
+  description: Contains a defibrillator, a first-aid kit, medical tools and a flashlight.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Medical/defib.rsi
@@ -144,4 +160,5 @@
     - CMSurgicalLine
     - CMSynthGraft
     - CMSurgicalCaseFilled
+    - RMCFlashlightPen
 #   - Syringe case # TODO RMC14 syringe cases

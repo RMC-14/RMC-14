@@ -58,7 +58,7 @@
       conditions:
       - !type:EntityAnchored {}
       steps:
-        - material: Cable
+        - material: RMCCable
           amount: 1
           doAfter: 4
 
@@ -167,7 +167,7 @@
       conditions:
       - !type:EntityAnchored {}
       steps:
-      - material: Cable
+      - material: RMCCable
         amount: 1
         doAfter: 4
 

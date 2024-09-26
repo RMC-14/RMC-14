@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "equipped-BELT, welder_flame Taken from tgstation at https://github.com/tgstation/tgstation/blob/eea0599511b088fdab9d43e562210cdbd51c6a98/icons/obj/tools.dmi. inhand-left-flame, inhand-right-flame by https://github.com/Aexxie. Everything else Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/c8c7cb927b013398cb4af9794783e964107513f5/icons/obj/items/items.dmi.",
+  "copyright": "equipped-BELT, taken from tgstation at https://github.com/tgstation/tgstation/blob/eea0599511b088fdab9d43e562210cdbd51c6a98/icons/obj/tools.dmi. Everything else Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/6791699de749afc1c62bc65ec6f2326a00b3bb61/icons/obj/items/items.dmi, https://github.com/cmss13-devs/cmss13/blob/bec6653d487a49aa2b5a8e0c97bed9612f620211/icons/mob/humans/onmob/items_lefthand_0.dmi, and https://github.com/cmss13-devs/cmss13/blob/bec6653d487a49aa2b5a8e0c97bed9612f620211/icons/mob/humans/onmob/items_righthand_0.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -11,11 +11,11 @@
       "name": "icon"
     },
     {
-      "name": "welder_flame",
+      "name": "welder_on",
       "delays": [
         [
-          0.2,
-          0.1
+          0.5,
+          0.3
         ]
       ]
     },
@@ -28,54 +28,46 @@
       "directions": 4
     },
     {
-      "name": "inhand-left-flame",
+      "name": "inhand-left-on",
       "directions": 4,
       "delays": [
         [
-          0.2,
-          0.2,
-          0.2
+          0.3,
+          0.5
         ],
         [
-          0.2,
-          0.2,
-          0.2
+          0.3,
+          0.5
         ],
         [
-          0.2,
-          0.2,
-          0.2
+          0.3,
+          0.5
         ],
         [
-          0.2,
-          0.2,
-          0.2
+          0.3,
+          0.5
         ]
       ]
     },
     {
-      "name": "inhand-right-flame",
+      "name": "inhand-right-on",
       "directions": 4,
       "delays": [
         [
-          0.2,
-          0.2,
-          0.2
+          0.3,
+          0.5
         ],
         [
-          0.2,
-          0.2,
-          0.2
+          0.3,
+          0.5
         ],
         [
-          0.2,
-          0.2,
-          0.2
+          0.3,
+          0.5
         ],
         [
-          0.2,
-          0.2,
-          0.2
+          0.3,
+          0.5
         ]
       ]
     },

@@ -17,7 +17,16 @@
         mask:
         - MobMask
         layer:
-        - MobLayer
+        - Opaque
+        - XenoProjectileImpassable
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        density: 185
+        restitution: 0.0
+        layer:
+        - BulletImpassable
   - type: SolutionContainerManager
   - type: InjectableSolution
     solution: chemicals
@@ -60,6 +69,7 @@
     - FootstepSound
     - DoorBumpOpener
   - type: Marine
+  - type: RMCSuitLight
   - type: HolocardState
   - type: Hunger
   - type: Thirst
@@ -112,6 +122,8 @@
       enum.CMMobStateActionsUI.Key:
         type: CMGhostActionBui
         requireInputValidation: false
+      enum.TacticalMapUserUi.Key:
+        type: TacticalMapUserBui
   - type: Infectable
   - type: Tackleable
   - type: Tackle
@@ -131,6 +143,9 @@
     coldDamageThreshold: 260
     currentTemperature: 310.15
     specificHeat: 42
+  - type: TemperatureSpeed
+    thresholds:
+      273: 1
   - type: ThermalRegulator
     metabolismHeat: 800
     radiatedHeat: 100
@@ -147,6 +162,9 @@
       types:
         Asphyxiation: -0.33
   - type: NoSlip
+  - type: NoClothingSlowdown
+  - type: RMCSize
+    size: Humanoid
   - type: AffectableByWeeds
   - type: UserIFF
   - type: UserLimitHits
@@ -178,6 +196,7 @@
   - type: CrashLandable
   - type: StunShakeable
   - type: StunShakeableUser
+  - type: MindCheck
   - type: GenericVisualizer
     visuals:
       enum.CreamPiedVisuals.Creamed:
@@ -196,3 +215,11 @@
             sprite: _RMC14/Effects/xeno_spray_acid.rsi
             state: human_acid_enhanced
             visible: true
+  - type: ActiveInputMover
+  - type: DropItemsOnRest
+  - type: UserBlockShootingInsideContainers
+  - type: TacticalMapTracked
+    trackDead: true
+  - type: TacticalMapUser
+    actionId: RMCActionOpenTacticalMapMarine
+    marines: true

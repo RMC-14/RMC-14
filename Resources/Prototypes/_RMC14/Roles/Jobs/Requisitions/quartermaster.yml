@@ -16,6 +16,9 @@
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - CMQM
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: ct
   special:
   - !type:AddComponentSpecial
     components:
@@ -42,8 +45,10 @@
     gloves: CMHandsInsulated
     id: CMIDCardQuartermaster
     ears: CMHeadsetQM
-    pocket1: CMPouchGeneralMedium
+    pocket1: RMCPouchGeneralMedium
     pocket2: CMFlash
+  inhand:
+  - CMStampApproved
 
 - type: entity
   parent: CMSpawnPointJobBase

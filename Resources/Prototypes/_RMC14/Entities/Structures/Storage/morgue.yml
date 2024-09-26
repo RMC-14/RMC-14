@@ -35,7 +35,7 @@
           HasContents: {visible: true}
           HasMob: {visible: true}
           HasSoul: {visible: true}
-  - type: InteractedBlacklist
+  - type: InsertBlacklist
     blacklist:
       components:
       - Xeno
@@ -75,7 +75,7 @@
         enum.CrematoriumVisualLayers.LightContent:
           True: { visible: true }
           False: { visible: false }
-  - type: InteractedBlacklist
+  - type: InsertBlacklist
     blacklist:
       components:
       - Xeno

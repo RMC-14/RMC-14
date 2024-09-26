@@ -10,6 +10,9 @@
   supervisors: cm-job-supervisors-ce
   accessGroups:
   - MaintTech
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: engi
   special:
   - !type:AddComponentSpecial
     components:
@@ -32,7 +35,7 @@
     id: CMIDCardMaintTech
     ears: CMHeadsetEngineer
     #    belt: TODO RMC14 M276 Pattern General Pistol Holster Rig Filled
-    pocket2: CMPouchGeneralMedium
+    pocket2: RMCPouchGeneralMedium
 
 - type: entity
   parent: CMSpawnPointJobBase

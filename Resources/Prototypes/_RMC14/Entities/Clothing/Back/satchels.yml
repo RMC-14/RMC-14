@@ -29,6 +29,37 @@
 
 - type: entity
   parent: CMSatchel
+  id: RMCBackpackScout
+  name: M68 thermal cloak
+  description: The lightweight thermal dampeners and optical camouflage provided by this cloak are weaker than those found in standard UNMC ghillie suits. In exchange, the cloak can be worn over combat armor and offers the wearer high maneuverability and adaptability to many environments.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/scout_cloak.rsi
+  - type: Storage
+    grid:
+    - 0,0,20,1 # 21, Satchel but with backpack capacity
+  - type: ClothingRequireEquipped
+    whitelist:
+      tags:
+      - RMCScoutArmor
+    denyReason: rmc-wear-scout-armor-required
+  - type: ThermalCloak
+    opacity: 0.03 # Put to 0.03 for testing
+    restrictWeapons: true
+    cloakedHideLayers:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Tail
+    - Snout # I don't know if this is hugely problematic but better safe than sorry
+    whitelist:
+      components:
+      - ScoutWhitelist
+    cloakSound: /Audio/_RMC14/Effects/Cloak/cloak_scout_on.ogg
+    uncloakSound: /Audio/_RMC14/Effects/Cloak/cloak_scout_off.ogg
+
+- type: entity
+  parent: CMSatchel
   id: CMSatchelEngineer
   name: industrial satchel
   description: A tough satchel with extra pockets.
@@ -157,7 +188,7 @@
     solution: tank
   - type: DrawableSolution
     solution: tank
-    
+
 - type: entity
   parent: RMCSatchelWelder
   id: RMCSatchelWelderChestrig

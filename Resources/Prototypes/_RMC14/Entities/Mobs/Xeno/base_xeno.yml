@@ -70,7 +70,7 @@
     sound:
       collection: XenoDeath
       params:
-        volume: -12
+        volume: -4
   - type: HealthExaminable
     examinableTypes:
     - Blunt
@@ -94,6 +94,7 @@
   - type: InputMover
   - type: LagCompensation
   - type: MobMover
+  - type: Emoting
   - type: Actions
   - type: Alerts
   - type: Appearance
@@ -152,13 +153,18 @@
         type: XenoOrderConstructionBui
       enum.XenoWordQueenUI.Key:
         type: XenoWordQueenBui
+      enum.TacticalMapUserUi.Key:
+        type: TacticalMapUserBui
   - type: TypingIndicator
     proto: alien
   - type: MovedByPressure
   - type: NoSlip
+  - type: RMCSize
+    size: Xeno
   - type: Pullable
   - type: Speech
     speechVerb: Xeno
+    allowedEmotes: [ "Growl", "Hiss", "XenoRoar", "XenoHelp", "XenoTailSwipe" ]
   - type: GhostOnMove
     mustBeDead: true
   - type: WhitelistPickup
@@ -167,6 +173,7 @@
     alert: XenoNightVision
     overlay: true
   - type: ParalyzeOnPullAttemptImmune
+  - type: InfectOnPullAttemptImmune
   - type: GhostTakeoverAvailable
   - type: GhostRole
     makeSentient: true
@@ -225,6 +232,14 @@
     keys:
     - enum.VendingMachineUiKey.Key
     - enum.PaperUiKey.Key
+  - type: ActiveInputMover
+  - type: HiveTracker
+  - type: RequireProjectileTarget
+    active: false
+  - type: TacticalMapTracked
+  - type: TacticalMapUser
+    actionId: RMCActionOpenTacticalMapXeno
+    xenos: true
 
 - type: entity
   abstract: true
@@ -327,6 +342,13 @@
     damage: #per second, scales with number of fire 'stacks'
       types:
         Heat: 3
+
+- type: entity
+  abstract: true
+  id: RMCXenoSpeechSounds
+  components:
+  - type: Speech
+    speechSounds: Xenonid
 
 - type: speechVerb
   id: Xeno

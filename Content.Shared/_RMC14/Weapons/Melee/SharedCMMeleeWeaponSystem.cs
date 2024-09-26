@@ -24,6 +24,7 @@ public abstract class SharedCMMeleeWeaponSystem : EntitySystem
         SubscribeLocalEvent<ImmuneToUnarmedComponent, GettingAttackedAttemptEvent>(OnImmuneToUnarmedGettingAttacked);
         SubscribeLocalEvent<MeleeReceivedMultiplierComponent, DamageModifyEvent>(OnMeleeReceivedMultiplierDamageModify);
         SubscribeLocalEvent<StunOnHitComponent, MeleeHitEvent>(OnStunOnHitMeleeHit);
+        SubscribeLocalEvent<MeleeDamageMultiplierComponent, MeleeHitEvent>(OnMultiplierOnHitMeleeHit);
     }
 
     private void OnStunOnHitMeleeHit(Entity<StunOnHitComponent> ent, ref MeleeHitEvent args)
@@ -38,8 +39,29 @@ public abstract class SharedCMMeleeWeaponSystem : EntitySystem
         }
     }
 
+    private void OnMultiplierOnHitMeleeHit(Entity<MeleeDamageMultiplierComponent> ent, ref MeleeHitEvent args)
+    {
+        if (!args.IsHit)
+            return;
+
+        var comp = ent.Comp;
+
+        foreach (var hit in args.HitEntities)
+        {
+            if (_whitelist.IsValid(comp.Whitelist, hit))
+            {
+                var damage = args.BaseDamage * comp.Multiplier;
+                args.BonusDamage += damage;
+                break;
+            }
+        }
+    }
+
     private void OnImmuneToUnarmedGettingAttacked(Entity<ImmuneToUnarmedComponent> ent, ref GettingAttackedAttemptEvent args)
     {
+        if (!ent.Comp.ApplyToXenos && _xenoQuery.HasComp(args.Attacker))
+            return;
+
         if (args.Attacker == args.Weapon)
             args.Cancelled = true;
     }

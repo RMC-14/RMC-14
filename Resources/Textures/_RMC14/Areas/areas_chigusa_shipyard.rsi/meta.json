@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b6738e326821c2d445cc25dbd49c4148569e32c0/icons/turf/area_chigusashipyard.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "guardbarracks"
+    },
+    {
+      "name": "guardbarracksone"
+    },
+    {
+      "name": "guardbarrackstwo"
+    },
+    {
+      "name": "guardbarracksthree"
+    },
+    {
+      "name": "guardbarracksfour"
+    },
+    {
+      "name": "guardbarracksfive"
+    },
+    {
+      "name": "guardbarrackssix"
+    },
+    {
+      "name": "guardbarracksseven"
+    },
+    {
+      "name": "guardbarrackseight"
+    },
+    {
+      "name": "easternaagun"
+    },
+    {
+      "name": "westernaagun"
+    },
+    {
+      "name": "easterncheckpoint"
+    },
+    {
+      "name": "westerncheckpoint"
+    },
+    {
+      "name": "barcheckpoint"
+    },
+    {
+      "name": "administrationcheckpoint"
+    },
+    {
+      "name": "guardarmory"
+    },
+    {
+      "name": "canteen"
+    },
+    {
+      "name": "freezer"
+    },
+    {
+      "name": "kitchen"
+    },
+    {
+      "name": "canteencommons"
+    },
+    {
+      "name": "civilian"
+    },
+    {
+      "name": "civilianbarracksone"
+    },
+    {
+      "name": "civilianbarrackstwo"
+    },
+    {
+      "name": "civilianbarracksthree"
+    },
+    {
+      "name": "civilianbarracksfour"
+    },
+    {
+      "name": "bunker"
+    },
+    {
+      "name": "civilianbunker"
+    },
+    {
+      "name": "utilitybunker"
+    },
+    {
+      "name": "administrationbunker"
+    },
+    {
+      "name": "bar"
+    },
+    {
+      "name": "barcommons"
+    },
+    {
+      "name": "bardorms"
+    },
+    {
+      "name": "barbathrooms"
+    },
+    {
+      "name": "chigusashipyard"
+    }
+  ]
+}

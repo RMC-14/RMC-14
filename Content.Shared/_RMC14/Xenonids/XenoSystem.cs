@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Rest;
@@ -51,9 +52,11 @@ public sealed class XenoSystem : EntitySystem
     private EntityQuery<MarineComponent> _marineQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<MobThresholdsComponent> _mobThresholdsQuery;
+    private EntityQuery<XenoFriendlyComponent> _xenoFriendlyQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
     private EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
     private EntityQuery<XenoRecoveryPheromonesComponent> _xenoRecoveryQuery;
+    private EntityQuery<VictimInfectedComponent> _victimInfectedQuery;
 
     private float _xenoDamageDealtMultiplier;
     private float _xenoDamageReceivedMultiplier;
@@ -68,9 +71,11 @@ public sealed class XenoSystem : EntitySystem
         _marineQuery = GetEntityQuery<MarineComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
         _mobThresholdsQuery = GetEntityQuery<MobThresholdsComponent>();
+        _xenoFriendlyQuery = GetEntityQuery<XenoFriendlyComponent>();
         _xenoNestedQuery = GetEntityQuery<XenoNestedComponent>();
         _xenoPlasmaQuery = GetEntityQuery<XenoPlasmaComponent>();
         _xenoRecoveryQuery = GetEntityQuery<XenoRecoveryPheromonesComponent>();
+        _victimInfectedQuery = GetEntityQuery<VictimInfectedComponent>();
 
         SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit);
         SubscribeLocalEvent<XenoComponent, GetAccessTagsEvent>(OnXenoGetAdditionalAccess);
@@ -144,8 +149,15 @@ public sealed class XenoSystem : EntitySystem
 
         // TODO RMC14 different hives
         // TODO RMC14 this still falsely plays the hit red flash effect on xenos if others are hit in a wide swing
-        if (HasComp<XenoFriendlyComponent>(target) ||
+        if (_xenoFriendlyQuery.HasComp(target) ||
             _mobState.IsDead(target))
+        {
+            args.Cancel();
+            return;
+        }
+
+        if (_xenoNestedQuery.HasComp(target) &&
+            _victimInfectedQuery.HasComp(target))
         {
             args.Cancel();
         }
@@ -297,19 +309,21 @@ public sealed class XenoSystem : EntitySystem
         return xenoOne.Comp.Hive == xenoTwo.Comp.Hive;
     }
 
-    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target)
+    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool hitNonMarines = false)
     {
-        // TODO RMC14 xenos of the same hive
         if (xeno == target)
             return false;
+        // TODO RMC14 use hive member instead
+        if (TryComp<XenoComponent>(xeno, out var comp1) && TryComp<XenoComponent>(target, out var comp2) && comp1.Hive == comp2.Hive)
+            return false;
 
-        if (_mobState.IsDead(target))
+        if (HasComp<MobStateComponent>(target) && _mobState.IsDead(target))
             return false;
 
         if (_xenoNestedQuery.HasComp(target))
             return false;
 
-        return HasComp<MarineComponent>(target);
+        return HasComp<MarineComponent>(target) || hitNonMarines;
     }
 
     public override void Update(float frameTime)
@@ -325,16 +339,19 @@ public sealed class XenoSystem : EntitySystem
             xeno.NextRegenTime = time + xeno.RegenCooldown;
             Dirty(uid, xeno);
 
-            if (!_affectableQuery.TryComp(uid, out var affectable) ||
-                !affectable.OnXenoWeeds)
+            if (!xeno.HealOffWeeds)
             {
-                if (_xenoPlasmaQuery.TryComp(uid, out var plasma))
+                if (!_affectableQuery.TryComp(uid, out var affectable) ||
+                    !affectable.OnXenoWeeds)
                 {
-                    var amount = FixedPoint2.Max(plasma.PlasmaRegenOffWeeds * plasma.MaxPlasma / 100 / 2, 0.01);
-                    _xenoPlasma.RegenPlasma((uid, plasma), amount);
-                }
+                    if (_xenoPlasmaQuery.TryComp(uid, out var plasma))
+                    {
+                        var amount = FixedPoint2.Max(plasma.PlasmaRegenOffWeeds * plasma.MaxPlasma / 100 / 2, 0.01);
+                        _xenoPlasma.RegenPlasma((uid, plasma), amount);
+                    }
 
-                continue;
+                    continue;
+                }
             }
 
             var heal = GetWeedsHealAmount((uid, xeno));

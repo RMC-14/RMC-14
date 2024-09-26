@@ -1,5 +1,6 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Mobs;
 using Content.Shared.StatusIcon.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -31,12 +32,12 @@ public sealed class MarineOverlay : Overlay
         _sprite = _entity.System<SpriteSystem>();
         _transform = _entity.System<TransformSystem>();
 
-        _shader = _prototype.Index<ShaderPrototype>("unshaded").Instance();
+        _shader = _prototype.Index<ShaderPrototype>("shaded").Instance();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        if (!_entity.HasComponent<MarineComponent>(_players.LocalEntity))
+        if (!_entity.HasComponent<ShowMarineIconsComponent>(_players.LocalEntity))
             return;
 
         var handle = args.WorldHandle;

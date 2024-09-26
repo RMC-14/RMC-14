@@ -20,13 +20,17 @@
       entries:
       - id: CMVendorBundleCombatTechnicianEssentials
     - name: Handheld Defense
-      entries: [ ]
+      choices: { CMHandheldDefense: 1 }
+      entries:
     #    CM21STeslaCoil
     #    CMJIMAPlantedFlag
     #    CMUA42FSentryFlamer
-    #    CMUA571CSentryGun
-    #- id: CMSentryUpgradeKit
-    #  points: 15
+      - id: RMCSentry
+    - name: Handheld Defense Upgrade
+      choices: { CMHandheldDefenseUpgrade: 1 }
+      entries:
+      - id: RMCEngineeringUpgrade
+        points: 15
     - name: Engineering Supplies
       entries:
     #- id: CMAirlockCircuitBoard
@@ -38,15 +42,22 @@
       - id: RMCPowerCellHigh
         points: 3
       - id: CMSheetMetal10
+        name: metal x10
         points: 5
+        recommended: true
       - id: CMSheetPlasteel10
+        name: plasteel x10
         points: 7
+        recommended: true
     #- id: CMPlasticExplosive
     #  points: 3
       - id: RMCExplosiveBreachingCharge
         points: 5
+        recommended: true
       - id: CMSandbagEmpty25
+        name: sandbags x25
         points: 10
+        recommended: true
       - id: RMCPowerCellSuper
         points: 10
     #- id: CMES11MobileFuelCanister
@@ -59,8 +70,8 @@
     #  points: 18
     #- id: CMM40HPDPPhosphorusPacket3
     #  points: 18
-    #- id: CMM40HSDPSmokePacket3
-    #  points: 9
+      - id: RMCPacketGrenadeSmokeFilled
+        points: 9
     #- id: CMM74AGMFragAirburstPacket3
     #  points: 18
     #- id: CMM74AGMIncendiaryAirburstPacket3
@@ -85,12 +96,20 @@
         points: 6
       - id: CMMagazineRifleM54CExt
         points: 6
+    - name: Sidearm Ammunition
+      entries:
+      - id: RMCSpeedLoader44Marksman
+        points: 6
+      - id: CMMagazinePistolMK80
+        points: 3
+      - id: RMCMagazinePistolSU6
+        points: 6
     - name: Armors
       entries:
       - id: CMArmorB12
         points: 24
       - id: CMArmorM4
-        points: 30
+        points: 16
     - name: Restricted Firearms
       entries:
       - id: RMCMK80Case
@@ -105,9 +124,9 @@
     #  points: 24
     - name: Clothing Items
       entries:
-    #- id: CMScabbardMacheteFull
-    #  points: 6
-      - id: CMPouchMacheteFilled
+      - id: RMCScabbardMacheteFilled
+        points: 6
+      - id: RMCPouchMacheteFilled
         points: 8
     #- id: CMMarineRadioTelephonePack
     #  points: 15
@@ -115,7 +134,7 @@
     #  points: 4
     #- id: CMSlingPouch
     #  points: 6
-      - id: CMPouchGeneralLarge
+      - id: RMCPouchGeneralLarge
         points: 6
       - id: CMBeltUtilityCombat
         points: 15
@@ -135,28 +154,25 @@
       entries:
       - id: RMCBinoculars
         points: 5
-    #- id: CMRangeFinder
-    #  points: 10
-    #- id: CMLaserDesignator
-    #  points: 15
+      - id: RMCRangefinder
+        points: 10
+      - id: RMCLaserDesignator
+        points: 15
     - name: Helmet Optics
       entries: [ ]
     #- id: CMMedicalHelmetOptic
     #  points: 12
     - name: Pamphlets
-      entries: [ ]
-    #- id: CMPamphletJTAC
-    #  points: 15
+      entries:
+      - id: CMPamphletJTAC
+        points: 15
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyIntel
-        amount: 3
         points: 3
       - id: CMEncryptionKeyJTAC
-        amount: 3
         points: 3
       - id: CMEncryptionKeyRequisition
-        amount: 3
         points: 3
 
 - type: entity
@@ -187,59 +203,70 @@
         name: light armor
       - id: CMArmorM3Medium
         name: medium armor
+        recommended: true
       - id: CMArmorM3Heavy
         name: heavy armor
     - name: Backpack
+      choices: { CMBackpack: 1 }
       entries:
-    #- id: CMScabbardMacheteFull
+      - id: RMCScabbardMacheteFilled
       - id: CMBackpackMarineTech
       - id: CMSatchelMarineTech
       - id: CMBackpackWelder
+        recommended: true
       - id: RMCSatchelWelder
       - id: RMCSatchelWelderChestrig
+        recommended: true
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-    #- id: CMG8AGeneralUtilityPouch
+      - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
     #- id: CMM276GeneralPistolHolsterRig
     #- id: CMM276M63HolsterRig
     #- id: CMM276M44HolsterRig
     #- id: CMM276M82FHolsterRig
     #- id: CMM276ShotgunShellLoadingRig
-    #- id: CMM276MortarOperatorBelt
+      - id: CMBeltMortar
       - id: CMBeltUtilityFilled
+        recommended: true
       - id: RMCBeltGrenade
     - name: Pouches
-      choices: { CMPouch: 2 }
+      choices: { RMCPouch: 2 }
       entries:
-      - id: CMPouchConstruction
-      - id: CMPouchFirstAidInjectors
+      - id: RMCPouchConstruction
+        recommended: true
+      - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
-      - id: CMPouchFirstAidSplintsGauzeOintment
+        recommended: true
+      - id: RMCPouchFirstAidSplintsGauzeOintment
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
-      - id: CMPouchFirstAidPills
+        recommended: true
+      - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
+        recommended: true
       #- id: CMElectronicsPouchFull
-      - id: CMPouchExplosive
-      - id: CMPouchFlareFilled
-        name: Flare pouch (Filled)
-      - id: CMPouchMagazinePistolLarge
-      - id: CMPouchMagazine
-      - id: CMPouchShotgun
-      - id: CMPouchGeneralMedium
-      - id: CMPouchPistol
-      - id: CMPouchToolsFill
+      - id: RMCPouchExplosive
+      - id: RMCPouchFlareFilled
+        name: Flare pouch (Full)
+      - id: RMCPouchMagazinePistolLarge
+      - id: RMCPouchMagazine
+      - id: RMCPouchShotgun
+      - id: RMCPouchGeneralMedium
+      - id: RMCPouchPistol
+      - id: RMCPouchToolsFill
         name: Tools pouch (Filled)
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
-      - id: CMWebbingBrown
       - id: CMWebbingBlack
+      - id: CMWebbingBrown
+        recommended: true
       #- id: CMShoulderHolster
       - id: CMWebbing
-    #- id: CMDropPouch
+      - id: CMWebbingPouch
     - name: Mask
+      choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
