@@ -152,6 +152,19 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_white.rsi
 
+# Executive Officer
+
+- type: entity
+  parent: CMCoatCO
+  id: CMCoatXOFormal
+  name: marine formal service jacket
+  description: Smells like vanilla. Signifies prestige and power, if a little flashy.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
+
 # Officer
 - type: entity
   parent: RMCBaseJacket

@@ -1,0 +1,100 @@
+# PMC headgear
+- type: entity
+  parent: ArmorHelmetM10
+  id: ArmorHelmetPMC
+  name: PMC tactical cap
+  description: A protective cap made from flexible kevlar. Standard issue for most security forms in the place of a helmet.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/cap.rsi
+
+- type: entity
+  parent: ArmorHelmetPMC
+  id: ArmorHelmetPMCOfficer
+  name: PMC beret
+  description: The pinnacle of fashion for any aspiring mercenary leader. Designed to protect the head from light impacts.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/officer.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/officer.rsi
+
+- type: entity
+  parent: ArmorHelmetPMC
+  id: ArmorHelmetPMCSniper
+  name: PMC sniper helmet
+  description: A helmet worn by PMC Marksmen.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/sniper.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/sniper.rsi
+
+- type: entity
+  parent: ArmorHelmetPMC
+  id: ArmorHelmetPMCGunner
+  name: PMC gun operator helmet
+  description: A modification of the standard M3 armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/heavy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/heavy.rsi
+
+- type: entity
+  parent: ArmorHelmetPMC
+  id: ArmorHelmetPMCCommando
+  name: PMC M5X helmet
+  description: A fully enclosed, armored helmet made to complete the M5X exoskeleton armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/commando.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/commando.rsi
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  parent: ArmorHelmetPMC
+  id: ArmorHelmetPMCCorporate
+  name: We-Ya corporate security helmet
+  description: A basic skull-helm worn by corporate security assets, graded to protect your head from an unruly scientist armed with a crowbar.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/corporate.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/corporate.rsi
+
+- type: entity
+  parent: ArmorHelmetPMCCorporate
+  id: ArmorHelmetPMCCorporateLead
+  description: A basic skull-helm worn by corporate security assets. This variant is worn by low-level guards that have too much brainmatter to fit into the old one. Or so they say.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/corporate_lead.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/corporate_lead.rsi
+
+- type: entity
+  parent: ArmorHelmetPMC
+  id: ArmorHelmetPMCRiot
+  name: RC6 helmet
+  description: The standard UN Riot Control 6 helmet is of odd design, lacking a face shield by default (mounting points are available). The distinct white pattern and red emblem are synonymous with oppression throughout the rim.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/riot.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/riot.rsi
+
+- type: entity
+  parent: ArmorHelmetPMC
+  id: ArmorHelmetPMCKutjevo
+  name: kutjevo helmet
+  description: Standard issued helmet for the workers of Kutjevo. Contains a small webbing to hold small items like pens, oil or even a photo of a loved one.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/kutjevo.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/kutjevo.rsi

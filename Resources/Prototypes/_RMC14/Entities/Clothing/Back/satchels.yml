@@ -31,7 +31,7 @@
   parent: CMSatchel
   id: RMCBackpackScout
   name: M68 thermal cloak
-  description: The lightweight thermal dampeners and optical camouflage provided by this cloak are weaker than those found in standard USCM ghillie suits. In exchange, the cloak can be worn over combat armor and offers the wearer high maneuverability and adaptability to many environments.
+  description: The lightweight thermal dampeners and optical camouflage provided by this cloak are weaker than those found in standard UNMC ghillie suits. In exchange, the cloak can be worn over combat armor and offers the wearer high maneuverability and adaptability to many environments.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/scout_cloak.rsi
@@ -188,7 +188,7 @@
     solution: tank
   - type: DrawableSolution
     solution: tank
-    
+
 - type: entity
   parent: RMCSatchelWelder
   id: RMCSatchelWelderChestrig

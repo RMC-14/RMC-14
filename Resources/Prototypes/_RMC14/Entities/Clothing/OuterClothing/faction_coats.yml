@@ -11,6 +11,41 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/deputy.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/deputy.rsi
+  - type: CMArmor
+    armor: 15
+    bio: 10
+    explosionArmor: 10
+  - type: Storage
+    grid:
+    - 0,0,3,1 # 2 slots
+    maxItemSize: Small
+    whitelist:
+      tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - Sidearm
+      - Knife
+      - Flashlight
+      - MRE
+      - Grenade
+      - CMAutoInjector
+      - Cigarette
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - Syringe
+      - Hypospray
+      - CMOintment
+      - Brutepack
+      - CMBurnKit
+      - CMTraumaKit
+      - Bottle
+      - Pill
+      - PowerCell
+  - type: FixedItemSizeStorage
 
 - type: entity
   parent: RMCBaseJacket
@@ -22,3 +57,27 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/marshal.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/marshal.rsi
+
+# High Command
+
+- type: entity
+  parent: RMCCoatBureauDeputy
+  id: RMCCoatJacketGeneral
+  name: general's jacket
+  description: A black trench coat with gold metallic trim. Flashy, highly protective, and over-the-top. Fit for a king - or, in this case, a General. Has quite a few pockets.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/jacket_general.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/jacket_general.rsi
+  - type: CMArmor
+    armor: 35
+    bio: 10
+    explosionArmor: 40
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: Storage
+    grid:
+    - 0,0,7,1 # 4 slots
+  - type: FixedItemSizeStorage

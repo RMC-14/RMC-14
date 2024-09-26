@@ -82,11 +82,11 @@
     - name: Glasses
       choices: { CMGlasses: 1 }
       entries:
-      #- id: CMShades # TODO: Port this.
-    #    recommended: true
+      - id: RMCSunglasses
+        recommended: true
       - id: RMCGlassesMedicalHUDGlasses
         recommended: true
-      #- id: CMAviatorShades # TODO: Port this.
+      - id: RMCGlassesAviators
     - name: Masks
       choices: { CMMasks: 1 }
       entries:
