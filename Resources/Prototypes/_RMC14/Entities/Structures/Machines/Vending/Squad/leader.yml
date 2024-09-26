@@ -43,8 +43,8 @@
         points: 16
     - name: Clothing Items
       entries:
-    #- id: CMScabbardMacheteFull
-    #  points: 4
+      - id: RMCScabbardMacheteFilled
+        points: 4
       - id: RMCPouchMacheteFilled
         points: 4
     #- id: CMMarineRadioTelephonePack
@@ -113,8 +113,8 @@
     #  points: 18
     #- id: CMM40HPDPWhitePhosphorusPacketx3
     #  points: 18
-    #- id: CMM40HSDPSmokePacketx3
-    #  points: 9
+      - id: RMCPacketGrenadeSmokeFilled
+        points: 9
     #- id: CMM74AGM-FragAirburstPacketx3
     #  points: 20
     #- id: CMM74AGM-IncendiaryAirburstPacketx3
@@ -228,7 +228,7 @@
       choices: { CMBackpack: 1 }
       entries:
       - id: CMBackpackMarine
-#      - id: CMScabbardMacheteFull
+      - id: RMCScabbardMacheteFilled
       - id: CMSatchelMarine
         recommended: true
     - name: Belt

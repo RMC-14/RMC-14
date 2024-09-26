@@ -1,6 +1,8 @@
 ﻿using Content.Shared._RMC14.Marines;
 using Content.Shared.Coordinates;
+using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Pulling.Systems;
+using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Shared.Network;
@@ -17,6 +19,7 @@ public sealed class XenoLungeSystem : EntitySystem
     [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
 
@@ -30,6 +33,8 @@ public sealed class XenoLungeSystem : EntitySystem
 
         SubscribeLocalEvent<XenoLungeComponent, XenoLungeActionEvent>(OnXenoLungeAction);
         SubscribeLocalEvent<XenoLungeComponent, ThrowDoHitEvent>(OnXenoLungeHit);
+
+        SubscribeLocalEvent<XenoLungeStunnedComponent, PullStoppedMessage>(OnXenoLungeStunnedPullStopped);
     }
 
     private void OnXenoLungeAction(Entity<XenoLungeComponent> xeno, ref XenoLungeActionEvent args)
@@ -82,12 +87,41 @@ public sealed class XenoLungeSystem : EntitySystem
         }
 
         _stun.TryParalyze(targetId, xeno.Comp.StunTime, true);
+
+        var stunned = EnsureComp<XenoLungeStunnedComponent>(targetId);
+        stunned.ExpireAt = _timing.CurTime + xeno.Comp.StunTime;
+        Dirty(targetId, stunned);
+
         _pulling.TryStartPull(xeno, targetId);
 
         if (_net.IsServer &&
             HasComp<MarineComponent>(targetId))
         {
             SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
+        }
+    }
+
+    private void OnXenoLungeStunnedPullStopped(Entity<XenoLungeStunnedComponent> ent, ref PullStoppedMessage args)
+    {
+        if (args.PulledUid != ent.Owner)
+            return;
+
+        foreach (var effect in ent.Comp.Effects)
+        {
+            _statusEffects.TryRemoveStatusEffect(ent, effect);
+        }
+    }
+
+    public override void Update(float frameTime)
+    {
+        var time = _timing.CurTime;
+        var query = EntityQueryEnumerator<XenoLungeStunnedComponent>();
+        while (query.MoveNext(out var uid, out var stunned))
+        {
+            if (time < stunned.ExpireAt)
+                continue;
+
+            RemCompDeferred<XenoLungeStunnedComponent>(uid);
         }
     }
 }

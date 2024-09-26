@@ -18,8 +18,8 @@
 - type: entity
   parent: [ ClothingEyesBase , ShowMedicalIcons ]
   id: CMGlassesM42ScoutSight
-  name: M42 scout sight
-  description: A headset and night vision sighting system for the M42 Scout Rifle. Allows highlighted imaging of surroundings.
+  name: M96 scout sight
+  description: A headset and night vision sighting system for the M96 Scout Rifle. Allows highlighted imaging of surroundings.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
@@ -38,10 +38,10 @@
           False: { state: icon }
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: ClothingEyesHudMedical
   id: RMCGlassesM4SPRBattleSight
   name: M4SPR Battle Sight
-  description: A headset and night vision sighting system for the M4SPR Custom Battle Rifle. Allows highlighted imaging of surroundings.
+  description: A headset and night vision sighting system for the M4SPR Custom Battle Rifle. Allows highlighted imaging of surroundings, as well as the ability to view the suit sensor health status readouts of other marines.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi

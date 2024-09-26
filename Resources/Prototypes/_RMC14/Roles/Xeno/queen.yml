@@ -20,6 +20,9 @@
   accessGroups:
   - CMAccessXeno
   - CMAccessXenoQueen
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: xenoqueen
 
 - type: playTimeTracker
   id: CMJobXenoQueen

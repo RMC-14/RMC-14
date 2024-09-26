@@ -1,0 +1,7 @@
+- type: emoteSounds
+  parent: [RMCBaseMaleSounds, UnisexMoth]
+  id: RMCMaleMoth
+
+- type: emoteSounds
+  parent: [RMCBaseFemaleSounds, UnisexMoth]
+  id: RMCFemaleMoth

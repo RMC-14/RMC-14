@@ -3,6 +3,9 @@
   id: CMXenoSentinel
   name: cm-job-name-xeno-sentinel
   playTimeTracker: CMJobXenoSentinel
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: sentinel
 
 - type: playTimeTracker
   id: CMJobXenoSentinel

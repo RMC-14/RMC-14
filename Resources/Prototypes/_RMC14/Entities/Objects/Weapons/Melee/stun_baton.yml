@@ -8,6 +8,9 @@
     sprite: _RMC14/Objects/Weapons/Melee/stun_baton.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Melee/stun_baton.rsi
+    slots:
+    - Belt
+    - Suitstorage
   - type: StaminaDamageOnHit
     damage: 100
   - type: MeleeRequiresSkill
@@ -17,3 +20,4 @@
     whitelist:
       components:
       - Marine
+

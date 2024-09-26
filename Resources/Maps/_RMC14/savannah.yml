@@ -1862,6 +1862,7 @@ entities:
         - 0
         - 0
     - type: AreaGrid
+      colors: {}
       areas:
         53,24: RMCAreaSavannahAlpha
         53,23: RMCAreaSavannahAlpha
@@ -11346,7 +11347,7 @@ entities:
       pos: 47.5,-25.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -34809.3
+      secondsUntilStateChange: -35074.605
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -11598,7 +11599,7 @@ entities:
       pos: -50.5,-10.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -55894.426
+      secondsUntilStateChange: -56159.73
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -11911,7 +11912,7 @@ entities:
       pos: -22.5,7.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -49400.152
+      secondsUntilStateChange: -49665.457
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -14447,11 +14448,6 @@ entities:
     components:
     - type: Transform
       pos: -18.5,-15.5
-      parent: 1
-  - uid: 6071
-    components:
-    - type: Transform
-      pos: -18.5,-14.5
       parent: 1
   - uid: 6073
     components:
@@ -19182,10 +19178,10 @@ entities:
       parent: 1
 - proto: CMFolderRed
   entities:
-  - uid: 1102
+  - uid: 30
     components:
     - type: Transform
-      pos: -40.523293,-7.032821
+      pos: -40.602333,-8.476171
       parent: 1
   - uid: 1105
     components:
@@ -19278,18 +19274,6 @@ entities:
     components:
     - type: Transform
       pos: -57.4084,0.47188556
-      parent: 1
-- proto: CMHandcuffs
-  entities:
-  - uid: 987
-    components:
-    - type: Transform
-      pos: -61.281796,0.43629625
-      parent: 1
-  - uid: 1040
-    components:
-    - type: Transform
-      pos: -61.500546,0.6862963
       parent: 1
 - proto: CMHandLabeler
   entities:
@@ -41460,6 +41444,15 @@ entities:
     - type: Transform
       pos: -57.5,2.5
       parent: 1
+- proto: CrayonWhite
+  entities:
+  - uid: 31
+    components:
+    - type: MetaData
+      name: spent crayon
+    - type: Transform
+      pos: -12.501979,-25.516708
+      parent: 1
 - proto: d6Dice
   entities:
   - uid: 7724
@@ -44300,6 +44293,11 @@ entities:
       parent: 1
 - proto: FoodBoxPizzaFilled
   entities:
+  - uid: 23
+    components:
+    - type: Transform
+      pos: -26.48762,-7.2996416
+      parent: 1
   - uid: 6430
     components:
     - type: Transform
@@ -44309,11 +44307,6 @@ entities:
     components:
     - type: Transform
       pos: -6.435155,0.73877776
-      parent: 1
-  - uid: 17384
-    components:
-    - type: Transform
-      pos: -27.328564,-7.3664513
       parent: 1
 - proto: FoodBurgerFive
   entities:
@@ -57915,18 +57908,6 @@ entities:
     - type: Transform
       pos: 93.5,4.5
       parent: 1
-- proto: RMCCrateSuppliesCrayons
-  entities:
-  - uid: 3674
-    components:
-    - type: Transform
-      pos: 40.5,-20.5
-      parent: 1
-  - uid: 13571
-    components:
-    - type: Transform
-      pos: -12.5,-25.5
-      parent: 1
 - proto: RMCCurtainShower
   entities:
   - uid: 1220
@@ -57935,7 +57916,7 @@ entities:
       pos: -14.5,8.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -8810.822
+      secondsUntilStateChange: -9076.128
       state: Opening
 - proto: RMCDispenserChem
   entities:
@@ -57984,6 +57965,18 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -36.5,-7.5
+      parent: 1
+- proto: RMCHandcuffs
+  entities:
+  - uid: 987
+    components:
+    - type: Transform
+      pos: -61.281796,0.43629625
+      parent: 1
+  - uid: 1040
+    components:
+    - type: Transform
+      pos: -61.500546,0.6862963
       parent: 1
 - proto: RMCInflatableDoor
   entities:
@@ -59465,6 +59458,18 @@ entities:
     components:
     - type: Transform
       pos: -33.50073,-6.9042196
+      parent: 1
+- proto: RMCTacticalMapTable
+  entities:
+  - uid: 24
+    components:
+    - type: Transform
+      pos: -27.5,-7.5
+      parent: 1
+  - uid: 29
+    components:
+    - type: Transform
+      pos: -40.5,-7.5
       parent: 1
 - proto: RMCTallFloodlight
   entities:

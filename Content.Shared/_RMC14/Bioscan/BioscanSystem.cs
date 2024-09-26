@@ -7,7 +7,6 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -154,72 +153,73 @@ public sealed class BioscanSystem : EntitySystem
         return true;
     }
 
-    public bool TryBioscanARES(ref TimeSpan lastMarine, ref int maxXenoAlive, SoundSpecifier sound, bool force)
+    public void TryBioscanARES(Entity<BioscanComponent> bioscan, bool force)
     {
         var time = _timing.CurTime;
-        if (TryBioscan<XenoComponent>(
-                lastMarine,
+        if (!TryBioscan<XenoComponent>(
+                bioscan.Comp.LastMarine,
                 force,
-                ref maxXenoAlive,
+                ref bioscan.Comp.MaxXenoAlive,
                 out _,
                 out var aliveShip,
                 out var alivePlanet,
                 out var warshipArea,
-                out var planetArea)
-           )
+                out var planetArea))
         {
-            var variance = _bioscanVariance;
-            alivePlanet = Math.Max(0, alivePlanet + _random.Next(-variance, variance + 1));
-            if (alivePlanet == 0)
-                planetArea = None;
-
-            lastMarine = time;
-            var message = Loc.GetString(
-                "rmc-bioscan-ares",
-                ("shipUncontained", aliveShip),
-                ("shipLocation", warshipArea),
-                ("planetLocation", planetArea),
-                ("onPlanet", alivePlanet)
-            );
-
-            _marineAnnounce.AnnounceARES(null, message, sound, "rmc-bioscan-ares-announcement");
-            return true;
+            return;
         }
 
-        return false;
+        var variance = _bioscanVariance;
+        alivePlanet = Math.Max(0, alivePlanet + _random.Next(-variance, variance + 1));
+        if (alivePlanet == 0)
+            planetArea = None;
+
+        bioscan.Comp.LastMarine = time;
+        var message = Loc.GetString(
+            "rmc-bioscan-ares",
+            ("shipUncontained", aliveShip),
+            ("shipLocation", warshipArea),
+            ("planetLocation", planetArea),
+            ("onPlanet", alivePlanet)
+        );
+
+        _marineAnnounce.AnnounceARES(null, message, bioscan.Comp.MarineSound, "rmc-bioscan-ares-announcement");
+        Dirty(bioscan);
     }
 
-    public void TryBioscanQueenMother(ref TimeSpan lastXeno, ref int maxMarineAlive, SoundSpecifier sound, bool force)
+    public void TryBioscanQueenMother(Entity<BioscanComponent> bioscan, bool force)
     {
         var time = _timing.CurTime;
-        if (TryBioscan<MarineComponent>(
-                lastXeno,
+        if (!TryBioscan<MarineComponent>(
+                bioscan.Comp.LastXeno,
                 force,
-                ref maxMarineAlive,
+                ref bioscan.Comp.MaxMarinesAlive,
                 out _,
                 out var aliveShip,
                 out var alivePlanet,
                 out var warshipArea,
-                out var planetArea)
-           )
+                out var planetArea))
         {
-            var variance = _bioscanVariance;
-            aliveShip = Math.Max(0, aliveShip + _random.Next(-variance, variance + 1));
-            if (aliveShip == 0)
-                planetArea = None;
-
-            lastXeno = time;
-            var message = Loc.GetString(
-                "rmc-bioscan-xeno",
-                ("shipLocation", warshipArea),
-                ("planetLocation", planetArea),
-                ("onShip", aliveShip),
-                ("onPlanet", alivePlanet)
-            );
-
-            message = Loc.GetString("rmc-bioscan-xeno-announcement", ("message", message));
-            _xenoAnnounce.AnnounceAll(default, message, sound);
+            return;
         }
+
+        var variance = _bioscanVariance;
+        aliveShip = Math.Max(0, aliveShip + _random.Next(-variance, variance + 1));
+        if (aliveShip == 0)
+            planetArea = None;
+
+        bioscan.Comp.LastXeno = time;
+        var message = Loc.GetString(
+            "rmc-bioscan-xeno",
+            ("shipLocation", warshipArea),
+            ("planetLocation", planetArea),
+            ("onShip", aliveShip),
+            ("onPlanet", alivePlanet)
+        );
+
+        message = Loc.GetString("rmc-bioscan-xeno-announcement", ("message", message));
+        _xenoAnnounce.AnnounceAll(default, message, bioscan.Comp.XenoSound);
+        Dirty(bioscan);
     }
 
     public override void Update(float frameTime)
@@ -237,8 +237,8 @@ public sealed class BioscanSystem : EntitySystem
             bioscan.NextCheck = time + _bioscanCheckDelay;
             Dirty(uid, bioscan);
 
-            TryBioscanARES(ref bioscan.LastMarine, ref bioscan.MaxXenoAlive, bioscan.MarineSound, false);
-            TryBioscanQueenMother(ref bioscan.LastXeno, ref bioscan.MaxMarinesAlive, bioscan.XenoSound, false);
+            TryBioscanARES((uid, bioscan), false);
+            TryBioscanQueenMother((uid, bioscan), false);
         }
     }
 }
