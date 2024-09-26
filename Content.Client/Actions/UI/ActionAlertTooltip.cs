@@ -14,6 +14,7 @@ namespace Content.Client.Actions.UI
         private const float TooltipTextMaxWidth = 350;
 
         private readonly RichTextLabel _cooldownLabel;
+        private readonly RichTextLabel _resourceLabel;
         private readonly IGameTiming _gameTiming;
 
         /// <summary>
@@ -70,6 +71,13 @@ namespace Content.Client.Actions.UI
                 Visible = false
             });
 
+            vbox.AddChild(_resourceLabel = new RichTextLabel
+            {
+                MaxWidth = TooltipTextMaxWidth,
+                StyleClasses = {StyleNano.StyleClassTooltipActionCooldown},
+                Visible = false
+            });
+
             if (!string.IsNullOrWhiteSpace(requires))
             {
                 var requiresLabel = new RichTextLabel
@@ -93,23 +101,23 @@ namespace Content.Client.Actions.UI
             if (!Cooldown.HasValue)
             {
                 _cooldownLabel.Visible = false;
-                return;
-            }
-
-            var timeLeft = Cooldown.Value.End - _gameTiming.CurTime;
-            if (timeLeft > TimeSpan.Zero)
-            {
-                var duration = Cooldown.Value.End - Cooldown.Value.Start;
-
-                if (!FormattedMessage.TryFromMarkup($"[color=#a10505]{(int) duration.TotalSeconds} sec cooldown ({(int) timeLeft.TotalSeconds + 1} sec remaining)[/color]", out var markup))
-                    return;
-
-                _cooldownLabel.SetMessage(markup);
-                _cooldownLabel.Visible = true;
             }
             else
             {
-                _cooldownLabel.Visible = false;
+                var timeLeft = Cooldown.Value.End - _gameTiming.CurTime;
+                if (timeLeft > TimeSpan.Zero)
+                {
+                    var duration = Cooldown.Value.End - Cooldown.Value.Start;
+
+                    if (FormattedMessage.TryFromMarkup($"[color=#a10505]{(int) duration.TotalSeconds} sec cooldown ({(int) timeLeft.TotalSeconds + 1} sec remaining)[/color]", out var markup)){
+                        _cooldownLabel.SetMessage(markup);
+                        _cooldownLabel.Visible = true;
+                    }
+                }
+                else
+                {
+                    _cooldownLabel.Visible = false;
+                }
             }
         }
     }
