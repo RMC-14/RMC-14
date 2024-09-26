@@ -99,7 +99,7 @@ namespace Content.Client.UserInterface.Systems.Alerts.Controls
         {
             var msg = FormattedMessage.FromMarkup(Loc.GetString(Alert.Name));
             var desc = FormattedMessage.FromMarkup(Loc.GetString(Alert.Description));
-            return new ActionAlertTooltip(msg, desc) {Cooldown = Cooldown};
+            return new ActionAlertTooltip(msg, desc) {Cooldown = Cooldown, ResourceMax = ResourceMax, ResourceCurrent = ResourceCurrent};
         }
 
         /// <summary>
