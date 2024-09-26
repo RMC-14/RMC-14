@@ -28,6 +28,8 @@
       collection: MaleGasp
     DefaultDeathgasp:
       collection: MaleDeathGasp
+    Warcry: 
+      collection: RMCMaleWarcry
 
 - type: emoteSounds
   parent: RMCBaseHumanoidSounds
@@ -48,3 +50,5 @@
       collection: FemaleGasp
     DefaultDeathgasp:
       collection: FemaleDeathGasp
+    Warcry: 
+      collection: RMCFemaleWarcry
