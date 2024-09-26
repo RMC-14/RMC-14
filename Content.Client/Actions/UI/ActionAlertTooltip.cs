@@ -21,6 +21,8 @@ namespace Content.Client.Actions.UI
         /// Current cooldown displayed in this tooltip. Set to null to show no cooldown.
         /// </summary>
         public (TimeSpan Start, TimeSpan End)? Cooldown { get; set; }
+        public int? ResourceMax { get; set; }
+        public int? ResourceCurrent { get; set; }
 
         public ActionAlertTooltip(FormattedMessage name, FormattedMessage? desc, string? requires = null, FormattedMessage? charges = null)
         {
@@ -117,6 +119,23 @@ namespace Content.Client.Actions.UI
                 else
                 {
                     _cooldownLabel.Visible = false;
+                }
+            }
+
+            if (!ResourceMax.HasValue || !ResourceCurrent.HasValue)
+            {
+                _resourceLabel.Visible = false;
+            }
+            else
+            {
+                if (FormattedMessage.TryFromMarkup($"[color=#ffffff]500 / 500[/color]", out var markup))
+                {
+                    _resourceLabel.SetMessage(markup);
+                    _resourceLabel.Visible = true;
+                }
+                else
+                {
+                    _resourceLabel.Visible = false;
                 }
             }
         }

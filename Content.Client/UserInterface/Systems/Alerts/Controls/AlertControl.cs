@@ -30,7 +30,35 @@ namespace Content.Client.UserInterface.Systems.Alerts.Controls
             }
         }
 
+        public int ResourceMax
+        {
+            get => _resourceMax;
+            set
+            {
+                _resourceMax = value;
+                if (SuppliedTooltip is ActionAlertTooltip actionAlertTooltip)
+                {
+                    actionAlertTooltip.ResourceMax = value;
+                }
+            }
+        }
+
+        public int ResourceCurrent
+        {
+            get => _resourceCurrent;
+            set
+            {
+                _resourceCurrent = value;
+                if (SuppliedTooltip is ActionAlertTooltip actionAlertTooltip)
+                {
+                    actionAlertTooltip.ResourceCurrent = value;
+                }
+            }
+        }
+
         private (TimeSpan Start, TimeSpan End)? _cooldown;
+        private int _resourceMax;
+        private int _resourceCurrent;
 
         private short? _severity;
         private readonly IGameTiming _gameTiming;
