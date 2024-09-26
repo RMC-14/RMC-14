@@ -68,7 +68,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
 
     private void OnHit(Entity<RMCStunOnHitComponent> bullet, ref ProjectileHitEvent args)
     {
-        if (bullet.Comp.ShotFrom == null)
+        if (_net.IsClient || bullet.Comp.ShotFrom == null)
             return;
 
         var distance = (_transform.GetMoverCoordinates(args.Target).Position - bullet.Comp.ShotFrom.Value.Position).Length();
