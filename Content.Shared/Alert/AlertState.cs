@@ -8,6 +8,8 @@ public struct AlertState
 {
     public short? Severity;
     public (TimeSpan, TimeSpan)? Cooldown;
+    public int? ResourceMax;
+    public int? ResourceCurrent;
     public bool AutoRemove;
     public bool ShowCooldown;
     public ProtoId<AlertPrototype> Type;
