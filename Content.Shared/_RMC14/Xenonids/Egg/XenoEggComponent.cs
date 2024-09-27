@@ -42,7 +42,7 @@ public sealed partial class XenoEggComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? Hive;
 
-    public SoundSpecifier PlantSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/Fluids/splat.ogg");
+    public SoundSpecifier PlantSound = new SoundPathSpecifier("/Audio/Effects/Fluids/splat.ogg");
 }
 
 [Serializable, NetSerializable]
