@@ -311,6 +311,14 @@ public sealed class XenoSystem : EntitySystem
         return xenoOne.Comp.Hive == xenoTwo.Comp.Hive;
     }
 
+    public bool FromHive(Entity<XenoComponent?> xeno, Entity<HiveComponent?> hive)
+    {
+        if (!_xenoQuery.Resolve(xeno, ref xeno.Comp, false))
+            return false;
+
+        return xeno.Comp.Hive == hive;
+    }
+
     public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool hitNonMarines = false)
     {
         if (xeno == target)

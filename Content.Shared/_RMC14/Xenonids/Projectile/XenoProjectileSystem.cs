@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Weapons.Ranged;
+﻿using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
@@ -40,6 +41,7 @@ public sealed class XenoProjectileSystem : EntitySystem
 
         SubscribeLocalEvent<XenoProjectileComponent, PreventCollideEvent>(OnPreventCollide);
         SubscribeLocalEvent<XenoProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
+        SubscribeLocalEvent<XenoProjectileComponent, CMClusterSpawnedEvent>(OnClusterSpawned);
     }
 
     private void OnPreventCollide(Entity<XenoProjectileComponent> ent, ref PreventCollideEvent args)
@@ -59,7 +61,7 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (_net.IsClient && !IsClientSide(ent))
             return;
 
-        if (_xeno.FromSameHive(ent.Owner, args.Target))
+        if (ent.Comp.Hive is { } hive && _xeno.FromHive(args.Target, hive))
         {
             args.Handled = true;
             QueueDel(ent);
@@ -71,6 +73,16 @@ public sealed class XenoProjectileSystem : EntitySystem
         {
             var ev = new XenoProjectileHitUserEvent();
             RaiseLocalEvent(shooter, ref ev);
+        }
+    }
+
+    private void OnClusterSpawned(Entity<XenoProjectileComponent> ent, ref CMClusterSpawnedEvent args)
+    {
+        foreach (var spawned in args.Spawned)
+        {
+            var projectile = EnsureComp<XenoProjectileComponent>(spawned);
+            projectile.Hive = ent.Comp.Hive;
+            Dirty(spawned, projectile);
         }
     }
 
