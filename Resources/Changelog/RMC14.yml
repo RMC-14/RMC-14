@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the nomads packet being able to fit items other than cigarettes,
-      the cigar case being able to fit items other than cigars, and the match box
-      being able to fit items other than matches.
-    type: Fix
-  id: 245
-  time: '2024-07-03T11:03:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2790
-- author: DrSmugleaf
-  changes:
-  - message: Fixed showing upstream mechanical changes for species when changing it
-      in the character editor, when there are actually none.
-    type: Fix
-  id: 246
-  time: '2024-07-03T11:02:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2789
 - author: ShadowCommander
   changes:
   - message: Xenonids can now drag drop hosts to nest them on nest-able surfaces.
@@ -4488,5 +4471,20 @@
   id: 744
   time: '2024-09-27T19:00:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4155
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the Warden Praetorian showing an error sprite when wounded.
+    type: Fix
+  id: 745
+  time: '2024-09-27T21:04:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4157
+- author: DrSmugleaf
+  changes:
+  - message: Fixed some guns making it look like you are leaving a trail of bullets
+      for the shooter.
+    type: Fix
+  id: 746
+  time: '2024-09-27T21:04:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4158
 Name: RMC14
 Order: -1
