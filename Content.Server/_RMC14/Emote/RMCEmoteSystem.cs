@@ -17,17 +17,18 @@ public sealed class RMCEmoteSystem : SharedRMCEmoteSystem
         bool hideLog = false,
         string? nameOverride = null,
         bool ignoreActionBlocker = false,
-        bool forceEmote = false)
+        bool forceEmote = false,
+        TimeSpan? cooldown = null)
     {
         var recently = EnsureComp<RecentlyEmotedComponent>(source);
         var time = _timing.CurTime;
-        if (recently.Emotes.TryGetValue(emote, out var last) &&
-            time < last + recently.Cooldown)
+        if (recently.Emotes.TryGetValue(emote, out var next) &&
+            time < next)
         {
             return;
         }
 
-        recently.Emotes[emote] = time;
+        recently.Emotes[emote] = time + cooldown ?? recently.Cooldown;
         _chat.TryEmoteWithChat(
             source,
             emote,

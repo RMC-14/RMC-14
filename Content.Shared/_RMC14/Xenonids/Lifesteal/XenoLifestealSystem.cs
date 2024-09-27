@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared.Coordinates;
@@ -18,6 +19,7 @@ public sealed class XenoLifestealSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCEmoteSystem _rmcEmote = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _targets = new();
 
@@ -62,6 +64,9 @@ public sealed class XenoLifestealSystem : EntitySystem
 
         if (!found)
             return;
+
+        if (xeno.Comp.Emote is { } emote)
+            _rmcEmote.TryEmoteWithChat(xeno, emote, cooldown: xeno.Comp.EmoteCooldown);
 
         if (!_damageableQuery.TryComp(xeno, out var damageable))
             return;
@@ -108,6 +113,9 @@ public sealed class XenoLifestealSystem : EntitySystem
 
             var selfMsg = Loc.GetString("rmc-lifesteal-more-self");
             _popup.PopupClient(selfMsg, xeno, xeno);
+
+            if (xeno.Comp.MaxEffect is { } effect)
+                SpawnAttachedTo(effect, xeno.Owner.ToCoordinates());
         }
     }
 }

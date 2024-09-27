@@ -11,7 +11,8 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
         bool hideLog = false,
         string? nameOverride = null,
         bool ignoreActionBlocker = false,
-        bool forceEmote = false)
+        bool forceEmote = false,
+        TimeSpan? cooldown = null)
     {
     }
 }
