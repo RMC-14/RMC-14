@@ -23,7 +23,7 @@
   description: Standard-issue Military Warden uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Warden/standard.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/standard.rsi
 
 - type: entity
   parent: CMJumpsuitWarden
@@ -32,7 +32,7 @@
   description: The insignia on this uniform tells you that this uniform belongs to the Warden..
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Warden/blue.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/blue.rsi
 
 - type: entity
   parent: CMJumpsuitWarden
@@ -41,7 +41,7 @@
   description: A standard-issue warden uniform.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Warden/red.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/red.rsi
 
 - type: entity
   parent: CMJumpsuitWarden
@@ -50,7 +50,7 @@
   description: A standard-issue warden uniform.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Warden/corporate.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/corporate.rsi
 
 - type: entity
   parent: CMJumpsuitWarden
@@ -59,7 +59,7 @@
   description: A navy variant of warden uniform.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Warden/navy.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/navy.rsi
 
 - type: entity
   parent: CMJumpsuitWarden
@@ -68,7 +68,7 @@
   description: A standard-issue warden uniform.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Warden/tan.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/tan.rsi
 
 # Warrant Officer / CMP
 - type: entity
@@ -78,5 +78,5 @@
   description: A uniform typically worn by a Chief MP of the UNMC. It has shards of light Kevlar to help protect against stabbing weapons, bullets, and shrapnel from explosions. This uniform includes a small EMF distributor to help nullify energy-based weapon fire, along with a hazmat chemical filter woven throughout the material to ward off biological and radiation hazards.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/wo.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/wo.rsi
 

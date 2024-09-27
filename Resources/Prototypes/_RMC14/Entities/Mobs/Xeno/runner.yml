@@ -35,6 +35,13 @@
         - LowImpassable
         layer:
         - MobLayer
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 185
+        layer:
+        - BulletImpassable
   - type: Xeno
     role: CMXenoRunner
     actionIds:

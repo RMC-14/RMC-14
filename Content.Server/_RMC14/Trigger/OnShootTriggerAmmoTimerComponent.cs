@@ -3,7 +3,7 @@
 namespace Content.Server._RMC14.Trigger;
 
 [RegisterComponent]
-[Access(typeof(CMTriggerSystem))]
+[Access(typeof(RMCTriggerSystem))]
 public sealed partial class OnShootTriggerAmmoTimerComponent : Component
 {
     [DataField]

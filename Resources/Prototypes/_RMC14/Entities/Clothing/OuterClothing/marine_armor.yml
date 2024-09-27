@@ -197,6 +197,28 @@
     grid:
     - 0,0,3,1 # 2 slots
 
+- type: entity
+  parent: CMArmorM3Medium
+  id: CMArmorM3VLSynth
+  name: M3A1 Synthetic Utility Vest
+  description: This variant of the ubiquitous M3 pattern vest has been extensively modified, providing no protection in exchange for maximum mobility and added storage. Synthetic programming compliant.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl_syn_camo.rsi
+  - type: Clothing
+    equipDelay: 1
+    unequipDelay: 0.5
+  - type: CMArmor
+    armor: 0 # CLOTHING_ARMOR_NONE
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
+    walkModifier: 0.949
+    sprintModifier: 0.949
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
+  - type: RMCBulkyArmor
+    isBulky: false
+
 # m4
 - type: entity
   parent: CMArmorM3Medium
