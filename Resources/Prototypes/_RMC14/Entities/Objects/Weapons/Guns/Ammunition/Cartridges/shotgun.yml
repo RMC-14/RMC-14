@@ -47,6 +47,9 @@
     - state: slug_shell_1
   - type: CartridgeAmmo
     proto: CMPelletShotgunSlug
+  - type: Tag
+    tags:
+    - CMShellShotgunSlugs
 
 - type: entity
   parent: CMShellShotgunBase
@@ -59,6 +62,9 @@
     - state: incendiary_slug_1
   - type: CartridgeAmmo
     proto: CMPelletShotgunIncendiary
+  - type: Tag
+    tags:
+    - CMShellShotgunIncendiary
 
 - type: entity
   parent: CMShellShotgunBase
@@ -71,6 +77,9 @@
     - state: beanbag_slug_1
   - type: CartridgeAmmo
     proto: CMPelletShotgunBeanbag
+  - type: Tag
+    tags:
+    - CMShellShotgunBeanbag
 
 - type: entity
   parent: CMShellShotgunBase
@@ -83,6 +92,9 @@
     - state: flechette_shell_1
   - type: CartridgeAmmo
     proto: CMPelletShotgunFlechette
+  - type: Tag
+    tags:
+    - CMShellShotgunFlechette
 
 - type: entity
   parent: CMShellShotgunBuckshot
@@ -101,3 +113,15 @@
 
 - type: Tag
   id: RMCShellShotgunBuckshot
+
+- type: Tag
+  id: CMShellShotgunSlugs
+  
+- type: Tag
+  id: CMShellShotgunFlechette
+  
+- type: Tag
+  id: CMShellShotgunIncendiary
+
+- type: Tag
+  id: CMShellShotgunBeanbag
