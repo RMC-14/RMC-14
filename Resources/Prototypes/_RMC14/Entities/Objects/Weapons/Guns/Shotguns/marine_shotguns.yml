@@ -158,6 +158,12 @@
   - type: Gun
     shotsPerBurst: 2
   - type: ShootUseDelay
+  - type: BallisticAmmoProvider
+    cycleable: true
+    whitelist:
+      tags:
+      - CMShellShotgun
+    capacity: 2
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -297,6 +303,11 @@
     baseFireRate: 2
     burstScatterMult: 1
   - type: BallisticAmmoProvider
+    cycleable: false
+    whitelist:
+      tags:
+      - CMShellShotgun
+    capacity: 3
     blacklist:
       tags:
       - RMCShellShotgunBuckshot
