@@ -11,6 +11,7 @@ using Robust.Client.Player;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
+using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
@@ -28,9 +29,15 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
+    private EntityQuery<IgnorePredictionHideComponent> _ignorePredictionHideQuery;
+    private EntityQuery<SpriteComponent> _spriteQuery;
+
     public override void Initialize()
     {
         base.Initialize();
+
+        _ignorePredictionHideQuery = GetEntityQuery<IgnorePredictionHideComponent>();
+        _spriteQuery = GetEntityQuery<SpriteComponent>();
 
         SubscribeLocalEvent<PhysicsUpdateBeforeSolveEvent>(OnBeforeSolve);
         SubscribeLocalEvent<PhysicsUpdateAfterSolveEvent>(OnAfterSolve);
@@ -112,7 +119,13 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
         if (!GunPrediction)
             return;
 
-        if (ent.Comp.ClientEnt == _player.LocalEntity && TryComp(ent, out SpriteComponent? sprite))
+        if (ent.Comp.ClientEnt != _player.LocalEntity)
+            return;
+
+        if (_ignorePredictionHideQuery.HasComp(ent))
+            return;
+
+        if (_spriteQuery.TryComp(ent, out var sprite))
             sprite.Visible = false;
     }
 

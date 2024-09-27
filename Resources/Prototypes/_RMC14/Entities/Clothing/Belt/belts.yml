@@ -331,6 +331,9 @@
     sprite: _RMC14/Objects/Clothing/Belt/smart_pistol.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/smart_pistol.rsi
+    slots:
+    - suitStorage
+    - belt
   - type: Storage
     maxItemSize: Normal
     grid:
@@ -343,6 +346,7 @@
   - type: Tag
     tags:
     - RMCSmartPistolHolster
+
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -361,3 +365,6 @@
     maxItemSize: Normal
     grid:
     - 0,0,9,1 # 9 slots
+  - type: Tag
+    tags:
+    - RMCG8Pouch

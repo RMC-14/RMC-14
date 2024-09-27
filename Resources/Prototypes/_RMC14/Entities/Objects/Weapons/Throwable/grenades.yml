@@ -18,6 +18,7 @@
     initialBeepDelay: 0
     beepInterval: 10
     doPopup: false
+  - type: IgnorePredictionHide
 
 - type: entity
   parent: CMGrenadeBase
@@ -128,7 +129,7 @@
   parent: CMGrenadeHighExplosive
   id: CMGrenadeFragOld
   name: M15 fragmentation grenade
-  description: An outdated USCM Fragmentation Grenade. With decades of service in the USCM, the old M15 Fragmentation Grenade is slowly being replaced by the slightly safer M40-series grenades. It is set to detonate in 4 seconds.
+  description: An outdated UNMC Fragmentation Grenade. With decades of service in the UNMC, the old M15 Fragmentation Grenade is slowly being replaced by the slightly safer M40-series grenades. It is set to detonate in 4 seconds.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/m15frag.rsi

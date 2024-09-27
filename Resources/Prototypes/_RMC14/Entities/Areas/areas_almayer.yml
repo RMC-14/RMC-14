@@ -10,7 +10,7 @@
     CAS: true
     fulton: true
     mortarPlacement: false
-    mortarFire: true
+    mortarFire: false # TODO RMC14 true
     lasing: false
     medevac: false
     OB: true

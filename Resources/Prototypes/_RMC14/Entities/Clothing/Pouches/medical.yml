@@ -42,7 +42,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMBicaridineAutoInjector
+    - id: CMTricordrazineAutoInjector
 #    - id: CMSplints5
     - id: CMOintment10
     - id: CMGauze10
@@ -432,7 +432,7 @@
       - CMRollerBed
       - BodyBag
 #      - TODO RMC14 fixovein
-      - Hypospray 
+      - Hypospray
       components:
       - Hypospray
   - type: FixedItemSizeStorage
