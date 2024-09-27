@@ -1,4 +1,5 @@
 ﻿using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.Parasite;
@@ -27,6 +28,24 @@ public sealed partial class ParasiteAIComponent : Component
 
     [DataField]
     public int MaxSurroundingParas = 2;
+
+    [DataField]
+    public int MaxInfectRange = 3;
+
+    [DataField]
+    public float IdleChance = 0.15f;
+
+    [DataField]
+    public int MinIdleTime = 3;
+
+    [DataField]
+    public int MaxIdleTime = 13;
+
+    [DataField]
+    public string RestAction = "ActionXenoRest";
+
+    [DataField]
+    public float RangeCheck = 1.5f;
 }
 
 [Serializable, NetSerializable]

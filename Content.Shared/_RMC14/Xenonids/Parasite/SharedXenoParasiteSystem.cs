@@ -118,7 +118,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     private void OnParasiteLeapHit(Entity<XenoParasiteComponent> parasite, ref XenoLeapHitEvent args)
     {
         var coordinates = _transform.GetMoverCoordinates(parasite);
-        if (_transform.InRange(coordinates, args.Leaping.Origin, parasite.Comp.InfectRange))
+        var range = TryComp<ParasiteAIComponent>(parasite, out var ai) ? ai.MaxInfectRange : parasite.Comp.InfectRange;
+
+        if (_transform.InRange(coordinates, args.Leaping.Origin, range))
             Infect(parasite, args.Hit, false);
     }
 
@@ -202,25 +204,25 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("rmc-xeno-cant-throw", ("target", ent)), user, user, PopupType.SmallCaution);
     }
 
-	private void OnParasiteTryPull(Entity<XenoParasiteComponent> ent, ref PullAttemptEvent args)
-	{
-		if (HasComp<ParasiteAIComponent>(ent) && !HasComp<InfectableComponent>(args.PullerUid))
-		{
-			_popup.PopupClient(Loc.GetString("rmc-xeno-parasite-nonplayer-pull", ("parasite", ent)), ent, args.PullerUid, PopupType.SmallCaution);
-			args.Cancelled = true;
-		}
-	}
+    private void OnParasiteTryPull(Entity<XenoParasiteComponent> ent, ref PullAttemptEvent args)
+    {
+        if (HasComp<ParasiteAIComponent>(ent) && !HasComp<InfectableComponent>(args.PullerUid))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-parasite-nonplayer-pull", ("parasite", ent)), ent, args.PullerUid, PopupType.SmallCaution);
+            args.Cancelled = true;
+        }
+    }
 
-	private void OnParasiteTryPickup(Entity<XenoParasiteComponent> ent, ref GettingPickedUpAttemptEvent args)
-	{
-		if (!HasComp<ParasiteAIComponent>(ent))
-		{
-			_popup.PopupClient(Loc.GetString("rmc-xeno-parasite-player-pickup", ("parasite", ent)), ent, args.User, PopupType.SmallCaution);
-			args.Cancel();
-		}
-	}
+    private void OnParasiteTryPickup(Entity<XenoParasiteComponent> ent, ref GettingPickedUpAttemptEvent args)
+    {
+        if (!HasComp<ParasiteAIComponent>(ent))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-parasite-player-pickup", ("parasite", ent)), ent, args.User, PopupType.SmallCaution);
+            args.Cancel();
+        }
+    }
 
-	protected virtual void ParasiteLeapHit(Entity<XenoParasiteComponent> parasite)
+    protected virtual void ParasiteLeapHit(Entity<XenoParasiteComponent> parasite)
     {
     }
 
@@ -306,6 +308,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, user, parasite.Comp.ManualAttachDelay, ev, parasite, victim)
         {
             BreakOnMove = true,
+            BlockDuplicate = true,
             AttemptFrequency = AttemptFrequency.EveryTick
         };
         _doAfter.TryStartDoAfter(doAfter);
@@ -368,6 +371,14 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         {
             var pos = _transform.GetWorldPosition(victim);
             _transform.SetWorldPosition(parasite, pos);
+
+            if (TryComp<ParasiteAIComponent>(parasite, out var ai))
+            {
+                ai.JumpsLeft--;
+
+                if (_random.NextFloat() < ai.IdleChance)
+                    GoIdle((parasite, ai));
+            }
         }
 
         if (!TryRipOffClothing(victim, SlotFlags.HEAD))
@@ -437,10 +448,10 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         var time = _timing.CurTime;
         var aiQuery = EntityQueryEnumerator<ParasiteAIComponent>();
-        while(aiQuery.MoveNext(out var uid, out var ai))
+        while (aiQuery.MoveNext(out var uid, out var ai))
         {
-            if (!_mobState.IsDead(uid))
-                CheckTimers((uid, ai), time);
+            if (!_mobState.IsDead(uid) && !TerminatingOrDeleted(uid))
+                UpdateAI((uid, ai), time);
         }
 
         var query = EntityQueryEnumerator<VictimInfectedComponent, TransformComponent>();

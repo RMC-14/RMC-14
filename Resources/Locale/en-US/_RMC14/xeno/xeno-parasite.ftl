@@ -15,3 +15,5 @@ rmc-xeno-parasite-nonplayer-pull = Pulling {$parasite} might hurt {OBJECT($paras
 rmc-xeno-parasite-ai-active = {CAPITALIZE(SUBJECT($parasite))} seems to be active.
 rmc-xeno-parasite-ai-idle = {CAPITALIZE(SUBJECT($parasite))} {CONJUGATE-BE($parasite)} resting.
 rmc-xeno-parasite-ai-dying = [color=red]{CAPITALIZE(SUBJECT($parasite))} needs to return to safety![/color]
+
+rmc-xeno-parasite-ai-eaten = {CAPITALIZE($parasite)} is furiously cannibalized by the other nearby parasites!

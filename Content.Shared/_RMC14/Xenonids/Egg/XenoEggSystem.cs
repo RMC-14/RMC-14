@@ -35,6 +35,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using static Content.Shared.Physics.CollisionGroup;
+using Robust.Shared.Map;
 
 namespace Content.Shared._RMC14.Xenonids.Egg;
 
@@ -85,8 +86,9 @@ public sealed class XenoEggSystem : EntitySystem
         SubscribeLocalEvent<XenoEggComponent, StepTriggerAttemptEvent>(OnXenoEggStepTriggerAttempt);
         SubscribeLocalEvent<XenoEggComponent, StepTriggeredOffEvent>(OnXenoEggStepTriggered);
         SubscribeLocalEvent<XenoEggComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
-		SubscribeLocalEvent<XenoEggComponent, ThrowItemAttemptEvent>(OnXenoEggTryThrow);
-	}
+        SubscribeLocalEvent<XenoEggComponent, ThrowItemAttemptEvent>(OnXenoEggTryThrow);
+        SubscribeLocalEvent<XenoEggComponent, PlaceEggDoAfterEvent>(OnXenoEggDoAfter);
+    }
 
     private void OnXenoGrowOvipositorAction(Entity<XenoComponent> xeno, ref XenoGrowOvipositorActionEvent args)
     {
@@ -186,41 +188,95 @@ public sealed class XenoEggSystem : EntitySystem
 
     private void OnXenoEggAfterInteract(Entity<XenoEggComponent> egg, ref AfterInteractEvent args)
     {
+        if (args.Handled)
+            return;
+
         if (egg.Comp.State != XenoEggState.Item ||
             !TryComp(egg, out TransformComponent? xform))
         {
             return;
         }
 
-        var user = args.User;
-        if (!args.CanReach)
+        bool handle = args.Handled;
+
+        if (!CanPlaceEgg(egg, args.User, args.CanReach, args.ClickLocation, ref handle))
+        {
+            args.Handled = handle;
+            return;
+        }
+
+        var ev = new PlaceEggDoAfterEvent(GetNetCoordinates(args.ClickLocation));
+        var doAfter = new DoAfterArgs(EntityManager, args.User, TimeSpan.FromSeconds(5), ev, egg)
+        {
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            BlockDuplicate = true
+        };
+
+        args.Handled = true;
+
+        _popup.PopupPredicted(Loc.GetString("rmc-xeno-egg-plant-self"), Loc.GetString("rmc-xeno-egg-plant", ("user", args.User)), egg, args.User);
+
+        _doAfter.TryStartDoAfter(doAfter);
+    }
+
+    private void OnXenoEggDoAfter(Entity<XenoEggComponent> egg, ref PlaceEggDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        if (egg.Comp.State != XenoEggState.Item ||
+    !TryComp(egg, out TransformComponent? xform))
+        {
+            return;
+        }
+
+        bool handle = args.Handled;
+        if (!CanPlaceEgg(egg, args.User, true, EntityManager.GetCoordinates(args.Coordinates), ref handle))
+        {
+            args.Handled = handle;
+            return;
+        }
+
+        // Hand code is god-awful and its reach distance is inconsistent with args.CanReach
+        // so we need to set the position ourselves.
+        _transform.SetCoordinates(egg, EntityManager.GetCoordinates(args.Coordinates));
+        _transform.SetLocalRotation(egg, 0);
+
+        SetEggState(egg, XenoEggState.Growing);
+        _transform.AnchorEntity(egg, xform);
+    }
+
+    private bool CanPlaceEgg(Entity<XenoEggComponent> egg, EntityUid user, bool reachable, EntityCoordinates location, ref bool handled)
+    {
+        if (!reachable)
         {
             if (_timing.IsFirstTimePredicted)
-                _popup.PopupCoordinates(Loc.GetString("cm-xeno-cant-reach-there"), args.ClickLocation, Filter.Local(), true);
+                _popup.PopupCoordinates(Loc.GetString("cm-xeno-cant-reach-there"), location, Filter.Local(), true);
 
-            return;
+            return false;
         }
 
         if (HasComp<MarineComponent>(user))
         {
             // TODO RMC14 this should have a better filter than marine component
-            if (!args.Handled)
+            if (!handled)
             {
-                _hands.TryDrop(user, egg, args.ClickLocation);
+                _hands.TryDrop(user, egg, location);
                 _popup.PopupClient(Loc.GetString("cm-xeno-egg-failed-plant-outside"), user, user);
             }
 
-            args.Handled = true;
-            return;
+            handled = true;
+            return false;
         }
 
-        if (_transform.GetGrid(args.ClickLocation) is not { } gridId ||
+        if (_transform.GetGrid(location) is not { } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
         {
-            return;
+            return false;
         }
 
-        var tile = _map.TileIndicesFor(gridId, grid, args.ClickLocation);
+        var tile = _map.TileIndicesFor(gridId, grid, location);
         var anchored = _map.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
         var hasWeeds = false;
         while (anchored.MoveNext(out var uid))
@@ -229,8 +285,8 @@ public sealed class XenoEggSystem : EntitySystem
             {
                 var msg = Loc.GetString("cm-xeno-egg-failed-already-there");
                 _popup.PopupClient(msg, uid.Value, user, PopupType.SmallCaution);
-                args.Handled = true;
-                return;
+                handled = true;
+                return false;
             }
 
             if (HasComp<XenoConstructComponent>(uid) ||
@@ -239,8 +295,8 @@ public sealed class XenoEggSystem : EntitySystem
             {
                 var msg = Loc.GetString("cm-xeno-egg-blocked");
                 _popup.PopupClient(msg, uid.Value, user, PopupType.SmallCaution);
-                args.Handled = true;
-                return;
+                handled = true;
+                return false;
             }
 
             if (HasComp<XenoWeedsComponent>(uid))
@@ -250,25 +306,19 @@ public sealed class XenoEggSystem : EntitySystem
         if (_turf.IsTileBlocked(gridId, tile, Impassable | MidImpassable | HighImpassable, grid))
         {
             var msg = Loc.GetString("cm-xeno-egg-blocked");
-            _popup.PopupClient(msg, args.ClickLocation, user, PopupType.SmallCaution);
-            args.Handled = true;
-            return;
+            _popup.PopupClient(msg, location, user, PopupType.SmallCaution);
+            handled = true;
+            return false;
         }
 
         // TODO RMC14 only on hive weeds
         if (!hasWeeds)
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-egg-failed-must-weeds"), user, user);
-            return;
+            return false;
         }
 
-        // Hand code is god-awful and its reach distance is inconsistent with args.CanReach
-        // so we need to set the position ourselves.
-        _transform.SetCoordinates(egg, args.ClickLocation);
-        _transform.SetLocalRotation(egg, 0);
-
-        SetEggState(egg, XenoEggState.Growing);
-        _transform.AnchorEntity(egg, xform);
+        return true;
     }
 
     private void OnXenoEggActivateInWorld(Entity<XenoEggComponent> egg, ref ActivateInWorldEvent args)
@@ -401,6 +451,8 @@ public sealed class XenoEggSystem : EntitySystem
         {
             spawned = SpawnAtPosition(egg.Comp.Spawn, xform.Coordinates);
             _xeno.SetHive(spawned.Value, egg.Comp.Hive);
+            if (spawned != null && TryComp<ParasiteAIComponent>(spawned, out var ai))
+                _parasite.GoIdle((spawned.Value, ai));
         }
 
         return true;
