@@ -1,10 +1,11 @@
 ﻿- type: entity
+  abstract: true
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
-  id: CMXenoPraetorian
+  id: CMXenoPraetorianBase
   name: Praetorian
   description: A huge, looming beast of an alien.
   components:
@@ -30,10 +31,10 @@
     - ActionXenoWatch
     - ActionXenoTailStab
     - ActionXenoAcidNormal
-    #    - ActionXenoSpit
-    #    - ActionXenoDash
-    #    - ActionXenoAcidBall
-    - ActionXenoSprayAcid
+    - ActionXenoSpit
+    - ActionXenoDash
+    - ActionXenoAcidBall
+    - ActionXenoSprayAcidPraetorian
     - ActionXenoDevolve
     tier: 3
     hudOffset: 0,0.16
@@ -79,9 +80,79 @@
         - BulletImpassable
   - type: RMCSize
     size: Big
-#  - type: RMCXenoDamageVisuals # TODO RMC14
-#    prefix: praetorian
+  - type: RMCXenoDamageVisuals
+    prefix: praetorian
+  - type: XenoSpit
+    projectileId: XenoSpitProjectilePraetorian
+  - type: XenoSprayAcid
+    barricadeDamage:
+      types:
+        Heat: 5
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: praetorian
+
+- type: entity
+  parent: CMXenoPraetorianBase
+  id: CMXenoPraetorian
+  components:
+  - type: XenoSprayAcid
+    barricadeDamage:
+      types:
+        Heat: 5
+    acid: XenoAcidSprayAcidStacks
+    plasmaCost: 80
+    doAfter: 0.5
+  - type: XenoLeap
+    plasmaCost: 50
+    delay: 0
+    knockdownTime: 0
+    range: 6
+    moveDelayTime: 0
+  - type: XenoShield
+    shield: Praetorian
+  - type: XenoAcidBall
+  - type: XenoEvolution
+    strains:
+    - RMCXenoPraetorianWarden
+
+- type: entity
+  parent: CMXenoPraetorianBase
+  id: RMCXenoPraetorianWarden
+  suffix: Warden
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Praetorian/warden_praetorian.rsi
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcidNormal
+    - ActionXenoPheromones
+    - ActionXenoSpit
+    - ActionXenoSprayAcidPraetorian
+    - ActionXenoAid
+    - ActionXenoRetrieve
+    - ActionXenoAidToggle
+    - ActionXenoDevolve
+  - type: XenoStrain
+    name: rmc-xeno-warden-name
+    description: rmc-xeno-warden-description
+    popup: rmc-xeno-warden-popup
+  - type: XenoPheromones
+    pheromonesMultiplier: 3
+  - type: XenoSpit
+    projectileId: XenoSpitProjectilePraetorianWarden
+  - type: XenoEnergy
+  - type: XenoRetrieve
+  - type: XenoAid
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 30
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 3.4

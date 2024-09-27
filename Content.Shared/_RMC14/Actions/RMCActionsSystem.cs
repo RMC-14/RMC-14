@@ -16,6 +16,8 @@ public sealed class RMCActionsSystem : EntitySystem
 
         SubscribeLocalEvent<ActionSharedCooldownComponent, ActionPerformedEvent>(OnSharedCooldownPerformed);
 
+        SubscribeLocalEvent<ActionCooldownComponent, RMCActionUseEvent>(OnCooldownUse);
+        
         SubscribeLocalEvent<InstantActionComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
         SubscribeLocalEvent<EntityTargetActionComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
         SubscribeLocalEvent<WorldTargetActionComponent, ActionReducedUseDelayEvent>(OnReducedUseDelayEvent);
@@ -93,5 +95,32 @@ public sealed class RMCActionsSystem : EntitySystem
         var delayNew = delayBase.Multiply(1 - reduction);
 
         shared.Cooldown = delayNew;
+    }
+
+    private void OnCooldownUse(Entity<ActionCooldownComponent> ent, ref RMCActionUseEvent args)
+    {
+        _actions.SetIfBiggerCooldown(ent, ent.Comp.Cooldown);
+    }
+
+    public bool CanUseActionPopup(EntityUid user, EntityUid action)
+    {
+        var ev = new RMCActionUseAttemptEvent(user);
+        RaiseLocalEvent(action, ref ev);
+        return !ev.Cancelled;
+    }
+
+    public void ActionUsed(EntityUid user, EntityUid action)
+    {
+        var ev = new RMCActionUseEvent(user);
+        RaiseLocalEvent(action, ref ev);
+    }
+
+    public bool TryUseAction(EntityUid user, EntityUid action)
+    {
+        if (!CanUseActionPopup(user, action))
+            return false;
+
+        ActionUsed(user, action);
+        return true;
     }
 }

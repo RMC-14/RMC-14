@@ -365,6 +365,9 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             ent.Comp.Map = xform.GridUid;
         }
 
+        if (_rottingQuery.HasComp(ent))
+            ent.Comp.Undefibbable = true;
+
         var blip = new TacticalMapBlip(indices, icon, ent.Comp.Color, ent.Comp.Undefibbable);
         if (_marineQuery.HasComp(ent))
         {

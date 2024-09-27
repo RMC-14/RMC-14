@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.DoAfter;
@@ -32,6 +33,9 @@ public abstract partial class SharedBuckleSystem
     private void OnStrapDragDropTarget(EntityUid uid, StrapComponent component, ref DragDropTargetEvent args)
     {
         if (!StrapCanDragDropOn(uid, args.User, uid, args.Dragged, component))
+            return;
+
+        if (!XenoCheck(args.User, args.Dragged))
             return;
 
         if (args.Dragged == args.User)

@@ -85,3 +85,15 @@
     damage:
       groups:
         Burn: 36
+
+- type: entity
+  parent: XenoAcidSprayWeak
+  id: XenoAcidSprayAcidStacks
+  name: splatter
+  description: It burns! It burns like hygiene!"
+  components:
+  - type: Sprite
+    layers:
+    - state: acid2
+  - type: ApplyAcidStacks
+    amount: 2
