@@ -303,14 +303,19 @@
     baseFireRate: 2
     burstScatterMult: 1
   - type: BallisticAmmoProvider
-    cycleable: false
+    cycleable: true
     whitelist:
       tags:
       - CMShellShotgun
-    capacity: 3
     blacklist:
-      tags:
+      tags: 
       - RMCShellShotgunBuckshot
+    proto: CMShellShotgunSlugs
+    capacity: 3
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
+      params:
+        volume: -2
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
