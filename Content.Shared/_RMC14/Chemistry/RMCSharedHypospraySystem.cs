@@ -170,11 +170,9 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
                 BreakOnMove = true,
                 BreakOnWeightlessMove = false,
                 BreakOnDamage = true,
-                BlockDuplicate = true,
                 NeedHand = ent.Comp.NeedHand,
                 BreakOnHandChange = ent.Comp.BreakOnHandChange,
-                MovementThreshold = ent.Comp.MovementThreshold,
-                DuplicateCondition = DuplicateConditions.SameEvent
+                MovementThreshold = ent.Comp.MovementThreshold
             });
             return;
         }
