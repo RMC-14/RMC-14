@@ -78,7 +78,9 @@ public abstract class AlertsSystem : EntitySystem
     ///     be erased if there is currently a cooldown for the alert)</param>
     /// <param name="autoRemove">if true, the alert will be removed at the end of the cooldown</param>
     /// <param name="showCooldown">if true, the cooldown will be visibly shown over the alert icon</param>
-    public void ShowAlert(EntityUid euid, ProtoId<AlertPrototype> alertType, short? severity = null, (TimeSpan, TimeSpan)? cooldown = null, bool autoRemove = false, bool showCooldown = true )
+    /// <param name="resourceMax">maximum value of a resource</param>
+    /// <param name="resourceCurrent">current value of a resource</param>
+    public void ShowAlert(EntityUid euid, ProtoId<AlertPrototype> alertType, short? severity = null, (TimeSpan, TimeSpan)? cooldown = null, bool autoRemove = false, bool showCooldown = true, int? resourceMax = null, int? resourceCurrent = null )
     {
         // This should be handled as part of networking.
         if (_timing.ApplyingState)
@@ -96,7 +98,9 @@ public abstract class AlertsSystem : EntitySystem
                 alertStateCallback.Severity == severity &&
                 alertStateCallback.Cooldown == cooldown &&
                 alertStateCallback.AutoRemove == autoRemove &&
-                alertStateCallback.ShowCooldown == showCooldown)
+                alertStateCallback.ShowCooldown == showCooldown &&
+                alertStateCallback.ResourceMax == resourceMax &&
+                alertStateCallback.ResourceCurrent == resourceCurrent)
             {
                 return;
             }
@@ -105,7 +109,7 @@ public abstract class AlertsSystem : EntitySystem
             alertsComponent.Alerts.Remove(alert.AlertKey);
 
             var state = new AlertState
-                { Cooldown = cooldown, Severity = severity, Type = alertType, AutoRemove = autoRemove, ShowCooldown = showCooldown};
+                { Cooldown = cooldown, Severity = severity, Type = alertType, AutoRemove = autoRemove, ShowCooldown = showCooldown, ResourceMax = resourceMax, ResourceCurrent = resourceCurrent};
             alertsComponent.Alerts[alert.AlertKey] = state;
 
             // Keeping a list of AutoRemove alerts, so Update() doesn't need to check every alert
@@ -133,7 +137,7 @@ public abstract class AlertsSystem : EntitySystem
     /// </summary>
     public void ClearAlertCategory(EntityUid euid, ProtoId<AlertCategoryPrototype> category)
     {
-        if(!TryComp(euid, out AlertsComponent? alertsComponent))
+        if (!TryComp(euid, out AlertsComponent? alertsComponent))
             return;
 
         var key = AlertKey.ForCategory(category);

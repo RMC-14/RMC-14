@@ -126,17 +126,10 @@ namespace Content.Client.Actions.UI
             {
                 _resourceLabel.Visible = false;
             }
-            else
+            else if (FormattedMessage.TryFromMarkup($"[color=#ffffff]{(int)ResourceCurrent} / {(int)ResourceMax}[/color]", out var resmarkup))
             {
-                if (FormattedMessage.TryFromMarkup($"[color=#ffffff]500 / 500[/color]", out var markup))
-                {
-                    _resourceLabel.SetMessage(markup);
-                    _resourceLabel.Visible = true;
-                }
-                else
-                {
-                    _resourceLabel.Visible = false;
-                }
+                _resourceLabel.SetMessage(resmarkup);
+                _resourceLabel.Visible = true;
             }
         }
     }
