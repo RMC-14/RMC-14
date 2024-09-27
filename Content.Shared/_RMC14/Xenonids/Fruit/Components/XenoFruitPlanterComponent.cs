@@ -9,12 +9,11 @@ namespace Content.Shared._RMC14.Xenonids.Fruit.Components;
 [Access(typeof(SharedXenoFruitSystem))]
 public sealed partial class XenoFruitPlanterComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public FixedPoint2 PlantRange = 1.9;
-
+    // Which fruits can this xeno plant?
     [DataField, AutoNetworkedField]
     public List<EntProtoId> CanPlant = new();
 
+    // Currently selected fruit
     [DataField, AutoNetworkedField]
     public EntProtoId? FruitChoice;
 
