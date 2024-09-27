@@ -86,6 +86,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             subs =>
             {
                 subs.Event<XenoEvolveBuiMsg>(OnXenoEvolveBui);
+                subs.Event<XenoStrainBuiMsg>(OnXenoStrainBui);
             });
 
         Subs.BuiEvents<XenoDevolveComponent>(XenoDevolveUIKey.Key,
@@ -141,12 +142,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return;
         }
 
-        if (TryComp(xeno, out DamageableComponent? damageable) &&
-            damageable.TotalDamage > 1)
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-cant-evolve-damaged"), xeno, xeno, PopupType.MediumCaution);
+        if (!DamagedCheckPopup(xeno, false))
             return;
-        }
 
         var time = _timing.CurTime;
         if (_prototypes.TryIndex(args.Choice, out var choice) &&
@@ -179,6 +176,38 @@ public sealed class XenoEvolutionSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
+    private void OnXenoStrainBui(Entity<XenoEvolutionComponent> xeno, ref XenoStrainBuiMsg args)
+    {
+        var actor = args.Actor;
+        _ui.CloseUi(xeno.Owner, XenoEvolutionUIKey.Key, actor);
+
+        if (_net.IsClient)
+            return;
+
+        if (!xeno.Comp.Strains.Contains(args.Choice))
+        {
+            Log.Warning($"{ToPrettyString(actor)} sent an invalid strain choice: {args.Choice}.");
+            return;
+        }
+
+        if (!ContainedCheckPopup(xeno))
+            return;
+
+        if (!DamagedCheckPopup(xeno, false))
+            return;
+
+        var newXeno = TransferXeno(xeno, args.Choice);
+        var ev = new NewXenoEvolvedEvent(xeno);
+        RaiseLocalEvent(newXeno, ref ev);
+
+        _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} chose strain {ToPrettyString(newXeno)}");
+
+        Del(xeno.Owner);
+
+        var afterEv = new AfterNewXenoEvolvedEvent();
+        RaiseLocalEvent(newXeno, ref afterEv);
+    }
+
     private void OnXenoDevolveBui(Entity<XenoDevolveComponent> xeno, ref XenoDevolveBuiMsg args)
     {
         _ui.CloseUi(xeno.Owner, XenoEvolutionUIKey.Key, xeno);
@@ -187,33 +216,12 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return;
 
         if (_net.IsClient ||
-            !_mind.TryGetMind(xeno, out var mindId, out _) ||
             !xeno.Comp.DevolvesTo.Contains(args.Choice))
         {
             return;
         }
 
-        var coordinates = _transform.GetMoverCoordinates(xeno.Owner);
-        var newXeno = Spawn(args.Choice, coordinates);
-        _xeno.SetSameHive(newXeno, xeno.Owner);
-
-        _mind.TransferTo(mindId, newXeno);
-        _mind.UnVisit(mindId);
-
-        foreach (var held in _hands.EnumerateHeld(xeno))
-            _hands.TryDrop(xeno, held);
-
-        // TODO RMC14 this is a hack because climbing on a newly created entity does not work properly for the client
-        var comp = EnsureComp<XenoNewlyEvolvedComponent>(newXeno);
-
-        _doors.Clear();
-        _entityLookup.GetEntitiesIntersecting(xeno, _doors);
-        foreach (var id in _doors)
-        {
-            if (HasComp<DoorComponent>(id) || HasComp<AirlockComponent>(id))
-                comp.StopCollide.Add(id);
-        }
-
+        var newXeno = TransferXeno(xeno, args.Choice);
         var ev = new XenoDevolvedEvent(xeno);
         RaiseLocalEvent(newXeno, ref ev);
 
@@ -237,27 +245,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         args.Handled = true;
 
-        var coordinates = _transform.GetMoverCoordinates(xeno.Owner);
-        var newXeno = Spawn(args.Choice, coordinates);
-        _xeno.SetSameHive(newXeno, xeno.Owner);
-
-        _mind.TransferTo(mindId, newXeno);
-        _mind.UnVisit(mindId);
-
-        foreach (var held in _hands.EnumerateHeld(xeno))
-            _hands.TryDrop(xeno, held);
-
-        // TODO RMC14 this is a hack because climbing on a newly created entity does not work properly for the client
-        var comp = EnsureComp<XenoNewlyEvolvedComponent>(newXeno);
-
-        _doors.Clear();
-        _entityLookup.GetEntitiesIntersecting(xeno, _doors);
-        foreach (var id in _doors)
-        {
-            if (HasComp<DoorComponent>(id) || HasComp<AirlockComponent>(id))
-                comp.StopCollide.Add(id);
-        }
-
+        var newXeno = TransferXeno(xeno, args.Choice);
         var ev = new NewXenoEvolvedEvent(xeno);
         RaiseLocalEvent(newXeno, ref ev);
 
@@ -266,6 +254,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
         Del(xeno.Owner);
 
         _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-end"), newXeno, newXeno);
+
+        var afterEv = new AfterNewXenoEvolvedEvent();
+        RaiseLocalEvent(newXeno, ref afterEv);
     }
 
     private void OnXenoEvolutionNewEvolved(Entity<XenoEvolutionComponent> xeno, ref NewXenoEvolvedEvent args)
@@ -312,6 +303,31 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
     }
 
+    private bool ContainedCheckPopup(EntityUid xeno, bool doPopup = true)
+    {
+        if (!_container.IsEntityInContainer(xeno))
+            return true;
+
+        if (doPopup)
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-failed-bad-location"), xeno, xeno, PopupType.MediumCaution);
+
+        return false;
+    }
+
+    private bool DamagedCheckPopup(EntityUid xeno, bool predicted = true, bool doPopup = true)
+    {
+        if (!TryComp(xeno, out DamageableComponent? damageable) ||
+            damageable.TotalDamage <= 1)
+            return true;
+
+        if (predicted)
+            _popup.PopupClient(Loc.GetString("rmc-xeno-evolution-cant-evolve-damaged"), xeno, xeno, PopupType.MediumCaution);
+        else
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-cant-evolve-damaged"), xeno, xeno, PopupType.MediumCaution);
+
+        return false;
+    }
+
     private bool CanEvolvePopup(Entity<XenoEvolutionComponent> xeno, EntProtoId newXeno, bool doPopup = true)
     {
         if (!xeno.Comp.EvolvesTo.Contains(newXeno) && !xeno.Comp.EvolvesToWithoutPoints.Contains(newXeno))
@@ -320,13 +336,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (!_prototypes.TryIndex(newXeno, out var prototype))
             return true;
 
-        if(_container.IsEntityInContainer(xeno))
-        {
-            if (doPopup)
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-failed-bad-location"), xeno, xeno, PopupType.MediumCaution);
-
+        if (!ContainedCheckPopup(xeno, doPopup))
             return false;
-        }
 
         // TODO RMC14 revive jelly when added should not bring back dead queens
         if (prototype.TryGetComponent(out XenoEvolutionCappedComponent? capped, _compFactory) &&
@@ -368,7 +379,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 );
             }
 
-            return false;
+            // return false;
         }
 
         if (newXenoComp != null &&
@@ -392,6 +403,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
                 existing++;
             }
+
+            if (_xenoHive.TryGetFreeSlots(oldHive, newXeno, out var freeSlots))
+                existing -= freeSlots;
 
             if (total != 0 && existing / (float) total >= limit)
             {
@@ -426,16 +440,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return false;
     }
 
-    private bool CanDevolvePopup(EntityUid xeno)
+    private bool CanDevolvePopup(EntityUid xeno, bool predicted = true)
     {
-        if (TryComp(xeno, out DamageableComponent? damageable) &&
-            damageable.TotalDamage > 1)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-evolution-cant-devolve-damaged"), xeno, xeno, PopupType.MediumCaution);
-            return false;
-        }
-
-        return true;
+        return DamagedCheckPopup(xeno, predicted);
     }
 
     // TODO RMC14 make this a property of the hive component
@@ -511,6 +518,37 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return NeedsOvipositor() && !HasOvipositor();
     }
 
+    private EntityUid TransferXeno(EntityUid xeno, EntProtoId proto)
+    {
+        var coordinates = _transform.GetMoverCoordinates(xeno);
+        var newXeno = Spawn(proto, coordinates);
+        _xeno.SetSameHive(newXeno, xeno);
+
+        if (_mind.TryGetMind(xeno, out var mindId, out _))
+        {
+            _mind.TransferTo(mindId, newXeno);
+            _mind.UnVisit(mindId);
+        }
+
+        foreach (var held in _hands.EnumerateHeld(xeno))
+        {
+            _hands.TryDrop(xeno, held);
+        }
+
+        // TODO RMC14 this is a hack because climbing on a newly created entity does not work properly for the client
+        var comp = EnsureComp<XenoNewlyEvolvedComponent>(newXeno);
+
+        _doors.Clear();
+        _entityLookup.GetEntitiesIntersecting(xeno, _doors);
+        foreach (var id in _doors)
+        {
+            if (HasComp<DoorComponent>(id) || HasComp<AirlockComponent>(id))
+                comp.StopCollide.Add(id);
+        }
+
+        return newXeno;
+    }
+
     public override void Update(float frameTime)
     {
         var newly = EntityQueryEnumerator<XenoNewlyEvolvedComponent>();
@@ -584,6 +622,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
         var evolution = EntityQueryEnumerator<XenoEvolutionComponent>();
         while (evolution.MoveNext(out var uid, out var comp))
         {
+            if (comp.Max == FixedPoint2.Zero)
+                continue;
+
             if (time < comp.LastPointsAt + TimeSpan.FromSeconds(1))
                 continue;
 

@@ -58,7 +58,7 @@
     # Mature
 #    - ActionXenoSpit
 #    - ActionXenoToggleSpitType
-    tier: 4
+    tier: 0
     bypassTierCount: true
     unlockAt: 0
   - type: XenoAcid
@@ -95,7 +95,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.40
+          radius: 0.35
         density: 185
         mask:
         - MobMask

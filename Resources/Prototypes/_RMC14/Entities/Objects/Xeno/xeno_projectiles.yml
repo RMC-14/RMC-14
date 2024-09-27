@@ -30,8 +30,8 @@
   - type: XenoProjectile
 
 - type: entity
-  id: XenoSpitProjectile
   parent: XenoBaseProjectile
+  id: XenoSpitProjectile
   name: spit
   categories:
   - HideSpawnMenu
@@ -195,3 +195,82 @@
     popupType: LargeCaution
   - type: ProjectileMaxRange
     max: 10
+
+- type: entity
+  parent: XenoSpitProjectile
+  id: XenoAcidBallSpitProjectile
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Projectile
+    damage:
+      groups:
+        Burn: 25
+  - type: ApplyAcidStacks
+    damage:
+      groups:
+        Burn: 30
+
+- type: entity
+  parent: XenoAcidBallSpitProjectile
+  id: XenoSpitProjectilePraetorian
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: XenoProjectileShieldOnHit
+  - type: PreventCollideWithDead
+
+- type: entity
+  parent: XenoSpitProjectile
+  id: XenoSpitProjectilePraetorianWarden
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Projectile
+    damage:
+      groups:
+        Burn: 25
+
+- type: entity
+  id: XenoAcidBallProjectile
+  name: acid ball
+  description: A small, pulsating ball of gas.
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Clickable
+  - type: Physics
+    bodyType: Dynamic
+    linearDamping: 0
+    angularDamping: 0
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: true
+        mask:
+        - Impassable
+        - BulletImpassable
+        - XenoProjectileImpassable
+        - BarricadeImpassable
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_acid_ball.rsi
+    layers:
+    - state: neuro_nade
+      shader: unshaded
+  - type: Projectile
+    deleteOnCollide: false
+    damage: {}
+  - type: TriggerOnFixedDistanceStop
+    delay: 1
+  - type: ClusterGrenade
+    fillPrototype: XenoAcidBallSpitProjectile
+    maxGrenadesCount: 14
+    grenadeType: enum.GrenadeType.Shoot
+    triggerGrenades: false
+  - type: AmmoFixedDistance
+    maxRange: 6
+  - type: ClusterLimitHits
+    limit: 4

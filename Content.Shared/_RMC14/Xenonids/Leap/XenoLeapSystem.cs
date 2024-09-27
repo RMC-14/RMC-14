@@ -106,6 +106,7 @@ public sealed class XenoLeapSystem : EntitySystem
         args.Handled = true;
 
         leaping.KnockdownRequiresInvisibility = xeno.Comp.KnockdownRequiresInvisibility;
+        leaping.MoveDelayTime = xeno.Comp.MoveDelayTime;
 
         if (xeno.Comp.PlasmaCost > FixedPoint2.Zero &&
             !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
