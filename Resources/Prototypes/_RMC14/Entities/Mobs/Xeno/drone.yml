@@ -1,10 +1,11 @@
 ﻿- type: entity
+  abstract: true
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
-  id: CMXenoDrone
+  id: CMXenoDroneBase
   name: Drone
   description: An alien drone.
   components:
@@ -48,25 +49,8 @@
   - type: XenoDevolve
     devolvesTo:
     - CMXenoLarva
-  - type: XenoAcid
-  - type: XenoConstruction
-    buildDelay: 2
-    canBuild:
-    - WallXenoResin
-    - WallXenoMembrane
-    - DoorXenoResin
-    canOrderConstruction:
-    - HiveCoreXenoConstructionNode
   - type: XenoDevour
-  - type: XenoEvolution
-    canEvolveWithoutGranter: true
-    max: 300
-    evolvesTo:
-#    - CMXenoCarrier
-#    - CMXenoBurrower
-    - CMXenoHivelord
-    evolvesToWithoutPoints:
-    - CMXenoQueen
+
   - type: XenoPheromones
     pheromonesMultiplier: 2
   - type: XenoPlasma
@@ -94,3 +78,68 @@
       sprite: _RMC14/Interface/map_blips.rsi
       state: drone
 
+- type: entity
+  parent: CMXenoDroneBase
+  id: CMXenoDrone
+  components:
+  - type: XenoEvolution
+    canEvolveWithoutGranter: true
+    max: 300
+    evolvesTo:
+#    - CMXenoCarrier
+#    - CMXenoBurrower
+    - CMXenoHivelord
+    evolvesToWithoutPoints:
+    - CMXenoQueen
+    strains:
+    - CMXenoDroneGardener
+  - type: XenoAcid
+  - type: XenoConstruction
+    buildDelay: 2
+    canBuild:
+    - WallXenoResin
+    - WallXenoMembrane
+    - DoorXenoResin
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode
+
+- type: entity
+  parent:
+  - CMXenoDroneBase
+  id: CMXenoDroneGardener
+  name: Gardener
+  suffix: Gardener
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Drone/gardener_drone.rsi
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoPheromones
+    - ActionXenoOrderConstruction
+    - ActionXenoPlantWeeds
+    # - ActionXenoPlantWeedsHardy # TODO: implement gardener weeds
+    - ActionXenoFruitPlant
+    - ActionXenoFruitChoose
+    - ActionXenoResinSurge # TODO: implement resin surge
+    - ActionXenoTransferPlasma
+    - ActionXenoDevolve
+    critHealMultiplier: 0.3465  # 5% increased regeneration
+    standHealingMultiplier: 0.42
+    restHealMultiplier: 1.05
+  - type: XenoConstruction
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode
+  - type: XenoFruitPlanter
+    canPlant:
+    - XenoFruitGreater
+    - XenoFruitPlasma
+    - XenoFruitSpeed
+    - XenoFruitSpore
+    - XenoFruitUnstable
+    maxFruitAllowed: 6
+  - type: XenoResinSurge
+  # TODO: Overlay color based on chosen fruit
