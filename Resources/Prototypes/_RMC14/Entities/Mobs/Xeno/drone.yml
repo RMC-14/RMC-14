@@ -81,6 +81,8 @@
       components:
       - XenoParasite
       - XenoEgg
+  - type: EggPlantTime
+    plantTime: 2.5
   - type: MultiHandedHolder
     items:
     - hands: 2

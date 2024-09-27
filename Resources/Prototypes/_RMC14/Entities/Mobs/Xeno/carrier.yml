@@ -84,6 +84,8 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
+  - type: EggPlantTime
+    plantTime: 1
   - type: WhitelistPickup
     whitelist:
       components:

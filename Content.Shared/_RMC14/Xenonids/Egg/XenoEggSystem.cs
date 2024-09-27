@@ -36,6 +36,7 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using static Content.Shared.Physics.CollisionGroup;
 using Robust.Shared.Map;
+using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Xenonids.Egg;
 
@@ -61,6 +62,7 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
@@ -205,8 +207,12 @@ public sealed class XenoEggSystem : EntitySystem
             return;
         }
 
+        var plantTime = TimeSpan.FromSeconds(3.5);
+        if (TryComp<EggPlantTimeComponent>(args.User, out var time))
+            plantTime = time.PlantTime;
+
         var ev = new PlaceEggDoAfterEvent(GetNetCoordinates(args.ClickLocation));
-        var doAfter = new DoAfterArgs(EntityManager, args.User, TimeSpan.FromSeconds(5), ev, egg)
+        var doAfter = new DoAfterArgs(EntityManager, args.User, plantTime, ev, egg)
         {
             BreakOnMove = true,
             BreakOnDamage = true,
@@ -238,6 +244,9 @@ public sealed class XenoEggSystem : EntitySystem
             return;
         }
 
+        if (!_plasma.TryRemovePlasmaPopup(egg.Owner, 30))
+            return;
+
         // Hand code is god-awful and its reach distance is inconsistent with args.CanReach
         // so we need to set the position ourselves.
         _transform.SetCoordinates(egg, EntityManager.GetCoordinates(args.Coordinates));
@@ -245,6 +254,8 @@ public sealed class XenoEggSystem : EntitySystem
 
         SetEggState(egg, XenoEggState.Growing);
         _transform.AnchorEntity(egg, xform);
+        var filter = Filter.Pvs(egg);
+        _audio.PlayEntity(egg.Comp.PlantSound, filter, egg, true);
     }
 
     private bool CanPlaceEgg(Entity<XenoEggComponent> egg, EntityUid user, bool reachable, EntityCoordinates location, ref bool handled)
@@ -317,6 +328,9 @@ public sealed class XenoEggSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("cm-xeno-egg-failed-must-weeds"), user, user);
             return false;
         }
+
+        if (!_plasma.HasPlasmaPopup(user, 30))
+            return false;
 
         return true;
     }
