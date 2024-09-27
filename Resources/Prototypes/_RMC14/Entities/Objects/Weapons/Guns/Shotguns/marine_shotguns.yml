@@ -307,8 +307,8 @@
     whitelist:
       tags:
       - CMShellShotgunSlugs
-      - CMPelletShotgunIncendiary
-      - CMPelletShotgunBeanbag
+      - CMShellShotgunIncendiary
+      - CMShellShotgunBeanbag
       - CMShellShotgunFlechette
     proto: CMShellShotgunSlugs
     capacity: 3
