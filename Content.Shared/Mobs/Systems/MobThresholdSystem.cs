@@ -37,7 +37,8 @@ public sealed class MobThresholdSystem : EntitySystem
             component.CurrentThresholdState,
             component.StateAlertDict,
             component.ShowOverlays,
-            component.AllowRevives);
+            component.AllowRevives,
+            component.DisplayDamageInAlert);
     }
 
     private void OnHandleState(EntityUid uid, MobThresholdsComponent component, ref ComponentHandleState args)
@@ -388,6 +389,15 @@ public sealed class MobThresholdSystem : EntitySystem
             return;
         }
 
+        int? healthMax = null;
+        int? healthCurrent = null;
+
+        if (threshold.DisplayDamageInAlert && TryGetIncapThreshold(target, out var critThreshold, threshold))
+        {
+            healthMax = (int?)critThreshold;
+            healthCurrent = (int?)critThreshold - (int?)damageable.TotalDamage;
+        }
+
         if (alertPrototype.SupportsSeverity)
         {
             var severity = _alerts.GetMinSeverity(currentAlert);
@@ -402,11 +412,11 @@ public sealed class MobThresholdSystem : EntitySystem
                         _alerts.GetMaxSeverity(currentAlert),
                         percentage.Value.Float()));
             }
-            _alerts.ShowAlert(target, currentAlert, severity);
+            _alerts.ShowAlert(target, currentAlert, severity, resourceMax: healthMax, resourceCurrent: healthCurrent);
         }
         else
         {
-            _alerts.ShowAlert(target, currentAlert);
+            _alerts.ShowAlert(target, currentAlert, resourceMax: healthMax, resourceCurrent: healthCurrent);
         }
     }
 
