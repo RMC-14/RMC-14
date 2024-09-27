@@ -125,7 +125,7 @@ public sealed class XenoEvolutionBui : BoundUserInterface
         {
             // TODO RMC14 for some reason this doesn't properly wrap text
             _window.OvipositorNeededLabel.SetMarkupPermissive("[bold][color=red]The Queen must be in their\novipositor for you to gain points![/color][/bold]");
-            _window.OvipositorNeededLabel.Visible = true;
+            _window.OvipositorNeededLabel.Visible = xeno.Max > FixedPoint2.Zero;
         }
         else
         {
