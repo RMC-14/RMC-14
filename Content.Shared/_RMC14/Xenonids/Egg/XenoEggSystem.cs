@@ -247,6 +247,8 @@ public sealed class XenoEggSystem : EntitySystem
         if (!_plasma.TryRemovePlasmaPopup(args.User, 30))
             return;
 
+        args.Handled = true;
+
         // Hand code is god-awful and its reach distance is inconsistent with args.CanReach
         // so we need to set the position ourselves.
         _transform.SetCoordinates(egg, EntityManager.GetCoordinates(args.Coordinates));
@@ -254,8 +256,7 @@ public sealed class XenoEggSystem : EntitySystem
 
         SetEggState(egg, XenoEggState.Growing);
         _transform.AnchorEntity(egg, xform);
-        var filter = Filter.Pvs(egg);
-        _audio.PlayEntity(egg.Comp.PlantSound, filter, egg, true);
+        _audio.PlayPredicted(egg.Comp.PlantSound, egg, args.User);
     }
 
     private bool CanPlaceEgg(Entity<XenoEggComponent> egg, EntityUid user, bool reachable, EntityCoordinates location, ref bool handled)
