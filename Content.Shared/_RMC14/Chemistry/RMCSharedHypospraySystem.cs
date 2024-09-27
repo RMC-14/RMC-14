@@ -174,6 +174,7 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
                 NeedHand = ent.Comp.NeedHand,
                 BreakOnHandChange = ent.Comp.BreakOnHandChange,
                 MovementThreshold = ent.Comp.MovementThreshold,
+                DuplicateCondition = DuplicateConditions.SameEvent
             });
             return;
         }
