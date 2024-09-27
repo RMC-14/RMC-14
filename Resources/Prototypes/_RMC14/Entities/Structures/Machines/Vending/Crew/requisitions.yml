@@ -41,8 +41,8 @@
         amount: 4
       - id: RMCSmartPistolCase
         amount: 3
-      #- id: MOU-53 Shotgun
-      #  amount: 2
+      - id: WeaponShotgunMOU53
+        amount: 2
       #- id: XM88 Heavy Rifle
       #  amount: 3
       #- id: RMCM54CE2Case
