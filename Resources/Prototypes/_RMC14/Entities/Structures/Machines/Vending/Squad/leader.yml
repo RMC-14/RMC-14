@@ -33,8 +33,8 @@
     #  points: 0
     #- id: CMM79GrenadeLauncher
     #  points: 0
-    #- id: CMMOU-53Shotgun
-    #  points: 0
+      - id: WeaponShotgunMOU53
+        points: 0
     #- id: CMXM88HeavyRifle
     #  points: 0
     - name: Armors
