@@ -244,7 +244,7 @@ public sealed class XenoEggSystem : EntitySystem
             return;
         }
 
-        if (!_plasma.TryRemovePlasmaPopup(egg.Owner, 30))
+        if (!_plasma.TryRemovePlasmaPopup(args.User, 30))
             return;
 
         // Hand code is god-awful and its reach distance is inconsistent with args.CanReach
