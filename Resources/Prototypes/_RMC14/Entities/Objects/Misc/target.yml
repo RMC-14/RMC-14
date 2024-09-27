@@ -62,9 +62,9 @@
     state: target_q
 
 - type: entity
-  name: xenonid target
   id: RMCTargetArmored
   parent: RMCTargetHuman
+  name: shooting target
   description: A shooting target. This one is an armored human.
   components:
   - type: Sprite
