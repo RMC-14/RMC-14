@@ -556,7 +556,7 @@
   id: RMCAttachmentStock
 
 - type: Tag
-  id: MCAttachmentM42A2WoodenStock
+  id: RMCAttachmentM42A2WoodenStock
 
 - type: Tag
   id: RMCAttachmentDoubleBarrelShotgunStock
