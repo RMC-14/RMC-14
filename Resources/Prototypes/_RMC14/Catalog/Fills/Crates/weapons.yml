@@ -51,3 +51,13 @@
     contents:
     - id: RMCSmartPistolCase
       amount: 2
+
+- type: entity
+  id: RMCCrateMOU53
+  parent: RMCCrateWeapons
+  name: MOU-53 Break Action Shotgun Crate (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponShotgunMOU53
+      amount: 2
