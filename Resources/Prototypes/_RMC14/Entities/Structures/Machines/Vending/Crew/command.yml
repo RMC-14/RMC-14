@@ -26,9 +26,10 @@
       takeAll: CMUniform
       entries:
       - id: CMJumpsuitBO
-        name: Service Uniform
-      #- id: CMJumpSuitOperations # TODO: Port Operations Uniform
-      #  recommended: true
+        name: service uniform
+      - id: CMJumpsuitOperations
+        name: operations uniform
+        recommended: true
       - id: CMHandsBlackMarine
     - name: Jacket
       choices: { CMCoat: 1}
@@ -42,12 +43,12 @@
         recommended: true
       - id: CMHeadBeretTan
         recommended: true
-      - id: CMHeadCap # TODO: Port Patrol Cap
+      - id: CMHeadCap
         recommended: true
-      #- id: CMOfficerCap # TODO: Port OfficerCap
-      #  recommended: true
-      #- id: CMServicePeakedCap # TODO: Port Service Peaked Cap
-      #  recommended: true
+      - id: CMHeadCapOfficer
+        recommended: true
+      - id: CMHeadCapPeakedService
+        recommended: true
     - name: Personal Sidearm
       choices: { CMWeapon: 1 }
       entries:
@@ -106,7 +107,7 @@
       - id: CMBootsBlackFilled
       - id: CMHandsBlackMarine
       - id: CMMRE
-      #- id: CMAviatorShades # TODO RMC14 Port Aviator Shades
+      - id: RMCGlassesAviators
       - id: RMCM5Bayonet
     - name: Specialisation Kit
       choices: { CMBundle: 1 }
@@ -225,12 +226,12 @@
       - id: CMHeadsetSeniorCommand
       - id: CMSatchel
       - id: CMMRE
-    # - name: Uniform # TODO: Port this.
-    #   choices: { CMUniform: 1 }
-    #   entries:
-    #   - id: CMJumpsuitXOService
-    #   - id: CMJumpsuitXOOperations
-    #   - id: CMJumpsuitXOFormal
+    - name: Uniform # TODO: Port this.
+      choices: { CMUniform: 1 }
+      entries:
+      - id: CMJumpsuitBO
+      - id: CMJumpsuitOperations
+      - id: RMCVendorBundleXOFormal
     - name: Personal Weapon
       choices: { CMWeapon: 1 }
       entries:
@@ -266,9 +267,9 @@
       - id: RMCGlassesMedicalHUDGlasses
         recommended: true
       - id: CMGlassesSecurity
-      #- id: CMShades # TODO: Port this.
-    #    recommended: true
-      #- id: CMAviatorShades # TODO: Port this.
+      - id: RMCSunglasses
+        recommended: true
+      - id: RMCGlassesAviators
     # - name: Patches # TODO RMC14 Make Patches
     #   entries:
     #   - id: CMUNMCPatch
@@ -311,9 +312,24 @@
       choices: { CMHat: 1 }
       entries:
       - id: CMHeadBeret # TODO: Port Officer Beret
-      - id: CMHeadCap # TODO: Port Service Peaked Cap
-      #- id: CMHeadCap # TODO: Port Patrol Cap
-      #- id: CMHeadCap # TODO: Port Officer Cap
+      - id: CMHeadCapPeakedService
+      - id: CMHeadCap # TODO: Port Patrol Cap
+      - id: CMHeadCapOfficer
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleXOFormal
+  name: formal uniform
+  description: Contains a peaked cap, formal uniform and jacket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+    - CMHeadCapPeakedFormal
+    - CMCoatXOFormal
+    - CMJumpsuitXOFormal
 
 # Weapon Vendor
 - type: entity
@@ -441,16 +457,16 @@
     - name: Utility
       entries:
       - id: CMJumpsuitBO
-      #- id: CMJumpsuitOperations # TODO: Port Operations Uniform
+      - id: CMJumpsuitOperations
       - id: CMHeadCapCO
       - id: CMHeadBeretCO
       - id: CMBootsBlackFilled
       - id: CMHandsBlackMarine
     - name: Utility Extras
       entries:
-      #- id: CMSunglasses # TODO: Port Sunglasses
-      #- id: CMPersonalShades # TODO RMC14 Port Personal Shades
-      #- id: CMAviatorShades # TODO RMC14 Port Aviator Shades
+      - id: RMCSunglasses
+      - id: RMCSunglassesBig
+      - id: RMCGlassesAviators
       - id: RMCGlassesMarineRpg
     - name: Service
       entries:
@@ -464,7 +480,7 @@
     - name: Service Headwear
       entries:
       - id: CMHeadBeretCO
-      #- id: CMHeadBeretCOWhite # TODO: Port White Beret
+      - id: CMHeadBeretCOWhite
       - id: CMHeadBeretCOBlack
       - id: CMHeadCap # TODO: Check this is the service variant. If so, parent and rename.
     - name: Service Extras

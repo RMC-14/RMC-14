@@ -1,56 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed grass being able to have weeds planted or spread onto it.
-    type: Fix
-  id: 237
-  time: '2024-07-02T13:47:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2755
-- author: DrSmugleaf
-  changes:
-  - message: Increased the delay between pointings from 0.5 seconds to 2 seconds.
-    type: Tweak
-  id: 238
-  time: '2024-07-02T15:29:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2756
-- author: Whisper
-  changes:
-  - message: Xenonids are now separated by caste in the ghost role panel.
-    type: Fix
-  id: 239
-  time: '2024-07-02T15:29:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2757
-- author: DrSmugleaf
-  changes:
-  - message: Fixed larvas and parasites being able to open xenonid eggs.
-    type: Fix
-  id: 240
-  time: '2024-07-02T15:31:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2758
-- author: DrSmugleaf
-  changes:
-  - message: Correspondents now spawn with a microphone in their pocket.
-    type: Add
-  id: 241
-  time: '2024-07-02T15:30:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2759
-- author: DrSmugleaf
-  changes:
-  - message: Added a Liaison job slot to the Almayer and Savannah.
-    type: Add
-  id: 242
-  time: '2024-07-02T15:32:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2760
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenonid pheromones not deactivating when the emitter goes into
-      crit or dies.
-    type: Fix
-  id: 243
-  time: '2024-07-02T15:45:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2761
-- author: DrSmugleaf
-  changes:
   - message: Fixed the client not getting feedback trying to build a hive core when
       one already exists far away from it
     type: Fix
@@ -4423,5 +4373,77 @@
   id: 736
   time: '2024-09-25T08:30:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4135
+- author: DummeHytteOst
+  changes:
+  - message: Corrected the defenders description
+    type: Fix
+  id: 737
+  time: '2024-09-26T18:44:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4126
+- author: Rainbeon
+  changes:
+  - message: M11 Throwing Knives will now slide farther than your cursor when thrown,
+      causing them to more reliably hit enemies.
+    type: Tweak
+  id: 738
+  time: '2024-09-26T18:43:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4136
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the gauze and ointment first-aid pouch incorrectly having a bicaridine
+      autoinjector instead of its tricordrazine one.
+    type: Fix
+  id: 739
+  time: '2024-09-26T19:00:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4144
+- author: crystalHex
+  changes:
+  - message: Added sunglasses, personal shades and aviators to the appropriate vendors.
+    type: Add
+  - message: Added five sets of uniforms and jackets, and some pieces of headgear
+      for special occasions.
+    type: Add
+  - message: Added several hats, uniforms and jackets to command vendors.
+    type: Add
+  - message: Added four provost uniforms, the special agent uniform, marine survivor
+      uniform.
+    type: Add
+  - message: Added eleven uniforms for various factions for special events.
+    type: Add
+  - message: Added ten sets of SPP uniforms, six sets of armor and three coats for
+      special events.
+    type: Add
+  - message: Added ten sets of PMC armor for special events.
+    type: Add
+  - message: Added a total of eighteen hats/helmets for PMCs and SPP.
+    type: Add
+  - message: Added another thirty sets of armor and headgear for the provost, mercenaries,
+      colonial militia, and other factions.
+    type: Add
+  id: 740
+  time: '2024-09-26T18:48:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3916
+- author: Whisper
+  changes:
+  - message: Added Vella 'Mortician' Sakeao figurine
+    type: Add
+  id: 741
+  time: '2024-09-27T06:53:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4149
+- author: Vermidia
+  changes:
+  - message: fixed ammo stuns appearing to stun when they didn't
+    type: Fix
+  id: 742
+  time: '2024-09-27T06:52:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4145
+- author: Vermidia
+  changes:
+  - message: Fixed some tool doafters (mostly medical ones) being able to treat multiple
+      people at once
+    type: Fix
+  id: 743
+  time: '2024-09-27T09:51:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4151
 Name: RMC14
 Order: -1

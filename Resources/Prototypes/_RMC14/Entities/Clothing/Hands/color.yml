@@ -51,3 +51,14 @@
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/white.rsi
   - type: Fiber
     fiberColor: fibers-white
+
+- type: entity
+  parent: CMHandsWhite
+  id: CMHandsWhiteDress
+  name: dress gloves
+  description: A pair of fashionable white gloves, worn by marines in dress.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/white.rsi

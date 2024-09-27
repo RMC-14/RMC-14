@@ -1,0 +1,13 @@
+- type: emoteSounds
+  parent: RMCMaleHuman
+  id: RMCMaleSlime
+  sounds:
+    Squish:
+      collection: Squishes
+
+- type: emoteSounds
+  parent: RMCFemaleHuman
+  id: RMCFemaleSlime
+  sounds:
+    Squish:
+      collection: Squishes
