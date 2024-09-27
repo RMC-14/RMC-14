@@ -286,9 +286,9 @@
   description: A limited production Kerchner MOU53 triple break action classic. Respectable damage output at medium ranges, while the Aegis M42 is the king of CQC, the Kerchner MOU53 is what hits the broadside of that barn. This specific model cannot safely fire buckshot shells.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Shotguns/mou53.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53.rsi
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Shotguns/mou53.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53.rsi
   - type: Gun
     shotsPerBurst: 1
   - type: ShootUseDelay
