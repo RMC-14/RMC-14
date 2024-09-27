@@ -1,43 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the client not getting feedback trying to build a hive core when
-      one already exists far away from it
-    type: Fix
-  id: 244
-  time: '2024-07-02T15:51:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2762
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the nomads packet being able to fit items other than cigarettes,
-      the cigar case being able to fit items other than cigars, and the match box
-      being able to fit items other than matches.
-    type: Fix
-  id: 245
-  time: '2024-07-03T11:03:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2790
-- author: DrSmugleaf
-  changes:
-  - message: Fixed showing upstream mechanical changes for species when changing it
-      in the character editor, when there are actually none.
-    type: Fix
-  id: 246
-  time: '2024-07-03T11:02:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2789
-- author: ShadowCommander
-  changes:
-  - message: Xenonids can now drag drop hosts to nest them on nest-able surfaces.
-    type: Add
-  id: 247
-  time: '2024-07-03T11:17:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2786
-- author: Vermidia
-  changes:
-  - message: Sentinel corrosive acid now works
-    type: Fix
-  id: 248
-  time: '2024-07-03T11:19:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2766
 - author: ShadowCommander
   changes:
   - message: Added empty sprites for backpacks, satchels, belts, and pouches.
@@ -4445,5 +4406,88 @@
   id: 743
   time: '2024-09-27T09:51:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4151
+- author: DrSmugleaf
+  changes:
+  - message: Added the Praetorian, a tier 3 xenonid caste evolved to from both Spitter
+      and Warrior which is centred around its acid stacking mechanic.
+    type: Add
+  - message: Added the Warden Praetorian strain, a strain that trades some offensive
+      capabilities for strong support abilities. Mousing over it in the evolve window
+      as a Praetorian will give you all the details.
+    type: Add
+  - message: Fixed xenonids not being able to target projectiles at non dead marines
+      that are lying down
+    type: Fix
+  - message: Made the Almayer more common at lower pops.
+    type: Tweak
+  - message: Added the missing free hivelord tier slot, guaranteeing that there's
+      always a slot for a hivelord.
+    type: Add
+  - message: Fixed the Queen taking up a slot in xenonid tier limits.
+    type: Fix
+  - message: Fixed the marine tactical map not showing a horizontal red line for undefibbable
+      marines.
+    type: Fix
+  - message: Added being able to pull things through ladders with you.
+    type: Add
+  - message: Fixed being flung to space if you climb a ladder while getting pulled.
+    type: Fix
+  - message: Fixed the Queen getting stuck on some things like Req railings.
+    type: Fix
+  - message: Increased the bullet hitbox size of some xenos by 14%. This doesn't affect
+      larva, parasite, defender, Queen and crusher.
+    type: Tweak
+  - message: Fixed the xeno identifier not being preserved through evolutions.
+    type: Fix
+  - message: Added the missing green heal overlay and roar to the Warrior's lifesteal
+      passive.
+    type: Add
+  - message: Fixed xenos being able to buckle humans.
+    type: Fix
+  - message: Fixed xenos being able to play instruments.
+    type: Fix
+  - message: Added the medilathe to the Almayer.
+    type: Add
+  - message: Added the missing windoor to the Almayer briefing podium.
+    type: Add
+  - message: Added the missing approved stamp to the QM's office in the Almayer.
+    type: Add
+  - message: Fix the firing range being access locked.
+    type: Fix
+  id: 744
+  time: '2024-09-27T19:00:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4155
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the Warden Praetorian showing an error sprite when wounded.
+    type: Fix
+  id: 745
+  time: '2024-09-27T21:04:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4157
+- author: DrSmugleaf
+  changes:
+  - message: Fixed some guns making it look like you are leaving a trail of bullets
+      for the shooter.
+    type: Fix
+  id: 746
+  time: '2024-09-27T21:04:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4158
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the armored shooting target being called a xenonid target.
+    type: Fix
+  - message: Added the medilathe and briefing podium windoor the Savannah.
+    type: Add
+  id: 747
+  time: '2024-09-27T21:33:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4159
+- author: DrSmugleaf
+  changes:
+  - message: Fixed welded closets and crates not opening from xenonid melee attacks.
+      Attacking one as a xenonid will now open it.
+    type: Fix
+  id: 748
+  time: '2024-09-27T21:47:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4160
 Name: RMC14
 Order: -1

@@ -17,6 +17,9 @@ public sealed partial class XenoSprayAcidComponent : Component
     public FixedPoint2 PlasmaCost = 40;
 
     [DataField, AutoNetworkedField]
+    public TimeSpan DoAfter;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan Delay = TimeSpan.FromSeconds(0.2);
 
     [DataField, AutoNetworkedField]
