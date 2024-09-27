@@ -6,8 +6,6 @@
     sprite: _RMC14/Effects/cloak.rsi
     drawdepth: Effects
     noRot: true
-  - type: TimedDespawn
-    lifetime: 0.6
   - type: EffectVisuals
   - type: AnimationPlayer
   - type: Tag
@@ -21,6 +19,8 @@
   components:
   - type: Sprite
     state: cloak
+  - type: TimedDespawn
+    lifetime: 0.8
 
 - type: entity
   parent: RMCEffectCloakBase
@@ -29,3 +29,5 @@
   components:
   - type: Sprite
     state: uncloak
+  - type: TimedDespawn
+    lifetime: 0.7
