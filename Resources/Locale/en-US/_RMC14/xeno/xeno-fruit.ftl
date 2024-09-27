@@ -77,3 +77,6 @@ rmc-xeno-fruit-effect-end = We feel the effects of the fruit wane...
 rmc-xeno-fruit-verb-harvest = Harvest
 rmc-xeno-fruit-verb-consume = Consume
 rmc-xeno-fruit-verb-feed = Feed
+
+# UI text
+rmc-xeno-fruit-ui-count = Planted fruit: {$count}/{$max}

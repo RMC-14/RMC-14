@@ -389,6 +389,8 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             : Loc.GetString("rmc-xeno-fruit-plant-success-self");
         var popupOthers = Loc.GetString("rmc-xeno-fruit-plant-success-others", ("xeno", xeno));
         _popup.PopupPredicted(popupSelf, popupOthers, xeno.Owner, xeno.Owner);
+
+        UpdateFruitCount(xeno);
     }
 
     #endregion
@@ -871,6 +873,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             return;
 
         planterComp.PlantedFruit.Remove(fruit.Owner);
+        UpdateFruitCount((planter, planterComp));
     }
 
     private void OnXenoFruitDestruction(Entity<XenoFruitComponent> fruit, ref DestructionEventArgs args)
@@ -904,6 +907,13 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         var ev = new XenoFruitStateChangedEvent();
         RaiseLocalEvent(fruit, ref ev);
+    }
+
+    private void UpdateFruitCount(Entity<XenoFruitPlanterComponent> xeno)
+    {
+        // Update UI to display the correct fruit count
+        var state = new XenoFruitChooseBuiState(xeno.Comp.PlantedFruit.Count, xeno.Comp.MaxFruitAllowed);
+        _ui.SetUiState(xeno.Owner, XenoFruitChooseUI.Key, state);
     }
 
     public override void Update(float frameTime)

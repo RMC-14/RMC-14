@@ -4,6 +4,9 @@
     Title="{Loc rmc-xeno-choose-resin-fruit}"
     MinSize="300 300">
     <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
-        <BoxContainer Orientation="Vertical" Name="FruitContainer" Access="Public" />
+        <BoxContainer Orientation="Vertical">
+            <Label Name="FruitCountLabel" Access="Public" Text="" />
+            <BoxContainer Orientation="Vertical" Name="FruitContainer" Access="Public" />
+        </BoxContainer>
     </ScrollContainer>
 </cc:XenoFruitChooseWindow>

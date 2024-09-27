@@ -37,6 +37,8 @@ public sealed class XenoFruitChooseBui : BoundUserInterface
         var group = new ButtonGroup();
         if (EntMan.TryGetComponent(Owner, out XenoFruitPlanterComponent? xeno))
         {
+            _window.FruitCountLabel.Text = Loc.GetString("rmc-xeno-fruit-ui-count", ("count", xeno.PlantedFruit.Count), ("max", xeno.MaxFruitAllowed));
+
             foreach (var fruitId in xeno.CanPlant)
             {
                 if (!_prototype.TryIndex(fruitId, out var fruit))
@@ -65,13 +67,29 @@ public sealed class XenoFruitChooseBui : BoundUserInterface
             _window?.Dispose();
     }
 
+    protected override void UpdateState(BoundUserInterfaceState state)
+    {
+        if (state is XenoFruitChooseBuiState uiState)
+            UpdateState(uiState);
+    }
+
+    private void UpdateState(XenoFruitChooseBuiState state)
+    {
+        if (_window == null)
+            return;
+
+        _window.FruitCountLabel.Text = Loc.GetString("rmc-xeno-fruit-ui-count", ("count", state.Count), ("max", state.Max));
+    }
+
     public void Refresh()
     {
-        if (EntMan.GetComponentOrNull<XenoFruitPlanterComponent>(Owner)?.FruitChoice is not { } choice ||
-            !_buttons.TryGetValue(choice, out var button))
-        {
+        if (!EntMan.TryGetComponent(Owner, out XenoFruitPlanterComponent? xeno) ||
+            _window == null)
             return;
-        }
+
+        if (xeno.FruitChoice is not { } choice ||
+            !_buttons.TryGetValue(choice, out var button))
+            return;
 
         button.Button.Pressed = true;
     }

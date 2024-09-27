@@ -10,6 +10,13 @@ public enum XenoFruitChooseUI : byte
 }
 
 [Serializable, NetSerializable]
+public sealed class XenoFruitChooseBuiState(int count, int max) : BoundUserInterfaceState
+{
+    public readonly int Count = count;
+    public readonly int Max = max;
+}
+
+[Serializable, NetSerializable]
 public sealed class XenoFruitChooseBuiMsg(EntProtoId fruitId) : BoundUserInterfaceMessage
 {
     public readonly EntProtoId FruitId = fruitId;
