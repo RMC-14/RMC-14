@@ -10,7 +10,6 @@ using Content.Shared.Mobs.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Content.Shared._RMC14.Xenonids.Egg;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Content.Shared._RMC14.Xenonids.Parasite;
 
@@ -148,6 +147,8 @@ public abstract partial class SharedXenoParasiteSystem
         _rmcNpc.WakeNPC(para);
         ChangeHTN(para, ParasiteMode.Active);
         para.Comp.Mode = ParasiteMode.Active;
+        //Has to wait 5 seconds before being able to jump from active
+        _stun.TryStun(para, TimeSpan.FromSeconds(5), true);
         Dirty(para);
     }
 

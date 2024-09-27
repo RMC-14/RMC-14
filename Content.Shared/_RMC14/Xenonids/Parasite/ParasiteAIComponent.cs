@@ -36,10 +36,10 @@ public sealed partial class ParasiteAIComponent : Component
     public float IdleChance = 0.15f;
 
     [DataField]
-    public int MinIdleTime = 3;
+    public int MinIdleTime = 5;
 
     [DataField]
-    public int MaxIdleTime = 13;
+    public int MaxIdleTime = 15;
 
     [DataField]
     public string RestAction = "ActionXenoRest";

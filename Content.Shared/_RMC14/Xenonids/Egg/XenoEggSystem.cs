@@ -13,7 +13,6 @@ using Content.Shared.Ghost;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Maps;
 using Content.Shared.Mind;
