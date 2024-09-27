@@ -309,6 +309,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         {
             BreakOnMove = true,
             BlockDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
             AttemptFrequency = AttemptFrequency.EveryTick
         };
         _doAfter.TryStartDoAfter(doAfter);
