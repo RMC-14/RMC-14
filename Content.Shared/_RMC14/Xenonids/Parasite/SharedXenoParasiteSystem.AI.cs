@@ -41,7 +41,10 @@ public abstract partial class SharedXenoParasiteSystem
 
     private void OnPlayerRemoved(Entity<XenoParasiteComponent> para, ref PlayerDetachedEvent args)
     {
-        EnsureComp<ParasiteAIComponent>(para);
+        var comp = EnsureComp<ParasiteAIComponent>(para);
+        // Just in case
+        _stun.TryStun(para, TimeSpan.FromSeconds(5), true);
+        GoIdle((para, comp));
     }
 
     private void OnAIAdded(Entity<ParasiteAIComponent> para, ref ComponentStartup args)
