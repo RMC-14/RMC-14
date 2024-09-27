@@ -203,6 +203,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
         _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} chose strain {ToPrettyString(newXeno)}");
 
         Del(xeno.Owner);
+
+        var afterEv = new AfterNewXenoEvolvedEvent();
+        RaiseLocalEvent(newXeno, ref afterEv);
     }
 
     private void OnXenoDevolveBui(Entity<XenoDevolveComponent> xeno, ref XenoDevolveBuiMsg args)
@@ -251,6 +254,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
         Del(xeno.Owner);
 
         _popup.PopupEntity(Loc.GetString("cm-xeno-evolution-end"), newXeno, newXeno);
+
+        var afterEv = new AfterNewXenoEvolvedEvent();
+        RaiseLocalEvent(newXeno, ref afterEv);
     }
 
     private void OnXenoEvolutionNewEvolved(Entity<XenoEvolutionComponent> xeno, ref NewXenoEvolvedEvent args)
@@ -373,7 +379,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 );
             }
 
-            return false;
+            // return false;
         }
 
         if (newXenoComp != null &&
