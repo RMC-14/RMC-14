@@ -84,4 +84,5 @@ rmc-xeno-fruit-examine-growing = still [color=darkred]growing[/color]
 rmc-xeno-fruit-examine-grown = [color=darkgreen]fully grown[/color]
 
 # UI text
+rmc-xeno-fruit-ui-title = Choose Resin Fruit
 rmc-xeno-fruit-ui-count = Planted fruit: {$count}/{$max}
