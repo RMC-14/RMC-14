@@ -80,7 +80,7 @@
 - type: entity
   parent: RMCStockAttachmentBase
   id: RMCAttachmentMOU53Stock
-  name: 
+  name: MOU53 Stock
   description: A metal stock fitted specifically for the MOU53 break action shotgun.
   components:
   - type: Sprite
