@@ -306,10 +306,10 @@
     cycleable: true
     whitelist:
       tags:
-      - CMShellShotgun
-    blacklist:
-      tags: 
-      - RMCShellShotgunBuckshot
+      - CMShellShotgunSlugs
+      - CMPelletShotgunIncendiary
+      - CMPelletShotgunBeanbag
+      - CMShellShotgunFlechette
     proto: CMShellShotgunSlugs
     capacity: 3
     soundInsert:
