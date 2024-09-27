@@ -206,6 +206,7 @@
   name: Semi-sawn-off M357 Rival
   id: WeaponShotgunM357Halfway
   description: A double barrel shotgun produced by Aegis. Archaic, sturdy, affordable. For some reason it seems that someone tried to saw through the barrel and gave up halfway through. This probably isn't going to be the greatest gun for combat..
+  components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/dbsawnoff.rsi
   - type: ShootUseDelay
