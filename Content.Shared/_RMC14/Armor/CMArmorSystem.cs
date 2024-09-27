@@ -57,7 +57,7 @@ public sealed class CMArmorSystem : EntitySystem
     private void OnMapInit(Entity<CMArmorComponent> armored, ref MapInitEvent args)
     {
         if (TryComp<XenoComponent>(armored, out var xeno))
-            _alerts.ShowAlert(armored, xeno.ArmorAlert, 0);
+            _alerts.ShowAlert(armored, xeno.ArmorAlert, 0, resourceMax: (int?)armored.Comp.Armor, resourceCurrent: (int?)armored.Comp.Armor); //TODO RMC14 update resourceCurrent when Armor level can actually change
     }
 
     private void OnRemove(Entity<CMArmorComponent> armored, ref ComponentRemove args)

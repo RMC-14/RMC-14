@@ -76,7 +76,7 @@ namespace Content.Client.Actions.UI
             vbox.AddChild(_resourceLabel = new RichTextLabel
             {
                 MaxWidth = TooltipTextMaxWidth,
-                StyleClasses = {StyleNano.StyleClassTooltipActionCooldown},
+                StyleClasses = {StyleNano.StyleClassTooltipActionResource},
                 Visible = false
             });
 
