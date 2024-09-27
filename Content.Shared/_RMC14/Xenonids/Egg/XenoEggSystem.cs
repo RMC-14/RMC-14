@@ -215,7 +215,6 @@ public sealed class XenoEggSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, args.User, plantTime, ev, egg)
         {
             BreakOnMove = true,
-            BreakOnDamage = true,
             BlockDuplicate = true
         };
 
