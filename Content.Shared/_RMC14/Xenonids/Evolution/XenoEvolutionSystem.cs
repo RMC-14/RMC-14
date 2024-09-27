@@ -398,6 +398,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 existing++;
             }
 
+            if (_xenoHive.TryGetFreeSlots(oldHive, newXeno, out var freeSlots))
+                existing -= freeSlots;
+
             if (total != 0 && existing / (float) total >= limit)
             {
                 if (doPopup)
