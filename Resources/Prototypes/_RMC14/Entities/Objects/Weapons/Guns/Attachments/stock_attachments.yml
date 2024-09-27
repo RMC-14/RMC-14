@@ -51,9 +51,6 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentM42A2WoodenStock
-  - bonusDamage:
-        types:
-          Blunt: 10
   - type: AttachableSpeedMods
     modifiers:
     - conditions:
@@ -552,7 +549,7 @@
   id: RMCAttachmentStock
 
 - type: Tag
-  id: RMCAttachmentM42A2WoodenStock
+  id: 
 
 - type: Tag
   id: RMCAttachmentDoubleBarrelShotgunStock
