@@ -60,6 +60,11 @@
   - type: AttachableWieldDelayMods
     modifiers:
       - delay: 0.4
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 10
   - type: AttachableWeaponRangedMods
     modifiers:
     - conditions:
@@ -88,7 +93,9 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentMOU53Stock
-  - bonusDamage:
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
         types:
           Blunt: 10
   - type: AttachableSpeedMods
