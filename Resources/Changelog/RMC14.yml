@@ -1,20 +1,6 @@
 ﻿Entries:
 - author: ShadowCommander
   changes:
-  - message: Xenonids can now drag drop hosts to nest them on nest-able surfaces.
-    type: Add
-  id: 247
-  time: '2024-07-03T11:17:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2786
-- author: Vermidia
-  changes:
-  - message: Sentinel corrosive acid now works
-    type: Fix
-  id: 248
-  time: '2024-07-03T11:19:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2766
-- author: ShadowCommander
-  changes:
   - message: Added empty sprites for backpacks, satchels, belts, and pouches.
     type: Add
   id: 249
@@ -4486,5 +4472,22 @@
   id: 746
   time: '2024-09-27T21:04:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4158
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the armored shooting target being called a xenonid target.
+    type: Fix
+  - message: Added the medilathe and briefing podium windoor the Savannah.
+    type: Add
+  id: 747
+  time: '2024-09-27T21:33:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4159
+- author: DrSmugleaf
+  changes:
+  - message: Fixed welded closets and crates not opening from xenonid melee attacks.
+      Attacking one as a xenonid will now open it.
+    type: Fix
+  id: 748
+  time: '2024-09-27T21:47:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4160
 Name: RMC14
 Order: -1
