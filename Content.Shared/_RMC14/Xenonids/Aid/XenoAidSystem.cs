@@ -12,7 +12,9 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Aid;
 
@@ -24,6 +26,7 @@ public sealed class XenoAidSystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
@@ -104,6 +107,7 @@ public sealed class XenoAidSystem : EntitySystem
                 if (xeno.Comp.HealEffect is { } effect)
                     SpawnAttachedTo(effect, target.ToCoordinates());
 
+                ActivateCooldown(xeno);
                 break;
             }
             case XenoAidMode.Ailments:
@@ -132,7 +136,8 @@ public sealed class XenoAidSystem : EntitySystem
                 if (xeno.Comp.AilmentsEffects is { } effect)
                     SpawnAttachedTo(effect, target.ToCoordinates());
 
-                _jitter.DoJitter(target, xeno.Comp.AilmentsJitterDuration, true, 5);
+                _jitter.DoJitter(target, xeno.Comp.AilmentsJitterDuration, true, 80, 8, true);
+                ActivateCooldown(xeno);
                 break;
             }
         }
@@ -149,5 +154,14 @@ public sealed class XenoAidSystem : EntitySystem
 
         Dirty(ent);
         _actions.SetToggled(args.Action, ent.Comp.Mode == XenoAidMode.Ailments);
+    }
+
+    private void ActivateCooldown(EntityUid user)
+    {
+        foreach (var (actionId, action) in _actions.GetActions(user))
+        {
+            if (action.BaseEvent is XenoAidActionEvent)
+                _actions.StartUseDelay(actionId);
+        }
     }
 }
