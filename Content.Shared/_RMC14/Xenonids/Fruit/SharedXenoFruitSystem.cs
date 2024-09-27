@@ -15,7 +15,7 @@ using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
-using Content.Shared.Examine;      // TODO: Add examine texts for when fruit are ready to be harvested
+using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -167,8 +167,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         args.Handled = true;
 
         var user = args.User;
-
-        // TODO: give xenos a faster way of eating the fruit without harvesting
 
         if (fruit.Comp.State != XenoFruitState.Item)
         {
@@ -335,13 +333,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
                 return;
             }
 
-            // TODO: catch this event in XenoRestSystem.cs
-            var attempt = new XenoFruitPlantAttemptEvent();
-            RaiseLocalEvent(xeno, ref attempt);
-
-            if (attempt.Cancelled)
-                return;
-
             // Remove plasma if possible
             if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, action.PlasmaCost))
             {
@@ -420,7 +411,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             return false;
         }
 
-        // TODO RMC14: check for hive as well
+        // TODO: check for hive as well
         // Non-planter xenos can't harvest growing fruit
         if (HasComp<XenoComponent>(user) &&
             !HasComp<XenoFruitPlanterComponent>(user) &&
@@ -503,7 +494,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     {
         if (!HasComp<XenoComponent>(user))
         {
-            // TODO RMC14: allow non-xenos to eat the forbidden froot
+            // TODO: allow non-xenos to eat the forbidden froot
             return false;
         }
 
@@ -514,7 +505,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             return false;
         }
 
-        // TODO RMC14: check for hive
+        // TODO: check for hive
 
         // Check if user is already under the effects of consumed fruit
         if (HasComp<XenoFruitSpeedComponent>(fruit) && HasComp<XenoFruitEffectSpeedComponent>(user))
