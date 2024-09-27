@@ -1,8 +1,5 @@
-﻿using Content.Shared._RMC14.Explosion;
-using Content.Shared._RMC14.Shields;
-using Content.Shared._RMC14.Weapons.Ranged;
+﻿using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared._RMC14.Xenonids.Projectile.Spit.Shield;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
@@ -30,12 +27,15 @@ public sealed class XenoProjectileSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
+    private EntityQuery<ProjectileComponent> _projectileQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
 
     public override void Initialize()
     {
+        _projectileQuery = GetEntityQuery<ProjectileComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
 
         SubscribeLocalEvent<XenoProjectileComponent, PreventCollideEvent>(OnPreventCollide);
@@ -59,11 +59,18 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (_net.IsClient && !IsClientSide(ent))
             return;
 
-        if (TryComp(args.Target, out XenoComponent? targetXeno) &&
-            targetXeno.Hive == ent.Comp.Hive)
+        if (_xeno.FromSameHive(ent.Owner, args.Target))
         {
             args.Handled = true;
             QueueDel(ent);
+            return;
+        }
+
+        if (_projectileQuery.TryComp(ent, out var projectile) &&
+            projectile.Shooter is { } shooter)
+        {
+            var ev = new XenoProjectileHitUserEvent();
+            RaiseLocalEvent(shooter, ref ev);
         }
     }
 

@@ -203,7 +203,6 @@
   - HideSpawnMenu
   components:
   - type: Projectile
-    impactEffect: null
     damage:
       groups:
         Burn: 25
@@ -220,6 +219,17 @@
   components:
   - type: XenoProjectileShieldOnHit
   - type: PreventCollideWithDead
+
+- type: entity
+  parent: XenoSpitProjectile
+  id: XenoSpitProjectilePraetorianWarden
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Projectile
+    damage:
+      groups:
+        Burn: 25
 
 - type: entity
   id: XenoAcidBallProjectile
