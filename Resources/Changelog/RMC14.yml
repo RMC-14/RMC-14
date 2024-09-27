@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed xenonid pheromones not deactivating when the emitter goes into
-      crit or dies.
-    type: Fix
-  id: 243
-  time: '2024-07-02T15:45:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2761
-- author: DrSmugleaf
-  changes:
   - message: Fixed the client not getting feedback trying to build a hive core when
       one already exists far away from it
     type: Fix
@@ -4445,5 +4437,13 @@
   id: 742
   time: '2024-09-27T06:52:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4145
+- author: Vermidia
+  changes:
+  - message: Fixed some tool doafters (mostly medical ones) being able to treat multiple
+      people at once
+    type: Fix
+  id: 743
+  time: '2024-09-27T09:51:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4151
 Name: RMC14
 Order: -1
