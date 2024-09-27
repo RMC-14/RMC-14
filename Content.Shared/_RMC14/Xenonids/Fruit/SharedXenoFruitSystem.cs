@@ -82,13 +82,13 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         SubscribeLocalEvent<XenoFruitChooseActionComponent, XenoFruitChosenEvent>(OnActionFruitChosen);
         // Fruit interactions
         SubscribeLocalEvent<XenoFruitComponent, ActivateInWorldEvent>(OnXenoFruitActivateInWorld);
+        SubscribeLocalEvent<XenoFruitComponent, AfterInteractEvent>(OnXenoFruitAfterInteract);
         SubscribeLocalEvent<XenoFruitComponent, GetVerbsEvent<AlternativeVerb>>(OnXenoFruitGetVerbs);
-        //SubscribeLocalEvent<XenoFruitComponent, InteractHandEvent>(OnXenoFruitInteractHand);
         // Fruit planting
         SubscribeLocalEvent<XenoFruitPlanterComponent, XenoFruitPlantActionEvent>(OnXenoFruitPlantAction);
         // Fruit harvesting
         SubscribeLocalEvent<XenoFruitComponent, XenoFruitHarvestDoAfterEvent>(OnXenoFruitHarvestDoAfter);
-        // Fruit consuming
+        // Fruit consuming (eating and feeding)
         SubscribeLocalEvent<XenoFruitComponent, XenoFruitConsumeDoAfterEvent>(OnXenoFruitConsumeDoAfter);
         // Fruit effects
         SubscribeLocalEvent<GardenerShieldComponent, RemovedShieldEvent>(OnShieldRemove);
@@ -98,10 +98,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         SubscribeLocalEvent<XenoFruitEffectSpeedComponent, ComponentShutdown>(OnXenoFruitEffectSpeedShutdown);
         SubscribeLocalEvent<XenoFruitEffectHasteComponent, MeleeHitEvent>(OnXenoFruitEffectHasteHit);
         SubscribeLocalEvent<XenoFruitEffectHasteComponent, ComponentShutdown>(OnXenoFruitEffectHasteShutdown);
-
-        //SubscribeLocalEvent<XenoFruitComponent, GettingPickedUpAttemptEvent>(OnXenoFruitPickedUpAttempt);
-        //SubscribeLocalEvent<XenoFruitComponent, AfterInteractEvent>(OnXenoFruitAfterInteract);
-        //SubscribeLocalEvent<XenoFruitComponent, AfterInteractUsingEvent>(OnXenoFruitAfterInteractUsing);
         // Fruit state updates
         SubscribeLocalEvent<XenoFruitComponent, AfterAutoHandleStateEvent>(OnXenoFruitAfterState);
         SubscribeLocalEvent<XenoFruitComponent, DestructionEventArgs>(OnXenoFruitDestruction);
@@ -162,7 +158,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         var user = args.User;
 
-        // TODO: give xenos a way of eating the fruit without harvesting
+        // TODO: give xenos a faster way of eating the fruit without harvesting
 
         if (fruit.Comp.State != XenoFruitState.Item)
         {
@@ -171,6 +167,24 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         }
 
         TryConsume(fruit, user);
+    }
+
+    private void OnXenoFruitAfterInteract(Entity<XenoFruitComponent> fruit, ref AfterInteractEvent args)
+    {
+        if (!args.CanReach ||
+            args.Target is not { } target)
+            return;
+
+        if (!HasComp<MobStateComponent>(target))
+            return;
+
+        if (args.User == target)
+        {
+            TryConsume(fruit, args.User);
+            return;
+        }
+
+        TryFeed(fruit, args.User, target);
     }
 
     private void OnXenoFruitGetVerbs(EntityUid fruit, XenoFruitComponent comp, GetVerbsEvent<AlternativeVerb> args)
@@ -488,7 +502,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         // Check if user is already under the effects of consumed fruit
         if (HasComp<XenoFruitSpeedComponent>(fruit) && HasComp<XenoFruitEffectSpeedComponent>(user))
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-effect-already"), user, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-effect-already", ("fruit", fruit)), user, user, PopupType.SmallCaution);
             return false;
         }
 
@@ -545,9 +559,14 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             return false;
         }
 
-        // TODO RMC14: check for hive
+        // TODO: check for hive
 
-        // TODO RMC14: Check if xeno is already under the effects of a fruit
+        // Check if xeno is already under the effects of a fruit
+        if (HasComp<XenoFruitSpeedComponent>(fruit) && HasComp<XenoFruitEffectSpeedComponent>(target))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-effect-already-feed", ("xeno", target), ("fruit", fruit)), user, user, PopupType.SmallCaution);
+            return false;
+        }
 
         // Check if fruit can be consumed at current (full) health
         if (!TryComp(target, out DamageableComponent? damage))
@@ -610,7 +629,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         // Display general eating/feeding pop-ups
         //var popupSelf = Loc.GetString("rmc-xeno-fruit-feed-success-self", ("target", target), ("fruit", fruit));
-        //var popupTarget = Loc.GetString("rmc-xeno-fruit-feed-success-target", ("user", user), ("fruit", fruit));
         //var popupOthers = Loc.GetString("rmc-xeno-fruit-feed-success-others", ("user", user), ("target", target), ("fruit", fruit));
 
         //if (user == target)

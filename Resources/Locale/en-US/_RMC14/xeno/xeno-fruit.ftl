@@ -69,7 +69,8 @@ rmc-xeno-fruit-effect-unstable = We feel our defense being bolstered, and begin 
 rmc-xeno-fruit-effect-spore = We feel a frenzy coming onto us! Our abilities will cool off faster as we slash!
 rmc-xeno-fruit-effect-speed = The fruit invigorates us to move faster!
 rmc-xeno-fruit-effect-plasma = The fruit boosts our plasma regeneration!
-rmc-xeno-fruit-effect-already = We are already under the effects of this fruit, go out and kill!
+rmc-xeno-fruit-effect-already = We are already under the effects of {THE($fruit)}, go out and kill!
+rmc-xeno-fruit-effect-already-feed = {CAPITALIZE(THE($xeno))} is already under the effects of {THE($fruit)}!
 rmc-xeno-fruit-effect-end = We feel the effects of the fruit wane...
 
 # Verbs
