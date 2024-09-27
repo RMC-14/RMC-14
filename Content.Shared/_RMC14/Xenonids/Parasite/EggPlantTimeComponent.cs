@@ -8,6 +8,6 @@ namespace Content.Shared._RMC14.Xenonids.Parasite;
 
 public sealed partial class EggPlantTimeComponent : Component
 {
-	[DataField, AutoNetworkedField]
-	public TimeSpan PlantTime = TimeSpan.FromSeconds(3.5);
+    [DataField, AutoNetworkedField]
+    public TimeSpan PlantTime = TimeSpan.FromSeconds(3.5);
 }
