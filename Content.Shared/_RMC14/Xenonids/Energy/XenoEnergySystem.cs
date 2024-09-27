@@ -116,8 +116,11 @@ public sealed class XenoEnergySystem : EntitySystem
         return true;
     }
 
-    public void RemoveEnergy(Entity<XenoEnergyComponent> xeno, int plasma)
+    public void RemoveEnergy(Entity<XenoEnergyComponent?> xeno, int plasma)
     {
+        if (!Resolve(xeno, ref xeno.Comp, false))
+            return;
+
         xeno.Comp.Current = int.Max(0, xeno.Comp.Current - plasma);
         Dirty(xeno);
     }

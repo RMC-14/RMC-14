@@ -78,6 +78,8 @@ public sealed class XenoAidSystem : EntitySystem
                 args.Handled = true;
                 var heal = xeno.Comp.Heal;
                 var bonusHeal = CompOrNull<XenoEnergyComponent>(xeno)?.Current * 0.5 ?? 0;
+                _xenoEnergy.RemoveEnergy(xeno.Owner, (int) bonusHeal);
+
                 if (_xenoStrain.AreSameStrain(xeno.Owner, target))
                     heal /= 2;
                 else
@@ -101,6 +103,7 @@ public sealed class XenoAidSystem : EntitySystem
 
                 if (xeno.Comp.HealEffect is { } effect)
                     SpawnAttachedTo(effect, target.ToCoordinates());
+
                 break;
             }
             case XenoAidMode.Ailments:
@@ -129,7 +132,7 @@ public sealed class XenoAidSystem : EntitySystem
                 if (xeno.Comp.AilmentsEffects is { } effect)
                     SpawnAttachedTo(effect, target.ToCoordinates());
 
-                _jitter.DoJitter(target, xeno.Comp.AilmentsJitterDuration, true);
+                _jitter.DoJitter(target, xeno.Comp.AilmentsJitterDuration, true, 5);
                 break;
             }
         }
