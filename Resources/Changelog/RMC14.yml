@@ -4477,6 +4477,14 @@
     type: Fix
   - message: Fixed xenos being able to play instruments.
     type: Fix
+  - message: Added the medilathe to the Almayer.
+    type: Add
+  - message: Added the missing windoor to the Almayer briefing podium.
+    type: Add
+  - message: Added the missing approved stamp to the QM's office in the Almayer.
+    type: Add
+  - message: Fix the firing range being access locked.
+    type: Fix
   id: 744
   time: '2024-09-27T19:00:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4155
