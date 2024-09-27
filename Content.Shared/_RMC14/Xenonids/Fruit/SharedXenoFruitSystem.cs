@@ -83,7 +83,8 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         // Fruit interactions
         SubscribeLocalEvent<XenoFruitComponent, ActivateInWorldEvent>(OnXenoFruitActivateInWorld);
         SubscribeLocalEvent<XenoFruitComponent, AfterInteractEvent>(OnXenoFruitAfterInteract);
-        SubscribeLocalEvent<XenoFruitComponent, GetVerbsEvent<AlternativeVerb>>(OnXenoFruitGetVerbs);
+        SubscribeLocalEvent<XenoFruitComponent, GetVerbsEvent<ActivationVerb>>(OnXenoFruitGetVerbs);
+        SubscribeLocalEvent<XenoFruitComponent, GetVerbsEvent<AlternativeVerb>>(OnXenoFruitGetAltVerbs);
         // Fruit planting
         SubscribeLocalEvent<XenoFruitPlanterComponent, XenoFruitPlantActionEvent>(OnXenoFruitPlantAction);
         // Fruit harvesting
@@ -187,7 +188,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         TryFeed(fruit, args.User, target);
     }
 
-    private void OnXenoFruitGetVerbs(EntityUid fruit, XenoFruitComponent comp, GetVerbsEvent<AlternativeVerb> args)
+    private void OnXenoFruitGetVerbs(EntityUid fruit, XenoFruitComponent comp, GetVerbsEvent<ActivationVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract)
             return;
@@ -195,15 +196,20 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         if (comp.State != XenoFruitState.Item)
         {
             // Harvest verb
-            AlternativeVerb harvestVerb = new()
+            ActivationVerb harvestVerb = new()
             {
                 Act = () => TryHarvest((fruit, comp), args.User),
                 Text = Loc.GetString("rmc-xeno-fruit-verb-harvest"),
-                Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/pickup.svg.192dpi.png")),
-                Priority = 1
+                Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/pickup.svg.192dpi.png"))
             };
             args.Verbs.Add(harvestVerb);
         }
+    }
+
+    private void OnXenoFruitGetAltVerbs(EntityUid fruit, XenoFruitComponent comp, GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
 
         // Consume verb
         AlternativeVerb consumeVerb = new()
