@@ -154,9 +154,7 @@
   description: A double barrel shotgun produced by Aegis. Archaic, sturdy, affordable. Only holds two 12g shells at a time.
   components:
   - type: Sprite
-    sprite: 
-  - type: Clothing
-    sprite: 
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/doublebarrel.rsi
   - type: Gun
     shotsPerBurst: 2
   - type: ShootUseDelay
@@ -209,9 +207,7 @@
   id: WeaponShotgunM357Halfway
   description: A double barrel shotgun produced by Aegis. Archaic, sturdy, affordable. For some reason it seems that someone tried to saw through the barrel and gave up halfway through. This probably isn't going to be the greatest gun for combat..
   - type: Sprite
-    sprite: 
-  - type: Clothing
-    sprite: 
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/dbsawnoff.rsi
   - type: ShootUseDelay
   - type: RMCSelectiveFire
     recoilWielded: 8
@@ -235,9 +231,7 @@
   id: WeaponShotgunM357Sawn
   description: A double barrel shotgun produced by Aegis. Archaic, sturdy, affordable. It has been artificially shortened to reduce range but increase damage and spread.
   - type: Sprite
-    sprite: 
-  - type: Clothing
-    sprite: 
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/dbsawnoff.rsi
   - type: Item
     size: Normal
   - type: GunDamageModifier
