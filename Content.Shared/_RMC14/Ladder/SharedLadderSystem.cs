@@ -1,4 +1,5 @@
-﻿using Content.Shared.Coordinates;
+﻿using Content.Shared._RMC14.Teleporter;
+using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.GameTicking;
@@ -22,6 +23,7 @@ public abstract class SharedLadderSystem : EntitySystem
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -138,12 +140,6 @@ public abstract class SharedLadderSystem : EntitySystem
             return;
 
         var user = args.DoAfter.Args.User;
-        if (TryComp(user, out PullerComponent? puller) &&
-            TryComp(puller.Pulling, out PullableComponent? pullable))
-        {
-            _pulling.TryStopPull(puller.Pulling.Value, pullable, user);
-        }
-
         var target = ent.Owner.ToCoordinates();
         if (user.ToCoordinates().TryDistance(EntityManager, _transform, target, out var distance) &&
             distance > ent.Comp.Range)
@@ -166,7 +162,8 @@ public abstract class SharedLadderSystem : EntitySystem
         if (ent.Comp.Other is not { } other || TerminatingOrDeleted(ent.Comp.Other))
             return;
 
-        _transform.SetCoordinates(user, _transform.GetMoverCoordinates(other));
+        var coordinates = _transform.GetMapCoordinates(other);
+        _transform.SetMapCoordinates(user, coordinates);
 
         var selfMessage = Loc.GetString("rmc-ladder-finish-climbing-self");
         var othersMessage = Loc.GetString("rmc-ladder-finish-climbing-others", ("user", user));
@@ -175,6 +172,8 @@ public abstract class SharedLadderSystem : EntitySystem
         ent.Comp.LastDoAfterEnt = null;
         ent.Comp.LastDoAfterId = null;
         Dirty(ent);
+
+        _rmcTeleporter.HandlePulling(user, coordinates);
     }
 
     private void OnLadderGetAltVerbs(Entity<LadderComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)

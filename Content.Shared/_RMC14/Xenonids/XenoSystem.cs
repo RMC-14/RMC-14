@@ -52,6 +52,7 @@ public sealed class XenoSystem : EntitySystem
     private EntityQuery<MarineComponent> _marineQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<MobThresholdsComponent> _mobThresholdsQuery;
+    private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<XenoFriendlyComponent> _xenoFriendlyQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
     private EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
@@ -71,6 +72,7 @@ public sealed class XenoSystem : EntitySystem
         _marineQuery = GetEntityQuery<MarineComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
         _mobThresholdsQuery = GetEntityQuery<MobThresholdsComponent>();
+        _xenoQuery = GetEntityQuery<XenoComponent>();
         _xenoFriendlyQuery = GetEntityQuery<XenoFriendlyComponent>();
         _xenoNestedQuery = GetEntityQuery<XenoNestedComponent>();
         _xenoPlasmaQuery = GetEntityQuery<XenoPlasmaComponent>();
@@ -300,13 +302,21 @@ public sealed class XenoSystem : EntitySystem
 
     public bool FromSameHive(Entity<XenoComponent?> xenoOne, Entity<XenoComponent?> xenoTwo)
     {
-        if (!Resolve(xenoOne, ref xenoOne.Comp, false) ||
-            !Resolve(xenoTwo, ref xenoTwo.Comp, false))
+        if (!_xenoQuery.Resolve(xenoOne, ref xenoOne.Comp, false) ||
+            !_xenoQuery.Resolve(xenoTwo, ref xenoTwo.Comp, false))
         {
             return false;
         }
 
         return xenoOne.Comp.Hive == xenoTwo.Comp.Hive;
+    }
+
+    public bool FromHive(Entity<XenoComponent?> xeno, Entity<HiveComponent?> hive)
+    {
+        if (!_xenoQuery.Resolve(xeno, ref xeno.Comp, false))
+            return false;
+
+        return xeno.Comp.Hive == hive;
     }
 
     public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool hitNonMarines = false)

@@ -20,9 +20,10 @@ public sealed class XenoBoneChipsSystem : EntitySystem
         if (args.Handled)
             return;
 
-        args.Handled = _xenoProjectile.TryShoot(
+        args.Handled = _xenoProjectile.TryShootAt(
             xeno,
-            args.Target,
+            args.Entity,
+            args.Coords,
             FixedPoint2.Zero,
             xeno.Comp.ProjectileId,
             null,

@@ -5,7 +5,7 @@
   id: Almayer
   mapName: Almayer
   mapPath: /Maps/_RMC14/almayer.yml
-  minPlayers: 90
+  minPlayers: 74
   maxRandomOffset: 0
   randomRotation: false
   fallback: true
