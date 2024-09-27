@@ -140,12 +140,6 @@ public abstract class SharedLadderSystem : EntitySystem
             return;
 
         var user = args.DoAfter.Args.User;
-        if (TryComp(user, out PullerComponent? puller) &&
-            TryComp(puller.Pulling, out PullableComponent? pullable))
-        {
-            _pulling.TryStopPull(puller.Pulling.Value, pullable, user);
-        }
-
         var target = ent.Owner.ToCoordinates();
         if (user.ToCoordinates().TryDistance(EntityManager, _transform, target, out var distance) &&
             distance > ent.Comp.Range)
