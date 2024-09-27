@@ -1,0 +1,37 @@
+using Content.Shared.FixedPoint;
+using Robust.Shared.GameStates;
+
+namespace Content.Shared._RMC14.Xenonids.ResinSurge;
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(SharedXenoResinSurgeSystem))]
+public sealed partial class XenoResinSurgeComponent : Component
+{
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 PlasmaCost = 75;
+
+    // Cooldown on failed action (in relation to cooldown on successful action)
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 FailedCooldownMultiplier = 0.5f;
+
+    // Amount of time to deduct from fruit growth timer
+    [DataField, AutoNetworkedField]
+    public TimeSpan FruitGrowth = TimeSpan.FromSeconds(5);
+
+    // Amount of hitpoints to reinforce structure by
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 ReinforceAmount = 6000;
+
+    // Amount of time to reinforce structure for
+    [DataField, AutoNetworkedField]
+    public TimeSpan ReinforceDuration = TimeSpan.FromSeconds(15);
+
+    // Color of reinforced door/wall if possible
+
+    // Amount of time to reinforce structure for
+    [DataField, AutoNetworkedField]
+    public TimeSpan StickyResinDoAfterPeriod = TimeSpan.FromSeconds(1);
+
+    // Radius of sticky resin to create (0 - 1x1 tile, 1 - 3x3 tiles, 2 - 5x5 tiles etc)
+    public int StickyResinRadius = 1;
+}

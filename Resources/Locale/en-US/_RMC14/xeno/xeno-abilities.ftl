@@ -121,3 +121,14 @@ rmc-xeno-defensive-shield-end = We feel our enhanced shield end!
 rmc-xeno-defensive-shield-resist-end = Our immunity to explosion damage ends!
 rmc-xeno-defensive-shield-activate = {$user} hunkers down and bolsters its defenses!
 rmc-xeno-defensive-shield-activate-self = We hunker down and bolster our defenses!
+
+# Resin Surge
+rmc-xeno-resin-surge-shield-self = We surge the resin around {THE($target)}, making it temporarily nigh unbreakable!
+rmc-xeno-resin-surge-shield-others = {CAPITALIZE(THE($xeno))} surges the resin around {THE($target)}, making it temporarily nigh unbreakable!
+rmc-xeno-resin-surge-shield-fail = We haplessly try to surge resin around {THE($target)}, but it's already reinforced. It'll take a moment for us to recover.
+rmc-xeno-resin-surge-fruit = We surge the resin around {THE($target)}, speeding its growth somewhat!
+rmc-xeno-resin-surge-fruit-fail = {CAPITALIZE(THE($target))} is already mature. The resin surge does nothing.
+rmc-xeno-resin-surge-wall-self = We surge the resin, creating an unstable wall!
+rmc-xeno-resin-surge-wall-others = {CAPITALIZE(THE($xeno))} surges the resin, creating an unstable wall!
+rmc-xeno-resin-surge-sticky-self = We surge the deep resin, creating an unstable sticky resin patch!
+rmc-xeno-resin-surge-sticky-others = {CAPITALIZE(THE($xeno))} surges deep resin, creating an unstable sticky resin patch!

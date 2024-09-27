@@ -858,6 +858,16 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     // Fruit state updates
     #region State updates
 
+    public bool TrySpeedupGrowth(XenoFruitComponent fruit, TimeSpan amount)
+    {
+        if (fruit.GrowAt == null ||
+            fruit.State != XenoFruitState.Growing)
+            return false;
+
+        fruit.GrowAt = fruit.GrowAt - amount;
+        return true;
+    }
+
     private void XenoFruitRemoved(Entity<XenoFruitComponent> fruit)
     {
         if (!_timing.IsFirstTimePredicted)

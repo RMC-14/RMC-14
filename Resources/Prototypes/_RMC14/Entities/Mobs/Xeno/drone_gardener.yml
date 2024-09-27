@@ -39,7 +39,7 @@
     # - ActionXenoPlantWeedsHardy # TODO: implement gardener weeds
     - ActionXenoFruitPlant
     - ActionXenoFruitChoose
-    # - ActionXenoResinSurge # TODO: implement resin surge
+    - ActionXenoResinSurge # TODO: implement resin surge
     - ActionXenoTransferPlasma
     - ActionXenoDevolve
     hudOffset: 0,0.15
@@ -64,6 +64,7 @@
     - XenoFruitSpore
     - XenoFruitUnstable
     maxFruitAllowed: 6
+  - type: XenoResinSurge
   - type: XenoDevour
   - type: XenoEvolution
     canEvolveWithoutGranter: true
