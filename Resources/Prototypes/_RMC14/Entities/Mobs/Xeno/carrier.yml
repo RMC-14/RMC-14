@@ -63,24 +63,6 @@
     threshold: 3
     stun: 9
     chance: 0.50
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.35
-        density: 185
-        mask:
-        - MobMask
-        layer:
-        - MobLayer
-      fix2:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.40
-        density: 185
-        layer:
-        - BulletImpassable
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
