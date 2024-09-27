@@ -78,5 +78,10 @@ rmc-xeno-fruit-verb-harvest = Harvest
 rmc-xeno-fruit-verb-consume = Consume
 rmc-xeno-fruit-verb-feed = Feed
 
+# Examine text
+rmc-xeno-fruit-examine-base = This fruit is {$growthStatus}.
+rmc-xeno-fruit-examine-growing = still [color=darkred]growing[/color]
+rmc-xeno-fruit-examine-grown = [color=darkgreen]fully grown[/color]
+
 # UI text
 rmc-xeno-fruit-ui-count = Planted fruit: {$count}/{$max}

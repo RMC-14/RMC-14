@@ -81,6 +81,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         SubscribeLocalEvent<XenoFruitPlanterComponent, XenoFruitChooseActionEvent>(OnXenoFruitChooseAction);
         SubscribeLocalEvent<XenoFruitChooseActionComponent, XenoFruitChosenEvent>(OnActionFruitChosen);
         // Fruit interactions
+        SubscribeLocalEvent<XenoFruitComponent, ExaminedEvent>(OnXenoFruitExamined);
         SubscribeLocalEvent<XenoFruitComponent, ActivateInWorldEvent>(OnXenoFruitActivateInWorld);
         SubscribeLocalEvent<XenoFruitComponent, AfterInteractEvent>(OnXenoFruitAfterInteract);
         SubscribeLocalEvent<XenoFruitComponent, GetVerbsEvent<ActivationVerb>>(OnXenoFruitGetVerbs);
@@ -149,6 +150,14 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
     // Fruit interactions
     #region Interactions
+
+    private void OnXenoFruitExamined(EntityUid uid, XenoFruitComponent fruit, ExaminedEvent args)
+    {
+        args.PushMarkup(Loc.GetString("rmc-xeno-fruit-examine-base",
+            ("growthStatus", Loc.GetString(fruit.State == XenoFruitState.Growing
+            ? "rmc-xeno-fruit-examine-growing"
+            : "rmc-xeno-fruit-examine-grown"))));
+    }
 
     private void OnXenoFruitActivateInWorld(Entity<XenoFruitComponent> fruit, ref ActivateInWorldEvent args)
     {
