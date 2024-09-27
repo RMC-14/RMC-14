@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: ShadowCommander
-  changes:
-  - message: Xenonids can now drag drop hosts to nest them on nest-able surfaces.
-    type: Add
-  id: 247
-  time: '2024-07-03T11:17:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2786
 - author: Vermidia
   changes:
   - message: Sentinel corrosive acid now works
@@ -4486,5 +4479,14 @@
   id: 746
   time: '2024-09-27T21:04:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4158
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the armored shooting target being called a xenonid target.
+    type: Fix
+  - message: Added the medilathe and briefing podium windoor the Savannah.
+    type: Add
+  id: 747
+  time: '2024-09-27T21:33:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4159
 Name: RMC14
 Order: -1
