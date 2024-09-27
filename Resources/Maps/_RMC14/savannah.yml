@@ -11347,7 +11347,7 @@ entities:
       pos: 47.5,-25.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -35074.605
+      secondsUntilStateChange: -35177.72
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -11599,7 +11599,7 @@ entities:
       pos: -50.5,-10.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -56159.73
+      secondsUntilStateChange: -56262.844
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -11912,7 +11912,7 @@ entities:
       pos: -22.5,7.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -49665.457
+      secondsUntilStateChange: -49768.57
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -39353,6 +39353,14 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -55.5,2.5
       parent: 1
+- proto: CMWindoorSecureCommand
+  entities:
+  - uid: 37
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -13.5,-7.5
+      parent: 1
 - proto: CMWindoorSecureMedical
   entities:
   - uid: 6804
@@ -44242,34 +44250,6 @@ entities:
     components:
     - type: Transform
       pos: 93.835655,-20.367973
-      parent: 1
-- proto: FloraTree01
-  entities:
-  - uid: 7625
-    components:
-    - type: Transform
-      pos: -26.819336,8.184347
-      parent: 1
-- proto: FloraTree03
-  entities:
-  - uid: 6381
-    components:
-    - type: Transform
-      pos: -33.975586,7.934347
-      parent: 1
-- proto: FloraTree05
-  entities:
-  - uid: 7624
-    components:
-    - type: Transform
-      pos: -25.80371,7.934347
-      parent: 1
-- proto: FloraTreeStump
-  entities:
-  - uid: 7627
-    components:
-    - type: Transform
-      pos: -32.86621,8.684347
       parent: 1
 - proto: FoodApple
   entities:
@@ -57916,7 +57896,7 @@ entities:
       pos: -14.5,8.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -9076.128
+      secondsUntilStateChange: -9179.24
       state: Opening
 - proto: RMCDispenserChem
   entities:
@@ -57936,6 +57916,34 @@ entities:
     components:
     - type: Transform
       pos: -3.5,13.5
+      parent: 1
+- proto: RMCFloraTree01
+  entities:
+  - uid: 7625
+    components:
+    - type: Transform
+      pos: -26.819336,8.184347
+      parent: 1
+- proto: RMCFloraTree03
+  entities:
+  - uid: 6381
+    components:
+    - type: Transform
+      pos: -33.975586,7.934347
+      parent: 1
+- proto: RMCFloraTree05
+  entities:
+  - uid: 7624
+    components:
+    - type: Transform
+      pos: -25.80371,7.934347
+      parent: 1
+- proto: RMCFloraTreeStump
+  entities:
+  - uid: 7627
+    components:
+    - type: Transform
+      pos: -32.86621,8.684347
       parent: 1
 - proto: RMCFoodSnackHotdog
   entities:
@@ -58053,6 +58061,13 @@ entities:
     components:
     - type: Transform
       pos: 37.5,-17.5
+      parent: 1
+- proto: RMCMedilatheLeft
+  entities:
+  - uid: 34
+    components:
+    - type: Transform
+      pos: 46.5,4.5
       parent: 1
 - proto: RMCMonitorCameraAlmayer
   entities:
