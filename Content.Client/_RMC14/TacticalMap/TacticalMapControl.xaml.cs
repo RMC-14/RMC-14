@@ -88,7 +88,7 @@ public sealed partial class TacticalMapControl : TextureRect
         {
             foreach (var blip in _blips)
             {
-                var position = GetDrawPosition(blip.Indices) * 3;
+                var position = GetDrawPosition(blip.Indices) * 3 * UIScale;
                 var rect = UIBox2.FromDimensions(position, new Vector2(14, 14));
                 handle.DrawTextureRect(background, rect, blip.Color);
                 handle.DrawTextureRect(system.Frame0(blip.Image), rect);
@@ -101,8 +101,8 @@ public sealed partial class TacticalMapControl : TextureRect
         var lineVectors = new Vector2[6];
         foreach (var line in Lines)
         {
-            var start = line.Start + offset;
-            var end = line.End + offset;
+            var start = (line.Start + offset) * UIScale;
+            var end = (line.End + offset) * UIScale;
             var diff = end - start;
             var box = Box2.CenteredAround(start + diff / 2, new Vector2(5, (int) diff.Length()));
             var boxRotated = new Box2Rotated(box, diff.ToWorldAngle(), start + diff / 2);

@@ -9,3 +9,116 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
+
+# Provost
+- type: entity
+  parent: CMHeadBeretRed
+  id: RMCHeadBeretProvost
+  name: UNMC provost beret
+  description: A beret with the UNMC Military Police insignia emblazoned on it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_wo.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_wo.rsi
+
+- type: entity
+  parent: RMCHeadBeretProvost
+  id: RMCHeadBeretProvostSenior
+  name: UNMC senior provost beret
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_black.rsi
+
+- type: entity
+  parent: RMCHeadBeretProvost
+  id: RMCArmorCapProvost
+  name: provost marshal cap
+  description: The expensive headwear of a Provost Marshal. Contains shards of kevlar to keep its valuable contents safe.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/provost.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/provost.rsi
+
+# Special agent
+- type: entity
+  parent: CMHeadBeretRed
+  id: RMCHeadBeretAgent
+  name: special agent beret
+  description: A beret with the intelligence service insignia emblazoned on it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_tis.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_tis.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretAgentIvan
+  name: black beret
+  description: Worn by officers of special units.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_ivan.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_ivan.rsi
+
+# Freelancer
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapFreelancer
+  name: armored freelancer cap
+  description: A sturdy freelancer's cap. More protective than it seems.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_freelancer.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_freelancer.rsi
+
+- type: entity
+  parent: RMCHeadCapFreelancer
+  id: RMCHeadBeretFreelancer
+  name: armored freelancer beret
+  description: A sturdy freelancer's beret. More protective than it seems.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_freelancer.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_freelancer.rsi
+
+# Rebel hood
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadMilitiaHood
+  name: armored militia cowl
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/hood_rebel.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/hood_rebel.rsi
+
+# Bucket
+- type: entity
+  parent: RMCHeadMilitiaHood
+  id: RMCHeadMilitiaBucket
+  name: militia bucket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bucket.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bucket.rsi
+
+# General's cap
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadCapGeneral
+  name: armored general's cap
+  description: A sturdy general officer's cap. More protective than it seems. Please don't ditch this for a helmet like a punk.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/general.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/general.rsi

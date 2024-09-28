@@ -120,8 +120,8 @@
         crate: RMCCratePlasteelSheets
       - cost: 2000
         crate: RMCCrateGlassSheets
-#      - cost: 2000
-#        crate: RMCCrateWoodenPlanks
+      - cost: 2000
+        crate: RMCCrateWoodenPlanks
 #      - cost: 2000
 #        crate: RMCCrateFoldingBarricades
 #      - cost: 3000

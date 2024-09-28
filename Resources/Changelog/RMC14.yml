@@ -1,173 +1,6 @@
 ﻿Entries:
 - author: Whisper
   changes:
-  - message: Crusher no longer devolves to crusher
-    type: Fix
-  id: 227
-  time: '2024-07-02T00:06:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2727
-- author: Whisper
-  changes:
-  - message: Lathes temporarily no longer need power.
-    type: Fix
-  id: 228
-  time: '2024-07-02T00:06:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2731
-- author: Whisper
-  changes:
-  - message: Faxes and microwaves temporarily no longer require power.
-    type: Fix
-  id: 229
-  time: '2024-07-02T00:09:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2732
-- author: Whisper
-  changes:
-  - message: Fixed grenade launcher being one grenade short in capacity.
-    type: Fix
-  id: 230
-  time: '2024-07-02T00:13:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2733
-- author: vero5123
-  changes:
-  - message: Adds shockwave overlay to queen's screech
-    type: Add
-  id: 231
-  time: '2024-07-02T01:03:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2734
-- author: Whisper
-  changes:
-  - message: Cargo techs now spawn with an approval stamp.
-    type: Add
-  id: 232
-  time: '2024-07-02T02:22:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2736
-- author: JoeHammad
-  changes:
-  - message: fixed M4SPR box name
-    type: Tweak
-  id: 233
-  time: '2024-07-02T06:09:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2739
-- author: Mattshark89
-  changes:
-  - message: Lesser Drone playtime now counts as drone caste playtime. For the Queen
-      (unlock)!
-    type: Add
-  id: 234
-  time: '2024-07-02T06:27:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2723
-- author: ShadowCommander
-  changes:
-  - message: Added empty sprite for the flare pack.
-    type: Add
-  id: 235
-  time: '2024-07-02T07:59:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2747
-- author: ShadowCommander
-  changes:
-  - message: Added pouch fill level visuals.
-    type: Add
-  id: 236
-  time: '2024-07-02T08:15:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2737
-- author: DrSmugleaf
-  changes:
-  - message: Fixed grass being able to have weeds planted or spread onto it.
-    type: Fix
-  id: 237
-  time: '2024-07-02T13:47:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2755
-- author: DrSmugleaf
-  changes:
-  - message: Increased the delay between pointings from 0.5 seconds to 2 seconds.
-    type: Tweak
-  id: 238
-  time: '2024-07-02T15:29:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2756
-- author: Whisper
-  changes:
-  - message: Xenonids are now separated by caste in the ghost role panel.
-    type: Fix
-  id: 239
-  time: '2024-07-02T15:29:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2757
-- author: DrSmugleaf
-  changes:
-  - message: Fixed larvas and parasites being able to open xenonid eggs.
-    type: Fix
-  id: 240
-  time: '2024-07-02T15:31:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2758
-- author: DrSmugleaf
-  changes:
-  - message: Correspondents now spawn with a microphone in their pocket.
-    type: Add
-  id: 241
-  time: '2024-07-02T15:30:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2759
-- author: DrSmugleaf
-  changes:
-  - message: Added a Liaison job slot to the Almayer and Savannah.
-    type: Add
-  id: 242
-  time: '2024-07-02T15:32:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2760
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenonid pheromones not deactivating when the emitter goes into
-      crit or dies.
-    type: Fix
-  id: 243
-  time: '2024-07-02T15:45:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2761
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the client not getting feedback trying to build a hive core when
-      one already exists far away from it
-    type: Fix
-  id: 244
-  time: '2024-07-02T15:51:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2762
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the nomads packet being able to fit items other than cigarettes,
-      the cigar case being able to fit items other than cigars, and the match box
-      being able to fit items other than matches.
-    type: Fix
-  id: 245
-  time: '2024-07-03T11:03:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2790
-- author: DrSmugleaf
-  changes:
-  - message: Fixed showing upstream mechanical changes for species when changing it
-      in the character editor, when there are actually none.
-    type: Fix
-  id: 246
-  time: '2024-07-03T11:02:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2789
-- author: ShadowCommander
-  changes:
-  - message: Xenonids can now drag drop hosts to nest them on nest-able surfaces.
-    type: Add
-  id: 247
-  time: '2024-07-03T11:17:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2786
-- author: Vermidia
-  changes:
-  - message: Sentinel corrosive acid now works
-    type: Fix
-  id: 248
-  time: '2024-07-03T11:19:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2766
-- author: ShadowCommander
-  changes:
-  - message: Added empty sprites for backpacks, satchels, belts, and pouches.
-    type: Add
-  id: 249
-  time: '2024-07-03T11:26:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2750
-- author: Whisper
-  changes:
   - message: Medical belt UI should be friendlier for players with smaller screens.
     type: Fix
   id: 250
@@ -4416,5 +4249,245 @@
   id: 726
   time: '2024-09-21T09:45:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4091
+- author: DummeHytteOst
+  changes:
+  - message: Wooden planks can now be bought by requisition.
+    type: Add
+  id: 727
+  time: '2024-09-21T18:32:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4099
+- author: DrSmugleaf
+  changes:
+  - message: Removed the Pacifist character trait.
+    type: Remove
+  id: 728
+  time: '2024-09-21T19:20:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4102
+- author: DrSmugleaf
+  changes:
+  - message: Fixed being able to place and fire mortars on the warship.
+    type: Fix
+  id: 729
+  time: '2024-09-21T19:31:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4105
+- author: DrSmugleaf
+  changes:
+  - message: Fixed sentries blocking grenades and bullets even when not aiming at
+      them directly.
+    type: Fix
+  id: 730
+  time: '2024-09-21T19:44:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4106
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the M44 revolver not shooting anything.
+    type: Fix
+  - message: Fixed the grenade launcher's grenades being invisible for the shooter.
+    type: Fix
+  id: 731
+  time: '2024-09-21T21:36:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4113
+- author: DrSmugleaf
+  changes:
+  - message: Fixed tactical map drawing and blips positions being incorrect with UI
+      scales that aren't 100%
+    type: Fix
+  id: 732
+  time: '2024-09-21T21:50:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4115
+- author: DrSmugleaf
+  changes:
+  - message: Fixed a visual bug that made it look like the requisitions elevator and
+      boiler gas blocked bullets for the shooter.
+    type: Fix
+  - message: Fixed xenonids being able to throw parasites.
+    type: Fix
+  id: 733
+  time: '2024-09-21T23:36:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4116
+- author: Vermidia
+  changes:
+  - message: Machete scabbards fit in the suitstorage slot
+    type: Fix
+  id: 734
+  time: '2024-09-25T06:23:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4118
+- author: FungiFellow
+  changes:
+  - message: Removed Wood from Trees
+    type: Remove
+  id: 735
+  time: '2024-09-25T06:28:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4121
+- author: DrSmugleaf
+  changes:
+  - message: Fixed a visual bug that made guns on semi-auto look like they were shooting
+      more bullets for the shooter than they were actually shooting.
+    type: Fix
+  id: 736
+  time: '2024-09-25T08:30:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4135
+- author: DummeHytteOst
+  changes:
+  - message: Corrected the defenders description
+    type: Fix
+  id: 737
+  time: '2024-09-26T18:44:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4126
+- author: Rainbeon
+  changes:
+  - message: M11 Throwing Knives will now slide farther than your cursor when thrown,
+      causing them to more reliably hit enemies.
+    type: Tweak
+  id: 738
+  time: '2024-09-26T18:43:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4136
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the gauze and ointment first-aid pouch incorrectly having a bicaridine
+      autoinjector instead of its tricordrazine one.
+    type: Fix
+  id: 739
+  time: '2024-09-26T19:00:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4144
+- author: crystalHex
+  changes:
+  - message: Added sunglasses, personal shades and aviators to the appropriate vendors.
+    type: Add
+  - message: Added five sets of uniforms and jackets, and some pieces of headgear
+      for special occasions.
+    type: Add
+  - message: Added several hats, uniforms and jackets to command vendors.
+    type: Add
+  - message: Added four provost uniforms, the special agent uniform, marine survivor
+      uniform.
+    type: Add
+  - message: Added eleven uniforms for various factions for special events.
+    type: Add
+  - message: Added ten sets of SPP uniforms, six sets of armor and three coats for
+      special events.
+    type: Add
+  - message: Added ten sets of PMC armor for special events.
+    type: Add
+  - message: Added a total of eighteen hats/helmets for PMCs and SPP.
+    type: Add
+  - message: Added another thirty sets of armor and headgear for the provost, mercenaries,
+      colonial militia, and other factions.
+    type: Add
+  id: 740
+  time: '2024-09-26T18:48:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3916
+- author: Whisper
+  changes:
+  - message: Added Vella 'Mortician' Sakeao figurine
+    type: Add
+  id: 741
+  time: '2024-09-27T06:53:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4149
+- author: Vermidia
+  changes:
+  - message: fixed ammo stuns appearing to stun when they didn't
+    type: Fix
+  id: 742
+  time: '2024-09-27T06:52:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4145
+- author: Vermidia
+  changes:
+  - message: Fixed some tool doafters (mostly medical ones) being able to treat multiple
+      people at once
+    type: Fix
+  id: 743
+  time: '2024-09-27T09:51:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4151
+- author: DrSmugleaf
+  changes:
+  - message: Added the Praetorian, a tier 3 xenonid caste evolved to from both Spitter
+      and Warrior which is centred around its acid stacking mechanic.
+    type: Add
+  - message: Added the Warden Praetorian strain, a strain that trades some offensive
+      capabilities for strong support abilities. Mousing over it in the evolve window
+      as a Praetorian will give you all the details.
+    type: Add
+  - message: Fixed xenonids not being able to target projectiles at non dead marines
+      that are lying down
+    type: Fix
+  - message: Made the Almayer more common at lower pops.
+    type: Tweak
+  - message: Added the missing free hivelord tier slot, guaranteeing that there's
+      always a slot for a hivelord.
+    type: Add
+  - message: Fixed the Queen taking up a slot in xenonid tier limits.
+    type: Fix
+  - message: Fixed the marine tactical map not showing a horizontal red line for undefibbable
+      marines.
+    type: Fix
+  - message: Added being able to pull things through ladders with you.
+    type: Add
+  - message: Fixed being flung to space if you climb a ladder while getting pulled.
+    type: Fix
+  - message: Fixed the Queen getting stuck on some things like Req railings.
+    type: Fix
+  - message: Increased the bullet hitbox size of some xenos by 14%. This doesn't affect
+      larva, parasite, defender, Queen and crusher.
+    type: Tweak
+  - message: Fixed the xeno identifier not being preserved through evolutions.
+    type: Fix
+  - message: Added the missing green heal overlay and roar to the Warrior's lifesteal
+      passive.
+    type: Add
+  - message: Fixed xenos being able to buckle humans.
+    type: Fix
+  - message: Fixed xenos being able to play instruments.
+    type: Fix
+  - message: Added the medilathe to the Almayer.
+    type: Add
+  - message: Added the missing windoor to the Almayer briefing podium.
+    type: Add
+  - message: Added the missing approved stamp to the QM's office in the Almayer.
+    type: Add
+  - message: Fix the firing range being access locked.
+    type: Fix
+  id: 744
+  time: '2024-09-27T19:00:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4155
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the Warden Praetorian showing an error sprite when wounded.
+    type: Fix
+  id: 745
+  time: '2024-09-27T21:04:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4157
+- author: DrSmugleaf
+  changes:
+  - message: Fixed some guns making it look like you are leaving a trail of bullets
+      for the shooter.
+    type: Fix
+  id: 746
+  time: '2024-09-27T21:04:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4158
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the armored shooting target being called a xenonid target.
+    type: Fix
+  - message: Added the medilathe and briefing podium windoor the Savannah.
+    type: Add
+  id: 747
+  time: '2024-09-27T21:33:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4159
+- author: DrSmugleaf
+  changes:
+  - message: Fixed welded closets and crates not opening from xenonid melee attacks.
+      Attacking one as a xenonid will now open it.
+    type: Fix
+  id: 748
+  time: '2024-09-27T21:47:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4160
+- author: DrSmugleaf
+  changes:
+  - message: Fixed shooting some guns lagging you to death.
+    type: Fix
+  id: 749
+  time: '2024-09-28T00:18:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4168
 Name: RMC14
 Order: -1

@@ -27,5 +27,8 @@ public sealed partial class XenoLeapComponent : Component
     public int Strength = 20;
 
     [DataField, AutoNetworkedField]
-    public bool KnockdownRequiresInvisibility = false;
+    public bool KnockdownRequiresInvisibility;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan MoveDelayTime = TimeSpan.FromSeconds(.7);
 }

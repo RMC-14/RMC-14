@@ -1,0 +1,13 @@
+- type: emoteSounds
+  parent: RMCMaleHuman
+  id: RMCMaleDwarf
+  params:
+    variation: 0.125
+    pitch: 0.75
+
+- type: emoteSounds
+  parent: RMCFemaleHuman
+  id: RMCFemaleDwarf
+  params:
+    variation: 0.125
+    pitch: 0.75

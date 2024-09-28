@@ -11,3 +11,58 @@
       state: transfer_plasma
     event: !type:XenoTransferPlasmaActionEvent
     range: 2
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoRetrieve
+  name: Retrieve (180 plasma, 100 energy)
+  description: Pull a xenonid to you if they are in crit, stunned, lying down, or small enough.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: retrieve
+    event: !type:XenoRetrieveActionEvent
+    range: 7
+  - type: XenoActionPlasma
+    cost: 180
+  - type: XenoActionEnergy
+    cost: 100
+  - type: ActionCooldown
+    cooldown: 10
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoAid
+  name: Aid Xenonid (100 plasma, 100 energy)
+  description: Heal a xenonid next to you and yourself, or remove ailments and stuns from a further away xenonid. Healing will consume an additional half of your remaining points for extra healing.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_aid
+    event: !type:XenoAidActionEvent
+    range: 8
+    useDelay: 10
+  - type: XenoActionPlasma
+    cost: 100
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoAidToggle
+  name: Toggle Aid Type
+  description: Toggles between healing or removing ailments with Aid Xenonid.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: warden_heal
+    iconOn:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: warden_rejuvenate
+    event: !type:XenoAidToggleActionEvent
+    useDelay: 0.5

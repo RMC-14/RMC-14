@@ -11,3 +11,7 @@
     breakoutTime: 60 # 1minute, just like in code/game/objects/items/handcuffs.dm on line 5
   - type: UseDelay
     delay: 4
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage

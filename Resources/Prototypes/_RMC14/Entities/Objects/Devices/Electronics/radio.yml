@@ -27,3 +27,7 @@
     blacklist:
       components:
       - Xeno
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage

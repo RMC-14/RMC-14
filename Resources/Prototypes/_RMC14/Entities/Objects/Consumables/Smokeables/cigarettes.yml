@@ -48,6 +48,10 @@
     blacklist:
       components:
       - Xeno
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 - type: entity
   parent: CigPackBase
@@ -163,6 +167,10 @@
     blacklist:
       components:
       - Xeno
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 - type: entity
   parent: RMCCigarettePackLuckySloths
