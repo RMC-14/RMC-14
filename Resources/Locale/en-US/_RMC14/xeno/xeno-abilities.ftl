@@ -120,6 +120,20 @@ cm-xeno-invisibility-expire = We feel our invisibility end!
 cm-xeno-ovipositor-attach = We start attaching to the ovipositor.
 cm-xeno-ovipositor-detach = We start detaching from the ovipositor.
 
+# Retrieve Egg
+cm-xeno-retrieve-egg-no-eggs = We don't have any eggs stored!
+cm-xeno-retrieve-egg-too-many-eggs = We don't have space to store any more eggs!
+cm-xeno-retrieve-egg-stash-egg = We put the egg into our internal storage. Now Holding: {$cur_eggs}/{$max_eggs} eggs
+cm-xeno-retrieve-egg-unstash-egg = We grab an egg from our internal storage. Now Holding: {$cur_eggs}/{$max_eggs} eggs
+cm-xeno-retrieve-egg-description = Retrieves an egg from your storage. Now Holding: {$cur_eggs}/{$max_eggs} eggs
+
+# Throw Parasite
+cm-xeno-throw-parasite-no-parasites = We don't have any parasites stored!
+cm-xeno-throw-parasite-too-many-parasites = We don't have space to store any more parasites!
+cm-xeno-throw-parasite-stash-parasite = We put the parasite into our storage. Now Sheltering: {$cur_parasites}/{$max_parasites} parasites
+cm-xeno-throw-parasite-unstash-parasite = We grab a parasite from our storage. Now Sheltering: {$cur_parasites}/{$max_parasites} parasites
+cm-xeno-throw-parasite-description = Throw Parasite. Now Sheltering: {$cur_parasites}/{$max_parasites} parasites
+
 # Defensive Shield
 rmc-xeno-defensive-shield-end = We feel our enhanced shield end!
 rmc-xeno-defensive-shield-resist-end = Our immunity to explosion damage ends!
