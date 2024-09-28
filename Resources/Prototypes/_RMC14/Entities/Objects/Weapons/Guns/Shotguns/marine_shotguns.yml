@@ -286,7 +286,7 @@
       - CMShellShotgunBeanbag
       - CMShellShotgunFlechette
     proto: CMShellShotgunSlugs
-    capacity: 3
+    capacity: 3 #It's a lovely triple barrel
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
       params:
