@@ -6,6 +6,7 @@
   suffix: RMC
   components:
   - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Melee/pickaxe.rsi
     quickEquip: false
     slots:
     - Belt
