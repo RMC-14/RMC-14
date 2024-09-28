@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: ShadowCommander
-  changes:
-  - message: Added empty sprites for backpacks, satchels, belts, and pouches.
-    type: Add
-  id: 249
-  time: '2024-07-03T11:26:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2750
 - author: Whisper
   changes:
   - message: Medical belt UI should be friendlier for players with smaller screens.
@@ -4489,5 +4482,12 @@
   id: 748
   time: '2024-09-27T21:47:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4160
+- author: DrSmugleaf
+  changes:
+  - message: Fixed shooting some guns lagging you to death.
+    type: Fix
+  id: 749
+  time: '2024-09-28T00:18:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4168
 Name: RMC14
 Order: -1
