@@ -2,6 +2,7 @@
   parent: [FireAxe, RMCBaseMeleeWeapon]
   id: RMCFireAxe
   name: fire axe
+  suffix: RMC
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Melee/fireaxe.rsi
