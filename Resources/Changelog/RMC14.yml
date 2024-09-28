@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Fixed health icons on shorter marines
-    type: Fix
-  id: 253
-  time: '2024-07-03T11:59:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2763
 - author: Whisper
   changes:
   - message: Crafted magazine boxes can now hold magazines
@@ -4493,5 +4486,14 @@
   id: 752
   time: '2024-09-28T21:47:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4107
+- author: Vermidia
+  changes:
+  - message: Smartgun has falloff start at 7 tiles and loses 4 damage a tile
+    type: Fix
+  - message: ML66A head mounted sight no longer gives farsight
+    type: Remove
+  id: 753
+  time: '2024-09-28T23:11:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4082
 Name: RMC14
 Order: -1
