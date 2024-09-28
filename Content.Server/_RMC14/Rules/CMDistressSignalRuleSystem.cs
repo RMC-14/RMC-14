@@ -300,6 +300,15 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                             slots *= 4;
 
                         Log.Info($"Setting {job} to {slots} slots.");
+                        var jobs = stationJobs.SetupAvailableJobs;
+                        if (jobs.TryGetValue(job, out var available))
+                        {
+                            for (var i = 0; i < available.Length; i++)
+                            {
+                                available[i] = slots;
+                            }
+                        }
+
                         _stationJobs.TrySetJobSlot(stationId, job, slots, stationJobs: stationJobs);
                     }
                 }
