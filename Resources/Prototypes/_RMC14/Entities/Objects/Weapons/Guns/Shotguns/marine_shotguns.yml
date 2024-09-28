@@ -203,8 +203,8 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.81, 0.06
-      rmc-aslot-rail: -0.025, 0.125
-      rmc-aslot-stock: -0.375, -0.029
+      rmc-aslot-rail: -0.025, 0.09
+      rmc-aslot-stock: -0.55, -0.05
       rmc-aslot-underbarrel: 0.25, -0.31
 
 - type: entity
@@ -250,8 +250,8 @@
           - RMCAttachmentGyroscopicStabilizer
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-rail: -0.025, 0.125
-      rmc-aslot-stock: -0.375, -0.029
+      rmc-aslot-rail: -0.025, 0.09
+      rmc-aslot-stock: -0.55, -0.05
       rmc-aslot-underbarrel: 0.25, -0.31
 
 - type: entity
@@ -273,8 +273,8 @@
     - Burst
     recoilWielded: 2
     recoilUnwielded: 4
-    scatterWielded: 10
-    scatterUnwielded: 20
+    scatterWielded: 9
+    scatterUnwielded: 18
     baseFireRate: 2
     burstScatterMult: 1
   - type: BallisticAmmoProvider
@@ -318,13 +318,12 @@
           - RMCAttachmentAngledGrip
           - RMCAttachmentVerticalGrip
           - RMCAttachmentLaserSight
-           
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.81, 0.06
-      rmc-aslot-rail: -0.025, 0.125
-      rmc-aslot-stock: -0.375, -0.029
-      rmc-aslot-underbarrel: 0.25, -0.31
+      rmc-aslot-barrel: 0.8, 0.06
+      rmc-aslot-rail: -0.02, 0.15
+      rmc-aslot-stock: -0.65, -0.18
+      rmc-aslot-underbarrel: 0.5, -0.25
 
 - type: Tag
   id: RMCWeaponShotgun
