@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Lesser drones now use different sprites from normal drones
-    type: Tweak
-  id: 252
-  time: '2024-07-03T11:48:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2782
 - author: blueDev2
   changes:
   - message: Fixed health icons on shorter marines
@@ -4491,5 +4484,14 @@
   id: 751
   time: '2024-09-28T20:37:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3821
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added scout invisibility effects
+    type: Add
+  - message: Fixed scout cloak sound playing more than once
+    type: Fix
+  id: 752
+  time: '2024-09-28T21:47:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4107
 Name: RMC14
 Order: -1
