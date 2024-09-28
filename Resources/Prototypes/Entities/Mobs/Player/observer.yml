@@ -49,6 +49,9 @@
     tags:
     - BypassInteractionRangeChecks
   - type: ActiveInputMover
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
 
 - type: entity
   id: ActionGhostBoo

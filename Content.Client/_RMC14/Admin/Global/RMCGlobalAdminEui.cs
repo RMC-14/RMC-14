@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Eui;
+using Robust.Client.Graphics;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
@@ -29,6 +30,7 @@ public sealed class RMCGlobalAdminEui : BaseEui
         TabContainer.SetTabTitle(_window.CVarsTab, "CVars");
         TabContainer.SetTabTitle(_window.MarinesTab, "Marines");
         TabContainer.SetTabTitle(_window.XenosTab, "Xenos");
+        TabContainer.SetTabTitle(_window.TacticalMapTab, "Tactical Map");
 
         _window.RefreshButton.OnPressed += OnRefresh;
         _window.OpenCentered();
@@ -42,30 +44,7 @@ public sealed class RMCGlobalAdminEui : BaseEui
         _window.CVars.DisposeAllChildren();
         _window.Squads.DisposeAllChildren();
         _window.XenoTiers.DisposeAllChildren();
-
-        var marinesPerXeno = new BoxContainer
-        {
-            Orientation = LayoutOrientation.Vertical,
-            Children =
-            {
-                new Label { Text = "Marines per xeno " },
-            },
-        };
-
-        _window.CVars.AddChild(marinesPerXeno);
-
-        foreach (var (map, ratio) in s.MarinesPerXeno)
-        {
-            marinesPerXeno.AddChild(new BoxContainer
-            {
-                Orientation = LayoutOrientation.Vertical,
-                Children =
-                {
-                    new Label { Text = map },
-                    new Label { Text = $"{ratio:F2}" },
-                },
-            });
-        }
+        _window.TacticalMapHistory.DisposeAllChildren();
 
         foreach (var cVar in _config.GetRegisteredCVars())
         {
@@ -150,6 +129,25 @@ public sealed class RMCGlobalAdminEui : BaseEui
         }
 
         _window.XenosLabel.Text = $"Total xenonid players alive: {s.Xenos.Count}";
+
+        foreach (var (guid, actor, round) in s.TacticalMapHistory)
+        {
+            var lines = new Button { Text = $"Round {round} by {actor}" };
+            lines.OnPressed += _ => SendMessage(new RMCAdminRequestTacticalMapHistory(guid));
+            _window.TacticalMapHistory.AddChild(lines);
+        }
+
+        _window.TacticalMap.Lines.Clear();
+        if (s.TacticalMapLines == default)
+        {
+            _window.TacticalMapLabel.Text = "Selected: None";
+        }
+        else
+        {
+            _window.TacticalMapLabel.Text = $"Selected: Round {s.TacticalMapLines.RoundId} by {s.TacticalMapLines.Actor}";
+            _window.TacticalMap.Texture = Texture.Transparent;
+            _window.TacticalMap.Lines.AddRange(s.TacticalMapLines.Lines);
+        }
     }
 
     private void OnRefresh(ButtonEventArgs args)

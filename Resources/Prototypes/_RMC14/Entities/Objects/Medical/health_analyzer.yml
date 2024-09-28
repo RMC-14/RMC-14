@@ -31,3 +31,7 @@
   - type: UseDelay
     delay: 1
   - type: MedicallyUnskilledDoAfter
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage

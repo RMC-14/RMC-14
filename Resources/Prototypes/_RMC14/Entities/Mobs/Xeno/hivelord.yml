@@ -89,3 +89,7 @@
     size: Big
   - type: RMCXenoDamageVisuals
     prefix: hivelord
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: hivelord

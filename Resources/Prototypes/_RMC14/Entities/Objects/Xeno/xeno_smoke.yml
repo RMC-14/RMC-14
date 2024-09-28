@@ -16,7 +16,7 @@
         mask:
         - MobMask
         layer:
-        - MobLayer
+        - MidImpassable
   - type: Occluder
   - type: Sprite
     sprite: _RMC14/Effects/smoke.rsi
@@ -48,6 +48,7 @@
     whitelist:
       components:
       - Marine
+  - type: DeleteOnExplosion # so this is supposed to be random depending on the explosion severity but uhhh hahAHAHA help
 
 - type: entity
   id: RMCSmokeNeurotoxin
@@ -67,7 +68,7 @@
         mask:
         - MobMask
         layer:
-        - MobLayer
+        - MidImpassable
   - type: Occluder
   - type: Sprite
     sprite: _RMC14/Effects/smoke.rsi
@@ -107,6 +108,7 @@
     whitelist:
       components:
       - Marine
+  - type: DeleteOnExplosion
 
 - type: entity
   parent: RMCSmokeAcid

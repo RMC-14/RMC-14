@@ -9,6 +9,9 @@
     zeroVisible: false
     zeroOnlyOnEmpty: true
   - type: Appearance
+  - type: Clothing
+    slots:
+    - suitStorage
 
 - type: entity
   parent: CMBaseMagazinePistol

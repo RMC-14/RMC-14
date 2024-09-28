@@ -61,7 +61,9 @@ public sealed class RMCRepairableSystem : EntitySystem
         var ev = new RMCRepairableDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, repairable)
         {
-            BreakOnMove = true
+            BreakOnMove = true,
+            BlockDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))

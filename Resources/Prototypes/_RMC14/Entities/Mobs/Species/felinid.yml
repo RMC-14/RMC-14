@@ -15,7 +15,7 @@
   - type: Vocal
     sounds:
       Male: RMCMaleFelinid
-      Unsexed: RMCMaleFelinid
+      Unsexed: RMCUnisexFelinid
       Female: RMCFemaleFelinid
   - type: Speech
     allowedEmotes: ['Hiss', 'Meow', 'Mew', 'Growl', 'Purr']

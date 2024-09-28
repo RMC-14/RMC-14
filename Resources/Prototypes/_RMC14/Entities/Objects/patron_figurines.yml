@@ -572,3 +572,14 @@
     state: honkzee_beezs
   - type: PatronFigurine
     id: f47ec457-4c44-4a3d-aad6-0d5a7c78f94e
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronVellaMorticianSakeao
+  name: Vella 'Mortician' Sakeao figurine
+  description: "Detachable SMG arm not included*"
+  components:
+  - type: Sprite
+    state: vella_mortician_sakeao
+  - type: PatronFigurine
+    id: 27ea1222-e729-4705-bda2-0ef1a5a6d1f3
