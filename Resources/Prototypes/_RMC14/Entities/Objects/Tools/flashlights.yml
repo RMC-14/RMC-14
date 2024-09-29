@@ -74,6 +74,23 @@
         map: [ "light" ]
   - type: Item
     size: Small
+  - type: Construction
+    graph: RMCFlashLightGraph
+    node: Flashlight
+
+- type: entity
+  parent: RMCFlashlight
+  id: RMCFlashlightEmpty
+  suffix: Empty
+  components:
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: null
+  - type: Construction
+    graph: RMCFlashLightGraph
+    node: Flashlight
 
 - type: entity
   parent: RMCFlashlightBase
