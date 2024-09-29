@@ -1,0 +1,31 @@
+- type: entity
+  parent: [BaseItem, RMCBaseMeleeWeapon]
+  id: RMCPickaxe
+  name: pickaxe
+  description: It's a pickaxe. Notched to perfection, for jamming it into rocks.
+  suffix: RMC
+  components:
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Belt
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/pickaxe.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Melee/pickaxe.rsi
+    size: Large
+  - type: Sharp
+  - type: MeleeWeapon
+    attackRate: 0.7
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Slash: 15
+        Blunt: 20
+        Structural: 20
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: Tag
+    tags:
+    - Pickaxe

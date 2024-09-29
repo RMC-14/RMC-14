@@ -1,34 +1,6 @@
 ﻿Entries:
 - author: Whisper
   changes:
-  - message: Medical belt UI should be friendlier for players with smaller screens.
-    type: Fix
-  id: 250
-  time: '2024-07-03T11:47:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2773
-- author: Whisper
-  changes:
-  - message: Hydroponics no longer drop SS14 steel and glass.
-    type: Fix
-  id: 251
-  time: '2024-07-03T11:46:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2778
-- author: Vermidia
-  changes:
-  - message: Lesser drones now use different sprites from normal drones
-    type: Tweak
-  id: 252
-  time: '2024-07-03T11:48:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2782
-- author: blueDev2
-  changes:
-  - message: Fixed health icons on shorter marines
-    type: Fix
-  id: 253
-  time: '2024-07-03T11:59:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2763
-- author: Whisper
-  changes:
   - message: Crafted magazine boxes can now hold magazines
     type: Fix
   id: 254
@@ -4489,5 +4461,39 @@
   id: 749
   time: '2024-09-28T00:18:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4168
+- author: Vermidia
+  changes:
+  - message: Fix some of the new outfits storage and suit storage whitelists
+    type: Fix
+  - message: MP armor can properly hold grenades in the suit slot now
+    type: Fix
+  id: 750
+  time: '2024-09-28T20:22:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4175
+- author: FungiFellow
+  changes:
+  - message: Flashlights can be turned into Attachments with a Screwdriver
+    type: Add
+  id: 751
+  time: '2024-09-28T20:37:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3821
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added scout invisibility effects
+    type: Add
+  - message: Fixed scout cloak sound playing more than once
+    type: Fix
+  id: 752
+  time: '2024-09-28T21:47:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4107
+- author: Vermidia
+  changes:
+  - message: Smartgun has falloff start at 7 tiles and loses 4 damage a tile
+    type: Fix
+  - message: ML66A head mounted sight no longer gives farsight
+    type: Remove
+  id: 753
+  time: '2024-09-28T23:11:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4082
 Name: RMC14
 Order: -1
