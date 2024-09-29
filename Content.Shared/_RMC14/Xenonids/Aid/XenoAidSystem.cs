@@ -1,5 +1,4 @@
-﻿using Content.Shared._RMC14.Actions;
-using Content.Shared._RMC14.Damage;
+﻿using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Strain;
 using Content.Shared.Actions;
@@ -10,11 +9,8 @@ using Content.Shared.Interaction;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Aid;
 
@@ -27,7 +23,6 @@ public sealed class XenoAidSystem : EntitySystem
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
@@ -63,9 +58,6 @@ public sealed class XenoAidSystem : EntitySystem
             _popup.PopupClient(msg, xeno, xeno, PopupType.SmallCaution);
             return;
         }
-
-        if (!_rmcActions.CanUseActionPopup(xeno, args.Action))
-            return;
 
         switch (xeno.Comp.Mode)
         {

@@ -93,6 +93,7 @@ rmc-xeno-rest-cant-stomp = You can't stomp while resting!
 rmc-xeno-rest-cant-gut = You can't gut while resting!
 rmc-xeno-rest-cant-screech = You can't screech while resting!
 rmc-xeno-rest-cant-secrete = You can't secrete while resting!
+rmc-xeno-rest-cant = You can't do that while resting!
 
 # Toggle Crest Defense
 cm-xeno-toggle-crest-cant-fortify = You can't fortify while your crest is lowered!

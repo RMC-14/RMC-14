@@ -6,13 +6,11 @@ using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
-using Content.Shared.Emoting;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
-using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
@@ -85,9 +83,6 @@ public sealed class XenoRetrieveSystem : EntitySystem
             _popup.PopupClient(msg, xeno, xeno, PopupType.SmallCaution);
             return;
         }
-
-        if (!_rmcActions.CanUseActionPopup(xeno, args.Action))
-            return;
 
         args.Handled = true;
         var ev = new XenoRetrieveDoAfterEvent(GetNetEntity(args.Action));
