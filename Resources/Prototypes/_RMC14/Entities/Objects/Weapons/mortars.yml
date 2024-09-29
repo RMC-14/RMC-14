@@ -77,6 +77,11 @@
     blacklist:
       components:
       - Xeno
+  - type: RequireProjectileTarget
+  - type: ImmuneToMelee
+    whitelist:
+      components:
+      - Marine
 
 - type: entity
   abstract: true

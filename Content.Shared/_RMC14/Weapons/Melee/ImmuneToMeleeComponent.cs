@@ -5,11 +5,8 @@ namespace Content.Shared._RMC14.Weapons.Melee;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedRMCMeleeWeaponSystem))]
-public sealed partial class StunOnHitComponent : Component
+public sealed partial class ImmuneToMeleeComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public TimeSpan Duration = TimeSpan.FromSeconds(12);
-
     [DataField(required: true), AutoNetworkedField]
-    public EntityWhitelist Whitelist = new();
+    public EntityWhitelist? Whitelist;
 }
