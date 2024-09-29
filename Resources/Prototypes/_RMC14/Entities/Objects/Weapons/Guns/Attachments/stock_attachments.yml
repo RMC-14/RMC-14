@@ -113,13 +113,13 @@
         wieldedOnly: true
       accuracyAddMult: 0.3
       recoilFlat: -4
-      scatterFlat: -5
+      scatterFlat: -2
     - conditions:
         unwieldedOnly: true
       accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: -0.1
       recoilFlat: 2
-      scatterFlat: 5
+      scatterFlat: 2
 
 - type: entity
   parent: RMCStockAttachmentBase
