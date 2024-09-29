@@ -281,3 +281,6 @@
     maxRange: 6
   - type: ClusterLimitHits
     limit: 4
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
