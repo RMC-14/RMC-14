@@ -27,7 +27,7 @@ public sealed partial class XenoResinSurgeComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan ReinforceDuration = TimeSpan.FromSeconds(15);
 
-    // Color of reinforced door/wall if possible
+    // TODO: Color of reinforced door/wall if possible
 
     // Length of do-after for surging sticky resin
     [DataField, AutoNetworkedField]

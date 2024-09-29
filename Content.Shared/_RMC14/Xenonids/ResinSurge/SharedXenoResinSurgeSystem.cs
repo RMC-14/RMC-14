@@ -20,6 +20,7 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruct = default!;
+    [Dependency] private readonly SharedXenoConstructReinforceSystem _xenoReinforce = default!;
     [Dependency] private readonly SharedXenoFruitSystem _xenoFruit = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
@@ -34,9 +35,7 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
             return;
 
         if (_net.IsServer)
-        {
-            var structure = Spawn(xeno.Comp.UnstableWallId, target);
-        }
+            Spawn(xeno.Comp.UnstableWallId, target);
     }
 
 
@@ -50,6 +49,7 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
         if (args.Coords is not { } target)
             return;
 
+        // Check if target on grid
         if (_transform.GetGrid(target) is not { } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
             return;
@@ -59,7 +59,7 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
         //var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
 
         // Check if user has enough plasma
-        if (!_xenoPlasma.HasPlasmaPopup((xeno.Owner, null), xeno.Comp.PlasmaCost))
+        if (!_xenoPlasma.TryRemovePlasmaPopup((xeno.Owner, null), xeno.Comp.PlasmaCost))
             return;
 
         if (args.Entity is { } entity)
@@ -68,9 +68,25 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
             if (TryComp(entity, out XenoConstructComponent? construct))
             {
                 // TODO: Check if structure is from our hive
+
                 // Check if target is already buffed
-                // If yes, display popup, and start half-cooldown
+                if (HasComp<XenoConstructReinforceComponent>(entity))
+                {
+                    // If yes, display popup, and start half-cooldown
+                    _popup.PopupClient(Loc.GetString("rmc-xeno-resin-surge-shield-fail", ("target", entity)), xeno, xeno);
+
+                    // TODO: reduce cooldown by half
+
+                    return;
+                }
+
                 // If no, buff structure
+                var popupSelf = Loc.GetString("rmc-xeno-resin-surge-shield-self", ("target", entity));
+                var popupOthers = Loc.GetString("rmc-xeno-resin-surge-shield-others", ("xeno", xeno), ("target", entity));
+                _popup.PopupPredicted(popupSelf, popupOthers, xeno, xeno);
+
+                _xenoReinforce.Reinforce(entity, xeno.Comp.ReinforceAmount, xeno.Comp.ReinforceDuration);
+
                 return;
             }
 
@@ -79,9 +95,9 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
             {
                 // TODO: Check if fruit is from our hive
 
+                // Check if fruit mature, try to fasten its growth if not
                 if (_xenoFruit.TrySpeedupGrowth((entity, fruit), xeno.Comp.FruitGrowth))
                 {
-                    // If no, speed up fruit growth
                     _popup.PopupClient(Loc.GetString("rmc-xeno-resin-surge-fruit", ("target", entity)), xeno, xeno);
                     return;
                 }
@@ -110,14 +126,9 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
             }
         }
 
-
-
         // Check if target is on turf
             // Start do-after of 1 second
             // If not interrupted, create a 3x3 patch of sticky resin
-
-        // Check if target on grid
-
 
     }
 
