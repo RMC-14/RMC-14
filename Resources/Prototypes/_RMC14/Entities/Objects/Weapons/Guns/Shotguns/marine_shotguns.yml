@@ -61,7 +61,7 @@
   - type: Tag
     tags:
     - RMCWeaponShotgun
-  - type: RMCFireGroupComponent
+  - type: RMCFireGroup
     group: Shotgun
 
 - type: entity
