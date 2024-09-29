@@ -160,4 +160,5 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
-    # TODO component for temporary construction
+  - type: TimedDespawn
+    lifetime: 5.0

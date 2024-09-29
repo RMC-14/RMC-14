@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   id: ActionXenoTransferPlasma
   parent: ActionXenoBase
   name: Transfer plasma (50) # TODO RMC14 proper plasma costs
@@ -18,7 +18,7 @@
   name: Resin Surge (75)
   description: Speed up plant growth, create temporary walls or heavily reinforce existing ones, or create patches of sticky resin.
   components:
-  - type: WorldTargetAction
+  - type: EntityWorldTargetAction
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi

@@ -1,5 +1,6 @@
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.ResinSurge;
 
@@ -28,10 +29,15 @@ public sealed partial class XenoResinSurgeComponent : Component
 
     // Color of reinforced door/wall if possible
 
-    // Amount of time to reinforce structure for
+    // Length of do-after for surging sticky resin
     [DataField, AutoNetworkedField]
     public TimeSpan StickyResinDoAfterPeriod = TimeSpan.FromSeconds(1);
 
     // Radius of sticky resin to create (0 - 1x1 tile, 1 - 3x3 tiles, 2 - 5x5 tiles etc)
+    [DataField, AutoNetworkedField]
     public int StickyResinRadius = 1;
+
+    // Prototype for unstable wall to create
+    [DataField, AutoNetworkedField]
+    public EntProtoId UnstableWallId = "WallXenoResinWeak";
 }
