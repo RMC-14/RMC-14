@@ -61,6 +61,8 @@
   - type: Tag
     tags:
     - RMCWeaponShotgun
+  - type: RMCFireGroupComponent
+    group: Shotgun
 
 - type: entity
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
