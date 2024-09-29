@@ -91,7 +91,7 @@ public sealed class XenoAidSystem : EntitySystem
                 var targetMsg = Loc.GetString("rmc-xeno-heal-target", ("target", target));
                 _popup.PopupEntity(targetMsg, target, target);
 
-                var othersMsg = Loc.GetString("rmc-xeno-heal-target", ("user", xeno), ("target", target));
+                var othersMsg = Loc.GetString("rmc-xeno-heal-others", ("user", xeno), ("target", target));
                 var filter = Filter.Pvs(target).RemovePlayersByAttachedEntity(xeno, target);
                 _popup.PopupEntity(othersMsg, target, filter, true);
 
@@ -120,7 +120,7 @@ public sealed class XenoAidSystem : EntitySystem
                 var targetMsg = Loc.GetString("rmc-xeno-heal-ailments-target", ("target", target));
                 _popup.PopupEntity(targetMsg, target, target);
 
-                var othersMsg = Loc.GetString("rmc-xeno-heal-ailments-target", ("user", xeno), ("target", target));
+                var othersMsg = Loc.GetString("rmc-xeno-heal-ailments-others", ("user", xeno), ("target", target));
                 var filter = Filter.Pvs(target).RemovePlayersByAttachedEntity(xeno, target);
                 _popup.PopupEntity(othersMsg, target, filter, true);
 
