@@ -33,9 +33,7 @@ public sealed class SharedFireGroupSystem : EntitySystem
                 if (!TryComp(item, out UseDelayComponent? useDelay))
                     continue;
 
-                var itemEnt = (item, useDelay);
-                _delay.SetLength(itemEnt, comp.Delay, comp.UseDelayID);
-                _delay.TryResetDelay(itemEnt, true, id: comp.UseDelayID);
+                _delay.TryResetDelay((item, useDelay), true, id: comp.UseDelayID);
             }
         }
     }

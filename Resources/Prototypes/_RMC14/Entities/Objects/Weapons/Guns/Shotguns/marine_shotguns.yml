@@ -63,7 +63,6 @@
     - RMCWeaponShotgun
   - type: RMCFireGroup
     group: Shotgun
-    delay: 3
 
 - type: entity
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
