@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Network;
@@ -13,7 +14,7 @@ public sealed class SharedXenoConstructReinforceSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<XenoConstructReinforceComponent, DamageModifyEvent>(OnReinforceDamageModify);
+        SubscribeLocalEvent<XenoConstructReinforceComponent, DamageModifyEvent>(OnReinforceDamageModify, after: [typeof(SharedCMMeleeWeaponSystem)]);
     }
 
     public void Reinforce(EntityUid uid, FixedPoint2 amount, TimeSpan duration)
@@ -27,6 +28,8 @@ public sealed class SharedXenoConstructReinforceSystem : EntitySystem
     {
         if (!args.Damage.AnyPositive())
             return;
+
+        // TODO: make this work for explosives
 
         foreach (var type in args.Damage.DamageDict)
         {
