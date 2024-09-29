@@ -67,13 +67,13 @@ public sealed class XenoLeapSystem : EntitySystem
         if (attempt.Cancelled)
             return;
 
-        args.Handled = true;
-
         if (xeno.Comp.PlasmaCost > FixedPoint2.Zero &&
             !_xenoPlasma.HasPlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
         {
             return;
         }
+
+        args.Handled = true;
 
         var ev = new XenoLeapDoAfterEvent(GetNetCoordinates(args.Target));
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.Delay, ev, xeno)

@@ -198,4 +198,7 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCJobSlotScaling =
         CVarDef.Create("rmc.job_slot_scaling", true, CVar.SERVER | CVar.REPLICATED);
+
+    public static readonly CVarDef<float> RMCEmoteCooldownSeconds =
+        CVarDef.Create("rmc.emote_cooldown_seconds", 20f, CVar.SERVER | CVar.REPLICATED);
 }
