@@ -142,4 +142,13 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
         return hive.Comp.TierLimits.TryGetValue(tier, out value);
     }
+
+    public bool TryGetFreeSlots(Entity<HiveComponent?> hive, EntProtoId caste, out int value)
+    {
+        value = default;
+        if (!Resolve(hive, ref hive.Comp, false))
+            return false;
+
+        return hive.Comp.FreeSlots.TryGetValue(caste, out value);
+    }
 }

@@ -14,6 +14,9 @@ public sealed class RMCActionsSystem : EntitySystem
         _actionSharedCooldownQuery = GetEntityQuery<ActionSharedCooldownComponent>();
 
         SubscribeLocalEvent<ActionSharedCooldownComponent, ActionPerformedEvent>(OnSharedCooldownPerformed);
+
+        SubscribeLocalEvent<ActionCooldownComponent, RMCActionUseEvent
+        >(OnCooldownUse);
     }
 
     private void OnSharedCooldownPerformed(Entity<ActionSharedCooldownComponent> ent, ref ActionPerformedEvent args)
@@ -39,5 +42,32 @@ public sealed class RMCActionsSystem : EntitySystem
             if ((shared.Id != null && shared.Id == action.Comp.Id) || (action.Comp.Id != null && shared.Ids.Contains(action.Comp.Id.Value)))
                 _actions.SetIfBiggerCooldown(actionId, action.Comp.Cooldown);
         }
+    }
+
+    private void OnCooldownUse(Entity<ActionCooldownComponent> ent, ref RMCActionUseEvent args)
+    {
+        _actions.SetIfBiggerCooldown(ent, ent.Comp.Cooldown);
+    }
+
+    public bool CanUseActionPopup(EntityUid user, EntityUid action)
+    {
+        var ev = new RMCActionUseAttemptEvent(user);
+        RaiseLocalEvent(action, ref ev);
+        return !ev.Cancelled;
+    }
+
+    public void ActionUsed(EntityUid user, EntityUid action)
+    {
+        var ev = new RMCActionUseEvent(user);
+        RaiseLocalEvent(action, ref ev);
+    }
+
+    public bool TryUseAction(EntityUid user, EntityUid action)
+    {
+        if (!CanUseActionPopup(user, action))
+            return false;
+
+        ActionUsed(user, action);
+        return true;
     }
 }

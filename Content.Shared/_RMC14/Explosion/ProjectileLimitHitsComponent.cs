@@ -8,4 +8,7 @@ public sealed partial class ProjectileLimitHitsComponent : Component
 {
     [DataField, AutoNetworkedField]
     public int Id;
+
+    [DataField, AutoNetworkedField]
+    public int Limit = 1;
 }

@@ -389,6 +389,8 @@ public sealed class CMGunSystem : EntitySystem
 
             StopProjectile((uid, comp));
             RemCompDeferred<ProjectileFixedDistanceComponent>(uid);
+            var ev = new ProjectileFixedDistanceStopEvent();
+            RaiseLocalEvent(uid, ref ev);
         }
     }
 
