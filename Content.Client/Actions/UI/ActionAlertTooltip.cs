@@ -14,15 +14,14 @@ namespace Content.Client.Actions.UI
         private const float TooltipTextMaxWidth = 350;
 
         private readonly RichTextLabel _cooldownLabel;
-        private readonly RichTextLabel _resourceLabel;
+        private readonly RichTextLabel _dynamicMessageLabel;
         private readonly IGameTiming _gameTiming;
 
         /// <summary>
         /// Current cooldown displayed in this tooltip. Set to null to show no cooldown.
         /// </summary>
         public (TimeSpan Start, TimeSpan End)? Cooldown { get; set; }
-        public int? ResourceMax { get; set; }
-        public int? ResourceCurrent { get; set; }
+        public string? DynamicMessage { get; set; }
 
         public ActionAlertTooltip(FormattedMessage name, FormattedMessage? desc, string? requires = null, FormattedMessage? charges = null)
         {
@@ -73,10 +72,10 @@ namespace Content.Client.Actions.UI
                 Visible = false
             });
 
-            vbox.AddChild(_resourceLabel = new RichTextLabel
+            vbox.AddChild(_dynamicMessageLabel = new RichTextLabel
             {
                 MaxWidth = TooltipTextMaxWidth,
-                StyleClasses = {StyleNano.StyleClassTooltipActionResource},
+                StyleClasses = {StyleNano.StyleClassTooltipActionDynamicMessage},
                 Visible = false
             });
 
@@ -122,14 +121,14 @@ namespace Content.Client.Actions.UI
                 }
             }
 
-            if (!ResourceMax.HasValue || !ResourceCurrent.HasValue)
+            if (string.IsNullOrWhiteSpace(DynamicMessage))
             {
-                _resourceLabel.Visible = false;
+                _dynamicMessageLabel.Visible = false;
             }
-            else if (FormattedMessage.TryFromMarkup($"[color=#ffffff]{(int)ResourceCurrent} / {(int)ResourceMax}[/color]", out var resmarkup))
+            else if (FormattedMessage.TryFromMarkup($"[color=#ffffff]{DynamicMessage}[/color]", out var dynamicMarkup))
             {
-                _resourceLabel.SetMessage(resmarkup);
-                _resourceLabel.Visible = true;
+                _dynamicMessageLabel.SetMessage(dynamicMarkup);
+                _dynamicMessageLabel.Visible = true;
             }
         }
     }

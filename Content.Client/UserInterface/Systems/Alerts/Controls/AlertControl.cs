@@ -30,35 +30,21 @@ namespace Content.Client.UserInterface.Systems.Alerts.Controls
             }
         }
 
-        public int? ResourceMax
+        public string? DynamicMessage
         {
-            get => _resourceMax;
+            get => _dynamicMessage;
             set
             {
-                _resourceMax = value;
+                _dynamicMessage = value;
                 if (SuppliedTooltip is ActionAlertTooltip actionAlertTooltip)
                 {
-                    actionAlertTooltip.ResourceMax = value;
-                }
-            }
-        }
-
-        public int? ResourceCurrent
-        {
-            get => _resourceCurrent;
-            set
-            {
-                _resourceCurrent = value;
-                if (SuppliedTooltip is ActionAlertTooltip actionAlertTooltip)
-                {
-                    actionAlertTooltip.ResourceCurrent = value;
+                    actionAlertTooltip.DynamicMessage = value;
                 }
             }
         }
 
         private (TimeSpan Start, TimeSpan End)? _cooldown;
-        private int? _resourceMax;
-        private int? _resourceCurrent;
+        private string? _dynamicMessage;
 
         private short? _severity;
         private readonly IGameTiming _gameTiming;
@@ -99,7 +85,7 @@ namespace Content.Client.UserInterface.Systems.Alerts.Controls
         {
             var msg = FormattedMessage.FromMarkup(Loc.GetString(Alert.Name));
             var desc = FormattedMessage.FromMarkup(Loc.GetString(Alert.Description));
-            return new ActionAlertTooltip(msg, desc) {Cooldown = Cooldown, ResourceMax = ResourceMax, ResourceCurrent = ResourceCurrent};
+            return new ActionAlertTooltip(msg, desc) {Cooldown = Cooldown, DynamicMessage = DynamicMessage};
         }
 
         /// <summary>

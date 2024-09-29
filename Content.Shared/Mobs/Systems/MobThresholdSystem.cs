@@ -389,13 +389,12 @@ public sealed class MobThresholdSystem : EntitySystem
             return;
         }
 
-        int? healthMax = null;
-        int? healthCurrent = null;
+        string? healthMessage = null;
 
-        if (threshold.DisplayDamageInAlert && TryGetIncapThreshold(target, out var critThreshold, threshold))
+        if (threshold.DisplayDamageInAlert && TryGetIncapThreshold(target, out var healthMax, threshold))
         {
-            healthMax = (int?)critThreshold;
-            healthCurrent = (int?)critThreshold - (int?)damageable.TotalDamage;
+            int healthCurrent = (int)healthMax - (int)damageable.TotalDamage;
+            healthMessage = healthCurrent + " / " + healthMax;
         }
 
         if (alertPrototype.SupportsSeverity)
@@ -412,11 +411,11 @@ public sealed class MobThresholdSystem : EntitySystem
                         _alerts.GetMaxSeverity(currentAlert),
                         percentage.Value.Float()));
             }
-            _alerts.ShowAlert(target, currentAlert, severity, resourceMax: healthMax, resourceCurrent: healthCurrent);
+            _alerts.ShowAlert(target, currentAlert, severity, dynamicMessage: healthMessage);
         }
         else
         {
-            _alerts.ShowAlert(target, currentAlert, resourceMax: healthMax, resourceCurrent: healthCurrent);
+            _alerts.ShowAlert(target, currentAlert, dynamicMessage: healthMessage);
         }
     }
 

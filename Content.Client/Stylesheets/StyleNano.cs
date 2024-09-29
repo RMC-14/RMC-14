@@ -57,7 +57,7 @@ namespace Content.Client.Stylesheets
         public const string StyleClassTooltipActionTitle = "tooltipActionTitle";
         public const string StyleClassTooltipActionDescription = "tooltipActionDesc";
         public const string StyleClassTooltipActionCooldown = "tooltipActionCooldown";
-        public const string StyleClassTooltipActionResource = "tooltipActionResource";
+        public const string StyleClassTooltipActionDynamicMessage = "tooltipActionDynamicMessage";
         public const string StyleClassTooltipActionRequirements = "tooltipActionCooldown";
         public const string StyleClassTooltipActionCharges = "tooltipActionCharges";
         public const string StyleClassHotbarSlotNumber = "hotbarSlotNumber";
@@ -993,7 +993,7 @@ namespace Content.Client.Stylesheets
                 {
                     new StyleProperty("font", notoSans15)
                 }),
-                new StyleRule(new SelectorElement(typeof(RichTextLabel), new[] {StyleClassTooltipActionResource}, null, null), new[]
+                new StyleRule(new SelectorElement(typeof(RichTextLabel), new[] {StyleClassTooltipActionDynamicMessage}, null, null), new[]
                 {
                     new StyleProperty("font", notoSans15)
                 }),
