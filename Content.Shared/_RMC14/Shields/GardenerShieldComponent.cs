@@ -1,6 +1,4 @@
-using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Shields;
 
