@@ -331,7 +331,18 @@ public abstract partial class SharedGunSystem : EntitySystem
         Dirty(gunUid, gun);
 
         if (!Timing.IsFirstTimePredicted)
+        {
+            foreach (var (ent, _) in ev.Ammo)
+            {
+                if (ent == null)
+                    continue;
+
+                if (_netManager.IsServer || IsClientSide(ent.Value))
+                    Del(ent);
+            }
+
             return null;
+        }
 
         if (ev.Ammo.Count <= 0)
         {

@@ -25,6 +25,10 @@ using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Radio;
 using Content.Shared.Standing;
+using Content.Shared.Storage.Components;
+using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Tools.Components;
+using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Configuration;
@@ -38,6 +42,7 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
@@ -45,6 +50,7 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly WeldableSystem _weldable = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private EntityQuery<AffectableByWeedsComponent> _affectableQuery;
@@ -90,6 +96,7 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, GetMeleeDamageEvent>(OnXenoGetMeleeDamage);
         SubscribeLocalEvent<XenoComponent, DamageModifyEvent>(OnXenoDamageModify);
         SubscribeLocalEvent<XenoComponent, RefreshMovementSpeedModifiersEvent>(OnXenoRefreshSpeed);
+        SubscribeLocalEvent<XenoComponent, MeleeHitEvent>(OnXenoMeleeHit);
 
         Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
@@ -199,6 +206,21 @@ public sealed class XenoSystem : EntitySystem
             return;
 
         args.ModifySpeed(_xenoSpeedMultiplier, _xenoSpeedMultiplier);
+    }
+
+    private void OnXenoMeleeHit(Entity<XenoComponent> xeno, ref MeleeHitEvent args)
+    {
+        foreach (var hit in args.HitEntities)
+        {
+            SharedEntityStorageComponent? storage = null;
+            if (!_entityStorage.ResolveStorage(hit, ref storage))
+                continue;
+
+            if (_weldable.IsWelded(hit))
+                _weldable.SetWeldedState(hit, false);
+
+            _entityStorage.TryOpenStorage(xeno, hit);
+        }
     }
 
     private void UpdateXenoSpeedMultiplier(float speed)

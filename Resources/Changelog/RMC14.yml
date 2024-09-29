@@ -1,70 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the nomads packet being able to fit items other than cigarettes,
-      the cigar case being able to fit items other than cigars, and the match box
-      being able to fit items other than matches.
-    type: Fix
-  id: 245
-  time: '2024-07-03T11:03:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2790
-- author: DrSmugleaf
-  changes:
-  - message: Fixed showing upstream mechanical changes for species when changing it
-      in the character editor, when there are actually none.
-    type: Fix
-  id: 246
-  time: '2024-07-03T11:02:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2789
-- author: ShadowCommander
-  changes:
-  - message: Xenonids can now drag drop hosts to nest them on nest-able surfaces.
-    type: Add
-  id: 247
-  time: '2024-07-03T11:17:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2786
-- author: Vermidia
-  changes:
-  - message: Sentinel corrosive acid now works
-    type: Fix
-  id: 248
-  time: '2024-07-03T11:19:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2766
-- author: ShadowCommander
-  changes:
-  - message: Added empty sprites for backpacks, satchels, belts, and pouches.
-    type: Add
-  id: 249
-  time: '2024-07-03T11:26:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2750
-- author: Whisper
-  changes:
-  - message: Medical belt UI should be friendlier for players with smaller screens.
-    type: Fix
-  id: 250
-  time: '2024-07-03T11:47:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2773
-- author: Whisper
-  changes:
-  - message: Hydroponics no longer drop SS14 steel and glass.
-    type: Fix
-  id: 251
-  time: '2024-07-03T11:46:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2778
-- author: Vermidia
-  changes:
-  - message: Lesser drones now use different sprites from normal drones
-    type: Tweak
-  id: 252
-  time: '2024-07-03T11:48:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2782
-- author: blueDev2
-  changes:
-  - message: Fixed health icons on shorter marines
-    type: Fix
-  id: 253
-  time: '2024-07-03T11:59:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2763
 - author: Whisper
   changes:
   - message: Crafted magazine boxes can now hold magazines
@@ -4488,5 +4422,78 @@
   id: 744
   time: '2024-09-27T19:00:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4155
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the Warden Praetorian showing an error sprite when wounded.
+    type: Fix
+  id: 745
+  time: '2024-09-27T21:04:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4157
+- author: DrSmugleaf
+  changes:
+  - message: Fixed some guns making it look like you are leaving a trail of bullets
+      for the shooter.
+    type: Fix
+  id: 746
+  time: '2024-09-27T21:04:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4158
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the armored shooting target being called a xenonid target.
+    type: Fix
+  - message: Added the medilathe and briefing podium windoor the Savannah.
+    type: Add
+  id: 747
+  time: '2024-09-27T21:33:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4159
+- author: DrSmugleaf
+  changes:
+  - message: Fixed welded closets and crates not opening from xenonid melee attacks.
+      Attacking one as a xenonid will now open it.
+    type: Fix
+  id: 748
+  time: '2024-09-27T21:47:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4160
+- author: DrSmugleaf
+  changes:
+  - message: Fixed shooting some guns lagging you to death.
+    type: Fix
+  id: 749
+  time: '2024-09-28T00:18:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4168
+- author: Vermidia
+  changes:
+  - message: Fix some of the new outfits storage and suit storage whitelists
+    type: Fix
+  - message: MP armor can properly hold grenades in the suit slot now
+    type: Fix
+  id: 750
+  time: '2024-09-28T20:22:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4175
+- author: FungiFellow
+  changes:
+  - message: Flashlights can be turned into Attachments with a Screwdriver
+    type: Add
+  id: 751
+  time: '2024-09-28T20:37:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3821
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added scout invisibility effects
+    type: Add
+  - message: Fixed scout cloak sound playing more than once
+    type: Fix
+  id: 752
+  time: '2024-09-28T21:47:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4107
+- author: Vermidia
+  changes:
+  - message: Smartgun has falloff start at 7 tiles and loses 4 damage a tile
+    type: Fix
+  - message: ML66A head mounted sight no longer gives farsight
+    type: Remove
+  id: 753
+  time: '2024-09-28T23:11:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4082
 Name: RMC14
 Order: -1

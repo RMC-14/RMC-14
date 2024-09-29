@@ -2,7 +2,7 @@
 
 # Bureau Deputy
 - type: entity
-  parent: RMCBaseJacket
+  parent: [RMCBaseJacket, RMCAllowSuitStorageClothingJacketMB]
   id: RMCCoatBureauDeputy
   name: bureau deputy jacket
   description: A thick and stylish black leather jacket with a Marshal's Deputy badge pinned to it. The back is enscribed with the powerful letters of 'DEPUTY' representing justice, authority, and protection in the outer rim. The laws of the Earth stretch beyond the Sol.
@@ -15,37 +15,6 @@
     armor: 15
     bio: 10
     explosionArmor: 10
-  - type: Storage
-    grid:
-    - 0,0,3,1 # 2 slots
-    maxItemSize: Small
-    whitelist:
-      tags:
-      - CMMagazineRifle
-      - CMMagazineSmg
-      - CMMagazineSniper
-      - CMMagazinePistol
-      - RMCMagazineRevolver
-      - Sidearm
-      - Knife
-      - Flashlight
-      - MRE
-      - Grenade
-      - CMAutoInjector
-      - Cigarette
-      - PillPacket
-      - PillCanister
-      - CMSurgicalCase
-      - Syringe
-      - Hypospray
-      - CMOintment
-      - Brutepack
-      - CMBurnKit
-      - CMTraumaKit
-      - Bottle
-      - Pill
-      - PowerCell
-  - type: FixedItemSizeStorage
 
 - type: entity
   parent: RMCBaseJacket
@@ -80,4 +49,3 @@
   - type: Storage
     grid:
     - 0,0,7,1 # 4 slots
-  - type: FixedItemSizeStorage

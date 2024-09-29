@@ -19,6 +19,9 @@
     beepInterval: 10
     doPopup: false
   - type: IgnorePredictionHide
+  - type: Clothing
+    slots:
+    - suitStorage
 
 - type: entity
   parent: CMGrenadeBase

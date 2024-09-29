@@ -17,39 +17,6 @@
   - type: Storage
     grid:
     - 0,0,5,1 # 3 slots
-    maxItemSize: Small
-    whitelist:
-      components:
-      - Gun
-      - BallisticAmmoProvider
-      - Stunbaton
-#      - # TODO RMC14 motion detector, walkman
-      tags:
-      - Handcuffs
-      - CMMagazineRifle # same as marine armor
-      - CMMagazineSmg
-      - CMMagazineSniper
-      - CMMagazinePistol
-      - RMCMagazineRevolver
-      - Sidearm
-      - Knife
-      - Flashlight
-      - Grenade
-      - MRE
-      - CMAutoInjector
-      - Cigarette
-      - PillPacket
-      - PillCanister
-      - CMSurgicalCase
-      - Syringe
-      - Hypospray
-      - CMOintment
-      - Brutepack
-      - CMBurnKit
-      - CMTraumaKit
-      - Bottle
-      - Pill
-      - PowerCell
 
 - type: entity
   parent: RMCArmorProvost
@@ -71,39 +38,6 @@
   - type: Storage
     grid:
     - 0,0,7,1 # 4 slots
-    maxItemSize: Small
-    whitelist:
-      components:
-      - Gun
-      - BallisticAmmoProvider
-      - Stunbaton
-#      - # TODO RMC14 motion detector, walkman
-      tags:
-      - Handcuffs
-      - CMMagazineRifle # same as marine armor
-      - CMMagazineSmg
-      - CMMagazineSniper
-      - CMMagazinePistol
-      - RMCMagazineRevolver
-      - Sidearm
-      - Knife
-      - Flashlight
-      - Grenade
-      - MRE
-      - CMAutoInjector
-      - Cigarette
-      - PillPacket
-      - PillCanister
-      - CMSurgicalCase
-      - Syringe
-      - Hypospray
-      - CMOintment
-      - Brutepack
-      - CMBurnKit
-      - CMTraumaKit
-      - Bottle
-      - Pill
-      - PowerCell
 
 - type: entity
   parent: RMCArmorProvost
@@ -130,44 +64,10 @@
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
-    maxItemSize: Small
-    whitelist:
-      components:
-      - Gun
-      - BallisticAmmoProvider
-      - Stunbaton
-#      - # TODO RMC14 motion detector, walkman
-      tags:
-      - Handcuffs
-      - CMMagazineRifle # same as marine armor
-      - CMMagazineSmg
-      - CMMagazineSniper
-      - CMMagazinePistol
-      - RMCMagazineRevolver
-      - Sidearm
-      - Knife
-      - Flashlight
-      - Grenade
-      - MRE
-      - CMAutoInjector
-      - Cigarette
-      - PillPacket
-      - PillCanister
-      - CMSurgicalCase
-      - Syringe
-      - Hypospray
-      - CMOintment
-      - Brutepack
-      - CMBurnKit
-      - CMTraumaKit
-      - Bottle
-      - Pill
-      - PowerCell
 
 # Special agent
-# TODO: implement storage whitelist for this
 - type: entity
-  parent: CMArmorM3Medium
+  parent: [CMArmorM3Medium, RMCAllowSuitStorageClothingArmorMP]
   id: RMCArmorProvostAgent
   name: M3 pattern Special Agent Armor
   description: A modified luxury armor, originally meant for a Provost Marshall, modified to use the colors and insignia of the intelligence service.
@@ -181,36 +81,3 @@
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
-    maxItemSize: Small
-    whitelist:
-      components:
-      - Gun
-      - BallisticAmmoProvider
-      - Stunbaton
-#      - # TODO RMC14 motion detector, walkman
-      tags:
-      - Handcuffs
-      - CMMagazineRifle # same as marine armor
-      - CMMagazineSmg
-      - CMMagazineSniper
-      - CMMagazinePistol
-      - RMCMagazineRevolver
-      - Sidearm
-      - Knife
-      - Flashlight
-      - Grenade
-      - MRE
-      - CMAutoInjector
-      - Cigarette
-      - PillPacket
-      - PillCanister
-      - CMSurgicalCase
-      - Syringe
-      - Hypospray
-      - CMOintment
-      - Brutepack
-      - CMBurnKit
-      - CMTraumaKit
-      - Bottle
-      - Pill
-      - PowerCell

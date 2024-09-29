@@ -1,5 +1,5 @@
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: RMCBaseJacket
   id: CMCoatDressBluesEnlisted
   name: marine enlisted dress blues jacket
   description: The jacket of the legendary Marine dress blues, virtually unchanged since the 19th century. You're wearing history, Marine. Don't let your ancestors down.
@@ -10,7 +10,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/DressBlues/enlisted.rsi
 
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: RMCBaseJacket
   id: CMCoatDressBluesSenior
   name: marine NCO dress blues jacket
   description: The jacket of the legendary Marine dress blues, virtually unchanged since the 19th century. Features the adornments of a decorated non-commissioned officer. Heritage, embodied.
@@ -21,7 +21,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/DressBlues/senior.rsi
 
 - type: entity
-  parent: ClothingOuterStorageBase
+  parent: RMCBaseJacket
   id: CMCoatDressBluesGeneral
   name: marine officer dress blues jacket
   description: The jacket of the legendary Marine dress blues, virtually unchanged since the 19th century. Features the sleek dark design of the uniform worn by a commissioned officer.
