@@ -17,8 +17,14 @@ public sealed partial class RMCFireGroupComponent : Component
     public string Group = string.Empty;
 
     /// <summary>
+    /// How long the other gun(s) are delayed for
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan Delay = TimeSpan.FromSeconds(1);
+
+    /// <summary>
     /// The UseDelay ID
     /// </summary>
     [DataField, AutoNetworkedField]
-    public string UseDelayID = "CMShootUseDelay";
+    public string UseDelayID = "RMCFireGroupDelay";
 }

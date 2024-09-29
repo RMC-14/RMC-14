@@ -1,5 +1,6 @@
 ﻿using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Timing;
+using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
@@ -12,6 +13,7 @@ public sealed class SharedFireGroupSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCFireGroupComponent, GunShotEvent>(OnGunShot);
+        SubscribeLocalEvent<RMCFireGroupComponent, ShotAttemptedEvent>(OnShotAttempt);
     }
 
     private void OnGunShot(Entity<RMCFireGroupComponent> ent, ref GunShotEvent args)
@@ -33,8 +35,21 @@ public sealed class SharedFireGroupSystem : EntitySystem
                 if (!TryComp(item, out UseDelayComponent? useDelay))
                     continue;
 
-                _delay.TryResetDelay((item, useDelay), true, id: comp.UseDelayID);
+                var itemEnt = (item, useDelay);
+                _delay.SetLength(itemEnt, comp.Delay, comp.UseDelayID);
+                _delay.TryResetDelay(itemEnt, true, id: comp.UseDelayID);
             }
         }
+    }
+
+    public void OnShotAttempt(Entity<RMCFireGroupComponent> ent, ref ShotAttemptedEvent args)
+    {
+        if (!TryComp(ent.Owner, out UseDelayComponent? useDelayComponent) ||
+            !_delay.IsDelayed((ent.Owner, useDelayComponent), ent.Comp.UseDelayID))
+        {
+            return;
+        }
+
+        args.Cancel();
     }
 }
