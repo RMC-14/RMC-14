@@ -19,7 +19,6 @@ public sealed class StunShakeableSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
 
     private static readonly ProtoId<StatusEffectPrototype> Stun = "Stun";
     private static readonly ProtoId<StatusEffectPrototype> KnockedDown = "KnockedDown";
@@ -72,8 +71,7 @@ public sealed class StunShakeableSystem : EntitySystem
         var targetPopup = Loc.GetString("rmc-shake-awake-target", ("user", user));
         _popup.PopupEntity(targetPopup, target, target);
 
-        if (_net.IsServer)
-            _audio.PlayEntity(ent.Comp.ShakeSound, Filter.Pvs(target), target, false);
+        _audio.PlayPredicted(ent.Comp.ShakeSound, target, user);
 
         var othersPopup = Loc.GetString("rmc-shake-awake-others", ("user", user), ("target", target));
         var others = Filter.PvsExcept(target).RemovePlayerByAttachedEntity(user);
