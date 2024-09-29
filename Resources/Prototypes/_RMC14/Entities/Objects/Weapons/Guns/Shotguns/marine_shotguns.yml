@@ -29,7 +29,6 @@
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
-    resetOnHandSelected: true
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
