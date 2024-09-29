@@ -334,7 +334,11 @@ public abstract partial class SharedGunSystem : EntitySystem
         {
             foreach (var (ent, _) in ev.Ammo)
             {
-                Del(ent);
+                if (ent == null)
+                    continue;
+
+                if (_netManager.IsServer || IsClientSide(ent.Value))
+                    Del(ent);
             }
 
             return null;

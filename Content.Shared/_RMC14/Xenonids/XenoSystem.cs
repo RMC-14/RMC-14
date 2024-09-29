@@ -27,7 +27,6 @@ using Content.Shared.Radio;
 using Content.Shared.Standing;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
-using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Melee.Events;
@@ -316,12 +315,6 @@ public sealed class XenoSystem : EntitySystem
         _damageable.TryChangeDamage(xeno, heal, true);
     }
 
-    // TODO RMC14 generalize this for survivors, synthetics, enemy hives, etc
-    public bool CanHitLiving(EntityUid xeno, EntityUid defender)
-    {
-        return _marineQuery.HasComponent(defender);
-    }
-
     public bool FromSameHive(Entity<XenoComponent?> xenoOne, Entity<XenoComponent?> xenoTwo)
     {
         if (!_xenoQuery.Resolve(xenoOne, ref xenoOne.Comp, false) ||
@@ -345,11 +338,16 @@ public sealed class XenoSystem : EntitySystem
     {
         if (xeno == target)
             return false;
-        // TODO RMC14 use hive member instead
-        if (TryComp<XenoComponent>(xeno, out var comp1) && TryComp<XenoComponent>(target, out var comp2) && comp1.Hive == comp2.Hive)
-            return false;
 
-        if (HasComp<MobStateComponent>(target) && _mobState.IsDead(target))
+        // TODO RMC14 use hive member instead
+        if (TryComp<XenoComponent>(xeno, out var comp1) &&
+            TryComp<XenoComponent>(target, out var comp2) &&
+            comp1.Hive == comp2.Hive)
+        {
+            return false;
+        }
+
+        if (_mobState.IsDead(target))
             return false;
 
         if (_xenoNestedQuery.HasComp(target))

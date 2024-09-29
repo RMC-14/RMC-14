@@ -88,6 +88,7 @@
     barricadeDamage:
       types:
         Heat: 5
+    doAfter: 0.5
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
@@ -149,6 +150,12 @@
   - type: XenoEnergy
   - type: XenoRetrieve
   - type: XenoAid
+  - type: XenoSprayAcid
+    acid: XenoAcidSprayStrong
+    barricadeDamage:
+      types:
+        Heat: 5
+    doAfter: 0.5
   - type: MeleeWeapon
     damage:
       groups:
