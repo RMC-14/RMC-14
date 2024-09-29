@@ -82,11 +82,11 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
                 if (_xenoFruit.TrySpeedupGrowth((entity, fruit), xeno.Comp.FruitGrowth))
                 {
                     // If no, speed up fruit growth
-                    _popup.PopupClient(Loc.GetString("rmc-xeno-resin-surge-fruit-fail", ("target", entity)), xeno, xeno);
+                    _popup.PopupClient(Loc.GetString("rmc-xeno-resin-surge-fruit", ("target", entity)), xeno, xeno);
                     return;
                 }
 
-                _popup.PopupClient(Loc.GetString("rmc-xeno-resin-surge-fruit", ("target", entity)), xeno, xeno);
+                _popup.PopupClient(Loc.GetString("rmc-xeno-resin-surge-fruit-fail", ("target", entity)), xeno, xeno);
 
                 // TODO: reduce cooldown by half
 
