@@ -1,0 +1,9 @@
+# рубаха с красным рукавом(Ага ру коментарии)
+- type: entity
+  parent: RMCMarineUniformBase
+  id: CMJumpsuitkosovorotka
+  name: kosovorotka
+  description: russian kosovorotka
+  components:
+  - type: Sprite
+    sprite: _MCWW/Objects/Clothing/Uniforms/kosovorotka.rsi

@@ -4,8 +4,11 @@ cm-chatsan-replacement-deltard = delta
 cm-chatsan-word-deltards = deltards
 cm-chatsan-replacement-deltards = deltas
 
-cm-chatsan-word-admins-marine = admins
-cm-chatsan-replacement-admins-marine = high command
+cm-chatsan-word-admin-marine = админ
+cm-chatsan-replacement-admin-marine = Высшее командование
+
+cm-chatsan-word-admins-marine = админы
+cm-chatsan-replacement-admins-marine = Высшее командование
 
 cm-chatsan-word-eorg-marine = eorg
 cm-chatsan-replacement-eorg-marine = warcrimes
@@ -25,29 +28,32 @@ cm-chatsan-replacement-sniper = long spitter
 cm-chatsan-word-flare = flare
 cm-chatsan-replacement-flare = glow stick
 
-cm-chatsan-word-synth = synth
-cm-chatsan-replacement-synth = fake hosts
+cm-chatsan-word-synth = синт
+cm-chatsan-replacement-synth = железные носители
 
-cm-chatsan-word-synthetic = synthetic
-cm-chatsan-replacement-synthetic = fake hosts
+cm-chatsan-word-synthetic = синтетик
+cm-chatsan-replacement-synthetic = железные носители
 
-cm-chatsan-word-synths = synths
-cm-chatsan-replacement-synths = fake hosts
+cm-chatsan-word-synths2 = робот
+cm-chatsan-replacement-synths2 = железные носители
 
-cm-chatsan-word-synthetics = synthetics
-cm-chatsan-replacement-synthetics = fake hosts
+cm-chatsan-word-synths = роботы
+cm-chatsan-replacement-synths = железные носители
+
+cm-chatsan-word-synthetics = синтеты
+cm-chatsan-replacement-synthetics = железные носители
 
 cm-chatsan-word-human = human
-cm-chatsan-replacement-human = tall host
+cm-chatsan-replacement-human = носитель
 
 cm-chatsan-word-humans = humans
-cm-chatsan-replacement-humans = tall hosts
+cm-chatsan-replacement-humans = носители
 
-cm-chatsan-word-marine = marine
-cm-chatsan-replacement-marine = tall host
+cm-chatsan-word-marine = марин
+cm-chatsan-replacement-marine = носитель
 
-cm-chatsan-word-marines = marines
-cm-chatsan-replacement-marines = tall hosts
+cm-chatsan-word-marines = марины
+cm-chatsan-replacement-marines = носители
 
 cm-chatsan-word-lizard = lizard
 cm-chatsan-replacement-lizard = scaled host
@@ -88,41 +94,44 @@ cm-chatsan-replacement-moths = winged hosts
 cm-chatsan-word-mothes = mothes
 cm-chatsan-replacement-mothes = winged hosts
 
-cm-chatsan-word-spider = spider
-cm-chatsan-replacement-spider = webspitter
+cm-chatsan-word-spider = паук
+cm-chatsan-replacement-spider = липучка
 
-cm-chatsan-word-spiders = spiders
-cm-chatsan-replacement-spiders = webspitters
+cm-chatsan-word-spiders = пауки
+cm-chatsan-replacement-spiders = липучки
 
-cm-chatsan-word-arachnid = arachnid
-cm-chatsan-replacement-arachnid = webspitting host
+cm-chatsan-word-arachnid = арахниды
+cm-chatsan-replacement-arachnid = носитель липучка
 
-cm-chatsan-word-arachnids = arachnids
-cm-chatsan-replacement-arachnids = webspitting hosts
+cm-chatsan-word-arachnids = арахниды
+cm-chatsan-replacement-arachnids = носители липучки
 
-cm-chatsan-word-dropship = dropship
-cm-chatsan-replacement-dropship = metal bird
+cm-chatsan-word-dropship = шатл
+cm-chatsan-replacement-dropship = Железная птица
 
-cm-chatsan-word-dropships = dropships
-cm-chatsan-replacement-dropships = metal birds
+cm-chatsan-word-dropships = Шатлы
+cm-chatsan-replacement-dropships = Железные птицы
 
-cm-chatsan-word-ship = ship
-cm-chatsan-replacement-ship = metal bird
+cm-chatsan-word-ship = шатл
+cm-chatsan-replacement-ship = Железная птица
 
-cm-chatsan-word-ships = ships
-cm-chatsan-replacement-ships = metal birds
+cm-chatsan-word-ships = Шатлы
+cm-chatsan-replacement-ships = Железные птицы
 
-cm-chatsan-word-alamo = alamo
-cm-chatsan-replacement-alamo = metal bird
+cm-chatsan-word-alamo = аламо
+cm-chatsan-replacement-alamo = Железная птица
 
-cm-chatsan-word-normandy = normandy
-cm-chatsan-replacement-normandy = metal bird
+cm-chatsan-word-normandy = Нормания
+cm-chatsan-replacement-normandy = Железная птица
 
-cm-chatsan-word-almayer = almayer
-cm-chatsan-replacement-almayer = metal hive
+cm-chatsan-word-almayer = Алмаер
+cm-chatsan-replacement-almayer = небесный улей
 
-cm-chatsan-word-admins-xeno = admins
-cm-chatsan-replacement-admins-xeno = grandmothers
+cm-chatsan-word-admins-xeno = админ
+cm-chatsan-replacement-admins-xeno = Великая мать
+
+cm-chatsan-word-admins-xeno = админы
+cm-chatsan-replacement-admins-xeno = Великая мать
 
 cm-chatsan-word-ob = ob
 cm-chatsan-replacement-ob = skyfire
@@ -194,7 +203,7 @@ cm-chatsan-word-senior-enlisted-advisor = senior enlisted advisor
 cm-chatsan-replacement-senior-enlisted-advisor = young tall queen
 
 cm-chatsan-word-lz = lz
-cm-chatsan-replacement-lz = metal bird perch
+cm-chatsan-replacement-lz = Железная птица perch
 
 cm-chatsan-word-shoot = shoot
 cm-chatsan-replacement-shoot = spit
