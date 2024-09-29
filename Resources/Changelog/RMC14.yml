@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Explosion and screech shockwave effects no longer temporarily reset your
-      camera to the default rotation.
-    type: Fix
-  id: 259
-  time: '2024-07-04T04:44:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2807
-- author: DrSmugleaf
-  changes:
   - message: Fixed xenonids being able to devolve if damaged. Xenonids now must be
       on full health before devolving.
     type: Fix
@@ -4525,5 +4517,12 @@
   id: 758
   time: '2024-09-29T23:47:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4189
+- author: TsjipTsjip
+  changes:
+  - message: High Command headset and encryption key exist now.
+    type: Add
+  id: 759
+  time: '2024-09-29T23:51:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4188
 Name: RMC14
 Order: -1
