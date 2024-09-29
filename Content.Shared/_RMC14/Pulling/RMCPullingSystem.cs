@@ -35,7 +35,7 @@ public sealed class RMCPullingSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    private SoundSpecifier PullSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg")
+    private readonly SoundSpecifier PullSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg")
     {
         Params = AudioParams.Default.WithVariation(0.05f)
     };
