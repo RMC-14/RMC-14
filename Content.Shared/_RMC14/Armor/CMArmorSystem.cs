@@ -58,7 +58,7 @@ public sealed class CMArmorSystem : EntitySystem
     {
         if (TryComp<XenoComponent>(armored, out var xeno)){
             string? armorMessage = armored.Comp.Armor + " / " + armored.Comp.Armor;
-            _alerts.ShowAlert(armored, xeno.ArmorAlert, 0, dynamicMessage: armorMessage); //TODO RMC14 update resourceCurrent when Armor level can actually change
+            _alerts.ShowAlert(armored, xeno.ArmorAlert, 0, dynamicMessage: armorMessage); //TODO RMC14 update message when Armor level can actually change
         }
     }
 
