@@ -46,6 +46,7 @@
     cost: 100
   - type: ActionCooldown
     cooldown: 10
+  - type: ActionBlockIfResting
 
 - type: entity
   parent: ActionXenoBase
@@ -63,6 +64,7 @@
     useDelay: 10
   - type: XenoActionPlasma
     cost: 100
+  - type: ActionBlockIfResting
 
 - type: entity
   parent: ActionXenoBase

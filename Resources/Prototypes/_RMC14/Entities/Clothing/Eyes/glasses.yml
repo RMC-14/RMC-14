@@ -73,8 +73,6 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ml66a_sight.rsi
   - type: NightVisionItem
-    toggleable: false
-  - type: FarSightItem
   - type: ClothingRequireEquipped
     whitelist:
       components:
@@ -82,7 +80,7 @@
   - type: Appearance
   - type: GenericVisualizer
     visuals:
-      enum.FarSightItemVisuals.Active:
+      enum.NightVisionItemVisuals.Active:
         icon:
           True: { state: icon_on }
           False: { state: icon }

@@ -1,0 +1,33 @@
+﻿- type: entity
+  id: RMCEffectCloakBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Effects/cloak.rsi
+    drawdepth: Effects
+    noRot: true
+  - type: EffectVisuals
+  - type: AnimationPlayer
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: RMCEffectCloakBase
+  id: RMCEffectCloak
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: cloak
+  - type: TimedDespawn
+    lifetime: 0.8
+
+- type: entity
+  parent: RMCEffectCloakBase
+  id: RMCEffectUncloak
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: uncloak
+  - type: TimedDespawn
+    lifetime: 0.7
