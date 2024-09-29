@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -6,7 +6,7 @@
   - RMCXenoSpeechSounds
   id: CMXenoDefender
   name: Defender
-  description: A alien with an armored crest.
+  description: An alien with an armored crest.
   components:
   - type: GhostRole
     name: cm-job-name-xeno-defender

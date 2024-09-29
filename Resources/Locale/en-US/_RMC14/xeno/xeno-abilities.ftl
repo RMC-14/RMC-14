@@ -1,6 +1,10 @@
 ﻿# Plasma
 cm-xeno-not-enough-plasma = You don't have enough plasma!
 
+# Energy
+rmc-xeno-not-enough-energy = Your health reserves are insufficient!
+rmc-xeno-energy-increase-user = You feel your internal health reserves increase!
+
 # Construction
 cm-xeno-choose-resin-structure = Choose Resin Structure
 cm-xeno-order-construction = Build Structure
@@ -24,6 +28,7 @@ cm-xeno-evolution-failed-hive-full = The hive cannot support another Tier {$tier
 rmc-xeno-evolution-devolve-title = De-Evolve To
 rmc-xeno-evolution-devolve = You devolve to {$xeno}!
 rmc-xeno-evolution-cant-evolve-damaged = We must be at full health to evolve.
+rmc-xeno-evolution-cant-strain-damaged = We must be at full health to take a strain.
 rmc-xeno-evolution-cant-devolve-damaged = We are too weak to deevolve, we must regain our health first.
 rmc-xeno-evolution-cant-evolve-recent-queen-death-minutes = We must wait about {$minutes} minutes and {$seconds} seconds for the hive to recover from the previous Queen's death.
 rmc-xeno-evolution-cant-evolve-recent-queen-death-seconds = We must wait about {$seconds} seconds for the hive to recover from the previous Queen's death.
@@ -115,8 +120,48 @@ cm-xeno-invisibility-expire = We feel our invisibility end!
 cm-xeno-ovipositor-attach = We start attaching to the ovipositor.
 cm-xeno-ovipositor-detach = We start detaching from the ovipositor.
 
+# Retrieve Egg
+cm-xeno-retrieve-egg-no-eggs = We don't have any eggs stored!
+cm-xeno-retrieve-egg-too-many-eggs = We don't have space to store any more eggs!
+cm-xeno-retrieve-egg-stash-egg = We put the egg into our internal storage. Now Holding: {$cur_eggs}/{$max_eggs} eggs
+cm-xeno-retrieve-egg-unstash-egg = We grab an egg from our internal storage. Now Holding: {$cur_eggs}/{$max_eggs} eggs
+cm-xeno-retrieve-egg-description = Retrieves an egg from your storage. Now Holding: {$cur_eggs}/{$max_eggs} eggs
+
+# Throw Parasite
+cm-xeno-throw-parasite-no-parasites = We don't have any parasites stored!
+cm-xeno-throw-parasite-too-many-parasites = We don't have space to store any more parasites!
+cm-xeno-throw-parasite-stash-parasite = We put the parasite into our storage. Now Sheltering: {$cur_parasites}/{$max_parasites} parasites
+cm-xeno-throw-parasite-unstash-parasite = We grab a parasite from our storage. Now Sheltering: {$cur_parasites}/{$max_parasites} parasites
+cm-xeno-throw-parasite-description = Throw Parasite. Now Sheltering: {$cur_parasites}/{$max_parasites} parasites
+
 # Defensive Shield
 rmc-xeno-defensive-shield-end = We feel our enhanced shield end!
 rmc-xeno-defensive-shield-resist-end = Our immunity to explosion damage ends!
 rmc-xeno-defensive-shield-activate = {$user} hunkers down and bolsters its defenses!
 rmc-xeno-defensive-shield-activate-self = We hunker down and bolster our defenses!
+
+# Acid Ball
+rmc-xeno-acid-ball-shoot-self = We lob a compressed ball of acid into the air!
+rmc-xeno-praetorian-acid-spit-hit-self = You feel acid eat into your skin!
+
+# Retrieve
+rmc-xeno-not-same-hive = We must target one of our sisters!
+rmc-xeno-retrieve-self = We cannot retrieve ourself!
+rmc-xeno-retrieve-anchored = That sister cannot move!
+rmc-xeno-retrieve-too-big = {$target} is too big to retrieve while standing up!
+rmc-xeno-retrieve-dead = {$target} is already dead!
+rmc-xeno-retrieve-blocked = We can't reach {$target} with our resin retrieval hook!
+rmc-xeno-retrieve-start-self = We prepare to fire our resin retrieval hook at {$target}!
+rmc-xeno-retrieve-start-others = {$user} prepares to fire its resin retrieval hook at {$target}!
+rmc-xeno-retrieve-finish-user = We fling {$target} over our head with our resin hook!
+rmc-xeno-retrieve-finish-target = We are pulled toward {$user}!
+
+# Aid
+rmc-xeno-aid-self = We cannot heal ourself!
+rmc-xeno-aid-dead = {$target} is already dead!
+rmc-xeno-heal-self = We heal {$target}!
+rmc-xeno-heal-target = We are healed by {$target}!
+rmc-xeno-heal-others = {$user} places its claws on {$target}, and its wounds are quickly sealed!
+rmc-xeno-heal-ailments-self = We rejuvenate {$target}!
+rmc-xeno-heal-ailments-target = We are rejuvenated by {$target}!
+rmc-xeno-heal-ailments-others = {$user} points at {$target}, and it spasms as it recuperates unnaturally quickly!

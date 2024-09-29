@@ -1,0 +1,241 @@
+# SPP armors
+- type: entity
+  parent: CMArmorM3Medium
+  id: RMCArmorSPP
+  name: SPP UM5 personal armor
+  description: Standard body armor of the SPP military, the UM5 (Union Medium MK5) is a medium body armor, roughly on par with the M3 pattern body armor in service with the UNMC, specialized towards ballistics protection. Unlike the M3, however, the plate has a heavier neckplate. This has earned many UN members to refer to SPP soldiers as 'tin men'.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/spp.rsi
+  - type: CMArmor
+    armor: 30 # CLOTHING_ARMOR_HIGH
+    bio: 15 # CLOTHING_ARMOR_MEDIUMLOW
+    explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_MEDIUM
+    walkModifier: 0.727
+    sprintModifier: 0.727
+  - type: Storage
+    grid:
+    - 0,0,1,1 # 1 slot
+    maxItemSize: Small
+    whitelist:
+      tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - Sidearm
+      - Knife
+      - Flashlight
+      - MRE
+      - Grenade
+      - CMAutoInjector
+      - Cigarette
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - Syringe
+      - Hypospray
+      - CMOintment
+      - Brutepack
+      - CMBurnKit
+      - CMTraumaKit
+      - Bottle
+      - Pill
+      - PowerCell
+
+- type: entity
+  parent: RMCArmorSPP
+  id: RMCArmorSPPSupport
+  name: SPP UL6 personal armor
+  description: Standard body armor of the SPP military, the UM5 (Union Medium MK5) is a medium body armor, roughly on par with the M3 pattern body armor in service with the UNMC, specialized towards ballistics protection. Unlike the M3, however, the plate has a heavier neckplate. This has earned many UN members to refer to SPP soldiers as 'tin men'.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/support.rsi
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
+    walkModifier: 0.814
+    sprintModifier: 0.814
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
+    maxItemSize: Small
+    whitelist:
+      tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - Sidearm
+      - Knife
+      - Flashlight
+      - MRE
+      - Grenade
+      - CMAutoInjector
+      - Cigarette
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - Syringe
+      - Hypospray
+      - CMOintment
+      - Brutepack
+      - CMBurnKit
+      - CMTraumaKit
+      - Bottle
+      - Pill
+      - PowerCell
+
+- type: entity
+  parent: RMCArmorSPPSupport
+  id: RMCArmorSPPSupportSynth
+  name: SPP UL6 synthetic personal armor
+  description: Modified variant of the UL6 personel armor system intended to be useable by Synthetic units. Offers no protection but very little movement impairment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/support.rsi
+  - type: Clothing
+    equipDelay: 1
+    unequipDelay: 0.5
+  - type: CMArmor
+    armor: 0 # CLOTHING_ARMOR_NONE
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
+    walkModifier: 0.897
+    sprintModifier: 0.897
+
+- type: entity
+  parent: RMCArmorSPP
+  id: RMCArmorSPPCommando
+  name: SPP UM5CU personal armor
+  description: A modification of the UM5, designed for stealth operations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/commando.rsi
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
+    walkModifier: 0.814
+    sprintModifier: 0.814
+  - type: Storage
+    grid:
+    - 0,0,3,1 # 2 slots
+    maxItemSize: Small
+    whitelist:
+      tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - Sidearm
+      - Knife
+      - Flashlight
+      - MRE
+      - Grenade
+      - CMAutoInjector
+      - Cigarette
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - Syringe
+      - Hypospray
+      - CMOintment
+      - Brutepack
+      - CMBurnKit
+      - CMTraumaKit
+      - Bottle
+      - Pill
+      - PowerCell
+
+- type: entity
+  parent: RMCArmorSPP
+  id: RMCArmorSPPHeavy
+  name: SPP UH7 heavy plated armor
+  description: An extremely heavy-duty set of body armor in service with the SPP military, the UH7 (Union Heavy MK7) is known for having powerful ballistic protection, alongside a noticeable neck guard, fortified in order to allow the wearer to endure the stresses of the bulky helmet.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/heavy.rsi
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_HEAVY
+    walkModifier: 0.68
+    sprintModifier: 0.68
+  - type: CMArmor
+    armor: 30 # CLOTHING_ARMOR_HIGHPLUS (bullets), CLOTHING_ARMOR_MEDIUMHIGH (melee); choosing an intermediate value until more damage types are implemented
+    bio: 20 # CLOTHING_ARMOR_MEDIUM
+    explosionArmor: 30 # CLOTHING_ARMOR_HIGH
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
+    maxItemSize: Small
+    whitelist:
+      tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - Sidearm
+      - Knife
+      - Flashlight
+      - MRE
+      - Grenade
+      - CMAutoInjector
+      - Cigarette
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - Syringe
+      - Hypospray
+      - CMOintment
+      - Brutepack
+      - CMBurnKit
+      - CMTraumaKit
+      - Bottle
+      - Pill
+      - PowerCell
+
+# SPP coats
+- type: entity
+  parent: RMCCoatBureauDeputy
+  id: RMCCoatSPP
+  name: SPP UL4 officer jacket
+  description: A lightweight jacket, issued to officers of the SPP's military. Slightly protective from incoming damage, best off with proper armor however.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/officer.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/officer.rsi
+  - type: CMArmor
+    armor: 10
+    bio: 10
+    explosionArmor: 10
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
+  - type: FixedItemSizeStorage
+
+- type: entity
+  parent: RMCCoatBureauDeputy
+  id: RMCCoatSPPSenior
+  name: SPP UL4 senior officer jacket
+  description: A lightweight jacket, issued to senior officers of the SPP's military. Made of high-quality materials, even going as far as having the ranks and insignia of the Kapitan and their Company emblazoned on the shoulders and front of the jacket. Slightly protective from incoming damage, best off with proper armor however.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/senior.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/senior.rsi
+  - type: Storage
+    grid:
+    - 0,0,7,1 # 4 slots
+
+- type: entity
+  parent: RMCCoatSPPSenior
+  id: RMCCoatSPPMP
+  name: SPP UL4 camouflaged jacket
+  description: A lightweight jacket, issued to troops when they're not expected to engage in combat. Still studded to the brim with kevlar shards, though the synthread construction reduces its effectiveness.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/mp.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/mp.rsi

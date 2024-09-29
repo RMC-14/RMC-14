@@ -20,3 +20,9 @@ public sealed class XenoEvolveBuiMsg(EntProtoId choice) : BoundUserInterfaceMess
 {
     public readonly EntProtoId Choice = choice;
 }
+
+[Serializable, NetSerializable]
+public sealed class XenoStrainBuiMsg(EntProtoId choice) : BoundUserInterfaceMessage
+{
+    public readonly EntProtoId Choice = choice;
+}

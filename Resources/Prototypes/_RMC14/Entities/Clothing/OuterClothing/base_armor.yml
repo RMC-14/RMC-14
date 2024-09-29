@@ -1,6 +1,6 @@
 # base
 - type: entity
-  parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing ]
+  parent: [ ClothingOuterBaseMedium, RMCAllowSuitStorageClothingArmor ]
   id: RMCBaseArmor
   abstract: true
   components:
@@ -19,6 +19,76 @@
       path: /Audio/_RMC14/Machines/armor_equip.ogg
 
 - type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingArmor
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - RMCLighter
+      - Bible
+      - Gun
+      tags:
+      - GasTank
+      - Flashlight
+      - DiscreteHealthAnalyzer
+      - CigPack
+      - Knife
+      - RMCG8Pouch
+      - RMCMacheteScabbard
+      #TODO Various holsters should fit here - 47 belt, 1984, m44, and flaregun
+      - RMCSmartPistolHolster
+      #TODO motion detector
+      #TODO walkman
+
+# TODO RMC14 PMC Armor has it's own list of allowed suit storage
+
+- type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingSmartgunner
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - BallisticAmmoProvider #Note should get all maganizes
+      - SmartGun
+      tags:
+      - GasTank
+      - Flashlight
+      - Knife
+      - RMCG8Pouch
+      #TODO mines
+      #TODO motion detector
+      #TODO walkman
+
+- type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingArmorMP
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - RMCLighter
+      - Bible
+      - BallisticAmmoProvider #Note should get all maganizes
+      - Stunbaton
+      - Gun
+      tags:
+      - Handcuffs
+      - GasTank
+      - CigPack
+      - Knife
+      - RMCG8Pouch
+      - Binoculars
+      - Grenade
+      #TODO Hailer - looks like a flash and shouts a message to halt
+      #TODO Various holsters go here - instead of specific ones though MP get ALL of them - any type of gun holster
+      - RMCSmartPistolHolster
+      #TODO Ceremonial Sword
+      #TODO motion detector
+      #TODO walkman
+
+- type: entity
   parent: RMCBaseArmor
   id: RMCBaseMarineArmor
   abstract: true
@@ -30,33 +100,6 @@
     maxItemSize: Small
     grid:
     - 0,0,5,1 # 3 slots
-    whitelist:
-      tags:
-      - CMMagazineRifle
-      - CMMagazineSmg
-      - CMMagazineSniper
-      - CMMagazinePistol
-      - RMCMagazineRevolver
-      - Sidearm
-      - Knife
-      - Flashlight
-      - MRE
-      - Grenade
-      - CMAutoInjector
-      - Cigarette
-      - PillPacket
-      - PillCanister
-      - CMSurgicalCase
-      - Syringe
-      - Hypospray
-      - CMOintment
-      - Brutepack
-      - CMBurnKit
-      - CMTraumaKit
-      - Bottle
-      - Pill
-      - PowerCell
-      - Binoculars
   - type: ContainerContainer
     containers:
       storagebase: !type:Container

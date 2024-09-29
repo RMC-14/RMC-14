@@ -33,6 +33,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 using static Content.Shared.Physics.CollisionGroup;
 using Robust.Shared.Map;
 using Robust.Shared.Audio.Systems;
@@ -53,6 +54,7 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly CMHandsSystem _rmcHands = default!;
     [Dependency] private readonly TagSystem _tags = default!;
@@ -81,6 +83,7 @@ public sealed class XenoEggSystem : EntitySystem
 
         SubscribeLocalEvent<XenoEggComponent, AfterAutoHandleStateEvent>(OnXenoEggAfterState);
         SubscribeLocalEvent<XenoEggComponent, GettingPickedUpAttemptEvent>(OnXenoEggPickedUpAttempt);
+        SubscribeLocalEvent<XenoEggComponent, UseInHandEvent>(OnXenoEggUseInHand);
         SubscribeLocalEvent<XenoEggComponent, InteractUsingEvent>(OnXenoEggInteractUsing);
         SubscribeLocalEvent<XenoEggComponent, AfterInteractEvent>(OnXenoEggAfterInteract);
         SubscribeLocalEvent<XenoEggComponent, ActivateInWorldEvent>(OnXenoEggActivateInWorld);
@@ -187,7 +190,14 @@ public sealed class XenoEggSystem : EntitySystem
         args.Cancelled = true;
     }
 
-    private void OnXenoEggAfterInteract(Entity<XenoEggComponent> egg, ref AfterInteractEvent args)
+	private void OnXenoEggUseInHand(Entity<XenoEggComponent> egg, ref UseInHandEvent args)
+	{
+		var ev = new XenoEggUseInHandEvent(_entities.GetNetEntity(egg.Owner));
+		RaiseLocalEvent(args.User, ev);
+		args.Handled = ev.Handled;
+	}
+
+	private void OnXenoEggAfterInteract(Entity<XenoEggComponent> egg, ref AfterInteractEvent args)
     {
         if (args.Handled)
             return;
@@ -336,6 +346,13 @@ public sealed class XenoEggSystem : EntitySystem
 
     private void OnXenoEggActivateInWorld(Entity<XenoEggComponent> egg, ref ActivateInWorldEvent args)
     {
+        // Prevent attempt to open the egg during a UseInHand Event
+        if (!TryComp(egg.Owner, out TransformComponent? transformComp) ||
+            !transformComp.Anchored)
+        {
+            return;
+        }
+
         // TODO RMC14 multiple hive support
         if (!HasComp<XenoParasiteComponent>(args.User) && (!HasComp<XenoComponent>(args.User) || !HasComp<HandsComponent>(args.User)))
             return;

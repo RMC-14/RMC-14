@@ -24,6 +24,9 @@ public sealed partial class XenoEvolutionComponent : Component
     public List<EntProtoId> EvolvesToWithoutPoints = new();
 
     [DataField, AutoNetworkedField]
+    public List<EntProtoId> Strains = new();
+
+    [DataField, AutoNetworkedField]
     public TimeSpan EvolutionDelay = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]

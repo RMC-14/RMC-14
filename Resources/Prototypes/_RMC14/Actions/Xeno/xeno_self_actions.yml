@@ -177,3 +177,52 @@
       state: empower
     event: !type:XenoDefensiveShieldActionEvent
     useDelay: 26
+
+- type: entity
+  id: ActionXenoRetrieveEgg
+  parent: ActionXenoBase
+  name: Retrieve Egg
+  description: Retrieves an egg from your storage.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: retrieve_egg
+    event: !type:XenoRetrieveEggActionEvent
+    deselectOnMiss: false
+    repeat: true
+    range: 30
+
+- type: entity
+  id: ActionXenoThrowParasite
+  parent: ActionXenoBase
+  name: Throw Parasite
+  description: Throw Parasite.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: throw_parasite
+    event: !type:XenoThrowParasiteActionEvent
+    deselectOnMiss: false
+    repeat: true
+    range: 30
+
+- type: entity
+  id: ActionXenoParasiteReserve
+  parent: ActionXenoBase
+  name: Reserve Parasite
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: reserve_parasite
+    event: !type:XenoReserveParasiteActionEvent
+    useDelay: 1
+  - type: UserInterface
+    interfaces:
+      enum.XenoReserveParasiteChangeUIKey.Key:
+        type: ReserveParasitesBoundUserInterface

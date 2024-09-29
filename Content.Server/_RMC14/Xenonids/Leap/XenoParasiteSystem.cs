@@ -1,4 +1,4 @@
-﻿using Content.Server.Ghost.Roles.Components;
+using Content.Server.Ghost.Roles.Components;
 using Content.Server.Ghost;
 using Content.Server.Mind;
 using Content.Shared._RMC14.Xenonids.Parasite;
