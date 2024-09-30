@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed intercoms having no power.
-    type: Fix
-  id: 262
-  time: '2024-07-04T04:45:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2808
-- author: DrSmugleaf
-  changes:
   - message: Fixed Immature Queens being able to use Screech. Any Queen, including
       newly-evolved ones, must wait until they are mature (10 minutes) before being
       able to use it.
@@ -4562,5 +4555,12 @@
   id: 761
   time: '2024-09-30T22:40:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4200
+- author: DrSmugleaf
+  changes:
+  - message: Added Seeks-to-Fight and Stares-at-Stars figurine.
+    type: Add
+  id: 762
+  time: '2024-09-30T22:50:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4198
 Name: RMC14
 Order: -1
