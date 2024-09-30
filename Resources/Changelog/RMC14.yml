@@ -1,18 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added 5 empty blood packs to the MM blood dispenser.
-    type: Add
-  - message: Fixed the Hospital Corpsman not having medical access.
-    type: Fix
-  - message: The MM blood dispenser now uses the fancy vendor UI, and no longer has
-      a delay to vending blood packs.
-    type: Tweak
-  id: 261
-  time: '2024-07-04T04:45:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2804
-- author: DrSmugleaf
-  changes:
   - message: Fixed intercoms having no power.
     type: Fix
   id: 262
@@ -4539,5 +4527,40 @@
   id: 760
   time: '2024-09-30T03:49:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4195
+- author: DrSmugleaf
+  changes:
+  - message: Added the missing boost to evolution points when hijack starts. For 3
+      minutes, xenos will get 5 evolution points per second, 10 times the default.
+    type: Add
+  - message: Added the missing evolution point bonus to the hive core, when present
+      it will boost default evolution point gain by 50%. This change also resets default
+      evolution point gain to its intended value, 0.5 per second instead of 1 per
+      second. A hive core will bring it up to 0.75 per second.
+    type: Add
+  - message: Fixed some xenos requiring more evolution points than intended to evolve.
+      T1 > T2 now requires 200, down from 300. T2 > T3 now requires 500, down from
+      540.
+    type: Fix
+  - message: Pressing Tab will now switch to focusing the next input on the mortar
+      window.
+    type: Tweak
+  - message: Fixed the start of a hijack not resetting the Queen's grow ovipositor
+      cooldown.
+    type: Fix
+  - message: Fixed Req not being able to buy 20 plastic for 2000 dollars, primarily
+      used in the medilathe.
+    type: Fix
+  - message: Fixed the pump shotgun not being able to fit an extended barrel.
+    type: Fix
+  - message: Fixed putting a helmet in your pocket as a squad role giving you a colored
+      mohawk.
+    type: Fix
+  - message: Fixed equipping armor by pressing F having no delay.
+    type: Fix
+  - message: Fixed epinephrine healing 5 Brute/Burn/Toxin instead of 20.
+    type: Fix
+  id: 761
+  time: '2024-09-30T22:40:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4200
 Name: RMC14
 Order: -1
