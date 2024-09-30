@@ -109,7 +109,7 @@
 # Just for the sprite + desc + time
 - type: entity
   parent: XenoAcidSprayStrong
-  id: XenoAcidSprayAcidWarden
+  id: XenoAcidSprayWarden
   name: splatter
   description: It burns! It burns like hygiene!
   components:
