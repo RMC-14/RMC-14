@@ -26,6 +26,7 @@ using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Content.Shared.Throwing;
+using Content.Shared.Interaction.Events;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -33,7 +34,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 using static Content.Shared.Physics.CollisionGroup;
 using Robust.Shared.Map;
 using Robust.Shared.Audio.Systems;
@@ -190,14 +190,14 @@ public sealed class XenoEggSystem : EntitySystem
         args.Cancelled = true;
     }
 
-	private void OnXenoEggUseInHand(Entity<XenoEggComponent> egg, ref UseInHandEvent args)
-	{
-		var ev = new XenoEggUseInHandEvent(_entities.GetNetEntity(egg.Owner));
-		RaiseLocalEvent(args.User, ev);
-		args.Handled = ev.Handled;
-	}
+    private void OnXenoEggUseInHand(Entity<XenoEggComponent> egg, ref UseInHandEvent args)
+    {
+        var ev = new XenoEggUseInHandEvent(_entities.GetNetEntity(egg.Owner));
+        RaiseLocalEvent(args.User, ev);
+        args.Handled = ev.Handled;
+    }
 
-	private void OnXenoEggAfterInteract(Entity<XenoEggComponent> egg, ref AfterInteractEvent args)
+    private void OnXenoEggAfterInteract(Entity<XenoEggComponent> egg, ref AfterInteractEvent args)
     {
         if (args.Handled)
             return;

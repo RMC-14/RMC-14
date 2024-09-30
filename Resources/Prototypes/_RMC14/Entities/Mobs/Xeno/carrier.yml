@@ -74,9 +74,8 @@
       - XenoParasite
       - XenoEgg
   - type: XenoParasiteThrower
-  - type: Hands
-    throwRange: 4
   - type: XenoEggRetriever
+  - type: XenoNurturing
   - type: RMCSize
     size: Big
 #  - type: RMCXenoDamageVisuals # TODO RMC14

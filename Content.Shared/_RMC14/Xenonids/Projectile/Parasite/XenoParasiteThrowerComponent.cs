@@ -1,10 +1,5 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 
@@ -16,14 +11,11 @@ public sealed partial class XenoParasiteThrowerComponent : Component
 {
     public EntProtoId ParasitePrototype = "CMXenoParasite";
 
-    [AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public int ReservedParasites = 0;
 
     [DataField]
-    public double ParasiteGhostRoleProbability = 0.25;
-
-    [DataField]
-    public double ParasiteThrowDistance = 4.0;
+    public float ParasiteThrowDistance = 4.0f;
 
     [DataField, AutoNetworkedField]
     public int MaxParasites = 16;
@@ -33,4 +25,7 @@ public sealed partial class XenoParasiteThrowerComponent : Component
 
     [DataField]
     public TimeSpan ThrownParasiteStunDuration = TimeSpan.FromSeconds(5);
+
+    [DataField]
+    public TimeSpan ThrownParasiteCooldown = TimeSpan.FromSeconds(2);
 }

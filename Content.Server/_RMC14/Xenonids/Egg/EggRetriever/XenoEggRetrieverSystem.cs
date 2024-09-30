@@ -1,16 +1,16 @@
 using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Egg.EggRetriever;
 using Content.Shared._RMC14.Xenonids.Evolution;
-using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
-using Robust.Shared.Containers;
 
 namespace Content.Server._RMC14.Xenonids.Egg.EggRetriever;
 
-public sealed partial class XenoEggRetrieverSystem : EntitySystem
+public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -19,7 +19,7 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
 
     public override void Initialize()
@@ -35,30 +35,28 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
 
     private void OnXenoRetrieveEgg(Entity<XenoEggRetrieverComponent> eggRetriever, ref XenoRetrieveEggActionEvent args)
     {
-        var (ent, comp) = eggRetriever;
-
-        var target = args.Target;
+       var target = args.Target;
         args.Handled = true;
 
         // If none of the entities on the selected, in-range tile are eggs, try to pull an egg out of inventory
-        if (_interact.InRangeUnobstructed(ent, target))
+        if (_interact.InRangeUnobstructed(eggRetriever, target))
         {
             var clickedEntities = _lookup.GetEntitiesIntersecting(target);
             var tileHasEggs = false;
 
             foreach (var possibleEgg in clickedEntities)
             {
-                if (!HasComp<XenoEggComponent>(possibleEgg) ||
-                    Transform(possibleEgg).Anchored)
+                if (!TryComp<XenoEggComponent>(possibleEgg, out var egg) ||
+                    egg.State != XenoEggState.Item)
                 {
                     continue;
                 }
 
                 tileHasEggs = true;
 
-                if (comp.CurEggs >= comp.MaxEggs)
+                if (eggRetriever.Comp.CurEggs >= eggRetriever.Comp.MaxEggs)
                 {
-                    _popup.PopupEntity(Loc.GetString("cm-xeno-retrieve-egg-too-many-eggs"), ent, ent);
+                    _popup.PopupEntity(Loc.GetString("cm-xeno-retrieve-egg-too-many-eggs"), eggRetriever, eggRetriever);
                     return;
                 }
 
@@ -67,17 +65,15 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
 
             if (tileHasEggs)
             {
-                var stashMsg = Loc.GetString("cm-xeno-retrieve-egg-stash-egg", ("cur_eggs", comp.CurEggs), ("max_eggs", comp.MaxEggs));
-                _popup.PopupEntity(stashMsg, ent, ent);
-
-                _meta.SetEntityDescription(args.Action, Loc.GetString("cm-xeno-retrieve-egg-description", ("cur_eggs", comp.CurEggs), ("max_eggs", comp.MaxEggs)));
+                var stashMsg = Loc.GetString("cm-xeno-retrieve-egg-stash-egg", ("cur_eggs", eggRetriever.Comp.CurEggs), ("max_eggs", eggRetriever.Comp.MaxEggs));
+                _popup.PopupEntity(stashMsg, eggRetriever, eggRetriever);
                 return;
             }
         }
 
-        if (comp.CurEggs == 0)
+        if (eggRetriever.Comp.CurEggs == 0)
         {
-            _popup.PopupEntity(Loc.GetString("cm-xeno-retrieve-egg-no-eggs"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cm-xeno-retrieve-egg-no-eggs"), eggRetriever, eggRetriever);
             return;
         }
 
@@ -85,51 +81,32 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
         {
             return;
         }
-        _hands.TryPickupAnyHand(ent, newEgg);
+        if (TryComp<XenoComponent>(eggRetriever, out var xenComp))
+            _xeno.SetHive(newEgg, xenComp.Hive);
 
-        var unstashMsg = Loc.GetString("cm-xeno-retrieve-egg-unstash-egg", ("cur_eggs", comp.CurEggs), ("max_eggs", comp.MaxEggs));
-        _popup.PopupEntity(unstashMsg, ent, ent);
+        _hands.TryPickupAnyHand(eggRetriever, newEgg);
 
-        _meta.SetEntityDescription(args.Action, Loc.GetString("cm-xeno-retrieve-egg-description", ("cur_eggs", comp.CurEggs), ("max_eggs", comp.MaxEggs)));
+        var unstashMsg = Loc.GetString("cm-xeno-retrieve-egg-unstash-egg", ("cur_eggs", eggRetriever.Comp.CurEggs), ("max_eggs", eggRetriever.Comp.MaxEggs));
+        _popup.PopupEntity(unstashMsg, eggRetriever, eggRetriever);;
     }
 
     private void OnXenoRetrieverUseInHand(Entity<XenoEggRetrieverComponent> eggRetriever, ref XenoEggUseInHandEvent args)
     {
-        var (ent, comp) = eggRetriever;
         if (args.Handled)
         {
             return;
         }
 
-        if (comp.CurEggs >= comp.MaxEggs)
+        if (eggRetriever.Comp.CurEggs >= eggRetriever.Comp.MaxEggs)
         {
-            _popup.PopupEntity(Loc.GetString("cm-xeno-retrieve-egg-too-many-eggs"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cm-xeno-retrieve-egg-too-many-eggs"), eggRetriever, eggRetriever);
             return;
         }
 
-
         AddEgg(_entities.GetEntity(args.UsedEgg), eggRetriever);
 
-        var msg = Loc.GetString("cm-xeno-retrieve-egg-stash-egg", ("cur_eggs", comp.CurEggs), ("max_eggs", comp.MaxEggs));
-        _popup.PopupEntity(msg, ent, ent);
-
-        if (TryComp(ent, out ActionsContainerComponent? actContainer))
-        {
-            var actions = actContainer.Container.ContainedEntities;
-
-            foreach (var action in actions)
-            {
-                if (!TryComp(action, out WorldTargetActionComponent? worldActComp))
-                {
-                    continue;
-                }
-                if (worldActComp.Event is XenoRetrieveEggActionEvent)
-                {
-                    _meta.SetEntityDescription(action, Loc.GetString("cm-xeno-retrieve-egg-description", ("cur_eggs", comp.CurEggs), ("max_eggs", comp.MaxEggs)));
-                    break;
-                }
-            }
-        }
+        var msg = Loc.GetString("cm-xeno-retrieve-egg-stash-egg", ("cur_eggs", eggRetriever.Comp.CurEggs), ("max_eggs", eggRetriever.Comp.MaxEggs));
+        _popup.PopupEntity(msg, eggRetriever, eggRetriever);
 
         args.Handled = true;
     }
@@ -153,11 +130,17 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
 
     private bool DropAllStoredEggs(Entity<XenoEggRetrieverComponent> xeno)
     {
+        XenoComponent? xenComp = null;
+        TryComp(xeno, out xenComp);
         for (var i = 0; i < xeno.Comp.CurEggs; ++i)
         {
             var newEgg = Spawn(xeno.Comp.EggPrototype);
+            if (xenComp != null)
+                _xeno.SetHive(newEgg, xenComp.Hive);
             _transform.DropNextTo(newEgg, xeno.Owner);
         }
+        xeno.Comp.CurEggs = 0; // Just in case
+        Dirty(xeno);
         return true;
     }
 
@@ -169,6 +152,8 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
     {
         xeno.Comp.CurEggs++;
 
+        Dirty(xeno);
+
         QueueDel(egg);
     }
 
@@ -179,6 +164,8 @@ public sealed partial class XenoEggRetrieverSystem : EntitySystem
     private EntityUid? RemoveEgg(Entity<XenoEggRetrieverComponent> xeno)
     {
         xeno.Comp.CurEggs--;
+
+        Dirty(xeno);
 
         return Spawn(xeno.Comp.EggPrototype);
     }

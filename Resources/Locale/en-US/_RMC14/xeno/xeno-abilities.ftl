@@ -122,17 +122,17 @@ cm-xeno-ovipositor-detach = We start detaching from the ovipositor.
 
 # Retrieve Egg
 cm-xeno-retrieve-egg-no-eggs = We don't have any eggs stored!
-cm-xeno-retrieve-egg-too-many-eggs = We don't have space to store any more eggs!
-cm-xeno-retrieve-egg-stash-egg = We put the egg into our internal storage. Now Holding: {$cur_eggs}/{$max_eggs} eggs
-cm-xeno-retrieve-egg-unstash-egg = We grab an egg from our internal storage. Now Holding: {$cur_eggs}/{$max_eggs} eggs
-cm-xeno-retrieve-egg-description = Retrieves an egg from your storage. Now Holding: {$cur_eggs}/{$max_eggs} eggs
+cm-xeno-retrieve-egg-too-many-eggs = We can't carry more eggs!
+cm-xeno-retrieve-egg-stash-egg = We store the egg for safekeeping. Now holding: {$cur_eggs}/{$max_eggs}.
+cm-xeno-retrieve-egg-unstash-egg = We grab an egg from our storage. Now holding: {$cur_eggs}/{$max_eggs}.
+rmc-xeno-retrieve-egg-current = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} holding: {$cur_eggs}/{$max_eggs} eggs.
 
 # Throw Parasite
 cm-xeno-throw-parasite-no-parasites = We don't have any parasites stored!
-cm-xeno-throw-parasite-too-many-parasites = We don't have space to store any more parasites!
-cm-xeno-throw-parasite-stash-parasite = We put the parasite into our storage. Now Sheltering: {$cur_parasites}/{$max_parasites} parasites
-cm-xeno-throw-parasite-unstash-parasite = We grab a parasite from our storage. Now Sheltering: {$cur_parasites}/{$max_parasites} parasites
-cm-xeno-throw-parasite-description = Throw Parasite. Now Sheltering: {$cur_parasites}/{$max_parasites} parasites
+cm-xeno-throw-parasite-too-many-parasites = We can't carry more parasites!
+cm-xeno-throw-parasite-stash-parasite = We store the parasite for safekeeping. Now sheltering: {$cur_parasites}/{$max_parasites}.
+cm-xeno-throw-parasite-unstash-parasite = We grab a parasite from our storage. Now sheltering: {$cur_parasites}/{$max_parasites}.
+rmc-xeno-throw-parasite-current = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} sheltering: {$cur_paras}/{$max_paras} parasites.
 
 # Defensive Shield
 rmc-xeno-defensive-shield-end = We feel our enhanced shield end!

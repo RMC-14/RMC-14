@@ -4,6 +4,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Actions;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared._RMC14.Xenonids.Pheromones;
+using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -23,8 +24,9 @@ public abstract partial class SharedXenoParasiteSystem
     {
         SubscribeLocalEvent<XenoParasiteComponent, PlayerAttachedEvent>(OnPlayerAdded);
         SubscribeLocalEvent<XenoParasiteComponent, PlayerDetachedEvent>(OnPlayerRemoved);
+        SubscribeLocalEvent<ParasiteAIDelayAddComponent, ComponentStartup>(OnAIDelayAdded);
 
-        SubscribeLocalEvent<ParasiteAIComponent, ComponentStartup>(OnAIAdded);
+        SubscribeLocalEvent<ParasiteAIComponent, MapInitEvent>(OnAIAdded);
         SubscribeLocalEvent<ParasiteAIComponent, ExaminedEvent>(OnAIExamined);
         SubscribeLocalEvent<ParasiteAIComponent, DroppedEvent>(OnAIDropPickup);
         SubscribeLocalEvent<ParasiteAIComponent, EntGotInsertedIntoContainerMessage>(OnAIDropPickup);
@@ -37,17 +39,22 @@ public abstract partial class SharedXenoParasiteSystem
     private void OnPlayerAdded(Entity<XenoParasiteComponent> para, ref PlayerAttachedEvent args)
     {
         RemCompDeferred<ParasiteAIComponent>(para);
+        RemCompDeferred<ParasiteAIDelayAddComponent>(para);
     }
 
     private void OnPlayerRemoved(Entity<XenoParasiteComponent> para, ref PlayerDetachedEvent args)
     {
-        var comp = EnsureComp<ParasiteAIComponent>(para);
-        // Just in case
-        _stun.TryStun(para, TimeSpan.FromSeconds(5), true);
-        GoIdle((para, comp));
+        if(!_mobState.IsDead(para))
+            EnsureComp<ParasiteAIDelayAddComponent>(para);
     }
 
-    private void OnAIAdded(Entity<ParasiteAIComponent> para, ref ComponentStartup args)
+    private void OnAIDelayAdded(Entity<ParasiteAIDelayAddComponent> para, ref ComponentStartup args)
+    {
+        para.Comp.TimeToAI = _timing.CurTime + para.Comp.DelayTime;
+    }
+
+
+    private void OnAIAdded(Entity<ParasiteAIComponent> para, ref MapInitEvent args)
     {
         HandleDeathTimer(para);
         _rmcNpc.WakeNPC(para);
@@ -81,7 +88,7 @@ public abstract partial class SharedXenoParasiteSystem
 
     public void HandleDeathTimer(Entity<ParasiteAIComponent> para)
     {
-        if (_container.TryGetContainingContainer((para, null, null), out var carry) && HasComp<XenoComponent>(carry.Owner)) // TODO Check for parasite thrower
+        if (_container.TryGetContainingContainer((para, null, null), out var carry) && HasComp<XenoNurturingComponent>(carry.Owner))
         {
             para.Comp.DeathTime = null;
             if (para.Comp.Mode == ParasiteMode.Dying)
@@ -173,6 +180,9 @@ public abstract partial class SharedXenoParasiteSystem
 
     private void CheckCannibalize(Entity<ParasiteAIComponent> para)
     {
+        if (_cmHands.TryGetHolder(para, out var _))
+            return;
+
         int totalParasites = 0;
         foreach (var parasite in _entityLookup.GetEntitiesInRange<ParasiteAIComponent>(_transform.GetMapCoordinates(para), para.Comp.RangeCheck))
         {
@@ -180,8 +190,8 @@ public abstract partial class SharedXenoParasiteSystem
                 continue;
 
             // Ignore those that are dead, not active, or already are being deleted
-            if (TerminatingOrDeleted(parasite) || _mobState.IsDead(parasite) ||
-                parasite.Comp.Mode != ParasiteMode.Active || _container.IsEntityInContainer(parasite))
+            if (TerminatingOrDeleted(parasite) || EntityManager.IsQueuedForDeletion(parasite) || _mobState.IsDead(parasite) ||
+                parasite.Comp.Mode != ParasiteMode.Active || _cmHands.TryGetHolder(parasite, out var _))
                 continue;
 
             totalParasites++;

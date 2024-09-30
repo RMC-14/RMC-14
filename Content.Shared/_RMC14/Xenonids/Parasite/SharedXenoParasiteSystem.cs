@@ -457,6 +457,16 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 UpdateAI((uid, ai), time);
         }
 
+        var aiDelayQuery = EntityQueryEnumerator<ParasiteAIDelayAddComponent>();
+        while (aiDelayQuery.MoveNext(out var uid, out var aid))
+        {
+            if (time > aid.TimeToAI)
+            {
+                EnsureComp<ParasiteAIComponent>(uid);
+                RemCompDeferred<ParasiteAIDelayAddComponent>(uid);
+            }
+        }
+
         var query = EntityQueryEnumerator<VictimInfectedComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var infected, out var xform))
         {

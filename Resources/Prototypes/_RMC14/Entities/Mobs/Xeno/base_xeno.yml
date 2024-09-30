@@ -162,6 +162,8 @@
         type: XenoWordQueenBui
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui
+      enum.XenoReserveParasiteChangeUI.Key:
+        type: ReserveParasitesBoundUserInterface
   - type: TypingIndicator
     proto: alien
   - type: MovedByPressure

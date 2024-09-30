@@ -15,7 +15,8 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly AreaSystem _areas = default!;
-    public override void Initialize()
+	[Dependency] private readonly SharedTransformSystem _transform = default!;
+	public override void Initialize()
     {
         SubscribeLocalEvent<XenoAnnounceDeathComponent, MobStateChangedEvent>(OnAnnounceDeathMobStateChanged);
 
@@ -29,24 +30,26 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
         if (args.NewMobState != MobState.Dead)
             return;
 
+        var locationName = "Unknown";
+        if (_areas.TryGetArea(_transform.GetMoverCoordinates(ent), out var areaProto, out _))
+            locationName = areaProto.Name;
+
         if (HasComp<ParasiteSpentComponent>(ent))
-            AnnounceSameHive(ent.Owner, Loc.GetString("rmc-xeno-parasite-announce-infect", ("xeno", ent.Owner)), color: ent.Comp.Color);
+            AnnounceSameHive(ent.Owner, Loc.GetString("rmc-xeno-parasite-announce-infect", ("xeno", ent.Owner), ("location", locationName)), color: ent.Comp.Color);
         else
-            AnnounceSameHive(ent.Owner, Loc.GetString(ent.Comp.Message, ("xeno", ent.Owner)), color: ent.Comp.Color);
+            AnnounceSameHive(ent.Owner, Loc.GetString(ent.Comp.Message, ("xeno", ent.Owner), ("location", locationName)), color: ent.Comp.Color);
     }
 
     private void OnResinHoleDestruction(Entity<XenoResinHoleComponent> ent, ref DestructionEventArgs args)
     {
         if (ent.Comp.Hive is null)
-        {
             return;
-        }
 
-        if (!_areas.TryGetArea(ent.Owner.ToCoordinates(), out var areaProto, out _))
-        {
-            return;
-        }
-        var locationName = areaProto.Name;
+        var locationName = "Unknown";
+
+        if (_areas.TryGetArea(_transform.GetMoverCoordinates(ent), out var areaProto, out _))
+            locationName = areaProto.Name;
+
         if (TryComp(ent.Owner, out DamageableComponent? damageComp))
         {
             var totalDamage = damageComp.TotalDamage;
@@ -73,16 +76,14 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
     private void OnResinHoleActivation(Entity<XenoResinHoleComponent> ent, ref XenoResinHoleActivationEvent args)
     {
         if (ent.Comp.Hive is null)
-        {
             return;
-        }
 
-        if (!_areas.TryGetArea(ent.Owner.ToCoordinates(), out var areaProto, out _))
-        {
-            return;
-        }
+        var locationName = "Unknown";
 
-        var msg = Loc.GetString(args.LocMsg, ("location", areaProto.Name));
+        if (_areas.TryGetArea(_transform.GetMoverCoordinates(ent), out var areaProto, out _))
+            locationName = areaProto.Name;
+
+        var msg = Loc.GetString(args.LocMsg, ("location", locationName));
         AnnounceToHive(ent.Owner, ent.Comp.Hive.Value, msg);
     }
 

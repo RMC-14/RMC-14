@@ -95,4 +95,8 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: drone
+  - type: AcidTrap
+    trapLevel: 1
+    cost: 70
+    spray: XenoAcidSprayTrapWeak
 

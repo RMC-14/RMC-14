@@ -7,7 +7,7 @@ rmc-xeno-failed-parasite-dead = We can't infect with a dead child!
 rmc-xeno-cant-throw = We can't throw {THE($target)}!
 
 rmc-xeno-parasite-dead = {CAPITALIZE(SUBJECT($parasite))} {CONJUGATE-BE($parasite)} not moving.
-rmc-xeno-parasite-announce-infect = We sense that {$xeno} has infected a host!
+rmc-xeno-parasite-announce-infect = We sense that {$xeno} has infected a host at {$location}!
 
 rmc-xeno-parasite-player-pickup = {CAPITALIZE($parasite)} can handle {REFLEXIVE($parasite)}!
 rmc-xeno-parasite-nonplayer-pull = Pulling {$parasite} might hurt {OBJECT($parasite)}!

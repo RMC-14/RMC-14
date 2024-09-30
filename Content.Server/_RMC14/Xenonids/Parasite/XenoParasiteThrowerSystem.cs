@@ -1,25 +1,18 @@
-using Content.Server.Ghost.Roles;
-using Content.Server.Ghost.Roles.Components;
 using Content.Server.Hands.Systems;
-using Content.Server.Popups;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
-using Content.Shared.Hands.Components;
-using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
-using Robust.Shared.Random;
-using Robust.Shared.Utility;
 
 
-namespace Content.Server._RMC14.Xenonids.Projectile.Parasite;
+namespace Content.Server._RMC14.Xenonids.Parasite;
 
 public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
 {
@@ -33,35 +26,32 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly MetaDataSystem _meta = default!;
+    [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoThrowParasiteActionEvent>(OnToggleParasiteThrow);
-        SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoReserveParasiteActionEvent>(OnSetReserve);
 
         SubscribeLocalEvent<XenoParasiteThrowerComponent, UserActivateInWorldEvent>(OnXenoParasiteThrowerUseInHand);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoDevolveBuiMsg>(OnXenoDevolveDoAfter);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, MobStateChangedEvent>(OnDeathMobStateChanged);
-        SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoChangeParasiteReserveEvent>(OnChangeParasiteReserve);
     }
 
     private void OnToggleParasiteThrow(Entity<XenoParasiteThrowerComponent> xeno, ref XenoThrowParasiteActionEvent args)
     {
-        var (ent, comp) = xeno;
-
         var target = args.Target;
 
         args.Handled = true;
 
+        _action.SetUseDelay(args.Action, TimeSpan.Zero);
+
         // If none of the entities on the selected, in-range tile are parasites, try to pull out a
         // parasite OR try to throw a held parasite
-        if (_interact.InRangeUnobstructed(ent, target))
+        if (_interact.InRangeUnobstructed(xeno, target))
         {
             var clickedEntities = _lookup.GetEntitiesIntersecting(target);
             var tileHasParasites = false;
@@ -80,9 +70,9 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
 
                 tileHasParasites = true;
 
-                if (comp.CurParasites >= comp.MaxParasites)
+                if (xeno.Comp.CurParasites >= xeno.Comp.MaxParasites)
                 {
-                    _popup.PopupEntity(Loc.GetString("cm-xeno-throw-parasite-too-many-parasites"), ent, ent);
+                    _popup.PopupEntity(Loc.GetString("cm-xeno-throw-parasite-too-many-parasites"), xeno, xeno);
                     return;
                 }
 
@@ -91,102 +81,82 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
 
             if (tileHasParasites)
             {
-                var stashMsg = Loc.GetString("cm-xeno-throw-parasite-stash-parasite", ("cur_parasites", comp.CurParasites), ("max_parasites", comp.MaxParasites));
-                _popup.PopupEntity(stashMsg, ent, ent);
-
-                _meta.SetEntityDescription(args.Action, Loc.GetString("cm-xeno-throw-parasite-description", ("cur_parasites", comp.CurParasites), ("max_parasites", comp.MaxParasites)));
+                var stashMsg = Loc.GetString("cm-xeno-throw-parasite-stash-parasite", ("cur_parasites", xeno.Comp.CurParasites), ("max_parasites", xeno.Comp.MaxParasites));
+                _popup.PopupEntity(stashMsg, xeno, xeno);
                 return;
             }
         }
 
-        if (_hands.GetActiveItem(ent) is EntityUid heldEntity &&
-            HasComp<XenoParasiteComponent>(heldEntity) &&
-            !_mobState.IsDead(heldEntity))
+        if (_hands.GetActiveItem((xeno, null)) is EntityUid heldEntity &&
+            HasComp<XenoParasiteComponent>(heldEntity))
         {
-            _hands.ThrowHeldItem(xeno.Owner, target);
 
-            _stun.TryStun(heldEntity, comp.ThrownParasiteStunDuration, true);
+            _hands.TryDrop(xeno);
+            var coords = _transform.GetMoverCoordinates(xeno);
+            // If throw distance would be more than 4, fix it to be exactly 4
+            if (coords.TryDistance(EntityManager, target, out var dis) && dis > xeno.Comp.ParasiteThrowDistance)
+            {
+                var fixedTrajectory = (target.Position - coords.Position).Normalized() * xeno.Comp.ParasiteThrowDistance;
+                target = coords.WithPosition(coords.Position + fixedTrajectory);
+            }
+            _throw.TryThrow(heldEntity, target, user: xeno, compensateFriction: true);
+            // Not parity but should help the ability be more consistent/not look weird since para AI goes rest on idle. The stun dur + leap time makes it longer
+            // Then jump time by 2 secs
+            if (TryComp<ParasiteAIComponent>(heldEntity, out var ai) && !_mobState.IsDead(heldEntity))
+                _parasite.GoActive((heldEntity, ai));
+
+            _action.SetUseDelay(args.Action, xeno.Comp.ThrownParasiteCooldown);
+
             return;
         }
 
-        if (comp.CurParasites == 0)
+        if (xeno.Comp.CurParasites == 0)
         {
-            _popup.PopupEntity(Loc.GetString("cm-xeno-throw-parasite-no-parasites"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cm-xeno-throw-parasite-no-parasites"), xeno, xeno);
             return;
         }
+
+        if (!_hands.TryGetEmptyHand(xeno, out var _))
+            return;
 
         if (RemoveParasite(xeno) is not EntityUid newParasite)
-        {
             return;
-        }
-        _hands.TryPickupAnyHand(ent, newParasite);
 
-        var msg = Loc.GetString("cm-xeno-throw-parasite-unstash-parasite", ("cur_parasites", comp.CurParasites), ("max_parasites", comp.MaxParasites));
-        _popup.PopupEntity(msg, ent, ent);
+        if(TryComp<XenoComponent>(xeno, out var xenComp))
+           _xeno.SetHive(newParasite, xenComp.Hive);
 
-        _meta.SetEntityDescription(args.Action, Loc.GetString("cm-xeno-throw-parasite-description", ("cur_parasites", comp.CurParasites), ("max_parasites", comp.MaxParasites)));
-    }
+        _hands.TryPickupAnyHand(xeno, newParasite);
 
-    private void OnSetReserve(Entity<XenoParasiteThrowerComponent> xeno, ref XenoReserveParasiteActionEvent args)
-    {
-        if (args.Handled)
-        {
-            return;
-        }
-
-        _ui.OpenUi(args.Action, XenoReserveParasiteChangeUIKey.Key, xeno.Owner);
-
-        args.Handled = true;
+        var msg = Loc.GetString("cm-xeno-throw-parasite-unstash-parasite", ("cur_parasites", xeno.Comp.CurParasites), ("max_parasites", xeno.Comp.MaxParasites));
+        _popup.PopupEntity(msg, xeno, xeno);
     }
 
     private void OnXenoParasiteThrowerUseInHand(Entity<XenoParasiteThrowerComponent> xeno, ref UserActivateInWorldEvent args)
     {
-        var (ent, comp) = xeno;
         var target = args.Target;
 
         if (!HasComp<XenoParasiteComponent>(target))
-        {
             return;
-        }
 
         if (_mobState.IsDead(target))
         {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-dead-child"), xeno, xeno);
             return;
         }
 
         if (args.Handled)
-        {
             return;
-        }
 
-        if (comp.CurParasites >= comp.MaxParasites)
+        if (xeno.Comp.CurParasites >= xeno.Comp.MaxParasites)
         {
-            _popup.PopupEntity(Loc.GetString("cm-xeno-throw-parasite-too-many-parasites"), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cm-xeno-throw-parasite-too-many-parasites"), xeno, xeno);
             return;
         }
 
         AddParasite(target, xeno);
 
-        var msg = Loc.GetString("cm-xeno-throw-parasite-stash-parasite", ("cur_parasites", comp.CurParasites), ("max_parasites", comp.MaxParasites));
-        _popup.PopupEntity(msg, ent, ent);
-
-        if (TryComp(ent, out ActionsContainerComponent? actContainer))
-        {
-            var actions = actContainer.Container.ContainedEntities;
-
-            foreach (var action in actions)
-            {
-                if (!TryComp(action, out WorldTargetActionComponent? worldActComp))
-                {
-                    continue;
-                }
-                if (worldActComp.Event is XenoThrowParasiteActionEvent)
-                {
-                    _meta.SetEntityDescription(action, Loc.GetString("cm-xeno-throw-parasite-description", ("cur_parasites", comp.CurParasites), ("max_parasites", comp.MaxParasites)));
-                    break;
-                }
-            }
-        }
+        var msg = Loc.GetString("cm-xeno-throw-parasite-stash-parasite", ("cur_parasites", xeno.Comp.CurParasites), ("max_parasites", xeno.Comp.MaxParasites));
+        _popup.PopupEntity(msg, xeno, xeno);
 
         args.Handled = true;
     }
@@ -208,18 +178,22 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         DropAllStoredParasites(xeno);
     }
 
-    private void OnChangeParasiteReserve(Entity<XenoParasiteThrowerComponent> xeno, ref XenoChangeParasiteReserveEvent args)
-    {
-        xeno.Comp.ReservedParasites = args.NewReserve;
-    }
-
     private bool DropAllStoredParasites(Entity<XenoParasiteThrowerComponent> xeno)
     {
+        XenoComponent? xenComp = null;
+        TryComp(xeno, out xenComp);
+
         for (var i = 0; i < xeno.Comp.CurParasites; ++i)
         {
             var newParasite = Spawn(xeno.Comp.ParasitePrototype);
+            if(xenComp != null)
+                _xeno.SetHive(newParasite, xenComp.Hive);
             _transform.DropNextTo(newParasite, xeno.Owner);
         }
+
+        xeno.Comp.CurParasites = 0; // Just in case
+
+        Dirty(xeno);
         return true;
     }
 
@@ -231,6 +205,8 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
     {
         xeno.Comp.CurParasites++;
 
+        Dirty(xeno);
+
         QueueDel(parasite);
     }
 
@@ -241,6 +217,8 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
     private EntityUid? RemoveParasite(Entity<XenoParasiteThrowerComponent> xeno)
     {
         xeno.Comp.CurParasites--;
+
+        Dirty(xeno);
 
         return Spawn(xeno.Comp.ParasitePrototype);
     }
