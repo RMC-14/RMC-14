@@ -232,7 +232,7 @@ public abstract partial class SharedXenoParasiteSystem
 
         EnsureComp<ParasiteTiredOutComponent>(para);
 
-        // TODO RMC14 empty resin holes and eggmorpher
+        // TODO RMC14 eggmorpher
     }
 
     private void OnParasiteAIMapInit(Entity<ParasiteTiredOutComponent> dead, ref MapInitEvent args)
