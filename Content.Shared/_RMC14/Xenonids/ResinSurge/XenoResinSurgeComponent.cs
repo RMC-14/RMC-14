@@ -8,13 +8,6 @@ namespace Content.Shared._RMC14.Xenonids.ResinSurge;
 [Access(typeof(SharedXenoResinSurgeSystem))]
 public sealed partial class XenoResinSurgeComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public FixedPoint2 PlasmaCost = 75;
-
-    // Cooldown on failed action (in relation to cooldown on successful action)
-    [DataField, AutoNetworkedField]
-    public FixedPoint2 FailedCooldownMultiplier = 0.5f;
-
     // Amount of time to deduct from fruit growth timer
     [DataField, AutoNetworkedField]
     public TimeSpan FruitGrowth = TimeSpan.FromSeconds(5);
