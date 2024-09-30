@@ -5,15 +5,24 @@
 # /datum/supply_packs/pyrotec
 # /datum/supply_packs/phoron
 - type: entity
-  id: RMCCrateResearchPhoron
   parent: RMCCrateSecurePhoron
+  id: RMCCrateResearchPhoron
   name: phoron crate (x30)
   components:
   - type: StorageFill
     contents:
     - id: CMSheetPhoron30
 
-# /datum/supply_packs/plastic
+- type: entity
+  parent: RMCCrateSecurePhoron
+  id: RMCCrateResearchPlastic
+  name: plastic crate (x20)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSheetPlastic10
+    - id: RMCSheetPlastic10
+
 # /datum/supply_packs/precious_metals
 # /datum/supply_packs/exp_production
 # /datum/supply_packs/xeno_tags
