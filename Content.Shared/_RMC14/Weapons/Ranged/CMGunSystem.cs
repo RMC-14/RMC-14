@@ -9,6 +9,7 @@ using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
@@ -224,6 +225,9 @@ public sealed class CMGunSystem : EntitySystem
     private void OnGunUserWhitelistAttemptShoot(Entity<GunUserWhitelistComponent> ent, ref AttemptShootEvent args)
     {
         if (args.Cancelled)
+            return;
+
+        if (HasComp<BypassInteractionChecksComponent>(args.User))
             return;
 
         if (_whitelist.IsValid(ent.Comp.Whitelist, args.User))

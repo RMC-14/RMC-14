@@ -29,7 +29,6 @@
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
-    resetOnHandSelected: true
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -153,7 +152,7 @@
       rmc-aslot-rail: -0.025, 0.125
       rmc-aslot-stock: -0.375, -0.029
       rmc-aslot-underbarrel: 0.25, -0.31
-
+      
 - type: entity
   parent: [ RMCBaseBreechloader, RMCBaseAttachableHolder ]
   name: M357 Rival
