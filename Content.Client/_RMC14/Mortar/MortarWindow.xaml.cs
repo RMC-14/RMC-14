@@ -4,7 +4,6 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Input;
-using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Mortar;
 
@@ -15,8 +14,6 @@ public sealed partial class MortarWindow : DefaultWindow
     public readonly FloatSpinBox TargetY;
     public readonly FloatSpinBox DialX;
     public readonly FloatSpinBox DialY;
-    private LineEdit? _focus;
-    private int _delayed;
 
     public MortarWindow()
     {
@@ -58,12 +55,6 @@ public sealed partial class MortarWindow : DefaultWindow
                 if (args.Function == EngineKeyFunctions.GuiTabNavigatePrev)
                     fromEdit.GrabKeyboardFocus();
             };
-
-            fromEdit.OnFocusEnter += _ =>
-            {
-                _focus = fromEdit;
-                _delayed = 0;
-            };
         }
 
         TargetX = CreateSpinBox(TargetXContainer);
@@ -75,24 +66,5 @@ public sealed partial class MortarWindow : DefaultWindow
         SpinBoxTab(TargetY, DialX);
         SpinBoxTab(DialX, DialY);
         SpinBoxTab(DialY, TargetX);
-    }
-
-    protected override void FrameUpdate(FrameEventArgs args)
-    {
-        base.FrameUpdate(args);
-
-        if (_focus == null)
-            return;
-
-        if (_delayed < 6)
-        {
-            _delayed++;
-            return;
-        }
-
-        _focus.CursorPosition = _focus.Text.Length;
-        _focus.SelectionStart = 0;
-        _focus = null;
-        _delayed = 0;
     }
 }
