@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed xenonids being able to devolve if damaged. Xenonids now must be
-      on full health before devolving.
-    type: Fix
-  id: 260
-  time: '2024-07-04T04:44:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2805
-- author: DrSmugleaf
-  changes:
   - message: Added 5 empty blood packs to the MM blood dispenser.
     type: Add
   - message: Fixed the Hospital Corpsman not having medical access.
@@ -4524,5 +4516,28 @@
   id: 759
   time: '2024-09-29T23:51:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4188
+- author: DrSmugleaf
+  changes:
+  - message: Fixed mortars being hit by bullets not targeted directly at them, and
+      being damaged by marine melee.
+    type: Fix
+  - message: Removed shotgun fire delay on wield now that fire groups are in. Akimbo
+      shotguns still won't work, but wielding your shotgun will no longer put it on
+      a very long cooldown anymore.
+    type: Fix
+  - message: Fixed the M5-ATL (Demolitionist weapons spec rocket launcher) leaving
+      behind fake projectiles.
+    type: Fix
+  - message: Fixed placing eggs and returning parasites to them having no delay. Both
+      now have a 4 second delay.
+    type: Fix
+  - message: Fixed some shutters and podlocks not being acidable by xenos.
+    type: Fix
+  - message: Removed a lot of turrets from the landing zones of all four planet maps.
+      The poison gas remains, with some turrets still within it.
+    type: Tweak
+  id: 760
+  time: '2024-09-30T03:49:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4195
 Name: RMC14
 Order: -1
