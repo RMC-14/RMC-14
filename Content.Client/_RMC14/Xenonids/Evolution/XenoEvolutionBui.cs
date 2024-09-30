@@ -124,7 +124,8 @@ public sealed class XenoEvolutionBui : BoundUserInterface
         _window.Separator.Visible = _window.EvolutionsContainer.ChildCount > 0 && _window.StrainsContainer.ChildCount > 0;
 
         var lackingOvipositor = State is XenoEvolveBuiState { LackingOvipositor: true };
-        _window.PointsLabel.Text = $"Evolution points: {xeno.Points} / {xeno.Max}";
+        var points = xeno.Points;
+        _window.PointsLabel.Text = $"Evolution points: {(int) Math.Floor(points.Double())} / {xeno.Max}";
         if (lackingOvipositor)
         {
             // TODO RMC14 for some reason this doesn't properly wrap text

@@ -633,9 +633,16 @@ public sealed class XenoEvolutionSystem : EntitySystem
             }
         }
 
+        var evoBonus = FixedPoint2.Zero;
+        var bonuses = EntityQueryEnumerator<EvolutionBonusComponent>();
+        while (bonuses.MoveNext(out var comp))
+        {
+            evoBonus += comp.Amount;
+        }
+
         FixedPoint2? evoOverride = null;
         var overrides = EntityQueryEnumerator<EvolutionOverrideComponent>();
-        while (overrides.MoveNext(out var uid, out var comp))
+        while (overrides.MoveNext(out var comp))
         {
             evoOverride = comp.Amount;
         }
@@ -662,7 +669,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 continue;
             }
 
-            var gain = evoOverride ?? comp.PointsPerSecond;
+            var gain = evoOverride ?? comp.PointsPerSecond + evoBonus;
             if (comp.Points < comp.Max || roundDuration < _evolutionAccumulatePointsBefore)
             {
                 if (needsOvipositor && comp.RequiresGranter && !hasGranter)
