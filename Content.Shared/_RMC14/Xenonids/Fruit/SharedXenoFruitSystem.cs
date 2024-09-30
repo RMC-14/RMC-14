@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Fruit.Components;
 using Content.Shared._RMC14.Xenonids.Fruit.Effects;
 using Content.Shared._RMC14.Xenonids.Fruit.Events;
+using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Xenonids.Weeds;
@@ -484,6 +485,9 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         _transform.Unanchor(fruit, xform);
         SetFruitState(fruit, XenoFruitState.Item);
         _hands.TryPickup(args.User, fruit);
+
+        if (HasComp<XenoPheromonesObjectComponent>(fruit))
+            RemCompDeferred<XenoPheromonesObjectComponent>(fruit);
     }
 
     #endregion

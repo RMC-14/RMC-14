@@ -144,8 +144,9 @@
     duration: 60
     reductionMax: 0.25
     reductionPerSlash: 0.05
-  - type: XenoPheromones  # TODO: Add component to actually make this work
+  - type: XenoPheromones
     pheromonesMultiplier: 1
+  - type: XenoPheromonesObject
 
 - type: entity
   parent: XenoFruitBase

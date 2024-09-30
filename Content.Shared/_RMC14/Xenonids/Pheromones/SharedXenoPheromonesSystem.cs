@@ -69,6 +69,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
         SubscribeLocalEvent<XenoActivePheromonesComponent, MobStateChangedEvent>(OnActiveMobStateChanged);
 
+        SubscribeLocalEvent<XenoPheromonesObjectComponent, ComponentStartup>(OnPheromonesObjectStartup);
+        SubscribeLocalEvent<XenoPheromonesObjectComponent, ComponentShutdown>(OnPheromonesObjectShutdown);
+
         Subs.BuiEvents<XenoPheromonesComponent>(XenoPheromonesUI.Key, subs =>
         {
             subs.Event<XenoPheromonesChosenBuiMsg>(OnXenoPheromonesChosenBui);
@@ -202,6 +205,29 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         }
     }
 
+    private void OnPheromonesObjectStartup(Entity<XenoPheromonesObjectComponent> ent, ref ComponentStartup args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp(ent, out XenoPheromonesComponent? comp))
+            return;
+
+        var active = EnsureComp<XenoActivePheromonesComponent>(ent);
+        active.Pheromones = ent.Comp.Pheromones;
+        Dirty(ent, active);
+
+        _entityLookup.GetEntitiesInRange(ent.Owner.ToCoordinates(), comp.PheromonesRange, active.Receivers);
+    }
+
+    private void OnPheromonesObjectShutdown(Entity<XenoPheromonesObjectComponent> ent, ref ComponentShutdown args)
+    {
+        if (!TryComp(ent, out XenoPheromonesComponent? comp))
+            return;
+
+        DeactivatePheromones((ent, comp));
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -259,7 +285,8 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
             pheromones.NextPheromonesPlasmaUse = _timing.CurTime + _pheromonePlasmaUseDelay;
             Dirty(uid, pheromones);
 
-            if (!_xenoPlasma.TryRemovePlasma(uid, pheromones.PheromonesPlasmaUpkeep))
+            if (!HasComp<XenoPheromonesObjectComponent>(uid) &&
+                !_xenoPlasma.TryRemovePlasma(uid, pheromones.PheromonesPlasmaUpkeep))
             {
                 _pheromonesJob.Pheromones.RemoveAt(_pheromonesJob.Pheromones.Count - 1);
                 RemCompDeferred<XenoActivePheromonesComponent>(uid);
