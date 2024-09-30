@@ -19,7 +19,7 @@ public sealed partial class HiveComponent : Component
     };
 
     [DataField, AutoNetworkedField]
-    public Dictionary<EntProtoId, int> FreeSlots = new() {["CMXenoHivelord"] = 1};
+    public Dictionary<EntProtoId, int> FreeSlots = new() {["CMXenoHivelord"] = 1, ["CMXenoCarrier"] = 1};
 
     [DataField, AutoNetworkedField]
     public Dictionary<TimeSpan, List<EntProtoId>> Unlocks = new();

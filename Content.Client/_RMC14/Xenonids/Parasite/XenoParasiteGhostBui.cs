@@ -1,24 +1,24 @@
 ﻿using JetBrains.Annotations;
 using Content.Shared._RMC14.Xenonids.Egg;
 
-namespace Content.Client._RMC14.Xenonids.Egg;
+namespace Content.Client._RMC14.Xenonids.Parasite;
 
 [UsedImplicitly]
-public sealed class XenoEggGhostBui : BoundUserInterface
+public sealed class XenoParasiteGhostBui : BoundUserInterface
 {
     [ViewVariables]
-    private XenoEggGhostWindow? _window;
+    private XenoParasiteGhostWindow? _window;
 
-    public XenoEggGhostBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    public XenoParasiteGhostBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
     }
 
     protected override void Open()
     {
-        _window = new XenoEggGhostWindow();
+        _window = new XenoParasiteGhostWindow();
         _window.OnClose += Close;
         _window.DenyButton.OnPressed += _ => _window.Close();
-        _window.ConfirmButton.OnPressed += _ => SendPredictedMessage(new XenoEggGhostBuiMsg());
+        _window.ConfirmButton.OnPressed += _ => SendPredictedMessage(new XenoParasiteGhostBuiMsg());
 
         _window.OpenCentered();
     }

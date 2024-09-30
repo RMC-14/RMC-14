@@ -247,6 +247,7 @@
     useDelay: 8
     range: 6
   - type: ActionBlockIfResting
+  
 
 - type: entity
   parent: ActionXenoSprayAcid
@@ -262,11 +263,20 @@
 - type: entity
   parent: ActionXenoSprayAcid
   id: ActionXenoSprayAcidPraetorian
+  name: Spray Acid (80)
   description: Sprays acid along the ground in a line, covering tiles with it. [color=red]Will coat barricades in acid![/color]
   components:
   - type: WorldTargetAction
     range: 7
     useDelay: 10
+
+- type: entity
+  parent: ActionXenoSprayAcidPraetorian
+  id: ActionXenoSprayAcidWarden
+  name: Spray Acid (130)
+  components:
+  - type: WorldTargetAction
+    useDelay: 13
 
 - type: entity
   id: ActionXenoAcidBall

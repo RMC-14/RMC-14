@@ -4,8 +4,8 @@ using Content.Server.Mind;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Mind;
 using Robust.Shared.Player;
-using Content.Shared.Mind.Components;
-using Robust.Shared.Containers;
+using Content.Server.NPC.HTN;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Xenonids.Leap;
 
@@ -13,28 +13,11 @@ public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
 {
     [Dependency] private readonly GhostSystem _ghostSystem = default!;
     [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly EntityManager _entities = default!;
+    [Dependency] private readonly HTNSystem _htn = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
+    private static readonly ProtoId<HTNCompoundPrototype> ActiveTask = "RMCParasiteActiveCompound";
 
-        SubscribeLocalEvent<XenoParasiteComponent, MindAddedMessage>(OnTakeRole);
-    }
-
-    private void OnTakeRole(Entity<XenoParasiteComponent> parasite, ref MindAddedMessage args)
-    {
-        var transformComp = Transform(parasite.Owner);
-        var parentEnt = transformComp.ParentUid;
-
-        // Only carriers can have parasites in them, currently
-        if (_container.ContainsEntity(parentEnt, parasite.Owner))
-        {
-            _transform.DropNextTo(parasite.Owner, parentEnt);
-        }
-    }
+    private static readonly ProtoId<HTNCompoundPrototype> DyingTask = "RMCParasiteDyingCompound";
 
     protected override void ParasiteLeapHit(Entity<XenoParasiteComponent> parasite)
     {
@@ -52,5 +35,28 @@ public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
             mind = _mind.CreateMind(session.UserId);
 
         _ghostSystem.SpawnGhost((mind.Owner, mind.Comp), parasite);
+    }
+
+    protected override void ChangeHTN(EntityUid parasite, ParasiteMode mode)
+    {
+        if (!TryComp<HTNComponent>(parasite, out var hTN))
+            return;
+
+        ProtoId<HTNCompoundPrototype>? RootTask = null;
+
+        switch (mode)
+        {
+            case ParasiteMode.Active:
+                RootTask = ActiveTask;
+                break;
+            case ParasiteMode.Dying:
+                RootTask = DyingTask;
+                break;
+            default:
+                return;
+        }
+
+        hTN.RootTask = new HTNCompoundTask { Task = RootTask.Value };
+        _htn.Replan(hTN);
     }
 }

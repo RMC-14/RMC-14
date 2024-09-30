@@ -74,7 +74,7 @@
   id: ActionXenoResinHole
   parent: ActionXenoBase
   name: Plant Resin Hole
-  description: Places a resin hole on weeds
+  description: Places a resin hole on weeds. It can be filled with boiler gas, acid, or parasites.
   components:
   - type: InstantAction
     itemIconStyle: NoItem

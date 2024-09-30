@@ -81,9 +81,12 @@
     allowedEmotes: []
   - type: RMCSize
     size: Small
+  - type: ParasiteAI
+  - type: CanEscapeInventory
+    baseResistTime: 1
   - type: HTN
     rootTask:
-      task: RMCParasiteCompound
+      task: RMCParasiteActiveCompound
     blackboard:
       VisionRadius: !type:Single
         3.0

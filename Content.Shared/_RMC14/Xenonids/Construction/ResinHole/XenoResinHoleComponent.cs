@@ -1,10 +1,6 @@
+using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 
@@ -17,15 +13,23 @@ public sealed partial class XenoResinHoleComponent : Component
 
     public const string NeuroGasPrototype = "XenoBombardNeurotoxinProjectile";
 
-    /// <summary>
-    /// The entity to spawn on the trap when activated
-    /// </summary>
-    public EntProtoId? TrapPrototype = null;
+    public const string AcidPrototype = "XenoAcidSprayTrap";
 
-    /// <summary>
-    /// The hive that will get announcements when the hole is broken or activated
-    /// </summary>
-    public EntityUid? Hive = null;
+    public const string WeakAcidPrototype = "XenoAcidSprayTrapWeak";
+
+    public const string StrongAcidPrototype = "XenoAcidSprayTrapStrong";
+
+	/// <summary>
+	/// The entity to spawn on the trap when activated
+	/// </summary>
+	[DataField]
+	public EntProtoId? TrapPrototype = null;
+
+	/// <summary>
+	/// The hive that will get announcements when the hole is broken or activated
+	/// </summary>
+	[DataField]
+	public EntityUid? Hive = null;
 
     [DataField]
     public TimeSpan StepStunDuration = TimeSpan.FromSeconds(2.5);
@@ -39,8 +43,17 @@ public sealed partial class XenoResinHoleComponent : Component
     [DataField]
     public float ParasiteActivationRange = 0.5f;
 
+//    [DataField] used but emulated through step trigger range being very low
+//    public float FluidActivationRange = 1.5f;
+
     [DataField]
-    public float FluidActivationRange = 1.5f;
+    public SoundSpecifier? FluidFillSound = new SoundPathSpecifier("/Audio/Effects/refill.ogg");
+
+    [DataField]
+    public SoundSpecifier BuildSound = new SoundCollectionSpecifier("RMCResinBuild")
+    {
+        Params = AudioParams.Default.WithVolume(-5f)
+    };
 }
 
 [Serializable, NetSerializable]
@@ -62,5 +75,7 @@ public enum ContainedTrap
     Parasite,
     NeuroticGas,
     AcidGas,
-    AcidSplash
+    Acid1,
+    Acid2,
+    Acid3
 }

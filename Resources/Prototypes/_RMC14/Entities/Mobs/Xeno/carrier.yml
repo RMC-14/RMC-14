@@ -66,19 +66,20 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
+  - type: EggPlantTime
+    plantTime: 1
   - type: WhitelistPickup
     whitelist:
       components:
       - XenoParasite
       - XenoEgg
   - type: XenoParasiteThrower
-  - type: Hands
-    throwRange: 4
   - type: XenoEggRetriever
+  - type: XenoNurturing
   - type: RMCSize
     size: Big
-#  - type: RMCXenoDamageVisuals # TODO RMC14
-#    prefix: carrier
+  - type: RMCXenoDamageVisuals
+    prefix: carrier
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi

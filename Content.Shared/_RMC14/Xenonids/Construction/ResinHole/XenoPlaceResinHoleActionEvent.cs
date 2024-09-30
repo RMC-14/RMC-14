@@ -14,7 +14,7 @@ public sealed partial class XenoPlaceResinHoleActionEvent : InstantActionEvent
     public EntProtoId Prototype = "XenoResinHole";
 
     [DataField]
-    public float DestroyWeedSourceDelay = 3.0f;
+    public float DestroyWeedSourceDelay = 1.0f;
 
     [DataField]
     public int PlasmaCost = 200;
