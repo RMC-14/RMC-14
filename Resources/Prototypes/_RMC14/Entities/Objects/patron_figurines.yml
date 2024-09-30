@@ -588,6 +588,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronSeeks-to-Fight
   name: Seeks-to-Fight figurine
+  description: "Navy is just the taxi service for the Marines."
   components:
   - type: Sprite
     state: seeks-to-fight
@@ -598,7 +599,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronStares-at-Stars
   name: Stares-at-Stars figurine
-  description: ""
+  description: "Smells of citrus."
   components:
   - type: Sprite
     state: stares-at-stars
