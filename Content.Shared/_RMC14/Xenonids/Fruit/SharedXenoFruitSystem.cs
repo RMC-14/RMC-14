@@ -130,11 +130,17 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         xeno.Comp.FruitChoice = args.FruitId;
         Dirty(xeno);
 
-        var ev = new XenoFruitChosenEvent(args.FruitId);
+        // Update action icon
+        var evAction = new XenoFruitChosenEvent(args.FruitId);
         foreach (var (id, _) in _actions.GetActions(xeno))
         {
-            RaiseLocalEvent(id, ref ev);
+            RaiseLocalEvent(id, ref evAction);
         }
+
+        // Update planter visuals
+        var fruitProto = new EntProtoId<XenoFruitComponent>(args.FruitId);
+        var evXeno = new XenoFruitVisualsChangedEvent(fruitProto);
+        RaiseLocalEvent(xeno, ref evXeno);
     }
 
     private void OnActionFruitChosen(Entity<XenoFruitChooseActionComponent> xeno, ref XenoFruitChosenEvent args)

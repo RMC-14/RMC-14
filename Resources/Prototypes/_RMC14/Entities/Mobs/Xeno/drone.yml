@@ -11,8 +11,6 @@
   components:
   - type: GhostRole
     name: cm-job-name-xeno-drone
-  - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Drone/drone.rsi
   - type: MobState
     allowedStates:
     - Alive
@@ -83,6 +81,8 @@
   parent: CMXenoDroneBase
   id: CMXenoDrone
   components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Drone/drone.rsi
   - type: XenoEvolution
     canEvolveWithoutGranter: true
     max: 300
@@ -112,6 +112,16 @@
   components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Drone/gardener_drone.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.XenoFruitVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+  - type: XenoFruitVisuals
+    rsi: _RMC14/Mobs/Xenonids/Drone/gardener_drone.rsi
+    prefix: gardener
   - type: Xeno
     actionIds:
     - ActionXenoRest
@@ -145,4 +155,3 @@
     - XenoFruitUnstable
     maxFruitAllowed: 6
   - type: XenoResinSurge
-  # TODO: Overlay color based on chosen fruit

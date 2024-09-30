@@ -99,6 +99,7 @@
     growTime: 30
     popup: rmc-xeno-fruit-effect-greater
     canConsumeAtFull: false
+    color: "#17991B"
   - type: XenoFruitHeal
     healAmount: 75
   - type: XenoFruitRegen
@@ -118,6 +119,7 @@
     grownState: fruit_unstable
     growTime: 45
     popup: rmc-xeno-fruit-effect-unstable
+    color: "#179973"
   - type: XenoFruitRegen
     tickCount: 15     # 75 health over 15 seconds
     tickPeriod: 1
@@ -140,6 +142,7 @@
     grownState: fruit_spore
     growTime: 15
     popup: rmc-xeno-fruit-effect-spore
+    color: "#994617"
   - type: XenoFruitHaste
     duration: 60
     reductionMax: 0.25
@@ -160,6 +163,7 @@
     grownState: fruit_speed
     growTime: 35
     popup: rmc-xeno-fruit-effect-speed
+    color: "#5B248C"
   - type: XenoFruitSpeed
     duration: 15
     speedModifer: 0.4
@@ -176,6 +180,7 @@
     grownState: fruit_plasma
     growTime: 25
     popup: rmc-xeno-fruit-effect-plasma
+    color: "#287A90"
   - type: XenoFruitPlasma
     tickCount: 5      # 240 plasma over 15 seconds
     tickPeriod: 3

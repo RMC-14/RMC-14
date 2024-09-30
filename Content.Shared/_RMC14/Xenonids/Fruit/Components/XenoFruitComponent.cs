@@ -57,6 +57,9 @@ public sealed partial class XenoFruitComponent : Component
     // Popup to display upon consumption
     [DataField, AutoNetworkedField]
     public LocId Popup = new LocId("rmc-xeno-fruit-effect-lesser");
+
+    [DataField, AutoNetworkedField]
+    public Color? Color;
 }
 
 [Serializable, NetSerializable]

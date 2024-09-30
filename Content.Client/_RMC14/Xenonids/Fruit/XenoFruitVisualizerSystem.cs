@@ -4,6 +4,7 @@ using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Xenonids.Fruit;
 
+// System for updating the appearance of the resin fruits
 public sealed class XenoFruitVisualizerSystem : EntitySystem
 {
     public override void Initialize()
