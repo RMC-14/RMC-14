@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Damage;
+using Content.Shared.Explosion;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
@@ -15,6 +16,7 @@ public sealed class SharedXenoConstructReinforceSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoConstructReinforceComponent, DamageModifyEvent>(OnReinforceDamageModify, after: [typeof(SharedCMMeleeWeaponSystem)]);
+        SubscribeLocalEvent<XenoConstructReinforceComponent, BeforeExplodeEvent>(OnReinforceBeforeExplode);
     }
 
     public void Reinforce(EntityUid uid, FixedPoint2 amount, TimeSpan duration)
@@ -24,31 +26,41 @@ public sealed class SharedXenoConstructReinforceSystem : EntitySystem
         comp.Duration = duration;
     }
 
-    private void OnReinforceDamageModify(Entity<XenoConstructReinforceComponent> ent, ref DamageModifyEvent args)
+    private void ReduceDamage(Entity<XenoConstructReinforceComponent> ent, ref DamageSpecifier damage)
     {
-        if (!args.Damage.AnyPositive())
-            return;
-
-        // TODO: make this work for explosives
-
-        foreach (var type in args.Damage.DamageDict)
+        if (!damage.AnyPositive())
         {
-            if (args.Damage.DamageDict[type.Key] <= 0)
+            return;
+        }
+
+        foreach (var type in damage.DamageDict)
+        {
+            if (damage.DamageDict[type.Key] <= 0)
                 continue;
 
             var modifyStep = FixedPoint2.New(
                 Math.Min(ent.Comp.ReinforceAmount.Double(),
-                args.Damage.DamageDict[type.Key].Double()));
+                damage.DamageDict[type.Key].Double()));
 
-            args.Damage.DamageDict[type.Key] -= modifyStep;
+            damage.DamageDict[type.Key] -= modifyStep;
             ent.Comp.ReinforceAmount -= modifyStep;
 
             if (ent.Comp.ReinforceAmount <= 0)
             {
                 ReinforceRemoved(ent);
-                return;
+                break;
             }
         }
+    }
+
+    private void OnReinforceBeforeExplode(Entity<XenoConstructReinforceComponent> ent, ref BeforeExplodeEvent args)
+    {
+        ReduceDamage(ent, ref args.Damage);
+    }
+
+    private void OnReinforceDamageModify(Entity<XenoConstructReinforceComponent> ent, ref DamageModifyEvent args)
+    {
+        ReduceDamage(ent, ref args.Damage);
     }
 
     private void ReinforceRemoved(Entity<XenoConstructReinforceComponent> ent)
