@@ -134,6 +134,10 @@ cm-xeno-throw-parasite-too-many-parasites = We can't carry more parasites!
 cm-xeno-throw-parasite-stash-parasite = We store the parasite for safekeeping. Now sheltering: {$cur_parasites}/{$max_parasites}.
 cm-xeno-throw-parasite-unstash-parasite = We grab a parasite from our storage. Now sheltering: {$cur_parasites}/{$max_parasites}.
 rmc-xeno-throw-parasite-current = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} sheltering: {$cur_paras}/{$max_paras} parasites.
+rmc-xeno-throw-parasite-reserves = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-HAVE($xeno)} {$rev_paras} parasite ghost {$rev_paras ->
+   [one] role
+   *[other] roles 
+} available.
 
 # Defensive Shield
 rmc-xeno-defensive-shield-end = We feel our enhanced shield end!

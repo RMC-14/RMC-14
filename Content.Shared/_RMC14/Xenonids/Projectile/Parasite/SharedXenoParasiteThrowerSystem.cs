@@ -22,9 +22,22 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
 
     private void OnParasiteThrowerExamine(Entity<XenoParasiteThrowerComponent> thrower, ref ExaminedEvent args)
     {
-        // Allow ghosts to see since they may want to join as a parasite
+
         if (!HasComp<XenoComponent>(args.Examiner) && !HasComp<GhostComponent>(args.Examiner))
             return;
+
+        // Allow ghosts to see free reserves since they may want to join as a parasite
+        if (HasComp<GhostComponent>(args.Examiner))
+        {
+            var paras = Math.Max(thrower.Comp.CurParasites - thrower.Comp.ReservedParasites, 0);
+
+            using (args.PushGroup(nameof(XenoParasiteThrowerComponent)))
+            {
+                args.PushMarkup(Loc.GetString("rmc-xeno-throw-parasite-reserves", ("xeno", thrower),
+                    ("rev_paras", paras)));
+            }
+            return;
+        }
 
         using (args.PushGroup(nameof(XenoParasiteThrowerComponent)))
         {
