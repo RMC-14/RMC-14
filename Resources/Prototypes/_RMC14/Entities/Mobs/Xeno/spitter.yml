@@ -47,8 +47,7 @@
     maxPlasma: 600
     plasmaRegenOnWeeds: 4
   - type: XenoEvolution
-    max: 540
-    evolvesTo:
+    max: 500
     - CMXenoBoiler
     - CMXenoPraetorian
   - type: XenoSpit
