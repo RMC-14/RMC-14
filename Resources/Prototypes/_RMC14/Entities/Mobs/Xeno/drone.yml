@@ -62,7 +62,7 @@
     canEvolveWithoutGranter: true
     max: 300
     evolvesTo:
-#    - CMXenoCarrier
+    - CMXenoCarrier
 #    - CMXenoBurrower
     - CMXenoHivelord
     evolvesToWithoutPoints:
