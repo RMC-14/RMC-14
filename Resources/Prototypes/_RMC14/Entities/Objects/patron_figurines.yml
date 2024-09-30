@@ -593,3 +593,14 @@
     state: seeks-to-fight
   - type: PatronFigurine
     id: 518fe396-b199-4757-92ff-697fc527bbf1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronStares-at-Stars
+  name: Stares-at-Stars figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: stares-at-stars
+  - type: PatronFigurine
+    id: 78d5f741-5ccc-4e18-be40-74eb432071af
