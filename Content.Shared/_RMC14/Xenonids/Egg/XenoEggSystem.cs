@@ -28,6 +28,8 @@ using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Content.Shared.Throwing;
 using Content.Shared.Interaction.Events;
+using Robust.Shared.Map;
+using Robust.Shared.Containers;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -35,6 +37,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 using static Content.Shared.Physics.CollisionGroup;
 using Robust.Shared.Map;
 using Robust.Shared.Audio.Systems;
@@ -182,15 +185,6 @@ public sealed class XenoEggSystem : EntitySystem
     {
         if (egg.Comp.State != XenoEggState.Item)
             args.Cancel();
-    }
-
-    private void OnXenoEggTryThrow(Entity<XenoEggComponent> ent, ref ThrowItemAttemptEvent args)
-    {
-        if (HasComp<XenoComponent>(args.User))
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-throw-xeno"), args.User, args.User, PopupType.SmallCaution);
-        else
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-throw"), args.User, args.User, PopupType.SmallCaution);
-        args.Cancelled = true;
     }
 
     private void OnXenoEggUseInHand(Entity<XenoEggComponent> egg, ref UseInHandEvent args)
