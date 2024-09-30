@@ -11,7 +11,7 @@
   - type: Transform
     anchored: true
   - type: Physics
-    bodyType: Dynamic
+    bodyType: Static
     fixedRotation: false
   - type: Fixtures
     fixtures:
