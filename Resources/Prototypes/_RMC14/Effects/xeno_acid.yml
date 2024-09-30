@@ -74,19 +74,19 @@
 - type: entity
   parent: XenoAcidSprayWeak
   id: XenoAcidSprayStrong
-  name: strong splatter
-  description: It burns! It burns!
+  name: splatter
+  description: It burns! It burns like hygiene!
   components:
   - type: Sprite
     layers:
-    - state: acid2-strong
+    - state: acid2
   - type: DamageOnCollide
     paralyze: 2
     damage:
       groups:
         Burn: 36
   - type: TimedDespawn
-    lifetime: 3.0
+    lifetime: 1.0
 
 - type: entity
   parent: XenoAcidSprayWeak
@@ -103,19 +103,6 @@
     damage:
       groups:
         Burn: 24
-  - type: TimedDespawn
-    lifetime: 1.0
-
-# Just for the sprite + desc + time
-- type: entity
-  parent: XenoAcidSprayStrong
-  id: XenoAcidSprayWarden
-  name: splatter
-  description: It burns! It burns like hygiene!
-  components:
-  - type: Sprite
-    layers:
-    - state: acid2
   - type: TimedDespawn
     lifetime: 1.0
 

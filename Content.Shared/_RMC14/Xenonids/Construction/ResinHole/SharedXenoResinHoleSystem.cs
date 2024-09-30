@@ -1,6 +1,5 @@
 using Content.Shared.Mobs.Systems;
 using Content.Shared.DoAfter;
-using Content.Shared.Mind;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -15,7 +14,6 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
 {
     [Dependency] protected readonly SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] protected readonly MobStateSystem _mobState = default!;
-    [Dependency] protected readonly SharedMindSystem _mind = default!;
     [Dependency] protected readonly CMHandsSystem _rmcHands = default!;
     [Dependency] protected readonly INetManager _net = default!;
     [Dependency] protected readonly SharedPopupSystem _popup = default!;
@@ -46,7 +44,7 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
         if (!_rmcHands.IsPickupByAllowed(uid, user))
             return false;
 
-        if (_mind.TryGetMind(uid, out _, out _))
+        if (HasComp<ParasiteAIComponent>(uid))
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-awake-child", ("parasite", uid)), user, user, PopupType.SmallCaution);
             return false;
@@ -92,7 +90,7 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (resinHole.Comp.TrapPrototype != null )
+        if (resinHole.Comp.TrapPrototype != null)
             return;
 
         if (!TryComp<XenoComponent>(args.User, out var xeno))
