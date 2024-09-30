@@ -71,6 +71,7 @@
       components:
       - XenoParasite
       - XenoEgg
+      - XenoFruit
   - type: RMCSize
     size: Big
 #  - type: RMCXenoDamageVisuals # TODO RMC14

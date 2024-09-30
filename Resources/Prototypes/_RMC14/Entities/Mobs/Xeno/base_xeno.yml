@@ -334,12 +334,6 @@
     whitelist:
       components:
       - XenoFruit
-  - type: MultiHandedHolder
-    items:
-    - hands: 2
-      whitelist:
-        components:
-        - XenoFruit
   - type: ParalyzeOnPullAttempt
 
 - type: entity
