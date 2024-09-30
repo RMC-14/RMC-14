@@ -12,6 +12,7 @@ using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared._RMC14.Xenonids.Weeds;
+using Content.Shared.Hands.Components;
 using Content.Shared.Maps;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -39,7 +40,6 @@ namespace Content.Server._RMC14.Xenonids.Construction.ResinHole;
 
 public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -167,6 +167,9 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
     private void OnEmptyHandInteract(Entity<XenoResinHoleComponent> resinHole, ref InteractHandEvent args)
     {
         if (args.Handled)
+            return;
+
+        if (!HasComp<HandsComponent>(args.User))
             return;
 
         if (resinHole.Comp.TrapPrototype == null && TryComp(args.User, out XenoBombardComponent? bombardComp))
@@ -300,6 +303,8 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 args.DamageDelta.ClampMax(0);
             return;
         }
+        //TODO Flames should make the trigger message never happen but destroyed will
+        // Also para traps should burn instead of trigger in this case
         ActivateTrap(resinHole);
     }
 

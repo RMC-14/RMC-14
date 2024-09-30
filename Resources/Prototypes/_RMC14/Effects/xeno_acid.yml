@@ -106,6 +106,16 @@
   - type: TimedDespawn
     lifetime: 1.0
 
+# Just for the sprite + desc + time
+- type: entity
+  parent: XenoAcidSprayStrong
+  id: XenoAcidSprayAcidWarden
+  name: splatter
+  description: It burns! It burns like hygiene!
+  components:
+  - type: TimedDespawn
+    lifetime: 1.0
+
 - type: entity
   parent: XenoAcidSprayWeak
   id: XenoAcidSprayTrap

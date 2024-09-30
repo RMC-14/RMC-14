@@ -165,6 +165,9 @@
         type: TacticalMapUserBui
       enum.XenoReserveParasiteChangeUI.Key:
         type: ReserveParasitesBoundUserInterface
+      enum.XenoParasiteGhostUI.Key:
+        type: XenoParasiteGhostBui
+        requireInputValidation: false
   - type: TypingIndicator
     proto: alien
   - type: MovedByPressure

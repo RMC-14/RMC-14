@@ -17,3 +17,7 @@ rmc-xeno-parasite-ai-idle = {CAPITALIZE(SUBJECT($parasite))} {CONJUGATE-BE($para
 rmc-xeno-parasite-ai-dying = [color=red]{CAPITALIZE(SUBJECT($parasite))} needs to return to safety![/color]
 
 rmc-xeno-parasite-ai-eaten = {CAPITALIZE($parasite)} is furiously cannibalized by the other nearby parasites!
+
+rmc-xeno-parasite-ghost-carrier-none = {THE($xeno)} has no sheltered parasites!
+rmc-xeno-parasite-ghost-carrier-reserved = {THE($xeno)} has reserved the remaing parasites for {REFLEXIVE($xeno)}.
+rmc-xeno-parasite-ghost-carrier-dead = {THE($xeno)} is dead and all {POSS_ADJ($xeno)} died with {OBJECT($xeno)}.

@@ -13,6 +13,7 @@ namespace Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 
 public abstract partial class SharedXenoResinHoleSystem : EntitySystem
 {
+    [Dependency] protected readonly SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] protected readonly MobStateSystem _mobState = default!;
     [Dependency] protected readonly SharedMindSystem _mind = default!;
     [Dependency] protected readonly CMHandsSystem _rmcHands = default!;
@@ -25,6 +26,7 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<XenoResinHoleComponent, InteractUsingEvent>(OnPlaceParasiteInXenoResinHole);
+        SubscribeLocalEvent<XenoResinHoleComponent, ActivateInWorldEvent>(OnActivateInWorldResinHole);
     }
 
     protected bool CanPlaceInHole(EntityUid uid, Entity<XenoResinHoleComponent> resinHole, EntityUid user)
@@ -75,6 +77,33 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfterArgs);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-hole-filling-parasite"), resinHole, args.User);
 
+    }
+
+    private void OnActivateInWorldResinHole(Entity<XenoResinHoleComponent> resinHole, ref ActivateInWorldEvent args)
+    {
+        if (!HasComp<XenoParasiteComponent>(args.User))
+            return;
+
+        args.Handled = true;
+
+        if (_mobState.IsDead(args.User))
+            return;
+
+        if (_net.IsClient)
+            return;
+
+        if (resinHole.Comp.TrapPrototype != null )
+            return;
+
+        if (!TryComp<XenoComponent>(args.User, out var xeno))
+            return;
+
+        resinHole.Comp.TrapPrototype = XenoResinHoleComponent.ParasitePrototype;
+        _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-hole-enter-parasite", ("parasite", args.User)), resinHole);
+        resinHole.Comp.Hive = xeno.Hive; // Yes, parasites claim any resin traps as their own
+        QueueDel(args.User);
+
+        _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Parasite);
     }
 }
 

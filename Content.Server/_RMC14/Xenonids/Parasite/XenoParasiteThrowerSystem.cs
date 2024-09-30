@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Server.Hands.Systems;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -10,6 +11,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Robust.Shared.Random;
 
 
 namespace Content.Server._RMC14.Xenonids.Parasite;
@@ -28,6 +30,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     public override void Initialize()
     {
@@ -189,6 +192,9 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
             if(xenComp != null)
                 _xeno.SetHive(newParasite, xenComp.Hive);
             _transform.DropNextTo(newParasite, xeno.Owner);
+            //So they don't eat eachother before they gloriously fly into the sunset
+            _stun.TryStun(newParasite, xeno.Comp.ThrownParasiteStunDuration, true);
+            _throw.TryThrow(newParasite, _random.NextAngle().RotateVec(Vector2.One) * _random.NextFloat(0.15f, 0.7f), 3);
         }
 
         xeno.Comp.CurParasites = 0; // Just in case
@@ -221,5 +227,37 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         Dirty(xeno);
 
         return Spawn(xeno.Comp.ParasitePrototype);
+    }
+
+    public EntityUid? TryRemoveGhostParasite(Entity<XenoParasiteThrowerComponent> xeno, out string message)
+    {
+        message = "";
+        if (xeno.Comp.CurParasites <= 0)
+        {
+            message = Loc.GetString("rmc-xeno-parasite-ghost-carrier-none", ("xeno", xeno));
+            return null;
+        }
+
+        if (xeno.Comp.ReservedParasites >= xeno.Comp.CurParasites)
+        {
+            message = Loc.GetString("rmc-xeno-parasite-ghost-carrier-reserved", ("xeno", xeno));
+            return null;
+        }
+
+        if(_mobState.IsDead(xeno))
+        {
+            message = Loc.GetString("rmc-xeno-parasite-ghost-carrier-dead", ("xeno", xeno));
+            return null;
+        }
+
+        var para = RemoveParasite(xeno);
+        if (para == null)
+            return null;
+
+        _transform.DropNextTo(para.Value, xeno.Owner);
+        // Small throw
+        _throw.TryThrow(para.Value, _random.NextAngle().RotateVec(Vector2.One), 3);
+
+        return para;
     }
 }

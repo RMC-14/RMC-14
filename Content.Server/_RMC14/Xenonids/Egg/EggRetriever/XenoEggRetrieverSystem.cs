@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Egg.EggRetriever;
 using Content.Shared._RMC14.Xenonids.Evolution;
@@ -7,6 +8,8 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
+using Content.Shared.Throwing;
+using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Xenonids.Egg.EggRetriever;
 
@@ -20,7 +23,8 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
-
+    [Dependency] private readonly ThrowingSystem _throw = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     public override void Initialize()
     {
@@ -77,10 +81,12 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
             return;
         }
 
-        if (RemoveEgg(eggRetriever) is not EntityUid newEgg)
-        {
+        if (!_hands.TryGetEmptyHand(eggRetriever, out var _))
             return;
-        }
+
+        if (RemoveEgg(eggRetriever) is not EntityUid newEgg)
+            return;
+
         if (TryComp<XenoComponent>(eggRetriever, out var xenComp))
             _xeno.SetHive(newEgg, xenComp.Hive);
 
@@ -138,6 +144,7 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
             if (xenComp != null)
                 _xeno.SetHive(newEgg, xenComp.Hive);
             _transform.DropNextTo(newEgg, xeno.Owner);
+            _throw.TryThrow(newEgg, _random.NextAngle().RotateVec(Vector2.One) * _random.NextFloat(0.15f, 0.7f), 3);
         }
         xeno.Comp.CurEggs = 0; // Just in case
         Dirty(xeno);

@@ -86,7 +86,7 @@ public sealed partial class NPCLeapSystem : EntitySystem
                     continue;
                 }
 
-                if (!_interaction.InRangeUnobstructed(uid, comp.Target, range))
+                if (!_interaction.InRangeUnobstructed(uid, comp.Target, range, comp.Mask))
                 {
                     _doafter.Cancel(after.DoAfters[comp.CurrentDoAfter.Value].Id);
                     comp.CurrentDoAfter = null;

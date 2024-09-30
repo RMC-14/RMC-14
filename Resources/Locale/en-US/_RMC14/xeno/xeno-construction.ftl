@@ -22,6 +22,7 @@ rmc-xeno-construction-resin-hole-finished-gas = {$xeno} presurises the resin tra
 rmc-xeno-construction-resin-hole-finished-gas-self = We pressurise the resin trap with gas!
 rmc-xeno-construction-resin-hole-filling-parasite = We start placing the parasite into the resin trap.
 rmc-xeno-construction-resin-hole-finished-parasite = We place a parasite in the resin trap.
+rmc-xeno-construction-resin-hole-enter-parasite = {CAPITALIZE($parasite)} crawls into the resin trap.
 
 rmc-xeno-construction-resin-hole-uproot = We start uprooting the node so we can put the resin hole in its place...
 

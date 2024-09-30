@@ -1,5 +1,9 @@
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
+using Content.Shared.Database;
+using Content.Shared.Verbs;
+using Content.Shared._RMC14.Xenonids.Egg;
+using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 
@@ -13,6 +17,7 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
         SubscribeLocalEvent<XenoParasiteThrowerComponent, ExaminedEvent>(OnParasiteThrowerExamine);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoChangeParasiteReserveMessage>(OnParasiteReserveChange);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoReserveParasiteActionEvent>(OnSetReserve);
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
     }
 
     private void OnParasiteThrowerExamine(Entity<XenoParasiteThrowerComponent> thrower, ref ExaminedEvent args)
@@ -45,5 +50,29 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
         _ui.OpenUi(xeno.Owner, XenoReserveParasiteChangeUI.Key, xeno);
 
         args.Handled = true;
+    }
+
+    private void OnGetVerbs(Entity<XenoParasiteThrowerComponent> xeno, ref GetVerbsEvent<ActivationVerb> args)
+    {
+        var uid = args.User;
+
+        if (!HasComp<ActorComponent>(uid) || !HasComp<GhostComponent>(uid))
+            return;
+
+        if (xeno.Comp.CurParasites == 0 || xeno.Comp.ReservedParasites >= xeno.Comp.CurParasites)
+            return;
+
+        var parasiteVerb = new ActivationVerb
+        {
+            Text = Loc.GetString("rmc-xeno-egg-ghost-verb"),
+            Act = () =>
+            {
+                _ui.TryOpenUi(xeno.Owner, XenoParasiteGhostUI.Key, uid);
+            },
+
+            Impact = LogImpact.High,
+        };
+
+        args.Verbs.Add(parasiteVerb);
     }
 }

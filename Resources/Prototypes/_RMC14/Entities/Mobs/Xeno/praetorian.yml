@@ -106,6 +106,7 @@
     acid: XenoAcidSprayAcidStacks
     plasmaCost: 80
     doAfter: 0.5
+    delay: 10
   - type: XenoLeap
     plasmaCost: 50
     delay: 0
@@ -135,7 +136,7 @@
     - ActionXenoAcidNormal
     - ActionXenoPheromones
     - ActionXenoSpit
-    - ActionXenoSprayAcidPraetorian
+    - ActionXenoSprayAcidWarden
     - ActionXenoAid
     - ActionXenoRetrieve
     - ActionXenoAidToggle
@@ -152,7 +153,9 @@
   - type: XenoRetrieve
   - type: XenoAid
   - type: XenoSprayAcid
-    acid: XenoAcidSprayStrong
+    delay: 13
+    acid: XenoAcidSprayWarden
+    plasmaCost: 130
     barricadeDamage:
       types:
         Heat: 5

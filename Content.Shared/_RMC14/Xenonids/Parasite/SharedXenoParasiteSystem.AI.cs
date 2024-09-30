@@ -11,6 +11,9 @@ using Content.Shared.Mobs.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
+using Content.Shared.Throwing;
+using Content.Shared.Stunnable;
 
 namespace Content.Shared._RMC14.Xenonids.Parasite;
 
@@ -44,18 +47,22 @@ public abstract partial class SharedXenoParasiteSystem
 
     private void OnPlayerRemoved(Entity<XenoParasiteComponent> para, ref PlayerDetachedEvent args)
     {
-        if(!_mobState.IsDead(para))
+        if(!TerminatingOrDeleted(para))
             EnsureComp<ParasiteAIDelayAddComponent>(para);
     }
 
     private void OnAIDelayAdded(Entity<ParasiteAIDelayAddComponent> para, ref ComponentStartup args)
     {
         para.Comp.TimeToAI = _timing.CurTime + para.Comp.DelayTime;
+        _rmcNpc.SleepNPC(para); // Keep it asleep
     }
 
 
     private void OnAIAdded(Entity<ParasiteAIComponent> para, ref MapInitEvent args)
     {
+        if (_mobState.IsDead(para))
+            return;
+
         HandleDeathTimer(para);
         _rmcNpc.WakeNPC(para);
     }
@@ -183,15 +190,19 @@ public abstract partial class SharedXenoParasiteSystem
         if (_cmHands.TryGetHolder(para, out var _))
             return;
 
+        if (HasComp<ThrownItemComponent>(para))
+            return;
+
         int totalParasites = 0;
-        foreach (var parasite in _entityLookup.GetEntitiesInRange<ParasiteAIComponent>(_transform.GetMapCoordinates(para), para.Comp.RangeCheck))
+        foreach (var parasite in _entityLookup.GetEntitiesInRange<ParasiteAIComponent>(_transform.GetMapCoordinates(para), para.Comp.CannibalizeCheck))
         {
             if (parasite == para)
                 continue;
 
-            // Ignore those that are dead, not active, or already are being deleted
+            // Ignore those that are dead, not active, or already are being deleted - plus a ton of other things
             if (TerminatingOrDeleted(parasite) || EntityManager.IsQueuedForDeletion(parasite) || _mobState.IsDead(parasite) ||
-                parasite.Comp.Mode != ParasiteMode.Active || _cmHands.TryGetHolder(parasite, out var _))
+                parasite.Comp.Mode != ParasiteMode.Active || _cmHands.TryGetHolder(parasite, out var _) ||
+                HasComp<ThrownItemComponent>(parasite) || HasComp<StunnedComponent>(parasite))
                 continue;
 
             totalParasites++;
@@ -207,9 +218,15 @@ public abstract partial class SharedXenoParasiteSystem
 
     private void CheckDeath(Entity<ParasiteAIComponent> para)
     {
-        foreach (var egg in _entityLookup.GetEntitiesInRange<XenoEggComponent>(_transform.GetMapCoordinates(para), para.Comp.RangeCheck))
+        foreach (var egg in _entityLookup.GetEntitiesInRange<XenoEggComponent>(_transform.GetMoverCoordinates(para), para.Comp.RangeCheck))
         {
             if (egg.Comp.State == XenoEggState.Opened)
+                return;
+        }
+
+        foreach (var trap in _entityLookup.GetEntitiesInRange<XenoResinHoleComponent>(_transform.GetMoverCoordinates(para), para.Comp.RangeCheck))
+        {
+            if (trap.Comp.TrapPrototype == null)
                 return;
         }
 

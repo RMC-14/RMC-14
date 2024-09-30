@@ -78,8 +78,8 @@
   - type: XenoNurturing
   - type: RMCSize
     size: Big
-#  - type: RMCXenoDamageVisuals # TODO RMC14
-#    prefix: carrier
+  - type: RMCXenoDamageVisuals
+    prefix: carrier
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi

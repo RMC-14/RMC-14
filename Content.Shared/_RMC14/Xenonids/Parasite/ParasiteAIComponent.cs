@@ -45,6 +45,9 @@ public sealed partial class ParasiteAIComponent : Component
 
     [DataField]
     public float RangeCheck = 1.5f;
+
+    [DataField]
+    public float CannibalizeCheck = 0.5f;
 }
 
 [Serializable, NetSerializable]
