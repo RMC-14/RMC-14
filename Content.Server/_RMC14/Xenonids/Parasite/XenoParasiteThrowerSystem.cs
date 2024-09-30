@@ -8,6 +8,7 @@ using Content.Shared.Actions;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Mind;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
@@ -31,6 +32,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
 
     public override void Initialize()
     {
@@ -62,14 +64,13 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
             foreach (var possibleParasite in clickedEntities)
             {
                 if (_mobState.IsDead(possibleParasite))
-                {
                     continue;
-                }
 
                 if (!HasComp<XenoParasiteComponent>(possibleParasite))
-                {
                     continue;
-                }
+
+                if (_mind.TryGetMind(possibleParasite, out _, out _))
+                    continue;
 
                 tileHasParasites = true;
 
@@ -153,6 +154,12 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         if (xeno.Comp.CurParasites >= xeno.Comp.MaxParasites)
         {
             _popup.PopupEntity(Loc.GetString("cm-xeno-throw-parasite-too-many-parasites"), xeno, xeno);
+            return;
+        }
+
+        if (_mind.TryGetMind(target, out _, out _))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-awake-child", ("parasite", target)), xeno, xeno);
             return;
         }
 

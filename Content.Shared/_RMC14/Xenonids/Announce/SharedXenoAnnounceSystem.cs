@@ -15,8 +15,8 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly AreaSystem _areas = default!;
-	[Dependency] private readonly SharedTransformSystem _transform = default!;
-	public override void Initialize()
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    public override void Initialize()
     {
         SubscribeLocalEvent<XenoAnnounceDeathComponent, MobStateChangedEvent>(OnAnnounceDeathMobStateChanged);
 

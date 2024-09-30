@@ -52,9 +52,7 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
             {
                 if (!TryComp<XenoEggComponent>(possibleEgg, out var egg) ||
                     egg.State != XenoEggState.Item)
-                {
                     continue;
-                }
 
                 tileHasEggs = true;
 
