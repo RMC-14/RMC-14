@@ -113,6 +113,9 @@
   name: splatter
   description: It burns! It burns like hygiene!
   components:
+  - type: Sprite
+    layers:
+    - state: acid2
   - type: TimedDespawn
     lifetime: 1.0
 
