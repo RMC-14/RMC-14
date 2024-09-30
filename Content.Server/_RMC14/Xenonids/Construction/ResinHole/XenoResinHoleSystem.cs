@@ -34,6 +34,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Player;
 using static Content.Shared.Physics.CollisionGroup;
 using Content.Shared.Examine;
+using Content.Shared.Standing;
 
 
 namespace Content.Server._RMC14.Xenonids.Construction.ResinHole;
@@ -57,6 +58,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
 
     private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
@@ -363,7 +365,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 !HasComp<VictimInfectedComponent>(args.Tripper);
             return;
         }
-        else if (_mobState.IsDead(args.Tripper)) // TODO check if lying down too. This only triggers on acid/gas
+        else if (_mobState.IsDead(args.Tripper) || _standing.IsDown(args.Tripper))
         {
             args.Continue = false;
             return;
