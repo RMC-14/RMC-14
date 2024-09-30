@@ -125,6 +125,7 @@
       rmc-aslot-barrel:
         whitelist:
           tags:
+          - RMCAttachmentExtendedBarrel
           - RMCAttachmentBarrelCharger
           - RMCAttachmentRecoilCompensator
           - RMCM5Bayonet
@@ -333,3 +334,4 @@
 
 - type: Tag
   id: RMCWeaponShotgun
+

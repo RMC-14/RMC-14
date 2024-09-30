@@ -1,6 +1,6 @@
-﻿<controls:XenoEggGhostWindow
+﻿<controls:XenoParasiteGhostWindow
     xmlns="https://spacestation14.io"
-    xmlns:controls="clr-namespace:Content.Client._RMC14.Xenonids.Egg"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Xenonids.Parasite"
     Title="Confirmation"
     MinSize="410 150">
     <BoxContainer Orientation="Vertical">
@@ -12,4 +12,4 @@
             <Button Name="DenyButton" Access="Public" MinHeight="35" Text="No" StyleClasses="ButtonColorDefaultRed" HorizontalAlignment="Left"/>
         </BoxContainer>
     </BoxContainer>
-</controls:XenoEggGhostWindow>
+</controls:XenoParasiteGhostWindow>

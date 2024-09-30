@@ -36,7 +36,7 @@ public sealed partial class XenoEvolutionComponent : Component
     public FixedPoint2 Max;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 PointsPerSecond = 1;
+    public FixedPoint2 PointsPerSecond = 0.5;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastPointsAt;
