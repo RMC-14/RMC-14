@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed Immature Queens being able to use Screech. Any Queen, including
-      newly-evolved ones, must wait until they are mature (10 minutes) before being
-      able to use it.
-    type: Fix
-  id: 263
-  time: '2024-07-04T04:43:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2806
-- author: DrSmugleaf
-  changes:
   - message: 'The roadmap has been updated to reflect current and upcoming changes:
       Blood types, Smart Gun Operator, and the Weapons Specialist''s Grenadier kit.'
     type: Tweak
@@ -4562,5 +4553,63 @@
   id: 762
   time: '2024-09-30T22:50:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4198
+- author: Vermidia
+  changes:
+  - message: AI Parasites now have periods of Idleness (indicated by resting) and
+      Activeness (indicated by not resting). Parasites will only leap/infect while
+      active.
+    type: Fix
+  - message: AI Parasites die after 30 seconds if not picked up by a carrier. Doing
+      this also resets the timer, and it doesn't progress while carried by them.
+    type: Fix
+  - message: Egg placing now has sounds, and speed is 3.5 seconds, with normal drones
+      doing it in 2.5 and carriers in 1. It costs 30 plasma to place an egg.
+    type: Tweak
+  - message: Parasites can go into resin traps to fill them manually. AI paras will
+      do this if they can't get into an egg.
+    type: Add
+  - message: Resin traps can be filled with corrosive acid
+    type: Add
+  - message: Almost all xeno announcements for deaths/trap triggers give location.
+    type: Add
+  - message: Fixed prae's acid having the boiler spray sprite
+    type: Fix
+  - message: AI parasites will eat eachother if too many are close by
+    type: Fix
+  - message: AI parasite's leaps will infect from farther away
+    type: Fix
+  - message: Moved carrier's egg and parasite count to examine
+    type: Tweak
+  - message: Made some carrier ability descriptions more informative
+    type: Tweak
+  - message: Different acid sprays now dissapate at different rates, with strong acid
+      taking 2 seconds and weak taking the original 0.6
+    type: Fix
+  - message: Praetorian's plasma cost for spray acid is higher. Warden strain's cost
+      even more, and has a slightly longer cooldown
+    type: Fix
+  - message: Hives get 1 free carrier slot
+    type: Add
+  - message: Ghosts can join as parasites from carriers
+    type: Add
+  - message: Parasites won't become AI controlled until 7 minutes have past since
+      the player disconnected
+    type: Fix
+  - message: Throwing a parasite always makes them able to attempt leaps after the
+      5 second stun
+    type: Tweak
+  - message: Player parasites can't be picked up, and can escape if they are. AI parasites
+      can't be pulled
+    type: Fix
+  - message: AI Parasites now prioritize downed targets, and don't need line of sight
+      for leaps/infects
+    type: Tweak
+  - message: Carriers dropping eggs/parasites on death is more satisfying
+    type: Tweak
+  - message: Item eggs won't show the become parasite verb
+    type: Fix
+  id: 763
+  time: '2024-09-30T23:06:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4067
 Name: RMC14
 Order: -1
