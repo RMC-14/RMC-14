@@ -60,7 +60,7 @@
   - type: XenoDevour
   - type: XenoEvolution
     canEvolveWithoutGranter: true
-    max: 300
+    max: 200
     evolvesTo:
     - CMXenoCarrier
 #    - CMXenoBurrower

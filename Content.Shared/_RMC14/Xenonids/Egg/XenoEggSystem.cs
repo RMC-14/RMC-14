@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -92,7 +93,8 @@ public sealed class XenoEggSystem : EntitySystem
         SubscribeLocalEvent<XenoEggComponent, StepTriggerAttemptEvent>(OnXenoEggStepTriggerAttempt);
         SubscribeLocalEvent<XenoEggComponent, StepTriggeredOffEvent>(OnXenoEggStepTriggered);
         SubscribeLocalEvent<XenoEggComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
-        SubscribeLocalEvent<XenoEggComponent, ThrowItemAttemptEvent>(OnXenoEggTryThrow);
+		SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
+		SubscribeLocalEvent<XenoEggComponent, ThrowItemAttemptEvent>(OnXenoEggTryThrow);
     }
 
     private void OnXenoGrowOvipositorAction(Entity<XenoComponent> xeno, ref XenoGrowOvipositorActionEvent args)
@@ -370,6 +372,19 @@ public sealed class XenoEggSystem : EntitySystem
         };
 
         args.Verbs.Add(parasiteVerb);
+    }
+
+    private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
+    {
+        var query = EntityQueryEnumerator<XenoOvipositorCapableComponent>();
+        while (query.MoveNext(out var uid, out _))
+        {
+            foreach (var (actionId, action) in _actions.GetActions(uid))
+            {
+                if (action.BaseEvent is XenoGrowOvipositorActionEvent)
+                    _actions.ClearCooldown(actionId);
+            }
+        }
     }
 
     private bool CanTrigger(EntityUid user)

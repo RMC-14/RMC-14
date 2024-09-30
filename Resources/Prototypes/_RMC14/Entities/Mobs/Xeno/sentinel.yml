@@ -48,7 +48,7 @@
   - type: CMArmor
     explosionArmor: 10
   - type: XenoEvolution
-    max: 300
+    max: 200
     evolvesTo:
     - CMXenoSpitter
   - type: XenoAcid

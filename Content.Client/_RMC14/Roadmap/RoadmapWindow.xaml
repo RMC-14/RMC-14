@@ -22,6 +22,7 @@
             <BoxContainer Name="Columns" Access="Public" Orientation="Horizontal">
                 <BoxContainer Name="FirstVersion" Access="Public" Orientation="Vertical" HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Current version" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Praetorian" Text="Tier 3 xeno" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Mortars" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Scout Kit" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Dropship modifications" />
@@ -63,7 +64,6 @@
                 <BoxContainer Name="SecondVersion" Access="Public" Orientation="Vertical"  HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Upcoming" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Carrier" Text="Carry parasites around, allowing the Hive to impregnate new hosts on the move. Use pheromones to assist fellow Aliens" />
-                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Praetorian" Text="Tier 3 xeno" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Power and evacuation" Text="Power simulation will allow marines to restore power to the colony if they secure the colony's reactors, with evacuation allowing them to fuel the lifeboats and flee the warship if hijacked" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Burrower" Text="Lay the foundations for resin traps in strategic locations or the Hive's flanks. Flank your way around the map with the tunnel ability and dig tunnels to allow for quick transportation of fellow Aliens from the hive to the frontlines" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Blood types" />
