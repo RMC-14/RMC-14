@@ -50,6 +50,7 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
         }
     }
 
+
     private void OnXenoResinSurgeAction(Entity<XenoResinSurgeComponent> xeno, ref XenoResinSurgeActionEvent args)
     {
         if (args.Handled)
@@ -84,6 +85,8 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
                     // If yes, display popup, and start half-cooldown
                     _popup.PopupClient(Loc.GetString("rmc-xeno-resin-surge-shield-fail", ("target", entity)), xeno, xeno);
                     ReduceSurgeCooldown(xeno);
+                    // This is here so SharedActionsSystem doesn't start the cooldown itself
+                    args.Handled = false;
                     return;
                 }
 
@@ -106,6 +109,8 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
                 {
                     _popup.PopupClient(Loc.GetString("rmc-xeno-resin-surge-fruit-fail", ("target", entity)), xeno, xeno);
                     ReduceSurgeCooldown(xeno);
+                    // This is here so SharedActionsSystem doesn't start the cooldown itself
+                    args.Handled = false;
                     return;
                 }
 
@@ -134,5 +139,7 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
 
         // Temporary until sticky resin is added
         ReduceSurgeCooldown(xeno, TimeSpan.Zero);
+        // This is here so SharedActionsSystem doesn't start the cooldown itself
+        args.Handled = false;
     }
 }

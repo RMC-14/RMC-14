@@ -26,6 +26,13 @@
     event: !type:XenoResinSurgeActionEvent
     range: 7
     useDelay: 10
+    whitelist:
+      components:
+      - XenoConstruct
+      - XenoFruit
+      - XenoWeeds
+
+
   - type: XenoResinSurgeAction
 
 - type: entity
