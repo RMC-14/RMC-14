@@ -1,86 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Medical belt UI should be friendlier for players with smaller screens.
-    type: Fix
-  id: 250
-  time: '2024-07-03T11:47:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2773
-- author: Whisper
-  changes:
-  - message: Hydroponics no longer drop SS14 steel and glass.
-    type: Fix
-  id: 251
-  time: '2024-07-03T11:46:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2778
-- author: Vermidia
-  changes:
-  - message: Lesser drones now use different sprites from normal drones
-    type: Tweak
-  id: 252
-  time: '2024-07-03T11:48:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2782
-- author: blueDev2
-  changes:
-  - message: Fixed health icons on shorter marines
-    type: Fix
-  id: 253
-  time: '2024-07-03T11:59:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2763
-- author: Whisper
-  changes:
-  - message: Crafted magazine boxes can now hold magazines
-    type: Fix
-  id: 254
-  time: '2024-07-03T12:01:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2787
-- author: ShadowCommander
-  changes:
-  - message: Changed parasite interaction on a host from hug to infect.
-    type: Add
-  - message: Fixed nests blocking host infection.
-    type: Fix
-  id: 255
-  time: '2024-07-04T01:51:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2802
-- author: Whisper
-  changes:
-  - message: Added Dagobert Dogburglar figurine.
-    type: Add
-  id: 256
-  time: '2024-07-04T01:52:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2800
-- author: UnicornOnLSD
-  changes:
-  - message: Entrenching tools are now worthy of being in tools belts.
-    type: Add
-  id: 257
-  time: '2024-07-04T01:53:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2797
-- author: ShadowCommander
-  changes:
-  - message: Players can now use melee attacks and shoves while dragging an entity
-      in their active hand.
-    type: Tweak
-  id: 258
-  time: '2024-07-04T01:52:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2801
-- author: DrSmugleaf
-  changes:
-  - message: Explosion and screech shockwave effects no longer temporarily reset your
-      camera to the default rotation.
-    type: Fix
-  id: 259
-  time: '2024-07-04T04:44:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2807
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenonids being able to devolve if damaged. Xenonids now must be
-      on full health before devolving.
-    type: Fix
-  id: 260
-  time: '2024-07-04T04:44:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2805
 - author: DrSmugleaf
   changes:
   - message: Added 5 empty blood packs to the MM blood dispenser.
@@ -4489,5 +4407,137 @@
   id: 749
   time: '2024-09-28T00:18:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4168
+- author: Vermidia
+  changes:
+  - message: Fix some of the new outfits storage and suit storage whitelists
+    type: Fix
+  - message: MP armor can properly hold grenades in the suit slot now
+    type: Fix
+  id: 750
+  time: '2024-09-28T20:22:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4175
+- author: FungiFellow
+  changes:
+  - message: Flashlights can be turned into Attachments with a Screwdriver
+    type: Add
+  id: 751
+  time: '2024-09-28T20:37:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3821
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added scout invisibility effects
+    type: Add
+  - message: Fixed scout cloak sound playing more than once
+    type: Fix
+  id: 752
+  time: '2024-09-28T21:47:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4107
+- author: Vermidia
+  changes:
+  - message: Smartgun has falloff start at 7 tiles and loses 4 damage a tile
+    type: Fix
+  - message: ML66A head mounted sight no longer gives farsight
+    type: Remove
+  id: 753
+  time: '2024-09-28T23:11:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4082
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Praetorian acid ball pushing marines around like a pinball.
+    type: Fix
+  - message: Fixed Warden Praetorian acid spray having no delay and not stunning for
+      2 seconds.
+    type: Fix
+  - message: Fixed job slot scaling with pop not working.
+    type: Fix
+  - message: Fixed shotguns having no delay to fire when swapping between them.
+    type: Fix
+  - message: Fixed Lurker pounce and Praetorian dash going on cooldown if you try
+      to use them without plasma.
+    type: Fix
+  - message: Fixed HE mortar shell damage being lower than intended, not even breaking
+      one regular wall. A single HE shell will now destroy a 3x3 of regular walls
+      (3000 hp), but only deal 6000 damage to a reinforced wall (9000 hp). This doesn't
+      change the damage it does to xenonids or marines, only structures.
+    type: Fix
+  - message: Fixed some Praetorian and Warden Praetorian abilities being usable while
+      resting. Spit, spray acid, acid ball, retrieve and aid xenonid now are correctly
+      no longer usable while the Praetorian is resting.
+    type: Fix
+  - message: Fixed the popup for the Warden Praetorian's aid xenonid being incorrect
+      for players other than the Praetorian and the target.
+    type: Fix
+  - message: Fixed the Warden Praetorian being able to gain internal hitpoints from
+      spitting at a wall.
+    type: Fix
+  - message: Ported 13's 20-second cooldown for emote sounds. Anyone angered by this
+      change should take it up with the hordes of people yawn and emote spamming during
+      briefing in the middle of a Brigadier-General aboard the Almayer, or those spamming
+      emotes in the dropship. Admins have better things to do than handle this dogshit
+      rp every round. The scream hotbar action will always bypass this cooldown, also
+      on a 20 second cooldown.
+    type: Fix
+  id: 754
+  time: '2024-09-29T23:18:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4187
+- author: Whisper
+  changes:
+  - message: Fixed missing sprites for the worn sniper spec weapon.
+    type: Fix
+  id: 755
+  time: '2024-09-29T23:19:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4194
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Removed akimbo shotguns.
+    type: Remove
+  id: 756
+  time: '2024-09-29T23:20:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4191
+- author: Rainbeon
+  changes:
+  - message: Xenos can now see their exact Health, Plasma, and Armor by hovering over
+      each respective alert on the right side of the screen.
+    type: Add
+  id: 757
+  time: '2024-09-29T23:46:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4150
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added pull animations
+    type: Add
+  id: 758
+  time: '2024-09-29T23:47:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4189
+- author: TsjipTsjip
+  changes:
+  - message: High Command headset and encryption key exist now.
+    type: Add
+  id: 759
+  time: '2024-09-29T23:51:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4188
+- author: DrSmugleaf
+  changes:
+  - message: Fixed mortars being hit by bullets not targeted directly at them, and
+      being damaged by marine melee.
+    type: Fix
+  - message: Removed shotgun fire delay on wield now that fire groups are in. Akimbo
+      shotguns still won't work, but wielding your shotgun will no longer put it on
+      a very long cooldown anymore.
+    type: Fix
+  - message: Fixed the M5-ATL (Demolitionist weapons spec rocket launcher) leaving
+      behind fake projectiles.
+    type: Fix
+  - message: Fixed placing eggs and returning parasites to them having no delay. Both
+      now have a 4 second delay.
+    type: Fix
+  - message: Fixed some shutters and podlocks not being acidable by xenos.
+    type: Fix
+  - message: Removed a lot of turrets from the landing zones of all four planet maps.
+      The poison gas remains, with some turrets still within it.
+    type: Tweak
+  id: 760
+  time: '2024-09-30T03:49:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4195
 Name: RMC14
 Order: -1

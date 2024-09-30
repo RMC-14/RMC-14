@@ -10,7 +10,7 @@ using Robust.Shared.Map;
 
 namespace Content.Client._RMC14.Weapons.Melee;
 
-public sealed class CMMeleeWeaponSystem : SharedCMMeleeWeaponSystem
+public sealed class RMCMeleeWeaponSystem : SharedRMCMeleeWeaponSystem
 {
     [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly IInputManager _input = default!;
@@ -31,7 +31,7 @@ public sealed class CMMeleeWeaponSystem : SharedCMMeleeWeaponSystem
                     if (session?.AttachedEntity != null)
                         TryPrimaryHeavyAttack();
                 }, handle: false))
-            .Register<CMMeleeWeaponSystem>();
+            .Register<RMCMeleeWeaponSystem>();
     }
 
     private void TryPrimaryHeavyAttack()

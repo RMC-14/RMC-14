@@ -249,11 +249,18 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.1,-0.1,0.1,0.1"
-        hard: true
+        hard: false
         mask:
         - Impassable
         - BulletImpassable
         - XenoProjectileImpassable
+      fix2:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: true
+        mask:
+        - Impassable
         - BarricadeImpassable
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_acid_ball.rsi
@@ -274,3 +281,6 @@
     maxRange: 6
   - type: ClusterLimitHits
     limit: 4
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container

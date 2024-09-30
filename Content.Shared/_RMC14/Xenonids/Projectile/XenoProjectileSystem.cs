@@ -58,20 +58,20 @@ public sealed class XenoProjectileSystem : EntitySystem
 
     private void OnProjectileHit(Entity<XenoProjectileComponent> ent, ref ProjectileHitEvent args)
     {
-        if (_net.IsClient && !IsClientSide(ent))
-            return;
-
         if (ent.Comp.Hive is { } hive && _xeno.FromHive(args.Target, hive))
         {
             args.Handled = true;
-            QueueDel(ent);
+
+            if (_net.IsServer || IsClientSide(ent))
+                QueueDel(ent);
+
             return;
         }
 
         if (_projectileQuery.TryComp(ent, out var projectile) &&
             projectile.Shooter is { } shooter)
         {
-            var ev = new XenoProjectileHitUserEvent();
+            var ev = new XenoProjectileHitUserEvent(args.Target);
             RaiseLocalEvent(shooter, ref ev);
         }
     }

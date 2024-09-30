@@ -66,6 +66,8 @@
   - type: RMCWallExplosionDeletable
   - type: MinimapColor
     color: "#451e5eb8"
+  - type: WallMount
+    arc: 360
 
 - type: entity
   parent: RMCShutterBase

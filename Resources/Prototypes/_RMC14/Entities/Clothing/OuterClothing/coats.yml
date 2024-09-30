@@ -43,6 +43,37 @@
       #TODO Various holsters go here - 1984, m44, mateba
       - RMCSmartPistolHolster
 
+- type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingJacketMB
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - RMCLighter
+      - Stunbaton
+      - Gun
+      - CrewMonitoringConsole
+      tags:
+      - Handcuffs
+      - GasTank
+      - Flashlight
+      - CigPack
+      - Knife
+      - RMCG8Pouch
+      - Binoculars
+      - RMCMacheteScabbard
+      - Crowbar
+      - DiscreteHealthAnalyzer
+      - Pen
+      - Radio
+      #TODO Various holsters go here - 1984, m44, mateba
+      - RMCSmartPistolHolster
+      - RMCMacheteScabbard
+      #TODO Katana scabbard
+      #TODO motion detector
+      #TODO Walkman
+
 # TODO RMC14 labcoat has it's own list
 
 # TODO RMC14 chef/medical apron have a shared list

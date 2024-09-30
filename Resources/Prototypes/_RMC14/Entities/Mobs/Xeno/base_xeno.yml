@@ -58,6 +58,7 @@
       Alive: XenoHealth
       Critical: XenoCrit
       Dead: XenoDead
+    displayDamageInAlert: true
   - type: MobStateActions
     actions:
       Critical:

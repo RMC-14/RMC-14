@@ -253,6 +253,21 @@
       - RMCEncryptionKeySeniorCommand
 
 - type: entity
+  parent: RMCHeadsetShip
+  id: CMHeadsetHighCommand
+  name: marine high command headset
+  description: Issued only to high command staff.
+  components:
+  - type: Sprite
+    state: mco_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - RMCEncryptionKeySeniorCommand
+      - RMCEncryptionKeyHighCommand
+
+- type: entity
   parent: CMHeadsetSeniorCommand
   id: RMCHeadsetSEA
   name: marine senior enlisted advisor headset
