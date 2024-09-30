@@ -40,6 +40,12 @@ public sealed partial class XenoEggComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? Hive;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan PlaceDelay = TimeSpan.FromSeconds(4);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan ReturnParasiteDelay = TimeSpan.FromSeconds(4);
 }
 
 [Serializable, NetSerializable]
