@@ -1,9 +1,10 @@
 using System.Numerics;
 using Content.Server.Hands.Systems;
+using Content.Server.Mind;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs;
@@ -12,7 +13,6 @@ using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Shared.Random;
-
 
 namespace Content.Server._RMC14.Xenonids.Parasite;
 
@@ -25,7 +25,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly ThrowingSystem _throw = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly EntityManager _entities = default!;
+    [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
