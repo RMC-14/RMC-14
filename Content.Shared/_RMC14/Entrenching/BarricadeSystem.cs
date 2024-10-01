@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
@@ -99,6 +100,9 @@ public sealed class BarricadeSystem : EntitySystem
             bagsSalvaged = fullSandbag.StackRequired;
         if (TryComp(args.Target, out DamageableComponent? damageable))
             bagsSalvaged -= Math.Max((int) damageable.TotalDamage / barricade.MaterialLossDamageInterval - 1, 0);
+
+        if (TryComp(args.Target, out BarbedComponent? barbed) && barbed.IsBarbed)
+            EntityManager.SpawnEntity(barbed.Spawn, EntityManager.GetCoordinates(args.Coordinates));
 
         Del(args.Target);
 
