@@ -19,6 +19,49 @@
     },
     {
       "name": "dead"
+    },
+    {
+      "name": "carrier_walk_3",
+      "directions": 4
+    },
+    {
+      "name": "carrier_walk_2",
+      "directions": 4
+    },
+    {
+      "name": "carrier_walk_1",
+      "directions": 4
+    },
+    {
+      "name": "carrier_walk_0",
+      "directions": 4
+    },
+    {
+      "name": "carrier_rest_3"
+    },
+    {
+      "name": "carrier_rest_2"
+    },
+    {
+      "name": "carrier_rest_1"
+    },
+    {
+      "name": "carrier_rest_0"
+    },
+    {
+      "name": "carrier_downed_3"
+    },
+    {
+      "name": "carrier_downed_2"
+    },
+    {
+      "name": "carrier_downed_1"
+    },
+    {
+      "name": "carrier_downed_0"
+    },
+    {
+      "name": "carrier_dissection"
     }
   ]
 }

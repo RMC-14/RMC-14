@@ -17,6 +17,9 @@
   supervisors: cm-job-supervisors-cmo
   accessGroups:
   - CMMedbay
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: medic
   special:
   - !type:AddComponentSpecial
     components:
@@ -30,7 +33,8 @@
 - type: startingGear
   id: CMGearNurse
   equipment:
-    jumpsuit: CMScrubsNurse
+    jumpsuit: RMCScrubsLightBlue
+    neck: RMCNurseArmband
     back: CMSatchelMarine
     shoes: ClothingShoesColorWhite
     id: CMIDCardNurse
@@ -39,7 +43,8 @@
 - type: startingGear
   id: CMGearNurseEquipped
   equipment:
-    jumpsuit: CMScrubsNurse
+    jumpsuit: RMCScrubsLightBlue
+    neck: RMCNurseArmband
     back: CMSatchelMarine
     gloves: CMHandsLatex
     shoes: RMCShoesWhite

@@ -294,6 +294,7 @@
   desc: reagent-desc-cmepinephrine
   color: "#6bd43c"
   overdose: 10.5
+  worksOnTheDead: true
   metabolisms:
     Medicine:
       metabolismRate: 0.2
@@ -302,9 +303,9 @@
         conditions:
         - !type:RecentlyDefibrillated
         damage:
-        - Brute: -5
-        - Burn: -5
-        - Toxin: -5
+        - Brute: -20
+        - Burn: -20
+        - Toxin: -20
       - !type:AdjustReagent
         conditions:
         - !type:RecentlyDefibrillated

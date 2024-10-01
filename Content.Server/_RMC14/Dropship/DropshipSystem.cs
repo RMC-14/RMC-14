@@ -387,6 +387,18 @@ public sealed class DropshipSystem : SharedDropshipSystem
         RaiseLocalEvent(shuttle, ref ev);
     }
 
+    public bool AnyHijacked()
+    {
+        var dropships = EntityQueryEnumerator<DropshipComponent>();
+        while (dropships.MoveNext(out var dropship))
+        {
+            if (dropship.Crashed)
+                return true;
+        }
+
+        return false;
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);

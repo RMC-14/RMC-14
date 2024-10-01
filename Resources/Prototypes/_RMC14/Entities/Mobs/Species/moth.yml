@@ -9,6 +9,7 @@
     species: Moth
     hideLayersOnEquip:
     - HeadTop
+  - type: MothAccent
   - type: ZombieAccentOverride
     accent: zombieMoth
   - type: Speech
@@ -18,8 +19,8 @@
     proto: moth
   - type: Vocal
     sounds:
-      Male: UnisexMoth
-      Female: UnisexMoth
+      Male: RMCMaleMoth
+      Female: RMCFemaleMoth
       Unsexed: UnisexMoth
   - type: DamageVisuals
     damageOverlayGroups:

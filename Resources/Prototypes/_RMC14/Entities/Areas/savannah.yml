@@ -12,7 +12,9 @@
     powerNet: almayer
     hijackEvacuationArea: false
     hijackEvacuationWeight: 0
-    hijackEvacuationType: null
+    hijackEvacuationType: None
+    mortarPlacement: false
+    mortarFire: false # TODO RMC14 true
 
 # MAINTS
 

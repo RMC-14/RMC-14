@@ -1,4 +1,6 @@
-﻿command-description-areas-save = Save all mapped areas to the map.
+﻿command-description-areas-load = Load all saved areas to the map as entities.
+command-description-areas-loadmortar = Load only mortarable saved areas to the map as entities.
+command-description-areas-save = Save all mapped areas to the map.
 
 command-description-bioscan-marine = Manually triggers an ARES bioscan to announce to marines where xenos are and how many are left.
 command-description-bioscan-xeno = Manually triggers a Queen Mother bioscan to announce to xenos where marines are and how many are left.
@@ -38,8 +40,5 @@ command-description-squad-with = Filters a group of marines by their squad.
 command-description-squad-refresh = Manually refreshes the members of a squad.
 
 command-description-xenomature = Instantly matures a xeno. Applicable to the Queen, at which point she gets more health and abilities.
-
-command-description-marinesperxeno-get = Gets the initial ratio of marines per xeno on a specific map.
-command-description-marinesperxeno-set = Sets the initial ratio of marines per xeno on a specific map.
 
 command-description-withxenotier = Filters entities or entity prototypes to those of a specific xenonid tier.

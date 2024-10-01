@@ -8,5 +8,6 @@ public record SharedRMCNamedItems(
     string? PrimaryGunName = null,
     string? SidearmName = null,
     string? HelmetName = null,
-    string? ArmorName = null
+    string? ArmorName = null,
+    string? SentryName = null
 );

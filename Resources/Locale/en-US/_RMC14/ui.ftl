@@ -25,6 +25,7 @@ rmc-ui-named-primary-gun = Primary Gun Name
 rmc-ui-named-sidearm = Sidearm Name
 rmc-ui-named-helmet = Helmet Name
 rmc-ui-named-armor = Armor Name
+rmc-ui-named-sentry = Sentry Name
 
 rmc-ui-patron-perks = Patron Perks
 rmc-ui-lobby-message = Lobby Message

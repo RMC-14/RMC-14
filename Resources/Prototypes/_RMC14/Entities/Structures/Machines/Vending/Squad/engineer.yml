@@ -20,13 +20,17 @@
       entries:
       - id: CMVendorBundleCombatTechnicianEssentials
     - name: Handheld Defense
-      entries: [ ]
+      choices: { CMHandheldDefense: 1 }
+      entries:
     #    CM21STeslaCoil
     #    CMJIMAPlantedFlag
     #    CMUA42FSentryFlamer
-    #    CMUA571CSentryGun
-    #- id: CMSentryUpgradeKit
-    #  points: 15
+      - id: RMCSentry
+    - name: Handheld Defense Upgrade
+      choices: { CMHandheldDefenseUpgrade: 1 }
+      entries:
+      - id: RMCEngineeringUpgrade
+        points: 15
     - name: Engineering Supplies
       entries:
     #- id: CMAirlockCircuitBoard
@@ -66,8 +70,8 @@
     #  points: 18
     #- id: CMM40HPDPPhosphorusPacket3
     #  points: 18
-    #- id: CMM40HSDPSmokePacket3
-    #  points: 9
+      - id: RMCPacketGrenadeSmokeFilled
+        points: 9
     #- id: CMM74AGMFragAirburstPacket3
     #  points: 18
     #- id: CMM74AGMIncendiaryAirburstPacket3
@@ -120,8 +124,8 @@
     #  points: 24
     - name: Clothing Items
       entries:
-    #- id: CMScabbardMacheteFull
-    #  points: 6
+      - id: RMCScabbardMacheteFilled
+        points: 6
       - id: RMCPouchMacheteFilled
         points: 8
     #- id: CMMarineRadioTelephonePack
@@ -150,8 +154,8 @@
       entries:
       - id: RMCBinoculars
         points: 5
-    #- id: CMRangeFinder
-    #  points: 10
+      - id: RMCRangefinder
+        points: 10
       - id: RMCLaserDesignator
         points: 15
     - name: Helmet Optics
@@ -205,13 +209,12 @@
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
-    #- id: CMScabbardMacheteFull
+      - id: RMCScabbardMacheteFilled
       - id: CMBackpackMarineTech
       - id: CMSatchelMarineTech
       - id: CMBackpackWelder
         recommended: true
       - id: RMCSatchelWelder
-        recommended: true
       - id: RMCSatchelWelderChestrig
         recommended: true
     - name: Belt
@@ -224,7 +227,7 @@
     #- id: CMM276M44HolsterRig
     #- id: CMM276M82FHolsterRig
     #- id: CMM276ShotgunShellLoadingRig
-    #- id: CMM276MortarOperatorBelt
+      - id: CMBeltMortar
       - id: CMBeltUtilityFilled
         recommended: true
       - id: RMCBeltGrenade

@@ -1,5 +1,5 @@
 - type: entity
-  parent: Hypospray
+  parent: BaseItem
   id: CMHypospray
   name: hypospray
   description: The DeForest Medical Corporation hypospray is a sterile, air-needle auto-injector for rapid administration of drugs to patients.
@@ -7,7 +7,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Medical/hypospray.rsi
     layers:
-      - state: hypospray
+      - state: empty
+        map: [ "enum.VialVisuals.Occupied" ]
       - state: hypospray1
         map: [ "enum.SolutionContainerLayers.Fill" ]
         visible: false
@@ -19,15 +20,7 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Medical/hypospray.rsi
-  - type: Hypospray
-    transferAmount: 5
-    injectOnly: true
-    injectSound: /Audio/_RMC14/Medical/hypospray.ogg
   - type: Appearance
-  - type: SolutionContainerManager
-    solutions:
-      hypospray:
-        maxVol: 30
   - type: UseDelay
     delay: 0.333
   - type: Tag
@@ -36,7 +29,55 @@
   - type: MedicallyUnskilledDoAfter
     min: 2
     doAfter: 3
+  - type: ItemSlots
+    slots:
+      vial:
+        name: Vial
+        insertSound: /Audio/_RMC14/Weapons/safety_toggle.ogg
+        ejectSound: /Audio/Items/screwdriver2.ogg
+        whitelist:
+          components:
+          - Vial
+  - type: ContainerContainer
+    containers:
+      vial: !type:ContainerSlot
+  - type: GenericVisualizer
+    visuals:
+      enum.VialVisuals.Occupied:
+        enum.VialVisuals.Occupied:
+          False: { state: "empty"}
+          True: { state: "hypospray" }
+  - type: RMCHypospray
+    slotId: vial
+    tacticalSkills:
+      all:
+        RMCSkillMedical: 1
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: Tag
   id: Hypospray
+
+- type: entity
+  parent: CMHypospray
+  id: CMHyposprayWithVial
+  suffix: Vial
+  components:
+  - type: ContainerFill
+    containers:
+      vial:
+      - RMCVial
+
+- type: entity
+  parent: CMHypospray
+  id: CMHyposprayFilledTricord
+  suffix: Filled, Tricordrazine
+  components:
+  - type: ContainerFill
+    containers:
+      vial:
+      - RMCVialTricordrazine
+
 

@@ -37,7 +37,7 @@
       - id: CMSatchelMarine
         name: satchel
         recommended: true
-      #- id: CMShotgunScabbard # TODO: Make a Scabbard
+      - id: RMCScabbardShotgun
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -108,8 +108,8 @@
     #  points: 20
     #- id: CMM40HPDPPhosphorusPacket3
     #  points: 20
-    #- id: CMM40HSDPSmokePacket3
-    #  points: 10
+      - id: RMCPacketGrenadeSmokeFilled
+        points: 10
     #- id: CMM74AGMFragAirburstPacket3
     #  points: 15
     #- id: CMM74AGMIncendiaryAirburstPacket3
@@ -158,8 +158,8 @@
         points: 15
     #- id: CMShoulderHolster
     #  points: 15
-    #- id: CMScabbardMacheteFull
-    #  points: 15
+      - id: RMCScabbardMacheteFilled
+        points: 15
       - id: RMCPouchMacheteFilled
         points: 15
     #- id: CMMarineRadioTelephonePack
@@ -190,8 +190,8 @@
       entries:
       - id: RMCBinoculars
         points: 5
-    #- id: CMRangeFinder
-    #  points: 10
+      - id: RMCRangefinder
+        points: 10
       - id: RMCLaserDesignator
         points: 15
     - name: Helmet Optics
@@ -204,8 +204,8 @@
       entries:
       - id: CMPamphletJTAC
         points: 15
-    #- id: CMPamphletEngineering
-    #  points: 15
+      - id: CMPamphletEngineer
+        points: 15
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer

@@ -1,6 +1,7 @@
 ﻿<cc:XenoEvolutionWindow
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.Evolution"
+    xmlns:userInterface="clr-namespace:Content.Client._RMC14.UserInterface"
     Title="{Loc cm-xeno-available-evolutions}"
     MinSize="300 300">
     <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
@@ -8,6 +9,9 @@
             <Label Name="PointsLabel" Access="Public" Text="Evolution points:" />
             <RichTextLabel Name="OvipositorNeededLabel" Access="Public" />
             <BoxContainer Orientation="Vertical" Name="EvolutionsContainer" Access="Public" />
+            <userInterface:BlueHorizontalSeparator Name="Separator" Access="Public" />
+            <Label Name="StrainsLabel" Access="Public" Text="Strains:" />
+            <BoxContainer Orientation="Vertical" Name="StrainsContainer" Access="Public" />
         </BoxContainer>
     </ScrollContainer>
 </cc:XenoEvolutionWindow>

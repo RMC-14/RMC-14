@@ -3,6 +3,9 @@
   id: CMXenoCrusher
   name: cm-job-name-xeno-crusher
   playTimeTracker: CMJobXenoCrusher
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: crusher
 
 - type: playTimeTracker
   id: CMJobXenoCrusher

@@ -52,6 +52,7 @@
     price: 500
   - type: MagazineAmmoProvider
     autoEject: true
+  - type: RMCAmmoEject
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -277,6 +278,8 @@
     recoilUnwielded: 2
     scatterWielded: 6
     baseFireRate: 2.86
+  - type: RMCWeaponDamageFalloff
+    falloffMultiplier: 0
   - type: WieldDelay
     baseDelay: 0.2
   - type: WieldableSpeedModifiers
@@ -407,12 +410,14 @@
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_unload.ogg
         priority: 2
+        startingItem: RMCMagazineRifleM4SPRA19
         whitelist:
           tags:
           - CMMagazineRifleM4SPR
           - CMMagazineRifleM4SPRAP
           - CMMagazineRifleM4SPRExt
           - RMCMagazineRifleM4SPRA19
+          - RMCMagazineRifleM4SPRA19Impact
 
 - type: Tag
   id: WeaponRifleM54CE2

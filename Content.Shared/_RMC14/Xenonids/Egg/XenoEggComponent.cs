@@ -2,6 +2,7 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Robust.Shared.Audio;
 
 namespace Content.Shared._RMC14.Xenonids.Egg;
 
@@ -40,6 +41,8 @@ public sealed partial class XenoEggComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? Hive;
+
+    public SoundSpecifier PlantSound = new SoundPathSpecifier("/Audio/Effects/Fluids/splat.ogg");
 }
 
 [Serializable, NetSerializable]

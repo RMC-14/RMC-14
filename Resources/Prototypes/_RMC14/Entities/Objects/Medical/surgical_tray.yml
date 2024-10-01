@@ -1,41 +1,56 @@
 - type: entity
   parent: CMSurgicalCase
-  id: RMCSurgicalTray
+  id: RMCSurgicalTrayEmpty
   name: surgical tray
-  suffix: Filled, All Tools
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Storage/surgical_tray.rsi
     layers:
-    - state: surgical_tray
+    - state: surgical_tray_base
+    - state: surgical_tray_cover
+      map: [ "cover" ]
     - state: surgical_tray_empty
-      map: [ "openLayer" ]
-      visible: false
+      map: [ "empty" ]
   - type: Item
     size: Large
   - type: Tag # to not inherit case tags
     tags: []
+  - type: CMStorageVisualizer
+    storageClosed: empty
+    storageOpen: cover
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,5,1 # 3 slots
+    - 0,0,13,3 # 14 slots
     whitelist:
+      tags:
+      - CMTraumaKit
+      - CMSurgicalLine
+      - CMSynthGraft
       components:
-      - CMScalpel
-      - CMHemostat
-      - CMRetractor
-      - CMBoneGel
-      - CMSurgicalDrill
-      - CMBoneSaw
-      - CMCautery
-      - CMBoneSetter
+      - CMSurgeryTool
+# TODO Should also be able to have PICT FixOVein and Nanopaste
+
+- type: entity
+  parent: RMCSurgicalTrayEmpty
+  id: RMCSurgicalTray
+  name: surgical tray
+  suffix: Filled, All Tools
+  components:
   - type: StorageFill
     contents:
+#   - PICT System
     - id: CMScalpel
     - id: CMHemostat
     - id: CMRetractor
-    - id: CMBoneGel
-    - id: CMSurgicalDrill
-    - id: CMCircularSaw
+    - id: CMTraumaKit10
     - id: CMCautery
+    - id: CMCircularSaw
+    - id: CMSurgicalDrill
+    - id: CMBoneGel
     - id: CMBonesetter
+#   - FixOVein
+#   - Nanopaste
+    - id: CMSurgicalLine
+    - id: CMSynthGraft
+

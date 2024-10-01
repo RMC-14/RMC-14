@@ -10,4 +10,7 @@ public sealed partial class StorageOpenDoAfterComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool SkipInHand = false;
+
+	[DataField, AutoNetworkedField]
+	public bool SkipOnGround = false;
 }

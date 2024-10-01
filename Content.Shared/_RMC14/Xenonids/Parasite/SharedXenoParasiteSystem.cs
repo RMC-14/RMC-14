@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Pheromones;
+using Content.Shared.Actions;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
@@ -13,16 +14,19 @@ using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
+using Content.Shared.Item;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
+using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
+using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -33,8 +37,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Parasite;
 
-public abstract class SharedXenoParasiteSystem : EntitySystem
+public abstract partial class SharedXenoParasiteSystem : EntitySystem
 {
+    [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -68,6 +73,9 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         SubscribeLocalEvent<XenoParasiteComponent, CanDragEvent>(OnParasiteCanDrag);
         SubscribeLocalEvent<XenoParasiteComponent, CanDropDraggedEvent>(OnParasiteCanDropDragged);
         SubscribeLocalEvent<XenoParasiteComponent, DragDropDraggedEvent>(OnParasiteDragDropDragged);
+        SubscribeLocalEvent<XenoParasiteComponent, ThrowItemAttemptEvent>(OnParasiteThrowAttempt);
+        SubscribeLocalEvent<XenoParasiteComponent, PullAttemptEvent>(OnParasiteTryPull);
+        SubscribeLocalEvent<XenoParasiteComponent, GettingPickedUpAttemptEvent>(OnParasiteTryPickup);
 
         SubscribeLocalEvent<ParasiteSpentComponent, MapInitEvent>(OnParasiteSpentMapInit);
         SubscribeLocalEvent<ParasiteSpentComponent, UpdateMobStateEvent>(OnParasiteSpentUpdateMobState,
@@ -86,6 +94,8 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         SubscribeLocalEvent<VictimBurstComponent, ExaminedEvent>(OnVictimBurstExamine);
 
         SubscribeLocalEvent<BursterComponent, MoveInputEvent>(OnTryMove);
+        IntializeAI();
+
     }
 
     private void OnInfectableActivate(Entity<InfectableComponent> ent, ref ActivateInWorldEvent args)
@@ -110,7 +120,9 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
     private void OnParasiteLeapHit(Entity<XenoParasiteComponent> parasite, ref XenoLeapHitEvent args)
     {
         var coordinates = _transform.GetMoverCoordinates(parasite);
-        if (_transform.InRange(coordinates, args.Leaping.Origin, parasite.Comp.InfectRange))
+        var range = TryComp<ParasiteAIComponent>(parasite, out var ai) ? ai.MaxInfectRange : parasite.Comp.InfectRange;
+
+        if (_transform.InRange(coordinates, args.Leaping.Origin, range))
             Infect(parasite, args.Hit, false);
     }
 
@@ -178,6 +190,38 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
         StartInfect(ent, args.Target, args.User);
         args.Handled = true;
+    }
+
+    private void OnParasiteThrowAttempt(Entity<XenoParasiteComponent> ent, ref ThrowItemAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        args.Cancelled = true;
+
+        if (_net.IsClient)
+            return;
+
+        var user = args.User;
+        _popup.PopupEntity(Loc.GetString("rmc-xeno-cant-throw", ("target", ent)), user, user, PopupType.SmallCaution);
+    }
+
+    private void OnParasiteTryPull(Entity<XenoParasiteComponent> ent, ref PullAttemptEvent args)
+    {
+        if (HasComp<ParasiteAIComponent>(ent) && !HasComp<InfectableComponent>(args.PullerUid))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-parasite-nonplayer-pull", ("parasite", ent)), ent, args.PullerUid, PopupType.SmallCaution);
+            args.Cancelled = true;
+        }
+    }
+
+    private void OnParasiteTryPickup(Entity<XenoParasiteComponent> ent, ref GettingPickedUpAttemptEvent args)
+    {
+        if (!HasComp<ParasiteAIComponent>(ent))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-parasite-player-pickup", ("parasite", ent)), ent, args.User, PopupType.SmallCaution);
+            args.Cancel();
+        }
     }
 
     protected virtual void ParasiteLeapHit(Entity<XenoParasiteComponent> parasite)
@@ -266,6 +310,8 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, user, parasite.Comp.ManualAttachDelay, ev, parasite, victim)
         {
             BreakOnMove = true,
+            BlockDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
             AttemptFrequency = AttemptFrequency.EveryTick
         };
         _doAfter.TryStartDoAfter(doAfter);
@@ -328,6 +374,14 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         {
             var pos = _transform.GetWorldPosition(victim);
             _transform.SetWorldPosition(parasite, pos);
+
+            if (TryComp<ParasiteAIComponent>(parasite, out var ai))
+            {
+                ai.JumpsLeft--;
+
+                if (_random.NextFloat() < ai.IdleChance)
+                    GoIdle((parasite, ai));
+            }
         }
 
         if (!TryRipOffClothing(victim, SlotFlags.HEAD))
@@ -394,7 +448,25 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+
         var time = _timing.CurTime;
+        var aiQuery = EntityQueryEnumerator<ParasiteAIComponent>();
+        while (aiQuery.MoveNext(out var uid, out var ai))
+        {
+            if (!_mobState.IsDead(uid) && !TerminatingOrDeleted(uid))
+                UpdateAI((uid, ai), time);
+        }
+
+        var aiDelayQuery = EntityQueryEnumerator<ParasiteAIDelayAddComponent>();
+        while (aiDelayQuery.MoveNext(out var uid, out var aid))
+        {
+            if (time > aid.TimeToAI)
+            {
+                EnsureComp<ParasiteAIComponent>(uid);
+                RemCompDeferred<ParasiteAIDelayAddComponent>(uid);
+            }
+        }
+
         var query = EntityQueryEnumerator<VictimInfectedComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var infected, out var xform))
         {
@@ -554,7 +626,7 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
         if (!popups)
             return;
         _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes-self"), victim, victim, PopupType.MediumCaution);
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.MediumCaution);        
+        _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.MediumCaution);
     }
 
     private void Burst(Entity<VictimInfectedComponent> burstFrom)
@@ -563,11 +635,13 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
             return;
         RemCompDeferred<VictimInfectedComponent>(burstFrom);
 
+        var coords = _transform.GetMoverCoordinates(burstFrom);
+
         if (_container.TryGetContainer(burstFrom, burstFrom.Comp.LarvaContainerId, out var container))
         {
             foreach (var larva in container.ContainedEntities)
                 RemCompDeferred<BursterComponent>(larva);
-            _container.EmptyContainer(container);
+            _container.EmptyContainer(container, destination: coords);
         }
 
         Dirty(burstFrom, burstFrom.Comp);
@@ -579,6 +653,9 @@ public abstract class SharedXenoParasiteSystem : EntitySystem
 
     private void OnTryMove(Entity<BursterComponent> burster, ref MoveInputEvent args)
     {
+        if (!args.HasDirectionalMovement)
+            return;
+
         if (TryComp<VictimInfectedComponent>(burster.Comp.BurstFrom, out var infected))
             Burst((burster.Comp.BurstFrom, infected));
     }

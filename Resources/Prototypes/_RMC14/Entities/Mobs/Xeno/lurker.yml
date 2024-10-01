@@ -47,7 +47,7 @@
   - type: CMArmor
     explosionArmor: 20
   - type: XenoEvolution
-    max: 540
+    max: 500
 #    evolvesTo:
 #    - CMXenoRavager
   - type: XenoLeap
@@ -58,16 +58,22 @@
     knockdownRequiresInvisibility: true
   - type: XenoTurnInvisible
   - type: XenoCripplingStrike
+  - type: XenoMeleeSlow
+    requiresKnockDown: true
   - type: MeleeWeapon
     attackRate: 0.75
     damage:
       groups:
         Brute: 35
   - type: Tackle # min: 2, max: 6
-    threshold: 5
+    threshold: 4
     stun: 5
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.7
     baseSprintSpeed: 5
   - type: RMCXenoDamageVisuals
     prefix: lurker
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: lurker
