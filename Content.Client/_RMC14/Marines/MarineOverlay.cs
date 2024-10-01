@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Mobs;
+using Content.Shared._RMC14.Stealth;
 using Content.Shared.StatusIcon.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -16,11 +17,14 @@ public sealed class MarineOverlay : Overlay
     [Dependency] private readonly IPlayerManager _players = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
+    private readonly ContainerSystem _container;
     private readonly MarineSystem _marine;
     private readonly SpriteSystem _sprite;
     private readonly TransformSystem _transform;
 
     private readonly ShaderInstance _shader;
+
+    private readonly EntityQuery<EntityActiveInvisibleComponent> _invisQuery;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
@@ -28,9 +32,12 @@ public sealed class MarineOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
 
+        _container = _entity.System<ContainerSystem>();
         _marine = _entity.System<MarineSystem>();
         _sprite = _entity.System<SpriteSystem>();
         _transform = _entity.System<TransformSystem>();
+
+        _invisQuery = _entity.GetEntityQuery<EntityActiveInvisibleComponent>();
 
         _shader = _prototype.Index<ShaderPrototype>("shaded").Instance();
     }
@@ -67,6 +74,12 @@ public sealed class MarineOverlay : Overlay
             if (icon.Icon == null)
                 continue;
 
+            if (_container.IsEntityOrParentInContainer(uid)) // prevent icons being visible inside containers
+                continue;
+
+            if (_invisQuery.HasComp(uid))
+                continue;
+
             var worldMatrix = Matrix3x2.CreateTranslation(worldPos);
             var scaledWorld = Matrix3x2.Multiply(scaleMatrix, worldMatrix);
             var matrix = Matrix3x2.Multiply(rotationMatrix, scaledWorld);
@@ -74,8 +87,8 @@ public sealed class MarineOverlay : Overlay
 
             var texture = _sprite.Frame0(icon.Icon);
 
-            var yOffset = 0.1f + (bounds.Height + sprite.Offset.Y) / 2f - (float) texture.Height / EyeManager.PixelsPerMeter;
-            var xOffset = 0.1f + (bounds.Width + sprite.Offset.X) / 2f - (float) texture.Width / EyeManager.PixelsPerMeter;
+            var yOffset = 0.1f + (bounds.Height + sprite.Offset.Y) / 2f - (float)texture.Height / EyeManager.PixelsPerMeter;
+            var xOffset = 0.1f + (bounds.Width + sprite.Offset.X) / 2f - (float)texture.Width / EyeManager.PixelsPerMeter;
 
             var position = new Vector2(xOffset, yOffset);
             if (icon.Icon != null && icon.Background != null)

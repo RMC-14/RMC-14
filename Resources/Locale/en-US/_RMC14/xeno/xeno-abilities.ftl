@@ -93,6 +93,7 @@ rmc-xeno-rest-cant-stomp = You can't stomp while resting!
 rmc-xeno-rest-cant-gut = You can't gut while resting!
 rmc-xeno-rest-cant-screech = You can't screech while resting!
 rmc-xeno-rest-cant-secrete = You can't secrete while resting!
+rmc-xeno-rest-cant = You can't do that while resting!
 
 # Toggle Crest Defense
 cm-xeno-toggle-crest-cant-fortify = You can't fortify while your crest is lowered!
@@ -119,6 +120,24 @@ cm-xeno-invisibility-expire = We feel our invisibility end!
 # Ovipositor
 cm-xeno-ovipositor-attach = We start attaching to the ovipositor.
 cm-xeno-ovipositor-detach = We start detaching from the ovipositor.
+
+# Retrieve Egg
+cm-xeno-retrieve-egg-no-eggs = We don't have any eggs stored!
+cm-xeno-retrieve-egg-too-many-eggs = We can't carry more eggs!
+cm-xeno-retrieve-egg-stash-egg = We store the egg for safekeeping. Now holding: {$cur_eggs}/{$max_eggs}.
+cm-xeno-retrieve-egg-unstash-egg = We grab an egg from our storage. Now holding: {$cur_eggs}/{$max_eggs}.
+rmc-xeno-retrieve-egg-current = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} holding: {$cur_eggs}/{$max_eggs} eggs.
+
+# Throw Parasite
+cm-xeno-throw-parasite-no-parasites = We don't have any parasites stored!
+cm-xeno-throw-parasite-too-many-parasites = We can't carry more parasites!
+cm-xeno-throw-parasite-stash-parasite = We store the parasite for safekeeping. Now sheltering: {$cur_parasites}/{$max_parasites}.
+cm-xeno-throw-parasite-unstash-parasite = We grab a parasite from our storage. Now sheltering: {$cur_parasites}/{$max_parasites}.
+rmc-xeno-throw-parasite-current = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} sheltering: {$cur_paras}/{$max_paras} parasites.
+rmc-xeno-throw-parasite-reserves = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-HAVE($xeno)} {$rev_paras} parasite ghost {$rev_paras ->
+   [one] role
+   *[other] roles 
+} available.
 
 # Defensive Shield
 rmc-xeno-defensive-shield-end = We feel our enhanced shield end!

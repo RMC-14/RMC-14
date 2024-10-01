@@ -88,10 +88,12 @@
     barricadeDamage:
       types:
         Heat: 5
+    doAfter: 0.5
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: praetorian
+  - type: AcidTrap
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -133,7 +135,7 @@
     - ActionXenoAcidNormal
     - ActionXenoPheromones
     - ActionXenoSpit
-    - ActionXenoSprayAcidPraetorian
+    - ActionXenoSprayAcidWarden
     - ActionXenoAid
     - ActionXenoRetrieve
     - ActionXenoAidToggle
@@ -149,6 +151,13 @@
   - type: XenoEnergy
   - type: XenoRetrieve
   - type: XenoAid
+  - type: XenoSprayAcid
+    acid: XenoAcidSprayStrong
+    plasmaCost: 130
+    barricadeDamage:
+      types:
+        Heat: 5
+    doAfter: 0.5
   - type: MeleeWeapon
     damage:
       groups:

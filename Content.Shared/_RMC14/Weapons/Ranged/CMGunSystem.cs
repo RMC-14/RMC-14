@@ -2,14 +2,14 @@
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Common;
-using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
-using Content.Shared.FixedPoint;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
@@ -24,7 +24,6 @@ using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
@@ -172,10 +171,8 @@ public sealed class CMGunSystem : EntitySystem
     /// </summary>
     private void OnCollisionCheckArc(Entity<ProjectileFixedDistanceComponent> ent, ref PreventCollideEvent args)
     {
-        int otherLayers = (int)args.OtherFixture.CollisionLayer;
-        if (Comp<ProjectileFixedDistanceComponent>(ent).ArcProj && (args.OtherFixture.CollisionLayer & blockArcCollisionGroup) == 0)
+        if (ent.Comp.ArcProj && (args.OtherFixture.CollisionLayer & blockArcCollisionGroup) == 0)
             args.Cancelled = true;
-        return;
     }
 
     private void OnEventToStopProjectile<T>(Entity<ProjectileFixedDistanceComponent> ent, ref T args)
@@ -228,6 +225,9 @@ public sealed class CMGunSystem : EntitySystem
     private void OnGunUserWhitelistAttemptShoot(Entity<GunUserWhitelistComponent> ent, ref AttemptShootEvent args)
     {
         if (args.Cancelled)
+            return;
+
+        if (HasComp<BypassInteractionChecksComponent>(args.User))
             return;
 
         if (_whitelist.IsValid(ent.Comp.Whitelist, args.User))

@@ -83,6 +83,9 @@
     - RMCAttachmentRail
     - RMCAttachmentRailFlashlight
     - Flashlight
+  - type: Construction
+    graph: RMCFlashLightGraph
+    node: RailLight
 
 - type: entity
   parent: RMCRailAttachmentBase

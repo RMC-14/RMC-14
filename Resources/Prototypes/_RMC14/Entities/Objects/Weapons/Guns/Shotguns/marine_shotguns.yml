@@ -61,6 +61,9 @@
   - type: Tag
     tags:
     - RMCWeaponShotgun
+  - type: RMCFireGroup
+    group: Shotgun
+    delay: 4
 
 - type: entity
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
@@ -91,6 +94,7 @@
       rmc-aslot-barrel:
         whitelist:
           tags:
+          - RMCAttachmentExtendedBarrel
           - RMCAttachmentBarrelCharger
           - RMCAttachmentRecoilCompensator
           - RMCM5Bayonet

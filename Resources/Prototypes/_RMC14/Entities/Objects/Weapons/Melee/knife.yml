@@ -106,7 +106,9 @@
   description: Latest issue of the Marine Machete.
   components:
   - type: Clothing
-    slots: [ belt ]
+    slots: 
+    - belt
+    - suitstorage
   - type: Tag
     tags:
     - Machete

@@ -8,7 +8,7 @@ using Content.Shared.Whitelist;
 
 namespace Content.Shared._RMC14.Weapons.Melee;
 
-public abstract class SharedCMMeleeWeaponSystem : EntitySystem
+public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
 {
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
@@ -22,8 +22,13 @@ public abstract class SharedCMMeleeWeaponSystem : EntitySystem
         _xenoQuery = GetEntityQuery<XenoComponent>();
 
         SubscribeLocalEvent<ImmuneToUnarmedComponent, GettingAttackedAttemptEvent>(OnImmuneToUnarmedGettingAttacked);
+
+        SubscribeLocalEvent<ImmuneToMeleeComponent, GettingAttackedAttemptEvent>(OnImmuneToMeleeGettingAttacked);
+
         SubscribeLocalEvent<MeleeReceivedMultiplierComponent, DamageModifyEvent>(OnMeleeReceivedMultiplierDamageModify);
+
         SubscribeLocalEvent<StunOnHitComponent, MeleeHitEvent>(OnStunOnHitMeleeHit);
+
         SubscribeLocalEvent<MeleeDamageMultiplierComponent, MeleeHitEvent>(OnMultiplierOnHitMeleeHit);
     }
 
@@ -63,6 +68,12 @@ public abstract class SharedCMMeleeWeaponSystem : EntitySystem
             return;
 
         if (args.Attacker == args.Weapon)
+            args.Cancelled = true;
+    }
+
+    private void OnImmuneToMeleeGettingAttacked(Entity<ImmuneToMeleeComponent> ent, ref GettingAttackedAttemptEvent args)
+    {
+        if (_whitelist.IsWhitelistPassOrNull(ent.Comp.Whitelist, args.Attacker))
             args.Cancelled = true;
     }
 

@@ -32,10 +32,10 @@
     - ActionXenoOrderConstruction
     - ActionXenoPheromones
     - ActionXenoPlantWeeds
-    #    - ActionXenoResinHole
-    #    - ActionXenoThrowParasite
-    #    - ActionXenoRetrieveEgg
-    #    - ActionXenoParasiteReserve
+    - ActionXenoResinHole
+    - ActionXenoThrowParasite
+    - ActionXenoRetrieveEgg
+    - ActionXenoParasiteReserve
     - ActionXenoDevolve
     tier: 2
     hudOffset: 0,0.19
@@ -66,15 +66,20 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
+  - type: EggPlantTime
+    plantTime: 1
   - type: WhitelistPickup
     whitelist:
       components:
       - XenoParasite
       - XenoEgg
+  - type: XenoParasiteThrower
+  - type: XenoEggRetriever
+  - type: XenoNurturing
   - type: RMCSize
     size: Big
-#  - type: RMCXenoDamageVisuals # TODO RMC14
-#    prefix: carrier
+  - type: RMCXenoDamageVisuals
+    prefix: carrier
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
