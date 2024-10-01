@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: 'The roadmap has been updated to reflect current and upcoming changes:
-      Blood types, Smart Gun Operator, and the Weapons Specialist''s Grenadier kit.'
-    type: Tweak
-  id: 264
-  time: '2024-07-04T04:59:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2803
 - author: noctyrnal
   changes:
   - message: Added a new rouny plushie. rouny.
@@ -4611,5 +4603,14 @@
   id: 763
   time: '2024-09-30T23:06:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4067
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed xeno hud icons being visible while a scout is invisible.
+    type: Fix
+  - message: Fixed scout specialists not becoming visible on death.
+    type: Fix
+  id: 764
+  time: '2024-10-01T00:01:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4197
 Name: RMC14
 Order: -1
