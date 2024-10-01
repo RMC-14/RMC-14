@@ -58,6 +58,7 @@
       Alive: XenoHealth
       Critical: XenoCrit
       Dead: XenoDead
+    displayDamageInAlert: true
   - type: MobStateActions
     actions:
       Critical:
@@ -162,6 +163,11 @@
         type: XenoWordQueenBui
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui
+      enum.XenoReserveParasiteChangeUI.Key:
+        type: ReserveParasitesBoundUserInterface
+      enum.XenoParasiteGhostUI.Key:
+        type: XenoParasiteGhostBui
+        requireInputValidation: false
   - type: TypingIndicator
     proto: alien
   - type: MovedByPressure

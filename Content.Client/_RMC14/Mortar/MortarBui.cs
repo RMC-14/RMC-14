@@ -9,10 +9,6 @@ namespace Content.Client._RMC14.Mortar;
 public sealed class MortarBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     private MortarWindow? _window;
-    private FloatSpinBox? _targetX;
-    private FloatSpinBox? _targetY;
-    private FloatSpinBox? _dialX;
-    private FloatSpinBox? _dialY;
 
     protected override void Open()
     {
@@ -25,32 +21,27 @@ public sealed class MortarBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
             return (int) spinBox.Value;
         }
 
-        static FloatSpinBox CreateSpinBox(BoxContainer container, int limit, int value)
+        static void SetSpinBox(FloatSpinBox spinBox, int limit, int value)
         {
-            var spinBox = new FloatSpinBox(1, 0) { MinWidth = 130 };
             spinBox.Value = value;
             spinBox.OnValueChanged += args =>
             {
                 var value = Math.Clamp(args.Value, -limit, limit);
                 spinBox.Value = value;
             };
-
-            container.AddChild(spinBox);
-            return spinBox;
         }
 
         if (EntMan.TryGetComponent(Owner, out MortarComponent? mortar))
         {
-            _targetX = CreateSpinBox(_window.TargetXContainer, mortar.MaxTarget, mortar.Target.X);
-            _targetY = CreateSpinBox(_window.TargetYContainer, mortar.MaxTarget, mortar.Target.Y);
-            _dialX = CreateSpinBox(_window.DialXContainer, mortar.MaxDial, mortar.Dial.X);
-            _dialY = CreateSpinBox(_window.DialYContainer, mortar.MaxDial, mortar.Dial.Y);
-
+            SetSpinBox(_window.TargetX, mortar.MaxTarget, mortar.Target.X);
+            SetSpinBox(_window.TargetY, mortar.MaxTarget, mortar.Target.Y);
+            SetSpinBox(_window.DialX, mortar.MaxDial, mortar.Dial.X);
+            SetSpinBox(_window.DialY, mortar.MaxDial, mortar.Dial.Y);
             _window.SetTargetButton.OnPressed += _ =>
-                SendPredictedMessage(new MortarTargetBuiMsg((Parse(_targetX), Parse(_targetY))));
+                SendPredictedMessage(new MortarTargetBuiMsg((Parse(_window.TargetX), Parse(_window.TargetY))));
 
             _window.SetOffsetButton.OnPressed += _ =>
-                SendPredictedMessage(new MortarDialBuiMsg((Parse(_dialX), Parse(_dialY))));
+                SendPredictedMessage(new MortarDialBuiMsg((Parse(_window.DialX), Parse(_window.DialY))));
         }
 
         _window.ViewCameraButton.OnPressed += _ => SendPredictedMessage(new MortarViewCamerasMsg());
@@ -70,10 +61,10 @@ public sealed class MortarBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
                 spinBox.Value = value;
         }
 
-        SetValue(_targetX, mortar.Target.X);
-        SetValue(_targetY, mortar.Target.Y);
-        SetValue(_dialX, mortar.Dial.X);
-        SetValue(_dialY, mortar.Dial.Y);
+        SetValue(_window.TargetX, mortar.Target.X);
+        SetValue(_window.TargetY, mortar.Target.Y);
+        SetValue(_window.DialX, mortar.Dial.X);
+        SetValue(_window.DialY, mortar.Dial.Y);
         _window.MaxDialLabel.Text = Loc.GetString("rmc-mortar-offset-max", ("max", mortar.MaxDial));
     }
 }

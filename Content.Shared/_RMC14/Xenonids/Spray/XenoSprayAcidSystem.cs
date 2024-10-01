@@ -78,9 +78,10 @@ public sealed class XenoSprayAcidSystem : EntitySystem
         }
 
         var start = xeno.Owner.ToCoordinates();
-        var end =GetCoordinates(args.Coordinates);
-        var tiles = _line.DrawLine(start, end, xeno.Comp.Delay);
+        var end = GetCoordinates(args.Coordinates);
+        var tiles = _line.DrawLine(start, end, xeno.Comp.Delay, out var blocker);
         var active = EnsureComp<ActiveAcidSprayingComponent>(xeno);
+        active.Blocker = blocker;
         active.Acid = xeno.Comp.Acid;
         active.Spawn = tiles;
         Dirty(xeno, active);
@@ -113,17 +114,22 @@ public sealed class XenoSprayAcidSystem : EntitySystem
 
     private void TryAcid(Entity<XenoSprayAcidComponent> acid, RMCAnchoredEntitiesEnumerator anchored)
     {
-        var time = _timing.CurTime;
         while (anchored.MoveNext(out var uid))
         {
-            if (!_barricadeQuery.HasComp(uid))
-                continue;
-
-            var comp = EnsureComp<SprayAcidedComponent>(uid);
-            comp.Damage = acid.Comp.BarricadeDamage;
-            comp.ExpireAt = time + acid.Comp.BarricadeDuration;
-            Dirty(uid, comp);
+            TryAcid(acid, uid);
         }
+    }
+
+    private void TryAcid(Entity<XenoSprayAcidComponent> acid, EntityUid target)
+    {
+        var time = _timing.CurTime;
+        if (!_barricadeQuery.HasComp(target))
+            return;
+
+        var comp = EnsureComp<SprayAcidedComponent>(target);
+        comp.Damage = acid.Comp.BarricadeDamage;
+        comp.ExpireAt = time + acid.Comp.BarricadeDuration;
+        Dirty(target, comp);
     }
 
     public override void Update(float frameTime)
@@ -150,15 +156,12 @@ public sealed class XenoSprayAcidSystem : EntitySystem
                     // Same tile
                     TryAcid(spray, _rmcMap.GetAnchoredEntitiesEnumerator(spawned));
 
-                    // Sides
-                    var direction = acid.Direction;
-                    var (first, second) = direction.GetPerpendiculars();
-                    TryAcid(spray, _rmcMap.GetAnchoredEntitiesEnumerator(spawned, first, first.GetOpposite().AsFlag()));
-                    TryAcid(spray, _rmcMap.GetAnchoredEntitiesEnumerator(spawned, second, second.GetOpposite().AsFlag()));
-
-                    // Ahead
-                    var aheadDirection = direction.AsFlag() | direction.GetOpposite().AsFlag();
-                    TryAcid(spray, _rmcMap.GetAnchoredEntitiesEnumerator(spawned, direction, aheadDirection));
+                    if (active.Spawn.Count <= 1 && active.Blocker != null)
+                    {
+                        TryAcid(spray, active.Blocker.Value);
+                        active.Blocker = null;
+                        Dirty(uid, active);
+                    }
                 }
 
                 _onCollide.SetChain(spawned, active.Chain.Value);

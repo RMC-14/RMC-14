@@ -2,9 +2,9 @@
   id: HiveCoreXeno
   name: hive core # TODO RMC14 allow other structures to be built
   description: A giant pulsating mound of mass. It looks very much alive.
-  components: # TODO RMC14 block ob, mortar and air strikes
+  components: # TODO RMC14 block ob
   - type: Transform
-    anchored: true # TODO RMC14 cooldown if destroyed
+    anchored: true
   - type: Physics
   - type: Fixtures
     fixtures:
@@ -46,6 +46,7 @@
     id: HiveCoreXeno
   - type: RoofingEntity
     range: 10
+  - type: EvolutionBonus
 
 - type: entity
   id: HiveCoreXenoConstructionNode

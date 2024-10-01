@@ -69,6 +69,6 @@
     isCorrodible: false
   - type: UserInterface
     interfaces:
-      enum.XenoEggGhostUI.Key:
-        type: XenoEggGhostBui
+      enum.XenoParasiteGhostUI.Key:
+        type: XenoParasiteGhostBui
         requireInputValidation: false

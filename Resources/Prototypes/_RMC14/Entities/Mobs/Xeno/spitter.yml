@@ -47,7 +47,7 @@
     maxPlasma: 600
     plasmaRegenOnWeeds: 4
   - type: XenoEvolution
-    max: 540
+    max: 500
     evolvesTo:
     - CMXenoBoiler
     - CMXenoPraetorian
@@ -81,3 +81,4 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: spitter
+  - type: AcidTrap
