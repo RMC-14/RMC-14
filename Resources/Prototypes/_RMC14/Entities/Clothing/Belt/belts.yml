@@ -22,9 +22,9 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/marine.rsi
   - type: Item
-    size: Normal
+    size: Large
   - type: Storage
-    maxItemSize: Large
+    maxItemSize: Normal
     grid:
     - 0,0,9,1 # 5 slots
     whitelist:
