@@ -1,5 +1,6 @@
-﻿using System.Numerics;
+﻿using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Entrenching;
+using Content.Shared._RMC14.Map;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Doors.Components;
 using Content.Shared.Tag;
@@ -19,6 +20,7 @@ public sealed class LineSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
+    private static readonly ProtoId<TagPrototype> WallTag = "Wall";
 
     private EntityQuery<BarricadeComponent> _barricadeQuery;
     private EntityQuery<DoorComponent> _doorQuery;
@@ -31,8 +33,9 @@ public sealed class LineSystem : EntitySystem
         _mapGridQuery = GetEntityQuery<MapGridComponent>();
     }
 
-    public List<LineTile> DrawLine(EntityCoordinates start, EntityCoordinates end, TimeSpan delayPer)
+    public List<LineTile> DrawLine(EntityCoordinates start, EntityCoordinates end, TimeSpan delayPer, out EntityUid? blocker)
     {
+        blocker = null;
         start = _mapSystem.AlignToGrid(_transform.GetMoverCoordinates(start));
         end = _mapSystem.AlignToGrid(_transform.GetMoverCoordinates(end));
         var tiles = new List<LineTile>();
@@ -61,22 +64,23 @@ public sealed class LineSystem : EntitySystem
             if (entityCoords == lastCoords)
                 continue;
 
-            var direction = (entityCoords.Position - lastCoords.Position).ToWorldAngle().GetCardinalDir();
-            var blocked = IsTileBlocked(grid, entityCoords, direction);
+            var direction = (entityCoords.Position - lastCoords.Position).ToWorldAngle();
+            var blocked = IsTileBlocked(grid, entityCoords, direction, out blocker);
             if (blocked)
                 break;
 
             lastCoords = entityCoords;
             var mapCoords = _transform.ToMapCoordinates(entityCoords);
-            tiles.Add(new LineTile(mapCoords, time + delayPer * delay, direction));
+            tiles.Add(new LineTile(mapCoords, time + delayPer * delay));
             delay++;
         }
 
         return tiles;
     }
 
-    private bool IsTileBlocked(Entity<MapGridComponent>? grid, EntityCoordinates coords, Direction direction)
+    private bool IsTileBlocked(Entity<MapGridComponent>? grid, EntityCoordinates coords, Angle angle, [NotNullWhen(true)] out EntityUid? blocker)
     {
+        blocker = default;
         if (grid == null)
             return false;
 
@@ -90,11 +94,34 @@ public sealed class LineSystem : EntitySystem
                     continue;
 
                 var barricadeDir = _transform.GetWorldRotation(uid.Value).GetCardinalDir();
+                var direction = angle.GetDir();
                 if (barricadeDir == direction || barricadeDir == direction.GetOpposite())
+                {
+                    blocker = uid.Value;
                     return true;
+                }
+
+                if (!direction.IsCardinal())
+                {
+                    var blocked = direction switch
+                    {
+                        Direction.SouthEast => barricadeDir is Direction.North or Direction.West,
+                        Direction.NorthEast => barricadeDir is Direction.South or Direction.West,
+                        Direction.NorthWest => barricadeDir is Direction.South or Direction.East,
+                        Direction.SouthWest => barricadeDir is Direction.North or Direction.East,
+                        _ => false,
+                    };
+
+                    if (blocked)
+                    {
+                        blocker = uid.Value;
+                        return true;
+                    }
+                }
             }
-            else if (_tag.HasTag(uid.Value, StructureTag))
+            else if (_tag.HasAnyTag(uid.Value, StructureTag, WallTag))
             {
+                blocker = uid.Value;
                 return true;
             }
         }
