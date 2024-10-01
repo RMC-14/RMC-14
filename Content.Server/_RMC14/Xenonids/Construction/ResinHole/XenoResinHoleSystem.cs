@@ -223,13 +223,11 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         var para = Spawn(resinHole.Comp.TrapPrototype);
         _xeno.SetHive(para, resinHole.Comp.Hive);
 
-        if (!_rmcHands.IsPickupByAllowed(para, args.User))
+        if (!_rmcHands.IsPickupByAllowed(para, args.User) || !_hands.TryPickupAnyHand(args.User, para))
         {
             QueueDel(para);
             return;
         }
-
-        _hands.TryPickupAnyHand(args.User, para);
 
         resinHole.Comp.TrapPrototype = null;
         _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);

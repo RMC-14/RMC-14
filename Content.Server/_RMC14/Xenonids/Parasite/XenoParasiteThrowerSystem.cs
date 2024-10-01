@@ -8,7 +8,6 @@ using Content.Shared.Actions;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Mind;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
@@ -32,7 +31,6 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
 
     public override void Initialize()
     {
@@ -69,7 +67,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
                 if (!HasComp<XenoParasiteComponent>(possibleParasite))
                     continue;
 
-                if (_mind.TryGetMind(possibleParasite, out _, out _))
+                if (HasComp<ParasiteAIComponent>(possibleParasite))
                     continue;
 
                 tileHasParasites = true;
