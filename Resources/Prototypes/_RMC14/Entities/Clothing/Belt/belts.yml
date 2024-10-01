@@ -24,9 +24,9 @@
   - type: Item
     size: Large
   - type: Storage
-    maxItemSize: Normal
+    maxItemSize: Large
     grid:
-    - 0,0,9,1 # 5 slots
+    - 0,0,5,1 # 5 slots
     whitelist:
       tags:
       - Flare
