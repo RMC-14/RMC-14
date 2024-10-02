@@ -1,3 +1,6 @@
+# Fruit choosing
+rmc-xeno-fruit-choose = We will now plant {$fruit} when secreting resin.
+
 # Plant failures
 rmc-xeno-fruit-plant-failed = We can't plant there!
 rmc-xeno-fruit-plant-failed-weeds = We cannot plant a fruit without a weed garden!

@@ -151,6 +151,8 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             action.Icon = new SpriteSpecifier.EntityPrototype(args.Choice);
             Dirty(xeno, action);
         }
+
+        _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-choose", ("fruit", args.Choice)), xeno, xeno);
     }
 
     #endregion
