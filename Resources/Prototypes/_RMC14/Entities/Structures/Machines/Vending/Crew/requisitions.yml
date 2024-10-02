@@ -61,8 +61,8 @@
       #  amount: 3
     - name: Explosives
       entries:
-      #- id: M15 Fragmentation Grenade
-      #  amount: 2
+      - id: CMGrenadeFragOld
+        amount: 2
       #- id: M20 Claymore Anti-Personnel Mine
       #  amount: 4
       - id: CMGrenadeHighExplosive
@@ -109,8 +109,8 @@
       entries:
       - id: CMBackpackMarine
         amount: 15
-      #- id: Shotgun Scabbard
-      #  amount: 10
+      - id: RMCScabbardShotgun
+        amount: 10
       #- id: Pyrotechnician G4-1 Fueltank
       #  amount: 2
       - id: CMBackpackWelder
@@ -211,8 +211,8 @@
       #   amount: 2
       - id: CMPackFlare
         amount: 10
-      #- id: Machete Scabbard (Full)
-      #  amount: 6
+      - id: RMCScabbardMacheteFilled
+        amount: 6
       #- id: MB-6 Folding Barricades (x3)
       #   amount: 3
       #- id: Motion Detector

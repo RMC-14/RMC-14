@@ -1,0 +1,114 @@
+# SPP helmets
+- type: entity
+  parent: ArmorHelmetM10
+  id: ArmorHelmetSPP
+  name: SPP UM4 helmet
+  description: Using highly skilled manufacturing techniques this UM4 helmet manages to be very resistant to ballistics damage, at the cost of its huge weight causing an extreme stress on the occupant's head that will most likely cause neck problems.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/helmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/helmet.rsi
+
+- type: entity
+  parent: CMArmorHelmetM10Tech
+  id: ArmorHelmetSPPEngineer
+  name: SPP UM4-V helmet
+  description: This version of the UM4 helmet has a ballistic-glass visor, allowing for the SPP Engineers to safely weld, but by some reports hindering sight in the process.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/engi.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/engi.rsi
+
+- type: entity
+  parent: ArmorHelmetSPP
+  id: ArmorHelmetSPPHeavy
+  name: SPP UH7 helmet
+  description: Like the UM4, this helmet is very resistant to ballistic damage, but both its flaws and benefits have been doubled. The few SPP Zhergeants that have lived past age 30 have all needed to retire from terminal neck problems caused from the stress of wearing this helmet.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/heavy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/heavy.rsi
+
+# SPP hats
+- type: entity
+  parent: CMHeadCap
+  id: CMHeadCapSPP
+  name: SPP UL2 cap
+  description: SPP headgear issued to soldiers when they're not expected to face combat, and may be requested by officers and above.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/cap.rsi
+
+- type: entity
+  parent: CMHeadCapSPP
+  id: CMHeadCapSPPCivilian
+  name: SPP UL2 civilian cap
+  description: SPP civilian headgear. It's of poor quality, and isn't expected to last all that long, however for as long as it's whole, it appears quite stylish.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/civ.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/civ.rsi
+
+- type: entity
+  parent: CMHeadCapSPP
+  id: CMHeadCapSPPBeret
+  name: SPP UL3 beret
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/beret.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/beret.rsi
+
+- type: entity
+  parent: CMHeadCapSPP
+  id: CMHeadCapSPPPeaked
+  name: SPP UL3 peaked cap
+  description: SPP headgear issued to Kapitans and above. It is made of high-quality materials, and has the officers rank in gold placed upon the front of the cap.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/peaked.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/peaked.rsi
+
+- type: entity
+  parent: CMHeadCapSPP
+  id: CMHeadCapSPPUshanka
+  name: SPP UL8 ushanka
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/ushanka.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon-up
+      map: ["foldedLayer"]
+      visible: false
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/ushanka.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+  - type: FoldableClothing
+    foldedEquippedPrefix: up
+    foldedHeldPrefix: up
+
+- type: entity
+  parent: CMHeadCapSPPUshanka
+  id: CMHeadCapSPPUshankaCivilian
+  name: SPP UL8c ushanka
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/ushanka_civ.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon-up
+      map: ["foldedLayer"]
+      visible: false
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/ushanka_civ.rsi

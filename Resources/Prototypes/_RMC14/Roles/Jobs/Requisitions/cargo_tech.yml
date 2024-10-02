@@ -10,6 +10,9 @@
   supervisors: cm-job-supervisors-qm
   accessGroups:
   - CMCargoTech
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: ct
   special:
   - !type:AddComponentSpecial
     components:

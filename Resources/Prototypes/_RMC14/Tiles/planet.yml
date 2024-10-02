@@ -35,6 +35,7 @@
   id: CMPlanetDesert1
   name: tiles-cm-desert
   sprite: /Textures/_RMC14/Tiles/planet/desert/desert_0.png
+  minimapColor: "#9c906dc2"
 
 - type: tile
   parent: CMPlanetDesert1

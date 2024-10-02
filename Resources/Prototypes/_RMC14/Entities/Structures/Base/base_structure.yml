@@ -88,6 +88,8 @@
     spawn: XenoWeedsWall
   - type: XenoConstructionSupport
   - type: RMCDropshipBlocked
+  - type: MinimapColor
+    color: "#ebe5e5ee"
 
 - type: entity
   abstract: true

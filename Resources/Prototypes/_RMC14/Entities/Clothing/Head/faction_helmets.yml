@@ -1,0 +1,160 @@
+
+# Marine raider
+- type: entity
+  parent: ArmorHelmetM10
+  id: RMCArmorHelmetMARSOC
+  name: SOF operator helmet
+  description: A special variant of the M10 Pattern Helmet worn by UNMC SOF.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/marsoc.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/marsoc.rsi
+
+# Dutch's Dozen
+- type: entity
+  parent: ArmorHelmetPMC
+  id: RMCArmorHelmetDutch
+  name: dutch's dozen helmet
+  description: A protective helmet worn by some seriously experienced mercs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Dutch/helmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Dutch/helmet.rsi
+
+- type: entity
+  parent: RMCArmorHelmetDutch
+  id: RMCArmorHelmetDutchCap
+  name: dutch's dozen cap
+  description: A protective cap worn by some seriously experienced mercs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Dutch/cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Dutch/cap.rsi
+
+- type: entity
+  parent: RMCArmorHelmetDutch
+  id: RMCArmorHelmetDutchBand
+  name: dutch's dozen band
+  description: A protective band worn by some seriously experienced mercs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Dutch/band.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Dutch/band.rsi
+
+# Iron Bear
+- type: entity
+  parent: ArmorHelmetPMC
+  id: RMCArmorHelmetBear
+  name: iron bear helmet
+  description: Is good for winter, because it has hole to put vodka through.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Dutch/helmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Dutch/helmet.rsi
+
+# Skullcap
+- type: entity
+  parent: ArmorHelmetM10
+  id: RMCArmorHelmetSkullcap
+  name: skullcap
+  description: Good for keeping sweat out of your eyes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/skullcap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/skullcap.rsi
+
+- type: entity
+  parent: RMCArmorHelmetSkullcap
+  id: RMCArmorHelmetSkullcapCowl
+  name: M8 marksman cowl
+  description: A cowl worn to conceal the face of a marksman in the jungle.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/skullcapm.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/skullcapm.rsi
+
+# Mercenaries
+- type: entity
+  parent: ArmorHelmetPMC
+  id: RMCArmorHelmetMercenary
+  name: mercenary K12 ceramic helmet
+  description: A sturdy helmet worn by an unknown mercenary group.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Mercenary/heavy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Mercenary/heavy.rsi
+
+- type: entity
+  parent: RMCArmorHelmetMercenary
+  id: RMCArmorHelmetMercenaryReinforced
+  name: mercenary modified K12 ceramic helmet
+  description: A sturdy helmet worn by an unknown mercenary group. Reinforced with extra plating.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Mercenary/heavy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Mercenary/heavy.rsi
+
+- type: entity
+  parent: RMCArmorHelmetMercenary
+  id: RMCArmorHelmetMercenaryMiner
+  name: mercenary Y8 miner helmet
+  description: A sturdy helmet, specialised for mining, worn by an unknown mercenary group.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Mercenary/miner.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Mercenary/miner.rsi
+
+- type: entity
+  parent: RMCArmorHelmetMercenary
+  id: RMCArmorHelmetMercenarySupport
+  name: mercenary Z7 support helmet
+  description: A sturdy helmet worn by an unknown mercenary group.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Mercenary/engi.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Mercenary/engi.rsi
+
+- type: entity
+  parent: RMCArmorHelmetMercenarySupport
+  id: RMCArmorHelmetMercenaryEngineer
+  name: mercenary Z7 engineer helmet
+  description: A sturdy helmet worn by an unknown mercenary group. This one includes a protective welding visor.
+  components:
+  - type: EyeProtection
+
+# HEFA
+# TODO: actually implement this
+- type: entity
+  parent: RMCArmorHelmetM3G4
+  id: RMCArmorHelmetHEFA
+  name: HEFA helmet
+  description: For some reason, seeing this helmet causes you to feel extremely distressed.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Mercenary/hefa.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Mercenary/hefa.rsi
+
+# CBRN
+- type: entity
+  parent: ArmorHelmetM10
+  id: RMCArmorHelmetCBRN
+  name: CBRN M3 MOPP mask
+  description: The M3 MOPP mask includes a full covering cowl that securely attaches to the MOPP suit. The mask filters out harmful particles in the air to allow the wearer to breathe safely in the field. Depending on the hostility of the contaminated area the mask’s filter will last an average of 12 hours or less.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cbrn.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/cbrn.rsi
+# TODO: add advanced version of CBRN helmet

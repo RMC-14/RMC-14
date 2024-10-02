@@ -106,7 +106,8 @@
         points: 18
     #    CMM40HIDPIncendiaryPacketx3grenades: 18P
     #    CMM40HPDPWhitePhosphorusPacketx3grenades: 18P
-    #    CMM40HSDPSmokePacketx3grenades: 9P
+      - id: RMCPacketGrenadeSmokeFilled
+        points: 9
     #    CMM74AGMFragAirburstPacketx3airburstgrenades: 20P
     #    CMM74AGMIncendiaryAirburstPacketx3airburstgrenades: 20P
     #    CMM74AGMSmokeAirburstPacketx3airburstgrenades: 10P
@@ -146,7 +147,8 @@
         points: 12
     - name: Clothing Items
       entries:
-    #    CMScabbardMacheteFull: 6P
+      - id: RMCScabbardMacheteFilled
+        points: 6
       - id: RMCPouchMacheteFilled
         points: 8
     #    CMMarineRadioTelephonePack: 15P

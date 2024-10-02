@@ -11,13 +11,18 @@
     state: binoculars
   - type: Scope
     useInHand: true
-    allowMovement: true
-    delay: 0
-    zoom: 1.6 # same stats of 4x telescopic scope
-    offset: 14
+    zoomLevels:
+    - zoom: 1.6
+      offset: 14
+      allowMovement: true
+      doAfter: 0
   - type: Tag
     tags:
     - Binoculars
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 - type: entity
   parent: RMCBinoculars

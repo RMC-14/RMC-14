@@ -48,7 +48,7 @@
   - type: CMArmor
     explosionArmor: 10
   - type: XenoEvolution
-    max: 300
+    max: 200
     evolvesTo:
     - CMXenoSpitter
   - type: XenoAcid
@@ -65,3 +65,11 @@
     chance: 0.50
   - type: RMCXenoDamageVisuals
     prefix: sentinel
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: sentinel
+  - type: AcidTrap
+    trapLevel: 1
+    cost: 70
+    spray: XenoAcidSprayTrapWeak

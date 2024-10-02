@@ -7,6 +7,8 @@
   name: fire extinguisher
   description: A traditional red fire extinguisher.
   components:
+  - type: Item
+    sprite: _RMC14/Objects/fire_extinguisher.rsi
   - type: Spray
     transferAmount: 5
   - type: SolutionContainerManager
@@ -31,6 +33,11 @@
     blacklist:
       components:
       - Xeno
+  - type: Clothing
+    sprite: _RMC14/Objects/fire_extinguisher.rsi
+    quickEquip: false
+    slots:
+    - Belt
 
 - type: entity
   parent: CMFireExtinguisher
@@ -39,6 +46,7 @@
   description: A light and compact fibreglass-framed model fire extinguisher.
   components:
   - type: Item
+    sprite: _RMC14/Objects/fire_extinguisher_mini.rsi
     size: Small
   - type: SolutionContainerManager
     solutions:
@@ -61,3 +69,5 @@
   - type: Tag
     tags:
     - CMFireExtinguisherPortable
+  - type: Clothing
+    sprite: _RMC14/Objects/fire_extinguisher_mini.rsi

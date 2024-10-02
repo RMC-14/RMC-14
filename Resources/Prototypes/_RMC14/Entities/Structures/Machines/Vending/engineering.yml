@@ -14,7 +14,7 @@
     denyState: deny-unshaded
     ejectState: eject-unshaded
   - type: AccessReader
-    access: [["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
+    access: [["CMAccessCombatTechPrep"], ["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
 
 - type: vendingMachineInventory
   id: CMVendorTool

@@ -58,6 +58,12 @@ public sealed class SquadSystem : EntitySystem
 
     private void OnSquadArmorGetVisuals(Entity<SquadArmorComponent> ent, ref GetEquipmentVisualsEvent args)
     {
+        if (_inventory.TryGetSlot(args.Equipee, args.Slot, out var slot) &&
+            slot.SlotFlags != SlotFlags.HEAD)
+        {
+            return;
+        }
+
         if (!_squadMemberQuery.TryComp(args.Equipee, out var member) ||
             !_squadArmorWearerQuery.TryComp(args.Equipee, out var wearer))
         {
@@ -270,7 +276,7 @@ public sealed class SquadSystem : EntitySystem
             team.Comp.Roles[job.Value] = roles + 1;
         }
 
-        var ev = new SquadMemberUpdatedEvent();
+        var ev = new SquadMemberUpdatedEvent(team);
         RaiseLocalEvent(marine, ref ev);
     }
 

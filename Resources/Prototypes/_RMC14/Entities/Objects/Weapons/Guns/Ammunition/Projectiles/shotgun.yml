@@ -25,11 +25,19 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 65
+        Piercing: 65
   - type: ProjectileSpread
     proto: CMPelletShotgunBuckshot
     count: 4
     spread: 20
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 4
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 0
+      falloff: 1
+  - type: RMCStunOnHit
 
 - type: entity
   parent: CMPelletShotgunBase
@@ -44,9 +52,21 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 70
+        Piercing: 70
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 8
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 0
+      falloff: 1
   - type: CMArmorPiercing
     amount: 20
+  - type: RMCStunOnHit
+    maxRange: 6
+    stunTime: 1
+    superSlowTime: 2
+    slowTime: 6
 
 - type: entity
   parent: CMPelletShotgunBase
@@ -59,6 +79,17 @@
     damage:
       types:
         Heat: 55
+  - type: ProjectileSpread
+    proto: CMPelletShotgunIncendiary
+    count: 1
+    spread: 5
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 12
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 0
+      falloff: 1
   # todo rmc14 add burning
 
 - type: entity
@@ -73,6 +104,13 @@
       shader: unshaded
   - type: Projectile
     damage: {}
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 12
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 0
+      falloff: 1
   - type: StaminaDamageOnCollide
     damage: 45
 
@@ -91,11 +129,18 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 30
+        Piercing: 30
   - type: ProjectileSpread
     proto: CMPelletShotgunFlechette
     count: 3
     spread: 15
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 12
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 0
+      falloff: 1
 
 - type: entity
   parent: CMPelletShotgunBuckshot

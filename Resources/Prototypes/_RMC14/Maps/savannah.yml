@@ -3,7 +3,7 @@
   mapName: Savannah
   mapPath: /Maps/_RMC14/savannah.yml
   minPlayers: 0
-  maxPlayers: 100
+  maxPlayers: 75
   maxRandomOffset: 0
   randomRotation: false
   stations:

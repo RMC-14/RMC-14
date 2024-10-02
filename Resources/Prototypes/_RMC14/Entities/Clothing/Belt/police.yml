@@ -51,7 +51,7 @@
     - id: RMCWeaponTaser
     - id: CMFlash
     - id: CMStunbaton
-    - id: CMHandcuffs
+    - id: RMCHandcuffs
 #    - id: Pepperspray # TODO RMC14
 #    - id: ForensicScanner # TODO RMC14 cm clue scanner
 
@@ -71,7 +71,7 @@
     - id: RMCWeaponTaser
     - id: CMFlash
     - id: CMStunbaton
-    - id: CMHandcuffs
+    - id: RMCHandcuffs
 #    - id: Pepperspray # TODO RMC14
 #    - id: # TODO RMC14 SPP shrapnel revolver magazine
 
@@ -98,6 +98,6 @@
     - id: CMStunbaton
 #    - id: Pepperspray # TODO RMC14
 #    - id: ForensicScanner # TODO RMC14 cm clue scanner
-    - id: CMHandcuffs
+    - id: RMCHandcuffs
       amount: 2
 #    - id: # TODO RMC14 FlashBang
