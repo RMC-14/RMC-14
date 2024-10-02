@@ -131,10 +131,10 @@
     - ActionXenoPheromones
     - ActionXenoOrderConstruction
     - ActionXenoPlantWeeds
-    # - ActionXenoPlantWeedsHardy # TODO: implement gardener weeds
+    - ActionXenoPlantWeedsHardy
     - ActionXenoFruitPlant
     - ActionXenoFruitChoose
-    - ActionXenoResinSurge # TODO: implement resin surge
+    - ActionXenoResinSurge
     - ActionXenoDevolve
     critHealMultiplier: 0.3465  # 5% increased regeneration
     standHealingMultiplier: 0.42

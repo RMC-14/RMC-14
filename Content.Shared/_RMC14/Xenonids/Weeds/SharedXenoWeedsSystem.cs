@@ -194,13 +194,20 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             _toUpdate.Add(other);
     }
 
-    public bool CanPlaceWeeds(Entity<MapGridComponent> grid, Vector2i tile)
+    public bool CanPlaceWeeds(Entity<MapGridComponent> grid, Vector2i tile, out bool semiWeedable)
     {
+        semiWeedable = false;
+
         if (!_mapSystem.TryGetTileRef(grid, grid, tile, out var tileRef))
             return false;
 
-        if (!_tile.TryGetDefinition(tileRef.Tile.TypeId, out var tileDef) ||
-            tileDef is ContentTileDefinition { WeedsSpreadable: false } ||
+        if (!_tile.TryGetDefinition(tileRef.Tile.TypeId, out var tileDef))
+            return false;
+
+        if (tileDef is ContentTileDefinition { SemiWeedable: true })
+            semiWeedable = true;
+
+        if (tileDef is ContentTileDefinition { WeedsSpreadable: false } ||
             tileDef.ID == ContentTileDefinition.SpaceID)
         {
             return false;
