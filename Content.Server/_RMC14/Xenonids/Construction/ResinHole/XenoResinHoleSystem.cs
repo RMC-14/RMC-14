@@ -76,6 +76,8 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         SubscribeLocalEvent<XenoResinHoleComponent, XenoPlaceFluidInHoleDoAfterEvent>(OnPlaceFluidInResinHole);
 
         SubscribeLocalEvent<XenoResinHoleComponent, DamageChangedEvent>(OnXenoResinHoleTakeDamage);
+        // TODO needs a specific event when set on fire/onfire/fire is used on it etc
+        // the burned message is used specifically for when a parasite trap gets burned up
         SubscribeLocalEvent<XenoResinHoleComponent, StepTriggerAttemptEvent>(OnXenoResinHoleStepTriggerAttempt);
         SubscribeLocalEvent<XenoResinHoleComponent, StepTriggeredOffEvent>(OnXenoResinHoleStepTriggered);
         SubscribeLocalEvent<XenoResinHoleComponent, ExaminedEvent>(OnExamine);
@@ -306,7 +308,6 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             return;
         }
         //TODO Flames should make the trigger message never happen but destroyed will
-        // Also para traps should burn instead of trigger in this case
         if (args.DamageDelta == null)
             return;
         var destroyed = args.Damageable.TotalDamage + args.DamageDelta.GetTotal() > resinHole.Comp.TotalHealth;
@@ -499,10 +500,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
         string msg = "rmc-xeno-construction-resin-hole-activate";
         if (destroyed && TryComp<DamageableComponent>(resinHole, out var damage))
-        {
-            if(damage.DamagePerGroup.TryGetValue("Burn", out var burnDamage))
-                msg = burnDamage / damage.TotalDamage > 0.5 ? "cm-xeno-construction-resin-hole-burned-down" : "cm-xeno-construction-resin-hole-destroyed";
-        }
+           msg = "cm-xeno-construction-resin-hole-destroyed";
 
         var ev = new XenoResinHoleActivationEvent(msg);
         RaiseLocalEvent(ent, ev);
