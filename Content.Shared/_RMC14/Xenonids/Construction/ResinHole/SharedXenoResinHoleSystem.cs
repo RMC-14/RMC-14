@@ -2,6 +2,8 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Hands;
 using Robust.Shared.Prototypes;
@@ -18,14 +20,18 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
     [Dependency] protected readonly INetManager _net = default!;
     [Dependency] protected readonly SharedPopupSystem _popup = default!;
     [Dependency] protected readonly SharedDoAfterSystem _doAfter = default!;
+	[Dependency] private readonly AreaSystem _areas = default!;
+	[Dependency] private readonly SharedXenoAnnounceSystem _announce = default!;
 
-    public override void Initialize()
+	public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<XenoResinHoleComponent, InteractUsingEvent>(OnPlaceParasiteInXenoResinHole);
         SubscribeLocalEvent<XenoResinHoleComponent, ActivateInWorldEvent>(OnActivateInWorldResinHole);
-    }
+
+		SubscribeLocalEvent<XenoResinHoleComponent, XenoResinHoleActivationEvent>(OnResinHoleActivation);
+	}
 
     protected bool CanPlaceInHole(EntityUid uid, Entity<XenoResinHoleComponent> resinHole, EntityUid user)
     {
@@ -105,7 +111,21 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
         _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Parasite);
     }
 
-    public string GetTrapTypeName(Entity<XenoResinHoleComponent> resinHole)
+	private void OnResinHoleActivation(Entity<XenoResinHoleComponent> ent, ref XenoResinHoleActivationEvent args)
+	{
+		if (ent.Comp.Hive is null)
+			return;
+
+		var locationName = "Unknown";
+
+		if (_areas.TryGetArea(_transform.GetMoverCoordinates(ent), out var areaProto, out _))
+			locationName = areaProto.Name;
+
+		var msg = Loc.GetString(args.message, ("location", locationName), ("type", _hole.GetTrapTypeName(ent)));
+		_announce.AnnounceToHive(ent.Owner, ent.Comp.Hive.Value, msg);
+	}
+
+	public string GetTrapTypeName(Entity<XenoResinHoleComponent> resinHole)
     {
         switch(resinHole.Comp.TrapPrototype)
         {

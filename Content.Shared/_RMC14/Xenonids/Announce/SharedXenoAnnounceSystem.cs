@@ -21,9 +21,6 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoAnnounceDeathComponent, MobStateChangedEvent>(OnAnnounceDeathMobStateChanged);
-
-        SubscribeLocalEvent<XenoResinHoleComponent, XenoResinHoleActivationEvent>(OnResinHoleActivation);
-
     }
 
     private void OnAnnounceDeathMobStateChanged(Entity<XenoAnnounceDeathComponent> ent, ref MobStateChangedEvent args)
@@ -42,20 +39,6 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
             if (HasComp<XenoEvolutionGranterComponent>(ent) || _xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
                 AnnounceSameHive(ent.Owner, Loc.GetString(ent.Comp.Message, ("xeno", ent.Owner), ("location", locationName)), color: ent.Comp.Color);
         }
-    }
-
-    private void OnResinHoleActivation(Entity<XenoResinHoleComponent> ent, ref XenoResinHoleActivationEvent args)
-    {
-        if (ent.Comp.Hive is null)
-            return;
-
-        var locationName = "Unknown";
-
-        if (_areas.TryGetArea(_transform.GetMoverCoordinates(ent), out var areaProto, out _))
-            locationName = areaProto.Name;
-
-        var msg = Loc.GetString(args.message, ("location", locationName), ("type", _hole.GetTrapTypeName(ent)));
-        AnnounceToHive(ent.Owner, ent.Comp.Hive.Value, msg);
     }
 
     public string WrapHive(string message, Color? color = null)
