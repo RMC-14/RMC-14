@@ -159,6 +159,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             return;
 
         resinHole.Comp.TrapPrototype = XenoResinHoleComponent.ParasitePrototype;
+        Dirty(resinHole);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-hole-finished-parasite"), resinHole, args.User);
         QueueDel(args.Used);
 
@@ -230,6 +231,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         }
 
         resinHole.Comp.TrapPrototype = null;
+        Dirty(resinHole);
         _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
         args.Handled = true;
     }
@@ -492,10 +494,11 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             }
         }
 
-        var ev = new XenoResinHoleActivationEvent("rmc-xeno-construction-resin-hole-activate");
+        var ev = new XenoResinHoleActivationEvent();
         RaiseLocalEvent(ent, ev);
 
         comp.TrapPrototype = null;
+        Dirty(resinHole);
         _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
 
         return true;

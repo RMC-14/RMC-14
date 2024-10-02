@@ -1,10 +1,11 @@
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
+using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class XenoResinHoleComponent : Component
 {
     public const string ParasitePrototype = "CMXenoParasite";
@@ -19,17 +20,17 @@ public sealed partial class XenoResinHoleComponent : Component
 
     public const string StrongAcidPrototype = "XenoAcidSprayTrapStrong";
 
-	/// <summary>
-	/// The entity to spawn on the trap when activated
-	/// </summary>
-	[DataField]
-	public EntProtoId? TrapPrototype = null;
+    /// <summary>
+    /// The entity to spawn on the trap when activated
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntProtoId? TrapPrototype = null;
 
-	/// <summary>
-	/// The hive that will get announcements when the hole is broken or activated
-	/// </summary>
-	[DataField]
-	public EntityUid? Hive = null;
+    /// <summary>
+    /// The hive that will get announcements when the hole is broken or activated
+    /// </summary>
+    [DataField]
+    public EntityUid? Hive = null;
 
     [DataField]
     public TimeSpan StepStunDuration = TimeSpan.FromSeconds(2.5);

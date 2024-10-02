@@ -44,7 +44,7 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
         if (!_rmcHands.IsPickupByAllowed(uid, user))
             return false;
 
-        if (HasComp<ParasiteAIComponent>(uid))
+        if (!HasComp<ParasiteAIComponent>(uid))
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-awake-child", ("parasite", uid)), user, user, PopupType.SmallCaution);
             return false;
@@ -97,23 +97,35 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
             return;
 
         resinHole.Comp.TrapPrototype = XenoResinHoleComponent.ParasitePrototype;
+        Dirty(resinHole);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-hole-enter-parasite", ("parasite", args.User)), resinHole);
         resinHole.Comp.Hive = xeno.Hive; // Yes, parasites claim any resin traps as their own
         QueueDel(args.User);
 
         _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Parasite);
     }
+
+    public string GetTrapTypeName(Entity<XenoResinHoleComponent> resinHole)
+    {
+        switch(resinHole.Comp.TrapPrototype)
+        {
+            case XenoResinHoleComponent.ParasitePrototype:
+                return Loc.GetString("rmc-xeno-construction-resin-hole-parasite-name");
+            case XenoResinHoleComponent.AcidGasPrototype:
+            case XenoResinHoleComponent.NeuroGasPrototype:
+                return Loc.GetString("rmc-xeno-construction-resin-hole-gas-name");
+            case XenoResinHoleComponent.WeakAcidPrototype:
+            case XenoResinHoleComponent.AcidPrototype:
+            case XenoResinHoleComponent.StrongAcidPrototype:
+                return Loc.GetString("rmc-xeno-construction-resin-hole-acid-name");
+            default:
+                return Loc.GetString("rmc-xeno-construction-resin-hole-empty-name");
+        }
+    }
 }
 
 [Serializable, NetSerializable]
-public sealed partial class XenoResinHoleActivationEvent : EntityEventArgs
-{
-    public LocId LocMsg;
-    public XenoResinHoleActivationEvent(LocId locMsg)
-    {
-        LocMsg = locMsg;
-    }
-}
+public sealed partial class XenoResinHoleActivationEvent : EntityEventArgs;
 
 [Serializable, NetSerializable]
 public sealed partial class XenoPlaceParasiteInHoleDoAfterEvent : SimpleDoAfterEvent;

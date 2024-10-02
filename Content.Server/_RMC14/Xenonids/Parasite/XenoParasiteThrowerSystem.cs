@@ -67,7 +67,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
                 if (!HasComp<XenoParasiteComponent>(possibleParasite))
                     continue;
 
-                if (HasComp<ParasiteAIComponent>(possibleParasite))
+                if (!HasComp<ParasiteAIComponent>(possibleParasite))
                     continue;
 
                 tileHasParasites = true;
