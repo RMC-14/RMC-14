@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+﻿using Content.Shared.FixedPoint;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Weeds;
@@ -38,5 +39,5 @@ public sealed partial class XenoWeedsComponent : Component
     public bool SpreadsOnSemiWeedable = false;
 
     [DataField, AutoNetworkedField]
-    public float FruitGrowthMultiplier = 1.0f;
+    public FixedPoint2 FruitGrowthMultiplier = 1.0f;
 }

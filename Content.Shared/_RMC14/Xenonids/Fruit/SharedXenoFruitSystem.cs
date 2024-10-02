@@ -379,6 +379,8 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             if (!xeno.Comp.PlantedFruit.Contains(entity))
                 xeno.Comp.PlantedFruit.Add(entity);
 
+            // TODO: increase growth time if on hardy weeds
+
             fruit.Planter = xeno.Owner;
 
             if (xeno.Comp.PlantedFruit.Count > xeno.Comp.MaxFruitAllowed)
