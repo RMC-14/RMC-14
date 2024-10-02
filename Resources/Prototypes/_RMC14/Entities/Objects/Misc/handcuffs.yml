@@ -17,7 +17,7 @@
     - suitstorage
 
 - type: entity
-  parent: CMHandcuffs
+  parent: RMCHandcuffs
   id: RMCZipties
   name: zipties
   description: Tough single-use plastic zipties, ideal for restraining rowdy prisoners.
