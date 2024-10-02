@@ -93,16 +93,16 @@ public sealed class BarricadeSystem : EntitySystem
 
         if (!TryComp(args.Target, out BarricadeSandbagComponent? barricade))
             return;
-        var full = Spawn(barricade.Material, EntityManager.GetCoordinates(args.Coordinates));
+        var full = Spawn(barricade.Material, GetCoordinates(args.Coordinates));
 
         var bagsSalvaged = barricade.MaxMaterial;
         if (bagsSalvaged <= 0 && TryComp(full, out FullSandbagComponent? fullSandbag))
             bagsSalvaged = fullSandbag.StackRequired;
         if (TryComp(args.Target, out DamageableComponent? damageable))
-            bagsSalvaged -= Math.Max((int) damageable.TotalDamage / barricade.MaterialLossDamageInterval - 1, 0);
+            bagsSalvaged -= Math.Max((int)damageable.TotalDamage / barricade.MaterialLossDamageInterval - 1, 0);
 
         if (TryComp(args.Target, out BarbedComponent? barbed) && barbed.IsBarbed)
-            EntityManager.SpawnEntity(barbed.Spawn, EntityManager.GetCoordinates(args.Coordinates));
+            Spawn(barbed.Spawn, GetCoordinates(args.Coordinates));
 
         Del(args.Target);
 
