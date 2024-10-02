@@ -22,7 +22,6 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
     {
         SubscribeLocalEvent<XenoAnnounceDeathComponent, MobStateChangedEvent>(OnAnnounceDeathMobStateChanged);
 
-        SubscribeLocalEvent<XenoResinHoleComponent, DestructionEventArgs>(OnResinHoleDestruction);
         SubscribeLocalEvent<XenoResinHoleComponent, XenoResinHoleActivationEvent>(OnResinHoleActivation);
 
     }
@@ -45,39 +44,6 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
         }
     }
 
-    private void OnResinHoleDestruction(Entity<XenoResinHoleComponent> ent, ref DestructionEventArgs args)
-    {
-        if (ent.Comp.Hive is null)
-            return;
-
-        var locationName = "Unknown";
-
-        if (_areas.TryGetArea(_transform.GetMoverCoordinates(ent), out var areaProto, out _))
-            locationName = areaProto.Name;
-
-        if (TryComp(ent.Owner, out DamageableComponent? damageComp))
-        {
-            var totalDamage = damageComp.TotalDamage;
-            var msg = "";
-
-            if (!damageComp.DamagePerGroup.TryGetValue("Burn", out var burnDamage))
-            {
-                return;
-            }
-
-            if (burnDamage / totalDamage > 0.5)
-            {
-                msg = Loc.GetString("cm-xeno-construction-resin-hole-burned-down", ("location", locationName), ("type", _hole.GetTrapTypeName(ent)));
-
-            }
-            else
-            {
-                msg = Loc.GetString("cm-xeno-construction-resin-hole-destroyed", ("location", locationName), ("type", _hole.GetTrapTypeName(ent)));
-            }
-            AnnounceToHive(ent.Owner, ent.Comp.Hive.Value, msg);
-        }
-    }
-
     private void OnResinHoleActivation(Entity<XenoResinHoleComponent> ent, ref XenoResinHoleActivationEvent args)
     {
         if (ent.Comp.Hive is null)
@@ -88,7 +54,7 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
         if (_areas.TryGetArea(_transform.GetMoverCoordinates(ent), out var areaProto, out _))
             locationName = areaProto.Name;
 
-        var msg = Loc.GetString("rmc-xeno-construction-resin-hole-activate", ("location", locationName), ("type", _hole.GetTrapTypeName(ent)));
+        var msg = Loc.GetString(args.message, ("location", locationName), ("type", _hole.GetTrapTypeName(ent)));
         AnnounceToHive(ent.Owner, ent.Comp.Hive.Value, msg);
     }
 

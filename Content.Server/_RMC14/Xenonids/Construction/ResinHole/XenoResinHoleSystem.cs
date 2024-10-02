@@ -307,7 +307,10 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         }
         //TODO Flames should make the trigger message never happen but destroyed will
         // Also para traps should burn instead of trigger in this case
-        ActivateTrap(resinHole);
+        if (args.DamageDelta == null)
+            return;
+        var destroyed = args.Damageable.TotalDamage + args.DamageDelta.GetTotal() > resinHole.Comp.TotalHealth;
+        ActivateTrap(resinHole, destroyed);
     }
 
     private void OnExamine(Entity<XenoResinHoleComponent> resinHole, ref ExaminedEvent args)
@@ -454,7 +457,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         _audio.PlayPvs(resinHoleComp.BuildSound, resinHole);
     }
 
-    private bool ActivateTrap(Entity<XenoResinHoleComponent> resinHole)
+    private bool ActivateTrap(Entity<XenoResinHoleComponent> resinHole, bool destroyed = false)
     {
         var (ent, comp) = resinHole;
 
@@ -494,7 +497,14 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             }
         }
 
-        var ev = new XenoResinHoleActivationEvent();
+        string msg = "rmc-xeno-construction-resin-hole-activate";
+        if (destroyed && TryComp<DamageableComponent>(resinHole, out var damage))
+        {
+            if(damage.DamagePerGroup.TryGetValue("Burn", out var burnDamage))
+                msg = burnDamage / damage.TotalDamage > 0.5 ? "cm-xeno-construction-resin-hole-burned-down" : "cm-xeno-construction-resin-hole-destroyed";
+        }
+
+        var ev = new XenoResinHoleActivationEvent(msg);
         RaiseLocalEvent(ent, ev);
 
         comp.TrapPrototype = null;

@@ -125,7 +125,15 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
 }
 
 [Serializable, NetSerializable]
-public sealed partial class XenoResinHoleActivationEvent : EntityEventArgs;
+public sealed partial class XenoResinHoleActivationEvent : EntityEventArgs
+{
+    public LocId message;
+
+    public XenoResinHoleActivationEvent(LocId msg)
+    {
+        message = msg;
+    }
+}
 
 [Serializable, NetSerializable]
 public sealed partial class XenoPlaceParasiteInHoleDoAfterEvent : SimpleDoAfterEvent;
