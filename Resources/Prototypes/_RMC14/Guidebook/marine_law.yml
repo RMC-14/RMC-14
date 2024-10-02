@@ -90,7 +90,7 @@
   priority: 2
   children:
   - RMCMarineLawCrimesVariable
-#  - RMCMarineLawCrimesMinor
+  - RMCMarineLawCrimesMinor
 #  - RMCMarineLawCrimesMajor
 #  - RMCMarineLawCrimesCapital
 #  - RMCMarineLawCrimesOptional
@@ -102,6 +102,13 @@
   name: rmc-guide-entry-marine-law-crimes-variable
   text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCrimesVariable.xml"
   priority: 0
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawCrimesMinor
+  name: rmc-guide-entry-marine-law-crimes-minor
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCrimesMinor.xml"
+  priority: 1
 
 # Prisoner Rights
 

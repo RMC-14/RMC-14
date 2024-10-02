@@ -1,0 +1,38 @@
+﻿<Document>
+  # Variable Crimes
+  - These crimes can vary in severity and have scaling punishments.
+  <Table Columns="3">
+    <ColorBox>
+      <Box>
+        Charge
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box>
+        Description
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box>
+        Punishment
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Failure to Follow Procedure
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Failing to follow the regulations found in the Standard Operating Procedure.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]10 Minutes, equipment confiscation where relevant.[/bold]
+      </Box>
+    </ColorBox>
+
+  </Table>
+</Document>
