@@ -48,7 +48,6 @@
     devolvesTo:
     - CMXenoLarva
   - type: XenoDevour
-
   - type: XenoPheromones
     pheromonesMultiplier: 2
   - type: XenoPlasma
@@ -64,6 +63,8 @@
       - XenoParasite
       - XenoEgg
       - XenoFruit
+  - type: EggPlantTime
+    plantTime: 2.5
   - type: MultiHandedHolder
     items:
     - hands: 2
@@ -76,6 +77,10 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: drone
+  - type: AcidTrap
+    trapLevel: 1
+    cost: 70
+    spray: XenoAcidSprayTrapWeak
 
 - type: entity
   parent: CMXenoDroneBase
@@ -85,9 +90,9 @@
     sprite: _RMC14/Mobs/Xenonids/Drone/drone.rsi
   - type: XenoEvolution
     canEvolveWithoutGranter: true
-    max: 300
+    max: 200
     evolvesTo:
-#    - CMXenoCarrier
+    - CMXenoCarrier
 #    - CMXenoBurrower
     - CMXenoHivelord
     evolvesToWithoutPoints:

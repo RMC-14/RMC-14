@@ -1,78 +1,4 @@
 ﻿Entries:
-- author: UnicornOnLSD
-  changes:
-  - message: Entrenching tools are now worthy of being in tools belts.
-    type: Add
-  id: 257
-  time: '2024-07-04T01:53:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2797
-- author: ShadowCommander
-  changes:
-  - message: Players can now use melee attacks and shoves while dragging an entity
-      in their active hand.
-    type: Tweak
-  id: 258
-  time: '2024-07-04T01:52:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2801
-- author: DrSmugleaf
-  changes:
-  - message: Explosion and screech shockwave effects no longer temporarily reset your
-      camera to the default rotation.
-    type: Fix
-  id: 259
-  time: '2024-07-04T04:44:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2807
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenonids being able to devolve if damaged. Xenonids now must be
-      on full health before devolving.
-    type: Fix
-  id: 260
-  time: '2024-07-04T04:44:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2805
-- author: DrSmugleaf
-  changes:
-  - message: Added 5 empty blood packs to the MM blood dispenser.
-    type: Add
-  - message: Fixed the Hospital Corpsman not having medical access.
-    type: Fix
-  - message: The MM blood dispenser now uses the fancy vendor UI, and no longer has
-      a delay to vending blood packs.
-    type: Tweak
-  id: 261
-  time: '2024-07-04T04:45:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2804
-- author: DrSmugleaf
-  changes:
-  - message: Fixed intercoms having no power.
-    type: Fix
-  id: 262
-  time: '2024-07-04T04:45:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2808
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Immature Queens being able to use Screech. Any Queen, including
-      newly-evolved ones, must wait until they are mature (10 minutes) before being
-      able to use it.
-    type: Fix
-  id: 263
-  time: '2024-07-04T04:43:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2806
-- author: DrSmugleaf
-  changes:
-  - message: 'The roadmap has been updated to reflect current and upcoming changes:
-      Blood types, Smart Gun Operator, and the Weapons Specialist''s Grenadier kit.'
-    type: Tweak
-  id: 264
-  time: '2024-07-04T04:59:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2803
-- author: noctyrnal
-  changes:
-  - message: Added a new rouny plushie. rouny.
-    type: Add
-  id: 265
-  time: '2024-07-04T08:10:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2673
 - author: DrSmugleaf
   changes:
   - message: Linked in-game and Discord admin chats.
@@ -4525,5 +4451,170 @@
   id: 756
   time: '2024-09-29T23:20:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4191
+- author: Rainbeon
+  changes:
+  - message: Xenos can now see their exact Health, Plasma, and Armor by hovering over
+      each respective alert on the right side of the screen.
+    type: Add
+  id: 757
+  time: '2024-09-29T23:46:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4150
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added pull animations
+    type: Add
+  id: 758
+  time: '2024-09-29T23:47:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4189
+- author: TsjipTsjip
+  changes:
+  - message: High Command headset and encryption key exist now.
+    type: Add
+  id: 759
+  time: '2024-09-29T23:51:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4188
+- author: DrSmugleaf
+  changes:
+  - message: Fixed mortars being hit by bullets not targeted directly at them, and
+      being damaged by marine melee.
+    type: Fix
+  - message: Removed shotgun fire delay on wield now that fire groups are in. Akimbo
+      shotguns still won't work, but wielding your shotgun will no longer put it on
+      a very long cooldown anymore.
+    type: Fix
+  - message: Fixed the M5-ATL (Demolitionist weapons spec rocket launcher) leaving
+      behind fake projectiles.
+    type: Fix
+  - message: Fixed placing eggs and returning parasites to them having no delay. Both
+      now have a 4 second delay.
+    type: Fix
+  - message: Fixed some shutters and podlocks not being acidable by xenos.
+    type: Fix
+  - message: Removed a lot of turrets from the landing zones of all four planet maps.
+      The poison gas remains, with some turrets still within it.
+    type: Tweak
+  id: 760
+  time: '2024-09-30T03:49:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4195
+- author: DrSmugleaf
+  changes:
+  - message: Added the missing boost to evolution points when hijack starts. For 3
+      minutes, xenos will get 5 evolution points per second, 10 times the default.
+    type: Add
+  - message: Added the missing evolution point bonus to the hive core, when present
+      it will boost default evolution point gain by 50%. This change also resets default
+      evolution point gain to its intended value, 0.5 per second instead of 1 per
+      second. A hive core will bring it up to 0.75 per second.
+    type: Add
+  - message: Fixed some xenos requiring more evolution points than intended to evolve.
+      T1 > T2 now requires 200, down from 300. T2 > T3 now requires 500, down from
+      540.
+    type: Fix
+  - message: Pressing Tab will now switch to focusing the next input on the mortar
+      window.
+    type: Tweak
+  - message: Fixed the start of a hijack not resetting the Queen's grow ovipositor
+      cooldown.
+    type: Fix
+  - message: Fixed Req not being able to buy 20 plastic for 2000 dollars, primarily
+      used in the medilathe.
+    type: Fix
+  - message: Fixed the pump shotgun not being able to fit an extended barrel.
+    type: Fix
+  - message: Fixed putting a helmet in your pocket as a squad role giving you a colored
+      mohawk.
+    type: Fix
+  - message: Fixed equipping armor by pressing F having no delay.
+    type: Fix
+  - message: Fixed epinephrine healing 5 Brute/Burn/Toxin instead of 20.
+    type: Fix
+  id: 761
+  time: '2024-09-30T22:40:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4200
+- author: DrSmugleaf
+  changes:
+  - message: Added Seeks-to-Fight and Stares-at-Stars figurine.
+    type: Add
+  id: 762
+  time: '2024-09-30T22:50:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4198
+- author: Vermidia
+  changes:
+  - message: AI Parasites now have periods of Idleness (indicated by resting) and
+      Activeness (indicated by not resting). Parasites will only leap/infect while
+      active.
+    type: Fix
+  - message: AI Parasites die after 30 seconds if not picked up by a carrier. Doing
+      this also resets the timer, and it doesn't progress while carried by them.
+    type: Fix
+  - message: Egg placing now has sounds, and speed is 3.5 seconds, with normal drones
+      doing it in 2.5 and carriers in 1. It costs 30 plasma to place an egg.
+    type: Tweak
+  - message: Parasites can go into resin traps to fill them manually. AI paras will
+      do this if they can't get into an egg.
+    type: Add
+  - message: Resin traps can be filled with corrosive acid
+    type: Add
+  - message: Almost all xeno announcements for deaths/trap triggers give location.
+    type: Add
+  - message: Fixed prae's acid having the boiler spray sprite
+    type: Fix
+  - message: AI parasites will eat eachother if too many are close by
+    type: Fix
+  - message: AI parasite's leaps will infect from farther away
+    type: Fix
+  - message: Moved carrier's egg and parasite count to examine
+    type: Tweak
+  - message: Made some carrier ability descriptions more informative
+    type: Tweak
+  - message: Different acid sprays now dissapate at different rates, with strong acid
+      taking 2 seconds and weak taking the original 0.6
+    type: Fix
+  - message: Praetorian's plasma cost for spray acid is higher. Warden strain's cost
+      even more, and has a slightly longer cooldown
+    type: Fix
+  - message: Hives get 1 free carrier slot
+    type: Add
+  - message: Ghosts can join as parasites from carriers
+    type: Add
+  - message: Parasites won't become AI controlled until 7 minutes have past since
+      the player disconnected
+    type: Fix
+  - message: Throwing a parasite always makes them able to attempt leaps after the
+      5 second stun
+    type: Tweak
+  - message: Player parasites can't be picked up, and can escape if they are. AI parasites
+      can't be pulled
+    type: Fix
+  - message: AI Parasites now prioritize downed targets, and don't need line of sight
+      for leaps/infects
+    type: Tweak
+  - message: Carriers dropping eggs/parasites on death is more satisfying
+    type: Tweak
+  - message: Item eggs won't show the become parasite verb
+    type: Fix
+  id: 763
+  time: '2024-09-30T23:06:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4067
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed xeno hud icons being visible while a scout is invisible.
+    type: Fix
+  - message: Fixed scout specialists not becoming visible on death.
+    type: Fix
+  id: 764
+  time: '2024-10-01T00:01:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4197
+- author: DrSmugleaf
+  changes:
+  - message: Fixed spray acid aciding too many cades, it will now correctly only acid
+      the one its blocked by, and any on the same tile, instead of also aciding any
+      adjacent ones.
+    type: Fix
+  - message: Fixed spray acid sometimes going through walls.
+    type: Fix
+  id: 765
+  time: '2024-10-01T02:45:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4207
 Name: RMC14
 Order: -1

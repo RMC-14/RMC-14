@@ -33,6 +33,7 @@
     - ActionXenoOrderConstruction
     #    - ActionXenoDigTunnel
     - ActionXenoPlantWeeds
+    - ActionXenoResinHole
     #    - ActionXenoBurrow
     #    - ActionXenoTremor
     - ActionXenoDevolve
@@ -68,3 +69,9 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: burrower
+  - type: AcidTrap #Do 2 CM code they make level 3 traps at a level 2 cost
+    trapLevel: 3
+    spray: XenoAcidSprayTrapStrong
+  - type: XenoConstruction
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode

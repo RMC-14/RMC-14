@@ -177,3 +177,50 @@
       state: empower
     event: !type:XenoDefensiveShieldActionEvent
     useDelay: 26
+
+- type: entity
+  id: ActionXenoRetrieveEgg
+  parent: ActionXenoBase
+  name: Retrieve Egg
+  description: Retrieves an egg from your storage if you have an empty hand. Using this on an unplanted egg will pick up all nearby unplanted eggs.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: retrieve_egg
+    event: !type:XenoRetrieveEggActionEvent
+    deselectOnMiss: false
+    repeat: true
+    range: 30
+
+- type: entity
+  id: ActionXenoThrowParasite
+  parent: ActionXenoBase
+  name: Throw Parasite
+  description: Retrieves a parasite from your storage if you have an empty hand. Using this on a parasite on the ground will pickup all nearby parasites. Targeting a tile with a parasite in hand will throw it up to 4 tiles away, where the parasite will be stunned for 5 seconds. [color=green]Parasites won't die due to time while you hold or carry them.[/color]
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: throw_parasite
+    event: !type:XenoThrowParasiteActionEvent
+    deselectOnMiss: false
+    repeat: true
+    range: 30
+    useDelay: 0
+
+- type: entity
+  id: ActionXenoParasiteReserve
+  parent: ActionXenoBase
+  name: Set Parasite Reserve
+  description: Sets your parasite Reserves. Observers cannot join as a stored parasite if your parasites stored is less than or equal to your reserve.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: reserve_parasite
+    event: !type:XenoReserveParasiteActionEvent
+    useDelay: 1

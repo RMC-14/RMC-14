@@ -168,6 +168,9 @@ public partial class ChatSystem
         if (!AllowedToUseEmote(uid, emote))
             return;
 
+        if (!_rmcEmote.TryEmote(uid))
+            return;
+
         InvokeEmoteEvent(uid, emote);
         return;
 
@@ -209,9 +212,6 @@ public partial class ChatSystem
 
     private void InvokeEmoteEvent(EntityUid uid, EmotePrototype proto)
     {
-        if (!_rmcEmote.CanEmote(uid))
-            return;
-
         var ev = new EmoteEvent(proto);
         RaiseLocalEvent(uid, ref ev);
     }

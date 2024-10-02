@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using System.Linq;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
@@ -153,7 +153,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         var tile = _mapSystem.CoordinatesToTile(gridUid, grid, coordinates);
-        if (!_xenoWeeds.CanPlaceWeeds((gridUid, grid), tile, out var semiWeedable) &&
+
+        if (!_xenoWeeds.CanPlaceWeeds((gridUid, grid), tile, true, out var semiWeedable) &&
             !(semiWeedable && args.UseOnSemiWeedable))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-weeds"),

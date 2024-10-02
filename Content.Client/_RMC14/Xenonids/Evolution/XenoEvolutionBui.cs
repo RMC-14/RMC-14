@@ -29,6 +29,17 @@ public sealed class XenoEvolutionBui : BoundUserInterface
     protected override void Open()
     {
         _window = this.CreateWindow<XenoEvolutionWindow>();
+
+        if (EntMan.TryGetComponent(Owner, out XenoEvolutionComponent? xeno))
+        {
+            foreach (var strain in xeno.Strains)
+            {
+                AddStrain(strain);
+            }
+        }
+
+        _window.StrainsLabel.Visible = _window.StrainsContainer.ChildCount > 0;
+
         Refresh();
     }
 
@@ -97,7 +108,6 @@ public sealed class XenoEvolutionBui : BoundUserInterface
         _window.PointsLabel.Visible = xeno.Max > FixedPoint2.Zero;
 
         _window.EvolutionsContainer.DisposeAllChildren();
-        _window.StrainsContainer.DisposeAllChildren();
         foreach (var evolutionId in xeno.EvolvesToWithoutPoints)
         {
             AddEvolution(evolutionId);
@@ -111,16 +121,11 @@ public sealed class XenoEvolutionBui : BoundUserInterface
             }
         }
 
-        foreach (var strain in xeno.Strains)
-        {
-            AddStrain(strain);
-        }
-
         _window.Separator.Visible = _window.EvolutionsContainer.ChildCount > 0 && _window.StrainsContainer.ChildCount > 0;
-        _window.StrainsLabel.Visible = _window.StrainsContainer.ChildCount > 0;
 
         var lackingOvipositor = State is XenoEvolveBuiState { LackingOvipositor: true };
-        _window.PointsLabel.Text = $"Evolution points: {xeno.Points} / {xeno.Max}";
+        var points = xeno.Points;
+        _window.PointsLabel.Text = $"Evolution points: {(int) Math.Floor(points.Double())} / {xeno.Max}";
         if (lackingOvipositor)
         {
             // TODO RMC14 for some reason this doesn't properly wrap text
