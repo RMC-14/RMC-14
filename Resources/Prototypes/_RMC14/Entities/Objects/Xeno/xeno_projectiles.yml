@@ -168,10 +168,30 @@
     popupType: LargeCaution
   - type: ProjectileMaxRange
     max: 10
+  - type: XenoSlowingSpitProjectile
+    slow: 0
+    paralyze: 4
+    armorResistsKnockdown: false
+  - type: Projectile
+    impactEffect: XenoProjectileImpactEffect
+    damage:
+      groups:
+        Burn: 1
+  - type: ModifyTargetOnHit
+    add:
+    - type: UserAcided
+      armorPiercing: 40
+      damage:
+        groups:
+          Burn: 1
+      duration: 20
+    whitelist:
+      components:
+      - Marine
 
 - type: entity
-  parent: XenoBombardAcidProjectile
-  id: XenoBombardNeurotoxinProjectile
+  parent: XenoBaseProjectile
+  id: XenoBombardNeurotoxinProjectile #TODO: Make the projectile apply a bit of neurotoxin on hit
   name: glob of neurotoxin gas
   categories:
   - HideSpawnMenu
@@ -195,6 +215,10 @@
     popupType: LargeCaution
   - type: ProjectileMaxRange
     max: 10
+  - type: XenoSlowingSpitProjectile
+    slow: 0
+    paralyze: 4
+    armorResistsKnockdown: false
 
 - type: entity
   parent: XenoSpitProjectile
