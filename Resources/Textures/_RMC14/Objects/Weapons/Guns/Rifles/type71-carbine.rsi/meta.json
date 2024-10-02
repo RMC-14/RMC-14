@@ -1,0 +1,17 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken/modified from cm-ss13 at https://github.com/cmss13-devs/cmss13/commit/9ff2072285d9668073b5bd2219d2ebac0f5281b5",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "type71-carb-e"
+        },
+        {
+            "name": "type71-carb-mag"
+        }
+    ]
+}
