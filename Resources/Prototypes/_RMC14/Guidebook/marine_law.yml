@@ -7,6 +7,7 @@
   children:
   - RMCMarineLawDefinitions
   - RMCMarineLawProcedures
+  - RMCMarineLawCrimes
 
 - type: guideEntry
   parent: RMC
@@ -79,4 +80,36 @@
   name: rmc-guide-entry-marine-law-executions
   text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawExecutions.xml"
   priority: 6
+
+# Crimes
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawCrimes
+  name: rmc-guide-entry-marine-law-crimes
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCrimes.xml"
+  priority: 2
+  children:
+  - RMCMarineLawCrimesVariable
+#  - RMCMarineLawCrimesMinor
+#  - RMCMarineLawCrimesMajor
+#  - RMCMarineLawCrimesCapital
+#  - RMCMarineLawCrimesOptional
+#  - RMCMarineLawCrimesPrecautionary
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawCrimesVariable
+  name: rmc-guide-entry-marine-law-crimes-variable
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCrimesVariable.xml"
+  priority: 0
+
+# Prisoner Rights
+
+# Appeals
+
+# Special Circumstances
+
+# Synthetics
+
+# Commanding Officer provisions
 
