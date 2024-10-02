@@ -498,9 +498,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             }
         }
 
-        string msg = "rmc-xeno-construction-resin-hole-activate";
-        if (destroyed && TryComp<DamageableComponent>(resinHole, out var damage))
-           msg = "cm-xeno-construction-resin-hole-destroyed";
+        string msg = destroyed ? "cm-xeno-construction-resin-hole-destroyed" : "rmc-xeno-construction-resin-hole-activate";
 
         var ev = new XenoResinHoleActivationEvent(msg);
         RaiseLocalEvent(ent, ev);
