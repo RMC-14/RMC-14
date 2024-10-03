@@ -70,6 +70,8 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
 
+    private static readonly ProtoId<DamageTypePrototype> FruitPlantDamageType = "Blunt";
+
 	private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
 	private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
 
@@ -344,8 +346,13 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         }
 
         // Deduct health
-        DamageSpecifier fruitDamage = new();
-        fruitDamage.DamageDict.Add("Brute", args.HealthCost);
+        var fruitDamage = new DamageSpecifier
+        {
+            DamageDict =
+            {
+                [FruitPlantDamageType] = args.HealthCost,
+            },
+        };
         _damageable.TryChangeDamage(xeno.Owner, fruitDamage, ignoreResistances: true, interruptsDoAfters: false);
 
         // Apply cooldown
