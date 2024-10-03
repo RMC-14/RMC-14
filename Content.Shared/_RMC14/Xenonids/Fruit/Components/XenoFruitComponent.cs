@@ -58,6 +58,7 @@ public sealed partial class XenoFruitComponent : Component
     [DataField, AutoNetworkedField]
     public LocId Popup = new LocId("rmc-xeno-fruit-effect-lesser");
 
+    // Color for the gardener overlay
     [DataField, AutoNetworkedField]
     public Color? Color;
 }

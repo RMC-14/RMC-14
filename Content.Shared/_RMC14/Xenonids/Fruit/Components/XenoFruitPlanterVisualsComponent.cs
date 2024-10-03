@@ -4,8 +4,8 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Xenonids.Fruit.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(XenoFruitVisualsSystem))]
-public sealed partial class XenoFruitVisualsComponent : Component
+[Access(typeof(XenoFruitPlanterVisualsSystem))]
+public sealed partial class XenoFruitPlanterVisualsComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
     public string Rsi;
@@ -18,7 +18,7 @@ public sealed partial class XenoFruitVisualsComponent : Component
 }
 
 [Serializable, NetSerializable]
-public enum XenoFruitVisuals
+public enum XenoFruitPlanterVisuals
 {
     Resting,
     Downed,

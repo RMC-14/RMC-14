@@ -106,7 +106,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         SubscribeLocalEvent<XenoFruitComponent, DestructionEventArgs>(OnXenoFruitDestruction);
         SubscribeLocalEvent<XenoFruitComponent, ComponentShutdown>(OnXenoFruitShutdown);
         SubscribeLocalEvent<XenoFruitComponent, EntityTerminatingEvent>(OnXenoFruitTerminating);
-
+        // Fruit selection UI
         Subs.BuiEvents<XenoFruitPlanterComponent>(XenoFruitChooseUI.Key, subs =>
         {
             subs.Event<XenoFruitChooseBuiMsg>(OnXenoFruitChooseBui);
@@ -139,7 +139,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         // Update planter visuals
         var fruitProto = new EntProtoId<XenoFruitComponent>(args.FruitId);
-        var evXeno = new XenoFruitVisualsChangedEvent(fruitProto);
+        var evXeno = new XenoFruitPlanterVisualsChangedEvent(fruitProto);
         RaiseLocalEvent(xeno, ref evXeno);
     }
 
@@ -321,7 +321,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     private void OnXenoFruitPlantAction(Entity<XenoFruitPlanterComponent> xeno, ref XenoFruitPlantActionEvent args)
     {
         // Check for selected fruit
-        if (xeno.Comp.FruitChoice is not { } fruitChoice)
+        if (xeno.Comp.FruitChoice is not { })
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-plant-failed-select"), xeno.Owner, xeno.Owner, PopupType.SmallCaution);
             return;
