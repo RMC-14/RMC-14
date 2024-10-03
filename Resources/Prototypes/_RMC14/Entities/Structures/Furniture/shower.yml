@@ -38,3 +38,6 @@
     successChance: 1
     interactSuccessSound:
       path: /Audio/Ambience/Objects/drain.ogg
+      params:
+        variation: 0.250
+        volume: -5
