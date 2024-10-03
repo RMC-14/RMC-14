@@ -81,7 +81,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     /// </summary>
     public Entity<HiveComponent>? GetHive(Entity<HiveMemberComponent?> member)
     {
-        if (!_memberQuery.Resolve(member, ref member.Comp))
+        if (!_memberQuery.Resolve(member, ref member.Comp, false))
             return null;
 
         if (member.Comp.Hive is not {} uid || TerminatingOrDeleted(uid))
