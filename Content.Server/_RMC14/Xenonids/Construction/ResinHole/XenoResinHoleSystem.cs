@@ -252,14 +252,15 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 return;
             _xenoPlasma.TryRemovePlasma(args.User, bombardComp.PlasmaCost);
 
-            resinHole.Comp.TrapPrototype = bombardComp.Projectile;
             switch (bombardComp.Projectile.Id)
             {
-                case XenoResinHoleComponent.AcidGasPrototype:
+                case XenoResinHoleComponent.BoilerAcid:
+                    resinHole.Comp.TrapPrototype = XenoResinHoleComponent.AcidGasPrototype;
                     _appearanceSystem.SetData(resinHole, XenoResinHoleVisuals.Contained, ContainedTrap.AcidGas);
                     break;
 
-                case XenoResinHoleComponent.NeuroGasPrototype:
+                case XenoResinHoleComponent.BoilerNeuro:
+                    resinHole.Comp.TrapPrototype = XenoResinHoleComponent.NeuroGasPrototype;
                     _appearanceSystem.SetData(resinHole, XenoResinHoleVisuals.Contained, ContainedTrap.NeuroticGas);
                     break;
             }
@@ -490,12 +491,9 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         else
         {
             var trapEntity = SpawnAtPosition(trapEntityProto, _transform.GetMoverCoordinates(resinHole));
-            _xeno.SetHive(trapEntity, resinHole.Comp.Hive);
-
-            if (TryComp(trapEntity, out XenoProjectileComponent? projectileComp))
-            {
-                _gun.ShootProjectile(trapEntity, Vector2.Zero, Vector2.Zero, resinHole);
-            }
+            //Prevent errors
+            if(trapEntityProto == XenoResinHoleComponent.ParasitePrototype)
+                _xeno.SetHive(trapEntity, resinHole.Comp.Hive);
         }
 
         string msg = destroyed ? "cm-xeno-construction-resin-hole-destroyed" : "rmc-xeno-construction-resin-hole-activate";
