@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Fruit.Components;
 using Content.Shared._RMC14.Xenonids.Fruit.Events;
@@ -242,18 +243,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     // Fruit planting
     #region Planting
 
-    public bool TileHasFruit(Entity<MapGridComponent> grid, EntityCoordinates coordinates)
-    {
-        var tile = _mapSystem.TileIndicesFor(grid.Owner, grid.Comp, coordinates);
-        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid.Owner, grid.Comp, tile);
-        while (anchored.MoveNext(out var uid))
-        {
-            if (HasComp<XenoFruitComponent>(uid))
-                return true;
-        }
-        return false;
-    }
-
     private bool CanPlantOnTilePopup(Entity<XenoFruitPlanterComponent> xeno,
         EntityCoordinates target, bool checkWeeds, out string popup)
     {
@@ -284,20 +273,26 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         // TODO: check if weeds belong to our hive
 
-        // TODO: check for resin holes
-
-        // Target on another fruit
-        if (TileHasFruit((gridId, grid), target))
-        {
-            popup = Loc.GetString("rmc-xeno-fruit-plant-failed-fruit");
-            return false;
-        }
-
-        // Target has egg, xeno construct or other obstruction on it
+        // Target has fruit, resin hole, egg, xeno construct or other obstruction on it
         var tile = _mapSystem.CoordinatesToTile(gridId, grid, target);
         var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
         while (anchored.MoveNext(out var uid))
         {
+            // Target on another fruit
+            if (HasComp<XenoFruitComponent>(uid))
+            {
+                popup = Loc.GetString("rmc-xeno-fruit-plant-failed-fruit");
+                return false;
+            }
+
+            // Target on resin hole
+            if (HasComp<XenoResinHoleComponent>(uid))
+            {
+                popup = Loc.GetString("rmc-xeno-fruit-plant-failed-resin-hole");
+                return false;
+            }
+
+            // Target on egg, airlock, structure, etc
             if (HasComp<StrapComponent>(uid) ||
                 HasComp<XenoEggComponent>(uid) ||
                 HasComp<XenoConstructComponent>(uid) ||
@@ -377,7 +372,10 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             if (!xeno.Comp.PlantedFruit.Contains(entity))
                 xeno.Comp.PlantedFruit.Add(entity);
 
-            // TODO: increase growth time if on hardy weeds
+            // Increase growth time if on hardy weeds
+            var weeds = _xenoWeeds.GetWeedsOnFloor(coordinates, false);
+            if (TryComp(weeds, out XenoWeedsComponent? weedsComp))
+                fruit.GrowTime = fruit.GrowTime / weedsComp.FruitGrowthMultiplier;
 
             fruit.Planter = xeno.Owner;
 
@@ -421,6 +419,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         }
 
         // TODO: check for hive as well
+
         // Non-planter xenos can't harvest growing fruit
         if (HasComp<XenoComponent>(user) &&
             !HasComp<XenoFruitPlanterComponent>(user) &&

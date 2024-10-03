@@ -111,18 +111,13 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: gardener_plant
     event: !type:XenoFruitPlantActionEvent
-  - type: XenoFruitPlantAction
-    checkWeeds: true
-    plasmaCost: 100
-    healthCost: # :(
-      groups:
-        Brute: 50
+    useDelay: 5
 
 - type: entity
   id: ActionXenoPlantWeedsHardy
   parent: ActionXenoBase
   name: Plant Hardy Weeds (125) # TODO RMC14 proper plasma costs
-  description: Plant a weed node that will spread more weeds.
+  description: Plant a weed node that will spread hardier weeds.
   components:
   - type: InstantAction
     itemIconStyle: NoItem

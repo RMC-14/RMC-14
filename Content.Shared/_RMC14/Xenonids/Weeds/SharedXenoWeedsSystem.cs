@@ -170,6 +170,15 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         return null;
     }
 
+    public EntityUid? GetWeedsOnFloor(EntityCoordinates coordinates, bool sourceOnly = false)
+    {
+        if (_transform.GetGrid(coordinates) is not { } gridId ||
+            !TryComp(gridId, out MapGridComponent? grid))
+            return null;
+
+        return GetWeedsOnFloor((gridId, grid), coordinates, sourceOnly);
+    }
+
     public bool IsOnWeeds(Entity<TransformComponent?> entity)
     {
         if (!Resolve(entity, ref entity.Comp))
