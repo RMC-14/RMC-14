@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Linked in-game and Discord admin chats.
-    type: Add
-  id: 266
-  time: '2024-07-04T10:17:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2810
 - author: snebl
   changes:
   - message: Fixed xenonids being able to attack and build while resting.
@@ -4616,5 +4609,13 @@
   id: 765
   time: '2024-10-01T02:45:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4207
+- author: TeaTotalTemplar
+  changes:
+  - message: The M276 Utility Toolbelt and M276 Combat Utility Toolbelt now contain
+      cable coil (30 pieces)
+    type: Add
+  id: 766
+  time: '2024-10-03T22:06:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4229
 Name: RMC14
 Order: -1
