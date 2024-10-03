@@ -1620,6 +1620,24 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
 
         #endregion
 
+        #region Discord_SS220
+
+        public async Task<DiscordPlayer?> GetAccountDiscordLink(Guid playerId)
+        {
+            await using var db = await GetDb();
+
+            return await db.DbContext.DiscordPlayers.AsNoTracking().FirstOrDefaultAsync(p => p.SS14Id == playerId);
+        }
+
+        public async Task InsertDiscord(DiscordPlayer discordPlayer)
+        {
+            await using var db = await GetDb();
+            db.DbContext.DiscordPlayers.Add(discordPlayer);
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        #endregion
+
         #region Job Whitelists
 
         public async Task<bool> AddJobWhitelist(Guid player, ProtoId<JobPrototype> job)

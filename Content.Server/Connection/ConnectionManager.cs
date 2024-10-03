@@ -7,9 +7,11 @@ using Content.Server.Chat.Managers;
 using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.Preferences.Managers;
+using Content.Server.SS220.Discord;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.Players.PlayTimeTracking;
+using Content.Shared.SS220.CCVars;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
@@ -55,6 +57,8 @@ namespace Content.Server.Connection
         [Dependency] private readonly IGameTiming _gameTiming = default!;
         [Dependency] private readonly ILogManager _logManager = default!;
         [Dependency] private readonly IChatManager _chatManager = default!;
+
+        [Dependency] private readonly DiscordPlayerManager _discordPlayerManager = default!;
 
         private readonly Dictionary<NetUserId, TimeSpan> _temporaryBypasses = [];
         private ISawmill _sawmill = default!;
@@ -267,6 +271,23 @@ namespace Content.Server.Connection
             {
                 return (ConnectionDenyReason.Full, Loc.GetString("soft-player-cap-full"), null);
             }
+
+            // SS220 prime list restriction start
+            if (_cfg.GetCVar(CCVars220.PrimelistEnabled))
+            {
+                var primeAccessStatus = await _discordPlayerManager.GetUserPrimeListStatus(userId);
+
+                if (primeAccessStatus is null)
+                {
+                    return (ConnectionDenyReason.Whitelist, "Статус доступа на prime не был получен. Попробуйте переподключиться к серверу.", null);
+                }
+
+                if (!string.IsNullOrWhiteSpace(primeAccessStatus.PrimeAccessNotAvailableReason))
+                {
+                    return (ConnectionDenyReason.Whitelist, primeAccessStatus.PrimeAccessNotAvailableReason, null);
+                }
+            }
+            // SS220 prime list restriction end
 
             if (_cfg.GetCVar(CCVars.WhitelistEnabled))
             {
