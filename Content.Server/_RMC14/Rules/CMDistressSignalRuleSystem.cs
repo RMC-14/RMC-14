@@ -3,6 +3,7 @@ using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Rules.CrashLand;
 using Content.Server._RMC14.Stations;
+using Content.Server._RMC14.Xenonids.Hive;
 using Content.Server.Administration.Components;
 using Content.Server.Administration.Managers;
 using Content.Server.Atmos.EntitySystems;
@@ -84,7 +85,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly DropshipSystem _dropship = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly XenoHiveSystem _hive = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly MarineSystem _marines = default!;
     [Dependency] private readonly MindSystem _mind = default!;
@@ -202,10 +203,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             OperationName = GetRandomOperationName();
 
-            comp.Hive = Spawn(comp.HiveId);
+            // TODO: come up with random name like operation name, in a function that can be reused for hive v hive
+            comp.Hive = _hive.CreateHive("xenonid hive", comp.HiveId);
             if (!SpawnXenoMap((uid, comp)))
             {
                 Log.Error("Failed to load xeno map");
+                // TODO: how should the gamemode handle failure? restart immediately or create an alert for admins
                 continue;
             }
 
@@ -274,7 +277,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 var xenoEnt = SpawnAtPosition(ent, point.ToCoordinates());
 
                 _xeno.MakeXeno(xenoEnt);
-                _xeno.SetHive(xenoEnt, comp.Hive);
+                _hive.SetHive(xenoEnt, comp.Hive);
                 return xenoEnt;
             }
 
