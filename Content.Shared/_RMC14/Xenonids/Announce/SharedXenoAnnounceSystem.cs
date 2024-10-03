@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -15,7 +16,9 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly AreaSystem _areas = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoAnnounceDeathComponent, MobStateChangedEvent>(OnAnnounceDeathMobStateChanged);
@@ -42,7 +45,7 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
 
     private void OnResinHoleDestruction(Entity<XenoResinHoleComponent> ent, ref DestructionEventArgs args)
     {
-        if (ent.Comp.Hive is null)
+        if (_hive.GetHive(ent.Owner) is not {} hive)
             return;
 
         var locationName = "Unknown";
@@ -53,29 +56,23 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
         if (TryComp(ent.Owner, out DamageableComponent? damageComp))
         {
             var totalDamage = damageComp.TotalDamage;
-            var msg = "";
 
             if (!damageComp.DamagePerGroup.TryGetValue("Burn", out var burnDamage))
             {
                 return;
             }
 
-            if (burnDamage / totalDamage > 0.5)
-            {
-                msg = Loc.GetString("cm-xeno-construction-resin-hole-burned-down", ("location", locationName));
-
-            }
-            else
-            {
-                msg = Loc.GetString("cm-xeno-construction-resin-hole-destroyed", ("location", locationName));
-            }
-            AnnounceToHive(ent.Owner, ent.Comp.Hive.Value, msg);
+            var id = burnDamage / totalDamage > 0.5
+                ? "cm-xeno-construction-resin-hole-burned-down"
+                : "cm-xeno-construction-resin-hole-destroyed";
+            var msg = Loc.GetString(id, ("location", locationName));
+            AnnounceToHive(ent.Owner, hive, msg);
         }
     }
 
     private void OnResinHoleActivation(Entity<XenoResinHoleComponent> ent, ref XenoResinHoleActivationEvent args)
     {
-        if (ent.Comp.Hive is null)
+        if (_hive.GetHive(ent.Owner) is not {} hive)
             return;
 
         var locationName = "Unknown";
@@ -84,7 +81,7 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
             locationName = areaProto.Name;
 
         var msg = Loc.GetString(args.LocMsg, ("location", locationName));
-        AnnounceToHive(ent.Owner, ent.Comp.Hive.Value, msg);
+        AnnounceToHive(ent.Owner, hive, msg);
     }
 
     public string WrapHive(string message, Color? color = null)
@@ -109,20 +106,17 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
         PopupType? popup = null,
         Color? color = null)
     {
-        var filter = Filter.Empty().AddWhereAttachedEntity(e => CompOrNull<XenoComponent>(e)?.Hive == hive);
+        var filter = Filter.Empty().AddWhereAttachedEntity(e => _hive.IsMember(e, hive));
         Announce(source, filter, message, WrapHive(message, color), sound, popup);
     }
 
-    public void AnnounceSameHive(Entity<XenoComponent?> xeno,
+    public void AnnounceSameHive(Entity<HiveMemberComponent?> xeno,
         string message,
         SoundSpecifier? sound = null,
         PopupType? popup = null,
         Color? color = null)
     {
-        if (!Resolve(xeno, ref xeno.Comp, false))
-            return;
-
-        if (xeno.Comp.Hive is not { } hive)
+        if (_hive.GetHive(xeno) is not {} hive)
             return;
 
         AnnounceToHive(xeno, hive, message, sound, popup, color);
