@@ -1,7 +1,7 @@
 using Robust.Shared.GameStates;
 using Content.Shared.FixedPoint;
 
-namespace Content.Shared._RMC14.Xenonids.Fruit.Effects;
+namespace Content.Shared._RMC14.Xenonids.Fruit.Components;
 
 // Instant heal (lesser/greater resin fruit)
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]

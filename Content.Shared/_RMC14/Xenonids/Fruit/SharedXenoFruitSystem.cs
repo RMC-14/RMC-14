@@ -2,7 +2,6 @@ using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Fruit.Components;
-using Content.Shared._RMC14.Xenonids.Fruit.Effects;
 using Content.Shared._RMC14.Xenonids.Fruit.Events;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Plasma;

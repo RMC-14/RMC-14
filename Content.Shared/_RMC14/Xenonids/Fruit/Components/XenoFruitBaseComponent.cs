@@ -1,7 +1,7 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Shared._RMC14.Xenonids.Fruit.Effects;
+namespace Content.Shared._RMC14.Xenonids.Fruit.Components;
 
 // Base component for fruit effects
 [RegisterComponent, NetworkedComponent]
