@@ -130,6 +130,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: plant_gardener_weeds
     event: !type:XenoPlantWeedsActionEvent
+      plasmaCost: 125
       prototype: XenoHardyWeedsSource
       useOnSemiWeedable: true
     useDelay: 120
@@ -141,9 +142,6 @@
   name: Plant Resin Fruit (50)
   description: Plant resin fruit at the cost of health and plasma.
   components:
-  - type: XenoFruitPlantAction
-    checkWeeds: true
-    plasmaCost: 50
-    healthCost: # :(
-      groups:
-        Brute: 50
+  - type: InstantAction
+    event: !type:XenoFruitPlantActionEvent
+      plasmaCost: 50

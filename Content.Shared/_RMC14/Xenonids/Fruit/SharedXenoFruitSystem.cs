@@ -12,6 +12,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
@@ -319,6 +320,9 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
     private void OnXenoFruitPlantAction(Entity<XenoFruitPlanterComponent> xeno, ref XenoFruitPlantActionEvent args)
     {
+        if (args.Handled)
+            return;
+
         // Check for selected fruit
         if (xeno.Comp.FruitChoice is not { })
         {
@@ -328,34 +332,29 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager, _map);
 
-        foreach (var (actionId, _) in _actions.GetActions(xeno))
-        {
-            // Find the planting action
-            if (!TryComp(actionId, out XenoFruitPlantActionComponent? action))
-                continue;
-
-            // Check if target location valid
-            if (!CanPlantOnTilePopup(xeno, coordinates, action.CheckWeeds, out var popup))
-            {
-                _popup.PopupClient(popup, coordinates, xeno.Owner, PopupType.SmallCaution);
-                return;
-            }
-
-            // Remove plasma if possible
-            if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, action.PlasmaCost))
-            {
-                return;
-            }
-
-            // Deduct health and apply cooldown
-            _damageable.TryChangeDamage(xeno.Owner, action.HealthCost, interruptsDoAfters: false);
-            _actions.SetCooldown(actionId, action.PlantCooldown);
-
-            break;
-        }
-
         if (!coordinates.IsValid(EntityManager))
             return;
+
+        // Check if target location valid
+        if (!CanPlantOnTilePopup(xeno, coordinates, args.CheckWeeds, out var popup))
+        {
+            _popup.PopupClient(popup, coordinates, xeno.Owner, PopupType.SmallCaution);
+            return;
+        }
+
+        // Remove plasma if possible
+        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
+        {
+            return;
+        }
+
+        // Deduct health
+        DamageSpecifier fruitDamage = new();
+        fruitDamage.DamageDict.Add("Brute", args.HealthCost);
+        _damageable.TryChangeDamage(xeno.Owner, fruitDamage, ignoreResistances: true, interruptsDoAfters: false);
+
+        // Apply cooldown
+        args.Handled = true;
 
         _audio.PlayPredicted(xeno.Comp.PlantSound, coordinates, xeno);
 
