@@ -31,8 +31,6 @@
       - XenoConstruct
       - XenoFruit
       - XenoWeeds
-
-
   - type: XenoResinSurgeAction
 
 - type: entity
