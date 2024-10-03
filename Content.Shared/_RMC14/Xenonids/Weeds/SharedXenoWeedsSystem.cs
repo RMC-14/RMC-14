@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
+﻿using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
@@ -200,7 +200,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             _toUpdate.Add(other);
     }
 
-    public bool CanPlaceWeeds(Entity<MapGridComponent> grid, Vector2i tile, bool source = false, out bool semiWeedable)
+    public bool CanPlaceWeeds(Entity<MapGridComponent> grid, Vector2i tile, out bool semiWeedable, bool source = false)
     {
         semiWeedable = false;
 

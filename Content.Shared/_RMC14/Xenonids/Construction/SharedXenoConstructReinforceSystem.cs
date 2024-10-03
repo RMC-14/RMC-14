@@ -15,7 +15,7 @@ public sealed class SharedXenoConstructReinforceSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<XenoConstructReinforceComponent, DamageModifyEvent>(OnReinforceDamageModify, after: [typeof(SharedCMMeleeWeaponSystem)]);
+        SubscribeLocalEvent<XenoConstructReinforceComponent, DamageModifyEvent>(OnReinforceDamageModify, after: [typeof(SharedRMCMeleeWeaponSystem)]);
         SubscribeLocalEvent<XenoConstructReinforceComponent, BeforeExplodeEvent>(OnReinforceBeforeExplode);
     }
 
