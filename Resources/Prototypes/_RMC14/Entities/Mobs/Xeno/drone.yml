@@ -27,19 +27,6 @@
         Brute: 22.5
   - type: Xeno
     role: CMXenoDrone
-    actionIds:
-    - ActionXenoRest
-    - ActionXenoRegurgitate
-    - ActionXenoWatch
-    - ActionXenoTailStab
-    - ActionXenoAcidWeak
-    - ActionXenoPheromones
-    - ActionXenoOrderConstruction
-    - ActionXenoPlantWeeds
-    - ActionXenoChooseStructure
-    - ActionXenoSecreteStructure
-    - ActionXenoTransferPlasma
-    - ActionXenoDevolve
     hudOffset: 0,0.15
     tier: 1
     bypassTierCount: true
@@ -88,6 +75,20 @@
   components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Drone/drone.rsi
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcidWeak
+    - ActionXenoPheromones
+    - ActionXenoOrderConstruction
+    - ActionXenoPlantWeeds
+    - ActionXenoChooseStructure
+    - ActionXenoSecreteStructure
+    - ActionXenoTransferPlasma
+    - ActionXenoDevolve
   - type: XenoEvolution
     canEvolveWithoutGranter: true
     max: 200
@@ -140,6 +141,7 @@
     - ActionXenoFruitPlant
     - ActionXenoFruitChoose
     - ActionXenoResinSurge
+    - ActionXenoTransferPlasma
     - ActionXenoDevolve
     critHealMultiplier: 0.3465  # 5% increased regeneration
     standHealingMultiplier: 0.42
