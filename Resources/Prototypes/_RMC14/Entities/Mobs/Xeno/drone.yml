@@ -68,6 +68,10 @@
     trapLevel: 1
     cost: 70
     spray: XenoAcidSprayTrapWeak
+  - type: XenoConstruction
+    buildDelay: 2
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode
 
 - type: entity
   parent: CMXenoDroneBase
@@ -102,13 +106,10 @@
     - CMXenoDroneGardener
   - type: XenoAcid
   - type: XenoConstruction
-    buildDelay: 2
     canBuild:
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
-    canOrderConstruction:
-    - HiveCoreXenoConstructionNode
 
 - type: entity
   parent:
@@ -150,9 +151,6 @@
     name: rmc-xeno-gardener-name
     description: rmc-xeno-gardener-description
     popup: rmc-xeno-gardener-popup
-  - type: XenoConstruction
-    canOrderConstruction:
-    - HiveCoreXenoConstructionNode
   - type: XenoFruitPlanter
     canPlant:
     - XenoFruitGreater
@@ -162,3 +160,39 @@
     - XenoFruitUnstable
     maxFruitAllowed: 6
   - type: XenoResinSurge
+
+- type: entity
+  parent:
+  - CMXenoDroneBase
+  id: CMXenoDroneHealer
+  suffix: Healer
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Drone/gardener_drone.rsi # TODO: port sprite
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoPheromones
+    - ActionXenoOrderConstruction
+    - ActionXenoPlantWeeds
+    - ActionXenoFruitPlantLesser
+    - ActionXenoTransferPlasma # TODO: improved plasma transfer
+    # - ActionXenoApplySalve
+    # - ActionXenoSacrifice
+    - ActionXenoDevolve
+  - type: XenoStrain
+    name: rmc-xeno-gardener-name # TODO: port strain texts
+    description: rmc-xeno-gardener-description
+    popup: rmc-xeno-gardener-popup
+  - type: XenoFruitPlanter # TODO: remove this comment (this component should be fine)
+    fruitChoice: XenoFruitLesser
+    canPlant:
+    - XenoFruitLesser
+    maxFruitAllowed: 3
+  # TODO: rest of the fucking owl
+  # lower slash damage
+  # stronger pheromones
+  # more difficult tackling
