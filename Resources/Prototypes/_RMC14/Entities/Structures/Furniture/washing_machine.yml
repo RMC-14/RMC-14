@@ -1,0 +1,56 @@
+- type: entity
+  id: CMWashingMachine
+  name: washing machine
+  description: Washing machine.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Clickable
+  - type: InteractionOutline    
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: start
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/washing_machine.rsi
+    layers:
+    - state: washing_machine_open
+    snapCardinals: true
+      
+- type: entity
+  parent: CMWashingMachine
+  id: CMWashingMachineDouble
+  name: washing machine (double)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/washing_machine.rsi
+    drawdepth: Overdoors
+    offset: "0.0,0.09"  
+    layers:
+    - state: washing_machine_double_open
+    snapCardinals: true
