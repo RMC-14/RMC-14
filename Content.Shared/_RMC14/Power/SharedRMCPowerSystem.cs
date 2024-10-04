@@ -82,6 +82,9 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        if (TerminatingOrDeleted(ent))
+            return;
+
         if (_area.TryGetArea(ent, out var area))
             _metaData.SetEntityName(ent, $"{Name(area)} APC");
 
