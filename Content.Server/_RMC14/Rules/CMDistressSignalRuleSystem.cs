@@ -102,13 +102,14 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private string _planetMaps = default!;
     private float _marinesPerXeno;
     private string _adminFaxAreaMap = string.Empty;
+    private int _mapVoteExcludeLast;
 
     private readonly List<MapId> _almayerMaps = [];
 
     private EntityQuery<HyperSleepChamberComponent> _hyperSleepChamberQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
 
-    private string? _lastPlanetMap;
+    private readonly Queue<string> _lastPlanetMaps = new();
 
     [ViewVariables]
     private string? SelectedPlanetMap { get; set; }
@@ -146,6 +147,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCPlanetMaps, v => _planetMaps = v, true);
         Subs.CVar(_config, RMCCVars.CMMarinesPerXeno, v => _marinesPerXeno = v, true);
         Subs.CVar(_config, RMCCVars.RMCAdminFaxAreaMap, v => _adminFaxAreaMap = v, true);
+        Subs.CVar(_config, RMCCVars.RMCPlanetMapVoteExcludeLast, v => _mapVoteExcludeLast = v, true);
 
         ReloadPrototypes();
     }
@@ -743,7 +745,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         //Just in case the planet was not selected before now
         var planet = SelectRandomPlanet();
-        _lastPlanetMap = planet;
+        _lastPlanetMaps.Enqueue(planet);
+        while (_lastPlanetMaps.Count > 0 && _lastPlanetMaps.Count > _mapVoteExcludeLast)
+        {
+            _lastPlanetMaps.Dequeue();
+        }
 
         if (!_mapLoader.TryLoad(mapId, planet, out var grids))
             return false;
@@ -1094,8 +1100,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             return;
 
         var planets = _planetMaps.Split(",").ToList();
-        if (_lastPlanetMap != null)
-            planets.Remove(_lastPlanetMap);
+        planets.RemoveAll(p => _lastPlanetMaps.Contains(p));
 
         var vote = new VoteOptions
         {
