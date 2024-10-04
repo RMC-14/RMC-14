@@ -114,7 +114,7 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
 
     private void OnResinHoleActivation(Entity<XenoResinHoleComponent> ent, ref XenoResinHoleActivationEvent args)
     {
-        if (ent.Comp.Hive is null)
+        if (_hive.GetHive(ent.Owner) is not { } hive)
             return;
 
         var locationName = "Unknown";
@@ -123,7 +123,7 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
             locationName = areaProto.Name;
 
         var msg = Loc.GetString(args.message, ("location", locationName), ("type", GetTrapTypeName(ent)));
-        _announce.AnnounceToHive(ent.Owner, ent.Comp.Hive.Value, msg);
+        _announce.AnnounceToHive(ent.Owner, hive, msg);
     }
 
     public string GetTrapTypeName(Entity<XenoResinHoleComponent> resinHole)
