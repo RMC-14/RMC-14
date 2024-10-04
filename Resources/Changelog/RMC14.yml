@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed xenonid weeds behind walls getting destroyed by explosions on the
-      other side of the wall.
-    type: Fix
-  id: 274
-  time: '2024-07-05T10:32:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2827
-- author: DrSmugleaf
-  changes:
   - message: Fixed the round not ending when the only marines left alive and not infected
       are all nested.
     type: Fix
@@ -4606,5 +4598,12 @@
   id: 773
   time: '2024-10-04T06:19:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4236
+- author: FungiFellow
+  changes:
+  - message: Knives/Machetes can now pry unpowered doors
+    type: Add
+  id: 774
+  time: '2024-10-04T08:23:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4234
 Name: RMC14
 Order: -1
