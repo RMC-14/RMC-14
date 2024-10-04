@@ -1,5 +1,5 @@
-using System.Numerics;
 using System.Linq;
+using System.Numerics;
 using Content.Server.Hands.Systems;
 using Content.Server.Mind;
 using Content.Shared._RMC14.Xenonids;
@@ -270,7 +270,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         Dirty(xeno);
 
         //Need to clone the array for it to dirty properly
-        _appearance.SetData(xeno, ParasiteOverlayVisuals.States, xeno.Comp.VisiblePositions.Clone());
+        Appearance.SetData(xeno, ParasiteOverlayVisuals.States, xeno.Comp.VisiblePositions.Clone());
     }
 
     private List<int> GetVisualIndexes(bool[] bools, bool visible)

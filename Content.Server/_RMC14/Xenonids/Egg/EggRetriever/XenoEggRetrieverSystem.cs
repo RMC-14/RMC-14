@@ -1,9 +1,10 @@
 using System.Numerics;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Egg.EggRetriever;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -11,7 +12,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Content.Shared.Throwing;
 using Robust.Shared.Random;
-using Content.Shared._RMC14.Xenonids.Announce;
+using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Xenonids.Egg.EggRetriever;
 
@@ -28,6 +29,7 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
     [Dependency] private readonly ThrowingSystem _throw = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _announce = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -129,6 +131,9 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
 
     private void OnDeathMobStateChanged(Entity<XenoEggRetrieverComponent> eggRetriever, ref MobStateChangedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (args.NewMobState != MobState.Dead)
             return;
         DropAllStoredEggs(eggRetriever, 0.75f);
