@@ -1,0 +1,16 @@
+ent-ClothingHeadHatHoodWinterCentcomm = капюшон зимней куртки Центком
+    .desc = Капюшон для сохранения тепла на голове Центрального Командования.
+ent-ClothingHeadHatHoodWardenArmored = капюшон куртки смотрителя
+    .desc = { ent-ClothingHeadHatHoodWinterBase.desc }
+ent-ClothingHeadHatHoodWinterChef = капюшон куртки шеф-повара
+    .desc = { ent-ClothingHeadHatHoodWinterBase.desc }
+ent-ClothingHeadHatHoodWinterGen = капюшон куртки генетика
+    .desc = { ent-ClothingHeadHatHoodWinterBase.desc }
+ent-ClothingHeadHatHoodWinterViro = капюшон куртки вирусолога
+    .desc = { ent-ClothingHeadHatHoodWinterBase.desc }
+ent-ClothingHeadHatHoodWinterAtmos = капюшон куртки атмосферного техника
+    .desc = { ent-ClothingHeadHatHoodWinterBase.desc }
+ent-ClothingHeadHatHoodWinterSyndieCapArmored = капюшон куртки синдиката
+    .desc = { ent-ClothingHeadHatHoodWinterBase.desc }
+ent-ClothingHeadHatHoodWinterSyndieCap = капюшон куртки синдиката
+    .desc = { ent-ClothingHeadHatHoodWinterBase.desc }

@@ -1,0 +1,12 @@
+ent-NotekeeperCartridge = картридж Заметки
+    .desc = Программа для хранения заметок
+ent-NewsReaderCartridge = картридж Новости
+    .desc = Программа для чтения новостей
+ent-CrewManifestCartridge = картридж Манифест экипажа
+    .desc = Программа для отображения списка членов экипажа
+ent-NetProbeCartridge = картридж Зонд сетей
+    .desc = Программа для получения адресов и частот сетевых устройств
+ent-MessengerCartridge = картридж месенджер
+    .desc = Месенджер
+ent-LogProbeCartridge = картридж Зонд логов
+    .desc = Программа для получения логов доступа с устройств

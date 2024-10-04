@@ -1,0 +1,1 @@
+ent-PoisonousAcid = ядовитый плевой

@@ -1,0 +1,10 @@
+shlepovend-ui-window = Шлёп'О'Венд
+shlepovend-discord-not-linked = Аккаунт Discord не привязан!
+shlepovend-go-to-discord = Перейти в Discord
+shlepovend-go-to-boosty = Перейти на Boosty
+shlepovend-subscription-level = Уровень подписки: { $subscription }
+shlepovend-tokens-left = Токенов на этот раунд: { $tokens }
+shlepovend-subscription-level-unknown = Неизвестно
+shlepovend-not-available = Недоступно
+shlepovend-not-enough = Не хватает
+shlepovend-price = { $tokens } токенов

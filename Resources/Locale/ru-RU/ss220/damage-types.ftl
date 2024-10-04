@@ -1,0 +1,1 @@
+damage-type-stamina = стамина

@@ -1,0 +1,1 @@
+sponsor-tier-insufficient = Требуется уровень подписки [color=yellow]{$tier}[/color]!
