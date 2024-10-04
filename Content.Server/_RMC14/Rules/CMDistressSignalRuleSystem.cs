@@ -35,7 +35,6 @@ using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.CCVar;
-using Content.Shared.Coordinates;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Mobs;
@@ -512,7 +511,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     {
         StartPlanetVote();
         ResetSelectedPlanet();
-        _config.SetCVar(CCVars.GameDisallowLateJoins, true);
+        _config.SetCVar(CCVars.GameDisallowLateJoins, false);
     }
 
     private void OnDropshipHijackLanded(ref DropshipHijackLandedEvent ev)

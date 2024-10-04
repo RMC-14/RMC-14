@@ -10,7 +10,6 @@ using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared.CCVar;
-using Content.Shared.Coordinates;
 using Content.Shared.Doors;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
@@ -107,7 +106,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
             Dirty(uid, door);
         }
 
-        _config.SetCVar(CCVars.GameDisallowLateJoins, false);
+        _config.SetCVar(CCVars.GameDisallowLateJoins, true);
     }
 
     private void OnEvacuationEnabled(ref EvacuationEnabledEvent ev)
