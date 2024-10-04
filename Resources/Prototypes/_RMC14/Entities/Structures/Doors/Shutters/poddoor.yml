@@ -50,6 +50,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Shutters/Almayer/poddoor.rsi
+  - type: MinimapColor
+    color: "#451e5eb8"
 
 - type: entity
   parent: RMCPodDoorAlmayer

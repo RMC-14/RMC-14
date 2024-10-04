@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Chemistry.EntitySystems;
@@ -32,6 +33,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
@@ -92,7 +94,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         // ray on the right side of the box
         var rightRay = new CollisionRay(boxRotated.BottomRight, (boxRotated.TopRight - boxRotated.BottomRight).Normalized(), AttackMask);
 
-        var hive = CompOrNull<XenoComponent>(stab)?.Hive;
+        var hive = _hive.GetHive(stab.Owner);
 
         bool Ignored(EntityUid uid)
         {
@@ -102,13 +104,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
             if (!HasComp<MobStateComponent>(uid))
                 return true;
 
-            if (TryComp(uid, out XenoComponent? otherXeno) &&
-                hive == otherXeno.Hive)
-            {
-                return true;
-            }
-
-            return false;
+            return _hive.IsMember(uid, hive);
         }
 
         // dont open allocations ahead

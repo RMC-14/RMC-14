@@ -17,6 +17,7 @@
     slots:
     - mask
     - pocket
+    - suitstorage
     sprite: _RMC14/Objects/Weapons/Melee/m5_bayonet.rsi
   - type: Tag
     tags:
@@ -58,6 +59,14 @@
     - conditions:
         unwieldedOnly: true
       accuracyAddMult: -0.05
+  - type: Tool
+    qualities:
+    - Prying
+  - type: Prying
+    pryPowered: false
+    speedModifier: 0.5
+    useSound:
+      path: /Audio/Items/crowbar.ogg
 
 - type: entity
   name: M11 throwing knife
@@ -77,6 +86,7 @@
     damage:
       types:
         Slash: 5
+  - type: LandAtCursor
   - type: DamageOtherOnHit
     damage:
       types:
@@ -104,7 +114,9 @@
   description: Latest issue of the Marine Machete.
   components:
   - type: Clothing
-    slots: [ belt ]
+    slots: 
+    - belt
+    - suitstorage
   - type: Tag
     tags:
     - Machete
@@ -128,6 +140,14 @@
     sprite: _RMC14/Objects/Weapons/Melee/machete.rsi
   - type: DisarmMalus
     malus: 0.225
+  - type: Tool
+    qualities:
+    - Prying
+  - type: Prying
+    pryPowered: false
+    speedModifier: 0.8
+    useSound:
+      path: /Audio/Items/crowbar.ogg
 
 - type: Tag
   id: RMCM5Bayonet

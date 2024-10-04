@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+﻿using Content.Shared._RMC14.Stun;
+using Robust.Shared.GameStates;
 using Robust.Shared.Physics.Collision.Shapes;
 
 namespace Content.Shared._RMC14.Xenonids.Fortify;
@@ -26,4 +27,10 @@ public sealed partial class XenoFortifyComponent : Component
 
     [DataField]
     public IPhysShape Shape = new PhysShapeCircle(0.49f);
+
+    [DataField, AutoNetworkedField]
+    public RMCSizes FortifySize = RMCSizes.Immobile;
+
+    [DataField, AutoNetworkedField]
+    public RMCSizes? OriginalSize;
 }

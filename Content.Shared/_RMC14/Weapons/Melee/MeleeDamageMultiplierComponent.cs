@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.Weapons.Melee;
 /// For melee weapons to apply extra damage to certain entities with certain component(s).
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedCMMeleeWeaponSystem))]
+[Access(typeof(SharedRMCMeleeWeaponSystem))]
 public sealed partial class MeleeDamageMultiplierComponent : Component
 {
     /// <summary>

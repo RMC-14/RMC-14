@@ -45,7 +45,6 @@
 - type: entity
   parent: CMPacketGrenadeHighExplosive
   id: CMPacketGrenadeHighExplosiveFilled
-  name: HEDP grenade packet
   suffix: Filled
   components:
   - type: StorageFill
@@ -70,10 +69,56 @@
 - type: entity
   parent: CMPacketGrenadeFrag
   id: CMPacketGrenadeFragFilled
-  name: HEFA grenade packet
   suffix: Filled
   components:
   - type: StorageFill
     contents:
     - id: CMGrenadeFrag
+      amount: 3
+
+
+- type: entity
+  parent: CMPacketBase
+  id: RMCPacketGrenadeSmoke
+  name: HSDP grenade packet
+  description: It contains three HSDP smoke grenades.
+  components:
+  - type: Sprite
+    layers:
+    - state: hsdp_packet
+      map: [ "closedLayer" ]
+    - state: hsdp_packet_e
+      map: [ "openLayer", "emptyLayer"]
+
+- type: entity
+  parent: RMCPacketGrenadeSmoke
+  id: RMCPacketGrenadeSmokeFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeSmoke
+      amount: 3
+
+- type: entity
+  parent: CMPacketBase
+  id: CMPacketGrenadeFragOld
+  name: M15 frag grenade packet
+  description: It contains three M15 fragmentation grenades. Handle with care.
+  components:
+  - type: Sprite
+    layers:
+    - state: m15_packet
+      map: [ "closedLayer" ]
+    - state: m15_packet_e
+      map: [ "openLayer", "emptyLayer" ]
+
+- type: entity
+  parent: CMPacketGrenadeFragOld
+  id: CMPacketGrenadeFragOldFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFragOld
       amount: 3

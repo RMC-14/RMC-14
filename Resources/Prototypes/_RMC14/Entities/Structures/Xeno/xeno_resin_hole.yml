@@ -1,0 +1,90 @@
+- type: entity
+  id: XenoResinHole
+  name: resin trap
+  description: It looks like a hidey hole.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Clickable
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    fixedRotation: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        layer:
+        - BulletImpassable
+        restitution: 0.3
+        friction: 0.2
+      resin_hole:
+        shape:
+          !type:PhysShapeCircle
+          radius: 1.5
+        hard: false
+        layer:
+        - SmallMobLayer
+        mask:
+        - MobLayer
+  - type: CollisionWake
+    enabled: false
+  - type: Flammable
+    fireSpread: false
+    damage:
+      types:
+        Heat: 3
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_resin_trap.rsi
+    drawdepth: FloorTiles
+    layers:
+    - state: trap
+      map: [ "enum.XenoResinHoleLayers.Base" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.XenoResinHoleVisuals.Contained:
+        enum.XenoResinHoleLayers.Base:
+          Empty: {state: trap}
+          Parasite: {state: trapparasite}
+          NeuroticGas: {state: trapgasn}
+          AcidGas: {state: trapgas}
+          Acid1: {state: trapacid1}
+          Acid2: {state: trapacid2}
+          Acid3: {state: trapacid3}
+  - type: Appearance
+  - type: XenoResinHole
+  - type: Damageable
+    damageContainer: StructuralXeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Heat
+        damage: 10
+      behaviors:
+      - !type:BurnBodyBehavior { }
+  - type: XenoFriendly
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+    intersectRatio: 0.1
+  - type: RMCNightVisionVisible
+    priority: -1
+  - type: Corrodible
+    isCorrodible: false
+  - type: XenoConstruct
+    destroyWeeds: false
+  - type: RequireProjectileTarget

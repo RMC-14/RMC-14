@@ -156,8 +156,8 @@
         amount: 15
       - id: CMSatchelMedical
         amount: 15
-#      - id: Shotgun Scabbard
-#        amount: 5
+      - id: RMCScabbardShotgun
+        amount: 5
     - name: Restricted Backpacks
       entries:
       - id: CMBackpackWelder
@@ -172,8 +172,8 @@
         amount: 15
       - id: RMCBeltGrenade
         amount: 10
-#      - id: M276 Pattern Shotgun Shell Loading Rig
-#        amount: 15
+      - id: RMCM276ShotgunShellLoadingRig
+        amount: 15
 #      - id: M276 Pattern General Pistol Holster Rig
 #        amount: 15
 #      - id: M276 Pattern M63 Holster Rig
@@ -391,8 +391,8 @@
         amount: 1
       - id: CMRollerBedSpawnFolded
         amount: 1
-#      - id: CMScabbardMacheteFull
-#        amount: 5
+      - id: RMCScabbardMacheteFilled
+        amount: 5
       - id: RMCBinoculars
         amount: 1
       #- id: CMFoldingBarricadesMB6x3

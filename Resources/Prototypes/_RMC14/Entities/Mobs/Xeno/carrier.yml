@@ -12,6 +12,19 @@
     name: cm-job-name-xeno-carrier
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Carrier/carrier.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.RightArm" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.Head" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.LeftArm" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.Back" ]
+      visible: false
   - type: MobState
     allowedStates:
     - Alive
@@ -32,10 +45,10 @@
     - ActionXenoOrderConstruction
     - ActionXenoPheromones
     - ActionXenoPlantWeeds
-    #    - ActionXenoResinHole
-    #    - ActionXenoThrowParasite
-    #    - ActionXenoRetrieveEgg
-    #    - ActionXenoParasiteReserve
+    - ActionXenoResinHole
+    - ActionXenoThrowParasite
+    - ActionXenoRetrieveEgg
+    - ActionXenoParasiteReserve
     - ActionXenoDevolve
     tier: 2
     hudOffset: 0,0.19
@@ -60,36 +73,27 @@
       groups:
         Brute: 27.5
   - type: Tackle # min: 2, max: 4
-    threshold: 3
+    threshold: 4
     stun: 9
     chance: 0.50
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.35
-        density: 185
-        mask:
-        - MobMask
-        layer:
-        - MobLayer
-      fix2:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.40
-        density: 185
-        layer:
-        - BulletImpassable
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
+  - type: EggPlantTime
+    plantTime: 1
   - type: WhitelistPickup
     whitelist:
       components:
       - XenoParasite
       - XenoEgg
+  - type: XenoParasiteThrower
+  - type: XenoEggRetriever
+  - type: XenoNurturing
   - type: RMCSize
     size: Big
-#  - type: RMCXenoDamageVisuals # TODO RMC14
-#    prefix: carrier
+  - type: RMCXenoDamageVisuals
+    prefix: carrier
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: carrier

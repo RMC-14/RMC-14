@@ -104,6 +104,40 @@ public sealed class ShowHolocardIconsSystem : EquipmentHudSystem<HolocardScanner
         return true;
     }
 
+    public bool TryGetHolocardColor(HolocardStatus holocardStatus, [NotNullWhen(true)] out Color? holocardColor)
+    {
+        holocardColor = null;
+        switch (holocardStatus)
+        {
+            case HolocardStatus.Urgent:
+                holocardColor = Color.Chocolate;
+                break;
+            case HolocardStatus.Emergency:
+                holocardColor = Color.DarkRed;
+                break;
+            case HolocardStatus.Xeno:
+                holocardColor = Color.Purple;
+                break;
+            case HolocardStatus.Permadead:
+                holocardColor = Color.Black;
+                break;
+            default:
+                return false;
+        }
+        return true;
+    }
+
+    public bool TryGetHolocardColor(Entity<HolocardStateComponent> entity, [NotNullWhen(true)] out Color? holocardColor)
+    {
+        holocardColor = null;
+        if (TryGetHolocardColor(entity.Comp.HolocardStatus, out var holoColor))
+        {
+            holocardColor = holoColor;
+            return true;
+        }
+        return false;
+    }
+
     public bool TryGetDescription(Entity<HolocardStateComponent> entity, [NotNullWhen(true)] out string? description)
     {
         description = null;

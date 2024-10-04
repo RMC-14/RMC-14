@@ -56,4 +56,10 @@ public sealed partial class ThermalCloakComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? Action;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId CloakEffect = "RMCEffectCloak";
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId UncloakEffect = "RMCEffectUncloak";
 }

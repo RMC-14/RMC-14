@@ -27,6 +27,7 @@ public sealed class CMClusterGrenadeSystem : EntitySystem
         {
             var projectile = EnsureComp<ProjectileLimitHitsComponent>(spawned);
             projectile.Id = ent.Owner.Id;
+            projectile.Limit = ent.Comp.Limit;
             Dirty(spawned, projectile);
         }
     }
@@ -62,13 +63,17 @@ public sealed class CMClusterGrenadeSystem : EntitySystem
     {
         var time = _timing.CurTime;
         var span = CollectionsMarshal.AsSpan(user.Comp.HitBy);
+        var count = 0;
         foreach (ref var hit in span)
         {
             if (hit.Id == projectile.Comp.Id &&
                 hit.ExpireAt > time)
             {
-                return false;
+                count++;
             }
+
+            if (count >= projectile.Comp.Limit)
+                return false;
         }
 
         return true;

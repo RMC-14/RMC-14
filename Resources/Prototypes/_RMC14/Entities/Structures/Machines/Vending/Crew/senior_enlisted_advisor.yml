@@ -51,7 +51,7 @@
       - id: CMArmorM3Light
       - id: CMArmorM3Medium
       #Bulletproof Vest
-      #USCM Service Jacket
+      #UNMC Service Jacket
     - name: Eyewear
       choices: { CMEyewear: 1 }
       entries:
@@ -60,7 +60,7 @@
       #Prescription Medical HUD Glasses
       - id: CMGlassesSecurity
       - id: RMCGlassesMarineRpg #Sunglasses Placeholder
-      #Sunglasses
+      - id: RMCSunglasses
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:

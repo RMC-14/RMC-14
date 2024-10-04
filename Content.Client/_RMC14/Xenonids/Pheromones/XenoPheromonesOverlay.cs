@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Robust.Client.GameObjects;
@@ -42,7 +43,7 @@ public sealed class XenoPheromonesOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        if (!_entity.HasComponent<XenoComponent>(_players.LocalEntity))
+        if (!_entity.HasComponent<XenoComponent>(_players.LocalEntity) && !_entity.HasComponent<CMGhostXenoHudComponent>(_players.LocalEntity))
             return;
 
         var handle = args.WorldHandle;

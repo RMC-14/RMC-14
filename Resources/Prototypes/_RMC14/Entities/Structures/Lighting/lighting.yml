@@ -8,6 +8,10 @@
   description: A lighting fixture that is fitted with a bright fluorescent light tube. Looking at it for too long makes your eyes go watery.
   suffix: Always powered
   components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/Wallmounts/Lighting/light_tube.rsi
     state: tube1
@@ -22,34 +26,11 @@
       Broken: tube-broken
       Burned: tube-burned
   - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 200
-      behaviors: #excess damage, don't spawn entities.
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-    - trigger:
-        !type:DamageTrigger
-        damage: 9 # 9.15 for lesser drone
-      behaviors:
-      - !type:EmptyAllContainersBehaviour
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          CMSheetMetal1:
-            min: 2
-            max: 2
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
+    thresholds: []
   - type: Construction
     graph: CMLightFixture
     node: tubeLight
+  - type: RMCBreakLightOnAttack
 
 - type: entity
   parent: CMLightFixtureAlwaysPowered
@@ -124,18 +105,11 @@
     containers:
       light_bulb: !type:ContainerSlot
   - type: ApcPowerReceiver
-  - type: ExtensionCableReceiver
-  - type: DeviceNetwork
-    deviceNetId: Wireless
-    receiveFrequencyId: SmartLight
-  - type: WirelessNetworkConnection
-    range: 200
-  - type: DeviceLinkSink
-    ports:
-      - On
-      - Off
-      - Toggle
   - type: Appearance
+  - type: RMCPowerReceiver
+    idleLoad: 1
+    activeLoad: 40
+    channel: Lighting
 
 - type: entity
   parent: CMLightFixtureEmpty

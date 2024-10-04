@@ -12,10 +12,14 @@ quick_lottery = true
 [gateway]
 generator_enabled = false
 
+[net]
+tickrate = 15
+
 [physics]
 # Makes mapping annoying
 grid_splitting = false
-maxlinvelocity = 62 # TODO RMC14 62 when we don't get tunneling, change in GunComponent too
+maxlinvelocity = 45 # TODO RMC14 62 when we don't get tunneling, change in GunComponent too
+target_minimum_tickrate = 90
 
 [procgen]
 preload = false
@@ -34,5 +38,4 @@ preload_grids = false
 see_own_notes = true
 
 [rmc]
-planet_maps = "/Maps/_RMC14/solaris.yml,/Maps/_RMC14/prison.yml,/Maps/_RMC14/shiva.yml"
 planet_map_vote = false

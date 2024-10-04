@@ -56,8 +56,10 @@ public sealed class CMArmorSystem : EntitySystem
 
     private void OnMapInit(Entity<CMArmorComponent> armored, ref MapInitEvent args)
     {
-        if (TryComp<XenoComponent>(armored, out var xeno))
-            _alerts.ShowAlert(armored, xeno.ArmorAlert, 0);
+        if (TryComp<XenoComponent>(armored, out var xeno)){
+            string? armorMessage = armored.Comp.Armor + " / " + armored.Comp.Armor;
+            _alerts.ShowAlert(armored, xeno.ArmorAlert, 0, dynamicMessage: armorMessage); //TODO RMC14 update message when Armor level can actually change
+        }
     }
 
     private void OnRemove(Entity<CMArmorComponent> armored, ref ComponentRemove args)
@@ -144,6 +146,9 @@ public sealed class CMArmorSystem : EntitySystem
             if (slot.ContainedEntity == null)
                 continue;
 
+            if (HasComp<ClothingIgnoreBlockBackpackComponent>(slot.ContainedEntity))
+                return;
+
             args.Cancel();
             args.Reason = "rmc-block-backpack-cant-other";
             break;
@@ -154,6 +159,9 @@ public sealed class CMArmorSystem : EntitySystem
     {
         ref readonly var ev = ref args.Args.Event;
         if (ev.Cancelled)
+            return;
+
+        if (HasComp<ClothingIgnoreBlockBackpackComponent>(args.Args.Event.Equipment))
             return;
 
         if ((ev.SlotFlags & SlotFlags.BACK) == 0)

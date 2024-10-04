@@ -55,8 +55,8 @@ port = 1212
 bindto = "::,0.0.0.0"
 
 [physics]
-maxlinvelocity = 45
 grid_splitting = false
+maxlinvelocity = 45 # TODO RMC14 62 when we don't get tunneling, change in GunComponent too
 target_minimum_tickrate = 90
 
 [replay]

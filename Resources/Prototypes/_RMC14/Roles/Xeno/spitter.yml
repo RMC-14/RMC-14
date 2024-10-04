@@ -3,6 +3,9 @@
   id: CMXenoSpitter
   name: cm-job-name-xeno-spitter
   playTimeTracker: CMJobXenoSpitter
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: spitter
 
 - type: playTimeTracker
   id: CMJobXenoSpitter

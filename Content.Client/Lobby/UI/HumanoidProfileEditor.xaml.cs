@@ -487,6 +487,7 @@ namespace Content.Client.Lobby.UI
                     SidearmName = type == RMCNamedItemType.Sidearm ? itemName : Profile.NamedItems.SidearmName,
                     HelmetName = type == RMCNamedItemType.Helmet ? itemName : Profile.NamedItems.HelmetName,
                     ArmorName = type == RMCNamedItemType.Armor ? itemName : Profile.NamedItems.ArmorName,
+                    SentryName = type == RMCNamedItemType.Sentry ? itemName : Profile.NamedItems.SentryName,
                 });
                 SetDirty();
             }
@@ -498,6 +499,7 @@ namespace Content.Client.Lobby.UI
             NamedItems.Sidearm.OnTextChanged += args => SetItemName(RMCNamedItemType.Sidearm, args.Text);
             NamedItems.Helmet.OnTextChanged += args => SetItemName(RMCNamedItemType.Helmet, args.Text);
             NamedItems.Armor.OnTextChanged += args => SetItemName(RMCNamedItemType.Armor, args.Text);
+            NamedItems.Sentry.OnTextChanged += args => SetItemName(RMCNamedItemType.Sentry, args.Text);
 
             UpdateSpeciesGuidebookIcon();
             IsDirty = false;
@@ -1622,6 +1624,7 @@ namespace Content.Client.Lobby.UI
             NamedItems.Sidearm.Text = Profile?.NamedItems.SidearmName ?? string.Empty;
             NamedItems.Helmet.Text = Profile?.NamedItems.HelmetName ?? string.Empty;
             NamedItems.Armor.Text = Profile?.NamedItems.ArmorName ?? string.Empty;
+            NamedItems.Sentry.Text = Profile?.NamedItems.SentryName ?? string.Empty;
         }
 
         private void UpdateSaveButton()

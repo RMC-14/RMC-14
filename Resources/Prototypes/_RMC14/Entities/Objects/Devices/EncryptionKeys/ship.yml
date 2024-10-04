@@ -67,6 +67,19 @@
   - type: Sprite
     state: cap_key
 
+# High Command
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyHighCommand
+  name: high command encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineHighCommand
+    defaultChannel: MarineHighCommand
+  - type: Sprite
+    state: cap_key
+
 # JTAC
 - type: entity
   parent: CMEncryptionKey

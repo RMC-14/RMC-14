@@ -1,0 +1,24 @@
+- type: entity
+  parent: [FireAxe, RMCBaseMeleeWeapon]
+  id: RMCFireAxe
+  name: fire axe
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/fireaxe.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Melee/fireaxe.rsi
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 15
+        Slash: 10
+        Structural: 10
+    soundHit:
+      collection: GenericHit
+  - type: IncreaseDamageOnWield
+    damage:
+      types:
+        Slash: 15
+        Blunt: 15
+        Structural: 40

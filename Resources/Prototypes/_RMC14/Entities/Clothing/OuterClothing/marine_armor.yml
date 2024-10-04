@@ -197,6 +197,28 @@
     grid:
     - 0,0,3,1 # 2 slots
 
+- type: entity
+  parent: CMArmorM3Medium
+  id: CMArmorM3VLSynth
+  name: M3A1 Synthetic Utility Vest
+  description: This variant of the ubiquitous M3 pattern vest has been extensively modified, providing no protection in exchange for maximum mobility and added storage. Synthetic programming compliant.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl_syn_camo.rsi
+  - type: Clothing
+    equipDelay: 1
+    unequipDelay: 0.5
+  - type: CMArmor
+    armor: 0 # CLOTHING_ARMOR_NONE
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
+    walkModifier: 0.949
+    sprintModifier: 0.949
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
+  - type: RMCBulkyArmor
+    isBulky: false
+
 # m4
 - type: entity
   parent: CMArmorM3Medium
@@ -237,7 +259,7 @@
 
 # Smart Gun
 - type: entity
-  parent: CMArmorM3Medium
+  parent: [ CMArmorM3Medium, RMCAllowSuitStorageClothingSmartgunner ]
   id: CMArmorSmartGunCombatHarness
   name: ML66A combat harness
   description: A heavy protective vest designed to be worn with the ML66A Smart Gun System. It has specially designed straps and reinforcement to carry the Smartgun and accessories.
@@ -248,38 +270,6 @@
     maxItemSize: Small
     grid:
     - 0,0,3,1 # 2 slots
-    whitelist:
-      components:
-      # Mines
-      # Bayonet
-      # Belts
-      # Motion detectors
-      # Walkman
-      tags:
-      - CMMagazineRifle # same as marine armor
-      - CMMagazineSmg
-      - CMMagazineSniper
-      - CMMagazinePistol
-      - RMCMagazineRevolver
-      - Sidearm
-      - Knife
-      - Flashlight
-      - MRE
-      - Grenade
-      - CMAutoInjector
-      - Cigarette
-      - PillPacket
-      - PillCanister
-      - CMSurgicalCase
-      - Syringe
-      - Hypospray
-      - CMOintment
-      - Brutepack
-      - CMBurnKit
-      - CMTraumaKit
-      - Bottle
-      - Pill
-      - PowerCell
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.8
@@ -288,7 +278,7 @@
 
 # M2
 - type: entity
-  parent: CMArmorM3Medium
+  parent: [ CMArmorM3Medium, RMCAllowSuitStorageClothingArmorMP ]
   id: CMArmorM2MP
   name: M2 pattern mp armor
   description: M2 Armor offers higher protection against melee attacks but less protection against projectile attacks
@@ -306,35 +296,3 @@
     maxItemSize: Small
     grid:
     - 0,0,3,1 # 2 slots
-    whitelist:
-      components:
-      - Gun
-      - BallisticAmmoProvider
-      - Stunbaton
-#      - # TODO RMC14 motion detector, walkman
-      tags:
-      - Handcuffs
-      - CMMagazineRifle # same as marine armor
-      - CMMagazineSmg
-      - CMMagazineSniper
-      - CMMagazinePistol
-      - RMCMagazineRevolver
-      - Sidearm
-      - Knife
-      - Flashlight
-      - Grenade
-      - MRE
-      - CMAutoInjector
-      - Cigarette
-      - PillPacket
-      - PillCanister
-      - CMSurgicalCase
-      - Syringe
-      - Hypospray
-      - CMOintment
-      - Brutepack
-      - CMBurnKit
-      - CMTraumaKit
-      - Bottle
-      - Pill
-      - PowerCell
