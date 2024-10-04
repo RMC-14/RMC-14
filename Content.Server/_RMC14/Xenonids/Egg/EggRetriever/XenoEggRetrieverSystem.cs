@@ -143,7 +143,7 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
 
         for (var i = 0; i < xeno.Comp.CurEggs; ++i)
         {
-            if (chance != 1.0 && _random.Prob(chance))
+            if (chance != 1.0 && !_random.Prob(chance))
                 continue;
             eggDropped = true;
             var newEgg = Spawn(xeno.Comp.EggPrototype);

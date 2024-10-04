@@ -200,7 +200,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
 
         for (var i = 0; i < xeno.Comp.CurParasites; ++i)
         {
-            if (chance != 1.0 && _random.Prob(chance))
+            if (chance != 1.0 && !_random.Prob(chance))
                 continue;
             var newParasite = Spawn(xeno.Comp.ParasitePrototype);
             _hive.SetHive(newParasite, hive);
