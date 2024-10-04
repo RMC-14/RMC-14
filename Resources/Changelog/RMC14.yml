@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: TsjipTsjip
-  changes:
-  - message: Explosion damage dealt to players is now logged again.
-    type: Add
-  id: 283
-  time: '2024-07-07T01:07:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2852
 - author: Whisper
   changes:
   - message: Made queen footsteps louder.
@@ -4655,5 +4648,14 @@
   id: 782
   time: '2024-10-04T22:11:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4250
+- author: DrSmugleaf
+  changes:
+  - message: Fixed error spam when near a hive core.
+    type: Fix
+  - message: Hopefully fix players sometimes stuttering until they reconnect.
+    type: Fix
+  id: 783
+  time: '2024-10-04T22:19:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4253
 Name: RMC14
 Order: -1
