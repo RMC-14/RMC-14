@@ -196,9 +196,9 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         if (chance != 1.0 && xeno.Comp.CurParasites > 0)
             _popup.PopupEntity(Loc.GetString("rmc-xeno-parasite-carrier-death", ("xeno", xeno)), xeno, PopupType.MediumCaution);
 
-		var hive = _hive.GetHive(xeno.Owner);
+        var hive = _hive.GetHive(xeno.Owner);
 
-		for (var i = 0; i < xeno.Comp.CurParasites; ++i)
+        for (var i = 0; i < xeno.Comp.CurParasites; ++i)
         {
             if (chance != 1.0 && _random.Prob(chance))
                 continue;

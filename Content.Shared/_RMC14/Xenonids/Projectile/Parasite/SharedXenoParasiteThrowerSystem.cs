@@ -5,7 +5,10 @@ using Content.Shared.Verbs;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Mobs;
+using Content.Shared.Stunnable;
+using Content.Shared.StatusEffect;
 using Robust.Shared.Player;
+
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 
@@ -24,6 +27,8 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
 
         SubscribeLocalEvent<XenoParasiteThrowerComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoRestEvent>(OnVisualsRest);
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, KnockedDownEvent>(OnVisualsKnockedDown);
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, StatusEffectEndedEvent>(OnVisualsStatusEffectEnded);
     }
 
     private void OnParasiteThrowerExamine(Entity<XenoParasiteThrowerComponent> thrower, ref ExaminedEvent args)
@@ -103,5 +108,16 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
     private void OnVisualsRest(Entity<XenoParasiteThrowerComponent> xeno, ref XenoRestEvent args)
     {
         _appearance.SetData(xeno, ParasiteOverlayVisuals.Resting, args.Resting);
+    }
+
+    private void OnVisualsKnockedDown(Entity<XenoParasiteThrowerComponent> xeno, ref KnockedDownEvent args)
+    {
+        _appearance.SetData(xeno, ParasiteOverlayVisuals.Downed, true);
+    }
+
+    private void OnVisualsStatusEffectEnded(Entity<XenoParasiteThrowerComponent> xeno, ref StatusEffectEndedEvent args)
+    {
+        if(args.Key == "KnockedDown")
+            _appearance.SetData(xeno, ParasiteOverlayVisuals.Downed, false);
     }
 }

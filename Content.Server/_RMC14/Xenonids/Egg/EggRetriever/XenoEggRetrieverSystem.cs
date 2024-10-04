@@ -139,9 +139,9 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
         XenoComponent? xenComp = null;
         TryComp(xeno, out xenComp);
         bool eggDropped = false;
-		var hive = _hive.GetHive(xeno.Owner);
+        var hive = _hive.GetHive(xeno.Owner);
 
-		for (var i = 0; i < xeno.Comp.CurEggs; ++i)
+        for (var i = 0; i < xeno.Comp.CurEggs; ++i)
         {
             if (chance != 1.0 && _random.Prob(chance))
                 continue;
@@ -153,7 +153,8 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
         }
         xeno.Comp.CurEggs = 0; // Just in case
         if (chance != 1.0 && eggDropped)
-            _announce.AnnounceSameHive(, Loc.GetString("rmc-xeno-egg-carrier-death", ("xeno", xeno));
+            _announce.AnnounceSameHive(xeno.Owner, Loc.GetString("rmc-xeno-egg-carrier-death", ("xeno", xeno)));
+
         Dirty(xeno);
         return true;
     }
