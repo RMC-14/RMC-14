@@ -30,12 +30,6 @@ public sealed partial class XenoResinHoleComponent : Component
     [DataField, AutoNetworkedField]
     public EntProtoId? TrapPrototype = null;
 
-    /// <summary>
-    /// The hive that will get announcements when the hole is broken or activated
-    /// </summary>
-    [DataField]
-    public EntityUid? Hive = null;
-
     [DataField]
     public TimeSpan StepStunDuration = TimeSpan.FromSeconds(2.5);
 

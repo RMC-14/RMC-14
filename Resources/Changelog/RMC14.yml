@@ -1,43 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Linked in-game and Discord admin chats.
-    type: Add
-  id: 266
-  time: '2024-07-04T10:17:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2810
-- author: snebl
-  changes:
-  - message: Fixed xenonids being able to attack and build while resting.
-    type: Fix
-  id: 267
-  time: '2024-07-04T11:08:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2809
-- author: Dorragon
-  changes:
-  - message: Requisition vendors
-    type: Add
-  id: 268
-  time: '2024-07-04T11:38:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2791
-- author: DrSmugleaf
-  changes:
-  - message: With the addition of requisitions vendors, the default money gain of
-      requisitions has been lowered back down from 1500 per minute to 600 per minute.
-    type: Tweak
-  id: 269
-  time: '2024-07-04T11:43:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2815
-- author: Whisper
-  changes:
-  - message: Sniper specialists will only spawn with regular mags temporarily, as
-      the status effects for the others are not implemented.
-    type: Tweak
-  id: 270
-  time: '2024-07-04T11:46:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2816
-- author: DrSmugleaf
-  changes:
   - message: Medbay personnel (doctors, nurses, researchers and CMOs but NOT hospital
       corpsmen) are now unable to equip any armor other than the M3-VL pattern ballistics
       vest.
@@ -4616,5 +4579,41 @@
   id: 765
   time: '2024-10-01T02:45:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4207
+- author: TeaTotalTemplar
+  changes:
+  - message: The M276 Utility Toolbelt and M276 Combat Utility Toolbelt now contain
+      cable coil (30 pieces)
+    type: Add
+  id: 766
+  time: '2024-10-03T22:06:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4229
+- author: CyberTropic
+  changes:
+  - message: Barbed sandbags now return the barbed wire when dismantled.
+    type: Fix
+  id: 767
+  time: '2024-10-04T04:14:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4211
+- author: TeaTotalTemplar
+  changes:
+  - message: Vending machines will now break down into RMC Steel instead of upstream
+    type: Fix
+  id: 768
+  time: '2024-10-04T04:13:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4233
+- author: CyberTropic
+  changes:
+  - message: Added showers
+    type: Add
+  id: 769
+  time: '2024-10-04T04:12:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4227
+- author: deltanedas
+  changes:
+  - message: Xenos are now told when the hive supports certain castes.
+    type: Add
+  id: 770
+  time: '2024-10-04T04:15:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4222
 Name: RMC14
 Order: -1

@@ -224,7 +224,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         }
 
         var para = Spawn(resinHole.Comp.TrapPrototype);
-        _xeno.SetHive(para, resinHole.Comp.Hive);
+        _hive.SetSameHive(para, resinHole.Owner);
 
         if (!_rmcHands.IsPickupByAllowed(para, args.User) || !_hands.TryPickupAnyHand(args.User, para))
         {
@@ -302,7 +302,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
     private void OnXenoResinHoleTakeDamage(Entity<XenoResinHoleComponent> resinHole, ref DamageChangedEvent args)
     {
-        if (TryComp<XenoComponent>(args.Origin, out var xeno) && xeno.Hive == resinHole.Comp.Hive)
+        if (args.Origin is {} origin && _hive.FromSameHive(origin, resinHole.Owner))
         {
             if (resinHole.Comp.TrapPrototype != null && args.DamageDelta != null)
                 args.DamageDelta.ClampMax(0);
@@ -352,7 +352,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         if (comp.TrapPrototype is null)
             return;
 
-        if (TryComp<XenoComponent>(args.Tripper, out var xeno) && xeno.Hive == resinHole.Comp.Hive)
+        if (_hive.FromSameHive(args.Tripper, resinHole.Owner))
         {
             args.Continue = false;
             return;
@@ -454,8 +454,9 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
         _adminLogs.Add(LogType.RMCXenoConstruct, $"Xeno {ToPrettyString(xeno.Owner):xeno} placed a resin hole at {coords}");
 
+        _hive.SetSameHive(xeno.Owner, resinHole);
+
         var resinHoleComp = EnsureComp<XenoResinHoleComponent>(resinHole);
-        resinHoleComp.Hive = xeno.Comp.Hive;
         _audio.PlayPvs(resinHoleComp.BuildSound, resinHole);
     }
 
@@ -465,7 +466,6 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
         if (comp.TrapPrototype is not EntProtoId trapEntityProto)
             return false;
-
 
         if (IsAcidPrototype(trapEntityProto, out _))
         {
@@ -481,7 +481,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
                     if (tuff != null && !_turf.IsTileBlocked(tuff.Value, FullTileMask))
                     {
                         var acid = SpawnAtPosition(trapEntityProto, coords);
-                        //_xeno.SetHive(trapEntity, resinHole.Comp.Hive); - for seperate hives later, don't think this work rn
+                        _hive.SetSameHive(resinHole.Owner, acid);
                         if (TryComp<DamageOnCollideComponent>(acid, out var collide))
                             _onCollide.SetChain((acid, collide), chain);
                     }
@@ -491,10 +491,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         else
         {
             var trapEntity = SpawnAtPosition(trapEntityProto, _transform.GetMoverCoordinates(resinHole));
-            //Prevent errors
-            if(trapEntityProto == XenoResinHoleComponent.ParasitePrototype)
-                _xeno.SetHive(trapEntity, resinHole.Comp.Hive);
-        }
+            _hive.SetSameHive(resinHole.Owner, trapEntity);
 
         string msg = destroyed ? "cm-xeno-construction-resin-hole-destroyed" : "rmc-xeno-construction-resin-hole-activate";
 

@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Damage;
@@ -14,9 +15,9 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly AreaSystem _areas = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedXenoResinHoleSystem _hole = default!;
-    [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoAnnounceDeathComponent, MobStateChangedEvent>(OnAnnounceDeathMobStateChanged);
@@ -62,20 +63,17 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
         PopupType? popup = null,
         Color? color = null)
     {
-        var filter = Filter.Empty().AddWhereAttachedEntity(e => CompOrNull<XenoComponent>(e)?.Hive == hive);
+        var filter = Filter.Empty().AddWhereAttachedEntity(e => _hive.IsMember(e, hive));
         Announce(source, filter, message, WrapHive(message, color), sound, popup);
     }
 
-    public void AnnounceSameHive(Entity<XenoComponent?> xeno,
+    public void AnnounceSameHive(Entity<HiveMemberComponent?> xeno,
         string message,
         SoundSpecifier? sound = null,
         PopupType? popup = null,
         Color? color = null)
     {
-        if (!Resolve(xeno, ref xeno.Comp, false))
-            return;
-
-        if (xeno.Comp.Hive is not { } hive)
+        if (_hive.GetHive(xeno) is not {} hive)
             return;
 
         AnnounceToHive(xeno, hive, message, sound, popup, color);
