@@ -40,6 +40,7 @@
       map: [ "enum.ApcVisualLayers.Environment" ]
   - type: Appearance
   - type: WallMount
+    arc: 360
   - type: UserInterface
     interfaces:
       enum.RMCApcUiKey.Key:

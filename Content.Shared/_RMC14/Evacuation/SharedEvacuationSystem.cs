@@ -8,7 +8,6 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Power;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
@@ -17,9 +16,9 @@ using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Examine;
 using Content.Shared.GameTicking;
-using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
+using Content.Shared.UserInterface;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
@@ -79,8 +78,10 @@ public abstract class SharedEvacuationSystem : EntitySystem
         SubscribeLocalEvent<EvacuationDoorComponent, BeforeDoorOpenedEvent>(OnEvacuationDoorBeforeOpened);
         SubscribeLocalEvent<EvacuationDoorComponent, BeforeDoorClosedEvent>(OnEvacuationDoorBeforeClosed);
 
-        SubscribeLocalEvent<EvacuationComputerComponent, InteractHandEvent>(OnEvacuationComputerInteractHand);
         SubscribeLocalEvent<EvacuationComputerComponent, ExaminedEvent>(OnEvacuationComputerExamined);
+        SubscribeLocalEvent<EvacuationComputerComponent, ActivatableUIOpenAttemptEvent>(OnEvacuationComputerUIOpenAttempt);
+
+        SubscribeLocalEvent<LifeboatComputerComponent, ActivatableUIOpenAttemptEvent>(OnLifeboatComputerUIOpenAttempt);
 
         Subs.BuiEvents<EvacuationComputerComponent>(EvacuationComputerUi.Key,
             subs =>
@@ -209,15 +210,6 @@ public abstract class SharedEvacuationSystem : EntitySystem
             args.PerformCollisionCheck = false;
     }
 
-    private void OnEvacuationComputerInteractHand(Entity<EvacuationComputerComponent> ent, ref InteractHandEvent args)
-    {
-        var user = args.User;
-        if (HasComp<XenoComponent>(user))
-            return;
-
-        _ui.TryOpenUi(ent.Owner, EvacuationComputerUi.Key, args.User);
-    }
-
     private void OnEvacuationComputerExamined(Entity<EvacuationComputerComponent> ent, ref ExaminedEvent args)
     {
         if (ent.Comp.MaxMobs is { } maxMobs)
@@ -227,6 +219,34 @@ public abstract class SharedEvacuationSystem : EntitySystem
                 args.PushMarkup($"[color=red]This pod is only rated for a maximum of {maxMobs} occupants! Any more may cause it to crash and burn.[/color]");
             }
         }
+    }
+
+    private void OnEvacuationComputerUIOpenAttempt(Entity<EvacuationComputerComponent> ent, ref ActivatableUIOpenAttemptEvent args)
+    {
+        if (args.Cancelled || ent.Comp.Mode == EvacuationComputerMode.Ready)
+            return;
+
+        args.Cancel();
+
+        var msg = ent.Comp.Mode switch
+        {
+            EvacuationComputerMode.Disabled => "Evacuation has not started.",
+            EvacuationComputerMode.Ready => "",
+            EvacuationComputerMode.Travelling => "The escape pod has already been launched!",
+            EvacuationComputerMode.Crashed => "This escape pod has crashed!",
+            _ => throw new ArgumentOutOfRangeException(),
+        };
+
+        _popup.PopupClient(msg, ent, args.User, PopupType.SmallCaution);
+    }
+
+    private void OnLifeboatComputerUIOpenAttempt(Entity<LifeboatComputerComponent> ent, ref ActivatableUIOpenAttemptEvent args)
+    {
+        if (args.Cancelled || ent.Comp.Enabled)
+            return;
+
+        args.Cancel();
+        _popup.PopupClient("Evacuation has not been authorized.", ent, args.User, PopupType.SmallCaution);
     }
 
     private void OnEvacuationComputerLaunch(Entity<EvacuationComputerComponent> ent, ref EvacuationComputerLaunchBuiMsg args)
