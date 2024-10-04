@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the round not ending when the only marines left alive and not infected
-      are all nested.
-    type: Fix
-  id: 275
-  time: '2024-07-05T10:39:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2830
 - author: Tunguso4ka
   changes:
   - message: Added welder satchel for Combat Technicians.
@@ -4605,5 +4597,13 @@
   id: 774
   time: '2024-10-04T08:23:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4234
+- author: crystalHex
+  changes:
+  - message: Added the first-aid kit to the G8-A general utility belt blacklist until
+      skill-based storage handling is added.
+    type: Tweak
+  id: 775
+  time: '2024-10-04T08:35:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3832
 Name: RMC14
 Order: -1
