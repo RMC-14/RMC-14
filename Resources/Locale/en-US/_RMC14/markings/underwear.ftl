@@ -45,15 +45,3 @@ marking-RMCUnderwearSatinJungle-j_satin = Satin
 
 marking-RMCUnderwearSatinSnow = Satin (Snow)
 marking-RMCUnderwearSatinSnow-s_satin = Satin
-
-marking-RMCUnderwearTanga = Tanga (Tan)
-marking-RMCUnderwearTanga-c_tanga = Tanga
-
-marking-RMCUnderwearTangaDesert = Tanga (Desert)
-marking-RMCUnderwearTangaDesert-d_tanga = Tanga
-
-marking-RMCUnderwearTangaJungle = Tanga (Jungle)
-marking-RMCUnderwearTangaJungle-j_tanga = Tanga
-
-marking-RMCUnderwearTangaSnow = Tanga (Snow)
-marking-RMCUnderwearTangaSnow-s_tanga = Tanga
