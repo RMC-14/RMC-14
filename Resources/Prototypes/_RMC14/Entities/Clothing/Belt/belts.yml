@@ -68,9 +68,6 @@
       tags:
       - RMCBoxShotgunShells
 #      - # TODO RMC14 shotgun shell handfuls
-
-      components:
-      - BallisticAmmoProvider
   - type: IgnoreContentsSize
     items:
       tags:
