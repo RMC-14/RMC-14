@@ -22,6 +22,7 @@
   - RMCLethalForceConsequences
   - RMCProtectDetainees
   - RMCGeneralRoleplayStandards
+  - RMCCharacterNames
   - RMCMarineRoleplayStandards
   - RMCMarineDeployment
   - RMCCommandRoleplay
@@ -160,17 +161,25 @@
 
 - type: guideEntry
   parent: RMC
-  id: RMCMarineRoleplayStandards
-  name: rmc-guide-entry-rules-marine-roleplay-standards
+  id: RMCCharacterNames
+  name: rmc-guide-entry-rules-marine-character-names
   priority: 19
   ruleEntry: false
-  text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/RMCMarineRoleplayStandards.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/RMCCharacterNames.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineRoleplayStandards
+  name: rmc-guide-entry-rules-marine-roleplay-standards
+  priority: 20
+  ruleEntry: false
+  text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/RMCGeneralRoleplayStandards.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCMarineDeployment
   name: rmc-guide-entry-rules-marine-deployment
-  priority: 20
+  priority: 21
   ruleEntry: false
   text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/RMCMarineDeployment.xml"
 
@@ -178,7 +187,7 @@
   parent: RMC
   id: RMCCommandRoleplay
   name: rmc-guide-entry-rules-command-roleplay
-  priority: 21
+  priority: 22
   ruleEntry: false
   text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/RMCCommandRoleplay.xml"
 
@@ -186,7 +195,7 @@
   parent: RMC
   id: RMCXenoRoleplay
   name: rmc-guide-entry-rules-xeno-roleplay
-  priority: 22
+  priority: 23
   ruleEntry: false
   text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/RMCXenoRoleplay.xml"
 
@@ -194,7 +203,7 @@
   parent: RMC
   id: RMCSurvivorRoleplay
   name: rmc-guide-entry-rules-survivor-roleplay
-  priority: 23
+  priority: 24
   ruleEntry: false
   text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/RMCSurvivorRoleplay.xml"
 
@@ -202,7 +211,7 @@
   parent: RMC
   id: RMCHostileFactionRoleplay
   name: rmc-guide-entry-rules-hostile-faction-roleplay
-  priority: 24
+  priority: 25
   ruleEntry: false
   text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/RMCHostileFactionRoleplay.xml"
 
@@ -210,6 +219,6 @@
   parent: RMC
   id: RMCCommandChain
   name: rmc-guide-entry-rules-command-chain
-  priority: 25
+  priority: 26
   ruleEntry: false
   text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/RMCCommandChain.xml"

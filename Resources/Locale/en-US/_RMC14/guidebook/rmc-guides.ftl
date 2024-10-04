@@ -19,6 +19,7 @@ rmc-guide-entry-rules-lethal-force = Lethal Force
 rmc-guide-entry-rules-lethal-force-consequences = Lethal Force Consequences
 rmc-guide-entry-rules-protect-detainees = MP Protect Detainees
 rmc-guide-entry-rules-general-roleplay-standards = General Roleplay Standards
+rmc-guide-entry-rules-marine-character-names = Character Names
 rmc-guide-entry-rules-marine-roleplay-standards = Marine Roleplay Standards
 rmc-guide-entry-rules-marine-deployment = Marine Deployment
 rmc-guide-entry-rules-command-roleplay = Command Roleplay
