@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added Rainy Cloudly figurine
-    type: Add
-  id: 278
-  time: '2024-07-06T10:14:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2848
 - author: Vermidia
   changes:
   - message: MREs can now be stored in webbing and armor
@@ -4645,5 +4638,13 @@
   id: 777
   time: '2024-10-04T10:04:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4237
+- author: MACMAN2003
+  changes:
+  - message: The tactical map can now be opened from the alerts sidebar instead of
+      only the actions bar.
+    type: Tweak
+  id: 778
+  time: '2024-10-04T10:37:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4156
 Name: RMC14
 Order: -1
