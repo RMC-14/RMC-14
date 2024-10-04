@@ -166,7 +166,7 @@
     color: "#5B248C"
   - type: XenoFruitSpeed
     duration: 15
-    speedModifer: 0.4
+    speedModifier: 0.4
 
 - type: entity
   parent: XenoFruitBase
