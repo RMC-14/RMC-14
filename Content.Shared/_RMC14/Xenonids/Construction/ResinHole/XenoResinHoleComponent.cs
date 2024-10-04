@@ -52,6 +52,9 @@ public sealed partial class XenoResinHoleComponent : Component
     public SoundSpecifier? FluidFillSound = new SoundPathSpecifier("/Audio/Effects/refill.ogg");
 
     [DataField]
+    public Color MessageColor = Color.FromHex("#2A623D");
+
+    [DataField]
     public SoundSpecifier BuildSound = new SoundCollectionSpecifier("RMCResinBuild")
     {
         Params = AudioParams.Default.WithVolume(-5f)
