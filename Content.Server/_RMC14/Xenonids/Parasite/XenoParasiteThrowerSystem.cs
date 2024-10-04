@@ -4,6 +4,7 @@ using Content.Server.Hands.Systems;
 using Content.Server.Mind;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared.Actions;
@@ -29,8 +30,8 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
 
     public override void Initialize()
@@ -67,7 +68,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
                 if (!HasComp<XenoParasiteComponent>(possibleParasite))
                     continue;
 
-                if (HasComp<ParasiteAIComponent>(possibleParasite))
+                if (!HasComp<ParasiteAIComponent>(possibleParasite))
                     continue;
 
                 tileHasParasites = true;
@@ -124,8 +125,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         if (RemoveParasite(xeno) is not EntityUid newParasite)
             return;
 
-        if(TryComp<XenoComponent>(xeno, out var xenComp))
-           _xeno.SetHive(newParasite, xenComp.Hive);
+        _hive.SetSameHive(xeno.Owner, newParasite);
 
         _hands.TryPickupAnyHand(xeno, newParasite);
 
@@ -196,13 +196,14 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         if (chance != 1.0 && xeno.Comp.CurParasites > 0)
             _popup.PopupEntity(Loc.GetString("rmc-xeno-parasite-carrier-death", ("xeno", xeno)), xeno, PopupType.MediumCaution);
 
-        for (var i = 0; i < xeno.Comp.CurParasites; ++i)
+		var hive = _hive.GetHive(xeno.Owner);
+
+		for (var i = 0; i < xeno.Comp.CurParasites; ++i)
         {
             if (chance != 1.0 && _random.Prob(chance))
                 continue;
             var newParasite = Spawn(xeno.Comp.ParasitePrototype);
-            if(xenComp != null)
-                _xeno.SetHive(newParasite, xenComp.Hive);
+            _hive.SetHive(newParasite, hive);
             _transform.DropNextTo(newParasite, xeno.Owner);
             //So they don't eat eachother before they gloriously fly into the sunset
             _stun.TryStun(newParasite, xeno.Comp.ThrownParasiteStunDuration, true);

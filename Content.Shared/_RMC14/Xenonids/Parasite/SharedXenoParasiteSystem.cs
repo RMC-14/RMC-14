@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared.Actions;
@@ -53,7 +54,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
@@ -401,7 +402,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         var time = _timing.CurTime;
         var victimComp = EnsureComp<VictimInfectedComponent>(victim);
         victimComp.AttachedAt = time;
-        victimComp.Hive = CompOrNull<XenoComponent>(parasite)?.Hive ?? default;
+        victimComp.Hive = _hive.GetHive(parasite.Owner)?.Owner;
         _stun.TryParalyze(victim, parasite.Comp.ParalyzeTime, true);
         _status.TryAddStatusEffect(victim, "Muted", parasite.Comp.ParalyzeTime, true, "Muted");
         _status.TryAddStatusEffect(victim, "TemporaryBlindness", parasite.Comp.ParalyzeTime, true, "TemporaryBlindness");
@@ -483,7 +484,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             if (infected.BurstAt <= time && infected.SpawnedLarva == null)
             {
                 var spawned = SpawnAtPosition(infected.BurstSpawn, xform.Coordinates);
-                _xeno.SetHive(spawned, infected.Hive);
+                _hive.SetHive(spawned, infected.Hive);
 
                 var larvaContainer = _container.EnsureContainer<ContainerSlot>(uid, infected.LarvaContainerId);
                 _container.Insert(spawned, larvaContainer);
@@ -495,7 +496,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
                 EnsureComp<BursterComponent>(spawned, out var burster);
                 burster.BurstFrom = uid;
-
             }
 
             if (infected.BurstAt + infected.AutoBurstTime > time)
