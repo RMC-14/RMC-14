@@ -151,7 +151,7 @@ public sealed class XenoEggSystem : EntitySystem
         if (TryComp(attached, out TransformComponent? xform))
             _transform.AnchorEntity(attached, xform);
 
-        var ev = new XenoOvipositorChangedEvent();
+        var ev = new XenoOvipositorChangedEvent(true);
         RaiseLocalEvent(ref ev);
     }
 
@@ -160,7 +160,7 @@ public sealed class XenoEggSystem : EntitySystem
         if (!TerminatingOrDeleted(attached) && TryComp(attached, out TransformComponent? xform))
             _transform.Unanchor(attached, xform);
 
-        var ev = new XenoOvipositorChangedEvent();
+        var ev = new XenoOvipositorChangedEvent(false);
         RaiseLocalEvent(ref ev);
     }
 
