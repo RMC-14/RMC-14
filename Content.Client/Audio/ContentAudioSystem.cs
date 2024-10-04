@@ -29,7 +29,12 @@ public sealed partial class ContentAudioSystem : SharedContentAudioSystem
     public const float AmbientMusicMultiplier = 3f;
     public const float LobbyMultiplier = 3f;
     public const float InterfaceMultiplier = 2f;
-    
+
+    public const float AHelpMultiplier = 3f; // SS220 Ahelp-Volume-Slider
+    public const float TTSMultiplier = 3f; // SS220 Ahelp-Volume-Slider
+    public const float TTSRadioMultiplier = 3f; // SS220 Ahelp-Volume-Slider
+    public const float TTSAnnounceMultiplier = 3f; // SS220 Ahelp-Volume-Slider
+
     public override void Initialize()
     {
         base.Initialize();

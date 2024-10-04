@@ -22,6 +22,7 @@ using Content.Server.Preferences.Managers;
 using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
 using Content.Server.SS220.Discord;
+using Content.Server.SS220.TTS;
 using Content.Server.Voting.Managers;
 using Content.Shared.CCVar;
 using Content.Shared.Kitchen;
@@ -108,6 +109,7 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<ServerApi>().Initialize();
 
                 IoCManager.Resolve<DiscordPlayerManager>().Initialize(); // SS220 discord player manager
+                IoCManager.Resolve<TTSManager>().Initialize(); // Corvax-TTS
 
                 _voteManager.Initialize();
                 _updateManager.Initialize();

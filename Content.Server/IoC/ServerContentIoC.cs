@@ -24,6 +24,7 @@ using Content.Server.Preferences.Managers;
 using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
 using Content.Server.SS220.Discord;
+using Content.Server.SS220.TTS;
 using Content.Server.Voting.Managers;
 using Content.Server.Worldgen.Tools;
 using Content.Shared.Administration.Logs;
@@ -73,6 +74,7 @@ namespace Content.Server.IoC
             IoCManager.Register<MappingManager>();
 
             IoCManager.Register<DiscordPlayerManager>(); // SS220 discord player manager
+            IoCManager.Register<TTSManager>();
 
             // RMC14
             IoCManager.Register<LinkAccountManager>();

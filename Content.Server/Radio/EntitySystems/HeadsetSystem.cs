@@ -5,6 +5,7 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
 using Content.Shared.Radio.EntitySystems;
+using Content.Shared.SS220.TTS;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 
@@ -99,8 +100,17 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
 
     private void OnHeadsetReceive(EntityUid uid, HeadsetComponent component, ref RadioReceiveEvent args)
     {
-        if (TryComp(Transform(uid).ParentUid, out ActorComponent? actor))
+        // SS220 TTS-Radio begin
+        var actorUid = Transform(uid).ParentUid;
+        if (TryComp(actorUid, out ActorComponent? actor))
+        {
             _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
+            if (actorUid != args.MessageSource && TryComp(args.MessageSource, out TTSComponent? _))
+            {
+                args.Receivers.Add(actorUid);
+            }
+        }
+        // SS220 TTS-Radio end
     }
 
     private void OnEmpPulse(EntityUid uid, HeadsetComponent component, ref EmpPulseEvent args)

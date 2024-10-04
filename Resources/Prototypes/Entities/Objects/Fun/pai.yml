@@ -55,6 +55,8 @@
   - type: Actions
   - type: TypingIndicator
     proto: robot
+  - type: TTS # Corvax-TTS
+    voice: adventure_core
   - type: Speech
     speechVerb: Robotic
     speechSounds: Pai

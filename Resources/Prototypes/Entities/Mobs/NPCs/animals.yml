@@ -2065,6 +2065,8 @@
       path: /Audio/Animals/parrot_raught.ogg
   - type: Bloodstream
     bloodMaxVolume: 50
+  - type: TTS # Corvax-TTS
+    voice: ziggs
 
 - type: entity
   name: penguin

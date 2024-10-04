@@ -39,6 +39,8 @@
     damageContainer: Biological
   - type: Examiner
   - type: NoSlip
+  - type: TTS # Corvax-TTS
+    voice: twitch
   - type: Actions
   - type: Eye
     drawFov: false

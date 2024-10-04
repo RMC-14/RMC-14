@@ -1,6 +1,7 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
+using Content.Shared.Chat;
 using Content.Shared.Clothing;
 using Content.Shared.Database;
 using Content.Shared.Popups;
@@ -30,6 +31,8 @@ public sealed partial class VoiceMaskSystem : EntitySystem
         SubscribeLocalEvent<VoiceMaskerComponent, ClothingGotUnequippedEvent>(OnUnequip);
         SubscribeLocalEvent<VoiceMaskSetNameEvent>(OnSetName);
         // SubscribeLocalEvent<VoiceMaskerComponent, GetVerbsEvent<AlternativeVerb>>(GetVerbs);
+
+        InitializeTTS(); // Corvax-TTS
     }
 
     private void OnSetName(VoiceMaskSetNameEvent ev)
@@ -80,7 +83,7 @@ public sealed partial class VoiceMaskSystem : EntitySystem
                 : Loc.GetString("voice-mask-unknown");
                 */
 
-            args.Name = component.VoiceName;
+            args.VoiceName = component.VoiceName;
             if (component.SpeechVerb != null)
                 args.SpeechVerb = component.SpeechVerb;
         }
@@ -108,6 +111,6 @@ public sealed partial class VoiceMaskSystem : EntitySystem
         }
 
         if (_uiSystem.HasUi(owner, VoiceMaskUIKey.Key))
-            _uiSystem.SetUiState(owner, VoiceMaskUIKey.Key, new VoiceMaskBuiState(component.VoiceName, component.SpeechVerb));
+            _uiSystem.SetUiState(owner, VoiceMaskUIKey.Key, new VoiceMaskBuiState(component.VoiceName, component.SpeechVerb, component.VoiceId));
     }
 }

@@ -44,4 +44,62 @@ public sealed class CCVars220
         CVarDef.Create("primelist.enabled", false, CVar.SERVERONLY);
 
     #endregion
+
+    /**
+ * TTS (Text-To-Speech)
+ */
+
+    /// <summary>
+    /// URL of the TTS server API.
+    /// </summary>
+    public static readonly CVarDef<bool> TTSEnabled =
+        CVarDef.Create("tts.enabled", false, CVar.SERVERONLY);
+
+    /// <summary>
+    /// URL of the TTS server API.
+    /// </summary>
+    public static readonly CVarDef<string> TTSApiUrl =
+        CVarDef.Create("tts.api_url", "", CVar.SERVERONLY);
+
+    /// <summary>
+    /// Auth token of the TTS server API.
+    /// </summary>
+    public static readonly CVarDef<string> TTSApiToken =
+        CVarDef.Create("tts.api_token", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
+    /// <summary>
+    /// Default volume setting of TTS sound
+    /// </summary>
+    public static readonly CVarDef<float> TTSVolume =
+        CVarDef.Create("tts.volume", 0.50f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Default volume setting of TTS Radio sound
+    /// </summary>
+    public static readonly CVarDef<float> TTSRadioVolume =
+        CVarDef.Create("tts.radio_volume", 0.50f, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Count of in-memory cached tts voice lines.
+    /// </summary>
+    public static readonly CVarDef<int> TTSMaxCache =
+        CVarDef.Create("tts.max_cache", 250, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// TTS request timeout in seconds.
+    /// </summary>
+    public static readonly CVarDef<float> TTSRequestTimeout =
+        CVarDef.Create("tts.timeout", 5f, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// VoiceId for Announcement TTS
+    /// </summary>
+    public static readonly CVarDef<string> TTSAnnounceVoiceId =
+        CVarDef.Create("tts.announce_voice", "glados", CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Default volume setting of TTS Announce sound
+    /// </summary>
+    public static readonly CVarDef<float> TTSAnnounceVolume =
+        CVarDef.Create("tts.announce_volume", 0.50f, CVar.CLIENTONLY | CVar.ARCHIVE);
 }

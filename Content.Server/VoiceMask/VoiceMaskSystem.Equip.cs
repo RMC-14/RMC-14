@@ -7,7 +7,6 @@ namespace Content.Server.VoiceMask;
 // This partial deals with equipment, i.e., the syndicate voice mask.
 public sealed partial class VoiceMaskSystem
 {
-    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
 
     private const string MaskSlot = "mask";

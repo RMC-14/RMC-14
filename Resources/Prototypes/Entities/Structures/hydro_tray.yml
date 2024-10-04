@@ -82,6 +82,8 @@
         acts: ["Destruction"]
   - type: Machine
     board: HydroponicsTrayMachineCircuitboard
+  - type: TTS # Corvax-TTS
+    voice: adventure_core
   - type: WiresPanel
   - type: AmbientSound
     volume: -9
