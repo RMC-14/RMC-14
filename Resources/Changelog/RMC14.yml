@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: snebl
-  changes:
-  - message: Sandbag barricades can now be deconstructed with the entrenching tool.
-    type: Add
-  id: 282
-  time: '2024-07-07T01:06:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2843
 - author: TsjipTsjip
   changes:
   - message: Explosion damage dealt to players is now logged again.
@@ -4646,5 +4639,21 @@
   id: 781
   time: '2024-10-04T21:56:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4251
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Trijent Dam tactical map, mortar, CAS, power, bioscan and other
+      area-related things.
+    type: Fix
+  - message: Fixed some areas on the Almayer being unpowered.
+    type: Fix
+  - message: Fixed being able to destroy or repair multiple fusion reactors at once.
+    type: Fix
+  - message: Fixed xenos being able to move while destroying a fusion reactor.
+    type: Fix
+  - message: Made water slightly less wide so it's harder to get slowed by it.
+    type: Tweak
+  id: 782
+  time: '2024-10-04T22:11:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4250
 Name: RMC14
 Order: -1
