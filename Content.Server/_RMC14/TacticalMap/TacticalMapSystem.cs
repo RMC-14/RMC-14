@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Server._RMC14.Announce;
 using Content.Server._RMC14.Marines;
 using Content.Server.Administration.Logs;
@@ -75,6 +75,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         SubscribeLocalEvent<TacticalMapUserComponent, MapInitEvent>(OnUserMapInit);
         SubscribeLocalEvent<TacticalMapUserComponent, OpenTacticalMapActionEvent>(OnUserOpenAction);
+        SubscribeLocalEvent<TacticalMapUserComponent, OpenTacMapAlertEvent>(OnUserOpenAlert);
 
         SubscribeLocalEvent<TacticalMapComputerComponent, MapInitEvent>(OnComputerMapInit);
         SubscribeLocalEvent<TacticalMapComputerComponent, BeforeActivatableUIOpenEvent>(OnComputerBeforeUIOpen);
@@ -149,6 +150,13 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (TryGetTacticalMap(out var map))
             UpdateUserData(ent, map);
 
+        _ui.TryOpenUi(ent.Owner, TacticalMapUserUi.Key, ent);
+    }
+
+    private void OnUserOpenAlert(Entity<TacticalMapUserComponent> ent, ref OpenTacMapAlertEvent args)
+    {
+        if (TryGetTacticalMap(out var map))
+            UpdateUserData(ent, map);
         _ui.TryOpenUi(ent.Owner, TacticalMapUserUi.Key, ent);
     }
 

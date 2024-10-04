@@ -84,3 +84,21 @@
 #  clickEvent: !type:SelectTrackerAlertEvent
   minSeverity: 0
   maxSeverity: 10
+
+- type: alert
+  id: MarineTacMapAlert
+  icons:
+  - sprite: /Textures/_RMC14/Structures/Machines/map_table.rsi
+    state: maptable
+  name: Tactical Map
+  description: Click to open the Tactical Map.
+  clickEvent: !type:OpenTacMapAlertEvent
+
+- type: alert
+  id: XenoTacMapAlert
+  icons:
+  - sprite: /Textures/_RMC14/Actions/xeno_actions.rsi
+    state: toggle_queen_zoom
+  name: Tactical Map
+  description: Click to open the Tactical Map.
+  clickEvent: !type:OpenTacMapAlertEvent
