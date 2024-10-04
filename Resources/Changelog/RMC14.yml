@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: snebl
-  changes:
-  - message: Fixed the punch and fling Xenonid abilities working on dead marines.
-    type: Fix
-  id: 272
-  time: '2024-07-05T04:51:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2826
 - author: DrSmugleaf
   changes:
   - message: Fixed showing the inventory button in the bottom left to xenonids, which
@@ -4607,5 +4600,12 @@
   id: 771
   time: '2024-10-04T05:39:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3835
+- author: Vermidia
+  changes:
+  - message: Xenos no longer hear about non-Queen xeno deaths if there is no Queen
+    type: Fix
+  id: 772
+  time: '2024-10-04T06:15:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4216
 Name: RMC14
 Order: -1
