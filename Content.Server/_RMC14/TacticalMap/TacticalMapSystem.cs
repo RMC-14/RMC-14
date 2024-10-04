@@ -137,7 +137,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void OnUserMapInit(Entity<TacticalMapUserComponent> ent, ref MapInitEvent args)
     {
-        //_actions.AddAction(ent, ref ent.Comp.Action, ent.Comp.ActionId);
+        _actions.AddAction(ent, ref ent.Comp.Action, ent.Comp.ActionId);
 
         if (TryGetTacticalMap(out var map))
             ent.Comp.Map = map;
