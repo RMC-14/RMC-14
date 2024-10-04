@@ -187,24 +187,6 @@ public sealed class DiscordPlayerManager : IPostInjectInit, IDisposable
         return string.Empty;
     }
 
-    private async Task<string> CreateKey(Guid userId)
-    {
-        var discordPlayer = new DiscordPlayer
-        {
-            SS14Id = userId,
-            HashKey = CreateSecureRandomString(8)
-        };
-
-        await _db.InsertDiscord(discordPlayer);
-
-        return discordPlayer.HashKey;
-    }
-
-    private static string CreateSecureRandomString(int count = 32)
-    {
-        return Convert.ToBase64String(RandomNumberGenerator.GetBytes(count));
-    }
-
     public async Task<PrimeListUserStatus?> GetUserPrimeListStatus(Guid userId)
     {
         if (string.IsNullOrEmpty(_apiUrl))

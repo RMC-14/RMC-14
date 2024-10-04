@@ -42,7 +42,6 @@ namespace Content.Server.Database
         public DbSet<AdminMessage> AdminMessages { get; set; } = null!;
         public DbSet<RoleWhitelist> RoleWhitelists { get; set; } = null!;
 
-        public DbSet<DiscordPlayer> DiscordPlayers { get; set; } = null!;
         public DbSet<BanTemplate> BanTemplate { get; set; } = null!;
 
         // RMC14
