@@ -492,18 +492,19 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         {
             var trapEntity = SpawnAtPosition(trapEntityProto, _transform.GetMoverCoordinates(resinHole));
             _hive.SetSameHive(resinHole.Owner, trapEntity);
+        }
 
-        string msg = destroyed ? "cm-xeno-construction-resin-hole-destroyed" : "rmc-xeno-construction-resin-hole-activate";
+		string msg = destroyed ? "cm-xeno-construction-resin-hole-destroyed" : "rmc-xeno-construction-resin-hole-activate";
 
-        var ev = new XenoResinHoleActivationEvent(msg);
-        RaiseLocalEvent(ent, ev);
+		var ev = new XenoResinHoleActivationEvent(msg);
+		RaiseLocalEvent(ent, ev);
 
-        comp.TrapPrototype = null;
-        Dirty(resinHole);
-        _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
+		comp.TrapPrototype = null;
+		Dirty(resinHole);
+		_appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
 
-        return true;
-    }
+		return true;
+	}
 
     private bool IsAcidPrototype(string proto, out int level)
     {
