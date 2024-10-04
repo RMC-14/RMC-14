@@ -64,7 +64,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/washing_machine.rsi
-    drawdepth: Overdoors
     offset: "0.0,0.09"  
     layers:
     - state: washing_machine_double_closed
