@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Linq;
 using Content.Server.Hands.Systems;
 using Content.Server.Mind;
 using Content.Shared._RMC14.Xenonids;
@@ -42,7 +43,6 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         SubscribeLocalEvent<XenoParasiteThrowerComponent, UserActivateInWorldEvent>(OnXenoParasiteThrowerUseInHand);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoDevolveBuiMsg>(OnXenoDevolveDoAfter);
-        SubscribeLocalEvent<XenoParasiteThrowerComponent, MobStateChangedEvent>(OnDeathMobStateChanged);
     }
 
     private void OnToggleParasiteThrow(Entity<XenoParasiteThrowerComponent> xeno, ref XenoThrowParasiteActionEvent args)
@@ -179,18 +179,29 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         DropAllStoredParasites(xeno);
     }
 
-    private void OnDeathMobStateChanged(Entity<XenoParasiteThrowerComponent> xeno, ref MobStateChangedEvent args)
+    protected override void OnMobStateChanged(Entity<XenoParasiteThrowerComponent> xeno, ref MobStateChangedEvent args)
     {
+        base.OnMobStateChanged(xeno, ref args);
+
         if (args.NewMobState != MobState.Dead)
             return;
-        DropAllStoredParasites(xeno);
+        DropAllStoredParasites(xeno, 0.75f);
     }
 
-    private bool DropAllStoredParasites(Entity<XenoParasiteThrowerComponent> xeno)
+    private bool DropAllStoredParasites(Entity<XenoParasiteThrowerComponent> xeno, float chance = 1.0f)
     {
+        XenoComponent? xenComp = null;
+        TryComp(xeno, out xenComp);
+
+        if (chance != 1.0 && xeno.Comp.CurParasites > 0)
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-parasite-carrier-death", ("xeno", xeno)), xeno, PopupType.MediumCaution);
+
         var hive = _hive.GetHive(xeno.Owner);
+
         for (var i = 0; i < xeno.Comp.CurParasites; ++i)
         {
+            if (chance != 1.0 && !_random.Prob(chance))
+                continue;
             var newParasite = Spawn(xeno.Comp.ParasitePrototype);
             _hive.SetHive(newParasite, hive);
             _transform.DropNextTo(newParasite, xeno.Owner);
@@ -201,7 +212,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
 
         xeno.Comp.CurParasites = 0; // Just in case
 
-        Dirty(xeno);
+        UpdateParasiteClingers(xeno);
         return true;
     }
 
@@ -213,7 +224,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
     {
         xeno.Comp.CurParasites++;
 
-        Dirty(xeno);
+        UpdateParasiteClingers(xeno);
 
         QueueDel(parasite);
     }
@@ -226,9 +237,51 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
     {
         xeno.Comp.CurParasites--;
 
-        Dirty(xeno);
+        UpdateParasiteClingers(xeno);
 
         return Spawn(xeno.Comp.ParasitePrototype);
+    }
+
+    private void UpdateParasiteClingers(Entity<XenoParasiteThrowerComponent> xeno)
+    {
+        var parasiteNumber = Math.Min(Math.Ceiling((((double)xeno.Comp.CurParasites / xeno.Comp.MaxParasites) * xeno.Comp.NumPositions)), xeno.Comp.NumPositions - 1);
+
+        var overlayNumbers = xeno.Comp.VisiblePositions.Count(position => position == true);
+
+        if (overlayNumbers > parasiteNumber)
+        {
+            var visibleIndexes = GetVisualIndexes(xeno.Comp.VisiblePositions, true);
+            for (int i = 0; i < overlayNumbers - parasiteNumber; i++)
+            {
+                var index = _random.PickAndTake(visibleIndexes);
+                xeno.Comp.VisiblePositions[index] = false;
+            }
+        }
+        else
+        {
+            var invisibleIndexes = GetVisualIndexes(xeno.Comp.VisiblePositions, false);
+            for (int i = 0; i < parasiteNumber - overlayNumbers; i++)
+            {
+                var index = _random.PickAndTake(invisibleIndexes);
+                xeno.Comp.VisiblePositions[index] = true;
+            }
+        }
+
+        Dirty(xeno);
+
+        //Need to clone the array for it to dirty properly
+        _appearance.SetData(xeno, ParasiteOverlayVisuals.States, xeno.Comp.VisiblePositions.Clone());
+    }
+
+    private List<int> GetVisualIndexes(bool[] bools, bool visible)
+    {
+        List<int> visualIndexes = new();
+        for (int i = 0; i < bools.Length; i++)
+        {
+            if (bools[i] == visible)
+                visualIndexes.Add(i);
+        }
+        return visualIndexes;
     }
 
     public EntityUid? TryRemoveGhostParasite(Entity<XenoParasiteThrowerComponent> xeno, out string message)

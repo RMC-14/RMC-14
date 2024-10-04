@@ -123,7 +123,7 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
             locationName = Name(area);
 
         var msg = Loc.GetString(args.message, ("location", locationName), ("type", GetTrapTypeName(ent)));
-        _announce.AnnounceToHive(ent.Owner, hive, msg);
+        _announce.AnnounceToHive(ent.Owner, hive, msg, color: ent.Comp.MessageColor);
     }
 
     public string GetTrapTypeName(Entity<XenoResinHoleComponent> resinHole)

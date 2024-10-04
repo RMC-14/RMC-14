@@ -3,13 +3,19 @@ using Content.Shared.Ghost;
 using Content.Shared.Database;
 using Content.Shared.Verbs;
 using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Rest;
+using Content.Shared.Mobs;
+using Content.Shared.Stunnable;
+using Content.Shared.StatusEffect;
 using Robust.Shared.Player;
+
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 
 public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
 {
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] protected readonly SharedAppearanceSystem _appearance = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -18,6 +24,11 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoChangeParasiteReserveMessage>(OnParasiteReserveChange);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoReserveParasiteActionEvent>(OnSetReserve);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
+
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoRestEvent>(OnVisualsRest);
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, KnockedDownEvent>(OnVisualsKnockedDown);
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, StatusEffectEndedEvent>(OnVisualsStatusEffectEnded);
     }
 
     private void OnParasiteThrowerExamine(Entity<XenoParasiteThrowerComponent> thrower, ref ExaminedEvent args)
@@ -87,5 +98,26 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
         };
 
         args.Verbs.Add(parasiteVerb);
+    }
+
+    protected virtual void OnMobStateChanged(Entity<XenoParasiteThrowerComponent> xeno, ref MobStateChangedEvent args)
+    {
+        _appearance.SetData(xeno, ParasiteOverlayVisuals.Downed, args.NewMobState != MobState.Alive);
+    }
+
+    private void OnVisualsRest(Entity<XenoParasiteThrowerComponent> xeno, ref XenoRestEvent args)
+    {
+        _appearance.SetData(xeno, ParasiteOverlayVisuals.Resting, args.Resting);
+    }
+
+    private void OnVisualsKnockedDown(Entity<XenoParasiteThrowerComponent> xeno, ref KnockedDownEvent args)
+    {
+        _appearance.SetData(xeno, ParasiteOverlayVisuals.Downed, true);
+    }
+
+    private void OnVisualsStatusEffectEnded(Entity<XenoParasiteThrowerComponent> xeno, ref StatusEffectEndedEvent args)
+    {
+        if(args.Key == "KnockedDown")
+            _appearance.SetData(xeno, ParasiteOverlayVisuals.Downed, false);
     }
 }
