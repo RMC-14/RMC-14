@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Attachable.Systems;
+using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Inventory;
 using Content.Shared.NPC.Components;
@@ -27,6 +28,7 @@ public sealed class GunIFFSystem : EntitySystem
         SubscribeLocalEvent<HandsComponent, GetIFFFactionEvent>(OnHandsIFFGetFaction);
         SubscribeLocalEvent<ItemIFFComponent, InventoryRelayedEvent<GetIFFFactionEvent>>(OnItemIFFGetFaction);
         SubscribeLocalEvent<GunIFFComponent, AmmoShotEvent>(OnGunIFFAmmoShot, before: [typeof(AttachableIFFSystem)]);
+        SubscribeLocalEvent<GunIFFComponent, ExaminedEvent>(OnGunIFFExamined);
         SubscribeLocalEvent<ProjectileIFFComponent, PreventCollideEvent>(OnProjectileIFFPreventCollide);
     }
 
@@ -67,6 +69,14 @@ public sealed class GunIFFSystem : EntitySystem
     private void OnGunIFFAmmoShot(Entity<GunIFFComponent> ent, ref AmmoShotEvent args)
     {
         GiveAmmoIFF(ent, ref args, ent.Comp.Intrinsic, ent.Comp.Enabled);
+    }
+
+    private void OnGunIFFExamined(Entity<GunIFFComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(GunIFFComponent)))
+        {
+            args.PushMarkup("[color=cyan]This gun will ignore and shoot past friendlies![/color]");
+        }
     }
 
     private void OnProjectileIFFPreventCollide(Entity<ProjectileIFFComponent> ent, ref PreventCollideEvent args)

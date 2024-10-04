@@ -8,6 +8,8 @@
     sprite: _RMC14/Structures/Machines/rmc_groundside_communications_console.rsi
     state: on
     layers: [ ]
+  - type: Clickable
+  - type: InteractionOutline
   - type: Corrodible
     isCorrodible: false
   - type: ApcPowerReceiver
@@ -32,6 +34,23 @@
       enum.MarineCommunicationsComputerUI.Key:
         type: MarineCommunicationsComputerBui
   - type: MarineCommunicationsComputer
+
+- type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCWarshipControlConsole
+  name: warship control console
+  description: This is used for controlling ship and its related functions.
+  components:
+  - type: ActivatableUI
+    key: enum.MarineControlComputerUi.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "CMAccessCommand" ] ]
+  - type: UserInterface
+    interfaces:
+      enum.MarineControlComputerUi.Key:
+        type: MarineControlComputerBui
+  - type: MarineControlComputer
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
@@ -84,3 +103,40 @@
       enum.TacticalMapComputerUi.Key:
         type: TacticalMapComputerBui
   - type: TacticalMapComputer
+
+- type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCEscapePodController
+  name: escape pod controller
+  description: A shuttle control computer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/escape_pod_panel.rsi
+    state: airlock_control_standby
+  - type: InteractionOutline
+  - type: ActivatableUI
+    key: enum.EvacuationComputerUi.Key
+  - type: UserInterface
+    interfaces:
+      enum.EvacuationComputerUi.Key:
+        type: EvacuationComputerBui
+  - type: EvacuationComputer
+    maxMobs: 3
+
+- type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCLifeboatConsole
+  name: lifeboat console
+  description: A lifeboat control computer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: terminal
+  - type: InteractionOutline
+  - type: ActivatableUI
+    key: enum.LifeboatComputerUi.Key
+  - type: UserInterface
+    interfaces:
+      enum.LifeboatComputerUi.Key:
+        type: LifeboatComputerBui
+  - type: LifeboatComputer

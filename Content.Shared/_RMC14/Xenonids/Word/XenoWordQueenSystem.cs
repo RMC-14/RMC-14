@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Xenonids.Announce;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
@@ -21,6 +22,7 @@ public sealed class XenoWordQueenSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private readonly Regex _newLineRegex = new("\n{3,}", RegexOptions.Compiled);
@@ -58,7 +60,7 @@ public sealed class XenoWordQueenSystem : EntitySystem
         if (!_xenoPlasma.HasPlasmaPopup(queen.Owner, queen.Comp.PlasmaCost))
             return;
 
-        if (!TryComp(queen, out XenoComponent? queenXeno))
+        if (_hive.GetHive(queen.Owner) is not {} hive)
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-words-of-the-queen-nobody-hear-you"), queen, queen, PopupType.LargeCaution);
             return;
@@ -72,7 +74,7 @@ public sealed class XenoWordQueenSystem : EntitySystem
 
         var xenos = Filter
             .Empty()
-            .AddWhereAttachedEntity(ent => TryComp(ent, out XenoComponent? otherXeno) && otherXeno.Hive == queenXeno.Hive);
+            .AddWhereAttachedEntity(ent => _hive.IsMember(ent, hive));
 
         if (xenos.Count <= 1)
         {

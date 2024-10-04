@@ -39,9 +39,6 @@ public sealed partial class XenoEggComponent : Component
     [DataField, AutoNetworkedField]
     public EntProtoId Spawn = "CMXenoParasite";
 
-    [DataField, AutoNetworkedField]
-    public EntityUid? Hive;
-
     public SoundSpecifier PlantSound = new SoundPathSpecifier("/Audio/Effects/Fluids/splat.ogg");
 }
 

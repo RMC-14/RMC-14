@@ -2,9 +2,9 @@
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
-using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
@@ -46,14 +46,14 @@ public sealed class RMCStorageSystem : EntitySystem
 
         SubscribeLocalEvent<StorageCloseOnMoveComponent, GotEquippedEvent>(OnStorageEquip);
 
-        Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, sub =>
+        Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, subs =>
         {
-            sub.Event<BoundUIOpenedEvent>(OnCloseOnMoveUIOpened);
+            subs.Event<BoundUIOpenedEvent>(OnCloseOnMoveUIOpened);
         });
 
-        Subs.BuiEvents<StorageOpenComponent>(StorageUiKey.Key, sub =>
+        Subs.BuiEvents<StorageOpenComponent>(StorageUiKey.Key, subs =>
         {
-            sub.Event<BoundUIClosedEvent>(OnCloseOnMoveUIClosed);
+            subs.Event<BoundUIClosedEvent>(OnCloseOnMoveUIClosed);
         });
 
         UpdatesAfter.Add(typeof(SharedStorageSystem));

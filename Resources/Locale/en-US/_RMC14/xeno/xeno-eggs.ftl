@@ -24,3 +24,5 @@ rmc-xeno-egg-throw = That's a bad idea.
 
 rmc-xeno-egg-plant-self = We start planting the egg.
 rmc-xeno-egg-plant = {CAPITALIZE($user)} starts planting an egg.
+
+rmc-xeno-egg-carrier-death = {CAPITALIZE(THE($xeno))} has dropped some precious eggs!

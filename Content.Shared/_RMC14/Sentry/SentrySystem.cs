@@ -26,7 +26,6 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Sentry;
 
@@ -39,7 +38,7 @@ public sealed class SentrySystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCInteractionSystem _rmcInteraction = default!;
     [Dependency] private readonly SharedRMCNPCSystem _rmcNpc = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -235,13 +234,7 @@ public sealed class SentrySystem : EntitySystem
         if (!CanInsertMagazinePopup(sentry, user, used, out _))
             return;
 
-        var delay = sentry.Comp.MagazineDelay;
-        var skill = _skills.GetSkill(user, sentry.Comp.Skill);
-        var multipliers = sentry.Comp.SkillMagazineDelayMultipliers;
-        if (!multipliers.TryGetValue(skill, out var multiplier))
-            multiplier = multipliers.Length == 0 ? 1 : multipliers[^1];
-
-        delay *= multiplier;
+        var delay = sentry.Comp.MagazineDelay * _skills.GetSkillDelayMultiplier(user, sentry.Comp.Skill);
         var ev = new SentryInsertMagazineDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, sentry, used: used)
         {

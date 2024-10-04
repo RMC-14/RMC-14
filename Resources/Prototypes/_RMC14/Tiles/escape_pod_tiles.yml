@@ -1,0 +1,85 @@
+﻿- type: tile
+  parent: CMTileBase
+  id: RMCFloorEscapePod00
+  name: tiles-rmc-escape-pod
+  sprite: /Textures/_RMC14/Tiles/escape_pods/floor0_0.png
+
+- type: tile
+  parent: RMCFloorEscapePod00
+  id: RMCFloorEscapePod01
+  sprite: /Textures/_RMC14/Tiles/escape_pods/floor0_1.png
+
+- type: tile
+  parent: RMCFloorEscapePod00
+  id: RMCFloorEscapePod02
+  sprite: /Textures/_RMC14/Tiles/escape_pods/floor0_2.png
+
+- type: tile
+  parent: RMCFloorEscapePod00
+  id: RMCFloorEscapePod03
+  sprite: /Textures/_RMC14/Tiles/escape_pods/floor0_3.png
+
+- type: tile
+  parent: RMCFloorEscapePod00
+  id: RMCFloorEscapePod10
+  sprite: /Textures/_RMC14/Tiles/escape_pods/floor1_0.png
+
+- type: tile
+  parent: RMCFloorEscapePod00
+  id: RMCFloorEscapePod11
+  sprite: /Textures/_RMC14/Tiles/escape_pods/floor1_1.png
+
+- type: tile
+  parent: RMCFloorEscapePod00
+  id: RMCFloorEscapePod12
+  sprite: /Textures/_RMC14/Tiles/escape_pods/floor1_2.png
+
+- type: tile
+  parent: RMCFloorEscapePod00
+  id: RMCFloorEscapePod13
+  sprite: /Textures/_RMC14/Tiles/escape_pods/floor1_3.png
+
+- type: tile
+  parent: RMCFloorEscapePod00
+  id: RMCFloorEscapePod20
+  sprite: /Textures/_RMC14/Tiles/escape_pods/floor2_0.png
+
+- type: tile
+  parent: RMCFloorEscapePod00
+  id: RMCFloorEscapePod21
+  sprite: /Textures/_RMC14/Tiles/escape_pods/floor2_1.png
+
+- type: tile
+  parent: RMCFloorEscapePod00
+  id: RMCFloorEscapePod22
+  sprite: /Textures/_RMC14/Tiles/escape_pods/floor2_2.png
+
+- type: tile
+  parent: RMCFloorEscapePod00
+  id: RMCFloorEscapePod23
+  sprite: /Textures/_RMC14/Tiles/escape_pods/floor2_3.png
+
+- type: tile
+  parent: RMCFloorEscapePod00
+  id: RMCFloorEscapePod30
+  sprite: /Textures/_RMC14/Tiles/escape_pods/floor3_0.png
+
+- type: tile
+  parent: RMCFloorEscapePod00
+  id: RMCFloorEscapePod31
+  sprite: /Textures/_RMC14/Tiles/escape_pods/floor3_1.png
+
+- type: tile
+  parent: RMCFloorEscapePod00
+  id: RMCFloorEscapePod32
+  sprite: /Textures/_RMC14/Tiles/escape_pods/floor3_2.png
+
+- type: tile
+  parent: RMCFloorEscapePod00
+  id: RMCFloorEscapePod33
+  sprite: /Textures/_RMC14/Tiles/escape_pods/floor3_3.png
+
+- type: tile
+  parent: RMCFloorEscapePod00
+  id: RMCFloorEscapePod4
+  sprite: /Textures/_RMC14/Tiles/escape_pods/floor4.png

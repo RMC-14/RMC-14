@@ -12,10 +12,14 @@ public abstract class SharedHyperSleepChamberSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
+    private EntityQuery<HyperSleepChamberComponent> _hyperSleepQuery;
+
     private readonly HashSet<EntityUid> _intersecting = new();
 
     public override void Initialize()
     {
+        _hyperSleepQuery = GetEntityQuery<HyperSleepChamberComponent>();
+
         SubscribeLocalEvent<HyperSleepChamberComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<HyperSleepChamberComponent, ContainerIsInsertingAttemptEvent>(OnInsertAttempt);
         SubscribeLocalEvent<HyperSleepChamberComponent, EntInsertedIntoContainerMessage>(OnInserted);
@@ -67,6 +71,15 @@ public abstract class SharedHyperSleepChamberSystem : EntitySystem
     {
         if (ent.Comp.Chamber == args.OtherEntity)
             args.Cancelled = true;
+    }
+
+    public void EjectChamber(Entity<HyperSleepChamberComponent?> ent)
+    {
+        if (!_hyperSleepQuery.Resolve(ent, ref ent.Comp, false))
+            return;
+
+        if (_containers.TryGetContainer(ent, ent.Comp.ContainerId, out var container))
+            _containers.EmptyContainer(container);
     }
 
     public override void Update(float frameTime)

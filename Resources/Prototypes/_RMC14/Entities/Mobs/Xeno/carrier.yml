@@ -12,6 +12,19 @@
     name: cm-job-name-xeno-carrier
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Carrier/carrier.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.RightArm" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.Head" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.LeftArm" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.Back" ]
+      visible: false
   - type: MobState
     allowedStates:
     - Alive
@@ -60,7 +73,7 @@
       groups:
         Brute: 27.5
   - type: Tackle # min: 2, max: 4
-    threshold: 3
+    threshold: 4
     stun: 9
     chance: 0.50
   - type: MovementSpeedModifier

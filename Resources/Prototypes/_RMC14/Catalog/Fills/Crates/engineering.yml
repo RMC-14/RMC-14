@@ -123,12 +123,10 @@
   parent: RMCCrateConstruction
   name: replacement lights crate
   components:
-  - type: StorageFill # TODO RMC14 this could probably be replaced with cm entities but it's fine for now
+  - type: StorageFill
     contents:
-      - id: BoxLighttube # 12 tubes in 1 box, so making 42 tubes is hard and makes no sense
-        amount: 4
-      - id: BoxLightbulb
-        amount: 2 #12 bulbs in 1 box, so making 21 bulbs is hard and makes no sense
+    - id: RMCBoxLightsMixed
+      amount: 3
 
 - type: entity
   id: RMCCratePacmanParts

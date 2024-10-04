@@ -250,9 +250,12 @@
   - type: RequireProjectileTarget
     active: false
   - type: TacticalMapTracked
+  - type: TacMapXenoAlert
   - type: TacticalMapUser
     actionId: RMCActionOpenTacticalMapXeno
     xenos: true
+  - type: TacticalMapLiveUpdateOnOvi
+    enabled: true
 
 - type: entity
   abstract: true
