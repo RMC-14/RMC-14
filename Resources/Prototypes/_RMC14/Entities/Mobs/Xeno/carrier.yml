@@ -76,6 +76,20 @@
   - type: XenoParasiteThrower
   - type: XenoEggRetriever
   - type: XenoNurturing
+  - type: Sprite
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.RightArm" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.Head" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.LeftArm" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.Back" ]
+      visible: false
   - type: RMCSize
     size: Big
   - type: RMCXenoDamageVisuals
