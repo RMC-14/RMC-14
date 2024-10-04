@@ -35,6 +35,13 @@
         - LowImpassable
         layer:
         - MobLayer
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 185
+        layer:
+        - BulletImpassable
   - type: Xeno
     role: CMXenoRunner
     actionIds:
@@ -57,7 +64,7 @@
   - type: XenoDevour
   - type: XenoHide
   - type: SlowOnPull
-    multiplier: 0.86
+    multiplier: 0.3
   - type: XenoLeap
     delay: 0
     knockdownTime: 2
@@ -69,7 +76,7 @@
   - type: CMArmor
     explosionArmor: 10
   - type: XenoEvolution
-    max: 300
+    max: 200
     evolvesTo:
     - CMXenoLurker
   - type: XenoZoom
@@ -85,5 +92,11 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.55
     baseSprintSpeed: 10
+  - type: RMCSize
+    size: SmallXeno
   - type: RMCXenoDamageVisuals
     prefix: runner
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: runner

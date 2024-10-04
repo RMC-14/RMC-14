@@ -5,7 +5,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Xenonids.Leap;
 
 [Serializable, NetSerializable]
-public sealed partial class XenoLeapDoAfterEvent : DoAfterEvent
+public sealed partial class XenoLeapDoAfterEvent : SimpleDoAfterEvent
 {
     [DataField]
     public NetCoordinates Coordinates;
@@ -13,10 +13,5 @@ public sealed partial class XenoLeapDoAfterEvent : DoAfterEvent
     public XenoLeapDoAfterEvent(NetCoordinates coordinates)
     {
         Coordinates = coordinates;
-    }
-
-    public override DoAfterEvent Clone()
-    {
-        return this;
     }
 }

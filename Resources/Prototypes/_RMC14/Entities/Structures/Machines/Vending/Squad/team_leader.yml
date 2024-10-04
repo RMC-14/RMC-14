@@ -23,8 +23,8 @@
     #  points: 18
     #- id: CMM40HPDPWhitePhosphorusPacketx3
     #  points: 18
-    #- id: CMM40HSDPSmokePacketx3
-    #  points: 9
+      - id: RMCPacketGrenadeSmokeFilled
+        points: 9
     #- id: CMM74AGMFragAirburstPacketx3
     #  points: 20
     #- id: CMM74AGMIncendiaryAirburstPacketx3
@@ -77,8 +77,8 @@
         points: 30
     - name: Clothing Items
       entries:
-    #- id: CMScabbardMacheteFull
-    #  points: 5
+      - id: RMCScabbardMacheteFilled
+        points: 5
       - id: RMCPouchMacheteFilled
         points: 15
     #- id: CMMarineRadioTelephonePack
@@ -97,6 +97,8 @@
       entries:
 #      - id: Plastic Explosive
 #        points: 10
+      - id: RMCPackFlareCAS
+        points: 5
       - id: RMCExplosiveBreachingCharge
         points: 10
 #      - id: ES-11 Mobile Fuel Canister
@@ -154,7 +156,7 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      - id: CMVendorBundleRiflemanApparel
+      - id: CMVendorBundleFireteamLeaderApparel
       - id: CMArmorM4
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
@@ -216,6 +218,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewFireteamLeader
   name: essential fireteam leader utilities
+  description: Contains a laser designator and two packs of signal flares.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi

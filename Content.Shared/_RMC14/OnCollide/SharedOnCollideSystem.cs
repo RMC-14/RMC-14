@@ -75,6 +75,9 @@ public abstract class SharedOnCollideSystem : EntitySystem
             if (!didEmote)
                 DoEmote(ent, other);
         }
+
+        var ev = new DamageCollideEvent(other);
+        RaiseLocalEvent(ent, ref ev);
     }
 
     protected virtual void DoEmote(Entity<DamageOnCollideComponent> ent, EntityUid other)

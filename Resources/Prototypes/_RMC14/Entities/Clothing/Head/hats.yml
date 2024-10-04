@@ -56,11 +56,45 @@
   parent: CMHeadBeret
   id: CMHeadBeretCOBlack
   name: CO's beret
+  description: A black beret with the Major insignia emblazoned on it. Its sleek black color commands power and exudes class.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_black.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadBeretCOWhite
+  name: CO's beret
+  description: A white beret with the Major insignia emblazoned on it. Its dazzling white color commands power and exudes class.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_white.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadBeretCOLtCol
+  name: CO's lieutenant colonel beret
+  description: A blue beret with the Lieutenant Colonel's insignia emblazoned on it. Its blue color symbolizes loyalty, confidence, and politics - the core components of a true Colonel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_ltcol.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_ltcol.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadBeretCOCol
+  name: CO's colonel beret
+  description: A dark blue, custom-tailored beret signifying The Colonel. Definitely not an alias for a General.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_col.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_col.rsi
 
 - type: entity
   parent: CMHeadBeret
@@ -183,6 +217,39 @@
 
 - type: entity
   parent: CMHeadCap
+  id: CMHeadCapOfficer
+  name: officer cap
+  description: A hat usually worn by officers in the UNMC. While it provides no protection, some officers wear it in the field to make themselves more recognisable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: CMHeadCapPeakedFormal
+  name: marine peaked cap
+  description: A peaked cap. Wearer may suffer the heavy weight of responsibility upon their head and shoulders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_formal.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_formal.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: CMHeadCapPeakedService
+  name: marine service peaked cap
+  description: A peaked cap. Wearer may suffer the heavy weight of responsibility upon their head and shoulders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_service.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_service.rsi
+
+- type: entity
+  parent: CMHeadCap
   id: CMHeadCapCMO
   name: CMO's cap
   components:
@@ -232,3 +299,47 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/orange.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/orange.rsi
+
+# Dress blues
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadDressBlues
+  name: marine dress blues cover
+  description: The combination cover of the legendary Marine dress blues, virtually unchanged since the 19th century. The polished logo sits proudly on the white cloth.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/DressBlues/enlisted.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/DressBlues/enlisted.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadDressBluesOfficer
+  name: marine dress blues officer cover
+  description: The combination cover of the legendary Marine dress blues, virtually unchanged since the 19th century. Features a gold stripe and silvered logo, emblematic of an officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/DressBlues/officer.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/DressBlues/officer.rsi
+
+# The squad beret
+# TODO: display the squad badge one the item icon as well
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretSquad
+  name: squad beret
+  description: For those who want to show pride and have nothing to lose (in their head, at least).
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+  - type: SquadArmor
+    layer: Helmet
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+      state: badge
+    leaderRsi:
+      sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+      state: badge

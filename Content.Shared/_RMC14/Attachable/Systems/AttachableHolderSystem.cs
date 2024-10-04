@@ -59,6 +59,8 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, GunRefreshModifiersEvent>(RelayEvent,
             after: new[] { typeof(WieldableSystem) });
         SubscribeLocalEvent<AttachableHolderComponent, InteractUsingEvent>(OnAttachableHolderInteractUsing);
+        SubscribeLocalEvent<AttachableHolderComponent, ActivateInWorldEvent>(OnAttachableHolderInteractInWorld,
+            before: new [] { typeof(CMGunSystem) });
         SubscribeLocalEvent<AttachableHolderComponent, ItemWieldedEvent>(OnHolderWielded);
         SubscribeLocalEvent<AttachableHolderComponent, ItemUnwieldedEvent>(OnHolderUnwielded);
         SubscribeLocalEvent<AttachableHolderComponent, UniqueActionEvent>(OnAttachableHolderUniqueAction);
@@ -74,6 +76,8 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, GetItemSizeModifiersEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GetFireModeValuesEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GetFireModesEvent>(RelayEvent);
+        SubscribeLocalEvent<AttachableHolderComponent, GetDamageFalloffEvent>(RelayEvent);
+
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.RMCActivateAttachableBarrel,
@@ -174,6 +178,17 @@ public sealed class AttachableHolderSystem : EntitySystem
             args.Handled = true;
     }
 
+    private void OnAttachableHolderInteractInWorld(Entity<AttachableHolderComponent> holder, ref ActivateInWorldEvent args)
+    {
+        if (args.Handled || holder.Comp.SupercedingAttachable == null)
+            return;
+
+        var activateInWorldEvent = new ActivateInWorldEvent(args.User, holder.Comp.SupercedingAttachable.Value, args.Complex);
+        RaiseLocalEvent(holder.Comp.SupercedingAttachable.Value, activateInWorldEvent);
+
+        args.Handled = activateInWorldEvent.Handled;
+    }
+
     private void OnAttachableHolderAttemptShoot(Entity<AttachableHolderComponent> holder, ref AttemptShootEvent args)
     {
         if (args.Cancelled)
@@ -226,6 +241,9 @@ public sealed class AttachableHolderSystem : EntitySystem
 
     private void OnAttachableHolderGetVerbs(Entity<AttachableHolderComponent> holder, ref GetVerbsEvent<EquipmentVerb> args)
     {
+        if (HasComp<XenoComponent>(args.User))
+            return;
+
         EnsureSlots(holder);
         var userUid = args.User;
 
@@ -458,7 +476,7 @@ public sealed class AttachableHolderSystem : EntitySystem
 
         var ev = new AttachableAlteredEvent(holder.Owner, AttachableAlteredType.Detached, userUid);
         RaiseLocalEvent(attachableUid, ref ev);
-        
+
         var holderEv = new AttachableHolderAttachablesAlteredEvent(attachableUid, slotId, AttachableAlteredType.Detached);
         RaiseLocalEvent(holder.Owner, ref holderEv);
 
@@ -594,7 +612,7 @@ public sealed class AttachableHolderSystem : EntitySystem
 
         if (!HasComp<AttachableToggleableComponent>(attachableUid))
             return;
-        
+
         if (!TryComp<AttachableToggleableComponent>(attachableUid, out var toggleableComponent))
             return;
 
@@ -668,7 +686,7 @@ public sealed class AttachableHolderSystem : EntitySystem
 
         return holder.Comp.Slots.ContainsKey(slotId);
     }
-    
+
     public bool TryGetHolder(EntityUid attachable, [NotNullWhen(true)] out EntityUid? holderUid)
     {
         if (!TryComp(attachable, out TransformComponent? transformComponent) ||
@@ -678,7 +696,7 @@ public sealed class AttachableHolderSystem : EntitySystem
             holderUid = null;
             return false;
         }
-        
+
         holderUid = transformComponent.ParentUid;
         return true;
     }

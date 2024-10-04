@@ -1,5 +1,5 @@
-﻿using Robust.Shared.GameStates;
-using Robust.Shared.Map;
+﻿using Content.Shared._RMC14.Line;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Spray;
@@ -12,7 +12,10 @@ public sealed partial class ActiveAcidSprayingComponent : Component
     public EntProtoId Acid;
 
     [DataField, AutoNetworkedField]
-    public List<(MapCoordinates Coordinates, TimeSpan At, Direction Direction)> Spawn = new();
+    public List<LineTile> Spawn = new();
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? Blocker;
 
     [DataField, AutoNetworkedField]
     public EntityUid? Chain;

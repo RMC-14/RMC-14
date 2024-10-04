@@ -1,0 +1,209 @@
+# Chigusa
+
+- type: entity
+  parent: RMCBaseWindowFrame
+  id: RMCWindowFrameChigusa
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/chigusa_frame.rsi
+    state: chig_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/chigusa_frame.rsi
+    state: chig_frame0
+  - type: IconSmooth
+    key: walls
+    base: chig_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowChigusa
+    node: windowFrameChigusa
+
+- type: entity
+  parent: CMBaseWindow
+  id: RMCWindowChigusa
+  name: reinforced window
+  description: A glass window with a special rod matrix inside a wall frame. It looks rather strong. Might take a few good hits to shatter it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/chigusa.rsi
+    state: chig_rwindow0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/chigusa.rsi
+    state: chig_rwindow0
+  - type: IconSmooth
+    key: walls
+    base: chig_rwindow
+    mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameChigusa
+  - type: RMCWallExplosionDeletable
+  - type: Construction
+    graph: RMCWindowChigusa
+    node: windowChigusa
+
+# Hangar
+
+- type: entity
+  parent: RMCBaseWindowFrame
+  id: RMCWindowFrameHangar
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/hangar_frame.rsi
+    state: hngr_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/hangar_frame.rsi
+    state: hngr_frame0
+  - type: IconSmooth
+    key: walls
+    base: chig_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHangar
+    node: windowFrameHangar
+
+- type: entity
+  parent: CMBaseWindow
+  id: RMCWindowHangar
+  name: reinforced window
+  description: A glass window with a special rod matrix inside a wall frame. It looks rather strong. Might take a few good hits to shatter it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/hangar.rsi
+    state: hngr_rwindow0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/hangar.rsi
+    state: hngr_rwindow0
+  - type: IconSmooth
+    key: walls
+    base: hngr_rwindow
+    mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameHangar
+  - type: RMCWallExplosionDeletable
+  - type: Construction
+    graph: RMCWindowHangar
+    node: windowHangar
+
+# Bunker
+
+- type: entity
+  parent: RMCBaseWindowFrame
+  id: RMCWindowFrameBunker
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/bunker_frame.rsi
+    state: bnkr_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/bunker_frame.rsi
+    state: bnkr_frame0
+  - type: IconSmooth
+    key: walls
+    base: bnkr_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowBunker
+    node: windowFrameBunker
+
+- type: entity
+  parent: CMBaseWindow
+  id: RMCWindowBunker
+  name: reinforced window
+  description: A glass window with a special rod matrix inside a wall frame. It looks rather strong. Might take a few good hits to shatter it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/bunker.rsi
+    state: bnkr_rwindow0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/bunker.rsi
+    state: bnkr_rwindow0
+  - type: IconSmooth
+    key: walls
+    base: bnkr_rwindow
+    mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameBunker
+  - type: RMCWallExplosionDeletable
+  - type: Construction
+    graph: RMCWindowBunker
+    node: windowBunker

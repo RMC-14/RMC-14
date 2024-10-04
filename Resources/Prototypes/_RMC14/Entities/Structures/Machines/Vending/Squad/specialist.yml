@@ -30,9 +30,9 @@
       - id: CMSniperEquipmentCase
     - name: Extra Scout Ammunition
       entries:
-#      - id: RMCMagazineRifleM4SPRA19 # TODO rmc14 CMMagazineSniperM96SFlak
-#        points: 40
-#      - id: RMCMagazineRifleM4SPRA19 # TODO rmc14 CMMagazineSniperM96SIncendiary
+      - id: RMCMagazineRifleM4SPRA19Impact
+        points: 40
+#      - id: RMCMagazineRifleM4SPRA19 # TODO rmc14 RMCMagazineRifleM4SPRA19Incendiary
 #        points: 40
       - id: RMCMagazineRifleM4SPRA19
         points: 40
@@ -174,7 +174,8 @@
         points: 10
     - name: Clothing Items
       entries:
-    #- id: CMScabbardMacheteFull
+      - id: RMCScabbardMacheteFilled
+        points: 6
       - id: RMCPouchMacheteFilled
         points: 15
     #- id: CMMarineRadioTelephonePack
@@ -210,8 +211,8 @@
       entries:
       - id: CMPamphletJTAC
         points: 15
-    #- id: CMPamphletEngineering
-    #  points: 15
+      - id: CMPamphletEngineer
+        points: 15
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer

@@ -1,0 +1,286 @@
+- type: entity
+  id: RMCBaseTree
+  description: Yep, it's a tree.
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    noRot: true
+    sprite: Objects/Decoration/Flora/flora_trees.rsi
+    drawdepth: Overdoors
+    offset: 0,0.9
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.4,0.35,0.4"
+        density: 1000
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/chop.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/tree_fell.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    
+- type: entity
+  parent: RMCBaseTree
+  id: RMCBaseTreeSnow
+  components:
+  - type: Sprite
+    sprite: Objects/Decoration/Flora/flora_treessnow.rsi
+    offset: 0,0.7
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.3,0.1,0.3"
+        density: 4000
+        layer:
+        - WallLayer
+
+- type: entity
+  parent: RMCBaseTree
+  id: RMCBaseTreeLarge
+  components:
+  - type: Sprite
+    sprite: Objects/Decoration/Flora/flora_treeslarge.rsi
+    offset: 0,1.55
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.18,-0.35,0.18,0.35"
+        density: 2000
+        layer:
+        - WallLayer
+
+- type: entity
+  parent: RMCBaseTree
+  id: RMCBaseTreeConifer
+  components:
+  - type: Sprite
+    sprite: Objects/Decoration/Flora/flora_treesconifer.rsi
+    offset: 0,1.15
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.35,0.1,0.35"
+        density: 3500
+        layer:
+        - WallLayer
+
+- type: entity
+  parent: RMCBaseTree
+  id: RMCFloraTree01
+  name: tree
+  components:
+  - type: Sprite
+    state: tree01
+
+- type: entity
+  parent: RMCBaseTree
+  id: RMCFloraTree02
+  name: tree
+  components:
+  - type: Sprite
+    state: tree02
+
+- type: entity
+  parent: RMCBaseTree
+  id: RMCFloraTree03
+  name: tree
+  components:
+  - type: Sprite
+    state: tree03
+
+- type: entity
+  parent: RMCBaseTree
+  id: RMCFloraTree04
+  name: tree
+  components:
+  - type: Sprite
+    state: tree04
+
+- type: entity
+  parent: RMCBaseTree
+  id: RMCFloraTree05
+  name: tree
+  components:
+  - type: Sprite
+    state: tree05
+
+- type: entity
+  parent: RMCBaseTree
+  id: RMCFloraTree06
+  name: tree
+  components:
+  - type: Sprite
+    state: tree06
+
+- type: entity
+  parent: RMCBaseTreeSnow
+  id: RMCFloraTreeSnow01
+  name: snowy tree
+  components:
+  - type: Sprite
+    state: treesnow01
+
+- type: entity
+  parent: RMCBaseTreeSnow
+  id: RMCFloraTreeSnow02
+  name: snowy tree
+  components:
+  - type: Sprite
+    state: treesnow02
+
+- type: entity
+  parent: RMCBaseTreeSnow
+  id: RMCFloraTreeSnow03
+  name: snowy tree
+  components:
+  - type: Sprite
+    state: treesnow03
+
+- type: entity
+  parent: RMCBaseTreeSnow
+  id: RMCFloraTreeSnow04
+  name: snowy tree
+  components:
+  - type: Sprite
+    state: treesnow04
+
+- type: entity
+  parent: RMCBaseTreeSnow
+  id: RMCFloraTreeSnow05
+  name: snowy tree
+  components:
+  - type: Sprite
+    state: treesnow05
+
+- type: entity
+  parent: RMCBaseTreeSnow
+  id: RMCFloraTreeSnow06
+  name: snowy tree
+  components:
+  - type: Sprite
+    state: treesnow06
+
+- type: entity
+  parent: RMCBaseTreeSnow
+  id: RMCFloraTreeStump
+  name: tree stump
+  components:
+  - type: Sprite
+    state: treestump
+
+- type: entity
+  parent: RMCBaseTreeLarge
+  id: RMCFloraTreeLarge01
+  name: large tree
+  components:
+  - type: Sprite
+    state: treelarge01
+
+- type: entity
+  parent: RMCBaseTreeLarge
+  id: RMCFloraTreeLarge02
+  name: large tree
+  components:
+  - type: Sprite
+    state: treelarge02
+
+- type: entity
+  parent: RMCBaseTreeLarge
+  id: RMCFloraTreeLarge03
+  name: large tree
+  components:
+  - type: Sprite
+    state: treelarge03
+
+- type: entity
+  parent: RMCBaseTreeLarge
+  id: RMCFloraTreeLarge04
+  name: large tree
+  components:
+  - type: Sprite
+    state: treelarge04
+
+- type: entity
+  parent: RMCBaseTreeLarge
+  id: RMCFloraTreeLarge05
+  name: large tree
+  components:
+  - type: Sprite
+    state: treelarge05
+
+- type: entity
+  parent: RMCBaseTreeLarge
+  id: RMCFloraTreeLarge06
+  name: large tree
+  components:
+  - type: Sprite
+    state: treelarge06
+
+- type: entity
+  parent: RMCBaseTreeConifer
+  id: RMCFloraTreeConifer01
+  name: snowy conifer
+  components:
+  - type: Sprite
+    state: treeconifer01
+
+- type: entity
+  parent: RMCBaseTreeConifer
+  id: RMCFloraTreeConifer02
+  name: snowy conifer
+  components:
+  - type: Sprite
+    state: treeconifer02
+
+- type: entity
+  parent: RMCBaseTreeConifer
+  id: RMCFloraTreeConifer03
+  name: snowy conifer
+  components:
+  - type: Sprite
+    state: treeconifer03
+
+- type: entity
+  parent: RMCBaseTreeConifer
+  id: RMCFloraTreeStumpConifer
+  name: tree stump
+  components:
+  - type: Sprite
+    state: treestumpconifer

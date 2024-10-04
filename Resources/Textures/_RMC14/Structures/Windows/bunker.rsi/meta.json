@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0a7aadfcc7b7a4c2af5ab897a939d3d9bac3d0b3/icons/turf/walls/windows.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bnkr_rwindow0"
+    },
+    {
+      "name": "bnkr_rwindow1"
+    },
+    {
+      "name": "bnkr_rwindow2"
+    },
+    {
+      "name": "bnkr_rwindow3"
+    },
+    {
+      "name": "bnkr_rwindow4"
+    },
+    {
+      "name": "bnkr_rwindow8"
+    },
+    {
+      "name": "bnkr_rwindow12"
+    },
+    {
+      "name": "bnkr_rwindow10"
+    },
+    {
+      "name": "bnkr_rwindow11"
+    },
+    {
+      "name": "bnkr_rwindow13"
+    },
+    {
+      "name": "bnkr_rwindow14"
+    },
+    {
+      "name": "bnkr_rwindow15"
+    },
+    {
+      "name": "bnkr_rwindow5"
+    },
+    {
+      "name": "bnkr_rwindow6"
+    },
+    {
+      "name": "bnkr_rwindow7"
+    },
+    {
+      "name": "bnkr_rwindow9"
+    }
+  ]
+}

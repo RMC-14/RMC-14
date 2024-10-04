@@ -58,6 +58,7 @@
       Alive: XenoHealth
       Critical: XenoCrit
       Dead: XenoDead
+    displayDamageInAlert: true
   - type: MobStateActions
     actions:
       Critical:
@@ -70,7 +71,7 @@
     sound:
       collection: XenoDeath
       params:
-        volume: -12
+        volume: -4
   - type: HealthExaminable
     examinableTypes:
     - Blunt
@@ -94,6 +95,7 @@
   - type: InputMover
   - type: LagCompensation
   - type: MobMover
+  - type: Emoting
   - type: Actions
   - type: Alerts
   - type: Appearance
@@ -135,6 +137,13 @@
         - MobMask
         layer:
         - MobLayer
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 185
+        layer:
+        - BulletImpassable
   - type: Xeno
   - type: UserInterface
     interfaces:
@@ -152,13 +161,23 @@
         type: XenoOrderConstructionBui
       enum.XenoWordQueenUI.Key:
         type: XenoWordQueenBui
+      enum.TacticalMapUserUi.Key:
+        type: TacticalMapUserBui
+      enum.XenoReserveParasiteChangeUI.Key:
+        type: ReserveParasitesBoundUserInterface
+      enum.XenoParasiteGhostUI.Key:
+        type: XenoParasiteGhostBui
+        requireInputValidation: false
   - type: TypingIndicator
     proto: alien
   - type: MovedByPressure
   - type: NoSlip
+  - type: RMCSize
+    size: Xeno
   - type: Pullable
   - type: Speech
     speechVerb: Xeno
+    allowedEmotes: [ "Growl", "Hiss", "XenoRoar", "XenoHelp", "XenoTailSwipe" ]
   - type: GhostOnMove
     mustBeDead: true
   - type: WhitelistPickup
@@ -228,6 +247,12 @@
     - enum.PaperUiKey.Key
   - type: ActiveInputMover
   - type: HiveTracker
+  - type: RequireProjectileTarget
+    active: false
+  - type: TacticalMapTracked
+  - type: TacticalMapUser
+    actionId: RMCActionOpenTacticalMapXeno
+    xenos: true
 
 - type: entity
   abstract: true

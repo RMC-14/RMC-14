@@ -83,5 +83,11 @@
     radius: 1.8
     softness: 1
     autoRot: true
+  - type: RMCSize
+    size: Big
   - type: RMCXenoDamageVisuals
     prefix: boiler
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: boiler

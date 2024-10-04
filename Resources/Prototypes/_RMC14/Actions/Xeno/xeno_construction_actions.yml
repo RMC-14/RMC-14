@@ -69,3 +69,17 @@
   - type: XenoConstructionAction
     checkStructureSelected: false
     checkWeeds: false
+
+- type: entity
+  id: ActionXenoResinHole
+  parent: ActionXenoBase
+  name: Plant Resin Hole
+  description: Places a resin hole on weeds. It can be filled with boiler gas, acid, or parasites.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: place_trap
+    event: !type:XenoPlaceResinHoleActionEvent
+    useDelay: 1

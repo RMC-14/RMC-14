@@ -21,19 +21,23 @@ public sealed class BioscanCommand : ToolshedCommand
     public void Marine()
     {
         _bioscan ??= GetSys<BioscanSystem>();
-        TimeSpan lastMarine = default;
-        int maxXenoAlive = default;
-        var sound = new BioscanComponent().MarineSound;
-        _bioscan.TryBioscanARES(ref lastMarine, ref maxXenoAlive, sound, true);
+
+        var bioscans = EntityManager.EntityQueryEnumerator<BioscanComponent>();
+        while (bioscans.MoveNext(out var uid, out var bioscan))
+        {
+            _bioscan.TryBioscanARES((uid, bioscan), true);
+        }
     }
 
     [CommandImplementation("xeno")]
     public void Xeno()
     {
         _bioscan ??= GetSys<BioscanSystem>();
-        TimeSpan lastXeno = default;
-        int maxMarineAlive = default;
-        var sound = new BioscanComponent().XenoSound;
-        _bioscan.TryBioscanQueenMother(ref lastXeno, ref maxMarineAlive, sound, true);
+
+        var bioscans = EntityManager.EntityQueryEnumerator<BioscanComponent>();
+        while (bioscans.MoveNext(out var uid, out var bioscan))
+        {
+            _bioscan.TryBioscanQueenMother((uid, bioscan), true);
+        }
     }
 }

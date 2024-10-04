@@ -31,4 +31,42 @@ public sealed class RMCInteractionSystem : EntitySystem
         if (_whitelist.IsValid(blacklist, args.EntityUid))
             args.Cancel();
     }
+
+    public void TryCapWorldRotation(Entity<MaxRotationComponent?, TransformComponent?> max, ref Angle angle)
+    {
+        if (!Resolve(max, ref max.Comp1, ref max.Comp2, false))
+            return;
+
+        var set = max.Comp1.Set;
+        var deviation = max.Comp1.Deviation;
+        if (Angle.ShortestDistance(angle, set) > deviation)
+            angle = set + deviation;
+
+        if (Angle.ShortestDistance(angle, set) < -deviation)
+            angle = set - deviation;
+    }
+
+    public bool CanFaceMaxRotation(Entity<MaxRotationComponent?, TransformComponent?> max, Angle angle)
+    {
+        if (!Resolve(max, ref max.Comp1, ref max.Comp2, false))
+            return true;
+
+        var set = max.Comp1.Set;
+        var deviation = max.Comp1.Deviation;
+        if (Angle.ShortestDistance(angle, set) > deviation ||
+            Angle.ShortestDistance(angle, set) < -deviation)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void SetMaxRotation(Entity<MaxRotationComponent?> ent, Angle set, Angle deviation)
+    {
+        ent.Comp ??= EnsureComp<MaxRotationComponent>(ent);
+        ent.Comp.Set = set;
+        ent.Comp.Deviation = deviation;
+        Dirty(ent);
+    }
 }
