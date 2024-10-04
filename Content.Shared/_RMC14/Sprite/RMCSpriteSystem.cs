@@ -11,6 +11,10 @@ public sealed class RMCSpriteSystem : EntitySystem
 
     private void OnSetRenderOrderMapInit(Entity<SpriteSetRenderOrderComponent> ent, ref MapInitEvent args)
     {
-        _appearance.SetData(ent, SpriteSetRenderOrderComponent.Appearance.Key, ent.Comp.RenderOrder);
+        if (ent.Comp.RenderOrder != null)
+            _appearance.SetData(ent, SpriteSetRenderOrderComponent.Appearance.Key, ent.Comp.RenderOrder);
+
+        if (ent.Comp.Offset != null)
+            _appearance.SetData(ent, SpriteSetRenderOrderComponent.Appearance.Offset, ent.Comp.Offset);
     }
 }
