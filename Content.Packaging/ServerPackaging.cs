@@ -48,6 +48,12 @@ public static class ServerPackaging
         "Npgsql",
         "Microsoft",
         "Discord.Net",
+
+        // SS220 extra assemblies begin
+        "FFMpegCore",
+        "MySqlConnector",
+        "Instances"
+        // SS220 extra assemblies end
     };
 
     private static readonly List<string> ServerNotExtraAssemblies = new()
