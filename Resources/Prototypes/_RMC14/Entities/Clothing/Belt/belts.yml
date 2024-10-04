@@ -365,6 +365,10 @@
     maxItemSize: Normal
     grid:
     - 0,0,9,1 # 9 slots
+    blacklist:
+      tags:
+      - CMFirstAidKit # TODO RMC14
+  #      - EngineerKit # TODO RMC14
   - type: Tag
     tags:
     - RMCG8Pouch
