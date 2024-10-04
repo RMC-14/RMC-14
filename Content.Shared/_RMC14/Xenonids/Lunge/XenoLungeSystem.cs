@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines;
+﻿using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Coordinates;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Pulling.Systems;
@@ -21,6 +22,7 @@ public sealed class XenoLungeSystem : EntitySystem
     [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -79,12 +81,8 @@ public sealed class XenoLungeSystem : EntitySystem
         if (_timing.IsFirstTimePredicted && xeno.Comp.Charge != null)
             xeno.Comp.Charge = null;
 
-        if (TryComp(xeno, out XenoComponent? xenoComp) &&
-            TryComp(targetId, out XenoComponent? targetXeno) &&
-            xenoComp.Hive == targetXeno.Hive)
-        {
+        if (_hive.FromSameHive(xeno.Owner, targetId))
             return;
-        }
 
         _stun.TryParalyze(targetId, xeno.Comp.StunTime, true);
 

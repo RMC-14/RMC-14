@@ -2,6 +2,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Hands;
 using Robust.Shared.Prototypes;
@@ -15,6 +16,7 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
     [Dependency] protected readonly SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] protected readonly MobStateSystem _mobState = default!;
     [Dependency] protected readonly CMHandsSystem _rmcHands = default!;
+    [Dependency] protected readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] protected readonly INetManager _net = default!;
     [Dependency] protected readonly SharedPopupSystem _popup = default!;
     [Dependency] protected readonly SharedDoAfterSystem _doAfter = default!;
@@ -93,12 +95,10 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
         if (resinHole.Comp.TrapPrototype != null)
             return;
 
-        if (!TryComp<XenoComponent>(args.User, out var xeno))
-            return;
-
         resinHole.Comp.TrapPrototype = XenoResinHoleComponent.ParasitePrototype;
         _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-hole-enter-parasite", ("parasite", args.User)), resinHole);
-        resinHole.Comp.Hive = xeno.Hive; // Yes, parasites claim any resin traps as their own
+        // Yes, parasites claim any resin traps as their own
+        _hive.SetSameHive(args.User, resinHole.Owner);
         QueueDel(args.User);
 
         _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Parasite);

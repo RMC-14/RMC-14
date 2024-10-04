@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Egg.EggRetriever;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.Hands.EntitySystems;
@@ -22,7 +23,7 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly ThrowingSystem _throw = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
 
@@ -85,8 +86,7 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
         if (RemoveEgg(eggRetriever) is not EntityUid newEgg)
             return;
 
-        if (TryComp<XenoComponent>(eggRetriever, out var xenComp))
-            _xeno.SetHive(newEgg, xenComp.Hive);
+        _hive.SetSameHive(eggRetriever.Owner, newEgg);
 
         _hands.TryPickupAnyHand(eggRetriever, newEgg);
 
@@ -134,13 +134,11 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
 
     private bool DropAllStoredEggs(Entity<XenoEggRetrieverComponent> xeno)
     {
-        XenoComponent? xenComp = null;
-        TryComp(xeno, out xenComp);
+        var hive = _hive.GetHive(xeno.Owner);
         for (var i = 0; i < xeno.Comp.CurEggs; ++i)
         {
             var newEgg = Spawn(xeno.Comp.EggPrototype);
-            if (xenComp != null)
-                _xeno.SetHive(newEgg, xenComp.Hive);
+            _hive.SetHive(newEgg, hive);
             _transform.DropNextTo(newEgg, xeno.Owner);
             _throw.TryThrow(newEgg, _random.NextAngle().RotateVec(Vector2.One) * _random.NextFloat(0.15f, 0.7f), 3);
         }
