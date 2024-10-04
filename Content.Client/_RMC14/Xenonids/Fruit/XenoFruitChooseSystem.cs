@@ -15,16 +15,23 @@ public sealed class XenoFruitChooseSystem : EntitySystem
 
     private void OnXenoFruitAfterState(Entity<XenoFruitPlanterComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
-        if (!TryComp(ent, out UserInterfaceComponent? ui))
-            return;
-
-        foreach (var bui in ui.ClientOpenInterfaces.Values)
+        try
         {
-            if (bui is XenoFruitChooseBui chooseUi)
-                chooseUi.Refresh();
+            if (!_timing.IsFirstTimePredicted)
+                return;
+
+            if (!TryComp(ent, out UserInterfaceComponent? ui))
+                return;
+
+            foreach (var bui in ui.ClientOpenInterfaces.Values)
+            {
+                if (bui is XenoFruitChooseBui chooseUi)
+                    chooseUi.Refresh();
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error refreshing {nameof(XenoFruitChooseBui)}\n{e}");
         }
     }
 }
