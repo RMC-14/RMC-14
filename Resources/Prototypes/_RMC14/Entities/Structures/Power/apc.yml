@@ -38,9 +38,6 @@
       shader: unshaded
       map: [ "enum.ApcVisualLayers.Environment" ]
   - type: Appearance
-  - type: Construction
-    graph: CMApc
-    node: apc
   - type: WallMount
   - type: UserInterface
     interfaces:

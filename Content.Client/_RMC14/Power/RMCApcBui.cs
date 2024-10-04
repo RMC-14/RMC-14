@@ -96,8 +96,9 @@ public sealed class RMCApcBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
             row.Off.Visible = false; // TODO RMC14
         }
 
+        var multiplier = _config.GetCVar(RMCCVars.RMCPowerLoadMultiplier);
         var totalWatts = apc.Channels.Sum(c => c.Watts);
-        _window.TotalLoadWatts.SetMarkupPermissive($"[bold]{totalWatts} W[/bold]");
+        _window.TotalLoadWatts.SetMarkupPermissive($"[bold]{totalWatts / multiplier} W[/bold]");
 
         _window.CoverButton.Text = apc.CoverLockedButton ? "Engaged" : "Disengaged";
     }
