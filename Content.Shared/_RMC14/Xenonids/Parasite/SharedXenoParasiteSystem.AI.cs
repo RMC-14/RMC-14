@@ -171,7 +171,7 @@ public abstract partial class SharedXenoParasiteSystem
 
     private void DoRestAction(Entity<ParasiteAIComponent> para)
     {
-        if (!TryComp<XenoComponent>(para, out var xeno))
+        if (!TryComp<XenoComponent>(para, out var xeno) || !xeno.Initialized)
             return;
 
         if (!TryComp<InstantActionComponent>(xeno.Actions[para.Comp.RestAction], out var instant))
