@@ -37,9 +37,6 @@ public sealed partial class SentryComponent : Component
     public int SkillLevel = 2;
 
     [DataField, AutoNetworkedField]
-    public float[] SkillMagazineDelayMultipliers = [1f, 0.75f, 0.5f, 0.375f, 0.25f];
-
-    [DataField, AutoNetworkedField]
     public SoundSpecifier? MagazineSwapSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/unload.ogg");
 
     [DataField, AutoNetworkedField]

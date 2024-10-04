@@ -47,6 +47,8 @@
   - type: ToolRefinable
     refineResult:
     - id: CMSheetGlass1
+  - type: Item
+    size: Small
 
 - type: entity
   parent: CMLightBulbBase

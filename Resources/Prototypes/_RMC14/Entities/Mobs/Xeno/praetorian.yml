@@ -57,7 +57,7 @@
       groups:
         Brute: 40
   - type: Tackle # min: 2, max: 5
-    threshold: 3
+    threshold: 4
     stun: 5
     chance: 0.45
   - type: Fixtures

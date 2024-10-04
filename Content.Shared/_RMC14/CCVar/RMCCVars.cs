@@ -201,4 +201,10 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCEmoteCooldownSeconds =
         CVarDef.Create("rmc.emote_cooldown_seconds", 20f, CVar.SERVER | CVar.REPLICATED);
+
+    public static readonly CVarDef<float> RMCPowerUpdateEverySeconds =
+        CVarDef.Create("rmc.power_update_every_seconds", 1f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCPowerLoadMultiplier =
+        CVarDef.Create("rmc.power_load_multiplier", 0.01f, CVar.REPLICATED | CVar.SERVER);
 }

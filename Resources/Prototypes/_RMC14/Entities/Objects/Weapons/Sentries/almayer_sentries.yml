@@ -1,0 +1,62 @@
+﻿- type: entity
+  parent: RMCBaseTurret
+  id: RMCTurretAlmayer
+  name: UA-635C static gauss turret
+  description: A fully-automated defence turret with mid-range targeting capabilities. Armed with a modified M32-S Autocannon and an internal belt feed and modified for UN warship use.
+  components:
+  - type: InteractionPopup
+    interactDelay: 0.2
+    successChance: 0.8
+    interactSuccessString: petting-success-generic
+    interactFailureString: petting-failure-generic
+    interactSuccessSound:
+      path: /Audio/Effects/double_beep.ogg
+  - type: Corrodible
+    isCorrodible: false
+  - type: Gun
+    fireRate: 2.5
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: RMCCartridgeSentry
+    capacity: 99999
+  - type: NpcFactionMember
+    factions:
+    - UNMC
+  - type: MarineIFF
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: TimedDespawn
+    lifetime: 1200
+
+- type: entity
+  parent: BaseStructure
+  id: RMCDeployerSentry
+  name: sentry deployment system
+  description: A box that deploys a sentry turret.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/sentry_deployer.rsi
+    state: floor_sentry_installed
+  - type: SpawnOnInteract
+    spawn: RMCTurretAlmayer
+    requireEvacuation: true
+    evacuationPopup: rmc-sentry-not-emergency
+    popup: rmc-sentry-deploy
+    sound:
+      path: /Audio/_RMC14/Machines/hydraulics_1.ogg
+    blacklist:
+      components:
+      - Xeno

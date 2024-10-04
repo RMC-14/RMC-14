@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/c67c5213507a19e10e252ef2898d94354c0709bf/icons/obj/structures/props/96x96.dmi",
+  "size": {
+    "x": 96,
+    "y": 96
+  },
+  "states": [
+    {
+      "name": "sedimentation"
+    },
+    {
+      "name": "filtration"
+    },
+    {
+      "name": "disinfection"
+    },
+    {
+      "name": "distribution"
+    },
+    {
+      "name": "distribution-damaged"
+    },
+    {
+      "name": "sedimentation_a_1"
+    }
+  ]
+}

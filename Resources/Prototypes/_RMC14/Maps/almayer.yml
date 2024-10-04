@@ -5,7 +5,7 @@
   id: Almayer
   mapName: Almayer
   mapPath: /Maps/_RMC14/almayer.yml
-  minPlayers: 74
+  minPlayers: 0 # TODO RMC14 74
   maxRandomOffset: 0
   randomRotation: false
   fallback: true
@@ -36,9 +36,9 @@
           CMDropshipCrewChief: [2, 2]
 
           #Engineering
-#          CMChiefEngineer: [1, 1]
+          CMChiefEngineer: [1, 1]
 #          CMOrdnanceTech: [3, 3]
-#          CMMaintTech: [1, 1]
+          CMMaintTech: [3, 3]
 
           #Medical
           CMCMO: [1, 1]

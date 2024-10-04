@@ -1,0 +1,29 @@
+﻿<controls:LifeboatComputerWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Marines.Lifeboat"
+    Title="Confirm?" MinSize="400 200">
+    <BoxContainer Orientation="Vertical">
+        <Label Text="Launch the lifeboat?" />
+        <BoxContainer Orientation="Horizontal">
+            <Control HorizontalExpand="True" />
+            <Button Name="EmergencyLaunchButton" Access="Public" Text="Emergency Launch"
+                    StyleClasses="OpenBoth" HorizontalExpand="True" SizeFlagsStretchRatio="3"
+                    Margin="0 2" />
+            <Control HorizontalExpand="True" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <Control HorizontalExpand="True" />
+            <Button Name="NoButton" Access="Public" Text="No"
+                    StyleClasses="OpenBoth" HorizontalExpand="True" SizeFlagsStretchRatio="3"
+                    Margin="0 2" />
+            <Control HorizontalExpand="True" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <Control HorizontalExpand="True" />
+            <Button Name="YesButton" Access="Public" Text="Yes"
+                    StyleClasses="OpenBoth" HorizontalExpand="True" SizeFlagsStretchRatio="3"
+                    Margin="0 2" />
+            <Control HorizontalExpand="True" />
+        </BoxContainer>
+    </BoxContainer>
+</controls:LifeboatComputerWindow>

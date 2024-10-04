@@ -1,15 +1,15 @@
-using Content.Shared.Mobs.Systems;
-using Content.Shared.DoAfter;
-using Content.Shared.Interaction;
-using Content.Shared.Popups;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
-using Content.Shared._RMC14.Hands;
+using Content.Shared.DoAfter;
+using Content.Shared.Interaction;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 
@@ -119,8 +119,8 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
 
         var locationName = "Unknown";
 
-        if (_areas.TryGetArea(_transform.GetMoverCoordinates(ent), out var areaProto, out _))
-            locationName = areaProto.Name;
+        if (_areas.TryGetArea(_transform.GetMoverCoordinates(ent), out var area))
+            locationName = Name(area);
 
         var msg = Loc.GetString(args.message, ("location", locationName), ("type", GetTrapTypeName(ent)));
         _announce.AnnounceToHive(ent.Owner, hive, msg);

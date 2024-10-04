@@ -1,0 +1,20 @@
+﻿- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxLightsMixed
+  name: box of replacement lights
+  description: This box is shaped on the inside so that only light tubes and bulbs fit.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,21,3 # 21 slots
+    whitelist:
+      components:
+      - LightBulb
+  - type: StorageFill
+    contents:
+    - id: CMLightTube
+      amount: 14
+    - id: CMLightBulb
+      amount: 7
+  - type: Sprite
+    state: lightmixed

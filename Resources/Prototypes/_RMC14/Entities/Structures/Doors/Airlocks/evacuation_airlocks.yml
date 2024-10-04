@@ -1,0 +1,38 @@
+﻿- type: entity
+  parent: RMCBaseDoorInvincible
+  id: RMCAirlockEvacuation
+  name: Evacuation Airlock PL-6
+  description: It opens and closes.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/EscapePod/escape_pod_door.rsi
+  - type: EvacuationDoor
+  - type: Corrodible
+    isCorrodible: true
+
+- type: entity
+  parent: RMCBaseDoorInvincible
+  id: RMCAirlockLifeboat
+  name: lifeboat docking hatch
+  description: A heavyset bulkhead for a lifeboat.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.49,-0.49,1.49,0.49"
+        density: 100
+        mask:
+        - FullTileMask
+        layer:
+        - AirlockLayer
+  - type: Sprite
+    sprite: _RMC14/Structures/Lifeboat/lifeboat_doors.rsi
+  - type: EvacuationDoor
+  - type: Corrodible
+    isCorrodible: true
