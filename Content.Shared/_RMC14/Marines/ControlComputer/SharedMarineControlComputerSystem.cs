@@ -1,8 +1,4 @@
-﻿using Content.Shared._RMC14.Evacuation;
-using Content.Shared.UserInterface;
-using Robust.Shared.Timing;
-
-namespace Content.Shared._RMC14.Marines.ControlComputer;
+﻿namespace Content.Shared._RMC14.Marines.ControlComputer;
 
 public abstract class SharedMarineControlComputerSystem : EntitySystem
 {
@@ -48,7 +44,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         ent.Comp.LastToggle = time;
 
         // TODO RMC14 evacuation start sound
-        // _evacuation.ToggleEvacuation(null, ent.Comp.EvacuationCancelledSound);
+        _evacuation.ToggleEvacuation(null, null);
         RefreshComputers();
     }
 
