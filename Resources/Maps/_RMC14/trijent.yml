@@ -11325,7 +11325,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 4403.4289299
     - type: Door
-      secondsUntilStateChange: -29131.357
+      secondsUntilStateChange: -29406.482
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -11339,7 +11339,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 4403.4289299
     - type: Door
-      secondsUntilStateChange: -29131.357
+      secondsUntilStateChange: -29406.482
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -81219,6 +81219,148 @@ entities:
     components:
     - type: Transform
       pos: 34.5,-179.5
+      parent: 1
+- proto: RMCTurretGaussSpaceborne
+  entities:
+  - uid: 30368
+    components:
+    - type: Transform
+      pos: 39.5,-15.5
+      parent: 1
+  - uid: 30369
+    components:
+    - type: Transform
+      pos: 40.5,-16.5
+      parent: 1
+  - uid: 30370
+    components:
+    - type: Transform
+      pos: 29.5,-15.5
+      parent: 1
+  - uid: 30371
+    components:
+    - type: Transform
+      pos: 28.5,-16.5
+      parent: 1
+  - uid: 30372
+    components:
+    - type: Transform
+      pos: 34.5,-15.5
+      parent: 1
+  - uid: 30373
+    components:
+    - type: Transform
+      pos: 28.5,-26.5
+      parent: 1
+  - uid: 30374
+    components:
+    - type: Transform
+      pos: 40.5,-26.5
+      parent: 1
+  - uid: 30375
+    components:
+    - type: Transform
+      pos: 40.5,-28.5
+      parent: 1
+  - uid: 30376
+    components:
+    - type: Transform
+      pos: 28.5,-28.5
+      parent: 1
+  - uid: 30377
+    components:
+    - type: Transform
+      pos: 28.5,-36.5
+      parent: 1
+  - uid: 30378
+    components:
+    - type: Transform
+      pos: 29.5,-37.5
+      parent: 1
+  - uid: 30379
+    components:
+    - type: Transform
+      pos: 39.5,-37.5
+      parent: 1
+  - uid: 30380
+    components:
+    - type: Transform
+      pos: 40.5,-36.5
+      parent: 1
+  - uid: 30381
+    components:
+    - type: Transform
+      pos: 34.5,-37.5
+      parent: 1
+  - uid: 30382
+    components:
+    - type: Transform
+      pos: 15.5,-207.5
+      parent: 1
+  - uid: 30383
+    components:
+    - type: Transform
+      pos: 15.5,-209.5
+      parent: 1
+  - uid: 30384
+    components:
+    - type: Transform
+      pos: 15.5,-216.5
+      parent: 1
+  - uid: 30385
+    components:
+    - type: Transform
+      pos: 16.5,-217.5
+      parent: 1
+  - uid: 30386
+    components:
+    - type: Transform
+      pos: 26.5,-217.5
+      parent: 1
+  - uid: 30387
+    components:
+    - type: Transform
+      pos: 27.5,-216.5
+      parent: 1
+  - uid: 30388
+    components:
+    - type: Transform
+      pos: 21.5,-217.5
+      parent: 1
+  - uid: 30389
+    components:
+    - type: Transform
+      pos: 27.5,-207.5
+      parent: 1
+  - uid: 30390
+    components:
+    - type: Transform
+      pos: 27.5,-209.5
+      parent: 1
+  - uid: 30391
+    components:
+    - type: Transform
+      pos: 27.5,-196.5
+      parent: 1
+  - uid: 30392
+    components:
+    - type: Transform
+      pos: 21.5,-195.5
+      parent: 1
+  - uid: 30393
+    components:
+    - type: Transform
+      pos: 16.5,-195.5
+      parent: 1
+  - uid: 30394
+    components:
+    - type: Transform
+      pos: 15.5,-196.5
+      parent: 1
+  - uid: 30395
+    components:
+    - type: Transform
+      pos: 26.5,-195.5
       parent: 1
 - proto: RMCWallBunker
   entities:
