@@ -1,7 +1,7 @@
 - type: entity
   id: CMWashingMachine
   name: washing machine
-  description: Washing machine.
+  description: The WM-321 is a rugged, cylindrical powerhouse, equipped with a transparent window. This one is not operational.
   placement:
     mode: SnapgridCenter
   components:
@@ -39,8 +39,23 @@
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/washing_machine.rsi
     layers:
-    - state: washing_machine_open
+    - state: washing_machine_closed
+      map: [ "enum.OpenableVisuals.Layer" ]
     snapCardinals: true
+  - type: Openable
+    openOnActivate: true
+    closeable: true
+    sound:
+      path: /Audio/Effects/closetopen.ogg
+    closeSound:
+      path: /Audio/Effects/closetclose.ogg
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: { state: washing_machine_open }
+          False: { state: washing_machine_closed }
       
 - type: entity
   parent: CMWashingMachine
@@ -52,5 +67,12 @@
     drawdepth: Overdoors
     offset: "0.0,0.09"  
     layers:
-    - state: washing_machine_double_open
+    - state: washing_machine_double_closed
+      map: [ "enum.OpenableVisuals.Layer" ]
     snapCardinals: true
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: { state: washing_machine_double_open }
+          False: { state: washing_machine_double_closed }
