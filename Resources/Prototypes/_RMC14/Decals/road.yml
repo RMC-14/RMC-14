@@ -1,0 +1,130 @@
+- type: decal
+  abstract: true
+  parent: CMDecalBase
+  id: RMCDecalRoadBase
+  tags: ["station", "markings"]
+
+# Road Edge
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadEdgeVertical0
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: road_edge_decal1
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadEdgeVertical1
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: road_edge_decal2
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadEdgeHorizontal0
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: road_edge_decal3
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadEdgeHorizontal1
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: road_edge_decal4
+
+# Road Corner
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadEdgeCorner0
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: road_edge_decal5
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadEdgeCorner1
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: road_edge_decal6
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadEdgeCorner2
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: road_edge_decal7
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadEdgeCorner3
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: road_edge_decal8
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadEdgeCorner4
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: road_edge_decal9
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadEdgeCorner5
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: road_edge_decal10
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadEdgeCorner6
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: road_edge_decal11
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadEdgeCorner7
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: road_edge_decal12
+
+# Road Stop
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadStop0
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: stop_decal1
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadStop1
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: stop_decal2
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadStop2
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: stop_decal3
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadStop3
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: stop_decal4
+
+- type: decal
+  parent: RMCDecalRoadBase
+  id: RMCDecalRoadStop4
+  sprite:
+    sprite: _RMC14/Decals/road.rsi
+    state: stop_decal5
