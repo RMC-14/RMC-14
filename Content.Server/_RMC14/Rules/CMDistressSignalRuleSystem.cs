@@ -1083,6 +1083,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             "solaris" => "Solaris Ridge",
             "prison" => "Fiorina Science Annex",
             "shiva" => "Shivas Snowball",
+            "trijent" => "Trijent Dam",
             _ => name,
         };
     }
