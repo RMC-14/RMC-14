@@ -202,6 +202,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, used: used)
             {
                 BreakOnMove = true,
+                DuplicateCondition = DuplicateConditions.SameEvent,
             };
 
             if (_doAfter.TryStartDoAfter(doAfter))
@@ -224,6 +225,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, used: used)
             {
                 BreakOnMove = true,
+                DuplicateCondition = DuplicateConditions.SameEvent,
             };
 
             if (_doAfter.TryStartDoAfter(doAfter))
@@ -333,7 +335,12 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         }
 
         var ev = new RMCFusionReactorDestroyDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, ent.Comp.DestroyDelay, ev, ent, ent);
+        var doAfter = new DoAfterArgs(EntityManager, user, ent.Comp.DestroyDelay, ev, ent, ent)
+        {
+            BreakOnMove = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+        };
+
         _doAfter.TryStartDoAfter(doAfter);
     }
 

@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+﻿using System.Numerics;
+using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Sprite;
@@ -8,11 +9,15 @@ namespace Content.Shared._RMC14.Sprite;
 public sealed partial class SpriteSetRenderOrderComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int RenderOrder;
+    public int? RenderOrder;
+
+    [DataField, AutoNetworkedField]
+    public Vector2? Offset;
 
     [Serializable, NetSerializable]
     public enum Appearance
     {
         Key,
+        Offset,
     }
 }
