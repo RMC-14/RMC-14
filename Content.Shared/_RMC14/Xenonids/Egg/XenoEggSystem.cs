@@ -593,7 +593,7 @@ public sealed class XenoEggSystem : EntitySystem
             return false;
         }
 
-        if (HasComp<ParasiteAIComponent>(used))
+        if (!HasComp<ParasiteAIComponent>(used))
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-awake-child", ("parasite", used)), user, user, PopupType.SmallCaution);
             return false;
