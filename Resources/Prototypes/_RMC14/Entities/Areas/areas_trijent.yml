@@ -2,6 +2,7 @@
   parent: RMCAreaBase
   id: RMCAreaDesertDam
   name: Desert Dam
+  suffix: Trijent Dam
   components:
   - type: Sprite
     state: cliff_blocked
@@ -189,6 +190,7 @@
 - type: entity
   parent: RMCAreaDesertDamInterior
   id: RMCAreaDesertDamInteriorDamInterior
+  name: Engineering
   components:
   - type: Area
     minimapColor: '#C19504E7'
@@ -394,14 +396,6 @@
     state: red
 
 - type: entity
-  parent: RMCAreaDesertDamInterior
-  id: RMCAreaDesertDamInteriorDamInterior
-  name: Engineering
-  components:
-  - type: Sprite
-    state: ''
-
-- type: entity
   parent: RMCAreaDesertDamInteriorDamInterior
   id: RMCAreaDesertDamInteriorDamInteriorNorthTunnelEntrance
   name: Engineering North Tunnel Entrance
@@ -474,6 +468,11 @@
   components:
   - type: Sprite
     state: yellow
+
+- type: entity
+  abstract: true
+  parent: RMCAreaDesertDamInteriorCavesCentralCaves
+  id: RMCAreaDesertDamInteriorCavesCentralCavesEntrances
 
 - type: entity
   parent: RMCAreaDesertDamInteriorCavesCentralCavesEntrances
@@ -669,6 +668,11 @@
     resinAllowed: false
 
 - type: entity
+  abstract: true
+  parent: RMCAreaDesertDamBuilding
+  id: RMCAreaDesertDamBuildingBar
+
+- type: entity
   parent: RMCAreaDesertDamBuildingBar
   id: RMCAreaDesertDamBuildingBarBar
   name: Bar
@@ -691,6 +695,12 @@
   components:
   - type: Sprite
     state: purple
+
+- type: entity
+  abstract: true
+  parent: RMCAreaDesertDamBuilding
+  id: RMCAreaDesertDamBuildingCafeteria
+  name: Cafeteria
 
 - type: entity
   parent: RMCAreaDesertDamBuildingCafeteria
@@ -733,6 +743,11 @@
     state: red
 
 - type: entity
+  abstract: true
+  parent: RMCAreaDesertDamBuilding
+  id: RMCAreaDesertDamBuildingDorms
+
+- type: entity
   parent: RMCAreaDesertDamBuildingDorms
   id: RMCAreaDesertDamBuildingDormsHallwayNorthwing
   name: Dormitory North Wing
@@ -771,13 +786,6 @@
   components:
   - type: Sprite
     state: red
-
-- type: entity
-  parent: RMCAreaDesertDamBuilding
-  id: RMCAreaDesertDamBuildingMedical
-  components:
-  - type: Area
-    minimapColor: '#3DBF75EE'
 
 - type: entity
   parent: RMCAreaDesertDamBuildingMedical
@@ -946,6 +954,13 @@
   components:
   - type: Sprite
     state: medbay2
+  - type: Area
+    minimapColor: '#3DBF75EE'
+
+- type: entity
+  abstract: true
+  parent: RMCAreaDesertDamBuilding
+  id: RMCAreaDesertDamBuildingWarehouse
 
 - type: entity
   parent: RMCAreaDesertDamBuildingWarehouse
@@ -1029,17 +1044,12 @@
 - type: entity
   parent: RMCAreaDesertDamBuilding
   id: RMCAreaDesertDamBuildingWaterTreatmentOne
-  components:
-  - type: Area
-    minimapColor: '#C19504E7'
-
-- type: entity
-  parent: RMCAreaDesertDamBuilding
-  id: RMCAreaDesertDamBuildingWaterTreatmentOne
   name: Water Treatment One
   components:
   - type: Sprite
     state: yellow
+  - type: Area
+    minimapColor: '#C19504E7'
 
 - type: entity
   parent: RMCAreaDesertDamBuildingWaterTreatmentOne
@@ -1132,17 +1142,12 @@
 - type: entity
   parent: RMCAreaDesertDamBuilding
   id: RMCAreaDesertDamBuildingWaterTreatmentTwo
-  components:
-  - type: Area
-    minimapColor: '#C19504E7'
-
-- type: entity
-  parent: RMCAreaDesertDamBuilding
-  id: RMCAreaDesertDamBuildingWaterTreatmentTwo
   name: Water Treatment Two
   components:
   - type: Sprite
     state: yellow
+  - type: Area
+    minimapColor: '#C19504E7'
 
 - type: entity
   parent: RMCAreaDesertDamBuildingWaterTreatmentTwo
@@ -1378,6 +1383,11 @@
     resinAllowed: false
 
 - type: entity
+  abstract: true
+  parent: RMCAreaDesertDamBuilding
+  id: RMCAreaDesertDamBuildingMining
+
+- type: entity
   parent: RMCAreaDesertDamBuildingMining
   id: RMCAreaDesertDamBuildingMiningWorkshop
   name: Mining Workshop
@@ -1487,6 +1497,11 @@
   components:
   - type: Sprite
     state: purple
+
+- type: entity
+  abstract: true
+  parent: RMCAreaDesertDamBuilding
+  id: RMCAreaDesertDamBuildingLabNortheast
 
 - type: entity
   parent: RMCAreaDesertDamBuildingLabNortheast
@@ -1799,12 +1814,22 @@
     state: purple
 
 - type: entity
+  abstract: true
+  parent: RMCAreaDesertDamExterior
+  id: RMCAreaDesertDamExteriorRiverMouth
+
+- type: entity
   parent: RMCAreaDesertDamExteriorRiverMouth
   id: RMCAreaDesertDamExteriorRiverMouthEastern
   name: Eastern River Mouth
   components:
   - type: Sprite
     state: purple
+
+- type: entity
+  abstract: true
+  parent: RMCAreaDesertDam
+  id: RMCAreaDesertDamLanding
 
 - type: entity
   parent: RMCAreaDesertDamLanding
@@ -1830,6 +1855,11 @@
     state: shuttle
 
 - type: entity
+  abstract: true
+  parent: RMCAreaShuttle
+  id: RMCAreaShuttleTriTrans1
+
+- type: entity
   parent: RMCAreaShuttleTriTrans1
   id: RMCAreaShuttleTriTrans1Away
   components:
@@ -1842,6 +1872,11 @@
   components:
   - type: Sprite
     state: shuttle2
+
+- type: entity
+  abstract: true
+  parent: RMCAreaShuttle
+  id: RMCAreaShuttleTriTrans2
 
 - type: entity
   parent: RMCAreaShuttleTriTrans2
