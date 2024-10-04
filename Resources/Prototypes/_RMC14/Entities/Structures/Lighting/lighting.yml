@@ -26,19 +26,11 @@
       Broken: tube-broken
       Burned: tube-burned
   - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 9 # 9.15 for lesser drone
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Breakage"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
+    thresholds: []
   - type: Construction
     graph: CMLightFixture
     node: tubeLight
+  - type: RMCBreakLightOnAttack
 
 - type: entity
   parent: CMLightFixtureAlwaysPowered
