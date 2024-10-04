@@ -388,7 +388,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         var spawn = Spawn(node.Spawn, transform.Coordinates);
         var hive = _hive.GetHive(target);
-        _hive.SetHive(spawn, target);
+        _hive.SetHive(spawn, hive);
 
         _adminLogs.Add(LogType.RMCXenoOrderConstructionComplete, $"Xeno {ToPrettyString(xeno):xeno} completed construction of {ToPrettyString(target):xeno} which turned into {ToPrettyString(spawn):spawn} at {transform.Coordinates}");
 
