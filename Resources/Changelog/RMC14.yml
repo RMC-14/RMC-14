@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: ShadowCommander
-  changes:
-  - message: Parasites no longer show up in ghost roles after infection.
-    type: Fix
-  id: 281
-  time: '2024-07-07T01:03:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2854
 - author: snebl
   changes:
   - message: Sandbag barricades can now be deconstructed with the entrenching tool.
@@ -4646,5 +4639,12 @@
   id: 780
   time: '2024-10-04T10:39:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4154
+- author: Vermidia
+  changes:
+  - message: Fixed parasites sometimes being hiveless
+    type: Fix
+  id: 781
+  time: '2024-10-04T21:56:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4251
 Name: RMC14
 Order: -1
