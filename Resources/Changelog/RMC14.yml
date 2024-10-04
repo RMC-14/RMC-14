@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Added requisition venders to the Savannah.
-    type: Add
-  id: 277
-  time: '2024-07-05T10:44:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2818
 - author: Whisper
   changes:
   - message: Added Rainy Cloudly figurine
@@ -4640,5 +4633,17 @@
   id: 776
   time: '2024-10-04T10:01:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4238
+- author: Vermidia
+  changes:
+  - message: Parasites now show up on carriers
+    type: Add
+  - message: Eggs and parasites from a dead carrier are no longer guaranteed to all
+      drop
+    type: Fix
+  - message: Damage overlays respect being stunned now
+    type: Fix
+  id: 777
+  time: '2024-10-04T10:04:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4237
 Name: RMC14
 Order: -1
