@@ -69,9 +69,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
         SubscribeLocalEvent<XenoActivePheromonesComponent, MobStateChangedEvent>(OnActiveMobStateChanged);
 
-        SubscribeLocalEvent<XenoPheromonesObjectComponent, ComponentStartup>(OnPheromonesObjectStartup);
-        SubscribeLocalEvent<XenoPheromonesObjectComponent, ComponentShutdown>(OnPheromonesObjectShutdown);
-
         Subs.BuiEvents<XenoPheromonesComponent>(XenoPheromonesUI.Key, subs =>
         {
             subs.Event<XenoPheromonesChosenBuiMsg>(OnXenoPheromonesChosenBui);
@@ -184,7 +181,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         a = FixedPoint2.Max(a, b);
     }
 
-    private void DeactivatePheromones(Entity<XenoPheromonesComponent?> xeno)
+    public void DeactivatePheromones(Entity<XenoPheromonesComponent?> xeno)
     {
         if (!Resolve(xeno, ref xeno.Comp, false))
             return;
@@ -205,8 +202,11 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         }
     }
 
-    private void OnPheromonesObjectStartup(Entity<XenoPheromonesObjectComponent> ent, ref ComponentStartup args)
+    public void TryActivatePheromonesObject(Entity<XenoPheromonesObjectComponent?> ent)
     {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return;
+
         if (_net.IsClient)
             return;
 
@@ -218,14 +218,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         Dirty(ent, active);
 
         _entityLookup.GetEntitiesInRange(ent.Owner.ToCoordinates(), comp.PheromonesRange, active.Receivers);
-    }
-
-    private void OnPheromonesObjectShutdown(Entity<XenoPheromonesObjectComponent> ent, ref ComponentShutdown args)
-    {
-        if (!TryComp(ent, out XenoPheromonesComponent? comp))
-            return;
-
-        DeactivatePheromones((ent, comp));
     }
 
     public override void Update(float frameTime)

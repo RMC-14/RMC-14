@@ -68,6 +68,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedXenoPheromonesSystem _xenoPhero = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
 
     private static readonly ProtoId<DamageTypePrototype> FruitPlantDamageType = "Blunt";
@@ -499,9 +500,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         _transform.Unanchor(fruit, xform);
         SetFruitState(fruit, XenoFruitState.Item);
         _hands.TryPickup(args.User, fruit);
-
-        if (HasComp<XenoPheromonesObjectComponent>(fruit))
-            RemCompDeferred<XenoPheromonesObjectComponent>(fruit);
     }
 
     #endregion
@@ -933,6 +931,14 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     {
         fruit.Comp.State = state;
         Dirty(fruit);
+
+        if (HasComp<XenoPheromonesObjectComponent>(fruit))
+        {
+            if (state == XenoFruitState.Grown)
+                _xenoPhero.TryActivatePheromonesObject(fruit.Owner);
+            else if (state == XenoFruitState.Item)
+                _xenoPhero.DeactivatePheromones(fruit.Owner);
+        }
 
         var ev = new XenoFruitStateChangedEvent();
         RaiseLocalEvent(fruit, ref ev);
