@@ -154,32 +154,37 @@ public sealed class DiscordPlayerManager : IPostInjectInit, IDisposable
     /// <returns></returns>
     public async Task<string> CheckAndGenerateKey(SessionData playerData)
     {
+        if (string.IsNullOrEmpty(_apiUrl))
+        {
+            return string.Empty;
+        }
+
         try
         {
-            var userId = playerData.UserId;
+            var url = $"{_apiUrl}/userinfo/link/{playerData.UserId}";
 
-            var existing = await _db.GetAccountDiscordLink(playerData.UserId);
+            var response = await _httpClient.GetAsync(url);
 
-            // Привязки не существует, создаём.
-            if (existing is null)
+            if (response.StatusCode != HttpStatusCode.OK)
             {
-                return await CreateKey(userId);
-            }
+                var errorText = await response.Content.ReadAsStringAsync();
 
-            // Привязка существует и ключа нет, значит аккаунт уже прошёл привязку.
-            if (string.IsNullOrWhiteSpace(existing.HashKey))
-            {
+                _sawmill.Error(
+                    "Failed to get player sponsor info: [{StatusCode}] {Response}",
+                    response.StatusCode,
+                    errorText);
+
                 return string.Empty;
             }
 
-            // Привязка существует и есть ключ, значит пользователь запрашивал привязку, но не использовал ключ.
-            return existing.HashKey;
+            return await response.Content.ReadFromJsonAsync<string>(GetJsonSerializerOptions()) ?? string.Empty;
         }
-        catch (Exception ex)
+        catch (Exception exc)
         {
-            _sawmill.Log(LogLevel.Error, ex, "Ошибка во время проверки и генерации ключа");
-            throw;
+            _sawmill.Error(exc.Message);
         }
+
+        return string.Empty;
     }
 
     private async Task<string> CreateKey(Guid userId)

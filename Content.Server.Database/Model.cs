@@ -1218,14 +1218,6 @@ namespace Content.Server.Database
         public bool Dismissed { get; set; }
     }
 
-    public record DiscordPlayer
-    {
-        public Guid Id { get; set; }
-        public Guid SS14Id { get; set; }
-        public string HashKey { get; set; } = string.Empty;
-        public ulong? DiscordId { get; set; }
-    }
-
     [PrimaryKey(nameof(PlayerUserId), nameof(RoleId))]
     public class RoleWhitelist
     {
