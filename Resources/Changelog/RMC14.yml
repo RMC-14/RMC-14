@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed showing the inventory button in the bottom left to xenonids, which
-      have no inventory slots.
-    type: Fix
-  id: 273
-  time: '2024-07-05T10:32:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2828
-- author: DrSmugleaf
-  changes:
   - message: Fixed xenonid weeds behind walls getting destroyed by explosions on the
       other side of the wall.
     type: Fix
@@ -4607,5 +4599,12 @@
   id: 772
   time: '2024-10-04T06:15:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4216
+- author: CyberTropic
+  changes:
+  - message: Added washing machines.
+    type: Add
+  id: 773
+  time: '2024-10-04T06:19:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4236
 Name: RMC14
 Order: -1
