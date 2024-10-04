@@ -605,3 +605,14 @@
     state: stares-at-stars
   - type: PatronFigurine
     id: 78d5f741-5ccc-4e18-be40-74eb432071af
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRhettRainmanMcIndrick
+  name: Rhett 'Rainman' McIndrick figurine
+  description: Former Scout Sergeant McIndrick. "Where's the glory in waiting?"
+  components:
+  - type: Sprite
+    state: rhett_rainman_mcindrick
+  - type: PatronFigurine
+    id: a0091382-d6c6-4fb1-8cf6-cd4eb49ae4e1

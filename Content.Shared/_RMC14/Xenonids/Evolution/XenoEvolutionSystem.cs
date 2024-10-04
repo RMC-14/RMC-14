@@ -1,6 +1,5 @@
 using System.Linq;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -23,12 +22,10 @@ using Content.Shared.Prototypes;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
-using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Evolution;
@@ -83,7 +80,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
         SubscribeLocalEvent<XenoEvolutionGranterComponent, NewXenoEvolvedEvent>(OnGranterEvolved);
 
         SubscribeLocalEvent<XenoOvipositorChangedEvent>(OnOvipositorChanged);
-        SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
 
         Subs.BuiEvents<XenoEvolutionComponent>(XenoEvolutionUIKey.Key,
             subs =>
@@ -303,16 +299,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
         {
             _ui.SetUiState(uid, XenoEvolutionUIKey.Key, state);
         }
-    }
-
-    private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
-    {
-        var boost = Spawn(null, MapCoordinates.Nullspace);
-        var evoOverride = EnsureComp<EvolutionOverrideComponent>(boost);
-        evoOverride.Amount = 10;
-        Dirty(boost, evoOverride);
-
-        EnsureComp<TimedDespawnComponent>(boost).Lifetime = 180;
     }
 
     private bool ContainedCheckPopup(EntityUid xeno, bool doPopup = true)

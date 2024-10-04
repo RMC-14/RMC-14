@@ -21,6 +21,7 @@ namespace Content.Shared._RMC14.Marines.Skills;
 
 public sealed class SkillsSystem : EntitySystem
 {
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
@@ -465,5 +466,20 @@ public sealed class SkillsSystem : EntitySystem
         }
 
         Dirty(ent);
+    }
+
+    public float GetSkillDelayMultiplier(Entity<SkillsComponent?> user, EntProtoId<SkillDefinitionComponent> definition)
+    {
+        if (!definition.TryGet(out var definitionComp, _prototypes, _compFactory))
+            return 1f;
+
+        if (definitionComp.DelayMultipliers.Length == 0)
+            return 1f;
+
+        var skill = GetSkill(user, definition);
+        if (!definitionComp.DelayMultipliers.TryGetValue(skill, out var multiplier))
+            multiplier = definitionComp.DelayMultipliers[^1];
+
+        return multiplier;
     }
 }

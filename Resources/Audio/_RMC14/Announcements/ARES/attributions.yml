@@ -8,6 +8,21 @@
   copyright: "cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/dropship_emergency.ogg"
 
+- files: ["evacuate_cancelled.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/evacuate_cancelled.ogg"
+
+- files: ["evacuation_complete.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/evacuation_complete.ogg"
+
+- files: ["evacuation_confirmed.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/evacuation_confirmed.ogg"
+
 - files: ["hijack.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "cmss13"

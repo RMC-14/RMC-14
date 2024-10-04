@@ -1,9 +1,7 @@
-using Content.Shared._RMC14.Areas;
-using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
+﻿using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
-using Content.Shared._RMC14.Xenonids.Evolution;
-using Content.Shared.Damage;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
@@ -13,7 +11,6 @@ namespace Content.Shared._RMC14.Xenonids.Announce;
 
 public abstract class SharedXenoAnnounceSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly AreaSystem _areas = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -30,8 +27,8 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
             return;
 
         var locationName = "Unknown";
-        if (_areas.TryGetArea(_transform.GetMoverCoordinates(ent), out var areaProto, out _))
-            locationName = areaProto.Name;
+        if (_areas.TryGetArea(_transform.GetMoverCoordinates(ent), out var area))
+            locationName = Name(area);
 
         if (HasComp<ParasiteSpentComponent>(ent))
             AnnounceSameHive(ent.Owner, Loc.GetString("rmc-xeno-parasite-announce-infect", ("xeno", ent.Owner), ("location", locationName)), color: ent.Comp.Color);

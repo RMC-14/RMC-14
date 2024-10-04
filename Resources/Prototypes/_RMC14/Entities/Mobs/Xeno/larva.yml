@@ -68,6 +68,9 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: larva
+  - type: Tag
+    tags:
+    - RMCXenoLarva
 
 # For surgeries/failed incubations
 - type: entity
@@ -80,3 +83,6 @@
       sprite: _RMC14/Mobs/Xenonids/Larva/larva.rsi
       noRot: true
       state: embryo
+
+- type: Tag
+  id: RMCXenoLarva

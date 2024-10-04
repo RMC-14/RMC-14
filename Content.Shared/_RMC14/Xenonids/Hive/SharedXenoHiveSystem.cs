@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.NightVision;
+﻿using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.FixedPoint;
@@ -7,6 +8,7 @@ using Content.Shared.Popups;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -26,14 +28,35 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
     public override void Initialize()
     {
-        base.Initialize();
-
         _query = GetEntityQuery<HiveComponent>();
         _memberQuery = GetEntityQuery<HiveMemberComponent>();
+
+        SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
 
         SubscribeLocalEvent<HiveComponent, MapInitEvent>(OnMapInit);
 
         SubscribeLocalEvent<XenoEvolutionGranterComponent, MobStateChangedEvent>(OnGranterMobStateChanged);
+    }
+
+    private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
+    {
+        var hives = EntityQueryEnumerator<HiveComponent>();
+        while (hives.MoveNext(out var uid, out var hive))
+        {
+            if (hive.HijackSurged)
+                continue;
+
+            hive.HijackSurged = true;
+            Dirty(uid, hive);
+
+            var boost = Spawn(null, MapCoordinates.Nullspace);
+            var evoOverride = EnsureComp<EvolutionOverrideComponent>(boost);
+            evoOverride.Amount = 10;
+            Dirty(boost, evoOverride);
+
+            EnsureComp<TimedDespawnComponent>(boost).Lifetime = 180;
+            break;
+        }
     }
 
     private void OnGranterMobStateChanged(Entity<XenoEvolutionGranterComponent> ent, ref MobStateChangedEvent args)

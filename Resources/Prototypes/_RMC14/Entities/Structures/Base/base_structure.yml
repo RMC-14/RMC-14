@@ -54,7 +54,7 @@
 # BaseWall
 - type: entity
   abstract: true
-  id: CMBaseWallInvincible
+  id: RMCBaseWallInvincibleNoIcon
   description: A huge chunk of metal used to separate rooms.
   placement:
     mode: SnapgridCenter
@@ -67,8 +67,6 @@
     bodyType: Static
   - type: Sprite
     drawdepth: Walls
-  - type: Icon
-    state: full
   - type: PlacementReplacement
     key: walls
   - type: Occluder
@@ -90,6 +88,19 @@
   - type: RMCDropshipBlocked
   - type: MinimapColor
     color: "#ebe5e5ee"
+
+- type: entity
+  abstract: true
+  parent: RMCBaseWallInvincibleNoIcon
+  id: CMBaseWallInvincible
+  description: A huge chunk of metal used to separate rooms.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Icon
+    state: full
 
 - type: entity
   abstract: true
