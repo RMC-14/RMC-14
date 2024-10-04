@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: MREs can now be stored in webbing and armor
-    type: Add
-  id: 279
-  time: '2024-07-07T00:53:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2858
-- author: DrSmugleaf
-  changes:
-  - message: Fixed not being able to normal attack breakable walls.
-    type: Fix
-  id: 280
-  time: '2024-07-07T01:04:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2862
 - author: ShadowCommander
   changes:
   - message: Parasites no longer show up in ghost roles after infection.
@@ -4646,5 +4632,19 @@
   id: 778
   time: '2024-10-04T10:37:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4156
+- author: DrSmugleaf
+  changes:
+  - message: Added xenos seeing each others position live while the Queen is in ovi.
+    type: Add
+  id: 779
+  time: '2024-10-04T10:39:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4239
+- author: FungiFellow
+  changes:
+  - message: Added the M276 Shotgun Shell Loading Rig
+    type: Add
+  id: 780
+  time: '2024-10-04T10:39:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4154
 Name: RMC14
 Order: -1
