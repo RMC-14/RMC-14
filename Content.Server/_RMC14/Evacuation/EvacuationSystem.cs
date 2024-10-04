@@ -34,23 +34,21 @@ public sealed class EvacuationSystem : SharedEvacuationSystem
         sound.Sound = launchSound;
         Dirty(grid, sound);
 
-        if (TryComp(grid, out TransformComponent? xform))
+        var gridTransform = Transform(grid);
+        var children = gridTransform.ChildEnumerator;
+        while (children.MoveNext(out var child))
         {
-            var children = xform.ChildEnumerator;
-            while (children.MoveNext(out var child))
+            if (_evacuationDoorQuery.TryComp(child, out var door))
             {
-                if (_evacuationDoorQuery.TryComp(child, out var door))
-                {
-                    door.Locked = true;
-                    Dirty(child, door);
+                door.Locked = true;
+                Dirty(child, door);
 
-                    _doors.Clear();
-                    _entityLookup.GetEntitiesInRange(child.ToCoordinates(), 2.5f, _doors);
-                    foreach (var nearbyDoor in _doors)
-                    {
-                        nearbyDoor.Comp.Locked = true;
-                        Dirty(nearbyDoor);
-                    }
+                _doors.Clear();
+                _entityLookup.GetEntitiesInRange(child.ToCoordinates(), 2.5f, _doors);
+                foreach (var nearbyDoor in _doors)
+                {
+                    nearbyDoor.Comp.Locked = true;
+                    Dirty(nearbyDoor);
                 }
             }
         }
@@ -61,6 +59,16 @@ public sealed class EvacuationSystem : SharedEvacuationSystem
             _random.Prob(crashLandChance) &&
             _crashLand.TryGetCrashLandLocation(out var location))
         {
+            children = gridTransform.ChildEnumerator;
+            while (children.MoveNext(out var child))
+            {
+                if (_evacuationDoorQuery.TryComp(child, out var door))
+                {
+                    door.Locked = false;
+                    Dirty(child, door);
+                }
+            }
+
             _shuttle.FTLToCoordinates(grid, shuttle, location, Angle.Zero, hyperspaceTime: 3);
             return;
         }
