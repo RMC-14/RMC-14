@@ -12,8 +12,19 @@ namespace Content.Server._RMC14.Evacuation;
 public sealed class EvacuationSystem : SharedEvacuationSystem
 {
     [Dependency] private readonly CrashLandSystem _crashLand = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
+
+    private EntityQuery<EvacuationDoorComponent> _evacuationDoorQuery;
+
+    private readonly HashSet<Entity<EvacuationDoorComponent>> _doors = new();
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        _evacuationDoorQuery = GetEntityQuery<EvacuationDoorComponent>();
+    }
 
     protected override void LaunchEvacuationFTL(EntityUid grid, float crashLandChance, SoundSpecifier? launchSound)
     {
@@ -22,6 +33,27 @@ public sealed class EvacuationSystem : SharedEvacuationSystem
         var sound = EnsureComp<PlaySoundOnFTLStartComponent>(grid);
         sound.Sound = launchSound;
         Dirty(grid, sound);
+
+        if (TryComp(grid, out TransformComponent? xform))
+        {
+            var children = xform.ChildEnumerator;
+            while (children.MoveNext(out var child))
+            {
+                if (_evacuationDoorQuery.TryComp(child, out var door))
+                {
+                    door.Locked = true;
+                    Dirty(child, door);
+
+                    _doors.Clear();
+                    _entityLookup.GetEntitiesInRange(child.ToCoordinates(), 2.5f, _doors);
+                    foreach (var nearbyDoor in _doors)
+                    {
+                        nearbyDoor.Comp.Locked = true;
+                        Dirty(nearbyDoor);
+                    }
+                }
+            }
+        }
 
         var shuttle = EnsureComp<ShuttleComponent>(grid);
         if (GetEvacuationProgress() < 100 &&
