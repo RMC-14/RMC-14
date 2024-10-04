@@ -218,6 +218,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
 
         Dirty(xeno);
 
+
         QueueDel(parasite);
     }
 
