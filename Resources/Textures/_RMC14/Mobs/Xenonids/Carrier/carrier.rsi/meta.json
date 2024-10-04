@@ -64,6 +64,16 @@
       "name": "carrier_dissection"
     },
     {
+      "name": "para_0",
+      "directions": 4
+    },
+    {
+      "name": "para_rest_0"
+    },
+    {
+      "name": "para_downed_0"
+    },
+    {
       "name": "para_1",
       "directions": 4
     },
@@ -92,16 +102,6 @@
     },
     {
       "name": "para_downed_3"
-    },
-    {
-      "name": "para_4",
-      "directions": 4
-    },
-    {
-      "name": "para_rest_4"
-    },
-    {
-      "name": "para_downed_4"
     }
   ]
 }

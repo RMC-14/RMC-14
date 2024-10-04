@@ -3,6 +3,8 @@ using Content.Shared.Ghost;
 using Content.Shared.Database;
 using Content.Shared.Verbs;
 using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Rest;
+using Content.Shared.Mobs;
 using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Parasite;
@@ -10,6 +12,7 @@ namespace Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
 {
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] protected readonly SharedAppearanceSystem _appearance = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -18,6 +21,9 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoChangeParasiteReserveMessage>(OnParasiteReserveChange);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoReserveParasiteActionEvent>(OnSetReserve);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
+
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoRestEvent>(OnVisualsRest);
     }
 
     private void OnParasiteThrowerExamine(Entity<XenoParasiteThrowerComponent> thrower, ref ExaminedEvent args)
@@ -87,5 +93,15 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
         };
 
         args.Verbs.Add(parasiteVerb);
+    }
+
+    protected virtual void OnMobStateChanged(Entity<XenoParasiteThrowerComponent> xeno, ref MobStateChangedEvent args)
+    {
+        _appearance.SetData(xeno, ParasiteOverlayVisuals.Downed, args.NewMobState != MobState.Alive);
+    }
+
+    private void OnVisualsRest(Entity<XenoParasiteThrowerComponent> xeno, ref XenoRestEvent args)
+    {
+        _appearance.SetData(xeno, ParasiteOverlayVisuals.Resting, args.Resting);
     }
 }
