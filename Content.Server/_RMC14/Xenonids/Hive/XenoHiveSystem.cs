@@ -53,8 +53,8 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
             if (_announce.Count == 0)
                 continue;
 
-            var popup = $"The Hive can now support: {string.Join(", ", _announce)}";
-            _xenoAnnounce.AnnounceSameHive(default, popup, hive.AnnounceSound, PopupType.Large);
+            var popup = Loc.GetString("rmc-hive-supports-castes", ("castes", string.Join(", ", _announce)));
+            _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hiveId, popup, hive.AnnounceSound, PopupType.Large);
         }
     }
 }
