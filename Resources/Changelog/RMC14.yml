@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Tunguso4ka
   changes:
-  - message: Added welder satchel for Combat Technicians.
-    type: Add
-  id: 276
-  time: '2024-07-05T10:44:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2813
-- author: Tunguso4ka
-  changes:
   - message: Added requisition venders to the Savannah.
     type: Add
   id: 277
@@ -4605,5 +4598,47 @@
   id: 775
   time: '2024-10-04T08:35:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3832
+- author: DrSmugleaf
+  changes:
+  - message: Added power mechanics. Every planet will have reactors that need repairs,
+      when complete they will give power to all APCs, powering any lights in the area.
+      Lights will now only lose their tube when broken and are able to have it replaced,
+      instead of disappearing entirely.
+    type: Add
+  - message: Added post-hijack evacuation. During this process, marines must hold
+      a few key areas to complete emergency fueling, letting them evacuate the Almayer
+      through the lifeboats, or the escape pods. The escape pods may hold a maximum
+      of 3 living beings, with any more than that causing them to crash. Escape pods
+      may also crash if launched early, except for the one in the Liaison's office.
+      The four fuel pump areas have sentries that may be deployed during a hijack.
+      This change also temporarily removes the Savannah from selection until it can
+      be updated to have all the evacuation and power mechanics.
+    type: Add
+  - message: Enabled the Maintenance Technician and Chief Engineer jobs.
+    type: Add
+  - message: Added Rhett 'Rainman' McIndrick figurine.
+    type: Add
+  - message: Fixed the light replacer holding too few lights. It can now hold 50 tubes
+      and 50 bulbs.
+    type: Fix
+  - message: Fixed spray acid playing a sound and not giving you a popup for not enough
+      plasma when a xeno attempts to use it without enough plasma.
+    type: Fix
+  - message: Fixed gun damage modifiers applying twice. This specially affected the
+      M4SPR and underbarrel shotgun attachment.
+    type: Fix
+  - message: Fixed being able to watch a ladder from any range.
+    type: Fix
+  - message: Added examine text to guns that ignore friendlies and can shoot past
+      them.
+    type: Tweak
+  - message: Increased the amount of tackles a Praetorian needs to tackle someone
+      from 3 to 4.
+    type: Tweak
+  - message: Excluded last two maps from the vote now that Trijent Dam is in.
+    type: Tweak
+  id: 776
+  time: '2024-10-04T10:01:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4238
 Name: RMC14
 Order: -1
