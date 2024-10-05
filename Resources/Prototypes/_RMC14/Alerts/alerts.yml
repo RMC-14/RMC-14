@@ -97,8 +97,8 @@
 - type: alert
   id: XenoTacMapAlert
   icons:
-  - sprite: /Textures/_RMC14/Actions/xeno_actions.rsi
-    state: toggle_queen_zoom
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_map.rsi
+    state: open_xeno_map
   name: Tactical Map
   description: Click to open the Tactical Map.
   clickEvent: !type:OpenTacMapAlertEvent
