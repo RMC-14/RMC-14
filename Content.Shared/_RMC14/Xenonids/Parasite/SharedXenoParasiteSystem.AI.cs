@@ -138,14 +138,16 @@ public abstract partial class SharedXenoParasiteSystem
 
     public void GoIdle(Entity<ParasiteAIComponent> para)
     {
-        if (para.Comp.Mode != ParasiteMode.Active)
+        // Always reset jumps to you can continue infecting from pickup
+		para.Comp.JumpsLeft = para.Comp.InitialJumps;
+
+		if (para.Comp.Mode != ParasiteMode.Active)
             return;
 
         if (!HasComp<XenoRestingComponent>(para))
             DoRestAction(para);
 
         _rmcNpc.SleepNPC(para);
-        para.Comp.JumpsLeft = para.Comp.InitialJumps;
         para.Comp.Mode = ParasiteMode.Idle;
 
         para.Comp.NextActiveTime = _timing.CurTime + TimeSpan.FromSeconds(_random.Next(para.Comp.MinIdleTime, para.Comp.MaxIdleTime + 1));
