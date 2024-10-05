@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.EyeProtection;
 ///     Component responsible for restricting vision when eye protection is enabled.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-[Access(typeof(RMCSharedEyeProtectionSystem))]
+[Access(typeof(SharedRMCEyeProtectionSystem))]
 public sealed partial class RMCEyeProtectionComponent : Component
 {
     [DataField]

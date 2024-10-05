@@ -2,4 +2,4 @@
 
 namespace Content.Server._RMC14.EyeProtection;
 
-public sealed class RMCEyeProtectionSystem : RMCSharedEyeProtectionSystem;
+public sealed class RMCEyeProtectionSystem : SharedRMCEyeProtectionSystem;

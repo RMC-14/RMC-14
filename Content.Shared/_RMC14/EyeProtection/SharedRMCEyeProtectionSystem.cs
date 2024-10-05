@@ -18,7 +18,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.EyeProtection
 {
-    public abstract class RMCSharedEyeProtectionSystem : EntitySystem
+    public abstract class SharedRMCEyeProtectionSystem : EntitySystem
     {
         [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
         [Dependency] private readonly BlindableSystem _blindingSystem = default!;

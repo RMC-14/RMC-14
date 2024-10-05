@@ -5,7 +5,7 @@ using Robust.Shared.Player;
 
 namespace Content.Client._RMC14.EyeProtection;
 
-public sealed class RMCEyeProtectionSystem : RMCSharedEyeProtectionSystem
+public sealed class RMCEyeProtectionSystem : SharedRMCEyeProtectionSystem
 {
     [Dependency] private readonly IOverlayManager _overlayManager = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
