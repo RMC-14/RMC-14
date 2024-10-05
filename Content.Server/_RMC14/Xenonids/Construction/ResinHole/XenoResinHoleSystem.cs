@@ -224,7 +224,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         }
 
         var para = Spawn(resinHole.Comp.TrapPrototype);
-        _hive.SetSameHive(para, resinHole.Owner);
+        _hive.SetSameHive(resinHole.Owner, para);
 
         if (!_rmcHands.IsPickupByAllowed(para, args.User) || !_hands.TryPickupAnyHand(args.User, para))
         {
@@ -494,17 +494,17 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             _hive.SetSameHive(resinHole.Owner, trapEntity);
         }
 
-		string msg = destroyed ? "cm-xeno-construction-resin-hole-destroyed" : "rmc-xeno-construction-resin-hole-activate";
+        string msg = destroyed ? "cm-xeno-construction-resin-hole-destroyed" : "rmc-xeno-construction-resin-hole-activate";
 
-		var ev = new XenoResinHoleActivationEvent(msg);
-		RaiseLocalEvent(ent, ev);
+        var ev = new XenoResinHoleActivationEvent(msg);
+        RaiseLocalEvent(ent, ev);
 
-		comp.TrapPrototype = null;
-		Dirty(resinHole);
-		_appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
+        comp.TrapPrototype = null;
+        Dirty(resinHole);
+        _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
 
-		return true;
-	}
+        return true;
+    }
 
     private bool IsAcidPrototype(string proto, out int level)
     {
