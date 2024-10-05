@@ -10,6 +10,9 @@
   components:
   - type: GhostRole
     name: cm-job-name-xeno-lesser-drone
+    description: roles-lesser-drone-description
+    raffle:
+      settings: short
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/LesserDrone/lesser_drone.rsi
   - type: MobState

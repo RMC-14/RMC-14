@@ -38,6 +38,8 @@
   - type: GhostRole
     name: roles-lesser-drone-name
     description: roles-lesser-drone-description
+    raffle:
+      settings: short
   - type: GhostRoleMobSpawner
     availableTakeovers: 2
     deleteOnSpawn: false
