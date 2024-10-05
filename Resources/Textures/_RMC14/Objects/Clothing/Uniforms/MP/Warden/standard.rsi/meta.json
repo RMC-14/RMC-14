@@ -13,6 +13,9 @@
     },
     {
       "name": "icon"
+    },
+    {
+      "name": "jacket-equipped-INNERCLOTHING"
     }
   ]
 }
