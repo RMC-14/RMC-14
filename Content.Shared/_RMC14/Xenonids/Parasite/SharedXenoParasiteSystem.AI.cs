@@ -139,9 +139,9 @@ public abstract partial class SharedXenoParasiteSystem
     public void GoIdle(Entity<ParasiteAIComponent> para)
     {
         // Always reset jumps to you can continue infecting from pickup
-		para.Comp.JumpsLeft = para.Comp.InitialJumps;
+        para.Comp.JumpsLeft = para.Comp.InitialJumps;
 
-		if (para.Comp.Mode != ParasiteMode.Active)
+        if (para.Comp.Mode != ParasiteMode.Active)
             return;
 
         if (!HasComp<XenoRestingComponent>(para))
