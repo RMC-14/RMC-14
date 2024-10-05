@@ -60,9 +60,9 @@
   - type: XenoDevour
   - type: XenoEvolution
     canEvolveWithoutGranter: true
-    max: 300
+    max: 200
     evolvesTo:
-#    - CMXenoCarrier
+    - CMXenoCarrier
 #    - CMXenoBurrower
     - CMXenoHivelord
     evolvesToWithoutPoints:
@@ -81,6 +81,8 @@
       components:
       - XenoParasite
       - XenoEgg
+  - type: EggPlantTime
+    plantTime: 2.5
   - type: MultiHandedHolder
     items:
     - hands: 2
@@ -93,4 +95,8 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: drone
+  - type: AcidTrap
+    trapLevel: 1
+    cost: 70
+    spray: XenoAcidSprayTrapWeak
 

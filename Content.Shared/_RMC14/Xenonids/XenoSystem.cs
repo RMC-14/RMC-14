@@ -25,6 +25,9 @@ using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Radio;
 using Content.Shared.Standing;
+using Content.Shared.Storage.Components;
+using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Configuration;
@@ -38,6 +41,8 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
@@ -45,6 +50,7 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly WeldableSystem _weldable = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private EntityQuery<AffectableByWeedsComponent> _affectableQuery;
@@ -52,6 +58,7 @@ public sealed class XenoSystem : EntitySystem
     private EntityQuery<MarineComponent> _marineQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<MobThresholdsComponent> _mobThresholdsQuery;
+    private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<XenoFriendlyComponent> _xenoFriendlyQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
     private EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
@@ -71,6 +78,7 @@ public sealed class XenoSystem : EntitySystem
         _marineQuery = GetEntityQuery<MarineComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
         _mobThresholdsQuery = GetEntityQuery<MobThresholdsComponent>();
+        _xenoQuery = GetEntityQuery<XenoComponent>();
         _xenoFriendlyQuery = GetEntityQuery<XenoFriendlyComponent>();
         _xenoNestedQuery = GetEntityQuery<XenoNestedComponent>();
         _xenoPlasmaQuery = GetEntityQuery<XenoPlasmaComponent>();
@@ -88,6 +96,8 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, GetMeleeDamageEvent>(OnXenoGetMeleeDamage);
         SubscribeLocalEvent<XenoComponent, DamageModifyEvent>(OnXenoDamageModify);
         SubscribeLocalEvent<XenoComponent, RefreshMovementSpeedModifiersEvent>(OnXenoRefreshSpeed);
+        SubscribeLocalEvent<XenoComponent, MeleeHitEvent>(OnXenoMeleeHit);
+        SubscribeLocalEvent<XenoComponent, HiveChangedEvent>(OnHiveChanged);
 
         Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
@@ -199,6 +209,27 @@ public sealed class XenoSystem : EntitySystem
         args.ModifySpeed(_xenoSpeedMultiplier, _xenoSpeedMultiplier);
     }
 
+    private void OnXenoMeleeHit(Entity<XenoComponent> xeno, ref MeleeHitEvent args)
+    {
+        foreach (var hit in args.HitEntities)
+        {
+            SharedEntityStorageComponent? storage = null;
+            if (!_entityStorage.ResolveStorage(hit, ref storage))
+                continue;
+
+            if (_weldable.IsWelded(hit))
+                _weldable.SetWeldedState(hit, false);
+
+            _entityStorage.TryOpenStorage(xeno, hit);
+        }
+    }
+
+    private void OnHiveChanged(Entity<XenoComponent> ent, ref HiveChangedEvent args)
+    {
+        // leaving the hive makes you lose container vision post hijack :)
+        _nightVision.SetSeeThroughContainers(ent.Owner, args.Hive?.Comp.SeeThroughContainers ?? false);
+    }
+
     private void UpdateXenoSpeedMultiplier(float speed)
     {
         _xenoSpeedMultiplier = speed;
@@ -213,36 +244,6 @@ public sealed class XenoSystem : EntitySystem
     public void MakeXeno(Entity<XenoComponent?> xeno)
     {
         EnsureComp<XenoComponent>(xeno);
-    }
-
-    public void SetHive(Entity<XenoComponent?> xeno, Entity<HiveComponent?>? hive)
-    {
-        if (!Resolve(xeno, ref xeno.Comp))
-            return;
-
-        if (hive == null)
-        {
-            xeno.Comp.Hive = null;
-            Dirty(xeno, xeno.Comp);
-            return;
-        }
-
-        var hiveEnt = hive.Value;
-        if (!Resolve(hiveEnt, ref hiveEnt.Comp))
-            return;
-
-        xeno.Comp.Hive = hive;
-        Dirty(xeno, xeno.Comp);
-
-        _nightVision.SetSeeThroughContainers(xeno.Owner, hiveEnt.Comp.SeeThroughContainers);
-    }
-
-    public void SetSameHive(Entity<XenoComponent?> to, Entity<XenoComponent?> from)
-    {
-        if (!Resolve(from, ref from.Comp))
-            return;
-
-        SetHive(to, from.Comp.Hive);
     }
 
     private FixedPoint2 GetWeedsHealAmount(Entity<XenoComponent> xeno)
@@ -292,32 +293,16 @@ public sealed class XenoSystem : EntitySystem
         _damageable.TryChangeDamage(xeno, heal, true);
     }
 
-    // TODO RMC14 generalize this for survivors, synthetics, enemy hives, etc
-    public bool CanHitLiving(EntityUid xeno, EntityUid defender)
-    {
-        return _marineQuery.HasComponent(defender);
-    }
-
-    public bool FromSameHive(Entity<XenoComponent?> xenoOne, Entity<XenoComponent?> xenoTwo)
-    {
-        if (!Resolve(xenoOne, ref xenoOne.Comp, false) ||
-            !Resolve(xenoTwo, ref xenoTwo.Comp, false))
-        {
-            return false;
-        }
-
-        return xenoOne.Comp.Hive == xenoTwo.Comp.Hive;
-    }
-
     public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool hitNonMarines = false)
     {
         if (xeno == target)
             return false;
-        // TODO RMC14 use hive member instead
-        if (TryComp<XenoComponent>(xeno, out var comp1) && TryComp<XenoComponent>(target, out var comp2) && comp1.Hive == comp2.Hive)
+
+        // hiveless xenos can attack eachother
+        if (_hive.FromSameHive(xeno, target))
             return false;
 
-        if (HasComp<MobStateComponent>(target) && _mobState.IsDead(target))
+        if (_mobState.IsDead(target))
             return false;
 
         if (_xenoNestedQuery.HasComp(target))

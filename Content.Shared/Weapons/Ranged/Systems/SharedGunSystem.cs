@@ -330,8 +330,23 @@ public abstract partial class SharedGunSystem : EntitySystem
         gun.ShotCounter += shots;
         Dirty(gunUid, gun);
 
+        void CleanupClient()
+        {
+            foreach (var (ent, _) in ev.Ammo)
+            {
+                if (ent == null)
+                    continue;
+
+                if (_netManager.IsServer || IsClientSide(ent.Value))
+                    Del(ent);
+            }
+        }
+
         if (!Timing.IsFirstTimePredicted)
+        {
+            CleanupClient();
             return null;
+        }
 
         if (ev.Ammo.Count <= 0)
         {
@@ -357,6 +372,12 @@ public abstract partial class SharedGunSystem : EntitySystem
 
             return null;
         }
+
+        // if (_netManager.IsClient && HasComp<GunIgnorePredictionComponent>(gunUid))
+        // {
+        //     CleanupClient();
+        //     return null;
+        // }
 
         // Shoot confirmed - sounds also played here in case it's invalid (e.g. cartridge already spent).
         var projectiles = Shoot(gunUid, gun, ev.Ammo, fromCoordinates, toCoordinates.Value, out var userImpulse, user, throwItems: attemptEv.ThrowItems, predictedProjectiles, userSession);
@@ -484,8 +505,13 @@ public abstract partial class SharedGunSystem : EntitySystem
                         if (_netManager.IsServer || GunPrediction)
                         {
                             var uid = Spawn(cartridge.Prototype, fromEnt);
-                            shotProjectiles.Add(uid);
                             CreateAndFireProjectiles(uid, cartridge);
+
+                            if (_netManager.IsClient && HasComp<GunIgnorePredictionComponent>(gunUid))
+                            {
+                                predictedProjectiles?.RemoveAll(i => i == uid.Id);
+                                QueueDel(uid);
+                            }
 
                             RaiseLocalEvent(ent!.Value, new AmmoShotEvent()
                             {

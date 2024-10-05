@@ -41,7 +41,32 @@
       #TODO motion detector
       #TODO walkman
 
-# TODO RMC14 PMC Armor has it's own list of allowed suit storage
+- type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingArmorPMC
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - RMCLighter
+      - Bible
+      - Gun
+      - BallisticAmmoProvider #Note should get all maganizes
+      - Stunbaton
+      - CrewMonitoringConsole
+      tags:
+      - Handcuffs
+      - GasTank
+      - Flashlight
+      - DiscreteHealthAnalyzer
+      - CigPack
+      - Knife
+      - RMCG8Pouch
+      - Crowbar
+      - RMCMacheteScabbard
+      #TODO katana scabbard
+      #TODO motion detector
+      #TODO walkman
 
 - type: entity
   abstract: true
@@ -85,6 +110,29 @@
       #TODO Various holsters go here - instead of specific ones though MP get ALL of them - any type of gun holster
       - RMCSmartPistolHolster
       #TODO Ceremonial Sword
+      #TODO motion detector
+      #TODO walkman
+
+- type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingArmorRoyal
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - RMCLighter
+      - Bible
+      - BallisticAmmoProvider #Note should get all maganizes
+      - Stunbaton
+      - Gun
+      tags:
+      - Handcuffs
+      - GasTank
+      - CigPack
+      - Knife
+      - Grenade
+      - Flashlight
+      - Machete
       #TODO motion detector
       #TODO walkman
 

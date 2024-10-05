@@ -43,6 +43,37 @@
       #TODO Various holsters go here - 1984, m44, mateba
       - RMCSmartPistolHolster
 
+- type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingJacketMB
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - RMCLighter
+      - Stunbaton
+      - Gun
+      - CrewMonitoringConsole
+      tags:
+      - Handcuffs
+      - GasTank
+      - Flashlight
+      - CigPack
+      - Knife
+      - RMCG8Pouch
+      - Binoculars
+      - RMCMacheteScabbard
+      - Crowbar
+      - DiscreteHealthAnalyzer
+      - Pen
+      - Radio
+      #TODO Various holsters go here - 1984, m44, mateba
+      - RMCSmartPistolHolster
+      - RMCMacheteScabbard
+      #TODO Katana scabbard
+      #TODO motion detector
+      #TODO Walkman
+
 # TODO RMC14 labcoat has it's own list
 
 # TODO RMC14 chef/medical apron have a shared list
@@ -151,6 +182,19 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_white.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_white.rsi
+
+# Executive Officer
+
+- type: entity
+  parent: CMCoatCO
+  id: CMCoatXOFormal
+  name: marine formal service jacket
+  description: Smells like vanilla. Signifies prestige and power, if a little flashy.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
 
 # Officer
 - type: entity

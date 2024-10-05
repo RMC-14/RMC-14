@@ -2,6 +2,7 @@
 using Content.Server.Popups;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -14,6 +15,7 @@ namespace Content.Server._RMC14.Xenonids.Watch;
 public sealed class XenoWatchSystem : SharedWatchXenoSystem
 {
     [Dependency] private readonly SharedEyeSystem _eye = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
@@ -97,6 +99,9 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
     {
         args.Handled = true;
 
+        if (_hive.GetHive(ent.Owner) is not {} hive)
+            return;
+
         if (!HasQueenPopup(ent))
             return;
 
@@ -104,19 +109,16 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
 
         var xenos = new List<Xeno>();
 
-        if (ent.Comp.Hive != default)
+        var query = EntityQueryEnumerator<XenoComponent, HiveMemberComponent, MetaDataComponent>();
+        while (query.MoveNext(out var uid, out _, out var member, out var metaData))
         {
-            var query = EntityQueryEnumerator<XenoComponent, MetaDataComponent>();
-            while (query.MoveNext(out var uid, out var xeno, out var metaData))
-            {
-                if (uid == ent.Owner || xeno.Hive != ent.Comp.Hive)
-                    continue;
+            if (uid == ent.Owner || member.Hive != hive.Owner)
+                continue;
 
-                if (_mobState.IsDead(uid))
-                    continue;
+            if (_mobState.IsDead(uid))
+                continue;
 
-                xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID));
-            }
+            xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID));
         }
 
         xenos.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
@@ -124,7 +126,7 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
         _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos));
     }
 
-    public override void Watch(Entity<XenoComponent?, ActorComponent?, EyeComponent?> watcher, Entity<XenoComponent?> toWatch)
+    public override void Watch(Entity<HiveMemberComponent?, ActorComponent?, EyeComponent?> watcher, Entity<HiveMemberComponent?> toWatch)
     {
         base.Watch(watcher, toWatch);
 
@@ -134,13 +136,10 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
         if (watcher.Owner == toWatch.Owner)
             return;
 
-        if (!Resolve(watcher, ref watcher.Comp1, ref watcher.Comp2, ref watcher.Comp3) ||
-            !Resolve(toWatch, ref toWatch.Comp))
-        {
+        if (!_hive.FromSameHive((watcher, watcher.Comp1), toWatch))
             return;
-        }
 
-        if (watcher.Comp1.Hive != toWatch.Comp.Hive || toWatch.Comp.Hive == default)
+        if (!Resolve(watcher, ref watcher.Comp2, false))
             return;
 
         _eye.SetTarget(watcher, toWatch, watcher);

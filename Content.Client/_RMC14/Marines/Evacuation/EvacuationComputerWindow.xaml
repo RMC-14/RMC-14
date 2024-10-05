@@ -1,0 +1,17 @@
+﻿<controls:EvacuationComputerWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Marines.Evacuation"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    Title="Escape Pod Controller">
+    <BoxContainer Orientation="Vertical">
+        <RichTextLabel Text="[bold]Information display[/bold]" />
+        <ui:BlueHorizontalSeparator />
+        <Label Name="StatusLabel" Access="Public" Text="Escape Pod Status: NO EVACUATION" />
+        <Label Name="HatchLabel" Access="Public" Text="Docking Hatch: UNSECURED" />
+        <RichTextLabel Text="[bold]Pod controls[/bold]" Margin="0 10 0 0" />
+        <ui:BlueHorizontalSeparator />
+        <Button Name="DoorButton" Access="Public" Text="Unlock door" StyleClasses="OpenBoth" />
+        <Button Name="EjectButton" Access="Public" Text="Manual eject" StyleClasses="OpenBoth" />
+        <Button Name="DelayButton" Access="Public" Text="Delay launch" StyleClasses="OpenBoth" />
+    </BoxContainer>
+</controls:EvacuationComputerWindow>

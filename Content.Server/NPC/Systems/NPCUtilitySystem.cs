@@ -11,6 +11,7 @@ using Content.Server.Nutrition.EntitySystems;
 using Content.Server.Storage.Components;
 using Content.Shared._RMC14.Interaction;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Damage;
@@ -388,6 +389,10 @@ public sealed class NPCUtilitySystem : EntitySystem
             {
                 return TryComp<XenoEggComponent>(targetUid, out var egg) && egg.State == XenoEggState.Opened ? 1f : 0f;
             }
+            case TargetIsEmptyResinTrapCon:
+                {
+                    return TryComp<XenoResinHoleComponent>(targetUid, out var trap) && trap.TrapPrototype == null ? 1f : 0f;
+                }
             case TargetIsDownCon:
             {
                 return _standing.IsDown(targetUid) ? 1f : 0f;
