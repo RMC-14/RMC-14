@@ -15,6 +15,7 @@ public sealed class SightRestrictionOverlay : Overlay
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
     private readonly ShaderInstance _sightRestrictShader;
 
+    // Default view distance from top to middle of screen in tiles
     private readonly float _maxTilesHeight = 8.5f;
 
     private Vector3 _color = new Vector3(0f, 0f, 0f);
@@ -49,8 +50,6 @@ public sealed class SightRestrictionOverlay : Overlay
         var handle = args.WorldHandle;
         var viewport = args.WorldAABB;
         var viewportHeight = args.ViewportBounds.Height;
-
-        // Default view distance from top to bottom of screen in tiles
 
         // Actual height of viewport in tiles, accounting for zoom
         var actualTilesHeight = _maxTilesHeight * eyeComp.Zoom.X;
