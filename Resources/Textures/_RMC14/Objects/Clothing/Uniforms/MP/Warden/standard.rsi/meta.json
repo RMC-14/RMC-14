@@ -15,7 +15,8 @@
       "name": "icon"
     },
     {
-      "name": "jacket-equipped-INNERCLOTHING"
+      "name": "jacket-equipped-INNERCLOTHING",
+      "directions": 4
     }
   ]
 }
