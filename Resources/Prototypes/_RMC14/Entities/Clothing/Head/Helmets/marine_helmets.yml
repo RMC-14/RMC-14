@@ -65,6 +65,7 @@
   - type: OverwatchCamera
   - type: SquadArmor
     layer: Helmet
+    slot: HEAD
     rsi:
       sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
       state: std-helmet
@@ -124,6 +125,7 @@
     - Biological
   - type: SquadArmor
     layer: Helmet
+    slot: HEAD
     rsi:
       sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
       state: std-helmet-medic

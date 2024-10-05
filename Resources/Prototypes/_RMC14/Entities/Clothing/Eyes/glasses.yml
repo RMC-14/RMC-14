@@ -152,6 +152,7 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/squad_ballistic_goggles.rsi
   - type: SquadArmor
     layer: Goggles
+    slot: EYES
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/squad_ballistic_goggles.rsi
       state: lenses
