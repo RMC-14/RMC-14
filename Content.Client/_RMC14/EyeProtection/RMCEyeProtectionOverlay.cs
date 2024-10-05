@@ -13,7 +13,7 @@ public sealed class RMCEyeProtectionOverlay : Overlay
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
-    private readonly ShaderInstance _eyeProtShader;
+    private readonly ShaderInstance _sightRestrictShader;
 
     private readonly float _maxTilesHeight = 8.5f;
 
@@ -27,7 +27,7 @@ public sealed class RMCEyeProtectionOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
 
-        _eyeProtShader = _prototypeManager.Index<ShaderPrototype>("GradientCircleMask").InstanceUnique();
+        _sightRestrictShader = _prototypeManager.Index<ShaderPrototype>("GradientCircleMask").InstanceUnique();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -43,7 +43,7 @@ public sealed class RMCEyeProtectionOverlay : Overlay
         if (args.Viewport.Eye != eyeComp.Eye)
             return;
 
-        if (!_entityManager.TryGetComponent<RMCSightRestrictionComponent>(playerEntity, out var eyeProt))
+        if (!_entityManager.TryGetComponent<RMCSightRestrictionComponent>(playerEntity, out var sightRestrict))
             return;
 
         var handle = args.WorldHandle;
@@ -55,27 +55,27 @@ public sealed class RMCEyeProtectionOverlay : Overlay
         // Actual height of viewport in tiles, accounting for zoom
         var actualTilesHeight = _maxTilesHeight * eyeComp.Zoom.X;
 
-        var outerRadiusRatio = (_maxTilesHeight - eyeProt.ImpairFull) / actualTilesHeight / 2;
-        var innerRadiusRatio = (_maxTilesHeight - eyeProt.ImpairFull - eyeProt.ImpairPartial) / actualTilesHeight / 2;
+        var outerRadiusRatio = (_maxTilesHeight - sightRestrict.ImpairFull) / actualTilesHeight / 2;
+        var innerRadiusRatio = (_maxTilesHeight - sightRestrict.ImpairFull - sightRestrict.ImpairPartial) / actualTilesHeight / 2;
 
         _innerRadius = innerRadiusRatio * viewportHeight;
         _outerRadius = outerRadiusRatio * viewportHeight;
-        _darknessAlphaInner = eyeProt.AlphaInner;
-        _darknessAlphaOuter = eyeProt.AlphaOuter;
+        _darknessAlphaInner = sightRestrict.AlphaInner;
+        _darknessAlphaOuter = sightRestrict.AlphaOuter;
 
         // Shouldn't be time-variant
-        _eyeProtShader.SetParameter("time", 0.0f);
+        _sightRestrictShader.SetParameter("time", 0.0f);
         // Outside area should be black
-        _eyeProtShader.SetParameter("color", _color);
-        _eyeProtShader.SetParameter("darknessAlphaInner", _darknessAlphaInner);
-        _eyeProtShader.SetParameter("darknessAlphaOuter", _darknessAlphaOuter);
+        _sightRestrictShader.SetParameter("color", _color);
+        _sightRestrictShader.SetParameter("darknessAlphaInner", _darknessAlphaInner);
+        _sightRestrictShader.SetParameter("darknessAlphaOuter", _darknessAlphaOuter);
         // Radius should stay constant
-        _eyeProtShader.SetParameter("outerCircleRadius", _outerRadius);
-        _eyeProtShader.SetParameter("outerCircleMaxRadius", _outerRadius);
-        _eyeProtShader.SetParameter("innerCircleRadius", _innerRadius);
-        _eyeProtShader.SetParameter("innerCircleMaxRadius", _innerRadius);
+        _sightRestrictShader.SetParameter("outerCircleRadius", _outerRadius);
+        _sightRestrictShader.SetParameter("outerCircleMaxRadius", _outerRadius);
+        _sightRestrictShader.SetParameter("innerCircleRadius", _innerRadius);
+        _sightRestrictShader.SetParameter("innerCircleMaxRadius", _innerRadius);
 
-        handle.UseShader(_eyeProtShader);
+        handle.UseShader(_sightRestrictShader);
         handle.DrawRect(viewport, Color.White);
         handle.UseShader(null);
     }
