@@ -8,7 +8,4 @@ public sealed partial class XenoProjectileComponent : Component
 {
     [DataField, AutoNetworkedField]
     public bool DeleteOnFriendlyXeno;
-
-    [DataField, AutoNetworkedField]
-    public EntityUid? Hive;
 }

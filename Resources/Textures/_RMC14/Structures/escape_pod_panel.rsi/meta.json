@@ -1,0 +1,26 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/71d46ee8057d19b12e1495419cb299d2fedef6cc/icons/obj/structures/machinery/airlock_machines.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "airlock_control_off"
+    },
+    {
+      "name": "airlock_control_standby"
+    },
+    {
+      "name": "airlock_control_process",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    }
+  ]
+}

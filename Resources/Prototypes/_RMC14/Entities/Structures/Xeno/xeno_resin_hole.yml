@@ -77,7 +77,6 @@
         damage: 10
       behaviors:
       - !type:BurnBodyBehavior { }
-  - type: XenoFriendly
   - type: StepTrigger
     requiredTriggeredSpeed: 0
     intersectRatio: 0.1

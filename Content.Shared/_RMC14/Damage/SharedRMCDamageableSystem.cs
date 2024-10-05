@@ -40,7 +40,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly List<string> _types = [];
@@ -417,6 +417,8 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 
                 if (damage.Popup is { } popup && _random.Prob(0.5f))
                     _popup.PopupEntity(popup, user, user, PopupType.SmallCaution);
+
+                _audio.PlayPvs(damage.Sound, user);
 
                 break;
             }
