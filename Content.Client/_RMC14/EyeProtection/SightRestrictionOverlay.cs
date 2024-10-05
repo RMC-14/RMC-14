@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.EyeProtection;
 
-public sealed class RMCEyeProtectionOverlay : Overlay
+public sealed class SightRestrictionOverlay : Overlay
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
@@ -23,7 +23,7 @@ public sealed class RMCEyeProtectionOverlay : Overlay
     private float _darknessAlphaOuter = 1.0f;
     private float _darknessAlphaInner = 0.0f;
 
-    public RMCEyeProtectionOverlay()
+    public SightRestrictionOverlay()
     {
         IoCManager.InjectDependencies(this);
 

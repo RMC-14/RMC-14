@@ -10,7 +10,7 @@ public sealed class RMCEyeProtectionSystem : SharedRMCEyeProtectionSystem
     [Dependency] private readonly IOverlayManager _overlayManager = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
 
-    private RMCEyeProtectionOverlay _overlay = default!;
+    private SightRestrictionOverlay _overlay = default!;
 
     public override void Initialize()
     {
