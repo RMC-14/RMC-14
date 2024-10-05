@@ -12,17 +12,16 @@ public sealed class RMCEyeProtectionOverlay : Overlay
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
-    public override bool RequestScreenTexture => true;
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
     private readonly ShaderInstance _eyeProtShader;
+
+    private readonly float _maxTilesHeight = 8.5f;
 
     private Vector3 _color = new Vector3(0f, 0f, 0f);
     private float _outerRadius;
     private float _innerRadius;
     private float _darknessAlphaOuter = 1.0f;
     private float _darknessAlphaInner = 0.0f;
-
-    private RMCEyeProtectionComponent _eyeProtComponent = default!;
 
     public RMCEyeProtectionOverlay()
     {
@@ -31,56 +30,33 @@ public sealed class RMCEyeProtectionOverlay : Overlay
         _eyeProtShader = _prototypeManager.Index<ShaderPrototype>("GradientCircleMask").InstanceUnique();
     }
 
-    protected override bool BeforeDraw(in OverlayDrawArgs args)
-    {
-        if (!_entityManager.TryGetComponent(_playerManager.LocalSession?.AttachedEntity, out EyeComponent? eyeComp))
-            return false;
-
-        if (args.Viewport.Eye != eyeComp.Eye)
-            return false;
-
-        var playerEntity = _playerManager.LocalSession?.AttachedEntity;
-
-        if (playerEntity == null)
-            return false;
-
-        if (!_entityManager.TryGetComponent<RMCEyeProtectionComponent>(playerEntity, out var eyeProtComp))
-            return false;
-
-        return true;
-    }
-
     protected override void Draw(in OverlayDrawArgs args)
     {
-        if (ScreenTexture == null)
-            return;
-
         var playerEntity = _playerManager.LocalSession?.AttachedEntity;
 
         if (playerEntity == null)
             return;
 
-        if (!_entityManager.TryGetComponent(_playerManager.LocalEntity, out RMCEyeProtectionComponent? eyeProt))
-        {
+        if (!_entityManager.TryGetComponent<EyeComponent>(playerEntity, out var eyeComp))
             return;
-        }
 
-        if (!_entityManager.TryGetComponent<EyeComponent>(playerEntity, out var content))
-        {
+        if (args.Viewport.Eye != eyeComp.Eye)
             return;
-        }
+
+        if (!_entityManager.TryGetComponent<RMCSightRestrictionComponent>(playerEntity, out var eyeProt))
+            return;
 
         var handle = args.WorldHandle;
         var viewport = args.WorldAABB;
         var viewportHeight = args.ViewportBounds.Height;
 
         // Default view distance from top to bottom of screen in tiles
-        var maxTilesHeight = 8.5f;
-        // Actual height of viewport in tiles, accounting for zoom
-        var actualTilesHeight = maxTilesHeight * content.Zoom.X;
 
-        var outerRadiusRatio = (maxTilesHeight - eyeProt.ImpairFull) / actualTilesHeight / 2;
-        var innerRadiusRatio = (maxTilesHeight - eyeProt.ImpairFull - eyeProt.ImpairPartial) / actualTilesHeight / 2;
+        // Actual height of viewport in tiles, accounting for zoom
+        var actualTilesHeight = _maxTilesHeight * eyeComp.Zoom.X;
+
+        var outerRadiusRatio = (_maxTilesHeight - eyeProt.ImpairFull) / actualTilesHeight / 2;
+        var innerRadiusRatio = (_maxTilesHeight - eyeProt.ImpairFull - eyeProt.ImpairPartial) / actualTilesHeight / 2;
 
         _innerRadius = innerRadiusRatio * viewportHeight;
         _outerRadius = outerRadiusRatio * viewportHeight;

@@ -39,9 +39,9 @@ namespace Content.Shared._RMC14.EyeProtection
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, GetEyeProtectionEvent>(OnGetProtection);
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, InventoryRelayedEvent<GetEyeProtectionEvent>>(OnGetRelayedProtection);
 
-            SubscribeLocalEvent<RMCEyeProtectionComponent, ComponentStartup>(OnEyeProtectionStartup);
-            SubscribeLocalEvent<RMCEyeProtectionComponent, AfterAutoHandleStateEvent>(OnEyeProtectionAfterHandle);
-            SubscribeLocalEvent<RMCEyeProtectionComponent, ComponentRemove>(OnEyeProtectionRemove);
+            SubscribeLocalEvent<RMCSightRestrictionComponent, ComponentStartup>(OnEyeProtectionStartup);
+            SubscribeLocalEvent<RMCSightRestrictionComponent, AfterAutoHandleStateEvent>(OnEyeProtectionAfterHandle);
+            SubscribeLocalEvent<RMCSightRestrictionComponent, ComponentRemove>(OnEyeProtectionRemove);
 
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, GetItemActionsEvent>(OnEyeProtectionItemGetActions);
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, ToggleActionEvent>(OnEyeProtectionItemToggle);
@@ -52,17 +52,17 @@ namespace Content.Shared._RMC14.EyeProtection
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, EntityTerminatingEvent>(OnEyeProtectionItemTerminating);
         }
 
-        private void OnEyeProtectionStartup(Entity<RMCEyeProtectionComponent> ent, ref ComponentStartup args)
+        private void OnEyeProtectionStartup(Entity<RMCSightRestrictionComponent> ent, ref ComponentStartup args)
         {
             EyeProtectionChanged(ent);
         }
 
-        private void OnEyeProtectionAfterHandle(Entity<RMCEyeProtectionComponent> ent, ref AfterAutoHandleStateEvent args)
+        private void OnEyeProtectionAfterHandle(Entity<RMCSightRestrictionComponent> ent, ref AfterAutoHandleStateEvent args)
         {
             EyeProtectionChanged(ent);
         }
 
-        private void OnEyeProtectionRemove(Entity<RMCEyeProtectionComponent> ent, ref ComponentRemove args)
+        private void OnEyeProtectionRemove(Entity<RMCSightRestrictionComponent> ent, ref ComponentRemove args)
         {
             if (ent.Comp.Alert is { } alert)
                 _alerts.ClearAlert(ent, alert);
@@ -180,10 +180,10 @@ namespace Content.Shared._RMC14.EyeProtection
                 return;
 
             // Check if already enabled
-            if (TryComp(user, out RMCEyeProtectionComponent? eyeProt))
+            if (TryComp(user, out RMCSightRestrictionComponent? eyeProt))
             {
                 return; // To prevent multiple items being enabled at once
-                //RemComp<RMCEyeProtectionComponent>(user);
+                //RemComp<RMCSightRestrictionComponent>(user);
             }
 
             item.Comp.User = user;
@@ -217,7 +217,7 @@ namespace Content.Shared._RMC14.EyeProtection
 
             if (!_timing.ApplyingState)
             {
-                eyeProt = EnsureComp<RMCEyeProtectionComponent>(user); // This should happen as late as possible
+                eyeProt = EnsureComp<RMCSightRestrictionComponent>(user); // This should happen as late as possible
                 Dirty(user, eyeProt);
             }
         }
@@ -257,8 +257,8 @@ namespace Content.Shared._RMC14.EyeProtection
             Dirty(item);
 
             // Can't disable what isn't there
-            if (TryComp(user, out RMCEyeProtectionComponent? eyeProt))
-                RemComp<RMCEyeProtectionComponent>(user.Value);
+            if (TryComp(user, out RMCSightRestrictionComponent? eyeProt))
+                RemComp<RMCSightRestrictionComponent>(user.Value);
         }
 
         private void ToggleEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid user)
@@ -274,9 +274,9 @@ namespace Content.Shared._RMC14.EyeProtection
             return;
         }
 
-        protected virtual void EyeProtectionChanged(Entity<RMCEyeProtectionComponent> ent) { }
+        protected virtual void EyeProtectionChanged(Entity<RMCSightRestrictionComponent> ent) { }
 
-        protected virtual void EyeProtectionRemoved(Entity<RMCEyeProtectionComponent> ent) { }
+        protected virtual void EyeProtectionRemoved(Entity<RMCSightRestrictionComponent> ent) { }
 
     }
 }

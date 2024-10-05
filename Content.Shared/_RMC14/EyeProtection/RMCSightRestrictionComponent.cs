@@ -6,11 +6,11 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.EyeProtection;
 
 /// <summary>
-///     Component responsible for restricting vision when eye protection is enabled.
+///     Component responsible for restricting vision.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 [Access(typeof(SharedRMCEyeProtectionSystem))]
-public sealed partial class RMCEyeProtectionComponent : Component
+public sealed partial class RMCSightRestrictionComponent : Component
 {
     [DataField]
     public ProtoId<AlertPrototype>? Alert;
