@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Xenonids.Energy;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Strain;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
@@ -24,8 +25,8 @@ public sealed class XenoAidSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
     [Dependency] private readonly XenoStrainSystem _xenoStrain = default!;
 
@@ -38,7 +39,7 @@ public sealed class XenoAidSystem : EntitySystem
     private void OnXenoAidAction(Entity<XenoAidComponent> xeno, ref XenoAidActionEvent args)
     {
         var target = args.Target;
-        if (!_xeno.FromSameHive(xeno.Owner, target))
+        if (!_hive.FromSameHive(xeno.Owner, target))
         {
             var msg = Loc.GetString("rmc-xeno-not-same-hive");
             _popup.PopupClient(msg, xeno, xeno, PopupType.SmallCaution);

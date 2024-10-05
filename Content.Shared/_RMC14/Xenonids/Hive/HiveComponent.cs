@@ -50,4 +50,7 @@ public sealed partial class HiveComponent : Component
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NewCoreAt;
+
+    [DataField, AutoNetworkedField]
+    public bool HijackSurged;
 }

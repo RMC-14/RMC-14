@@ -144,8 +144,8 @@
       #   amount: 5
       #- id: M276 M82F Holster Rig
       #  amount: 2
-      #- id: M276 Shotgun Shell Loading Rig
-      #  amount: 10
+      - id: RMCM276ShotgunShellLoadingRig
+        amount: 10
       - id: CMBeltMortar
         amount: 2
     - name: Pouches
@@ -449,8 +449,8 @@
         amount: 20
       - id: CMBeltMarine
         amount: 10
-      #- id: M276 Shotgun Shell Loading Rig
-      #  amount: 10
+      - id: RMCM276ShotgunShellLoadingRig
+        amount: 10
       - id: CMSatchelMarine
         amount: 20
       - id: JumpsuitMarine

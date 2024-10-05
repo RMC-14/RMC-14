@@ -5,6 +5,16 @@
     cm-chatsan-word-deltards: cm-chatsan-replacement-deltards
     cm-chatsan-word-beno: cm-chatsan-replacement-beno
     cm-chatsan-word-benos: cm-chatsan-replacement-benos
+    cm-chatsan-word-alphoid: cm-chatsan-replacement-alphoid
+    cm-chatsan-word-alphoids: cm-chatsan-replacement-alphoids
+    cm-chatsan-word-bravoid: cm-chatsan-replacement-bravoid
+    cm-chatsan-word-bravoids: cm-chatsan-replacement-bravoids
+    cm-chatsan-word-charloid: cm-chatsan-replacement-charloid
+    cm-chatsan-word-charloids: cm-chatsan-replacement-charloids
+    cm-chatsan-word-deltoid: cm-chatsan-replacement-deltoid
+    cm-chatsan-word-deltoids: cm-chatsan-replacement-deltoids
+    cm-chatsan-word-xenoid: cm-chatsan-replacement-xenoid
+    cm-chatsan-word-xenoids: cm-chatsan-replacement-xenoids
 
 - type: accent
   id: CMChatSanitizeMarine

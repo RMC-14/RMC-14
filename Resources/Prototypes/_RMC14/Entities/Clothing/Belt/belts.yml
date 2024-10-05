@@ -50,6 +50,33 @@
 
 - type: entity
   parent: CMBeltBaseStorage
+  id: RMCM276ShotgunShellLoadingRig
+  name: M276 pattern shotgun shell loading rig
+  description: An ammunition belt designed to hold shotgun shells or individual bullets.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/shotgun.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/shotgun.rsi
+  - type: Item
+    size: Large
+  - type: Storage
+    maxItemSize: Large
+    grid:
+    - 0,0,5,1 # 3 slots
+    whitelist:
+      tags:
+      - RMCBoxShotgunShells
+#      - # TODO RMC14 shotgun shell handfuls
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
+  - type: FixedItemSizeStorage
+
+- type: entity
+  parent: CMBeltBaseStorage
   id: CMBeltUtility
   name: M276 pattern toolbelt rig
   description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version lacks any combat functionality, and is commonly used by engineers to transport important tools.
@@ -365,6 +392,10 @@
     maxItemSize: Normal
     grid:
     - 0,0,9,1 # 9 slots
+    blacklist:
+      tags:
+      - CMFirstAidKit # TODO RMC14
+  #      - EngineerKit # TODO RMC14
   - type: Tag
     tags:
     - RMCG8Pouch

@@ -116,6 +116,7 @@
     layers:
     - state: acid2
   - type: DamageOnCollide
+    paralyze: 2
     damage:
       groups:
         Burn: 42.6

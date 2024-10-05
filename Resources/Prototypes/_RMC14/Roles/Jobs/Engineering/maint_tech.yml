@@ -23,7 +23,6 @@
         RMCSkillEngineer: 3
         RMCSkillFirearms: 1
         RMCSkillPowerLoader: 2
-  hidden: true # TODO RMC14
 
 - type: startingGear
   id: CMGearMaintTech
