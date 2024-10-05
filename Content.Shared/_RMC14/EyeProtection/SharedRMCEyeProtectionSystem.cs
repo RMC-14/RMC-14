@@ -39,7 +39,7 @@ namespace Content.Shared._RMC14.EyeProtection
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, GetEyeProtectionEvent>(OnGetProtection);
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, InventoryRelayedEvent<GetEyeProtectionEvent>>(OnGetRelayedProtection);
 
-            SubscribeLocalEvent<RMCEyeProtectionItemComponent, GetItemActionsEvent>(OnEyeProtectionItemGetActions);
+            //SubscribeLocalEvent<RMCEyeProtectionItemComponent, GetItemActionsEvent>(OnEyeProtectionItemGetActions);
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, ToggleActionEvent>(OnEyeProtectionItemToggle);
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, GotEquippedEvent>(OnEyeProtectionItemGotEquipped);
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, GotUnequippedEvent>(OnEyeProtectionItemGotUnequipped);
@@ -88,6 +88,7 @@ namespace Content.Shared._RMC14.EyeProtection
             component.Toggled = args.Activated;
         }
 
+        /*
         private void OnEyeProtectionItemGetActions(Entity<RMCEyeProtectionItemComponent> ent, ref GetItemActionsEvent args)
         {
             if (args.InHands || !ent.Comp.Toggleable)
@@ -100,6 +101,7 @@ namespace Content.Shared._RMC14.EyeProtection
             args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId);
             Dirty(ent);
         }
+        */
 
         private void OnEyeProtectionItemToggle(Entity<RMCEyeProtectionItemComponent> ent, ref ToggleActionEvent args)
         {
