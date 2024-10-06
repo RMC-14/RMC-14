@@ -128,6 +128,13 @@
       - Xeno
 
 - type: entity
+  parent: RMCEscapePodController
+  id: RMCEscapePodControllerLiaison
+  components:
+  - type: EvacuationComputer
+    earlyCrashChance: 0
+
+- type: entity
   parent: RMCCommunicationsConsoleBase
   id: RMCLifeboatConsole
   name: lifeboat console
