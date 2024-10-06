@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
@@ -34,9 +35,16 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
         SubscribeLocalEvent<XenoResinHoleComponent, ActivateInWorldEvent>(OnActivateInWorldResinHole);
 
         SubscribeLocalEvent<XenoResinHoleComponent, XenoResinHoleActivationEvent>(OnResinHoleActivation);
-    }
+		SubscribeLocalEvent<XenoResinHoleComponent, GettingAttackedAttemptEvent>(OnXenoResinHoleAttacked);
+	}
 
-    protected bool CanPlaceInHole(EntityUid uid, Entity<XenoResinHoleComponent> resinHole, EntityUid user)
+	private void OnXenoResinHoleAttacked(Entity<XenoResinHoleComponent> resinHole, ref GettingAttackedAttemptEvent args)
+	{
+		if (_hive.FromSameHive(args.Attacker, resinHole.Owner) && resinHole.Comp.TrapPrototype != null)
+			args.Cancelled = true;
+	}
+
+	protected bool CanPlaceInHole(EntityUid uid, Entity<XenoResinHoleComponent> resinHole, EntityUid user)
     {
         if (!HasComp<XenoParasiteComponent>(uid) ||
             _mobState.IsDead(uid))
