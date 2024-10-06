@@ -44,7 +44,7 @@
       map: [ "fullLayer" ]
   - type: ItemSlots
   - type: CMItemSlots
-    count: 10
+    count: 20
     slot:
       name: bedsheets
       whitelist:
@@ -84,4 +84,4 @@
   components:
   - type: CMItemSlots
     startingItem: CMBedsheetWhite
-    count: 10
+    count: 20
