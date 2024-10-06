@@ -57,6 +57,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private TimeSpan _evolutionPointsRequireOvipositorAfter;
     private TimeSpan _evolutionAccumulatePointsBefore;
 
+    private bool _didAccumulationAnnouncement;
+
     private readonly HashSet<EntityUid> _climbable = new();
     private readonly HashSet<EntityUid> _doors = new();
     private readonly HashSet<EntityUid> _intersecting = new();
@@ -663,6 +665,16 @@ public sealed class XenoEvolutionSystem : EntitySystem
             else if (comp.Points > comp.Max)
             {
                 SetPoints((uid, comp), FixedPoint2.Max(comp.Points - gain, comp.Max));
+            }
+        }
+
+        if (!_didAccumulationAnnouncement && roundDuration >= _evolutionAccumulatePointsBefore)
+        {
+            _didAccumulationAnnouncement = true;
+            var query = EntityQueryEnumerator<HiveComponent>();
+            while (query.MoveNext(out var uid, out _))
+            {
+                _xenoAnnounce.AnnounceToHive(default, uid, Loc.GetString("rmc-xeno-evolution-accumulation-ended"));
             }
         }
     }
