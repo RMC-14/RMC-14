@@ -85,8 +85,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         if (TerminatingOrDeleted(ent))
             return;
 
-        if (_area.TryGetArea(ent, out var area))
-            _metaData.SetEntityName(ent, $"{Name(area)} APC");
+        if (_area.TryGetArea(ent, out _, out var areaProto, out _))
+            _metaData.SetEntityName(ent, $"{areaProto.Name} APC");
 
         _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.CellContainerSlot);
         if (ent.Comp.StartingCell is { } startingCell)
@@ -492,11 +492,14 @@ public abstract class SharedRMCPowerSystem : EntitySystem
     private bool TryGetPowerArea(EntityUid ent, out Entity<RMCAreaPowerComponent> areaPower)
     {
         areaPower = default;
-        if (!_area.TryGetArea(ent, out var area))
+        if (!_area.TryGetArea(ent, out _, out _, out var areaEnt) ||
+            areaEnt is not { Valid: true })
+        {
             return false;
+        }
 
-        var areaPowerComp = EnsureComp<RMCAreaPowerComponent>(area);
-        areaPower = (area, areaPowerComp);
+        var areaPowerComp = EnsureComp<RMCAreaPowerComponent>(areaEnt.Value);
+        areaPower = (areaEnt.Value, areaPowerComp);
         return true;
     }
 
