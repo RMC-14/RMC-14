@@ -56,7 +56,7 @@
         RMCSkillVehicles: 2
     - type: MarineOrders
     - type: CMVendorUser
-      points: 135
+      points: 45
 
 - type: startingGear
   id: CMGearSeniorEnlistedAdvisor
