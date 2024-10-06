@@ -45,8 +45,6 @@
     - state: linenbin_full
       map: [ "fullLayer" ]
   - type: ItemSlots
-    insertSound: /Audio/Effects/rustle1.ogg
-    ejectSound: /Audio/Effects/rustle2.ogg
   - type: CMItemSlots
     count: 10
     slot:
@@ -54,6 +52,10 @@
       whitelist:
         tags:
         - Bedsheet
+      insertSound:
+        collection: storageRustle
+      ejectSound:
+        collection: storageRustle
   - type: Appearance
   - type: GenericVisualizer
     visuals:
