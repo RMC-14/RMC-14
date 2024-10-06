@@ -1,5 +1,3 @@
-#TODO: Start anchored, don't rotate sprite when dragged
-
 - type: entity
   parent: BaseStructureDynamic
   id: CMLinenBin
