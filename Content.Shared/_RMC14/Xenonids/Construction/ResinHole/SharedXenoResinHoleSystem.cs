@@ -119,8 +119,8 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
 
         var locationName = "Unknown";
 
-        if (_areas.TryGetArea(_transform.GetMoverCoordinates(ent), out var area))
-            locationName = Name(area);
+        if (_areas.TryGetArea(ent, out _, out var areaProto, out _))
+            locationName = areaProto.Name;
 
         var msg = Loc.GetString(args.message, ("location", locationName), ("type", GetTrapTypeName(ent)));
         _announce.AnnounceToHive(ent.Owner, hive, msg, color: ent.Comp.MessageColor);

@@ -27,8 +27,8 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
             return;
 
         var locationName = "Unknown";
-        if (_areas.TryGetArea(_transform.GetMoverCoordinates(ent), out var area))
-            locationName = Name(area);
+        if (_areas.TryGetArea(ent, out _, out var areaProto, out _))
+            locationName = areaProto.Name;
 
         if (HasComp<ParasiteSpentComponent>(ent))
             AnnounceSameHive(ent.Owner, Loc.GetString("rmc-xeno-parasite-announce-infect", ("xeno", ent.Owner), ("location", locationName)), color: ent.Comp.Color);
