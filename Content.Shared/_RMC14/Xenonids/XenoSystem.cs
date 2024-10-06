@@ -157,9 +157,8 @@ public sealed class XenoSystem : EntitySystem
         if (args.Target is not { } target)
             return;
 
-        // TODO RMC14 different hives
         // TODO RMC14 this still falsely plays the hit red flash effect on xenos if others are hit in a wide swing
-        if (_xenoFriendlyQuery.HasComp(target) ||
+        if ((_xenoFriendlyQuery.HasComp(target) && _hive.FromSameHive(xeno.Owner, target)) ||
             _mobState.IsDead(target))
         {
             args.Cancel();
