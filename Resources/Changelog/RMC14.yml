@@ -1,23 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed explosions destroying destroyable items inside backpacks, belts,
-      pouches, webbings, armors and helmets. Any items stored inside will no longer
-      be destroyed by an explosion.
-    type: Fix
-  - message: Helmets now have two slots for items instead of a single 3 space area,
-      allowing for two injectors, bandages, ointments or pill packets to fit inside,
-      for example.
-    type: Tweak
-  - message: 'Fixed small items fitting into helmets. Only tiny items and the following
-      items can be fit into helmets: auto injectors, pill packets, bandages, ointment,
-      flasks, scalpels, cigarettes, pizza slices, pens, crayons and flashlights,'
-    type: Fix
-  id: 289
-  time: '2024-07-08T02:26:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2868
-- author: DrSmugleaf
-  changes:
   - message: Fixed thick resin structures (the hivelord ones) being cheaper to build
       than intended. The thick wall now costs 170 plasma, up from 120. The thick membrane
       now costs 120, up from 95. The thick door now costs 145, up from 120.
@@ -4657,5 +4640,12 @@
   id: 788
   time: '2024-10-06T22:58:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4302
+- author: deltanedas
+  changes:
+  - message: Fixed tail stab looking like you hurt your fellow xenos on your client.
+    type: Fix
+  id: 789
+  time: '2024-10-06T23:26:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4295
 Name: RMC14
 Order: -1
