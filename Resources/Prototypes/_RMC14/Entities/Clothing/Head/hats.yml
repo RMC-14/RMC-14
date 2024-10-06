@@ -337,6 +337,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
   - type: SquadArmor
     layer: Helmet
+    slot: HEAD
     rsi:
       sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
       state: badge
