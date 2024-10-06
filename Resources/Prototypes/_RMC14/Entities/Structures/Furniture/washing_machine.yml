@@ -1,5 +1,6 @@
 - type: entity
   id: CMWashingMachine
+  parent: BaseStructure
   name: washing machine
   description: The WM-321 is a rugged, cylindrical powerhouse, equipped with a transparent window. This one is not operational.
   placement:
@@ -7,6 +8,10 @@
   components:
   - type: Physics
     bodyType: Static
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Anchorable
   - type: Fixtures
     fixtures:
       fix1:

@@ -8,6 +8,8 @@
   description: A linen bin. It looks rather cosy.
   components:
   - type: Anchorable
+  - type: Transform
+    anchored: true
   - type: InteractionOutline
   - type: Damageable
     damageContainer: Inorganic
@@ -33,6 +35,7 @@
             min: 1
             max: 1
   - type: Sprite
+    noRot: true
     sprite: _RMC14/Structures/Furniture/linen_bin.rsi
     layers:
     - state: linenbin_empty
@@ -42,6 +45,8 @@
     - state: linenbin_full
       map: [ "fullLayer" ]
   - type: ItemSlots
+    insertSound: /Audio/Effects/rustle1.ogg
+    ejectSound: /Audio/Effects/rustle2.ogg
   - type: CMItemSlots
     count: 10
     slot:
