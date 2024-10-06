@@ -24,7 +24,6 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
     [Dependency] protected readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly AreaSystem _areas = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _announce = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
