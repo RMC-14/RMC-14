@@ -1,0 +1,49 @@
+- type: constructionGraph
+  parent: RMC
+  id: RMCBed
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:DestroyEntity {}
+      edges:
+        - to: bed
+          completed:
+            - !type:SnapToGrid { }
+          steps:
+            - material: CMSteel
+              amount: 2
+              doAfter: 1
+    - node: bed
+      entity: CMBed
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: CMSheetMetal1
+              amount: 1
+          steps:
+            - tool: Screwing
+              doAfter: 1
+    - node: altBed
+      entity: RMCBedAlt
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: CMSheetMetal1
+              amount: 1
+          steps:
+            - tool: Screwing
+              doAfter: 1
+    - node: bedPsych
+      entity: RMCBedPsych
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: CMSheetMetal1
+              amount: 1
+          steps:
+            - tool: Screwing
+              doAfter: 1
