@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed thick resin structures (the hivelord ones) being cheaper to build
-      than intended. The thick wall now costs 170 plasma, up from 120. The thick membrane
-      now costs 120, up from 95. The thick door now costs 145, up from 120.
-    type: Fix
-  id: 290
-  time: '2024-07-08T02:26:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2873
-- author: DrSmugleaf
-  changes:
   - message: Fixed being able to eat req invoices and being able to put them into
       fax machines.
     type: Fix
@@ -4647,5 +4638,12 @@
   id: 789
   time: '2024-10-06T23:26:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4295
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the SEA not starting with 45 vendor points.
+    type: Fix
+  id: 790
+  time: '2024-10-06T23:34:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4315
 Name: RMC14
 Order: -1
