@@ -18,13 +18,19 @@
   - type: WieldDelay
   - type: AltFireMelee
   - type: MeleeWeapon
+    resetOnHandSelected: false
     attackRate: 1
     damage:
       types:
         Blunt: 5
+    soundHit:
+      collection: GenericHit
   - type: EmitSoundOnPickup
     sound:
       collection: RMCEquipGun
   - type: EmitSoundOnLand
     sound:
       collection: RMCRustleGun
+  - type: Gun
+    meleeCooldownOnShoot: false
+    resetOnHandSelected: false

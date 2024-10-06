@@ -281,6 +281,9 @@ public abstract class SharedDropshipSystem : EntitySystem
             var dropship = EnsureComp<DropshipComponent>(xform.ParentUid);
             dropship.Crashed = true;
             Dirty(xform.ParentUid, dropship);
+
+            var ev = new DropshipHijackStartEvent(xform.ParentUid);
+            RaiseLocalEvent(ref ev);
         }
     }
 

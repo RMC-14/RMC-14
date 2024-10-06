@@ -16,6 +16,9 @@
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - CMQM
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: ct
   special:
   - !type:AddComponentSpecial
     components:

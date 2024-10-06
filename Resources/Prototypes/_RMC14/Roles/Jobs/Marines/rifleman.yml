@@ -20,6 +20,9 @@
       points: 45
     - type: SquadArmorWearer
   hasIcon: false
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: private
 
 - type: startingGear
   id: CMGearRifleman

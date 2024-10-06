@@ -205,7 +205,9 @@ public sealed class CPRSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, performer, TimeSpan.FromSeconds(4), new CPRDoAfterEvent(), performer, target)
         {
             BreakOnMove = true,
-            NeedHand = true
+            NeedHand = true,
+            BlockDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent
         };
         _doAfter.TryStartDoAfter(doAfter);
 

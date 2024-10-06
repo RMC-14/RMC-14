@@ -7,7 +7,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Tools.Systems;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Repairable;
 
@@ -51,17 +50,14 @@ public sealed class RMCRepairableSystem : EntitySystem
             return;
         }
 
-        var delay = repairable.Comp.Delay;
-        var skill = _skills.GetSkill(args.User, repairable.Comp.Skill);
-        if (!repairable.Comp.SkillDelayMultipliers.TryGetValue(skill, out var multiplier))
-            multiplier = repairable.Comp.SkillDelayMultipliers[^1];
-
-        delay *= multiplier;
+        var delay = repairable.Comp.Delay * _skills.GetSkillDelayMultiplier(args.User, repairable.Comp.Skill);
 
         var ev = new RMCRepairableDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, repairable)
         {
-            BreakOnMove = true
+            BreakOnMove = true,
+            BlockDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))

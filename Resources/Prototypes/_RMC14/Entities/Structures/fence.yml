@@ -29,3 +29,5 @@
     graph: CMFence
     node: fenceMetal
   - type: RMCDropshipBlocked
+  - type: MinimapColor
+    color: "#8d2294ad"

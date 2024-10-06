@@ -1,0 +1,50 @@
+
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitProvost
+  name: provost uniform
+  description: The crisp uniform of a Provost Officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Provost/officer.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+
+- type: entity
+  parent: CMJumpsuitProvost
+  id: CMJumpsuitProvostCI
+  name: provost uniform # Not sure what this should be called
+  description: The crisp uniform of a Provost Officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Provost/ci.rsi
+
+- type: entity
+  parent: CMJumpsuitProvost
+  id: CMJumpsuitProvostSenior
+  name: provost senior uniform
+  description: The crisp uniform of a senior member of the Provost Office.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Provost/senior.rsi
+
+- type: entity
+  parent: CMJumpsuitProvost
+  id: CMJumpsuitProvostMarshal
+  name: provost marshal uniform
+  description: The crisp uniform of a Provost Marshal.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Provost/marshal.rsi
+
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: CMJumpsuitProvostAgent
+  name: special agent uniform
+  description: A modified Provost uniform, with its original insignia replaced by those of the Intelligence Service. Special Agents are often recruited from the upper echelons of law enforcement agencies in various armed forces. These recruits often take all their gear, uniform included with them and later modify them to include intelligence service insignia.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Provost/agent.rsi
+

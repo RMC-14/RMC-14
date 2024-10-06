@@ -14,6 +14,9 @@
   supervisors: cm-job-supervisors-ce
   accessGroups:
   - OT
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: ot
   special:
   - !type:AddComponentSpecial
     components:

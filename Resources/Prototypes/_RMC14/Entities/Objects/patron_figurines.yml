@@ -572,3 +572,47 @@
     state: honkzee_beezs
   - type: PatronFigurine
     id: f47ec457-4c44-4a3d-aad6-0d5a7c78f94e
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronVellaMorticianSakeao
+  name: Vella 'Mortician' Sakeao figurine
+  description: "Detachable SMG arm not included*"
+  components:
+  - type: Sprite
+    state: vella_mortician_sakeao
+  - type: PatronFigurine
+    id: 27ea1222-e729-4705-bda2-0ef1a5a6d1f3
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSeeks-to-Fight
+  name: Seeks-to-Fight figurine
+  description: "Navy is just the taxi service for the Marines."
+  components:
+  - type: Sprite
+    state: seeks-to-fight
+  - type: PatronFigurine
+    id: 518fe396-b199-4757-92ff-697fc527bbf1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronStares-at-Stars
+  name: Stares-at-Stars figurine
+  description: "Smells of citrus."
+  components:
+  - type: Sprite
+    state: stares-at-stars
+  - type: PatronFigurine
+    id: 78d5f741-5ccc-4e18-be40-74eb432071af
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRhettRainmanMcIndrick
+  name: Rhett 'Rainman' McIndrick figurine
+  description: Former Scout Sergeant McIndrick. "Where's the glory in waiting?"
+  components:
+  - type: Sprite
+    state: rhett_rainman_mcindrick
+  - type: PatronFigurine
+    id: a0091382-d6c6-4fb1-8cf6-cd4eb49ae4e1

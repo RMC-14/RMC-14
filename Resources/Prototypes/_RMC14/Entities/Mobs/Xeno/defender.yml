@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -6,7 +6,7 @@
   - RMCXenoSpeechSounds
   id: CMXenoDefender
   name: Defender
-  description: A alien with an armored crest.
+  description: An alien with an armored crest.
   components:
   - type: GhostRole
     name: cm-job-name-xeno-defender
@@ -41,7 +41,7 @@
     devolvesTo:
     - CMXenoLarva
   - type: XenoEvolution
-    max: 300
+    max: 200
     evolvesTo:
     - CMXenoWarrior
   - type: XenoPlasma
@@ -90,3 +90,7 @@
         - BulletImpassable
   - type: RMCXenoDamageVisuals
     prefix: defender
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: defender

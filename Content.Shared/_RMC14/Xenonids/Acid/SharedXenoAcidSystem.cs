@@ -24,8 +24,10 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+
     protected int CorrosiveAcidTickDelaySeconds;
-    protected string CorrosiveAcidDamageTypeStr = "Heat";
+    protected ProtoId<DamageTypePrototype> CorrosiveAcidDamageTypeStr = "Heat";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -34,16 +36,22 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         SubscribeLocalEvent<XenoAcidComponent, DoAfterAttemptEvent<XenoCorrosiveAcidDoAfterEvent>>(OnXenoCorrosiveAcidDoAfterAttempt);
         SubscribeLocalEvent<XenoAcidComponent, XenoCorrosiveAcidDoAfterEvent>(OnXenoCorrosiveAcidDoAfter);
 
-        Subs.CVar(_config, RMCCVars.RMCCorrosiveAcidTickDelaySeconds, obj =>
-        {
-            CorrosiveAcidTickDelaySeconds = obj;
-            OnXenoAcidSystemCVarsUpdated();
-        }, true);
-        Subs.CVar(_config, RMCCVars.RMCCorrosiveAcidDamageType, obj =>
-        {
-            CorrosiveAcidDamageTypeStr = obj;
-            OnXenoAcidSystemCVarsUpdated();
-        }, true);
+        Subs.CVar(_config,
+            RMCCVars.RMCCorrosiveAcidTickDelaySeconds,
+            obj =>
+            {
+                CorrosiveAcidTickDelaySeconds = obj;
+                OnXenoAcidSystemCVarsUpdated();
+            },
+            true);
+        Subs.CVar(_config,
+            RMCCVars.RMCCorrosiveAcidDamageType,
+            obj =>
+            {
+                CorrosiveAcidDamageTypeStr = obj;
+                OnXenoAcidSystemCVarsUpdated();
+            },
+            true);
     }
 
     private void OnXenoAcidSystemCVarsUpdated()
@@ -65,12 +73,15 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             return;
         }
 
+        args.Handled = true;
+
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.AcidDelay, new XenoCorrosiveAcidDoAfterEvent(args), xeno, args.Target)
         {
             BreakOnMove = true,
             RequireCanInteract = false,
             AttemptFrequency = AttemptFrequency.StartAndEnd
         };
+
         _doAfter.TryStartDoAfter(doAfter);
     }
 

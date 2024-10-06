@@ -22,7 +22,7 @@ public sealed class CMDoorSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private EntityQuery<DoorComponent> _doorQuery;

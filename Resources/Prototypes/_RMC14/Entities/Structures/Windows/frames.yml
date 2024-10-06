@@ -46,6 +46,8 @@
   - type: RMCWallExplosionDeletable
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: MinimapColor
+    color: "#8d2294ad"
 
 - type: entity
   parent: RMCBaseWindowFrame

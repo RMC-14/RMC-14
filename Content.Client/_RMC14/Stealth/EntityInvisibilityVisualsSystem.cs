@@ -22,7 +22,7 @@ public sealed class EntityInvisibilityVisualsSystem : EntitySystem
         if (!TryComp(ent, out SpriteComponent? sprite))
             return;
 
-        sprite.PostShader = _prototypes.Index<ShaderPrototype>("RMCInvisibile").InstanceUnique();
+        sprite.PostShader = _prototypes.Index<ShaderPrototype>("RMCInvisible").InstanceUnique();
     }
 
     private void OnShutdown(Entity<EntityTurnInvisibleComponent> ent, ref ComponentShutdown args)

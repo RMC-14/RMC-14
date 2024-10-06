@@ -35,6 +35,13 @@
         - LowImpassable
         layer:
         - MobLayer
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 185
+        layer:
+        - BulletImpassable
   - type: Xeno
     role: CMXenoRunner
     actionIds:
@@ -69,7 +76,7 @@
   - type: CMArmor
     explosionArmor: 10
   - type: XenoEvolution
-    max: 300
+    max: 200
     evolvesTo:
     - CMXenoLurker
   - type: XenoZoom
@@ -89,3 +96,7 @@
     size: SmallXeno
   - type: RMCXenoDamageVisuals
     prefix: runner
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: runner
