@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fix the patron perks window initially showing the lobby message tab even
-      if the user's tier doesn't have that perk.
-    type: Fix
-  id: 287
-  time: '2024-07-07T11:11:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2869
-- author: DrSmugleaf
-  changes:
   - message: Fixed barbed wire damage not piercing through xeno armor. It now always
       deals the same amount of damage, regardless of armor.
     type: Fix
@@ -4656,5 +4648,13 @@
   id: 786
   time: '2024-10-05T22:14:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4275
+- author: deltanedas
+  changes:
+  - message: Wehny is not real. Rouny is not real. Ravager is not real. Burrower is
+      not real.
+    type: Fix
+  id: 787
+  time: '2024-10-06T01:39:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4292
 Name: RMC14
 Order: -1
