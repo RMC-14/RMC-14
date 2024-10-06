@@ -1,17 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed barbed wire damage not piercing through xeno armor. It now always
-      deals the same amount of damage, regardless of armor.
-    type: Fix
-  - message: Fixed barbed wire damage being too low. It now deals 10 damage, up from
-      6.
-    type: Fix
-  id: 288
-  time: '2024-07-08T02:26:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2872
-- author: DrSmugleaf
-  changes:
   - message: Fixed explosions destroying destroyable items inside backpacks, belts,
       pouches, webbings, armors and helmets. Any items stored inside will no longer
       be destroyed by an explosion.
@@ -4656,5 +4645,17 @@
   id: 787
   time: '2024-10-06T01:39:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4292
+- author: DrSmugleaf
+  changes:
+  - message: Fix the dropship landing rotated at Trijent Dam's LZ2.
+    type: Fix
+  - message: Fix the Liaison's escape pod crashing if launched early.
+    type: Fix
+  - message: Fix a visual bug with laser designators always saying that you can't
+      use them there.
+    type: Fix
+  id: 788
+  time: '2024-10-06T22:58:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4302
 Name: RMC14
 Order: -1
