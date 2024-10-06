@@ -36,6 +36,7 @@
     tier: 3
     hudOffset: 0,0.1
     unlockAt: 900 # 15 minutes
+    hidden: true # TODO RMC: remove once ravager is implemented
   - type: XenoDevolve
     devolvesTo:
     - CMXenoLurker

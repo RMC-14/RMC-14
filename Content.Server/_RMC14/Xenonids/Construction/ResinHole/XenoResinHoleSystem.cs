@@ -10,7 +10,6 @@ using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Hands.Components;
 using Content.Shared.Maps;
@@ -23,6 +22,7 @@ using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Stunnable;
@@ -35,7 +35,6 @@ using Robust.Shared.Player;
 using static Content.Shared.Physics.CollisionGroup;
 using Content.Shared.Examine;
 using Content.Shared.Standing;
-
 
 namespace Content.Server._RMC14.Xenonids.Construction.ResinHole;
 
@@ -224,7 +223,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         }
 
         var para = Spawn(resinHole.Comp.TrapPrototype);
-        _hive.SetSameHive(para, resinHole.Owner);
+        _hive.SetSameHive(resinHole.Owner, para);
 
         if (!_rmcHands.IsPickupByAllowed(para, args.User) || !_hands.TryPickupAnyHand(args.User, para))
         {
@@ -302,15 +301,13 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
     private void OnXenoResinHoleTakeDamage(Entity<XenoResinHoleComponent> resinHole, ref DamageChangedEvent args)
     {
-        if (args.Origin is {} origin && _hive.FromSameHive(origin, resinHole.Owner))
-        {
-            if (resinHole.Comp.TrapPrototype != null && args.DamageDelta != null)
-                args.DamageDelta.ClampMax(0);
+        if (args.Origin is { } origin && _hive.FromSameHive(origin, resinHole.Owner))
             return;
-        }
+
         //TODO Flames should make the trigger message never happen but destroyed will
         if (args.DamageDelta == null)
             return;
+
         var destroyed = args.Damageable.TotalDamage + args.DamageDelta.GetTotal() > resinHole.Comp.TotalHealth;
         ActivateTrap(resinHole, destroyed);
     }
@@ -494,17 +491,17 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             _hive.SetSameHive(resinHole.Owner, trapEntity);
         }
 
-		string msg = destroyed ? "cm-xeno-construction-resin-hole-destroyed" : "rmc-xeno-construction-resin-hole-activate";
+        string msg = destroyed ? "cm-xeno-construction-resin-hole-destroyed" : "rmc-xeno-construction-resin-hole-activate";
 
-		var ev = new XenoResinHoleActivationEvent(msg);
-		RaiseLocalEvent(ent, ev);
+        var ev = new XenoResinHoleActivationEvent(msg);
+        RaiseLocalEvent(ent, ev);
 
-		comp.TrapPrototype = null;
-		Dirty(resinHole);
-		_appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
+        comp.TrapPrototype = null;
+        Dirty(resinHole);
+        _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
 
-		return true;
-	}
+        return true;
+    }
 
     private bool IsAcidPrototype(string proto, out int level)
     {
