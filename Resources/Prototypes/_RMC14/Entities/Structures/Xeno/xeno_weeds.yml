@@ -75,7 +75,6 @@
         weed14: ""
     - 0:
         weed15: ""
-  - type: XenoFriendly
   - type: Damageable
     damageContainer: StructuralXeno
   - type: Destructible
@@ -236,7 +235,6 @@
     base: weedwall
     mode: Corners
   - type: XenoNestSurface
-  - type: XenoFriendly
   - type: Damageable
     damageContainer: StructuralXeno
   - type: Destructible
