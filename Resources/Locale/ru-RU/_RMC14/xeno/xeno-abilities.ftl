@@ -1,5 +1,5 @@
 ﻿# Plasma
-cm-xeno-not-enough-plasma = You don't have enough plasma!
+cm-xeno-not-enough-plasma = Нехватает плазмы!
 
 # Construction
 cm-xeno-choose-resin-structure = Выбрать структуру
@@ -12,21 +12,21 @@ cm-xeno-cant-build-in-self = You can't build structures that close!
 cm-xeno-unique-exists = There's already a {$choice} built!
 
 # Evolve
-cm-xeno-available-evolutions = Available Evolutions
-cm-xeno-evolution-start = You begin to twist and contort.
-cm-xeno-evolution-end = You emerge in a greater form from the husk of your old body. For the hive!
-cm-xeno-evolution-ready = Our carapace crackles and our tendons strengthen. We are ready to evolve!
-cm-xeno-evolution-failed-already-have = There already is a living {$prototype}!
-cm-xeno-evolution-failed-hive-shaken = The Hive is shaken by the death of the last Queen. We can't find the strength to evolve.
-cm-xeno-evolution-failed-cannot-support = The Hive cannot support this caste yet!
-cm-xeno-evolution-failed-hive-full = The hive cannot support another Tier {$tier}, wait for either more aliens to be born or someone to die.
-rmc-xeno-evolution-devolve-title = De-Evolve To
-rmc-xeno-evolution-devolve = You devolve to {$xeno}!
-rmc-xeno-evolution-cant-evolve-damaged = We must be at full health to evolve.
-rmc-xeno-evolution-cant-devolve-damaged = We are too weak to deevolve, we must regain our health first.
-rmc-xeno-evolution-cant-evolve-recent-queen-death-minutes = We must wait about {$minutes} minutes and {$seconds} seconds for the hive to recover from the previous Queen's death.
-rmc-xeno-evolution-cant-evolve-recent-queen-death-seconds = We must wait about {$seconds} seconds for the hive to recover from the previous Queen's death.
-rmc-xeno-evolution-failed-bad-location = We can't evolve here.
+cm-xeno-available-evolutions = Эволюции
+cm-xeno-evolution-start = Вы начинаете скидывать экзоскелет.
+cm-xeno-evolution-end = Вы стали более сильным и поможете улью в новой форме!
+cm-xeno-evolution-ready = Ваш экзоскелет трещит и вы хотите скинуть его!
+cm-xeno-evolution-failed-already-have = Уже есть живая {$prototype}!
+cm-xeno-evolution-failed-hive-shaken = Мы оплакиваем смерть прошлой королевы. Мы не можем пока эволюционировать.
+cm-xeno-evolution-failed-cannot-support = Улей не способен поддерживать данную касту!
+cm-xeno-evolution-failed-hive-full = Улей не способен поддерживать большее количество {$tier} уровня, нужно больше ксенов.
+rmc-xeno-evolution-devolve-title = Деградировать
+rmc-xeno-evolution-devolve = Вы деградировали в {$xeno}!
+rmc-xeno-evolution-cant-evolve-damaged = Надо быть здоровым для эволюции.
+rmc-xeno-evolution-cant-devolve-damaged = Надо быть целым для дегродации.
+rmc-xeno-evolution-cant-evolve-recent-queen-death-minutes = Мы будем горевать ещё {$minutes} минут и {$seconds} секунд о прошлой королеве.
+rmc-xeno-evolution-cant-evolve-recent-queen-death-seconds = Мы будем горевать ещё {$seconds} секунд о прошлой королеве.
+rmc-xeno-evolution-failed-bad-location = Плохое место для эволюции.
 
 # Fortify
 cm-xeno-fortify-cant-headbutt = You can't headbutt while fortifying!
@@ -100,7 +100,7 @@ cm-xeno-plasma-cannot-self = You can't transfer plasma to yourself!
 cm-xeno-plasma-other-max-zero = {$target} doesn't have any use for plasma!
 
 # Watch
-cm-xeno-watch = Watch Xeno
+cm-xeno-watch = Посмотреть чужим взглядом
 
 # Charge Spit
 cm-xeno-charge-spit = Our next spit will be stronger.

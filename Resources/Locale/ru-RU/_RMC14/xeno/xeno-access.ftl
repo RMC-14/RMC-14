@@ -1,2 +1,2 @@
-﻿cm-access-xeno = Xeno
-cm-access-xeno-queen = Xeno Queen
+﻿cm-access-xeno = ксено
+cm-access-xeno-queen = королева ксено
