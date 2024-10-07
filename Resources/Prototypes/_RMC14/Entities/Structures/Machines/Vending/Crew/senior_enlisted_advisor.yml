@@ -40,7 +40,7 @@
       - id: RMCPouchGeneralLarge
       - id: RMCPouchMagazineLarge
       - id: RMCPouchMagazinePistolLarge
-      - id: RMCPouchShotgun #Change to Large when released
+      - id: RMCPouchShotgunLarge
       #Medical Kit Pouch
       - id: RMCPouchPistol
       - id: RMCPouchSling

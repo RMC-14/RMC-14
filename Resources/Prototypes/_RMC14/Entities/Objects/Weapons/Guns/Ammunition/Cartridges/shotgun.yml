@@ -19,7 +19,7 @@
   - type: Tag
     tags:
     - Cartridge
-    - CMShellShotgun
+    - RMCShellShotgun
   - type: Appearance
 
 - type: entity
@@ -48,7 +48,7 @@
   - type: Tag
     tags:
     - Cartridge
-    - CMShellShotgun
+    - RMCShellShotgun
     - RMCShellShotgunBuckshot
 
 - type: stack
@@ -84,7 +84,7 @@
   - type: Tag
     tags:
     - Cartridge
-    - CMShellShotgun
+    - RMCShellShotgun
     - RMCShellShotgunSlugs
 
 - type: stack
@@ -120,7 +120,7 @@
   - type: Tag
     tags:
     - Cartridge
-    - CMShellShotgun
+    - RMCShellShotgun
     - RMCShellShotgunIncendiary
 
 - type: stack
@@ -156,7 +156,7 @@
   - type: Tag
     tags:
     - Cartridge
-    - CMShellShotgun
+    - RMCShellShotgun
     - RMCShellShotgunBeanbag
 
 - type: stack
@@ -192,7 +192,7 @@
   - type: Tag
     tags:
     - Cartridge
-    - CMShellShotgun
+    - RMCShellShotgun
     - RMCShellShotgunFlechette
 
 - type: stack
@@ -228,7 +228,7 @@
   - type: Tag
     tags:
     - Cartridge
-    - CMShellShotgun
+    - RMCShellShotgun
     - RMCShellShotgunIncendiaryBuckshot
 
 - type: stack
@@ -239,7 +239,7 @@
   maxCount: 5
 
 - type: Tag
-  id: CMShellShotgun
+  id: RMCShellShotgun
 
 - type: Tag
   id: RMCShellShotgunBuckshot

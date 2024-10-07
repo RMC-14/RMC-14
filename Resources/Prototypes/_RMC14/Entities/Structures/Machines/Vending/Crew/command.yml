@@ -149,7 +149,7 @@
       - id: RMCPouchGeneralLarge
         recommended: true
       - id: RMCPouchMagazineLarge
-      #- id: RMCPouchShotgunLarge # TODO RMC14 Large Shotgun Pouch
+      - id: RMCPouchShotgunLarge
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMedical
       - id: RMCPouchMedkit
@@ -286,7 +286,7 @@
         recommended: true
       - id: RMCPouchGeneralLarge
       - id: RMCPouchMagazineLarge
-      #- id: RMCPouchShotgunLarge # TODO RMC14 Large Shotgun Pouch
+      - id: RMCPouchShotgunLarge
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMedical
       - id: RMCPouchMedkit
@@ -434,7 +434,7 @@
         points: 5
       - id: RMCFlashlight
         points: 1
-      
+
 # Commanding Officer #
 
 # Clothing Vend
@@ -576,7 +576,7 @@
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMagazineLarge
       - id: RMCPouchPistol
-      #- id: RMCPouchShotgunLarge # TODO RMC14 Large Shotgun Pouch
+      - id: RMCPouchShotgunLarge
       - id: RMCPouchToolsFill
 
 # Weapon Vend
