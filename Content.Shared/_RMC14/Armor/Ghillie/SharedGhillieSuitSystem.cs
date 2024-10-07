@@ -167,25 +167,28 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
             EnsureComp<EntityIFFComponent>(user);
             RemCompDeferred<RMCNightVisionVisibleComponent>(user);
         }
-        else
+
+        if (!enabling && TryComp<EntityActiveInvisibleComponent>(user, out var invisible))
         {
-            turnInvisible.Enabled = false;
+            invisible.Opacity = 1;
+            Dirty(user, invisible);
 
             comp.Enabled = false;
             Dirty(ent);
 
-            EnsureComp<RMCNightVisionVisibleComponent>(user);
-
-            RemCompDeferred<RMCPassiveStealthComponent>(user);
-            RemCompDeferred<EntityActiveInvisibleComponent>(user);
-            RemCompDeferred<EntityIFFComponent>(user);
-
+            turnInvisible.Enabled = false;
             turnInvisible.UncloakTime = _timing.CurTime;
             Dirty(user, turnInvisible);
 
             var deactivatedPopupSelf = Loc.GetString("rmc-ghillie-fail-self");
             var deactivatedPopupOthers = Loc.GetString("rmc-ghillie-fail-others", ("user", user));
             _popup.PopupPredicted(deactivatedPopupSelf, deactivatedPopupOthers, user, user, PopupType.MediumCaution);
+
+            EnsureComp<RMCNightVisionVisibleComponent>(user);
+
+            RemCompDeferred<RMCPassiveStealthComponent>(user);
+            RemCompDeferred<EntityActiveInvisibleComponent>(user);
+            RemCompDeferred<EntityIFFComponent>(user);
         }
     }
 
