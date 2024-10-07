@@ -56,7 +56,7 @@
 - type: stack
   id: RMCShellShotgunBuckshot
   name: handful of buckshot shell
-  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: buckshot_shell }
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: buckshot_shell_1 }
   spawn: CMShellShotgunBuckshot
   maxCount: 5
 
@@ -92,7 +92,7 @@
 - type: stack
   id: RMCShellShotgunSlug
   name: handful of shotgun slugs
-  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: slug_shell }
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: slug_shell_1 }
   spawn: CMShellShotgunSlugs
   maxCount: 5
 
@@ -128,7 +128,7 @@
 - type: stack
   id: RMCShellShotgunIncendiary
   name: handful of incendiary slugs
-  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: incendiary_slug }
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: incendiary_slug_1 }
   spawn: CMShellShotgunIncendiary
   maxCount: 5
 
@@ -164,7 +164,7 @@
 - type: stack
   id: RMCShellShotgunBeanbag
   name: handful of beanbag slugs
-  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: beanbag_slug }
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: beanbag_slug_1 }
   spawn: CMShellShotgunBeanbag
   maxCount: 5
 
@@ -200,7 +200,7 @@
 - type: stack
   id: RMCShellShotgunFlechette
   name: handful of flechette shells
-  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: flechette }
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: flechette_1 }
   spawn: CMShellShotgunFlechette
   maxCount: 5
 
@@ -236,7 +236,7 @@
 - type: stack
   id: RMCShellShotgunIncendiaryBuckshot
   name: handful of incendiary buckshot shells
-  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: incen_buckshot }
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: incen_buckshot_1 }
   spawn: CMShellShotgunIncendiaryBuckshot
   maxCount: 5
 
