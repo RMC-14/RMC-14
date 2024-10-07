@@ -8,6 +8,8 @@
   - type: Anchorable
   - type: Transform
     anchored: true
+  - type: Physics
+    bodyType: Static
   - type: InteractionOutline
   - type: Damageable
     damageContainer: Inorganic

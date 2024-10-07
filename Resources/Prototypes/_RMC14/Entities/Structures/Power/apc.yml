@@ -157,6 +157,9 @@
   components:
   - type: RMCApc
     startingCell: RMCPowerCellHigh
+  - type: ContainerContainer
+    containers:
+      rmc_apc_power_cell: !type:ContainerSlot
 
 # APCs in use
 - type: entity

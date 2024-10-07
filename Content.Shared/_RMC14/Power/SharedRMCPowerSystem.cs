@@ -77,6 +77,12 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
     private void OnApcUpdate<T>(Entity<RMCApcComponent> ent, ref T args)
     {
+        if (!TryComp(ent, out MetaDataComponent? metaData) ||
+            metaData.EntityLifeStage < EntityLifeStage.MapInitialized)
+        {
+            return;
+        }
+
         ToUpdate.Add(ent);
 
         if (_net.IsClient)
