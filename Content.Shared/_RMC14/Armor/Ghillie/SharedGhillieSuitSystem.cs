@@ -243,10 +243,6 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
 
             invis.Opacity = 1;
             Dirty(user, invis);
-
-            var deactivatedPopupSelf = Loc.GetString("rmc-ghillie-fail-self");
-            var deactivatedPopupOthers = Loc.GetString("rmc-ghillie-fail-others", ("user", user));
-            _popup.PopupPredicted(deactivatedPopupSelf, deactivatedPopupOthers, user, user, PopupType.MediumCaution);
         }
     }
 }
