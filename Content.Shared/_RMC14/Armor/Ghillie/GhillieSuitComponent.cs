@@ -23,7 +23,7 @@ public sealed partial class GhillieSuitComponent : Component
     public TimeSpan UseDelay = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan InvisibilityDelay = TimeSpan.FromSeconds(5);
+    public TimeSpan InvisibilityDelay = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]
     public EntityWhitelist Whitelist = new();

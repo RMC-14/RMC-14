@@ -11,4 +11,4 @@
     useDelay: 8
     priority: -9
     itemIconStyle: NoItem
-    event: !type:ToggleActionEvent
+    event: !type:GhillieSuitPreparePositionActionEvent

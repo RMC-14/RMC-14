@@ -44,6 +44,7 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
 
         SubscribeLocalEvent<RMCPassiveStealthComponent, VaporHitEvent>(OnVaporHit);
         SubscribeLocalEvent<RMCPassiveStealthComponent, MoveInputEvent>(OnMove);
+        
         SubscribeLocalEvent<GunShotEvent>(OnGunShot);
     }
 
@@ -214,7 +215,7 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
         ToggleInvisibility(suit.Value, user, false);
     }
 
-    private void OnGunShot(ref GunShotEvent args)
+    private void OnGunShot(GunShotEvent args)
     {
         var user = args.User;
         var suit = FindSuit(user);
