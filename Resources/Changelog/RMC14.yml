@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: diraven
-  changes:
-  - message: Fixed metal barricades and sandbags damage thresholds for them to look
-      more progressively more broken rather then almost fully destroyed after a slightest
-      hit.
-    type: Fix
-  id: 297
-  time: '2024-07-08T03:48:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2881
 - author: ShadowCommander
   changes:
   - message: Added unfolding magazine boxes into cardboard sheets.
@@ -4651,5 +4642,12 @@
   id: 796
   time: '2024-10-07T04:39:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4323
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the half-second delay to taking items out of storage.
+    type: Fix
+  id: 797
+  time: '2024-10-07T05:26:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4324
 Name: RMC14
 Order: -1
