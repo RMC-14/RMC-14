@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed microwaves being invincible.
-    type: Fix
-  id: 292
-  time: '2024-07-08T03:43:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2888
-- author: DrSmugleaf
-  changes:
   - message: Fixed crushers, defenders, runners and other xenonid castes sometimes
       being able to charge or leap through barricades.
     type: Fix
@@ -4644,5 +4637,23 @@
   id: 791
   time: '2024-10-07T02:35:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4301
+- author: DrSmugleaf
+  changes:
+  - message: Added handfuls of shotgun shells. These are bundles of five shells which
+      can be used to quickly reload a shotgun, stored in the shotgun rig, shotgun
+      pouch, armor and regular ammo load rig.
+    type: Add
+  - message: Added the large shotgun shell pouch, available to squad leaders, some
+      command roles, pilots. Requisitions also starts with one in their vendor.
+    type: Add
+  - message: Updated the shotgun shell pouch and shotgun shell loading rig to fit
+      more handfuls instead of one or a few boxes.
+    type: Tweak
+  - message: Boxes of shotgun shells now properly eject a handful of shells when clicked
+      in hand with your other empty hand, and no longer load shotguns directly.
+    type: Tweak
+  id: 792
+  time: '2024-10-07T02:43:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4316
 Name: RMC14
 Order: -1
