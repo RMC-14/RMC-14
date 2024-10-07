@@ -20,7 +20,7 @@
   id: CMVendorTool
   startingInventory:
     RMCFlashlight: 4
-    ClothingHeadHatHardhatBlue: 4
+    RMCHardhatBlue: 4
     CMHandsInsulated: 4
     CMBeltUtility: 4
     ClothingEyesGlassesMeson: 4

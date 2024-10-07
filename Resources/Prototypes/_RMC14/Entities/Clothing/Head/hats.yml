@@ -34,6 +34,17 @@
 
 - type: entity
   parent: CMHeadBeret
+  id: CMHeadBeretEngineer
+  name: engineering beret
+  description: A beret with the engineering insignia emblazoned on it. For engineers that are more inclined towards style than safety.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_engi.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_engi.rsi
+
+- type: entity
+  parent: CMHeadBeret
   id: CMHeadBeretWO
   name: WO's beret
   components:
