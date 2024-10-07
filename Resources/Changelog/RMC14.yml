@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed being able to drop equipped items to the ground while nested.
-    type: Fix
-  id: 296
-  time: '2024-07-08T03:45:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2890
 - author: diraven
   changes:
   - message: Fixed metal barricades and sandbags damage thresholds for them to look
@@ -4649,5 +4642,14 @@
   id: 795
   time: '2024-10-07T04:21:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4321
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the underbarrel shotgun attachment doing too little damage to xeno
+      resin structures. It will now properly one shot both resin door types with one
+      buckshot shot at point-blank, and three shot thick resin walls.
+    type: Fix
+  id: 796
+  time: '2024-10-07T04:39:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4323
 Name: RMC14
 Order: -1
