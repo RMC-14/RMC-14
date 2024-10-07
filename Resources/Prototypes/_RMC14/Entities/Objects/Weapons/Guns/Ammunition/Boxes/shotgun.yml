@@ -1,19 +1,16 @@
 - type: entity
   abstract: true
-  parent: AmmoProviderShotgunShell
+  parent: BaseStorageItem
   id: RMCBoxShotgunBase
   name: box of shotgun shells
   components:
   - type: Item
     size: Large
-  - type: BallisticAmmoProvider
-    proto: CMShellShotgunBase
-    capacity: 25
-    soundInsert:
-      collection: CMShotgunLoad
+  - type: Storage
+    grid:
+    - 0,0,9,1 # 5 slots
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/shotgun_boxes.rsi
-  - type: CMAmmoBox
   - type: Appearance
   - type: Tag
     tags:
@@ -22,6 +19,8 @@
     blacklist:
       components:
       - Xeno
+  - type: CMStorageVisualizer
+    storageEmpty: empty
 
 - type: Tag
   id: RMCBoxShotgunShells
@@ -32,13 +31,20 @@
   name: box of buckshot shells
   description: A box filled with buckshot spread shotgun shells. 12 Gauge.
   components:
-  - type: BallisticAmmoProvider
-    proto: CMShellShotgunBuckshot
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCShellShotgunBuckshot
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 5
   - type: Sprite
     layers:
-    - state: buckshot_e
     - state: buckshot
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+      map: [ "full" ]
+    - state: buckshot_e
+      map: [ "empty" ]
 
 - type: entity
   parent: RMCBoxShotgunBase
@@ -46,13 +52,20 @@
   name: box of shotgun slugs
   description: A box filled with heavy shotgun shells. A timeless classic. 12 Gauge.
   components:
-  - type: BallisticAmmoProvider
-    proto: CMShellShotgunSlugs
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCShellShotgunSlugs
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunSlugs
+      amount: 5
   - type: Sprite
     layers:
-    - state: slugs_e
     - state: slugs
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+      map: [ "full" ]
+    - state: slugs_e
+      map: [ "empty" ]
 
 - type: entity
   parent: RMCBoxShotgunBase
@@ -60,13 +73,20 @@
   name: box of incendiary slugs
   description: A box filled with self-detonating incendiary shotgun rounds. 12 Gauge.
   components:
-  - type: BallisticAmmoProvider
-    proto: CMShellShotgunIncendiary
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCShellShotgunIncendiary
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunIncendiary
+      amount: 5
   - type: Sprite
     layers:
-    - state: incendiary_e
     - state: incendiary
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+      map: [ "full" ]
+    - state: incendiary_e
+      map: [ "empty" ]
 
 - type: entity
   parent: RMCBoxShotgunBase
@@ -74,13 +94,20 @@
   name: box of beanbag slugs
   description: A box filled with beanbag shotgun shells used for non-lethal crowd control. 12 Gauge.
   components:
-  - type: BallisticAmmoProvider
-    proto: CMShellShotgunBeanbag
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCShellShotgunBeanbag
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBeanbag
+      amount: 5
   - type: Sprite
     layers:
-    - state: beanbag_e
     - state: beanbag
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+      map: [ "full" ]
+    - state: beanbag_e
+      map: [ "empty" ]
 
 - type: entity
   parent: RMCBoxShotgunBase
@@ -88,13 +115,20 @@
   name: box of flechette shells
   description: A box filled with flechette shotgun shells. 12 Gauge.
   components:
-  - type: BallisticAmmoProvider
-    proto: CMShellShotgunFlechette
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCShellShotgunFlechette
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunFlechette
+      amount: 5
   - type: Sprite
     layers:
-    - state: flechette_e
     - state: flechette
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+      map: [ "full" ]
+    - state: flechette_e
+      map: [ "empty" ]
 
 - type: entity
   parent: RMCBoxShotgunBase
@@ -102,10 +136,17 @@
   name: box of incendiary buckshots
   description: A box filled with self-detonating buckshot incendiary shotgun rounds. 12 Gauge.
   components:
-  - type: BallisticAmmoProvider
-    proto: CMShellShotgunIncendiaryBuckshot
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCShellShotgunIncendiaryBuckshot
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunIncendiaryBuckshot
+      amount: 5
   - type: Sprite
     layers:
-    - state: incendiarybuck_e
     - state: incendiarybuck
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+      map: [ "full" ]
+    - state: incendiarybuck_e
+      map: [ "empty" ]
