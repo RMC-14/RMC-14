@@ -8,6 +8,7 @@
   - RMCMarineLawDefinitions
   - RMCMarineLawProcedures
   - RMCMarineLawCrimes
+  - RMCMarineLawPrisonerRights
 
 - type: guideEntry
   parent: RMC
@@ -138,9 +139,13 @@
   text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCrimesPrecautionary.xml"
   priority: 5
 
-
-
 # Prisoner Rights
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawPrisonerRights
+  name: rmc-guide-entry-marine-law-prisoner-rights
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawPrisonerRights.xml"
+  priority: 3
 
 # Appeals
 
