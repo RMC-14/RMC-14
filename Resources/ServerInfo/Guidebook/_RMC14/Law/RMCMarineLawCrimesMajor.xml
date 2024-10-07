@@ -106,6 +106,7 @@
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
         Killing someone without malicious intent. Manslaughter may be applied if someone dies as a result of a fight where the intent was not to kill.
+        \nThis also includes failing to revive someone without a reasonable attempt, not executed by the execution procedure.
       </Box>
     </ColorBox>
     <ColorBox>

@@ -45,6 +45,7 @@
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
         Killing someone with malicious intent. This includes Synthetic units. The charge applies even if the victim is later revived. Executions are only authorized as outlined in the Execution Procedure.
+        \nThis also includes refusing or preventing to revive anyone not executed by the execution procedure.
       </Box>
     </ColorBox>
 
