@@ -288,10 +288,10 @@
     cycleable: true
     whitelist:
       tags:
-      - CMShellShotgunSlugs
-      - CMShellShotgunIncendiary
-      - CMShellShotgunBeanbag
-      - CMShellShotgunFlechette
+      - RMCShellShotgunSlugs
+      - RMCShellShotgunIncendiary
+      - RMCShellShotgunBeanbag
+      - RMCShellShotgunFlechette
     proto: CMShellShotgunSlugs
     capacity: 3 #It's a lovely triple barrel
     soundInsert:
