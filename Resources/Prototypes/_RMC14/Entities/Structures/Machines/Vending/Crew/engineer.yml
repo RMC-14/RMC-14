@@ -36,10 +36,10 @@
     - name: Suit
       choices: { CMSuit: 1 }
       entries:
-      - RMCHazardVestBlack
-      - RMCHazardVestBlue
-      - RMCHazardVest
-      - RMCHazardVestYellow
+      - id: RMCHazardVestBlack
+      - id: RMCHazardVestBlue
+      - id: RMCHazardVest
+      - id: RMCHazardVestYellow
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
