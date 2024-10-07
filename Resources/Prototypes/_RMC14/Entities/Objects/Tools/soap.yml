@@ -76,6 +76,10 @@
   - type: Residue
     residueAdjective: residue-slippery
     residueColor: residue-red
+  - type: FlavorProfile
+    flavors:
+      - clean
+      - punishment
     
 - type: entity
   name: soap
