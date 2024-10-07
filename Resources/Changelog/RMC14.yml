@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed crushers, defenders, runners and other xenonid castes sometimes
-      being able to charge or leap through barricades.
-    type: Fix
-  id: 293
-  time: '2024-07-08T03:43:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2889
-- author: DrSmugleaf
-  changes:
   - message: Fixed marines not being able to take out their boot knife to attack xenonids
       while devoured.
     type: Fix
@@ -4655,5 +4647,12 @@
   id: 792
   time: '2024-10-07T02:43:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4316
+- author: DrSmugleaf
+  changes:
+  - message: Fixed error sprites for some window frames in Trijent Dam.
+    type: Fix
+  id: 793
+  time: '2024-10-07T03:33:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4322
 Name: RMC14
 Order: -1
