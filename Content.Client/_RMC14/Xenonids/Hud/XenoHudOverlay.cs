@@ -23,6 +23,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Robust.Shared.Utility.SpriteSpecifier;
+using Content.Shared._RMC14.Stealth;
 
 namespace Content.Client._RMC14.Xenonids.Hud;
 
@@ -50,6 +51,7 @@ public sealed class XenoHudOverlay : Overlay
     private readonly EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
     private readonly EntityQuery<TransformComponent> _xformQuery;
     private readonly EntityQuery<XenoShieldComponent> _xenoShieldQuery;
+    private readonly EntityQuery<EntityActiveInvisibleComponent> _invisQuery;
 
     private readonly ShaderInstance _shader;
 
@@ -78,6 +80,7 @@ public sealed class XenoHudOverlay : Overlay
         _xenoPlasmaQuery = _entity.GetEntityQuery<XenoPlasmaComponent>();
         _xformQuery = _entity.GetEntityQuery<TransformComponent>();
         _xenoShieldQuery = _entity.GetEntityQuery<XenoShieldComponent>();
+        _invisQuery = _entity.GetEntityQuery<EntityActiveInvisibleComponent>();
 
         _shader = _prototype.Index<ShaderPrototype>("unshaded").Instance();
         ZIndex = 1;
@@ -180,6 +183,9 @@ public sealed class XenoHudOverlay : Overlay
             if (_xenoParasiteQuery.HasComp(uid))
                 continue;
 
+            if (_invisQuery.HasComp(uid))
+                continue;
+
             var bounds = sprite.Bounds;
             var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
 
@@ -212,6 +218,9 @@ public sealed class XenoHudOverlay : Overlay
                 continue;
 
             if (_container.IsEntityOrParentInContainer(uid, xform: xform))
+                continue;
+
+            if (_invisQuery.HasComp(uid))
                 continue;
 
             var bounds = sprite.Bounds;
@@ -247,6 +256,9 @@ public sealed class XenoHudOverlay : Overlay
                 continue;
 
             if (_container.IsEntityOrParentInContainer(uid, xform: xform))
+                continue;
+
+            if (_invisQuery.HasComp(uid))
                 continue;
 
             var bounds = sprite.Bounds;

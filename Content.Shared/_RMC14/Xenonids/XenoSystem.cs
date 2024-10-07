@@ -42,6 +42,7 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
@@ -96,6 +97,7 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, DamageModifyEvent>(OnXenoDamageModify);
         SubscribeLocalEvent<XenoComponent, RefreshMovementSpeedModifiersEvent>(OnXenoRefreshSpeed);
         SubscribeLocalEvent<XenoComponent, MeleeHitEvent>(OnXenoMeleeHit);
+        SubscribeLocalEvent<XenoComponent, HiveChangedEvent>(OnHiveChanged);
 
         Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
@@ -222,6 +224,12 @@ public sealed class XenoSystem : EntitySystem
         }
     }
 
+    private void OnHiveChanged(Entity<XenoComponent> ent, ref HiveChangedEvent args)
+    {
+        // leaving the hive makes you lose container vision post hijack :)
+        _nightVision.SetSeeThroughContainers(ent.Owner, args.Hive?.Comp.SeeThroughContainers ?? false);
+    }
+
     private void UpdateXenoSpeedMultiplier(float speed)
     {
         _xenoSpeedMultiplier = speed;
@@ -236,36 +244,6 @@ public sealed class XenoSystem : EntitySystem
     public void MakeXeno(Entity<XenoComponent?> xeno)
     {
         EnsureComp<XenoComponent>(xeno);
-    }
-
-    public void SetHive(Entity<XenoComponent?> xeno, Entity<HiveComponent?>? hive)
-    {
-        if (!Resolve(xeno, ref xeno.Comp))
-            return;
-
-        if (hive == null)
-        {
-            xeno.Comp.Hive = null;
-            Dirty(xeno, xeno.Comp);
-            return;
-        }
-
-        var hiveEnt = hive.Value;
-        if (!Resolve(hiveEnt, ref hiveEnt.Comp))
-            return;
-
-        xeno.Comp.Hive = hive;
-        Dirty(xeno, xeno.Comp);
-
-        _nightVision.SetSeeThroughContainers(xeno.Owner, hiveEnt.Comp.SeeThroughContainers);
-    }
-
-    public void SetSameHive(Entity<XenoComponent?> to, Entity<XenoComponent?> from)
-    {
-        if (!Resolve(from, ref from.Comp))
-            return;
-
-        SetHive(to, from.Comp.Hive);
     }
 
     private FixedPoint2 GetWeedsHealAmount(Entity<XenoComponent> xeno)
@@ -315,37 +293,14 @@ public sealed class XenoSystem : EntitySystem
         _damageable.TryChangeDamage(xeno, heal, true);
     }
 
-    public bool FromSameHive(Entity<XenoComponent?> xenoOne, Entity<XenoComponent?> xenoTwo)
-    {
-        if (!_xenoQuery.Resolve(xenoOne, ref xenoOne.Comp, false) ||
-            !_xenoQuery.Resolve(xenoTwo, ref xenoTwo.Comp, false))
-        {
-            return false;
-        }
-
-        return xenoOne.Comp.Hive == xenoTwo.Comp.Hive;
-    }
-
-    public bool FromHive(Entity<XenoComponent?> xeno, Entity<HiveComponent?> hive)
-    {
-        if (!_xenoQuery.Resolve(xeno, ref xeno.Comp, false))
-            return false;
-
-        return xeno.Comp.Hive == hive;
-    }
-
     public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool hitNonMarines = false)
     {
         if (xeno == target)
             return false;
 
-        // TODO RMC14 use hive member instead
-        if (TryComp<XenoComponent>(xeno, out var comp1) &&
-            TryComp<XenoComponent>(target, out var comp2) &&
-            comp1.Hive == comp2.Hive)
-        {
+        // hiveless xenos can attack eachother
+        if (_hive.FromSameHive(xeno, target))
             return false;
-        }
 
         if (_mobState.IsDead(target))
             return false;

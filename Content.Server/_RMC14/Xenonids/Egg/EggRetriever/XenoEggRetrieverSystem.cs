@@ -1,8 +1,10 @@
 using System.Numerics;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Egg.EggRetriever;
 using Content.Shared._RMC14.Xenonids.Evolution;
-using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Actions;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -10,6 +12,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Content.Shared.Throwing;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Xenonids.Egg.EggRetriever;
 
@@ -22,9 +25,11 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly ThrowingSystem _throw = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedXenoAnnounceSystem _announce = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -85,8 +90,7 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
         if (RemoveEgg(eggRetriever) is not EntityUid newEgg)
             return;
 
-        if (TryComp<XenoComponent>(eggRetriever, out var xenComp))
-            _xeno.SetHive(newEgg, xenComp.Hive);
+        _hive.SetSameHive(eggRetriever.Owner, newEgg);
 
         _hands.TryPickupAnyHand(eggRetriever, newEgg);
 
@@ -127,24 +131,35 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
 
     private void OnDeathMobStateChanged(Entity<XenoEggRetrieverComponent> eggRetriever, ref MobStateChangedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (args.NewMobState != MobState.Dead)
             return;
-        DropAllStoredEggs(eggRetriever);
+        DropAllStoredEggs(eggRetriever, 0.75f);
     }
 
-    private bool DropAllStoredEggs(Entity<XenoEggRetrieverComponent> xeno)
+    private bool DropAllStoredEggs(Entity<XenoEggRetrieverComponent> xeno, float chance = 1.0f)
     {
         XenoComponent? xenComp = null;
         TryComp(xeno, out xenComp);
+        bool eggDropped = false;
+        var hive = _hive.GetHive(xeno.Owner);
+
         for (var i = 0; i < xeno.Comp.CurEggs; ++i)
         {
+            if (chance != 1.0 && !_random.Prob(chance))
+                continue;
+            eggDropped = true;
             var newEgg = Spawn(xeno.Comp.EggPrototype);
-            if (xenComp != null)
-                _xeno.SetHive(newEgg, xenComp.Hive);
+            _hive.SetHive(newEgg, hive);
             _transform.DropNextTo(newEgg, xeno.Owner);
             _throw.TryThrow(newEgg, _random.NextAngle().RotateVec(Vector2.One) * _random.NextFloat(0.15f, 0.7f), 3);
         }
         xeno.Comp.CurEggs = 0; // Just in case
+        if (chance != 1.0 && eggDropped)
+            _announce.AnnounceSameHive(xeno.Owner, Loc.GetString("rmc-xeno-egg-carrier-death", ("xeno", xeno)));
+
         Dirty(xeno);
         return true;
     }

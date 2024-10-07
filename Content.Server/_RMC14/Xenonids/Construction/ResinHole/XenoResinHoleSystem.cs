@@ -10,7 +10,6 @@ using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Hands.Components;
 using Content.Shared.Maps;
@@ -23,6 +22,7 @@ using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Stunnable;
@@ -35,7 +35,6 @@ using Robust.Shared.Player;
 using static Content.Shared.Physics.CollisionGroup;
 using Content.Shared.Examine;
 using Content.Shared.Standing;
-
 
 namespace Content.Server._RMC14.Xenonids.Construction.ResinHole;
 
@@ -76,6 +75,8 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         SubscribeLocalEvent<XenoResinHoleComponent, XenoPlaceFluidInHoleDoAfterEvent>(OnPlaceFluidInResinHole);
 
         SubscribeLocalEvent<XenoResinHoleComponent, DamageChangedEvent>(OnXenoResinHoleTakeDamage);
+        // TODO needs a specific event when set on fire/onfire/fire is used on it etc
+        // the burned message is used specifically for when a parasite trap gets burned up
         SubscribeLocalEvent<XenoResinHoleComponent, StepTriggerAttemptEvent>(OnXenoResinHoleStepTriggerAttempt);
         SubscribeLocalEvent<XenoResinHoleComponent, StepTriggeredOffEvent>(OnXenoResinHoleStepTriggered);
         SubscribeLocalEvent<XenoResinHoleComponent, ExaminedEvent>(OnExamine);
@@ -159,6 +160,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             return;
 
         resinHole.Comp.TrapPrototype = XenoResinHoleComponent.ParasitePrototype;
+        Dirty(resinHole);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-hole-finished-parasite"), resinHole, args.User);
         QueueDel(args.Used);
 
@@ -221,17 +223,16 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         }
 
         var para = Spawn(resinHole.Comp.TrapPrototype);
-        _xeno.SetHive(para, resinHole.Comp.Hive);
+        _hive.SetSameHive(resinHole.Owner, para);
 
-        if (!_rmcHands.IsPickupByAllowed(para, args.User))
+        if (!_rmcHands.IsPickupByAllowed(para, args.User) || !_hands.TryPickupAnyHand(args.User, para))
         {
             QueueDel(para);
             return;
         }
 
-        _hands.TryPickupAnyHand(args.User, para);
-
         resinHole.Comp.TrapPrototype = null;
+        Dirty(resinHole);
         _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
         args.Handled = true;
     }
@@ -250,14 +251,15 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 return;
             _xenoPlasma.TryRemovePlasma(args.User, bombardComp.PlasmaCost);
 
-            resinHole.Comp.TrapPrototype = bombardComp.Projectile;
             switch (bombardComp.Projectile.Id)
             {
-                case XenoResinHoleComponent.AcidGasPrototype:
+                case XenoResinHoleComponent.BoilerAcid:
+                    resinHole.Comp.TrapPrototype = XenoResinHoleComponent.AcidGasPrototype;
                     _appearanceSystem.SetData(resinHole, XenoResinHoleVisuals.Contained, ContainedTrap.AcidGas);
                     break;
 
-                case XenoResinHoleComponent.NeuroGasPrototype:
+                case XenoResinHoleComponent.BoilerNeuro:
+                    resinHole.Comp.TrapPrototype = XenoResinHoleComponent.NeuroGasPrototype;
                     _appearanceSystem.SetData(resinHole, XenoResinHoleVisuals.Contained, ContainedTrap.NeuroticGas);
                     break;
             }
@@ -299,15 +301,15 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
     private void OnXenoResinHoleTakeDamage(Entity<XenoResinHoleComponent> resinHole, ref DamageChangedEvent args)
     {
-        if (TryComp<XenoComponent>(args.Origin, out var xeno) && xeno.Hive == resinHole.Comp.Hive)
-        {
-            if (resinHole.Comp.TrapPrototype != null && args.DamageDelta != null)
-                args.DamageDelta.ClampMax(0);
+        if (args.Origin is { } origin && _hive.FromSameHive(origin, resinHole.Owner))
             return;
-        }
+
         //TODO Flames should make the trigger message never happen but destroyed will
-        // Also para traps should burn instead of trigger in this case
-        ActivateTrap(resinHole);
+        if (args.DamageDelta == null)
+            return;
+
+        var destroyed = args.Damageable.TotalDamage + args.DamageDelta.GetTotal() > resinHole.Comp.TotalHealth;
+        ActivateTrap(resinHole, destroyed);
     }
 
     private void OnExamine(Entity<XenoResinHoleComponent> resinHole, ref ExaminedEvent args)
@@ -347,7 +349,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         if (comp.TrapPrototype is null)
             return;
 
-        if (TryComp<XenoComponent>(args.Tripper, out var xeno) && xeno.Hive == resinHole.Comp.Hive)
+        if (_hive.FromSameHive(args.Tripper, resinHole.Owner))
         {
             args.Continue = false;
             return;
@@ -449,18 +451,18 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
         _adminLogs.Add(LogType.RMCXenoConstruct, $"Xeno {ToPrettyString(xeno.Owner):xeno} placed a resin hole at {coords}");
 
+        _hive.SetSameHive(xeno.Owner, resinHole);
+
         var resinHoleComp = EnsureComp<XenoResinHoleComponent>(resinHole);
-        resinHoleComp.Hive = xeno.Comp.Hive;
         _audio.PlayPvs(resinHoleComp.BuildSound, resinHole);
     }
 
-    private bool ActivateTrap(Entity<XenoResinHoleComponent> resinHole)
+    private bool ActivateTrap(Entity<XenoResinHoleComponent> resinHole, bool destroyed = false)
     {
         var (ent, comp) = resinHole;
 
         if (comp.TrapPrototype is not EntProtoId trapEntityProto)
             return false;
-
 
         if (IsAcidPrototype(trapEntityProto, out _))
         {
@@ -476,7 +478,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
                     if (tuff != null && !_turf.IsTileBlocked(tuff.Value, FullTileMask))
                     {
                         var acid = SpawnAtPosition(trapEntityProto, coords);
-                        //_xeno.SetHive(trapEntity, resinHole.Comp.Hive); - for seperate hives later, don't think this work rn
+                        _hive.SetSameHive(resinHole.Owner, acid);
                         if (TryComp<DamageOnCollideComponent>(acid, out var collide))
                             _onCollide.SetChain((acid, collide), chain);
                     }
@@ -486,18 +488,16 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         else
         {
             var trapEntity = SpawnAtPosition(trapEntityProto, _transform.GetMoverCoordinates(resinHole));
-            _xeno.SetHive(trapEntity, resinHole.Comp.Hive);
-
-            if (TryComp(trapEntity, out XenoProjectileComponent? projectileComp))
-            {
-                _gun.ShootProjectile(trapEntity, Vector2.Zero, Vector2.Zero, resinHole);
-            }
+            _hive.SetSameHive(resinHole.Owner, trapEntity);
         }
 
-        var ev = new XenoResinHoleActivationEvent("rmc-xeno-construction-resin-hole-activate");
+        string msg = destroyed ? "cm-xeno-construction-resin-hole-destroyed" : "rmc-xeno-construction-resin-hole-activate";
+
+        var ev = new XenoResinHoleActivationEvent(msg);
         RaiseLocalEvent(ent, ev);
 
         comp.TrapPrototype = null;
+        Dirty(resinHole);
         _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
 
         return true;

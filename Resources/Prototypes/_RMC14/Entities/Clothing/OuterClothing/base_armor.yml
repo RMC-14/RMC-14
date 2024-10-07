@@ -179,6 +179,7 @@
   - type: RMCMagneticArmor
   - type: SquadArmor
     layer: Armor
+    slot: OUTERCLOTHING
     rsi:
       sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
       state: std-armor
