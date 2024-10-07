@@ -1,0 +1,23 @@
+- type: emoteSounds
+  id: RMCUnisexFelinid
+  sounds:
+    Scream:
+      collection: FelinidScreams
+    Hiss:
+      collection: FelinidHisses
+    Meow:
+      collection: FelinidMeows
+    Mew:
+      collection: FelinidMews
+    Growl:
+      collection: FelinidGrowls
+    Purr:
+      collection: FelinidPurrs
+
+- type: emoteSounds
+  parent: [RMCUnisexFelinid, RMCMaleHuman]
+  id: RMCMaleFelinid
+
+- type: emoteSounds
+  parent: [RMCUnisexFelinid, RMCFemaleHuman]
+  id: RMCFemaleFelinid

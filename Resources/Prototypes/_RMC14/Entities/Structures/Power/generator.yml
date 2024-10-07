@@ -1,0 +1,74 @@
+﻿- type: entity
+  id: RMCGeneratorFusion
+  name: S-52 fusion reactor
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 100
+        mask:
+        - FullTileMask
+        layer:
+        - AirlockLayer
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Power/fusion_reactor.rsi
+    layers:
+    - state: "off"
+      map: [ "base" ]
+  - type: Appearance
+  - type: Corrodible
+    isCorrodible: false
+  - type: RMCFusionReactor
+    watts: 50000
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFusionReactorLayers.Layer:
+        base:
+          Off: { state: "off" }
+          Weld: { state: "weld" }
+          Wire: { state: "wire" }
+          Wrench: { state: "wrench" }
+          Ten: { state: "on-10" }
+          TwentyFive: { state: "on-25" }
+          Fifty: { state: "on-50" }
+          SeventyFive: { state: "on-75" }
+          Hundred: { state: "on-100" }
+          Overloaded: { state: "overloaded" }
+
+- type: entity
+  parent: RMCGeneratorFusion
+  id: RMCGeneratorFusionColony
+  name: G-11 geothermal generator
+  description: A thermoelectric generator sitting atop a plasma-filled borehole.
+  components:
+  - type: RMCFusionReactor
+    watts: 100000
+    randomizeDamage: true
+
+- type: entity
+  parent: BaseItem
+  id: RMCGeneratorFusionCell
+  name: WL-6 universal fuel cell
+  description: A rechargeable fuel cell.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Power/fusion_fuel_cell.rsi
+    state: cell-full
+  - type: Item
+    size: Normal
+  - type: RMCFusionCell

@@ -1,10 +1,14 @@
 - type: entity
-  parent: [BaseStructureDynamic, CMBaseStructureCorrodible]
+  parent: CMBaseStructureCorrodible
   abstract: true
   id: RMCBaseLandingSign
   name: sign
   description: A sign.
   components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
   - type: InteractionOutline
   - type: Sprite
     drawdepth: OverMobs

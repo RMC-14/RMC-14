@@ -34,6 +34,9 @@ public sealed class OverwatchConsoleSelectSquadBuiMsg(NetEntity squad) : BoundUs
 }
 
 [Serializable, NetSerializable]
+public sealed class OverwatchViewTacticalMapBuiMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
 public sealed class OverwatchConsoleTakeOperatorBuiMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]

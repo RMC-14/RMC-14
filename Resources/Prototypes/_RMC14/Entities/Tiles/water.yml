@@ -36,7 +36,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.5,-0.5,0.5,0.5"
+          bounds: "-0.4,-0.4,0.4,0.4"
         layer:
         - SlipLayer
         mask:
@@ -49,6 +49,8 @@
       params:
         volume: 8
   - type: BlockWeeds
+  - type: MinimapColor
+    color: "#94b0d59c"
 
 - type: entity
   parent: CMFloorShallowWaterEntity

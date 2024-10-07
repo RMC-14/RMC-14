@@ -30,6 +30,30 @@
     zeroVisible: false
     zeroOnlyOnEmpty: true
   - type: Appearance
+  
+- type: entity
+  parent: BaseMagazineRifle
+  id: RMCMagazineSentryShotgun
+  name: "12g buckshot drum"
+  description: "An ammo drum of 50 12g buckshot shells for the UN 12-G Shotgun Sentry. Just feed it into the sentry gun's ammo port when its ammo is depleted."
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineSentryShotgun
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCShellShotgunBuckshot
+    proto: CMShellShotgunBuckshot
+    capacity: 50
+    cycleable: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/un12g.rsi
+
 
 - type: Tag
   id: RMCMagazineSentry
+
+- type: Tag
+  id: RMCMagazineSentryShotgun

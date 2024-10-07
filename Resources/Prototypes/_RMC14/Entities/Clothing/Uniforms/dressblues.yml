@@ -1,0 +1,30 @@
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCMarineUniformDressEnlisted
+  name: marine enlisted dress blues uniform
+  description: The undershirt and trousers of the legendary Marine dress blues, virtually unchanged since the 19th century. This unadorned variant is for enlisted personnel, E-1 thru E-3.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/DressBlues/enlisted.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCMarineUniformDressSenior
+  name: marine senior dress blues uniform
+  description: The undershirt and trousers of the legendary Marine dress blues, virtually unchanged since the 19th century. This variant features the iconic Blood Stripe, worn by NCOs and officers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/DressBlues/senior.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCMarineUniformDressGeneral
+  name: marine general dress blues uniform
+  description: The undershirt and trousers of the legendary Marine dress blues, virtually unchanged since the 19th century. This variant features black trousers and a large Blood Stripe, worn by general officers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/DressBlues/general.rsi
+
+
+

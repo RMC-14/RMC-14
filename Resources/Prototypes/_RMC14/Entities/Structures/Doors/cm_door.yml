@@ -1,16 +1,11 @@
 ﻿- type: entity
   abstract: true
   parent: BaseStructure
-  id: CMBaseDoor
+  id: RMCBaseDoorInvincible
   name: door
   placement:
     mode: SnapgridCenter
   components:
-  - type: MeleeSound
-    soundGroups:
-      Brute:
-        path:
-          "/Audio/Weapons/smash.ogg"
   - type: InteractionOutline
   - type: Sprite
     snapCardinals: false
@@ -21,6 +16,7 @@
       map: ["enum.DoorVisualLayers.BaseUnlit"]
     - state: welded
       map: [ "enum.WeldableLayers.BaseWelded" ]
+      visible: false
     - state: locked
       shader: unshaded
       map: ["enum.DoorVisualLayers.BaseBolted"]
@@ -61,17 +57,54 @@
   - type: ContainerContainer
     containers:
       board: !type:Container
-  - type: Weldable
-    time: 3
   - type: Airlock
     openingSpriteState: unlit
     closingSpriteState: unlit
     denySpriteState: door_deny
   - type: DoorBolt
   - type: Appearance
-  - type: WiresVisuals
   - type: ApcPowerReceiver
     powerLoad: 0 # TODO RMC14 20
+  - type: UserInterface
+    interfaces:
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: Airtight
+    fixVacuum: true
+    noAirWhenFullyAirBlocked: false
+  - type: RadiationBlocker
+    resistance: 3
+  - type: PlacementReplacement
+    key: walls
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+  - type: PaintableAirlock
+    group: Standard
+    department: CMSquad
+  - type: AccessReader
+  - type: StaticPrice
+    price: 150
+  - type: Tag
+    tags:
+    - Airlock
+    # This tag is used to nagivate the Airlock construction graph. It's needed because the construction graph is shared between Airlock, AirlockGlass, and HighSecDoor
+  - type: PryUnpowered
+  - type: RMCDropshipBlocked
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  abstract: true
+  parent: RMCBaseDoorInvincible
+  id: CMBaseDoor
+  name: door
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Weldable
+    time: 3
+  - type: WiresVisuals
   - type: ExtensionCableReceiver
   - type: Electrified
     enabled: false
@@ -99,15 +132,11 @@
     - DoorStatus
   - type: SoundOnOverload
   - type: SpawnOnOverload
-  - type: UserInterface
-    interfaces:
-      enum.WiresUiKey.Key:
-        type: WiresBoundUserInterface
-  - type: Airtight
-    fixVacuum: true
-    noAirWhenFullyAirBlocked: false
-  - type: RadiationBlocker
-    resistance: 3
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/smash.ogg"
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Metallic
@@ -119,26 +148,11 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: PlacementReplacement
-    key: walls
-  - type: IconSmooth
-    key: walls
-    mode: NoSprite
-  - type: PaintableAirlock
-    group: Standard
-    department: CMSquad
-  - type: AccessReader
-  - type: StaticPrice
-    price: 150
-  - type: Tag
-    tags:
-    - Airlock
-    # This tag is used to nagivate the Airlock construction graph. It's needed because the construction graph is shared between Airlock, AirlockGlass, and HighSecDoor
-  - type: PryUnpowered
-  - type: RMCDropshipBlocked
   - type: RMCWallExplosionDeletable
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: Corrodible
+    isCorrodible: true
 
 - type: entity
   abstract: true

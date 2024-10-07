@@ -1,0 +1,470 @@
+# Armors for all factions that don't have their own file
+
+# MARSOC
+- type: entity
+  parent: CMArmorM3Medium
+  id: RMCArmorMARSOC
+  name: marine raider armor
+  description: A heavily customized suit of M3 armor. Used by Marine Raiders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/marsoc.rsi
+  - type: CMArmor
+    armor: 30 # CLOTHING_ARMOR_HIGH
+    bio: 15 # CLOTHING_ARMOR_MEDIUMLOW
+    explosionArmor: 40 # CLOTHING_ARMOR_VERYHIGH
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
+    walkModifier: 0.814
+    sprintModifier: 0.814
+  - type: Storage
+    grid:
+    - 0,0,7,1 # 4 slots
+    maxItemSize: Small
+    whitelist:
+      tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - Sidearm
+      - Knife
+      - Flashlight
+      - MRE
+      - Grenade
+      - CMAutoInjector
+      - Cigarette
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - Syringe
+      - Hypospray
+      - CMOintment
+      - Brutepack
+      - CMBurnKit
+      - CMTraumaKit
+      - Bottle
+      - Pill
+      - PowerCell
+
+# Iron Bear
+- type: entity
+  parent: RMCArmorM4PMC
+  id: CMArmorIronBear
+  name: H1 Iron Bears vest
+  description: A protective vest worn by Iron Bears mercenaries.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/bear.rsi
+  - type: CMArmor
+    armor: 25
+    bio: 20
+    explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
+    walkModifier: 0.897
+    sprintModifier: 0.897
+
+# Dutch's Dozen
+- type: entity
+  parent: RMCArmorM4PMC
+  id: CMArmorDutchVest
+  name: D2 armored vest
+  description: A protective vest worn by some seriously experienced mercs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Dutch/vest.rsi
+  - type: CMArmor
+    armor: 32 # CLOTHING_ARMOR_HIGH (melee); CLOTHING_ARMOR_HIGHPLUS (bullets); intermediate value until more damage types implemented
+    bio: 20
+    explosionArmor: 30 # CLOTHING_ARMOR_HIGH
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
+    walkModifier: 0.897
+    sprintModifier: 0.897
+  - type: PointLight
+    enabled: false
+    radius: 7 # Higher light range
+    softness: 5
+    autoRot: true
+    netsync: false
+
+# TODO: remove shoulder light from this
+# TODO: implement storage whitelist for this
+- type: entity
+  parent: RMCArmorM4PMC
+  id: CMArmorDutchJacket
+  name: safari jacket
+  description: A tailored hunting jacket, cunningly lined with segmented armor plates. Sometimes the game shoots back.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Dutch/bandolier.rsi
+  - type: CMArmor
+    armor: 25
+    bio: 20
+    explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
+    walkModifier: 0.814
+    sprintModifier: 0.814
+
+# Freelancer
+- type: entity
+  parent: RMCArmorSPP
+  id: CMArmorFreelancer
+  name: freelancer cuirass
+  description: An armored protective chestplate scrapped together from various plates. It keeps up remarkably well, as the craftsmanship is solid, and the design mirrors such armors in the SPP and the UNMC. The many skilled craftsmen in the freelancers ranks produce these vests at a rate about one a month.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/freelancer.rsi
+  - type: CMArmor
+    armor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    bio: 15
+    explosionArmor: 20
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
+    walkModifier: 0.814
+    sprintModifier: 0.814
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: Storage
+    grid:
+    - 0,0,3,1 # 2 slots
+    maxItemSize: Small
+    whitelist:
+      tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - Sidearm
+      - Knife
+      - Flashlight
+      - MRE
+      - Grenade
+      - CMAutoInjector
+      - Cigarette
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - Syringe
+      - Hypospray
+      - CMOintment
+      - Brutepack
+      - CMBurnKit
+      - CMTraumaKit
+      - Bottle
+      - Pill
+      - PowerCell
+
+# Colonial militia
+# TODO: implement storage whitelist for this
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: RMCCoatMilitia
+  name: colonial militia hauberk
+  description: The hauberk of a colonist militia member, created from boiled leather and some modern armored plates. While not the most powerful form of armor, and primitive compared to most modern suits of armor, it gives the wearer almost perfect mobility, which suits the needs of the local colonists. It is also quick to don, easy to hide, and cheap to produce in large workshops.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/rebel.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/rebel.rsi
+  - type: CMArmor
+    armor: 18 # CLOTHING_ARMOR_MEDIUM (melee); CLOTHING_ARMOR_MEDIUMLOW (bullets)
+    explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
+    walkModifier: 0.814
+    sprintModifier: 0.814
+  - type: WieldSlowdownCompensation
+    walk: 0.12
+    sprint: 0.198
+  - type: Storage
+    grid:
+    - 0,0,3,1 # 2 slots
+  - type: FixedItemSizeStorage
+
+- type: entity
+  parent: RMCCoatMilitia
+  id: RMCCoatMilitiaVest
+  name: colonial militia vest
+  description: The hauberk of a colonist militia member, created from boiled leather and some modern armored plates. While not the most powerful form of armor, and primitive compared to most modern suits of armor, it gives the wearer almost perfect mobility, which suits the needs of the local colonists. It is also quick to don, easy to hide, and cheap to produce in large workshops. This extremely light variant protects only the chest and abdomen.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/vest.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/vest.rsi
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
+    walkModifier: 0.897
+    sprintModifier: 0.897
+
+- type: entity
+  parent: RMCCoatMilitia
+  id: RMCCoatMilitiaBrace
+  name: colonial militia brace
+  description: The hauberk of a colonist militia member, created from boiled leather and some modern armored plates. While not the most powerful form of armor, and primitive compared to most modern suits of armor, it gives the wearer almost perfect mobility, which suits the needs of the local colonists. It is also quick to don, easy to hide, and cheap to produce in large workshops. This extremely light variant has some of the chest pieces removed.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/brace.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/brace.rsi
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
+    walkModifier: 0.897
+    sprintModifier: 0.897
+
+- type: entity
+  parent: RMCCoatMilitia
+  id: RMCCoatMilitiaHauberk
+  name: colonial militia partial hauberk
+  description: The hauberk of a colonist militia member, created from boiled leather and some modern armored plates. While not the most powerful form of armor, and primitive compared to most modern suits of armor, it gives the wearer almost perfect mobility, which suits the needs of the local colonists. It is also quick to don, easy to hide, and cheap to produce in large workshops. This even lighter variant has some of the arm pieces removed.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/hauberk.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/hauberk.rsi
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
+    walkModifier: 0.897
+    sprintModifier: 0.897
+
+- type: entity
+  parent: RMCCoatMilitia
+  id: RMCCoatMilitiaHarness
+  name: colonial militia harness
+  description: The hauberk of a colonist militia member, created from boiled leather and some modern armored plates. While not the most powerful form of armor, and primitive compared to most modern suits of armor, it gives the wearer almost perfect mobility, which suits the needs of the local colonists. It is also quick to don, easy to hide, and cheap to produce in large workshops. This one has straps interweaved with the plates, that allow the user to fire a captured smart gun, if a bit uncomfortably.
+  components:
+  - type: SmartGunArmor
+
+# Mercenaries
+# TODO: implement storage whitelist for this
+- type: entity
+  parent: RMCArmorM4PMC
+  id: RMCArmorMercenary
+  name: mercenary K12 ceramic plated armor
+  description: A set of grey, heavy ceramic armor with dark blue highlights. It is the standard uniform of an unknown mercenary group working in the sector.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Mercenary/heavy.rsi
+  - type: CMArmor
+    armor: 40 # CLOTHING_ARMOR_VERYHIGH
+    bio: 20
+    explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
+    walkModifier: 0.814
+    sprintModifier: 0.814
+  - type: Storage
+    grid:
+    - 0,0,3,1 # 2 slots
+    maxItemSize: Small
+    whitelist:
+      components:
+        - Gun
+        - BallisticAmmoProvider
+        - Stunbaton
+        - Bible
+        # TODO RMC14 motion detector, walkman
+        # TODO RMC14 machete/katana scabbard
+      tags:
+      - Handcuffs
+      - Crowbar
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - Sidearm
+      - Knife
+      - Flashlight
+      - MRE
+      - Grenade
+      - CMAutoInjector
+      - Cigarette
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - Syringe
+      - Hypospray
+      - CMOintment
+      - Brutepack
+      - CMBurnKit
+      - CMTraumaKit
+      - Bottle
+      - Pill
+      - PowerCell
+
+- type: entity
+  parent: RMCArmorMercenary
+  id: RMCArmorMercenaryHeavy
+  name: mercenary modified K12 ceramic plated armor
+  description: A set of grey, heavy ceramic armor with dark blue highlights. It has been modified with extra ceramic plates placed in its storage pouch, and seems intended to support an extremely heavy weapon.
+  components:
+  - type: CMArmor
+    armor: 52 # CLOTHING_ARMOR_ULTRAHIGH (melee); CLOTHING_ARMOR_ULTRAHIGHPLUS (bullet)
+    bio: 20
+    explosionArmor: 35 # CLOTHING_ARMOR_HIGHPLUS
+  - type: Storage
+    grid:
+    - 0,0,1,1 # 1 slot
+    maxItemSize: Small
+    whitelist:
+      components:
+        - Gun
+        - BallisticAmmoProvider
+        - Stunbaton
+        - Bible
+        # TODO RMC14 motion detector, walkman
+        # TODO RMC14 machete/katana scabbard
+      tags:
+      - Handcuffs
+      - Crowbar
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - Sidearm
+      - Knife
+      - Flashlight
+      - MRE
+      - Grenade
+      - CMAutoInjector
+      - Cigarette
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - Syringe
+      - Hypospray
+      - CMOintment
+      - Brutepack
+      - CMBurnKit
+      - CMTraumaKit
+      - Bottle
+      - Pill
+      - PowerCell
+
+# TODO: Implement storage whitelist for this
+- type: entity
+  parent: RMCArmorMercenary
+  id: RMCArmorMercenaryMiner
+  name: mercenary Y8 armored miner vest
+  description: A set of beige, light armor built for protection while mining. It is a specialized uniform of an unknown mercenary group working in the sector.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Mercenary/miner.rsi
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
+    maxItemSize: Small
+    whitelist:
+      components:
+        - Gun
+        - BallisticAmmoProvider
+        - Stunbaton
+        - Bible
+        # TODO RMC14 motion detector, walkman
+        # TODO RMC14 machete/katana scabbard
+      tags:
+      - Handcuffs
+      - Crowbar
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - Sidearm
+      - Knife
+      - Flashlight
+      - MRE
+      - Grenade
+      - CMAutoInjector
+      - Cigarette
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - Syringe
+      - Hypospray
+      - CMOintment
+      - Brutepack
+      - CMBurnKit
+      - CMTraumaKit
+      - Bottle
+      - Pill
+      - PowerCell
+
+- type: entity
+  parent: RMCArmorMercenary
+  id: RMCArmorMercenaryEngineer
+  name: mercenary Z7 armored vest
+  description: A set of blue armor with yellow highlights built for protection while building or carrying out medical treatment in highly dangerous environments. It is a specialized uniform of an unknown mercenary group working in the sector.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Mercenary/engi.rsi
+
+# HEFA knight
+- type: entity
+  parent: RMCArmorM3G4
+  id: RMCArmorMercenaryHEFA
+  name: HEFA Knight armor
+  description: A thick piece of armor adorning a HEFA. Usually seen on a HEFA knight.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Mercenary/hefa.rsi
+  - type: CMArmor
+    armor: 40 # CLOTHING_ARMOR_VERYHIGH
+    bio: 15
+    explosionArmor: 70 # CLOTHING_ARMOR_GIGAHIGH
+
+# Riot armor
+- type: entity
+  parent: RMCArmorM4PMC
+  id: RMCArmorPMCRiot
+  name: UN-M1 riot armor
+  description: Based on the M3 pattern employed by the UNMC, the UN-M1 body armor is employed by security, riot control and union-busting teams. While robust against melee and bullet attacks, it critically lacks coverage of the legs and arms.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/riot.rsi
+  - type: CMArmor
+    armor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    bio: 20
+    explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
+    walkModifier: 0.897
+    sprintModifier: 0.897
+
+- type: entity
+  parent: RMCArmorPMCRiot
+  id: RMCArmorPMCRiotSynth
+  name: UN-M1S synthetic body armor
+  description: Based on the M3 pattern employed by the UNMC, the UN-M1 body armor is employed by security, riot control and union-busting teams. The UN-1MS modification is Synthetic programming compliant, sacrificing protection for speed and carrying capacity.
+  components:
+  - type: CMArmor
+    armor: 0
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
+    walkModifier: 0.949
+    sprintModifier: 0.949
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
+
+# CBRN
+- type: entity
+  parent: CMArmorM3Medium
+  id: RMCArmorCBRN
+  name: CBRN M3-M armor
+  description: While lacking the appearance of the M3 pattern armor worn in regular service, this armor piece is still a derivative of it. It has been heavily modified to fit over the MOPP suit with additional padding and Venlar composite layers removed, so as not to restrict the wearer’s movement. However, with the reduction of composite layers, the personal protection offered is less than desired with complaints having been lodged since 2165.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/cbrn.rsi
+  - type: CMArmor
+    armor: 20 # CLOTHING_ARMOR_MEDIUM
+    explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
+    bio: 10 # CLOTHING_ARMOR_LOW
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_HEAVY
+    walkModifier: 0.68
+    sprintModifier: 0.68
+
+- type: entity
+  parent: RMCArmorCBRN
+  id: RMCArmorCBRNAdvanced
+  name: CBRN M3-M advanced armor
+  components:
+  - type: CMArmor
+    armor: 20 # CLOTHING_ARMOR_MEDIUM
+    explosionArmor: 50 # CLOTHING_ARMOR_ULTRAHIGH
+    bio: 75 # CLOTHING_ARMOR_GIGAHIGHPLUS

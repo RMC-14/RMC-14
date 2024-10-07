@@ -9,4 +9,10 @@ public sealed partial class AreaGridComponent : Component
 {
     [DataField, AutoNetworkedField]
     public Dictionary<Vector2i, EntProtoId<AreaComponent>> Areas = new();
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<Vector2i, Color> Colors = new();
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<EntProtoId<AreaComponent>, EntityUid> AreaEntities = new();
 }

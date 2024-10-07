@@ -16,7 +16,7 @@
         mask:
         - MobMask
         layer:
-        - MobLayer
+        - MidImpassable
   - type: Occluder
   - type: Sprite
     sprite: _RMC14/Effects/smoke.rsi
@@ -68,7 +68,7 @@
         mask:
         - MobMask
         layer:
-        - MobLayer
+        - MidImpassable
   - type: Occluder
   - type: Sprite
     sprite: _RMC14/Effects/smoke.rsi

@@ -293,7 +293,7 @@
 - type: entity
   parent: RMCAreaLv624Ground
   id: RMCAreaLv624GroundColony
-  name: Weyland-Yutani Compound
+  name: Weston-Yamada Compound
   components:
   - type: Sprite
     state: green
