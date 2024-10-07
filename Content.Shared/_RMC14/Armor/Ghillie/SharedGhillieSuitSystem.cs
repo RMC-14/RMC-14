@@ -186,7 +186,7 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
 
             EnsureComp<RMCNightVisionVisibleComponent>(user);
 
-            RemCompDeferred<RMCPassiveStealthComponent>(user);
+            RemComp<RMCPassiveStealthComponent>(user);
             RemCompDeferred<EntityActiveInvisibleComponent>(user);
             RemCompDeferred<EntityIFFComponent>(user);
         }
