@@ -14,6 +14,7 @@ using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Robust.Shared.Timing;
 using Content.Shared.Inventory.Events;
 using Content.Shared._RMC14.Chemistry;
+using Content.Shared.Weapons.Ranged.Components;
 
 namespace Content.Shared._RMC14.Armor.Ghillie;
 
@@ -42,7 +43,7 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
         SubscribeLocalEvent<RMCPassiveStealthComponent, VaporHitEvent>(OnVaporHit);
         SubscribeLocalEvent<RMCPassiveStealthComponent, MoveInputEvent>(OnMove);
 
-        SubscribeLocalEvent<GunShotEvent>(OnGunShot);
+        SubscribeLocalEvent<GunComponent, GunShotEvent>(OnGunShot);
     }
 
     private void OnGetItemActions(Entity<GhillieSuitComponent> ent, ref GetItemActionsEvent args)
@@ -142,11 +143,12 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
         if (!TryComp<EntityTurnInvisibleComponent>(user, out var turnInvisible))
             return;
 
-        if (enabling)
+        if (enabling && !HasComp<EntityActiveInvisibleComponent>(user))
         {
             turnInvisible.Enabled = true;
-            turnInvisible.UncloakTime = _timing.CurTime;
+
             comp.Enabled = true;
+            Dirty(ent);
 
             var passiveInvisibility = EnsureComp<RMCPassiveStealthComponent>(user);
             passiveInvisibility.MinOpacity = comp.Opacity;
@@ -159,20 +161,27 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
             activeInvisibility.Opacity = 1f;
             Dirty(user, activeInvisibility);
 
+            turnInvisible.UncloakTime = _timing.CurTime;
+            Dirty(user, turnInvisible);
+
             EnsureComp<EntityIFFComponent>(user);
             RemCompDeferred<RMCNightVisionVisibleComponent>(user);
         }
         else
         {
             turnInvisible.Enabled = false;
-            turnInvisible.UncloakTime = _timing.CurTime;
+
             comp.Enabled = false;
+            Dirty(ent);
 
             EnsureComp<RMCNightVisionVisibleComponent>(user);
 
             RemCompDeferred<RMCPassiveStealthComponent>(user);
             RemCompDeferred<EntityActiveInvisibleComponent>(user);
             RemCompDeferred<EntityIFFComponent>(user);
+
+            turnInvisible.UncloakTime = _timing.CurTime;
+            Dirty(user, turnInvisible);
 
             var deactivatedPopupSelf = Loc.GetString("rmc-ghillie-fail-self");
             var deactivatedPopupOthers = Loc.GetString("rmc-ghillie-fail-others", ("user", user));
@@ -217,7 +226,7 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
         ToggleInvisibility(suit.Value, user, false);
     }
 
-    private void OnGunShot(GunShotEvent args)
+    private void OnGunShot(Entity<GunComponent> ent, ref GunShotEvent args)
     {
         var user = args.User;
         var suit = FindSuit(user);
@@ -234,6 +243,10 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
 
             invis.Opacity = 1;
             Dirty(user, invis);
+
+            var deactivatedPopupSelf = Loc.GetString("rmc-ghillie-fail-self");
+            var deactivatedPopupOthers = Loc.GetString("rmc-ghillie-fail-others", ("user", user));
+            _popup.PopupPredicted(deactivatedPopupSelf, deactivatedPopupOthers, user, user, PopupType.MediumCaution);
         }
     }
 }
