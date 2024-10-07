@@ -16,6 +16,8 @@
     deleteOnSpawn: true
     soundEject:
       collection: ShellEject
+    soundInsert:
+      collection: CMShotgunLoad
   - type: Tag
     tags:
     - Cartridge

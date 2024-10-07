@@ -287,6 +287,9 @@ public abstract partial class SharedGunSystem
             if (split != null)
                 used = split.Value;
 
+            if (CompOrNull<CartridgeAmmoComponent>(used)?.SoundInsert is { } sound)
+                Audio.PlayPredicted(sound, uid, user);
+
             if (_netManager.IsClient)
                 return;
         }
