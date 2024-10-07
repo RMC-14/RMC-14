@@ -103,7 +103,7 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Illegaly placing a listening device in a secure area, or area with privacy shutters, such as CIC or the CL's office.\nIf the listening device is also tied to a foreign government or terror organisation this is additionally considered [bold]Subterfuge[/bold].\n[bold]15 minutes.[/bold]
+        Illegaly placing a listening device in a secure area, or area with privacy shutters, such as CIC or the CL's office.\n[italic]If the listening device is also tied to a foreign government or terror organisation this is additionally considered Subterfuge[/italic].\n[bold]15 minutes.[/bold]
       </Box>
     </ColorBox>
 

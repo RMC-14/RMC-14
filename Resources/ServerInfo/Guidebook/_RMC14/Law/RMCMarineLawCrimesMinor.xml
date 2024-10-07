@@ -41,12 +41,12 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Behavior that is generally disruptive to the ship and crew that classifies as low-level shenanigans not deserving of more severe punishment. Things such as excessive window knocking, force-feeding other marines or failing to conduct oneself properly during the briefing, such as climbing the Briefing overview.
+        Behavior that is generally disruptive to the ship and crew that classifies as low-level shenanigans not deserving of more severe punishment. Things such as excessive window knocking, force-feeding other marines or failing to conduct oneself properly during the briefing, such as climbing the Briefing overview. This can escalate to [bold]Disorderly Conduct[/bold].
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        [bold]NJP or optionally 10 minutes.[/bold]
+        [bold]NJP.[/bold]
       </Box>
     </ColorBox>
 
