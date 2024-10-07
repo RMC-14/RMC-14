@@ -52,7 +52,7 @@
   parent: CMBeltBaseStorage
   id: RMCM276ShotgunShellLoadingRig
   name: M276 pattern shotgun shell loading rig
-  description: An ammunition belt designed to hold shotgun shells or individual bullets.
+  description: An ammunition belt designed to hold shotgun shells. # or individual bullets. TODO RMC14
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/shotgun.rsi

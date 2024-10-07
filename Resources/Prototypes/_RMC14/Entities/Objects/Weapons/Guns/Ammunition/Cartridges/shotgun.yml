@@ -91,7 +91,7 @@
   id: RMCShellShotgunSlug
   name: handful of shotgun slugs
   icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: slug_shell }
-  spawn: CMShellShotgunSlug
+  spawn: CMShellShotgunSlugs
   maxCount: 5
 
 - type: entity

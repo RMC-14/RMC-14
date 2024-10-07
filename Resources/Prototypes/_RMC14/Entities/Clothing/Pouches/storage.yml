@@ -246,7 +246,7 @@
   parent: RMCPouchShotgun
   id: RMCPouchShotgunLarge
   name: large shotgun shell pouch
-  description: It can contain more handfuls of shells, or bullets if you choose to for some reason.
+  description: It can contain more handfuls of shells. #, or bullets if you choose to for some reason. TODO RMC14
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/large_shotshells.rsi
