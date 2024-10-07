@@ -31,7 +31,7 @@
   - type: PointLight
     enabled: false
     radius: 4
-    softness: 6
+    softness: 3
     autoRot: true
     netsync: false
   - type: HandheldLight
