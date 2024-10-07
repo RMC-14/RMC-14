@@ -37,8 +37,6 @@
       - clean
   - type: Food
     solution: soap
-    delay: 7
-    forceFeedDelay: 7
   - type: BadFood
   - type: CleansForensics
   - type: Residue
