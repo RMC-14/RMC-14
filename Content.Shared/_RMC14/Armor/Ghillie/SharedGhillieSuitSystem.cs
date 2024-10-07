@@ -182,7 +182,7 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
 
             var deactivatedPopupSelf = Loc.GetString("rmc-ghillie-fail-self");
             var deactivatedPopupOthers = Loc.GetString("rmc-ghillie-fail-others", ("user", user));
-            _popup.PopupPredicted(deactivatedPopupSelf, deactivatedPopupOthers, user, user, PopupType.MediumCaution);
+            _popup.PopupPredicted(deactivatedPopupSelf, deactivatedPopupOthers, user, user, PopupType.Medium);
 
             EnsureComp<RMCNightVisionVisibleComponent>(user);
 
