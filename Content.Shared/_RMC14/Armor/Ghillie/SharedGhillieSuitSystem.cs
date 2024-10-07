@@ -44,7 +44,7 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
 
         SubscribeLocalEvent<RMCPassiveStealthComponent, VaporHitEvent>(OnVaporHit);
         SubscribeLocalEvent<RMCPassiveStealthComponent, MoveInputEvent>(OnMove);
-        
+
         SubscribeLocalEvent<GunShotEvent>(OnGunShot);
     }
 
@@ -142,8 +142,15 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
     {
         var comp = ent.Comp;
 
+        if (!TryComp<EntityTurnInvisibleComponent>(user, out var turnInvisible))
+            return;
+
         if (enabling)
         {
+            turnInvisible.Enabled = true;
+            turnInvisible.UncloakTime = _timing.CurTime;
+            comp.Enabled = true;
+
             var passiveInvisibility = EnsureComp<RMCPassiveStealthComponent>(user);
             passiveInvisibility.MinOpacity = comp.Opacity;
             passiveInvisibility.Delay = comp.InvisibilityDelay;
@@ -158,11 +165,13 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
             EnsureComp<EntityIFFComponent>(user);
             RemCompDeferred<RMCNightVisionVisibleComponent>(user);
 
-            comp.Enabled = true;
-            Dirty(ent);
         }
         else
         {
+            turnInvisible.Enabled = false;
+            turnInvisible.UncloakTime = _timing.CurTime;
+            comp.Enabled = false;
+
             EnsureComp<RMCNightVisionVisibleComponent>(user);
 
             RemCompDeferred<RMCPassiveStealthComponent>(user);
@@ -172,9 +181,6 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
             var deactivatedPopupSelf = Loc.GetString("rmc-ghillie-fail-self");
             var deactivatedPopupOthers = Loc.GetString("rmc-ghillie-fail-others", ("user", user));
             _popup.PopupPredicted(deactivatedPopupSelf, deactivatedPopupOthers, user, user, PopupType.MediumCaution);
-
-            comp.Enabled = false;
-            Dirty(ent);
         }
     }
 
