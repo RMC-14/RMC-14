@@ -17,7 +17,7 @@ public sealed partial class GhillieSuitComponent : Component
     public bool Enabled = false;
 
     [DataField, AutoNetworkedField]
-    public float Opacity = 0.05f;
+    public float Opacity = 0.02f;
 
     [DataField, AutoNetworkedField]
     public TimeSpan UseDelay = TimeSpan.FromSeconds(4);
