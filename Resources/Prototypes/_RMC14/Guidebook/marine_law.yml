@@ -94,7 +94,7 @@
   - RMCMarineLawCrimesMajor
   - RMCMarineLawCrimesCapital
 #  - RMCMarineLawCrimesOptional
-#  - RMCMarineLawCrimesPrecautionary
+  - RMCMarineLawCrimesPrecautionary
 
 - type: guideEntry
   parent: RMC
@@ -123,6 +123,15 @@
   name: rmc-guide-entry-marine-law-crimes-capital
   text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCrimesCapital.xml"
   priority: 3
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawCrimesPrecautionary
+  name: rmc-guide-entry-marine-law-crimes-precautionary
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCrimesPrecautionary.xml"
+  priority: 5
+
+
 
 # Prisoner Rights
 

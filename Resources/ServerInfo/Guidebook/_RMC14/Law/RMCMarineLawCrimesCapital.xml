@@ -75,12 +75,12 @@
 
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Crimes against Humanity
+        Crimes against Humanoids
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        To engage in actions that violate human rights or otherwise are heinous acts against humans. Examples are torture, cannibalism and forced infection of any kind.
+        To engage in actions that violate humanoid rights or otherwise are heinous acts against humanoids. Examples are torture, cannibalism and forced infection of any kind.
       </Box>
     </ColorBox>
 
