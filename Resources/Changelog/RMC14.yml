@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed being able to eat req invoices and being able to put them into
-      fax machines.
-    type: Fix
-  id: 291
-  time: '2024-07-08T02:26:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2884
-- author: DrSmugleaf
-  changes:
   - message: Fixed microwaves being invincible.
     type: Fix
   id: 292
@@ -4645,5 +4637,12 @@
   id: 790
   time: '2024-10-06T23:34:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4315
+- author: CyberTropic
+  changes:
+  - message: Added linen bins.
+    type: Add
+  id: 791
+  time: '2024-10-07T02:35:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4301
 Name: RMC14
 Order: -1
