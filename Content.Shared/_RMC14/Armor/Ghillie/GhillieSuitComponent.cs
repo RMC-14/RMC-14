@@ -28,9 +28,9 @@ public sealed partial class GhillieSuitComponent : Component
     [DataField, AutoNetworkedField]
     public EntityWhitelist Whitelist = new();
 
-    /// <summary>
-    /// ID of the use delay for the ghillie suit invisiblity.
-    /// </summary>
-    [DataField]
-    public string DelayId = "rmc_ghillie_suit";
+    [DataField, AutoNetworkedField]
+    public EntProtoId ActionId = "RMCActionGhilliePreparePosition";
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? Action;
 }

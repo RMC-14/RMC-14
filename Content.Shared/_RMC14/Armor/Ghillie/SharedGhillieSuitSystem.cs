@@ -12,6 +12,8 @@ using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Robust.Shared.Timing;
+using Content.Shared.Inventory.Events;
+using Content.Shared._RMC14.Chemistry;
 
 namespace Content.Shared._RMC14.Armor.Ghillie;
 
@@ -33,40 +35,47 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<GhillieSuitComponent, ItemToggleActivateAttemptEvent>(OnGhillieActivateAttempt);
-        SubscribeLocalEvent<GhillieSuitComponent, ItemToggledEvent>(OnGhillieToggled);
+        SubscribeLocalEvent<GhillieSuitComponent, GetItemActionsEvent>(OnGetItemActions);
+        SubscribeLocalEvent<GhillieSuitComponent, GhillieSuitPreparePositionActionEvent>(OnPreparePositionAction);
         SubscribeLocalEvent<GhillieSuitComponent, GhillieSuitDoAfterEvent>(OnDoAfter);
 
+        SubscribeLocalEvent<GhillieSuitComponent, GotEquippedEvent>(OnEquipped);
+        SubscribeLocalEvent<GhillieSuitComponent, GotUnequippedEvent>(OnUnequipped);
+
+        SubscribeLocalEvent<RMCPassiveStealthComponent, VaporHitEvent>(OnVaporHit);
         SubscribeLocalEvent<RMCPassiveStealthComponent, MoveInputEvent>(OnMove);
-        SubscribeLocalEvent<EntityActiveInvisibleComponent, AttemptShootEvent>(OnAttemptShoot);
+        SubscribeLocalEvent<GunShotEvent>(OnGunShot);
     }
 
-    private void OnGhillieActivateAttempt(Entity<GhillieSuitComponent> ent, ref ItemToggleActivateAttemptEvent args)
+    private void OnGetItemActions(Entity<GhillieSuitComponent> ent, ref GetItemActionsEvent args)
     {
-        var user = args.User;
         var comp = ent.Comp;
 
-        if (user != null && !_whitelist.IsValid(comp.Whitelist, user))
-        {
-            args.Cancelled = true;
+        if (args.InHands || !_inventory.InSlotWithFlags((ent, null, null), SlotFlags.OUTERCLOTHING))
+            return;
 
+        args.AddAction(ref comp.Action, comp.ActionId);
+        Dirty(ent);
+    }
+
+    private void OnPreparePositionAction(Entity<GhillieSuitComponent> ent, ref GhillieSuitPreparePositionActionEvent args)
+    {
+        var user = args.Performer;
+        var comp = ent.Comp;
+
+        if (args.Handled)
+            return;
+
+        if (!_whitelist.IsValid(ent.Comp.Whitelist, args.Performer))
+        {
             var popup = Loc.GetString("cm-gun-unskilled", ("gun", ent.Owner));
-            _popup.PopupClient(popup, user.Value, user, PopupType.SmallCaution);
+            _popup.PopupClient(popup, args.Performer, args.Performer, PopupType.SmallCaution);
             return;
         }
-    }
 
-    public void OnGhillieToggled(Entity<GhillieSuitComponent> ent, ref ItemToggledEvent args)
-    {
-        var suit = ent.Owner;
-        var comp = ent.Comp;
+        args.Handled = true;
 
-        if (args.User == null)
-            return;
-
-        var user = args.User.Value;
-
-        if (args.Activated)
+        if (!comp.Enabled)
         {
             var ev = new GhillieSuitDoAfterEvent();
             var doAfterEventArgs = new DoAfterArgs(EntityManager, user, comp.UseDelay, ev, ent.Owner)
@@ -86,53 +95,86 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
         }
         else
         {
-            EnsureComp<RMCNightVisionVisibleComponent>(user);
-            RemCompDeferred<EntityIFFComponent>(user);
-            RemCompDeferred<RMCPassiveStealthComponent>(user);
-            RemCompDeferred<EntityActiveInvisibleComponent>(user);
-            RemCompDeferred<EntityTurnInvisibleComponent>(user);
-
-            if (comp.Enabled)
-            {
-                var deactivatedPopupSelf = Loc.GetString("rmc-ghillie-fail-self");
-                var deactivatedPopupOthers = Loc.GetString("rmc-ghillie-fail-others", ("user", user));
-                _popup.PopupPredicted(deactivatedPopupSelf, deactivatedPopupOthers, user, user, PopupType.Medium);
-                _useDelay.TryResetDelay(suit, id: comp.DelayId);
-
-                comp.Enabled = false;
-                Dirty(ent);
-            }
+            ToggleInvisibility(ent, user, false);
         }
     }
 
     private void OnDoAfter(Entity<GhillieSuitComponent> ent, ref GhillieSuitDoAfterEvent args)
     {
         var user = args.User;
-        var comp = ent.Comp;
 
         if (args.Cancelled)
-        {
-            _toggle.TryDeactivate(ent.Owner, user);
             return;
-        }
 
         if (args.Handled)
             return;
 
         args.Handled = true;
+        ToggleInvisibility(ent, user, true);
+    }
 
-        var invis = EnsureComp<RMCPassiveStealthComponent>(user);
-        invis.MinOpacity = comp.Opacity;
-        invis.Delay = comp.InvisibilityDelay;
-        invis.Enabled = true;
-        invis.ToggleTime = _timing.CurTime;
-        Dirty(user, invis);
+    private void OnEquipped(Entity<GhillieSuitComponent> ent, ref GotEquippedEvent args)
+    {
+        if (_timing.ApplyingState)
+            return;
 
-        EnsureComp<EntityIFFComponent>(user);
-        RemCompDeferred<RMCNightVisionVisibleComponent>(user);
+        if (!_inventory.InSlotWithFlags((ent, null, null), SlotFlags.OUTERCLOTHING))
+            return;
 
-        comp.Enabled = true;
-        Dirty(ent);
+        var comp = EnsureComp<EntityTurnInvisibleComponent>(args.Equipee);
+        Dirty(args.Equipee, comp);
+    }
+
+    private void OnUnequipped(Entity<GhillieSuitComponent> ent, ref GotUnequippedEvent args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        if (_inventory.InSlotWithFlags((ent, null, null), SlotFlags.OUTERCLOTHING))
+            return;
+
+        RemCompDeferred<EntityTurnInvisibleComponent>(args.Equipee);
+        ToggleInvisibility(ent, args.Equipee, false);
+    }
+
+    public void ToggleInvisibility(Entity<GhillieSuitComponent> ent, EntityUid user, bool enabling)
+    {
+        var comp = ent.Comp;
+
+        if (enabling)
+        {
+            var passiveInvisibility = EnsureComp<RMCPassiveStealthComponent>(user);
+            passiveInvisibility.MinOpacity = comp.Opacity;
+            passiveInvisibility.Delay = comp.InvisibilityDelay;
+            passiveInvisibility.Enabled = true;
+            passiveInvisibility.ToggleTime = _timing.CurTime;
+            Dirty(user, passiveInvisibility);
+
+            var activeInvisibility = EnsureComp<EntityActiveInvisibleComponent>(user);
+            activeInvisibility.Opacity = 1f;
+            Dirty(user, activeInvisibility);
+
+            EnsureComp<EntityIFFComponent>(user);
+            RemCompDeferred<RMCNightVisionVisibleComponent>(user);
+
+            comp.Enabled = true;
+            Dirty(ent);
+        }
+        else
+        {
+            EnsureComp<RMCNightVisionVisibleComponent>(user);
+
+            RemCompDeferred<RMCPassiveStealthComponent>(user);
+            RemCompDeferred<EntityActiveInvisibleComponent>(user);
+            RemCompDeferred<EntityIFFComponent>(user);
+
+            var deactivatedPopupSelf = Loc.GetString("rmc-ghillie-fail-self");
+            var deactivatedPopupOthers = Loc.GetString("rmc-ghillie-fail-others", ("user", user));
+            _popup.PopupPredicted(deactivatedPopupSelf, deactivatedPopupOthers, user, user, PopupType.MediumCaution);
+
+            comp.Enabled = false;
+            Dirty(ent);
+        }
     }
 
     /// <summary>
@@ -150,6 +192,17 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
         return null;
     }
 
+    private void OnVaporHit(Entity<RMCPassiveStealthComponent> ent, ref VaporHitEvent args)
+    {
+        var user = ent.Owner;
+        var suit = FindSuit(user);
+
+        if (suit == null)
+            return;
+
+        ToggleInvisibility(suit.Value, user, false);
+    }
+
     private void OnMove(Entity<RMCPassiveStealthComponent> ent, ref MoveInputEvent args)
     {
         var user = ent.Owner;
@@ -158,27 +211,26 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
         if (suit == null)
             return;
 
-        _toggle.TryDeactivate(suit.Value.Owner, user);
+        ToggleInvisibility(suit.Value, user, false);
     }
 
-    private void OnAttemptShoot(Entity<EntityActiveInvisibleComponent> ent, ref AttemptShootEvent args)
+    private void OnGunShot(ref GunShotEvent args)
     {
-        var user = ent.Owner;
-        var comp = ent.Comp;
+        var user = args.User;
         var suit = FindSuit(user);
 
-        if (args.Cancelled)
-            return;
         if (suit == null)
             return;
 
-        if (_toggle.IsActivated(suit.Value.Owner) && TryComp<RMCPassiveStealthComponent>(user, out var invis))
+        if (suit.Value.Comp.Enabled
+            && TryComp<EntityActiveInvisibleComponent>(user, out var invis)
+            && TryComp<RMCPassiveStealthComponent>(user, out var passive))
         {
-            comp.Opacity = 1;
-            Dirty(ent);
-
-            invis.ToggleTime = _timing.CurTime;
+            invis.Opacity = 1;
             Dirty(user, invis);
+
+            passive.ToggleTime = _timing.CurTime;
+            Dirty(user, passive);
         }
     }
 }
