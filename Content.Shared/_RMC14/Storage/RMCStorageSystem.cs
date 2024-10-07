@@ -228,6 +228,34 @@ public sealed class RMCStorageSystem : EntitySystem
         return true;
     }
 
+    public bool TryGetLastItem(Entity<StorageComponent?> storage, out EntityUid item)
+    {
+        item = default;
+        if (!Resolve(storage, ref storage.Comp, false))
+            return false;
+
+        ItemStorageLocation? lastLocation = null;
+        foreach (var (stored, location) in storage.Comp.StoredItems)
+        {
+            if (lastLocation is not { } last ||
+                last.Position.Y < location.Position.Y)
+            {
+                item = stored;
+                lastLocation = location;
+                continue;
+            }
+
+            if (last.Position.Y == location.Position.Y &&
+                last.Position.X > location.Position.X)
+            {
+                item = stored;
+                lastLocation = location;
+            }
+        }
+
+        return item != default;
+    }
+
     public override void Update(float frameTime)
     {
         var removeOnlyQuery = EntityQueryEnumerator<RemoveOnlyStorageComponent>();
