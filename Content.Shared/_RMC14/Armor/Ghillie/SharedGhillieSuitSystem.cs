@@ -164,7 +164,6 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
 
             EnsureComp<EntityIFFComponent>(user);
             RemCompDeferred<RMCNightVisionVisibleComponent>(user);
-
         }
         else
         {
@@ -221,7 +220,7 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
         ToggleInvisibility(suit.Value, user, false);
     }
 
-    private void OnGunShot(GunShotEvent args)
+    private void OnGunShot(ref GunShotEvent args)
     {
         var user = args.User;
         var suit = FindSuit(user);
@@ -233,11 +232,11 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
             && TryComp<EntityActiveInvisibleComponent>(user, out var invis)
             && TryComp<RMCPassiveStealthComponent>(user, out var passive))
         {
-            invis.Opacity = 1;
-            Dirty(user, invis);
-
             passive.ToggleTime = _timing.CurTime;
             Dirty(user, passive);
+
+            invis.Opacity = 1;
+            Dirty(user, invis);
         }
     }
 }
