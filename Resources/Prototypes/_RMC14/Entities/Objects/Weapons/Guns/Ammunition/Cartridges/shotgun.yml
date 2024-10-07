@@ -200,7 +200,7 @@
 - type: stack
   id: RMCShellShotgunFlechette
   name: handful of flechette shells
-  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: flechette_1 }
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: flechette_shell_1 }
   spawn: CMShellShotgunFlechette
   maxCount: 5
 
