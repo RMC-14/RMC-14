@@ -169,7 +169,7 @@
     cycleable: true
     whitelist:
       tags:
-      - CMShellShotgun
+      - RMCShellShotgun
     capacity: 2
   - type: RMCSelectiveFire
     baseFireModes:
