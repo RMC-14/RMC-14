@@ -849,3 +849,8 @@ FloraTreeStumpConifer: RMCFloraTreeStumpConifer
 # 2024-09-23
 FireAxe: RMCFireAxe
 Pickaxe: RMCPickaxe
+
+# 2024-10-07
+ClothingOuterVestHazard: RMCHazardVest
+ClothingHeadHatHardhatYellow: RMCHardHat
+ClothingHeadHatHardhatBlue: RMCHardhatBlue
