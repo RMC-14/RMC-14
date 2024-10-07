@@ -106,7 +106,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         if (!TryComp<GunComponent>(uid, out var gun))
             return;
 
-        if (gun.NextFire > component.NextAttack)
+        if (gun.MeleeCooldownOnShoot && gun.NextFire > component.NextAttack)
         {
             component.NextAttack = gun.NextFire;
             Dirty(uid, component);

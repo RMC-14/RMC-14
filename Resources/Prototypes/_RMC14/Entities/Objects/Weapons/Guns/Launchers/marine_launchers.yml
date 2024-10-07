@@ -211,3 +211,5 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: -0.12, 0.1
+  - type: IgnorePredictionHide
+  - type: GunIgnorePrediction

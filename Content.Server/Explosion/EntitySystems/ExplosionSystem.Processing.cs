@@ -1,7 +1,5 @@
-using System.Linq;
 using System.Numerics;
 using Content.Server.Atmos.EntitySystems;
-using Content.Server.Explosion.Components;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
 using Content.Shared.Database;
@@ -443,6 +441,12 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
         float? fireStacksOnIgnite,
         EntityUid? cause)
     {
+        if (_deleteOnExplosionQuery.HasComp(uid))
+        {
+            QueueDel(uid);
+            return;
+        }
+
         if (originalDamage != null)
         {
             GetEntitiesToDamage(uid, originalDamage, id);

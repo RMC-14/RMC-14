@@ -19,6 +19,9 @@ rmc-sentry-upgrade-not-item = You need to disassemble {THE($sentry)} with a mult
 rmc-sentry-upgrade-not-holding = You need to be holding an upgrade kit in your active hand to upgrade {THE($sentry)}!
 rmc-sentry-upgrade-not-upgradeable = You can't upgrade {THE($sentry)}!
 
+rmc-sentry-spikes-self = The sentry's steel tusks cut into you!
+rmc-sentry-spikes-others = The sentry's steel tusks cut into {$target}!
+
 rmc-sentry-rotate-self = You rotate {THE($sentry)}.
 rmc-sentry-rotate-others = {$user} rotates {THE($sentry)}.
 
@@ -29,7 +32,7 @@ rmc-sentry-disassemble-finish-others = {$user} disassembles {THE($sentry)}.
 
 rmc-sentry-unanchor-is-on = {CAPITALIZE(THE($sentry))} is currently active. The motors will prevent you from unanchoring it safely.
 
-health-examinable-sentry-none = {CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} in pristine condition.
+health-examinable-sentry-none = It is in pristine condition.
 
 health-examinable-sentry-Blunt-10 = [color=yellow]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-HAVE($target)} a few dents.[/color]
 health-examinable-sentry-Blunt-25 = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} a bit beat up.[/color]
@@ -55,3 +58,6 @@ health-examinable-sentry-Shock-10 = [color=yellow]{CAPITALIZE(SUBJECT($target))}
 health-examinable-sentry-Shock-25 = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} lightly charred.[/color]
 health-examinable-sentry-Shock-50 = [color=red]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} letting off sparks![/color]
 health-examinable-sentry-Shock-75 = [color=crimson]{CAPITALIZE(SUBJECT($target))} can barely function![/color]
+
+rmc-sentry-not-emergency = {CAPITALIZE(THE($deployer))} can only be activated in emergencies.
+rmc-sentry-deploy = You deploy {THE($spawned)}

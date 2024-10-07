@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
+using Robust.Shared.Utility;
 
 // ReSharper disable CheckNamespace
 namespace Content.Shared.Roles;
@@ -35,4 +36,7 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
 
     [DataField]
     public readonly string? OverwatchRoleName;
+
+    [DataField]
+    public SpriteSpecifier.Rsi? MinimapIcon;
 }

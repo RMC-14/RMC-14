@@ -10,6 +10,9 @@
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - MessTech
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: mst
   special:
   - !type:AddComponentSpecial
     components:

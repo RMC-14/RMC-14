@@ -1,5 +1,5 @@
-﻿using Content.Server._RMC14.Dropship;
-using Content.Server.GameTicking;
+﻿using Content.Server.GameTicking;
+using Content.Shared._RMC14.Dropship;
 using Content.Shared.Coordinates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;

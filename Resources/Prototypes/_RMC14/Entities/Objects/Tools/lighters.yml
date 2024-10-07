@@ -19,6 +19,10 @@
       map: ["flame"]
       visible: false
       shader: unshaded
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 - type: entity
   name: We-Ya executive zippo lighter

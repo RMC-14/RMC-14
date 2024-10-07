@@ -1,8 +1,8 @@
-﻿using Content.Shared._RMC14.Xenonids;
+﻿using Content.Shared._RMC14.Connection;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.SSDIndicator;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Prototypes;
 
@@ -16,10 +16,10 @@ public sealed class CMHealthIconsSystem : EntitySystem
     private static readonly ProtoId<HealthIconPrototype> Healthy = "CMHealthIconHealthy";
     private static readonly ProtoId<HealthIconPrototype> DeadDefib = "CMHealthIconDeadDefib";
     private static readonly ProtoId<HealthIconPrototype> DeadClose = "CMHealthIconDeadClose";
-    private static readonly ProtoId<HealthIconPrototype> DeadAlmost = "CMHealthIconDeadClose";
+    private static readonly ProtoId<HealthIconPrototype> DeadAlmost = "CMHealthIconDeadAlmost";
     private static readonly ProtoId<HealthIconPrototype> DeadDNR = "CMHealthIconDeadDNR";
     private static readonly ProtoId<HealthIconPrototype> Dead = "CMHealthIconDead";
-    private static readonly ProtoId<HealthIconPrototype> HCDead = "CMHealthIconDead";
+    private static readonly ProtoId<HealthIconPrototype> HCDead = "CMHealthIconHCDead";
 
     public StatusIconData GetDeadIcon()
     {
@@ -43,7 +43,7 @@ public sealed class CMHealthIconsSystem : EntitySystem
 
         if (_mobState.IsDead(damageable))
         {
-            if (CompOrNull<SSDIndicatorComponent>(damageable)?.IsSSD ?? false)
+            if (TryComp<MindCheckComponent>(damageable, out var mind) && !mind.ActiveMindOrGhost)
             {
                 icons.Add(_prototype.Index(DeadDNR));
                 return icons;

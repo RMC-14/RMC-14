@@ -9,6 +9,6 @@
   path: "/Textures/_RMC14/Shaders/screech_shock_wave.swsl"
 
 - type: shader
-  id: RMCInvisibile
+  id: RMCInvisible
   kind: source
   path: "/Textures/_RMC14/Shaders/invisible.swsl"

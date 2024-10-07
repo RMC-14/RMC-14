@@ -32,6 +32,9 @@
   whitelisted: true
   accessGroups:
   - ShipMasterAccess
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: cic
   special:
   - !type:AddComponentSpecial
     components:

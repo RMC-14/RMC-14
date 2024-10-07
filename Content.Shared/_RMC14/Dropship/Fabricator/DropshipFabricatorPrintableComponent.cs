@@ -10,7 +10,7 @@ public sealed partial class DropshipFabricatorPrintableComponent : Component
     public int Cost = 50;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan Delay = TimeSpan.FromSeconds(10);
+    public TimeSpan Delay = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]
     public CategoryType Category;

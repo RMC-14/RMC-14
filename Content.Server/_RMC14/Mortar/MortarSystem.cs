@@ -21,7 +21,7 @@ public sealed class MortarSystem : SharedMortarSystem
     [Dependency] private readonly DropshipSystem _dropship = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -93,7 +93,7 @@ public sealed class MortarSystem : SharedMortarSystem
             return false;
         }
 
-        if (!_area.TryGetArea(coordinates, out _, out var area))
+        if (!_area.TryGetArea(coordinates, out var area, out _, out _))
         {
             _popup.PopupEntity(Loc.GetString("rmc-mortar-target-not-area"), user, user, SmallCaution);
             return false;

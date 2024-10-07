@@ -1,8 +1,11 @@
-﻿using Content.Shared.Coordinates;
+﻿using Content.Shared._RMC14.Pulling;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
@@ -13,10 +16,10 @@ namespace Content.Shared._RMC14.Xenonids.Punch;
 public sealed class XenoPunchSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
@@ -46,6 +49,8 @@ public sealed class XenoPunchSystem : EntitySystem
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
         var targetId = args.Target;
+        _rmcPulling.TryStopUserPullIfPulling(xeno, targetId);
+
         var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage);
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {

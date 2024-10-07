@@ -104,6 +104,9 @@ public sealed class RMCNamedItems
 
     [StringLength(20)]
     public string? ArmorName { get; set; } = default!;
+
+    [StringLength(20)]
+    public string? SentryName { get; set; } = default!;
 }
 
 [Table("rmc_linked_accounts_logs")]

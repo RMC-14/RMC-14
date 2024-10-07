@@ -58,3 +58,103 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Correspondent/red.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Correspondent/red.rsi
+
+# Dutch's Dozen
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitDutch # This is technically originally split into two items, but only the sprites are different between them
+  name: Dutch's Dozen uniform
+  description: A comfortable uniform worn by the Dutch's Dozen mercenaries. It's seen some definite wear and tear, but is still in good condition.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Dutch/jumpsuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Dutch/jumpsuit.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitDutchBandolier
+  name: hunting clothes
+  description: A set of tailored clothes, made from fine but sturdy reinforced fabrics. Protects from thorns, weather, and the cuts and scrapes that forever bedevil outdoorsmen.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Dutch/bandolier.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Dutch/bandolier.rsi
+
+# Mercenaries
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitMercenaryHeavy
+  name: mercenary fatigues
+  description: A thick, beige suit with a red armband. There is an unknown symbol is emblazed on the suit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/heavy.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/heavy.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitMercenaryMiner
+  name: mercenary miner fatigues
+  description: A beige suit with a red armband. It looks a little thin, like it wasn't designed for protection. There is an unknown symbol is emblazed on the suit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/miner.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/miner.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitMercenaryEngineer
+  name: mercenary engineer fatigues
+  description: A blue suit with yellow accents, used by engineers. There is an unknown symbol is emblazed on the suit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/engi.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/engi.rsi
+
+
+# Other factions
+
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitMarsoc
+  name: special operative uniform # TODO: find more appropriate name
+  description: A black uniform for elite Marine personnel. Designed to be comfortable and help blend into dark environments.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/marsoc.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/marsoc.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitFreelancer
+  name: freelancer fatigues
+  description: A set of loose-fitting fatigues, perfect for an informal mercenary. Smells like gunpowder, apple pie, and covered in grease and sake stains.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi
+
+# "Civilian"
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitCivilian
+  name: gray utility uniform
+  description: A stylish gray jumpsuit - standard issue for civilian support personnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/civilian.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/civilian.rsi
