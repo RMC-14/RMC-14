@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed marines not being able to take out their boot knife to attack xenonids
-      while devoured.
-    type: Fix
-  id: 294
-  time: '2024-07-08T03:45:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2891
-- author: DrSmugleaf
-  changes:
   - message: Fixed the grenadier armor not being able to fit any items.
     type: Fix
   - message: Fixed the grenadier armor only having 2 slots, it now has 3 slots.
@@ -4654,5 +4646,12 @@
   id: 793
   time: '2024-10-07T03:33:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4322
+- author: whisper
+  changes:
+  - message: Fixed lesser drones from the hive core not being raffled.
+    type: Fix
+  id: 794
+  time: '2024-10-07T04:16:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4268
 Name: RMC14
 Order: -1
