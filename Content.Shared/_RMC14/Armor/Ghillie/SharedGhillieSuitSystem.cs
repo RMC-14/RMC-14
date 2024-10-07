@@ -192,6 +192,13 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
         }
     }
 
+    public void TryToggleInvisibility(EntityUid uid, bool enabling)
+    {
+        var suit = FindSuit(uid);
+        if (suit.HasValue)
+            ToggleInvisibility(suit.Value, uid, enabling);
+    }
+
     /// <summary>
     /// Finds a ghillie suit on a user.
     /// </summary>
@@ -209,24 +216,12 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
 
     private void OnVaporHit(Entity<RMCPassiveStealthComponent> ent, ref VaporHitEvent args)
     {
-        var user = ent.Owner;
-        var suit = FindSuit(user);
-
-        if (suit == null)
-            return;
-
-        ToggleInvisibility(suit.Value, user, false);
+        TryToggleInvisibility(ent.Owner, false);
     }
 
     private void OnMove(Entity<RMCPassiveStealthComponent> ent, ref MoveInputEvent args)
     {
-        var user = ent.Owner;
-        var suit = FindSuit(user);
-
-        if (suit == null)
-            return;
-
-        ToggleInvisibility(suit.Value, user, false);
+        TryToggleInvisibility(ent.Owner, false);
     }
 
     private void OnGunShot(Entity<GunComponent> ent, ref GunShotEvent args)
