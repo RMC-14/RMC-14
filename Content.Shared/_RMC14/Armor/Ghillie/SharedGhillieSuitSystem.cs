@@ -22,13 +22,10 @@ namespace Content.Shared._RMC14.Armor.Ghillie;
 /// </summary>
 public abstract class SharedGhillieSuitSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly ItemToggleSystem _toggle = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
@@ -220,7 +217,7 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
         ToggleInvisibility(suit.Value, user, false);
     }
 
-    private void OnGunShot(ref GunShotEvent args)
+    private void OnGunShot(GunShotEvent args)
     {
         var user = args.User;
         var suit = FindSuit(user);
