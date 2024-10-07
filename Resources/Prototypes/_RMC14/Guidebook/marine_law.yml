@@ -93,7 +93,7 @@
   - RMCMarineLawCrimesMinor
   - RMCMarineLawCrimesMajor
   - RMCMarineLawCrimesCapital
-#  - RMCMarineLawCrimesOptional
+  - RMCMarineLawCrimesOptional
   - RMCMarineLawCrimesPrecautionary
 
 - type: guideEntry
@@ -123,6 +123,13 @@
   name: rmc-guide-entry-marine-law-crimes-capital
   text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCrimesCapital.xml"
   priority: 3
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawCrimesOptional
+  name: rmc-guide-entry-marine-law-crimes-optional
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCrimesOptional.xml"
+  priority: 4
 
 - type: guideEntry
   parent: RMC
