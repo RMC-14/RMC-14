@@ -23,6 +23,8 @@
     - Cartridge
     - RMCShellShotgun
   - type: Appearance
+  - type: StaticPrice
+    price: 0
 
 - type: entity
   parent: CMShellShotgunBase

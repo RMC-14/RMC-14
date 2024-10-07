@@ -111,6 +111,11 @@
     idleLoad: 1
     activeLoad: 40
     channel: Lighting
+  - type: DeviceLinkSink
+    ports:
+    - On
+    - Off
+    - Toggle
 
 - type: entity
   parent: CMLightFixtureEmpty
@@ -187,6 +192,11 @@
     range: 2
     sound:
       path: /Audio/Ambience/Objects/light_hum.ogg
+  - type: DeviceLinkSink
+    ports:
+    - On
+    - Off
+    - Toggle
 
 - type: entity
   parent: CMLightFixture
@@ -383,6 +393,11 @@
     range: 2
     sound:
       path: /Audio/Ambience/Objects/light_hum.ogg
+  - type: DeviceLinkSink
+    ports:
+    - On
+    - Off
+    - Toggle
 
 - type: entity
   parent: CMLightFixtureSmall
