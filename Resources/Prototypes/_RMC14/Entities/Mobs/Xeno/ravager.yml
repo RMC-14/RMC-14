@@ -82,6 +82,8 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
+  - type: SlowOnPull
+    multiplier: 0.5
   - type: RMCSize
     size: Big
 #  - type: RMCXenoDamageVisuals # TODO RMC14
