@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Temporarily added an autobalance feature that will change the ratio of
-      marines per xeno round-start depending on round outcome. This was already being
-      done by the hosts manually from time to time but is now automatic.
-    type: Add
-  id: 301
-  time: '2024-07-08T09:09:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2892
-- author: DrSmugleaf
-  changes:
   - message: The dropship crew hatches can now be locked by the pilot from the navigation
       computer.
     type: Add
@@ -4652,5 +4643,12 @@
   id: 800
   time: '2024-10-08T22:09:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4337
+- author: Rainbeon
+  changes:
+  - message: Fixed Xeno Health Regeneration being half of what it should be in 13.
+    type: Fix
+  id: 801
+  time: '2024-10-08T22:12:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4345
 Name: RMC14
 Order: -1
