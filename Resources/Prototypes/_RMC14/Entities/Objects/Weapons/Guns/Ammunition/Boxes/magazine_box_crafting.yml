@@ -275,47 +275,47 @@
     state: base_flech
   objectType: Item
   
-- type: construction
-  parent: RMC
-  name: Shell Box (Incendiary)
-  id: RMCBoxShellsIncendiaryEmpty
-  graph: RMCBoxMagazine
-  startNode: start
-  targetNode: RMCBoxShellsIncendiaryEmpty
-  category: construction-category-cm-box-magazine
-  description: A box for holding shells.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_inc
-  objectType: Item
+# - type: construction
+  # parent: RMC
+  # name: Shell Box (Incendiary)
+  # id: RMCBoxShellsIncendiaryEmpty
+  # graph: RMCBoxMagazine
+  # startNode: start
+  # targetNode: RMCBoxShellsIncendiaryEmpty
+  # category: construction-category-cm-box-magazine
+  # description: A box for holding shells.
+  # icon:
+    # sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    # state: base_inc
+  # objectType: Item
   
-- type: construction
-  parent: RMC
-  name: Shell Box (Beanbag)
-  id: RMCBoxShellsBeanbagEmpty
-  graph: RMCBoxMagazine
-  startNode: start
-  targetNode: RMCBoxShellsBeanbagEmpty
-  category: construction-category-cm-box-magazine
-  description: A box for holding shells.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_bean
-  objectType: Item
+# - type: construction
+  # parent: RMC
+  # name: Shell Box (Beanbag)
+  # id: RMCBoxShellsBeanbagEmpty
+  # graph: RMCBoxMagazine
+  # startNode: start
+  # targetNode: RMCBoxShellsBeanbagEmpty
+  # category: construction-category-cm-box-magazine
+  # description: A box for holding shells.
+  # icon:
+    # sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    # state: base_bean
+  # objectType: Item
   
-- type: construction
-  parent: RMC
-  name: Shell Box (Inc Buckshot)
-  id: RMCBoxShellsIncendiaryBuckshotEmpty
-  graph: RMCBoxMagazine
-  startNode: start
-  targetNode: RMCBoxShellsIncendiaryBuckshotEmpty
-  category: construction-category-cm-box-magazine
-  description: A box for holding shells.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_incbuck
-  objectType: Item
+# - type: construction
+  # parent: RMC
+  # name: Shell Box (Inc Buckshot)
+  # id: RMCBoxShellsIncendiaryBuckshotEmpty
+  # graph: RMCBoxMagazine
+  # startNode: start
+  # targetNode: RMCBoxShellsIncendiaryBuckshotEmpty
+  # category: construction-category-cm-box-magazine
+  # description: A box for holding shells.
+  # icon:
+    # sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    # state: base_incbuck
+  # objectType: Item
   
   # Construct graphs
 - type: constructionGraph
@@ -441,21 +441,21 @@
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
-    - to: RMCBoxShellsIncendiaryEmpty
-      steps:
-      - material: RMCSheetCardboard
-        amount: 1
-        doAfter: 1
-    - to: RMCBoxShellsBeanbagEmpty
-      steps:
-      - material: RMCSheetCardboard
-        amount: 1
-        doAfter: 1
-    - to: RMCBoxShellsIncendiaryBuckshotEmpty
-      steps:
-      - material: RMCSheetCardboard
-        amount: 1
-        doAfter: 1
+    # - to: RMCBoxShellsIncendiaryEmpty
+      # steps:
+      # - material: RMCSheetCardboard
+        # amount: 1
+        # doAfter: 1
+    # - to: RMCBoxShellsBeanbagEmpty
+      # steps:
+      # - material: RMCSheetCardboard
+        # amount: 1
+        # doAfter: 1
+    # - to: RMCBoxShellsIncendiaryBuckshotEmpty
+      # steps:
+      # - material: RMCSheetCardboard
+        # amount: 1
+        # doAfter: 1
 
   # Why the fuck do you even need these nodes???
 
@@ -514,10 +514,10 @@
     entity: RMCBoxShellsSlugsEmpty
   - node: RMCBoxShellsFlechetteEmpty
     entity: RMCBoxShellsFlechetteEmpty
-  - node: RMCBoxShellsIncendiaryEmpty
-    entity: RMCBoxShellsIncendiaryEmpty
-  - node: RMCBoxShellsBeanbagEmpty
-    entity: RMCBoxShellsBeanbagEmpty
-  - node: RMCBoxShellsIncendiaryBuckshotEmpty
-    entity: RMCBoxShellsIncendiaryBuckshotEmpty
+  # - node: RMCBoxShellsIncendiaryEmpty
+    # entity: RMCBoxShellsIncendiaryEmpty
+  # - node: RMCBoxShellsBeanbagEmpty
+    # entity: RMCBoxShellsBeanbagEmpty
+  # - node: RMCBoxShellsIncendiaryBuckshotEmpty
+    # entity: RMCBoxShellsIncendiaryBuckshotEmpty
   
