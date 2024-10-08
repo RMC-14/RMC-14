@@ -2,7 +2,7 @@
   parent: BaseItem
   id: CMSoap
   name: soap
-  desc: A cheap bar of soap. Doesn't smell.
+  description: A cheap bar of soap. Doesn't smell.
   components:
   - type: Tag
     tags:
