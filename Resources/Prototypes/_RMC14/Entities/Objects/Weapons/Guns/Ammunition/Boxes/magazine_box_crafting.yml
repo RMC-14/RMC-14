@@ -235,7 +235,7 @@
 # Shotgun
 - type: construction
   parent: RMC
-  name: Magazine Box (SG Buckshot)
+  name: Shell Box (Buckshot)
   id: RMCBoxShellsBuckshotEmpty
   graph: RMCBoxMagazine
   startNode: start
