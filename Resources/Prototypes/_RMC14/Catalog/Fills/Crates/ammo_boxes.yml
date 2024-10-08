@@ -7,7 +7,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxMagazineShotgunSlugs
+    - id: RMCBoxShellsSlugs
       amount: 1
 
 - type: entity

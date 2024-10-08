@@ -744,8 +744,7 @@
 - type: entity
   parent: RMCBoxShellsBase
   id: RMCBoxShellsBuckshotEmpty
-  name: buckshot case
-  description: A box for holding many handfuls of rounds. 
+  name: shell box (Buckshot)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -777,3 +776,55 @@
       whitelist:
         tags:
         - RMCShellShotgunBuckshot
+
+- type: entity
+  parent: RMCBoxShellsBase
+  id: RMCBoxShellsSlugsEmpty
+  name: shell box (Slugs)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsSlugsEmpty
+  - type: Sprite
+    layers:
+    - state: base_slug
+    - state: shells_slug
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_shells
+    - state: base_slug_lid
+      map: [ "lid" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: shells_slug, visible: false }
+          Low: { state: shells_slug_1, visible: true }
+          Medium: { state: shells_slug_2, visible: true }
+          High: { state: shells_slug_3, visible: true }
+          Full: { state: shells_slug, visible: true }
+  - type: CMItemSlots
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunSlugs
+
+- type: entity
+  parent: RMCBoxShellsSlugsEmpty
+  id: RMCBoxShellsSlugs
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunSlugs
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunSlugs

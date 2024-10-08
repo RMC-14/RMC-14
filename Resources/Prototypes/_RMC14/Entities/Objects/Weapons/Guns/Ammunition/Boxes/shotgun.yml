@@ -24,12 +24,6 @@
 
 - type: Tag
   id: RMCBoxShotgunShells
-- type: Tag
-  id: RMCBoxShotgunBuckshot
-- type: Tag
-  id: RMCBoxShotgunSlugs
-- type: Tag
-  id: RMCBoxShotgunFlechette
 
 - type: entity
   parent: RMCBoxShotgunBase
