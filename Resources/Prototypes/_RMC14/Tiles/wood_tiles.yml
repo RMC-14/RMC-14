@@ -45,8 +45,8 @@
   sprite: /Textures/_RMC14/Tiles/almayer/wood-broken7.png
 
 - type: tile
-  parent: CMFloorWoodBaseInside
-  id: RMCWood
+  parent: CMFloorWoodBase
+  id: RMCWoodInside
   name: tiles-cm-wood
   sprite: /Textures/_RMC14/Tiles/planet/wood/wood.png
 
