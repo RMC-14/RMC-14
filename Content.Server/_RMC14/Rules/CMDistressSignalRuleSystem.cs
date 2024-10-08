@@ -34,7 +34,6 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
-using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
 using Content.Shared.GameTicking;
@@ -186,7 +185,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 continue;
             }
 
-            SetWeedsHive(comp.Hive);
+            SetFriendlyHives(comp.Hive);
 
             SpawnSquads((uid, comp));
             SpawnAdminFaxArea();
@@ -1176,12 +1175,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     }
 
     /// <summary>
-    /// Sets the hive of all loaded weeds.
+    /// Sets the hive of all loaded xeno friendly entities (e.g. weeds).
     /// Only makes sense for distress signal with 1 hive, with multiple hives you would need to determine which weeds belong to which hive
     /// </summary>
-    public void SetWeedsHive(EntityUid hive)
+    public void SetFriendlyHives(EntityUid hive)
     {
-        var query = EntityQueryEnumerator<XenoWeedsComponent>();
+        var query = EntityQueryEnumerator<XenoFriendlyComponent>();
         while (query.MoveNext(out var weeds, out _))
         {
             _hive.SetHive(weeds, hive);
