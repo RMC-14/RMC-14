@@ -235,44 +235,16 @@
 # Shotgun
 - type: construction
   parent: RMC
-  name: Magazine Box (M42 Buckshot)
-  id: RMCBoxMagazineShotgunBuckshotEmpty
+  name: Magazine Box (SG Buckshot)
+  id: RMCBoxShellsBuckshotEmpty
   graph: RMCBoxMagazine
   startNode: start
-  targetNode: RMCBoxMagazineShotgunBuckshotEmpty
+  targetNode: RMCBoxShellsBuckshotEmpty
   category: construction-category-cm-box-magazine
-  description: A box for holding other, smaller, boxes of shotgun shells.
+  description: A box for holding shells.
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_buck
-  objectType: Item
-  
-- type: construction
-  parent: RMC
-  name: Magazine Box (M42 Slugs)
-  id: RMCBoxMagazineShotgunSlugsEmpty
-  graph: RMCBoxMagazine
-  startNode: start
-  targetNode: RMCBoxMagazineShotgunSlugsEmpty
-  category: construction-category-cm-box-magazine
-  description: A box for holding other, smaller, boxes of shotgun shells.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_slug
-  objectType: Item
-  
-- type: construction
-  parent: RMC
-  name: Magazine Box (M42 Flechette)
-  id: RMCBoxMagazineShotgunFlechetteEmpty
-  graph: RMCBoxMagazine
-  startNode: start
-  targetNode: RMCBoxMagazineShotgunFlechetteEmpty
-  category: construction-category-cm-box-magazine
-  description: A box for holding other, smaller, boxes of shotgun shells.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_flech
   objectType: Item
 
   # Construct graphs
@@ -384,17 +356,7 @@
         doAfter: 1
     
     # Shotgun
-    - to: RMCBoxMagazineShotgunBuckshotEmpty
-      steps:
-      - material: RMCSheetCardboard
-        amount: 1
-        doAfter: 1
-    - to: RMCBoxMagazineShotgunSlugsEmpty
-      steps:
-      - material: RMCSheetCardboard
-        amount: 1
-        doAfter: 1
-    - to: RMCBoxMagazineShotgunFlechetteEmpty
+    - to: RMCBoxShellsBuckshotEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
@@ -451,10 +413,6 @@
     entity: RMCBoxMagazineRevolverM44MarksmanEmpty
     
   # Shotgun
-  - node: RMCBoxMagazineShotgunBuckshotEmpty
-    entity: RMCBoxMagazineShotgunBuckshotEmpty
-  - node: RMCBoxMagazineShotgunSlugsEmpty
-    entity: RMCBoxMagazineShotgunSlugsEmpty
-  - node: RMCBoxMagazineShotgunFlechetteEmpty
-    entity: RMCBoxMagazineShotgunFlechetteEmpty
+  - node: RMCBoxShellsBuckshotEmpty
+    entity: RMCBoxShellsBuckshotEmpty
   

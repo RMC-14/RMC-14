@@ -17,7 +17,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxMagazineShotgunBuckshot
+    - id: RMCBoxShellsBuckshot
       amount: 1
 
 - type: entity
