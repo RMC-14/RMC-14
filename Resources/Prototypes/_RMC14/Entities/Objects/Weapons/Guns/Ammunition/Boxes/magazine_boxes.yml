@@ -972,7 +972,7 @@
     slot:
       whitelist:
         tags:
-        - RMCShellBeanbagIncendiary
+        - RMCShellShotgunBeanbag
 
 - type: entity
   parent: RMCBoxShellsBeanbagEmpty

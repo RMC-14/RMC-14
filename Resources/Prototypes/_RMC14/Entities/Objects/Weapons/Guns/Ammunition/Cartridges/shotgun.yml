@@ -151,12 +151,12 @@
     stackType: RMCShellShotgunBeanbag
     baseLayer: base
     layerStates:
-    - incendiary_slug_1
-    - incendiary_slug_1
-    - incendiary_slug_2
-    - incendiary_slug_3
-    - incendiary_slug_4
-    - incendiary_slug_5
+    - beanbag_slug_1
+    - beanbag_slug_1
+    - beanbag_slug_2
+    - beanbag_slug_3
+    - beanbag_slug_4
+    - beanbag_slug_5
   - type: Tag
     tags:
     - Cartridge
