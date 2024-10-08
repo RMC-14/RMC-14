@@ -881,16 +881,15 @@
         tags:
         - RMCShellShotgunFlechette
         
-# Incendiary, beanbag, incenbuck
-        
+# These shells aren't fully implemented yet, so they can't be constructed
 - type: entity
   parent: RMCBoxShellsBase
   id: RMCBoxShellsIncendiaryEmpty
   name: shell box (Incendiary)
   components:
-  - type: Construction
-    graph: RMCBoxMagazine
-    node: RMCBoxShellsIncendiaryEmpty
+  # - type: Construction
+    # graph: RMCBoxMagazine
+    # node: RMCBoxShellsIncendiaryEmpty
   - type: Sprite
     layers:
     - state: base_inc
@@ -940,9 +939,9 @@
   id: RMCBoxShellsBeanbagEmpty
   name: shell box (Beanbag)
   components:
-  - type: Construction
-    graph: RMCBoxMagazine
-    node: RMCBoxShellsBeanbagEmpty
+  # - type: Construction
+    # graph: RMCBoxMagazine
+    # node: RMCBoxShellsBeanbagEmpty
   - type: Sprite
     layers:
     - state: base_bean
@@ -992,9 +991,9 @@
   id: RMCBoxShellsIncendiaryBuckshotEmpty
   name: shell box (Incendiary Buckshot)
   components:
-  - type: Construction
-    graph: RMCBoxMagazine
-    node: RMCBoxShellsIncendiaryBuckshotEmpty
+  # - type: Construction
+    # graph: RMCBoxMagazine
+    # node: RMCBoxShellsIncendiaryBuckshotEmpty
   - type: Sprite
     layers:
     - state: base_incbuck
