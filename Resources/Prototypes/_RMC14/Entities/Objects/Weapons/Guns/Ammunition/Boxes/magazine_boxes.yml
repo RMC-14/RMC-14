@@ -1024,7 +1024,7 @@
     slot:
       whitelist:
         tags:
-        - RMCShellIncendiaryBuckshotIncendiary
+        - RMCShellShotgunIncendiaryBuckshot
 
 - type: entity
   parent: RMCBoxShellsIncendiaryBuckshotEmpty
