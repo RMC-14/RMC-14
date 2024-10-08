@@ -195,6 +195,19 @@
     popupType: LargeCaution
   - type: ProjectileMaxRange
     max: 10
+  - type: NeurotoxinInjector
+    neuroPerSecond: 5
+    affectsDead: false
+    affectsInfectedNested: false
+    toxinDamage:
+        groups:
+          Toxin: 2
+    oxygenDamage:
+        types:
+          Asphyxiation: 150
+    coughDamage:
+        groups:
+          Brute: 5
 
 - type: entity
   parent: XenoSpitProjectile
