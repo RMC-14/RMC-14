@@ -76,7 +76,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
         if (!HasComp<MarineComponent>(args.Target))
             return;
 
-        if (ent.Comp.AffectsDead && _mobState.IsDead(args.Target))
+        if (!ent.Comp.AffectsDead && _mobState.IsDead(args.Target))
             return;
 
         if (!ent.Comp.AffectsInfectedNested &&
