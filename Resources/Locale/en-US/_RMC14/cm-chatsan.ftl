@@ -253,6 +253,12 @@ cm-chatsan-replacement-grenade = boomstick
 cm-chatsan-word-grenades = grenades
 cm-chatsan-replacement-grenades = boomsticks
 
+cm-chatsan-word-gl = gl
+cm-chatsan-replacement-gl = boomstick launcher
+
+cm-chatsan-word-gls = gls
+cm-chatsan-replacement-gls = boomstick launchers
+
 cm-chatsan-word-bullet = bullet
 cm-chatsan-replacement-bullet = spit
 
