@@ -1182,7 +1182,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     public void SetWeedsHive(EntityUid hive)
     {
         var query = EntityQueryEnumerator<XenoWeedsComponent>();
-        while (query.MoveNext(out var weeds, out _)
+        while (query.MoveNext(out var weeds, out _))
         {
             _hive.SetHive(weeds, hive);
         }
