@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Cardboard box crate now gives a stack of cardboard instead
-    type: Tweak
-  id: 300
-  time: '2024-07-08T09:09:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2893
 - author: DrSmugleaf
   changes:
   - message: Temporarily added an autobalance feature that will change the ratio of
@@ -4651,5 +4644,13 @@
   id: 799
   time: '2024-10-07T23:26:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4332
+- author: Vermidia
+  changes:
+  - message: Boiler neurotoxin applies 5 on direct hit, and boiler tailstabs now differ
+      based on gas toggled, with neuro injecting 16 neuro instead of injecting acid.
+    type: Fix
+  id: 800
+  time: '2024-10-08T22:09:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4337
 Name: RMC14
 Order: -1
