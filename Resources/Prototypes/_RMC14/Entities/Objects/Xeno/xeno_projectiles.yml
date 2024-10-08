@@ -180,11 +180,6 @@
     slow: 0
     paralyze: 4
     armorResistsKnockdown: false
-  - type: Projectile
-    impactEffect: XenoProjectileImpactEffect
-    damage:
-      groups:
-        Burn: 1
   - type: ModifyTargetOnHit
     add:
     - type: UserAcided
