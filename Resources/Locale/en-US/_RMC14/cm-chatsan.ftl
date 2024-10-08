@@ -242,10 +242,10 @@ cm-chatsan-word-cats = cats
 cm-chatsan-replacement-cats = feline hosts
 
 cm-chatsan-word-avali = avali
-cm-chatsan-replacement-avali = four eared host
+cm-chatsan-replacement-avali = four-eared host
 
 cm-chatsan-word-avalis = avalis
-cm-chatsan-replacement-avalis = four eared hosts
+cm-chatsan-replacement-avalis = four-eared hosts
 
 cm-chatsan-word-grenade = grenade
 cm-chatsan-replacement-grenade = boomstick
