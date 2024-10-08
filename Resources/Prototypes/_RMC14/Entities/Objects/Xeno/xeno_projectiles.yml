@@ -194,7 +194,7 @@
 
 - type: entity
   parent: XenoBaseProjectile
-  id: XenoBombardNeurotoxinProjectile #TODO: Make the projectile apply a bit of neurotoxin on hit
+  id: XenoBombardNeurotoxinProjectile
   name: glob of neurotoxin gas
   categories:
   - HideSpawnMenu
