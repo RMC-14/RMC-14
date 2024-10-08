@@ -54,9 +54,42 @@
   description: Standard-issue officer jacket.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/aso.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/aso.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: CMCoatASOGreen
+  name: aso jacket green
+  description: Standard-issue officer jacket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/asogreen.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/asogreen.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: CMCoatASOGreenAlt
+  name: aso jacket green alternate
+  description: Standard-issue officer jacket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/asogreenalt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/asogreenalt.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: CMCoatASOWhite
+  name: aso jacket white
+  description: Standard-issue officer jacket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/asowhite.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/asowhite.rsi
 
 # Commanding Officer
 - type: entity
@@ -138,3 +171,38 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/correspondent.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/correspondent.rsi
+
+# Service Jackets
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: CMCoatServiceGreen
+  name: service jacket green
+  description: Standard-issue coat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/servicejacket/servicejacketgreen.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/servicejacket/servicejacketgreen.rsi
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: CMCoatServiceGreenAlt
+  name: service jacket green alternate
+  description: Standard-issue coat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/servicejacket/servicejacketgreenalt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/servicejacket/servicejacketgreenalt.rsi
+
+#Labcoat - Description/name may not be parity, feel free to fix
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: CMCoatLab
+  name: labcoat
+  description: medical grade labcoat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/labcoat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/labcoat.rsi

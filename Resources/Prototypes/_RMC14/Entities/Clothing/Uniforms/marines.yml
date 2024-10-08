@@ -233,6 +233,18 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/pilot.rsi
 
+# - Description/name may not be parity for tactical PO, feel free to fix
+- type: entity
+  parent: JumpsuitMarine
+  id: CMTacticalPilot
+  name: pilot officer tactical suit
+  description: A tactical version of the normal pilot suit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/pilottactical.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/pilottactical.rsi
+
 # IO
 - type: entity
   parent: JumpsuitMarine
