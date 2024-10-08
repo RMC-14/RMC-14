@@ -17,6 +17,9 @@
   id: CMCartridgeRifle10x24mm
 
 - type: Tag
+  id: RMCCartridgeRfleAR10
+
+- type: Tag
   id: RMCCartridgePistol45ACP
 
 - type: Tag

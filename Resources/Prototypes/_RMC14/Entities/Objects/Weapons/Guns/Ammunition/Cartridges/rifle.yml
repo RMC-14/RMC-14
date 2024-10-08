@@ -62,8 +62,25 @@
   - type: CartridgeAmmo
     proto: BulletRifleM4SPRA19Impact
 
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifleAR10
+  name: Cartridge (7.62x51)
+  description: A 7.62x51 rifle cartridge
+  components:
+  - type: Tag
+    tags:
+     - Cartridge
+     - RMCCartridgeRifleAR10
+  - type: CartridgeAmmo
+    proto: BulletRifleAR10
+
+
 - type: Tag
   id: RMCCartridgeRifleM4SPRA19
 
 - type: Tag
   id: RMCCartridgeRifleM4SPRA19Impact
+
+- type: Tag
+  id: RMCCartridgeRifleAR10

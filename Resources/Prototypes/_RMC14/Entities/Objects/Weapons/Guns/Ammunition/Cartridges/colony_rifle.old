@@ -1,0 +1,29 @@
+- type: entity
+  id: BaseCartridgeAR10
+  name: cartridge (7.62x51)
+  parent: BaseCartridge
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+      - Cartridge
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+  - type: Sprite
+    noRot: false
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+  - type: StaticPrice
+    price: 10
+
+- type: entity
+  id: CartridgeAR10
+  name: cartridge (.25 caseless)
+  parent: BaseCartridgeAR10
+  components:
+  - type: CartridgeAmmo
+    proto: BulletRifleAR10

@@ -58,3 +58,13 @@
     stunTime: 1
     superSlowTime: 4
     slowTime: 10
+
+- type: entity
+  parent: BaseBullet
+  id: BulletRifleAR10
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 56
