@@ -48670,6 +48670,23 @@ entities:
       canCollide: False
     - type: Fixtures
       fixtures: {}
+- proto: CMLinenBinFilled
+  entities:
+  - uid: 15690
+    components:
+    - type: Transform
+      pos: 91.5,89.5
+      parent: 1
+  - uid: 15691
+    components:
+    - type: Transform
+      pos: 98.5,90.5
+      parent: 1
+  - uid: 15696
+    components:
+    - type: Transform
+      pos: 166.5,120.5
+      parent: 1
 - proto: CMLockerBase
   entities:
   - uid: 7220
@@ -51037,6 +51054,26 @@ entities:
     components:
     - type: Transform
       pos: 67.5,24.5
+      parent: 1
+- proto: CMShower
+  entities:
+  - uid: 15697
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 152.5,139.5
+      parent: 1
+  - uid: 15698
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 152.5,138.5
+      parent: 1
+  - uid: 15699
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 152.5,137.5
       parent: 1
 - proto: CMSink
   entities:
@@ -53681,6 +53718,30 @@ entities:
     components:
     - type: Transform
       pos: 212.5,40.5
+      parent: 1
+- proto: CMWashingMachine
+  entities:
+  - uid: 15695
+    components:
+    - type: Transform
+      pos: 166.5,122.5
+      parent: 1
+- proto: CMWashingMachineDouble
+  entities:
+  - uid: 15692
+    components:
+    - type: Transform
+      pos: 91.5,91.5
+      parent: 1
+  - uid: 15693
+    components:
+    - type: Transform
+      pos: 92.5,91.5
+      parent: 1
+  - uid: 15694
+    components:
+    - type: Transform
+      pos: 94.5,91.5
       parent: 1
 - proto: CMWeaponPistolM1984
   entities:
