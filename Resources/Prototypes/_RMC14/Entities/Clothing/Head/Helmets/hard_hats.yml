@@ -15,6 +15,7 @@
       map: [ "light" ]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/yellow.rsi
+    equippedPrefix: off
     clothingVisuals:
       head:
       - state: off-equipped-HELMET
