@@ -142,6 +142,26 @@
 
 - type: entity
   parent: ClothingEyesBase
+  id: RMCWeldingGoggles
+  name: welding goggles
+  description: A pair of welding goggles. Provides protection from eye damage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
+  - type: EyeProtection # This cancels out the upstream RequiresEyeProtection on welders
+  - type: RMCEyeProtectionItem
+    raisedEquippedPrefix: up
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCEyeProtectionItemVisuals.Active:
+        icon:
+          True: { state: icon }
+          False: { state: icon_raised }
+
+- type: entity
+  parent: ClothingEyesBase
   id: RMCGogglesBallisticSquad
   name: Advanced ballistic goggles
   description: Cutting edge UNMC goggles. Advanced polymers and expensive nanotechnology allow the goggles to link with the wearer's armor and change the color of the lenses to match their squad designation. The lenses are invisible when worn by the unworthy.

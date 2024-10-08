@@ -22,6 +22,10 @@
     {
       "name": "sql-helmet-medic",
       "directions": 4
+    },
+    {
+        "name": "weld-visor",
+        "directions": 4
     }
   ]
 }

@@ -57,6 +57,22 @@
 
 - type: entity
   parent: ActionMarineBase
+  id: RMCActionToggleEyeProtection
+  name: Toggle welding protection
+  description: Lower/raise welding protection.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
+      state: icon_up
+    iconOn:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
+      state: icon_down
+    event: !type:ToggleActionEvent
+    useDelay: 0.25
+
+- type: entity
+  parent: ActionMarineBase
   id: RMCActionWhistle
   name: Whistle
   description: Blow the whistle.
