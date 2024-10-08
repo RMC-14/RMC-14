@@ -59,6 +59,15 @@
 
 - type: entity
   parent: RMCPowerCellAPC
+  id: RMCPowerCellAPCNoPower
+  suffix: No Power
+  components:
+  - type: Battery
+    maxCharge: 5000
+    startingCharge: 0
+
+- type: entity
+  parent: RMCPowerCellAPC
   id: RMCPowerCellAPCEmpty
   suffix: Empty
   components:

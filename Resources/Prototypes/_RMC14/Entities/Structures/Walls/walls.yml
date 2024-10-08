@@ -93,6 +93,7 @@
   name: reinforced wall
   id: CMWallSuperReinforced
   description: A huge chunk of reinforced metal used to separate rooms. Looks very robust.
+  suffix: Super Reinforced
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/rwall.rsi

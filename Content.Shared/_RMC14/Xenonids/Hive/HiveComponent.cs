@@ -19,6 +19,9 @@ public sealed partial class HiveComponent : Component
     };
 
     [DataField, AutoNetworkedField]
+    public Dictionary<EntProtoId, int> FreeSlots = new() {["CMXenoHivelord"] = 1, ["CMXenoCarrier"] = 1};
+
+    [DataField, AutoNetworkedField]
     public Dictionary<TimeSpan, List<EntProtoId>> Unlocks = new();
 
     [DataField, AutoNetworkedField]
@@ -47,4 +50,7 @@ public sealed partial class HiveComponent : Component
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NewCoreAt;
+
+    [DataField, AutoNetworkedField]
+    public bool HijackSurged;
 }

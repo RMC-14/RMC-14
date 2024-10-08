@@ -58,6 +58,7 @@
       Alive: XenoHealth
       Critical: XenoCrit
       Dead: XenoDead
+    displayDamageInAlert: true
   - type: MobStateActions
     actions:
       Critical:
@@ -136,6 +137,13 @@
         - MobMask
         layer:
         - MobLayer
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 185
+        layer:
+        - BulletImpassable
   - type: Xeno
   - type: UserInterface
     interfaces:
@@ -155,6 +163,11 @@
         type: XenoWordQueenBui
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui
+      enum.XenoReserveParasiteChangeUI.Key:
+        type: ReserveParasitesBoundUserInterface
+      enum.XenoParasiteGhostUI.Key:
+        type: XenoParasiteGhostBui
+        requireInputValidation: false
   - type: TypingIndicator
     proto: alien
   - type: MovedByPressure
@@ -237,9 +250,12 @@
   - type: RequireProjectileTarget
     active: false
   - type: TacticalMapTracked
+  - type: TacMapXenoAlert
   - type: TacticalMapUser
     actionId: RMCActionOpenTacticalMapXeno
     xenos: true
+  - type: TacticalMapLiveUpdateOnOvi
+    enabled: true
 
 - type: entity
   abstract: true

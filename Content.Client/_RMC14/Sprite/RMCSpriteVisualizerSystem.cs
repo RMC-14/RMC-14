@@ -1,4 +1,5 @@
-﻿using Content.Client.Outline;
+﻿using System.Numerics;
+using Content.Client.Outline;
 using Content.Shared._RMC14.Sprite;
 using Robust.Client.GameObjects;
 
@@ -19,6 +20,9 @@ public sealed class RMCSpriteVisualizerSystem : VisualizerSystem<SpriteSetRender
 
         if (AppearanceSystem.TryGetData(uid, SpriteSetRenderOrderComponent.Appearance.Key, out int order, args.Component))
             args.Sprite.RenderOrder = (uint) order;
+
+        if (AppearanceSystem.TryGetData(uid, SpriteSetRenderOrderComponent.Appearance.Offset, out Vector2 offset, args.Component))
+            args.Sprite.Offset = offset;
     }
 
     public override void FrameUpdate(float frameTime)
@@ -26,7 +30,11 @@ public sealed class RMCSpriteVisualizerSystem : VisualizerSystem<SpriteSetRender
         var query = EntityQueryEnumerator<SpriteSetRenderOrderComponent, SpriteComponent>();
         while (query.MoveNext(out var set, out var sprite))
         {
-            sprite.RenderOrder = (uint) set.RenderOrder;
+            if (set.RenderOrder != null)
+                sprite.RenderOrder = (uint) set.RenderOrder.Value;
+
+            if (set.Offset != null)
+                sprite.Offset = set.Offset.Value;
         }
     }
 }

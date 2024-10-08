@@ -223,3 +223,4 @@
   - type: TacticalMapUser
     actionId: RMCActionOpenTacticalMapMarine
     marines: true
+  - type: EmoteCooldown

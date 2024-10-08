@@ -47,7 +47,7 @@
   - type: CMArmor
     explosionArmor: 20
   - type: XenoEvolution
-    max: 540
+    max: 500
 #    evolvesTo:
 #    - CMXenoRavager
   - type: XenoLeap

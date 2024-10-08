@@ -1,4 +1,6 @@
-﻿using Content.Shared._RMC14.Xenonids.Parasite;
+﻿using System.Numerics;
+using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.Coordinates;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Components;
@@ -8,8 +10,11 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
+using Content.Shared.Weapons.Melee;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Pulling;
@@ -17,15 +22,25 @@ namespace Content.Shared._RMC14.Pulling;
 public sealed class RMCPullingSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+
+    private readonly SoundSpecifier PullSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg")
+    {
+        Params = AudioParams.Default.WithVariation(0.05f)
+    };
+
+    private const string PullEffect = "CMEffectGrab";
 
     private EntityQuery<PreventPulledWhileAliveComponent> _preventPulledWhileAliveQuery;
 
@@ -50,6 +65,8 @@ public sealed class RMCPullingSystem : EntitySystem
         SubscribeLocalEvent<PreventPulledWhileAliveComponent, PullAttemptEvent>(OnPreventPulledWhileAliveAttempt);
         SubscribeLocalEvent<PreventPulledWhileAliveComponent, PullStartedMessage>(OnPreventPulledWhileAliveStart);
         SubscribeLocalEvent<PreventPulledWhileAliveComponent, PullStoppedMessage>(OnPreventPulledWhileAliveStop);
+
+        SubscribeLocalEvent<PullableComponent, PullStartedMessage>(OnPullAnimation);
     }
 
     private void OnParalyzeOnPullAttempt(Entity<ParalyzeOnPullAttemptComponent> ent, ref PullAttemptEvent args)
@@ -243,6 +260,26 @@ public sealed class RMCPullingSystem : EntitySystem
         }
 
         _pulling.TryStopPull(puller.Pulling.Value, pullable, user);
+    }
+
+    private void OnPullAnimation(Entity<PullableComponent> ent, ref PullStartedMessage args)
+    {
+        if (args.PulledUid != ent.Owner)
+            return;
+
+        var pulled = args.PulledUid;
+        var puller = args.PullerUid;
+
+        var userXform = Transform(puller);
+        var targetPos = _transform.GetWorldPosition(pulled);
+        var localPos = Vector2.Transform(targetPos, _transform.GetInvWorldMatrix(userXform));
+        localPos = userXform.LocalRotation.RotateVec(localPos);
+
+        _melee.DoLunge(puller, puller, Angle.Zero, localPos, null);
+        _audio.PlayPredicted(PullSound, pulled, puller);
+
+        if (_net.IsServer)
+            SpawnAttachedTo(PullEffect, pulled.ToCoordinates());
     }
 
     public override void Update(float frameTime)
