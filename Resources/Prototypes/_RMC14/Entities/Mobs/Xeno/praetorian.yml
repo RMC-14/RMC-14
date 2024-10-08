@@ -94,6 +94,8 @@
       sprite: _RMC14/Interface/map_blips.rsi
       state: praetorian
   - type: AcidTrap
+  - type: SlowOnPull
+    multiplier: 0.5
 
 - type: entity
   parent: CMXenoPraetorianBase

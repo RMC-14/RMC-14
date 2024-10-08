@@ -5,4 +5,8 @@ public abstract class SharedRMCPvsSystem : EntitySystem
     public virtual void AddGlobalOverride(EntityUid ent)
     {
     }
+
+    public virtual void AddForceSend(EntityUid ent)
+    {
+    }
 }

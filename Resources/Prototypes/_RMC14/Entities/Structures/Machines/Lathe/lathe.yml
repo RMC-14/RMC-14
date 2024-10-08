@@ -36,6 +36,7 @@
     producingSound: /Audio/_RMC14/Machines/print.ogg
     staticRecipes:
     - RMCBucket
+    - CMBucketMop
 #    - Janitorial bucket (10000 metal)
 #    - Flashlight (62 metal, 25 glass)
     - CMFireExtinguisher

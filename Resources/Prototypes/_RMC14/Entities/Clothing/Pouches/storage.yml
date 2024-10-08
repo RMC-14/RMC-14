@@ -168,7 +168,8 @@
       - CMMagazineRifle
       - CMMagazineSmg
       - CMMagazineSniper
-      # TODO RMC14 m60 mag, handfuls
+      - RMCShellShotgun
+      # TODO RMC14 m60 mag
   - type: FixedItemSizeStorage
 
 
@@ -223,36 +224,42 @@
   parent: [RMCPouchStorage]
   id: RMCPouchShotgun
   name: shotgun shell pouch
-  description: It can contain a single box of shotgun shells. # It can contain handfuls of shells, or bullets if you choose to for some reason. # TODO RMC14
+  description: It can contain handfuls of shells. #, or bullets if you choose to for some reason. # TODO RMC14
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/medium_shotshells.rsi
   - type: Storage
     grid:
-    - 0,0,1,1 #5 slots (1 temporarily)
+    - 0,0,9,1 #5 slots
     whitelist:
       tags:
-      - RMCBoxShotgunShells
+      - RMCShellShotgun
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
     items:
       tags:
-      - RMCBoxShotgunShells
-    #whitelist: # TODO RMC14 make shotshells
+      - RMCShellShotgun
 
 
 # Large Shotgun Shell Pouch
-#- type: entity
-#  parent: RMCPouchShotgun
-#  id: RMCPouchShotgunLarge
-#  name: large shotgun shell pouch
-#  description: It can contain more handfuls of shells, or bullets if you choose to for some reason.
-#  components:
-#  - type: Sprite
-#    sprite: _RMC14/Objects/Clothing/Pouches/large_shotshells.rsi
-#  - type: Storage
-#    grid:
-#    - 0,0,13,1 #7 slots
+- type: entity
+  parent: RMCPouchShotgun
+  id: RMCPouchShotgunLarge
+  name: large shotgun shell pouch
+  description: It can contain more handfuls of shells. #, or bullets if you choose to for some reason. TODO RMC14
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/large_shotshells.rsi
+  - type: Storage
+    grid:
+    - 0,0,13,1 #7 slots
+    whitelist:
+      tags:
+      - RMCShellShotgun
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCShellShotgun
 
 
 # Expolosives Pouch

@@ -526,7 +526,8 @@
   name: Substation
   components:
   - type: Sprite
-    sprite: _RMC14/Areas/dam_areas.rsi
+    sprite: _RMC14/Areas/areas_dam.rsi
+    state: northewestern_ss
   - type: Area
     minimapColor: '#C19504E7'
 

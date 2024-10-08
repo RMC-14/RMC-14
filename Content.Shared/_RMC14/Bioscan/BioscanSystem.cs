@@ -105,7 +105,7 @@ public sealed class BioscanSystem : EntitySystem
                 continue;
 
             alive++;
-            var bioscanBlocked = _area.BioscanBlocked(uid, out var area);
+            var bioscanBlocked = _area.BioscanBlocked(uid, out var name);
             var mapId = xform.MapID;
             if (_warshipMaps.Contains(mapId))
             {
@@ -113,16 +113,16 @@ public sealed class BioscanSystem : EntitySystem
                 {
                     aliveShip++;
 
-                    if (area != default)
-                        _warshipAreas.Add(Name(area));
+                    if (name != null)
+                        _warshipAreas.Add(name);
                 }
             }
             else if (_planetMaps.Contains(mapId))
             {
                 alivePlanet++;
 
-                if (!bioscanBlocked && area != default)
-                    _planetAreas.Add(Name(area));
+                if (!bioscanBlocked && name != null)
+                    _planetAreas.Add(name);
             }
         }
 

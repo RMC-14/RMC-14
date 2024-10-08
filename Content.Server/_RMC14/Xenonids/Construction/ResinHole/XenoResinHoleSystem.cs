@@ -10,7 +10,6 @@ using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Hands.Components;
 using Content.Shared.Maps;
@@ -23,6 +22,7 @@ using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Stunnable;
@@ -35,7 +35,6 @@ using Robust.Shared.Player;
 using static Content.Shared.Physics.CollisionGroup;
 using Content.Shared.Examine;
 using Content.Shared.Standing;
-
 
 namespace Content.Server._RMC14.Xenonids.Construction.ResinHole;
 
@@ -302,15 +301,13 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
     private void OnXenoResinHoleTakeDamage(Entity<XenoResinHoleComponent> resinHole, ref DamageChangedEvent args)
     {
-        if (args.Origin is {} origin && _hive.FromSameHive(origin, resinHole.Owner))
-        {
-            if (resinHole.Comp.TrapPrototype != null && args.DamageDelta != null)
-                args.DamageDelta.ClampMax(0);
+        if (args.Origin is { } origin && _hive.FromSameHive(origin, resinHole.Owner))
             return;
-        }
+
         //TODO Flames should make the trigger message never happen but destroyed will
         if (args.DamageDelta == null)
             return;
+
         var destroyed = args.Damageable.TotalDamage + args.DamageDelta.GetTotal() > resinHole.Comp.TotalHealth;
         ActivateTrap(resinHole, destroyed);
     }

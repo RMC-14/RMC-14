@@ -197,8 +197,8 @@
         amount: 1
       - id: RMCPouchMagazineLarge
         amount: 1
-      #- id: RMCPouchShotgunLarge
-      #  amount: 1
+      - id: RMCPouchShotgunLarge
+        amount: 1
     - name: Miscellaneous
       entries:
       - id: RMCFlashlight # Combat Flashlight

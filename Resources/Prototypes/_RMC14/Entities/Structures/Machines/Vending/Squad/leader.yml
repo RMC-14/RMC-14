@@ -265,7 +265,7 @@
         recommended: true
       #- id: CMSlingPouch
       - id: RMCPouchMagazineLarge
-      #- id: CMLargeShotgunShellPouch
+      - id: RMCPouchShotgunLarge
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchPistol
     - name: Accessories
