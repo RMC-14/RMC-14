@@ -828,3 +828,55 @@
       whitelist:
         tags:
         - RMCShellShotgunSlugs
+
+- type: entity
+  parent: RMCBoxShellsBase
+  id: RMCBoxShellsFlechetteEmpty
+  name: shell box (Flechette)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsFlechetteEmpty
+  - type: Sprite
+    layers:
+    - state: base_flech
+    - state: shells_flech
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_shells
+    - state: base_flech_lid
+      map: [ "lid" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: shells_flech, visible: false }
+          Low: { state: shells_flech_1, visible: true }
+          Medium: { state: shells_flech_2, visible: true }
+          High: { state: shells_flech_3, visible: true }
+          Full: { state: shells_flech, visible: true }
+  - type: CMItemSlots
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunFlechette
+
+- type: entity
+  parent: RMCBoxShellsFlechetteEmpty
+  id: RMCBoxShellsFlechette
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunFlechette
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunFlechette

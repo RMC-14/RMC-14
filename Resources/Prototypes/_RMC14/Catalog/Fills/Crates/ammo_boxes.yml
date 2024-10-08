@@ -27,5 +27,5 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxMagazineShotgunFlechette
+    - id: RMCBoxShellsFlechette
       amount: 1

@@ -260,6 +260,20 @@
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_slug
   objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Shell Box (Flechette)
+  id: RMCBoxShellsFlechetteEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxShellsFlechetteEmpty
+  category: construction-category-cm-box-magazine
+  description: A box for holding shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_flech
+  objectType: Item
   
   # Construct graphs
 - type: constructionGraph
@@ -380,6 +394,11 @@
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
+    - to: RMCBoxShellsFlechetteEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 1
 
   # Why the fuck do you even need these nodes???
 
@@ -436,4 +455,6 @@
     entity: RMCBoxShellsBuckshotEmpty
   - node: RMCBoxShellsSlugsEmpty
     entity: RMCBoxShellsSlugsEmpty
+  - node: RMCBoxShellsFlechetteEmpty
+    entity: RMCBoxShellsFlechetteEmpty
   
