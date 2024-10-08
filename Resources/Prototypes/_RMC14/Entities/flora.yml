@@ -17,6 +17,56 @@
         - WallLayer
 
 - type: entity
+  id: RMCBasePlant
+  abstract: true
+  components:
+  - type: Sprite
+    drawdepth: Overdoors
+  - type: Clickable
+  - type: AtmosExposed
+  - type: Physics
+    bodyType: Static
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/slash.ogg"
+  - type: Appearance
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Temperature
+    heatDamage:
+      types:
+        Heat: 5
+    coldDamage: {}
+  - type: Flammable
+    fireSpread: true
+    damage:
+      types:
+        Heat: 3
+  - type: Reactive
+    groups:
+      Flammable: [Touch]
+      Extinguish: [Touch]
+    reactions:
+    - reagents: [WeedKiller, PlantBGone]
+      methods: [Touch]
+      effects:
+      - !type:HealthChange
+        scaleByQuantity: true
+        damage:
+          types:
+            Heat: 10
+
+- type: entity
   id: RMCBaseRockIndistructable
   abstract: true
   components:
@@ -55,6 +105,100 @@
             acts: [ "Destruction" ]
   - type: Corrodible
     isCorrodible: true
+
+- type: entity
+  parent: RMCBasePlant
+  id: BonsaiTree01
+  description: A small, leafy bush.
+  name: Bush
+  components:
+  - type: Sprite
+    state: tree_1
+    sprite: _RMC14/Objects/Flora/dam.rsi
+
+- type: entity
+  parent: RMCBasePlant
+  id: BonsaiTree02
+  description: A small, leafy bush.
+  name: Bush
+  components:
+  - type: Sprite
+    state: tree_2
+    sprite: _RMC14/Objects/Flora/dam.rsi
+
+- type: entity
+  parent: RMCBasePlant
+  id: BonsaiTree03
+  description: A small, leafy bush.
+  name: Bush
+  components:
+  - type: Sprite
+    state: tree_3
+    sprite: _RMC14/Objects/Flora/dam.rsi
+
+- type: entity
+  parent: RMCBasePlant
+  id: BonsaiTree04
+  description: A small, leafy bush.
+  name: Bush
+  components:
+  - type: Sprite
+    state: tree_4
+    sprite: _RMC14/Objects/Flora/dam.rsi
+
+- type: entity
+  parent: RMCBasePlant
+  id: StalkyBush01
+  name: stalkybush
+  components:
+  - type: Sprite
+    state: bushh1
+    sprite: Decals/Flora/flora_bushes.rsi
+
+- type: entity
+  parent: RMCBasePlant
+  id: StalkyBush02
+  name: stalkybush
+  components:
+  - type: Sprite
+    state: bushh2
+    sprite: Decals/Flora/flora_bushes.rsi
+
+- type: entity
+  parent: RMCBasePlant
+  id: StalkyBush03
+  name: stalkybush
+  components:
+  - type: Sprite
+    state: bushh3
+    sprite: Decals/Flora/flora_bushes.rsi
+
+- type: entity
+  parent: RMCBasePlant
+  id: FernyBush01
+  name: fernybush
+  components:
+  - type: Sprite
+    state: bushj1
+    sprite: Decals/Flora/flora_bushes.rsi
+
+- type: entity
+  parent: RMCBasePlant
+  id: FernyBush02
+  name: fernybush
+  components:
+  - type: Sprite
+    state: bushj2
+    sprite: Decals/Flora/flora_bushes.rsi
+
+- type: entity
+  parent: RMCBasePlant
+  id: FernyBush03
+  name: fernybush
+  components:
+  - type: Sprite
+    state: bushj3
+    sprite: Decals/Flora/flora_bushes.rsi
 
 - type: entity
   parent: RMCBasePalm
