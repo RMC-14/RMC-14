@@ -36,6 +36,16 @@
   - type: NpcFactionMember
     factions:
     - RMCXeno
+  - type: RMCNightVisionVisible
+    priority: -1
+    transparency: 0.2
+  - type: InvulnerabilityTime
+    whitelist:
+      components:
+      - Marine
+    hitsToInvulnerability: 3
+  - type: DamageMultiplierFlags
+    flags: Breaching
 
 - type: entity
   id: CMCorrodible
@@ -46,7 +56,7 @@
 # BaseWall
 - type: entity
   abstract: true
-  id: CMBaseWallInvincible
+  id: RMCBaseWallInvincibleNoIcon
   description: A huge chunk of metal used to separate rooms.
   placement:
     mode: SnapgridCenter
@@ -59,8 +69,6 @@
     bodyType: Static
   - type: Sprite
     drawdepth: Walls
-  - type: Icon
-    state: full
   - type: PlacementReplacement
     key: walls
   - type: Occluder
@@ -80,6 +88,21 @@
     spawn: XenoWeedsWall
   - type: XenoConstructionSupport
   - type: RMCDropshipBlocked
+  - type: MinimapColor
+    color: "#ebe5e5ee"
+
+- type: entity
+  abstract: true
+  parent: RMCBaseWallInvincibleNoIcon
+  id: CMBaseWallInvincible
+  description: A huge chunk of metal used to separate rooms.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Icon
+    state: full
 
 - type: entity
   abstract: true
@@ -119,3 +142,38 @@
     damageCoefficient: 12.5 # Walls take 15x explosive damage, resin walls reduce that by 15%
   - type: DamageMultiplierFlags
     flags: Turf
+
+# Invisible Wall
+
+- type: entity
+  id: RMCWallInvisibleBulletPassible
+  name: wall blocker
+  suffix: Projectile Passible
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: PlacementReplacement
+    key: walls
+  - type: Occluder
+    enabled: false
+  - type: Airtight
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - InteractImpassable
+        density: 1000
+  - type: RMCDropshipBlocked
+

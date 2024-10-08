@@ -1,0 +1,45 @@
+﻿- type: entity
+  abstract: true
+  parent: CMBaseStructure
+  id: RMCDropshipAttachmentBase
+  components:
+  - type: Transform
+    anchored: true
+  - type: Corrodible
+    isCorrodible: false
+  - type: Sprite
+    sprite: _RMC14/Objects/dropship_attachments.rsi
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 100
+        mask:
+        - FullTileMask
+        layer:
+        - GlassAirlockLayer
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: PowerLoaderGrabbable
+    virtualRight: RMCVirtualDropshipGearRight
+    virtualLeft: RMCVirtualDropshipGearLeft
+  - type: Item
+# TODO RMC14 make these climbable when we have single climb technology

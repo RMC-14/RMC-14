@@ -4,11 +4,41 @@ cm-chatsan-replacement-deltard = delta
 cm-chatsan-word-deltards = deltards
 cm-chatsan-replacement-deltards = deltas
 
+cm-chatsan-word-alphoid = alphoid
+cm-chatsan-replacement-alphoid = alpha
+
+cm-chatsan-word-alphoids = alphoids
+cm-chatsan-replacement-alphoids = alpha
+
+cm-chatsan-word-bravoid = bravoid
+cm-chatsan-replacement-bravoid = bravo
+
+cm-chatsan-word-bravoids = bravoids
+cm-chatsan-replacement-bravoids = bravo
+
+cm-chatsan-word-charloid = charloid
+cm-chatsan-replacement-charloid = charlie
+
+cm-chatsan-word-charloids = charloids
+cm-chatsan-replacement-charloids = charlie
+
+cm-chatsan-word-deltoid = deltoid
+cm-chatsan-replacement-deltoid = delta
+
+cm-chatsan-word-deltoids = deltoids
+cm-chatsan-replacement-deltoids = delta
+
 cm-chatsan-word-admins-marine = admins
 cm-chatsan-replacement-admins-marine = high command
 
 cm-chatsan-word-eorg-marine = eorg
 cm-chatsan-replacement-eorg-marine = warcrimes
+
+cm-chatsan-word-xenoid = xenoid
+cm-chatsan-replacement-xenoid = xenonid
+
+cm-chatsan-word-xenoids = xenoids
+cm-chatsan-replacement-xenoids = xenonids
 
 cm-chatsan-word-beno = beno
 cm-chatsan-replacement-beno = xeno

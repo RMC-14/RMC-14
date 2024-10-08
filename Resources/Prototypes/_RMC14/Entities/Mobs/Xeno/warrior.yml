@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoWarrior
   name: Warrior
   description: A beefy alien with an armored carapace.
@@ -50,10 +51,10 @@
     maxPlasma: 0
     plasmaRegenOnWeeds: 0
   - type: XenoEvolution
-    max: 540
+    max: 500
     evolvesTo:
     - CMXenoCrusher
-#    - CMXenoPraetorian
+    - CMXenoPraetorian
   - type: CMArmor
     armor: 20
     explosionArmor: 40
@@ -61,9 +62,13 @@
     damage:
       groups:
         Brute: 35
-  - type: Tackle
+  - type: Tackle # min: 2, max: 4
     threshold: 4
     stun: 5
   - type: XenoLifesteal
   - type: RMCXenoDamageVisuals
     prefix: warrior
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: warrior

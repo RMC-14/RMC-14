@@ -1,0 +1,107 @@
+# All slot sizes (if using slots instead of total space) here should be twice cm13's (times two minus one, as 0,0,1,1 is 2x2 in ss14
+
+# Base
+- type: entity
+  parent: Clothing
+  id: RMCPouch
+  name: abstract pouch
+  description: The physical manifestation of the concept of a pouch. Woah.
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/small_drop.rsi
+    layers:
+    - state: icon
+  - type: Appearance
+  - type: Item
+    size: Large
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - pocket
+  - type: Tag
+    tags:
+    - Pouch
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+
+- type: entity
+  parent: [RMCPouch, BaseStorageItem]
+  id: RMCPouchStorage
+  name: storage pouch
+  abstract: true
+  components:
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,1,1 #1 slot
+    blacklist:
+      tags:
+      - Pouch
+      - ThrowingKnife
+
+
+- type: entity
+  parent: RMCPouch
+  id: RMCPouchClosed
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+
+
+- type: entity
+  parent: RMCPouch
+  id: RMCPouchOpenClosed
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+    - state: closed
+      map: [ "closedLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+
+
+- type: entity
+  parent: RMCPouch
+  id: RMCPouchFill
+  abstract: true
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+    - state: partial
+      map: [ "partialLayer" ]
+    - state: full
+      map: [ "fullLayer" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        fullLayer:
+          Empty: { visible: false }
+          Low: { visible: false }
+          Medium: { visible: true }
+          High: { visible: true }
+          Full: { visible: true }
+        partialLayer:
+          Empty: { visible: false }
+          Low: { visible: true }
+          Medium: { visible: false }
+          High: { visible: false }
+          Full: { visible: false }

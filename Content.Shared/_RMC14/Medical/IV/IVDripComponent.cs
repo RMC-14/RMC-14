@@ -61,7 +61,7 @@ public sealed partial class IVDripComponent : Component
     public ProtoId<EmotePrototype> RipEmote = "Scream";
 
     [DataField, AutoNetworkedField]
-    public Skills SkillRequired = new() { Surgery = 1 };
+    public Dictionary<EntProtoId<SkillDefinitionComponent>, int> SkillRequired = new() { ["RMCSkillSurgery"] = 1 };
 }
 
 [Serializable, NetSerializable]

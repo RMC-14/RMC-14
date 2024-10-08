@@ -1,4 +1,6 @@
-﻿using Content.Shared.Hands.Components;
+﻿using Content.Shared._RMC14.Attachable.Systems;
+using Content.Shared.Examine;
+using Content.Shared.Hands.Components;
 using Content.Shared.Inventory;
 using Content.Shared.NPC.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -25,7 +27,8 @@ public sealed class GunIFFSystem : EntitySystem
         SubscribeLocalEvent<InventoryComponent, GetIFFFactionEvent>(OnInventoryIFFGetFaction);
         SubscribeLocalEvent<HandsComponent, GetIFFFactionEvent>(OnHandsIFFGetFaction);
         SubscribeLocalEvent<ItemIFFComponent, InventoryRelayedEvent<GetIFFFactionEvent>>(OnItemIFFGetFaction);
-        SubscribeLocalEvent<GunIFFComponent, AmmoShotEvent>(OnGunIFFAmmoShot);
+        SubscribeLocalEvent<GunIFFComponent, AmmoShotEvent>(OnGunIFFAmmoShot, before: [typeof(AttachableIFFSystem)]);
+        SubscribeLocalEvent<GunIFFComponent, ExaminedEvent>(OnGunIFFExamined);
         SubscribeLocalEvent<ProjectileIFFComponent, PreventCollideEvent>(OnProjectileIFFPreventCollide);
     }
 
@@ -65,7 +68,18 @@ public sealed class GunIFFSystem : EntitySystem
 
     private void OnGunIFFAmmoShot(Entity<GunIFFComponent> ent, ref AmmoShotEvent args)
     {
-        GiveAmmoIFF(ent, ref args, ent.Comp.Intrinsic);
+        GiveAmmoIFF(ent, ref args, ent.Comp.Intrinsic, ent.Comp.Enabled);
+    }
+
+    private void OnGunIFFExamined(Entity<GunIFFComponent> ent, ref ExaminedEvent args)
+    {
+        if (!ent.Comp.Enabled)
+            return;
+
+        using (args.PushGroup(nameof(GunIFFComponent)))
+        {
+            args.PushMarkup(Loc.GetString("rmc-examine-text-iff"));
+        }
     }
 
     private void OnProjectileIFFPreventCollide(Entity<ProjectileIFFComponent> ent, ref PreventCollideEvent args)
@@ -76,7 +90,10 @@ public sealed class GunIFFSystem : EntitySystem
             return;
         }
 
-        if (IsInFaction(args.OtherEntity, faction))
+        if (ent.Comp.Enabled && IsInFaction(args.OtherEntity, faction))
+            args.Cancelled = true;
+
+        if (HasComp<EntityIFFComponent>(args.OtherEntity) && IsInFaction(args.OtherEntity, faction))
             args.Cancelled = true;
     }
 
@@ -97,7 +114,7 @@ public sealed class GunIFFSystem : EntitySystem
         Dirty(user);
     }
 
-    public void GiveAmmoIFF(EntityUid gun, ref AmmoShotEvent args, bool intrinsic)
+    public void GiveAmmoIFF(EntityUid gun, ref AmmoShotEvent args, bool intrinsic, bool enabled)
     {
         EntityUid owner;
         if (intrinsic)
@@ -128,6 +145,7 @@ public sealed class GunIFFSystem : EntitySystem
         {
             var iff = EnsureComp<ProjectileIFFComponent>(projectile);
             iff.Faction = id;
+            iff.Enabled = enabled;
             Dirty(projectile, iff);
         }
     }

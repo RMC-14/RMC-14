@@ -23,18 +23,19 @@
   sprite: /Textures/_RMC14/Tiles/planet/desert/desert.png
   variants: 6
   placementVariants:
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
-  - 1.0
+  - 90.0
+  - 2.0
+  - 2.0
+  - 2.0
+  - 2.0
+  - 2.0
 
 - type: tile
   parent: CMPlanetBase
   id: CMPlanetDesert1
   name: tiles-cm-desert
   sprite: /Textures/_RMC14/Tiles/planet/desert/desert_0.png
+  minimapColor: "#9c906dc2"
 
 - type: tile
   parent: CMPlanetDesert1
@@ -224,6 +225,20 @@
   footstepSounds:
     collection: FootstepWood
   canDig: false
+
+- type: tile
+  parent: CMPlanetWood
+  id: CMPlanetWoodDamaged
+  sprite: /Textures/_RMC14/Tiles/planet/wood/wood-broken.png
+  variants: 7
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
 
 - type: tile
   parent: CMPlanetBase
@@ -690,3 +705,25 @@
   id: RCMPlanetTallGrassCompositeSouthWest
   name: tall grass
   sprite: /Textures/_RMC14/Tiles/planet/tallgrass/tallgrass_south_west_composite.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetSandWet
+  name: sand
+  sprite: /Textures/_RMC14/Tiles/varadero/layer1.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetMultiTileDark
+  name: multi tile dark
+  sprite: /Textures/_RMC14/Tiles/varadero/grey_multi_tiles.png

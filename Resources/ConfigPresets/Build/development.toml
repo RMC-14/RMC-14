@@ -5,13 +5,21 @@ lobbyenabled = false
 map = "CMDev"
 role_timers = false
 
+[ghost]
+role_time = 0.5
+quick_lottery = true
+
 [gateway]
 generator_enabled = false
+
+[net]
+tickrate = 15
 
 [physics]
 # Makes mapping annoying
 grid_splitting = false
-maxlinvelocity = 62 # TODO RMC14 62 when we don't get tunneling, change in GunComponent too
+maxlinvelocity = 45 # TODO RMC14 62 when we don't get tunneling, change in GunComponent too
+target_minimum_tickrate = 90
 
 [procgen]
 preload = false
@@ -28,3 +36,6 @@ preload_grids = false
 
 [admin]
 see_own_notes = true
+
+[rmc]
+planet_map_vote = false

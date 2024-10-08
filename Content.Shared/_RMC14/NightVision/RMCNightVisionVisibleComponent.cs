@@ -14,4 +14,10 @@ public sealed partial class RMCNightVisionVisibleComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public int Priority = 0;
+
+    /// <summary>
+    /// Transparency of the rendered sprite.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float? Transparency = null;
 }

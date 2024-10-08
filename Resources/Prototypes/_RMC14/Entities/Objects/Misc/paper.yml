@@ -72,6 +72,12 @@
     whitelist:
       components:
       - Xeno
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/paper_pickup.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/_RMC14/Handling/paper_drop.ogg
 
 - type: entity
   abstract: true

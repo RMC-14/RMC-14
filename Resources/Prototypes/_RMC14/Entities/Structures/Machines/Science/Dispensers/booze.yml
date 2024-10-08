@@ -15,6 +15,8 @@
     pack: CMDispenserBoozeInventory
   - type: Machine
     board: CMCircuitboardDispenserBooze
+  - type: ApcPowerReceiver
+    needsPower: false
 
 - type: reagentDispenserInventory
   id: CMDispenserBoozeInventory

@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/2e03ec5296abc80b15f80c93287356487cf24303/icons/turf/area_varadero.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": ""
+    },
+    {
+      "name": "base_ico"
+    },
+    {
+      "name": "oob"
+    },
+    {
+      "name": "varadero"
+    },
+    {
+      "name": "varadero0"
+    },
+    {
+      "name": "varadero1"
+    },
+    {
+      "name": "varadero2"
+    },
+    {
+      "name": "varadero3"
+    },
+    {
+      "name": "varadero4"
+    },
+    {
+      "name": "shuttle"
+    },
+    {
+      "name": "shuttle2"
+    },
+    {
+      "name": "lz1"
+    },
+    {
+      "name": "lz2"
+    },
+    {
+      "name": "lz1_comp"
+    },
+    {
+      "name": "lz2_comp"
+    },
+    {
+      "name": "hall0"
+    },
+    {
+      "name": "hall1"
+    },
+    {
+      "name": "hall2"
+    },
+    {
+      "name": "hall3"
+    },
+    {
+      "name": "hall4"
+    },
+    {
+      "name": "req0"
+    },
+    {
+      "name": "req1"
+    },
+    {
+      "name": "req2"
+    },
+    {
+      "name": "req3"
+    },
+    {
+      "name": "req4"
+    },
+    {
+      "name": "offices0"
+    },
+    {
+      "name": "offices1"
+    },
+    {
+      "name": "offices2"
+    },
+    {
+      "name": "offices3"
+    },
+    {
+      "name": "offices4"
+    },
+    {
+      "name": "tunnels0"
+    },
+    {
+      "name": "tunnels1"
+    },
+    {
+      "name": "tunnels2"
+    },
+    {
+      "name": "tunnels3"
+    },
+    {
+      "name": "tunnels4"
+    },
+    {
+      "name": "comms1"
+    },
+    {
+      "name": "comms2"
+    },
+    {
+      "name": "comms3"
+    },
+    {
+      "name": "comms4"
+    },
+    {
+      "name": "ob_prot_overlay"
+    },
+    {
+      "name": "nv_no_ob"
+    },
+    {
+      "name": "nv_no_ob0"
+    },
+    {
+      "name": "nv_no_ob1"
+    },
+    {
+      "name": "nv_no_ob2"
+    },
+    {
+      "name": "nv_no_ob3"
+    },
+    {
+      "name": "nv_no_ob4"
+    },
+    {
+      "name": "deepcaves0"
+    },
+    {
+      "name": "deepcaves1"
+    },
+    {
+      "name": "deepcaves2"
+    },
+    {
+      "name": "deepcaves3"
+    },
+    {
+      "name": "deepcaves4"
+    },
+    {
+      "name": "predship"
+    }
+  ]
+}

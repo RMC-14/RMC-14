@@ -1,7 +1,10 @@
+using System.Linq;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
+using JetBrains.Annotations;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
@@ -413,7 +416,7 @@ public partial class SharedGunSystem
             }
 
             // Delete the cartridge entity on client
-            if (_netManager.IsClient)
+            if (_netManager.IsClient && IsClientSide(ent.Value))
             {
                 QueueDel(ent);
             }

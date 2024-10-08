@@ -3,6 +3,9 @@
   id: CMXenoRavager
   name: cm-job-name-xeno-ravager
   playTimeTracker: CMJobXenoRavager
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: ravager
 
 - type: playTimeTracker
   id: CMJobXenoRavager

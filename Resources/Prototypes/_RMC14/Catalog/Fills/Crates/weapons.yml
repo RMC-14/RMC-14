@@ -1,6 +1,6 @@
 - type: entity
-  id: CMCrateM54C
-  parent: CMCrateWeapons
+  id: RMCCrateM54C
+  parent: RMCCrateWeapons
   name: M54C MK1 Rifle Crate (x2 MK2, x2 magazines)
   components:
   - type: StorageFill
@@ -11,8 +11,8 @@
         amount: 2
 
 - type: entity
-  id: CMCrateM54CE2
-  parent: CMCrateWeapons
+  id: RMCCrateM54CE2
+  parent: RMCCrateWeapons
   name: M54CE2 HAR crate (HAR x2, HAR ammo box x2)
   components:
   - type: StorageFill
@@ -23,8 +23,8 @@
         amount: 2
 
 - type: entity
-  id: CMCrateMK80
-  parent: CMCrateWeapons
+  id: RMCCrateMK80
+  parent: RMCCrateWeapons
   name: MK80 Hand Cannon Crate (x2)
   components:
   - type: StorageFill
@@ -33,7 +33,7 @@
       amount: 2
 
 - type: entity
-  parent: CMCrateWeapons
+  parent: RMCCrateWeapons
   id: RMCCrateSmartGunSet
   name: ML66A Smart Gun System Package
   components:
@@ -43,8 +43,8 @@
       amount: 1
 
 - type: entity
-  id: CMCrateSU6
-  parent: CMCrateWeapons
+  id: RMCCrateSU6
+  parent: RMCCrateWeapons
   name: SU-6 Smart Pistol Crate (x2)
   components:
   - type: StorageFill

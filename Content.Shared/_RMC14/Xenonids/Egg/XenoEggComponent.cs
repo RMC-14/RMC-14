@@ -2,6 +2,7 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Robust.Shared.Audio;
 
 namespace Content.Shared._RMC14.Xenonids.Egg;
 
@@ -16,6 +17,9 @@ public sealed partial class XenoEggComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan MaxTime = TimeSpan.FromSeconds(15);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan KnockdownTime = TimeSpan.FromSeconds(1);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan? GrowAt;
@@ -35,8 +39,7 @@ public sealed partial class XenoEggComponent : Component
     [DataField, AutoNetworkedField]
     public EntProtoId Spawn = "CMXenoParasite";
 
-    [DataField, AutoNetworkedField]
-    public EntityUid? Hive;
+    public SoundSpecifier PlantSound = new SoundPathSpecifier("/Audio/Effects/Fluids/splat.ogg");
 }
 
 [Serializable, NetSerializable]

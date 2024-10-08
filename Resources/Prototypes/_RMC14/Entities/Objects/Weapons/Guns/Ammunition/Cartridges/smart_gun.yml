@@ -18,7 +18,7 @@
     - CMCartridgeSmartGun10x30mm
 
 - type: entity
-  parent: BaseBullet
+  parent: CMBulletBase
   id: CMBulletSmartGun10x30mm
   name: bullet (10x30mm)
   noSpawn: true
@@ -34,3 +34,11 @@
         Piercing: 30
   - type: CMArmorPiercing
     amount: 0
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 12
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 7
+      falloff: 4
+    

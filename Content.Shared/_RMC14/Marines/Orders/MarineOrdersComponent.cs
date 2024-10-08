@@ -58,4 +58,7 @@ public sealed partial class MarineOrdersComponent : Component
 
     [DataField, AutoNetworkedField]
     public List<LocId> HoldCallouts = new() { "hold-order-callout-1", "hold-order-callout-2", "hold-order-callout-3" };
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillLeadership";
 }

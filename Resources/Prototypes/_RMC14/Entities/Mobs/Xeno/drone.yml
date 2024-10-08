@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoDrone
   name: Drone
   description: An alien drone.
@@ -59,9 +60,9 @@
   - type: XenoDevour
   - type: XenoEvolution
     canEvolveWithoutGranter: true
-    max: 300
+    max: 200
     evolvesTo:
-#    - CMXenoCarrier
+    - CMXenoCarrier
 #    - CMXenoBurrower
     - CMXenoHivelord
     evolvesToWithoutPoints:
@@ -72,7 +73,7 @@
     plasma: 1000
     maxPlasma: 1000
     plasmaRegenOnWeeds: 4.5
-  - type: Tackle
+  - type: Tackle # min: 2, max: 4
     threshold: 4
     stun: 7
   - type: WhitelistPickup
@@ -80,6 +81,8 @@
       components:
       - XenoParasite
       - XenoEgg
+  - type: EggPlantTime
+    plantTime: 2.5
   - type: MultiHandedHolder
     items:
     - hands: 2
@@ -88,4 +91,12 @@
         - XenoEgg
   - type: RMCXenoDamageVisuals
     prefix: drone
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: drone
+  - type: AcidTrap
+    trapLevel: 1
+    cost: 70
+    spray: XenoAcidSprayTrapWeak
 

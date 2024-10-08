@@ -20,9 +20,6 @@
   id: RMCCartridgePistol45ACP
 
 - type: Tag
-  id: CMMortarShell
-
-- type: Tag
   id: CMBloodPack
 
 - type: Tag
@@ -74,3 +71,15 @@
 
 - type: Tag
   id: CMRocketDisposable
+  
+- type: Tag
+  id: RMCGlass
+
+- type: Tag
+  id: Scabbard
+
+- type: Tag
+  id: RMCMacheteScabbard
+
+- type: Tag
+  id: RMCG8Pouch

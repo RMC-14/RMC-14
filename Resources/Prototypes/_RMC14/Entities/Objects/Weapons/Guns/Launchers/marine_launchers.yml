@@ -31,6 +31,12 @@
     containers:
       ballistic-ammo: !type:Container
         ents: []
+  - type: RMCAmmoEject
+    containerID: ballistic-ammo
+    ejectSound:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
+      params:
+        volume: -2
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -205,7 +211,10 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: -0.12, 0.1
-      
+  - type: IgnorePredictionHide
+  - type: GunIgnorePrediction
+
+
 - type: entity
   name: RAS-KEL
   parent: [BaseWeaponLauncher, CMBaseWeaponGun]
@@ -242,3 +251,5 @@
   - type: GunRequiresWield
   - type: GunShowUseDelay
   - type: UseDelay
+  - type: IgnorePredictionHide
+  - type: GunIgnorePrediction

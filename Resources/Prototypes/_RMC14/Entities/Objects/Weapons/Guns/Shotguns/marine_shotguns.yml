@@ -3,6 +3,8 @@
   parent: [ BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder ]
   id: RMCBaseWeaponShotgun
   components:
+  - type: Item
+    size: Large
   - type: Sprite
     layers:
     - state: base
@@ -40,15 +42,18 @@
     cycleable: false
     whitelist:
       tags:
-      - CMShellShotgun
+      - RMCShellShotgun
     capacity: 9
     proto: null
     soundInsert:
-      path: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+      collection: CMShotgunLoad
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
         ents: []
+  - type: RMCAmmoEject
+    containerID: ballistic-ammo
+    ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
   - type: StaticPrice
     price: 500
   - type: RMCNameItemOnVend
@@ -56,6 +61,9 @@
   - type: Tag
     tags:
     - RMCWeaponShotgun
+  - type: RMCFireGroup
+    group: Shotgun
+    delay: 4
 
 - type: entity
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
@@ -65,8 +73,11 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2.rsi
   - type: Gun
     shotsPerBurst: 1
+  - type: ShootUseDelay
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -83,6 +94,7 @@
       rmc-aslot-barrel:
         whitelist:
           tags:
+          - RMCAttachmentExtendedBarrel
           - RMCAttachmentBarrelCharger
           - RMCAttachmentRecoilCompensator
           - RMCM5Bayonet

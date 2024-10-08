@@ -106,7 +106,7 @@ public sealed class XenoChargeSystem : EntitySystem
             _xenoAnimations.PlayLungeAnimationEvent(xeno, charge);
         }
 
-        if (!_xeno.CanAbilityAttackTarget(xeno, targetId))
+        if (!_xeno.CanAbilityAttackTarget(xeno, targetId, true))
             return;
 
         if (_net.IsServer)

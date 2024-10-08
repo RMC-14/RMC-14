@@ -10,9 +10,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/autolathe.rsi
     layers:
-    - state: autolathe_n
-      map: ["enum.LatheVisualLayers.IsRunning"]
     - state: autolathe
+      map: ["enum.LatheVisualLayers.IsRunning"]
+    - state: autolathe_u
       shader: unshaded
       map: ["enum.PowerDeviceVisualLayers.Powered"]
     - state: autolathe_t
@@ -33,8 +33,10 @@
   - type: Lathe
     idleState: autolathe
     runningState: autolathe_n
+    producingSound: /Audio/_RMC14/Machines/print.ogg
     staticRecipes:
-    - CMBucket
+    - RMCBucket
+    - CMBucketMop
 #    - Janitorial bucket (10000 metal)
 #    - Flashlight (62 metal, 25 glass)
     - CMFireExtinguisher
@@ -86,7 +88,7 @@
     whitelist:
       tags:
       - Metal
-      - Sheet
+      - RMCGlass
   - type: Destructible
     thresholds:
     - trigger:
@@ -116,3 +118,5 @@
     price: 800
   - type: Machine
     board: CMAutolatheMachineCircuitboard
+  - type: Corrodible
+    isCorrodible: false

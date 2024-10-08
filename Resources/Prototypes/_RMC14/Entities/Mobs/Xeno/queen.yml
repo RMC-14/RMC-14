@@ -2,6 +2,7 @@
   parent:
   - CMXenoDeveloped
   - CMXenoTail
+  - RMCXenoSpeechSounds
   id: CMXenoQueen
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
@@ -57,7 +58,7 @@
     # Mature
 #    - ActionXenoSpit
 #    - ActionXenoToggleSpitType
-    tier: 4
+    tier: 0
     bypassTierCount: true
     unlockAt: 0
   - type: XenoAcid
@@ -85,8 +86,8 @@
       groups:
         Brute: 40
   - type: XenoOvipositorCapable
-  - type: Tackle
-    threshold: 3
+  - type: Tackle # min: 2, max: 6
+    threshold: 4
     stun: 11
     chance: 0.55
   - type: Fixtures
@@ -94,7 +95,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.40
+          radius: 0.35
         density: 185
         mask:
         - MobMask
@@ -154,5 +155,25 @@
     - type: XenoScreech
     addActions:
     - ActionXenoScreech
+  - type: RMCSize
+    size: Immobile
   - type: RMCXenoDamageVisuals
     prefix: queen
+  - type: PreventPulledWhileAlive
+    whitelist:
+      components:
+      - Xeno
+    exceptEffects:
+    - Stun
+    - KnockedDown
+  - type: TacticalMapUser
+    xenos: true
+    canDraw: true
+    liveUpdate: true
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: xenoqueen
+  - type: AcidTrap
+  - type: TacticalMapLiveUpdateOnOvi
+    enabled: false

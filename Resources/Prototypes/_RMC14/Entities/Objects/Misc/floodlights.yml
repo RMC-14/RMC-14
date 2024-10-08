@@ -65,6 +65,13 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Anchorable
+    flags:
+    - Anchorable
   - type: Sprite
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/floodlightbig.rsi
@@ -75,8 +82,6 @@
         map: [ "light" ]
     offset: "0.0,0.5"
     drawdepth: Mobs
-  - type: Transform
-    anchored: true
   - type: Construction
     graph: RMCFloodlightBroken
     node: completed
@@ -103,7 +108,6 @@
           collection: MetalGlassBreak
       - !type:ChangeConstructionNodeBehavior
         node: start
-  - type: Physics
   - type: Repairable
   - type: Corrodible # Repairable, not destructible.
     isCorrodible: false
@@ -126,6 +130,13 @@
   name: tall broken floodlight
   description: A pasted on note says 'To fix, unscrew the panel, crowbar out the damaged assembly, weld it fixed, add 2 cable, then close the panel.'
   components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Anchorable
+    flags:
+    - Anchorable
   - type: Sprite
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/floodlightbig.rsi
@@ -136,8 +147,6 @@
     graph: RMCFloodlightBroken
     node: start
   - type: InteractionOutline
-  - type: Anchorable
-  - type: Physics
   - type: Corrodible # Repairable, not destructible.
     isCorrodible: false
   - type: Fixtures

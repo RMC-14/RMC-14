@@ -1,4 +1,5 @@
 job-greet-station-name = Welcome aboard {$stationName}.
+job-greet-planet-name = Currently Orbiting {$planetName}
 job-greet-introduce-job-name = Your role is: {$jobName}.
 job-greet-important-disconnect-admin-notify = You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via ahelp.
 job-greet-supervisors-warning = As the {$jobName} you answer directly to {$supervisors}. Special circumstances may change this.

@@ -1,0 +1,13 @@
+﻿- type: entity
+  parent: ActionMarineToggleable
+  id: RMCActionToggleCloak
+  name: Toggle Cloak
+  description: Enable or Disable your Thermal Cloak
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/scout_cloak.rsi
+      state: icon
+    event: !type:ThermalCloakTurnInvisibleActionEvent
+    useDelay: 3
+    itemIconStyle: NoItem

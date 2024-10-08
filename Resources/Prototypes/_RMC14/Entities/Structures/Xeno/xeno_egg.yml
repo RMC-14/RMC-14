@@ -63,3 +63,12 @@
   - type: StepTrigger
     requiredTriggeredSpeed: 0
     intersectRatio: 0.5
+  - type: RMCNightVisionVisible
+    priority: -1
+  - type: Corrodible
+    isCorrodible: false
+  - type: UserInterface
+    interfaces:
+      enum.XenoParasiteGhostUI.Key:
+        type: XenoParasiteGhostBui
+        requireInputValidation: false

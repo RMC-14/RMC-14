@@ -13,6 +13,7 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Wieldable;
@@ -28,6 +29,7 @@ public sealed class RMCWieldableSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
 
     private const string wieldUseDelayID = "RMCWieldDelay";
+    private static readonly EntProtoId<SkillDefinitionComponent> WieldSkill = "RMCSkillFirearms";
 
     public override void Initialize()
     {
@@ -86,7 +88,7 @@ public sealed class RMCWieldableSystem : EntitySystem
 
         args.Args.ModifySpeed(wieldable.Comp.ModifiedWalk, wieldable.Comp.ModifiedSprint);
     }
-    
+
     public void RefreshSpeedModifiers(Entity<WieldableSpeedModifiersComponent?> wieldable)
     {
         wieldable.Comp = EnsureComp<WieldableSpeedModifiersComponent>(wieldable);
@@ -118,7 +120,7 @@ public sealed class RMCWieldableSystem : EntitySystem
     {
         RefreshSpeedModifiers((wieldable.Owner, wieldable.Comp));
     }
-    
+
     private void RefreshModifiersOnParent(EntityUid wieldableUid)
     {
         if (!TryComp(wieldableUid, out TransformComponent? transformComponent) ||
@@ -128,7 +130,7 @@ public sealed class RMCWieldableSystem : EntitySystem
         {
             return;
         }
-        
+
         _movementSpeedModifierSystem.RefreshMovementSpeedModifiers(transformComponent.ParentUid);
     }
 #endregion
@@ -204,13 +206,10 @@ public sealed class RMCWieldableSystem : EntitySystem
     private void OnItemWieldedWithDelay(Entity<WieldDelayComponent> wieldable, ref ItemWieldedEvent args)
     {
         // TODO RMC14 +0.5s if Dazed
-        TimeSpan skillModifiedDelay = wieldable.Comp.ModifiedDelay;
+        var skillModifiedDelay = wieldable.Comp.ModifiedDelay;
 
-        if (_container.TryGetContainingContainer((wieldable, null), out var container) &&
-            TryComp(container.Owner, out SkillsComponent? skills))
-        {
-            skillModifiedDelay -= (TimeSpan.FromSeconds(0.2) * skills.Skills.Firearms);
-        }
+        if (_container.TryGetContainingContainer((wieldable, null), out var container))
+            skillModifiedDelay -= TimeSpan.FromSeconds(0.2) * _skills.GetSkill(container.Owner, WieldSkill);
 
         _useDelaySystem.SetLength(wieldable.Owner, skillModifiedDelay, wieldUseDelayID);
         _useDelaySystem.TryResetDelay(wieldable.Owner, id: wieldUseDelayID);

@@ -1,4 +1,4 @@
-- type: statusIcon
+- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconLiaison
   icon:

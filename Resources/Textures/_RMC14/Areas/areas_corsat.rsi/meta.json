@@ -1,0 +1,317 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1a6d9e2acb0e533ce0b461e7fbe9a673206c0f5c/icons/turf/area_corsat.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "theta_complex"
+    },
+    {
+      "name": "theta_hydro_east"
+    },
+    {
+      "name": "theta_hydro_west"
+    },
+    {
+      "name": "theta_airlock_west"
+    },
+    {
+      "name": "theta_airlock_east"
+    },
+    {
+      "name": "theta_control"
+    },
+    {
+      "name": "gamma_biodome"
+    },
+    {
+      "name": "gamma_complex"
+    },
+    {
+      "name": "gamma_virology"
+    },
+    {
+      "name": "gamma_toxin"
+    },
+    {
+      "name": "omega_biodome"
+    },
+    {
+      "name": "gamma_hangar_security"
+    },
+    {
+      "name": "omega_hangar_office"
+    },
+    {
+      "name": "corporate_shuttle"
+    },
+    {
+      "name": "omega_hallway"
+    },
+    {
+      "name": "omega_complex"
+    },
+    {
+      "name": "omega_containment"
+    },
+    {
+      "name": "omega_security"
+    },
+    {
+      "name": "omega_hangar_security"
+    },
+    {
+      "name": "omega_checkpoint"
+    },
+    {
+      "name": "omega_offices"
+    },
+    {
+      "name": "omega_cargo"
+    },
+    {
+      "name": "omega_maintenance"
+    },
+    {
+      "name": "omega_airlock"
+    },
+    {
+      "name": "omega_control"
+    },
+    {
+      "name": "sigma_biodome"
+    },
+    {
+      "name": "sigma_testgrounds"
+    },
+    {
+      "name": "sigma_gunrange"
+    },
+    {
+      "name": "sigma_scrapyard"
+    },
+    {
+      "name": "theta_biodome"
+    },
+    {
+      "name": "corsat_kitchen"
+    },
+    {
+      "name": "food_storage"
+    },
+    {
+      "name": "corsat_administration"
+    },
+    {
+      "name": "gamma_security"
+    },
+    {
+      "name": "security_cell"
+    },
+    {
+      "name": "corsat_armory"
+    },
+    {
+      "name": "corsat_rnr"
+    },
+    {
+      "name": "corsat_bar"
+    },
+    {
+      "name": "corsat_arcade"
+    },
+    {
+      "name": "corsat_library"
+    },
+    {
+      "name": "gamma_engineering"
+    },
+    {
+      "name": "gamma_atmos"
+    },
+    {
+      "name": "corsat_core"
+    },
+    {
+      "name": "sigma_complex_remote"
+    },
+    {
+      "name": "gamma_airlock_north"
+    },
+    {
+      "name": "gamma_airlock_south"
+    },
+    {
+      "name": "gamma_control"
+    },
+    {
+      "name": "omega_hangar"
+    },
+    {
+      "name": "gamma_residential_west"
+    },
+    {
+      "name": "gamma_residential_east"
+    },
+    {
+      "name": "gamma_residential_maint"
+    },
+    {
+      "name": "researcher_quarters"
+    },
+    {
+      "name": "researcher_lounge"
+    },
+    {
+      "name": "gamma_lavatory"
+    },
+    {
+      "name": "gamma_showers"
+    },
+    {
+      "name": "gamma_laundry"
+    },
+    {
+      "name": "gamma_cargo"
+    },
+    {
+      "name": "gamma_cargo_lobby"
+    },
+    {
+      "name": "gamma_disposals"
+    },
+    {
+      "name": "corsat_medbay"
+    },
+    {
+      "name": "corsat_morgue"
+    },
+    {
+      "name": "corsat_chemistry"
+    },
+    {
+      "name": "corsat_surgery"
+    },
+    {
+      "name": "medbay_lobby"
+    },
+    {
+      "name": "corsat_hydroponics"
+    },
+    {
+      "name": "corsat_canteen"
+    },
+    {
+      "name": "secondary_core"
+    },
+    {
+      "name": "corsat_telecomms"
+    },
+    {
+      "name": "sigma_data_lab"
+    },
+    {
+      "name": "sigma_data_offices"
+    },
+    {
+      "name": "sigma_hallway_southeast"
+    },
+    {
+      "name": "sigma_complex"
+    },
+    {
+      "name": "robotics"
+    },
+    {
+      "name": "sigma_engineering"
+    },
+    {
+      "name": "sigma_security"
+    },
+    {
+      "name": "sigma_offices"
+    },
+    {
+      "name": "gamma_hangar"
+    },
+    {
+      "name": "gamma_hangar_office"
+    },
+    {
+      "name": "flight_center"
+    },
+    {
+      "name": "gamma_arrivals"
+    },
+    {
+      "name": "gamma_foyer"
+    },
+    {
+      "name": "gamma_hallway_main"
+    },
+    {
+      "name": "gamma_hallway_south"
+    },
+    {
+      "name": "sigma_hangar"
+    },
+    {
+      "name": "sigma_arrivals"
+    },
+    {
+      "name": "sigma_hangar_office"
+    },
+    {
+      "name": "sigma_hangar_security"
+    },
+    {
+      "name": "sigma_airlock_east"
+    },
+    {
+      "name": "sigma_airlock_south"
+    },
+    {
+      "name": "sigma_control"
+    },
+    {
+      "name": "sigma_hallway_north"
+    },
+    {
+      "name": "sigma_cargo"
+    },
+    {
+      "name": "sigma_laundry"
+    },
+    {
+      "name": "sigma_lavatory"
+    },
+    {
+      "name": "sigma_cafe"
+    },
+    {
+      "name": "sigma_residential"
+    },
+    {
+      "name": "sigma_security_checkpoint"
+    },
+    {
+      "name": "sigma_hallway_south"
+    },
+    {
+      "name": "corsat_hull"
+    },
+    {
+      "name": "corsat_id"
+    },
+    {
+      "name": "monorail"
+    },
+    {
+      "name": "railcart"
+    }
+  ]
+}

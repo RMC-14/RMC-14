@@ -6,7 +6,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Xenonids.Construction.Events;
 
 [Serializable, NetSerializable]
-public sealed partial class XenoSecreteStructureDoAfterEvent : DoAfterEvent
+public sealed partial class XenoSecreteStructureDoAfterEvent : SimpleDoAfterEvent
 {
     [DataField]
     public NetCoordinates Coordinates;
@@ -14,14 +14,13 @@ public sealed partial class XenoSecreteStructureDoAfterEvent : DoAfterEvent
     [DataField]
     public EntProtoId StructureId = "WallXenoResin";
 
-    public XenoSecreteStructureDoAfterEvent(NetCoordinates coordinates, EntProtoId structureId)
+    [DataField]
+    public NetEntity? Effect;
+
+    public XenoSecreteStructureDoAfterEvent(NetCoordinates coordinates, EntProtoId structureId, NetEntity? effect = null)
     {
         Coordinates = coordinates;
         StructureId = structureId;
-    }
-
-    public override DoAfterEvent Clone()
-    {
-        return this;
+        Effect = effect;
     }
 }

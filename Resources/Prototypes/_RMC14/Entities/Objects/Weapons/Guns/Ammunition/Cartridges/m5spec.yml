@@ -12,8 +12,6 @@
   - type: CartridgeAmmo
     proto: RMCProjectileRocket84mm
     deleteOnSpawn: false
-    count: 1
-    spread: 0
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/m5spec.rsi
     layers:
@@ -25,6 +23,7 @@
   - type: SpentAmmoVisuals
     state: m5_84mm_he
     suffix: false
+  - type: IgnorePredictionHide
 
 - type: entity
   id: RMCProjectileRocket84mm
@@ -73,6 +72,7 @@
     radius: 3.5
     color: orange
     energy: 0.5
+  - type: IgnorePredictionHide
 
 # 84mm AP
 
@@ -85,8 +85,6 @@
   - type: CartridgeAmmo
     proto: RMCProjectileRocket84mmAntiArmor
     deleteOnSpawn: false
-    count: 1
-    spread: 0
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/m5spec.rsi
     layers:
@@ -95,6 +93,7 @@
   - type: SpentAmmoVisuals
     state: m5_84mm_ap
     suffix: false
+  - type: IgnorePredictionHide
 
 - type: entity
   id: RMCProjectileRocket84mmAntiArmor
@@ -129,5 +128,6 @@
   # Almost every other stun in the future should use some kind of configurable and resistable system instead.
     stunAmount: 6
     knockdownAmount: 6
+  - type: IgnorePredictionHide
 
 # TODO RMC14 84mm WP

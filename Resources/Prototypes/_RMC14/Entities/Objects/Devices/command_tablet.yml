@@ -19,3 +19,9 @@
       enum.MarineCommunicationsComputerUI.Key:
         type: MarineCommunicationsComputerBui
   - type: MarineCommunicationsComputer
+  - type: Tag
+    tags:
+    - CommandTablet
+  
+- type: Tag
+  id: CommandTablet

@@ -89,6 +89,10 @@
   - type: ImmuneToUnarmed
   - type: CMIconSmooth
     smooth: true
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: XenoResinBreak
 #  - type: Physics
 #    bodyType: Static
 #  - type: FootstepModifier
@@ -246,6 +250,9 @@
   - type: ImmuneToUnarmed
   - type: WallMount
     arc: 360
+  - type: RMCNightVisionVisible
+    priority: -1
+    transparency: 0.2
 
 - type: edgeSpreader
   id: XenoWeeds

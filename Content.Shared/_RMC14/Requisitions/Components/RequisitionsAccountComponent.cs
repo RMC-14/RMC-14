@@ -13,9 +13,6 @@ public sealed partial class RequisitionsAccountComponent : Component
     [DataField]
     public int Balance;
 
-    [DataField]
-    public int StartingDollarsPerMarine = 400;
-
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextGain;
 

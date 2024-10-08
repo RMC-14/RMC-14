@@ -12,7 +12,12 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 70
+        Piercing: 140 # TODO RMC14 70 when aimed shot is in please someone help im dying
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 32
+      falloff: 9999
+      ignoreModifiers: true
   - type: CMArmorPiercing
     amount: 50
 

@@ -1,0 +1,23 @@
+﻿<controls:RMCMarineTab
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Admin"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface">
+    <BoxContainer Orientation="Vertical">
+        <Label Text="{Loc 'rmc-ui-automated-vendor-points'}" />
+        <ui:BlueHorizontalSeparator />
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc 'rmc-ui-points'}" MinWidth="130" />
+            <SpinBox Name="PointsSpinBox" Access="Public" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc 'rmc-ui-specialist-points'}" MinWidth="130" />
+            <SpinBox Name="SpecialistPointsSpinBox" Access="Public" />
+        </BoxContainer>
+        <Label Text="{Loc 'rmc-ui-weapons-specialist-skills'}" Margin="0 20 0 0" />
+        <ui:BlueHorizontalSeparator />
+        <BoxContainer Name="SpecialistSkills" Access="Public" Orientation="Horizontal" />
+        <Label Text="{Loc 'rmc-ui-create-squad'}" Margin="0 20 0 0" />
+        <ui:BlueHorizontalSeparator />
+        <BoxContainer Name="Squads" Access="Public" Orientation="Vertical" />
+    </BoxContainer>
+</controls:RMCMarineTab>

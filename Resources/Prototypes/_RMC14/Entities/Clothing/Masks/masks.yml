@@ -31,7 +31,6 @@
     sprite: _RMC14/Objects/Clothing/Mask/sterile.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/sterile.rsi
-  - type: IngestionBlocker
   - type: Item
     storedRotation: -90
 
@@ -58,6 +57,5 @@
     sprite: _RMC14/Objects/Clothing/Mask/coif.rsi
   - type: IdentityBlocker
     coverage: MOUTH
-  - type: IngestionBlocker
   - type: Item
     storedRotation: -90

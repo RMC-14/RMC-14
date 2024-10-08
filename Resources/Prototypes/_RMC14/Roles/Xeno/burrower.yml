@@ -3,6 +3,9 @@
   id: CMXenoBurrower
   name: cm-job-name-xeno-burrower
   playTimeTracker: CMJobXenoBurrower
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: burrower
 
 - type: playTimeTracker
   id: CMJobXenoBurrower

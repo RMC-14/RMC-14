@@ -18,3 +18,4 @@ rmc-revolver-spin = You spin the cylinder.
 rmc-examine-text-scatter-max = Current maximum scatter is [color={$colour}]{TOSTRING($scatter, "F1")}[/color] degrees.
 rmc-examine-text-scatter-min = Current minimum scatter is [color={$colour}]{TOSTRING($scatter, "F1")}[/color] degrees.
 rmc-examine-text-shots-to-max-scatter = It takes [color={$colour}]{$shots}[/color] shots to reach maximum scatter.
+rmc-examine-text-iff = [color=cyan]This gun will ignore and shoot past friendlies![/color]

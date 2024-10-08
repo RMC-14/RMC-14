@@ -25,8 +25,11 @@
     {
       "name": "bnkr_frame8"
     },
-	{
+    {
       "name": "bnkr_frame12"
+    },
+    {
+      "name": "bnkr_frame13"
     }
   ]
 }
