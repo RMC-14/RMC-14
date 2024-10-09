@@ -14,6 +14,7 @@ public sealed class XenoInvisibilitySystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     public override void Initialize()
@@ -21,7 +22,7 @@ public sealed class XenoInvisibilitySystem : EntitySystem
         SubscribeLocalEvent<XenoTurnInvisibleComponent, XenoTurnInvisibleActionEvent>(OnXenoTurnInvisibleAction);
 
         SubscribeLocalEvent<XenoActiveInvisibleComponent, ComponentRemove>(OnXenoActiveInvisibleRemove);
-        SubscribeLocalEvent<XenoActiveInvisibleComponent, MeleeAttackEvent>(OnXenoActiveInvisibleMeleeAttack);
+        SubscribeLocalEvent<XenoActiveInvisibleComponent, MeleeHitEvent>(OnXenoActiveInvisibleMeleeHit);
         SubscribeLocalEvent<XenoActiveInvisibleComponent, XenoLeapHitEvent>(OnXenoActiveInvisibleLeapHit);
         SubscribeLocalEvent<XenoActiveInvisibleComponent, RefreshMovementSpeedModifiersEvent>(OnXenoActiveInvisibleRefreshSpeed);
     }
@@ -55,10 +56,21 @@ public sealed class XenoInvisibilitySystem : EntitySystem
             _movementSpeed.RefreshMovementSpeedModifiers(xeno);
     }
 
-    private void OnXenoActiveInvisibleMeleeAttack(Entity<XenoActiveInvisibleComponent> xeno, ref MeleeAttackEvent args)
+    private void OnXenoActiveInvisibleMeleeHit(Entity<XenoActiveInvisibleComponent> xeno, ref MeleeHitEvent args)
     {
-        RemCompDeferred<XenoActiveInvisibleComponent>(xeno);
-        OnRemoveInvisibility(xeno);
+        if (!args.IsHit || args.HitEntities.Count == 0)
+            return;
+
+        foreach (var entity in args.HitEntities)
+        {
+            if (!_xeno.CanAbilityAttackTarget(xeno, entity))
+                return;
+        
+            RemCompDeferred<XenoActiveInvisibleComponent>(xeno);
+            OnRemoveInvisibility(xeno);
+
+            break;
+        }
     }
 
     private void OnXenoActiveInvisibleLeapHit(Entity<XenoActiveInvisibleComponent> xeno, ref XenoLeapHitEvent args)
