@@ -638,7 +638,13 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             return;
 
         if (TryComp<VictimInfectedComponent>(burster.Comp.BurstFrom, out var infected) && !infected.IsBursting)
-            TryBurst((burster.Comp.BurstFrom, infected));
+        {
+            var ent = (burster.Comp.BurstFrom, infected);
+            infected.IsBursting = true;
+            Dirty(ent);
+
+            TryBurst(ent);
+        }
     }
 
     private void TryBurst(Entity<VictimInfectedComponent> burstFrom)
@@ -648,9 +654,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         if (comp.IsBursting)
             return;
-
-        comp.IsBursting = true;
-        Dirty(burstFrom);
 
         if (comp.SpawnedLarva == null)
             return;
@@ -696,13 +699,10 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     private void OnBurst(Entity<VictimInfectedComponent> ent, ref LarvaBurstDoAfterEvent args)
     {
+        _appearance.SetData(ent.Owner, ent.Comp.BurstingLayer, false);
+
         if (_net.IsClient)
             return;
-
-        if (!TryComp(ent, out TransformComponent? xform))
-            return;
-
-        _appearance.SetData(ent.Owner, ent.Comp.BurstingLayer, false);
 
         var coords = _transform.GetMoverCoordinates(ent);
 
