@@ -51008,86 +51008,73 @@ entities:
       rot: 3.141592653589793 rad
       pos: 68.5,50.5
       parent: 1
-- proto: CMSheetMetal
-  entities:
-  - uid: 14100
-    components:
-    - type: Transform
-      pos: 163.5,139.5
-      parent: 1
 - proto: CMSheetMetal1
   entities:
   - uid: 1444
     components:
     - type: Transform
-      pos: 45.5,40.5
+      pos: 215.5,139.5
+      parent: 1
+  - uid: 1447
+    components:
+    - type: Transform
+      pos: 213.5,139.5
       parent: 1
   - uid: 1709
     components:
     - type: Transform
-      pos: 46.5,49.5
+      pos: 210.5,144.5
       parent: 1
   - uid: 1710
     components:
     - type: Transform
-      pos: 45.5,42.5
+      pos: 207.5,123.5
       parent: 1
   - uid: 4464
     components:
     - type: Transform
-      pos: 35.5,118.5
+      pos: 205.5,124.5
       parent: 1
   - uid: 4465
     components:
     - type: Transform
-      pos: 34.5,116.5
+      pos: 204.5625,117.5625
       parent: 1
+    - type: Stack
+      count: 25
   - uid: 4466
     components:
     - type: Transform
-      pos: 32.5,115.5
-      parent: 1
-  - uid: 4467
-    components:
-    - type: Transform
-      pos: 32.5,120.5
+      pos: 203.5,124.5
       parent: 1
   - uid: 4468
     components:
     - type: Transform
-      pos: 31.5,121.5
+      pos: 174.5,49.5
       parent: 1
   - uid: 4469
     components:
     - type: Transform
-      pos: 34.5,121.5
+      pos: 170.5,49.5
       parent: 1
   - uid: 4470
     components:
     - type: Transform
-      pos: 34.5,126.5
+      pos: 169.5,47.5
       parent: 1
   - uid: 4471
     components:
     - type: Transform
-      pos: 38.5,124.5
+      pos: 165.5,99.5
       parent: 1
   - uid: 5954
     components:
     - type: Transform
-      pos: 98.5,96.5
+      pos: 163.5,139.5
       parent: 1
-  - uid: 5955
-    components:
-    - type: Transform
-      pos: 99.5,96.5
-      parent: 1
+    - type: Stack
+      count: 10
   - uid: 7616
-    components:
-    - type: Transform
-      pos: 113.5,141.5
-      parent: 1
-  - uid: 7986
     components:
     - type: Transform
       pos: 115.5,80.5
@@ -51095,71 +51082,94 @@ entities:
   - uid: 11030
     components:
     - type: Transform
-      pos: 174.5,49.5
+      pos: 113.5,141.5
       parent: 1
   - uid: 11043
     components:
     - type: Transform
-      pos: 170.5,49.5
+      pos: 99.5,96.5
       parent: 1
   - uid: 11085
     components:
     - type: Transform
-      pos: 169.5,47.5
+      pos: 98.5,96.5
+      parent: 1
+  - uid: 13055
+    components:
+    - type: Transform
+      pos: 98.5,92.5
       parent: 1
   - uid: 13102
     components:
     - type: Transform
-      pos: 207.5,123.5
+      pos: 71.5,43.5
       parent: 1
-  - uid: 14552
-    components:
-    - type: Transform
-      pos: 205.5,124.5
-      parent: 1
-  - uid: 14553
-    components:
-    - type: Transform
-      pos: 203.5,124.5
-      parent: 1
-  - uid: 14706
-    components:
-    - type: Transform
-      pos: 213.5,139.5
-      parent: 1
-  - uid: 14707
-    components:
-    - type: Transform
-      pos: 215.5,139.5
-      parent: 1
-  - uid: 14708
-    components:
-    - type: Transform
-      pos: 215.5,141.5
-      parent: 1
-  - uid: 14709
-    components:
-    - type: Transform
-      pos: 210.5,144.5
-      parent: 1
-  - uid: 14710
-    components:
-    - type: Transform
-      pos: 215.5,145.5
-      parent: 1
-- proto: CMSheetMetal10
-  entities:
-  - uid: 1447
+  - uid: 14100
     components:
     - type: Transform
       pos: 48.5,51.5
       parent: 1
-- proto: CMSheetMetal30
-  entities:
-  - uid: 13055
+  - uid: 14552
     components:
     - type: Transform
-      pos: 204.5,117.5
+      pos: 46.5,49.5
+      parent: 1
+  - uid: 14553
+    components:
+    - type: Transform
+      pos: 45.5,42.5
+      parent: 1
+  - uid: 14706
+    components:
+    - type: Transform
+      pos: 45.5,40.5
+      parent: 1
+  - uid: 14709
+    components:
+    - type: Transform
+      pos: 32.5,120.5
+      parent: 1
+  - uid: 14710
+    components:
+    - type: Transform
+      pos: 31.5,121.5
+      parent: 1
+  - uid: 15829
+    components:
+    - type: Transform
+      pos: 215.5,141.5
+      parent: 1
+  - uid: 15830
+    components:
+    - type: Transform
+      pos: 215.5,145.5
+      parent: 1
+- proto: CMSheetMetal30
+  entities:
+  - uid: 4467
+    components:
+    - type: Transform
+      pos: 178.5,129.5
+      parent: 1
+  - uid: 5955
+    components:
+    - type: Transform
+      pos: 124.5,46.5
+      parent: 1
+  - uid: 7986
+    components:
+    - type: Transform
+      pos: 115.5,52.5
+      parent: 1
+  - uid: 14707
+    components:
+    - type: Transform
+      pos: 34.5,121.5
+      parent: 1
+  - uid: 14708
+    components:
+    - type: Transform
+      pos: 34.5,116.5
       parent: 1
 - proto: CMShellShotgunBuckshot
   entities:
@@ -119716,6 +119726,68 @@ entities:
     components:
     - type: Transform
       pos: 183.5,118.5
+      parent: 1
+- proto: WeaponRifleM4SPR
+  entities:
+  - uid: 15831
+    components:
+    - type: Transform
+      pos: 14.5,124.5
+      parent: 1
+  - uid: 15832
+    components:
+    - type: Transform
+      pos: 19.875,123.6875
+      parent: 1
+  - uid: 15833
+    components:
+    - type: Transform
+      pos: 20.5,116.5
+      parent: 1
+  - uid: 15834
+    components:
+    - type: Transform
+      pos: 21.3125,124.5
+      parent: 1
+  - uid: 15835
+    components:
+    - type: Transform
+      pos: 22.5,119.5
+      parent: 1
+  - uid: 15836
+    components:
+    - type: Transform
+      pos: 24.3125,116.5
+      parent: 1
+  - uid: 15837
+    components:
+    - type: Transform
+      pos: 26.5,121.5
+      parent: 1
+  - uid: 15838
+    components:
+    - type: Transform
+      pos: 96.5,71.5
+      parent: 1
+  - uid: 15839
+    components:
+    - type: Transform
+      pos: 96.5,72.5
+      parent: 1
+  - uid: 15840
+    components:
+    - type: Transform
+      pos: 125.5,22.5
+      parent: 1
+  - uid: 15841
+    components:
+    - type: Transform
+      pos: 131.5,24.5
+      parent: 1
+  - uid: 15842
+    components:
+    - type: Transform
+      pos: 132.5,55.5
       parent: 1
 - proto: WeaponRifleM54C
   entities:
