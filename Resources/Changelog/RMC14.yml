@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: diraven
-  changes:
-  - message: Pheromones icons are now shown even without direct line of sight.
-    type: Tweak
-  id: 313
-  time: '2024-07-08T21:28:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2910
 - author: DrSmugleaf
   changes:
   - message: Fixed the lifesaver bag's storage UI being extremely long, it is now
@@ -4639,5 +4632,12 @@
   id: 812
   time: '2024-10-09T21:55:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4100
+- author: TeaTotalTemplar
+  changes:
+  - message: Added the AR10, AR10 magazine and 7.62x51 cartridge
+    type: Add
+  id: 813
+  time: '2024-10-09T22:14:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4367
 Name: RMC14
 Order: -1
