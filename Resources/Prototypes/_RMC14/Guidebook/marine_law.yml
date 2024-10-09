@@ -1,0 +1,157 @@
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLaw
+  name: rmc-guide-entry-rules-marine-law
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLaw.xml"
+  priority: 3
+  children:
+  - RMCMarineLawDefinitions
+  - RMCMarineLawProcedures
+  - RMCMarineLawCrimes
+  - RMCMarineLawPrisonerRights
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawDefinitions
+  name: rmc-guide-entry-marine-law-definitions
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawDefinitions.xml"
+  priority: 0
+
+# Procedures
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawProcedures
+  name: rmc-guide-entry-marine-law-procedures
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawProcedures.xml"
+  priority: 1
+  children:
+  - RMCMarineLawArresting
+  - RMCMarineLawCharging
+  - RMCMarineLawNJP
+  - RMCMarineLawLethal
+  - RMCMarineLawSearches
+  - RMCMarineLawDemotions
+  - RMCMarineLawExecutions
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawArresting
+  name: rmc-guide-entry-marine-law-arresting
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawArresting.xml"
+  priority: 0
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawCharging
+  name: rmc-guide-entry-marine-law-charging
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCharging.xml"
+  priority: 1
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawNJP
+  name: rmc-guide-entry-marine-law-njp
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawNJP.xml"
+  priority: 2
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawLethal
+  name: rmc-guide-entry-marine-law-lethal
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawLethal.xml"
+  priority: 3
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawSearches
+  name: rmc-guide-entry-marine-law-searches
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawSearches.xml"
+  priority: 4
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawDemotions
+  name: rmc-guide-entry-marine-law-demotions
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawDemotions.xml"
+  priority: 5
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawExecutions
+  name: rmc-guide-entry-marine-law-executions
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawExecutions.xml"
+  priority: 6
+
+# Crimes
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawCrimes
+  name: rmc-guide-entry-marine-law-crimes
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCrimes.xml"
+  priority: 2
+  children:
+  - RMCMarineLawCrimesVariable
+  - RMCMarineLawCrimesMinor
+  - RMCMarineLawCrimesMajor
+  - RMCMarineLawCrimesCapital
+  - RMCMarineLawCrimesOptional
+  - RMCMarineLawCrimesPrecautionary
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawCrimesVariable
+  name: rmc-guide-entry-marine-law-crimes-variable
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCrimesVariable.xml"
+  priority: 0
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawCrimesMinor
+  name: rmc-guide-entry-marine-law-crimes-minor
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCrimesMinor.xml"
+  priority: 1
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawCrimesMajor
+  name: rmc-guide-entry-marine-law-crimes-major
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCrimesMajor.xml"
+  priority: 2
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawCrimesCapital
+  name: rmc-guide-entry-marine-law-crimes-capital
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCrimesCapital.xml"
+  priority: 3
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawCrimesOptional
+  name: rmc-guide-entry-marine-law-crimes-optional
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCrimesOptional.xml"
+  priority: 4
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawCrimesPrecautionary
+  name: rmc-guide-entry-marine-law-crimes-precautionary
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCrimesPrecautionary.xml"
+  priority: 5
+
+# Prisoner Rights
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawPrisonerRights
+  name: rmc-guide-entry-marine-law-prisoner-rights
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawPrisonerRights.xml"
+  priority: 3
+
+# Appeals
+
+# Special Circumstances
+
+# Synthetics
+
+# Commanding Officer provisions
+

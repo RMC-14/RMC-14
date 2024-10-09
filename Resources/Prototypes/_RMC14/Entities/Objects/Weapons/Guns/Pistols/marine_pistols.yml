@@ -82,12 +82,19 @@
           - RMCAttachmentBurstFireAssembly
           - RMCAttachmentLaserSight
 
+- type: Tag
+  id: CMWeaponPistolM1984
+
 - type: entity
   parent: CMWeaponPistolBase
   id: CMWeaponPistolM1984
   name: M1984 service pistol
   description: An M1984 Service Pistol, once the standard issue sidearm of the Marines but has recently been replaced with the M77 combat pistol. Fires 9mm pistol rounds.
   components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - CMWeaponPistolM1984
   - type: RMCSelectiveFire
     scatterWielded: 10
     scatterUnwielded: 10
@@ -139,6 +146,10 @@
   name: M77 combat pistol # TODO RMC14 sounds
   description: Standard issue Marine firearm. Also found in the hands of We-Ya PMC teams. Fires 9mm armor shredding rounds and is capable of 3-round burst.
   components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - CMWeaponPistolM77
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m77.rsi
   - type: Clothing
@@ -286,7 +297,7 @@
   - type: Tag
     tags:
     - Sidearm
-    - RMCMK80
+    - CMWeaponPistolMK80
 
 - type: entity
   parent: CMWeaponPistolBase
