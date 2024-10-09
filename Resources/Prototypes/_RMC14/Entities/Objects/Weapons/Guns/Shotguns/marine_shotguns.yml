@@ -122,14 +122,14 @@
 
 - type: entity
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
-  name: Mk221 Tactical Shotgun
-  id: WeaponShotgunMk221
+  name: M890 Tactical Shotgun
+  id: WeaponShotgunM890
   description: A unique corporate made semi-automatic shotgun with a rapid fire rate and an attached Underslung Grenade Launcher. Holds 8 shotgun shells in the chamber.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mk221.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/M890.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mk221.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/M890.rsi
   - type: Gun
     shotsPerBurst: 1
   - type: ShootUseDelay
@@ -165,10 +165,10 @@
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
       rmc-aslot-stock:
-        startingAttachable: RMCAttachmentMK221Stock
+        startingAttachable: RMCAttachmentM890Stock
         whitelist:
           tags:
-          - RMCAttachmentMK221Stock
+          - RMCAttachmentM890Stock
       rmc-aslot-underbarrel:
         locked: true
         startingAttachable: RMCAttachmentU1GrenadeLauncher

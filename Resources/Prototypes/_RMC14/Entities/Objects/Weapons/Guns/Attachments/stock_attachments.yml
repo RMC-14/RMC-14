@@ -94,9 +94,9 @@
 
 - type: entity
   parent: RMCStockAttachmentBase
-  id: RMCAttachmentMK221Stock
-  name: MK221 Tactical Stock
-  description: Standard Stock for the Mk221 tactical shotgun.
+  id: RMCAttachmentM890Stock
+  name: M890 Tactical Stock
+  description: Standard Stock for the M890 tactical shotgun.
   components:
   - type: Sprite
     state: tactical_stock_221
@@ -105,7 +105,7 @@
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentMK221Stock
+    - RMCAttachmentM890Stock
   - type: AttachableSpeedMods
     modifiers:
     - conditions:
@@ -549,7 +549,7 @@
   id: RMCAttachmentStock
 
 - type: Tag
-  id: RMCAttachmentMK221Stock
+  id: RMCAttachmentM890Stock
 
 - type: Tag
   id: RMCAttachmentM42A2WoodenStock
