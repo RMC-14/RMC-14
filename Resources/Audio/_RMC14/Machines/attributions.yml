@@ -77,3 +77,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/1ed1c734f77b7c4fe6ff069547963e0184624650/sound/machines/keyboard3.ogg"
+
+- files: ["flare_activate_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/d6f6755a2cc2e4d1f997dc04ce784f0d9cfc11c3/sound/handling/flare_activate_2.ogg"
