@@ -57,7 +57,6 @@
 
 - type: Tag
   id: CMFlarePack
-
 - type: Tag
   id: RMCSmartPistol
 
@@ -70,6 +69,9 @@
 - type: Tag
   id: RMCRocketAmmo84mm
 
+- type: Tag
+  id: CMRocketDisposable
+  
 - type: Tag
   id: RMCGlass
 
