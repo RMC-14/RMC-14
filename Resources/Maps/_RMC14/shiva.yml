@@ -41212,273 +41212,184 @@ entities:
       parent: 1
 - proto: CMApc
   entities:
-  - uid: 14796
+  - uid: 14805
     components:
     - type: Transform
-      pos: 186.5,72.5
+      pos: 61.5,125.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 14797
-  - uid: 14798
-    components:
-    - type: Transform
-      pos: 194.5,67.5
-      parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 14799
-  - uid: 15646
-    components:
-    - type: Transform
-      pos: 61.5,124.5
-      parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 15647
-  - uid: 15652
+  - uid: 14808
     components:
     - type: MetaData
       name: telecomms relay power controller
     - type: Transform
-      pos: 56.5,155.5
+      rot: 3.141592653589793 rad
+      pos: 56.5,154.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 15653
-  - uid: 15654
+  - uid: 14811
     components:
     - type: Transform
-      pos: 52.5,103.5
+      rot: 1.5707963267948966 rad
+      pos: 51.5,103.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 15655
-  - uid: 15660
+  - uid: 14815
     components:
     - type: Transform
-      pos: 34.5,129.5
+      rot: 1.5707963267948966 rad
+      pos: 33.5,129.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 15661
-  - uid: 15662
-    components:
-    - type: Transform
-      pos: 26.5,55.5
-      parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 15663
-- proto: CMApcNoPower
-  entities:
-  - uid: 14792
-    components:
-    - type: Transform
-      pos: 201.5,89.5
-      parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 14793
-  - uid: 14794
-    components:
-    - type: Transform
-      pos: 175.5,25.5
-      parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 14795
-  - uid: 14800
-    components:
-    - type: Transform
-      pos: 176.5,143.5
-      parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 14801
-  - uid: 14802
-    components:
-    - type: Transform
-      pos: 162.5,118.5
-      parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 14803
-  - uid: 14804
-    components:
-    - type: Transform
-      pos: 153.5,50.5
-      parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 14805
-  - uid: 14806
-    components:
-    - type: Transform
-      pos: 144.5,88.5
-      parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 14807
-  - uid: 14808
-    components:
-    - type: Transform
-      pos: 135.5,54.5
-      parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 14809
-  - uid: 14810
-    components:
-    - type: Transform
-      pos: 125.5,129.5
-      parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 14811
-  - uid: 14812
-    components:
-    - type: Transform
-      pos: 125.5,45.5
-      parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 14813
-  - uid: 14814
-    components:
-    - type: Transform
-      pos: 123.5,14.5
-      parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 14815
   - uid: 14816
     components:
     - type: Transform
-      pos: 120.5,68.5
+      pos: 26.5,56.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 14817
-  - uid: 14818
+  - uid: 15863
     components:
     - type: Transform
-      pos: 106.5,131.5
+      rot: 1.5707963267948966 rad
+      pos: 185.5,72.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 14819
-  - uid: 14820
+  - uid: 15867
     components:
     - type: Transform
-      pos: 105.5,110.5
+      rot: 1.5707963267948966 rad
+      pos: 193.5,67.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 15639
-  - uid: 15640
+- proto: CMApcNoPower
+  entities:
+  - uid: 14795
     components:
     - type: Transform
-      pos: 98.5,78.5
+      rot: -1.5707963267948966 rad
+      pos: 99.5,78.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 15641
-  - uid: 15642
+  - uid: 14796
     components:
     - type: Transform
-      pos: 96.5,95.5
+      rot: -1.5707963267948966 rad
+      pos: 97.5,95.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 15643
-  - uid: 15644
+  - uid: 14804
     components:
     - type: Transform
-      pos: 69.5,15.5
+      rot: 3.141592653589793 rad
+      pos: 69.5,14.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 15645
-  - uid: 15648
+  - uid: 14806
     components:
     - type: Transform
-      pos: 62.5,71.5
+      rot: 1.5707963267948966 rad
+      pos: 61.5,71.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 15649
-  - uid: 15650
+  - uid: 14807
     components:
     - type: MetaData
       name: telecomms relay power controller
     - type: Transform
-      pos: 59.5,53.5
+      rot: -1.5707963267948966 rad
+      pos: 60.5,53.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 15651
-  - uid: 15656
+  - uid: 14813
     components:
     - type: Transform
-      pos: 50.5,21.5
+      rot: 3.141592653589793 rad
+      pos: 50.5,20.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 15657
-  - uid: 15658
+  - uid: 14814
     components:
     - type: Transform
-      pos: 39.5,129.5
+      rot: -1.5707963267948966 rad
+      pos: 40.5,129.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 15659
+  - uid: 14817
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 14.5,104.5
+      parent: 1
+  - uid: 14820
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,125.5
+      parent: 1
+  - uid: 15642
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 105.5,109.5
+      parent: 1
+  - uid: 15645
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 107.5,131.5
+      parent: 1
+  - uid: 15650
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 120.5,67.5
+      parent: 1
+  - uid: 15653
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 123.5,13.5
+      parent: 1
+  - uid: 15660
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 125.5,44.5
+      parent: 1
+  - uid: 15661
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 125.5,128.5
+      parent: 1
   - uid: 15664
     components:
     - type: Transform
-      pos: 15.5,104.5
+      rot: 1.5707963267948966 rad
+      pos: 134.5,54.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 15665
-  - uid: 15666
+  - uid: 15848
     components:
     - type: Transform
-      pos: 2.5,125.5
+      rot: 3.141592653589793 rad
+      pos: 144.5,87.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        rmc_apc_power_cell: !type:ContainerSlot
-          ent: 15667
+  - uid: 15852
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 153.5,49.5
+      parent: 1
+  - uid: 15858
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 162.5,117.5
+      parent: 1
+  - uid: 15861
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 175.5,24.5
+      parent: 1
+  - uid: 15862
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 176.5,142.5
+      parent: 1
+  - uid: 15875
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 200.5,89.5
+      parent: 1
 - proto: CMAutolathe
   entities:
   - uid: 5576
@@ -45905,6 +45816,413 @@ entities:
       rot: 3.141592653589793 rad
       pos: 123.5,97.5
       parent: 1
+  - uid: 14792
+    components:
+    - type: Transform
+      pos: 103.5,127.5
+      parent: 1
+  - uid: 14793
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 101.5,144.5
+      parent: 1
+  - uid: 14794
+    components:
+    - type: Transform
+      pos: 101.5,145.5
+      parent: 1
+  - uid: 14797
+    components:
+    - type: MetaData
+      name: Colony Dormitories
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 93.5,112.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 14798
+    components:
+    - type: MetaData
+      name: Colony Dormitories
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 92.5,112.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 14799
+    components:
+    - type: MetaData
+      name: Colony Dormitories
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 90.5,109.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 14800
+    components:
+    - type: MetaData
+      name: Colony Dormitories
+    - type: Transform
+      pos: 90.5,110.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 14801
+    components:
+    - type: MetaData
+      name: Colony Dormitories
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 90.5,97.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 14802
+    components:
+    - type: MetaData
+      name: Colony Dormitories
+    - type: Transform
+      pos: 90.5,98.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 14809
+    components:
+    - type: MetaData
+      name: North Aerodrome Hangar
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 57.5,35.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 14810
+    components:
+    - type: MetaData
+      name: North Aerodrome Hangar
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 56.5,35.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15639
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 103.5,126.5
+      parent: 1
+  - uid: 15640
+    components:
+    - type: Transform
+      pos: 104.5,145.5
+      parent: 1
+  - uid: 15641
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 104.5,144.5
+      parent: 1
+  - uid: 15643
+    components:
+    - type: Transform
+      pos: 106.5,127.5
+      parent: 1
+  - uid: 15644
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 106.5,126.5
+      parent: 1
+  - uid: 15646
+    components:
+    - type: MetaData
+      name: Underground Chapel
+    - type: Transform
+      pos: 112.5,134.5
+      parent: 1
+  - uid: 15647
+    components:
+    - type: MetaData
+      name: Underground Chapel
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 112.5,133.5
+      parent: 1
+  - uid: 15648
+    components:
+    - type: MetaData
+      name: Colony Dormitories Canteen
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 118.5,88.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15649
+    components:
+    - type: MetaData
+      name: Colony Dormitories Canteen
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 119.5,88.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15651
+    components:
+    - type: Transform
+      pos: 120.5,127.5
+      parent: 1
+  - uid: 15652
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 120.5,126.5
+      parent: 1
+  - uid: 15654
+    components:
+    - type: MetaData
+      name: Colony Dormitories
+    - type: Transform
+      pos: 123.5,98.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15655
+    components:
+    - type: MetaData
+      name: Colony Dormitories
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 123.5,97.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15656
+    components:
+    - type: MetaData
+      name: Colony Dormitories
+    - type: Transform
+      pos: 123.5,109.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15657
+    components:
+    - type: MetaData
+      name: Colony Dormitories
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 123.5,108.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15658
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 124.5,153.5
+      parent: 1
+  - uid: 15659
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 125.5,153.5
+      parent: 1
+  - uid: 15662
+    components:
+    - type: MetaData
+      name: Underground Sports Center
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 131.5,153.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15663
+    components:
+    - type: MetaData
+      name: Underground Sports Center
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 132.5,153.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15665
+    components:
+    - type: MetaData
+      name: Colony Garage
+    - type: Transform
+      pos: 138.5,82.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15666
+    components:
+    - type: MetaData
+      name: Colony Garage
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 138.5,81.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15667
+    components:
+    - type: MetaData
+      name: Underground Sports Center
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 138.5,153.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15843
+    components:
+    - type: MetaData
+      name: Underground Sports Center
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 139.5,153.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15844
+    components:
+    - type: MetaData
+      name: Underground Staff Canteen
+    - type: Transform
+      pos: 142.5,136.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15845
+    components:
+    - type: MetaData
+      name: Underground Staff Canteen
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 142.5,135.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15846
+    components:
+    - type: MetaData
+      name: Underground Staff Canteen
+    - type: Transform
+      pos: 142.5,140.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15847
+    components:
+    - type: MetaData
+      name: Underground Staff Canteen
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 142.5,139.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15849
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 145.5,127.5
+      parent: 1
+  - uid: 15850
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 146.5,127.5
+      parent: 1
+  - uid: 15853
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 156.5,39.5
+      parent: 1
+  - uid: 15854
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 157.5,39.5
+      parent: 1
+  - uid: 15855
+    components:
+    - type: MetaData
+      name: Underground Security Checkpoint
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 159.5,140.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15856
+    components:
+    - type: MetaData
+      name: Underground Security Checkpoint
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 160.5,140.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15859
+    components:
+    - type: MetaData
+      name: Underground Security Brig
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 163.5,127.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 15860
+    components:
+    - type: MetaData
+      name: Underground Security Brig
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 164.5,127.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
 - proto: CMDoubleDoorMedicalGlass
   entities:
   - uid: 14494
@@ -45941,6 +46259,100 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 201.5,127.5
+      parent: 1
+  - uid: 15869
+    components:
+    - type: MetaData
+      name: Aurora Medical Clinic Treatment
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 195.5,146.5
+      parent: 1
+  - uid: 15870
+    components:
+    - type: MetaData
+      name: Aurora Medical Clinic Treatment
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 196.5,146.5
+      parent: 1
+  - uid: 15871
+    components:
+    - type: MetaData
+      name: Aurora Medical Clinic
+    - type: Transform
+      pos: 196.5,124.5
+      parent: 1
+  - uid: 15872
+    components:
+    - type: MetaData
+      name: Aurora Medical Clinic
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 196.5,123.5
+      parent: 1
+  - uid: 15873
+    components:
+    - type: MetaData
+      name: Aurora Medical Clinic Treatment
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 198.5,120.5
+      parent: 1
+  - uid: 15874
+    components:
+    - type: MetaData
+      name: Aurora Medical Clinic Treatment
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 199.5,120.5
+      parent: 1
+  - uid: 15876
+    components:
+    - type: MetaData
+      name: Aurora Medical Clinic Treatment
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 200.5,127.5
+      parent: 1
+  - uid: 15877
+    components:
+    - type: MetaData
+      name: Aurora Medical Clinic Treatment
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 201.5,127.5
+      parent: 1
+  - uid: 15878
+    components:
+    - type: MetaData
+      name: Aurora Medical Clinic Treatment
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 201.5,139.5
+      parent: 1
+  - uid: 15879
+    components:
+    - type: MetaData
+      name: Aurora Medical Clinic Treatment
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 202.5,139.5
+      parent: 1
+  - uid: 15880
+    components:
+    - type: MetaData
+      name: Aurora Medical Clinic Treatment
+    - type: Transform
+      pos: 205.5,143.5
+      parent: 1
+  - uid: 15881
+    components:
+    - type: MetaData
+      name: Aurora Medical Clinic Treatment
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 205.5,142.5
       parent: 1
 - proto: CMDoubleDoorMedicalGlassLocked
   entities:
@@ -116008,6 +116420,114 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
+  - uid: 14803
+    components:
+    - type: Transform
+      pos: 73.5,38.375
+      parent: 1
+    - type: RMCDoorButton
+      id: hangar_ice_3
+    - type: Fixtures
+      fixtures: {}
+  - uid: 14812
+    components:
+    - type: Transform
+      pos: 50.5,38.375
+      parent: 1
+    - type: RMCDoorButton
+      id: hangar_ice_2
+    - type: Fixtures
+      fixtures: {}
+  - uid: 14818
+    components:
+    - type: Transform
+      pos: 11.5,135.375
+      parent: 1
+    - type: RMCDoorButton
+      id: nlz_shutters
+    - type: Fixtures
+      fixtures: {}
+  - uid: 14819
+    components:
+    - type: Transform
+      pos: 5.5,147.375
+      parent: 1
+    - type: RMCDoorButton
+      id: nlz_shutters
+    - type: Fixtures
+      fixtures: {}
+  - uid: 15851
+    components:
+    - type: MetaData
+      name: garage shutter control
+    - type: Transform
+      pos: 147.5,76.5
+      parent: 1
+    - type: RMCDoorButton
+      id: garage_ice_1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 15857
+    components:
+    - type: MetaData
+      name: garage shutter control
+    - type: Transform
+      pos: 160.5,88.5
+      parent: 1
+    - type: RMCDoorButton
+      id: garage_ice_2
+    - type: Fixtures
+      fixtures: {}
+  - uid: 15864
+    components:
+    - type: MetaData
+      name: Storage Unit Lock
+    - type: Transform
+      pos: 186.25,74.5
+      parent: 1
+    - type: RMCDoorButton
+      id: st_17
+    - type: Fixtures
+      fixtures: {}
+  - uid: 15865
+    components:
+    - type: MetaData
+      name: Storage Unit Lock
+    - type: Transform
+      pos: 186.75,74.5
+      parent: 1
+    - type: RMCDoorButton
+      id: st_17
+    - type: Fixtures
+      fixtures: {}
+  - uid: 15866
+    components:
+    - type: MetaData
+      name: Storage Unit Lock
+    - type: Transform
+      pos: 193.5,68.25
+      parent: 1
+    - type: RMCDoorButton
+      id: st_18
+    - type: Fixtures
+      fixtures: {}
+    - type: AccessReader
+      accessLog: []
+      accessKeys: []
+      access:
+      - - CMAccessColonyPublic
+      denyTags: []
+  - uid: 15868
+    components:
+    - type: MetaData
+      name: Storage Unit Lock
+    - type: Transform
+      pos: 193.5,68.75
+      parent: 1
+    - type: RMCDoorButton
+      id: st_18
+    - type: Fixtures
+      fixtures: {}
 - proto: RMCPouchFirstAidSplintsGauzeOintment
   entities:
   - uid: 8070
@@ -116029,184 +116549,6 @@ entities:
     - type: Transform
       pos: 107.5,95.5
       parent: 1
-- proto: RMCPowerCellAPC
-  entities:
-  - uid: 14797
-    components:
-    - type: Transform
-      parent: 14796
-    - type: Physics
-      canCollide: False
-  - uid: 14799
-    components:
-    - type: Transform
-      parent: 14798
-    - type: Physics
-      canCollide: False
-  - uid: 15647
-    components:
-    - type: Transform
-      parent: 15646
-    - type: Physics
-      canCollide: False
-  - uid: 15653
-    components:
-    - type: Transform
-      parent: 15652
-    - type: Physics
-      canCollide: False
-  - uid: 15655
-    components:
-    - type: Transform
-      parent: 15654
-    - type: Physics
-      canCollide: False
-  - uid: 15661
-    components:
-    - type: Transform
-      parent: 15660
-    - type: Physics
-      canCollide: False
-  - uid: 15663
-    components:
-    - type: Transform
-      parent: 15662
-    - type: Physics
-      canCollide: False
-- proto: RMCPowerCellAPCNoPower
-  entities:
-  - uid: 14793
-    components:
-    - type: Transform
-      parent: 14792
-    - type: Physics
-      canCollide: False
-  - uid: 14795
-    components:
-    - type: Transform
-      parent: 14794
-    - type: Physics
-      canCollide: False
-  - uid: 14801
-    components:
-    - type: Transform
-      parent: 14800
-    - type: Physics
-      canCollide: False
-  - uid: 14803
-    components:
-    - type: Transform
-      parent: 14802
-    - type: Physics
-      canCollide: False
-  - uid: 14805
-    components:
-    - type: Transform
-      parent: 14804
-    - type: Physics
-      canCollide: False
-  - uid: 14807
-    components:
-    - type: Transform
-      parent: 14806
-    - type: Physics
-      canCollide: False
-  - uid: 14809
-    components:
-    - type: Transform
-      parent: 14808
-    - type: Physics
-      canCollide: False
-  - uid: 14811
-    components:
-    - type: Transform
-      parent: 14810
-    - type: Physics
-      canCollide: False
-  - uid: 14813
-    components:
-    - type: Transform
-      parent: 14812
-    - type: Physics
-      canCollide: False
-  - uid: 14815
-    components:
-    - type: Transform
-      parent: 14814
-    - type: Physics
-      canCollide: False
-  - uid: 14817
-    components:
-    - type: Transform
-      parent: 14816
-    - type: Physics
-      canCollide: False
-  - uid: 14819
-    components:
-    - type: Transform
-      parent: 14818
-    - type: Physics
-      canCollide: False
-  - uid: 15639
-    components:
-    - type: Transform
-      parent: 14820
-    - type: Physics
-      canCollide: False
-  - uid: 15641
-    components:
-    - type: Transform
-      parent: 15640
-    - type: Physics
-      canCollide: False
-  - uid: 15643
-    components:
-    - type: Transform
-      parent: 15642
-    - type: Physics
-      canCollide: False
-  - uid: 15645
-    components:
-    - type: Transform
-      parent: 15644
-    - type: Physics
-      canCollide: False
-  - uid: 15649
-    components:
-    - type: Transform
-      parent: 15648
-    - type: Physics
-      canCollide: False
-  - uid: 15651
-    components:
-    - type: Transform
-      parent: 15650
-    - type: Physics
-      canCollide: False
-  - uid: 15657
-    components:
-    - type: Transform
-      parent: 15656
-    - type: Physics
-      canCollide: False
-  - uid: 15659
-    components:
-    - type: Transform
-      parent: 15658
-    - type: Physics
-      canCollide: False
-  - uid: 15665
-    components:
-    - type: Transform
-      parent: 15664
-    - type: Physics
-      canCollide: False
-  - uid: 15667
-    components:
-    - type: Transform
-      parent: 15666
-    - type: Physics
-      canCollide: False
 - proto: RMCShutterAlmayer
   entities:
   - uid: 2135
