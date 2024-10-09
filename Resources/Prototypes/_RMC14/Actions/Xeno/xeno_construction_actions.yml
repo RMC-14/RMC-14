@@ -73,7 +73,7 @@
 - type: entity
   id: ActionXenoResinHole
   parent: ActionXenoBase
-  name: Plant Resin Hole
+  name: Plant Resin Hole (200)
   description: Places a resin hole on weeds. It can be filled with boiler gas, acid, or parasites.
   components:
   - type: InstantAction
