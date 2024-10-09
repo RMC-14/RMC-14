@@ -185,6 +185,12 @@ public sealed class XenoLeapSystem : EntitySystem
         var ev = new XenoLeapHitEvent(xeno, other);
         RaiseLocalEvent(xeno, ref ev);
 
+        if (!xeno.Comp.PlayedSound)
+        {
+            xeno.Comp.PlayedSound = true;
+            _audio.PlayPredicted(xeno.Comp.LeapSound, xeno, xeno);
+        }
+
         StopLeap(xeno);
     }
 
@@ -214,14 +220,6 @@ public sealed class XenoLeapSystem : EntitySystem
         {
             _physics.SetLinearVelocity(leaping, Vector2.Zero, body: physics);
             _physics.SetBodyStatus(leaping, physics, BodyStatus.OnGround);
-        }
-
-        if (!leaping.Comp.PlayedSound)
-        {
-            leaping.Comp.PlayedSound = true;
-            Dirty(leaping);
-
-            _audio.PlayPredicted(leaping.Comp.LeapSound, leaping, leaping);
         }
 
         RemCompDeferred<XenoLeapingComponent>(leaping);
