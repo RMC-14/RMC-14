@@ -259,7 +259,7 @@
 
 # Smart Gun
 - type: entity
-  parent: [ CMArmorM3Medium, RMCAllowSuitStorageClothingSmartgunner ]
+  parent: [ RMCAllowSuitStorageClothingSmartgunner, CMArmorM3Medium ]
   id: CMArmorSmartGunCombatHarness
   name: ML66A combat harness
   description: A heavy protective vest designed to be worn with the ML66A Smart Gun System. It has specially designed straps and reinforcement to carry the Smartgun and accessories.
@@ -278,7 +278,7 @@
 
 # M2
 - type: entity
-  parent: [ CMArmorM3Medium, RMCAllowSuitStorageClothingArmorMP ]
+  parent: [ RMCAllowSuitStorageClothingArmorMP, CMArmorM3Medium ]
   id: CMArmorM2MP
   name: M2 pattern mp armor
   description: M2 Armor offers higher protection against melee attacks but less protection against projectile attacks
