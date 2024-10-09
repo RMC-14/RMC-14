@@ -73,7 +73,7 @@
      - Cartridge
      - RMCCartridgeRifleAR10
   - type: CartridgeAmmo
-    proto: BulletRifleAR10
+    proto: BulletRifle10x24mm
 
 
 - type: Tag
