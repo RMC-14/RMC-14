@@ -1,17 +1,16 @@
 ﻿- type: entity
+  abstract: true
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
-  id: CMXenoDrone
+  id: CMXenoDroneBase
   name: Drone
   description: An alien drone.
   components:
   - type: GhostRole
     name: cm-job-name-xeno-drone
-  - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Drone/drone.rsi
   - type: MobState
     allowedStates:
     - Alive
@@ -28,19 +27,6 @@
         Brute: 22.5
   - type: Xeno
     role: CMXenoDrone
-    actionIds:
-    - ActionXenoRest
-    - ActionXenoRegurgitate
-    - ActionXenoWatch
-    - ActionXenoTailStab
-    - ActionXenoAcidWeak
-    - ActionXenoPheromones
-    - ActionXenoOrderConstruction
-    - ActionXenoPlantWeeds
-    - ActionXenoChooseStructure
-    - ActionXenoSecreteStructure
-    - ActionXenoTransferPlasma
-    - ActionXenoDevolve
     hudOffset: 0,0.15
     tier: 1
     bypassTierCount: true
@@ -48,25 +34,7 @@
   - type: XenoDevolve
     devolvesTo:
     - CMXenoLarva
-  - type: XenoAcid
-  - type: XenoConstruction
-    buildDelay: 2
-    canBuild:
-    - WallXenoResin
-    - WallXenoMembrane
-    - DoorXenoResin
-    canOrderConstruction:
-    - HiveCoreXenoConstructionNode
   - type: XenoDevour
-  - type: XenoEvolution
-    canEvolveWithoutGranter: true
-    max: 200
-    evolvesTo:
-    - CMXenoCarrier
-#    - CMXenoBurrower
-    - CMXenoHivelord
-    evolvesToWithoutPoints:
-    - CMXenoQueen
   - type: XenoPheromones
     pheromonesMultiplier: 2
   - type: XenoPlasma
@@ -81,6 +49,7 @@
       components:
       - XenoParasite
       - XenoEgg
+      - XenoFruit
   - type: EggPlantTime
     plantTime: 2.5
   - type: MultiHandedHolder
@@ -99,4 +68,131 @@
     trapLevel: 1
     cost: 70
     spray: XenoAcidSprayTrapWeak
+  - type: XenoConstruction
+    buildDelay: 2
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode
 
+- type: entity
+  parent: CMXenoDroneBase
+  id: CMXenoDrone
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Drone/drone.rsi
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcidWeak
+    - ActionXenoPheromones
+    - ActionXenoOrderConstruction
+    - ActionXenoPlantWeeds
+    - ActionXenoChooseStructure
+    - ActionXenoSecreteStructure
+    - ActionXenoTransferPlasma
+    - ActionXenoDevolve
+  - type: XenoEvolution
+    canEvolveWithoutGranter: true
+    max: 200
+    evolvesTo:
+    - CMXenoCarrier
+#    - CMXenoBurrower
+    - CMXenoHivelord
+    evolvesToWithoutPoints:
+    - CMXenoQueen
+    strains:
+    - CMXenoDroneGardener
+  - type: XenoAcid
+  - type: XenoConstruction
+    canBuild:
+    - WallXenoResin
+    - WallXenoMembrane
+    - DoorXenoResin
+
+- type: entity
+  parent:
+  - CMXenoDroneBase
+  id: CMXenoDroneGardener
+  suffix: Gardener
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Drone/gardener_drone.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.XenoFruitVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+  - type: XenoFruitPlanterVisuals
+    rsi: _RMC14/Mobs/Xenonids/Drone/gardener_drone.rsi
+    prefix: gardener
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoPheromones
+    - ActionXenoOrderConstruction
+    - ActionXenoPlantWeeds
+    - ActionXenoPlantWeedsHardy
+    - ActionXenoFruitPlant
+    - ActionXenoFruitChoose
+    - ActionXenoResinSurge
+    - ActionXenoTransferPlasma
+    - ActionXenoDevolve
+    critHealMultiplier: 0.3465  # 5% increased regeneration
+    standHealingMultiplier: 0.42
+    restHealMultiplier: 1.05
+  - type: XenoStrain
+    name: rmc-xeno-gardener-name
+    description: rmc-xeno-gardener-description
+    popup: rmc-xeno-gardener-popup
+  - type: XenoFruitPlanter
+    canPlant:
+    - XenoFruitGreater
+    - XenoFruitPlasma
+    - XenoFruitSpeed
+    - XenoFruitSpore
+    - XenoFruitUnstable
+    maxFruitAllowed: 6
+  - type: XenoResinSurge
+
+- type: entity
+  parent:
+  - CMXenoDroneBase
+  id: CMXenoDroneHealer
+  suffix: Healer
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Drone/gardener_drone.rsi # TODO: port sprite
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoPheromones
+    - ActionXenoOrderConstruction
+    - ActionXenoPlantWeeds
+    - ActionXenoFruitPlantLesser
+    - ActionXenoTransferPlasma # TODO: improved plasma transfer
+    # - ActionXenoApplySalve
+    # - ActionXenoSacrifice
+    - ActionXenoDevolve
+  - type: XenoStrain
+    name: rmc-xeno-gardener-name # TODO: port strain texts
+    description: rmc-xeno-gardener-description
+    popup: rmc-xeno-gardener-popup
+  - type: XenoFruitPlanter # TODO: remove this comment (this component should be fine)
+    fruitChoice: XenoFruitLesser
+    canPlant:
+    - XenoFruitLesser
+    maxFruitAllowed: 3
+  # TODO: rest of the fucking owl
+  # lower slash damage
+  # stronger pheromones
+  # more difficult tackling
