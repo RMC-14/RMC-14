@@ -29,25 +29,40 @@ public sealed class XenoInvisibilitySystem : EntitySystem
 
     private void OnXenoTurnInvisibleAction(Entity<XenoTurnInvisibleComponent> xeno, ref XenoTurnInvisibleActionEvent args)
     {
-        if (args.Handled)
-            return;
+        //if (args.Handled)
+        //    return;
 
-        args.Handled = true;
-        if (HasComp<XenoActiveInvisibleComponent>(xeno))
+        /* if (HasComp<XenoActiveInvisibleComponent>(xeno))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-invisibility-already-invisible"), xeno, xeno);
             return;
-        }
+        } */
 
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
 
-        var active = EnsureComp<XenoActiveInvisibleComponent>(xeno);
-        active.ExpiresAt = _timing.CurTime + xeno.Comp.Duration;
-        active.Cooldown = xeno.Comp.Cooldown;
-        active.SpeedMultiplier = xeno.Comp.SpeedMultiplier;
+        if (TryComp<XenoActiveInvisibleComponent>(xeno, out var oldActive)){
+            RemCompDeferred<XenoActiveInvisibleComponent>(xeno);
+            
+            foreach (var (actionId, actionComp) in _actions.GetActions(xeno))
+            {
+                if (actionComp.BaseEvent is XenoTurnInvisibleActionEvent)
+                {
+                    _actions.SetCooldown(actionId, xeno.Comp.Cooldown);
+                }
+            }
+        }
+        else
+        {
+            var active = EnsureComp<XenoActiveInvisibleComponent>(xeno);
+            active.ExpiresAt = _timing.CurTime + xeno.Comp.Duration;
+            active.Cooldown = xeno.Comp.Cooldown;
+            active.SpeedMultiplier = xeno.Comp.SpeedMultiplier; 
 
-        _movementSpeed.RefreshMovementSpeedModifiers(xeno);
+            _movementSpeed.RefreshMovementSpeedModifiers(xeno);
+        }
+
+        //args.Handled = true;
     }
 
     private void OnXenoActiveInvisibleRemove(Entity<XenoActiveInvisibleComponent> xeno, ref ComponentRemove args)
@@ -90,7 +105,9 @@ public sealed class XenoInvisibilitySystem : EntitySystem
         foreach (var (actionId, actionComp) in _actions.GetActions(xeno))
         {
             if (actionComp.BaseEvent is XenoTurnInvisibleActionEvent)
-                _actions.SetIfBiggerCooldown(actionId, xeno.Comp.Cooldown);
+            {
+                _actions.SetCooldown(actionId, xeno.Comp.Cooldown);
+            }
         }
 
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);
