@@ -62,3 +62,18 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/521e3ec58dcf4ab78571f3e651e9d967989c79e9/sound/machines/print.ogg"
+
+- files: ["keyboard1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/1ed1c734f77b7c4fe6ff069547963e0184624650/sound/machines/keyboard1.ogg"
+
+- files: ["keyboard2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/1ed1c734f77b7c4fe6ff069547963e0184624650/sound/machines/keyboard2.ogg"
+
+- files: ["keyboard3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/1ed1c734f77b7c4fe6ff069547963e0184624650/sound/machines/keyboard3.ogg"

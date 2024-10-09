@@ -1,86 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Cardboard box crate now gives a stack of cardboard instead
-    type: Tweak
-  id: 300
-  time: '2024-07-08T09:09:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2893
-- author: DrSmugleaf
-  changes:
-  - message: Temporarily added an autobalance feature that will change the ratio of
-      marines per xeno round-start depending on round outcome. This was already being
-      done by the hosts manually from time to time but is now automatic.
-    type: Add
-  id: 301
-  time: '2024-07-08T09:09:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2892
-- author: DrSmugleaf
-  changes:
-  - message: The dropship crew hatches can now be locked by the pilot from the navigation
-      computer.
-    type: Add
-  - message: Fixed dropship doors not closing during travel if someone is in the way.
-    type: Fix
-  - message: Fixed being able to build barricades and other fortifications on or move
-      existing ones onto dropships.
-    type: Fix
-  - message: Fixed dropships having no initial cooldown, They now need 15 minutes
-      of round time to pass before they can start flying.
-    type: Fix
-  - message: Fixed dropship crew hatches being corrodible.
-    type: Fix
-  - message: The health of dropship crew hatches has been doubled to 1000 as a temporary
-      measure until separate prying timers for xenos and marines is implemented.
-    type: Tweak
-  id: 302
-  time: '2024-07-08T10:19:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2894
-- author: Dorragon
-  changes:
-  - message: Medical crew vendor
-    type: Add
-  id: 303
-  time: '2024-07-08T10:55:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2829
-- author: DrSmugleaf
-  changes:
-  - message: 'Added the Warrior''s missing passive: lifesteal on melee hits. Limited
-      to 1 heal per melee attack, it heals the Warrior for 7% of its current missing
-      health, adding 1% for each marine that is within a 3 tile radius of it, to a
-      maximum of 9% total. Minimum heal of 20, maximum heal of 40. A popup is displayed
-      to the Warrior and marines if the max of 9% is reached. This does not count
-      nested nor dead marines.'
-    type: Fix
-  - message: Fixed the Warrior's abilities being able to target weeds, items, and
-      dead marines. Warrior abilities now remain selected until a valid target is
-      clicked, or the ability is cancelled with right click.
-    type: Fix
-  id: 304
-  time: '2024-07-08T11:06:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2897
-- author: UnicornOnLSD
-  changes:
-  - message: Marines have finally developped kinetic reflexes for machetes ! (You
-      can now use holster keys on machete pouch)
-    type: Add
-  id: 305
-  time: '2024-07-08T11:07:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2851
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenos being affected by camera recoil from bullet hits.
-    type: Fix
-  id: 306
-  time: '2024-07-08T11:06:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2896
-- author: snebl
-  changes:
-  - message: Fixed sandbag barricades being repairable with a welder.
-    type: Fix
-  id: 307
-  time: '2024-07-08T11:06:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2899
 - author: Mattshark89
   changes:
   - message: The Queen's screech no longer affects marines behind opaque walls. It
@@ -4651,5 +4569,69 @@
   id: 799
   time: '2024-10-07T23:26:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4332
+- author: Vermidia
+  changes:
+  - message: Boiler neurotoxin applies 5 on direct hit, and boiler tailstabs now differ
+      based on gas toggled, with neuro injecting 16 neuro instead of injecting acid.
+    type: Fix
+  id: 800
+  time: '2024-10-08T22:09:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4337
+- author: Rainbeon
+  changes:
+  - message: Fixed Xeno Health Regeneration being half of what it should be in 13.
+    type: Fix
+  id: 801
+  time: '2024-10-08T22:12:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4345
+- author: Vermidia
+  changes:
+  - message: Added Avali species
+    type: Add
+  id: 802
+  time: '2024-10-08T22:14:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4336
+- author: Rainbeon
+  changes:
+  - message: Bullets will now only hit Eggs when directly aimed at
+    type: Tweak
+  id: 803
+  time: '2024-10-08T22:15:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4329
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Cargo tech, warden, and maint tech uniform can now be folded for an alternate
+      style
+    type: Tweak
+  id: 804
+  time: '2024-10-08T22:16:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4276
+- author: FungiFellow
+  changes:
+  - message: Added the missing stun on direct hit effect of the Boiler's Bombard.
+    type: Add
+  - message: Acid Bombard direct hits now properly applies the same effect as a Charged
+      Spit
+    type: Add
+  id: 805
+  time: '2024-10-09T02:07:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4214
+- author: CyberTropic
+  changes:
+  - message: Added soap
+    type: Add
+  id: 806
+  time: '2024-10-09T02:09:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4333
+- author: Vermidia
+  changes:
+  - message: Add hazard vests, hard hats, and rebreathers to maintenance tech vendors
+    type: Add
+  - message: Flashlights, penlights, and tripods no longer use powercells and won't
+      run out of power
+    type: Fix
+  id: 807
+  time: '2024-10-09T02:08:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4328
 Name: RMC14
 Order: -1

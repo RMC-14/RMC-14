@@ -1,0 +1,35 @@
+- type: entity
+  save: false
+  parent: CMBaseMobSpeciesOrganic
+  id: CMMobAvali
+  name: Urist C-M McRaptor
+  suffix: RMC14
+  components:
+  - type: HumanoidAppearance
+    species: Avali
+    hideLayersOnEquip:
+    - HeadTop
+    - HeadSide
+  - type: Sprite
+    drawdepth: Mobs
+  - type: Vocal
+    sounds:
+      Male: RMCMaleAvali
+      Unsexed: RMCMaleAvali
+      Female: RMCFemaleAvali
+  - type: Speech
+    speechVerb: Parrot # Didn't come with one
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#7a8bf2"
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Weapons/pierce.ogg
+    animation: WeaponArcClaw
+
+- type: entity
+  parent: BaseSpeciesDummy
+  id: MobAvaliDummy
+  noSpawn: true
