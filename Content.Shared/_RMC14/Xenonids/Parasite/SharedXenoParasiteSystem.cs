@@ -632,6 +632,15 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.MediumCaution);
     }
 
+    private void OnTryMove(Entity<BursterComponent> burster, ref MoveInputEvent args)
+    {
+        if (!args.HasDirectionalMovement)
+            return;
+
+        if (TryComp<VictimInfectedComponent>(burster.Comp.BurstFrom, out var infected))
+            TryBurst((burster.Comp.BurstFrom, infected));
+    }
+
     private void TryBurst(Entity<VictimInfectedComponent> burstFrom)
     {
         var victim = burstFrom.Owner;
@@ -654,7 +663,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             BreakOnDamage = false,
             BreakOnMove = false,
             Hidden = true,
-            BlockDuplicate = true
+            BlockDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent
         };
 
         if (_doAfter.TryStartDoAfter(doAfterEventArgs))
@@ -668,6 +678,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 var filter = Filter.Pvs(victim);
                 _audio.PlayEntity(sound, filter, victim, true);
             }
+
+            _appearance.SetData(spawnedLarva, comp.BurstingLayer, true);
 
             var shakeFilter = Filter.PvsExcept(victim);
             shakeFilter.RemoveWhereAttachedEntity(HasComp<XenoComponent>); // not visible to xenos
@@ -686,12 +698,14 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     {
         if (_net.IsClient)
             return;
+
+        _appearance.SetData(args.User, ent.Comp.BurstingLayer, false);
         RemCompDeferred<VictimInfectedComponent>(ent);
 
         if (!TryComp(ent, out TransformComponent? xform))
             return;
 
-        var coords = _transform.GetMoverCoordinates(burstFrom);
+        var coords = _transform.GetMoverCoordinates(ent);
 
         if (_container.TryGetContainer(ent, ent.Comp.LarvaContainerId, out var container))
         {
@@ -704,16 +718,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         EnsureComp<VictimBurstComponent>(ent);
 
-        _audio.PlayPvs(ent.Comp.BurstSound, ent);
-    }
-
-    private void OnTryMove(Entity<BursterComponent> burster, ref MoveInputEvent args)
-    {
-        if (!args.HasDirectionalMovement)
-            return;
-
-        if (TryComp<VictimInfectedComponent>(burster.Comp.BurstFrom, out var infected))
-            TryBurst((burster.Comp.BurstFrom, infected));
+        _audio.PlayPvs(ent.Comp.BurstSound, args.User);
     }
 
     /// <summary>

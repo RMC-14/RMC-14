@@ -166,4 +166,16 @@ public sealed partial class VictimInfectedComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan BurstDoAfterDelay = TimeSpan.FromSeconds(3);
+
+    /// <summary>
+    ///     Layer of the bursting animation.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Enum BurstingLayer = VictimInfectedLayer.Bursting;
+
+    /// <summary>
+    ///     Sprite of the bursting animation.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier BurstingSprite = new Rsi(new ResPath("/Textures/_RMC14/Effects/burst.rsi"), "burst_stand");
 }
