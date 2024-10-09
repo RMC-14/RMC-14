@@ -699,11 +699,10 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        _appearance.SetData(ent.Owner, ent.Comp.BurstingLayer, true);
-        RemCompDeferred<VictimInfectedComponent>(ent);
-
         if (!TryComp(ent, out TransformComponent? xform))
             return;
+
+        _appearance.SetData(ent.Owner, ent.Comp.BurstingLayer, false);
 
         var coords = _transform.GetMoverCoordinates(ent);
 
@@ -715,7 +714,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         }
 
         Dirty(ent);
-
+        RemCompDeferred<VictimInfectedComponent>(ent);
         EnsureComp<VictimBurstComponent>(ent);
 
         _audio.PlayPvs(ent.Comp.BurstSound, args.User);

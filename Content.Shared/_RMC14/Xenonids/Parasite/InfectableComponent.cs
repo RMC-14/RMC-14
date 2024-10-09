@@ -19,12 +19,12 @@ public sealed partial class InfectableComponent : Component
     {
         [Sex.Male] = new SoundCollectionSpecifier("RMCMalePreburstScreams")
         {
-            Params = AudioParams.Default.WithVolume(-2),
+            Params = AudioParams.Default.WithVolume(-3f),
         },
 
         [Sex.Female] = new SoundCollectionSpecifier("RMCFemalePreburstScreams")
         {
-            Params = AudioParams.Default.WithVolume(-2),
+            Params = AudioParams.Default.WithVolume(-3f),
         }
     };
 }
