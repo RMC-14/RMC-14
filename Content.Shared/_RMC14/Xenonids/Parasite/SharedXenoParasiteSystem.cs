@@ -664,6 +664,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             BreakOnMove = false,
             Hidden = true,
             BlockDuplicate = true,
+            CancelDuplicate = true,
             DuplicateCondition = DuplicateConditions.SameTarget
         };
 
