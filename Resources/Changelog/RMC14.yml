@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: UnicornOnLSD
-  changes:
-  - message: Several medical sprites are now BLU, per player demand.
-    type: Add
-  id: 309
-  time: '2024-07-08T11:24:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2895
-- author: DrSmugleaf
-  changes:
-  - message: All caps including surgical can now hold any combination of 2 lighters,
-      cigarettes and matchsticks.
-    type: Tweak
-  id: 310
-  time: '2024-07-08T11:24:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2900
 - author: DrSmugleaf
   changes:
   - message: Fixed the defender being able to push nested marines deeper into the
@@ -4632,5 +4617,20 @@
   id: 808
   time: '2024-10-09T05:17:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4361
+- author: CyberTropic
+  changes:
+  - message: Added magazine boxes for handfuls of shotgun shells.
+    type: Add
+  id: 809
+  time: '2024-10-09T08:55:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4065
+- author: Rainbeon
+  changes:
+  - message: The Lurker and Runner Leap sound effect now correctly only plays when
+      hitting an enemy with the leap.
+    type: Fix
+  id: 810
+  time: '2024-10-09T08:55:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4362
 Name: RMC14
 Order: -1
