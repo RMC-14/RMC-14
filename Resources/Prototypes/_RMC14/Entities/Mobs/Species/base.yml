@@ -16,6 +16,7 @@
         restitution: 0.0
         mask:
         - MobMask
+        - BarbedBarricade
         layer:
         - Opaque
         - XenoProjectileImpassable

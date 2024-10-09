@@ -135,6 +135,7 @@
         density: 185
         mask:
         - MobMask
+        - BarbedBarricade
         layer:
         - MobLayer
       fix2:

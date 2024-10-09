@@ -33,6 +33,7 @@
         - Impassable
         - HighImpassable
         - LowImpassable
+        - BarbedBarricade
         layer:
         - MobLayer
       fix2:
