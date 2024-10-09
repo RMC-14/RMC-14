@@ -1,6 +1,8 @@
-﻿using Content.Shared._RMC14.Xenonids.Leap;
+﻿using Content.Shared._RMC14.Xenonids.Devour;
+using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
+using Content.Shared.DoAfter;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
@@ -23,6 +25,7 @@ public sealed class XenoInvisibilitySystem : EntitySystem
 
         SubscribeLocalEvent<XenoActiveInvisibleComponent, ComponentRemove>(OnXenoActiveInvisibleRemove);
         SubscribeLocalEvent<XenoActiveInvisibleComponent, MeleeHitEvent>(OnXenoActiveInvisibleMeleeHit);
+        SubscribeLocalEvent<XenoActiveInvisibleComponent, DoAfterAttemptEvent<XenoDevourDoAfterEvent>>(OnXenoDevourDoAfterAttempt);
         SubscribeLocalEvent<XenoActiveInvisibleComponent, XenoLeapHitEvent>(OnXenoActiveInvisibleLeapHit);
         SubscribeLocalEvent<XenoActiveInvisibleComponent, RefreshMovementSpeedModifiersEvent>(OnXenoActiveInvisibleRefreshSpeed);
     }
@@ -31,12 +34,6 @@ public sealed class XenoInvisibilitySystem : EntitySystem
     {
         //if (args.Handled)
         //    return;
-
-        /* if (HasComp<XenoActiveInvisibleComponent>(xeno))
-        {
-            _popup.PopupClient(Loc.GetString("cm-xeno-invisibility-already-invisible"), xeno, xeno);
-            return;
-        } */
 
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
@@ -98,6 +95,12 @@ public sealed class XenoInvisibilitySystem : EntitySystem
     {
         var multiplier = xeno.Comp.SpeedMultiplier.Float();
         args.ModifySpeed(multiplier, multiplier);
+    }
+
+    private void OnXenoDevourDoAfterAttempt(Entity<XenoActiveInvisibleComponent> xeno, ref DoAfterAttemptEvent<XenoDevourDoAfterEvent> args)
+    {
+        RemCompDeferred<XenoActiveInvisibleComponent>(xeno);
+        OnRemoveInvisibility(xeno);
     }
 
     private void OnRemoveInvisibility(Entity<XenoActiveInvisibleComponent> xeno)
