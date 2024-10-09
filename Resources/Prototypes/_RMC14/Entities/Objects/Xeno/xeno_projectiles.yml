@@ -30,7 +30,15 @@
   - type: XenoProjectile
 
 - type: entity
-  parent: XenoBaseProjectile
+  abstract: true
+  id: XenoSpitImpactSounds
+  components:
+  - type: Projectile
+    soundHit:
+      path: /Audio/_RMC14/Xeno/acid_impact1.ogg
+
+- type: entity
+  parent: [XenoSpitImpactSounds, XenoBaseProjectile]
   id: XenoSpitProjectile
   name: spit
   categories:
@@ -83,7 +91,7 @@
 
 - type: entity
   id: XenoSlowingSpitProjectile
-  parent: XenoBaseProjectile
+  parent: [XenoSpitImpactSounds, XenoBaseProjectile]
   name: slowing spit
   categories:
   - HideSpawnMenu
@@ -100,7 +108,7 @@
 
 - type: entity
   id: XenoScatteredSpitProjectile
-  parent: XenoBaseProjectile
+  parent: [XenoSpitImpactSounds, XenoBaseProjectile]
   name: scattered spit
   categories:
   - HideSpawnMenu
@@ -195,6 +203,19 @@
     popupType: LargeCaution
   - type: ProjectileMaxRange
     max: 10
+  - type: NeurotoxinInjector
+    neuroPerSecond: 5
+    affectsDead: false
+    affectsInfectedNested: false
+    toxinDamage:
+        groups:
+          Toxin: 2
+    oxygenDamage:
+        types:
+          Asphyxiation: 150
+    coughDamage:
+        groups:
+          Brute: 5
 
 - type: entity
   parent: XenoSpitProjectile

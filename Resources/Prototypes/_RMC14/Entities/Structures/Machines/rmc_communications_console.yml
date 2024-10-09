@@ -17,6 +17,11 @@
     needsPower: false # TODO RMC14
   - type: WallMount
     arc: 360
+  - type: EmitSoundOnUIOpen
+    sound:
+      collection: RMCKeyboardTyping
+      params:
+        volume: -1
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
@@ -103,6 +108,8 @@
       enum.TacticalMapComputerUi.Key:
         type: TacticalMapComputerBui
   - type: TacticalMapComputer
+  - type: EmitSoundOnUIOpen
+    sound: null
 
 - type: entity
   parent: RMCCommunicationsConsoleBase

@@ -71,7 +71,7 @@
   - type: LitOnPowered
   - type: EmitSoundOnUIOpen
     sound:
-      collection: Keyboard
+      collection: RMCKeyboardTyping
       params:
         volume: -1
   - type: RequireProjectileTarget
