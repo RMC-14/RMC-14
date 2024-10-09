@@ -26,6 +26,7 @@
   - type: AtmosExposed
   - type: Physics
     bodyType: Static
+    canCollide: False
   - type: MeleeSound
     soundGroups:
       Brute:
