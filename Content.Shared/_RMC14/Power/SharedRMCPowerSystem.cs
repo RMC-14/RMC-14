@@ -336,7 +336,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
         if (ent.Comp.State == RMCFusionReactorState.Weld)
         {
-            _popup.PopupClient("You see no reason to attack the S-52 fusion reactor.", ent, user);
+            _popup.PopupClient(Loc.GetString("rmc-fusion-reactor-already-destroyed", ("reactor", ent)), ent, user);
             return;
         }
 
@@ -358,7 +358,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
         if (ent.Comp.State == RMCFusionReactorState.Weld)
         {
-            _popup.PopupClient("You see no reason to attack the S-52 fusion reactor.", ent, user);
+            _popup.PopupClient(Loc.GetString("rmc-fusion-reactor-already-destroyed", ("reactor", ent)), ent, user);
             return;
         }
 
@@ -374,7 +374,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         Dirty(ent);
         UpdateAppearance(ent);
 
-        _popup.PopupClient("The S-52 fusion reactor gets torn apart!", ent, user, SmallCaution);
+        _popup.PopupClient(Loc.GetString("rmc-fusion-reactor-destroyed", ("reactor", ent)), ent, user, SmallCaution);
 
         if (ent.Comp.State != RMCFusionReactorState.Weld)
             args.Repeat = true;
@@ -389,6 +389,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         {
             if (ent.Comp.State != RMCFusionReactorState.Working)
             {
+                // TODO: localize
                 var tool = ent.Comp.State switch
                 {
                     RMCFusionReactorState.Wrench => $"a [color=cyan]Wrench[/color]",
@@ -404,6 +405,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             if (!_container.TryGetContainer(ent, ent.Comp.CellContainerSlot, out var container) ||
                 container.ContainedEntities.Count == 0)
             {
+                // TODO: localize
                 args.PushMarkup("It needs a [color=cyan]fuel cell[/color]!");
             }
         }
