@@ -637,7 +637,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (!args.HasDirectionalMovement)
             return;
 
-        if (TryComp<VictimInfectedComponent>(burster.Comp.BurstFrom, out var infected))
+        if (TryComp<VictimInfectedComponent>(burster.Comp.BurstFrom, out var infected) && !infected.IsBursting)
             TryBurst((burster.Comp.BurstFrom, infected));
     }
 
@@ -699,7 +699,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        _appearance.SetData(ent, ent.Comp.BurstingLayer, false);
+        _appearance.SetData(ent.Owner, ent.Comp.BurstingLayer, true);
         RemCompDeferred<VictimInfectedComponent>(ent);
 
         if (!TryComp(ent, out TransformComponent? xform))
