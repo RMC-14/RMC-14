@@ -16,3 +16,6 @@
     # TODO RMC14 highpower automagnum
     # TODO RMC14 m1911
     # TODO RMC14 S&W .38 model 37 revolver
+    primaryWeapons:
+    - [RMCBeltMarineM54C, WeaponRifleM54C]
+    primaryWeaponChance: 0.6

@@ -26,6 +26,16 @@ public sealed class SurvivorSystem : EntitySystem
         if (!preset.TryGet(out var comp, _prototypes, _compFactory))
             return;
 
+        if (_random.Prob(comp.PrimaryWeaponChance) &&
+            comp.PrimaryWeapons.Count > 0)
+        {
+            var gear = _random.Pick(comp.PrimaryWeapons);
+            foreach (var item in gear)
+            {
+                _inventory.SpawnItemOnEntity(mob, item);
+            }
+        }
+
         if (comp.RandomGear.Count > 0)
         {
             var gear = _random.Pick(comp.RandomGear);

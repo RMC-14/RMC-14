@@ -40,7 +40,6 @@
     shoes: RMCShoesBlack
     id: CMIDCardColonist
     ears: CMHeadset # TODO RMC14 colony
-    belt: CMBeltMarine
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchGeneral
 

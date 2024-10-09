@@ -132,3 +132,13 @@
     contents:
     - id: RMCMagazinePistolSU6
       amount: 6
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltMarineM54C
+  suffix: Filled, M54C
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineRifleM54C
+      amount: 5
