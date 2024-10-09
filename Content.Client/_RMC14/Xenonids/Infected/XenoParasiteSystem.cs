@@ -58,7 +58,7 @@ public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
         }
         else
         {
-            sprite.LayerSetVisible(layer, true);
+            sprite.LayerSetVisible(layer, false);
         }
     }
 
