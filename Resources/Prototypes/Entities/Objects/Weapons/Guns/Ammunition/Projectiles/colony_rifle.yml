@@ -1,6 +1,6 @@
 - type: entity
   id: BulletAR10
-  name: bullet (7.69x51)
+  name: bullet (7.62x51)
   parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
