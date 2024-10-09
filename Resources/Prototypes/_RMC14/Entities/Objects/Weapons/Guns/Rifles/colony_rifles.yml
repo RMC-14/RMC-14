@@ -2,7 +2,7 @@
   parent: CMBaseWeaponRifle
   name: AR10 Assault Rifle
   id: WeaponRifleAR10
-  description: An earlier version of the more widespread M16 rifle. How one of these ended up here is a mystery of its own. Uses 7.62x51mm rounds.
+  description: An earlier version of the more widespread M16 rifle. Considered to be the father of the 20th century rifle. How one of these ended up here is a mystery of its own. It is chambered in 7.62x51mm.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/ar10.rsi
@@ -21,22 +21,20 @@
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
   - type: Gun
-    selectedMode: FullAuto
+    selectedMode: SemiAuto
     availableModes:
     - SemiAuto
     - Burst
-    - FullAuto
     soundGunshot:
       collection: CMAR10Shoot
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
     - Burst
-    - FullAuto
     recoilUnwielded: 3
-    scatterWielded: 3
-    scatterUnwielded: 11
-    baseFireRate: 2.5
+    scatterWielded: 4
+    scatterUnwielded: 20
+    baseFireRate: 2
     burstScatterMult: 2
   - type: ItemSlots
     slots:
@@ -49,4 +47,4 @@
           tags:
           - RMCMagazineRifleAR10
   - type: GunDamageModifier
-    multiplier: 1.1
+    multiplier: 1.4

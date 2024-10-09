@@ -1,7 +1,7 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleAR10
-  name: "AR10 Magazine (7.62x51)"
+  name: "AR10 Magazine (7.62x51mm)"
   components:
   - type: Tag
     tags:
