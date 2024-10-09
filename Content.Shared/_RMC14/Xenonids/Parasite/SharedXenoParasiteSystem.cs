@@ -650,7 +650,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             return;
 
         comp.IsBursting = true;
-        Dirty(victim, comp);
+        Dirty(burstFrom);
 
         if (comp.SpawnedLarva == null)
             return;
@@ -664,7 +664,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             BreakOnMove = false,
             Hidden = true,
             BlockDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameEvent
+            DuplicateCondition = DuplicateConditions.SameTarget
         };
 
         if (_doAfter.TryStartDoAfter(doAfterEventArgs))
@@ -679,7 +679,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 _audio.PlayEntity(sound, filter, victim, true);
             }
 
-            _appearance.SetData(spawnedLarva, comp.BurstingLayer, true);
+            _appearance.SetData(victim, comp.BurstingLayer, true);
 
             var shakeFilter = Filter.PvsExcept(victim);
             shakeFilter.RemoveWhereAttachedEntity(HasComp<XenoComponent>); // not visible to xenos
@@ -699,7 +699,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        _appearance.SetData(args.User, ent.Comp.BurstingLayer, false);
+        _appearance.SetData(ent, ent.Comp.BurstingLayer, false);
         RemCompDeferred<VictimInfectedComponent>(ent);
 
         if (!TryComp(ent, out TransformComponent? xform))
@@ -714,7 +714,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             _container.EmptyContainer(container, destination: coords);
         }
 
-        Dirty(ent, ent.Comp);
+        Dirty(ent);
 
         EnsureComp<VictimBurstComponent>(ent);
 
