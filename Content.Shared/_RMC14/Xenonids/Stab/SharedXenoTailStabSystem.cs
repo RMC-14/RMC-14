@@ -1,7 +1,9 @@
 ﻿using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Xenonids.GasToggle;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Neurotoxin;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Chemistry.EntitySystems;
@@ -51,9 +53,19 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<XenoTailStabComponent, XenoTailStabEvent>(OnXenoTailStab);
+        SubscribeLocalEvent<XenoTailStabComponent, XenoGasToggleActionEvent>(OnXenoGasToggle);
 
         Subs.CVar(_config, RMCCVars.RMCTailStabMaxTargets, v => _tailStabMaxTargets = v, true);
     }
+
+    private void OnXenoGasToggle(Entity<XenoTailStabComponent> stab, ref XenoGasToggleActionEvent args)
+    {
+        if (!stab.Comp.Toggle)
+            return;
+
+        stab.Comp.InjectNeuro = !stab.Comp.InjectNeuro;
+    }
+
 
     private void OnXenoTailStab(Entity<XenoTailStabComponent> stab, ref XenoTailStabEvent args)
     {
@@ -170,7 +182,23 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                     if (change?.GetTotal() > FixedPoint2.Zero)
                         _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { hit }, filter);
 
-                    if (stab.Comp.Inject != null &&
+                    if (stab.Comp.InjectNeuro)
+                    {
+                        if (!TryComp<NeurotoxinInjectorComponent>(stab, out var neuroTox))
+                           continue;
+
+                        if (!EnsureComp<NeurotoxinComponent>(hit, out var neuro))
+                        {
+                            neuro.LastMessage = _timing.CurTime;
+                            neuro.LastAccentTime = _timing.CurTime;
+                            neuro.LastStumbleTime = _timing.CurTime;
+                        }
+                        neuro.NeurotoxinAmount += neuroTox.NeuroPerSecond;
+                        neuro.ToxinDamage = neuroTox.ToxinDamage;
+                        neuro.OxygenDamage = neuroTox.OxygenDamage;
+                        neuro.CoughDamage = neuroTox.CoughDamage;
+                    }
+                    else if (stab.Comp.Inject != null &&
                         _solutionContainer.TryGetInjectableSolution(hit, out var solutionEnt, out _))
                     {
                         foreach (var (reagent, amount) in stab.Comp.Inject)

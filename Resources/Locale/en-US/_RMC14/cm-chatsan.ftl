@@ -241,11 +241,23 @@ cm-chatsan-replacement-cat = feline host
 cm-chatsan-word-cats = cats
 cm-chatsan-replacement-cats = feline hosts
 
+cm-chatsan-word-avali = avali
+cm-chatsan-replacement-avali = four-eared host
+
+cm-chatsan-word-avalis = avalis
+cm-chatsan-replacement-avalis = four-eared hosts
+
 cm-chatsan-word-grenade = grenade
 cm-chatsan-replacement-grenade = boomstick
 
 cm-chatsan-word-grenades = grenades
 cm-chatsan-replacement-grenades = boomsticks
+
+cm-chatsan-word-gl = gl
+cm-chatsan-replacement-gl = boomstick launcher
+
+cm-chatsan-word-gls = gls
+cm-chatsan-replacement-gls = boomstick launchers
 
 cm-chatsan-word-bullet = bullet
 cm-chatsan-replacement-bullet = spit
