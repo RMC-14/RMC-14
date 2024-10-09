@@ -87,8 +87,8 @@
           Medium: { state: magaz_hv_2, visible: true }
           High: { state: magaz_hv_3, visible: true }
           Full: { state: magaz_hv, visible: true }
-          
-          
+
+
 - type: entity
   abstract: true
   parent: RMCBoxMagazineBase
@@ -671,14 +671,14 @@
     node: RMCBoxMagazineRevolverM44Empty
   - type: Sprite
     layers:
-    - state: base_m44 
-    - state: magaz_reg 
+    - state: base_m44
+    - state: magaz_reg
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: text_m44 
-    - state: base_type_m44_reg 
-    - state: base_m44_lid 
+    - state: text_m44
+    - state: base_type_m44_reg
+    - state: base_m44_lid
       map: [ "lid" ]
-    - state: lid_type_m44_reg 
+    - state: lid_type_m44_reg
       map: [ "lid_stripe" ]
   - type: CMItemSlots
     count: 16
@@ -711,12 +711,12 @@
     node: RMCBoxMagazineRevolverM44MarksmanEmpty
   - type: Sprite
     layers:
-    - state: base_m44 
-    - state: magaz_reg 
+    - state: base_m44
+    - state: magaz_reg
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: text_m44 
+    - state: text_m44
     - state: base_type_m44_mark
-    - state: base_m44_lid 
+    - state: base_m44_lid
       map: [ "lid" ]
     - state: lid_type_m44_mark
       map: [ "lid_stripe" ]
@@ -880,7 +880,7 @@
       whitelist:
         tags:
         - RMCShellShotgunFlechette
-        
+
 # These shells aren't fully implemented yet, so they can't be constructed
 - type: entity
   parent: RMCBoxShellsBase
@@ -985,7 +985,7 @@
       whitelist:
         tags:
         - RMCShellShotgunBeanbag
-        
+
 - type: entity
   parent: RMCBoxShellsBase
   id: RMCBoxShellsIncendiaryBuckshotEmpty

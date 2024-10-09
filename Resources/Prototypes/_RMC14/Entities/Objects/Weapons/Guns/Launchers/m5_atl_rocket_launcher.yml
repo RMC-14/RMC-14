@@ -1,5 +1,72 @@
-# 84mm HE
+- type: entity
+  name: M5-ATL
+  parent: [BaseWeaponLauncher, CMBaseWeaponGun, RMCBaseAttachableHolder]
+  id: RMCWeaponLauncherM5ATL
+  description: "The M5 Anti-Tank Launcher is a powerful anti-armor infantry weapon, commonly fielded by the UNMC. Used to take out light-tanks and enemy structures, the M5-ATL is a dangerous weapon with a variety of combat uses, depending on the loaded ammunition, and is capable of firing both shells and rocket-propelled grenades.\n\nThis one is missing its smart optics completely, and seems to be damaged, greatly limiting its range..."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5spec.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5spec.rsi
+    quickEquip: true
+    slots:
+    - suitStorage
+  - type: Gun
+    fireRate: 0.83
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/m5_shoot.ogg
+    resetOnHandSelected: false
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+        - RMCRocketAmmo84mm
+    capacity: 1
+    cycleable: true
+    mayTransfer: false
+    insertDelay: 6.0
+    cycleDelay: 6.0
+    proto: RMCRocket84mm
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Cock/m5_ammo.ogg
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - DemoSpecWhitelist
+  - type: Corrodible
+    isCorrodible: false
+  - type: ExplosionResistance
+    damageCoefficient: 0
+  - type: Wieldable
+  - type: GunRequiresWield
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+  - type: OnShootTriggerAmmoTimer
+    delay: 0.2 # TODO RMC14 Make some way for rockets to explode when they stop, for shooting at the ground closer than max range.
+    # This is a temporary hack to guarantee it will always go off after stopping even if it doesn't collide with anything.
+    # Works for almost all gameplay purposes at least right now because even max range rockets are less than 0.2s and it's fast enough not matter.
+  - type: ShootAtFixedPoint
+    shootArcProj: false
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.696
+    baseSprint: 0.559
+  - type: WieldDelay
+    baseDelay: 1.2
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentMagneticHarness
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: -0.12, 0.1
+  - type: IgnorePredictionHide
+  - type: GunIgnorePrediction
 
+# 84mm HE
 - type: entity
   id: RMCRocket84mm
   name: 84mm high-explosive rocket
@@ -8,7 +75,7 @@
   components:
   - type: Tag
     tags:
-      - RMCRocketAmmo84mm
+    - RMCRocketAmmo84mm
   - type: CartridgeAmmo
     proto: RMCProjectileRocket84mm
     deleteOnSpawn: false
@@ -32,7 +99,7 @@
   description: Uh oh.
   components:
   - type: TriggerOnCollide
-  # TODO RMC14 Make TriggerOnCollide spawn the explosion on the OtherEntity tile more consistently, so the explosion is centered properly
+    # TODO RMC14 Make TriggerOnCollide spawn the explosion on the OtherEntity tile more consistently, so the explosion is centered properly
     fixtureID: projectile # no parent entity from BaseBulletTrigger because it has Clickable
   - type: Physics
     bodyType: Dynamic
@@ -117,15 +184,15 @@
     layers:
     - state: m5_84mm_ap
   - type: Explosive
-  # TODO RMC14 Very inconsistent because explosions spawn at epicenter of the rocket, not the hit entity. Proper values are around (50, 40, 90)
+    # TODO RMC14 Very inconsistent because explosions spawn at epicenter of the rocket, not the hit entity. Proper values are around (50, 40, 90)
     explosionType: RMC
     maxIntensity: 10
     intensitySlope: 5
     totalIntensity: 35
     maxTileBreak: 0
   - type: StunOnCollide
-  # This only works for AP rockets because it's supposed to have a hardcoded 6 second stun.
-  # Almost every other stun in the future should use some kind of configurable and resistable system instead.
+    # This only works for AP rockets because it's supposed to have a hardcoded 6 second stun.
+    # Almost every other stun in the future should use some kind of configurable and resistable system instead.
     stunAmount: 6
     knockdownAmount: 6
   - type: IgnorePredictionHide
