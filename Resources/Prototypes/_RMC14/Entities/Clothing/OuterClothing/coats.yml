@@ -1,4 +1,4 @@
-# BaseJacket
+#Base Jacket
 - type: entity
   abstract: true
   parent: [ClothingOuterStorageBase, RMCAllowSuitStorageClothingJacket]
@@ -42,6 +42,43 @@
       - Radio
       #TODO Various holsters go here - 1984, m44, mateba
       - RMCSmartPistolHolster
+
+- type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingHazardVest
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - Blowtorch
+      - Gun
+      - RMCLighter
+      - Stunbaton
+      - CrewMonitoringConsole
+      tags:
+      #TODO any analyzer - plant etc
+      - Multitool
+      - Radio
+      # TODO CM t-ray scanner
+      - Crowbar
+      - Screwdriver
+      - Wirecutter
+      - Wrench
+      - GasMask
+      - CigPack
+      - Handcuffs
+      - Binoculars
+      - Knife
+      #TODO Various holsters go here - 1984, m44, mateba
+      - RMCSmartPistolHolster
+      - Flashlight
+      - DiscreteHealthAnalyzer
+      - GasTank
+      - Pen
+      - RMCMacheteScabbard
+      #TODO Katana scabbard
+      #TODO motion detector
+
 
 - type: entity
   abstract: true
@@ -217,42 +254,3 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/long_coat.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/long_coat.rsi
-
-# Correspondent
-- type: entity
-  parent: RMCBaseJacket
-  id: RMCCoatCorrespondent
-  name: combat correspondent jacket
-  description: A jacket for the most fashionable war correspondents.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/brown.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/brown.rsi
-
-- type: entity
-  parent: RMCCoatCorrespondent
-  id: RMCCoatCorrespondentGreen
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/green.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/green.rsi
-
-- type: entity
-  parent: RMCCoatCorrespondent
-  id: RMCCoatCorrespondentBlack
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/black.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/black.rsi
-
-- type: entity
-  parent: RMCCoatCorrespondent
-  id: RMCCoatCorrespondentBlue
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/blue.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/blue.rsi

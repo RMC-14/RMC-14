@@ -170,7 +170,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             var weeds = Spawn(args.Prototype, coordinates);
             _adminLogs.Add(LogType.RMCXenoPlantWeeds, $"Xeno {ToPrettyString(xeno):xeno} planted weeds {ToPrettyString(weeds):weeds} at {coordinates}");
+            _hive.SetSameHive(xeno.Owner, weeds);
         }
+
+        _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, xeno);
     }
 
     private void OnXenoChooseStructureAction(Entity<XenoConstructionComponent> xeno, ref XenoChooseStructureActionEvent args)

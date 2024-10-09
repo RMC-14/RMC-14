@@ -44,6 +44,8 @@
       components:
       - Marine
     hitsToInvulnerability: 3
+  - type: DamageMultiplierFlags
+    flags: Breaching
 
 - type: entity
   id: CMCorrodible

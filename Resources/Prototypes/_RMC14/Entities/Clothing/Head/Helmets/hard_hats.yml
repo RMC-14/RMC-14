@@ -1,0 +1,111 @@
+- type: entity
+  parent: RMCHelmetBase
+  id: RMCHardHat
+  name: hard hat
+  description: A piece of headgear used in dangerous working conditions to protect the head. Comes with a built-in flashlight.
+  components:
+  - type: Item
+    heldPrefix: off
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/yellow.rsi
+    layers:
+    - state: icon
+    - state: icon_on
+      visible: false
+      map: [ "light" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/yellow.rsi
+    equippedPrefix: off
+    clothingVisuals:
+      head:
+      - state: off-equipped-HELMET
+  - type: CMArmor
+    armor: 20 # 20 melee, 10 bullet
+    explosionArmor: 0
+  - type: CMHardArmor
+  - type: Appearance
+  - type: ToggleableLightVisuals
+    spriteLayer: light
+    clothingVisuals:
+      head:
+      - state: on-equipped-HELMET
+  - type: PointLight
+    enabled: false
+    radius: 4
+    softness: 3
+    autoRot: true
+    netsync: false
+  - type: HandheldLight
+    addPrefix: true
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
+    turnOffSound:
+      path: /Audio/_RMC14/Machines/suitlight_off.ogg
+    turnOnSound:
+      path: /Audio/_RMC14/Machines/suitlight_on.ogg
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      id: radiating
+      interpolate: Linear
+      maxDuration: 2.0
+      startValue: 3.0
+      endValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+      reverseWhenFinished: true
+    - !type:PulseBehaviour
+      id: blinking
+      interpolate: Nearest
+      maxDuration: 1.0
+      minValue: 0.1
+      maxValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+  - type: Battery
+    maxCharge: 600 #lights drain 3/s but recharge of 2 makes this 1/s. Therefore 600 is 10 minutes of light.
+    startingCharge: 600
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 2 #recharge of 2 makes total drain 1w / s so max charge is 1:1 with time. Time to fully charge should be 5 minutes. Having recharge gives light an extended flicker period which gives you some warning to return to light area.
+
+- type: entity
+  parent: RMCHardHat
+  id: RMCHardhatRed
+  name: firefighter helmet
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/red.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/red.rsi
+# TODO heat protection and stuff
+
+- type: entity
+  parent: RMCHardHat
+  id: RMCHardhatOrange
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/orange.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/orange.rsi
+
+- type: entity
+  parent: RMCHardHat
+  id: RMCHardhatBlue
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/blue.rsi
+
+- type: entity
+  parent: RMCHardHat
+  id: RMCHardhatWhite
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/white.rsi
+# TODO heat protection...for some reason

@@ -77,6 +77,12 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
     private void OnApcUpdate<T>(Entity<RMCApcComponent> ent, ref T args)
     {
+        if (!TryComp(ent, out MetaDataComponent? metaData) ||
+            metaData.EntityLifeStage < EntityLifeStage.MapInitialized)
+        {
+            return;
+        }
+
         ToUpdate.Add(ent);
 
         if (_net.IsClient)
@@ -85,8 +91,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         if (TerminatingOrDeleted(ent))
             return;
 
-        if (_area.TryGetArea(ent, out var area))
-            _metaData.SetEntityName(ent, $"{Name(area)} APC");
+        if (_area.TryGetArea(ent, out _, out var areaProto, out _))
+            _metaData.SetEntityName(ent, $"{areaProto.Name} APC");
 
         _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.CellContainerSlot);
         if (ent.Comp.StartingCell is { } startingCell)
@@ -330,7 +336,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
         if (ent.Comp.State == RMCFusionReactorState.Weld)
         {
-            _popup.PopupClient("You see no reason to attack the S-52 fusion reactor.", ent, user);
+            _popup.PopupClient(Loc.GetString("rmc-fusion-reactor-already-destroyed", ("reactor", ent)), ent, user);
             return;
         }
 
@@ -352,7 +358,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
         if (ent.Comp.State == RMCFusionReactorState.Weld)
         {
-            _popup.PopupClient("You see no reason to attack the S-52 fusion reactor.", ent, user);
+            _popup.PopupClient(Loc.GetString("rmc-fusion-reactor-already-destroyed", ("reactor", ent)), ent, user);
             return;
         }
 
@@ -368,7 +374,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         Dirty(ent);
         UpdateAppearance(ent);
 
-        _popup.PopupClient("The S-52 fusion reactor gets torn apart!", ent, user, SmallCaution);
+        _popup.PopupClient(Loc.GetString("rmc-fusion-reactor-destroyed", ("reactor", ent)), ent, user, SmallCaution);
 
         if (ent.Comp.State != RMCFusionReactorState.Weld)
             args.Repeat = true;
@@ -383,6 +389,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         {
             if (ent.Comp.State != RMCFusionReactorState.Working)
             {
+                // TODO: localize
                 var tool = ent.Comp.State switch
                 {
                     RMCFusionReactorState.Wrench => $"a [color=cyan]Wrench[/color]",
@@ -398,6 +405,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             if (!_container.TryGetContainer(ent, ent.Comp.CellContainerSlot, out var container) ||
                 container.ContainedEntities.Count == 0)
             {
+                // TODO: localize
                 args.PushMarkup("It needs a [color=cyan]fuel cell[/color]!");
             }
         }
@@ -492,11 +500,14 @@ public abstract class SharedRMCPowerSystem : EntitySystem
     private bool TryGetPowerArea(EntityUid ent, out Entity<RMCAreaPowerComponent> areaPower)
     {
         areaPower = default;
-        if (!_area.TryGetArea(ent, out var area))
+        if (!_area.TryGetArea(ent, out _, out _, out var areaEnt) ||
+            areaEnt is not { Valid: true })
+        {
             return false;
+        }
 
-        var areaPowerComp = EnsureComp<RMCAreaPowerComponent>(area);
-        areaPower = (area, areaPowerComp);
+        var areaPowerComp = EnsureComp<RMCAreaPowerComponent>(areaEnt.Value);
+        areaPower = (areaEnt.Value, areaPowerComp);
         return true;
     }
 

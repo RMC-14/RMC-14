@@ -1,0 +1,89 @@
+- type: entity
+  parent: BaseStructureDynamic
+  id: CMLinenBin
+  suffix: Empty
+  name: linen bin
+  description: A linen bin. It looks rather cosy.
+  components:
+  - type: Anchorable
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: InteractionOutline
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:EmptyAllContainersBehaviour
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 1
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Structures/Furniture/linen_bin.rsi
+    layers:
+    - state: linenbin_empty
+      map: [ "emptyLayer" ]
+    - state: linenbin_half
+      map: [ "partialLayer" ]
+    - state: linenbin_full
+      map: [ "fullLayer" ]
+  - type: ItemSlots
+  - type: CMItemSlots
+    count: 20
+    slot:
+      name: bedsheets
+      whitelist:
+        tags:
+        - Bedsheet
+      insertSound:
+        collection: storageRustle
+      ejectSound:
+        collection: storageRustle
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        fullLayer:
+          Empty: { visible: false }
+          Low: { visible: false }
+          Medium: { visible: true }
+          High: { visible: true }
+          Full: { visible: true }
+        partialLayer:
+          Empty: { visible: false }
+          Low: { visible: true }
+          Medium: { visible: false }
+          High: { visible: false }
+          Full: { visible: false }
+        emptyLayer:
+          Empty: { visible: true }
+          Low: { visible: false }
+          Medium: { visible: false }
+          High: { visible: false }
+          Full: { visible: false }
+
+- type: entity
+  parent: CMLinenBin
+  id: CMLinenBinFilled
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMBedsheetWhite
+    count: 20

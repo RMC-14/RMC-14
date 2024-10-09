@@ -63,7 +63,7 @@
       - id: RMCPouchGeneralLarge
       - id: RMCPouchMagazineLarge
       - id: RMCPouchMagazinePistolLarge
-      #- id: RMCPouchShotgunLarge # TODO RMC14 Large Shotgun Pouch
+      - id: RMCPouchShotgunLarge
       - id: RMCPouchMedical
       - id: RMCPouchMedkit
       - id: RMCPouchPistol

@@ -12,6 +12,7 @@
     anchored: false
   - type: Physics
     bodyType: Static
+    canCollide: false
   - type: Sprite
     sprite: _RMC14/Structures/Wallmounts/Lighting/light_tube.rsi
     state: tube1
@@ -110,6 +111,11 @@
     idleLoad: 1
     activeLoad: 40
     channel: Lighting
+  - type: DeviceLinkSink
+    ports:
+    - On
+    - Off
+    - Toggle
 
 - type: entity
   parent: CMLightFixtureEmpty
@@ -186,6 +192,11 @@
     range: 2
     sound:
       path: /Audio/Ambience/Objects/light_hum.ogg
+  - type: DeviceLinkSink
+    ports:
+    - On
+    - Off
+    - Toggle
 
 - type: entity
   parent: CMLightFixture
@@ -335,17 +346,11 @@
     containers:
       light_bulb: !type:ContainerSlot
   - type: ApcPowerReceiver
-  - type: ExtensionCableReceiver
-  - type: DeviceNetwork
-    deviceNetId: Wireless
-    receiveFrequencyId: SmartLight
-  - type: WirelessNetworkConnection
-    range: 200
   - type: DeviceLinkSink
     ports:
-      - On
-      - Off
-      - Toggle
+    - On
+    - Off
+    - Toggle
   - type: Appearance
 
 - type: entity
@@ -388,6 +393,11 @@
     range: 2
     sound:
       path: /Audio/Ambience/Objects/light_hum.ogg
+  - type: DeviceLinkSink
+    ports:
+    - On
+    - Off
+    - Toggle
 
 - type: entity
   parent: CMLightFixtureSmall

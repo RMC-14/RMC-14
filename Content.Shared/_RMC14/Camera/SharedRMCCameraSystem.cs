@@ -53,10 +53,10 @@ public abstract class SharedRMCCameraSystem : EntitySystem
         if (ent.Comp.Id is { } id)
             _refresh.Add(id);
 
-        if (!_area.TryGetArea(ent, out var area))
+        if (!_area.TryGetArea(ent, out _, out var areaProto, out _))
             return;
 
-        var areaName = Name(area);
+        var areaName = areaProto.Name;
         var count = _cameraNames.GetValueOrDefault(areaName);
         _metaData.SetEntityName(ent, $"{areaName} #{++count}");
         _cameraNames[areaName] = count;

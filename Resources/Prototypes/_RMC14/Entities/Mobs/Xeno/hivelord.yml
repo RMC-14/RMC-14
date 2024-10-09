@@ -74,6 +74,8 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.66
     baseSprintSpeed: 3
+  - type: SlowOnPull
+    multiplier: 0.5
   - type: WhitelistPickup
     whitelist:
       components:

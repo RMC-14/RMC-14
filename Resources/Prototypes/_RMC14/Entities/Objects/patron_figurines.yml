@@ -616,3 +616,14 @@
     state: rhett_rainman_mcindrick
   - type: PatronFigurine
     id: a0091382-d6c6-4fb1-8cf6-cd4eb49ae4e1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDoes-The-Dishes
+  name: Does-The-Dishes figurine
+  description: "\"Anybody want a sssmoke?\""
+  components:
+  - type: Sprite
+    state: does-the-dishes
+  - type: PatronFigurine
+    id: 428803e1-1ab5-4a19-8216-06bdb8b638d9
