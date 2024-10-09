@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenos being affected by camera recoil from bullet hits.
-    type: Fix
-  id: 306
-  time: '2024-07-08T11:06:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2896
-- author: snebl
-  changes:
-  - message: Fixed sandbag barricades being repairable with a welder.
-    type: Fix
-  id: 307
-  time: '2024-07-08T11:06:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2899
 - author: Mattshark89
   changes:
   - message: The Queen's screech no longer affects marines behind opaque walls. It
@@ -4630,5 +4616,22 @@
   id: 805
   time: '2024-10-09T02:07:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4214
+- author: CyberTropic
+  changes:
+  - message: Added soap
+    type: Add
+  id: 806
+  time: '2024-10-09T02:09:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4333
+- author: Vermidia
+  changes:
+  - message: Add hazard vests, hard hats, and rebreathers to maintenance tech vendors
+    type: Add
+  - message: Flashlights, penlights, and tripods no longer use powercells and won't
+      run out of power
+    type: Fix
+  id: 807
+  time: '2024-10-09T02:08:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4328
 Name: RMC14
 Order: -1
