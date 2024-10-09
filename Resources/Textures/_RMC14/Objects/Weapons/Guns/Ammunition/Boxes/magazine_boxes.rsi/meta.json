@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0b241c0584b792912d42c34007d808494e386023/icons/obj/items/weapons/guns/ammo_boxes/magazines.dmi, https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/icons/obj/items/weapons/guns/ammo_boxes/boxes_and_lids.dmi, https://github.com/cmss13-devs/cmss13/blob/fba613ad33ac51b16689a75bc2f1572b24df282a/icons/obj/items/weapons/guns/ammo_boxes/text.dmi, m4spr, m1984, mp5 edited by sio3732. m54 edited by Vermidia",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0b241c0584b792912d42c34007d808494e386023/icons/obj/items/weapons/guns/ammo_boxes/magazines.dmi, https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/icons/obj/items/weapons/guns/ammo_boxes/boxes_and_lids.dmi, https://github.com/cmss13-devs/cmss13/blob/fba613ad33ac51b16689a75bc2f1572b24df282a/icons/obj/items/weapons/guns/ammo_boxes/text.dmi, https://github.com/cmss13-devs/cmss13/blob/fba613ad33ac51b16689a75bc2f1572b24df282a/icons/obj/items/weapons/guns/ammo_boxes/handfuls.dmi, m4spr, m1984, mp5 edited by sio3732. m54 edited by Vermidia",
   "size": {
     "x": 32,
     "y": 32
@@ -918,6 +918,93 @@
     },
     {
       "name": "text_m54"
+    },
+    {
+      "name": "shells"
+    },
+    {
+      "name": "shells_buck_1"
+    },
+    {
+      "name": "shells_buck_2"
+    },
+    {
+      "name": "shells_buck_3"
+    },
+    {
+      "name": "shells_buck"
+    },
+    {
+      "name": "shells_slug_1"
+    },
+    {
+      "name": "shells_slug_2"
+    },
+    {
+      "name": "shells_slug_3"
+    },
+    {
+      "name": "shells_slug"
+    },
+    {
+      "name": "shells_flech_1"
+    },
+    {
+      "name": "shells_flech_2"
+    },
+    {
+      "name": "shells_flech_3"
+    },
+    {
+      "name": "shells_flech"
+    },
+    {
+      "name": "shells_incen_1"
+    },
+    {
+      "name": "shells_incen_2"
+    },
+    {
+      "name": "shells_incen_3"
+    },
+    {
+      "name": "shells_incen"
+    },
+    {
+      "name": "shells_incenbuck_1"
+    },
+    {
+      "name": "shells_incenbuck_2"
+    },
+    {
+      "name": "shells_incenbuck_3"
+    },
+    {
+      "name": "shells_incenbuck"
+    },
+    {
+      "name": "shells_bean_1"
+    },
+    {
+      "name": "shells_bean_2"
+    },
+    {
+      "name": "shells_bean_3"
+    },
+    {
+      "name": "shells_bean"
+    },
+    {
+      "name": "shells_breach_1"
+    },
+    {
+      "name": "shells_breach_2"
+    },
+    {
+      "name": "shells_breach_3"
+    },
+    {
+      "name": "shells_breach"
     }
   ]
 }

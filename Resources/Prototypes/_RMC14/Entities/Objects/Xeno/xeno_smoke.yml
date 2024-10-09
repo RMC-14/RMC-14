@@ -33,7 +33,7 @@
     id: RMCSmokeAcid
   - type: EvenSmoke
     spawn: RMCSmokeAcid
-    range: 2
+    range: 3
   - type: DamageOverTime
     affectsDead: false
     affectsInfectedNested: false
@@ -85,7 +85,7 @@
     id: RMCSmokeNeurotoxin
   - type: EvenSmoke
     spawn: RMCSmokeNeurotoxin
-    range: 3
+    range: 4
   - type: NeurotoxinInjector
     neuroPerSecond: 6
     affectsDead: false

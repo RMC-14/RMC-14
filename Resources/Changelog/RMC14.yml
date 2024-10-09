@@ -1,71 +1,4 @@
 ﻿Entries:
-- author: UnicornOnLSD
-  changes:
-  - message: Marines have finally developped kinetic reflexes for machetes ! (You
-      can now use holster keys on machete pouch)
-    type: Add
-  id: 305
-  time: '2024-07-08T11:07:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2851
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenos being affected by camera recoil from bullet hits.
-    type: Fix
-  id: 306
-  time: '2024-07-08T11:06:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2896
-- author: snebl
-  changes:
-  - message: Fixed sandbag barricades being repairable with a welder.
-    type: Fix
-  id: 307
-  time: '2024-07-08T11:06:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2899
-- author: Mattshark89
-  changes:
-  - message: The Queen's screech no longer affects marines behind opaque walls. It
-      still affects marines behind barricades.
-    type: Tweak
-  id: 308
-  time: '2024-07-08T11:11:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2866
-- author: UnicornOnLSD
-  changes:
-  - message: Several medical sprites are now BLU, per player demand.
-    type: Add
-  id: 309
-  time: '2024-07-08T11:24:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2895
-- author: DrSmugleaf
-  changes:
-  - message: All caps including surgical can now hold any combination of 2 lighters,
-      cigarettes and matchsticks.
-    type: Tweak
-  id: 310
-  time: '2024-07-08T11:24:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2900
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the defender being able to push nested marines deeper into the
-      walls with its abilities.
-    type: Fix
-  id: 311
-  time: '2024-07-08T11:52:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2901
-- author: ShadowCommander
-  changes:
-  - message: Ship staff no longer spawn hungry.
-    type: Fix
-  id: 312
-  time: '2024-07-08T20:47:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2904
-- author: diraven
-  changes:
-  - message: Pheromones icons are now shown even without direct line of sight.
-    type: Tweak
-  id: 313
-  time: '2024-07-08T21:28:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2910
 - author: DrSmugleaf
   changes:
   - message: Fixed the lifesaver bag's storage UI being extremely long, it is now
@@ -4628,5 +4561,83 @@
   id: 804
   time: '2024-10-08T22:16:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4276
+- author: FungiFellow
+  changes:
+  - message: Added the missing stun on direct hit effect of the Boiler's Bombard.
+    type: Add
+  - message: Acid Bombard direct hits now properly applies the same effect as a Charged
+      Spit
+    type: Add
+  id: 805
+  time: '2024-10-09T02:07:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4214
+- author: CyberTropic
+  changes:
+  - message: Added soap
+    type: Add
+  id: 806
+  time: '2024-10-09T02:09:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4333
+- author: Vermidia
+  changes:
+  - message: Add hazard vests, hard hats, and rebreathers to maintenance tech vendors
+    type: Add
+  - message: Flashlights, penlights, and tripods no longer use powercells and won't
+      run out of power
+    type: Fix
+  id: 807
+  time: '2024-10-09T02:08:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4328
+- author: Vermidia
+  changes:
+  - message: Fixed boiler gas spreading one less tile than intended.
+    type: Fix
+  id: 808
+  time: '2024-10-09T05:17:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4361
+- author: CyberTropic
+  changes:
+  - message: Added magazine boxes for handfuls of shotgun shells.
+    type: Add
+  id: 809
+  time: '2024-10-09T08:55:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4065
+- author: Rainbeon
+  changes:
+  - message: The Lurker and Runner Leap sound effect now correctly only plays when
+      hitting an enemy with the leap.
+    type: Fix
+  id: 810
+  time: '2024-10-09T08:55:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4362
+- author: TeaTotalTemplar
+  changes:
+  - message: Added the missing plasma cost to the Carrier's "Plant Resin Hole" ability
+      tooltip
+    type: Fix
+  id: 811
+  time: '2024-10-09T21:03:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4369
+- author: crystalHex
+  changes:
+  - message: Added the gardener drone. The gardener drone sacrifices its resin constructions
+      and corrosive acid for the abilities to grow a variety of resin fruits, to plant
+      hardier weeds, and to surge resin. Resin surge allows you to speed up fruit
+      growth, create temporary walls, and make existing walls temporarily nigh unbreakable.
+    type: Add
+  - message: Added the gardener's fruits, the effects of which include instant healing,
+      health/plasma regeneration, overshield, movement speed increase, passive recovery
+      pheromones, and ability cooldown reduction.
+    type: Add
+  id: 812
+  time: '2024-10-09T21:55:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4100
+- author: TeaTotalTemplar
+  changes:
+  - message: Added the AR10, AR10 magazine and 7.62x51 cartridge
+    type: Add
+  id: 813
+  time: '2024-10-09T22:14:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4367
 Name: RMC14
 Order: -1

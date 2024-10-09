@@ -1,0 +1,274 @@
+﻿- type: entity
+  parent: RMCBaseWeaponSniperRifle
+  id: CMM96SSniperRifle
+  name: M96S scoped rifle
+  description: "A heavy sniper rifle manufactured by Aegis Armaments. It has a scope system and fires armor penetrating rounds out of a 15-round magazine.
+    'Peace Through Superior Firepower'"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: sniperbarrel
+      offset: 0.715, 0.025
+  - type: Item
+    size: Large
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s.rsi
+  - type: Tag
+    tags:
+    - CMM96SSniperRifle
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 12
+  - type: Gun
+    shotsPerBurst: 1
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_sniper.ogg
+  - type: RMCSelectiveFire
+    recoilWielded: 1
+    scatterWielded: 0
+    baseFireRate: 0.667
+  - type: WieldDelay
+    baseDelay: 1.2
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineSniperM96S
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - SniperWhitelist
+  - type: GunRequiresWield
+  - type: Corrodible
+    isCorrodible: false
+  - type: GunIFF
+    enabled: true
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        locked: true
+        startingAttachable: RMCM96SIntegratedScope
+        whitelist:
+          tags:
+          - RMCM96SIntegratedScope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBipod
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-underbarrel: 0.21875, -0.343
+
+- type: entity
+  parent: BaseMagazineRifle
+  id: CMMagazineSniperM96S
+  name: "M96S marksman magazine (10x28mm)"
+  description: A magazine of sniper rifle ammo. An aimed shot with it will deal significant damage.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSniper
+    - CMMagazineSniperM96S
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeSniper10x28mm
+    proto: CMCartridgeSniper10x28mm
+    capacity: 15
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m42c.rsi
+    layers:
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: Appearance
+
+- type: entity
+  parent: CMMagazineSniperM96S
+  id: CMMagazineSniperM96SIncendiary
+  name: "M96S incendiary magazine (10x28mm)"
+  description: A magazine of sniper rifle ammo. An aimed shot with it will temporarily blind the targe and kindle the blaze further.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CMCartridgeSniper10x28mmIncendiary
+    capacity: 15
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m42c.rsi
+    layers:
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: band_e # TODO RMC14 band non e
+      color: "#9C2219"
+
+- type: entity
+  parent: CMMagazineSniperM96S
+  id: CMMagazineSniperM96SFlak
+  name: "M96S flak magazine (10x28mm)"
+  description: A magazine of sniper rifle ammo. An aimed shot with it will temporarily slow the target and minimize the backlash.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CMCartridgeSniper10x28mmFlak
+    capacity: 15
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m42c.rsi
+    layers:
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: band_e # TODO RMC14 band non e
+      color: "#7866FF"
+
+- type: entity
+  parent: CMMagazineSniperM96S
+  id: CMMagazineSniperM96SAntiMateriel
+  name: "XM43E1 marksman magazine (10x99mm)"
+  description: A magazine of 10x99mm anti-materiel rounds.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSniper
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeSniper10x99mm
+    proto: CMCartridgeSniper10x99mmAntiMateriel
+    capacity: 8
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m42c.rsi
+    layers:
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: band_e # TODO RMC14 band non e
+      color: "#000000"
+
+- type: entity
+  parent: CMCartridgeSniper10x28mm
+  id: CMCartridgeSniper10x28mmIncendiary
+  name: cartridge (10x28mm) (incendiary)
+  components:
+  - type: CartridgeAmmo
+    proto: CMBulletSniper10x28mmIncendiary
+
+- type: entity
+  parent: CMCartridgeSniper10x28mm
+  id: CMCartridgeSniper10x28mmFlak
+  name: cartridge (10x28mm) (Flak)
+  components:
+  - type: CartridgeAmmo
+    proto: CMBulletSniper10x28mmFlak
+
+- type: entity
+  parent: CMCartridgeSniper10x28mm
+  id: CMCartridgeSniper10x99mmAntiMateriel
+  name: cartridge (10x99mm) (AntiMateriel)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridgeSniper10x99mm
+  - type: CartridgeAmmo
+    proto: CMBulletSniper10x99mmAntiMateriel
+
+- type: entity
+  parent: BaseBullet
+  id: CMBulletSniper10x28mm
+  name: bullet (10x28mm)
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    layers:
+    - state: bullet
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 140 # TODO RMC14 70 when aimed shot is in please someone help im dying
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 32
+      falloff: 9999
+      ignoreModifiers: true
+  - type: CMArmorPiercing
+    amount: 50
+
+# TODO RMC14 incendiary
+- type: entity
+  parent: CMBulletSniper10x28mm
+  id: CMBulletSniper10x28mmIncendiary
+  name: bullet (10x28mm)
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 50
+        Heat: 10
+  - type: CMArmorPiercing
+    amount: 20
+
+# TODO RMC14 slow
+- type: entity
+  parent: CMBulletSniper10x28mm
+  id: CMBulletSniper10x28mmFlak
+  name: bullet (10x28mm)
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55
+  - type: CMArmorPiercing
+    amount: 0
+
+- type: entity
+  parent: CMBulletSniper10x28mm
+  id: CMBulletSniper10x99mmAntiMateriel
+  name: bullet (10x99mm)
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 125
+  - type: CMArmorPiercing
+    amount: 50
+
+- type: Tag
+  id: CMM96SSniperRifle
+
+- type: Tag
+  id: CMMagazineSniperM96S
+
+- type: Tag
+  id: CMCartridgeSniper10x28mm
+
+- type: Tag
+  id: CMCartridgeSniper10x99mm

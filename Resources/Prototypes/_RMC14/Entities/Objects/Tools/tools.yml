@@ -18,6 +18,11 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/screwdriver_pickup.ogg
+  - type: Clothing
+    quickEquip: false
+    slots:
+    #TODO ear slot
+    - Suitstorage
 
 - type: entity
   parent: Wirecutter
@@ -39,6 +44,10 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/wirecutter_pickup.ogg
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Suitstorage
 
 - type: entity
   parent: Wrench
@@ -57,6 +66,10 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/wrench_pickup.ogg
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Suitstorage
 
 - type: entity
   parent: Multitool
@@ -76,6 +89,10 @@
     sound:
       path: /Audio/_RMC14/Handling/multitool_pickup.ogg
   - type: Multitool
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Suitstorage
 
 - type: entity
   parent: Crowbar

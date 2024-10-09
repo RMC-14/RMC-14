@@ -160,6 +160,8 @@
         type: XenoPheromonesBui
       enum.XenoOrderConstructionUI.Key:
         type: XenoOrderConstructionBui
+      enum.XenoFruitChooseUI.Key:
+        type: XenoFruitChooseBui
       enum.XenoWordQueenUI.Key:
         type: XenoWordQueenBui
       enum.TacticalMapUserUi.Key:
@@ -338,6 +340,10 @@
       location: Right
     - name: Left Hand
       location: Left
+  - type: WhitelistPickup
+    whitelist:
+      components:
+      - XenoFruit
   - type: ParalyzeOnPullAttempt
 
 - type: entity

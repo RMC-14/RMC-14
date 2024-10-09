@@ -98,3 +98,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/b72dc18a26d2f4b5072d2b65145d6130036e0755/sound/weapons/gun_rocketlauncher.ogg"
+
+- files: ["gun_ar10.orgg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/eb11a226994fb140fb0f713dd05525a0f8b3b3ae/sound/weapons/gun_ar10.ogg"

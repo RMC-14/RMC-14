@@ -73,7 +73,7 @@
 - type: entity
   id: ActionXenoResinHole
   parent: ActionXenoBase
-  name: Plant Resin Hole
+  name: Plant Resin Hole (200)
   description: Places a resin hole on weeds. It can be filled with boiler gas, acid, or parasites.
   components:
   - type: InstantAction
@@ -83,3 +83,60 @@
       state: place_trap
     event: !type:XenoPlaceResinHoleActionEvent
     useDelay: 1
+
+# For gardener drone
+- type: entity
+  id: ActionXenoFruitChoose
+  parent: ActionXenoBase
+  name: Change Fruit
+  description: Choose a fruit to be planted with 'Plant Resin Fruit' action.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: blank
+    event: !type:XenoFruitChooseActionEvent
+  - type: XenoFruitChooseAction
+
+- type: entity
+  id: ActionXenoFruitPlant
+  parent: ActionXenoBase
+  name: Plant Resin Fruit (100)
+  description: Plant chosen resin fruit at the cost of health and plasma.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: gardener_plant
+    event: !type:XenoFruitPlantActionEvent
+    useDelay: 5
+
+- type: entity
+  id: ActionXenoPlantWeedsHardy
+  parent: ActionXenoBase
+  name: Plant Hardy Weeds (125) # TODO RMC14 proper plasma costs
+  description: Plant a weed node that will spread hardier weeds.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: plant_gardener_weeds
+    event: !type:XenoPlantWeedsActionEvent
+      plasmaCost: 125
+      prototype: XenoHardyWeedsSource
+      useOnSemiWeedable: true
+    useDelay: 120
+
+# For healer drone
+- type: entity
+  id: ActionXenoFruitPlantLesser
+  parent: ActionXenoFruitPlant
+  name: Plant Resin Fruit (50)
+  description: Plant resin fruit at the cost of health and plasma.
+  components:
+  - type: InstantAction
+    event: !type:XenoFruitPlantActionEvent
+      plasmaCost: 50
