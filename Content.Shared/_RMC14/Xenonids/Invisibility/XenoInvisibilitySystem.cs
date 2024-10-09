@@ -32,21 +32,18 @@ public sealed class XenoInvisibilitySystem : EntitySystem
 
     private void OnXenoTurnInvisibleAction(Entity<XenoTurnInvisibleComponent> xeno, ref XenoTurnInvisibleActionEvent args)
     {
-        //if (args.Handled)
-        //    return;
-
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
 
-        if (TryComp<XenoActiveInvisibleComponent>(xeno, out var oldActive)){
+        if (TryComp<XenoActiveInvisibleComponent>(xeno, out var invis)){
             RemCompDeferred<XenoActiveInvisibleComponent>(xeno);
-            
-            foreach (var (actionId, actionComp) in _actions.GetActions(xeno))
+            OnRemoveInvisibility((xeno, invis));
+
+            if (!invis.DidPopup)
             {
-                if (actionComp.BaseEvent is XenoTurnInvisibleActionEvent)
-                {
-                    _actions.SetCooldown(actionId, xeno.Comp.Cooldown);
-                }
+                _popup.PopupClient(Loc.GetString("cm-xeno-invisibility-expire"), xeno, xeno, PopupType.SmallCaution);
+                invis.DidPopup = true;
+                Dirty(xeno, invis);
             }
         }
         else
@@ -58,8 +55,6 @@ public sealed class XenoInvisibilitySystem : EntitySystem
 
             _movementSpeed.RefreshMovementSpeedModifiers(xeno);
         }
-
-        //args.Handled = true;
     }
 
     private void OnXenoActiveInvisibleRemove(Entity<XenoActiveInvisibleComponent> xeno, ref ComponentRemove args)
