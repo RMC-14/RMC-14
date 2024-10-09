@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Mattshark89
-  changes:
-  - message: The Queen's screech no longer affects marines behind opaque walls. It
-      still affects marines behind barricades.
-    type: Tweak
-  id: 308
-  time: '2024-07-08T11:11:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2866
 - author: UnicornOnLSD
   changes:
   - message: Several medical sprites are now BLU, per player demand.
@@ -4633,5 +4625,12 @@
   id: 807
   time: '2024-10-09T02:08:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4328
+- author: Vermidia
+  changes:
+  - message: Fixed boiler gas spreading one less tile than intended.
+    type: Fix
+  id: 808
+  time: '2024-10-09T05:17:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4361
 Name: RMC14
 Order: -1
