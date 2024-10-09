@@ -7,7 +7,6 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Construction;
 
-
 public sealed class SharedXenoConstructReinforceSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -29,10 +28,9 @@ public sealed class SharedXenoConstructReinforceSystem : EntitySystem
     private void ReduceDamage(Entity<XenoConstructReinforceComponent> ent, ref DamageSpecifier damage)
     {
         if (!damage.AnyPositive())
-        {
             return;
-        }
 
+        damage = new DamageSpecifier(damage);
         foreach (var type in damage.DamageDict)
         {
             if (damage.DamageDict[type.Key] <= 0)
