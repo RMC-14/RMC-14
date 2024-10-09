@@ -639,11 +639,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         if (TryComp<VictimInfectedComponent>(burster.Comp.BurstFrom, out var infected) && !infected.IsBursting)
         {
-            var ent = (burster.Comp.BurstFrom, infected);
             infected.IsBursting = true;
-            Dirty(ent);
-
-            TryBurst(ent);
+            Dirty(burster.Comp.BurstFrom, infected);
+            TryBurst((burster.Comp.BurstFrom, infected));
         }
     }
 
@@ -651,9 +649,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     {
         var victim = burstFrom.Owner;
         var comp = burstFrom.Comp;
-
-        if (comp.IsBursting)
-            return;
 
         if (comp.SpawnedLarva == null)
             return;
