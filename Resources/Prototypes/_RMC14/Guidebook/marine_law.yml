@@ -9,6 +9,7 @@
   - RMCMarineLawProcedures
   - RMCMarineLawCrimes
   - RMCMarineLawPrisonerRights
+  - RMCMarineLawAppeals
 
 - type: guideEntry
   parent: RMC
@@ -148,6 +149,12 @@
   priority: 3
 
 # Appeals
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawAppeals
+  name: rmc-guide-entry-marine-law-appeals
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawAppeals.xml"
+  priority: 4
 
 # Special Circumstances
 
