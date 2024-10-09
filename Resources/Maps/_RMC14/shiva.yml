@@ -47767,6 +47767,18 @@ entities:
     - type: Transform
       pos: 206.5,126.5
       parent: 1
+- proto: CMFortuneCookie
+  entities:
+  - uid: 15703
+    components:
+    - type: Transform
+      pos: 118.78472,51.792324
+      parent: 1
+  - uid: 15704
+    components:
+    - type: Transform
+      pos: 118.48785,51.4642
+      parent: 1
 - proto: CMGauze1
   entities:
   - uid: 992
@@ -51144,6 +51156,23 @@ entities:
     components:
     - type: Transform
       pos: 48.5,57.5
+      parent: 1
+- proto: CMSoap
+  entities:
+  - uid: 15700
+    components:
+    - type: Transform
+      pos: 151.47894,138.54362
+      parent: 1
+  - uid: 15701
+    components:
+    - type: Transform
+      pos: 181.59981,153.51343
+      parent: 1
+  - uid: 15702
+    components:
+    - type: Transform
+      pos: 115.34484,58.475582
       parent: 1
 - proto: CMSpawnMobMonkey
   entities:
