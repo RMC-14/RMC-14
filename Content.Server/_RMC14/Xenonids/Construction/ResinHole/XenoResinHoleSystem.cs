@@ -277,6 +277,8 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             if (!_xenoPlasma.HasPlasmaPopup(args.User, acid.Cost, false))
                 return;
 
+            _xenoPlasma.TryRemovePlasma(args.User, acid.Cost);
+
             resinHole.Comp.TrapPrototype = acid.Spray;
             switch (acid.Spray.Id)
             {
