@@ -15,6 +15,7 @@ public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
         base.Initialize();
 
         SubscribeLocalEvent<VictimBurstComponent, AppearanceChangeEvent>(OnVictimBurstAppearanceChanged);
+        SubscribeLocalEvent<VictimInfectedComponent, AppearanceChangeEvent>(OnVictimInfectedAppearanceChanged);
     }
 
     private void OnVictimBurstAppearanceChanged(Entity<VictimBurstComponent> ent, ref AppearanceChangeEvent args)
@@ -36,6 +37,28 @@ public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
         else
         {
             sprite.LayerSetVisible(layer, true);
+        }
+    }
+
+    private void OnVictimInfectedAppearanceChanged(Entity<VictimInfectedComponent> ent, ref AppearanceChangeEvent args)
+    {
+        if (args.Sprite is not { } sprite)
+            return;
+
+        if (!_appearance.TryGetData(ent, ent.Comp.BurstingLayer, out bool bursting, args.Component))
+            return;
+
+        if (!sprite.LayerMapTryGet(ent.Comp.BurstingLayer, out var layer))
+            layer = sprite.LayerMapReserveBlank(ent.Comp.BurstingLayer);
+
+        if (bursting)
+        {
+            sprite.LayerSetSprite(layer, ent.Comp.BurstingSprite);
+            sprite.LayerSetVisible(layer, true);
+        }
+        else
+        {
+            sprite.LayerSetVisible(layer, false);
         }
     }
 

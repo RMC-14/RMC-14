@@ -12,6 +12,7 @@ using Content.Shared.DragDrop;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
 using Content.Shared.Humanoid;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
@@ -34,6 +35,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Parasite;
@@ -87,6 +89,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         SubscribeLocalEvent<VictimInfectedComponent, ComponentRemove>(OnVictimInfectedRemoved);
         SubscribeLocalEvent<VictimInfectedComponent, ExaminedEvent>(OnVictimInfectedExamined);
         SubscribeLocalEvent<VictimInfectedComponent, RejuvenateEvent>(OnVictimInfectedRejuvenate);
+        SubscribeLocalEvent<VictimInfectedComponent, LarvaBurstDoAfterEvent>(OnBurst);
 
         SubscribeLocalEvent<VictimBurstComponent, MapInitEvent>(OnVictimBurstMapInit);
         SubscribeLocalEvent<VictimBurstComponent, UpdateMobStateEvent>(OnVictimUpdateMobState,
@@ -505,7 +508,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 if (_mobState.IsDead(uid) && (HasComp<InfectStopOnDeathComponent>(uid) || _rotting.IsRotten(uid)))
                 {
                     if (infected.SpawnedLarva != null)
-                        Burst((uid, infected));
+                        TryBurst((uid, infected));
                     else
                         RemCompDeferred<VictimInfectedComponent>(uid);
                     continue;
@@ -516,7 +519,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
                 // Stages
                 // Percentage of how far along we out to burst time times the number of stages, truncated. You can't go back a stage once you've reached one
-                int stage = Math.Max((int) ((infected.BurstDelay - (infected.BurstAt - time)) / infected.BurstDelay * infected.FinalStage), infected.CurrentStage);
+                int stage = Math.Max((int)((infected.BurstDelay - (infected.BurstAt - time)) / infected.BurstDelay * infected.FinalStage), infected.CurrentStage);
                 if (stage != infected.CurrentStage)
                 {
                     infected.CurrentStage = stage;
@@ -532,7 +535,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon", ("victim", uid)), uid, Filter.PvsExcept(uid), true, PopupType.MediumCaution);
 
                     var knockdownTime = infected.BaseKnockdownTime * 75;
-                    InfectionShakes(uid, infected, knockdownTime, knockdownTime, false);
+                    InfectionShakes(uid, infected, knockdownTime, infected.JitterTime, false);
                     infected.DidBurstWarning = true;
 
                     continue;
@@ -548,8 +551,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                         var message = Loc.GetString("rmc-xeno-infection-insanepain-" + random);
                         _popup.PopupEntity(message, uid, uid, PopupType.LargeCaution);
 
-                        var knockdownTime = infected.BaseKnockdownTime * 10;
-                        InfectionShakes(uid, infected, knockdownTime, knockdownTime, false);
+                        var knockdownTime = infected.BaseKnockdownTime * 2;
+                        var jitterTime = infected.JitterTime * 0;
+                        InfectionShakes(uid, infected, knockdownTime, jitterTime, false);
                     }
                 }
                 else if (stage >= infected.FinalSymptomsStart)
@@ -606,8 +610,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 continue;
             }
 
-            Burst((uid, infected));
-
+            TryBurst((uid, infected));
         }
     }
 
@@ -629,35 +632,90 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.MediumCaution);
     }
 
-    private void Burst(Entity<VictimInfectedComponent> burstFrom)
+    private void OnTryMove(Entity<BursterComponent> burster, ref MoveInputEvent args)
     {
+        if (!args.HasDirectionalMovement)
+            return;
+
+        if (TryComp<VictimInfectedComponent>(burster.Comp.BurstFrom, out var infected) && !infected.IsBursting)
+            TryBurst((burster.Comp.BurstFrom, infected));
+    }
+
+    private void TryBurst(Entity<VictimInfectedComponent> burstFrom)
+    {
+        var victim = burstFrom.Owner;
+        var comp = burstFrom.Comp;
+
+        if (comp.SpawnedLarva == null)
+            return;
+
+        if (comp.IsBursting)
+            return;
+
+        comp.IsBursting = true;
+        Dirty(victim, comp);
+
+        var spawnedLarva = comp.SpawnedLarva.Value;
+
+        var doAfterEventArgs = new DoAfterArgs(EntityManager, spawnedLarva, comp.BurstDoAfterDelay, new LarvaBurstDoAfterEvent(), victim, target: victim)
+        {
+            NeedHand = false,
+            BreakOnDamage = false,
+            BreakOnMove = false,
+            Hidden = true,
+            BlockDuplicate = true,
+            CancelDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameTarget
+        };
+
+        if (_doAfter.TryStartDoAfter(doAfterEventArgs))
+        {
+            if (_net.IsServer &&
+                TryComp(victim, out InfectableComponent? infectable) &&
+                TryComp(victim, out HumanoidAppearanceComponent? appearance) &&
+                infectable.PreburstSound.TryGetValue(appearance.Sex, out var sound) &&
+                !_mobState.IsIncapacitated(victim))
+            {
+                var filter = Filter.Pvs(victim);
+                _audio.PlayEntity(sound, filter, victim, true);
+            }
+
+            _appearance.SetData(victim, comp.BurstingLayer, true);
+
+            var shakeFilter = Filter.PvsExcept(victim);
+            shakeFilter.RemoveWhereAttachedEntity(HasComp<XenoComponent>); // not visible to xenos
+
+            // Force infection shakes even while dead, bigger popup
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, victim, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, shakeFilter, true, PopupType.LargeCaution);
+            _jitter.DoJitter(victim, comp.JitterTime * 2.5, false);
+
+            var messageLarva = Loc.GetString("rmc-xeno-infection-burst-now-xeno", ("victim", Identity.Entity(victim, EntityManager)));
+            _popup.PopupEntity(messageLarva, spawnedLarva, spawnedLarva, PopupType.MediumCaution);
+        }
+    }
+
+    private void OnBurst(Entity<VictimInfectedComponent> ent, ref LarvaBurstDoAfterEvent args)
+    {
+        _appearance.SetData(ent.Owner, ent.Comp.BurstingLayer, false);
+
         if (_net.IsClient)
             return;
-        RemCompDeferred<VictimInfectedComponent>(burstFrom);
 
-        var coords = _transform.GetMoverCoordinates(burstFrom);
+        var coords = _transform.GetMoverCoordinates(ent);
 
-        if (_container.TryGetContainer(burstFrom, burstFrom.Comp.LarvaContainerId, out var container))
+        if (_container.TryGetContainer(ent, ent.Comp.LarvaContainerId, out var container))
         {
             foreach (var larva in container.ContainedEntities)
                 RemCompDeferred<BursterComponent>(larva);
             _container.EmptyContainer(container, destination: coords);
         }
 
-        Dirty(burstFrom, burstFrom.Comp);
+        Dirty(ent);
+        RemCompDeferred<VictimInfectedComponent>(ent);
+        EnsureComp<VictimBurstComponent>(ent);
 
-        EnsureComp<VictimBurstComponent>(burstFrom);
-
-        _audio.PlayPvs(burstFrom.Comp.BurstSound, burstFrom);
-    }
-
-    private void OnTryMove(Entity<BursterComponent> burster, ref MoveInputEvent args)
-    {
-        if (!args.HasDirectionalMovement)
-            return;
-
-        if (TryComp<VictimInfectedComponent>(burster.Comp.BurstFrom, out var infected))
-            Burst((burster.Comp.BurstFrom, infected));
+        _audio.PlayPvs(ent.Comp.BurstSound, args.User);
     }
 
     /// <summary>
@@ -706,4 +764,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         return true;
     }
+}
+
+[Serializable, NetSerializable]
+public sealed partial class LarvaBurstDoAfterEvent : SimpleDoAfterEvent
+{
 }
