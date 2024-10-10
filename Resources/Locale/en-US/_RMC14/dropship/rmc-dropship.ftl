@@ -39,7 +39,9 @@ rmc-dropship-weapons-cams = CAMS
 rmc-dropship-weapons-cancel = CANCEL
 rmc-dropship-weapons-exit = EXIT
 
-rmc-dropship-weapons-offset-calibration = Offset Calibration
+rmc-dropship-weapons-offset-calibration = Camera
+  Offset
+rmc-dropship-weapons-offset-calibration-does-not-affect-direct-bombardment = Does not affect direct bombardment!
 
 rmc-dropship-weapons-fire = FIRE
 rmc-dropship-weapons-strike = STRIKE
@@ -58,6 +60,10 @@ rmc-dropship-weapons-fire-not-flying = Dropships can only fire fire while in fli
 rmc-dropship-weapons-fire-not-skilled = You don't have the training to fire this weapon!
 rmc-dropship-weapons-fire-no-ammo = {$weapon} has no ammo.
 rmc-dropship-weapons-fire-cooldown = {$weapon} just fired, wait for it to cool down.
+
+rmc-dropship-weapons-point-gun = It has a {$weapon} loaded.
+rmc-dropship-weapons-point-ammo = It has a {$ammo} loaded.
+rmc-dropship-weapons-rounds-left = It has {$current} out of {$max} rounds left.
 
 rmc-dropship-flyby-no-skill = You don't have the skill to perform a flyby.
 

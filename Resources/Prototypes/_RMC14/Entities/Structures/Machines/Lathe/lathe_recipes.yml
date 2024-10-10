@@ -7,6 +7,13 @@
     CMSteel: 67 # 2500
 
 - type: latheRecipe
+  id: CMBucketMop
+  result: CMBucketMop
+  completetime: 4
+  materials:
+    CMSteel: 107 # 4000
+
+- type: latheRecipe
   id: CMFireExtinguisher
   result: CMFireExtinguisher
   completetime: 4

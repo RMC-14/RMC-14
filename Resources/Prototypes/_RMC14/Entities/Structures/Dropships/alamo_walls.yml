@@ -655,6 +655,7 @@
   parent: CMBaseAlamoWall
   id: CMAlamoWall61
   name: port wing weapon attach point
+  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 61
   components:
   - type: Sprite
@@ -706,6 +707,7 @@
   parent: CMBaseAlamoWall
   id: CMAlamoWall65
   name: starboard wing weapon attach point
+  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 65
   components:
   - type: Sprite
@@ -919,6 +921,7 @@
   parent: CMBaseAlamoWall
   id: CMAlamoWall84
   name: port fore weapon attach point
+  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 84
   components:
   - type: Sprite
@@ -940,6 +943,7 @@
   parent: CMAlamoWall84
   id: CMAlamoWall84Flipped
   name: starboard fore weapon attach point
+  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 84, Flipped
   components:
   - type: Sprite
@@ -952,6 +956,7 @@
   parent: CMBaseAlamoWall
   id: CMAlamoWall85
   name: electronic system attach point
+  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 85
   components:
   - type: Sprite

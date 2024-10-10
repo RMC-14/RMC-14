@@ -18,7 +18,8 @@
     size: Small
     sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
   - type: Food
-    trash: RMCTray_empty
+    trash:
+    - RMCTray_empty
 
 - type: entity
   parent: CMMarinePreparedMealBase

@@ -33,8 +33,8 @@
     #  points: 30
     #- id: CMM40HPDPWhitePhosphorusPacketx3
     #  points: 30
-    #- id: CMM40HSDPSmokePacketx3
-    #  points: 15
+      - id: RMCPacketGrenadeSmokeFilled
+        points: 15
     #- id: CMM74AGM-FragAirburstPacketx3
     #  points: 20
     #- id: CMM74AGM-IncendiaryAirburstPacketx3
@@ -59,8 +59,8 @@
         points: 15
     - name: Clothing Items
       entries:
-    #- id: CMScabbardMacheteFull
-    #  points: 6
+      - id: RMCScabbardMacheteSGFilled
+        points: 15
     #- id: CMFuelTankStrapPouch
     #  points: 5
       - id: RMCPouchGeneralLarge
@@ -81,8 +81,8 @@
       entries:
       - id: RMCBinoculars
         points: 5
-    #- id: CMRangeFinder
-    #  points: 10
+      - id: RMCRangefinder
+        points: 10
       - id: RMCLaserDesignator
         points: 15
     - name: Helmet Optics
@@ -95,8 +95,8 @@
       entries:
       - id: CMPamphletJTAC
         points: 15
-    #- id: CMPamphletEngineering
-    #  points: 15
+      - id: CMPamphletEngineer
+        points: 15
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer

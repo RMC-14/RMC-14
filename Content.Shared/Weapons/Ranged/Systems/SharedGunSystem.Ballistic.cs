@@ -1,8 +1,10 @@
+using Content.Shared._RMC14.Stack;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Stacks;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -15,7 +17,8 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 public abstract partial class SharedGunSystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-
+    [Dependency] private readonly SharedRMCStackSystem _rmcStack = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     protected virtual void InitializeBallistic()
     {
@@ -145,13 +148,12 @@ public abstract partial class SharedGunSystem
 
         args.Handled = true;
 
-        TimeSpan fillDelayConverted = TimeSpan.FromSeconds(component.FillDelay);
-
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, fillDelayConverted, new AmmoFillDoAfterEvent(), used: uid, target: args.Target, eventTarget: uid)
+        // Continuous loading
+        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, component.FillDelay, new AmmoFillDoAfterEvent(), used: uid, target: args.Target, eventTarget: uid)
         {
             BreakOnMove = true,
             BreakOnDamage = false,
-            NeedHand = true
+            NeedHand = true,
         });
     }
 
@@ -278,6 +280,20 @@ public abstract partial class SharedGunSystem
 
     private void ManualLoad(EntityUid uid, BallisticAmmoProviderComponent component, EntityUid used, EntityUid user)
     {
+        if (TryComp(used, out StackComponent? stack))
+        {
+            var coordinates = _transform.GetMoverCoordinates(used);
+            var split = _rmcStack.Split((used, stack), 1, coordinates);
+            if (split != null)
+                used = split.Value;
+
+            if (CompOrNull<CartridgeAmmoComponent>(used)?.SoundInsert is { } sound)
+                Audio.PlayPredicted(sound, uid, user);
+
+            if (_netManager.IsClient)
+                return;
+        }
+
         // Reused function moved here.
         component.Entities.Add(used);
         Containers.Insert(used, component.Container);
@@ -435,6 +451,17 @@ public abstract partial class SharedGunSystem
 
         Appearance.SetData(uid, AmmoVisuals.AmmoCount, GetBallisticShots(component), appearance);
         Appearance.SetData(uid, AmmoVisuals.AmmoMax, component.Capacity, appearance);
+    }
+
+    public void SetBallisticUnspawned(Entity<BallisticAmmoProviderComponent> entity, int count)
+    {
+        if (entity.Comp.UnspawnedCount == count)
+            return;
+
+        entity.Comp.UnspawnedCount = count;
+        UpdateBallisticAppearance(entity.Owner, entity.Comp);
+        UpdateAmmoCount(entity.Owner);
+        Dirty(entity);
     }
 }
 

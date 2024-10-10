@@ -200,7 +200,7 @@
     jumpsuit: CMJumpsuitLiaisonField
     back: CMSatchel
     shoes: RMCShoesLaceup
-#    eyes: aviators
+    eyes: RMCGlassesAviators
     id: CMIDCardLiaison
     ears: RMCHeadsetDistressWeYa
 #    belt: /obj/item/storage/belt/gun/m4a3/mod88

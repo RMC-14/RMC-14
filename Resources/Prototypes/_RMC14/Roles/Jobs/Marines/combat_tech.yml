@@ -16,6 +16,9 @@
   - CombatTech
   overwatchSortPriority: 0
   overwatchRoleName: Combat Technicians
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: engi
   special:
   - !type:AddComponentSpecial
     components:

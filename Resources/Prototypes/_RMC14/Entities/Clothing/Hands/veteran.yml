@@ -13,8 +13,6 @@
     armor: 40
     explosionArmor: 20
   - type: Insulated
-  - type: GloveHeatResistance
-    heatResistance: 1400
 
 # SPP
 - type: entity

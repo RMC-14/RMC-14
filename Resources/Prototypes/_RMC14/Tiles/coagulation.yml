@@ -1,0 +1,188 @@
+# Base
+
+- type: tile
+  abstract: true
+  parent: CMFloorSteel
+  id: RMCFloorCoagulationBase
+  name: tiles-rmc-coagulation
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/plating.png
+
+- type: tile
+  parent: RMCFloorCoagulationBase
+  id: RMCFloorCoagulationPlating
+
+# Corners
+
+- type: tile
+  parent: RMCFloorCoagulationBase
+  id: RMCFloorCoagulationCornerSW
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/0_0.png
+
+- type: tile
+  parent: RMCFloorCoagulationBase
+  id: RMCFloorCoagulationCornerNW
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/0_8.png
+
+- type: tile
+  parent: RMCFloorCoagulationBase
+  id: RMCFloorCoagulationCornerSE
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/8_0.png
+
+- type: tile
+  parent: RMCFloorCoagulationBase
+  id: RMCFloorCoagulationCornerNE
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/8_8.png
+
+# South
+
+- type: tile
+  parent: RMCFloorCoagulationBase
+  id: RMCFloorCoagulationSouthBase
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/1_0.png
+
+- type: tile
+  parent: RMCFloorCoagulationSouthBase
+  id: RMCFloorCoagulationSouth1
+
+- type: tile
+  parent: RMCFloorCoagulationSouthBase
+  id: RMCFloorCoagulationSouth2
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/2_0.png
+
+- type: tile
+  parent: RMCFloorCoagulationSouthBase
+  id: RMCFloorCoagulationSouth3
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/3_0.png
+
+- type: tile
+  parent: RMCFloorCoagulationSouthBase
+  id: RMCFloorCoagulationSouth4
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/4_0.png
+
+- type: tile
+  parent: RMCFloorCoagulationSouthBase
+  id: RMCFloorCoagulationSouth5
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/5_0.png
+
+- type: tile
+  parent: RMCFloorCoagulationSouthBase
+  id: RMCFloorCoagulationSouth6
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/6_0.png
+
+- type: tile
+  parent: RMCFloorCoagulationSouthBase
+  id: RMCFloorCoagulationSouth7
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/7_0.png
+
+# West
+
+- type: tile
+  parent: RMCFloorCoagulationBase
+  id: RMCFloorCoagulationWestBase
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/0_1.png
+
+- type: tile
+  parent: RMCFloorCoagulationWestBase
+  id: RMCFloorCoagulationWest1
+
+- type: tile
+  parent: RMCFloorCoagulationWestBase
+  id: RMCFloorCoagulationWest2
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/0_2.png
+
+- type: tile
+  parent: RMCFloorCoagulationWestBase
+  id: RMCFloorCoagulationWest4
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/0_4.png
+
+- type: tile
+  parent: RMCFloorCoagulationWestBase
+  id: RMCFloorCoagulationWest5
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/0_5.png
+
+- type: tile
+  parent: RMCFloorCoagulationWestBase
+  id: RMCFloorCoagulationWest6
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/0_6.png
+
+- type: tile
+  parent: RMCFloorCoagulationWestBase
+  id: RMCFloorCoagulationWest7
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/0_7.png
+
+# North
+
+- type: tile
+  parent: RMCFloorCoagulationBase
+  id: RMCFloorCoagulationNorthBase
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/1_8.png
+
+- type: tile
+  parent: RMCFloorCoagulationNorthBase
+  id: RMCFloorCoagulationNorth1
+
+- type: tile
+  parent: RMCFloorCoagulationNorthBase
+  id: RMCFloorCoagulationNorth2
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/2_8.png
+
+- type: tile
+  parent: RMCFloorCoagulationNorthBase
+  id: RMCFloorCoagulationNorth3
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/3_8.png
+
+- type: tile
+  parent: RMCFloorCoagulationNorthBase
+  id: RMCFloorCoagulationNorth4
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/4_8.png
+
+- type: tile
+  parent: RMCFloorCoagulationNorthBase
+  id: RMCFloorCoagulationNorth5
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/5_8.png
+
+- type: tile
+  parent: RMCFloorCoagulationNorthBase
+  id: RMCFloorCoagulationNorth6
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/6_8.png
+
+- type: tile
+  parent: RMCFloorCoagulationNorthBase
+  id: RMCFloorCoagulationNorth7
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/7_8.png
+
+# East
+
+- type: tile
+  parent: RMCFloorCoagulationBase
+  id: RMCFloorCoagulationEastBase
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/8_1.png
+
+- type: tile
+  parent: RMCFloorCoagulationEastBase
+  id: RMCFloorCoagulationEast1
+
+- type: tile
+  parent: RMCFloorCoagulationEastBase
+  id: RMCFloorCoagulationEast3
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/8_3.png
+
+- type: tile
+  parent: RMCFloorCoagulationEastBase
+  id: RMCFloorCoagulationEast4
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/8_4.png
+
+- type: tile
+  parent: RMCFloorCoagulationEastBase
+  id: RMCFloorCoagulationEast5
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/8_5.png
+
+- type: tile
+  parent: RMCFloorCoagulationEastBase
+  id: RMCFloorCoagulationEast6
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/8_6.png
+
+- type: tile
+  parent: RMCFloorCoagulationEastBase
+  id: RMCFloorCoagulationEast7
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/8_7.png

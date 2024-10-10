@@ -110,15 +110,16 @@ public sealed class DropshipSystem : SharedDropshipSystem
     {
         OnRefreshUI(ent, ref args);
 
-        if (HasComp<RMCPlanetComponent>(args.MapUid))
+        var map = args.MapUid;
+        if (HasComp<RMCPlanetComponent>(map))
         {
             var ev = new DropshipLandedOnPlanetEvent();
             RaiseLocalEvent(ref ev);
         }
 
-        if (HasComp<AlmayerComponent>(args.MapUid) && ent.Comp.Crashed)
+        if (HasComp<AlmayerComponent>(map) && ent.Comp.Crashed)
         {
-            var ev = new DropshipHijackLandedEvent();
+            var ev = new DropshipHijackLandedEvent(map);
             RaiseLocalEvent(ref ev);
         }
     }
@@ -385,6 +386,18 @@ public sealed class DropshipSystem : SharedDropshipSystem
     {
         var ev = new FTLUpdatedEvent();
         RaiseLocalEvent(shuttle, ref ev);
+    }
+
+    public bool AnyHijacked()
+    {
+        var dropships = EntityQueryEnumerator<DropshipComponent>();
+        while (dropships.MoveNext(out var dropship))
+        {
+            if (dropship.Crashed)
+                return true;
+        }
+
+        return false;
     }
 
     public override void Update(float frameTime)

@@ -16,6 +16,9 @@
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - CMCE
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: engi
   special:
   - !type:AddComponentSpecial
     components:
@@ -33,7 +36,6 @@
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
     - type: MarineOrders
-  hidden: true # TODO RMC14
 
 - type: startingGear
   id: CMGearChiefEngineer

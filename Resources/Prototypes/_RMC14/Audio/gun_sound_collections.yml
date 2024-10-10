@@ -31,3 +31,8 @@
   - /Audio/_RMC14/Weapons/Guns/Reload/shell_load2.ogg
   - /Audio/_RMC14/Weapons/Guns/Reload/shell_load3.ogg
   - /Audio/_RMC14/Weapons/Guns/Reload/shell_load4.ogg
+
+- type: soundCollection
+  id: CMAR10Shoot
+  files:
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ar10.ogg

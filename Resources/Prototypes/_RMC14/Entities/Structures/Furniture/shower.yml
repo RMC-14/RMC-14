@@ -1,0 +1,43 @@
+- type: entity
+  id: CMShower
+  name: shower
+  suffix: Empty
+  description: The HS-451. Installed in the 2050s by the WeYa Hygiene Division.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/shower.rsi
+    layers:
+    - state: shower
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Appearance  
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 40
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: InteractionPopup
+    interactDelay: 3
+    successChance: 1
+    interactSuccessSound:
+      path: /Audio/Ambience/Objects/drain.ogg
+      params:
+        variation: 0.250
+        volume: -5

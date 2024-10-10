@@ -10,7 +10,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/dropship_attachments.rsi
   - type: Physics
-    bodyType: Dynamic
+    bodyType: Static
   - type: Fixtures
     fixtures:
       fix1:

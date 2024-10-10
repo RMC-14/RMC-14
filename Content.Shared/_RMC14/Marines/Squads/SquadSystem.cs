@@ -58,6 +58,12 @@ public sealed class SquadSystem : EntitySystem
 
     private void OnSquadArmorGetVisuals(Entity<SquadArmorComponent> ent, ref GetEquipmentVisualsEvent args)
     {
+        if (_inventory.TryGetSlot(args.Equipee, args.Slot, out var slot) &&
+            (slot.SlotFlags & ent.Comp.Slot) == 0)
+        {
+            return;
+        }
+
         if (!_squadMemberQuery.TryComp(args.Equipee, out var member) ||
             !_squadArmorWearerQuery.TryComp(args.Equipee, out var wearer))
         {
@@ -228,7 +234,20 @@ public sealed class SquadSystem : EntitySystem
 
         var member = EnsureComp<SquadMemberComponent>(marine);
         if (_squadTeamQuery.TryComp(member.Squad, out var oldSquad))
+        {
             oldSquad.Members.Remove(marine);
+
+            if (_mind.TryGetMind(marine, out var mindId, out _) &&
+                _job.MindTryGetJobId(mindId, out var currentJob) &&
+                currentJob != null)
+            {
+                if (oldSquad.Roles.TryGetValue(currentJob.Value, out var oldJobs) &&
+                    oldJobs > 0)
+                {
+                    oldSquad.Roles[currentJob.Value] = oldJobs - 1;
+                }
+            }
+        }
 
         member.Squad = team;
         member.Background = team.Comp.Background;
@@ -251,7 +270,13 @@ public sealed class SquadSystem : EntitySystem
         Dirty(marine, grant);
 
         team.Comp.Members.Add(marine);
-        var ev = new SquadMemberUpdatedEvent();
+        if (job != null)
+        {
+            team.Comp.Roles.TryGetValue(job.Value, out var roles);
+            team.Comp.Roles[job.Value] = roles + 1;
+        }
+
+        var ev = new SquadMemberUpdatedEvent(team);
         RaiseLocalEvent(marine, ref ev);
     }
 

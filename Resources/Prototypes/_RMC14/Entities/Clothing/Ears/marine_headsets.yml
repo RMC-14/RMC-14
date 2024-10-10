@@ -1,6 +1,8 @@
 - type: entity
   parent: RMCHeadsetShip
   id: RMCHeadsetMarine
+  components:
+  - type: GrantSquadLeaderTracker
 
 # Alpha
 - type: entity

@@ -7,7 +7,6 @@
 
 - type: entity
   abstract: true
-  parent: MarkerBase
   id: RMCAreaBase
   name: area
   suffix: Area
@@ -20,12 +19,16 @@
     anchored: true
   - type: Sprite
     sprite: _RMC14/Areas/areas.rsi
-    state: blank
+    state: unknown
+  - type: Marker
+  - type: Clickable
+  - type: InteractionOutline
   - type: Area
     CAS: true
     fulton: true
     lasing: true
-    mortar: true
+    mortarPlacement: true
+    mortarFire: true
     medevac: true
     OB: true
     supplyDrop: true

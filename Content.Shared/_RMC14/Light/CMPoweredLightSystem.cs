@@ -16,6 +16,6 @@ public sealed class CMPoweredLightSystem : EntitySystem
     {
         ev.Cancelled = true;
         if (!HasComp<XenoComponent>(ev.User))
-            _popup.PopupEntity(Loc.GetString("cm-light-failed"), ev.Light, ev.User);
+            _popup.PopupClient(Loc.GetString("cm-light-failed"), ev.Light, ev.User);
     }
 }

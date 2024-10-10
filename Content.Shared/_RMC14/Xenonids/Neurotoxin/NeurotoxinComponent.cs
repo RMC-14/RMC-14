@@ -30,7 +30,7 @@ public sealed partial class NeurotoxinComponent : Component
     public TimeSpan TimeBetweenMessages = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan AccentTime = TimeSpan.FromSeconds(10);
+    public TimeSpan AccentTime = TimeSpan.FromSeconds(20);
 
     [DataField, AutoNetworkedField]
     public TimeSpan JitterTime = TimeSpan.FromSeconds(15);
@@ -42,7 +42,7 @@ public sealed partial class NeurotoxinComponent : Component
     public TimeSpan LastStumbleTime;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan BlindTime = TimeSpan.FromSeconds(3);
+    public TimeSpan BlindTime = TimeSpan.FromSeconds(6);
 
     [DataField, AutoNetworkedField]
     public TimeSpan MinimumDelayBetweenEvents = TimeSpan.FromSeconds(1);
@@ -60,7 +60,7 @@ public sealed partial class NeurotoxinComponent : Component
     public DamageSpecifier CoughDamage = new();
 
     [DataField, AutoNetworkedField]
-    public TimeSpan DazeLength = TimeSpan.FromSeconds(1);
+    public TimeSpan DazeLength = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
     public ProtoId<EmotePrototype> CoughId = "Cough";
@@ -69,5 +69,5 @@ public sealed partial class NeurotoxinComponent : Component
     public ProtoId<EmotePrototype> PainId = "Scream"; // TODO custom pain emote
 
     [DataField, AutoNetworkedField]
-    public TimeSpan BloodCoughDuration = TimeSpan.FromSeconds(1);
+    public TimeSpan BloodCoughDuration = TimeSpan.FromSeconds(2);
 }

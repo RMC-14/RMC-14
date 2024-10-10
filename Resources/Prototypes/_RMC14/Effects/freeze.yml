@@ -3,7 +3,7 @@
   noSpawn: true
   components:
   - type: TimedDespawn
-    lifetime: 2
+    lifetime: 4
   - type: Sprite
     sprite: _RMC14/Effects/xeno_freeze.rsi
     noRot: true

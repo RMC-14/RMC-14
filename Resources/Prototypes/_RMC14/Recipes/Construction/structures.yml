@@ -168,6 +168,7 @@
     state: metal
   conditions:
     - !type:TileNotBlocked
+    - !type:TileBarricadeClear
 
 - type: construction
   parent: RMC
@@ -186,6 +187,7 @@
     state: plasteel
   conditions:
     - !type:TileNotBlocked
+    - !type:TileBarricadeClear
 
 - type: construction
   parent: RMC
@@ -204,6 +206,7 @@
     state: wooden
   conditions:
     - !type:TileNotBlocked
+    - !type:TileBarricadeClear
 
 - type: construction
   parent: RMC
@@ -222,6 +225,7 @@
     state: turnstile
   conditions:
     - !type:TileNotBlocked
+    - !type:TileBarricadeClear
 
 - type: construction
   parent: RMC
@@ -240,6 +244,7 @@
     state: turnstile_med
   conditions:
     - !type:TileNotBlocked
+    - !type:TileBarricadeClear
 
 - type: construction
   parent: RMC
@@ -258,6 +263,7 @@
     state: handrail_a_0
   conditions:
     - !type:TileNotBlocked
+    - !type:TileBarricadeClear
 
 - type: construction
   parent: RMC
@@ -276,6 +282,7 @@
     state: folding_metal
   conditions:
     - !type:TileNotBlocked
+    - !type:TileBarricadeClear
 
 - type: construction
   parent: RMC
@@ -294,6 +301,7 @@
     state: folding_plasteel
   conditions:
     - !type:TileNotBlocked
+    - !type:TileBarricadeClear
 
 #lighting
 - type: construction

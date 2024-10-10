@@ -1,6 +1,11 @@
-﻿using Content.Shared._RMC14.Xenonids.Plasma;
+﻿using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Weapons.Ranged;
+using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
+using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -10,6 +15,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile;
 
@@ -17,30 +23,25 @@ public sealed class XenoProjectileSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
-    private EntityQuery<XenoComponent> _xenoQuery;
+    private EntityQuery<ProjectileComponent> _projectileQuery;
 
     public override void Initialize()
     {
-        _xenoQuery = GetEntityQuery<XenoComponent>();
+        _projectileQuery = GetEntityQuery<ProjectileComponent>();
 
         SubscribeLocalEvent<XenoProjectileComponent, PreventCollideEvent>(OnPreventCollide);
         SubscribeLocalEvent<XenoProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
-    }
-
-    private void OnProjectileHit(Entity<XenoProjectileComponent> ent, ref ProjectileHitEvent args)
-    {
-        if (TryComp(args.Target, out XenoComponent? targetXeno) &&
-            targetXeno.Hive == ent.Comp.Hive)
-        {
-            args.Handled = true;
-            QueueDel(ent);
-        }
+        SubscribeLocalEvent<XenoProjectileComponent, CMClusterSpawnedEvent>(OnClusterSpawned);
     }
 
     private void OnPreventCollide(Entity<XenoProjectileComponent> ent, ref PreventCollideEvent args)
@@ -48,22 +49,39 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (args.Cancelled || ent.Comp.DeleteOnFriendlyXeno)
             return;
 
-        if (_xenoQuery.TryComp(args.OtherEntity, out var xeno) &&
-            xeno.Hive == ent.Comp.Hive)
-        {
+        if (_hive.FromSameHive(ent.Owner, args.OtherEntity))
             args.Cancelled = true;
+    }
+
+    private void OnProjectileHit(Entity<XenoProjectileComponent> ent, ref ProjectileHitEvent args)
+    {
+        if (_hive.FromSameHive(ent.Owner, args.Target))
+        {
+            args.Handled = true;
+
+            if (_net.IsServer || IsClientSide(ent))
+                QueueDel(ent);
+
+            return;
+        }
+
+        if (_projectileQuery.TryComp(ent, out var projectile) &&
+            projectile.Shooter is { } shooter)
+        {
+            var ev = new XenoProjectileHitUserEvent(args.Target);
+            RaiseLocalEvent(shooter, ref ev);
         }
     }
 
-    public bool SameHive(Entity<XenoProjectileComponent?> projectile, Entity<XenoComponent?> xeno)
+    private void OnClusterSpawned(Entity<XenoProjectileComponent> ent, ref CMClusterSpawnedEvent args)
     {
-        if (!Resolve(projectile, ref projectile.Comp, false) ||
-            !Resolve(xeno, ref xeno.Comp, false))
-        {
-            return false;
-        }
+        if (_hive.GetHive(ent.Owner) is not {} hive)
+            return;
 
-        return projectile.Comp.Hive == xeno.Comp.Hive;
+        foreach (var spawned in args.Spawned)
+        {
+            _hive.SetHive(spawned, hive);
+        }
     }
 
     public bool TryShoot(
@@ -74,13 +92,15 @@ public sealed class XenoProjectileSystem : EntitySystem
         SoundSpecifier? sound,
         int shots,
         Angle deviation,
-        float speed)
+        float speed,
+        float? fixedDistance = null,
+        EntityUid? target = null)
     {
         var origin = _transform.GetMapCoordinates(xeno);
-        var target = _transform.ToMapCoordinates(targetCoords);
+        var targetMap = _transform.ToMapCoordinates(targetCoords);
 
-        if (origin.MapId != target.MapId ||
-            origin.Position == target.Position)
+        if (origin.MapId != targetMap.MapId ||
+            origin.Position == targetMap.Position)
         {
             return false;
         }
@@ -92,14 +112,14 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (_net.IsClient)
             return true;
 
-        var originalDiff = target.Position - origin.Position;
+        var originalDiff = targetMap.Position - origin.Position;
         for (var i = 0; i < shots; i++)
         {
-            var projTarget = target;
+            var projTarget = targetMap;
             if (deviation != Angle.Zero)
             {
                 var angle = _random.NextAngle(-deviation / 2, deviation / 2);
-                projTarget = new MapCoordinates(origin.Position + angle.RotateVec(originalDiff), target.MapId);
+                projTarget = new MapCoordinates(origin.Position + angle.RotateVec(originalDiff), targetMap.MapId);
             }
 
             var diff = projTarget.Position - origin.Position;
@@ -109,26 +129,80 @@ public sealed class XenoProjectileSystem : EntitySystem
 
             _gun.ShootProjectile(projectile, diff, xenoVelocity, xeno, xeno, speed);
 
-            var comp = EnsureComp<XenoProjectileComponent>(projectile);
-            if (TryComp(xeno, out XenoComponent? xenoComp))
+            // let hive member logic apply
+            EnsureComp<XenoProjectileComponent>(projectile);
+
+            _hive.SetSameHive(xeno, projectile);
+
+            if (fixedDistance != null)
             {
-                comp.Hive = xenoComp.Hive;
-                Dirty(projectile, comp);
+                var fixedDistanceComp = EnsureComp<ProjectileFixedDistanceComponent>(projectile);
+                fixedDistanceComp.FlyEndTime = _timing.CurTime + TimeSpan.FromSeconds(fixedDistance.Value / speed);
+                Dirty(projectile, fixedDistanceComp);
+            }
+
+            if (target != null)
+            {
+                var targeted = EnsureComp<TargetedProjectileComponent>(projectile);
+                targeted.Target = target.Value;
+                Dirty(projectile, targeted);
             }
         }
 
         return true;
     }
 
-    public void SetSameHive(Entity<XenoProjectileComponent?> projectile, Entity<XenoComponent?> xeno)
+    public bool TryShootAt(
+        EntityUid xeno,
+        EntityUid? target,
+        EntityCoordinates? targetCoords,
+        FixedPoint2 plasma,
+        EntProtoId projectileId,
+        SoundSpecifier? sound,
+        int shots,
+        Angle deviation,
+        float speed,
+        float? fixedDistance = null)
     {
-        if (!Resolve(projectile, ref projectile.Comp, false) ||
-            !Resolve(xeno, ref xeno.Comp, false))
+        if (target is { Valid: true })
         {
-            return;
+            if (_mobState.IsDead(target.Value))
+            {
+                targetCoords = _transform.GetMoverCoordinates(target.Value);
+            }
+            else
+            {
+                return TryShoot(
+                    xeno,
+                    _transform.GetMoverCoordinates(target.Value),
+                    plasma,
+                    projectileId,
+                    sound,
+                    shots,
+                    deviation,
+                    speed,
+                    fixedDistance,
+                    target
+                );
+            }
         }
 
-        projectile.Comp.Hive = xeno.Comp.Hive;
-        Dirty(projectile);
+        if (targetCoords != null && targetCoords.Value.IsValid(EntityManager))
+        {
+            return TryShoot(
+                xeno,
+                targetCoords.Value,
+                plasma,
+                projectileId,
+                sound,
+                shots,
+                deviation,
+                speed,
+                fixedDistance,
+                target
+            );
+        }
+
+        return false;
     }
 }
