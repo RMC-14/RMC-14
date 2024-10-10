@@ -35,24 +35,20 @@ public sealed class XenoInvisibilitySystem : EntitySystem
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
 
-        if (TryComp<XenoActiveInvisibleComponent>(xeno, out var invis)){
-            RemCompDeferred<XenoActiveInvisibleComponent>(xeno);
-            OnRemoveInvisibility((xeno, invis));
-
-            if (!invis.DidPopup)
-            {
-                _popup.PopupClient(Loc.GetString("cm-xeno-invisibility-expire"), xeno, xeno, PopupType.SmallCaution);
-                invis.DidPopup = true;
-                Dirty(xeno, invis);
-            }
+        if (TryComp<XenoActiveInvisibleComponent>(xeno, out var invis))
+        {
+            var refundedCooldown = GetRefundedCooldown(xeno, invis, xeno.Comp.ManualRefundMultiplier);
+            RemoveInvisibility((xeno, invis), refundedCooldown);
         }
         else
         {
             var active = EnsureComp<XenoActiveInvisibleComponent>(xeno);
             active.ExpiresAt = _timing.CurTime + xeno.Comp.Duration;
-            active.Cooldown = xeno.Comp.Cooldown;
+            active.FullCooldown = xeno.Comp.FullCooldown;
             active.SpeedMultiplier = xeno.Comp.SpeedMultiplier; 
 
+            //Half a second cooldown to prevent double clicks
+            StartCooldown((xeno, active), xeno.Comp.ToggleLockoutTime, true);
             _movementSpeed.RefreshMovementSpeedModifiers(xeno);
         }
     }
@@ -73,17 +69,26 @@ public sealed class XenoInvisibilitySystem : EntitySystem
             if (!_xeno.CanAbilityAttackTarget(xeno, entity))
                 return;
         
-            RemCompDeferred<XenoActiveInvisibleComponent>(xeno);
-            OnRemoveInvisibility(xeno);
-
+            RemoveInvisibility(xeno, xeno.Comp.FullCooldown);
             break;
         }
     }
 
+    private void OnXenoDevourDoAfterAttempt(Entity<XenoActiveInvisibleComponent> xeno, ref DoAfterAttemptEvent<XenoDevourDoAfterEvent> args)
+    {
+        if(!TryComp<XenoTurnInvisibleComponent>(xeno, out var turnInvis))
+        {
+            RemoveInvisibility(xeno, xeno.Comp.FullCooldown);
+            return;
+        }
+
+        var devourCooldown = GetRefundedCooldown((xeno, turnInvis), xeno.Comp, turnInvis.RevealedRefundMultiplier);
+        RemoveInvisibility(xeno, devourCooldown);
+    }
+
     private void OnXenoActiveInvisibleLeapHit(Entity<XenoActiveInvisibleComponent> xeno, ref XenoLeapHitEvent args)
     {
-        RemCompDeferred<XenoActiveInvisibleComponent>(xeno);
-        OnRemoveInvisibility(xeno);
+        RemoveInvisibility(xeno, xeno.Comp.FullCooldown);
     }
 
     private void OnXenoActiveInvisibleRefreshSpeed(Entity<XenoActiveInvisibleComponent> xeno, ref RefreshMovementSpeedModifiersEvent args)
@@ -92,23 +97,38 @@ public sealed class XenoInvisibilitySystem : EntitySystem
         args.ModifySpeed(multiplier, multiplier);
     }
 
-    private void OnXenoDevourDoAfterAttempt(Entity<XenoActiveInvisibleComponent> xeno, ref DoAfterAttemptEvent<XenoDevourDoAfterEvent> args)
+    private TimeSpan GetRefundedCooldown(Entity<XenoTurnInvisibleComponent> xeno, XenoActiveInvisibleComponent activeInvis, float refundMultiplier)
     {
-        RemCompDeferred<XenoActiveInvisibleComponent>(xeno);
-        OnRemoveInvisibility(xeno);
+        var timeRemaining = (activeInvis.ExpiresAt - _timing.CurTime) / xeno.Comp.Duration;
+        var refundedCooldown = xeno.Comp.FullCooldown - timeRemaining * refundMultiplier * xeno.Comp.FullCooldown;
+
+        return refundedCooldown;
     }
 
-    private void OnRemoveInvisibility(Entity<XenoActiveInvisibleComponent> xeno)
+    private void StartCooldown(Entity<XenoActiveInvisibleComponent> xeno, TimeSpan cooldownTime, bool toggledStatus)
     {
         foreach (var (actionId, actionComp) in _actions.GetActions(xeno))
         {
             if (actionComp.BaseEvent is XenoTurnInvisibleActionEvent)
             {
-                _actions.SetCooldown(actionId, xeno.Comp.Cooldown);
+                _actions.SetCooldown(actionId, cooldownTime);
+                _actions.SetToggled(actionId, toggledStatus);
             }
         }
+    }
 
+    private void RemoveInvisibility(Entity<XenoActiveInvisibleComponent> xeno, TimeSpan cooldownTime)
+    {
+        RemCompDeferred<XenoActiveInvisibleComponent>(xeno);
+        StartCooldown(xeno, cooldownTime, false);
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);
+
+        if (!xeno.Comp.DidPopup)
+        {
+            _popup.PopupClient(Loc.GetString("cm-xeno-invisibility-expire"), xeno, xeno, PopupType.SmallCaution);
+            xeno.Comp.DidPopup = true;
+            Dirty(xeno);
+        }
     }
 
     public override void Update(float frameTime)
@@ -120,15 +140,7 @@ public sealed class XenoInvisibilitySystem : EntitySystem
             if (active.ExpiresAt > time)
                 continue;
 
-            RemCompDeferred<XenoActiveInvisibleComponent>(uid);
-            OnRemoveInvisibility((uid, active));
-
-            if (!active.DidPopup)
-            {
-                _popup.PopupClient(Loc.GetString("cm-xeno-invisibility-expire"), uid, uid, PopupType.SmallCaution);
-                active.DidPopup = true;
-                Dirty(uid, active);
-            }
+            RemoveInvisibility((uid, active), active.FullCooldown);
         }
     }
 }
