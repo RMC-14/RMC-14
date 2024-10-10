@@ -1,29 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed the lifesaver bag's storage UI being extremely long, it is now
-      split into 3 rows instead. Same storage space as before.
-    type: Fix
-  id: 314
-  time: '2024-07-08T22:05:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2912
-- author: DrSmugleaf
-  changes:
-  - message: Fixed a bug where the health bar overlay for xenos would sometimes momentarily
-      disappear.
-    type: Fix
-  id: 315
-  time: '2024-07-08T22:05:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2911
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenos not being able to corrode folding barricades.
-    type: Fix
-  id: 316
-  time: '2024-07-08T22:05:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2913
-- author: DrSmugleaf
-  changes:
   - message: Xenos can now see non-xenos hidden in lockers after a hijack.
     type: Tweak
   id: 317
@@ -4639,5 +4616,27 @@
   id: 813
   time: '2024-10-09T22:14:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4367
+- author: FungiFellow
+  changes:
+  - message: Added the MOU53 Shotgun & the Double Barrel
+    type: Add
+  id: 814
+  time: '2024-10-10T01:00:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4141
+- author: Vermidia
+  changes:
+  - message: Fix shields blocking more damage on break than they should
+    type: Fix
+  id: 815
+  time: '2024-10-10T01:01:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4389
+- author: DrSmugleaf
+  changes:
+  - message: Fixed receiving acid damage resulting in examine test that said you have
+      cold and shock burns.
+    type: Fix
+  id: 816
+  time: '2024-10-10T01:02:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4390
 Name: RMC14
 Order: -1

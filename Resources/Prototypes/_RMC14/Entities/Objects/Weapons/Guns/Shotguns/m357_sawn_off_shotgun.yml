@@ -1,0 +1,46 @@
+﻿- type: entity
+  parent: [ RMCBaseBreechloader, RMCBaseAttachableHolder ]
+  name: Sawn-Off M357 Rival
+  id: WeaponShotgunM357Sawn
+  description: A double barrel shotgun produced by Aegis. Archaic, sturdy, affordable. It has been artificially shortened to reduce range but increase damage and spread.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/dbsawnoff.rsi
+  - type: Item
+    size: Normal
+  - type: GunDamageModifier
+    multiplier: 0.80
+  - type: RMCExtraProjectilesDamageMods
+    damageMultiplier: 1.5
+  - type: RMCWeaponDamageFalloff
+    falloffMultiplier: 2 # Adjust as needed
+  - type: RMCSelectiveFire
+    recoilWielded: 3
+    recoilUnwielded: 5
+    scatterWielded: 10
+    scatterUnwielded: 20
+    baseFireRate: 2
+    burstScatterMult: 1
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentDoubleBarrelShotgunStock
+        whitelist:
+          tags:
+          - RMCAttachmentDoubleBarrelShotgunStock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentGyroscopicStabilizer
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: -0.025, 0.09
+      rmc-aslot-stock: -0.55, -0.05
+      rmc-aslot-underbarrel: 0.25, -0.31
