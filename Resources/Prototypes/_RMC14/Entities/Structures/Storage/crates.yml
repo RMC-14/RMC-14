@@ -44,7 +44,6 @@
     isPlaceable: false
   - type: Damageable
     damageContainer: StructuralInorganic
-    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
     - trigger:
