@@ -16,32 +16,32 @@ public sealed class RMCEyeProtectionSystem : SharedRMCEyeProtectionSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RMCSightRestrictionComponent, ComponentInit>(OnEyeProtectionInit);
-        SubscribeLocalEvent<RMCSightRestrictionComponent, ComponentShutdown>(OnEyeProtectionShutdown);
+        SubscribeLocalEvent<SightRestrictionComponent, ComponentInit>(OnEyeProtectionInit);
+        SubscribeLocalEvent<SightRestrictionComponent, ComponentShutdown>(OnEyeProtectionShutdown);
 
-        SubscribeLocalEvent<RMCSightRestrictionComponent, LocalPlayerAttachedEvent>(OnEyeProtectionAttached);
-        SubscribeLocalEvent<RMCSightRestrictionComponent, LocalPlayerDetachedEvent>(OnEyeProtectionDetached);
+        SubscribeLocalEvent<SightRestrictionComponent, LocalPlayerAttachedEvent>(OnEyeProtectionAttached);
+        SubscribeLocalEvent<SightRestrictionComponent, LocalPlayerDetachedEvent>(OnEyeProtectionDetached);
 
         _overlay = new();
     }
 
-    private void OnEyeProtectionAttached(EntityUid uid, RMCSightRestrictionComponent component,  LocalPlayerAttachedEvent args)
+    private void OnEyeProtectionAttached(EntityUid uid, SightRestrictionComponent component,  LocalPlayerAttachedEvent args)
     {
         _overlayManager.AddOverlay(_overlay);
     }
 
-    private void OnEyeProtectionDetached(EntityUid uid, RMCSightRestrictionComponent component, LocalPlayerDetachedEvent args)
+    private void OnEyeProtectionDetached(EntityUid uid, SightRestrictionComponent component, LocalPlayerDetachedEvent args)
     {
         _overlayManager.RemoveOverlay(_overlay);
     }
 
-    private void OnEyeProtectionInit(EntityUid uid, RMCSightRestrictionComponent component, ComponentInit args)
+    private void OnEyeProtectionInit(EntityUid uid, SightRestrictionComponent component, ComponentInit args)
     {
         if (_player.LocalEntity == uid)
             _overlayManager.AddOverlay(_overlay);
     }
 
-    private void OnEyeProtectionShutdown(EntityUid uid, RMCSightRestrictionComponent component, ComponentShutdown args)
+    private void OnEyeProtectionShutdown(EntityUid uid, SightRestrictionComponent component, ComponentShutdown args)
     {
         if (_player.LocalEntity == uid)
         {

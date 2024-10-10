@@ -44,7 +44,7 @@ public sealed class SightRestrictionOverlay : Overlay
         if (args.Viewport.Eye != eyeComp.Eye)
             return;
 
-        if (!_entityManager.TryGetComponent<RMCSightRestrictionComponent>(playerEntity, out var sightRestrict))
+        if (!_entityManager.TryGetComponent<SightRestrictionComponent>(playerEntity, out var sightRestrict))
             return;
 
         var handle = args.WorldHandle;

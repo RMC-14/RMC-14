@@ -11,22 +11,6 @@ namespace Content.Shared._RMC14.EyeProtection;
 [Access(typeof(SharedRMCEyeProtectionSystem))]
 public sealed partial class RMCEyeProtectionItemComponent : Component
 {
-    /// <summary>
-    /// How many seconds to subtract from the status effect. If it's greater than the source
-    /// of blindness, do not blind.
-    /// </summary>
-    [DataField("protectionTime")]
-    public TimeSpan ProtectionTime = TimeSpan.FromSeconds(10);
-
-    /// <summary>
-    ///  Action ID for toggling welding protection
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public EntProtoId ActionId = "RMCActionToggleEyeProtection";
-
-    [DataField, AutoNetworkedField]
-    public EntityUid? Action;
-
     [DataField, AutoNetworkedField]
     public EntityUid? User;
 

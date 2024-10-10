@@ -188,11 +188,11 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
   - type: ToggleClothing
     action: RMCActionToggleEyeProtection
+  - type: ItemToggle
   - type: ComponentToggler
     components:
     - type: EyeProtection
-  - type: RMCEyeProtectionItem
-    raisedEquippedPrefix: up
+    - type: SightRestrictionItem
   - type: GenericVisualizer
     visuals:
       enum.RMCEyeProtectionItemVisuals.Active:

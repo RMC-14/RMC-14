@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.SightRestriction;
 using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Content.Shared.Clothing.Components;
@@ -34,8 +35,9 @@ namespace Content.Shared._RMC14.EyeProtection
         {
             base.Initialize();
 
-            SubscribeLocalEvent<RMCEyeProtectionItemComponent, ToggleActionEvent>(OnEyeProtectionItemToggle);
+
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, ToggleClothingCheckEvent>(OnEyeProtectionItemToggleCheck);
+            SubscribeLocalEvent<RMCEyeProtectionItemComponent, ToggleActionEvent>(OnEyeProtectionItemToggle);
 
 
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, GotEquippedEvent>(OnEyeProtectionItemGotEquipped);
@@ -45,139 +47,114 @@ namespace Content.Shared._RMC14.EyeProtection
             SubscribeLocalEvent<RMCEyeProtectionItemComponent, EntityTerminatingEvent>(OnEyeProtectionItemTerminating);
         }
 
-        private void OnEyeProtectionItemToggle(Entity<RMCEyeProtectionItemComponent> ent, ref ToggleActionEvent args)
+        private void OnEyeProtectionItemToggleCheck(Entity<RMCEyeProtectionItemComponent> item, ref ToggleClothingCheckEvent args)
+        {
+            // Get containing slot and check if item in proper slot
+            if (!_inventory.TryGetContainingSlot((item.Owner, null, null), out var slotDef) ||
+                slotDef.SlotFlags != item.Comp.Slots)
+                args.Cancelled = true;
+        }
+
+        private void OnEyeProtectionItemToggle(Entity<RMCEyeProtectionItemComponent> item, ref ToggleActionEvent args)
         {
             if (args.Handled)
                 return;
 
             args.Handled = true;
-            ToggleEyeProtectionItem(ent, args.Performer);
+            ToggleEyeProtectionItem(item, args.Performer);
         }
 
-        private void OnEyeProtectionItemGotEquipped(Entity<RMCEyeProtectionItemComponent> ent, ref GotEquippedEvent args)
+        private void UpdateEquippedSprite(Entity<RMCEyeProtectionItemComponent> item)
         {
-            // Item not in a position for protecting eyes
-            if (ent.Comp.Slots != args.SlotFlags)
+            if (!TryComp<ClothingComponent>(item.Owner, out var clothing))
                 return;
 
-            if (!TryComp<ClothingComponent>(ent.Owner, out var clothingComp))
+            if (item.Comp.RaisedEquippedPrefix is not { } prefix)
                 return;
 
-            // Display correct sprite, if applicable
-            if (ent.Comp.RaisedEquippedPrefix != null)
-                _clothingSystem.SetEquippedPrefix(ent.Owner, ent.Comp.RaisedEquippedPrefix, clothingComp);
+            // Update sprite
+            _clothingSystem.SetEquippedPrefix(item.Owner, item.Comp.Toggled ? prefix : null, clothing);
         }
 
-        private void OnEyeProtectionItemGotUnequipped(Entity<RMCEyeProtectionItemComponent> ent, ref GotUnequippedEvent args)
+        private void EquippedPopup(Entity<RMCEyeProtectionItemComponent> item)
         {
-            // Item not in a position for protecting eyes
-            if (ent.Comp.Slots != args.SlotFlags)
+            if (!item.Comp.Toggleable)
                 return;
 
-            DisableEyeProtectionItem(ent, args.Equipee);
+            string msg;
+            if (item.Comp.PopupName is not { } popup)
+            {
+                msg = Loc.GetString(item.Comp.Toggled
+                    ? "rmc-weld-protection-down"
+                    : "rmc-weld-protection-up",
+                    ("protection",  item.Owner));
+            }
+            else
+            {
+                msg = Loc.GetString(item.Comp.Toggled
+                    ? "rmc-weld-protection-down"
+                    : "rmc-weld-protection-up",
+                    ("protection",  popup));
+            }
+
+            _popup.PopupClient(msg, item.Owner, item.Owner);
         }
 
-        private void OnEyeProtectionItemActionRemoved(Entity<RMCEyeProtectionItemComponent> ent, ref ActionRemovedEvent args)
+        private void OnEyeProtectionItemGotEquipped(Entity<RMCEyeProtectionItemComponent> item, ref GotEquippedEvent args)
         {
-            DisableEyeProtectionItem(ent, ent.Comp.User);
+            if (item.Comp.Slots != args.SlotFlags)
+                return;
+
+            UpdateEquippedSprite(item);
         }
 
-        private void OnEyeProtectionItemRemove(Entity<RMCEyeProtectionItemComponent> ent, ref ComponentRemove args)
+        private void OnEyeProtectionItemGotUnequipped(Entity<RMCEyeProtectionItemComponent> item, ref GotUnequippedEvent args)
         {
-            DisableEyeProtectionItem(ent, ent.Comp.User);
+            if (item.Comp.Slots != args.SlotFlags)
+                return;
+
+            DisableEyeProtectionItem(item, args.Equipee);
         }
 
-        private void OnEyeProtectionItemTerminating(Entity<RMCEyeProtectionItemComponent> ent, ref EntityTerminatingEvent args)
+        private void OnEyeProtectionItemActionRemoved(Entity<RMCEyeProtectionItemComponent> item, ref ActionRemovedEvent args)
         {
-            DisableEyeProtectionItem(ent, ent.Comp.User);
+            DisableEyeProtectionItem(item, item.Comp.User);
+        }
+
+        private void OnEyeProtectionItemRemove(Entity<RMCEyeProtectionItemComponent> item, ref ComponentRemove args)
+        {
+            DisableEyeProtectionItem(item, item.Comp.User);
+        }
+
+        private void OnEyeProtectionItemTerminating(Entity<RMCEyeProtectionItemComponent> item, ref EntityTerminatingEvent args)
+        {
+            DisableEyeProtectionItem(item, item.Comp.User);
         }
 
         private void EnableEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid user)
         {
-            var ent = item.Owner;
-
-            if (!TryComp<ClothingComponent>(ent, out var clothingComp))
-                return;
-
             // Check if already enabled
-            if (TryComp(user, out RMCSightRestrictionComponent? eyeProt))
-            {
+            if (item.Comp.Toggled)
                 return;
-            }
 
             item.Comp.User = user;
             item.Comp.Toggled = true;
 
-            // Display correct worn sprite
-            if (item.Comp.RaisedEquippedPrefix != null)
-            {
-                _clothingSystem.SetEquippedPrefix(ent, null, clothingComp);
-            }
-
             // Update icon
             _appearance.SetData(item, RMCEyeProtectionItemVisuals.Active, true);
 
-            // Update action
-            _actions.SetToggled(item.Comp.Action, true);
-
-            // Display pop-up
-            if (item.Comp.PopupName != null)
-            {
-                var msg = Loc.GetString("rmc-weld-protection-down", ("protection", item.Comp.PopupName));
-                _popup.PopupClient(msg, ent, user, PopupType.Small);
-            }
-            else
-            {
-                var msg = Loc.GetString("rmc-weld-protection-down", ("protection", ent));
-                _popup.PopupClient(msg, ent, user, PopupType.Small);
-            }
-
             Dirty(item);
-
-            if (!_timing.ApplyingState)
-            {
-                eyeProt = EnsureComp<RMCSightRestrictionComponent>(user);
-                Dirty(user, eyeProt);
-            }
         }
 
         protected void DisableEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid? user)
         {
-            var ent = item.Owner;
-
-            if (!TryComp<ClothingComponent>(ent, out var clothingComp))
-                return;
-
-            // Display pop-up
-            if (item.Comp.PopupName != null)
-            {
-                var msg = Loc.GetString("rmc-weld-protection-up", ("protection", item.Comp.PopupName));
-                _popup.PopupClient(msg, ent, user, PopupType.Small);
-            }
-            else
-            {
-                var msg = Loc.GetString("rmc-weld-protection-up", ("protection", ent));
-                _popup.PopupClient(msg, ent, user, PopupType.Small);
-            }
-
             item.Comp.User = null;
             item.Comp.Toggled = false;
-
-            // Display correct worn sprite, if applicable
-            if (item.Comp.RaisedEquippedPrefix != null)
-                _clothingSystem.SetEquippedPrefix(ent, item.Comp.RaisedEquippedPrefix, clothingComp);
 
             // Update icon
             _appearance.SetData(item, RMCEyeProtectionItemVisuals.Active, false);
 
-            // Update action
-            _actions.SetToggled(item.Comp.Action, false);
-
             Dirty(item);
-
-            // Can't disable what isn't there
-            if (TryComp(user, out RMCSightRestrictionComponent? eyeProt))
-                RemComp<RMCSightRestrictionComponent>(user.Value);
         }
 
         private void ToggleEyeProtectionItem(Entity<RMCEyeProtectionItemComponent> item, EntityUid user)
@@ -190,7 +167,8 @@ namespace Content.Shared._RMC14.EyeProtection
             else
                 EnableEyeProtectionItem(item, user);
 
-            return;
+            EquippedPopup(item);
+            UpdateEquippedSprite(item);
         }
     }
 }
