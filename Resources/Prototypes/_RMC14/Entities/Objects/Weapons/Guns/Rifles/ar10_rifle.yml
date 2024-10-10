@@ -50,6 +50,23 @@
     multiplier: 1.4
 
 - type: entity
+  parent: WeaponRifleAR10
+  id: WeaponRifleAR10Filled
+  suffix: Filled
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleAR10
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleAR10
+
+- type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleAR10
   name: "AR10 Magazine (7.62x51mm)"

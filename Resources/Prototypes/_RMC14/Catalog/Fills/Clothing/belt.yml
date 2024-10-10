@@ -135,10 +135,10 @@
 
 - type: entity
   parent: CMBeltMarine
-  id: RMCBeltMarineM54C
-  suffix: Filled, M54C
+  id: RMCBeltMarineAR10
+  suffix: Filled, AR10
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazineRifleM54C
+    - id: RMCMagazineRifleAR10
       amount: 5
