@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Sphiral
-  changes:
-  - message: Barricades now have a 0.3 use delay
-    type: Tweak
-  id: 321
-  time: '2024-07-09T04:09:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2837
 - author: Tunguso4ka
   changes:
   - message: Ported Solaris Ridge
@@ -4653,5 +4646,12 @@
   id: 820
   time: '2024-10-10T08:32:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4124
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Made the M3-VL vest and M3-VL flak vest have light armor speed
+    type: Tweak
+  id: 821
+  time: '2024-10-10T20:08:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4400
 Name: RMC14
 Order: -1
