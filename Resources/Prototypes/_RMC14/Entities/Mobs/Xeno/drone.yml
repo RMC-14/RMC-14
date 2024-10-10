@@ -72,6 +72,15 @@
     buildDelay: 2
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+  - type: XenoEvolution
+    canEvolveWithoutGranter: true
+    max: 200
+    evolvesTo:
+    - CMXenoCarrier
+#    - CMXenoBurrower
+    - CMXenoHivelord
+    evolvesToWithoutPoints:
+    - CMXenoQueen
 
 - type: entity
   parent: CMXenoDroneBase
@@ -94,14 +103,6 @@
     - ActionXenoTransferPlasma
     - ActionXenoDevolve
   - type: XenoEvolution
-    canEvolveWithoutGranter: true
-    max: 200
-    evolvesTo:
-    - CMXenoCarrier
-#    - CMXenoBurrower
-    - CMXenoHivelord
-    evolvesToWithoutPoints:
-    - CMXenoQueen
     strains:
     - CMXenoDroneGardener
   - type: XenoAcid
