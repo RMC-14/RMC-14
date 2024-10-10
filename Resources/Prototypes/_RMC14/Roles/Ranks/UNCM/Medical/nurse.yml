@@ -1,0 +1,7 @@
+﻿- type: rank
+  parent: RMCBaseRankSergeant
+  id: RMCRankNurseSergeant
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobNurse
+    time: 36000 # 10 hours

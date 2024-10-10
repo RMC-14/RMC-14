@@ -8,6 +8,9 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 36000 # 10 hours
+  ranks:
+  - RMCRankChiefMedicalOfficerFirstLT
+  - RMCBaseRankSecondLT
   weight: 5
   startingGear: CMGearCMO
   icon: "CMJobIconCMO"

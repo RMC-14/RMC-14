@@ -8,6 +8,9 @@
   - !type:TotalDepartmentsTimeRequirement
     group: CMDepartmentsHuman
     time: 3600 # 1 hour
+  ranks:
+  - RMCRankNurseSergeant
+  - RMCBaseRankCorporal
   startingGear: CMGearNurse
   icon: "CMJobIconNurse"
   joinNotifyCrew: false

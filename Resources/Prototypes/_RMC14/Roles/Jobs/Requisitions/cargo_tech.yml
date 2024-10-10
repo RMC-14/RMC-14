@@ -4,6 +4,10 @@
   name: cm-job-name-cargotech
   description: cm-job-description-cargotech
   playTimeTracker: CMJobCargoTech
+  ranks:
+  - RMCRankCargoTechLanceCorporal
+  - RMCRankCargoTechPrivateFirstClass
+  - RMCBaseRankPrivate
   startingGear: CMGearCargoTech
   icon: "CMJobIconCargoTech"
   joinNotifyCrew: false

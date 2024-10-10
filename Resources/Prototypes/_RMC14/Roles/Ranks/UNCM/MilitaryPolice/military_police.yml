@@ -1,0 +1,15 @@
+- type: rank
+  parent: RMCBaseRankStaffSergeant
+  id: RMCRankMilitaryPoliceStaffSergeant
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobMilitaryPolice
+    time: 252000 # 70 hours
+
+- type: rank
+  parent: RMCBaseRankSergeant
+  id: RMCRankMilitaryPoliceSergeant
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobMilitaryPolice
+    time: 36000 # 10 hours

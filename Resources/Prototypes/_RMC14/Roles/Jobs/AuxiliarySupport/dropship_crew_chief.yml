@@ -11,6 +11,10 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 3600 # 1 hours
+  ranks:
+  - RMCRankDCCStaffSergeant
+  - RMCRankDCCSergeant
+  - RMCBaseRankCorporal
   startingGear: CMGearDCC
   icon: "CMJobIconDCC"
   joinNotifyCrew: false

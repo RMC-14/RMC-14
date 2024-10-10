@@ -1,0 +1,15 @@
+- type: rank
+  parent: RMCBaseRankLanceCorporal
+  id: RMCRankCargoTechLanceCorporal
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobCargoTech
+    time: 252000 # 70 hours
+
+- type: rank
+  parent: RMCBaseRankPrivateFirstClass
+  id: RMCRankCargoTechPrivateFirstClass
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobCargoTech
+    time: 36000 # 10 hours
