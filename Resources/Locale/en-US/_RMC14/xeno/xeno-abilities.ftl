@@ -114,7 +114,6 @@ cm-xeno-charge-spit = Our next spit will be stronger.
 cm-xeno-charge-spit-expire = Our spits are back to normal.
 
 # Turn Invisible
-cm-xeno-invisibility-already-invisible = We are already invisible!
 cm-xeno-invisibility-expire = We feel our invisibility end!
 
 # Ovipositor
