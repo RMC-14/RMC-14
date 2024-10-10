@@ -1,5 +1,4 @@
 using System.Numerics;
-using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared._RMC14.Xenonids.Bombard;
@@ -8,7 +7,6 @@ using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Xenonids.Egg;
-using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Hands.Components;
@@ -17,15 +15,11 @@ using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates.Helpers;
-using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
-using Content.Shared.StepTrigger.Systems;
-using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Robust.Server.Audio;
 using Robust.Shared.Map;
@@ -33,8 +27,6 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Player;
 using static Content.Shared.Physics.CollisionGroup;
-using Content.Shared.Examine;
-using Content.Shared.Standing;
 
 namespace Content.Server._RMC14.Xenonids.Construction.ResinHole;
 
@@ -48,16 +40,12 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly TagSystem _tags = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly GunSystem _gun = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
 
     private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
@@ -74,12 +62,9 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         SubscribeLocalEvent<XenoResinHoleComponent, InteractHandEvent>(OnEmptyHandInteract);
         SubscribeLocalEvent<XenoResinHoleComponent, XenoPlaceFluidInHoleDoAfterEvent>(OnPlaceFluidInResinHole);
 
-        SubscribeLocalEvent<XenoResinHoleComponent, DamageChangedEvent>(OnXenoResinHoleTakeDamage);
+        
         // TODO needs a specific event when set on fire/onfire/fire is used on it etc
         // the burned message is used specifically for when a parasite trap gets burned up
-        SubscribeLocalEvent<XenoResinHoleComponent, StepTriggerAttemptEvent>(OnXenoResinHoleStepTriggerAttempt);
-        SubscribeLocalEvent<XenoResinHoleComponent, StepTriggeredOffEvent>(OnXenoResinHoleStepTriggered);
-        SubscribeLocalEvent<XenoResinHoleComponent, ExaminedEvent>(OnExamine);
 
     }
 
@@ -298,93 +283,6 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         _audio.PlayPvs(resinHole.Comp.FluidFillSound, resinHole);
         args.Handled = true;
     }
-
-    private void OnXenoResinHoleTakeDamage(Entity<XenoResinHoleComponent> resinHole, ref DamageChangedEvent args)
-    {
-        if (args.Origin is { } origin && _hive.FromSameHive(origin, resinHole.Owner))
-            return;
-
-        //TODO Flames should make the trigger message never happen but destroyed will
-        if (args.DamageDelta == null)
-            return;
-
-        var destroyed = args.Damageable.TotalDamage + args.DamageDelta.GetTotal() > resinHole.Comp.TotalHealth;
-        ActivateTrap(resinHole, destroyed);
-    }
-
-    private void OnExamine(Entity<XenoResinHoleComponent> resinHole, ref ExaminedEvent args)
-    {
-        if (!HasComp<XenoComponent>(args.Examiner))
-            return;
-
-        using (args.PushGroup(nameof(XenoResinHoleComponent)))
-        {
-            if (resinHole.Comp.TrapPrototype == null)
-                args.PushMarkup(Loc.GetString("rmc-xeno-construction-resin-hole-empty"));
-            else
-            {
-                switch (resinHole.Comp.TrapPrototype)
-                {
-                    case XenoResinHoleComponent.AcidGasPrototype:
-                    case XenoResinHoleComponent.NeuroGasPrototype:
-                        args.PushMarkup(Loc.GetString("rmc-xeno-construction-resin-hole-gas"));
-                        break;
-                    case XenoResinHoleComponent.WeakAcidPrototype:
-                    case XenoResinHoleComponent.AcidPrototype:
-                    case XenoResinHoleComponent.StrongAcidPrototype:
-                        args.PushMarkup(Loc.GetString("rmc-xeno-construction-resin-hole-acid"));
-                        break;
-                    case XenoResinHoleComponent.ParasitePrototype:
-                        args.PushMarkup(Loc.GetString("rmc-xeno-construction-resin-hole-parasite"));
-                        break;
-                }
-            }
-        }
-    }
-
-    private void OnXenoResinHoleStepTriggerAttempt(Entity<XenoResinHoleComponent> resinHole, ref StepTriggerAttemptEvent args)
-    {
-        var (ent, comp) = resinHole;
-
-        if (comp.TrapPrototype is null)
-            return;
-
-        if (_hive.FromSameHive(args.Tripper, resinHole.Owner))
-        {
-            args.Continue = false;
-            return;
-        }
-
-        if (comp.TrapPrototype == XenoResinHoleComponent.ParasitePrototype)
-        {
-            if (!_interaction.InRangeUnobstructed(args.Source, args.Tripper, comp.ParasiteActivationRange))
-            {
-                args.Continue = false;
-                return;
-            }
-
-            args.Continue = HasComp<InfectableComponent>(args.Tripper) &&
-                !HasComp<VictimInfectedComponent>(args.Tripper);
-            return;
-        }
-        else if (_mobState.IsDead(args.Tripper) || _standing.IsDown(args.Tripper))
-        {
-            args.Continue = false;
-            return;
-        }
-
-        args.Continue = true;
-    }
-
-    private void OnXenoResinHoleStepTriggered(Entity<XenoResinHoleComponent> resinHole, ref StepTriggeredOffEvent args)
-    {
-        if (resinHole.Comp.TrapPrototype == XenoResinHoleComponent.ParasitePrototype)
-        {
-            _stun.TryParalyze(args.Tripper, resinHole.Comp.StepStunDuration, true);
-        }
-        ActivateTrap(resinHole);
-    }
-
     private bool CanPlaceResinHole(EntityUid user, EntityCoordinates coords)
     {
         if (_transform.GetGrid(coords) is not { } gridId ||
@@ -457,12 +355,12 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         _audio.PlayPvs(resinHoleComp.BuildSound, resinHole);
     }
 
-    private bool ActivateTrap(Entity<XenoResinHoleComponent> resinHole, bool destroyed = false)
+    protected override void ActivateTrap(Entity<XenoResinHoleComponent> resinHole, bool destroyed = false)
     {
         var (ent, comp) = resinHole;
 
         if (comp.TrapPrototype is not EntProtoId trapEntityProto)
-            return false;
+            return;
 
         if (IsAcidPrototype(trapEntityProto, out _))
         {
@@ -500,7 +398,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         Dirty(resinHole);
         _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
 
-        return true;
+        return;
     }
 
     private bool IsAcidPrototype(string proto, out int level)

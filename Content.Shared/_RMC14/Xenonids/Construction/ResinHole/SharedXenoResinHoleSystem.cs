@@ -3,9 +3,14 @@ using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.StepTrigger.Systems;
+using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Examine;
+using Content.Shared.Standing;
+using Content.Shared.Stunnable;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
@@ -25,6 +30,9 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
     [Dependency] protected readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly AreaSystem _areas = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _announce = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
 
     public override void Initialize()
     {
@@ -34,16 +42,97 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
         SubscribeLocalEvent<XenoResinHoleComponent, ActivateInWorldEvent>(OnActivateInWorldResinHole);
 
         SubscribeLocalEvent<XenoResinHoleComponent, XenoResinHoleActivationEvent>(OnResinHoleActivation);
-		SubscribeLocalEvent<XenoResinHoleComponent, GettingAttackedAttemptEvent>(OnXenoResinHoleAttacked);
-	}
+        SubscribeLocalEvent<XenoResinHoleComponent, GettingAttackedAttemptEvent>(OnXenoResinHoleAttacked);
+        SubscribeLocalEvent<XenoResinHoleComponent, DamageChangedEvent>(OnXenoResinHoleTakeDamage);
+        SubscribeLocalEvent<XenoResinHoleComponent, StepTriggerAttemptEvent>(OnXenoResinHoleStepTriggerAttempt);
+        SubscribeLocalEvent<XenoResinHoleComponent, StepTriggeredOffEvent>(OnXenoResinHoleStepTriggered);
 
-	private void OnXenoResinHoleAttacked(Entity<XenoResinHoleComponent> resinHole, ref GettingAttackedAttemptEvent args)
-	{
-		if (_hive.FromSameHive(args.Attacker, resinHole.Owner) && resinHole.Comp.TrapPrototype != null)
-			args.Cancelled = true;
-	}
+        SubscribeLocalEvent<XenoResinHoleComponent, ExaminedEvent>(OnExamine);
+    }
 
-	protected bool CanPlaceInHole(EntityUid uid, Entity<XenoResinHoleComponent> resinHole, EntityUid user)
+    private void OnExamine(Entity<XenoResinHoleComponent> resinHole, ref ExaminedEvent args)
+    {
+        if (!HasComp<XenoComponent>(args.Examiner))
+            return;
+
+        using (args.PushGroup(nameof(XenoResinHoleComponent)))
+        {
+            if (resinHole.Comp.TrapPrototype == null)
+                args.PushMarkup(Loc.GetString("rmc-xeno-construction-resin-hole-empty"));
+            else
+            {
+                switch (resinHole.Comp.TrapPrototype)
+                {
+                    case XenoResinHoleComponent.AcidGasPrototype:
+                    case XenoResinHoleComponent.NeuroGasPrototype:
+                        args.PushMarkup(Loc.GetString("rmc-xeno-construction-resin-hole-gas"));
+                        break;
+                    case XenoResinHoleComponent.WeakAcidPrototype:
+                    case XenoResinHoleComponent.AcidPrototype:
+                    case XenoResinHoleComponent.StrongAcidPrototype:
+                        args.PushMarkup(Loc.GetString("rmc-xeno-construction-resin-hole-acid"));
+                        break;
+                    case XenoResinHoleComponent.ParasitePrototype:
+                        args.PushMarkup(Loc.GetString("rmc-xeno-construction-resin-hole-parasite"));
+                        break;
+                }
+            }
+        }
+    }
+
+    private void OnXenoResinHoleStepTriggerAttempt(Entity<XenoResinHoleComponent> resinHole, ref StepTriggerAttemptEvent args)
+    {
+        var (ent, comp) = resinHole;
+
+        if (comp.TrapPrototype is null)
+        {
+			args.Continue = false;
+			return;
+        }
+
+        if (_hive.FromSameHive(args.Tripper, resinHole.Owner))
+        {
+            args.Continue = false;
+            return;
+        }
+
+        if (comp.TrapPrototype == XenoResinHoleComponent.ParasitePrototype)
+        {
+            if (!_interaction.InRangeUnobstructed(args.Source, args.Tripper, comp.ParasiteActivationRange))
+            {
+                args.Continue = false;
+                return;
+            }
+
+            args.Continue = HasComp<InfectableComponent>(args.Tripper) &&
+                !HasComp<VictimInfectedComponent>(args.Tripper);
+            return;
+        }
+        else if (_mobState.IsDead(args.Tripper) || _standing.IsDown(args.Tripper))
+        {
+            args.Continue = false;
+            return;
+        }
+
+        args.Continue = true;
+    }
+
+    private void OnXenoResinHoleStepTriggered(Entity<XenoResinHoleComponent> resinHole, ref StepTriggeredOffEvent args)
+    {
+        if (resinHole.Comp.TrapPrototype == XenoResinHoleComponent.ParasitePrototype)
+        {
+            _stun.TryParalyze(args.Tripper, resinHole.Comp.StepStunDuration, true);
+        }
+        ActivateTrap(resinHole);
+    }
+
+    private void OnXenoResinHoleAttacked(Entity<XenoResinHoleComponent> resinHole, ref GettingAttackedAttemptEvent args)
+    {
+        if (_hive.FromSameHive(args.Attacker, resinHole.Owner) && resinHole.Comp.TrapPrototype != null)
+            args.Cancelled = true;
+    }
+
+    protected bool CanPlaceInHole(EntityUid uid, Entity<XenoResinHoleComponent> resinHole, EntityUid user)
     {
         if (!HasComp<XenoParasiteComponent>(uid) ||
             _mobState.IsDead(uid))
@@ -119,6 +208,19 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
         _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Parasite);
     }
 
+    private void OnXenoResinHoleTakeDamage(Entity<XenoResinHoleComponent> resinHole, ref DamageChangedEvent args)
+    {
+        if (args.Origin is { } origin && _hive.FromSameHive(origin, resinHole.Owner))
+            return;
+
+        //TODO Flames should make the trigger message never happen but destroyed will
+        if (args.DamageDelta == null)
+            return;
+
+        var destroyed = args.Damageable.TotalDamage + args.DamageDelta.GetTotal() > resinHole.Comp.TotalHealth;
+        ActivateTrap(resinHole, destroyed);
+    }
+
     private void OnResinHoleActivation(Entity<XenoResinHoleComponent> ent, ref XenoResinHoleActivationEvent args)
     {
         if (_hive.GetHive(ent.Owner) is not { } hive)
@@ -150,6 +252,8 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
                 return Loc.GetString("rmc-xeno-construction-resin-hole-empty-name");
         }
     }
+
+    protected virtual void ActivateTrap(Entity<XenoResinHoleComponent> resinHole, bool destroyed = false) { }
 }
 
 [Serializable, NetSerializable]
