@@ -347,7 +347,6 @@
     whitelist:
       tags:
       - RMCGrenadeM40
-      - RMCGrenadeTraining
     capacity: 3
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
