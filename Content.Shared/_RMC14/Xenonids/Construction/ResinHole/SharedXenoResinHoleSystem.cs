@@ -86,8 +86,8 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
 
         if (comp.TrapPrototype is null)
         {
-			args.Continue = false;
-			return;
+            args.Continue = false;
+            return;
         }
 
         if (_hive.FromSameHive(args.Tripper, resinHole.Owner))
@@ -119,10 +119,8 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
 
     private void OnXenoResinHoleStepTriggered(Entity<XenoResinHoleComponent> resinHole, ref StepTriggeredOffEvent args)
     {
-        if (resinHole.Comp.TrapPrototype == XenoResinHoleComponent.ParasitePrototype)
-        {
+        if (resinHole.Comp.TrapPrototype == XenoResinHoleComponent.ParasitePrototype && _net.IsServer)
             _stun.TryParalyze(args.Tripper, resinHole.Comp.StepStunDuration, true);
-        }
         ActivateTrap(resinHole);
     }
 
