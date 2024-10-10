@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added pod door buttons.
-    type: Add
-  id: 320
-  time: '2024-07-09T03:51:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2922
 - author: Sphiral
   changes:
   - message: Barricades now have a 0.3 use delay
@@ -4648,5 +4641,17 @@
   id: 819
   time: '2024-10-10T05:42:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4364
+- author: Rainbeon
+  changes:
+  - message: Fixed Revolvers not correctly reloading from Speedloaders when the Revolver
+      is partially loaded.
+    type: Fix
+  - message: Speedloaders will now prioritize loading the active and upcoming chambers
+      in a Revolver when the Speedloader is only partially filled, rather than the
+      ones farthest away.
+    type: Fix
+  id: 820
+  time: '2024-10-10T08:32:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4124
 Name: RMC14
 Order: -1
