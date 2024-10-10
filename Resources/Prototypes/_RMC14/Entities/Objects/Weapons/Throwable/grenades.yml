@@ -173,6 +173,7 @@
     - Grenade
     - LauncherCompatibleGrenade
     - RMCGrenadeTraining
+    - RMCGrenadeM40
   - type: Ammo
 
 - type: entity
