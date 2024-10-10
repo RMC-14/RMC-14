@@ -225,3 +225,8 @@
     actionId: RMCActionOpenTacticalMapMarine
     marines: true
   - type: EmoteCooldown
+  - type: RMCSuicide
+    damage:
+      types:
+        Piercing: 100
+        Asphyxiation: 200
