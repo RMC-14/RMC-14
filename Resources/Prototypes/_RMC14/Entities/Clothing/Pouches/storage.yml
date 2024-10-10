@@ -68,6 +68,7 @@
       - Brutepack
       - Radio
       - Knife
+      - PillPacket
       # todo rmc14 splint
       components:
       - Pill
