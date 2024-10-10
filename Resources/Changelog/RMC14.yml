@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Xenos can now see non-xenos hidden in lockers after a hijack.
-    type: Tweak
-  id: 317
-  time: '2024-07-09T00:03:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2920
-- author: DrSmugleaf
-  changes:
   - message: Fixed being able to deconstruct the ASRS console.
     type: Fix
   id: 318
@@ -4638,5 +4631,13 @@
   id: 816
   time: '2024-10-10T01:02:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4390
+- author: Whisper
+  changes:
+  - message: Fixed some minor structures and objects having arbitrary damage reduction,
+      resulting in doors and floodlights taking more damage to destroy than intended.
+    type: Fix
+  id: 817
+  time: '2024-10-10T05:40:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4392
 Name: RMC14
 Order: -1
