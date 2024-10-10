@@ -11,7 +11,7 @@
     - [ CMWelder ] # TODO RMC14 industrial welder
     - [ CMAdvFirstAidKitFilled ]
     randomWeapon:
-    # TODO RMC14 b92fs
+    - [ RMCWeaponPistolB92FS, RMCMagazinePistolB92FS ]
     # TODO RMC14 CMB revolver
     - [ RMCWeaponPistolMK45, RMCMagazinePistolMK45 ]
     - [ CMWeaponPistolM1984, CMMagazinePistolM1984 ]

@@ -49299,303 +49299,144 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 217.5,13.5
       parent: 1
-- proto: CMMagazineRifleM4SPR
-  entities:
-  - uid: 9571
-    components:
-    - type: Transform
-      pos: 96.5,72.5
-      parent: 1
-  - uid: 10820
-    components:
-    - type: Transform
-      pos: 96.5,71.5
-      parent: 1
-  - uid: 10888
-    components:
-    - type: Transform
-      pos: 96.5,71.5
-      parent: 1
-  - uid: 14309
-    components:
-    - type: Transform
-      pos: 25.5,125.5
-      parent: 1
-  - uid: 15692
-    components:
-    - type: Transform
-      pos: 25.5,125.5
-      parent: 1
-  - uid: 15694
-    components:
-    - type: Transform
-      pos: 25.5,125.5
-      parent: 1
-  - uid: 15697
-    components:
-    - type: Transform
-      pos: 15.5,123.5
-      parent: 1
-  - uid: 15698
-    components:
-    - type: Transform
-      pos: 19.65625,123.28125
-      parent: 1
-  - uid: 15715
-    components:
-    - type: Transform
-      pos: 96.5,71.5
-      parent: 1
-  - uid: 15717
-    components:
-    - type: Transform
-      pos: 25.5,125.5
-      parent: 1
-  - uid: 15721
-    components:
-    - type: Transform
-      pos: 25.5,125.5
-      parent: 1
-  - uid: 15736
-    components:
-    - type: Transform
-      pos: 19.5,117.5
-      parent: 1
-  - uid: 15740
-    components:
-    - type: Transform
-      pos: 131.5,23.5
-      parent: 1
-  - uid: 15742
-    components:
-    - type: Transform
-      pos: 132.5,54.5
-      parent: 1
-  - uid: 15750
-    components:
-    - type: Transform
-      pos: 19.34375,124.21875
-      parent: 1
-  - uid: 15772
-    components:
-    - type: Transform
-      pos: 25.5,125.5
-      parent: 1
-  - uid: 15773
-    components:
-    - type: Transform
-      pos: 25.5,125.5
-      parent: 1
-  - uid: 15776
-    components:
-    - type: Transform
-      pos: 123.5,21.5
-      parent: 1
-  - uid: 15787
-    components:
-    - type: Transform
-      pos: 96.5,72.5
-      parent: 1
-  - uid: 15788
-    components:
-    - type: Transform
-      pos: 96.5,72.5
-      parent: 1
-  - uid: 15789
-    components:
-    - type: Transform
-      pos: 22.5,123.5
-      parent: 1
-  - uid: 15790
-    components:
-    - type: Transform
-      pos: 25.5,120.5
-      parent: 1
-  - uid: 15804
-    components:
-    - type: Transform
-      pos: 96.5,72.5
-      parent: 1
-  - uid: 15805
-    components:
-    - type: Transform
-      pos: 96.5,72.5
-      parent: 1
-  - uid: 15806
-    components:
-    - type: Transform
-      pos: 21.5,119.5
-      parent: 1
-  - uid: 15807
-    components:
-    - type: Transform
-      pos: 96.5,71.5
-      parent: 1
-  - uid: 15808
-    components:
-    - type: Transform
-      pos: 96.5,71.5
-      parent: 1
-  - uid: 15810
-    components:
-    - type: Transform
-      pos: 20.28125,123.25
-      parent: 1
 - proto: CMMagazineRifleM54C
   entities:
-  - uid: 15691
+  - uid: 1019
+    components:
+    - type: Transform
+      pos: 201.5,29.5
+      parent: 1
+  - uid: 1020
+    components:
+    - type: Transform
+      pos: 201.5,29.5
+      parent: 1
+  - uid: 1129
+    components:
+    - type: Transform
+      pos: 201.5,29.5
+      parent: 1
+  - uid: 2245
+    components:
+    - type: Transform
+      pos: 200.5,29.5
+      parent: 1
+  - uid: 2246
+    components:
+    - type: Transform
+      pos: 200.5,29.5
+      parent: 1
+  - uid: 3799
+    components:
+    - type: Transform
+      pos: 200.5,29.5
+      parent: 1
+  - uid: 4413
+    components:
+    - type: Transform
+      pos: 199.5,30.5
+      parent: 1
+  - uid: 4770
+    components:
+    - type: Transform
+      pos: 199.5,30.5
+      parent: 1
+  - uid: 7957
+    components:
+    - type: Transform
+      pos: 199.5,30.5
+      parent: 1
+  - uid: 15730
     components:
     - type: Transform
       pos: 98.5,69.5
       parent: 1
-  - uid: 15718
-    components:
-    - type: Transform
-      pos: 97.5,69.5
-      parent: 1
-  - uid: 15719
-    components:
-    - type: Transform
-      pos: 97.5,69.5
-      parent: 1
-  - uid: 15723
+  - uid: 15731
     components:
     - type: Transform
       pos: 98.5,69.5
+      parent: 1
+  - uid: 15734
+    components:
+    - type: Transform
+      pos: 97.5,69.5
       parent: 1
   - uid: 15735
     components:
     - type: Transform
-      pos: 52.5,20.5
+      pos: 97.5,69.5
       parent: 1
-  - uid: 15747
-    components:
-    - type: Transform
-      pos: 162.5,46.5
-      parent: 1
-  - uid: 15748
+  - uid: 15755
     components:
     - type: Transform
       pos: 163.5,47.5
       parent: 1
-  - uid: 15764
+  - uid: 15756
     components:
     - type: Transform
-      pos: 96.5,69.5
+      pos: 162.5,46.5
       parent: 1
-  - uid: 15765
-    components:
-    - type: Transform
-      pos: 96.5,69.5
-      parent: 1
-  - uid: 15778
+  - uid: 15757
     components:
     - type: Transform
       pos: 161.5,47.5
       parent: 1
-  - uid: 15800
+  - uid: 15784
     components:
     - type: Transform
-      pos: 179.5,41.5
+      pos: 96.5,70.5
       parent: 1
-  - uid: 15802
+  - uid: 15785
+    components:
+    - type: Transform
+      pos: 96.5,70.5
+      parent: 1
+  - uid: 15786
+    components:
+    - type: Transform
+      pos: 96.5,70.5
+      parent: 1
+  - uid: 15788
     components:
     - type: Transform
       pos: 96.5,69.5
       parent: 1
-  - uid: 15809
+  - uid: 15789
     components:
     - type: Transform
-      pos: 96.5,70.5
+      pos: 96.5,69.5
       parent: 1
-  - uid: 15811
+  - uid: 15790
     components:
     - type: Transform
-      pos: 96.5,70.5
+      pos: 96.5,69.5
       parent: 1
-  - uid: 15812
+  - uid: 15806
     components:
     - type: Transform
-      pos: 96.5,70.5
+      pos: 52.5,20.5
       parent: 1
-  - uid: 15817
-    components:
-    - type: Transform
-      pos: 199.5,30.5
-      parent: 1
-  - uid: 15818
-    components:
-    - type: Transform
-      pos: 199.5,30.5
-      parent: 1
-  - uid: 15819
-    components:
-    - type: Transform
-      pos: 199.5,30.5
-      parent: 1
-  - uid: 15821
-    components:
-    - type: Transform
-      pos: 200.5,29.5
-      parent: 1
-  - uid: 15822
-    components:
-    - type: Transform
-      pos: 200.5,29.5
-      parent: 1
-  - uid: 15823
-    components:
-    - type: Transform
-      pos: 200.5,29.5
-      parent: 1
-  - uid: 15825
-    components:
-    - type: Transform
-      pos: 201.5,29.5
-      parent: 1
-  - uid: 15826
-    components:
-    - type: Transform
-      pos: 201.5,29.5
-      parent: 1
-  - uid: 15827
-    components:
-    - type: Transform
-      pos: 201.5,29.5
-      parent: 1
-- proto: CMMagazineRifleM54CExt
+- proto: CMMagazineSMGMP5
   entities:
-  - uid: 15716
+  - uid: 15703
     components:
     - type: Transform
-      pos: 97.5,69.5
+      pos: 166.5,133.5
       parent: 1
-  - uid: 15722
-    components:
-    - type: Transform
-      pos: 98.5,69.5
-      parent: 1
-- proto: CMMagazineSMGM63
-  entities:
   - uid: 15704
     components:
     - type: Transform
-      pos: 165.5,133.5
-      parent: 1
-  - uid: 15754
-    components:
-    - type: Transform
-      pos: 165.5,133.5
-      parent: 1
-  - uid: 15760
-    components:
-    - type: Transform
       pos: 166.5,133.5
       parent: 1
-  - uid: 15761
+  - uid: 15709
     components:
     - type: Transform
-      pos: 166.5,133.5
+      pos: 165.5,133.5
+      parent: 1
+  - uid: 15710
+    components:
+    - type: Transform
+      pos: 165.5,133.5
       parent: 1
 - proto: CMMicrowave
   entities:
@@ -51585,67 +51426,35 @@ entities:
       parent: 1
 - proto: CMShellShotgunBuckshot
   entities:
-  - uid: 2246
+  - uid: 15766
     components:
     - type: Transform
       pos: 129.5,58.5
       parent: 1
-  - uid: 3799
+  - uid: 15803
+    components:
+    - type: Transform
+      pos: 67.5,24.5
+      parent: 1
+  - uid: 15807
+    components:
+    - type: Transform
+      pos: 29.5,118.5
+      parent: 1
+  - uid: 15810
+    components:
+    - type: Transform
+      pos: 25.5,125.5
+      parent: 1
+  - uid: 15814
+    components:
+    - type: Transform
+      pos: 125.625,56
+      parent: 1
+  - uid: 15817
     components:
     - type: Transform
       pos: 124.5,56.5
-      parent: 1
-  - uid: 4413
-    components:
-    - type: Transform
-      pos: 29.5,118.5
-      parent: 1
-  - uid: 14308
-    components:
-    - type: Transform
-      pos: 25.5,125.5
-      parent: 1
-  - uid: 15690
-    components:
-    - type: Transform
-      pos: 29.5,118.5
-      parent: 1
-  - uid: 15696
-    components:
-    - type: Transform
-      pos: 25.5,125.5
-      parent: 1
-  - uid: 15734
-    components:
-    - type: Transform
-      pos: 29.5,118.5
-      parent: 1
-  - uid: 15738
-    components:
-    - type: Transform
-      pos: 125.625,56
-      parent: 1
-  - uid: 15739
-    components:
-    - type: Transform
-      pos: 125.625,56
-      parent: 1
-  - uid: 15741
-    components:
-    - type: Transform
-      pos: 129.5,58.5
-      parent: 1
-  - uid: 15779
-    components:
-    - type: Transform
-      pos: 67.5,24.5
-      parent: 1
-- proto: CMShellShotgunSlugs
-  entities:
-  - uid: 1129
-    components:
-    - type: Transform
-      pos: 67.5,24.5
       parent: 1
 - proto: CMSink
   entities:
@@ -51763,58 +51572,6 @@ entities:
     components:
     - type: Transform
       pos: 45.5,28.5
-      parent: 1
-- proto: CMSpawnPointSurvivor
-  entities:
-  - uid: 7957
-    components:
-    - type: Transform
-      pos: 105.5,113.5
-      parent: 1
-  - uid: 14310
-    components:
-    - type: Transform
-      pos: 100.5,114.5
-      parent: 1
-  - uid: 14312
-    components:
-    - type: Transform
-      pos: 106.5,51.5
-      parent: 1
-  - uid: 15726
-    components:
-    - type: Transform
-      pos: 6.5,133.5
-      parent: 1
-  - uid: 15728
-    components:
-    - type: Transform
-      pos: 104.5,82.5
-      parent: 1
-  - uid: 15749
-    components:
-    - type: Transform
-      pos: 164.5,82.5
-      parent: 1
-  - uid: 15757
-    components:
-    - type: Transform
-      pos: 93.5,101.5
-      parent: 1
-  - uid: 15758
-    components:
-    - type: Transform
-      pos: 95.5,88.5
-      parent: 1
-  - uid: 15780
-    components:
-    - type: Transform
-      pos: 68.5,46.5
-      parent: 1
-  - uid: 15797
-    components:
-    - type: Transform
-      pos: 115.5,86.5
       parent: 1
 - proto: CMSpawnPointXeno
   entities:
@@ -54342,18 +54099,6 @@ entities:
     components:
     - type: Transform
       pos: 212.5,40.5
-      parent: 1
-- proto: CMWeaponPistolM1984
-  entities:
-  - uid: 4770
-    components:
-    - type: Transform
-      pos: 107.5,70.5
-      parent: 1
-  - uid: 15699
-    components:
-    - type: Transform
-      pos: 67.5,49.5
       parent: 1
 - proto: CMWelder
   entities:
@@ -110466,47 +110211,47 @@ entities:
       parent: 1
 - proto: RMCBoxShotgunBuckshot
   entities:
-  - uid: 15695
-    components:
-    - type: Transform
-      pos: 6.5,147.75
-      parent: 1
-  - uid: 15706
-    components:
-    - type: Transform
-      pos: 166.5,151.5
-      parent: 1
-  - uid: 15707
-    components:
-    - type: Transform
-      pos: 166.6875,151.375
-      parent: 1
-  - uid: 15763
+  - uid: 15698
     components:
     - type: Transform
       pos: 167.5,151.5
       parent: 1
+  - uid: 15701
+    components:
+    - type: Transform
+      pos: 166.6875,151.375
+      parent: 1
+  - uid: 15702
+    components:
+    - type: Transform
+      pos: 166.5,151.5
+      parent: 1
+  - uid: 15723
+    components:
+    - type: Transform
+      pos: 6.5,147.75
+      parent: 1
 - proto: RMCBoxShotgunSlugs
   entities:
-  - uid: 14313
+  - uid: 10888
     components:
     - type: Transform
       pos: 195.6875,92.375
       parent: 1
-  - uid: 15693
+  - uid: 15728
     components:
     - type: Transform
       pos: 102.5,69.5
       parent: 1
-  - uid: 15700
-    components:
-    - type: Transform
-      pos: 164.5,152.5
-      parent: 1
-  - uid: 15701
+  - uid: 15753
     components:
     - type: Transform
       pos: 164.6875,152.375
+      parent: 1
+  - uid: 15754
+    components:
+    - type: Transform
+      pos: 164.5,152.5
       parent: 1
 - proto: RMCBucket
   entities:
@@ -114040,6 +113785,277 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
+- proto: RMCMagazinePistolHoldout
+  entities:
+  - uid: 15724
+    components:
+    - type: Transform
+      pos: 107.5,69.5
+      parent: 1
+  - uid: 15725
+    components:
+    - type: Transform
+      pos: 107.59375,69.5625
+      parent: 1
+  - uid: 15801
+    components:
+    - type: Transform
+      pos: 68.6875,48.375
+      parent: 1
+- proto: RMCMagazinePistolMK45
+  entities:
+  - uid: 14307
+    components:
+    - type: Transform
+      pos: 169.6875,151.375
+      parent: 1
+  - uid: 14308
+    components:
+    - type: Transform
+      pos: 169.5,151.5
+      parent: 1
+  - uid: 14309
+    components:
+    - type: Transform
+      pos: 169.6875,151.375
+      parent: 1
+  - uid: 14310
+    components:
+    - type: Transform
+      pos: 169.5,151.5
+      parent: 1
+  - uid: 14312
+    components:
+    - type: Transform
+      pos: 168.6875,151.375
+      parent: 1
+  - uid: 14313
+    components:
+    - type: Transform
+      pos: 168.5,151.5
+      parent: 1
+  - uid: 15690
+    components:
+    - type: Transform
+      pos: 168.6875,151.375
+      parent: 1
+  - uid: 15691
+    components:
+    - type: Transform
+      pos: 168.5,151.5
+      parent: 1
+  - uid: 15694
+    components:
+    - type: Transform
+      pos: 167.6875,153.375
+      parent: 1
+  - uid: 15695
+    components:
+    - type: Transform
+      pos: 167.5,153.5
+      parent: 1
+  - uid: 15696
+    components:
+    - type: Transform
+      pos: 167.6875,153.375
+      parent: 1
+  - uid: 15697
+    components:
+    - type: Transform
+      pos: 167.5,153.5
+      parent: 1
+  - uid: 15720
+    components:
+    - type: Transform
+      pos: 9.5,145.5
+      parent: 1
+  - uid: 15722
+    components:
+    - type: Transform
+      pos: 7.5,146.5
+      parent: 1
+  - uid: 15747
+    components:
+    - type: Transform
+      pos: 164.6875,153.375
+      parent: 1
+  - uid: 15748
+    components:
+    - type: Transform
+      pos: 164.5,153.5
+      parent: 1
+  - uid: 15749
+    components:
+    - type: Transform
+      pos: 164.6875,153.375
+      parent: 1
+  - uid: 15750
+    components:
+    - type: Transform
+      pos: 164.5,153.5
+      parent: 1
+  - uid: 15759
+    components:
+    - type: Transform
+      pos: 157.5,151.5
+      parent: 1
+- proto: RMCMagazineRifleAR10
+  entities:
+  - uid: 11028
+    components:
+    - type: Transform
+      pos: 179.5,41.5
+      parent: 1
+  - uid: 15712
+    components:
+    - type: Transform
+      pos: 20.28125,123.25
+      parent: 1
+  - uid: 15714
+    components:
+    - type: Transform
+      pos: 19.34375,124.21875
+      parent: 1
+  - uid: 15715
+    components:
+    - type: Transform
+      pos: 19.65625,123.28125
+      parent: 1
+  - uid: 15717
+    components:
+    - type: Transform
+      pos: 19.5,117.5
+      parent: 1
+  - uid: 15718
+    components:
+    - type: Transform
+      pos: 15.5,123.5
+      parent: 1
+  - uid: 15732
+    components:
+    - type: Transform
+      pos: 98.5,69.5
+      parent: 1
+  - uid: 15736
+    components:
+    - type: Transform
+      pos: 97.5,69.5
+      parent: 1
+  - uid: 15737
+    components:
+    - type: Transform
+      pos: 25.5,125.5
+      parent: 1
+  - uid: 15738
+    components:
+    - type: Transform
+      pos: 25.5,125.5
+      parent: 1
+  - uid: 15739
+    components:
+    - type: Transform
+      pos: 25.5,120.5
+      parent: 1
+  - uid: 15741
+    components:
+    - type: Transform
+      pos: 22.5,123.5
+      parent: 1
+  - uid: 15744
+    components:
+    - type: Transform
+      pos: 21.5,119.5
+      parent: 1
+  - uid: 15763
+    components:
+    - type: Transform
+      pos: 132.5,54.5
+      parent: 1
+  - uid: 15765
+    components:
+    - type: Transform
+      pos: 131.5,23.5
+      parent: 1
+  - uid: 15771
+    components:
+    - type: Transform
+      pos: 96.5,72.5
+      parent: 1
+  - uid: 15772
+    components:
+    - type: Transform
+      pos: 96.5,72.5
+      parent: 1
+  - uid: 15773
+    components:
+    - type: Transform
+      pos: 96.5,72.5
+      parent: 1
+  - uid: 15775
+    components:
+    - type: Transform
+      pos: 96.5,72.5
+      parent: 1
+  - uid: 15776
+    components:
+    - type: Transform
+      pos: 96.5,72.5
+      parent: 1
+  - uid: 15778
+    components:
+    - type: Transform
+      pos: 96.5,71.5
+      parent: 1
+  - uid: 15779
+    components:
+    - type: Transform
+      pos: 96.5,71.5
+      parent: 1
+  - uid: 15780
+    components:
+    - type: Transform
+      pos: 96.5,71.5
+      parent: 1
+  - uid: 15781
+    components:
+    - type: Transform
+      pos: 96.5,71.5
+      parent: 1
+  - uid: 15782
+    components:
+    - type: Transform
+      pos: 96.5,71.5
+      parent: 1
+  - uid: 15811
+    components:
+    - type: Transform
+      pos: 25.5,125.5
+      parent: 1
+  - uid: 15812
+    components:
+    - type: Transform
+      pos: 25.5,125.5
+      parent: 1
+  - uid: 15818
+    components:
+    - type: Transform
+      pos: 123.5,21.5
+      parent: 1
+  - uid: 15823
+    components:
+    - type: Transform
+      pos: 25.5,125.5
+      parent: 1
+  - uid: 15824
+    components:
+    - type: Transform
+      pos: 25.5,125.5
+      parent: 1
+  - uid: 15825
+    components:
+    - type: Transform
+      pos: 25.5,125.5
+      parent: 1
 - proto: RMCPickaxe
   entities:
   - uid: 10778
@@ -117211,103 +117227,6 @@ entities:
     - type: Transform
       pos: 158.5,70.5
       parent: 1
-- proto: RMCSpeedLoaderM44
-  entities:
-  - uid: 1020
-    components:
-    - type: Transform
-      pos: 164.6875,153.375
-      parent: 1
-  - uid: 1130
-    components:
-    - type: Transform
-      pos: 164.5,153.5
-      parent: 1
-  - uid: 11028
-    components:
-    - type: Transform
-      pos: 169.5,151.5
-      parent: 1
-  - uid: 15702
-    components:
-    - type: Transform
-      pos: 164.6875,153.375
-      parent: 1
-  - uid: 15709
-    components:
-    - type: Transform
-      pos: 167.5,153.5
-      parent: 1
-  - uid: 15710
-    components:
-    - type: Transform
-      pos: 167.6875,153.375
-      parent: 1
-  - uid: 15711
-    components:
-    - type: Transform
-      pos: 167.5,153.5
-      parent: 1
-  - uid: 15712
-    components:
-    - type: Transform
-      pos: 168.6875,151.375
-      parent: 1
-  - uid: 15713
-    components:
-    - type: Transform
-      pos: 168.5,151.5
-      parent: 1
-  - uid: 15714
-    components:
-    - type: Transform
-      pos: 169.6875,151.375
-      parent: 1
-  - uid: 15729
-    components:
-    - type: Transform
-      pos: 7.5,146.5
-      parent: 1
-  - uid: 15731
-    components:
-    - type: Transform
-      pos: 9.5,145.5
-      parent: 1
-  - uid: 15745
-    components:
-    - type: Transform
-      pos: 157.5,151.5
-      parent: 1
-  - uid: 15766
-    components:
-    - type: Transform
-      pos: 167.6875,153.375
-      parent: 1
-  - uid: 15781
-    components:
-    - type: Transform
-      pos: 164.5,153.5
-      parent: 1
-  - uid: 15785
-    components:
-    - type: Transform
-      pos: 169.5,151.5
-      parent: 1
-  - uid: 15786
-    components:
-    - type: Transform
-      pos: 169.6875,151.375
-      parent: 1
-  - uid: 15801
-    components:
-    - type: Transform
-      pos: 168.5,151.5
-      parent: 1
-  - uid: 15803
-    components:
-    - type: Transform
-      pos: 168.6875,151.375
-      parent: 1
 - proto: RMCStairs
   entities:
   - uid: 1491
@@ -119338,61 +119257,73 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 54.5,66.5
       parent: 1
-- proto: RMCWeaponRevolverM44
+- proto: RMCWeaponPistolHoldout
+  entities:
+  - uid: 15802
+    components:
+    - type: Transform
+      pos: 67.5,49.5
+      parent: 1
+  - uid: 15822
+    components:
+    - type: Transform
+      pos: 107.5,70.5
+      parent: 1
+- proto: RMCWeaponPistolMK45
   entities:
   - uid: 11044
     components:
     - type: Transform
+      pos: 174.5,138.5
+      parent: 1
+  - uid: 15692
+    components:
+    - type: Transform
       pos: 167.6875,154.375
       parent: 1
-  - uid: 15703
-    components:
-    - type: Transform
-      pos: 86.5,94.5
-      parent: 1
-  - uid: 15708
-    components:
-    - type: Transform
-      pos: 166.6875,154.375
-      parent: 1
-  - uid: 15730
-    components:
-    - type: Transform
-      pos: 8.5,147.5
-      parent: 1
-  - uid: 15743
-    components:
-    - type: Transform
-      pos: 157.5,151.5
-      parent: 1
-  - uid: 15753
-    components:
-    - type: Transform
-      pos: 164.6875,154.375
-      parent: 1
-  - uid: 15767
+  - uid: 15693
     components:
     - type: Transform
       pos: 167.5,154.5
       parent: 1
-  - uid: 15771
+  - uid: 15699
     components:
     - type: Transform
-      pos: 174.5,138.5
+      pos: 166.6875,154.375
       parent: 1
-  - uid: 15782
-    components:
-    - type: Transform
-      pos: 164.5,154.5
-      parent: 1
-  - uid: 15784
+  - uid: 15700
     components:
     - type: Transform
       pos: 166.5,154.5
       parent: 1
+  - uid: 15721
+    components:
+    - type: Transform
+      pos: 8.5,147.5
+      parent: 1
+  - uid: 15745
+    components:
+    - type: Transform
+      pos: 164.6875,154.375
+      parent: 1
+  - uid: 15746
+    components:
+    - type: Transform
+      pos: 164.5,154.5
+      parent: 1
+  - uid: 15760
+    components:
+    - type: Transform
+      pos: 157.5,151.5
+      parent: 1
+  - uid: 15800
+    components:
+    - type: Transform
+      pos: 86.5,94.5
+      parent: 1
 - proto: RMCWeaponTaser
   entities:
-  - uid: 3801
+  - uid: 15820
     components:
     - type: Transform
       pos: 112.5,81.5
@@ -120069,168 +120000,163 @@ entities:
     - type: Transform
       pos: 183.5,118.5
       parent: 1
-- proto: WeaponRifleM4SPR
+- proto: WeaponRifleAR10
   entities:
-  - uid: 15831
-    components:
-    - type: Transform
-      pos: 14.5,124.5
-      parent: 1
-  - uid: 15832
-    components:
-    - type: Transform
-      pos: 19.875,123.6875
-      parent: 1
-  - uid: 15833
+  - uid: 15713
     components:
     - type: Transform
       pos: 20.5,116.5
       parent: 1
-  - uid: 15834
+  - uid: 15716
     components:
     - type: Transform
-      pos: 21.3125,124.5
+      pos: 19.875,123.6875
       parent: 1
-  - uid: 15835
+  - uid: 15719
     components:
     - type: Transform
-      pos: 22.5,119.5
+      pos: 14.5,124.5
       parent: 1
-  - uid: 15836
+  - uid: 15740
     components:
     - type: Transform
       pos: 24.3125,116.5
       parent: 1
-  - uid: 15837
+  - uid: 15742
     components:
     - type: Transform
-      pos: 26.5,121.5
+      pos: 22.5,119.5
       parent: 1
-  - uid: 15838
+  - uid: 15743
     components:
     - type: Transform
-      pos: 96.5,71.5
+      pos: 21.3125,124.5
       parent: 1
-  - uid: 15839
-    components:
-    - type: Transform
-      pos: 96.5,72.5
-      parent: 1
-  - uid: 15840
-    components:
-    - type: Transform
-      pos: 125.5,22.5
-      parent: 1
-  - uid: 15841
-    components:
-    - type: Transform
-      pos: 131.5,24.5
-      parent: 1
-  - uid: 15842
+  - uid: 15761
     components:
     - type: Transform
       pos: 132.5,55.5
       parent: 1
-- proto: WeaponRifleM54C
-  entities:
-  - uid: 2245
+  - uid: 15764
     components:
     - type: Transform
-      pos: 161.5,46.5
+      pos: 131.5,24.5
       parent: 1
-  - uid: 14307
+  - uid: 15777
     components:
     - type: Transform
-      pos: 97.5,69.5
-      parent: 1
-  - uid: 15720
-    components:
-    - type: Transform
-      pos: 98.5,69.5
-      parent: 1
-  - uid: 15733
-    components:
-    - type: Transform
-      pos: 114.5,70.5
-      parent: 1
-  - uid: 15744
-    components:
-    - type: Transform
-      pos: 53.5,21.5
-      parent: 1
-  - uid: 15759
-    components:
-    - type: Transform
-      pos: 96.5,69.5
+      pos: 96.5,72.5
       parent: 1
   - uid: 15783
     components:
     - type: Transform
-      pos: 166.5,35.5
+      pos: 96.5,71.5
       parent: 1
-  - uid: 15813
+  - uid: 15809
     components:
     - type: Transform
-      pos: 96.5,70.5
+      pos: 26.5,121.5
       parent: 1
   - uid: 15816
     components:
     - type: Transform
-      pos: 199.5,30.5
+      pos: 125.5,22.5
       parent: 1
-  - uid: 15820
-    components:
-    - type: Transform
-      pos: 200.5,29.5
-      parent: 1
-  - uid: 15824
+- proto: WeaponRifleM54C
+  entities:
+  - uid: 1130
     components:
     - type: Transform
       pos: 201.5,29.5
       parent: 1
+  - uid: 3801
+    components:
+    - type: Transform
+      pos: 200.5,29.5
+      parent: 1
+  - uid: 9571
+    components:
+    - type: Transform
+      pos: 199.5,30.5
+      parent: 1
+  - uid: 15706
+    components:
+    - type: Transform
+      pos: 166.5,35.5
+      parent: 1
+  - uid: 15733
+    components:
+    - type: Transform
+      pos: 98.5,69.5
+      parent: 1
+  - uid: 15758
+    components:
+    - type: Transform
+      pos: 161.5,46.5
+      parent: 1
+  - uid: 15767
+    components:
+    - type: Transform
+      pos: 97.5,69.5
+      parent: 1
+  - uid: 15787
+    components:
+    - type: Transform
+      pos: 96.5,70.5
+      parent: 1
+  - uid: 15797
+    components:
+    - type: Transform
+      pos: 96.5,69.5
+      parent: 1
+  - uid: 15805
+    components:
+    - type: Transform
+      pos: 53.5,21.5
+      parent: 1
+  - uid: 15819
+    components:
+    - type: Transform
+      pos: 114.5,70.5
+      parent: 1
 - proto: WeaponShotgunM42A2
   entities:
-  - uid: 15724
+  - uid: 10820
     components:
     - type: Transform
-      pos: 99.59375,13.1875
+      pos: 198.5,93.5
       parent: 1
-  - uid: 15725
-    components:
-    - type: Transform
-      pos: 102.5,70.5
-      parent: 1
-  - uid: 15732
-    components:
-    - type: Transform
-      pos: 28.5,119.5
-      parent: 1
-  - uid: 15737
-    components:
-    - type: Transform
-      pos: 125.5,56.5
-      parent: 1
-  - uid: 15746
-    components:
-    - type: Transform
-      pos: 67.5,24.5
-      parent: 1
-  - uid: 15755
-    components:
-    - type: Transform
-      pos: 165.6875,151.375
-      parent: 1
-  - uid: 15756
+  - uid: 15707
     components:
     - type: Transform
       pos: 165.5,151.5
       parent: 1
-  - uid: 15775
+  - uid: 15708
     components:
     - type: Transform
-      pos: 109.5,68.5
+      pos: 165.6875,151.375
       parent: 1
-  - uid: 15777
+  - uid: 15726
+    components:
+    - type: Transform
+      pos: 102.5,70.5
+      parent: 1
+  - uid: 15729
+    components:
+    - type: Transform
+      pos: 99.59375,13.1875
+      parent: 1
+  - uid: 15804
+    components:
+    - type: Transform
+      pos: 67.5,24.5
+      parent: 1
+  - uid: 15808
+    components:
+    - type: Transform
+      pos: 28.5,119.5
+      parent: 1
+  - uid: 15813
     components:
     - type: Transform
       pos: 127.5,47.5
@@ -120238,24 +120164,24 @@ entities:
   - uid: 15815
     components:
     - type: Transform
-      pos: 198.5,93.5
+      pos: 125.5,56.5
       parent: 1
-- proto: WeaponSMGM63
-  entities:
-  - uid: 1019
+  - uid: 15821
     components:
     - type: Transform
-      pos: 165.5,133.5
+      pos: 109.5,68.5
       parent: 1
+- proto: WeaponSMGMP5
+  entities:
   - uid: 15705
     components:
     - type: Transform
       pos: 166.5,133.5
       parent: 1
-  - uid: 15814
+  - uid: 15711
     components:
     - type: Transform
-      pos: 172.5,99.5
+      pos: 165.5,133.5
       parent: 1
 - proto: WeldingFuelTankFull
   entities:
