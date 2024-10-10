@@ -1,0 +1,244 @@
+﻿- type: entity
+  parent: CMBaseWeaponRifle
+  name: M54C assault rifle MK2
+  id: WeaponRifleM54C
+  description: The standard issue rifle of the Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c.rsi
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    soundGunshot:
+      collection: CMM54CShoot
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilUnwielded: 4
+    scatterWielded: 6
+    scatterUnwielded: 20
+    baseFireRate: 4
+    burstScatterMult: 1
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54C
+          - CMMagazineRifleM54CAP
+          - CMMagazineRifleM54CExt
+  - type: GunDamageModifier
+    multiplier: 1.1
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentM54CStockCollapsible
+        whitelist:
+          tags:
+          - RMCAttachmentM54CStockSolid
+          - RMCAttachmentM54CStockCollapsible
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentU1GrenadeLauncher
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentVerticalGrip
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.75, 0.00
+      rmc-aslot-rail: 0.06, 0.185
+      rmc-aslot-stock: -0.84, 0.0325
+      rmc-aslot-underbarrel: 0.25, -0.343
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: CMMagazineRifleM54C
+  name: "M54C magazine (10x24mm)"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM54C
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeRifle10x24mm
+    proto: CMCartridgeRifle10x24mm
+    capacity: 40
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: entity
+  parent: CMMagazineRifleM54C
+  id: CMMagazineRifleM54CAP
+  name: "M54C AP magazine (10x24mm)"
+  suffix: AP
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM54CAP
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CMCartridgeRifle10x24mmAP
+    proto: CMCartridgeRifle10x24mmAP
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#1F951F"
+
+- type: entity
+  parent: CMMagazineRifleM54C
+  id: CMMagazineRifleM54CExt
+  name: "M54C extended magazine (10x24mm)"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM54CExt
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeRifle10x24mm
+    proto: CMCartridgeRifle10x24mm
+    capacity: 60
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: CMCartridgeRifle10x24mm
+  name: cartridge (10x24mm)
+  description: A 10x24mm cartridge. Fits in 10x24mm magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridgeRifle10x24mm
+  - type: CartridgeAmmo
+    proto: BulletRifle10x24mm
+
+- type: entity
+  parent: CMCartridgeRifle10x24mm
+  id: CMCartridgeRifle10x24mmAP
+  name: AP cartridge (10x24mm)
+  description: An armor piercing 10x24mm cartridge. Fits in 10x24mm AP magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridgeRifle10x24mmAP
+  - type: CartridgeAmmo
+    proto: BulletRifle10x24mmAP
+
+- type: entity
+  parent: BaseBullet
+  id: BulletRifle10x24mm
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 24
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 7
+      falloff: 4
+  - type: CMArmorPiercing
+    amount: 5
+
+- type: entity
+  parent: BulletRifle10x24mm
+  id: BulletRifle10x24mmAP
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+  - type: CMArmorPiercing
+    amount: 40
+
+- type: Tag
+  id: CMMagazineRifleM54C
+
+- type: Tag
+  id: CMMagazineRifleM54CAP
+
+- type: Tag
+  id: CMMagazineRifleM54CExt
+
+- type: Tag
+  id: CMCartridgeRifle10x24mm
+
+- type: Tag
+  id: CMCartridgeRifle10x24mmAP

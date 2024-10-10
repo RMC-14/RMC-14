@@ -145,3 +145,22 @@
         Slash: 300
   - type: XenoConstructionPlasmaCost
     plasma: 120
+
+- type: entity
+  parent: WallXenoResin
+  id: WallXenoResinWeak
+  name: weak resin wall
+  description: Weird slime solidified into a wall. It already looks on the verge of collapsing...
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100 # very weak
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: XenoConstruct # would be painful to use if it destroyed weeds
+    destroyWeeds: false
+  - type: TimedDespawn
+    lifetime: 5.0

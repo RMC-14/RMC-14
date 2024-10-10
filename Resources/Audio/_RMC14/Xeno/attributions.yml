@@ -327,3 +327,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/d74dae2014c8d2f00cbfdb9dc7b99b263af174ba/sound/voice/alien_roar_larva2.ogg"
+
+- files: ["acid_impact1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/commits/1ed1c734f77b7c4fe6ff069547963e0184624650/sound/bullets/acid_impact1.ogg"

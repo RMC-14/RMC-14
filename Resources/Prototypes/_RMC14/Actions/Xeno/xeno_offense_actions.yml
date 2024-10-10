@@ -92,6 +92,12 @@
   description: Launches an attack towards a given direction. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid into the target, dealing damage over time.[/color]
 
 - type: entity
+  parent: ActionXenoTailStab
+  id: ActionXenoTailStabBoiler
+  name: Corrosive Tail Stab
+  description: Launches an attack towards a given direction. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid or neurotoxin into the target, dealing damage or stunning over time. Which type depends on current gas type.[/color]
+
+- type: entity
   id: ActionXenoLeap
   parent: ActionXenoBase
   name: Leap

@@ -1,0 +1,233 @@
+﻿- type: entity
+  parent: CMBaseWeaponSMG
+  name: M63 submachine gun
+  id: WeaponSMGM63
+  description: The Aegis Battlefield Armaments M-63 submachinegun. Occasionally carried by light-infantry, scouts, engineers and medics.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63.rsi
+  - type: Gun
+    shotsPerBurst: 3
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m63.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilWielded: 1
+    recoilUnwielded: 1
+    scatterWielded: 14
+    scatterUnwielded: 14
+    baseFireRate: 6.667
+    burstScatterMult: 4
+    modifiers:
+      Burst:
+        fireDelay: 0.0999
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        maxScatterModifier: 3
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineSMGM63
+          - CMMagazineSMGM63AP
+          - CMMagazineSMGM63Ext
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentM63StockCollapsible
+        whitelist:
+          tags:
+          - RMCAttachmentM63ArmBrace
+          - RMCAttachmentM63Stock
+          - RMCAttachmentM63StockCollapsible
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.715, 0.092
+      rmc-aslot-rail: 0.032, 0.155
+      rmc-aslot-stock: -0.81, 0.032
+      rmc-aslot-underbarrel: 0.25, -0.25
+
+- type: entity
+  parent: BaseMagazineRifle
+  id: CMMagazineSMGM63
+  name: "M63 magazine (10x20mm)"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - CMMagazineSMGM63
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridge10x20mm
+    proto: CMCartridge10x20mm
+    capacity: 48
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m63.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: Appearance
+
+- type: entity
+  parent: CMMagazineSMGM63
+  id: CMMagazineSMGM63AP
+  name: "M63 AP magazine (10x20mm)"
+  components:
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CMCartridge10x20mmAP
+    proto: CMCartridge10x20mmAP
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m63.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - CMMagazineSMGM63AP
+
+- type: entity
+  parent: CMMagazineSMGM63
+  id: CMMagazineSMGM63Ext
+  name: "M63 extended magazine (10x20mm)"
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 72
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m63e.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - CMMagazineSMGM63Ext
+
+- type: entity
+  parent: CMCartridgeSMGBase
+  id: CMCartridge10x20mm
+  name: cartridge (10x20mm)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridge10x20mm
+  - type: CartridgeAmmo
+    proto: Bullet10x20mm
+
+- type: entity
+  parent: CMCartridge10x20mm
+  id: CMCartridge10x20mmAP
+  name: AP cartridge (10x20mm)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridge10x20mmAP
+  - type: CartridgeAmmo
+    proto: Bullet10x20mmAP
+
+- type: entity
+  parent: BaseBullet
+  id: Bullet10x20mm
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 34
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 4
+      falloff: 6
+  - type: CMArmorPiercing
+    amount: 5
+
+- type: entity
+  parent: Bullet10x20mm
+  id: Bullet10x20mmAP
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 26
+  - type: CMArmorPiercing
+    amount: 30
+
+- type: Tag
+  id: CMMagazineSMGM63
+
+- type: Tag
+  id: CMMagazineSMGM63AP
+
+- type: Tag
+  id: CMMagazineSMGM63Ext
+
+- type: Tag
+  id: CMCartridge10x20mmAP
