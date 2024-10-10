@@ -76,13 +76,16 @@
 
 # Cargotech
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: JumpsuitMarine
   id: CMJumpsuitCargoTech
   name: cargo technician uniform
   description: A standard-issue cargo tech uniform.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Supply/cargo_tech.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-pants-verb-unfold
+    foldVerbText: rmc-pants-verb-fold
 
 # MessTech / Chef
 - type: entity
@@ -108,7 +111,7 @@
 
 # Ordnance Technician / OT
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: JumpsuitMarine
   id: CMJumpsuitOrdnanceTech
   name: ordnance technician uniform
   description: Standard-issue Ordnance Technician uniform.
@@ -118,7 +121,7 @@
 
 # Maintenance Technician / MT
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: JumpsuitMarine
   id: CMJumpsuitMaintTech
   name: maintenance technician uniform
   description: Standard-issue Maintenance Technician uniform.

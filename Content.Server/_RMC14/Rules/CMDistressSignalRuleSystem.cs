@@ -185,6 +185,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 continue;
             }
 
+            SetFriendlyHives(comp.Hive);
+
             SpawnSquads((uid, comp));
             SpawnAdminFaxArea();
 
@@ -512,7 +514,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     {
         StartPlanetVote();
         ResetSelectedPlanet();
-        _config.SetCVar(CCVars.GameDisallowLateJoins, true);
+        _config.SetCVar(CCVars.GameDisallowLateJoins, false);
     }
 
     private void OnDropshipHijackLanded(ref DropshipHijackLandedEvent ev)
@@ -1170,6 +1172,19 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private void EndRound()
     {
         _roundEnd.EndRound();
+    }
+
+    /// <summary>
+    /// Sets the hive of all loaded xeno friendly entities (e.g. weeds).
+    /// Only makes sense for distress signal with 1 hive, with multiple hives you would need to determine which weeds belong to which hive
+    /// </summary>
+    public void SetFriendlyHives(EntityUid hive)
+    {
+        var query = EntityQueryEnumerator<XenoFriendlyComponent>();
+        while (query.MoveNext(out var weeds, out _))
+        {
+            _hive.SetHive(weeds, hive);
+        }
     }
 }
 

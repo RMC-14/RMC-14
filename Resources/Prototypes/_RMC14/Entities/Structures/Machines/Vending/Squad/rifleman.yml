@@ -49,7 +49,7 @@
       #    CMM276M63HolsterRig #TODO: Make this
       #    CMM276M44HolsterRig #TODO: Make this
       #    CMM276M82FHolsterRig #TODO: Make this
-      #    CMM276ShotgunShellLoadingRig #TODO: Make this
+      - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtility
       - id: RMCBeltUtilityGeneral
       - id: RMCBeltGrenade

@@ -1,0 +1,48 @@
+﻿- type: entity
+  name: M79 grenade launcher
+  parent: [ RMCBaseWeaponGrenadeLauncher ]
+  id: CMWeaponLauncherM79
+  description: The M79 grenade launcher is a single-shot, shoulder-fired, break-action grenade launcher.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m79.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m79.rsi
+    slots:
+    - Back
+    - suitStorage
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/m79_shoot.ogg
+  - type: RMCSelectiveFire
+    baseFireRate: 0.833
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - LauncherCompatibleGrenade
+    capacity: 1
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/m79_reload.ogg
+  #    proto: CMGrenadeHighExplosive # This needs to start with an HIRR baton slug when those get implemented.
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentM79Stock
+        whitelist:
+          tags:
+          - RMCAttachmentM79Stock
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: -0.065, 0.125
+      rmc-aslot-stock: -0.56, 0.0

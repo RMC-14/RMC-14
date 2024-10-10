@@ -17,6 +17,11 @@
     needsPower: false # TODO RMC14
   - type: WallMount
     arc: 360
+  - type: EmitSoundOnUIOpen
+    sound:
+      collection: RMCKeyboardTyping
+      params:
+        volume: -1
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
@@ -103,6 +108,8 @@
       enum.TacticalMapComputerUi.Key:
         type: TacticalMapComputerBui
   - type: TacticalMapComputer
+  - type: EmitSoundOnUIOpen
+    sound: null
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
@@ -122,6 +129,17 @@
         type: EvacuationComputerBui
   - type: EvacuationComputer
     maxMobs: 3
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCEscapePodController
+  id: RMCEscapePodControllerLiaison
+  components:
+  - type: EvacuationComputer
+    earlyCrashChance: 0
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
@@ -140,3 +158,7 @@
       enum.LifeboatComputerUi.Key:
         type: LifeboatComputerBui
   - type: LifeboatComputer
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno

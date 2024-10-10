@@ -22,4 +22,4 @@ rmc-xeno-parasite-ghost-carrier-none = {THE($xeno)} has no sheltered parasites!
 rmc-xeno-parasite-ghost-carrier-reserved = {THE($xeno)} has reserved the remaining parasites for {REFLEXIVE($xeno)}.
 rmc-xeno-parasite-ghost-carrier-dead = {THE($xeno)} is dead and all {POSS_ADJ($xeno)} died with {OBJECT($xeno)}.
 
-rmc-xeno-parasite-carrier-death = The chittering mass of tiny aliens is trying to escape {THE($xeno)};
+rmc-xeno-parasite-carrier-death = The chittering mass of tiny aliens try to escape {THE($xeno)}!

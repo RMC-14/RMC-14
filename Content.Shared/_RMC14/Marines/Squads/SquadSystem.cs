@@ -59,7 +59,7 @@ public sealed class SquadSystem : EntitySystem
     private void OnSquadArmorGetVisuals(Entity<SquadArmorComponent> ent, ref GetEquipmentVisualsEvent args)
     {
         if (_inventory.TryGetSlot(args.Equipee, args.Slot, out var slot) &&
-            slot.SlotFlags != SlotFlags.HEAD)
+            (slot.SlotFlags & ent.Comp.Slot) == 0)
         {
             return;
         }

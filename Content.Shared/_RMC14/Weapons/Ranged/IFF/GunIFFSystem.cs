@@ -73,9 +73,12 @@ public sealed class GunIFFSystem : EntitySystem
 
     private void OnGunIFFExamined(Entity<GunIFFComponent> ent, ref ExaminedEvent args)
     {
+        if (!ent.Comp.Enabled)
+            return;
+
         using (args.PushGroup(nameof(GunIFFComponent)))
         {
-            args.PushMarkup("[color=cyan]This gun will ignore and shoot past friendlies![/color]");
+            args.PushMarkup(Loc.GetString("rmc-examine-text-iff"));
         }
     }
 

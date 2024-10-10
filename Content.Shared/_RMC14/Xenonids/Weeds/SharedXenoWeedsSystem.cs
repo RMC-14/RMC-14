@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
+﻿using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
@@ -170,6 +170,15 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         return null;
     }
 
+    public EntityUid? GetWeedsOnFloor(EntityCoordinates coordinates, bool sourceOnly = false)
+    {
+        if (_transform.GetGrid(coordinates) is not { } gridId ||
+            !TryComp(gridId, out MapGridComponent? grid))
+            return null;
+
+        return GetWeedsOnFloor((gridId, grid), coordinates, sourceOnly);
+    }
+
     public bool IsOnWeeds(Entity<TransformComponent?> entity)
     {
         if (!Resolve(entity, ref entity.Comp))
@@ -200,13 +209,18 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             _toUpdate.Add(other);
     }
 
-    public bool CanPlaceWeeds(Entity<MapGridComponent> grid, Vector2i tile, bool source = false)
+    public bool CanPlaceWeeds(Entity<MapGridComponent> grid, Vector2i tile, bool semiWeedable = false, bool source = false)
     {
         if (!_mapSystem.TryGetTileRef(grid, grid, tile, out var tileRef))
             return false;
 
-        if (!_tile.TryGetDefinition(tileRef.Tile.TypeId, out var tileDef) ||
-            tileDef is ContentTileDefinition { WeedsSpreadable: false } ||
+        if (!_tile.TryGetDefinition(tileRef.Tile.TypeId, out var tileDef))
+            return false;
+
+        if (tileDef is ContentTileDefinition { SemiWeedable: true } && semiWeedable)
+            return true;
+
+        if (tileDef is ContentTileDefinition { WeedsSpreadable: false } ||
             tileDef.ID == ContentTileDefinition.SpaceID)
         {
             return false;

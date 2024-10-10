@@ -1,0 +1,137 @@
+﻿- type: entity
+  parent: CMWeaponPistolBase
+  id: CMWeaponPistolMK80
+  name: MK80 pistol
+  description: A massive, formidable semi-automatic handgun chambered in 9mm squash-head rounds. A common sight throughout both UA and 3WE space, often held by both We-Ya PMC units and corporate executives. This weapon is also undergoing limited field testing as part of the Marines' next generation pistol program. The slide is engraved with the We-Ya logo reminding you who's really in charge.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mk80.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mk80.rsi
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 8
+  - type: Gun
+    shotsPerBurst: 3
+    availableModes:
+    - SemiAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mk80.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    recoilWielded: 1
+    recoilUnwielded: 2
+    scatterWielded: 10
+    scatterUnwielded: 10
+    baseFireRate: 2
+    burstScatterMult: 4
+    modifiers:
+      Burst:
+        fireDelay: 0.1665
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazinePistolMK80
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        locked: true
+        startingAttachable: RMCAttachmentLaserLightModule
+        whitelist:
+          tags:
+          - RMCAttachmentLaserLightModule
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.685, 0.125
+      rmc-aslot-rail: -0.125, 0.215
+      rmc-aslot-underbarrel: 0.284, -0.19
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCMK80
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: CMMagazinePistolMK80
+  name: MK80 magazine (9mm Squash-Head)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - CMMagazinePistolMK80
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgePistol9mm
+      - RCMCartridgePistol9mmSquashHead #MK80 is specially chambered to take these rounds, regular pistols cannot.
+    proto: RCMCartridgePistol9mmSquashHead
+    capacity: 18
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mk80.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: RCMCartridgePistol9mmSquashHead
+  name: cartridge (9mm Squash-Head)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RCMCartridgePistol9mmSquashHead
+  - type: CartridgeAmmo
+    proto: RCMBulletPistol9mmSquashHead
+
+- type: entity # todo rmc14 this is missing a lot of effects, shrapnel, debilitate etc
+  parent: CMBulletBase
+  id: RCMBulletPistol9mmSquashHead
+  name: bullet (9mm Squash-Head)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 45
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 3
+      falloff: 5
+  - type: CMArmorPiercing
+    amount: 30
+
+- type: Tag
+  id: CMMagazinePistolMK80

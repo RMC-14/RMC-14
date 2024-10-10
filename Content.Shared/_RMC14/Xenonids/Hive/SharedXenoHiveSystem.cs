@@ -79,16 +79,16 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
         foreach (var prototype in _prototypes.EnumeratePrototypes<EntityPrototype>())
         {
-            if (prototype.TryGetComponent(out XenoComponent? xeno, _compFactory))
-            {
-                if (xeno.UnlockAt == default)
-                    continue;
+            if (!prototype.TryGetComponent(out XenoComponent? xeno, _compFactory))
+                continue;
 
-                ent.Comp.Unlocks.GetOrNew(xeno.UnlockAt).Add(prototype.ID);
+            if (xeno.UnlockAt == default || xeno.Hidden)
+                continue;
 
-                if (!ent.Comp.AnnouncementsLeft.Contains(xeno.UnlockAt))
-                    ent.Comp.AnnouncementsLeft.Add(xeno.UnlockAt);
-            }
+            ent.Comp.Unlocks.GetOrNew(xeno.UnlockAt).Add(prototype.ID);
+
+            if (!ent.Comp.AnnouncementsLeft.Contains(xeno.UnlockAt))
+                ent.Comp.AnnouncementsLeft.Add(xeno.UnlockAt);
         }
 
         foreach (var unlock in ent.Comp.Unlocks)
@@ -141,7 +141,10 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         if (_query.TryComp(hive, out var hiveComp))
             hiveEnt = (hive.Value, hiveComp);
         else if (hive != null)
+        {
+            Log.Error($"Tried to set hive of {ToPrettyString(member)} to bad hive entity {ToPrettyString(hive)}");
             return; // invalid hive was passed, prevent it breaking anything else
+        }
 
         comp.Hive = hive;
         Dirty(member, comp);

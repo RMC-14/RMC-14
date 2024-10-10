@@ -1,0 +1,128 @@
+﻿- type: entity
+  abstract: true
+  parent: [ BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder ]
+  id: RMCBaseWeaponShotgun
+  components:
+  - type: Item
+    size: Large
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Shotguns/db_shotgun.rsi
+    slots:
+    - Back
+    - SuitStorage
+  - type: Wieldable
+  - type: WieldDelay
+    baseDelay: 0.6
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.842
+    baseSprint: 0.748
+  - type: AmmoCounter
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/empty.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 10
+    scatterUnwielded: 20
+    baseFireRate: 1.429
+    burstScatterMult: 5
+  - type: BallisticAmmoProvider
+    cycleable: false
+    whitelist:
+      tags:
+      - RMCShellShotgun
+    capacity: 9
+    proto: null
+    soundInsert:
+      collection: CMShotgunLoad
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: RMCAmmoEject
+    containerID: ballistic-ammo
+    ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+  - type: StaticPrice
+    price: 500
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+  - type: Tag
+    tags:
+    - RMCWeaponShotgun
+  - type: RMCFireGroup
+    group: Shotgun
+    delay: 4
+
+- type: entity
+  abstract: true
+  parent: RMCBaseWeaponShotgun
+  id: RMCBaseBreechloader
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Shotguns/db_shotgun.rsi
+    layers:
+    - state: base
+      map: [ "enum.BreechVisuals.Open" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.BreechVisuals.Open:
+        enum.BreechVisuals.Open:
+          True: { state: bolt-open }
+          False: { state: base }
+  - type: BallisticAmmoProvider
+    cycleable: true
+    capacity: 2
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
+      params:
+        volume: -2
+  - type: UniqueAction
+  - type: BreechLoaded
+    needOpenClose: false
+  - type: RMCFireGroup
+    group: Shotgun
+    delay: 0
+
+- type: entity
+  abstract: true
+  parent: BaseCartridge
+  id: CMShellShotgunBase
+  name: handful of shotgun shell
+  description: A handful of rounds to reload on the go.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi
+    layers:
+    - state: buckshot_shell_1
+  - type: Item
+    size: Small
+  - type: CartridgeAmmo
+    proto: CMPelletShotgunBuckshot
+    deleteOnSpawn: true
+    soundEject:
+      collection: ShellEject
+    soundInsert:
+      collection: CMShotgunLoad
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCShellShotgun
+  - type: Appearance
+  - type: StaticPrice
+    price: 0
+
+- type: Tag
+  id: RMCWeaponShotgun

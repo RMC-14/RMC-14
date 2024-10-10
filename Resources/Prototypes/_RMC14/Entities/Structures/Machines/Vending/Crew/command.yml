@@ -128,7 +128,7 @@
       - id: CMBeltMedicalFilled
       #- id: CMBeltM39 # TODO RMC14 M39 Belt
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
-      #- id: CMBeltShotgunRig # TODO RMC14 Shotgun Belt
+      - id: RMCM276ShotgunShellLoadingRig
       - id: RMCBeltGrenade
     - name: Pouches
       choices: { CMPouches: 2 }
@@ -149,7 +149,7 @@
       - id: RMCPouchGeneralLarge
         recommended: true
       - id: RMCPouchMagazineLarge
-      #- id: RMCPouchShotgunLarge # TODO RMC14 Large Shotgun Pouch
+      - id: RMCPouchShotgunLarge
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMedical
       - id: RMCPouchMedkit
@@ -286,7 +286,7 @@
         recommended: true
       - id: RMCPouchGeneralLarge
       - id: RMCPouchMagazineLarge
-      #- id: RMCPouchShotgunLarge # TODO RMC14 Large Shotgun Pouch
+      - id: RMCPouchShotgunLarge
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMedical
       - id: RMCPouchMedkit
@@ -434,7 +434,7 @@
         points: 5
       - id: RMCFlashlight
         points: 1
-      
+
 # Commanding Officer #
 
 # Clothing Vend
@@ -559,6 +559,7 @@
       - id: CMBeltUtilityCombat
         recommended: true
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+      - id: RMCM276ShotgunShellLoadingRig
     - name: Pouches
       choices: { CMPouch: 2 }
       entries:
@@ -575,7 +576,7 @@
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMagazineLarge
       - id: RMCPouchPistol
-      #- id: RMCPouchShotgunLarge # TODO RMC14 Large Shotgun Pouch
+      - id: RMCPouchShotgunLarge
       - id: RMCPouchToolsFill
 
 # Weapon Vend

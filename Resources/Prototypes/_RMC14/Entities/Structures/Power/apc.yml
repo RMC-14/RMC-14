@@ -2,6 +2,7 @@
   abstract: true
   id: CMApcBase
   name: area power controller
+  description: This model doesn't let you change its power cell yet!
   categories: [ HideSpawnMenu ]
   components:
   - type: Transform
@@ -38,10 +39,8 @@
       shader: unshaded
       map: [ "enum.ApcVisualLayers.Environment" ]
   - type: Appearance
-  - type: Construction
-    graph: CMApc
-    node: apc
   - type: WallMount
+    arc: 360
   - type: UserInterface
     interfaces:
       enum.RMCApcUiKey.Key:
@@ -57,7 +56,6 @@
       - Xeno
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
     - trigger:
@@ -158,6 +156,9 @@
   components:
   - type: RMCApc
     startingCell: RMCPowerCellHigh
+  - type: ContainerContainer
+    containers:
+      rmc_apc_power_cell: !type:ContainerSlot
 
 # APCs in use
 - type: entity
