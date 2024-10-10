@@ -7,7 +7,7 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMSquad
-    time: 18000 # 5 hours
+    time: 7200 # 2 hours
   startingGear: CMGearMaintTech
   icon: "CMJobIconMaintTech"
   joinNotifyCrew: false
