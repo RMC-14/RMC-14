@@ -1,6 +1,7 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
@@ -18,6 +19,7 @@ using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.Throwing;
+using Content.Shared.Timing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
@@ -54,10 +56,15 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private readonly EntityManager _entityManager = default!;
 
     private static readonly EntProtoId DropshipTargetMarker = "RMCLaserDropshipTarget";
 
-    private bool _casDebug;
+    public bool CasDebug
+    {
+        get; private set;
+    }
     private readonly HashSet<Entity<DamageableComponent>> _damageables = new();
     private int _nextId = 1;
 
@@ -98,7 +105,26 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 subs.Event<DropshipTerminalWeaponsTargetsSelectMsg>(OnWeaponsTargetsSelect);
             });
 
-        Subs.CVar(_config, RMCCVars.RMCDropshipCASDebug, v => _casDebug = v, true);
+        Subs.CVar(_config, RMCCVars.RMCDropshipCASDebug, v => CasDebug = v, true);
+    }
+
+    private void SetTarget(Entity<DropshipTerminalWeaponsComponent> dropshipWeaponsTerminal, EntityUid? newTarget)
+    {
+        if (newTarget == dropshipWeaponsTerminal.Comp.Target)
+        {
+            return;
+        }
+        if (!_dropship.TryGetGridDropship(dropshipWeaponsTerminal, out var dropship))
+        {
+            return;
+        }
+        dropshipWeaponsTerminal.Comp.Target = newTarget;
+        var ev = new DropshipTargetChangedEvent(_entityManager.GetNetEntity(newTarget));
+
+        foreach (var attachmentPoint in dropship.Comp.AttachmentPoints)
+        {
+            RaiseLocalEvent(attachmentPoint, ev);
+        }
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -203,7 +229,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (terminal.Target == ent)
             {
                 RemovePvsActors((uid, terminal));
-                terminal.Target = null;
+                SetTarget((uid, terminal), null);
             }
 
             var span = CollectionsMarshal.AsSpan(terminal.Targets);
@@ -287,7 +313,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         }
 
         Entity<DropshipComponent> dropship = default;
-        if (!_casDebug)
+        if (!CasDebug)
         {
             if (!_dropship.TryGetGridDropship(weapon.Value, out dropship))
                 return;
@@ -307,27 +333,27 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (!IsValidTarget(target))
         {
             RemovePvsActors(ent);
-            ent.Comp.Target = null;
+            SetTarget(ent, null);
             Dirty(ent);
             return;
         }
 
         var coordinates = _transform.GetMoverCoordinates(target).SnapToGrid(EntityManager, _mapManager);
-        if (!_casDebug && !_area.CanCAS(coordinates))
+        if (!CasDebug && !_area.CanCAS(coordinates))
         {
             var msg = Loc.GetString("rmc-laser-designator-not-cas");
             _popup.PopupCursor(msg, actor);
             return;
         }
 
-        if (!_casDebug && weaponComp.Skills != null && !_skills.HasSkills(actor, weaponComp.Skills))
+        if (!CasDebug && weaponComp.Skills != null && !_skills.HasSkills(actor, weaponComp.Skills))
         {
             var msg = Loc.GetString("rmc-laser-designator-not-skilled");
             _popup.PopupCursor(msg, actor);
             return;
         }
 
-        if (!_casDebug &&
+        if (!CasDebug &&
             !weaponComp.FireInTransport &&
             !HasComp<DropshipInFlyByComponent>(dropship))
         {
@@ -453,7 +479,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         }
 
         RemovePvsActors(ent);
-        ent.Comp.Target = target;
+        SetTarget(ent, target);
         _eye.SetOffset(target.Value, ent.Comp.Offset);
         AddPvsActors(ent);
 
@@ -498,15 +524,21 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         return 0;
     }
 
+    /// <summary>
+    /// Checks if a target is valid for being fired upon
+    /// </summary>
     private bool IsValidTarget(Entity<DropshipTargetComponent?> ent)
     {
         if (!Resolve(ent, ref ent.Comp, false))
             return false;
 
         var xform = Transform(ent);
-        if (!_casDebug && !HasComp<RMCPlanetComponent>(xform.GridUid))
+        if (!CasDebug && !HasComp<RMCPlanetComponent>(xform.GridUid))
             return false;
-
+        if (!ent.Comp.IsTargetableByWeapons)
+        {
+            return false;
+        }
         return true;
     }
 

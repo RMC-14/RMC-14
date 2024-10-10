@@ -1,7 +1,7 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._RMC14.Dropship;
+namespace Content.Shared._RMC14.Dropship.AttachmentPoint;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedDropshipSystem))]

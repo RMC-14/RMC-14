@@ -11,6 +11,10 @@
   - type: DropshipAmmo
     rounds: 400
     maxRounds: 400
+  - type: PowerLoaderAttachable
+    attachableTypes:
+    - RMCDropshipWeaponPoint
+  - type: PowerLoaderDetachable
 
 - type: entity
   parent: RMCDropshipAttachmentAmmo
