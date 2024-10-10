@@ -139,7 +139,6 @@
           "/Audio/Weapons/smash.ogg"
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
     - trigger:
