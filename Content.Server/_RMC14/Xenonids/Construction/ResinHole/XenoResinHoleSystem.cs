@@ -240,16 +240,13 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
     private void OnPlaceFluidInResinHole(Entity<XenoResinHoleComponent> resinHole, ref XenoPlaceFluidInHoleDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
-        {
             return;
-        }
 
         if (TryComp(args.User, out XenoBombardComponent? bombardComp) && resinHole.Comp.TrapPrototype == null)
         {
 
-            if (!_xenoPlasma.HasPlasmaPopup(args.User, bombardComp.PlasmaCost, false))
+            if (!_xenoPlasma.TryRemovePlasmaPopup(args.User, bombardComp.PlasmaCost))
                 return;
-            _xenoPlasma.TryRemovePlasma(args.User, bombardComp.PlasmaCost);
 
             switch (bombardComp.Projectile.Id)
             {
@@ -274,7 +271,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             if (resinHole.Comp.TrapPrototype != null && (!IsAcidPrototype(resinHole.Comp.TrapPrototype, out var level) || level >= acid.TrapLevel))
                 return;
 
-            if (!_xenoPlasma.HasPlasmaPopup(args.User, acid.Cost, false))
+            if (!_xenoPlasma.TryRemovePlasmaPopup(args.User, acid.Cost))
                 return;
 
             resinHole.Comp.TrapPrototype = acid.Spray;

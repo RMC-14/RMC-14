@@ -1,27 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Xenos can now see non-xenos hidden in lockers after a hijack.
-    type: Tweak
-  id: 317
-  time: '2024-07-09T00:03:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2920
-- author: DrSmugleaf
-  changes:
-  - message: Fixed being able to deconstruct the ASRS console.
-    type: Fix
-  id: 318
-  time: '2024-07-09T00:48:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2919
-- author: Tunguso4ka
-  changes:
-  - message: Ported disabler gun!
-    type: Add
-  id: 319
-  time: '2024-07-09T00:49:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2916
-- author: DrSmugleaf
-  changes:
   - message: Added pod door buttons.
     type: Add
   id: 320
@@ -4638,5 +4617,36 @@
   id: 816
   time: '2024-10-10T01:02:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4390
+- author: Whisper
+  changes:
+  - message: Fixed some minor structures and objects having arbitrary damage reduction,
+      resulting in doors and floodlights taking more damage to destroy than intended.
+    type: Fix
+  id: 817
+  time: '2024-10-10T05:40:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4392
+- author: TeaTotalTemplar
+  changes:
+  - message: Adds the Beretta M92FS pistol and magazine
+    type: Add
+  id: 818
+  time: '2024-10-10T05:41:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4397
+- author: Rainbeon
+  changes:
+  - message: Lurkers can now manually toggle off their invisibility, which refunds
+      90% of the remaining cloak time.
+    type: Add
+  - message: Lurkers can now attack structures and wideswing without losing invisibility,
+      as long as they do not hit a Marine.
+    type: Add
+  - message: Lurkers can now shove Marines without losing invisibility.
+    type: Add
+  - message: Lurkers can no longer devour while invisible. Doing so de-cloaks them
+      and refunds 50% of the remaining cloak time.
+    type: Remove
+  id: 819
+  time: '2024-10-10T05:42:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4364
 Name: RMC14
 Order: -1
