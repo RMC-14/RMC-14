@@ -103,8 +103,6 @@
     - ActionXenoTransferPlasma
     - ActionXenoDevolve
   - type: XenoEvolution
-    canEvolveWithoutGranter: true
-    max: 200
     strains:
     - CMXenoDroneGardener
   - type: XenoAcid
