@@ -16,7 +16,6 @@
   - type: Repairable
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: PointLight
     enabled: true
     radius: 6
@@ -88,7 +87,6 @@
   - type: InteractionOutline
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: PointLight
     enabled: true
     radius: 10

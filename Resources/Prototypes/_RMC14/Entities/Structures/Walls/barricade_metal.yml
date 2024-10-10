@@ -194,7 +194,6 @@
       - map: [ "acided" ]
     - type: Damageable
       damageContainer: Inorganic
-      damageModifierSet: Metallic
     - type: Destructible
       thresholds:
       - trigger:
@@ -243,7 +242,6 @@
     - type: Repairable
     - type: Damageable
       damageContainer: Inorganic
-      damageModifierSet: Metallic
     - type: Destructible
       thresholds:
       - trigger:

@@ -12,10 +12,9 @@
     - state: shower
   - type: Clickable
   - type: InteractionOutline
-  - type: Appearance  
+  - type: Appearance
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
     - trigger:
