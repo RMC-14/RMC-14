@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Scoping;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
