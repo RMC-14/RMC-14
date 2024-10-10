@@ -11,10 +11,10 @@
     - [ CMWelder ] # TODO RMC14 industrial welder
     - [ CMAdvFirstAidKitFilled ]
     randomWeapon:
-    - [ CMWeaponPistolM1984, CMMagazinePistolM1984 ] # TODO RMC14 b92fs
-    - [ RMCWeaponRevolverM44, RMCSpeedLoaderM44 ] # TODO RMC14 CMB revolver
-    # TODO RMC14 highpower automagnum
-    # TODO RMC14 m1911
+    # TODO RMC14 b92fs
+    # TODO RMC14 CMB revolver
+    - [ RMCWeaponPistolMK45, RMCMagazinePistolMK45 ]
+    - [ CMWeaponPistolM1984, CMMagazinePistolM1984 ]
     # TODO RMC14 S&W .38 model 37 revolver
     primaryWeapons:
     - [ RMCBeltMarineAR10, WeaponRifleAR10 ]
