@@ -1,0 +1,39 @@
+- type: entity
+  parent: CMShellShotgunBase
+  id: RMCCartridge458SOCOM
+  name: handful of .458 SOCOM bullets
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/xm88.rsi
+    layers:
+    - state: SOCOM1
+      map: [ "base" ]
+  - type: CartridgeAmmo
+    proto: CMPelletShotgunBuckshot
+  - type: Stack
+    count: 9
+    stackType: RMCShellShotgunBuckshot
+    baseLayer: base
+    layerStates:
+    - SOCOM1
+    - SOCOM1
+    - SOCOM2
+    - SOCOM3
+    - SOCOM4
+    - SOCOM5
+    - SOCOM6
+    - SOCOM7
+    - SOCOM8
+    - SOCOM9
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCShellShotgun
+    - RMCShellShotgunBuckshot
+
+- type: stack
+  id: RMCCartridge458SOCOM
+  name: handful of .458 SOCOM bullets
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Magazines/xm88.rsi, state: SOCOM1 }
+  spawn: CMShellShotgunBuckshot
+  maxCount: 9
