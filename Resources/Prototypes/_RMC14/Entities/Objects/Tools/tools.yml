@@ -114,6 +114,8 @@
     slots:
     - Belt
     - Suitstorage
+  - type: Prying
+    speedModifier: 100000
 
 - type: entity
   parent: CMCrowbar
