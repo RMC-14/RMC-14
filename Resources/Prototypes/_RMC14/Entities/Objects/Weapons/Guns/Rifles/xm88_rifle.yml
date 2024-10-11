@@ -81,3 +81,6 @@
   - type: CMArmorPiercing
     amount: 10
   - type: GunStacksProjectile
+
+- type: Tag
+  id: RMCCartridge458SOCOM
