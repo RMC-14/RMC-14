@@ -41390,6 +41390,23 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 200.5,89.5
       parent: 1
+- proto: CMArmorRiot
+  entities:
+  - uid: 15839
+    components:
+    - type: Transform
+      pos: 199.5,30.5
+      parent: 1
+  - uid: 15840
+    components:
+    - type: Transform
+      pos: 200.5,29.5
+      parent: 1
+  - uid: 15841
+    components:
+    - type: Transform
+      pos: 201.5,29.5
+      parent: 1
 - proto: CMAutolathe
   entities:
   - uid: 5576
@@ -109641,6 +109658,18 @@ entities:
     - type: Transform
       pos: 164.5,30.5
       parent: 1
+- proto: RMCArmorSecurity
+  entities:
+  - uid: 15837
+    components:
+    - type: Transform
+      pos: 97.5,89.5
+      parent: 1
+  - uid: 15838
+    components:
+    - type: Transform
+      pos: 98.5,89.5
+      parent: 1
 - proto: RMCBarricadeHandrail
   entities:
   - uid: 3810
@@ -117061,42 +117090,96 @@ entities:
     - type: Transform
       pos: 159.5,88.5
       parent: 1
-- proto: RMCSpawnerCorpseColonist
+- proto: RMCSpawnerCorpseDoctor
+  entities:
+  - uid: 7463
+    components:
+    - type: Transform
+      pos: 101.5,67.5
+      parent: 1
+  - uid: 14563
+    components:
+    - type: Transform
+      pos: 205.5,125.5
+      parent: 1
+- proto: RMCSpawnerCorpseEngineer
   entities:
   - uid: 7386
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 98.5,101.5
+      pos: 67.5,58.5
       parent: 1
-  - uid: 7387
+  - uid: 7995
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 85.5,93.5
+      pos: 152.5,58.5
       parent: 1
+  - uid: 9695
+    components:
+    - type: Transform
+      pos: 175.5,138.5
+      parent: 1
+- proto: RMCSpawnerCorpseMiner
+  entities:
   - uid: 7388
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 67.5,58.5
+      pos: 98.5,101.5
       parent: 1
-  - uid: 7463
+  - uid: 14297
     components:
     - type: Transform
-      pos: 115.5,150.5
+      pos: 203.5,118.5
       parent: 1
+- proto: RMCSpawnerCorpsePrisoner
+  entities:
+  - uid: 8074
+    components:
+    - type: Transform
+      pos: 160.5,126.5
+      parent: 1
+- proto: RMCSpawnerCorpseScientist
+  entities:
+  - uid: 12350
+    components:
+    - type: Transform
+      pos: 176.5,37.5
+      parent: 1
+  - uid: 13057
+    components:
+    - type: Transform
+      pos: 197.5,134.5
+      parent: 1
+  - uid: 14187
+    components:
+    - type: Transform
+      pos: 200.5,132.5
+      parent: 1
+- proto: RMCSpawnerCorpseSecurity
+  entities:
   - uid: 7464
     components:
     - type: Transform
-      pos: 112.5,151.5
-      parent: 1
-  - uid: 7465
-    components:
-    - type: Transform
-      pos: 118.5,151.5
+      pos: 108.5,97.5
       parent: 1
   - uid: 7642
+    components:
+    - type: Transform
+      pos: 112.5,82.5
+      parent: 1
+  - uid: 9313
+    components:
+    - type: Transform
+      pos: 174.5,153.5
+      parent: 1
+- proto: RMCSpawnerCorpseWeYaGoon
+  entities:
+  - uid: 7387
+    components:
+    - type: Transform
+      pos: 85.5,93.5
+      parent: 1
+  - uid: 7465
     components:
     - type: Transform
       pos: 109.5,68.5
@@ -117104,61 +117187,7 @@ entities:
   - uid: 7643
     components:
     - type: Transform
-      pos: 101.5,67.5
-      parent: 1
-  - uid: 7995
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 112.5,82.5
-      parent: 1
-  - uid: 8074
-    components:
-    - type: Transform
-      pos: 108.5,97.5
-      parent: 1
-  - uid: 9313
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 152.5,58.5
-      parent: 1
-  - uid: 9695
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
       pos: 141.5,155.5
-      parent: 1
-  - uid: 12350
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 176.5,37.5
-      parent: 1
-  - uid: 13057
-    components:
-    - type: Transform
-      pos: 203.5,118.5
-      parent: 1
-  - uid: 14187
-    components:
-    - type: Transform
-      pos: 175.5,138.5
-      parent: 1
-  - uid: 14297
-    components:
-    - type: Transform
-      pos: 174.5,153.5
-      parent: 1
-  - uid: 14563
-    components:
-    - type: Transform
-      pos: 205.5,125.5
-      parent: 1
-  - uid: 14564
-    components:
-    - type: Transform
-      pos: 200.5,132.5
       parent: 1
 - proto: RMCSpawnerFigurinePatron
   entities:
