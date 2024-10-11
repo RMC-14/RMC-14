@@ -37,7 +37,7 @@
   id: ActionXenoPheromones
   parent: ActionXenoBase
   name: Emit Pheromones (35) # TODO RMC14 proper plasma costs
-  description: Gives a buff to nearby xenonids. Consumes 2.5 plasma per second.
+  description: Gives a buff to nearby xenonids. [color=cyan]Consumes 2.5 plasma per second.[/color]
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -99,7 +99,7 @@
   id: ActionXenoResinWalker
   parent: ActionXenoBase
   name: Resin Walker (50) # TODO RMC14 proper plasma costs
-  description: Run faster on weeds. Consumes 30 plasma per second.
+  description: Run faster on weeds. [color=cyan]Consumes 30 plasma per second.[/color]
   components:
   - type: InstantAction
     itemIconStyle: NoItem
