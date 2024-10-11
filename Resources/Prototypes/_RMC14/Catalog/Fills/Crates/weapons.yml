@@ -43,7 +43,7 @@
     contents:
       - id: WeaponRifleXM88
         amount: 2
-      - id: CMBoxRifleXM88
+      - id: RMCBox458SOCOM
         amount: 2
 
 - type: entity
