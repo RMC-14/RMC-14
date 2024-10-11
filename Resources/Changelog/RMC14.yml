@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Ported Solaris Ridge
-    type: Add
-  id: 322
-  time: '2024-07-09T08:51:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2479
-- author: Vermidia
-  changes:
-  - message: Getting infected now also mutes you (in addition to paralyzing and blinding
-      you)
-    type: Add
-  id: 323
-  time: '2024-07-09T09:40:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2925
 - author: DrSmugleaf
   changes:
   - message: Fixed damaged xenonids being able to evolve. Xenos must now be on full
@@ -4653,5 +4638,26 @@
   id: 821
   time: '2024-10-10T20:08:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4400
+- author: Rainbeon
+  changes:
+  - message: The Rest action description no longer falsely claims to regenerate plasma,
+      as resting has no effect on plasma regeneration.
+    type: Fix
+  - message: Pheromone and Resin Walker descriptions now state how much Plasma they
+      consume per second.
+    type: Add
+  id: 822
+  time: '2024-10-11T09:24:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4408
+- author: TeaTotalTemplar
+  changes:
+  - message: Adds the M07 Training Grenade - this grenade functions identically to
+      the M40 HEDP and HEFA but contains no explosive charge, allowing new recruits
+      to familiarise themselves with the M40 in a safe environment. Can be loaded
+      into grenade launchers, or thrown by hand.
+    type: Add
+  id: 823
+  time: '2024-10-11T09:25:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4398
 Name: RMC14
 Order: -1
