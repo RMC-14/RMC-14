@@ -11,7 +11,9 @@
   - type: Item
     sprite: _RMC14/Objects/Devices/radio.rsi
   - type: RadioMicrophone
+    enabled: true
     broadcastChannel: ColonyHandheld
   - type: RadioSpeaker
+    enabled: true
     channels:
     - ColonyHandheld
