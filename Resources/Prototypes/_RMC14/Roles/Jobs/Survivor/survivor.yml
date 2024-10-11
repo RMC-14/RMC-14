@@ -30,6 +30,7 @@
         RMCSkillFirearms: 1
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetCivilian
+    - type: Survivor
   hasIcon: false
 
 - type: startingGear
