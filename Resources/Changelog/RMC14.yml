@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Barricades with barbed wires maintain their barbed wires when upgrading
-    type: Fix
-  id: 331
-  time: '2024-07-10T03:01:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2936
 - author: DrSmugleaf
   changes:
   - message: Fixed walls and membranes not destroying weed nodes under them when constructed.
@@ -4734,5 +4727,12 @@
   id: 830
   time: '2024-10-11T23:24:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4422
+- author: DrSmugleaf
+  changes:
+  - message: Fixed survivors not being listed on the ghost warp UI.
+    type: Fix
+  id: 831
+  time: '2024-10-11T23:25:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4423
 Name: RMC14
 Order: -1
