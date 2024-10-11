@@ -99,7 +99,7 @@
   id: ActionXenoResinWalker
   parent: ActionXenoBase
   name: Resin Walker (50) # TODO RMC14 proper plasma costs
-  description: Run faster on weeds.
+  description: Run faster on weeds. Consumes 30 plasma per second.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
