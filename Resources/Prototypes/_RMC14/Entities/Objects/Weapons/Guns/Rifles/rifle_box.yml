@@ -15,7 +15,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/SOCOM_box.rsi
     layers:
-    - state: buckshot
-      map: [ "SOCOMFULL32subdiv" ]
-    - state: buckshot_e
-      map: [ "Socom32e" ]
+    - state: SOCOMFULL32subdiv
+      map: [ "full" ]
+    - state: Socom32e
+      map: [ "empty" ]
