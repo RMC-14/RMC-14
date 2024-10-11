@@ -237,7 +237,6 @@
         crate: CMCrateMK80
       - cost: 4000
         crate: CMCrateXM88
-        crate: RMCCrateMK80
       - cost: 3000
         crate: RMCCrateSU6
       - cost: 3000
