@@ -3,7 +3,6 @@ using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
 using Content.Server.Radio.Components;
 using Content.Server.VoiceMask;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Radio;
@@ -47,9 +46,6 @@ public sealed class RadioSystem : EntitySystem
 
     private void OnIntrinsicSpeak(EntityUid uid, IntrinsicRadioTransmitterComponent component, EntitySpokeEvent args)
     {
-        if (HasComp<XenoComponent>(args.Source))
-            return;
-
         if (args.Channel != null && component.Channels.Contains(args.Channel.ID))
         {
             SendRadioMessage(uid, args.Message, args.Channel, uid);

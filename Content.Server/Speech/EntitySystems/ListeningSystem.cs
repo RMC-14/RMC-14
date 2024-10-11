@@ -1,6 +1,5 @@
 using Content.Server.Chat.Systems;
 using Content.Server.Speech.Components;
-using Content.Shared._RMC14.Xenonids;
 
 namespace Content.Server.Speech.EntitySystems;
 
@@ -24,9 +23,6 @@ public sealed class ListeningSystem : EntitySystem
 
     public void PingListeners(EntityUid source, string message, string? obfuscatedMessage)
     {
-        if (HasComp<XenoComponent>(source))
-            return;
-
         // TODO whispering / audio volume? Microphone sensitivity?
         // for now, whispering just arbitrarily reduces the listener's max range.
 
