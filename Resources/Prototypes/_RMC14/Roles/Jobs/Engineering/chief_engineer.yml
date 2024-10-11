@@ -36,7 +36,6 @@
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
     - type: MarineOrders
-  hidden: true # TODO RMC14
 
 - type: startingGear
   id: CMGearChiefEngineer

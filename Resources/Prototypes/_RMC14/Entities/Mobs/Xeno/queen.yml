@@ -136,6 +136,7 @@
     whitelist:
       components:
       - XenoEgg
+      - XenoFruit
   - type: XenoEvolutionGranter
   - type: XenoEvolutionCapped
     id: CMXenoQueen
@@ -174,3 +175,6 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: xenoqueen
+  - type: AcidTrap
+  - type: TacticalMapLiveUpdateOnOvi
+    enabled: false

@@ -49,7 +49,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly SharedXenoHiveSystem _xenoHive = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -148,12 +147,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
         var time = _timing.CurTime;
         if (_prototypes.TryIndex(args.Choice, out var choice) &&
             choice.HasComponent<XenoEvolutionGranterComponent>(_compFactory) &&
-            TryComp(xeno, out XenoComponent? xenoComp) &&
-            TryComp(xenoComp.Hive, out HiveComponent? hive) &&
-            hive.LastQueenDeath is { } lastQueenDeath &&
-            time < lastQueenDeath + hive.NewQueenCooldown)
+            _xenoHive.GetHive(xeno.Owner) is { } hive &&
+            hive.Comp.LastQueenDeath is { } lastQueenDeath &&
+            time < lastQueenDeath + hive.Comp.NewQueenCooldown)
         {
-            var left = lastQueenDeath + hive.NewQueenCooldown - time;
+            var left = lastQueenDeath + hive.Comp.NewQueenCooldown - time;
             var msg = Loc.GetString("rmc-xeno-evolution-cant-evolve-recent-queen-death-minutes",
                 ("minutes", left.Minutes),
                 ("seconds", left.Seconds));
@@ -384,16 +382,15 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         if (newXenoComp != null &&
             !newXenoComp.BypassTierCount &&
-            TryComp(xeno, out XenoComponent? oldXenoComp) &&
-            oldXenoComp.Hive is { } oldHive &&
-            _xenoHive.TryGetTierLimit(oldHive, newXenoComp.Tier, out var limit))
+            _xenoHive.GetHive(xeno.Owner) is {} oldHive &&
+            _xenoHive.TryGetTierLimit((oldHive, oldHive.Comp), newXenoComp.Tier, out var limit))
         {
             var existing = 0;
             var total = 0;
-            var current = EntityQueryEnumerator<XenoComponent>();
-            while (current.MoveNext(out var existingComp))
+            var current = EntityQueryEnumerator<XenoComponent, HiveMemberComponent>();
+            while (current.MoveNext(out var existingComp, out var member))
             {
-                if (existingComp.Hive != oldHive || !existingComp.CountedInSlots)
+                if (member.Hive != oldHive.Owner || !existingComp.CountedInSlots)
                     continue;
 
                 total++;
@@ -404,7 +401,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 existing++;
             }
 
-            if (_xenoHive.TryGetFreeSlots(oldHive, newXeno, out var freeSlots))
+            if (_xenoHive.TryGetFreeSlots((oldHive, oldHive.Comp), newXeno, out var freeSlots))
                 existing -= freeSlots;
 
             if (total != 0 && existing / (float) total >= limit)
@@ -522,7 +519,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     {
         var coordinates = _transform.GetMoverCoordinates(xeno);
         var newXeno = Spawn(proto, coordinates);
-        _xeno.SetSameHive(newXeno, xeno);
+        _xenoHive.SetSameHive(xeno, newXeno);
 
         if (_mind.TryGetMind(xeno, out var mindId, out _))
         {
@@ -619,6 +616,20 @@ public sealed class XenoEvolutionSystem : EntitySystem
             }
         }
 
+        var evoBonus = FixedPoint2.Zero;
+        var bonuses = EntityQueryEnumerator<EvolutionBonusComponent>();
+        while (bonuses.MoveNext(out var comp))
+        {
+            evoBonus += comp.Amount;
+        }
+
+        FixedPoint2? evoOverride = null;
+        var overrides = EntityQueryEnumerator<EvolutionOverrideComponent>();
+        while (overrides.MoveNext(out var comp))
+        {
+            evoOverride = comp.Amount;
+        }
+
         var evolution = EntityQueryEnumerator<XenoEvolutionComponent>();
         while (evolution.MoveNext(out var uid, out var comp))
         {
@@ -641,16 +652,17 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 continue;
             }
 
+            var gain = evoOverride ?? comp.PointsPerSecond + evoBonus;
             if (comp.Points < comp.Max || roundDuration < _evolutionAccumulatePointsBefore)
             {
                 if (needsOvipositor && comp.RequiresGranter && !hasGranter)
                     continue;
 
-                SetPoints((uid, comp), comp.Points + comp.PointsPerSecond);
+                SetPoints((uid, comp), comp.Points + gain);
             }
             else if (comp.Points > comp.Max)
             {
-                SetPoints((uid, comp), FixedPoint2.Max(comp.Points - comp.PointsPerSecond, comp.Max));
+                SetPoints((uid, comp), FixedPoint2.Max(comp.Points - gain, comp.Max));
             }
         }
     }

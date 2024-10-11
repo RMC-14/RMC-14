@@ -33,10 +33,7 @@ public sealed class XenoEnergySystem : EntitySystem
         var isHit = false;
         foreach (var hit in args.HitEntities)
         {
-            if (_xeno.FromSameHive(xeno.Owner, hit))
-                continue;
-
-            if (!_mobState.IsAlive(hit))
+            if (!_xeno.CanAbilityAttackTarget(xeno.Owner, hit))
                 continue;
 
             isHit = true;
@@ -51,7 +48,8 @@ public sealed class XenoEnergySystem : EntitySystem
 
     private void OnXenoProjectileHitUser(Entity<XenoEnergyComponent> xeno, ref XenoProjectileHitUserEvent args)
     {
-        AddEnergy(xeno, xeno.Comp.GainAttack);
+        if (_xeno.CanAbilityAttackTarget(xeno, args.Hit))
+            AddEnergy(xeno, xeno.Comp.GainAttack);
     }
 
     private void OnRejuvenate(Entity<XenoEnergyComponent> ent, ref RejuvenateEvent args)

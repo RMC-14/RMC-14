@@ -63,8 +63,6 @@
   - type: XenoBoneChips
   - type: XenoDevour
   - type: XenoHide
-  - type: SlowOnPull
-    multiplier: 0.3
   - type: XenoLeap
     delay: 0
     knockdownTime: 2
@@ -76,7 +74,7 @@
   - type: CMArmor
     explosionArmor: 10
   - type: XenoEvolution
-    max: 300
+    max: 200
     evolvesTo:
     - CMXenoLurker
   - type: XenoZoom

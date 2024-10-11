@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
@@ -10,6 +11,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
@@ -44,6 +46,8 @@ public sealed class ThermalCloakSystem : EntitySystem
         SubscribeLocalEvent<ThermalCloakComponent, GotUnequippedEvent>(OnUnequipped);
 
         SubscribeLocalEvent<EntityActiveInvisibleComponent, VaporHitEvent>(OnVaporHit);
+        SubscribeLocalEvent<EntityActiveInvisibleComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<EntityActiveInvisibleComponent, XenoDevouredEvent>(OnDevour);
 
         SubscribeLocalEvent<GunComponent, AttemptShootEvent>(OnAttemptShoot);
         SubscribeLocalEvent<ExplodeOnTriggerComponent, UseInHandEvent>(OnTimerUse);
@@ -234,14 +238,27 @@ public sealed class ThermalCloakSystem : EntitySystem
         }
     }
 
+    private void OnAcidProjectile(Entity<UncloakOnHitComponent> ent, ref ProjectileHitEvent args)
+    {
+        TrySetInvisibility(args.Target, false, true);
+    }
+
     private void OnVaporHit(Entity<EntityActiveInvisibleComponent> ent, ref VaporHitEvent args)
     {
         TrySetInvisibility(ent.Owner, false, true);
     }
 
-    private void OnAcidProjectile(Entity<UncloakOnHitComponent> ent, ref ProjectileHitEvent args)
+    private void OnMobStateChanged(Entity<EntityActiveInvisibleComponent> ent, ref MobStateChangedEvent args)
     {
-        TrySetInvisibility(args.Target, false, true);
+        if (args.NewMobState != MobState.Dead)
+            return;
+
+        TrySetInvisibility(ent.Owner, false, true);
+    }
+
+    private void OnDevour(Entity<EntityActiveInvisibleComponent> ent, ref XenoDevouredEvent args)
+    {
+        TrySetInvisibility(ent.Owner, false, true);
     }
 
     private Entity<ThermalCloakComponent>? FindWornCloak(EntityUid player)

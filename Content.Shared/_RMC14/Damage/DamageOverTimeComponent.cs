@@ -27,6 +27,9 @@ public sealed partial class DamageOverTimeComponent : Component
     public SoundSpecifier? BarricadeSound = new SoundCollectionSpecifier("XenoAcidSizzle", AudioParams.Default.WithVolume(-3));
 
     [DataField, AutoNetworkedField]
+    public SoundSpecifier? Sound;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan DamageEvery = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]

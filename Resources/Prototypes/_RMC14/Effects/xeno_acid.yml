@@ -57,15 +57,15 @@
   - type: DamageOnCollide
     acidComboDuration: 40
     acidComboDamage:
-      groups:
-        Burn: 3
+      types:
+        Heat: 3
     acidComboParalyze: 2
     damage:
-      groups:
-        Burn: 30
+      types:
+        Heat: 30
     chainDamage:
-      groups:
-        Burn: 10
+      types:
+        Heat: 10
     whitelist:
       components:
       - Marine
@@ -74,26 +74,94 @@
 - type: entity
   parent: XenoAcidSprayWeak
   id: XenoAcidSprayStrong
-  name: strong splatter
-  description: It burns! It burns!
+  name: splatter
+  description: It burns! It burns like hygiene!
   components:
   - type: Sprite
     layers:
-    - state: acid2-strong
+    - state: acid2
   - type: DamageOnCollide
     paralyze: 2
     damage:
-      groups:
-        Burn: 36
+      types:
+        Heat: 36
+  - type: TimedDespawn
+    lifetime: 1.0
 
 - type: entity
   parent: XenoAcidSprayWeak
   id: XenoAcidSprayAcidStacks
   name: splatter
-  description: It burns! It burns like hygiene!"
+  description: It burns! It burns like hygiene!
   components:
   - type: Sprite
     layers:
     - state: acid2
   - type: ApplyAcidStacks
     amount: 2
+  - type: DamageOnCollide
+    damage:
+      types:
+        Heat: 24
+  - type: TimedDespawn
+    lifetime: 1.0
+
+- type: entity
+  parent: XenoAcidSprayWeak
+  id: XenoAcidSprayTrap
+  name: splatter
+  description: It burns! It burns like hygiene!
+  components:
+  - type: Sprite
+    layers:
+    - state: acid2
+  - type: DamageOnCollide
+    paralyze: 2
+    damage:
+      types:
+        Heat: 42.6
+    chainDamage:
+      types:
+        Heat: 14.2
+  - type: TimedDespawn
+    lifetime: 1.0
+
+- type: entity
+  parent: XenoAcidSprayTrap
+  id: XenoAcidSprayTrapWeak
+  name: weak splatter
+  description: It burns! It burns, but not as much!
+  components:
+  - type: Sprite
+    layers:
+    - state: acid2-weak
+  - type: DamageOnCollide
+    paralyze: 0
+    damage:
+      types:
+        Heat: 36.6
+    chainDamage:
+      types:
+        Heat: 12.2
+  - type: TimedDespawn
+    lifetime: 0.6
+
+- type: entity
+  parent: XenoAcidSprayTrap
+  id: XenoAcidSprayTrapStrong
+  name: strong splatter
+  description: It burns a lot!
+  components:
+  - type: Sprite
+    layers:
+    - state: acid2-strong
+  - type: DamageOnCollide
+    paralyze: 4
+    damage:
+      types:
+        Heat: 63.9
+    chainDamage:
+      types:
+        Heat: 21.3
+  - type: TimedDespawn
+    lifetime: 3.0
