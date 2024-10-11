@@ -16,7 +16,7 @@
   storage:
     back:
     - RMCM5Bayonet
-    - RMCRadioHandheldColony
+    - RMCRadioHandheldColonyOff
 
 # Chef
 - type: entity
@@ -61,7 +61,7 @@
     ears: CMHeadsetColony
   storage:
     back:
-    - RMCRadioHandheldColony
+    - RMCRadioHandheldColonyOff
 
 # Engineer
 - type: entity
@@ -87,7 +87,7 @@
     belt: CMBeltUtilityFilled
   storage:
     back:
-    - RMCRadioHandheldColony
+    - RMCRadioHandheldColonyOff
 
 # Scientist
 - type: entity
@@ -110,7 +110,7 @@
     ears: CMHeadsetColony
   storage:
     back:
-    - RMCRadioHandheldColony
+    - RMCRadioHandheldColonyOff
 #    # motion detector
 #    # good research notes
 
@@ -137,7 +137,7 @@
   storage:
     back:
     - RMCFlashlightLantern
-    - RMCRadioHandheldColony
+    - RMCRadioHandheldColonyOff
 
 # Security
 - type: entity
@@ -162,7 +162,7 @@
   storage:
     back:
     - RMCM5Bayonet
-    - RMCRadioHandheldColony
+    - RMCRadioHandheldColonyOff
 
 # Marshal Bureau Deputy
 - type: entity
@@ -206,7 +206,7 @@
 #    belt: /obj/item/storage/belt/gun/m4a3/mod88
   storage:
     back:
-    - RMCRadioHandheldColony
+    - RMCRadioHandheldColonyOff
 
 # Prison Guard
 - type: entity
@@ -227,7 +227,7 @@
     ears: CMHeadsetColony
   storage:
     back:
-    - RMCRadioHandheldColony
+    - RMCRadioHandheldColonyOff
 
 # Colonist
 - type: entity
