@@ -443,6 +443,8 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
                 continue;
 
             bureaucraticRewards += SubmitInvoices(entity);
+            bureaucraticRewards += SellingTrash(entity);
+
 
             if (TryComp(entity, out RequisitionsCrateComponent? crate))
             {

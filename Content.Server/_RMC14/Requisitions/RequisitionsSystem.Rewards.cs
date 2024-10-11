@@ -120,5 +120,27 @@ namespace Content.Server._RMC14.Requisitions
 
             return compoundRewards;
         }
+
+        private int SellingTrash(EntityUid uid)
+        {
+            int compoundRewards = 0;
+
+            if (!TryComp<ContainerManagerComponent>(uid, out var container))
+                return compoundRewards;
+
+            // It iterate everything inside the crate, including labelSlot
+            foreach (var containerValues in container.Containers.Values)
+            {
+                foreach (var content in containerValues.ContainedEntities)
+                {
+                    if (TryComp(content, out RequisitionsForSellComponent? containerInvoice))
+                    {
+                        compoundRewards += containerInvoice.Reward;
+                    }
+                }
+            }
+
+            return compoundRewards;
+        }
     }
 }
