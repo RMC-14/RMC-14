@@ -98,7 +98,7 @@
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
-  parent: BaseCartridgePistol
+  parent: CMCartridgePistolBase
   id: CMCartridgePistolMK45
   components:
   - type: Tag
