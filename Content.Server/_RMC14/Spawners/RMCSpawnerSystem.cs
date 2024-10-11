@@ -19,6 +19,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private readonly Dictionary<EntProtoId, List<Entity<ProportionalSpawnerComponent>>> _spawners = new();
+    private readonly List<Entity<CorpseSpawnerComponent>> _corpseSpawners = new();
 
     private int _maxCorpses;
     private int _corpsesSpawned;
@@ -63,26 +64,27 @@ public sealed class RMCSpawnerSystem : EntitySystem
         EnsureComp<TimedDespawnComponent>(ent).Lifetime = (float) time.TotalSeconds;
     }
 
-    public bool CanSpawn(Entity<CorpseSpawnerComponent?> spawner)
-    {
-        return !HasComp<CorpseSpawnerComponent>(spawner);
-    }
-
     public override void Update(float frameTime)
     {
         _spawners.Clear();
+        _corpseSpawners.Clear();
 
-        var corpseSpawners = EntityQueryEnumerator<CorpseSpawnerComponent>();
-        while (corpseSpawners.MoveNext(out var uid, out var comp))
+        var corpseSpawnersQuery = EntityQueryEnumerator<CorpseSpawnerComponent>();
+        while (corpseSpawnersQuery.MoveNext(out var uid, out var comp))
         {
             if (TerminatingOrDeleted(uid) || EntityManager.IsQueuedForDeletion(uid))
                 continue;
 
             QueueDel(uid);
+            _corpseSpawners.Add((uid, comp));
+        }
+
+        foreach (var spawner in _corpseSpawners)
+        {
             if (_corpsesSpawned >= _maxCorpses)
                 continue;
 
-            Spawn(comp.Spawn, Transform(uid).Coordinates);
+            Spawn(spawner.Comp.Spawn, _transform.GetMoverCoordinates(spawner));
         }
 
         var proportional = EntityQueryEnumerator<ProportionalSpawnerComponent>();
