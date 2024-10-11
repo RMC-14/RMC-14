@@ -267,6 +267,14 @@
     fruitGrowthMultiplier: 0.8
   - type: EdgeSpreader
     id: XenoWeeds
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity # TODO RMC14 sound
   parent: XenoHardyWeeds
