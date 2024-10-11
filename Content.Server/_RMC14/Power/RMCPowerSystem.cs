@@ -73,6 +73,9 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
             if (receiverComp.Powered == on)
                 continue;
 
+            if (!receiverComp.NeedsPower)
+                continue;
+
             receiverComp.Powered = on;
             Dirty(receiver, receiverComp);
 
