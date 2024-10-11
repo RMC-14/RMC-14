@@ -2,7 +2,7 @@
   id: ActionXenoRest
   parent: ActionXenoBase
   name: Rest
-  description: Lie down to regenerate health and plasma more quickly while on weeds.
+  description: Lie down to regenerate health more quickly while on weeds.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -16,7 +16,7 @@
   parent: CMGuidebookActionXenoBase
   id: CMGuidebookActionXenoRest
   name: Rest
-  description: Lie down to regenerate health and plasma more quickly while on weeds.
+  description: Lie down to regenerate health more quickly while on weeds.
   components:
   - type: Sprite
     state: resting
@@ -37,7 +37,7 @@
   id: ActionXenoPheromones
   parent: ActionXenoBase
   name: Emit Pheromones (35) # TODO RMC14 proper plasma costs
-  description: Gives a buff to nearby xenonids.
+  description: Gives a buff to nearby xenonids. [color=cyan]Consumes 2.5 plasma per second.[/color]
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -99,7 +99,7 @@
   id: ActionXenoResinWalker
   parent: ActionXenoBase
   name: Resin Walker (50) # TODO RMC14 proper plasma costs
-  description: Run faster on weeds.
+  description: Run faster on weeds. [color=cyan]Consumes 30 plasma per second.[/color]
   components:
   - type: InstantAction
     itemIconStyle: NoItem
