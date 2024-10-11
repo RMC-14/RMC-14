@@ -18,3 +18,14 @@
     enabled: true
     channels:
     - ColonyHandheld
+
+- type: entity
+  parent: RMCRadioHandheldColony
+  id: RMCRadioHandheldColonyOff
+  name: shortwave radio
+  suffix: Off
+  components:
+  - type: RadioMicrophone
+    enabled: false
+  - type: RadioSpeaker
+    enabled: false
