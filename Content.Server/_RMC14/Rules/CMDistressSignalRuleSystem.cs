@@ -10,6 +10,7 @@ using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Preferences.Managers;
+using Content.Server.Roles;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Spawners.Components;
@@ -87,7 +88,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCStationJobsSystem _rmcStationJobs = default!;
+    [Dependency] private readonly RoleSystem _roles = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
+    [Dependency] private readonly PlayTimeTrackingSystem _playTimeTracking = default!;
     [Dependency] private readonly StationJobsSystem _stationJobs = default!;
     [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
@@ -291,6 +294,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                 RemCompDeferred<TacticalMapUserComponent>(survivorMob);
                 _mind.TransferTo(mind.Value, survivorMob);
+
+                if (!HasComp<JobComponent>(mind.Value))
+                    _roles.MindAddRole(mind.Value, jobComp, silent: false);
+
+                _playTimeTracking.PlayerRolesChanged(player);
                 return playerId;
             }
 
