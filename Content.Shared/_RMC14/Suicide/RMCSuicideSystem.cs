@@ -127,6 +127,7 @@ public sealed class RMCSuicideSystem : EntitySystem
         _mobState.ChangeMobState(user, MobState.Dead);
         EnsureComp<RMCHasSuicidedComponent>(user);
         EnsureComp<RottingComponent>(user);
+        _audio.PlayPredicted(gun.SoundGunshot, held, ent);
     }
 
     private void OnHasSuicidedUpdateMobState(Entity<RMCHasSuicidedComponent> ent, ref UpdateMobStateEvent args)
