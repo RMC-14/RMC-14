@@ -63,13 +63,6 @@
     - RMCShellShotgun
     - RMCShellShotgunSlugs
 
-- type: entity
-  parent: CMShellShotgunBase
-  id: CMShellShotgunSlugSolo
-  components:
-  - type: Stack
-    count: 1
-
 - type: stack
   id: RMCShellShotgunSlug
   name: handful of shotgun slugs
