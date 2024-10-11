@@ -36,7 +36,7 @@
   
 - type: entity
   id: CMCrateXM88
-  parent: CMCrateWeapons
+  parent: RMCCrateWeapons
   name: XM88 Heavy Rifle crate (XM88 x2, XM88 ammo box x2)
   components:
   - type: StorageFill
