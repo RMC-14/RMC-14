@@ -6,7 +6,7 @@
   components:
   - type: Storage
     grid:
-    - 0,0,19,5 # should be 60 slots if I did my math right
+    - 0,0,19,11 # should be 60 slots if I did my math right
     whitelist:
       tags:
       - RMCCartridge458SOCOM
