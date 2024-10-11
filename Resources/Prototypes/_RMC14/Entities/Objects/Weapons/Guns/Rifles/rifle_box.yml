@@ -7,7 +7,7 @@
   - type: Storage
     whitelist:
       tags:
-      - RMCCartridge458
+      - RMCCartridge458SOCOM
   - type: StorageFill
     contents:
     - id: RMCCartridge458SOCOM
