@@ -1,34 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Ported Solaris Ridge
-    type: Add
-  id: 322
-  time: '2024-07-09T08:51:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2479
-- author: Vermidia
-  changes:
-  - message: Getting infected now also mutes you (in addition to paralyzing and blinding
-      you)
-    type: Add
-  id: 323
-  time: '2024-07-09T09:40:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2925
-- author: DrSmugleaf
-  changes:
-  - message: Fixed damaged xenonids being able to evolve. Xenos must now be on full
-      health to evolve, same as devolving.
-    type: Fix
-  id: 324
-  time: '2024-07-09T10:50:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2929
-- author: DrSmugleaf
-  changes:
-  - message: Fixed defenders staying fortified after going into crit.
-    type: Fix
-  id: 325
-  time: '2024-07-09T10:51:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2928
 - author: DrSmugleaf
   changes:
   - message: Fixed xenonids being able to put eggs inside resin structures and being
@@ -4653,5 +4623,105 @@
   id: 821
   time: '2024-10-10T20:08:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4400
+- author: Rainbeon
+  changes:
+  - message: The Rest action description no longer falsely claims to regenerate plasma,
+      as resting has no effect on plasma regeneration.
+    type: Fix
+  - message: Pheromone and Resin Walker descriptions now state how much Plasma they
+      consume per second.
+    type: Add
+  id: 822
+  time: '2024-10-11T09:24:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4408
+- author: TeaTotalTemplar
+  changes:
+  - message: Adds the M07 Training Grenade - this grenade functions identically to
+      the M40 HEDP and HEFA but contains no explosive charge, allowing new recruits
+      to familiarise themselves with the M40 in a safe environment. Can be loaded
+      into grenade launchers, or thrown by hand.
+    type: Add
+  id: 823
+  time: '2024-10-11T09:25:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4398
+- author: Rainbeon
+  changes:
+  - message: Fixed player-controlled Parasites not hearing their own infection noise
+      when infecting a marine.
+    type: Fix
+  id: 824
+  time: '2024-10-11T09:26:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4404
+- author: DrSmugleaf
+  changes:
+  - message: Added survivors. This is a very hard role to play that spawns on the
+      planet.
+    type: Add
+  - message: Added colony handheld radio.
+    type: Add
+  - message: Added survivor weapons and magazines to planets, add corpses, add metal,
+      plasteel and colony-locked doors.
+    type: Add
+  - message: Added power mechanics to doors. They can be pried instantly by crowbars
+      when unpowered, and by a gun with a bayonet attached, but not by a detached
+      bayonet or your bare hands.
+    type: Add
+  - message: Added Mr Wiggles to LV.
+    type: Add
+  - message: Added suicides by right clicking or alt clicking yourself while holding
+      a loaded gun. Check the rules for which roleplay reasons allow a suicide. Any
+      done without a valid roleplay reason will result in a ban. Starting and cancelling
+      a suicide will be treated the same as an actual suicide, and punished if invalid.
+    type: Add
+  - message: Added dropship night vision.
+    type: Add
+  - message: Added the MP5, MK45, Holdout and M16 survivor weapons, and the detective
+      armor and armored vest.
+    type: Add
+  - message: Added cargo containers to planet maps and the Almayer. They can be blown
+      up by explosions.
+    type: Add
+  - message: Added water grates to Trijent.
+    type: Add
+  - message: Fixed red crowbar stored sprite and crowbar size being too small.
+    type: Fix
+  - message: Fixed fire axe wide animation rotation.
+    type: Fix
+  - message: Fixed access and names for many doors, including those on the Almayer.
+      The CIC is no longer a walk-in clinic.
+    type: Fix
+  - message: Fixed platforms not being climbable in 0.25 aseconds.
+    type: Fix
+  - message: Fixed being able to move through barbed cades when climbing other things.
+    type: Fix
+  - message: Fixed the lifesaver bag having ointments instead of burn kits.
+    type: Fix
+  - message: Fixed runners, larva and parasites not being able to move through window
+      frames without climbing.
+    type: Fix
+  - message: Fixed the Queen not regenerating plasma while on ovi.
+    type: Fix
+  - message: Fixed fuel pump sentries friendly-firing you and having double the intended
+      range.
+    type: Fix
+  - message: Fixed the 5-slot webbing vests being able to fit SMG mags.
+    type: Fix
+  - message: Fixed the Liaison's pod crashing if launched early.
+    type: Fix
+  - message: Fixed not being able to pry unpowered shutters.
+    type: Fix
+  - message: Fixed landing zone sentries being powered before the dropship lands.
+    type: Fix
+  - message: Fixed xenonid eggs not being drawn over everything but mobs.
+    type: Fix
+  - message: Increased Queen footstep volume.
+    type: Tweak
+  - message: Returned the new cave formation to north Solaris caves.
+    type: Tweak
+  - message: Updated the roadmap.
+    type: Tweak
+  id: 825
+  time: '2024-10-11T19:36:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4414
 Name: RMC14
 Order: -1
