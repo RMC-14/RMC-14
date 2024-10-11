@@ -34,5 +34,5 @@
   id: RMCCartridge458SOCOM
   name: handful of .458 SOCOM bullets
   icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Magazines/xm88.rsi, state: SOCOM1 }
-  spawn: CMShellShotgunBuckshot
+  spawn: RMCCartridge458SOCOM
   maxCount: 9
