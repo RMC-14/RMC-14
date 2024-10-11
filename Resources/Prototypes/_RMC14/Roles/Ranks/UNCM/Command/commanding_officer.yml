@@ -1,0 +1,22 @@
+- type: rank
+  id: RMCRankColonelCO
+  name: (O6) Colonel
+  shortenedName: (O6) Col
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobCommandingOfficer
+    time: 630000 # 175 hours
+
+- type: rank
+  id: RMCRankLieutenantColonelCO
+  name: (O5) Lieutenant Colonel
+  shortenedName: (O5) Lt.Col	
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobCommandingOfficer
+    time: 252000 # 70 hours
+
+- type: rank
+  id: RMCRankMajorCO
+  name: (O4) Major
+  shortenedName: (O4) Maj

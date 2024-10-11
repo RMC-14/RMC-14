@@ -8,6 +8,10 @@
   - !type:DepartmentTimeRequirement
     department: CMSquad
     time: 3600 # 1 hour
+  ranks:
+  - RMCRankComtechCorporal
+  - RMCRankComtechLanceCorporal
+  - RMCBaseRankPrivateFirstClass
   startingGear: CMGearCombatTech
   icon: "CMJobIconCombatTech"
   joinNotifyCrew: false

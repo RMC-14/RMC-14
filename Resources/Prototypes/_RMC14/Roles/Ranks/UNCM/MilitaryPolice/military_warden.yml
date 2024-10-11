@@ -1,0 +1,15 @@
+- type: rank
+  parent: RMCBaseRankGunnerySergeant
+  id: RMCRankMilitaryWardenGunnerySergeant
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobMilitaryWarden
+    time: 252000 # 70 hours
+
+- type: rank
+  parent: RMCBaseRankStaffSergeant
+  id: RMCRankMilitaryWardenStaffSergeant
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobMilitaryWarden
+    time: 36000 # 10 hours

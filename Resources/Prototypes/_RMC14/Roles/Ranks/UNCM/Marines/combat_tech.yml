@@ -1,0 +1,15 @@
+- type: rank
+  parent: RMCBaseRankCorporal
+  id: RMCRankComtechCorporal
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobCombatTech
+    time: 252000 # 70 hours
+
+- type: rank
+  parent: RMCBaseRankLanceCorporal
+  id: RMCRankComtechLanceCorporal
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobCombatTech
+    time: 36000 # 10 hours

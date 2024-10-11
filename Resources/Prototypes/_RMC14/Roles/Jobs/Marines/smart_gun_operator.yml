@@ -8,6 +8,10 @@
     - !type:DepartmentTimeRequirement
       department: CMSquad
       time: 18000 # 5 hours
+  ranks:
+  - RMCRankSmartGunOperatorSergeant
+  - RMCRankSmartGunOperatorCorporal
+  - RMCBaseRankLanceCorporal
   startingGear: CMGearSmartGunOperator
   icon: "CMJobIconSmartGunOperator"
   joinNotifyCrew: false

@@ -1,0 +1,15 @@
+- type: rank
+  parent: RMCBaseRankSergeant
+  id: RMCRankSmartGunOperatorSergeant
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSmartGunOperator
+    time: 252000 # 70 hours
+
+- type: rank
+  parent: RMCBaseRankLanceCorporal
+  id: RMCRankSmartGunOperatorCorporal
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSmartGunOperator
+    time: 36000 # 10 hours
