@@ -6,14 +6,14 @@
   components:
   - type: Storage
     grid:
-    - 0,0,19,11 # should be 60 slots if I did my math right
+    - 0,0,19,5
     whitelist:
       tags:
       - RMCCartridge458SOCOM
   - type: StorageFill
     contents:
     - id: RMCCartridge458SOCOM
-      amount: 60 #60 throws some issues so I'll do this for testing
+      amount: 30 #60 lags really hard, but 30 seems fine
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/SOCOM_box.rsi
     layers:
