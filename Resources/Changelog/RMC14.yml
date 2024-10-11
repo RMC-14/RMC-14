@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed eggs being able to infect through corners.
-    type: Fix
-  id: 327
-  time: '2024-07-09T19:23:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2931
-- author: DrSmugleaf
-  changes:
-  - message: Re-enabled the Discord game admin chat bridge.
-    type: Add
-  id: 328
-  time: '2024-07-09T19:29:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2871
 - author: diraven
   changes:
   - message: Xenos in "watch xeno" skill ui are now sorted alphabetically.
@@ -4737,5 +4723,15 @@
   id: 827
   time: '2024-10-11T21:58:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4418
+- author: DrSmugleaf
+  changes:
+  - message: Fixed hivemind chat not working but for real this time I hate chat code
+      this shit is a blight on this project even trying to exclude xenos from handheld
+      radios is a sisyphean task changing any part of this feels like pushing a rock
+      up a mountain please for the love of god someone save me from this hell.
+    type: Fix
+  id: 828
+  time: '2024-10-11T22:40:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4420
 Name: RMC14
 Order: -1
