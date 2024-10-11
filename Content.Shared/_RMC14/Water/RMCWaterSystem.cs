@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Map;
 using Content.Shared.NameModifier.EntitySystems;
+using Content.Shared.Whitelist;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Water;
@@ -7,6 +8,7 @@ namespace Content.Shared._RMC14.Water;
 public sealed class RMCWaterSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -37,6 +39,24 @@ public sealed class RMCWaterSystem : EntitySystem
         _nameModifier.RefreshNameModifiers(ent.Owner);
     }
 
+    public bool CanCollide(Entity<RMCWaterComponent?> water, EntityUid user)
+    {
+        if (!Resolve(water, ref water.Comp, false))
+            return true;
+
+        if (water.Comp.Cover is not { } cover)
+            return true;
+
+        var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(water);
+        while (anchored.MoveNext(out var anchoredId))
+        {
+            if (_entityWhitelist.IsWhitelistPass(cover, anchoredId))
+                return false;
+        }
+
+        return true;
+    }
+
     public override void Update(float frameTime)
     {
         _makeActive.Clear();
@@ -63,7 +83,6 @@ public sealed class RMCWaterSystem : EntitySystem
                     }
                 }
             }
-
         }
 
         foreach (var (id, spreadAt) in _makeActive)

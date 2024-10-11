@@ -23,7 +23,7 @@
         volume: 8
   - type: Tag
     tags:
-      - Catwalk
+    - Catwalk
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
@@ -87,7 +87,7 @@
         volume: 8
   - type: Tag
     tags:
-      - Catwalk
+    - Catwalk
 
 - type: entity
   parent: RMCMonorailStraight
