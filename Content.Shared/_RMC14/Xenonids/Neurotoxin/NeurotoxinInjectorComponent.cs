@@ -25,4 +25,7 @@ public sealed partial class NeurotoxinInjectorComponent : Component
 
     [DataField, AutoNetworkedField]
     public DamageSpecifier CoughDamage = new();
+
+	[DataField, AutoNetworkedField]
+	public bool InjectInContact = true;
 }
