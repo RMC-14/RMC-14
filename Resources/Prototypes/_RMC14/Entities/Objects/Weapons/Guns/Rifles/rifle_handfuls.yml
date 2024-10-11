@@ -9,10 +9,10 @@
     - state: SOCOM1
       map: [ "base" ]
   - type: CartridgeAmmo
-    proto: CMPelletShotgunBuckshot
+    proto: RMCCartridge458SOCOM
   - type: Stack
     count: 9
-    stackType: RMCShellShotgunBuckshot
+    stackType: RMCCartridge458SOCOM
     baseLayer: base
     layerStates:
     - SOCOM1
