@@ -1,0 +1,21 @@
+- type: entity
+  id: RMCKitchenReagentGrinder
+  parent: KitchenReagentGrinder
+  name: All-In-One Grinder
+  description: ""
+  suffix: ""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/juicer.rsi
+    drawdepth: SmallObjects
+    snapCardinals: true
+    offset: "0.0,0.0"
+    layers:
+    - map: [ "grinder" ]
+      state: "juicer0"
+  - type: GenericVisualizer
+    visuals:
+      enum.ReagentGrinderVisualState.BeakerAttached:
+        grinder:
+          True: {state: "juicer1"}
+          False: {state: "juicer0"}

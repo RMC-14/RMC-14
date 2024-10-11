@@ -1,4 +1,5 @@
 ﻿using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Marines.Skills;
 
@@ -6,6 +7,6 @@ namespace Content.Shared._RMC14.Marines.Skills;
 [Access(typeof(SkillsSystem))]
 public sealed partial class SkillsComponent : Component
 {
-    [IncludeDataField, AutoNetworkedField]
-    public Skills Skills;
+    [DataField, AutoNetworkedField]
+    public Dictionary<EntProtoId<SkillDefinitionComponent>, int> Skills = new();
 }

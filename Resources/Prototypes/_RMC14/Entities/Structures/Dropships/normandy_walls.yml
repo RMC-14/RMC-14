@@ -614,10 +614,15 @@
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall61]
   id: CMNormandyWall61
+  name: port wing weapon attach point
+  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 61
   components:
   - type: Sprite
-    state: "61"
+    layers:
+    - state: "61"
+    - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
   - type: Icon
     state: "61"
 
@@ -654,10 +659,15 @@
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall65]
   id: CMNormandyWall65
+  name: starboard wing weapon attach point
+  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 65
   components:
   - type: Sprite
-    state: "65"
+    layers:
+    - state: "65"
+    - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
   - type: Icon
     state: "65"
 
@@ -844,22 +854,53 @@
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall84]
   id: CMNormandyWall84
+  name: port fore weapon attach point
+  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 84
   components:
   - type: Sprite
-    state: "84"
+    layers:
+    - state: "84"
+    - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
   - type: Icon
     state: "84"
 
 - type: entity
+  parent: [CMNormandyWall84, CMAlamoWall84Flipped]
+  id: CMNormandyWall84Flipped
+  name: starboard fore weapon attach point
+  description: A place where heavy equipment can be installed with a powerloader.
+  suffix: 84, Flipped
+  components:
+  - type: Sprite
+    layers:
+    - state: "84_flipped"
+    - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
+
+- type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall85]
   id: CMNormandyWall85
+  name: electronic system attach point
+  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 85
   components:
   - type: Sprite
     state: "85"
   - type: Icon
     state: "85"
+
+- type: entity
+  parent: [CMNormandyWall85, CMAlamoWall85Flipped]
+  id: CMNormandyWall85Flipped
+  suffix: 85, Flipped
+  components:
+  - type: Sprite
+    layers:
+    - state: "85_flipped"
+    - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall86]

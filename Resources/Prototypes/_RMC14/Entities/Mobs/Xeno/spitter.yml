@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoSpitter
   name: Spitter
   description: A gross, oozing alien of some kind.
@@ -46,10 +47,10 @@
     maxPlasma: 600
     plasmaRegenOnWeeds: 4
   - type: XenoEvolution
-    max: 540
+    max: 500
     evolvesTo:
     - CMXenoBoiler
-#    - CMXenoPraetorian
+    - CMXenoPraetorian
   - type: XenoSpit
   - type: XenoChargeSpit
   - type: XenoScatteredSpit
@@ -67,8 +68,8 @@
     damage:
       groups:
         Brute: 25
-  - type: Tackle
-    threshold: 4
+  - type: Tackle # min: 2, max: 6
+    threshold: 5
     stun: 9
     chance: 0.45
   - type: MovementSpeedModifier
@@ -76,3 +77,8 @@
     baseSprintSpeed: 3.5
   - type: RMCXenoDamageVisuals
     prefix: spitter
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: spitter
+  - type: AcidTrap

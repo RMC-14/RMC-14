@@ -159,8 +159,8 @@
       "name": "welded",
       "directions": 4
     },
-	{
-		"name": "unlit"
-	}
+    {
+      "name": "unlit"
+    }
   ]
 }

@@ -1,0 +1,154 @@
+﻿- type: entity
+  parent: BaseMachinePowered
+  id: RMCMedilathe
+  name: medilathe
+  suffix: Right Output
+  description: A specialized autolathe made for printing medical items.
+  components:
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RequiresSkill
+    skills:
+      RMCSkillMedical: 3
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/medilathe.rsi
+    layers:
+    - state: medilathe
+      map: ["enum.LatheVisualLayers.IsRunning"]
+      offset: -0.5, 0
+    - state: medilathe_u
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      offset: -0.5, 0
+    - state: medilathe_t
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      offset: -0.5, 0
+  - type: Appearance
+  - type: WiresVisuals
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.5,-0.5,0.5,0.5"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Lathe
+    idleState: medilathe
+    runningState: medilathe_n
+    unlitIdleState: medilathe_u
+    unlitRunningState: medilathe_n_u
+    producingSound: /Audio/_RMC14/Machines/print.ogg
+    staticRecipes:
+    - CMBeaker
+    - CMBeakerLarge
+#    - Drinking glass (625 glass)
+    - CMSyringe
+    - RMCDropper
+#    - RMC Spray bottle (500 plastic)
+#    - Autoinjector (C-T) (300 Plastic)
+#    - Autoinjector (C-S) (300 Plastic)
+#    - Autoinjector (C-M) (300 Plastic)
+#    - Autoinjector (C-L) (300 Plastic)
+#    - EZ Autoinjector (E-U) (300 Plastic)
+#    - EZ Autoinjector (E-VS) (300 Plastic)
+#    - EZ Autoinjector (E-S) (300 Plastic)
+#    - EZ Autoinjector (E-T) (300 Plastic)
+#    - EZ Autoinjector (E-M) (300 Plastic)
+#    - EZ Autoinjector (E-L) (300 Plastic)
+#    - EZ Autoinjector (E-XL) (300 Plastic)
+#    - Medic Autoinjector (M-M) (300 Plastic)
+#    - Medic Autoinjector (M-L) (300 Plastic)
+    - CMHypospray
+    - CMBloodPack
+    - RMCBeakerHighCapacity
+    - CMBonesetter
+#    - FixOVein (5000 Plastic)
+    - CMStasisBag
+    - CMRollerBed
+    - CMPillCanister
+    - CMFirstAidKit
+    - CMBurnAidKit
+    - CMToxinAidKit
+    - CMAdvFirstAidKit
+    - CMFirstAidO2Kit
+#    - Radiation First Aid Kit (2000 Plastic)
+#    - Syringe Case (1000 Plastic)
+    - RMCSurgicalTrayEmpty 
+    - RMCVialBox
+#    - Pressurized Reagent Canister Pouch (2000 Plastic, 2000 Glass)
+#    - Pressurized Canister (2000 Glass)
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Plastic
+      - RMCGlass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: WiresPanel
+  - type: ActivatableUI
+    key: enum.LatheUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.LatheUiKey.Key:
+        type: LatheBoundUserInterface
+      enum.ResearchClientUiKey.Key:
+        type: ResearchClientBoundUserInterface
+  - type: Transform
+    anchored: true
+  - type: Corrodible
+    isCorrodible: false
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCMedilathe
+  id: RMCMedilatheLeft
+  suffix: Left Output
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/medilathe.rsi
+    layers:
+    - state: medilathe_f
+      map: ["enum.LatheVisualLayers.IsRunning"]
+      offset: 0.5, 0
+    - state: medilathe_u_f
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      offset: 0.5, 0
+    - state: medilathe_t_f
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      offset: 0.5, 0
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,1.5,0.5"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Lathe
+    idleState: medilathe_f
+    runningState: medilathe_n_f
+    unlitIdleState: medilathe_u_f
+    unlitRunningState: medilathe_n_u_f
+    

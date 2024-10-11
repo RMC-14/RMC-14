@@ -233,6 +233,9 @@ public sealed partial class GunComponent : Component
     /// </summary>
     [DataField]
     public bool ClumsyProof = false;
+
+    [DataField]
+    public bool MeleeCooldownOnShoot = true;
 }
 
 [Flags]

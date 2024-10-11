@@ -23,6 +23,12 @@
       - !type:SpawnPrototype
         prototype: CMSheetMetal1
         amount: 6
+      - !type:ConditionalAction
+        condition:
+          !type:IsBarbed
+        action:
+          !type:SpawnPrototype
+          prototype: BarbedWire1
       - !type:DeleteEntity
       conditions:
       - !type:EntityAnchored

@@ -274,6 +274,13 @@ namespace Content.Server.GameTicking
                     Loc.GetString("job-greet-station-name", ("stationName", metaData.EntityName)));
             }
 
+            if(_distressSignal?.SelectedPlanetMapName != null)
+            {
+                _chatManager.DispatchServerMessage(player,
+                    Loc.GetString("job-greet-planet-name", ("planetName",_distressSignal.SelectedPlanetMapName)));
+            }
+
+
             // Arrivals is unable to do this during spawning as no actor is attached yet.
             // We also want this message last.
             if (!silent && lateJoin && _arrivals.Enabled)

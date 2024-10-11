@@ -48,6 +48,10 @@
     layers:
     - state: "off"
     - state: "normal-unshaded"
+  - type: AccessReader
+    access:
+    - [ "CMAccessKitchen" ]
+    - [ "CMAccessColonyPublic" ]
   - type: CMAutomatedVendor
     sections:
     - name: Alcohol

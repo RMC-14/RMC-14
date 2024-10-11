@@ -1,9 +1,9 @@
 ﻿# TODO RMC14 make a central system to manage these instead of ticking them all separately
 - type: entity
-  id: CMFogWall
+  id: RMCFogWallPermanent
   name: dense fog
-  description: It looks way too dangerous to traverse. Best wait until it has cleared up.
-  suffix: 25 minutes
+  description: It looks way too dangerous to traverse.
+  suffix: Permanent
   placement:
     mode: SnapgridCenter
     snap:
@@ -30,14 +30,86 @@
         layer:
         - WallLayer
         density: 1000
-  - type: TimedDespawn
-    lifetime: 1500
   - type: Occluder
+  - type: Fog
 
 - type: entity
-  parent: CMFogWall
-  id: CMFogWallShort
+  parent: RMCFogWallPermanent
+  id: RMCFogWall25
+  description: It looks way too dangerous to traverse. Best wait until it has cleared up.
+  suffix: 25 minutes
+  components:
+  - type: TimedDespawn
+    lifetime: 1500
+
+- type: entity
+  parent: RMCFogWall25
+  id: RMCFogWall15
   suffix: 15 minutes
   components:
   - type: TimedDespawn
     lifetime: 900
+
+- type: entity
+  parent: MarkerBase
+  id: RMCFogWallRemoverOne
+  name: random fog remover
+  description: Marks this fog for random removal at round-start.
+  suffix: group one
+  components:
+  - type: Sprite
+    drawdepth: Overdoors
+    sprite: Markers/cross.rsi
+    state: red
+  - type: RandomAnchoredRemover
+    group: RMCFogWallRemoverOne
+    whitelist:
+      components:
+      - Fog
+
+- type: entity
+  parent: MarkerBase
+  id: RMCFogWallAdderOne
+  name: random fog spawner
+  description: Marks a spot for random fog spawning at round-start.
+  suffix: group one, 25 minutes
+  components:
+  - type: Sprite
+    drawdepth: Overdoors
+    sprite: Markers/cross.rsi
+    state: green
+  - type: RandomAnchoredSpawner
+    group: RMCFogWallRemoverOne
+    spawn: RMCFogWall25
+
+- type: entity
+  parent: RMCFogWallRemoverOne
+  id: RMCFogWallRemoverTwo
+  suffix: group two
+  components:
+  - type: RandomAnchoredRemover
+    group: RMCFogWallRemoverTwo
+
+- type: entity
+  parent: RMCFogWallAdderOne
+  id: RMCFogWallAdderTwo
+  suffix: group two, 25 minutes
+  components:
+  - type: RandomAnchoredSpawner
+    group: RMCFogWallRemoverTwo
+
+- type: entity
+  parent: RMCFogWallRemoverOne
+  id: RMCFogWallRemoverThree
+  suffix: group three
+  components:
+  - type: RandomAnchoredRemover
+    group: RMCFogWallRemoverThree
+
+- type: entity
+  parent: RMCFogWallAdderOne
+  id: RMCFogWallAdderThree
+  suffix: group three, 25 minutes
+  components:
+  - type: RandomAnchoredSpawner
+    group: RMCFogWallRemoverThree

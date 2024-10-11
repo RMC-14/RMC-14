@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/8e8d26bbb4f1617ea1b1ffc17ffffca552ce8c11/icons/turf/area_shiva.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": ""
+    },
+    {
+      "name": "base_ico"
+    },
+    {
+      "name": "shiva"
+    },
+    {
+      "name": "oob"
+    },
+    {
+      "name": "shuttle"
+    },
+    {
+      "name": "shuttle2"
+    },
+    {
+      "name": "landing_valley"
+    },
+    {
+      "name": "lz2_fortress"
+    },
+    {
+      "name": "junkyard0"
+    },
+    {
+      "name": "junkyard1"
+    },
+    {
+      "name": "junkyard2"
+    },
+    {
+      "name": "junkyard3"
+    },
+    {
+      "name": "bar0"
+    },
+    {
+      "name": "bar1"
+    },
+    {
+      "name": "bar2"
+    },
+    {
+      "name": "bar3"
+    },
+    {
+      "name": "bar4"
+    },
+    {
+      "name": "hangars0"
+    },
+    {
+      "name": "hangars1"
+    },
+    {
+      "name": "hangars2"
+    },
+    {
+      "name": "hangars3"
+    },
+    {
+      "name": "hangars4"
+    },
+    {
+      "name": "barrens0"
+    },
+    {
+      "name": "barrens1"
+    },
+    {
+      "name": "barrens2"
+    },
+    {
+      "name": "barrens3"
+    },
+    {
+      "name": "barrens4"
+    },
+    {
+      "name": "res0"
+    },
+    {
+      "name": "res1"
+    },
+    {
+      "name": "res2"
+    },
+    {
+      "name": "res3"
+    },
+    {
+      "name": "res4"
+    },
+    {
+      "name": "caves0"
+    },
+    {
+      "name": "caves1"
+    },
+    {
+      "name": "caves2"
+    },
+    {
+      "name": "caves3"
+    },
+    {
+      "name": "caves4"
+    }
+  ]
+}

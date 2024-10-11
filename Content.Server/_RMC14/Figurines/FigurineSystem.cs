@@ -2,8 +2,13 @@
 using System.Reflection;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server.GameTicking;
+using Content.Server.Hands.Systems;
+using Content.Server.Storage.EntitySystems;
 using Content.Shared._RMC14.Figurines;
-using Content.Shared.Prototypes;
+using Content.Shared._RMC14.Marines;
+using Content.Shared.Inventory;
+using Content.Shared.Storage;
+using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using SixLabors.ImageSharp;
@@ -15,16 +20,21 @@ namespace Content.Server._RMC14.Figurines;
 public sealed class FigurineSystem : EntitySystem
 {
     [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private readonly HandsSystem _hands = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly StorageSystem _storage = default!;
 
-    private readonly HashSet<EntProtoId> _allFigurines = [];
+    private readonly Dictionary<string, EntProtoId> _allFigurines = new();
     private readonly HashSet<EntProtoId> _figurines = [];
 
     public override void Initialize()
     {
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
+
         SubscribeLocalEvent<RandomPatronFigurineSpawnerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<RandomPatronFigurineSpawnerComponent, GameRunLevelChangedEvent>(OnRunLevelChanged);
 
@@ -48,13 +58,41 @@ public sealed class FigurineSystem : EntitySystem
             ReloadAllFigurines();
     }
 
+    private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
+    {
+        if (!HasComp<MarineComponent>(ev.Mob))
+            return;
+
+        if (!_allFigurines.TryGetValue(ev.Player.UserId.ToString(), out var figurineId))
+            return;
+
+        var figurine = Spawn(figurineId, MapCoordinates.Nullspace);
+        if (_hands.TryPickupAnyHand(ev.Mob, figurine, false))
+            return;
+
+        var backs = _inventory.GetSlotEnumerator(ev.Mob, SlotFlags.BACK);
+        while (backs.MoveNext(out var slot))
+        {
+            if (!TryComp(slot.ContainedEntity, out StorageComponent? storage))
+                continue;
+
+            if (_storage.Insert(slot.ContainedEntity.Value, figurine, out _, storageComp: storage))
+                return;
+        }
+    }
+
     private void ReloadAllFigurines()
     {
         _allFigurines.Clear();
         foreach (var prototype in _prototypes.EnumeratePrototypes<EntityPrototype>())
         {
-            if (prototype.HasComponent<PatronFigurineComponent>())
-                _allFigurines.Add(prototype);
+            if (prototype.TryGetComponent(out PatronFigurineComponent? figurine, _compFactory))
+            {
+                if (_allFigurines.ContainsKey(figurine.Id))
+                    Log.Error($"Duplicate id {figurine.Id} found for figurine {prototype.ID}");
+
+                _allFigurines[figurine.Id] = prototype.ID;
+            }
         }
 
         ReloadActiveFigurines();
@@ -65,7 +103,7 @@ public sealed class FigurineSystem : EntitySystem
         _figurines.Clear();
 
         var available = _linkAccount.GetFigurines();
-        foreach (var figurineId in _allFigurines)
+        foreach (var (_, figurineId) in _allFigurines)
         {
             if (_prototypes.TryIndex(figurineId, out var figurine) &&
                 figurine.TryGetComponent(out PatronFigurineComponent? figurineComp, _compFactory))

@@ -30,7 +30,7 @@
     whitelist:
       tags:
       - Flare
-#      - # TODO RMC14 shotgun shell handfuls
+      - RMCShellShotgun
       - CMMagazinePistol
       - RMCMagazineRevolver
       - CMMagazineRifle
@@ -41,6 +41,32 @@
 #      - # TODO RMC14 snacks
       components:
       - BallisticAmmoProvider
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
+  - type: FixedItemSizeStorage
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCM276ShotgunShellLoadingRig
+  name: M276 pattern shotgun shell loading rig
+  description: An ammunition belt designed to hold shotgun shells. # or individual bullets. TODO RMC14
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/shotgun.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/shotgun.rsi
+  - type: Item
+    size: Large
+  - type: Storage
+    maxItemSize: Large
+    grid:
+    - 0,0,13,3 # 14 slots
+    whitelist:
+      tags:
+      - RMCShellShotgun
   - type: IgnoreContentsSize
     items:
       tags:
@@ -72,6 +98,8 @@
       - Multitool
       - Flashlight
       - PowerCell
+      - CMFireExtinguisherPortable
+      - RMCExplosiveBreachingCharge
 #      - # TODO nailgun, circuit board
       components:
       - Welder
@@ -114,7 +142,8 @@
       - CMMagazinePistol
       - RMCMagazineRevolver
       - PowerCell
-#      - # TODO RMC14 handful of shotgun shells
+      - CMFireExtinguisherPortable
+      - RMCShellShotgun
 #      - # TODO nailgun, circuit board
       components:
       - Welder
@@ -124,6 +153,12 @@
       - LightReplacer
       - EntrenchingTool
   - type: FixedItemSizeStorage
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
 
 - type: entity
   parent: CMBeltBase
@@ -137,6 +172,7 @@
     sprite: _RMC14/Objects/Clothing/Belt/knife.rsi
   - type: ItemSlots
   - type: CMHolster
+  - type: UsableWhileDevoured
   - type: CMItemSlots
     cooldown: 1
     cooldownPopup: You need to wait before drawing another knife!
@@ -183,6 +219,7 @@
       - CMRollerBed
       - BodyBag
 #      - # TODO RMC14 latex gloves
+      - Hypospray
       components:
       - Hypospray
       - Defibrillator
@@ -240,10 +277,10 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/mortar.rsi
   - type: Storage
-    maxItemSize: Normal
+    maxItemSize: Huge
     whitelist:
-      tags:
-      - CMMortarShell
+      components:
+      - MortarShell
 #      - # TODO RMC14 pistol, revolver, flaregun
   - type: FixedItemSizeStorage
 
@@ -268,7 +305,7 @@
       - CMMagazineSmg
       - CMMagazineSniper
       - RMCMagazineSmartGun
-#      - # TODO RMC14 shotgun handfuls
+      - RMCShellShotgun
       - Flare
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
@@ -289,7 +326,7 @@
   - type: Storage
     maxItemSize: Normal
     grid:
-    - 0,0,11,2 # 12 slots
+    - 0,0,11,3 # 12 slots
     whitelist:
       tags:
       - Grenade
@@ -320,6 +357,9 @@
     sprite: _RMC14/Objects/Clothing/Belt/smart_pistol.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/smart_pistol.rsi
+    slots:
+    - suitStorage
+    - belt
   - type: Storage
     maxItemSize: Normal
     grid:
@@ -332,3 +372,29 @@
   - type: Tag
     tags:
     - RMCSmartPistolHolster
+
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCBeltUtilityGeneral
+  name: M276 G8-A general utility pouch
+  description: A small, lightweight pouch that can be clipped onto M3 Pattern armor to provide additional storage. The newer G8-A model, while uncomfortable, can also be clipped around the waist.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/sparepouch.rsi
+  - type: Clothing
+    slots:
+    - suitStorage
+    - belt
+    sprite: _RMC14/Objects/Clothing/Belt/sparepouch.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,9,1 # 9 slots
+    blacklist:
+      tags:
+      - CMFirstAidKit # TODO RMC14
+  #      - EngineerKit # TODO RMC14
+  - type: Tag
+    tags:
+    - RMCG8Pouch

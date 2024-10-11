@@ -22,6 +22,7 @@
     transferAmount: 15
     injectOnly: true
     onlyAffectsMobs: true
+    canContainerDraw: false
   - type: SolutionContainerManager
     solutions:
       pen:

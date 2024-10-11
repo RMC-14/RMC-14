@@ -20,6 +20,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
         SubscribeLocalEvent<NightVisionComponent, MapInitEvent>(OnNightVisionMapInit);
         SubscribeLocalEvent<NightVisionComponent, AfterAutoHandleStateEvent>(OnNightVisionAfterHandle);
         SubscribeLocalEvent<NightVisionComponent, ComponentRemove>(OnNightVisionRemove);
+        SubscribeLocalEvent<NightVisionComponent, ToggleNightVisionAlertEvent>(OnNightVisionToggle);
 
         SubscribeLocalEvent<NightVisionItemComponent, GetItemActionsEvent>(OnNightVisionItemGetActions);
         SubscribeLocalEvent<NightVisionItemComponent, ToggleActionEvent>(OnNightVisionItemToggle);
@@ -53,9 +54,17 @@ public abstract class SharedNightVisionSystem : EntitySystem
         NightVisionRemoved(ent);
     }
 
+    private void OnNightVisionToggle(Entity<NightVisionComponent> ent, ref ToggleNightVisionAlertEvent args)
+    {
+        Toggle((ent, ent));
+    }
+
     private void OnNightVisionItemGetActions(Entity<NightVisionItemComponent> ent, ref GetItemActionsEvent args)
     {
         if (args.InHands || !ent.Comp.Toggleable)
+            return;
+
+        if (ent.Comp.SlotFlags != args.SlotFlags)
             return;
 
         args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId);
@@ -72,11 +81,17 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
     private void OnNightVisionItemGotEquipped(Entity<NightVisionItemComponent> ent, ref GotEquippedEvent args)
     {
-        ToggleNightVisionItem(ent, args.Equipee);
+        if (ent.Comp.SlotFlags != args.SlotFlags)
+            return;
+
+        EnableNightVisionItem(ent, args.Equipee);
     }
 
     private void OnNightVisionItemGotUnequipped(Entity<NightVisionItemComponent> ent, ref GotUnequippedEvent args)
     {
+        if (ent.Comp.SlotFlags != args.SlotFlags)
+            return;
+
         DisableNightVisionItem(ent, args.Equipee);
     }
 

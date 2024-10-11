@@ -1,0 +1,35 @@
+﻿<controls:DropshipWeaponsScreen
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Dropship.Weapon"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:viewport="clr-namespace:Content.Client.Viewport">
+    <PanelContainer Margin="10">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#121212" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical">
+            <controls:DropshipWeaponsButtonRow Name="TopRow" Access="Public"
+                                               Orientation="Horizontal" />
+            <BoxContainer Orientation="Horizontal">
+                <controls:DropshipWeaponsButtonRow Name="LeftRow" Access="Public"
+                                                   Orientation="Vertical" />
+                <PanelContainer SetSize="500 500"
+                                HorizontalExpand="True" VerticalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BackgroundColor="#001908" BorderColor="#00AE3A"
+                                               BorderThickness="2" />
+                    </PanelContainer.PanelOverride>
+                    <viewport:ScalingViewport Name="Viewport" Access="Public" Visible="False"
+                                              HorizontalExpand="True" VerticalExpand="True" />
+                    <Label Name="ScreenLabel" Access="Public"
+                           HorizontalExpand="True" VerticalExpand="True"
+                           Align="Center" VAlign="Center" ModulateSelfOverride="#00E94E" />
+                </PanelContainer>
+                <controls:DropshipWeaponsButtonRow Name="RightRow" Access="Public"
+                                                   Orientation="Vertical" />
+            </BoxContainer>
+        <controls:DropshipWeaponsButtonRow Name="BottomRow" Access="Public"
+                                           Orientation="Horizontal" />
+        </BoxContainer>
+    </PanelContainer>
+</controls:DropshipWeaponsScreen>

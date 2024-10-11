@@ -1,0 +1,43 @@
+﻿- type: entity
+  abstract: true
+  parent: RMCDropshipAttachmentBase
+  id: RMCDropshipAttachmentWeapon
+  components:
+  - type: DropshipFabricatorPrintable
+    category: Equipment
+    cost: 400
+  - type: PowerLoaderGrabbable
+    delay: 1
+  - type: DropshipWeapon
+    skills:
+      all:
+        RMCSkillPilot: 2
+
+- type: entity
+  parent: RMCDropshipAttachmentWeapon
+  id: RMCDropshipAttachmentGau21Cannon
+  name: GAU-21 30mm cannon
+  description: A dismounted GAU-21 'Rattler' 30mm rotary cannon. It seems to be missing its feed links and has exposed connection wires. Capable of firing 5200 rounds a minute, feared by many for its power. Earned the nickname 'Rattler' from the vibrations it would cause on dropships in its initial production run. Accepts PGU-100/PGU-105 ammo crates
+  components:
+  - type: Sprite
+    layers:
+    - state: 30mm_cannon
+      offset: 0.5, 0.5
+  - type: DropshipFabricatorPrintable
+    cost: 400
+  - type: DropshipWeapon
+    abbreviation: GAU
+    fireDelay: 2
+    fireInTransport: true
+    skills:
+      all:
+        RMCSkillPilot: 1
+    weaponAttachedSprite:
+      sprite: _RMC14/Objects/dropship_attachments.rsi
+      state: 30mm_cannon_installed
+    ammoEmptyAttachedSprite:
+      sprite: _RMC14/Objects/dropship_attachments.rsi
+      state: 30mm_cannon_loaded0
+    ammoAttachedSprite:
+      sprite: _RMC14/Objects/dropship_attachments.rsi
+      state: 30mm_cannon_loaded1

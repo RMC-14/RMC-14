@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoRunner
   name: Runner
   description: A small red alien that looks like it could run fairly quickly...
@@ -34,6 +35,13 @@
         - LowImpassable
         layer:
         - MobLayer
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 185
+        layer:
+        - BulletImpassable
   - type: Xeno
     role: CMXenoRunner
     actionIds:
@@ -66,7 +74,7 @@
   - type: CMArmor
     explosionArmor: 10
   - type: XenoEvolution
-    max: 300
+    max: 200
     evolvesTo:
     - CMXenoLurker
   - type: XenoZoom
@@ -75,12 +83,18 @@
     damage:
       groups:
         Brute: 22.5
-  - type: Tackle
+  - type: Tackle # min: 4, max: 5
     threshold: 5
     stun: 8
     chance: 0.40
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.55
     baseSprintSpeed: 10
+  - type: RMCSize
+    size: SmallXeno
   - type: RMCXenoDamageVisuals
     prefix: runner
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: runner

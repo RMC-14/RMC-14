@@ -50,15 +50,6 @@
       "name": "labeler1"
     },
     {
-      "name": "clipboard"
-    },
-    {
-      "name": "clipboard_over"
-    },
-    {
-      "name": "clipboard_pen"
-    },
-    {
       "name": "paper_plane"
     },
     {
@@ -259,6 +250,10 @@
     },
     {
       "name": "fountain_pen"
+    },
+    {
+      "name": "pen-equipped-SUITSTORAGE",
+      "directions": 4
     }
   ]
 }

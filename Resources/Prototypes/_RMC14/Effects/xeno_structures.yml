@@ -1,0 +1,77 @@
+﻿- type: entity
+  id: RMCBaseEffectXenoStructure
+  noSpawn: true
+  components:
+  - type: Transform
+    anchored: True
+  - type: Sprite
+    drawdepth: Effects
+    sprite: /Textures/_RMC14/Effects/xeno_structure_animations.rsi
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+  - type: TimedDespawn
+    lifetime: 5.0
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: XenoConstructionAnimation
+
+- type: entity
+  parent: RMCBaseEffectXenoStructure
+  id: RMCEffectWallXenoResinThick
+  noSpawn: true
+  components:
+  - type: Sprite
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: thick
+
+- type: entity
+  parent: RMCBaseEffectXenoStructure
+  id: RMCEffectWallXenoMembraneThick
+  noSpawn: true
+  components:
+  - type: Sprite
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: thickmembrane
+
+- type: entity
+  parent: RMCBaseEffectXenoStructure
+  id: RMCEffectDoorXenoResinThick
+  noSpawn: true
+  components:
+  - type: Sprite
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: thickdoor
+
+- type: entity
+  parent: RMCBaseEffectXenoStructure
+  id: RMCEffectWallXenoResin
+  noSpawn: true
+  components:
+  - type: Sprite
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: wall
+
+- type: entity
+  parent: RMCBaseEffectXenoStructure
+  id: RMCEffectWallXenoMembrane
+  noSpawn: true
+  components:
+  - type: Sprite
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: membrane
+
+- type: entity
+  parent: RMCBaseEffectXenoStructure
+  id: RMCEffectDoorXenoResin
+  noSpawn: true
+  components:
+  - type: Sprite
+    layers:
+    - map: ["enum.XenoConstructionVisualLayers.Animation"]
+      state: door

@@ -58,4 +58,14 @@ public sealed class SquadCommand : ToolshedCommand
     {
         return marines.Where(marine => TryComp(marine, out SquadMemberComponent? member) && member.Squad == squad.Value);
     }
+
+    [CommandImplementation("refresh")]
+    public EntityUid Refresh(
+        [CommandInvocationContext] IInvocationContext ctx,
+        [CommandArgument] SquadType squad)
+    {
+        _squad ??= GetSys<SquadSystem>();
+        _squad.RefreshSquad(squad.Value);
+        return squad.Value;
+    }
 }

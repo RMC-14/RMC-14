@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoRavager
   name: Ravager
   description: A huge, nasty red alien with enormous scythed claws.
@@ -35,6 +36,7 @@
     tier: 3
     hudOffset: 0,0.1
     unlockAt: 900 # 15 minutes
+    hidden: true # TODO RMC: remove once ravager is implemented
   - type: XenoDevolve
     devolvesTo:
     - CMXenoLurker
@@ -51,7 +53,7 @@
     damage:
       groups:
         Brute: 45
-  - type: Tackle
+  - type: Tackle # min: 2, max: 5
     threshold: 4
     stun: 9
     chance: 0.35
@@ -80,5 +82,13 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
+  - type: SlowOnPull
+    multiplier: 0.5
+  - type: RMCSize
+    size: Big
 #  - type: RMCXenoDamageVisuals # TODO RMC14
 #    prefix: ravager
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: ravager

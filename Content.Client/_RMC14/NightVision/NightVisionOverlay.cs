@@ -16,6 +16,7 @@ public sealed class NightVisionOverlay : Overlay
 
     private readonly ContainerSystem _container;
     private readonly TransformSystem _transform;
+    private readonly EntityQuery<XenoComponent> _xenoQuery;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
@@ -27,6 +28,7 @@ public sealed class NightVisionOverlay : Overlay
 
         _container = _entity.System<ContainerSystem>();
         _transform = _entity.System<TransformSystem>();
+        _xenoQuery = _entity.GetEntityQuery<XenoComponent>();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -47,7 +49,6 @@ public sealed class NightVisionOverlay : Overlay
         {
             _entries.Add(new NightVisionRenderEntry((uid, sprite, xform),
                 eye?.Position.MapId,
-                eyeRot,
                 nightVision.SeeThroughContainers,
                 visible.Priority,
                 visible.Transparency));
@@ -60,7 +61,7 @@ public sealed class NightVisionOverlay : Overlay
             Render(entry.Ent,
                 entry.Map,
                 handle,
-                entry.EyeRot,
+                eyeRot,
                 entry.NightVisionSeeThroughContainers,
                 entry.Transparency);
         }
@@ -84,12 +85,11 @@ public sealed class NightVisionOverlay : Overlay
         if (xform.MapID != map)
             return;
 
-        var seeThrough = seeThroughContainers && !_entity.HasComponent<XenoComponent>(uid);
-        if (!seeThrough && _container.IsEntityOrParentInContainer(uid))
+        var seeThrough = seeThroughContainers && !_xenoQuery.HasComp(uid);
+        if (!seeThrough && _container.IsEntityOrParentInContainer(uid, xform: xform))
             return;
 
-        var position = _transform.GetWorldPosition(xform);
-        var rotation = _transform.GetWorldRotation(xform);
+        var (position, rotation) = _transform.GetWorldPositionRotation(xform);
 
         var colorCache = sprite.Color;
         if (transparency != null)
@@ -108,7 +108,7 @@ public sealed class NightVisionOverlay : Overlay
 public record struct NightVisionRenderEntry(
     (EntityUid, SpriteComponent, TransformComponent) Ent,
     MapId? Map,
-    Angle EyeRot,
     bool NightVisionSeeThroughContainers,
     int Priority,
-    float? Transparency);
+    float? Transparency
+);

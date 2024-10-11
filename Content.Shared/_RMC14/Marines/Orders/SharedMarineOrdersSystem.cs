@@ -13,6 +13,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _receivers = new();
@@ -108,7 +109,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
             return false;
         }
 
-        var level = Math.Max(1, CompOrNull<SkillsComponent>(orders)?.Skills.Leadership ?? 1);
+        var level = Math.Max(1, _skills.GetSkill(orders.Owner, orders.Comp.Skill));
         var duration = orders.Comp.Duration * (level + 1);
 
         // TODO RMC14 implement focus order effects

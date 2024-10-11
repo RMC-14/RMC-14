@@ -1,0 +1,14 @@
+﻿<controls:RangefinderWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Rangefinder"
+    xmlns:userInterface="clr-namespace:Content.Client._RMC14.UserInterface"
+    Title="{Loc 'rmc-rangefinder'}" MinSize="325 185">
+    <BoxContainer Orientation="Vertical">
+        <RichTextLabel Name="Header" Access="Public" />
+        <userInterface:BlueHorizontalSeparator Margin="0 5" />
+        <RichTextLabel Name="Longitude" Access="Public" HorizontalAlignment="Center"
+                       VerticalAlignment="Center" Margin="0 20 0 0" />
+        <RichTextLabel Name="Latitude" Access="Public" HorizontalAlignment="Center"
+                       VerticalAlignment="Center" Margin="0 20 0 20" />
+    </BoxContainer>
+</controls:RangefinderWindow>

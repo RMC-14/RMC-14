@@ -1,0 +1,35 @@
+﻿- type: entity
+  parent: RMCBaseGunCase
+  id: RMCKitBase
+  abstract: true
+  name: kit
+  description: It's just an ordinary box.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/Storage/guncase.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/guncase.rsi
+    state: closed
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        base:
+          True: { state: open }
+          False: { state: closed }
+  - type: Item
+    size: Huge
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,1,1
+  - type: FixedItemSizeStorage
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: RemoveOnlyStorage

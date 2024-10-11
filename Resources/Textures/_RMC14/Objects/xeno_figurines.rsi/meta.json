@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Based on cmss13 sprites, edited by deltanedas (github) for RMC-14.",
+  "size": {
+    "x": 48,
+    "y": 50
+  },
+  "states": [
+    {
+      "name": "drone"
+    },
+    {
+      "name": "warrior"
+    }
+  ]
+}

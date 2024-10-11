@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/85bcc1a23e09e240ed086ac502c856b29a27e4a6/icons/obj/structures/machinery/library.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/85bcc1a23e09e240ed086ac502c856b29a27e4a6/icons/obj/structures/machinery/library.dmi, inserting_mouse modified using https://github.com/space-wizards/space-station-14/commit/24e7653c984da133283457da2089e629161a7ff2 mouse-1 by KalimbaMachine",
   "size": {
     "x": 32,
     "y": 32
@@ -20,6 +20,22 @@
     },
     {
       "name": "inserting",
+      "delays": [
+        [
+          0.1,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "inserting_mouse",
       "delays": [
         [
           0.1,

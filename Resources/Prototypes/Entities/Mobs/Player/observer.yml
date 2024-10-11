@@ -3,7 +3,7 @@
   id: MobObserver
   name: observer
   description: Boo!
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: CargoSellBlacklist
   - type: Sprite
@@ -48,6 +48,10 @@
   - type: Tag
     tags:
     - BypassInteractionRangeChecks
+  - type: ActiveInputMover
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
 
 - type: entity
   id: ActionGhostBoo

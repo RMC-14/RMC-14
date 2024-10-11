@@ -4,6 +4,10 @@
   name: soda fountain
   description: A drink fabricating machine, capable of producing many sugary drinks with just one touch.
   components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/Machines/Science/small_dispensers.rsi
     state: soda_dispenser
@@ -19,6 +23,8 @@
     blacklist:
       components:
       - Xeno
+  - type: ApcPowerReceiver
+    needsPower: false
 
 - type: reagentDispenserInventory
   id: CMDispenserSodaInventory

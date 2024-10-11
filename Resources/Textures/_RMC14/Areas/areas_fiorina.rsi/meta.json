@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/19011fea938a035f595b9b47e625ffc35f05bad0/icons/turf/area_prison_v3_fiorina.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": ""
+    },
+    {
+      "name": "oob"
+    },
+    {
+      "name": "base_icon"
+    },
+    {
+      "name": "fiorina"
+    },
+    {
+      "name": "maints"
+    },
+    {
+      "name": "tumor0"
+    },
+    {
+      "name": "tumor1"
+    },
+    {
+      "name": "tumor2"
+    },
+    {
+      "name": "tumor3"
+    },
+    {
+      "name": "tumor4"
+    },
+    {
+      "name": "tumor0-deep"
+    },
+    {
+      "name": "tumor-fiberbush"
+    },
+    {
+      "name": "station0"
+    },
+    {
+      "name": "station1"
+    },
+    {
+      "name": "station2"
+    },
+    {
+      "name": "station3"
+    },
+    {
+      "name": "station4"
+    },
+    {
+      "name": "disco"
+    },
+    {
+      "name": "police_line"
+    },
+    {
+      "name": "lz"
+    },
+    {
+      "name": "lz1"
+    },
+    {
+      "name": "lz2"
+    },
+    {
+      "name": "wardens"
+    },
+    {
+      "name": "security_hub"
+    },
+    {
+      "name": "botany"
+    },
+    {
+      "name": "power0"
+    }
+  ]
+}

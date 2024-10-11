@@ -5,7 +5,7 @@
     MinSize="500 500">
     <TabContainer Name="Tabs">
         <cc:RMCTransformTab Name="TransformTab" Access="Public" />
+        <cc:RMCMarineTab Name="MarineTab" Access="Public" />
         <cc:RMCXenoTab Name="XenoTab" Access="Public" />
-        <cc:RMCSquadsTab Name="SquadsTab" Access="Public" />
     </TabContainer>
 </cc:RMCAdminWindow>

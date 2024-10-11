@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+﻿using Content.Shared._RMC14.Stun;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Crest;
 
@@ -17,4 +18,10 @@ public sealed partial class XenoCrestComponent : Component
 
     [DataField, AutoNetworkedField]
     public string ImmuneToStatus = "Stun";
+
+    [DataField, AutoNetworkedField]
+    public RMCSizes CrestSize = RMCSizes.Big;
+
+    [DataField, AutoNetworkedField]
+    public RMCSizes? OriginalSize;
 }

@@ -183,6 +183,15 @@ public sealed class LinkAccountManager : IPostInjectInit
         return _figurines;
     }
 
+    public string GetPatronOOCHexColor(NetUserId userId)
+    {
+        // TODO RMC14 move this to the database
+        if (userId.UserId == Guid.Parse("518fe396-b199-4757-92ff-697fc527bbf1"))
+            return "#FFFFFF";
+
+        return "#aa00ff";
+    }
+
     void IPostInjectInit.PostInject()
     {
         _net.RegisterNetMessage<LinkAccountRequestMsg>(OnRequest);

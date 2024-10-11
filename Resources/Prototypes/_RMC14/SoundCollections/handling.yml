@@ -1,0 +1,19 @@
+- type: soundCollection
+  id: RMCEquipArmor
+  files:
+  - /Audio/_RMC14/Handling/armorequip_1.ogg
+  - /Audio/_RMC14/Handling/armorequip_2.ogg
+
+- type: soundCollection
+  id: RMCEquipGun
+  files:
+  - /Audio/_RMC14/Handling/gunequip1.ogg
+  - /Audio/_RMC14/Handling/gunequip2.ogg
+  - /Audio/_RMC14/Handling/gunequip3.ogg
+
+- type: soundCollection
+  id: RMCRustleGun
+  files:
+  - /Audio/_RMC14/Handling/gunrustle1.ogg
+  - /Audio/_RMC14/Handling/gunrustle2.ogg
+  - /Audio/_RMC14/Handling/gunrustle3.ogg
