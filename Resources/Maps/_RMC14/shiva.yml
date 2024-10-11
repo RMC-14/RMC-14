@@ -110337,6 +110337,56 @@ entities:
     - type: Transform
       pos: 153.5,154.5
       parent: 1
+- proto: RMCContainerBlueLeft
+  entities:
+  - uid: 15826
+    components:
+    - type: Transform
+      pos: 114.5,33.5
+      parent: 1
+  - uid: 15833
+    components:
+    - type: Transform
+      pos: 121.5,31.5
+      parent: 1
+- proto: RMCContainerBlueMiddle
+  entities:
+  - uid: 15827
+    components:
+    - type: Transform
+      pos: 115.5,33.5
+      parent: 1
+  - uid: 15835
+    components:
+    - type: Transform
+      pos: 122.5,31.5
+      parent: 1
+- proto: RMCContainerBlueRight
+  entities:
+  - uid: 15831
+    components:
+    - type: Transform
+      pos: 116.5,33.5
+      parent: 1
+  - uid: 15836
+    components:
+    - type: Transform
+      pos: 123.5,31.5
+      parent: 1
+- proto: RMCContainerGreenLeft
+  entities:
+  - uid: 15832
+    components:
+    - type: Transform
+      pos: 120.5,37.5
+      parent: 1
+- proto: RMCContainerGreenRight
+  entities:
+  - uid: 15834
+    components:
+    - type: Transform
+      pos: 121.5,37.5
+      parent: 1
 - proto: RMCCrateFreezer
   entities:
   - uid: 13000
