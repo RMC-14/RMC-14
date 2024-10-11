@@ -4,7 +4,6 @@ using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Xenonids;
-using Content.Shared._RMC14.Xenonids.Strain;
 using Content.Shared.Eui;
 using Content.Shared.Humanoid.Prototypes;
 using JetBrains.Annotations;
