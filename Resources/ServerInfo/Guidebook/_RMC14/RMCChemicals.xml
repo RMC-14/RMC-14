@@ -5,6 +5,53 @@
 
   Knowing different types of chemicals and their effects is important for being able to manage injury and danger.
 
+  ## Elements
+  <GuideReagentGroupEmbed Group="Elements"/>
+
+  \n
+
   ## Medicine
   <GuideReagentGroupEmbed Group="Medicine"/>
+
+  \n
+
+  ## Narcotics
+  <GuideReagentGroupEmbed Group="Narcotics"/>
+
+  \n
+
+
+  ## Pyrotechnics
+  <GuideReagentGroupEmbed Group="Pyrotechnic"/>
+
+  \n
+
+
+  ## Toxins
+  <GuideReagentGroupEmbed Group="Toxins"/>
+
+  \n
+
+
+  ## Foods
+  <GuideReagentGroupEmbed Group="Foods"/>
+
+  \n
+
+
+  ## Botanical
+  <GuideReagentGroupEmbed Group="Botanical"/>
+
+  \n
+
+
+  ## Biological
+  <GuideReagentGroupEmbed Group="Biological"/>
+
+  \n
+
+
+  ## Other
+  <GuideReagentGroupEmbed Group="Unknown"/>
+
 </Document>
