@@ -51590,6 +51590,58 @@ entities:
     - type: Transform
       pos: 45.5,28.5
       parent: 1
+- proto: CMSpawnPointSurvivor
+  entities:
+  - uid: 14564
+    components:
+    - type: Transform
+      pos: 6.5,133.5
+      parent: 1
+  - uid: 15842
+    components:
+    - type: Transform
+      pos: 68.5,46.5
+      parent: 1
+  - uid: 15882
+    components:
+    - type: Transform
+      pos: 93.5,101.5
+      parent: 1
+  - uid: 15883
+    components:
+    - type: Transform
+      pos: 95.5,88.5
+      parent: 1
+  - uid: 15884
+    components:
+    - type: Transform
+      pos: 100.5,114.5
+      parent: 1
+  - uid: 15885
+    components:
+    - type: Transform
+      pos: 104.5,82.5
+      parent: 1
+  - uid: 15886
+    components:
+    - type: Transform
+      pos: 105.5,113.5
+      parent: 1
+  - uid: 15887
+    components:
+    - type: Transform
+      pos: 106.5,51.5
+      parent: 1
+  - uid: 15888
+    components:
+    - type: Transform
+      pos: 115.5,86.5
+      parent: 1
+  - uid: 15889
+    components:
+    - type: Transform
+      pos: 164.5,82.5
+      parent: 1
 - proto: CMSpawnPointXeno
   entities:
   - uid: 11170
