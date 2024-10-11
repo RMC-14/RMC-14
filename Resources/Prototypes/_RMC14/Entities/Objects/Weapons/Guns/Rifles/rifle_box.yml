@@ -5,6 +5,8 @@
   description: A box filled with handfuls of .458 SOCOM rounds, designed for use with the XM88 heavy rifle.
   components:
   - type: Storage
+    grid:
+    - 0,0,19,5 # should be 60 slots if I did my math right
     whitelist:
       tags:
       - RMCCartridge458SOCOM
