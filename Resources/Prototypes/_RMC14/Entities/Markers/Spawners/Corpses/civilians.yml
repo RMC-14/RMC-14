@@ -114,4 +114,4 @@
   components:
   - type: ConditionalSpawner
     prototypes:
-    - RMCGearCorpseWeYaGoon
+    - RMCHumanCorpseWeYaGoon

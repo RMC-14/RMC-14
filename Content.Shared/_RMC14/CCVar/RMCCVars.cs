@@ -210,4 +210,16 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCPowerLoadMultiplier =
         CVarDef.Create("rmc.power_load_multiplier", 0.01f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCMarinesPerSurvivor =
+        CVarDef.Create("rmc.marines_per_survivor", 10, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCSurvivorsMinimum =
+        CVarDef.Create("rmc.survivors_minimum", 2, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCSurvivorsMaximum =
+        CVarDef.Create("rmc.survivors_maximum", 8, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCSpawnerMaxCorpses =
+        CVarDef.Create("rmc.spawner_max_corpses", 25, CVar.REPLICATED | CVar.SERVER);
 }
