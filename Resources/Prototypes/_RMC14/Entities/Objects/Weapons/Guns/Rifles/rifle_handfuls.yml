@@ -28,8 +28,7 @@
   - type: Tag
     tags:
     - Cartridge
-    - RMCShellShotgun
-    - RMCShellShotgunBuckshot
+    - RMCCartridge458SOCOM
 
 - type: stack
   id: RMCCartridge458SOCOM
