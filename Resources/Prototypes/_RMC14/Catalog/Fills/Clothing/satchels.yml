@@ -21,5 +21,5 @@
   - type: StorageFill
     contents:
     - id: CMSheetMetal20
-    - id: RMCWeaponRevolverM44
-    - id: RMCSpeedLoaderM44
+    - id: RMCWeaponPistolMK45
+    - id: RMCMagazinePistolMK45
