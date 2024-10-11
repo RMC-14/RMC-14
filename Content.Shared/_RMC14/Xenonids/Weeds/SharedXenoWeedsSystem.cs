@@ -1,5 +1,7 @@
-﻿using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
+﻿using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Rest;
+using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Maps;
@@ -26,6 +28,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -120,7 +123,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
     private void WeedsRefreshPassiveSpeed(Entity<AffectableByWeedsComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        if (!EntityManager.TryGetComponent<PhysicsComponent>(ent, out var physicsComponent))
+        if (!TryComp<PhysicsComponent>(ent, out var physicsComponent))
             return;
 
         var speed = 0.0f;
@@ -136,6 +139,13 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             speed += isXeno ? weeds.SpeedMultiplierXeno : weeds.SpeedMultiplierOutsider;
             any = true;
             entries++;
+        }
+
+        if (!any &&
+            Transform(ent).Anchored &&
+            _rmcMap.HasAnchoredEntityEnumerator<XenoWeedsComponent>(ent.Owner.ToCoordinates()))
+        {
+            any = true;
         }
 
         if (entries > 0)

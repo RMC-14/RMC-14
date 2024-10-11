@@ -97,6 +97,9 @@
     maxItemSize: Small
     grid:
     - 0,0,9,1 # 5 slots
+    blacklist:
+      tags:
+      - CMMagazineSmg
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
     items:
@@ -114,6 +117,9 @@
       maxItemSize: Small
       grid:
       - 0,0,9,1 # 5 slots
+      blacklist:
+        tags:
+        - CMMagazineSmg
     - type: IgnoreContentsSize
       items:
         tags:
@@ -144,6 +150,9 @@
       maxItemSize: Small
       grid:
       - 0,0,9,1 # 5 slots
+      blacklist:
+        tags:
+        - CMMagazineSmg
     - type: IgnoreContentsSize
       items:
         tags:

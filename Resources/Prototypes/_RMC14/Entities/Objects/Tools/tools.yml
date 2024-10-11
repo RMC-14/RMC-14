@@ -103,10 +103,9 @@
     state: icon
   - type: Item
     size: Small
-    sprite: _RMC14/Objects/Tools/crowbar.rsi
-    storedSprite:
-      sprite: _RMC14/Objects/Tools/crowbar.rsi
-      state: icon
+    sprite: null
+    storedSprite: null
+    shape: null
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/crowbar_pickup.ogg
@@ -115,6 +114,8 @@
     slots:
     - Belt
     - Suitstorage
+  - type: Prying
+    speedModifier: 100000
 
 - type: entity
   parent: CMCrowbar
@@ -129,6 +130,7 @@
     state: red-icon
   - type: Item
     heldPrefix: red
+    storedSprite: null
 
 - type: entity
   parent: HandLabeler

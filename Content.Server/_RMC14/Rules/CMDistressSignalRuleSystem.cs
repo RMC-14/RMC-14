@@ -45,6 +45,7 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
+using Content.Shared.Roles.Jobs;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -101,6 +102,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private string _planetMaps = default!;
     private float _marinesPerXeno;
+    private float _marinesPerSurvivor;
+    private float _maximumSurvivors;
+    private float _minimumSurvivors;
     private string _adminFaxAreaMap = string.Empty;
     private int _mapVoteExcludeLast;
 
@@ -146,6 +150,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         Subs.CVar(_config, RMCCVars.RMCPlanetMaps, v => _planetMaps = v, true);
         Subs.CVar(_config, RMCCVars.CMMarinesPerXeno, v => _marinesPerXeno = v, true);
+        Subs.CVar(_config, RMCCVars.RMCMarinesPerSurvivor, v => _marinesPerSurvivor = v, true);
+        Subs.CVar(_config, RMCCVars.RMCSurvivorsMaximum, v => _maximumSurvivors = v, true);
+        Subs.CVar(_config, RMCCVars.RMCSurvivorsMinimum, v => _minimumSurvivors = v, true);
         Subs.CVar(_config, RMCCVars.RMCAdminFaxAreaMap, v => _adminFaxAreaMap = v, true);
         Subs.CVar(_config, RMCCVars.RMCPlanetMapVoteExcludeLast, v => _mapVoteExcludeLast = v, true);
 
@@ -242,6 +249,51 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 return playerId;
             }
 
+            var survivorSpawners = new List<EntityUid>();
+            var spawners = EntityQueryEnumerator<SpawnPointComponent>();
+            while (spawners.MoveNext(out var spawnId, out var spawnComp))
+            {
+                if (spawnComp.Job == comp.SurvivorJob)
+                    survivorSpawners.Add(spawnId);
+            }
+
+            var survivorSpawnersLeft = new List<EntityUid>(survivorSpawners);
+            NetUserId? SpawnSurvivor(List<NetUserId> list, out bool stop)
+            {
+                stop = false;
+                if (survivorSpawners.Count == 0)
+                {
+                    stop = true;
+                    return null;
+                }
+
+                if (survivorSpawnersLeft.Count == 0)
+                    survivorSpawnersLeft.AddRange(survivorSpawners);
+
+                var playerId = _random.PickAndTake(list);
+                if (!_player.TryGetSessionById(playerId, out var player))
+                {
+                    Log.Error($"Failed to find player with id {playerId} during survivor selection.");
+                    return null;
+                }
+
+                var spawner = _random.PickAndTake(survivorSpawnersLeft);
+                ev.PlayerPool.Remove(player);
+                GameTicker.PlayerJoinGame(player);
+
+                var profile = GameTicker.GetPlayerProfile(player);
+                var coordinates = _transform.GetMoverCoordinates(spawner);
+                var jobComp = new JobComponent { Prototype = comp.SurvivorJob };
+                var survivorMob = _stationSpawning.SpawnPlayerMob(coordinates, jobComp, profile, null);
+
+                if (!_mind.TryGetMind(playerId, out var mind))
+                    mind = _mind.CreateMind(playerId);
+
+                RemCompDeferred<TacticalMapUserComponent>(survivorMob);
+                _mind.TransferTo(mind.Value, survivorMob);
+                return playerId;
+            }
+
             EntityUid SpawnXenoEnt(EntProtoId ent)
             {
                 var leader = _prototypes.TryIndex(ent, out var proto) &&
@@ -257,7 +309,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             }
 
             var totalXenos = (int) Math.Round(Math.Max(1, ev.PlayerPool.Count / _marinesPerXeno));
-            var marines = ev.PlayerPool.Count - totalXenos;
+            var totalSurvivors = (int) Math.Round(ev.PlayerPool.Count / _marinesPerSurvivor);
+            totalSurvivors = (int) Math.Clamp(totalSurvivors, _minimumSurvivors, _maximumSurvivors);
+            var marines = ev.PlayerPool.Count - totalXenos - totalSurvivors;
             var jobSlotScaling = _config.GetCVar(RMCCVars.RMCJobSlotScaling);
             if (marines > 0 && jobSlotScaling)
             {
@@ -348,22 +402,58 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 }
             }
 
-            var selected = 0;
+            var selectedXenos = 0;
             for (var i = xenoCandidates.Length - 1; i >= 0; i--)
             {
                 var list = xenoCandidates[i];
-                while (list.Count > 0 && selected < totalXenos)
+                while (list.Count > 0 && selectedXenos < totalXenos)
                 {
                     if (SpawnXeno(list, comp.LarvaEnt) != null)
-                        selected++;
+                        selectedXenos++;
                 }
             }
 
             // Any unfilled xeno slots become larva
-            for (var i = selected; i < totalXenos; i++)
+            for (var i = selectedXenos; i < totalXenos; i++)
             {
                 // TODO RMC14 burrowed larva
                 SpawnXenoEnt(comp.LarvaEnt);
+            }
+
+            var survivorCandidates = new List<NetUserId>[Enum.GetValues<JobPriority>().Length];
+            for (var i = 0; i < survivorCandidates.Length; i++)
+            {
+                survivorCandidates[i] = [];
+            }
+
+            foreach (var player in ev.PlayerPool)
+            {
+                var id = player.UserId;
+                if (!IsAllowed(id, comp.SurvivorJob))
+                    continue;
+
+                if (!ev.Profiles.TryGetValue(id, out var profile))
+                    continue;
+
+                if (profile.JobPriorities.TryGetValue(comp.SurvivorJob, out var priority) &&
+                    priority > JobPriority.Never)
+                {
+                    survivorCandidates[(int) priority].Add(id);
+                }
+            }
+
+            var selectedSurvivors = 0;
+            for (var i = survivorCandidates.Length - 1; i >= 0; i--)
+            {
+                var list = survivorCandidates[i];
+                while (list.Count > 0 && selectedSurvivors < totalSurvivors)
+                {
+                    if (SpawnSurvivor(list, out var stop) != null)
+                        selectedSurvivors++;
+
+                    if (stop)
+                        break;
+                }
             }
 
             if (spawnedDropships)

@@ -83,6 +83,11 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
         }
     }
 
+    public override bool IsPowered(EntityUid ent)
+    {
+        return TryComp(ent, out ApcPowerReceiverComponent? receiver) && receiver.Powered;
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);

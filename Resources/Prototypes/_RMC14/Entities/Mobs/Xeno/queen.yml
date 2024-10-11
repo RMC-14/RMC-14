@@ -99,6 +99,7 @@
         density: 185
         mask:
         - MobMask
+        - BarbedBarricade
         layer:
         - MobLayer
       fix2:
@@ -119,7 +120,7 @@
     footstepSoundCollection:
       collection: XenoFootstepLarge
       params:
-        volume: -8
+        volume: -6
 #  - type: RandomSound
 #    sound:
 #      collection: XenoQueenBreath # TODO RMC14

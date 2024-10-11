@@ -1,0 +1,19 @@
+﻿- type: entity
+  parent: RadioHandheld
+  id: RMCRadioHandheldColony
+  name: shortwave radio
+  description: ""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/radio.rsi
+    state: walkietalkie
+    layers: []
+  - type: Item
+    sprite: _RMC14/Objects/Devices/radio.rsi
+  - type: RadioMicrophone
+    enabled: true
+    broadcastChannel: ColonyHandheld
+  - type: RadioSpeaker
+    enabled: true
+    channels:
+    - ColonyHandheld
