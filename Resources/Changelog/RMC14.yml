@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed damaged xenonids being able to evolve. Xenos must now be on full
-      health to evolve, same as devolving.
-    type: Fix
-  id: 324
-  time: '2024-07-09T10:50:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2929
-- author: DrSmugleaf
-  changes:
   - message: Fixed defenders staying fortified after going into crit.
     type: Fix
   id: 325
@@ -4659,5 +4651,13 @@
   id: 823
   time: '2024-10-11T09:25:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4398
+- author: Rainbeon
+  changes:
+  - message: Fixed player-controlled Parasites not hearing their own infection noise
+      when infecting a marine.
+    type: Fix
+  id: 824
+  time: '2024-10-11T09:26:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4404
 Name: RMC14
 Order: -1
