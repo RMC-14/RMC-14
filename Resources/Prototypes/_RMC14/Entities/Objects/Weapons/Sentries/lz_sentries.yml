@@ -56,6 +56,8 @@
   - type: GunIFF
     enabled: true
     intrinsic: true
+  - type: SleepNPC
+  - type: WakeNPCOnDropshipLanding
 
 - type: entity
   parent: RMCBaseTurret
