@@ -259,6 +259,8 @@
   parent: XenoWeeds
   id: XenoHardyWeeds
   components:
+  - type: Sprite
+    color: "#a1a1a1"
   - type: XenoWeeds
     spawns: XenoHardyWeeds
     spreadsOnSemiWeedable: true
@@ -274,6 +276,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: FloorTiles
+    color: "#a1a1a1"
     layers:
     - state: weed0
     - state: constructionnode
