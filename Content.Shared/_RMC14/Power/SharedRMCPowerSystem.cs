@@ -589,6 +589,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         return false;
     }
 
+    public abstract bool IsPowered(EntityUid ent);
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
