@@ -75,7 +75,7 @@
   - type: Tag
     tags:
     - Sidearm
-    - RMCMK80
+    - CMWeaponPistolMK80
 
 - type: entity
   parent: CMBaseMagazinePistol
