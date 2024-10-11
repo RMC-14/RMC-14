@@ -230,3 +230,4 @@
       types:
         Piercing: 100
         Asphyxiation: 200
+  - type: RMCUserPryingRequiresTool
