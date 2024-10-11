@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed xenonids being able to put eggs inside resin structures and being
-      able to build on top of eggs to hide them.
-    type: Fix
-  id: 326
-  time: '2024-07-09T11:08:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2927
-- author: DrSmugleaf
-  changes:
   - message: Fixed eggs being able to infect through corners.
     type: Fix
   id: 327
@@ -4723,5 +4715,20 @@
   id: 825
   time: '2024-10-11T19:36:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4414
+- author: DrSmugleaf
+  changes:
+  - message: Fixed hivemind chat not working for xenonids.
+    type: Fix
+  - message: Fixed dropship doors being unpowered.
+    type: Fix
+  - message: Fixed radios on corpses starting on.
+    type: Fix
+  - message: Fixed MOU53 being listed for 0 points.
+    type: Fix
+  - message: Fixed ejecting full handfuls from the MOU53.
+    type: Fix
+  id: 826
+  time: '2024-10-11T21:52:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4417
 Name: RMC14
 Order: -1
