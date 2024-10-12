@@ -395,8 +395,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             TryComp(victim, out HumanoidAppearanceComponent? appearance) &&
             infectable.Sound.TryGetValue(appearance.Sex, out var sound))
         {
-            var filter = Filter.Pvs(victim);
-            _audio.PlayEntity(sound, filter, victim, true);
+            _audio.PlayPvs(sound, victim);
         }
 
         var time = _timing.CurTime;

@@ -16,7 +16,7 @@
   id: ActionXenoResinSurge
   parent: ActionXenoBase
   name: Resin Surge (75)
-  description: Speed up plant growth, create temporary walls or heavily reinforce existing ones, or create patches of sticky resin.
+  description: Speed up plant growth, create temporary walls, or heavily reinforce existing ones. #, or create patches of sticky resin. TODO RMC14
   components:
   - type: EntityWorldTargetAction
     itemIconStyle: NoItem

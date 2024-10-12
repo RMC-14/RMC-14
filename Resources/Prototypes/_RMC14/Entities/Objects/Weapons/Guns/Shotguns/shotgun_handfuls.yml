@@ -118,7 +118,6 @@
       map: [ "base" ]
   - type: CartridgeAmmo
     proto: CMPelletShotgunBeanbag
-
   - type: Stack
     count: 5
     stackType: RMCShellShotgunBeanbag

@@ -159,6 +159,24 @@
   - type: CMVocalizeTrigger
 
 - type: entity
+  parent: CMGrenadeBase
+  id: RMCGrenadeTraining
+  name: M07 Training Grenade
+  description: A harmless reusable version of the M40 HEDP, used for training. Capable of being loaded into a grenade launcher, or thrown by hand.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/m07training.rsi
+  - type: SoundOnTrigger
+    sound: /Audio/Effects/snap.ogg
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+    - RMCGrenadeTraining
+    - RMCGrenadeM40
+  - type: Ammo
+
+- type: entity
   id: CMExplosionEffectGrenade
   categories:
   - HideSpawnMenu
@@ -214,3 +232,7 @@
 
 - type: Tag
   id: RMCGrenadeM40
+
+- type: Tag
+  id: RMCGrenadeTraining
+

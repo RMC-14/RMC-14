@@ -3,6 +3,7 @@
   name: AR10 Assault Rifle
   id: WeaponRifleAR10
   description: An earlier version of the more widespread M16 rifle. Considered to be the father of the 20th century rifle. How one of these ended up here is a mystery of its own. It is chambered in 7.62x51mm.
+  suffix: Filled
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/ar10.rsi
@@ -11,15 +12,11 @@
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi # TODO RMC14 effects
       state: ar10_stock
       offset: -0.5, 0
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/ar10.rsi
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
   - type: Gun
     selectedMode: SemiAuto
     availableModes:
@@ -36,10 +33,14 @@
     scatterUnwielded: 20
     baseFireRate: 2
     burstScatterMult: 2
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
   - type: ItemSlots
     slots:
       gun_magazine:
         name: Magazine
+        startingItem: RMCMagazineRifleAR10
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
         priority: 2

@@ -97,3 +97,13 @@
         base:
           Toxic: { sprite: _RMC14/Tiles/planet/desert_water_toxic.rsi, state: deep }
           Unarmed: { sprite: _RMC14/Tiles/planet/desert_water.rsi, state: deep }
+
+- type: entity
+  parent: CMCatwalk
+  id: RMCGrate
+  name: grate
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/grate.rsi
+    state: grate
+  - type: DeleteOnExplosion

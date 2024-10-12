@@ -68,8 +68,6 @@
     consumeDelay: 5
     canConsumeAtFull: true
 
-
-
 - type: entity
   parent: XenoFruitBase
   id: XenoFruitLesser
@@ -154,7 +152,7 @@
 - type: entity
   parent: XenoFruitBase
   id: XenoFruitSpeed
-  name: speed resin fruit
+  name: alacrit resin fruit
   description: A fruit that can be eaten to move faster for a short amount of time.
   components:
   - type: XenoFruit
@@ -171,7 +169,7 @@
 - type: entity
   parent: XenoFruitBase
   id: XenoFruitPlasma
-  name: plasma resin fruit
+  name: cruor resin fruit
   description: A fruit that can be eaten to boost plasma generation.
   components:
   - type: XenoFruit

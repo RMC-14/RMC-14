@@ -68,6 +68,7 @@
       - Brutepack
       - Radio
       - Knife
+      - PillPacket
       # todo rmc14 splint
       components:
       - Pill
@@ -82,12 +83,9 @@
     contents:
     - id: RMCFlashlight
     - id: CMCrowbarRed
-    - id: CMPillTricordrazine
-    - id: CMPillTricordrazine
-    - id: CMPillTricordrazine
-    - id: CMPillTricordrazine
+    - id: CMPacketPillsTricordrazine
     - id: CMGauze10
-    - id: RadioHandheld
+    - id: RMCRadioHandheldColony
     - id: RMCM5Bayonet
       # 5 splints
 

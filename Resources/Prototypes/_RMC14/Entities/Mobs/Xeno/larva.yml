@@ -52,6 +52,7 @@
         density: 185
         mask:
         - SmallMobMask
+        - BarbedBarricade
         layer:
         - SmallMobLayer
   - type: Flammable

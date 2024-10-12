@@ -1,0 +1,121 @@
+﻿- type: entity
+  parent: CMBaseWeaponSMG
+  name: MP5 submachine gun
+  id: WeaponSMGMP5 # TODO RMC14 10% chance to have an underbarrel grenade launcher
+  description: A German design, this was one of the most widely used submachine guns in the world. It's still possible to find this firearm in the hands of collectors or gun fanatics.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/mp5.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/mp5.rsi
+  - type: Gun
+    shotsPerBurst: 3
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/smg_light.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilWielded: 1
+    recoilUnwielded: 1
+    scatterWielded: 6
+    scatterUnwielded: 12
+    baseFireRate: 4
+    burstScatterMult: 3
+    modifiers:
+      Burst:
+        fireDelay: 0.0999
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        maxScatterModifier: 3
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: CMMagazineSMGMP5
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineSMGMP5
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentBipod
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.84, 0
+      rmc-aslot-rail: 0.032, 0.09
+      rmc-aslot-underbarrel: 0.45, -0.31
+  - type: GunDamageModifier
+    multiplier: 1.2
+
+- type: entity
+  parent: BaseMagazineRifle
+  id: CMMagazineSMGMP5
+  name: "MP5 magazine (9mm)"
+  description: "A 9mm magazine for the MP5."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - CMMagazineSMGMP5
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridge10x20mm
+    proto: CMCartridge10x20mm
+    capacity: 30
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mp5.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: Appearance
+
+- type: Tag
+  id: CMMagazineSMGMP5

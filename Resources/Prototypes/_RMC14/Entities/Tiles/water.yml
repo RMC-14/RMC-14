@@ -29,6 +29,9 @@
   - type: SpeedModifierContacts
     walkSpeedModifier: 0.5
     sprintSpeedModifier: 0.5
+    cover:
+      tags:
+      - Catwalk
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -51,6 +54,10 @@
   - type: BlockWeeds
   - type: MinimapColor
     color: "#94b0d59c"
+  - type: RMCWater
+    cover:
+      tags:
+      - Catwalk
 
 - type: entity
   parent: CMFloorShallowWaterEntity

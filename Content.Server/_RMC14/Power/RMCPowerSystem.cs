@@ -73,6 +73,9 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
             if (receiverComp.Powered == on)
                 continue;
 
+            if (!receiverComp.NeedsPower)
+                continue;
+
             receiverComp.Powered = on;
             Dirty(receiver, receiverComp);
 
@@ -81,6 +84,11 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
             if (_appearanceQuery.TryComp(receiver, out var appearance))
                 _appearance.SetData(receiver, PowerDeviceVisuals.Powered, on, appearance);
         }
+    }
+
+    public override bool IsPowered(EntityUid ent)
+    {
+        return TryComp(ent, out ApcPowerReceiverComponent? receiver) && receiver.Powered;
     }
 
     public override void Update(float frameTime)

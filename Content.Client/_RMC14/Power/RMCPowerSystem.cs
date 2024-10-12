@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Power;
+﻿using Content.Client.Power.Components;
+using Content.Shared._RMC14.Power;
 
 namespace Content.Client._RMC14.Power;
 
@@ -8,6 +9,11 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     {
         base.Initialize();
         SubscribeLocalEvent<RMCApcComponent, AfterAutoHandleStateEvent>(OnApcState);
+    }
+
+    public override bool IsPowered(EntityUid ent)
+    {
+        return TryComp(ent, out ApcPowerReceiverComponent? receiver) && receiver.Powered;
     }
 
     private void OnApcState(Entity<RMCApcComponent> ent, ref AfterAutoHandleStateEvent args)

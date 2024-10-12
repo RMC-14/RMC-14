@@ -29,6 +29,8 @@ command-description-marine-randomizewithjob = Deletes and then spawns a marine o
 
 command-description-removeinvalidweeds = Removes any weeds that should not have normally spread to where they are from the map.
 
+command-description-prototypecontains = Filters entities by whether or not their prototype ID contains the given text.
+
 command-description-skills-get = Gets the level of a specific skill for a marine.
 command-description-skills-set = Sets the level of a specific skill for a marine or group of marines.
 command-description-skills-all = Sets the level of all skills for a marine or group of marines.

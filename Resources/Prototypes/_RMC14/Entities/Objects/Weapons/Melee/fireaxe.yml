@@ -16,6 +16,7 @@
         Structural: 10
     soundHit:
       collection: GenericHit
+    wideAnimationRotation: 90
   - type: IncreaseDamageOnWield
     damage:
       types:
