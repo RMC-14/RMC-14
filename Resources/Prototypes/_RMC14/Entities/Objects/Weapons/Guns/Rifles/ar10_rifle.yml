@@ -48,7 +48,7 @@
           tags:
           - RMCMagazineRifleAR10
   - type: GunDamageModifier
-    multiplier: 1.4
+    multiplier: 1.2
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -96,7 +96,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 56
+        Piercing: 40
 
 - type: Tag
   id: RMCMagazineRifleAR10
