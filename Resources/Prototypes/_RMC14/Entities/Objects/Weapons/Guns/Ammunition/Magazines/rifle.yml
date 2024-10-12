@@ -258,6 +258,90 @@
     - state: ammo_band
       color: "#00CDEA"
 
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineT71
+  name: "Type 71 magazine (5.45x39mm)"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineT71
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle545x39
+    proto: RMCCartridgeRifle545x39
+    capacity: 60
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/T71.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: Tag
+  id: RMCMagazineT71
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineT71AP
+  name: "Type 71 magazine AP (5.45x39mm)"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineT71
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle545x39AP
+    proto: RMCCartridgeRifle545x39AP
+    capacity: 60
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/T71AP.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: Tag
+  id: RMCMagazineT71AP
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineT71HEAP
+  name: "Type 71 magazine HEAP (5.45x39mm)"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineT71
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle545x39HEAP
+    proto: RMCCartridgeRifle545x39HEAP
+    capacity: 60
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/T71HEAP.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: Tag
+  id: RMCMagazineT71HEAP
+
 - type: Tag
   id: CMMagazineRifle
 
