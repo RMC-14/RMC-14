@@ -1,27 +1,4 @@
 ﻿Entries:
-- author: diraven
-  changes:
-  - message: Xenos in "watch xeno" skill ui are now sorted alphabetically.
-    type: Tweak
-  id: 329
-  time: '2024-07-09T19:30:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2934
-- author: Zarq
-  changes:
-  - message: Added recipes for current medicines.
-    type: Add
-  - message: Re-enabled the Chemical Dispenser.
-    type: Tweak
-  id: 330
-  time: '2024-07-09T19:52:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2735
-- author: blueDev2
-  changes:
-  - message: Barricades with barbed wires maintain their barbed wires when upgrading
-    type: Fix
-  id: 331
-  time: '2024-07-10T03:01:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2936
 - author: DrSmugleaf
   changes:
   - message: Fixed walls and membranes not destroying weed nodes under them when constructed.
@@ -4733,5 +4710,29 @@
   id: 828
   time: '2024-10-11T22:40:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4420
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Trijent window frames having error sprites in some directions.
+    type: Fix
+  - message: Fixed resin surge mentioning sticky resin which is not implemented yet.
+    type: Fix
+  id: 829
+  time: '2024-10-11T22:56:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4421
+- author: Vermidia
+  changes:
+  - message: Fruit speed modifiers are now additive instead of multiplicative (it
+      has less effect the faster you are)
+    type: Fix
+  id: 830
+  time: '2024-10-11T23:24:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4422
+- author: DrSmugleaf
+  changes:
+  - message: Fixed survivors not being listed on the ghost warp UI.
+    type: Fix
+  id: 831
+  time: '2024-10-11T23:25:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4423
 Name: RMC14
 Order: -1
