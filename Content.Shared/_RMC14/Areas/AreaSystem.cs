@@ -1,8 +1,11 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Shared._RMC14.GameStates;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.Coordinates;
+using Content.Shared.GameTicking;
 using Content.Shared.Maps;
+using Content.Shared.Popups;
+using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
@@ -12,27 +15,31 @@ namespace Content.Shared._RMC14.Areas;
 public sealed class AreaSystem : EntitySystem
 {
     [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    private EntityQuery<AreaComponent> _areaQuery;
     private EntityQuery<AreaGridComponent> _areaGridQuery;
     private EntityQuery<MapGridComponent> _mapGridQuery;
     private EntityQuery<MinimapColorComponent> _minimapColorQuery;
 
     private readonly List<EntityUid> _toRender = new();
 
+    private TimeSpan _earlySpreadHiveTime;
+
     public override void Initialize()
     {
-        _areaQuery = GetEntityQuery<AreaComponent>();
         _areaGridQuery = GetEntityQuery<AreaGridComponent>();
         _mapGridQuery = GetEntityQuery<MapGridComponent>();
         _minimapColorQuery = GetEntityQuery<MinimapColorComponent>();
 
         SubscribeLocalEvent<AreaGridComponent, MapInitEvent>(OnAreaGridMapInit);
+
+        Subs.CVar(_config, RMCCVars.RMCHiveSpreadEarlyMinutes, v => _earlySpreadHiveTime = TimeSpan.FromMinutes(v), true);
     }
 
     private void OnAreaGridMapInit(Entity<AreaGridComponent> ent, ref MapInitEvent args)
@@ -53,6 +60,34 @@ public sealed class AreaSystem : EntitySystem
     }
 
     public bool TryGetArea(
+        Entity<MapGridComponent, AreaGridComponent?> grid,
+        Vector2i indices,
+        [NotNullWhen(true)] out AreaComponent? area,
+        [NotNullWhen(true)] out EntityPrototype? areaPrototype,
+        out EntityUid? entity)
+    {
+        area = default;
+        areaPrototype = default;
+        entity = default;
+        if (!Resolve(grid, ref grid.Comp2, false))
+            return false;
+
+        if (!grid.Comp2.Areas.TryGetValue(indices, out var areaProtoId))
+            return false;
+
+        if (!_prototypes.TryIndex(areaProtoId, out areaPrototype) ||
+            !areaProtoId.TryGet(out area, _prototypes, _compFactory))
+        {
+            return false;
+        }
+
+        if (grid.Comp2.AreaEntities.TryGetValue(areaProtoId, out var areaEnt))
+            entity = areaEnt;
+
+        return true;
+    }
+
+    public bool TryGetArea(
         EntityCoordinates coordinates,
         [NotNullWhen(true)] out AreaComponent? area,
         [NotNullWhen(true)] out EntityPrototype? areaPrototype,
@@ -69,19 +104,7 @@ public sealed class AreaSystem : EntitySystem
         }
 
         var indices = _map.CoordinatesToTile(gridId, grid, coordinates);
-        if (!areaGrid.Areas.TryGetValue(indices, out var areaProtoId))
-            return false;
-
-        if (!_prototypes.TryIndex(areaProtoId, out areaPrototype) ||
-            !areaProtoId.TryGet(out area, _prototypes, _compFactory))
-        {
-            return false;
-        }
-
-        if (areaGrid.AreaEntities.TryGetValue(areaProtoId, out var areaEnt))
-            entity = areaEnt;
-
-        return true;
+        return TryGetArea((gridId, grid, areaGrid), indices, out area, out areaPrototype, out entity);
     }
 
     public bool TryGetArea(
@@ -172,6 +195,24 @@ public sealed class AreaSystem : EntitySystem
                 return true;
             }
         }
+
+        return false;
+    }
+
+    public bool CanResinPopup(Entity<MapGridComponent, AreaGridComponent?> grid, Vector2i indices, EntityUid? user)
+    {
+        if (!TryGetArea(grid, indices, out var area, out _, out _))
+            return true;
+
+        if (area.ResinAllowed)
+            return true;
+
+        var roundDuration = _gameTicker.RoundDuration();
+        if (roundDuration > _earlySpreadHiveTime)
+            return true;
+
+        if (user != null)
+            _popup.PopupClient("It's too early to spread the hive this far.", user.Value, user.Value, PopupType.MediumCaution);
 
         return false;
     }
