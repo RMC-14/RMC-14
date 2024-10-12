@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed walls and membranes not destroying weed nodes under them when constructed.
-    type: Fix
-  id: 332
-  time: '2024-07-10T03:34:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2942
-- author: DrSmugleaf
-  changes:
   - message: Added admin logs for plant weeds, xeno construction and order construction.!
     type: Add
   id: 333
@@ -4734,5 +4727,21 @@
   id: 831
   time: '2024-10-11T23:25:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4423
+- author: DrSmugleaf
+  changes:
+  - message: Added the missing blocker to weeds being spread near landing zones before
+      40 minutes pass.
+    type: Add
+  - message: Fixed evac doors being unpowered.
+    type: Fix
+  - message: Fixed planet faxes being able to fax the ship.
+    type: Fix
+  - message: Fixed lifeboat pump sentries not shooting.
+    type: Fix
+  - message: Fixed being able to suicide without a gun in your active hand.
+    type: Fix
+  id: 832
+  time: '2024-10-12T09:27:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4435
 Name: RMC14
 Order: -1
