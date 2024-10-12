@@ -41,6 +41,7 @@ using Robust.Shared.Utility;
 using static Content.Shared.Physics.CollisionGroup;
 using Content.Shared.Movement.Components;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Marines;
 
 namespace Content.Shared._RMC14.Xenonids.Fruit;
 
@@ -278,6 +279,13 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         }
 
         // TODO: check if weeds belong to our hive
+        var weed = _xenoWeeds.GetWeedsOnFloor((gridId, grid), target);
+
+        if(checkWeeds && weed != null && !_hive.FromSameHive(xeno.Owner, weed.Value))
+        {
+            popup = Loc.GetString("rmc-xeno-fruit-wrong-hive");
+            return false;
+        }
 
         // Target has fruit, resin hole, egg, xeno construct or other obstruction on it
         var tile = _mapSystem.CoordinatesToTile(gridId, grid, target);
@@ -427,8 +435,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         if (!HasComp<HandsComponent>(user))
             return false;
 
-        // TODO: check for hive as well
-        if (!_hive.FromSameHive(fruit.Owner, user))
+        if (!HasComp<MarineComponent>(user) && !_hive.FromSameHive(fruit.Owner, user))
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-wrong-hive"), user, user, PopupType.SmallCaution);
             return false;
@@ -439,7 +446,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             !HasComp<XenoFruitPlanterComponent>(user) &&
             fruit.Comp.State == XenoFruitState.Growing)
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-pick-failed-not-mature"), user, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-pick-failed-not-mature", ("fruit", fruit)), user, user, PopupType.SmallCaution);
             return false;
         }
 
@@ -448,7 +455,9 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         {
             NeedHand = true,
             BreakOnMove = true,
-            RequireCanInteract = true
+            RequireCanInteract = true,
+            BlockDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent
         };
 
         if (!_doAfter.TryStartDoAfter(doAfter))
