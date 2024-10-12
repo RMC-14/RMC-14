@@ -117,7 +117,7 @@
   id: ActionXenoPlantWeedsHardy
   parent: ActionXenoBase
   name: Plant Hardy Weeds (125) # TODO RMC14 proper plasma costs
-  description: Plant a weed node that will spread hardier weeds, which grow fruit 20% faster and can be spread on some surfaces where normal weeds won't grow.
+  description: Plant a weed node that will spread hardier weeds, which grow fruit 20% faster, have slightly more health, and can be spread on some surfaces where normal weeds won't grow.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
