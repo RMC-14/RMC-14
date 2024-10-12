@@ -187,6 +187,7 @@
   parent: XenoHiveWeeds
   id: XenoHiveWeedsSource
   name: hive weed node
+  description: A weird, pulsating node
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
@@ -280,6 +281,7 @@
   parent: XenoHardyWeeds
   id: XenoHardyWeedsSource
   name: hardy weed node
+  description: A weird, pulsating node
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
