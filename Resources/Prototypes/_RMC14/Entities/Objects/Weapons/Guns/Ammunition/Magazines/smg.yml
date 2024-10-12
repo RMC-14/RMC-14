@@ -85,3 +85,35 @@
 
 - type: Tag
   id: CMMagazineSMGM63
+
+- type: entity
+  parent: BaseMagazineRifle
+  id: RMCMagazineT64
+  name: "Type 64 Helical Magazine (7.62x19mm)"
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineT64
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridge762x19mm
+    proto: RMCCartridge762x19mm
+    capacity: 64
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/T64.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: Appearance
+
+- type: Tag
+  id: RMCMagazineT64
