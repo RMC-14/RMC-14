@@ -56,8 +56,6 @@
   - type: GunIFF
     enabled: true
     intrinsic: true
-  - type: SleepNPC
-  - type: WakeNPCOnDropshipLanding
 
 - type: entity
   parent: RMCBaseTurret
@@ -79,6 +77,8 @@
     - UNMC
   - type: TimedDespawnOnLanding
   - type: MarineIFF
+  - type: SleepNPC
+  - type: WakeNPCOnDropshipLanding
 
 - type: htnCompound
   id: RMCTurretCompound
