@@ -39,6 +39,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Content.Shared.Physics.CollisionGroup;
+using Content.Shared._RMC14.Xenonids.Hive;
 
 namespace Content.Shared._RMC14.Xenonids.Fruit;
 
@@ -70,11 +71,12 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedXenoPheromonesSystem _xenoPhero = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     private static readonly ProtoId<DamageTypePrototype> FruitPlantDamageType = "Blunt";
 
-	private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
-	private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
+    private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
+    private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
 
     private EntityQuery<MobStateComponent> _mobStateQuery;
 
@@ -370,6 +372,8 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             var fruit = EnsureComp<XenoFruitComponent>(entity);
             var xform = Transform(entity);
 
+            _hive.SetSameHive(xeno.Owner, entity);
+
             _transform.SetCoordinates(entity, coordinates);
             _transform.SetLocalRotation(entity, 0);
 
@@ -416,17 +420,18 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     {
         // Check if fruit has already been harvested
         if (fruit.Comp.State == XenoFruitState.Item)
-        {
             return false;
-        }
 
         // Can't harvest without hands
         if (!HasComp<HandsComponent>(user))
-        {
             return false;
-        }
 
         // TODO: check for hive as well
+        if (!_hive.FromSameHive(fruit.Owner, user))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-wrong-hive"), user, user, PopupType.SmallCaution);
+            return false;
+        }
 
         // Non-planter xenos can't harvest growing fruit
         if (HasComp<XenoComponent>(user) &&
@@ -522,6 +527,11 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         }
 
         // TODO: check for hive
+        if (!_hive.FromSameHive(fruit.Owner, user))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-wrong-hive"), user, user, PopupType.SmallCaution);
+            return false;
+        }
 
         // Check if user is already under the effects of consumed fruit
         if (HasComp<XenoFruitSpeedComponent>(fruit) && HasComp<XenoFruitEffectSpeedComponent>(user))
@@ -579,11 +589,21 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         // Check if target is alive
         if (_mobState.IsDead(target))
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-feed-dead", ("target",target), ("fruit", fruit)), user, user);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-feed-dead", ("target", target), ("fruit", fruit)), user, user);
             return false;
         }
 
         // TODO: check for hive
+        if(!_hive.FromSameHive(fruit.Owner, user))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-wrong-hive"), user, user, PopupType.SmallCaution);
+            return false;
+        }
+        else if(!_hive.FromSameHive(user, target))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-feed-wrong-hive", ("target", target)), user, user, PopupType.SmallCaution);
+            return false;
+        }
 
         // Check if xeno is already under the effects of a fruit
         if (HasComp<XenoFruitSpeedComponent>(fruit) && HasComp<XenoFruitEffectSpeedComponent>(target))
