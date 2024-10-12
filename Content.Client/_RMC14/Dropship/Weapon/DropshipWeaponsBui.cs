@@ -179,8 +179,10 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
         var fire = ButtonAction("fire", _ => SendPredictedMessage(new DropshipTerminalWeaponsFireMsg(first)));
         var strike = Button("strike", Strike);
         // var vector = Loc.GetString("rmc-dropship-weapons-vector");
-        var nightVisionOn = Loc.GetString("rmc-dropship-weapons-night-vision-on");
-        var nightVisionOff = Loc.GetString("rmc-dropship-weapons-night-vision-off");
+        var nightVisionOn = ButtonAction("night-vision-on",
+            _ => SendPredictedMessage(new DropshipTerminalWeaponsNightVisionMsg(first, true)));
+        var nightVisionOff = ButtonAction("night-vision-off",
+            _ => SendPredictedMessage(new DropshipTerminalWeaponsNightVisionMsg(first, false)));
         var cancel = ButtonAction("cancel", _ => SendPredictedMessage(new DropshipTerminalWeaponsCancelMsg(first)));
         var weapon = Button("weapon", StrikeWeapon);
 
@@ -285,7 +287,7 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
                 screen.BottomRow.SetData(exit);
                 break;
             case Cams:
-                // screen.LeftRow.SetData(nightVisionOn, nightVisionOff);
+                screen.LeftRow.SetData(nightVisionOn, nightVisionOff);
                 screen.ScreenLabel.Visible = false;
 
                 if (_oldEye != null && _oldEye != terminal.Target)

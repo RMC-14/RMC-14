@@ -59,14 +59,7 @@
     - conditions:
         unwieldedOnly: true
       accuracyAddMult: -0.05
-  - type: Tool
-    qualities:
-    - Prying
-  - type: Prying
-    pryPowered: false
-    speedModifier: 0.5
-    useSound:
-      path: /Audio/Items/crowbar.ogg
+  - type: AttachablePrying
 
 - type: entity
   name: M11 throwing knife
@@ -114,7 +107,7 @@
   description: Latest issue of the Marine Machete.
   components:
   - type: Clothing
-    slots: 
+    slots:
     - belt
     - suitstorage
   - type: Tag

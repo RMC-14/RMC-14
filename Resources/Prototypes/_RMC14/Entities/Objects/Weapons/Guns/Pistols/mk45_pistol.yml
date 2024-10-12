@@ -1,0 +1,127 @@
+﻿- type: entity
+  parent: CMWeaponPistolBase
+  id: RMCWeaponPistolMK45
+  name: "MK-45 'high-power' automagnum"
+  description: Originally designed as a replacement for the UNMC's M44 combat revolver, it was rejected at the last minute by a committee, citing its need to be cocked after every loaded magazine to be too cumbersone and antiquated.
+  suffix: Filled
+  components:
+  - type: RMCSelectiveFire
+    scatterWielded: 10
+    scatterUnwielded: 14
+    baseFireRate: 1.428
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mk45.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mk45.rsi
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazinePistolMK45
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolMK45
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentSuppressor
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentCompensator
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentLaserSight
+          - RMCAttachmentGyroscopicStabilizer
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.71, 0.095
+      rmc-aslot-rail: -0.065, 0.125
+      rmc-aslot-underbarrel: 0.312, -0.25
+  - type: GunDamageModifier
+    multiplier: 1.4
+  - type: PumpAction
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Cock/gun_pistol_cocked.ogg
+    examine: rmc-gun-rack-examine
+    popup: rmc-gun-rack-first
+    popupKey: rmc-gun-rack-first-with
+    once: true
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolMK45
+  name: mk-45 automagnum magazine (.45)
+  description: A pistol magazine.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolMK45
+  - type: Item
+    size: Tiny
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgePistolMK45
+    proto: CMCartridgePistolMK45
+    capacity: 13
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mk45.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: CMCartridgePistolBase
+  id: CMCartridgePistolMK45
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridgePistolMK45
+  - type: CartridgeAmmo
+    proto: CMBulletPistolMK45
+
+- type: entity
+  parent: CMBulletBase
+  id: CMBulletPistolMK45
+  name: high-powered pistol bullet (.45)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 36
+  - type: CMArmorPiercing
+    amount: 25
+
+- type: Tag
+  id: RMCMagazinePistolMK45
+
+- type: Tag
+  id: CMCartridgePistolMK45

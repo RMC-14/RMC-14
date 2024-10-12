@@ -39,6 +39,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Content.Shared.Physics.CollisionGroup;
+using Content.Shared.Movement.Components;
 using Content.Shared._RMC14.Xenonids.Hive;
 
 namespace Content.Shared._RMC14.Xenonids.Fruit;
@@ -792,8 +793,13 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     private void OnXenoFruitSpeedRefresh(Entity<XenoFruitEffectSpeedComponent> xeno, ref RefreshMovementSpeedModifiersEvent args)
     {
         var comp = xeno.Comp;
-        var speed = 1 + comp.SpeedModifier.Float();
-        args.ModifySpeed(speed, speed);
+        if (!TryComp<MovementSpeedModifierComponent>(xeno, out var baseSpeed))
+            return;
+
+        var modSpeedWalk = baseSpeed.BaseWalkSpeed + comp.SpeedModifier.Float();
+        var modSpeedSprint = baseSpeed.BaseSprintSpeed + comp.SpeedModifier.Float();
+
+        args.ModifySpeed(modSpeedWalk / baseSpeed.BaseWalkSpeed, modSpeedSprint / baseSpeed.BaseSprintSpeed);
     }
 
     // Shield (unstable fruit)

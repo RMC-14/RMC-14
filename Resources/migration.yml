@@ -854,3 +854,7 @@ Pickaxe: RMCPickaxe
 ClothingOuterVestHazard: RMCHazardVest
 ClothingHeadHatHardhatYellow: RMCHardHat
 ClothingHeadHatHardhatBlue: RMCHardhatBlue
+
+# 2024-10-11
+Crowbar: CMCrowbar
+CrowbarRed: CMCrowbarRed

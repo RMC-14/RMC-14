@@ -23,6 +23,7 @@
     sprite: _RMC14/Structures/containers.rsi
     offset: 0, 0.5
   - type: Clickable
+  - type: DeleteOnExplosion
 
 - type: entity
   parent: RMCContainerBase
