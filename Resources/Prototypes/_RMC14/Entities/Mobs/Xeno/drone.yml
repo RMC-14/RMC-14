@@ -64,10 +64,6 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: drone
-  - type: AcidTrap
-    trapLevel: 1
-    cost: 70
-    spray: XenoAcidSprayTrapWeak
   - type: XenoConstruction
     buildDelay: 2
     canOrderConstruction:
@@ -106,6 +102,10 @@
     strains:
     - CMXenoDroneGardener
   - type: XenoAcid
+  - type: AcidTrap
+    trapLevel: 1
+    cost: 70
+    spray: XenoAcidSprayTrapWeak
   - type: XenoConstruction
     canBuild:
     - WallXenoResin

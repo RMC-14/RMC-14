@@ -16,7 +16,7 @@
   storage:
     back:
     - RMCM5Bayonet
-    # Radio
+    - RMCRadioHandheldColonyOff
 
 # Chef
 - type: entity
@@ -59,9 +59,9 @@
     gloves: CMHandsLatex
     id: CMIDCardColonist
     ears: CMHeadsetColony
-#  storage:
-#    back:
-#    # radio
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
 
 # Engineer
 - type: entity
@@ -85,9 +85,9 @@
     id: CMIDCardColonist
     ears: CMHeadsetColony
     belt: CMBeltUtilityFilled
-#  storage:
-#    back:
-#    # radio
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
 
 # Scientist
 - type: entity
@@ -108,9 +108,9 @@
     outerClothing: ClothingOuterCoatLab
     id: CMIDCardColonist
     ears: CMHeadsetColony
-#  storage:
-#    back:
-#    # radio
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
 #    # motion detector
 #    # good research notes
 
@@ -129,15 +129,15 @@
     jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
     back: CMBackpackEngineer
     shoes: CMBootsBlackFilled
-#    head: Hard Hat
-#    outerClothing: Hazard Vest
+    head: RMCHardHat
+    outerClothing: RMCHazardVest
     id:  CMIDCardColonist
     ears: CMHeadsetColony
     pocket1: RMCPouchToolsFill
   storage:
     back:
     - RMCFlashlightLantern
-#    # radio
+    - RMCRadioHandheldColonyOff
 
 # Security
 - type: entity
@@ -162,7 +162,7 @@
   storage:
     back:
     - RMCM5Bayonet
-#    # radio
+    - RMCRadioHandheldColonyOff
 
 # Marshal Bureau Deputy
 - type: entity
@@ -204,9 +204,9 @@
     id: CMIDCardLiaison
     ears: RMCHeadsetDistressWeYa
 #    belt: /obj/item/storage/belt/gun/m4a3/mod88
-#  storage:
-#    back:
-#    # radio
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
 
 # Prison Guard
 - type: entity
@@ -225,9 +225,9 @@
     gloves: CMHandsBlackMarine
     id: CMIDCardColonist
     ears: CMHeadsetColony
-#  storage:
-#    back:
-#    # radio
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
 
 # Colonist
 - type: entity
@@ -251,3 +251,31 @@
   id: RMCHumanCorpseColonistBurst
   components:
   - type: VictimBurst
+
+# We-Ya Goon
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseWeYaGoon
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseWeYaGoon ]
+
+- type: startingGear
+  id: RMCGearCorpseWeYaGoon # TODO RMC14 headset, backpack, general pistol holster rig
+  equipment:
+    head: ArmorHelmetPMCCorporate
+    jumpsuit: RMCJumpsuitVeteranPMCCorporate
+    outerClothing: RMCArmorM4PMCCorporate
+    back: CMBackpackMarine
+    gloves: RMCHandsVeteran
+    shoes: RMCBootsCorporate
+    id: RMCIDCardPMCColony
+    ears: CMHeadsetColony
+    pocket1: RMCPouchFirstAidInjectors
+  storage:
+    back:
+    - CMStunbaton
+    - CMCrowbar
+    - CMMagazinePistolM77AP
+    - CMMagazinePistolM77AP
+    - CMMagazinePistolM77AP

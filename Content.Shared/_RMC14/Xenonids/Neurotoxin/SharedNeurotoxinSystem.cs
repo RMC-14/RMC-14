@@ -111,6 +111,9 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
 
         while (neurotoxinInjectorQuery.MoveNext(out var uid, out var neuroGas))
         {
+            if (!neuroGas.InjectInContact)
+                continue;
+
             _marines.Clear();
             _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), 0.5f, _marines);
 

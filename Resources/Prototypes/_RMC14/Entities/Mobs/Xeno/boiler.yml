@@ -90,6 +90,7 @@
     size: Big
   - type: NeurotoxinInjector
     neuroPerSecond: 16
+    injectInContact: false
     affectsDead: false
     affectsInfectedNested: false
     toxinDamage:

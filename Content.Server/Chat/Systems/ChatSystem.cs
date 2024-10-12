@@ -12,6 +12,7 @@ using Content.Server.Speech.Components;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
@@ -174,7 +175,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         ICommonSession? player = null,
         string? nameOverride = null,
         bool checkRadioPrefix = true,
-        bool ignoreActionBlocker = false
+        bool ignoreActionBlocker = false,
+        bool ignoreXenos = false
         )
     {
         if (HasComp<GhostComponent>(source))
@@ -253,7 +255,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                 SendEntitySpeak(source, message, range, nameOverride, hideLog, ignoreActionBlocker);
                 break;
             case InGameICChatType.Whisper:
-                SendEntityWhisper(source, message, range, null, nameOverride, hideLog, ignoreActionBlocker);
+                SendEntityWhisper(source, message, range, null, nameOverride, hideLog, ignoreActionBlocker, ignoreXenos);
                 break;
             case InGameICChatType.Emote:
                 SendEntityEmote(source, message, range, nameOverride, hideLog: hideLog, ignoreActionBlocker: ignoreActionBlocker);
@@ -490,7 +492,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         RadioChannelPrototype? channel,
         string? nameOverride,
         bool hideLog = false,
-        bool ignoreActionBlocker = false
+        bool ignoreActionBlocker = false,
+        bool ignoreXenos = false
         )
     {
         if (!_actionBlocker.CanSpeak(source) && !ignoreActionBlocker)
@@ -528,7 +531,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             ("message", FormattedMessage.EscapeText(obfuscatedMessage)));
 
 
-        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange))
+        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange, ignoreXenos))
         {
             EntityUid listener;
 
@@ -828,7 +831,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// <summary>
     ///     Returns list of players and ranges for all players withing some range. Also returns observers with a range of -1.
     /// </summary>
-    private Dictionary<ICommonSession, ICChatRecipientData> GetRecipients(EntityUid source, float voiceGetRange)
+    private Dictionary<ICommonSession, ICChatRecipientData> GetRecipients(EntityUid source, float voiceGetRange, bool ignoreXenos = false)
     {
         // TODO proper speech occlusion
 
@@ -867,6 +870,16 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         var ev = new ChatMessageAfterGetRecipients(recipients);
         RaiseLocalEvent(source, ref ev);
+
+        if (ignoreXenos)
+        {
+            foreach (var session in recipients.Keys.ToArray())
+            {
+                if (HasComp<XenoComponent>(session.AttachedEntity))
+                    recipients.Remove(session);
+            }
+        }
+
         return recipients;
     }
 

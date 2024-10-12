@@ -1,5 +1,7 @@
-﻿using Content.Shared._RMC14.Areas;
+﻿using System.Numerics;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Sprite;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.Destructible;
@@ -31,6 +33,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly RMCSpriteSystem _sprite = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
 
     protected readonly HashSet<EntityUid> ToUpdate = new();
@@ -97,6 +100,25 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.CellContainerSlot);
         if (ent.Comp.StartingCell is { } startingCell)
             TrySpawnInContainer(startingCell, ent, ent.Comp.CellContainerSlot, out _);
+
+        var sprite = EnsureComp<SpriteSetRenderOrderComponent>(ent);
+        switch (Transform(ent).LocalRotation.GetDir())
+        {
+            case Direction.South:
+                _sprite.SetOffset(ent, new Vector2(0.45f, -0.32f));
+                break;
+            case Direction.East:
+                _sprite.SetOffset(ent, new Vector2(0.7f, -1.45f));
+                break;
+            case Direction.North:
+                _sprite.SetOffset(ent, new Vector2(-0.5f, -1.5f));
+                break;
+            case Direction.West:
+                _sprite.SetOffset(ent, new Vector2(-0.7f, -0.4f));
+                break;
+        }
+
+        Dirty(ent, sprite);
     }
 
     private void OnApcRemove<T>(Entity<RMCApcComponent> ent, ref T args)
@@ -566,6 +588,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
         return false;
     }
+
+    public abstract bool IsPowered(EntityUid ent);
 
     public override void Update(float frameTime)
     {

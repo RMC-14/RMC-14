@@ -1,6 +1,9 @@
 ﻿using Content.Server.GameTicking;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared.Coordinates;
+using Content.Shared.GameTicking;
+using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
@@ -10,16 +13,30 @@ namespace Content.Server._RMC14.Spawners;
 
 public sealed class RMCSpawnerSystem : EntitySystem
 {
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private readonly Dictionary<EntProtoId, List<Entity<ProportionalSpawnerComponent>>> _spawners = new();
+    private readonly List<Entity<CorpseSpawnerComponent>> _corpseSpawners = new();
+
+    private int _maxCorpses;
+    private int _corpsesSpawned;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<DropshipLandedOnPlanetEvent>(OnDropshipLandedOnPlanet);
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
+
         SubscribeLocalEvent<RandomTimedDespawnComponent, MapInitEvent>(OnTimedDespawnMapInit);
+
+        Subs.CVar(_config, RMCCVars.RMCSpawnerMaxCorpses, v => _maxCorpses = v, true);
+    }
+
+    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
+    {
+        _corpsesSpawned = 0;
     }
 
     private void OnDropshipLandedOnPlanet(ref DropshipLandedOnPlanetEvent ev)
@@ -50,9 +67,28 @@ public sealed class RMCSpawnerSystem : EntitySystem
     public override void Update(float frameTime)
     {
         _spawners.Clear();
+        _corpseSpawners.Clear();
 
-        var query = EntityQueryEnumerator<ProportionalSpawnerComponent>();
-        while (query.MoveNext(out var uid, out var comp))
+        var corpseSpawnersQuery = EntityQueryEnumerator<CorpseSpawnerComponent>();
+        while (corpseSpawnersQuery.MoveNext(out var uid, out var comp))
+        {
+            if (TerminatingOrDeleted(uid) || EntityManager.IsQueuedForDeletion(uid))
+                continue;
+
+            QueueDel(uid);
+            _corpseSpawners.Add((uid, comp));
+        }
+
+        foreach (var spawner in _corpseSpawners)
+        {
+            if (_corpsesSpawned >= _maxCorpses)
+                continue;
+
+            Spawn(spawner.Comp.Spawn, _transform.GetMoverCoordinates(spawner));
+        }
+
+        var proportional = EntityQueryEnumerator<ProportionalSpawnerComponent>();
+        while (proportional.MoveNext(out var uid, out var comp))
         {
             _spawners.GetOrNew(comp.Id).Add((uid, comp));
         }
