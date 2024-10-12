@@ -1,0 +1,205 @@
+﻿- type: entity
+  parent: WeaponRifleM4SPR
+  name: M4SPR custom battle rifle
+  id: WeaponRifleM4SPRCustom
+  description: An improvement over the already great M4SPR. Able to take A19 rounds, as well as having better control and accuracy at the cost of being harder to use. Can take traditional M4SPR mags, at lower damage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: d_m4spr_custom_barrel
+      offset: 0.65, 0
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 1
+    recoilUnwielded: 4
+    scatterWielded: 2.5
+    scatterUnwielded: 8
+    baseFireRate: 1.8
+  - type: GunDamageModifier
+    multiplier: 1.2 # Lower to allow for normal M4SPR mags to have lower damage. A19 mags have been given significantly higher damage to compensate.
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.94
+    baseSprint: 0.88
+  - type: Gun
+    shotsPerBurst: 2
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m4spr.ogg
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - ScoutWhitelist
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom.rsi
+  - type: MeleeWeapon
+    attackRate: 1
+    damage:
+      types:
+        Slash: 31 # Yes this does this much damage in 13. 51 with a bayonet attached.
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS42xTelescopicMiniscope
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_unload.ogg
+        priority: 2
+        startingItem: RMCMagazineRifleM4SPRA19
+        whitelist:
+          tags:
+          - CMMagazineRifleM4SPR
+          - CMMagazineRifleM4SPRAP
+          - CMMagazineRifleM4SPRExt
+          - RMCMagazineRifleM4SPRA19
+          - RMCMagazineRifleM4SPRA19Impact
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineRifleM4SPRA19
+  name: "M4SPR A19 magazine (high-velocity)"
+  description: "A magazine of high-velocity A19 rounds for use in the M4SPR battle rifle."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleM4SPRA19
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifleM4SPRA19
+    proto: RMCCartridgeRifleM4SPRA19
+    capacity: 18
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4spra19.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: RMCMagazineRifleM4SPRA19
+  id: RMCMagazineRifleM4SPRA19Impact
+  name: "M4SPR A19 magazine (high-velocity high impact)"
+  description: "A magazine of high-velocity high impact A19 rounds for use in the M4SPR battle rifle."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleM4SPRA19Impact
+  - type: BallisticAmmoProvider
+    proto: RMCCartridgeRifleM4SPRA19Impact
+    whitelist:
+      tags:
+      - RMCCartridgeRifleM4SPRA19Impact
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4spra19.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#00CDEA"
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifleM4SPRA19
+  name: cartridge (A19 high-velocity)
+  description: A high-velocity A19 cartridge. Fits in M4SPR custom magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleM4SPRA19
+  - type: CartridgeAmmo
+    proto: BulletRifleM4SPRA19
+
+- type: entity
+  parent: RMCCartridgeRifleM4SPRA19
+  id: RMCCartridgeRifleM4SPRA19Impact
+  name: cartridge (A19 high-velocity high impact)
+  description: A high-velocity high impact A19 cartridge. Fits in M4SPR custom magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleM4SPRA19Impact
+  - type: CartridgeAmmo
+    proto: BulletRifleM4SPRA19Impact
+
+- type: entity
+  parent: BaseBullet
+  id: BulletRifleM4SPRA19
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55
+  - type: CMArmorPiercing
+    amount: 35
+
+- type: entity
+  parent: BaseBullet
+  id: BulletRifleM4SPRA19Impact
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: CMArmorPiercing
+    amount: 50
+  - type: RMCStunOnHit
+    maxRange: 32
+    losesEffectWithRange: true
+    stunTime: 1
+    superSlowTime: 4
+    slowTime: 10
+
+- type: Tag
+  id: RMCMagazineRifleM4SPRA19
+
+- type: Tag
+  id: RMCMagazineRifleM4SPRA19Impact
+
+- type: Tag
+  id: RMCCartridgeRifleM4SPRA19
+
+- type: Tag
+  id: RMCCartridgeRifleM4SPRA19Impact

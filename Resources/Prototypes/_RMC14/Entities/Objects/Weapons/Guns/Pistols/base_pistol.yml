@@ -1,0 +1,131 @@
+﻿- type: entity
+  parent: [BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder]
+  abstract: true
+  id: CMWeaponPistolBase
+  components:
+  - type: AmmoCounter
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Item
+    size: Normal
+  - type: Tag
+    tags:
+    - Sidearm
+  - type: Clothing
+    slots:
+    - suitStorage
+    - belt
+  - type: Wieldable
+  - type: WieldDelay
+    baseDelay: 0.2
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 6
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      collection: CMM1984Shoot
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/Weapons/Guns/MagIn/pistol_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/pistol_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazinePistol
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: RMCAmmoEject
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: MagazineAmmoProvider
+    autoEject: true
+  - type: RMCNameItemOnVend
+    item: Sidearm
+  - type: GunUnskilledPenalty
+    angleIncrease: 5
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentLaserSight
+
+- type: entity
+  abstract: true
+  parent: BaseMagazinePistol
+  id: CMBaseMagazinePistol
+  components:
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: Appearance
+  - type: Clothing
+    slots:
+    - suitStorage
+
+- type: entity
+  abstract: true
+  parent: BaseCartridgePistol
+  id: CMCartridgePistolBase
+  components:
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+
+- type: entity
+  abstract: true
+  parent: BaseBullet
+  id: CMBulletBase
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Projectile
+  - type: RMCProjectileDamageFalloff
+
+- type: entity
+  parent: CMBulletBase
+  id: CMBulletPistol9mm
+  name: bullet (9mm)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: CMArmorPiercing
+    amount: 10
+
+- type: Tag
+  id: CMMagazinePistol

@@ -108,7 +108,7 @@
   parent: CMArmorM3Medium
   id: CMArmorM3Light
   name: M3-L pattern light armor
-  description: A lighter, cut down version of the standard M3 pattern armor. It sacrifices protection for more speed. Protects more against acid.
+  description: A lighter, cut down version of the standard M3 pattern armor. It sacrifices durability for more speed.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light.rsi

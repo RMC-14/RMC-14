@@ -136,6 +136,7 @@
     whitelist:
       components:
       - XenoEgg
+      - XenoFruit
   - type: XenoEvolutionGranter
   - type: XenoEvolutionCapped
     id: CMXenoQueen

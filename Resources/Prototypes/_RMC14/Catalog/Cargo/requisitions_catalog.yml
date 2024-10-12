@@ -237,6 +237,8 @@
         crate: RMCCrateMK80
       - cost: 3000
         crate: RMCCrateSU6
+      - cost: 3000
+        crate: RMCCrateMOU53
     - name: Weapons Specialist Ammo
       entries:
       - cost: 4000

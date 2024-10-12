@@ -153,7 +153,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         var tile = _mapSystem.CoordinatesToTile(gridUid, grid, coordinates);
-        if (!_xenoWeeds.CanPlaceWeeds((gridUid, grid), tile, true))
+
+        if (!_xenoWeeds.CanPlaceWeeds((gridUid, grid), tile, args.UseOnSemiWeedable, true))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-weeds"),
                 xeno.Owner,

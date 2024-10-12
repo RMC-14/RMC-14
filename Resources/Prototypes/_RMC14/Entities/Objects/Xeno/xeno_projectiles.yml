@@ -52,8 +52,8 @@
   - type: Projectile
     impactEffect: null
     damage:
-      groups:
-        Burn: 20 # TODO RMC14 damage fall-off and higher at close range
+      types:
+        Heat: 20 # TODO RMC14 damage fall-off and higher at close range
   - type: CMArmorPiercing
     amount: 10
   - type: XenoProjectile
@@ -73,15 +73,15 @@
   - type: Projectile
     impactEffect: null
     damage:
-      groups:
-        Burn: 30 # TODO RMC14 damage fall-off and higher at close range
+      types:
+        Heat: 30 # TODO RMC14 damage fall-off and higher at close range
   - type: ModifyTargetOnHit
     add:
     - type: UserAcided
       armorPiercing: 40
       damage:
-        groups:
-          Burn: 1
+        types:
+          Heat: 1
       duration: 20
     whitelist:
       components:
@@ -185,8 +185,8 @@
     - type: UserAcided
       armorPiercing: 40
       damage:
-        groups:
-          Burn: 1
+        types:
+          Heat: 1
       duration: 20
     whitelist:
       components:
@@ -244,12 +244,12 @@
   components:
   - type: Projectile
     damage:
-      groups:
-        Burn: 25
+      types:
+        Heat: 25
   - type: ApplyAcidStacks
     damage:
-      groups:
-        Burn: 30
+      types:
+        Heat: 30
 
 - type: entity
   parent: XenoAcidBallSpitProjectile
@@ -268,8 +268,8 @@
   components:
   - type: Projectile
     damage:
-      groups:
-        Burn: 25
+      types:
+        Heat: 25
 
 - type: entity
   id: XenoAcidBallProjectile

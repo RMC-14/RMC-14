@@ -1,0 +1,37 @@
+﻿- type: entity
+  abstract: true
+  parent: CMBaseWeaponRifle
+  id: RMCBaseWeaponSniperRifle
+  components:
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.696
+    baseSprint: 0.559
+  - type: WieldDelay
+    baseDelay: 0.8
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: CMCartridgeSniper10x28mm
+  name: cartridge (10x28mm)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridgeSniper10x28mm
+  - type: CartridgeAmmo
+    proto: CMBulletSniper10x28mm
+
+- type: Tag
+  id: CMMagazineSniper

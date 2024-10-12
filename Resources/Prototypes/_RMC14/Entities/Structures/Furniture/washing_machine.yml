@@ -24,10 +24,9 @@
         layer:
         - MachineLayer
   - type: Clickable
-  - type: InteractionOutline    
+  - type: InteractionOutline
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
     - trigger:
@@ -66,7 +65,7 @@
         enum.OpenableVisuals.Layer:
           True: { state: washing_machine_open }
           False: { state: washing_machine_closed }
-      
+
 - type: entity
   parent: CMWashingMachine
   id: CMWashingMachineDouble
@@ -74,7 +73,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/washing_machine.rsi
-    offset: "0.0,0.09"  
+    offset: "0.0,0.09"
     layers:
     - state: washing_machine_double_closed
       map: [ "enum.OpenableVisuals.Layer" ]
