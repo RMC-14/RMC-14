@@ -222,4 +222,7 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCSpawnerMaxCorpses =
         CVarDef.Create("rmc.spawner_max_corpses", 25, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCHiveSpreadEarlyMinutes =
+        CVarDef.Create("rmc.hive_spread_early_minutes", 40, CVar.REPLICATED | CVar.SERVER);
 }

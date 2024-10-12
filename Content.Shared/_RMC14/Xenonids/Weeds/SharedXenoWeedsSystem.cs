@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Map;
+﻿using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Coordinates;
@@ -6,6 +7,7 @@ using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Maps;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Popups;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -21,6 +23,7 @@ namespace Content.Shared._RMC14.Xenonids.Weeds;
 
 public abstract class SharedXenoWeedsSystem : EntitySystem
 {
+    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IMapManager _map = default!;
@@ -30,6 +33,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -219,22 +223,29 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             _toUpdate.Add(other);
     }
 
-    public bool CanPlaceWeeds(Entity<MapGridComponent> grid, Vector2i tile, bool semiWeedable = false, bool source = false)
+    public bool CanPlaceWeedsPopup(Entity<MapGridComponent> grid, Vector2i tile, EntityUid? user, bool semiWeedable = false, bool source = false)
     {
-        if (!_mapSystem.TryGetTileRef(grid, grid, tile, out var tileRef))
-            return false;
+        void GenericPopup()
+        {
+            if (user == null)
+                return;
 
-        if (!_tile.TryGetDefinition(tileRef.Tile.TypeId, out var tileDef))
-            return false;
+            var msg = Loc.GetString("cm-xeno-construction-failed-weeds");
+            _popup.PopupClient(msg, user.Value, user.Value, PopupType.SmallCaution);
+        }
 
-        if (tileDef is ContentTileDefinition { SemiWeedable: true } && semiWeedable)
-            return true;
-
-        if (tileDef is ContentTileDefinition { WeedsSpreadable: false } ||
+        if (!_mapSystem.TryGetTileRef(grid, grid, tile, out var tileRef) ||
+            !_tile.TryGetDefinition(tileRef.Tile.TypeId, out var tileDef) ||
+            tileDef is ContentTileDefinition { SemiWeedable: true } && semiWeedable ||
+            tileDef is ContentTileDefinition { WeedsSpreadable: false } ||
             tileDef.ID == ContentTileDefinition.SpaceID)
         {
+            GenericPopup();
             return false;
         }
+
+        if (!_area.CanResinPopup((grid, grid, null), tile, user))
+            return false;
 
         var targetTileAnchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, tile);
         while (targetTileAnchored.MoveNext(out var uid))
