@@ -434,7 +434,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             !HasComp<XenoFruitPlanterComponent>(user) &&
             fruit.Comp.State == XenoFruitState.Growing)
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-pick-failed-not-mature"), user, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-pick-failed-not-mature", ("fruit", fruit)), user, user, PopupType.SmallCaution);
             return false;
         }
 
