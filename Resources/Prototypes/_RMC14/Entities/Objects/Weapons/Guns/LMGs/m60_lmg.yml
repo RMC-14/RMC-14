@@ -13,7 +13,7 @@
       map: [ "enum.GunVisualLayers.Mag" ]
     - sprite: _RMC14/Objects/Weapons/Guns/LMGs/m60.rsi
       state: barrel
-      offset: 0.525, 0
+      offset: 0.525, 0.0925
     - sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
       state: m60_stock
       offset: -0.6, 0
@@ -56,7 +56,7 @@
       FullAuto:
         fireDelay: 0.01
         MaxScatterModifier: 4
-        shotsToMaxScatter: 6.5
+        shotsToMaxScatter: 6
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -89,7 +89,7 @@
           - RMCAttachmentBipod
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-underbarrel: 0.6, -0.343
+      rmc-aslot-underbarrel: 0.618, -0.263
   - type: Wieldable
   - type: GunRequiresWield
 
