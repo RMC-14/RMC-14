@@ -39,22 +39,24 @@
     - SemiAuto
     - Burst
     - FullAuto
-    fireDelay: 0.01
+    fireDelay: .35
+    recoilWielded: 0
     recoilUnwielded: 0
-    scatterWielded: 6
-    scatterUnwielded: 0
-    baseFireRate: 2.86
+    scatterWielded: 4
+    scatterUnwielded: 4
+    baseFireRate: 3.3
     burstScatterMult: 3
     modifiers:
       Burst:
-        fireDelay: 0.01
+        fireDelay: 0.1
         maxScatterModifier: 10
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 0
         shotsToMaxScatter: 6
       FullAuto:
         fireDelay: 0.01
-        shotsToMaxScatter: 6
+        MaxScatterModifier: 4
+        shotsToMaxScatter: 6.5
   - type: ItemSlots
     slots:
       gun_magazine:
