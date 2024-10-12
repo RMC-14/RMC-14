@@ -40,17 +40,7 @@ public sealed class RMCSuicideSystem : EntitySystem
         if (user != args.Target || args.Hands is not { } hands)
             return;
 
-        var hasGun = false;
-        foreach (var hand in hands.Hands.Values)
-        {
-            if (HasComp<GunComponent>(hand.HeldEntity))
-            {
-                hasGun = true;
-                break;
-            }
-        }
-
-        if (!hasGun)
+        if (!HasComp<GunComponent>(hands.ActiveHandEntity))
             return;
 
         args.Verbs.Add(new AlternativeVerb
@@ -102,7 +92,7 @@ public sealed class RMCSuicideSystem : EntitySystem
         args.Handled = true;
 
         if (!TryComp(user, out HandsComponent? hands) ||
-            hands.ActiveHand?.HeldEntity is not { } held ||
+            hands.ActiveHandEntity is not { } held ||
             !TryComp(held, out GunComponent? gun))
         {
             return;

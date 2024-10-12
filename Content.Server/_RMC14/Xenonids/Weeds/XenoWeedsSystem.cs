@@ -63,7 +63,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
             if (diff.X >= ent.Comp.Range || diff.Y >= ent.Comp.Range)
                 break;
 
-            if (!CanPlaceWeeds((gridOwner, neighbor.Grid), tile, ent.Comp.SpreadsOnSemiWeedable, false))
+            if (!CanPlaceWeedsPopup((gridOwner, neighbor.Grid), tile, null, ent.Comp.SpreadsOnSemiWeedable, false))
                 continue;
 
             var coords = _mapSystem.GridTileToLocal(gridOwner, neighbor.Grid, tile);

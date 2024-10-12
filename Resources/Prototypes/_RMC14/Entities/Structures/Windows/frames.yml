@@ -31,7 +31,7 @@
         mask:
         - MachineMask
         layer:
-        - MidImpassable
+        - HalfWallLayer
   - type: Destructible
     thresholds:
       - trigger:

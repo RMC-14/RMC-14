@@ -11,6 +11,11 @@
   - type: EvacuationDoor
   - type: Corrodible
     isCorrodible: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: Airlock
+    powered: true
 
 - type: entity
   parent: RMCBaseDoorInvincible
@@ -36,3 +41,8 @@
   - type: EvacuationDoor
   - type: Corrodible
     isCorrodible: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: Airlock
+    powered: true
