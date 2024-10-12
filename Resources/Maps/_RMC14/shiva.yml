@@ -46510,6 +46510,9 @@ entities:
     - type: Transform
       pos: 110.5,82.5
       parent: 1
+    - type: ApcPowerReceiver
+      needsPower: true
+      powerLoad: 5
 - proto: CMFence
   entities:
   - uid: 719
