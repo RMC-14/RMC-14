@@ -1,20 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added admin logs for plant weeds, xeno construction and order construction.!
-    type: Add
-  id: 333
-  time: '2024-07-10T07:34:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2947
-- author: DrSmugleaf
-  changes:
-  - message: Fixed nested marines getting knocked back into walls by grenade explosions.
-    type: Fix
-  id: 334
-  time: '2024-07-10T07:47:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2945
-- author: DrSmugleaf
-  changes:
   - message: Default projectile speed has been increased by 24%
     type: Tweak
   id: 335
@@ -4743,5 +4729,20 @@
   id: 832
   time: '2024-10-12T09:27:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4435
+- author: Vermidia
+  changes:
+  - message: Fix resin traps being activated by fruits.
+    type: Fix
+  id: 833
+  time: '2024-10-13T02:03:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4429
+- author: Vermidia
+  changes:
+  - message: Fix neurotoxin gas sometimes injecting twice as much neuro as was supposed
+      to
+    type: Fix
+  id: 834
+  time: '2024-10-13T02:02:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4449
 Name: RMC14
 Order: -1

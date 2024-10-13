@@ -94,6 +94,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
             neuro.LastAccentTime = time;
             neuro.LastStumbleTime = time;
         }
+
         neuro.NeurotoxinAmount += ent.Comp.NeuroPerSecond;
         neuro.ToxinDamage = ent.Comp.ToxinDamage;
         neuro.OxygenDamage = ent.Comp.OxygenDamage;
@@ -134,12 +135,18 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                     builtNeurotoxin.LastMessage = time;
                     builtNeurotoxin.LastAccentTime = time;
                     builtNeurotoxin.LastStumbleTime = time;
+                    builtNeurotoxin.NextGasInjectionAt = time;
                 }
+
+                if (time < builtNeurotoxin.NextGasInjectionAt)
+                    continue;
+
                 // TODO RMC14 blurriness added here too
-                builtNeurotoxin.NeurotoxinAmount += neuroGas.NeuroPerSecond * frameTime;
+                builtNeurotoxin.NeurotoxinAmount += neuroGas.NeuroPerSecond;
                 builtNeurotoxin.ToxinDamage = neuroGas.ToxinDamage;
                 builtNeurotoxin.OxygenDamage = neuroGas.OxygenDamage;
                 builtNeurotoxin.CoughDamage = neuroGas.CoughDamage;
+                builtNeurotoxin.NextGasInjectionAt = time + neuroGas.TimeBetweenGasInjects;
             }
         }
 
