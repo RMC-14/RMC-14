@@ -261,8 +261,6 @@
     spawns: XenoHardyWeeds
     spreadsOnSemiWeedable: true
     fruitGrowthMultiplier: 0.8
-  - type: EdgeSpreader
-    id: XenoWeeds
   - type: Destructible
     thresholds:
     - trigger:
