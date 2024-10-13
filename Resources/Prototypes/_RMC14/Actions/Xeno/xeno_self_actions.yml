@@ -65,7 +65,7 @@
   id: ActionXenoToggleCrest
   parent: ActionXenoBase
   name: Toggle Crest Defense
-  description: Increases your resistance to direct damage but slows you down.
+  description: Increases your resistance to direct damage but slows you down. You count as one size bigger while you're crest is lowered.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -82,7 +82,7 @@
   id: ActionXenoFortify
   parent: ActionXenoBase
   name: Fortify
-  description: Become immobile and impassable to mobs, dramatically increasing your resistance to direct damage. Damage is further reduced from the direction you are facing.
+  description: Become immobile and impassable to mobs, dramatically increasing your resistance to direct damage. Damage is further reduced from the direction you are facing. You can't be stunned while fortified. You count as two sizes bigger while aswell.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
