@@ -48,8 +48,6 @@ public sealed class CPRSystem : EntitySystem
         SubscribeLocalEvent<ReceivingCPRComponent, ReceiveCPRAttemptEvent>(OnReceivingCPRAttempt);
         SubscribeLocalEvent<CPRReceivedComponent, ReceiveCPRAttemptEvent>(OnReceivedCPRAttempt);
         SubscribeLocalEvent<MobStateComponent, ReceiveCPRAttemptEvent>(OnMobStateCPRAttempt);
-
-        SubscribeLocalEvent<InventoryComponent, ReceiveCPRAttemptEvent>(_inventory.RelayEvent);
     }
 
     private void OnMarineInteractHand(Entity<MarineComponent> ent, ref InteractHandEvent args)
