@@ -147,14 +147,18 @@ public sealed class RMCPullingSystem : EntitySystem
     private void OnPullingSlowedMovementSpeed(Entity<PullingSlowedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
         if (HasComp<BypassInteractionChecksComponent>(ent) ||
+            !TryComp(ent, out PullerComponent? puller) ||
             !TryComp(ent, out SlowOnPullComponent? slow))
         {
             return;
         }
 
+        if (puller.Pulling == null)
+            return;
+
         foreach (var slowdown in slow.Slowdowns)
         {
-            if (_whitelist.IsWhitelistPass(slowdown.Whitelist, ent))
+            if (_whitelist.IsWhitelistPass(slowdown.Whitelist, puller.Pulling.Value))
             {
                 args.ModifySpeed(slowdown.Multiplier, slowdown.Multiplier);
                 return;
