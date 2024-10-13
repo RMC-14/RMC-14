@@ -65,6 +65,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         SubscribeLocalEvent<XenoWeedsComponent, StartCollideEvent>(OnWeedsStartCollide);
         SubscribeLocalEvent<XenoWeedsComponent, EndCollideEvent>(OnWeedsEndCollide);
 
+        SubscribeLocalEvent<XenoWeedsSpreadingComponent, MapInitEvent>(OnSpreadingMapInit);
+
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
     }
 
@@ -223,6 +225,12 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             _toUpdate.Add(other);
     }
 
+    private void OnSpreadingMapInit(Entity<XenoWeedsSpreadingComponent> ent, ref MapInitEvent args)
+    {
+        ent.Comp.SpreadAt = _timing.CurTime + ent.Comp.SpreadDelay;
+        Dirty(ent);
+    }
+
     public bool CanPlaceWeedsPopup(Entity<MapGridComponent> grid, Vector2i tile, EntityUid? user, bool semiWeedable = false, bool source = false)
     {
         void GenericPopup()
@@ -263,12 +271,17 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        foreach (var mobId in _toUpdate)
+        try
         {
-            _movementSpeed.RefreshMovementSpeedModifiers(mobId);
+            foreach (var mobId in _toUpdate)
+            {
+                _movementSpeed.RefreshMovementSpeedModifiers(mobId);
+            }
         }
-
-        _toUpdate.Clear();
+        finally
+        {
+            _toUpdate.Clear();
+        }
 
         // Damage for not being over weeds
         var time = _timing.CurTime;
