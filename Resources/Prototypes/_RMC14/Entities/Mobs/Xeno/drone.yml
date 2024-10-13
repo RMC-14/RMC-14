@@ -31,6 +31,7 @@
     tier: 1
     bypassTierCount: true
     unlockAt: 60 # 1 minute
+  - type: XenoLight
   - type: XenoDevolve
     devolvesTo:
     - CMXenoLarva

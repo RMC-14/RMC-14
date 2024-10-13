@@ -41,6 +41,7 @@
     contributesToVictory: false
     countedInSlots: false
     unlockAt: 0
+  - type: XenoLight
   - type: XenoAcid
   - type: XenoConstruction
     buildDelay: 4

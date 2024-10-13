@@ -41,6 +41,7 @@
     tier: 2
     hudOffset: 0,0.35
     unlockAt: 180 # 3 minutes
+  - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
     - CMXenoDrone
@@ -75,7 +76,19 @@
     baseWalkSpeed: 1.66
     baseSprintSpeed: 3
   - type: SlowOnPull
-    multiplier: 0.5
+    slowdowns:
+    - multiplier: 0.6925
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.765
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.53
+      whitelist:
+        components:
+        - XenoHeavy
   - type: WhitelistPickup
     whitelist:
       components:
