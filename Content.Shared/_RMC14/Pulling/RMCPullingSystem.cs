@@ -128,7 +128,7 @@ public sealed class RMCPullingSystem : EntitySystem
 
     private void OnSlowPullStarted(Entity<SlowOnPullComponent> ent, ref PullStartedMessage args)
     {
-        if (ent.Owner == args.PulledUid)
+        if (ent.Owner == args.PullerUid)
         {
             EnsureComp<PullingSlowedComponent>(args.PullerUid);
             _movementSpeed.RefreshMovementSpeedModifiers(args.PullerUid);
@@ -137,9 +137,9 @@ public sealed class RMCPullingSystem : EntitySystem
 
     private void OnSlowPullStopped(Entity<SlowOnPullComponent> ent, ref PullStoppedMessage args)
     {
-        if (ent.Owner == args.PulledUid)
+        if (ent.Owner == args.PullerUid)
         {
-            RemCompDeferred<PullingSlowedComponent>(args.PullerUid);
+            RemComp<PullingSlowedComponent>(args.PullerUid);
             _movementSpeed.RefreshMovementSpeedModifiers(args.PullerUid);
         }
     }
@@ -147,8 +147,7 @@ public sealed class RMCPullingSystem : EntitySystem
     private void OnPullingSlowedMovementSpeed(Entity<PullingSlowedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
         if (HasComp<BypassInteractionChecksComponent>(ent) ||
-            !TryComp(ent, out PullerComponent? puller) ||
-            !TryComp(puller.Pulling, out SlowOnPullComponent? slow))
+            !TryComp(ent, out SlowOnPullComponent? slow))
         {
             return;
         }
