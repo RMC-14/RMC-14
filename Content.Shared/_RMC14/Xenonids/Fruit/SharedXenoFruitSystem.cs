@@ -393,10 +393,10 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             if (!xeno.Comp.PlantedFruit.Contains(entity))
                 xeno.Comp.PlantedFruit.Add(entity);
 
-            // Increase growth time if on hardy weeds
+            // Decrease growth time if on hardy weeds
             var weeds = _xenoWeeds.GetWeedsOnFloor(coordinates, false);
             if (TryComp(weeds, out XenoWeedsComponent? weedsComp))
-                fruit.GrowTime = fruit.GrowTime / weedsComp.FruitGrowthMultiplier;
+                fruit.GrowTime *= weedsComp.FruitGrowthMultiplier;
 
             fruit.Planter = xeno.Owner;
 
