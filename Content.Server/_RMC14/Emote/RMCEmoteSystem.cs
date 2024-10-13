@@ -1,6 +1,8 @@
 ﻿using Content.Server.Chat.Systems;
+using Content.Server.Speech.EntitySystems;
 using Content.Shared._RMC14.Emote;
 using Content.Shared.Chat.Prototypes;
+using Content.Shared.Speech;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -10,6 +12,19 @@ public sealed class RMCEmoteSystem : SharedRMCEmoteSystem
 {
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<EmoteCooldownComponent, ScreamActionEvent>(OnCooldownScreamAction, before: [typeof(VocalSystem)]);
+    }
+
+    private void OnCooldownScreamAction(Entity<EmoteCooldownComponent> ent, ref ScreamActionEvent args)
+    {
+        // always allow off-cooldown scream action emote
+        ResetCooldown((ent, ent));
+    }
 
     public override void TryEmoteWithChat(
         EntityUid source,

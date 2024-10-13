@@ -203,6 +203,8 @@
       entries:
       - cost: 3000
         crate: RMCCrateResearchPhoron
+      - cost: 2000
+        crate: RMCCrateResearchPlastic
     - name: Restricted Equipment
       entries:
       - cost: 2000
@@ -235,6 +237,8 @@
         crate: RMCCrateMK80
       - cost: 3000
         crate: RMCCrateSU6
+      - cost: 3000
+        crate: RMCCrateMOU53
     - name: Weapons Specialist Ammo
       entries:
       - cost: 4000
@@ -257,7 +261,7 @@
         crate: RMCCrateMagazineM4SPRCustomMixed
       - cost: 3000
         crate: RMCCrateMagazineM4SPRCustomStandard
-      - cost: 3000 
+      - cost: 3000
         crate: RMCCrateMagazineM4SPRCustomImpact
 #      - cost: 3000
 #        crate: RMCCrateMagazineM4SPRCustomIncendiary These ones are straight downgrades and thus shouldn't be for sale

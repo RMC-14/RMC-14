@@ -55,6 +55,8 @@
         RMCSkillSurgery: 2
         RMCSkillVehicles: 2
     - type: MarineOrders
+    - type: CMVendorUser
+      points: 45
 
 - type: startingGear
   id: CMGearSeniorEnlistedAdvisor

@@ -36,6 +36,7 @@
   - type: Sprite
     state: platform
   - type: Climbable
+    delay: 0.25
 
 - type: entity
   parent: CMPlatformBase

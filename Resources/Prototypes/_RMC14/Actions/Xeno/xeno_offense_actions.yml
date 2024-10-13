@@ -92,6 +92,12 @@
   description: Launches an attack towards a given direction. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid into the target, dealing damage over time.[/color]
 
 - type: entity
+  parent: ActionXenoTailStab
+  id: ActionXenoTailStabBoiler
+  name: Corrosive Tail Stab
+  description: Launches an attack towards a given direction. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid or neurotoxin into the target, dealing damage or stunning over time. Which type depends on current gas type.[/color]
+
+- type: entity
   id: ActionXenoLeap
   parent: ActionXenoBase
   name: Leap
@@ -182,6 +188,7 @@
     useDelay: 1.5
     range: 15
     checkCanAccess: false
+  - type: ActionBlockIfResting
 
 - type: entity
   id: ActionXenoScatteredSpit
@@ -198,6 +205,7 @@
     useDelay: 8
     range: 15
     checkCanAccess: false
+  - type: ActionBlockIfResting
 
 - type: entity
   id: ActionXenoSpit
@@ -214,6 +222,7 @@
     useDelay: 2
     range: 15
     checkCanAccess: false
+  - type: ActionBlockIfResting
 
 - type: entity
   id: ActionXenoChargeSpit
@@ -243,6 +252,8 @@
     event: !type:XenoSprayAcidActionEvent
     useDelay: 8
     range: 6
+  - type: ActionBlockIfResting
+  
 
 - type: entity
   parent: ActionXenoSprayAcid
@@ -258,11 +269,20 @@
 - type: entity
   parent: ActionXenoSprayAcid
   id: ActionXenoSprayAcidPraetorian
+  name: Spray Acid (80)
   description: Sprays acid along the ground in a line, covering tiles with it. [color=red]Will coat barricades in acid![/color]
   components:
   - type: WorldTargetAction
     range: 7
     useDelay: 10
+
+- type: entity
+  parent: ActionXenoSprayAcidPraetorian
+  id: ActionXenoSprayAcidWarden
+  name: Spray Acid (130)
+  components:
+  - type: WorldTargetAction
+    useDelay: 13
 
 - type: entity
   id: ActionXenoAcidBall
@@ -279,6 +299,7 @@
     useDelay: 18
     range: 15
     checkCanAccess: false
+  - type: ActionBlockIfResting
 
 - type: entity
   id: ActionXenoParalyzingSlash

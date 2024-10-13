@@ -50,16 +50,19 @@ public sealed partial class XenoShieldSystem : EntitySystem
 
         if (ent.Comp.ShieldAmount <= 0)
         {
+            var usableShield = ent.Comp.ShieldAmount + args.Damage.GetTotal();
+            ent.Comp.ShieldAmount = 0;
+
             foreach (var type in args.Damage.DamageDict)
             {
-                if (ent.Comp.ShieldAmount == 0)
+                if (usableShield == 0)
                     break;
 
                 if (type.Value > 0)
                 {
-                    var tempVal = Math.Min(type.Value.Double(), -ent.Comp.ShieldAmount.Double());
+                    var tempVal = Math.Min(type.Value.Double(), usableShield.Double());
                     args.Damage.DamageDict[type.Key] -= tempVal;
-                    ent.Comp.ShieldAmount += tempVal;
+                    usableShield -= tempVal;
                 }
             }
 

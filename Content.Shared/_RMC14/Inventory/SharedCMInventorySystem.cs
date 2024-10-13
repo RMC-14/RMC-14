@@ -288,7 +288,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
             // Try equip to inventory slot
             if (slot.Slot != null &&
-                _inventory.TryEquip(user, item, slot.Slot.ID, true))
+                _inventory.TryEquip(user, item, slot.Slot.ID, true, checkDoafter: true))
                 return;
         }
 

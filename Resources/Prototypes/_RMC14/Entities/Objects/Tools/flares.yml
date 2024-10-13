@@ -16,7 +16,9 @@
     turnOnBehaviourID: turn_on
     fadeOutBehaviourID: fade_out
     litSound:
-      path: /Audio/Items/Flare/flare_on.ogg
+      path: /Audio/_RMC14/Machines/flare_activate_2.ogg
+      params:
+        variation: 0.08
     loopedSound: /Audio/Items/Flare/flare_burn.ogg
   - type: Sprite
     sprite: _RMC14/Objects/Misc/flares.rsi

@@ -1,0 +1,98 @@
+﻿- type: entity
+  abstract: true
+  id: RMCContainerBase
+  name: cargo container
+  description: A huge industrial shipping container.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,1.5"
+        density: 190
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/containers.rsi
+    offset: 0, 0.5
+  - type: Clickable
+  - type: DeleteOnExplosion
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerBlueLeft
+  suffix: Blue, Left
+  components:
+  - type: Sprite
+    state: bluecontainerleft
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerBlueMiddle
+  suffix: Blue, Middle
+  components:
+  - type: Sprite
+    state: bluecontainermiddle
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerBlueRight
+  suffix: Blue, Right
+  components:
+  - type: Sprite
+    state: bluecontainerright
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerGreenLeft
+  suffix: Green, Left
+  components:
+  - type: Sprite
+    state: greencontainerleft
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerGreenMiddle
+  suffix: Green, Middle
+  components:
+  - type: Sprite
+    state: greencontainermiddle
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerGreenRight
+  suffix: Green, Right
+  components:
+  - type: Sprite
+    state: greencontainerright
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerRedLeft
+  suffix: Red, Left
+  components:
+  - type: Sprite
+    state: redcontainerleft
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerRedMiddle
+  suffix: Red, Middle
+  components:
+  - type: Sprite
+    state: redcontainercenter
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerRedRight
+  suffix: Red, Right
+  components:
+  - type: Sprite
+    state: redcontainerright

@@ -1,0 +1,116 @@
+﻿- type: entity
+  parent: CMWeaponPistolBase
+  id: RMCWeaponPistolSU6
+  name: SU-6 smart pistol
+  description: The SU-6 Smartpistol is an IFF-based sidearm currently undergoing field testing in the UNMC. Uses modified .45 ACP IFF bullets. Capable of firing in bursts.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/su6.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/su6.rsi
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 8
+  - type: GunIFF
+    enabled: true
+  - type: Gun
+    shotsPerBurst: 3
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/su6_shoot.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    recoilWielded: 1
+    recoilUnwielded: 2
+    scatterWielded: 10
+    scatterUnwielded: 10
+    baseFireRate: 10
+    burstScatterMult: 5
+    modifiers:
+      Burst:
+        fireDelay: 0.1665
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCSmartPistol
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_su6_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_su6_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolSU6
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.65, 0.09375
+      rmc-aslot-rail: -0.15625, 0.15625
+      rmc-aslot-underbarrel: 0.25, -0.3125
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolSU6
+  name: SU-6 magazine (.45 ACP)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolSU6
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistol45ACP
+    proto: RMCCartridgePistol45ACP
+    capacity: 15
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/su6.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: RMCCartridgePistol45ACP
+  name: cartridge (.45 ACP)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistol45ACP
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol45ACP
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistol45ACP
+  name: bullet (.45 ACP)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+  - type: CMArmorPiercing
+    amount: 20
+
+- type: Tag
+  id: RMCMagazinePistolSU6

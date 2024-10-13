@@ -1,0 +1,61 @@
+﻿- type: entity
+  abstract: true
+  parent: [ BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder ]
+  id: RMCBaseWeaponGrenadeLauncher
+  components:
+  - type: Item
+    size: Large
+  - type: Gun
+    projectileSpeed: 20
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
+    resetOnHandSelected: false
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 2
+  - type: ShootAtFixedPoint
+    shootArcProj: true
+  - type: OnShootTriggerAmmoTimer
+    delay: 1
+    beepInterval: 2
+    initialBeepDelay: 0
+    beepSound:
+      path: "/Audio/Effects/beep1.ogg"
+      params:
+        volume: 5
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: RMCAmmoEject
+    containerID: ballistic-ammo
+    ejectSound:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
+      params:
+        volume: -2
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - LauncherCompatibleGrenade
+    capacity: 1
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
+  - type: AmmoCounter
+  - type: Wieldable
+  - type: GunRequiresWield
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.696
+    baseSprint: 0.559
+  - type: WieldDelay
+    baseDelay: 0.8
+  - type: Clothing
+    slots:
+    - suitStorage
+  - type: StaticPrice
+    price: 500
+  - type: RMCNameItemOnVend
+    item: PrimaryGun

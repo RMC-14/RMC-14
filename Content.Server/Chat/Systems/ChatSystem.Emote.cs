@@ -168,6 +168,9 @@ public partial class ChatSystem
         if (!AllowedToUseEmote(uid, emote))
             return;
 
+        if (!_rmcEmote.TryEmote(uid))
+            return;
+
         InvokeEmoteEvent(uid, emote);
         return;
 

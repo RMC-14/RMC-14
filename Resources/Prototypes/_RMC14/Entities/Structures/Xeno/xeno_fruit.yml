@@ -1,0 +1,185 @@
+- type: entity
+  parent: BaseItem
+  id: XenoFruitBase
+  abstract: true
+  name: resin fruit
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        layer:
+        - BulletImpassable
+        restitution: 0.3
+        friction: 0.2
+      xeno_fruit:
+        shape:
+          !type:PhysShapeCircle
+          radius: 1.5
+        hard: false
+        mask:
+        - MobLayer
+  - type: CollisionWake
+    enabled: false
+  - type: Flammable
+    fireSpread: false
+    damage:
+      types:
+        Heat: 3
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_fruit.rsi
+    drawdepth: SmallMobs
+    layers:
+    - state: fruit_lesser_immature
+      map: [ "enum.XenoFruitLayers.Base" ]
+  - type: Item
+    size: Large
+  - type: Damageable
+    damageContainer: StructuralXeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Heat
+        damage: 60
+      behaviors:
+      - !type:BurnBodyBehavior { }
+  - type: XenoFriendly
+  - type: RMCNightVisionVisible
+    priority: -1
+  - type: Corrodible
+    isCorrodible: false
+  - type: XenoFruit
+    consumeDelay: 5
+    canConsumeAtFull: true
+
+- type: entity
+  parent: XenoFruitBase
+  id: XenoFruitLesser
+  name: lesser resin fruit
+  description: A fruit that can be eaten to immediately recover health.
+  components:
+  - type: XenoFruit
+    itemState: fruit_lesser_item
+    growingState: fruit_lesser_immature
+    grownState: fruit_lesser
+    growTime: 15
+    popup: rmc-xeno-fruit-effect-lesser
+    canConsumeAtFull: false
+  - type: XenoFruitHeal
+    healAmount: 50
+
+- type: entity
+  parent: XenoFruitLesser
+  id: XenoFruitGreater
+  name: greater resin fruit
+  description: A fruit that can be eaten to immediately recover health, and a strong regeneration effect for a few seconds.
+  components:
+  - type: XenoFruit
+    itemState: fruit_greater_item
+    growingState: fruit_greater_immature
+    grownState: fruit_greater
+    growTime: 30
+    popup: rmc-xeno-fruit-effect-greater
+    canConsumeAtFull: false
+    color: "#17991B"
+  - type: XenoFruitHeal
+    healAmount: 75
+  - type: XenoFruitRegen
+    tickCount: 5      # 100 health over 5 seconds
+    tickPeriod: 1
+    regenPerTick: 20
+
+- type: entity
+  parent: XenoFruitBase
+  id: XenoFruitUnstable
+  name: unstable resin fruit
+  description: A fruit that can be eaten to gain a strong overshield effect, and a small regeneration for several seconds.
+  components:
+  - type: XenoFruit
+    itemState: fruit_unstable_item
+    growingState: fruit_unstable_immature
+    grownState: fruit_unstable
+    growTime: 45
+    popup: rmc-xeno-fruit-effect-unstable
+    color: "#179973"
+  - type: XenoFruitRegen
+    tickCount: 15     # 75 health over 15 seconds
+    tickPeriod: 1
+    regenPerTick: 5
+  - type: XenoFruitShield
+    duration: 60
+    shieldAmount: 200
+    shieldDecay: 10
+    shieldRatio: 0.3
+
+- type: entity
+  parent: XenoFruitBase
+  id: XenoFruitSpore
+  name: spore resin fruit
+  description: A fruit that can be eaten to reenergize cooldowns. It also passively emits weak recovery pheromones.
+  components:
+  - type: XenoFruit
+    itemState: fruit_spore_item
+    growingState: fruit_spore_immature
+    grownState: fruit_spore
+    growTime: 15
+    popup: rmc-xeno-fruit-effect-spore
+    color: "#994617"
+  - type: XenoFruitHaste
+    duration: 60
+    reductionMax: 0.25
+    reductionPerSlash: 0.05
+  - type: XenoPheromones
+    pheromonesMultiplier: 1
+  - type: XenoPheromonesObject
+
+- type: entity
+  parent: XenoFruitBase
+  id: XenoFruitSpeed
+  name: alacrit resin fruit
+  description: A fruit that can be eaten to move faster for a short amount of time.
+  components:
+  - type: XenoFruit
+    itemState: fruit_speed_item
+    growingState: fruit_speed_immature
+    grownState: fruit_speed
+    growTime: 35
+    popup: rmc-xeno-fruit-effect-speed
+    color: "#5B248C"
+  - type: XenoFruitSpeed
+    duration: 15
+    speedModifier: 0.4
+
+- type: entity
+  parent: XenoFruitBase
+  id: XenoFruitPlasma
+  name: cruor resin fruit
+  description: A fruit that can be eaten to boost plasma generation.
+  components:
+  - type: XenoFruit
+    itemState: fruit_plasma_item
+    growingState: fruit_plasma_immature
+    grownState: fruit_plasma
+    growTime: 25
+    popup: rmc-xeno-fruit-effect-plasma
+    color: "#287A90"
+  - type: XenoFruitPlasma
+    tickCount: 5      # 240 plasma over 15 seconds
+    tickPeriod: 3
+    regenPerTick: 48

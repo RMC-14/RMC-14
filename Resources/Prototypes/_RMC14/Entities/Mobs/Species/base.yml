@@ -16,6 +16,7 @@
         restitution: 0.0
         mask:
         - MobMask
+        - BarbedBarricade
         layer:
         - Opaque
         - XenoProjectileImpassable
@@ -223,3 +224,10 @@
   - type: TacticalMapUser
     actionId: RMCActionOpenTacticalMapMarine
     marines: true
+  - type: EmoteCooldown
+  - type: RMCSuicide
+    damage:
+      types:
+        Piercing: 100
+        Asphyxiation: 200
+  - type: RMCUserPryingRequiresTool

@@ -36,6 +36,7 @@
     tier: 3
     hudOffset: 0,0.1
     unlockAt: 900 # 15 minutes
+    hidden: true # TODO RMC: remove once ravager is implemented
   - type: XenoDevolve
     devolvesTo:
     - CMXenoLurker
@@ -69,6 +70,7 @@
         density: 185
         mask:
         - MobMask
+        - BarbedBarricade
         layer:
         - MobLayer
       fix2:
@@ -81,6 +83,8 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
+  - type: SlowOnPull
+    multiplier: 0.5
   - type: RMCSize
     size: Big
 #  - type: RMCXenoDamageVisuals # TODO RMC14

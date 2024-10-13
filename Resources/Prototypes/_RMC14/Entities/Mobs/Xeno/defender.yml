@@ -41,7 +41,7 @@
     devolvesTo:
     - CMXenoLarva
   - type: XenoEvolution
-    max: 300
+    max: 200
     evolvesTo:
     - CMXenoWarrior
   - type: XenoPlasma
@@ -79,6 +79,7 @@
         density: 185
         mask:
         - MobMask
+        - BarbedBarricade
         layer:
         - MobLayer
       fix2:

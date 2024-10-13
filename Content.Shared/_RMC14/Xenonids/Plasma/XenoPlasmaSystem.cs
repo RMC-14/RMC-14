@@ -153,7 +153,8 @@ public sealed class XenoPlasmaSystem : EntitySystem
         var level = MathF.Max(0f, xeno.Comp.Plasma.Float());
         var max = _alerts.GetMaxSeverity(xeno.Comp.Alert);
         var severity = max - ContentHelpers.RoundToLevels(level, xeno.Comp.MaxPlasma, max + 1);
-        _alerts.ShowAlert(xeno, xeno.Comp.Alert, (short) severity);
+        string? plasmaResourceMessage = (int)xeno.Comp.Plasma + " / " + xeno.Comp.MaxPlasma;
+        _alerts.ShowAlert(xeno, xeno.Comp.Alert, (short) severity, dynamicMessage: plasmaResourceMessage);
     }
 
     public bool HasPlasma(Entity<XenoPlasmaComponent> xeno, FixedPoint2 plasma)
