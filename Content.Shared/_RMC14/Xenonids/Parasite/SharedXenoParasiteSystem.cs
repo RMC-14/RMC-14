@@ -532,7 +532,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 if (!infected.DidBurstWarning && stage == infected.BurstWarningStart)
                 {
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon-self"), uid, uid, PopupType.MediumCaution);
-                    _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon", ("victim", uid)), uid, Filter.PvsExcept(uid), true, PopupType.MediumCaution);
 
                     var knockdownTime = infected.BaseKnockdownTime * 75;
                     InfectionShakes(uid, infected, knockdownTime, infected.JitterTime, false);
@@ -620,14 +619,17 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         // Don't activate when unconscious
         if (_mobState.IsIncapacitated(victim))
             return;
+
         //TODO Minor limb damage and causes pain
         _stun.TryParalyze(victim, knockdownTime, false);
         _status.TryAddStatusEffect(victim, "Muted", knockdownTime, true, "Muted");
         _status.TryAddStatusEffect(victim, "TemporaryBlindness", knockdownTime, true, "TemporaryBlindness");
         _jitter.DoJitter(victim, jitterTime, false);
         _damage.TryChangeDamage(victim, infected.InfectionDamage, true, false);
+
         if (!popups)
             return;
+
         _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes-self"), victim, victim, PopupType.MediumCaution);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, Filter.PvsExcept(victim), true, PopupType.MediumCaution);
     }
@@ -686,7 +688,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
             // Force infection shakes even while dead, bigger popup
             _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, victim, PopupType.MediumCaution);
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-shakes", ("victim", victim)), victim, shakeFilter, true, PopupType.LargeCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon", ("victim", victim)), victim, shakeFilter, true, PopupType.LargeCaution);
             _jitter.DoJitter(victim, comp.JitterTime * 2.5, true, 20f, 10f, true); // violent jitter
 
             var messageLarva = Loc.GetString("rmc-xeno-infection-burst-now-xeno", ("victim", Identity.Entity(victim, EntityManager)));
