@@ -666,7 +666,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             BreakOnMove = false,
             Hidden = true,
             CancelDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameTarget
+            BlockDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent
         };
 
         if (_doAfter.TryStartDoAfter(doAfterEventArgs))
@@ -689,7 +690,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             // Force infection shakes even while dead, bigger popup
             _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, victim, PopupType.MediumCaution);
             _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon", ("victim", victim)), victim, shakeFilter, true, PopupType.LargeCaution);
-            _jitter.DoJitter(victim, comp.JitterTime * 2.5, true, 20f, 10f, true); // violent jitter
+            _jitter.DoJitter(victim, comp.JitterTime, true, 20f, 2f, true); // violent jitter
 
             var messageLarva = Loc.GetString("rmc-xeno-infection-burst-now-xeno", ("victim", Identity.Entity(victim, EntityManager)));
             _popup.PopupEntity(messageLarva, spawnedLarva, spawnedLarva, PopupType.MediumCaution);
@@ -698,10 +699,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     private void OnBurst(Entity<VictimInfectedComponent> ent, ref LarvaBurstDoAfterEvent args)
     {
-        if (args.Handled)
-            return;
-
-        if (args.Cancelled)
+        if (args.Cancelled || args.Handled)
             return;
 
         _appearance.SetData(ent.Owner, ent.Comp.BurstingLayer, false);
