@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: The xenonid "Choose Resin Structure" window now stays open after making
-      a selection, allowing it to be changed back and forth without reopening the
-      window.
-    type: Tweak
-  id: 337
-  time: '2024-07-10T08:29:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2951
 - author: 0xRainy
   changes:
   - message: Non-Xeno can no longer nest players
@@ -4746,5 +4737,12 @@
   id: 836
   time: '2024-10-13T06:19:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4437
+- author: Vermidia
+  changes:
+  - message: Fix xeno unlock announcements showing a caste multiple times due to strains
+    type: Fix
+  id: 837
+  time: '2024-10-14T06:40:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4466
 Name: RMC14
 Order: -1
