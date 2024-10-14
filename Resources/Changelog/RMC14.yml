@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: tsp01
-  changes:
-  - message: blood can be stored in the correct pouches and belts
-    type: Fix
-  - message: surgical cases can be stored in the correct pouches and belts
-    type: Fix
-  id: 342
-  time: '2024-07-10T20:08:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2940
 - author: Whisper
   changes:
   - message: Fixed small hosts being unable to be dragged and tackled
@@ -4718,5 +4709,12 @@
   id: 841
   time: '2024-10-14T06:48:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4454
+- author: Vermidia
+  changes:
+  - message: Fix Warden's Aid ability being usable on hive structures
+    type: Fix
+  id: 842
+  time: '2024-10-14T23:00:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4471
 Name: RMC14
 Order: -1
