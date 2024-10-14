@@ -377,7 +377,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 );
             }
 
-            // return false;
+            return false;
         }
 
         if (newXenoComp != null &&
