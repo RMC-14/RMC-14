@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: ShadowCommander
-  changes:
-  - message: Wall lights now break in one hit by a xenonid.
-    type: Tweak
-  id: 344
-  time: '2024-07-11T05:52:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2969
 - author: Siigiil, Cepha
   changes:
   - message: Added all standard attachments, excluding the bipod, the underbarrel
@@ -4716,5 +4709,13 @@
   id: 843
   time: '2024-10-14T23:03:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4468
+- author: Rainbeon
+  changes:
+  - message: Fixed xenonids being able to apply acid to the Scout Weapon Specialist's
+      Rifle and Thermal Cloak.
+    type: Fix
+  id: 844
+  time: '2024-10-14T23:04:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4469
 Name: RMC14
 Order: -1
