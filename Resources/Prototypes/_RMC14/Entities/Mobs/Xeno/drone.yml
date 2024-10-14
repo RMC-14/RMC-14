@@ -147,6 +147,7 @@
     critHealMultiplier: 0.3465  # 5% increased regeneration
     standHealingMultiplier: 0.42
     restHealMultiplier: 1.05
+    hidden: true
   - type: XenoStrain
     name: rmc-xeno-gardener-name
     description: rmc-xeno-gardener-description
