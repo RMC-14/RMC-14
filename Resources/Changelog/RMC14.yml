@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Fixed M1984 accepting 9mm AP in regular mags.
-    type: Fix
-  id: 340
-  time: '2024-07-10T12:45:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2957
-- author: Siigiil
-  changes:
-  - message: Magnetic harness temporarily removed from vendors due to being horribly
-      bugged.
-    type: Remove
-  id: 341
-  time: '2024-07-10T20:06:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2959
 - author: tsp01
   changes:
   - message: blood can be stored in the correct pouches and belts
@@ -4719,5 +4704,19 @@
   id: 839
   time: '2024-10-14T06:41:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4465
+- author: Dutch-VanDerLinde
+  changes:
+  - message: You no longer need to pull down a marine's mask to perform CPR on them
+    type: Tweak
+  id: 840
+  time: '2024-10-14T06:47:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4456
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Changed gun suicide do-after delay from 4 to 2 seconds.
+    type: Tweak
+  id: 841
+  time: '2024-10-14T06:48:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4454
 Name: RMC14
 Order: -1
