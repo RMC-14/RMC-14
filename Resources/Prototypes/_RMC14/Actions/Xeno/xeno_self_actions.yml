@@ -82,7 +82,7 @@
   id: ActionXenoFortify
   parent: ActionXenoBase
   name: Fortify
-  description: Become immobile and impassable to mobs, dramatically increasing your resistance to direct damage. Damage is further reduced from the direction you are facing. You can't be stunned while fortified. You count as two sizes bigger while aswell.
+  description: Become immobile and impassable to mobs, dramatically increasing your resistance to direct damage. Damage is further reduced from the direction you are facing. You can't be stunned while fortified and count as two sizes bigger.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
