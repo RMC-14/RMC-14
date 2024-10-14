@@ -16,8 +16,6 @@
         density: 20
         mask:
         - ItemMask
-        layer:
-        - BulletImpassable
         restitution: 0.3
         friction: 0.2
       xeno_egg:
