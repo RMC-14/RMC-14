@@ -21,6 +21,7 @@
         - SlipLayer
         restitution: 0.3
         friction: 0.2
+        hard: false
       xeno_fruit:
         shape:
           !type:PhysShapeCircle
