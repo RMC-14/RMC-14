@@ -143,6 +143,30 @@
                     </BoxContainer>
                 </PanelContainer>
             </BoxContainer>
+            <BoxContainer Name="SupplyDrop" Access="Public" Orientation="Vertical"
+                          VerticalExpand="True">
+                <PanelContainer VerticalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Vertical" VerticalExpand="True">
+                        <PanelContainer>
+                            <PanelContainer.PanelOverride>
+                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="0 0 0 1" />
+                            </PanelContainer.PanelOverride>
+                            <Label Text="Supply Drop" />
+                        </PanelContainer>
+                        <BoxContainer Orientation="Horizontal" Margin="5"
+                                      VerticalExpand="True">
+                            <BoxContainer Orientation="Vertical">
+                                <BoxContainer Orientation="Horizontal">
+                                    <BoxContainer Orientation="Vertical" />
+                                </BoxContainer>
+                            </BoxContainer>
+                        </BoxContainer>
+                    </BoxContainer>
+                </PanelContainer>
+            </BoxContainer>
         </TabContainer>
     </BoxContainer>
 </controls:OverwatchSquadView>

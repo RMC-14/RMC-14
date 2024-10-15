@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -29,6 +30,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly SharedSupplyDropSystem _supplyDrop = default!;
     [Dependency] private readonly SharedTacticalMapSystem _tacticalMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -132,6 +134,9 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
                 Log.Warning($"{ToPrettyString(args.Actor)} tried to select invalid squad id {ToPrettyString(squad)}");
                 return;
             }
+
+            if (TryComp(ent, out SupplyDropComputerComponent? supplyComputer))
+                _supplyDrop.SetSquad((ent, supplyComputer), Prototype(squad.Value)?.ID);
         }
 
         ent.Comp.Squad = args.Squad;

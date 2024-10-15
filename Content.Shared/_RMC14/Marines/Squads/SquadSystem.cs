@@ -315,6 +315,14 @@ public sealed class SquadSystem : EntitySystem
         }
     }
 
+    public bool IsInSquad(Entity<SquadMemberComponent?> member, EntProtoId<SquadTeamComponent> squad)
+    {
+        if (!Resolve(member, ref member.Comp, false))
+            return false;
+
+        return member.Comp.Squad is { } memberSquad && Prototype(memberSquad)?.ID == squad.Id;
+    }
+
     public override void Update(float frameTime)
     {
         var query = EntityQueryEnumerator<SquadGrantAccessComponent>();

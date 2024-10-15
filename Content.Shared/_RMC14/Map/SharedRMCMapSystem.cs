@@ -107,6 +107,11 @@ public abstract class SharedRMCMapSystem : EntitySystem
         return _turf.IsTileBlocked(turf.Value, group);
     }
 
+    public bool IsTileBlocked(MapCoordinates coordinates, CollisionGroup group = CollisionGroup.Impassable)
+    {
+        return IsTileBlocked(_transform.ToCoordinates(coordinates), group);
+    }
+
     public bool TileHasStructure(EntityCoordinates coordinates)
     {
         var anchored = GetAnchoredEntitiesEnumerator(coordinates);
