@@ -85,6 +85,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
                 continue;
 
             Spawn(spawner.Comp.Spawn, _transform.GetMoverCoordinates(spawner));
+            _corpsesSpawned++;
         }
 
         var proportional = EntityQueryEnumerator<ProportionalSpawnerComponent>();
