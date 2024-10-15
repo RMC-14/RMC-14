@@ -55,7 +55,7 @@
         shotsToMaxScatter: 6
       FullAuto:
         fireDelay: 0.01
-        MaxScatterModifier: 4
+        maxScatterModifier: 4
         shotsToMaxScatter: 6
   - type: ItemSlots
     slots:
