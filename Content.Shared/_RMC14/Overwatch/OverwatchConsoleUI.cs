@@ -74,6 +74,35 @@ public sealed class OverwatchConsoleHideBuiMsg(NetEntity target, bool hide) : Bo
 }
 
 [Serializable, NetSerializable]
+public sealed class OverwatchConsoleSupplyDropLongitudeBuiMsg(int longitude) : BoundUserInterfaceMessage
+{
+    public readonly int Longitude = longitude;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleSupplyDropLatitudeBuiMsg(int latitude) : BoundUserInterfaceMessage
+{
+    public readonly int Latitude = latitude;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleSupplyDropLaunchBuiMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleSupplyDropSaveBuiMsg(int longitude, int latitude) : BoundUserInterfaceMessage
+{
+    public readonly int Longitude = longitude;
+    public readonly int Latitude = latitude;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleSupplyDropCommentBuiMsg(int index, string comment) : BoundUserInterfaceMessage
+{
+    public readonly int Index = index;
+    public readonly string Comment = comment;
+}
+
+[Serializable, NetSerializable]
 public readonly record struct OverwatchSquad(NetEntity Id, string Name, Color Color);
 
 [Serializable, NetSerializable]

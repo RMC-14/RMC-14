@@ -20,10 +20,10 @@ public sealed partial class SupplyDropWindow : DefaultWindow
     {
         RobustXamlLoader.Load(this);
 
-        Longitude = UIExtensions.CreateDialSpinBox();
+        Longitude = UIExtensions.CreateDialSpinBox(buttons: false);
         TargetXContainer.AddChild(Longitude);
 
-        Latitude = UIExtensions.CreateDialSpinBox();
+        Latitude = UIExtensions.CreateDialSpinBox(buttons: false);
         TargetYContainer.AddChild(Latitude);
 
         Longitude.OnKeyBindDown += args =>

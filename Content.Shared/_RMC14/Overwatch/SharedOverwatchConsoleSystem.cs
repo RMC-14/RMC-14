@@ -41,9 +41,9 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     private EntityQuery<OriginalRoleComponent> _originalRoleQuery;
     private EntityQuery<RMCPlanetComponent> _planetQuery;
 
-    private ProtoId<DamageGroupPrototype> _bruteGroup = "Brute";
-    private ProtoId<DamageGroupPrototype> _burnGroup = "Burn";
-    private ProtoId<DamageGroupPrototype> _toxinGroup = "Toxin";
+    private readonly ProtoId<DamageGroupPrototype> _bruteGroup = "Brute";
+    private readonly ProtoId<DamageGroupPrototype> _burnGroup = "Burn";
+    private readonly ProtoId<DamageGroupPrototype> _toxinGroup = "Toxin";
 
     public override void Initialize()
     {
@@ -71,6 +71,11 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             subs.Event<OverwatchConsoleShowHiddenBuiMsg>(OnOverwatchShowHiddenBui);
             subs.Event<OverwatchConsoleWatchBuiMsg>(OnOverwatchWatchBui);
             subs.Event<OverwatchConsoleHideBuiMsg>(OnOverwatchHideBui);
+            subs.Event<OverwatchConsoleSupplyDropLongitudeBuiMsg>(OnOverwatchSupplyDropLongitudeBui);
+            subs.Event<OverwatchConsoleSupplyDropLatitudeBuiMsg>(OnOverwatchSupplyDropLatitudeBui);
+            subs.Event<OverwatchConsoleSupplyDropLaunchBuiMsg>(OnOverwatchSupplyDropLaunchBui);
+            subs.Event<OverwatchConsoleSupplyDropSaveBuiMsg>(OnOverwatchSupplyDropSaveBui);
+            subs.Event<OverwatchConsoleSupplyDropCommentBuiMsg>(OnOverwatchSupplyDropCommentBui);
         });
     }
 
@@ -219,6 +224,63 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         var state = GetOverwatchBuiState();
         _ui.SetUiState(ent.Owner, OverwatchConsoleUI.Key, state);
+    }
+
+    private void OnOverwatchSupplyDropLongitudeBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSupplyDropLongitudeBuiMsg args)
+    {
+        _supplyDrop.SetLongitude(ent.Owner, args.Longitude);
+    }
+
+    private void OnOverwatchSupplyDropLatitudeBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSupplyDropLatitudeBuiMsg args)
+    {
+        _supplyDrop.SetLatitude(ent.Owner, args.Latitude);
+    }
+
+    private void OnOverwatchSupplyDropLaunchBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSupplyDropLaunchBuiMsg args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp(ent, out SupplyDropComputerComponent? computer))
+            return;
+
+        _supplyDrop.TryLaunchSupplyDropPopup((ent, computer), args.Actor);
+
+        var state = GetOverwatchBuiState();
+        _ui.SetUiState(ent.Owner, OverwatchConsoleUI.Key, state);
+        Dirty(ent);
+    }
+
+    private void OnOverwatchSupplyDropSaveBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSupplyDropSaveBuiMsg args)
+    {
+        var locations = ent.Comp.SupplyDropLocations;
+        if (locations.Length == 0)
+            return;
+
+        ref var last = ref ent.Comp.LastLocation;
+        if (last >= locations.Length)
+            last = 0;
+
+        locations[last] = new OverwatchSupplyDropLocation(args.Longitude, args.Latitude, string.Empty);
+
+        last++;
+        Dirty(ent);
+    }
+
+    private void OnOverwatchSupplyDropCommentBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSupplyDropCommentBuiMsg args)
+    {
+        var locations = ent.Comp.SupplyDropLocations;
+        if (args.Index < 0 || args.Index >= locations.Length)
+            return;
+
+        if (locations[args.Index] is not { } location)
+            return;
+
+        var comment = args.Comment;
+        if (comment.Length > 50)
+            comment = comment[..50];
+
+        locations[args.Index] = location with { Comment = comment };
     }
 
     protected virtual void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<OverwatchCameraComponent?> toWatch)

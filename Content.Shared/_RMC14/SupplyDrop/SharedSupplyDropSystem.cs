@@ -75,16 +75,12 @@ public abstract class SharedSupplyDropSystem : EntitySystem
 
     private void OnSupplyDropComputerLongitudeMsg(Entity<SupplyDropComputerComponent> ent, ref SupplyDropComputerLongitudeBuiMsg args)
     {
-        args.Longitude.Cap(ent.Comp.MaxCoordinate);
-        ent.Comp.Coordinates = new Vector2i(args.Longitude, ent.Comp.Coordinates.Y);
-        Dirty(ent);
+        SetLongitude((ent, ent), args.Longitude);
     }
 
     private void OnSupplyDropComputerLatitudeMsg(Entity<SupplyDropComputerComponent> ent, ref SupplyDropComputerLatitudeBuiMsg args)
     {
-        args.Latitude.Cap(ent.Comp.MaxCoordinate);
-        ent.Comp.Coordinates = new Vector2i(ent.Comp.Coordinates.X, args.Latitude);
-        Dirty(ent);
+        SetLatitude((ent, ent), args.Latitude);
     }
 
     private void OnSupplyDropComputerUpdateMsg(Entity<SupplyDropComputerComponent> ent, ref SupplyDropComputerUpdateBuiMsg args)
@@ -126,6 +122,26 @@ public abstract class SharedSupplyDropSystem : EntitySystem
             return;
 
         computer.Comp.Squad = squad;
+        Dirty(computer);
+    }
+
+    public void SetLongitude(Entity<SupplyDropComputerComponent?> computer, int longitude)
+    {
+        if (!Resolve(computer, ref computer.Comp, false))
+            return;
+
+        longitude.Cap(computer.Comp.MaxCoordinate);
+        computer.Comp.Coordinates = new Vector2i(longitude, computer.Comp.Coordinates.Y);
+        Dirty(computer);
+    }
+
+    public void SetLatitude(Entity<SupplyDropComputerComponent?> computer, int latitude)
+    {
+        if (!Resolve(computer, ref computer.Comp, false))
+            return;
+
+        latitude.Cap(computer.Comp.MaxCoordinate);
+        computer.Comp.Coordinates = new Vector2i(computer.Comp.Coordinates.X, latitude);
         Dirty(computer);
     }
 
