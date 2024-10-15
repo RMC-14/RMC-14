@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using Content.Client._RMC14.LinkAccount;
@@ -46,10 +47,21 @@ namespace Content.Client.Credits
             TabContainer.SetTabTitle(Ss14ContributorsTab, Loc.GetString("credits-window-ss14contributorslist-tab"));
             TabContainer.SetTabTitle(PatronsTab, Loc.GetString("credits-window-patrons-tab"));
             TabContainer.SetTabTitle(LicensesTab, Loc.GetString("credits-window-licenses-tab"));
+            TabContainer.SetTabTitle(OtherTab, Loc.GetString("rmc-other-credits-tab"));
 
             PopulateContributors(Ss14ContributorsContainer);
             PopulatePatrons(PatronsContainer);
             PopulateLicenses(LicensesContainer);
+            PopulateOther(OtherContainer);
+        }
+
+        private void PopulateOther(BoxContainer otherContainer)
+        {
+            var text = _resourceManager.ContentFileReadAllText($"/Credits/_RMC14/Other.txt");
+            var label = new RichTextLabel();
+            label.SetMessage(text);
+
+            otherContainer.AddChild(label);
         }
 
         private void PopulateLicenses(BoxContainer licensesContainer)
