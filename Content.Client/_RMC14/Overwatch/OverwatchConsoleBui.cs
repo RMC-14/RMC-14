@@ -267,11 +267,29 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                     ToolTip = "Hide marine",
                 };
 
-                if (_overwatchConsole.IsHidden((Owner, console), marine.Marine))
+                var promoteButton = new Button
+                {
+                    MaxWidth = 25,
+                    MaxHeight = 25,
+                    VerticalAlignment = VAlignment.Top,
+                    StyleClasses = { "OpenBoth" },
+                    Text = "^",
+                    ModulateSelfOverride = Color.FromHex(GreenColor),
+                    ToolTip = "Promote marine to Squad Leader",
+                };
+
+                if (_overwatchConsole.IsHidden((Owner, console), marine.Marine) &&
+                    marine.Marine != squad.Leader)
                 {
                     hideButton.Text = "+";
                     hideButton.ModulateSelfOverride = Color.FromHex("#248E34");
                     hideButton.ToolTip = "Show marine";
+                }
+
+                if (squad.Leader == marine.Marine)
+                {
+                    hideButton.Visible = false;
+                    promoteButton.Visible = false;
                 }
 
                 hideButton.OnPressed += _ =>
@@ -280,10 +298,21 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                     SendPredictedMessage(new OverwatchConsoleHideBuiMsg(marine.Marine, hidden));
                 };
 
+                promoteButton.OnPressed += _ =>
+                    SendPredictedMessage(new OverwatchConsolePromoteLeaderBuiMsg(marine.Marine));
+
                 panel = CreatePanel(50);
                 hideButton.Margin = margin;
                 panel.AddChild(hideButton);
-                monitor.Buttons.AddChild(panel);
+                var buttonsContainer = new BoxContainer { Orientation = LayoutOrientation.Horizontal };
+                buttonsContainer.AddChild(panel);
+
+                panel = CreatePanel(50);
+                promoteButton.Margin = margin;
+                panel.AddChild(promoteButton);
+                buttonsContainer.AddChild(panel);
+
+                monitor.Buttons.AddChild(buttonsContainer);
             }
 
             // TODO RMC14 change squad leader

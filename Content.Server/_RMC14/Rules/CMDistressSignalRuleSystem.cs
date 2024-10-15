@@ -1269,6 +1269,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private void EndRound()
     {
+        return;
         _roundEnd.EndRound();
     }
 

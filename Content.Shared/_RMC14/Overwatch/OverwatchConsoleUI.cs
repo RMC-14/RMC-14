@@ -21,7 +21,9 @@ public enum OverwatchConsoleUI
 }
 
 [Serializable, NetSerializable]
-public sealed class OverwatchConsoleBuiState(List<OverwatchSquad> squads, Dictionary<NetEntity, List<OverwatchMarine>> marines) : BoundUserInterfaceState
+public sealed class OverwatchConsoleBuiState(
+    List<OverwatchSquad> squads,
+    Dictionary<NetEntity, List<OverwatchMarine>> marines) : BoundUserInterfaceState
 {
     public readonly List<OverwatchSquad> Squads = squads;
     public readonly Dictionary<NetEntity, List<OverwatchMarine>> Marines = marines;
@@ -74,6 +76,12 @@ public sealed class OverwatchConsoleHideBuiMsg(NetEntity target, bool hide) : Bo
 }
 
 [Serializable, NetSerializable]
+public sealed class OverwatchConsolePromoteLeaderBuiMsg(NetEntity target) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity Target = target;
+}
+
+[Serializable, NetSerializable]
 public sealed class OverwatchConsoleSupplyDropLongitudeBuiMsg(int longitude) : BoundUserInterfaceMessage
 {
     public readonly int Longitude = longitude;
@@ -103,7 +111,7 @@ public sealed class OverwatchConsoleSupplyDropCommentBuiMsg(int index, string co
 }
 
 [Serializable, NetSerializable]
-public readonly record struct OverwatchSquad(NetEntity Id, string Name, Color Color);
+public record struct OverwatchSquad(NetEntity Id, string Name, Color Color, NetEntity? Leader);
 
 [Serializable, NetSerializable]
 public readonly record struct OverwatchMarine(
