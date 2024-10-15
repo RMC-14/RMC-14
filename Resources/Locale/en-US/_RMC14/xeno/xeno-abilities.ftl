@@ -169,6 +169,7 @@ rmc-xeno-heal-others = {$user} places its claws on {$target}, and its wounds are
 rmc-xeno-heal-ailments-self = We rejuvenate {$target}!
 rmc-xeno-heal-ailments-target = We are rejuvenated by {$target}!
 rmc-xeno-heal-ailments-others = {$user} points at {$target}, and it spasms as it recuperates unnaturally quickly!
+rmc-xeno-heal-sisters = We must target one of our sisters!
 
 # Resin Surge
 rmc-xeno-resin-surge-shield-self = We surge the resin around {THE($target)}, making it temporarily nigh unbreakable!

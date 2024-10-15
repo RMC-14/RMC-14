@@ -46,6 +46,7 @@
         whitelist:
           tags:
           - CMMagazinePistolMK80
+        startingItem: CMMagazinePistolMK80
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -128,7 +129,7 @@
     - range: 22
       falloff: 9999
       ignoreModifiers: true
-    - range: 3
+    - range: 6
       falloff: 5
   - type: CMArmorPiercing
     amount: 30

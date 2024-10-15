@@ -143,6 +143,7 @@
     - ActionXenoRetrieve
     - ActionXenoAidToggle
     - ActionXenoDevolve
+    hidden: true
   - type: XenoStrain
     name: rmc-xeno-warden-name
     description: rmc-xeno-warden-description

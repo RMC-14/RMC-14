@@ -103,7 +103,7 @@
   id: ActionXenoFruitPlant
   parent: ActionXenoBase
   name: Plant Resin Fruit (100)
-  description: Plant chosen resin fruit at the cost of health and plasma.
+  description: Plant chosen resin fruit on weeds at the cost of health and plasma. Xenos can pick these fruits once they're mature, you can also pick a plant early to get rid of it. Xenos can use them in hand or eat them on the ground to gain their effects. They can also be used on other xenos to feed them. You can only have 6 fruits planted and picked at a time.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -117,7 +117,7 @@
   id: ActionXenoPlantWeedsHardy
   parent: ActionXenoBase
   name: Plant Hardy Weeds (125) # TODO RMC14 proper plasma costs
-  description: Plant a weed node that will spread hardier weeds.
+  description: Plant a weed node that will spread hardier weeds, which grow fruit 25% faster, have slightly more health, and can be spread on some surfaces where normal weeds won't grow.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -135,7 +135,7 @@
   id: ActionXenoFruitPlantLesser
   parent: ActionXenoFruitPlant
   name: Plant Resin Fruit (50)
-  description: Plant resin fruit at the cost of health and plasma.
+  description: Plant resin fruit on weeds at the cost of health and plasma.
   components:
   - type: InstantAction
     event: !type:XenoFruitPlantActionEvent
