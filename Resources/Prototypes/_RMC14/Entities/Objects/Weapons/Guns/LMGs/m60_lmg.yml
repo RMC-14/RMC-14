@@ -19,6 +19,9 @@
       offset: -0.6, 0
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/LMGs/m60.rsi
+  - type: Tag
+    tags:
+    - RMCWeaponLMGM60
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -34,7 +37,6 @@
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m60.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
-    
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -93,6 +95,7 @@
   - type: Wieldable
   - type: GunRequiresWield
 
+
 - type: entity
   parent: RMCMagazineLMGBase
   id: RMCMagazineLMGM60
@@ -148,9 +151,11 @@
   - type: CMArmorPiercing
     amount: 30
 
+- type: Tag
+  id: RMCWeaponLMGM60
 
 - type: Tag
   id: RMCMagazineLMGM60
-
+  
 - type: Tag
   id: RMCCartridgeLMGM60
