@@ -84,6 +84,8 @@
   - type: RequireProjectileTarget
 
 - type: entity
+  parent: BaseItem
+  categories: [ HideSpawnMenu ]
   id: XenoEggDestroyed
   name: egg
   description: A mess of... something.
@@ -105,6 +107,8 @@
         - BulletImpassable
         restitution: 0.3
         friction: 0.2
+  - type: Transform
+    anchored: true
   - type: CollisionWake
     enabled: false
   - type: Flammable
