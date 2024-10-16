@@ -1,0 +1,60 @@
+﻿- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerEvacuationPodSouth
+  name: escape pod spawner
+  description: Defines a location to spawn an evacuation pod in.
+  suffix: South
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    state: green
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/escape_pod_south.yml"
+    offset: 1.5,0.5
+
+- type: entity
+  parent: RMCSpawnerEvacuationPodSouth
+  id: RMCSpawnerEvacuationPodEast
+  suffix: East
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/escape_pod_east.yml"
+
+- type: entity
+  parent: RMCSpawnerEvacuationPodSouth
+  id: RMCSpawnerEvacuationPodNorth
+  suffix: North
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/escape_pod_north.yml"
+
+- type: entity
+  parent: RMCSpawnerEvacuationPodSouth
+  id: RMCSpawnerEvacuationPodWest
+  suffix: West
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/escape_pod_west.yml"
+
+- type: entity
+  parent: RMCSpawnerEvacuationPodSouth
+  id: RMCSpawnerEvacuationPodEastLiaison
+  suffix: East, Liaison
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/escape_pod_east_liaison.yml"
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerLifeboat
+  name: lifeboat spawner
+  description: Defines a location to spawn a lifeboat.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    state: green
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/lifeboat.yml"
+    offset: 12.5,2.5

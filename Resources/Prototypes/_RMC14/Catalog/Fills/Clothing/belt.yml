@@ -10,7 +10,7 @@
     - id: CMWelder
     - id: CMCrowbar
     - id: CMWirecutter
-#    - id: CMCableCoil30 TODO RMC14
+    - id: RMCCableCoil30
     - id: CMMultitool
 
 - type: entity
@@ -26,6 +26,7 @@
     - id: CMWirecutter
     - id: CMWelder
     - id: CMMultitool
+    - id: RMCCableCoil30
 
 - type: entity
   parent: CMBeltKnife

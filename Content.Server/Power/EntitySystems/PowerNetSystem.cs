@@ -3,6 +3,7 @@ using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.Power.Components;
 using Content.Server.Power.NodeGroups;
 using Content.Server.Power.Pow3r;
+using Content.Shared._RMC14.Power;
 using Content.Shared.CCVar;
 using Content.Shared.Power;
 using JetBrains.Annotations;
@@ -29,9 +30,13 @@ namespace Content.Server.Power.EntitySystems
 
         private BatteryRampPegSolver _solver = new();
 
+        private EntityQuery<RMCPowerReceiverComponent> _rmcPowerReceiverQuery;
+
         public override void Initialize()
         {
             base.Initialize();
+
+            _rmcPowerReceiverQuery = GetEntityQuery<RMCPowerReceiverComponent>();
 
             UpdatesAfter.Add(typeof(NodeGroupSystem));
             _solver = new(_cfg.GetCVar(CCVars.DebugPow3rDisableParallel));
@@ -324,6 +329,9 @@ namespace Content.Server.Power.EntitySystems
 
                 var metadata = metaQuery.Comp(uid);
                 if (metadata.EntityPaused)
+                    continue;
+
+                if (_rmcPowerReceiverQuery.HasComp(uid))
                     continue;
 
                 apcReceiver.Recalculate = false;

@@ -21,7 +21,6 @@
       whitelist:
         tags:
         - ShellShotgun
-        - CMShellShotgun
       capacity: 16
 
 # Shotgun Shells

@@ -21,7 +21,6 @@
   - type: Eye
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: Sprite
     drawdepth: WallMountedItems
     sprite: _RMC14/Structures/Wallmounts/camera.rsi

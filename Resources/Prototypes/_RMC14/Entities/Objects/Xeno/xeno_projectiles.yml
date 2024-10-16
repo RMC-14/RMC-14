@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   id: XenoBaseProjectile
   name: projectile
@@ -30,7 +30,15 @@
   - type: XenoProjectile
 
 - type: entity
-  parent: XenoBaseProjectile
+  abstract: true
+  id: XenoSpitImpactSounds
+  components:
+  - type: Projectile
+    soundHit:
+      path: /Audio/_RMC14/Xeno/acid_impact1.ogg
+
+- type: entity
+  parent: [XenoSpitImpactSounds, XenoBaseProjectile]
   id: XenoSpitProjectile
   name: spit
   categories:
@@ -44,8 +52,8 @@
   - type: Projectile
     impactEffect: null
     damage:
-      groups:
-        Burn: 20 # TODO RMC14 damage fall-off and higher at close range
+      types:
+        Heat: 20 # TODO RMC14 damage fall-off and higher at close range
   - type: CMArmorPiercing
     amount: 10
   - type: XenoProjectile
@@ -65,15 +73,15 @@
   - type: Projectile
     impactEffect: null
     damage:
-      groups:
-        Burn: 30 # TODO RMC14 damage fall-off and higher at close range
+      types:
+        Heat: 30 # TODO RMC14 damage fall-off and higher at close range
   - type: ModifyTargetOnHit
     add:
     - type: UserAcided
       armorPiercing: 40
       damage:
-        groups:
-          Burn: 1
+        types:
+          Heat: 1
       duration: 20
     whitelist:
       components:
@@ -83,7 +91,7 @@
 
 - type: entity
   id: XenoSlowingSpitProjectile
-  parent: XenoBaseProjectile
+  parent: [XenoSpitImpactSounds, XenoBaseProjectile]
   name: slowing spit
   categories:
   - HideSpawnMenu
@@ -100,7 +108,7 @@
 
 - type: entity
   id: XenoScatteredSpitProjectile
-  parent: XenoBaseProjectile
+  parent: [XenoSpitImpactSounds, XenoBaseProjectile]
   name: scattered spit
   categories:
   - HideSpawnMenu
@@ -168,9 +176,24 @@
     popupType: LargeCaution
   - type: ProjectileMaxRange
     max: 10
+  - type: XenoSlowingSpitProjectile
+    slow: 0
+    paralyze: 4
+    armorResistsKnockdown: false
+  - type: ModifyTargetOnHit
+    add:
+    - type: UserAcided
+      armorPiercing: 40
+      damage:
+        types:
+          Heat: 1
+      duration: 20
+    whitelist:
+      components:
+      - Marine
 
 - type: entity
-  parent: XenoBombardAcidProjectile
+  parent: XenoBaseProjectile
   id: XenoBombardNeurotoxinProjectile
   name: glob of neurotoxin gas
   categories:
@@ -195,6 +218,23 @@
     popupType: LargeCaution
   - type: ProjectileMaxRange
     max: 10
+  - type: XenoSlowingSpitProjectile
+    slow: 0
+    paralyze: 4
+    armorResistsKnockdown: false
+  - type: NeurotoxinInjector
+    neuroPerSecond: 5
+    affectsDead: false
+    affectsInfectedNested: false
+    toxinDamage:
+        groups:
+          Toxin: 2
+    oxygenDamage:
+        types:
+          Asphyxiation: 150
+    coughDamage:
+        groups:
+          Brute: 5
 
 - type: entity
   parent: XenoSpitProjectile
@@ -204,12 +244,12 @@
   components:
   - type: Projectile
     damage:
-      groups:
-        Burn: 25
+      types:
+        Heat: 25
   - type: ApplyAcidStacks
     damage:
-      groups:
-        Burn: 30
+      types:
+        Heat: 30
 
 - type: entity
   parent: XenoAcidBallSpitProjectile
@@ -228,8 +268,8 @@
   components:
   - type: Projectile
     damage:
-      groups:
-        Burn: 25
+      types:
+        Heat: 25
 
 - type: entity
   id: XenoAcidBallProjectile

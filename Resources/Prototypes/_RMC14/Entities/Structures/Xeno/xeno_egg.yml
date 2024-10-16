@@ -72,3 +72,4 @@
       enum.XenoParasiteGhostUI.Key:
         type: XenoParasiteGhostBui
         requireInputValidation: false
+  - type: RequireProjectileTarget

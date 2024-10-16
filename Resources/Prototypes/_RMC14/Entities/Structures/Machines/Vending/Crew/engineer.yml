@@ -27,12 +27,19 @@
       # map
     - name: Helmet
       choices: { CMHelmet: 1 }
-      entries: []
-      # Beret, white/orange/blue hardhat, welding helmet
+      entries:
+      - id: CMHeadBeretEngineer
+      - id: RMCHardhatWhite
+      - id: RMCHardhatOrange
+      - id: RMCHardhatBlue
+      # Welding helmet
     - name: Suit
       choices: { CMSuit: 1 }
-      entries: []
-      # Black/blue/Orange/Yellow hazard vest
+      entries:
+      - id: RMCHazardVestBlack
+      - id: RMCHazardVestBlue
+      - id: RMCHazardVest
+      - id: RMCHazardVestYellow
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -40,7 +47,7 @@
       - id: CMSatchelMarineTech
       - id: CMBackpackWelder
       - id: RMCSatchelWelder
-      # Welder Chestrig
+      - id: CMSatchelMarineTech
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -69,7 +76,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
-      #- id: CMRebreather #TODO RMC14: Make this
+      - id: RMCMaskRebreather
     - name: Accessories
       choices: { CMAccessory: 1 }
       entries:

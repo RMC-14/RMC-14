@@ -1,17 +1,22 @@
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
+using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class XenoResinHoleComponent : Component
 {
     public const string ParasitePrototype = "CMXenoParasite";
 
-    public const string AcidGasPrototype = "XenoBombardAcidProjectile";
+    public const string BoilerAcid = "XenoBombardAcidProjectile";
 
-    public const string NeuroGasPrototype = "XenoBombardNeurotoxinProjectile";
+    public const string AcidGasPrototype = "RMCSmokeAcid";
+
+    public const string BoilerNeuro = "XenoBombardNeurotoxinProjectile";
+
+    public const string NeuroGasPrototype = "RMCSmokeNeurotoxin";
 
     public const string AcidPrototype = "XenoAcidSprayTrap";
 
@@ -19,17 +24,11 @@ public sealed partial class XenoResinHoleComponent : Component
 
     public const string StrongAcidPrototype = "XenoAcidSprayTrapStrong";
 
-	/// <summary>
-	/// The entity to spawn on the trap when activated
-	/// </summary>
-	[DataField]
-	public EntProtoId? TrapPrototype = null;
-
-	/// <summary>
-	/// The hive that will get announcements when the hole is broken or activated
-	/// </summary>
-	[DataField]
-	public EntityUid? Hive = null;
+    /// <summary>
+    /// The entity to spawn on the trap when activated
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntProtoId? TrapPrototype = null;
 
     [DataField]
     public TimeSpan StepStunDuration = TimeSpan.FromSeconds(2.5);
@@ -43,11 +42,17 @@ public sealed partial class XenoResinHoleComponent : Component
     [DataField]
     public float ParasiteActivationRange = 0.5f;
 
-//    [DataField] used but emulated through step trigger range being very low
-//    public float FluidActivationRange = 1.5f;
+    [DataField]
+    public float TotalHealth = 10f;
+
+    //    [DataField] used but emulated through step trigger range being very low
+    //    public float FluidActivationRange = 1.5f;
 
     [DataField]
     public SoundSpecifier? FluidFillSound = new SoundPathSpecifier("/Audio/Effects/refill.ogg");
+
+    [DataField]
+    public Color MessageColor = Color.FromHex("#2A623D");
 
     [DataField]
     public SoundSpecifier BuildSound = new SoundCollectionSpecifier("RMCResinBuild")

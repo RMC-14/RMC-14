@@ -13,6 +13,27 @@
     range: 2
 
 - type: entity
+  id: ActionXenoResinSurge
+  parent: ActionXenoBase
+  name: Resin Surge (75)
+  description: Speed up plant growth, create temporary walls or heavily reinforce existing ones, or create patches of sticky resin.
+  components:
+  - type: EntityWorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: gardener_resin_surge
+    event: !type:XenoResinSurgeActionEvent
+    range: 7
+    useDelay: 10
+    whitelist:
+      components:
+      - XenoConstruct
+      - XenoFruit
+      - XenoWeeds
+  - type: XenoResinSurgeAction
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoRetrieve
   name: Retrieve (180 plasma, 100 energy)

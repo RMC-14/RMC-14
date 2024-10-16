@@ -28,7 +28,7 @@
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStabCorrosive
+    - ActionXenoTailStabBoiler
     - ActionXenoAcidStrong
     - ActionXenoBombard
     - ActionXenoToggleGasType
@@ -60,6 +60,7 @@
   - type: XenoAcidShroud
   - type: XenoGasToggle
   - type: XenoTailStab
+    toggle: true
     inject:
       RMCMolecularAcid: 1 # TODO RMC14 6
   - type: XenoSprayAcid
@@ -78,6 +79,8 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
+  - type: SlowOnPull
+    multiplier: 0.5
   - type: PointLight
     enabled: true
     radius: 1.8
@@ -85,6 +88,19 @@
     autoRot: true
   - type: RMCSize
     size: Big
+  - type: NeurotoxinInjector
+    neuroPerSecond: 16
+    affectsDead: false
+    affectsInfectedNested: false
+    toxinDamage:
+        groups:
+          Toxin: 2
+    oxygenDamage:
+        types:
+          Asphyxiation: 150
+    coughDamage:
+        groups:
+          Brute: 5
   - type: RMCXenoDamageVisuals
     prefix: boiler
   - type: TacticalMapIcon
