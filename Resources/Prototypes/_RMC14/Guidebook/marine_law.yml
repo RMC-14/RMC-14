@@ -10,6 +10,7 @@
   - RMCMarineLawCrimes
   - RMCMarineLawPrisonerRights
   - RMCMarineLawAppeals
+  - RMCMarineLawSpecialProvisions
 
 - type: guideEntry
   parent: RMC
@@ -157,6 +158,12 @@
   priority: 4
 
 # Special Circumstances
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawSpecialProvisions
+  name: rmc-guide-entry-marine-law-special-provisions
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawSpecialProvisions.xml"
+  priority: 5
 
 # Synthetics
 
