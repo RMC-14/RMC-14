@@ -176,9 +176,6 @@
   id: CMMagazineSMGT64HM
   name: "Type 64 Helical Magazine"
   components:
-  - type: Tag
-    tags:
-    - CMMagazineSMGT64HM
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
