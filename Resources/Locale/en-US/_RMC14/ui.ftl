@@ -53,3 +53,5 @@ rmc-ui-shoutout-xeno = [bold]Hive established by [color=purple]{$name}[/color]![
 
 rmc-ui-discord = Discord
 rmc-ui-patreon = Patreon
+
+rmc-other-credits-tab = Other

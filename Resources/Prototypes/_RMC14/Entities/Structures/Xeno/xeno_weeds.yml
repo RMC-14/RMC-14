@@ -25,9 +25,7 @@
         hard: false
   - type: XenoWeeds
   - type: Clickable
-  - type: EdgeSpreader
-    id: XenoWeeds
-  - type: ActiveEdgeSpreader
+  - type: XenoWeedsSpreading
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: FloorTiles
@@ -133,8 +131,6 @@
   components:
   - type: XenoWeeds
     spawns: XenoHiveWeeds
-  - type: EdgeSpreader
-    id: XenoWeeds
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: FloorTiles
@@ -187,6 +183,7 @@
   parent: XenoHiveWeeds
   id: XenoHiveWeedsSource
   name: hive weed node
+  description: A weird, pulsating node
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
@@ -265,8 +262,6 @@
     spawns: XenoHardyWeeds
     spreadsOnSemiWeedable: true
     fruitGrowthMultiplier: 0.8
-  - type: EdgeSpreader
-    id: XenoWeeds
   - type: Destructible
     thresholds:
     - trigger:
@@ -279,7 +274,8 @@
 - type: entity # TODO RMC14 sound
   parent: XenoHardyWeeds
   id: XenoHardyWeedsSource
-  name: hive weed node
+  name: hardy weed node
+  description: A weird, pulsating node
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
@@ -288,7 +284,3 @@
     layers:
     - state: weed0
     - state: constructionnode
-
-- type: edgeSpreader
-  id: XenoWeeds
-  updatesPerSecond: 2
