@@ -212,3 +212,6 @@
     - CMCartridge762x19mm
   - type: CartridgeAmmo
     proto: Bullet10x20mm
+
+- type: Tag
+  id: CMMagazineSMGT64HM
