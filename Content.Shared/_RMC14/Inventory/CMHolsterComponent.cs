@@ -25,4 +25,6 @@ public sealed partial class CMHolsterComponent : Component
     /// </summary>
     [DataField]
     public SoundSpecifier? EjectSound = new SoundPathSpecifier("/Audio/Weapons/Guns/MagOut/revolver_magout.ogg");
+
+    // TODO: add whitelist to account for e.g. crowbars being "holstered" into combat toolbelts
 }

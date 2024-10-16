@@ -34,4 +34,24 @@ public sealed class CMInventorySystem : SharedCMInventorySystem
 
         sprite.LayerSetVisible(layer, false);
     }
+
+    protected override void ContentsUpdated(Entity<CMHolsterComponent> ent)
+    {
+        base.ContentsUpdated(ent);
+
+        if (!TryComp(ent, out SpriteComponent? sprite) ||
+            !sprite.LayerMapTryGet(CMHolsterLayers.Base, out var layer))
+        {
+            return;
+        }
+
+        sprite.LayerSetVisible(layer, false);
+
+        if (ent.Comp.Contents.Count == 0)
+            return;
+
+        // TODO: implement per-gun underlay here
+        // sprite.LayerSetState(layer, $"{<gun_state_here>}");
+        sprite.LayerSetVisible(layer, true);
+    }
 }
