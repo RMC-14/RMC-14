@@ -41,8 +41,6 @@
     layers:
     - state: egg_item
       map: [ "enum.XenoEggLayers.Base" ]
-  - type: Item
-    size: Ginormous
   - type: XenoEgg
   - type: Damageable
     damageContainer: StructuralXeno
@@ -94,6 +92,8 @@
     snap:
     - Wall
   components:
+  - type: Item
+    size: Ginormous
   - type: Fixtures
     fixtures:
       fix1:
@@ -121,6 +121,8 @@
     drawdepth: Items
     layers:
     - state: egg_exploding
+  - type: Damageable
+    damageContainer: StructuralXeno
   - type: Destructible
     thresholds:
     - trigger:
@@ -139,3 +141,4 @@
     isCorrodible: false
   - type: RequireProjectileTarget
   - type: WhitelistPickupBy
+  - type: Appearance
