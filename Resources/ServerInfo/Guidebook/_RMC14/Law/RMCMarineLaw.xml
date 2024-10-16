@@ -12,16 +12,16 @@
 
   Should [color=#ff000d][bold]MP[/bold][/color]s disagree on cases, Marine Law rank structure must be followed.
 
-  - [color=#ffa500][bold]Provost Marshal Office[/bold][/color] > [color=#00CBFE][bold]Commanding Officer[/bold][/color] > [color=#8B0000][bold]Chief MP[/bold][/color] > Warden > [color=#ff000d][bold]MP[/bold][/color]
+  - [color=#ffa500][bold]Provost Marshal Office[/bold][/color] > [color=#00CBFE][bold]Commanding Officer[/bold][/color] > [color=#8B0000][bold]Chief MP[/bold][/color] > Warden > [color=#ff000d][bold]MP[/bold][/color] > Deputized [color=#ff000d][bold]MP[/bold][/color]
 
   ## Law and Related
   - [textlink="Definitions" link="RMCMarineLawDefinitions"]
   - [textlink="Procedures" link="RMCMarineLawProcedures"]
   - [textlink="Crimes" link="RMCMarineLawCrimes"]
-  - [textlink="Prisoner Rights" link=""]
-  - [textlink="Prisoner Rights, Appeals" link=""]
-  - [textlink="Special Circumstances" link=""]
-  - [textlink="Synthetics" link=""]
+  RMCMarineLawPrisonerRights
+  - [textlink="Prisoner Rights, Appeals" link="RMCMarineLawAppeals"]
+  - [textlink="Special Provisions" link="RMCMarineLawSpecialProvisions"]
+  - [textlink="Synthetics" link="RMCMarineLawSynthetics"]
   - [textlink="Commanding Officer Provisions" link=""]
 
   ## Standard Operating Procedure

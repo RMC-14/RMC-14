@@ -11,6 +11,7 @@
   - RMCMarineLawPrisonerRights
   - RMCMarineLawAppeals
   - RMCMarineLawSpecialProvisions
+  - RMCMarineLawSynthetics
 
 - type: guideEntry
   parent: RMC
@@ -166,6 +167,12 @@
   priority: 5
 
 # Synthetics
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawSynthetics
+  name: rmc-guide-entry-marine-law-synthetics
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawSynthetics.xml"
+  priority: 6
 
 # Commanding Officer provisions
 
