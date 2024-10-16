@@ -18,5 +18,6 @@ rmc-guide-entry-marine-law-prisoner-rights = Prisoner Rights
 rmc-guide-entry-marine-law-appeals = Appeals
 rmc-guide-entry-marine-law-specialcircumstances = Special Circumstances
 rmc-guide-entry-marine-law-synthetics = Synthetics
-rmc-guide-entry-marine-law-commandingofficerprovisions = Commanding Officer provisions
+rmc-guide-entry-marine-law-commandingofficerprovisions = Commanding Officer Provisions
 rmc-guide-entry-marine-law-special-provisions = Special Provisions
+rmc-guide-entry-marine-co-provisions = Commanding Officer Provisions

@@ -12,6 +12,7 @@
   - RMCMarineLawAppeals
   - RMCMarineLawSpecialProvisions
   - RMCMarineLawSynthetics
+  - RMCMarineLawCOProvisions
 
 - type: guideEntry
   parent: RMC
@@ -175,4 +176,9 @@
   priority: 6
 
 # Commanding Officer provisions
-
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawCOProvisions
+  name: rmc-guide-entry-marine-co-provisions
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCOProvisions.xml"
+  priority: 7
