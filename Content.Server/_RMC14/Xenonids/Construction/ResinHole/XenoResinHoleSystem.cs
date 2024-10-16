@@ -486,6 +486,9 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         {
             var trapEntity = SpawnAtPosition(trapEntityProto, _transform.GetMoverCoordinates(resinHole));
             _hive.SetSameHive(resinHole.Owner, trapEntity);
+
+            if (trapEntityProto == XenoResinHoleComponent.ParasitePrototype)
+                EnsureComp<TrapParasiteComponent>(trapEntity);
         }
 
         string msg = destroyed ? "cm-xeno-construction-resin-hole-destroyed" : "rmc-xeno-construction-resin-hole-activate";

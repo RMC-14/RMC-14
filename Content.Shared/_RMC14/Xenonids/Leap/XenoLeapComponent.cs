@@ -1,11 +1,12 @@
-﻿using Content.Shared.FixedPoint;
+﻿using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Leap;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(XenoLeapSystem))]
+[Access(typeof(XenoLeapSystem), typeof(SharedXenoParasiteSystem))]
 public sealed partial class XenoLeapComponent : Component
 {
     [DataField, AutoNetworkedField]
