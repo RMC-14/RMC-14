@@ -227,11 +227,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         Del(xeno.Owner);
 
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-devolve", ("xeno", newXeno)), newXeno, newXeno, PopupType.LargeCaution);
+                var afterEv = new AfterNewXenoEvolvedEvent();
+        RaiseLocalEvent(newXeno, ref afterEv);
 
-		var afterEv = new AfterNewXenoEvolvedEvent();
-		RaiseLocalEvent(newXeno, ref afterEv);
-	}
+        _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-devolve", ("xeno", newXeno)), newXeno, newXeno, PopupType.LargeCaution);
+    }
 
     private void OnXenoEvolveDoAfter(Entity<XenoEvolutionComponent> xeno, ref XenoEvolutionDoAfterEvent args)
     {
