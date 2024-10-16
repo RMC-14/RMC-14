@@ -1,139 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: The xenonid "Choose Resin Structure" window now stays open after making
-      a selection, allowing it to be changed back and forth without reopening the
-      window.
-    type: Tweak
-  id: 337
-  time: '2024-07-10T08:29:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2951
-- author: 0xRainy
-  changes:
-  - message: Non-Xeno can no longer nest players
-    type: Fix
-  id: 338
-  time: '2024-07-10T09:48:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2943
-- author: DrSmugleaf
-  changes:
-  - message: Fixed anyone being able to walk through the Almayer's medbay, and hospital
-      corpsmen being able to walk into the medbay's chemistry rooms. The marine tide
-      must now walk through the top or bottom hallways towards the hangar.
-    type: Fix
-  - message: Fixed security airlocks not being security locked on the Almayer.
-    type: Fix
-  - message: Temporarily unpowered all Intercoms until the xenonids are no longer
-      able to speak in plain English through them.
-    type: Fix
-  - message: Added the Almayer's north and south hangar pod doors, and meeting room
-      security checkpoints shutters.
-    type: Add
-  - message: Added medical equipment racks and chemical dispensers to the Almayer's
-      medbay.
-    type: Add
-  - message: Added a command tablet next to the groundside operations console on the
-      Almayer.
-    type: Add
-  - message: Moved the liaison's spawn point on the Almayer into a temporary room
-      with a fax and paper.
-    type: Tweak
-  - message: Moved the correspondent's spawn point on the Almayer into a temporary
-      room with two cameras.
-    type: Tweak
-  - message: Added one more staff officer slot on the Almayer, and one more cargo
-      tech slot.
-    type: Tweak
-  id: 339
-  time: '2024-07-10T12:27:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2955
-- author: Whisper
-  changes:
-  - message: Fixed M1984 accepting 9mm AP in regular mags.
-    type: Fix
-  id: 340
-  time: '2024-07-10T12:45:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2957
-- author: Siigiil
-  changes:
-  - message: Magnetic harness temporarily removed from vendors due to being horribly
-      bugged.
-    type: Remove
-  id: 341
-  time: '2024-07-10T20:06:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2959
-- author: tsp01
-  changes:
-  - message: blood can be stored in the correct pouches and belts
-    type: Fix
-  - message: surgical cases can be stored in the correct pouches and belts
-    type: Fix
-  id: 342
-  time: '2024-07-10T20:08:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2940
-- author: Whisper
-  changes:
-  - message: Fixed small hosts being unable to be dragged and tackled
-    type: Fix
-  id: 343
-  time: '2024-07-11T02:56:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2964
-- author: ShadowCommander
-  changes:
-  - message: Wall lights now break in one hit by a xenonid.
-    type: Tweak
-  id: 344
-  time: '2024-07-11T05:52:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2969
-- author: Siigiil, Cepha
-  changes:
-  - message: Added all standard attachments, excluding the bipod, the underbarrel
-      extinguisher, the underbarrel flamers and most attachments specific to weapons
-      that are unimplemented.
-    type: Add
-  - message: Added the missing default keybinds for attachment activation. Your keybinds
-      will be reset.
-    type: Add
-  - message: You can now open the attachment strip menu with a hotkey as well as the
-      verb. No default keybinding.
-    type: Add
-  - message: Certain scopes now allow movement. These being the smartscope and the
-      miniscope.
-    type: Tweak
-  - message: Scopes now properly work with attachment hotkeys.
-    type: Fix
-  - message: Implemented wield delay. You will need to wait a short while after picking
-      up a weapon before you can wield it. Shooting is unaffected. Attachments can
-      affect this.
-    type: Add
-  - message: Added wield slowdown. Wielding certain weapons will slow you down. Attachments
-      can affect this.
-    type: Add
-  - message: Added new sprites for the agrip and vgrip. Sprited by Cepha.
-    type: Tweak
-  - message: Added new sprites for the M54C solid and folding stocks. Sprited by Sigil.
-    type: Tweak
-  id: 345
-  time: '2024-07-09T07:39:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2788
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Patron figurines not being able to fit into helmets.
-    type: Fix
-  id: 346
-  time: '2024-07-11T11:29:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2977
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the defibrillator using the wrong audio, and its audio being able
-      to be spammed.
-    type: Fix
-  - message: Fixed the defibrillator being able to be used on more than one target
-      at the same time.
-    type: Fix
-  id: 347
-  time: '2024-07-11T09:23:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2978
 - author: Adrian16199
   changes:
   - message: Added a new tail for felinid species.
@@ -4746,5 +4611,86 @@
   id: 836
   time: '2024-10-13T06:19:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4437
+- author: Vermidia
+  changes:
+  - message: Fix xeno unlock announcements showing a caste multiple times due to strains
+    type: Fix
+  id: 837
+  time: '2024-10-14T06:40:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4466
+- author: Vermidia
+  changes:
+  - message: Fix xeno fruits blocking bullets. Bullets now always pass over them.
+    type: Fix
+  id: 838
+  time: '2024-10-14T06:42:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4458
+- author: Vermidia
+  changes:
+  - message: Fix pistols from vends and guncases not starting with a magazine
+    type: Fix
+  id: 839
+  time: '2024-10-14T06:41:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4465
+- author: Dutch-VanDerLinde
+  changes:
+  - message: You no longer need to pull down a marine's mask to perform CPR on them
+    type: Tweak
+  id: 840
+  time: '2024-10-14T06:47:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4456
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Changed gun suicide do-after delay from 4 to 2 seconds.
+    type: Tweak
+  id: 841
+  time: '2024-10-14T06:48:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4454
+- author: Vermidia
+  changes:
+  - message: Fix Warden's Aid ability being usable on hive structures
+    type: Fix
+  id: 842
+  time: '2024-10-14T23:00:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4471
+- author: Vermidia
+  changes:
+  - message: Fixed mk80 falloff starting from 3 tiles to starting at 6 tiles.
+    type: Fix
+  id: 843
+  time: '2024-10-14T23:03:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4468
+- author: Rainbeon
+  changes:
+  - message: Fixed xenonids being able to apply acid to the Scout Weapon Specialist's
+      Rifle and Thermal Cloak.
+    type: Fix
+  id: 844
+  time: '2024-10-14T23:04:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4469
+- author: Vermidia
+  changes:
+  - message: Added Avali speech sounds by Nefuki.
+    type: Add
+  id: 845
+  time: '2024-10-15T00:05:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4455
+- author: Vermidia
+  changes:
+  - message: Fixed parasite trap inconsistencies. They now stun for less (2.5->2.0
+      seconds) but parasites will now no longer do a doafter and will instant leap/infect
+      anyone in their radius after 1.5 seconds
+    type: Fix
+  id: 846
+  time: '2024-10-16T00:38:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4487
+- author: Rainbeon
+  changes:
+  - message: The remaining time until you are allowed to become a Parasite is now
+      told to the player when attempting to take a Parasite ghost role from an Egg/Carrier.
+    type: Add
+  id: 847
+  time: '2024-10-16T00:38:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4488
 Name: RMC14
 Order: -1

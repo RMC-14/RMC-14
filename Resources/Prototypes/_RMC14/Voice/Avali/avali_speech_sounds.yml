@@ -1,0 +1,18 @@
+- type: speechSounds
+  id: MaleAvali
+  saySound:
+    path: /Audio/_RMC14/Voice/Avali/avali_1.ogg
+  askSound:
+    path: /Audio/_RMC14/Voice/Avali/avali_1_ask.ogg
+  exclaimSound:
+    path: /Audio/_RMC14/Voice/Avali/avali_1_exclaim.ogg
+
+# Unused but if we get diff supprot for it can add in
+- type: speechSounds
+  id: FemaleAvali
+  saySound:
+    path: /Audio/_RMC14/Voice/Avali/avali_2.ogg
+  askSound:
+    path: /Audio/_RMC14/Voice/Avali/avali_2_ask.ogg
+  exclaimSound:
+    path: /Audio/_RMC14/Voice/Avali/avali_2_exclaim.ogg

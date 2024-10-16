@@ -16,7 +16,7 @@
   id: ActionXenoResinSurge
   parent: ActionXenoBase
   name: Resin Surge (75)
-  description: Speed up plant growth, create temporary walls, or heavily reinforce existing ones. #, or create patches of sticky resin. TODO RMC14
+  description: Speeds up fruit growth by 5 seconds when used on fruit, creates temporary walls when used on weeds or use on existing walls to reinforce them with 6000 hp for 15 seconds. #or create patches of sticky resin. TODO RMC14
   components:
   - type: EntityWorldTargetAction
     itemIconStyle: NoItem
@@ -37,7 +37,7 @@
   parent: ActionXenoBase
   id: ActionXenoRetrieve
   name: Retrieve (180 plasma, 100 energy)
-  description: Pull a xenonid to you if they are in crit, stunned, lying down, or small enough.
+  description: Pull a xenonid to you if they are still, with a 0.6 second doafter.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem

@@ -23,6 +23,7 @@
         whitelist:
           tags:
           - CMMagazinePistolM1984
+        startingItem: CMMagazinePistolM1984
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:

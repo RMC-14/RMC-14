@@ -244,9 +244,10 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         if (!_mapSystem.TryGetTileRef(grid, grid, tile, out var tileRef) ||
             !_tile.TryGetDefinition(tileRef.Tile.TypeId, out var tileDef) ||
-            tileDef is ContentTileDefinition { SemiWeedable: true } && semiWeedable ||
-            tileDef is ContentTileDefinition { WeedsSpreadable: false } ||
-            tileDef.ID == ContentTileDefinition.SpaceID)
+            tileDef.ID == ContentTileDefinition.SpaceID ||
+            (tileDef is ContentTileDefinition { WeedsSpreadable: false } &&
+            !(tileDef is ContentTileDefinition { SemiWeedable: true } && semiWeedable))
+            )
         {
             GenericPopup();
             return false;

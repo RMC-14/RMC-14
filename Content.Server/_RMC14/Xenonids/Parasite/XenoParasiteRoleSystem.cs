@@ -80,10 +80,12 @@ public sealed class XenoEggRoleSystem : EntitySystem
         if (!TryComp(user, out GhostComponent? ghostComp))
             return false;
 
+        var timeSinceDeath = _gameTiming.CurTime.Subtract(ghostComp.TimeOfDeath);
+
         // Must have been dead for 3 minutes
-        if (_gameTiming.CurTime.Subtract(ghostComp.TimeOfDeath) < TimeSpan.FromMinutes(3))
+        if (timeSinceDeath < TimeSpan.FromMinutes(3))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-ghost-need-time"), user, user, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-ghost-need-time", ("seconds", 180 - (int)timeSinceDeath.TotalSeconds)), user, user, PopupType.MediumCaution);
             return false;
         }
 

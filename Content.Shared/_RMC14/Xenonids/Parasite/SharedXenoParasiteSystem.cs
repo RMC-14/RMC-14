@@ -308,7 +308,12 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             return false;
 
         var ev = new AttachParasiteDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, parasite.Comp.ManualAttachDelay, ev, parasite, victim)
+        var delay = parasite.Comp.ManualAttachDelay;
+
+        if (HasComp<TrapParasiteComponent>(parasite))
+            delay = TimeSpan.Zero;
+
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, parasite, victim)
         {
             BreakOnMove = true,
             BlockDuplicate = true,
@@ -383,6 +388,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 if (_random.NextFloat() < ai.IdleChance)
                     GoIdle((parasite, ai));
             }
+
+            if (TryComp<TrapParasiteComponent>(parasite, out var trap))
+                ResetTrapState((parasite.Owner, trap));
         }
 
         if (!TryRipOffClothing(victim, SlotFlags.HEAD))
@@ -455,6 +463,23 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         {
             if (!_mobState.IsDead(uid) && !TerminatingOrDeleted(uid))
                 UpdateAI((uid, ai), time);
+        }
+
+        var trapQuery = EntityQueryEnumerator<TrapParasiteComponent>();
+        while (trapQuery.MoveNext(out var uid, out var trap))
+        {
+            if (trap.LeapAt > time)
+                continue;
+
+            if (_mobState.IsDead(uid) || TerminatingOrDeleted(uid))
+                continue;
+
+            _rmcNpc.WakeNPC(uid);
+
+            if (trap.DisableAt > time)
+                continue;
+
+            RemCompDeferred<TrapParasiteComponent>(uid);
         }
 
         var aiDelayQuery = EntityQueryEnumerator<ParasiteAIDelayAddComponent>();
