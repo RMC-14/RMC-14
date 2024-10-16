@@ -120,7 +120,8 @@
     sprite: _RMC14/Structures/Xenos/xeno_egg.rsi
     drawdepth: Items
     layers:
-    - state: egg_exploding
+    - map: [ "egg" ]
+      state: egg_exploded
   - type: Damageable
     damageContainer: StructuralXeno
   - type: Destructible
@@ -142,3 +143,4 @@
   - type: RequireProjectileTarget
   - type: WhitelistPickupBy
   - type: Appearance
+  - type: DestroyedXenoEgg

@@ -1,16 +1,23 @@
 ﻿using Content.Shared._RMC14.Xenonids.Egg;
+using Robust.Client.Animations;
 using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Xenonids.Egg;
 
 public sealed class XenoEggVisualizerSystem : EntitySystem
 {
+    [Dependency] private readonly AnimationPlayerSystem _animation = default!;
+
+    private const string AnimationKey = "rmc_egg_destroying";
+
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<XenoEggComponent, ComponentStartup>(SetVisuals);
         SubscribeLocalEvent<XenoEggComponent, XenoEggStateChangedEvent>(SetVisuals);
+
+        SubscribeLocalEvent<DestroyedXenoEggComponent, MapInitEvent>(OnMapInit);
     }
 
     private void SetVisuals<T>(Entity<XenoEggComponent> ent, ref T args)
@@ -32,5 +39,29 @@ public sealed class XenoEggVisualizerSystem : EntitySystem
             return;
 
         sprite.LayerSetState(XenoEggLayers.Base, state);
+    }
+
+    private void OnMapInit(Entity<DestroyedXenoEggComponent> ent, ref MapInitEvent args)
+    {
+        if (_animation.HasRunningAnimation(ent, AnimationKey))
+            return;
+
+        _animation.Play(ent,
+           new Animation
+           {
+               Length = ent.Comp.AnimationTime,
+               AnimationTracks =
+               {
+                    new AnimationTrackSpriteFlick
+                    {
+                        LayerKey = ent.Comp.Layer,
+                        KeyFrames =
+                        {
+                            new AnimationTrackSpriteFlick.KeyFrame(ent.Comp.AnimationState, 0f),
+                        },
+                    },
+               },
+           },
+           AnimationKey);
     }
 }
