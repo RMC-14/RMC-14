@@ -667,7 +667,10 @@ public sealed class XenoEggSystem : EntitySystem
                 }
             }
 
-            if (xform.Anchored || egg.State == XenoEggState.Growing)
+            if (!xform.Anchored)
+                continue;
+
+            if (egg.State == XenoEggState.Growing)
             {
                 egg.GrowAt ??= time + _random.Next(egg.MinTime, egg.MaxTime);
 
@@ -677,7 +680,7 @@ public sealed class XenoEggSystem : EntitySystem
                 SetEggState((uid, egg), XenoEggState.Grown);
             }
 
-            if (xform.Anchored || egg.State == XenoEggState.Opening)
+            if (egg.State == XenoEggState.Opening)
             {
                 egg.OpenAt ??= time + egg.EggOpenTime;
 
