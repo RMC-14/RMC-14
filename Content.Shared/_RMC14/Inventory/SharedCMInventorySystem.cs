@@ -8,6 +8,8 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
+using Content.Shared.Storage;
+using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
@@ -143,6 +145,10 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     private void OnSlotsActivateInWorld(Entity<CMItemSlotsComponent> ent, ref ActivateInWorldEvent args)
     {
+        // If holster belongs to storage item, open it instead of unholstering
+        if (HasComp<StorageComponent>(ent))
+            return;
+
         PickupSlot(args.User, ent);
     }
 
@@ -160,6 +166,15 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     protected void OnSlotsEntInsertedIntoContainer(Entity<CMItemSlotsComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
+        var item = args.Entity;
+        var ev = new IsUnholsterableEvent();
+        RaiseLocalEvent(item, ref ev);
+
+        if (ev.Unholsterable &&
+            TryComp(ent, out CMHolsterComponent? holster) &&
+            !holster.Contents.Contains(item))
+            holster.Contents.Add(item);
+
         ContentsUpdated(ent);
     }
 
@@ -170,6 +185,11 @@ public abstract class SharedCMInventorySystem : EntitySystem
             ent.Comp.LastEjectAt = _timing.CurTime;
             Dirty(ent);
         }
+
+        var item = args.Entity;
+        if (TryComp(ent, out CMHolsterComponent? holster) &&
+            holster.Contents.Contains(item))
+            holster.Contents.Remove(item);
 
         ContentsUpdated(ent);
     }
