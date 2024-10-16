@@ -2,6 +2,7 @@
   parent: BaseItem
   id: XenoEgg
   name: egg
+  description: It looks like a weird egg.
   placement:
     mode: SnapgridCenter
     snap:
@@ -51,6 +52,14 @@
         !type:DamageTrigger
         damage: 80
       behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          XenoEggDestroyed:
+            min: 1
+            max: 1
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Xeno/alien_egg_burst.ogg
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
     - trigger:
@@ -72,4 +81,56 @@
       enum.XenoParasiteGhostUI.Key:
         type: XenoParasiteGhostBui
         requireInputValidation: false
+  - type: RequireProjectileTarget
+
+- type: entity
+  id: XenoEggDestroyed
+  name: egg
+  description: A mess of... something.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        layer:
+        - BulletImpassable
+        restitution: 0.3
+        friction: 0.2
+  - type: CollisionWake
+    enabled: false
+  - type: Flammable
+    fireSpread: false
+    damage:
+      types:
+        Heat: 3
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_egg.rsi
+    drawdepth: Items
+    layers:
+    - state: egg_exploding
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 20
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Heat
+        damage: 5
+      behaviors:
+      - !type:BurnBodyBehavior { }
+  - type: Corrodible
+    isCorrodible: false
   - type: RequireProjectileTarget

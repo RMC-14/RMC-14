@@ -337,3 +337,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/7d96ef5970d3e9c5d1d8038aa32b03ffa3ea8403/sound/effects/alien_egg_move.ogg"
+
+- files: ["alien_egg_burst.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/effects/alien_egg_burst.ogg"
