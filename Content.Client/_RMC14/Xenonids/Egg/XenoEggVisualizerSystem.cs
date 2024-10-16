@@ -17,7 +17,7 @@ public sealed class XenoEggVisualizerSystem : EntitySystem
         SubscribeLocalEvent<XenoEggComponent, ComponentStartup>(SetVisuals);
         SubscribeLocalEvent<XenoEggComponent, XenoEggStateChangedEvent>(SetVisuals);
 
-        SubscribeLocalEvent<DestroyedXenoEggComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<DestroyedXenoEggComponent, ComponentStartup>(OnStartup);
     }
 
     private void SetVisuals<T>(Entity<XenoEggComponent> ent, ref T args)
@@ -41,7 +41,7 @@ public sealed class XenoEggVisualizerSystem : EntitySystem
         sprite.LayerSetState(XenoEggLayers.Base, state);
     }
 
-    private void OnMapInit(Entity<DestroyedXenoEggComponent> ent, ref MapInitEvent args)
+    private void OnStartup(Entity<DestroyedXenoEggComponent> ent, ref ComponentStartup args)
     {
         if (_animation.HasRunningAnimation(ent, AnimationKey))
             return;
