@@ -401,10 +401,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 existing++;
             }
 
-            if (_xenoHive.TryGetFreeSlots((oldHive, oldHive.Comp), newXeno, out var freeSlots))
-                existing -= freeSlots;
-
-            if (total != 0 && existing / (float) total >= limit)
+            if (total != 0 && existing / (float) total >= limit && !HasFreeSlotsAvailible(newXeno, oldHive))
             {
                 if (doPopup)
                 {
@@ -421,6 +418,15 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         return true;
+    }
+
+    private bool HasFreeSlotsAvailible(EntProtoId caste, Entity<HiveComponent> hive)
+    {
+        if (!_xenoHive.TryGetFreeSlots((hive, hive.Comp), caste, out var freeSlots))
+            return false;
+
+        //Returns true if we have less than that caste for the slot (Assuming role Id = caste defined here, which it should)
+        return !HasLiving<XenoComponent>(freeSlots, e => e.Comp.Role.Id == caste);
     }
 
     private bool CanEvolveAny(Entity<XenoEvolutionComponent> xeno)
