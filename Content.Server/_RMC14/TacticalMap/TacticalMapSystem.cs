@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Server._RMC14.Announce;
 using Content.Server._RMC14.Marines;
 using Content.Server.Administration.Logs;
@@ -8,6 +8,8 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Actions;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Database;
@@ -30,6 +32,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly XenoEvolutionSystem _evolution = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
@@ -71,10 +74,13 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         _transformQuery = GetEntityQuery<TransformComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
 
+        SubscribeLocalEvent<XenoOvipositorChangedEvent>(OnOvipositorChanged);
+
         SubscribeLocalEvent<TacticalMapComponent, MapInitEvent>(OnTacticalMapMapInit);
 
         SubscribeLocalEvent<TacticalMapUserComponent, MapInitEvent>(OnUserMapInit);
         SubscribeLocalEvent<TacticalMapUserComponent, OpenTacticalMapActionEvent>(OnUserOpenAction);
+        SubscribeLocalEvent<TacticalMapUserComponent, OpenTacMapAlertEvent>(OnUserOpenAlert);
 
         SubscribeLocalEvent<TacticalMapComputerComponent, MapInitEvent>(OnComputerMapInit);
         SubscribeLocalEvent<TacticalMapComputerComponent, BeforeActivatableUIOpenEvent>(OnComputerBeforeUIOpen);
@@ -91,6 +97,9 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         SubscribeLocalEvent<RottingComponent, MapInitEvent>(OnRottingMapInit);
         SubscribeLocalEvent<RottingComponent, ComponentRemove>(OnRottingRemove);
+
+        SubscribeLocalEvent<TacticalMapLiveUpdateOnOviComponent, MapInitEvent>(OnLiveUpdateOnOviMapInit);
+        SubscribeLocalEvent<TacticalMapLiveUpdateOnOviComponent, MobStateChangedEvent>(OnLiveUpdateOnOviStateChanged);
 
         Subs.BuiEvents<TacticalMapUserComponent>(TacticalMapUserUi.Key,
             subs =>
@@ -115,6 +124,19 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             RMCCVars.RMCTacticalMapUpdateEverySeconds,
             v => _mapUpdateEvery = TimeSpan.FromSeconds(v),
             true);
+    }
+
+    private void OnOvipositorChanged(ref XenoOvipositorChangedEvent ev)
+    {
+        var users = EntityQueryEnumerator<TacticalMapLiveUpdateOnOviComponent, TacticalMapUserComponent>();
+        while (users.MoveNext(out var uid, out var onOvi, out var user))
+        {
+            if (!onOvi.Enabled)
+                continue;
+
+            user.LiveUpdate = ev.Attached;
+            Dirty(uid, user);
+        }
     }
 
     private void OnTacticalMapMapInit(Entity<TacticalMapComponent> ent, ref MapInitEvent args)
@@ -149,6 +171,13 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (TryGetTacticalMap(out var map))
             UpdateUserData(ent, map);
 
+        _ui.TryOpenUi(ent.Owner, TacticalMapUserUi.Key, ent);
+    }
+
+    private void OnUserOpenAlert(Entity<TacticalMapUserComponent> ent, ref OpenTacMapAlertEvent args)
+    {
+        if (TryGetTacticalMap(out var map))
+            UpdateUserData(ent, map);
         _ui.TryOpenUi(ent.Owner, TacticalMapUserUi.Key, ent);
     }
 
@@ -220,6 +249,24 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     {
         if (_activeTacticalMapTrackedQuery.TryComp(ent, out var active))
             UpdateTracked((ent, active));
+    }
+
+    private void OnLiveUpdateOnOviMapInit(Entity<TacticalMapLiveUpdateOnOviComponent> ent, ref MapInitEvent args)
+    {
+        if (!ent.Comp.Enabled ||
+            !TryComp(ent, out TacticalMapUserComponent? user))
+        {
+            return;
+        }
+
+        user.LiveUpdate = _evolution.HasOvipositor();
+        Dirty(ent, user);
+    }
+
+    private void OnLiveUpdateOnOviStateChanged(Entity<TacticalMapLiveUpdateOnOviComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState == MobState.Dead)
+            RemCompDeferred<TacticalMapLiveUpdateOnOviComponent>(ent);
     }
 
     private void OnUserBUIOpened(Entity<TacticalMapUserComponent> ent, ref BoundUIOpenedEvent args)

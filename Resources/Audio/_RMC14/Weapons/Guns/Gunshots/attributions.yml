@@ -43,6 +43,11 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/8086109b2dbf8d1d98aec106a07d86b65fe63e1b/sound/weapons/gun_m4ra.ogg"
 
+- files: ["gun_m16.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Made by WebKnight"
+  source: "https://github.com/cmss13-devs/cmss13/blob/5db92c87812e21fa7f9343758e96f49ef1e01c3f/sound/weapons/gun_m16.ogg"
+
 - files: ["gun_m63.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
@@ -78,6 +83,16 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/8086109b2dbf8d1d98aec106a07d86b65fe63e1b/sound/weapons/gun_m92_attachable.ogg"
 
+- files: ["Gunshot.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8086109b2dbf8d1d98aec106a07d86b65fe63e1b/sound/weapons/Gunshot.ogg"
+
+- files: ["gun_uzi.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/c61de09c61ec2be27f4da34fcde9d0c3fbef7453/sound/weapons/gun_uzi.ogg"
+
 - files: ["m79_shoot.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
@@ -98,3 +113,13 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/b72dc18a26d2f4b5072d2b65145d6130036e0755/sound/weapons/gun_rocketlauncher.ogg"
+
+- files: ["smg_light.orgg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/21e6447cc08aea502f671c819fdbcecbb85e6028master/sound/weapons/smg_light.ogg"
+
+- files: ["gun_ar10.orgg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/eb11a226994fb140fb0f713dd05525a0f8b3b3ae/sound/weapons/gun_ar10.ogg"

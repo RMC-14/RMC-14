@@ -1,0 +1,105 @@
+- type: entity
+  parent: CMBaseWeaponRifle
+  name: AR10 Assault Rifle
+  id: WeaponRifleAR10
+  description: An earlier version of the more widespread M16 rifle. Considered to be the father of the 20th century rifle. How one of these ended up here is a mystery of its own. It is chambered in 7.62x51mm.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/ar10.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi # TODO RMC14 effects
+      state: ar10_stock
+      offset: -0.5, 0
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/ar10.rsi
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    soundGunshot:
+      collection: CMAR10Shoot
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    recoilUnwielded: 3
+    scatterWielded: 4
+    scatterUnwielded: 20
+    baseFireRate: 2
+    burstScatterMult: 2
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleAR10
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleAR10
+  - type: GunDamageModifier
+    multiplier: 1.4
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineRifleAR10
+  name: "AR10 Magazine (7.62x51mm)"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleAR10
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifleAR10
+    proto: RMCCartridgeRifleAR10
+    capacity: 20
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/ar10.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifleAR10
+  name: Cartridge (7.62x51)
+  description: A 7.62x51 rifle cartridge
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleAR10
+  - type: CartridgeAmmo
+    proto: BulletRifle10x24mm
+
+- type: entity
+  parent: BaseBullet
+  id: BulletRifleAR10
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 56
+
+- type: Tag
+  id: RMCMagazineRifleAR10
+
+- type: Tag
+  id: RMCCartridgeRifleAR10

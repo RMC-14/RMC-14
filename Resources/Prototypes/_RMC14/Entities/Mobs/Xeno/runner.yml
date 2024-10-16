@@ -33,6 +33,7 @@
         - Impassable
         - HighImpassable
         - LowImpassable
+        - BarbedBarricade
         layer:
         - MobLayer
       fix2:
@@ -63,8 +64,6 @@
   - type: XenoBoneChips
   - type: XenoDevour
   - type: XenoHide
-  - type: SlowOnPull
-    multiplier: 0.3
   - type: XenoLeap
     delay: 0
     knockdownTime: 2

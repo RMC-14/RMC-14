@@ -8,9 +8,9 @@ cm-xeno-construction-resin-hole-full = The resin trap already has something in i
 cm-xeno-construction-resin-hole-failed-must-weeds = Resin holes must be built on weeds.
 cm-xeno-construction-resin-hole-blocked = There's something built here already.
 cm-xeno-construction-resin-hole-too-close = There are other resin holes nearby!
-cm-xeno-construction-resin-hole-burned-down = Resin trap burned down at {$location}.
-cm-xeno-construction-resin-hole-destroyed = Resin trap destroyed at {$location}.
-rmc-xeno-construction-resin-hole-activate = Resin trap triggered at {$location}.
+cm-xeno-construction-resin-hole-burned-down = We sense one of our Hive's {$type} traps at {$location} has been burnt!
+cm-xeno-construction-resin-hole-destroyed = We sense one of our Hive's {$type} traps at {$location} has been destroyed!
+rmc-xeno-construction-resin-hole-activate = We sense one of our Hive's {$type} traps at {$location} has been triggered!
 rmc-xeno-construction-resin-hole-no-acid = We can't secrete any acid into the resin hole!
 rmc-xeno-construction-resin-hole-good-acid = It already has good acid in.
 
@@ -30,3 +30,8 @@ rmc-xeno-construction-resin-hole-empty = It's empty.
 rmc-xeno-construction-resin-hole-parasite = There's a little one inside.
 rmc-xeno-construction-resin-hole-gas = It's filled with pressurised gas.
 rmc-xeno-construction-resin-hole-acid = It's filled with pressurised acid.
+
+rmc-xeno-construction-resin-hole-empty-name = empty
+rmc-xeno-construction-resin-hole-parasite-name = parasite
+rmc-xeno-construction-resin-hole-gas-name = gas
+rmc-xeno-construction-resin-hole-acid-name = acid

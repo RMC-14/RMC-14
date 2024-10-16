@@ -40,6 +40,7 @@
     tier: 2
     hudOffset: 0,0.56
     unlockAt: 420 # 7 minutes
+    hidden: true # TODO RMC: remove when burrower is implemented
   - type: XenoDevolve
     devolvesTo:
     - CMXenoDrone

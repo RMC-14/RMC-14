@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Water;
 using Content.Shared.Movement.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Physics.Components;
@@ -11,6 +12,7 @@ public sealed class SpeedModifierContactsSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speedModifierSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly RMCWaterSystem _rmcWater = default!;
 
     // TODO full-game-save
     // Either these need to be processed before a map is saved, or slowed/slowing entities need to update on init.
@@ -120,6 +122,9 @@ public sealed class SpeedModifierContactsSystem : EntitySystem
     {
         var otherUid = args.OtherEntity;
         if (!HasComp<MovementSpeedModifierComponent>(otherUid))
+            return;
+
+        if (!_rmcWater.CanCollide(uid, otherUid))
             return;
 
         EnsureComp<SpeedModifiedByContactComponent>(otherUid);

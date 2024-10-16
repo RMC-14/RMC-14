@@ -13,6 +13,6 @@ public sealed partial class RandomAnchoredSpawnerComponent : Component
     [DataField(required: true)]
     public EntProtoId Group;
 
-    [DataField(required: true), AutoNetworkedField]
+    [DataField(required: true)]
     public EntProtoId? Spawn;
 }

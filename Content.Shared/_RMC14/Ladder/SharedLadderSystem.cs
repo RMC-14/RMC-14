@@ -5,8 +5,6 @@ using Content.Shared.DragDrop;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Events;
-using Content.Shared.Movement.Pulling.Components;
-using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Network;
@@ -19,10 +17,10 @@ public abstract class SharedLadderSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
     [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -182,10 +180,19 @@ public abstract class SharedLadderSystem : EntitySystem
             return;
 
         var user = args.User;
+        if (!CanWatchPopup(ent, user))
+            return;
+
         args.Verbs.Add(new AlternativeVerb
         {
             Priority = 100,
-            Act = () => Watch(user, other),
+            Act = () =>
+            {
+                if (!CanWatchPopup(ent, user))
+                    return;
+
+                Watch(user, other);
+            },
             Text = Loc.GetString("rmc-ladder-look-through"),
         });
     }
@@ -206,14 +213,18 @@ public abstract class SharedLadderSystem : EntitySystem
 
     private void OnLadderDragDropDragged(Entity<LadderComponent> ent, ref DragDropDraggedEvent args)
     {
+        var user = args.User;
         if (ent.Comp.Other is not { } other ||
-            args.User != args.Target)
+            user != args.Target)
         {
             return;
         }
 
+        if (!CanWatchPopup(ent, user))
+            return;
+
         args.Handled = true;
-        Watch(args.User, other);
+        Watch(user, other);
     }
 
     private void OnWatchingMoveInput(Entity<LadderWatchingComponent> ent, ref MoveInputEvent args)
@@ -245,6 +256,14 @@ public abstract class SharedLadderSystem : EntitySystem
             return;
 
         _eye.SetTarget(watcher, watcher, watcher);
+    }
+
+    protected bool CanWatchPopup(Entity<LadderComponent> ladder, EntityUid user)
+    {
+        if (!_interaction.InRangeUnobstructed(user, ladder.Owner, popup: true))
+            return false;
+
+        return true;
     }
 
     public override void Update(float frameTime)

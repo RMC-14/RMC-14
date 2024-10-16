@@ -57,7 +57,7 @@
       groups:
         Brute: 40
   - type: Tackle # min: 2, max: 5
-    threshold: 3
+    threshold: 4
     stun: 5
     chance: 0.45
   - type: Fixtures
@@ -69,6 +69,7 @@
         density: 185
         mask:
         - MobMask
+        - BarbedBarricade
         layer:
         - MobLayer
       fix2:
@@ -94,6 +95,8 @@
       sprite: _RMC14/Interface/map_blips.rsi
       state: praetorian
   - type: AcidTrap
+  - type: SlowOnPull
+    multiplier: 0.5
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -140,6 +143,7 @@
     - ActionXenoRetrieve
     - ActionXenoAidToggle
     - ActionXenoDevolve
+    hidden: true
   - type: XenoStrain
     name: rmc-xeno-warden-name
     description: rmc-xeno-warden-description

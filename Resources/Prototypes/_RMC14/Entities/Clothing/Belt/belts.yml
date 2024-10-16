@@ -30,7 +30,7 @@
     whitelist:
       tags:
       - Flare
-#      - # TODO RMC14 shotgun shell handfuls
+      - RMCShellShotgun
       - CMMagazinePistol
       - RMCMagazineRevolver
       - CMMagazineRifle
@@ -41,6 +41,32 @@
 #      - # TODO RMC14 snacks
       components:
       - BallisticAmmoProvider
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
+  - type: FixedItemSizeStorage
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCM276ShotgunShellLoadingRig
+  name: M276 pattern shotgun shell loading rig
+  description: An ammunition belt designed to hold shotgun shells. # or individual bullets. TODO RMC14
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/shotgun.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/shotgun.rsi
+  - type: Item
+    size: Large
+  - type: Storage
+    maxItemSize: Large
+    grid:
+    - 0,0,13,3 # 14 slots
+    whitelist:
+      tags:
+      - RMCShellShotgun
   - type: IgnoreContentsSize
     items:
       tags:
@@ -117,7 +143,7 @@
       - RMCMagazineRevolver
       - PowerCell
       - CMFireExtinguisherPortable
-#      - # TODO RMC14 handful of shotgun shells
+      - RMCShellShotgun
 #      - # TODO nailgun, circuit board
       components:
       - Welder
@@ -279,7 +305,7 @@
       - CMMagazineSmg
       - CMMagazineSniper
       - RMCMagazineSmartGun
-#      - # TODO RMC14 shotgun handfuls
+      - RMCShellShotgun
       - Flare
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
@@ -365,6 +391,10 @@
     maxItemSize: Normal
     grid:
     - 0,0,9,1 # 9 slots
+    blacklist:
+      tags:
+      - CMFirstAidKit # TODO RMC14
+  #      - EngineerKit # TODO RMC14
   - type: Tag
     tags:
     - RMCG8Pouch
