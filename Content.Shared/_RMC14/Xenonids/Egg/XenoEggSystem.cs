@@ -453,7 +453,7 @@ public sealed class XenoEggSystem : EntitySystem
         egg.Comp.SpawnedCreature = spawned;
         Dirty(egg);
 
-        var eggContainer = _container.EnsureContainer<ContainerSlot>(spawned.Value, egg.Comp.CreatureContainerId);
+        var eggContainer = _container.EnsureContainer<ContainerSlot>(egg.Owner, egg.Comp.CreatureContainerId);
         _container.Insert(spawned.Value, eggContainer);
 
         // TODO: create EggHatchedEvent to uncouple it from ai?
