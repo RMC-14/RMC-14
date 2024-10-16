@@ -55,6 +55,7 @@
         whitelist:
           tags:
           - GlassBeaker
+          - ChemDispensable
   - type: ContainerContainer
     containers:
       chemical_dispenser_slot: !type:ContainerSlot
