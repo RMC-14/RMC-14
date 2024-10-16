@@ -74,7 +74,7 @@ public sealed partial class XenoEggComponent : Component
 
     public SoundSpecifier PlantSound = new SoundPathSpecifier("/Audio/Effects/Fluids/splat.ogg");
 
-    public SoundSpecifier EggOpenSound = new SoundPathSpecifier("/Audio/Effects/Fluids/splat.ogg");
+    public SoundSpecifier OpenSound = new SoundPathSpecifier("/Audio/Effects/Fluids/splat.ogg");
 }
 
 [Serializable, NetSerializable]

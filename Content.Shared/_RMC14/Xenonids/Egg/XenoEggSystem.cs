@@ -441,6 +441,7 @@ public sealed class XenoEggSystem : EntitySystem
         }
 
         SetEggState(egg, XenoEggState.Opening);
+        _audio.PlayPredicted(egg.Comp.OpenSound, egg, user);
 
         if (_net.IsClient)
             return true;
@@ -690,7 +691,12 @@ public sealed class XenoEggSystem : EntitySystem
                 if (_container.TryGetContainer(uid, egg.CreatureContainerId, out var container))
                     _container.EmptyContainer(container, destination: coords);
 
-                if (egg.InfectTarget != null && egg.SpawnedCreature != null)
+                if (egg.SpawnedCreature == null)
+                    continue;
+
+                _jitter.DoJitter(egg.SpawnedCreature.Value, egg.CreatureExitEggJitterDuration, true, 80, 8, true);
+
+                if (egg.InfectTarget != null)
                 {
                     if (TryComp<XenoParasiteComponent>(egg.SpawnedCreature, out var para))
                     {
