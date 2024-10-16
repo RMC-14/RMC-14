@@ -11,6 +11,6 @@ public sealed partial class DestroyedXenoEggComponent : Component
     [DataField(required: true), AutoNetworkedField]
     public TimeSpan AnimationTime = TimeSpan.FromSeconds(0.7);
 
-	[DataField, AutoNetworkedField]
-	public string Layer = "egg";
+    [DataField, AutoNetworkedField]
+    public string Layer = "egg";
 }
