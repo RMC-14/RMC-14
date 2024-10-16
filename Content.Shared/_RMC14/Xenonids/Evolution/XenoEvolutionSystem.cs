@@ -388,6 +388,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             var existing = 0;
             var total = 0;
             var current = EntityQueryEnumerator<XenoComponent, HiveMemberComponent>();
+            var slotCount = oldHive.Comp.FreeSlots.ToDictionary();
             while (current.MoveNext(out var existingComp, out var member))
             {
                 if (member.Hive != oldHive.Owner || !existingComp.CountedInSlots)
@@ -398,7 +399,10 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 if (existingComp.Tier < newXenoComp.Tier)
                     continue;
 
-                existing++;
+                if (slotCount.ContainsKey(newXeno) && slotCount[newXeno] > 0)
+                    slotCount[newXeno] -= 1;
+                else
+                    existing++;
             }
 
             if (total != 0 && existing / (float) total >= limit && !HasFreeSlotsAvailible(newXeno, oldHive))
