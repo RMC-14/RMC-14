@@ -24,6 +24,7 @@ public sealed class XenoEggVisualizerSystem : EntitySystem
             XenoEggState.Growing => ent.Comp.GrowingState,
             XenoEggState.Grown => ent.Comp.GrownState,
             XenoEggState.Opened => ent.Comp.OpenedState,
+            XenoEggState.Opening => ent.Comp.OpeningState,
             _ => null
         };
 
