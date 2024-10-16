@@ -8,6 +8,8 @@
     snap:
     - Wall
   components:
+  - type: Item
+    size: Ginormous
   - type: Fixtures
     fixtures:
       fix1:
@@ -142,5 +144,4 @@
     isCorrodible: false
   - type: RequireProjectileTarget
   - type: WhitelistPickupBy
-  - type: Appearance
   - type: DestroyedXenoEgg
