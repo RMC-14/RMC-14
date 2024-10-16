@@ -710,6 +710,7 @@ public sealed class XenoEggSystem : EntitySystem
 
                 egg.InfectTarget = null;
                 egg.SpawnedCreature = null;
+                egg.OpenAt = null;
                 Dirty(uid, egg);
             }
         }

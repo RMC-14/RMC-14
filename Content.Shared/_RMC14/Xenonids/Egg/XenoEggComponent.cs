@@ -19,7 +19,7 @@ public sealed partial class XenoEggComponent : Component
     public TimeSpan MaxTime = TimeSpan.FromSeconds(15);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan EggOpenTime = TimeSpan.FromSeconds(1);
+    public TimeSpan EggOpenTime = TimeSpan.FromSeconds(0.9);
 
     [DataField, AutoNetworkedField]
     public TimeSpan KnockdownTime = TimeSpan.FromSeconds(1);
