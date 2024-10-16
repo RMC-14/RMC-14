@@ -1,22 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Patron figurines not being able to fit into helmets.
-    type: Fix
-  id: 346
-  time: '2024-07-11T11:29:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2977
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the defibrillator using the wrong audio, and its audio being able
-      to be spammed.
-    type: Fix
-  - message: Fixed the defibrillator being able to be used on more than one target
-      at the same time.
-    type: Fix
-  id: 347
-  time: '2024-07-11T09:23:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2978
 - author: Adrian16199
   changes:
   - message: Added a new tail for felinid species.
@@ -4693,5 +4675,22 @@
   id: 845
   time: '2024-10-15T00:05:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4455
+- author: Vermidia
+  changes:
+  - message: Fixed parasite trap inconsistencies. They now stun for less (2.5->2.0
+      seconds) but parasites will now no longer do a doafter and will instant leap/infect
+      anyone in their radius after 1.5 seconds
+    type: Fix
+  id: 846
+  time: '2024-10-16T00:38:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4487
+- author: Rainbeon
+  changes:
+  - message: The remaining time until you are allowed to become a Parasite is now
+      told to the player when attempting to take a Parasite ghost role from an Egg/Carrier.
+    type: Add
+  id: 847
+  time: '2024-10-16T00:38:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4488
 Name: RMC14
 Order: -1
