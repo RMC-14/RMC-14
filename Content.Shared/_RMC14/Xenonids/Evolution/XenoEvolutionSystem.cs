@@ -228,7 +228,10 @@ public sealed class XenoEvolutionSystem : EntitySystem
         Del(xeno.Owner);
 
         _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-devolve", ("xeno", newXeno)), newXeno, newXeno, PopupType.LargeCaution);
-    }
+
+		var afterEv = new AfterNewXenoEvolvedEvent();
+		RaiseLocalEvent(newXeno, ref afterEv);
+	}
 
     private void OnXenoEvolveDoAfter(Entity<XenoEvolutionComponent> xeno, ref XenoEvolutionDoAfterEvent args)
     {
@@ -399,13 +402,13 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 if (existingComp.Tier < newXenoComp.Tier)
                     continue;
 
-                if (slotCount.ContainsKey(newXeno) && slotCount[newXeno] > 0)
-                    slotCount[newXeno] -= 1;
+                if (slotCount.ContainsKey(existingComp.Role.Id) && slotCount[existingComp.Role.Id] > 0)
+                    slotCount[existingComp.Role.Id] -= 1;
                 else
                     existing++;
             }
 
-            if (total != 0 && existing / (float) total >= limit && !HasFreeSlotsAvailible(newXeno, oldHive))
+            if (total != 0 && existing / (float) total >= limit && (!slotCount.ContainsKey(newXeno) || slotCount[newXeno] <= 0))
             {
                 if (doPopup)
                 {
@@ -422,15 +425,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         return true;
-    }
-
-    private bool HasFreeSlotsAvailible(EntProtoId caste, Entity<HiveComponent> hive)
-    {
-        if (!_xenoHive.TryGetFreeSlots((hive, hive.Comp), caste, out var freeSlots))
-            return false;
-
-        //Returns true if we have less than that caste for the slot (Assuming role Id = caste defined here, which it should)
-        return !HasLiving<XenoComponent>(freeSlots, e => e.Comp.Role.Id == caste);
     }
 
     private bool CanEvolveAny(Entity<XenoEvolutionComponent> xeno)
