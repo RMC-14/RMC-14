@@ -76,6 +76,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         SubscribeLocalEvent<XenoEvolutionComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
         SubscribeLocalEvent<XenoEvolutionComponent, NewXenoEvolvedEvent>(OnXenoEvolutionNewEvolved);
         SubscribeLocalEvent<XenoEvolutionComponent, XenoDevolvedEvent>(OnXenoEvolutionDevolved);
+        SubscribeLocalEvent<XenoEvolutionComponent, AfterNewXenoEvolvedEvent>(OnAfterNewXenoEvolved);
 
         SubscribeLocalEvent<XenoNewlyEvolvedComponent, PreventCollideEvent>(OnNewlyEvolvedPreventCollide);
 
@@ -276,6 +277,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private void OnXenoEvolutionDevolved(Entity<XenoEvolutionComponent> xeno, ref XenoDevolvedEvent args)
     {
         TransferPoints(args.OldXeno, (xeno, xeno), false);
+    }
+
+    private void OnAfterNewXenoEvolved(Entity<XenoEvolutionComponent> xeno, ref AfterNewXenoEvolvedEvent args)
+    {
+        _jitter.DoJitter(xeno, xeno.Comp.EvolutionJitterDuration, true, 80, 8, true);
     }
 
     private void TransferPoints(Entity<XenoEvolutionComponent?> old, Entity<XenoEvolutionComponent> xeno, bool subtract)
