@@ -461,6 +461,17 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             {
                 map.MarineLines = lines;
                 map.LastUpdateMarineBlips = map.MarineBlips.ToDictionary();
+
+                var includeEv = new TacticalMapIncludeXenosEvent();
+                RaiseLocalEvent(ref includeEv);
+                if (includeEv.Include)
+                {
+                    foreach (var blip in map.XenoBlips)
+                    {
+                        map.LastUpdateMarineBlips.Add(blip.Key, blip.Value);
+                    }
+                }
+
                 _marineAnnounce.AnnounceARES(user, "The UNMC tactical map has been updated.", sound);
                 _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the marine tactical map for {{ToPrettyString(mapId)}}");
             }
