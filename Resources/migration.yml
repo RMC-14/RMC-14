@@ -519,7 +519,7 @@ BookChefGaming: BookHowToCookForFortySpaceman
 IntercomAssesmbly: IntercomAssembly
 
 # 2024-07-1
-CMDispenserChem : RMCDispenserChem
+CMDispenserChem : RMCChemDispenserGround
 
 # 2024-07-7
 SignScience1: SignScience
@@ -858,3 +858,7 @@ ClothingHeadHatHardhatBlue: RMCHardhatBlue
 # 2024-10-11
 Crowbar: CMCrowbar
 CrowbarRed: CMCrowbarRed
+
+# 2024-10-15
+RMCDispenserChemEmpty: RMCChemDispenserGround
+RMCDispenserChem: RMCChemDispenserGround
