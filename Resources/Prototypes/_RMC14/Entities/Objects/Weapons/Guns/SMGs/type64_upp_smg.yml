@@ -109,14 +109,14 @@
   description: The standard submachinegun of the UPP, sporting an unusual 64 round helical magazine, it has a high fire-rate, but is unusually accurate. 
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/type64.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/type64.rsi
   - type: Gun
     shotsPerBurst: 4
     soundGunshot:
@@ -176,13 +176,17 @@
   id: CMMagazineSMGT64HM
   name: "Type 64 Helical Magazine"
   components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - CMMagazineSMGT64HM
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
       - CMCartridge762x19mm
     proto: CMCartridge762x19mm
-    capacity: 48
+    capacity: 64
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/t64.rsi
     layers:
