@@ -47,7 +47,7 @@
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/type64.rsi
   - type: Gun
     shotsPerBurst: 4
     soundGunshot:
@@ -170,3 +170,44 @@
     offsets:
       rmc-aslot-barrel: 0.715, 0.092
       rmc-aslot-rail: 0.032, 0.155
+
+- type: entity
+  parent: BaseMagazineRifle
+  id: CMMagazineSMGT64HM
+  name: "Type 64 Helical Magazine"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSMGT64HM
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridge762x19mm
+    proto: CMCartridge762x19mm
+    capacity: 48
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/t64.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: Appearance
+
+- type: entity
+  parent: CMCartridgeSMGBase
+  id: CMCartridge762x19mm
+  name: cartridge (7.62x19mm)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridge762x19mm
+  - type: CartridgeAmmo
+    proto: Bullet10x20mm
