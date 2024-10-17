@@ -47,8 +47,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
         ent.Comp.LastToggle = time;
 
-        // TODO RMC14 evacuation start sound
-        _evacuation.ToggleEvacuation(null, null);
+        _evacuation.ToggleEvacuation(ent.Comp.EvacuationStartSound, ent.Comp.EvacuationCancelledSound);
         RefreshComputers();
     }
 
