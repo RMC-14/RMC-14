@@ -12,6 +12,7 @@ jobs:
   build:
     if: github.actor != 'RounyBot' && github.event.pull_request.draft == false
     strategy:
+      fail-fast: true
       matrix:
         os: [ubuntu-22.04]
 
