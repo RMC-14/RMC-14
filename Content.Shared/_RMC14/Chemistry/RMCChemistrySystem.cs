@@ -1,7 +1,12 @@
 ﻿using System.Linq;
+using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
+using Content.Shared.Popups;
+using Content.Shared.Verbs;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -14,6 +19,8 @@ public sealed class RMCChemistrySystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -21,7 +28,12 @@ public sealed class RMCChemistrySystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<DetailedExaminableSolutionComponent, ExaminedEvent>(OnDetailedSolutionExamined);
+
         SubscribeLocalEvent<RMCChemicalDispenserComponent, MapInitEvent>(OnDispenserMapInit);
+
+        SubscribeLocalEvent<RMCToggleableSolutionTransferComponent, MapInitEvent>(OnToggleableSolutionTransferMapInit);
+        SubscribeLocalEvent<RMCToggleableSolutionTransferComponent, GetVerbsEvent<AlternativeVerb>>(OnToggleableSolutionTransferVerbs);
 
         Subs.BuiEvents<RMCChemicalDispenserComponent>(RMCChemicalDispenserUi.Key,
             subs =>
@@ -33,9 +45,76 @@ public sealed class RMCChemistrySystem : EntitySystem
             });
     }
 
+    private void OnDetailedSolutionExamined(Entity<DetailedExaminableSolutionComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(DetailedExaminableSolutionComponent)))
+        {
+            args.PushText("It contains:");
+            if (!_solution.TryGetSolution(ent.Owner, ent.Comp.Solution, out _, out var solution) ||
+                solution.Volume <= FixedPoint2.Zero)
+            {
+                args.PushText("Nothing.");
+            }
+            else
+            {
+                foreach (var reagent in solution.Contents)
+                {
+                    var name = reagent.Reagent.Prototype;
+                    if (_prototypes.TryIndex(reagent.Reagent.Prototype, out ReagentPrototype? reagentProto))
+                        name = reagentProto.LocalizedName;
+
+                    args.PushText($"{reagent.Quantity.Int()} units of {name}");
+                }
+
+                args.PushText($"Total volume: {solution.Volume} / {solution.MaxVolume}.");
+            }
+        }
+    }
+
     private void OnDispenserMapInit(Entity<RMCChemicalDispenserComponent> ent, ref MapInitEvent args)
     {
         _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.ContainerSlotId);
+    }
+
+    private void OnToggleableSolutionTransferMapInit(Entity<RMCToggleableSolutionTransferComponent> ent, ref MapInitEvent args)
+    {
+        RemCompDeferred<DrainableSolutionComponent>(ent);
+        var refillable = EnsureComp<RefillableSolutionComponent>(ent);
+        refillable.Solution = ent.Comp.Solution;
+        Dirty(ent, refillable);
+    }
+
+    private void OnToggleableSolutionTransferVerbs(Entity<RMCToggleableSolutionTransferComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
+        var user = args.User;
+        var dispensing = HasComp<DrainableSolutionComponent>(ent);
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Text = dispensing ? "Enable drawing" : "Enable dispensing",
+            Act = () =>
+            {
+                dispensing = HasComp<DrainableSolutionComponent>(ent);
+                if (dispensing)
+                {
+                    RemCompDeferred<DrainableSolutionComponent>(ent);
+                    var refillable = EnsureComp<RefillableSolutionComponent>(ent);
+                    refillable.Solution = ent.Comp.Solution;
+                    Dirty(ent, refillable);
+                    _popup.PopupClient("Now drawing", ent, user, PopupType.Medium);
+                }
+                else
+                {
+                    RemCompDeferred<RefillableSolutionComponent>(ent);
+                    var drainable = EnsureComp<DrainableSolutionComponent>(ent);
+                    drainable.Solution = ent.Comp.Solution;
+                    Dirty(ent, drainable);
+                    _popup.PopupClient("Now dispensing", ent, user, PopupType.Medium);
+                }
+            },
+        });
     }
 
     private void OnChemicalDispenserSettingMsg(Entity<RMCChemicalDispenserComponent> ent, ref RMCChemicalDispenserDispenseSettingBuiMsg args)

@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b5a595ce32f9bb4fc8abde0efe21196b3862d8bf/icons/obj/objects.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "weldtank"
+    },
+    {
+      "name": "watertank"
+    },
+    {
+      "name": "methanetank"
+    },
+    {
+      "name": "hydrogentank"
+    },
+    {
+      "name": "ammoniatank"
+    },
+    {
+      "name": "pacidtank"
+    },
+    {
+      "name": "oxygentank"
+    },
+    {
+      "name": "sacidtank"
+    },
+    {
+      "name": "ethanoltank"
+    },
+    {
+      "name": "tank_normal"
+    },
+    {
+      "name": "tank_explosive"
+    },
+    {
+      "name": "te_color"
+    },
+    {
+      "name": "tn_color"
+    },
+    {
+      "name": "tn_color-1"
+    },
+    {
+      "name": "tn_color-2"
+    },
+    {
+      "name": "te_color-1"
+    },
+    {
+      "name": "te_color-2"
+    }
+  ]
+}
