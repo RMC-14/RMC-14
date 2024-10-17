@@ -3,6 +3,16 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/effects/bamf.ogg"
 
+- files: ["motion_detector.ogg"]
+  license: "Public Domain"
+  copyright: "Movie & Game Sounds"
+  source: "https://www.youtube.com/watch?v=tBcnKI0r_CA"
+
+- files: ["motion_detector_none.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7853d79df1827a2a4907fb3162b6319662dbc1ba/sound/items/detector.ogg"
+
 - files: ["tech_notification.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"

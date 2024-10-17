@@ -31,6 +31,7 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetCivilian
     - type: Survivor
+    - type: MotionDetectorTracked
   hasIcon: false
 
 - type: startingGear
