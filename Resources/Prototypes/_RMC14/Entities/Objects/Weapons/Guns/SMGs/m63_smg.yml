@@ -91,6 +91,10 @@
       rmc-aslot-rail: 0.032, 0.155
       rmc-aslot-stock: -0.81, 0.032
       rmc-aslot-underbarrel: 0.25, -0.25
+  - type: Tag
+    tags:
+    - RMCWeaponSMG
+    - RMCWeaponSMGM63
 
 - type: entity
   parent: BaseMagazineRifle
@@ -219,6 +223,9 @@
         Piercing: 26
   - type: CMArmorPiercing
     amount: 30
+
+- type: Tag
+  id: RMCWeaponSMGM63
 
 - type: Tag
   id: CMMagazineSMGM63

@@ -221,6 +221,9 @@ public sealed class RMCStorageSystem : EntitySystem
             var storedCount = 0;
             foreach (var stored in limited.Comp2.StoredItems.Keys)
             {
+                if (stored == toInsert)
+                    continue;
+
                 if (!_whitelist.IsWhitelistPass(limit.Whitelist, stored))
                     continue;
 

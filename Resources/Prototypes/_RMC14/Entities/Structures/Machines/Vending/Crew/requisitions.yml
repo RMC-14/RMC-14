@@ -136,8 +136,8 @@
       - id: CMBeltKnifeFilled
         name: M276 Knife Rig (Full)
         amount: 5
-      #- id: M276 M39 Holster Rig
-      #  amount: 5
+      - id: RMCBeltSmgMags
+        amount: 5
       #- id: M276 M40 Grenade Rig
       #  amount: 2
       #- id: M276 M44 Holster Rig

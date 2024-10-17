@@ -44,7 +44,7 @@
         recommended: true
       - id: CMBeltMedicalFilled
         recommended: true
-      #- id: CMBeltM39 # TODO RMC14 M39 Belt
+      - id: RMCBeltSmgMags
       #- id: CMBeltRevolver # TODO RMC14 Revolver Holster Belt
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
       #- id: CMBeltGeneralPistol # TODO RMC14 General Pistol Holster Belt
