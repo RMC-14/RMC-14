@@ -12,6 +12,7 @@
     drawdepth: FloorObjects
   - type: Physics
     bodyType: Static
+    canCollide: false
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Wood
