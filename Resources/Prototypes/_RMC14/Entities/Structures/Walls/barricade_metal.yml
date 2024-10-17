@@ -245,7 +245,7 @@
     - type: Physics
     - type: RMCRepairable
       heal: -200
-      skills: RMCSkillConstruction
+      skill: RMCSkillConstruction
       delay: 10
       fuelUsed: 2
     - type: Damageable
