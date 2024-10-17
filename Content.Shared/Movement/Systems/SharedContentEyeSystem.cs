@@ -74,6 +74,18 @@ public abstract class SharedContentEyeSystem : EntitySystem
         return Vector2.Clamp(zoom, MinZoom, component.MaxZoom);
     }
 
+    public bool GetZoom(EntityUid uid, out Vector2 zoom, ContentEyeComponent? eye = null)
+    {
+        if (!Resolve(uid, ref eye, false))
+        {
+            zoom = new Vector2(1.0f, 1.0f);
+            return false;
+        }
+
+        zoom = eye.TargetZoom;
+        return true;
+    }
+
     /// <summary>
     /// Sets the target zoom, optionally ignoring normal zoom limits.
     /// </summary>
