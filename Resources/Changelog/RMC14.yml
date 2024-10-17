@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Fixed meralyn recipe.
-    type: Fix
-  id: 349
-  time: '2024-07-11T11:39:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2981
 - author: DrSmugleaf
   changes:
   - message: Fixed the runner's and lurker's leap cooldown being swapped. The runner's
@@ -4692,5 +4685,12 @@
   id: 848
   time: '2024-10-16T05:07:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4490
+- author: FungiFellow
+  changes:
+  - message: Anti Monkey Poaching Rule has been re-worded
+    type: Tweak
+  id: 849
+  time: '2024-10-17T01:30:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4496
 Name: RMC14
 Order: -1
