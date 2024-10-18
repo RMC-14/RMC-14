@@ -37,6 +37,7 @@
     hudOffset: 0,0.1
     unlockAt: 900 # 15 minutes
     hidden: true # TODO RMC: remove once ravager is implemented
+  - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
     - CMXenoLurker
@@ -84,7 +85,19 @@
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
   - type: SlowOnPull
-    multiplier: 0.5
+    slowdowns:
+    - multiplier: 0.6125
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.6675
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.445
+      whitelist:
+        components:
+        - XenoHeavy
   - type: RMCSize
     size: Big
 #  - type: RMCXenoDamageVisuals # TODO RMC14

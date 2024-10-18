@@ -215,7 +215,19 @@
     - Hivemind
   - type: StandingState
   - type: SlowOnPull
-    multiplier: 0.75
+    slowdowns:
+      - multiplier: 0.6
+        whitelist:
+          components:
+          - Marine
+      - multiplier: 0.665
+        whitelist:
+          components:
+          - XenoLight
+      - multiplier: 0.445
+        whitelist:
+          components:
+          - XenoHeavy
   - type: PullWhitelist
     whitelist:
       components:

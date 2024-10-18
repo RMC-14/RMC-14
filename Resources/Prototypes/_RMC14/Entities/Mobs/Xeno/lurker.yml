@@ -36,6 +36,7 @@
     tier: 2
     hudOffset: 0,0.16
     unlockAt: 540 # 9 minutes
+  - type: XenoLight
   - type: XenoDevolve
     devolvesTo:
     - CMXenoRunner
@@ -71,6 +72,20 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.7
     baseSprintSpeed: 5
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.53
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.59
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.375
+      whitelist:
+        components:
+        - XenoHeavy
   - type: RMCXenoDamageVisuals
     prefix: lurker
   - type: TacticalMapIcon

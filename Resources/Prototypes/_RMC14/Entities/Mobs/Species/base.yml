@@ -171,12 +171,19 @@
   - type: UserLimitHits
   - type: MovementIgnoreGravity
   - type: SlowOnPull
-    multiplier: 0.6
     slowdowns:
-    - multiplier: 0.5
+    - multiplier: 0.7575
       whitelist:
         components:
-        - Xeno
+        - Marine
+    - multiplier: 0.8725
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.59
+      whitelist:
+        components:
+        - XenoHeavy
   - type: MobThresholds
     thresholds:
       0: Alive
