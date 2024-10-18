@@ -290,6 +290,8 @@ public abstract partial class SharedGunSystem
             if (CompOrNull<CartridgeAmmoComponent>(used)?.SoundInsert is { } sound)
                 Audio.PlayPredicted(sound, uid, user);
 
+            UpdateAmmoCount(uid, artificialIncrease: 1);
+
             if (_netManager.IsClient)
                 return;
         }
@@ -297,9 +299,11 @@ public abstract partial class SharedGunSystem
         // Reused function moved here.
         component.Entities.Add(used);
         Containers.Insert(used, component.Container);
+        Dirty(uid, component);
         // Not predicted so
         Audio.PlayPredicted(component.SoundInsert, uid, user);
         UpdateBallisticAppearance(uid, component);
+        UpdateAmmoCount(uid);
         Dirty(uid, component);
         return;
     }
