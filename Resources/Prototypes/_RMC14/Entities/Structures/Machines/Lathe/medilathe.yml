@@ -61,7 +61,7 @@
 #    - EZ Autoinjector (E-M) (300 Plastic)
 #    - EZ Autoinjector (E-L) (300 Plastic)
 #    - EZ Autoinjector (E-XL) (300 Plastic)
-#    - Medic Autoinjector (M-M) (300 Plastic)
+    - RMCMedicAutoInjector
 #    - Medic Autoinjector (M-L) (300 Plastic)
     - CMHypospray
     - CMBloodPack

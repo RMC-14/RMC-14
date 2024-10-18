@@ -127,3 +127,10 @@
   materials:
     RMCGlass: 67 # 2500
 
+- type: latheRecipe
+  id: RMCMedicAutoInjector
+  result: RMCMedicAutoInjector
+  completetime: 4
+  materials:
+    RMCPlastic: 19 # 375
+
