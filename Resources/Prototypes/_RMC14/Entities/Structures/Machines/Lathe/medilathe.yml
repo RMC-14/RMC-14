@@ -78,10 +78,10 @@
     - CMFirstAidO2Kit
 #    - Radiation First Aid Kit (2000 Plastic)
 #    - Syringe Case (1000 Plastic)
-    - RMCSurgicalTrayEmpty 
+    - RMCSurgicalTrayEmpty
     - RMCVialBox
-#    - Pressurized Reagent Canister Pouch (2000 Plastic, 2000 Glass)
-#    - Pressurized Canister (2000 Glass)
+    - RMCPouchReagentCanister
+    - RMCPressurizedCanister
   - type: MaterialStorage
     whitelist:
       tags:
@@ -151,4 +151,3 @@
     runningState: medilathe_n_f
     unlitIdleState: medilathe_u_f
     unlitRunningState: medilathe_n_u_f
-    
