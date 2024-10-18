@@ -6,7 +6,7 @@
 - type: guideEntry
   parent: RMC
   id: RMC14
-  name: cm-guide-entry-rmc
+  name: rmc-guide-entry-rmc
   text: "/ServerInfo/Guidebook/_RMC14/RMC14.xml"
   children:
   - RMCGuideNewPlayer
@@ -18,22 +18,22 @@
   name: "New Player Guide"
   text: "/ServerInfo/Guidebook/_RMC14/RMCGuideNewPlayer.xml"
   children:
-  - CMGuideRoleRifleman
-  - CMGuideRoleDrone
+  - RMCGuideRoleRifleman
+  - RMCGuideRoleDrone
 
 - type: guideEntry
   parent: RMC
-  id: CMGuideRoleRifleman
+  id: RMCGuideRoleRifleman
   priority: 0
   name: "Rifleman Guide"
-  text: "/ServerInfo/Guidebook/_RMC14/NewPlayerGuide/CMGuideRoleRifleman.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/NewPlayerGuide/RMCGuideRoleRifleman.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CMGuideRoleDrone
+  id: RMCGuideRoleDrone
   priority: 1
   name: "Drone Guide"
-  text: "/ServerInfo/Guidebook/_RMC14/NewPlayerGuide/CMGuideRoleDrone.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/NewPlayerGuide/RMCGuideRoleDrone.xml"
 
 - type: guideEntry
   parent: RMC
@@ -42,4 +42,4 @@
   name: "Medical"
   text: "/ServerInfo/Guidebook/_RMC14/Medical/RMCMedical.xml"
   children:
-  - CMChemicals
+  - RMCChemicals

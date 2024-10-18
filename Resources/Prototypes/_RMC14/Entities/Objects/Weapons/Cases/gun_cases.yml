@@ -1,6 +1,8 @@
+# pistols
+# SU6 smart pistol
 - type: entity
-  parent: RMCBaseGunCase
-  id: RMCSmartPistolCase
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolSmart
   name: SU-6 smart pistol case
   description: A gun case containing the SU-6 smart pistol. Comes with a full belt holster.
   components:
@@ -17,19 +19,20 @@
     - id: RMCWeaponPistolSU6
     - id: RMCBeltSmartPistolFilled
 
+# MK80
 - type: entity
-  parent: RMCBaseGunCase
-  id: RMCMK80Case
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolMK80
   name: MK80 pistol case
   description: A gun case containing the MK80. Comes with two magazines.
   components:
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,3,1
+    - 0,0,5,1
     whitelist:
       tags:
-      - RMCMK80
+      - CMWeaponPistolMK80
       - CMMagazinePistolMK80
   - type: StorageFill
     contents:
@@ -37,9 +40,79 @@
     - id: CMMagazinePistolMK80
       amount: 2
 
+# M77
 - type: entity
-  parent: RMCBaseGunCase
-  id: RMCM54CE2Case
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolM77
+  name: M77 Combat Pistol case
+  description: A gun case containing a M77 Combat Pistol. Comes with a rail flashlight and 6 magazines.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - CMWeaponPistolM77
+      - CMMagazinePistolM77AP
+      - RMCAttachmentRailFlashlight
+  - type: StorageFill
+    contents:
+    - id: RMCAttachmentRailFlashlight
+    - id: CMWeaponPistolM77
+    - id: CMMagazinePistolM77AP
+      amount: 6
+
+# M44 combat revolver
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolM44
+  name: M44 combat revolver case
+  description:
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - RMCWeaponRevolverM44
+      - RMCSpeedLoader44Marksman
+      - RMCAttachmentRailFlashlight
+  - type: StorageFill
+    contents:
+    - id: RMCAttachmentRailFlashlight
+    - id: RMCWeaponRevolverM44
+    - id: RMCSpeedLoader44Marksman
+      amount: 6
+
+# M1984 service pistol
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolM1984
+  name: M1984 service pistol case
+  description:
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - CMWeaponPistolM1984
+      - CMMagazinePistolM1984
+      - RMCAttachmentRailFlashlight
+  - type: StorageFill
+    contents:
+    - id: RMCAttachmentRailFlashlight
+    - id: CMWeaponPistolM1984
+    - id: CMMagazinePistolM1984
+      amount: 6
+
+# rifles
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCaseRifleM54CE2
   name: M54CE2 heavy assault rifle case
   description: A gun case containing the M54CE2 heavy assault rifle. You can get additional ammunition at requisitions.
   components:
