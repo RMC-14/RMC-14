@@ -23,6 +23,7 @@
     - type: Skills
       skills:
         RMCSkillFirearms: 0
+        RMCSkillFireman: 1
         RMCSkillMedical: 3
         RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
