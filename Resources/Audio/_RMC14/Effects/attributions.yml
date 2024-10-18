@@ -3,8 +3,8 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/effects/bamf.ogg"
 
-- files: ["motion_detector.ogg"]
-  license: "Public Domain"
+- files: ["motion_detector.ogg"] # This is marked as no copyright but the workflow breaks
+  license: "CC-BY-SA-3.0"
   copyright: "Movie & Game Sounds"
   source: "https://www.youtube.com/watch?v=tBcnKI0r_CA"
 
