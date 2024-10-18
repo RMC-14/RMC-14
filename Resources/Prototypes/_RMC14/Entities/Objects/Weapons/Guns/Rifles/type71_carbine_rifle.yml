@@ -5,14 +5,14 @@
   description: A carbine variant of the Type 71, intended for use by frontline support roles. A reduced length makes the gun lighter and easier to handle at the cost of muzzle velocity.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/type71_carbine_rifle.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/type71_carbine.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/type71_carbine_rifle.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/type71_carbine.rsi
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
