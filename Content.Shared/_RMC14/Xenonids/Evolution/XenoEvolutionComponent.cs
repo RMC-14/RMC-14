@@ -52,4 +52,7 @@ public sealed partial class XenoEvolutionComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool GotPopup;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan EvolutionJitterDuration = TimeSpan.FromSeconds(10);
 }

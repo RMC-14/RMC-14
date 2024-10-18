@@ -33,6 +33,8 @@ rmc-xeno-evolution-cant-devolve-damaged = We are too weak to deevolve, we must r
 rmc-xeno-evolution-cant-evolve-recent-queen-death-minutes = We must wait about {$minutes} minutes and {$seconds} seconds for the hive to recover from the previous Queen's death.
 rmc-xeno-evolution-cant-evolve-recent-queen-death-seconds = We must wait about {$seconds} seconds for the hive to recover from the previous Queen's death.
 rmc-xeno-evolution-failed-bad-location = We can't evolve here.
+rmc-xeno-evolution-start-self = We begin to twist and contort.
+rmc-xeno-evolution-start-others = {$xeno} begins to twist and contort.
 
 # Fortify
 cm-xeno-fortify-cant-headbutt = You can't headbutt while fortifying!
@@ -135,7 +137,7 @@ cm-xeno-throw-parasite-unstash-parasite = We grab a parasite from our storage. N
 rmc-xeno-throw-parasite-current = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} sheltering: {$cur_paras}/{$max_paras} parasites.
 rmc-xeno-throw-parasite-reserves = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-HAVE($xeno)} {$rev_paras} parasite ghost {$rev_paras ->
    [one] role
-   *[other] roles 
+   *[other] roles
 } available.
 
 # Defensive Shield
