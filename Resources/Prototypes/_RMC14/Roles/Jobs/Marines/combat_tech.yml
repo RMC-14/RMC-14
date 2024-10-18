@@ -25,7 +25,7 @@
     - type: Skills
       skills:
         RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
+        RMCSkillEngineer: 3
         RMCSkillFirearms: 1
         RMCSkillJtac: 1
         RMCSkillVehicles: 1
