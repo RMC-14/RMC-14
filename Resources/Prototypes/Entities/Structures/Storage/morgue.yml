@@ -46,6 +46,7 @@
       path: /Audio/Items/deconstruct.ogg
   - type: EntityStorageLayingDownOverride
   - type: Morgue
+    DoSoulBeep: false
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container
