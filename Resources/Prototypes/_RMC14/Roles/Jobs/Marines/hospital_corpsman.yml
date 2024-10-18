@@ -28,6 +28,7 @@
     - type: Skills
       skills:
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillJtac: 1
         RMCSkillMedical: 2
         RMCSkillSurgery: 1

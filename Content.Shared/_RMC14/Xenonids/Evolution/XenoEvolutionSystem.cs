@@ -14,6 +14,7 @@ using Content.Shared.Doors.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Jittering;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -41,6 +42,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
+    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -171,7 +173,16 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (xeno.Comp.EvolutionDelay > TimeSpan.Zero)
             _popup.PopupClient(Loc.GetString("cm-xeno-evolution-start"), xeno, xeno);
 
-        _doAfter.TryStartDoAfter(doAfter);
+        if (_doAfter.TryStartDoAfter(doAfter))
+        {
+            _jitter.DoJitter(xeno, xeno.Comp.EvolutionDelay, true, 80, 8, true);
+
+            var popupOthers = Loc.GetString("rmc-xeno-evolution-start-others", ("xeno", xeno));
+            _popup.PopupEntity(popupOthers, xeno, Filter.PvsExcept(xeno), true, PopupType.Medium);
+
+            var popupSelf = Loc.GetString("rmc-xeno-evolution-start-self");
+            _popup.PopupEntity(popupSelf, xeno, xeno, PopupType.Medium);
+        }
     }
 
     private void OnXenoStrainBui(Entity<XenoEvolutionComponent> xeno, ref XenoStrainBuiMsg args)
@@ -227,6 +238,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         Del(xeno.Owner);
 
+        var afterEv = new AfterNewXenoEvolvedEvent();
+        RaiseLocalEvent(newXeno, ref afterEv);
+
         _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-devolve", ("xeno", newXeno)), newXeno, newXeno, PopupType.LargeCaution);
     }
 
@@ -260,6 +274,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private void OnXenoEvolutionNewEvolved(Entity<XenoEvolutionComponent> xeno, ref NewXenoEvolvedEvent args)
     {
         TransferPoints((args.OldXeno, args.OldXeno), xeno, true);
+        _jitter.DoJitter(xeno, xeno.Comp.EvolutionJitterDuration, true, 80, 8, true);
     }
 
     private void OnXenoEvolutionDevolved(Entity<XenoEvolutionComponent> xeno, ref XenoDevolvedEvent args)
@@ -382,12 +397,13 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         if (newXenoComp != null &&
             !newXenoComp.BypassTierCount &&
-            _xenoHive.GetHive(xeno.Owner) is {} oldHive &&
+            _xenoHive.GetHive(xeno.Owner) is { } oldHive &&
             _xenoHive.TryGetTierLimit((oldHive, oldHive.Comp), newXenoComp.Tier, out var limit))
         {
             var existing = 0;
             var total = 0;
             var current = EntityQueryEnumerator<XenoComponent, HiveMemberComponent>();
+            var slotCount = oldHive.Comp.FreeSlots.ToDictionary();
             while (current.MoveNext(out var existingComp, out var member))
             {
                 if (member.Hive != oldHive.Owner || !existingComp.CountedInSlots)
@@ -398,13 +414,13 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 if (existingComp.Tier < newXenoComp.Tier)
                     continue;
 
-                existing++;
+                if (slotCount.ContainsKey(existingComp.Role.Id) && slotCount[existingComp.Role.Id] > 0)
+                    slotCount[existingComp.Role.Id] -= 1;
+                else
+                    existing++;
             }
 
-            if (_xenoHive.TryGetFreeSlots((oldHive, oldHive.Comp), newXeno, out var freeSlots))
-                existing -= freeSlots;
-
-            if (total != 0 && existing / (float) total >= limit)
+            if (total != 0 && existing / (float) total >= limit && (!slotCount.ContainsKey(newXeno) || slotCount[newXeno] <= 0))
             {
                 if (doPopup)
                 {

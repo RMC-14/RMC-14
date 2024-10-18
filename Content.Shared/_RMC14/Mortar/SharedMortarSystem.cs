@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Camera;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Extensions;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Rules;
@@ -321,8 +322,8 @@ public abstract class SharedMortarSystem : EntitySystem
 
     private void OnMortarTargetBui(Entity<MortarComponent> mortar, ref MortarTargetBuiMsg args)
     {
-        Cap(ref args.Target.X, mortar.Comp.MaxTarget);
-        Cap(ref args.Target.Y, mortar.Comp.MaxTarget);
+        args.Target.X.Cap(mortar.Comp.MaxTarget);
+        args.Target.Y.Cap(mortar.Comp.MaxTarget);
 
         var user = args.Actor;
         var ev = new TargetMortarDoAfterEvent(args.Target);
@@ -341,8 +342,8 @@ public abstract class SharedMortarSystem : EntitySystem
 
     private void OnMortarDialBui(Entity<MortarComponent> mortar, ref MortarDialBuiMsg args)
     {
-        Cap(ref args.Target.X, mortar.Comp.MaxDial);
-        Cap(ref args.Target.Y, mortar.Comp.MaxDial);
+        args.Target.X.Cap(mortar.Comp.MaxDial);
+        args.Target.Y.Cap(mortar.Comp.MaxDial);
 
         var user = args.Actor;
         var ev = new DialMortarDoAfterEvent(args.Target);
@@ -446,15 +447,6 @@ public abstract class SharedMortarSystem : EntitySystem
                 : Loc.GetString(warning, ("direction", direction));
             _popup.PopupEntity(msg, recipient, recipient, PopupType.LargeCaution);
         }
-    }
-
-    private void Cap(ref int value, int at)
-    {
-        at = Math.Abs(at);
-        if (value > at)
-            value = at;
-        else if (value < -at)
-            value = -at;
     }
 
     public override void Update(float frameTime)

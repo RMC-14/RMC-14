@@ -1731,6 +1731,17 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 .ToListAsync();
         }
 
+        public async Task SetGhostColor(Guid player, System.Drawing.Color? color)
+        {
+            await using var db = await GetDb();
+            var patron = await db.DbContext.RMCPatrons.FirstOrDefaultAsync(p => p.PlayerId == player);
+            if (patron == null)
+                return;
+
+            patron.GhostColor = color?.ToArgb();
+            await db.DbContext.SaveChangesAsync();
+        }
+
         public async Task SetLobbyMessage(Guid player, string message)
         {
             await using var db = await GetDb();

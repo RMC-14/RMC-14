@@ -146,8 +146,8 @@
     #  points: 5
       - id: CMFireExtinguisherPortable
         points: 3
-    #- id: CMMotionDetector
-    #  points: 8
+      - id: RMCMotionDetector
+        points: 8
       - id: RMCWhistle
         points: 3
     - name: Binoculars
@@ -223,7 +223,7 @@
       - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
     #- id: CMM276GeneralPistolHolsterRig
-    #- id: CMM276M63HolsterRig
+      - id: RMCBeltSmgMags
     #- id: CMM276M44HolsterRig
     #- id: CMM276M82FHolsterRig
       - id: RMCM276ShotgunShellLoadingRig

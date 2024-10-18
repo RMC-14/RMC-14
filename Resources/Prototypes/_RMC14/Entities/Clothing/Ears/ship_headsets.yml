@@ -18,6 +18,8 @@
     state: generic_headset
   - type: Item
     size: Small
+  - type: ClothingLimit
+    id: CMHeadset
 
 - type: entity
   parent: CMHeadset

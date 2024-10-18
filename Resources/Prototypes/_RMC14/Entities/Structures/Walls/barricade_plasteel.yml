@@ -37,7 +37,11 @@
     messagePerceivedByOthers: fence-rattle-success
     interactSuccessSound:
       collection: FenceRattle
-  - type: Repairable
+  - type: RMCRepairable
+    heal: -200
+    skill: RMCSkillConstruction
+    delay: 10
+    fuelUsed: 2
   - type: Destructible
     thresholds:
     - trigger:
@@ -156,7 +160,11 @@
       map: ["enum.DoorVisualLayers.Base"]
     - map: [ "acided" ]
     drawdepth: WallTops
-  - type: Repairable
+  - type: RMCRepairable
+    heal: -200
+    skill: RMCSkillConstruction
+    delay: 10
+    fuelUsed: 2
   - type: Destructible
     thresholds:
     - trigger:

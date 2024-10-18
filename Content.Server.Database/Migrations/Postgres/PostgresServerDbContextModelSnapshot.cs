@@ -1081,6 +1081,10 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("uuid")
                         .HasColumnName("player_id");
 
+                    b.Property<int?>("GhostColor")
+                        .HasColumnType("integer")
+                        .HasColumnName("ghost_color");
+
                     b.Property<int>("TierId")
                         .HasColumnType("integer")
                         .HasColumnName("tier_id");
@@ -1164,6 +1168,10 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Property<bool>("Figurines")
                         .HasColumnType("boolean")
                         .HasColumnName("figurines");
+
+                    b.Property<bool>("GhostColor")
+                        .HasColumnType("boolean")
+                        .HasColumnName("ghost_color");
 
                     b.Property<bool>("LobbyMessage")
                         .HasColumnType("boolean")

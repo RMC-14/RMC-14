@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Fireman;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Alert;
@@ -411,6 +412,11 @@ public sealed class PullingSystem : EntitySystem
 
         if (pullable.Comp.Puller == pullerUid)
         {
+            var ev = new RMCPullToggleEvent();
+            RaiseLocalEvent(pullerUid, ref ev);
+            if (ev.Handled)
+                return true;
+
             return TryStopPull(pullable, pullable.Comp);
         }
 

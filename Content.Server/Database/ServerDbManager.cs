@@ -317,6 +317,8 @@ namespace Content.Server.Database
 
         Task<List<RMCPatron>> GetAllPatrons();
 
+        Task SetGhostColor(Guid player, System.Drawing.Color? color);
+
         Task SetLobbyMessage(Guid player, string message);
 
         Task SetMarineShoutout(Guid player, string name);
@@ -1034,6 +1036,12 @@ namespace Content.Server.Database
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetAllPatrons());
+        }
+
+        public Task SetGhostColor(Guid player, System.Drawing.Color? color)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetGhostColor(player, color));
         }
 
         public Task SetLobbyMessage(Guid player, string message)

@@ -75,8 +75,9 @@
       - id: RMCFlashlight
         points: 1
         recommended: true
-      #- id: RMCMotionDetector # TODO RMC14 Motion Detector
-      #  recommended: true
+      - id: RMCMotionDetector
+        points: 5
+        recommended: true
       - id: SprayBottleSpaceCleaner
         points: 2
       - id: RMCWhistle
@@ -126,7 +127,7 @@
       - id: CMBeltUtilityFilled
       - id: CMBeltMedicBagFilled
       - id: CMBeltMedicalFilled
-      #- id: CMBeltM39 # TODO RMC14 M39 Belt
+      - id: RMCBeltSmgMags
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
       - id: RMCM276ShotgunShellLoadingRig
       - id: RMCBeltGrenade
@@ -192,8 +193,9 @@
       #- id: RMCFultonRecoveryDevice # TODO RMC14 Fulton Recovery
       - id: RMCFlashlight
         points: 1
-      #- id: RMCMotionDetector # TODO RMC14 Motion Detector
-      #  points: 5
+      - id: RMCMotionDetector
+        points: 5
+        recommended: true
       - id: SprayBottleSpaceCleaner
         points: 2
       - id: RMCWhistle

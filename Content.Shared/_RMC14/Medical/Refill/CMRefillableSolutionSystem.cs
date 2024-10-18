@@ -8,6 +8,7 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Medical.Refill;
 
@@ -26,6 +27,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<CMSolutionRefillerComponent, InteractUsingEvent>(OnRefillerInteractUsing);
+        SubscribeLocalEvent<RMCRefillSolutionOnStoreComponent, EntInsertedIntoContainerMessage>(OnRefillSolutionOnStoreInserted);
     }
 
     private void OnRefillerInteractUsing(Entity<CMSolutionRefillerComponent> ent, ref InteractUsingEvent args)
@@ -81,6 +83,25 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         {
             _popup.PopupClient(Loc.GetString("cm-refillable-solution-cannot-refill", ("user", ent.Owner), ("target", fillable)), args.User, args.User, PopupType.SmallCaution);
         }
+    }
+
+    private void OnRefillSolutionOnStoreInserted(Entity<RMCRefillSolutionOnStoreComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container) ||
+            !container.ContainedEntities.TryFirstOrNull(out var contained))
+        {
+            return;
+        }
+
+        if (!_solution.TryGetDrainableSolution(contained.Value, out var drainable, out _) ||
+            !_solution.TryGetRefillableSolution(args.Entity, out var refillable, out _))
+        {
+            return;
+        }
+
+        var volume = refillable.Value.Comp.Solution.AvailableVolume;
+        var drained = _solution.Drain(contained.Value, drainable.Value, volume);
+        _solution.Refill(args.Entity, refillable.Value, drained);
     }
 
     public override void Update(float frameTime)

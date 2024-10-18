@@ -56,8 +56,8 @@
         points: 3
       - id: CMFireExtinguisherPortable
         points: 3
-    #- id: CMMotionDetector
-    #  points: 5
+      - id: RMCMotionDetector
+        points: 5
     #- id: CMFultonDeviceStack
     #  points: 5
     - name: Binoculars
@@ -239,7 +239,7 @@
     #- id: CMM276GeneralPistolHolsterRig
       - id: CMBeltMedicBag
       - id: CMBeltMedical
-    #- id: CMM276M63HolsterRig
+      - id: RMCBeltSmgMags
     #- id: CMM276M44HolsterRig
     #- id: CMM276M82FHolsterRig
       - id: RMCM276ShotgunShellLoadingRig

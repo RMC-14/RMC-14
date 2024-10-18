@@ -52,6 +52,7 @@
   - type: ShowHealthBars
     damageContainers:
     - Biological
+  - type: GhostColor
 
 - type: entity
   id: ActionGhostBoo

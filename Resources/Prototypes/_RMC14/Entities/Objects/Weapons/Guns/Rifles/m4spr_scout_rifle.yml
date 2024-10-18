@@ -165,7 +165,7 @@
     proto: BulletRifleM4SPRA19Impact
 
 - type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: BulletRifleM4SPRA19
   noSpawn: true
   components:
@@ -177,7 +177,7 @@
     amount: 35
 
 - type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: BulletRifleM4SPRA19Impact
   noSpawn: true
   components:

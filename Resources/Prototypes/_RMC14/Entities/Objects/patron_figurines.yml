@@ -627,3 +627,14 @@
     state: does-the-dishes
   - type: PatronFigurine
     id: 428803e1-1ab5-4a19-8216-06bdb8b638d9
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronTempest
+  name: Tempest figurine
+  description: "A beam of light through the clouds. Smells of blue raspberry."
+  components:
+  - type: Sprite
+    state: tempest
+  - type: PatronFigurine
+    id: 5bb80762-7bf7-454e-bf30-8bd3c972fbee

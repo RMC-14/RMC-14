@@ -102,6 +102,7 @@
   parent: CMCatwalk
   id: RMCGrate
   name: grate
+  description: ""
   components:
   - type: Sprite
     sprite: _RMC14/Structures/grate.rsi

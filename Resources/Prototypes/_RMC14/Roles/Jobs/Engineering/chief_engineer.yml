@@ -36,6 +36,7 @@
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
     - type: MarineOrders
+    - type: RMCPointing
 
 - type: startingGear
   id: CMGearChiefEngineer
