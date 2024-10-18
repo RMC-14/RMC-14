@@ -19,8 +19,8 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/gas.rsi
     slots:
-    - Suitstorage
     - Mask
+    - Suitstorage
   - type: Item
     size: Small
   - type: Tag
