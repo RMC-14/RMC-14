@@ -135,7 +135,7 @@
     proto: RMCBulletLMGM60
 
 - type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: RMCBulletLMGM60
   noSpawn: true
   components:
@@ -156,6 +156,6 @@
 
 - type: Tag
   id: RMCMagazineLMGM60
-  
+
 - type: Tag
   id: RMCCartridgeLMGM60

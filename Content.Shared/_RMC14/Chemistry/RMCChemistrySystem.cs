@@ -161,7 +161,15 @@ public sealed class RMCChemistrySystem : EntitySystem
             return;
         }
 
-        var cost = ent.Comp.CostPerUnit * ent.Comp.DispenseSetting;
+        var dispense = ent.Comp.DispenseSetting;
+        var available = solutionEnt.Value.Comp.Solution.AvailableVolume;
+        if (dispense > available)
+            dispense = available;
+
+        if (dispense == FixedPoint2.Zero)
+            return;
+
+        var cost = ent.Comp.CostPerUnit * dispense;
         if (cost > storage.Comp.Energy)
             return;
 

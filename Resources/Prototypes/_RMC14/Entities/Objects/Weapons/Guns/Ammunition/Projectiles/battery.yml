@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: RMCProjectileTaser
   noSpawn: true
   name: taser bolt

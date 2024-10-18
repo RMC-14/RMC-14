@@ -121,6 +121,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/chemical_storage.rsi
     state: chemstorage
+    offset: 0.5,0
   - type: RMCChemicalStorage
 
 - type: entity

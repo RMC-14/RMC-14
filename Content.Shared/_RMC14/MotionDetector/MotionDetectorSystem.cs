@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Inventory;
 using Content.Shared.Coordinates;
+using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
@@ -40,6 +41,7 @@ public sealed class MotionDetectorSystem : EntitySystem
         SubscribeLocalEvent<MotionDetectorComponent, GetVerbsEvent<AlternativeVerb>>(OnMotionDetectorGetVerbs);
         SubscribeLocalEvent<MotionDetectorComponent, DroppedEvent>(OnMotionDetectorDisable);
         SubscribeLocalEvent<MotionDetectorComponent, RMCDroppedEvent>(OnMotionDetectorDisable);
+        SubscribeLocalEvent<MotionDetectorComponent, ExaminedEvent>(OnMotionDetectorExamined);
 
         SubscribeLocalEvent<MotionDetectorTrackedComponent, MoveEvent>(OnMotionDetectorTracked);
     }
@@ -78,6 +80,7 @@ public sealed class MotionDetectorSystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract)
             return;
 
+        var user = args.User;
         args.Verbs.Add(new AlternativeVerb
         {
             Text = ent.Comp.Short ? "Change to long range mode" : "Change to short range mode",
@@ -85,6 +88,7 @@ public sealed class MotionDetectorSystem : EntitySystem
             {
                 ent.Comp.Short = !ent.Comp.Short;
                 Dirty(ent);
+                _audio.PlayPredicted(ent.Comp.ToggleSound, ent, user);
             },
         });
     }
@@ -95,6 +99,15 @@ public sealed class MotionDetectorSystem : EntitySystem
         Dirty(ent);
         UpdateAppearance(ent);
         MotionDetectorUpdated(ent);
+    }
+
+    private void OnMotionDetectorExamined(Entity<MotionDetectorComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(MotionDetectorComponent)))
+        {
+            var mode = ent.Comp.Short ? "short" : "long";
+            args.PushMarkup($"The motion detector is in [color=cyan]{mode}[/color] scanning mode.");
+        }
     }
 
     private void OnMotionDetectorTracked(Entity<MotionDetectorTrackedComponent> ent, ref MoveEvent args)
