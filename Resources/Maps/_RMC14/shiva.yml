@@ -110502,39 +110502,11 @@ entities:
     - type: Transform
       pos: 192.5,154.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        chemical_dispenser_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        machine_board: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        machine_parts: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
   - uid: 14651
     components:
     - type: Transform
       pos: 192.5,151.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        chemical_dispenser_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        machine_board: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        machine_parts: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
 - proto: RMCContainerBlueLeft
   entities:
   - uid: 15826
@@ -116800,6 +116772,13 @@ entities:
     components:
     - type: Transform
       pos: 107.5,95.5
+      parent: 1
+- proto: RMCSensorTower
+  entities:
+  - uid: 15903
+    components:
+    - type: Transform
+      pos: 190.5,78.5
       parent: 1
 - proto: RMCShutterAlmayer
   entities:

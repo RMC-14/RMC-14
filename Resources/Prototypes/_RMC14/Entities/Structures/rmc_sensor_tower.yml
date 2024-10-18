@@ -24,7 +24,7 @@
     - state: sensor_off
       map: [ "base" ]
     state: sensor_off
-    offset: 0,2
+    offset: 0.5,2
   - type: Clickable
   - type: InteractionOutline
   - type: Appearance
