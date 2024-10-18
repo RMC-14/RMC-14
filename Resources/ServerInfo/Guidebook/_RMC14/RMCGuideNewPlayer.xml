@@ -42,7 +42,7 @@
   To perform [color=cyan]basic interactions[/color], use [color=yellow][bold][keybind="ActivateItemInWorld"][/bold][/color].
   This is like [bold]interacting with nothing in hand[/bold].
   Pressing [color=yellow][bold][keybind="ActivateItemInHand"][/bold][/color] has the same effect with the currently held item.
-  It's most used for performing basic interaction while holding something, such as opening a door when your hands are full.
+  It's most used for performing a basic interaction while holding something, such as opening a door when your hands are full.
 
   Hovering over an entity and pressing [color=yellow][bold][keybind="UIRightClick"/][/bold][/color] brings up the [color=cyan]context menu[/color].
   This not only allows you to sort through large piles of items, but also to perform [bold]additional interactions.[/bold]
@@ -57,7 +57,7 @@
   You can [color=cyan]drop[/color] the item you are holding using [color=yellow][bold][keybind="Drop"][/bold][/color] or alternatively [color=cyan]throw it[/color] to your cursor with [color=yellow][bold][keybind="ThrowItemInHand"][/bold][/color].
 
   ## Inventory
-  You can [color=cyan]open[/color] you inventory using [color=yellow][bold][keybind="OpenInventoryMenu"][/bold][/color].
+  You can [color=cyan]open[/color] your inventory using [color=yellow][bold][keybind="OpenInventoryMenu"][/bold][/color].
   Each slot on your HUD can be filled with an appropriate [bold]item[/bold] or [bold]piece of clothing[/bold].
 
   Two of the slots on the hotbar correspond to your [bold]bag and belt[/bold].

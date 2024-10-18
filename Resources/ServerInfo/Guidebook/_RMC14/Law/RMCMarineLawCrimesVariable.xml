@@ -51,12 +51,12 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Failing to follow a lawful order from a superior person of rank or position. Or disrespecting someone of a higher rank or position that is not an officer.\nDisrespecting a superior Officer is under minor crimes.
+        Failing to follow a lawful order from a superior person of rank or position, or disrespecting someone of a higher rank or position that is not an officer.\nDisrespecting a superior Officer is under minor crimes.
       </Box>
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        An order which is not personally directed. Or disrespecting someone of a higher rank or position that is not an officer.\n[bold]7.5 minutes.[/bold]
+        An order which is not personally directed, or disrespecting someone of a higher rank or position that is not an officer.\n[bold]7.5 minutes.[/bold]
       </Box>
     </ColorBox>
     <ColorBox>
@@ -103,7 +103,7 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Illegaly placing a listening device in a secure area, or area with privacy shutters, such as CIC or the CL's office.\n[italic]If the listening device is also tied to a foreign government or terror organisation this is additionally considered Subterfuge[/italic].\n[bold]15 minutes.[/bold]
+        Illegally placing a listening device in a secure area, or area with privacy shutters, such as CIC or the CL's office.\n[italic]If the listening device is also tied to a foreign government or terror organisation this is additionally considered Subterfuge[/italic].\n[bold]15 minutes.[/bold]
       </Box>
     </ColorBox>
 
