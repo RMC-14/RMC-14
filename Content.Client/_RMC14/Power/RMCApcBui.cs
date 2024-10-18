@@ -30,7 +30,6 @@ public sealed class RMCApcBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         {
             var row = new RMCApcChannelRow();
             row.Label.SetMarkupPermissive($"[color=#5B88B0]{channel}:[/color]");
-            row.Visible = channel == RMCPowerChannel.Lighting; // TODO RMC14
             _window.Channels.AddChild(row);
         }
 

@@ -135,7 +135,18 @@
           tags:
           - CMM96SSniperRifle
       fireDelayFlat: -0.1
-
+    - conditions:
+        activeOnly: true
+        whitelist:
+          tags:
+          - RMCWeaponLMGM60
+      fireDelayFlat: -0.05
+    - conditions:
+        activeOnly: true
+        blacklist:
+          tags:
+          - RMCWeaponLMGM60
+      fireDelayFlat: -0.05
 - type: entity
   parent: RMCUnderAttachmentBase
   id: RMCAttachmentBurstFireAssembly

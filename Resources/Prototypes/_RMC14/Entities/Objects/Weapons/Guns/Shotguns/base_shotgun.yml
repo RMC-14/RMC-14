@@ -92,9 +92,6 @@
   - type: UniqueAction
   - type: BreechLoaded
     needOpenClose: false
-  - type: RMCFireGroup
-    group: Shotgun
-    delay: 0
 
 - type: entity
   abstract: true

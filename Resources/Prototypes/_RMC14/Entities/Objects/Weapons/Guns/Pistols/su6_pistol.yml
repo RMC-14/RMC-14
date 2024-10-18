@@ -58,6 +58,7 @@
         whitelist:
           tags:
           - RMCMagazinePistolSU6
+        startingItem: RMCMagazinePistolSU6
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.65, 0.09375

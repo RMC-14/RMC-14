@@ -36,7 +36,7 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Almayer" Text="Ship map for the marines" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="LV-624" Text="Planet map" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Weapon attachments" Text="Each weapon will be able to be customized with different attachments, changing the weapon's stats" />
-                    <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Demolitionist Kit" Text="SADAR!!!" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Demolitionist Kit" Text="M5-ATL!!!" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Sniper Kit" Text="Sniper loadout for the squad weapons specialist. On completion, its ghillie suit will let you become partially cloaked, and the rifle will have special actions" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Squad automated vendors" Text="Where the marine roles get their equipment at round start" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Requisitions" Text="Department that buys supplies for the rest of the marines" />
@@ -44,6 +44,7 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Firearms skill" Text="Each marine role has a different firearms skill. This impacts how accurate they are with guns" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Survivors" Text="A role that starts on the planet and must try to survive until rescued by the Marines" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Engineering staff" Text="Maintenance technician and the Chief Engineer" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Carrier" Text="Carry parasites around, allowing the Hive to impregnate new hosts on the move. Use pheromones to assist fellow Aliens" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Power and evacuation" Text="Power simulation will allow marines to restore power to the colony if they secure the colony's reactors, with evacuation allowing them to fuel the lifeboats and flee the warship if hijacked" />
@@ -69,7 +70,7 @@
                 <BoxContainer Name="SecondVersion" Access="Public" Orientation="Vertical"  HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Upcoming" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Burrower" Text="Lay the foundations for resin traps in strategic locations or the Hive's flanks. Flank your way around the map with the tunnel ability and dig tunnels to allow for quick transportation of fellow Aliens from the hive to the frontlines" />
-                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Survivors" Text="A role that starts on the planet and must try to survive until rescued by the Marines" />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Intelligence officer" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Blood types" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Ravager" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Limb damage" Text="Each limb on a marine will be able to take damage separately, being able to detach upon receiving too much damage and requiring individual treatment" />
@@ -87,7 +88,6 @@
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Synthetics" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Emergency responders" Text="A faction that randomly spawns, with their own objectives" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Orbital bombardment" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Intelligence officer" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Chemical research" Text="Chemicals with random recipes, ingredients and effects" />
                 </BoxContainer>
             </BoxContainer>

@@ -8,6 +8,7 @@ using Content.Server.Roles.Jobs;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
+using Content.Shared._RMC14.Survivor;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
@@ -149,6 +150,8 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
                 HasComp<MarineComponent>(e) ||
                 HasComp<GhostComponent>(e)
             );
+
+        filter.RemoveWhereAttachedEntity(HasComp<SurvivorComponent>);
 
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
         _audio.PlayGlobal(sound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));

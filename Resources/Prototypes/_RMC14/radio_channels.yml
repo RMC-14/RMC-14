@@ -131,6 +131,14 @@
   color: "#cf40a6" #todo rmc14
   longRange: true
 
+- type: radioChannel
+  id: ColonyHandheld
+  name: chat-radio-colony
+  keycode: 'ñ'
+  frequency: 1461
+  color: "#cf40a6" #todo rmc14
+  longRange: true
+
 - type: radioChannel # Only used by Corporate Liason to hand out to bodyguards / command.
   id: WEYA
   name: chat-radio-WY

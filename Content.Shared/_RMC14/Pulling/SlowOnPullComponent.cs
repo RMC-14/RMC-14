@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Pulling;
 [Access(typeof(RMCPullingSystem))]
 public sealed partial class SlowOnPullComponent : Component
 {
-    [DataField(required: true), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public float Multiplier = 1;
 
     [DataField, AutoNetworkedField]

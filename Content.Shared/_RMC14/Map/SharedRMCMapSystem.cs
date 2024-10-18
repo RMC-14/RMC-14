@@ -1,8 +1,8 @@
 ﻿using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using Content.Shared.Atmos;
 using Content.Shared.Coordinates;
-using Content.Shared.Directions;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Tag;
@@ -23,6 +23,13 @@ public abstract class SharedRMCMapSystem : EntitySystem
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
 
     private EntityQuery<MapGridComponent> _mapGridQuery;
+
+    public readonly ImmutableArray<AtmosDirection> AtmosCardinalDirections = ImmutableArray.Create(
+        AtmosDirection.South,
+        AtmosDirection.East,
+        AtmosDirection.North,
+        AtmosDirection.West
+    );
 
     public readonly ImmutableArray<Direction> CardinalDirections = ImmutableArray.Create(
         Direction.South,
@@ -49,11 +56,16 @@ public abstract class SharedRMCMapSystem : EntitySystem
             return RMCAnchoredEntitiesEnumerator.Empty;
         }
 
-        if (offset != null)
-            coords = coords.Offset(offset.Value);
-
         var indices = _map.CoordinatesToTile(gridId, gridComp, coords);
-        var anchored = _map.GetAnchoredEntitiesEnumerator(gridId, gridComp, indices);
+        return GetAnchoredEntitiesEnumerator((gridId, gridComp), indices, offset, facing);
+    }
+
+    public RMCAnchoredEntitiesEnumerator GetAnchoredEntitiesEnumerator(Entity<MapGridComponent> grid, Vector2i indices, Direction? offset = null, DirectionFlag facing = DirectionFlag.None)
+    {
+        if (offset != null)
+            indices = indices.Offset(offset.Value);
+
+        var anchored = _map.GetAnchoredEntitiesEnumerator(grid, grid, indices);
         return new RMCAnchoredEntitiesEnumerator(_transform, anchored, facing);
     }
 

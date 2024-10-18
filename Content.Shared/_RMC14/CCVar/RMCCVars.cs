@@ -52,7 +52,7 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.bleed_time_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> CMMarinesPerXeno =
-        CVarDef.Create("rmc.marines_per_xeno", 6f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.marines_per_xeno", 7f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCPatronLobbyMessageTimeSeconds =
         CVarDef.Create("rmc.patron_lobby_message_time_seconds", 30, CVar.REPLICATED | CVar.SERVER);
@@ -67,11 +67,11 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.requisitions_starting_balance", 0, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCRequisitionsBalanceGain =
-        CVarDef.Create("rmc.requisitions_balance_gain", 800, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.requisitions_balance_gain", 750, CVar.REPLICATED | CVar.SERVER);
 
     // TODO RMC14 400
     public static readonly CVarDef<int> RMCRequisitionsStartingDollarsPerMarine =
-        CVarDef.Create("rmc.requisitions_starting_dollars_per_marine", 2000, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.requisitions_starting_dollars_per_marine", 1750, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<string> RMCDiscordToken =
         CVarDef.Create("rmc.discord_token", "", CVar.SERVER | CVar.SERVERONLY | CVar.CONFIDENTIAL);
@@ -210,4 +210,19 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCPowerLoadMultiplier =
         CVarDef.Create("rmc.power_load_multiplier", 0.01f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCMarinesPerSurvivor =
+        CVarDef.Create("rmc.marines_per_survivor", 10, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCSurvivorsMinimum =
+        CVarDef.Create("rmc.survivors_minimum", 2, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCSurvivorsMaximum =
+        CVarDef.Create("rmc.survivors_maximum", 8, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCSpawnerMaxCorpses =
+        CVarDef.Create("rmc.spawner_max_corpses", 25, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCHiveSpreadEarlyMinutes =
+        CVarDef.Create("rmc.hive_spread_early_minutes", 40, CVar.REPLICATED | CVar.SERVER);
 }

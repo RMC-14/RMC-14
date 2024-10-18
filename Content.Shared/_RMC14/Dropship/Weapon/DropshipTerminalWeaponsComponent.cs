@@ -28,6 +28,9 @@ public sealed partial class DropshipTerminalWeaponsComponent : Component
     [DataField, AutoNetworkedField]
     public int TargetsPage;
 
+    [DataField, AutoNetworkedField]
+    public bool NightVision;
+
     [DataRecord]
     [Serializable, NetSerializable]
     public record struct Screen(
