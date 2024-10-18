@@ -2,11 +2,14 @@
   parent: BaseItem
   id: XenoEgg
   name: egg
+  description: It looks like a weird egg.
   placement:
     mode: SnapgridCenter
     snap:
     - Wall
   components:
+  - type: Item
+    size: Ginormous
   - type: Fixtures
     fixtures:
       fix1:
@@ -40,8 +43,6 @@
     layers:
     - state: egg_item
       map: [ "enum.XenoEggLayers.Base" ]
-  - type: Item
-    size: Ginormous
   - type: XenoEgg
   - type: Damageable
     damageContainer: StructuralXeno
@@ -51,6 +52,14 @@
         !type:DamageTrigger
         damage: 80
       behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          XenoEggDestroyed:
+            min: 1
+            max: 1
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Xeno/alien_egg_burst.ogg
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
     - trigger:
@@ -73,3 +82,66 @@
         type: XenoParasiteGhostBui
         requireInputValidation: false
   - type: RequireProjectileTarget
+
+- type: entity
+  parent: BaseItem
+  categories: [ HideSpawnMenu ]
+  id: XenoEggDestroyed
+  name: egg
+  description: A mess of... something.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        layer:
+        - BulletImpassable
+        restitution: 0.3
+        friction: 0.2
+  - type: Transform
+    anchored: true
+  - type: CollisionWake
+    enabled: false
+  - type: Flammable
+    fireSpread: false
+    damage:
+      types:
+        Heat: 3
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_egg.rsi
+    drawdepth: Items
+    layers:
+    - map: [ "egg" ]
+      state: egg_exploded
+  - type: Damageable
+    damageContainer: StructuralXeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 60
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Heat
+        damage: 15
+      behaviors:
+      - !type:BurnBodyBehavior { }
+  - type: Corrodible
+    isCorrodible: false
+  - type: RequireProjectileTarget
+  - type: WhitelistPickupBy
+  - type: DestroyedXenoEgg
