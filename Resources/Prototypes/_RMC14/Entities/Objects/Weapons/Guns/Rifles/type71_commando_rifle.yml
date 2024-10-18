@@ -5,14 +5,14 @@
   description: A much rarer variant of the Type 71, this version contains an integrated suppressor, integrated scope, and extensive fine-tuning. Many parts have been replaced, filed down, and improved upon.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/type71_commando.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/type71-commando.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/type71_commando.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/type71-commando.rsi
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
