@@ -19,8 +19,8 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/gas.rsi
     slots:
-    - Mask
     - Suitstorage
+    - Mask
   - type: Item
     size: Small
   - type: Tag
@@ -68,6 +68,12 @@
     coverage: MOUTH
   - type: Item
     storedRotation: -90
+  - type: HideLayerClothing # TODO port pulled down sprite from SS13
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
 
 - type: entity
   parent: CMBaseMask
