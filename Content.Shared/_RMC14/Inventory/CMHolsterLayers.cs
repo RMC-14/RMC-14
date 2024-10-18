@@ -3,7 +3,7 @@
 namespace Content.Shared._RMC14.Inventory;
 
 [Serializable, NetSerializable]
-public enum CMItemSlotsLayers
+public enum CMHolsterLayers
 {
-    Fill,
+    Base,
 }
