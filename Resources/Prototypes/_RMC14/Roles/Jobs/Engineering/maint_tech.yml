@@ -4,6 +4,10 @@
   name: cm-job-name-maint-tech
   description: cm-job-description-maint-tech
   playTimeTracker: CMJobMaintTech
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 7200 # 2 hours
   startingGear: CMGearMaintTech
   icon: "CMJobIconMaintTech"
   joinNotifyCrew: false
