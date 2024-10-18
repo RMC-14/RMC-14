@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the runner's and lurker's leap cooldown being swapped. The runner's
-      is now correctly 3 seconds, and the lurker's is 6 seconds.
-    type: Fix
-  id: 350
-  time: '2024-07-11T11:41:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2976
 - author: Mattshark89
   changes:
   - message: The Queen's screech is no longer blocked by marines. Apparently, marines
@@ -4692,5 +4684,12 @@
   id: 849
   time: '2024-10-17T01:30:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4496
+- author: Vermidia
+  changes:
+  - message: You can no longer akimbo with two MOU53s
+    type: Fix
+  id: 850
+  time: '2024-10-18T01:06:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4506
 Name: RMC14
 Order: -1
