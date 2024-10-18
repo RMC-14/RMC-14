@@ -100,6 +100,7 @@
 - type: entity
   parent: CMCartridgePistolBase
   id: CMCartridgePistolMK45
+  name: Cartridge (.45 Automagnum)
   components:
   - type: Tag
     tags:
