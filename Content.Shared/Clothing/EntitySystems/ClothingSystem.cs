@@ -109,18 +109,19 @@ public abstract class ClothingSystem : EntitySystem
                                 if (clothing.EquippedPrefix != mask.EquippedPrefix)
                                 {
                                     shouldLayerShow = false;
-                                    break;
+                                    continue;
                                 }
                             }
                             else
                             {
                                 shouldLayerShow = false;
-                                break;
+                                continue;
                             }
                         }
                     }
                 }
             }
+
             _humanoidSystem.SetLayerVisibility(equipee, layer, shouldLayerShow);
         }
     }
