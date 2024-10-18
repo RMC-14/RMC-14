@@ -1,0 +1,7 @@
+# Attempted to keep the files in alphabetical order so its easier to audit.
+# Finding individual authors is an unfeasible task. If you can reference the author please do so.
+
+- files: ["warcry.png"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Created by TyAshley (AllenTheGreat) at commit 7f6c7cd82943dbc9a1fe8a79d6a924ac600b3fdb, modified by Dutch-VanDerLinde"
+  source: "https://github.com/TyAshley"
