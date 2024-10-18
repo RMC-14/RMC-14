@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: ShadowCommander
-  changes:
-  - message: Fixed nests sometimes getting placed in-between walls.
-    type: Fix
-  - message: Nest direction is now based on Xenonid position instead of host position.
-    type: Tweak
-  - message: Xenonids now attempt to place hosts on both wall surface directions when
-      positioned diagonally to the surface.
-    type: Tweak
-  id: 352
-  time: '2024-07-13T01:44:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3014
 - author: Sigil
   changes:
   - message: Attachments that modify the size of their holder now properly apply and
@@ -4696,5 +4684,16 @@
   id: 851
   time: '2024-10-18T01:26:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4505
+- author: Vermidia
+  changes:
+  - message: Fix identifiers not being preserved on devolve
+    type: Fix
+  - message: Fix free slots not being 100% free. They will no longer count towards
+      existing tier counts and will always be available no matter how many xenos of
+      that tier are roaming about.
+    type: Fix
+  id: 852
+  time: '2024-10-18T01:27:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4499
 Name: RMC14
 Order: -1
