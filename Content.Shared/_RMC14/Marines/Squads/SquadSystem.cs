@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Orders;
+using Content.Shared._RMC14.Pointing;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Chat;
@@ -419,6 +420,7 @@ public sealed class SquadSystem : EntitySystem
                     }
 
                     RemCompDeferred<SquadLeaderComponent>(uid);
+                    RemCompDeferred<RMCPointingComponent>(uid);
                 }
             }
         }
@@ -430,6 +432,8 @@ public sealed class SquadSystem : EntitySystem
             Dirty(toPromote, orders);
             _marineOrders.StartActionUseDelay((toPromote, orders));
         }
+
+        EnsureComp<RMCPointingComponent>(toPromote);
 
         var slots = _inventory.GetSlotEnumerator(toPromote.Owner, SlotFlags.EARS);
         while (slots.MoveNext(out var slot))
