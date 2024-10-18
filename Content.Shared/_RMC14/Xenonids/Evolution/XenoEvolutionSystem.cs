@@ -14,6 +14,7 @@ using Content.Shared.Doors.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Jittering;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -41,6 +42,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
+    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -171,7 +173,16 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (xeno.Comp.EvolutionDelay > TimeSpan.Zero)
             _popup.PopupClient(Loc.GetString("cm-xeno-evolution-start"), xeno, xeno);
 
-        _doAfter.TryStartDoAfter(doAfter);
+        if (_doAfter.TryStartDoAfter(doAfter))
+        {
+            _jitter.DoJitter(xeno, xeno.Comp.EvolutionDelay, true, 80, 8, true);
+
+            var popupOthers = Loc.GetString("rmc-xeno-evolution-start-others", ("xeno", xeno));
+            _popup.PopupEntity(popupOthers, xeno, Filter.PvsExcept(xeno), true, PopupType.Medium);
+
+            var popupSelf = Loc.GetString("rmc-xeno-evolution-start-self");
+            _popup.PopupEntity(popupSelf, xeno, xeno, PopupType.Medium);
+        }
     }
 
     private void OnXenoStrainBui(Entity<XenoEvolutionComponent> xeno, ref XenoStrainBuiMsg args)
@@ -263,6 +274,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private void OnXenoEvolutionNewEvolved(Entity<XenoEvolutionComponent> xeno, ref NewXenoEvolvedEvent args)
     {
         TransferPoints((args.OldXeno, args.OldXeno), xeno, true);
+        _jitter.DoJitter(xeno, xeno.Comp.EvolutionJitterDuration, true, 80, 8, true);
     }
 
     private void OnXenoEvolutionDevolved(Entity<XenoEvolutionComponent> xeno, ref XenoDevolvedEvent args)
@@ -385,7 +397,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         if (newXenoComp != null &&
             !newXenoComp.BypassTierCount &&
-            _xenoHive.GetHive(xeno.Owner) is {} oldHive &&
+            _xenoHive.GetHive(xeno.Owner) is { } oldHive &&
             _xenoHive.TryGetTierLimit((oldHive, oldHive.Comp), newXenoComp.Tier, out var limit))
         {
             var existing = 0;
