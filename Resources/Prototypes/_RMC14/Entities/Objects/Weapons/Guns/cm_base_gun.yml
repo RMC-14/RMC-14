@@ -3,6 +3,8 @@
   parent: RMCBaseMeleeWeapon
   id: CMBaseWeaponGun
   components:
+  - type: UsableWhileDevoured
+    canUnequip: true
   - type: GunUnskilledPenalty
   - type: GunIFF
     enabled: false

@@ -100,8 +100,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridge10x20mm
-    proto: CMCartridge10x20mm
+      - CMCartridge9mmSMG
+    proto: CMCartridge9mmSMG
     capacity: 30
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mp5.rsi
@@ -117,5 +117,21 @@
     zeroOnlyOnEmpty: true
   - type: Appearance
 
+- type: entity
+  parent: CMCartridge10x20mm
+  id: CMCartridge9mmSMG
+  name: cartridge (9mm SMG)
+  description: A 9mm cartridge for the mp5 submachinegun.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridge9mmSMG
+  - type: CartridgeAmmo
+    proto: Bullet10x20mm
+
 - type: Tag
   id: CMMagazineSMGMP5
+
+- type: Tag
+  id: CMCartridge9mmSMG
