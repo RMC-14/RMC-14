@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Alert;
 using Content.Shared.DoAfter;
@@ -60,6 +61,12 @@ public sealed class XenoPlasmaSystem : EntitySystem
             return;
         }
 
+        if (HasComp<XenoAttachedOvipositorComponent>(args.Target))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-plasma-ovipositor"), xeno, xeno);
+            return;
+        }
+
         if (!TryComp(args.Target, out XenoPlasmaComponent? targetPlasma) ||
             targetPlasma.MaxPlasma == 0)
         {
@@ -89,8 +96,9 @@ public sealed class XenoPlasmaSystem : EntitySystem
 
         if (self.Owner == target ||
             !TryComp(target, out XenoPlasmaComponent? otherXeno) ||
-            !TryRemovePlasma((self, self), args.Amount))
-        {
+            !TryRemovePlasma((self, self), args.Amount)) || HasComp<XenoAttachedOvipositorComponent>(args.Target)
+
+		{
             return;
         }
 
