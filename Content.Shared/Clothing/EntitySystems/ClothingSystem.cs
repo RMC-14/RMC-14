@@ -121,7 +121,6 @@ public abstract class ClothingSystem : EntitySystem
                     }
                 }
             }
-
             _humanoidSystem.SetLayerVisibility(equipee, layer, shouldLayerShow);
         }
     }
