@@ -1,32 +1,4 @@
 ﻿Entries:
-- author: MendaxxDev
-  changes:
-  - message: Added new lobby music
-    type: Add
-  id: 361
-  time: '2024-07-13T07:39:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3001
-- author: DrSmugleaf
-  changes:
-  - message: Fixed shutters not occluding vision when closed.
-    type: Fix
-  - message: Fixed shutters and podlocks showing a red damage visual effect when they
-      are invincible to damage.
-    type: Fix
-  id: 362
-  time: '2024-07-13T07:53:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3036
-- author: DrSmugleaf
-  changes:
-  - message: The game no longer forces at least one xeno to spawn as Queen. In the
-      event that there is none round-start, one of the larvas can evolve into it.
-    type: Tweak
-  - message: Fixed the Grenadier Specialist's M83 grenade launcher shooting grenades
-      half as far as it should have been.
-    type: Fix
-  id: 363
-  time: '2024-07-13T09:37:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3037
 - author: Kaga
   changes:
   - message: Wield delay now applies to shooting after wielding.
@@ -4714,5 +4686,27 @@
   id: 860
   time: '2024-10-18T09:47:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4508
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Gun bayonets can now be used while devoured by a xenonid. You cannot
+      shoot the gun, however.
+    type: Tweak
+  id: 861
+  time: '2024-10-18T19:11:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4514
+- author: Vermidia
+  changes:
+  - message: Fix being able to transfer plasma to ovi'd Queens
+    type: Fix
+  id: 862
+  time: '2024-10-18T19:11:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4513
+- author: Vermidia
+  changes:
+  - message: Comtechs now have engineering skill 3 instead of 2
+    type: Tweak
+  id: 863
+  time: '2024-10-18T19:12:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4510
 Name: RMC14
 Order: -1
