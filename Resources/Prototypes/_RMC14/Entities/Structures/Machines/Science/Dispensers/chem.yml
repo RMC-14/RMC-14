@@ -7,7 +7,6 @@
     mode: SnapgridCenter
   components:
   - type: Transform
-    anchored: true
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -105,7 +104,7 @@
     mode: SnapgridCenter
   components:
   - type: Transform
-    anchored: true
+    anchored: false
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -119,6 +118,9 @@
         - MachineMask
         layer:
         - MachineLayer
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/chemical_storage.rsi
+    state: chemstorage
   - type: RMCChemicalStorage
 
 - type: entity
