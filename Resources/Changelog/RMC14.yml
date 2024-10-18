@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Mattshark89
-  changes:
-  - message: The Queen's screech is no longer blocked by marines. Apparently, marines
-      are opaque.
-    type: Fix
-  id: 351
-  time: '2024-07-12T03:17:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3002
 - author: ShadowCommander
   changes:
   - message: Fixed nests sometimes getting placed in-between walls.
@@ -4691,5 +4683,18 @@
   id: 850
   time: '2024-10-18T01:06:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4506
+- author: Vermidia
+  changes:
+  - message: Fix being able to repair multiple cades at once. Welders also use the
+      proper amount of fuel for this, and isn't canceled by damage.
+    type: Fix
+  - message: Cades now heal 200 health on weld instead of all their health. They also
+      now take 5 seconds to weld with construction skill 2 and 10 with 1 or 0 skill.
+    type: Fix
+  - message: You can no longer weld sentries with a turned off or empty welder.
+    type: Fix
+  id: 851
+  time: '2024-10-18T01:26:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4505
 Name: RMC14
 Order: -1
