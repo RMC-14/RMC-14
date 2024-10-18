@@ -1,18 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: The turrets guarding landing zones at round-start will now automatically
-      target nearby resin structures and destroy them in a single shot.
-    type: Tweak
-  - message: The turrets guarding landing zones at round-start will now last 20 minutes
-      after a dropship lands, instead of 20 minutes from round start, keeping the
-      landing zones safer for longer.
-    type: Tweak
-  id: 356
-  time: '2024-07-13T06:16:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3032
-- author: DrSmugleaf
-  changes:
   - message: Fixed xenonids not being able to corrode folding barricades for realsies
       this time.
     type: Fix
@@ -4698,5 +4686,25 @@
   id: 855
   time: '2024-10-18T02:26:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4491
+- author: Rainbeon
+  changes:
+  - message: Runner's pulling speed on marines has been decreased by about ~23.5%,
+      moving slightly slower than a Marine wearing Heavy Armor.
+    type: Tweak
+  - message: Warrior's pulling speed on marines has been decreased by about ~10%.
+    type: Tweak
+  - message: All other Xenos pull Marines somewhat faster.
+    type: Tweak
+  - message: Marines now pull other Marines faster.
+    type: Tweak
+  - message: All Xenos besides Hivelord and Crusher now pull other Xenos slower.
+    type: Tweak
+  - message: Hivelords and Crushers now pull other Xenos faster.
+    type: Tweak
+  - message: Marines now pull Xeno corpses faster.
+    type: Tweak
+  id: 856
+  time: '2024-10-18T02:29:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4453
 Name: RMC14
 Order: -1
