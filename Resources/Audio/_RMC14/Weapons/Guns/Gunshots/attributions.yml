@@ -119,7 +119,13 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/21e6447cc08aea502f671c819fdbcecbb85e6028master/sound/weapons/smg_light.ogg"
 
-- files: ["gun_ar10.orgg"]
+- files: ["gun_ar10.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/eb11a226994fb140fb0f713dd05525a0f8b3b3ae/sound/weapons/gun_ar10.ogg"
+
+- files: ["gun_m60.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_m60.ogg"
+  
