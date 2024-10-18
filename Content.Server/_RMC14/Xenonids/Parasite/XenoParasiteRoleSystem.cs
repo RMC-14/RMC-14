@@ -1,5 +1,6 @@
 using Content.Server.Ghost.Roles;
 using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared.Ghost;
 using Content.Shared.Popups;
@@ -79,6 +80,10 @@ public sealed class XenoEggRoleSystem : EntitySystem
 
         if (!TryComp(user, out GhostComponent? ghostComp))
             return false;
+
+        // If the player previously successfully infected someone, they bypass the timer check entirely 
+        if (HasComp<InfectionSuccessComponent>(user))
+            return true;
 
         var timeSinceDeath = _gameTiming.CurTime.Subtract(ghostComp.TimeOfDeath);
 

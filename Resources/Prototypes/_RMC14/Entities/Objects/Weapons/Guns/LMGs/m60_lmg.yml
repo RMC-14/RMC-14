@@ -1,0 +1,161 @@
+- type: entity
+  parent: RMCBaseWeaponLMG
+  name: M60 General Purpose Machine Gun
+  id: RMCWeaponLMGM60
+  description: The Pig. The Action Hero's dream. Chambered in 7.62x51 NATO
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/LMGs/m60.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/LMGs/m60.rsi
+      state: barrel
+      offset: 0.525, 0.0925
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+      state: m60_stock
+      offset: -0.6, 0
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/LMGs/m60.rsi
+  - type: Tag
+    tags:
+    - RMCWeaponLMGM60
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: Gun
+    shotsPerBurst: 5
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m60.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilWielded: 0
+    recoilUnwielded: 0
+    scatterWielded: 4
+    scatterUnwielded: 4
+    baseFireRate: 3.3
+    burstScatterMult: 3
+    modifiers:
+      Burst:
+        fireDelay: 0.1
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 0
+        shotsToMaxScatter: 6
+      FullAuto:
+        fireDelay: 0.01
+        maxScatterModifier: 4
+        shotsToMaxScatter: 6
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineLMGM60
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineLMGM60
+  - type: GunDamageModifier
+    multiplier: 1
+  # - type: UniqueAction
+  # - type: BreechLoaded
+  #   needOpenClose: false
+  # - type: Appearance
+  # - type: GenericVisualizer
+  #   visuals:
+  #     enum.BreechVisuals.Open:
+  #       enum.BreechVisuals.Open:
+  #         True: { state: cover-open }
+  #         False: { state: cover-closed }
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentBipod
+        whitelist:
+          tags:
+          - RMCAttachmentBipod
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-underbarrel: 0.618, -0.263
+  - type: Wieldable
+  - type: GunRequiresWield
+
+
+- type: entity
+  parent: RMCMagazineLMGBase
+  id: RMCMagazineLMGM60
+  name: "M60 Ammo Box (7.62x51 NATO)"
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineLMG
+    - RMCMagazineLMGM60
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeLMGM60
+    proto: RMCCartridgeLMGM60
+    capacity: 100
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m60.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: entity
+  parent: RMCCartridgeRifleAR10
+  id: RMCCartridgeLMGM60
+  name: cartridge (7.62x51)
+  description: A 7.62x51 NATO cartridge
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeLMGM60
+  - type: CartridgeAmmo
+    proto: RMCBulletLMGM60
+
+- type: entity
+  parent: BaseBullet
+  id: RMCBulletLMGM60
+  noSpawn: true
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 45
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 9999
+      ignoreModifiers: true
+  - type: CMArmorPiercing
+    amount: 30
+
+- type: Tag
+  id: RMCWeaponLMGM60
+
+- type: Tag
+  id: RMCMagazineLMGM60
+  
+- type: Tag
+  id: RMCCartridgeLMGM60

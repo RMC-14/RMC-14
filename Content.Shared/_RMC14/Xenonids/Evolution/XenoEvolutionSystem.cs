@@ -238,6 +238,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         Del(xeno.Owner);
 
+        var afterEv = new AfterNewXenoEvolvedEvent();
+        RaiseLocalEvent(newXeno, ref afterEv);
+
         _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-devolve", ("xeno", newXeno)), newXeno, newXeno, PopupType.LargeCaution);
     }
 
@@ -400,6 +403,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             var existing = 0;
             var total = 0;
             var current = EntityQueryEnumerator<XenoComponent, HiveMemberComponent>();
+            var slotCount = oldHive.Comp.FreeSlots.ToDictionary();
             while (current.MoveNext(out var existingComp, out var member))
             {
                 if (member.Hive != oldHive.Owner || !existingComp.CountedInSlots)
@@ -410,13 +414,13 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 if (existingComp.Tier < newXenoComp.Tier)
                     continue;
 
-                existing++;
+                if (slotCount.ContainsKey(existingComp.Role.Id) && slotCount[existingComp.Role.Id] > 0)
+                    slotCount[existingComp.Role.Id] -= 1;
+                else
+                    existing++;
             }
 
-            if (_xenoHive.TryGetFreeSlots((oldHive, oldHive.Comp), newXeno, out var freeSlots))
-                existing -= freeSlots;
-
-            if (total != 0 && existing / (float)total >= limit)
+            if (total != 0 && existing / (float) total >= limit && (!slotCount.ContainsKey(newXeno) || slotCount[newXeno] <= 0))
             {
                 if (doPopup)
                 {

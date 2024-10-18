@@ -37,6 +37,7 @@
     tier: 1
     hudOffset: 0,0.2
     unlockAt: 240 # 4 minutes
+  - type: XenoLight
   - type: XenoDevolve
     devolvesTo:
     - CMXenoLarva
