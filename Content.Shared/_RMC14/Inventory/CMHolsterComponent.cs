@@ -14,6 +14,10 @@ public sealed partial class CMHolsterComponent : Component
     [DataField]
     public List<EntityUid> Contents = new();
 
+    // How many entities fit "inside" the holster
+    [DataField]
+    public int HolsterSize = 1;
+
     /// <summary>
     /// Sound played whenever an entity is inserted into holster.
     /// </summary>

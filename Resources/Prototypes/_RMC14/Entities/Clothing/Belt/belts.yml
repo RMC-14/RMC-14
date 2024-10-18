@@ -123,6 +123,18 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/combat_utility.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m1984 # TODO RMC14 per-gun underlay
+      offset: -0.3125, -0.09375
+      map: [ "enum.CMHolsterLayers.Base" ]
+      visible: false
+    - state: icon-front
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/combat_utility.rsi
   - type: Storage
@@ -159,6 +171,15 @@
       whitelist:
         components:
         - Gun
+  - type: CMHolster
+    insertSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_sheathe.ogg
+    ejectSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_draw.ogg
+  - type: GenericVisualizer
+    visuals:
+      enum.CMHolsterLayers.Base:
+        enum.CMHolsterLayers.Base:
+          Empty: { state: m1984, visible: false }
+          Full: { state: m1984, visible: true }
 
 - type: entity
   parent: CMBeltBase

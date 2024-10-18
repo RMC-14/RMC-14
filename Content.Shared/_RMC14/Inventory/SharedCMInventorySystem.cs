@@ -69,6 +69,10 @@ public abstract class SharedCMInventorySystem : EntitySystem
         SubscribeLocalEvent<CMItemSlotsComponent, EntInsertedIntoContainerMessage>(OnSlotsEntInsertedIntoContainer);
         SubscribeLocalEvent<CMItemSlotsComponent, EntRemovedFromContainerMessage>(OnSlotsEntRemovedFromContainer);
 
+        SubscribeLocalEvent<CMHolsterComponent, AfterAutoHandleStateEvent>(OnHolsterComponentHandleState);
+        SubscribeLocalEvent<CMHolsterComponent, EntInsertedIntoContainerMessage>(OnHolsterEntInsertedIntoContainer);
+        SubscribeLocalEvent<CMHolsterComponent, EntRemovedFromContainerMessage>(OnHolsterEntRemovedFromContainer);
+
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMHolsterPrimary,
                 InputCmdHandler.FromDelegate(session =>
@@ -147,6 +151,11 @@ public abstract class SharedCMInventorySystem : EntitySystem
         ContentsUpdated(ent);
     }
 
+    private void OnHolsterComponentHandleState(Entity<CMHolsterComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        ContentsUpdated(ent);
+    }
+
     private void OnSlotsActivateInWorld(Entity<CMItemSlotsComponent> ent, ref ActivateInWorldEvent args)
     {
         // If holster belongs to storage item, open it instead of unholstering
@@ -170,15 +179,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     protected void OnSlotsEntInsertedIntoContainer(Entity<CMItemSlotsComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        var item = args.Entity;
-        var ev = new IsUnholsterableEvent();
-        RaiseLocalEvent(item, ref ev);
-
-        if (ev.Unholsterable &&
-            TryComp(ent, out CMHolsterComponent? holster) &&
-            !holster.Contents.Contains(item))
-            holster.Contents.Add(item);
-
         ContentsUpdated(ent);
     }
 
@@ -190,10 +190,27 @@ public abstract class SharedCMInventorySystem : EntitySystem
             Dirty(ent);
         }
 
+        ContentsUpdated(ent);
+    }
+
+    protected void OnHolsterEntInsertedIntoContainer(Entity<CMHolsterComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
         var item = args.Entity;
-        if (TryComp(ent, out CMHolsterComponent? holster) &&
-            holster.Contents.Contains(item))
-            holster.Contents.Remove(item);
+        var ev = new IsUnholsterableEvent();
+        RaiseLocalEvent(item, ref ev);
+
+        if (ev.Unholsterable &&
+            !ent.Comp.Contents.Contains(item))
+            ent.Comp.Contents.Add(item);
+
+        ContentsUpdated(ent);
+    }
+
+    protected void OnHolsterEntRemovedFromContainer(Entity<CMHolsterComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        var item = args.Entity;
+        if (ent.Comp.Contents.Contains(item))
+            ent.Comp.Contents.Remove(item);
 
         ContentsUpdated(ent);
     }
@@ -216,10 +233,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
             visuals = CMItemSlotsVisuals.Empty;
 
         _appearance.SetData(ent, CMItemSlotsLayers.Fill, visuals);
-
-        // Update holster visuals if applicable
-        if (TryComp(ent, out CMHolsterComponent? holster))
-            ContentsUpdated((ent.Owner, holster));
     }
 
     protected virtual void ContentsUpdated(Entity<CMHolsterComponent> ent)
@@ -511,9 +524,10 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
             if (TryComp(item, out StorageComponent? storage) &&
                 TryGetLastInserted(holsterComp, out var weapon) &&
-                _hands.TryPickup(user, weapon))
+                weapon is { } weaponActual &&
+                _hands.TryPickup(user, weaponActual))
             {
-                holsterComp.Contents.Remove(weapon);
+                holsterComp.Contents.Remove(weaponActual);
                 _audio.PlayPredicted(holsterComp.EjectSound, item, user);
                 stop = true;
                 return true;
