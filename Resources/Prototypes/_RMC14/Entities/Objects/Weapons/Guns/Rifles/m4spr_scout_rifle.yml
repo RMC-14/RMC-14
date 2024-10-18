@@ -38,6 +38,8 @@
     whitelist:
       components:
       - ScoutWhitelist
+  - type: Corrodible
+    isCorrodible: false
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom.rsi
   - type: MeleeWeapon

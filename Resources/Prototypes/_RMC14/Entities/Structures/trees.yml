@@ -100,6 +100,26 @@
         density: 3500
         layer:
         - WallLayer
+        
+- type: entity
+  parent: RMCBaseTree
+  id: RMCBaseTreeAlien
+  abstract: true
+  name: strange tree
+  description: Some kind of bizarre alien tree. It oozes with a sickly yellow sap.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Flora/flora_treealien.rsi
+    offset: 0,0.7
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.3,0.1,0.3"
+        density: 4000
+        layer:
+        - WallLayer
 
 - type: entity
   parent: RMCBaseTree
@@ -284,3 +304,10 @@
   components:
   - type: Sprite
     state: treestumpconifer
+
+- type: entity
+  parent: RMCBaseTreeAlien
+  id: RMCAlienTree01
+  components:
+  - type: Sprite
+    state: treealien01

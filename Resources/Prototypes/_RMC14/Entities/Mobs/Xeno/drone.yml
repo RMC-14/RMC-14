@@ -31,6 +31,7 @@
     tier: 1
     bypassTierCount: true
     unlockAt: 60 # 1 minute
+  - type: XenoLight
   - type: XenoDevolve
     devolvesTo:
     - CMXenoLarva
@@ -147,6 +148,7 @@
     critHealMultiplier: 0.3465  # 5% increased regeneration
     standHealingMultiplier: 0.42
     restHealMultiplier: 1.05
+    hidden: true
   - type: XenoStrain
     name: rmc-xeno-gardener-name
     description: rmc-xeno-gardener-description
