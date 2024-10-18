@@ -235,6 +235,8 @@
 #        crate: RMCCrateM54CE2
       - cost: 3000
         crate: RMCCrateMK80
+      - cost: 4000
+        crate: RMCCrateXM88
       - cost: 3000
         crate: RMCCrateSU6
       - cost: 3000
