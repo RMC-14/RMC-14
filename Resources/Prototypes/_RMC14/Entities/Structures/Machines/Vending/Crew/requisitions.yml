@@ -152,8 +152,8 @@
       entries:
       - id: RMCPouchAutoinjector
         amount: 1
-      #- id: RMCPouchMedkit
-      #  amount: 2
+      - id: RMCPouchMedkit
+        amount: 2
       - id: RMCPouchFirstAidInjectors
         amount: 5
       - id: RMCPouchFirstResponder
