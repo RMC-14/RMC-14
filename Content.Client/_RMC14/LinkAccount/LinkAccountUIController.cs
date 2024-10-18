@@ -222,6 +222,7 @@ public sealed class LinkAccountUIController : UIController, IOnSystemChanged<Lin
             return;
 
         _patronPerksWindow.GhostColorSliders.Color = Color.White;
+        _patronPerksWindow.GhostColorSaveButton.Disabled = true;
         _net.ClientSendMessage(new RMCClearGhostColorMsg());
     }
 
@@ -230,6 +231,7 @@ public sealed class LinkAccountUIController : UIController, IOnSystemChanged<Lin
         if (_patronPerksWindow is not { IsOpen: true })
             return;
 
+        _patronPerksWindow.GhostColorSaveButton.Disabled = true;
         _net.ClientSendMessage(new RMCChangeGhostColorMsg { Color = _patronPerksWindow.GhostColorSliders.Color });
     }
 
