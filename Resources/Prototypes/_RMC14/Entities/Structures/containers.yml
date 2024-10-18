@@ -23,6 +23,8 @@
     sprite: _RMC14/Structures/containers.rsi
     offset: 0, 0.5
   - type: Clickable
+  - type: Occluder
+    boundingBox: "-0.5,-0.5,0.5,1.5"
   - type: DeleteOnExplosion
 
 - type: entity
