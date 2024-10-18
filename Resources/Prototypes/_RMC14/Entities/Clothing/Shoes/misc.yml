@@ -8,6 +8,22 @@
     sprite: _RMC14/Objects/Clothing/Shoes/laceup.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Shoes/laceup.rsi
+  - type: ContainerContainer
+    containers:
+      item: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      item:
+        name: rmc-gun
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        whitelist:
+          tags:
+          - Holdout
+  - type: Matchbox
+  - type: CMHolster
+  - type: CMItemSlots
+  - type: UsableWhileDevoured
 
 - type: entity
   parent: RMCShoesLaceup
@@ -19,7 +35,7 @@
     sprite: _RMC14/Objects/Clothing/Shoes/laceup_brown.rsi
 
 - type: entity
-  parent: ClothingShoesBase
+  parent: CMBootsBlackFilled
   id: RMCShoesJackboots
   name: jackboots
   description: Security combat boots for combat scenarios or combat situations. All combat, all the time.
