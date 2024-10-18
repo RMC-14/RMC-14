@@ -1,10 +1,10 @@
 <Document>
 [color=#5f698a]█    █ █▄ █[/color] [head=2][bold]UNITED NATIONS MARINE CORPS[/bold][/head]\n
-[color=#5f698a]▀ ▄▀ █ ▀█ [/color] [italic]UNS Almayer; 2nd Co, 2nd Bn, 4th Bde, 4th UNMC Div[/italic]
+[color=#5f698a]▀ ▄▀ █ ▀█ [/color]
 
 #UNMC Rifleman's Primer
-  - Rise and shine, soldier! Get out of that cryobooth and get tactical, briefing in 10 minutes!
-  
+  - Rise and shine, soldier! Get out of that cryobooth and get tactical!
+
   - You've just woken up, so you're hungry. Head to the food vendor, dispense two meals from the machine and get them down your neck. If you have complaints about the food, you can address them to someone who gives a damn!
   <Box>
     <GuideEntityEmbed Entity="ColMarTechFood"/>
@@ -12,15 +12,15 @@
   </Box>
    - You can't bring those trays with you, so leave them on a nearby table or throw them into the disposals. God help you if I catch you throwing them anywhere else!
   <Box>
-  [color=red]MARINE! You cannot attend briefing in your shorts! Get dressed! DOUBLE TIME! [/color]
+  [color=red]MARINE! You cannot fight in your shorts! Get dressed! DOUBLE TIME! [/color]
   </Box>
   - Haul your ass to the automated equipment vendor and get your uniform on. Click on the vending machine, and then click the "Standard Marine Apparel".
   - This will give you your uniform, including undersuit, boots, gloves, helmet, and headset - and you will wear them at ALL TIMES.
   <GuideEntityEmbed Entity="ColMarTechEquipment"/>
-  
+
   - Take note of the colors on your helmet, they denote your squad:\n
-  [color=#EA0000]Red for Alpha[/color], [color=#C68610]Yellow for Bravo[/color], [color=#AA55AA]Purple for Charlie[/color], and [color=#007FCF]Blue for Delta[/color].
-  
+  [color=#E61919]Red for Alpha[/color], [color=#FFC32D]Yellow for Bravo[/color], [color=#C864C8]Purple for Charlie[/color], and [color=#4148C8]Blue for Delta[/color].
+
   - You now have your choice of equipment. You will only be dispensed one item per category (two for pouches) so choose carefully. Anything marked in [color=green]Green[/color] is recommended for your role, so grab yourself some light or medium armor, an M276 Ammo Load Rig, some first aid pouches, and a gas mask or coif if you so desire.
     <Box>
     <GuideEntityEmbed Entity="CMBeltMarine"/>
@@ -47,7 +47,7 @@
   - Inside the armory you will also find machines dispensing surplus uniforms, tools, munitions, and weapon attachments. We will cover weapon attachments in more detail another time.
   <Box>[color=red]You're mean, you're green, you're a UN Marine! OORAH![/color]
   </Box>
- 
+
   - Find your squadmates and head to briefing. If you're late to the party, head straight west to the hangar bay and get ready for deployment.
 
   - If you need any help, you can ask any of your fellow marines, or your local mentor, the Senior Enlisted Advisor.
