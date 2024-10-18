@@ -18,7 +18,7 @@ public sealed class RMCChemicalDispenserDispenseSettingBuiMsg(FixedPoint2 amount
 }
 
 [Serializable, NetSerializable]
-public sealed class RMCChemicalDispenserBeakerSettingBuiMsg(FixedPoint2 amount) : BoundUserInterfaceMessage
+public sealed class RMCChemicalDispenserBeakerBuiMsg(FixedPoint2 amount) : BoundUserInterfaceMessage
 {
     public readonly FixedPoint2 Amount = amount;
 }

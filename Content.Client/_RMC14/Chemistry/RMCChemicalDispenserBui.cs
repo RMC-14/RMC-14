@@ -90,10 +90,9 @@ public sealed class RMCChemicalDispenserBui : BoundUserInterface
                     StyleClasses = { "OpenBoth" },
                     SetWidth = 45,
                     Margin = new Thickness(0, 0, 0, 3),
-                    Pressed = dispenser.BeakerSetting == setting,
                 };
                 beakerButton.OnPressed += _ =>
-                    SendPredictedMessage(new RMCChemicalDispenserBeakerSettingBuiMsg(setting));
+                    SendPredictedMessage(new RMCChemicalDispenserBeakerBuiMsg(setting));
                 _window.BeakerContainer.AddChild(beakerButton);
                 _beakerButtons.Add((beakerButton, setting));
             }
@@ -171,11 +170,6 @@ public sealed class RMCChemicalDispenserBui : BoundUserInterface
         foreach (var (button, amount) in _dispenseButtons)
         {
             button.Pressed = dispenser.DispenseSetting == amount;
-        }
-
-        foreach (var (button, amount) in _beakerButtons)
-        {
-            button.Pressed = dispenser.BeakerSetting == amount;
         }
     }
 }

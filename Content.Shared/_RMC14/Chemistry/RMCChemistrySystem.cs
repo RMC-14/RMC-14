@@ -39,7 +39,7 @@ public sealed class RMCChemistrySystem : EntitySystem
             subs =>
             {
                 subs.Event<RMCChemicalDispenserDispenseSettingBuiMsg>(OnChemicalDispenserSettingMsg);
-                subs.Event<RMCChemicalDispenserBeakerSettingBuiMsg>(OnChemicalDispenserBeakerSettingMsg);
+                subs.Event<RMCChemicalDispenserBeakerBuiMsg>(OnChemicalDispenserBeakerSettingMsg);
                 subs.Event<RMCChemicalDispenserEjectBeakerBuiMsg>(OnChemicalDispenserEjectBeakerMsg);
                 subs.Event<RMCChemicalDispenserDispenseBuiMsg>(OnChemicalDispenserDispenseMsg);
             });
@@ -126,12 +126,18 @@ public sealed class RMCChemistrySystem : EntitySystem
         Dirty(ent);
     }
 
-    private void OnChemicalDispenserBeakerSettingMsg(Entity<RMCChemicalDispenserComponent> ent, ref RMCChemicalDispenserBeakerSettingBuiMsg args)
+    private void OnChemicalDispenserBeakerSettingMsg(Entity<RMCChemicalDispenserComponent> ent, ref RMCChemicalDispenserBeakerBuiMsg args)
     {
-        if (!ent.Comp.Settings.Contains(args.Amount))
+        if (!_itemSlots.TryGetSlot(ent, ent.Comp.ContainerSlotId, out var slot) ||
+            slot.ContainerSlot?.ContainedEntity is not { } contained ||
+            !_solution.TryGetMixableSolution(contained, out var solutionEnt, out _) ||
+            !ent.Comp.Settings.Contains(args.Amount) ||
+            !TryGetStorage(ent.Comp.Network, out var storage))
+        {
             return;
+        }
 
-        ent.Comp.BeakerSetting = args.Amount;
+        _solution.SplitSolution(solutionEnt.Value, args.Amount);
         Dirty(ent);
     }
 

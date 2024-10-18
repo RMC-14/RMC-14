@@ -37,8 +37,5 @@ public sealed partial class RMCChemicalDispenserComponent : Component
     public FixedPoint2 DispenseSetting = 5;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 BeakerSetting = 5;
-
-    [DataField, AutoNetworkedField]
     public FixedPoint2[] Settings = [5, 10, 20, 30, 40];
 }

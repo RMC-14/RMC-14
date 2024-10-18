@@ -16,6 +16,7 @@
   - type: ContainerContainer
     containers:
       pressurized_reagent_canister: !type:ContainerSlot
+      storagebase: !type:Container
   - type: ItemSlots
     slots:
       pressurized_reagent_canister:
