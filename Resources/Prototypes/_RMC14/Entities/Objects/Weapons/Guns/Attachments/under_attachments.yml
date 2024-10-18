@@ -140,13 +140,7 @@
         whitelist:
           tags:
           - RMCWeaponLMGM60
-      fireDelayFlat: -0.05
-    - conditions:
-        activeOnly: true
-        blacklist:
-          tags:
-          - RMCWeaponLMGM60
-      fireDelayFlat: -0.05
+      fireDelayFlat: -0.1
 - type: entity
   parent: RMCUnderAttachmentBase
   id: RMCAttachmentBurstFireAssembly
