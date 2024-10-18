@@ -56,8 +56,8 @@
         points: 3
       - id: CMFireExtinguisherPortable
         points: 3
-    #- id: CMMotionDetector
-    #  points: 5
+      - id: RMCMotionDetector
+        points: 5
     #- id: CMFultonDeviceStack
     #  points: 5
     - name: Binoculars

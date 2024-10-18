@@ -158,7 +158,8 @@
       entries:
       - id: CMFireExtinguisherPortable
         points: 3
-    #    CMMotionDetector: 8P
+      - id: RMCMotionDetector
+        points: 8
       - id: RMCWhistle
         points: 3
     - name: Binoculars

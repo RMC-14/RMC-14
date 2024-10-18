@@ -180,6 +180,8 @@
     #  points: 5
       - id: CMFireExtinguisherPortable
         points: 5
+      - id: RMCMotionDetector
+        points: 15
     #- id: CMMotionDetector
     #  points: 15
     #- id: CMDataDetector
