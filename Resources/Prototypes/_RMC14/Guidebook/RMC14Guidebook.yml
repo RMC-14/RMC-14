@@ -11,6 +11,7 @@
   children:
   - RMCGuideNewPlayer
   - RMCMedical
+  - RMCRequisitions
 
 - type: guideEntry
   parent: RMC
@@ -43,3 +44,10 @@
   text: "/ServerInfo/Guidebook/_RMC14/Medical/RMCMedical.xml"
   children:
   - CMChemicals
+
+- type: guideEntry
+  parent: RMC
+  id: RMCRequisitions
+  priority: 3
+  name: "Requisitions"
+  text: "/ServerInfo/Guidebook/_RMC14/RMCRequisitions.xml"
