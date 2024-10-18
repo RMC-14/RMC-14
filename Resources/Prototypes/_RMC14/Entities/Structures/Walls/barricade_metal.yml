@@ -73,7 +73,11 @@
     messagePerceivedByOthers: fence-rattle-success
     interactSuccessSound:
       collection: FenceRattle
-  - type: Repairable
+  - type: RMCRepairable
+    heal: -200
+    skill: RMCSkillConstruction
+    delay: 10
+    fuelUsed: 2
   - type: Destructible
     thresholds:
     - trigger:
@@ -239,7 +243,11 @@
       - state: handrail_a_0
       - map: [ "acided" ]
     - type: Physics
-    - type: Repairable
+    - type: RMCRepairable
+      heal: -200
+      skill: RMCSkillConstruction
+      delay: 10
+      fuelUsed: 2
     - type: Damageable
       damageContainer: Inorganic
     - type: Destructible
@@ -338,7 +346,11 @@
       map: ["enum.DoorVisualLayers.Base"]
     - map: [ "acided" ]
     drawdepth: WallTops
-  - type: Repairable
+  - type: RMCRepairable
+    heal: -200
+    skill: RMCSkillConstruction
+    delay: 10
+    fuelUsed: 2
   - type: Destructible
     thresholds:
     - trigger:

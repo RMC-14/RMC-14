@@ -1,99 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the runner's and lurker's leap cooldown being swapped. The runner's
-      is now correctly 3 seconds, and the lurker's is 6 seconds.
-    type: Fix
-  id: 350
-  time: '2024-07-11T11:41:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2976
-- author: Mattshark89
-  changes:
-  - message: The Queen's screech is no longer blocked by marines. Apparently, marines
-      are opaque.
-    type: Fix
-  id: 351
-  time: '2024-07-12T03:17:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3002
-- author: ShadowCommander
-  changes:
-  - message: Fixed nests sometimes getting placed in-between walls.
-    type: Fix
-  - message: Nest direction is now based on Xenonid position instead of host position.
-    type: Tweak
-  - message: Xenonids now attempt to place hosts on both wall surface directions when
-      positioned diagonally to the surface.
-    type: Tweak
-  id: 352
-  time: '2024-07-13T01:44:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3014
-- author: Sigil
-  changes:
-  - message: Attachments that modify the size of their holder now properly apply and
-      remove their modifiers.
-    type: Fix
-  id: 353
-  time: '2024-07-13T01:49:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2989
-- author: DrSmugleaf
-  changes:
-  - message: Added Rytil Pyain figurine.
-    type: Add
-  id: 354
-  time: '2024-07-13T01:50:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3006
-- author: DrSmugleaf
-  changes:
-  - message: Fixed warding pheromones giving far more crit health than intended. It
-      now gives (40 times the pheromone level) extra crit health, instead of multiplying
-      crit health by 4.4 when used by the Queen, or 2.5 when used by a hivelord.
-    type: Fix
-  id: 355
-  time: '2024-07-13T04:15:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3026
-- author: DrSmugleaf
-  changes:
-  - message: The turrets guarding landing zones at round-start will now automatically
-      target nearby resin structures and destroy them in a single shot.
-    type: Tweak
-  - message: The turrets guarding landing zones at round-start will now last 20 minutes
-      after a dropship lands, instead of 20 minutes from round start, keeping the
-      landing zones safer for longer.
-    type: Tweak
-  id: 356
-  time: '2024-07-13T06:16:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3032
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenonids not being able to corrode folding barricades for realsies
-      this time.
-    type: Fix
-  id: 357
-  time: '2024-07-13T06:26:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3034
-- author: DrSmugleaf
-  changes:
-  - message: Marines-per-xeno ratio autobalancing after each round now has different
-      values for each planet map.
-    type: Tweak
-  id: 358
-  time: '2024-07-13T06:26:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3033
-- author: DrSmugleaf
-  changes:
-  - message: The planet's name for the current round is now shown in the groundside
-      operations console and the command tablet.
-    type: Add
-  id: 359
-  time: '2024-07-13T07:04:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3035
-- author: DrSmugleaf
-  changes:
-  - message: Xenonids will now get visibly injured from damage.
-    type: Add
-  id: 360
-  time: '2024-07-13T07:36:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2965
 - author: MendaxxDev
   changes:
   - message: Added new lobby music
@@ -4692,5 +4597,122 @@
   id: 849
   time: '2024-10-17T01:30:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4496
+- author: Vermidia
+  changes:
+  - message: You can no longer akimbo with two MOU53s
+    type: Fix
+  id: 850
+  time: '2024-10-18T01:06:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4506
+- author: Vermidia
+  changes:
+  - message: Fix being able to repair multiple cades at once. Welders also use the
+      proper amount of fuel for this, and isn't canceled by damage.
+    type: Fix
+  - message: Cades now heal 200 health on weld instead of all their health. They also
+      now take 5 seconds to weld with construction skill 2 and 10 with 1 or 0 skill.
+    type: Fix
+  - message: You can no longer weld sentries with a turned off or empty welder.
+    type: Fix
+  id: 851
+  time: '2024-10-18T01:26:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4505
+- author: Vermidia
+  changes:
+  - message: Fix identifiers not being preserved on devolve
+    type: Fix
+  - message: Fix free slots not being 100% free. They will no longer count towards
+      existing tier counts and will always be available no matter how many xenos of
+      that tier are roaming about.
+    type: Fix
+  id: 852
+  time: '2024-10-18T01:27:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4499
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added xeno egg destroying animations
+    type: Add
+  - message: Added xeno egg opening animations
+    type: Add
+  - message: There is now a 1 second delay for a xeno egg to open
+    type: Tweak
+  id: 853
+  time: '2024-10-18T02:24:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4495
+- author: Rainbeon
+  changes:
+  - message: Shotguns and Grenade Launchers now correctly display ammo when being
+      loaded.
+    type: Fix
+  id: 854
+  time: '2024-10-18T02:26:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4494
+- author: Rainbeon
+  changes:
+  - message: You may now become a Parasite again immediately after successfully infecting
+      a Marine.
+    type: Tweak
+  id: 855
+  time: '2024-10-18T02:26:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4491
+- author: Rainbeon
+  changes:
+  - message: Runner's pulling speed on marines has been decreased by about ~23.5%,
+      moving slightly slower than a Marine wearing Heavy Armor.
+    type: Tweak
+  - message: Warrior's pulling speed on marines has been decreased by about ~10%.
+    type: Tweak
+  - message: All other Xenos pull Marines somewhat faster.
+    type: Tweak
+  - message: Marines now pull other Marines faster.
+    type: Tweak
+  - message: All Xenos besides Hivelord and Crusher now pull other Xenos slower.
+    type: Tweak
+  - message: Hivelords and Crushers now pull other Xenos faster.
+    type: Tweak
+  - message: Marines now pull Xeno corpses faster.
+    type: Tweak
+  id: 856
+  time: '2024-10-18T02:29:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4453
+- author: TsjipTsjip
+  changes:
+  - message: Marine icon command.
+    type: Add
+  id: 857
+  time: '2024-10-18T02:34:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4480
+- author: TeaTotalTemplar
+  changes:
+  - message: Added the M60 General Purpose Machinegun and associated box magazine.
+      Includes a pre-installed bipod which greatly benefits it when properly deployed.
+    type: Add
+  - message: Corrected an error in the B92FS pistol's description.
+    type: Tweak
+  id: 858
+  time: '2024-10-18T02:37:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4428
+- author: TeaTotalTemplar
+  changes:
+  - message: The Rifleman guide entry of the guidebook has been updated to be more
+      instructional, more specific, and more immersive. Further suggestions or feedback
+      is welcomed in the discord thread.
+    type: Tweak
+  - message: The MK45 cartridges are now correctly identified as .45 automagnum
+    type: Fix
+  - message: The M16 magazine now correctly shows if it is loaded or empty
+    type: Fix
+  - message: The MP5 magazine now correctly loads 9mm smg rounds
+    type: Fix
+  id: 859
+  time: '2024-10-18T06:13:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4481
+- author: Whisper
+  changes:
+  - message: Added the Requisitions guidebook page, by epicjoston.
+    type: Add
+  id: 860
+  time: '2024-10-18T09:47:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4508
 Name: RMC14
 Order: -1

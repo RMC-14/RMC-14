@@ -57,6 +57,24 @@ public abstract class SharedMarineSystem : EntitySystem
         return ev;
     }
 
+    public void SetMarineIcon(EntityUid marine, SpriteSpecifier specifier)
+    {
+        if (TryComp<MarineComponent>(marine, out var comp))
+        {
+            comp.Icon = specifier;
+            Dirty(marine, comp);
+        }
+    }
+
+    public void ClearMarineIcon(EntityUid marine)
+    {
+        if (TryComp<MarineComponent>(marine, out var comp))
+        {
+            comp.Icon = null;
+            Dirty(marine, comp);
+        }
+    }
+
     public void MakeMarine(EntityUid uid, SpriteSpecifier? icon)
     {
         var marine = EnsureComp<MarineComponent>(uid);

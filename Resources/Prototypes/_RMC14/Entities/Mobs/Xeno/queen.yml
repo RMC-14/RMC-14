@@ -61,6 +61,7 @@
     tier: 0
     bypassTierCount: true
     unlockAt: 0
+  - type: XenoHeavy
   - type: XenoAcid
   - type: XenoConstruction
     canBuild:
@@ -114,7 +115,19 @@
     baseWalkSpeed: 1.4
     baseSprintSpeed: 2.5
   - type: SlowOnPull
-    multiplier: 0.5
+    slowdowns:
+    - multiplier: 0.505
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.5475
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.43
+      whitelist:
+        components:
+        - XenoHeavy
   - type: MobMover
   - type: FootstepModifier
     footstepSoundCollection:
