@@ -1,0 +1,861 @@
+- type: entity
+  id: RMCBaseBush
+  suffix: RMCBaseBush
+  abstract: true
+  name: bush
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    noRot: true    
+    sprite: Decals/Flora/flora_bushes.rsi
+    drawdepth: FloorObjects
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/tree_fell.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBaseGrass
+  suffix: RMCBaseGrass
+  abstract: true
+  name: grass
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_grass.rsi
+    
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBaseFlowers
+  suffix: RMCBaseFlowers
+  abstract: true
+  name: flowers
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_flowers.rsi
+    
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBaseRock
+  suffix: RMCBaseRock
+  abstract: true
+  name: rocks
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_rocks.rsi
+  
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrassa1
+  suffix: RMCGrassa1
+  components:
+  - type: Sprite
+    state: grassa1
+
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrassa2
+  suffix: RMCGrassa2
+  components:
+  - type: Sprite
+    state: grassa2
+
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrassa3
+  suffix: RMCGrassa3
+  components:
+  - type: Sprite
+    state: grassa3
+
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrassa4
+  suffix: RMCGrassa4
+  components:
+  - type: Sprite
+    state: grassa4
+
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrassa5
+  suffix: RMCGrassa5
+  components:
+  - type: Sprite
+    state: grassa5
+
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrassb1
+  suffix: RMCGrassb1
+  components:
+  - type: Sprite
+    state: grassb1
+
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrassb2
+  suffix: RMCGrassb2
+  components:
+  - type: Sprite
+    state: grassb2
+
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrassb3
+  suffix: RMCGrassb3
+  components:
+  - type: Sprite
+    state: grassb3
+
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrassb4
+  suffix: RMCGrassb4
+  components:
+  - type: Sprite
+    state: grassb4
+
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrassb5
+  suffix: RMCGrassb5
+  components:
+  - type: Sprite
+    state: grassb5
+
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrassc1
+  suffix: RMCGrassc1
+  components:
+  - type: Sprite
+    state: grassc1
+
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrassc2
+  suffix: RMCGrassc2
+  components:
+  - type: Sprite
+    state: grassc2
+
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrassc3
+  suffix: RMCGrassc3
+  components:
+  - type: Sprite
+    state: grassc3
+
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrassc4
+  suffix: RMCGrassc4
+  components:
+  - type: Sprite
+    state: grassc4
+
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrassd1
+  suffix: RMCGrassd1
+  components:
+  - type: Sprite
+    state: grassd1
+
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrassd2
+  suffix: RMCGrassd2
+  components:
+  - type: Sprite
+    state: grassd2
+
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrassd3
+  suffix: RMCGrassd3
+  components:
+  - type: Sprite
+    state: grassd3
+
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrasse1
+  suffix: RMCGrasse1
+  components:
+  - type: Sprite
+    state: grasse1
+
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrasse2
+  suffix: RMCGrasse2
+  components:
+  - type: Sprite
+    state: grasse2
+
+- type: entity
+  parent: RMCBaseGrass
+  id: RMCGrasse3
+  suffix: RMCGrasse3
+  components:
+  - type: Sprite
+    state: grasse3
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBusha1
+  suffix: RMCBusha1
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: busha1
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBusha2
+  suffix: RMCBusha2
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: busha2
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBusha3
+  suffix: RMCBusha3
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: busha3
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushb1
+  suffix: RMCBushb1
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushb1
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushb2
+  suffix: RMCBushb2
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushb2
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushb3
+  suffix: RMCBushb3
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushb3
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushc1
+  suffix: RMCBushc1
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushc1
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushc2
+  suffix: RMCBushc2
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushc2
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushc3
+  suffix: RMCBushc3
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushc3
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushd1
+  suffix: RMCBushd1
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushd1
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushd2
+  suffix: RMCBushd2
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushd2
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushd3
+  suffix: RMCBushd3
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushd3
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushd4
+  suffix: RMCBushd4
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushd4
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushe1
+  suffix: RMCBushe1
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushe1
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushe2
+  suffix: RMCBushe2
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushe2
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushe3
+  suffix: RMCBushe3
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushe3
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushe4
+  suffix: RMCBushe4
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushe4
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushf1
+  suffix: RMCBushf1
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushf1
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushf2
+  suffix: RMCBushf2
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushf2
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushf3
+  suffix: RMCBushf3
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushf3
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushg1
+  suffix: RMCBushg1
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushg1
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushg2
+  suffix: RMCBushg2
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushg2
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushg3
+  suffix: RMCBushg3
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushg3
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushg4
+  suffix: RMCBushg4
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushg4
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushh1
+  suffix: RMCBushh1
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushh1
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushh2
+  suffix: RMCBushh2
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushh2
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushh3
+  suffix: RMCBushh3
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushh3
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushi1
+  suffix: RMCBushi1
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushi1
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushi2
+  suffix: RMCBushi2
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushi2
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushi3
+  suffix: RMCBushi3
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushi3
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushi4
+  suffix: RMCBushi4
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushi4
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushj1
+  suffix: RMCBushj1
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushj1
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushj2
+  suffix: RMCBushj2
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushj2
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushj3
+  suffix: RMCBushj3
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushj3
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushk1
+  suffix: RMCBushk1
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushk1
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushk2
+  suffix: RMCBushk2
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushk2
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushk3
+  suffix: RMCBushk3
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushk3
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushl1
+  suffix: RMCBushl1
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushl1
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushl2
+  suffix: RMCBushl2
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushl2
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushl3
+  suffix: RMCBushl3
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushl3
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushl4
+  suffix: RMCBushl4
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushl4
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushm1
+  suffix: RMCBushm1
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushm1
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushm2
+  suffix: RMCBushm2
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushm2
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushm3
+  suffix: RMCBushm3
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushm3
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushm4
+  suffix: RMCBushm4
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushm4
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCBushn1
+  suffix: RMCBushn1
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushes.rsi
+    state: bushn1
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCbushsnowa1
+  suffix: RMCbushsnowa1
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushessnow.rsi
+    state: bushsnowa1
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCbushsnowa2
+  suffix: RMCbushsnowa2
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushessnow.rsi
+    state: bushsnowa2
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCbushsnowa3
+  suffix: RMCbushsnowa3
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushessnow.rsi
+    state: bushsnowa3
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCbushsnowb1
+  suffix: RMCbushsnowb1
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushessnow.rsi
+    state: bushsnowb1
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCbushsnowb2
+  suffix: RMCbushsnowb2
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushessnow.rsi
+    state: bushsnowb2
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCbushsnowb3
+  suffix: RMCbushsnowb3
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_bushessnow.rsi
+    state: bushsnowb3
+
+- type: entity
+  parent: RMCBaseFlowers
+  id: RMCFlowersbr1
+  suffix: RMCFlowersbr1
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_flowers.rsi
+    state: flowersbr1
+
+- type: entity
+  parent: RMCBaseFlowers
+  id: RMCFlowersbr2
+  suffix: RMCFlowersbr2
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_flowers.rsi
+    state: flowersbr2
+
+- type: entity
+  parent: RMCBaseFlowers
+  id: RMCFlowersbr3
+  suffix: RMCFlowersbr3
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_flowers.rsi
+    state: flowersbr3
+
+- type: entity
+  parent: RMCBaseFlowers
+  id: RMCFlowerspv1
+  suffix: RMCFlowerspv1
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_flowers.rsi
+    state: flowerspv1
+
+- type: entity
+  parent: RMCBaseFlowers
+  id: RMCFlowerspv2
+  suffix: RMCFlowerspv2
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_flowers.rsi
+    state: flowerspv2
+
+- type: entity
+  parent: RMCBaseFlowers
+  id: RMCFlowerspv3
+  suffix: RMCFlowerspv3
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_flowers.rsi
+    state: flowerspv3
+
+- type: entity
+  parent: RMCBaseFlowers
+  id: RMCFlowersy1
+  suffix: RMCFlowersy1
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_flowers.rsi
+    state: flowersy1
+
+- type: entity
+  parent: RMCBaseFlowers
+  id: RMCFlowersy2
+  suffix: RMCFlowersy2
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_flowers.rsi
+    state: flowersy2
+
+- type: entity
+  parent: RMCBaseFlowers
+  id: RMCFlowersy3
+  suffix: RMCFlowersy3
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_flowers.rsi
+    state: flowersy3
+
+- type: entity
+  parent: RMCBaseFlowers
+  id: RMCFlowersy4
+  suffix: RMCFlowersy4
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_flowers.rsi
+    state: flowersy4
+    
+- type: entity
+  parent: RMCBaseRock
+  id: RMCRock01
+  suffix: RMCRock01
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_rocks.rsi
+    state: rock01
+
+- type: entity
+  parent: RMCBaseRock
+  id: RMCRock02
+  suffix: RMCRock02
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_rocks.rsi
+    state: rock02
+
+- type: entity
+  parent: RMCBaseRock
+  id: RMCRock03
+  suffix: RMCRock03
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_rocks.rsi
+    state: rock03
+
+- type: entity
+  parent: RMCBaseRock
+  id: RMCRock04
+  suffix: RMCRock04
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_rocks.rsi
+    state: rock04
+
+- type: entity
+  parent: RMCBaseRock
+  id: RMCRock05
+  suffix: RMCRock05
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_rocks.rsi
+    state: rock05
+
+- type: entity
+  parent: RMCBaseRock
+  id: RMCRock06
+  suffix: RMCRock06
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_rocks.rsi
+    state: rock06
+
+- type: entity
+  parent: RMCBaseRock
+  id: RMCRock07
+  suffix: RMCRock07
+  components:
+  - type: Sprite
+    sprite: Decals/Flora/flora_rocks.rsi
+    state: rock07
+
+- type: entity
+  parent: RMCBaseBush
+  id: RMCAlienBush1
+  suffix: RMCAlienBush1
+  name: strange tree
+  description: Some kind of bizarre alien tree. It oozes with a sickly yellow sap.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Flora/flora_plantalien.rsi
+    state: alienplant1
+    
