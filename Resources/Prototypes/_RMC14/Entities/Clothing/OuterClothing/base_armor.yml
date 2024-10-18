@@ -66,7 +66,7 @@
       - Crowbar
       - RMCMacheteScabbard
       #TODO katana scabbard
-      #TODO motion detector
+      - RMCMotionDetector
       #TODO walkman
 
 - type: entity
@@ -84,7 +84,7 @@
       - Knife
       - RMCG8Pouch
       #TODO mines
-      #TODO motion detector
+      - RMCMotionDetector
       #TODO walkman
 
 - type: entity
@@ -112,7 +112,7 @@
       - RMCSmartPistolHolster
       - RMCSmgHolster
       #TODO Ceremonial Sword
-      #TODO motion detector
+      - RMCMotionDetector
       #TODO walkman
 
 - type: entity
@@ -135,7 +135,7 @@
       - Grenade
       - Flashlight
       - Machete
-      #TODO motion detector
+      - RMCMotionDetector
       #TODO walkman
 
 - type: entity
