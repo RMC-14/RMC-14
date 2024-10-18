@@ -251,11 +251,20 @@
 - type: entity
   parent: CMArmorM3Medium
   id: CMArmorM45
-  name: M45 pattern ghillie armor # TODO RMC14 camo, id lock
-  description: A lightweight ghillie camouflage suit, used by Marine snipers on recon missions. Very lightweight and surprisingly very protective.
+  name: M45 pattern ghillie armor # TODO id lock
+  description: A lightweight ghillie camouflage suit, used by UNMC snipers on recon missions. Very lightweight, but doesn't protect much.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghille.rsi
+  - type: Corrodible
+    isCorrodible: false
+  - type: ClothingSpeedModifier # light armor speed
+    walkModifier: .814
+    sprintModifier: .814
+  - type: GhillieSuit
+    whitelist:
+      components:
+      - SniperWhitelist
 
 # Smart Gun
 - type: entity
@@ -271,8 +280,8 @@
     grid:
     - 0,0,3,1 # 2 slots
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
+    walkModifier: .814
+    sprintModifier: .814
   - type: ClothingBlockBackpack
   - type: SmartGunArmor
 
