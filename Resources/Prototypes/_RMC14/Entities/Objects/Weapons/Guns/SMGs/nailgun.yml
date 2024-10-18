@@ -27,7 +27,7 @@
     recoilUnwielded: 1
     scatterWielded: 6
     scatterUnwielded: 12
-    baseFireRate: 4
+    baseFireRate: 2.4
     burstScatterMult: 3
     modifiers:
       Burst:
@@ -41,9 +41,6 @@
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 4
-  - type: MagazineAmmoProvider
-    autoEject: false
-    soundAutoEject: null
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -109,7 +106,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 34
+        Piercing: 25
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 22
@@ -118,7 +115,7 @@
     - range: 4
       falloff: 6
   - type: CMArmorPiercing
-    amount: 5
+    amount: 25
 
 - type: Tag
   id: RMCMagazineSMGNailgun
