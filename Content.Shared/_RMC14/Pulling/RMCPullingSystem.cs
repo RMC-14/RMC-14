@@ -149,12 +149,12 @@ public sealed class RMCPullingSystem : EntitySystem
             return;
         }
 
+        if (puller.Pulling == null)
+            return;
+
         var ev = new PullSlowdownAttemptEvent(puller.Pulling.Value);
         RaiseLocalEvent(ent, ref ev);
         if (ev.Cancelled)
-            return;
-
-        if (puller.Pulling == null)
             return;
 
         foreach (var slowdown in slow.Slowdowns)
