@@ -13,4 +13,18 @@ public sealed partial class InfectableComponent : Component
         [Sex.Male] = new SoundPathSpecifier("/Audio/_RMC14/Voice/Human/infected_male.ogg"),
         [Sex.Female] = new SoundPathSpecifier("/Audio/_RMC14/Voice/Human/infected_female.ogg")
     };
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<Sex, SoundSpecifier> PreburstSound = new()
+    {
+        [Sex.Male] = new SoundCollectionSpecifier("RMCMalePreburstScreams")
+        {
+            Params = AudioParams.Default.WithVolume(-3f),
+        },
+
+        [Sex.Female] = new SoundCollectionSpecifier("RMCFemalePreburstScreams")
+        {
+            Params = AudioParams.Default.WithVolume(-3f),
+        }
+    };
 }
