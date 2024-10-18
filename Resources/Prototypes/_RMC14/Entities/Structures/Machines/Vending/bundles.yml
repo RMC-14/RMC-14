@@ -66,6 +66,7 @@
     - CMSurgicalCaseFilled
     - CMBloodPackFull # TODO RMC14 O-
     - CMBloodPackFull # TODO RMC14 O-
+    - RMCFlashlightPen
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

@@ -1,0 +1,102 @@
+﻿- type: entity
+  parent: RMCPouchStorage
+  id: RMCPouchReagentCanister
+  name: pressurized reagent canister pouch
+  description: A pressurized reagent canister pouch. It is used to refill custom injectors, and can also store one. May be refilled with a reagent tank or a Chemical Dispenser. Can be worn by attaching it to a pocket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/pressurized_reagent_canister.rsi
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCAutoInjectorMedical
+  - type: StorageFill
+    contents:
+    - id: RMCMedicAutoInjector
+  - type: ContainerContainer
+    containers:
+      pressurized_reagent_canister: !type:ContainerSlot
+      storagebase: !type:Container
+  - type: ItemSlots
+    slots:
+      pressurized_reagent_canister:
+        name: Canister
+        startingItem: RMCPressurizedCanister
+        whitelist:
+          tags:
+          - PressurizedCanister
+        insertOnInteract: true
+  - type: RMCStorageEjectHand
+  - type: RMCRefillSolutionOnStore
+
+- type: entity
+  parent: RMCPouchReagentCanister
+  id: RMCPouchReagentCanisterBicaridine
+  suffix: Bicaridine
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMedicAutoInjectorBicaridine
+  - type: ItemSlots
+    slots:
+      pressurized_reagent_canister:
+        name: Canister
+        startingItem: RMCPressurizedCanisterBicaridine
+        whitelist:
+          tags:
+          - PressurizedCanister
+        insertOnInteract: true
+
+- type: entity
+  parent: RMCPouchReagentCanister
+  id: RMCPouchReagentCanisterKelotane
+  suffix: Kelotane
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMedicAutoInjectorKelotane
+  - type: ItemSlots
+    slots:
+      pressurized_reagent_canister:
+        name: Canister
+        startingItem: RMCPressurizedCanisterKelotane
+        whitelist:
+          tags:
+          - PressurizedCanister
+        insertOnInteract: true
+
+- type: entity
+  parent: RMCPouchReagentCanister
+  id: RMCPouchReagentCanisterTricordrazineRevival
+  suffix: Tricordrazine - Revival
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMedicAutoInjectorTricordrazineRevival
+  - type: ItemSlots
+    slots:
+      pressurized_reagent_canister:
+        name: Canister
+        startingItem: RMCPressurizedCanisterTricordrazineRevival
+        whitelist:
+          tags:
+          - PressurizedCanister
+        insertOnInteract: true
+
+- type: entity
+  parent: RMCPouchReagentCanister
+  id: RMCPouchReagentCanisterTricordrazine
+  suffix: Tricordrazine
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMedicAutoInjectorTricordrazine
+  - type: ItemSlots
+    slots:
+      pressurized_reagent_canister:
+        name: Canister
+        startingItem: RMCPressurizedCanisterTricordrazine
+        whitelist:
+          tags:
+          - PressurizedCanister
+        insertOnInteract: true

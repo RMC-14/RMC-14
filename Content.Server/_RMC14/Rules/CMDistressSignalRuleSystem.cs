@@ -5,6 +5,7 @@ using Content.Server._RMC14.Stations;
 using Content.Server._RMC14.Xenonids.Hive;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
+using Content.Server.Fax;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
@@ -37,6 +38,7 @@ using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
+using Content.Shared.Fax.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Mobs;
@@ -54,7 +56,6 @@ using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -72,6 +73,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ContainerSystem _containers = default!;
     [Dependency] private readonly DropshipSystem _dropship = default!;
+    [Dependency] private readonly FaxSystem _fax = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly XenoHiveSystem _hive = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
@@ -515,6 +517,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             while (marineFactions.MoveNext(out var iffId, out _))
             {
                 _gunIFF.SetUserFaction(iffId, comp.MarineFaction);
+            }
+
+            var faxes = EntityQueryEnumerator<FaxMachineComponent>();
+            while (faxes.MoveNext(out var faxId, out var faxComp))
+            {
+                _fax.Refresh(faxId, faxComp);
             }
         }
     }
@@ -1123,41 +1131,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             {
                 component.Result = DistressSignalRuleResult.MajorMarineVictory;
                 EndRound();
-            }
-        }
-    }
-
-    private IEnumerable<EntityUid> GetChildren(EntityUid almayer)
-    {
-        if (TryComp<StationDataComponent>(almayer, out var station))
-        {
-            foreach (var grid in station.Grids)
-            {
-                var enumerator = Transform(grid).ChildEnumerator;
-                while (enumerator.MoveNext(out var ent))
-                {
-                    yield return ent;
-                }
-            }
-        }
-        else if (HasComp<MapComponent>(almayer))
-        {
-            var enumerator = Transform(almayer).ChildEnumerator;
-            while (enumerator.MoveNext(out var possibleGrid))
-            {
-                var enumerator2 = Transform(possibleGrid).ChildEnumerator;
-                while (enumerator2.MoveNext(out var ent))
-                {
-                    yield return ent;
-                }
-            }
-        }
-        else
-        {
-            var enumerator = Transform(almayer).ChildEnumerator;
-            while (enumerator.MoveNext(out var ent))
-            {
-                yield return ent;
             }
         }
     }

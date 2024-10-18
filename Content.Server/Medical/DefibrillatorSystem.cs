@@ -13,14 +13,13 @@ using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
+using Content.Shared.Inventory;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Medical;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Timing;
-using Content.Shared.Inventory;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -158,6 +157,7 @@ public sealed class DefibrillatorSystem : EntitySystem
             uid, target, uid)
             {
                 NeedHand = true,
+                BreakOnHandChange = false,
                 BreakOnMove = !component.AllowDoAfterMovement,
                 DuplicateCondition = DuplicateConditions.SameEvent,
             });

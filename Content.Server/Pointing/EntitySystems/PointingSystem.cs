@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Pointing.Components;
+using Content.Shared._RMC14.Pointing;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.Examine;
@@ -151,7 +152,9 @@ namespace Content.Server.Pointing.EntitySystems
             var mapCoordsPointed = _transform.ToMapCoordinates(coordsPointed);
             _rotateToFaceSystem.TryFaceCoordinates(player, mapCoordsPointed.Position);
 
-            var arrow = EntityManager.SpawnEntity("PointingArrow", coordsPointed);
+            var arrowEv = new RMCGetPointingArrowEvent("PointingArrow");
+            RaiseLocalEvent(player, ref arrowEv);
+            var arrow = EntityManager.SpawnEntity(arrowEv.Arrow, coordsPointed);
 
             if (TryComp<PointingArrowComponent>(arrow, out var pointing))
             {

@@ -7,6 +7,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
+using Content.Shared._RMC14.Rules;
 using Content.Shared.Chasm;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
@@ -477,7 +478,16 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             if (!account.Started)
             {
                 account.Started = true;
-                var marines = Count<MarineComponent>();
+                var marines = 0;
+                var marinesQuery = EntityQueryEnumerator<MarineComponent, TransformComponent>();
+                while (marinesQuery.MoveNext(out var marineId, out var xform))
+                {
+                    if (HasComp<RMCPlanetComponent>(xform.MapUid))
+                        continue;
+
+                    marines++;
+                }
+
                 account.Balance = _starting + marines * _startingDollarsPerMarine;
                 Dirty(uid, account);
 

@@ -103,6 +103,10 @@
       - SmartGunArmor
   - type: GunToggleableRecoil
   - type: GunToggleableAutoFire
+  - type: GunToggleableMotionDetector
+  - type: MotionDetector
+    handToggleable: false
+    toggleSound: null
   - type: SmartGun
   - type: AttachableHolder
     slots:

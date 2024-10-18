@@ -232,9 +232,15 @@
     actionId: RMCActionOpenTacticalMapMarine
     marines: true
   - type: EmoteCooldown
+  - type: FiremanCarriable
+  - type: CanFiremanCarry
   - type: RMCSuicide
     damage:
       types:
         Piercing: 100
         Asphyxiation: 200
   - type: RMCUserPryingRequiresTool
+  - type: BlockEntityStorage
+    whitelist:
+      components:
+      - CanBeSupplyDropped

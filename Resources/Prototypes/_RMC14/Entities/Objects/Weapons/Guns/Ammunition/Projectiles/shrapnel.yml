@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: CMProjectileShrapnel
   name: shrapnel
   noSpawn: true

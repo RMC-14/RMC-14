@@ -33,6 +33,7 @@
         RMCSkillOverwatch: 1
         RMCSkillResearch: 1
     - type: MarineOrders
+    - type: RMCPointing
   hidden: true # TODO RMC14
 
 - type: startingGear

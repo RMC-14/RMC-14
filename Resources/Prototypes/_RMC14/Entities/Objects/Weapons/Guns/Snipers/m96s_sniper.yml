@@ -197,7 +197,7 @@
     proto: CMBulletSniper10x99mmAntiMateriel
 
 - type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: CMBulletSniper10x28mm
   name: bullet (10x28mm)
   noSpawn: true

@@ -2,6 +2,7 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Overwatch"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     VerticalExpand="True">
     <BoxContainer Orientation="Vertical" VerticalExpand="True">
         <PanelContainer>
@@ -139,6 +140,56 @@
                                     </BoxContainer>
                                 </BoxContainer>
                             </ScrollContainer>
+                        </BoxContainer>
+                    </BoxContainer>
+                </PanelContainer>
+            </BoxContainer>
+            <BoxContainer Name="SupplyDrop" Access="Public" Orientation="Vertical"
+                          VerticalExpand="True">
+                <PanelContainer VerticalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Vertical" VerticalExpand="True" Margin="5">
+                        <PanelContainer>
+                            <PanelContainer.PanelOverride>
+                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="0 0 0 1" />
+                            </PanelContainer.PanelOverride>
+                            <Label Text="Supply Drop" />
+                        </PanelContainer>
+                        <BoxContainer Orientation="Horizontal" Margin="5"
+                                      VerticalExpand="True">
+                            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                <BoxContainer Orientation="Horizontal">
+                                    <BoxContainer Name="LongitudeContainer" Access="Public" Orientation="Vertical">
+                                        <Label Text="LONGITUDE" />
+                                    </BoxContainer>
+                                    <BoxContainer Name="LatitudeContainer" Access="Public" Orientation="Vertical">
+                                        <Label Text="LATITUDE" />
+                                    </BoxContainer>
+                                    <BoxContainer Orientation="Vertical">
+                                        <RichTextLabel Name="CrateStatus" Access="Public"
+                                                       Text="[color=red][bold]No crate loaded[/bold][/color]" />
+                                        <Label Text="STATUS" HorizontalAlignment="Center" />
+                                    </BoxContainer>
+                                </BoxContainer>
+                                <Button Name="LaunchButton" Access="Public" Text="Launch"
+                                        HorizontalExpand="True" StyleClasses="OpenBoth"
+                                        ModulateSelfOverride="#D3B400" TextAlign="Center" />
+                                <Button Name="SaveButton" Access="Public" Text="Save"
+                                        HorizontalExpand="True" StyleClasses="OpenBoth"
+                                        ModulateSelfOverride="#D3B400" TextAlign="Center" />
+                            </BoxContainer>
+                            <ui:BlueHorizontalSeparator SetWidth="2" Margin="5 0" />
+                            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                <Label Text="Max 3 stored coordinates. Will overwrite oldest first." />
+                                <BoxContainer Orientation="Horizontal">
+                                    <BoxContainer Name="Longitudes" Access="Public" Orientation="Vertical" />
+                                    <BoxContainer Name="Latitudes" Access="Public" Orientation="Vertical" />
+                                    <BoxContainer Name="Comments" Access="Public" Orientation="Vertical" HorizontalExpand="True" />
+                                    <BoxContainer Name="Saves" Access="Public" Orientation="Vertical" />
+                                </BoxContainer>
+                            </BoxContainer>
                         </BoxContainer>
                     </BoxContainer>
                 </PanelContainer>

@@ -46,7 +46,7 @@
       #    CMM276GeneralPistolHolsterRig #TODO: Make this
       - id: CMBeltKnifeFilled
         name: M276 knife rig (full)
-      #    CMM276M63HolsterRig #TODO: Make this
+      - id: RMCBeltSmgMags
       #    CMM276M44HolsterRig #TODO: Make this
       #    CMM276M82FHolsterRig #TODO: Make this
       - id: RMCM276ShotgunShellLoadingRig
@@ -180,6 +180,8 @@
     #  points: 5
       - id: CMFireExtinguisherPortable
         points: 5
+      - id: RMCMotionDetector
+        points: 15
     #- id: CMMotionDetector
     #  points: 15
     #- id: CMDataDetector

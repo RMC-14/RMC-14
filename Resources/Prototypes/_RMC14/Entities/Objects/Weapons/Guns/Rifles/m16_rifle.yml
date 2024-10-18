@@ -110,7 +110,7 @@
     proto: BulletRifle10x24mm
 
 - type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: BulletRifleM16
   noSpawn: true
   components:
