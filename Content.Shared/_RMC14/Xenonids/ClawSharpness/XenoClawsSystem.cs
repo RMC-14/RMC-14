@@ -21,6 +21,26 @@ public sealed class XenoClawsSystem : EntitySystem
         SubscribeLocalEvent<AirlockReceiverXenoClawsComponent, DamageModifyEvent>(OnAirlockReceiverDamageModify);
     }
 
+    /*
+    REFERENCES:
+
+    // Determines how xenos interact with walls, normal nothing, sharp can destroy normal walls and window frame, very sharp reinforced ones.
+    #define CLAW_TYPE_NORMAL 1
+    #define CLAW_TYPE_SHARP 2
+    #define CLAW_TYPE_VERY_SHARP 3
+
+    #define XENO_HITS_TO_DESTROY_WALL 20
+    #define XENO_HITS_TO_DESTROY_WINDOW_FRAME 3
+    #define XENO_HITS_TO_DESTROY_R_WINDOW_FRAME 5
+    #define XENO_HITS_TO_DESTROY_BOLTED_DOOR 10
+    #define XENO_HITS_TO_DESTROY_WELDED_DOOR 15
+    #define XENO_HITS_TO_EXPOSE_WIRES_MIN 3
+    #define XENO_HITS_TO_EXPOSE_WIRES_MAX 4
+    #define XENO_HITS_TO_CUT_WIRES 10
+
+    FROM CM-SS13
+    */
+
     private void OnReceiverDamageModify(Entity<ReceiverXenoClawsComponent> ent, ref DamageModifyEvent args)
     {
         var xeno = args.Tool;
