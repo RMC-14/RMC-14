@@ -110,9 +110,9 @@ public sealed class CMHandsSystem : EntitySystem
                 Dirty(ent);
 
                 if (ent.Comp.Enabled)
-                    _popup.PopupClient(Loc.GetString("rmc-storage-hand-eject-enabled", ("storage", ent.Owner)), user, PopupType.Medium);
+                    _popup.PopupClient(Loc.GetString("rmc-storage-hand-eject-enabled", ("storage", ent.Owner)), user, user, PopupType.Medium);
                 else
-                    _popup.PopupClient(Loc.GetString("rmc-storage-hand-eject-disabled", ("storage", ent.Owner)), user, PopupType.Medium);
+                    _popup.PopupClient(Loc.GetString("rmc-storage-hand-eject-disabled", ("storage", ent.Owner)), user, user, PopupType.Medium);
             },
         };
 
