@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Content.Server.Database;
 using Content.Shared._RMC14.LinkAccount;
+using Robust.Server.Player;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -13,6 +14,7 @@ public sealed class LinkAccountManager : IPostInjectInit
 {
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UserDbDataManager _userDb = default!;
 
@@ -82,6 +84,12 @@ public sealed class LinkAccountManager : IPostInjectInit
         SendPatrons(player);
     }
 
+    private void SendPatronStatus(NetUserId user)
+    {
+        if (_player.TryGetSessionById(user, out var session))
+            SendPatrons(session);
+    }
+
     private void OnRequest(LinkAccountRequestMsg message)
     {
         var user = message.MsgChannel.UserId;
@@ -125,6 +133,7 @@ public sealed class LinkAccountManager : IPostInjectInit
             text = text[..SharedRMCLobbyMessage.CharacterLimit];
 
         _db.SetLobbyMessage(user, text);
+        OnPatronUpdated(user, p => p with { LobbyMessage = new SharedRMCLobbyMessage(text) });
     }
 
     private void OnChangeMarineShoutout(RMCChangeMarineShoutoutMsg message)
@@ -141,6 +150,7 @@ public sealed class LinkAccountManager : IPostInjectInit
             name = name[..SharedRMCRoundEndShoutouts.CharacterLimit];
 
         _db.SetMarineShoutout(user, name);
+        OnPatronUpdated(user, p => p with { RoundEndShoutout = new SharedRMCRoundEndShoutouts(name, p.RoundEndShoutout?.Xeno) });
     }
 
     private void OnChangeXenoShoutout(RMCChangeXenoShoutoutMsg message)
@@ -157,6 +167,7 @@ public sealed class LinkAccountManager : IPostInjectInit
             name = name[..SharedRMCRoundEndShoutouts.CharacterLimit];
 
         _db.SetXenoShoutout(user, name);
+        OnPatronUpdated(user, p => p with { RoundEndShoutout = new SharedRMCRoundEndShoutouts(p.RoundEndShoutout?.Marine, name) });
     }
 
     private void SetGhostColor(NetUserId user, Robust.Shared.Maths.Color? color)
@@ -166,13 +177,18 @@ public sealed class LinkAccountManager : IPostInjectInit
 
         Color? sysColor = color == null ? null : Color.FromArgb(color.Value.ToArgb());
         _db.SetGhostColor(user, sysColor);
+        OnPatronUpdated(user, p => p with { GhostColor = color });
+    }
 
-        if (_connected.TryGetValue(user, out var connected))
-        {
-            connected = connected with { GhostColor = color };
-            _connected[user] = connected;
-            PatronUpdated?.Invoke((user, connected));
-        }
+    private void OnPatronUpdated(NetUserId user, Func<SharedRMCPatronFull, SharedRMCPatronFull> action)
+    {
+        if (!_connected.TryGetValue(user, out var connected))
+            return;
+
+        connected = action(connected);
+        _connected[user] = connected;
+        PatronUpdated?.Invoke((user, connected));
+        SendPatronStatus(user);
     }
 
     public async Task RefreshAllPatrons()
