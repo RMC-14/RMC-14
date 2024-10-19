@@ -223,11 +223,8 @@ public sealed class MotionDetectorSystem : EntitySystem
             detector.Blips.Clear();
             foreach (var tracked in _tracked)
             {
-                if (tracked.Comp.LastMove < time - detector.MoveTime ||
-                    _mobState.IsDead(tracked))
-                {
+                if (tracked.Comp.LastMove < time - detector.MoveTime)
                     continue;
-                }
 
                 detector.Blips.Add(_transform.GetMapCoordinates(tracked));
             }
