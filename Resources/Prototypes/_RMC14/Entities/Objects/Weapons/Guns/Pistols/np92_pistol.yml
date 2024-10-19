@@ -92,7 +92,7 @@
   - type: Tag
     tags:
     - CMMagazinePistol
-    - aaaa
+    - RMCMagazinePistolNP92
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
