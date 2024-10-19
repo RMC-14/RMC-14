@@ -5,6 +5,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Storage;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
@@ -20,6 +21,7 @@ public sealed class MotionDetectorSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -219,27 +221,25 @@ public sealed class MotionDetectorSystem : EntitySystem
             _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), range, _tracked, LookupFlags.Uncontained);
 
             detector.Blips.Clear();
-            if (_tracked.Count == 0)
-            {
-                _audio.PlayPvs(detector.ScanEmptySound, uid);
-                UpdateAppearance((uid, detector));
-                continue;
-            }
-
             foreach (var tracked in _tracked)
             {
-                if (tracked.Comp.LastMove < time - detector.MoveTime)
+                if (tracked.Comp.LastMove < time - detector.MoveTime ||
+                    _mobState.IsDead(tracked))
+                {
                     continue;
+                }
 
                 detector.Blips.Add(_transform.GetMapCoordinates(tracked));
             }
 
-            if (detector.Blips.Count > 0)
-                _audio.PlayPvs(detector.ScanSound, uid);
-            else
-                _audio.PlayPvs(detector.ScanEmptySound, uid);
-
             UpdateAppearance((uid, detector));
+            if (detector.Blips.Count == 0)
+            {
+                _audio.PlayPvs(detector.ScanEmptySound, uid);
+                continue;
+            }
+
+            _audio.PlayPvs(detector.ScanSound, uid);
         }
     }
 }
