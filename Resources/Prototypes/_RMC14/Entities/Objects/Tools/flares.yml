@@ -119,8 +119,15 @@
     - state: supply_crate
     - state: magaz_flares
       map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_m94
+    - state: supply_crate_lid
+      map: [ "lid" ]
   - type: GenericVisualizer
     visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
       enum.CMItemSlotsLayers.Fill:
         enum.CMItemSlotsLayers.Fill:
           Empty: { state: magaz_flares, visible: false }
