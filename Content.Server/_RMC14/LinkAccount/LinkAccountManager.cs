@@ -87,7 +87,7 @@ public sealed class LinkAccountManager : IPostInjectInit
     private void SendPatronStatus(NetUserId user)
     {
         if (_player.TryGetSessionById(user, out var session))
-            SendPatrons(session);
+            SendPatronStatus(session);
     }
 
     private void OnRequest(LinkAccountRequestMsg message)
