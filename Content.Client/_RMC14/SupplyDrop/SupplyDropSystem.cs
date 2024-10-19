@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.SupplyDrop;
+﻿using Content.Client._RMC14.Overwatch;
+using Content.Shared._RMC14.SupplyDrop;
 
 namespace Content.Client._RMC14.SupplyDrop;
 
@@ -21,6 +22,9 @@ public sealed class SupplyDropSystem : SharedSupplyDropSystem
             {
                 if (bui is SupplyDropComputerBui supplyDropUi)
                     supplyDropUi.Refresh();
+
+                if (bui is OverwatchConsoleBui overwatchUi)
+                    overwatchUi.Refresh();
             }
         }
         catch (Exception e)

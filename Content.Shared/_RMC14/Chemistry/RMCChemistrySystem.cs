@@ -63,7 +63,7 @@ public sealed class RMCChemistrySystem : EntitySystem
                     if (_prototypes.TryIndex(reagent.Reagent.Prototype, out ReagentPrototype? reagentProto))
                         name = reagentProto.LocalizedName;
 
-                    args.PushText($"{reagent.Quantity.Int()} units of {name}");
+                    args.PushText($"{reagent.Quantity.Float():F2} units of {name}");
                 }
 
                 args.PushText($"Total volume: {solution.Volume} / {solution.MaxVolume}.");
