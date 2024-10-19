@@ -14,8 +14,8 @@ public sealed class RMCNameIdentifierSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<NameIdentifierComponent, NewXenoEvolvedEvent>(OnNewXenoEvolved);
-		SubscribeLocalEvent<NameIdentifierComponent, XenoDevolvedEvent>(OnXenoDevolved);
-		SubscribeLocalEvent<TransferNameIdentifierComponent, AfterNewXenoEvolvedEvent>(OnAfterNewXenoEvolved);
+        SubscribeLocalEvent<NameIdentifierComponent, XenoDevolvedEvent>(OnXenoDevolved);
+        SubscribeLocalEvent<TransferNameIdentifierComponent, AfterNewXenoEvolvedEvent>(OnAfterNewXenoEvolved);
     }
 
     private void OnNewXenoEvolved(Entity<NameIdentifierComponent> ent, ref NewXenoEvolvedEvent args)
@@ -29,18 +29,18 @@ public sealed class RMCNameIdentifierSystem : EntitySystem
         transfer.Group = nameIdentifier.Group;
     }
 
-	private void OnXenoDevolved(Entity<NameIdentifierComponent> ent, ref XenoDevolvedEvent args)
-	{
-		if (!TryComp(args.OldXeno, out NameIdentifierComponent? nameIdentifier))
-			return;
+    private void OnXenoDevolved(Entity<NameIdentifierComponent> ent, ref XenoDevolvedEvent args)
+    {
+        if (!TryComp(args.OldXeno, out NameIdentifierComponent? nameIdentifier))
+            return;
 
-		var transfer = EnsureComp<TransferNameIdentifierComponent>(ent);
-		transfer.FullIdentifier = nameIdentifier.FullIdentifier;
-		transfer.Identifier = nameIdentifier.Identifier;
-		transfer.Group = nameIdentifier.Group;
-	}
+        var transfer = EnsureComp<TransferNameIdentifierComponent>(ent);
+        transfer.FullIdentifier = nameIdentifier.FullIdentifier;
+        transfer.Identifier = nameIdentifier.Identifier;
+        transfer.Group = nameIdentifier.Group;
+    }
 
-	private void OnAfterNewXenoEvolved(Entity<TransferNameIdentifierComponent> ent, ref AfterNewXenoEvolvedEvent args)
+    private void OnAfterNewXenoEvolved(Entity<TransferNameIdentifierComponent> ent, ref AfterNewXenoEvolvedEvent args)
     {
         var entityName = Name(ent);
         if (TryComp(ent, out NameIdentifierComponent? nameIdentifier))
