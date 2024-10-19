@@ -40,7 +40,9 @@ public sealed class FiremanCarrySystem : EntitySystem
         SubscribeLocalEvent<FiremanCarriableComponent, UpdateCanMoveEvent>(OnCarriableCanMove);
         SubscribeLocalEvent<FiremanCarriableComponent, MoveInputEvent>(OnCarriableMoveInput);
         SubscribeLocalEvent<FiremanCarriableComponent, BreakFiremanCarryDoAfterEvent>(OnCarriableBreakCarryDoAfter);
+        SubscribeLocalEvent<FiremanCarriableComponent, PullStartedMessage>(OnCarriablePullStarted);
         SubscribeLocalEvent<FiremanCarriableComponent, PullStoppedMessage>(OnCarriablePullStopped);
+        SubscribeLocalEvent<FiremanCarriableComponent, PullAttemptEvent>(OnCarriablePullAttempt);
 
         SubscribeLocalEvent<CanFiremanCarryComponent, PullStartedMessage>(OnCarrierPullStarted);
         SubscribeLocalEvent<CanFiremanCarryComponent, PullStoppedMessage>(OnCarrierPullStopped);
@@ -57,7 +59,7 @@ public sealed class FiremanCarrySystem : EntitySystem
     private void OnCarriableDragDropDragged(Entity<FiremanCarriableComponent> ent, ref DragDropDraggedEvent args)
     {
         var user = args.User;
-        if (!TryComp(user, out CanFiremanCarryComponent? carrier))
+        if (!TryComp(user, out CanFiremanCarryComponent? carrier) || args.Target != user)
             return;
 
         if (!_rmcPulling.IsPulling(user, ent.Owner))
@@ -176,12 +178,33 @@ public sealed class FiremanCarrySystem : EntitySystem
         }
     }
 
+    private void OnCarriablePullStarted(Entity<FiremanCarriableComponent> ent, ref PullStartedMessage args)
+    {
+        if (args.PulledUid != ent.Owner)
+            return;
+
+        if (_rmcPulling.IsBeingPulled(ent.Owner, out var puller) &&
+            TryComp(puller, out CanFiremanCarryComponent? carrier))
+        {
+            StopPull((puller, carrier), ent);
+        }
+    }
+
     private void OnCarriablePullStopped(Entity<FiremanCarriableComponent> ent, ref PullStoppedMessage args)
     {
         if (ent.Owner != args.PulledUid)
             return;
 
         _standing.Stand(ent);
+    }
+
+    private void OnCarriablePullAttempt(Entity<FiremanCarriableComponent> ent, ref PullAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (ent.Comp.BeingCarried || IsBeingAggressivelyGrabbed(ent))
+            args.Cancelled = true;
     }
 
     private void OnCarrierPullStarted(Entity<CanFiremanCarryComponent> ent, ref PullStartedMessage args)
