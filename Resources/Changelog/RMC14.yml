@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed the defender's fortified wounded state being a massive error sign.
-    type: Fix
-  id: 368
-  time: '2024-07-13T10:35:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3040
-- author: DrSmugleaf
-  changes:
   - message: Savannah now has a second Staff Officer slot and a fourth Cargo Tech
       slot, just like the Almayer.
     type: Tweak
@@ -4787,5 +4780,30 @@
   id: 867
   time: '2024-10-19T18:34:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4519
+- author: DrSmugleaf
+  changes:
+  - message: Added Beatrice 'Bea' Bootes figurine.
+    type: Add
+  - message: Fixed not being able to move after cancelling an aggressive grab.
+    type: Fix
+  - message: Fixed grenades being exploded by landing supply drops.
+    type: Fix
+  - message: Fixed overwatch console never saying that a crate is loaded.
+    type: Fix
+  - message: Fixed overwatch console not showing promoted acting squad leaders on
+      the top summary.
+    type: Fix
+  - message: Fixed overwatch console squad leader promotion sometimes not giving comms,
+      a squad announcement and operator popup.
+    type: Fix
+  - message: Fixed reagent tank rounding down.
+    type: Fix
+  - message: Fixed platform corners not being quick-vaultable in 0.25 seconds.
+    type: Fix
+  - message: Fixed being able to pull while being aggressively grabbed or carried.
+    type: Fix
+  id: 868
+  time: '2024-10-19T22:28:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4532
 Name: RMC14
 Order: -1
