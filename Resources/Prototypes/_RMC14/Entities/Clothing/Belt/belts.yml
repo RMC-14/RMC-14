@@ -434,6 +434,11 @@
       whitelist:
         components:
         - Gun
+    - popup: rmc-storage-limit-max-mags
+      count: 6
+      whitelist:
+        tags:
+        - RMCMagazinePistolSU6
   - type: CMHolster
     whitelist:
       components:
