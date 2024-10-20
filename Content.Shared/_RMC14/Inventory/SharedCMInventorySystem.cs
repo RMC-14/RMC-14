@@ -208,9 +208,14 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     protected void OnHolsterEntRemovedFromContainer(Entity<CMHolsterComponent> ent, ref EntRemovedFromContainerMessage args)
     {
+        if (!_timing.ApplyingState)
+        {
+            ent.Comp.LastEjectAt = _timing.CurTime;
+            Dirty(ent);
+        }
+
         var item = args.Entity;
-        if (ent.Comp.Contents.Contains(item))
-            ent.Comp.Contents.Remove(item);
+        ent.Comp.Contents.Remove(item);
 
         ContentsUpdated(ent);
     }
@@ -240,7 +245,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         CMHolsterVisuals visuals;
 
         // TODO: account for the gunslinger belt
-        if (!TryGetLastInserted(ent.Comp, out _))
+        if (ent.Comp.Contents.Count == 0)
             visuals = CMHolsterVisuals.Empty;
         else
             visuals = CMHolsterVisuals.Full;
@@ -340,6 +345,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
                     validSlots.Add(new HolsterSlot(priority, true, null, clothing, null));
                 }
             }
+            priority++;
         }
 
         validSlots.Sort();
@@ -445,14 +451,19 @@ public abstract class SharedCMInventorySystem : EntitySystem
     }
 
     // Get last item inserted into holster (can also be used to check if holster is empty)
-    private bool TryGetLastInserted(CMHolsterComponent holster, [NotNullWhen(true)] out EntityUid? item)
+    private bool TryGetLastInserted(Entity<CMHolsterComponent?> holster, out EntityUid item)
     {
-        item = null;
+        item = default;
 
-        if (holster.Contents.Count == 0)
+        if (!Resolve(holster, ref holster.Comp))
             return false;
 
-        item = holster.Contents[holster.Contents.Count - 1];
+        var contents = holster.Comp.Contents;
+
+        if (contents.Count == 0)
+            return false;
+
+        item = contents[contents.Count - 1];
         return true;
     }
 
@@ -510,11 +521,9 @@ public abstract class SharedCMInventorySystem : EntitySystem
     private bool Unholster(EntityUid user, EntityUid item, out bool stop)
     {
         stop = false;
-        if (TryComp(item, out CMHolsterComponent? holsterComp))
+        if (TryComp(item, out CMHolsterComponent? holster))
         {
-            // TODO: Move cooldown to holster component
-            if (TryComp(item, out CMItemSlotsComponent? holster) &&
-                holster.Cooldown is { } cooldown &&
+            if (holster.Cooldown is { } cooldown &&
                 _timing.CurTime < holster.LastEjectAt + cooldown)
             {
                 stop = true;
@@ -523,12 +532,11 @@ public abstract class SharedCMInventorySystem : EntitySystem
             }
 
             if (TryComp(item, out StorageComponent? storage) &&
-                TryGetLastInserted(holsterComp, out var weapon) &&
-                weapon is { } weaponActual &&
-                _hands.TryPickup(user, weaponActual))
+                TryGetLastInserted((item, holster), out var weapon))
             {
-                holsterComp.Contents.Remove(weaponActual);
-                _audio.PlayPredicted(holsterComp.EjectSound, item, user);
+                _hands.TryPickup(user, weapon);
+                holster.Contents.Remove(weapon);
+                _audio.PlayPredicted(holster.EjectSound, item, user);
                 stop = true;
                 return true;
             }

@@ -1,12 +1,14 @@
 ﻿using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Inventory;
 
 // TODO RMC14 add to rifle holster
 // TODO RMC14 add to machete scabbard pouch
 // TODO RMC14 add to all large scabbards (machete scabbard, katana scabbard, m63 holster rig)
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
 [Access(typeof(SharedCMInventorySystem))]
 public sealed partial class CMHolsterComponent : Component
 {
@@ -17,6 +19,15 @@ public sealed partial class CMHolsterComponent : Component
     // How many entities fit "inside" the holster
     [DataField]
     public int HolsterSize = 1;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan LastEjectAt;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan? Cooldown;
+
+    [DataField, AutoNetworkedField]
+    public string? CooldownPopup;
 
     /// <summary>
     /// Sound played whenever an entity is inserted into holster.
