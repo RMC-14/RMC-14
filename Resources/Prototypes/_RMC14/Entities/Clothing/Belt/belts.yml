@@ -318,6 +318,11 @@
       whitelist:
         components:
         - Gun
+    - popup: rmc-storage-limit-max-shells
+      count: 6
+      whitelist:
+        components:
+        - MortarShell
   - type: CMHolster
     whitelist:
       components:
