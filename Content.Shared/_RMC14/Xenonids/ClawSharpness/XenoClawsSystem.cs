@@ -11,11 +11,13 @@ public sealed class XenoClawsSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
 
     private EntityQuery<MeleeWeaponComponent> _meleeWeaponQuery;
+    private EntityQuery<XenoClawsComponent> _xenoClawsQuery;
     private readonly ProtoId<DamageGroupPrototype> _clawsDamageGroup = "Brute";
 
     public override void Initialize()
     {
         _meleeWeaponQuery = GetEntityQuery<MeleeWeaponComponent>();
+        _xenoClawsQuery = GetEntityQuery<XenoClawsComponent>();
 
         SubscribeLocalEvent<ReceiverXenoClawsComponent, DamageModifyEvent>(OnReceiverDamageModify);
         SubscribeLocalEvent<AirlockReceiverXenoClawsComponent, DamageModifyEvent>(OnAirlockReceiverDamageModify);
@@ -51,7 +53,7 @@ public sealed class XenoClawsSystem : EntitySystem
 
         var damage = new DamageSpecifier(_protoManager.Index(_clawsDamageGroup), 0);
 
-        if (TryComp<XenoClawsComponent>(xeno, out var claws))
+        if (_xenoClawsQuery.TryComp(xeno, out var claws))
         {
             if (claws.ClawType.CompareTo(receiver.MinimumClawStrength) >= 0)
                 damage = new DamageSpecifier(_protoManager.Index(_clawsDamageGroup), receiver.MaxHealth / receiver.HitsToDestroy);
@@ -76,7 +78,7 @@ public sealed class XenoClawsSystem : EntitySystem
 
         var damage = new DamageSpecifier(_protoManager.Index(_clawsDamageGroup), 0);
 
-        if (TryComp<XenoClawsComponent>(xeno, out var claws))
+        if (_xenoClawsQuery.TryComp(xeno, out var claws))
         {
             if (claws.ClawType.CompareTo(receiver.MinimumClawStrength) >= 0)
             {
