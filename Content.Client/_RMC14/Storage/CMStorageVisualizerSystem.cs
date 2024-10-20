@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Storage;
 using Robust.Client.GameObjects;
@@ -19,6 +20,12 @@ public sealed class CMStorageVisualizerSystem : VisualizerSystem<CMStorageVisual
         // If empty
         if (!AppearanceSystem.TryGetData<int>(uid, StorageVisuals.StorageUsed, out var used, args.Component))
             return;
+
+        // If item has holster and the holster isn't empty,
+        //  don't count holster's contents towards fill status
+        if (HasComp<CMHolsterComponent>(uid) &&
+            AppearanceSystem.TryGetData<int>(uid, CMHolsterLayers.Size, out var holstered, args.Component))
+            used -= holstered;
 
         if (used == 0)
         {

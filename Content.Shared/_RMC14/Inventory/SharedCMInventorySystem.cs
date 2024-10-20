@@ -33,6 +33,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedItemSystem _item = default!;
 
     private readonly SlotFlags[] _order =
     [
@@ -246,15 +247,24 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     protected virtual void ContentsUpdated(Entity<CMHolsterComponent> ent)
     {
-        CMHolsterVisuals visuals;
+        CMHolsterVisuals visuals = CMHolsterVisuals.Empty;
+        var size = 0;
 
         // TODO: account for the gunslinger belt
-        if (ent.Comp.Contents.Count == 0)
-            visuals = CMHolsterVisuals.Empty;
-        else
+        if (ent.Comp.Contents.Count != 0)
+        {
+            // Display weapon underlay
             visuals = CMHolsterVisuals.Full;
+            // Get weapons size to accurately display storage visuals
+            foreach (var item in ent.Comp.Contents)
+            {
+                if (TryComp(item, out ItemComponent? itemComp))
+                    size += _item.GetItemShape(itemComp).GetArea();
+            }
+        }
 
         _appearance.SetData(ent, CMHolsterLayers.Fill, visuals);
+        _appearance.SetData(ent, CMHolsterLayers.Size, size);
     }
 
     private bool SlotCanInteract(EntityUid user, EntityUid holster, [NotNullWhen(true)] out ItemSlotsComponent? itemSlots)
