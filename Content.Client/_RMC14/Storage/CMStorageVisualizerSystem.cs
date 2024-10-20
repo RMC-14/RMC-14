@@ -23,9 +23,9 @@ public sealed class CMStorageVisualizerSystem : VisualizerSystem<CMStorageVisual
 
         // If item has holster and the holster isn't empty,
         //  don't count holster's contents towards fill status
-        if (HasComp<CMHolsterComponent>(uid) &&
-            AppearanceSystem.TryGetData<int>(uid, CMHolsterLayers.Size, out var holstered, args.Component) &&
-            holstered >= used)
+        if (TryComp(uid, out StorageComponent? storage) &&
+            TryComp(uid, out CMHolsterComponent? holster) &&
+            storage.Container.ContainedEntities.Count == holster.Contents.Count)
             used = 0;
 
         if (used == 0)
