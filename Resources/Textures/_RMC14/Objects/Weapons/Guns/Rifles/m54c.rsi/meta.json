@@ -8,24 +8,22 @@
   },
   "states": [
     {
-      "name": "icon"
-    },
-    {
-      "name": "base"
-    },
-    {
-      "name": "bolt-open"
+      "name": "equipped-BACKPACK",
+      "directions": 4
     },
     {
       "name": "inhand-left",
       "directions": 4
     },
     {
-      "name": "mag-0"
-    },
-    {
       "name": "inhand-right",
       "directions": 4
+    },
+    {
+      "name": "base"
+    },
+    {
+      "name": "mag-0"
     },
     {
       "name": "wielded-inhand-left",
@@ -36,12 +34,10 @@
       "directions": 4
     },
     {
-      "name": "equipped-BACKPACK",
-      "directions": 4
+      "name": "bolt-open"
     },
     {
-      "name": "sling",
-      "directions": 4
+      "name": "icon"
     },
     {
       "name": "equipped-SUITSTORAGE",
