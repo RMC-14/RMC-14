@@ -172,6 +172,9 @@
         components:
         - Gun
   - type: CMHolster
+    whitelist:
+      components:
+      - Gun
     insertSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_sheathe.ogg
     ejectSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_draw.ogg
   - type: GenericVisualizer

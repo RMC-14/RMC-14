@@ -13,6 +13,7 @@ using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
@@ -31,6 +32,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     private readonly SlotFlags[] _order =
     [
@@ -199,8 +201,10 @@ public abstract class SharedCMInventorySystem : EntitySystem
         var ev = new IsUnholsterableEvent();
         RaiseLocalEvent(item, ref ev);
 
-        if (ev.Unholsterable &&
-            !ent.Comp.Contents.Contains(item))
+        if (ev.Unholsterable &&                             // Check if unholsterable
+            !ent.Comp.Contents.Contains(item) &&            // Here to prevent holster from counting one item twice
+            (ent.Comp.Whitelist is not { } whitelist ||     // Check if no whitelist
+            _whitelist.IsWhitelistPass(whitelist, item)))   //  or if item matches whitelist
             ent.Comp.Contents.Add(item);
 
         ContentsUpdated(ent);
@@ -318,7 +322,13 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 }
 
                 // Check if the slot item has a CMHolsterComponent
-                if (!HasComp<CMHolsterComponent>(clothing))
+                if (!TryComp(clothing, out CMHolsterComponent? holster))
+                    continue;
+
+                // Check if item matches holster whitelist (if it has one)
+                // This is to prevent e.g. ammo & tools from being "holstered"
+                if (holster.Whitelist is { } whitelist &&
+                    !_whitelist.IsWhitelistPass(whitelist, item))
                     continue;
 
                 // If holster has ItemSlotsComponent

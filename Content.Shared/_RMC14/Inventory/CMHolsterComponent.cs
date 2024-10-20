@@ -2,6 +2,7 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Content.Shared.Whitelist;
 
 namespace Content.Shared._RMC14.Inventory;
 
@@ -16,10 +17,13 @@ public sealed partial class CMHolsterComponent : Component
     [DataField]
     public List<EntityUid> Contents = new();
 
-    // How many entities fit "inside" the holster
+    // Whitelist for entities that can be (un)holstered
+    // Note: this does not block them from being inserted (use other whitelists for that),
+    //  this is here to prevent "unholstering" ammo and non-weapons
     [DataField]
-    public int HolsterSize = 1;
+    public EntityWhitelist? Whitelist;
 
+    // Variables to mitigate holster spamming
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastEjectAt;
 
@@ -40,6 +44,4 @@ public sealed partial class CMHolsterComponent : Component
     /// </summary>
     [DataField]
     public SoundSpecifier? EjectSound = new SoundPathSpecifier("/Audio/Weapons/Guns/MagOut/revolver_magout.ogg");
-
-    // TODO: add whitelist to account for e.g. crowbars being "holstered" into combat toolbelts
 }
