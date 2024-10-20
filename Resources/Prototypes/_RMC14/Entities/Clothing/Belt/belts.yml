@@ -175,12 +175,6 @@
     whitelist:
       components:
       - Gun
-  - type: GenericVisualizer
-    visuals:
-      enum.CMHolsterLayers.Fill:
-        enum.CMHolsterLayers.Fill:
-          Empty: { state: m1984, visible: false }
-          Full: { state: m1984, visible: true }
 
 - type: entity
   parent: CMBeltBase
@@ -328,12 +322,6 @@
     whitelist:
       components:
       - Gun
-  - type: GenericVisualizer
-    visuals:
-      enum.CMHolsterLayers.Fill:
-        enum.CMHolsterLayers.Fill:
-          Empty: { state: m1984, visible: false }
-          Full: { state: m1984, visible: true }
 
 - type: entity
   parent: CMBeltMarine
@@ -445,12 +433,6 @@
     whitelist:
       components:
       - Gun
-  - type: GenericVisualizer
-    visuals:
-      enum.CMHolsterLayers.Fill:
-        enum.CMHolsterLayers.Fill:
-          Empty: { state: smartpistol, visible: false }
-          Full: { state: smartpistol, visible: true }
 
 - type: entity
   parent: CMBeltBaseStorage
