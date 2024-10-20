@@ -4,7 +4,7 @@
   id: CMAutoInjector
   name: autoinjector
   description: An autoinjector.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Medical/auto_injectors.rsi

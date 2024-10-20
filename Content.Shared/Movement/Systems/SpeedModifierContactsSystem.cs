@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.Water;
-using Content.Shared.Inventory;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Slippery;
@@ -150,6 +149,9 @@ public sealed class SpeedModifierContactsSystem : EntitySystem
 
     private void OnEntityEnter(EntityUid uid, SpeedModifierContactsComponent component, ref StartCollideEvent args)
     {
+        if (!_rmcWater.CanCollide(uid, args.OtherEntity))
+            return;
+
         AddModifiedEntity(args.OtherEntity);
     }
 
@@ -160,9 +162,6 @@ public sealed class SpeedModifierContactsSystem : EntitySystem
     public void AddModifiedEntity(EntityUid uid)
     {
         if (!HasComp<MovementSpeedModifierComponent>(uid))
-            return;
-
-        if (!_rmcWater.CanCollide(uid, otherUid))
             return;
 
         EnsureComp<SpeedModifiedByContactComponent>(uid);

@@ -167,7 +167,7 @@
 - type: entity
   parent: RMCBaseBullet
   id: BulletRifleM4SPRA19
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -179,7 +179,7 @@
 - type: entity
   parent: RMCBaseBullet
   id: BulletRifleM4SPRA19Impact
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
