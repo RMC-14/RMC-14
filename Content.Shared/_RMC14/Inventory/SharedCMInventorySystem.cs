@@ -377,10 +377,11 @@ public abstract class SharedCMInventorySystem : EntitySystem
             if (slot.ItemSlot == null &&
                 TryComp(slot.Ent, out StorageComponent? storage) &&
                 TryComp(slot.Ent, out CMHolsterComponent? holster) &&
-                !holster.Contents.Contains(item) &&
-                _storage.Insert(slot.Ent, item, out _, user, storage, playSound: false))
+                !holster.Contents.Contains(item))
             {
                 holster.Contents.Add(item);
+                _hands.TryDrop(user, item);
+                _storage.Insert(slot.Ent, item, out _, user, storage, playSound: false);
                 _audio.PlayPredicted(holster.InsertSound, item, user);
                 return;
             }
