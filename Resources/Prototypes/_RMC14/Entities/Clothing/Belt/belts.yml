@@ -175,8 +175,6 @@
     whitelist:
       components:
       - Gun
-    insertSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_sheathe.ogg
-    ejectSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_draw.ogg
   - type: GenericVisualizer
     visuals:
       enum.CMHolsterLayers.Base:
@@ -327,6 +325,9 @@
         components:
         - Gun
   - type: CMHolster
+    whitelist:
+      components:
+      - Gun
   - type: GenericVisualizer
     visuals:
       enum.CMHolsterLayers.Base:
@@ -441,6 +442,9 @@
         components:
         - Gun
   - type: CMHolster
+    whitelist:
+      components:
+      - Gun
   - type: GenericVisualizer
     visuals:
       enum.CMHolsterLayers.Base:
@@ -520,6 +524,9 @@
         tags:
         - CMMagazineSmg
   - type: CMHolster
+    whitelist:
+      components:
+      - Gun
   - type: Tag
     tags:
     - RMCSmgHolster

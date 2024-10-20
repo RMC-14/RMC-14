@@ -326,7 +326,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
                     continue;
 
                 // Check if item matches holster whitelist (if it has one)
-                // This is to prevent e.g. ammo & tools from being "holstered"
+                // This is to prevent e.g. tools from being "holstered"
                 if (holster.Whitelist is { } whitelist &&
                     !_whitelist.IsWhitelistPass(whitelist, item))
                     continue;

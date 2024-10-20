@@ -19,7 +19,7 @@ public sealed partial class CMHolsterComponent : Component
 
     // Whitelist for entities that can be (un)holstered
     // Note: this does not block them from being inserted (use other whitelists for that),
-    //  this is here to prevent "unholstering" ammo and non-weapons
+    //  this is here to prevent "unholstering" non-weapons (e.g. tools from the combat toolbelt)
     [DataField]
     public EntityWhitelist? Whitelist;
 
@@ -37,11 +37,11 @@ public sealed partial class CMHolsterComponent : Component
     /// Sound played whenever an entity is inserted into holster.
     /// </summary>
     [DataField]
-    public SoundSpecifier? InsertSound = new SoundPathSpecifier("/Audio/Weapons/Guns/MagIn/revolver_magin.ogg");
+    public SoundSpecifier? InsertSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/Guns/gun_pistol_sheathe.ogg");
 
     /// <summary>
     /// Sound played whenever an entity is removed from holster.
     /// </summary>
     [DataField]
-    public SoundSpecifier? EjectSound = new SoundPathSpecifier("/Audio/Weapons/Guns/MagOut/revolver_magout.ogg");
+    public SoundSpecifier? EjectSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/Guns/gun_pistol_draw.ogg");
 }

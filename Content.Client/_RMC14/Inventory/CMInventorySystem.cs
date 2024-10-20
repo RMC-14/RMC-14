@@ -45,13 +45,16 @@ public sealed class CMInventorySystem : SharedCMInventorySystem
             return;
         }
 
-        sprite.LayerSetVisible(layer, false);
+        if (ent.Comp.Contents.Count != 0)
+        {
+            // TODO: implement per-gun underlay here
+            // sprite.LayerSetState(layer, $"{<gun_state_here>}");
+            sprite.LayerSetVisible(layer, true);
 
-        if (ent.Comp.Contents.Count == 0)
+            // TODO: account for the gunslinger belt
             return;
+        }
 
-        // TODO: implement per-gun underlay here
-        // sprite.LayerSetState(layer, $"{<gun_state_here>}");
-        sprite.LayerSetVisible(layer, true);
+        sprite.LayerSetVisible(layer, false);
     }
 }
