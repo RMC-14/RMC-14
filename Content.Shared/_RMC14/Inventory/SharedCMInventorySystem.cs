@@ -254,7 +254,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         else
             visuals = CMHolsterVisuals.Full;
 
-        _appearance.SetData(ent, CMHolsterLayers.Base, visuals);
+        _appearance.SetData(ent, CMHolsterLayers.Fill, visuals);
     }
 
     private bool SlotCanInteract(EntityUid user, EntityUid holster, [NotNullWhen(true)] out ItemSlotsComponent? itemSlots)

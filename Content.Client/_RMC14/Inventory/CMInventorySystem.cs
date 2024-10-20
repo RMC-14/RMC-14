@@ -40,7 +40,7 @@ public sealed class CMInventorySystem : SharedCMInventorySystem
         base.ContentsUpdated(ent);
 
         if (!TryComp(ent, out SpriteComponent? sprite) ||
-            !sprite.LayerMapTryGet(CMHolsterLayers.Base, out var layer))
+            !sprite.LayerMapTryGet(CMHolsterLayers.Fill, out var layer))
         {
             return;
         }
