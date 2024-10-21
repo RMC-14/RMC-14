@@ -8,6 +8,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
@@ -266,6 +267,18 @@ public abstract partial class SharedScopeSystem : EntitySystem
         return null;
     }
 
+    private bool GetZoom(EntityUid uid, out Vector2 zoom, ContentEyeComponent? eye = null)
+    {
+        if (!Resolve(uid, ref eye, false))
+        {
+            zoom = new Vector2(1.0f, 1.0f);
+            return false;
+        }
+
+        zoom = eye.TargetZoom;
+        return true;
+    }
+
     private void Scope(Entity<ScopeComponent> scope, EntityUid user, Direction direction)
     {
         if (TryComp(user, out ScopingComponent? scoping))
@@ -282,9 +295,9 @@ public abstract partial class SharedScopeSystem : EntitySystem
         scoping.Scope = scope;
 
         scoping.AllowMovement = zoomLevel.AllowMovement;
-        
+
         // To account for e.g. farsight
-        if (_contentEye.GetZoom(user, out var zoom))
+        if (GetZoom(user, out var zoom))
             scoping.PreviousZoom = zoom;
 
         Dirty(user, scoping);
@@ -336,7 +349,6 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
         _actionsSystem.SetToggled(scope.Comp.ScopingToggleActionEntity, false);
         _contentEye.SetZoom(user, prevZoom, true);
-        //_contentEye.ResetZoom(user);
         return true;
     }
 
