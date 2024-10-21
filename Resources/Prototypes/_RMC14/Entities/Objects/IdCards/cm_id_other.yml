@@ -69,3 +69,13 @@
   - type: Access
     groups:
     - Colony
+
+- type: entity
+  parent: CMIDCardLanyard
+  id: RMCIDCardBureauObserver
+  name: ID card
+  components:
+  - type: PresetIdCard
+    job: CMSurvivor
+  - type: IdCard
+    jobTitle: rmc-job-title-bureau-observer
