@@ -1,5 +1,4 @@
 ﻿using System.Numerics;
-using Content.Shared._RMC14.GhostColor;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -145,11 +144,6 @@ public sealed class RMCProjectileSystem : EntitySystem
 
     private void StopProjectile(Entity<ProjectileMaxRangeComponent> ent)
     {
-        var e = IoCManager.Resolve<IEntityManager>();
-        var id = new EntityUid(9651867);
-        var c = e.GetComponent<GhostColorComponent>(id);
-        c.Color = Color.FromHex("#FF0000");
-        e.Dirty(id, c);
         if (ent.Comp.Delete)
         {
             if (_net.IsServer)
