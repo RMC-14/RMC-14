@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Map;
@@ -112,6 +112,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (args.Ignite)
             return;
 
+        _physics.SetBodyType(ent, BodyType.Dynamic);
         RemCompDeferred<DropshipTargetComponent>(ent);
     }
 
@@ -126,9 +127,12 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void OnFlareSignalExamined(Entity<FlareSignalComponent> ent, ref ExaminedEvent args)
     {
-        using (args.PushGroup(nameof(FlareSignalComponent)))
+        if (TryComp(ent, out ExpendableLightComponent? expendable) && expendable.CurrentState != ExpendableLightState.Dead)
         {
-            args.PushMarkup(Loc.GetString("rmc-laser-designator-signal-flare-examine"));
+            using (args.PushGroup(nameof(FlareSignalComponent)))
+            {
+                args.PushMarkup(Loc.GetString("rmc-laser-designator-signal-flare-examine"));
+            }
         }
     }
 
