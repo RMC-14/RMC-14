@@ -27,3 +27,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "cmss13"
   source: "https://github.com/cmss13-devs/cmss13/21e6447cc08aea502f671c819fdbcecbb85e6028master/sound/AI/hijack.ogg"
+
+- files: ["evacuate.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/evacuate.ogg"
