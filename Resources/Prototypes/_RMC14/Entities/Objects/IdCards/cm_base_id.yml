@@ -4,7 +4,7 @@
   id: CMIDCardStandardDogtag
   name: dog tag
   description: A marine dog tag.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Item
     size: Tiny
@@ -28,7 +28,7 @@
   id: CMIDCardBase
   name: identification holo-badge
   description: A slice of encoded compressed fiber glass. Used for identification and access control.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/id.rsi
@@ -57,7 +57,7 @@
   id: CMIDCardGold
   name: gold identification holo-badge
   description: A gold plated holo-badge which shows power and might.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/gold_id.rsi
@@ -72,7 +72,7 @@
   id: CMIDCardSilver
   name: silver identification holo-badge
   description: A silver plated holo-badge which shows honour and dedication.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/silver_id.rsi
@@ -87,7 +87,7 @@
   id: CMIDCardLanyard
   name: identification holo-lanyard
   description: A crude holo-lanyard. As cheap as they come.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/lanyard.rsi
