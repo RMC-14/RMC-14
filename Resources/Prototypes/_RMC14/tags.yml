@@ -67,6 +67,12 @@
   id: RMCRocketAmmo84mm
 
 - type: Tag
+  id: RMCDropshipWeaponPoint
+
+- type: Tag
+  id: RMCDropshipUtilityPoint
+
+- type: Tag
   id: RMCGlass
 
 - type: Tag

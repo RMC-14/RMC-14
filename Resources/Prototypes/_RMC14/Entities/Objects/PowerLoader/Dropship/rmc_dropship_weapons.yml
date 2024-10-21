@@ -12,6 +12,12 @@
     skills:
       all:
         RMCSkillPilot: 2
+  - type: PowerLoaderAttachable
+    attachDelay: 7
+    attachableTypes:
+    - RMCDropshipWeaponPoint
+  - type: PowerLoaderDetachable
+    detachDelay: 7
 
 - type: entity
   parent: RMCDropshipAttachmentWeapon
