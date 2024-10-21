@@ -124,6 +124,11 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/eb11a226994fb140fb0f713dd05525a0f8b3b3ae/sound/weapons/gun_ar10.ogg"
 
+- files: ["nailgun_fire.orgg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/0cbe3e21446a2af36c317845afbc5fdd9c208ee8/sound/weapons/nailgun_fire.ogg"
+  
 - files: ["gun_m60.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
