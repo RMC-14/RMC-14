@@ -191,4 +191,5 @@
     - state: green
   - type: Physics
     bodyType: Static
+    canCollide: false
   - type: Airtight

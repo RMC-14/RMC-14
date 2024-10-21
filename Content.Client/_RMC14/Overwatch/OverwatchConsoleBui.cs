@@ -315,7 +315,6 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                 monitor.Buttons.AddChild(buttonsContainer);
             }
 
-            // TODO RMC14 change squad leader
             var rolesList = new List<(string Role, HashSet<OverwatchMarine> Deployed, HashSet<OverwatchMarine> Alive, HashSet<OverwatchMarine> All, bool DisplayName, int Priority)>();
             foreach (var (id, (deployed, alive, all)) in roles)
             {
@@ -334,7 +333,16 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                 string roleAlive;
                 if (displayName)
                 {
-                    if (all.TryFirstOrNull(out var first))
+                    if (_overwatchConsole.IsSquadLeader(roleId) &&
+                        squad.Leader != null &&
+                        marines.TryFirstOrNull(m => m.Marine == squad.Leader.Value, out var leader))
+                    {
+                        roleDeployed = leader.Value.Name;
+                        roleAlive = leader.Value.State == MobState.Dead
+                            ? $"[color={RedColor}]DEAD[/color]"
+                            : $"[color={GreenColor}]ALIVE[/color]";
+                    }
+                    else if (all.TryFirstOrNull(out var first))
                     {
                         roleDeployed = first.Value.Name;
                         roleAlive = first.Value.State == MobState.Dead

@@ -419,7 +419,7 @@ public sealed class SquadSystem : EntitySystem
                         RemCompDeferred<MarineOrdersComponent>(uid);
                     }
 
-                    RemCompDeferred<SquadLeaderComponent>(uid);
+                    RemComp<SquadLeaderComponent>(uid);
                     RemCompDeferred<RMCPointingComponent>(uid);
                 }
             }
@@ -439,7 +439,7 @@ public sealed class SquadSystem : EntitySystem
         while (slots.MoveNext(out var slot))
         {
             if (slot.ContainedEntity is not { } contained)
-                return;
+                continue;
 
             if (TryComp(contained, out EncryptionKeyHolderComponent? holder))
             {

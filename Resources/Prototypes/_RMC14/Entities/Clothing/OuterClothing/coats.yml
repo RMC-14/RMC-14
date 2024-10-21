@@ -77,7 +77,7 @@
       - Pen
       - RMCMacheteScabbard
       #TODO Katana scabbard
-      #TODO motion detector
+      - RMCMotionDetector
 
 
 - type: entity
@@ -108,7 +108,7 @@
       - RMCSmartPistolHolster
       - RMCMacheteScabbard
       #TODO Katana scabbard
-      #TODO motion detector
+      - RMCMotionDetector
       #TODO Walkman
 
 # TODO RMC14 labcoat has it's own list

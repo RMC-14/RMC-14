@@ -1,4 +1,4 @@
-﻿﻿using Content.Shared._RMC14.Xenonids.Hive;
+﻿using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Movement.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -59,6 +59,6 @@ public abstract class SharedWatchXenoSystem : EntitySystem
         if (!Resolve(watcher, ref watcher.Comp))
             return;
 
-        _eye.SetTarget(watcher, watcher, watcher);
+        _eye.SetTarget(watcher, null, watcher);
     }
 }

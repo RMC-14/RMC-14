@@ -1,5 +1,5 @@
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   id: CMIntercom
   name: intercom
   description: An intercom. For when the marines just needs to know something.

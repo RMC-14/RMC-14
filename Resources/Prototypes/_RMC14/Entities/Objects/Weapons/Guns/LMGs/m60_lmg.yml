@@ -137,7 +137,7 @@
 - type: entity
   parent: RMCBaseBullet
   id: RMCBulletLMGM60
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

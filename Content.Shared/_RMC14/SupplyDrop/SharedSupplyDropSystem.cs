@@ -88,8 +88,7 @@ public abstract class SharedSupplyDropSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        ent.Comp.HasCrate = TryFindCrate(ent, out _);
-        Dirty(ent);
+        UpdateHasCrate(ent);
     }
 
     private void OnSupplyDropComputerLaunchMsg(Entity<SupplyDropComputerComponent> ent, ref SupplyDropComputerLaunchBuiMsg args)
@@ -240,12 +239,32 @@ public abstract class SharedSupplyDropSystem : EntitySystem
         return _supplyDropMap.Value;
     }
 
+    private void UpdateHasCrate(Entity<SupplyDropComputerComponent> ent)
+    {
+        var hasCrate = ent.Comp.HasCrate;
+        ent.Comp.HasCrate = TryFindCrate(ent, out _);
+        if (hasCrate == ent.Comp.HasCrate)
+            return;
+
+        Dirty(ent);
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
             return;
 
         var time = _timing.CurTime;
+        var computerQuery = EntityQueryEnumerator<SupplyDropComputerComponent>();
+        while (computerQuery.MoveNext(out var uid, out var computer))
+        {
+            if (time < computer.NextUpdate)
+                continue;
+
+            computer.NextUpdate = time + computer.UpdateEvery;
+            UpdateHasCrate((uid, computer));
+        }
+
         var droppingQuery = EntityQueryEnumerator<BeingSupplyDroppedComponent>();
         while (droppingQuery.MoveNext(out var uid, out var dropping))
         {

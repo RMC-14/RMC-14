@@ -10,6 +10,8 @@
     sprite: _RMC14/Structures/platforms.rsi
   - type: InteractionOutline
   - type: Clickable
+  - type: Climbable
+    delay: 0.25
 
 - type: entity
   parent: CMPlatformBase
@@ -35,8 +37,6 @@
         - TableLayer
   - type: Sprite
     state: platform
-  - type: Climbable
-    delay: 0.25
 
 - type: entity
   parent: CMPlatformBase

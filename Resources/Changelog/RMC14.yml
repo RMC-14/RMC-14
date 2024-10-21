@@ -1,62 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Larva dies if a host becomes unreviviable
-    type: Tweak
-  - message: Nesting speeds up incubation, and stasis bags are less good against late
-      stage infections
-    type: Add
-  id: 365
-  time: '2024-07-13T10:17:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2995
-- author: Kaga
-  changes:
-  - message: Added proper resin wall explosion damage modifiers. They should be much
-      easier to blow up, now.
-    type: Add
-  - message: Reduced HEDP and HEFA base explosion power to account for the resin-breaking
-      buff.
-    type: Tweak
-  id: 366
-  time: '2024-07-13T10:19:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2825
-- author: blueDev2
-  changes:
-  - message: Medical containers now have prefix icons
-    type: Add
-  id: 367
-  time: '2024-07-13T10:19:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2658
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the defender's fortified wounded state being a massive error sign.
-    type: Fix
-  id: 368
-  time: '2024-07-13T10:35:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3040
-- author: DrSmugleaf
-  changes:
-  - message: Savannah now has a second Staff Officer slot and a fourth Cargo Tech
-      slot, just like the Almayer.
-    type: Tweak
-  id: 369
-  time: '2024-07-13T10:43:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3041
-- author: DrSmugleaf
-  changes:
-  - message: Fixed there being no cooldown for replacing a dead Queen. There is now
-      a 5 minute cooldown.
-    type: Fix
-  - message: Fixed hivemind chat not being disabled for xenonids when there is no
-      live Queen. Local chat will still work.
-    type: Fix
-  - message: Xenonids now receive an announcement in chat when a new Queen evolves.
-    type: Tweak
-  - message: Xenonid parasites now only have a 25% chance of becoming a ghost role.
-    type: Tweak
-  id: 370
-  time: '2024-07-13T11:46:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3043
 - author: DrSmugleaf
   changes:
   - message: The current operation name is now displayed in the groundside operations
@@ -4792,5 +4734,68 @@
   id: 864
   time: '2024-10-18T19:29:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4515
+- author: Rainbeon
+  changes:
+  - message: Runner, Lurker, and Parasite Leaps will now register hits on Marines
+      that are too close or sharing the same tile as them.
+    type: Fix
+  id: 865
+  time: '2024-10-19T18:30:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4529
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed fence health being twice the intended amount.
+    type: Fix
+  id: 866
+  time: '2024-10-19T18:32:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4518
+- author: Vermidia
+  changes:
+  - message: You can now wear motion detectors on your belt and on suitstorage for
+      most armors
+    type: Fix
+  id: 867
+  time: '2024-10-19T18:34:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4519
+- author: DrSmugleaf
+  changes:
+  - message: Added Beatrice 'Bea' Bootes figurine.
+    type: Add
+  - message: Fixed not being able to move after cancelling an aggressive grab.
+    type: Fix
+  - message: Fixed grenades being exploded by landing supply drops.
+    type: Fix
+  - message: Fixed overwatch console never saying that a crate is loaded.
+    type: Fix
+  - message: Fixed overwatch console not showing promoted acting squad leaders on
+      the top summary.
+    type: Fix
+  - message: Fixed overwatch console squad leader promotion sometimes not giving comms,
+      a squad announcement and operator popup.
+    type: Fix
+  - message: Fixed reagent tank rounding down.
+    type: Fix
+  - message: Fixed platform corners not being quick-vaultable in 0.25 seconds.
+    type: Fix
+  - message: Fixed being able to pull while being aggressively grabbed or carried.
+    type: Fix
+  id: 868
+  time: '2024-10-19T22:28:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4532
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Patron Perks UI not refreshing in real time and making it look
+      like changes to lobby messages and shoutouts aren't saved.
+    type: Fix
+  id: 869
+  time: '2024-10-19T22:46:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4535
+- author: Whisper
+  changes:
+  - message: Added new lobby art by wendyribstonofpippin.
+    type: Add
+  id: 870
+  time: '2024-10-20T11:37:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4544
 Name: RMC14
 Order: -1
