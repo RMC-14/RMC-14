@@ -323,11 +323,11 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKateFleming
-  name: Kate Fleming figurine
-  description: "\"OORAH!!\""
+  name: Kate 'Engie' Fleming figurine
+  description: "Smells like welding fuel."
   components:
   - type: Sprite
-    state: kate_fleming
+    state: kate_engie_fleming
   - type: PatronFigurine
     id: 355c1f67-83a4-4252-b288-b218a4f84fd5
 
