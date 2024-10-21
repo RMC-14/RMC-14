@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
@@ -39,6 +40,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
+    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -47,7 +49,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
@@ -153,14 +155,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         var tile = _mapSystem.CoordinatesToTile(gridUid, grid, coordinates);
-        if (!_xenoWeeds.CanPlaceWeeds((gridUid, grid), tile))
-        {
-            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-weeds"),
-                xeno.Owner,
-                xeno.Owner,
-                PopupType.SmallCaution);
+
+        if (!_xenoWeeds.CanPlaceWeedsPopup((gridUid, grid), tile, xeno, args.UseOnSemiWeedable, true))
             return;
-        }
 
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
             return;
@@ -170,7 +167,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             var weeds = Spawn(args.Prototype, coordinates);
             _adminLogs.Add(LogType.RMCXenoPlantWeeds, $"Xeno {ToPrettyString(xeno):xeno} planted weeds {ToPrettyString(weeds):weeds} at {coordinates}");
+            _hive.SetSameHive(xeno.Owner, weeds);
         }
+
+        _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, xeno);
     }
 
     private void OnXenoChooseStructureAction(Entity<XenoConstructionComponent> xeno, ref XenoChooseStructureActionEvent args)
@@ -338,11 +338,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var coordinates = target.SnapToGrid(EntityManager, _map);
         var structure = Spawn(args.StructureId, coordinates);
 
-        if (TryComp(xeno, out XenoComponent? xenoComp))
-        {
-            var member = EnsureComp<HiveMemberComponent>(structure);
-            _hive.SetHive((structure, member), xenoComp.Hive);
-        }
+        _hive.SetSameHive(xeno.Owner, structure);
 
         _adminLogs.Add(LogType.RMCXenoOrderConstruction, $"Xeno {ToPrettyString(xeno):xeno} ordered construction of {ToPrettyString(structure):structure} at {coordinates}");
     }
@@ -390,29 +386,29 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var hive = CompOrNull<HiveMemberComponent>(target)?.Hive;
         var spawn = Spawn(node.Spawn, transform.Coordinates);
-        var member = EnsureComp<HiveMemberComponent>(spawn);
-        _hive.SetHive((spawn, member), hive);
+        var hive = _hive.GetHive(target);
+        _hive.SetHive(spawn, hive);
 
         _adminLogs.Add(LogType.RMCXenoOrderConstructionComplete, $"Xeno {ToPrettyString(xeno):xeno} completed construction of {ToPrettyString(target):xeno} which turned into {ToPrettyString(spawn):spawn} at {transform.Coordinates}");
 
         QueueDel(target);
 
-        if (TryComp(spawn, out HiveConstructionUniqueComponent? unique))
-        {
-            var uniques = EntityQueryEnumerator<HiveConstructionUniqueComponent>();
-            while (uniques.MoveNext(out var uid, out var otherUnique))
-            {
-                if (uid == spawn)
-                    continue;
+        if (!TryComp<HiveConstructionUniqueComponent>(spawn, out var unique))
+            return;
 
-                if (otherUnique.Id == unique.Id &&
-                    !TerminatingOrDeleted(uid) &&
-                    !EntityManager.IsQueuedForDeletion(uid))
-                {
-                    QueueDel(uid);
-                }
+        var uniques = EntityQueryEnumerator<HiveConstructionUniqueComponent, HiveMemberComponent>();
+        while (uniques.MoveNext(out var uid, out var otherUnique, out var member))
+        {
+            // don't troll other hives or itself
+            if (uid == spawn || member.Hive == hive?.Owner)
+                continue;
+
+            if (otherUnique.Id == unique.Id &&
+                !TerminatingOrDeleted(uid) &&
+                !EntityManager.IsQueuedForDeletion(uid))
+            {
+                QueueDel(uid);
             }
         }
     }
@@ -630,6 +626,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             }
         }
 
+        if (!_area.CanResinPopup((gridId, grid, null), tile, xeno))
+            return false;
+
         return true;
     }
 
@@ -674,9 +673,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 return false;
             }
 
-            if (TryComp(xeno, out XenoComponent? xenoComp) &&
-                TryComp(xenoComp.Hive, out HiveComponent? hive) &&
-                hive.NewCoreAt > _timing.CurTime)
+            if (_hive.GetHive(xeno.Owner) is {} hive && hive.Comp.NewCoreAt > _timing.CurTime)
             {
                 if (_net.IsServer)
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-cant-build-new-yet", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);

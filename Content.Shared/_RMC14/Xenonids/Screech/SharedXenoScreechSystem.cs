@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
@@ -12,6 +13,7 @@ namespace Content.Shared._RMC14.Xenonids.Screech;
 public sealed class XenoScreechSystem : EntitySystem
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
@@ -61,12 +63,8 @@ public sealed class XenoScreechSystem : EntitySystem
             if (!_examineSystem.InRangeUnOccluded(xeno.Owner, receiver.Owner))
                 continue;
 
-            if (TryComp(xeno, out XenoComponent? xenoComp) &&
-                TryComp(receiver, out XenoComponent? targetXeno) &&
-                xenoComp.Hive == targetXeno.Hive)
-            {
+            if (_hive.FromSameHive(xeno.Owner, receiver.Owner))
                 continue;
-            }
 
             _stun.TryStun(receiver, xeno.Comp.StunTime, false);
         }
@@ -82,12 +80,8 @@ public sealed class XenoScreechSystem : EntitySystem
             if (!_examineSystem.InRangeUnOccluded(xeno.Owner, receiver.Owner))
                 continue;
 
-            if (TryComp(xeno, out XenoComponent? xenoComp) &&
-                TryComp(receiver, out XenoComponent? targetXeno) &&
-                xenoComp.Hive == targetXeno.Hive)
-            {
+            if (_hive.FromSameHive(xeno.Owner, receiver.Owner))
                 continue;
-            }
 
             _stun.TryParalyze(receiver, xeno.Comp.ParalyzeTime, true);
         }

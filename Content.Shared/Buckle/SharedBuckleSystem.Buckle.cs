@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Alert;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Cuffs.Components;
@@ -11,15 +12,14 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
-using Content.Shared.Rotation;
 using Content.Shared.Standing;
 using Content.Shared.Storage.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
-using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
@@ -31,6 +31,7 @@ public abstract partial class SharedBuckleSystem
 {
     public static ProtoId<AlertCategoryPrototype> BuckledAlertCategory = "Buckled";
 
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
 
     private void InitializeBuckle()
@@ -58,13 +59,6 @@ public abstract partial class SharedBuckleSystem
         {
             BuckleDoafterEarly((uid, comp), ev.Event, ev);
         });
-
-        SubscribeLocalEvent<BuckleComponent, ComponentGetState>(OnGetState);
-    }
-
-    private void OnGetState(Entity<BuckleComponent> ent, ref ComponentGetState args)
-    {
-        args.State = new BuckleState(GetNetEntity(ent.Comp.BuckledTo), ent.Comp.DontCollide, ent.Comp.BuckleTime);
     }
 
     private void OnBuckleComponentShutdown(Entity<BuckleComponent> ent, ref ComponentShutdown args)
@@ -196,11 +190,15 @@ public abstract partial class SharedBuckleSystem
     protected void SetBuckledTo(Entity<BuckleComponent> buckle, Entity<StrapComponent?>? strap)
     {
         if (TryComp(buckle.Comp.BuckledTo, out StrapComponent? old))
+        {
             old.BuckledEntities.Remove(buckle);
+            Dirty(buckle.Comp.BuckledTo.Value, old);
+        }
 
         if (strap is {} strapEnt && Resolve(strapEnt.Owner, ref strapEnt.Comp))
         {
             strapEnt.Comp.BuckledEntities.Add(buckle);
+            Dirty(strapEnt);
             _alerts.ShowAlert(buckle, strapEnt.Comp.BuckledAlertType);
         }
         else
@@ -242,8 +240,9 @@ public abstract partial class SharedBuckleSystem
         if (_whitelistSystem.IsWhitelistFail(strapComp.Whitelist, buckleUid) ||
             _whitelistSystem.IsBlacklistPass(strapComp.Blacklist, buckleUid))
         {
-            if (_netManager.IsServer && popup && user != null)
-                _popup.PopupEntity(Loc.GetString("buckle-component-cannot-fit-message"), user.Value, user.Value, PopupType.Medium);
+            if (popup)
+                _popup.PopupClient(Loc.GetString("buckle-component-cannot-fit-message"), user, PopupType.Medium);
+
             return false;
         }
 
@@ -261,23 +260,24 @@ public abstract partial class SharedBuckleSystem
 
         if (user != null && !HasComp<HandsComponent>(user))
         {
-            // PopupPredicted when
-            if (_netManager.IsServer && popup)
-                _popup.PopupEntity(Loc.GetString("buckle-component-no-hands-message"), user.Value, user.Value);
+            if (popup)
+                _popup.PopupClient(Loc.GetString("buckle-component-no-hands-message"), user);
+
             return false;
         }
 
-        if (buckleComp.Buckled)
+        if (buckleComp.Buckled && !TryUnbuckle(buckleUid, user, buckleComp))
         {
-            if (_netManager.IsClient || popup || user == null)
-                return false;
-
-            var message = Loc.GetString(buckleUid == user
+            if (popup)
+            {
+                var message = Loc.GetString(buckleUid == user
                     ? "buckle-component-already-buckled-message"
                     : "buckle-component-other-already-buckled-message",
                 ("owner", Identity.Entity(buckleUid, EntityManager)));
 
-            _popup.PopupEntity(message, user.Value, user.Value);
+                _popup.PopupClient(message, user);
+            }
+
             return false;
         }
 
@@ -291,32 +291,36 @@ public abstract partial class SharedBuckleSystem
                 continue;
             }
 
-            if (_netManager.IsClient || popup || user == null)
-                return false;
-
-            var message = Loc.GetString(buckleUid == user
+            if (popup)
+            {
+                var message = Loc.GetString(buckleUid == user
                     ? "buckle-component-cannot-buckle-message"
                     : "buckle-component-other-cannot-buckle-message",
                 ("owner", Identity.Entity(buckleUid, EntityManager)));
 
-            _popup.PopupEntity(message, user.Value, user.Value);
+                _popup.PopupClient(message, user);
+            }
+
             return false;
         }
 
         if (!StrapHasSpace(strapUid, buckleComp, strapComp))
         {
-            if (_netManager.IsClient || popup || user == null)
-                return false;
-
-            var message = Loc.GetString(buckleUid == user
-                    ? "buckle-component-cannot-fit-message"
-                    : "buckle-component-other-cannot-fit-message",
+            if (popup)
+            {
+                var message = Loc.GetString(buckleUid == user
+                    ? "buckle-component-cannot-buckle-message"
+                    : "buckle-component-other-cannot-buckle-message",
                 ("owner", Identity.Entity(buckleUid, EntityManager)));
 
-            _popup.PopupEntity(message, user.Value, user.Value);
+                _popup.PopupClient(message, user);
+            }
 
             return false;
         }
+
+        if (!XenoCheck(user, buckleUid, popup))
+            return false;
 
         var buckleAttempt = new BuckleAttemptEvent((strapUid, strapComp), (buckleUid, buckleComp), user, popup);
         RaiseLocalEvent(buckleUid, ref buckleAttempt);
@@ -460,13 +464,17 @@ public abstract partial class SharedBuckleSystem
 
         if (buckleXform.ParentUid == strap.Owner && !Terminating(buckleXform.ParentUid))
         {
-            _container.AttachParentToContainerOrGrid((buckle, buckleXform));
+            _transform.PlaceNextTo((buckle, buckleXform), (strap.Owner, oldBuckledXform));
+            buckleXform.ActivelyLerping = false;
 
             var oldBuckledToWorldRot = _transform.GetWorldRotation(strap);
-            _transform.SetWorldRotation(buckleXform, oldBuckledToWorldRot);
+            _transform.SetWorldRotationNoLerp((buckle, buckleXform), oldBuckledToWorldRot);
 
-            if (strap.Comp.UnbuckleOffset != Vector2.Zero)
-                buckleXform.Coordinates = oldBuckledXform.Coordinates.Offset(strap.Comp.UnbuckleOffset);
+            // TODO: This is doing 4 moveevents this is why I left the warning in, if you're going to remove it make it only do 1 moveevent.
+            if (strap.Comp.BuckleOffset != Vector2.Zero)
+            {
+                buckleXform.Coordinates = oldBuckledXform.Coordinates.Offset(strap.Comp.BuckleOffset);
+            }
         }
 
         _rotationVisuals.ResetHorizontalAngle(buckle.Owner);
@@ -558,5 +566,21 @@ public abstract partial class SharedBuckleSystem
             ev.Cancel();
             TryBuckle(args.Target.Value, args.User, args.Used.Value, popup: false);
         }
+    }
+
+    private bool XenoCheck(EntityUid? user, EntityUid buckle, bool popup = true)
+    {
+        if (!HasComp<XenoComponent>(user))
+            return true;
+
+        if (popup && _net.IsServer)
+        {
+            _popup.PopupEntity("You don't have the dexterity to do that, try a nest.",
+                buckle,
+                user.Value,
+                PopupType.SmallCaution);
+        }
+
+        return false;
     }
 }

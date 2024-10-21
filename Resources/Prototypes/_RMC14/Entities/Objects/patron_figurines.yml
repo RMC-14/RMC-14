@@ -572,3 +572,84 @@
     state: honkzee_beezs
   - type: PatronFigurine
     id: f47ec457-4c44-4a3d-aad6-0d5a7c78f94e
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronVellaMorticianSakeao
+  name: Vella 'Mortician' Sakeao figurine
+  description: "Detachable SMG arm not included*"
+  components:
+  - type: Sprite
+    state: vella_mortician_sakeao
+  - type: PatronFigurine
+    id: 27ea1222-e729-4705-bda2-0ef1a5a6d1f3
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSeeks-to-Fight
+  name: Seeks-to-Fight figurine
+  description: "Navy is just the taxi service for the Marines."
+  components:
+  - type: Sprite
+    state: seeks-to-fight
+  - type: PatronFigurine
+    id: 518fe396-b199-4757-92ff-697fc527bbf1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronStares-at-Stars
+  name: Stares-at-Stars figurine
+  description: "Smells of citrus."
+  components:
+  - type: Sprite
+    state: stares-at-stars
+  - type: PatronFigurine
+    id: 78d5f741-5ccc-4e18-be40-74eb432071af
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRhettRainmanMcIndrick
+  name: Rhett 'Rainman' McIndrick figurine
+  description: Former Scout Sergeant McIndrick. "Where's the glory in waiting?"
+  components:
+  - type: Sprite
+    state: rhett_rainman_mcindrick
+  - type: PatronFigurine
+    id: a0091382-d6c6-4fb1-8cf6-cd4eb49ae4e1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDoes-The-Dishes
+  name: Does-The-Dishes figurine
+  description: "\"Anybody want a sssmoke?\""
+  components:
+  - type: Sprite
+    state: does-the-dishes
+  - type: PatronFigurine
+    id: 428803e1-1ab5-4a19-8216-06bdb8b638d9
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronTempest
+  name: Tempest figurine
+  description: "A beam of light through the clouds. Smells of blue raspberry."
+  components:
+  - type: Sprite
+    state: tempest
+  - type: PatronFigurine
+    id: 5bb80762-7bf7-454e-bf30-8bd3c972fbee
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBeatriceBeaBootes
+  name: Beatrice 'Bea' Bootes figurine
+  description: "Born, adopted, and raised in Madawaska, Maine, this lesbian felinid tries her best to lead. She would go on to join the UNMC and later become a sergeant. Loves dual SMG. She lost her wife to a horrific accident and reached a low point in her life, but she fought on eventually. She is a social democrat who is a prominent member of “The Doves”. Her opponents throw rumors of her giving $1.4 million to the North Korean government and eating human organs. She is silly but deeply caring.
+
+    Strives to be a CO.
+
+    :3"
+  components:
+  - type: Sprite
+    state: beatrice_bea_bootes
+  - type: PatronFigurine
+    id: bb4d5e20-1aab-462d-aed4-d85454667d5c

@@ -21,11 +21,11 @@ public sealed partial class RMCRepairableComponent : Component
     public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillEngineer";
 
     [DataField, AutoNetworkedField]
-    public float[] SkillDelayMultipliers = [1f, 0.75f, 0.5f, 0.375f, 0.25f];
-
-    [DataField, AutoNetworkedField]
     public SoundSpecifier? Sound = new SoundPathSpecifier("/Audio/Items/welder.ogg");
 
     [DataField, AutoNetworkedField]
     public ProtoId<ToolQualityPrototype> Quality = "Welding";
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 FuelUsed = FixedPoint2.New(0);
 }

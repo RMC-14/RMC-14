@@ -13,8 +13,7 @@
 - type: Tag
   id: RCMCartridgePistol9mmSquashHead
 
-- type: Tag
-  id: CMCartridgeRifle10x24mm
+
 
 - type: Tag
   id: RMCCartridgePistol45ACP
@@ -53,9 +52,6 @@
   id: LauncherCompatibleGrenade
 
 - type: Tag
-  id: CMAutoInjector
-
-- type: Tag
   id: CMFlarePack
 
 - type: Tag
@@ -75,3 +71,9 @@
 
 - type: Tag
   id: Scabbard
+
+- type: Tag
+  id: RMCMacheteScabbard
+
+- type: Tag
+  id: RMCG8Pouch

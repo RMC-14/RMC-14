@@ -34,7 +34,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedWebbingSystem _webbing = default!;
 
@@ -210,7 +210,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                     }
                     else // Does not exist on the currently checked vendor
                         specVendorComponent.GlobalSharedVends.Add(args.Entry, maxAmongVendors);
-                    Dirty(specVendorComponent);
+                    Dirty(vendorId, specVendorComponent);
                 }
 
                 thisSpecVendor.GlobalSharedVends[args.Entry] = maxAmongVendors;
@@ -224,7 +224,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 else
                     thisSpecVendor.GlobalSharedVends[args.Entry] += 1;
 
-                Dirty(thisSpecVendor);
+                Dirty(vendor, thisSpecVendor);
             }
         }
 

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -6,7 +6,7 @@
   - RMCXenoSpeechSounds
   id: CMXenoDefender
   name: Defender
-  description: A alien with an armored crest.
+  description: An alien with an armored crest.
   components:
   - type: GhostRole
     name: cm-job-name-xeno-defender
@@ -37,11 +37,12 @@
     tier: 1
     hudOffset: 0,0.2
     unlockAt: 240 # 4 minutes
+  - type: XenoLight
   - type: XenoDevolve
     devolvesTo:
     - CMXenoLarva
   - type: XenoEvolution
-    max: 300
+    max: 200
     evolvesTo:
     - CMXenoWarrior
   - type: XenoPlasma
@@ -79,6 +80,7 @@
         density: 185
         mask:
         - MobMask
+        - BarbedBarricade
         layer:
         - MobLayer
       fix2:

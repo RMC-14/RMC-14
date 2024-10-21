@@ -1,5 +1,7 @@
-﻿using Content.Shared.FixedPoint;
+﻿using Content.Shared.Chat.Prototypes;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Lifesteal;
 
@@ -24,4 +26,13 @@ public sealed partial class XenoLifestealComponent : Component
 
     [DataField, AutoNetworkedField]
     public float TargetRange = 3;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId? MaxEffect = "RMCEffectHeal";
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<EmotePrototype>? Emote = "XenoRoar";
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan? EmoteCooldown = TimeSpan.FromSeconds(5);
 }

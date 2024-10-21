@@ -36,6 +36,7 @@
         RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
     - type: MarineOrders
+    - type: RMCPointing
 
 - type: startingGear
   id: CMGearCMO

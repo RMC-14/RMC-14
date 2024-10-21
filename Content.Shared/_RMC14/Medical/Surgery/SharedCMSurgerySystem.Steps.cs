@@ -47,7 +47,7 @@ public abstract partial class SharedCMSurgerySystem
                     TryComp(tool, out CMSurgeryToolComponent? toolComp) &&
                     toolComp.EndSound != null)
                 {
-                    _audio.PlayEntity(toolComp.EndSound, args.User, tool);
+                    _audio.PlayPvs(toolComp.EndSound, tool);
                 }
             }
         }

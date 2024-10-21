@@ -210,6 +210,8 @@
     },
     {
       "name": "type71_stock"
+    },
+    { "name": "m60_stock"
     }
   ]
 }

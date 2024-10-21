@@ -65,6 +65,7 @@
   - type: OverwatchCamera
   - type: SquadArmor
     layer: Helmet
+    slot: HEAD
     rsi:
       sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
       state: std-helmet
@@ -124,6 +125,7 @@
     - Biological
   - type: SquadArmor
     layer: Helmet
+    slot: HEAD
     rsi:
       sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
       state: std-helmet-medic
@@ -148,7 +150,7 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM11
   name: M11 pattern leader helmet
-  description: A slightly fancier helmet for marine leaders. This one contains a small built-in camera and has cushioning to project your fragile brain.
+  description: A slightly fancier helmet for marine leaders. This one contains a small built-in camera and has cushioning to protect your fragile brain.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m11.rsi

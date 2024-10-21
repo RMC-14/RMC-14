@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Scoping;
+using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -14,6 +15,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
+using Content.Shared.Roles;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -30,6 +32,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly SquadSystem _squad = default!;
+    [Dependency] private readonly SharedSupplyDropSystem _supplyDrop = default!;
     [Dependency] private readonly SharedTacticalMapSystem _tacticalMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -40,9 +44,11 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     private EntityQuery<OriginalRoleComponent> _originalRoleQuery;
     private EntityQuery<RMCPlanetComponent> _planetQuery;
 
-    private ProtoId<DamageGroupPrototype> _bruteGroup = "Brute";
-    private ProtoId<DamageGroupPrototype> _burnGroup = "Burn";
-    private ProtoId<DamageGroupPrototype> _toxinGroup = "Toxin";
+    private readonly ProtoId<DamageGroupPrototype> _bruteGroup = "Brute";
+    private readonly ProtoId<DamageGroupPrototype> _burnGroup = "Burn";
+    private readonly ProtoId<DamageGroupPrototype> _toxinGroup = "Toxin";
+
+    private readonly ProtoId<DamageGroupPrototype> _squadLeaderJob = "CMSquadLeader";
 
     public override void Initialize()
     {
@@ -70,6 +76,12 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             subs.Event<OverwatchConsoleShowHiddenBuiMsg>(OnOverwatchShowHiddenBui);
             subs.Event<OverwatchConsoleWatchBuiMsg>(OnOverwatchWatchBui);
             subs.Event<OverwatchConsoleHideBuiMsg>(OnOverwatchHideBui);
+            subs.Event<OverwatchConsolePromoteLeaderBuiMsg>(OnOverwatchPromoteLeaderBui);
+            subs.Event<OverwatchConsoleSupplyDropLongitudeBuiMsg>(OnOverwatchSupplyDropLongitudeBui);
+            subs.Event<OverwatchConsoleSupplyDropLatitudeBuiMsg>(OnOverwatchSupplyDropLatitudeBui);
+            subs.Event<OverwatchConsoleSupplyDropLaunchBuiMsg>(OnOverwatchSupplyDropLaunchBui);
+            subs.Event<OverwatchConsoleSupplyDropSaveBuiMsg>(OnOverwatchSupplyDropSaveBui);
+            subs.Event<OverwatchConsoleSupplyDropCommentBuiMsg>(OnOverwatchSupplyDropCommentBui);
         });
     }
 
@@ -133,6 +145,9 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
                 Log.Warning($"{ToPrettyString(args.Actor)} tried to select invalid squad id {ToPrettyString(squad)}");
                 return;
             }
+
+            if (TryComp(ent, out SupplyDropComputerComponent? supplyComputer))
+                _supplyDrop.SetSquad((ent, supplyComputer), Prototype(squad.Value)?.ID);
         }
 
         ent.Comp.Squad = args.Squad;
@@ -217,6 +232,79 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _ui.SetUiState(ent.Owner, OverwatchConsoleUI.Key, state);
     }
 
+    private void OnOverwatchPromoteLeaderBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsolePromoteLeaderBuiMsg args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryGetEntity(args.Target, out var target) ||
+            !TryComp(target, out SquadMemberComponent? member))
+        {
+            return;
+        }
+
+        _squad.PromoteSquadLeader((target.Value, member), args.Actor);
+        var state = GetOverwatchBuiState();
+        _ui.SetUiState(ent.Owner, OverwatchConsoleUI.Key, state);
+    }
+
+    private void OnOverwatchSupplyDropLongitudeBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSupplyDropLongitudeBuiMsg args)
+    {
+        _supplyDrop.SetLongitude(ent.Owner, args.Longitude);
+    }
+
+    private void OnOverwatchSupplyDropLatitudeBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSupplyDropLatitudeBuiMsg args)
+    {
+        _supplyDrop.SetLatitude(ent.Owner, args.Latitude);
+    }
+
+    private void OnOverwatchSupplyDropLaunchBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSupplyDropLaunchBuiMsg args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp(ent, out SupplyDropComputerComponent? computer))
+            return;
+
+        _supplyDrop.TryLaunchSupplyDropPopup((ent, computer), args.Actor);
+
+        var state = GetOverwatchBuiState();
+        _ui.SetUiState(ent.Owner, OverwatchConsoleUI.Key, state);
+        Dirty(ent);
+    }
+
+    private void OnOverwatchSupplyDropSaveBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSupplyDropSaveBuiMsg args)
+    {
+        var locations = ent.Comp.SupplyDropLocations;
+        if (locations.Length == 0)
+            return;
+
+        ref var last = ref ent.Comp.LastLocation;
+        if (last >= locations.Length)
+            last = 0;
+
+        locations[last] = new OverwatchSupplyDropLocation(args.Longitude, args.Latitude, string.Empty);
+
+        last++;
+        Dirty(ent);
+    }
+
+    private void OnOverwatchSupplyDropCommentBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSupplyDropCommentBuiMsg args)
+    {
+        var locations = ent.Comp.SupplyDropLocations;
+        if (args.Index < 0 || args.Index >= locations.Length)
+            return;
+
+        if (locations[args.Index] is not { } location)
+            return;
+
+        var comment = args.Comment;
+        if (comment.Length > 50)
+            comment = comment[..50];
+
+        locations[args.Index] = location with { Comment = comment };
+    }
+
     protected virtual void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<OverwatchCameraComponent?> toWatch)
     {
     }
@@ -237,9 +325,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         while (query.MoveNext(out var uid, out var team))
         {
             var netUid = GetNetEntity(uid);
-            squads.Add(new OverwatchSquad(netUid, Name(uid), team.Color));
+            var squad = new OverwatchSquad(netUid, Name(uid), team.Color, null);
             var members = marines.GetOrNew(netUid);
-
             foreach (var member in team.Members)
             {
                 if (TerminatingOrDeleted(member))
@@ -261,9 +348,10 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
                 var role = _originalRoleQuery.CompOrNull(member)?.Job;
                 var deployed = !_almayerQuery.HasComp(_transform.GetMap((member, xform)));
                 var location = _planetQuery.HasComp(mapId) ? OverwatchLocation.Planet : OverwatchLocation.Ship;
+                var netMember = GetNetEntity(member);
 
                 members.Add(new OverwatchMarine(
-                    GetNetEntity(member),
+                    netMember,
                     GetNetEntity(camera),
                     name,
                     mobState,
@@ -272,7 +360,12 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
                     deployed,
                     location
                 ));
+
+                if (HasComp<SquadLeaderComponent>(member))
+                    squad.Leader = netMember;
             }
+
+            squads.Add(squad);
         }
 
         return new OverwatchConsoleBuiState(squads, marines);
@@ -281,6 +374,11 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     public bool IsHidden(Entity<OverwatchConsoleComponent> console, NetEntity marine)
     {
         return console.Comp.Hidden.Contains(marine);
+    }
+
+    public bool IsSquadLeader(ProtoId<JobPrototype> job)
+    {
+        return job == _squadLeaderJob;
     }
 
     private void TryLocalUnwatch(Entity<OverwatchWatchingComponent> ent)

@@ -19,6 +19,10 @@
   - type: Tag
     tags:
     - Binoculars
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 - type: entity
   parent: RMCBinoculars

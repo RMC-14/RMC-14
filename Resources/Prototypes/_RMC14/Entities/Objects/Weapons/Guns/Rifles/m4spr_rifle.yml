@@ -1,0 +1,157 @@
+﻿- type: entity
+  parent: CMBaseWeaponRifle
+  name: M4SPR battle rifle
+  id: WeaponRifleM4SPR
+  description: The M4SPR battle rifle is a designated marksman rifle in service with the Marine. Sporting a bullpup configuration, the M4SPR battle rifle is perfect for reconnaissance and fire support teams.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: d_m4spr_barrel
+      offset: 0.65, 0
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr.rsi
+  - type: Gun
+    shotsPerBurst: 0
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m4spr.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilUnwielded: 2
+    scatterWielded: 6
+    baseFireRate: 2.86
+  - type: RMCWeaponDamageFalloff
+    falloffMultiplier: 0
+  - type: WieldDelay
+    baseDelay: 0.2
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.92
+    baseSprint: 0.86
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM4SPR
+          - CMMagazineRifleM4SPRAP
+          - CMMagazineRifleM4SPRExt
+  - type: GunDamageModifier
+    multiplier: 1.4
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentB8SmartScope
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS42xTelescopicMiniscope
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 1.18, 0.0
+      rmc-aslot-rail: 0.225, 0.125
+      rmc-aslot-underbarrel: 0.62, -0.31
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: CMMagazineRifleM4SPR
+  name: "M4SPR magazine (10x24mm)"
+  description: "A magazine of standard 10x24mm rounds for use in the M4SPR battle rifle."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM4SPR
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeRifle10x24mm
+    proto: CMCartridgeRifle10x24mm
+    capacity: 25
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4spr.rsi
+
+- type: entity
+  parent: CMMagazineRifleM4SPR
+  id: CMMagazineRifleM4SPRAP
+  name: M4SPR AP magazine (10x24mm)
+  description: "A magazine of armor-piercing 10x24mm rounds for use in the M4SPR battle rifle."
+  suffix: AP
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM4SPRAP
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4spr.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CMCartridgeRifle10x24mmAP
+    proto: CMCartridgeRifle10x24mmAP
+
+- type: entity
+  parent: CMMagazineRifleM4SPR
+  id: CMMagazineRifleM4SPRExt
+  name: "M4SPR extended magazine (10x24mm)"
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 35
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4spre.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM4SPRExt
+
+- type: Tag
+  id: CMMagazineRifleM4SPR
+
+- type: Tag
+  id: CMMagazineRifleM4SPRAP
+
+- type: Tag
+  id: CMMagazineRifleM4SPRExt

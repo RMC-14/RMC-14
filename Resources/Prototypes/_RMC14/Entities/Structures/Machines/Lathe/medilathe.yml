@@ -61,7 +61,7 @@
 #    - EZ Autoinjector (E-M) (300 Plastic)
 #    - EZ Autoinjector (E-L) (300 Plastic)
 #    - EZ Autoinjector (E-XL) (300 Plastic)
-#    - Medic Autoinjector (M-M) (300 Plastic)
+    - RMCMedicAutoInjector
 #    - Medic Autoinjector (M-L) (300 Plastic)
     - CMHypospray
     - CMBloodPack
@@ -78,10 +78,10 @@
     - CMFirstAidO2Kit
 #    - Radiation First Aid Kit (2000 Plastic)
 #    - Syringe Case (1000 Plastic)
-    - RMCSurgicalTrayEmpty 
+    - RMCSurgicalTrayEmpty
     - RMCVialBox
-#    - Pressurized Reagent Canister Pouch (2000 Plastic, 2000 Glass)
-#    - Pressurized Canister (2000 Glass)
+    - RMCPouchReagentCanister
+    - RMCPressurizedCanister
   - type: MaterialStorage
     whitelist:
       tags:
@@ -151,4 +151,3 @@
     runningState: medilathe_n_f
     unlitIdleState: medilathe_u_f
     unlitRunningState: medilathe_n_u_f
-    

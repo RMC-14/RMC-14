@@ -33,12 +33,15 @@
     - ActionXenoOrderConstruction
     #    - ActionXenoDigTunnel
     - ActionXenoPlantWeeds
+    - ActionXenoResinHole
     #    - ActionXenoBurrow
     #    - ActionXenoTremor
     - ActionXenoDevolve
     tier: 2
     hudOffset: 0,0.56
     unlockAt: 420 # 7 minutes
+    hidden: true # TODO RMC: remove when burrower is implemented
+  - type: XenoLight
   - type: XenoDevolve
     devolvesTo:
     - CMXenoDrone
@@ -62,9 +65,29 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.6425
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.7125
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.4775
+      whitelist:
+        components:
+        - XenoHeavy
 #  - type: RMCXenoDamageVisuals # TODO RMC14
 #    prefix: burrower
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: burrower
+  - type: AcidTrap #Do 2 CM code they make level 3 traps at a level 2 cost
+    trapLevel: 3
+    spray: XenoAcidSprayTrapStrong
+  - type: XenoConstruction
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode

@@ -19,8 +19,8 @@
     proto: moth
   - type: Vocal
     sounds:
-      Male: UnisexMoth
-      Female: UnisexMoth
+      Male: RMCMaleMoth
+      Female: RMCFemaleMoth
       Unsexed: UnisexMoth
   - type: DamageVisuals
     damageOverlayGroups:

@@ -172,14 +172,14 @@
         amount: 15
       - id: RMCBeltGrenade
         amount: 10
-#      - id: M276 Pattern Shotgun Shell Loading Rig
-#        amount: 15
+      - id: RMCM276ShotgunShellLoadingRig
+        amount: 15
 #      - id: M276 Pattern General Pistol Holster Rig
 #        amount: 15
 #      - id: M276 Pattern M63 Holster Rig
 #        amount: 15
-#      - id: M276 Pattern M63 Holster Rig And Pouch
-#        amount: 10
+      - id: RMCBeltSmgMags
+        amount: 10
 #      - id: M276 Pattern M44 Holster Rig
 #        amount: 15
 #      - id: M276 Pattern M82F Holster Rig

@@ -10,6 +10,9 @@
   components:
   - type: GhostRole
     name: cm-job-name-xeno-lesser-drone
+    description: roles-lesser-drone-description
+    raffle:
+      settings: short
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/LesserDrone/lesser_drone.rsi
   - type: MobState
@@ -38,6 +41,7 @@
     contributesToVictory: false
     countedInSlots: false
     unlockAt: 0
+  - type: XenoLight
   - type: XenoAcid
   - type: XenoConstruction
     buildDelay: 4
@@ -63,6 +67,7 @@
       components:
       - XenoParasite
       - XenoEgg
+      - XenoFruit
   - type: MultiHandedHolder
     items:
     - hands: 2
@@ -82,3 +87,7 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: lesser_drone
+  - type: AcidTrap
+    trapLevel: 1
+    cost: 70
+    spray: XenoAcidSprayTrapWeak

@@ -2,7 +2,6 @@ using System.Numerics;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Camera;
-using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -123,7 +122,9 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         if (!deleted)
         {
             _guns.PlayImpactSound(target, modifiedDamage, component.SoundHit, component.ForceSound, filter, projectile);
-            _sharedCameraRecoil.KickCamera(target, direction);
+
+            if (!float.IsNaN(direction.X))
+                _sharedCameraRecoil.KickCamera(target, direction);
         }
 
         component.DamagedEntity = true;
@@ -215,9 +216,11 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         Embed(uid, args.Target, args.Shooter, component);
 
         // Raise a specific event for projectiles.
-        if (TryComp(uid, out ProjectileComponent? projectile))
+        if (TryComp(uid, out ProjectileComponent? projectile) &&
+            projectile.Shooter is { } shooter &&
+            projectile.Weapon is { } weapon)
         {
-            var ev = new ProjectileEmbedEvent(projectile.Shooter!.Value, projectile.Weapon!.Value, args.Target);
+            var ev = new ProjectileEmbedEvent(shooter, weapon, args.Target);
             RaiseLocalEvent(uid, ref ev);
         }
     }

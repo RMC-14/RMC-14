@@ -23,6 +23,7 @@
     - type: Skills
       skills:
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillIntel: 1
         RMCSkillJtac: 2
         RMCSkillLeadership: 1
@@ -34,6 +35,7 @@
     - type: MarineOrders
     - type: CMVendorUser
       points: 45
+    - type: RMCPointing
 
 - type: startingGear
   id: CMGearPilotGunship

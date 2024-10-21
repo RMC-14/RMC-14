@@ -1,4 +1,5 @@
-﻿using Content.Shared.Movement.Events;
+﻿using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared.Movement.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 
@@ -49,7 +50,7 @@ public abstract class SharedWatchXenoSystem : EntitySystem
     {
     }
 
-    public virtual void Watch(Entity<XenoComponent?, ActorComponent?, EyeComponent?> watcher, Entity<XenoComponent?> toWatch)
+    public virtual void Watch(Entity<HiveMemberComponent?, ActorComponent?, EyeComponent?> watcher, Entity<HiveMemberComponent?> toWatch)
     {
     }
 
@@ -58,6 +59,6 @@ public abstract class SharedWatchXenoSystem : EntitySystem
         if (!Resolve(watcher, ref watcher.Comp))
             return;
 
-        _eye.SetTarget(watcher, watcher, watcher);
+        _eye.SetTarget(watcher, null, watcher);
     }
 }

@@ -118,10 +118,10 @@
       - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
     #- id: CMM276GeneralPistolHolsterRig
-    #- id: CMM276M63HolsterRig
+      - id: RMCBeltSmgMags
     #- id: CMM276M44HolsterRig
     #- id: CMM276M82FHolsterRig
-    #- id: CMM276ShotgunShellLoadingRig
+      - id: RMCM276ShotgunShellLoadingRig
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -189,10 +189,12 @@
         points: 15
     - name: Utilities
       entries:
-      - id: CMFireExtinguisherPortable
-        points: 5
       - id: CMRollerBedSpawnFolded
         points: 5
+      - id: CMFireExtinguisherPortable
+        points: 5
+      - id: RMCMotionDetector
+        points: 10
     #- id: CMFultonDeviceStack
     #- id: CMMotionDetector
       - id: RMCWhistle

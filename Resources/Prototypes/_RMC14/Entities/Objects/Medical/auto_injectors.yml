@@ -4,7 +4,7 @@
   id: CMAutoInjector
   name: autoinjector
   description: An autoinjector.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Medical/auto_injectors.rsi
@@ -15,7 +15,7 @@
       visible: false
   - type: Item
     size: Small
-    sprite: _RMC14/Objects/Medical/auto_injectors.rsi
+    sprite: null
   - type: Hypospray
     solutionName: pen
     injectSound: /Audio/_RMC14/Medical/hypospray.ogg
@@ -234,3 +234,85 @@
       CMEpinephrine: 15.75
   - type: IconLabel
     labelTextLocId: rmc-epinephrine-container-label-text
+
+- type: entity
+  parent: CMAutoInjector
+  id: RMCMedicAutoInjector
+  name: medic autoinjector (M-M)
+  description: A custom-made professional injector, likely from research. Has a similar lock to pill bottles, and fits up to 6 injections.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/medic_auto_injector.rsi
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 90
+  - type: SolutionContainerVisuals
+    maxFillLevels: 6
+  - type: Tag
+    tags:
+    - RMCAutoInjectorMedical
+  - type: RefillableSolution
+    solution: pen
+
+- type: entity
+  parent: RMCMedicAutoInjector
+  id: RMCMedicAutoInjectorBicaridine
+  suffix: Bicaridine
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 90
+        reagents:
+        - ReagentId: CMBicaridine
+          Quantity: 90
+
+- type: entity
+  parent: RMCMedicAutoInjector
+  id: RMCMedicAutoInjectorKelotane
+  suffix: Kelotane
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 90
+        reagents:
+        - ReagentId: CMKelotane
+          Quantity: 90
+
+- type: entity
+  parent: RMCMedicAutoInjector
+  id: RMCMedicAutoInjectorTricordrazineRevival
+  suffix: Tricordrazine - Revival
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 90
+        reagents:
+        - ReagentId: CMEpinephrine
+          Quantity: 30
+        - ReagentId: CMInaprovaline
+          Quantity: 30
+        - ReagentId: CMTricordrazine
+          Quantity: 30
+
+- type: entity
+  parent: RMCMedicAutoInjector
+  id: RMCMedicAutoInjectorTricordrazine
+  suffix: Tricordrazine
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 90
+        reagents:
+        - ReagentId: CMTricordrazine
+          Quantity: 90
+
+- type: Tag
+  id: CMAutoInjector
+
+- type: Tag
+  id: RMCAutoInjectorMedical

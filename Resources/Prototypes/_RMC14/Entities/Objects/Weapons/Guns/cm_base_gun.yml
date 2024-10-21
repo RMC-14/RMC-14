@@ -3,6 +3,8 @@
   parent: RMCBaseMeleeWeapon
   id: CMBaseWeaponGun
   components:
+  - type: UsableWhileDevoured
+    canUnequip: true
   - type: GunUnskilledPenalty
   - type: GunIFF
     enabled: false
@@ -18,10 +20,13 @@
   - type: WieldDelay
   - type: AltFireMelee
   - type: MeleeWeapon
+    resetOnHandSelected: false
     attackRate: 1
     damage:
       types:
         Blunt: 5
+    soundHit:
+      collection: GenericHit
   - type: EmitSoundOnPickup
     sound:
       collection: RMCEquipGun
@@ -30,3 +35,14 @@
       collection: RMCRustleGun
   - type: Gun
     meleeCooldownOnShoot: false
+    resetOnHandSelected: false
+
+- type: entity
+  parent: BaseBullet
+  id: RMCBaseBullet
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    layers:
+    - state: bullet
+      shader: unshaded

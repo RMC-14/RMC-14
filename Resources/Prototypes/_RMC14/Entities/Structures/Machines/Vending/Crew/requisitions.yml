@@ -41,8 +41,8 @@
         amount: 4
       - id: RMCSmartPistolCase
         amount: 3
-      #- id: MOU-53 Shotgun
-      #  amount: 2
+      - id: WeaponShotgunMOU53
+        amount: 2
       #- id: XM88 Heavy Rifle
       #  amount: 3
       #- id: RMCM54CE2Case
@@ -136,16 +136,16 @@
       - id: CMBeltKnifeFilled
         name: M276 Knife Rig (Full)
         amount: 5
-      #- id: M276 M39 Holster Rig
-      #  amount: 5
+      - id: RMCBeltSmgMags
+        amount: 5
       #- id: M276 M40 Grenade Rig
       #  amount: 2
       #- id: M276 M44 Holster Rig
       #   amount: 5
       #- id: M276 M82F Holster Rig
       #  amount: 2
-      #- id: M276 Shotgun Shell Loading Rig
-      #  amount: 10
+      - id: RMCM276ShotgunShellLoadingRig
+        amount: 10
       - id: CMBeltMortar
         amount: 2
     - name: Pouches
@@ -197,8 +197,8 @@
         amount: 1
       - id: RMCPouchMagazineLarge
         amount: 1
-      #- id: RMCPouchShotgunLarge
-      #  amount: 1
+      - id: RMCPouchShotgunLarge
+        amount: 1
     - name: Miscellaneous
       entries:
       - id: RMCFlashlight # Combat Flashlight
@@ -215,8 +215,8 @@
         amount: 6
       #- id: MB-6 Folding Barricades (x3)
       #   amount: 3
-      #- id: Motion Detector
-      #  amount: 4
+      - id: RMCMotionDetector
+        amount: 4
       #- id: Data Detector
       #  amount: 4
       - id: RMCBinoculars
@@ -449,8 +449,8 @@
         amount: 20
       - id: CMBeltMarine
         amount: 10
-      #- id: M276 Shotgun Shell Loading Rig
-      #  amount: 10
+      - id: RMCM276ShotgunShellLoadingRig
+        amount: 10
       - id: CMSatchelMarine
         amount: 20
       - id: JumpsuitMarine
