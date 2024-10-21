@@ -268,3 +268,31 @@
     sprite: _RMC14/Structures/Storage/Lockers/delta.rsi
   - type: AccessReader
     access: [["CMAccessDelta"]]
+
+# new varadero
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerResearchDirector
+  name: research director's locker
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/rd.rsi
+  - type: AccessReader
+    access: [["CMAccessCMO"]]
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCCabinet
+  name: cabinet
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/cabinet.rsi
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerDetective
+  name: detective's cabinet
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/detective.rsi

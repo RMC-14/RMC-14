@@ -11,7 +11,7 @@
   - type: InfectStopOnDeath
   - type: CrashLandable
   - type: PressureImmunity
-  - type: Respirator 
+  - type: Respirator
     minSaturation: 5.0
   - type: Temperature
     heatDamageThreshold: 423
@@ -42,7 +42,7 @@
     prob: 0
   - type: CrashLandable
   - type: PressureImmunity
-  - type: Respirator 
+  - type: Respirator
     minSaturation: 5.0
   - type: Temperature
     heatDamageThreshold: 423
@@ -56,7 +56,7 @@
   - type: GhostRole
     prob: 0
   - type: PressureImmunity
-  - type: Respirator 
+  - type: Respirator
     minSaturation: 5.0
   - type: Temperature
     heatDamageThreshold: 423
@@ -70,7 +70,7 @@
   - type: GhostRole
     prob: 0
   - type: PressureImmunity
-  - type: Respirator 
+  - type: Respirator
     minSaturation: 5.0
   - type: Temperature
     heatDamageThreshold: 423
@@ -87,12 +87,12 @@
     location: Mister Wiggles
   - type: CrashLandable
   - type: PressureImmunity
-  - type: Respirator 
+  - type: Respirator
     minSaturation: 5.0
   - type: Temperature
     heatDamageThreshold: 423
     coldDamageThreshold: 0
-    
+
 - type: entity
   parent: MobCatCalico
   id: CMMobJones
@@ -104,7 +104,24 @@
     location: Jones
   - type: CrashLandable
   - type: PressureImmunity
-  - type: Respirator 
+  - type: Respirator
+    minSaturation: 5.0
+  - type: Temperature
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
+
+- type: entity
+  parent: MobCatCalico
+  id: RMCMobOrion
+  name: Orion
+  description: A domesticated, feline pet. The collar says 'Orion'.
+  components:
+  - type: WarpPoint
+    follow: true
+    location: Orion
+  - type: CrashLandable
+  - type: PressureImmunity
+  - type: Respirator
     minSaturation: 5.0
   - type: Temperature
     heatDamageThreshold: 423
@@ -183,3 +200,18 @@
   - type: ConditionalSpawner
     prototypes:
     - CMMobJones
+
+- type: entity
+  parent: MarkerBase
+  id: CMSpawnMobOrion
+  name: Orion Spawner
+  suffix: RCM
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: cat2
+      sprite: Mobs/Pets/cat.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobOrion
