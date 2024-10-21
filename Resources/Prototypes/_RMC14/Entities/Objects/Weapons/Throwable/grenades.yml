@@ -22,6 +22,8 @@
   - type: Clothing
     slots:
     - suitStorage
+  - type: Destructible
+    thresholds: []
 
 - type: entity
   parent: CMGrenadeBase

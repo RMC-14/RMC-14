@@ -61,4 +61,7 @@ public sealed partial class MarineOrdersComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillLeadership";
+
+    [DataField, AutoNetworkedField]
+    public bool Intrinsic = true;
 }

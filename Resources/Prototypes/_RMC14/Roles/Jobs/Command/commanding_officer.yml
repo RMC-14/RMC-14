@@ -61,6 +61,7 @@
     - type: MarineOrders
     - type: CMVendorUser
       points: 120
+    - type: RMCPointing
 
 - type: startingGear
   id: CMGearCommandingOfficer

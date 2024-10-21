@@ -385,7 +385,6 @@
       components:
       - ComputerBoard
       - MachineBoard
-      - MachinePart
   - type: FixedItemSizeStorage
 
 - type: entity
@@ -466,7 +465,6 @@
       - Welder
       - ComputerBoard
       - MachineBoard
-      - MachinePart
       - LightReplacer
       - EntrenchingTool
   - type: FixedItemSizeStorage

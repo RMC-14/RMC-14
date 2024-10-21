@@ -158,7 +158,8 @@
       entries:
       - id: CMFireExtinguisherPortable
         points: 3
-    #    CMMotionDetector: 8P
+      - id: RMCMotionDetector
+        points: 8
       - id: RMCWhistle
         points: 3
     - name: Binoculars
@@ -238,7 +239,7 @@
       - id: CMBeltMedicalFilled
         name: m276 medical storage rig (full)
         recommended: true
-      #- id: CMM276M63HolsterRig
+      - id: RMCBeltSmgMags
       #- id: CMM276M44HolsterRig
       #- id: CMM276M82FHolsterRig
       - id: RMCM276ShotgunShellLoadingRig
@@ -265,16 +266,23 @@
         recommended: true
       #- id: RMCPouchMedkit
 #        recommended: true
-      #- id: CMPressurizedReagentCanisterPouchBicaridine
+      - id: RMCPouchReagentCanisterBicaridine
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Bicaridine)
+      - id: RMCPouchReagentCanisterKelotane
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Kelotane)
+      - id: RMCPouchReagentCanisterTricordrazineRevival
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
+#      - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
 #        recommended: true
-      #- id: CMPressurizedReagentCanisterPouchKelotane
-#        recommended: true
-      #- id: CMPressurizedReagentCanisterPouchRevivalMix
-#        recommended: true
-      #- id: CMPressurizedReagentCanisterPouchTricordrazine
-#        recommended: true
-      #- id: CMPressurizedReagentCanisterPouchEmpty
-#        recommended: true
+#        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+      - id: RMCPouchReagentCanisterTricordrazine
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+      - id: RMCPouchReagentCanister
+        name: Pressurized Reagent Canister Pouch\n(EMPTY)
       - id: RMCPouchPistol
       - id: RMCPouchVialFill
     - name: Accessories

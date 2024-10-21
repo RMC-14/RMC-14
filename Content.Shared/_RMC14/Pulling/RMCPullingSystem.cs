@@ -42,12 +42,8 @@ public sealed class RMCPullingSystem : EntitySystem
 
     private const string PullEffect = "CMEffectGrab";
 
-    private EntityQuery<PreventPulledWhileAliveComponent> _preventPulledWhileAliveQuery;
-
     public override void Initialize()
     {
-        _preventPulledWhileAliveQuery = GetEntityQuery<PreventPulledWhileAliveComponent>();
-
         SubscribeLocalEvent<ParalyzeOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
         SubscribeLocalEvent<InfectOnPullAttemptComponent, PullAttemptEvent>(OnInfectOnPullAttempt);
 
@@ -128,7 +124,7 @@ public sealed class RMCPullingSystem : EntitySystem
 
     private void OnSlowPullStarted(Entity<SlowOnPullComponent> ent, ref PullStartedMessage args)
     {
-        if (ent.Owner == args.PulledUid)
+        if (ent.Owner == args.PullerUid)
         {
             EnsureComp<PullingSlowedComponent>(args.PullerUid);
             _movementSpeed.RefreshMovementSpeedModifiers(args.PullerUid);
@@ -137,9 +133,9 @@ public sealed class RMCPullingSystem : EntitySystem
 
     private void OnSlowPullStopped(Entity<SlowOnPullComponent> ent, ref PullStoppedMessage args)
     {
-        if (ent.Owner == args.PulledUid)
+        if (ent.Owner == args.PullerUid)
         {
-            RemCompDeferred<PullingSlowedComponent>(args.PullerUid);
+            RemComp<PullingSlowedComponent>(args.PullerUid);
             _movementSpeed.RefreshMovementSpeedModifiers(args.PullerUid);
         }
     }
@@ -148,14 +144,22 @@ public sealed class RMCPullingSystem : EntitySystem
     {
         if (HasComp<BypassInteractionChecksComponent>(ent) ||
             !TryComp(ent, out PullerComponent? puller) ||
-            !TryComp(puller.Pulling, out SlowOnPullComponent? slow))
+            !TryComp(ent, out SlowOnPullComponent? slow))
         {
             return;
         }
 
+        if (puller.Pulling == null)
+            return;
+
+        var ev = new PullSlowdownAttemptEvent(puller.Pulling.Value);
+        RaiseLocalEvent(ent, ref ev);
+        if (ev.Cancelled)
+            return;
+
         foreach (var slowdown in slow.Slowdowns)
         {
-            if (_whitelist.IsWhitelistPass(slowdown.Whitelist, ent))
+            if (_whitelist.IsWhitelistPass(slowdown.Whitelist, puller.Pulling.Value))
             {
                 args.ModifySpeed(slowdown.Multiplier, slowdown.Multiplier);
                 return;
@@ -267,9 +271,34 @@ public sealed class RMCPullingSystem : EntitySystem
         if (args.PulledUid != ent.Owner)
             return;
 
-        var pulled = args.PulledUid;
-        var puller = args.PullerUid;
+        PlayPullEffect(args.PullerUid, args.PulledUid);
+    }
 
+    public bool IsPulling(Entity<PullerComponent?> user, Entity<PullableComponent?> target)
+    {
+        if (!Resolve(user, ref user.Comp, false) ||
+            !Resolve(target, ref target.Comp, false))
+        {
+            return false;
+        }
+
+        return user.Comp.Pulling == target;
+    }
+
+    public bool IsBeingPulled(Entity<PullableComponent?> target, out EntityUid user)
+    {
+        user = default;
+        if (!Resolve(target, ref target.Comp, false))
+            return false;
+
+        if (target.Comp.Puller is { } puller)
+            user = puller;
+
+        return target.Comp.BeingPulled;
+    }
+
+    public void PlayPullEffect(EntityUid puller, EntityUid pulled)
+    {
         var userXform = Transform(puller);
         var targetPos = _transform.GetWorldPosition(pulled);
         var localPos = Vector2.Transform(targetPos, _transform.GetInvWorldMatrix(userXform));

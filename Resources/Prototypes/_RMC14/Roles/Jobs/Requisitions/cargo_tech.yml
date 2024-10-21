@@ -20,6 +20,7 @@
       skills:
         RMCSkillConstruction: 1
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillPowerLoader: 2
 
 - type: startingGear

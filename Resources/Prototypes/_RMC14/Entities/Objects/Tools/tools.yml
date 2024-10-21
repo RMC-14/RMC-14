@@ -21,7 +21,7 @@
   - type: Clothing
     quickEquip: false
     slots:
-    #TODO ear slot
+    - Ears
     - Suitstorage
 
 - type: entity

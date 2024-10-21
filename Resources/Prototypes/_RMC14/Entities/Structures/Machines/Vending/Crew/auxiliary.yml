@@ -44,7 +44,7 @@
         recommended: true
       - id: CMBeltMedicalFilled
         recommended: true
-      #- id: CMBeltM39 # TODO RMC14 M39 Belt
+      - id: RMCBeltSmgMags
       #- id: CMBeltRevolver # TODO RMC14 Revolver Holster Belt
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
       #- id: CMBeltGeneralPistol # TODO RMC14 General Pistol Holster Belt
@@ -147,9 +147,9 @@
       #  points: 10
       - id: RMCPouchMacheteFilled
         points: 15
-      #- id: RMCMotionDetector # TODO RMC14 Motion Detector
-      #  points: 15
-      #  recommended: true
+      - id: RMCMotionDetector
+        points: 15
+        recommended: true
 
 # Weapon Rack
 -  type: entity
@@ -220,15 +220,15 @@
        entries:
        - id: RMCAttachmentRailFlashlight
          amount: 8
-      #  - id: RMCAttachmentUnderBarrelFlashlight # TODO RMC14 Underbarrel flashlight grip
-      #    amount: 4
+       - id: RMCAttachmentFlashlightGrip
+         amount: 4
      - name: Utilities
        entries:
        - id: RMCFlashlight
          amount: 4
        - id: RMCM5Bayonet
          amount: 4
-      #  - id: RMCPackFlareSignal # TODO RMC14 Signal Flares
-      #    amount: 1
+       - id: RMCPackFlareCAS
+         amount: 1
        - id: CMPackFlare
          amount: 10

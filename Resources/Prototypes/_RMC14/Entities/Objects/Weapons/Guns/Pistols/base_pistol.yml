@@ -107,7 +107,7 @@
 
 - type: entity
   abstract: true
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: CMBulletBase
   categories:
   - HideSpawnMenu

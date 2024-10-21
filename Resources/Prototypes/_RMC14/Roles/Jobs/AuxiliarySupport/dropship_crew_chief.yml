@@ -27,6 +27,7 @@
       skills:
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillJtac: 2
         RMCSkillLeadership: 1
         RMCSkillMedical: 2
@@ -36,6 +37,7 @@
     - type: MarineOrders
     - type: CMVendorUser
       points: 45
+    - type: RMCPointing
   hidden: false
 
 - type: startingGear

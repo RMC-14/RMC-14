@@ -171,6 +171,8 @@
         crate: RMCCrateGearBinoculars
       - cost: 4000
         crate: RMCCrateGearPackFlare
+      - cost: 4000
+        crate: RMCCrateGearMotionDetector
       - cost: 6000
         crate: RMCCrateGearPackFlareCAS
     - name: Medical

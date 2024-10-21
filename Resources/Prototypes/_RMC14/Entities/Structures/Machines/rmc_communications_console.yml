@@ -87,6 +87,7 @@
       RMCSkillOverwatch: 1
   - type: OverwatchConsole
   - type: TacticalMapComputer
+  - type: SupplyDropComputer
 
 - type: entity
   parent: RMCCommunicationsConsoleBase

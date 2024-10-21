@@ -30,6 +30,7 @@
     unlockAt: 0
     healOffWeeds: true
     emoteSounds: Larva
+  - type: XenoLight
   - type: XenoPlasma
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1

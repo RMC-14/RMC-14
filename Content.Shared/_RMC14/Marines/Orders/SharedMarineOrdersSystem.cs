@@ -145,15 +145,6 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         _movementSpeed.RefreshMovementSpeedModifiers(receiver);
     }
 
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        RemoveExpired<MoveOrderComponent>();
-        RemoveExpired<FocusOrderComponent>();
-        RemoveExpired<HoldOrderComponent>();
-    }
-
     private void RemoveExpired<T>() where T : IComponent, IOrderComponent
     {
         var query = EntityQueryEnumerator<T>();
@@ -171,5 +162,20 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
             if (comp.Received.Count == 0)
                 RemCompDeferred<T>(uid);
         }
+    }
+
+    public void StartActionUseDelay(Entity<MarineOrdersComponent> orders)
+    {
+        _actions.StartUseDelay(orders.Comp.HoldActionEntity);
+        _actions.StartUseDelay(orders.Comp.MoveActionEntity);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        RemoveExpired<MoveOrderComponent>();
+        RemoveExpired<FocusOrderComponent>();
+        RemoveExpired<HoldOrderComponent>();
     }
 }
