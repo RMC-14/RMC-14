@@ -49,6 +49,8 @@
   - type: CMArmor
     armor: 25
     explosionArmor: 80
+  - type: XenoClaws
+    clawType: VerySharp
   - type: MeleeWeapon
     attackRate: 1.05
     damage:

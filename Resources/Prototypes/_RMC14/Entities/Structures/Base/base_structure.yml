@@ -119,6 +119,8 @@
   - type: RMCWallExplosionDeletable
   - type: DamageMultiplierFlags
     flags: Turf
+  - type: ReceiverXenoClaws
+    hitsToDestroy: 20
 
 - type: entity
   parent:
