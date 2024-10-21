@@ -1,11 +1,14 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Attachable.Events;
+using Content.Shared._RMC14.FarSight;
+using Content.Shared._RMC14.Overwatch;
 using Content.Shared.Actions;
 using Content.Shared.Camera;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
@@ -21,6 +24,7 @@ namespace Content.Shared._RMC14.Scoping;
 public abstract partial class SharedScopeSystem : EntitySystem
 {
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
+    [Dependency] private readonly FarSightSystem _farSight = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedContentEyeSystem _contentEye = default!;
@@ -95,6 +99,10 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
     private void OnGetActions(Entity<ScopeComponent> ent, ref GetItemActionsEvent args)
     {
+        // No scoping while watching through the console
+        if (HasComp<OverwatchWatchingComponent>(args.User))
+            return;
+
         args.AddAction(ref ent.Comp.ScopingToggleActionEntity, ent.Comp.ScopingToggleAction);
 
         if (ent.Comp.ZoomLevels.Count > 1)
@@ -133,6 +141,8 @@ public abstract partial class SharedScopeSystem : EntitySystem
     {
         if (args.Handled || !args.Complex || !ent.Comp.UseInHand)
             return;
+
+
 
         args.Handled = true;
         ToggleScoping(ent, args.User);
@@ -238,6 +248,9 @@ public abstract partial class SharedScopeSystem : EntitySystem
         if (!CanScopePopup(scope, user))
             return null;
 
+        if (HasComp<OverwatchWatchingComponent>(user))
+            return null;
+
         // TODO RMC14 make this work properly with rotations
         var xform = Transform(user);
         var cardinalDir = xform.LocalRotation.GetCardinalDir();
@@ -254,6 +267,18 @@ public abstract partial class SharedScopeSystem : EntitySystem
         return null;
     }
 
+    private bool GetZoom(EntityUid uid, out Vector2 zoom, ContentEyeComponent? eye = null)
+    {
+        if (!Resolve(uid, ref eye, false))
+        {
+            zoom = new Vector2(1.0f, 1.0f);
+            return false;
+        }
+
+        zoom = eye.TargetZoom;
+        return true;
+    }
+
     private void Scope(Entity<ScopeComponent> scope, EntityUid user, Direction direction)
     {
         if (TryComp(user, out ScopingComponent? scoping))
@@ -268,7 +293,13 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
         scoping = EnsureComp<ScopingComponent>(user);
         scoping.Scope = scope;
+
         scoping.AllowMovement = zoomLevel.AllowMovement;
+
+        // To account for e.g. farsight
+        if (GetZoom(user, out var zoom))
+            scoping.PreviousZoom = zoom;
+
         Dirty(user, scoping);
 
         if (scope.Comp.Attachment && TryGetActiveEntity(scope, out var active))
@@ -294,6 +325,10 @@ public abstract partial class SharedScopeSystem : EntitySystem
         if (scope.Comp.User is not { } user)
             return false;
 
+        if (!TryComp(scope.Comp.User, out ScopingComponent? scoping))
+            return false;
+
+        var prevZoom = scoping.PreviousZoom;
         RemCompDeferred<ScopingComponent>(user);
 
         if (scope.Comp.Attachment && TryGetActiveEntity(scope, out var active))
@@ -313,7 +348,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
         _popup.PopupClient(msgUser, user, user);
 
         _actionsSystem.SetToggled(scope.Comp.ScopingToggleActionEntity, false);
-        _contentEye.ResetZoom(user);
+        _contentEye.SetZoom(user, prevZoom, true);
         return true;
     }
 

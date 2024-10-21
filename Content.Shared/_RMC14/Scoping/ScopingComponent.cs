@@ -15,4 +15,8 @@ public sealed partial class ScopingComponent : Component
 
     [ViewVariables, AutoNetworkedField]
     public bool AllowMovement;
+
+    // To account for other zoom-altering items, such as the SGO sights
+    [ViewVariables, AutoNetworkedField]
+    public Vector2 PreviousZoom = new Vector2(1.0f, 1.0f);
 }
