@@ -4,6 +4,13 @@
   parent: BaseBulletTrigger
   noSpawn: true
   components:
+  - type: TriggerOnCollide
+  - type: Projectile
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Blunt: 12
+    maxFixedRange: 3 # 4 tiles
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/rocket_projectiles.rsi
     layers:
@@ -11,14 +18,16 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: RMC
-    maxIntensity: 400
-    intensitySlope: 200
-    totalIntensity: 400
+    maxIntensity: 20
+    intensitySlope: 10
+    totalIntensity: 140
     canCreateVacuum: false
+  - type: CMExplosionEffect
   - type: PointLight
-    radius: 5
+    radius: 3.5
     color: orange
     energy: 0.5
+  - type: IgnorePredictionHide
 
 - type: entity
   id: CMCartridgeRocketDisposable

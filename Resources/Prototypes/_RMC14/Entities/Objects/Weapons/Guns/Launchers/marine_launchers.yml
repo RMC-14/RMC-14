@@ -234,9 +234,9 @@
   - type: Gun
     minAngle: 0
     maxAngle: 1
-    fireRate: 0.4
+    fireRate: 0.21
     soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/m5_shoot.ogg
   - type: BallisticAmmoProvider
     cycleable: false
     whitelist:
@@ -245,11 +245,16 @@
     proto: CMCartridgeRocketDisposable
     capacity: 1
     soundInsert:
-      path: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Cock/m5_ammo.ogg
   - type: Appearance
   - type: Wieldable
   - type: GunRequiresWield
-  - type: GunShowUseDelay
-  - type: UseDelay
+  - type: WieldDelay
+    baseDelay: 2.4
+  - type: OnShootTriggerAmmoTimer
+    delay: 0.25 # TODO RMC14 REFER TO M5-ATL
+  - type: WieldableSpeedModifiers
+    baseWalk: 0.58
+    baseSprint: 0.466
   - type: IgnorePredictionHide
   - type: GunIgnorePrediction
