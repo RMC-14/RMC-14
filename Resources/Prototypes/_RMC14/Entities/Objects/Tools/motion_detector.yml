@@ -18,7 +18,7 @@
     size: Normal
   - type: Clothing
     slots:
-    - suitStorage
+    - suitstorage
     - belt
   - type: MotionDetector
   - type: Appearance
