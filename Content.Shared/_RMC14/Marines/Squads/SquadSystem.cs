@@ -398,15 +398,15 @@ public sealed class SquadSystem : EntitySystem
             var leaders = EntityQueryEnumerator<SquadLeaderComponent, SquadMemberComponent>();
             while (leaders.MoveNext(out var uid, out var leader, out var otherMember))
             {
-                if (leader.Headset is { } headset)
-                {
-                    RemComp<SquadLeaderHeadsetComponent>(headset);
-                    if (TryComp(headset, out EncryptionKeyHolderComponent? holder))
-                        _encryptionKey.UpdateChannels(headset, holder);
-                }
-
                 if (otherMember.Squad == toPromote.Comp.Squad)
                 {
+                    if (leader.Headset is { } headset)
+                    {
+                        RemComp<SquadLeaderHeadsetComponent>(headset);
+                        if (TryComp(headset, out EncryptionKeyHolderComponent? holder))
+                            _encryptionKey.UpdateChannels(headset, holder);
+                    }
+
                     if (TryComp(uid, out MarineComponent? otherMarine) &&
                         Equals(otherMarine.Icon, leader.Icon))
                     {
