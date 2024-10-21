@@ -398,30 +398,30 @@ public sealed class SquadSystem : EntitySystem
             var leaders = EntityQueryEnumerator<SquadLeaderComponent, SquadMemberComponent>();
             while (leaders.MoveNext(out var uid, out var leader, out var otherMember))
             {
-                if (otherMember.Squad == toPromote.Comp.Squad)
+                if (otherMember.Squad != toPromote.Comp.Squad)
+                    continue;
+
+                if (leader.Headset is { } headset)
                 {
-                    if (leader.Headset is { } headset)
-                    {
-                        RemComp<SquadLeaderHeadsetComponent>(headset);
-                        if (TryComp(headset, out EncryptionKeyHolderComponent? holder))
-                            _encryptionKey.UpdateChannels(headset, holder);
-                    }
-
-                    if (TryComp(uid, out MarineComponent? otherMarine) &&
-                        Equals(otherMarine.Icon, leader.Icon))
-                    {
-                        _marine.ClearIcon((uid, otherMarine));
-                    }
-
-                    if (TryComp(uid, out MarineOrdersComponent? otherOrders) &&
-                        !otherOrders.Intrinsic)
-                    {
-                        RemCompDeferred<MarineOrdersComponent>(uid);
-                    }
-
-                    RemComp<SquadLeaderComponent>(uid);
-                    RemCompDeferred<RMCPointingComponent>(uid);
+                    RemComp<SquadLeaderHeadsetComponent>(headset);
+                    if (TryComp(headset, out EncryptionKeyHolderComponent? holder))
+                        _encryptionKey.UpdateChannels(headset, holder);
                 }
+
+                if (TryComp(uid, out MarineComponent? otherMarine) &&
+                    Equals(otherMarine.Icon, leader.Icon))
+                {
+                    _marine.ClearIcon((uid, otherMarine));
+                }
+
+                if (TryComp(uid, out MarineOrdersComponent? otherOrders) &&
+                    !otherOrders.Intrinsic)
+                {
+                    RemCompDeferred<MarineOrdersComponent>(uid);
+                }
+
+                RemComp<SquadLeaderComponent>(uid);
+                RemCompDeferred<RMCPointingComponent>(uid);
             }
         }
 
