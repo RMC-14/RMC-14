@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: [ BaseMachinePowered, RMCConstructibleMachine ]
   id: CMAutolathe
   name: autolathe
   description: It produces items using metal and glass.
