@@ -127,11 +127,15 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void OnFlareSignalExamined(Entity<FlareSignalComponent> ent, ref ExaminedEvent args)
     {
-        if (TryComp(ent, out ExpendableLightComponent? expendable) && expendable.CurrentState != ExpendableLightState.Dead)
+        using (args.PushGroup(nameof(FlareSignalComponent)))
         {
-            using (args.PushGroup(nameof(FlareSignalComponent)))
+            if (TryComp(ent, out ExpendableLightComponent? expendable) && expendable.CurrentState != ExpendableLightState.Dead)
             {
                 args.PushMarkup(Loc.GetString("rmc-laser-designator-signal-flare-examine"));
+            }
+            if (TryComp(ent, out ActiveFlareSignalComponent? active))
+            {
+                args.PushMarkup(Loc.GetString("rmc-laser-designator-examine-id", ("id", active.Abbreviation)));
             }
         }
     }
