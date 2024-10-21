@@ -51,6 +51,8 @@ public sealed class XenoFruitChooseBui : BoundUserInterface
 
                 control.Set(name, _sprite.Frame0(fruit));
                 control.Button.OnPressed += _ => SendPredictedMessage(new XenoFruitChooseBuiMsg(fruitId));
+                control.Button.ToolTip = fruit.Description;
+                control.Button.TooltipDelay = 0.1f;
 
                 _window.FruitContainer.AddChild(control);
                 _buttons.Add(fruitId, control);

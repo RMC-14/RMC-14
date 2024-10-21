@@ -3,6 +3,7 @@
   id: XenoFruitBase
   abstract: true
   name: resin fruit
+  description: a fruit that shouldn't exist
   placement:
     mode: SnapgridCenter
     snap:
