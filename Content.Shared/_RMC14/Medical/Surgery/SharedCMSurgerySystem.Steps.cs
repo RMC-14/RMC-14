@@ -209,9 +209,9 @@ public abstract partial class SharedCMSurgerySystem
             foreach (var tool in validTools)
             {
                 if (TryComp(tool, out CMSurgeryToolComponent? toolComp) &&
-                    toolComp.EndSound != null)
+                    toolComp.StartSound != null)
                 {
-                    _audio.PlayEntity(toolComp.StartSound, user, tool);
+                    _audio.PlayPvs(toolComp.StartSound, tool);
                 }
             }
         }
