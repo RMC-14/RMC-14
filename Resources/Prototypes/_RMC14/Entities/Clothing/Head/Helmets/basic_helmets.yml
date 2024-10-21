@@ -1,9 +1,83 @@
-# tucking features
+# base
 - type: entity
   parent: ClothingHeadBase
   id: RMCHelmetBase
   abstract: true
   name: helmet
+  components:
+  - type: Storage #hopefully in the future someone smarter than me can add storage(?) for integrated things like netting, HUD, etc. but for now this is for hiding snacks
+    maxItemSize: Tiny
+    grid:
+    - 0,0,3,1 # TODO RMC14 7, but 2 slots are reserved for garbs
+    blacklist:
+      tags:
+      - Pouch
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: CMHardArmor
+  - type: RMCNameItemOnVend
+    item: Helmet
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - RMCLighter
+      - RMCFlask
+      - CMScalpel
+      - Figurine
+      tags:
+#      - TODO RMC14 matchbox
+      - Cigarette
+#      - TODO RMC14 cards
+      - Slice
+#      - TODO RMC14 glasses (eyewear)
+#      - TODO RMC14 walkman and casettes
+#      - TODO RMC14 helmet garb
+      - Pen
+      - Crayon
+#      - TODO RMC14 handful of bullets
+      - Flashlight
+      - Brutepack
+      - CMOintment
+      - CMAutoInjector
+      - PillPacket
+  - type: FixedItemSizeStorage
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCHelmetBase
+  id: RMCMarineHelmetBase
+  abstract: true
+  components:
+  - type: CMArmor
+    armor: 20
+    explosionArmor: 10
+  - type: RMCBulkyArmor
+  - type: OverwatchCamera
+  - type: SquadArmor
+    layer: Helmet
+    slot: HEAD
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
+      state: std-helmet
+    leaderRsi:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
+      state: sql-helmet
+
+- type: entity
+  id: RMCFoldableHelmetBase
+  abstract: true
   components:
   - type: Foldable
     unfoldVerbText : "rmc-untuck"
@@ -19,7 +93,7 @@
 
 # riot
 - type: entity
-  parent: RMCHelmetBase
+  parent: [RMCHelmetBase, RMCFoldableHelmetBase]
   id: ArmorHelmetRiot
   name: riot helmet
   description: It's a helmet specifically designed to protect against close range attacks. It covers your ears.
