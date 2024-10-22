@@ -9,6 +9,21 @@
   "states": [
     {
       "name": "scorch1"
+    },
+    {
+      "name": "scorch2"
+    },
+    {
+      "name": "scorch3"
+    },
+    {
+      "name": "scorch_small1"
+    },
+    {
+      "name": "scorch_small2"
+    },
+    {
+      "name": "scorch_small3"
     }
   ]
 }

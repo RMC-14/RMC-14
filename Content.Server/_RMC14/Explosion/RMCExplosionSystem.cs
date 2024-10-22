@@ -13,6 +13,7 @@ using System.Numerics;
 using Content.Shared.Decals;
 using Robust.Shared.Prototypes;
 using System.Linq;
+using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Explosion;
 
@@ -25,6 +26,9 @@ public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly TriggerSystem _trigger = default!;
     [Dependency] private readonly DecalSystem _decals = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+
+    private string[] _scorchDecals = [];
 
     public override void Initialize()
     {
@@ -35,6 +39,8 @@ public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
         SubscribeLocalEvent<RMCExplosiveDeleteWallsComponent, EntityStuckEvent>(OnExplosiveDeleteWallsStuck);
 
         SubscribeLocalEvent<RMCScorchEffectComponent, CMExplosiveTriggeredEvent>(OnExplosionEffectTriggered);
+
+        CacheDecals();
     }
 
     private void OnVocalizeTriggered(Entity<CMVocalizeTriggerComponent> ent, ref ActiveTimerTriggerEvent args)
@@ -66,12 +72,9 @@ public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
 
     private void OnExplosionEffectTriggered(Entity<RMCScorchEffectComponent> ent, ref CMExplosiveTriggeredEvent args)
     {
-        //Logger.Debug("Server OnExplosionEffectTriggered()");
-        Logger.Debug($"Adding decal at {Transform(ent).Coordinates}");
-        var decal = _prototypeManager.EnumeratePrototypes<DecalPrototype>().FirstOrDefault(x => x.Tags.Contains("scorch"));
-        if (!_decals.TryAddDecal(decal?.ID ?? String.Empty, Transform(ent).Coordinates.Offset(new Vector2(-0.5f, -0.5f)), out _, cleanable: true))
-            Logger.Warning("Failed to add decal");
-            return;
+        var decalId = _scorchDecals[_random.Next(_scorchDecals.Length)];
+        var coords = Transform(ent).Coordinates.Offset(new Vector2(-0.5f, -0.5f)); //Decals spawn based on bottom left corner
+        _decals.TryAddDecal(decalId, coords, out _, rotation: _random.NextAngle(), cleanable: true);
     }
 
     public override void QueueExplosion(
@@ -107,5 +110,11 @@ public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
         EntityUid? user = null)
     {
         _explosion.TriggerExplosive(uid, null, delete, totalIntensity, radius, user);
+    }
+
+
+    private void CacheDecals()
+    {
+        _scorchDecals = _prototypeManager.EnumeratePrototypes<DecalPrototype>().Where(x => x.Tags.Contains("scorch")).Select(x => x.ID).ToArray();
     }
 }

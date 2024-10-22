@@ -6,3 +6,50 @@
   sprite:
     sprite: _RMC14/Decals/scorch.rsi
     state: scorch1
+    
+- type: decal
+  id: CMScorch2
+  parent: CMDecalBase
+  tags: ["scorch"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/scorch.rsi
+    state: scorch2
+    
+- type: decal
+  id: CMScorch3
+  parent: CMDecalBase
+  tags: ["scorch"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/scorch.rsi
+    state: scorch3
+    
+- type: decal
+  id: CMScorch4
+  parent: CMDecalBase
+  # tags: ["scorch"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/scorch.rsi
+    state: scorch_small1
+    
+- type: decal
+  id: CMScorch5
+  parent: CMDecalBase
+  # tags: ["scorch"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/scorch.rsi
+    state: scorch_small2
+    
+- type: decal
+  id: CMScorch6
+  parent: CMDecalBase
+  # tags: ["scorch"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/scorch.rsi
+    state: scorch_small3
+    
+    
