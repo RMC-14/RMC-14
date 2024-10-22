@@ -44,6 +44,16 @@
     grid:
     - 0,0,5,1 #6 slot
 
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeBureauObserverFill
+  suffix: Bureau Observer, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFireExtinguisherPortable
+    - id: CMRollerBedSpawnFolded # TODO RMC14 pepper spray
+
 
 # flamertank / fueltank.rsi
 
