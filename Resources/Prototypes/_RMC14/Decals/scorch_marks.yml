@@ -1,0 +1,8 @@
+- type: decal
+  id: CMScorch1
+  parent: CMDecalBase
+  tags: ["scorch"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/scorch.rsi
+    state: scorch1
