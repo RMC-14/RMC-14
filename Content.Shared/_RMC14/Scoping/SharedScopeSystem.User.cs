@@ -1,4 +1,6 @@
-﻿using Content.Shared.Camera;
+﻿using Content.Shared._RMC14.FarSight;
+using Content.Shared._RMC14.Overwatch;
+using Content.Shared.Camera;
 using Content.Shared.Mobs;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Events;
@@ -24,6 +26,7 @@ public partial class SharedScopeSystem
         SubscribeLocalEvent<ScopingComponent, StunnedEvent>(OnStunned);
         SubscribeLocalEvent<ScopingComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<ScopingComponent, OverwatchStartEvent>(OnOverwatchStart);
+        SubscribeLocalEvent<ScopingComponent, FarSightStartEvent>(OnFarSightStart);
     }
 
     private void OnRemove(Entity<ScopingComponent> user, ref ComponentRemove args)
@@ -93,6 +96,11 @@ public partial class SharedScopeSystem
     }
 
     private void OnOverwatchStart(Entity<ScopingComponent> ent, ref OverwatchStartEvent args)
+    {
+        UserStopScoping(ent);
+    }
+
+    private void OnFarSightStart(Entity<ScopingComponent> ent, ref FarSightStartEvent args)
     {
         UserStopScoping(ent);
     }

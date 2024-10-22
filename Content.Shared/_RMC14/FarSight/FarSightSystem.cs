@@ -1,5 +1,6 @@
-﻿using Content.Shared._RMC14.Scoping;
+﻿using Content.Shared._RMC14.FarSight;
 using Content.Shared._RMC14.Overwatch;
+using Content.Shared._RMC14.Scoping;
 using Content.Shared.Actions;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
@@ -32,10 +33,6 @@ public sealed class FarSightSystem : EntitySystem
         if (args.InHands || !_inventory.InSlotWithFlags((ent, null, null), ent.Comp.Slots))
             return;
 
-        // No farsight while watching through the console
-        if (HasComp<OverwatchWatchingComponent>(args.User))
-            return;
-
         args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId);
         Dirty(ent);
     }
@@ -47,10 +44,8 @@ public sealed class FarSightSystem : EntitySystem
 
         var user = args.Performer;
 
-        // No farsight while watching through the console
-        if (HasComp<ScopingComponent>(user) ||
-            HasComp<OverwatchWatchingComponent>(user))
-            return;
+        var ev = new FarSightStartEvent();
+        RaiseLocalEvent(user, ref ev);
 
         args.Handled = true;
 
