@@ -58,21 +58,9 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
             return;
         }
 
-        // To stop using scopes through the overwatch console
-        if (TryComp(watcher.Owner, out ScopingComponent? scope))
-            _scope.UserStopScoping((watcher.Owner, scope));
-
-        // To disable night-vision while using console
-        if (TryComp(watcher.Owner, out NightVisionComponent? nightVision))
-        {
-            _nightVision.DisableNightVisionItem(nightVision.Item, watcher.Owner);
-        }
-
-        // To disable far-sight when using consoles
-        if (TryComp(watcher.Owner, out FarSightComponent? farSight))
-        {
-            _farSight.SetFarSightItem(farSight.Item, watcher.Owner, false);
-        }
+        // Raise event to cancel all conflicting actions
+        var ev = new OverwatchStartEvent();
+        RaiseLocalEvent(watcher, ref ev);
 
         _eye.SetTarget(watcher, toWatch, watcher);
         _viewSubscriber.AddViewSubscriber(toWatch, watcher.Comp1.PlayerSession);

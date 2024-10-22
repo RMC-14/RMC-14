@@ -23,6 +23,7 @@ public partial class SharedScopeSystem
         SubscribeLocalEvent<ScopingComponent, KnockedDownEvent>(OnKnockedDown);
         SubscribeLocalEvent<ScopingComponent, StunnedEvent>(OnStunned);
         SubscribeLocalEvent<ScopingComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<ScopingComponent, OverwatchStartEvent>(OnOverwatchStart);
     }
 
     private void OnRemove(Entity<ScopingComponent> user, ref ComponentRemove args)
@@ -88,6 +89,11 @@ public partial class SharedScopeSystem
         if (args.NewMobState == MobState.Alive)
             return;
 
+        UserStopScoping(ent);
+    }
+
+    private void OnOverwatchStart(Entity<ScopingComponent> ent, ref OverwatchStartEvent args)
+    {
         UserStopScoping(ent);
     }
 

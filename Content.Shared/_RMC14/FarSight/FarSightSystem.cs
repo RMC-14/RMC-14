@@ -23,6 +23,8 @@ public sealed class FarSightSystem : EntitySystem
         SubscribeLocalEvent<FarSightItemComponent, FarSightActionEvent>(OnFarSightAction);
         SubscribeLocalEvent<FarSightItemComponent, GotUnequippedEvent>(OnFarSightUnequipped);
         SubscribeLocalEvent<FarSightItemComponent, GotEquippedEvent>(OnFarSightEquipped);
+
+        SubscribeLocalEvent<FarSightComponent, OverwatchStartEvent>(OnOverwatchStart);
     }
 
     private void OnFarSightGetItemActions(Entity<FarSightItemComponent> ent, ref GetItemActionsEvent args)
@@ -84,13 +86,14 @@ public sealed class FarSightSystem : EntitySystem
         SetZoom(false, user, ent);
     }
 
-    public bool SetFarSightItem(EntityUid item, EntityUid user, bool state)
+    private void OnOverwatchStart(Entity<FarSightComponent> ent, ref OverwatchStartEvent args)
     {
-        if (!TryComp(item, out FarSightItemComponent? comp))
-            return false;
+        var item = ent.Comp.Item;
 
-        SetZoom(state, user, (item, comp));
-        return true;
+        if (!TryComp(item, out FarSightItemComponent? farSight))
+            return;
+
+        SetZoom(false, ent.Owner, (item, farSight));
     }
 
     private void SetZoom(bool activated, EntityUid user, Entity<FarSightItemComponent> item)
