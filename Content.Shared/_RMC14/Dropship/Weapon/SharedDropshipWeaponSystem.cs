@@ -688,7 +688,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 var spread = _random.NextVector2(-ammo.BulletSpread, ammo.BulletSpread + 1);
                 var target = _transform.ToMapCoordinates(flight.Target).Offset(spread);
                 Spawn(ammo.ImpactEffect, target, rotation: _random.NextAngle());
-                //TODO Spawn impact decals here
 
                 _entityLookup.GetEntitiesInRange(target, 0.49f, _damageables, LookupFlags.Uncontained);
                 foreach (var damageable in _damageables)

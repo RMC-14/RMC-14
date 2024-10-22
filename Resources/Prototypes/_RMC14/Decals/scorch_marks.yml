@@ -1,64 +1,64 @@
 - type: decal
-  id: CMScorch1
+  id: RMCScorch1
   parent: CMDecalBase
-  tags: ["scorch"]
+  tags: ["RMCscorch"]
   defaultCustomColor: true
   sprite:
     sprite: _RMC14/Decals/scorch.rsi
     state: scorch1
     
 - type: decal
-  id: CMScorch2
+  id: RMCScorch2
   parent: CMDecalBase
-  tags: ["scorch"]
+  tags: ["RMCscorch"]
   defaultCustomColor: true
   sprite:
     sprite: _RMC14/Decals/scorch.rsi
     state: scorch2
     
 - type: decal
-  id: CMScorch3
+  id: RMCScorch3
   parent: CMDecalBase
-  tags: ["scorch"]
+  tags: ["RMCscorch"]
   defaultCustomColor: true
   sprite:
     sprite: _RMC14/Decals/scorch.rsi
     state: scorch3
     
 - type: decal
-  id: CMScorch4
+  id: RMCScorch4
   parent: CMDecalBase
-  tags: ["scorch"]
+  tags: ["RMCscorch"]
   defaultCustomColor: true
   sprite:
     sprite: _RMC14/Decals/scorch.rsi
     state: scorch4
     
 - type: decal
-  id: CMScorchTiny1
+  id: RMCScorchSmall1
   parent: CMDecalBase
-  # tags: ["scorch"]
+  tags: ["RMCScorchSmall"]
   defaultCustomColor: true
   sprite:
     sprite: _RMC14/Decals/scorch.rsi
-    state: scorch_tiny1
+    state: scorch_small1
     
 - type: decal
-  id: CMScorchTiny2
+  id: RMCScorchSmall2
   parent: CMDecalBase
-  # tags: ["scorch"]
+  tags: ["RMCScorchSmall"]
   defaultCustomColor: true
   sprite:
     sprite: _RMC14/Decals/scorch.rsi
-    state: scorch_tiny2
+    state: scorch_small2
     
 - type: decal
-  id: CMScorchTiny3
+  id: RMCScorchSmall3
   parent: CMDecalBase
-  # tags: ["scorch"]
+  tags: ["RMCScorchSmall"]
   defaultCustomColor: true
   sprite:
     sprite: _RMC14/Decals/scorch.rsi
-    state: scorch_tiny3
+    state: scorch_small3
     
     
