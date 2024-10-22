@@ -160,9 +160,8 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
     private void EnableNightVisionItem(Entity<NightVisionItemComponent> item, EntityUid user)
     {
-        // No night-vision through overwatch consoles
-        if (HasComp<OverwatchWatchingComponent>(user))
-            return;
+        var ev = new NightVisionStartEvent();
+        RaiseLocalEvent(user, ref ev);
 
         DisableNightVisionItem(item, item.Comp.User);
 

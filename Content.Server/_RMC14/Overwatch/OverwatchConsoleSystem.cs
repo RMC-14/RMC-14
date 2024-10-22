@@ -1,7 +1,4 @@
-﻿using Content.Shared._RMC14.FarSight;
-using Content.Shared._RMC14.NightVision;
-using Content.Shared._RMC14.Overwatch;
-using Content.Shared._RMC14.Scoping;
+﻿using Content.Shared._RMC14.Overwatch;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 
@@ -11,9 +8,6 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
 {
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
-    [Dependency] private readonly FarSightSystem _farSight = default!;
-    [Dependency] private readonly SharedNightVisionSystem _nightVision = default!;
-    [Dependency] private readonly SharedScopeSystem _scope = default!;
 
 
     public override void Initialize()

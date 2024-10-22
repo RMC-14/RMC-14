@@ -65,8 +65,11 @@ public sealed class FarSightSystem : EntitySystem
         if (!_inventory.InSlotWithFlags((ent, null, null), ent.Comp.Slots))
             return;
 
-        if (HasComp<OverwatchWatchingComponent>(user))
-            return;
+        if (ent.Comp.Enabled)
+        {
+            var ev = new FarSightStartEvent();
+            RaiseLocalEvent(user, ref ev);
+        }
 
         SetZoom(ent.Comp.Enabled, user, ent);
     }

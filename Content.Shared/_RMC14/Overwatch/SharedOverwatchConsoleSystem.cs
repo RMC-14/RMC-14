@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.FarSight;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Scoping;
@@ -64,6 +65,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         SubscribeLocalEvent<OverwatchWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
         SubscribeLocalEvent<OverwatchWatchingComponent, DamageChangedEvent>(OnWatchingDamageChanged);
         SubscribeLocalEvent<OverwatchWatchingComponent, FarSightStartEvent>(OnFarSightStart);
+        SubscribeLocalEvent<OverwatchWatchingComponent, NightVisionStartEvent>(OnNightVisionStart);
 
         SubscribeLocalEvent<SquadMemberComponent, SquadMemberUpdatedEvent>(OnSquadMemberUpdated);
 
@@ -129,6 +131,11 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     }
 
     private void OnFarSightStart(Entity<OverwatchWatchingComponent> ent, ref FarSightStartEvent args)
+    {
+        TryLocalUnwatch(ent);
+    }
+
+    private void OnNightVisionStart(Entity<OverwatchWatchingComponent> ent, ref NightVisionStartEvent args)
     {
         TryLocalUnwatch(ent);
     }
