@@ -87,6 +87,10 @@
     blacklist:
       components:
       - Xeno
+  - type: CanBeSupplyDropped
+    landingDamage:
+      types:
+        Blunt: 5000
 
 - type: entity
   parent: BaseStructureDynamic

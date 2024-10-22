@@ -198,9 +198,9 @@
     proto: BulletRifle10x24mmAP
 
 - type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: BulletRifle10x24mm
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -219,7 +219,7 @@
 - type: entity
   parent: BulletRifle10x24mm
   id: BulletRifle10x24mmAP
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

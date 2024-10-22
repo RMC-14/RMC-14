@@ -28,12 +28,13 @@
         RMCSkillEndurance: 2
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
-        RMCSkillFireman: 1
+        RMCSkillFireman: 2
         RMCSkillLeadership: 1
         RMCSkillMedical: 1
         RMCSkillOverwatch: 1
         RMCSkillPolice: 2
     - type: MarineOrders
+    - type: RMCPointing
 
 - type: startingGear
   id: CMGearMilitaryWarden

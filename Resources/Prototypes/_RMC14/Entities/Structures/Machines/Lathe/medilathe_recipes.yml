@@ -112,3 +112,25 @@
   materials:
     RMCPlastic: 150 # 3000
 
+- type: latheRecipe
+  id: RMCPouchReagentCanister
+  result: RMCPouchReagentCanister
+  completetime: 4
+  materials:
+    CMGlass: 67 # 2500
+    RMCPlastic: 125 # 2500
+
+- type: latheRecipe
+  id: RMCPressurizedCanister
+  result: RMCPressurizedCanister
+  completetime: 4
+  materials:
+    CMGlass: 67 # 2500
+
+- type: latheRecipe
+  id: RMCMedicAutoInjector
+  result: RMCMedicAutoInjector
+  completetime: 4
+  materials:
+    RMCPlastic: 19 # 375
+

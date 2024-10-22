@@ -21,6 +21,7 @@
       - Xeno
   - type: CMStorageVisualizer
     storageEmpty: empty
+  - type: RMCStorageEjectHand
 
 - type: Tag
   id: RMCBoxShotgunShells

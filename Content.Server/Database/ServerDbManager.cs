@@ -244,6 +244,16 @@ namespace Content.Server.Database
 
         #endregion
 
+        #region Blacklist
+
+        Task<bool> GetBlacklistStatusAsync(NetUserId player);
+
+        Task AddToBlacklistAsync(NetUserId player);
+
+        Task RemoveFromBlacklistAsync(NetUserId player);
+
+        #endregion
+
         #region Uploaded Resources Logs
 
         Task AddUploadedResourceLogAsync(NetUserId user, DateTimeOffset date, string path, byte[] data);
@@ -316,6 +326,8 @@ namespace Content.Server.Database
         Task<RMCPatron?> GetPatron(Guid player, CancellationToken cancel);
 
         Task<List<RMCPatron>> GetAllPatrons();
+
+        Task SetGhostColor(Guid player, System.Drawing.Color? color);
 
         Task SetLobbyMessage(Guid player, string message);
 
@@ -770,6 +782,24 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.RemoveFromWhitelistAsync(player));
         }
 
+        public Task<bool> GetBlacklistStatusAsync(NetUserId player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetBlacklistStatusAsync(player));
+        }
+
+        public Task AddToBlacklistAsync(NetUserId player)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddToBlacklistAsync(player));
+        }
+
+        public Task RemoveFromBlacklistAsync(NetUserId player)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.RemoveFromBlacklistAsync(player));
+        }
+
         public Task AddUploadedResourceLogAsync(NetUserId user, DateTimeOffset date, string path, byte[] data)
         {
             DbWriteOpsMetric.Inc();
@@ -1034,6 +1064,12 @@ namespace Content.Server.Database
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetAllPatrons());
+        }
+
+        public Task SetGhostColor(Guid player, System.Drawing.Color? color)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetGhostColor(player, color));
         }
 
         public Task SetLobbyMessage(Guid player, string message)

@@ -197,10 +197,10 @@
     proto: CMBulletSniper10x99mmAntiMateriel
 
 - type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: CMBulletSniper10x28mm
   name: bullet (10x28mm)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
@@ -224,7 +224,7 @@
   parent: CMBulletSniper10x28mm
   id: CMBulletSniper10x28mmIncendiary
   name: bullet (10x28mm)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -239,7 +239,7 @@
   parent: CMBulletSniper10x28mm
   id: CMBulletSniper10x28mmFlak
   name: bullet (10x28mm)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -252,7 +252,7 @@
   parent: CMBulletSniper10x28mm
   id: CMBulletSniper10x99mmAntiMateriel
   name: bullet (10x99mm)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

@@ -38,7 +38,21 @@ public abstract class SharedTacticalMapSystem : EntitySystem
 
     protected void UpdateMapData(Entity<TacticalMapComputerComponent> computer, TacticalMapComponent map)
     {
-        computer.Comp.Blips = map.MarineBlips;
+        var ev = new TacticalMapIncludeXenosEvent();
+        RaiseLocalEvent(ref ev);
+        if (ev.Include)
+        {
+            computer.Comp.Blips = new Dictionary<int, TacticalMapBlip>(map.MarineBlips);
+            foreach (var blip in map.XenoBlips)
+            {
+                computer.Comp.Blips.TryAdd(blip.Key, blip.Value);
+            }
+        }
+        else
+        {
+            computer.Comp.Blips = map.MarineBlips;
+        }
+
         Dirty(computer);
 
         var lines = EnsureComp<TacticalMapLinesComponent>(computer);

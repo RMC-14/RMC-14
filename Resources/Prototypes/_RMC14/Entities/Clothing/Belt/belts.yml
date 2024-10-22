@@ -373,7 +373,6 @@
     tags:
     - RMCSmartPistolHolster
 
-
 - type: entity
   parent: CMBeltBaseStorage
   id: RMCBeltUtilityGeneral
@@ -398,3 +397,45 @@
   - type: Tag
     tags:
     - RMCG8Pouch
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCBeltSmgMags
+  name: M276 pattern M63 holster rig
+  description: Special issue variant of the M276 designed to holster a M63 submachine gun and two spare magazines. Uncommonly issued to UNMC support and specialist personnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/smg_mags.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/smg_mags.rsi
+    slots:
+    - suitStorage
+    - belt
+  - type: Item
+    size: Large
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,5,1 # 3 slots
+    whitelist:
+      tags:
+      - RMCWeaponSMGM63
+      - CMMagazineSmg
+  - type: FixedItemSizeStorage
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
+    - popup: rmc-storage-limit-two-mags
+      count: 2
+      whitelist:
+        tags:
+        - CMMagazineSmg
+  - type: Tag
+    tags:
+    - RMCSmgHolster
+
+- type: Tag
+  id: RMCSmgHolster

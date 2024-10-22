@@ -17,6 +17,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.UserInterface;
@@ -36,6 +37,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -94,6 +96,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, RoleAddedEvent>(OnActiveTrackedRoleAdded);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, MindAddedMessage>(OnActiveTrackedMindAdded);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, SquadMemberUpdatedEvent>(OnActiveSquadMemberUpdated);
+        SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, MobStateChangedEvent>(OnActiveMobStateChanged);
 
         SubscribeLocalEvent<RottingComponent, MapInitEvent>(OnRottingMapInit);
         SubscribeLocalEvent<RottingComponent, ComponentRemove>(OnRottingRemove);
@@ -239,6 +242,12 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             ent.Comp.Color = squad.Color;
     }
 
+    private void OnActiveMobStateChanged(Entity<ActiveTacticalMapTrackedComponent> ent, ref MobStateChangedEvent args)
+    {
+        UpdateIcon(ent);
+        UpdateTracked(ent);
+    }
+
     private void OnRottingMapInit(Entity<RottingComponent> ent, ref MapInitEvent args)
     {
         if (_activeTacticalMapTrackedQuery.TryComp(ent, out var active))
@@ -371,7 +380,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         }
 
         if (!_mind.TryGetMind(tracked, out var mindId, out _) ||
-            !_job.MindTryGetJob(mindId, out _, out var jobProto) ||
+            !_job.MindTryGetJob(mindId, out var jobProto) ||
             jobProto.MinimapIcon == null)
         {
             return;
@@ -412,10 +421,13 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             ent.Comp.Map = xform.GridUid;
         }
 
+        var status = TacticalMapBlipStatus.Alive;
         if (_rottingQuery.HasComp(ent))
-            ent.Comp.Undefibbable = true;
+            status = TacticalMapBlipStatus.Undefibabble;
+        else if (_mobState.IsDead(ent))
+            status = TacticalMapBlipStatus.Defibabble;
 
-        var blip = new TacticalMapBlip(indices, icon, ent.Comp.Color, ent.Comp.Undefibbable);
+        var blip = new TacticalMapBlip(indices, icon, ent.Comp.Color, status);
         if (_marineQuery.HasComp(ent))
         {
             tacticalMap.MarineBlips[ent.Owner.Id] = blip;
@@ -461,6 +473,17 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             {
                 map.MarineLines = lines;
                 map.LastUpdateMarineBlips = map.MarineBlips.ToDictionary();
+
+                var includeEv = new TacticalMapIncludeXenosEvent();
+                RaiseLocalEvent(ref includeEv);
+                if (includeEv.Include)
+                {
+                    foreach (var blip in map.XenoBlips)
+                    {
+                        map.LastUpdateMarineBlips.Add(blip.Key, blip.Value);
+                    }
+                }
+
                 _marineAnnounce.AnnounceARES(user, "The UNMC tactical map has been updated.", sound);
                 _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the marine tactical map for {{ToPrettyString(mapId)}}");
             }

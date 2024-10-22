@@ -2,3 +2,22 @@
   id: Pyro
   background: /Textures/_RMC14/Lobby/PyrotechnicianXeno.png
 
+- type: lobbyBackground
+  id: fob
+  background: /Textures/_RMC14/Lobby/from_fobbiton_with_love.png
+
+- type: lobbyBackground
+  id: shnee
+  background: /Textures/_RMC14/Lobby/only_you_shnee.png
+
+- type: lobbyBackground
+  id: sisters
+  background: /Textures/_RMC14/Lobby/sisters.png
+
+- type: lobbyBackground
+  id: smartgunoperator
+  background: /Textures/_RMC14/Lobby/smart_gun.png
+
+- type: lobbyBackground
+  id: MarineMajor
+  background: /Textures/_RMC14/Lobby/MarineMajor.png

@@ -26,4 +26,11 @@ public sealed class RMCSpriteSystem : EntitySystem
         sprite.Offset = offset;
         Dirty(ent, sprite);
     }
+
+    public void SetRenderOrder(EntityUid ent, int order)
+    {
+        var sprite = EnsureComp<SpriteSetRenderOrderComponent>(ent);
+        sprite.RenderOrder = order;
+        Dirty(ent, sprite);
+    }
 }
