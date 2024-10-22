@@ -130,6 +130,7 @@
   - type: CMExplosionEffect
     maxShrapnel: 0
   - type: CMVocalizeTrigger
+  - type: RMCScorchEffect
 
 - type: entity
   parent: CMGrenadeHighExplosive
