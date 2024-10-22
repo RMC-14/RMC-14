@@ -72,6 +72,8 @@ public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
 
     private void OnExplosionEffectTriggered(Entity<RMCScorchEffectComponent> ent, ref CMExplosiveTriggeredEvent args)
     {
+        if (_scorchDecals.Length == 0) return;
+
         var decalId = _scorchDecals[_random.Next(_scorchDecals.Length)];
         //Decals spawn based on bottom left corner, if bigger decals are used the offset will have to change
         var coords = Transform(ent).Coordinates.Offset(new Vector2(-0.5f, -0.5f));
@@ -117,5 +119,7 @@ public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
     private void CacheDecals()
     {
         _scorchDecals = _prototypeManager.EnumeratePrototypes<DecalPrototype>().Where(x => x.Tags.Contains("RMCScorch")).Select(x => x.ID).ToArray();
+        if (_scorchDecals.Length == 0)
+            Log.Error("Failed to get any decals for RMCScorchEffectComponent. Check that at least one decal has tag RMCScorch.");
     }
 }
