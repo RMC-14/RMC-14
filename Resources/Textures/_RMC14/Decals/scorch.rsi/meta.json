@@ -17,6 +17,9 @@
       "name": "scorch3"
     },
     {
+      "name": "scorch4"
+    },
+    {
       "name": "scorch_small1"
     },
     {
@@ -24,6 +27,15 @@
     },
     {
       "name": "scorch_small3"
+    },
+    {
+      "name": "scorch_tiny1"
+    },
+    {
+      "name": "scorch_tiny2"
+    },
+    {
+      "name": "scorch_tiny3"
     }
   ]
 }
