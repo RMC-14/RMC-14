@@ -3,6 +3,8 @@
   id: RMCHydroponicsLattice
   name: Hydroponics Lattice
   description: A root lattice connected to two floating pontoons.
+  placement:
+    mode: PlaceFree
   components:
   - type: Sprite
     drawdepth: Objects
@@ -10,3 +12,7 @@
     state: hydro_tray
   - type: Corrodible
     isCorrodible: false
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
