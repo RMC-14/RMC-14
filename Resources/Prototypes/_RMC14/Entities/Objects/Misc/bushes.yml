@@ -859,3 +859,24 @@
     sprite: _RMC14/Objects/Flora/flora_plantalien.rsi
     state: alienplant1
     
+- type: entity
+  parent: RMCBaseBush
+  id: RMCStump1
+  suffix: RMCStump1
+  name: cleared foliage
+  description: There used to be dense vegetation here.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Flora/flora_stump.rsi
+    state: stump1
+    
+- type: entity
+  parent: RMCBaseBush
+  id: RMCStump2
+  suffix: RMCStump2
+  name: cleared foliage
+  description: There used to be dense vegetation here.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Flora/flora_stump.rsi
+    state: stump2
