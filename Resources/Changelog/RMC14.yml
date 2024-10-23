@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper, DrSmugleaf, Cepha
-  changes:
-  - message: Added the ML66A Smart Gun and Smart Gun Operator.
-    type: Add
-  id: 380
-  time: '2024-07-15T06:08:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3046
 - author: DrSmugleaf
   changes:
   - message: Fixed hivemind chat not always being disabled without a Queen. Every
@@ -4807,5 +4800,12 @@
   id: 879
   time: '2024-10-23T22:54:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4575
+- author: CyberTropic
+  changes:
+  - message: Added scorch marks to explosives.
+    type: Add
+  id: 880
+  time: '2024-10-23T22:59:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4572
 Name: RMC14
 Order: -1
