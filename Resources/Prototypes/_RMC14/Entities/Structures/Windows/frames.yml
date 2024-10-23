@@ -48,6 +48,9 @@
     flags: Breaching
   - type: MinimapColor
     color: "#8d2294ad"
+  - type: ReceiverXenoClaws
+    maxHealth: 600
+    hitsToDestroy: 3
 
 - type: entity
   parent: RMCBaseWindowFrame
@@ -138,6 +141,8 @@
   - type: Construction
     graph: RMCWindowColonyReinforced
     node: windowFrameColonyReinforced
+  - type: ReceiverXenoClaws
+    hitsToDestroy: 5
 
 - type: entity
   parent: RMCBaseWindowFrame

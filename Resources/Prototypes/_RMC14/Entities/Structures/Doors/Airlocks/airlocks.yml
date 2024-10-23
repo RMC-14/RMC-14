@@ -72,6 +72,8 @@
   name: reinforced maintenance hatch
   suffix: Reinforced
   components:
+  - type: AirlockReceiverXenoClaws
+    maxHealth: 1200
   - type: Destructible
     thresholds:
     - trigger:

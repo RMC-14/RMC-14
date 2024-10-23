@@ -12,6 +12,8 @@
   - type: Tag
     tags:
     - Wall
+  - type: ReceiverXenoClaws
+    maxHealth: 3000
   - type: Destructible
     thresholds:
     - trigger:
@@ -71,6 +73,9 @@
   - type: Tag
     tags:
     - Wall
+  - type: ReceiverXenoClaws
+    maxHealth: 9000
+    minimumClawStrength: VerySharp
   - type: Destructible
     thresholds:
     - trigger:
@@ -102,6 +107,9 @@
   - type: Tag
     tags:
     - Wall
+  - type: ReceiverXenoClaws
+    maxHealth: 9000
+    minimumClawStrength: VerySharp
   - type: Destructible
     thresholds:
     - trigger:
@@ -287,6 +295,8 @@
   - type: Tag
     tags:
     - Wall
+  - type: ReceiverXenoClaws
+    maxHealth: 3000
   - type: Destructible
     thresholds:
     - trigger:
@@ -314,6 +324,8 @@
   - type: Tag
     tags:
     - Wall
+  - type: ReceiverXenoClaws
+    maxHealth: 3000
   - type: Destructible
     thresholds:
     - trigger:

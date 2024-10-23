@@ -140,6 +140,7 @@
       Brute:
         path:
           "/Audio/Weapons/smash.ogg"
+  - type: AirlockReceiverXenoClaws
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
