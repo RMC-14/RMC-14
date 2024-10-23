@@ -230,3 +230,15 @@
     - id: CMClipboard # TODO RMC14 tape recorder
     - id: CMCrowbar
 
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelICBLiaisonFill
+  suffix: Interstellar Commerce Bureau Liaison, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPenClicky
+    - id: CMPaper
+    - id: CMPaper
+    - id: RMCRadioHandheldColonyOff
+    - id: CMCrowbar
