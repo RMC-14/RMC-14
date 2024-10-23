@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed hivemind chat not always being disabled without a Queen. Every
-      minute I have to spend down chasing a bug that no bug abuser reports is a minute
-      you guys spend without extra content being added to the game.
-    type: Fix
-  id: 381
-  time: '2024-07-15T06:19:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3077
-- author: DrSmugleaf
-  changes:
   - message: Fixed the smart gun operator role being hidden for some players.
     type: Fix
   id: 382
@@ -4807,5 +4798,12 @@
   id: 880
   time: '2024-10-23T22:59:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4572
+- author: Ss14plss
+  changes:
+  - message: Now you can put your cigarette/writing pen behind your ear.
+    type: Add
+  id: 881
+  time: '2024-10-23T23:02:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4550
 Name: RMC14
 Order: -1
