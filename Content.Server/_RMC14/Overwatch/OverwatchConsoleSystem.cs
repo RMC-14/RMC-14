@@ -9,6 +9,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
 
+
     public override void Initialize()
     {
         base.Initialize();
@@ -50,6 +51,10 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         {
             return;
         }
+
+        // Raise event to cancel all conflicting actions
+        var ev = new OverwatchStartEvent();
+        RaiseLocalEvent(watcher, ref ev);
 
         _eye.SetTarget(watcher, toWatch, watcher);
         _viewSubscriber.AddViewSubscriber(toWatch, watcher.Comp1.PlayerSession);
