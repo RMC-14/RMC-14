@@ -27,11 +27,11 @@
     recoilUnwielded: 2
     scatterWielded: 10
     scatterUnwielded: 10
-    baseFireRate: 2
+    baseFireRate: 3
     burstScatterMult: 4
     modifiers:
       Burst:
-        fireDelay: 0.1665
+        fireDelay: 0.1225
         maxScatterModifier: 10
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
@@ -124,6 +124,9 @@
     damage:
       types:
         Piercing: 45
+        Structural: 15
+    soundHit: 
+      collection: ExplosiveBulletImpact
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 22
