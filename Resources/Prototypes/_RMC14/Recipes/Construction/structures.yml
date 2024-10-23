@@ -112,6 +112,44 @@
   conditions:
     - !type:TileNotBlocked
 
+# Directional Windows
+- type: construction
+  parent: RMC
+  name: directional window
+  id: RMCWindowDirectional
+  graph: RMCWindowDirectional
+  startNode: start
+  targetNode: windowDirectional
+  category: construction-category-cm-structures
+  description: A glass window. It looks thin and flimsy.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: _RMC14/Structures/Windows/directional.rsi
+    state: window
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  parent: RMC
+  name: directional reinforced window
+  id: RMCWindowReinforcedDirectional
+  graph: RMCWindowDirectional
+  startNode: start
+  targetNode: windowReinforcedDirectional
+  category: construction-category-cm-structures
+  description: A glass window reinforced with bracing rods. It looks rather strong.
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  icon:
+    sprite: _RMC14/Structures/Windows/directional.rsi
+    state: rwindow
+  objectType: Structure
+  placementMode: SnapgridCenter
 
 # Windoors
 - type: construction
