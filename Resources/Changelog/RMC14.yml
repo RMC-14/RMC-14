@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenos being able to pry open shutters. Corroding still works.
-    type: Fix
-  id: 375
-  time: '2024-07-14T07:48:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3058
-- author: DrSmugleaf
-  changes:
-  - message: Fixed warding pheromones for real this time.
-    type: Fix
-  id: 376
-  time: '2024-07-14T07:50:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3059
 - author: diraven
   changes:
   - message: automatic xeno text chat replacements for "cat", "grenade", "ship", "bullet",
@@ -4799,5 +4785,23 @@
   id: 874
   time: '2024-10-23T06:36:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4574
+- author: Whisper
+  changes:
+  - message: Added a new hijack soundtrack, Storm the Iron Hive, by Nighty
+    type: Add
+  - message: Added a new lobby soundtrack, Enemy is Unknown, by Nighty
+    type: Add
+  - message: Added a new lobby soundtrack, The Fallen Queen, by Bolgarich
+    type: Add
+  id: 875
+  time: '2024-10-23T22:49:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4566
+- author: DrSmugleaf
+  changes:
+  - message: Fixed promoting someone to aSL removing command comms for all other SLs
+    type: Fix
+  id: 876
+  time: '2024-10-23T22:49:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4554
 Name: RMC14
 Order: -1
