@@ -112,6 +112,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (args.Ignite)
             return;
 
+        _physics.SetBodyType(ent, BodyType.Dynamic);
         RemCompDeferred<DropshipTargetComponent>(ent);
     }
 
@@ -128,7 +129,14 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     {
         using (args.PushGroup(nameof(FlareSignalComponent)))
         {
-            args.PushMarkup(Loc.GetString("rmc-laser-designator-signal-flare-examine"));
+            if (TryComp(ent, out ExpendableLightComponent? expendable) && expendable.CurrentState != ExpendableLightState.Dead)
+            {
+                args.PushMarkup(Loc.GetString("rmc-laser-designator-signal-flare-examine"));
+            }
+            if (TryComp(ent, out ActiveFlareSignalComponent? active))
+            {
+                args.PushMarkup(Loc.GetString("rmc-laser-designator-examine-id", ("id", active.Abbreviation)));
+            }
         }
     }
 

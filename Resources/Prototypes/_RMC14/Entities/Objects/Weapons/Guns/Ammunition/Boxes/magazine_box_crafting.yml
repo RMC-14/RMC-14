@@ -317,6 +317,50 @@
     # state: base_incbuck
   # objectType: Item
   
+  # Misc
+  
+- type: construction
+  parent: RMC
+  name: Supply Box (MRE)
+  id: RMCBoxMREEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMREEmpty
+  category: construction-category-cm-box-magazine
+  description: A box of MREs. Nutritious, but not delicious.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: supply_crate
+  objectType: Item
+  
+- type: construction
+  parent: RMC
+  name: Supply Box (M94)
+  id: RMCBoxPackFlareEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxPackFlareEmpty
+  category: construction-category-cm-box-magazine
+  description: A box of M94 marking flare packs, to brighten up your day.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: supply_crate
+  objectType: Item
+  
+- type: construction
+  parent: RMC
+  name: Supply Box (M89-S)
+  id: RMCBoxPackFlareCASEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxPackFlareCASEmpty
+  category: construction-category-cm-box-magazine
+  description: A box of M89 signal flare packs, to mark up the way.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: supply_crate
+  objectType: Item
+  
   # Construct graphs
 - type: constructionGraph
   parent: RMC
@@ -456,6 +500,23 @@
       # - material: RMCSheetCardboard
         # amount: 1
         # doAfter: 1
+        
+    # Misc 
+    - to: RMCBoxMREEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 1
+    - to: RMCBoxPackFlareEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 1
+    - to: RMCBoxPackFlareCASEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 1
 
   # Why the fuck do you even need these nodes???
 
@@ -521,3 +582,10 @@
   # - node: RMCBoxShellsIncendiaryBuckshotEmpty
     # entity: RMCBoxShellsIncendiaryBuckshotEmpty
   
+  # Misc
+  - node: RMCBoxMREEmpty
+    entity: RMCBoxMREEmpty
+  - node: RMCBoxPackFlareEmpty
+    entity: RMCBoxPackFlareEmpty
+  - node: RMCBoxPackFlareCASEmpty
+    entity: RMCBoxPackFlareCASEmpty
