@@ -60,3 +60,32 @@
     - id: CMMagazineRifleM54CE2 # Replace with a holotargeting mag once that ammo is implemented.
     - id: RMCAttachmentRailFlashlight
     - id: RMCAttachmentBipod
+
+- type: entity
+  parent: BaseStorageItem
+  id: RMCD18Case
+  name: D18 pistol case
+  description: A fairly decorated and ceremonial box containing a CLF D18 and a single additional magazine for it. I guess those CLF folk really care about their craftsmanship and prose rather than practicality, eh?
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    noRot: false
+    sprite: _RMC14/Objects/Storage/D18case.rsi # Needs proper 'closed' Sprites, Open/Closed are identical atm
+    layers:
+    - state: closed
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/D18case.rsi
+    state: closed
+  - type: Storage
+    maxItemSize: Tiny
+    grid:
+    - 0,0,1,1
+    whitelist:
+      tags:
+      - RMCWeaponPistolD18
+      - RMCMagazinePistolD18
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolD18
+    - id: RMCMagazinePistolD18
