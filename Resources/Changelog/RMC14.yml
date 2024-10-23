@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: diraven
-  changes:
-  - message: automatic xeno text chat replacements for "cat", "grenade", "ship", "bullet",
-      "ammo", "marine".
-    type: Add
-  id: 377
-  time: '2024-07-14T23:32:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3069
 - author: lunarcomets
   changes:
   - message: lightbulbs now ALSO break in a single hit
@@ -4803,5 +4795,14 @@
   id: 876
   time: '2024-10-23T22:49:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4554
+- author: Vermidia
+  changes:
+  - message: Fix normal marine armor not fitting MD on the suit slot
+    type: Fix
+  - message: Fix MD not showing blips while worn on the belt/suit slot
+    type: Fix
+  id: 877
+  time: '2024-10-23T22:51:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4537
 Name: RMC14
 Order: -1
