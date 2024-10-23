@@ -5,9 +5,9 @@
   description: As UPP soldiers frequently reported being outmatched by enemy combatants, UPP High Command commissioned a large amount of Type 23 shotguns, originally used for quelling defector colony riots.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/type23.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/type23.rsi
   - type: Gun
     shotsPerBurst: 1
   - type: ShootUseDelay
