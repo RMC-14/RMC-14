@@ -27,3 +27,8 @@
   - "/Audio/Weapons/Guns/Hits/energy_metal1.ogg"
   - "/Audio/Weapons/Guns/Hits/energy_metal2.ogg"
 
+- type: soundCollection
+  id: ExplosiveBulletImpact # To do - change sound effects to closer match HESH - small explosion sounds are temporary
+  files:
+  - "Audio/Effects/explosion_small3.ogg"
+  - "Audio/Effects/explosion_small1.ogg"
