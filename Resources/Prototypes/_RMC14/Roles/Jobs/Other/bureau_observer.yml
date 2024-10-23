@@ -1,5 +1,4 @@
-﻿# Marshal
-- type: entity
+﻿- type: entity
   parent: MarkerBase
   id: RMCSpawnerBureauObserver
   name: interstellar sapient-life rights observer spawner
@@ -60,3 +59,5 @@
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchGeneralLargeBureauObserverFill
     suitstorage: RMCFlashlight
+  inhand: # TOOD RMC14 camera
+  - CMHealthAnalyzer

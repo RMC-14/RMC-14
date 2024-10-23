@@ -148,6 +148,14 @@
   longRange: true
 
 - type: radioChannel
+  id: CMB
+  name: chat-radio-CMB
+  keycode: "l"
+  frequency: 1220
+  color: "#1b748c"
+  longRange: true
+
+- type: radioChannel
   id: Hivemind
   name: chat-radio-hivemind
   keycode: "h"
