@@ -1,83 +1,77 @@
 - type: tile
   abstract: true
   parent: CMTileBase
-  id: RMCFloorKutjevoMiscBase
-  name: tiles-cm-default-misc
+  id: RMCFloorKutjevoTanBase
+  name: tiles-cm-default-tan
   suffix: kutjevo
   
-# Base floor
+- type: tile
+  parent: RMCFloorKutjevoTanBase
+  id: RMCFloorKutjevoTan1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan.png
   
 - type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoFloor1
-  sprite: /Textures/_RMC14/Tiles/kutjevo/floor.png
+  parent: RMCFloorKutjevoTanBase
+  id: RMCFloorKutjevoTan2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan2.png
   
 - type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoFloor2
-  sprite: /Textures/_RMC14/Tiles/kutjevo/floor2.png
+  parent: RMCFloorKutjevoTanBase
+  id: RMCFloorKutjevoTan3_0
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_alt3_0.png
   
 - type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoFloor3
-  sprite: /Textures/_RMC14/Tiles/kutjevo/floor3.png
-  
-# Fake wood
+  parent: RMCFloorKutjevoTanBase
+  id: RMCFloorKutjevoTan3_1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_alt3_1.png
   
 - type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoFakeWood0
-  sprite: /Textures/_RMC14/Tiles/kutjevo/fake_wood_0.png
+  parent: RMCFloorKutjevoTanBase
+  id: RMCFloorKutjevoTan3_2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_alt3_2.png
   
 - type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoFakeWood1
-  sprite: /Textures/_RMC14/Tiles/kutjevo/fake_wood_1.png
+  parent: RMCFloorKutjevoTanBase
+  id: RMCFloorKutjevoTan3_3
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_alt3_3.png
   
 - type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoFakeWood2
-  sprite: /Textures/_RMC14/Tiles/kutjevo/fake_wood_2.png
+  parent: RMCFloorKutjevoTanBase
+  id: RMCFloorKutjevoTan3_4
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_alt3_4.png
   
 - type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoFakeWood3
-  sprite: /Textures/_RMC14/Tiles/kutjevo/fake_wood_3.png
-  
-# Damaged
+  parent: RMCFloorKutjevoTanBase
+  id: RMCFloorKutjevoTan3_5
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_alt3_5.png
   
 - type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoDamaged1
-  sprite: /Textures/_RMC14/Tiles/kutjevo/damaged1.png
+  parent: RMCFloorKutjevoTanBase
+  id: RMCFloorKutjevoTan3_6
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_alt3_6.png
   
 - type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoDamaged2
-  sprite: /Textures/_RMC14/Tiles/kutjevo/damaged2.png
+  parent: RMCFloorKutjevoTanBase
+  id: RMCFloorKutjevoTan3_7
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_alt3_7.png
   
 - type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoDamaged3
-  sprite: /Textures/_RMC14/Tiles/kutjevo/damaged3.png
+  parent: RMCFloorKutjevoTanBase
+  id: RMCFloorKutjevoTan4_0
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_alt4_0.png
   
 - type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoDamaged4
-  sprite: /Textures/_RMC14/Tiles/kutjevo/damaged4.png
+  parent: RMCFloorKutjevoTanBase
+  id: RMCFloorKutjevoTan4_1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_alt4_1.png
   
 - type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoDamaged5
-  sprite: /Textures/_RMC14/Tiles/kutjevo/damaged5.png
+  parent: RMCFloorKutjevoTanBase
+  id: RMCFloorKutjevoTan4_2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_alt4_2.png
   
 - type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoScorched1
-  sprite: /Textures/_RMC14/Tiles/kutjevo/floorscorched1.png
-  
-- type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoScorched2
-  sprite: /Textures/_RMC14/Tiles/kutjevo/floorscorched2.png
+  parent: RMCFloorKutjevoTanBase
+  id: RMCFloorKutjevoTan4_3
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_alt4_3.png
   

@@ -42,5 +42,5 @@
   
 - type: tile
   parent: RMCFloorKutjevoMultiBase
-  id: RMCFloorKutjevoMulti6
+  id: RMCFloorKutjevoMulti7
   sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_multi_7.png
