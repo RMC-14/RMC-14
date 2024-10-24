@@ -8,141 +8,6 @@
   },
   "states": [
     {
-      "name": "blue1"
-    },
-    {
-      "name": "blue2"
-    },
-    {
-      "name": "blue3_0"
-    },
-    {
-      "name": "blue3_1"
-    },
-    {
-      "name": "blue3_2"
-    },
-    {
-      "name": "blue3_3"
-    },
-    {
-      "name": "blue3_4"
-    },
-    {
-      "name": "blue3_5"
-    },
-    {
-      "name": "blue3_6"
-    },
-    {
-      "name": "blue3_7"
-    },
-    {
-      "name": "blue4_0"
-    },
-    {
-      "name": "blue4_1"
-    },
-    {
-      "name": "blue4_2"
-    },
-    {
-      "name": "blue4_3"
-    },
-    {
-      "name": "catwalk_0"
-    },
-    {
-      "name": "catwalk_1"
-    },
-    {
-      "name": "catwalk_2"
-    },
-    {
-      "name": "catwalk_3"
-    },
-    {
-      "name": "catwalk_4"
-    },
-    {
-      "name": "catwalk_5"
-    },
-    {
-      "name": "catwalk_6"
-    },
-    {
-      "name": "catwalk_7"
-    },
-    {
-      "name": "cyan1"
-    },
-    {
-      "name": "cyan2"
-    },
-    {
-      "name": "cyan3_0"
-    },
-    {
-      "name": "cyan3_1"
-    },
-    {
-      "name": "cyan3_2"
-    },
-    {
-      "name": "cyan3_3"
-    },
-    {
-      "name": "cyan3_4"
-    },
-    {
-      "name": "cyan3_5"
-    },
-    {
-      "name": "cyan3_6"
-    },
-    {
-      "name": "cyan3_7"
-    },
-    {
-      "name": "cyan4_0"
-    },
-    {
-      "name": "cyan4_1"
-    },
-    {
-      "name": "cyan4_2"
-    },
-    {
-      "name": "cyan4_3"
-    },
-    {
-      "name": "damaged1"
-    },
-    {
-      "name": "damaged2"
-    },
-    {
-      "name": "damaged3"
-    },
-    {
-      "name": "damaged4"
-    },
-    {
-      "name": "damaged5"
-    },
-    {
-      "name": "fake_wood_0"
-    },
-    {
-      "name": "fake_wood_1"
-    },
-    {
-      "name": "fake_wood_2"
-    },
-    {
-      "name": "fake_wood_3"
-    },
-    {
       "name": "floor"
     },
     {
@@ -152,118 +17,46 @@
       "name": "floor3"
     },
     {
-      "name": "floorscorched1"
+      "name": "orange1"
     },
     {
-      "name": "floorscorched2"
+      "name": "orange2"
     },
     {
-      "name": "floor_grey1"
+      "name": "orange3",
+      "directions": 8
     },
     {
-      "name": "floor_grey2"
+      "name": "orange4",
+      "directions": 4
     },
     {
-      "name": "floor_tan"
+      "name": "blue1"
     },
     {
-      "name": "floor_tan2"
+      "name": "blue2"
     },
     {
-      "name": "floor_tan_alt3_0"
+      "name": "blue3",
+      "directions": 8
     },
     {
-      "name": "floor_tan_alt3_1"
+      "name": "blue4",
+      "directions": 4
     },
     {
-      "name": "floor_tan_alt3_2"
+      "name": "purp1"
     },
     {
-      "name": "floor_tan_alt3_3"
+      "name": "purp2"
     },
     {
-      "name": "floor_tan_alt3_4"
+      "name": "purp3",
+      "directions": 8
     },
     {
-      "name": "floor_tan_alt3_5"
-    },
-    {
-      "name": "floor_tan_alt3_6"
-    },
-    {
-      "name": "floor_tan_alt3_7"
-    },
-    {
-      "name": "floor_tan_alt4_0"
-    },
-    {
-      "name": "floor_tan_alt4_1"
-    },
-    {
-      "name": "floor_tan_alt4_2"
-    },
-    {
-      "name": "floor_tan_alt4_3"
-    },
-    {
-      "name": "floor_tan_grey3_0"
-    },
-    {
-      "name": "floor_tan_grey3_1"
-    },
-    {
-      "name": "floor_tan_grey3_2"
-    },
-    {
-      "name": "floor_tan_grey3_3"
-    },
-    {
-      "name": "floor_tan_grey3_4"
-    },
-    {
-      "name": "floor_tan_grey3_5"
-    },
-    {
-      "name": "floor_tan_grey3_6"
-    },
-    {
-      "name": "floor_tan_grey3_7"
-    },
-    {
-      "name": "floor_tan_grey4_0"
-    },
-    {
-      "name": "floor_tan_grey4_1"
-    },
-    {
-      "name": "floor_tan_grey4_2"
-    },
-    {
-      "name": "floor_tan_grey4_3"
-    },
-    {
-      "name": "floor_tan_multi_0"
-    },
-    {
-      "name": "floor_tan_multi_1"
-    },
-    {
-      "name": "floor_tan_multi_2"
-    },
-    {
-      "name": "floor_tan_multi_3"
-    },
-    {
-      "name": "floor_tan_multi_4"
-    },
-    {
-      "name": "floor_tan_multi_5"
-    },
-    {
-      "name": "floor_tan_multi_6"
-    },
-    {
-      "name": "floor_tan_multi_7"
+      "name": "purp4",
+      "directions": 4
     },
     {
       "name": "green1"
@@ -272,115 +65,89 @@
       "name": "green2"
     },
     {
-      "name": "green3_0"
+      "name": "green3",
+      "directions": 8
     },
     {
-      "name": "green3_1"
+      "name": "green4",
+      "directions": 4
     },
     {
-      "name": "green3_2"
+      "name": "cyan1"
     },
     {
-      "name": "green3_3"
+      "name": "cyan2"
     },
     {
-      "name": "green3_4"
+      "name": "cyan3",
+      "directions": 8
     },
     {
-      "name": "green3_5"
+      "name": "cyan4",
+      "directions": 4
     },
     {
-      "name": "green3_6"
+      "name": "yellow1"
     },
     {
-      "name": "green3_7"
+      "name": "yellow2"
     },
     {
-      "name": "green4_0"
+      "name": "yellow3",
+      "directions": 8
     },
     {
-      "name": "green4_1"
+      "name": "yellow4",
+      "directions": 4
     },
     {
-      "name": "green4_2"
+      "name": "red1"
     },
     {
-      "name": "green4_3"
+      "name": "red2"
     },
     {
-      "name": "meta.json"
+      "name": "red3",
+      "directions": 8
     },
     {
-      "name": "multi_tiles_0"
+      "name": "red4",
+      "directions": 4
     },
     {
-      "name": "multi_tiles_3"
+      "name": "multi_tiles",
+      "directions": 8
     },
     {
-      "name": "multi_tiles_4"
+      "name": "fake_wood",
+      "directions": 4
     },
     {
-      "name": "multi_tiles_6"
+      "name": "floorscorched1"
     },
     {
-      "name": "multi_tiles_7"
+      "name": "floorscorched2"
     },
     {
-      "name": "mutli_tiles_1"
+      "name": "damaged4"
     },
     {
-      "name": "mutli_tiles_2"
+      "name": "damaged5"
     },
     {
-      "name": "mutli_tiles_5"
+      "name": "damaged1"
     },
     {
-      "name": "orange1"
+      "name": "damaged3"
     },
     {
-      "name": "orange2"
-    },
-    {
-      "name": "orange3_0"
-    },
-    {
-      "name": "orange3_1"
-    },
-    {
-      "name": "orange3_2"
-    },
-    {
-      "name": "orange3_3"
-    },
-    {
-      "name": "orange3_4"
-    },
-    {
-      "name": "orange3_5"
-    },
-    {
-      "name": "orange3_6"
-    },
-    {
-      "name": "orange3_7"
-    },
-    {
-      "name": "orange4_0"
-    },
-    {
-      "name": "orange4_1"
-    },
-    {
-      "name": "orange4_2"
-    },
-    {
-      "name": "orange4_3"
-    },
-    {
-      "name": "panlscorched"
+      "name": "damaged2"
     },
     {
       "name": "plating"
+    },
+    {
+      "name": "panelscorched"
     },
     {
       "name": "platingdmg1"
@@ -392,130 +159,40 @@
       "name": "platingdmg3"
     },
     {
-      "name": "purp1"
+      "name": "floor_tan"
     },
     {
-      "name": "purp2"
+      "name": "floor_tan2"
     },
     {
-      "name": "purp3_0"
+      "name": "floor_tan_multi",
+      "directions": 8
     },
     {
-      "name": "purp3_1"
+      "name": "floor_grey1"
     },
     {
-      "name": "purp3_2"
+      "name": "floor_grey2"
     },
     {
-      "name": "purp3_3"
+      "name": "floor_tan_grey3",
+      "directions": 8
     },
     {
-      "name": "purp3_4"
+      "name": "floor_tan_grey4",
+      "directions": 4
     },
     {
-      "name": "purp3_5"
+      "name": "floor_tan_alt3",
+      "directions": 8
     },
     {
-      "name": "purp3_6"
+      "name": "floor_tan_alt4",
+      "directions": 4
     },
     {
-      "name": "purp3_7"
-    },
-    {
-      "name": "purp4_0"
-    },
-    {
-      "name": "purp4_1"
-    },
-    {
-      "name": "purp4_2"
-    },
-    {
-      "name": "purp4_3"
-    },
-    {
-      "name": "red1"
-    },
-    {
-      "name": "red2"
-    },
-    {
-      "name": "red3_0"
-    },
-    {
-      "name": "red3_1"
-    },
-    {
-      "name": "red3_2"
-    },
-    {
-      "name": "red3_3"
-    },
-    {
-      "name": "red3_4"
-    },
-    {
-      "name": "red3_5"
-    },
-    {
-      "name": "red3_6"
-    },
-    {
-      "name": "red3_7"
-    },
-    {
-      "name": "red4_0"
-    },
-    {
-      "name": "red4_1"
-    },
-    {
-      "name": "red4_2"
-    },
-    {
-      "name": "red4_3"
-    },
-    {
-      "name": "yellow1"
-    },
-    {
-      "name": "yellow2"
-    },
-    {
-      "name": "yellow3_0"
-    },
-    {
-      "name": "yellow3_1"
-    },
-    {
-      "name": "yellow3_2"
-    },
-    {
-      "name": "yellow3_3"
-    },
-    {
-      "name": "yellow3_4"
-    },
-    {
-      "name": "yellow3_5"
-    },
-    {
-      "name": "yellow3_6"
-    },
-    {
-      "name": "yellow3_7"
-    },
-    {
-      "name": "yellow4_0"
-    },
-    {
-      "name": "yellow4_1"
-    },
-    {
-      "name": "yellow4_2"
-    },
-    {
-      "name": "yellow4_3"
+      "name": "catwalk",
+      "directions": 8
     }
   ]
 }
