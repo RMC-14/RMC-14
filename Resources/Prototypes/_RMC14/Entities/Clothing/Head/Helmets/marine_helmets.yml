@@ -1,6 +1,6 @@
 # m10
 - type: entity
-  parent: RMCHelmetBase
+  parent: [RMCMarineHelmetBase, RMCFoldableHelmetBase]
   id: ArmorHelmetM10
   name: M10 pattern marine helmet
   description: A standard M10 Pattern Helmet. The inside label, along with washing information, reads, 'The difference between an open-casket and closed-casket funeral. Wear on head for best results.'. There is a built-in camera on the right side.
@@ -9,69 +9,6 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/standard.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/standard.rsi
-  - type: Storage #hopefully in the future someone smarter than me can add storage(?) for integrated things like netting, HUD, etc. but for now this is for hiding snacks
-    maxItemSize: Tiny
-    grid:
-    - 0,0,3,1 # TODO RMC14 7, but 2 slots are reserved for garbs
-    blacklist:
-      tags:
-      - Pouch
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
-        ents: [ ]
-  - type: UserInterface
-    interfaces:
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
-  - type: CMArmor
-    armor: 20
-    explosionArmor: 10
-  - type: CMHardArmor
-  - type: RMCNameItemOnVend
-    item: Helmet
-  - type: RMCBulkyArmor
-  - type: ExplosionResistance
-    damageCoefficient: 0
-    worn: false
-  - type: IgnoreContentsSize
-    items:
-      components:
-      - RMCLighter
-      - RMCFlask
-      - CMScalpel
-      - Figurine
-      tags:
-#      - TODO RMC14 matchbox
-      - Cigarette
-#      - TODO RMC14 cards
-      - Slice
-#      - TODO RMC14 glasses (eyewear)
-#      - TODO RMC14 walkman and casettes
-#      - TODO RMC14 helmet garb
-      - Pen
-      - Crayon
-#      - TODO RMC14 handful of bullets
-      - Flashlight
-      - Brutepack
-      - CMOintment
-      - CMAutoInjector
-      - PillPacket
-  - type: FixedItemSizeStorage
-  - type: InteractedBlacklist
-    blacklist:
-      components:
-      - Xeno
-  - type: OverwatchCamera
-  - type: SquadArmor
-    layer: Helmet
-    slot: HEAD
-    rsi:
-      sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
-      state: std-helmet
-    leaderRsi:
-      sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
-      state: sql-helmet
 
 - type: entity
   parent: ArmorHelmetM10
@@ -236,7 +173,7 @@
 
 # M45 Sniper Spec
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCMarineHelmetBase
   id: CMArmorHelmetM45
   name: M45 ghillie helmet
   description: A lightweight M45 helmet with ghillie coif used by Marine snipers on recon missions.
@@ -245,6 +182,12 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m45.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m45.rsi
+  - type: HideLayerClothing # coif
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
 
 # M3-T Demo Spec
 - type: entity
