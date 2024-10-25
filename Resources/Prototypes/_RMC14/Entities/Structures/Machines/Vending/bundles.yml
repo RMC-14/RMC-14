@@ -41,7 +41,6 @@
     - CMArmorHelmetM10Medic # TODO RMC14 M4
     - CMVendorHeadsetSquadCorpsman
     - CMJumpsuitMarineMedic
-    - CMHandsBlackMarine
     - CMBootsBlackFilled
 
 - type: entity
