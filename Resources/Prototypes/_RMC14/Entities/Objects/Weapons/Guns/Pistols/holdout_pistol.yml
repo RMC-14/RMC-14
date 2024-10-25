@@ -5,6 +5,8 @@
   description: A tiny pistol meant for hiding in hard-to-reach areas. Best not ask where it came from.
   suffix: Filled
   components:
+  - type: Item
+    size: Tiny
   - type: RMCSelectiveFire
     scatterWielded: 10
     scatterUnwielded: 10
@@ -30,6 +32,7 @@
         priority: 2
         whitelist:
           tags:
+          - Holdout
           - RMCMagazinePistolHoldout
   - type: AttachableHolder
     slots:
