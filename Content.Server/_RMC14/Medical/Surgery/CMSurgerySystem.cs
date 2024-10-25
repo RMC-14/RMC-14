@@ -148,8 +148,6 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
         {
             SpawnAtPosition(ent.Comp.DeadLarvaItem, coords);
         }
-
-        RemCompDeferred<VictimInfectedComponent>(args.Body);
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
