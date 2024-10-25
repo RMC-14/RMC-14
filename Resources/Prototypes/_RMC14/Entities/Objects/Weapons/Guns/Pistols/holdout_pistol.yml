@@ -83,5 +83,30 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
 
+- type: entity
+  parent: CMBulletBase
+  id: CMBulletPistol.22mm
+  name: bullet (.22)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 20
+  - type: CMArmorPiercing
+    amount: 10
+
+- type: entity
+  id: CMCartridgePistol.22mm
+  name: cartridge (.22)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridgePistol.22mm
+  - type: CartridgeAmmo
+    proto: CMBulletPistol.22mm
+
+
 - type: Tag
   id: RMCMagazinePistolHoldout
