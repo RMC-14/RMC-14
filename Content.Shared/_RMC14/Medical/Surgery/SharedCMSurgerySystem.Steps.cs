@@ -166,7 +166,7 @@ public abstract partial class SharedCMSurgerySystem
 
     private void OnCutLarvaRootsStep(Entity<CMSurgeryCutLarvaRootsStepComponent> ent, ref CMSurgeryStepEvent args)
     {
-        if (TryComp(args.Body, out VictimInfectedComponent? infected) && infected.IsBursting)
+        if (TryComp(args.Body, out VictimInfectedComponent? infected) && !infected.IsBursting)
         {
             infected.RootsCut = true;
         }
