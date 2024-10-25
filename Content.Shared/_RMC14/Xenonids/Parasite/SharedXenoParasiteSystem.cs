@@ -504,7 +504,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 _inventory.TryUnequip(uid, "mask", true, true, true);
             }
 
-            if (infected.BurstAt + infected.AutoBurstTime < time)
+            if (infected.BurstAt + infected.AutoBurstTime <= time && infected.SpawnedLarva != null)
             {
                 TryBurst((uid, infected));
                 continue;
@@ -533,9 +533,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 _hive.SetHive(spawned, infected.Hive);
 
                 infected.CurrentStage = 6;
-                Dirty(uid, infected);
-
                 infected.SpawnedLarva = spawned;
+                Dirty(uid, infected);
 
                 EnsureComp<BursterComponent>(spawned, out var burster);
                 burster.BurstFrom = uid;
