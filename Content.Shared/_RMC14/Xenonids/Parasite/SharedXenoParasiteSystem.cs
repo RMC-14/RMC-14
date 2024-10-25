@@ -711,7 +711,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             _appearance.SetData(victim, comp.BurstingLayer, true);
 
             var shakeFilter = Filter.PvsExcept(victim);
-            shakeFilter.RemoveWhereAttachedEntity(HasComp<XenoComponent>); // not visible to xenos
+            shakeFilter.RemoveWhereAttachedEntity(HasComp<BursterComponent>); // not visible the larva
 
             // Force infection shakes even while dead, bigger popup
             _popup.PopupClient(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, victim, PopupType.MediumCaution);

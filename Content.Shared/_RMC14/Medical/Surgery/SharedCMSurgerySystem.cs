@@ -49,8 +49,6 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
         SubscribeLocalEvent<CMSurgeryLarvaConditionComponent, CMSurgeryValidEvent>(OnLarvaValid);
         SubscribeLocalEvent<CMSurgeryPartConditionComponent, CMSurgeryValidEvent>(OnPartConditionValid);
 
-        SubscribeLocalEvent<CMSurgeryRemoveLarvaComponent, CMSurgeryCompletedEvent>(OnRemoveLarva);
-
         InitializeSteps();
     }
 
@@ -102,11 +100,6 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
     {
         if (CompOrNull<BodyPartComponent>(args.Part)?.PartType != ent.Comp.Part)
             args.Cancelled = true;
-    }
-
-    private void OnRemoveLarva(Entity<CMSurgeryRemoveLarvaComponent> ent, ref CMSurgeryCompletedEvent args)
-    {
-        RemCompDeferred<VictimInfectedComponent>(ent);
     }
 
     protected bool IsSurgeryValid(EntityUid body, EntityUid targetPart, EntProtoId surgery, EntProtoId stepId, out Entity<CMSurgeryComponent> surgeryEnt, out Entity<BodyPartComponent> part, out EntityUid step)
