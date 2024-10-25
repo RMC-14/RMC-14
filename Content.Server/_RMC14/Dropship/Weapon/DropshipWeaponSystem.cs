@@ -42,15 +42,15 @@ public sealed class DropshipWeaponSystem : SharedDropshipWeaponSystem
         var spawnProbability = ent.Comp.Probability;
         if (_random.NextFloat() > spawnProbability) return;
 
-        //Add a random scorched decal only if there are less than tileLimit of them on a tile
+        //Check that the tileLimit for scorch decals hasn't been reached on the tile
         var tileLimit = ent.Comp.TileLimit;
         var gridUid = Transform(ent).GridUid;
         if (!gridUid.HasValue) return;
         var tileBounds = Box2.CenteredAround(Transform(ent).Coordinates.Offset(new Vector2(-0.5f, -0.5f)).Position, Vector2.One);
-
         var tileDecals = _decals.GetDecalsIntersecting((EntityUid)gridUid, tileBounds);
+        //Only check the decal types we have cached, ignore other decals in the tile.
         var tileCount = tileDecals.Count(x => _scorchDecals.Contains(x.Decal.Id));
-        Logger.Debug($"Tile decals at {tileBounds}: {string.Join("", tileDecals.Select(x => x.Decal.Coordinates))}; tile count: {tileCount}");
+        //Logger.Debug($"Tile decals at {tileBounds}: {string.Join("", tileDecals.Select(x => x.Decal.Coordinates))}; tile count: {tileCount}");
         if (tileCount >= tileLimit) return;
 
         var decalId = _scorchDecals[_random.Next(_scorchDecals.Length)];
