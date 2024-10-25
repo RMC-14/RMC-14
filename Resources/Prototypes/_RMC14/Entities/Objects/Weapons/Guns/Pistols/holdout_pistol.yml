@@ -72,8 +72,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgePistol9mm
-    proto: CMCartridgePistol9mm
+      - CMCartridgePistol.22mm
+    proto: CMCartridgePistol.22mm
     capacity: 5
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/holdout.rsi
