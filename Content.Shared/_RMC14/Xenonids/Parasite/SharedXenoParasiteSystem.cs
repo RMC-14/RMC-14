@@ -712,11 +712,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             var shakeFilter = Filter.PvsExcept(victim);
             shakeFilter.RemoveWhereAttachedEntity(HasComp<BursterComponent>); // not visible the larva
 
-            // Force infection shakes even while dead, bigger popup
-            _popup.PopupClient(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, victim, PopupType.MediumCaution);
-
             if (_net.IsServer)
             {
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, victim, PopupType.MediumCaution);
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon", ("victim", victim)), victim, shakeFilter, true, PopupType.LargeCaution);
                 _jitter.DoJitter(victim, comp.JitterTime / 1.2, true, 14f, 5f, true); // violent jitter
             }

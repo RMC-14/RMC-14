@@ -91,8 +91,8 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
         if (!TryComp(args.Body, out VictimInfectedComponent? infected))
             args.Cancelled = true;
 
-        // The larva has fully developed and surgery is now impossible
-        if (infected != null && infected.SpawnedLarva != null)
+        // The larva is bursting and surgery is now impossible
+        if (infected != null && infected.IsBursting)
             args.Cancelled = true;
     }
 
