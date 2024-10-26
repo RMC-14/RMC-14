@@ -59,7 +59,6 @@
       rmc-aslot-rail:
         whitelist:
           tags:
-          - RMCAttachmentS42xTelescopicMiniscope
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
@@ -128,7 +127,7 @@
     damage:
       types:
         Piercing: 45
-        Structural: 20
+        Sructural: 20
     soundHit:
       collection: ExplosiveBulletImpact #references unique soundcollection w/ explosive hitreg
   #The following codes the explosion visual effects of the bullets.
