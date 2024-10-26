@@ -27,54 +27,62 @@ public sealed partial class FindParasiteSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CMGhostComponent, FindParasiteActionEvent>(FindParasites);
+        SubscribeLocalEvent<FindParasiteComponent, FindParasiteActionEvent>(FindParasites);
 
-        SubscribeLocalEvent<CMGhostComponent, GetAllActiveParasiteSpawnersMessage>(GetAllActiveParasiteSpawners);
-        SubscribeLocalEvent<CMGhostComponent, FollowParasiteSpawnerMessage>(FollowParasiteSpawner);
-        SubscribeLocalEvent<CMGhostComponent, TakeParasiteRoleMessage>(TakeParasiteRole);
+        SubscribeLocalEvent<FindParasiteComponent, GetAllActiveParasiteSpawnersMessage>(GetAllActiveParasiteSpawners);
+        SubscribeLocalEvent<FindParasiteComponent, FollowParasiteSpawnerMessage>(FollowParasiteSpawner);
+        SubscribeLocalEvent<FindParasiteComponent, TakeParasiteRoleMessage>(TakeParasiteRole);
     }
 
-    private void FindParasites(Entity<CMGhostComponent> ghostEnt, ref FindParasiteActionEvent args)
+    private void FindParasites(Entity<FindParasiteComponent> ghostEnt, ref FindParasiteActionEvent args)
     {
+        if (args.Handled)
+        {
+            return;
+        }
         var ent = args.Performer;
 
-        _ui.OpenUi(args.Action, XenoFindParasiteUI.Key, ent, _net.IsClient);
+        _ui.OpenUi(ent, XenoFindParasiteUI.Key, ent);
+        args.Handled = true;
     }
 
-    private void GetAllActiveParasiteSpawners(Entity<CMGhostComponent> ghostEnt, ref GetAllActiveParasiteSpawnersMessage args)
+    private void GetAllActiveParasiteSpawners(Entity<FindParasiteComponent> parasiteFinderEnt, ref GetAllActiveParasiteSpawnersMessage args)
     {
-        var comp = ghostEnt.Comp;
+        var ent = parasiteFinderEnt.Owner;
+        var comp = parasiteFinderEnt.Comp;
+        comp.ActiveParasiteSpawners.Clear();
+
         var eggs = EntityQueryEnumerator<XenoEggComponent>();
         var parasiteThrowers = EntityQueryEnumerator<XenoParasiteThrowerComponent>();
 
         var spawners = new List<NetEntity>();
-        while (eggs.MoveNext(out var ent, out var egg))
+        while (eggs.MoveNext(out var eggEnt, out var egg))
         {
             if (egg.State != XenoEggState.Grown)
             {
                 continue;
             }
 
-            var netEnt = _entities.GetNetEntity(ent);
+            var netEnt = _entities.GetNetEntity(eggEnt);
             spawners.Add(netEnt);
         }
 
-        while (parasiteThrowers.MoveNext(out var ent, out var parasiteThrower))
+        while (parasiteThrowers.MoveNext(out var throwerEnt, out var parasiteThrower))
         {
             if (parasiteThrower.CurParasites <= parasiteThrower.ReservedParasites &&
                 parasiteThrower.CurParasites > 0)
             {
                 continue;
             }
-            spawners.Add(_entities.GetNetEntity(ent));
+            spawners.Add(_entities.GetNetEntity(throwerEnt));
         }
 
         foreach (var spawner in spawners)
         {
-            var ent = _entities.GetEntity(spawner);
+            var spawnerEnt = _entities.GetEntity(spawner);
             var name = MetaData(ent).EntityName;
             var areaName = Loc.GetString("xeno-ui-default-area-name");
-            if (_areas.TryGetArea(ent.ToCoordinates(), out AreaComponent? area, out _, out var areaEnt) &&
+            if (_areas.TryGetArea(spawnerEnt.ToCoordinates(), out AreaComponent? area, out _, out var areaEnt) &&
                 areaEnt is EntityUid)
             {
                 areaName = MetaData(areaEnt.Value).EntityName;
@@ -84,15 +92,12 @@ public sealed partial class FindParasiteSystem : EntitySystem
 
             comp.ActiveParasiteSpawners.Add(name, spawner);
         }
+        Dirty(parasiteFinderEnt);
 
-        if (comp.FindParasiteEntity is null)
-        {
-            return;
-        }
-        _ui.SetUiState(comp.FindParasiteEntity.Value, XenoFindParasiteUI.Key, null);
+        _ui.SetUiState(ent, XenoFindParasiteUI.Key, null);
 
     }
-    private void FollowParasiteSpawner(Entity<CMGhostComponent> ghostEnt, ref FollowParasiteSpawnerMessage args)
+    private void FollowParasiteSpawner(Entity<FindParasiteComponent> parasiteFinderEnt, ref FollowParasiteSpawnerMessage args)
     {
         var netEnt = args.Entity;
         var ent = _entities.GetEntity(netEnt);
@@ -108,7 +113,7 @@ public sealed partial class FindParasiteSystem : EntitySystem
         _host.ExecuteCommand(actComp.PlayerSession, followCommand);
     }
 
-    private void TakeParasiteRole(Entity<CMGhostComponent> ghostEnt, ref TakeParasiteRoleMessage args)
+    private void TakeParasiteRole(Entity<FindParasiteComponent> parasiteFinderEnt, ref TakeParasiteRoleMessage args)
     {
         var netEnt = args.Entity;
         var ent = _entities.GetEntity(netEnt);

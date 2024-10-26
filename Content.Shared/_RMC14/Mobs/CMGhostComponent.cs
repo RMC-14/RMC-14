@@ -27,9 +27,6 @@ public sealed partial class CMGhostComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? FindParasiteEntity;
-
-    [DataField, AutoNetworkedField]
-    public Dictionary<string, NetEntity> ActiveParasiteSpawners;
 }
 
 

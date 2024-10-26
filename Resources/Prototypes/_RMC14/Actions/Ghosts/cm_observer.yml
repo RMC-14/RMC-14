@@ -39,7 +39,3 @@
       sprite: _RMC14/Actions/observer_actions.rsi
       state: find_parasite
     event: !type:FindParasiteActionEvent
-  - type: UserInterface
-    interfaces:
-      enum.XenoFindParasiteUI.Key:
-        type: FindParasiteBoundUserInterface

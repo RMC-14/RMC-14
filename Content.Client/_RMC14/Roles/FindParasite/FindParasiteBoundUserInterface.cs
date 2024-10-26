@@ -33,12 +33,12 @@ public sealed partial class FindParasiteBoundUserInterface : BoundUserInterface
     {
         base.UpdateState(state);
 
-        if (!_entManager.TryGetComponent(_owner, out CMGhostComponent? ghostcomp) ||
+        if (!_entManager.TryGetComponent(_owner, out FindParasiteComponent? parasiteFindercomp) ||
             _spawnerList is null)
         {
             return;
         }
-        var activeParasiteSpawners = ghostcomp.ActiveParasiteSpawners;
+        var activeParasiteSpawners = parasiteFindercomp.ActiveParasiteSpawners;
         foreach (var spawner in activeParasiteSpawners)
         {
             var item = new ItemList.Item(_spawnerList);
