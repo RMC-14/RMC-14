@@ -127,7 +127,7 @@
     damage:
       types:
         Piercing: 45
-        Sructural: 20
+        Structural: 20
     soundHit:
       collection: ExplosiveBulletImpact #references unique soundcollection w/ explosive hitreg
   #The following codes the explosion visual effects of the bullets.
