@@ -194,6 +194,7 @@
 
 - type: entity
   id: RMCExplosionEffectGrenadeShockWave
+  categories: [ HideSpawnMenu ]
   components:
   - type: TimedDespawn
     lifetime: 0.5
