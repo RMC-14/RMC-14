@@ -49,6 +49,40 @@
           - RMCMagazineRifleAR10
   - type: GunDamageModifier
     multiplier: 1.4
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight      
+          - RMCAttachmentVerticalGrip
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.75, 0.00 # Adjust the values big man
+      rmc-aslot-rail: 0.06, 0.185
+     # rmc-aslot-stock: -0.84, 0.0325 Stock may or may not be factored into its stats
+      rmc-aslot-underbarrel: 0.25, -0.343
+
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -86,7 +120,7 @@
     - Cartridge
     - RMCCartridgeRifleAR10
   - type: CartridgeAmmo
-    proto: BulletRifle10x24mm
+    proto: BulletRifleAR10
 
 - type: entity
   parent: RMCBaseBullet
@@ -96,7 +130,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 40
+        Piercing: 45
   - type: CMArmorPiercing
     amount: 5
   - type: RMCProjectileDamageFalloff
