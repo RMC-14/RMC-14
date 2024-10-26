@@ -73,5 +73,5 @@
     enabled: true
     radius: 1
   - type: RMCScorchEffectOnSpawn
-    probability: 1
+    probability: 0.5
     tileLimit: 4
