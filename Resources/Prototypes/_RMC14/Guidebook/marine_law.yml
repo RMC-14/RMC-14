@@ -13,6 +13,7 @@
   - RMCMarineLawSpecialProvisions
   - RMCMarineLawSynthetics
   - RMCMarineLawCOProvisions
+  - RMCMarineSOP
 
 - type: guideEntry
   parent: RMC
@@ -182,3 +183,15 @@
   name: rmc-guide-entry-marine-co-provisions
   text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCOProvisions.xml"
   priority: 7
+
+  # SOP
+
+# SOP
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineSOP
+  name: rmc-guide-entry-rules-marine-sop
+  text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOP.xml"
+  priority: 8
+#  children:
+#  - RMCMarineLawDefinitions
