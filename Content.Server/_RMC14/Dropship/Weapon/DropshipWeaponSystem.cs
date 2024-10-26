@@ -30,12 +30,12 @@ public sealed class DropshipWeaponSystem : SharedDropshipWeaponSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RMCScorchEffectOnSpawnComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<RMCScorchEffectOnSpawnComponent, ComponentStartup>(OnScorchEffectStartup);
 
         CacheDecals();
     }
 
-    private void OnStartup(Entity<RMCScorchEffectOnSpawnComponent> ent, ref ComponentStartup args)
+    private void OnScorchEffectStartup(Entity<RMCScorchEffectOnSpawnComponent> ent, ref ComponentStartup args)
     {
         if (_scorchDecals.Length == 0) return;
 
