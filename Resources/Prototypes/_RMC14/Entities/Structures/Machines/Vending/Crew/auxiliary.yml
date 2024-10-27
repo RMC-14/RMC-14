@@ -34,7 +34,7 @@
       choices: { CMSidearm: 1 }
       entries:
       - id: CMWeaponPistolM1984
-      - id: CMWeaponPistolMK80
+      - id: RMCWeaponRevolverM44
     - name: Belts
       choices: { CMBelt: 1 }
       entries:
@@ -92,6 +92,12 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+    - name: Restricted Firearms
+      entries:
+      - id: RMCMK80Case
+        points: 8
+      - id: RMCSmartPistolCase
+        points: 12
     - name: Attachments
       entries:
       - id: RMCAttachmentAngledGrip
@@ -130,7 +136,7 @@
         points: 10
       - id: CMMagazineRifleM54CExt
         points: 10
-      - id: RMCSpeedLoaderM44
+      - id: RMCSpeedLoader44Marksman
         points: 10
     - name: Utilities
       entries:
