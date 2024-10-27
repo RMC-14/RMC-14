@@ -405,7 +405,7 @@ public sealed class XenoSpitSystem : EntitySystem
             return;
 
         var target = args.Target;
-        if (_hive.FromSameHive(spit.Owner, target) || _solution.TryGetSolution(target, spit.Comp.TargetSolution, out var solEnt, out var solu))
+        if (_hive.FromSameHive(spit.Owner, target) || !_solution.TryGetSolution(target, spit.Comp.TargetSolution, out var solEnt, out var solu))
             return;
 
         if (solu == null || solEnt == null)
