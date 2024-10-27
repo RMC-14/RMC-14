@@ -29,7 +29,6 @@
     baseFireModes:
     - SemiAuto
     - Burst
-    baseFireRate: 0.5
     recoilUnwielded: 3
     scatterWielded: 4
     scatterUnwielded: 20
@@ -87,10 +86,9 @@
           - RMCAttachmentVerticalGrip
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.75, 0.00 # Adjust the values big man
-      rmc-aslot-rail: 0.06, 0.185
-      rmc-aslot-underbarrel: 0.25, -0.343
-
+      rmc-aslot-barrel: 0.75, 0.00
+      rmc-aslot-rail: -0.23, 0.091
+      rmc-aslot-underbarrel: 0.35, -0.3
 
 - type: entity
   parent: CMMagazineRifleBase
