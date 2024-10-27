@@ -2,7 +2,7 @@
 - type: entity
   id: CMScopingChunkLoader
   name: SCOPING CHUNK LOADER YOU SHOULD NOT SEE THIS
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Eye
     - type: Tag

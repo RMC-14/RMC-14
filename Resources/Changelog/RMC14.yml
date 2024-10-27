@@ -1,98 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: The current operation name is now displayed in the groundside operations
-      console and the command tablet.
-    type: Add
-  id: 371
-  time: '2024-07-13T11:47:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3044
-- author: DrSmugleaf
-  changes:
-  - message: Added 2 more large surgical cases to Savannah with all of the surgery
-      tools.
-    type: Tweak
-  - message: Renamed the large surgical case to make it stand out more.
-    type: Tweak
-  id: 372
-  time: '2024-07-13T11:57:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3045
-- author: blueDev2
-  changes:
-  - message: Temporarily Remove Medical Items Inventory Icon Labels
-    type: Remove
-  id: 373
-  time: '2024-07-14T00:00:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3050
-- author: DrSmugleaf
-  changes:
-  - message: Fixed equipment and gear racks being corrodible. They can no longer be
-      destroyed with corrosive acid.
-    type: Fix
-  id: 374
-  time: '2024-07-14T01:38:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3052
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenos being able to pry open shutters. Corroding still works.
-    type: Fix
-  id: 375
-  time: '2024-07-14T07:48:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3058
-- author: DrSmugleaf
-  changes:
-  - message: Fixed warding pheromones for real this time.
-    type: Fix
-  id: 376
-  time: '2024-07-14T07:50:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3059
-- author: diraven
-  changes:
-  - message: automatic xeno text chat replacements for "cat", "grenade", "ship", "bullet",
-      "ammo", "marine".
-    type: Add
-  id: 377
-  time: '2024-07-14T23:32:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3069
-- author: lunarcomets
-  changes:
-  - message: lightbulbs now ALSO break in a single hit
-    type: Fix
-  id: 378
-  time: '2024-07-14T23:35:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3060
-- author: DrSmugleaf
-  changes:
-  - message: Fixed others priming grenades showing the popup as "You" priming it.
-    type: Fix
-  - message: Some CVars have been renamed. Check your settings for "Play Humanoid
-      Voicelines" as they have been reset.
-    type: Tweak
-  - message: Requisitions now starts with 10000 more dollars as a base.
-    type: Tweak
-  - message: Requisitions now gains 800 dollars per minute, up from 600.
-    type: Tweak
-  id: 379
-  time: '2024-07-15T05:44:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3073
-- author: Whisper, DrSmugleaf, Cepha
-  changes:
-  - message: Added the ML66A Smart Gun and Smart Gun Operator.
-    type: Add
-  id: 380
-  time: '2024-07-15T06:08:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3046
-- author: DrSmugleaf
-  changes:
-  - message: Fixed hivemind chat not always being disabled without a Queen. Every
-      minute I have to spend down chasing a bug that no bug abuser reports is a minute
-      you guys spend without extra content being added to the game.
-    type: Fix
-  id: 381
-  time: '2024-07-15T06:19:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3077
-- author: DrSmugleaf
-  changes:
   - message: Fixed the smart gun operator role being hidden for some players.
     type: Fix
   id: 382
@@ -4797,5 +4705,105 @@
   id: 870
   time: '2024-10-20T11:37:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4544
+- author: Whisper
+  changes:
+  - message: Updated the M63 sprites.
+    type: Add
+  id: 871
+  time: '2024-10-21T01:14:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4545
+- author: Whisper
+  changes:
+  - message: Added new lobby art by wrath7167e.
+    type: Add
+  id: 872
+  time: '2024-10-21T01:15:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4546
+- author: DrSmugleaf
+  changes:
+  - message: Added the interstellar sapient-life rights observer ghost role as an
+      admin event.
+    type: Add
+  id: 873
+  time: '2024-10-22T06:45:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4553
+- author: DrSmugleaf
+  changes:
+  - message: Added the Corporate Executive Specialist, Corporate Executive Supervisor,
+      and Interstellar Commerce Bureau Liaison admin ghost roles.
+    type: Add
+  - message: Added the black, khaki, blue, formal, and brown corporate jackets to
+      the Corporate Liaison's wardrobe.
+    type: Add
+  - message: Fixed the Corporate Liaison's ID and headset being the wrong color.
+    type: Fix
+  id: 874
+  time: '2024-10-23T06:36:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4574
+- author: Whisper
+  changes:
+  - message: Added a new hijack soundtrack, Storm the Iron Hive, by Nighty
+    type: Add
+  - message: Added a new lobby soundtrack, Enemy is Unknown, by Nighty
+    type: Add
+  - message: Added a new lobby soundtrack, The Fallen Queen, by Bolgarich
+    type: Add
+  id: 875
+  time: '2024-10-23T22:49:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4566
+- author: DrSmugleaf
+  changes:
+  - message: Fixed promoting someone to aSL removing command comms for all other SLs
+    type: Fix
+  id: 876
+  time: '2024-10-23T22:49:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4554
+- author: Vermidia
+  changes:
+  - message: Fix normal marine armor not fitting MD on the suit slot
+    type: Fix
+  - message: Fix MD not showing blips while worn on the belt/suit slot
+    type: Fix
+  id: 877
+  time: '2024-10-23T22:51:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4537
+- author: crystalHex
+  changes:
+  - message: Added tooltips to the gardener's fruit selection UI.
+    type: Tweak
+  id: 878
+  time: '2024-10-23T22:54:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4562
+- author: Rainbeon
+  changes:
+  - message: Fixed Leaps now self-stunning Xenos instead of self-rooting. This means
+      Runners and Lurkers can attack, shove, and initiate grabs immediately after
+      a leap without waiting, but still can not move.
+    type: Fix
+  - message: Lurkers now self-root themselves for 1.5 seconds when leaping a Marine
+      while invisible, up from 0.7 seconds.
+    type: Fix
+  - message: Fixed Lurkers stunning themselves when leaping a marine while still visible.
+    type: Fix
+  - message: Fixed Lurkers not un-rooting themselves when attacking Marines after
+      a Leap.
+    type: Fix
+  id: 879
+  time: '2024-10-23T22:54:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4575
+- author: CyberTropic
+  changes:
+  - message: Added scorch marks to explosives.
+    type: Add
+  id: 880
+  time: '2024-10-23T22:59:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4572
+- author: Ss14plss
+  changes:
+  - message: Now you can put your cigarette/writing pen behind your ear.
+    type: Add
+  id: 881
+  time: '2024-10-23T23:02:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4550
 Name: RMC14
 Order: -1

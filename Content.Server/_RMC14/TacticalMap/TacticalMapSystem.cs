@@ -380,7 +380,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         }
 
         if (!_mind.TryGetMind(tracked, out var mindId, out _) ||
-            !_job.MindTryGetJob(mindId, out _, out var jobProto) ||
+            !_job.MindTryGetJob(mindId, out var jobProto) ||
             jobProto.MinimapIcon == null)
         {
             return;

@@ -112,6 +112,7 @@
     totalIntensity: 800
     canCreateVacuum: false
   - type: CMExplosionEffect
+  - type: RMCScorchEffect
   - type: MortarShell
 
 - type: entity
