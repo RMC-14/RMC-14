@@ -128,7 +128,11 @@
     - Cartridge
     - CMCartridge9mmSMG
   - type: CartridgeAmmo
-    proto: Bullet10x20mm
+    proto: CMBullet9mmSMG
+
+- type: entity
+  parent: Bullet10x20mm
+  id: CMBullet9mmSMG #Yes it does use a seperate type of 9mm thats mechanically identical to 10x20mm for some reason
 
 - type: Tag
   id: CMMagazineSMGMP5
