@@ -1,8 +1,11 @@
-﻿using System.Numerics;
+﻿using System.Linq;
+using System.Numerics;
 using Content.Client.Hands.Systems;
 using Content.Client.UserInterface.Systems.Viewport;
 using Content.Shared._RMC14.MotionDetector;
 using Content.Shared.CCVar;
+using Content.Shared.Clothing.EntitySystems;
+using Content.Shared.Inventory;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
@@ -27,6 +30,8 @@ public sealed class MotionDetectorOverlay : Overlay
 
     private TimeSpan _last;
     private readonly List<Vector2> _blips = new();
+
+    private readonly SlotFlags DetectSlots = SlotFlags.SUITSTORAGE | SlotFlags.BELT;
 
     public MotionDetectorOverlay()
     {
@@ -57,8 +62,18 @@ public sealed class MotionDetectorOverlay : Overlay
         }
 
         var hands = _entity.System<HandsSystem>();
+        var inventory = _entity.System<InventorySystem>();
         var time = _timing.CurTime;
-        foreach (var held in hands.EnumerateHeld(player))
+
+        List<EntityUid> ents = hands.EnumerateHeld(player).ToList();
+
+        if(inventory.TryGetContainerSlotEnumerator(player, out var inv, DetectSlots))
+        {
+            while (inv.NextItem(out var item))
+                ents.Add(item);
+        }
+
+        foreach (var held in ents)
         {
             if (!_entity.TryGetComponent(held, out MotionDetectorComponent? detector))
                 continue;

@@ -49,23 +49,38 @@
         amount: 1
 #      - id: PinkWorkwear
 #      - id: GreenWorkwear
-#    - name: Coat
-#      entries:
-#      - id: BlackSuitJacket
-#      - id: KhakiSuitJacket
-#      - id: BrownSuitJacket
-#      - id: BlueSuitJacket
-#      - id: FormalSuitJacket
+    - name: Coat
+      entries:
+      - id: RMCJacketCorporateBlack
+        amount: 1
+      - id: RMCJacketCorporateKhaki
+        amount: 1
+      - id: RMCJacketCorporateBrown
+        amount: 1
+      - id: RMCJacketCorporateBlue
+        amount: 1
+      - id: RMCJacketCorporateFormal
+        amount: 1
 #      - id: GreyBomberJacket
+#        amount: 1
 #      - id: RedBomberJacket
+#        amount: 1
 #      - id: KhakiBomberJacket
+#        amount: 1
 #      - id: BrownBomberJacket
+#        amount: 1
 #      - id: BlackBomberJacket
+#        amount: 1
 #      - id: LiaisonsWinterCoat
+#        amount: 1
 #      - id: Labcoat
+#        amount: 1
 #      - id: Grey Vest
+#        amount: 1
 #      - id: Brown Vest
+#        amount: 1
 #      - id: Tan Vest
+#        amount: 1
 #    - name: Ties
 #      entries:
 #      - id: BlackTie
