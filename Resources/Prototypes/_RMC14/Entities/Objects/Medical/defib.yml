@@ -39,7 +39,7 @@
     - Toxin: -12
     zapHeal:
       groups:
-        Airloss: -200
+        Airloss: -400
     zapSound:
       path: /Audio/_RMC14/Medical/defib_release.ogg
       params:
