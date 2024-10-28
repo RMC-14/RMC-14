@@ -128,7 +128,8 @@
   parent: CMFloorPlating
   id: RMCFloorPlatingKutjevo
   sprite: /Textures/_RMC14/Tiles/kutjevo/plating.png
-  baseTurf: Lattice
+  baseTurf: ""
+  deconstructTools: [ ]
   isSubfloor: true
   footstepSounds:
     collection: FootstepPlating
