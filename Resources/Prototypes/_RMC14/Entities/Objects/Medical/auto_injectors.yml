@@ -1,7 +1,7 @@
 ﻿- type: entity
   abstract: true
   parent: ChemicalMedipen
-  id: CMAutoInjector
+  id: CMAutoInjectorBase
   name: autoinjector
   description: An autoinjector.
   categories: [ HideSpawnMenu ]
@@ -38,12 +38,19 @@
   - type: Tag
     tags:
     - CMAutoInjector
-  - type: MedicallyUnskilledDoAfter
   - type: UseDelay
     delay: 0.333
   - type: IconLabel
     textColor: White
     storedOffset: 0, 12
+
+- type: entity
+  abstract: true
+  parent: CMAutoInjectorBase
+  id: CMAutoInjector
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: MedicallyUnskilledDoAfter
 
 - type: entity
   parent: CMAutoInjector
@@ -236,7 +243,7 @@
     labelTextLocId: rmc-epinephrine-container-label-text
 
 - type: entity
-  parent: CMAutoInjector
+  parent: CMAutoInjectorBase
   id: RMCMedicAutoInjector
   name: medic autoinjector (M-M)
   description: A custom-made professional injector, likely from research. Has a similar lock to pill bottles, and fits up to 6 injections.
@@ -254,6 +261,9 @@
     - RMCAutoInjectorMedical
   - type: RefillableSolution
     solution: pen
+  - type: RequiresSkill
+    skills:
+      RMCSkillMedical: 2
 
 - type: entity
   parent: RMCMedicAutoInjector
