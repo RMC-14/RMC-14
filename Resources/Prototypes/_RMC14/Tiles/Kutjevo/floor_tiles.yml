@@ -34,16 +34,6 @@
   id: RMCFloorKutjevoFakeWood1
   sprite: /Textures/_RMC14/Tiles/kutjevo/fake_wood_1.png
   
-- type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoFakeWood2
-  sprite: /Textures/_RMC14/Tiles/kutjevo/fake_wood_2.png
-  
-- type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoFakeWood3
-  sprite: /Textures/_RMC14/Tiles/kutjevo/fake_wood_3.png
-  
 # Damaged
   
 - type: tile
@@ -128,13 +118,6 @@
   parent: CMFloorPlating
   id: RMCFloorPlatingKutjevo
   sprite: /Textures/_RMC14/Tiles/kutjevo/plating.png
-  baseTurf: ""
-  deconstructTools: [ ]
-  isSubfloor: true
-  footstepSounds:
-    collection: FootstepPlating
-  friction: 0.3
-  heatCapacity: 10000
   
 - type: tile
   parent: RMCFloorPlatingKutjevo

@@ -32,21 +32,6 @@
   
 - type: tile
   parent: RMCFloorKutjevoMultiBase
-  id: RMCFloorKutjevoTanMulti5
-  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_multi_5.png
-  
-- type: tile
-  parent: RMCFloorKutjevoMultiBase
-  id: RMCFloorKutjevoTanMulti6
-  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_multi_6.png
-  
-- type: tile
-  parent: RMCFloorKutjevoMultiBase
-  id: RMCFloorKutjevoTanMulti7
-  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_multi_7.png
-  
-- type: tile
-  parent: RMCFloorKutjevoMultiBase
   id: RMCFloorKutjevoMulti0
   sprite: /Textures/_RMC14/Tiles/kutjevo/multi_tiles_0.png
   
@@ -75,12 +60,3 @@
   id: RMCFloorKutjevoMulti5
   sprite: /Textures/_RMC14/Tiles/kutjevo/multi_tiles_5.png
   
-- type: tile
-  parent: RMCFloorKutjevoMultiBase
-  id: RMCFloorKutjevoMulti6
-  sprite: /Textures/_RMC14/Tiles/kutjevo/multi_tiles_6.png
-  
-- type: tile
-  parent: RMCFloorKutjevoMultiBase
-  id: RMCFloorKutjevoMulti7
-  sprite: /Textures/_RMC14/Tiles/kutjevo/multi_tiles_7.png
