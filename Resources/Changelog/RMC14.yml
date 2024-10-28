@@ -1,43 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the smart gun operator role being hidden for some players.
-    type: Fix
-  id: 382
-  time: '2024-07-15T08:08:14.0000000+00:00'
-  url: null
-- author: CaasGit
-  changes:
-  - message: Slightly upgrade sprites for the surgical case along with open states
-      for them.
-    type: Tweak
-  id: 383
-  time: '2024-07-16T03:53:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3068
-- author: musicmanvr
-  changes:
-  - message: The MK80 has been upgraded with new ammo and new sounds.
-    type: Tweak
-  id: 384
-  time: '2024-07-17T01:19:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3097
-- author: DrSmugleaf
-  changes:
-  - message: Fixed spaceborne gauss turrets not destroying resin structures in one
-      shot.
-    type: Fix
-  - message: Fixed spaceborne gauss turrets hitting marines if they were in the way.
-    type: Fix
-  id: 385
-  time: '2024-07-15T12:03:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3082
-- author: blueDev2
-  changes:
-  - message: Re-added medical label icons
-    type: Add
-  id: 386
-  time: '2024-07-16T06:24:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3088
 - author: Kadeo64
   changes:
   - message: ROUNY IS FINALLY HERE!!
@@ -4805,5 +4766,46 @@
   id: 881
   time: '2024-10-23T23:02:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4550
+- author: Vermidia
+  changes:
+  - message: Fix Medic Autoinjectors not requiring medical 2 to use
+    type: Fix
+  id: 882
+  time: '2024-10-28T09:45:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4616
+- author: Vermidia
+  changes:
+  - message: Added Pressurized Chemical Dispensers, which can be used by corpsman
+      to make their own simple canister mixes.
+    type: Add
+  - message: Corpsman vendors have been reorganized. A few items have been removed,
+      most notably non-medical belts and the machete scabbard, as well as the JTAC
+      pamphlet. You can also no longer pointbuy gauze or ointment from them.
+    type: Tweak
+  id: 883
+  time: '2024-10-28T09:46:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4615
+- author: Boaz1111
+  changes:
+  - message: The powerloader is now capable of picking up crates, like those from
+      req.
+    type: Add
+  id: 884
+  time: '2024-10-28T09:48:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4612
+- author: Vermidia
+  changes:
+  - message: Surgical Cases can now hold synth graft and surgical line
+    type: Add
+  id: 885
+  time: '2024-10-28T09:49:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4608
+- author: Vermidia
+  changes:
+  - message: Fix defibs healing less oxygen damage on defib than intended.
+    type: Fix
+  id: 886
+  time: '2024-10-28T09:50:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4604
 Name: RMC14
 Order: -1
