@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the smart gun operator role being hidden for some players.
-    type: Fix
-  id: 382
-  time: '2024-07-15T08:08:14.0000000+00:00'
-  url: null
 - author: CaasGit
   changes:
   - message: Slightly upgrade sprites for the surgical case along with open states
@@ -4805,5 +4798,12 @@
   id: 881
   time: '2024-10-23T23:02:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4550
+- author: Vermidia
+  changes:
+  - message: Fix Medic Autoinjectors not requiring medical 2 to use
+    type: Fix
+  id: 882
+  time: '2024-10-28T09:45:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4616
 Name: RMC14
 Order: -1
