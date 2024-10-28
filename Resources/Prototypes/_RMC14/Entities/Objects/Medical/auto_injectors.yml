@@ -254,6 +254,9 @@
     - RMCAutoInjectorMedical
   - type: RefillableSolution
     solution: pen
+  - type: RequiresSkill
+    skills:
+      RMCSkillMedical: 2
 
 - type: entity
   parent: RMCMedicAutoInjector
