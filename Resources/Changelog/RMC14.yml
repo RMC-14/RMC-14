@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: musicmanvr
-  changes:
-  - message: The MK80 has been upgraded with new ammo and new sounds.
-    type: Tweak
-  id: 384
-  time: '2024-07-17T01:19:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3097
 - author: DrSmugleaf
   changes:
   - message: Fixed spaceborne gauss turrets not destroying resin structures in one
@@ -4809,5 +4802,13 @@
   id: 883
   time: '2024-10-28T09:46:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4615
+- author: Boaz1111
+  changes:
+  - message: The powerloader is now capable of picking up crates, like those from
+      req.
+    type: Add
+  id: 884
+  time: '2024-10-28T09:48:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4612
 Name: RMC14
 Order: -1
