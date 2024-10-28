@@ -71,6 +71,7 @@
     interfaces:
       enum.XenoFindParasiteUI.Key:
         type: FindParasiteBoundUserInterface
+        requireInputValidation: false
 
 - type: entity
   id: ActionGhostBoo

@@ -1,5 +1,5 @@
 using Content.Shared._RMC14.Areas;
-using Content.Shared._RMC14.Mobs;
+using Content.Shared._RMC14.Roles.FindParasite;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared.Coordinates;
@@ -15,7 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Content.Shared._RMC14.Roles.FindParasite;
+namespace Content.Server._RMC14.Roles.FindParasite;
 public sealed partial class FindParasiteSystem : EntitySystem
 {
     [Dependency] private readonly IConsoleHost _host = default!;
@@ -29,12 +29,12 @@ public sealed partial class FindParasiteSystem : EntitySystem
 
         SubscribeLocalEvent<FindParasiteComponent, FindParasiteActionEvent>(FindParasites);
 
-        SubscribeLocalEvent<FindParasiteComponent, GetAllActiveParasiteSpawnersMessage>(GetAllActiveParasiteSpawners);
+        SubscribeLocalEvent<FindParasiteComponent, BoundUIOpenedEvent>(GetAllActiveParasiteSpawners);
         SubscribeLocalEvent<FindParasiteComponent, FollowParasiteSpawnerMessage>(FollowParasiteSpawner);
         SubscribeLocalEvent<FindParasiteComponent, TakeParasiteRoleMessage>(TakeParasiteRole);
     }
 
-    private void FindParasites(Entity<FindParasiteComponent> ghostEnt, ref FindParasiteActionEvent args)
+    private void FindParasites(Entity<FindParasiteComponent> parasiteFinderEnt, ref FindParasiteActionEvent args)
     {
         if (args.Handled)
         {
@@ -42,15 +42,14 @@ public sealed partial class FindParasiteSystem : EntitySystem
         }
         var ent = args.Performer;
 
-        _ui.OpenUi(ent, XenoFindParasiteUI.Key, ent);
+        _ui.OpenUi(parasiteFinderEnt.Owner, XenoFindParasiteUI.Key, parasiteFinderEnt);
         args.Handled = true;
     }
 
-    private void GetAllActiveParasiteSpawners(Entity<FindParasiteComponent> parasiteFinderEnt, ref GetAllActiveParasiteSpawnersMessage args)
+    private void GetAllActiveParasiteSpawners(Entity<FindParasiteComponent> parasiteFinderEnt, ref BoundUIOpenedEvent args)
     {
         var ent = parasiteFinderEnt.Owner;
-        var comp = parasiteFinderEnt.Comp;
-        comp.ActiveParasiteSpawners.Clear();
+        var uiState = new FindParasiteUIState();
 
         var eggs = EntityQueryEnumerator<XenoEggComponent>();
         var parasiteThrowers = EntityQueryEnumerator<XenoParasiteThrowerComponent>();
@@ -80,7 +79,7 @@ public sealed partial class FindParasiteSystem : EntitySystem
         foreach (var spawner in spawners)
         {
             var spawnerEnt = _entities.GetEntity(spawner);
-            var name = MetaData(ent).EntityName;
+            var name = MetaData(spawnerEnt).EntityName;
             var areaName = Loc.GetString("xeno-ui-default-area-name");
             if (_areas.TryGetArea(spawnerEnt.ToCoordinates(), out AreaComponent? area, out _, out var areaEnt) &&
                 areaEnt is EntityUid)
@@ -90,11 +89,9 @@ public sealed partial class FindParasiteSystem : EntitySystem
             name = Loc.GetString("xeno-ui-find-parasite-item",
                     ("itemName", name), ("areaName", areaName));
 
-            comp.ActiveParasiteSpawners.Add(name, spawner);
+            uiState.ActiveParasiteSpawners.Add(new(name, spawner));
         }
-        Dirty(parasiteFinderEnt);
-
-        _ui.SetUiState(ent, XenoFindParasiteUI.Key, null);
+        _ui.SetUiState(ent, XenoFindParasiteUI.Key, uiState);
 
     }
     private void FollowParasiteSpawner(Entity<FindParasiteComponent> parasiteFinderEnt, ref FollowParasiteSpawnerMessage args)
@@ -121,8 +118,8 @@ public sealed partial class FindParasiteSystem : EntitySystem
         var netSpawner = args.Spawner;
         var spawner = _entities.GetEntity(netSpawner);
 
-        var ev = new GetVerbsEvent<ActivationVerb>(ent, spawner, null, null, false, false, new());
-        RaiseLocalEvent(ent, ev);
+        var ev = new GetVerbsEvent<ActivationVerb>(ent, spawner, null, null, false, false, false, new());
+        RaiseLocalEvent(spawner, ev);
 
         foreach (var action in ev.Verbs)
         {

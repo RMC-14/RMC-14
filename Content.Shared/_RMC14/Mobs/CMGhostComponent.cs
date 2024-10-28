@@ -6,7 +6,7 @@ using Content.Shared._RMC14.Roles.FindParasite;
 
 namespace Content.Shared._RMC14.Mobs;
 
-[RegisterComponent, NetworkedComponent, Access([typeof(SharedGhostSystem), typeof(FindParasiteSystem)])]
+[RegisterComponent, NetworkedComponent, Access([typeof(SharedGhostSystem)])]
 [AutoGenerateComponentState(true)]
 public sealed partial class CMGhostComponent : Component
 {

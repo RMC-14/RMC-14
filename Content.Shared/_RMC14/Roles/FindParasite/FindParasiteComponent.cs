@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Roles.FindParasite;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent]
 public sealed partial class FindParasiteComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public Dictionary<string, NetEntity> ActiveParasiteSpawners = new();
+
 }

@@ -28,8 +28,27 @@ public sealed partial class TakeParasiteRoleMessage : BoundUserInterfaceMessage
 }
 
 [Serializable, NetSerializable]
-public sealed partial class GetAllActiveParasiteSpawnersMessage : BoundUserInterfaceMessage
+public sealed partial class RefreshActiveParasiteSpawnersMessage : BoundUserInterfaceMessage
 {
+}
+
+[Serializable, NetSerializable]
+public sealed partial class FindParasiteUIState : BoundUserInterfaceState
+{
+    public List<SpawnerData> ActiveParasiteSpawners = new();
+}
+
+[Serializable, NetSerializable]
+public sealed partial class SpawnerData
+{
+    public string Name;
+    public NetEntity Spawner;
+
+    public SpawnerData(string name, NetEntity spawner)
+    {
+        Name = name;
+        Spawner = spawner;
+    }
 }
 
 [Serializable, NetSerializable]

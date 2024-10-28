@@ -17,7 +17,12 @@ public sealed partial class FindParasiteBoundUserInterface : BoundUserInterface
 {
     private IEntityManager _entManager;
     private EntityUid _owner;
-    private NetEntity? _selected;
+
+    private ItemList.Item? _selectedItem;
+
+    // Deselecting directly via code still activates events,
+    // prevent activation of function "OnItemDeselect" if "_impledDeselect" is true
+    private bool _impledDeselect = false;
 
     private ItemList? _spawnerList;
 
@@ -33,17 +38,21 @@ public sealed partial class FindParasiteBoundUserInterface : BoundUserInterface
     {
         base.UpdateState(state);
 
-        if (!_entManager.TryGetComponent(_owner, out FindParasiteComponent? parasiteFindercomp) ||
+        if (state is not FindParasiteUIState ||
             _spawnerList is null)
         {
             return;
         }
-        var activeParasiteSpawners = parasiteFindercomp.ActiveParasiteSpawners;
-        foreach (var spawner in activeParasiteSpawners)
+        var uiState = (FindParasiteUIState)state;
+
+        var activeParasiteSpawners = uiState.ActiveParasiteSpawners;
+        _spawnerList.Clear();
+
+        foreach (var spawnerData in activeParasiteSpawners)
         {
             var item = new ItemList.Item(_spawnerList);
-            item.Text = spawner.Key;
-            item.Metadata = spawner.Value;
+            item.Text = spawnerData.Name;
+            item.Metadata = spawnerData.Spawner;
             _spawnerList.Add(item);
         }
     }
@@ -55,33 +64,82 @@ public sealed partial class FindParasiteBoundUserInterface : BoundUserInterface
         _spawnerList = _window.ParasiteSpawners;
         var spawnButton = _window.SpawnButton;
 
-        RefreshActiveParasiteSpawners();
+        _spawnerList.OnItemSelected += OnItemSelect;
 
-        _spawnerList.OnItemSelected += (ItemList.ItemListSelectedEventArgs args) =>
-        {
-            spawnButton.Disabled = false;
-            NetEntity newSelected = (NetEntity)args.ItemList[args.ItemIndex].Metadata!;
-            if (newSelected == _selected)
-            {
-                TakeParasiteRole(_selected.Value);
-                Close();
-            }
-            _selected = newSelected;
-            FollowParasiteSpawner(_selected.Value);
-        };
+        _spawnerList.OnItemDeselected += OnItemDeselect;
 
         spawnButton.Text = Loc.GetString("xeno-ui-find-parasite-spawn-button");
         spawnButton.Disabled = true;
 
         spawnButton.OnButtonDown += (BaseButton.ButtonEventArgs args) =>
         {
-            if (_selected is null)
+            if (_selectedItem is null)
             {
                 args.Button.Disabled = true;
                 return;
             }
-            TakeParasiteRole(_selected.Value);
+            NetEntity selected = (NetEntity)_selectedItem.Metadata!;
+
+            TakeParasiteRole(selected);
+            Close();
         };
+
+    }
+    private void OnItemSelect(ItemList.ItemListSelectedEventArgs args)
+    {
+        _window!.SpawnButton.Disabled = false;
+
+        ItemList.Item newSelectedItem = args.ItemList[args.ItemIndex];
+        NetEntity newSelected = (NetEntity)newSelectedItem.Metadata!;
+
+
+        if (_selectedItem is null)
+        {
+            FollowParasiteSpawner(newSelected);
+            _selectedItem = newSelectedItem;
+            return;
+        }
+
+        NetEntity originalSelected = (NetEntity)_selectedItem.Metadata!;
+
+        if (newSelected == originalSelected)
+        {
+            TakeParasiteRole(originalSelected);
+            Close();
+            return;
+        }
+        else
+        {
+            _impledDeselect = true;
+            _selectedItem.Selected = false;
+        }
+        _selectedItem = newSelectedItem;
+        FollowParasiteSpawner(newSelected);
+    }
+
+    private void OnItemDeselect(ItemList.ItemListDeselectedEventArgs args)
+    {
+        NetEntity deselected = (NetEntity)args.ItemList[args.ItemIndex].Metadata!;
+
+        if (_selectedItem is null)
+        {
+            return;
+        }
+
+        if (_impledDeselect)
+        {
+            _impledDeselect = false;
+            return;
+        }
+
+        NetEntity originalSelected = (NetEntity)_selectedItem.Metadata!;
+
+        if (deselected == originalSelected)
+        {
+            TakeParasiteRole(originalSelected);
+            Close();
+            return;
+        }
 
     }
 
@@ -90,12 +148,6 @@ public sealed partial class FindParasiteBoundUserInterface : BoundUserInterface
         base.Dispose(disposing);
         if (!disposing) return;
         _window?.Dispose();
-    }
-
-    public void RefreshActiveParasiteSpawners()
-    {
-        var msg = new GetAllActiveParasiteSpawnersMessage();
-        SendMessage(msg);
     }
 
     public void FollowParasiteSpawner(NetEntity spawner)
