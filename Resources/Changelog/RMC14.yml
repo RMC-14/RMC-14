@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: CaasGit
-  changes:
-  - message: Slightly upgrade sprites for the surgical case along with open states
-      for them.
-    type: Tweak
-  id: 383
-  time: '2024-07-16T03:53:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3068
 - author: musicmanvr
   changes:
   - message: The MK80 has been upgraded with new ammo and new sounds.
@@ -4805,5 +4797,17 @@
   id: 882
   time: '2024-10-28T09:45:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4616
+- author: Vermidia
+  changes:
+  - message: Added Pressurized Chemical Dispensers, which can be used by corpsman
+      to make their own simple canister mixes.
+    type: Add
+  - message: Corpsman vendors have been reorganized. A few items have been removed,
+      most notably non-medical belts and the machete scabbard, as well as the JTAC
+      pamphlet. You can also no longer pointbuy gauze or ointment from them.
+    type: Tweak
+  id: 883
+  time: '2024-10-28T09:46:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4615
 Name: RMC14
 Order: -1
