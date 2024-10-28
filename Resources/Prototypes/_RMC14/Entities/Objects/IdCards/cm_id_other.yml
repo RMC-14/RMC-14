@@ -23,12 +23,42 @@
     job: CMSurvivor
 
 - type: entity
-  parent: CMIDCardGold
+  parent: CMIDCardSilver
   id: CMIDCardLiaison
   name: liaison ID card
   components:
   - type: PresetIdCard
     job: CMLiaison
+
+- type: entity
+  parent: CMIDCardLiaison
+  id: RMCIDCardExecutiveCorporateSpecialist
+  name: executive corporate specialist ID card
+  components:
+  - type: PresetIdCard
+    job: null
+  - type: IdCard
+    jobTitle: rmc-job-title-corporate-executive-specialist
+
+- type: entity
+  parent: CMIDCardLiaison
+  id: RMCIDCardExecutiveCorporateSupervisor
+  name: executive corporate supervisor ID card
+  components:
+  - type: PresetIdCard
+    job: null
+  - type: IdCard
+    jobTitle: rmc-job-title-corporate-executive-supervisor
+
+- type: entity
+  parent: CMIDCardLiaison
+  id: RMCIDCardICBLiaison
+  name: interstellar commerce bureau liaison ID card
+  components:
+  - type: PresetIdCard
+    job: null
+  - type: IdCard
+    jobTitle: rmc-job-title-interstellar-commerce-bureau-liaison
 
 - type: entity
   parent: CMIDCardBase
@@ -69,3 +99,11 @@
   - type: Access
     groups:
     - Colony
+
+- type: entity
+  parent: CMIDCardLanyard
+  id: RMCIDCardBureauObserver
+  name: ID card
+  components:
+  - type: IdCard
+    jobTitle: rmc-job-title-bureau-observer

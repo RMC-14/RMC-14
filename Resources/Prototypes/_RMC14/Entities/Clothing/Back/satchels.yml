@@ -214,3 +214,31 @@
     maxItemSize: Normal
     grid:
     - 0,0,20,1 # same as backpack, up to 7 normal size rockets
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelBureauObserverFill
+  suffix: Bureau Observer, Filled
+  components:
+  - type: StorageFill
+    contents: # TODO RMC14 film cartridge
+    - id: RMCBinoculars
+    - id: CMPaper
+    - id: CMFolderWhite
+    - id: CMPenClicky
+    - id: RMCRadioHandheldColonyOff
+    - id: CMClipboard # TODO RMC14 tape recorder
+    - id: CMCrowbar
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelICBLiaisonFill
+  suffix: Interstellar Commerce Bureau Liaison, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPenClicky
+    - id: CMPaper
+    - id: CMPaper
+    - id: RMCRadioHandheldColonyOff
+    - id: CMCrowbar

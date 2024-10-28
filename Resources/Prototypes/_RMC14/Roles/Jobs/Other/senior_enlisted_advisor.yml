@@ -87,7 +87,7 @@
   id: CMGuidebookRoleSEA
   name: Senior Enlisted Advisor
   description: Mentor for the Marines!
-  noSpawn: false
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: senior_enlisted_advisor

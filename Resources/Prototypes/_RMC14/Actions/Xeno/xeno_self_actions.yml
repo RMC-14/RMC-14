@@ -17,6 +17,7 @@
   id: CMGuidebookActionXenoRest
   name: Rest
   description: Lie down to regenerate health more quickly while on weeds.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: resting
