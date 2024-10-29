@@ -49,6 +49,8 @@
   - type: RoofingEntity
     range: 10
   - type: EvolutionBonus
+  - type: WarpPoint
+    location: hive core
 
 - type: entity
   id: HiveCoreXenoConstructionNode
