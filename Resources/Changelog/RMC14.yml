@@ -1,22 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Corporate Liaison now have access to WeYa radio channel.
-    type: Add
-  - message: Fireteam Leaders now have access to JTAC channel.
-    type: Add
-  - message: ASO now don't have access to Squad channels.
-    type: Fix
-  id: 388
-  time: '2024-07-17T00:39:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3080
-- author: musicmanvr
-  changes:
-  - message: An old shipment of trench whistles has arrived for SLs and FTLs.
-    type: Add
-  id: 389
-  time: '2024-07-16T05:35:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3063
 - author: DrSmugleaf
   changes:
   - message: Fixed xenonids sometimes being unable to evolve at full health.
@@ -4808,5 +4790,19 @@
   id: 887
   time: '2024-10-29T08:07:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4582
+- author: Vermidia
+  changes:
+  - message: Fix fruit eating/feeding being slower than intended.
+    type: Fix
+  id: 888
+  time: '2024-10-29T08:11:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4593
+- author: crystalHex
+  changes:
+  - message: Fixed RMC Actions menu transforming into strain instead of base xenonid.
+    type: Fix
+  id: 889
+  time: '2024-10-29T08:10:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4560
 Name: RMC14
 Order: -1
