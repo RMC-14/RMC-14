@@ -17,7 +17,9 @@
   - RMCWeYa
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: cl
+    layers:
+    - state: background_civilian
+    - state: cl
   special:
   - !type:AddComponentSpecial
     components:

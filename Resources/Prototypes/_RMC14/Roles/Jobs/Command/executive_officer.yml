@@ -18,7 +18,9 @@
   - MarineMain
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: cic
+    layers:
+    - state: background_command
+    - state: xo
   special:
   - !type:AddComponentSpecial
     components:

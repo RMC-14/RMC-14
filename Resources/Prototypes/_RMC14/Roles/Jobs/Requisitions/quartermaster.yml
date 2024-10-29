@@ -18,7 +18,9 @@
   - CMQM
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: ct
+    layers:
+    - state: background_command
+    - state: cargo
   special:
   - !type:AddComponentSpecial
     components:

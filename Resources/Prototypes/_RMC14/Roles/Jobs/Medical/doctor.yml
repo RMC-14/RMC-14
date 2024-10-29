@@ -16,7 +16,9 @@
   - CMMedbay
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: medic
+    layers:
+    - state: background_medical
+    - state: doctor
   special:
   - !type:AddComponentSpecial
     components:

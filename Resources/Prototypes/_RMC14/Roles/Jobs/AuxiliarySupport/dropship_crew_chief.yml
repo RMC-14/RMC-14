@@ -19,7 +19,9 @@
   - DropshipCrewChief
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: pilot
+    layers:
+    - state: background_shipside
+    - state: dcc
   special:
   - !type:AddComponentSpecial
     components:

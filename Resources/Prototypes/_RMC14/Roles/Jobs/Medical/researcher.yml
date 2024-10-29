@@ -16,7 +16,9 @@
   - Researcher
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: researcher
+    layers:
+    - state: background_medical
+    - state: researcher
   special:
   - !type:AddComponentSpecial
     components:

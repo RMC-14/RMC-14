@@ -12,7 +12,9 @@
   - MessTech
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: mst
+    layers:
+    - state: background_shipside
+    - state: mst
   special:
   - !type:AddComponentSpecial
     components:

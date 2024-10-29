@@ -12,7 +12,9 @@
   - MaintTech
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: engi
+    layers:
+    - state: background_shipside
+    - state: mt
   special:
   - !type:AddComponentSpecial
     components:
