@@ -105,7 +105,6 @@
         points: 8
       - id: RMCBoxShotgunSlugs
         points: 8
-      - id:
     - name: Gun Attachments
       choices: { CMAttachments: 1 }
       entries:
