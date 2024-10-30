@@ -93,8 +93,8 @@
       choices: { CMPrimary: 1 }
       entries:
       - id: WeaponRifleM54C
-      - id: WeaponShotgunM42A2
       - id: WeaponSMGM63
+      - id: WeaponShotgunM42A2
     - name: Ammunition
       entries:
       - id: CMMagazineRifleM54C
