@@ -703,14 +703,14 @@
 #       - id: CMHeadsetSeniorCommand #ToDo: convert Headset to CMP comms
 #       - id: CMHandsBlackMarine
 #       - id: CMBootsBlackFilled
-#     - name: ARMOR 
+#     - name: ARMOR
 #       takeAll: CMStandard
 #       entries:
 #       - id: CMArmorM3WO
 #       - id: CMArmorHelmetM10ChiefMP
 #       - id: CMHandsBlackMarine
 #       - id: CMHeadBeretWO
-#     - name: HANDGUN CASE 
+#     - name: HANDGUN CASE
 #       choices: { CMWeapon: 1 }
 #       entries:
 #       - id: CMWeaponPistolMK80  # These all come inside belts; but these don't exist so... # TODO RMC14 Pistol Belt Fills
@@ -869,7 +869,7 @@
 #       entries:
 #       - id: CMHeadsetEngineer
 #         ammount: 15
-          
+
 
 #   - type: CMAutomatedVendor
 #     jobs:
@@ -1028,7 +1028,7 @@
 #       entries:
 #       - id: CMHandsInsulated
 #       - id: CMJumpsuitBO
-#       - id: CMHeadsetQM #Todo: Fix comms access squads.
+#       - id: CMHeadsetSeniorCommand
 #       - id: CMCoatASO
 #     - name: BAG
 #       choices: { CMHelmet: 1 }
