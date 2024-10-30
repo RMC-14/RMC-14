@@ -1,6 +1,7 @@
 - type: entity
   id: RMCBaseTree
   description: Yep, it's a tree.
+  abstract: true
   components:
   - type: SpriteFade
   - type: Clickable
@@ -54,7 +55,7 @@
               max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-    
+
 - type: entity
   parent: RMCBaseTree
   id: RMCBaseTreeSnow
@@ -105,7 +106,7 @@
         density: 3500
         layer:
         - WallLayer
-        
+
 - type: entity
   parent: RMCBaseTree
   id: RMCBaseTreeAlien

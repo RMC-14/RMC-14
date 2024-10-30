@@ -1,141 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenos being able to pry open shutters. Corroding still works.
-    type: Fix
-  id: 375
-  time: '2024-07-14T07:48:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3058
-- author: DrSmugleaf
-  changes:
-  - message: Fixed warding pheromones for real this time.
-    type: Fix
-  id: 376
-  time: '2024-07-14T07:50:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3059
-- author: diraven
-  changes:
-  - message: automatic xeno text chat replacements for "cat", "grenade", "ship", "bullet",
-      "ammo", "marine".
-    type: Add
-  id: 377
-  time: '2024-07-14T23:32:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3069
-- author: lunarcomets
-  changes:
-  - message: lightbulbs now ALSO break in a single hit
-    type: Fix
-  id: 378
-  time: '2024-07-14T23:35:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3060
-- author: DrSmugleaf
-  changes:
-  - message: Fixed others priming grenades showing the popup as "You" priming it.
-    type: Fix
-  - message: Some CVars have been renamed. Check your settings for "Play Humanoid
-      Voicelines" as they have been reset.
-    type: Tweak
-  - message: Requisitions now starts with 10000 more dollars as a base.
-    type: Tweak
-  - message: Requisitions now gains 800 dollars per minute, up from 600.
-    type: Tweak
-  id: 379
-  time: '2024-07-15T05:44:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3073
-- author: Whisper, DrSmugleaf, Cepha
-  changes:
-  - message: Added the ML66A Smart Gun and Smart Gun Operator.
-    type: Add
-  id: 380
-  time: '2024-07-15T06:08:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3046
-- author: DrSmugleaf
-  changes:
-  - message: Fixed hivemind chat not always being disabled without a Queen. Every
-      minute I have to spend down chasing a bug that no bug abuser reports is a minute
-      you guys spend without extra content being added to the game.
-    type: Fix
-  id: 381
-  time: '2024-07-15T06:19:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3077
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the smart gun operator role being hidden for some players.
-    type: Fix
-  id: 382
-  time: '2024-07-15T08:08:14.0000000+00:00'
-  url: null
-- author: CaasGit
-  changes:
-  - message: Slightly upgrade sprites for the surgical case along with open states
-      for them.
-    type: Tweak
-  id: 383
-  time: '2024-07-16T03:53:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3068
-- author: musicmanvr
-  changes:
-  - message: The MK80 has been upgraded with new ammo and new sounds.
-    type: Tweak
-  id: 384
-  time: '2024-07-17T01:19:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3097
-- author: DrSmugleaf
-  changes:
-  - message: Fixed spaceborne gauss turrets not destroying resin structures in one
-      shot.
-    type: Fix
-  - message: Fixed spaceborne gauss turrets hitting marines if they were in the way.
-    type: Fix
-  id: 385
-  time: '2024-07-15T12:03:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3082
-- author: blueDev2
-  changes:
-  - message: Re-added medical label icons
-    type: Add
-  id: 386
-  time: '2024-07-16T06:24:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3088
-- author: Kadeo64
-  changes:
-  - message: ROUNY IS FINALLY HERE!!
-    type: Add
-  id: 387
-  time: '2024-07-16T06:31:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2857
-- author: Tunguso4ka
-  changes:
-  - message: Corporate Liaison now have access to WeYa radio channel.
-    type: Add
-  - message: Fireteam Leaders now have access to JTAC channel.
-    type: Add
-  - message: ASO now don't have access to Squad channels.
-    type: Fix
-  id: 388
-  time: '2024-07-17T00:39:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3080
-- author: musicmanvr
-  changes:
-  - message: An old shipment of trench whistles has arrived for SLs and FTLs.
-    type: Add
-  id: 389
-  time: '2024-07-16T05:35:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3063
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenonids sometimes being unable to evolve at full health.
-    type: Fix
-  id: 390
-  time: '2024-07-15T12:04:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3079
-- author: DrSmugleaf
-  changes:
-  - message: Fixed operating tables being corrodible.
-    type: Fix
-  id: 391
-  time: '2024-07-16T04:33:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3090
 - author: Derrek-Larson
   changes:
   - message: Medical access, Requisition access to Secure Surgery Crate
@@ -4799,5 +4662,149 @@
   id: 874
   time: '2024-10-23T06:36:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4574
+- author: Whisper
+  changes:
+  - message: Added a new hijack soundtrack, Storm the Iron Hive, by Nighty
+    type: Add
+  - message: Added a new lobby soundtrack, Enemy is Unknown, by Nighty
+    type: Add
+  - message: Added a new lobby soundtrack, The Fallen Queen, by Bolgarich
+    type: Add
+  id: 875
+  time: '2024-10-23T22:49:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4566
+- author: DrSmugleaf
+  changes:
+  - message: Fixed promoting someone to aSL removing command comms for all other SLs
+    type: Fix
+  id: 876
+  time: '2024-10-23T22:49:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4554
+- author: Vermidia
+  changes:
+  - message: Fix normal marine armor not fitting MD on the suit slot
+    type: Fix
+  - message: Fix MD not showing blips while worn on the belt/suit slot
+    type: Fix
+  id: 877
+  time: '2024-10-23T22:51:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4537
+- author: crystalHex
+  changes:
+  - message: Added tooltips to the gardener's fruit selection UI.
+    type: Tweak
+  id: 878
+  time: '2024-10-23T22:54:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4562
+- author: Rainbeon
+  changes:
+  - message: Fixed Leaps now self-stunning Xenos instead of self-rooting. This means
+      Runners and Lurkers can attack, shove, and initiate grabs immediately after
+      a leap without waiting, but still can not move.
+    type: Fix
+  - message: Lurkers now self-root themselves for 1.5 seconds when leaping a Marine
+      while invisible, up from 0.7 seconds.
+    type: Fix
+  - message: Fixed Lurkers stunning themselves when leaping a marine while still visible.
+    type: Fix
+  - message: Fixed Lurkers not un-rooting themselves when attacking Marines after
+      a Leap.
+    type: Fix
+  id: 879
+  time: '2024-10-23T22:54:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4575
+- author: CyberTropic
+  changes:
+  - message: Added scorch marks to explosives.
+    type: Add
+  id: 880
+  time: '2024-10-23T22:59:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4572
+- author: Ss14plss
+  changes:
+  - message: Now you can put your cigarette/writing pen behind your ear.
+    type: Add
+  id: 881
+  time: '2024-10-23T23:02:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4550
+- author: Vermidia
+  changes:
+  - message: Fix Medic Autoinjectors not requiring medical 2 to use
+    type: Fix
+  id: 882
+  time: '2024-10-28T09:45:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4616
+- author: Vermidia
+  changes:
+  - message: Added Pressurized Chemical Dispensers, which can be used by corpsman
+      to make their own simple canister mixes.
+    type: Add
+  - message: Corpsman vendors have been reorganized. A few items have been removed,
+      most notably non-medical belts and the machete scabbard, as well as the JTAC
+      pamphlet. You can also no longer pointbuy gauze or ointment from them.
+    type: Tweak
+  id: 883
+  time: '2024-10-28T09:46:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4615
+- author: Boaz1111
+  changes:
+  - message: The powerloader is now capable of picking up crates, like those from
+      req.
+    type: Add
+  id: 884
+  time: '2024-10-28T09:48:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4612
+- author: Vermidia
+  changes:
+  - message: Surgical Cases can now hold synth graft and surgical line
+    type: Add
+  id: 885
+  time: '2024-10-28T09:49:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4608
+- author: Vermidia
+  changes:
+  - message: Fix defibs healing less oxygen damage on defib than intended.
+    type: Fix
+  id: 886
+  time: '2024-10-28T09:50:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4604
+- author: Rainbeon
+  changes:
+  - message: Fixed Hive Cores having their ghost warp points removed upon being fully
+      constructed.
+    type: Fix
+  id: 887
+  time: '2024-10-29T08:07:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4582
+- author: Vermidia
+  changes:
+  - message: Fix fruit eating/feeding being slower than intended.
+    type: Fix
+  id: 888
+  time: '2024-10-29T08:11:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4593
+- author: crystalHex
+  changes:
+  - message: Fixed RMC Actions menu transforming into strain instead of base xenonid.
+    type: Fix
+  id: 889
+  time: '2024-10-29T08:10:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4560
+- author: Vermidia
+  changes:
+  - message: Fix hyposprays needing medical skill 2 to instant inject
+    type: Fix
+  id: 890
+  time: '2024-10-30T02:13:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4624
+- author: Vermidia
+  changes:
+  - message: More jobs have unique map icons
+    type: Tweak
+  - message: Hive core now shows up on xeno's map
+    type: Add
+  id: 891
+  time: '2024-10-30T02:15:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4626
 Name: RMC14
 Order: -1

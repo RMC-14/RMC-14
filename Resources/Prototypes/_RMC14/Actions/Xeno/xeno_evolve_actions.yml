@@ -29,6 +29,7 @@
   id: CMGuidebookActionXenoEvolve
   name: Evolve
   description: Evolve to the next caste of xenonid or choose a strain if one is available.
+  categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
       state: evolve
