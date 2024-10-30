@@ -888,6 +888,6 @@
   suffix: RMCStump3
   components:
   - type: Sprite
-    sprite: _RMC14\Objects\Flora\flora_treealien.rsi
+    sprite: _RMC14/Objects/Flora/flora_treealien.rsi
     state: treestumpalien
     offset: 0,0.7
