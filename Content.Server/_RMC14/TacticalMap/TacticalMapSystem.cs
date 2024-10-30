@@ -395,8 +395,14 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         }
 
         tracked.Comp.Icon = jobProto.MinimapIcon;
-        if (jobProto.MinimapBackground != null)
+        //Don't get job background if we have a squad, and if we do and it doesn't have it's own background
+        //Still don't apply it
+        if (!_squad.TryGetMemberSquad(tracked.Owner, out var squad))
             tracked.Comp.Background = jobProto.MinimapBackground;
+        else if (squad.Comp.MinimapBackground == null)
+            tracked.Comp.Background = null;
+        else
+            tracked.Comp.Background = squad.Comp.MinimapBackground;
     }
 
     private void UpdateRotting(Entity<ActiveTacticalMapTrackedComponent> tracked)
