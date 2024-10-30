@@ -20,7 +20,7 @@
     state: cl
   minimapBackground:
    sprite: _RMC14/Interface/map_blips.rsi
-   state: background_civilian
+   state: background_civillian
   special:
   - !type:AddComponentSpecial
     components:
