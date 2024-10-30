@@ -36,6 +36,7 @@
     tags:
     - RMCWeaponSMG
   - type: GunGroupSpreadPenalty
+    damageMultiplier: 0.4
 
 - type: entity
   parent: BaseCartridgeCaselessRifle
