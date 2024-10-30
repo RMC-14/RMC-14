@@ -248,6 +248,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             else
                 ent.Comp.Color = squad.Color;
         }
+        else if (ent.Comp.Background != null) // If we lose a squad update icon to refresh background if needed
+            UpdateIcon(ent);
     }
 
     private void OnActiveMobStateChanged(Entity<ActiveTacticalMapTrackedComponent> ent, ref MobStateChangedEvent args)
