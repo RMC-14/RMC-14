@@ -94,9 +94,12 @@
       entries:
       - id: WeaponRifleM54C
       - id: WeaponShotgunM42A2
+      - id: WeaponSMGM63
     - name: Ammunition
       entries:
       - id: CMMagazineRifleM54C
+        points: 9
+      - id: CMMagazineSMGM63
         points: 9
       - id: RMCBoxShotgunBuckshot
         points: 8
@@ -107,6 +110,7 @@
       choices: { CMAttachments: 1 }
       entries:
       - id: RMCAttachmentLaserSight
-      #Red-Dot Sight
+      - id: RMCAttachmentS5RedDotSight
       - id: RMCAttachmentS6ReflexSight
       - id: RMCAttachmentRailFlashlight
+      - id: RMCAttachmentBipod
