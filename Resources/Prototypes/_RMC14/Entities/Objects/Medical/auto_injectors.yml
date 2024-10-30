@@ -260,6 +260,26 @@
 
 - type: entity
   parent: RMCMedicAutoInjector
+  id: RMCMedicAutoInjectorEZ15
+  name: autoinjector (E-T)
+  description: A custom-made EZ autoinjector, likely from research. Injects its entire payload immediately and doesn't require any training.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/ez_medic_auto_injector.rsi
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 15
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+  - type: MedicallyUnskilledDoAfter
+    min: 0
+  - type: RequiresSkill
+    skills:
+      RMCSkillMedical: 0
+
+- type: entity
+  parent: RMCMedicAutoInjector
   id: RMCMedicAutoInjectorBicaridine
   suffix: Bicaridine
   components:

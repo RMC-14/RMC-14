@@ -134,3 +134,10 @@
   materials:
     RMCPlastic: 19 # 375
 
+- type: latheRecipe
+  id: RMCMedicAutoInjectorEZ15
+  result: RMCMedicAutoInjectorEZ15
+  completetime: 4
+  materials:
+    RMCPlastic: 19 # 375
+
