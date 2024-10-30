@@ -483,6 +483,19 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("assigned_user_id", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.Blacklist",
+                b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("UserId")
+                        .HasName("PK_blacklist");
+
+                    b.ToTable("blacklist", (string) null);
+                });
             modelBuilder.Entity("Content.Server.Database.BanTemplate", b =>
                 {
                     b.Property<int>("Id")
@@ -1024,6 +1037,10 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("player_id");
 
+                    b.Property<int?>("GhostColor")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("ghost_color");
+
                     b.Property<int>("TierId")
                         .HasColumnType("INTEGER")
                         .HasColumnName("tier_id");
@@ -1105,6 +1122,10 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Property<bool>("Figurines")
                         .HasColumnType("INTEGER")
                         .HasColumnName("figurines");
+
+                    b.Property<bool>("GhostColor")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("ghost_color");
 
                     b.Property<bool>("LobbyMessage")
                         .HasColumnType("INTEGER")

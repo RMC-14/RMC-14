@@ -54,6 +54,37 @@
   - type: Sprite
     state: we_ya_key
 
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyWEYAColony
+  name: we-ya colony encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - WEYA
+    - Colony
+    defaultChannel: WEYA
+  - type: Sprite
+    state: we_ya_key
+
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyICB
+  name: ICB encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - CMB
+    - WEYA
+    - MarineCommand
+    - MarineMedical
+    - MarineIntel
+    - MarineCommon
+    - Colony
+    defaultChannel: CMB
+  - type: Sprite
+    state: we_ya_key
+
 # Command
 - type: entity
   parent: CMEncryptionKey

@@ -1,4 +1,6 @@
-﻿namespace Content.Shared._RMC14.Sprite;
+﻿using System.Numerics;
+
+namespace Content.Shared._RMC14.Sprite;
 
 public sealed class RMCSpriteSystem : EntitySystem
 {
@@ -16,5 +18,19 @@ public sealed class RMCSpriteSystem : EntitySystem
 
         if (ent.Comp.Offset != null)
             _appearance.SetData(ent, SpriteSetRenderOrderComponent.Appearance.Offset, ent.Comp.Offset);
+    }
+
+    public void SetOffset(EntityUid ent, Vector2 offset)
+    {
+        var sprite = EnsureComp<SpriteSetRenderOrderComponent>(ent);
+        sprite.Offset = offset;
+        Dirty(ent, sprite);
+    }
+
+    public void SetRenderOrder(EntityUid ent, int order)
+    {
+        var sprite = EnsureComp<SpriteSetRenderOrderComponent>(ent);
+        sprite.RenderOrder = order;
+        Dirty(ent, sprite);
     }
 }

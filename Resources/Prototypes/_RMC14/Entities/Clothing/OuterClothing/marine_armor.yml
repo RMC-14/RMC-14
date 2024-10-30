@@ -108,7 +108,7 @@
   parent: CMArmorM3Medium
   id: CMArmorM3Light
   name: M3-L pattern light armor
-  description: A lighter, cut down version of the standard M3 pattern armor. It sacrifices protection for more speed. Protects more against acid.
+  description: A lighter, cut down version of the standard M3 pattern armor. It sacrifices durability for more speed.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light.rsi
@@ -168,7 +168,7 @@
       - RMCScoutArmor
 
 - type: entity
-  parent: CMArmorM3Medium
+  parent: CMArmorM3Light
   id: CMArmorM3VLBallistics
   name: M3-VL pattern ballistics vest
   description: Up until 2182 Marine non-combat personnel were issued non-standardized ballistics vests, though the lack of IMP compatibility and suit lamps proved time and time again inefficient. This modified M3-L shell is the result of a 6-year R&D program; It provides utility, protection, AND comfort to all Marine non-combat personnel.

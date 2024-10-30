@@ -2,6 +2,7 @@
 using Content.Client.Message;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Overwatch;
+using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared.Mobs;
 using Content.Shared.Roles;
 using JetBrains.Annotations;
@@ -141,6 +142,27 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
 
                 monitor.TransferMarineButton.Label.ModulateSelfOverride = Color.Black;
 
+                if (EntMan.TryGetComponent(Owner, out SupplyDropComputerComponent? supplyDrop))
+                {
+                    monitor.Longitude.Value = supplyDrop.Coordinates.X;
+                    monitor.Latitude.Value = supplyDrop.Coordinates.Y;
+                }
+
+                monitor.Longitude.OnValueChanged +=
+                    args => SendPredictedMessage(new OverwatchConsoleSupplyDropLongitudeBuiMsg((int) args.Value));
+                monitor.Latitude.OnValueChanged +=
+                    args => SendPredictedMessage(new OverwatchConsoleSupplyDropLatitudeBuiMsg((int) args.Value));
+                monitor.LaunchButton.OnPressed +=
+                    _ => SendPredictedMessage(new OverwatchConsoleSupplyDropLaunchBuiMsg());
+                monitor.SaveButton.OnPressed +=
+                    _ =>
+                    {
+                        var longitude = (int)monitor.Longitude.Value;
+                        var latitude = (int)monitor.Latitude.Value;
+                        var msg = new OverwatchConsoleSupplyDropSaveBuiMsg(longitude, latitude);
+                        SendPredictedMessage(msg);
+                    };
+
                 _squadViews[squad.Id] = monitor;
                 _window.SquadViewContainer.AddChild(monitor);
             }
@@ -245,11 +267,29 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                     ToolTip = "Hide marine",
                 };
 
-                if (_overwatchConsole.IsHidden((Owner, console), marine.Marine))
+                var promoteButton = new Button
+                {
+                    MaxWidth = 25,
+                    MaxHeight = 25,
+                    VerticalAlignment = VAlignment.Top,
+                    StyleClasses = { "OpenBoth" },
+                    Text = "^",
+                    ModulateSelfOverride = Color.FromHex(GreenColor),
+                    ToolTip = "Promote marine to Squad Leader",
+                };
+
+                if (_overwatchConsole.IsHidden((Owner, console), marine.Marine) &&
+                    marine.Marine != squad.Leader)
                 {
                     hideButton.Text = "+";
                     hideButton.ModulateSelfOverride = Color.FromHex("#248E34");
                     hideButton.ToolTip = "Show marine";
+                }
+
+                if (squad.Leader == marine.Marine)
+                {
+                    hideButton.Visible = false;
+                    promoteButton.Visible = false;
                 }
 
                 hideButton.OnPressed += _ =>
@@ -258,13 +298,23 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                     SendPredictedMessage(new OverwatchConsoleHideBuiMsg(marine.Marine, hidden));
                 };
 
+                promoteButton.OnPressed += _ =>
+                    SendPredictedMessage(new OverwatchConsolePromoteLeaderBuiMsg(marine.Marine));
+
                 panel = CreatePanel(50);
                 hideButton.Margin = margin;
                 panel.AddChild(hideButton);
-                monitor.Buttons.AddChild(panel);
+                var buttonsContainer = new BoxContainer { Orientation = LayoutOrientation.Horizontal };
+                buttonsContainer.AddChild(panel);
+
+                panel = CreatePanel(50);
+                promoteButton.Margin = margin;
+                panel.AddChild(promoteButton);
+                buttonsContainer.AddChild(panel);
+
+                monitor.Buttons.AddChild(buttonsContainer);
             }
 
-            // TODO RMC14 change squad leader
             var rolesList = new List<(string Role, HashSet<OverwatchMarine> Deployed, HashSet<OverwatchMarine> Alive, HashSet<OverwatchMarine> All, bool DisplayName, int Priority)>();
             foreach (var (id, (deployed, alive, all)) in roles)
             {
@@ -283,7 +333,16 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                 string roleAlive;
                 if (displayName)
                 {
-                    if (all.TryFirstOrNull(out var first))
+                    if (_overwatchConsole.IsSquadLeader(roleId) &&
+                        squad.Leader != null &&
+                        marines.TryFirstOrNull(m => m.Marine == squad.Leader.Value, out var leader))
+                    {
+                        roleDeployed = leader.Value.Name;
+                        roleAlive = leader.Value.State == MobState.Dead
+                            ? $"[color={RedColor}]DEAD[/color]"
+                            : $"[color={GreenColor}]ALIVE[/color]";
+                    }
+                    else if (all.TryFirstOrNull(out var first))
                     {
                         roleDeployed = first.Value.Name;
                         roleAlive = first.Value.State == MobState.Dead
@@ -419,6 +478,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
             return;
         }
 
+        var supplyDrop = EntMan.GetComponentOrNull<SupplyDropComputerComponent>(Owner);
         var activeSquad = GetActiveSquad();
         if (activeSquad == null)
         {
@@ -455,6 +515,103 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
             squad.ShowHiddenButton.Text = console.ShowHidden
                 ? "Hide hidden"
                 : "Show hidden";
+
+            if (supplyDrop != null)
+            {
+                squad.HasCrate = supplyDrop.HasCrate;
+                squad.NextLaunchAt = supplyDrop.NextLaunchAt;
+                squad.Longitudes.DisposeAllChildren();
+
+                var margin = new Thickness(2);
+                var panel = CreatePanel(50);
+                panel.AddChild(new Label
+                {
+                    Text = "LONG.",
+                    Margin = margin,
+                });
+                squad.Longitudes.AddChild(panel);
+
+                squad.Latitudes.DisposeAllChildren();
+                panel = CreatePanel(50);
+                panel.AddChild(new Label
+                {
+                    Text = "LAT.",
+                    Margin = margin,
+                });
+                squad.Latitudes.AddChild(panel);
+
+                squad.Comments.DisposeAllChildren();
+                panel = CreatePanel(50);
+                panel.AddChild(new Label
+                {
+                    Text = "COMMENT",
+                    Margin = margin,
+                });
+                squad.Comments.AddChild(panel);
+
+                squad.Saves.DisposeAllChildren();
+                panel = CreatePanel(50);
+                panel.AddChild(new Label
+                {
+                    Text = " ",
+                    Margin = margin,
+                });
+
+                squad.Saves.AddChild(panel);
+
+                for (var i = 0; i < console.SupplyDropLocations.Length; i++)
+                {
+                    if (console.SupplyDropLocations[i] is not { } location)
+                        continue;
+
+                    panel = CreatePanel(50);
+                    panel.AddChild(new Label
+                    {
+                        Text = $"{location.Longitude}",
+                        Margin = margin,
+                    });
+                    squad.Longitudes.AddChild(panel);
+
+                    panel = CreatePanel(50);
+                    panel.AddChild(new Label
+                    {
+                        Text = $"{location.Latitude}",
+                        Margin = margin,
+                    });
+                    squad.Latitudes.AddChild(panel);
+
+                    var comment = new LineEdit { Text = $"{location.Comment}" };
+                    var index = i;
+                    comment.OnTextEntered += args => SaveComment(index, args.Text);
+
+                    panel = CreatePanel(50);
+                    panel.AddChild(comment);
+                    squad.Comments.AddChild(panel);
+
+                    panel = CreatePanel(50);
+                    var saveButton = new Button
+                    {
+                        MaxWidth = 25,
+                        MaxHeight = 25,
+                        VerticalAlignment = VAlignment.Top,
+                        StyleClasses = { "OpenBoth" },
+                        Text = "<",
+                        ModulateSelfOverride = Color.FromHex("#D3B400"),
+                        ToolTip = "Save Comment",
+                    };
+                    saveButton.OnPressed += _ =>
+                    {
+                        squad.Longitude.Value = location.Longitude;
+                        squad.Latitude.Value = location.Latitude;
+
+                        SendPredictedMessage(new OverwatchConsoleSupplyDropLongitudeBuiMsg(location.Longitude));
+                        SendPredictedMessage(new OverwatchConsoleSupplyDropLatitudeBuiMsg(location.Latitude));
+                    };
+
+                    panel.AddChild(saveButton);
+                    squad.Saves.AddChild(panel);
+                }
+            }
         }
     }
 
@@ -488,6 +645,14 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
         return EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? overwatch)
             ? overwatch.Operator
             : null;
+    }
+
+    private void SaveComment(int index, string text)
+    {
+        if (text.Length > 50)
+            text = text[..50];
+
+        SendPredictedMessage(new OverwatchConsoleSupplyDropCommentBuiMsg(index, text));
     }
 
     public void Refresh()

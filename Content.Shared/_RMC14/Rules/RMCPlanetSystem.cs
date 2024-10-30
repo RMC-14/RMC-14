@@ -63,4 +63,18 @@ public sealed class RMCPlanetSystem : EntitySystem
         offset = default;
         return false;
     }
+
+    public bool TryPlanetToCoordinates(Vector2i coordinates, out MapCoordinates mapCoordinates)
+    {
+        var planets = EntityQueryEnumerator<RMCPlanetComponent>();
+        while (planets.MoveNext(out var uid, out var comp))
+        {
+            var mapId = _transform.GetMapId(uid);
+            mapCoordinates = new MapCoordinates(coordinates - comp.Offset, mapId);
+            return true;
+        }
+
+        mapCoordinates = default;
+        return false;
+    }
 }

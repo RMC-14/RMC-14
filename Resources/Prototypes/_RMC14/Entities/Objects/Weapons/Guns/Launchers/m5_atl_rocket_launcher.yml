@@ -95,7 +95,7 @@
 - type: entity
   id: RMCProjectileRocket84mm
   name: 84mm high-explosive rocket
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   description: Uh oh.
   components:
   - type: TriggerOnCollide
@@ -135,6 +135,7 @@
     totalIntensity: 290
     maxTileBreak: 0
   - type: CMExplosionEffect
+  - type: RMCScorchEffect
   - type: PointLight
     radius: 3.5
     color: orange
@@ -166,7 +167,7 @@
   id: RMCProjectileRocket84mmAntiArmor
   name: 84mm anti-armor rocket
   parent: RMCProjectileRocket84mm
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     impactEffect: BulletImpactEffect

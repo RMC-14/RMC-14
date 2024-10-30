@@ -51,6 +51,10 @@
   - type: BlockWeeds
   - type: MinimapColor
     color: "#94b0d59c"
+  - type: RMCWater
+    cover:
+      tags:
+      - Catwalk
 
 - type: entity
   parent: CMFloorShallowWaterEntity

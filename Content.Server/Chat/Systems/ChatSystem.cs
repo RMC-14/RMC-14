@@ -12,6 +12,7 @@ using Content.Server.Speech.Components;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
@@ -22,8 +23,8 @@ using Content.Shared.Ghost;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Players;
+using Content.Shared.Players.RateLimiting;
 using Content.Shared.Radio;
-using Content.Shared.Speech;
 using Content.Shared.Whitelist;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
@@ -123,6 +124,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                     _configurationManager.SetCVar(CCVars.OocEnabled, false);
                 break;
             case GameRunLevel.PostRound:
+            case GameRunLevel.PreRoundLobby:
                 if (!_configurationManager.GetCVar(CCVars.OocEnableDuringRound))
                     _configurationManager.SetCVar(CCVars.OocEnabled, true);
                 break;
@@ -174,7 +176,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         ICommonSession? player = null,
         string? nameOverride = null,
         bool checkRadioPrefix = true,
-        bool ignoreActionBlocker = false
+        bool ignoreActionBlocker = false,
+        bool ignoreXenos = false
         )
     {
         if (HasComp<GhostComponent>(source))
@@ -253,7 +256,7 @@ public sealed partial class ChatSystem : SharedChatSystem
                 SendEntitySpeak(source, message, range, nameOverride, hideLog, ignoreActionBlocker);
                 break;
             case InGameICChatType.Whisper:
-                SendEntityWhisper(source, message, range, null, nameOverride, hideLog, ignoreActionBlocker);
+                SendEntityWhisper(source, message, range, null, nameOverride, hideLog, ignoreActionBlocker, ignoreXenos);
                 break;
             case InGameICChatType.Emote:
                 SendEntityEmote(source, message, range, nameOverride, hideLog: hideLog, ignoreActionBlocker: ignoreActionBlocker);
@@ -440,9 +443,9 @@ public sealed partial class ChatSystem : SharedChatSystem
         {
             var nameEv = new TransformSpeakerNameEvent(source, Name(source));
             RaiseLocalEvent(source, nameEv);
-            name = nameEv.Name;
+            name = nameEv.VoiceName;
             // Check for a speech verb override
-            if (nameEv.SpeechVerb != null && _prototypeManager.TryIndex<SpeechVerbPrototype>(nameEv.SpeechVerb, out var proto))
+            if (nameEv.SpeechVerb != null && _prototypeManager.TryIndex(nameEv.SpeechVerb, out var proto))
                 speech = proto;
         }
 
@@ -490,13 +493,14 @@ public sealed partial class ChatSystem : SharedChatSystem
         RadioChannelPrototype? channel,
         string? nameOverride,
         bool hideLog = false,
-        bool ignoreActionBlocker = false
+        bool ignoreActionBlocker = false,
+        bool ignoreXenos = false
         )
     {
         if (!_actionBlocker.CanSpeak(source) && !ignoreActionBlocker)
             return;
 
-        var message = TransformSpeech(source, FormattedMessage.RemoveMarkup(originalMessage));
+        var message = TransformSpeech(source, FormattedMessage.RemoveMarkupOrThrow(originalMessage));
         if (message.Length == 0)
             return;
 
@@ -514,7 +518,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         {
             var nameEv = new TransformSpeakerNameEvent(source, Name(source));
             RaiseLocalEvent(source, nameEv);
-            name = nameEv.Name;
+            name = nameEv.VoiceName;
         }
         name = FormattedMessage.EscapeText(name);
 
@@ -528,7 +532,7 @@ public sealed partial class ChatSystem : SharedChatSystem
             ("message", FormattedMessage.EscapeText(obfuscatedMessage)));
 
 
-        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange))
+        foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange, ignoreXenos))
         {
             EntityUid listener;
 
@@ -594,7 +598,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         var wrappedMessage = Loc.GetString("chat-manager-entity-me-wrap-message",
             ("entityName", name),
             ("entity", ent),
-            ("message", FormattedMessage.RemoveMarkup(action)));
+            ("message", FormattedMessage.RemoveMarkupOrThrow(action)));
 
         if (checkEmote)
             TryEmoteChatInput(source, action);
@@ -828,7 +832,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// <summary>
     ///     Returns list of players and ranges for all players withing some range. Also returns observers with a range of -1.
     /// </summary>
-    private Dictionary<ICommonSession, ICChatRecipientData> GetRecipients(EntityUid source, float voiceGetRange)
+    private Dictionary<ICommonSession, ICChatRecipientData> GetRecipients(EntityUid source, float voiceGetRange, bool ignoreXenos = false)
     {
         // TODO proper speech occlusion
 
@@ -867,6 +871,16 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         var ev = new ChatMessageAfterGetRecipients(recipients);
         RaiseLocalEvent(source, ref ev);
+
+        if (ignoreXenos)
+        {
+            foreach (var session in recipients.Keys.ToArray())
+            {
+                if (HasComp<XenoComponent>(session.AttachedEntity))
+                    recipients.Remove(session);
+            }
+        }
+
         return recipients;
     }
 
@@ -913,20 +927,6 @@ public sealed partial class ChatSystem : SharedChatSystem
 /// </summary>
 public record ExpandICChatRecipientsEvent(EntityUid Source, float VoiceRange, Dictionary<ICommonSession, ChatSystem.ICChatRecipientData> Recipients)
 {
-}
-
-public sealed class TransformSpeakerNameEvent : EntityEventArgs
-{
-    public EntityUid Sender;
-    public string Name;
-    public string? SpeechVerb;
-
-    public TransformSpeakerNameEvent(EntityUid sender, string name, string? speechVerb = null)
-    {
-        Sender = sender;
-        Name = name;
-        SpeechVerb = speechVerb;
-    }
 }
 
 /// <summary>

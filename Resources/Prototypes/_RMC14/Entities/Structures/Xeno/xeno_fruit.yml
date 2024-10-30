@@ -3,6 +3,7 @@
   id: XenoFruitBase
   abstract: true
   name: resin fruit
+  description: a fruit that shouldn't exist
   placement:
     mode: SnapgridCenter
     snap:
@@ -17,8 +18,6 @@
         density: 20
         mask:
         - ItemMask
-        layer:
-        - BulletImpassable
         restitution: 0.3
         friction: 0.2
       xeno_fruit:
@@ -65,10 +64,8 @@
   - type: Corrodible
     isCorrodible: false
   - type: XenoFruit
-    consumeDelay: 5
+    consumeDelay: 2
     canConsumeAtFull: true
-
-
 
 - type: entity
   parent: XenoFruitBase
@@ -154,7 +151,7 @@
 - type: entity
   parent: XenoFruitBase
   id: XenoFruitSpeed
-  name: speed resin fruit
+  name: alacrit resin fruit
   description: A fruit that can be eaten to move faster for a short amount of time.
   components:
   - type: XenoFruit
@@ -171,7 +168,7 @@
 - type: entity
   parent: XenoFruitBase
   id: XenoFruitPlasma
-  name: plasma resin fruit
+  name: cruor resin fruit
   description: A fruit that can be eaten to boost plasma generation.
   components:
   - type: XenoFruit

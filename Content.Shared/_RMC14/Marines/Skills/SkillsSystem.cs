@@ -27,6 +27,8 @@ public sealed class SkillsSystem : EntitySystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
+    private static readonly EntProtoId<SkillDefinitionComponent> _meleeSkill = "RMCSkillMeleeWeapons";
+
     public ImmutableArray<EntProtoId<SkillDefinitionComponent>> Skills { get; private set; }
 
     public ImmutableDictionary<string, EntProtoId<SkillDefinitionComponent>> SkillNames { get; private set; } =
@@ -39,6 +41,7 @@ public sealed class SkillsSystem : EntitySystem
         _skillsQuery = GetEntityQuery<SkillsComponent>();
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
+        SubscribeLocalEvent<GetMeleeDamageEvent>(OnGetMeleeDamage);
 
         SubscribeLocalEvent<MedicallyUnskilledDoAfterComponent, AttemptHyposprayUseEvent>(OnAttemptHyposprayUse);
 
@@ -60,6 +63,18 @@ public sealed class SkillsSystem : EntitySystem
     {
         if (ev.WasModified<EntityPrototype>())
             ReloadPrototypes();
+    }
+
+    private void OnGetMeleeDamage(ref GetMeleeDamageEvent args)
+    {
+        if (args.User == args.Weapon)
+            return;
+
+        var skill = GetSkill(args.User, _meleeSkill);
+        if (skill <= 0)
+            return;
+
+        args.Damage *= 1 + 0.25 * skill;
     }
 
     private void OnAttemptHyposprayUse(Entity<MedicallyUnskilledDoAfterComponent> ent, ref AttemptHyposprayUseEvent args)

@@ -86,11 +86,24 @@
       - id: RMCPouchFirstResponder
       - id: RMCPouchMedical
       #- id: CMMedicalKitPouch
-      #- id: CMPressurizedReagentCanisterPouchBicaridine
-      #- id: CMPressurizedReagentCanisterPouchKelotane
-      #- id: CMPressurizedReagentCanisterPouchRevivalMix
-      #- id: CMPressurizedReagentCanisterPouchTricordrazine
-      #- id: CMPressurizedReagentCanisterPouchEmpty
+      - id: RMCPouchReagentCanisterBicaridine
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Bicaridine)
+      - id: RMCPouchReagentCanisterKelotane
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Kelotane)
+      - id: RMCPouchReagentCanisterTricordrazineRevival
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
+      #      - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
+      #        recommended: true
+      #        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+      - id: RMCPouchReagentCanisterTricordrazine
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+      - id: RMCPouchReagentCanister
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(EMPTY)
       #- id: CMSlingPouch
     - name: Accessories
       choices: { CMAccessories: 1 }

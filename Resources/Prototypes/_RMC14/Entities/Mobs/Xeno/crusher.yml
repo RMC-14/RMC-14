@@ -36,6 +36,7 @@
     tier: 3
     hudOffset: 0,0.375
     unlockAt: 900 # 15 minutes
+  - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
     - CMXenoWarrior
@@ -74,7 +75,19 @@
     baseWalkSpeed: 1.66
     baseSprintSpeed: 3
   - type: SlowOnPull
-    multiplier: 0.5
+    slowdowns:
+    - multiplier: 0.68
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.755
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.5275
+      whitelist:
+        components:
+        - XenoHeavy
   - type: XenoBrutalize
   - type: RMCSize
     size: Immobile

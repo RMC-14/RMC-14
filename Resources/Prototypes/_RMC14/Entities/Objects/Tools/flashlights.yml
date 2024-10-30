@@ -92,6 +92,10 @@
   - type: Tag
     tags:
     - RMCPenlight
+  - type: Clothing
+    slots:
+    - ears
+    - suitstorage
 
 - type: Tag
   id: RMCPenlight

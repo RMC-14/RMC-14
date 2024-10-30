@@ -222,7 +222,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return new DamageSpecifier();
 
         var ev = new GetMeleeDamageEvent(uid, new(component.Damage), new(), user, component.ResistanceBypass);
-        RaiseLocalEvent(uid, ref ev);
+        RaiseLocalEvent(uid, ref ev, true);
 
         return DamageSpecifier.ApplyModifierSets(ev.Damage, ev.Modifiers);
     }

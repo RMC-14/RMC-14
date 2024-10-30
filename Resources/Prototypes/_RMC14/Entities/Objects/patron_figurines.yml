@@ -323,11 +323,11 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKateFleming
-  name: Kate Fleming figurine
-  description: "\"OORAH!!\""
+  name: Kate 'Engie' Fleming figurine
+  description: "Smells like welding fuel."
   components:
   - type: Sprite
-    state: kate_fleming
+    state: kate_engie_fleming
   - type: PatronFigurine
     id: 355c1f67-83a4-4252-b288-b218a4f84fd5
 
@@ -627,3 +627,29 @@
     state: does-the-dishes
   - type: PatronFigurine
     id: 428803e1-1ab5-4a19-8216-06bdb8b638d9
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronTempest
+  name: Tempest figurine
+  description: "A beam of light through the clouds. Smells of blue raspberry."
+  components:
+  - type: Sprite
+    state: tempest
+  - type: PatronFigurine
+    id: 5bb80762-7bf7-454e-bf30-8bd3c972fbee
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBeatriceBeaBootes
+  name: Beatrice 'Bea' Bootes figurine
+  description: "Born, adopted, and raised in Madawaska, Maine, this lesbian felinid tries her best to lead. She would go on to join the UNMC and later become a sergeant. Loves dual SMG. She lost her wife to a horrific accident and reached a low point in her life, but she fought on eventually. She is a social democrat who is a prominent member of “The Doves”. Her opponents throw rumors of her giving $1.4 million to the North Korean government and eating human organs. She is silly but deeply caring.
+
+    Strives to be a CO.
+
+    :3"
+  components:
+  - type: Sprite
+    state: beatrice_bea_bootes
+  - type: PatronFigurine
+    id: bb4d5e20-1aab-462d-aed4-d85454667d5c

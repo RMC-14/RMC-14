@@ -346,12 +346,16 @@
     containers:
       light_bulb: !type:ContainerSlot
   - type: ApcPowerReceiver
+  - type: Appearance
+  - type: RMCPowerReceiver
+    idleLoad: 1
+    activeLoad: 40
+    channel: Lighting
   - type: DeviceLinkSink
     ports:
     - On
     - Off
     - Toggle
-  - type: Appearance
 
 - type: entity
   parent: CMLightFixtureSmallEmpty

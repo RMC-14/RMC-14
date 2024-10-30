@@ -56,7 +56,6 @@
       - Xeno
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
     - trigger:
@@ -100,7 +99,7 @@
 
 # APC under construction
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: APCFrame
   id: CMApcFrame
   components:

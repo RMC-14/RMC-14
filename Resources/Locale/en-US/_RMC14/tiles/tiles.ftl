@@ -57,3 +57,7 @@ tiles-rmc-tcomms = tcomms tile
 tiles-rmc-outer-hull = outer hull tile
 
 tiles-rmc-escape-pod = escape pod tile
+
+tiles-rmc-grate = grate tile
+
+tiles-rmc-supply-pad = supply pad tile

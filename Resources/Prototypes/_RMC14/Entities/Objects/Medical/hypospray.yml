@@ -27,7 +27,7 @@
     tags:
     - Hypospray
   - type: MedicallyUnskilledDoAfter
-    min: 2
+    min: 1
     doAfter: 3
   - type: ItemSlots
     slots:

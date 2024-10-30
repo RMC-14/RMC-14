@@ -23,10 +23,9 @@
         volume: 8
   - type: Tag
     tags:
-      - Catwalk
+    - Catwalk
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
     - trigger:
@@ -88,7 +87,7 @@
         volume: 8
   - type: Tag
     tags:
-      - Catwalk
+    - Catwalk
 
 - type: entity
   parent: RMCMonorailStraight

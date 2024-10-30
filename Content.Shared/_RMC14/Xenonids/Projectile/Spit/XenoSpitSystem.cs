@@ -13,6 +13,7 @@ using Content.Shared._RMC14.Xenonids.Projectile.Spit.Slowing;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Stacks;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Standard;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Effects;
@@ -183,6 +184,8 @@ public sealed class XenoSpitSystem : EntitySystem
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);
 
         _popup.PopupClient(Loc.GetString("cm-xeno-charge-spit"), xeno, xeno);
+        if(_net.IsServer)
+            SpawnAttachedTo(xeno.Comp.Effect, xeno.Owner.ToCoordinates());
     }
 
     private void OnXenoSlowingSpitHit(Entity<XenoSlowingSpitProjectileComponent> spit, ref ProjectileHitEvent args)
