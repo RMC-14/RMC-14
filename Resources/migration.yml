@@ -854,3 +854,6 @@ Pickaxe: RMCPickaxe
 ClothingOuterVestHazard: RMCHazardVest
 ClothingHeadHatHardhatYellow: RMCHardHat
 ClothingHeadHatHardhatBlue: RMCHardhatBlue
+
+# 2024-10-28
+ColMarTechExecutiveOfficerEquipment: ColMarTechSeniorOfficerEquipment
