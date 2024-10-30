@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed operating tables being corrodible.
-    type: Fix
-  id: 391
-  time: '2024-07-16T04:33:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3090
 - author: Derrek-Larson
   changes:
   - message: Medical access, Requisition access to Secure Surgery Crate
@@ -4804,5 +4797,14 @@
   id: 890
   time: '2024-10-30T02:13:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4624
+- author: Vermidia
+  changes:
+  - message: More jobs have unique map icons
+    type: Tweak
+  - message: Hive core now shows up on xeno's map
+    type: Add
+  id: 891
+  time: '2024-10-30T02:15:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4626
 Name: RMC14
 Order: -1
