@@ -288,6 +288,7 @@
     #rifle rubber ammo 20
     #m4spr rubber ammo 20
     #shotgun beanbag 20
+    RMCGrenadeTraining: 6
     CMFirstAidKitFilled: 2
     CMBurnAidKitFilled: 2 #firstaid fire 2
     #MedkitRadiationFilled: 1 #firstaid rad 1
