@@ -12,9 +12,6 @@
     burstScatterMult: 10
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/holdout.rsi
-    layers:
-    - state: base
-      map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/holdout.rsi
   - type: MagazineAmmoProvider
