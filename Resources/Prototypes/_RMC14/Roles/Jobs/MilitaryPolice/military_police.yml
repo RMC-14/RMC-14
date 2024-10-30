@@ -17,9 +17,10 @@
   - MP
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    layers:
-    - state: background_mp
-    - state: mp
+    state: mp
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_mp
   special:
   - !type:AddComponentSpecial
     components:

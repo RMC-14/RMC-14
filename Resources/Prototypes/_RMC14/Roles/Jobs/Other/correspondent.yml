@@ -16,9 +16,10 @@
   - CMCorrespondent
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    layers:
-    - state: background_civilian
-    - state: correspondent
+    state: correspondent
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_civilian
   special:
   - !type:AddComponentSpecial
     components:

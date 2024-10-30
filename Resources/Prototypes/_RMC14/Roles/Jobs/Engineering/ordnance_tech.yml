@@ -16,9 +16,10 @@
   - OT
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    layers:
-    - state: background_shipside
-    - state: ot
+    state: ot
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_shipside
   special:
   - !type:AddComponentSpecial
     components:

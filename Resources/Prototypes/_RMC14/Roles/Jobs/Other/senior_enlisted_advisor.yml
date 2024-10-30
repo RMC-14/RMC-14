@@ -31,9 +31,10 @@
   - MarineMain
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    layers:
-    - state: background_medical
-    - state: sea
+    state: sea
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_medical
   special:
   - !type:AddComponentSpecial
     components:
