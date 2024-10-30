@@ -9,6 +9,9 @@
     "states": [
         {
             "name": "treealien01"
+        },
+        {
+            "name": "treestumpalien"
         }
     ]
 }
