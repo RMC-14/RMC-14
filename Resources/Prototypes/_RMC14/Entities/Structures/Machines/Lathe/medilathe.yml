@@ -83,6 +83,9 @@
     - RMCPouchReagentCanister
     - RMCPressurizedCanister
   - type: MaterialStorage
+    storage:
+      CMGlass: 533
+      RMCPlastic: 2000
     whitelist:
       tags:
       - Plastic
