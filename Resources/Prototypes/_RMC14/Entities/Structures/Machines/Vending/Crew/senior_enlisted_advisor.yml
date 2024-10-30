@@ -51,7 +51,7 @@
       - id: CMArmorM3Light
       - id: CMArmorM3Medium
       #Bulletproof Vest
-      #UNMC Service Jacket
+      - id: CMCoatOfficer
     - name: Eyewear
       choices: { CMEyewear: 1 }
       entries:
@@ -93,10 +93,16 @@
       choices: { CMPrimary: 1 }
       entries:
       - id: WeaponRifleM54C
+      - id: WeaponShotgunM42A2
     - name: Ammunition
       entries:
       - id: CMMagazineRifleM54C
         points: 9
+      - id: RMCBoxShotgunBuckshot
+        points: 8
+      - id: RMCBoxShotgunSlugs
+        points: 8
+      - id:
     - name: Gun Attachments
       choices: { CMAttachments: 1 }
       entries:
