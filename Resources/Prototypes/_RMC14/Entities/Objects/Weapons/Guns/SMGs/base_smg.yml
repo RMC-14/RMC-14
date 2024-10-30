@@ -35,6 +35,7 @@
   - type: Tag
     tags:
     - RMCWeaponSMG
+  - type: GunGroupSpreadPenalty
 
 - type: entity
   parent: BaseCartridgeCaselessRifle
