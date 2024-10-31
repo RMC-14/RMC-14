@@ -9,5 +9,5 @@
   - type: Physics
     bodyType: Static
   - type: Sprite
-    sprite:  _RMC14/Objects/Misc/deskflag.rsi
-    state: usmcflag
+    sprite:  _RMC14/Objects/Misc/desk_flag.rsi
+    state: usmcflag2
