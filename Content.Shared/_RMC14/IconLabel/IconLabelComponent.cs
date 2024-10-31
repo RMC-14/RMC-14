@@ -19,4 +19,7 @@ public sealed partial class IconLabelComponent : Component
 
     [DataField, AutoNetworkedField]
     public Vector2i StoredOffset = new(0, 0);
+
+    [DataField, AutoNetworkedField]
+    public int LabelMaxSize = 2;
 }

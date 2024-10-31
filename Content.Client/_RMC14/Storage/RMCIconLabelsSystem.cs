@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.IconLabel;
 using Robust.Client.Graphics;
@@ -33,7 +33,8 @@ public sealed class RMCIconLabelsSystem : EntitySystem
 
         var scale = 2 * uiScale;
         if (iconLabel.LabelTextLocId is null ||
-            !Loc.TryGetString(iconLabel.LabelTextLocId, out var msg))
+            !Loc.TryGetString(iconLabel.LabelTextLocId, out var msg) ||
+            msg.length > iconLabel.LabelMaxSize)
         {
             return;
         }
