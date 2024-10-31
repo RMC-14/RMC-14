@@ -515,6 +515,8 @@
         amount: 20
       - id: CMMaskCoif
         amount: 10
+      - id: RMCMaskRebreather
+        amount: 20
     - name: Miscellaneous
       entries:
       - id: BedrollFolded

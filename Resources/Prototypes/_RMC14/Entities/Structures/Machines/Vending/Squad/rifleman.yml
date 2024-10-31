@@ -80,7 +80,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
-    #    CMRebreather #TODO: Make this
+      - id: RMCMaskRebreather
     - name: Engineering Supplies
       entries:
       - id: CMEntrenchingTool
