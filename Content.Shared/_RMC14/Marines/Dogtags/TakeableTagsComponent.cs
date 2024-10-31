@@ -2,7 +2,9 @@
 
 namespace Content.Shared._RMC14.Marines.Dogtags;
 
-[RegisterComponent, AutoNetworkedField]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class TakeableTagsComponent : Component
 {
+    [DataField, AutoNetworkedField]
+    public bool TagsTaken = false;
 }
