@@ -107209,4 +107209,246 @@ entities:
     - type: Transform
       pos: 98.5,-49.5
       parent: 1
+- proto: RMCSmallFloodlight
+  entities:
+  - uid: 21226
+    components:
+    - type: Transform 
+      pos: 10.5,-101.5
+      parent: 1
+  - uid: 21227
+    components:
+    - type: Transform 
+      pos: 11.5,-117.5
+      parent: 1
+  - uid: 21228
+    components:
+    - type: Transform 
+      pos: 11.5,-140.5
+      parent: 1
+  - uid: 21229
+    components:
+    - type: Transform 
+      pos: 23.5,-117.5
+      parent: 1
+  - uid: 21230
+    components:
+    - type: Transform 
+      pos: 23.5,-140.5
+      parent: 1
+  - uid: 21231
+    components:
+    - type: Transform 
+      pos: 18.5,-20.5
+      parent: 1
+  - uid: 21232
+    components:
+    - type: Transform 
+      pos: 18.5,-43.5
+      parent: 1
+  - uid: 21233
+    components:
+    - type: Transform 
+      pos: 30.5,-20.5
+      parent: 1
+  - uid: 21234
+    components:
+    - type: Transform 
+      pos: 30.5,-43.5
+      parent: 1
+  - uid: 21235
+    components:
+    - type: Transform 
+      pos: 10.5,-98.5
+      parent: 1
+- proto: RMCTallFloodlight
+  entities:
+  - uid: 21236
+    components:
+    - type: Transform 
+      pos: 34.5,-155.5
+      parent: 1
+  - uid: 21237
+    components:
+    - type: Transform 
+      pos: 136.5,-57.5
+      parent: 1
+  - uid: 21238
+    components:
+    - type: Transform 
+      pos: 139.5,-57.5
+      parent: 1
+  - uid: 21239
+    components:
+    - type: Transform 
+      pos: 73.5,-102.5
+      parent: 1
+  - uid: 21240
+    components:
+    - type: Transform 
+      pos: 73.5,-108.5
+      parent: 1
+  - uid: 21241
+    components:
+    - type: Transform 
+      pos: 74.5,-102.5
+      parent: 1
+  - uid: 21242
+    components:
+    - type: Transform 
+      pos: 74.5,-108.5
+      parent: 1
+  - uid: 21243
+    components:
+    - type: Transform 
+      pos: 77.5,-109.5
+      parent: 1
+  - uid: 21244
+    components:
+    - type: Transform 
+      pos: 83.5,-109.5
+      parent: 1
+  - uid: 21245
+    components:
+    - type: Transform 
+      pos: 87.5,-108.5
+      parent: 1
+  - uid: 21246
+    components:
+    - type: Transform 
+      pos: 44.5,-98.5
+      parent: 1
+  - uid: 21247
+    components:
+    - type: Transform 
+      pos: 129.5,-55.5
+      parent: 1
+  - uid: 21248
+    components:
+    - type: Transform 
+      pos: 132.5,-55.5
+      parent: 1
+  - uid: 21249
+    components:
+    - type: Transform 
+      pos: 134.5,-55.5
+      parent: 1
+  - uid: 21250
+    components:
+    - type: Transform 
+      pos: 29.5,-115.5
+      parent: 1
+  - uid: 21251
+    components:
+    - type: Transform 
+      pos: 34.5,-115.5
+      parent: 1
+  - uid: 21252
+    components:
+    - type: Transform 
+      pos: 169.5,-59.5
+      parent: 1
+  - uid: 21253
+    components:
+    - type: Transform 
+      pos: 171.5,-59.5
+      parent: 1
+  - uid: 21254
+    components:
+    - type: Transform 
+      pos: 115.5,-47.5
+      parent: 1
+  - uid: 21255
+    components:
+    - type: Transform 
+      pos: 113.5,-60.5
+      parent: 1
+  - uid: 21256
+    components:
+    - type: Transform 
+      pos: 77.5,-101.5
+      parent: 1
+  - uid: 21257
+    components:
+    - type: Transform 
+      pos: 83.5,-101.5
+      parent: 1
+  - uid: 21258
+    components:
+    - type: Transform 
+      pos: 39.5,-143.5
+      parent: 1
+  - uid: 21259
+    components:
+    - type: Transform 
+      pos: 39.5,-149.5
+      parent: 1
+  - uid: 21260
+    components:
+    - type: Transform 
+      pos: 200.5,-83.5
+      parent: 1
+  - uid: 21261
+    components:
+    - type: Transform 
+      pos: 43.5,-115.5
+      parent: 1
+- proto: RMCLampTripodGrey
+  entities:
+  - uid: 21262
+    components:
+    - type: Transform 
+      pos: 130.5,-104.5
+      parent: 1
+  - uid: 21263
+    components:
+    - type: Transform 
+      pos: 133.5,-99.5
+      parent: 1
+  - uid: 21264
+    components:
+    - type: Transform 
+      pos: 136.5,-85.5
+      parent: 1
+  - uid: 21265
+    components:
+    - type: Transform 
+      pos: 169.5,-136.5
+      parent: 1
+  - uid: 21266
+    components:
+    - type: Transform 
+      pos: 175.5,-146.5
+      parent: 1
+  - uid: 21267
+    components:
+    - type: Transform 
+      pos: 182.5,-137.5
+      parent: 1
+  - uid: 21268
+    components:
+    - type: Transform 
+      pos: 88.5,-111.5
+      parent: 1
+  - uid: 21269
+    components:
+    - type: Transform 
+      pos: 88.5,-97.5
+      parent: 1
+  - uid: 21270
+    components:
+    - type: Transform 
+      pos: 88.5,-100.5
+      parent: 1
+  - uid: 21271
+    components:
+    - type: Transform 
+      pos: 92.5,-100.5
+      parent: 1
+  - uid: 21272
+    components:
+    - type: Transform 
+      pos: 96.5,-98.5
+      parent: 1
+
 ...
