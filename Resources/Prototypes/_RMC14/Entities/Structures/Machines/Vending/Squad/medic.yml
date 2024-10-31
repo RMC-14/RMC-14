@@ -277,3 +277,4 @@
       - id: CMMaskSterile
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather

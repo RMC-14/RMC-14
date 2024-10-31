@@ -92,6 +92,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather
     - name: Attachments
       entries:
       - id: RMCAttachmentAngledGrip
