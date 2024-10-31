@@ -40,10 +40,6 @@
         "directions": 4
       },
       {
-        "name": "sling",
-        "directions": 4
-      },
-      {
         "name": "equipped-SUITSTORAGE",
         "directions": 4
       }

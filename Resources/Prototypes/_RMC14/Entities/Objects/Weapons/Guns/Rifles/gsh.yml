@@ -99,7 +99,7 @@
     proto: CMCartridgeGSH762x51mm
     capacity: 300
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/Rifles/gsh.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/gsh.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -140,8 +140,6 @@
     damage:
       types:
         Piercing: 35
-  - type: CMArmorPiercing
-    amount: 0
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 22
@@ -153,7 +151,7 @@
     amount: 30
 
 - type: Tag
-  id: RMCMagazineSmartGun
+  id: RMCMagazineGSH
 
 - type: Tag
-  id: CMCartridgeSmartGun10x30mm
+  id: CMCartridgeGSH762x51mm
