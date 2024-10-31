@@ -48,6 +48,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
         _batteryQuery = GetEntityQuery<BatteryComponent>();
 
         SubscribeLocalEvent<RMCPowerReceiverComponent, PowerChangedEvent>(OnReceiverPowerChanged);
+        SubscribeLocalEvent<ApcPowerReceiverComponent, MapInitEvent>(ReceiverOnMapInit);
 
         Subs.CVar(_config, RMCCVars.RMCPowerUpdateEverySeconds, v => _updateEvery = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCPowerLoadMultiplier, v => _powerLoadMultiplier = v, true);
@@ -57,6 +58,22 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     {
         ent.Comp.Mode = args.Powered ? RMCPowerMode.Active : RMCPowerMode.Off;
         ToUpdate.Add(ent);
+    }
+
+    private void ReceiverOnMapInit(Entity<ApcPowerReceiverComponent> ent, ref MapInitEvent args)
+    {
+        if (!ent.Comp.NeedsPower)
+        {
+            ent.Comp.Powered = true;
+
+            Dirty(ent, ent.Comp);
+
+            var ev = new PowerChangedEvent(true, 0);
+            RaiseLocalEvent(ent, ref ev);
+
+            if (_appearanceQuery.TryComp(ent, out var appearance))
+                _appearance.SetData(ent, PowerDeviceVisuals.Powered, true, appearance);
+        }
     }
 
     protected override void PowerUpdated(Entity<RMCAreaPowerComponent> area, RMCPowerChannel channel, bool on)
