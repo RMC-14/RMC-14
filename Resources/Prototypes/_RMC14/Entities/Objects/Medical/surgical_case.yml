@@ -25,6 +25,7 @@
       - CMScalpel
       - CMHemostat
       - CMRetractor
+      tags:
       - CMSurgicalLine
       - CMSynthGraft
       #TODO FixoVein

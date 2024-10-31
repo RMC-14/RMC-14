@@ -6,6 +6,9 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: defender
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_xeno
 
 - type: playTimeTracker
   id: CMJobXenoDefender

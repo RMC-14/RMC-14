@@ -13,6 +13,8 @@
     - sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi # TODO RMC14 effects
       state: m16-stock
       offset: -0.5, 0
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m16.rsi
   - type: Gun

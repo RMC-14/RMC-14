@@ -1,6 +1,6 @@
 ﻿# TODO RMC14 other effects
 - type: reagent
-  parent: [ CMReagent, Dylovene ]
+  parent: [ CMReagentMedicine, Dylovene ]
   id: CMDylovene
   name: reagent-name-cmdylovene
   desc: reagent-desc-cmdylovene
@@ -43,7 +43,7 @@
 
 # TODO RMC14 other effects
 - type: reagent
-  parent: [ CMReagent, Ethylredoxrazine ]
+  parent: [ CMReagentMedicine, Ethylredoxrazine ]
   id: CMEthylredoxrazine
   name: reagent-name-cmethylredoxrazine
   desc: reagent-desc-cmethylredoxrazine
@@ -74,7 +74,7 @@
 
 # TODO RMC14 other effects
 - type: reagent
-  parent: [ CMReagent, Arithrazine ]
+  parent: [ CMReagentMedicine, Arithrazine ]
   id: CMArithrazine
   name: reagent-name-cmarithrazine
   desc: reagent-desc-cmarithrazine
@@ -135,7 +135,7 @@
 
 # TODO RMC14 other effects
 - type: reagent
-  parent: [ CMReagent, Bicaridine ]
+  parent: [ CMReagentMedicine, Bicaridine ]
   id: CMBicaridine
   name: reagent-name-cmbicaridine
   desc: reagent-desc-cmbicaridine
@@ -166,7 +166,7 @@
 
 # TODO RMC14 other effects (remove toxic reagents)
 - type: reagent
-  parent: [ CMReagent, Cryoxadone ]
+  parent: [ CMReagentMedicine, Cryoxadone ]
   id: CMCryoxadone
   name: reagent-name-cmcryoxadone
   desc: reagent-desc-cmcryoxadone
@@ -194,7 +194,7 @@
 
 # TODO RMC14 other effects
 - type: reagent
-  parent: [ CMReagent, Dermaline ]
+  parent: [ CMReagentMedicine, Dermaline ]
   id: CMDermaline
   name: reagent-name-cmdermaline
   desc: reagent-desc-cmdermaline
@@ -226,7 +226,7 @@
 
 # TODO RMC14 other effects
 - type: reagent
-  parent: [ CMReagent, Dexalin ]
+  parent: [ CMReagentMedicine, Dexalin ]
   id: CMDexalin
   name: reagent-name-cmdexalin
   desc: reagent-desc-cmdexalin
@@ -257,7 +257,7 @@
 
 # TODO RMC14 other effects
 - type: reagent
-  parent: [ CMReagent, DexalinPlus ]
+  parent: [ CMReagentMedicine, DexalinPlus ]
   id: CMDexalinPlus
   name: reagent-name-cmdexalinplus
   desc: reagent-desc-cmdexalinplus
@@ -288,7 +288,7 @@
 # TODO RMC14 other effects (pain)
 # TODO RMC14 injected only
 - type: reagent
-  parent: [ CMReagent, Epinephrine ]
+  parent: [ CMReagentMedicine, Epinephrine ]
   id: CMEpinephrine
   name: reagent-name-cmepinephrine
   desc: reagent-desc-cmepinephrine
@@ -332,7 +332,7 @@
 # TODO RMC14 other effects
 # TODO RMC14 allow breathing in crit instead of reducing asphyxiation
 - type: reagent
-  parent: [ CMReagent, Inaprovaline ]
+  parent: [ CMReagentMedicine, Inaprovaline ]
   id: CMInaprovaline
   name: reagent-name-cminaprovaline
   desc: reagent-desc-cminaprovaline
@@ -380,7 +380,7 @@
 
 # TODO RMC14 other effects
 - type: reagent
-  parent: [ CMReagent, Kelotane ]
+  parent: [ CMReagentMedicine, Kelotane ]
   id: CMKelotane
   name: reagent-name-cmkelotane
   desc: reagent-desc-cmkelotane
@@ -412,7 +412,7 @@
 
 # TODO RMC14 other effects
 - type: reagent
-  parent: [ CMReagent, Leporazine ]
+  parent: [ CMReagentMedicine, Leporazine ]
   id: CMLeporazine
   name: reagent-name-cmleporazine
   desc: reagent-desc-cmleporazine
@@ -452,7 +452,7 @@
 
 # TODO RMC14 other effects
 - type: reagent
-  parent: [ CMReagent, Tricordrazine ]
+  parent: [ CMReagentMedicine, Tricordrazine ]
   id: CMTricordrazine
   name: reagent-name-cmtricordrazine
   desc: reagent-desc-cmtricordrazine
@@ -500,7 +500,7 @@
 
 # TODO RMC14 other effects
 - type: reagent
-  parent: [ CMReagent, CMBicaridine ]
+  parent: [ CMReagentMedicine, CMBicaridine ]
   id: CMMeralyne
   name: reagent-name-cmmeralyne
   desc: reagent-desc-cmmeralyne
@@ -533,7 +533,7 @@
 # TODO RMC14 progressive eye healing
 # TODO RMC14 brain damage over 50u
 - type: reagent
-  parent: [ CMReagent, CMDylovene ]
+  parent: [ CMReagentMedicine, CMDylovene ]
   id: CMImidazoline
   name: reagent-name-cmimidazoline
   desc: reagent-desc-cmimidazoline
@@ -564,7 +564,7 @@
 # TODO RMC14 other effects
 # TODO RMC14 heal cloneloss
 - type: reagent
-  parent: [ CMReagent, CMCryoxadone ]
+  parent: [ CMReagentMedicine, CMCryoxadone ]
   id: CMClonexadone
   name: reagent-name-cmclonexadone
   desc: reagent-desc-cmclonexadone
