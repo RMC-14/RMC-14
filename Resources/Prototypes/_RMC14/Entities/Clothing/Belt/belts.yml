@@ -379,12 +379,13 @@
       map: [ "closedLayer" ]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator_pistol.rsi
-  - type: Storage
+  - type: Storage   # Holds up to 4 drums/magazines and 1 sidearm
     maxItemSize: Normal
     grid:
-    - 0,0,7,1 # 4 slots
+    - 0,0,9,1 # 5 slots
     whitelist:
       tags:
+      - Sidearm
       - CMMagazinePistol
       - RMCMagazineRevolver
       - RMCMagazineSmartGun
@@ -395,6 +396,28 @@
     items:
       tags:
       - RMCMagazineSmartGun
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        tags:
+        - Sidearm
+    - popup: rmc-storage-limit-max-mags
+      count: 4
+      whitelist:
+        tags:
+        - CMMagazinePistol
+        - RMCMagazineRevolver
+        - RMCMagazineSmartGun
+  - type: CMHolster
+    whitelist:
+      tags:
+      - RMCSmartPistol
+  - type: Tag
+    tags:
+    - RMCSmartGunSidearmHolster
+
+
   - type: ContainerContainer
     containers:
       pouch: !type:ContainerSlot
@@ -406,7 +429,6 @@
 #        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
         whitelist:
           tags:
-          - Sidearm
   - type: CMHolster
   - type: CMItemSlots
 
@@ -478,15 +500,12 @@
       - RMCSmartPistol
       - RMCMagazinePistolSU6
   - type: FixedItemSizeStorage
-  - type: Tag
-    tags:
-    - RMCSmartPistolHolster
   - type: LimitedStorage
     limits:
     - popup: rmc-storage-limit-one-gun
       whitelist:
-        components:
-        - Gun
+        tags:
+        - RMCSmartPistol
     - popup: rmc-storage-limit-max-mags
       count: 6
       whitelist:
@@ -494,8 +513,11 @@
         - RMCMagazinePistolSU6
   - type: CMHolster
     whitelist:
-      components:
-      - Gun
+      tags:
+      - RMCSmartPistol
+  - type: Tag
+    tags:
+    - RMCSmartPistolHolster
 
 - type: entity
   parent: CMBeltMarine
@@ -509,7 +531,7 @@
     - state: icon
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: m1984 # TODO RMC14 per-gun underlay
-      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      map: [ "enum.CMHolsterLayers.Fill" ]
       visible: false
     - state: icon-front
     - state: half
@@ -521,30 +543,35 @@
   - type: Storage # holds up to 6 mags plus gun
     maxItemSize: Normal
     grid:
-    - 0,0,11,1 # 6 slots
+    - 0,0,13,1 # 7 slots
     whitelist:
       tags:
+      - Sidearm
       - CMMagazinePistol
     blacklist:
       tags:
+      - RMCSmartPistol
       - RMCMagazinePistolSU6
+      - RMCWeaponRevolverM44
   - type: FixedItemSizeStorage
-  - type: ContainerContainer
-    containers:
-      pouch: !type:ContainerSlot
-  - type: ItemSlots
-    slots:
-      pouch:
-        name: General pistol holster
-#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
-#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
-        whitelist:
-          tags:
-          - CMWeaponPistolM1984
-          - CMWeaponPistolM77
-          - RMCMK80
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        tags:
+        - Sidearm
+    - popup: rmc-storage-limit-max-mags
+      count: 6
+      whitelist:
+        tags:
+        - CMMagazinePistol
   - type: CMHolster
-  - type: CMItemSlots
+    whitelist:
+      tags:
+      - Sidearm
+  - type: Tag
+    tags:
+    - RMCGeneralPistolHolster
 
 - type: entity
   parent: CMBeltMarine
@@ -558,7 +585,7 @@
     - state: icon
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: m44r # TODO RMC14 per-gun underlay
-      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      map: [ "enum.CMHolsterLayers.Fill" ]
       visible: false
     - state: icon-front
     - state: half
@@ -570,25 +597,30 @@
   - type: Storage # holds up to 6 mags plus gun
     maxItemSize: Normal
     grid:
-    - 0,0,11,1 # 6 slots
+    - 0,0,13,1 # 7 slots
     whitelist:
       tags:
+      - RMCWeaponRevolverM44
       - RMCMagazineRevolver
   - type: FixedItemSizeStorage
-  - type: ContainerContainer
-    containers:
-      pouch: !type:ContainerSlot
-  - type: ItemSlots
-    slots:
-      pouch:
-        name: General revolver holster
-#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
-#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
-        whitelist:
-          tags:
-          - RMCWeaponRevolverM44
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        tags:
+        - RMCWeaponRevolverM44
+    - popup: rmc-storage-limit-max-mags
+      count: 6
+      whitelist:
+        tags:
+        - RMCMagazineRevolver
   - type: CMHolster
-  - type: CMItemSlots
+    whitelist:
+      tags:
+      - RMCWeaponRevolverM44
+  - type: Tag
+    tags:
+    - RMCGeneralRevolverHolster
 
 - type: entity
   parent: ClothingBeltBase # Can't have storage slots on this one
@@ -602,7 +634,7 @@
     - state: icon
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: m63
-      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      map: [ "enum.CMHolsterLayers.Fill" ]
       visible: false
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/holster_smg.rsi
@@ -619,7 +651,13 @@
           tags:
           - WeaponSMGM63
   - type: CMHolster
+    whitelist:
+      tags:
+      - WeaponSMGM63
   - type: CMItemSlots
+  - type: Tag
+    tags:
+    - RMCSMGHolster
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -648,7 +686,7 @@
 
 - type: entity
   parent: CMBeltBaseStorage
-  id: RMCBeltSmgMags
+  id: RMCBeltHolsterSMGPouch
   name: M276 pattern M63 holster rig
   description: Special issue variant of the M276 designed to holster a M63 submachine gun and two spare magazines. Uncommonly issued to UNMC support and specialist personnel.
   components:
@@ -698,10 +736,7 @@
       - Gun
   - type: Tag
     tags:
-    - RMCSmgHolster
-
-- type: Tag
-  id: RMCSmgHolster
+    - RMCSMGPouchHolster
 
 - type: entity
   parent: CMBeltBaseStorage

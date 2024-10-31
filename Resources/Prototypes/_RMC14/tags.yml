@@ -16,8 +16,6 @@
 - type: Tag
   id: RCMCartridgePistol9mmSquashHead
 
-
-
 - type: Tag
   id: RMCCartridgePistol45ACP
 
@@ -64,6 +62,21 @@
   id: RMCSmartPistolHolster
 
 - type: Tag
+  id: RMCGeneralPistolHolster
+
+- type: Tag
+  id: RMCGeneralRevolverHolster
+
+- type: Tag
+  id: RMCSmartGunSidearmHolster
+
+- type: Tag
+  id: RMCSMGHolster
+
+- type: Tag
+  id: RMCSMGPouchHolster
+
+- type: Tag
   id: RMCMK80
 
 - type: Tag
@@ -92,4 +105,3 @@
 
 - type: Tag
   id: RMCG8Pouch
->>>>>>> master
