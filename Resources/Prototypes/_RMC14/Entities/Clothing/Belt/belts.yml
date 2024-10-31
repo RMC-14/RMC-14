@@ -534,6 +534,15 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/mateba_belt.rsi
+    layers:
+    - state: cmateba
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+    - state: icon
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
   - type: Clothing
     slots:
     - suitStorage
@@ -555,6 +564,12 @@
     whitelist:
       components:
       - Gun
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
 
 - type: entity
   parent: RMCMatebaBelt
