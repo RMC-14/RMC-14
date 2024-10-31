@@ -93,10 +93,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
-    state: icon-on
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
   - type: ItemToggle
+    activated: true
     soundActivate:
       path: /Audio/_RMC14/Machines/click.ogg
       params:
@@ -107,15 +107,6 @@
         variation: 0.250
   - type: ToggleClothing
     action: RMCActionToggleMedhud
-  - type: ComponentToggler
-    components:
-    - type: ShowHealthBars
-      damageContainers:
-      - Biological
-    - type: HolocardScanner
-    - type: ShowHealthIcons
-      damageContainers:
-      - Biological
   - type: GenericVisualizer
     visuals:
       enum.ToggleVisuals.Toggled:

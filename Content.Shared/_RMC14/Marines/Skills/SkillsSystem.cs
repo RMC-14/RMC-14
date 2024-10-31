@@ -179,7 +179,7 @@ public sealed class SkillsSystem : EntitySystem
     {
         if (!HasAllSkills(args.Equipee, ent.Comp.Skills))
         {
-            if (_toggle.TryDeactivate(ent.Owner) && ent.Comp.Popup != null)
+            if (_toggle.IsActivated(ent.Owner) && _toggle.TryDeactivate(ent.Owner, args.Equipee) && ent.Comp.Popup != null)
             {
                 var msg = Loc.GetString(ent.Comp.Popup, ("item", ent));
                 _popup.PopupClient(msg, args.Equipee, args.Equipee, PopupType.SmallCaution);
