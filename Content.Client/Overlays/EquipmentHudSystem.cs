@@ -91,7 +91,10 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
 
     private void OnCompToggled(EntityUid uid, T component, ItemToggledEvent args)
     {
-        RefreshOverlay(args.User ?? uid);
+        if (args.User == null)
+            return;
+
+        RefreshOverlay(args.User.Value);
     }
 
     private void OnRoundRestart(RoundRestartCleanupEvent args)
