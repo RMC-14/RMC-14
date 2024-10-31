@@ -239,7 +239,17 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private void OnActiveSquadMemberUpdated(Entity<ActiveTacticalMapTrackedComponent> ent, ref SquadMemberUpdatedEvent args)
     {
         if (_squadTeamQuery.TryComp(args.Squad, out var squad))
-            ent.Comp.Color = squad.Color;
+        {
+            if (squad.MinimapBackground != null)
+            {
+                ent.Comp.Background = squad.MinimapBackground;
+                ent.Comp.Color = Color.White;
+            }
+            else
+                ent.Comp.Color = squad.Color;
+        }
+        else if (ent.Comp.Background != null) // If we lose a squad update icon to refresh background if needed
+            UpdateIcon(ent);
     }
 
     private void OnActiveMobStateChanged(Entity<ActiveTacticalMapTrackedComponent> ent, ref MobStateChangedEvent args)
@@ -376,6 +386,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (_tacticalMapIconQuery.TryComp(tracked, out var iconComp))
         {
             tracked.Comp.Icon = iconComp.Icon;
+            tracked.Comp.Background = iconComp.Background;
             return;
         }
 
@@ -387,6 +398,14 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         }
 
         tracked.Comp.Icon = jobProto.MinimapIcon;
+        //Don't get job background if we have a squad, and if we do and it doesn't have it's own background
+        //Still don't apply it
+        if (!_squad.TryGetMemberSquad(tracked.Owner, out var squad))
+            tracked.Comp.Background = jobProto.MinimapBackground;
+        else if (squad.Comp.MinimapBackground == null)
+            tracked.Comp.Background = null;
+        else
+            tracked.Comp.Background = squad.Comp.MinimapBackground;
     }
 
     private void UpdateRotting(Entity<ActiveTacticalMapTrackedComponent> tracked)
@@ -397,9 +416,17 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private void UpdateColor(Entity<ActiveTacticalMapTrackedComponent> tracked)
     {
         if (_squad.TryGetMemberSquad(tracked.Owner, out var squad))
-            tracked.Comp.Color = squad.Comp.Color;
-        else if (_xenoQuery.HasComp(tracked))
-            tracked.Comp.Color = Color.FromHex("#3A064D");
+        {
+            if (squad.Comp.MinimapBackground == null)
+                tracked.Comp.Color = squad.Comp.Color;
+            else
+            {
+                tracked.Comp.Background = squad.Comp.MinimapBackground;
+                tracked.Comp.Color = Color.White;
+            }
+        }
+        else
+            tracked.Comp.Color = Color.White;
     }
 
     private void UpdateTracked(Entity<ActiveTacticalMapTrackedComponent> ent)
@@ -427,7 +454,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         else if (_mobState.IsDead(ent))
             status = TacticalMapBlipStatus.Defibabble;
 
-        var blip = new TacticalMapBlip(indices, icon, ent.Comp.Color, status);
+        var blip = new TacticalMapBlip(indices, icon, ent.Comp.Color, status, ent.Comp.Background);
         if (_marineQuery.HasComp(ent))
         {
             tacticalMap.MarineBlips[ent.Owner.Id] = blip;

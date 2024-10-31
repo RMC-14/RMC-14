@@ -473,6 +473,8 @@
       #  amount: 20
       #- id: M3 Pattern Skull Marine Armor
       #  amount: 20
+      - id: CMArmorM3Medium #TODO RMC: remove this when above is added
+        amount: 20
       - id: CMArmorM3Heavy
         amount: 10
       - id: CMArmorM3Light
@@ -515,6 +517,8 @@
         amount: 20
       - id: CMMaskCoif
         amount: 10
+      - id: RMCMaskRebreather
+        amount: 20
     - name: Miscellaneous
       entries:
       - id: BedrollFolded

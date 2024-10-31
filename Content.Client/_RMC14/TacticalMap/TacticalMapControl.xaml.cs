@@ -91,7 +91,7 @@ public sealed partial class TacticalMapControl : TextureRect
             {
                 var position = GetDrawPosition(blip.Indices) * 3 * UIScale;
                 var rect = UIBox2.FromDimensions(position, new Vector2(14, 14));
-                handle.DrawTextureRect(background, rect, blip.Color);
+                handle.DrawTextureRect(blip.Background != null ? system.Frame0(blip.Background) : background, rect, blip.Color);
                 handle.DrawTextureRect(system.Frame0(blip.Image), rect);
 
                 switch (blip.Status)

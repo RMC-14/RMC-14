@@ -5,6 +5,8 @@
   description: A tiny pistol meant for hiding in hard-to-reach areas. Best not ask where it came from.
   suffix: Filled
   components:
+  - type: Item
+    size: Tiny
   - type: RMCSelectiveFire
     scatterWielded: 10
     scatterUnwielded: 10
@@ -12,9 +14,6 @@
     burstScatterMult: 10
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/holdout.rsi
-    layers:
-    - state: base
-      map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/holdout.rsi
   - type: MagazineAmmoProvider
@@ -30,6 +29,7 @@
         priority: 2
         whitelist:
           tags:
+          - Holdout
           - RMCMagazinePistolHoldout
   - type: AttachableHolder
     slots:
@@ -69,8 +69,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgePistol9mm
-    proto: CMCartridgePistol9mm
+      - CMCartridgePistol.22mm
+    proto: CMCartridgePistol.22mm
     capacity: 5
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/holdout.rsi
@@ -79,6 +79,31 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: CMBulletBase
+  id: CMBulletPistol.22mm
+  name: bullet (.22)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 20
+  - type: CMArmorPiercing
+    amount: 10
+
+- type: entity
+  id: CMCartridgePistol.22mm
+  name: cartridge (.22)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridgePistol.22mm
+  - type: CartridgeAmmo
+    proto: CMBulletPistol.22mm
+
 
 - type: Tag
   id: RMCMagazinePistolHoldout
