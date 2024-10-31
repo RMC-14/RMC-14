@@ -107,6 +107,16 @@
         variation: 0.250
   - type: ToggleClothing
     action: RMCActionToggleMedhud
+  - type: ComponentToggler
+    components:
+    - type: ShowHealthBars
+      damageContainers:
+      - Biological
+    - type: HolocardScanner
+    - type: ShowHealthIcons
+      damageContainers:
+      - Biological
+  - type: RMCItemToggleClothingVisuals
   - type: GenericVisualizer
     visuals:
       enum.ToggleVisuals.Toggled:

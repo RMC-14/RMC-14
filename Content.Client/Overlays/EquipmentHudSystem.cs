@@ -3,7 +3,8 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Robust.Client.Player;
 using Robust.Shared.Player;
-
+using Content.Shared.Item;
+using Content.Shared.Item.ItemToggle.Components;
 namespace Content.Client.Overlays;
 
 /// <summary>
@@ -29,6 +30,8 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
 
         SubscribeLocalEvent<T, GotEquippedEvent>(OnCompEquip);
         SubscribeLocalEvent<T, GotUnequippedEvent>(OnCompUnequip);
+
+        SubscribeLocalEvent<T, ItemToggledEvent>(OnCompToggled);
 
         SubscribeLocalEvent<T, RefreshEquipmentHudEvent<T>>(OnRefreshComponentHud);
         SubscribeLocalEvent<T, InventoryRelayedEvent<RefreshEquipmentHudEvent<T>>>(OnRefreshEquipmentHud);
@@ -84,6 +87,11 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
     private void OnCompUnequip(EntityUid uid, T component, GotUnequippedEvent args)
     {
         RefreshOverlay(args.Equipee);
+    }
+
+    private void OnCompToggled(EntityUid uid, T component, ItemToggledEvent args)
+    {
+        RefreshOverlay(args.User ?? uid);
     }
 
     private void OnRoundRestart(RoundRestartCleanupEvent args)
