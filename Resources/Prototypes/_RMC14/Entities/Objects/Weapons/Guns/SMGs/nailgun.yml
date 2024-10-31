@@ -103,7 +103,6 @@
 - type: entity
   parent: BaseBullet
   id: Nail7x45mm
-  noSpawn: true
   components:
   - type: Projectile
     damage:
