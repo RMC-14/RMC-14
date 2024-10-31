@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added Simon Starseeker and Lena Milize figurines.
-    type: Add
-  id: 402
-  time: '2024-07-19T13:04:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3128
 - author: musicmanvr
   changes:
   - message: Made the standard issue flare less abrasive on the eyes.
@@ -4827,5 +4820,13 @@
   id: 901
   time: '2024-10-31T09:16:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4589
+- author: crystalHex
+  changes:
+  - message: Added functional holsters to the smart pistol belt, combat toolbelt,
+      mortar operator belt and M63 holster rig.
+    type: Tweak
+  id: 902
+  time: '2024-10-31T09:20:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4522
 Name: RMC14
 Order: -1
