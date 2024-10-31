@@ -47,10 +47,11 @@ public sealed class SkillsSystem : EntitySystem
 
         SubscribeLocalEvent<RequiresSkillComponent, BeforeRangedInteractEvent>(OnRequiresSkillBeforeRangedInteract);
         SubscribeLocalEvent<RequiresSkillComponent, ActivatableUIOpenAttemptEvent>(OnRequiresSkillActivatableUIOpenAttempt);
+        SubscribeLocalEvent<RequiresSkillComponent, UseInHandEvent>(OnRequiresSkillUseInHand, before: [typeof(SharedHypospraySystem), typeof(SharedFlashSystem)]);
 
-        SubscribeLocalEvent<MeleeRequiresSkillComponent, AttemptMeleeEvent>(OnRequiresSkillAttemptMelee);
-        SubscribeLocalEvent<MeleeRequiresSkillComponent, ThrowItemAttemptEvent>(OnRequiresSkillThrowAttempt);
-        SubscribeLocalEvent<MeleeRequiresSkillComponent, UseInHandEvent>(OnRequiresSkillUseInHand, before: [typeof(SharedFlashSystem)]);
+        SubscribeLocalEvent<MeleeRequiresSkillComponent, AttemptMeleeEvent>(OnMeleeRequiresSkillAttemptMelee);
+        SubscribeLocalEvent<MeleeRequiresSkillComponent, ThrowItemAttemptEvent>(OnMeleeRequiresSkillThrowAttempt);
+        SubscribeLocalEvent<MeleeRequiresSkillComponent, UseInHandEvent>(OnMeleeRequiresSkillUseInHand, before: [typeof(SharedHypospraySystem), typeof(SharedFlashSystem)]);
 
         SubscribeLocalEvent<ReagentExaminationRequiresSkillComponent, ExaminedEvent>(OnExamineReagentContainer);
 
@@ -111,7 +112,17 @@ public sealed class SkillsSystem : EntitySystem
         }
     }
 
-    private void OnRequiresSkillAttemptMelee(Entity<MeleeRequiresSkillComponent> ent, ref AttemptMeleeEvent args)
+    private void OnRequiresSkillUseInHand(Entity<RequiresSkillComponent> ent, ref UseInHandEvent args)
+    {
+        if (!HasAllSkills(args.User, ent.Comp.Skills))
+        {
+            var msg = Loc.GetString("rmc-skills-cant-use", ("item", ent));
+            _popup.PopupClient(msg, args.User, args.User, PopupType.SmallCaution);
+            args.Handled = true;
+        }
+    }
+
+    private void OnMeleeRequiresSkillAttemptMelee(Entity<MeleeRequiresSkillComponent> ent, ref AttemptMeleeEvent args)
     {
         if (!HasAllSkills(args.User, ent.Comp.Skills))
         {
@@ -121,7 +132,7 @@ public sealed class SkillsSystem : EntitySystem
         }
     }
 
-    private void OnRequiresSkillThrowAttempt(Entity<MeleeRequiresSkillComponent> ent, ref ThrowItemAttemptEvent args)
+    private void OnMeleeRequiresSkillThrowAttempt(Entity<MeleeRequiresSkillComponent> ent, ref ThrowItemAttemptEvent args)
     {
         if (!HasAllSkills(args.User, ent.Comp.Skills))
         {
@@ -135,7 +146,7 @@ public sealed class SkillsSystem : EntitySystem
         }
     }
 
-    private void OnRequiresSkillUseInHand(Entity<MeleeRequiresSkillComponent> ent, ref UseInHandEvent args)
+    private void OnMeleeRequiresSkillUseInHand(Entity<MeleeRequiresSkillComponent> ent, ref UseInHandEvent args)
     {
         if (!HasAllSkills(args.User, ent.Comp.Skills))
         {
