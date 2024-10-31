@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Kaga
-  changes:
-  - message: Fixed wielding and caseless ammo for revolvers.
-    type: Fix
-  - message: Added cylinder spinning as the default RMC14 revolver unique action.
-    type: Add
-  id: 398
-  time: '2024-07-18T11:18:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3078
 - author: Vermidia
   changes:
   - message: Dead parasites can no longer be used to infect hosts
@@ -4815,5 +4806,12 @@
   id: 897
   time: '2024-10-31T09:02:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4409
+- author: CyberTropic
+  changes:
+  - message: Added Kutjevo tiles
+    type: Add
+  id: 898
+  time: '2024-10-31T09:05:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4607
 Name: RMC14
 Order: -1
