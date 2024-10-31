@@ -54,6 +54,37 @@
   - type: Sprite
     state: we_ya_key
 
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyWEYAColony
+  name: we-ya colony encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - WEYA
+    - Colony
+    defaultChannel: WEYA
+  - type: Sprite
+    state: we_ya_key
+
+- type: entity
+  parent: CMEncryptionKey
+  id: CMEncryptionKeyICB
+  name: ICB encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - CMB
+    - WEYA
+    - MarineCommand
+    - MarineMedical
+    - MarineIntel
+    - MarineCommon
+    - Colony
+    defaultChannel: CMB
+  - type: Sprite
+    state: we_ya_key
+
 # Command
 - type: entity
   parent: CMEncryptionKey
@@ -64,6 +95,19 @@
     channels:
     - MarineCommand
     defaultChannel: MarineCommand
+  - type: Sprite
+    state: cap_key
+
+# High Command
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyHighCommand
+  name: high command encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineHighCommand
+    defaultChannel: MarineHighCommand
   - type: Sprite
     state: cap_key
 
@@ -158,6 +202,12 @@
     - MarineRequisition
     - MarineJTAC
     - MarineIntel
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
     defaultChannel: MarineCommand
 
 
@@ -217,6 +267,13 @@
     - MarineMedical
     - MarineCommand
     - MarineIntel
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineEngineer
     defaultChannel: MarineMedical
 
 # Research

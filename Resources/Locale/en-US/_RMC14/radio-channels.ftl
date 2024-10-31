@@ -1,4 +1,4 @@
-chat-radio-marine-highcommand = Marine HighCommand
+chat-radio-marine-highcommand = Marine High Command
 
 chat-radio-marine-common = Marine Common
 chat-radio-marine-command = Command
@@ -18,5 +18,6 @@ chat-radio-marine-foxtrot = Foxtrot
 
 chat-radio-colony = Colony
 chat-radio-WY = We-Ya
+chat-radio-CMB = Colony Marshal Bureau
 
 chat-radio-hivemind = Hivemind

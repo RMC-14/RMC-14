@@ -1,0 +1,14 @@
+- files: ["gau.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/afb687eaaa1feadaf4da4765ac07c994f3400d4f/sound/effects/gau.ogg"
+
+- files: ["gau_incockpit.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/afb687eaaa1feadaf4da4765ac07c994f3400d4f/sound/effects/gau_incockpit.ogg"
+
+- files: ["gauimpact.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/afb687eaaa1feadaf4da4765ac07c994f3400d4f/sound/effects/gauimpact.ogg"

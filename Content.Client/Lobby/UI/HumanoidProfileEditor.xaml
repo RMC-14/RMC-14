@@ -4,6 +4,7 @@
          xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
          xmlns:ui="clr-namespace:Content.Client.Lobby.UI"
          xmlns:namedItems="clr-namespace:Content.Client._RMC14.NamedItems"
+         xmlns:userInterface="clr-namespace:Content.Client._RMC14.UserInterface"
          HorizontalExpand="True">
         <!-- Left side -->
         <BoxContainer Orientation="Vertical" Margin="10 10 10 10" HorizontalExpand="True">
@@ -39,6 +40,8 @@
                             <Button Name="ResetButton" Disabled="True" Text="{Loc 'humanoid-profile-editor-reset-button'}"/>
                             <Button Name="ImportButton" Text="{Loc 'humanoid-profile-editor-import-button'}"/>
                             <Button Name="ExportButton" Text="{Loc 'humanoid-profile-editor-export-button'}"/>
+                            <Button Name="ExportImageButton" Text="{Loc 'humanoid-profile-editor-export-image-button'}"/>
+                            <Button Name="OpenImagesButton" Text="{Loc 'humanoid-profile-editor-open-image-button'}"/>
                         </BoxContainer>
                     </ui:HighlightedContainer>
                 </BoxContainer>
@@ -51,6 +54,12 @@
                         <!-- appearanceList -->
                         <BoxContainer Orientation="Vertical">
                             <BoxContainer Margin="10" Orientation="Vertical" HorizontalExpand="True">
+                                <BoxContainer HorizontalExpand="True">
+                                    <Label Text="{Loc 'humanoid-profile-editor-preferred-squad-label'}" />
+                                    <Control HorizontalExpand="True" />
+                                    <OptionButton Name="SquadPreferenceButton" HorizontalAlignment="Right" />
+                                </BoxContainer>
+                                <userInterface:BlueHorizontalSeparator Margin="0 5" />
                                 <!-- Species -->
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-species-label'}" />
@@ -95,7 +104,7 @@
                             <BoxContainer Margin="10" HorizontalExpand="True" Orientation="Vertical">
                                 <Label Text="{Loc 'humanoid-profile-editor-skin-color-label'}" />
                                 <Slider HorizontalExpand="True" Name="Skin" MinValue="0" MaxValue="100" Value="20" />
-                                <BoxContainer Name="RgbSkinColorContainer" Visible="False" Orientation="Vertical" HorizontalExpand="True"></BoxContainer>
+                                <BoxContainer Name="RgbSkinColorContainer" Visible="False" Orientation="Vertical" HorizontalExpand="True" />
                             </BoxContainer>
                             <!-- Hair -->
                             <BoxContainer Margin="10" Orientation="Horizontal">

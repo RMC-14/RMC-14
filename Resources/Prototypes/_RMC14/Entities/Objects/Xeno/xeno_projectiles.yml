@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   id: XenoBaseProjectile
   name: projectile
@@ -21,6 +21,7 @@
         mask:
         - Impassable
         - BulletImpassable
+        - XenoProjectileImpassable
   - type: Projectile
     impactEffect: XenoProjectileImpactEffect
     damage: {}
@@ -29,8 +30,16 @@
   - type: XenoProjectile
 
 - type: entity
+  abstract: true
+  id: XenoSpitImpactSounds
+  components:
+  - type: Projectile
+    soundHit:
+      path: /Audio/_RMC14/Xeno/acid_impact1.ogg
+
+- type: entity
+  parent: [XenoSpitImpactSounds, XenoBaseProjectile]
   id: XenoSpitProjectile
-  parent: XenoBaseProjectile
   name: spit
   categories:
   - HideSpawnMenu
@@ -43,13 +52,12 @@
   - type: Projectile
     impactEffect: null
     damage:
-      groups:
-        Burn: 20 # TODO RMC14 damage fall-off and higher at close range
+      types:
+        Heat: 20 # TODO RMC14 damage fall-off and higher at close range
   - type: CMArmorPiercing
     amount: 10
   - type: XenoProjectile
     deleteOnFriendlyXeno: true
-  - type: UncloakOnHit
 
 - type: entity
   parent: XenoSpitProjectile
@@ -65,15 +73,15 @@
   - type: Projectile
     impactEffect: null
     damage:
-      groups:
-        Burn: 30 # TODO RMC14 damage fall-off and higher at close range
+      types:
+        Heat: 30 # TODO RMC14 damage fall-off and higher at close range
   - type: ModifyTargetOnHit
     add:
     - type: UserAcided
       armorPiercing: 40
       damage:
-        groups:
-          Burn: 1
+        types:
+          Heat: 1
       duration: 20
     whitelist:
       components:
@@ -83,7 +91,7 @@
 
 - type: entity
   id: XenoSlowingSpitProjectile
-  parent: XenoBaseProjectile
+  parent: [XenoSpitImpactSounds, XenoBaseProjectile]
   name: slowing spit
   categories:
   - HideSpawnMenu
@@ -100,7 +108,7 @@
 
 - type: entity
   id: XenoScatteredSpitProjectile
-  parent: XenoBaseProjectile
+  parent: [XenoSpitImpactSounds, XenoBaseProjectile]
   name: scattered spit
   categories:
   - HideSpawnMenu
@@ -168,9 +176,24 @@
     popupType: LargeCaution
   - type: ProjectileMaxRange
     max: 10
+  - type: XenoSlowingSpitProjectile
+    slow: 0
+    paralyze: 4
+    armorResistsKnockdown: false
+  - type: ModifyTargetOnHit
+    add:
+    - type: UserAcided
+      armorPiercing: 40
+      damage:
+        types:
+          Heat: 1
+      duration: 20
+    whitelist:
+      components:
+      - Marine
 
 - type: entity
-  parent: XenoBombardAcidProjectile
+  parent: XenoBaseProjectile
   id: XenoBombardNeurotoxinProjectile
   name: glob of neurotoxin gas
   categories:
@@ -181,3 +204,124 @@
     layers:
     - state: neuro_glob
       shader: unshaded
+  - type: TimedDespawn
+    lifetime: 10
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false
+  - type: SmokeOnTrigger
+    smokePrototype: RMCSmokeNeurotoxin
+    duration: 30
+    spreadAmount: 50
+  - type: SpawnOnTerminate
+    spawn: RMCSmokeNeurotoxin
+    popup: rmc-glob-land
+    popupType: LargeCaution
+  - type: ProjectileMaxRange
+    max: 10
+  - type: XenoSlowingSpitProjectile
+    slow: 0
+    paralyze: 4
+    armorResistsKnockdown: false
+  - type: NeurotoxinInjector
+    neuroPerSecond: 5
+    injectInContact: false
+    affectsDead: false
+    affectsInfectedNested: false
+    toxinDamage:
+        groups:
+          Toxin: 2
+    oxygenDamage:
+        types:
+          Asphyxiation: 150
+    coughDamage:
+        groups:
+          Brute: 5
+
+- type: entity
+  parent: XenoSpitProjectile
+  id: XenoAcidBallSpitProjectile
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 25
+  - type: ApplyAcidStacks
+    damage:
+      types:
+        Heat: 30
+
+- type: entity
+  parent: XenoAcidBallSpitProjectile
+  id: XenoSpitProjectilePraetorian
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: XenoProjectileShieldOnHit
+  - type: PreventCollideWithDead
+
+- type: entity
+  parent: XenoSpitProjectile
+  id: XenoSpitProjectilePraetorianWarden
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 25
+
+- type: entity
+  id: XenoAcidBallProjectile
+  name: acid ball
+  description: A small, pulsating ball of gas.
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Clickable
+  - type: Physics
+    bodyType: Dynamic
+    linearDamping: 0
+    angularDamping: 0
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+        - XenoProjectileImpassable
+      fix2:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: true
+        mask:
+        - Impassable
+        - BarricadeImpassable
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_acid_ball.rsi
+    layers:
+    - state: neuro_nade
+      shader: unshaded
+  - type: Projectile
+    deleteOnCollide: false
+    damage: {}
+  - type: TriggerOnFixedDistanceStop
+    delay: 1
+  - type: ClusterGrenade
+    fillPrototype: XenoAcidBallSpitProjectile
+    maxGrenadesCount: 14
+    grenadeType: enum.GrenadeType.Shoot
+    triggerGrenades: false
+  - type: AmmoFixedDistance
+    maxRange: 6
+  - type: ClusterLimitHits
+    limit: 4
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container

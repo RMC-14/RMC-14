@@ -1,9 +1,11 @@
 ﻿- type: entity
+  abstract: true
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
-  id: CMXenoPraetorian
+  - RMCXenoSpeechSounds
+  id: CMXenoPraetorianBase
   name: Praetorian
   description: A huge, looming beast of an alien.
   components:
@@ -29,14 +31,15 @@
     - ActionXenoWatch
     - ActionXenoTailStab
     - ActionXenoAcidNormal
-    #    - ActionXenoSpit
-    #    - ActionXenoDash
-    #    - ActionXenoAcidBall
-    - ActionXenoSprayAcid
+    - ActionXenoSpit
+    - ActionXenoDash
+    - ActionXenoAcidBall
+    - ActionXenoSprayAcidPraetorian
     - ActionXenoDevolve
     tier: 3
     hudOffset: 0,0.16
     unlockAt: 900 # 15 minutes
+  - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
     - CMXenoWarrior
@@ -54,8 +57,8 @@
     damage:
       groups:
         Brute: 40
-  - type: Tackle
-    threshold: 3
+  - type: Tackle # min: 2, max: 5
+    threshold: 4
     stun: 5
     chance: 0.45
   - type: Fixtures
@@ -67,6 +70,7 @@
         density: 185
         mask:
         - MobMask
+        - BarbedBarricade
         layer:
         - MobLayer
       fix2:
@@ -76,5 +80,119 @@
         density: 185
         layer:
         - BulletImpassable
-#  - type: RMCXenoDamageVisuals # TODO RMC14
-#    prefix: praetorian
+  - type: RMCSize
+    size: Big
+  - type: RMCXenoDamageVisuals
+    prefix: praetorian
+  - type: XenoSpit
+    projectileId: XenoSpitProjectilePraetorian
+  - type: XenoSprayAcid
+    barricadeDamage:
+      types:
+        Heat: 5
+    doAfter: 0.5
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: praetorian
+  - type: AcidTrap
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.5875
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.645
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.4275
+      whitelist:
+        components:
+        - XenoHeavy
+
+- type: entity
+  parent: CMXenoPraetorianBase
+  id: CMXenoPraetorian
+  components:
+  - type: XenoSprayAcid
+    barricadeDamage:
+      types:
+        Heat: 5
+    acid: XenoAcidSprayAcidStacks
+    plasmaCost: 80
+    doAfter: 0.5
+  - type: XenoLeap
+    plasmaCost: 50
+    delay: 0
+    knockdownTime: 0
+    range: 6
+    moveDelayTime: 0
+  - type: XenoShield
+    shield: Praetorian
+  - type: XenoAcidBall
+  - type: XenoEvolution
+    strains:
+    - RMCXenoPraetorianWarden
+
+- type: entity
+  parent: CMXenoPraetorianBase
+  id: RMCXenoPraetorianWarden
+  suffix: Warden
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Praetorian/warden_praetorian.rsi
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcidNormal
+    - ActionXenoPheromones
+    - ActionXenoSpit
+    - ActionXenoSprayAcidWarden
+    - ActionXenoAid
+    - ActionXenoRetrieve
+    - ActionXenoAidToggle
+    - ActionXenoDevolve
+    hidden: true
+  - type: XenoStrain
+    name: rmc-xeno-warden-name
+    description: rmc-xeno-warden-description
+    popup: rmc-xeno-warden-popup
+  - type: XenoPheromones
+    pheromonesMultiplier: 3
+  - type: XenoSpit
+    projectileId: XenoSpitProjectilePraetorianWarden
+  - type: XenoEnergy
+  - type: XenoRetrieve
+  - type: XenoAid
+  - type: XenoSprayAcid
+    acid: XenoAcidSprayStrong
+    plasmaCost: 130
+    barricadeDamage:
+      types:
+        Heat: 5
+    doAfter: 0.5
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 30
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 3.4
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.64
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.7025
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.475
+      whitelist:
+        components:
+        - XenoHeavy

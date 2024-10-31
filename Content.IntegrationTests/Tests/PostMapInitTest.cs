@@ -9,6 +9,7 @@ using Content.Server.Spawners.Components;
 using Content.Server.Station.Components;
 using Content.Shared.CCVar;
 using Content.Shared.Roles;
+using Content.Shared.Station.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
@@ -16,6 +17,8 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
+using Content.Shared.Station.Components;
+using FastAccessors;
 using Robust.Shared.Utility;
 using YamlDotNet.RepresentationModel;
 
@@ -30,8 +33,7 @@ namespace Content.IntegrationTests.Tests
         private static readonly string[] NoSpawnMaps =
         {
             "CentComm",
-            "Dart",
-            "NukieOutpost"
+            "Dart"
         };
 
         private static readonly string[] Grids =
@@ -49,24 +51,21 @@ namespace Content.IntegrationTests.Tests
             "Fland",
             "Meta",
             "Packed",
-            "Cluster",
             "Omega",
             "Bagel",
-            "Origin",
             "CentComm",
-            "NukieOutpost",
             "Box",
-            "Europa",
-            "Saltern",
             "Core",
             "Marathon",
             "MeteorArena",
-            "Atlas",
+            "Saltern",
             "Reach",
             "Train",
             "Oasis",
-            "CMDev",
-            "Savannah",
+            "Cog",
+            "Oasis",
+            "RMCDev",
+            // "Savannah",
             "Almayer",
             "RMCAdminFax",
         };
@@ -256,10 +255,17 @@ namespace Content.IntegrationTests.Tests
                     var jobs = new HashSet<ProtoId<JobPrototype>>(comp.SetupAvailableJobs.Keys);
 
                     var spawnPoints = entManager.EntityQuery<SpawnPointComponent>()
-                        .Where(x => x.SpawnType == SpawnPointType.Job)
-                        .Select(x => x.Job!.Value);
+                        .Where(x => x.SpawnType == SpawnPointType.Job && x.Job != null)
+                        .Select(x => x.Job.Value);
 
                     jobs.ExceptWith(spawnPoints);
+
+                    spawnPoints = entManager.EntityQuery<ContainerSpawnPointComponent>()
+                        .Where(x => x.SpawnType is SpawnPointType.Job or SpawnPointType.Unset && x.Job != null)
+                        .Select(x => x.Job.Value);
+
+                    jobs.ExceptWith(spawnPoints);
+
                     Assert.That(jobs, Is.Empty, $"There is no spawnpoints for {string.Join(", ", jobs)} on {mapProto}.");
                 }
 

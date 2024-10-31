@@ -1,0 +1,234 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/465b4c500f25ad1c74cf097ca78efd702dce37a4/icons/ui_icons/map_blips.dmi",
+  "size": {
+    "x": 7,
+    "y": 7
+  },
+  "states": [
+    {
+      "name": "background"
+    },
+    {
+      "name": "unknown"
+    },
+    {
+      "name": "cic"
+    },
+    {
+      "name": "synth"
+    },
+    {
+      "name": "sea"
+    },
+    {
+      "name": "pilot"
+    },
+    {
+      "name": "dcc"
+    },
+    {
+      "name": "vc"
+    },
+    {
+      "name": "io"
+    },
+    {
+      "name": "engi"
+    },
+    {
+      "name": "ot"
+    },
+    {
+      "name": "mp"
+    },
+    {
+      "name": "warden"
+    },
+    {
+      "name": "defibbable"
+    },
+    {
+      "name": "undefibbable"
+    },
+    {
+      "name": "mst"
+    },
+    {
+      "name": "ct"
+    },
+    {
+      "name": "researcher"
+    },
+    {
+      "name": "private"
+    },
+    {
+      "name": "leader"
+    },
+    {
+      "name": "tl"
+    },
+    {
+      "name": "spec"
+    },
+    {
+      "name": "smartgunner"
+    },
+    {
+      "name": "medic"
+    },
+    {
+      "name": "correspondent"
+    },
+    {
+      "name": "surv"
+    },
+    {
+      "name": "cl"
+    },
+    {
+      "name": "xeno"
+    },
+    {
+      "name": "larva"
+    },
+    {
+      "name": "parasite"
+    },
+    {
+      "name": "lesser_drone"
+    },
+    {
+      "name": "drone"
+    },
+    {
+      "name": "runner"
+    },
+    {
+      "name": "defender"
+    },
+    {
+      "name": "burrower"
+    },
+    {
+      "name": "sentinel"
+    },
+    {
+      "name": "hivelord"
+    },
+    {
+      "name": "carrier"
+    },
+    {
+      "name": "warrior"
+    },
+    {
+      "name": "lurker"
+    },
+    {
+      "name": "spitter"
+    },
+    {
+      "name": "ravager"
+    },
+    {
+      "name": "crusher"
+    },
+    {
+      "name": "praetorian"
+    },
+    {
+      "name": "boiler"
+    },
+    {
+      "name": "predalien_larva"
+    },
+    {
+      "name": "xenoqueen"
+    },
+    {
+      "name": "predalien"
+    },
+    {
+      "name": "xenoleader"
+    },
+    {
+      "name": "border",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "predator"
+    },
+    {
+      "name": "thrall"
+    },
+    {
+      "name": "bracer_stolen"
+    },
+    {
+      "name": "apc"
+    },
+    {
+      "name": "sentry_passive"
+    },
+    {
+      "name": "sentry_firing",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "supply",
+      "delays": [
+        [
+          0.25,
+          0.25
+        ]
+      ]
+    },
+    {
+      "name": "asrs"
+    },
+    {
+      "name": "xenotunnel"
+    },
+    {
+      "name": "cluster"
+    },
+    {
+      "name": "core"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
-﻿using Content.Shared.FixedPoint;
+﻿using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Xenonids.Crippling;
 
@@ -8,6 +8,9 @@ namespace Content.Shared._RMC14.Xenonids.Crippling;
 [Access(typeof(XenoCripplingStrikeSystem))]
 public sealed partial class XenoCripplingStrikeComponent : Component
 {
+    [DataField, AutoNetworkedField]
+    public float DamageMult = 1.2f;
+
     [DataField, AutoNetworkedField]
     public FixedPoint2 PlasmaCost = 20;
 

@@ -1,6 +1,6 @@
 # m10
 - type: entity
-  parent: ClothingHeadBase
+  parent: RMCHelmetBase
   id: ArmorHelmetM10
   name: M10 pattern marine helmet
   description: A standard M10 Pattern Helmet. The inside label, along with washing information, reads, 'The difference between an open-casket and closed-casket funeral. Wear on head for best results.'. There is a built-in camera on the right side.
@@ -65,6 +65,7 @@
   - type: OverwatchCamera
   - type: SquadArmor
     layer: Helmet
+    slot: HEAD
     rsi:
       sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
       state: std-helmet
@@ -124,6 +125,7 @@
     - Biological
   - type: SquadArmor
     layer: Helmet
+    slot: HEAD
     rsi:
       sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
       state: std-helmet-medic
@@ -148,7 +150,7 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM11
   name: M11 pattern leader helmet
-  description: A slightly fancier helmet for marine leaders. This one contains a small built-in camera and has cushioning to project your fragile brain.
+  description: A slightly fancier helmet for marine leaders. This one contains a small built-in camera and has cushioning to protect your fragile brain.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m11.rsi
@@ -217,6 +219,8 @@
   - type: CMArmor
     armor: 25
     explosionArmor: 50
+  - type: ParasiteResistance
+    maxCount: 6
 
 # M35 Pyro Spec
 - type: entity
@@ -252,5 +256,4 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/t_demo.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/t_demo.rsi
-# TODO RMC14 Give hearing protection component if ear damage is added
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/t_demo.rsi # TODO RMC14 Give hearing protection component if ear damage is added

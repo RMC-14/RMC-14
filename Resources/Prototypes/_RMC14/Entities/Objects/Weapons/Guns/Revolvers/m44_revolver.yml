@@ -1,0 +1,171 @@
+﻿- type: entity
+  parent: RMCWeaponRevolverBase
+  id: RMCWeaponRevolverM44
+  name: M44 combat revolver
+  description: A bulky revolver, occasionally carried by assault troops and officers in the Marine Corps, as well as civilian law enforcement. Fires .44 Magnum rounds.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m44.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m44.rsi
+  - type: RevolverAmmoProvider
+    proto: RMCCartridgeRevolver44
+    capacity: 7
+    chambers: [ True, True, True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null, null, null ]
+  - type: RMCSelectiveFire
+    baseFireRate: 2
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCM5Bayonet
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+          - RMCAttachmentB8SmartScope
+      rmc-aslot-stock:
+        whitelist:
+          tags:
+          - RMCAttachmentM44MagnumSharpshooterStock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.715, 0.125
+      rmc-aslot-rail: 0, 0.185
+      rmc-aslot-stock: -0.59375, 0.09375
+      rmc-aslot-underbarrel: 0.375, -0.155
+
+- type: entity
+  id: RMCBaseSpeedLoader44
+  name: "M44 speed loader (.44)"
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - RMCMagazineRevolver
+    - RMCSpeedLoaderM44
+  - type: SpeedLoader
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRevolver44
+    capacity: 7
+  - type: Sprite
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+
+- type: entity
+  parent: RMCBaseSpeedLoader44
+  id: RMCSpeedLoaderM44
+  name: "M44 speed loader (.44)"
+  description: A revolver speed loader.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/m44.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: base-5
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: base
+    steps: 6
+    zeroVisible: false
+  - type: BallisticAmmoProvider
+    proto: RMCCartridgeRevolver44
+    capacity: 7
+  - type: Appearance
+
+- type: entity
+  parent: RMCSpeedLoaderM44
+  id: RMCSpeedLoader44Marksman
+  name: "M44 marksman speed loader (.44)"
+  description: A revolver speed loader filled with Marksman ammo.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/m44.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: base-5
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: base-unshaded-5
+      color: "#FF744F"
+      map: [ "enum.GunVisualLayers.MagUnshaded" ]
+  - type: BallisticAmmoProvider
+    proto: RMCCartridgeRevolver44Marksman
+    capacity: 7
+
+- type: entity
+  id: RMCCartridgeRevolver44
+  name: cartridge (.44)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRevolver44
+  - type: CartridgeAmmo
+    proto: CMBulletRevolver44
+
+- type: entity
+  id: RMCCartridgeRevolver44Marksman
+  name: cartridge (.44)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRevolver44
+  - type: CartridgeAmmo
+    proto: RMCBulletRevolver44Marksman
+
+- type: entity
+  parent: CMBulletBase
+  id: CMBulletRevolver44
+  name: bullet (.44)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 72
+  - type: CMArmorPiercing
+    amount: 5
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletRevolver44Marksman
+  name: bullet (.44 Marksman)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 9999
+      ignoreModifiers: true
+  - type: CMArmorPiercing
+    amount: 35
+
+- type: Tag
+  id: RMCSpeedLoaderM44

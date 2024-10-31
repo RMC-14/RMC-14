@@ -92,3 +92,15 @@
   license: "CC-BY-SA-3.0"
   copyright: "The CM-SS13 development team"
   source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/wrench_pickup.ogg"
+
+
+- files: ["weldingtool_on.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/items/weldingtool_on.ogg"
+
+
+- files: ["weldingtool_off.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "The CM-SS13 development team"
+  source: "https://github.com/cmss13-devs/cmss13/commits/master/sound/items/weldingtool_off.ogg"

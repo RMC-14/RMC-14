@@ -14,6 +14,9 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - CMCorrespondent
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: correspondent
   special:
   - !type:AddComponentSpecial
     components:

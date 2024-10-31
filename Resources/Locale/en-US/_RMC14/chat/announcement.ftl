@@ -16,7 +16,10 @@ rmc-announcement-ares-message = [color=white][font size=16][bold]ARES v3.2 Opera
     {$message}[/bold][/font][/color]
 
 rmc-announcement-ares-lz-designated = Command Order Issued:
-    
+
     {$name} has been designated as the primary landing zone.
 
 rmc-announcement-cooldown = Please allow at least {$seconds} seconds to pass between announcements
+
+rmc-announcement-emergency-dropship-crash = [font size=14][bold][color=white]EMERGENCY[/color][/bold][/font][font size=12][color=red]
+  DROPSHIP ON COLLISION COURSE. CRASH IMMINENT.[/color][/font]

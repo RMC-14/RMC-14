@@ -8,6 +8,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using static Robust.Client.UserInterface.Controls.BaseButton;
 using static Robust.Client.UserInterface.Controls.LineEdit;
 using static Robust.Client.UserInterface.Controls.TabContainer;
 
@@ -136,6 +137,13 @@ public sealed class LinkAccountUIController : UIController, IOnSystemChanged<Lin
             if (_linkAccount.RoundEndShoutout?.Xeno is { } xenoShoutout)
                 _patronPerksWindow.XenoShoutout.Text = xenoShoutout;
 
+            SetTabTitle(_patronPerksWindow.GhostColorTab, Loc.GetString("rmc-ui-ghost-color"));
+            SetTabVisible(_patronPerksWindow.GhostColorTab, tier is { GhostColor: true });
+            _patronPerksWindow.GhostColorSliders.Color = _linkAccount.GhostColor ?? Color.White;
+            _patronPerksWindow.GhostColorSliders.OnColorChanged += OnGhostColorChanged;
+            _patronPerksWindow.GhostColorClearButton.OnPressed += OnGhostColorClear;
+            _patronPerksWindow.GhostColorSaveButton.OnPressed += OnGhostColorSave;
+
             SetTabTitle(_patronPerksWindow.NamedItemsReferenceTab, Loc.GetString("rmc-ui-named-items"));
             SetTabVisible(_patronPerksWindow.NamedItemsReferenceTab, tier is { NamedItems: true });
 
@@ -198,6 +206,33 @@ public sealed class LinkAccountUIController : UIController, IOnSystemChanged<Lin
 
         _net.ClientSendMessage(new RMCChangeXenoShoutoutMsg { Name = text });
         UpdateExamples();
+    }
+
+    private void OnGhostColorChanged(Color color)
+    {
+        if (_patronPerksWindow is not { IsOpen: true })
+            return;
+
+        _patronPerksWindow.GhostColorSaveButton.Disabled = false;
+    }
+
+    private void OnGhostColorClear(ButtonEventArgs args)
+    {
+        if (_patronPerksWindow is not { IsOpen: true })
+            return;
+
+        _patronPerksWindow.GhostColorSliders.Color = Color.White;
+        _patronPerksWindow.GhostColorSaveButton.Disabled = true;
+        _net.ClientSendMessage(new RMCClearGhostColorMsg());
+    }
+
+    private void OnGhostColorSave(ButtonEventArgs args)
+    {
+        if (_patronPerksWindow is not { IsOpen: true })
+            return;
+
+        _patronPerksWindow.GhostColorSaveButton.Disabled = true;
+        _net.ClientSendMessage(new RMCChangeGhostColorMsg { Color = _patronPerksWindow.GhostColorSliders.Color });
     }
 
     private void UpdateExamples()

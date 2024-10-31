@@ -49,7 +49,6 @@ public sealed class NightVisionOverlay : Overlay
         {
             _entries.Add(new NightVisionRenderEntry((uid, sprite, xform),
                 eye?.Position.MapId,
-                eyeRot,
                 nightVision.SeeThroughContainers,
                 visible.Priority,
                 visible.Transparency));
@@ -62,7 +61,7 @@ public sealed class NightVisionOverlay : Overlay
             Render(entry.Ent,
                 entry.Map,
                 handle,
-                entry.EyeRot,
+                eyeRot,
                 entry.NightVisionSeeThroughContainers,
                 entry.Transparency);
         }
@@ -109,7 +108,7 @@ public sealed class NightVisionOverlay : Overlay
 public record struct NightVisionRenderEntry(
     (EntityUid, SpriteComponent, TransformComponent) Ent,
     MapId? Map,
-    Angle EyeRot,
     bool NightVisionSeeThroughContainers,
     int Priority,
-    float? Transparency);
+    float? Transparency
+);

@@ -14,12 +14,16 @@
   supervisors: cm-job-supervisors-cmo
   accessGroups:
   - CMMedbay
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: medic
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
         RMCSkillFirearms: 0
+        RMCSkillFireman: 1
         RMCSkillMedical: 3
         RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable

@@ -33,8 +33,10 @@
   - type: Lathe
     idleState: autolathe
     runningState: autolathe_n
+    producingSound: /Audio/_RMC14/Machines/print.ogg
     staticRecipes:
     - RMCBucket
+    - CMBucketMop
 #    - Janitorial bucket (10000 metal)
 #    - Flashlight (62 metal, 25 glass)
     - CMFireExtinguisher
@@ -86,7 +88,7 @@
     whitelist:
       tags:
       - Metal
-      - Sheet
+      - RMCGlass
   - type: Destructible
     thresholds:
     - trigger:
@@ -116,3 +118,5 @@
     price: 800
   - type: Machine
     board: CMAutolatheMachineCircuitboard
+  - type: Corrodible
+    isCorrodible: false

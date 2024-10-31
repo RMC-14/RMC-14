@@ -97,7 +97,8 @@
       - id: CMStasisBagFolded
         points: 6
     #    CMPressurizedReagentCanisterPouchEMPTY: 3P
-    #    CMG8AGeneralUtilityPouch: 15P
+      - id: RMCBeltUtilityGeneral
+        points: 15
     #    CMMS11SmartRefillTank: 6P
     - name: Explosives
       entries:
@@ -105,7 +106,8 @@
         points: 18
     #    CMM40HIDPIncendiaryPacketx3grenades: 18P
     #    CMM40HPDPWhitePhosphorusPacketx3grenades: 18P
-    #    CMM40HSDPSmokePacketx3grenades: 9P
+      - id: RMCPacketGrenadeSmokeFilled
+        points: 9
     #    CMM74AGMFragAirburstPacketx3airburstgrenades: 20P
     #    CMM74AGMIncendiaryAirburstPacketx3airburstgrenades: 20P
     #    CMM74AGMSmokeAirburstPacketx3airburstgrenades: 10P
@@ -145,7 +147,8 @@
         points: 12
     - name: Clothing Items
       entries:
-    #    CMScabbardMacheteFull: 6P
+      - id: RMCScabbardMacheteFilled
+        points: 6
       - id: RMCPouchMacheteFilled
         points: 8
     #    CMMarineRadioTelephonePack: 15P
@@ -155,22 +158,27 @@
       entries:
       - id: CMFireExtinguisherPortable
         points: 3
-    #    CMMotionDetector: 8P
+      - id: RMCMotionDetector
+        points: 8
       - id: RMCWhistle
         points: 3
     - name: Binoculars
       entries:
       - id: RMCBinoculars
         points: 5
-    #    CMRangeFinder: 10P
-    #    CMLaserDesignator: 15P
+      - id: RMCRangefinder
+        points: 10
+      - id: RMCLaserDesignator
+        points: 15
     - name: Helmet Optics
       entries: [ ]
     #    CMWeldingVisor: 5P
     - name: Pamphlets
-      entries: [ ]
-    #    CMPamphletJTAC: 15P
-    #    CMPamphletEngineering: 15P
+      entries:
+      - id: CMPamphletJTAC
+        points: 15
+      - id: CMPamphletEngineer
+        points: 15
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
@@ -233,8 +241,9 @@
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
+      - id: RMCBeltSmgMags
       #- id: RMCBeltHolsterFlareGun
-      #- id: CMM276ShotgunShellLoadingRig
+      - id: RMCM276ShotgunShellLoadingRig
       - id: RMCBeltGrenade
     - name: Pouches
       choices: { RMCPouch: 2 }
@@ -258,18 +267,25 @@
         recommended: true
       #- id: RMCPouchMedkit
 #        recommended: true
-      #- id: CMPressurizedReagentCanisterPouchBicaridine
+      - id: RMCPouchReagentCanisterBicaridine
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Bicaridine)
+      - id: RMCPouchReagentCanisterKelotane
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Kelotane)
+      - id: RMCPouchReagentCanisterTricordrazineRevival
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
+#      - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
 #        recommended: true
-      #- id: CMPressurizedReagentCanisterPouchKelotane
-#        recommended: true
-      #- id: CMPressurizedReagentCanisterPouchRevivalMix
-#        recommended: true
-      #- id: CMPressurizedReagentCanisterPouchTricordrazine
-#        recommended: true
-      #- id: CMPressurizedReagentCanisterPouchEmpty
-#        recommended: true
+#        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+      - id: RMCPouchReagentCanisterTricordrazine
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+      - id: RMCPouchReagentCanister
+        name: Pressurized Reagent Canister Pouch\n(EMPTY)
       - id: RMCPouchPistol
-      #- id: CMVialPouchFull
+      - id: RMCPouchVialFill
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
@@ -278,7 +294,7 @@
       - id: CMWebbingBlack
       #- id: CMShoulderHolster
       - id: CMWebbing
-    #- id: CMDropPouch
+      - id: CMWebbingPouch
     - name: Mask
       choices: { CMMask: 1 }
       entries:

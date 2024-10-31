@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared.Actions;
 using Content.Shared.Camera;
 using Content.Shared.DoAfter;
@@ -41,6 +42,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
         SubscribeLocalEvent<ScopeComponent, ItemUnwieldedEvent>(OnUnwielded);
         SubscribeLocalEvent<ScopeComponent, GetItemActionsEvent>(OnGetActions);
         SubscribeLocalEvent<ScopeComponent, ToggleActionEvent>(OnToggleAction);
+        SubscribeLocalEvent<ScopeComponent, ScopeCycleZoomLevelEvent>(OnCycleZoomLevel);
         SubscribeLocalEvent<ScopeComponent, ActivateInWorldEvent>(OnActivateInWorld);
         SubscribeLocalEvent<ScopeComponent, GunShotEvent>(OnGunShot);
         SubscribeLocalEvent<ScopeComponent, ScopeDoAfterEvent>(OnScopeDoAfter);
@@ -54,6 +56,10 @@ public abstract partial class SharedScopeSystem : EntitySystem
     private void OnMapInit(Entity<ScopeComponent> ent, ref MapInitEvent args)
     {
         _actionContainer.EnsureAction(ent.Owner, ref ent.Comp.ScopingToggleActionEntity, ent.Comp.ScopingToggleAction);
+
+        if (ent.Comp.ZoomLevels.Count > 1)
+            _actionContainer.EnsureAction(ent.Owner, ref ent.Comp.CycleZoomLevelActionEntity, ent.Comp.CycleZoomLevelAction);
+
         Dirty(ent.Owner, ent.Comp);
     }
 
@@ -90,6 +96,9 @@ public abstract partial class SharedScopeSystem : EntitySystem
     private void OnGetActions(Entity<ScopeComponent> ent, ref GetItemActionsEvent args)
     {
         args.AddAction(ref ent.Comp.ScopingToggleActionEntity, ent.Comp.ScopingToggleAction);
+
+        if (ent.Comp.ZoomLevels.Count > 1)
+            args.AddAction(ref ent.Comp.CycleZoomLevelActionEntity, ent.Comp.CycleZoomLevelAction);
     }
 
     private void OnToggleAction(Entity<ScopeComponent> ent, ref ToggleActionEvent args)
@@ -99,6 +108,25 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
         args.Handled = true;
         ToggleScoping(ent, args.Performer);
+    }
+
+    private void OnCycleZoomLevel(Entity<ScopeComponent> scope, ref ScopeCycleZoomLevelEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+
+        if (scope.Comp.CurrentZoomLevel >= scope.Comp.ZoomLevels.Count - 1)
+            scope.Comp.CurrentZoomLevel = 0;
+        else
+            ++scope.Comp.CurrentZoomLevel;
+
+        var zoomLevel = GetCurrentZoomLevel(scope);
+        if (zoomLevel.Name != null)
+            _popup.PopupClient(Loc.GetString("rcm-action-popup-scope-cycle-zoom", ("zoom", zoomLevel.Name)), args.Performer, args.Performer);
+
+        Dirty(scope);
     }
 
     private void OnActivateInWorld(Entity<ScopeComponent> ent, ref ActivateInWorldEvent args)
@@ -214,9 +242,10 @@ public abstract partial class SharedScopeSystem : EntitySystem
         var xform = Transform(user);
         var cardinalDir = xform.LocalRotation.GetCardinalDir();
         var ev = new ScopeDoAfterEvent(cardinalDir);
-        var doAfter = new DoAfterArgs(EntityManager, user, scope.Comp.Delay, ev, scope, null, scope)
+        var zoomLevel = GetCurrentZoomLevel(scope);
+        var doAfter = new DoAfterArgs(EntityManager, user, zoomLevel.DoAfter, ev, scope, null, scope)
         {
-            BreakOnMove = !scope.Comp.AllowMovement
+            BreakOnMove = !zoomLevel.AllowMovement
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
@@ -230,6 +259,8 @@ public abstract partial class SharedScopeSystem : EntitySystem
         if (TryComp(user, out ScopingComponent? scoping))
             UserStopScoping((user, scoping));
 
+        var zoomLevel = GetCurrentZoomLevel(scope);
+
         scope.Comp.User = user;
         scope.Comp.ScopingDirection = direction;
 
@@ -237,7 +268,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
         scoping = EnsureComp<ScopingComponent>(user);
         scoping.Scope = scope;
-        scoping.AllowMovement = scope.Comp.AllowMovement;
+        scoping.AllowMovement = zoomLevel.AllowMovement;
         Dirty(user, scoping);
 
         if (scope.Comp.Attachment && TryGetActiveEntity(scope, out var active))
@@ -254,7 +285,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
         _popup.PopupClient(msgUser, user, user);
 
         _actionsSystem.SetToggled(scope.Comp.ScopingToggleActionEntity, true);
-        _contentEye.SetZoom(user, Vector2.One * scope.Comp.Zoom, true);
+        _contentEye.SetZoom(user, Vector2.One * zoomLevel.Zoom, true);
         UpdateOffset(user);
     }
 
@@ -267,6 +298,12 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
         if (scope.Comp.Attachment && TryGetActiveEntity(scope, out var active))
             RemCompDeferred<GunScopingComponent>(active);
+
+        if (scope.Comp.Attachment && scope.Comp.User != null)
+        {
+            var interruptEvent = new AttachableToggleableInterruptEvent(scope.Comp.User.Value);
+            RaiseLocalEvent(scope.Owner, ref interruptEvent);
+        }
 
         scope.Comp.User = null;
         scope.Comp.ScopingDirection = null;
@@ -322,11 +359,38 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
     protected Vector2 GetScopeOffset(Entity<ScopeComponent> scope, Direction direction)
     {
-        return direction.ToVec() * ((scope.Comp.Offset * scope.Comp.Zoom - 1) / 2);
+        var zoomLevel = GetCurrentZoomLevel(scope);
+        return direction.ToVec() * ((zoomLevel.Offset * zoomLevel.Zoom - 1) / 2);
     }
 
     protected virtual void DeleteRelay(Entity<ScopeComponent> scope, EntityUid? user)
     {
+    }
+
+    private ScopeZoomLevel GetCurrentZoomLevel(Entity<ScopeComponent> scope)
+    {
+        ValidateCurrentZoomLevel(scope);
+        return scope.Comp.ZoomLevels[scope.Comp.CurrentZoomLevel];
+    }
+
+    private void ValidateCurrentZoomLevel(Entity<ScopeComponent> scope)
+    {
+        bool dirty = false;
+
+        if (scope.Comp.ZoomLevels == null || scope.Comp.ZoomLevels.Count <= 0)
+        {
+            scope.Comp.ZoomLevels = new List<ScopeZoomLevel>(){ new ScopeZoomLevel(null, 1f, 15, false, TimeSpan.FromSeconds(1)) };
+            dirty = true;
+        }
+
+        if (scope.Comp.CurrentZoomLevel >= scope.Comp.ZoomLevels.Count)
+        {
+            scope.Comp.CurrentZoomLevel = 0;
+            dirty = true;
+        }
+
+        if (dirty)
+            Dirty(scope);
     }
 
     private void UpdateOffset(EntityUid user)

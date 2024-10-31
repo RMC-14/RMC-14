@@ -13,14 +13,13 @@ using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
+using Content.Shared.Inventory;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Medical;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Timing;
-using Content.Shared.Inventory;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -47,7 +46,6 @@ public sealed class DefibrillatorSystem : EntitySystem
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly UseDelaySystem _useDelay = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly CMDefibrillatorSystem _cmDefibrillator = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
@@ -158,9 +156,8 @@ public sealed class DefibrillatorSystem : EntitySystem
         return _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, component.DoAfterDuration, new DefibrillatorZapDoAfterEvent(),
             uid, target, uid)
             {
-                BlockDuplicate = true,
-                BreakOnHandChange = true,
                 NeedHand = true,
+                BreakOnHandChange = false,
                 BreakOnMove = !component.AllowDoAfterMovement,
                 DuplicateCondition = DuplicateConditions.SameEvent,
             });

@@ -1,12 +1,11 @@
-using System.Linq;
 using System.Numerics;
 using Content.Server.Atmos.EntitySystems;
-using Content.Server.Explosion.Components;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Explosion;
 using Content.Shared.Explosion.Components;
+using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Projectiles;
@@ -218,7 +217,7 @@ public sealed partial class ExplosionSystem
         // get the entities on a tile. Note that we cannot process them directly, or we get
         // enumerator-changed-while-enumerating errors.
         List<(EntityUid, TransformComponent)> list = new();
-        var state = (list, processed, _transformQuery);
+        var state = (list, processed, EntityManager.TransformQuery);
 
         // get entities:
         lookup.DynamicTree.QueryAabb(ref state, GridQueryCallback, gridBox, true);
@@ -317,7 +316,7 @@ public sealed partial class ExplosionSystem
         var gridBox = Box2.FromDimensions(tile * DefaultTileSize, new Vector2(DefaultTileSize, DefaultTileSize));
         var worldBox = spaceMatrix.TransformBox(gridBox);
         var list = new List<(EntityUid, TransformComponent)>();
-        var state = (list, processed, invSpaceMatrix, lookup.Owner, _transformQuery, gridBox, _transformSystem);
+        var state = (list, processed, invSpaceMatrix, lookup.Owner, EntityManager.TransformQuery, gridBox, _transformSystem);
 
         // get entities:
         lookup.DynamicTree.QueryAabb(ref state, SpaceQueryCallback, worldBox, true);
@@ -443,6 +442,12 @@ public sealed partial class ExplosionSystem
         float? fireStacksOnIgnite,
         EntityUid? cause)
     {
+        if (_deleteOnExplosionQuery.HasComp(uid))
+        {
+            QueueDel(uid);
+            return;
+        }
+
         if (originalDamage != null)
         {
             GetEntitiesToDamage(uid, originalDamage, id);
@@ -451,15 +456,13 @@ public sealed partial class ExplosionSystem
                 if (damage.GetTotal() > 0 && TryComp<ActorComponent>(entity, out var actorComponent))
                 {
                     // Log damage to player entities only, cause this will create a massive amount of log spam otherwise.
-                    var damageStr = string.Join(", ", damage.DamageDict.Select(entry => $"{entry.Key}: {entry.Value}"));
-
                     if (cause != null)
                     {
-                        _adminLogger.Add(LogType.Explosion, $"{ToPrettyString(cause)} exploded at {epicenter:coordinates} and dealt {damageStr} damage to {ToPrettyString(entity)}.");
+                        _adminLogger.Add(LogType.ExplosionHit, LogImpact.Medium, $"Explosion of {ToPrettyString(cause):actor} dealt {damage.GetTotal()} damage to {ToPrettyString(entity):subject}");
                     }
                     else
                     {
-                        _adminLogger.Add(LogType.Explosion, LogImpact.Medium, $"Explosion at {epicenter:coordinates} dealt {damageStr} damage to {ToPrettyString(entity)}.");
+                        _adminLogger.Add(LogType.ExplosionHit, LogImpact.Medium, $"Explosion at {epicenter:epicenter} dealt {damage.GetTotal()} damage to {ToPrettyString(entity):subject}");
                     }
 
                 }
@@ -489,9 +492,12 @@ public sealed partial class ExplosionSystem
             && physics.BodyType == BodyType.Dynamic)
         {
             var pos = _transformSystem.GetWorldPosition(xform);
+            var dir = pos - epicenter.Position;
+            if (dir.IsLengthZero())
+                dir = _robustRandom.NextVector2().Normalized();
             _throwingSystem.TryThrow(
                 uid,
-                 pos - epicenter.Position,
+                dir,
                 physics,
                 xform,
                 _projectileQuery,
@@ -667,6 +673,7 @@ sealed class Explosion
 
     private readonly IEntityManager _entMan;
     private readonly ExplosionSystem _system;
+    private readonly SharedMapSystem _mapSystem;
 
     public readonly EntityUid VisualEnt;
 
@@ -689,11 +696,13 @@ sealed class Explosion
         IEntityManager entMan,
         IMapManager mapMan,
         EntityUid visualEnt,
-        EntityUid? cause)
+        EntityUid? cause,
+        SharedMapSystem mapSystem)
     {
         VisualEnt = visualEnt;
         Cause = cause;
         _system = system;
+        _mapSystem = mapSystem;
         ExplosionType = explosionType;
         _tileSetIntensity = tileSetIntensity;
         Epicenter = epicenter;
@@ -900,7 +909,7 @@ sealed class Explosion
         {
             if (list.Count > 0 && _entMan.EntityExists(grid.Owner))
             {
-                grid.SetTiles(list);
+                _mapSystem.SetTiles(grid.Owner, grid, list);
             }
         }
         _tileUpdateDict.Clear();

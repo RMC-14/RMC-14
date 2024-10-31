@@ -1,6 +1,25 @@
-# riot
+# tucking features
 - type: entity
   parent: ClothingHeadBase
+  id: RMCHelmetBase
+  abstract: true
+  name: helmet
+  components:
+  - type: Foldable
+    unfoldVerbText : "rmc-untuck"
+    foldVerbText: "rmc-tuck"
+    canFoldInsideContainer: true
+  - type: FoldableClothing
+    foldedHideLayers:
+    - Hair
+    - HeadTop
+    - HeadSide
+    unfoldedHideLayers: []
+  - type: HideLayerClothing
+
+# riot
+- type: entity
+  parent: RMCHelmetBase
   id: ArmorHelmetRiot
   name: riot helmet
   description: It's a helmet specifically designed to protect against close range attacks. It covers your ears.

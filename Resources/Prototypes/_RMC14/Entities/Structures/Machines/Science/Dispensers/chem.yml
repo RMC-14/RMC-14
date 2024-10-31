@@ -1,9 +1,27 @@
 - type: entity
-  parent: ChemDispenser
-  id: RMCDispenserChem
+  abstract: true
+  id: RMCChemDispenserBase
   name: chemical dispenser
   description: A complex machine for mixing elements into chemicals. A We-Ya product.
+  placement:
+    mode: SnapgridCenter
   components:
+  - type: Transform
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49, -0.49, 0.49, 0.49"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Clickable
+  - type: InteractionOutline
   - type: Sprite
     sprite: _RMC14/Structures/Machines/Science/dispenser.rsi
     layers:
@@ -19,11 +37,8 @@
         enum.PowerDeviceVisualLayers.Powered:
           True: { visible: true }
           False: { visible: false }
-  - type: ReagentDispenser
-    storageWhitelist:
-      tags:
-      - ChemDispensable
-    pack: RMCDispenserChemInventory
+  - type: RMCChemicalDispenser
+    network: RMCDispenserChem
   - type: Machine
     board: CMCircuitboardDispenserChem
   - type: ApcPowerReceiver
@@ -32,43 +47,103 @@
   - type: RequiresSkill
     skills:
       RMCSkillMedical: 3
+  - type: ItemSlots
+    slots:
+      chemical_dispenser_slot:
+        name: Chemical Dispenser
+        whitelist:
+          tags:
+          - GlassBeaker
+          - ChemDispensable
+  - type: ContainerContainer
+    containers:
+      chemical_dispenser_slot: !type:ContainerSlot
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: UserInterface
+    interfaces:
+      enum.RMCChemicalDispenserUi.Key:
+        type: RMCChemicalDispenserBui
+  - type: ActivatableUI
+    key: enum.RMCChemicalDispenserUi.Key
   - type: InteractedBlacklist
     blacklist:
       components:
       - Xeno
 
 - type: entity
-  parent: RMCDispenserChem
-  id: RMCDispenserChemEmpty
-  suffix: Empty
+  parent: RMCChemDispenserBase
+  id: RMCChemDispenserGround
+  suffix: Ground
   components:
-  - type: ReagentDispenser
-    pack: RMCEmptyInventory
+  - type: RMCChemicalDispenser
+    network: RMCChemStorageGround
 
-- type: reagentDispenserInventory
-  id: RMCDispenserChemInventory
-  inventory:
-  - RMCJugWater
-  - RMCJugEthanol
-  - RMCJugOxygen
-  - RMCJugCopper
-  - RMCJugNitrogen
-  - RMCJugHydrogen
-  - RMCJugPotassium
-  - RMCJugMercury
-  - RMCJugSulfur
-  - RMCJugCarbon
-  - RMCJugChlorine
-  - RMCJugFluorine
-  - RMCJugSodium
-  - RMCJugPhosphorus
-  - RMCJugLithium
-  - RMCJugSugar
-  - RMCJugIron
-  - RMCJugAluminum
-  - RMCJugSilicon
-  - RMCJugRadium
-  - RMCJugSulphuricAcid
+- type: entity
+  parent: RMCChemDispenserBase
+  id: RMCChemDispenserMedbay
+  suffix: Medbay
+  components:
+  - type: RMCChemicalDispenser
+    network: RMCChemStorageMedbay
 
-- type: reagentDispenserInventory
-  id: RMCEmptyInventory
+- type: entity
+  parent: RMCChemDispenserBase
+  id: RMCChemDispenserResearch
+  suffix: Research
+  components:
+  - type: RMCChemicalDispenser
+    network: RMCChemStorageResearch
+
+- type: entity
+  abstract: true
+  id: RMCChemStorageBase
+  name: chemical storage system
+  description: Storage system for a large supply of chemicals, which slowly recharges.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/chemical_storage.rsi
+    state: chemstorage
+    offset: 0.5,0
+  - type: RMCChemicalStorage
+
+- type: entity
+  parent: RMCChemStorageBase
+  id: RMCChemStorageGround
+  suffix: Ground
+  components:
+  - type: RMCChemicalStorage
+    network: RMCChemStorageGround
+
+- type: entity
+  parent: RMCChemStorageBase
+  id: RMCChemStorageMedbay
+  suffix: Medbay
+  components:
+  - type: RMCChemicalStorage
+    network: RMCChemStorageMedbay
+
+- type: entity
+  parent: RMCChemStorageBase
+  id: RMCChemStorageResearch
+  suffix: Research
+  components:
+  - type: RMCChemicalStorage
+    network: RMCChemStorageResearch

@@ -1,6 +1,7 @@
 ﻿- type: department
   parent: CMDepartmentBase
   id: CMOther
+  name: department-CMOther
   description: cm-department-Other-description
   color: "#595959"
   roles:

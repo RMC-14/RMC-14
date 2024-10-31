@@ -1,0 +1,68 @@
+﻿- type: entity
+  id: RMCJobSlotScaling
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: JobSlotScaling
+    jobs:
+      CMHospitalCorpsman:
+        factor: 40
+        c: 1
+        min: 3
+        max: 5
+        squad: true
+      CMCombatTech:
+        factor: 50
+        c: 1
+        min: 2
+        max: 4
+        squad: true
+      CMMilitaryPolice:
+        factor: 25
+        c: 2
+        min: 4
+        max: 8
+      CMStaffOfficer:
+        factor: 40
+        c: 1
+        min: 2
+        max: 5
+      CMDoctor:
+        factor: 25
+        c: 1
+        min: 4
+        max: 6
+#      CMResearcher:
+#        factor: 40
+#        c: 1
+#        min: 2
+#        max: 3
+#      CMOrdnanceTech:
+#        factor: 60
+#        c: 1
+#        min: 2
+#        max: 3
+      CMCargoTech:
+        factor: 30
+        c: 0
+        min: 2
+        max: 3
+#      CMIntelOfficer:
+#        factor: 30
+#        c: 1
+#        min: 1
+#        max: 3
+      CMWeaponsSpecialist:
+        factor: 20
+        c: 1
+        min: 2
+        max: 4
+      CMSmartGunOperator:
+        factor: 20
+        c: 1
+        min: 2
+        max: 4
+#      CMMessTech:
+#        factor: 70
+#        c: 1
+#        min: 1
+#        max: 2

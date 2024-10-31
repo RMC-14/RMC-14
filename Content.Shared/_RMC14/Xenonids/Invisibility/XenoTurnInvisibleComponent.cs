@@ -14,10 +14,19 @@ public sealed partial class XenoTurnInvisibleComponent : Component
     public TimeSpan Duration = TimeSpan.FromSeconds(30);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan Cooldown = TimeSpan.FromSeconds(20);
+    public TimeSpan FullCooldown = TimeSpan.FromSeconds(20);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan ToggleLockoutTime = TimeSpan.FromSeconds(0.5);
 
     [DataField, AutoNetworkedField]
     public float Opacity = 0.1f;
+
+    [DataField, AutoNetworkedField]
+    public float ManualRefundMultiplier = 0.9f;
+
+    [DataField, AutoNetworkedField]
+    public float RevealedRefundMultiplier = 0.5f;
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 SpeedMultiplier = FixedPoint2.New(1.15);

@@ -1,11 +1,10 @@
+using Content.Server._RMC14.Emote;
 using Content.Server.Actions;
 using Content.Server.Chat.Systems;
-using Content.Server.Speech.Components;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Humanoid;
 using Content.Shared.Speech;
 using Content.Shared.Speech.Components;
-using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -19,6 +18,7 @@ public sealed class VocalSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly ActionsSystem _actions = default!;
+    [Dependency] private readonly RMCEmoteSystem _rmcEmote = default!;
 
     public override void Initialize()
     {

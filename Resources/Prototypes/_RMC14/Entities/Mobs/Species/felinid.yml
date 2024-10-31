@@ -7,13 +7,15 @@
   components:
   - type: HumanoidAppearance
     species: Felinid
+    hideLayersOnEquip:
+    - Hair
+    - HeadTop
   - type: Sprite
     drawdepth: Mobs
-    scale: 0.8, 0.8
   - type: Vocal
     sounds:
       Male: RMCMaleFelinid
-      Unsexed: RMCMaleFelinid
+      Unsexed: RMCUnisexFelinid
       Female: RMCFemaleFelinid
   - type: Speech
     allowedEmotes: ['Hiss', 'Meow', 'Mew', 'Growl', 'Purr']
@@ -21,7 +23,4 @@
 - type: entity
   parent: BaseSpeciesDummy
   id: MobFelinidDummy
-  noSpawn: true
-  components:
-  - type: Sprite
-    scale: 0.8, 0.8
+  categories: [ HideSpawnMenu ]

@@ -168,6 +168,26 @@
     state: metal
   conditions:
     - !type:TileNotBlocked
+    - !type:TileBarricadeClear
+
+- type: construction
+  parent: RMC
+  name: Plasteel Barricade
+  id: RMCBarricadePlasteel
+  graph: BarricadePlasteelGraph
+  startNode: start
+  targetNode: nodePlasteel
+  category: construction-category-cm-structures
+  description: A military-grade hardened plasteel barricade.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
+    state: plasteel
+  conditions:
+    - !type:TileNotBlocked
+    - !type:TileBarricadeClear
 
 - type: construction
   parent: RMC
@@ -186,6 +206,7 @@
     state: wooden
   conditions:
     - !type:TileNotBlocked
+    - !type:TileBarricadeClear
 
 - type: construction
   parent: RMC
@@ -204,6 +225,7 @@
     state: turnstile
   conditions:
     - !type:TileNotBlocked
+    - !type:TileBarricadeClear
 
 - type: construction
   parent: RMC
@@ -222,6 +244,7 @@
     state: turnstile_med
   conditions:
     - !type:TileNotBlocked
+    - !type:TileBarricadeClear
 
 - type: construction
   parent: RMC
@@ -240,6 +263,7 @@
     state: handrail_a_0
   conditions:
     - !type:TileNotBlocked
+    - !type:TileBarricadeClear
 
 - type: construction
   parent: RMC
@@ -258,6 +282,7 @@
     state: folding_metal
   conditions:
     - !type:TileNotBlocked
+    - !type:TileBarricadeClear
 
 - type: construction
   parent: RMC
@@ -273,9 +298,10 @@
   canBuildInImpassable: false
   icon:
     sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
-    state: plasteel
+    state: folding_plasteel
   conditions:
     - !type:TileNotBlocked
+    - !type:TileBarricadeClear
 
 #lighting
 - type: construction

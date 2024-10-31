@@ -1,53 +1,53 @@
-﻿- type: statusIcon
+﻿- type: healthIcon
   abstract: true
   id: CMHealthIconBase
   priority: 1
   locationPreference: Left
   isShaded: true
 
-- type: statusIcon
+- type: healthIcon
   parent: CMHealthIconBase
   id: CMHealthIconHealthy
   icon:
     sprite: /Textures/_RMC14/Interface/health_hud.rsi
     state: hudhealthy
 
-- type: statusIcon
+- type: healthIcon
   parent: CMHealthIconBase
   id: CMHealthIconDeadDefib
   icon:
     sprite: /Textures/_RMC14/Interface/health_hud.rsi
     state: huddeaddefib
 
-- type: statusIcon
+- type: healthIcon
   parent: CMHealthIconBase
   id: CMHealthIconDeadClose
   icon:
     sprite: /Textures/_RMC14/Interface/health_hud.rsi
     state: huddeadclose
 
-- type: statusIcon
+- type: healthIcon
   parent: CMHealthIconBase
   id: CMHealthIconDeadAlmost
   icon:
     sprite: /Textures/_RMC14/Interface/health_hud.rsi
     state: huddeadalmost
 
-- type: statusIcon
+- type: healthIcon
   parent: CMHealthIconBase
   id: CMHealthIconDeadDNR
   icon:
     sprite: /Textures/_RMC14/Interface/health_hud.rsi
     state: huddeaddnr
 
-- type: statusIcon
+- type: healthIcon
   parent: CMHealthIconBase
   id: CMHealthIconDead
   icon:
     sprite: /Textures/_RMC14/Interface/health_hud.rsi
     state: huddead
 
-- type: statusIcon
+- type: healthIcon
   parent: CMHealthIconBase
   id: CMHealthIconHCDead
   icon:
