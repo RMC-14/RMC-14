@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed the whistle having the wrong sound and cooldown.
-    type: Fix
-  - message: Fixed weapon specialists not being able to buy a whistle.
-    type: Fix
-  id: 394
-  time: '2024-07-17T05:27:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3102
-- author: DrSmugleaf
-  changes:
   - message: Fixed xenonid stuns making a smart gun operator drop their gun.
     type: Fix
   id: 395
@@ -4813,5 +4804,13 @@
   id: 893
   time: '2024-10-31T01:16:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3881
+- author: Rainbeon
+  changes:
+  - message: The Bipod can now correctly turn 90 degrees in either direction before
+      automatically dismounting, up from 45 degrees.
+    type: Fix
+  id: 894
+  time: '2024-10-31T01:20:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4592
 Name: RMC14
 Order: -1
