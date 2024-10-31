@@ -525,3 +525,59 @@
 
 - type: Tag
   id: RMCSmgHolster
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCMatebaBelt
+  name: M276 pattern Mateba holster rig
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Mateba magnum revolver, along with five small pouches for speedloaders. It was included with the mail-order UNMC edition of the Mateba autorevolver in the early 2170s.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/mateba_belt.rsi
+    layers:
+    - state: cmateba
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+    - state: icon
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    slots:
+    - suitStorage
+    - belt
+    sprite: _RMC14/Objects/Clothing/Belt/sparepouch.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,13,1 # 7 slots
+    blacklist:
+      tags:
+      - CMFirstAidKit # TODO RMC14
+  #      - EngineerKit # TODO RMC14
+  - type: Tag
+    tags:
+    - RMCG8Pouch
+  - type: FixedItemSizeStorage
+  - type: CMHolster
+    whitelist:
+      components:
+      - Gun
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
+
+- type: entity
+  parent: RMCMatebaBelt
+  id: RMCMatebaBeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMateba
+      amount: 5
+    - id: RMCWeaponRevolverMateba
