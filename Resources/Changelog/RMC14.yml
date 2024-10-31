@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: 'Rules: Xenonids are now allowed to sneak onto the shuttle at any point
-      in the round, at their own risk.'
-    type: Tweak
-  id: 407
-  time: '2024-07-20T03:41:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3158
 - author: DrSmugleaf
   changes:
   - message: Fixed being forced to refer to "Solaris admin" as "Solaris high command"
@@ -4831,5 +4823,12 @@
   id: 906
   time: '2024-10-31T21:33:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4641
+- author: Vermidia
+  changes:
+  - message: Fixed scout rifle's damage multiplier being higher than intended
+    type: Fix
+  id: 907
+  time: '2024-10-31T21:35:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4643
 Name: RMC14
 Order: -1
