@@ -86,8 +86,8 @@
     whitelist:
       components:
       - Marine
-  - type: TimedDespawn
-    lifetime: 0.18
+  - type: ProjectileMaxRange
+    max: 6
 
 - type: entity
   id: XenoSlowingSpitProjectile
