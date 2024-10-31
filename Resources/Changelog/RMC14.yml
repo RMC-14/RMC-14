@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed xenonid stuns making a smart gun operator drop their gun.
-    type: Fix
-  id: 395
-  time: '2024-07-17T05:27:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3103
-- author: DrSmugleaf
-  changes:
   - message: Added Jimmy 'Punished Pit' Johnson figurine.
     type: Add
   id: 396
@@ -4812,5 +4805,12 @@
   id: 894
   time: '2024-10-31T01:20:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4592
+- author: MACMAN2003
+  changes:
+  - message: Added rebreathers to squad vendors.
+    type: Add
+  id: 895
+  time: '2024-10-31T08:36:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4636
 Name: RMC14
 Order: -1
