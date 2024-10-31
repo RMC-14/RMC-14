@@ -81,6 +81,7 @@
     - Shock
   - type: CMDefibrillatorBlocked
     popup: defibrillator-xeno
+    showOnExamine: false
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.2
     baseSprintSpeed: 4
