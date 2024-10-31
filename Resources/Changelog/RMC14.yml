@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: musicmanvr
-  changes:
-  - message: Made the standard issue flare less abrasive on the eyes.
-    type: Tweak
-  id: 403
-  time: '2024-07-20T01:31:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3152
 - author: DrSmugleaf
   changes:
   - message: Added squad:with Toolshed filter command.
@@ -4828,5 +4821,12 @@
   id: 902
   time: '2024-10-31T09:20:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4522
+- author: CyberTropic
+  changes:
+  - message: Added scorch marks to CAS fire
+    type: Add
+  id: 903
+  time: '2024-10-31T09:21:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4602
 Name: RMC14
 Order: -1
