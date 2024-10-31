@@ -161,7 +161,7 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
             Dirty(user, passiveInvisibility);
 
             var activeInvisibility = EnsureComp<EntityActiveInvisibleComponent>(user);
-            activeInvisibility.Opacity = 1f;
+            activeInvisibility.Opacity = comp.Opacity;
             Dirty(user, activeInvisibility);
 
             turnInvisible.UncloakTime = _timing.CurTime;
