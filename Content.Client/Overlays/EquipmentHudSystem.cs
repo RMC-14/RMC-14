@@ -31,8 +31,6 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
         SubscribeLocalEvent<T, GotEquippedEvent>(OnCompEquip);
         SubscribeLocalEvent<T, GotUnequippedEvent>(OnCompUnequip);
 
-        SubscribeLocalEvent<T, ItemToggledEvent>(OnCompToggled);
-
         SubscribeLocalEvent<T, RefreshEquipmentHudEvent<T>>(OnRefreshComponentHud);
         SubscribeLocalEvent<T, InventoryRelayedEvent<RefreshEquipmentHudEvent<T>>>(OnRefreshEquipmentHud);
 
@@ -61,11 +59,17 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
     private void OnStartup(EntityUid uid, T component, ComponentStartup args)
     {
         RefreshOverlay(uid);
+
+        var user = Transform(uid).ParentUid;
+        RefreshOverlay(user);
     }
 
     private void OnRemove(EntityUid uid, T component, ComponentRemove args)
     {
         RefreshOverlay(uid);
+
+        var user = Transform(uid).ParentUid;
+        RefreshOverlay(user);
     }
 
     private void OnPlayerAttached(LocalPlayerAttachedEvent args)
@@ -87,14 +91,6 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
     private void OnCompUnequip(EntityUid uid, T component, GotUnequippedEvent args)
     {
         RefreshOverlay(args.Equipee);
-    }
-
-    private void OnCompToggled(EntityUid uid, T component, ItemToggledEvent args)
-    {
-        if (args.User == null)
-            return;
-
-        RefreshOverlay(args.User.Value);
     }
 
     private void OnRoundRestart(RoundRestartCleanupEvent args)
