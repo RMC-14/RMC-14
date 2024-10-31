@@ -140,4 +140,7 @@ public enum LogType
     RMCTacticalMapUpdated = RMCMarineAnnounce + 15,
     RMCXenoFruitPlant = RMCMarineAnnounce + 16,
     RMCCommunicationsTower = RMCMarineAnnounce + 17,
+    RMCSuicide = RMCMarineAnnounce + 18,
+    RMCTackle = RMCMarineAnnounce + 19,
+    RMCHolster = RMCMarineAnnounce + 20,
 }
