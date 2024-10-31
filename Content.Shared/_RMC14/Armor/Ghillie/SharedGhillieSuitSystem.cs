@@ -15,6 +15,8 @@ using Robust.Shared.Timing;
 using Content.Shared.Inventory.Events;
 using Content.Shared._RMC14.Chemistry;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Coordinates;
+using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Armor.Ghillie;
 
@@ -28,6 +30,7 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
     {
@@ -166,6 +169,9 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
 
             EnsureComp<EntityIFFComponent>(user);
             RemCompDeferred<RMCNightVisionVisibleComponent>(user);
+
+            if (_net.IsServer)
+                SpawnAttachedTo(comp.CloakEffect, user.ToCoordinates());
         }
 
         if (!enabling && TryComp<EntityActiveInvisibleComponent>(user, out var invisible))

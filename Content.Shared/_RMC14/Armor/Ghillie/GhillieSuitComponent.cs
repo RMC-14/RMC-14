@@ -32,6 +32,9 @@ public sealed partial class GhillieSuitComponent : Component
     public EntityWhitelist Whitelist = new();
 
     [DataField, AutoNetworkedField]
+    public EntProtoId CloakEffect = "RMCEffectCloak";
+
+    [DataField, AutoNetworkedField]
     public EntProtoId ActionId = "RMCActionGhilliePreparePosition";
 
     [DataField, AutoNetworkedField]
