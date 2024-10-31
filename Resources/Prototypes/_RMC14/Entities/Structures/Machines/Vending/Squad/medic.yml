@@ -209,10 +209,10 @@
       takeAll: CMStandard
       entries:
       - id: CMVendorBundleSquadMedicalApparel
-      - id: CMMRE
-      #- id: CMMap # TODO: Make a map
       - id: RMCHandsLatexMarine
         name: combat sterile gloves
+      - id: CMMRE
+      #- id: CMMap # TODO: Make a map
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
