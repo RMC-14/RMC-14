@@ -16,7 +16,7 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
-  
+
 - type: entity
   abstract: true
   id: RMCAllowSuitStorageClothingJacket
@@ -238,12 +238,31 @@
   parent: RMCBaseJacket
   id: CMCoatOfficer
   name: marine service jacket
-  description: A service jacket typically worn by officers of the UNMC. 
+  description: A service jacket typically worn by officers of the UNMC.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/officer.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/officer.rsi
+
+- type: entity
+  parent: CMCoatOfficer
+  id: RMCCoatService
+  description: A service jacket typically worn by officers of the USCM. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/d_coat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/d_coat.rsi
+  - type: CMArmor
+    armor: 10 # TODO RMC14 10 melee
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-buttons-verb-fold
+    foldVerbText: rmc-buttons-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
 
 # Longcoat - This is the service jacket but for snow maps
 - type: entity
