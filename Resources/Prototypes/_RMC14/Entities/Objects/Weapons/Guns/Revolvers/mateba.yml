@@ -25,7 +25,7 @@
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
-        startingAttachable: RMCAttachmentMatebaStandard 
+        startingAttachable: RMCAttachmentMatebaStandard
         whitelist:
           tags:
           - RMCAttachmentRecoilCompensator
@@ -97,7 +97,22 @@
     - Cartridge
     - RMCCartridgeRevolverMateba
   - type: CartridgeAmmo
-    proto: CMBulletRevolver44
+    proto: RMCBulletMateba
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletMateba
+  name: bullet (.454)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 72
+  - type: CMArmorPiercing
+    amount: 5
+  - type: RMCStunOnHit
+    maxRange: 4
+    stunTime: 1
 
 - type: Tag
   id: RMCSpeedLoaderMateba

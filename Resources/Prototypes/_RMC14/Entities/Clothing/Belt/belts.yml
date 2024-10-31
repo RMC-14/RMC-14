@@ -550,3 +550,19 @@
   - type: Tag
     tags:
     - RMCG8Pouch
+  - type: FixedItemSizeStorage
+  - type: CMHolster
+    whitelist:
+      components:
+      - Gun
+
+- type: entity
+  parent: RMCMatebaBelt
+  id: RMCMatebaBeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMateba
+      amount: 5
+    - id: RMCWeaponRevolverMateba
