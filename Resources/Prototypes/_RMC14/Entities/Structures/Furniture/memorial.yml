@@ -20,6 +20,8 @@
         - FullTileMask
         layer:
         - WallLayer
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   parent: CMMemorial

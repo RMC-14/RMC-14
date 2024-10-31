@@ -17,7 +17,10 @@
   - CMWarden
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: mp
+    state: warden
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_mp
   special:
   - !type:AddComponentSpecial
     components:

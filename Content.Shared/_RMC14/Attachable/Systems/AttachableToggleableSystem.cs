@@ -37,6 +37,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly UseDelaySystem _useDelaySystem = default!;
 
     private const string attachableToggleUseDelayID = "RMCAttachableToggle";
@@ -229,11 +230,13 @@ public sealed class AttachableToggleableSystem : EntitySystem
     private void OnGunShot(Entity<AttachableToggleableComponent> attachable, ref AttachableRelayedEvent<GunShotEvent> args)
     {
         CheckUserBreakOnRotate(args.Args.User);
+        CheckUserBreakOnFullRotate(args.Args.User, args.Args.FromCoordinates, args.Args.ToCoordinates);
     }
 
     private void OnGunShot(Entity<AttachableToggleableComponent> attachable, ref GunShotEvent args)
     {
         CheckUserBreakOnRotate(args.User);
+        CheckUserBreakOnFullRotate(args.User, args.FromCoordinates, args.ToCoordinates);
     }
 
     private void OnAttemptShoot(Entity<AttachableGunPreventShootComponent> gun, ref AttemptShootEvent args)
@@ -334,6 +337,44 @@ public sealed class AttachableToggleableSystem : EntitySystem
         }
 
         RemCompDeferred<AttachableDirectionLockedComponent>(user);
+    }
+
+    private void CheckUserBreakOnFullRotate(Entity<AttachableSideLockedComponent?> user, EntityCoordinates playerPos, EntityCoordinates targetPos)
+    {
+        if (user.Comp == null)
+        {
+            if (!TryComp(user.Owner, out AttachableSideLockedComponent? lockedComponent))
+                return;
+
+            user.Comp = lockedComponent;
+        }
+
+        if (user.Comp.LockedDirection == null)
+            return;
+
+        var initialAngle = user.Comp.LockedDirection.Value.ToAngle();
+        var playerMapPos = _transformSystem.ToMapCoordinates(playerPos);
+        var targetMapPos = _transformSystem.ToMapCoordinates(targetPos);
+        var currentAngle = (targetMapPos.Position - playerMapPos.Position).ToWorldAngle();
+        
+        var differenceFromLockedAngle = (currentAngle.Degrees - initialAngle.Degrees + 180 + 360) % 360 - 180;
+
+        if (differenceFromLockedAngle > -90 && differenceFromLockedAngle < 90)
+            return;
+
+        foreach (EntityUid attachableUid in user.Comp.AttachableList)
+        {
+            if (!TryComp(attachableUid, out AttachableToggleableComponent? toggleableComponent) ||
+                !toggleableComponent.Active ||
+                !toggleableComponent.BreakOnFullRotate)
+            {
+                continue;
+            }
+
+            Toggle((attachableUid, toggleableComponent), user.Owner, toggleableComponent.DoInterrupt);
+        }
+
+        RemCompDeferred<AttachableSideLockedComponent>(user);
     }
 #endregion
 
@@ -576,6 +617,15 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
             if (directionLockedComponent.LockedDirection == null)
                 directionLockedComponent.LockedDirection = Transform(userUid.Value).LocalRotation.GetCardinalDir();
+        }
+        
+        if (attachable.Comp.BreakOnFullRotate && userUid != null)
+        {
+            var sideLockedComponent = EnsureComp<AttachableSideLockedComponent>(userUid.Value);
+            sideLockedComponent.AttachableList.Add(attachable.Owner);
+
+            if (sideLockedComponent.LockedDirection == null)
+                sideLockedComponent.LockedDirection = Transform(userUid.Value).LocalRotation.GetCardinalDir();
         }
 
         if (!attachable.Comp.SupercedeHolder)

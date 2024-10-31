@@ -111,6 +111,20 @@
     modifiers:
     - damageFalloffAddMult: 0.1
 
+- type: entity
+  parent: RMCBarrelAttachmentBase
+  id: RMCAttachmentMatebaStandard
+  name: Standard Mateba Barrel
+  description: A standard mateba barrel. Offers a balance between accuracy and fire rate.
+  components:
+  - type: Sprite
+    state: mateba_medium
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+  - type: AttachableVisuals
+  - type: AttachableWeaponRangedMods
+
 - type: Tag
   id: RMCAttachmentBarrel
 
@@ -125,3 +139,6 @@
 
 - type: Tag
   id: RMCAttachmentBarrelCharger
+
+- type: Tag
+  id: RMCAttachmentMatebaStandard

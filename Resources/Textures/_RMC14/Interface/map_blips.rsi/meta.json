@@ -1,7 +1,7 @@
-﻿{
+{
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/465b4c500f25ad1c74cf097ca78efd702dce37a4/icons/ui_icons/map_blips.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/570fc8f2777381f4a88b4029da2540c72f91b253/icons/ui_icons/map_blips.dmi",
   "size": {
     "x": 7,
     "y": 7
@@ -11,22 +11,43 @@
       "name": "background"
     },
     {
+      "name": "background_charlie"
+    },
+    {
+      "name": "background_delta"
+    },
+    {
+      "name": "background_bravo"
+    },
+    {
+      "name": "background_alpha"
+    },
+    {
+      "name": "background_echo"
+    },
+    {
+      "name": "background_foxtrot"
+    },
+    {
+      "name": "background_intel"
+    },
+    {
+      "name": "background_cbrn"
+    },
+    {
+      "name": "background_forecon"
+    },
+    {
       "name": "unknown"
     },
     {
-      "name": "cic"
+      "name": "placeholder"
     },
     {
-      "name": "synth"
+      "name": "defibbable"
     },
     {
-      "name": "sea"
-    },
-    {
-      "name": "pilot"
-    },
-    {
-      "name": "dcc"
+      "name": "undefibbable"
     },
     {
       "name": "vc"
@@ -36,30 +57,6 @@
     },
     {
       "name": "engi"
-    },
-    {
-      "name": "ot"
-    },
-    {
-      "name": "mp"
-    },
-    {
-      "name": "warden"
-    },
-    {
-      "name": "defibbable"
-    },
-    {
-      "name": "undefibbable"
-    },
-    {
-      "name": "mst"
-    },
-    {
-      "name": "ct"
-    },
-    {
-      "name": "researcher"
     },
     {
       "name": "private"
@@ -80,6 +77,21 @@
       "name": "medic"
     },
     {
+      "name": "medic_k9"
+    },
+    {
+      "name": "synth"
+    },
+    {
+      "name": "synth_k9"
+    },
+    {
+      "name": "joe"
+    },
+    {
+      "name": "background_civillian"
+    },
+    {
       "name": "correspondent"
     },
     {
@@ -87,6 +99,15 @@
     },
     {
       "name": "cl"
+    },
+    {
+      "name": "background_xeno"
+    },
+    {
+      "name": "xeno_ruler"
+    },
+    {
+      "name": "xenoleader"
     },
     {
       "name": "xeno"
@@ -146,13 +167,10 @@
       "name": "predalien_larva"
     },
     {
-      "name": "xenoqueen"
-    },
-    {
       "name": "predalien"
     },
     {
-      "name": "xenoleader"
+      "name": "xenoqueen"
     },
     {
       "name": "border",
@@ -186,18 +204,6 @@
       ]
     },
     {
-      "name": "predator"
-    },
-    {
-      "name": "thrall"
-    },
-    {
-      "name": "bracer_stolen"
-    },
-    {
-      "name": "apc"
-    },
-    {
       "name": "sentry_passive"
     },
     {
@@ -219,16 +225,397 @@
       ]
     },
     {
-      "name": "asrs"
+      "name": "asrs",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "uav"
     },
     {
       "name": "xenotunnel"
     },
     {
-      "name": "cluster"
+      "name": "cluster",
+      "delays": [
+        [
+          4,
+          0.15,
+          0.15
+        ]
+      ]
     },
     {
-      "name": "core"
+      "name": "core",
+      "delays": [
+        [
+          0.7,
+          0.125,
+          0.125,
+          0.125
+        ]
+      ]
+    },
+    {
+      "name": "background_command"
+    },
+    {
+      "name": "pilot"
+    },
+    {
+      "name": "so"
+    },
+    {
+      "name": "aso"
+    },
+    {
+      "name": "xo"
+    },
+    {
+      "name": "co"
+    },
+    {
+      "name": "ce"
+    },
+    {
+      "name": "co_wo"
+    },
+    {
+      "name": "xo_wo"
+    },
+    {
+      "name": "gp"
+    },
+    {
+      "name": "background_mp"
+    },
+    {
+      "name": "pve"
+    },
+    {
+      "name": "pve_leader"
+    },
+    {
+      "name": "pve_inspector"
+    },
+    {
+      "name": "pve_chief_inspector"
+    },
+    {
+      "name": "pve_advisor"
+    },
+    {
+      "name": "mp"
+    },
+    {
+      "name": "cmp"
+    },
+    {
+      "name": "warden"
+    },
+    {
+      "name": "rmp"
+    },
+    {
+      "name": "crmp"
+    },
+    {
+      "name": "hgsl"
+    },
+    {
+      "name": "vhg"
+    },
+    {
+      "name": "hgspec"
+    },
+    {
+      "name": "hg"
+    },
+    {
+      "name": "background_medical"
+    },
+    {
+      "name": "sea"
+    },
+    {
+      "name": "recruiter"
+    },
+    {
+      "name": "doctor"
+    },
+    {
+      "name": "researcher"
+    },
+    {
+      "name": "background_medical_WO"
+    },
+    {
+      "name": "cmo_wo"
+    },
+    {
+      "name": "chemist_wo"
+    },
+    {
+      "name": "background_shipside"
+    },
+    {
+      "name": "ot"
+    },
+    {
+      "name": "mt"
+    },
+    {
+      "name": "dcc"
+    },
+    {
+      "name": "mst"
+    },
+    {
+      "name": "nurse"
+    },
+    {
+      "name": "cargo"
+    },
+    {
+      "name": "wo_mcrew"
+    },
+    {
+      "name": "background_sof"
+    },
+    {
+      "name": "sof_officer"
+    },
+    {
+      "name": "sof_sg"
+    },
+    {
+      "name": "sof_sl"
+    },
+    {
+      "name": "background_cmb"
+    },
+    {
+      "name": "deputy"
+    },
+    {
+      "name": "icc"
+    },
+    {
+      "name": "cmb_syn"
+    },
+    {
+      "name": "obs"
+    },
+    {
+      "name": "background_twe"
+    },
+    {
+      "name": "rmc_teamleader"
+    },
+    {
+      "name": "rmc_lieutenant"
+    },
+    {
+      "name": "rmc_commander"
+    },
+    {
+      "name": "rmc_rifleman"
+    },
+    {
+      "name": "rmc_sg"
+    },
+    {
+      "name": "rmc_marksman"
+    },
+    {
+      "name": "rmc_breacher"
+    },
+    {
+      "name": "background_pmc"
+    },
+    {
+      "name": "pmc_sd"
+    },
+    {
+      "name": "pmc_ld"
+    },
+    {
+      "name": "pmc_md"
+    },
+    {
+      "name": "pmc_td"
+    },
+    {
+      "name": "pmc_sg"
+    },
+    {
+      "name": "pmc_syn"
+    },
+    {
+      "name": "whiteout"
+    },
+    {
+      "name": "background_goon"
+    },
+    {
+      "name": "goon_standard"
+    },
+    {
+      "name": "goon_leader"
+    },
+    {
+      "name": "goon_engi"
+    },
+    {
+      "name": "goon_sci"
+    },
+    {
+      "name": "background_spp"
+    },
+    {
+      "name": "spp_slt"
+    },
+    {
+      "name": "spp_lt"
+    },
+    {
+      "name": "spp_co"
+    },
+    {
+      "name": "spp_xo"
+    },
+    {
+      "name": "spp_synth"
+    },
+    {
+      "name": "spp_comsl"
+    },
+    {
+      "name": "spp_com"
+    },
+    {
+      "name": "spp_commed"
+    },
+    {
+      "name": "spp_med"
+    },
+    {
+      "name": "spp_sapper"
+    },
+    {
+      "name": "spp_spec"
+    },
+    {
+      "name": "spp_sl"
+    },
+    {
+      "name": "spp_sl_a"
+    },
+    {
+      "name": "spp_pvt"
+    },
+    {
+      "name": "spp_cont"
+    },
+    {
+      "name": "spp_cargo"
+    },
+    {
+      "name": "spp_sci"
+    },
+    {
+      "name": "spp_sec"
+    },
+    {
+      "name": "spp_doc"
+    },
+    {
+      "name": "spp_mp"
+    },
+    {
+      "name": "spp_vc"
+    },
+    {
+      "name": "spp_plt"
+    },
+    {
+      "name": "background_clf"
+    },
+    {
+      "name": "clf_synth"
+    },
+    {
+      "name": "clf_sl"
+    },
+    {
+      "name": "clf_sl_a"
+    },
+    {
+      "name": "clf_mil"
+    },
+    {
+      "name": "clf_med"
+    },
+    {
+      "name": "clf_engi"
+    },
+    {
+      "name": "clf_spec"
+    },
+    {
+      "name": "background_ua"
+    },
+    {
+      "name": "tissa"
+    },
+    {
+      "name": "peacekeeper"
+    },
+    {
+      "name": "hefa"
+    },
+    {
+      "name": "background_cultist"
+    },
+    {
+      "name": "cultist"
+    },
+    {
+      "name": "cult_leader"
+    },
+    {
+      "name": "cult_synth"
+    },
+    {
+      "name": "predator"
+    },
+    {
+      "name": "thrall"
+    },
+    {
+      "name": "bracer_stolen"
+    },
+    {
+      "name": "predator_ancient"
+    },
+    {
+      "name": "predator_leader"
+    },
+    {
+      "name": "predator_elder"
+    },
+    {
+      "name": "predator_elite"
+    },
+    {
+      "name": "predator_young"
+    },
+    {
+      "name": "hellhound"
     }
   ]
 }
