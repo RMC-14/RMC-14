@@ -18,4 +18,7 @@ public sealed partial class ActiveTacticalMapTrackedComponent : Component
 
     [DataField]
     public bool Undefibbable;
+
+    [DataField]
+    public SpriteSpecifier.Rsi? Background;
 }

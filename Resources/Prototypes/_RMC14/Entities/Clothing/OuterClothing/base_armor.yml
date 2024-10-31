@@ -10,6 +10,7 @@
     size: Huge
   - type: CMDefibrillatorBlocked
     popup: cm-defib-take-off-armor
+    showOnExamine: false
   - type: InteractedBlacklist
     blacklist:
       components:
@@ -39,7 +40,7 @@
       #TODO Various holsters should fit here - 47 belt, 1984, m44, and flaregun
       - RMCSmartPistolHolster
       - RMCSmgHolster
-      #TODO motion detector
+      - RMCMotionDetector
       #TODO walkman
 
 - type: entity

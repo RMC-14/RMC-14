@@ -47,6 +47,7 @@
   - type: Ammo
   - type: CMExplosionEffect
   - type: CMVocalizeTrigger
+  - type: RMCScorchEffect
 
 - type: entity
   parent: CMGrenadeBase
@@ -129,6 +130,7 @@
   - type: CMExplosionEffect
     maxShrapnel: 0
   - type: CMVocalizeTrigger
+  - type: RMCScorchEffect
 
 - type: entity
   parent: CMGrenadeHighExplosive
@@ -159,6 +161,7 @@
   - type: CMExplosionEffect
     maxShrapnel: 0
   - type: CMVocalizeTrigger
+  - type: RMCScorchEffect
 
 - type: entity
   parent: CMGrenadeBase
@@ -191,6 +194,7 @@
 
 - type: entity
   id: RMCExplosionEffectGrenadeShockWave
+  categories: [ HideSpawnMenu ]
   components:
   - type: TimedDespawn
     lifetime: 0.5
