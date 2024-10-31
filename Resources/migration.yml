@@ -388,6 +388,13 @@ M40Smoke: CMGrenadeSmoke
 M40HEFA: CMGrenadeFrag
 ShrapnelProjectile: CMProjectileShrapnel
 
+#2024-06-05
+DisasterVictimSpawner: CommandVisitorSpawner
+LostCargoTechnicianSpawner: VisitorCargoTechnicianSpawner
+ClownTroupeSpawner: VisitorClownSpawner
+TravelingChefSpawner: VisitorChefSpawner
+SyndieDisasterVictimSpawner: SyndieVisitorSpawner
+
 # 2024-06-06
 CMAutoLathe: CMAutolathe
 
@@ -519,7 +526,7 @@ BookChefGaming: BookHowToCookForFortySpaceman
 IntercomAssesmbly: IntercomAssembly
 
 # 2024-07-1
-CMDispenserChem : RMCDispenserChem
+CMDispenserChem : RMCChemDispenserGround
 
 # 2024-07-7
 SignScience1: SignScience
@@ -560,6 +567,9 @@ FoodMeatSnakeKebab: FoodKebabSkewer
 FoodMeatHawaiianKebab: FoodKebabSkewer
 FoodMeatKebab: FoodKebabSkewer
 FoodMeatFiestaKebab: FoodKebabSkewer
+
+#2024-08-14
+ClothingBeltSuspenders: ClothingBeltSuspendersRed
 
 # 2024-08-19
 ClothingNeckShockCollar: ClothingBackpackElectropack
@@ -858,3 +868,31 @@ ClothingHeadHatHardhatBlue: RMCHardhatBlue
 # 2024-10-11
 Crowbar: CMCrowbar
 CrowbarRed: CMCrowbarRed
+
+# 2024-10-15
+RMCDispenserChemEmpty: RMCChemDispenserGround
+RMCDispenserChem: RMCChemDispenserGround
+
+# 2024-08-22
+ComputerShuttleSalvage: null
+SalvageShuttleConsoleCircuitboard: null
+SalvageShuttleCircuitboardStealObjective: null
+
+# 2024-08-28
+ClothingBackpackDuffelSyndicateCostumeCentcom: null
+ClothingHeadsetAltCentComFake: null
+CentcomPDAFake: null
+CentcomIDCardSyndie: null
+
+# 2024-09-06
+AntimovCircuitBoard: null
+OverlordCircuitBoard: null
+
+# 2024-09-08
+HatBase: null
+
+# 2024-09-19
+BlueprintFlare: null
+
+# 2024-10-04
+BaseAdvancedPen: Pen

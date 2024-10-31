@@ -217,6 +217,14 @@ public sealed class AreaSystem : EntitySystem
         return false;
     }
 
+    public bool CanSupplyDrop(MapCoordinates mapCoordinates)
+    {
+        if (!TryGetArea(mapCoordinates, out var area, out _, out _))
+            return false;
+
+        return area.SupplyDrop;
+    }
+
     public override void Update(float frameTime)
     {
         try

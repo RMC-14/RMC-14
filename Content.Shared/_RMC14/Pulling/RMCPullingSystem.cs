@@ -42,12 +42,8 @@ public sealed class RMCPullingSystem : EntitySystem
 
     private const string PullEffect = "CMEffectGrab";
 
-    private EntityQuery<PreventPulledWhileAliveComponent> _preventPulledWhileAliveQuery;
-
     public override void Initialize()
     {
-        _preventPulledWhileAliveQuery = GetEntityQuery<PreventPulledWhileAliveComponent>();
-
         SubscribeLocalEvent<ParalyzeOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
         SubscribeLocalEvent<InfectOnPullAttemptComponent, PullAttemptEvent>(OnInfectOnPullAttempt);
 
@@ -154,6 +150,11 @@ public sealed class RMCPullingSystem : EntitySystem
         }
 
         if (puller.Pulling == null)
+            return;
+
+        var ev = new PullSlowdownAttemptEvent(puller.Pulling.Value);
+        RaiseLocalEvent(ent, ref ev);
+        if (ev.Cancelled)
             return;
 
         foreach (var slowdown in slow.Slowdowns)
@@ -270,9 +271,34 @@ public sealed class RMCPullingSystem : EntitySystem
         if (args.PulledUid != ent.Owner)
             return;
 
-        var pulled = args.PulledUid;
-        var puller = args.PullerUid;
+        PlayPullEffect(args.PullerUid, args.PulledUid);
+    }
 
+    public bool IsPulling(Entity<PullerComponent?> user, Entity<PullableComponent?> target)
+    {
+        if (!Resolve(user, ref user.Comp, false) ||
+            !Resolve(target, ref target.Comp, false))
+        {
+            return false;
+        }
+
+        return user.Comp.Pulling == target;
+    }
+
+    public bool IsBeingPulled(Entity<PullableComponent?> target, out EntityUid user)
+    {
+        user = default;
+        if (!Resolve(target, ref target.Comp, false))
+            return false;
+
+        if (target.Comp.Puller is { } puller)
+            user = puller;
+
+        return target.Comp.BeingPulled;
+    }
+
+    public void PlayPullEffect(EntityUid puller, EntityUid pulled)
+    {
         var userXform = Transform(puller);
         var targetPos = _transform.GetWorldPosition(pulled);
         var localPos = Vector2.Transform(targetPos, _transform.GetInvWorldMatrix(userXform));

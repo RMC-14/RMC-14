@@ -107,6 +107,7 @@ cm-xeno-plasma-transferred-to-other = You have transferred {$plasma} plasma to {
 cm-xeno-plasma-transferred-to-self = {$target} has transferred {$plasma} plasma to you. You now have {$total}
 cm-xeno-plasma-cannot-self = You can't transfer plasma to yourself!
 cm-xeno-plasma-other-max-zero = {$target} doesn't have any use for plasma!
+rmc-xeno-plasma-ovipositor = We can't transfer plasma to a queen mounted on her ovipositor.
 
 # Watch
 cm-xeno-watch = Watch Xeno

@@ -50,14 +50,14 @@ patreon = "https://www.patreon.com/RMC14"
 #wiki = ""
 
 [net]
-tickrate = 15
+tickrate = 25
 port = 1212
 bindto = "::,0.0.0.0"
 
 [physics]
 grid_splitting = false
-maxlinvelocity = 45 # TODO RMC14 62 when we don't get tunneling, change in GunComponent too
-target_minimum_tickrate = 90
+maxlinvelocity = 72
+target_minimum_tickrate = 120
 
 [replay]
 auto_record = true

@@ -343,7 +343,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             RMCFusionReactorState.Wrench => RMCFusionReactorState.Working,
             RMCFusionReactorState.Wire => RMCFusionReactorState.Wrench,
             RMCFusionReactorState.Weld => RMCFusionReactorState.Wire,
-            _ => throw new ArgumentOutOfRangeException()
+            _ => throw new ArgumentOutOfRangeException(),
         };
 
         Dirty(ent);
@@ -414,15 +414,14 @@ public abstract class SharedRMCPowerSystem : EntitySystem
                 // TODO: localize
                 var tool = ent.Comp.State switch
                 {
-                    RMCFusionReactorState.Wrench => $"a [color=cyan]Wrench[/color]",
-                    RMCFusionReactorState.Wire => $"[color=cyan]Wirecutters[/color]",
-                    RMCFusionReactorState.Weld => $"a [color=cyan]Welder[/color]",
+                    RMCFusionReactorState.Wrench => "a [color=cyan]Wrench[/color]",
+                    RMCFusionReactorState.Wire => "[color=cyan]Wirecutters[/color]",
+                    RMCFusionReactorState.Weld => "a [color=cyan]Welder[/color]",
                     _ => throw new ArgumentOutOfRangeException(),
                 };
 
                 args.PushMarkup($"Use {tool} to repair it!");
             }
-
 
             if (!_container.TryGetContainer(ent, ent.Comp.CellContainerSlot, out var container) ||
                 container.ContainedEntities.Count == 0)

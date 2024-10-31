@@ -192,3 +192,5 @@
   - type: AcidTrap
   - type: TacticalMapLiveUpdateOnOvi
     enabled: false
+  - type: RMCPointing
+    arrow: RMCPointingArrowBigQueen

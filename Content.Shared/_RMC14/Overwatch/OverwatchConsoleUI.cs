@@ -21,7 +21,9 @@ public enum OverwatchConsoleUI
 }
 
 [Serializable, NetSerializable]
-public sealed class OverwatchConsoleBuiState(List<OverwatchSquad> squads, Dictionary<NetEntity, List<OverwatchMarine>> marines) : BoundUserInterfaceState
+public sealed class OverwatchConsoleBuiState(
+    List<OverwatchSquad> squads,
+    Dictionary<NetEntity, List<OverwatchMarine>> marines) : BoundUserInterfaceState
 {
     public readonly List<OverwatchSquad> Squads = squads;
     public readonly Dictionary<NetEntity, List<OverwatchMarine>> Marines = marines;
@@ -74,7 +76,42 @@ public sealed class OverwatchConsoleHideBuiMsg(NetEntity target, bool hide) : Bo
 }
 
 [Serializable, NetSerializable]
-public readonly record struct OverwatchSquad(NetEntity Id, string Name, Color Color);
+public sealed class OverwatchConsolePromoteLeaderBuiMsg(NetEntity target) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity Target = target;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleSupplyDropLongitudeBuiMsg(int longitude) : BoundUserInterfaceMessage
+{
+    public readonly int Longitude = longitude;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleSupplyDropLatitudeBuiMsg(int latitude) : BoundUserInterfaceMessage
+{
+    public readonly int Latitude = latitude;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleSupplyDropLaunchBuiMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleSupplyDropSaveBuiMsg(int longitude, int latitude) : BoundUserInterfaceMessage
+{
+    public readonly int Longitude = longitude;
+    public readonly int Latitude = latitude;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleSupplyDropCommentBuiMsg(int index, string comment) : BoundUserInterfaceMessage
+{
+    public readonly int Index = index;
+    public readonly string Comment = comment;
+}
+
+[Serializable, NetSerializable]
+public record struct OverwatchSquad(NetEntity Id, string Name, Color Color, NetEntity? Leader);
 
 [Serializable, NetSerializable]
 public readonly record struct OverwatchMarine(

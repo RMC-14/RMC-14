@@ -1,6 +1,7 @@
 ﻿- type: entity
+  abstract: true
   parent: RadioHandheld
-  id: RMCRadioHandheldColony
+  id: RMCRadioHandheldColonyBase
   name: shortwave radio
   description: ""
   components:
@@ -20,9 +21,19 @@
     - ColonyHandheld
 
 - type: entity
-  parent: RMCRadioHandheldColony
+  parent: RMCRadioHandheldColonyBase
+  id: RMCRadioHandheldColony
+  suffix: On
+  components:
+  - type: ActiveListener
+    range: 4
+  - type: ActiveRadio
+    channels:
+    - ColonyHandheld
+
+- type: entity
+  parent: RMCRadioHandheldColonyBase
   id: RMCRadioHandheldColonyOff
-  name: shortwave radio
   suffix: Off
   components:
   - type: RadioMicrophone

@@ -271,6 +271,7 @@
     xenos: true
   - type: TacticalMapLiveUpdateOnOvi
     enabled: true
+  - type: MotionDetectorTracked
 
 - type: entity
   abstract: true

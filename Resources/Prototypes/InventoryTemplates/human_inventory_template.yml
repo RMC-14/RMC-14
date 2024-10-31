@@ -53,7 +53,14 @@
       stripTime: 3
       uiWindowPos: 2,2
       strippingWindowPos: 2,0
-      displayName: Ears
+      displayName: Left Ear
+    - name: ears2
+      slotTexture: ears
+      slotFlags: EARS
+      stripTime: 3
+      uiWindowPos: 2,3
+      strippingWindowPos: 2,1
+      displayName: Right Ear
     - name: head
       slotTexture: head
       slotFlags: HEAD

@@ -1,6 +1,7 @@
 - type: entity
   id: RMCASRSAccount
   name: ASRS account
+  categories: [ HideSpawnMenu ]
   components:
   - type: RequisitionsAccount
 

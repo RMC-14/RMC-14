@@ -89,9 +89,9 @@
     proto: BulletRifle10x24mm
 
 - type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: BulletRifleAR10
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -106,7 +106,7 @@
       ignoreModifiers: true
     - range: 7
       falloff: 4
-        
+
 - type: Tag
   id: RMCMagazineRifleAR10
 

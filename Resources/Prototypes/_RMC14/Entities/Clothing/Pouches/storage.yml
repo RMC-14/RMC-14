@@ -44,6 +44,28 @@
     grid:
     - 0,0,5,1 #6 slot
 
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeBureauObserverFill
+  suffix: Bureau Observer, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFireExtinguisherPortable
+    - id: CMRollerBedSpawnFolded # TODO RMC14 pepper spray
+
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeICBLiaison
+  suffix: Interstellar Commerce Bureau Liaison, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCCigarettePackWeYaGold
+    - id: RMCZippo
+    - id: RMCSpaceCash1000
+    - id: RMCSpaceCash1000 # TODO RMC14 tape recorder
+
 
 # flamertank / fueltank.rsi
 
@@ -385,7 +407,6 @@
       components:
       - ComputerBoard
       - MachineBoard
-      - MachinePart
   - type: FixedItemSizeStorage
 
 - type: entity
@@ -466,7 +487,6 @@
       - Welder
       - ComputerBoard
       - MachineBoard
-      - MachinePart
       - LightReplacer
       - EntrenchingTool
   - type: FixedItemSizeStorage

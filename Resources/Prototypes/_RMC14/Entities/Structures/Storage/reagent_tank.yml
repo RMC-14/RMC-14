@@ -1,0 +1,35 @@
+﻿- type: entity
+  parent: [StorageTank, StructureWheeled]
+  id: RMCTankReagentEmpty
+  name: reagent tank
+  description: A reagent tank, typically used to store large quantities of chemicals.
+  suffix: Empty
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/reagent_tank.rsi
+    layers:
+    - state: tank_normal
+    - state: tn_color-1
+    - state: tn_color-1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 2
+    fillBaseName: tn_color-
+  - type: DetailedExaminableSolution
+    solution: tank
+  - type: RMCToggleableSolutionTransfer
+    solution: tank
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 1000

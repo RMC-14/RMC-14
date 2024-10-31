@@ -165,9 +165,9 @@
     proto: BulletRifleM4SPRA19Impact
 
 - type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: BulletRifleM4SPRA19
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -177,9 +177,9 @@
     amount: 35
 
 - type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: BulletRifleM4SPRA19Impact
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

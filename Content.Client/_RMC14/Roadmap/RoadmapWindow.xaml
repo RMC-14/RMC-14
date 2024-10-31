@@ -71,6 +71,7 @@
                     <controls:RoadmapVersionHeader Text="Upcoming" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Burrower" Text="Lay the foundations for resin traps in strategic locations or the Hive's flanks. Flank your way around the map with the tunnel ability and dig tunnels to allow for quick transportation of fellow Aliens from the hive to the frontlines" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Intelligence officer" />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="New Varadero" Text="Planet map, ported by Aurallianz Star" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Blood types" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Ravager" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Limb damage" Text="Each limb on a marine will be able to take damage separately, being able to detach upon receiving too much damage and requiring individual treatment" />
@@ -81,8 +82,6 @@
                 <BoxContainer Name="ThirdVersion" Access="Public" Orientation="Vertical"  HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Future versions" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="More lobby art and music" Text="We are always looking for people to contribute more lobby art and music!" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="More planet maps" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="More weapons" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Communications objective" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Nuke endgame" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Synthetics" />
