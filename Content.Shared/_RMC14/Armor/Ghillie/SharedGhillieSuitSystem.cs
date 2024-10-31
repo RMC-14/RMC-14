@@ -248,7 +248,7 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
             invis.Opacity += suitComp.AddedOpacityOnShoot;
             Dirty(user, invis);
 
-            passive.ToggleTime = _timing.CurTime;
+            passive.ToggleTime = _timing.CurTime + suitComp.InvisibilityBreakDelay;
             passive.MaxOpacity = invis.Opacity;
             Dirty(user, passive);
         }

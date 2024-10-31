@@ -19,14 +19,30 @@ public sealed partial class GhillieSuitComponent : Component
     [DataField, AutoNetworkedField]
     public float Opacity = 0.01f;
 
+    /// <summary>
+    /// How much opacity is added whenever the user fires a gun.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public float AddedOpacityOnShoot = 0.1f;
 
+    /// <summary>
+    /// How long the do-after of the ability takes.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan UseDelay = TimeSpan.FromSeconds(4);
 
+    /// <summary>
+    /// How long it takes for the cloak the cloak to fade out.
+    /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan InvisibilityDelay = TimeSpan.FromSeconds(3);
+    public TimeSpan InvisibilityDelay = TimeSpan.FromSeconds(4);
+
+    /// <summary>
+    /// How long it takes for the cloak to start fading again if it is broken. (For example, shooting a gun)
+    /// </summary>
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan InvisibilityBreakDelay = TimeSpan.FromSeconds(5);
 
     [DataField, AutoNetworkedField]
     public EntityWhitelist Whitelist = new();
