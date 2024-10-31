@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added Bill Titan figurine.
-    type: Add
-  id: 393
-  time: '2024-07-17T02:55:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3100
-- author: DrSmugleaf
-  changes:
   - message: Fixed the whistle having the wrong sound and cooldown.
     type: Fix
   - message: Fixed weapon specialists not being able to buy a whistle.
@@ -4811,5 +4804,14 @@
   id: 892
   time: '2024-10-31T01:14:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4614
+- author: FungiFellow
+  changes:
+  - message: Added D18 Hummingbird, Holdout Pistol but 9mm
+    type: Add
+  - message: Fixed Holdout Pistol's ammo type, size and can fit in shoes.
+    type: Fix
+  id: 893
+  time: '2024-10-31T01:16:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3881
 Name: RMC14
 Order: -1
