@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Derrek-Larson
-  changes:
-  - message: Medical access, Requisition access to Secure Surgery Crate
-    type: Add
-  - message: Corporate access, Requisition access to WeYa Secure Crate
-    type: Add
-  id: 392
-  time: '2024-07-16T04:26:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3070
 - author: DrSmugleaf
   changes:
   - message: Added Bill Titan figurine.
@@ -4806,5 +4797,19 @@
   id: 891
   time: '2024-10-30T02:15:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4626
+- author: Vermidia
+  changes:
+  - message: Sentinel slowing spit now drains medicines in the target by 1.75 each
+      on hit
+    type: Add
+  - message: Sentinel slowing spit now modifies speed the same as other 'superslow'
+      moves
+    type: Fix
+  - message: Sentinel slowing spit knockdown and slow last longer; their durations
+      were too short before
+    type: Fix
+  id: 892
+  time: '2024-10-31T01:14:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4614
 Name: RMC14
 Order: -1
