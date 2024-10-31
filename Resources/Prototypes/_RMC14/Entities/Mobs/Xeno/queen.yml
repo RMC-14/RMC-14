@@ -189,6 +189,9 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: xenoqueen
+    background:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: xeno_ruler
   - type: AcidTrap
   - type: TacticalMapLiveUpdateOnOvi
     enabled: false

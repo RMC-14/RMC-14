@@ -44,5 +44,5 @@
           - RMCAttachmentM79Stock
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-rail: -0.065, 0.125
+      rmc-aslot-rail: 0, 0.093
       rmc-aslot-stock: -0.56, 0.0

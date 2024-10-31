@@ -2,3 +2,9 @@
   abstract: true
   id: CMReagent
   isCM: true
+
+- type: reagent
+  abstract: true
+  parent: CMReagent
+  id: CMReagentMedicine
+  group: Medicine
