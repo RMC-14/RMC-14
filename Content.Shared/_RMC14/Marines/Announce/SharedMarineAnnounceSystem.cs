@@ -1,4 +1,5 @@
-﻿using Content.Shared.Popups;
+﻿using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.UserInterface;
 using Robust.Shared.Audio;
@@ -47,6 +48,13 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         SoundSpecifier? sound = null,
         LocId? announcement = null
         )
+    {
+    }
+
+    public virtual void AnnounceSquad(
+        string message,
+        EntProtoId<SquadTeamComponent> squad,
+        SoundSpecifier? sound = null)
     {
     }
 }

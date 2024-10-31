@@ -39,6 +39,14 @@ public sealed class XenoAidSystem : EntitySystem
     private void OnXenoAidAction(Entity<XenoAidComponent> xeno, ref XenoAidActionEvent args)
     {
         var target = args.Target;
+
+        if(!HasComp<XenoComponent>(target))
+        {
+            var msg = Loc.GetString("rmc-xeno-heal-sisters");
+            _popup.PopupClient(msg, xeno, xeno, PopupType.SmallCaution);
+            return;
+        }
+
         if (!_hive.FromSameHive(xeno.Owner, target))
         {
             var msg = Loc.GetString("rmc-xeno-not-same-hive");

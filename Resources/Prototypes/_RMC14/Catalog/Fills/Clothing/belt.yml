@@ -66,7 +66,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMOintment10
+    - id: CMBurnKit10
       amount: 2
     - id: CMTraumaKit10
       amount: 2
@@ -132,3 +132,13 @@
     contents:
     - id: RMCMagazinePistolSU6
       amount: 6
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltMarineAR10
+  suffix: Filled, AR10
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleAR10
+      amount: 5

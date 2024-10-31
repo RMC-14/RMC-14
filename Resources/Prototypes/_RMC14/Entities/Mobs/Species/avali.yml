@@ -19,6 +19,7 @@
       Female: RMCFemaleAvali
   - type: Speech
     speechVerb: Parrot # Didn't come with one
+    speechSounds: MaleAvali
   - type: DamageVisuals
     damageOverlayGroups:
       Brute:
@@ -32,4 +33,4 @@
 - type: entity
   parent: BaseSpeciesDummy
   id: MobAvaliDummy
-  noSpawn: true
+  categories: [ HideSpawnMenu ]

@@ -17,7 +17,10 @@
   - CMWarden
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: mp
+    state: warden
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_mp
   special:
   - !type:AddComponentSpecial
     components:
@@ -28,12 +31,13 @@
         RMCSkillEndurance: 2
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
-        RMCSkillFireman: 1
+        RMCSkillFireman: 2
         RMCSkillLeadership: 1
         RMCSkillMedical: 1
         RMCSkillOverwatch: 1
         RMCSkillPolice: 2
     - type: MarineOrders
+    - type: RMCPointing
 
 - type: startingGear
   id: CMGearMilitaryWarden

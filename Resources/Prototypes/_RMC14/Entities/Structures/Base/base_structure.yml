@@ -119,6 +119,8 @@
   - type: RMCWallExplosionDeletable
   - type: DamageMultiplierFlags
     flags: Turf
+  - type: ReceiverXenoClaws
+    hitsToDestroy: 20
 
 - type: entity
   parent:
@@ -177,3 +179,19 @@
         density: 1000
   - type: RMCDropshipBlocked
 
+- type: entity
+  parent: MarkerBase
+  id: RMCBlockerAirtight
+  name: airtight blocker
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    layers:
+    - state: green
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Airtight

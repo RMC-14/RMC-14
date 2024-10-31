@@ -1,0 +1,21 @@
+﻿- type: entity
+  id: RMCSurvivorPresetCivilian
+  name: civilian survivor preset
+  components:
+  - type: SurvivorPreset
+    randomGear:
+    - [ CMGrenadeHighExplosive ] # TODO RMC14 incendiary molotov
+    - [ CMPackFlare ]
+    # TODO RMC14 nailgun
+    - [ RMCFireAxe ]
+    - [ CMWelder ] # TODO RMC14 industrial welder
+    - [ CMAdvFirstAidKitFilled ]
+    randomWeapon:
+    - [ RMCWeaponPistolB92FS, RMCMagazinePistolB92FS ]
+    # TODO RMC14 CMB revolver
+    - [ RMCWeaponPistolMK45, RMCMagazinePistolMK45 ]
+    - [ CMWeaponPistolM1984, CMMagazinePistolM1984 ]
+    # TODO RMC14 S&W .38 model 37 revolver
+    primaryWeapons:
+    - [ RMCBeltMarineAR10, WeaponRifleAR10 ]
+    primaryWeaponChance: 0.6

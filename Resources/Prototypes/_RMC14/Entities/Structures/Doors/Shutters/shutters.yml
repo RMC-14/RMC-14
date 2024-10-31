@@ -52,7 +52,7 @@
       path: /Audio/_RMC14/Machines/blastdoor.ogg
     performCollisionCheck: false
     canCrush: false
-    canPry: false
+    canPry: true
   - type: Appearance
   - type: UserInterface
     interfaces:
@@ -68,12 +68,19 @@
     color: "#451e5eb8"
   - type: WallMount
     arc: 360
+  - type: ApcPowerReceiver
+  - type: RMCPowerReceiver
+    idleLoad: 1
+    activeLoad: 20
+    channel: Environment
 
 - type: entity
   parent: RMCShutterBase
   id: RMCShutterAlmayer
   components:
   - type: RMCPodDoor
+  - type: Clickable
+  - type: InteractionOutline
 
 - type: entity
   parent: RMCShutterAlmayer

@@ -38,6 +38,8 @@
     whitelist:
       components:
       - ScoutWhitelist
+  - type: Corrodible
+    isCorrodible: false
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom.rsi
   - type: MeleeWeapon
@@ -163,9 +165,9 @@
     proto: BulletRifleM4SPRA19Impact
 
 - type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: BulletRifleM4SPRA19
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -175,9 +177,9 @@
     amount: 35
 
 - type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: BulletRifleM4SPRA19Impact
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

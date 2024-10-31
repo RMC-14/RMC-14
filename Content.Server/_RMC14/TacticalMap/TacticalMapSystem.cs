@@ -17,6 +17,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.UserInterface;
@@ -36,6 +37,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -94,6 +96,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, RoleAddedEvent>(OnActiveTrackedRoleAdded);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, MindAddedMessage>(OnActiveTrackedMindAdded);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, SquadMemberUpdatedEvent>(OnActiveSquadMemberUpdated);
+        SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, MobStateChangedEvent>(OnActiveMobStateChanged);
 
         SubscribeLocalEvent<RottingComponent, MapInitEvent>(OnRottingMapInit);
         SubscribeLocalEvent<RottingComponent, ComponentRemove>(OnRottingRemove);
@@ -236,7 +239,23 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private void OnActiveSquadMemberUpdated(Entity<ActiveTacticalMapTrackedComponent> ent, ref SquadMemberUpdatedEvent args)
     {
         if (_squadTeamQuery.TryComp(args.Squad, out var squad))
-            ent.Comp.Color = squad.Color;
+        {
+            if (squad.MinimapBackground != null)
+            {
+                ent.Comp.Background = squad.MinimapBackground;
+                ent.Comp.Color = Color.White;
+            }
+            else
+                ent.Comp.Color = squad.Color;
+        }
+        else if (ent.Comp.Background != null) // If we lose a squad update icon to refresh background if needed
+            UpdateIcon(ent);
+    }
+
+    private void OnActiveMobStateChanged(Entity<ActiveTacticalMapTrackedComponent> ent, ref MobStateChangedEvent args)
+    {
+        UpdateIcon(ent);
+        UpdateTracked(ent);
     }
 
     private void OnRottingMapInit(Entity<RottingComponent> ent, ref MapInitEvent args)
@@ -367,17 +386,26 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (_tacticalMapIconQuery.TryComp(tracked, out var iconComp))
         {
             tracked.Comp.Icon = iconComp.Icon;
+            tracked.Comp.Background = iconComp.Background;
             return;
         }
 
         if (!_mind.TryGetMind(tracked, out var mindId, out _) ||
-            !_job.MindTryGetJob(mindId, out _, out var jobProto) ||
+            !_job.MindTryGetJob(mindId, out var jobProto) ||
             jobProto.MinimapIcon == null)
         {
             return;
         }
 
         tracked.Comp.Icon = jobProto.MinimapIcon;
+        //Don't get job background if we have a squad, and if we do and it doesn't have it's own background
+        //Still don't apply it
+        if (!_squad.TryGetMemberSquad(tracked.Owner, out var squad))
+            tracked.Comp.Background = jobProto.MinimapBackground;
+        else if (squad.Comp.MinimapBackground == null)
+            tracked.Comp.Background = null;
+        else
+            tracked.Comp.Background = squad.Comp.MinimapBackground;
     }
 
     private void UpdateRotting(Entity<ActiveTacticalMapTrackedComponent> tracked)
@@ -388,9 +416,17 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private void UpdateColor(Entity<ActiveTacticalMapTrackedComponent> tracked)
     {
         if (_squad.TryGetMemberSquad(tracked.Owner, out var squad))
-            tracked.Comp.Color = squad.Comp.Color;
-        else if (_xenoQuery.HasComp(tracked))
-            tracked.Comp.Color = Color.FromHex("#3A064D");
+        {
+            if (squad.Comp.MinimapBackground == null)
+                tracked.Comp.Color = squad.Comp.Color;
+            else
+            {
+                tracked.Comp.Background = squad.Comp.MinimapBackground;
+                tracked.Comp.Color = Color.White;
+            }
+        }
+        else
+            tracked.Comp.Color = Color.White;
     }
 
     private void UpdateTracked(Entity<ActiveTacticalMapTrackedComponent> ent)
@@ -412,10 +448,13 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             ent.Comp.Map = xform.GridUid;
         }
 
+        var status = TacticalMapBlipStatus.Alive;
         if (_rottingQuery.HasComp(ent))
-            ent.Comp.Undefibbable = true;
+            status = TacticalMapBlipStatus.Undefibabble;
+        else if (_mobState.IsDead(ent))
+            status = TacticalMapBlipStatus.Defibabble;
 
-        var blip = new TacticalMapBlip(indices, icon, ent.Comp.Color, ent.Comp.Undefibbable);
+        var blip = new TacticalMapBlip(indices, icon, ent.Comp.Color, status, ent.Comp.Background);
         if (_marineQuery.HasComp(ent))
         {
             tacticalMap.MarineBlips[ent.Owner.Id] = blip;
@@ -461,6 +500,17 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             {
                 map.MarineLines = lines;
                 map.LastUpdateMarineBlips = map.MarineBlips.ToDictionary();
+
+                var includeEv = new TacticalMapIncludeXenosEvent();
+                RaiseLocalEvent(ref includeEv);
+                if (includeEv.Include)
+                {
+                    foreach (var blip in map.XenoBlips)
+                    {
+                        map.LastUpdateMarineBlips.Add(blip.Key, blip.Value);
+                    }
+                }
+
                 _marineAnnounce.AnnounceARES(user, "The UNMC tactical map has been updated.", sound);
                 _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the marine tactical map for {{ToPrettyString(mapId)}}");
             }
