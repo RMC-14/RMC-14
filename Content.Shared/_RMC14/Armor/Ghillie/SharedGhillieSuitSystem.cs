@@ -21,7 +21,7 @@ namespace Content.Shared._RMC14.Armor.Ghillie;
 /// <summary>
 /// Handles the ghillie suit's prepare position ability.
 /// </summary>
-public abstract class SharedGhillieSuitSystem : EntitySystem
+public sealed class SharedGhillieSuitSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -232,14 +232,16 @@ public abstract class SharedGhillieSuitSystem : EntitySystem
         if (suit == null)
             return;
 
-        if (suit.Value.Comp.Enabled
+        var suitComp = suit.Value.Comp;
+
+        if (suitComp.Enabled
             && TryComp<EntityActiveInvisibleComponent>(user, out var invis)
             && TryComp<RMCPassiveStealthComponent>(user, out var passive))
         {
             passive.ToggleTime = _timing.CurTime;
             Dirty(user, passive);
 
-            invis.Opacity = 1;
+            invis.Opacity += suitComp.AddedOpacityOnShoot;
             Dirty(user, invis);
         }
     }

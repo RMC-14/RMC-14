@@ -20,6 +20,9 @@ public sealed partial class GhillieSuitComponent : Component
     public float Opacity = 0.02f;
 
     [DataField, AutoNetworkedField]
+    public float AddedOpacityOnShoot = 0.05f;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan UseDelay = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
