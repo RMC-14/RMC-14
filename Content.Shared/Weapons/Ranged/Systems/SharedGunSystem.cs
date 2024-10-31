@@ -1017,7 +1017,7 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     public void RefreshModifiers(Entity<GunComponent?> gun)
     {
-        if (!Resolve(gun, ref gun.Comp))
+        if (!Resolve(gun, ref gun.Comp, false))
             return;
 
         var comp = gun.Comp;
