@@ -72,7 +72,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMedicAutoInjectorTricordrazine15Revival15
+    - id: RMCMedicAutoInjectorTricordrazineRevival15
   - type: ItemSlots
     slots:
       pressurized_reagent_canister:
