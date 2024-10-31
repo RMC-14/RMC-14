@@ -35,6 +35,8 @@
     - type: CMVendorUser
       points: 45
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: "HM"
 
 - type: startingGear
   id: CMGearHospitalCorpsman

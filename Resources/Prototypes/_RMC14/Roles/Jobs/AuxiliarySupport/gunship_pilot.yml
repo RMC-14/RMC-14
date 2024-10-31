@@ -39,6 +39,8 @@
     - type: CMVendorUser
       points: 45
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "GP"
 
 - type: startingGear
   id: CMGearPilotGunship

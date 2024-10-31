@@ -61,6 +61,8 @@
     - type: CMVendorUser
       points: 45
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "SEA"
 
 - type: startingGear
   id: CMGearSeniorEnlistedAdvisor

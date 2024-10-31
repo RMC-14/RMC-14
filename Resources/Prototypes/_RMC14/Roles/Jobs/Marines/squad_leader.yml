@@ -43,6 +43,8 @@
       leader: true
     - type: SquadLeader
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "SL"
 
 - type: startingGear
   id: CMGearSquadLeader

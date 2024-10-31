@@ -30,6 +30,8 @@
         RMCSkillVehicles: 1
     - type: CMVendorUser
       points: 50
+    - type: JobPrefix
+      prefix: "CL"
 
 - type: startingGear
   id: CMGearLiaison

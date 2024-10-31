@@ -33,6 +33,8 @@
     - type: CMVendorUser
       points: 45
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: "ComTech"
 
 - type: startingGear
   id: CMGearCombatTech

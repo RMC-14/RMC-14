@@ -47,6 +47,8 @@
     - type: CMVendorUser
       points: 120
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "XO"
 
 - type: startingGear
   id: CMGearExecutiveOfficer
