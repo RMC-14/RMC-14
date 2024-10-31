@@ -40,7 +40,6 @@ public sealed partial class GhillieSuitComponent : Component
     /// <summary>
     /// How long it takes for the cloak to start fading again if it is broken. (For example, shooting a gun)
     /// </summary>
-
     [DataField, AutoNetworkedField]
     public TimeSpan InvisibilityBreakDelay = TimeSpan.FromSeconds(5);
 
