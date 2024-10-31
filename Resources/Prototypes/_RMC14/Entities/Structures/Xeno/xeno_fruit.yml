@@ -64,7 +64,7 @@
   - type: Corrodible
     isCorrodible: false
   - type: XenoFruit
-    consumeDelay: 5
+    consumeDelay: 2
     canConsumeAtFull: true
 
 - type: entity

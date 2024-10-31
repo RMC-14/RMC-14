@@ -91,6 +91,9 @@
     landingDamage:
       types:
         Blunt: 5000
+  - type: PowerLoaderGrabbable
+    virtualRight: RMCVirtualDropshipGearRight
+    virtualLeft: RMCVirtualDropshipGearLeft
 
 - type: entity
   parent: BaseStructureDynamic

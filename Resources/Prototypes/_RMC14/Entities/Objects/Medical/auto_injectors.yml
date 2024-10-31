@@ -237,7 +237,7 @@
 
 - type: entity
   parent: CMAutoInjector
-  id: RMCMedicAutoInjector
+  id: RMCMedicAutoInjector15
   name: medic autoinjector (M-M)
   description: A custom-made professional injector, likely from research. Has a similar lock to pill bottles, and fits up to 6 injections.
   components:
@@ -254,10 +254,121 @@
     - RMCAutoInjectorMedical
   - type: RefillableSolution
     solution: pen
+  - type: RequiresSkill
+    skills:
+      RMCSkillMedical: 2
+  - type: Hypospray
+    transferAmount: 15
 
 - type: entity
-  parent: RMCMedicAutoInjector
-  id: RMCMedicAutoInjectorBicaridine
+  parent: RMCMedicAutoInjector15
+  id: RMCMedicAutoInjector30
+  name: medic autoinjector (M-L)
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 180
+  - type: Hypospray
+    transferAmount: 30
+
+- type: entity
+  parent: RMCMedicAutoInjector15
+  id: RMCMedicAutoInjectorEZ1
+  name: autoinjector (E-U)
+  description: A custom-made EZ autoinjector, likely from research. Injects its entire payload immediately and doesn't require any training.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/ez_medic_auto_injector.rsi
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 1
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+  - type: MedicallyUnskilledDoAfter
+    min: 0
+  - type: RequiresSkill
+    skills:
+      RMCSkillMedical: 0
+  - type: Hypospray
+    transferAmount: 1
+
+- type: entity
+  parent: RMCMedicAutoInjectorEZ1
+  id: RMCMedicAutoInjectorEZ5
+  name: autoinjector (E-VS)
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 5
+  - type: Hypospray
+    transferAmount: 5
+
+- type: entity
+  parent: RMCMedicAutoInjectorEZ1
+  id: RMCMedicAutoInjectorEZ10
+  name: autoinjector (E-S)
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 10
+  - type: Hypospray
+    transferAmount: 10
+
+- type: entity
+  parent: RMCMedicAutoInjectorEZ1
+  id: RMCMedicAutoInjectorEZ15
+  name: autoinjector (E-T)
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 15
+  - type: Hypospray
+    transferAmount: 15
+
+- type: entity
+  parent: RMCMedicAutoInjectorEZ1
+  id: RMCMedicAutoInjectorEZ30
+  name: autoinjector (E-M)
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 30
+  - type: Hypospray
+    transferAmount: 30
+
+- type: entity
+  parent: RMCMedicAutoInjectorEZ1
+  id: RMCMedicAutoInjectorEZ45
+  name: autoinjector (E-L)
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 45
+  - type: Hypospray
+    transferAmount: 45
+
+- type: entity
+  parent: RMCMedicAutoInjectorEZ1
+  id: RMCMedicAutoInjectorEZ60
+  name: autoinjector (E-XL)
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 60
+  - type: Hypospray
+    transferAmount: 60
+
+- type: entity
+  parent: RMCMedicAutoInjector15
+  id: RMCMedicAutoInjectorBicaridine15
   suffix: Bicaridine
   components:
   - type: SolutionContainerManager
@@ -269,8 +380,8 @@
           Quantity: 90
 
 - type: entity
-  parent: RMCMedicAutoInjector
-  id: RMCMedicAutoInjectorKelotane
+  parent: RMCMedicAutoInjector15
+  id: RMCMedicAutoInjectorKelotane15
   suffix: Kelotane
   components:
   - type: SolutionContainerManager
@@ -282,8 +393,8 @@
           Quantity: 90
 
 - type: entity
-  parent: RMCMedicAutoInjector
-  id: RMCMedicAutoInjectorTricordrazineRevival
+  parent: RMCMedicAutoInjector15
+  id: RMCMedicAutoInjectorTricordrazineRevival15
   suffix: Tricordrazine - Revival
   components:
   - type: SolutionContainerManager
@@ -299,8 +410,8 @@
           Quantity: 30
 
 - type: entity
-  parent: RMCMedicAutoInjector
-  id: RMCMedicAutoInjectorTricordrazine
+  parent: RMCMedicAutoInjector15
+  id: RMCMedicAutoInjectorTricordrazine15
   suffix: Tricordrazine
   components:
   - type: SolutionContainerManager

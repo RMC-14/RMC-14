@@ -215,6 +215,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

@@ -54,15 +54,15 @@
 #    - Autoinjector (C-S) (300 Plastic)
 #    - Autoinjector (C-M) (300 Plastic)
 #    - Autoinjector (C-L) (300 Plastic)
-#    - EZ Autoinjector (E-U) (300 Plastic)
-#    - EZ Autoinjector (E-VS) (300 Plastic)
-#    - EZ Autoinjector (E-S) (300 Plastic)
-#    - EZ Autoinjector (E-T) (300 Plastic)
-#    - EZ Autoinjector (E-M) (300 Plastic)
-#    - EZ Autoinjector (E-L) (300 Plastic)
-#    - EZ Autoinjector (E-XL) (300 Plastic)
-    - RMCMedicAutoInjector
-#    - Medic Autoinjector (M-L) (300 Plastic)
+    - RMCMedicAutoInjectorEZ1
+    - RMCMedicAutoInjectorEZ5
+    - RMCMedicAutoInjectorEZ10
+    - RMCMedicAutoInjectorEZ15
+    - RMCMedicAutoInjectorEZ30
+    - RMCMedicAutoInjectorEZ45
+    - RMCMedicAutoInjectorEZ60
+    - RMCMedicAutoInjector15
+    - RMCMedicAutoInjector30
     - CMHypospray
     - CMBloodPack
     - RMCBeakerHighCapacity
@@ -83,6 +83,9 @@
     - RMCPouchReagentCanister
     - RMCPressurizedCanister
   - type: MaterialStorage
+    storage:
+      CMGlass: 533
+      RMCPlastic: 2000
     whitelist:
       tags:
       - Plastic

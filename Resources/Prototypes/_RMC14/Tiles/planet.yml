@@ -223,6 +223,79 @@
   sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt_edge_3.png
 
 - type: tile
+  parent: CMPlanetGrassDirt
+  id: CMPlanetGrassDirt2NW
+  name: grass dirt2 nw
+  sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt2_corner_0.png
+  semiWeedable: true
+
+- type: tile
+  parent: CMPlanetGrassDirt2NW # reparent to inherit semiweedable property
+  id: CMPlanetGrassDirt2NE
+  name: grass dirt2 ne
+  sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt2_corner_1.png
+
+- type: tile
+  parent: CMPlanetGrassDirt2NW
+  id: CMPlanetGrassDirt2SE
+  name: grass dirt2 se
+  sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt2_corner_2.png
+
+- type: tile
+  parent: CMPlanetGrassDirt2NW
+  id: CMPlanetGrassDirt2SW
+  name: grass dirt2 sw
+  sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt2_corner_3.png
+
+- type: tile
+  parent: CMPlanetGrassDirt2NW
+  id: CMPlanetGrassDirt2NW2
+  name: grass dirt2 nw 2
+  sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt2_corner2_0.png
+
+- type: tile
+  parent: CMPlanetGrassDirt2NW
+  id: CMPlanetGrassDirt2SE2
+  name: grass dirt2 se 2
+  sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt2_corner2_1.png
+
+- type: tile
+  parent: CMPlanetGrassDirt2NW
+  id: CMPlanetGrassDirt2NE2
+  name: grass dirt2 ne 2
+  sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt2_corner2_2.png
+
+- type: tile
+  parent: CMPlanetGrassDirt2NW
+  id: CMPlanetGrassDirt2SW2
+  name: grass dirt2 sw 2
+  sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt2_corner2_3.png
+
+- type: tile
+  parent: CMPlanetGrassDirt2NW
+  id: CMPlanetGrassDirt2North
+  name: grass dirt2 north
+  sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt2_edge_0.png
+
+- type: tile
+  parent: CMPlanetGrassDirt2NW
+  id: CMPlanetGrassDirt2South
+  name: grass dirt2 south
+  sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt2_edge_1.png
+
+- type: tile
+  parent: CMPlanetGrassDirt2NW
+  id: CMPlanetGrassDirt2West
+  name: grass dirt2 west
+  sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt2_edge_2.png
+
+- type: tile
+  parent: CMPlanetGrassDirt2NW
+  id: CMPlanetGrassDirt2East
+  name: grass dirt2 east
+  sprite: /Textures/_RMC14/Tiles/planet/grass_dirt/grassdirt2_edge_3.png
+
+- type: tile
   parent: CMPlanetBase
   id: CMPlanetWood
   name: tiles-cm-wood

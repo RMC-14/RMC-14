@@ -12,12 +12,13 @@
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi # TODO RMC14 effects
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi # Stock has no effects, no reason to make it an attachment
       state: ar10_stock
       offset: -0.5, 0
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/ar10.rsi
   - type: Gun
+    shotsPerBurst: 3
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -33,6 +34,13 @@
     scatterUnwielded: 20
     baseFireRate: 2
     burstScatterMult: 2
+    modifiers:
+      Burst:
+        fireDelay: 0.1665
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
   - type: MagazineAmmoProvider
     autoEject: false
     soundAutoEject: null
@@ -49,6 +57,38 @@
           - RMCMagazineRifleAR10
   - type: GunDamageModifier
     multiplier: 1.4
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight      
+          - RMCAttachmentVerticalGrip
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.75, 0.00
+      rmc-aslot-rail: -0.23, 0.091
+      rmc-aslot-underbarrel: 0.35, -0.3
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -86,7 +126,7 @@
     - Cartridge
     - RMCCartridgeRifleAR10
   - type: CartridgeAmmo
-    proto: BulletRifle10x24mm
+    proto: BulletRifleAR10
 
 - type: entity
   parent: RMCBaseBullet

@@ -25,9 +25,9 @@
   - type: Projectile
     impactEffect: XenoProjectileImpactEffect
     damage: {}
-  - type: TimedDespawn
-    lifetime: 0.2
   - type: XenoProjectile
+  - type: ProjectileMaxRange
+    max: 7
 
 - type: entity
   abstract: true
@@ -86,8 +86,8 @@
     whitelist:
       components:
       - Marine
-  - type: TimedDespawn
-    lifetime: 0.18
+  - type: ProjectileMaxRange
+    max: 6
 
 - type: entity
   id: XenoSlowingSpitProjectile
@@ -105,6 +105,9 @@
     armorResistsKnockdown: true
   - type: XenoProjectile
     deleteOnFriendlyXeno: true
+  - type: DrainOnHit
+  - type: ProjectileMaxRange
+    max: 6
 
 - type: entity
   id: XenoScatteredSpitProjectile
@@ -124,6 +127,8 @@
     armorResistsKnockdown: false
   - type: XenoProjectile
     deleteOnFriendlyXeno: true
+  - type: ProjectileMaxRange
+    max: 4
 
 - type: entity
   id: XenoBoneChipsProjectile
@@ -140,8 +145,6 @@
   - type: XenoSlowingSpitProjectile
     slow: 5
     paralyze: 0
-  - type: TimedDespawn
-    lifetime: 0.2
   - type: Projectile
     impactEffect: null
     damage:
@@ -149,6 +152,8 @@
         Slash: 10
   - type: XenoProjectile
     deleteOnFriendlyXeno: false
+  - type: ProjectileMaxRange
+    max: 4
 
 - type: entity
   parent: XenoBaseProjectile
@@ -318,8 +323,9 @@
     maxGrenadesCount: 14
     grenadeType: enum.GrenadeType.Shoot
     triggerGrenades: false
-  - type: AmmoFixedDistance
-    maxRange: 6
+  - type: ProjectileMaxRange
+    max: 5
+    delete: false
   - type: ClusterLimitHits
     limit: 4
   - type: ContainerContainer
