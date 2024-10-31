@@ -7,7 +7,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Client._RMC14.Storage;
 
-public sealed class RMCIconLabelsSystem : EntitySystem
+public sealed class RMCIconLabelsSystem : SharedRMCIconLabelSystem
 {
     [Dependency] private readonly IResourceCache _cache = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
@@ -33,8 +33,8 @@ public sealed class RMCIconLabelsSystem : EntitySystem
 
         var scale = 2 * uiScale;
         if (iconLabel.LabelTextLocId is null ||
-            !Loc.TryGetString(iconLabel.LabelTextLocId, out var msg) ||
-            msg.length > iconLabel.LabelMaxSize)
+            !Loc.TryGetString(iconLabel.LabelTextLocId, out var msg, iconLabel.LabelTextParams.ToArray()) ||
+            msg.Length > iconLabel.LabelMaxSize)
         {
             return;
         }
