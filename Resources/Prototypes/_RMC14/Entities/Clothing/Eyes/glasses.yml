@@ -94,6 +94,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
     state: icon-on
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
   - type: ItemToggle
     soundActivate:
       path: /Audio/_RMC14/Machines/click.ogg
@@ -120,6 +122,7 @@
         enum.ToggleVisuals.Layer:
           True: {state: icon-on}
           False: {state: icon}
+  - type: Appearance
   - type: ItemToggleRequiresSkill
     skills:
       RMCSkillMedical: 1
