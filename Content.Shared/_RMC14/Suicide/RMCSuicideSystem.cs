@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Medical.Defibrillator
+﻿using Content.Shared._RMC14.Medical.Defibrillator;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
