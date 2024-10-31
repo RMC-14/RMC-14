@@ -141,3 +141,115 @@
       rmc-aslot-rail: -0.065, 0.125
       rmc-aslot-underbarrel: 0.312, -0.25
 
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolT73
+  name: Type 73 Magazine
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolT73
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RCMCartridgePistol762x25mm 
+    proto: RCMCartridgePistol762x25mm
+    capacity: 9
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/t73.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolT74HI
+  name: Type 74 Impact Magazine
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolT74HI
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RCMCartridgePistol762x25mmHI
+    proto: RCMCartridgePistol762x25mmHI
+    capacity: 9
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/t74.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  id: RCMCartridgePistol762x25mm
+  name: cartridge (762x25mm)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RCMCartridgePistol762x25mm
+  - type: CartridgeAmmo
+    proto: RCMBulletPistol762x25mm
+
+- type: entity
+  id: RCMCartridgePistol762x25mmHI
+  name: cartridge (762x25mm High Impact)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RCMCartridgePistol762x25mmHI
+  - type: CartridgeAmmo
+    proto: RCMBulletPistol762x25mmHI
+
+- type: entity
+  parent: CMBulletBase
+  id: RCMBulletPistol762x25mm
+  name: bullet (762x25mm)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 71
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 1
+      falloff: 1
+  - type: CMArmorPiercing
+    amount: 15
+
+- type: entity
+  parent: CMBulletBase
+  id: RCMBulletPistol762x25mmHI
+  name: bullet (762x25mm High Impact)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 78
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 1
+      falloff: 1
+  - type: CMArmorPiercing
+    amount: 30
+
+- type: Tag
+  id: RMCMagazinePistolT73
