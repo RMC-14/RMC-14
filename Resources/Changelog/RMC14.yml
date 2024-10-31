@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: musicmanvr
-  changes:
-  - message: Reload sounds of most weapons have been changed, and new xeno attack
-      sounds have been added.
-    type: Tweak
-  id: 406
-  time: '2024-07-20T03:35:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3106
 - author: Whisper
   changes:
   - message: 'Rules: Xenonids are now allowed to sneak onto the shuttle at any point
@@ -4832,5 +4824,12 @@
   id: 905
   time: '2024-10-31T09:24:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4605
+- author: Vermidia
+  changes:
+  - message: Fixed Suicide killing larva in the host
+    type: Fix
+  id: 906
+  time: '2024-10-31T21:33:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4641
 Name: RMC14
 Order: -1
