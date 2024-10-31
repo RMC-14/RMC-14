@@ -71,3 +71,13 @@
 
 - type: Tag
   id: RMCActionCycleZoomLevel
+
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionToggleMedhud
+  name: Toggle Medical HUD
+  description: Toggle the optical matrix of the medical HUD.
+  components:
+  - type: InstantAction
+    itemIconStyle: BigItem
+    event: !type:ToggleActionEvent
