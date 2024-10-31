@@ -3,6 +3,7 @@
   id: XenoFruitBase
   abstract: true
   name: resin fruit
+  description: a fruit that shouldn't exist
   placement:
     mode: SnapgridCenter
     snap:
@@ -63,7 +64,7 @@
   - type: Corrodible
     isCorrodible: false
   - type: XenoFruit
-    consumeDelay: 5
+    consumeDelay: 2
     canConsumeAtFull: true
 
 - type: entity

@@ -105,6 +105,7 @@
     armorResistsKnockdown: true
   - type: XenoProjectile
     deleteOnFriendlyXeno: true
+  - type: DrainOnHit
   - type: ProjectileMaxRange
     max: 6
 
