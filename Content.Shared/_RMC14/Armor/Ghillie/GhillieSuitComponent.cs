@@ -23,7 +23,7 @@ public sealed partial class GhillieSuitComponent : Component
     /// How much opacity is added whenever the user fires a gun.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float AddedOpacityOnShoot = 0.1f;
+    public float AddedOpacityOnShoot = 0.04f;
 
     /// <summary>
     /// How long the do-after of the ability takes.
