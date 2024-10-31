@@ -170,8 +170,7 @@ public sealed class SkillsSystem : EntitySystem
 
         if (!HasAllSkills(args.User.Value, ent.Comp.Skills))
         {
-            var msg = Loc.GetString("rmc-skills-cant-use", ("item", ent));
-            _popup.PopupClient(msg, args.User.Value, args.User.Value, PopupType.SmallCaution);
+            args.Popup = Loc.GetString("rmc-skills-cant-use", ("item", ent));
             args.Cancelled = true;
         }
     }
