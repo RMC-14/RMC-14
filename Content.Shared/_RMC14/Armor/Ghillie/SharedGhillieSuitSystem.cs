@@ -154,6 +154,7 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
             Dirty(ent);
 
             var passiveInvisibility = EnsureComp<RMCPassiveStealthComponent>(user);
+            passiveInvisibility.MaxOpacity = comp.Opacity;
             passiveInvisibility.MinOpacity = comp.Opacity;
             passiveInvisibility.Delay = comp.InvisibilityDelay;
             passiveInvisibility.Enabled = true;
@@ -244,11 +245,12 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
             && TryComp<EntityActiveInvisibleComponent>(user, out var invis)
             && TryComp<RMCPassiveStealthComponent>(user, out var passive))
         {
-            passive.ToggleTime = _timing.CurTime;
-            Dirty(user, passive);
-
             invis.Opacity += suitComp.AddedOpacityOnShoot;
             Dirty(user, invis);
+
+            passive.ToggleTime = _timing.CurTime;
+            passive.MaxOpacity = invis.Opacity;
+            Dirty(user, passive);
         }
     }
 }
