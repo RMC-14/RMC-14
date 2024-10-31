@@ -228,7 +228,7 @@
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
-      - id: RMCBeltSmgMags
+      - id: RMCBeltHolsterSMGPouch
       #- id: RMCBeltHolsterFlareGun
       - id: RMCM276ShotgunShellLoadingRig
       - id: RMCBeltGrenade
@@ -267,7 +267,7 @@
      #- id: CMSlingPouch
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMagazine
-      - id: RMCPouchShotgun  
+      - id: RMCPouchShotgun
       - id: RMCPouchPistol
     - name: Accessories
       choices: { CMAccessories: 1 }

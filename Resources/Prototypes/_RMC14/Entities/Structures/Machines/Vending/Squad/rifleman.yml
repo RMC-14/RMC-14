@@ -48,7 +48,7 @@
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
-      - id: RMCBeltSmgMags
+      - id: RMCBeltHolsterSMGPouch
       #    RMCBeltHolsterFlareGun #TODO: Make this
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtility

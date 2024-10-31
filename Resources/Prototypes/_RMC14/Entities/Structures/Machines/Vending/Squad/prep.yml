@@ -180,7 +180,7 @@
         amount: 15
       - id: RMCBeltHolsterSMG
         amount: 15
-      - id: RMCBeltSmgMags
+      - id: RMCBeltHolsterSMGPouch
         amount: 10
       - id: RMCBeltHolsterRevolver
         amount: 15

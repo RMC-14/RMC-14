@@ -138,7 +138,7 @@
         amount: 5
       - id: RMCBeltHolsterSMG
         amount: 5
-      - id: RMCBeltSmgMags
+      - id: RMCBeltHolsterSMGPouch
         amount: 5
       - id: RMCBeltGrenade
         amount: 2
