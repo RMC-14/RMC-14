@@ -57,3 +57,4 @@
 
 - type: playTimeTracker
   id: CMJobCargoTech
+  isHumanoid: true

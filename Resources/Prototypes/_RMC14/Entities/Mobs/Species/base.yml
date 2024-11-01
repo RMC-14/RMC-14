@@ -244,3 +244,4 @@
     whitelist:
       components:
       - CanBeSupplyDropped
+  - type: NewPlayerLabel

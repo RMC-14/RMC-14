@@ -60,6 +60,7 @@
 
 - type: playTimeTracker
   id: CMJobHospitalCorpsman
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

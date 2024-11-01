@@ -71,3 +71,4 @@
 
 - type: playTimeTracker
   id: CMJobQuartermaster
+  isHumanoid: true

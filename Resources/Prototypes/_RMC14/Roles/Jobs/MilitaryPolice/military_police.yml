@@ -65,3 +65,4 @@
 
 - type: playTimeTracker
   id: CMJobMilitaryPolice
+  isHumanoid: true

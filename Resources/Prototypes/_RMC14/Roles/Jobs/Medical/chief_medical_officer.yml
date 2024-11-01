@@ -81,3 +81,4 @@
 
 - type: playTimeTracker
   id: CMJobCMO
+  isHumanoid: true

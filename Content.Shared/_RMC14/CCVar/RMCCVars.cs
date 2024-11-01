@@ -225,4 +225,10 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCHiveSpreadEarlyMinutes =
         CVarDef.Create("rmc.hive_spread_early_minutes", 40, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCNewPlayerTimeTotalHours =
+        CVarDef.Create("rmc.new_player_time_total_hours", 25, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCNewPlayerTimeJobHours =
+        CVarDef.Create("rmc.new_player_time_job_hours", 10, CVar.REPLICATED | CVar.SERVER);
 }

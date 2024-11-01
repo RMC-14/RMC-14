@@ -54,6 +54,7 @@
 
 - type: playTimeTracker
   id: CMJobSmartGunOperator
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

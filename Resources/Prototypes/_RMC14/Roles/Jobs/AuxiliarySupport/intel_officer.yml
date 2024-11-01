@@ -60,4 +60,5 @@
     - state: intel_officer
 
 - type: playTimeTracker
+  isHumanoid: true
   id: CMJobIntelOfficer

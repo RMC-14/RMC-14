@@ -70,3 +70,4 @@
 
 - type: playTimeTracker
   id: CMJobChiefEngineer
+  isHumanoid: true

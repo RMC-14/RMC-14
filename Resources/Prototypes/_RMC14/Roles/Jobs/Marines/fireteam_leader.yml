@@ -55,6 +55,7 @@
 
 - type: playTimeTracker
   id: CMJobFireteamLeader
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -104,4 +105,3 @@
   - type: SquadSpawner
     squad: SquadDelta
     role: CMFireteamLeader
-

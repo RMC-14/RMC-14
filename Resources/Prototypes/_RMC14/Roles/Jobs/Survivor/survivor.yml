@@ -60,3 +60,4 @@
 
 - type: playTimeTracker
   id: CMJobSurvivor
+  isHumanoid: true

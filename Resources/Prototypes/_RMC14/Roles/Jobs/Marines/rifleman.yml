@@ -46,6 +46,7 @@
 
 - type: playTimeTracker
   id: CMJobRifleman
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

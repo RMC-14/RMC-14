@@ -72,3 +72,4 @@
 
 - type: playTimeTracker
   id: CMJobMilitaryWarden
+  isHumanoid: true

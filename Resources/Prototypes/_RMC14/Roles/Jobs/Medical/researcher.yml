@@ -69,3 +69,4 @@
 
 - type: playTimeTracker
   id: CMJobResearcher
+  isHumanoid: true

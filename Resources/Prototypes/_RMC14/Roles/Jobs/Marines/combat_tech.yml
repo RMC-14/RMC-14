@@ -58,6 +58,7 @@
 
 - type: playTimeTracker
   id: CMJobCombatTech
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -107,4 +108,3 @@
   - type: SquadSpawner
     squad: SquadDelta
     role: CMCombatTech
-

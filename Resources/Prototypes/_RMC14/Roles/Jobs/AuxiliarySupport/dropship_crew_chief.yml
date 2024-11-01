@@ -69,3 +69,4 @@
 
 - type: playTimeTracker
   id: CMJobDropshipCrewChief
+  isHumanoid: true

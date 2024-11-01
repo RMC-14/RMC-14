@@ -74,3 +74,4 @@
 
 - type: playTimeTracker
   id: CMJobStaffOfficer
+  isHumanoid: true

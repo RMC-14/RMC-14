@@ -70,3 +70,4 @@
 
 - type: playTimeTracker
   id: CMJobNurse
+  isHumanoid: true
