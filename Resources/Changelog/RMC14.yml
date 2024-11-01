@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: All armors can hold more types of items, mostly different medical items
-    type: Add
-  id: 415
-  time: '2024-07-20T10:26:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3168
 - author: Cu1r
   changes:
   - message: Ported Fiorina Science Annex
@@ -4827,5 +4820,15 @@
   id: 914
   time: '2024-11-01T05:19:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4595
+- author: CyberTropic
+  changes:
+  - message: Added nailgun survivor weapon. Uses nails as ammo and fits in backpack.
+    type: Add
+  - message: Added flora. LV-624 now has plants and bushes that can hide alien weeds,
+      including strange alien trees.
+    type: Add
+  id: 915
+  time: '2024-11-01T05:23:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4511
 Name: RMC14
 Order: -1
