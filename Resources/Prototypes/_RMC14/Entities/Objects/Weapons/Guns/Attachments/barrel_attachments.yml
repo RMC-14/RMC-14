@@ -109,7 +109,6 @@
   - type: AttachableSilencer
     sound:
       collection: CMSilencedShoot
-      
       params:
         maxDistance: 6
   - type: AttachableWeaponRangedMods
