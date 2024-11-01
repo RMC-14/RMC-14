@@ -70,7 +70,7 @@
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
-  parent: CMCartridgePistolBase
+  parent: CMCartridgePistol9mm
   id: RCMCartridgeT73762x25mm
   name: cartridge (762x25mm)
   components:

@@ -73,7 +73,7 @@
 - type: entity
   id: RCMCartridgePistol762x25mmHI
   name: cartridge (762x25mm High Impact)
-  parent: CMCartridgePistolBase
+  parent: CMCartridgePistol9mm
   components:
   - type: Tag
     tags:
