@@ -71,3 +71,36 @@
     idleLoad: 10000
     activeLoad: 1
     channel: Equipment
+
+- type: entity
+  abstract: true
+  parent: MarkerBase
+  id: RMCSpawnerCommunicationsTowerBase
+  name: static comms
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/communications_tower.rsi
+    layers: []
+    offset: 0.5, 1.5
+  - type: CommunicationsTowerSpawner
+    spawn: RMCCommunicationsTower
+
+- type: entity
+  parent: RMCSpawnerCommunicationsTowerBase
+  id: RMCSpawnerCommunicationsTowerOne
+  suffix: One
+  components:
+  - type: Sprite
+    state: comms_landmark_1
+  - type: CommunicationsTowerSpawner
+    group: RMCSpawnerCommunicationsTowerOne
+
+- type: entity
+  parent: RMCSpawnerCommunicationsTowerBase
+  id: RMCSpawnerCommunicationsTowerTwo
+  suffix: Two
+  components:
+  - type: Sprite
+    state: comms_landmark_2
+  - type: CommunicationsTowerSpawner
+    group: RMCSpawnerCommunicationsTowerTwo

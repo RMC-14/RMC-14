@@ -13,7 +13,10 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Radio;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Communications;
 
@@ -25,9 +28,14 @@ public sealed class CommunicationsTowerSystem : EntitySystem
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+
+    private readonly Dictionary<EntProtoId, List<Entity<CommunicationsTowerSpawnerComponent>>> _spawners = new();
 
     public override void Initialize()
     {
@@ -208,5 +216,31 @@ public sealed class CommunicationsTowerSystem : EntitySystem
         }
 
         return false;
+    }
+
+    public override void Update(float frameTime)
+    {
+        if (_net.IsServer)
+            return;
+
+        _spawners.Clear();
+        var spawnersQuery = EntityQueryEnumerator<CommunicationsTowerSpawnerComponent>();
+        while (spawnersQuery.MoveNext(out var uid, out var spawner))
+        {
+            if (TerminatingOrDeleted(uid) || EntityManager.IsQueuedForDeletion(uid))
+                continue;
+
+            QueueDel(uid);
+            _spawners.GetOrNew(spawner.Group).Add((uid, spawner));
+        }
+
+        foreach (var spawners in _spawners.Values)
+        {
+            if (spawners.Count == 0)
+                continue;
+
+            var spawner = _random.Pick(spawners);
+            Spawn(spawner.Comp.Spawn, _transform.GetMoverCoordinates(spawner));
+        }
     }
 }

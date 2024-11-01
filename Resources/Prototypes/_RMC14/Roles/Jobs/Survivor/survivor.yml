@@ -32,6 +32,8 @@
       preset: RMCSurvivorPresetCivilian
     - type: Survivor
     - type: MotionDetectorTracked
+    - type: UserIFF
+      faction: FactionSurvivor
   hasIcon: false
 
 - type: startingGear
