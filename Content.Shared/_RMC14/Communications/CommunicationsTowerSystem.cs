@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Administration.Logs;
@@ -10,6 +11,7 @@ using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.Power;
 using Content.Shared.Radio;
 using Robust.Shared.Prototypes;
 
@@ -22,9 +24,10 @@ public sealed class CommunicationsTowerSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
 
     public override void Initialize()
     {
@@ -37,6 +40,7 @@ public sealed class CommunicationsTowerSystem : EntitySystem
         SubscribeLocalEvent<CommunicationsTowerComponent, CommunicationsTowerWipeDoAfterEvent>(OnTowerDialogWipeDoAfter);
         SubscribeLocalEvent<CommunicationsTowerComponent, CommunicationsTowerAddDoAfterEvent>(OnTowerDialogAddDoAfter);
         SubscribeLocalEvent<CommunicationsTowerComponent, InteractHandEvent>(OnTowerInteractHand);
+        SubscribeLocalEvent<CommunicationsTowerComponent, PowerChangedEvent>(OnTowerPowerChangedEvent);
     }
 
     private void OnTowerMapInit(Entity<CommunicationsTowerComponent> ent, ref MapInitEvent args)
@@ -154,6 +158,12 @@ public sealed class CommunicationsTowerSystem : EntitySystem
             return;
         }
 
+        if (!_rmcPower.IsPowered(ent))
+        {
+            _popup.PopupClient($"{Name(ent)} makes a small plaintful beep, and nothing happens. It seems to be out of power.", ent, args.User, PopupType.MediumCaution);
+            return;
+        }
+
         ent.Comp.State = ent.Comp.State switch
         {
             CommunicationsTowerState.Off => CommunicationsTowerState.On,
@@ -164,6 +174,16 @@ public sealed class CommunicationsTowerSystem : EntitySystem
         var state = ent.Comp.State == CommunicationsTowerState.On ? "on" : "off";
         _adminLog.Add(LogType.RMCCommunicationsTower, $"{ToPrettyString(args.User):user} turned {ToPrettyString(ent):tower} {state}.");
 
+        Dirty(ent);
+        UpdateAppearance(ent);
+    }
+
+    private void OnTowerPowerChangedEvent(Entity<CommunicationsTowerComponent> ent, ref PowerChangedEvent args)
+    {
+        if (ent.Comp.State != CommunicationsTowerState.On)
+            return;
+
+        ent.Comp.State = CommunicationsTowerState.Off;
         Dirty(ent);
         UpdateAppearance(ent);
     }

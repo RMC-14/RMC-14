@@ -66,3 +66,8 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: supply
+  - type: ApcPowerReceiver
+  - type: RMCPowerReceiver
+    idleLoad: 10000
+    activeLoad: 1
+    channel: Equipment
