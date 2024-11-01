@@ -216,7 +216,8 @@
        # amount: 14
        #- id: CMMagazinePistolMK80HP # TODO RMC14 Pistol AP varieties
        # amount: 14
-       #- id: CMMagazinePistolVP78 # Same rounds as the M1984 but I'm not sure why a different pistols mag is in here.
+       - id: CMMagazinePistolMK80
+         amount: 14
      - name: Attachments
        entries:
        - id: RMCAttachmentRailFlashlight
