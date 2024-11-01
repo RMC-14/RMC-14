@@ -58,7 +58,7 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RCMCartridgePistol762x25mm 
+      - RCMCartridgeT73762x25mm 
     proto: RCMCartridgePistol762x25mm
     capacity: 9
   - type: Sprite
@@ -70,14 +70,14 @@
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
-  id: RCMCartridgePistol762x25mm
-  name: cartridge (762x25mm)
   parent: CMCartridgePistolBase
+  id: RCMCartridgeT73762x25mm
+  name: cartridge (762x25mm)
   components:
   - type: Tag
     tags:
     - Cartridge
-    - RCMCartridgePistol762x25mm
+    - RCMCartridgeT73762x25mm
   - type: CartridgeAmmo
     proto: RCMBulletPistol762x25mm
 
