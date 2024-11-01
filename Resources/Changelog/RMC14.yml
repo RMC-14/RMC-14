@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed flashes not requiring police skill. They now require a police skill
-      of 1 (ASO, XO, SO, CE, CMO, QM, CO, CMP, MP, Warden and SEA).
-    type: Fix
-  - message: Fixed stun batons stunning for a shorter time and taking more hits than
-      intended. They now stun marines for 12 seconds in a single hit.
-    type: Fix
-  - message: Stun baton usage now requires a police skill of 1.
-    type: Tweak
-  id: 414
-  time: '2024-07-20T10:25:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3166
 - author: Vermidia
   changes:
   - message: All armors can hold more types of items, mostly different medical items
@@ -4830,5 +4817,15 @@
   id: 913
   time: '2024-11-01T05:17:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4646
+- author: Dutch-VanDerLinde
+  changes:
+  - message: You can now remove fully grown larva in surgery, but it will not kill
+      the larva
+    type: Tweak
+  - message: Fixed parasites and larvas dying on the dropship
+    type: Fix
+  id: 914
+  time: '2024-11-01T05:19:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4595
 Name: RMC14
 Order: -1
