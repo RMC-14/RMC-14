@@ -664,3 +664,14 @@
     state: gives-the-fish
   - type: PatronFigurine
     id: 9c5deff6-212d-4578-855e-0afb86a0a910
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJester-Who-Helps
+  name: Jester-Who-Helps figurine
+  description: "A Dubious Little Creature Up To Mischief!"
+  components:
+  - type: Sprite
+    state: jester-who-helps
+  - type: PatronFigurine
+    id: 15d914f4-e436-496a-afe0-0e127297ed36
