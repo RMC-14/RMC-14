@@ -107,7 +107,10 @@
   - type: AttachableVisuals
     prefix: suppressor2
   - type: AttachableSilencer
-    params:
+    sound:
+      collection: CMSilencedShoot
+      
+      params:
         maxDistance: 6
   - type: AttachableWeaponRangedMods
     modifiers:
