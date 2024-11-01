@@ -220,7 +220,7 @@ public sealed class CommunicationsTowerSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        if (_net.IsServer)
+        if (_net.IsClient)
             return;
 
         _spawners.Clear();

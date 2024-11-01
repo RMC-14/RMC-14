@@ -77,7 +77,7 @@
   parent: MarkerBase
   id: RMCSpawnerCommunicationsTowerBase
   name: static comms
-  components:
+  components: # TODO RMC14 some start broken
   - type: Sprite
     sprite: _RMC14/Structures/communications_tower.rsi
     layers: []
