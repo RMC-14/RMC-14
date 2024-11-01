@@ -1,4 +1,5 @@
-﻿using Content.Shared.Administration.Logs;
+﻿using Content.Shared._RMC14.Medical.Defibrillator;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Damage;
 using Content.Shared.Database;
@@ -124,7 +125,7 @@ public sealed class RMCSuicideSystem : EntitySystem
         _damageable.TryChangeDamage(user, ent.Comp.Damage, true);
         _mobState.ChangeMobState(user, MobState.Dead);
         EnsureComp<RMCHasSuicidedComponent>(user);
-        EnsureComp<RottingComponent>(user);
+        EnsureComp<CMDefibrillatorBlockedComponent>(user);
         _audio.PlayPredicted(gun.SoundGunshot, held, ent);
     }
 

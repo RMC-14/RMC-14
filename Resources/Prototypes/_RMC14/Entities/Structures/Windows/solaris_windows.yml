@@ -17,7 +17,7 @@
     node: windowFrameSolaris
 
 - type: entity
-  parent: RMCBaseWindowFrame
+  parent: RMCWindowFrameColonyReinforced
   id: RMCWindowFrameSolarisReinforced
   components:
   - type: Sprite

@@ -65,6 +65,13 @@
     damageContainers:
     - Biological
   - type: GhostColor
+  # RCM - FindParasite Event
+  - type: FindParasite
+  - type: UserInterface
+    interfaces:
+      enum.XenoFindParasiteUI.Key:
+        type: FindParasiteBoundUserInterface
+        requireInputValidation: false
 
 - type: entity
   id: ActionGhostBoo

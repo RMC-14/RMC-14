@@ -8,3 +8,5 @@ rmc-sleeves-verb-unfold = Roll down sleeves
 
 rmc-pants-verb-fold = Roll up pants
 rmc-pants-verb-unfold = Roll down pants
+
+rmc-buttons-verb-fold = Toggle buttons

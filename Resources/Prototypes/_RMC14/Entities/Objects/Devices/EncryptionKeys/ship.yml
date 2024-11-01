@@ -235,8 +235,14 @@
     channels:
     - MarineEngineer
     - MarineCommand
-    - MarineMedical
     - MarineRequisition
+    - MarineMedical
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
     defaultChannel: MarineEngineer
   - type: Sprite
     state: ce_key
@@ -371,6 +377,14 @@
     channels:
     - MarineRequisition
     - MarineCommand
+    - MarineEngineer
+    - MarineMedical
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
     defaultChannel: MarineRequisition
   - type: Sprite
     state: ce_key

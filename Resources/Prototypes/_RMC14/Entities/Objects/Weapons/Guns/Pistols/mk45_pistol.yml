@@ -9,11 +9,17 @@
     scatterWielded: 10
     scatterUnwielded: 14
     baseFireRate: 1.428
+  - type: GunDamageModifier
+    multiplier: 1.4
+  - type: PumpAction
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Cock/gun_pistol_cocked.ogg
+    examine: rmc-gun-rack-examine
+    popup: rmc-gun-rack-first
+    popupKey: rmc-gun-rack-first-with
+    once: true
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mk45.rsi
-    layers:
-    - state: base
-      map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mk45.rsi
   - type: MagazineAmmoProvider
@@ -60,15 +66,6 @@
       rmc-aslot-barrel: 0.71, 0.095
       rmc-aslot-rail: -0.065, 0.125
       rmc-aslot-underbarrel: 0.312, -0.25
-  - type: GunDamageModifier
-    multiplier: 1.4
-  - type: PumpAction
-    sound:
-      path: /Audio/_RMC14/Weapons/Guns/Cock/gun_pistol_cocked.ogg
-    examine: rmc-gun-rack-examine
-    popup: rmc-gun-rack-first
-    popupKey: rmc-gun-rack-first-with
-    once: true
 
 - type: entity
   parent: CMBaseMagazinePistol

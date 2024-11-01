@@ -384,6 +384,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (_tacticalMapIconQuery.TryComp(tracked, out var iconComp))
         {
             tracked.Comp.Icon = iconComp.Icon;
+            tracked.Comp.Background = iconComp.Background;
             return;
         }
 

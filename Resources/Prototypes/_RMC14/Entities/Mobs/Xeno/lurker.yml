@@ -63,6 +63,8 @@
   - type: XenoCripplingStrike
   - type: XenoMeleeSlow
     requiresKnockDown: true
+  - type: XenoClaws
+    clawType: Sharp
   - type: MeleeWeapon
     attackRate: 0.75
     damage:

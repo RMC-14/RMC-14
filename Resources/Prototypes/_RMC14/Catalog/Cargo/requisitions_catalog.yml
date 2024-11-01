@@ -268,3 +268,9 @@
 #      - cost: 3000
 #        crate: RMCCrateMagazineM4SPRCustomIncendiary These ones are straight downgrades and thus shouldn't be for sale
 #      - cost: 4000
+
+
+
+#        Black Market Orders
+#      - cost: 5 We-Ya Funnybucks
+#        crate: RMCCrateD18
