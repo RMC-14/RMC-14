@@ -24,6 +24,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private static readonly SoundSpecifier RemotePickupSound = new SoundPathSpecifier("/Audio/_RMC14/Phone/remote_pickup.ogg");
@@ -88,28 +89,8 @@ public abstract class SharedTelephoneSystem : EntitySystem
 
     private void OnRotaryPhoneDialingInteractUsing(Entity<RotaryPhoneDialingComponent> ent, ref InteractUsingEvent args)
     {
-        if (!IsCorrectPhone(ent.Owner, args.Used))
-            return;
-
-        args.Handled = true;
-        RemCompDeferred<RotaryPhoneDialingComponent>(ent);
-        ReturnPhone(ent.Owner, args.Used, args.User);
-
-        if (ent.Comp.Other is { } other)
-        {
-            StopSound(other);
-            HangUp(ent, other);
-
-            if (!HasPickedUp(other))
-            {
-                RemCompDeferred<RotaryPhoneReceivingComponent>(other);
-                StopSound(other);
-            }
-
-            UpdateAppearance(other, true);
-        }
-
-        UpdateAppearance(ent.Owner, true);
+        if (HangUpDialing(ent, args.Used, args.User))
+            args.Handled = true;
     }
 
     private void OnRotaryPhoneReceivingInteractHand(Entity<RotaryPhoneReceivingComponent> ent, ref InteractHandEvent args)
@@ -123,22 +104,8 @@ public abstract class SharedTelephoneSystem : EntitySystem
 
     private void OnRotaryPhoneReceivingInteractUsing(Entity<RotaryPhoneReceivingComponent> ent, ref InteractUsingEvent args)
     {
-        if (!IsCorrectPhone(ent.Owner, args.Used))
-            return;
-
-        args.Handled = true;
-        RemCompDeferred<RotaryPhoneReceivingComponent>(ent);
-        ReturnPhone(ent.Owner, args.Used, args.User);
-
-        if (ent.Comp.Other is { } other)
-        {
-            HangUp(ent, other);
-
-            if (!HasPickedUp(other))
-                RemCompDeferred<RotaryPhoneReceivingComponent>(other);
-        }
-
-        UpdateAppearance(ent.Owner, true);
+        if (HangUpReceiving(ent, args.Used, args.User))
+            args.Handled = true;
     }
 
     private void OnTelephoneTerminating<T>(Entity<TelephoneComponent> ent, ref T args)
@@ -275,9 +242,10 @@ public abstract class SharedTelephoneSystem : EntitySystem
             _container.Remove(telephone, container);
 
         _hands.TryPickupAnyHand(user, telephone);
+        EnsureComp<PickedUpPhoneComponent>(telephone);
     }
 
-    private void ReturnPhone(EntityUid rotary, EntityUid telephone, EntityUid user)
+    private void ReturnPhone(EntityUid rotary, EntityUid telephone, EntityUid? user)
     {
         if (!TryComp(rotary, out RotaryPhoneComponent? rotaryPhone) ||
             rotaryPhone.Phone != telephone ||
@@ -286,7 +254,10 @@ public abstract class SharedTelephoneSystem : EntitySystem
             return;
         }
 
-        _hands.TryDropIntoContainer(user, telephone, container);
+        if (user != null)
+            _hands.TryDropIntoContainer(user.Value, telephone, container);
+        else
+            _container.Insert(telephone, container);
     }
 
     private void HangUp(EntityUid self, EntityUid other)
@@ -414,6 +385,52 @@ public abstract class SharedTelephoneSystem : EntitySystem
         return name;
     }
 
+    private bool HangUpDialing(Entity<RotaryPhoneDialingComponent> ent, EntityUid phone, EntityUid? user)
+    {
+        if (!IsCorrectPhone(ent.Owner, phone))
+            return false;
+
+        RemCompDeferred<RotaryPhoneDialingComponent>(ent);
+        ReturnPhone(ent.Owner, phone, user);
+
+        if (ent.Comp.Other is { } other)
+        {
+            StopSound(other);
+            HangUp(ent, other);
+
+            if (!HasPickedUp(other))
+            {
+                RemCompDeferred<RotaryPhoneReceivingComponent>(other);
+                StopSound(other);
+            }
+
+            UpdateAppearance(other, true);
+        }
+
+        UpdateAppearance(ent.Owner, true);
+        return true;
+    }
+
+    private bool HangUpReceiving(Entity<RotaryPhoneReceivingComponent> ent, EntityUid used, EntityUid? user)
+    {
+        if (!IsCorrectPhone(ent.Owner, used))
+            return false;
+
+        RemCompDeferred<RotaryPhoneReceivingComponent>(ent);
+        ReturnPhone(ent.Owner, used, user);
+
+        if (ent.Comp.Other is { } other)
+        {
+            HangUp(ent, other);
+
+            if (!HasPickedUp(other))
+                RemCompDeferred<RotaryPhoneReceivingComponent>(other);
+        }
+
+        UpdateAppearance(ent.Owner, true);
+        return true;
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -443,6 +460,35 @@ public abstract class SharedTelephoneSystem : EntitySystem
             {
                 if (phone.DialingIdleSound is { } sound)
                     _ambientSound.SetSound(uid, sound);
+            }
+        }
+
+        var pickedUpPhonesQuery = EntityQueryEnumerator<PickedUpPhoneComponent, TelephoneComponent>();
+        while (pickedUpPhonesQuery.MoveNext(out var uid, out var pickedUp, out var telephone))
+        {
+            if (telephone.RotaryPhone is not { } rotary)
+                continue;
+
+            void PhoneSnapBackPopup()
+            {
+                _popup.PopupEntity($"The {Name(uid)} snaps back to the {Name(rotary)}!", uid, PopupType.MediumCaution);
+            }
+
+            var phonePosition = _transform.GetMoverCoordinates(uid);
+            var rotaryPosition = _transform.GetMoverCoordinates(rotary);
+            if (!phonePosition.TryDistance(EntityManager, _transform, rotaryPosition, out var distance) ||
+                distance > pickedUp.Range)
+            {
+                if (TryComp(rotary, out RotaryPhoneDialingComponent? dialing))
+                {
+                    if (HangUpDialing((rotary, dialing), uid, null))
+                        PhoneSnapBackPopup();
+                }
+                else if (TryComp(rotary, out RotaryPhoneReceivingComponent? receiving))
+                {
+                    if (HangUpReceiving((rotary, receiving), uid, null))
+                        PhoneSnapBackPopup();
+                }
             }
         }
     }
