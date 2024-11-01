@@ -217,7 +217,7 @@
        #- id: CMMagazinePistolMK80HP # TODO RMC14 Pistol AP varieties
        # amount: 14
        - id: CMMagazinePistolMK80
-         amount: 14
+         amount: 16
      - name: Attachments
        entries:
        - id: RMCAttachmentRailFlashlight
