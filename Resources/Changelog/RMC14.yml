@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added RMC Admin UI.
-    type: Add
-  - message: Added marine:randomizewithjob command.
-    type: Add
-  id: 409
-  time: '2024-07-20T06:15:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3163
-- author: DrSmugleaf
-  changes:
   - message: Added Orion Blackburn, Lilly 'Pipsqueak' Harding, Bites-The-Dust figurines.
     type: Add
   id: 410
@@ -4835,5 +4826,12 @@
   id: 908
   time: '2024-10-31T21:45:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3592
+- author: snebl
+  changes:
+  - message: Fixed some airlocks 'bolted' sprite not working.
+    type: Fix
+  id: 909
+  time: '2024-10-31T23:47:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4644
 Name: RMC14
 Order: -1
