@@ -272,6 +272,7 @@
   - type: TacticalMapLiveUpdateOnOvi
     enabled: true
   - type: MotionDetectorTracked
+  - type: XenoMapTracked
 
 - type: entity
   abstract: true

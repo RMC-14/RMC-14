@@ -59,3 +59,10 @@
           On: { state: static1 }
   - type: MaxDamage
     max: 500
+  - type: MarineMapTracked
+  - type: XenoMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: supply

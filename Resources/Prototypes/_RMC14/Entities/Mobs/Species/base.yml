@@ -245,3 +245,4 @@
       components:
       - CanBeSupplyDropped
   - type: NewPlayerLabel
+  - type: MarineMapTracked
