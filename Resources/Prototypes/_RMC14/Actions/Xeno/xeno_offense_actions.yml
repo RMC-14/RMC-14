@@ -518,7 +518,7 @@
   id: ActionXenoTremor
   parent: ActionXenoBase
   name: Tremor (100)
-  description: Slam the ground with a 7x7 AOE, slowing down and disarming all enemies in range. Deals heavy damage to targets you are on top of.
+  description: Slam the ground with a 7x7 AOE, stuning all enemies in range for a short period of time
   components:
   - type: InstantAction
     itemIconStyle: NoItem
