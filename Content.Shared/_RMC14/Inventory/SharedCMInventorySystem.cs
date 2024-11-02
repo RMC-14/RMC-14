@@ -123,8 +123,8 @@ public abstract class SharedCMInventorySystem : EntitySystem
         {
             Act = () => Unholster(args.User, holster, out _),
             Text = Loc.GetString("rmc-storage-holster-eject-verb"),
-            //Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/eject.svg.192dpi.png"))
-            IconEntity = GetNetEntity(comp.Contents[0])
+            IconEntity = GetNetEntity(comp.Contents[0]),
+            Priority = 5 // Higher priority to appear above folding verbs (for webbing-based holsters)
         };
         args.Verbs.Add(holsterVerb);
     }
