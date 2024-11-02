@@ -98,7 +98,7 @@
 - type: entity
   parent: BaseStructureDynamic
   id: RMCCrateLarge
-  name: large crate
+  name: supply crate
   description: A hefty wooden crate.
   components:
   - type: Sprite
