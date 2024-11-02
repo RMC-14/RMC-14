@@ -14,13 +14,11 @@ rmc-emote-name-bark = Bark
 rmc-emote-name-snarl = Snarl
 rmc-emote-name-whine = Whine
 rmc-emote-name-howl = Howl
-rmc-emote-name-growl = Growls
 
 rmc-emote-bark = barks.
 rmc-emote-snarl = snarls.
 rmc-emote-whine = whines.
 rmc-emote-howl = howls.
-rmc-emote-growl = growls.
 
 rmc-emote-name-xeno-roar = Roar
 rmc-emote-name-xeno-tail-swipe = Tail Swipe

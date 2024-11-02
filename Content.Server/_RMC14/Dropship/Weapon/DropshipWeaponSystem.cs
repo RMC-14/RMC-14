@@ -1,6 +1,5 @@
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared.Decals;
-using JetBrains.FormatRipper.Elf;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 using System.Numerics;

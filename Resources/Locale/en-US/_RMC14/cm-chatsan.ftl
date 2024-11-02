@@ -248,7 +248,7 @@ cm-chatsan-word-vulpkanins = vulpkanins
 cm-chatsan-replacement-vulpkanins = canine hosts
 
 cm-chatsan-word-vulp = vulp
-cm-chatsan-replacement-vulpkanin = canine host
+cm-chatsan-replacement-vulp = canine host
 
 cm-chatsan-word-vulps = vulps
 cm-chatsan-replacement-vulps = canine hosts

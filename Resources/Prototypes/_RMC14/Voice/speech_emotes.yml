@@ -77,6 +77,8 @@
   chatTriggers:
     - growl
     - growls
+    - growls.
+    - growls!
     - growling
     - growled
 
@@ -192,25 +194,5 @@
     - howling.
     - howled.
 
-- type: emote
-  id: Growl
-  name: rmc-emote-name-growl
-  category: Vocal
-  available: false
-  whitelist:
-    components:
-    - Vocal
-  blacklist:
-    components:
-    - BorgChassis
-  chatMessages: ["rmc-emote-growl"]
-  chatTriggers:
-    - growl
-    - growls.
-    - growls!
-    - growled
-    - growled.
-    - growled!
-    - growling.
-    - growled.
+
 

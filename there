@@ -1,0 +1,111 @@
+warning: in the working copy of 'Resources/Prototypes/_RMC14/Entities/Mobs/Species/vulpkanin.yml', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/Resources/Locale/en-US/_RMC14/chat/species-emotes.ftl b/Resources/Locale/en-US/_RMC14/chat/species-emotes.ftl[m
+[1mindex cd79c73e3c..18a5c9428f 100644[m
+[1m--- a/Resources/Locale/en-US/_RMC14/chat/species-emotes.ftl[m
+[1m+++ b/Resources/Locale/en-US/_RMC14/chat/species-emotes.ftl[m
+[36m@@ -1,7 +1,7 @@[m
+ rmc-emote-name-hiss = Hiss[m
+ rmc-emote-name-meow = Meow[m
+ rmc-emote-name-mew = Mew[m
+[31m-rmc-emote-name-growl = Growl[m
+[32m+[m[32mrmc-emote-name-catgrowl = Growl[m
+ rmc-emote-name-purr = Purr[m
+ [m
+ rmc-emote-hiss = hisses.[m
+[36m@@ -14,13 +14,11 @@[m [mrmc-emote-name-bark = Bark[m
+ rmc-emote-name-snarl = Snarl[m
+ rmc-emote-name-whine = Whine[m
+ rmc-emote-name-howl = Howl[m
+[31m-rmc-emote-name-growl = Growls[m
+ [m
+ rmc-emote-bark = barks.[m
+ rmc-emote-snarl = snarls.[m
+ rmc-emote-whine = whines.[m
+ rmc-emote-howl = howls.[m
+[31m-rmc-emote-growl = growls.[m
+ [m
+ rmc-emote-name-xeno-roar = Roar[m
+ rmc-emote-name-xeno-tail-swipe = Tail Swipe[m
+[1mdiff --git a/Resources/Locale/en-US/_RMC14/cm-chatsan.ftl b/Resources/Locale/en-US/_RMC14/cm-chatsan.ftl[m
+[1mindex e17e6a17ea..9f075c4e64 100644[m
+[1m--- a/Resources/Locale/en-US/_RMC14/cm-chatsan.ftl[m
+[1m+++ b/Resources/Locale/en-US/_RMC14/cm-chatsan.ftl[m
+[36m@@ -248,7 +248,7 @@[m [mcm-chatsan-word-vulpkanins = vulpkanins[m
+ cm-chatsan-replacement-vulpkanins = canine hosts[m
+ [m
+ cm-chatsan-word-vulp = vulp[m
+[31m-cm-chatsan-replacement-vulpkanin = canine host[m
+[32m+[m[32mcm-chatsan-replacement-vulp = canine host[m
+ [m
+ cm-chatsan-word-vulps = vulps[m
+ cm-chatsan-replacement-vulps = canine hosts[m
+[1mdiff --git a/Resources/Prototypes/_RMC14/Accents/cm_word_replacements.yml b/Resources/Prototypes/_RMC14/Accents/cm_word_replacements.yml[m
+[1mindex 49f7c1df9c..cd62c6ce09 100644[m
+[1m--- a/Resources/Prototypes/_RMC14/Accents/cm_word_replacements.yml[m
+[1m+++ b/Resources/Prototypes/_RMC14/Accents/cm_word_replacements.yml[m
+[36m@@ -99,3 +99,11 @@[m
+     cm-chatsan-word-bullet: cm-chatsan-replacement-bullet[m
+     cm-chatsan-word-bullets: cm-chatsan-replacement-bullets[m
+     cm-chatsan-word-ammo: cm-chatsan-replacement-ammo[m
+[32m+[m[32m    cm-chatsan-word-vulpkanin: cm-chatsan-replacement-vulpkanin[m
+[32m+[m[32m    cm-chatsan-word-vulpkanins: cm-chatsan-replacement-vulpkanins[m
+[32m+[m[32m    cm-chatsan-word-dog: cm-chatsan-replacement-dog[m
+[32m+[m[32m    cm-chatsan-word-dogs: cm-chatsan-replacement-dogs[m
+[32m+[m[32m    cm-chatsan-word-vulp: cm-chatsan-replacement-vulp[m
+[32m+[m[32m    cm-chatsan-word-vulps: cm-chatsan-replacement-vulps[m[41m [m
+[32m+[m[32m    cm-chatsan-word-avali: cm-chatsan-replacement-avali[m
+[32m+[m[32m    cm-chatsan-word-avalis: cm-chatsan-replacement-avalis[m
+[1mdiff --git a/Resources/Prototypes/_RMC14/Entities/Mobs/Species/vulpkanin.yml b/Resources/Prototypes/_RMC14/Entities/Mobs/Species/vulpkanin.yml[m
+[1mindex 4625cafdd1..93c29b3702 100644[m
+[1m--- a/Resources/Prototypes/_RMC14/Entities/Mobs/Species/vulpkanin.yml[m
+[1m+++ b/Resources/Prototypes/_RMC14/Entities/Mobs/Species/vulpkanin.yml[m
+[36m@@ -81,9 +81,6 @@[m
+       - map: [ "pocket1" ][m
+       - map: [ "pocket2" ][m
+       - map: [ "clownedon" ][m
+[31m-        sprite: "textures/effects/creampie.rsi"[m
+[31m-        state: "creampie_vulpkanin"[m
+[31m-        visible: false[m
+ [m
+ - type: entity[m
+   parent: BaseSpeciesDummy[m
+[1mdiff --git a/Resources/Prototypes/_RMC14/Voice/speech_emotes.yml b/Resources/Prototypes/_RMC14/Voice/speech_emotes.yml[m
+[1mindex fb0c82ba3b..0737106907 100644[m
+[1m--- a/Resources/Prototypes/_RMC14/Voice/speech_emotes.yml[m
+[1m+++ b/Resources/Prototypes/_RMC14/Voice/speech_emotes.yml[m
+[36m@@ -77,6 +77,8 @@[m
+   chatTriggers:[m
+     - growl[m
+     - growls[m
+[32m+[m[32m    - growls.[m
+[32m+[m[32m    - growls![m
+     - growling[m
+     - growled[m
+ [m
+[36m@@ -192,25 +194,5 @@[m
+     - howling.[m
+     - howled.[m
+ [m
+[31m-- type: emote[m
+[31m-  id: Growl[m
+[31m-  name: rmc-emote-name-growl[m
+[31m-  category: Vocal[m
+[31m-  available: false[m
+[31m-  whitelist:[m
+[31m-    components:[m
+[31m-    - Vocal[m
+[31m-  blacklist:[m
+[31m-    components:[m
+[31m-    - BorgChassis[m
+[31m-  chatMessages: ["rmc-emote-growl"][m
+[31m-  chatTriggers:[m
+[31m-    - growl[m
+[31m-    - growls.[m
+[31m-    - growls![m
+[31m-    - growled[m
+[31m-    - growled.[m
+[31m-    - growled![m
+[31m-    - growling.[m
+[31m-    - growled.[m
+[41m+[m
+ [m

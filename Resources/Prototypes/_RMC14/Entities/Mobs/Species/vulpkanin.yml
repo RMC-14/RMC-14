@@ -29,8 +29,6 @@
     animation: WeaponArcClaw
   - type: Inventory
     speciesId: vulpkanin
-  - type: Wagging
-    action: ActionToggleVulpakinWagging
   - type: Sprite # Drawlayers. Top to bottom in order I believe.
     netsync: false
     noRot: true
@@ -81,9 +79,6 @@
       - map: [ "pocket1" ]
       - map: [ "pocket2" ]
       - map: [ "clownedon" ]
-        sprite: "textures/effects/creampie.rsi"
-        state: "creampie_vulpkanin"
-        visible: false
 
 - type: entity
   parent: BaseSpeciesDummy
