@@ -90,8 +90,8 @@
   - type: Climbable
 
 - type: entity
-  id: RMCBaseRock
   parent: RMCBaseRockIndistructable
+  id: RMCBaseRockDestructible
   components:
   - type: Damageable
     damageContainer: Inorganic
@@ -218,7 +218,7 @@
     state: palm2
 
 - type: entity
-  parent: RMCBaseRock
+  parent: RMCBaseRockDestructible
   id: RMCRock
   name: rock
   description: A solidified collection of local minerals. When melted, becomes a substance best known as lava.
@@ -236,7 +236,7 @@
     state: rock
 
 - type: entity
-  parent: RMCBaseRock
+  parent: RMCBaseRockDestructible
   id: RMCRockSmart
   name: a smart rock
   description: Now draw them getting an education.
