@@ -109,7 +109,7 @@
 
 - type: entity
   parent: [RMCToolboxMechanicalGreen, RMCToolboxMechanicalFilled]
-  id: RMCToolboxMechanicalFilled
+  id: RMCToolboxMechanicalGreenFilled
   suffix: RMC14, Filled, Green
 
 - type: entity

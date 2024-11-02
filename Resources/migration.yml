@@ -902,7 +902,7 @@ ColMarTechExecutiveOfficerEquipment: ColMarTechSeniorOfficerEquipment
 
 # 2024-11-2
 ToolboxArtistic: RMCToolboxMechanicalGreen
-ToolboxArtisticFilled: RMCToolboxMechanicalFilled
+ToolboxArtisticFilled: RMCToolboxMechanicalGreenFilled
 ToolboxSyndicate: RMCToolboxSyndicate
 ToolboxSyndicateFilled: RMCToolboxSyndicateFilled
 Bible: RMCBible
