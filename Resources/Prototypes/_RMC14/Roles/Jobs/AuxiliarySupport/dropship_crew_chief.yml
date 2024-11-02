@@ -41,6 +41,8 @@
     - type: CMVendorUser
       points: 45
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "DCC"
   hidden: false
 
 - type: startingGear
@@ -67,3 +69,4 @@
 
 - type: playTimeTracker
   id: CMJobDropshipCrewChief
+  isHumanoid: true

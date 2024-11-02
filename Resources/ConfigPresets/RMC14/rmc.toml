@@ -18,9 +18,11 @@ mode = 1
 
 [game]
 maxplayers = 500
-soft_max_players = 250
+soft_max_players = 300
 panic_bunker.enabled = false
 round_end_pvs_overrides = false
+round_restart_time = 300
+lobbyduration = 180
 
 [ghost]
 kill_crit = false

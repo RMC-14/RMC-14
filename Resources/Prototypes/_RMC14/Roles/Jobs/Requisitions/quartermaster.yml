@@ -38,6 +38,8 @@
         RMCSkillPowerLoader: 2
     - type: MarineOrders
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "QM"
 
 - type: startingGear
   id: CMGearQuartermaster
@@ -69,3 +71,4 @@
 
 - type: playTimeTracker
   id: CMJobQuartermaster
+  isHumanoid: true
