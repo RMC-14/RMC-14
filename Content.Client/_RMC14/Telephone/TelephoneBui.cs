@@ -39,11 +39,22 @@ public sealed class TelephoneBui(EntityUid owner, Enum uiKey) : BoundUserInterfa
         {
             if (!categories.TryGetValue(phone.Category, out var category))
             {
+                var tab = new BoxContainer { Orientation = LayoutOrientation.Vertical };
+
+                var scroll = new ScrollContainer
+                {
+                    HScrollEnabled = false,
+                    VScrollEnabled = true,
+                    VerticalExpand = true,
+                };
+
                 category = new BoxContainer { Orientation = LayoutOrientation.Vertical };
+                scroll.AddChild(category);
                 categories[phone.Category] = category;
 
                 var searchBar = new LineEdit();
-                category.AddChild(searchBar);
+                tab.AddChild(searchBar);
+                tab.AddChild(scroll);
 
                 searchBar.OnTextChanged += args =>
                 {
@@ -63,8 +74,8 @@ public sealed class TelephoneBui(EntityUid owner, Enum uiKey) : BoundUserInterfa
                     }
                 };
 
-                _window.Tabs.AddChild(category);
-                TabContainer.SetTabTitle(category, phone.Category);
+                _window.Tabs.AddChild(tab);
+                TabContainer.SetTabTitle(tab, phone.Category);
             }
 
             var phoneButton = new Button
