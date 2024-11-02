@@ -117,7 +117,7 @@ public sealed class FiremanCarrySystem : EntitySystem
 
         _transform.SetParent(ent, user);
         _transform.SetLocalPosition(ent, Vector2.Zero);
-        _standing.Down(ent);
+        _standing.Down(ent, changeCollision: true);
 
         _movementSpeed.RefreshMovementSpeedModifiers(user);
         _rmcSprite.SetRenderOrder(user, 1);
@@ -248,7 +248,7 @@ public sealed class FiremanCarrySystem : EntitySystem
             puller.Pulling is { } pulling)
         {
             _actionBlocker.UpdateCanMove(pulling);
-            _standing.Down(pulling);
+            _standing.Down(pulling, changeCollision: true);
             _rmcPulling.PlayPullEffect(ent, pulling);
 
             var selfMsg = Loc.GetString("rmc-pull-aggressive-self", ("pulled", pulling));

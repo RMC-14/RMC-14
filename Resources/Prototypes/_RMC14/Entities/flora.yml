@@ -1,0 +1,245 @@
+- type: entity
+  parent: BaseTree
+  id: RMCBasePalm
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Flora/palm.rsi
+    offset: 0,0.7
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.3,0.1,0.3"
+        density: 4000
+        layer:
+        - WallLayer
+
+- type: entity
+  id: RMCBasePlant
+  abstract: true
+  components:
+  - type: Sprite
+    drawdepth: Overdoors
+  - type: Clickable
+  - type: AtmosExposed
+  - type: Physics
+    bodyType: Static
+    canCollide: False
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Weapons/slash.ogg"
+  - type: Appearance
+  - type: Damageable
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Temperature
+    heatDamage:
+      types:
+        Heat: 5
+    coldDamage: {}
+  - type: Flammable
+    fireSpread: true
+    damage:
+      types:
+        Heat: 3
+  - type: Reactive
+    groups:
+      Flammable: [Touch]
+      Extinguish: [Touch]
+    reactions:
+    - reagents: [WeedKiller, PlantBGone]
+      methods: [Touch]
+      effects:
+      - !type:HealthChange
+        scaleByQuantity: true
+        damage:
+          types:
+            Heat: 10
+
+- type: entity
+  id: RMCBaseRockIndistructable
+  abstract: true
+  components:
+  - type: Clickable
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/Flora/rocks.rsi
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.4
+        density: 1000
+        layer:
+        - HalfWallLayer
+        - Opaque
+  - type: Climbable
+
+- type: entity
+  parent: RMCBaseRockIndistructable
+  id: RMCBaseRockDestructible
+  components:
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 200
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+  - type: Corrodible
+    isCorrodible: true
+
+- type: entity
+  parent: RMCBasePlant
+  id: BonsaiTree01
+  description: A small, leafy bush.
+  name: Bush
+  components:
+  - type: Sprite
+    state: tree_1
+    sprite: _RMC14/Objects/Flora/dam.rsi
+
+- type: entity
+  parent: RMCBasePlant
+  id: BonsaiTree02
+  description: A small, leafy bush.
+  name: Bush
+  components:
+  - type: Sprite
+    state: tree_2
+    sprite: _RMC14/Objects/Flora/dam.rsi
+
+- type: entity
+  parent: RMCBasePlant
+  id: BonsaiTree03
+  description: A small, leafy bush.
+  name: Bush
+  components:
+  - type: Sprite
+    state: tree_3
+    sprite: _RMC14/Objects/Flora/dam.rsi
+
+- type: entity
+  parent: RMCBasePlant
+  id: BonsaiTree04
+  description: A small, leafy bush.
+  name: Bush
+  components:
+  - type: Sprite
+    state: tree_4
+    sprite: _RMC14/Objects/Flora/dam.rsi
+
+- type: entity
+  parent: RMCBasePlant
+  id: StalkyBush01
+  name: stalkybush
+  components:
+  - type: Sprite
+    state: bushh1
+    sprite: Decals/Flora/flora_bushes.rsi
+
+- type: entity
+  parent: RMCBasePlant
+  id: StalkyBush02
+  name: stalkybush
+  components:
+  - type: Sprite
+    state: bushh2
+    sprite: Decals/Flora/flora_bushes.rsi
+
+- type: entity
+  parent: RMCBasePlant
+  id: StalkyBush03
+  name: stalkybush
+  components:
+  - type: Sprite
+    state: bushh3
+    sprite: Decals/Flora/flora_bushes.rsi
+
+- type: entity
+  parent: RMCBasePlant
+  id: FernyBush01
+  name: fernybush
+  components:
+  - type: Sprite
+    state: bushj1
+    sprite: Decals/Flora/flora_bushes.rsi
+
+- type: entity
+  parent: RMCBasePlant
+  id: FernyBush02
+  name: fernybush
+  components:
+  - type: Sprite
+    state: bushj2
+    sprite: Decals/Flora/flora_bushes.rsi
+
+- type: entity
+  parent: RMCBasePlant
+  id: FernyBush03
+  name: fernybush
+  components:
+  - type: Sprite
+    state: bushj3
+    sprite: Decals/Flora/flora_bushes.rsi
+
+- type: entity
+  parent: RMCBasePalm
+  id: RMCFloraTreePalm01
+  name: palm tree
+  components:
+  - type: Sprite
+    state: palm1
+
+- type: entity
+  parent: RMCBasePalm
+  id: RMCFloraTreePalm02
+  name: palm tree
+  components:
+  - type: Sprite
+    state: palm2
+
+- type: entity
+  parent: RMCBaseRockDestructible
+  id: RMCRock
+  name: rock
+  description: A solidified collection of local minerals. When melted, becomes a substance best known as lava.
+  components:
+  - type: Sprite
+    state: rock
+
+- type: entity
+  parent: RMCBaseRockIndistructable
+  id: RMCRockIndistructable
+  name: sturdy rock
+  description: A solidified collection of local minerals. When melted, becomes a substance best known as lava. These look particularly durable.
+  components:
+  - type: Sprite
+    state: rock
+
+- type: entity
+  parent: RMCBaseRockDestructible
+  id: RMCRockSmart
+  name: a smart rock
+  description: Now draw them getting an education.
+  components:
+  - type: Sprite
+    state: educated_rock
