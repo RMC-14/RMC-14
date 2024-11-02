@@ -384,7 +384,7 @@ public abstract partial class SharedBuckleSystem
                 _standing.Stand(buckle, force: true);
                 break;
             case StrapPosition.Down:
-                _standing.Down(buckle, false, false, force: true);
+                _standing.Down(buckle, false, false, force: true, changeCollision: true);
                 break;
         }
 
@@ -482,7 +482,7 @@ public abstract partial class SharedBuckleSystem
         Appearance.SetData(buckle, BuckleVisuals.Buckled, false);
 
         if (HasComp<KnockedDownComponent>(buckle) || _mobState.IsIncapacitated(buckle))
-            _standing.Down(buckle, playSound: false);
+            _standing.Down(buckle, playSound: false, changeCollision: true);
         else
             _standing.Stand(buckle);
 
