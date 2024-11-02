@@ -1,5 +1,7 @@
-﻿using Content.Shared._RMC14.Areas;
+﻿using System.Numerics;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Sprite;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.Destructible;
@@ -31,6 +33,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly RMCSpriteSystem _sprite = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
 
     protected readonly HashSet<EntityUid> ToUpdate = new();
@@ -97,6 +100,25 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.CellContainerSlot);
         if (ent.Comp.StartingCell is { } startingCell)
             TrySpawnInContainer(startingCell, ent, ent.Comp.CellContainerSlot, out _);
+
+        var sprite = EnsureComp<SpriteSetRenderOrderComponent>(ent);
+        switch (Transform(ent).LocalRotation.GetDir())
+        {
+            case Direction.South:
+                _sprite.SetOffset(ent, new Vector2(0.45f, -0.32f));
+                break;
+            case Direction.East:
+                _sprite.SetOffset(ent, new Vector2(0.7f, -1.45f));
+                break;
+            case Direction.North:
+                _sprite.SetOffset(ent, new Vector2(-0.5f, -1.5f));
+                break;
+            case Direction.West:
+                _sprite.SetOffset(ent, new Vector2(-0.7f, -0.4f));
+                break;
+        }
+
+        Dirty(ent, sprite);
     }
 
     private void OnApcRemove<T>(Entity<RMCApcComponent> ent, ref T args)
@@ -321,7 +343,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             RMCFusionReactorState.Wrench => RMCFusionReactorState.Working,
             RMCFusionReactorState.Wire => RMCFusionReactorState.Wrench,
             RMCFusionReactorState.Weld => RMCFusionReactorState.Wire,
-            _ => throw new ArgumentOutOfRangeException()
+            _ => throw new ArgumentOutOfRangeException(),
         };
 
         Dirty(ent);
@@ -336,7 +358,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
         if (ent.Comp.State == RMCFusionReactorState.Weld)
         {
-            _popup.PopupClient("You see no reason to attack the S-52 fusion reactor.", ent, user);
+            _popup.PopupClient(Loc.GetString("rmc-fusion-reactor-already-destroyed", ("reactor", ent)), ent, user);
             return;
         }
 
@@ -358,7 +380,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
         if (ent.Comp.State == RMCFusionReactorState.Weld)
         {
-            _popup.PopupClient("You see no reason to attack the S-52 fusion reactor.", ent, user);
+            _popup.PopupClient(Loc.GetString("rmc-fusion-reactor-already-destroyed", ("reactor", ent)), ent, user);
             return;
         }
 
@@ -374,7 +396,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         Dirty(ent);
         UpdateAppearance(ent);
 
-        _popup.PopupClient("The S-52 fusion reactor gets torn apart!", ent, user, SmallCaution);
+        _popup.PopupClient(Loc.GetString("rmc-fusion-reactor-destroyed", ("reactor", ent)), ent, user, SmallCaution);
 
         if (ent.Comp.State != RMCFusionReactorState.Weld)
             args.Repeat = true;
@@ -389,21 +411,22 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         {
             if (ent.Comp.State != RMCFusionReactorState.Working)
             {
+                // TODO: localize
                 var tool = ent.Comp.State switch
                 {
-                    RMCFusionReactorState.Wrench => $"a [color=cyan]Wrench[/color]",
-                    RMCFusionReactorState.Wire => $"[color=cyan]Wirecutters[/color]",
-                    RMCFusionReactorState.Weld => $"a [color=cyan]Welder[/color]",
+                    RMCFusionReactorState.Wrench => "a [color=cyan]Wrench[/color]",
+                    RMCFusionReactorState.Wire => "[color=cyan]Wirecutters[/color]",
+                    RMCFusionReactorState.Weld => "a [color=cyan]Welder[/color]",
                     _ => throw new ArgumentOutOfRangeException(),
                 };
 
                 args.PushMarkup($"Use {tool} to repair it!");
             }
 
-
             if (!_container.TryGetContainer(ent, ent.Comp.CellContainerSlot, out var container) ||
                 container.ContainedEntities.Count == 0)
             {
+                // TODO: localize
                 args.PushMarkup("It needs a [color=cyan]fuel cell[/color]!");
             }
         }
@@ -564,6 +587,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
         return false;
     }
+
+    public abstract bool IsPowered(EntityUid ent);
 
     public override void Update(float frameTime)
     {

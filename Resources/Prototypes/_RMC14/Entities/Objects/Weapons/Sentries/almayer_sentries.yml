@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: RMCBaseTurret
   id: RMCTurretAlmayer
-  name: UA-635C static gauss turret
+  name: UN-635C static gauss turret
   description: A fully-automated defence turret with mid-range targeting capabilities. Armed with a modified M32-S Autocannon and an internal belt feed and modified for UN warship use.
   components:
   - type: InteractionPopup
@@ -38,6 +38,16 @@
         acts: [ "Destruction" ]
   - type: TimedDespawn
     lifetime: 1200
+  - type: HTN
+    rootTask:
+      task: RMCTurretCompound
+    blackboard:
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Effects/double_beep.ogg
+      VisionRadius: !type:Single
+        4.5
+  - type: UserIFF
+    faction: FactionMarine
 
 - type: entity
   parent: BaseStructure

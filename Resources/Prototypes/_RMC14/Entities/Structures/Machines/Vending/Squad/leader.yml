@@ -33,8 +33,7 @@
     #  points: 0
     #- id: CMM79GrenadeLauncher
     #  points: 0
-    #- id: CMMOU-53Shotgun
-    #  points: 0
+      - id: WeaponShotgunMOU53
     #- id: CMXM88HeavyRifle
     #  points: 0
     - name: Armors
@@ -57,8 +56,8 @@
         points: 3
       - id: CMFireExtinguisherPortable
         points: 3
-    #- id: CMMotionDetector
-    #  points: 5
+      - id: RMCMotionDetector
+        points: 5
     #- id: CMFultonDeviceStack
     #  points: 5
     - name: Binoculars
@@ -240,7 +239,7 @@
     #- id: CMM276GeneralPistolHolsterRig
       - id: CMBeltMedicBag
       - id: CMBeltMedical
-    #- id: CMM276M63HolsterRig
+      - id: RMCBeltSmgMags
     #- id: CMM276M44HolsterRig
     #- id: CMM276M82FHolsterRig
       - id: RMCM276ShotgunShellLoadingRig
@@ -282,6 +281,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

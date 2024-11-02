@@ -21,6 +21,9 @@ public sealed partial class SquadTeamComponent : Component
     public SpriteSpecifier Background;
 
     [DataField]
+    public SpriteSpecifier.Rsi? MinimapBackground;
+
+    [DataField]
     public ProtoId<AccessLevelPrototype>[] AccessLevels = Array.Empty<ProtoId<AccessLevelPrototype>>();
 
     [DataField]

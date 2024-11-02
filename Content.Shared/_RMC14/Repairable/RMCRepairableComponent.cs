@@ -25,4 +25,7 @@ public sealed partial class RMCRepairableComponent : Component
 
     [DataField, AutoNetworkedField]
     public ProtoId<ToolQualityPrototype> Quality = "Welding";
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 FuelUsed = FixedPoint2.New(0);
 }

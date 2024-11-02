@@ -16,6 +16,7 @@
         restitution: 0.0
         mask:
         - MobMask
+        - BarbedBarricade
         layer:
         - Opaque
         - XenoProjectileImpassable
@@ -170,12 +171,19 @@
   - type: UserLimitHits
   - type: MovementIgnoreGravity
   - type: SlowOnPull
-    multiplier: 0.6
     slowdowns:
-    - multiplier: 0.5
+    - multiplier: 0.7575
       whitelist:
         components:
-        - Xeno
+        - Marine
+    - multiplier: 0.8725
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.59
+      whitelist:
+        components:
+        - XenoHeavy
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -224,3 +232,15 @@
     actionId: RMCActionOpenTacticalMapMarine
     marines: true
   - type: EmoteCooldown
+  - type: FiremanCarriable
+  - type: CanFiremanCarry
+  - type: RMCSuicide
+    damage:
+      types:
+        Piercing: 100
+        Asphyxiation: 200
+  - type: RMCUserPryingRequiresTool
+  - type: BlockEntityStorage
+    whitelist:
+      components:
+      - CanBeSupplyDropped

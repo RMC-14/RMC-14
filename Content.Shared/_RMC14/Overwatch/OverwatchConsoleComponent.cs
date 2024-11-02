@@ -23,4 +23,10 @@ public sealed partial class OverwatchConsoleComponent : Component
 
     [DataField, AutoNetworkedField]
     public HashSet<NetEntity> Hidden = new();
+
+    [DataField, AutoNetworkedField]
+    public OverwatchSupplyDropLocation?[] SupplyDropLocations = new OverwatchSupplyDropLocation?[3];
+
+    [DataField, AutoNetworkedField]
+    public int LastLocation;
 }

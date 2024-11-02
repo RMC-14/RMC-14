@@ -6,6 +6,7 @@
             Resizable="False">
 
     <BoxContainer Orientation="Vertical" SeparationOverride="4" MinWidth="150">
+        <Button Access="Public" Name="PatronPerksButton" Text="{Loc 'rmc-ui-patron-perks'}" StyleClasses="Caution" Visible="False" />
         <Button Access="Public" Name="RoadmapButton" Text="{Loc 'cm-ui-roadmap'}" StyleClasses="Caution" />
         <changelog:ChangelogButton Access="Public" Name="ChangelogButton"/>
         <ui:VoteCallMenuButton />

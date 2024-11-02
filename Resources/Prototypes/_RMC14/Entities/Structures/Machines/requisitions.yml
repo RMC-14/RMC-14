@@ -1,6 +1,7 @@
 - type: entity
   id: RMCASRSAccount
   name: ASRS account
+  categories: [ HideSpawnMenu ]
   components:
   - type: RequisitionsAccount
 
@@ -71,7 +72,7 @@
   - type: LitOnPowered
   - type: EmitSoundOnUIOpen
     sound:
-      collection: Keyboard
+      collection: RMCKeyboardTyping
       params:
         volume: -1
   - type: RequireProjectileTarget

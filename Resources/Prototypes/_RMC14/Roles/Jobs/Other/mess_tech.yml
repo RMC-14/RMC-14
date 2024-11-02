@@ -13,6 +13,9 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: mst
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_shipside
   special:
   - !type:AddComponentSpecial
     components:
@@ -22,6 +25,7 @@
         RMCSkillDomestics: 2
         RMCSkillEngineer: 1
         RMCSkillFirearms: 2
+        RMCSkillFireman: 1
   hidden: true # TODO RMC14
 
 - type: startingGear

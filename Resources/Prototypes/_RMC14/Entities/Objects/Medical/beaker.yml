@@ -149,7 +149,7 @@
 
 - type: entity
   parent: RMCBeakerBaseMetallic
-  id: RMCBeakerHighCapacity 
+  id: RMCBeakerHighCapacity
   name: high-capacity beaker
   description: A beaker with an enlarged holding capacity, made with blue-tinted plexiglass in order to withstand greater pressure. Can hold up to 300 units.
   components:
@@ -222,7 +222,7 @@
 # Pressurised Canister /obj/item/reagent_container/glass/pressurized_canister
 - type: entity
   parent: CMBeakerBase
-  id: CMPressurizedCanister
+  id: RMCPressurizedCanister
   name: pressurized canister
   description: A pressurized container. The inner part of a pressurized reagent canister pouch. Only compatible with its pouch, machinery or a storage tank.
   components:
@@ -243,14 +243,70 @@
   - type: SolutionContainerVisuals
     maxFillLevels: 1
     fillBaseName: can
-  - type: Spillable
-    solution: beaker
   - type: StaticPrice
     price: 40
   - type: Tag
     tags:
     - PressurizedCanister
     - ChemDispensable
+  - type: DrainableSolution
+    solution: beaker
+
+- type: entity
+  parent: RMCPressurizedCanister
+  id: RMCPressurizedCanisterBicaridine
+  suffix: Bicaridine
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+        reagents:
+        - ReagentId: CMBicaridine
+          Quantity: 480
+
+- type: entity
+  parent: RMCPressurizedCanister
+  id: RMCPressurizedCanisterKelotane
+  suffix: Kelotane
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+        reagents:
+        - ReagentId: CMKelotane
+          Quantity: 480
+
+- type: entity
+  parent: RMCPressurizedCanister
+  id: RMCPressurizedCanisterTricordrazineRevival
+  suffix: Tricordrazine - Revival
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+        reagents:
+        - ReagentId: CMEpinephrine
+          Quantity: 160
+        - ReagentId: CMInaprovaline
+          Quantity: 160
+        - ReagentId: CMTricordrazine
+          Quantity: 160
+
+- type: entity
+  parent: RMCPressurizedCanister
+  id: RMCPressurizedCanisterTricordrazine
+  suffix: Tricordrazine
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+        reagents:
+        - ReagentId: CMTricordrazine
+          Quantity: 480
 
 - type: Tag
   id: PressurizedCanister

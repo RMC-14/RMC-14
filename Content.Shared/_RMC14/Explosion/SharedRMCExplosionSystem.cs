@@ -1,4 +1,4 @@
-﻿using Content.Shared.Coordinates;
+using Content.Shared.Coordinates;
 using Content.Shared.Throwing;
 using Robust.Shared.Map;
 using Robust.Shared.Random;

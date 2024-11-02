@@ -157,9 +157,8 @@ public sealed class XenoSystem : EntitySystem
         if (args.Target is not { } target)
             return;
 
-        // TODO RMC14 different hives
         // TODO RMC14 this still falsely plays the hit red flash effect on xenos if others are hit in a wide swing
-        if (_xenoFriendlyQuery.HasComp(target) ||
+        if ((_xenoFriendlyQuery.HasComp(target) && _hive.FromSameHive(xeno.Owner, target)) ||
             _mobState.IsDead(target))
         {
             args.Cancel();
@@ -265,7 +264,7 @@ public sealed class XenoSystem : EntitySystem
         var passiveHeal = threshold.Value / 65 + xeno.Comp.FlatHealing;
         var recovery = (CompOrNull<XenoRecoveryPheromonesComponent>(xeno)?.Multiplier ?? 0) / 2;
         var recoveryHeal = (threshold.Value / 65) * (recovery / 2);
-        return (passiveHeal + recoveryHeal) * multiplier / 2;
+        return (passiveHeal + recoveryHeal) * multiplier; // TODO RMC14 add Strain based multiplier for Gardener Drone
     }
 
     public void HealDamage(Entity<DamageableComponent?> xeno, FixedPoint2 amount)

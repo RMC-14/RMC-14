@@ -16,7 +16,10 @@
   - CMMedbay
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: medic
+    state: nurse
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_shipside
   special:
   - !type:AddComponentSpecial
     components:

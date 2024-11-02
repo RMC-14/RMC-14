@@ -94,6 +94,8 @@
     cm-chatsan-word-ships: cm-chatsan-replacement-ships
     cm-chatsan-word-grenade: cm-chatsan-replacement-grenade
     cm-chatsan-word-grenades: cm-chatsan-replacement-grenades
+    cm-chatsan-word-gl: cm-chatsan-replacement-gl
+    cm-chatsan-word-gls: cm-chatsan-replacement-gls
     cm-chatsan-word-bullet: cm-chatsan-replacement-bullet
     cm-chatsan-word-bullets: cm-chatsan-replacement-bullets
     cm-chatsan-word-ammo: cm-chatsan-replacement-ammo

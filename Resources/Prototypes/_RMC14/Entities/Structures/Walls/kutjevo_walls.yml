@@ -1,0 +1,78 @@
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallKutjevoRock
+  name: rock wall
+  description: Tall sandy rocks. Imposing. Impressive. Attention grabbing.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/kutjevo_rock.rsi
+    state: rock
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/kutjevo_rock.rsi
+    state: rock
+  - type: IconSmooth
+    key: walls
+    base: rock
+
+- type: entity
+  parent: RMCWallKutjevoRock
+  id: RMCWallKutjevoRockBorder
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/kutjevo_rock.rsi
+    state: rock_border
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/kutjevo_rock.rsi
+    state: rock_border
+  - type: IconSmooth
+    key: walls
+    base: rock_border
+
+
+- type: entity
+  parent: CMWallMetal
+  id: RMCWallKutjevo
+  name: colony wall
+  description: Dusty worn down walls that were once built to last.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/kutjevo_wall.rsi
+    state: colony
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/kutjevo_wall.rsi
+    state: colony
+  - type: IconSmooth
+    key: walls
+    base: colony
+
+- type: entity
+  parent: CMWallReinforced
+  id: RMCWallKutjevoReinforced
+  name: reinforced colony wall
+  description: Dusty worn down walls that were once built to last. This one is reinforced
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/kutjevo_rwall.rsi
+    state: colonyr
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/kutjevo_rwall.rsi
+    state: colonyr
+  - type: IconSmooth
+    key: walls
+    base: colonyr
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallKutjevoHull
+  name: heavy reinforced colony wall
+  description: Dusty worn down walls that were once built to last. This one is indestructible.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/kutjevo_rwall.rsi
+    state: colonyr
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/kutjevo_rwall.rsi
+    state: colonyh
+  - type: IconSmooth
+    key: walls
+    base: colonyr
