@@ -99,7 +99,7 @@ public abstract class SharedWebbingSystem : EntitySystem
             return;
 
         // Check if holster has gun
-        if (_cmInventory.IsEmpty(itemSlotsComp.Owner))
+        if (_cmInventory.TryGetLastInserted((clothing.Owner, null), out_))
             return;
 
         args.Verbs.Add(new InteractionVerb

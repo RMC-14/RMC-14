@@ -353,8 +353,12 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
                     continue;
                 }
-                
-                ------ add check for webbing here ------
+
+                // Check if the slot item has a webbing
+                // If yes, treat the webbing as the slot item
+                if (TryComp(clothing, out WebbingClothingComponent? webClothComp) &&
+                    _webbing.HasWebbing(webClothComp.Owner, out var webbing))
+                    clothing = webbing;
 
                 // Check if the slot item has a CMHolsterComponent
                 if (!TryComp(clothing, out CMHolsterComponent? holster))
@@ -377,36 +381,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
                         emptyOnly: true) &&
                     itemSlot.ContainerSlot != null)
                 {
-<<<<<< shoulder-holster
-                    validSlots.Add(new HolsterSlot(priority, true, null, (clothing, slotComp), ItemSlot: itemSlot));
-                    continue;
-                }
-
-                // If the slot item has a WebbingClothingComponent
-                // and has a webbing
-                //  which contains a CMHolsterComponent
-                //  and contains an ItemSlotsComponent
-                //  and insert succeeds
-                //  then return
-                if (TryComp(clothing, out WebbingClothingComponent? webClothComp))
-                {
-                    // Get webbing component if able
-                    if (!_webbing.HasWebbing(webClothComp.Owner, out var webbing))
-                        continue;
-
-                    if (HasComp<CMHolsterComponent>(webbing) &&
-                        HasComp<CMItemSlotsComponent>(webbing) &&
-                        SlotCanInteract(user, webbing, out var webSlotComp) &&
-                        TryGetAvailableSlot((webbing, webSlotComp),
-                            item,
-                            user,
-                            out var webItemSlot,
-                            emptyOnly: true) &&
-                        webItemSlot.ContainerSlot != null)
-                    {
-                        validSlots.Add(new HolsterSlot(priority, true, null, (webbing, webSlotComp), ItemSlot: webItemSlot));
-                    }
-=======
                     validSlots.Add(new HolsterSlot(priority, true, null, clothing, ItemSlot: itemSlot));
                     continue;
                 }
@@ -416,9 +390,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 if (HasComp<StorageComponent>(clothing) &&
                     _storage.CanInsert(clothing, item, out _))
                 {
-                    // TODO: Add storage holster to valid slots list
                     validSlots.Add(new HolsterSlot(priority, true, null, clothing, null));
->>>>>> master
                 }
             }
             priority++;
@@ -528,7 +500,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
     }
 
     // Get last item inserted into holster (can also be used to check if holster is empty)
-    private bool TryGetLastInserted(Entity<CMHolsterComponent?> holster, out EntityUid item)
+    public bool TryGetLastInserted(Entity<CMHolsterComponent?> holster, out EntityUid item)
     {
         item = default;
 
@@ -729,15 +701,5 @@ public abstract class SharedCMInventorySystem : EntitySystem
         }
 
         return (filled, slots.Comp.Slots.Count);
-    }
-
-    public bool IsEmpty(Entity<ItemSlotsComponent?> slots)
-    {
-        (int filled, int total) = GetItemSlotsFilled(slots);
-
-        if (filled == 0)
-            return true;
-
-        return false;
     }
 }
