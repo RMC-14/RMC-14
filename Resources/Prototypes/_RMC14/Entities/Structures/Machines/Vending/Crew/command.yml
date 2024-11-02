@@ -414,7 +414,7 @@
     #- id: CMTacticalWaistcoat # TODO Port Waistcoat
       - id: CMWebbingPouch
       - id: CMWebbing
-    - id: CMWebbingHolster
+      - id: CMWebbingHolster
     - name: Huds
       choices: { CMHud: 1 }
       entries:
