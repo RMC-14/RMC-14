@@ -199,7 +199,7 @@
         whitelist:
           tags:
           - Sidearm
-      - popup: rmc-storage-limit-max-mags
+      - popup: rmc-storage-limit-max-ammo-webbing
         count: 2
         whitelist:
           tags:
