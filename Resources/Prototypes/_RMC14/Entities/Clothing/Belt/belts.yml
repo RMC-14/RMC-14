@@ -402,7 +402,7 @@
       whitelist:
         tags:
         - Sidearm
-    - popup: rmc-storage-limit-max-mags
+    - popup: rmc-storage-limit-max-ammo
       count: 4
       whitelist:
         tags:
@@ -593,8 +593,8 @@
     - popup: rmc-storage-limit-one-gun
       whitelist:
         tags:
-        - RMCWeaponRevolverM44
-    - popup: rmc-storage-limit-max-mags
+        - RMCRevolver
+    - popup: rmc-storage-limit-max-loaders
       count: 6
       whitelist:
         tags:
