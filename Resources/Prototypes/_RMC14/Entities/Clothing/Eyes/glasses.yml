@@ -86,7 +86,7 @@
           False: { state: icon }
 
 - type: entity
-  parent: ClothingEyesHudMedical
+  parent: [ClothingEyesHudMedical, BaseToggleClothing]
   id: RMCGlassesMedicalHUDGlasses
   name: medical HUD glasses
   description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
@@ -95,6 +95,42 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/medicalhud.rsi
+  - type: ItemToggle
+    activated: true
+    soundActivate:
+      path: /Audio/_RMC14/Machines/click.ogg
+      params:
+        variation: 0.250
+    soundDeactivate:
+      path: /Audio/_RMC14/Machines/click.ogg
+      params:
+        variation: 0.250
+  - type: ToggleClothing
+    action: RMCActionToggleMedhud
+  - type: ComponentToggler
+    components:
+    - type: ShowHealthBars
+      damageContainers:
+      - Biological
+    - type: HolocardScanner
+    - type: ShowHealthIcons
+      damageContainers:
+      - Biological
+  - type: RMCItemToggleClothingVisuals
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: {state: icon-on}
+          False: {state: icon}
+  - type: Appearance
+  - type: ItemToggleRequiresSkill
+    skills:
+      RMCSkillMedical: 1
+  - type: ItemToggleDeactivateUnskilled
+    skills:
+      RMCSkillMedical: 1
+    popup: rmc-skills-hud-toggle
 
 - type: entity
   parent: ClothingEyesBase
