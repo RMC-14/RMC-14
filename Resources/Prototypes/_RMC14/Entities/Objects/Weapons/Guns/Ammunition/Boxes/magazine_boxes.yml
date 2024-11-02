@@ -739,12 +739,72 @@
       whitelist:
         tags:
         - RMCSpeedLoaderM44
+        
+# Nailgun
+
+- type: entity
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineSMGNailgunEmpty
+  name: magazine box (Nailgun x 10)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineSMGNailgunEmpty
+  - type: Sprite
+    layers:
+    - state: base_nailgun_deployed
+      map: [ "deployed" ]
+      visible: false
+    - state: magaz_nailgun
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      visible: false
+    - state: base_nailgun
+      map: [ "packed" ]
+  # The nailgun box sprite isn't structured the same as other sprites, so the visualizer is different.
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: blank, visible: true }
+          Low: { state: magaz_nailgun_1, visible: true }
+          Medium: { state: magaz_nailgun_2, visible: true }
+          High: { state: magaz_nailgun_3, visible: true }
+          Full: { state: magaz_nailgun, visible: true }
+      enum.DeployableItemVisuals.Deployed:
+        deployed:
+          True: { visible: true }
+          False: { visible: false }
+        enum.CMItemSlotsLayers.Fill:
+          True: { visible: true }
+          False: { visible: false }
+        packed:
+          True: { visible: false }
+          False: { visible: true }
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSMGNailgun
+
+- type: entity
+  parent: RMCBoxMagazineSMGNailgunEmpty
+  id: RMCBoxMagazineSMGNailgun
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineSMGNailgun
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSMGNailgun
 
 # Shotgun
 - type: entity
   parent: RMCBoxShellsBase
   id: RMCBoxShellsBuckshotEmpty
-  name: shell box (Buckshot)
+  name: shell box (Buckshot x 100)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -780,7 +840,7 @@
 - type: entity
   parent: RMCBoxShellsBase
   id: RMCBoxShellsSlugsEmpty
-  name: shell box (Slugs)
+  name: shell box (Slugs x 100)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -832,7 +892,7 @@
 - type: entity
   parent: RMCBoxShellsBase
   id: RMCBoxShellsFlechetteEmpty
-  name: shell box (Flechette)
+  name: shell box (Flechette x 100)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -885,7 +945,7 @@
 - type: entity
   parent: RMCBoxShellsBase
   id: RMCBoxShellsIncendiaryEmpty
-  name: shell box (Incendiary)
+  name: shell box (Incendiary x 100)
   components:
   # - type: Construction
     # graph: RMCBoxMagazine
@@ -937,7 +997,7 @@
 - type: entity
   parent: RMCBoxShellsBase
   id: RMCBoxShellsBeanbagEmpty
-  name: shell box (Beanbag)
+  name: shell box (Beanbag x 100)
   components:
   # - type: Construction
     # graph: RMCBoxMagazine
@@ -989,7 +1049,7 @@
 - type: entity
   parent: RMCBoxShellsBase
   id: RMCBoxShellsIncendiaryBuckshotEmpty
-  name: shell box (Incendiary Buckshot)
+  name: shell box (Incendiary Buckshot x 100)
   components:
   # - type: Construction
     # graph: RMCBoxMagazine

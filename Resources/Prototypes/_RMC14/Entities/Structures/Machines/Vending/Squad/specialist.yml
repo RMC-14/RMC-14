@@ -158,6 +158,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather
     - name: Restricted Firearms
       entries:
       - id: RMCMK80Case

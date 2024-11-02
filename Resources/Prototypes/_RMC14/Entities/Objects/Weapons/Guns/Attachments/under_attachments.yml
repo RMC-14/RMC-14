@@ -51,7 +51,7 @@
     doInterrupt: true
     attachedOnly: true
     breakOnMove: true
-    breakOnRotate: true
+    breakOnFullRotate: true
     doAfter: 1.5
     deactivateDoAfter: 0
     instantToggle: Brace

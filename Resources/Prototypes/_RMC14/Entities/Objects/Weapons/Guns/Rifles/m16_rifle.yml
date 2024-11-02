@@ -1,6 +1,6 @@
 ﻿- type: entity
   parent: CMBaseWeaponRifle
-  id: WeaponRifleM16
+  id: WeaponRifleM16 # TODO: Make the M16 grenadier rifle when impact nades exist
   name: M16 rifle
   description: An old, reliable design first adopted by the U.S. military in the 1960s. Something like this belongs in a museum of war history. It is chambered in 5.56x45mm.
   suffix: Filled
@@ -13,6 +13,8 @@
     - sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi # TODO RMC14 effects
       state: m16-stock
       offset: -0.5, 0
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m16.rsi
   - type: Gun
@@ -68,7 +70,7 @@
           - RMCAttachmentS42xTelescopicMiniscope
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.81, 0.00
+      rmc-aslot-barrel: 0.81, -0.03
       rmc-aslot-rail: -0.15, 0.12
 
 - type: entity
@@ -99,25 +101,26 @@
 - type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridgeRifleM16
-  name: Cartridge (7.62x51)
-  description: A 7.62x51 rifle cartridge
+  name: Cartridge (5.56x45)
+  description: A 5.56x45 rifle cartridge
   components:
   - type: Tag
     tags:
     - Cartridge
     - RMCCartridgeRifleM16
   - type: CartridgeAmmo
-    proto: BulletRifle10x24mm
+    proto: BulletRifle5.56x45mm
 
 - type: entity
-  parent: RMCBaseBullet
-  id: BulletRifleM16
-  categories: [ HideSpawnMenu ]
+  parent: BulletRifle10x24mm
+  id: BulletRifle5.56x45mm
   components:
   - type: Projectile
     damage:
       types:
         Piercing: 56
+  - type: CMArmorPiercing
+    amount: 5
 
 - type: Tag
   id: RMCMagazineRifleM16

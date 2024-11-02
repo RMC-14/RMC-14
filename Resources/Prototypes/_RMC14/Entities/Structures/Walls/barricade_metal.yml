@@ -113,7 +113,7 @@
   parent: CMBarricadeMetal
   id: CMBarricadeBurn
   name: anti-biohazard barricade
-  description: A barricade incredibly resistant to corrosive and fire damage but breaks easier. Repair with a welder.
+  description: A barricade incredibly resistant to corrosive and fire damage. Repair with a welder.
   components:
     - type: Sprite
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi

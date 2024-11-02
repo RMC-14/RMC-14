@@ -62,7 +62,7 @@
           - RMCAttachmentMagneticHarness
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-rail: -0.12, 0.1
+      rmc-aslot-rail: -0.057, 0.162
   - type: IgnorePredictionHide
   - type: GunIgnorePrediction
 

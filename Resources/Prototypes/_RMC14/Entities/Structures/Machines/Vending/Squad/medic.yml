@@ -198,9 +198,10 @@
       takeAll: CMStandard
       entries:
       - id: CMVendorBundleSquadMedicalApparel
+      - id: RMCHandsLatexMarine
+        name: combat sterile gloves
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
-    #- id: CMCombatSterileGloves
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
@@ -277,3 +278,4 @@
       - id: CMMaskSterile
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather
