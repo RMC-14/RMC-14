@@ -71,6 +71,8 @@
     idleLoad: 10000
     activeLoad: 1
     channel: Equipment
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   abstract: true
