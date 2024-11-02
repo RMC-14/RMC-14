@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoCarrier
   name: Carrier
   description: A strange-looking alien creature. It carries a number of scuttling jointed crablike creatures.
@@ -11,6 +12,19 @@
     name: cm-job-name-xeno-carrier
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Carrier/carrier.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.RightArm" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.Head" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.LeftArm" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.Back" ]
+      visible: false
   - type: MobState
     allowedStates:
     - Alive
@@ -31,14 +45,15 @@
     - ActionXenoOrderConstruction
     - ActionXenoPheromones
     - ActionXenoPlantWeeds
-    #    - ActionXenoResinHole
-    #    - ActionXenoThrowParasite
-    #    - ActionXenoRetrieveEgg
-    #    - ActionXenoParasiteReserve
+    - ActionXenoResinHole
+    - ActionXenoThrowParasite
+    - ActionXenoRetrieveEgg
+    - ActionXenoParasiteReserve
     - ActionXenoDevolve
     tier: 2
     hudOffset: 0,0.19
     unlockAt: 300 # 5 minutes
+  - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
     - CMXenoDrone
@@ -58,35 +73,43 @@
     damage:
       groups:
         Brute: 27.5
-  - type: Tackle
-    threshold: 3
+  - type: Tackle # min: 2, max: 4
+    threshold: 4
     stun: 9
     chance: 0.50
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.35
-        density: 185
-        mask:
-        - MobMask
-        layer:
-        - MobLayer
-      fix2:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.40
-        density: 185
-        layer:
-        - BulletImpassable
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.6375
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.7075
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.475
+      whitelist:
+        components:
+        - XenoHeavy
+  - type: EggPlantTime
+    plantTime: 1
   - type: WhitelistPickup
     whitelist:
       components:
       - XenoParasite
       - XenoEgg
-#  - type: RMCXenoDamageVisuals # TODO RMC14
-#    prefix: carrier
+      - XenoFruit
+  - type: XenoParasiteThrower
+  - type: XenoEggRetriever
+  - type: XenoNurturing
+  - type: RMCSize
+    size: Big
+  - type: RMCXenoDamageVisuals
+    prefix: carrier
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: carrier

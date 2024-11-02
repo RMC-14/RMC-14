@@ -17,6 +17,9 @@
   overwatchSortPriority: -3
   overwatchShowName: true
   overwatchRoleName: Specialist
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: spec
   special:
   - !type:AddComponentSpecial
     components:
@@ -27,6 +30,7 @@
         RMCSkillEndurance: 2
         RMCSkillEngineer: 1
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillJtac: 1
         RMCSkillMeleeWeapons: 1
         RMCSkillSpecialistWeapons: 1
@@ -54,6 +58,9 @@
     id: CMDogtagWeaponsSpecialist
     ears: CMHeadsetAlpha
 
+- type: playTimeTracker
+  id: CMJobWeaponsSpecialist
+
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointWeaponsSpecialist
@@ -67,5 +74,39 @@
       state: green
     - state: weapons_specialist
 
-- type: playTimeTracker
-  id: CMJobWeaponsSpecialist
+- type: entity
+  parent: CMSpawnPointWeaponsSpecialist
+  id: CMSpawnPointWeaponsSpecialistAlpha
+  suffix: Alpha
+  components:
+  - type: SquadSpawner
+    squad: SquadAlpha
+    role: CMWeaponsSpecialist
+
+- type: entity
+  parent: CMSpawnPointWeaponsSpecialist
+  id: CMSpawnPointWeaponsSpecialistBravo
+  suffix: Bravo
+  components:
+  - type: SquadSpawner
+    squad: SquadBravo
+    role: CMWeaponsSpecialist
+
+- type: entity
+  parent: CMSpawnPointWeaponsSpecialist
+  id: CMSpawnPointWeaponsSpecialistCharlie
+  suffix: Charlie
+  components:
+  - type: SquadSpawner
+    squad: SquadCharlie
+    role: CMWeaponsSpecialist
+
+- type: entity
+  parent: CMSpawnPointWeaponsSpecialist
+  id: CMSpawnPointWeaponsSpecialistDelta
+  suffix: Delta
+  components:
+  - type: SquadSpawner
+    squad: SquadDelta
+    role: CMWeaponsSpecialist
+

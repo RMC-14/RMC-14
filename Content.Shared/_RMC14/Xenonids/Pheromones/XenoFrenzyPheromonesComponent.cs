@@ -21,7 +21,7 @@ public sealed partial class XenoFrenzyPheromonesComponent : Component
     public float AttackDamageModifier = 1.1f;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 MovementSpeedModifier = 0.1;
+    public FixedPoint2 MovementSpeedModifier = 0.06;
 
     [DataField, AutoNetworkedField]
     public List<ProtoId<DamageTypePrototype>> DamageTypes = new() { "Blunt", "Slash", "Piercing" };

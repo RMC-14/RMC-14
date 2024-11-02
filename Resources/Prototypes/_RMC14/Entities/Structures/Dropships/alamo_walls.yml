@@ -654,14 +654,24 @@
 - type: entity
   parent: CMBaseAlamoWall
   id: CMAlamoWall61
+  name: port wing weapon attach point
+  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 61
   components:
   - type: Sprite
-    state: "61"
+    layers:
+    - state: "61"
+    - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
   - type: Icon
     state: "61"
   - type: Occluder
     enabled: false
+  - type: InteractionOutline
+  - type: Clickable
+  - type: DropshipWeaponPoint
+    dirOffset: Clockwise
+  - type: Appearance
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -696,14 +706,24 @@
 - type: entity
   parent: CMBaseAlamoWall
   id: CMAlamoWall65
+  name: starboard wing weapon attach point
+  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 65
   components:
   - type: Sprite
-    state: "65"
+    layers:
+    - state: "65"
+    - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
   - type: Icon
     state: "65"
   - type: Occluder
     enabled: false
+  - type: InteractionOutline
+  - type: Clickable
+  - type: DropshipWeaponPoint
+    dirOffset: CounterClockwise
+  - type: Appearance
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -900,22 +920,62 @@
 - type: entity
   parent: CMBaseAlamoWall
   id: CMAlamoWall84
+  name: port fore weapon attach point
+  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 84
   components:
   - type: Sprite
-    state: "84"
+    layers:
+    - state: "84"
+    - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
   - type: Icon
     state: "84"
+  - type: Occluder
+    enabled: false
+  - type: InteractionOutline
+  - type: Clickable
+  - type: DropshipWeaponPoint
+    dirOffset: Flip
+  - type: Appearance
+
+- type: entity
+  parent: CMAlamoWall84
+  id: CMAlamoWall84Flipped
+  name: starboard fore weapon attach point
+  description: A place where heavy equipment can be installed with a powerloader.
+  suffix: 84, Flipped
+  components:
+  - type: Sprite
+    layers:
+    - state: "84_flipped"
+    - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
 
 - type: entity
   parent: CMBaseAlamoWall
   id: CMAlamoWall85
+  name: electronic system attach point
+  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 85
   components:
   - type: Sprite
     state: "85"
   - type: Icon
     state: "85"
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: CMAlamoWall85
+  id: CMAlamoWall85Flipped
+  suffix: 85, Flipped
+  components:
+  - type: Sprite
+    layers:
+    - state: "85_flipped"
+    - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
+      offset: 0.5, 0.5
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -970,6 +1030,8 @@
     state: "90"
   - type: Icon
     state: "90"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall
@@ -980,6 +1042,8 @@
     state: "91"
   - type: Icon
     state: "91"
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: CMBaseAlamoWall

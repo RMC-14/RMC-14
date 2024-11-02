@@ -17,12 +17,16 @@
   overwatchSortPriority: -2
   overwatchShowName: true
   overwatchRoleName: Smart Gun Operator
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: smartgunner
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillJtac: 1
         RMCSkillSmartGun: 1
     - type: CMVendorUser
@@ -46,6 +50,9 @@
     id: CMDogtagSmartGunOperator
     ears: CMHeadsetAlpha
 
+- type: playTimeTracker
+  id: CMJobSmartGunOperator
+
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointSmartGunOperator
@@ -59,5 +66,39 @@
       state: green
     - state: smart_gun_operator
 
-- type: playTimeTracker
-  id: CMJobSmartGunOperator
+- type: entity
+  parent: CMSpawnPointSmartGunOperator
+  id: CMSpawnPointSmartGunOperatorAlpha
+  suffix: Alpha
+  components:
+  - type: SquadSpawner
+    squad: SquadAlpha
+    role: CMSmartGunOperator
+
+- type: entity
+  parent: CMSpawnPointSmartGunOperator
+  id: CMSpawnPointSmartGunOperatorBravo
+  suffix: Bravo
+  components:
+  - type: SquadSpawner
+    squad: SquadBravo
+    role: CMSmartGunOperator
+
+- type: entity
+  parent: CMSpawnPointSmartGunOperator
+  id: CMSpawnPointSmartGunOperatorCharlie
+  suffix: Charlie
+  components:
+  - type: SquadSpawner
+    squad: SquadCharlie
+    role: CMSmartGunOperator
+
+- type: entity
+  parent: CMSpawnPointSmartGunOperator
+  id: CMSpawnPointSmartGunOperatorDelta
+  suffix: Delta
+  components:
+  - type: SquadSpawner
+    squad: SquadDelta
+    role: CMSmartGunOperator
+

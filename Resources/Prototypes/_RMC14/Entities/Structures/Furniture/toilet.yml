@@ -34,10 +34,6 @@
     bodyType: Static
   - type: PlungerUse
   - type: Appearance
-  - type: SecretStash
-    secretPartName: secret-stash-part-toilet
-    examineStash: toilet-component-on-examine-found-hidden-item
-    openableStash: true
   - type: Drain
     autoDrain: false
   - type: StaticPrice

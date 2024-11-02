@@ -20,7 +20,7 @@
     stateBaseClosed: base
     stateDoorOpen: open
     stateDoorClosed: closed
-  - type: InteractedBlacklist
+  - type: InsertBlacklist
     blacklist:
       components:
       - Xeno

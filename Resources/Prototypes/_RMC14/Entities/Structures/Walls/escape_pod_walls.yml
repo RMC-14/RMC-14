@@ -1,0 +1,113 @@
+﻿- type: entity
+  parent: RMCBaseWallInvincibleNoIcon
+  id: RMCWallEscapePod0
+  name: wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/escape_pod.rsi
+    state: wall0
+
+- type: entity
+  parent: RMCWallEscapePod0
+  id: RMCWallEscapePod1
+  components:
+  - type: Sprite
+    state: wall1
+
+- type: entity
+  parent: RMCWallEscapePod0
+  id: RMCWallEscapePod2
+  components:
+  - type: Sprite
+    state: wall2
+
+- type: entity
+  parent: RMCWallEscapePod0
+  id: RMCWallEscapePod3
+  components:
+  - type: Sprite
+    state: wall3
+
+- type: entity
+  parent: RMCWallEscapePod0
+  id: RMCWallEscapePod4
+  components:
+  - type: Sprite
+    state: wall4
+
+- type: entity
+  parent: RMCWallEscapePod0
+  id: RMCWallEscapePod5
+  components:
+  - type: Sprite
+    state: wall5
+
+- type: entity
+  parent: RMCWallEscapePod0
+  id: RMCWallEscapePod6
+  components:
+  - type: Sprite
+    state: wall6
+
+- type: entity
+  parent: RMCWallEscapePod0
+  id: RMCWallEscapePod7
+  components:
+  - type: Sprite
+    state: wall7
+
+- type: entity
+  parent: RMCWallEscapePod0
+  id: RMCWallEscapePod8
+  components:
+  - type: Sprite
+    state: wall8
+
+- type: entity
+  parent: RMCWallEscapePod0
+  id: RMCWallEscapePod9
+  components:
+  - type: Sprite
+    state: wall9
+
+- type: entity
+  parent: RMCWallEscapePod0
+  id: RMCWallEscapePod10
+  components:
+  - type: Sprite
+    state: wall10
+
+- type: entity
+  parent: RMCWallEscapePod0
+  id: RMCWallEscapePod11
+  components:
+  - type: Sprite
+    state: wall11
+
+- type: entity
+  parent: RMCWallEscapePod0
+  id: RMCWallEscapePod12
+  components:
+  - type: Sprite
+    state: wall12
+
+- type: entity
+  parent: RMCWallEscapePod0
+  id: RMCWallEscapePod13
+  components:
+  - type: Sprite
+    state: wall13
+
+- type: entity
+  parent: RMCWallEscapePod0
+  id: RMCWallEscapePod14
+  components:
+  - type: Sprite
+    state: wall14
+
+- type: entity
+  parent: RMCWallEscapePod0
+  id: RMCWallEscapePod15
+  components:
+  - type: Sprite
+    state: wall15

@@ -22,6 +22,10 @@
   components:
   - type: Item
     size: Normal
+  - type: Tag
+    tags:
+    - Sheet
+    - RMCGlass
 
 - type: entity
   parent: CMSheetGlassBase

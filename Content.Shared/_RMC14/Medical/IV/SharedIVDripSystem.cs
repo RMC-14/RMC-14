@@ -223,6 +223,8 @@ public abstract class SharedIVDripSystem : EntitySystem
             BreakOnMove = true,
             BreakOnDamage = true,
             BreakOnHandChange = true,
+            BlockDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent
         };
         _doAfter.TryStartDoAfter(doAfter);
     }

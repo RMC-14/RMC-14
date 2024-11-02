@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Item;
@@ -76,7 +77,7 @@ public abstract class SharedWebbingSystem : EntitySystem
 
     private void OnWebbingClothingGetVerbs(Entity<WebbingClothingComponent> clothing, ref GetVerbsEvent<InteractionVerb> args)
     {
-        if (!args.CanAccess || !args.CanInteract)
+        if (!args.CanAccess || !args.CanInteract || HasComp<XenoComponent>(args.User))
             return;
 
         if (!HasWebbing((clothing, clothing), out var webComp))

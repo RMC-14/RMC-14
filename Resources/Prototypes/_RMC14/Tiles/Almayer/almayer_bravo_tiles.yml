@@ -1,0 +1,70 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorSteelBravoBase
+  name: tiles-cm-default-bravo
+
+- type: tile
+  parent: CMFloorSteelBravoBase
+  id: CMFloorSteelBravo0
+  sprite: /Textures/_RMC14/Tiles/almayer/orange_0.png
+
+- type: tile
+  parent: CMFloorSteelBravoBase
+  id: CMFloorSteelBravo1
+  sprite: /Textures/_RMC14/Tiles/almayer/orange_1.png
+
+- type: tile
+  parent: CMFloorSteelBravoBase
+  id: CMFloorSteelBravo2
+  sprite: /Textures/_RMC14/Tiles/almayer/orange_2.png
+
+- type: tile
+  parent: CMFloorSteelBravoBase
+  id: CMFloorSteelBravo3
+  sprite: /Textures/_RMC14/Tiles/almayer/orange_3.png
+
+- type: tile
+  parent: CMFloorSteelBravoBase
+  id: CMFloorSteelBravo4
+  sprite: /Textures/_RMC14/Tiles/almayer/orange_4.png
+
+- type: tile
+  parent: CMFloorSteelBravoBase
+  id: CMFloorSteelBravo5
+  sprite: /Textures/_RMC14/Tiles/almayer/orange_5.png
+
+- type: tile
+  parent: CMFloorSteelBravoBase
+  id: CMFloorSteelBravo6
+  sprite: /Textures/_RMC14/Tiles/almayer/orange_6.png
+
+- type: tile
+  parent: CMFloorSteelBravoBase
+  id: CMFloorSteelBravo7
+  sprite: /Textures/_RMC14/Tiles/almayer/orange_7.png
+
+- type: tile
+  parent: CMFloorSteelBravoBase
+  id: CMFloorSteelBravoCorner0
+  sprite: /Textures/_RMC14/Tiles/almayer/orangecorner_0.png
+
+- type: tile
+  parent: CMFloorSteelBravoBase
+  id: CMFloorSteelBravoCorner1
+  sprite: /Textures/_RMC14/Tiles/almayer/orangecorner_1.png
+
+- type: tile
+  parent: CMFloorSteelBravoBase
+  id: CMFloorSteelBravoCorner2
+  sprite: /Textures/_RMC14/Tiles/almayer/orangecorner_2.png
+
+- type: tile
+  parent: CMFloorSteelBravoBase
+  id: CMFloorSteelBravoCorner3
+  sprite: /Textures/_RMC14/Tiles/almayer/orangecorner_3.png
+
+- type: tile
+  parent: CMFloorSteelBravoBase
+  id: CMFloorSteelBravoFull
+  sprite: /Textures/_RMC14/Tiles/almayer/orangefull.png

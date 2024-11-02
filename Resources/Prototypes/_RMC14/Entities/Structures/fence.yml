@@ -21,7 +21,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 50
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -29,3 +29,5 @@
     graph: CMFence
     node: fenceMetal
   - type: RMCDropshipBlocked
+  - type: MinimapColor
+    color: "#8d2294ad"

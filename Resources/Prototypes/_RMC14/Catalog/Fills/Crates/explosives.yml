@@ -1,6 +1,6 @@
-﻿- type: entity
-  parent: CMCrateExplosives
-  id: CMCrateGrenadesHighExplosive
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesHighExplosive
   name: M40 HEDP blast grenades crate (x6)
   components:
   - type: StorageFill
@@ -9,8 +9,8 @@
       amount: 2
 
 - type: entity
-  parent: CMCrateExplosives
-  id: CMCrateGrenadesFrag
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesFrag
   name: M40 HEFA fragmentation grenades crate (x6)
   components:
   - type: StorageFill
@@ -19,7 +19,28 @@
       amount: 2
 
 - type: entity
-  parent: CMCrateExplosives
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesSmoke
+  name: M40 HSDP smoke grenades crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPacketGrenadeSmokeFilled
+      amount: 2
+
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesFragOld
+  name: M15 fragmentation grenades crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPacketGrenadeFragOldFilled
+      amount: 2
+
+- type: entity
+  parent: RMCCrateExplosives
   id: RMCCrateBreachingCharges
   name: breaching charges crate (x4)
   components:

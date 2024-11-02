@@ -1,0 +1,42 @@
+﻿- type: entity
+  id: RMCLandingZoneGas
+  name: CN20-X miasma
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _RMC14/Effects/smoke.rsi
+    state: smoke
+    color: "#30193499"
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Appearance
+  - type: DamageOverTime
+    affectsDead: false
+    armorPiercingDamage:
+      groups:
+        Burn: 4
+    emotes:
+    - Cough
+    - Gasp
+    popup: "Your skin is sloughing off!"
+    multipliers:
+    - multiplier: 3
+      whitelist:
+        components:
+        - Xeno
+  - type: DeleteOnLanding

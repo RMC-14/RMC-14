@@ -23,8 +23,8 @@
     #  points: 18
     #- id: CMM40HPDPWhitePhosphorusPacketx3
     #  points: 18
-    #- id: CMM40HSDPSmokePacketx3
-    #  points: 9
+      - id: RMCPacketGrenadeSmokeFilled
+        points: 9
     #- id: CMM74AGMFragAirburstPacketx3
     #  points: 20
     #- id: CMM74AGMIncendiaryAirburstPacketx3
@@ -77,8 +77,8 @@
         points: 30
     - name: Clothing Items
       entries:
-    #- id: CMScabbardMacheteFull
-    #  points: 5
+      - id: RMCScabbardMacheteFilled
+        points: 5
       - id: RMCPouchMacheteFilled
         points: 15
     #- id: CMMarineRadioTelephonePack
@@ -97,6 +97,8 @@
       entries:
 #      - id: Plastic Explosive
 #        points: 10
+      - id: RMCPackFlareCAS
+        points: 5
       - id: RMCExplosiveBreachingCharge
         points: 10
 #      - id: ES-11 Mobile Fuel Canister
@@ -105,8 +107,9 @@
         points: 5
     - name: Utilities
       entries:
-    #- id: CMMotionDetector
-    #  points: 15
+      - id: RMCMotionDetector
+        points: 15
+        recommended: true
       - id: CMRollerBedSpawnFolded
         points: 5
     #- id: CMFultonDeviceStack
@@ -154,7 +157,7 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
-      - id: CMVendorBundleRiflemanApparel
+      - id: CMVendorBundleFireteamLeaderApparel
       - id: CMArmorM4
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
@@ -162,14 +165,14 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-    #- id: CMG8AGeneralUtilityPouch
+      - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
         recommended: true
     #- id: CMM276GeneralPistolHolsterRig
-    #- id: CMM276M63HolsterRig
+      - id: RMCBeltSmgMags
     #- id: CMM276M44HolsterRig
     #- id: CMM276M82FHolsterRig
-    #- id: CMM276ShotgunShellLoadingRig
+      - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
         recommended: true
       - id: RMCBeltGrenade
@@ -205,23 +208,27 @@
         recommended: true
       #- id: CMShoulderHolster
       - id: CMWebbing
-    #- id: CMDropPouch
+      - id: CMWebbingPouch
     - name: Mask
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewFireteamLeader
   name: essential fireteam leader utilities
+  description: Contains a laser designator and two packs of signal flares.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Devices/binoculars.rsi # TODO RMC14 laser designator icon
-    state: binoculars
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    layers:
+    - state: rangefinder
+    - state: laser_cas
   - type: CMVendorBundle
     bundle:
-    - CMPackFlare # TODO RMC14 signal flares when we have any use for damn signals
-    - CMPackFlare # TODO RMC14 signal flares when we have any use for damn signals
-    - RMCBinoculars # TODO RMC14 laser designator when see above
+    - RMCPackFlareCAS
+    - RMCPackFlareCAS
+    - RMCLaserDesignator

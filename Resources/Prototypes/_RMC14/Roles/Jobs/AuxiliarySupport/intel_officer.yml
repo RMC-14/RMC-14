@@ -14,6 +14,9 @@
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - IntelOfficer
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: io
   special:
   - !type:AddComponentSpecial
     components:
@@ -22,6 +25,7 @@
         RMCSkillCqc: 1
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillIntel: 2
         RMCSkillJtac: 2
         RMCSkillLeadership: 2
@@ -29,6 +33,7 @@
         RMCSkillOverwatch: 1
         RMCSkillResearch: 1
     - type: MarineOrders
+    - type: RMCPointing
   hidden: true # TODO RMC14
 
 - type: startingGear

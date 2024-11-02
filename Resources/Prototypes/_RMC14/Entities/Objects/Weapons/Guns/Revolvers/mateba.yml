@@ -1,0 +1,121 @@
+- type: entity
+  parent: RMCWeaponRevolverBase
+  id: RMCWeaponRevolverMateba
+  name: Mateba autorevolver custom
+  description: The .454 Mateba 6 Unica autorevolver is a semi-automatic handcannon that uses its own recoil to rotate the cylinders. Extremely rare, prohibitively costly, and unyieldingly powerful, it's found in the hands of a select few high-ranking UNMC officials. Stylish, sophisticated, and above all, extremely deadly.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba.rsi
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mateba.ogg
+  - type: RevolverAmmoProvider
+    proto: RMCCartridgeRevolverMateba
+    capacity: 6
+    chambers: [ True, True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null, null ]
+  - type: RMCSelectiveFire
+    baseFireRate: 1.111
+    scatterWielded: 8
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCAttachmentMatebaStandard
+        whitelist:
+          tags:
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentMatebaStandard
+          - RMCAttachmentBarrelCharger
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.215, 0.19
+      rmc-aslot-rail: -0.11, 0.22
+
+- type: entity
+  id: RMCBaseSpeedLoaderMateba
+  name: "Mateba speed loader (.454)"
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - RMCMagazineRevolver
+    - RMCSpeedLoaderMateba
+  - type: SpeedLoader
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRevolverMateba
+    capacity: 6
+  - type: Sprite
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+
+- type: entity
+  parent: RMCBaseSpeedLoaderMateba
+  id: RMCSpeedLoaderMateba
+  description: A formidable .454 speedloader, made exclusively for the Mateba autorevolver. Packs a devastating punch. This standard-variant is optimized for anti-armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/mateba.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: base-5
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: base
+    steps: 6
+    zeroVisible: false
+  - type: BallisticAmmoProvider
+    proto: RMCCartridgeRevolverMateba
+    capacity: 6
+  - type: Appearance
+
+- type: entity
+  id: RMCCartridgeRevolverMateba
+  name: cartridge (.454)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRevolverMateba
+  - type: CartridgeAmmo
+    proto: RMCBulletMateba
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletMateba
+  name: bullet (.454)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 72
+  - type: CMArmorPiercing
+    amount: 5
+  - type: RMCStunOnHit
+    maxRange: 4
+    stunTime: 1
+
+- type: Tag
+  id: RMCSpeedLoaderMateba
+
+- type: Tag
+  id: RMCCartridgeRevolverMateba
