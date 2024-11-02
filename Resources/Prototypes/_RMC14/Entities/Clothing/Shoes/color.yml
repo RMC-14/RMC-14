@@ -21,9 +21,9 @@
         whitelist:
           tags:
           - Holdout
-        startingItem: null
+        startingItem: RMCSpaceCash1
   - type: CMItemSlots
-    startingItem: null
+    startingItem: RMCSpaceCash1
 
 # Brown  
 - type: entity
