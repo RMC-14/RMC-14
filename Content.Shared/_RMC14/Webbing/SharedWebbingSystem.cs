@@ -6,7 +6,6 @@ using Content.Shared.Item;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Verbs;
-using Content.Shared._RMC14.Inventory;
 using Robust.Shared.Containers;
 using static Content.Shared._RMC14.Webbing.WebbingTransferComponent;
 
@@ -38,13 +37,13 @@ public abstract class SharedWebbingSystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract || HasComp<XenoComponent>(args.User))
             return;
 
-        if (!HasWebbing((clothing, clothing), out var webComp))
+        if (!HasWebbing((clothing, clothing), out _))
             return;
 
         var user = args.User;
         args.Verbs.Add(new InteractionVerb
         {
-            Text = Loc.GetString("rmc-storage-webbing-remove-verb"),
+            Text = "Remove webbing",
             Act = () => Detach(clothing, user)
         });
     }
