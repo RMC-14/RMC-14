@@ -49,7 +49,8 @@ public abstract class SharedWebbingSystem : EntitySystem
         args.Verbs.Add(new InteractionVerb
         {
             Text = Loc.GetString("rmc-storage-webbing-remove-verb"),
-            Act = () => Detach(clothing, user)
+            Act = () => Detach(clothing, user),
+            IconEntity = GetNetEntity(clothing.Owner)
         });
     }
 
@@ -80,7 +81,8 @@ public abstract class SharedWebbingSystem : EntitySystem
         args.Verbs.Add(new EquipmentVerb
         {
             Text = Loc.GetString("rmc-storage-webbing-remove-verb"),
-            Act = () => Detach(clothing, user)
+            Act = () => Detach(clothing, user),
+            IconEntity = GetNetEntity(clothing.Owner)
         });
     }
 
