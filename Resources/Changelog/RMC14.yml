@@ -1,28 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: The turrets guarding landing zones round-start now shoot twice as fast
-      and pierce all armor, with a DPS of 120 (up from 90)
-    type: Tweak
-  id: 420
-  time: '2024-07-21T06:44:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3178
-- author: DrSmugleaf
-  changes:
-  - message: The ASRS console is no longer corrodible.
-    type: Tweak
-  id: 421
-  time: '2024-07-21T06:44:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3181
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added MK80 hand cannon pistol case
-    type: Add
-  id: 422
-  time: '2024-07-22T05:03:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3182
-- author: DrSmugleaf
-  changes:
   - message: Fixed lathes making upstream buckets instead of RMC-14 buckets, which
       also had an unintentionally higher capacity.
     type: Fix
@@ -4824,5 +4802,41 @@
   id: 919
   time: '2024-11-02T04:26:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4652
+- author: Rainbeon
+  changes:
+  - message: Mobs that are knocked down can no longer be dragged through tables, window
+      frames, and flaps without manually vaulting them.
+    type: Tweak
+  - message: Runners, Larvae, and Parasites can now travel on top of window frames
+      without vaulting once again.
+    type: Tweak
+  id: 920
+  time: '2024-11-02T04:29:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4660
+- author: Vermidia
+  changes:
+  - message: Sentinel's paralyzing slash now kicks in 1 second faster, and stuns for
+      an additional second
+    type: Tweak
+  - message: Slowing spit now last 8 seconds
+    type: Tweak
+  - message: Scatter spit's max scatter decreased from 60 to 45
+    type: Tweak
+  - message: Slowing spit's cooldown increased to 2 seconds, Scatter spit's cooldown
+      decreased to 6
+    type: Tweak
+  id: 921
+  time: '2024-11-02T09:17:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4664
+- author: Vermidia
+  changes:
+  - message: Added Information Tags. When a body can no longer be defibbed or is dead
+      and you have police skill 2 or more, you can take an information tag from somebody.
+      You can combine information tags together and use them on the slab of victory
+      to engrave the names of the fallen.
+    type: Add
+  id: 922
+  time: '2024-11-02T09:16:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4663
 Name: RMC14
 Order: -1
