@@ -133,7 +133,7 @@
       choices: { CMBelt: 1 }
       entries:
       - id: CMBeltSmartGunOperatorFilled
-      - id: CMBeltSmartGunOperatorPistolFilled
+      - id: RMCBeltSmartGunOperatorPistolFilled
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
