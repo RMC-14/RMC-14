@@ -354,12 +354,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
                     continue;
                 }
 
-                // Check if the slot item has a webbing
-                // If yes, treat the webbing as the slot item
-                if (TryComp(clothing, out WebbingClothingComponent? webClothComp) &&
-                    _webbing.HasWebbing(webClothComp.Owner, out var webbing))
-                    clothing = webbing;
-
                 // Check if the slot item has a CMHolsterComponent
                 if (!TryComp(clothing, out CMHolsterComponent? holster))
                     continue;
@@ -594,28 +588,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 return true;
         }
 
-        // Check webbing holster
-        if (TryComp(item, out WebbingClothingComponent? webClothComp))
-        {
-            if (_webbing.HasWebbing(webClothComp.Owner, out var webComp))
-            {
-                if (HasComp<CMHolsterComponent>(webComp))
-                {
-                    if (TryComp(webComp, out CMItemSlotsComponent? webHolster) &&
-                        webHolster.Cooldown is { } cooldown &&
-                        _timing.CurTime < webHolster.LastEjectAt + cooldown)
-                    {
-                        stop = true;
-                        _popup.PopupPredicted(webHolster.CooldownPopup, user, user, PopupType.SmallCaution);
-                        return false;
-                    }
-
-                    if (PickupSlot(user, webComp))
-                        return true;
-                }
-            }
-        }
-
         var ev = new IsUnholsterableEvent();
         RaiseLocalEvent(item, ref ev);
 
@@ -623,42 +595,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
             return false;
 
         return _hands.TryPickup(user, item);
-    }
-
-    public bool TryUnholster(EntityUid user, EntityUid item)
-    {
-        return Unholster(user, item, out _);
-    }
-
-    // For trying to holster to webbing
-    public bool TryHolster(EntityUid user, EntityUid item, Entity<WebbingComponent> webbing)
-    {
-        if (!HasComp<CMHolsterComponent>(webbing) ||
-            !HasComp<CMItemSlotsComponent>(webbing))
-            return false;
-
-        if (!SlotCanInteract(user, webbing, out var webSlotComp) ||
-            !TryGetAvailableSlot((webbing, webSlotComp),
-                item,
-                user,
-                out var webItemSlot,
-                emptyOnly: true) ||
-            webItemSlot.ContainerSlot == null)
-            return false;
-
-        if (!TryComp(webbing, out ItemSlotsComponent? itemSlotComp))
-            return false;
-
-        return _itemSlots.TryInsert(itemSlotComp.Owner, webItemSlot, item, user, excludeUserAudio: true);
-    }
-
-    // For trying to holster to clothing that has a webbing
-    public bool TryHolster(EntityUid user, EntityUid item, Entity<WebbingClothingComponent> webClothing)
-    {
-        if (!_webbing.HasWebbing(webClothing.Owner, out var webbing))
-            return false;
-
-        return TryHolster(user, item, webbing);
     }
 
     public bool TryEquipClothing(EntityUid user, Entity<ClothingComponent> clothing)
