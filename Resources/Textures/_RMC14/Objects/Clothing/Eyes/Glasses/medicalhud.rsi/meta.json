@@ -9,19 +9,27 @@
   "states": [
     {
       "name": "icon",
-      "directions": 1,
-      "delays": [
-          [
-            1.2,
-            0.2,
-            0.2,
-            0.2
-          ]
-      ]
+      "directions": 1
     },
     {
-      "name": "equipped-EYES",
+        "name": "icon-on",
+        "directions": 1,
+        "delays": [
+            [
+              1.2,
+              0.2,
+              0.2,
+              0.2
+            ]
+        ]
+    },
+    {
+      "name": "on-equipped-EYES",
       "directions": 4
+    },
+    {
+        "name": "equipped-EYES",
+        "directions": 4
     }
   ]
 }

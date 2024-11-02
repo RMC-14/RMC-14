@@ -653,3 +653,47 @@
     state: beatrice_bea_bootes
   - type: PatronFigurine
     id: bb4d5e20-1aab-462d-aed4-d85454667d5c
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronGives-The-Fish
+  name: Gives-The-Fish figurine
+  description: "\"Fishy, where is my goddamn fish?\""
+  components:
+  - type: Sprite
+    state: gives-the-fish
+  - type: PatronFigurine
+    id: 9c5deff6-212d-4578-855e-0afb86a0a910
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJester-Who-Helps
+  name: Jester-Who-Helps figurine
+  description: "A Dubious Little Creature Up To Mischief!"
+  components:
+  - type: Sprite
+    state: jester-who-helps
+  - type: PatronFigurine
+    id: 15d914f4-e436-496a-afe0-0e127297ed36
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronFlynnWendigoSuziko
+  name: Flynn 'Wendigo' Suziko figurine
+  description: "A figurine of Flynn 'Wendigo' Suziko, a middle-aged felinid girl serving in the UNMC to support her daughter, Evelyn Suziko. Gained the nickname of 'wendigo' at a young age due to having mannerisms similar to that of one. Despite her specialization in stealth, she seems to always end up as a rifleman."
+  components:
+  - type: Sprite
+    state: flynn_wendigo_suziko
+  - type: PatronFigurine
+    id: 1561bc00-1d0d-4566-9bae-87df526cce29
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJulieSniperWalker
+  name: Julie 'Sniper' Walker figurine
+  description: "Her cold gaze Strengthens the longer you stare at her."
+  components:
+  - type: Sprite
+    state: julie_sniper_walker
+  - type: PatronFigurine
+    id: 02e1ee97-1b06-4405-bc94-bf042c461b9e

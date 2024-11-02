@@ -17,6 +17,9 @@
   id: RCMCartridgePistol9mmSquashHead
 
 - type: Tag
+  id: RMCCartridge7x45mm
+
+- type: Tag
   id: RMCCartridgePistol45ACP
 
 - type: Tag
