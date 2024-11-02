@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: The turrets guarding landing zones round-start now shoot twice as fast
-      and pierce all armor, with a DPS of 120 (up from 90)
-    type: Tweak
-  id: 420
-  time: '2024-07-21T06:44:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3178
-- author: DrSmugleaf
-  changes:
   - message: The ASRS console is no longer corrodible.
     type: Tweak
   id: 421
@@ -4824,5 +4816,16 @@
   id: 919
   time: '2024-11-02T04:26:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4652
+- author: Rainbeon
+  changes:
+  - message: Mobs that are knocked down can no longer be dragged through tables, window
+      frames, and flaps without manually vaulting them.
+    type: Tweak
+  - message: Runners, Larvae, and Parasites can now travel on top of window frames
+      without vaulting once again.
+    type: Tweak
+  id: 920
+  time: '2024-11-02T04:29:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4660
 Name: RMC14
 Order: -1
