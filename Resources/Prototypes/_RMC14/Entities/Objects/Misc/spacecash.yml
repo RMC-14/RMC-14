@@ -13,7 +13,7 @@
   - type: Item
     size: Tiny
     shape: null
-   - type: Tag
+  - type: Tag
     tags:
     - Holdout
   - type: Stack
