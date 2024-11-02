@@ -122,7 +122,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         AlternativeVerb holsterVerb = new()
         {
             Act = () => Unholster(args.User, holster, out _),
-            Text = Loc.GetString("rmc-unholster-verb"),
+            Text = Loc.GetString("rmc-storage-holster-eject-verb"),
             //Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/eject.svg.192dpi.png"))
             IconEntity = GetNetEntity(comp.Contents[0])
         };

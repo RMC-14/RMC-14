@@ -9,4 +9,4 @@ rmc-storage-limit-max-ammo = You can't fit more ammo in the belt!
 rmc-storage-limit-one-binoculars = That already holds a pair of binoculars!
 rmc-storage-limit-one-command-tablet = That already holds a tablet!
 rmc-storage-nothing-left = {CAPITALIZE(THE($storage))} is empty. Nothing to grab.
-rmc-unholster-verb = Unholster
+rmc-storage-holster-eject-verb = Unholster
