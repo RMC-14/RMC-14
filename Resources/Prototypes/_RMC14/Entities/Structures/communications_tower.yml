@@ -1,0 +1,106 @@
+﻿- type: entity
+  parent: BaseStructure
+  id: RMCCommunicationsTower
+  name: TC-3T static telecommunications tower
+  description: A static heavy-duty TC-3T telecommunications tower. Used to set up subspace communications lines between planetary and extra-planetary locations. Will need to have extra communication frequencies programmed into it by multitool.
+  components:
+  - type: Transform
+    anchored: false
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,1.49,1.49"
+        density: 200
+        mask:
+        - MobLayer
+  - type: Sprite
+    sprite: _RMC14/Structures/communications_tower.rsi
+    offset: 0.5, 1.5
+    layers:
+    - state: static1_broken
+      map: [ "base" ]
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 450
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Breakage" ]
+  - type: CommunicationsTower
+  - type: RMCRepairable
+    heal: -150
+    skillRequired: 1
+    delay: 5
+    fuelUsed: 0
+  - type: UserInterface
+    interfaces:
+      enum.DialogUiKey.Key:
+        type: DialogBui
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.CommunicationsTowerLayers.Layer:
+        base:
+          Broken: { state: static1_broken }
+          Off: { state: static1_off }
+          On: { state: static1 }
+  - type: MaxDamage
+    max: 500
+  - type: MarineMapTracked
+  - type: XenoMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: supply
+  - type: ApcPowerReceiver
+  - type: RMCPowerReceiver
+    idleLoad: 10000
+    activeLoad: 1
+    channel: Equipment
+
+- type: entity
+  abstract: true
+  parent: MarkerBase
+  id: RMCSpawnerCommunicationsTowerBase
+  name: static comms
+  components: # TODO RMC14 some start broken
+  - type: Sprite
+    sprite: _RMC14/Structures/communications_tower.rsi
+    layers: []
+    offset: 0.5, 1.5
+  - type: CommunicationsTowerSpawner
+    spawn: RMCCommunicationsTower
+
+- type: entity
+  parent: RMCSpawnerCommunicationsTowerBase
+  id: RMCSpawnerCommunicationsTowerOne
+  suffix: One
+  components:
+  - type: Sprite
+    state: comms_landmark_1
+  - type: CommunicationsTowerSpawner
+    group: RMCSpawnerCommunicationsTowerOne
+
+- type: entity
+  parent: RMCSpawnerCommunicationsTowerBase
+  id: RMCSpawnerCommunicationsTowerTwo
+  suffix: Two
+  components:
+  - type: Sprite
+    state: comms_landmark_2
+  - type: CommunicationsTowerSpawner
+    group: RMCSpawnerCommunicationsTowerTwo

@@ -257,6 +257,8 @@ public sealed class SensorTowerSystem : EntitySystem
                 _popup.PopupEntity($"The {Name(uid)} beeps wildly and a fuse blows! Use wirecutters, then a wrench to repair it.", uid, uid, PopupType.LargeCaution);
                 tower.State = SensorTowerState.Wire;
             }
+
+            UpdateAppearance((uid, tower));
         }
     }
 }

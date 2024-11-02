@@ -65,6 +65,19 @@
     damageContainers:
     - Biological
   - type: GhostColor
+  # RCM - FindParasite Event
+  - type: FindParasite
+  - type: UserInterface
+    interfaces:
+      enum.XenoFindParasiteUI.Key:
+        type: FindParasiteBoundUserInterface
+        requireInputValidation: false
+      enum.TacticalMapUserUi.Key:
+        type: TacticalMapUserBui
+  - type: TacticalMapUser
+    actionId: RMCActionOpenTacticalMapGhost
+    marines: true
+    xenos: true
 
 - type: entity
   id: ActionGhostBoo

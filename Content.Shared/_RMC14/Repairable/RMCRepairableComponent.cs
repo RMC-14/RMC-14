@@ -21,6 +21,9 @@ public sealed partial class RMCRepairableComponent : Component
     public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillEngineer";
 
     [DataField, AutoNetworkedField]
+    public int SkillRequired;
+
+    [DataField, AutoNetworkedField]
     public SoundSpecifier? Sound = new SoundPathSpecifier("/Audio/Items/welder.ogg");
 
     [DataField, AutoNetworkedField]

@@ -16,7 +16,10 @@
   - CMMedbay
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: medic
+    state: doctor
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_medical
   special:
   - !type:AddComponentSpecial
     components:
@@ -27,6 +30,8 @@
         RMCSkillMedical: 3
         RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
+    - type: JobPrefix
+      prefix: "Doc"
 
 - type: startingGear
   id: CMGearDoctor
@@ -65,3 +70,4 @@
 
 - type: playTimeTracker
   id: CMJobDoctor
+  isHumanoid: true

@@ -56,6 +56,14 @@ public sealed class RMCRepairableSystem : EntitySystem
         if (!TryComp(repairable, out DamageableComponent? damageable) ||
             damageable.TotalDamage <= FixedPoint2.Zero)
         {
+            _popup.PopupClient(Loc.GetString("rmc-repairable-not-damaged", ("target", repairable)), user, user, PopupType.SmallCaution);
+            return;
+        }
+
+        if (repairable.Comp.SkillRequired > 0 &&
+            !_skills.HasSkill(user, repairable.Comp.Skill, repairable.Comp.SkillRequired))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-repairable-not-trained", ("target", repairable)), user, user, PopupType.SmallCaution);
             return;
         }
 

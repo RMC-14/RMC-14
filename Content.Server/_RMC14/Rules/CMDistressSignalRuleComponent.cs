@@ -44,6 +44,9 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     [DataField]
     public EntProtoId<IFFFactionComponent> MarineFaction = "FactionMarine";
 
+    [DataField]
+    public EntProtoId<IFFFactionComponent> SurvivorFaction = "FactionSurvivor";
+
     [DataField, AutoPausedField]
     public TimeSpan? QueenDiedCheck;
 

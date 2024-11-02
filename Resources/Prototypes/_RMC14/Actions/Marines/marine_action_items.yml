@@ -69,5 +69,29 @@
     event: !type:SoundActionEvent
     useDelay: 10
 
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionTelephone
+  name: Use Phone
+  description: Used to call another phone.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Objects/phone.rsi
+      state: rpb_phone
+    event: !type:TelephoneActionEvent
+    useDelay: 0.5
+
 - type: Tag
   id: RMCActionCycleZoomLevel
+
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionToggleMedhud
+  name: Toggle Medical HUD
+  description: Toggle the optical matrix of the medical HUD.
+  components:
+  - type: InstantAction
+    itemIconStyle: BigItem
+    event: !type:ToggleActionEvent

@@ -10,6 +10,7 @@
     size: Huge
   - type: CMDefibrillatorBlocked
     popup: cm-defib-take-off-armor
+    showOnExamine: false
   - type: InteractedBlacklist
     blacklist:
       components:

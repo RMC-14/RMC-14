@@ -12,7 +12,10 @@
   - CMCargoTech
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: ct
+    state: cargo
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_shipside
   special:
   - !type:AddComponentSpecial
     components:
@@ -22,6 +25,8 @@
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillPowerLoader: 2
+    - type: JobPrefix
+      prefix: "CT"
 
 - type: startingGear
   id: CMGearCargoTech
@@ -52,3 +57,4 @@
 
 - type: playTimeTracker
   id: CMJobCargoTech
+  isHumanoid: true

@@ -1,0 +1,54 @@
+﻿- type: entity
+  id: RMCRotaryPhone
+  name: rotary phone
+  description: The finger plate is a little stiff.
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/rotary_phone.rsi
+    drawdepth: WallMountedItems
+    layers:
+    - state: rotary_phone
+      map: [ "base" ]
+  - type: InteractionOutline
+  - type: Clickable
+  - type: RotaryPhone
+  - type: ContainerContainer
+    containers:
+      rmc_rotary_phone_telephone: !type:ContainerSlot
+  - type: ActivatableUI
+    key: enum.TelephoneUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.TelephoneUiKey.Key:
+        type: TelephoneBui
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RotaryPhoneLayers.Layer:
+        base:
+          Base: { state: rotary_phone }
+          Ring: { state: rotary_phone_ring }
+          Ear: { state: rotary_phone_ear }
+  - type: WallMount # TODO RMC14 wall mounted rotary phones
+    arc: 360
+
+- type: entity
+  parent: BaseItem
+  id: RMCTelephone
+  name: telephone
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/phone.rsi
+    state: rpb_phone
+  - type: Item
+    size: Invalid
+  - type: Telephone
+  - type: Corrodible
+    isCorrodible: false
+  - type: BlockEntityStorage

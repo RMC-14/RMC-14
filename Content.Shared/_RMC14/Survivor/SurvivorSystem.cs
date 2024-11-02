@@ -36,6 +36,15 @@ public sealed class SurvivorSystem : EntitySystem
             }
         }
 
+        if (comp.RandomWeapon.Count > 0)
+        {
+            var gear = _random.Pick(comp.RandomWeapon);
+            foreach (var item in gear)
+            {
+                _inventory.SpawnItemOnEntity(mob, item);
+            }
+        }
+
         if (comp.RandomGear.Count > 0)
         {
             var gear = _random.Pick(comp.RandomGear);

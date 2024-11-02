@@ -34,7 +34,10 @@
   - ShipMasterAccess
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: cic
+    state: co
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
   special:
   - !type:AddComponentSpecial
     components:
@@ -62,17 +65,22 @@
     - type: CMVendorUser
       points: 120
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "CO"
 
 - type: startingGear
   id: CMGearCommandingOfficer
   equipment:
-    jumpsuit: CMJumpsuitCO
+    jumpsuit: CMJumpsuitBO
     back: CMSatchel
+    belt: RMCMatebaBeltFilled
     shoes: CMShoesLaceupCommander
     head: CMHeadBeretCO
-    outerClothing: CMCoatOfficer
+    outerClothing: RMCCoatService
     id: CMIDCardCommandingOfficer
     ears: CMHeadsetSeniorCommand
+    pocket1: RMCPouchCommand
+    pocket2: RMCPouchGeneralLarge
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -89,3 +97,4 @@
 
 - type: playTimeTracker
   id: CMJobCommandingOfficer
+  isHumanoid: true

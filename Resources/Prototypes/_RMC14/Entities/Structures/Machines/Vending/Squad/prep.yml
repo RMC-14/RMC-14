@@ -134,6 +134,8 @@
 #        amount: 15
 #      - id: M3 Pattern Smooth Marine Armor
 #        amount: 15
+      - id: CMArmorM3Medium #TODO RMC: remove this when the above is added
+        amount: 15
       - id: CMArmorM3Heavy
         amount: 10
       - id: CMArmorM3Light
@@ -236,8 +238,8 @@
         amount: 15
       - id: CMMaskCoif
         amount: 10
-#      - id: Rebreather
-#        amount: 10
+      - id: RMCMaskRebreather
+        amount: 10
     - name: Miscellaneous
       entries:
       - id: RMCGogglesBallistic
