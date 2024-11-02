@@ -68,8 +68,8 @@
   id: RMCAreaVaraderoInteriorProtected
   name: New Varadero - Interior
   components:
-  - type: Sprite
-    state: nv_no_cas
+#  - type: Sprite
+#    state: nv_no_cas
   - type: Area
     CAS: false
     fulton: false

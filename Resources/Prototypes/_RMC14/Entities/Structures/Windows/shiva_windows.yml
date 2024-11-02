@@ -66,8 +66,8 @@
 - type: entity
   parent: CMBaseWindow
   id: CMWindowShivaIce
-  name: translucent ice
-  description: A thick sheet of ice that you can just see through. It's cold to the touch.
+  name: thin ice wall
+  description: It is very thin.
   components:
   - type: Corrodible
     isCorrodible: false
@@ -77,4 +77,4 @@
   - type: Icon
     sprite: _RMC14/Structures/Windows/ice.rsi
     state: ice_wall
-    
+  - type: RMCWallExplosionDeletable

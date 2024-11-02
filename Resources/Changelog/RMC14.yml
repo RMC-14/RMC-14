@@ -4450,7 +4450,7 @@
   url: https://github.com/RMC-14/RMC-14/pull/4562
 - author: Rainbeon
   changes:
-  - message: Fixed Leaps now self-stunning Xenos instead of self-rooting. This means
+  - message: Fixed Leaps self-stunning Xenos instead of self-rooting. This means
       Runners and Lurkers can attack, shove, and initiate grabs immediately after
       a leap without waiting, but still can not move.
     type: Fix

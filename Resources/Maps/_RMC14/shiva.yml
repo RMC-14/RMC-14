@@ -117226,6 +117226,40 @@ entities:
     - type: Transform
       pos: 159.5,88.5
       parent: 1
+- proto: RMCSpawnerCommunicationsTowerOne
+  entities:
+  - uid: 15905
+    components:
+    - type: Transform
+      pos: 25.5,57.5
+      parent: 1
+  - uid: 15907
+    components:
+    - type: Transform
+      pos: 56.5,55.5
+      parent: 1
+- proto: RMCSpawnerCommunicationsTowerTwo
+  entities:
+  - uid: 15904
+    components:
+    - type: Transform
+      pos: 3.5,99.5
+      parent: 1
+  - uid: 15906
+    components:
+    - type: Transform
+      pos: 48.5,102.5
+      parent: 1
+  - uid: 15908
+    components:
+    - type: Transform
+      pos: 57.5,149.5
+      parent: 1
+  - uid: 15909
+    components:
+    - type: Transform
+      pos: 62.5,124.5
+      parent: 1
 - proto: RMCSpawnerCorpseDoctor
   entities:
   - uid: 7463
