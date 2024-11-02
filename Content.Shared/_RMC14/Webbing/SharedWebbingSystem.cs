@@ -49,21 +49,6 @@ public abstract class SharedWebbingSystem : EntitySystem
             Text = Loc.GetString("rmc-storage-webbing-remove-verb"),
             Act = () => Detach(clothing, user)
         });
-
-        // Check if webbing holster
-        if (!TryComp(webComp, out CMHolsterComponent? holsterComp))
-            return;
-
-        // Check if holster has gun
-        if (_cmInventory.TryGetLastInserted((clothing.Owner, null), out _))
-            return;
-
-        args.Verbs.Add(new InteractionVerb
-        {
-            Text = Loc.GetString("rmc-storage-holster-eject-verb"),
-            Act = () => _cmInventory.Unholster(user, clothing.Owner, out _)
-        });
-
     }
 
     public bool HasWebbing(Entity<WebbingClothingComponent?> clothing, out Entity<WebbingComponent> webbing)
