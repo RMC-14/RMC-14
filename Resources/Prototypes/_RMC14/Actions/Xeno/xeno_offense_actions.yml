@@ -253,7 +253,7 @@
     useDelay: 8
     range: 6
   - type: ActionBlockIfResting
-  
+
 
 - type: entity
   parent: ActionXenoSprayAcid
@@ -513,3 +513,17 @@
     - ActionXenoSprayAcidBoiler
     cooldown: 30
     onPerform: false
+
+- type: entity
+  id: ActionXenoTremor
+  parent: ActionXenoBase
+  name: Tremor (100)
+  description: Slam the ground with a 7x7 AOE, slowing down and disarming all enemies in range. Deals heavy damage to targets you are on top of.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: stomp
+    event: !type:XenoStompActionEvent
+    useDelay: 45

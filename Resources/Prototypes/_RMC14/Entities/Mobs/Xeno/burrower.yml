@@ -35,7 +35,7 @@
     - ActionXenoPlantWeeds
     - ActionXenoResinHole
     #    - ActionXenoBurrow
-    #    - ActionXenoTremor
+    - ActionXenoTremor
     - ActionXenoDevolve
     tier: 2
     hudOffset: 0,0.56
@@ -54,6 +54,12 @@
     armor: 25
     explosionArmor: 40
   - type: XenoDevour
+  - type: XenoStomp
+    selfEffect: CMEffectSelfStomp
+    shortRange: 0
+    range: 6
+    plasmaCost: 100
+    paralyzeTime: 2
   - type: MeleeWeapon
     damage:
       groups:
