@@ -311,6 +311,9 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
     private void OnOverwatchSendMessageBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSendMessageBuiMsg args)
     {
+        if (!ent.Comp.CanMessageSquad)
+            return;
+
         var time = _timing.CurTime;
         if (time < ent.Comp.LastMessage + ent.Comp.MessageCooldown)
             return;
@@ -328,7 +331,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         ent.Comp.LastMessage = time;
         Dirty(ent);
 
-        _marineAnnounce.AnnounceSquad($"[color=#215CFF][bold]Overwatch:[/bold] {Name(args.Actor)} transmits: [font size=16][bold]{message}[/bold][/font][/color]", squadProto.ID);
+        _marineAnnounce.AnnounceSquad($"[color=#3C70FF][bold]Overwatch:[/bold] {Name(args.Actor)} transmits: [font size=16][bold]{message}[/bold][/font][/color]", squadProto.ID);
     }
 
     protected virtual void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<OverwatchCameraComponent?> toWatch)

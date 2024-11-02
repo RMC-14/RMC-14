@@ -36,4 +36,7 @@ public sealed partial class OverwatchConsoleComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan MessageCooldown = TimeSpan.FromSeconds(0.5);
+
+    [DataField, AutoNetworkedField]
+    public bool CanMessageSquad = true;
 }

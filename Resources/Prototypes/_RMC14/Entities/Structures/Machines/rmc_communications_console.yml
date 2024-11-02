@@ -38,7 +38,14 @@
     interfaces:
       enum.MarineCommunicationsComputerUI.Key:
         type: MarineCommunicationsComputerBui
+      enum.OverwatchConsoleUI.Key:
+        type: OverwatchConsoleBui
+      enum.TacticalMapComputerUi.Key:
+        type: TacticalMapComputerBui
   - type: MarineCommunicationsComputer
+  - type: OverwatchConsole
+    canMessageSquad: false
+  - type: TacticalMapComputer
 
 - type: entity
   parent: RMCCommunicationsConsoleBase

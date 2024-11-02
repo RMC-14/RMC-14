@@ -5,8 +5,8 @@
     <BoxContainer Orientation="Vertical">
         <LineEdit Name="MessageBox" Access="Public" />
         <BoxContainer Orientation="Horizontal">
-            <Button Name="OkButton" Access="Public" Text="Ok" />
-            <Button Name="CancelButton" Access="Public" Text="Cancel" />
+            <Button Name="OkButton" Access="Public" Text="Ok" HorizontalExpand="True" StyleClasses="OpenBoth" />
+            <Button Name="CancelButton" Access="Public" Text="Cancel" HorizontalExpand="True" StyleClasses="OpenBoth" />
         </BoxContainer>
     </BoxContainer>
 </controls:OverwatchTextInputWindow>

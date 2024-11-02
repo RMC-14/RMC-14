@@ -179,6 +179,11 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                     window.OpenCentered();
                 };
 
+                TabContainer.SetTabVisible(monitor.SupplyDrop, EntMan.HasComponent<SupplyDropComputerComponent>(Owner));
+
+                monitor.MessageSquadContainer.Visible = EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? overwatch) &&
+                                                        overwatch.CanMessageSquad;
+
                 _squadViews[squad.Id] = monitor;
                 _window.SquadViewContainer.AddChild(monitor);
             }
