@@ -118,8 +118,8 @@
         amount: 2
       - id: CMWebbingPouch
         amount: 1
-#      - id: Shoulder Holster
-#        amount: 1
+      - id: CMWebbingHolster
+        amount: 1
     - name: Armor
       entries:
 #      - id: M3 Pattern Carrier Marine Armor

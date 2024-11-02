@@ -260,7 +260,7 @@
      #- id: CMSlingPouch
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMagazine
-      - id: RMCPouchShotgun  
+      - id: RMCPouchShotgun
       - id: RMCPouchPistol
     - name: Accessories
       choices: { CMAccessories: 1 }
@@ -269,9 +269,9 @@
         recommended: true
       - id: CMWebbingBlack
         recommended: true
-      #- id: CMShoulderHolster
       - id: CMWebbing
       - id: CMWebbingPouch
+      - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }
       entries:

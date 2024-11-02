@@ -156,8 +156,8 @@
         points: 15
       - id: CMWebbingPouch
         points: 15
-    #- id: CMShoulderHolster
-    #  points: 15
+      - id: CMWebbingHolster
+        points: 15
       - id: RMCScabbardMacheteFilled
         points: 15
       - id: RMCPouchMacheteFilled
