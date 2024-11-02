@@ -1162,6 +1162,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             "prison" => "Fiorina Science Annex",
             "shiva" => "Shivas Snowball",
             "trijent" => "Trijent Dam",
+            "varadero" => "New Varadero",
             _ => name,
         };
     }
