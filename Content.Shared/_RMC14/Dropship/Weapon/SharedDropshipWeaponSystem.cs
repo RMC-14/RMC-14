@@ -133,10 +133,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             {
                 args.PushMarkup(Loc.GetString("rmc-laser-designator-signal-flare-examine"));
             }
-            if (TryComp(ent, out ActiveFlareSignalComponent? active))
-            {
-                args.PushMarkup(Loc.GetString("rmc-laser-designator-examine-id", ("id", active.Abbreviation)));
-            }
         }
     }
 
