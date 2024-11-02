@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Input;
-using Content.Shared._RMC14.Webbing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Hands.Components;
@@ -30,7 +29,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedWebbingSystem _webbing = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -185,7 +183,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
     private void OnSlotsActivateInWorld(Entity<CMItemSlotsComponent> ent, ref ActivateInWorldEvent args)
     {
         // If holster belongs to storage item, open it instead of unholstering
-
         if (HasComp<StorageComponent>(ent))
             return;
 

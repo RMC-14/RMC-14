@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Content.Shared.Containers.ItemSlots;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -19,7 +18,6 @@ public abstract class SharedWebbingSystem : EntitySystem
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
 
     public override void Initialize()
     {
