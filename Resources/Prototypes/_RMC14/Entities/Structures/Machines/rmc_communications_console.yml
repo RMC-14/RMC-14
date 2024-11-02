@@ -3,6 +3,10 @@
   parent: CMBaseStructure
   id: RMCCommunicationsConsoleBase
   components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     drawdepth: SmallObjects
     sprite: _RMC14/Structures/Machines/rmc_groundside_communications_console.rsi
