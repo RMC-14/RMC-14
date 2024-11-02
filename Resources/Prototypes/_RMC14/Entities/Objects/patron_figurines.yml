@@ -699,7 +699,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronAlecProtagBuchanan
   name: Alec 'Protag' Buchanan figurine
-  description: ""
+  description: "Here stands the Fireteam Lord, a Delta Marine's best friend. Known for his bravery and being the heaviest drinker in the UNMC. The figurine smells vaguely of Alcohol and imminent Death."
   components:
   - type: Sprite
     state: alec_protag_buchanan
