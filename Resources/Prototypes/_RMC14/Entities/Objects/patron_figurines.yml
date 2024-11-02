@@ -50,7 +50,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronFritzVohlkson
   name: Fritz Vohlkson figurine
-  description: "SIR YES SIR OORAH!"
+  description: "A member of the Colony Liaison's security detail. A tacky reward given by We-Ya for 20 years of service."
   components:
   - type: Sprite
     state: Fritz_Vohlkson
@@ -643,10 +643,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronBeatriceBeaBootes
   name: Beatrice 'Bea' Bootes figurine
-  description: "Born, adopted, and raised in Madawaska, Maine, this lesbian felinid tries her best to lead. She would go on to join the UNMC and later become a sergeant. Loves dual SMG. She lost her wife to a horrific accident and reached a low point in her life, but she fought on eventually. She is a social democrat who is a prominent member of “The Doves”. Her opponents throw rumors of her giving $1.4 million to the North Korean government and eating human organs. She is silly but deeply caring.
-
-    Strives to be a CO.
-
+  description: "Adopted and raised in Madawaska, Maine, this lesbian felinid tries her best. She'd go on to join the UNMC and become a tungsten-level sergeant. She lost her wife to a horrific accident and sunk to rock bottom, but she prevailed. She's a social democrat whose a leading member of The Doves. Her opponents throw rumors of her doing many crimes such as eating human organs, bombing a children's hospital plus a funeral, and being a SPP agent. She's silly but deeply caring. She loves the XM88. Yearns to be a CO.
     :3"
   components:
   - type: Sprite
@@ -697,3 +694,40 @@
     state: julie_sniper_walker
   - type: PatronFigurine
     id: 02e1ee97-1b06-4405-bc94-bf042c461b9e
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAlecProtagBuchanan
+  name: Alec 'Protag' Buchanan figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: alec_protag_buchanan
+  - type: PatronFigurine
+    id: 86c42047-ba25-4bef-9165-735d90efebd9
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKonKleemaan
+  name: Kon Kleemaan figurine
+  description: "1 of 57, this one is... chittering?"
+  components:
+  - type: Sprite
+    state: kon_kleemaan
+  - type: PatronFigurine
+    id: b2bbf83b-17f8-4be8-910f-619303449a57
+  - type: PointLight
+    enabled: true
+    radius: 1.5
+    color: orange
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronPorterZombieCoolidge
+  name: Porter 'Zombie' Coolidge figurine
+  description: "A figurine of a longtime Delta Combat Technician. He seems to be repairing a cadeline - you can even see the flash of the blowtorch reflected in his goggles..."
+  components:
+  - type: Sprite
+    state: porter_zombie_coolidge
+  - type: PatronFigurine
+    id: 6f980172-002b-4574-8f3c-f9fead1f11a1
