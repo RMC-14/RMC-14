@@ -1,0 +1,79 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorKutjevoYellowBase
+  name: tiles-cm-default-yellow
+  suffix: kutjevo
+
+- type: tile
+  parent: RMCFloorKutjevoYellowBase
+  id: RMCFloorKutjevoYellow1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/yellow1.png
+  
+- type: tile
+  parent: RMCFloorKutjevoYellowBase
+  id: RMCFloorKutjevoYellow2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/yellow2.png
+  
+- type: tile
+  parent: RMCFloorKutjevoYellowBase
+  id: RMCFloorKutjevoYellow3_0
+  sprite: /Textures/_RMC14/Tiles/kutjevo/yellow3_0.png
+  
+- type: tile
+  parent: RMCFloorKutjevoYellowBase
+  id: RMCFloorKutjevoYellow3_1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/yellow3_1.png
+  
+- type: tile
+  parent: RMCFloorKutjevoYellowBase
+  id: RMCFloorKutjevoYellow3_2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/yellow3_2.png
+  
+- type: tile
+  parent: RMCFloorKutjevoYellowBase
+  id: RMCFloorKutjevoYellow3_3
+  sprite: /Textures/_RMC14/Tiles/kutjevo/yellow3_3.png
+  
+- type: tile
+  parent: RMCFloorKutjevoYellowBase
+  id: RMCFloorKutjevoYellow3_4
+  sprite: /Textures/_RMC14/Tiles/kutjevo/yellow3_4.png
+  
+- type: tile
+  parent: RMCFloorKutjevoYellowBase
+  id: RMCFloorKutjevoYellow3_5
+  sprite: /Textures/_RMC14/Tiles/kutjevo/yellow3_5.png
+  
+- type: tile
+  parent: RMCFloorKutjevoYellowBase
+  id: RMCFloorKutjevoYellow3_6
+  sprite: /Textures/_RMC14/Tiles/kutjevo/yellow3_6.png
+  
+- type: tile
+  parent: RMCFloorKutjevoYellowBase
+  id: RMCFloorKutjevoYellow3_7
+  sprite: /Textures/_RMC14/Tiles/kutjevo/yellow3_7.png
+  
+- type: tile
+  parent: RMCFloorKutjevoYellowBase
+  id: RMCFloorKutjevoYellow4_0
+  sprite: /Textures/_RMC14/Tiles/kutjevo/yellow4_0.png
+  
+- type: tile
+  parent: RMCFloorKutjevoYellowBase
+  id: RMCFloorKutjevoYellow4_1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/yellow4_1.png
+  
+- type: tile
+  parent: RMCFloorKutjevoYellowBase
+  id: RMCFloorKutjevoYellow4_2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/yellow4_2.png
+  
+- type: tile
+  parent: RMCFloorKutjevoYellowBase
+  id: RMCFloorKutjevoYellow4_3
+  sprite: /Textures/_RMC14/Tiles/kutjevo/yellow4_3.png
+  
+  
+

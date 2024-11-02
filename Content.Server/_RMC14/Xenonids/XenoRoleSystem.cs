@@ -3,7 +3,6 @@ using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Roles;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared.Roles.Jobs;
 using Robust.Server.GameStates;
 using Robust.Shared.Player;
 
@@ -34,8 +33,7 @@ public sealed class XenoRoleSystem : EntitySystem
         if (_hive.GetHive(xeno.Owner) is {} hive)
             _pvsOverride.AddForceSend(hive, args.Player);
 
-        _role.MindTryRemoveRole<JobComponent>(mind.Value);
-        _role.MindAddRole(mind.Value, new JobComponent { Prototype = xeno.Comp.Role });
+        _role.MindAddJobRole(mind.Value, jobPrototype: xeno.Comp.Role);
         _playTime.PlayerRolesChanged(args.Player);
     }
 

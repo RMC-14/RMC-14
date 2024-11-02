@@ -64,7 +64,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
-#     - id: Rebreather
+      - id: RMCMaskRebreather
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
@@ -137,7 +137,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
-#     - id: Rebreather
+      - id: RMCMaskRebreather
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:

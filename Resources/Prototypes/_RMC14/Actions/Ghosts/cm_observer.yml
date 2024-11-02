@@ -27,3 +27,15 @@
       sprite: _RMC14/Interface/Alerts/xeno_health.rsi
       state: health_full
     event: !type:ToggleXenoHudActionEvent
+
+- type: entity
+  id: ActionFindParasite
+  name: Find Parasite
+  description: Find Ghostrolable Parasites
+  components:
+  - type: InstantAction
+    checkCanInteract: false
+    icon:
+      sprite: _RMC14/Actions/observer_actions.rsi
+      state: find_parasite
+    event: !type:FindParasiteActionEvent

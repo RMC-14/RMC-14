@@ -163,7 +163,7 @@
   parent: CMBulletBase
   id: CMBulletSmartGun10x30mm
   name: bullet (10x30mm)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi

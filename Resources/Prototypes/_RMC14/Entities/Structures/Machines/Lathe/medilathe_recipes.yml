@@ -128,9 +128,73 @@
     CMGlass: 67 # 2500
 
 - type: latheRecipe
-  id: RMCMedicAutoInjector
-  result: RMCMedicAutoInjector
+  id: RMCMedicAutoInjectorEZ1
+  name: rmc-autoinjector-ez-1
+  result: RMCMedicAutoInjectorEZ1
   completetime: 4
   materials:
     RMCPlastic: 19 # 375
 
+- type: latheRecipe
+  id: RMCMedicAutoInjectorEZ5
+  name: rmc-autoinjector-ez-5
+  result: RMCMedicAutoInjectorEZ5
+  completetime: 4
+  materials:
+    RMCPlastic: 19 # 375
+
+- type: latheRecipe
+  id: RMCMedicAutoInjectorEZ10
+  name: rmc-autoinjector-ez-10
+  result: RMCMedicAutoInjectorEZ10
+  completetime: 4
+  materials:
+    RMCPlastic: 19 # 375
+
+- type: latheRecipe
+  id: RMCMedicAutoInjectorEZ15
+  name: rmc-autoinjector-ez-15
+  result: RMCMedicAutoInjectorEZ15
+  completetime: 4
+  materials:
+    RMCPlastic: 19 # 375
+
+- type: latheRecipe
+  id: RMCMedicAutoInjectorEZ30
+  name: rmc-autoinjector-ez-30
+  result: RMCMedicAutoInjectorEZ30
+  completetime: 4
+  materials:
+    RMCPlastic: 19 # 375
+
+- type: latheRecipe
+  id: RMCMedicAutoInjectorEZ45
+  name: rmc-autoinjector-ez-45
+  result: RMCMedicAutoInjectorEZ45
+  completetime: 4
+  materials:
+    RMCPlastic: 19 # 375
+
+- type: latheRecipe
+  id: RMCMedicAutoInjectorEZ60
+  name: rmc-autoinjector-ez-60
+  result: RMCMedicAutoInjectorEZ60
+  completetime: 4
+  materials:
+    RMCPlastic: 19 # 375
+
+- type: latheRecipe
+  id: RMCMedicAutoInjector15
+  name: rmc-autoinjector-medic-15
+  result: RMCMedicAutoInjector15
+  completetime: 4
+  materials:
+    RMCPlastic: 19 # 375
+
+- type: latheRecipe
+  id: RMCMedicAutoInjector30
+  name: rmc-autoinjector-medic-30
+  result: RMCMedicAutoInjector30
+  completetime: 4
+  materials:
+    RMCPlastic: 19 # 375

@@ -196,7 +196,7 @@
 - type: entity
   parent: RMCBaseBullet
   id: Bullet10x20mm
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -215,7 +215,7 @@
 - type: entity
   parent: Bullet10x20mm
   id: Bullet10x20mmAP
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

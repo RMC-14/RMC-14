@@ -1,7 +1,7 @@
 ﻿- type: entity
   id: RMCSmokeAcid
   name: acid gas
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Transform
     anchored: true
@@ -53,7 +53,7 @@
 - type: entity
   id: RMCSmokeNeurotoxin
   name: neurotoxin gas
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Transform
     anchored: true
@@ -114,7 +114,7 @@
   parent: RMCSmokeAcid
   id: RMCSmokeAcidShroud
   name: acid gas
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: EvenSmoke
     spawn: RMCSmokeAcidShroud
@@ -124,7 +124,7 @@
   parent: RMCSmokeNeurotoxin
   id: RMCSmokeNeurotoxinShroud
   name: neurotoxin gas
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: EvenSmoke
     spawn: RMCSmokeNeurotoxinShroud

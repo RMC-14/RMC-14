@@ -136,10 +136,22 @@ public sealed class CMHandsSystem : EntitySystem
 
     public bool TryStorageEjectHand(EntityUid user, EntityUid item)
     {
-        if (!HasComp<RMCStorageEjectHandComponent>(item) ||
+        if (!TryComp(item, out RMCStorageEjectHandComponent? eject) ||
             !TryComp(item, out StorageComponent? storage))
         {
             return false;
+        }
+
+        if (eject.Whitelist != null)
+        {
+            foreach (var contained in storage.Container.ContainedEntities)
+            {
+                if (_whitelist.IsWhitelistPass(eject.Whitelist, contained))
+                {
+                    _hands.TryPickupAnyHand(user, contained);
+                    return true;
+                }
+            }
         }
 
         if (!_rmcStorage.TryGetLastItem((item, storage), out var last))

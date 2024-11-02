@@ -2,6 +2,7 @@
   parent: SpaceCash
   id: RMCSpaceCash
   name: dollars
+  description: Ten US Government minted hundred-dollar bills. Every single damn one of them has Ben Fucking Franklin on them. The court of Bens sit impatiently, as if each one thought they alone belonged to you. This coven of angry Bens have all since learned about your relations with the other Bens, and they want answers.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/spacecash.rsi
@@ -9,6 +10,9 @@
     layers:
     - state: spacecash1
       map: ["base"]
+  - type: Item
+    size: Tiny
+    shape: null
   - type: Stack
     stackType: Dollar
     count: 1
