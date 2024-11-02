@@ -81,8 +81,8 @@
         points: 5
       - id: RMCPouchMacheteFilled
         points: 15
-    #- id: CMMarineRadioTelephonePack
-    #  points: 5
+      - id: RMCBackpackRTO
+        points: 5
     #- id: CMWeldingGoggles
     #  points: 3
       - id: CMBeltUtilityCombat
