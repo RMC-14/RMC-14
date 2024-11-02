@@ -99,14 +99,13 @@
 - type: entity
   parent: RMCToolboxMechanical
   id: RMCToolboxMechanicalGreen
-  suffix: RMC14, Green
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Tools/Toolboxes/toolbox_green.rsi
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Tools/Toolboxes/toolbox_green.rsi
-  suffix: RMC14
+  suffix: RMC14, Green
 
 - type: entity
   parent: [RMCToolboxMechanicalGreen, RMCToolboxMechanicalFilled]
