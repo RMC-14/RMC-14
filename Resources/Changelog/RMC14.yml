@@ -1,23 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added crash landing back to the planet when outside the dropship or in
-      space far away from the warship. Ending up outside the dropship during FTL will
-      now crash land you to a random spot on the planet and instantly kill you.
-    type: Add
-  - message: Fixed xenos being able to hug the outsides of the dropship to hitch a
-      ride.
-    type: Fix
-  - message: Fixed the command tablet in Savannah not being accessible to anyone but
-      the CO. It is now located in the CIC.
-    type: Fix
-  - message: Fixed Savannah having two groundside operation consoles.
-    type: Fix
-  id: 424
-  time: '2024-07-22T10:19:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3170
-- author: DrSmugleaf
-  changes:
   - message: The Dropship landing gibbing you now has half a tile less range.
     type: Tweak
   id: 425
@@ -4890,5 +4873,12 @@
   id: 923
   time: '2024-11-02T20:17:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4667
+- author: FungiFellow
+  changes:
+  - message: Added storage for holdout to color shoes
+    type: Add
+  id: 924
+  time: '2024-11-02T22:51:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4669
 Name: RMC14
 Order: -1
