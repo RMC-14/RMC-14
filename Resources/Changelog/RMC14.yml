@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: The Dropship landing gibbing you now has half a tile less range.
-    type: Tweak
-  id: 425
-  time: '2024-07-22T10:19:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3172
 - author: Whisper
   changes:
   - message: Pretzels are no longer made of meatballs.
@@ -4880,5 +4873,23 @@
   id: 924
   time: '2024-11-02T22:51:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4669
+- author: DrSmugleaf
+  changes:
+  - message: Fixed patron figurines being invisible.
+    type: Fix
+  - message: Fixed not being able to open the radio telephone backpack storage.
+    type: Fix
+  - message: Fixed comms towers being acidable.
+    type: Fix
+  - message: Fixed the telephone UI overflowing when there's too many choices.
+    type: Fix
+  - message: Fixed not being able to open the groundside operations console while
+      the announcement is on cooldown.
+    type: Fix
+  - message: Fixed telephone cord drawing erratically over your screen.
+    type: Fix
+  id: 925
+  time: '2024-11-02T22:57:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4675
 Name: RMC14
 Order: -1
