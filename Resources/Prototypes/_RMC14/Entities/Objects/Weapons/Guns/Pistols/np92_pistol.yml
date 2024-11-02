@@ -141,3 +141,6 @@
 
 - type: Tag
   id: RMCMagazinePistolNP92
+
+- type: Tag
+  id: CMCartridgePistol9x18mm

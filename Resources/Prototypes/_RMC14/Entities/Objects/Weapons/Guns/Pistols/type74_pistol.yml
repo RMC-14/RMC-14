@@ -103,3 +103,6 @@
 
 - type: Tag
   id: RMCMagazinePistolT74HI
+
+- type: Tag
+  id: RCMCartridgePistol762x25mmHI
