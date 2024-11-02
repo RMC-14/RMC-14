@@ -193,5 +193,13 @@
   name: rmc-guide-entry-rules-marine-sop
   text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOP.xml"
   priority: 8
-#  children:
-#  - RMCMarineLawDefinitions
+  children:
+  - RMCMarineSOPGeneral
+
+# General Regulations
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineSOPGeneral
+  name: rmc-guide-entry-rules-marine-sop-general
+  text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPGeneral.xml"
+  priority: 1
