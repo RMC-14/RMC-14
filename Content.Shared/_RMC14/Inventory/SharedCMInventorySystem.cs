@@ -120,7 +120,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         AlternativeVerb holsterVerb = new()
         {
             Act = () => Unholster(args.User, holster, out _),
-            Text = Loc.GetString("rmc-holster-verb"),
+            Text = Loc.GetString("rmc-storage-holster-eject-verb"),
             Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/eject.svg.192dpi.png"))
         };
         args.Verbs.Add(holsterVerb);
@@ -567,7 +567,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         return false;
     }
 
-    private bool Unholster(EntityUid user, EntityUid item, out bool stop)
+    public bool Unholster(EntityUid user, EntityUid item, out bool stop)
     {
         stop = false;
         if (TryComp(item, out CMHolsterComponent? holster))
