@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: musicmanvr
-  changes:
-  - message: Directional windows no longer mess up layering when you press against
-      them.
-    type: Fix
-  id: 417
-  time: '2024-07-20T10:57:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3117
 - author: DrSmugleaf
   changes:
   - message: Fixed explosions making elevator tiles weedable.
@@ -4830,5 +4822,12 @@
   id: 916
   time: '2024-11-01T23:00:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4655
+- author: Aurallianz
+  changes:
+  - message: New Varadero.
+    type: Add
+  id: 917
+  time: '2024-11-02T04:25:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4339
 Name: RMC14
 Order: -1
