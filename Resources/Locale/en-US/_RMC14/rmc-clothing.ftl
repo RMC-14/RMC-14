@@ -17,4 +17,4 @@ rmc-dogtags-single-join = You join the two tags together.
 
 rmc-dogtags-unknown = unknown
 rmc-dogtags-info-joined-name = information dog tags
-rmc-dogtags-info-joined-desc = Fallen marines information dog tags.
+rmc-dogtags-info-joined-desc = Fallen marines' information dog tags.
