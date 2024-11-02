@@ -50,7 +50,7 @@
 - type: entity
   parent: RMCCommunicationsConsoleBase
   id: RMCWarshipControlConsole
-  name: warship control console
+  name: almayer control console
   description: This is used for controlling ship and its related functions.
   components:
   - type: ActivatableUI
