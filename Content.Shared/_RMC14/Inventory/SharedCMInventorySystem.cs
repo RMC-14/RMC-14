@@ -492,7 +492,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
     }
 
     // Get last item inserted into holster (can also be used to check if holster is empty)
-    public bool TryGetLastInserted(Entity<CMHolsterComponent?> holster, out EntityUid item)
+    private bool TryGetLastInserted(Entity<CMHolsterComponent?> holster, out EntityUid item)
     {
         item = default;
 
@@ -559,7 +559,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         return false;
     }
 
-    public bool Unholster(EntityUid user, EntityUid item, out bool stop)
+    private bool Unholster(EntityUid user, EntityUid item, out bool stop)
     {
         stop = false;
         if (TryComp(item, out CMHolsterComponent? holster))
