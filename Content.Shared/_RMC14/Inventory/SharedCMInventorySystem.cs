@@ -115,11 +115,16 @@ public abstract class SharedCMInventorySystem : EntitySystem
         if (comp.Contents.Count == 0)
             return;
 
+        // CMItemSlots-based holsters have their own eject verb, no need to add a duplicate
+        if (HasComp<CMItemSlotsComponent>(holster))
+            return;
+
         AlternativeVerb holsterVerb = new()
         {
             Act = () => Unholster(args.User, holster, out _),
-            Text = Loc.GetString("rmc-holster-verb"),
-            Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/eject.svg.192dpi.png"))
+            Text = Loc.GetString("rmc-unholster-verb"),
+            //Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/eject.svg.192dpi.png"))
+            IconEntity = GetNetEntity(comp.Contents[0])
         };
         args.Verbs.Add(holsterVerb);
     }
