@@ -22,6 +22,8 @@
     FacialHair: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
     Chest: MobVulpkaninTorso
+    Underwear: MobHumanoidAnyMarking
+    Undershirt: MobHumanoidAnyMarking
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
