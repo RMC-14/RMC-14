@@ -31,6 +31,8 @@
         RMCSkillResearch: 1
         RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
+    - type: JobPrefix
+      prefix: "Rsr"
   hidden: true # TODO RMC14
 
 - type: startingGear
@@ -67,3 +69,4 @@
 
 - type: playTimeTracker
   id: CMJobResearcher
+  isHumanoid: true

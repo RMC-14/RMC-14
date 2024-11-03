@@ -111,6 +111,12 @@ public sealed class OverwatchConsoleSupplyDropCommentBuiMsg(int index, string co
 }
 
 [Serializable, NetSerializable]
+public sealed class OverwatchConsoleSendMessageBuiMsg(string message) : BoundUserInterfaceMessage
+{
+    public readonly string Message = message;
+}
+
+[Serializable, NetSerializable]
 public record struct OverwatchSquad(NetEntity Id, string Name, Color Color, NetEntity? Leader);
 
 [Serializable, NetSerializable]

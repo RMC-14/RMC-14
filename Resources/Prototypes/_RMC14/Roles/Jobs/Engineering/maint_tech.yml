@@ -27,6 +27,8 @@
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillPowerLoader: 2
+    - type: JobPrefix
+      prefix: "MT"
 
 - type: startingGear
   id: CMGearMaintTech
@@ -55,3 +57,4 @@
 
 - type: playTimeTracker
   id: CMJobMaintTech
+  isHumanoid: true

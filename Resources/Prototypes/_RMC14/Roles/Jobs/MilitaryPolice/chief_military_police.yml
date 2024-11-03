@@ -45,6 +45,8 @@
         RMCSkillPolice: 2
     - type: MarineOrders
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "CMP"
 
 - type: startingGear
   id: CMGearChiefMP
@@ -77,3 +79,4 @@
 
 - type: playTimeTracker
   id: CMJobChiefMP
+  isHumanoid: true

@@ -38,6 +38,8 @@
         RMCSkillPolice: 2
     - type: MarineOrders
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "MW"
 
 - type: startingGear
   id: CMGearMilitaryWarden
@@ -70,3 +72,4 @@
 
 - type: playTimeTracker
   id: CMJobMilitaryWarden
+  isHumanoid: true
