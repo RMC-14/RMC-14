@@ -1,9 +1,27 @@
+﻿- type: job
+  parent: CMSurvivor
+  id: RMCMedicalSurvivor
+  name: cm-job-name-survivor #make new name
+  description: cm-job-description-survivor # Make new description
+  startingGear: RMCGearSurvivor
+  accessGroups:
+  - Colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+    - type: EquipSurvivorPreset
+      preset: #RMCSurvivorPresetMedical
+
 ﻿- type: startingGear
   id: RMCGearSurvivorDoctor #Port Outer clothing: Labcoat, 15 bio armor
   equipment:
     head: CMHeadCapSurgBlue
     mask: CMMaskSterile
-    jumpsuit: CMJumpsuitLiaisonBlue # TODO RMC14 /obj/item/clothing/under/rank/medical
+    jumpsuit: CMJumpsuitLiaisonBlue 
     back: CMSatchelMedical
     gloves: CMHandsLatex
     shoes: RMCShoesLaceup
