@@ -525,6 +525,9 @@
       map: [ "closedLayer" ]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+    slots:
+    - suitStorage
+    - belt
   - type: Storage # holds up to 6 mags plus gun
     maxItemSize: Normal
     grid:
@@ -579,6 +582,9 @@
       map: [ "closedLayer" ]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+    slots:
+    - suitStorage
+    - belt
   - type: Storage # holds up to 6 mags plus gun
     maxItemSize: Normal
     grid:
@@ -623,6 +629,9 @@
       visible: false
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/holster_smg.rsi
+    slots:
+    - suitStorage
+    - belt
   - type: ContainerContainer
     containers:
       pouch: !type:ContainerSlot
