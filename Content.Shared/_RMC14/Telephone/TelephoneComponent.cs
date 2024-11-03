@@ -11,5 +11,5 @@ public sealed partial class TelephoneComponent : Component
     public EntityUid? RotaryPhone;
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier SpeakSound = new SoundCollectionSpecifier("RMCPhoneSpeak");
+    public SoundSpecifier SpeakSound = new SoundCollectionSpecifier("RMCPhoneSpeak", AudioParams.Default.WithVolume(-3));
 }
