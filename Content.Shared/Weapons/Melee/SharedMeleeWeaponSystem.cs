@@ -736,6 +736,9 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return groups.Keys.First();
         }
 
+        if (modifiedDamage.GetTotal() == FixedPoint2.Zero)
+            return null;
+
         var highestDamage = FixedPoint2.Zero;
         string? highestDamageType = null;
 
