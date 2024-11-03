@@ -1,0 +1,10 @@
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionSetPose
+  name: Set Pose
+  description: Set the pose of your character.
+  components:
+  - type: InstantAction
+    itemIconStyle: BigItem
+    event: !type:RMCSetPoseActionEvent
+    useDelay: 3
