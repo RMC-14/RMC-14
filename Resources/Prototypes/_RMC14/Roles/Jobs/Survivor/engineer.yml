@@ -1,9 +1,27 @@
-﻿- type: startingGear
+﻿- type: job
+  parent: CMSurvivor
+  id: RMCMedicalSurvivor
+  name: cm-job-name-survivor #make new name
+  description: cm-job-description-survivor # Make new description
+  startingGear: RMCGearSurvivor
+  accessGroups:
+  - Colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 3
+        RMCSkillEngineer: 3
+    - type: EquipSurvivorPreset
+      preset: # RMCSurvivorPresetEngineer
+ 
+ - type: startingGear
   id: RMCGearSurvivorEngineer
   equipment:
     head: ClothingHeadHatBeretEngineering
     gloves: CMHandsInsulated
-    jumpsuit: CMJumpsuitColonist # TODO RMC14 /obj/item/clothing/under/rank/engineer
+    jumpsuit: ClothingUniformJumpsuitEngineering
     back: CMSatchelEngineer
     shoes: ClothingShoesColorOrange
     id: CMIDCardColonist
