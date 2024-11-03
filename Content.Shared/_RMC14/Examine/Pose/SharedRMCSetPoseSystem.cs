@@ -17,7 +17,8 @@ public abstract class SharedRMCSetPoseSystem : EntitySystem
 
     private void OnMapInit(Entity<RMCSetPoseComponent> ent, ref MapInitEvent ev)
     {
-        _actions.AddAction(ent, ref ent.Comp.Action, ent.Comp.ActionPrototype);
+        if (_actions.AddAction(ent, ref ent.Comp.Action, out var action, ent.Comp.ActionPrototype))
+            action.EntityIcon = ent;
     }
 
     private void OnExamine(Entity<RMCSetPoseComponent> ent, ref ExaminedEvent args)
