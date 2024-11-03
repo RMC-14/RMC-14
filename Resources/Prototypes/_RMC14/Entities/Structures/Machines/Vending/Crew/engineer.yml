@@ -46,8 +46,10 @@
       - id: CMBackpackMarineTech
       - id: CMSatchelMarineTech
       - id: CMBackpackWelder
+        recommended: true
       - id: RMCSatchelWelder
-      - id: CMSatchelMarineTech
+      - id: RMCSatchelWelderChestrig
+        recommended: true
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
