@@ -1,16 +1,17 @@
 ﻿- type: startingGear
-  id: RMCGearSurvivorDoctor
+  id: RMCGearSurvivorDoctor #Port Outer clothing: Labcoat, 15 bio armor
   equipment:
     head: CMHeadCapSurgBlue
     mask: CMMaskSterile
-    jumpsuit: CMJumpsuitColonist # TODO RMC14 /obj/item/clothing/under/rank/medical
+    jumpsuit: CMJumpsuitLiaisonBlue # TODO RMC14 /obj/item/clothing/under/rank/medical
     back: CMSatchelMedical
     gloves: CMHandsLatex
-    shoes: ClothingShoesColorWhite
-    id: CMIDCardColonist
+    shoes: RMCShoesLaceup
+    id: CMIDCardColonist #Replace me with an ID with med access
+    eyes: RMCGlassesMedicalHUDGlasses
     ears: CMHeadsetColony
     pocket1: RMCM5Bayonet
-    pocket2: RMCFlashlight
+    pocket2: RMCFlashlightPen
 
 - type: entity
   parent: CMSpawnPointJobBase
