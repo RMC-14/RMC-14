@@ -89,6 +89,8 @@
     state: comms1
   - type: Area
     minimapColor: '#5A4501E7'
+    resinAllowed: false
+    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoInterior
@@ -119,6 +121,8 @@
     state: comms4
   - type: Area
     minimapColor: '#5A4501E7'
+    resinAllowed: false
+    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoInterior
@@ -170,6 +174,8 @@
   - type: Area
     minimapColor: '#EBE5E5E3'
     landingZone: true
+    resinAllowed: false
+    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoExterior
@@ -181,6 +187,8 @@
   - type: Area
     minimapColor: '#EBE5E5E3'
     landingZone: true
+    resinAllowed: false
+    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoExterior
@@ -191,6 +199,8 @@
     state: varadero0
   - type: Area
     minimapColor: '#2B5B2BEE'
+    resinAllowed: false
+    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoExteriorPontoonBeach
@@ -208,6 +218,8 @@
     state: varadero1
   - type: Area
     minimapColor: '#2B5B2BEE'
+    resinAllowed: false
+    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoExterior
@@ -241,6 +253,7 @@
     noTunnel: true
     unweedable: false
     minimapColor: '#0603C4EE'
+    resinAllowed: false
 
 - type: entity
   parent: RMCAreaVaraderoExterior
@@ -286,6 +299,8 @@
     state: req0
   - type: Area
     minimapColor: '#C19504E7'
+    resinAllowed: false
+    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoInterior
@@ -302,6 +317,9 @@
   components:
   - type: Sprite
     state: hall2
+  - type: Area
+    resinAllowed: false
+    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoInterior
@@ -320,6 +338,8 @@
     state: offices1
   - type: Area
     minimapColor: '#132242EE'
+    resinAllowed: false
+    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoInterior
@@ -330,6 +350,8 @@
     state: offices0
   - type: Area
     minimapColor: '#17472CEE'
+    resinAllowed: false
+    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoInterior
@@ -356,6 +378,9 @@
   components:
   - type: Sprite
     state: tunnels1
+  - type: Area
+    resinAllowed: false
+    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoInteriorMaintenance
@@ -462,6 +487,8 @@
     state: offices0
   - type: Area
     minimapColor: '#132242EE'
+    resinAllowed: false
+    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoInterior

@@ -58,17 +58,20 @@ public sealed class TelephoneBui(EntityUid owner, Enum uiKey) : BoundUserInterfa
 
                 searchBar.OnTextChanged += args =>
                 {
-                    foreach (var container in _window.Tabs.GetControlOfType<BoxContainer>())
+                    foreach (var scroll in _window.Tabs.GetControlOfType<ScrollContainer>())
                     {
-                        foreach (var child in container.Children)
+                        foreach (var container in scroll.GetControlOfType<BoxContainer>())
                         {
-                            if (child is LineEdit otherBar)
+                            foreach (var child in container.Children)
                             {
-                                otherBar.SetText(args.Text, false);
-                            }
-                            else if (child is Button button)
-                            {
-                                button.Visible = button.Text?.Contains(args.Text, StringComparison.OrdinalIgnoreCase) ?? false;
+                                if (child is LineEdit otherBar)
+                                {
+                                    otherBar.SetText(args.Text, false);
+                                }
+                                else if (child is Button button)
+                                {
+                                    button.Visible = button.Text?.Contains(args.Text, StringComparison.OrdinalIgnoreCase) ?? false;
+                                }
                             }
                         }
                     }

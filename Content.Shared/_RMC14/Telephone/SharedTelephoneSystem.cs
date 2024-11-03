@@ -195,6 +195,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
                 var selfSound = EnsureComp<AmbientSoundComponent>(ent);
                 _ambientSound.SetSound(ent, dialingSound, selfSound);
                 _ambientSound.SetRange(ent, 16, selfSound);
+                _ambientSound.SetVolume(ent, dialingSound.Params.Volume, selfSound);
             }
 
             if (ent.Comp.ReceivingSound is { } receivingSound)
@@ -202,6 +203,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
                 var otherSound = EnsureComp<AmbientSoundComponent>(target);
                 _ambientSound.SetSound(target, receivingSound, otherSound);
                 _ambientSound.SetRange(target, 16, otherSound);
+                _ambientSound.SetVolume(target, receivingSound.Params.Volume, otherSound);
             }
         }
 
@@ -272,7 +274,10 @@ public abstract class SharedTelephoneSystem : EntitySystem
         }
 
         if (_net.IsServer)
+        {
             _ambientSound.SetSound(other, BusySound);
+            _ambientSound.SetVolume(other, BusySound.Params.Volume);
+        }
 
         if (!HasPickedUp(other))
             return;
@@ -456,10 +461,11 @@ public abstract class SharedTelephoneSystem : EntitySystem
             }
 
             if (!HasPickedUp(other) &&
-                time > phone.LastCall + phone.DialingIdleDelay)
+                time > phone.LastCall + phone.DialingIdleDelay &&
+                phone.DialingIdleSound is { } sound)
             {
-                if (phone.DialingIdleSound is { } sound)
-                    _ambientSound.SetSound(uid, sound);
+                _ambientSound.SetSound(uid, sound);
+                _ambientSound.SetVolume(uid, sound.Params.Volume);
             }
         }
 

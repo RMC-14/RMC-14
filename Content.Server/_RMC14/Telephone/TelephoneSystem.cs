@@ -55,7 +55,7 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
 
     private void OnRadioReceiveAttempt(ref RadioReceiveAttemptEvent ev)
     {
-        if (!_rmcPlanet.IsOnPlanet(ev.RadioSource.ToCoordinates()))
+        if (!_rmcPlanet.IsOnPlanet(ev.RadioReceiver.ToCoordinates()))
             return;
 
         if (!ev.Channel.Planet)
