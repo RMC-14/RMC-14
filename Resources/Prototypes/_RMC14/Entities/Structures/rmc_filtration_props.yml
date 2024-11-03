@@ -1,0 +1,107 @@
+﻿- type: entity
+  id: RMCFiltration
+  name: water filtration system
+  description: A water filter that separates both organic and inorganic matter, hazardous waste, and corrosive acids from water so it may be further processed.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.49,-1.49,1.49,1.49"
+        density: 60
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/Filtration/96x96.rsi
+    state: filtration
+  - type: Clickable
+
+- type: entity
+  parent: RMCFiltration
+  id: RMCFiltrationDisinfection
+  name: disinfection filter
+  description: A water filter specifically designed to separate micro-organisms, such as viruses and bacteria, from water.
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.49,-1.49,1.49,0.49"
+        density: 60
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/Filtration/96x96.rsi
+    state: disinfection
+
+- type: entity
+  parent: RMCFiltration
+  id: RMCFiltrationDistribution
+  name: waste distribution system
+  description: This machine separates the leftover waste from the purification processes to be discarded into space, recycled for supplies, or used for research.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Filtration/96x96.rsi
+    state: distribution
+
+- type: entity
+  parent: RMCFiltrationDistribution
+  id: RMCFiltrationDistributionDamaged
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Filtration/96x96.rsi
+    state: distribution-damaged
+
+- type: entity
+  parent: RMCFiltration
+  id: RMCFiltrationSedimentation
+  name: sedimentation filter
+  description: A water filter specifically designed to capture and remove sediment, such as sand, silt, dirt, and rust, from water without removing the nutritious minerals for that crisp, clean taste every time.
+  components:  
+  - type: Sprite
+    sprite: _RMC14/Structures/Filtration/96x96.rsi
+    state: sedimentation
+
+- type: entity
+  parent: RMCFiltrationSedimentation
+  id: RMCFiltrationSedimentationAlt
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.49,-1.49,1.49,0.49"
+        density: 60
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/Filtration/96x96.rsi
+    state: sedimentation_A_1
+
+- type: entity
+  parent: RMCFiltration
+  id: RMCCoagulationArm
+  name: coagulation arm
+  description: An axel with four sides, made to spin to help filter the water.
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 60
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/Filtration/96x96.rsi
+    state: coagulation_arm
