@@ -89,7 +89,6 @@
     state: comms1
   - type: Area
     minimapColor: '#5A4501E7'
-  - type: Area
     resinAllowed: false
     unweedable: false
 
@@ -300,7 +299,6 @@
     state: req0
   - type: Area
     minimapColor: '#C19504E7'
-  - type: Area
     resinAllowed: false
     unweedable: false
 
@@ -340,7 +338,6 @@
     state: offices1
   - type: Area
     minimapColor: '#132242EE'
-  - type: Area
     resinAllowed: false
     unweedable: false
 
@@ -353,7 +350,6 @@
     state: offices0
   - type: Area
     minimapColor: '#17472CEE'
-  - type: Area
     resinAllowed: false
     unweedable: false
 
