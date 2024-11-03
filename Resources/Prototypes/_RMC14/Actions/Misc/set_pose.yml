@@ -5,6 +5,5 @@
   description: Set the pose of your character.
   components:
   - type: InstantAction
-    itemIconStyle: BigItem
     event: !type:RMCSetPoseActionEvent
     useDelay: 3
