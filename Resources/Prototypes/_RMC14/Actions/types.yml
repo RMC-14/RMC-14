@@ -6,8 +6,8 @@
   noSpawn: true
   components:
     - type: InstantAction
-      icon: { sprite: _RMC/Mobs/Vulpkanin/tail_markings.rsi, state: tail-wag-icon }
-      iconOn: { sprite: _RMC/Mobs/Vulpkanin/tail_markings.rsi, state: tail-wag-icon }
+      icon: { sprite: _RMC14/Mobs/Vulpkanin/tail_markings.rsi, state: tail-wag-icon }
+      iconOn: { sprite: _RMC14/Mobs/Vulpkanin/tail_markings.rsi, state: tail-wag-icon }
       itemIconStyle: NoItem
       useDelay: 1 # Prevents Emote Spam
       event: !type:ToggleActionEvent
