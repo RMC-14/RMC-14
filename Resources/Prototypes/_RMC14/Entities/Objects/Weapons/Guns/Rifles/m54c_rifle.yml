@@ -88,9 +88,9 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.75, 0.00
-      rmc-aslot-rail: 0.06, 0.185
-      rmc-aslot-stock: -0.84, 0.0325
-      rmc-aslot-underbarrel: 0.25, -0.343
+      rmc-aslot-rail: 0.1, 0.16
+      rmc-aslot-stock: -0.78, 0.0325
+      rmc-aslot-underbarrel: 0.35, -0.343
 
 - type: entity
   parent: CMMagazineRifleBase
