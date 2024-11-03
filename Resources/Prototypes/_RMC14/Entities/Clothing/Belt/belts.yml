@@ -594,7 +594,7 @@
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: m82f
       offset: -0.0625, 0.0
-      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      map: [ "enum.CMHolsterLayers.Fill" ]
       visible: false
     - state: icon
     - state: half
@@ -603,23 +603,27 @@
       map: [ "closedLayer" ]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/holster_flaregun.rsi
+    slots:
+    - suitStorage
+    - belt
   - type: Storage
     grid:
     - 0,0,19,3 # 20 flares
     whitelist:
       tags:
+      # - RMCM82FFlareGun
+      - Sidearm # TODO: replace this with the line above once the flare gun gets added
       - Flare
-  - type: ContainerContainer
-    containers:
-      pouch: !type:ContainerSlot
-  - type: ItemSlots
-    slots:
-      pouch:
-        name: M82F holster
-#        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg # TODO RMC14 sounds
-#        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
-        whitelist:
-          tags:
-          - RMCM82FFlareGun
+  - type: FixedItemSizeStorage
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        tags:
+        #- RMCM82FFlareGun
+        - Sidearm # TODO: replace this with the line above once the flare gun gets added
   - type: CMHolster
-  - type: CMItemSlots
+    whitelist:
+      tags:
+      #- RMCM82FFlareGun
+      - Sidearm # TODO: replace this with the line above once the flare gun gets added
