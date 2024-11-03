@@ -23,6 +23,8 @@
       Male: MaleVulpkanin
       Female: FemaleVulpkanin
       Unsexed: MaleVulpkanin
+  - type: Wagging
+    action: ActionToggleVulpkaninWagging
   - type: MeleeWeapon
     soundHit:
       path: /Audio/Weapons/pierce.ogg
@@ -42,6 +44,8 @@
       - map: [ "enum.HumanoidVisualLayers.LArm" ]
       - map: [ "enum.HumanoidVisualLayers.RLeg" ]
       - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+      - map: [ "enum.HumanoidVisualLayers.Underwear" ]
+      - map: [ "enum.HumanoidVisualLayers.Undershirt" ]
       - shader: StencilClear
         sprite: Mobs/Species/Human/parts.rsi
         state: l_leg
@@ -77,9 +81,13 @@
       - map: [ "mask" ]
       - map: [ "head" ]
       - map: [ "pocket1" ]
-      - map: [ "pocket2" ]
-      - map: [ "clownedon" ]
-
+      - map: [ "pocket2" ]    
+      - shader: StencilMask
+        map: [ "enum.HumanoidVisualLayers.StencilMask" ]
+        sprite: _RMC14/Mobs/Vulpkanin/masking_helpers.rsi
+        state: female_full
+        visible: false
+      
 - type: entity
   parent: BaseSpeciesDummy
   name: Vulpkanin Dummy
