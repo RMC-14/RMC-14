@@ -82,8 +82,6 @@
   - type: Strap
     position: Down
     rotation: -90
-    buckleOffset: "0,0"
-    unbuckleOffset: "0,0"
   - type: Construction
     graph: bed
     node: bed

@@ -16,9 +16,12 @@
         Structural: 10
     soundHit:
       collection: GenericHit
+    wideAnimationRotation: 90
   - type: IncreaseDamageOnWield
     damage:
       types:
         Slash: 15
         Blunt: 15
         Structural: 40
+  - type: Prying
+    speedModifier: 100000

@@ -90,6 +90,7 @@ public sealed class FigurineSystem : EntitySystem
         {
             base.Draw(handle);
 
+            var log = _entManager.System<FigurineSystem>().Log;
             while (QueuedTextures.TryDequeue(out var queued))
             {
                 try
@@ -119,7 +120,7 @@ public sealed class FigurineSystem : EntitySystem
                     queued.Texture.Dispose();
 
                     if (!string.IsNullOrEmpty(exc.StackTrace))
-                        Logger.Fatal(exc.StackTrace);
+                        log.Fatal(exc.StackTrace);
                 }
             }
         }

@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._RMC14.Hands;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
@@ -15,6 +16,8 @@ namespace Content.Shared.Hands.EntitySystems;
 
 public abstract partial class SharedHandsSystem : EntitySystem
 {
+    [Dependency] private readonly CMHandsSystem _rmcHands = default!;
+
     private void InitializeInteractions()
     {
         SubscribeAllEvent<RequestSetHandEvent>(HandleSetHand);
@@ -50,8 +53,13 @@ public abstract partial class SharedHandsSystem : EntitySystem
 
     private void HandleMoveItemFromHand(RequestMoveHandItemEvent msg, EntitySessionEventArgs args)
     {
-        if (args.SenderSession.AttachedEntity != null)
-            TryMoveHeldEntityToActiveHand(args.SenderSession.AttachedEntity.Value, msg.HandName);
+        if (args.SenderSession.AttachedEntity == null)
+            return;
+
+        if (_rmcHands.TryStorageEjectHand(args.SenderSession.AttachedEntity.Value, msg.HandName))
+            return;
+
+        TryMoveHeldEntityToActiveHand(args.SenderSession.AttachedEntity.Value, msg.HandName);
     }
 
     private void HandleUseInHand(RequestUseInHandEvent msg, EntitySessionEventArgs args)

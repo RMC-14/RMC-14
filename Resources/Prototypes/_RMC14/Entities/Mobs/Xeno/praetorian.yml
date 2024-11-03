@@ -39,6 +39,7 @@
     tier: 3
     hudOffset: 0,0.16
     unlockAt: 900 # 15 minutes
+  - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
     - CMXenoWarrior
@@ -69,6 +70,7 @@
         density: 185
         mask:
         - MobMask
+        - BarbedBarricade
         layer:
         - MobLayer
       fix2:
@@ -94,6 +96,20 @@
       sprite: _RMC14/Interface/map_blips.rsi
       state: praetorian
   - type: AcidTrap
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.5875
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.645
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.4275
+      whitelist:
+        components:
+        - XenoHeavy
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -140,6 +156,7 @@
     - ActionXenoRetrieve
     - ActionXenoAidToggle
     - ActionXenoDevolve
+    hidden: true
   - type: XenoStrain
     name: rmc-xeno-warden-name
     description: rmc-xeno-warden-description
@@ -165,3 +182,17 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.2
     baseSprintSpeed: 3.4
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.64
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.7025
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.475
+      whitelist:
+        components:
+        - XenoHeavy

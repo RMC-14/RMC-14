@@ -65,7 +65,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
     public void UpdateSprite(Entity<SpriteComponent?, MobStateComponent?, AppearanceComponent?, InputMoverComponent?, ThrownItemComponent?, XenoLeapingComponent?, KnockedDownComponent?> entity)
     {
         var (_, sprite, mobState, appearance, input, thrown, leaping, knocked) = entity;
-        if (!Resolve(entity, ref sprite, ref appearance))
+        if (!Resolve(entity, ref sprite, ref appearance, false))
             return;
 
         var state = MobState.Alive;

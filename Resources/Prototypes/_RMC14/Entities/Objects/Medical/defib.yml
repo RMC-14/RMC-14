@@ -38,8 +38,8 @@
     - Burn: -12
     - Toxin: -12
     zapHeal:
-      types:
-        Asphyxiation: -200
+      groups:
+        Airloss: -400
     zapSound:
       path: /Audio/_RMC14/Medical/defib_release.ogg
       params:
@@ -78,6 +78,7 @@
   suffix: RMC14
   components:
   - type: PowerCellDraw
+    enabled: false
     useRate: 100
 
 - type: entity

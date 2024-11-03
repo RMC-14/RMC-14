@@ -44,6 +44,8 @@
       components:
       - Marine
     hitsToInvulnerability: 3
+  - type: DamageMultiplierFlags
+    flags: Breaching
 
 - type: entity
   id: CMCorrodible
@@ -117,6 +119,8 @@
   - type: RMCWallExplosionDeletable
   - type: DamageMultiplierFlags
     flags: Turf
+  - type: ReceiverXenoClaws
+    hitsToDestroy: 20
 
 - type: entity
   parent:
@@ -144,12 +148,15 @@
 # Invisible Wall
 
 - type: entity
+  parent: MarkerBase
   id: RMCWallInvisibleBulletPassible
   name: wall blocker
   suffix: Projectile Passible
   placement:
     mode: SnapgridCenter
   components:
+  - type: Sprite
+    state: green
   - type: Transform
     anchored: true
   - type: Physics
@@ -167,6 +174,7 @@
           bounds: "-0.5,-0.5,0.5,0.5"
         mask:
         - FullTileMask
+        - MobMask
         layer:
         - HighImpassable
         - MidImpassable
@@ -175,3 +183,19 @@
         density: 1000
   - type: RMCDropshipBlocked
 
+- type: entity
+  parent: MarkerBase
+  id: RMCBlockerAirtight
+  name: airtight blocker
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    layers:
+    - state: green
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Airtight

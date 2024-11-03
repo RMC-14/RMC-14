@@ -8,7 +8,6 @@ using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
-using Content.Shared.Roles.Jobs;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -64,8 +63,7 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
             ? HumanoidCharacterProfile.Random()
             : HumanoidCharacterProfile.RandomWithSpecies(species);
         var coordinates = _transform.GetMoverCoordinates(entity);
-        var jobComp = job == null ? null : new JobComponent { Prototype = job.Value };
-        var humanoid = _stationSpawning.SpawnPlayerMob(coordinates, jobComp, profile, null);
+        var humanoid = _stationSpawning.SpawnPlayerMob(coordinates, job, profile, null);
 
         if (gear != null)
         {

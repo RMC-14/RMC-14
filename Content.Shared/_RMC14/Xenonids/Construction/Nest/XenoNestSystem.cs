@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.ActionBlocker;
@@ -39,6 +40,7 @@ public sealed class XenoNestSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly OccluderSystem _occluder = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -149,7 +151,7 @@ public sealed class XenoNestSystem : EntitySystem
 
         // TODO RMC14
         if (HasComp<KnockedDownComponent>(ent) || _mobState.IsIncapacitated(ent))
-            _standing.Down(ent);
+            _standing.Down(ent, changeCollision: true);
     }
 
     private void OnSurfaceDoAfterAttempt(Entity<XenoNestSurfaceComponent> ent, ref DoAfterAttemptEvent<XenoNestDoAfterEvent> args)
@@ -193,6 +195,8 @@ public sealed class XenoNestSystem : EntitySystem
 
         var nest = SpawnAttachedTo(ent.Comp.Nest, nestCoordinates);
         _transform.SetCoordinates(nest, nestCoordinates.Offset(offset));
+
+        _hive.SetSameHive(args.User, nest);
 
         ent.Comp.Nests[direction.Value] = nest;
         Dirty(ent);

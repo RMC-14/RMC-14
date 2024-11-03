@@ -28,7 +28,7 @@
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStabCorrosive
+    - ActionXenoTailStabBoiler
     - ActionXenoAcidStrong
     - ActionXenoBombard
     - ActionXenoToggleGasType
@@ -39,6 +39,7 @@
     tier: 3
     hudOffset: 0,0.35
     unlockAt: 900 # 15 minutes
+  - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
     - CMXenoSpitter
@@ -60,6 +61,7 @@
   - type: XenoAcidShroud
   - type: XenoGasToggle
   - type: XenoTailStab
+    toggle: true
     inject:
       RMCMolecularAcid: 1 # TODO RMC14 6
   - type: XenoSprayAcid
@@ -78,6 +80,20 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.6375
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.7075
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.475
+      whitelist:
+        components:
+        - XenoHeavy
   - type: PointLight
     enabled: true
     radius: 1.8
@@ -85,6 +101,20 @@
     autoRot: true
   - type: RMCSize
     size: Big
+  - type: NeurotoxinInjector
+    neuroPerSecond: 16
+    injectInContact: false
+    affectsDead: false
+    affectsInfectedNested: false
+    toxinDamage:
+        groups:
+          Toxin: 2
+    oxygenDamage:
+        types:
+          Asphyxiation: 150
+    coughDamage:
+        groups:
+          Brute: 5
   - type: RMCXenoDamageVisuals
     prefix: boiler
   - type: TacticalMapIcon

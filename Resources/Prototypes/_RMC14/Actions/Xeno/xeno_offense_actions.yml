@@ -92,6 +92,12 @@
   description: Launches an attack towards a given direction. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid into the target, dealing damage over time.[/color]
 
 - type: entity
+  parent: ActionXenoTailStab
+  id: ActionXenoTailStabBoiler
+  name: Corrosive Tail Stab
+  description: Launches an attack towards a given direction. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid or neurotoxin into the target, dealing damage or stunning over time. Which type depends on current gas type.[/color]
+
+- type: entity
   id: ActionXenoLeap
   parent: ActionXenoBase
   name: Leap
@@ -171,7 +177,7 @@
   id: ActionXenoSlowingSpit
   parent: ActionXenoBase
   name: Slowing Spit (20) # TODO RMC14 proper plasma costs
-  description: Launches a damageless projectile that will slow the first enemy that it hits, and paralyze them if they have no armor.
+  description: Launches a damageless projectile that will slow the first enemy that it hits, and paralyze them if they have no armor. It'll also drain helpful substances from their body.
   components:
   - type: EntityWorldTargetAction
     itemIconStyle: NoItem
@@ -179,7 +185,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: xeno_spit
     event: !type:XenoSlowingSpitActionEvent
-    useDelay: 1.5
+    useDelay: 2
     range: 15
     checkCanAccess: false
   - type: ActionBlockIfResting
@@ -196,7 +202,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: acid_shotgun
     event: !type:XenoScatteredSpitActionEvent
-    useDelay: 8
+    useDelay: 6
     range: 15
     checkCanAccess: false
   - type: ActionBlockIfResting

@@ -17,7 +17,7 @@
       conditions:
       - !type:EntityAnchored {}
       steps:
-      - tool: Welding
+      - tool: Anchoring
         doAfter: 2
 
     - to: windowChigusa
@@ -70,7 +70,7 @@
       conditions:
       - !type:EntityAnchored {}
       steps:
-      - tool: Welding
+      - tool: Anchoring
         doAfter: 2
 
     - to: windowHangar
@@ -123,7 +123,7 @@
       conditions:
       - !type:EntityAnchored {}
       steps:
-      - tool: Welding
+      - tool: Anchoring
         doAfter: 2
 
     - to: windowBunker

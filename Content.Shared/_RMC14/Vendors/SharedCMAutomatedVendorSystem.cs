@@ -210,7 +210,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                     }
                     else // Does not exist on the currently checked vendor
                         specVendorComponent.GlobalSharedVends.Add(args.Entry, maxAmongVendors);
-                    Dirty(specVendorComponent);
+                    Dirty(vendorId, specVendorComponent);
                 }
 
                 thisSpecVendor.GlobalSharedVends[args.Entry] = maxAmongVendors;
@@ -224,7 +224,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 else
                     thisSpecVendor.GlobalSharedVends[args.Entry] += 1;
 
-                Dirty(thisSpecVendor);
+                Dirty(vendor, thisSpecVendor);
             }
         }
 

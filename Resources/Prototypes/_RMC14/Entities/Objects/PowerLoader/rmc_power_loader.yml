@@ -51,7 +51,6 @@
       rmc-mech-pilot: !type:ContainerSlot
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/Mecha/sound_mecha_powerloader_step.ogg

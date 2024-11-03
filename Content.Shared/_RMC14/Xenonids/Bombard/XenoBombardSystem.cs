@@ -4,7 +4,6 @@ using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Xenonids.GasToggle;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.DoAfter;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -88,7 +87,7 @@ public sealed class XenoBombardSystem : EntitySystem
         var max = EnsureComp<ProjectileMaxRangeComponent>(projectile);
         _rmcProjectile.SetMaxRange((projectile, max), direction.Length());
 
-        _gun.ShootProjectile(projectile, direction, Vector2.Zero, ent, ent);
+        _gun.ShootProjectile(projectile, direction, Vector2.Zero, ent, ent, speed: 7.5f);
         _audio.PlayEntity(ent.Comp.ShootSound, ent, ent);
         _rmcActions.ActivateSharedCooldown(action, ent);
 
