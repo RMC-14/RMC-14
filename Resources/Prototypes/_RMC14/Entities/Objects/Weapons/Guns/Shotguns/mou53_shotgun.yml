@@ -1,0 +1,70 @@
+﻿- type: entity
+  parent: [ RMCBaseBreechloader, RMCBaseAttachableHolder ]
+  name: MOU53 break action shotgun
+  id: WeaponShotgunMOU53
+  description: A limited production Kerchner MOU53 triple break action classic. Respectable damage output at medium ranges, while the Aegis M42 is the king of CQC, the Kerchner MOU53 is what hits the broadside of that barn. This specific model cannot safely fire buckshot shells.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53.rsi
+  - type: Gun
+    shotsPerBurst: 1
+  - type: ShootUseDelay
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 9
+    scatterUnwielded: 18
+    baseFireRate: 2
+    burstScatterMult: 1
+  - type: BallisticAmmoProvider
+    cycleable: true
+    whitelist:
+      tags:
+      - RMCShellShotgunSlugs
+      - RMCShellShotgunIncendiary
+      - RMCShellShotgunBeanbag
+      - RMCShellShotgunFlechette
+    proto: CMShellShotgunSlugs
+    capacity: 3 #It's a lovely triple barrel
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
+      params:
+        volume: -2
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentMOU53Stock
+        whitelist:
+          tags:
+          - RMCAttachmentMOU53Stock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.8, 0.06
+      rmc-aslot-rail: -0.02, 0.15
+      rmc-aslot-stock: -0.65, -0.18
+      rmc-aslot-underbarrel: 0.5, -0.25

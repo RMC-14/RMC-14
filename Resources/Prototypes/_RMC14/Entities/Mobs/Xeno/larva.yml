@@ -28,6 +28,9 @@
     hudOffset: -0.1,0.125
     tier: 0
     unlockAt: 0
+    healOffWeeds: true
+    emoteSounds: Larva
+  - type: XenoLight
   - type: XenoPlasma
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
@@ -50,6 +53,7 @@
         density: 185
         mask:
         - SmallMobMask
+        - BarbedBarricade
         layer:
         - SmallMobLayer
   - type: Flammable
@@ -57,6 +61,19 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 3.7
     baseSprintSpeed: 6.7
+  - type: Speech
+    speechSounds: XenonidLarva
+    allowedEmotes: [ "XenoRoar" ]
+  - type: RMCSize
+    size: Small
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: larva
+  - type: Tag
+    tags:
+    - RMCXenoLarva
+
 # For surgeries/failed incubations
 - type: entity
   id: RMCXenoEmbryo
@@ -68,3 +85,6 @@
       sprite: _RMC14/Mobs/Xenonids/Larva/larva.rsi
       noRot: true
       state: embryo
+
+- type: Tag
+  id: RMCXenoLarva

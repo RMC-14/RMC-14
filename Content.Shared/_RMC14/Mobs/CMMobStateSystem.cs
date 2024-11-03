@@ -18,9 +18,9 @@ public sealed class CMMobStateSystem : EntitySystem
         SubscribeLocalEvent<MobStateActionsComponent, CMGhostActionEvent>(OnMobStateActionsGhost);
 
         Subs.BuiEvents<MobStateActionsComponent>(CMMobStateActionsUI.Key,
-            sub =>
+            subs =>
             {
-                sub.Event<CMGhostActionBuiMsg>(OnGhostActionBuiMsg);
+                subs.Event<CMGhostActionBuiMsg>(OnGhostActionBuiMsg);
             });
     }
 

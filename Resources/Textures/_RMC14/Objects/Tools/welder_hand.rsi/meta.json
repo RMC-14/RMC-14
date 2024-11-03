@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "equipped-BELT, taken from tgstation at https://github.com/tgstation/tgstation/blob/eea0599511b088fdab9d43e562210cdbd51c6a98/icons/obj/tools.dmi. Everything else Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/6791699de749afc1c62bc65ec6f2326a00b3bb61/icons/obj/items/items.dmi, https://github.com/cmss13-devs/cmss13/blob/bec6653d487a49aa2b5a8e0c97bed9612f620211/icons/mob/humans/onmob/items_lefthand_0.dmi, and https://github.com/cmss13-devs/cmss13/blob/bec6653d487a49aa2b5a8e0c97bed9612f620211/icons/mob/humans/onmob/items_righthand_0.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "welder_on",
+      "delays": [
+        [
+          0.2,
+          0.1,
+	  0.1,
+	  0.1
+        ]
+      ]
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left-on",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.1,
+	  0.1
+        ],
+        [
+          0.2,
+          0.1,
+	  0.1
+        ],
+        [
+          0.2,
+          0.1,
+	  0.1
+        ],
+        [
+          0.2,
+          0.1,
+	  0.1
+        ]
+      ]
+    },
+    {
+      "name": "inhand-right-on",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.1,
+	  0.1
+        ],
+        [
+          0.2,
+          0.1,
+	  0.1
+        ],
+        [
+          0.2,
+          0.1,
+	  0.1
+        ],
+        [
+          0.2,
+          0.1,
+	  0.1
+        ]
+      ]
+    },
+    {
+      "name": "equipped-BELT",
+      "directions": 4
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Stealth;
 using Content.Shared.CCVar;
 using Content.Shared.Ghost;
 using Content.Shared.StatusIcon;
@@ -83,6 +84,9 @@ public sealed class StatusIconSystem : SharedStatusIconSystem
             return false;
 
         if (data.HideOnStealth && TryComp<StealthComponent>(ent, out var stealth) && stealth.Enabled)
+            return false;
+
+        if (data.HideOnStealth && HasComp<EntityActiveInvisibleComponent>(ent))
             return false;
 
         if (data.ShowTo != null && !_entityWhitelist.IsValid(data.ShowTo, viewer))

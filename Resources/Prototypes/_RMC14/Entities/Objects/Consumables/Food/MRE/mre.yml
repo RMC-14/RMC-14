@@ -80,7 +80,7 @@
     - id: CMDrinkWEYAWaterBottle30
     - id: CMFortuneCookie
       prob: 0.333
-    - id: CMCigarettePackLuckySloths
+    - id: CMCigarettePackLuckySlothsMini
     - id: CMMatchBook
       orGroup: matchbook
     - id: CMBrownMatchBook
@@ -89,7 +89,7 @@
       orGroup: matchbook
     - id: CMElectroMatchbook
       orGroup: matchbook
-    - id: CMElectroMatchbook
+    - id: CMExecutiveWEYAMatchbook
       orGroup: matchbook
   - type: FixedItemSizeStorage
   - type: InteractedBlacklist
@@ -127,8 +127,8 @@
 
 - type: entity
   abstract: true
-  parent: CMBoxMagazineBase
-  id: CMBoxMREBase
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMREBase
   name: box of MREs
   description: A box of MREs. Nutritious, but not delicious.
   components:
@@ -156,8 +156,8 @@
           Full: { state: magaz_mre, visible: true }
 
 - type: entity
-  parent: CMBoxMREBase
-  id: CMBoxMRE
+  parent: RMCBoxMREBase
+  id: RMCBoxMRE
   suffix: Filled
   components:
   - type: CMItemSlots

@@ -16,6 +16,12 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - CMCMO
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: doctor
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
   special:
   - !type:AddComponentSpecial
     components:
@@ -33,6 +39,9 @@
         RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
     - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: "CMO"
 
 - type: startingGear
   id: CMGearCMO
@@ -72,3 +81,4 @@
 
 - type: playTimeTracker
   id: CMJobCMO
+  isHumanoid: true

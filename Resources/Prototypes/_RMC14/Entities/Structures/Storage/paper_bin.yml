@@ -16,6 +16,8 @@
           tags:
           - Document
           - Write
+  - type: Bin
+    maxItems: 30
   - type: InteractedBlacklist
     blacklist:
       components:
@@ -67,6 +69,48 @@
   components:
   - type: Bin
     initialContents:
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    whitelist:
+      tags:
+      - Document
+      - Write
+
+- type: entity
+  parent: CMPaperBin
+  id: CMPaperBin30
+  suffix: 30
+  components:
+  - type: Bin
+    initialContents:
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
     - CMPaper
     - CMPaper
     - CMPaper

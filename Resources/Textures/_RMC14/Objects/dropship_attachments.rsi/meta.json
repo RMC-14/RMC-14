@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/83239d4edde7b1e8d59e950d07d47b84ee7508e4/icons/obj/structures/props/almayer_props64.dmi",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "double"
+    },
+    {
+      "name": "single"
+    },
+    {
+      "name": "30mm_cannon"
+    },
+    {
+      "name": "banshee"
+    },
+    {
+      "name": "paveway"
+    },
+    {
+      "name": "30mm_cannon_installed",
+      "directions": 4
+    },
+    {
+      "name": "30mm_cannon_loaded1",
+      "directions": 4
+    },
+    {
+      "name": "30mm_cannon_loaded0",
+      "directions": 4
+    },
+    {
+      "name": "rocket_pod_installed",
+      "directions": 4
+    },
+    {
+      "name": "rocket_pod_loadedb",
+      "directions": 4
+    },
+    {
+      "name": "rocket_pod_loadedk",
+      "directions": 4
+    },
+    {
+      "name": "rocket_pod_loaded",
+      "directions": 4
+    },
+    {
+      "name": "rocket_pod"
+    },
+    {
+      "name": "fuel_base",
+      "directions": 4
+    },
+    {
+      "name": "cooling_system"
+    },
+    {
+      "name": "cooling_system_installed",
+      "directions": 4
+    },
+    {
+      "name": "fuel_enhancer_installed",
+      "directions": 4
+    },
+    {
+      "name": "fuel_enhancer"
+    },
+    {
+      "name": "minirocket_pod"
+    },
+    {
+      "name": "minirocket_pod_installed",
+      "directions": 4
+    },
+    {
+      "name": "minirocket_pod_loaded",
+      "directions": 4
+    },
+    {
+      "name": "fatty"
+    },
+    {
+      "name": "rocket_pod_loadedf",
+      "directions": 4
+    },
+    {
+      "name": "napalm"
+    },
+    {
+      "name": "rocket_pod_loadedn",
+      "directions": 4
+    },
+    {
+      "name": "laser_beam"
+    },
+    {
+      "name": "laser_beam_installed",
+      "directions": 4
+    },
+    {
+      "name": "laser_beam_loaded",
+      "directions": 4
+    },
+    {
+      "name": "cannon_tray"
+    },
+    {
+      "name": "cannon_tray_explosive"
+    },
+    {
+      "name": "cannon_tray_incendiary"
+    },
+    {
+      "name": "cannon_tray_cluster"
+    },
+    {
+      "name": "cannon_tray_1"
+    },
+    {
+      "name": "cannon_tray_2"
+    },
+    {
+      "name": "cannon_tray_3"
+    },
+    {
+      "name": "cannon_tray_4"
+    },
+    {
+      "name": "cannon_tray_5"
+    },
+    {
+      "name": "cannon_tray_6"
+    },
+    {
+      "name": "rocket_pod_loadeds",
+      "directions": 4
+    },
+    {
+      "name": "harpoon"
+    }
+  ]
+}

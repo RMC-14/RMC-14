@@ -1,0 +1,12 @@
+- type: entity
+  parent: CMBaseStructure
+  id: RMCBargeFloat
+  name: Barge Float
+  description: A supportive lattice connected to two floating pontoons.
+  components:
+  - type: Sprite
+    drawdepth: Objects
+    sprite: _RMC14/Structures/Machines/hydro_tray.rsi
+    state: hydro_tray
+  - type: Corrodible
+    isCorrodible: false

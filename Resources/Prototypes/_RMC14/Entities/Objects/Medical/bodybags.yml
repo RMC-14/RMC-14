@@ -21,10 +21,11 @@
     state: bodybag_closed
   - type: EntityStorageVisuals
     stateDoorOpen: bodybag_open
-  - type: InteractedBlacklist
+  - type: InsertBlacklist
     blacklist:
       components:
       - Xeno
+  - type: HealthScannableContainer
 
 - type: entity
   parent: CMBodyBag
@@ -57,6 +58,8 @@
     sprite: _RMC14/Objects/Medical/stasisbag.rsi
   - type: EntityStorageVisuals
     stateDoorOpen: bodybag_open
+  - type: EntityStorageLayingDownOverride
+    enabled: false
   - type: CMStasisBag
 
 - type: entity

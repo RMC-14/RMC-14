@@ -19,18 +19,24 @@
   - HospitalCorpsman
   overwatchSortPriority: -1
   overwatchRoleName: Hospital Corpsmen
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: medic
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillJtac: 1
         RMCSkillMedical: 2
         RMCSkillSurgery: 1
     - type: CMVendorUser
       points: 45
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: "HM"
 
 - type: startingGear
   id: CMGearHospitalCorpsman
@@ -52,6 +58,10 @@
     ears: CMHeadsetAlphaMedic
     belt: CMBeltMedicBagFilled
 
+- type: playTimeTracker
+  id: CMJobHospitalCorpsman
+  isHumanoid: true
+
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointHospitalCorpsman
@@ -65,6 +75,40 @@
       state: green
     - state: hospital_corpsman
 
-- type: playTimeTracker
-  id: CMJobHospitalCorpsman
+- type: entity
+  parent: CMSpawnPointHospitalCorpsman
+  id: CMSpawnPointHospitalCorpsmanAlpha
+  suffix: Alpha
+  components:
+  - type: SquadSpawner
+    squad: SquadAlpha
+    role: CMHospitalCorpsman
+
+- type: entity
+  parent: CMSpawnPointHospitalCorpsman
+  id: CMSpawnPointHospitalCorpsmanBravo
+  suffix: Bravo
+  components:
+  - type: SquadSpawner
+    squad: SquadBravo
+    role: CMHospitalCorpsman
+
+- type: entity
+  parent: CMSpawnPointHospitalCorpsman
+  id: CMSpawnPointHospitalCorpsmanCharlie
+  suffix: Charlie
+  components:
+  - type: SquadSpawner
+    squad: SquadCharlie
+    role: CMHospitalCorpsman
+
+- type: entity
+  parent: CMSpawnPointHospitalCorpsman
+  id: CMSpawnPointHospitalCorpsmanDelta
+  suffix: Delta
+  components:
+  - type: SquadSpawner
+    squad: SquadDelta
+    role: CMHospitalCorpsman
+
 

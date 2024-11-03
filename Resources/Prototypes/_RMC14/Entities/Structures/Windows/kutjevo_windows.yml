@@ -17,7 +17,7 @@
     node: windowFrameKutjevo
 
 - type: entity
-  parent: RMCBaseWindowFrame
+  parent: RMCWindowFrameColonyReinforced
   id: RMCWindowFrameKutjevoReinforced
   components:
   - type: Sprite

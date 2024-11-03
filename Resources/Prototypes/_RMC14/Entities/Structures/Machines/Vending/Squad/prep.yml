@@ -26,11 +26,11 @@
         recommended: true
     - name: Primary ammunition
       entries:
-      - id: CMBoxShotgunFlechette
+      - id: RMCBoxShotgunFlechette
         amount: 4
-      - id: CMBoxShotgunBuckshot
+      - id: RMCBoxShotgunBuckshot
         amount: 10
-      - id: CMBoxShotgunSlugs
+      - id: RMCBoxShotgunSlugs
         amount: 10
       - id: CMMagazineRifleM4SPR
         amount: 15
@@ -116,8 +116,8 @@
         amount: 1
       - id: CMWebbing
         amount: 2
-#      - id: Drop Pouch
-#        amount: 1
+      - id: CMWebbingPouch
+        amount: 1
 #      - id: Shoulder Holster
 #        amount: 1
     - name: Armor
@@ -134,6 +134,8 @@
 #        amount: 15
 #      - id: M3 Pattern Smooth Marine Armor
 #        amount: 15
+      - id: CMArmorM3Medium #TODO RMC: remove this when the above is added
+        amount: 15
       - id: CMArmorM3Heavy
         amount: 10
       - id: CMArmorM3Light
@@ -156,8 +158,8 @@
         amount: 15
       - id: CMSatchelMedical
         amount: 15
-#      - id: Shotgun Scabbard
-#        amount: 5
+      - id: RMCScabbardShotgun
+        amount: 5
     - name: Restricted Backpacks
       entries:
       - id: CMBackpackWelder
@@ -172,14 +174,14 @@
         amount: 15
       - id: RMCBeltGrenade
         amount: 10
-#      - id: M276 Pattern Shotgun Shell Loading Rig
-#        amount: 15
+      - id: RMCM276ShotgunShellLoadingRig
+        amount: 15
 #      - id: M276 Pattern General Pistol Holster Rig
 #        amount: 15
 #      - id: M276 Pattern M63 Holster Rig
 #        amount: 15
-#      - id: M276 Pattern M63 Holster Rig And Pouch
-#        amount: 10
+      - id: RMCBeltSmgMags
+        amount: 10
 #      - id: M276 Pattern M44 Holster Rig
 #        amount: 15
       - id: RMCBeltHolsterFlareGun
@@ -187,8 +189,8 @@
       - id: CMBeltKnifeFilled
         name: M276 Knife Rig (Full)
         amount: 15
-#      - id: M276 G8-A General Utility Pouch
-#        amount: 15
+      - id: RMCBeltUtilityGeneral
+        amount: 15
     - name: Pouches
       entries:
       - id: RMCPouchBayonet
@@ -236,11 +238,13 @@
         amount: 15
       - id: CMMaskCoif
         amount: 10
-#      - id: Rebreather
-#        amount: 10
+      - id: RMCMaskRebreather
+        amount: 10
     - name: Miscellaneous
       entries:
       - id: RMCGogglesBallistic
+        amount: 10
+      - id: RMCGogglesBallisticSquad
         amount: 10
       - id: RMCGogglesM1A1Ballistic
         amount: 10
@@ -346,7 +350,7 @@
       entries:
       - id: CMMRE
         amount: 5
-      - id: CMBoxMRE
+      - id: RMCBoxMRE
         amount: 1
     - name: Tools
       entries:
@@ -369,14 +373,14 @@
 #      #  amount: 1
       - id: RMCFlashlight # Combat Flashlight
         amount: 5
-#      #- id: CMBoxFlashlights
+#      #- id: RMCBoxFlashlights
 #      #  amount: 1
-      - id: CMBoxPackFlare
+      - id: RMCBoxPackFlare
         amount: 1
       - id: CMPackFlare
         amount: 10
-#      #- id: CMSignalFlarePackM89S
-#      #  amount: 1
+      - id: RMCPackFlareCAS
+        amount: 1
     - name: Miscellaneous
       entries:
       #- id: CMEngineerKit
@@ -389,8 +393,8 @@
         amount: 1
       - id: CMRollerBedSpawnFolded
         amount: 1
-#      - id: CMScabbardMacheteFull
-#        amount: 5
+      - id: RMCScabbardMacheteFilled
+        amount: 5
       - id: RMCBinoculars
         amount: 1
       #- id: CMFoldingBarricadesMB6x3

@@ -4,7 +4,7 @@ namespace Content.Shared._RMC14.Explosion.Components
 {
     [RegisterComponent, NetworkedComponent]
     [AutoGenerateComponentState]
-    [Access(typeof(SharedCMExplosionSystem))]
+    [Access(typeof(SharedRMCExplosionSystem))]
     public sealed partial class RMCExplosionShockWaveComponent : Component
     {
         /// <summary>

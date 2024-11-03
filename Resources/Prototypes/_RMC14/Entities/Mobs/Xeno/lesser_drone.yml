@@ -3,12 +3,16 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoLesserDrone
   name: Lesser Drone
   description: An alien drone. Looks... smaller.
   components:
   - type: GhostRole
     name: cm-job-name-xeno-lesser-drone
+    description: roles-lesser-drone-description
+    raffle:
+      settings: short
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/LesserDrone/lesser_drone.rsi
   - type: MobState
@@ -37,6 +41,7 @@
     contributesToVictory: false
     countedInSlots: false
     unlockAt: 0
+  - type: XenoLight
   - type: XenoAcid
   - type: XenoConstruction
     buildDelay: 4
@@ -54,7 +59,7 @@
     damage:
       groups:
         Brute: 20
-  - type: Tackle
+  - type: Tackle  # min: 4, max: 5
     threshold: 5
     stun: 5
   - type: WhitelistPickup
@@ -62,6 +67,7 @@
       components:
       - XenoParasite
       - XenoEgg
+      - XenoFruit
   - type: MultiHandedHolder
     items:
     - hands: 2
@@ -73,5 +79,15 @@
       types:
         Blunt: 2.5
   - type: XenoHiveCoreRole
+  - type: RMCSize
+    size: VerySmallXeno
 #  - type: RMCXenoDamageVisuals # TODO RMC14
 #    prefix: drone
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: lesser_drone
+  - type: AcidTrap
+    trapLevel: 1
+    cost: 70
+    spray: XenoAcidSprayTrapWeak

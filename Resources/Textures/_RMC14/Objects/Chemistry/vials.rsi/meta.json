@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/4494b45ba5bfd996d1618df134ff1e728eabb501/icons/obj/items/chemistry.dmi, https://github.com/cmss13-devs/cmss13/blob/ca94d2e8715b73103fa9f213be53d343359b4107/icons/obj/items/reagentfillings.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "vial"
+    },
+    {
+      "name": "vial1"
+    },
+    {
+      "name": "vial2"
+    },
+    {
+      "name": "vial3"
+    },
+    {
+      "name": "vial4"
+    },
+    {
+      "name": "vial5"
+    },
+    {
+      "name": "vial-lid"
+    }
+  ]
+}

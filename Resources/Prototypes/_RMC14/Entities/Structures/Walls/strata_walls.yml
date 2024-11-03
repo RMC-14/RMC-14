@@ -1,0 +1,47 @@
+- type: entity
+  parent: CMWallMetal
+  id: RMCWallStrata
+  name: bare outpost wall
+  description: A thick and chunky metal wall. The surface is barren and imposing.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/strata_wall.rsi
+    state: strata_bare_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/strata_wall.rsi
+    state: strata_bare_outpost_
+  - type: IconSmooth
+    key: walls
+    base: strata_bare_outpost_
+
+- type: entity
+  parent: CMWallReinforced
+  id: RMCWallStrataReinforced
+  name: ribbed outpost wall
+  description: A thick and chunky metal wall covered in jagged ribs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/strata_rwall.rsi
+    state: strata_ribbed_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/strata_rwall.rsi
+    state: strata_ribbed_outpost_
+  - type: IconSmooth
+    key: walls
+    base: strata_ribbed_outpost_
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallStrataHull
+  name: heavy ribbed outpost wall
+  description: A thick and chunky metal wall that is, just by virtue of its placement and imposing presence, entirely indestructible.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/strata_rwall.rsi
+    state: strata_ribbed_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/strata_rwall.rsi
+    state: strata_hull
+  - type: IconSmooth
+    key: walls
+    base: strata_ribbed_outpost_

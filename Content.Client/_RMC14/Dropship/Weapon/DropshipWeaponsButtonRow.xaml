@@ -1,0 +1,12 @@
+﻿<controls:DropshipWeaponsButtonRow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Dropship.Weapon"
+    SeparationOverride="25" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Control Name="PaddingStart" />
+    <controls:DropshipWeaponsButton Name="One" Access="Public" />
+    <controls:DropshipWeaponsButton Name="Two" Access="Public" />
+    <controls:DropshipWeaponsButton Name="Three" Access="Public" />
+    <controls:DropshipWeaponsButton Name="Four" Access="Public" />
+    <controls:DropshipWeaponsButton Name="Five" Access="Public" />
+    <Control Name="PaddingEnd" />
+</controls:DropshipWeaponsButtonRow>

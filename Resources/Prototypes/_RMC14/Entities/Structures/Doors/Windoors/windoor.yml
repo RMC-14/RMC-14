@@ -36,6 +36,8 @@
     powerLoad: 0
     needsPower: false
   - type: RMCDropshipBlocked
+  - type: AccessReader
+    containerAccessProvider: null
 
 - type: entity
   parent: BaseSecureWindoor
@@ -75,3 +77,6 @@
     powerLoad: 0
     needsPower: false
   - type: RMCDropshipBlocked
+  - type: ImmuneToUnarmed
+  - type: AccessReader
+    containerAccessProvider: null

@@ -7,6 +7,8 @@
   components:
   - type: HumanoidAppearance
     species: Diona
+    hideLayersOnEquip:
+    - HeadTop
   - type: Icon
     sprite: Mobs/Species/Diona/parts.rsi
     state: full
@@ -21,8 +23,8 @@
     speechVerb: Plant
   - type: Vocal
     sounds:
-      Male: UnisexDiona
-      Female: UnisexDiona
+      Male: RMCMaleDiona
+      Female: RMCFemaleDiona
       Unsexed: UnisexDiona
   - type: BodyEmotes
     soundsId: DionaBodyEmotes

@@ -2,6 +2,7 @@
   parent:
   - CMXenoDeveloped
   - CMXenoTail
+  - RMCXenoSpeechSounds
   id: CMXenoQueen
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
@@ -57,9 +58,10 @@
     # Mature
 #    - ActionXenoSpit
 #    - ActionXenoToggleSpitType
-    tier: 4
+    tier: 0
     bypassTierCount: true
     unlockAt: 0
+  - type: XenoHeavy
   - type: XenoAcid
   - type: XenoConstruction
     canBuild:
@@ -80,13 +82,15 @@
     explosionArmor: 100
   - type: XenoWordQueen
   - type: XenoGut
+  - type: XenoClaws
+    clawType: VerySharp
   - type: MeleeWeapon
     damage:
       groups:
         Brute: 40
   - type: XenoOvipositorCapable
-  - type: Tackle
-    threshold: 3
+  - type: Tackle # min: 2, max: 6
+    threshold: 4
     stun: 11
     chance: 0.55
   - type: Fixtures
@@ -94,10 +98,11 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.40
+          radius: 0.35
         density: 185
         mask:
         - MobMask
+        - BarbedBarricade
         layer:
         - MobLayer
       fix2:
@@ -112,13 +117,25 @@
     baseWalkSpeed: 1.4
     baseSprintSpeed: 2.5
   - type: SlowOnPull
-    multiplier: 0.5
+    slowdowns:
+    - multiplier: 0.505
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.5475
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.43
+      whitelist:
+        components:
+        - XenoHeavy
   - type: MobMover
   - type: FootstepModifier
     footstepSoundCollection:
       collection: XenoFootstepLarge
       params:
-        volume: -8
+        volume: -6
 #  - type: RandomSound
 #    sound:
 #      collection: XenoQueenBreath # TODO RMC14
@@ -135,6 +152,7 @@
     whitelist:
       components:
       - XenoEgg
+      - XenoFruit
   - type: XenoEvolutionGranter
   - type: XenoEvolutionCapped
     id: CMXenoQueen
@@ -154,5 +172,30 @@
     - type: XenoScreech
     addActions:
     - ActionXenoScreech
+  - type: RMCSize
+    size: Immobile
   - type: RMCXenoDamageVisuals
     prefix: queen
+  - type: PreventPulledWhileAlive
+    whitelist:
+      components:
+      - Xeno
+    exceptEffects:
+    - Stun
+    - KnockedDown
+  - type: TacticalMapUser
+    xenos: true
+    canDraw: true
+    liveUpdate: true
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: xenoqueen
+    background:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: xeno_ruler
+  - type: AcidTrap
+  - type: TacticalMapLiveUpdateOnOvi
+    enabled: false
+  - type: RMCPointing
+    arrow: RMCPointingArrowBigQueen

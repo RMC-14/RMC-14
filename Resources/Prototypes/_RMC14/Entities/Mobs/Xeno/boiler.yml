@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoBoiler
   name: Boiler # TODO RMC14 3x fire damage from fires (not all burn damage!)
   description: A huge, grotesque xenonid covered in glowing, oozing acid slime.
@@ -27,10 +28,10 @@
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStabCorrosive
+    - ActionXenoTailStabBoiler
     - ActionXenoAcidStrong
     - ActionXenoBombard
-#    - ActionXenoToggleGasType
+    - ActionXenoToggleGasType
     - ActionXenoSprayAcidBoiler
     - ActionXenoZoom
     - ActionXenoAcidShroud
@@ -38,6 +39,7 @@
     tier: 3
     hudOffset: 0,0.35
     unlockAt: 900 # 15 minutes
+  - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
     - CMXenoSpitter
@@ -57,9 +59,11 @@
     doAfter: 0.5
   - type: XenoBombard
   - type: XenoAcidShroud
+  - type: XenoGasToggle
   - type: XenoTailStab
+    toggle: true
     inject:
-      RMCMolecularAcid: 1 # TODO RMC14 2
+      RMCMolecularAcid: 1 # TODO RMC14 6
   - type: XenoSprayAcid
     acid: XenoAcidSprayStrong
     barricadeDamage:
@@ -69,19 +73,51 @@
     damage:
       groups:
         Brute: 22.5
-  - type: Tackle
+  - type: Tackle # min: 2, max: 6
     threshold: 5
     stun: 7
     chance: 0.25
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.6375
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.7075
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.475
+      whitelist:
+        components:
+        - XenoHeavy
   - type: PointLight
     enabled: true
     radius: 1.8
     softness: 1
     autoRot: true
-  - type: SlowOnPull
-    multiplier: 0.5
+  - type: RMCSize
+    size: Big
+  - type: NeurotoxinInjector
+    neuroPerSecond: 16
+    injectInContact: false
+    affectsDead: false
+    affectsInfectedNested: false
+    toxinDamage:
+        groups:
+          Toxin: 2
+    oxygenDamage:
+        types:
+          Asphyxiation: 150
+    coughDamage:
+        groups:
+          Brute: 5
   - type: RMCXenoDamageVisuals
     prefix: boiler
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: boiler

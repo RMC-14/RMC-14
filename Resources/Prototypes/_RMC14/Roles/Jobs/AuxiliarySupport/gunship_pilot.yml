@@ -14,12 +14,19 @@
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - Pilot
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: gp
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillIntel: 1
         RMCSkillJtac: 2
         RMCSkillLeadership: 1
@@ -29,7 +36,11 @@
         RMCSkillPowerLoader: 2
         RMCSkillSurgery: 1
     - type: MarineOrders
-  hidden: true # TODO RMC14
+    - type: CMVendorUser
+      points: 45
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: "GP"
 
 - type: startingGear
   id: CMGearPilotGunship
@@ -55,3 +66,4 @@
 
 - type: playTimeTracker
   id: CMJobPilotGunship
+  isHumanoid: true

@@ -109,6 +109,10 @@
   - type: Stack
     stackType: CMSandbagFull
     count: 1
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMSandbagFull

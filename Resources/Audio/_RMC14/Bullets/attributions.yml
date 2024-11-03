@@ -12,3 +12,23 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/ffbfb98e07642857222dbe0792d029c0ceb2b38c/sound/bullets/shield_break_c1.ogg"
+
+- files: ["shield_impact_c1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/ffbfb98e07642857222dbe0792d029c0ceb2b38c/sound/bullets/shield_impact_c1.ogg"
+
+- files: ["shield_impact_c2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/ffbfb98e07642857222dbe0792d029c0ceb2b38c/sound/bullets/shield_impact_c2.ogg"
+
+- files: ["shield_impact_c3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/ffbfb98e07642857222dbe0792d029c0ceb2b38c/sound/bullets/shield_impact_c3.ogg"
+
+- files: ["shield_impact_c4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/ffbfb98e07642857222dbe0792d029c0ceb2b38c/sound/bullets/shield_impact_c4.ogg"

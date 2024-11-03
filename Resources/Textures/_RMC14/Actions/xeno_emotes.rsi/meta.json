@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by Vermidia, derivative of other licensed sprites in the repo",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "growl"
+    },
+    {
+      "name": "hiss"
+    },
+    {
+      "name": "help"
+    },
+    {
+      "name": "roar"
+    },
+    {
+      "name": "tailswipe"
+    }
+  ]
+}

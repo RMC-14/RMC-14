@@ -1,0 +1,15 @@
+﻿- type: entity
+  parent: Dropper
+  description: A dropper. Transfers 5 units.
+  id: RMCDropper
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Chemistry/dropper.rsi
+    layers:
+    - state: dropper
+    - state: dropper1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: Item
+    sprite: _RMC14/Objects/Chemistry/dropper.rsi
+    size: Tiny

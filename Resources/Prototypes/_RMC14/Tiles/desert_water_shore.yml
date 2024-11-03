@@ -1,0 +1,193 @@
+# Base
+
+- type: tile
+  abstract: true
+  parent: CMPlanetBase
+  id: RMCPlanetDesertWaterShoreBase
+  name: tile-rmc-desert-water-shore
+
+# Shore
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShore0
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore1_0.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShore1
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore1_1.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShore2
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore1_2.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShore3
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore1_3.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShore4
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore1_4.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShore5
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore1_5.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShore6
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore1_6.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShore7
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore1_7.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShore8
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore1_8.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShore9
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore1_9.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShore10
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore1_10.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShore11
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore1_11.png
+
+# Shore Corner
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreCorner0
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_corner2_0.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreCorner1
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_corner2_1.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreCorner2
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_corner2_2.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreCorner3
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_corner2_3.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreCorner4
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_corner2_4.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreCorner5
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_corner2_5.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreCorner6
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_corner2_6.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreCorner7
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_corner2_7.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreCorner8
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_corner2_8.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreCorner9
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_corner2_9.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreCorner10
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_corner2_10.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreCorner11
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_corner2_11.png
+
+# Shore Edge
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreEdge0
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_edge1_0.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreEdge1
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_edge1_1.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreEdge2
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_edge1_2.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreEdge3
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_edge1_3.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreEdge4
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_edge1_4.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreEdge5
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_edge1_5.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreEdge6
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_edge1_6.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreEdge7
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_edge1_7.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreEdge8
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_edge1_8.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreEdge9
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_edge1_9.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreEdge10
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_edge1_10.png
+
+- type: tile
+  parent: RMCPlanetDesertWaterShoreBase
+  id: RMCPlanetDesertWaterShoreEdge11
+  sprite: /Textures/_RMC14/Tiles/planet/desert_water_shore/shore_edge1_11.png

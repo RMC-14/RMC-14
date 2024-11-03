@@ -15,6 +15,8 @@ public sealed class RMCGlobalAdminEui : BaseEui
 
     private readonly SquadSystem _squad;
 
+    private Guid _tacticalMapLines;
+
     public RMCGlobalAdminEui()
     {
         IoCManager.InjectDependencies(this);
@@ -34,7 +36,7 @@ public sealed class RMCGlobalAdminEui : BaseEui
 
     public override EuiStateBase GetNewState()
     {
-        return RMCAdminEui.CreateState(_entities);
+        return RMCAdminEui.CreateState(_entities, _tacticalMapLines);
     }
 
     public override void HandleMessage(EuiMessageBase msg)
@@ -51,6 +53,12 @@ public sealed class RMCGlobalAdminEui : BaseEui
             }
             case RMCAdminRefresh:
             {
+                StateDirty();
+                break;
+            }
+            case RMCAdminRequestTacticalMapHistory history:
+            {
+                _tacticalMapLines = history.Id;
                 StateDirty();
                 break;
             }

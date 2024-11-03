@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Hands;
 using Content.Shared.Armor;
 using Content.Shared.Clothing.Components;
 using Content.Shared.DoAfter;
@@ -10,6 +11,7 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Strip;
 using Content.Shared.Strip.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
@@ -32,6 +34,8 @@ public abstract partial class InventorySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly SharedStrippableSystem _strippable = default!;
+    [Dependency] private readonly CMHandsSystem _rmcHands = default!;
 
     [ValidatePrototypeId<ItemSizePrototype>]
     private const string PocketableItemSize = "Small";
@@ -95,6 +99,9 @@ public abstract partial class InventorySystem
         // unequip the item.
         if (itemUid != null)
         {
+            if (_rmcHands.TryStorageEjectHand(actor, itemUid.Value))
+                return;
+
             if (!TryUnequip(actor, ev.Slot, out var item, predicted: true, inventory: inventory, checkDoafter: true))
                 return;
 
@@ -109,8 +116,7 @@ public abstract partial class InventorySystem
         // before we drop the item, check that it can be equipped in the first place.
         if (!CanEquip(actor, held.Value, ev.Slot, out var reason))
         {
-            if (_gameTiming.IsFirstTimePredicted)
-                _popup.PopupCursor(Loc.GetString(reason));
+            _popup.PopupCursor(Loc.GetString(reason));
             return;
         }
 
@@ -131,7 +137,7 @@ public abstract partial class InventorySystem
     {
         if (!Resolve(target, ref inventory, false))
         {
-            if(!silent && _gameTiming.IsFirstTimePredicted)
+            if(!silent)
                 _popup.PopupCursor(Loc.GetString("inventory-component-can-equip-cannot"));
             return false;
         }
@@ -142,14 +148,14 @@ public abstract partial class InventorySystem
 
         if (!TryGetSlotContainer(target, slot, out var slotContainer, out var slotDefinition, inventory))
         {
-            if(!silent && _gameTiming.IsFirstTimePredicted)
+            if(!silent)
                 _popup.PopupCursor(Loc.GetString("inventory-component-can-equip-cannot"));
             return false;
         }
 
         if (!force && !CanEquip(actor, target, itemUid, slot, out var reason, slotDefinition, inventory, clothing))
         {
-            if(!silent && _gameTiming.IsFirstTimePredicted)
+            if(!silent)
                 _popup.PopupCursor(Loc.GetString(reason));
             return false;
         }
@@ -169,12 +175,8 @@ public abstract partial class InventorySystem
                 target,
                 itemUid)
             {
-                BlockDuplicate = true,
-                BreakOnHandChange = true,
                 BreakOnMove = true,
-                CancelDuplicate = true,
-                RequireCanInteract = true,
-                NeedHand = true
+                NeedHand = true,
             };
 
             _doAfter.TryStartDoAfter(args);
@@ -183,7 +185,7 @@ public abstract partial class InventorySystem
 
         if (!_containerSystem.Insert(itemUid, slotContainer))
         {
-            if(!silent && _gameTiming.IsFirstTimePredicted)
+            if(!silent)
                 _popup.PopupCursor(Loc.GetString("inventory-component-can-unequip-cannot"));
             return false;
         }
@@ -378,14 +380,14 @@ public abstract partial class InventorySystem
 
         if (!Resolve(target, ref inventory, false))
         {
-            if(!silent && _gameTiming.IsFirstTimePredicted)
+            if(!silent)
                 _popup.PopupCursor(Loc.GetString("inventory-component-can-unequip-cannot"));
             return false;
         }
 
         if (!TryGetSlotContainer(target, slot, out var slotContainer, out var slotDefinition, inventory))
         {
-            if(!silent && _gameTiming.IsFirstTimePredicted)
+            if(!silent)
                 _popup.PopupCursor(Loc.GetString("inventory-component-can-unequip-cannot"));
             return false;
         }
@@ -397,7 +399,7 @@ public abstract partial class InventorySystem
 
         if (!force && !CanUnequip(actor, target, slot, out var reason, slotContainer, slotDefinition, inventory))
         {
-            if(!silent && _gameTiming.IsFirstTimePredicted)
+            if(!silent)
                 _popup.PopupCursor(Loc.GetString(reason));
             return false;
         }
@@ -420,12 +422,8 @@ public abstract partial class InventorySystem
                 target,
                 removedItem.Value)
             {
-                BlockDuplicate = true,
-                BreakOnHandChange = true,
                 BreakOnMove = true,
-                CancelDuplicate = true,
-                RequireCanInteract = true,
-                NeedHand = true
+                NeedHand = true,
             };
 
             _doAfter.TryStartDoAfter(args);
