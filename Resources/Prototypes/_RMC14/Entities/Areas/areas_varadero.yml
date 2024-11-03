@@ -1,0 +1,607 @@
+﻿- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaVaradero
+  name: New Varadero
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: varadero
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#6C6767D8'
+
+- type: entity
+  parent: RMCAreaShuttleDrop1
+  id: RMCAreaShuttleDrop1Varadero
+  name: New Varadero - Dropship Alamo Landing Zone
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: shuttle
+  - type: Area
+    minimapColor: '#EBE5E5E3'
+
+- type: entity
+  parent: RMCAreaShuttleDrop2
+  id: RMCAreaShuttleDrop2Varadero
+  name: New Varadero - Dropship Normandy Landing Zone
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: shuttle2
+  - type: Area
+    minimapColor: '#EBE5E5E3'
+
+- type: entity
+  parent: RMCAreaVaradero
+  id: RMCAreaVaraderoExterior
+  name: New Varadero - Exterior
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaVaradero
+  id: RMCAreaVaraderoInterior
+  name: New Varadero - Interior
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaVaradero
+  id: RMCAreaVaraderoInteriorProtected
+  name: New Varadero - Interior
+  components:
+#  - type: Sprite
+#    state: nv_no_cas
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorComms1
+  name: New Varadero - Cargo Generator
+  components:
+  - type: Sprite
+    state: comms1
+  - type: Area
+    minimapColor: '#5A4501E7'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorComms2
+  name: New Varadero - Communications Project Site
+  components:
+  - type: Sprite
+    state: comms2
+  - type: Area
+    minimapColor: '#5A4501E7'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorComms3
+  name: New Varadero - Engineering Communications
+  components:
+  - type: Sprite
+    state: comms3
+  - type: Area
+    minimapColor: '#5A4501E7'
+
+- type: entity
+  parent: RMCAreaVaraderoExterior
+  id: RMCAreaVaraderoExteriorComms4
+  name: New Varadero - Walkway Extension
+  components:
+  - type: Sprite
+    state: comms4
+  - type: Area
+    minimapColor: '#5A4501E7'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorOob
+  name: New Varadero - Out Of Bounds
+  components:
+  - type: Sprite
+    state: oob
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+
+- type: entity
+  parent: RMCAreaVaraderoExterior
+  id: RMCAreaVaraderoExteriorLz1Console
+  name: New Varadero - Pontoon Dock
+  components:
+  - type: Area
+    resinAllowed: false
+    minimapColor: '#EBE5E5E3'
+    landingZone: true
+
+- type: entity
+  parent: RMCAreaVaraderoExteriorLz1Console
+  id: RMCAreaVaraderoExteriorLz1ConsoleTwo
+  name: New Varadero - Palm Airfield
+  components:
+  - type: Area
+    resinAllowed: false
+    minimapColor: '#EBE5E5E3'
+
+- type: entity
+  parent: RMCAreaVaraderoExterior
+  id: RMCAreaVaraderoExteriorLz1Near
+  name: New Varadero - Pontoon Airfield
+  components:
+  - type: Sprite
+    state: lz1
+  - type: Area
+    minimapColor: '#EBE5E5E3'
+    landingZone: true
+
+- type: entity
+  parent: RMCAreaVaraderoExterior
+  id: RMCAreaVaraderoExteriorLz2Near
+  name: New Varadero - Palm Airfield
+  components:
+  - type: Sprite
+    state: lz2
+  - type: Area
+    minimapColor: '#EBE5E5E3'
+    landingZone: true
+
+- type: entity
+  parent: RMCAreaVaraderoExterior
+  id: RMCAreaVaraderoExteriorPontoonBeach
+  name: New Varadero - Rockabilly Beach
+  components:
+  - type: Sprite
+    state: varadero0
+  - type: Area
+    minimapColor: '#2B5B2BEE'
+
+- type: entity
+  parent: RMCAreaVaraderoExteriorPontoonBeach
+  id: RMCAreaVaraderoExteriorPontoonBeachLz
+  components:
+  - type: Area
+    landingZone: true
+
+- type: entity
+  parent: RMCAreaVaraderoExterior
+  id: RMCAreaVaraderoExteriorEastbeach
+  name: New Varadero - East Beach
+  components:
+  - type: Sprite
+    state: varadero1
+  - type: Area
+    minimapColor: '#2B5B2BEE'
+
+- type: entity
+  parent: RMCAreaVaraderoExterior
+  id: RMCAreaVaraderoExteriorMonsoon
+  name: New Varadero - Monsoon
+  components:
+  - type: Sprite
+    state: varadero1
+  - type: Area
+    minimapColor: '#2B5B2BEE'
+
+- type: entity
+  parent: RMCAreaVaraderoExterior
+  id: RMCAreaVaraderoExteriorPool
+  name: New Varadero - Interior Pool
+  components:
+  - type: Sprite
+    state: varadero1
+  - type: Area
+    minimapColor: '#132242EE'
+
+- type: entity
+  parent: RMCAreaVaraderoExterior
+  id: RMCAreaVaraderoExteriorEastocean
+  name: New Varadero - East Ocean
+  components:
+  - type: Sprite
+    state: varadero2
+  - type: Area
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+    minimapColor: '#0603C4EE'
+
+- type: entity
+  parent: RMCAreaVaraderoExterior
+  id: RMCAreaVaraderoExteriorFarocean
+  name: New Varadero - Far Ocean
+  components:
+  - type: Sprite
+    state: varadero3
+  - type: Area
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+    minimapColor: '#0603C4EE'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorBeachBar
+  name: New Varadero - Beach Bar
+  components:
+  - type: Sprite
+    state: varadero4
+  - type: Area
+    minimapColor: '#2B5B2BEE'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorDockControl
+  name: New Varadero - Dock Control
+  components:
+  - type: Sprite
+    state: varadero3
+  - type: Area
+    minimapColor: '#2B5B2BEE'
+    landingZone: true
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorCargo
+  name: New Varadero - Cargo
+  components:
+  - type: Sprite
+    state: req0
+  - type: Area
+    minimapColor: '#C19504E7'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorHallNW
+  name: New Varadero - Hallway NW
+  components:
+  - type: Sprite
+    state: hall0
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorHallN
+  name: New Varadero - Hallway N
+  components:
+  - type: Sprite
+    state: hall2
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorHallSE
+  name: New Varadero - Hallway SE
+  components:
+  - type: Sprite
+    state: hall1
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorChapel
+  name: New Vardero - Chapel
+  components:
+  - type: Sprite
+    state: offices1
+  - type: Area
+    minimapColor: '#132242EE'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorMorgue
+  name: New Varadero - Morgue
+  components:
+  - type: Sprite
+    state: offices0
+  - type: Area
+    minimapColor: '#17472CEE'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorMedical
+  name: New Varadero - Medical
+  components:
+  - type: Sprite
+    state: offices2
+  - type: Area
+    minimapColor: '#3DBF75EE'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorMaintenance
+  name: New Varadero - Central Maintenance
+  components:
+  - type: Sprite
+    state: tunnels0
+
+- type: entity
+  parent: RMCAreaVaraderoInteriorMaintenance
+  id: RMCAreaVaraderoInteriorMaintenanceNorth
+  name: New Varadero - Northern Maintenance
+  components:
+  - type: Sprite
+    state: tunnels1
+
+- type: entity
+  parent: RMCAreaVaraderoInteriorMaintenance
+  id: RMCAreaVaraderoInteriorMaintenanceResearch
+  name: New Varadero - Research Maintenance
+  components:
+  - type: Sprite
+    state: tunnels1
+  - type: Area
+    minimapColor: '#2D1342EE'
+
+- type: entity
+  parent: RMCAreaVaraderoInteriorMaintenance
+  id: RMCAreaVaraderoInteriorMaintenanceSecurity
+  name: New Varadero - Sec. Maintenance
+  components:
+  - type: Sprite
+    state: tunnels2
+  - type: Area
+    minimapColor: '#421313EE'
+
+- type: entity
+  parent: RMCAreaVaraderoInteriorMaintenanceSecurity
+  id: RMCAreaVaraderoInteriorMaintenanceSecurityNorth
+  name: New Varadero - North Sec. Maintenance
+
+- type: entity
+  parent: RMCAreaVaraderoInteriorMaintenanceSecurity
+  id: RMCAreaVaraderoInteriorMaintenanceSecuritySouth
+  name: New Varadero - South Sec. Maintenance
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorResearch
+  name: New Varadero - Research Offices
+  components:
+  - type: Sprite
+    state: offices4
+  - type: Area
+    minimapColor: '#812DA2EE'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorElectrical
+  name: New Varadero - Electrical Annex
+  components:
+  - type: Sprite
+    state: req4
+  - type: Area
+    minimapColor: '#C19504E7'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorToilets
+  name: New Varadero - Restrooms
+  components:
+  - type: Sprite
+    state: req0
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorTechnicalStorage
+  name: New Varadero - Technical Storage
+  components:
+  - type: Sprite
+    state: req3
+  - type: Area
+    minimapColor: '#C19504E7'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorLaundry
+  name: New Varadero - Laundry
+  components:
+  - type: Sprite
+    state: req2
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorDisposals
+  name: New Varadero - Disposals
+  components:
+  - type: Sprite
+    state: offices4
+  - type: Area
+    minimapColor: '#C19504E7'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorAdministration
+  name: New Varadero - Administrative Offices
+  components:
+  - type: Sprite
+    state: offices2
+  - type: Area
+    minimapColor: '#2D3FA2EE'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorLibrary
+  name: New Varadero - Library
+  components:
+  - type: Sprite
+    state: offices0
+  - type: Area
+    minimapColor: '#132242EE'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorCourt
+  name: New Varadero - Basketball Court
+  components:
+  - type: Sprite
+    state: req4
+  - type: Area
+    minimapColor: '#132242EE'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorMess
+  name: New Varadero - Mess Hall
+  components:
+  - type: Sprite
+    state: req2
+  - type: Area
+    minimapColor: '#132242EE'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorBunks
+  name: New Varadero - Level 1 Quarters
+  components:
+  - type: Sprite
+    state: req3
+  - type: Area
+    minimapColor: '#2B5B2BEE'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorSecurity
+  name: New Varadero - Security Offices
+  components:
+  - type: Sprite
+    state: offices0
+  - type: Area
+    minimapColor: '#A22D2DEE'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorRecords
+  name: New Varadero - Records
+  components:
+  - type: Sprite
+    state: offices2
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorRearElevator
+  name: New Varadero - Main Lift
+  components:
+  - type: Sprite
+    state: req3
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorCaves
+  name: New Varadero - PARENT TYPE CAVES
+  components:
+  - type: Sprite
+    state: tunnels0
+  - type: Area
+    minimapColor: '#3F3C3CEF'
+
+- type: entity
+  parent: RMCAreaVaraderoInteriorCaves
+  id: RMCAreaVaraderoInteriorCavesNorthResearch
+  name: New Varadero - North Research Caves
+  components:
+  - type: Sprite
+    state: tunnels4
+
+- type: entity
+  parent: RMCAreaVaraderoInteriorCaves
+  id: RMCAreaVaraderoInteriorCavesEast
+  name: New Varadero - Beach Caves
+  components:
+  - type: Sprite
+    state: tunnels2
+
+- type: entity
+  parent: RMCAreaVaraderoInteriorProtected
+  id: RMCAreaVaraderoInteriorProtectedCaves
+  name: New Varadero - South Research Caves
+  components:
+  - type: Sprite
+    state: deepcaves0
+  - type: Area
+    minimapColor: '#2D1342EE'
+
+- type: entity
+  parent: RMCAreaVaraderoInteriorProtectedCaves
+  id: RMCAreaVaraderoInteriorProtectedCavesCentral
+  name: New Varadero - Grass Caves
+  components:
+  - type: Sprite
+    state: deepcaves2
+  - type: Area
+    minimapColor: '#3F3C3CEF'
+
+- type: entity
+  parent: RMCAreaVaraderoInteriorProtectedCaves
+  id: RMCAreaVaraderoInteriorProtectedCavesDigsite
+  name: New Varadero - Dig Site
+  components:
+  - type: Sprite
+    state: deepcaves3
+
+- type: entity
+  parent: RMCAreaVaraderoInteriorProtectedCaves
+  id: RMCAreaVaraderoInteriorProtectedCavesSwcaves
+  name: New Varadero - Southwest Caves
+  components:
+  - type: Sprite
+    state: deepcaves3
+
+- type: entity
+  abstract: true
+  parent: RMCAreaVaraderoInteriorProtected
+  id: RMCAreaVaraderoInteriorProtectedMaintenance
+
+- type: entity
+  parent: RMCAreaVaraderoInteriorProtectedMaintenance
+  id: RMCAreaVaraderoInteriorProtectedMaintenanceSouth
+  name: New Varadero - Southern Maintenance
+  components:
+  - type: Sprite
+    state: deepcaves4
+  - type: Area
+    minimapColor: '#3F3C3CEF'
+
+- type: entity
+  parent: RMCAreaVaraderoInteriorProtected
+  id: RMCAreaVaraderoInteriorProtectedVessel
+  name: New Varadero - Unknown Vessel
+  components:
+  - type: Sprite
+    state: predship
+  - type: Area
+    minimapColor: '#885A04E7'

@@ -10,7 +10,9 @@
     size: Tiny
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/dogtags.rsi
-    state: dogtag
+    layers:
+        - state: dogtag
+          map: ["enum.DogtagVisuals.Taken"]
   - type: Clothing
     slots:
     - idcard
@@ -21,6 +23,28 @@
     canMicrowave: false
   - type: ItemIFF
     faction: FactionMarine
+  - type: TakeableTags
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.DogtagVisuals.Taken:
+        enum.DogtagVisuals.Taken:
+          True: { state: "dogtag_taken" }
+          False: { state: "dogtag" }
+          
+  
+- type: entity
+  parent: BaseItem
+  id: RMCInformationDogtag
+  name: information dog tag
+  description: A fallen marine's information dog tag.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/dogtags.rsi
+    state: dogtag_taken
+  - type: InformationTags
 
 # generic id bases, they get their information replaced by the job.
 - type: entity
@@ -101,3 +125,28 @@
   id: FactionMarine
   components:
   - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - MarineCommand
+    - MarineMedical
+    - MarineEngineer
+    - MarineMilitaryPolice
+#    - TODO RMC14 sentry
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    - WEYA
+
+- type: entity
+  id: FactionSurvivor
+  components:
+  - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - Colony

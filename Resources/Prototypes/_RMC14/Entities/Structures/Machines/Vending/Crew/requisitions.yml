@@ -121,10 +121,12 @@
         amount: 5
       #- id: IMP Ammo Rack
       #   amount: 2
-      #- id: Radio Telephone Pack
-      #  amount: 2
+      - id: RMCBackpackRTO
+        amount: 2
       #- id: Parachute
       #  amount: 20
+      - id: RMCSatchelGrenadeSpec
+        amount: 2
     - name: Belts
       entries:
       - id: RMCBeltUtilityGeneral
@@ -243,8 +245,8 @@
       #  amount: 1
       #- id: Spare PDT/L Battle Buddy Kit
       #  amount: 4
-      #- id: W-Y brand rechargeable mini-battery 3
-      #  amount: 10
+      - id: RMCPowerCellCrap
+        amount: 10
 
 #AMMUNITION VENDOR
 

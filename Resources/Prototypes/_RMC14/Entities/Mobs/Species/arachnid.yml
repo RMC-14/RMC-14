@@ -87,3 +87,5 @@
       state: "creampie_arachnid"
       visible: false
     - map: [ "acided" ]
+    - map: [ "enum.NewPlayerLayers.Layer" ]
+      visible: false

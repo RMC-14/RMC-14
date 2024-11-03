@@ -1,0 +1,10 @@
+﻿<controls:RMCDialogWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Dialog"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface">
+    <BoxContainer Orientation="Vertical">
+        <RichTextLabel Text="[bold]What do you wish to do?[/bold]" />
+        <ui:BlueHorizontalSeparator />
+        <BoxContainer Name="Options" Access="Public" Orientation="Vertical" />
+    </BoxContainer>
+</controls:RMCDialogWindow>

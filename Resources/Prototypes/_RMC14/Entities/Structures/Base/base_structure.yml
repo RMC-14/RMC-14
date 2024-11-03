@@ -148,12 +148,15 @@
 # Invisible Wall
 
 - type: entity
+  parent: MarkerBase
   id: RMCWallInvisibleBulletPassible
   name: wall blocker
   suffix: Projectile Passible
   placement:
     mode: SnapgridCenter
   components:
+  - type: Sprite
+    state: green
   - type: Transform
     anchored: true
   - type: Physics

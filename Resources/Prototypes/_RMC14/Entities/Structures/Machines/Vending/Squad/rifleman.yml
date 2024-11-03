@@ -162,8 +162,8 @@
         points: 15
       - id: RMCPouchMacheteFilled
         points: 15
-    #- id: CMMarineRadioTelephonePack
-    #  points: 15
+      - id: RMCBackpackRTO
+        points: 15
     #- id: CMFuelTankStrapPouch
     #  points: 5
     #- id: CMWeldingGoggles

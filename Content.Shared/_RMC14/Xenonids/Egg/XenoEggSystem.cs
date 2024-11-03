@@ -448,15 +448,13 @@ public sealed class XenoEggSystem : EntitySystem
         if (_net.IsClient)
             return true;
 
-        var coords = Transform(egg).Coordinates;
-        spawned = SpawnAtPosition(egg.Comp.Spawn, coords);
+        var eggContainer = _container.EnsureContainer<ContainerSlot>(egg.Owner, egg.Comp.CreatureContainerId);
+        spawned = SpawnInContainerOrDrop(egg.Comp.Spawn, egg.Owner, eggContainer.ID);
+
         _hive.SetSameHive(egg.Owner, spawned.Value);
 
         egg.Comp.SpawnedCreature = spawned;
         Dirty(egg);
-
-        var eggContainer = _container.EnsureContainer<ContainerSlot>(egg.Owner, egg.Comp.CreatureContainerId);
-        _container.Insert(spawned.Value, eggContainer);
 
         // TODO: create EggHatchedEvent to uncouple it from ai?
         if (TryComp<ParasiteAIComponent>(spawned, out var ai))

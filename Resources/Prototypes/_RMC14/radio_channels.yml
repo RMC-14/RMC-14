@@ -1,4 +1,3 @@
-# TODO RMC14 remove longrange once communications is in
 # High Command
 - type: radioChannel #UNMC High Command, for events and such, basically CentComm channel
   id: MarineHighCommand
@@ -14,8 +13,10 @@
   name: chat-radio-marine-common
   keycode: "g" #; and g in cm13
   frequency: 1480
-  color: "#6FD08C"
+  color: "#B4B4B4"
   longRange: true
+  tower: true
+  planet: false
 
 - type: radioChannel
   id: MarineCommand
@@ -24,6 +25,7 @@
   frequency: 1481
   color: "#5b96d4"
   longRange: true
+  tower: true
 
 - type: radioChannel
   id: MarineMedical
@@ -32,6 +34,7 @@
   frequency: 1482
   color: "#009771"
   longRange: true
+  tower: true
 
 - type: radioChannel
   id: MarineEngineer
@@ -40,6 +43,7 @@
   frequency: 1483
   color: "#e4860c"
   longRange: true
+  tower: true
 
 - type: radioChannel
   id: MarineMilitaryPolice
@@ -48,6 +52,7 @@
   frequency: 1484
   color: "#be324f"
   longRange: true
+  tower: true
 
 - type: radioChannel
   id: MarineRequisition
@@ -56,6 +61,7 @@
   frequency: 1485
   color: "#b17324"
   longRange: true
+  tower: true
 
 - type: radioChannel
   id: MarineIntel
@@ -64,6 +70,7 @@
   frequency: 1486
   color: "#059705"
   longRange: true
+  tower: true
 
 - type: radioChannel
   id: MarineJTAC
@@ -72,6 +79,7 @@
   frequency: 1487
   color: "#ad3b98"
   longRange: true
+  tower: true
 
 # Squad channels
 - type: radioChannel
@@ -81,6 +89,7 @@
   frequency: 1491
   color: "#dc0a0a"
   longRange: true
+  tower: true
 
 - type: radioChannel
   id: MarineBravo
@@ -89,6 +98,7 @@
   frequency: 1492
   color: "#f2af03"
   longRange: true
+  tower: true
 
 - type: radioChannel
   id: MarineCharlie
@@ -97,6 +107,7 @@
   frequency: 1493
   color: "#a94ac2"
   longRange: true
+  tower: true
 
 - type: radioChannel
   id: MarineDelta
@@ -105,6 +116,7 @@
   frequency: 1494
   color: "#038ae1"
   longRange: true
+  tower: true
 
 - type: radioChannel
   id: MarineEcho
@@ -113,6 +125,7 @@
   frequency: 1495
   color: "#3be1b1"
   longRange: true
+  tower: true
 
 - type: radioChannel
   id: MarineFoxtrot
@@ -121,15 +134,17 @@
   frequency: 1496
   color: "#c23c07"
   longRange: true
+  tower: true
 
 # Non Marine
 - type: radioChannel
   id: Colony
   name: chat-radio-colony
   keycode: "o" #o in cm13
-  frequency: 1381
+  frequency: 1469
   color: "#cf40a6" #todo rmc14
   longRange: true
+  tower: true
 
 - type: radioChannel
   id: ColonyHandheld
@@ -143,9 +158,10 @@
   id: WEYA
   name: chat-radio-WY
   keycode: "w" #w in CM13
-  frequency: 1487
+  frequency: 1231
   color: "#fe9b24"
   longRange: true
+  tower: true
 
 - type: radioChannel
   id: CMB
@@ -154,6 +170,7 @@
   frequency: 1220
   color: "#1b748c"
   longRange: true
+  tower: true
 
 - type: radioChannel
   id: Hivemind

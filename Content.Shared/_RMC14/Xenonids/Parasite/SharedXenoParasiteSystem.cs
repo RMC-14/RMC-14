@@ -504,31 +504,13 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 _inventory.TryUnequip(uid, "mask", true, true, true);
             }
 
-            if (_net.IsClient)
+            if (infected.BurstAt + infected.AutoBurstTime <= time && infected.SpawnedLarva != null)
+            {
+                TryBurst((uid, infected));
                 continue;
-
-            // 20 seconds before burst, spawn the larva
-            if (infected.BurstAt <= time && infected.SpawnedLarva == null)
-            {
-                var spawned = SpawnAtPosition(infected.BurstSpawn, xform.Coordinates);
-                _hive.SetHive(spawned, infected.Hive);
-
-                var larvaContainer = _container.EnsureContainer<ContainerSlot>(uid, infected.LarvaContainerId);
-                _container.Insert(spawned, larvaContainer);
-
-                infected.CurrentStage = 6;
-                Dirty(uid, infected);
-
-                infected.SpawnedLarva = spawned;
-
-                EnsureComp<BursterComponent>(spawned, out var burster);
-                burster.BurstFrom = uid;
             }
-
-            if (infected.BurstAt + infected.AutoBurstTime > time)
+            else
             {
-                // Embryo dies if unrevivable when dead
-                // Kill the embryo if we've rotted or are a simplemob
                 if (_mobState.IsDead(uid) && (HasComp<InfectStopOnDeathComponent>(uid) || _rotting.IsRotten(uid)))
                 {
                     if (infected.SpawnedLarva != null)
@@ -537,103 +519,120 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                         RemCompDeferred<VictimInfectedComponent>(uid);
                     continue;
                 }
-                // Stasis slows this, while nesting makes it happen sooner
-                if (infected.IncubationMultiplier != 1)
-                    infected.BurstAt += TimeSpan.FromSeconds(1 - infected.IncubationMultiplier) * frameTime;
+            }
 
-                // Stages
-                // Percentage of how far along we out to burst time times the number of stages, truncated. You can't go back a stage once you've reached one
-                int stage = Math.Max((int)((infected.BurstDelay - (infected.BurstAt - time)) / infected.BurstDelay * infected.FinalStage), infected.CurrentStage);
-                if (stage != infected.CurrentStage)
-                {
-                    infected.CurrentStage = stage;
-                    Dirty(uid, infected);
-                    // Refresh multipliers since some become more/less effective
-                    RefreshIncubationMultipliers(uid);
-                }
+            if (_net.IsClient)
+                continue;
 
-                // Warn on the last to final stage of a burst
-                if (!infected.DidBurstWarning && stage == infected.BurstWarningStart)
-                {
-                    _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon-self"), uid, uid, PopupType.MediumCaution);
+            // 20 seconds before burst, spawn the larva
+            if (infected.BurstAt <= time && infected.SpawnedLarva == null)
+            {
+                var larvaContainer = _container.EnsureContainer<ContainerSlot>(uid, infected.LarvaContainerId);
+                var spawned = SpawnInContainerOrDrop(infected.BurstSpawn, uid, larvaContainer.ID);
 
-                    var knockdownTime = infected.BaseKnockdownTime * 75;
-                    InfectionShakes(uid, infected, knockdownTime, infected.JitterTime, false);
-                    infected.DidBurstWarning = true;
+                _hive.SetHive(spawned, infected.Hive);
 
-                    continue;
-                }
+                infected.CurrentStage = 6;
+                infected.SpawnedLarva = spawned;
+                Dirty(uid, infected);
 
-                // Symptoms only start after the IntialSymptomStart is passed (by default, 2)
-                // And continue until burst time is reached
-                if (stage >= infected.BurstWarningStart)
-                {
-                    if (_random.Prob(infected.InsanePainChance * frameTime))
-                    {
-                        var random = _random.Pick(new List<string> { "one", "two", "three", "four", "five" });
-                        var message = Loc.GetString("rmc-xeno-infection-insanepain-" + random);
-                        _popup.PopupEntity(message, uid, uid, PopupType.LargeCaution);
+                EnsureComp<BursterComponent>(spawned, out var burster);
+                burster.BurstFrom = uid;
+            }
 
-                        var knockdownTime = infected.BaseKnockdownTime * 2;
-                        var jitterTime = infected.JitterTime * 0;
-                        InfectionShakes(uid, infected, knockdownTime, jitterTime, false);
-                    }
-                }
-                else if (stage >= infected.FinalSymptomsStart)
-                {
-                    if (_random.Prob(infected.MajorPainChance * frameTime))
-                    {
-                        var message = Loc.GetString("rmc-xeno-infection-majorpain-" + _random.Pick(new List<string> { "chest", "breathing", "heart" }));
-                        _popup.PopupEntity(message, uid, uid, PopupType.SmallCaution);
-                        if (_random.Prob(0.5f))
-                        {
-                            var ev = new VictimInfectedEmoteEvent(infected.ScreamId);
-                            RaiseLocalEvent(uid, ref ev);
-                        }
-                    }
+            // Stasis slows this, while nesting makes it happen sooner
+            if (infected.IncubationMultiplier != 1)
+                infected.BurstAt += TimeSpan.FromSeconds(1 - infected.IncubationMultiplier) * frameTime;
 
-                    if (_random.Prob(infected.ShakesChance * frameTime))
-                        InfectionShakes(uid, infected, infected.BaseKnockdownTime * 4, infected.JitterTime * 4);
-                }
-                else if (stage >= infected.MiddlingSymptomsStart)
-                {
-                    if (_random.Prob(infected.ThroatPainChance * frameTime))
-                    {
-                        var message = Loc.GetString("rmc-xeno-infection-throat-" + _random.Pick(new List<string> { "sore", "mucous" }));
-                        _popup.PopupEntity(message, uid, uid, PopupType.SmallCaution);
-                    }
-                    // TODO 20% chance to take limb damage
-                    else if (_random.Prob(infected.MuscleAcheChance * frameTime))
-                    {
-                        _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-muscle-ache"), uid, uid, PopupType.SmallCaution);
-                        if (_random.Prob(0.2f))
-                            _damage.TryChangeDamage(uid, infected.InfectionDamage, true, false);
-                    }
-                    else if (_random.Prob(infected.SneezeCoughChance * frameTime))
-                    {
-                        var emote = _random.Pick(new List<ProtoId<EmotePrototype>> { infected.SneezeId, infected.CoughId });
-                        var ev = new VictimInfectedEmoteEvent(emote);
-                        RaiseLocalEvent(uid, ref ev);
-                    }
+            // Stages
+            // Percentage of how far along we out to burst time times the number of stages, truncated. You can't go back a stage once you've reached one
+            int stage = Math.Max((int)((infected.BurstDelay - (infected.BurstAt - time)) / infected.BurstDelay * infected.FinalStage), infected.CurrentStage);
+            if (stage != infected.CurrentStage)
+            {
+                infected.CurrentStage = stage;
+                Dirty(uid, infected);
+                // Refresh multipliers since some become more/less effective
+                RefreshIncubationMultipliers(uid);
+            }
 
-                    if (_random.Prob(infected.ShakesChance * 5 / 6 * frameTime))
-                        InfectionShakes(uid, infected, infected.BaseKnockdownTime * 2, infected.JitterTime * 2);
-                }
-                else if (stage >= infected.InitialSymptomsStart)
-                {
-                    if (_random.Prob(infected.MinorPainChance * frameTime))
-                    {
-                        var message = Loc.GetString("rmc-xeno-infection-minorpain-" + _random.Pick(new List<string> { "stomach", "chest" }));
-                        _popup.PopupEntity(message, uid, uid, PopupType.SmallCaution);
-                    }
+            // Warn on the last to final stage of a burst
+            if (!infected.DidBurstWarning && stage == infected.BurstWarningStart)
+            {
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon-self"), uid, uid, PopupType.MediumCaution);
 
-                    if (_random.Prob((infected.ShakesChance * 2 / 3) * frameTime))
-                        InfectionShakes(uid, infected, infected.BaseKnockdownTime, infected.JitterTime);
-                }
+                var knockdownTime = infected.BaseKnockdownTime * 75;
+                InfectionShakes(uid, infected, knockdownTime, infected.JitterTime, false);
+                infected.DidBurstWarning = true;
+
                 continue;
             }
 
-            TryBurst((uid, infected));
+            // Symptoms only start after the IntialSymptomStart is passed (by default, 2)
+            // And continue until burst time is reached
+            if (stage >= infected.BurstWarningStart)
+            {
+                if (_random.Prob(infected.InsanePainChance * frameTime))
+                {
+                    var random = _random.Pick(new List<string> { "one", "two", "three", "four", "five" });
+                    var message = Loc.GetString("rmc-xeno-infection-insanepain-" + random);
+                    _popup.PopupEntity(message, uid, uid, PopupType.LargeCaution);
+
+                    var knockdownTime = infected.BaseKnockdownTime * 2;
+                    var jitterTime = infected.JitterTime * 0;
+                    InfectionShakes(uid, infected, knockdownTime, jitterTime, false);
+                }
+            }
+            else if (stage >= infected.FinalSymptomsStart)
+            {
+                if (_random.Prob(infected.MajorPainChance * frameTime))
+                {
+                    var message = Loc.GetString("rmc-xeno-infection-majorpain-" + _random.Pick(new List<string> { "chest", "breathing", "heart" }));
+                    _popup.PopupEntity(message, uid, uid, PopupType.SmallCaution);
+                    if (_random.Prob(0.5f))
+                    {
+                        var ev = new VictimInfectedEmoteEvent(infected.ScreamId);
+                        RaiseLocalEvent(uid, ref ev);
+                    }
+                }
+
+                if (_random.Prob(infected.ShakesChance * frameTime))
+                    InfectionShakes(uid, infected, infected.BaseKnockdownTime * 4, infected.JitterTime * 4);
+            }
+            else if (stage >= infected.MiddlingSymptomsStart)
+            {
+                if (_random.Prob(infected.ThroatPainChance * frameTime))
+                {
+                    var message = Loc.GetString("rmc-xeno-infection-throat-" + _random.Pick(new List<string> { "sore", "mucous" }));
+                    _popup.PopupEntity(message, uid, uid, PopupType.SmallCaution);
+                }
+                // TODO 20% chance to take limb damage
+                else if (_random.Prob(infected.MuscleAcheChance * frameTime))
+                {
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-muscle-ache"), uid, uid, PopupType.SmallCaution);
+                    if (_random.Prob(0.2f))
+                        _damage.TryChangeDamage(uid, infected.InfectionDamage, true, false);
+                }
+                else if (_random.Prob(infected.SneezeCoughChance * frameTime))
+                {
+                    var emote = _random.Pick(new List<ProtoId<EmotePrototype>> { infected.SneezeId, infected.CoughId });
+                    var ev = new VictimInfectedEmoteEvent(emote);
+                    RaiseLocalEvent(uid, ref ev);
+                }
+
+                if (_random.Prob(infected.ShakesChance * 5 / 6 * frameTime))
+                    InfectionShakes(uid, infected, infected.BaseKnockdownTime * 2, infected.JitterTime * 2);
+            }
+            else if (stage >= infected.InitialSymptomsStart)
+            {
+                if (_random.Prob(infected.MinorPainChance * frameTime))
+                {
+                    var message = Loc.GetString("rmc-xeno-infection-minorpain-" + _random.Pick(new List<string> { "stomach", "chest" }));
+                    _popup.PopupEntity(message, uid, uid, PopupType.SmallCaution);
+                }
+
+                if (_random.Prob((infected.ShakesChance * 2 / 3) * frameTime))
+                    InfectionShakes(uid, infected, infected.BaseKnockdownTime, infected.JitterTime);
+            }
         }
     }
 
@@ -711,13 +710,11 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             _appearance.SetData(victim, comp.BurstingLayer, true);
 
             var shakeFilter = Filter.PvsExcept(victim);
-            shakeFilter.RemoveWhereAttachedEntity(HasComp<XenoComponent>); // not visible to xenos
-
-            // Force infection shakes even while dead, bigger popup
-            _popup.PopupClient(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, victim, PopupType.MediumCaution);
+            shakeFilter.RemoveWhereAttachedEntity(HasComp<BursterComponent>); // not visible the larva
 
             if (_net.IsServer)
             {
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-now-victim"), victim, victim, PopupType.MediumCaution);
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-infection-burst-soon", ("victim", victim)), victim, shakeFilter, true, PopupType.LargeCaution);
                 _jitter.DoJitter(victim, comp.JitterTime / 1.2, true, 14f, 5f, true); // violent jitter
             }

@@ -166,9 +166,7 @@ public abstract partial class SharedCMSurgerySystem
 
     private void OnCutLarvaRootsStep(Entity<CMSurgeryCutLarvaRootsStepComponent> ent, ref CMSurgeryStepEvent args)
     {
-        if (TryComp(args.Body, out VictimInfectedComponent? infected) &&
-            infected.BurstAt > _timing.CurTime &&
-            infected.SpawnedLarva == null)
+        if (TryComp(args.Body, out VictimInfectedComponent? infected) && !infected.IsBursting)
         {
             infected.RootsCut = true;
         }
@@ -179,9 +177,8 @@ public abstract partial class SharedCMSurgerySystem
         if (!TryComp(args.Body, out VictimInfectedComponent? infected) || !infected.RootsCut)
             args.Cancelled = true;
 
-        // The larva has fully developed and surgery is now impossible
-        // TODO: Surgery should still be possible, but the fully developed larva should escape while also saving the hosts life
-        if (infected != null && infected.SpawnedLarva != null)
+        // The larva is bursting
+        if (infected != null && infected.IsBursting)
             args.Cancelled = true;
     }
 

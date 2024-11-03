@@ -98,7 +98,7 @@
 - type: entity
   parent: BaseStructureDynamic
   id: RMCCrateLarge
-  name: large crate
+  name: supply crate
   description: A hefty wooden crate.
   components:
   - type: Sprite
@@ -808,3 +808,74 @@
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/weapons.rsi
+
+- type: entity
+  parent: RMCCrateWeldable
+  id: RMCCrateAmmoAlt
+  name: ammunitions crate
+  suffix: black
+  description: A crate that contains ammunition, this one is black.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/ammo_alt.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _RMC14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/ammo_alt.rsi
+
+- type: entity
+  parent: RMCCrateWeldable
+  id: RMCCrateAmmoAlt2
+  name: ammunitions crate
+  suffix: flammable
+  description: A black crate. Warning, contents are flammable!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/ammo_alt2.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _RMC14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/ammo_alt2.rsi
+
+- type: entity
+  parent: RMCCrateWeldable
+  id: RMCTrashCart
+  name: trash cart
+  description: A heavy, metal trashcart with wheels.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/trash_cart.rsi
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: invoice
+      sprite: _RMC14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/trash_cart.rsi

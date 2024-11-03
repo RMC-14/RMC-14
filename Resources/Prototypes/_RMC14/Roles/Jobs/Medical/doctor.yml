@@ -30,6 +30,8 @@
         RMCSkillMedical: 3
         RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
+    - type: JobPrefix
+      prefix: "Doc"
 
 - type: startingGear
   id: CMGearDoctor
@@ -68,3 +70,4 @@
 
 - type: playTimeTracker
   id: CMJobDoctor
+  isHumanoid: true

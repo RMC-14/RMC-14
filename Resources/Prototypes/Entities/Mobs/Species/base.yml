@@ -57,6 +57,8 @@
       state: "creampie_human"
       visible: false
     - map: [ "acided" ]
+    - map: [ "enum.NewPlayerLayers.Layer" ]
+      visible: false
   - type: DamageVisuals
     thresholds: [ 10, 20, 30, 50, 70, 100 ]
     targetLayers:
