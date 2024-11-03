@@ -158,6 +158,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather
     - name: Restricted Firearms
       entries:
       - id: RMCMK80Case
@@ -178,7 +179,8 @@
         points: 6
       - id: RMCPouchMacheteFilled
         points: 15
-    #- id: CMMarineRadioTelephonePack
+      - id: RMCBackpackRTO
+        points: 15
     #- id: CMFuelTankStrapPouch
     #- id: CMWeldingGoggles
       - id: RMCPouchGeneralLarge

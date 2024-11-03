@@ -82,6 +82,8 @@
     explosionArmor: 100
   - type: XenoWordQueen
   - type: XenoGut
+  - type: XenoClaws
+    clawType: VerySharp
   - type: MeleeWeapon
     damage:
       groups:
@@ -189,6 +191,9 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: xenoqueen
+    background:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: xeno_ruler
   - type: AcidTrap
   - type: TacticalMapLiveUpdateOnOvi
     enabled: false

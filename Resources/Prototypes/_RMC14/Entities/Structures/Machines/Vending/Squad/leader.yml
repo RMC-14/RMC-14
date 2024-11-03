@@ -46,8 +46,8 @@
         points: 4
       - id: RMCPouchMacheteFilled
         points: 4
-    #- id: CMMarineRadioTelephonePack
-    #  points: 5
+      - id: RMCBackpackRTO
+        points: 5
       - id: CMBeltUtilityCombat
         points: 15
     - name: Utilities
@@ -281,6 +281,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

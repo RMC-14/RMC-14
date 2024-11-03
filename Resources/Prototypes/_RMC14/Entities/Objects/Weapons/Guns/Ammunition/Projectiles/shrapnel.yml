@@ -2,9 +2,7 @@
   parent: RMCBaseBullet
   id: CMProjectileShrapnel
   name: shrapnel
-  noSpawn: true
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi

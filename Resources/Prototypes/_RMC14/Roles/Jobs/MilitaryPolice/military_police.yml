@@ -18,6 +18,9 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: mp
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_mp
   special:
   - !type:AddComponentSpecial
     components:
@@ -28,6 +31,8 @@
         RMCSkillFirearms: 1
         RMCSkillFireman: 2
         RMCSkillPolice: 2
+    - type: JobPrefix
+      prefix: "MP"
 
 - type: startingGear
   id: CMGearMilitaryPolice
@@ -60,3 +65,4 @@
 
 - type: playTimeTracker
   id: CMJobMilitaryPolice
+  isHumanoid: true

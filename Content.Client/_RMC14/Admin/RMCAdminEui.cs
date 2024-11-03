@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Strain;
 using Content.Shared.Eui;
 using Content.Shared.Humanoid.Prototypes;
 using JetBrains.Annotations;
@@ -64,6 +65,9 @@ public sealed class RMCAdminEui : BaseEui
         foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
         {
             if (entity.Abstract || !entity.TryGetComponent(out XenoComponent? xeno, _compFactory))
+                continue;
+
+            if (entity.TryGetComponent(out XenoStrainComponent? strain, _compFactory))
                 continue;
 
             if (!tiers.TryGetValue(xeno.Tier, out var xenos))
