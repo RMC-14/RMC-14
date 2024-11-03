@@ -88,7 +88,7 @@
       rmc-aslot-barrel: 0.81, 0.029
       rmc-aslot-rail: 0.125, 0.185
       rmc-aslot-stock: -0.875, 0.0325
-      rmc-aslot-underbarrel: 0.312, -0.343
+      rmc-aslot-underbarrel: 0.35, -0.4
 
 - type: entity
   parent: CMMagazineRifleM54C

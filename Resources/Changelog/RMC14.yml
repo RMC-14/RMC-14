@@ -1,42 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Pretzels are no longer made of meatballs.
-    type: Fix
-  id: 426
-  time: '2024-07-22T10:18:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3201
-- author: DrSmugleaf
-  changes:
-  - message: Added designating primary landing zone. This will make an ARES announcement
-      and make the other landing zone unable to be hijacked by the Queen. If no landing
-      zone is made primary after 25 minutes, one will automatically be chosen.
-    type: Add
-  - message: Fixed there being no initial 15 minute cooldown for calling down a ship
-      for a hijack.
-    type: Fix
-  - message: Fixed being able to call two dropships down to the same spot for hijack.
-    type: Fix
-  id: 427
-  time: '2024-07-22T10:20:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3177
-- author: Dutch-VanDerLinde
-  changes:
-  - message: The xeno pheromones menu is now a radial menu rather than a window
-    type: Tweak
-  id: 428
-  time: '2024-07-22T10:34:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3191
-- author: Whisper
-  changes:
-  - message: Fences and catwalks are no longer buildable. Fences are still able to
-      be deconstructed.
-    type: Fix
-  - message: catwalks are no longer able to be deconstructed.
-    type: Fix
-  id: 429
-  time: '2024-07-22T10:35:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3200
 - author: Vermidia
   changes:
   - message: You can now inject and draw from blood bags, but they will only inject
@@ -4891,5 +4853,33 @@
   id: 925
   time: '2024-11-02T22:57:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4675
+- author: Whisper
+  changes:
+  - message: Updated the sprites of the M54C and M54CE2 (In development)
+    type: Add
+  id: 926
+  time: '2024-11-03T02:06:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4542
+- author: Vermidia
+  changes:
+  - message: Fixed hive core not showing on the xeno tacmap
+    type: Fix
+  id: 927
+  time: '2024-11-03T02:07:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4678
+- author: FungiFellow
+  changes:
+  - message: Added Welder Chestrig to MT Vendor
+    type: Add
+  id: 928
+  time: '2024-11-03T02:08:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4681
+- author: Rainbeon
+  changes:
+  - message: Defibrillators no longer passively drain power at all.
+    type: Fix
+  id: 929
+  time: '2024-11-03T02:06:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4676
 Name: RMC14
 Order: -1
