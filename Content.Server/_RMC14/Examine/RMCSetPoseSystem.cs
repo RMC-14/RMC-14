@@ -7,7 +7,6 @@ namespace Content.Server._RMC14.Examine;
 
 public sealed class RMCSetPoseSystem : SharedRMCSetPoseSystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
 
     public override void Initialize()
