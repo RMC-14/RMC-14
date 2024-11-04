@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Multiple people wiring the same barricade no longer wastes barbed wire.
-    type: Fix
-  - message: Attempting to wire another cade while already wiring does not cancel
-      the original wiring.
-    type: Tweak
-  id: 434
-  time: '2024-07-22T11:00:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3155
 - author: musicmanvr
   changes:
   - message: Ported the M44 combat revolver, find it in your nearest vendor!
@@ -4903,5 +4893,23 @@
   id: 933
   time: '2024-11-04T02:03:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4666
+- author: DrSmugleaf
+  changes:
+  - message: Fixed telephones not listing a marine's squad.
+    type: Fix
+  - message: Fixed telephone category order not being consistent.
+    type: Fix
+  - message: Fixed the dropship hijack alert not being shown in chat.
+    type: Fix
+  - message: Fixed dropships landing one tile lower than intended on New Varadero
+      west LZ.
+    type: Fix
+  - message: Fixed New Varadero having no turrets.
+    type: Fix
+  - message: Fixed a spot where you could escape the map bounds on New Varadero.
+    type: Fix
+  id: 934
+  time: '2024-11-04T04:15:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4691
 Name: RMC14
 Order: -1
