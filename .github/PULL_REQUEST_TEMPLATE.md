@@ -20,7 +20,7 @@ This will be posted in #codebase-changes. -->
 **Changelog**
 <!-- Add a Changelog entry to make players aware of new features or changes that could affect gameplay.
 Changelog must have a :cl: symbol, so the bot recognizes the changes and adds them to the game's changelog.
-Add your name after the :cl: to have it credited in game. -->
+Add your name after the :cl: to change the display name credited in game, otherwise your github name will be used. Delete the changelog if you are leaving it empty. -->
 :cl:
 - add: Added fun!
 - remove: Removed fun!
