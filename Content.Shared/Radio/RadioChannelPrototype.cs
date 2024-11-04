@@ -35,4 +35,10 @@ public sealed partial class RadioChannelPrototype : IPrototype
     /// </summary>
     [DataField("longRange"), ViewVariables]
     public bool LongRange = false;
+
+    [DataField]
+    public bool Tower;
+
+    [DataField]
+    public bool Planet = true;
 }

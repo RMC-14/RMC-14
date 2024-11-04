@@ -17,6 +17,8 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
             return;
 
         _window = new MarineCommunicationsComputerWindow();
+        _window.TacticalMapButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsOpenMapMsg());
+        _window.OverwatchButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsOverwatchMsg());
         _window.Send.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsComputerMsg( Rope.Collapse(_window.Text.TextRope)));
         OnStateUpdate();
 

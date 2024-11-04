@@ -29,6 +29,8 @@
         RMCSkillMedical: 3
         RMCSkillSurgery: 1
     - type: RMCUserBulkyArmorIncapable
+    - type: JobPrefix
+      prefix: "Nurse"
 
 - type: startingGear
   id: CMGearNurse
@@ -68,3 +70,4 @@
 
 - type: playTimeTracker
   id: CMJobNurse
+  isHumanoid: true

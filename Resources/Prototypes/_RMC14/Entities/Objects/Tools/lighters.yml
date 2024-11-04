@@ -32,3 +32,12 @@
   components:
   - type: Sprite
     sprite:  _RMC14/Objects/Tools/Lighters/execzippo.rsi
+
+- type: entity
+  name: golden zippo lighter
+  description: A gold-anodized Zippo lighter. Ostentatious, but it certainly stands out.
+  parent: RMCZippo
+  id: RMCZippoGold
+  components:
+  - type: Sprite
+    sprite:  _RMC14/Objects/Tools/Lighters/goldzippo.rsi

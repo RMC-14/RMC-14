@@ -1,7 +1,5 @@
-using Content.Shared.Radio;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Dropship;
@@ -15,9 +13,6 @@ public sealed partial class DropshipComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Crashed;
-
-    [DataField, AutoNetworkedField]
-    public ProtoId<RadioChannelPrototype> AnnounceHijackIn = "MarineCommon";
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier LocalHijackSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Shuttle/queen_alarm.ogg");

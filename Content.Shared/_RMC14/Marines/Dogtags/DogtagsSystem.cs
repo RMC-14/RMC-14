@@ -62,7 +62,7 @@ public sealed class DogtagsSystem : EntitySystem
         int count = 1;
         foreach (var tag in tags.Comp.Tags)
         {
-            args.PushMarkup(Loc.GetString("rmc-dogtags-info-read", ("number", count++), ("name", tag.Name), ("assignment", tag.Assignment), ("bloodtype", tag.BloodType)), -20);
+            args.PushMarkup(Loc.GetString("rmc-dogtags-info-read", ("number", count++), ("name", tag.Name), ("assignment", tag.Assignment), ("bloodtype", tag.BloodType)), -19 - count);
         }
     }
     private void OnMemorialExamined(Entity<RMCMemorialComponent> memorial, ref ExaminedEvent args)

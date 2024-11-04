@@ -125,3 +125,28 @@
   id: FactionMarine
   components:
   - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - MarineCommand
+    - MarineMedical
+    - MarineEngineer
+    - MarineMilitaryPolice
+#    - TODO RMC14 sentry
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    - WEYA
+
+- type: entity
+  id: FactionSurvivor
+  components:
+  - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - Colony

@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.GameStates;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
@@ -21,6 +22,7 @@ public abstract class SharedRoleSystem : EntitySystem
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
 
     private JobRequirementOverridePrototype? _requirementOverride;
 
@@ -148,10 +150,12 @@ public abstract class SharedRoleSystem : EntitySystem
             EnsureComp<JobRoleComponent>(mindRoleId);
         }
 
+        Dirty(mindRoleId, mindRoleComp);
         if (mindRoleComp.Antag || mindRoleComp.ExclusiveAntag)
             antagonist = true;
 
         mind.MindRoles.Add(mindRoleId);
+        Dirty(mindId, mind);
 
         var mindEv = new MindRoleAddedEvent(silent);
         RaiseLocalEvent(mindId, ref mindEv);
@@ -177,6 +181,9 @@ public abstract class SharedRoleSystem : EntitySystem
                 LogImpact.Low,
                 $"{name} added to {ToPrettyString(mindId)}");
         }
+
+        if (mind.Session != null)
+            _rmcPvs.AddSessionOverride(mindRoleId, mind.Session);
     }
 
     /// <summary>

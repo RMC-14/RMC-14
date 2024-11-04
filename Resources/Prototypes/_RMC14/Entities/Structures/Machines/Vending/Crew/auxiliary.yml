@@ -44,10 +44,10 @@
         recommended: true
       - id: CMBeltMedicalFilled
         recommended: true
-      - id: RMCBeltSmgMags
-      #- id: CMBeltRevolver # TODO RMC14 Revolver Holster Belt
+      - id: RMCBeltHolsterSMGPouch
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
-      #- id: CMBeltGeneralPistol # TODO RMC14 General Pistol Holster Belt
       - id: RMCM276ShotgunShellLoadingRig
     - name: Pouches
       choices: { CMPouches: 2 }

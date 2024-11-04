@@ -46,6 +46,8 @@
     - type: CMVendorUser
       points: 45
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "SO"
 
 - type: startingGear
   id: CMGearStaffOfficer
@@ -72,3 +74,4 @@
 
 - type: playTimeTracker
   id: CMJobStaffOfficer
+  isHumanoid: true

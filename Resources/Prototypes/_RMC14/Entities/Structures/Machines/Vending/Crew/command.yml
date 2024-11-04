@@ -127,7 +127,7 @@
       - id: CMBeltUtilityFilled
       - id: CMBeltMedicBagFilled
       - id: CMBeltMedicalFilled
-      - id: RMCBeltSmgMags
+      - id: RMCBeltHolsterSMGPouch
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
       - id: RMCM276ShotgunShellLoadingRig
       - id: RMCBeltGrenade

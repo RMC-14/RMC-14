@@ -11,6 +11,7 @@
   - type: Tag
     tags:
     - Sidearm
+    - RMCRevolver
   - type: Clothing
     slots:
     - suitStorage
@@ -55,3 +56,6 @@
 
 - type: Tag
   id: RMCMagazineRevolver
+
+- type: Tag
+  id: RMCRevolver

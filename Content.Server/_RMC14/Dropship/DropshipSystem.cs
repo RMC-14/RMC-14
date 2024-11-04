@@ -10,7 +10,6 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Rules;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
@@ -24,7 +23,6 @@ using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Dropship;
@@ -259,10 +257,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
             _audio.PlayPvs(dropship.LocalHijackSound, dropshipId.Value);
 
             var marineText = "Unscheduled dropship departure detected from operational area. Hijack likely. Shutting down autopilot.";
-            _marineAnnounce.AnnounceRadio(dropshipId.Value, marineText, dropship.AnnounceHijackIn);
-
-            var marines = Filter.Empty().AddWhereAttachedEntity(e => !HasComp<XenoComponent>(e));
-            _audio.PlayGlobal(dropship.MarineHijackSound, marines, true);
+            _marineAnnounce.AnnounceARES(dropshipId.Value, marineText, dropship.MarineHijackSound, new LocId("rmc-announcement-dropship-message"));
         }
 
         _adminLog.Add(LogType.RMCDropshipLaunch,
