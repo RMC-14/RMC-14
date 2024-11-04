@@ -11,5 +11,5 @@ public sealed partial class CorrodibleComponent : Component
     public bool IsCorrodible = true;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan TimeToApply = TimeSpan.FromSeconds(1);
+    public TimeSpan TimeToApply = TimeSpan.FromSeconds(4);
 }
