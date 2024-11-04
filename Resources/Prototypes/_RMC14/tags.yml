@@ -14,7 +14,7 @@
   id: RMCCartridgeRevolver44
 
 - type: Tag
-  id: RMCCartridgePistol9mmSquashHead
+  id: RCMCartridgePistol9mmSquashHead
 
 - type: Tag
   id: RMCCartridge7x45mm
@@ -65,10 +65,37 @@
   id: RMCSmartPistolHolster
 
 - type: Tag
+  id: RMCGeneralPistolHolster
+
+- type: Tag
+  id: RMCGeneralRevolverHolster
+
+- type: Tag
+  id: RMCSmartGunSidearmHolster
+
+- type: Tag
+  id: RMCSMGHolster
+
+- type: Tag
+  id: RMCSMGPouchHolster
+
+- type: Tag
   id: RMCMK80
 
 - type: Tag
   id: RMCRocketAmmo84mm
+
+- type: Tag
+  id: WeaponSMGM63
+
+- type: Tag
+  id: CMWeaponPistolM1984
+
+- type: Tag
+  id: CMWeaponPistolM77
+
+- type: Tag
+  id: RMCWeaponRevolverM44
 
 - type: Tag
   id: RMCGlass
