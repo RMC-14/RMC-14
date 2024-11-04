@@ -172,27 +172,7 @@
     - whined!
     - whining.
 
-- type: emote
-  id: Howl
-  name: rmc-emote-name-howl
-  category: Vocal
-  available: false
-  whitelist:
-    components:
-    - Vocal
-  blacklist:
-    components:
-    - BorgChassis
-  chatMessages: ["rmc-emote-howl"]
-  chatTriggers:
-    - howl
-    - howl.
-    - howl!
-    - howls
-    - howls.
-    - howls!
-    - howling.
-    - howled.
+
 
 
 

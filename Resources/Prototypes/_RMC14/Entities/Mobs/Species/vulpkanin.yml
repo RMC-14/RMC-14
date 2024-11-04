@@ -15,9 +15,8 @@
     sprite: _RMC14/Mobs/Vulpkanin/parts.rsi
     state: full
   - type: Speech
-    speechSounds: Vulpkanin
     speechVerb: Vulpkanin
-    allowedEmotes: [ 'Bark', 'Snarl', 'Whine', 'Howl', 'Growl' ]
+    allowedEmotes: [ 'Bark', 'Snarl', 'Whine', 'Growl' ]
   - type: Vocal
     sounds:
       Male: MaleVulpkanin
@@ -82,12 +81,6 @@
       - map: [ "head" ]
       - map: [ "pocket1" ]
       - map: [ "pocket2" ]
-      # - shader: StencilMask
-
-      # map: [ "enum.HumanoidVisualLayers.StencilMask" ]
-        # sprite: _RMC14/Mobs/Vulpkanin/masking_helpers.rsi
-        # state: female_full
-        # visible: false
 
 - type: entity
   parent: BaseSpeciesDummy
