@@ -26,6 +26,8 @@
         RMCSkillEngineer: 1
         RMCSkillFirearms: 2
         RMCSkillFireman: 1
+    - type: JobPrefix
+      prefix: "MST"
   hidden: true # TODO RMC14
 
 - type: startingGear

@@ -32,6 +32,8 @@
     - type: CMVendorUser
       points: 45
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: "SG"
 
 - type: startingGear
   id: CMGearSmartGunOperator
@@ -52,6 +54,7 @@
 
 - type: playTimeTracker
   id: CMJobSmartGunOperator
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -13,6 +13,9 @@
   - type: Item
     size: Tiny
     shape: null
+  - type: Tag
+    tags:
+    - Holdout
   - type: Stack
     stackType: Dollar
     count: 1

@@ -97,6 +97,7 @@
   - type: BypassInteractionChecks
   - type: ParalyzeOnPullAttemptImmune
   - type: BypassSkillChecks
+  - type: SeeNewPlayers
 
 - type: entity
   id: ActionAGhostShowSolar

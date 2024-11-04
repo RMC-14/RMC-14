@@ -33,6 +33,8 @@
     - type: CMVendorUser
       points: 45
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: "ComTech"
 
 - type: startingGear
   id: CMGearCombatTech
@@ -56,6 +58,7 @@
 
 - type: playTimeTracker
   id: CMJobCombatTech
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -105,4 +108,3 @@
   - type: SquadSpawner
     squad: SquadDelta
     role: CMCombatTech
-
