@@ -736,7 +736,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronFumbles-The-Rifle
   name: Fumbles-The-Rifle figurine
-  description: ""
+  description: "A friendly grey-blue reptilian with an assortment of spines. Bandages around his hands indicate some kind of previous injury and a hint to his namesake..."
   components:
   - type: Sprite
     state: fumbles-the-rifle
