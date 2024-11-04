@@ -19,9 +19,9 @@
     allowedEmotes: [ 'Bark', 'Snarl', 'Whine', 'Growl' ]
   - type: Vocal
     sounds:
-      Male: MaleVulpkanin
-      Female: FemaleVulpkanin
-      Unsexed: MaleVulpkanin
+      Male: RMCMaleVulpkanin
+      Female: RMCFemaleVulpkanin
+      Unsexed: RMCMaleVulpkanin
   - type: Wagging
     action: ActionToggleVulpkaninWagging
   - type: MeleeWeapon

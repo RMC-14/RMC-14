@@ -1,20 +1,6 @@
 - type: emoteSounds
-  id: MaleVulpkanin
-  params:
-    variation: 0.125
+  id: RMCUnisexVulpkanin
   sounds:
-    Laugh:
-      collection: MaleLaugh
-    Sneeze:
-      collection: MaleSneezes
-    Cough:
-      collection: MaleCoughs
-    Whistle:
-      collection: Whistles
-    Sigh:
-      collection: MaleSigh
-    Scream:
-      collection: MaleScreams
     Growl:
       collection: VulpkaninGrowls
     Snarl:
@@ -25,27 +11,9 @@
       collection: VulpkaninWhines
 
 - type: emoteSounds
-  id: FemaleVulpkanin
-  params:
-    variation: 0.125
-  sounds:
-    Laugh:
-      collection: FemaleLaugh
-    Sneeze:
-      collection: FemaleSneezes
-    Cough:
-      collection: FemaleCoughs
-    Whistle:
-      collection: Whistles
-    Sigh:
-      collection: FemaleSigh
-    Scream:
-      collection: FemaleScreams
-    Growl:
-      collection: VulpkaninGrowls
-    Snarl:
-      collection: VulpkaninSnarls
-    Bark:
-      collection: VulpkaninBarks
-    Whine:
-      collection: VulpkaninWhines
+  parent: [RMCUnisexVulpkanin, RMCMaleHuman]
+  id: RMCMaleVulpkanin
+
+- type: emoteSounds
+  parent: [RMCUnisexVulpkanin, RMCFemaleHuman]
+  id: RMCFemaleVulpkanin
