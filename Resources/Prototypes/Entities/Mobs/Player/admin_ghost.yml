@@ -51,6 +51,11 @@
       enum.GeneralStationRecordConsoleKey.Key:
       # who the fuck named this bruh
         type: GeneralStationRecordConsoleBoundUserInterface
+      enum.XenoFindParasiteUI.Key:
+        type: FindParasiteBoundUserInterface
+        requireInputValidation: false
+      enum.TacticalMapUserUi.Key:
+        type: TacticalMapUserBui
   - type: IntrinsicUI
     uis:
       enum.SolarControlConsoleUiKey.Key:
