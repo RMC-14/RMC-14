@@ -4,7 +4,7 @@
   id: Vulpkanin
   name: species-name-vulpkanin
   roundStart: true
-  prototype: CMMobVulpkanin
+  prototype: RMCMobVulpkanin
   sprites: MobVulpkaninSprites
   defaultSkinTone: "#985629"
   markingLimits: MobVulpkaninMarkingLimits
