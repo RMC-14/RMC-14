@@ -132,8 +132,8 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-     #- id: CMM802SmartGunOperatorSidearmBeltFilled
       - id: CMBeltSmartGunOperatorFilled
+      - id: RMCBeltSmartGunOperatorPistolFilled
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
