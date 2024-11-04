@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: ShadowCommander
-  changes:
-  - message: Holster keybinds now equip to equipped holsters before inventory slots.
-    type: Tweak
-  id: 431
-  time: '2024-07-22T10:41:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2933
 - author: DrSmugleaf
   changes:
   - message: Added Spray Acid ability for the Spitter. This replaces the placeholder
@@ -4901,5 +4894,13 @@
   id: 930
   time: '2024-11-03T03:03:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4685
+- author: Rainbeon
+  changes:
+  - message: Fixed Xeno Spit Projectiles and Runner Bone Chips not shooting where
+      you are actually aiming.
+    type: Fix
+  id: 931
+  time: '2024-11-04T01:56:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4693
 Name: RMC14
 Order: -1
