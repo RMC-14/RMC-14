@@ -81,13 +81,14 @@
       - map: [ "mask" ]
       - map: [ "head" ]
       - map: [ "pocket1" ]
-      - map: [ "pocket2" ]    
-      - shader: StencilMask
-        map: [ "enum.HumanoidVisualLayers.StencilMask" ]
-        sprite: _RMC14/Mobs/Vulpkanin/masking_helpers.rsi
-        state: female_full
-        visible: false
-      
+      - map: [ "pocket2" ]
+      # - shader: StencilMask
+
+      # map: [ "enum.HumanoidVisualLayers.StencilMask" ]
+        # sprite: _RMC14/Mobs/Vulpkanin/masking_helpers.rsi
+        # state: female_full
+        # visible: false
+
 - type: entity
   parent: BaseSpeciesDummy
   name: Vulpkanin Dummy

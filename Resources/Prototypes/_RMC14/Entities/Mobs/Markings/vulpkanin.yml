@@ -142,7 +142,6 @@
   id: VulpSnouted
   bodyPart: Snout
   markingCategory: Snout
-  forcedColouring: true
   speciesRestriction: []
   sprites:
   - sprite: _RMC14/Mobs/Vulpkanin/parts.rsi

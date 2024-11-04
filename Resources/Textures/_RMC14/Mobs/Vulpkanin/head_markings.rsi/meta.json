@@ -4,7 +4,11 @@
   "copyright": "Taken from https://github.com/DeltaV-Station/Delta-v/commit/65d35d0b3c20aa4e8a0e749a4de8392e53051e86",
   "size": {"x": 32, "y": 32},
   "states": [
-    {
+      {
+       "name": "nose",
+       "directions": 4
+      },
+      {
       "name": "tiger_face",
       "directions": 4
     },
