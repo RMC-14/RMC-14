@@ -68,14 +68,14 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     private void OnXenoCorrosiveAcid(Entity<XenoAcidComponent> xeno, ref XenoCorrosiveAcidEvent args)
     {
         if (xeno.Owner != args.Performer ||
-            !CheckCorrodiblePopups(xeno, args.Target))
+            !CheckCorrodiblePopups(xeno, args.Target, out var time))
         {
             return;
         }
 
         args.Handled = true;
 
-        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.AcidDelay, new XenoCorrosiveAcidDoAfterEvent(args), xeno, args.Target)
+        var doAfter = new DoAfterArgs(EntityManager, xeno, time, new XenoCorrosiveAcidDoAfterEvent(args), xeno, args.Target)
         {
             BreakOnMove = true,
             RequireCanInteract = false,
@@ -99,7 +99,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         if (args.Handled || args.Cancelled || args.Target is not { } target)
             return;
 
-        if (!CheckCorrodiblePopups(xeno, target))
+        if (!CheckCorrodiblePopups(xeno, target, out var _))
             return;
 
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
@@ -124,8 +124,9 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         });
     }
 
-    private bool CheckCorrodiblePopups(Entity<XenoAcidComponent> xeno, EntityUid target)
+    private bool CheckCorrodiblePopups(Entity<XenoAcidComponent> xeno, EntityUid target, out TimeSpan time)
     {
+        time = TimeSpan.Zero;
         if (!TryComp(target, out CorrodibleComponent? corrodible) ||
             !corrodible.IsCorrodible)
         {
@@ -138,6 +139,8 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("cm-xeno-acid-already-corroding", ("target", target)), xeno, xeno);
             return false;
         }
+
+        time = corrodible.TimeToApply;
 
         return true;
     }
