@@ -137,6 +137,17 @@
       state: dalmatian
 
 # Head Markings (Snout)
+
+- type: marking
+  id: VulpSnouted
+  bodyPart: Snout
+  markingCategory: Snout
+  forcedColouring: true
+  speciesRestriction: []
+  sprites:
+  - sprite: _RMC14/Mobs/Vulpkanin/parts.rsi
+    state: snout
+
 - type: marking
   id: VulpSnoutAlt
   bodyPart: Snout
@@ -182,15 +193,6 @@
       state: nose
 
 - type: marking
-  id: VulpSnoutNose
-  bodyPart: Snout
-  markingCategory: Snout
-  speciesRestriction: [Vulpkanin]
-  sprites:
-    - sprite: _RMC14/Mobs/Vulpkanin/head_markings.rsi
-      state: nose
-
-- type: marking
   id: VulpSnoutMask
   bodyPart: Snout
   markingCategory: Snout
@@ -209,15 +211,6 @@
   sprites:
     - sprite: _RMC14/Mobs/Vulpkanin/head_markings.rsi
       state: vulpine
-    - sprite: _RMC14/Mobs/Vulpkanin/head_markings.rsi
-      state: vulpine-lines
-
-- type: marking
-  id: VulpSnoutSwift
-  bodyPart: Snout
-  markingCategory: Snout
-  speciesRestriction: [Vulpkanin]
-  sprites:
     - sprite: _RMC14/Mobs/Vulpkanin/head_markings.rsi
       state: vulpine-lines
 
