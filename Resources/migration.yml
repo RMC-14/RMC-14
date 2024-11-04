@@ -899,3 +899,10 @@ BaseAdvancedPen: Pen
 
 # 2024-10-28
 ColMarTechExecutiveOfficerEquipment: ColMarTechSeniorOfficerEquipment
+
+# 2024-11-2
+ToolboxArtistic: RMCToolboxMechanicalGreen
+ToolboxArtisticFilled: RMCToolboxMechanicalGreenFilled
+ToolboxSyndicate: RMCToolboxSyndicate
+ToolboxSyndicateFilled: RMCToolboxSyndicateFilled
+Bible: RMCBible

@@ -1,36 +1,4 @@
 ﻿Entries:
-- author: ShadowCommander
-  changes:
-  - message: Holster keybinds now equip to equipped holsters before inventory slots.
-    type: Tweak
-  id: 431
-  time: '2024-07-22T10:41:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2933
-- author: DrSmugleaf
-  changes:
-  - message: Added Spray Acid ability for the Spitter. This replaces the placeholder
-      scattered spit ability that Spitters temporarily had.
-    type: Add
-  id: 432
-  time: '2024-07-22T10:48:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3157
-- author: musicmanvr
-  changes:
-  - message: Added floodlights to help be a light in the darkness.
-    type: Add
-  id: 433
-  time: '2024-07-22T10:59:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3151
-- author: blueDev2
-  changes:
-  - message: Multiple people wiring the same barricade no longer wastes barbed wire.
-    type: Fix
-  - message: Attempting to wire another cade while already wiring does not cancel
-      the original wiring.
-    type: Tweak
-  id: 434
-  time: '2024-07-22T11:00:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3155
 - author: musicmanvr
   changes:
   - message: Ported the M44 combat revolver, find it in your nearest vendor!
@@ -4901,5 +4869,47 @@
   id: 930
   time: '2024-11-03T03:03:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4685
+- author: Rainbeon
+  changes:
+  - message: Fixed Xeno Spit Projectiles and Runner Bone Chips not shooting where
+      you are actually aiming.
+    type: Fix
+  id: 931
+  time: '2024-11-04T01:56:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4693
+- author: crystalHex
+  changes:
+  - message: Added the general pistol holster rig, revolver holster rig, smart gun
+      operator sidearm belt and M63 holster rig (without pouches).
+    type: Add
+  id: 932
+  time: '2024-11-04T02:00:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3625
+- author: crystalHex
+  changes:
+  - message: Added a verb to the context menu to allow for webbing to be removed from
+      dead marines without stripping them of their uniform (and dignity).
+    type: Tweak
+  id: 933
+  time: '2024-11-04T02:03:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4666
+- author: DrSmugleaf
+  changes:
+  - message: Fixed telephones not listing a marine's squad.
+    type: Fix
+  - message: Fixed telephone category order not being consistent.
+    type: Fix
+  - message: Fixed the dropship hijack alert not being shown in chat.
+    type: Fix
+  - message: Fixed dropships landing one tile lower than intended on New Varadero
+      west LZ.
+    type: Fix
+  - message: Fixed New Varadero having no turrets.
+    type: Fix
+  - message: Fixed a spot where you could escape the map bounds on New Varadero.
+    type: Fix
+  id: 934
+  time: '2024-11-04T04:15:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4691
 Name: RMC14
 Order: -1

@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared.Actions;
 using Content.Shared.Audio;
 using Content.Shared.Hands.EntitySystems;
@@ -23,6 +24,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -386,6 +388,9 @@ public abstract class SharedTelephoneSystem : EntitySystem
         name = Name(holder);
         if (TryComp(holder, out JobPrefixComponent? jobPrefix))
             name = $"{jobPrefix.Prefix} {name}";
+
+        if (_squad.TryGetMemberSquad(holder, out var squad))
+            name = $"{name} ({Name(squad)})";
 
         return name;
     }
