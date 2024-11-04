@@ -1,11 +1,29 @@
+﻿- type: job
+  parent: CMSurvivor
+  id: RMCSecuritySurvivor
+  name: cm-job-name-survivor #make new name
+  description: cm-job-description-survivor # Make new description
+  startingGear: RMCGearSurvivor
+  accessGroups:
+  - Colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillPolice: 2
+        RMCSkillCqc: 2
+    - type: EquipSurvivorPreset
+      preset: #RMCSurvivorPresetSecurity
+
 ﻿- type: startingGear
   id: RMCGearSurvivorSecurity
   equipment:
     head: CMHeadBeretRed
-    jumpsuit: CMJumpsuitColonist # /obj/item/clothing/under/rank/security
+    jumpsuit: ClothingUniformJumpsuitSec 
     back: CMSatchelSecurity
-    shoes: CMBootsBlack # jackboots
-    id: CMIDCardColonist
+    shoes: RMCShoesJackboots
+    id: CMIDCardColonist # Marshalls actually get a badge looking thang
     ears: CMHeadsetColony
     pocket1: RMCM5Bayonet
     pocket2: RMCFlashlight
