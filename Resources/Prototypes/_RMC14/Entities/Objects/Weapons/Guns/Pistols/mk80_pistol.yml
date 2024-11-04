@@ -136,3 +136,6 @@
 
 - type: Tag
   id: CMMagazinePistolMK80
+
+- type: Tag
+  id: RMCCartridgePistol9mmSquashHead
