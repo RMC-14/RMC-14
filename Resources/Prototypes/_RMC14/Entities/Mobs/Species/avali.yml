@@ -2,7 +2,7 @@
   save: false
   parent: CMBaseMobSpeciesOrganic
   id: CMMobAvali
-  name: Urist C-M McRaptor
+  name: Urist C.M McRaptor
   suffix: RMC14
   components:
   - type: HumanoidAppearance

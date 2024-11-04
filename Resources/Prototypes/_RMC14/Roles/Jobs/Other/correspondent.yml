@@ -27,6 +27,8 @@
       skills:
         RMCSkillFirearms: 0
         RMCSkillVehicles: 1
+    - type: JobPrefix
+      prefix: "PRESS" # TODO RMC14 combat correspondent is CC
   hasIcon: false
 
 - type: startingGear
@@ -56,3 +58,4 @@
 
 - type: playTimeTracker
   id: CMJobCorrespondent
+  isHumanoid: true

@@ -34,6 +34,8 @@
         RMCSkillResearch: 1
     - type: MarineOrders
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "IO"
   hidden: true # TODO RMC14
 
 - type: startingGear
@@ -58,4 +60,5 @@
     - state: intel_officer
 
 - type: playTimeTracker
+  isHumanoid: true
   id: CMJobIntelOfficer

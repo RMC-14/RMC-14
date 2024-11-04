@@ -39,6 +39,8 @@
     - type: CMVendorUser
       points: 45
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "DP"
 
 - type: startingGear
   id: CMGearPilotDropship
@@ -64,3 +66,4 @@
 
 - type: playTimeTracker
   id: CMJobPilotDropship
+  isHumanoid: true

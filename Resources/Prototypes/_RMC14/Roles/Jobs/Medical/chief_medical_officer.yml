@@ -40,6 +40,8 @@
     - type: RMCUserBulkyArmorIncapable
     - type: MarineOrders
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "CMO"
 
 - type: startingGear
   id: CMGearCMO
@@ -79,3 +81,4 @@
 
 - type: playTimeTracker
   id: CMJobCMO
+  isHumanoid: true

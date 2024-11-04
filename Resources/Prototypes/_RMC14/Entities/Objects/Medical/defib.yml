@@ -78,6 +78,7 @@
   suffix: RMC14
   components:
   - type: PowerCellDraw
+    enabled: false
     useRate: 100
 
 - type: entity

@@ -69,6 +69,20 @@
     event: !type:SoundActionEvent
     useDelay: 10
 
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionTelephone
+  name: Use Phone
+  description: Used to call another phone.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Objects/phone.rsi
+      state: rpb_phone
+    event: !type:TelephoneActionEvent
+    useDelay: 0.5
+
 - type: Tag
   id: RMCActionCycleZoomLevel
 

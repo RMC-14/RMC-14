@@ -53,6 +53,8 @@
         RMCSkillVehicles: 1
     - type: MarineOrders
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "ASO"
 
 - type: startingGear
   id: CMGearASO
@@ -81,3 +83,4 @@
 
 - type: playTimeTracker
   id: CMJobAuxiliarySupportOfficer
+  isHumanoid: true
