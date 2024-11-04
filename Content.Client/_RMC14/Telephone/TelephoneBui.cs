@@ -85,14 +85,20 @@ public sealed class TelephoneBui(EntityUid owner, Enum uiKey) : BoundUserInterfa
                 if (child is not ScrollContainer scroll)
                     continue;
 
-                var phoneButton = new Button
+                foreach (var scrollChild in scroll.Children)
                 {
-                    Text = phone.Name,
-                    StyleClasses = { "OpenBoth" },
-                };
-                phoneButton.OnPressed += _ => SendPredictedMessage(new TelephoneCallBuiMsg(phone.Id));
-                scroll.AddChild(phoneButton);
-                break;
+                    if (scrollChild is not BoxContainer category)
+                        continue;
+
+                    var phoneButton = new Button
+                    {
+                        Text = phone.Name,
+                        StyleClasses = { "OpenBoth" },
+                    };
+                    phoneButton.OnPressed += _ => SendPredictedMessage(new TelephoneCallBuiMsg(phone.Id));
+                    scroll.AddChild(phoneButton);
+                    break;
+                }
             }
         }
 
