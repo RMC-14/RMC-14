@@ -33,42 +33,36 @@ public abstract class SharedSightRestrictionSystem : EntitySystem
 
     // Maximum sight restriction
     private readonly SightRestrictionDefinition _maxRestrict =
-        new SightRestrictionDefiniton(3.0, 2.0, 1.0, 0.0);
+        new SightRestrictionDefinition(3.0, 2.0, 1.0, 0.0);
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<SightRestrictionItemComponent, ComponentStartup>(OnSightRestrictionStartup);
+        SubscribeLocalEvent<SightRestrictionItemComponent, ItemToggledEvent>(OnToggled);
 
         SubscribeLocalEvent<SightRestrictionComponent, SightRestrictionChangedEvent>(OnSightRestrictionChanged);
-
-
-
     }
 
     private void OnSightRestrictionStartup(Entity<SightRestrictionItemComponent> ent, ref ComponentStartup args)
     {
+        TODO: Fix this!
+        var user = Transform(ent).ParentUid;
+        if (!user.IsValid())
+            return;
 
+        AddSightRestrict(user, ent);
     }
 
-    private void OnSightRestrictionChanged(Entity<SightRestrictionComponent> user, SightRestrictionChangedEvent args)
+    private void OnSightRestrictionChanged(Entity<SightRestrictionComponent> user, ref SightRestrictionChangedEvent args)
     {
         if (user.Comp.Restrictions.Count == 0)
         {
             RemoveAllSightRestrict(user);
             return;
         }
-
-
     }
-
-    // If entity already has sight restrict component, compare if new values greater
-    // If yes, increase restriction and remember old restriction
-    // If no, retain old restriction, but remember new restriction
-
-    // Better yet, add all restrictions to list, sort it by restriction size, apply strongest restriction
-    // AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
     public void AddSightRestrict(EntityUid user, Entity<SightRestrictionItemComponent> item)
     {
@@ -83,22 +77,19 @@ public abstract class SharedSightRestrictionSystem : EntitySystem
     }
 
     // Removes restriction given by 'item' from 'user'
-    public void RemoveSightRestrict(Entity<SightRestrictionComponent?> user, EntityUid? item)
+    public void RemoveSightRestrict(Entity<SightRestrictionComponent> user, EntityUid item)
     {
-        if (!Resolve(user, ref user.Comp))
-            return;
-
         var sightRestrict = user.Comp.Restrictions;
 
-        if (sightRestrict.ContainsKey(item.Owner))
-            sightRestrict.Remove(item.Owner);
+        if (sightRestrict.ContainsKey(item))
+            sightRestrict.Remove(item);
 
         var ev = new SightRestrictionChangedEvent();
         RaiseLocalEvent(user, ev);
     }
 
     // Remove all sight restrictions from user
-    public void RemoveAllSightRestrict(Entity<SightRestrictionComponent?> user)
+    public void RemoveAllSightRestrict(Entity<SightRestrictionComponent> user)
     {
         RemCompDeferred<SightRestrictionComponent>(user.Owner);
 

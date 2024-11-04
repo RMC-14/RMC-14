@@ -1,11 +1,12 @@
 ﻿using Content.Shared._RMC14.EyeProtection;
+using Content.Shared._RMC14.SightRestriction;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Player;
 
-namespace Content.Client._RMC14.EyeProtection;
+namespace Content.Client._RMC14.SightRestriction;
 
-public sealed class RMCEyeProtectionSystem : SharedRMCEyeProtectionSystem
+public sealed class SightRestrictionSystem : SharedSightRestrictionSystem
 {
     [Dependency] private readonly IOverlayManager _overlayManager = default!;
     [Dependency] private readonly IPlayerManager _player = default!;

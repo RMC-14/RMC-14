@@ -193,6 +193,11 @@
     components:
     - type: EyeProtection
     - type: SightRestrictionItem
+      restriction:
+        impairFull: 3.0
+        impairPartial: 2.0
+        alphaOuter: 1.0
+        alphaInner: 0.0
   - type: GenericVisualizer
     visuals:
       enum.RMCEyeProtectionItemVisuals.Active:

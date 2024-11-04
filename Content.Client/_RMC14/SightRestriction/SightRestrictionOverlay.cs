@@ -1,10 +1,11 @@
 ﻿using Content.Shared._RMC14.EyeProtection;
+using Content.Shared._RMC14.SightRestriction;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client._RMC14.EyeProtection;
+namespace Content.Client._RMC14.SightRestriction;
 
 public sealed class SightRestrictionOverlay : Overlay
 {
@@ -47,6 +48,18 @@ public sealed class SightRestrictionOverlay : Overlay
         if (!_entityManager.TryGetComponent<SightRestrictionComponent>(playerEntity, out var sightRestrict))
             return;
 
+        var restrictions = sightRestrict.Restrictions;
+        if (restrictions.Count == 0)
+            return;
+
+        // TODO: find strongest restriction and apply it
+        var appliedRestrict = new SightRestrictionDefinition();
+        foreach (var currentRestrict in restrictions.Values)
+        {
+            if (currentRestrict > appliedRestrict)
+                appliedRestrict = currentRestrict;
+        }
+
         var handle = args.WorldHandle;
         var viewport = args.WorldAABB;
         var viewportHeight = args.ViewportBounds.Height;
@@ -54,13 +67,13 @@ public sealed class SightRestrictionOverlay : Overlay
         // Actual height of viewport in tiles, accounting for zoom
         var actualTilesHeight = _maxTilesHeight * eyeComp.Zoom.X;
 
-        var outerRadiusRatio = (_maxTilesHeight - sightRestrict.ImpairFull) / actualTilesHeight / 2;
-        var innerRadiusRatio = (_maxTilesHeight - sightRestrict.ImpairFull - sightRestrict.ImpairPartial) / actualTilesHeight / 2;
+        var outerRadiusRatio = (_maxTilesHeight - appliedRestrict.ImpairFull.Float()) / actualTilesHeight / 2;
+        var innerRadiusRatio = (_maxTilesHeight - appliedRestrict.ImpairFull.Float() - appliedRestrict.ImpairPartial.Float()) / actualTilesHeight / 2;
 
         _innerRadius = innerRadiusRatio * viewportHeight;
         _outerRadius = outerRadiusRatio * viewportHeight;
-        _darknessAlphaInner = sightRestrict.AlphaInner;
-        _darknessAlphaOuter = sightRestrict.AlphaOuter;
+        _darknessAlphaInner = appliedRestrict.AlphaInner.Float();
+        _darknessAlphaOuter = appliedRestrict.AlphaOuter.Float();
 
         // Shouldn't be time-variant
         _sightRestrictShader.SetParameter("time", 0.0f);

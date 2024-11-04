@@ -1,32 +1,46 @@
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.SightRestriction;
 
 [DataDefinition]
+[Serializable, NetSerializable]
 public partial struct SightRestrictionDefinition
 {
     /// <summary>
     ///     Radius of full sight restriction in tiles counted from screen edge
     /// </summary>
     [DataField]
-    public FixedPoint2 ImpairFull = 3.0f;
+    //public FixedPoint2 ImpairFull = 3.0f;
+    public FixedPoint2 ImpairFull;
     /// <summary>
     ///     Radius of partial sight restriction in tiles counted from edge of full sight restriction
     /// </summary>
     [DataField]
-    public FixedPoint2 ImpairPartial = 2.0f;
+    //public FixedPoint2 ImpairPartial = 2.0f;
+    public FixedPoint2 ImpairPartial;
 
     /// <summary>
     ///     Alpha component of full sight restriction
     /// </summary>
     [DataField]
-    public FixedPoint2 AlphaOuter = 1.0f;
+    //public FixedPoint2 AlphaOuter = 1.0f;
+    public FixedPoint2 AlphaOuter;
     /// <summary>
     ///     Alpha component of unrestricted sight; the alpha of partial sight restriction is a gradient between this and AlphaOuter
     /// </summary>
     [DataField]
-    public FixedPoint2 AlphaInner = 0.0f;
+    //public FixedPoint2 AlphaInner = 0.0f;
+    public FixedPoint2 AlphaInner;
+
+    public SightRestrictionDefinition()
+    {
+        ImpairFull = 0;
+        ImpairPartial = 0;
+        AlphaOuter = 0;
+        AlphaInner = 0;
+    }
 
     public SightRestrictionDefinition(
         FixedPoint2 impairFull, FixedPoint2 impairPartial,

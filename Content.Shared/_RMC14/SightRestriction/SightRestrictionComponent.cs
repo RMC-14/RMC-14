@@ -6,7 +6,7 @@ namespace Content.Shared._RMC14.SightRestriction;
 /// <summary>
 ///     Component for restricting the sight of a player; this one's attached to the item
 /// </summary>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedSightRestrictionSystem))]
 public sealed partial class SightRestrictionItemComponent : Component
 {
@@ -20,7 +20,7 @@ public sealed partial class SightRestrictionItemComponent : Component
 /// <summary>
 ///     Component for restricting the sight of a player; this one's attached to the player
 /// </summary>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedSightRestrictionSystem))]
 public sealed partial class SightRestrictionComponent : Component
 {
