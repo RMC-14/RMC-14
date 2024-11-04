@@ -133,17 +133,19 @@
         amount: 2
       - id: CMBeltMarine
         amount: 15
-      #- id: M276 General Pistol Holster Rig
-      #  amount: 10
+      - id: RMCBeltHolsterPistol
+        amount: 10
       - id: CMBeltKnifeFilled
         name: M276 Knife Rig (Full)
         amount: 5
-      - id: RMCBeltSmgMags
+      - id: RMCBeltHolsterSMG
         amount: 5
-      #- id: M276 M40 Grenade Rig
-      #  amount: 2
-      #- id: M276 M44 Holster Rig
-      #   amount: 5
+      - id: RMCBeltHolsterSMGPouch
+        amount: 5
+      - id: RMCBeltGrenade
+        amount: 2
+      - id: RMCBeltHolsterRevolver
+        amount: 5
       #- id: M276 M82F Holster Rig
       #  amount: 2
       - id: RMCM276ShotgunShellLoadingRig

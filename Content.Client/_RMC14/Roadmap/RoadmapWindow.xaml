@@ -22,6 +22,7 @@
             <BoxContainer Name="Columns" Access="Public" Orientation="Horizontal">
                 <BoxContainer Name="FirstVersion" Access="Public" Orientation="Vertical" HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Current version" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Communications objective" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Engineering skill" Text="Allows you to repair and hack more advanced constructs" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno strains" Text="Variations of a xeno caste with different stats and abilities" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Praetorian" Text="Tier 3 xeno" />
@@ -44,6 +45,7 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Firearms skill" Text="Each marine role has a different firearms skill. This impacts how accurate they are with guns" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="New Varadero" Text="Planet map, ported by Aurallianz Star" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Survivors" Text="A role that starts on the planet and must try to survive until rescued by the Marines" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Engineering staff" Text="Maintenance technician and the Chief Engineer" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Carrier" Text="Carry parasites around, allowing the Hive to impregnate new hosts on the move. Use pheromones to assist fellow Aliens" />
@@ -71,7 +73,6 @@
                     <controls:RoadmapVersionHeader Text="Upcoming" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Burrower" Text="Lay the foundations for resin traps in strategic locations or the Hive's flanks. Flank your way around the map with the tunnel ability and dig tunnels to allow for quick transportation of fellow Aliens from the hive to the frontlines" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Intelligence officer" />
-                    <controls:RoadmapItem ItemState="InProgress" HeaderText="New Varadero" Text="Planet map, ported by Aurallianz Star" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Blood types" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Ravager" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Limb damage" Text="Each limb on a marine will be able to take damage separately, being able to detach upon receiving too much damage and requiring individual treatment" />
@@ -82,7 +83,6 @@
                 <BoxContainer Name="ThirdVersion" Access="Public" Orientation="Vertical"  HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Future versions" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="More lobby art and music" Text="We are always looking for people to contribute more lobby art and music!" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Communications objective" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Nuke endgame" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Synthetics" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Emergency responders" Text="A faction that randomly spawns, with their own objectives" />

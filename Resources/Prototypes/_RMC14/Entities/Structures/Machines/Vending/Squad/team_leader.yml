@@ -168,10 +168,11 @@
       - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
         recommended: true
-    #- id: CMM276GeneralPistolHolsterRig
-      - id: RMCBeltSmgMags
-    #- id: CMM276M44HolsterRig
-    #- id: CMM276M82FHolsterRig
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterSMG
+      - id: RMCBeltHolsterSMGPouch
+    #- id: RMCBeltHolsterFlareGun
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
         recommended: true

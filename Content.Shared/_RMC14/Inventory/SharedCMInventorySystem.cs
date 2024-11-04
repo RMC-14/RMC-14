@@ -118,11 +118,16 @@ public abstract class SharedCMInventorySystem : EntitySystem
         if (comp.Contents.Count == 0)
             return;
 
+        // CMItemSlots-based holsters have their own eject verb, no need to add a duplicate
+        if (HasComp<CMItemSlotsComponent>(holster))
+            return;
+
         AlternativeVerb holsterVerb = new()
         {
             Act = () => Unholster(args.User, holster, out _),
-            Text = Loc.GetString("rmc-holster-verb"),
-            Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/eject.svg.192dpi.png"))
+            Text = Loc.GetString("rmc-storage-holster-eject-verb"),
+            IconEntity = GetNetEntity(comp.Contents[0]),
+            Priority = 5 // Higher priority to appear above folding verbs (for webbing-based holsters)
         };
         args.Verbs.Add(holsterVerb);
     }
@@ -287,7 +292,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
         }
 
         _appearance.SetData(ent, CMHolsterLayers.Fill, visuals);
-        _appearance.SetData(ent, CMHolsterLayers.Size, size);
     }
 
     private bool SlotCanInteract(EntityUid user, EntityUid holster, [NotNullWhen(true)] out ItemSlotsComponent? itemSlots)
