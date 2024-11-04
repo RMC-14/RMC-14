@@ -96,7 +96,7 @@ public sealed class TelephoneBui(EntityUid owner, Enum uiKey) : BoundUserInterfa
                         StyleClasses = { "OpenBoth" },
                     };
                     phoneButton.OnPressed += _ => SendPredictedMessage(new TelephoneCallBuiMsg(phone.Id));
-                    scroll.AddChild(phoneButton);
+                    category.AddChild(phoneButton);
                     break;
                 }
             }
