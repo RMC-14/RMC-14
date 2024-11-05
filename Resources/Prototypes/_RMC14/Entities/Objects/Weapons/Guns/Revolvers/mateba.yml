@@ -19,6 +19,8 @@
     capacity: 6
     chambers: [ True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null ]
+  - type: GunDamageModifier
+    multiplier: 1.5
   - type: RMCSelectiveFire
     baseFireRate: 1.111
     scatterWielded: 8
@@ -107,9 +109,9 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 72
+        Piercing: 60
   - type: CMArmorPiercing
-    amount: 5
+    amount: 20
   - type: RMCStunOnHit
     maxRange: 4
     stunTime: 1
