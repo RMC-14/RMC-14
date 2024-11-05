@@ -8,6 +8,8 @@ namespace Content.Client._RMC14.Telephone;
 
 public sealed class TelephoneBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
+    private static readonly List<string> TabOrder = new() { "MP Dept.", "Almayer", "Command", "Offices", "ARES", "Dropship", "Marine" };
+
     private TelephoneWindow? _window;
 
     protected override void Open()
@@ -34,46 +36,85 @@ public sealed class TelephoneBui(EntityUid owner, Enum uiKey) : BoundUserInterfa
             return;
 
         _window.Tabs.DisposeAllChildren();
-        var categories = new Dictionary<string, BoxContainer>();
+        var tabs = new Dictionary<string, BoxContainer>();
         foreach (var phone in state.Phones)
         {
-            if (!categories.TryGetValue(phone.Category, out var category))
+            if (!tabs.TryGetValue(phone.Category, out var tab))
             {
-                category = new BoxContainer { Orientation = LayoutOrientation.Vertical };
-                categories[phone.Category] = category;
+                tab = new BoxContainer { Orientation = LayoutOrientation.Vertical };
+                tabs[phone.Category] = tab;
+
+                var scroll = new ScrollContainer
+                {
+                    HScrollEnabled = false,
+                    VScrollEnabled = true,
+                    VerticalExpand = true,
+                };
+
+                var category = new BoxContainer { Orientation = LayoutOrientation.Vertical };
+                scroll.AddChild(category);
 
                 var searchBar = new LineEdit();
-                category.AddChild(searchBar);
+                tab.AddChild(searchBar);
+                tab.AddChild(scroll);
 
                 searchBar.OnTextChanged += args =>
                 {
-                    foreach (var container in _window.Tabs.GetControlOfType<BoxContainer>())
+                    foreach (var scroll in _window.Tabs.GetControlOfType<ScrollContainer>())
                     {
-                        foreach (var child in container.Children)
+                        foreach (var container in scroll.GetControlOfType<BoxContainer>())
                         {
-                            if (child is LineEdit otherBar)
+                            foreach (var child in container.Children)
                             {
-                                otherBar.SetText(args.Text, false);
-                            }
-                            else if (child is Button button)
-                            {
-                                button.Visible = button.Text?.Contains(args.Text, StringComparison.OrdinalIgnoreCase) ?? false;
+                                if (child is LineEdit otherBar)
+                                {
+                                    otherBar.SetText(args.Text, false);
+                                }
+                                else if (child is Button button)
+                                {
+                                    button.Visible = button.Text?.Contains(args.Text, StringComparison.OrdinalIgnoreCase) ?? false;
+                                }
                             }
                         }
                     }
                 };
-
-                _window.Tabs.AddChild(category);
-                TabContainer.SetTabTitle(category, phone.Category);
             }
 
-            var phoneButton = new Button
+            foreach (var child in tab.Children)
             {
-                Text = phone.Name,
-                StyleClasses = { "OpenBoth" },
-            };
-            phoneButton.OnPressed += _ => SendPredictedMessage(new TelephoneCallBuiMsg(phone.Id));
-            category.AddChild(phoneButton);
+                if (child is not ScrollContainer scroll)
+                    continue;
+
+                foreach (var scrollChild in scroll.Children)
+                {
+                    if (scrollChild is not BoxContainer category)
+                        continue;
+
+                    var phoneButton = new Button
+                    {
+                        Text = phone.Name,
+                        StyleClasses = { "OpenBoth" },
+                    };
+                    phoneButton.OnPressed += _ => SendPredictedMessage(new TelephoneCallBuiMsg(phone.Id));
+                    category.AddChild(phoneButton);
+                    break;
+                }
+            }
+        }
+
+        foreach (var categoryName in TabOrder)
+        {
+            if (tabs.Remove(categoryName, out var category))
+            {
+                _window.Tabs.AddChild(category);
+                TabContainer.SetTabTitle(category, categoryName);
+            }
+        }
+
+        foreach (var (categoryName, category) in tabs)
+        {
+            _window.Tabs.AddChild(category);
+            TabContainer.SetTabTitle(category, categoryName);
         }
     }
 }

@@ -35,11 +35,10 @@
     - name: Uniform
       choices: { CMUniform: 1 }
       entries:
-      - id: RMCScrubsLightBlue
       - id: CMScrubsGreen
       - id: CMScrubsBlue
+      - id: RMCScrubsLightBlue
       - id: CMScrubsPurple
-      - id: CMScrubsOrange
       - id: RMCScrubsOlive
       - id: RMCScrubsGrey
 #    - name: Suit

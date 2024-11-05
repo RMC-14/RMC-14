@@ -1,106 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added crash landing back to the planet when outside the dropship or in
-      space far away from the warship. Ending up outside the dropship during FTL will
-      now crash land you to a random spot on the planet and instantly kill you.
-    type: Add
-  - message: Fixed xenos being able to hug the outsides of the dropship to hitch a
-      ride.
-    type: Fix
-  - message: Fixed the command tablet in Savannah not being accessible to anyone but
-      the CO. It is now located in the CIC.
-    type: Fix
-  - message: Fixed Savannah having two groundside operation consoles.
-    type: Fix
-  id: 424
-  time: '2024-07-22T10:19:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3170
-- author: DrSmugleaf
-  changes:
-  - message: The Dropship landing gibbing you now has half a tile less range.
-    type: Tweak
-  id: 425
-  time: '2024-07-22T10:19:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3172
-- author: Whisper
-  changes:
-  - message: Pretzels are no longer made of meatballs.
-    type: Fix
-  id: 426
-  time: '2024-07-22T10:18:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3201
-- author: DrSmugleaf
-  changes:
-  - message: Added designating primary landing zone. This will make an ARES announcement
-      and make the other landing zone unable to be hijacked by the Queen. If no landing
-      zone is made primary after 25 minutes, one will automatically be chosen.
-    type: Add
-  - message: Fixed there being no initial 15 minute cooldown for calling down a ship
-      for a hijack.
-    type: Fix
-  - message: Fixed being able to call two dropships down to the same spot for hijack.
-    type: Fix
-  id: 427
-  time: '2024-07-22T10:20:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3177
-- author: Dutch-VanDerLinde
-  changes:
-  - message: The xeno pheromones menu is now a radial menu rather than a window
-    type: Tweak
-  id: 428
-  time: '2024-07-22T10:34:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3191
-- author: Whisper
-  changes:
-  - message: Fences and catwalks are no longer buildable. Fences are still able to
-      be deconstructed.
-    type: Fix
-  - message: catwalks are no longer able to be deconstructed.
-    type: Fix
-  id: 429
-  time: '2024-07-22T10:35:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3200
-- author: Vermidia
-  changes:
-  - message: You can now inject and draw from blood bags, but they will only inject
-      blood in them
-    type: Add
-  id: 430
-  time: '2024-07-22T10:41:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3175
-- author: ShadowCommander
-  changes:
-  - message: Holster keybinds now equip to equipped holsters before inventory slots.
-    type: Tweak
-  id: 431
-  time: '2024-07-22T10:41:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/2933
-- author: DrSmugleaf
-  changes:
-  - message: Added Spray Acid ability for the Spitter. This replaces the placeholder
-      scattered spit ability that Spitters temporarily had.
-    type: Add
-  id: 432
-  time: '2024-07-22T10:48:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3157
-- author: musicmanvr
-  changes:
-  - message: Added floodlights to help be a light in the darkness.
-    type: Add
-  id: 433
-  time: '2024-07-22T10:59:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3151
-- author: blueDev2
-  changes:
-  - message: Multiple people wiring the same barricade no longer wastes barbed wire.
-    type: Fix
-  - message: Attempting to wire another cade while already wiring does not cancel
-      the original wiring.
-    type: Tweak
-  id: 434
-  time: '2024-07-22T11:00:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3155
 - author: musicmanvr
   changes:
   - message: Ported the M44 combat revolver, find it in your nearest vendor!
@@ -4890,5 +4788,128 @@
   id: 923
   time: '2024-11-02T20:17:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4667
+- author: FungiFellow
+  changes:
+  - message: Added storage for holdout to color shoes
+    type: Add
+  id: 924
+  time: '2024-11-02T22:51:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4669
+- author: DrSmugleaf
+  changes:
+  - message: Fixed patron figurines being invisible.
+    type: Fix
+  - message: Fixed not being able to open the radio telephone backpack storage.
+    type: Fix
+  - message: Fixed comms towers being acidable.
+    type: Fix
+  - message: Fixed the telephone UI overflowing when there's too many choices.
+    type: Fix
+  - message: Fixed not being able to open the groundside operations console while
+      the announcement is on cooldown.
+    type: Fix
+  - message: Fixed telephone cord drawing erratically over your screen.
+    type: Fix
+  id: 925
+  time: '2024-11-02T22:57:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4675
+- author: Whisper
+  changes:
+  - message: Updated the sprites of the M54C and M54CE2 (In development)
+    type: Add
+  id: 926
+  time: '2024-11-03T02:06:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4542
+- author: Vermidia
+  changes:
+  - message: Fixed hive core not showing on the xeno tacmap
+    type: Fix
+  id: 927
+  time: '2024-11-03T02:07:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4678
+- author: FungiFellow
+  changes:
+  - message: Added Welder Chestrig to MT Vendor
+    type: Add
+  id: 928
+  time: '2024-11-03T02:08:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4681
+- author: Rainbeon
+  changes:
+  - message: Defibrillators no longer passively drain power at all.
+    type: Fix
+  id: 929
+  time: '2024-11-03T02:06:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4676
+- author: DrSmugleaf
+  changes:
+  - message: Fixed drawn tactical map lines disappearing after being drawn.
+    type: Fix
+  - message: Fixed New Varadero not having a sensor tower.
+    type: Fix
+  - message: Fixed Almayer radio color being hard to read by darkening the chat background
+      color to its intended value.
+    type: Fix
+  - message: Fix telephone filtering not working.
+    type: Fix
+  - message: Fixed phone sounds being too quiet.
+    type: Fix
+  - message: Fixed New Varadero not having early hive spread protection.
+    type: Fix
+  - message: Fixed New Varadero having incorrectly stacked filing cabinets and chairs,
+      and having 3 beds instead of lattices in the hunter ship.
+    type: Fix
+  - message: Fixed being able to receive Almayer channel radio comms while on the
+      planet.
+    type: Fix
+  - message: Fixed being able to vault through invisible blockers in New Varadero.
+    type: Fix
+  - message: Updated the roadmap.
+    type: Tweak
+  id: 930
+  time: '2024-11-03T03:03:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4685
+- author: Rainbeon
+  changes:
+  - message: Fixed Xeno Spit Projectiles and Runner Bone Chips not shooting where
+      you are actually aiming.
+    type: Fix
+  id: 931
+  time: '2024-11-04T01:56:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4693
+- author: crystalHex
+  changes:
+  - message: Added the general pistol holster rig, revolver holster rig, smart gun
+      operator sidearm belt and M63 holster rig (without pouches).
+    type: Add
+  id: 932
+  time: '2024-11-04T02:00:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3625
+- author: crystalHex
+  changes:
+  - message: Added a verb to the context menu to allow for webbing to be removed from
+      dead marines without stripping them of their uniform (and dignity).
+    type: Tweak
+  id: 933
+  time: '2024-11-04T02:03:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4666
+- author: DrSmugleaf
+  changes:
+  - message: Fixed telephones not listing a marine's squad.
+    type: Fix
+  - message: Fixed telephone category order not being consistent.
+    type: Fix
+  - message: Fixed the dropship hijack alert not being shown in chat.
+    type: Fix
+  - message: Fixed dropships landing one tile lower than intended on New Varadero
+      west LZ.
+    type: Fix
+  - message: Fixed New Varadero having no turrets.
+    type: Fix
+  - message: Fixed a spot where you could escape the map bounds on New Varadero.
+    type: Fix
+  id: 934
+  time: '2024-11-04T04:15:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4691
 Name: RMC14
 Order: -1
