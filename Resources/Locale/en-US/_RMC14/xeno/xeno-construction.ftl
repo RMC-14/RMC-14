@@ -35,3 +35,6 @@ rmc-xeno-construction-resin-hole-empty-name = empty
 rmc-xeno-construction-resin-hole-parasite-name = parasite
 rmc-xeno-construction-resin-hole-gas-name = gas
 rmc-xeno-construction-resin-hole-acid-name = acid
+
+rmc-xeno-construction-tunnel-empty-non-xeno-enter-failure = You stare into the dark abyss
+rmc-xeno-construction-tunnel-occupied-non-xeno-enter-failure = You stare into the dark abyss, making out what appears to be two little lights... almost like something is watching
