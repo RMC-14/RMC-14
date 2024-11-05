@@ -233,7 +233,6 @@ public sealed partial class SelectDestinationTunnelInterfaceState : BoundUserInt
         HiveTunnels = hiveTunnels;
     }
 }
-[AutoGenerateComponentState]
 public sealed partial class XenoDigTunnelActionEvent : InstantActionEvent
 {
     [DataField]
@@ -242,7 +241,7 @@ public sealed partial class XenoDigTunnelActionEvent : InstantActionEvent
     [DataField]
     public float DestroyWeedSourceDelay = 1.0f;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public int PlasmaCost = 200;
 }
 
