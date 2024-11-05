@@ -3,7 +3,7 @@
   id: RMCSecuritySurvivor
   name: cm-job-name-survivor #make new name
   description: cm-job-description-survivor # Make new description
-  startingGear: RMCGearSurvivor
+  startingGear: RMCGearSurvivorSecurity
   accessGroups:
   - ColonistSec
   special:
@@ -14,12 +14,13 @@
         RMCSkillPolice: 2
         RMCSkillCqc: 2
     - type: EquipSurvivorPreset
-      preset: #RMCSurvivorPresetSecurity
+      preset: RMCSurvivorPresetSecurity
 
 ﻿- type: startingGear
   id: RMCGearSurvivorSecurity
   equipment:
     head: CMHeadBeretRed
+    eyes: CMGlassesSecurity
     jumpsuit: ClothingUniformJumpsuitSec 
     back: CMSatchelSecurity
     shoes: RMCShoesJackboots
