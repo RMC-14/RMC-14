@@ -3,7 +3,7 @@
   id: RMCMedicalSurvivor
   name: cm-job-name-survivor #make new name
   description: cm-job-description-survivor # Make new description
-  startingGear: RMCGearSurvivor
+  startingGear: RMCGearSurvivorEngineer
   accessGroups:
   - ColonistEngi
   special:
@@ -14,12 +14,13 @@
         RMCSkillConstruction: 3
         RMCSkillEngineer: 3
     - type: EquipSurvivorPreset
-      preset: # RMCSurvivorPresetEngineer
+      preset: RMCSurvivorPresetEngineer
  
- - type: startingGear
+- type: startingGear
   id: RMCGearSurvivorEngineer
   equipment:
     head: ClothingHeadHatBeretEngineering
+    eyes: ClothingEyesGlassesMeson
     gloves: CMHandsInsulated
     jumpsuit: ClothingUniformJumpsuitEngineering
     back: CMSatchelEngineer
