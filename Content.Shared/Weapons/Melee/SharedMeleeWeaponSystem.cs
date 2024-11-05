@@ -537,7 +537,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         }
 
-        _meleeSound.PlayHitSound(target.Value, user, GetHighestDamageSound(modifiedDamage, _protoManager), hitEvent.HitSoundOverride, component);
+        if (damageResult != null)
+        _meleeSound.PlayHitSound(target.Value, user, GetHighestDamageSound(damageResult, _protoManager), hitEvent.HitSoundOverride, component);
 
         if (damageResult?.GetTotal() > FixedPoint2.Zero)
         {
@@ -735,9 +736,6 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
         {
             return groups.Keys.First();
         }
-
-        if (modifiedDamage.GetTotal() == FixedPoint2.Zero)
-            return null;
 
         var highestDamage = FixedPoint2.Zero;
         string? highestDamageType = null;
