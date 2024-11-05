@@ -5,7 +5,7 @@
   description: cm-job-description-survivor # Make new description
   startingGear: RMCGearSurvivor
   accessGroups:
-  - Colonist
+  - ColonistEngi
   special:
   - !type:AddComponentSpecial
     components:
