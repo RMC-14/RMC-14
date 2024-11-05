@@ -3,7 +3,7 @@
   id: RMCMedicalSurvivor
   name: cm-job-name-survivor #make new name
   description: cm-job-description-survivor # Make new description
-  startingGear: RMCGearSurvivor
+  startingGear: RMCGearSurvivorDoctor
   accessGroups:
   - ColonistMedical
   special:
@@ -14,7 +14,7 @@
         RMCSkillMedical: 3
         RMCSkillSurgery: 2
     - type: EquipSurvivorPreset
-      preset: #RMCSurvivorPresetMedical
+      preset: RMCSurvivorPresetMedical
 
 ﻿- type: startingGear
   id: RMCGearSurvivorDoctor #Port Outer clothing: Labcoat, 15 bio armor
