@@ -62,7 +62,7 @@
 
 - type: entity
   parent: CMCatwalk
-  id: CMCatwalkKutjevo
+  id: RMCCatwalkKutjevo
   components:
   - type: Sprite
     state: kutjevo_catwalk
