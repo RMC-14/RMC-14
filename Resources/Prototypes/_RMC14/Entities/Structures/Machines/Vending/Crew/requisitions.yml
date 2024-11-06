@@ -467,16 +467,18 @@
         amount: 20
       - id: CMArmorHelmetM10Medic
         amount: 20
-      #- id: M3 Pattern Carrier Marine Armor
-      #  amount: 20
+      - id: RMCArmorM3MediumCarrier
+        amount: 15
       - id: RMCArmorM3MediumPadded
-        amount: 20
+        amount: 15
       - id: RMCArmorM3MediumPadless
-        amount: 20
-      #- id: M3 Pattern Ridged Marine Armor
-      #  amount: 20
-      #- id: M3 Pattern Skull Marine Armor
-      #  amount: 20
+        amount: 15
+      - id: RMCArmorM3MediumRidged
+        amount: 15
+      - id: RMCArmorM3MediumSkull
+        amount: 15
+      - id: RMCArmorM3MediumSmooth
+        amount: 15
       - id: CMArmorM3Heavy
         amount: 10
       - id: CMArmorM3Light

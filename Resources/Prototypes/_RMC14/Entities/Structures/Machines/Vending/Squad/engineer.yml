@@ -202,6 +202,7 @@
       - id: CMArmorM3Light
         name: light armor
       - id: RMCArmorM3MediumVariants
+        name: medium armor
         recommended: true
       - id: CMArmorM3Heavy
         name: heavy armor

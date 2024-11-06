@@ -20,7 +20,7 @@
 
 - type: entity
   id: RMCArmorM3MediumVariants
-  name: medium armor
+  name: M3 pattern marine armor
   description: A standard UNMC M3 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
   categories:
   - HideSpawnMenu
@@ -49,7 +49,7 @@
   name: M3 pattern padless marine armor
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard-padded.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard-padless.rsi
 
 - type: entity
   parent: CMArmorM3Medium
@@ -57,7 +57,7 @@
   name: M3 pattern ridged marine armor
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard-ridged.rsi
 
 - type: entity
   parent: CMArmorM3Medium
@@ -65,7 +65,7 @@
   name: M3 pattern carrier marine armor
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard-carrier.rsi
 
 - type: entity
   parent: CMArmorM3Medium
@@ -73,7 +73,7 @@
   name: M3 pattern skull marine armor
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard-skull.rsi
 
 - type: entity
   parent: CMArmorM3Medium
@@ -81,7 +81,7 @@
   name: M3 pattern smooth marine armor
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard-smooth.rsi
 
 - type: entity
   parent: CMArmorM3Medium
