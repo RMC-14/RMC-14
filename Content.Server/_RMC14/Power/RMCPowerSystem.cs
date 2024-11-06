@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
+using Content.Server.PowerCell;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Power;
 using Content.Shared.Examine;
@@ -20,6 +21,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly PowerCellSystem _cell = default!;
 
     [ViewVariables]
     private TimeSpan _nextUpdate;
@@ -59,7 +61,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
 
     private void OnUsageDisplayEvent(Entity<RMCPowerUsageDisplayComponent> ent, ref ExaminedEvent args)
     {
-        if (!TryComp<BatteryComponent>(ent, out var battery) || !TryComp<PowerCellDrawComponent>(ent, out var draw))
+        if (!_cell.TryGetBatteryFromSlot(ent, out var battery) || !TryComp<PowerCellDrawComponent>(ent, out var draw))
             return;
 
         int maxUses = (int)(battery.MaxCharge / draw.UseRate);
@@ -67,29 +69,6 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
 
         args.PushMarkup(Loc.GetString(ent.Comp.PowerText, ("uses", uses), ("maxuses", maxUses)));
     }
-
-    public bool HasBatteryCharges(EntityUid uid, BatteryComponent? battery = null, PowerCellDrawComponent? draw = null)
-    {
-        if (!Resolve(uid, ref battery, ref draw, false))
-            return true;
-
-        if (battery.CurrentCharge < draw.UseRate)
-            return false;
-
-        return true;
-    }
-
-    public bool TryUseBatteryCharge(EntityUid uid, BatteryComponent? battery = null, PowerCellDrawComponent? draw = null)
-    {
-        if (!Resolve(uid, ref battery, ref draw, false))
-            return true;
-
-        if (!_battery.TryUseCharge(uid, draw.UseRate, battery))
-            return false;
-
-        return true;
-    }
-
     private void OnReceiverPowerChanged(Entity<RMCPowerReceiverComponent> ent, ref PowerChangedEvent args)
     {
         ent.Comp.Mode = args.Powered ? RMCPowerMode.Active : RMCPowerMode.Off;

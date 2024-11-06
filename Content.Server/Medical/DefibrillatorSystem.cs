@@ -1,4 +1,3 @@
-using Content.Server._RMC14.Power;
 using Content.Server.Atmos.Rotting;
 using Content.Server.Chat.Systems;
 using Content.Server.DoAfter;
@@ -51,7 +50,6 @@ public sealed class DefibrillatorSystem : EntitySystem
     [Dependency] private readonly CMDefibrillatorSystem _cmDefibrillator = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly RMCPowerSystem _power = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -106,7 +104,7 @@ public sealed class DefibrillatorSystem : EntitySystem
         if (!TryComp<MobStateComponent>(target, out var mobState))
             return false;
 
-        if (!_powerCell.HasActivatableCharge(uid, user: user) || !_power.HasBatteryCharges(uid))
+        if (!_powerCell.HasActivatableCharge(uid, user: user))
             return false;
 
         if (_mobState.IsAlive(target, mobState))
@@ -177,7 +175,7 @@ public sealed class DefibrillatorSystem : EntitySystem
             return;
         }
 
-        if (!_powerCell.TryUseActivatableCharge(uid, user: user) || !_power.TryUseBatteryCharge(uid))
+        if (!_powerCell.TryUseActivatableCharge(uid, user: user))
             return;
 
         _audio.PlayPvs(component.ZapSound, uid);
@@ -245,7 +243,7 @@ public sealed class DefibrillatorSystem : EntitySystem
         _audio.PlayPvs(sound, uid);
 
         // if we don't have enough power left for another shot, turn it off
-        if (!_powerCell.HasActivatableCharge(uid) || !_power.HasBatteryCharges(uid))
+        if (!_powerCell.HasActivatableCharge(uid))
             _toggle.TryDeactivate(uid);
 
         // TODO clean up this clown show above
