@@ -1,0 +1,1 @@
+rmc-power-usage-display-defib = It has {$uses} out of {$maxuses} uses left in its internal battery.

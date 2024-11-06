@@ -3,7 +3,9 @@ using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Power;
+using Content.Shared.Examine;
 using Content.Shared.Power;
+using Content.Shared.PowerCell;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
@@ -49,9 +51,43 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
 
         SubscribeLocalEvent<RMCPowerReceiverComponent, PowerChangedEvent>(OnReceiverPowerChanged);
         SubscribeLocalEvent<ApcPowerReceiverComponent, MapInitEvent>(ReceiverOnMapInit);
+        SubscribeLocalEvent<RMCPowerUsageDisplayComponent, ExaminedEvent>(OnUsageDisplayEvent);
 
         Subs.CVar(_config, RMCCVars.RMCPowerUpdateEverySeconds, v => _updateEvery = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCPowerLoadMultiplier, v => _powerLoadMultiplier = v, true);
+    }
+
+    private void OnUsageDisplayEvent(Entity<RMCPowerUsageDisplayComponent> ent, ref ExaminedEvent args)
+    {
+        if (!TryComp<BatteryComponent>(ent, out var battery) || !TryComp<PowerCellDrawComponent>(ent, out var draw))
+            return;
+
+        int maxUses = (int)(battery.MaxCharge / draw.UseRate);
+        int uses = (int)(battery.CurrentCharge / draw.UseRate);
+
+        args.PushMarkup(Loc.GetString(ent.Comp.PowerText, ("uses", uses), ("maxuses", maxUses)));
+    }
+
+    public bool HasBatteryCharges(EntityUid uid, BatteryComponent? battery = null, PowerCellDrawComponent? draw = null)
+    {
+        if (!Resolve(uid, ref battery, ref draw, false))
+            return true;
+
+        if (battery.CurrentCharge < draw.UseRate)
+            return false;
+
+        return true;
+    }
+
+    public bool TryUseBatteryCharge(EntityUid uid, BatteryComponent? battery = null, PowerCellDrawComponent? draw = null)
+    {
+        if (!Resolve(uid, ref battery, ref draw, false))
+            return true;
+
+        if (!_battery.TryUseCharge(uid, draw.UseRate, battery))
+            return false;
+
+        return true;
     }
 
     private void OnReceiverPowerChanged(Entity<RMCPowerReceiverComponent> ent, ref PowerChangedEvent args)
