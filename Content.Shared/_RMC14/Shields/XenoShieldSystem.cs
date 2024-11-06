@@ -82,7 +82,7 @@ public sealed partial class XenoShieldSystem : EntitySystem
     public void ApplyShield(EntityUid uid, ShieldType type, FixedPoint2 amount, TimeSpan? duration = null,
         double decay = 0, bool addShield = false, double maxShield = 200)
     {
-        EnsureComp<XenoShieldComponent>(uid, out var shieldComp);
+        var shieldComp = EnsureComp<XenoShieldComponent>(uid);
 
         if (shieldComp.Active && shieldComp.Shield == type)
         {
