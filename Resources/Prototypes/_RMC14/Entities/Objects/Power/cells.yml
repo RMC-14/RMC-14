@@ -211,3 +211,15 @@
         cell_slot:
           name: power-cell-slot-component-slot-name-default
           startingItem: RMCPowerCell
+
+- type: entity
+  parent: RMCPowerCellSlot
+  id: RMCPowerCellSlotUnremovable
+  abstract: true
+  components:
+    - type: ItemSlots
+      slots:
+        cell_slot:
+          name: power-cell-slot-component-slot-name-default
+          startingItem: RMCPowerCell
+          locked: true
