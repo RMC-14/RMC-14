@@ -642,6 +642,20 @@ namespace Content.Shared.Preferences
             Appearance = appearance;
             SpawnPriority = spawnPriority;
 
+            var armorPreference = ArmorPreference switch
+            {
+                ArmorPreference.Random => ArmorPreference.Random,
+                ArmorPreference.Padded => ArmorPreference.Padded,
+                ArmorPreference.Padless => ArmorPreference.Padless,
+                ArmorPreference.Ridged => ArmorPreference.Ridged,
+                ArmorPreference.Carrier => ArmorPreference.Carrier,
+                ArmorPreference.Skull => ArmorPreference.Skull,
+                ArmorPreference.Smooth => ArmorPreference.Smooth,
+                _ => ArmorPreference.Random // Invalid enum values.
+            };
+
+            ArmorPreference = armorPreference;
+
             if (!prototypeManager.TryIndex(SquadPreference, out var squad) ||
                 !squad.TryGetComponent(out SquadTeamComponent? team, compFactory) ||
                 !team.RoundStart)
@@ -772,6 +786,7 @@ namespace Content.Shared.Preferences
             hashCode.Add((int)Gender);
             hashCode.Add(Appearance);
             hashCode.Add((int)SpawnPriority);
+            hashCode.Add((int)ArmorPreference);
             hashCode.Add(SquadPreference);
             hashCode.Add((int)PreferenceUnavailable);
             hashCode.Add(NamedItems);

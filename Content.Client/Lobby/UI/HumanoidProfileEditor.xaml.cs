@@ -831,6 +831,7 @@ namespace Content.Client.Lobby.UI
             UpdateGenderControls();
             UpdateSkinColor();
             UpdateSpawnPriorityControls();
+            UpdateArmorPreferenceControls();
             UpdateSquadPreferenceControls();
             UpdateAgeEdit();
             UpdateEyePickers();
@@ -1507,6 +1508,16 @@ namespace Content.Client.Lobby.UI
             }
 
             SpawnPriorityButton.SelectId((int) Profile.SpawnPriority);
+        }
+
+        private void UpdateArmorPreferenceControls()
+        {
+            if (Profile == null)
+            {
+                return;
+            }
+
+            ArmorPreferenceButton.SelectId((int) Profile.ArmorPreference);
         }
 
         private void UpdateSquadPreferenceControls()
