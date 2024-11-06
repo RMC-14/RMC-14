@@ -105,7 +105,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!CanDevolvePopup(xeno))
+        if (!DamagedCheckPopup(xeno))
             return;
 
         args.Handled = true;
@@ -220,28 +220,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private void OnXenoDevolveBui(Entity<XenoDevolveComponent> xeno, ref XenoDevolveBuiMsg args)
     {
         _ui.CloseUi(xeno.Owner, XenoEvolutionUIKey.Key, xeno);
-
-        if (!CanDevolvePopup(xeno))
-            return;
-
-        if (_net.IsClient ||
-            !xeno.Comp.DevolvesTo.Contains(args.Choice))
-        {
-            return;
-        }
-
-        var newXeno = TransferXeno(xeno, args.Choice);
-        var ev = new XenoDevolvedEvent(xeno);
-        RaiseLocalEvent(newXeno, ref ev);
-
-        _adminLog.Add(LogType.RMCDevolve, $"Xenonid {ToPrettyString(xeno)} devolved into {ToPrettyString(newXeno)}");
-
-        Del(xeno.Owner);
-
-        var afterEv = new AfterNewXenoEvolvedEvent();
-        RaiseLocalEvent(newXeno, ref afterEv);
-
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-devolve", ("xeno", newXeno)), newXeno, newXeno, PopupType.LargeCaution);
+        TryDevolve(xeno, args.Choice);
     }
 
     private void OnXenoEvolveDoAfter(Entity<XenoEvolutionComponent> xeno, ref XenoEvolutionDoAfterEvent args)
@@ -453,11 +432,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
         return false;
     }
 
-    private bool CanDevolvePopup(EntityUid xeno, bool predicted = true)
-    {
-        return DamagedCheckPopup(xeno, predicted);
-    }
-
     // TODO RMC14 make this a property of the hive component
     // TODO RMC14 per-hive
     public int GetLiving<T>(Predicate<Entity<T>>? predicate = null) where T : IComponent
@@ -558,6 +532,37 @@ public sealed class XenoEvolutionSystem : EntitySystem
             if (HasComp<DoorComponent>(id) || HasComp<AirlockComponent>(id))
                 comp.StopCollide.Add(id);
         }
+
+        return newXeno;
+    }
+
+    private void TryDevolve(Entity<XenoDevolveComponent> xeno, EntProtoId to, bool damagedCheck = true)
+    {
+        if (damagedCheck && !DamagedCheckPopup(xeno))
+            return;
+
+        if (Devolve(xeno, to) is { } newXeno && _net.IsServer)
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-devolve", ("xeno", newXeno)), newXeno, newXeno, PopupType.LargeCaution);
+    }
+
+    public EntityUid? Devolve(Entity<XenoDevolveComponent> xeno, EntProtoId to)
+    {
+        if (_net.IsClient ||
+            !xeno.Comp.DevolvesTo.Contains(to))
+        {
+            return null;
+        }
+
+        var newXeno = TransferXeno(xeno, to);
+        var ev = new XenoDevolvedEvent(xeno);
+        RaiseLocalEvent(newXeno, ref ev);
+
+        _adminLog.Add(LogType.RMCDevolve, $"Xenonid {ToPrettyString(xeno)} devolved into {ToPrettyString(newXeno)}");
+
+        Del(xeno.Owner);
+
+        var afterEv = new AfterNewXenoEvolvedEvent();
+        RaiseLocalEvent(newXeno, ref afterEv);
 
         return newXeno;
     }

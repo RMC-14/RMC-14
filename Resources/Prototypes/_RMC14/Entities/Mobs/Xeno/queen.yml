@@ -51,8 +51,7 @@
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
     - ActionXenoGrowOvipositor
-#    - ActionXenoBanishXenonid
-#    - ActionXenoReadmitXenonid
+    - ActionXenoManageHive
 #    - ActionXenoRoyalJelly
 #    - ActionXenoMarkResin
     # Mature
@@ -199,3 +198,4 @@
     enabled: false
   - type: RMCPointing
     arrow: RMCPointingArrowBigQueen
+  - type: ManageHive

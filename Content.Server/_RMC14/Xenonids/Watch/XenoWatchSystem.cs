@@ -37,6 +37,7 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
 
         SubscribeLocalEvent<XenoWatchedComponent, ComponentRemove>(OnWatchedRemove);
         SubscribeLocalEvent<XenoWatchedComponent, EntityTerminatingEvent>(OnWatchedRemove);
+
         SubscribeLocalEvent<XenoWatchingComponent, ComponentRemove>(OnWatchingRemove);
         SubscribeLocalEvent<XenoWatchingComponent, EntityTerminatingEvent>(OnWatchingRemove);
 
