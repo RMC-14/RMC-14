@@ -20,7 +20,7 @@
 
 - type: entity
   id: RMCArmorM3MediumVariants
-  name: M3 pattern marine armor
+  name: medium armor
   description: A standard UNMC M3 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
   categories:
   - HideSpawnMenu
