@@ -37,6 +37,10 @@
       ignoreModifiers: true
     - range: 0
       falloff: 1
+  - type: RMCProjectileAccuracy
+    thresholds:
+    - range: 4
+      falloff: 10
   - type: RMCStunOnHit
 
 - type: entity

@@ -1,9 +1,11 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
@@ -58,6 +60,8 @@ public sealed class CMGunSystem : EntitySystem
 
     private readonly int _blockArcCollisionGroup = (int) (CollisionGroup.HighImpassable | CollisionGroup.Impassable);
 
+    private const string accuracyExamineColour = "yellow";
+
     public override void Initialize()
     {
         _gunGroupSpreadPenalty = GetEntityQuery<GunGroupSpreadPenaltyComponent>();
@@ -70,6 +74,10 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<RMCWeaponDamageFalloffComponent, GunRefreshModifiersEvent>(OnWeaponDamageFalloffRefreshModifiers);
 
         SubscribeLocalEvent<RMCExtraProjectilesDamageModsComponent, AmmoShotEvent>(OnExtraProjectilesShot);
+
+        SubscribeLocalEvent<RMCWeaponAccuracyComponent, ExaminedEvent>(OnWeaponAccuracyExamined);
+        SubscribeLocalEvent<RMCWeaponAccuracyComponent, GunRefreshModifiersEvent>(OnWeaponAccuracyRefreshModifiers);
+        SubscribeLocalEvent<RMCWeaponAccuracyComponent, AmmoShotEvent>(OnWeaponAccuracyShot);
 
         SubscribeLocalEvent<ProjectileFixedDistanceComponent, PreventCollideEvent>(OnCollisionCheckArc);
         SubscribeLocalEvent<ProjectileFixedDistanceComponent, PhysicsSleepEvent>(OnEventToStopProjectile);
@@ -221,6 +229,60 @@ public sealed class CMGunSystem : EntitySystem
                 continue;
 
             projectileComponent.Damage *= weapon.Comp.DamageMultiplier;
+        }
+    }
+
+    private void OnWeaponAccuracyExamined(Entity<RMCWeaponAccuracyComponent> weapon, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(RMCWeaponAccuracyComponent)))
+        {
+            args.PushMarkup(Loc.GetString("rmc-examine-text-weapon-accuracy", ("colour", accuracyExamineColour), ("accuracy", weapon.Comp.ModifiedAccuracyMultiplier)));
+        }
+    }
+
+    private void OnWeaponAccuracyRefreshModifiers(Entity<RMCWeaponAccuracyComponent> weapon, ref GunRefreshModifiersEvent args)
+    {
+        var baseMult = weapon.Comp.AccuracyMultiplierUnwielded;
+
+        if (TryComp(weapon.Owner, out WieldableComponent? wieldableComponent) && wieldableComponent.Wielded)
+            baseMult = weapon.Comp.AccuracyMultiplier;
+
+        var ev = new GetWeaponAccuracyEvent(baseMult);
+        RaiseLocalEvent(weapon.Owner, ref ev);
+
+        weapon.Comp.ModifiedAccuracyMultiplier = ev.AccuracyMultiplier;
+
+        Dirty(weapon);
+    }
+
+    private void OnWeaponAccuracyShot(Entity<RMCWeaponAccuracyComponent> weapon, ref AmmoShotEvent args)
+    {
+        var netId = GetNetEntity(weapon.Owner).Id;
+        FixedPoint2 orderAccuracy = 0;
+        FixedPoint2 orderAccuracyPerTile = 0;
+
+        if (TryComp(weapon.Owner, out TransformComponent? transformComponent) &&
+            transformComponent.ParentUid.Valid &&
+            TryComp(transformComponent.ParentUid, out FocusOrderComponent? orderComponent) &&
+            orderComponent.Received.Count != 0)
+        {
+            orderAccuracy = orderComponent.Received[0].Multiplier * orderComponent.AccuracyModifier;
+            orderAccuracyPerTile = orderComponent.Received[0].Multiplier * orderComponent.AccuracyPerTileModifier;
+        }
+
+        for (int t = 0; t < args.FiredProjectiles.Count; ++t)
+        {
+            if (!TryComp(args.FiredProjectiles[t], out RMCProjectileAccuracyComponent? accuracyComponent))
+                continue;
+
+            accuracyComponent.Accuracy *= weapon.Comp.ModifiedAccuracyMultiplier;
+            accuracyComponent.Accuracy += orderAccuracy;
+
+            if (orderAccuracyPerTile != 0)
+                accuracyComponent.Thresholds.Add(new AccuracyFalloffThreshold(0f, -orderAccuracyPerTile, false));
+
+            accuracyComponent.GunSeed = (long) t << 32 | netId;
+            Dirty<RMCProjectileAccuracyComponent>((args.FiredProjectiles[t], accuracyComponent));
         }
     }
 

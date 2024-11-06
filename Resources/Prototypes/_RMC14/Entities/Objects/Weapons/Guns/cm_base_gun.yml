@@ -36,6 +36,7 @@
   - type: Gun
     meleeCooldownOnShoot: false
     resetOnHandSelected: false
+  - type: RMCWeaponAccuracy
 
 - type: entity
   parent: BaseBullet

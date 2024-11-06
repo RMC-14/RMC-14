@@ -259,3 +259,4 @@
       - CanBeSupplyDropped
   - type: NewPlayerLabel
   - type: MarineMapTracked
+  - type: Evasion

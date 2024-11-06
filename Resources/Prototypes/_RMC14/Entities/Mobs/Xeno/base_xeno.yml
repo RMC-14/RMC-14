@@ -284,6 +284,7 @@
       sprite: _RMC14/Interface/map_blips.rsi
       state: background_xeno
   - type: XenoMapTracked
+  - type: Evasion
 
 - type: entity
   abstract: true
