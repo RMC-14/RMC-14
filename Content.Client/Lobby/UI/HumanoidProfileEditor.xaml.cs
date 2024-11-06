@@ -361,6 +361,21 @@ namespace Content.Client.Lobby.UI
 
             #endregion SpawnPriority
 
+            #region ArmorPreference
+
+            foreach (var value in Enum.GetValues<ArmorPreference>())
+            {
+                ArmorPreferenceButton.AddItem(value.ToString(), (int) value);
+            }
+
+            ArmorPreferenceButton.OnItemSelected += args =>
+            {
+                ArmorPreferenceButton.SelectId(args.Id);
+                SetArmorPreference((ArmorPreference) args.Id);
+            };
+
+            #endregion ArmorPreference
+
             #region SquadPreference
 
             SquadPreferenceButton.AddItem(Loc.GetString("loadout-none"), 0);
@@ -1287,6 +1302,12 @@ namespace Content.Client.Lobby.UI
         private void SetSpawnPriority(SpawnPriorityPreference newSpawnPriority)
         {
             Profile = Profile?.WithSpawnPriorityPreference(newSpawnPriority);
+            SetDirty();
+        }
+
+        private void SetArmorPreference(ArmorPreference newArmorPreference)
+        {
+            Profile = Profile?.WithArmorPreference(newArmorPreference);
             SetDirty();
         }
 
