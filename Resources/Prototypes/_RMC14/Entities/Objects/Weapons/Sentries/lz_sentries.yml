@@ -47,6 +47,8 @@
         path: /Audio/Effects/double_beep.ogg
       VisionRadius: !type:Single
         9.0
+      AggroVisionRadius: !type:Single
+        10.0
   - type: MouseRotator
     angleTolerance: 5
     rotationSpeed: 180
