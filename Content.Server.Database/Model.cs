@@ -455,7 +455,6 @@ namespace Content.Server.Database
         public Preference Preference { get; set; } = null!;
         public RMCNamedItems? NamedItems { get; set; }
         public RMCSquadPreference? SquadPreference { get; set; }
-        public string ArmorPreference { get; set; } = null!;
     }
 
     public class Job
