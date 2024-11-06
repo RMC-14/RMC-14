@@ -45,10 +45,10 @@ public sealed class RMCArmorSystem : EntitySystem
             ? _prefs.GetPreferences(actor.PlayerSession.UserId).SelectedCharacter as HumanoidCharacterProfile
             : HumanoidCharacterProfile.RandomWithSpecies();
 
-        if (profile == null)
+        if (!_armorVariantQuery.TryComp(args.Item, out var armor))
             return;
 
-        if (!_armorVariantQuery.TryComp(args.Item, out var armor))
+        if (profile == null)
             return;
 
         var armorType = profile.ArmorPreference;
@@ -65,6 +65,8 @@ public sealed class RMCArmorSystem : EntitySystem
         }
 
         var equipmentEntity = Spawn(equipmentEntityID);
-        InventorySystem.TryEquip(ent, equipmentEntity, SlotFlags.OUTERCLOTHING.ToString(), force: true);
+        InventorySystem.TryEquip(ent, equipmentEntity, "outerClothing", force: true, predicted: false);
+
+        QueueDel(args.Item);
     }
 }

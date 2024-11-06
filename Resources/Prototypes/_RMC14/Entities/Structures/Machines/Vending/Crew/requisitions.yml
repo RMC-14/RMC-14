@@ -469,16 +469,14 @@
         amount: 20
       #- id: M3 Pattern Carrier Marine Armor
       #  amount: 20
-      #- id: M3 Pattern Padded Marine Armor
-      #  amount: 20
-      #- id: M3 Pattern Padless Marine Armor
-      #  amount: 20
+      - id: RMCArmorM3MediumPadded
+        amount: 20
+      - id: RMCArmorM3MediumPadless
+        amount: 20
       #- id: M3 Pattern Ridged Marine Armor
       #  amount: 20
       #- id: M3 Pattern Skull Marine Armor
       #  amount: 20
-      - id: CMArmorM3Medium #TODO RMC: remove this when above is added
-        amount: 20
       - id: CMArmorM3Heavy
         amount: 10
       - id: CMArmorM3Light

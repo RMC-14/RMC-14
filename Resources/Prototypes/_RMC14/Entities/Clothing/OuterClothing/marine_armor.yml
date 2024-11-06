@@ -27,6 +27,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
+    state: icon
   - type: RMCArmorVariant
     defaultType: RMCArmorM3MediumPadded
     types:

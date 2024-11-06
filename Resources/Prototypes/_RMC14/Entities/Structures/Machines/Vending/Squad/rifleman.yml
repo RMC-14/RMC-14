@@ -25,8 +25,7 @@
       entries:
       - id: CMArmorM3Light
         name: light armor
-      - id: CMArmorM3Medium
-        name: medium armor
+      - id: RMCArmorM3MediumVariants
       - id: CMArmorM3Heavy
         name: heavy armor
     - name: Backpack
