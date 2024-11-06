@@ -19,6 +19,70 @@
     worn: false
 
 - type: entity
+  id: RMCArmorM3MediumVariants
+  name: M3 pattern marine armor
+  description: A standard UNMC M3 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
+  - type: RMCArmorVariant
+    defaultType: RMCArmorM3MediumPadded
+    types:
+      Padded: RMCArmorM3MediumPadded
+      Padless: RMCArmorM3MediumPadless
+      Ridged: RMCArmorM3MediumRidged
+      Carrier: RMCArmorM3MediumCarrier
+      Skull: RMCArmorM3MediumSkull
+      Smooth: RMCArmorM3MediumSmooth
+
+- type: entity
+  parent: CMArmorM3Medium
+  id: RMCArmorM3MediumPadded
+  name: M3 pattern padded marine armor
+
+- type: entity
+  parent: CMArmorM3Medium
+  id: RMCArmorM3MediumPadless
+  name: M3 pattern padless marine armor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard-padded.rsi
+
+- type: entity
+  parent: CMArmorM3Medium
+  id: RMCArmorM3MediumRidged
+  name: M3 pattern ridged marine armor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
+
+- type: entity
+  parent: CMArmorM3Medium
+  id: RMCArmorM3MediumCarrier
+  name: M3 pattern carrier marine armor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
+
+- type: entity
+  parent: CMArmorM3Medium
+  id: RMCArmorM3MediumSkull
+  name: M3 pattern skull marine armor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
+
+- type: entity
+  parent: CMArmorM3Medium
+  id: RMCArmorM3MediumSmooth
+  name: M3 pattern smooth marine armor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
+
+- type: entity
   parent: CMArmorM3Medium
   id: CMArmorB12
   name: B12 pattern marine armor
