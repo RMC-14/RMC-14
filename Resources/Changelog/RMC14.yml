@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added Kate Fleming, Kaylie Rowleyininski, Amari 'Dropping Hot' Williams
-      figurines
-    type: Add
-  id: 442
-  time: '2024-07-23T22:07:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3176
 - author: DrSmugleaf
   changes:
   - message: Added the Spitter's missing charged spit + spray acid combo. Hitting
@@ -4915,5 +4907,13 @@
   id: 941
   time: '2024-11-06T22:41:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4731
+- author: crystalHex
+  changes:
+  - message: Attempting to unholster a gun from a belt holster while unable to interact
+      with inventory items no longer breaks the holster.
+    type: Fix
+  id: 942
+  time: '2024-11-06T22:44:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4734
 Name: RMC14
 Order: -1
