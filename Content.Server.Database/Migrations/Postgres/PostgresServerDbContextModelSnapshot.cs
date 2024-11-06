@@ -866,6 +866,11 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("integer")
                         .HasColumnName("spawn_priority");
 
+                    b.Property<string>("ArmorPreference")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("armor_preference");
+
                     b.Property<string>("Species")
                         .IsRequired()
                         .HasColumnType("text")

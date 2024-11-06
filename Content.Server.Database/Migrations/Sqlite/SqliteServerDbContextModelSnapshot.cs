@@ -816,6 +816,11 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("INTEGER")
                         .HasColumnName("spawn_priority");
 
+                    b.Property<string>("ArmorPreference")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("armor_preference");
+
                     b.Property<string>("Species")
                         .IsRequired()
                         .HasColumnType("TEXT")
