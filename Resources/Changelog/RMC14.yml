@@ -1,26 +1,4 @@
 ﻿Entries:
-- author: 0xRainy
-  changes:
-  - message: Xenos can no longer get in hypersleep chambers
-    type: Fix
-  id: 439
-  time: '2024-07-23T01:00:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3216
-- author: Vermidia
-  changes:
-  - message: Fixed xenonids being able to pull eggs.
-    type: Fix
-  id: 440
-  time: '2024-07-23T21:52:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3240
-- author: DrSmugleaf
-  changes:
-  - message: 'Added two tracks by Bolgarich that play during hijack: Hiking in the
-      fog and tango with bloodshed.'
-    type: Add
-  id: 441
-  time: '2024-07-23T22:05:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3220
 - author: Whisper
   changes:
   - message: Added Kate Fleming, Kaylie Rowleyininski, Amari 'Dropping Hot' Williams
@@ -4911,5 +4889,31 @@
   id: 938
   time: '2024-11-06T22:39:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4740
+- author: Rainbeon
+  changes:
+  - message: Popups for Shoving, Tail Stab, Sentinel Paralyzing Slash, and Lurker
+      Crippling Strike are no longer predicted. This means the message will no longer
+      mispredict and lie to you about their effects happening, but will appear later
+      than they used to on successes.
+    type: Fix
+  id: 939
+  time: '2024-11-06T22:42:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4703
+- author: Vermidia
+  changes:
+  - message: Fixed shield fruit not applying the first time it's used
+    type: Fix
+  id: 940
+  time: '2024-11-06T22:42:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4730
+- author: Vermidia
+  changes:
+  - message: Fix defibs having 10 instead of 15 charges
+    type: Fix
+  - message: Fixed Defibs being able to have their powercells removed
+    type: Fix
+  id: 941
+  time: '2024-11-06T22:41:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4731
 Name: RMC14
 Order: -1
