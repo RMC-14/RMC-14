@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Cu1r
-  changes:
-  - message: Fixed windows not having any destructible functionality.
-    type: Fix
-  - message: Windows now leave vaultable frames when smashed and can be repaired or
-      deconstructed entirely.
-    type: Add
-  id: 438
-  time: '2024-07-23T00:55:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3174
 - author: 0xRainy
   changes:
   - message: Xenos can no longer get in hypersleep chambers
@@ -4914,5 +4904,12 @@
   id: 937
   time: '2024-11-06T05:30:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4713
+- author: Vermidia
+  changes:
+  - message: Fix sentries continuing to fire after leaving their range
+    type: Fix
+  id: 938
+  time: '2024-11-06T22:39:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4740
 Name: RMC14
 Order: -1
