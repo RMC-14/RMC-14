@@ -1,0 +1,7 @@
+- type: rank
+  parent: RMCBaseRankFirstLT
+  id: RMCRankChiefEngineerFirstLT
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMChiefEngineer
+    time: 252000 # 70 hours

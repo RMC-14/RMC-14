@@ -8,6 +8,10 @@
   icon: "CMJobIconMaintTech"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-ce
+  ranks:
+  - RMCRankMaintTechLanceCorporal
+  - RMCRankMaintTechPrivateFirstClass
+  - RMCBaseRankPrivate
   accessGroups:
   - MaintTech
   minimapIcon:

@@ -1,14 +1,14 @@
 - type: rank
   id: RMCBaseRankCaptain
   name: (O3) Captain
-  prefix: (O3) CPT
+  prefix: CPT.
 
 - type: rank
   id: RMCBaseRankFirstLT
   name: (O2) First Lieutenant
-  prefix: (O2) 1stLT
+  prefix: 1stLT.
 
 - type: rank
   id: RMCBaseRankSecondLT
   name: (O1) Second Lieutenant
-  prefix: (O1) 2ndLT
+  prefix: 2ndLT.

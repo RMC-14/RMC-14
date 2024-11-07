@@ -14,6 +14,9 @@
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: cm-job-supervisors-aso
+  ranks:
+  - RMCRankChiefEngineerFirstLT
+  - RMCBaseRankSecondLT
   accessGroups:
   - CMCE
   minimapIcon:
