@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added the Spitter's missing charged spit + spray acid combo. Hitting
-      a marine with both in that order will make them take extra damage and be knocked
-      down. Remember to click the status on the right as a marine to resist the acid!
-    type: Add
-  id: 443
-  time: '2024-07-24T01:16:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3243
 - author: Tunguso4ka
   changes:
   - message: Added handheld Broadcasting Camera for Correspondents!
@@ -4915,5 +4906,12 @@
   id: 942
   time: '2024-11-06T22:44:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4734
+- author: Vermidia
+  changes:
+  - message: Fixed medic and ez injectors not fitting into some storages
+    type: Fix
+  id: 943
+  time: '2024-11-07T08:18:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4744
 Name: RMC14
 Order: -1
