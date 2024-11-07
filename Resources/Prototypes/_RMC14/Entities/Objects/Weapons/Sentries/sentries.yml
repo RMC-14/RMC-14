@@ -78,6 +78,8 @@
         path: /Audio/Effects/double_beep.ogg
       VisionRadius: !type:Single
         6.0
+      AggroVisionRadius: !type:Single
+        6.0
   - type: MouseRotator
     angleTolerance: 5
     rotationSpeed: 180
@@ -293,6 +295,8 @@
         path: /Audio/Effects/double_beep.ogg
       VisionRadius: !type:Single
         11.0
+      AggroVisionRadius: !type:Single
+        11.0
   - type: Sentry
     upgrades: null
 
@@ -333,6 +337,8 @@
       SoundTargetInLOS: !type:SoundPathSpecifier
         path: /Audio/Effects/double_beep.ogg
       VisionRadius: !type:Single
+        5.0
+      AggroVisionRadius: !type:Single
         5.0
   - type: Sentry
     upgrades: null
@@ -392,6 +398,8 @@
       SoundTargetInLOS: !type:SoundPathSpecifier
         path: /Audio/Effects/double_beep.ogg
       VisionRadius: !type:Single
+        4.0
+      AggroVisionRadius: !type:Single
         4.0
   - type: Sentry
     upgrades: null

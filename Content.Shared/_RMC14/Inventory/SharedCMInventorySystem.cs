@@ -592,7 +592,9 @@ public abstract class SharedCMInventorySystem : EntitySystem
             if (TryComp(item, out StorageComponent? storage) &&
                 TryGetLastInserted((item, holster), out var weapon))
             {
-                _hands.TryPickup(user, weapon);
+                if (!_hands.TryPickup(user, weapon))
+                    return false;
+
                 holster.Contents.Remove(weapon);
                 _audio.PlayPredicted(holster.EjectSound, item, user);
                 stop = true;
