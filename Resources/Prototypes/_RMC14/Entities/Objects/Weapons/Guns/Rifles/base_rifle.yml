@@ -65,7 +65,8 @@
   parent: CMBaseWeaponRifleNoDualWieldPenalty
   id: CMBaseWeaponRifle
   components:
-  - type: GunGroupSpreadPenalty
+  - type: GunDualWielding
+    weaponGroup: Rifle
   - type: GunPointBlank
 
 - type: entity

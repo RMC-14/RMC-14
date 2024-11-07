@@ -82,7 +82,6 @@ public record struct AccuracyFalloffThreshold(
     bool Buildup
 );
 
-
 public enum AccuracyModifiers : int
 {
     TargetOccluded = -15

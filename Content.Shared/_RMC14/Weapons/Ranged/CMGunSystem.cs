@@ -57,7 +57,6 @@ public sealed class CMGunSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly RMCProjectileSystem _rmcProjectileSystem = default!;
 
-    private EntityQuery<GunGroupSpreadPenaltyComponent> _gunGroupSpreadPenalty;
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ProjectileComponent> _projectileQuery;
 
@@ -67,7 +66,6 @@ public sealed class CMGunSystem : EntitySystem
 
     public override void Initialize()
     {
-        _gunGroupSpreadPenalty = GetEntityQuery<GunGroupSpreadPenaltyComponent>();
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
         _projectileQuery = GetEntityQuery<ProjectileComponent>();
 
@@ -122,15 +120,15 @@ public sealed class CMGunSystem : EntitySystem
 
         SubscribeLocalEvent<RMCAmmoEjectComponent, ActivateInWorldEvent>(OnAmmoEjectActivateInWorld);
 
-        SubscribeLocalEvent<GunGroupSpreadPenaltyComponent, GotEquippedHandEvent>(OnGroupSpreadPenaltyEquippedHand);
-        SubscribeLocalEvent<GunGroupSpreadPenaltyComponent, GotUnequippedHandEvent>(OnGroupSpreadPenaltyUnequippedHand);
-        SubscribeLocalEvent<GunGroupSpreadPenaltyComponent, GunRefreshModifiersEvent>(OnGroupSpreadPenaltyRefreshModifiers);
-        SubscribeLocalEvent<GunGroupSpreadPenaltyComponent, AmmoShotEvent>(OnGroupSpreadPenaltyAmmoShot);
-
         SubscribeLocalEvent<AssistedReloadAmmoComponent, AfterInteractEvent>(OnAssistedReloadAmmoAfterInteract);
 
         SubscribeLocalEvent<AssistedReloadWeaponComponent, ItemWieldedEvent>(OnAssistedReloadWeaponWielded);
         SubscribeLocalEvent<AssistedReloadWeaponComponent, ItemUnwieldedEvent>(OnAssistedReloadWeaponUnwielded);
+
+        SubscribeLocalEvent<GunDualWieldingComponent, GotEquippedHandEvent>(OnDualWieldingEquippedHand);
+        SubscribeLocalEvent<GunDualWieldingComponent, GotUnequippedHandEvent>(OnDualWieldingUnequippedHand);
+        SubscribeLocalEvent<GunDualWieldingComponent, GunRefreshModifiersEvent>(OnDualWieldingRefreshModifiers);
+        SubscribeLocalEvent<GunDualWieldingComponent, GetWeaponAccuracyEvent>(OnDualWieldingGetWeaponAccuracy);
     }
 
     /// <summary>
@@ -597,65 +595,59 @@ public sealed class CMGunSystem : EntitySystem
         _hands.TryPickup(args.User, ejectedAmmo, hand);
     }
 
-    private void OnGroupSpreadPenaltyEquippedHand(Entity<GunGroupSpreadPenaltyComponent> ent, ref GotEquippedHandEvent args)
+    private void OnDualWieldingEquippedHand(Entity<GunDualWieldingComponent> gun, ref GotEquippedHandEvent args)
     {
-        RefreshGunHolderModifiers(ent);
+        RefreshGunHolderModifiers(gun, args.User);
     }
 
-    private void OnGroupSpreadPenaltyUnequippedHand(Entity<GunGroupSpreadPenaltyComponent> ent, ref GotUnequippedHandEvent args)
+    private void OnDualWieldingUnequippedHand(Entity<GunDualWieldingComponent> gun, ref GotUnequippedHandEvent args)
     {
-        RefreshGunHolderModifiers(ent);
+        RefreshGunHolderModifiers(gun, args.User);
     }
 
-    private void OnGroupSpreadPenaltyRefreshModifiers(Entity<GunGroupSpreadPenaltyComponent> ent, ref GunRefreshModifiersEvent args)
+    private void OnDualWieldingRefreshModifiers(Entity<GunDualWieldingComponent> gun, ref GunRefreshModifiersEvent args)
     {
-        if (!TryGetGunUser(ent, out var user))
+        if (gun.Comp.WeaponGroup == GunDualWieldingGroup.None || !TryGetGunUser(gun, out var user))
             return;
 
-        foreach (var hand in user.Comp.Hands)
-        {
-            if (hand.Value.HeldEntity is not { } held ||
-                held == ent.Owner ||
-                !_gunGroupSpreadPenalty.HasComp(hand.Value.HeldEntity))
-            {
-                continue;
-            }
-
-            args.CameraRecoilScalar += ent.Comp.Recoil;
-            args.AngleIncrease += ent.Comp.AngleIncrease;
-            args.MinAngle += ent.Comp.AngleIncrease / 2;
-            args.MaxAngle += ent.Comp.AngleIncrease;
-            break;
-        }
-    }
-
-    private void OnGroupSpreadPenaltyAmmoShot(Entity<GunGroupSpreadPenaltyComponent> ent, ref AmmoShotEvent args)
-    {
-        if (!TryGetGunUser(ent, out var user))
+        if (!TryGetOtherDualWieldedGun(user, gun, out _))
             return;
 
-        var other = false;
-        foreach (var hand in user.Comp.Hands)
+        args.CameraRecoilScalar += gun.Comp.RecoilModifier;
+        args.MinAngle += gun.Comp.ScatterModifier;
+        args.MaxAngle += gun.Comp.ScatterModifier;
+    }
+
+    private void OnDualWieldingGetWeaponAccuracy(Entity<GunDualWieldingComponent> gun, ref GetWeaponAccuracyEvent args)
+    {
+        if (gun.Comp.WeaponGroup == GunDualWieldingGroup.None || !TryGetGunUser(gun, out var user))
+            return;
+
+        if (!TryGetOtherDualWieldedGun(user, gun, out _))
+            return;
+
+        args.AccuracyMultiplier += gun.Comp.AccuracyAddMult;
+    }
+
+    private bool TryGetOtherDualWieldedGun(EntityUid user, Entity<GunDualWieldingComponent> gun, out Entity<GunDualWieldingComponent> otherGun)
+    {
+        otherGun = default;
+
+        if (!TryComp(user, out HandsComponent? handsComp))
+            return false;
+
+        foreach (var hand in handsComp.Hands)
         {
             if (hand.Value.HeldEntity is { } held &&
-                held != ent.Owner &&
-                _gunGroupSpreadPenalty.HasComp(hand.Value.HeldEntity))
+                held != gun.Owner &&
+                TryComp(held, out GunDualWieldingComponent? dualWieldingComp) &&
+                dualWieldingComp.WeaponGroup == gun.Comp.WeaponGroup)
             {
-                other = true;
-                break;
+                otherGun = (held, dualWieldingComp);
+                return true;
             }
         }
-
-        if (!other)
-            return;
-
-        foreach (var projectile in args.FiredProjectiles)
-        {
-            if (!_projectileQuery.TryComp(projectile, out var projectileComp))
-                continue;
-
-            projectileComp.Damage *= ent.Comp.DamageMultiplier;
-        }
+        return false;
     }
 
     private bool TryGetGunUser(EntityUid gun, out Entity<HandsComponent> user)
@@ -671,20 +663,13 @@ public sealed class CMGunSystem : EntitySystem
         return false;
     }
 
-    private void RefreshGunHolderModifiers(EntityUid gun)
+    private void RefreshGunHolderModifiers(Entity<GunDualWieldingComponent> gun, EntityUid user)
     {
-        _gun.RefreshModifiers(gun);
-        if (!TryGetGunUser(gun, out var user))
+        _gun.RefreshModifiers(gun.Owner);
+        if (!TryGetOtherDualWieldedGun(user, gun, out var otherGun))
             return;
 
-        foreach (var hand in user.Comp.Hands)
-        {
-            if (hand.Value.HeldEntity is { } held &&
-                held != gun)
-            {
-                _gun.RefreshModifiers(held);
-            }
-        }
+        _gun.RefreshModifiers(otherGun.Owner);
     }
 
     private void OnAssistedReloadAmmoAfterInteract(Entity<AssistedReloadAmmoComponent> ent, ref AfterInteractEvent args)

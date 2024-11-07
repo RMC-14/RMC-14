@@ -64,6 +64,8 @@
   - type: RMCFireGroup
     group: Shotgun
     delay: 4
+  - type: GunDualWielding
+    weaponGroup: Shotgun
   - type: GunPointBlank
 
 - type: entity

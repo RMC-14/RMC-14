@@ -61,6 +61,9 @@
     item: Sidearm
   - type: GunUnskilledPenalty
     angleIncrease: 5
+  - type: GunPointBlank
+  - type: GunDualWielding
+    weaponGroup: Handgun
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -81,7 +84,6 @@
           tags:
           - RMCAttachmentBurstFireAssembly
           - RMCAttachmentLaserSight
-  - type: GunPointBlank
 
 - type: entity
   abstract: true

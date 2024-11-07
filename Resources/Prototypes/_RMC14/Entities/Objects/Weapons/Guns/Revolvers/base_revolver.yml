@@ -51,6 +51,8 @@
     item: Sidearm
   - type: GunUnskilledPenalty
     angleIncrease: 5
+  - type: GunDualWielding
+    weaponGroup: Handgun
   - type: GunPointBlank
 
 - type: Tag
