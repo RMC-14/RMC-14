@@ -20,7 +20,7 @@
   ranks:
     RMCRankCaptain:
     - !type:RoleTimeRequirement
-      role: CMAuxiliarySupportOfficer
+      role: CMJobAuxiliarySupportOfficer
       time: 630000 # 175 hours
     RMCRankFirstLT: []
   weight: 5
