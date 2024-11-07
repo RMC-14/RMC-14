@@ -16,6 +16,7 @@
   - type: WieldDelay
     baseDelay: 0.8
   - type: GunGroupSpreadPenalty
+  - type: GunPointBlank
 
 - type: entity
   parent: CMBaseCartridgeRifle

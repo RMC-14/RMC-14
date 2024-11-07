@@ -64,6 +64,7 @@
   - type: RMCFireGroup
     group: Shotgun
     delay: 4
+  - type: GunPointBlank
 
 - type: entity
   abstract: true

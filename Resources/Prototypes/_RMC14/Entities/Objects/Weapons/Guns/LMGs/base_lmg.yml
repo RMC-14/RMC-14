@@ -64,6 +64,7 @@
   - type: RMCNameItemOnVend
     item: PrimaryGun
   - type: GunGroupSpreadPenalty
+  - type: GunPointBlank
 
 - type: entity
   parent: BaseMagazineRifle

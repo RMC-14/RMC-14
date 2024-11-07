@@ -81,6 +81,7 @@
           tags:
           - RMCAttachmentBurstFireAssembly
           - RMCAttachmentLaserSight
+  - type: GunPointBlank
 
 - type: entity
   abstract: true

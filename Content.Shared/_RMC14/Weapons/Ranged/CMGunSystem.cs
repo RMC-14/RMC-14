@@ -16,6 +16,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Standing;
 using Content.Shared.Timing;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
@@ -41,6 +42,7 @@ public sealed class CMGunSystem : EntitySystem
     [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private readonly SharedProjectileSystem _projectile = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -48,6 +50,7 @@ public sealed class CMGunSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
@@ -95,12 +98,13 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<GunDamageModifierComponent, AmmoShotEvent>(OnGunDamageModifierAmmoShot);
         SubscribeLocalEvent<GunDamageModifierComponent, MapInitEvent>(OnGunDamageModifierMapInit);
 
+        SubscribeLocalEvent<GunPointBlankComponent, AmmoShotEvent>(OnGunPointBlankAmmoShot);
+
         SubscribeLocalEvent<GunSkilledRecoilComponent, GotEquippedHandEvent>(TryRefreshGunModifiers);
         SubscribeLocalEvent<GunSkilledRecoilComponent, GotUnequippedHandEvent>(TryRefreshGunModifiers);
         SubscribeLocalEvent<GunSkilledRecoilComponent, ItemWieldedEvent>(TryRefreshGunModifiers);
         SubscribeLocalEvent<GunSkilledRecoilComponent, ItemUnwieldedEvent>(TryRefreshGunModifiers);
         SubscribeLocalEvent<GunSkilledRecoilComponent, GunRefreshModifiersEvent>(OnRecoilSkilledRefreshModifiers);
-
 
         SubscribeLocalEvent<GunSkilledAccuracyComponent, GotEquippedHandEvent>(TryRefreshGunModifiers);
         SubscribeLocalEvent<GunSkilledAccuracyComponent, GotUnequippedHandEvent>(TryRefreshGunModifiers);
@@ -261,7 +265,7 @@ public sealed class CMGunSystem : EntitySystem
         var ev = new GetWeaponAccuracyEvent(baseMult);
         RaiseLocalEvent(weapon.Owner, ref ev);
 
-        weapon.Comp.ModifiedAccuracyMultiplier = ev.AccuracyMultiplier;
+        weapon.Comp.ModifiedAccuracyMultiplier = Math.Max(0.1, (double) ev.AccuracyMultiplier);
 
         Dirty(weapon);
     }
@@ -360,6 +364,30 @@ public sealed class CMGunSystem : EntitySystem
                 continue;
 
             comp.Damage *= ent.Comp.ModifiedMultiplier;
+        }
+    }
+
+    private void OnGunPointBlankAmmoShot(Entity<GunPointBlankComponent> gun, ref AmmoShotEvent args)
+    {
+        if (!TryComp(gun.Owner, out GunComponent? gunComp) || gunComp.Target == null || !HasComp<TransformComponent>(gunComp.Target))
+            return;
+
+        foreach (var projectile in args.FiredProjectiles)
+        {
+            if (!TryComp(projectile, out ProjectileComponent? projectileComp) ||
+                !TryComp(projectile, out PhysicsComponent? physicsComp) ||
+                gun.Comp.Range < (_transform.GetMoverCoordinates(gunComp.Target.Value).Position - _transform.GetMoverCoordinates(projectile).Position).Length())
+            {
+                continue;
+            }
+
+            if (_standing.IsDown(gunComp.Target.Value))
+            {
+                projectileComp.Damage *= gun.Comp.ProneDamageMult;
+                Dirty(projectile, projectileComp);
+            }
+
+            _projectile.ProjectileCollide((projectile, projectileComp, physicsComp), gunComp.Target.Value);
         }
     }
 

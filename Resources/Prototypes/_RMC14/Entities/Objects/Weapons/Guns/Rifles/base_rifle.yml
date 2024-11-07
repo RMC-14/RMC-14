@@ -66,6 +66,7 @@
   id: CMBaseWeaponRifle
   components:
   - type: GunGroupSpreadPenalty
+  - type: GunPointBlank
 
 - type: entity
   parent: BaseMagazineRifle
