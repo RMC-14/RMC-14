@@ -189,6 +189,7 @@
   components:
   - type: Item
     size: Huge
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/standard.rsi
   - type: FixedItemSizeStorage
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/ammo_rack.rsi
