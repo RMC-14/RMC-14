@@ -39,6 +39,12 @@
     blacklist:
       components:
       - Xeno
+  - type: Tag
+    tags:
+    - RMCAmmoBox
+
+- type: Tag
+  id: RMCAmmoBox
 
 - type: entity
   abstract: true
