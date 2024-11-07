@@ -120,7 +120,7 @@ public sealed class RMCProjectileSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (projectile.Comp.ShotFrom == null)
+        if (projectile.Comp.ForceHit || projectile.Comp.ShotFrom == null)
             return;
 
         if (!TryComp(projectile.Owner, out ProjectileComponent? projectileComponent))

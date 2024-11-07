@@ -285,6 +285,7 @@
       state: background_xeno
   - type: XenoMapTracked
   - type: Evasion
+  - type: RMCWeaponAccuracy # This is so projectiles fired by xenos get a correctly-generated seed for RNG.
 
 - type: entity
   abstract: true

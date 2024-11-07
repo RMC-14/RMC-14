@@ -234,6 +234,9 @@ public sealed class CMGunSystem : EntitySystem
 
     private void OnWeaponAccuracyExamined(Entity<RMCWeaponAccuracyComponent> weapon, ref ExaminedEvent args)
     {
+        if (!HasComp<GunComponent>(weapon.Owner))
+            return;
+
         using (args.PushGroup(nameof(RMCWeaponAccuracyComponent)))
         {
             args.PushMarkup(Loc.GetString("rmc-examine-text-weapon-accuracy", ("colour", accuracyExamineColour), ("accuracy", weapon.Comp.ModifiedAccuracyMultiplier)));

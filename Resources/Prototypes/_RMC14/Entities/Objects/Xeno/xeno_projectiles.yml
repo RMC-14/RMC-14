@@ -28,6 +28,8 @@
   - type: XenoProjectile
   - type: ProjectileMaxRange
     max: 7
+  - type: RMCProjectileAccuracy
+    accuracy: 160
 
 - type: entity
   abstract: true

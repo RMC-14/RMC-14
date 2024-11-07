@@ -41,6 +41,12 @@ public sealed partial class RMCProjectileAccuracyComponent : Component
     public bool IgnoreFriendlyEvasion = false;
 
     /// <summary>
+    /// If set to true, this makes the projectile automatically hit regardless of accuracy or any other modifiers.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool ForceHit = false;
+
+    /// <summary>
     /// These are the coordinates from which the projectile was shot. Used to determine the distance travelled.
     /// </summary>
     [DataField, AutoNetworkedField]
