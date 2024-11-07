@@ -12,13 +12,13 @@
     group: CMJobsMedical
     time: 3600 # 1 hours
   ranks:
-    RMCRankColonel:
+    RMCRankStaffSergeant:
     - !type:RoleTimeRequirement
-      role: RMCRankStaffSergeant
+      role: CMJobDropshipCrewChief
       time: 252000 # 70 hours
-    RMCRankLieutenantColonel:
+    RMCRankSergeant:
     - !type:RoleTimeRequirement
-      role: RMCRankSergeant
+      role: CMJobDropshipCrewChief
       time: 270000 # 10 hours
     RMCRankCorporal: []
   startingGear: CMGearDCC
