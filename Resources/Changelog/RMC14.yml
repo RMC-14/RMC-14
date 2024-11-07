@@ -1,74 +1,4 @@
 ﻿Entries:
-- author: musicmanvr
-  changes:
-  - message: Ported the M44 combat revolver, find it in your nearest vendor!
-    type: Add
-  id: 435
-  time: '2024-07-22T12:12:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3025
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenonids being able to open UIs that they shouldn't be able to.
-    type: Fix
-  id: 436
-  time: '2024-07-22T12:12:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3204
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added SU-6 magazines to squad vendors
-    type: Add
-  id: 437
-  time: '2024-07-22T23:10:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3208
-- author: Cu1r
-  changes:
-  - message: Fixed windows not having any destructible functionality.
-    type: Fix
-  - message: Windows now leave vaultable frames when smashed and can be repaired or
-      deconstructed entirely.
-    type: Add
-  id: 438
-  time: '2024-07-23T00:55:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3174
-- author: 0xRainy
-  changes:
-  - message: Xenos can no longer get in hypersleep chambers
-    type: Fix
-  id: 439
-  time: '2024-07-23T01:00:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3216
-- author: Vermidia
-  changes:
-  - message: Fixed xenonids being able to pull eggs.
-    type: Fix
-  id: 440
-  time: '2024-07-23T21:52:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3240
-- author: DrSmugleaf
-  changes:
-  - message: 'Added two tracks by Bolgarich that play during hijack: Hiking in the
-      fog and tango with bloodshed.'
-    type: Add
-  id: 441
-  time: '2024-07-23T22:05:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3220
-- author: Whisper
-  changes:
-  - message: Added Kate Fleming, Kaylie Rowleyininski, Amari 'Dropping Hot' Williams
-      figurines
-    type: Add
-  id: 442
-  time: '2024-07-23T22:07:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3176
-- author: DrSmugleaf
-  changes:
-  - message: Added the Spitter's missing charged spit + spray acid combo. Hitting
-      a marine with both in that order will make them take extra damage and be knocked
-      down. Remember to click the status on the right as a marine to resist the acid!
-    type: Add
-  id: 443
-  time: '2024-07-24T01:16:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3243
 - author: Tunguso4ka
   changes:
   - message: Added handheld Broadcasting Camera for Correspondents!
@@ -4911,5 +4841,77 @@
   id: 934
   time: '2024-11-04T04:15:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4691
+- author: Vermidia
+  changes:
+  - message: Fixed helmets being small
+    type: Fix
+  id: 935
+  time: '2024-11-06T01:28:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4710
+- author: Vermidia
+  changes:
+  - message: Fixed corrosive acid taking too long to apply. It's now 1 second for
+      items and 4 for structures.
+    type: Fix
+  id: 936
+  time: '2024-11-06T01:27:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4706
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the surplus uniform vendor not having a radio telephone pack.
+    type: Fix
+  - message: Fixed not showing counts for any votes.
+    type: Fix
+  id: 937
+  time: '2024-11-06T05:30:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4713
+- author: Vermidia
+  changes:
+  - message: Fix sentries continuing to fire after leaving their range
+    type: Fix
+  id: 938
+  time: '2024-11-06T22:39:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4740
+- author: Rainbeon
+  changes:
+  - message: Popups for Shoving, Tail Stab, Sentinel Paralyzing Slash, and Lurker
+      Crippling Strike are no longer predicted. This means the message will no longer
+      mispredict and lie to you about their effects happening, but will appear later
+      than they used to on successes.
+    type: Fix
+  id: 939
+  time: '2024-11-06T22:42:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4703
+- author: Vermidia
+  changes:
+  - message: Fixed shield fruit not applying the first time it's used
+    type: Fix
+  id: 940
+  time: '2024-11-06T22:42:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4730
+- author: Vermidia
+  changes:
+  - message: Fix defibs having 10 instead of 15 charges
+    type: Fix
+  - message: Fixed Defibs being able to have their powercells removed
+    type: Fix
+  id: 941
+  time: '2024-11-06T22:41:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4731
+- author: crystalHex
+  changes:
+  - message: Attempting to unholster a gun from a belt holster while unable to interact
+      with inventory items no longer breaks the holster.
+    type: Fix
+  id: 942
+  time: '2024-11-06T22:44:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4734
+- author: Vermidia
+  changes:
+  - message: Fixed medic and ez injectors not fitting into some storages
+    type: Fix
+  id: 943
+  time: '2024-11-07T08:18:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4744
 Name: RMC14
 Order: -1
