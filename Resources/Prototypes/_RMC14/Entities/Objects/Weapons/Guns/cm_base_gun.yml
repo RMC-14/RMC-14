@@ -37,6 +37,7 @@
     meleeCooldownOnShoot: false
     resetOnHandSelected: false
   - type: RMCWeaponAccuracy
+  - type: GunSkilledAccuracy
 
 - type: entity
   parent: BaseBullet

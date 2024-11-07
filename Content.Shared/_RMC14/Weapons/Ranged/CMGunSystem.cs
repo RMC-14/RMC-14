@@ -90,6 +90,7 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<GunUnskilledPenaltyComponent, GotEquippedHandEvent>(TryRefreshGunModifiers);
         SubscribeLocalEvent<GunUnskilledPenaltyComponent, GotUnequippedHandEvent>(TryRefreshGunModifiers);
         SubscribeLocalEvent<GunUnskilledPenaltyComponent, GunRefreshModifiersEvent>(OnGunUnskilledPenaltyRefresh);
+        SubscribeLocalEvent<GunUnskilledPenaltyComponent, GetWeaponAccuracyEvent>(OnGunUnskilledPenaltyGetWeaponAccuracy);
 
         SubscribeLocalEvent<GunDamageModifierComponent, AmmoShotEvent>(OnGunDamageModifierAmmoShot);
         SubscribeLocalEvent<GunDamageModifierComponent, MapInitEvent>(OnGunDamageModifierMapInit);
@@ -99,6 +100,13 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<GunSkilledRecoilComponent, ItemWieldedEvent>(TryRefreshGunModifiers);
         SubscribeLocalEvent<GunSkilledRecoilComponent, ItemUnwieldedEvent>(TryRefreshGunModifiers);
         SubscribeLocalEvent<GunSkilledRecoilComponent, GunRefreshModifiersEvent>(OnRecoilSkilledRefreshModifiers);
+
+
+        SubscribeLocalEvent<GunSkilledAccuracyComponent, GotEquippedHandEvent>(TryRefreshGunModifiers);
+        SubscribeLocalEvent<GunSkilledAccuracyComponent, GotUnequippedHandEvent>(TryRefreshGunModifiers);
+        SubscribeLocalEvent<GunSkilledAccuracyComponent, ItemWieldedEvent>(TryRefreshGunModifiers);
+        SubscribeLocalEvent<GunSkilledAccuracyComponent, ItemUnwieldedEvent>(TryRefreshGunModifiers);
+        SubscribeLocalEvent<GunSkilledAccuracyComponent, GetWeaponAccuracyEvent>(OnAccuracySkilledGetWeaponAccuracy);
 
         SubscribeLocalEvent<GunRequiresSkillsComponent, AttemptShootEvent>(OnRequiresSkillsAttemptShoot);
 
@@ -328,6 +336,17 @@ public sealed class CMGunSystem : EntitySystem
         args.MaxAngle += ent.Comp.AngleIncrease;
     }
 
+    private void OnGunUnskilledPenaltyGetWeaponAccuracy(Entity<GunUnskilledPenaltyComponent> ent, ref GetWeaponAccuracyEvent args)
+    {
+        if (TryGetUserSkills(ent, out var user) &&
+            _skills.HasSkill((user, user), ent.Comp.Skill, ent.Comp.Firearms))
+        {
+            return;
+        }
+
+        args.AccuracyMultiplier += ent.Comp.AccuracyAddMult;
+    }
+
     private void OnGunDamageModifierMapInit(Entity<GunDamageModifierComponent> ent, ref MapInitEvent args)
     {
         RefreshGunDamageMultiplier((ent.Owner, ent.Comp));
@@ -356,6 +375,14 @@ public sealed class CMGunSystem : EntitySystem
             return;
 
         args.CameraRecoilScalar = 0;
+    }
+
+    private void OnAccuracySkilledGetWeaponAccuracy(Entity<GunSkilledAccuracyComponent> gun, ref GetWeaponAccuracyEvent args)
+    {
+        if (!TryGetUserSkills(gun, out var user))
+            return;
+
+        args.AccuracyMultiplier += gun.Comp.AccuracyAddMult * _skills.GetSkill((user, user), gun.Comp.Skill);
     }
 
     private void OnRequiresSkillsAttemptShoot(Entity<GunRequiresSkillsComponent> ent, ref AttemptShootEvent args)
