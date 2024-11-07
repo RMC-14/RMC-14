@@ -3,5 +3,5 @@
   id: RMCRankChiefEngineerFirstLT
   requirements:
   - !type:RoleTimeRequirement
-    role: CMChiefEngineer
+    role: CMJobChiefEngineer
     time: 252000 # 70 hours
