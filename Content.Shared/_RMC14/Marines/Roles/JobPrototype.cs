@@ -38,7 +38,7 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     [DataField]
     public readonly string? OverwatchRoleName;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public readonly Dictionary<ProtoId<RankPrototype>, HashSet<JobRequirement>?>? Ranks;
 
     [DataField]
