@@ -43,6 +43,7 @@ public sealed partial class RankPrototype : IPrototype, IInheritingPrototype
     [DataField]
     public string? FemalePrefix { get; set; }
 
+    [AlwaysPushInheritance]
     [DataField]
-    public HashSet<JobRequirement>? Requirements { get; set; }
+    public string? Paygrade { get; set; }
 }

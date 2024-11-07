@@ -22,7 +22,7 @@ public abstract class SharedRankSystem : EntitySystem
         using (args.PushGroup(nameof(SharedRankSystem), 1))
         {
             var user = ent.Owner;
-            var rank = GetRankString(user);
+            var rank = GetRankString(user, hasPaygrade: true);
 
             if (rank != null)
             {
@@ -75,7 +75,7 @@ public abstract class SharedRankSystem : EntitySystem
     /// <summary>
     ///     Gets the rank name of a given mob.
     /// </summary>
-    public string? GetRankString(EntityUid uid, bool isShort = false)
+    public string? GetRankString(EntityUid uid, bool isShort = false, bool hasPaygrade = false)
     {
         var rank = GetRank(uid);
         if (rank == null)
@@ -97,6 +97,10 @@ public abstract class SharedRankSystem : EntitySystem
             };
 
             return genderPrefix;
+        }
+        else if (hasPaygrade && rank.Paygrade != null)
+        {
+            return "(" + rank.Paygrade + ")" + rank.Name;
         }
         else
         {

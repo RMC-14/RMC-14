@@ -61,14 +61,13 @@ public sealed class RankSystem : SharedRankSystem
         foreach (var rank in ranks)
         {
             var failed = false;
+            var jobRequirements = rank.Value;
 
-            if (_prototypes.TryIndex<RankPrototype>(rank, out var rankPrototype) && rankPrototype != null)
+            if (_prototypes.TryIndex<RankPrototype>(rank.Key, out var rankPrototype) && rankPrototype != null)
             {
-                var requirements = rankPrototype.Requirements;
-
-                if (requirements != null)
+                if (jobRequirements != null)
                 {
-                    foreach (var req in requirements)
+                    foreach (var req in jobRequirements)
                     {
                         if (!req.Check(_entityManager, _prototypes, ev.Profile, playTimes, out _))
                             failed = true;

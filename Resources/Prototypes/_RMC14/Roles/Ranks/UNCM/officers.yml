@@ -1,0 +1,35 @@
+- type: rank
+  id: RMCRankColonel
+  name: Colonel
+  prefix: Col.
+  paygrade: O6
+
+- type: rank
+  id: RMCRankLieutenantColonel
+  name: Lieutenant Colonel
+  prefix: Lt.Col.
+  paygrade: O5
+
+- type: rank
+  id: RMCRankMajor
+  name: Major
+  prefix: Maj.
+  paygrade: O4
+
+- type: rank
+  id: RMCRankCaptain
+  name: Captain
+  prefix: CPT.
+  paygrade: O3
+
+- type: rank
+  id: RMCRankFirstLT
+  name: First Lieutenant
+  prefix: 1stLT.
+  paygrade: O2
+
+- type: rank
+  id: RMCRankSecondLT
+  name: Second Lieutenant
+  prefix: 2ndLT.
+  paygrade: O1
