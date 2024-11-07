@@ -158,13 +158,20 @@
   name: box of breaching shells
   description: A box filled with breaching shotgun shells. 16 Gauge.
   components:
-  - type: BallisticAmmoProvider
-    proto: RMCShellShotgunBreaching
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCShellShotgunBreaching
+  - type: StorageFill
+    contents:
+    - id: RMCShellShotgunBreaching
+      amount: 5
   - type: Sprite
     layers:
-    - state: breaching_e
     - state: breaching
-      map: [ "enum.CMAmmoBoxLayers.Ammo" ]
+      map: [ "full" ]
+    - state: breaching_e
+      map: [ "empty" ]
   - type: Tag
     tags:
     - RMCBoxShotgunBreaching

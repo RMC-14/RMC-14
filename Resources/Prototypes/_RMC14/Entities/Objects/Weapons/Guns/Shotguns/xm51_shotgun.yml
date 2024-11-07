@@ -79,30 +79,11 @@
     tags:
     - RMCWeaponShotgun
     - RMCWeaponShotgunXM51
-
-- type: entity
-  parent: CMShellShotgunBase
-  id: RMCShellShotgunBreaching
-  name: handful of breaching shells
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi
-    layers:
-    - state: breaching_shell_1
-  - type: CartridgeAmmo
-    count: 4
-    spread: 5
-    proto: RMCPelletShotgunBreaching
-    deleteOnSpawn: true
-    soundEject:
-      collection: ShellEject
-  - type: Tag
-    tags:
-    - Cartridge
-    - RMCShellShotgunBreaching
-
-- type: Tag
-  id: RMCWeaponShotgun
+  - type: GunDamageMultipliers
+    multipliers:
+      Turf: 30
+      Breaching: 15
+      Xeno: 0.23 # TODO RMC14 pylon 6
 
 - type: Tag
   id: RMCWeaponShotgunXM51

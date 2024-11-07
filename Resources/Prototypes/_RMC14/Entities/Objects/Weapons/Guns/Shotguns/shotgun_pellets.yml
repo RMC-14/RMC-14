@@ -155,7 +155,7 @@
 - type: entity
   parent: CMPelletShotgunBase
   id: RMCPelletShotgunBreaching
-  name: breaching shell
+  name: light breaching shell
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
@@ -165,7 +165,8 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 20
-        Structural: 375
+        Blunt: 85
+  - type: CMArmorPiercing
+    amount: 5
   - type: TimedDespawn
     lifetime: 0.075
