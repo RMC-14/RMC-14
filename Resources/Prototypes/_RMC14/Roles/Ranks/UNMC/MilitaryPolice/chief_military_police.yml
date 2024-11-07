@@ -1,7 +1,0 @@
-- type: rank
-  parent: RMCBaseRankFirstLT
-  id: RMCRankCMPFirstLT
-  requirements:
-  - !type:RoleTimeRequirement
-    role: CMJobChiefMP
-    time: 36000 # 10 hours

@@ -9,7 +9,7 @@
     group: CMJobsMedical
     time: 3600 # 1 hour
   ranks:
-  - RMCBaseRankSecondLT
+    RMCRankSecondLT: []
   startingGear: CMGearDoctor
   icon: "CMJobIconDoctor"
   joinNotifyCrew: false

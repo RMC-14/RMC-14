@@ -9,9 +9,15 @@
     department: CMSquad
     time: 36000 # 10 hours
   ranks:
-  - RMCRankMilitaryPoliceStaffSergeant
-  - RMCRankMilitaryPoliceSergeant
-  - RMCBaseRankCorporal
+    RMCRankStaffSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryPolice
+      time: 252000 # 70 hours
+    RMCRankSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryPolice
+      time: 36000 # 10 hours
+    RMCRankCorporal: []
   weight: 5
   startingGear: CMGearMilitaryPolice
   icon: "CMJobIconMilitaryPolice"

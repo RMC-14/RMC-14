@@ -9,9 +9,15 @@
     department: CMSquad
     time: 36000 # 10 hours
   ranks:
-  - RMCRankSquadLeaderGunnerySergeant
-  - RMCRankSquadLeaderStaffSergeant
-  - RMCBaseRankSergeant
+    RMCRankGunnerySergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 252000 # 70 hours
+    RMCRankStaffSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 36000 # 10 hours
+    RMCRankSergeant: []
   startingGear: CMGearSquadLeader
   icon: "CMJobIconSquadLeader"
   joinNotifyCrew: false
