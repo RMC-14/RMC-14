@@ -9,7 +9,7 @@
     department: CMSquad
     time: 18000 # 5 hours
   ranks:
-  - RMCBaseRankSecondLT
+    RMCRankSecondLT: []
   startingGear: CMGearIntelOfficer
   icon: "CMJobIconIntelOfficer"
   joinNotifyCrew: false

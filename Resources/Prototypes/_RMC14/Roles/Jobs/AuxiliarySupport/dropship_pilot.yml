@@ -9,7 +9,7 @@
     group: CMJobsDropship
     time: 7200 # 2 hours
   ranks:
-  - RMCBaseRankSecondLT
+    RMCRankSecondLT: []
   startingGear: CMGearPilotDropship
   icon: "CMJobIconPilotDropship"
   joinNotifyCrew: false
