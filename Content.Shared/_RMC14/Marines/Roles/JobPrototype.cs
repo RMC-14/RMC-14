@@ -38,8 +38,8 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     [DataField]
     public readonly string? OverwatchRoleName;
 
-    [DataField]
-    public Dictionary<ProtoId<RankPrototype>, HashSet<JobRequirement>?>? Ranks = null;
+    [DataField, AutoNetworkedField]
+    public readonly Dictionary<ProtoId<RankPrototype>, HashSet<JobRequirement>?>? Ranks;
 
     [DataField]
     public SpriteSpecifier.Rsi? MinimapIcon;
