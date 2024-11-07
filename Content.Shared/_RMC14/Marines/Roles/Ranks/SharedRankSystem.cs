@@ -1,5 +1,7 @@
 ﻿using Content.Shared.Clothing;
 using Content.Shared.Examine;
+using Content.Shared.Humanoid;
+using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Marines.Roles.Ranks;
@@ -80,9 +82,26 @@ public abstract class SharedRankSystem : EntitySystem
             return null;
 
         if (isShort)
-            return rank.ShortenedName;
+        {
+            if (rank.FemalePrefix == null || rank.MalePrefix == null)
+                return rank.Prefix;
+
+            if (!TryComp<HumanoidAppearanceComponent>(uid, out var humanoidAppearance))
+                return rank.Prefix;
+
+            var genderPrefix = humanoidAppearance.Gender switch
+            {
+                Gender.Female => rank.FemalePrefix,
+                Gender.Male => rank.MalePrefix,
+                Gender.Epicene or Gender.Neuter or _ => rank.Prefix
+            };
+
+            return genderPrefix;
+        }
         else
+        {
             return rank.Name;
+        }
     }
 
     /// <summary>

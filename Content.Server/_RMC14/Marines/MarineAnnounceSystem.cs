@@ -2,7 +2,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.Popups;
-using Content.Server.Mind;
 using Content.Server.Radio.EntitySystems;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
@@ -14,7 +13,6 @@ using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
-using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Robust.Server.Audio;
 using Robust.Shared.Audio;
@@ -35,9 +33,6 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     [Dependency] private readonly SharedDropshipSystem _dropship = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly JobSystem _job = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;

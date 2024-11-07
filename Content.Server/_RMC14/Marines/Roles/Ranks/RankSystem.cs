@@ -3,6 +3,7 @@ using Content.Server.GameTicking;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared.Access.Systems;
+using Content.Shared.Chat;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 
@@ -23,13 +24,13 @@ public sealed class RankSystem : SharedRankSystem
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
     }
 
-    private void OnSpeakerNameTransform(EntityUid uid, RankComponent component, TransformSpeakerNameEvent args)
+    private void OnSpeakerNameTransform(Entity<RankComponent> ent, ref TransformSpeakerNameEvent args)
     {
-        var name = GetSpeakerRankName(uid);
+        var name = GetSpeakerRankName(ent);
         if (name == null)
             return;
 
-        args.Name = name;
+        args.VoiceName = name;
     }
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
