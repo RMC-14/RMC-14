@@ -2,28 +2,16 @@
   id: RMCRankWeYaExecutiveSpecialist
   name: Executive Specialist
   prefix: Exec. Spc.
-  requirements:
-  - !type:RoleTimeRequirement
-    role: CMJobLiaison
-    time: 630000 # 175 hours
 
 - type: rank
   id: RMCRankWeYaSeniorExecutive
   name: Senior Executive
   prefix: Sr. Exec.
-  requirements:
-  - !type:RoleTimeRequirement
-    role: CMJobLiaison
-    time: 252000 # 70 hours
 
 - type: rank
   id: RMCRankWeYaExecutive
   name: Executive
   prefix: Exec.
-  requirements:
-  - !type:RoleTimeRequirement
-    role: CMJobLiaison
-    time: 90000 # 25 hours
 
 - type: rank
   id: RMCRankWeYaJuniorExecutive

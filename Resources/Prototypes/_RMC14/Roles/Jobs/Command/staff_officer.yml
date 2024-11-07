@@ -12,7 +12,7 @@
     group: CMDepartmentsHuman
     time: 54000 # 15 hours
   ranks:
-  - RMCBaseRankSecondLT
+    RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearStaffOfficer
   icon: "CMJobIconStaffOfficer"
