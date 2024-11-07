@@ -8,15 +8,15 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsEngineering
     time: 36000 # 10 hours
+  ranks:
+  - RMCRankChiefEngineerFirstLT
+  - RMCBaseRankSecondLT
   weight: 5
   startingGear: CMGearChiefEngineer
   icon: "CMJobIconChiefEngineer"
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: cm-job-supervisors-aso
-  ranks:
-  - RMCRankChiefEngineerFirstLT
-  - RMCBaseRankSecondLT
   accessGroups:
   - CMCE
   minimapIcon:
