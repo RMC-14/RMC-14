@@ -8,18 +8,27 @@
   overdose: 30
   metabolisms:
     Medicine:
-      metabolismRate: 0.1
+      metabolismRate: 0.2
       effects:
       - !type:EqualHealthChange
         damage:
-        - Toxin: -1
+        - Toxin: -2
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 30
         damage:
           groups:
+            Brute: 1 # TODO: change to eye damage
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
             Brute: 1
+            Burn: 1
+            Toxin: 2
       - !type:Jitter
         conditions:
         - !type:ReagentThreshold
@@ -51,26 +60,29 @@
   overdose: 30
   metabolisms:
     Medicine:
-      metabolismRate: 0.1
+      metabolismRate: 0.2
       effects:
       - !type:GenericStatusEffect
         key: Drunk
-        time: 1.5
+        time: 3
         type: Remove
+      - !type:AdjustReagent # TODO add another alcohols to decrease
+        reagent: RMCEthanol
+        amount: -3
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 30
         damage:
           groups:
-            Toxin: 0.75
+            Toxin: 1.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 50
         damage:
           groups:
-            Toxin: 2.25
+            Toxin: 6
 
 # TODO RMC14 other effects
 - type: reagent
@@ -79,29 +91,40 @@
   name: reagent-name-cmarithrazine
   desc: reagent-desc-cmarithrazine
   color: "#3c8529"
-  overdose: 7.5
+  overdose: 15
   metabolisms:
     Medicine:
-      metabolismRate: 0.03
+      metabolismRate: 0.05
       effects:
       - !type:EqualHealthChange
         damage:
-        - Toxin: -0.5
+        - Toxin: -1
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: 1
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
-          min: 7.5
+          min: 15
         damage:
           groups:
-            Brute: 0.5
+            Brute: 3 # TODO: change to 1 eye damage + 2 brute damage
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
+        damage:
+          groups:
+            Brute: 4
       - !type:Jitter
         conditions:
         - !type:ReagentThreshold
-          min: 12.5
+          min: 25
       - !type:PopupMessage
         conditions:
         - !type:ReagentThreshold
-          min: 12.5
+          min: 25
         type: Local
         visualType: Medium
         messages: [ "generic-reagent-effect-nauseous" ]
@@ -109,29 +132,11 @@
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
-          min: 12.5
+          min: 25
         key: Drunk
         component: Drunk
         time: 30
         type: Add
-      - !type:HealthChange
-        damage:
-          groups:
-            Brute: 0.12
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 7.5
-        damage:
-          groups:
-            Brute: 0.25
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
-          min: 12.5
-        damage:
-          groups:
-            Brute: 0.62
 
 # TODO RMC14 other effects
 - type: reagent
@@ -143,26 +148,26 @@
   overdose: 30
   metabolisms:
     Medicine:
-      metabolismRate: 0.1
+      metabolismRate: 0.2
       effects:
       - !type:EqualHealthChange
         damage:
-        - Brute: -0.5
+        - Brute: -1
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 30
         damage:
           groups:
-            Burn: 0.25
+            Burn: 1
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 50
         damage:
           groups:
-            Burn: 2.5
-            Toxin: 1
+            Burn: 6
+            Toxin: 2
 
 # TODO RMC14 other effects (remove toxic reagents)
 - type: reagent
@@ -173,16 +178,16 @@
   color: "#4acaca"
   metabolisms:
     Medicine:
-      metabolismRate: 0.1
+      metabolismRate: 0.2
       effects:
       - !type:EqualHealthChange
         conditions:
         - !type:Temperature
           max: 170
         damage:
-        - Brute: -1.5
-        - Burn: -1
-        - Toxin: -1.5
+        - Brute: -3
+        - Burn: -3
+        - Toxin: -3
       - !type:HealthChange
         conditions:
         - !type:Temperature
@@ -190,7 +195,7 @@
         damage:
           types:
             Asphyxiation: -1
-            Cellular: -0.12
+            Cellular: -3
 
 # TODO RMC14 other effects
 - type: reagent
@@ -202,27 +207,27 @@
   overdose: 15
   metabolisms:
     Medicine:
-      metabolismRate: 0.1
+      metabolismRate: 0.2
       effects:
       - !type:EqualHealthChange
         damage:
-        - Burn: -0.75
+        - Burn: -1.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 15
         damage:
           groups:
-            Burn: 0.37
-            Toxin: 0.37
+            Burn: 1.5
+            Toxin: 1.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 25
         damage:
           groups:
-            Burn: 0.88
-            Toxin: 0.88
+            Burn: 9
+            Toxin: 9
 
 # TODO RMC14 other effects
 - type: reagent
@@ -234,26 +239,26 @@
   overdose: 30
   metabolisms:
     Medicine:
-      metabolismRate: 0.1
+      metabolismRate: 0.2
       effects:
       - !type:EqualHealthChange
         damage:
-        - Airloss: -1
+        - Airloss: -4
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 30
         damage:
           groups:
-            Toxin: 0.5
+            Toxin: 2
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 50
         damage:
           groups:
-            Brute: 1
-            Toxin: 2
+            Brute: 4
+            Toxin: 8
 
 # TODO RMC14 other effects
 - type: reagent
@@ -265,7 +270,7 @@
   overdose: 15
   metabolisms:
     Medicine:
-      metabolismRate: 0.1
+      metabolismRate: 0.2
       effects:
       - !type:RemoveDamage
         group: Airloss
@@ -275,15 +280,15 @@
           min: 15
         damage:
           groups:
-            Toxin: 0.75
+            Toxin: 1.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 25
         damage:
           groups:
-            Brute: 1.5
-            Toxin: 3
+            Brute: 3
+            Toxin: 7.5
 
 # TODO RMC14 other effects (pain)
 # TODO RMC14 injected only
@@ -297,15 +302,16 @@
   worksOnTheDead: true
   metabolisms:
     Medicine:
-      metabolismRate: 0.2
+      metabolismRate: 0.4
       effects:
       - !type:EqualHealthChange
         conditions:
         - !type:RecentlyDefibrillated
         damage:
-        - Brute: -20
-        - Burn: -20
-        - Toxin: -20
+        - Brute: -16
+        - Burn: -16
+        - Toxin: -16
+        - Asphyxiation: -16
       - !type:AdjustReagent
         conditions:
         - !type:RecentlyDefibrillated
@@ -317,17 +323,10 @@
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
-          min: 10.5
-        damage:
-          groups:
-            Toxin: 0.19
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentThreshold
           min: 20
         damage:
           types:
-            Asphyxiation: 1.5
+            Brute: 1
 
 # TODO RMC14 other effects
 # TODO RMC14 allow breathing in crit instead of reducing asphyxiation
@@ -340,7 +339,7 @@
   overdose: 60
   metabolisms:
     Medicine:
-      metabolismRate: 0.1
+      metabolismRate: 0.2
       effects:
       - !type:HealthChange
         conditions:
@@ -388,27 +387,27 @@
   overdose: 30
   metabolisms:
     Medicine:
-      metabolismRate: 0.1
+      metabolismRate: 0.2
       effects:
       - !type:EqualHealthChange
         damage:
-        - Burn: -0.5
+        - Burn: -1
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 30
         damage:
           groups:
-            Brute: 0.3
-            Toxin: 0.3
+            Brute: 1
+            Toxin: 1
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 50
         damage:
           groups:
-            Brute: 2.5
-            Toxin: 2.5
+            Brute: 5.5
+            Toxin: 5.5
 
 # TODO RMC14 other effects
 - type: reagent
@@ -420,7 +419,7 @@
   overdose: 30
   metabolisms:
     Medicine:
-      metabolismRate: 0.1
+      metabolismRate: 0.2
       effects:
       - !type:StabilizeTemperature
         stable: 310
@@ -460,12 +459,12 @@
   overdose: 30
   metabolisms:
     Medicine:
-      metabolismRate: 0.1
+      metabolismRate: 0.2
       effects:
       - !type:EqualHealthChange
         damage:
-        - Brute: -0.25
-        - Burn: -0.25
+        - Brute: -0.5
+        - Burn: -0.5
         - Toxin: -0.5
       - !type:HealthChange
         damage:
@@ -477,18 +476,18 @@
           min: 30
         damage:
           groups:
-            Brute: 0.13
-            Burn: 0.26
-            Toxin: 0.26
+            Brute: 1 # TODO: change to 0.5 eye damage + 0.5 brute damage
+            Burn: 0.5
+            Toxin: 0.25
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 50
         damage:
           groups:
-            Brute: 1.5
-            Burn: 1.25
-            Toxin: 2.25
+            Brute: 2.5
+            Burn: 2.5
+            Toxin: 4
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
@@ -508,26 +507,26 @@
   overdose: 15
   metabolisms:
     Medicine:
-      metabolismRate: 0.1
+      metabolismRate: 0.2
       effects:
       - !type:EqualHealthChange
         damage:
-        - Brute: -0.75
+        - Brute: -1.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 15
         damage:
           groups:
-            Burn: 0.375
+            Burn: 1.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 25
         damage:
           groups:
-            Burn: 3.75
-            Toxin: 1.5
+            Burn: 9
+            Toxin: 3
 
 # TODO RMC14 other effects
 # TODO RMC14 progressive eye healing
@@ -541,7 +540,7 @@
   overdose: 30
   metabolisms:
     Medicine:
-      metabolismRate: 0.1
+      metabolismRate: 0.2
       effects:
       - !type:ChemHealEyeDamage
       - !type:HealthChange
@@ -550,16 +549,16 @@
           min: 30
         damage:
           groups:
-            Toxin: 0.5
+            Toxin: 1
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 50
         damage:
           groups:
-            Brute: 0.5
-            Burn: 0.5
-            Toxin: 2
+            Brute: 1
+            Burn: 1
+            Toxin: 4
 
 # TODO RMC14 other effects
 # TODO RMC14 heal cloneloss
@@ -571,13 +570,20 @@
   color: "#51b4db"
   metabolisms:
     Medicine:
-      metabolismRate: 0.1
+      metabolismRate: 0.2
       effects:
       - !type:EqualHealthChange
         conditions:
         - !type:Temperature
           max: 170
         damage:
-        - Toxin: -3.75
-        - Brute: -2.25
-        - Burn: -3
+        - Toxin: -6
+        - Brute: -6
+        - Burn: -6
+      - !type:HealthChange
+        conditions:
+        - !type:Temperature
+          max: 170
+        damage:
+          types:
+            Cellular: -6
