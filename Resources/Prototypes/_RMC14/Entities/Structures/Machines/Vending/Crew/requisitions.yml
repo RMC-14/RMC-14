@@ -120,7 +120,7 @@
       - id: RMCSatchelWelder
         amount: 5
       - id: RMCBackpackAmmo
-         amount: 2
+        amount: 2
       - id: RMCBackpackRTO
         amount: 2
       #- id: Parachute
