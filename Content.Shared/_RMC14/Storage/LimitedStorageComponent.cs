@@ -15,6 +15,7 @@ public sealed partial class LimitedStorageComponent : Component
     [Serializable, NetSerializable]
     public partial struct Limit()
     {
+        [DataField]
         public int Count = 1;
 
         [DataField(required: true)]

@@ -78,7 +78,7 @@
 # Empty Tray
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: BaseItem
   id: RMCTray_empty
   name: empty tray

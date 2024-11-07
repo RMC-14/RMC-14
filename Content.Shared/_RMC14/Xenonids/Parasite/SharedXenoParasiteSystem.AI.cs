@@ -14,6 +14,7 @@ using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared.Throwing;
 using Content.Shared.Stunnable;
+using Content.Shared._RMC14.Xenonids.Leap;
 
 namespace Content.Shared._RMC14.Xenonids.Parasite;
 
@@ -34,9 +35,48 @@ public abstract partial class SharedXenoParasiteSystem
         SubscribeLocalEvent<ParasiteAIComponent, DroppedEvent>(OnAIDropPickup);
         SubscribeLocalEvent<ParasiteAIComponent, EntGotInsertedIntoContainerMessage>(OnAIDropPickup);
 
+        SubscribeLocalEvent<TrapParasiteComponent, ComponentStartup>(OnTrapAdded);
+        SubscribeLocalEvent<TrapParasiteComponent, PlayerAttachedEvent>(OnEndTrap);
+        SubscribeLocalEvent<TrapParasiteComponent, EntGotInsertedIntoContainerMessage>(OnEndTrap);
+        SubscribeLocalEvent<TrapParasiteComponent, XenoLeapHitEvent>(OnLeapEndTrap);
+
         SubscribeLocalEvent<ParasiteTiredOutComponent, MapInitEvent>(OnParasiteAIMapInit);
         SubscribeLocalEvent<ParasiteTiredOutComponent, UpdateMobStateEvent>(OnParasiteAIUpdateMobState,
             after: [typeof(MobThresholdSystem), typeof(SharedXenoPheromonesSystem)]);
+    }
+
+    private void OnTrapAdded(Entity<TrapParasiteComponent> para, ref ComponentStartup args)
+    {
+        para.Comp.LeapAt = _timing.CurTime + para.Comp.JumpTime;
+        para.Comp.DisableAt = para.Comp.LeapAt + para.Comp.DisableTime;
+
+        if (!TryComp<XenoLeapComponent>(para, out var leap))
+            return;
+
+        para.Comp.NormalLeapDelay = leap.Delay;
+        leap.Delay = TimeSpan.Zero;
+        _rmcNpc.SleepNPC(para);
+    }
+
+    private void OnEndTrap<T>(Entity<TrapParasiteComponent> para, ref T args) where T : EntityEventArgs
+    {
+        ResetTrapState(para);
+    }
+
+    private void OnLeapEndTrap(Entity<TrapParasiteComponent> para, ref XenoLeapHitEvent args)
+    {
+        ResetTrapState(para);
+    }
+
+    public void ResetTrapState(Entity<TrapParasiteComponent> para)
+    {
+        if (!TryComp<XenoLeapComponent>(para, out var leap))
+            return;
+
+        leap.Delay = para.Comp.NormalLeapDelay;
+        RemCompDeferred<TrapParasiteComponent>(para);
+        if (TryComp<ParasiteAIComponent>(para, out var ai) && ai.Mode == ParasiteMode.Active)
+            _rmcNpc.WakeNPC(para);
     }
 
     private void OnPlayerAdded(Entity<XenoParasiteComponent> para, ref PlayerAttachedEvent args)

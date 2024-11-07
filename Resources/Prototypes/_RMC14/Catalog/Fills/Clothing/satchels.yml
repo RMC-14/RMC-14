@@ -12,3 +12,12 @@
     items:
       tags:
       - BoxCardboard
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelCivilianFill
+  suffix: Civilian, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20

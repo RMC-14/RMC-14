@@ -231,6 +231,21 @@
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_m54
   objectType: Item
+  
+# Nailgun
+- type: construction
+  parent: RMC
+  name: Magazine Box (Nailgun)
+  id: RMCBoxMagazineSMGNailgunEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazineSMGNailgunEmpty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain nailgun mags.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_nailgun
+  objectType: Item
 
 # Shotgun
 - type: construction
@@ -425,6 +440,13 @@
         amount: 1
         doAfter: 1
     
+    # Nailgun
+    - to: RMCBoxMagazineSMGNailgunEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 1
+    
     # Shotgun
     - to: RMCBoxShellsBuckshotEmpty
       steps:
@@ -506,6 +528,10 @@
     entity: RMCBoxMagazineRevolverM44Empty
   - node: RMCBoxMagazineRevolverM44MarksmanEmpty
     entity: RMCBoxMagazineRevolverM44MarksmanEmpty
+  
+  # Nailgun
+  - node: RMCBoxMagazineSMGNailgunEmpty
+    entity: RMCBoxMagazineSMGNailgunEmpty
     
   # Shotgun
   - node: RMCBoxShellsBuckshotEmpty

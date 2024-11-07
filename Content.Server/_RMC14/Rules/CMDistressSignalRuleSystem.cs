@@ -5,11 +5,13 @@ using Content.Server._RMC14.Stations;
 using Content.Server._RMC14.Xenonids.Hive;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
+using Content.Server.Fax;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Preferences.Managers;
+using Content.Server.Roles;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
 using Content.Server.Spawners.Components;
@@ -28,6 +30,7 @@ using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Spawners;
+using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
@@ -36,6 +39,7 @@ using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
+using Content.Shared.Fax.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Mobs;
@@ -52,7 +56,6 @@ using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -70,6 +73,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ContainerSystem _containers = default!;
     [Dependency] private readonly DropshipSystem _dropship = default!;
+    [Dependency] private readonly FaxSystem _fax = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly XenoHiveSystem _hive = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
@@ -86,7 +90,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCStationJobsSystem _rmcStationJobs = default!;
+    [Dependency] private readonly RoleSystem _roles = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
+    [Dependency] private readonly PlayTimeTrackingSystem _playTimeTracking = default!;
     [Dependency] private readonly StationJobsSystem _stationJobs = default!;
     [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
@@ -101,6 +107,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private string _planetMaps = default!;
     private float _marinesPerXeno;
+    private float _marinesPerSurvivor;
+    private float _maximumSurvivors;
+    private float _minimumSurvivors;
     private string _adminFaxAreaMap = string.Empty;
     private int _mapVoteExcludeLast;
 
@@ -146,6 +155,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         Subs.CVar(_config, RMCCVars.RMCPlanetMaps, v => _planetMaps = v, true);
         Subs.CVar(_config, RMCCVars.CMMarinesPerXeno, v => _marinesPerXeno = v, true);
+        Subs.CVar(_config, RMCCVars.RMCMarinesPerSurvivor, v => _marinesPerSurvivor = v, true);
+        Subs.CVar(_config, RMCCVars.RMCSurvivorsMaximum, v => _maximumSurvivors = v, true);
+        Subs.CVar(_config, RMCCVars.RMCSurvivorsMinimum, v => _minimumSurvivors = v, true);
         Subs.CVar(_config, RMCCVars.RMCAdminFaxAreaMap, v => _adminFaxAreaMap = v, true);
         Subs.CVar(_config, RMCCVars.RMCPlanetMapVoteExcludeLast, v => _mapVoteExcludeLast = v, true);
 
@@ -242,6 +254,54 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 return playerId;
             }
 
+            var survivorSpawners = new List<EntityUid>();
+            var spawners = EntityQueryEnumerator<SpawnPointComponent>();
+            while (spawners.MoveNext(out var spawnId, out var spawnComp))
+            {
+                if (spawnComp.Job == comp.SurvivorJob)
+                    survivorSpawners.Add(spawnId);
+            }
+
+            var survivorSpawnersLeft = new List<EntityUid>(survivorSpawners);
+            NetUserId? SpawnSurvivor(List<NetUserId> list, out bool stop)
+            {
+                stop = false;
+                if (survivorSpawners.Count == 0)
+                {
+                    stop = true;
+                    return null;
+                }
+
+                if (survivorSpawnersLeft.Count == 0)
+                    survivorSpawnersLeft.AddRange(survivorSpawners);
+
+                var playerId = _random.PickAndTake(list);
+                if (!_player.TryGetSessionById(playerId, out var player))
+                {
+                    Log.Error($"Failed to find player with id {playerId} during survivor selection.");
+                    return null;
+                }
+
+                var spawner = _random.PickAndTake(survivorSpawnersLeft);
+                ev.PlayerPool.Remove(player);
+                GameTicker.PlayerJoinGame(player);
+
+                var profile = GameTicker.GetPlayerProfile(player);
+                var coordinates = _transform.GetMoverCoordinates(spawner);
+                var survivorMob = _stationSpawning.SpawnPlayerMob(coordinates, comp.SurvivorJob, profile, null);
+
+                if (!_mind.TryGetMind(playerId, out var mind))
+                    mind = _mind.CreateMind(playerId);
+
+                RemCompDeferred<TacticalMapUserComponent>(survivorMob);
+                _mind.TransferTo(mind.Value, survivorMob);
+
+                _roles.MindAddJobRole(mind.Value, jobPrototype: comp.SurvivorJob);
+
+                _playTimeTracking.PlayerRolesChanged(player);
+                return playerId;
+            }
+
             EntityUid SpawnXenoEnt(EntProtoId ent)
             {
                 var leader = _prototypes.TryIndex(ent, out var proto) &&
@@ -257,7 +317,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             }
 
             var totalXenos = (int) Math.Round(Math.Max(1, ev.PlayerPool.Count / _marinesPerXeno));
-            var marines = ev.PlayerPool.Count - totalXenos;
+            var totalSurvivors = (int) Math.Round(ev.PlayerPool.Count / _marinesPerSurvivor);
+            totalSurvivors = (int) Math.Clamp(totalSurvivors, _minimumSurvivors, _maximumSurvivors);
+            var marines = ev.PlayerPool.Count - totalXenos - totalSurvivors;
             var jobSlotScaling = _config.GetCVar(RMCCVars.RMCJobSlotScaling);
             if (marines > 0 && jobSlotScaling)
             {
@@ -348,22 +410,58 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 }
             }
 
-            var selected = 0;
+            var selectedXenos = 0;
             for (var i = xenoCandidates.Length - 1; i >= 0; i--)
             {
                 var list = xenoCandidates[i];
-                while (list.Count > 0 && selected < totalXenos)
+                while (list.Count > 0 && selectedXenos < totalXenos)
                 {
                     if (SpawnXeno(list, comp.LarvaEnt) != null)
-                        selected++;
+                        selectedXenos++;
                 }
             }
 
             // Any unfilled xeno slots become larva
-            for (var i = selected; i < totalXenos; i++)
+            for (var i = selectedXenos; i < totalXenos; i++)
             {
                 // TODO RMC14 burrowed larva
                 SpawnXenoEnt(comp.LarvaEnt);
+            }
+
+            var survivorCandidates = new List<NetUserId>[Enum.GetValues<JobPriority>().Length];
+            for (var i = 0; i < survivorCandidates.Length; i++)
+            {
+                survivorCandidates[i] = [];
+            }
+
+            foreach (var player in ev.PlayerPool)
+            {
+                var id = player.UserId;
+                if (!IsAllowed(id, comp.SurvivorJob))
+                    continue;
+
+                if (!ev.Profiles.TryGetValue(id, out var profile))
+                    continue;
+
+                if (profile.JobPriorities.TryGetValue(comp.SurvivorJob, out var priority) &&
+                    priority > JobPriority.Never)
+                {
+                    survivorCandidates[(int) priority].Add(id);
+                }
+            }
+
+            var selectedSurvivors = 0;
+            for (var i = survivorCandidates.Length - 1; i >= 0; i--)
+            {
+                var list = survivorCandidates[i];
+                while (list.Count > 0 && selectedSurvivors < totalSurvivors)
+                {
+                    if (SpawnSurvivor(list, out var stop) != null)
+                        selectedSurvivors++;
+
+                    if (stop)
+                        break;
+                }
             }
 
             if (spawnedDropships)
@@ -418,6 +516,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             {
                 _gunIFF.SetUserFaction(iffId, comp.MarineFaction);
             }
+
+            var faxes = EntityQueryEnumerator<FaxMachineComponent>();
+            while (faxes.MoveNext(out var faxId, out var faxComp))
+            {
+                _fax.Refresh(faxId, faxComp);
+            }
         }
     }
 
@@ -432,7 +536,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private void OnPlayerSpawning(PlayerSpawningEvent ev)
     {
-        if (ev.Job?.Prototype is not { } jobId ||
+        if (ev.Job is not { } jobId ||
             !_prototypes.TryIndex(jobId, out var job) ||
             !job.IsCM)
         {
@@ -468,7 +572,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             if (squad != null)
             {
-                _squad.AssignSquad(ev.SpawnResult.Value, squad.Value, ev.Job?.Prototype);
+                _squad.AssignSquad(ev.SpawnResult.Value, squad.Value, jobId);
 
                 // TODO RMC14 add this to the map file
                 if (TryComp(spawner, out TransformComponent? xform) &&
@@ -481,7 +585,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     _hunger.SetHunger(ev.SpawnResult.Value, 50.0f, hunger);
             }
 
-            _gunIFF.SetUserFaction(ev.SpawnResult.Value, comp.MarineFaction);
+            var faction = HasComp<SurvivorComponent>(ev.SpawnResult.Value) ? comp.SurvivorFaction : comp.MarineFaction;
+            _gunIFF.SetUserFaction(ev.SpawnResult.Value, faction);
             return;
         }
     }
@@ -1029,41 +1134,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         }
     }
 
-    private IEnumerable<EntityUid> GetChildren(EntityUid almayer)
-    {
-        if (TryComp<StationDataComponent>(almayer, out var station))
-        {
-            foreach (var grid in station.Grids)
-            {
-                var enumerator = Transform(grid).ChildEnumerator;
-                while (enumerator.MoveNext(out var ent))
-                {
-                    yield return ent;
-                }
-            }
-        }
-        else if (HasComp<MapComponent>(almayer))
-        {
-            var enumerator = Transform(almayer).ChildEnumerator;
-            while (enumerator.MoveNext(out var possibleGrid))
-            {
-                var enumerator2 = Transform(possibleGrid).ChildEnumerator;
-                while (enumerator2.MoveNext(out var ent))
-                {
-                    yield return ent;
-                }
-            }
-        }
-        else
-        {
-            var enumerator = Transform(almayer).ChildEnumerator;
-            while (enumerator.MoveNext(out var ent))
-            {
-                yield return ent;
-            }
-        }
-    }
-
     private string SelectRandomPlanet()
     {
         if (SelectedPlanetMap != null)
@@ -1092,6 +1162,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             "prison" => "Fiorina Science Annex",
             "shiva" => "Shivas Snowball",
             "trijent" => "Trijent Dam",
+            "varadero" => "New Varadero",
             _ => name,
         };
     }

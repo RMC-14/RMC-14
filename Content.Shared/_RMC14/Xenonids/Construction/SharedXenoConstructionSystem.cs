@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Linq;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
@@ -39,6 +40,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
+    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -154,14 +156,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         var tile = _mapSystem.CoordinatesToTile(gridUid, grid, coordinates);
 
-        if (!_xenoWeeds.CanPlaceWeeds((gridUid, grid), tile, args.UseOnSemiWeedable, true))
-        {
-            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-weeds"),
-                xeno.Owner,
-                xeno.Owner,
-                PopupType.SmallCaution);
+        if (!_xenoWeeds.CanPlaceWeedsPopup((gridUid, grid), tile, xeno, args.UseOnSemiWeedable, true))
             return;
-        }
 
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
             return;
@@ -629,6 +625,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 return false;
             }
         }
+
+        if (!_area.CanResinPopup((gridId, grid, null), tile, xeno))
+            return false;
 
         return true;
     }

@@ -244,7 +244,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
 
     private void UpdateParasiteClingers(Entity<XenoParasiteThrowerComponent> xeno)
     {
-        var parasiteNumber = Math.Min(Math.Ceiling((((double)xeno.Comp.CurParasites / xeno.Comp.MaxParasites) * xeno.Comp.NumPositions)), xeno.Comp.NumPositions - 1);
+        var parasiteNumber = Math.Min(Math.Ceiling((((double)xeno.Comp.CurParasites / xeno.Comp.MaxParasites) * xeno.Comp.NumPositions)), xeno.Comp.NumPositions);
 
         var overlayNumbers = xeno.Comp.VisiblePositions.Count(position => position == true);
 

@@ -70,4 +70,7 @@ public sealed partial class NeurotoxinComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan BloodCoughDuration = TimeSpan.FromSeconds(2);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan NextGasInjectionAt;
 }

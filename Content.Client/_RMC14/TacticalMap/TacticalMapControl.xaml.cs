@@ -80,6 +80,7 @@ public sealed partial class TacticalMapControl : TextureRect
 
         var system = IoCManager.Resolve<IEntityManager>().System<SpriteSystem>();
         var backgroundRsi = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/map_blips.rsi"), "background");
+        var defibbableRsi = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/map_blips.rsi"), "defibbable");
         var undefibbableRsi = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/map_blips.rsi"), "undefibbable");
         var background = system.Frame0(backgroundRsi);
         var draw = GetDrawDimensions(Texture);
@@ -90,11 +91,18 @@ public sealed partial class TacticalMapControl : TextureRect
             {
                 var position = GetDrawPosition(blip.Indices) * 3 * UIScale;
                 var rect = UIBox2.FromDimensions(position, new Vector2(14, 14));
-                handle.DrawTextureRect(background, rect, blip.Color);
+                handle.DrawTextureRect(blip.Background != null ? system.Frame0(blip.Background) : background, rect, blip.Color);
                 handle.DrawTextureRect(system.Frame0(blip.Image), rect);
 
-                if (blip.Undefibbable)
-                    handle.DrawTextureRect(system.Frame0(undefibbableRsi), rect);
+                switch (blip.Status)
+                {
+                    case TacticalMapBlipStatus.Defibabble:
+                        handle.DrawTextureRect(system.Frame0(defibbableRsi), rect);
+                        break;
+                    case TacticalMapBlipStatus.Undefibabble:
+                        handle.DrawTextureRect(system.Frame0(undefibbableRsi), rect);
+                        break;
+                }
             }
         }
 

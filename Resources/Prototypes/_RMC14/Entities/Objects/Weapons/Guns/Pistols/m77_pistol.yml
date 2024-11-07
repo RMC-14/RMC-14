@@ -44,6 +44,7 @@
         whitelist:
           tags:
           - CMMagazinePistolM77AP
+        startingItem: CMMagazinePistolM77AP
   - type: GunDamageModifier
     multiplier: 1.2
   - type: AttachableHolder

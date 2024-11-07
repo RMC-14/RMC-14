@@ -18,6 +18,7 @@ namespace Content.Shared._RMC14.Storage;
 public sealed class RMCStorageSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -45,6 +46,8 @@ public sealed class RMCStorageSystem : EntitySystem
         SubscribeLocalEvent<StorageSkillRequiredComponent, DumpableDoAfterEvent>(OnDumpableDoAfter, before: [typeof(DumpableSystem)]);
 
         SubscribeLocalEvent<StorageCloseOnMoveComponent, GotEquippedEvent>(OnStorageEquip);
+
+        SubscribeLocalEvent<BlockEntityStorageComponent, InsertIntoEntityStorageAttemptEvent>(OnBlockInsertIntoEntityStorageAttempt);
 
         Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, subs =>
         {
@@ -171,12 +174,20 @@ public sealed class RMCStorageSystem : EntitySystem
         var coordinates = GetNetCoordinates(_transform.GetMoverCoordinates(user));
         EnsureComp<StorageOpenComponent>(ent).OpenedAt[user] = coordinates;
     }
+
     private void OnStorageEquip(Entity<StorageCloseOnMoveComponent> ent, ref GotEquippedEvent args)
     {
         _ui.CloseUi(ent.Owner, StorageUiKey.Key, args.Equipee);
         if (TryComp<StorageOpenComponent>(ent, out var comp))
             comp.OpenedAt.Remove(args.Equipee);
     }
+
+    private void OnBlockInsertIntoEntityStorageAttempt(Entity<BlockEntityStorageComponent> ent, ref InsertIntoEntityStorageAttemptEvent args)
+    {
+        if (_entityWhitelist.IsWhitelistPassOrNull(ent.Comp.Whitelist, args.Container))
+            args.Cancelled = true;
+    }
+
     private void OnCloseOnMoveUIClosed(Entity<StorageOpenComponent> ent, ref BoundUIClosedEvent args)
     {
         ent.Comp.OpenedAt.Remove(args.Actor);
@@ -210,6 +221,9 @@ public sealed class RMCStorageSystem : EntitySystem
             var storedCount = 0;
             foreach (var stored in limited.Comp2.StoredItems.Keys)
             {
+                if (stored == toInsert)
+                    continue;
+
                 if (!_whitelist.IsWhitelistPass(limit.Whitelist, stored))
                     continue;
 

@@ -51,7 +51,7 @@
     doInterrupt: true
     attachedOnly: true
     breakOnMove: true
-    breakOnRotate: true
+    breakOnFullRotate: true
     doAfter: 1.5
     deactivateDoAfter: 0
     instantToggle: Brace
@@ -135,7 +135,12 @@
           tags:
           - CMM96SSniperRifle
       fireDelayFlat: -0.1
-
+    - conditions:
+        activeOnly: true
+        whitelist:
+          tags:
+          - RMCWeaponLMGM60
+      fireDelayFlat: -0.1
 - type: entity
   parent: RMCUnderAttachmentBase
   id: RMCAttachmentBurstFireAssembly

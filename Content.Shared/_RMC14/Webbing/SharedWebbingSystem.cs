@@ -2,7 +2,9 @@
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Inventory;
 using Content.Shared.Item;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Verbs;
@@ -17,11 +19,14 @@ public abstract class SharedWebbingSystem : EntitySystem
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
+    [Dependency] private readonly MobStateSystem _mob = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<WebbingClothingComponent, InteractUsingEvent>(OnWebbingClothingInteractUsing);
-        SubscribeLocalEvent<WebbingClothingComponent, GetVerbsEvent<InteractionVerb>>(OnWebbingClothingGetVerbs);
+        SubscribeLocalEvent<WebbingClothingComponent, InventoryRelayedEvent<GetVerbsEvent<EquipmentVerb>>>(GetRelayedVerbs);
+        SubscribeLocalEvent<WebbingClothingComponent, GetVerbsEvent<EquipmentVerb>>(OnWebbingClothingGetEquipmentVerbs);
+        SubscribeLocalEvent<WebbingClothingComponent, GetVerbsEvent<InteractionVerb>>(OnWebbingClothingGetInteractionVerbs);
         SubscribeLocalEvent<WebbingClothingComponent, EntInsertedIntoContainerMessage>(OnClothingInserted);
         SubscribeLocalEvent<WebbingClothingComponent, EntRemovedFromContainerMessage>(OnClothingRemoved);
     }
@@ -32,7 +37,7 @@ public abstract class SharedWebbingSystem : EntitySystem
             args.Handled = true;
     }
 
-    private void OnWebbingClothingGetVerbs(Entity<WebbingClothingComponent> clothing, ref GetVerbsEvent<InteractionVerb> args)
+    private void OnWebbingClothingGetInteractionVerbs(Entity<WebbingClothingComponent> clothing, ref GetVerbsEvent<InteractionVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract || HasComp<XenoComponent>(args.User))
             return;
@@ -43,8 +48,41 @@ public abstract class SharedWebbingSystem : EntitySystem
         var user = args.User;
         args.Verbs.Add(new InteractionVerb
         {
-            Text = "Remove webbing",
-            Act = () => Detach(clothing, user)
+            Text = Loc.GetString("rmc-storage-webbing-remove-verb"),
+            Act = () => Detach(clothing, user),
+            IconEntity = GetNetEntity(clothing.Owner)
+        });
+    }
+
+    private void GetRelayedVerbs(EntityUid uid, WebbingClothingComponent component, InventoryRelayedEvent<GetVerbsEvent<EquipmentVerb>> args)
+    {
+        OnWebbingClothingGetEquipmentVerbs((uid, component), ref args.Args);
+    }
+
+    private void OnWebbingClothingGetEquipmentVerbs(Entity<WebbingClothingComponent> clothing, ref GetVerbsEvent<EquipmentVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract || HasComp<XenoComponent>(args.User))
+            return;
+
+        if (!HasWebbing((clothing, clothing), out _))
+            return;
+
+        var wearer = Transform(clothing).ParentUid;
+        var user = args.User;
+
+        // To avoid duplicate verbs
+        if (user == wearer)
+            return;
+
+        // To prevent stripping webbing from alive players
+        if (!_mob.IsDead(wearer))
+            return;
+
+        args.Verbs.Add(new EquipmentVerb
+        {
+            Text = Loc.GetString("rmc-storage-webbing-remove-verb"),
+            Act = () => Detach(clothing, user),
+            IconEntity = GetNetEntity(clothing.Owner)
         });
     }
 

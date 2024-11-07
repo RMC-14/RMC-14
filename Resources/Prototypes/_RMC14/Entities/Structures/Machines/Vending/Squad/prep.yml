@@ -134,6 +134,8 @@
 #        amount: 15
 #      - id: M3 Pattern Smooth Marine Armor
 #        amount: 15
+      - id: CMArmorM3Medium #TODO RMC: remove this when the above is added
+        amount: 15
       - id: CMArmorM3Heavy
         amount: 10
       - id: CMArmorM3Light
@@ -164,8 +166,8 @@
         amount: 1
       - id: RMCSatchelWelder
         amount: 2
-#      - id: Radio Telephone Backpack
-#        amount: 1
+      - id: RMCBackpackRTO
+        amount: 1
     - name: Belts
       entries:
       - id: CMBeltMarine
@@ -174,14 +176,14 @@
         amount: 10
       - id: RMCM276ShotgunShellLoadingRig
         amount: 15
-#      - id: M276 Pattern General Pistol Holster Rig
-#        amount: 15
-#      - id: M276 Pattern M63 Holster Rig
-#        amount: 15
-#      - id: M276 Pattern M63 Holster Rig And Pouch
-#        amount: 10
-#      - id: M276 Pattern M44 Holster Rig
-#        amount: 15
+      - id: RMCBeltHolsterPistol
+        amount: 15
+      - id: RMCBeltHolsterRevolver
+        amount: 15
+      - id: RMCBeltHolsterSMG
+        amount: 15
+      - id: RMCBeltHolsterSMGPouch
+        amount: 10
 #      - id: M276 Pattern M82F Holster Rig
 #        amount: 5
       - id: CMBeltKnifeFilled
@@ -236,8 +238,8 @@
         amount: 15
       - id: CMMaskCoif
         amount: 10
-#      - id: Rebreather
-#        amount: 10
+      - id: RMCMaskRebreather
+        amount: 10
     - name: Miscellaneous
       entries:
       - id: RMCGogglesBallistic

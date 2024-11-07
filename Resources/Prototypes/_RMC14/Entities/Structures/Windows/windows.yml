@@ -278,6 +278,59 @@
 
 - type: entity
   parent: CMBaseWindow
+  id: RMCHunterReinforcedWindow
+  suffix: hunter
+  name: reinforced window
+  description: A glass window with a special rod matrix inside a wall frame. It looks rather strong. Might take a few good hits to shatter it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/colony_rwindow.rsi
+    state: col_rwindow0
+    color: "#aba9a9"
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/colony_rwindow.rsi
+    state: col_rwindow0
+    color: "#aba9a9"
+  - type: IconSmooth
+    key: walls
+    base: col_rwindow
+    mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameHunterReinforced
+  - type: RMCWallExplosionDeletable
+  - type: Construction
+    graph: RMCWindowHunterReinforced
+    node: windowHunterReinforced
+
+- type: entity
+  parent: CMBaseWindow
   id: RMCWindowWood
   name: window
   description: A glass window. It looks thin and flimsy. A few knocks with anything should shatter it.

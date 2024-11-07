@@ -85,6 +85,9 @@
 #    - Camera assembly (875 metal, 375 glass)
 #    - Matrix assembly (9375 metal)
   - type: MaterialStorage
+    storage:
+      CMSteel: 800
+      CMGlass: 100
     whitelist:
       tags:
       - Metal

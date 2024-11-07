@@ -31,6 +31,7 @@
     tier: 1
     bypassTierCount: true
     unlockAt: 60 # 1 minute
+  - type: XenoLight
   - type: XenoDevolve
     devolvesTo:
     - CMXenoLarva
@@ -64,10 +65,6 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: drone
-  - type: AcidTrap
-    trapLevel: 1
-    cost: 70
-    spray: XenoAcidSprayTrapWeak
   - type: XenoConstruction
     buildDelay: 2
     canOrderConstruction:
@@ -106,6 +103,10 @@
     strains:
     - CMXenoDroneGardener
   - type: XenoAcid
+  - type: AcidTrap
+    trapLevel: 1
+    cost: 70
+    spray: XenoAcidSprayTrapWeak
   - type: XenoConstruction
     canBuild:
     - WallXenoResin
@@ -147,6 +148,7 @@
     critHealMultiplier: 0.3465  # 5% increased regeneration
     standHealingMultiplier: 0.42
     restHealMultiplier: 1.05
+    hidden: true
   - type: XenoStrain
     name: rmc-xeno-gardener-name
     description: rmc-xeno-gardener-description

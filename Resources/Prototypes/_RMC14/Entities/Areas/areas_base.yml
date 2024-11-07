@@ -1,6 +1,6 @@
 ﻿# PORTING CHEATSHEET
 # 0: Block nothing
-# 1: Block mortar, lasing, medevac
+# 1: Block mortar placement, lasing, medevac
 # 2: Block CAS signals, supply drops, fultoning, mortar fire
 # 3: Block CAS
 # 4: Block OB

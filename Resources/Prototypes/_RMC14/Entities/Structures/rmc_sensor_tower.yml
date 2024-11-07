@@ -1,0 +1,40 @@
+﻿- type: entity
+  id: RMCSensorTower
+  name: experimental sensor tower
+  description: A tower with a lot of delicate sensors made to track weather conditions. This one has been adjusted to track biosignatures.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 60
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/sensor_tower.rsi
+    layers:
+    - state: sensor_off
+      map: [ "base" ]
+    state: sensor_off
+    offset: 0.5,2
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SensorTowerLayers.Layer:
+        base:
+          Weld: { state: sensor_broken }
+          Wire: { state: sensor_broken }
+          Wrench: { state: sensor_broken }
+          Off: { state: sensor_off }
+          On: { state: sensor_ }
+  - type: SensorTower
