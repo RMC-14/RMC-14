@@ -6,14 +6,14 @@
   components:
   - type: Storage
     grid:
-    - 0,0,19,5
+    - 0,0,21,1
     whitelist:
       tags:
       - RMCCartridge458SOCOM
   - type: StorageFill
     contents:
     - id: RMCCartridge458SOCOM
-      amount: 30 #60 lags really hard, but 30 seems fine
+      amount: 11
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/SOCOM_box.rsi
     layers:
@@ -21,3 +21,4 @@
       map: [ "full" ]
     - state: Socom32e
       map: [ "empty" ]
+  - type: RMCStorageEjectHand

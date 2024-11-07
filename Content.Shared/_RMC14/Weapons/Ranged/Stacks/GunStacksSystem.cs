@@ -19,14 +19,12 @@ public sealed class GunStacksSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private EntityQuery<GunStacksComponent> _gunStacksQuery;
-    private EntityQuery<ProjectileComponent> _projectileQuery;
     private EntityQuery<RMCSelectiveFireComponent> _selectiveFireQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
 
     public override void Initialize()
     {
         _gunStacksQuery = GetEntityQuery<GunStacksComponent>();
-        _projectileQuery = GetEntityQuery<ProjectileComponent>();
         _selectiveFireQuery = GetEntityQuery<RMCSelectiveFireComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
 
@@ -99,8 +97,8 @@ public sealed class GunStacksSystem : EntitySystem
 
         _rmcGun.RefreshGunDamageMultiplier(ent.Owner);
 
-        if (_selectiveFireQuery.TryComp(ent.Owner, out var selective))
-            _rmcSelectiveFire.RefreshFireModeGunValues((ent.Owner, selective));
+        if (_selectiveFireQuery.TryComp(ent.Comp.Gun, out var selective))
+            _rmcSelectiveFire.RefreshFireModeGunValues((ent.Comp.Gun.Value, selective));
 
         Dirty(ent);
     }
