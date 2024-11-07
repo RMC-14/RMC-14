@@ -3,6 +3,7 @@ using Content.Server.Ghost;
 using Content.Server.Mind;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Mind;
+using Content.Shared.Popups;
 using Robust.Shared.Player;
 using Content.Server.NPC.HTN;
 using Robust.Shared.Prototypes;
@@ -13,6 +14,7 @@ public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
 {
     [Dependency] private readonly GhostSystem _ghostSystem = default!;
     [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly HTNSystem _htn = default!;
 
     private static readonly ProtoId<HTNCompoundPrototype> ActiveTask = "RMCParasiteActiveCompound";
@@ -34,7 +36,12 @@ public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
         else
             mind = _mind.CreateMind(session.UserId);
 
-        _ghostSystem.SpawnGhost((mind.Owner, mind.Comp), parasite);
+        var ghost = _ghostSystem.SpawnGhost((mind.Owner, mind.Comp), parasite);
+
+        if (ghost != null){
+            EnsureComp<InfectionSuccessComponent>(ghost.Value);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-ghost-bypass-time"), ghost.Value, ghost.Value, PopupType.Medium);
+        }
     }
 
     protected override void ChangeHTN(EntityUid parasite, ParasiteMode mode)

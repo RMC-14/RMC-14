@@ -30,7 +30,10 @@
   - ASO
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: cic
+    state: aso
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
   special:
   - !type:AddComponentSpecial
     components:
@@ -52,6 +55,9 @@
         RMCSkillSurgery: 1
         RMCSkillVehicles: 1
     - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: "ASO"
 
 - type: startingGear
   id: CMGearASO
@@ -61,7 +67,7 @@
     back: CMSatchel
     shoes: CMBootsBlack
     id: CMIDCardASO
-    ears: RMCHeadsetMarineCommandAlternative
+    ears: CMHeadsetSeniorCommand
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchGeneralLarge
 
@@ -80,3 +86,4 @@
 
 - type: playTimeTracker
   id: CMJobAuxiliarySupportOfficer
+  isHumanoid: true

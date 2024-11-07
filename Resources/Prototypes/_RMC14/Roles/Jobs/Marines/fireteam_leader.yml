@@ -31,10 +31,13 @@
         RMCSkillConstruction: 2
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillJtac: 3
     - type: CMVendorUser
       points: 45
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: "FTL"
 
 - type: startingGear
   id: CMGearFireteamLeader
@@ -56,6 +59,7 @@
 
 - type: playTimeTracker
   id: CMJobFireteamLeader
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -105,4 +109,3 @@
   - type: SquadSpawner
     squad: SquadDelta
     role: CMFireteamLeader
-

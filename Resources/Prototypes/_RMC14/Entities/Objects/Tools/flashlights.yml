@@ -30,16 +30,12 @@
         isLooped: true
   - type: ToggleableLightVisuals
     spriteLayer: light
-  - type: PowerCellSlot
-    cellSlotId: cell_slot
-  - type: ContainerContainer
-    containers:
-      cell_slot: !type:ContainerSlot
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: RMCPowerCell
+  - type: Battery
+    maxCharge: 600
+    startingCharge: 600
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 2
   - type: PointLight
     enabled: false
     radius: 5
@@ -79,20 +75,6 @@
     node: Flashlight
 
 - type: entity
-  parent: RMCFlashlight
-  id: RMCFlashlightEmpty
-  suffix: Empty
-  components:
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: null
-  - type: Construction
-    graph: RMCFlashLightGraph
-    node: Flashlight
-
-- type: entity
   parent: RMCFlashlightBase
   id: RMCFlashlightPen
   name: penlight
@@ -110,6 +92,10 @@
   - type: Tag
     tags:
     - RMCPenlight
+  - type: Clothing
+    slots:
+    - ears
+    - suitstorage
 
 - type: Tag
   id: RMCPenlight
@@ -186,11 +172,6 @@
         map: [ "light" ]
   - type: PointLight
     radius: 6
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: RMCPowerCellHigh
 
 - type: entity
   parent: RMCLampTripod

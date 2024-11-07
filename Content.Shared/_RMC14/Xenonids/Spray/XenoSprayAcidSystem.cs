@@ -27,7 +27,7 @@ public sealed class XenoSprayAcidSystem : EntitySystem
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
@@ -52,6 +52,9 @@ public sealed class XenoSprayAcidSystem : EntitySystem
 
     private void OnSprayAcidAction(Entity<XenoSprayAcidComponent> xeno, ref XenoSprayAcidActionEvent args)
     {
+        if (!_xenoPlasma.HasPlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
+            return;
+
         var ev = new XenoSprayAcidDoAfter(GetNetCoordinates(args.Target));
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.DoAfter, ev, xeno) { BreakOnMove = true };
         _doAfter.TryStartDoAfter(doAfter);
@@ -63,12 +66,12 @@ public sealed class XenoSprayAcidSystem : EntitySystem
             return;
 
         args.Handled = true;
+        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
+            return;
+
         _audio.PlayPredicted(xeno.Comp.Sound, xeno, xeno);
 
         if (_net.IsClient)
-            return;
-
-        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
 
         foreach (var (actionId, action) in _actions.GetActions(xeno))

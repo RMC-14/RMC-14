@@ -33,6 +33,8 @@ rmc-xeno-evolution-cant-devolve-damaged = We are too weak to deevolve, we must r
 rmc-xeno-evolution-cant-evolve-recent-queen-death-minutes = We must wait about {$minutes} minutes and {$seconds} seconds for the hive to recover from the previous Queen's death.
 rmc-xeno-evolution-cant-evolve-recent-queen-death-seconds = We must wait about {$seconds} seconds for the hive to recover from the previous Queen's death.
 rmc-xeno-evolution-failed-bad-location = We can't evolve here.
+rmc-xeno-evolution-start-self = We begin to twist and contort.
+rmc-xeno-evolution-start-others = {$xeno} begins to twist and contort.
 
 # Fortify
 cm-xeno-fortify-cant-headbutt = You can't headbutt while fortifying!
@@ -105,6 +107,7 @@ cm-xeno-plasma-transferred-to-other = You have transferred {$plasma} plasma to {
 cm-xeno-plasma-transferred-to-self = {$target} has transferred {$plasma} plasma to you. You now have {$total}
 cm-xeno-plasma-cannot-self = You can't transfer plasma to yourself!
 cm-xeno-plasma-other-max-zero = {$target} doesn't have any use for plasma!
+rmc-xeno-plasma-ovipositor = We can't transfer plasma to a queen mounted on her ovipositor.
 
 # Watch
 cm-xeno-watch = Watch Xeno
@@ -114,7 +117,6 @@ cm-xeno-charge-spit = Our next spit will be stronger.
 cm-xeno-charge-spit-expire = Our spits are back to normal.
 
 # Turn Invisible
-cm-xeno-invisibility-already-invisible = We are already invisible!
 cm-xeno-invisibility-expire = We feel our invisibility end!
 
 # Ovipositor
@@ -136,7 +138,7 @@ cm-xeno-throw-parasite-unstash-parasite = We grab a parasite from our storage. N
 rmc-xeno-throw-parasite-current = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} sheltering: {$cur_paras}/{$max_paras} parasites.
 rmc-xeno-throw-parasite-reserves = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-HAVE($xeno)} {$rev_paras} parasite ghost {$rev_paras ->
    [one] role
-   *[other] roles 
+   *[other] roles
 } available.
 
 # Defensive Shield
@@ -170,3 +172,15 @@ rmc-xeno-heal-others = {$user} places its claws on {$target}, and its wounds are
 rmc-xeno-heal-ailments-self = We rejuvenate {$target}!
 rmc-xeno-heal-ailments-target = We are rejuvenated by {$target}!
 rmc-xeno-heal-ailments-others = {$user} points at {$target}, and it spasms as it recuperates unnaturally quickly!
+rmc-xeno-heal-sisters = We must target one of our sisters!
+
+# Resin Surge
+rmc-xeno-resin-surge-shield-self = We surge the resin around {THE($target)}, making it temporarily nigh unbreakable!
+rmc-xeno-resin-surge-shield-others = {CAPITALIZE(THE($xeno))} surges the resin around {THE($target)}, making it temporarily nigh unbreakable!
+rmc-xeno-resin-surge-shield-fail = We haplessly try to surge resin around {THE($target)}, but it's already reinforced. It'll take a moment for us to recover.
+rmc-xeno-resin-surge-fruit = We surge the resin around {THE($target)}, speeding its growth somewhat!
+rmc-xeno-resin-surge-fruit-fail = {CAPITALIZE(THE($target))} is already mature. The resin surge does nothing.
+rmc-xeno-resin-surge-wall-self = We surge the resin, creating an unstable wall!
+rmc-xeno-resin-surge-wall-others = {CAPITALIZE(THE($xeno))} surges the resin, creating an unstable wall!
+rmc-xeno-resin-surge-sticky-self = We surge the deep resin, creating an unstable sticky resin patch!
+rmc-xeno-resin-surge-sticky-others = {CAPITALIZE(THE($xeno))} surges deep resin, creating an unstable sticky resin patch!

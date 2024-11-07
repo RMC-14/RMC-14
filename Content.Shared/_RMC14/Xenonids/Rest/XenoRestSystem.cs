@@ -17,6 +17,7 @@ using Content.Shared.Actions;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Rest;
 
@@ -26,6 +27,7 @@ public sealed class XenoRestSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -71,6 +73,9 @@ public sealed class XenoRestSystem : EntitySystem
 
     private void OnXenoRestAction(Entity<XenoComponent> xeno, ref XenoRestActionEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         var attempt = new XenoRestAttemptEvent();
         RaiseLocalEvent(xeno, ref attempt);
 

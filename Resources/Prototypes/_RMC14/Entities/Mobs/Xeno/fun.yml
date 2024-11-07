@@ -10,6 +10,8 @@
   - type: XenoEvolution
     max: 200
     evolvesTo: [ ]
+  - type: Xeno
+    hidden: true
 
 - type: entity
   parent: CMXenoRunner
@@ -22,3 +24,5 @@
   - type: XenoEvolution
     max: 200
     evolvesTo: [ ]
+  - type: Xeno
+    hidden: true

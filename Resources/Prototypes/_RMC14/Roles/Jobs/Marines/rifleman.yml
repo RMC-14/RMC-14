@@ -23,6 +23,8 @@
     - type: CMVendorUser
       points: 45
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: "RFN"
   hasIcon: false
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
@@ -48,6 +50,7 @@
 
 - type: playTimeTracker
   id: CMJobRifleman
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

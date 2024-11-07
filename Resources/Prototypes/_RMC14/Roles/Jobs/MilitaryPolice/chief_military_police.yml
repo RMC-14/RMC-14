@@ -24,7 +24,10 @@
   - CMP
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: mp
+    state: cmp
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_mp
   special:
   - !type:AddComponentSpecial
     components:
@@ -44,6 +47,9 @@
         RMCSkillOverwatch: 1
         RMCSkillPolice: 2
     - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: "CMP"
 
 - type: startingGear
   id: CMGearChiefMP
@@ -76,3 +82,4 @@
 
 - type: playTimeTracker
   id: CMJobChiefMP
+  isHumanoid: true
