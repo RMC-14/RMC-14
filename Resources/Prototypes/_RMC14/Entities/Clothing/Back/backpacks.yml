@@ -183,7 +183,7 @@
 
 - type: entity
   parent: CMBackpack
-  id: CMBackpackAmmo
+  id: RMCBackpackAmmo
   name: IMP ammo rack
   description: A bare IMP frame with buckles designed to hold multiple ammo cans, but can fit any cumbersome box thanks to Marine ingenuity. Helps you lug around extra rounds or supplies.
   components:
