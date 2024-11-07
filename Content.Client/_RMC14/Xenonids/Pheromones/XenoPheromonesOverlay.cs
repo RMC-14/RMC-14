@@ -1,6 +1,8 @@
-﻿using System.Numerics;
+﻿using System.Collections.Immutable;
+using System.Numerics;
 using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -20,6 +22,10 @@ public sealed class XenoPheromonesOverlay : Overlay
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
+    private static readonly ImmutableArray<XenoPheromones> AllPheromones =
+        Enum.GetValues<XenoPheromones>().ToImmutableArray();
+
+    private readonly ContainerSystem _container;
     private readonly SpriteSystem _sprite;
     private readonly TransformSystem _transform;
 
@@ -33,6 +39,7 @@ public sealed class XenoPheromonesOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
 
+        _container = _entity.System<ContainerSystem>();
         _sprite = _entity.System<SpriteSystem>();
         _transform = _entity.System<TransformSystem>();
 
@@ -48,7 +55,6 @@ public sealed class XenoPheromonesOverlay : Overlay
 
         var handle = args.WorldHandle;
         var eyeRot = args.Viewport.Eye?.Rotation ?? default;
-
         var scaleMatrix = Matrix3x2.CreateScale(new Vector2(1, 1));
         var rotationMatrix = Matrix3Helpers.CreateRotation(-eyeRot);
 
@@ -76,6 +82,23 @@ public sealed class XenoPheromonesOverlay : Overlay
         while (sources.MoveNext(out var uid, out var pheromones, out var sprite, out var xform))
         {
             var emitting = pheromones.Pheromones;
+            var name = $"aura_{emitting.ToString().ToLowerInvariant()}";
+            var icon = new Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_pheromones_hud.rsi"), name);
+
+            DrawIcon((uid, sprite, xform), in args, icon, scaleMatrix, rotationMatrix);
+        }
+
+        var leaders = _entity.AllEntityQueryEnumerator<HiveLeaderComponent, SpriteComponent, TransformComponent>();
+        while (leaders.MoveNext(out var uid, out var leader, out var sprite, out var xform))
+        {
+            if (!_container.TryGetContainer(uid, leader.PheromonesContainerId, out var container) ||
+                !container.ContainedEntities.TryFirstOrNull(out var first) ||
+                !_entity.TryGetComponent(first, out XenoActivePheromonesComponent? active))
+            {
+                continue;
+            }
+
+            var emitting = active.Pheromones;
             var name = $"aura_{emitting.ToString().ToLowerInvariant()}";
             var icon = new Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_pheromones_hud.rsi"), name);
 

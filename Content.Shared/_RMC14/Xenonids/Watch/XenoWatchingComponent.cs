@@ -1,8 +1,11 @@
-﻿namespace Content.Shared._RMC14.Xenonids.Watch;
+﻿using Robust.Shared.GameStates;
 
-[RegisterComponent]
+namespace Content.Shared._RMC14.Xenonids.Watch;
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedWatchXenoSystem))]
 public sealed partial class XenoWatchingComponent : Component
 {
+    [DataField, AutoNetworkedField]
     public EntityUid? Watching;
 }

@@ -199,3 +199,9 @@
   - type: RMCPointing
     arrow: RMCPointingArrowBigQueen
   - type: ManageHive
+  - type: HiveLeaderGranter
+
+- type: entity
+  id: XenoLeaderPheromoneRelay
+  components:
+  - type: Pheromones

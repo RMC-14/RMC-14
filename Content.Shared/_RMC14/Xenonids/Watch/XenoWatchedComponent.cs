@@ -2,10 +2,10 @@
 
 namespace Content.Shared._RMC14.Xenonids.Watch;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedWatchXenoSystem))]
 public sealed partial class XenoWatchedComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public HashSet<EntityUid> Watching = new();
 }

@@ -206,8 +206,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return;
 
         var newXeno = TransferXeno(xeno, args.Choice);
-        var ev = new NewXenoEvolvedEvent(xeno);
-        RaiseLocalEvent(newXeno, ref ev);
+        var ev = new NewXenoEvolvedEvent(xeno, newXeno);
+        RaiseLocalEvent(newXeno, ref ev, true);
 
         _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} chose strain {ToPrettyString(newXeno)}");
 
@@ -237,8 +237,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
         args.Handled = true;
 
         var newXeno = TransferXeno(xeno, args.Choice);
-        var ev = new NewXenoEvolvedEvent(xeno);
-        RaiseLocalEvent(newXeno, ref ev);
+        var ev = new NewXenoEvolvedEvent(xeno, newXeno);
+        RaiseLocalEvent(newXeno, ref ev, true);
 
         _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} evolved into {ToPrettyString(newXeno)}");
 
