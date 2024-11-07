@@ -56,7 +56,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
 
         foreach (var entity in args.HitEntities)
         {
-            if (!_xeno.CanHitLiving(xeno, entity) ||
+            if (!_xeno.CanAbilityAttackTarget(xeno, entity) ||
                 HasComp<VictimCripplingStrikeSlowedComponent>(entity))
             {
                 continue;
@@ -74,10 +74,13 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
             _movementSpeed.RefreshMovementSpeedModifiers(entity);
 
             var message = Loc.GetString("cm-xeno-crippling-strike-hit", ("target", entity));
-            _popup.PopupClient(message, entity, xeno);
+            
 
             if (_net.IsServer)
+            {
+                _popup.PopupEntity(message, entity, xeno);
                 SpawnAttachedTo(xeno.Comp.Effect, entity.ToCoordinates());
+            }
 
             RemCompDeferred<XenoActiveCripplingStrikeComponent>(xeno);
             break;

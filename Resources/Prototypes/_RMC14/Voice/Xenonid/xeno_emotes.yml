@@ -1,0 +1,63 @@
+- type: emote
+  id: XenoRoar
+  name: rmc-emote-name-xeno-roar
+  category: Vocal
+  whitelist:
+    components:
+    - Xeno
+  blacklist:
+    components:
+    - BorgChassis
+  available: false
+  icon: _RMC14/Actions/xeno_emotes.rsi/roar.png
+  chatMessages: ["rmc-emote-xeno-roar"]
+  chatTriggers:
+    - roar
+    - roars
+    - roaring
+    - roared
+
+- type: emote
+  id: XenoTailSwipe
+  name: rmc-emote-name-xeno-tail-swipe
+  category: General
+  whitelist:
+    components:
+    - Xeno
+  blacklist:
+    components:
+    - BorgChassis
+  available: false
+  icon: _RMC14/Actions/xeno_emotes.rsi/tailswipe.png
+  chatMessages: ["rmc-emote-xeno-tail-swipe"]
+  chatTriggers:
+    - swipe
+    - swipes
+    - swiping
+    - swiped
+    - swipe tail
+    - swipes tail
+    - swipes its tail
+    - swipes their tail
+    - swipes her tail
+    - swipes his tail
+
+- type: emote
+  id: XenoHelp
+  name: rmc-emote-name-xeno-help
+  category: Vocal
+  whitelist:
+    components:
+    - Xeno
+  blacklist:
+    components:
+    - BorgChassis
+  available: false
+  icon: _RMC14/Actions/xeno_emotes.rsi/help.png
+  chatMessages: ["rmc-emote-xeno-help"]
+  chatTriggers:
+    - help
+    - needhelp
+    - needshelp
+    - need help
+    - needs help

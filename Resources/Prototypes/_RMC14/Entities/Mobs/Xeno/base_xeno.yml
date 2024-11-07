@@ -58,6 +58,7 @@
       Alive: XenoHealth
       Critical: XenoCrit
       Dead: XenoDead
+    displayDamageInAlert: true
   - type: MobStateActions
     actions:
       Critical:
@@ -70,7 +71,7 @@
     sound:
       collection: XenoDeath
       params:
-        volume: -12
+        volume: -4
   - type: HealthExaminable
     examinableTypes:
     - Blunt
@@ -80,6 +81,7 @@
     - Shock
   - type: CMDefibrillatorBlocked
     popup: defibrillator-xeno
+    showOnExamine: false
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.2
     baseSprintSpeed: 4
@@ -94,6 +96,7 @@
   - type: InputMover
   - type: LagCompensation
   - type: MobMover
+  - type: Emoting
   - type: Actions
   - type: Alerts
   - type: Appearance
@@ -133,8 +136,16 @@
         density: 185
         mask:
         - MobMask
+        - BarbedBarricade
         layer:
         - MobLayer
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 185
+        layer:
+        - BulletImpassable
   - type: Xeno
   - type: UserInterface
     interfaces:
@@ -150,15 +161,27 @@
         type: XenoPheromonesBui
       enum.XenoOrderConstructionUI.Key:
         type: XenoOrderConstructionBui
+      enum.XenoFruitChooseUI.Key:
+        type: XenoFruitChooseBui
       enum.XenoWordQueenUI.Key:
         type: XenoWordQueenBui
+      enum.TacticalMapUserUi.Key:
+        type: TacticalMapUserBui
+      enum.XenoReserveParasiteChangeUI.Key:
+        type: ReserveParasitesBoundUserInterface
+      enum.XenoParasiteGhostUI.Key:
+        type: XenoParasiteGhostBui
+        requireInputValidation: false
   - type: TypingIndicator
     proto: alien
   - type: MovedByPressure
   - type: NoSlip
+  - type: RMCSize
+    size: Xeno
   - type: Pullable
   - type: Speech
     speechVerb: Xeno
+    allowedEmotes: [ "Growl", "Hiss", "XenoRoar", "XenoHelp", "XenoTailSwipe" ]
   - type: GhostOnMove
     mustBeDead: true
   - type: WhitelistPickup
@@ -193,7 +216,19 @@
     - Hivemind
   - type: StandingState
   - type: SlowOnPull
-    multiplier: 0.75
+    slowdowns:
+      - multiplier: 0.6
+        whitelist:
+          components:
+          - Marine
+      - multiplier: 0.665
+        whitelist:
+          components:
+          - XenoLight
+      - multiplier: 0.445
+        whitelist:
+          components:
+          - XenoHeavy
   - type: PullWhitelist
     whitelist:
       components:
@@ -227,6 +262,25 @@
     - enum.VendingMachineUiKey.Key
     - enum.PaperUiKey.Key
   - type: ActiveInputMover
+  - type: HiveTracker
+  - type: RequireProjectileTarget
+    active: false
+  - type: TacticalMapTracked
+  - type: TacMapXenoAlert
+  - type: TacticalMapUser
+    actionId: RMCActionOpenTacticalMapXeno
+    xenos: true
+  - type: TacticalMapLiveUpdateOnOvi
+    enabled: true
+  - type: MotionDetectorTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: xeno
+    background:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_xeno
+  - type: XenoMapTracked
 
 - type: entity
   abstract: true
@@ -266,6 +320,7 @@
         Brute: 12
   - type: Tackle
     chance: 0.35
+  - type: XenoClaws
 
 - type: entity
   abstract: true
@@ -308,6 +363,10 @@
       location: Right
     - name: Left Hand
       location: Left
+  - type: WhitelistPickup
+    whitelist:
+      components:
+      - XenoFruit
   - type: ParalyzeOnPullAttempt
 
 - type: entity

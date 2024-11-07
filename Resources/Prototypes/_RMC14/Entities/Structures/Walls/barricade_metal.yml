@@ -17,6 +17,7 @@
         layer:
         - TableLayer
         - LowImpassable
+        - BarricadeImpassable
   - type: RotationDrawDepth
     southDrawDepth: OverMobs
   - type: Barricade
@@ -72,7 +73,11 @@
     messagePerceivedByOthers: fence-rattle-success
     interactSuccessSound:
       collection: FenceRattle
-  - type: Repairable
+  - type: RMCRepairable
+    heal: -200
+    skill: RMCSkillConstruction
+    delay: 10
+    fuelUsed: 2
   - type: Destructible
     thresholds:
     - trigger:
@@ -108,7 +113,7 @@
   parent: CMBarricadeMetal
   id: CMBarricadeBurn
   name: anti-biohazard barricade
-  description: A barricade incredibly resistant to corrosive and fire damage but breaks easier. Repair with a welder.
+  description: A barricade incredibly resistant to corrosive and fire damage. Repair with a welder.
   components:
     - type: Sprite
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
@@ -193,7 +198,6 @@
       - map: [ "acided" ]
     - type: Damageable
       damageContainer: Inorganic
-      damageModifierSet: Metallic
     - type: Destructible
       thresholds:
       - trigger:
@@ -239,10 +243,13 @@
       - state: handrail_a_0
       - map: [ "acided" ]
     - type: Physics
-    - type: Repairable
+    - type: RMCRepairable
+      heal: -200
+      skill: RMCSkillConstruction
+      delay: 10
+      fuelUsed: 2
     - type: Damageable
       damageContainer: Inorganic
-      damageModifierSet: Metallic
     - type: Destructible
       thresholds:
       - trigger:
@@ -339,7 +346,11 @@
       map: ["enum.DoorVisualLayers.Base"]
     - map: [ "acided" ]
     drawdepth: WallTops
-  - type: Repairable
+  - type: RMCRepairable
+    heal: -200
+    skill: RMCSkillConstruction
+    delay: 10
+    fuelUsed: 2
   - type: Destructible
     thresholds:
     - trigger:

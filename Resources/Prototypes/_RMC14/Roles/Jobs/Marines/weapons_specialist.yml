@@ -17,6 +17,9 @@
   overwatchSortPriority: -3
   overwatchShowName: true
   overwatchRoleName: Specialist
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: spec
   special:
   - !type:AddComponentSpecial
     components:
@@ -27,6 +30,7 @@
         RMCSkillEndurance: 2
         RMCSkillEngineer: 1
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillJtac: 1
         RMCSkillMeleeWeapons: 1
         RMCSkillSpecialistWeapons: 1
@@ -35,6 +39,8 @@
       extraPoints:
         Specialist: 120
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: "Spc"
 
 - type: startingGear
   id: CMGearWeaponsSpecialist
@@ -56,6 +62,7 @@
 
 - type: playTimeTracker
   id: CMJobWeaponsSpecialist
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -1,7 +1,7 @@
 - type: gameMapPool
   id: DefaultMapPool
   maps:
-  - Savannah
+#  - Savannah # TODO RMC14 tunguso4ka save me
   - Almayer
 
 - type: gameMapPool

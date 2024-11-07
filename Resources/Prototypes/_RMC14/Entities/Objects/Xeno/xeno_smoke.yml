@@ -1,7 +1,7 @@
 ﻿- type: entity
   id: RMCSmokeAcid
   name: acid gas
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Transform
     anchored: true
@@ -14,9 +14,9 @@
           !type:PhysShapeAabb
           bounds: "-0.4,-0.4,0.4,0.4"
         mask:
-        - ItemMask
+        - MobMask
         layer:
-        - SlipLayer
+        - MidImpassable
   - type: Occluder
   - type: Sprite
     sprite: _RMC14/Effects/smoke.rsi
@@ -33,7 +33,7 @@
     id: RMCSmokeAcid
   - type: EvenSmoke
     spawn: RMCSmokeAcid
-    range: 2
+    range: 3
   - type: DamageOverTime
     affectsDead: false
     affectsInfectedNested: false
@@ -45,11 +45,15 @@
     barricadeDamage:
       types:
         Heat: 11.5
+    whitelist:
+      components:
+      - Marine
+  - type: DeleteOnExplosion # so this is supposed to be random depending on the explosion severity but uhhh hahAHAHA help
 
 - type: entity
   id: RMCSmokeNeurotoxin
   name: neurotoxin gas
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Transform
     anchored: true
@@ -62,9 +66,9 @@
           !type:PhysShapeAabb
           bounds: "-0.4,-0.4,0.4,0.4"
         mask:
-        - ItemMask
+        - MobMask
         layer:
-        - SlipLayer
+        - MidImpassable
   - type: Occluder
   - type: Sprite
     sprite: _RMC14/Effects/smoke.rsi
@@ -81,7 +85,7 @@
     id: RMCSmokeNeurotoxin
   - type: EvenSmoke
     spawn: RMCSmokeNeurotoxin
-    range: 3
+    range: 4
   - type: NeurotoxinInjector
     neuroPerSecond: 6
     affectsDead: false
@@ -101,13 +105,16 @@
     damage:
       types:
         Asphyxiation: 5
-    barricadeDamage: {} # This is required...
+    whitelist:
+      components:
+      - Marine
+  - type: DeleteOnExplosion
 
 - type: entity
   parent: RMCSmokeAcid
   id: RMCSmokeAcidShroud
   name: acid gas
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: EvenSmoke
     spawn: RMCSmokeAcidShroud
@@ -117,7 +124,7 @@
   parent: RMCSmokeNeurotoxin
   id: RMCSmokeNeurotoxinShroud
   name: neurotoxin gas
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: EvenSmoke
     spawn: RMCSmokeNeurotoxinShroud

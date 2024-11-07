@@ -14,12 +14,19 @@
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - Pilot
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: pilot
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillIntel: 1
         RMCSkillJtac: 2
         RMCSkillLeadership: 1
@@ -31,6 +38,9 @@
     - type: MarineOrders
     - type: CMVendorUser
       points: 45
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: "DP"
 
 - type: startingGear
   id: CMGearPilotDropship
@@ -56,3 +66,4 @@
 
 - type: playTimeTracker
   id: CMJobPilotDropship
+  isHumanoid: true

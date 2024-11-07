@@ -1,0 +1,14 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9092037df766dbf782056ad537a27b5df53a4d72/icons/obj/items/misc.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "rpb_phone"
+    }
+  ]
+}

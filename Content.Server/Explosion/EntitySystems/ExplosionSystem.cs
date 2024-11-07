@@ -7,12 +7,13 @@ using Content.Server.Explosion.Components;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NPC.Pathfinding;
 using Content.Shared._RMC14.Explosion;
-using Content.Shared.Armor;
 using Content.Shared.Camera;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Explosion;
+using Content.Shared.Explosion.Components;
+using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.Projectiles;
@@ -30,7 +31,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Explosion.EntitySystems;
 
-public sealed partial class ExplosionSystem : EntitySystem
+public sealed partial class ExplosionSystem : SharedExplosionSystem
 {
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IRobustRandom _robustRandom = default!;
@@ -52,10 +53,10 @@ public sealed partial class ExplosionSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
 
-    private EntityQuery<TransformComponent> _transformQuery;
     private EntityQuery<FlammableComponent> _flammableQuery;
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ProjectileComponent> _projectileQuery;
+    private EntityQuery<DeleteOnExplosionComponent> _deleteOnExplosionQuery;
 
     /// <summary>
     ///     "Tile-size" for space when there are no nearby grids to use as a reference.
@@ -93,8 +94,6 @@ public sealed partial class ExplosionSystem : EntitySystem
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnReset);
 
-        SubscribeLocalEvent<ExplosionResistanceComponent, ArmorExamineEvent>(OnArmorExamine);
-
         // Handled by ExplosionSystem.Processing.cs
         SubscribeLocalEvent<MapChangedEvent>(OnMapChanged);
 
@@ -104,10 +103,10 @@ public sealed partial class ExplosionSystem : EntitySystem
         InitAirtightMap();
         InitVisuals();
 
-        _transformQuery = GetEntityQuery<TransformComponent>();
         _flammableQuery = GetEntityQuery<FlammableComponent>();
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
         _projectileQuery = GetEntityQuery<ProjectileComponent>();
+        _deleteOnExplosionQuery = GetEntityQuery<DeleteOnExplosionComponent>();
     }
 
     private void OnReset(RoundRestartCleanupEvent ev)
@@ -142,15 +141,8 @@ public sealed partial class ExplosionSystem : EntitySystem
             args.DamageCoefficient *= modifier;
     }
 
-    /// <summary>
-    ///     Given an entity with an explosive component, spawn the appropriate explosion.
-    /// </summary>
-    /// <remarks>
-    ///     Also accepts radius or intensity arguments. This is useful for explosives where the intensity is not
-    ///     specified in the yaml / by the component, but determined dynamically (e.g., by the quantity of a
-    ///     solution in a reaction).
-    /// </remarks>
-    public void TriggerExplosive(EntityUid uid, ExplosiveComponent? explosive = null, bool delete = true, float? totalIntensity = null, float? radius = null, EntityUid? user = null)
+    /// <inheritdoc/>
+    public override void TriggerExplosive(EntityUid uid, ExplosiveComponent? explosive = null, bool delete = true, float? totalIntensity = null, float? radius = null, EntityUid? user = null)
     {
         // log missing: false, because some entities (e.g. liquid tanks) attempt to trigger explosions when damaged,
         // but may not actually be explosive.
@@ -400,7 +392,8 @@ public sealed partial class ExplosionSystem : EntitySystem
             EntityManager,
             _mapManager,
             visualEnt,
-            queued.Cause);
+            queued.Cause,
+            _map);
     }
 
     private void CameraShake(float range, MapCoordinates epicenter, float totalIntensity)
@@ -413,7 +406,7 @@ public sealed partial class ExplosionSystem : EntitySystem
             if (player.AttachedEntity is not EntityUid uid)
                 continue;
 
-            var playerPos = Transform(player.AttachedEntity!.Value).WorldPosition;
+            var playerPos = _transformSystem.GetWorldPosition(player.AttachedEntity!.Value);
             var delta = epicenter.Position - playerPos;
 
             if (delta.EqualsApprox(Vector2.Zero))
@@ -424,16 +417,5 @@ public sealed partial class ExplosionSystem : EntitySystem
             if (effect > 0.01f)
                 _recoilSystem.KickCamera(uid, -delta.Normalized() * effect);
         }
-    }
-
-    private void OnArmorExamine(EntityUid uid, ExplosionResistanceComponent component, ref ArmorExamineEvent args)
-    {
-        var value = MathF.Round((1f - component.DamageCoefficient) * 100, 1);
-
-        if (value == 0)
-            return;
-
-        args.Msg.PushNewline();
-        args.Msg.AddMarkupOrThrow(Loc.GetString(component.Examine, ("value", value)));
     }
 }

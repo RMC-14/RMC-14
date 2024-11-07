@@ -1,0 +1,16 @@
+﻿- type: entity
+  parent: RMCBaseArmor
+  id: RMCArmorDetective
+  name: detective armor
+  description: An armored vest with a detective's badge on it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/detective_armor.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 0.9
+    sprintModifier: 0.9
+  - type: CMArmor
+    armor: 15 # TODO RMC14 20 bullet
+    bio: 20
+    explosionArmor: 10
+  - type: CMHardArmor

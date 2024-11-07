@@ -14,6 +14,12 @@
   supervisors: cm-job-supervisors-cmo
   accessGroups:
   - CMMedbay
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: nurse
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_shipside
   special:
   - !type:AddComponentSpecial
     components:
@@ -23,11 +29,14 @@
         RMCSkillMedical: 3
         RMCSkillSurgery: 1
     - type: RMCUserBulkyArmorIncapable
+    - type: JobPrefix
+      prefix: "Nurse"
 
 - type: startingGear
   id: CMGearNurse
   equipment:
-    jumpsuit: CMScrubsNurse
+    jumpsuit: RMCScrubsLightBlue
+    neck: RMCNurseArmband
     back: CMSatchelMarine
     shoes: ClothingShoesColorWhite
     id: CMIDCardNurse
@@ -36,7 +45,8 @@
 - type: startingGear
   id: CMGearNurseEquipped
   equipment:
-    jumpsuit: CMScrubsNurse
+    jumpsuit: RMCScrubsLightBlue
+    neck: RMCNurseArmband
     back: CMSatchelMarine
     gloves: CMHandsLatex
     shoes: RMCShoesWhite
@@ -60,3 +70,4 @@
 
 - type: playTimeTracker
   id: CMJobNurse
+  isHumanoid: true

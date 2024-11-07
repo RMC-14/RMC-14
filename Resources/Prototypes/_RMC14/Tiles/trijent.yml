@@ -1,768 +1,174 @@
-# Desert
+# Base
 
-- type: tile
-  parent: CMPlanetBase
-  id: RMCPlanetRedDesert
-  name: tiles-RMC-red-desert
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert1.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert1
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert2.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert2
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert3.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert3
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_north1.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert4
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_north2.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert5
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_north3.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert6
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_northeast1.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert7
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_northeast2.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert8
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_northeast3.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert9
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_northwest1.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert10
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_northwest2.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert11
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_northwest3.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert12
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_south1.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert13
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_south2.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert14
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_south3.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert15
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_southeast1.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert16
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_southeast2.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert17
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_southeast3.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert18
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_southwest1.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert19
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_southwest2.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert20
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_southwest3.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert21
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_east1.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert22
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_east2.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert23
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_east3.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert24
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_west1.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert25
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_west2.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert26
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_west3.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert27
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_corner_northeast1.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert28
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_corner_northeast2.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert29
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_corner_northeast3.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert30
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_corner_northwest1.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert31
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_corner_northwest2.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert32
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_corner_northwest3.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert33
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_corner_southeast1.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert34
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_corner_southeast2.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert35
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_corner_southeast3.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert36
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_corner_southwest1.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert37
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_corner_southwest2.png
-
-- type: tile
-  parent: RMCPlanetRedDesert
-  id: RMCPlanetRedDesert38
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_corner_southwest3.png
-  
 - type: tile
   abstract: true
   parent: CMPlanetBase
-  id: RMCPlanetRedDesertTransitionCorner
+  id: RMCPlanetRedDesertBase
   name: tiles-rmc-red-desert
+  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert1.png
+
+# Desert
+
+- type: tile
+  parent: RMCPlanetRedDesertBase
+  id: RMCPlanetRedDesert
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/_RMC14/Tiles/planet/red_desert/single_edge.png
+    NorthEast: /Textures/_RMC14/Tiles/planet/red_desert/single_edge.png
+    NorthWest: /Textures/_RMC14/Tiles/planet/red_desert/single_edge.png
+    SouthWest: /Textures/_RMC14/Tiles/planet/red_desert/single_edge.png
+    South: /Textures/_RMC14/Tiles/planet/red_desert/double_edge.png
+    East: /Textures/_RMC14/Tiles/planet/red_desert/double_edge.png
+    North: /Textures/_RMC14/Tiles/planet/red_desert/double_edge.png
+    West: /Textures/_RMC14/Tiles/planet/red_desert/double_edge.png
+
+# Transition Corner
+
+- type: tile
+  abstract: true
+  parent: RMCPlanetRedDesertBase
+  id: RMCPlanetRedDesertTransitionCorner
 
 - type: tile
   parent: RMCPlanetRedDesertTransitionCorner
-  id: RMCPlanetRedDesertTransitionCorner0
+  id: RMCPlanetRedDesertTransitionCornerNorthEast
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_transition_corner0.png
 
 - type: tile
   parent: RMCPlanetRedDesertTransitionCorner
-  id: RMCPlanetRedDesertTransitionCorner1
+  id: RMCPlanetRedDesertTransitionCornerSouthEast
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_transition_corner1.png
 
 - type: tile
   parent: RMCPlanetRedDesertTransitionCorner
-  id: RMCPlanetRedDesertTransitionCorner2
+  id: RMCPlanetRedDesertTransitionCornerSouthWest
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_transition_corner2.png
 
 - type: tile
   parent: RMCPlanetRedDesertTransitionCorner
-  id: RMCPlanetRedDesertTransitionCorner3
+  id: RMCPlanetRedDesertTransitionCornerNorthWest
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_transition_corner3.png
+
+# Edge
 
 - type: tile
   abstract: true
-  parent: CMPlanetBase
+  parent: RMCPlanetRedDesertBase
   id: RMCPlanetRedDesertTransitionEdge
-  name: tiles-rmc-red-desert
 
 - type: tile
   parent: RMCPlanetRedDesertTransitionEdge
-  id: RMCPlanetRedDesertTransitionEdge0
+  id: RMCPlanetRedDesertTransitionEdgeSouth
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_transition_edge0.png
 
 - type: tile
   parent: RMCPlanetRedDesertTransitionEdge
-  id: RMCPlanetRedDesertTransitionEdge1
+  id: RMCPlanetRedDesertTransitionEdgeNorth
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_transition_edge1.png
 
 
 - type: tile
   parent: RMCPlanetRedDesertTransitionEdge
-  id: RMCPlanetRedDesertTransitionEdge2
+  id: RMCPlanetRedDesertTransitionEdgeEast
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_transition_edge2.png
 
 
 - type: tile
   parent: RMCPlanetRedDesertTransitionEdge
-  id: RMCPlanetRedDesertTransitionEdge3
+  id: RMCPlanetRedDesertTransitionEdgeWest
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_transition_edge3.png
 
 
 - type: tile
   parent: RMCPlanetRedDesertTransitionEdge
-  id: RMCPlanetRedDesertTransitionEdge4
+  id: RMCPlanetRedDesertTransitionEdgeSouthEast
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_transition_edge4.png
 
 
 - type: tile
   parent: RMCPlanetRedDesertTransitionEdge
-  id: RMCPlanetRedDesertTransitionEdge5
+  id: RMCPlanetRedDesertTransitionEdgeSouthWest
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_transition_edge5.png
 
 
 - type: tile
   parent: RMCPlanetRedDesertTransitionEdge
-  id: RMCPlanetRedDesertTransitionEdge6
+  id: RMCPlanetRedDesertTransitionEdgeNorthEast
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_transition_edge6.png
 
 - type: tile
   parent: RMCPlanetRedDesertTransitionEdge
-  id: RMCPlanetRedDesertTransitionEdge7
+  id: RMCPlanetRedDesertTransitionEdgeNorthWest
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_transition_edge7.png
 
-# - type: tile
-  # parent: RMCPlanetRedDesertTransitionEdge
-  # id: RMCPlanetRedDesertTransitionEdge8
-  # sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_transition_edge8.png
-
-# Desert Dirt
+# Rock
 
 - type: tile
-  parent: CMPlanetBase
-  id: RMCPlanetRedDesertDirt
-  name: tiles-rmc-red-desert
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt1.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirt
-  id: RMCPlanetRedDesertDirt1
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt2.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirt
-  id: RMCPlanetRedDesertDirt2
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt3.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirt
-  id: RMCPlanetRedDesertDirt3
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4.png
-
-- type: tile
-  abstract: true
-  parent: CMPlanetBase
-  id: RMCPlanetRedDesertDirtTransitionCorner1
-  name: tiles-rmc-red-desert
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionCorner1
-  id: RMCPlanetRedDesertDirtTransitioncorner10
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_corner1_0.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionCorner1
-  id: RMCPlanetRedDesertDirtTransitioncorner11
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_corner1_1.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionCorner1
-  id: RMCPlanetRedDesertDirtTransitioncorner12
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_corner1_2.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionCorner1
-  id: RMCPlanetRedDesertDirtTransitioncorner13
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_corner1_3.png
-
-- type: tile
-  abstract: true
-  parent: CMPlanetBase
-  id: RMCPlanetRedDesertDirtTransitionCorner2
-  name: tiles-rmc-red-desert
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionCorner1
-  id: RMCPlanetRedDesertDirtTransitioncorner20
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_corner2_0.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionCorner1
-  id: RMCPlanetRedDesertDirtTransitioncorner21
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_corner2_1.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionCorner1
-  id: RMCPlanetRedDesertDirtTransitioncorner22
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_corner2_2.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionCorner1
-  id: RMCPlanetRedDesertDirtTransitioncorner23
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_corner2_3.png
-
-- type: tile
-  abstract: true
-  parent: CMPlanetBase
-  id: RMCPlanetRedDesertDirtTransitionEdge1
-  name: tiles-rmc-red-desert
-  
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionEdge1
-  id: RMCPlanetRedDesertDirtTransitionEdge10
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_edge1_0.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionEdge1
-  id: RMCPlanetRedDesertDirtTransitionEdge11
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_edge1_1.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionEdge1
-  id: RMCPlanetRedDesertDirtTransitionEdge12
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_edge1_2.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionEdge1
-  id: RMCPlanetRedDesertDirtTransitionEdge13
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_edge1_3.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionEdge1
-  id: RMCPlanetRedDesertDirtTransitionEdge14
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_edge1_4.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionEdge1
-  id: RMCPlanetRedDesertDirtTransitionEdge15
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_edge1_5.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionEdge1
-  id: RMCPlanetRedDesertDirtTransitionEdge16
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_edge1_6.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionEdge1
-  id: RMCPlanetRedDesertDirtTransitionEdge17
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_edge1_7.png
-
-- type: tile
-  abstract: true
-  parent: CMPlanetBase
-  id: RMCPlanetRedDesertDirtTransitionEdge2
-  name: tiles-rmc-red-desert
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionEdge2
-  id: RMCPlanetRedDesertDirtTransitionEdge20
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_edge2_0.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionEdge2
-  id: RMCPlanetRedDesertDirtTransitionEdge21
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_edge2_1.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionEdge2
-  id: RMCPlanetRedDesertDirtTransitionEdge22
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_edge2_2.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionEdge2
-  id: RMCPlanetRedDesertDirtTransitionEdge23
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_edge2_3.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionEdge2
-  id: RMCPlanetRedDesertDirtTransitionEdge24
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_edge2_4.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionEdge2
-  id: RMCPlanetRedDesertDirtTransitionEdge25
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_edge2_5.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionEdge2
-  id: RMCPlanetRedDesertDirtTransitionEdge26
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_edge2_6.png
-
-- type: tile
-  parent: RMCPlanetRedDesertDirtTransitionEdge2
-  id: RMCPlanetRedDesertDirtTransitionEdge27
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt4_transition_edge2_7.png
-
-
-# Desert Rock
-
-- type: tile
-  parent: CMPlanetBase
+  parent: RMCPlanetRedDesertBase
   id: RMCPlanetRedDesertRock
-  name: tiles-rmc-red-desert
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock1.png
-  
+
 - type: tile
   parent: RMCPlanetRedDesertRock
   id: RMCPlanetRedDesertRock1
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock2.png
 
 - type: tile
-  abstract: true
-  parent: CMPlanetBase
-  id: RMCPlanetRedDesertRock1Transition
-  name: tiles-rmc-red-desert
-
-- type: tile
-  parent: RMCPlanetRedDesertRock1Transition
-  id: RMCPlanetRedDesertRock1Transition0
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock2_transition_0.png
- 
-- type: tile
-  parent: RMCPlanetRedDesertRock1Transition
-  id: RMCPlanetRedDesertRock1Transition1
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock2_transition_1.png
- 
-- type: tile
-  parent: RMCPlanetRedDesertRock1Transition
-  id: RMCPlanetRedDesertRock1Transition2
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock2_transition_2.png
- 
-- type: tile
-  parent: RMCPlanetRedDesertRock1Transition
-  id: RMCPlanetRedDesertRock1Transition3
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock2_transition_3.png
- 
-- type: tile
-  parent: RMCPlanetRedDesertRock1Transition
-  id: RMCPlanetRedDesertRock1Transition4
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock2_transition_4.png
- 
-- type: tile
-  parent: RMCPlanetRedDesertRock1Transition
-  id: RMCPlanetRedDesertRock1Transition5
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock2_transition_5.png
- 
-- type: tile
-  parent: RMCPlanetRedDesertRock1Transition
-  id: RMCPlanetRedDesertRock1Transition6
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock2_transition_6.png
- 
-- type: tile
-  parent: RMCPlanetRedDesertRock1Transition
-  id: RMCPlanetRedDesertRock1Transition7
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock2_transition_7.png
- 
-- type: tile
   parent: RMCPlanetRedDesertRock
-  id: RMCPlanetRedDesertRock3
+  id: RMCPlanetRedDesertRock2
   sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock3.png
 
-- type: tile
-  parent: RMCPlanetRedDesertRock
-  id: RMCPlanetRedDesertRock4
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock4.png
+# Rock Transition
 
-# Desert Grass
-
-- type: tile
-  parent: CMPlanetBase
-  id: RMCPlanetRedDesertGrass
-  name: tiles-rmc-red-desert
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_grass.png
-  
 - type: tile
   abstract: true
-  parent: CMPlanetBase
-  id: RMCPlanetRedDesertGrassTransitionEdge
-  name: tiles-rmc-red-desert
+  parent: RMCPlanetRedDesertBase
+  id: RMCPlanetRedDesertRockTransition
 
 - type: tile
-  parent: RMCPlanetRedDesertGrassTransitionEdge
-  id: RMCPlanetRedDesertGrassTransitionEdge0
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_grass_transition_edge0.png
- 
-- type: tile
-  parent: RMCPlanetRedDesertGrassTransitionEdge
-  id: RMCPlanetRedDesertGrassTransitionEdge1
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_grass_transition_edge1.png
- 
-- type: tile
-  parent: RMCPlanetRedDesertGrassTransitionEdge
-  id: RMCPlanetRedDesertGrassTransitionEdge2
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_grass_transition_edge2.png
- 
-- type: tile
-  parent: RMCPlanetRedDesertGrassTransitionEdge
-  id: RMCPlanetRedDesertGrassTransitionEdge3
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_grass_transition_edge3.png
- 
-- type: tile
-  parent: RMCPlanetRedDesertGrassTransitionEdge
-  id: RMCPlanetRedDesertGrassTransitionEdge4
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_grass_transition_edge4.png
- 
-- type: tile
-  parent: RMCPlanetRedDesertGrassTransitionEdge
-  id: RMCPlanetRedDesertGrassTransitionEdge5
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_grass_transition_edge5.png
- 
-- type: tile
-  parent: RMCPlanetRedDesertGrassTransitionEdge
-  id: RMCPlanetRedDesertGrassTransitionEdge6
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_grass_transition_edge6.png
- 
-- type: tile
-  parent: RMCPlanetRedDesertGrassTransitionEdge
-  id: RMCPlanetRedDesertGrassTransitionEdge7
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/desert_grass_transition_edge7.png
- 
-# Desert Crust
+  parent: RMCPlanetRedDesertRockTransition
+  id: RMCPlanetRedDesertRockTransitionSouth
+  sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock2_transition_0.png
 
 - type: tile
-  parent: CMPlanetBase
-  id: RMCPlanetRedDesertCrust
-  name: tiles-rmc-red-desert
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust1.png
+  parent: RMCPlanetRedDesertRockTransition
+  id: RMCPlanetRedDesertRockTransitionNorth
+  sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock2_transition_1.png
 
 - type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust1
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust2.png
+  parent: RMCPlanetRedDesertRockTransition
+  id: RMCPlanetRedDesertRockTransitionEast
+  sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock2_transition_2.png
 
 - type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust2
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust3.png
+  parent: RMCPlanetRedDesertRockTransition
+  id: RMCPlanetRedDesertRockTransitionWest
+  sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock2_transition_3.png
 
 - type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust3
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_north1.png
+  parent: RMCPlanetRedDesertRockTransition
+  id: RMCPlanetRedDesertRockTransitionCornerSouthEast
+  sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock2_transition_4.png
 
 - type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust4
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_north2.png
+  parent: RMCPlanetRedDesertRockTransition
+  id: RMCPlanetRedDesertRockTransitionCornerSouthWest
+  sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock2_transition_5.png
 
 - type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust5
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_north3.png
+  parent: RMCPlanetRedDesertRockTransition
+  id: RMCPlanetRedDesertRockTransitionCornerNorthEast
+  sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock2_transition_6.png
 
 - type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust6
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_northeast1.png
+  parent: RMCPlanetRedDesertRockTransition
+  id: RMCPlanetRedDesertRockTransitionCornerNorthWest
+  sprite: /Textures/_RMC14/Tiles/planet/red_desert/rock2_transition_7.png
+
+# Dirt
 
 - type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust7
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_northeast2.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust8
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_northeast3.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust9
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_northwest1.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust10
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_northwest2.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust11
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_northwest3.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust12
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_south1.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust13
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_south2.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust14
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_south3.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust15
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_southeast1.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust16
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_southeast2.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust17
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_southeast3.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust18
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_southwest1.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust19
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_southwest2.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust20
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_southwest3.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust21
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_east1.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust22
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_east2.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust23
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_east3.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust24
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_west1.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust25
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_west2.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust26
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_west3.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust27
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_corner_northeast1.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust28
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_corner_northeast2.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust29
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_corner_northeast3.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust30
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_corner_northwest1.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust31
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_corner_northwest2.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust32
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_corner_northwest3.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust33
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_corner_southeast1.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust34
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_corner_southeast2.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust35
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_corner_southeast3.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust36
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_corner_southwest1.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust37
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_corner_southwest2.png
-
-- type: tile
-  parent: RMCPlanetRedDesertCrust
-  id: RMCPlanetRedDesertCrust38
-  sprite: /Textures/_RMC14/Tiles/planet/red_desert/crust_corner_southwest3.png
+  parent: RMCPlanetRedDesertBase
+  id: RMCPlanetRedDesertDirt
+  sprite: /Textures/_RMC14/Tiles/planet/red_desert/dirt2.png

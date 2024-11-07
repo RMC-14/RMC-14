@@ -12,7 +12,7 @@ rmc-bioscan-ares = Bioscan complete.
     *[other] signatures
   } present on the ship{ $shipLocation ->
     [none] {""}
-    *[other], including one in{$shipLocation},
+    *[other], including one in {$shipLocation},
   } and { $onPlanet ->
     [0] no
     *[other] approximately {$onPlanet}

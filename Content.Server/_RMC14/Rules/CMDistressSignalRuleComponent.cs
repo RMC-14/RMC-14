@@ -17,9 +17,6 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public Dictionary<EntProtoId, EntityUid> Squads = new();
 
     [DataField]
-    public Dictionary<ProtoId<JobPrototype>, int> NextSquad = new();
-
-    [DataField]
     public EntityUid XenoMap;
 
     [DataField]
@@ -47,6 +44,9 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     [DataField]
     public EntProtoId<IFFFactionComponent> MarineFaction = "FactionMarine";
 
+    [DataField]
+    public EntProtoId<IFFFactionComponent> SurvivorFaction = "FactionSurvivor";
+
     [DataField, AutoPausedField]
     public TimeSpan? QueenDiedCheck;
 
@@ -62,10 +62,10 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     [DataField]
     public TimeSpan CheckEvery = TimeSpan.FromSeconds(5);
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public TimeSpan? AbandonedAt;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public TimeSpan AbandonedDelay = TimeSpan.FromMinutes(5);
 
     [DataField]
@@ -74,19 +74,25 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     [DataField]
     public bool HijackSongPlayed;
 
+    [DataField]
+    public SoundSpecifier MajorMarineAudio = new SoundCollectionSpecifier("RMCMarineMajor");
+
+    [DataField]
+    public SoundSpecifier MinorMarineAudio = new SoundCollectionSpecifier("RMCMarineMinor");
+
+    [DataField]
+    public SoundSpecifier MajorXenoAudio = new SoundCollectionSpecifier("RMCXenoMajor");
+
+    [DataField]
+    public SoundSpecifier MinorXenoAudio = new SoundCollectionSpecifier("RMCXenoMinor");
+
     // TODO RMC14
     // [DataField]
-    // public SoundSpecifier MajorMarineAudio = new SoundCollectionSpecifier("CMMarineMajor");
-    //
-    // [DataField]
-    // public SoundSpecifier MinorMarineAudio = new SoundCollectionSpecifier("CMMarineMinor");
-    //
-    // [DataField]
-    // public SoundSpecifier MajorXenoAudio = new SoundCollectionSpecifier("CMXenoMajor");
-    //
-    // [DataField]
-    // public SoundSpecifier MinorXenoAudio = new SoundCollectionSpecifier("CMXenoMinor");
-    //
-    // [DataField]
     // public SoundSpecifier AllDiedAudio = new SoundCollectionSpecifier("CMAllDied");
+
+    [DataField]
+    public EntProtoId? LandingZoneGas = "RMCLandingZoneGas";
+
+    [DataField]
+    public ProtoId<JobPrototype> SurvivorJob = "CMSurvivor";
 }

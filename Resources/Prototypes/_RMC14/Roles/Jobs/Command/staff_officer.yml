@@ -19,6 +19,12 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - MarineMain
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: so
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
   special:
   - !type:AddComponentSpecial
     components:
@@ -39,6 +45,9 @@
     - type: MarineOrders
     - type: CMVendorUser
       points: 45
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: "SO"
 
 - type: startingGear
   id: CMGearStaffOfficer
@@ -65,3 +74,4 @@
 
 - type: playTimeTracker
   id: CMJobStaffOfficer
+  isHumanoid: true

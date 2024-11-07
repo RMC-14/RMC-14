@@ -17,6 +17,12 @@
   supervisors: cm-job-supervisors-po
   accessGroups:
   - DropshipCrewChief
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: dcc
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_shipside
   special:
   - !type:AddComponentSpecial
     components:
@@ -24,6 +30,7 @@
       skills:
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillJtac: 2
         RMCSkillLeadership: 1
         RMCSkillMedical: 2
@@ -33,6 +40,9 @@
     - type: MarineOrders
     - type: CMVendorUser
       points: 45
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: "DCC"
   hidden: false
 
 - type: startingGear
@@ -59,3 +69,4 @@
 
 - type: playTimeTracker
   id: CMJobDropshipCrewChief
+  isHumanoid: true

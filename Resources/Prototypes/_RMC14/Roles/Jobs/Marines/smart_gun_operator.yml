@@ -17,17 +17,23 @@
   overwatchSortPriority: -2
   overwatchShowName: true
   overwatchRoleName: Smart Gun Operator
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: smartgunner
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillJtac: 1
         RMCSkillSmartGun: 1
     - type: CMVendorUser
       points: 45
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: "SG"
 
 - type: startingGear
   id: CMGearSmartGunOperator
@@ -48,6 +54,7 @@
 
 - type: playTimeTracker
   id: CMJobSmartGunOperator
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

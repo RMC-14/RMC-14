@@ -37,19 +37,20 @@
       - id: CMSatchelMarine
         name: satchel
         recommended: true
-      #- id: CMShotgunScabbard # TODO: Make a Scabbard
+      - id: RMCScabbardShotgun
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
       - id: CMBeltMarine
         recommended: true
-      #    CMM276GeneralPistolHolsterRig #TODO: Make this
       - id: CMBeltKnifeFilled
         name: M276 knife rig (full)
-      #    CMM276M63HolsterRig #TODO: Make this
-      #    CMM276M44HolsterRig #TODO: Make this
-      #    CMM276M82FHolsterRig #TODO: Make this
-      #    CMM276ShotgunShellLoadingRig #TODO: Make this
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterSMG
+      - id: RMCBeltHolsterSMGPouch
+      #    RMCBeltHolsterFlareGun #TODO: Make this
+      - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtility
       - id: RMCBeltUtilityGeneral
       - id: RMCBeltGrenade
@@ -80,7 +81,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
-    #    CMRebreather #TODO: Make this
+      - id: RMCMaskRebreather
     - name: Engineering Supplies
       entries:
       - id: CMEntrenchingTool
@@ -108,8 +109,8 @@
     #  points: 20
     #- id: CMM40HPDPPhosphorusPacket3
     #  points: 20
-    #- id: CMM40HSDPSmokePacket3
-    #  points: 10
+      - id: RMCPacketGrenadeSmokeFilled
+        points: 10
     #- id: CMM74AGMFragAirburstPacket3
     #  points: 15
     #- id: CMM74AGMIncendiaryAirburstPacket3
@@ -158,12 +159,12 @@
         points: 15
     #- id: CMShoulderHolster
     #  points: 15
-    #- id: CMScabbardMacheteFull
-    #  points: 15
+      - id: RMCScabbardMacheteFilled
+        points: 15
       - id: RMCPouchMacheteFilled
         points: 15
-    #- id: CMMarineRadioTelephonePack
-    #  points: 15
+      - id: RMCBackpackRTO
+        points: 15
     #- id: CMFuelTankStrapPouch
     #  points: 5
     #- id: CMWeldingGoggles
@@ -180,6 +181,8 @@
     #  points: 5
       - id: CMFireExtinguisherPortable
         points: 5
+      - id: RMCMotionDetector
+        points: 15
     #- id: CMMotionDetector
     #  points: 15
     #- id: CMDataDetector
@@ -190,8 +193,8 @@
       entries:
       - id: RMCBinoculars
         points: 5
-    #- id: CMRangeFinder
-    #  points: 10
+      - id: RMCRangefinder
+        points: 10
       - id: RMCLaserDesignator
         points: 15
     - name: Helmet Optics
@@ -204,8 +207,8 @@
       entries:
       - id: CMPamphletJTAC
         points: 15
-    #- id: CMPamphletEngineering
-    #  points: 15
+      - id: CMPamphletEngineer
+        points: 15
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer

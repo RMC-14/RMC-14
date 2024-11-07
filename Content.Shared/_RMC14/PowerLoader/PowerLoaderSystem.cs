@@ -15,9 +15,11 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
+using Content.Shared.Mobs;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Stunnable;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -43,7 +45,7 @@ public sealed class PowerLoaderSystem : EntitySystem
     [Dependency] private readonly SharedMoverController _mover = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
@@ -70,10 +72,14 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, PickupAttemptEvent>(OnGrabbablePickupAttempt);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, AfterInteractEvent>(OnGrabbableAfterInteract);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, BeforeRangedInteractEvent>(OnGrabbableBeforeRangedInteract);
-        SubscribeLocalEvent<PowerLoaderGrabbableComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
-        SubscribeLocalEvent<PowerLoaderGrabbableComponent, DropshipDetachDoAfterEvent>(OnDropshipDetach);
+        SubscribeLocalEvent<PowerLoaderGrabbableComponent, DropshipAttachDoAfterEvent>(OnGrabbableDropshipAttach);
+        SubscribeLocalEvent<PowerLoaderGrabbableComponent, DropshipDetachDoAfterEvent>(OnGrabbableDropshipDetach);
+        SubscribeLocalEvent<PowerLoaderGrabbableComponent, CombatModeShouldHandInteractEvent>(OnGrababbleShouldInteract);
 
         SubscribeLocalEvent<ActivePowerLoaderPilotComponent, PreventCollideEvent>(OnActivePilotPreventCollide);
+        SubscribeLocalEvent<ActivePowerLoaderPilotComponent, KnockedDownEvent>(OnActivePilotStunned);
+        SubscribeLocalEvent<ActivePowerLoaderPilotComponent, StunnedEvent>(OnActivePilotStunned);
+        SubscribeLocalEvent<ActivePowerLoaderPilotComponent, MobStateChangedEvent>(OnActivePilotMobStateChanged);
     }
 
     private void OnPowerLoaderMapInit(Entity<PowerLoaderComponent> ent, ref MapInitEvent args)
@@ -325,7 +331,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
-    private void OnDropshipAttach(Entity<PowerLoaderGrabbableComponent> ent, ref DropshipAttachDoAfterEvent args)
+    private void OnGrabbableDropshipAttach(Entity<PowerLoaderGrabbableComponent> ent, ref DropshipAttachDoAfterEvent args)
     {
         if (args.Cancelled ||
             args.Handled ||
@@ -347,7 +353,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         SyncAppearance(target);
     }
 
-    private void OnDropshipDetach(Entity<PowerLoaderGrabbableComponent> ent, ref DropshipDetachDoAfterEvent args)
+    private void OnGrabbableDropshipDetach(Entity<PowerLoaderGrabbableComponent> ent, ref DropshipDetachDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled || args.Target is not { } target)
             return;
@@ -384,9 +390,26 @@ public sealed class PowerLoaderSystem : EntitySystem
         SyncAppearance(target);
     }
 
+    private void OnGrababbleShouldInteract(Entity<PowerLoaderGrabbableComponent> ent, ref CombatModeShouldHandInteractEvent args)
+    {
+        if (!HasComp<PowerLoaderComponent>(args.User))
+            args.Cancelled = true;
+    }
+
     private void OnActivePilotPreventCollide(Entity<ActivePowerLoaderPilotComponent> ent, ref PreventCollideEvent args)
     {
         args.Cancelled = true;
+    }
+
+    private void OnActivePilotStunned<T>(Entity<ActivePowerLoaderPilotComponent> ent, ref T args)
+    {
+        RemovePilot(ent);
+    }
+
+    private void OnActivePilotMobStateChanged(Entity<ActivePowerLoaderPilotComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState == MobState.Critical || args.NewMobState == MobState.Dead)
+            OnActivePilotStunned(ent, ref args);
     }
 
     private bool CanAttachPopup(
@@ -688,16 +711,21 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
     }
 
+    private void RemovePilot(Entity<ActivePowerLoaderPilotComponent> active)
+    {
+        _buckle.Unbuckle(active.Owner, null);
+        RemCompDeferred<ActivePowerLoaderPilotComponent>(active);
+    }
+
     public override void Update(float frameTime)
     {
         var pilots = EntityQueryEnumerator<ActivePowerLoaderPilotComponent>();
-        while (pilots.MoveNext(out var uid, out _))
+        while (pilots.MoveNext(out var uid, out var active))
         {
             if (!TryComp(uid, out BuckleComponent? buckle) ||
                 !HasComp<PowerLoaderComponent>(buckle.BuckledTo))
             {
-                _buckle.Unbuckle(uid, null);
-                RemCompDeferred<ActivePowerLoaderPilotComponent>(uid);
+                RemovePilot((uid, active));
             }
         }
     }

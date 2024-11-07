@@ -512,6 +512,20 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("assigned_user_id", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.Blacklist",
+                b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("UserId")
+                        .HasName("PK_blacklist");
+
+                    b.ToTable("blacklist", (string) null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.BanTemplate", b =>
                 {
                     b.Property<int>("Id")
@@ -1059,6 +1073,11 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("character varying(20)")
                         .HasColumnName("primary_gun_name");
 
+                    b.Property<string>("SentryName")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("sentry_name");
+
                     b.Property<string>("SidearmName")
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)")
@@ -1075,6 +1094,10 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Property<Guid>("PlayerId")
                         .HasColumnType("uuid")
                         .HasColumnName("player_id");
+
+                    b.Property<int?>("GhostColor")
+                        .HasColumnType("integer")
+                        .HasColumnName("ghost_color");
 
                     b.Property<int>("TierId")
                         .HasColumnType("integer")
@@ -1160,6 +1183,10 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("boolean")
                         .HasColumnName("figurines");
 
+                    b.Property<bool>("GhostColor")
+                        .HasColumnType("boolean")
+                        .HasColumnName("ghost_color");
+
                     b.Property<bool>("LobbyMessage")
                         .HasColumnType("boolean")
                         .HasColumnName("lobby_message");
@@ -1208,6 +1235,22 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasName("PK_rmc_role_timer_excludes");
 
                     b.ToTable("rmc_role_timer_excludes", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.RMCSquadPreference", b =>
+                {
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("integer")
+                        .HasColumnName("profile_id");
+
+                    b.Property<string>("Squad")
+                        .HasColumnType("text")
+                        .HasColumnName("squad");
+
+                    b.HasKey("ProfileId")
+                        .HasName("PK_rmc_squad_preferences");
+
+                    b.ToTable("rmc_squad_preferences", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.RoleWhitelist", b =>
@@ -2089,6 +2132,18 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Player");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCSquadPreference", b =>
+                {
+                    b.HasOne("Content.Server.Database.Profile", "Profile")
+                        .WithOne("SquadPreference")
+                        .HasForeignKey("Content.Server.Database.RMCSquadPreference", "ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_squad_preferences_profile_profile_id");
+
+                    b.Navigation("Profile");
+                });
+
             modelBuilder.Entity("Content.Server.Database.RoleWhitelist", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", "Player")
@@ -2329,6 +2384,8 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Loadouts");
 
                     b.Navigation("NamedItems");
+
+                    b.Navigation("SquadPreference");
 
                     b.Navigation("Traits");
                 });

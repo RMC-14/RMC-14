@@ -57,12 +57,24 @@ public sealed class RMCMagneticSystem : EntitySystem
 
     private void OnMagnetizeItem(Entity<RMCMagneticArmorComponent> ent, ref InventoryRelayedEvent<RMCMagnetizeItemEvent> args)
     {
-        args.Args.Magnetizer = ent;
+        if ((ent.Comp.AllowMagnetizeToSlots & args.Args.MagnetizeToSlots) == SlotFlags.NONE)
+            return;
+
+        var slotEnumerator = _inventory.GetSlotEnumerator(args.Args.User, ent.Comp.AllowMagnetizeToSlots & args.Args.MagnetizeToSlots);
+
+        while (slotEnumerator.MoveNext(out var container))
+        {
+            if (container.Count > 0)
+                continue;
+
+            args.Args.Magnetizer = ent;
+            break;
+        }
     }
 
     private bool CanReturn(Entity<RMCMagneticItemComponent> ent, EntityUid user, out EntityUid magnetizer)
     {
-        var ev = new RMCMagnetizeItemEvent(SlotFlags.OUTERCLOTHING);
+        var ev = new RMCMagnetizeItemEvent(user, ent.Comp.MagnetizeToSlots, SlotFlags.OUTERCLOTHING);
         RaiseLocalEvent(user, ref ev);
 
         magnetizer = ev.Magnetizer ?? default;
@@ -80,6 +92,12 @@ public sealed class RMCMagneticSystem : EntitySystem
 
         Dirty(ent, returnComp);
         return true;
+    }
+
+    public void SetMagnetizeToSlots(Entity<RMCMagneticItemComponent> ent, SlotFlags slots)
+    {
+        ent.Comp.MagnetizeToSlots = slots;
+        Dirty(ent);
     }
 
     public override void Update(float frameTime)

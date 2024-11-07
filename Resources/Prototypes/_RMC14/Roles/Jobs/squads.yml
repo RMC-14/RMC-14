@@ -6,6 +6,13 @@
     background:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad
+    maxRoles:
+      CMSquadLeader: 1
+      CMFireteamLeader: 2
+      CMWeaponsSpecialist: 1
+      CMSmartGunOperator: 1
+      CMCombatTech: 3
+      CMHospitalCorpsman: 4
 
 - type: entity
   parent: SquadBase
@@ -13,9 +20,13 @@
   name: Alpha
   components:
   - type: SquadTeam
+    roundStart: true
     color: "#E61919"
     accessLevels:
     - CMAccessAlpha
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_alpha
 
 - type: entity
   parent: SquadBase
@@ -23,9 +34,13 @@
   name: Bravo
   components:
   - type: SquadTeam
+    roundStart: true
     color: "#FFC32D"
     accessLevels:
     - CMAccessBravo
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_bravo
 
 - type: entity
   parent: SquadBase
@@ -33,9 +48,13 @@
   name: Charlie
   components:
   - type: SquadTeam
+    roundStart: true
     color: "#C864C8"
     accessLevels:
     - CMAccessCharlie
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_charlie
 
 - type: entity
   parent: SquadBase
@@ -43,9 +62,13 @@
   name: Delta
   components:
   - type: SquadTeam
+    roundStart: true
     color: "#4148C8"
     accessLevels:
     - CMAccessDelta
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_delta
 
 - type: entity
   parent: SquadBase
@@ -59,6 +82,9 @@
     - CMAccessBravo
     - CMAccessCharlie
     - CMAccessDelta
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_echo
 
 - type: entity
   parent: SquadBase
@@ -72,3 +98,8 @@
     - CMAccessBravo
     - CMAccessCharlie
     - CMAccessDelta
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_foxtrot
+
+#TODO RMC-14 Intel needs to use their custom background

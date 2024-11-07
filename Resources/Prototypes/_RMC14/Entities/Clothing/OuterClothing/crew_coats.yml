@@ -1,0 +1,83 @@
+# Correspondent
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCCoatCorrespondent
+  name: combat correspondent jacket
+  description: A jacket for the most fashionable war correspondents.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/brown.rsi
+
+- type: entity
+  parent: RMCCoatCorrespondent
+  id: RMCCoatCorrespondentGreen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/green.rsi
+
+- type: entity
+  parent: RMCCoatCorrespondent
+  id: RMCCoatCorrespondentBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/black.rsi
+
+- type: entity
+  parent: RMCCoatCorrespondent
+  id: RMCCoatCorrespondentBlue
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Correspondent/blue.rsi
+
+# Hazard vests
+- type: entity
+  parent: [RMCAllowSuitStorageClothingHazardVest, RMCBaseJacket]
+  id: RMCHazardVest
+  name: orange hazard vest
+  description: An orange high-visibility vest used in work zones.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/orange.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/orange.rsi
+
+- type: entity
+  parent: RMCHazardVest
+  id: RMCHazardVestBlue
+  name: blue hazard vest
+  description: A blue high-visibility vest used in work zones.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/blue.rsi
+
+- type: entity
+  parent: RMCHazardVest
+  name: yellow hazard vest
+  id: RMCHazardVestYellow
+  description: A yellow high-visibility vest used in work zones.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/yellow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/yellow.rsi
+
+- type: entity
+  parent: RMCHazardVest
+  id: RMCHazardVestBlack
+  name: black hazard vest
+  description: A niche-market, black, allegedly high-visibility vest supposedly used in work zones. Features extra-reflective tapes. The etiquette on the vest insists that it's fully compliant with all the United Nations workplace safety standards.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/black.rsi

@@ -66,6 +66,17 @@
 
 - type: entity
   parent: CMSheetMetal
+  id: CMSheetMetal20
+  suffix: "20"
+  components:
+    - type: Sprite
+      state: metal_3
+    - type: Stack
+      stackType: CMSteel
+      count: 20
+
+- type: entity
+  parent: CMSheetMetal
   id: CMSheetMetal30
   suffix: "30"
   components:

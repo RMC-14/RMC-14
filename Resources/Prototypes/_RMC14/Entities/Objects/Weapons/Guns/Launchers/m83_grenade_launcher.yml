@@ -1,0 +1,35 @@
+﻿- type: entity
+  name: M83 grenade launcher
+  parent: [ RMCBaseWeaponGrenadeLauncher ]
+  id: WeaponLauncherM83
+  description: A heavy, 6-shot grenade launcher used by the UNMC for area denial and big explosions.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83.rsi
+  - type: RMCSelectiveFire
+    baseFireRate: 0.3125
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - GrenadeSpecWhitelist
+  - type: BallisticAmmoProvider
+    capacity: 6
+    proto: CMGrenadeHighExplosive
+  - type: Corrodible
+    isCorrodible: false
+  - type: ExplosionResistance
+    damageCoefficient: 0
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentMagneticHarness
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: 0.0, 0.185

@@ -22,6 +22,7 @@
         whitelist:
           tags:
           - Knife
+          - Holdout
         startingItem: RMCM5Bayonet
   - type: CMItemSlots
     startingItem: RMCM5Bayonet
@@ -39,7 +40,7 @@
     layers:
     - state: icon
     - state: filled
-      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/black.rsi
   - type: ContainerContainer
@@ -54,6 +55,7 @@
         whitelist:
           tags:
           - Knife
+          - Holdout
   - type: Matchbox
   - type: CMHolster
   - type: CMItemSlots
@@ -63,6 +65,19 @@
   parent: [RMCItemSlotM5Bayonet, CMBootsBlack]
   id: CMBootsBlackFilled
   suffix: Filled
+
+- type: entity
+  parent: CMBootsBlackFilled
+  id: RMCScoutShoes
+  name: infiltrator boots # Could probably use it's own sprite
+  description: A modified pair of combat boots, including several trimmed down areas and padded with cloth alongside some form of leather
+  components:
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepCatwalk #I dunno what a better sound effect would be, catwalk stands out so it's there to alert xenos if scout moves while they are close
+      params:
+        volume: -8
+        maxDistance: 0
 
 # Brown Boots
 - type: entity
@@ -105,7 +120,7 @@
   description: These synth-leather boots seem high quality when first worn, but quickly detoriate, especially in the environments the corporate security members these are issued to operate in. Still, better than nothing.
 
 
-# PMC 
+# PMC
 - type: entity
   parent: CMBootsBlack
   id: RMCBootsPMC

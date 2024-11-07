@@ -41,6 +41,7 @@
     tier: 2
     hudOffset: 0,0.35
     unlockAt: 180 # 3 minutes
+  - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
     - CMXenoDrone
@@ -74,16 +75,38 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.66
     baseSprintSpeed: 3
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.6925
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.765
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.53
+      whitelist:
+        components:
+        - XenoHeavy
   - type: WhitelistPickup
     whitelist:
       components:
       - XenoParasite
       - XenoEgg
+      - XenoFruit
   - type: MultiHandedHolder
     items:
     - hands: 2
       whitelist:
         components:
         - XenoEgg
+  - type: RMCSize
+    size: Big
   - type: RMCXenoDamageVisuals
     prefix: hivelord
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: hivelord
+  - type: AcidTrap

@@ -21,5 +21,10 @@ rmc-announcement-ares-lz-designated = Command Order Issued:
 
 rmc-announcement-cooldown = Please allow at least {$seconds} seconds to pass between announcements
 
+
+rmc-announcement-dropship-message = [color=white][font size=16][bold]Dropship Alert[/bold][/font][/color][color=red][font size=14][bold]
+
+    {$message}[/bold][/font][/color]
+
 rmc-announcement-emergency-dropship-crash = [font size=14][bold][color=white]EMERGENCY[/color][/bold][/font][font size=12][color=red]
   DROPSHIP ON COLLISION COURSE. CRASH IMMINENT.[/color][/font]
