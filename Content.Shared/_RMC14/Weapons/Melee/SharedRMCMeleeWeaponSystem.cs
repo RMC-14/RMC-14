@@ -5,13 +5,17 @@ using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Melee;
 
 public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
 {
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
+
 
     private EntityQuery<MeleeWeaponComponent> _meleeWeaponQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
@@ -20,6 +24,8 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
     {
         _meleeWeaponQuery = GetEntityQuery<MeleeWeaponComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
+
+        SubscribeLocalEvent<MeleeResetComponent, ComponentInit>(OnMeleeResetInit);
 
         SubscribeLocalEvent<ImmuneToUnarmedComponent, GettingAttackedAttemptEvent>(OnImmuneToUnarmedGettingAttacked);
 
@@ -30,6 +36,28 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         SubscribeLocalEvent<StunOnHitComponent, MeleeHitEvent>(OnStunOnHitMeleeHit);
 
         SubscribeLocalEvent<MeleeDamageMultiplierComponent, MeleeHitEvent>(OnMultiplierOnHitMeleeHit);
+
+        SubscribeAllEvent<LightAttackEvent>(OnLightAttack, before: new[] { typeof(SharedMeleeWeaponSystem) });
+
+        SubscribeAllEvent<HeavyAttackEvent>(OnHeavyAttack, before: new[] { typeof(SharedMeleeWeaponSystem) });
+
+        SubscribeAllEvent<DisarmAttackEvent>(OnDisarmAttack, before: new[] { typeof(SharedMeleeWeaponSystem) });
+    }
+
+    private void OnMeleeResetInit(EntityUid uid, MeleeResetComponent meleeResetComponent, ComponentInit args)
+    {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
+        if (!TryComp<MeleeWeaponComponent>(uid, out var weapon))
+        {
+            RemComp<MeleeResetComponent>(uid);
+            return;
+        }
+
+        meleeResetComponent.OriginalTime = weapon.NextAttack;
+        weapon.NextAttack = _timing.CurTime;
+        Dirty(uid, weapon);
     }
 
     private void OnStunOnHitMeleeHit(Entity<StunOnHitComponent> ent, ref MeleeHitEvent args)
@@ -89,5 +117,58 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         }
 
         args.Damage = args.Damage * ent.Comp.OtherMultiplier;
+    }
+
+    private void OnLightAttack(LightAttackEvent msg, EntitySessionEventArgs args)
+    {
+        if (args.SenderSession.AttachedEntity is not {} user)
+            return;
+
+        if (!_melee.TryGetWeapon(user, out var weaponUid, out var weapon) ||
+            weaponUid != GetEntity(msg.Weapon))
+        {
+            return;
+        }
+
+        TryMeleeReset(weaponUid, weapon, false);
+    }
+
+    private void OnHeavyAttack(HeavyAttackEvent msg, EntitySessionEventArgs args)
+    {
+        if (args.SenderSession.AttachedEntity is not {} user)
+            return;
+
+        if (!_melee.TryGetWeapon(user, out var weaponUid, out var weapon) ||
+            weaponUid != GetEntity(msg.Weapon))
+        {
+            return;
+        }
+
+        TryMeleeReset(weaponUid, weapon, false);
+    }
+
+    private void OnDisarmAttack(DisarmAttackEvent msg, EntitySessionEventArgs args)
+    {
+        if (args.SenderSession.AttachedEntity is not {} user)
+            return;
+
+        if (!_melee.TryGetWeapon(user, out var weaponUid, out var weapon))
+        {
+            return;
+        }
+
+        TryMeleeReset(weaponUid, weapon, true);
+    }
+
+
+    private void TryMeleeReset(EntityUid weaponUid, MeleeWeaponComponent weapon, bool disarm){
+        if (!TryComp<MeleeResetComponent>(weaponUid, out var reset))
+            return;
+        
+        if (disarm)
+            weapon.NextAttack = reset.OriginalTime;
+
+        RemCompDeferred<MeleeResetComponent>(weaponUid);
+        Dirty(weaponUid, weapon);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Movement.Systems;
@@ -38,6 +39,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
 
         args.Handled = true;
         var active = EnsureComp<XenoActiveCripplingStrikeComponent>(xeno);
+        EnsureComp<MeleeResetComponent>(xeno);
 
         active.ExpireAt = _timing.CurTime + xeno.Comp.ActiveDuration;
         active.SpeedMultiplier = xeno.Comp.SpeedMultiplier;
@@ -122,6 +124,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
                     continue;
 
                 RemCompDeferred<XenoActiveCripplingStrikeComponent>(uid);
+                RemCompDeferred<MeleeResetComponent>(uid);
 
                 _popup.PopupEntity(Loc.GetString("cm-xeno-crippling-strike-expire"), uid, uid, PopupType.SmallCaution);
             }
