@@ -1,54 +1,54 @@
 - type: rank
   id: RMCBaseRankSergeantMajor
   name: (E9E) Sergeant Major
-  shortenedName: (E9E) SGM
+  prefix: (E9E) SGM
 
 - type: rank
   id: RMCBaseRankMasterGunnerySergeant
   name: (E9) Master Gunnery Sergeant
-  shortenedName: (E9) MGySGT
+  prefix: (E9) MGySGT
 
 - type: rank
   id: RMCBaseRankFirstSergeant
   name: (E8E) First Sergeant
-  shortenedName: (E8E) 1stSGT
+  prefix: (E8E) 1stSGT
 
 - type: rank
   id: RMCBaseRankMasterSergeant
   name: (E8) Master Sergeant
-  shortenedName: (E8) MSGT
+  prefix: (E8) MSGT
 
 - type: rank
   id: RMCBaseRankGunnerySergeant
   name: (E7) Gunnery Sergeant
-  shortenedName: (E7) GySGT
+  prefix: (E7) GySGT
 
 - type: rank
   id: RMCBaseRankStaffSergeant
   name: (E6) Staff Sergeant
-  shortenedName: (E6) SSGT
+  prefix: (E6) SSGT
 
 - type: rank
   id: RMCBaseRankSergeant
   name: (E5) Sergeant
-  shortenedName: (E5) SGT
+  prefix: (E5) SGT
 
 - type: rank
   id: RMCBaseRankCorporal
   name: (E4) Corporal
-  shortenedName: (E4) CPL
+  prefix: (E4) CPL
 
 - type: rank
   id: RMCBaseRankLanceCorporal
   name: (E3) Lance Corporal
-  shortenedName: (E3) LCPL
+  prefix: (E3) LCPL
 
 - type: rank
   id: RMCBaseRankPrivateFirstClass
   name: (E2) Private First Class
-  shortenedName: (E2) PFC
+  prefix: (E2) PFC
 
 - type: rank
   id: RMCBaseRankPrivate
   name: (E1) Private
-  shortenedName: (E1) PVT
+  prefix: (E1) PVT

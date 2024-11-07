@@ -1,7 +1,7 @@
 - type: rank
   id: RMCRankColonelCO
   name: (O6) Colonel
-  shortenedName: (O6) Col
+  prefix: (O6) Col
   requirements:
   - !type:RoleTimeRequirement
     role: CMJobCommandingOfficer
@@ -10,7 +10,7 @@
 - type: rank
   id: RMCRankLieutenantColonelCO
   name: (O5) Lieutenant Colonel
-  shortenedName: (O5) Lt.Col	
+  prefix: (O5) Lt.Col
   requirements:
   - !type:RoleTimeRequirement
     role: CMJobCommandingOfficer
@@ -19,4 +19,4 @@
 - type: rank
   id: RMCRankMajorCO
   name: (O4) Major
-  shortenedName: (O4) Maj
+  prefix: (O4) Maj

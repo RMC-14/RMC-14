@@ -1,14 +1,14 @@
 - type: rank
   id: RMCBaseRankCaptain
   name: (O3) Captain
-  shortenedName: (O3) CPT
+  prefix: (O3) CPT
 
 - type: rank
   id: RMCBaseRankFirstLT
   name: (O2) First Lieutenant
-  shortenedName: (O2) 1stLT
+  prefix: (O2) 1stLT
 
 - type: rank
   id: RMCBaseRankSecondLT
   name: (O1) Second Lieutenant
-  shortenedName: (O1) 2ndLT
+  prefix: (O1) 2ndLT

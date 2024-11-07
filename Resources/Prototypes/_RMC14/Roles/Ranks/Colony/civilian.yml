@@ -1,4 +1,6 @@
 ﻿- type: rank
   id: RMCRankCivilian
   name: Civilian
-  shortenedName: C
+  prefix: Civ.
+  malePrefix: Mr.
+  femalePrefix: Ms.

@@ -1,7 +1,7 @@
 ﻿- type: rank
   id: RMCRankWeYaExecutiveSpecialist
   name: Executive Specialist
-  shortenedName: Exec. Spc.
+  prefix: Exec. Spc.
   requirements:
   - !type:RoleTimeRequirement
     role: CMJobLiaison
@@ -10,7 +10,7 @@
 - type: rank
   id: RMCRankWeYaSeniorExecutive
   name: Senior Executive
-  shortenedName: Sr. Exec.
+  prefix: Sr. Exec.
   requirements:
   - !type:RoleTimeRequirement
     role: CMJobLiaison
@@ -19,7 +19,7 @@
 - type: rank
   id: RMCRankWeYaExecutive
   name: Executive
-  shortenedName: Exec.
+  prefix: Exec.
   requirements:
   - !type:RoleTimeRequirement
     role: CMJobLiaison
@@ -28,4 +28,4 @@
 - type: rank
   id: RMCRankWeYaJuniorExecutive
   name: Junior Executive
-  shortenedName: Jr. Exec.
+  prefix: Jr. Exec.
