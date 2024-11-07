@@ -29,6 +29,9 @@
     recoilUnwielded: 2
     scatterWielded: 6
     baseFireRate: 2.86
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.25
+    accuracyMultiplierUnwielded: 0.6
   - type: RMCWeaponDamageFalloff
     falloffMultiplier: 0
   - type: WieldDelay

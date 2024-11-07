@@ -126,6 +126,7 @@
   - type: RMCNameItemOnVend
     item: Sentry
   - type: RequireProjectileTarget
+  - type: RMCWeaponAccuracy
 
 - type: htnCompound
   id: RMCSentryCompound
@@ -301,6 +302,9 @@
         11.0
   - type: Sentry
     upgrades: null
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 4
+    accuracyMultiplierUnwielded: 4
 
 - type: entity
   parent: RMCSentry
@@ -407,3 +411,6 @@
     upgrades: null
     startingMagazine: RMCMagazineSentryShotgun
     magazineTag: RMCMagazineSentryShotgun
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 2
+    accuracyMultiplierUnwielded: 2

@@ -71,6 +71,11 @@
     stunTime: 1
     superSlowTime: 2
     slowTime: 6
+  - type: RMCProjectileAccuracy
+    accuracy: 100
+    thresholds:
+    - range: 8
+      falloff: 10
 
 - type: entity
   parent: CMPelletShotgunBase
@@ -94,6 +99,8 @@
       ignoreModifiers: true
     - range: 0
       falloff: 1
+  - type: RMCProjectileAccuracy
+    accuracy: 95
   # todo rmc14 add burning
 
 - type: entity
@@ -117,6 +124,8 @@
       falloff: 1
   - type: StaminaDamageOnCollide
     damage: 45
+  - type: RMCProjectileAccuracy
+    accuracy: 100
 
 - type: entity
   parent: CMPelletShotgunBase

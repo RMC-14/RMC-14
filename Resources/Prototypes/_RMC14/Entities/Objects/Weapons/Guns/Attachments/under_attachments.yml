@@ -288,6 +288,7 @@
       Turf: 5
       Breaching: 10.8
   - type: UseDelay
+  - type: RMCWeaponAccuracy
   - type: AttachableToggleable
     userOnly: true
     attachedOnly: true

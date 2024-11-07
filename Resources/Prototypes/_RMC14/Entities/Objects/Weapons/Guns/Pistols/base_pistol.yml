@@ -117,6 +117,8 @@
   components:
   - type: Projectile
   - type: RMCProjectileDamageFalloff
+  - type: RMCProjectileAccuracy
+    accuracy: 60
 
 - type: entity
   parent: CMBulletBase
