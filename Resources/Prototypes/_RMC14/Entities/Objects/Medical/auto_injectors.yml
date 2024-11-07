@@ -289,10 +289,6 @@
     maxFillLevels: 1
   - type: MedicallyUnskilledDoAfter
     min: 0
-  - type: Tag
-    tags:
-    - CMAutoInjector
-    - RMCAutoInjectorEZ
   - type: RequiresSkill
     skills:
       RMCSkillMedical: 0
@@ -432,6 +428,3 @@
 
 - type: Tag
   id: RMCAutoInjectorMedical
-
-- type: Tag
-  id: RMCAutoInjectorEZ
