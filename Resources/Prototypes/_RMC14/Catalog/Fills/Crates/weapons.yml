@@ -23,6 +23,16 @@
         amount: 2
 
 - type: entity
+  parent: RMCCrateWeapons
+  id: RMCCrateM54CE2
+  name: M54CAE2 HPR crate (HAR x2, HAR ammo box x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCM54CE2Case
+      amount: 2
+
+- type: entity
   id: RMCCrateMK80
   parent: RMCCrateWeapons
   name: MK80 Hand Cannon Crate (x2)
