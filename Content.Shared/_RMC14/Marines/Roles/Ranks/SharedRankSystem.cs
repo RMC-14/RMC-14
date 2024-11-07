@@ -100,7 +100,7 @@ public abstract class SharedRankSystem : EntitySystem
         }
         else if (hasPaygrade && rank.Paygrade != null)
         {
-            return "(" + rank.Paygrade + ")" + rank.Name;
+            return "(" + rank.Paygrade + ")" + " " + rank.Name;
         }
         else
         {
