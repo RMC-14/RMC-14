@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed xenos being 20% faster than intended at pulling marines. Marine
-      on marine pull speed remains unchanged.
-    type: Fix
-  id: 450
-  time: '2024-07-25T05:37:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3256
-- author: DrSmugleaf
-  changes:
   - message: Fixed tackle stacks lasting for longer than intended. All tackle stacks
       now expire after a fixed 4 seconds for all xenonid castes, after which they
       all need to be reapplied. This specially affects castes with long stun times
@@ -4914,5 +4906,13 @@
   id: 949
   time: '2024-11-08T04:43:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4733
+- author: PursuitInAshes
+  changes:
+  - message: 'The SEA vendors have been updated to include new items and equipment:
+      Service Jackets, medkit pouch, reddot sight.'
+    type: Tweak
+  id: 950
+  time: '2024-11-08T05:22:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4634
 Name: RMC14
 Order: -1
