@@ -41,7 +41,7 @@
       - id: RMCPouchMagazineLarge
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchShotgunLarge
-      #Medical Kit Pouch
+      - id: RMCPouchMedkit
       - id: RMCPouchPistol
       - id: RMCPouchSling
     - name: Armor
@@ -50,7 +50,7 @@
       - id: CMArmorM3VLBallistics
       - id: CMArmorM3Light
       - id: CMArmorM3Medium
-      #Bulletproof Vest
+      - id: CMArmorM3VLBallistics
       - id: CMCoatOfficer
     - name: Eyewear
       choices: { CMEyewear: 1 }
