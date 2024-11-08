@@ -1,0 +1,90 @@
+﻿- type: entity
+  parent: [ CMBaseWeaponRifle, RMCBaseAttachableHolder ]
+  name: XM51 breaching scattergun
+  id: RMCWeaponShotgunXM51
+  description: An experimental shotgun model going through testing trials in the UNMC. Based on the original civilian and CMB version, the XM51 is a mag-fed, pump-action shotgun. It utilizes special 16-gauge breaching rounds which are effective at breaching walls and doors. Users are advised not to employ the weapon against soft or armored targets due to low performance of the shells.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/xm51.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/xm51.rsi
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: Gun
+    shotsPerBurst: 1
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_xm51.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/empty.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 10
+    scatterUnwielded: 30
+    baseFireRate: 0.625
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineShotgunXM51
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineShotgunXM51
+  - type: PumpAction
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+      rmc-aslot-stock:
+        whitelist:
+          tags:
+          - RMCAttachmentXM51Stock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentFlashlightGrip
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.75, 0.00
+      rmc-aslot-rail: -0.03125, 0.125
+      rmc-aslot-stock: -0.5625, 0.00
+      rmc-aslot-underbarrel: 0.25, -0.343
+  - type: Tag
+    tags:
+    - RMCWeaponShotgun
+    - RMCWeaponShotgunXM51
+  - type: GunDamageMultipliers
+    multipliers:
+      Turf: 30
+      Breaching: 15
+      Xeno: 0.23 # TODO RMC14 pylon 6
+
+- type: Tag
+  id: RMCWeaponShotgunXM51
