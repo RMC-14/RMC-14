@@ -73,6 +73,7 @@
       rmc-aslot-barrel: 0.76, 0.0
       rmc-aslot-rail: -0.1, 0.13
       rmc-aslot-underbarrel: 0.24, -0.3
+      rmc-aslot-stock: -0.78, 0.0325
 
 - type: entity
   parent: BulletRifle10x24mm
