@@ -109,7 +109,7 @@
   parent: ActionXenoBase
   id: ActionXenoHeal
   name: Heal Xenonid (600) # TODO RMC14 proper plasma costs
-  description: Heals xenonids in a 4 tile range around where you click for 30% of their health.
+  description: Heals xenonids in a 4 tile range around where you click for 30% of their health over 20 seconds.
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
