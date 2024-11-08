@@ -78,7 +78,7 @@
         recommended: true
       - id: CMWebbingPouch
       - id: CMWebbing
-      #- id: CMWebbingHolster # TODO RMC14 Shoulder Holster Webbing
+      - id: CMWebbingHolster
     - name: Glasses
       choices: { CMGlasses: 1 }
       entries:
