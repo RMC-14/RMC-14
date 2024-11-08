@@ -205,4 +205,4 @@
 - type: entity
   id: XenoLeaderPheromoneRelay
   components:
-  - type: Pheromones
+  - type: XenoPheromones
