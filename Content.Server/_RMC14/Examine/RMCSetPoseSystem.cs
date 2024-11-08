@@ -20,6 +20,9 @@ public sealed class RMCSetPoseSystem : SharedRMCSetPoseSystem
 
     private void OnSetPoseGetVerbs(Entity<RMCSetPoseComponent> ent, ref GetVerbsEvent<Verb> args)
     {
+        if (!args.CanInteract)
+            return;
+
         if (args.User != args.Target)
             return;
 
@@ -32,6 +35,7 @@ public sealed class RMCSetPoseSystem : SharedRMCSetPoseSystem
         {
             Text = Loc.GetString("rmc-set-pose-title"),
             Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/character.svg.192dpi.png")),
+            Priority = -5,
             Act = () => _quickDialog.OpenDialog(actor.PlayerSession, Loc.GetString("rmc-set-pose-title"), setPosePrompt,
             (string pose) =>
             {
