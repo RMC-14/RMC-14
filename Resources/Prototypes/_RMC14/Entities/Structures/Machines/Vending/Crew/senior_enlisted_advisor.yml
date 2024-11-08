@@ -97,12 +97,6 @@
       entries:
       - id: CMMagazineRifleM54C
         points: 9
-      - id: CMMagazineSMGM63
-        points: 9
-      - id: RMCBoxShotgunBuckshot
-        points: 8
-      - id: RMCBoxShotgunSlugs
-        points: 8
     - name: Gun Attachments
       choices: { CMAttachments: 1 }
       entries:
