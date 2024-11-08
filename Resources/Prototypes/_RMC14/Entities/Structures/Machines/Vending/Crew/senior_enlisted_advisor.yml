@@ -41,7 +41,7 @@
       - id: RMCPouchMagazineLarge
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchShotgunLarge
-      - id: RMCPouchMedkit
+#      - id: RMCPouchMedkit
       - id: RMCPouchPistol
       - id: RMCPouchSling
     - name: Armor
@@ -49,7 +49,7 @@
       entries:
       - id: CMArmorM3VLBallistics
       - id: CMArmorM3Light
-      - id: CMArmorM3Medium
+      - id: RMCArmorM3MediumVariants
       - id: CMArmorM3VLBallistics
       - id: CMCoatOfficer
     - name: Eyewear
