@@ -13,10 +13,10 @@ public sealed partial class DialogComponent : Component
     public string Title;
 
     [DataField, AutoNetworkedField]
-    public DialogChoice Message = new(string.Empty);
+    public DialogOption Message = new(string.Empty);
 
     [DataField, AutoNetworkedField]
-    public List<DialogChoice> Options = new();
+    public List<DialogOption> Options = new();
 
     [DataField, AutoNetworkedField]
     public object? Event;

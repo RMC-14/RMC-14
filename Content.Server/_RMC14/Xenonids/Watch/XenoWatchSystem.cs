@@ -124,7 +124,7 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
 
         xenos.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
 
-        _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos));
+        _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos, hive.Comp.BurrowedLarva));
     }
 
     public override void Watch(Entity<HiveMemberComponent?, ActorComponent?, EyeComponent?> watcher, Entity<HiveMemberComponent?> toWatch)

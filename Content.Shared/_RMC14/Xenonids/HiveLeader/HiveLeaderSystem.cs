@@ -106,10 +106,10 @@ public sealed class HiveLeaderSystem : EntitySystem
                 return;
             }
 
-            var options = new List<DialogChoice>();
+            var options = new List<DialogOption>();
             foreach (var leader in leaders)
             {
-                options.Add(new DialogChoice(Name(leader), new HiveLeaderWatchEvent(GetNetEntity(leader))));
+                options.Add(new DialogOption(Name(leader), new HiveLeaderWatchEvent(GetNetEntity(leader))));
             }
 
             _dialog.OpenOptions(ent, "Watch with leader?", options, "Target");

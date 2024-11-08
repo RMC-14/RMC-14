@@ -95,7 +95,7 @@ public sealed class CommunicationsTowerSystem : EntitySystem
         if (!HasComp<MultitoolComponent>(args.Used))
             return;
 
-        var options = new List<DialogChoice>
+        var options = new List<DialogOption>
         {
             new("Wipe communication frequencies"),
             new("Add your faction's frequencies"),

@@ -65,11 +65,11 @@ public sealed class DialogSystem : EntitySystem
         RemComp<DialogComponent>(ent);
     }
 
-    public void OpenOptions(EntityUid target, EntityUid actor, string title, List<DialogChoice> options, string message = "")
+    public void OpenOptions(EntityUid target, EntityUid actor, string title, List<DialogOption> options, string message = "")
     {
         var dialog = EnsureComp<DialogComponent>(target);
         dialog.Title = title;
-        dialog.Message = new DialogChoice(message);
+        dialog.Message = new DialogOption(message);
         dialog.DialogType = DialogType.Options;
         dialog.Options = options;
         Dirty(target, dialog);
@@ -77,7 +77,7 @@ public sealed class DialogSystem : EntitySystem
         _ui.TryOpenUi(target, DialogUiKey.Key, actor);
     }
 
-    public void OpenOptions(EntityUid actor, string title, List<DialogChoice> options, string message = "")
+    public void OpenOptions(EntityUid actor, string title, List<DialogOption> options, string message = "")
     {
         OpenOptions(actor, actor, title, options, message);
     }
@@ -86,7 +86,7 @@ public sealed class DialogSystem : EntitySystem
     {
         var dialog = EnsureComp<DialogComponent>(target);
         dialog.DialogType = DialogType.Input;
-        dialog.Message = new DialogChoice(message, ev);
+        dialog.Message = new DialogOption(message, ev);
         dialog.InputEvent = ev;
         Dirty(target, dialog);
 
@@ -103,7 +103,7 @@ public sealed class DialogSystem : EntitySystem
         var dialog = EnsureComp<DialogComponent>(target);
         dialog.DialogType = DialogType.Confirm;
         dialog.Title = title;
-        dialog.Message = new DialogChoice(message, ev);
+        dialog.Message = new DialogOption(message, ev);
         dialog.ConfirmEvent = ev;
         Dirty(target, dialog);
 

@@ -422,11 +422,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             }
 
             // Any unfilled xeno slots become larva
-            for (var i = selectedXenos; i < totalXenos; i++)
-            {
-                // TODO RMC14 burrowed larva
-                SpawnXenoEnt(comp.LarvaEnt);
-            }
+            var unfilled = totalXenos - selectedXenos;
+            if (unfilled > 0)
+                _hive.IncreaseBurrowedLarva(unfilled);
 
             var survivorCandidates = new List<NetUserId>[Enum.GetValues<JobPriority>().Length];
             for (var i = 0; i < survivorCandidates.Length; i++)

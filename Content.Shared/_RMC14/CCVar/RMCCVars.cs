@@ -231,4 +231,13 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCNewPlayerTimeJobHours =
         CVarDef.Create("rmc.new_player_time_job_hours", 10, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarvaEarlyThresholdMinutes =
+        CVarDef.Create("rmc.late_joins_per_burrowed_larva_early_threshold_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarvaEarly =
+        CVarDef.Create("rmc.late_joins_per_burrowed_larva_early", 4f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarva =
+        CVarDef.Create("rmc.late_joins_per_burrowed_larva", 2.5f, CVar.REPLICATED | CVar.SERVER);
 }

@@ -380,7 +380,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
             _xenoHive.TryGetTierLimit((oldHive, oldHive.Comp), newXenoComp.Tier, out var limit))
         {
             var existing = 0;
-            var total = 0;
+            var total = Math.Sqrt(oldHive.Comp.BurrowedLarva * oldHive.Comp.BurrowedLarvaSlotFactor);
+            total = Math.Min(total, oldHive.Comp.BurrowedLarva);
+
             var current = EntityQueryEnumerator<XenoComponent, HiveMemberComponent>();
             var slotCount = oldHive.Comp.FreeSlots.ToDictionary();
             while (current.MoveNext(out var existingComp, out var member))

@@ -41,7 +41,7 @@ public sealed class ManageHiveSystem : EntitySystem
         // TODO RMC14 other options
         _dialog.OpenOptions(manage,
             "Hive Management",
-            new List<DialogChoice>
+            new List<DialogOption>
             {
                 new("De-evolve (500)", new ManageHiveDevolveEvent()),
             },
@@ -72,14 +72,14 @@ public sealed class ManageHiveSystem : EntitySystem
             return;
         }
 
-        var choices = new List<DialogChoice>();
+        var choices = new List<DialogOption>();
         foreach (var choice in devolutions)
         {
             var name = choice.Id;
             if (_prototype.TryIndex(choice, out var choiceProto))
                 name = choiceProto.Name;
 
-            choices.Add(new DialogChoice(name, new ManageHiveDevolveConfirmEvent(choice)));
+            choices.Add(new DialogOption(name, new ManageHiveDevolveConfirmEvent(choice)));
         }
 
         _dialog.OpenOptions(manage, "Choose a caste", choices);
