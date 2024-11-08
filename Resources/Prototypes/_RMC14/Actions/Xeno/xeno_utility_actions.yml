@@ -104,3 +104,22 @@
       state: xeno_lead
     event: !type:HiveLeaderActionEvent
     useDelay: 3
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoHeal
+  name: Heal Xenonid (600) # TODO RMC14 proper plasma costs
+  description: Heals xenonids in a 4 tile range around where you click for 30% of their health.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: heal_xeno
+    event: !type:XenoHealActionEvent
+    useDelay: 8
+    checkCanAccess: false
+    range: -1
+  - type: XenoActionPlasma
+    cost: 600
