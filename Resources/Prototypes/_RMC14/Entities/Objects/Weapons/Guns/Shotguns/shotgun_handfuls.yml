@@ -27,6 +27,36 @@
     - RMCShellShotgun
     - RMCShellShotgunBuckshot
 
+- type: entity
+  parent: CMShellShotgunBase
+  id: RMCShellShotgunBreaching
+  name: handful of breaching shells
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi
+    layers:
+    - state: breaching_shell_1
+      map: [ "base" ]
+  - type: CartridgeAmmo
+    proto: RMCPelletShotgunBreaching
+  - type: Stack
+    count: 6
+    stackType: RMCShellShotgunBuckshot
+    baseLayer: base
+    layerStates:
+    - breaching_shell_1
+    - breaching_shell_1
+    - breaching_shell_2
+    - breaching_shell_3
+    - breaching_shell_4
+    - breaching_shell_5
+    - breaching_shell_6
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCShellShotgun
+    - RMCShellShotgunBreaching
+
 - type: stack
   id: RMCShellShotgunBuckshot
   name: handful of buckshot shell
@@ -214,6 +244,13 @@
   spawn: CMShellShotgunIncendiaryBuckshot
   maxCount: 5
 
+- type: stack
+  id: RMCShellShotgunBreaching
+  name: handful of light breaching shell
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: breaching_shell_1 }
+  spawn: RMCShellShotgunBreaching
+  maxCount: 5
+
 - type: Tag
   id: RMCShellShotgun
 
@@ -234,3 +271,6 @@
 
 - type: Tag
   id: RMCShellShotgunIncendiaryBuckshot
+
+- type: Tag
+  id: RMCShellShotgunBreaching

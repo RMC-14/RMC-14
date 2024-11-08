@@ -739,7 +739,7 @@
       whitelist:
         tags:
         - RMCSpeedLoaderM44
-        
+
 # Nailgun
 
 - type: entity
@@ -1097,3 +1097,55 @@
       whitelist:
         tags:
         - RMCShellShotgunIncendiaryBuckshot
+
+- type: entity
+  parent: RMCBoxShellsBase
+  id: RMCBoxShellsBreachingEmpty
+  name: shell box (Breaching x 120)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsBreachingEmpty
+  - type: Sprite
+    layers:
+    - state: base_breach
+    - state: shells_breach
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_shells
+    - state: base_breach_lid
+      map: [ "lid" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: shells_breach, visible: false }
+          Low: { state: shells_breach_1, visible: true }
+          Medium: { state: shells_breach_2, visible: true }
+          High: { state: shells_breach_3, visible: true }
+          Full: { state: shells_breach, visible: true }
+  - type: CMItemSlots
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBreaching
+
+- type: entity
+  parent: RMCBoxShellsBreachingEmpty
+  id: RMCBoxShellsBreaching
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCShellShotgunBreaching
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBreaching

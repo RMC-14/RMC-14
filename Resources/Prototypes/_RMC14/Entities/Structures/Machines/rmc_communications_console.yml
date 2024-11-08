@@ -3,6 +3,10 @@
   parent: CMBaseStructure
   id: RMCCommunicationsConsoleBase
   components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     drawdepth: SmallObjects
     sprite: _RMC14/Structures/Machines/rmc_groundside_communications_console.rsi
@@ -38,12 +42,19 @@
     interfaces:
       enum.MarineCommunicationsComputerUI.Key:
         type: MarineCommunicationsComputerBui
+      enum.OverwatchConsoleUI.Key:
+        type: OverwatchConsoleBui
+      enum.TacticalMapComputerUi.Key:
+        type: TacticalMapComputerBui
   - type: MarineCommunicationsComputer
+  - type: OverwatchConsole
+    canMessageSquad: false
+  - type: TacticalMapComputer
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
   id: RMCWarshipControlConsole
-  name: warship control console
+  name: almayer control console
   description: This is used for controlling ship and its related functions.
   components:
   - type: ActivatableUI

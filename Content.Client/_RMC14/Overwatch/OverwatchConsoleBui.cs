@@ -163,6 +163,27 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                         SendPredictedMessage(msg);
                     };
 
+                monitor.MessageSquadButton.OnPressed += _ =>
+                {
+                    var window = new OverwatchTextInputWindow();
+
+                    void SendSquadMessage()
+                    {
+                        SendPredictedMessage(new OverwatchConsoleSendMessageBuiMsg(window.MessageBox.Text));
+                        window.Close();
+                    }
+
+                    window.MessageBox.OnTextEntered += _ => SendSquadMessage();
+                    window.OkButton.OnPressed += _ => SendSquadMessage();
+                    window.CancelButton.OnPressed += _ => window.Close();
+                    window.OpenCentered();
+                };
+
+                TabContainer.SetTabVisible(monitor.SupplyDrop, EntMan.HasComponent<SupplyDropComputerComponent>(Owner));
+
+                monitor.MessageSquadContainer.Visible = EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? overwatch) &&
+                                                        overwatch.CanMessageSquad;
+
                 _squadViews[squad.Id] = monitor;
                 _window.SquadViewContainer.AddChild(monitor);
             }

@@ -11,7 +11,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 5
+        damage: 100
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -28,6 +28,13 @@
         transferForensics: true
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: DamageOnLand
+    damage: {}
+  - type: DamageOtherOnHit
+    damage: {}
+  - type: DamageOnHighSpeedImpact
+    minimumSpeed: 2
+    damage: {}
 
 - type: entity
   parent: BaseBeakerMetallic

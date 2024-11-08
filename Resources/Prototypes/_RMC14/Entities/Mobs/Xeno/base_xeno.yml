@@ -280,6 +280,7 @@
     background:
       sprite: _RMC14/Interface/map_blips.rsi
       state: background_xeno
+  - type: XenoMapTracked
 
 - type: entity
   abstract: true

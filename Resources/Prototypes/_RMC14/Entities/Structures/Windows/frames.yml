@@ -31,7 +31,7 @@
         mask:
         - MachineMask
         layer:
-        - HalfWallLayer
+        - MidImpassable
   - type: Destructible
     thresholds:
       - trigger:
@@ -143,6 +143,27 @@
     node: windowFrameColonyReinforced
   - type: ReceiverXenoClaws
     hitsToDestroy: 5
+
+- type: entity
+  parent: RMCBaseWindowFrame
+  id: RMCWindowFrameHunterReinforced
+  suffix: hunter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/colony_rframe.rsi
+    state: col_rframe0
+    color: "#aba9a9"
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/colony_rframe.rsi
+    state: col_rframe0
+    color: "#aba9a9"
+  - type: IconSmooth
+    key: walls
+    base: col_rframe
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHunterReinforced
+    node: windowFrameHunterReinforced
 
 - type: entity
   parent: RMCBaseWindowFrame

@@ -5,6 +5,8 @@
   abstract: true
   name: helmet
   components:
+  - type: Item
+    size: Normal
   - type: Storage #hopefully in the future someone smarter than me can add storage(?) for integrated things like netting, HUD, etc. but for now this is for hiding snacks
     maxItemSize: Tiny
     grid:
