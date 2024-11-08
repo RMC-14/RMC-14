@@ -20,11 +20,13 @@
       visible: false
       shader: unshaded
   - type: Item
+    size: Tiny
     sprite: Objects/Tools/lighters.rsi
   - type: Clothing
     quickEquip: false
     slots:
     - suitstorage
+  - type: RMCLighter
 
 - type: entity
   name: cheap lighter
@@ -33,7 +35,6 @@
   id: RMCLighter
   components:
   - type: Item
-    size: Tiny
     heldPrefix: null
   - type: ItemToggle
     predictable: false
@@ -97,7 +98,6 @@
           lighter_u_on: ""
         open:
           lighter_u_on: ""
-  - type: RMCLighter
 
 - type: entity
   name: We-Ya executive zippo lighter
