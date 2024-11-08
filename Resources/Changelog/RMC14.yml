@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: gorillagaming
-  changes:
-  - message: The current planet is now displayed in the lobby
-    type: Add
-  id: 446
-  time: '2024-07-24T11:30:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3232
 - author: Vermidia
   changes:
   - message: Parasites can crawl back into open eggs, and drone castes can also put
@@ -4915,5 +4908,12 @@
   id: 945
   time: '2024-11-08T01:19:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3778
+- author: UnicornOnLSD
+  changes:
+  - message: Added General's formal cloak
+    type: Add
+  id: 946
+  time: '2024-11-08T01:26:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4705
 Name: RMC14
 Order: -1
