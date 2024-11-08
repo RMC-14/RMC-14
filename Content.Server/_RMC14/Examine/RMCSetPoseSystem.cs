@@ -32,7 +32,6 @@ public sealed class RMCSetPoseSystem : SharedRMCSetPoseSystem
         {
             Text = Loc.GetString("pointing-verb-get-data-text"),
             Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/character.svg.192dpi.png")),
-            ClientExclusive = true,
             Act = () => _quickDialog.OpenDialog(actor.PlayerSession, Loc.GetString("rmc-set-pose-title"), setPosePrompt,
             (string pose) =>
             {
