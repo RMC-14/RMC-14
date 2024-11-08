@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed xenonids being able to watch other xenonids without a Queen.
-    type: Fix
-  id: 459
-  time: '2024-07-25T11:44:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3261
-- author: DrSmugleaf
-  changes:
   - message: Dropship travel and cooldown times are the default from 13 again, 100
       seconds to travel and 120 seconds to cool down. This gives marines more time
       to prepare after a hijack announcement. Be ready to cycle dropships or wait
@@ -4861,5 +4854,19 @@
   id: 958
   time: '2024-11-08T20:18:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4767
+- author: DrSmugleaf
+  changes:
+  - message: Fixed pill canisters not being able to be opened.
+    type: Fix
+  - message: Fixed not being able to demote hive leaders when you have 4, and not
+      getting popups when promoting and demoting hive leaders. These popups are on
+      your cursor since popups beyond your view range broke AGAIN.
+    type: Fix
+  - message: Fixed the XM51 breaching scattergun sounding like its being fired inside
+      your skull if used by someone else.
+    type: Fix
+  id: 959
+  time: '2024-11-08T22:26:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4771
 Name: RMC14
 Order: -1
