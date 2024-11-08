@@ -13,6 +13,9 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: mst
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_shipside
   special:
   - !type:AddComponentSpecial
     components:
@@ -23,6 +26,8 @@
         RMCSkillEngineer: 1
         RMCSkillFirearms: 2
         RMCSkillFireman: 1
+    - type: JobPrefix
+      prefix: "MST"
   hidden: true # TODO RMC14
 
 - type: startingGear

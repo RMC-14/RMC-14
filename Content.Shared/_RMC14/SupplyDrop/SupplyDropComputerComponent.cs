@@ -29,4 +29,10 @@ public sealed partial class SupplyDropComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool HasCrate;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan UpdateEvery = TimeSpan.FromSeconds(0.5);
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan NextUpdate;
 }

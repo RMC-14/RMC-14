@@ -127,7 +127,7 @@
       - id: CMBeltUtilityFilled
       - id: CMBeltMedicBagFilled
       - id: CMBeltMedicalFilled
-      - id: RMCBeltSmgMags
+      - id: RMCBeltHolsterSMGPouch
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
       - id: RMCM276ShotgunShellLoadingRig
       - id: RMCBeltGrenade
@@ -173,6 +173,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather
     - name: Other Supplies
       entries:
       # - id: CMHelmetVisorMedical
@@ -205,133 +206,6 @@
 
 
 # Executive Officer #
-
-# Drip Vendor
-- type: entity
-  parent: ColMarTechBase
-  id: ColMarTechExecutiveOfficerEquipment
-  name: ColMarTech Executive Officer Equipment Rack
-  description: An automated equipment rack for the Executive Officer. It features a sizeable selection of equipment meant only for the second in command of a ship.
-  components:
-  - type: AccessReader
-    access:
-    - [ "CMAccessCommand" ]
-  - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
-  - type: CMAutomatedVendor
-    jobs:
-    - CMExecutiveOfficer
-    sections:
-    - name: Standard Equipment
-      takeAll: CMStandard
-      entries:
-      - id: CMHeadsetSeniorCommand
-      - id: CMSatchel
-      - id: CMMRE
-    - name: Uniform # TODO: Port this.
-      choices: { CMUniform: 1 }
-      entries:
-      - id: CMJumpsuitBO
-      - id: CMJumpsuitOperations
-      - id: RMCVendorBundleXOFormal
-    - name: Personal Weapon
-      choices: { CMWeapon: 1 }
-      entries:
-      - id: CMWeaponPistolMK80  # These all come inside belts; but these don't exist so...
-        recommended: true       # TODO RMC14 Pistol Belt Fills
-      - id: CMWeaponPistolM1984
-      - id: CMWeaponPistolM77
-      - id: RMCWeaponRevolverM44
-    - name: Belt
-      choices: { CMBelt: 1 }
-      entries:
-      - id: RMCBeltUtilityGeneral
-        recommended: true
-      - id: CMBeltSecurityMPFilled
-        recommended: true
-      - id: CMBeltMedicBag
-        recommended: true
-      - id: CMBeltMarine
-        recommended: true
-      - id: CMBeltUtilityCombat
-        recommended: true
-    - name: Combat Equipment
-      takeAll: CMEquipment
-      entries:
-      - id: CMArmorM4 # TODO: Port Officer Armour
-      - id: ArmorHelmetM10 # TODO: Port Officer Helmet
-      - id: CMBootsBlackFilled
-      - id: CMHandsBlackMarine
-      #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
-    - name: Eyewear
-      choices: { CMEyewear: 1 }
-      entries:
-      - id: RMCGlassesMedicalHUDGlasses
-        recommended: true
-      - id: CMGlassesSecurity
-      - id: RMCSunglasses
-        recommended: true
-      - id: RMCGlassesAviators
-    # - name: Patches # TODO RMC14 Make Patches
-    #   entries:
-    #   - id: CMUNMCPatch
-    #   - id: CMFallingFalconsPatch
-    - name: Pouches
-      choices: { CMPouches: 2 }
-      entries:
-      - id: RMCPouchFirstAidInjectors
-        name: first-aid pouch (refillable injectors)
-      - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
-      - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pills)
-        recommended: true
-      - id: RMCPouchGeneralLarge
-      - id: RMCPouchMagazineLarge
-      - id: RMCPouchShotgunLarge
-      - id: RMCPouchMagazinePistolLarge
-      - id: RMCPouchMedical
-      - id: RMCPouchMedkit
-      - id: RMCPouchPistol
-      #- id: RMCPouchSling # TODO RMC14 Sling Pouch
-                           # This has a comment saying "implement this", going to leave it commented out.
-      - id: RMCPouchToolsFill
-      - id: RMCPouchConstruction
-      - id: RMCPouchElectronicsFill
-      - id: RMCPouchFlareFilled
-      #- id: RMCPouchFuelTank # TODO RMC14 Fuel Tank Pouch
-    - name: Accessories
-      choices: { CMAccessories: 1 }
-      entries:
-      - id: CMWebbingBrown
-        recommended: true
-      - id: CMWebbingBlack
-        recommended: true
-      - id: CMWebbingPouch
-      - id: CMWebbing
-      #- id: CMWebbingHolster # TODO RMC14 Shoulder Holster Webbing
-    - name: Hats
-      choices: { CMHat: 1 }
-      entries:
-      - id: CMHeadBeret # TODO: Port Officer Beret
-      - id: CMHeadCapPeakedService
-      - id: CMHeadCap # TODO: Port Patrol Cap
-      - id: CMHeadCapOfficer
-
-- type: entity
-  parent: CMVendorBundleRiflemanApparel
-  id: RMCVendorBundleXOFormal
-  name: formal uniform
-  description: Contains a peaked cap, formal uniform and jacket.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
-    state: icon
-  - type: CMVendorBundle
-    bundle:
-    - CMHeadCapPeakedFormal
-    - CMCoatXOFormal
-    - CMJumpsuitXOFormal
 
 # Weapon Vendor
 - type: entity
@@ -686,3 +560,517 @@
         points: 15
       - id: RMCAttachmentSuppressor
         points: 15
+
+# Senior Officer Vendors
+
+# Drip Vendor
+#
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechSeniorOfficerEquipment
+  name: ColMarTech Senior Officer Equipment Rack
+  description: An automated equipment vendor for Senior Officers.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCommand" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMExecutiveOfficer
+    sections:
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMHeadsetSeniorCommand
+      - id: CMSatchel
+      - id: CMMRE
+    - name: Uniform # TODO: Port this.
+      choices: { CMUniform: 1 }
+      entries:
+      - id: CMJumpsuitBO
+      - id: CMJumpsuitOperations
+      - id: RMCVendorBundleXOFormal
+    - name: Personal Weapon
+      choices: { CMWeapon: 1 }
+      entries:
+      - id: CMWeaponPistolMK80  # These all come inside belts; but these don't exist so...
+        recommended: true       # TODO RMC14 Pistol Belt Fills
+      - id: CMWeaponPistolM1984
+      - id: CMWeaponPistolM77
+      - id: RMCWeaponRevolverM44
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCBeltUtilityGeneral
+        recommended: true
+      - id: CMBeltSecurityMPFilled
+        recommended: true
+      - id: CMBeltMedicBag
+        recommended: true
+      - id: CMBeltMarine
+        recommended: true
+      - id: CMBeltUtilityCombat
+        recommended: true
+    - name: Combat Equipment
+      takeAll: CMEquipment
+      entries:
+      - id: CMArmorM4 # TODO: Port Officer Armour
+      - id: ArmorHelmetM10 # TODO: Port Officer Helmet
+      - id: CMBootsBlackFilled
+      - id: CMHandsBlackMarine
+      #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+    - name: Eyewear
+      choices: { CMEyewear: 1 }
+      entries:
+      - id: RMCGlassesMedicalHUDGlasses
+        recommended: true
+      - id: CMGlassesSecurity
+      - id: RMCSunglasses
+        recommended: true
+      - id: RMCGlassesAviators
+    # - name: Patches # TODO RMC14 Make Patches
+    #   entries:
+    #   - id: CMUNMCPatch
+    #   - id: CMFallingFalconsPatch
+    - name: Pouches
+      choices: { CMPouches: 2 }
+      entries:
+      - id: RMCPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+      - id: RMCPouchFirstAidPills
+        name: first-aid pouch (pills)
+        recommended: true
+      - id: RMCPouchGeneralLarge
+      - id: RMCPouchMagazineLarge
+      - id: RMCPouchShotgunLarge
+      - id: RMCPouchMagazinePistolLarge
+      - id: RMCPouchMedical
+      - id: RMCPouchMedkit
+      - id: RMCPouchPistol
+      #- id: RMCPouchSling # TODO RMC14 Sling Pouch
+                           # This has a comment saying "implement this", going to leave it commented out.
+      - id: RMCPouchToolsFill
+      - id: RMCPouchConstruction
+      - id: RMCPouchElectronicsFill
+      - id: RMCPouchFlareFilled
+      #- id: RMCPouchFuelTank # TODO RMC14 Fuel Tank Pouch
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+        recommended: true
+      - id: CMWebbingBlack
+        recommended: true
+      - id: CMWebbingPouch
+      - id: CMWebbing
+      #- id: CMWebbingHolster # TODO RMC14 Shoulder Holster Webbing
+    - name: Hats
+      choices: { CMHat: 1 }
+      entries:
+      - id: CMHeadBeret # TODO: Port Officer Beret
+      - id: CMHeadCapPeakedService
+      - id: CMHeadCap # TODO: Port Patrol Cap
+      - id: CMHeadCapOfficer
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleXOFormal
+  name: formal uniform
+  description: Contains a peaked cap, formal uniform and jacket.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+    - CMHeadCapPeakedFormal
+    - CMCoatXOFormal
+    - CMJumpsuitXOFormal
+
+#   - type: CMAutomatedVendor
+#     jobs:
+#     - CMChiefMP
+#     sections:
+#     - name: POLICE SET (MANDATORY)
+#       takeAll: CMStandard
+#       entries:
+#       - id: RMCVendorBundleMilitaryPoliceApparelCMP
+#     - name: STANDARD EQUIPMENT
+#       takeAll: CMStandard
+#       entries:
+#       - id: CMJumpsuitWO
+#       - id: CMHeadsetSeniorCommand #ToDo: convert Headset to CMP comms
+#       - id: CMHandsBlackMarine
+#       - id: CMBootsBlackFilled
+#     - name: ARMOR
+#       takeAll: CMStandard
+#       entries:
+#       - id: CMArmorM3WO
+#       - id: CMArmorHelmetM10ChiefMP
+#       - id: CMHandsBlackMarine
+#       - id: CMHeadBeretWO
+#     - name: HANDGUN CASE
+#       choices: { CMWeapon: 1 }
+#       entries:
+#       - id: CMWeaponPistolMK80  # These all come inside belts; but these don't exist so... # TODO RMC14 Pistol Belt Fills
+#       - id: RMCWeaponRevolverM44 # TODO ADD CASE.
+#       - id: CMWeaponPistolM1984 # TODO ADD CASE.
+#     - name: BACKPACK
+#       choices: { CMBackpack: 1 }
+#       entries:
+#       - id: CMSatchelSecurity
+#     - name: BELT
+#       choices: { CMBelt: 1 }
+#       entries:
+#       - id: RMCBeltUtilityGeneral
+#       #- id: RMCBeltGunPistol # TODO Add belt.
+#       #- id: RMCBeltGunRevolver # TODO Add belt.
+#     - name: Combat Equipment
+#       takeAll: CMEquipment
+#       entries:
+#       - id: CMArmorM4 # TODO: Port Officer Armour
+#       - id: ArmorHelmetM10 # TODO: Port Officer Helmet
+#       - id: CMBootsBlackFilled
+#       - id: CMHandsBlackMarine
+#       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+#     - name: POUCHES
+#       choices: { CMPouches: 2 }
+#       entries:
+#       - id: RMCPouchGeneralLarge
+#       - id: RMCPouchFirstAidInjectors
+#       - id: RMCPouchFirstAidSplintsGauzeOintment
+#       - id: RMCPouchFirstAidPills
+#       - id: RMCPouchMagazinePistol
+#       - id: RMCPouchPistol
+#     - name: MASK
+#       choices: { CMMask: 1 }
+#       entries:
+#       - id: CMMaskGas
+#       - id: CMMaskCoif
+#       #- id: RMCMaskRebreather
+#     - name: ACCESSORIES
+#       choices: { CMAccessories: 1 }
+#       entries:
+#       - id: CMWebbingBrown
+#       - id: CMWebbingBlack
+#       - id: CMWebbingPouch
+#       - id: CMWebbing
+
+# - type: entity
+#   parent: CMVendorBundleRiflemanApparel
+#   id: RMCVendorBundleMilitaryPoliceApparelCMP
+#   name: Essential Police Set
+#   description: Contains security HUD-glasses, a filled security belt and a M10 helmet.
+#   components:
+#   - type: Sprite
+#     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
+#     state: icon
+#   - type: CMVendorBundle
+#     bundle:
+#     - CMGlassesSecurity
+#     - CMBeltSecurityMPFilled
+
+
+#   - type: CMAutomatedVendor
+#     jobs:
+#     - CMChiefEngineer
+#     sections:
+#     - name: SHIPSIDE GEAR
+#     - name: STANDARD EQUIPMENT
+#       takeAll: CMStandard
+#       entries:
+#       - id: CMHandsInsulated
+#       - id: CMHeadsetCommand #TODO Change to ce headset
+#       - id: CMBeltUtilityFilled
+#       - id: CMBootsBlack
+#       - id: ClothingEyesGlassesMeson #TODO change to CM13 engi goggles.
+#     - name: UNIFORM
+#       choices: { CMUniform: 1 }
+#       entries:
+#       - id: CMJumpsuitChiefEngineer
+#       - id: CMJumpsuitBO
+#     - name: HELMET
+#       choices: { CMHelmet: 1 }
+#       entries:
+#       #- id: RMCHeadBeretEngineering #TODO ADD
+#       - id: RMCHardhatWhite
+#       - id: CMHeadCap
+#       #- id: CMHeadWeldingHelmet #TODO ADD
+#     - name: SUIT
+#       choices: { CMSuit: 1 }
+#       entries:
+#       #- id: RMCSuitBlackHazard #TODO ADD
+#       #- id: RMCSuitBlueHazard #TODO ADD
+#       #- id: RMCSuitOrangekHazard #TODO ADD
+#       #- id: RMCSuitYellowHazard #TODO ADD
+#       - id: CMCoatOfficer
+#     - name: BACKPACK
+#       choices: { CMBackpack: 1 }
+#       entries:
+#       - id: CMSatchel
+#       - id: CMSatchelMarineTech
+#       - id: RMCSatchelWelder
+#       - id: CMBackpackWelder
+#       #- id: RMCWelderpack #TODO ADD
+#     - name: POUCHES
+#       choices: { CMPouches: 2 }
+#       entries:
+#       - id: RMCPouchFirstAidInjectors
+#       - id: RMCPouchFirstAidSplintsGauzeOintment
+#       - id: RMCPouchFirstAidPills
+#       - id: RMCPouchGeneralLarge
+#       - id: RMCPouchToolsFill
+#       - id: RMCPouchConstruction
+#       - id: RMCPouchElectronicsFill
+#       - id: RMCPouchMagazine
+#       - id: RMCPouchShotgun
+#       - id: RMCPouchPistol
+#       - id: RMCPouchFlareFilled
+#       #- id: RMCPouchFuelTank
+#     - name: PERSONAL SIDEARM
+#       choices: { CMWeapon: 1 }
+#       entries:
+#       - id: CMWeaponPistolMK80
+#       - id: CMWeaponPistolM1984
+#       - id: RMCWeaponRevolverM44
+#     - name: ACCESSORIES
+#       choices: { CMAccessories: 1 }
+#       entries:
+#       - id: CMWebbingBrown
+#       - id: CMWebbingBlack
+#       - id: CMWebbingPouch
+#       - id: CMWebbing
+#       #- id: CMWebbingHolster # TODO RMC14 Shoulder Holster Webbing
+#     - name: DEPLOYENT GEAR
+#     - name: COMBAT EQUIPMENT
+#       takeAll: CMStandard
+#       entries:
+#       - id: CMArmorM3Medium #ToDo Replace with officer M3
+#       - id: CMBootsBlackFilled
+#       - id: RMCLaserDesignator
+#     - name: COMBAT HELMET
+#       choices: { CMCombatHelmet: 1 }
+#       entries:
+#       #- id: CMArmorHelmetM10Officer #ToDo Add.
+#       - id: CMArmorHelmetM10Tech
+#     - name: MASK
+#       choices: { CMMask: 1 }
+#       entries:
+#       - id: CMMaskGas
+#       - id: CMMaskCoif
+#     - name: PRIMARY FIREARMS
+#       choices: { CMWeaponPrimary: 1 }
+#       entries:
+#       - id: WeaponShotgunM42A2
+#       #- id: WeaponPulseRifle #ToDo Add.
+#       #- id: WeaponIncineratorUnit #ToDo Add.
+#     - name: Spare Equipment
+#       entries:
+#       - id: CMHeadsetEngineer
+#         ammount: 15
+
+
+#   - type: CMAutomatedVendor
+#     jobs:
+#     - CMQuartermaster
+#     sections:
+#     - name: STANDARD EQUIPMENT
+#       takeAll: CMStandard
+#       entries:
+#       - id: CMHandsInsulated
+#       - id: CMJumpsuitQM
+#       - id: CMHeadsetQM #Todo: Fix comms access squads.
+#       - id: CMSatchel
+#       #- id: CMCoatQM #Todo: Port this
+#     - name: Headgear
+#       choices: { CMHelmet: 1 }
+#       entries:
+#       - id: CMHeadCapQM
+#       - id: CMHeadBeret
+#       - id: CMHeadCapCargo
+#     - name: PERSONAL SIDEARM
+#       choices: { CMWeapon: 1 }
+#       entries:
+#       - id: CMWeaponPistolMK80
+#       - id: CMWeaponPistolM1984
+#       - id: RMCWeaponRevolverM44
+#     - name: COMBAT EQUIPMENT
+#       takeAll: CMStandard
+#       entries:
+#       - id: CMArmorM3Medium #ToDo Replace with officer M3
+#       - id: CMBootsBlackFilled
+#       - id: ArmorHelmetM10
+#     - name: POUCHES
+#       choices: { CMPouches: 2 }
+#       entries:
+#       - id: RMCPouchFirstAidInjectors
+#       - id: RMCPouchFirstAidSplintsGauzeOintment
+#       - id: RMCPouchFirstAidPills
+#       - id: RMCPouchGeneralLarge
+#       - id: RMCPouchTools
+#       - id: RMCPouchConstruction
+#     - name: ACCESSORIES
+#       choices: { CMAccessories: 1 }
+#       entries:
+#       - id: CMWebbingBrown
+#       - id: CMWebbingBlack
+#       - id: CMWebbing
+#     - name: Spare Equipment
+#       entries:
+#       - id: CMStampApproved
+#         ammount: 15
+
+
+#   - type: CMAutomatedVendor
+#     jobs:
+#     - CMCMO
+#     sections:
+#     - name: Medical Set (Mandatory)
+#       takeAll: CMMedicalSet
+#       entries:
+#       - id: CMVendorBundleCrewMedicalEssentialsNurse
+#     - name: STANDARD EQUIPMENT
+#       entries:
+#       - id: CMHandsLatex
+#       - id: CMHeadsetCMO
+#     - name: EYEWEAR
+#       choices: { CMEyewear: 1 }
+#       - id: RMCGlassesMedicalHUDGlasses
+#       #- id: RMCGlassesMedicalHUDGlassesPrescription
+#       #- id: RMCGlasesReagentScannerHUD
+#       #- id: RMCGlasesReagentScannerHUDPrescription
+#     - name: Uniform # TODO: Port this.
+#       choices: { CMUniform: 1 }
+#       entries:
+#       - id: CMJumpsuitCMO
+#         recommended: true
+#       - id: RMCScrubsLightBlue
+#       - id: CMScrubsGreen
+#       - id: CMScrubsBlue
+#       - id: CMScrubsPurple
+#       - id: CMScrubsOrange
+#       - id: RMCScrubsOlive
+#       - id: RMCScrubsGrey
+#     - name: SUIT
+#       choices: { CMSuit: 1 }
+#       entries:
+#       - id: RMCSuitLabcoat
+#         recommended: true
+#       - id: RMCSuitMedicalApron
+#     - name: Combat Equipment
+#       takeAll: CMEquipment
+#       entries:
+#       #- id: RMCCoatSnowcoat
+#       #- id: RMCMaskBalaclava
+#       #- id: RMCMaskSnowScarf
+#     - name: HEADWEAR
+#       choices: { CMHelmet: 1 }
+#       entries:
+#       #- id: RMCCMOPeakedCap
+#       - id: CMHeadCapSurgOrange
+#       - id: CMHeadCapSurgBlue
+#       - id: CMHeadCapSurgPurple
+#       - id: CMHeadCapSurgGreen
+#     - name: BAG
+#       choices: { CMBag: 1 }
+#       entries:
+#       - id: CMSatchelMarine
+#       - id: CMBackpackMarine
+#       - id: CMSatchelMedical
+#         recommended: true
+#       - id: CMBackpackMedical
+#         recommended: true
+#     - name: BELT
+#       choices: { CMBelt: 1 }
+#       entries:
+#       - id: CMBeltMedicBagFilled
+#       - id: CMBeltMedicalFilled
+#     - name: PERSONAL SIDEARM
+#       choices: { CMWeapon: 1 }
+#       entries:
+#       - id: CMWeaponPistolMK80
+#       - id: CMWeaponPistolM1984
+#       - id: RMCWeaponRevolverM44
+#     - name: COMBAT EQUIPMENT (COMBAT USE ONLY)
+#       takeAll: CMStandard
+#       entries:
+#       - id: CMArmorM3Medium #ToDo Replace with officer M3
+#       - id: CMBootsBlackFilled
+#       - id: ArmorHelmetM10
+#     - name: Pouches
+#       choices: { CMPouches: 2 }
+#       entries:
+#       - id: RMCPouchAutoinjector
+#       - id: RMCPouchFirstAidInjectors
+#       - id: RMCPouchFirstAidSplintsGauzeOintment
+#       - id: RMCPouchFirstAidPills
+#       - id: RMCPouchFirstResponder
+#       - id: RMCPouchMedical
+#       - id: RMCPouchMedkit
+#       # Add pressuized reagent pouch.
+#       - id: RMCPouchGeneralLarge
+#       #- id: RMCPouchSling
+#     - name: Accessories
+#       choices: { CMAccessories: 1 }
+#       entries:
+#       - id: CMWebbingBrown
+#       - id: CMWebbingBlack
+#       - id: CMWebbing
+
+
+#   - type: CMAutomatedVendor
+#     jobs:
+#     - CMAuxiliarySupportOfficer
+#     sections:
+#     - name: STANDARD EQUIPMENT
+#       takeAll: CMStandard
+#       entries:
+#       - id: CMHandsInsulated
+#       - id: CMJumpsuitBO
+#       - id: CMHeadsetSeniorCommand
+#       - id: CMCoatASO
+#     - name: BAG
+#       choices: { CMHelmet: 1 }
+#       entries:
+#       - id: CMSatchelMarineTech
+#       - id: CMSatchel
+#     - name: PERSONAL SIDEARM
+#       choices: { CMWeapon: 1 }
+#       entries:
+#       - id: CMWeaponPistolMK80
+#       - id: CMWeaponPistolM1984
+#       - id: RMCWeaponRevolverM44
+#     - name: Headgear
+#       choices: { CMHelmet: 1 }
+#       entries:
+#       - id: RMCHeadBeretGreen
+#       - id: CMHeadBeretTan
+#       - id: CMHeadCap
+#       - id: CMHeadCapPeakedService
+#     - name: COMBAT EQUIPMENT
+#       takeAll: CMStandard
+#       entries:
+#       - id: CMArmorM3Medium #ToDo Replace with officer M3
+#       - id: CMBootsBlackFilled
+#       - id: ArmorHelmetM10
+#     - name: POUCHES
+#       choices: { CMPouches: 2 }
+#       entries:
+#       - id: RMCPouchDocument
+#       - id: RMCPouchFirstAidInjectors
+#       - id: RMCPouchFirstAidSplintsGauzeOintment
+#       - id: RMCPouchFirstAidPills
+#       - id: RMCPouchGeneralLarge
+#       - id: RMCPouchTools
+#       - id: RMCPouchConstruction
+#       #- id: RMCPouchSling
+#     - name: ACCESSORIES
+#       choices: { CMAccessories: 1 }
+#       entries:
+#       - id: CMWebbingBrown
+#       - id: CMWebbingBlack
+#       - id: CMWebbing

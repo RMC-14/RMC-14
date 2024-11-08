@@ -92,8 +92,8 @@
     whitelist:
       tags:
       - CMCartridgePistol9mm
-      - RCMCartridgePistol9mmSquashHead #MK80 is specially chambered to take these rounds, regular pistols cannot.
-    proto: RCMCartridgePistol9mmSquashHead
+      - RMCCartridgePistol9mmSquashHead #MK80 is specially chambered to take these rounds, regular pistols cannot.
+    proto: RMCCartridgePistol9mmSquashHead
     capacity: 18
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mk80.rsi
@@ -104,14 +104,14 @@
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
-  id: RCMCartridgePistol9mmSquashHead
+  id: RMCCartridgePistol9mmSquashHead
   name: cartridge (9mm Squash-Head)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
     tags:
     - Cartridge
-    - RCMCartridgePistol9mmSquashHead
+    - RMCCartridgePistol9mmSquashHead
   - type: CartridgeAmmo
     proto: RCMBulletPistol9mmSquashHead
 
@@ -136,3 +136,6 @@
 
 - type: Tag
   id: CMMagazinePistolMK80
+
+- type: Tag
+  id: RMCCartridgePistol9mmSquashHead

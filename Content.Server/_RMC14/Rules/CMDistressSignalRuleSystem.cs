@@ -30,6 +30,7 @@ using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Spawners;
+using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
@@ -48,7 +49,6 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
-using Content.Shared.Roles.Jobs;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -288,8 +288,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                 var profile = GameTicker.GetPlayerProfile(player);
                 var coordinates = _transform.GetMoverCoordinates(spawner);
-                var jobComp = new JobComponent { Prototype = comp.SurvivorJob };
-                var survivorMob = _stationSpawning.SpawnPlayerMob(coordinates, jobComp, profile, null);
+                var survivorMob = _stationSpawning.SpawnPlayerMob(coordinates, comp.SurvivorJob, profile, null);
 
                 if (!_mind.TryGetMind(playerId, out var mind))
                     mind = _mind.CreateMind(playerId);
@@ -297,8 +296,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 RemCompDeferred<TacticalMapUserComponent>(survivorMob);
                 _mind.TransferTo(mind.Value, survivorMob);
 
-                if (!HasComp<JobComponent>(mind.Value))
-                    _roles.MindAddRole(mind.Value, jobComp, silent: false);
+                _roles.MindAddJobRole(mind.Value, jobPrototype: comp.SurvivorJob);
 
                 _playTimeTracking.PlayerRolesChanged(player);
                 return playerId;
@@ -538,7 +536,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private void OnPlayerSpawning(PlayerSpawningEvent ev)
     {
-        if (ev.Job?.Prototype is not { } jobId ||
+        if (ev.Job is not { } jobId ||
             !_prototypes.TryIndex(jobId, out var job) ||
             !job.IsCM)
         {
@@ -574,7 +572,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             if (squad != null)
             {
-                _squad.AssignSquad(ev.SpawnResult.Value, squad.Value, ev.Job?.Prototype);
+                _squad.AssignSquad(ev.SpawnResult.Value, squad.Value, jobId);
 
                 // TODO RMC14 add this to the map file
                 if (TryComp(spawner, out TransformComponent? xform) &&
@@ -587,7 +585,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     _hunger.SetHunger(ev.SpawnResult.Value, 50.0f, hunger);
             }
 
-            _gunIFF.SetUserFaction(ev.SpawnResult.Value, comp.MarineFaction);
+            var faction = HasComp<SurvivorComponent>(ev.SpawnResult.Value) ? comp.SurvivorFaction : comp.MarineFaction;
+            _gunIFF.SetUserFaction(ev.SpawnResult.Value, faction);
             return;
         }
     }
@@ -1163,6 +1162,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             "prison" => "Fiorina Science Annex",
             "shiva" => "Shivas Snowball",
             "trijent" => "Trijent Dam",
+            "varadero" => "New Varadero",
             _ => name,
         };
     }

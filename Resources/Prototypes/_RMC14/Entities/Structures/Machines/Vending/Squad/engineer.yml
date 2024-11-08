@@ -128,8 +128,8 @@
         points: 6
       - id: RMCPouchMacheteFilled
         points: 8
-    #- id: CMMarineRadioTelephonePack
-    #  points: 15
+      - id: RMCBackpackRTO
+        points: 15
     #- id: CMFuelTankStrapPouch
     #  points: 4
     #- id: CMSlingPouch
@@ -222,10 +222,11 @@
       entries:
       - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
-    #- id: CMM276GeneralPistolHolsterRig
-      - id: RMCBeltSmgMags
-    #- id: CMM276M44HolsterRig
-    #- id: CMM276M82FHolsterRig
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterSMG
+      - id: RMCBeltHolsterSMGPouch
+    #- id: RMCBeltHolsterFlareGun
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltMortar
       - id: CMBeltUtilityFilled
@@ -270,3 +271,4 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather

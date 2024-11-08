@@ -46,8 +46,8 @@
         points: 4
       - id: RMCPouchMacheteFilled
         points: 4
-    #- id: CMMarineRadioTelephonePack
-    #  points: 5
+      - id: RMCBackpackRTO
+        points: 5
       - id: CMBeltUtilityCombat
         points: 15
     - name: Utilities
@@ -236,12 +236,13 @@
       - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
         recommended: true
-    #- id: CMM276GeneralPistolHolsterRig
       - id: CMBeltMedicBag
       - id: CMBeltMedical
-      - id: RMCBeltSmgMags
-    #- id: CMM276M44HolsterRig
-    #- id: CMM276M82FHolsterRig
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterSMG
+      - id: RMCBeltHolsterSMGPouch
+    #- id: RMCBeltHolsterFlareGun
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
       - id: RMCBeltGrenade
@@ -281,6 +282,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

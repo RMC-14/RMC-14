@@ -16,6 +16,10 @@
     state: detector
   - type: Item
     size: Normal
+  - type: Clothing
+    slots:
+    - suitstorage
+    - belt
   - type: MotionDetector
   - type: Appearance
   - type: GenericVisualizer
@@ -37,3 +41,9 @@
           7: { state: detector_on_7, visible: true }
           8: { state: detector_on_8, visible: true }
           9: { state: detector_on_9, visible: true }
+  - type: Tag
+    tags:
+    - RMCMotionDetector
+
+- type: Tag
+  id: RMCMotionDetector

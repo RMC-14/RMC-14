@@ -150,6 +150,11 @@
   parent: RMCFloorCoagulationNorthBase
   id: RMCFloorCoagulationNorth7
   sprite: /Textures/_RMC14/Tiles/planet/coagulation/7_8.png
+  
+- type: tile
+  parent: RMCFloorCoagulationNorthBase
+  id: RMCFloorCoagulationNorth7_2
+  sprite: /Textures/_RMC14/Tiles/planet/coagulation/7_8-2.png
 
 # East
 

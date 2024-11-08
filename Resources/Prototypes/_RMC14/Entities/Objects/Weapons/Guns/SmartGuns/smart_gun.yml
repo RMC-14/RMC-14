@@ -69,6 +69,9 @@
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: RMCPowerCellSmartgun
+        whitelist:
+          components:
+          - SmartGunBattery
   - type: GunDamageModifier
     multiplier: 1
   - type: GunToggleableAmmo
@@ -163,7 +166,7 @@
   parent: CMBulletBase
   id: CMBulletSmartGun10x30mm
   name: bullet (10x30mm)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi

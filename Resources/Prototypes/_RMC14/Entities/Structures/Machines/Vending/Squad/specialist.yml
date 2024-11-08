@@ -117,10 +117,11 @@
       entries:
       - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
-    #- id: CMM276GeneralPistolHolsterRig
-      - id: RMCBeltSmgMags
-    #- id: CMM276M44HolsterRig
-    #- id: CMM276M82FHolsterRig
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterSMG
+      - id: RMCBeltHolsterSMGPouch
+    #- id: RMCBeltHolsterFlareGun
       - id: RMCM276ShotgunShellLoadingRig
     - name: Pouches
       choices: { RMCPouch: 2 }
@@ -158,6 +159,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather
     - name: Restricted Firearms
       entries:
       - id: RMCMK80Case
@@ -178,7 +180,8 @@
         points: 6
       - id: RMCPouchMacheteFilled
         points: 15
-    #- id: CMMarineRadioTelephonePack
+      - id: RMCBackpackRTO
+        points: 15
     #- id: CMFuelTankStrapPouch
     #- id: CMWeldingGoggles
       - id: RMCPouchGeneralLarge

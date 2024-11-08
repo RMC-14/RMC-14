@@ -40,10 +40,12 @@ public sealed class FiremanCarrySystem : EntitySystem
         SubscribeLocalEvent<FiremanCarriableComponent, UpdateCanMoveEvent>(OnCarriableCanMove);
         SubscribeLocalEvent<FiremanCarriableComponent, MoveInputEvent>(OnCarriableMoveInput);
         SubscribeLocalEvent<FiremanCarriableComponent, BreakFiremanCarryDoAfterEvent>(OnCarriableBreakCarryDoAfter);
-        SubscribeLocalEvent<FiremanCarriableComponent, PullStoppedMessage>(OnnCarriablePullStopped);
+        SubscribeLocalEvent<FiremanCarriableComponent, PullStartedMessage>(OnCarriablePullStarted);
+        SubscribeLocalEvent<FiremanCarriableComponent, PullStoppedMessage>(OnCarriablePullStopped);
+        SubscribeLocalEvent<FiremanCarriableComponent, PullAttemptEvent>(OnCarriablePullAttempt);
 
-        SubscribeLocalEvent<CanFiremanCarryComponent, PullStartedMessage>(OnCarrierPull);
-        SubscribeLocalEvent<CanFiremanCarryComponent, PullStoppedMessage>(OnCarrierPull);
+        SubscribeLocalEvent<CanFiremanCarryComponent, PullStartedMessage>(OnCarrierPullStarted);
+        SubscribeLocalEvent<CanFiremanCarryComponent, PullStoppedMessage>(OnCarrierPullStopped);
         SubscribeLocalEvent<CanFiremanCarryComponent, PullSlowdownAttemptEvent>(OnCarrierPullSlowdownAttempt);
         SubscribeLocalEvent<CanFiremanCarryComponent, MobStateChangedEvent>(OnCarrierMobStateChanged);
         SubscribeLocalEvent<CanFiremanCarryComponent, RMCPullToggleEvent>(OnCarrierPullToggle);
@@ -57,7 +59,7 @@ public sealed class FiremanCarrySystem : EntitySystem
     private void OnCarriableDragDropDragged(Entity<FiremanCarriableComponent> ent, ref DragDropDraggedEvent args)
     {
         var user = args.User;
-        if (!TryComp(user, out CanFiremanCarryComponent? carrier))
+        if (!TryComp(user, out CanFiremanCarryComponent? carrier) || args.Target != user)
             return;
 
         if (!_rmcPulling.IsPulling(user, ent.Owner))
@@ -115,7 +117,7 @@ public sealed class FiremanCarrySystem : EntitySystem
 
         _transform.SetParent(ent, user);
         _transform.SetLocalPosition(ent, Vector2.Zero);
-        _standing.Down(ent);
+        _standing.Down(ent, changeCollision: true);
 
         _movementSpeed.RefreshMovementSpeedModifiers(user);
         _rmcSprite.SetRenderOrder(user, 1);
@@ -176,7 +178,19 @@ public sealed class FiremanCarrySystem : EntitySystem
         }
     }
 
-    private void OnnCarriablePullStopped(Entity<FiremanCarriableComponent> ent, ref PullStoppedMessage args)
+    private void OnCarriablePullStarted(Entity<FiremanCarriableComponent> ent, ref PullStartedMessage args)
+    {
+        if (args.PulledUid != ent.Owner)
+            return;
+
+        if (_rmcPulling.IsBeingPulled(ent.Owner, out var puller) &&
+            TryComp(puller, out CanFiremanCarryComponent? carrier))
+        {
+            StopPull((puller, carrier), ent);
+        }
+    }
+
+    private void OnCarriablePullStopped(Entity<FiremanCarriableComponent> ent, ref PullStoppedMessage args)
     {
         if (ent.Owner != args.PulledUid)
             return;
@@ -184,15 +198,23 @@ public sealed class FiremanCarrySystem : EntitySystem
         _standing.Stand(ent);
     }
 
-    private void OnCarrierPull<T>(Entity<CanFiremanCarryComponent> ent, ref T args)
+    private void OnCarriablePullAttempt(Entity<FiremanCarriableComponent> ent, ref PullAttemptEvent args)
     {
-        if (_timing.ApplyingState)
+        if (args.Cancelled)
             return;
 
-        StopCarry((ent, ent), ent.Comp.Carrying);
+        if (ent.Comp.BeingCarried || IsBeingAggressivelyGrabbed(ent))
+            args.Cancelled = true;
+    }
 
-        ent.Comp.PullTime = _timing.CurTime;
-        Dirty(ent);
+    private void OnCarrierPullStarted(Entity<CanFiremanCarryComponent> ent, ref PullStartedMessage args)
+    {
+        StopPull(ent, args.PulledUid);
+    }
+
+    private void OnCarrierPullStopped(Entity<CanFiremanCarryComponent> ent, ref PullStoppedMessage args)
+    {
+        StopPull(ent, args.PulledUid);
     }
 
     private void OnCarrierPullSlowdownAttempt(Entity<CanFiremanCarryComponent> ent, ref PullSlowdownAttemptEvent args)
@@ -226,13 +248,25 @@ public sealed class FiremanCarrySystem : EntitySystem
             puller.Pulling is { } pulling)
         {
             _actionBlocker.UpdateCanMove(pulling);
-            _standing.Down(pulling);
+            _standing.Down(pulling, changeCollision: true);
             _rmcPulling.PlayPullEffect(ent, pulling);
 
             var selfMsg = Loc.GetString("rmc-pull-aggressive-self", ("pulled", pulling));
             var othersMsg = Loc.GetString("rmc-pull-aggressive-others", ("puller", ent), ("pulled", pulling));
             _popup.PopupPredicted(selfMsg, othersMsg, pulling, ent, PopupType.SmallCaution);
         }
+    }
+
+    private void StopPull(Entity<CanFiremanCarryComponent> ent, EntityUid target)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        StopCarry((ent, ent), target);
+        _actionBlocker.UpdateCanMove(target);
+
+        ent.Comp.PullTime = _timing.CurTime;
+        Dirty(ent);
     }
 
     private void StopCarry(Entity<CanFiremanCarryComponent?> user, Entity<FiremanCarriableComponent?>? targetNullable)

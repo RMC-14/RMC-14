@@ -32,4 +32,7 @@ public sealed partial class XenoLeapComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan MoveDelayTime = TimeSpan.FromSeconds(.7);
+
+    [DataField, AutoNetworkedField]
+    public bool UnrootOnMelee = false;
 }

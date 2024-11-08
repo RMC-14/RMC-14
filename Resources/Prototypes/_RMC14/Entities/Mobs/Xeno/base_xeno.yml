@@ -81,6 +81,7 @@
     - Shock
   - type: CMDefibrillatorBlocked
     popup: defibrillator-xeno
+    showOnExamine: false
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.2
     baseSprintSpeed: 4
@@ -272,6 +273,14 @@
   - type: TacticalMapLiveUpdateOnOvi
     enabled: true
   - type: MotionDetectorTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: xeno
+    background:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_xeno
+  - type: XenoMapTracked
 
 - type: entity
   abstract: true
@@ -311,6 +320,7 @@
         Brute: 12
   - type: Tackle
     chance: 0.35
+  - type: XenoClaws
 
 - type: entity
   abstract: true

@@ -16,7 +16,10 @@
   - Pilot
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: pilot
+    state: gp
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
   special:
   - !type:AddComponentSpecial
     components:
@@ -36,6 +39,8 @@
     - type: CMVendorUser
       points: 45
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "GP"
 
 - type: startingGear
   id: CMGearPilotGunship
@@ -61,3 +66,4 @@
 
 - type: playTimeTracker
   id: CMJobPilotGunship
+  isHumanoid: true

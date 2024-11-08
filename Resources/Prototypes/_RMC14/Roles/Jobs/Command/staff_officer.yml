@@ -21,7 +21,10 @@
   - MarineMain
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: cic
+    state: so
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
   special:
   - !type:AddComponentSpecial
     components:
@@ -43,6 +46,8 @@
     - type: CMVendorUser
       points: 45
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "SO"
 
 - type: startingGear
   id: CMGearStaffOfficer
@@ -69,3 +74,4 @@
 
 - type: playTimeTracker
   id: CMJobStaffOfficer
+  isHumanoid: true

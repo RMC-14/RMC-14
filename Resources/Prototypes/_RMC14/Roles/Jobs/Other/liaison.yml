@@ -18,6 +18,9 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: cl
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_civillian
   special:
   - !type:AddComponentSpecial
     components:
@@ -27,6 +30,8 @@
         RMCSkillVehicles: 1
     - type: CMVendorUser
       points: 50
+    - type: JobPrefix
+      prefix: "CL"
 
 - type: startingGear
   id: CMGearLiaison
@@ -52,3 +57,4 @@
 
 - type: playTimeTracker
   id: CMJobLiaison
+  isHumanoid: true

@@ -10,6 +10,7 @@
     size: Huge
   - type: CMDefibrillatorBlocked
     popup: cm-defib-take-off-armor
+    showOnExamine: false
   - type: InteractedBlacklist
     blacklist:
       components:
@@ -38,8 +39,11 @@
       - RMCMacheteScabbard
       #TODO Various holsters should fit here - 47 belt, 1984, m44, and flaregun
       - RMCSmartPistolHolster
-      - RMCSmgHolster
-      #TODO motion detector
+      - RMCSMGHolster
+      - RMCSMGPouchHolster
+      - RMCGeneralPistolHolster
+      - RMCGeneralRevolverHolster
+      - RMCMotionDetector
       #TODO walkman
 
 - type: entity
@@ -66,7 +70,7 @@
       - Crowbar
       - RMCMacheteScabbard
       #TODO katana scabbard
-      #TODO motion detector
+      - RMCMotionDetector
       #TODO walkman
 
 - type: entity
@@ -84,7 +88,7 @@
       - Knife
       - RMCG8Pouch
       #TODO mines
-      #TODO motion detector
+      - RMCMotionDetector
       #TODO walkman
 
 - type: entity
@@ -110,9 +114,12 @@
       #TODO Hailer - looks like a flash and shouts a message to halt
       #TODO Various holsters go here - instead of specific ones though MP get ALL of them - any type of gun holster
       - RMCSmartPistolHolster
-      - RMCSmgHolster
+      - RMCSMGHolster
+      - RMCSMGPouchHolster
+      - RMCGeneralPistolHolster
+      - RMCGeneralRevolverHolster
       #TODO Ceremonial Sword
-      #TODO motion detector
+      - RMCMotionDetector
       #TODO walkman
 
 - type: entity
@@ -135,8 +142,10 @@
       - Grenade
       - Flashlight
       - Machete
-      #TODO motion detector
+      - RMCMotionDetector
       #TODO walkman
+
+# TODO: Add separate whitelists for 'safari jacket' and 'bureau deputy jacket'
 
 - type: entity
   parent: RMCBaseArmor

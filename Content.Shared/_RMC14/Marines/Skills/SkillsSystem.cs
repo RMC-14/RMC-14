@@ -8,6 +8,9 @@ using Content.Shared.Examine;
 using Content.Shared.Flash;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Inventory.Events;
+using Content.Shared.Item.ItemToggle;
+using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Popups;
 using Content.Shared.Prototypes;
 using Content.Shared.Throwing;
@@ -26,6 +29,7 @@ public sealed class SkillsSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly ItemToggleSystem _toggle = default!;
 
     private static readonly EntProtoId<SkillDefinitionComponent> _meleeSkill = "RMCSkillMeleeWeapons";
 
@@ -47,10 +51,14 @@ public sealed class SkillsSystem : EntitySystem
 
         SubscribeLocalEvent<RequiresSkillComponent, BeforeRangedInteractEvent>(OnRequiresSkillBeforeRangedInteract);
         SubscribeLocalEvent<RequiresSkillComponent, ActivatableUIOpenAttemptEvent>(OnRequiresSkillActivatableUIOpenAttempt);
+        SubscribeLocalEvent<RequiresSkillComponent, UseInHandEvent>(OnRequiresSkillUseInHand, before: [typeof(SharedHypospraySystem), typeof(SharedFlashSystem)]);
 
-        SubscribeLocalEvent<MeleeRequiresSkillComponent, AttemptMeleeEvent>(OnRequiresSkillAttemptMelee);
-        SubscribeLocalEvent<MeleeRequiresSkillComponent, ThrowItemAttemptEvent>(OnRequiresSkillThrowAttempt);
-        SubscribeLocalEvent<MeleeRequiresSkillComponent, UseInHandEvent>(OnRequiresSkillUseInHand, before: [typeof(SharedFlashSystem)]);
+        SubscribeLocalEvent<MeleeRequiresSkillComponent, AttemptMeleeEvent>(OnMeleeRequiresSkillAttemptMelee);
+        SubscribeLocalEvent<MeleeRequiresSkillComponent, ThrowItemAttemptEvent>(OnMeleeRequiresSkillThrowAttempt);
+        SubscribeLocalEvent<MeleeRequiresSkillComponent, UseInHandEvent>(OnMeleeRequiresSkillUseInHand, before: [typeof(SharedHypospraySystem), typeof(SharedFlashSystem)]);
+
+        SubscribeLocalEvent<ItemToggleRequiresSkillComponent, ItemToggleActivateAttemptEvent>(OnItemToggleRequiresSkill);
+        SubscribeLocalEvent<ItemToggleDeactivateUnskilledComponent, GotEquippedEvent>(OnItemToggleDeactivateUnskilled);
 
         SubscribeLocalEvent<ReagentExaminationRequiresSkillComponent, ExaminedEvent>(OnExamineReagentContainer);
 
@@ -111,7 +119,17 @@ public sealed class SkillsSystem : EntitySystem
         }
     }
 
-    private void OnRequiresSkillAttemptMelee(Entity<MeleeRequiresSkillComponent> ent, ref AttemptMeleeEvent args)
+    private void OnRequiresSkillUseInHand(Entity<RequiresSkillComponent> ent, ref UseInHandEvent args)
+    {
+        if (!HasAllSkills(args.User, ent.Comp.Skills))
+        {
+            var msg = Loc.GetString("rmc-skills-cant-use", ("item", ent));
+            _popup.PopupClient(msg, args.User, args.User, PopupType.SmallCaution);
+            args.Handled = true;
+        }
+    }
+
+    private void OnMeleeRequiresSkillAttemptMelee(Entity<MeleeRequiresSkillComponent> ent, ref AttemptMeleeEvent args)
     {
         if (!HasAllSkills(args.User, ent.Comp.Skills))
         {
@@ -121,7 +139,7 @@ public sealed class SkillsSystem : EntitySystem
         }
     }
 
-    private void OnRequiresSkillThrowAttempt(Entity<MeleeRequiresSkillComponent> ent, ref ThrowItemAttemptEvent args)
+    private void OnMeleeRequiresSkillThrowAttempt(Entity<MeleeRequiresSkillComponent> ent, ref ThrowItemAttemptEvent args)
     {
         if (!HasAllSkills(args.User, ent.Comp.Skills))
         {
@@ -135,13 +153,37 @@ public sealed class SkillsSystem : EntitySystem
         }
     }
 
-    private void OnRequiresSkillUseInHand(Entity<MeleeRequiresSkillComponent> ent, ref UseInHandEvent args)
+    private void OnMeleeRequiresSkillUseInHand(Entity<MeleeRequiresSkillComponent> ent, ref UseInHandEvent args)
     {
         if (!HasAllSkills(args.User, ent.Comp.Skills))
         {
             var msg = Loc.GetString("rmc-skills-cant-use", ("item", ent));
             _popup.PopupClient(msg, args.User, args.User, PopupType.SmallCaution);
             args.Handled = true;
+        }
+    }
+
+    private void OnItemToggleRequiresSkill(Entity<ItemToggleRequiresSkillComponent> ent, ref ItemToggleActivateAttemptEvent args)
+    {
+        if (args.User == null)
+            return;
+
+        if (!HasAllSkills(args.User.Value, ent.Comp.Skills))
+        {
+            args.Popup = Loc.GetString("rmc-skills-cant-use", ("item", ent));
+            args.Cancelled = true;
+        }
+    }
+
+    private void OnItemToggleDeactivateUnskilled(Entity<ItemToggleDeactivateUnskilledComponent> ent, ref GotEquippedEvent args)
+    {
+        if (!HasAllSkills(args.Equipee, ent.Comp.Skills))
+        {
+            if (_toggle.IsActivated(ent.Owner) && _toggle.TryDeactivate(ent.Owner, args.Equipee) && ent.Comp.Popup != null)
+            {
+                var msg = Loc.GetString(ent.Comp.Popup, ("item", ent));
+                _popup.PopupClient(msg, args.Equipee, args.Equipee, PopupType.SmallCaution);
+            }
         }
     }
 
