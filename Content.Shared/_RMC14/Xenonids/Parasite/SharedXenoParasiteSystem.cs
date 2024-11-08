@@ -91,7 +91,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         SubscribeLocalEvent<VictimInfectedComponent, RejuvenateEvent>(OnVictimInfectedRejuvenate);
         SubscribeLocalEvent<VictimInfectedComponent, LarvaBurstDoAfterEvent>(OnBurst);
 
-        SubscribeLocalEvent<VictimBurstComponent, VictimBurstStateChangedEvent>(OnVictimBurstStateChanged);
         SubscribeLocalEvent<VictimBurstComponent, UpdateMobStateEvent>(OnVictimUpdateMobState,
             after: [typeof(MobThresholdSystem), typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<VictimBurstComponent, RejuvenateEvent>(OnVictimBurstRejuvenate);
@@ -281,17 +280,11 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         RemCompDeferred<VictimInfectedComponent>(victim);
     }
 
-    private void OnVictimBurstStateChanged(Entity<VictimBurstComponent> burst, ref VictimBurstStateChangedEvent args)
+    private void OnVictimUpdateMobState(Entity<VictimBurstComponent> burst, ref UpdateMobStateEvent args)
     {
         if (burst.Comp.State != BurstVisualState.Burst)
             return;
 
-        if (TryComp(burst, out MobStateComponent? mobState))
-            _mobState.UpdateMobState(burst, mobState);
-    }
-
-    private void OnVictimUpdateMobState(Entity<VictimBurstComponent> burst, ref UpdateMobStateEvent args)
-    {
         args.State = MobState.Dead;
     }
 
@@ -799,13 +792,16 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         return true;
     }
 
-    private void SetVictimBurstState(Entity<VictimBurstComponent> ent, BurstVisualState state)
+    private void SetVictimBurstState(Entity<VictimBurstComponent> burst, BurstVisualState state)
     {
-        ent.Comp.State = state;
-        Dirty(ent);
+        burst.Comp.State = state;
+        Dirty(burst);
 
         var ev = new VictimBurstStateChangedEvent();
-        RaiseLocalEvent(ent, ref ev);
+        RaiseLocalEvent(burst, ref ev);
+
+        if (TryComp(burst, out MobStateComponent? mobState))
+            _mobState.UpdateMobState(burst, mobState);
     }
 }
 
