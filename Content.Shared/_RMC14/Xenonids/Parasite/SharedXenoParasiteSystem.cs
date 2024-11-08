@@ -723,8 +723,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (args.Cancelled || args.Handled)
             return;
 
-        if (TryComp<VictimBurstComponent>(ent, out var victimBurst))
-            SetVictimBurstState((ent, victimBurst), BurstVisualState.Burst);
+        var victimBurst = EnsureComp<VictimBurstComponent>(ent);
+        SetVictimBurstState((ent.Owner, victimBurst), BurstVisualState.Burst);
 
         if (_net.IsClient)
             return;
