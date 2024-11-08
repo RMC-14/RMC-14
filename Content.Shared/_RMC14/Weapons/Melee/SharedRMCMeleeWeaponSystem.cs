@@ -44,9 +44,6 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
     //Call this whenever you add MeleeResetComponent to anything
     public void MeleeResetInit(Entity<MeleeResetComponent> ent)
     {
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
         if (!TryComp<MeleeWeaponComponent>(ent, out var weapon))
         {
             RemComp<MeleeResetComponent>(ent);
