@@ -7,7 +7,7 @@
   - type: SpriteFade
   - type: Clickable
   - type: Sprite
-    noRot: true    
+    noRot: true
     sprite: Decals/Flora/flora_bushes.rsi
     drawdepth: FloorObjects
   - type: Physics
@@ -46,7 +46,7 @@
   components:
   - type: Sprite
     sprite: Decals/Flora/flora_grass.rsi
-    
+
 - type: entity
   parent: RMCBaseBush
   id: RMCBaseFlowers
@@ -56,7 +56,7 @@
   components:
   - type: Sprite
     sprite: Decals/Flora/flora_flowers.rsi
-    
+
 - type: entity
   parent: RMCBaseBush
   id: RMCBaseRock
@@ -66,7 +66,7 @@
   components:
   - type: Sprite
     sprite: Decals/Flora/flora_rocks.rsi
-  
+
 - type: entity
   parent: RMCBaseGrass
   id: RMCGrassa1
@@ -784,7 +784,7 @@
   - type: Sprite
     sprite: Decals/Flora/flora_flowers.rsi
     state: flowersy4
-    
+
 - type: entity
   parent: RMCBaseRock
   id: RMCRock01
@@ -858,4 +858,3 @@
   - type: Sprite
     sprite: _RMC14/Objects/Flora/flora_plantalien.rsi
     state: alienplant1
-    

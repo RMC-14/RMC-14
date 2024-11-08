@@ -116,22 +116,22 @@ public sealed class XenoSpitSystem : EntitySystem
 
     private void OnXenoSpitAction(Entity<XenoSpitComponent> xeno, ref XenoSpitActionEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || args.Coords == null)
             return;
 
         var ev = new XenoGetSpitProjectileEvent(xeno.Comp.ProjectileId);
         RaiseLocalEvent(xeno, ref ev);
 
-        args.Handled = _xenoProjectile.TryShootAt(
+        args.Handled = _xenoProjectile.TryShoot(
             xeno,
-            args.Entity,
-            args.Coords,
+            args.Coords.Value,
             xeno.Comp.PlasmaCost,
             ev.Id,
             xeno.Comp.Sound,
             1,
             Angle.Zero,
-            xeno.Comp.Speed
+            xeno.Comp.Speed,
+            target: args.Entity
         );
 
         if (RemCompDeferred<XenoActiveChargingSpitComponent>(xeno))
@@ -140,37 +140,37 @@ public sealed class XenoSpitSystem : EntitySystem
 
     private void OnXenoSlowingSpitAction(Entity<XenoSlowingSpitComponent> xeno, ref XenoSlowingSpitActionEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || args.Coords == null)
             return;
 
-        args.Handled = _xenoProjectile.TryShootAt(
+        args.Handled = _xenoProjectile.TryShoot(
             xeno,
-            args.Entity,
-            args.Coords,
+            args.Coords.Value,
             xeno.Comp.PlasmaCost,
             xeno.Comp.ProjectileId,
             xeno.Comp.Sound,
             1,
             Angle.Zero,
-            xeno.Comp.Speed
+            xeno.Comp.Speed,
+            target: args.Entity
         );
     }
 
     private void OnXenoScatteredSpitAction(Entity<XenoScatteredSpitComponent> xeno, ref XenoScatteredSpitActionEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || args.Coords == null)
             return;
 
-        args.Handled = _xenoProjectile.TryShootAt(
+        args.Handled = _xenoProjectile.TryShoot(
             xeno,
-            args.Entity,
-            args.Coords,
+            args.Coords.Value,
             xeno.Comp.PlasmaCost,
             xeno.Comp.ProjectileId,
             xeno.Comp.Sound,
             xeno.Comp.MaxProjectiles,
             xeno.Comp.MaxDeviation,
-            xeno.Comp.Speed
+            xeno.Comp.Speed,
+            target: args.Entity
         );
     }
 

@@ -9,13 +9,21 @@
             <PanelContainer.PanelOverride>
                 <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
             </PanelContainer.PanelOverride>
-            <BoxContainer Orientation="Horizontal" Margin="5">
-                <Label Name="OverwatchLabel" Access="Public" Text="Overwatch" />
-                <Control HorizontalExpand="True" />
-                <Button Name="TacticalMapButton" Access="Public" Text="Tactical Map"
-                        StyleClasses="OpenBoth" />
-                <Button Name="OperatorButton" Access="Public" StyleClasses="OpenBoth" />
-                <Button Name="StopOverwatchButton" Access="Public" Text="Stop Overwatch" StyleClasses="OpenBoth" />
+            <BoxContainer Orientation="Vertical">
+                <BoxContainer Orientation="Horizontal" Margin="5">
+                    <Label Name="OverwatchLabel" Access="Public" Text="Overwatch" />
+                    <Control HorizontalExpand="True" />
+                    <Button Name="TacticalMapButton" Access="Public" Text="Tactical Map"
+                            StyleClasses="OpenBoth" />
+                    <Button Name="OperatorButton" Access="Public" StyleClasses="OpenBoth" />
+                    <Button Name="StopOverwatchButton" Access="Public" Text="Stop Overwatch"
+                            StyleClasses="OpenBoth" />
+                </BoxContainer>
+                <BoxContainer Name="MessageSquadContainer" Access="Public" Orientation="Vertical">
+                    <ui:BlueHorizontalSeparator />
+                    <Button Name="MessageSquadButton" Access="Public" Text="Message Squad"
+                            StyleClasses="OpenBoth" />
+                </BoxContainer>
             </BoxContainer>
         </PanelContainer>
         <BoxContainer Orientation="Vertical" Margin="0 10">

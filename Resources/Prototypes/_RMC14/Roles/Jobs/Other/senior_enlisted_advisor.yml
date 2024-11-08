@@ -61,6 +61,9 @@
     - type: CMVendorUser
       points: 45
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "SEA"
+    - type: SeeNewPlayers
 
 - type: startingGear
   id: CMGearSeniorEnlistedAdvisor
@@ -97,3 +100,4 @@
 
 - type: playTimeTracker
   id: CMJobSeniorEnlistedAdvisor
+  isHumanoid: true

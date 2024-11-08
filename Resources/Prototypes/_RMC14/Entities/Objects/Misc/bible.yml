@@ -1,0 +1,14 @@
+- type: entity
+  name: bible
+  description: Apply to head repeatedly.
+  parent: Bible
+  id: RMCBible
+  components:
+  - type: Bible
+    damageOnUntrainedUse: ## What a non-chaplain takes when attempting to heal someone
+      groups:
+        Burn: 15
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/bible.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Misc/bible.rsi

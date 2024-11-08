@@ -1,5 +1,8 @@
 ﻿using Content.Shared._RMC14.Medical.Defibrillator;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Atmos.Rotting;
 using Content.Shared.Damage;
+using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
 using Content.Shared.Mobs;
@@ -17,6 +20,7 @@ namespace Content.Shared._RMC14.Suicide;
 // this ignores the suicide cvar since we don't want upstream suicides
 public sealed class RMCSuicideSystem : EntitySystem
 {
+    [Dependency] private readonly ISharedAdminLogManager _admin = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -26,12 +30,12 @@ public sealed class RMCSuicideSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<RMCSuicideComponent, GetVerbsEvent<AlternativeVerb>>(OnSuicideGetVerbs);
+        SubscribeLocalEvent<RMCSuicideComponent, GetVerbsEvent<Verb>>(OnSuicideGetVerbs);
         SubscribeLocalEvent<RMCSuicideComponent, RMCSuicideDoAfterEvent>(OnSuicideDoAfter);
         SubscribeLocalEvent<RMCHasSuicidedComponent, UpdateMobStateEvent>(OnHasSuicidedUpdateMobState);
     }
 
-    private void OnSuicideGetVerbs(Entity<RMCSuicideComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    private void OnSuicideGetVerbs(Entity<RMCSuicideComponent> ent, ref GetVerbsEvent<Verb> args)
     {
         if (!args.CanInteract)
             return;
@@ -43,7 +47,7 @@ public sealed class RMCSuicideSystem : EntitySystem
         if (!HasComp<GunComponent>(hands.ActiveHandEntity))
             return;
 
-        args.Verbs.Add(new AlternativeVerb
+        args.Verbs.Add(new Verb
         {
             Text = Loc.GetString("rmc-suicide"),
             Act = () =>
@@ -67,6 +71,7 @@ public sealed class RMCSuicideSystem : EntitySystem
 
                 if (_doAfter.TryStartDoAfter(doAfter))
                 {
+                    _admin.Add(LogType.RMCSuicide, LogImpact.High, $"{ToPrettyString(user)} started to suicide.");
                     var selfMsg = Loc.GetString("rmc-suicide-start-self");
                     var othersMsg = Loc.GetString("rmc-suicide-start-others", ("user", user));
                     _popup.PopupPredicted(selfMsg, othersMsg, user, user, PopupType.LargeCaution);
@@ -80,6 +85,7 @@ public sealed class RMCSuicideSystem : EntitySystem
         var user = args.User;
         if (args.Cancelled)
         {
+            _admin.Add(LogType.RMCSuicide, LogImpact.High, $"{ToPrettyString(user)}'s suicide was cancelled.");
             var selfMsg = Loc.GetString("rmc-suicide-cancel-self");
             var othersMsg = Loc.GetString("rmc-suicide-cancel-others", ("user", user));
             _popup.PopupPredicted(selfMsg, othersMsg, user, user, PopupType.MediumCaution);
@@ -95,6 +101,7 @@ public sealed class RMCSuicideSystem : EntitySystem
             hands.ActiveHandEntity is not { } held ||
             !TryComp(held, out GunComponent? gun))
         {
+            _admin.Add(LogType.RMCSuicide, LogImpact.High, $"{ToPrettyString(user)} failed to suicide: no gun.");
             return;
         }
 
@@ -104,6 +111,7 @@ public sealed class RMCSuicideSystem : EntitySystem
 
         if (ev.Ammo.Count == 0)
         {
+            _admin.Add(LogType.RMCSuicide, LogImpact.High, $"{ToPrettyString(user)} failed to suicide: no ammo.");
             _audio.PlayPredicted(gun.SoundEmpty, held, ent);
             return;
         }
@@ -113,6 +121,7 @@ public sealed class RMCSuicideSystem : EntitySystem
             QueueDel(bullet);
         }
 
+        _admin.Add(LogType.RMCSuicide, LogImpact.High, $"{ToPrettyString(user)} suicided.");
         _damageable.TryChangeDamage(user, ent.Comp.Damage, true);
         _mobState.ChangeMobState(user, MobState.Dead);
         EnsureComp<RMCHasSuicidedComponent>(user);

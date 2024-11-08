@@ -171,3 +171,47 @@
   components:
   - type: Sprite
     state: p_stair_ice_solo_cap
+
+- type: entity
+  parent: RMCStairs
+  suffix: Corner
+  id: RMCHunterStairs
+  components:
+  - type: Sprite
+    color: "#6b675e"
+
+- type: entity
+  id: RMCHunterStairsCorner
+  parent: RMCStairs
+  suffix: Corner
+  components:
+  - type: Sprite
+    state: p_stair_full_corner
+    color: "#6b675e"
+
+- type: entity
+  id: RMCHunterStairsLeft
+  parent: RMCStairs
+  suffix: Left
+  components:
+  - type: Sprite
+    state: p_stair_left_cap
+    color: "#6b675e"
+
+- type: entity
+  id: RMCHunterStairsRight
+  parent: RMCStairs
+  suffix: Right
+  components:
+  - type: Sprite
+    state: p_stair_right_cap
+    color: "#6b675e"
+
+- type: entity
+  id: RMCHunterStairsSolo
+  parent: RMCStairs
+  suffix: Solo
+  components:
+  - type: Sprite
+    state: p_stair_solo_cap
+    color: "#6b675e"
