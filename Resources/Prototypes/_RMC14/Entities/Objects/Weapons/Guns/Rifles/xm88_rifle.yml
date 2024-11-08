@@ -58,12 +58,16 @@
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
-          - RMCAttachmentXS-9
+          - RMCAttachmentXS-9 # 99% of it is TODO
       rmc-aslot-underbarrel:
         whitelist:
           tags:
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentLaserSight
+      rmc-aslot-stock:
+        whitelist:
+          tags:
+          - RMCAttachmentXM88Stock
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.76, 0.0
