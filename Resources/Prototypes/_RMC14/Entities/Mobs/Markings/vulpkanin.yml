@@ -203,17 +203,6 @@
       state: nose
 
 - type: marking
-  id: VulpSnoutVulpine
-  bodyPart: Snout
-  markingCategory: Snout
-  speciesRestriction: [Vulpkanin]
-  sprites:
-    - sprite: _RMC14/Mobs/Vulpkanin/head_markings.rsi
-      state: vulpine
-    - sprite: _RMC14/Mobs/Vulpkanin/head_markings.rsi
-      state: vulpine-lines
-
-- type: marking
   id: VulpSnoutBlaze
   bodyPart: Snout
   markingCategory: Snout
@@ -305,17 +294,6 @@
       state: vulp_alt-tip
 
 - type: marking
-  id: VulpTailLong
-  bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Vulpkanin]
-  sprites:
-    - sprite: _RMC14/Mobs/Vulpkanin/tail_markings.rsi
-      state: long
-    - sprite: _RMC14/Mobs/Vulpkanin/tail_markings.rsi
-      state: long-tip
-
-- type: marking
   id: VulpTailFox
   bodyPart: Tail
   markingCategory: Tail
@@ -336,15 +314,6 @@
       state: fox
     - sprite: _RMC14/Mobs/Vulpkanin/tail_markings.rsi
       state: fox-tip
-
-- type: marking
-  id: VulpTailBushy
-  bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Vulpkanin]
-  sprites:
-    - sprite: _RMC14/Mobs/Vulpkanin/tail_markings.rsi
-      state: bushfluff
 
 - type: marking
   id: VulpTailCoyote
@@ -385,17 +354,6 @@
       state: fox2
 
 - type: marking
-  id: VulpTailFox3
-  bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Vulpkanin]
-  sprites:
-    - sprite: _RMC14/Mobs/Vulpkanin/tail_markings.rsi
-      state: fox3
-    - sprite: _RMC14/Mobs/Vulpkanin/tail_markings.rsi
-      state: fox3-tip
-
-- type: marking
   id: VulpTailFennec
   bodyPart: Tail
   markingCategory: Tail
@@ -421,15 +379,6 @@
   sprites:
     - sprite: _RMC14/Mobs/Vulpkanin/tail_markings.rsi
       state: fluffy
-
-- type: marking
-  id: VulpTailCorgi #These will need locale
-  bodyPart: Tail
-  markingCategory: Tail
-  speciesRestriction: [Vulpkanin]
-  sprites:
-    - sprite: _RMC14/Mobs/Vulpkanin/tail_markings.rsi
-      state: corgi
 
 - type: marking
   id: VulpTailDalmation #These will need locale
@@ -468,34 +417,6 @@
     - sprite: _RMC14/Mobs/Vulpkanin/body_markings.rsi
       state: belly_fox
 
-# # Body Markings (Overlay)
-# Eventually layering will allow to have markings on the body not layering above jumpsuits
-# - type: marking
-#   id: VulpBodyPointsCrest
-#   markingCategory: Overlay
-#   bodyPart: RFoot
-#   speciesRestriction: [Vulpkanin]
-#   sprites:
-#     - sprite: _RMC14/Mobs/Vulpkanin/body_markings.rsi
-#       state: points_crest
-#
-# - type: marking
-#   id: VulpBodyPointsFade
-#   markingCategory: Overlay
-#   bodyPart: RFoot
-#   speciesRestriction: [Vulpkanin]
-#   sprites:
-#     - sprite: _RMC14/Mobs/Vulpkanin/body_markings.rsi
-#       state: points_fade
-#
-# - type: marking
-#   id: VulpBodyPointsSharp
-#   markingCategory: Overlay
-#   bodyPart: RFoot
-#   speciesRestriction: [Vulpkanin]
-#   sprites:
-#     - sprite: _RMC14/Mobs/Vulpkanin/body_markings.rsi
-#       state: points_sharp
 
 # Leg Markings
 - type: marking

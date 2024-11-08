@@ -49,7 +49,7 @@
     Tail:
       points: 1
       required: true
-      defaultMarkings: [ VulpTailAlt ]
+      defaultMarkings: [ VulpTail ]
     Head:
       points: 1
       required: false
