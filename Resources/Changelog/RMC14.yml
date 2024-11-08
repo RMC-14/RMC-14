@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed devoured knife damage and attack rate being higher than intended
-      and not piercing armor. The damage is now a fixed 15, down from 45, and the
-      attacks per second have been lowered from 1 to 0.55.
-    type: Fix
-  id: 454
-  time: '2024-07-25T09:20:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3259
 - author: Sigil
   changes:
   - message: Ranged weapons can now be used to attack in melee. Right-click to do
@@ -4894,5 +4885,16 @@
   id: 953
   time: '2024-11-08T06:33:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4645
+- author: Aurallianz
+  changes:
+  - message: Lifeboats doors
+    type: Fix
+  - message: Lifeboats windows
+    type: Fix
+  - message: Lifeboats & Evac Pod gravity.
+    type: Fix
+  id: 954
+  time: '2024-11-08T06:49:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4758
 Name: RMC14
 Order: -1
