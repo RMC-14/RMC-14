@@ -29,3 +29,13 @@
     contents:
     - id: RMCBoxShellsFlechette
       amount: 1
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBox458SOCOMAmmo
+  name: Crate of 458 SOCOM ammo
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBox458SOCOM
+      amount: 6
