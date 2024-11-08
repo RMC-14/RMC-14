@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: 0xRainy
-  changes:
-  - message: Xenos can no longer interact with a LOT of items
-    type: Fix
-  id: 457
-  time: '2024-07-25T11:14:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3223
 - author: DrSmugleaf
   changes:
   - message: Added the missing requirement for the Queen to be in her ovipositor for
@@ -4815,5 +4808,14 @@
   id: 956
   time: '2024-11-08T07:48:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4747
+- author: Rainbeon
+  changes:
+  - message: Ported Lurker's Crippling Strike Attack Reset from CM13. Whenever the
+      Crippling Strike ability is used, you can melee attack again instantly, regardless
+      of when you last meleed. This lets you melee twice in quick succession.
+    type: Add
+  id: 957
+  time: '2024-11-08T09:21:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4755
 Name: RMC14
 Order: -1
