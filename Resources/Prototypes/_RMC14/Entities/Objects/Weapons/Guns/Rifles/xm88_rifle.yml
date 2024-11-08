@@ -80,7 +80,7 @@
 - type: entity
   parent: BulletRifle10x24mm
   id: RMCCartridge458SOCOM-p
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

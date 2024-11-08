@@ -156,6 +156,12 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
 
         SetFireModes((gun.Owner, gunComponent), ev.Modes, !(forceValueRefresh || initialMode != gunComponent.SelectedMode));
 
+        if (TryComp(gun, out GunComponent? gunComp) &&
+            (gunComp.AvailableModes & ev.Set) != SelectiveFire.Invalid)
+        {
+            _gunSystem.SelectFire(gun, gunComponent, ev.Set);
+        }
+
         if (forceValueRefresh || initialMode != gunComponent.SelectedMode)
             RefreshFireModeGunValues((gun.Owner, gun.Comp));
     }
@@ -206,7 +212,7 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
 
     public void SetFireModes(Entity<GunComponent?> gun, SelectiveFire modes, bool dirty = true)
     {
-        if (gun.Comp == null && !TryComp(gun.Owner, out gun.Comp) || (modes & allFireModes) != SelectiveFire.Invalid)
+        if (gun.Comp == null && !TryComp(gun.Owner, out gun.Comp) || (modes & allFireModes) == SelectiveFire.Invalid)
             return;
 
         gun.Comp.AvailableModes = allFireModes;

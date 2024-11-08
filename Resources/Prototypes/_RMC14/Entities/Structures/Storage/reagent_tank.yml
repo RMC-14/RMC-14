@@ -13,6 +13,18 @@
     - state: tn_color-1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - MobMask
+        - BulletImpassable
   - type: Destructible
     thresholds:
     - trigger:
@@ -33,3 +45,6 @@
     solutions:
       tank:
         maxVol: 1000
+  - type: Anchorable
+    flags:
+    - None

@@ -11,16 +11,14 @@
         amount: 2
 
 - type: entity
-  id: RMCCrateM54CE2
   parent: RMCCrateWeapons
-  name: M54CE2 HAR crate (HAR x2, HAR ammo box x2)
+  id: RMCCrateM54CE2
+  name: M54CE2 HPR crate (HAR x2, HAR ammo box x2)
   components:
   - type: StorageFill
     contents:
-      - id: WeaponRifleM54CE2
-        amount: 2
-      - id: CMMagazineRifleM54CE2
-        amount: 2
+    - id: RMCM54CE2Case
+      amount: 2
 
 - type: entity
   id: RMCCrateMK80

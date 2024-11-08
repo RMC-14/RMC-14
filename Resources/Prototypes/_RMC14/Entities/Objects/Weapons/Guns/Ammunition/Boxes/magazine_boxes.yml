@@ -1163,11 +1163,11 @@
   components:
   - type: Construction
     graph: RMCBoxMagazine
-    node: RMCBoxBullets458
+    node: RMCBoxBullets458Empty
   - type: Sprite
     layers:
     - state: base_458
-    - state: shells_458
+    - state: rounds_458
       map: [ "enum.CMItemSlotsLayers.Fill" ]
     - state: text_458
     - state: base_458_lid
