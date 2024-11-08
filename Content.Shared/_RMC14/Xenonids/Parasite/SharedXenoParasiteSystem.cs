@@ -740,7 +740,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         Dirty(ent);
         RemCompDeferred<VictimInfectedComponent>(ent);
-        EnsureComp<VictimBurstComponent>(ent);
 
         _audio.PlayPvs(ent.Comp.BurstSound, args.User);
     }
