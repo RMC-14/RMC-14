@@ -33,6 +33,7 @@
   id: RMCLighter
   components:
   - type: Item
+    size: Tiny
     heldPrefix: null
   - type: ItemToggle
     predictable: false
@@ -90,7 +91,13 @@
           lighter_y_on: ""
         open:
           lighter_y_on: ""
-
+      - base:
+          lighter_u: ""
+        top:
+          lighter_u_on: ""
+        open:
+          lighter_u_on: ""
+  - type: RMCLighter
 
 - type: entity
   name: We-Ya executive zippo lighter
