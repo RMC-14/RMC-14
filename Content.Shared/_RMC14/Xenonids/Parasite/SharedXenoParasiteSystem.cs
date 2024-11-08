@@ -91,7 +91,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         SubscribeLocalEvent<VictimInfectedComponent, RejuvenateEvent>(OnVictimInfectedRejuvenate);
         SubscribeLocalEvent<VictimInfectedComponent, LarvaBurstDoAfterEvent>(OnBurst);
 
-        SubscribeLocalEvent<VictimBurstComponent, MapInitEvent>(OnVictimBurstMapInit);
+        SubscribeLocalEvent<VictimBurstComponent, VictimBurstStateChangedEvent>(OnVictimBurstStateChanged);
         SubscribeLocalEvent<VictimBurstComponent, UpdateMobStateEvent>(OnVictimUpdateMobState,
             after: [typeof(MobThresholdSystem), typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<VictimBurstComponent, RejuvenateEvent>(OnVictimBurstRejuvenate);
@@ -281,9 +281,10 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         RemCompDeferred<VictimInfectedComponent>(victim);
     }
 
-    private void OnVictimBurstMapInit(Entity<VictimBurstComponent> burst, ref MapInitEvent args)
+    private void OnVictimBurstStateChanged(Entity<VictimBurstComponent> burst, ref VictimBurstStateChangedEvent args)
     {
-        _appearance.SetData(burst, burst.Comp.BurstLayer, true);
+        if (burst.Comp.State != BurstVisualState.Burst)
+            return;
 
         if (TryComp(burst, out MobStateComponent? mobState))
             _mobState.UpdateMobState(burst, mobState);
@@ -707,7 +708,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             }
             */
 
-            _appearance.SetData(victim, comp.BurstingLayer, true);
+            EnsureComp<VictimBurstComponent>(burstFrom);
 
             var shakeFilter = Filter.PvsExcept(victim);
             shakeFilter.RemoveWhereAttachedEntity(HasComp<BursterComponent>); // not visible the larva
@@ -729,7 +730,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (args.Cancelled || args.Handled)
             return;
 
-        _appearance.SetData(ent.Owner, ent.Comp.BurstingLayer, false);
+        if (TryComp<VictimBurstComponent>(ent, out var victimBurst))
+            SetVictimBurstState((ent, victimBurst), BurstVisualState.Burst);
 
         if (_net.IsClient)
             return;
@@ -795,6 +797,15 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         }
 
         return true;
+    }
+
+    private void SetVictimBurstState(Entity<VictimBurstComponent> ent, BurstVisualState state)
+    {
+        ent.Comp.State = state;
+        Dirty(ent);
+
+        var ev = new VictimBurstStateChangedEvent();
+        RaiseLocalEvent(ent, ref ev);
     }
 }
 
