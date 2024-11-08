@@ -251,6 +251,7 @@
     maxFillLevels: 6
   - type: Tag
     tags:
+    - CMAutoInjector
     - RMCAutoInjectorMedical
   - type: RefillableSolution
     solution: pen

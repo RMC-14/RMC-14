@@ -61,7 +61,9 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
             Dirty(entity, victim);
 
             var message = Loc.GetString("cm-xeno-paralyzing-slash-hit", ("target", entity));
-            _popup.PopupClient(message, entity, xeno);
+
+            if (_net.IsServer)
+                _popup.PopupEntity(message, entity, xeno);
 
             RemCompDeferred<XenoActiveParalyzingSlashComponent>(xeno);
             break;

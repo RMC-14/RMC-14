@@ -43,6 +43,9 @@
     whitelist:
       tags:
       - RMCShellShotgun
+    blacklist:
+      tags:
+      - RMCShellShotgun
     capacity: 9
     proto: null
     soundInsert:
