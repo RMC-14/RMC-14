@@ -106,12 +106,13 @@
       - RMCWeaponShotgunXM51
       - RMCMagazineShotgunXM51
       - RMCBoxShotgunBreaching
+      - RMCG8Pouch
   - type: StorageFill
     contents:
-    # - id: TODO M276 pattern XM51 holster rig
     - id: RMCAttachmentXM51Stock
     - id: RMCWeaponShotgunXM51
     - id: RMCMagazineShotgunXM51
-      amount: 3
+      amount: 2
     - id: RMCBoxShotgunBreaching
       amount: 2
+    - id: RMCBeltXM51

@@ -54,6 +54,7 @@
   - type: Tag
     tags:
     - Cartridge
+    - RMCShellShotgun
     - RMCShellShotgunBreaching
 
 - type: stack

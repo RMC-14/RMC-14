@@ -273,6 +273,8 @@
         amount: 40
       - id: RMCBoxShotgunSlugs
         amount: 40
+      - id: RMCBoxShotgunBreaching
+        amount: 4
       - id: CMMagazineRifleM4SPR
         amount: 45
       - id: CMMagazineRifleM54C
@@ -333,8 +335,8 @@
       #  amount: 2
       #- id: M2C Box Magazine
       #  amount: 2
-      #- id: XM51 Magazine (16g)
-      #  amount: 3
+      - id: RMCMagazineShotgunXM51
+        amount: 3
     - name: Shotgun shell boxes # I don't think we have those yet
       entries: [ ]
       #- id: Shotgun Shell Box (Buckshot x 100)

@@ -34,6 +34,8 @@
         crate: RMCCrateBoxShellsShotgunBuckshot
       - cost: 3000
         crate: RMCCrateBoxShellsShotgunFlechette
+      - cost: 4000
+        crate: RMCCrateBoxShellsShotgunBreaching
       - cost: 2000
         crate: RMCCrateBoxMagazinePistolM77AP
       - cost: 4000
@@ -44,6 +46,8 @@
         crate: RMCCrateMagazineSmartGun
       - cost: 4000
         crate: RMCCrateBoxMagazineSmartPistol
+      - cost: 2000
+        crate: RMCCrateBoxMagazineBreaching
       - cost: 2000
         crate: RMCCrateBoxMagazineM44Revolver
       - cost: 3000
@@ -231,8 +235,6 @@
       entries:
       - cost: 10000
         crate: RMCCrateSmartGunSet
-      - cost: 3000
-        crate: RMCCrateXM51
       - cost: 4000
         crate: RMCCrateM54C
 #      - cost: 4000
@@ -243,6 +245,8 @@
         crate: RMCCrateSU6
       - cost: 3000
         crate: RMCCrateMOU53
+      - cost: 3000
+        crate: RMCCrateXM51
     - name: Weapons Specialist Ammo
       entries:
       - cost: 4000

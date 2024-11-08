@@ -201,3 +201,15 @@
     contents:
     - id: RMCMagazineSentryShotgun
       amount: 2
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineBreaching
+  name: XM51 Ammo (2x mags) (1x small breaching shell box)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineShotgunXM51
+      amount: 2
+    - id: RMCBoxShotgunBreaching
+      amount: 1

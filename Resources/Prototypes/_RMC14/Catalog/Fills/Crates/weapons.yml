@@ -63,8 +63,8 @@
       amount: 2
 
 - type: entity
-  id: RMCCrateXM51
   parent: RMCCrateWeapons
+  id: RMCCrateXM51
   name: XM51 Breaching Scattergun Crate (x2)
   components:
   - type: StorageFill

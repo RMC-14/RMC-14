@@ -23,7 +23,7 @@
     availableModes:
     - SemiAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_xm51.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
   - type: RMCSelectiveFire
@@ -38,6 +38,7 @@
     slots:
       gun_magazine:
         name: Magazine
+        startingItem: RMCMagazineShotgunXM51
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
         priority: 2
