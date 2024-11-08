@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Smartgunner combat-sight giving permanent far sight
-    type: Fix
-  id: 449
-  time: '2024-07-25T05:37:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3253
 - author: DrSmugleaf
   changes:
   - message: Fixed xenos being 20% faster than intended at pulling marines. Marine
@@ -4914,5 +4907,12 @@
   id: 948
   time: '2024-11-08T04:38:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4736
+- author: BackeTako
+  changes:
+  - message: Fixed MedKit inhand sprite inconsistencies
+    type: Fix
+  id: 949
+  time: '2024-11-08T04:43:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4733
 Name: RMC14
 Order: -1
