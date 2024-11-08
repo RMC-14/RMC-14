@@ -313,7 +313,7 @@
         amount: 6
       #- id: M4A3 HP Magazine (9mm)
       #  amount: 2
-      #- id: M41AE2 Holo Target Rounds (10x24mm)
+      #- id: M54CE2 Holo Target Rounds (10x24mm)
       #  amount: 2
     - name: Restricted firearm ammunition
       entries:

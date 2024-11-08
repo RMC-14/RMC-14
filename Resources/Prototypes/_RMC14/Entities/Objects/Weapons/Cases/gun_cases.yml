@@ -44,7 +44,7 @@
   description: A gun case containing the M54CE2 heavy assault rifle. You can get additional ammunition at requisitions.
   components:
   - type: Storage
-    maxItemSize: Huge
+    maxItemSize: Ginormous
     grid:
     - 0,0,7,1
     whitelist:
