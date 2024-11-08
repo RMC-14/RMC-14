@@ -218,8 +218,9 @@
   id: CMVendorCigs
   startingInventory:
     RMCCigarettePackLuckySloths: 50
-    RMCTarbackCase: 15
-    Lighter: 25
+    RMCTarbackTube: 20
+    RMCMatchboxFull: 15
+    RMCLighter: 25
     RMCZippo: 10
 
 
