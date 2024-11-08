@@ -147,7 +147,9 @@
   - type: ExplosionResistance
     damageCoefficient: 12.5 # Walls take 15x explosive damage, resin walls reduce that by 15%
   - type: DamageMultiplierFlags
-    flags: Turf
+    flags:
+    - Turf
+    - Xeno
 
 # Invisible Wall
 
