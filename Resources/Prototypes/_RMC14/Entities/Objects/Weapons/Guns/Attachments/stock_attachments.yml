@@ -158,10 +158,10 @@
       scatterFlat: -6
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
+      accuracyMovementPenaltyAddMult: -2
       accuracyAddMult: -0.25
-      recoilFlat: 3
-      scatterFlat: 4
+      recoilFlat: 1
+      scatterFlat: 10
 
 - type: entity
   parent: RMCStockAttachmentBase
