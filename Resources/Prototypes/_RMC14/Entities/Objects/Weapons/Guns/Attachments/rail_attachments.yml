@@ -454,9 +454,9 @@
     breakOnMove: false
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
-      state: miniscope
-    actionName: Look through the S4 2x Telescopic Mini-Scope
-    actionDesc: An AEGIS S4 telescoping eye piece. Fixed at a modest 2x zoom.
+      state: boomslang-scope
+    actionName: Look through the XS-9 Scope
+    actionDesc: A mostly disabled XS-9, it still functions as a scope though.
   - type: AttachableToggleableSimpleActivate
   - type: Scope
     zoomLevels:
@@ -524,5 +524,5 @@
 - type: Tag
   id: RMCM96SIntegratedScope
 
-  type: Tag
+- type: Tag
   id: RMCAttachmentXS-9
