@@ -11,11 +11,5 @@ namespace Content.Shared._RMC14.Examine.Pose;
 public sealed partial class RMCSetPoseComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntityUid? Action;
-
-    [DataField, AutoNetworkedField]
-    public EntProtoId ActionPrototype = "RMCActionSetPose";
-
-    [DataField, AutoNetworkedField]
     public string Pose = string.Empty;
 }
