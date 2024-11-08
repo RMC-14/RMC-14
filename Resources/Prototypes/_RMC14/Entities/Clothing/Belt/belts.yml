@@ -838,3 +838,36 @@
   - type: CMStorageVisualizer
     storageClosed: null
     storageOpen: null
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCM300SOCOMBelt
+  name: M300 pattern .458 SOCOM loading rig
+  description: An ammunition belt designed to hold the large .458 SOCOM caliber bullets for the XM88 heavy rifle.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/SOCOM.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/SOCOM.rsi
+  - type: Item
+    size: Large
+  - type: Storage
+    maxItemSize: Large
+    grid:
+    - 0,0,13,3 # 14 slots
+    whitelist:
+      tags:
+      - RMCCartridge458SOCOM
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - RMCShellShotgun
+  - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - RMCBeltSOCOM
+
+- type: Tag
+  id: RMCBeltSOCOM
