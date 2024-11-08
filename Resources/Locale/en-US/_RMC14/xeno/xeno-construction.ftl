@@ -41,3 +41,10 @@ rmc-xeno-construction-resin-hole-acid-name = acid
 
 rmc-xeno-construction-tunnel-empty-non-xeno-enter-failure = You stare into the dark abyss
 rmc-xeno-construction-tunnel-occupied-non-xeno-enter-failure = You stare into the dark abyss, making out what appears to be two little lights... almost like something is watching
+
+rmc-xeno-construction-no-map-resin-tunnel = The ground isn't solid
+rmc-xeno-construction-blocked-resin-tunnel = There's something built here already.
+
+rmc-xeno-construction-resin-tunnel-uproot = We start uprooting the node so we can dig a tunnel in its place...
+rmc-xeno-construction-resin-tunnel-create-tunnel = We start digging
+rmc-xeno-construction-default-tunnel-name = Tunnel {$tunnelNumber}

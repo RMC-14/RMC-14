@@ -387,7 +387,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
     private bool CanPlaceResinHole(EntityUid user, EntityCoordinates coords)
     {
-        var canPlaceStructure = _xenoConstruct.CanPlaceXenoStructure(user, coords, ResinHolePrototype, out var popupType, true);
+        var canPlaceStructure = _xenoConstruct.CanPlaceXenoStructure(user, coords, out var popupType, true);
 
         if (!canPlaceStructure)
         {

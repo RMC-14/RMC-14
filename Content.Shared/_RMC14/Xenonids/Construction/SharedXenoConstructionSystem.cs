@@ -741,7 +741,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         return supported;
     }
 
-    public bool CanPlaceXenoStructure(EntityUid user, EntityCoordinates coords, string structurePrototype, [NotNullWhen(false)] out string? popupType, bool needsWeeds = true)
+    public bool CanPlaceXenoStructure(EntityUid user, EntityCoordinates coords, [NotNullWhen(false)] out string? popupType, bool needsWeeds = true)
     {
         popupType = null;
         if (_transform.GetGrid(coords) is not { } gridId ||
