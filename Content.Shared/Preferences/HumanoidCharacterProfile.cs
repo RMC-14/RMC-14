@@ -508,6 +508,7 @@ namespace Content.Shared.Preferences
             if (!Loadouts.SequenceEqual(other.Loadouts)) return false;
             if (FlavorText != other.FlavorText) return false;
             if (NamedItems != other.NamedItems) return false;
+            if (ArmorPreference != other.ArmorPreference) return false;
             return Appearance.MemberwiseEquals(other.Appearance);
         }
 
