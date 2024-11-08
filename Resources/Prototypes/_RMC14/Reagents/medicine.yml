@@ -311,7 +311,12 @@
         - Brute: -16
         - Burn: -16
         - Toxin: -16
-        - Asphyxiation: -16
+      - !type:HealthChange
+        conditions:
+        - !type:RecentlyDefibrillated
+        damage:
+          types:
+            Asphyxiation: -16
       - !type:AdjustReagent
         conditions:
         - !type:RecentlyDefibrillated
@@ -325,8 +330,7 @@
         - !type:ReagentThreshold
           min: 20
         damage:
-          types:
-            Brute: 1
+          Brute: 1
 
 # TODO RMC14 other effects
 # TODO RMC14 allow breathing in crit instead of reducing asphyxiation
