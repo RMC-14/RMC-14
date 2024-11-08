@@ -210,4 +210,7 @@
     whitelist:
       tags:
       - RMCAmmoBox
+  - type: CMStorageVisualizer
+    storageClosed: null
+    storageOpen: null
 

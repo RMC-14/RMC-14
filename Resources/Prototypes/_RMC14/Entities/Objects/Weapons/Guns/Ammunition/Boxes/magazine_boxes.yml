@@ -1163,7 +1163,7 @@
   components:
   - type: Construction
     graph: RMCBoxMagazine
-    node: RMCBoxBullets458
+    node: RMCBoxBullets458Empty
   - type: Sprite
     layers:
     - state: base_458
