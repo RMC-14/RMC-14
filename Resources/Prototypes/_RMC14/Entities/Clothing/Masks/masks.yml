@@ -42,8 +42,6 @@
     sprite: _RMC14/Objects/Clothing/Mask/sterile.rsi
   - type: Item
     storedRotation: -90
-  - type: HideLayerClothing
-    slots: []
 
 - type: entity # TODO RMC14 this needs a lizard sprite
   parent: ClothingMaskGas
@@ -70,11 +68,6 @@
     coverage: MOUTH
   - type: Item
     storedRotation: -90
-  - type: HideLayerClothing # TODO port pulled down sprite from SS13
-    slots:
-    - Hair
-    - HeadTop
-    - HeadSide
 
 - type: entity
   parent: CMBaseMask
