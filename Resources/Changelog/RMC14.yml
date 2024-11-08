@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Ported Shiva's Snowball
-    type: Add
-  id: 452
-  time: '2024-07-25T07:57:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3119
 - author: Kaga
   changes:
   - message: Added the M5 Anti-Tank Launcher, the Demolitionist Weapon Specialist,
@@ -4906,5 +4899,12 @@
   id: 951
   time: '2024-11-08T05:31:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3623
+- author: CyberTropic
+  changes:
+  - message: Added sand edges for New Varadero sand
+    type: Add
+  id: 952
+  time: '2024-11-08T06:14:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4683
 Name: RMC14
 Order: -1
