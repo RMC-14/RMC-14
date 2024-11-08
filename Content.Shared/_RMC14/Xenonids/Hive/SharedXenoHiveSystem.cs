@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -22,6 +23,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedNightVisionSystem _nightVision = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
@@ -278,6 +280,9 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             while (candidates.MoveNext(out var uid, out _, out var member))
             {
                 if (member.Hive != hive)
+                    continue;
+
+                if (_mobState.IsDead(uid))
                     continue;
 
                 var position = _transform.GetMoverCoordinates(uid);
