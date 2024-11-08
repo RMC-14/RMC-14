@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0b241c0584b792912d42c34007d808494e386023/icons/obj/items/weapons/guns/ammo_boxes/magazines.dmi, https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/icons/obj/items/weapons/guns/ammo_boxes/boxes_and_lids.dmi, https://github.com/cmss13-devs/cmss13/blob/fba613ad33ac51b16689a75bc2f1572b24df282a/icons/obj/items/weapons/guns/ammo_boxes/text.dmi, https://github.com/cmss13-devs/cmss13/blob/fba613ad33ac51b16689a75bc2f1572b24df282a/icons/obj/items/weapons/guns/ammo_boxes/handfuls.dmi, m4spr, m1984, mp5 edited by sio3732. m54 edited by Vermidia",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0b241c0584b792912d42c34007d808494e386023/icons/obj/items/weapons/guns/ammo_boxes/magazines.dmi, https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/icons/obj/items/weapons/guns/ammo_boxes/boxes_and_lids.dmi, https://github.com/cmss13-devs/cmss13/blob/fba613ad33ac51b16689a75bc2f1572b24df282a/icons/obj/items/weapons/guns/ammo_boxes/text.dmi, https://github.com/cmss13-devs/cmss13/blob/fba613ad33ac51b16689a75bc2f1572b24df282a/icons/obj/items/weapons/guns/ammo_boxes/handfuls.dmi, m4spr, m1984, mp5 edited by sio3732. m54 edited by Vermidia, https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/icons/obj/items/weapons/guns/ammo_boxes/handfuls.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -1005,6 +1005,18 @@
     },
     {
       "name": "shells_breach"
+    },
+    {
+      "name": "rounds_458"
+    },
+    {
+      "name": "rounds_458_3"
+    },
+    {
+      "name": "rounds_458_2"
+    },
+    {
+      "name": "rounds_458_1"
     }
   ]
 }

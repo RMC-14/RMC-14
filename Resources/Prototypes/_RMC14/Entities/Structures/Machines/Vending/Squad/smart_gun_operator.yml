@@ -132,8 +132,8 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-     #- id: CMM802SmartGunOperatorSidearmBeltFilled
       - id: CMBeltSmartGunOperatorFilled
+      - id: RMCBeltSmartGunOperatorPistolFilled
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -163,9 +163,9 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbingBlack
-    #- id: CMShoulderHolster
       - id: CMWebbing
       - id: CMWebbingPouch
+      - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }
       entries:

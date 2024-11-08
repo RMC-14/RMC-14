@@ -55,6 +55,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private EntityQuery<XenoMapTrackedComponent> _xenoMapTrackedQuery;
 
     private readonly HashSet<Entity<ActiveTacticalMapTrackedComponent>> _toUpdate = new();
+    private readonly List<TacticalMapLine> _emptyLines = new();
 
     private TimeSpan _announceCooldown;
     private TimeSpan _mapUpdateEvery;
@@ -468,18 +469,18 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private void UpdateUserData(Entity<TacticalMapUserComponent> user, TacticalMapComponent map)
     {
         var lines = EnsureComp<TacticalMapLinesComponent>(user);
-        if (user.Comp.Marines)
-        {
-            user.Comp.MarineBlips = user.Comp.LiveUpdate ? map.MarineBlips : map.LastUpdateMarineBlips;
-            lines.MarineLines = map.MarineLines;
-            lines.XenoLines.Clear();
-        }
-
         if (user.Comp.Xenos)
         {
             user.Comp.XenoBlips = user.Comp.LiveUpdate ? map.XenoBlips : map.LastUpdateXenoBlips;
             lines.XenoLines = map.XenoLines;
-            lines.MarineLines.Clear();
+            lines.MarineLines = _emptyLines;
+        }
+
+        if (user.Comp.Marines)
+        {
+            user.Comp.MarineBlips = user.Comp.LiveUpdate ? map.MarineBlips : map.LastUpdateMarineBlips;
+            lines.MarineLines = map.MarineLines;
+            lines.XenoLines = _emptyLines;
         }
 
         Dirty(user);

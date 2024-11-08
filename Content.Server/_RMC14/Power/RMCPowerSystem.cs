@@ -1,9 +1,12 @@
 ﻿using System.Runtime.InteropServices;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
+using Content.Server.PowerCell;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Power;
+using Content.Shared.Examine;
 using Content.Shared.Power;
+using Content.Shared.PowerCell;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
@@ -18,6 +21,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly PowerCellSystem _cell = default!;
 
     [ViewVariables]
     private TimeSpan _nextUpdate;
@@ -49,11 +53,22 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
 
         SubscribeLocalEvent<RMCPowerReceiverComponent, PowerChangedEvent>(OnReceiverPowerChanged);
         SubscribeLocalEvent<ApcPowerReceiverComponent, MapInitEvent>(ReceiverOnMapInit);
+        SubscribeLocalEvent<RMCPowerUsageDisplayComponent, ExaminedEvent>(OnUsageDisplayEvent);
 
         Subs.CVar(_config, RMCCVars.RMCPowerUpdateEverySeconds, v => _updateEvery = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCPowerLoadMultiplier, v => _powerLoadMultiplier = v, true);
     }
 
+    private void OnUsageDisplayEvent(Entity<RMCPowerUsageDisplayComponent> ent, ref ExaminedEvent args)
+    {
+        if (!_cell.TryGetBatteryFromSlot(ent, out var battery) || !TryComp<PowerCellDrawComponent>(ent, out var draw))
+            return;
+
+        int maxUses = (int)(battery.MaxCharge / draw.UseRate);
+        int uses = (int)(battery.CurrentCharge / draw.UseRate);
+
+        args.PushMarkup(Loc.GetString(ent.Comp.PowerText, ("uses", uses), ("maxuses", maxUses)));
+    }
     private void OnReceiverPowerChanged(Entity<RMCPowerReceiverComponent> ent, ref PowerChangedEvent args)
     {
         ent.Comp.Mode = args.Powered ? RMCPowerMode.Active : RMCPowerMode.Off;

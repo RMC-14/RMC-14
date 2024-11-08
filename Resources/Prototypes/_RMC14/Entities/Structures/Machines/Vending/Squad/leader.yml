@@ -26,16 +26,11 @@
       - id: RMCKitCM54C
       - id: RMCKitEngineering
     #- id: CMM240PyrotechnicianSupportKit
-    #  points: 0
     #- id: CMM2CHeavyMachineGun
-    #  points: 0
     #- id: CMM56DHeavyMachineGun
-    #  points: 0
     #- id: CMM79GrenadeLauncher
-    #  points: 0
       - id: WeaponShotgunMOU53
-    #- id: CMXM88HeavyRifle
-    #  points: 0
+      - id: RMCCaseXM88
     - name: Armors
       entries:
       - id: CMArmorM4
@@ -236,12 +231,13 @@
       - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
         recommended: true
-    #- id: CMM276GeneralPistolHolsterRig
       - id: CMBeltMedicBag
       - id: CMBeltMedical
-      - id: RMCBeltSmgMags
-    #- id: CMM276M44HolsterRig
-    #- id: CMM276M82FHolsterRig
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterSMG
+      - id: RMCBeltHolsterSMGPouch
+    #- id: RMCBeltHolsterFlareGun
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
       - id: RMCBeltGrenade
@@ -273,9 +269,9 @@
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
-      #- id: CMShoulderHolster
       - id: CMWebbing
       - id: CMWebbingPouch
+      - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }
       entries:

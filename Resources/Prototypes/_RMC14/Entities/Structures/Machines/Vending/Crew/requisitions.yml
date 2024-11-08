@@ -43,8 +43,8 @@
         amount: 3
       - id: WeaponShotgunMOU53
         amount: 2
-      #- id: XM88 Heavy Rifle
-      #  amount: 3
+      - id: RMCCaseXM88
+        amount: 3
       #- id: RMCM54CE2Case
       #  amount: 3
       #- id: M41A Pulse Rifle MK1
@@ -57,8 +57,8 @@
       #  amount: 2
       #- id: M79 Grenade Launcher
       #  amount: 3
-      #- id: XM51 Breaching Scattergun
-      #  amount: 3
+      - id: RMCXM51Case
+        amount: 3
     - name: Explosives
       entries:
       - id: CMGrenadeFragOld
@@ -119,8 +119,8 @@
         amount: 1
       - id: RMCSatchelWelder
         amount: 5
-      #- id: IMP Ammo Rack
-      #   amount: 2
+      - id: RMCBackpackAmmo
+        amount: 2
       - id: RMCBackpackRTO
         amount: 2
       #- id: Parachute
@@ -133,17 +133,19 @@
         amount: 2
       - id: CMBeltMarine
         amount: 15
-      #- id: M276 General Pistol Holster Rig
-      #  amount: 10
+      - id: RMCBeltHolsterPistol
+        amount: 10
       - id: CMBeltKnifeFilled
         name: M276 Knife Rig (Full)
         amount: 5
-      - id: RMCBeltSmgMags
+      - id: RMCBeltHolsterSMG
         amount: 5
-      #- id: M276 M40 Grenade Rig
-      #  amount: 2
-      #- id: M276 M44 Holster Rig
-      #   amount: 5
+      - id: RMCBeltHolsterSMGPouch
+        amount: 5
+      - id: RMCBeltGrenade
+        amount: 2
+      - id: RMCBeltHolsterRevolver
+        amount: 5
       #- id: M276 M82F Holster Rig
       #  amount: 2
       - id: RMCM276ShotgunShellLoadingRig
@@ -271,6 +273,8 @@
         amount: 40
       - id: RMCBoxShotgunSlugs
         amount: 40
+      - id: RMCBoxShotgunBreaching
+        amount: 4
       - id: CMMagazineRifleM4SPR
         amount: 45
       - id: CMMagazineRifleM54C
@@ -331,8 +335,8 @@
       #  amount: 2
       #- id: M2C Box Magazine
       #  amount: 2
-      #- id: XM51 Magazine (16g)
-      #  amount: 3
+      - id: RMCMagazineShotgunXM51
+        amount: 3
     - name: Shotgun shell boxes # I don't think we have those yet
       entries: [ ]
       #- id: Shotgun Shell Box (Buckshot x 100)
@@ -465,18 +469,18 @@
         amount: 20
       - id: CMArmorHelmetM10Medic
         amount: 20
-      #- id: M3 Pattern Carrier Marine Armor
-      #  amount: 20
-      #- id: M3 Pattern Padded Marine Armor
-      #  amount: 20
-      #- id: M3 Pattern Padless Marine Armor
-      #  amount: 20
-      #- id: M3 Pattern Ridged Marine Armor
-      #  amount: 20
-      #- id: M3 Pattern Skull Marine Armor
-      #  amount: 20
-      - id: CMArmorM3Medium #TODO RMC: remove this when above is added
-        amount: 20
+      - id: RMCArmorM3MediumCarrier
+        amount: 15
+      - id: RMCArmorM3MediumPadded
+        amount: 15
+      - id: RMCArmorM3MediumPadless
+        amount: 15
+      - id: RMCArmorM3MediumRidged
+        amount: 15
+      - id: RMCArmorM3MediumSkull
+        amount: 15
+      - id: RMCArmorM3MediumSmooth
+        amount: 15
       - id: CMArmorM3Heavy
         amount: 10
       - id: CMArmorM3Light

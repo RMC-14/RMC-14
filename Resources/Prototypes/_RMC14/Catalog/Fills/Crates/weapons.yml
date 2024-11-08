@@ -31,6 +31,18 @@
     contents:
     - id: RMCMK80Case
       amount: 2
+    - id: CMMagazinePistolMK80
+      amount: 4
+
+- type: entity
+  id: RMCCrateXM88
+  parent: RMCCrateWeapons
+  name: XM88 Heavy Rifle crate (XM88 x2)
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCCaseXM88
+        amount: 2
 
 - type: entity
   parent: RMCCrateWeapons
@@ -60,4 +72,14 @@
   - type: StorageFill
     contents:
     - id: WeaponShotgunMOU53
+      amount: 2
+
+- type: entity
+  parent: RMCCrateWeapons
+  id: RMCCrateXM51
+  name: XM51 Breaching Scattergun Crate (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCXM51Case
       amount: 2

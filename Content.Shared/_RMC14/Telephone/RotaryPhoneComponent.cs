@@ -17,13 +17,13 @@ public sealed partial class RotaryPhoneComponent : Component
     public bool CanDnd;
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? DialingSound = new SoundPathSpecifier("/Audio/_RMC14/Phone/dial.ogg");
+    public SoundSpecifier? DialingSound = new SoundPathSpecifier("/Audio/_RMC14/Phone/dial.ogg", AudioParams.Default.WithVolume(-3));
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? DialingIdleSound = new SoundPathSpecifier("/Audio/_RMC14/Phone/ring_outgoing.ogg");
+    public SoundSpecifier? DialingIdleSound = new SoundPathSpecifier("/Audio/_RMC14/Phone/ring_outgoing.ogg", AudioParams.Default.WithVolume(-3));
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? ReceivingSound = new SoundPathSpecifier("/Audio/_RMC14/Phone/telephone_ring.ogg");
+    public SoundSpecifier? ReceivingSound = new SoundPathSpecifier("/Audio/_RMC14/Phone/telephone_ring.ogg", AudioParams.Default.WithVolume(-3));
 
     [DataField, AutoNetworkedField]
     public EntProtoId<TelephoneComponent> PhoneId = "RMCTelephone";

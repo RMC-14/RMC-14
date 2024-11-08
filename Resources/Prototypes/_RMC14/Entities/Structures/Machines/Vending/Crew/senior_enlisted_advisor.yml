@@ -41,7 +41,7 @@
       - id: RMCPouchMagazineLarge
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchShotgunLarge
-      #Medical Kit Pouch
+#      - id: RMCPouchMedkit
       - id: RMCPouchPistol
       - id: RMCPouchSling
     - name: Armor
@@ -49,9 +49,9 @@
       entries:
       - id: CMArmorM3VLBallistics
       - id: CMArmorM3Light
-      - id: CMArmorM3Medium
-      #Bulletproof Vest
-      #UNMC Service Jacket
+      - id: RMCArmorM3MediumVariants
+      - id: CMArmorM3VLBallistics
+      - id: CMCoatOfficer
     - name: Eyewear
       choices: { CMEyewear: 1 }
       entries:
@@ -92,7 +92,7 @@
     - name: Personal Primary
       choices: { CMPrimary: 1 }
       entries:
-      - id: WeaponRifleM54C
+      - id: WeaponRifleM54C # TODO rmc14 this should be MK1 WeaponRifleM54CMK1
     - name: Ammunition
       entries:
       - id: CMMagazineRifleM54C
@@ -101,6 +101,6 @@
       choices: { CMAttachments: 1 }
       entries:
       - id: RMCAttachmentLaserSight
-      #Red-Dot Sight
+      - id: RMCAttachmentS5RedDotSight
       - id: RMCAttachmentS6ReflexSight
       - id: RMCAttachmentRailFlashlight

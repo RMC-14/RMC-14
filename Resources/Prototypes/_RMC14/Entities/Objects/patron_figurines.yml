@@ -400,17 +400,6 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronJermaineBaitMcClune
-  name: Jermaine 'Bait' McClune figurine
-  description: "Let's see... e-barrels, smarties, drums, plasteel, cardboard, rockets, HEDP, cells, and a LOT of metal..."
-  components:
-  - type: Sprite
-    state: jermaine_bait_mcclune
-  - type: PatronFigurine
-    id: 6f980172-002b-4574-8f3c-f9fead1f11a1
-
-- type: entity
-  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronMazyTheFortressTusji
   name: Mazy 'The Fortress' Tusji figurine
   description: "This figurine is covered in chew marks and acid burns, yet remains recognizable and unbroken."
@@ -643,7 +632,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronBeatriceBeaBootes
   name: Beatrice 'Bea' Bootes figurine
-  description: "Adopted and raised in Madawaska, Maine, this lesbian felinid tries her best. She'd go on to join the UNMC and become a tungsten-level sergeant. She lost her wife to a horrific accident and sunk to rock bottom, but she prevailed. She's a social democrat whose a leading member of The Doves. Her opponents throw rumors of her doing many crimes such as eating human organs, bombing a children's hospital plus a funeral, and being a SPP agent. She's silly but deeply caring. She loves the XM88. Yearns to be a CO.
+  description: "Adopted and raised in Madawaska, Maine, this lesbian felinid tries her best. She'd go on to join the UNMC and become a sergeant made of tungsten. She lost her wife to a horrific accident and sunk to rock bottom, but she prevailed. She's a social democrat whose a leading member of The Doves. Her opponents throw rumors of her committing multiple crimes such as eating human organs, bombing a children's hospital plus a funeral, and being a SPP agent. She's quite silly but deeply caring. Aspires to be a CO.
     :3"
   components:
   - type: Sprite
@@ -731,3 +720,25 @@
     state: porter_zombie_coolidge
   - type: PatronFigurine
     id: 6f980172-002b-4574-8f3c-f9fead1f11a1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronFumbles-The-Rifle
+  name: Fumbles-The-Rifle figurine
+  description: "A friendly grey-blue reptilian with an assortment of spines. Bandages around his hands indicate some kind of previous injury and a hint to his namesake..."
+  components:
+  - type: Sprite
+    state: fumbles-the-rifle
+  - type: PatronFigurine
+    id: c44d034f-f96c-4427-b797-2be728854ad2
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNovaQuinn
+  name: Nova Quinn figurine
+  description: "An overworked Auxiliary Support Officer. Smells like paperwork and tobacco."
+  components:
+  - type: Sprite
+    state: nova_quinn
+  - type: PatronFigurine
+    id: e017c450-686b-480b-bdc7-2fdbe1016f52
