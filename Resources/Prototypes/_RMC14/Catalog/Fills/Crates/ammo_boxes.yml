@@ -32,10 +32,9 @@
 
 - type: entity
   parent: RMCCrateAmmo
-  id: RMCCrateBox458SOCOMAmmo
-  name: Crate of 458 SOCOM ammo
+  id: RMCCrateBoxAmmo458
+  name: .458 bullets box (.458 x 300)
   components:
   - type: StorageFill
     contents:
-    - id: RMCBox458SOCOM
-      amount: 6
+    - id: RMCBoxBullets458

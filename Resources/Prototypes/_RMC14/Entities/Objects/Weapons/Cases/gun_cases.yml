@@ -19,6 +19,34 @@
 
 - type: entity
   parent: RMCBaseGunCase
+  id: RMCCaseXM88
+  name: XM88 heavy rifle case
+  description: A gun case containing the XM88 Heavy Rifle, a prototype weapon designed for use against heavily armored infantry targets and light vehicles. Contains an ammunition belt, two boxes of ammunition, the XS-9 Targeting Relay attachment, and the stock for the rifle.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,11,1
+    whitelist:
+      components:
+      - Gun
+      tags:
+      - RMCAttachmentXM88Stock
+      - RMCAttachmentXS-9
+      - RMCBox458SOCOM
+      - RMCBox458SOCOM
+      - RMCBeltSOCOM
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleXM88
+    - id: RMCAttachmentXM88Stock
+    - id: RMCAttachmentXS-9
+    - id: RMCBox458SOCOM
+    - id: RMCBox458SOCOM
+    - id: RMCM300SOCOMBelt
+
+- type: entity
+  parent: RMCBaseGunCase
   id: RMCMK80Case
   name: MK80 pistol case
   description: A gun case containing the MK80. Comes with two magazines.

@@ -555,7 +555,7 @@
 - type: entity
   parent: RMCStockAttachmentBase
   id: RMCAttachmentXM88Stock
-  name: XM88 Padded Stock
+  name: XM88 padded stock
   description: A specially made compound polymer stock reinforced with aluminum rods and thick rubber padding to shield the user from recoil. Fitted specifically for the XM88 Heavy Rifle.
   components:
   - type: Sprite

@@ -815,3 +815,9 @@
       - CMMagazineSmg
       - RMCShellShotgun
   - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - RMCBeltSOCOM
+
+- type: Tag
+  id: RMCBeltSOCOM

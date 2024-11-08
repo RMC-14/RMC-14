@@ -5,17 +5,19 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Events;
+using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Stacks;
 
 public sealed class GunStacksSystem : EntitySystem
 {
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly CMArmorSystem _rmcArmor = default!;
     [Dependency] private readonly CMGunSystem _rmcGun = default!;
     [Dependency] private readonly RMCSelectiveFireSystem _rmcSelectiveFire = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private EntityQuery<GunStacksComponent> _gunStacksQuery;
@@ -79,12 +81,19 @@ public sealed class GunStacksSystem : EntitySystem
         if (!_gunStacksQuery.TryComp(ent.Comp.Gun, out var gun))
             return;
 
+        if (TryComp(ent, out ProjectileComponent? projectile) &&
+            projectile.DamagedEntity)
+        {
+            return;
+        }
+
         var target = args.Target;
         if (_xenoQuery.HasComp(target) && !_mobState.IsDead(target))
         {
             gun.Hits++;
             gun.LastHitAt = _timing.CurTime;
-            if (args.Shooter is { } shooter)
+            if (args.Shooter is { } shooter &&
+                _net.IsServer)
             {
                 var msg = gun.Hits == 1 ? "Bullseye!" : $"Bullseye! {gun.Hits} hits in a row!";
                 _popup.PopupEntity(msg, shooter, shooter);
@@ -92,6 +101,14 @@ public sealed class GunStacksSystem : EntitySystem
         }
         else
         {
+            if (gun.Hits > 0 &&
+                args.Shooter is { } shooter &&
+                _net.IsServer)
+            {
+                var msg = $"The {Name(ent.Comp.Gun.Value)} beeps as it loses its targeting data, and returns to normal firing procedures.";
+                _popup.PopupEntity(msg, shooter, shooter);
+            }
+
             gun.Hits = 0;
         }
 

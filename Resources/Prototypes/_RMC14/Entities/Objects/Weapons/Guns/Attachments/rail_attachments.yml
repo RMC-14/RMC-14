@@ -440,7 +440,7 @@
 - type: entity
   parent: RMCAttachmentScopeBase
   id: RMCAttachmentXS-9
-  name: XS-9 Targeting Relay
+  name: XS-9 targeting relay
   description: While still in development, the XS-9 Targeting Relay has many features -- most of them disabled for the field testing -- functions slightly better than a standard scope.
   components:
   - type: Sprite

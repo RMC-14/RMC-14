@@ -50,8 +50,8 @@
         crate: RMCCrateBoxMagazineM44RevolverMarksman
       - cost: 4000
         crate: RMCCrateBoxMagazineSentry
-      - cost: 4000 #wiki so could be wrong: I wanna sleep
-        crate: RMCCrateBox458SOCOMAmmo
+      - cost: 4000
+        crate: RMCCrateBoxAmmo458
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryShotgun
     - name: Attachments

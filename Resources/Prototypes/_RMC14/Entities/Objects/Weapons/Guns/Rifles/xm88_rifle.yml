@@ -31,6 +31,8 @@
     baseWalk: 0.92
     baseSprint: 0.86
   - type: PumpAction
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Pump/gun_boomslang_lever.ogg
   - type: BallisticAmmoProvider
     cycleable: false
     whitelist:
@@ -88,5 +90,36 @@
     amount: 10
   - type: GunStacksProjectile
 
+- type: entity
+  parent: RMCBoxShotgunBase
+  id: RMCBox458SOCOM
+  name: box of .458 SOCOM
+  description: A box filled with handfuls of .458 SOCOM rounds, designed for use with the XM88 heavy rifle.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,21,1
+    whitelist:
+      tags:
+      - RMCCartridge458SOCOM
+  - type: StorageFill
+    contents:
+    - id: RMCCartridge458SOCOM
+      amount: 11
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/SOCOM_box.rsi
+    layers:
+    - state: SOCOMFULL32subdiv
+      map: [ "full" ]
+    - state: Socom32e
+      map: [ "empty" ]
+  - type: RMCStorageEjectHand
+  - type: Tag
+    tags:
+    - RMCBox458SOCOM
+
 - type: Tag
   id: RMCCartridge458SOCOM
+
+- type: Tag
+  id: RMCBox458SOCOM
