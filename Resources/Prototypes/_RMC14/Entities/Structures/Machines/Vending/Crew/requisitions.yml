@@ -119,8 +119,8 @@
         amount: 1
       - id: RMCSatchelWelder
         amount: 5
-      #- id: IMP Ammo Rack
-      #   amount: 2
+      - id: RMCBackpackAmmo
+        amount: 2
       - id: RMCBackpackRTO
         amount: 2
       #- id: Parachute
