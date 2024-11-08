@@ -4865,7 +4865,7 @@
 - author: PursuitInAshes
   changes:
   - message: 'The SEA vendors have been updated to include new items and equipment:
-      Service Jackets, medkit pouch, reddot sight.'
+      Service Jackets, reddot sight.'
     type: Tweak
   id: 950
   time: '2024-11-08T05:22:32.0000000+00:00'
