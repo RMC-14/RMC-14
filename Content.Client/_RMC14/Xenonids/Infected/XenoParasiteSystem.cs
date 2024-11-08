@@ -15,8 +15,7 @@ public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
         base.Initialize();
 
         SubscribeLocalEvent<VictimBurstComponent, ComponentStartup>(SetVisuals);
-        SubscribeLocalEvent<VictimBurstComponent, VictimBurstStateChangedEvent>(SetVisuals,
-            before: [typeof(SharedXenoParasiteSystem)]);
+        SubscribeLocalEvent<VictimBurstComponent, VictimBurstStateChangedEvent>(SetVisuals);
     }
 
     private void SetVisuals<T>(Entity<VictimBurstComponent> ent, ref T args)
