@@ -39,5 +39,3 @@ public abstract class SharedRMCSetPoseSystem : EntitySystem
         Dirty(ent);
     }
 }
-
-public sealed partial class RMCSetPoseActionEvent : InstantActionEvent;
