@@ -123,7 +123,7 @@
 
 - type: entity
   parent: RMCStockAttachmentBase
-  id: RMCAttachmentXM51Stock
+  id: RMCAttachmentXM51Stock # TODO RMC14 burst
   name: XM51 stock
   description: A specialized stock designed for XM51 breaching shotguns. Helps the user absorb the recoil of the weapon while also reducing scatter. Integrated mechanisms inside the stock allow use of a devastating two-shot burst. This comes at a cost of the gun becoming too unwieldy to holster, worse handling and mobility.
   components:
