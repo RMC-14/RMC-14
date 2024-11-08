@@ -370,6 +370,9 @@ public sealed class CMGunSystem : EntitySystem
         if (!TryComp(gun.Owner, out GunComponent? gunComp) || gunComp.Target == null || !HasComp<TransformComponent>(gunComp.Target))
             return;
 
+        if (gunComp.SelectedMode == SelectiveFire.FullAuto && TryGetGunUser(gun.Owner, out var user) && gunComp.Target.Value == user.Owner)
+            return;
+
         foreach (var projectile in args.FiredProjectiles)
         {
             if (!TryComp(projectile, out ProjectileComponent? projectileComp) ||
