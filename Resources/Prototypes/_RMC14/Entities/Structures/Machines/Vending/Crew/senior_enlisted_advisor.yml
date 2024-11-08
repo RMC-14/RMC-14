@@ -92,9 +92,7 @@
     - name: Personal Primary
       choices: { CMPrimary: 1 }
       entries:
-      - id: WeaponRifleM54C
-      - id: WeaponSMGM63
-      - id: WeaponShotgunM42A2
+      - id: WeaponRifleM54C # TODO rmc14 this should be MK1 WeaponRifleM54CMK1
     - name: Ammunition
       entries:
       - id: CMMagazineRifleM54C
