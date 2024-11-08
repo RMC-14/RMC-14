@@ -552,6 +552,48 @@
       recoilFlat: 2
       scatterFlat: 6
 
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentXM88Stock
+  name: XM88 Padded Stock
+  description: A specially made compound polymer stock reinforced with aluminum rods and thick rubber padding to shield the user from recoil. Fitted specifically for the XM88 Heavy Rifle.
+  components:
+  - type: Sprite
+    state: boomslang-stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentXM88Stock
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 5
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      walk: -0.050
+      sprint: -0.10
+  - type: AttachableWieldDelayMods
+    modifiers:
+      - delay: 0.3
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.3
+      recoilFlat: -1
+      scatterFlat: -3
+    - conditions:
+        unwieldedOnly: true
+      accuracyMovementPenaltyAddMult: -1
+      accuracyAddMult: -0.1
+      recoilFlat: 1
+      scatterFlat: 7
+
 - type: Tag
   id: RMCAttachmentStock
 
