@@ -505,6 +505,13 @@
         amount: 1
         doAfter: 1
 
+    # XM88
+    - to: RMCBoxBullets458Empty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 1
+
     # Shotgun
     - to: RMCBoxShellsBuckshotEmpty
       steps:
@@ -612,6 +619,10 @@
   # Nailgun
   - node: RMCBoxMagazineSMGNailgunEmpty
     entity: RMCBoxMagazineSMGNailgunEmpty
+
+  # XM88
+  - node: RMCBoxBullets458Empty
+    entity: RMCBoxBullets458Empty
 
   # Shotgun
   - node: RMCBoxShellsBuckshotEmpty

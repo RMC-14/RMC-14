@@ -394,7 +394,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 if (HasComp<StorageComponent>(clothing) &&
                     _storage.CanInsert(clothing, item, out _))
                 {
-                    // TODO: Add storage holster to valid slots list
                     validSlots.Add(new HolsterSlot(priority, true, null, clothing, null));
                 }
             }
