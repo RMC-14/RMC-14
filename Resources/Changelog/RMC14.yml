@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Added handheld Broadcasting Camera for Correspondents!
-    type: Add
-  id: 444
-  time: '2024-07-24T10:50:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3227
 - author: musicmanvr
   changes:
   - message: The Hot Foods machine now stocks familiar items.
@@ -4913,5 +4906,14 @@
   id: 943
   time: '2024-11-07T08:18:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4744
+- author: Vermidia
+  changes:
+  - message: Fixed pens and cigarettes not fitting on ears
+    type: Fix
+  - message: Fixed cig machine inventory
+    type: Fix
+  id: 944
+  time: '2024-11-08T00:40:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4754
 Name: RMC14
 Order: -1
