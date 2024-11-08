@@ -110,6 +110,9 @@ public sealed class ManageHiveSystem : EntitySystem
             return;
         }
 
+        if (!_xenoPlasma.TryRemovePlasmaPopup(manage.Owner, manage.Comp.DevolvePlasmaCost))
+            return;
+
         var oldString = ToPrettyString(watched);
         if (_xenoEvolution.Devolve(watched, args.Choice) is not { } devolution)
             return;
