@@ -25,8 +25,6 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         _meleeWeaponQuery = GetEntityQuery<MeleeWeaponComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
 
-        SubscribeLocalEvent<MeleeResetComponent, ComponentInit>(OnMeleeResetInit);
-
         SubscribeLocalEvent<ImmuneToUnarmedComponent, GettingAttackedAttemptEvent>(OnImmuneToUnarmedGettingAttacked);
 
         SubscribeLocalEvent<ImmuneToMeleeComponent, GettingAttackedAttemptEvent>(OnImmuneToMeleeGettingAttacked);
@@ -44,20 +42,22 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         SubscribeAllEvent<DisarmAttackEvent>(OnDisarmAttack, before: new[] { typeof(SharedMeleeWeaponSystem) });
     }
 
-    private void OnMeleeResetInit(EntityUid uid, MeleeResetComponent meleeResetComponent, ComponentInit args)
+    //Call this whenever you add MeleeResetComponent to anything
+    public void MeleeResetInit(Entity<MeleeResetComponent> ent)
     {
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        if (!TryComp<MeleeWeaponComponent>(uid, out var weapon))
+        if (!TryComp<MeleeWeaponComponent>(ent, out var weapon))
         {
-            RemComp<MeleeResetComponent>(uid);
+            RemComp<MeleeResetComponent>(ent);
             return;
         }
 
-        meleeResetComponent.OriginalTime = weapon.NextAttack;
+        ent.Comp.OriginalTime = weapon.NextAttack;
         weapon.NextAttack = _timing.CurTime;
-        Dirty(uid, weapon);
+        Dirty(ent, weapon);
+        Dirty(ent, ent.Comp);
     }
 
     private void OnStunOnHitMeleeHit(Entity<StunOnHitComponent> ent, ref MeleeHitEvent args)
@@ -168,7 +168,7 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         if (disarm)
             weapon.NextAttack = reset.OriginalTime;
 
-        RemCompDeferred<MeleeResetComponent>(weaponUid);
+        RemComp<MeleeResetComponent>(weaponUid);
         Dirty(weaponUid, weapon);
     }
 }

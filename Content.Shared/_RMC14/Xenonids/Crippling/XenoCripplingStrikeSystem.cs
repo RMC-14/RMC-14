@@ -18,6 +18,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
 
@@ -39,7 +40,8 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
 
         args.Handled = true;
         var active = EnsureComp<XenoActiveCripplingStrikeComponent>(xeno);
-        EnsureComp<MeleeResetComponent>(xeno);
+        var reset = EnsureComp<MeleeResetComponent>(xeno);
+        _rmcMelee.MeleeResetInit((xeno.Owner, reset));
 
         active.ExpireAt = _timing.CurTime + xeno.Comp.ActiveDuration;
         active.SpeedMultiplier = xeno.Comp.SpeedMultiplier;
