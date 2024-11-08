@@ -559,7 +559,7 @@
   description: A specially made compound polymer stock reinforced with aluminum rods and thick rubber padding to shield the user from recoil. Fitted specifically for the XM88 Heavy Rifle.
   components:
   - type: Sprite
-    state: boomslang-stock
+    state: d_boomslang-stock
   - type: AttachableVisuals
     suffix: ""
   - type: Tag
