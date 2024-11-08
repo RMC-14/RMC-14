@@ -36,10 +36,6 @@
         reagents:
           - ReagentId: Nicotine
             Quantity: 10
-  - type: Clothing
-    quickEquip: false
-    slots:
-    - Ears
 
 - type: entity
   parent: BaseSmokable

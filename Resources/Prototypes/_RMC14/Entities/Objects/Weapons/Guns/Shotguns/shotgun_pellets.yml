@@ -151,3 +151,22 @@
     proto: CMPelletShotgunIncendiaryBuckshot
     count: 4
     spread: 20
+
+- type: entity
+  parent: CMPelletShotgunBase
+  id: RMCPelletShotgunBreaching
+  name: light breaching shell
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
+    layers:
+    - state: flechette
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 85
+  - type: CMArmorPiercing
+    amount: 5
+  - type: TimedDespawn
+    lifetime: 0.075
