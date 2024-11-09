@@ -418,6 +418,9 @@
     tags:
     - RMCSmartGunSidearmHolster
 
+- type: Tag
+  id: RMCSmartGunSidearmHolster
+
 - type: entity
   parent: CMBeltMarine
   id: RMCBeltGrenade
@@ -505,6 +508,9 @@
     tags:
     - RMCSmartPistolHolster
 
+- type: Tag
+  id: RMCSmartPistolHolster
+
 - type: entity
   parent: CMBeltMarine
   id: RMCBeltHolsterPistol
@@ -562,6 +568,9 @@
     tags:
     - RMCGeneralPistolHolster
 
+- type: Tag
+  id: RMCGeneralPistolHolster
+
 - type: entity
   parent: CMBeltMarine
   id: RMCBeltHolsterRevolver
@@ -614,6 +623,9 @@
     tags:
     - RMCGeneralRevolverHolster
 
+- type: Tag
+  id: RMCGeneralRevolverHolster
+
 - type: entity
   parent: ClothingBeltBase # Can't have storage slots on this one
   id: RMCBeltHolsterSMG
@@ -653,6 +665,9 @@
   - type: Tag
     tags:
     - RMCSMGHolster
+
+- type: Tag
+  id: RMCSMGHolster
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -736,6 +751,9 @@
   - type: Tag
     tags:
     - RMCSMGPouchHolster
+
+- type: Tag
+  id: RMCSMGPouchHolster
 
 - type: entity
   parent: CMBeltBaseStorage
