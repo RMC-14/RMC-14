@@ -1,23 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed the Boiler's bombard ability not taking plasma to use. It now correctly
-      takes 200 plasma to use.
-    type: Fix
-  id: 463
-  time: '2024-07-25T22:09:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3273
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the Boiler's Bombard putting Spray Acid on cooldown, Bombard now
-      correctly only puts Acid Shroud on cooldown, and Acid Shroud puts both Bombard
-      and Spray acid on cooldown.
-    type: Fix
-  id: 464
-  time: '2024-07-25T22:40:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3274
-- author: DrSmugleaf
-  changes:
   - message: Fixed Requisitions not getting their free 80 m44 speed loaders round-start.
     type: Fix
   id: 465
@@ -4876,5 +4859,23 @@
   id: 962
   time: '2024-11-09T05:21:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4777
+- author: Sigil
+  changes:
+  - message: You can now extract grenades from the UGL even when it's not attached
+      to a gun.
+    type: Fix
+  - message: You can no longer extract grenades from the UGL when the breech is closed.
+    type: Fix
+  id: 963
+  time: '2024-11-09T05:24:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4776
+- author: Vermidia
+  changes:
+  - message: Fixed XM88's stats (scatter was too low, falloff was slightly wrong,
+      etc)
+    type: Fix
+  id: 964
+  time: '2024-11-09T05:23:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4775
 Name: RMC14
 Order: -1
