@@ -23,7 +23,7 @@ rmc-announcement-ares-online = [color=white][font size=16][bold]ARES Online[/bol
 
     {$message}[/bold][/font][/color]
 
-rmc-announcement-ares-map = [color=white][font size=16][bold]USS Almayer[/bold][/font][/color][color=red][font size=14][bold]
+rmc-announcement-ares-map = [color=white][font size=16][bold]UNS Almayer[/bold][/font][/color][color=red][font size=14][bold]
 
     {$message}[/bold][/font][/color]
 
