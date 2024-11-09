@@ -69,6 +69,9 @@
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: RMCPowerCellSmartgun
+        whitelist:
+          components:
+          - SmartGunBattery
   - type: GunDamageModifier
     multiplier: 1
   - type: GunToggleableAmmo

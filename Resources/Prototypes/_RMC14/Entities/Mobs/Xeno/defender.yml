@@ -41,6 +41,7 @@
   - type: XenoDevolve
     devolvesTo:
     - CMXenoLarva
+    canBeDevolvedByOther: false
   - type: XenoEvolution
     max: 200
     evolvesTo:

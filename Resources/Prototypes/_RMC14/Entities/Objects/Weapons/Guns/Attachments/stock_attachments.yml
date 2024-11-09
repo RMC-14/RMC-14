@@ -74,7 +74,7 @@
       scatterFlat: -6
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
+      accuracyMovementPenaltyAddMult: -0.75
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
@@ -120,6 +120,48 @@
       accuracyAddMult: -0.1
       recoilFlat: 2
       scatterFlat: 2
+
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentXM51Stock # TODO RMC14 burst
+  name: XM51 stock
+  description: A specialized stock designed for XM51 breaching shotguns. Helps the user absorb the recoil of the weapon while also reducing scatter. Integrated mechanisms inside the stock allow use of a devastating two-shot burst. This comes at a cost of the gun becoming too unwieldy to holster, worse handling and mobility.
+  components:
+  - type: Sprite
+    state: xm51_stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentXM51Stock
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      walk: -0.059
+      sprint: -0.101
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.4
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 10
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.15
+      recoilFlat: -2
+      scatterFlat: -6
+    - conditions:
+        unwieldedOnly: true
+      accuracyMovementPenaltyAddMult: -2
+      accuracyAddMult: -0.25
+      recoilFlat: 1
+      scatterFlat: 10
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -552,11 +594,56 @@
       recoilFlat: 2
       scatterFlat: 6
 
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentXM88Stock
+  name: XM88 padded stock
+  description: A specially made compound polymer stock reinforced with aluminum rods and thick rubber padding to shield the user from recoil. Fitted specifically for the XM88 Heavy Rifle.
+  components:
+  - type: Sprite
+    state: d_boomslang-stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentXM88Stock
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 5
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      walk: -0.050
+      sprint: -0.10
+  - type: AttachableWieldDelayMods
+    modifiers:
+      - delay: 0.3
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.3
+      recoilFlat: -1
+      scatterFlat: -6
+    - conditions:
+        unwieldedOnly: true
+      accuracyMovementPenaltyAddMult: -1
+      accuracyAddMult: -0.1
+      recoilFlat: 1
+      scatterFlat: 14
+
 - type: Tag
   id: RMCAttachmentStock
 
 - type: Tag
   id: RMCAttachmentM42A2WoodenStock
+
+- type: Tag
+  id: RMCAttachmentXM51Stock
 
 - type: Tag
   id: RMCAttachmentDoubleBarrelShotgunStock
@@ -596,3 +683,6 @@
 
 - type: Tag
   id: RMCAttachmentMOU53Stock
+
+- type: Tag
+  id: RMCAttachmentXM88Stock

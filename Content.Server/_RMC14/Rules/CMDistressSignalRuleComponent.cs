@@ -95,4 +95,22 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public ProtoId<JobPrototype> SurvivorJob = "CMSurvivor";
+
+    [DataField]
+    public TimeSpan AresGreetingDelay = TimeSpan.FromSeconds(5);
+
+    [DataField]
+    public SoundSpecifier AresGreetingAudio = new SoundPathSpecifier("/Audio/_RMC14/Announcements/ARES/ares_online.ogg");
+
+    [DataField]
+    public bool AresGreetingDone;
+
+    [DataField]
+    public TimeSpan AresMapDelay = TimeSpan.FromSeconds(20);
+
+    [DataField]
+    public bool AresMapDone;
+
+    [DataField]
+    public TimeSpan? StartTime;
 }

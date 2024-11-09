@@ -89,3 +89,37 @@
       state: warden_rejuvenate
     event: !type:XenoAidToggleActionEvent
     useDelay: 0.5
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoLeader
+  name: Choose/Follow Xenonid Leaders
+  description: Promotes and demotes xenonid leaders, or watches them. Promoting a xeno to leader will make them emit your pheromones around themselves.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: xeno_lead
+    event: !type:HiveLeaderActionEvent
+    useDelay: 3
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoHeal
+  name: Heal Xenonid (600) # TODO RMC14 proper plasma costs
+  description: Heals xenonids in a 4 tile range around where you click for 30% of their health over 20 seconds.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: heal_xeno
+    event: !type:XenoHealActionEvent
+    useDelay: 8
+    checkCanAccess: false
+    range: -1
+  - type: XenoActionPlasma
+    cost: 600

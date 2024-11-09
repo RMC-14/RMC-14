@@ -1,4 +1,3 @@
-using System.Numerics;
 using Content.Shared._RMC14.Attachable.Systems;
 using Content.Shared._RMC14.Input;
 using Content.Shared.Examine;
@@ -107,12 +106,17 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
 
         gunComponent.AngleIncrease = gun.Comp.ScatterIncrease;
         gunComponent.AngleDecay = gun.Comp.ScatterDecay;
-        gunComponent.FireRate = gunComponent.SelectedMode == SelectiveFire.Burst ? gun.Comp.BaseFireRate * 2 : gun.Comp.BaseFireRate;
+
+        var ev = new GunGetFireRateEvent(gunComponent.SelectedMode == SelectiveFire.Burst ? gun.Comp.BaseFireRate * 2 : gun.Comp.BaseFireRate);
+        RaiseLocalEvent(gun, ref ev);
+        gunComponent.FireRate = ev.FireRate;
 
         if (ContainsMods(gun, gunComponent.SelectedMode))
         {
             var mods = gun.Comp.Modifiers[gunComponent.SelectedMode];
-            gunComponent.FireRate = 1f / (1f / gunComponent.FireRate + mods.FireDelay);
+            ev = new GunGetFireRateEvent(1f / (1f / gunComponent.FireRate + mods.FireDelay));
+            RaiseLocalEvent(gun, ref ev);
+            gunComponent.FireRate = ev.FireRate;
         }
 
         RefreshWieldableFireModeValues(gun);
@@ -151,6 +155,12 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
         RaiseLocalEvent(gun.Owner, ref ev);
 
         SetFireModes((gun.Owner, gunComponent), ev.Modes, !(forceValueRefresh || initialMode != gunComponent.SelectedMode));
+
+        if (TryComp(gun, out GunComponent? gunComp) &&
+            (gunComp.AvailableModes & ev.Set) != SelectiveFire.Invalid)
+        {
+            _gunSystem.SelectFire(gun, gunComponent, ev.Set);
+        }
 
         if (forceValueRefresh || initialMode != gunComponent.SelectedMode)
             RefreshFireModeGunValues((gun.Owner, gun.Comp));
@@ -202,7 +212,7 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
 
     public void SetFireModes(Entity<GunComponent?> gun, SelectiveFire modes, bool dirty = true)
     {
-        if (gun.Comp == null && !TryComp(gun.Owner, out gun.Comp) || (modes & allFireModes) != SelectiveFire.Invalid)
+        if (gun.Comp == null && !TryComp(gun.Owner, out gun.Comp) || (modes & allFireModes) == SelectiveFire.Invalid)
             return;
 
         gun.Comp.AvailableModes = allFireModes;

@@ -1,55 +1,76 @@
 - type: entity
   name: match box
-  description: matchbox
-  parent: Matchbox
+  description: A small box of 'Space-Proof' premium matches.
+  parent: [ SmallboxItem, BaseBagOpenClose ]
   id: RMCMatchbox
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/matchbox_drop.ogg
+  - type: Matchbox
   - type: Sprite
     sprite:  _RMC14/Objects/Consumable/Smokeables/Matchboxes/matchbox.rsi
     layers:
     - state: matchbox
-    - state: matchbox-open
-      map: ["openLayer"]
-    - state: matchbox1
-      map: ["matchbox1"]
-      visible: false
-    - state: matchbox2
-      map: ["matchbox2"]
-      visible: false
-    - state: matchbox3
-      map: ["matchbox3"]
-      visible: false
-    - state: matchbox4
-      map: ["matchbox4"]
-      visible: false
-    - state: matchbox5
-      map: ["matchbox5"]
-      visible: false
-    - state: matchbox6
-      map: ["matchbox6"]
-      visible: false
+    - state: matchbox-0
+      map: ["enum.StorageFillLayers.Fill"]
+      visible: false   
   - type: Item
     sprite: Objects/Tools/matches.rsi
     heldPrefix: matchbox
     size: Small
+  - type: StorageFillVisualizer
+    maxFillLevels: 7
+    fillBaseName: matchbox
   - type: Storage
     grid:
-    - 0,0,5,1
+    - 0,0,13,1
     whitelist:
       tags:
       - Matchstick
-  - type: ItemCounter
-    count:
-      tags: [Matchstick]
-    composite: true
-    layerStates:
-    - matchbox1
-    - matchbox2
-    - matchbox3
-    - matchbox4
-    - matchbox5
-    - matchbox6
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        enum.StorageFillLayers.Fill:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Tag
+    tags:
+    - Trash
+  - type: SpaceGarbage
   - type: InteractedBlacklist
     blacklist:
       components:
       - Xeno
+
+- type: entity
+  name: match box
+  parent: RMCMatchbox
+  id: RMCMatchboxFull
+  suffix: Full
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMatchstick
+      amount: 14
+
+- type: entity
+  name: match
+  description: A simple match stick, used for lighting fine smokables.
+  parent: Matchstick
+  id: RMCMatchstick
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Matches/match.rsi
+    state: match_unlit
+
+- type: entity
+  name: paper match
+  description: A simple match stick, used for lighting fine smokables.
+  parent: RMCMatchstick
+  id: RMCMatchstickPaper
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Matches/paper.rsi
+    state: match_unlit

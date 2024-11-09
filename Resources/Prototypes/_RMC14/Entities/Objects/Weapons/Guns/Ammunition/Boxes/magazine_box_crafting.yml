@@ -231,7 +231,7 @@
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_m54
   objectType: Item
-  
+
 # Nailgun
 - type: construction
   parent: RMC
@@ -289,7 +289,7 @@
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     state: base_flech
   objectType: Item
-  
+
 # - type: construction
   # parent: RMC
   # name: Shell Box (Incendiary)
@@ -303,7 +303,7 @@
     # sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     # state: base_inc
   # objectType: Item
-  
+
 # - type: construction
   # parent: RMC
   # name: Shell Box (Beanbag)
@@ -317,7 +317,7 @@
     # sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     # state: base_bean
   # objectType: Item
-  
+
 # - type: construction
   # parent: RMC
   # name: Shell Box (Inc Buckshot)
@@ -331,7 +331,21 @@
     # sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     # state: base_incbuck
   # objectType: Item
-  
+
+- type: construction
+  parent: RMC
+  name: Shell Box (Breaching)
+  id: RMCBoxShellsBreachingEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxShellsBreachingEmpty
+  category: construction-category-cm-box-magazine
+  description: A box for holding shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_breach
+  objectType: Item
+
   # Construct graphs
 - type: constructionGraph
   parent: RMC
@@ -439,14 +453,21 @@
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
-    
+
     # Nailgun
     - to: RMCBoxMagazineSMGNailgunEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
-    
+
+    # XM88
+    - to: RMCBoxBullets458Empty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 1
+
     # Shotgun
     - to: RMCBoxShellsBuckshotEmpty
       steps:
@@ -478,6 +499,11 @@
       # - material: RMCSheetCardboard
         # amount: 1
         # doAfter: 1
+    - to: RMCBoxShellsBreachingEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 1
 
   # Why the fuck do you even need these nodes???
 
@@ -528,11 +554,15 @@
     entity: RMCBoxMagazineRevolverM44Empty
   - node: RMCBoxMagazineRevolverM44MarksmanEmpty
     entity: RMCBoxMagazineRevolverM44MarksmanEmpty
-  
+
   # Nailgun
   - node: RMCBoxMagazineSMGNailgunEmpty
     entity: RMCBoxMagazineSMGNailgunEmpty
-    
+
+  # XM88
+  - node: RMCBoxBullets458Empty
+    entity: RMCBoxBullets458Empty
+
   # Shotgun
   - node: RMCBoxShellsBuckshotEmpty
     entity: RMCBoxShellsBuckshotEmpty
@@ -546,4 +576,5 @@
     # entity: RMCBoxShellsBeanbagEmpty
   # - node: RMCBoxShellsIncendiaryBuckshotEmpty
     # entity: RMCBoxShellsIncendiaryBuckshotEmpty
-  
+  - node: RMCBoxShellsBreachingEmpty
+    entity: RMCBoxShellsBreachingEmpty

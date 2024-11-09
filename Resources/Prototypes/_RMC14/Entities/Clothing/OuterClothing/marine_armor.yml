@@ -19,6 +19,71 @@
     worn: false
 
 - type: entity
+  id: RMCArmorM3MediumVariants
+  name: M3 pattern marine armor
+  description: A standard UNMC M3 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard.rsi
+    state: icon
+  - type: RMCArmorVariant
+    defaultType: RMCArmorM3MediumPadded
+    types:
+      Padded: RMCArmorM3MediumPadded
+      Padless: RMCArmorM3MediumPadless
+      Ridged: RMCArmorM3MediumRidged
+      Carrier: RMCArmorM3MediumCarrier
+      Skull: RMCArmorM3MediumSkull
+      Smooth: RMCArmorM3MediumSmooth
+
+- type: entity
+  parent: CMArmorM3Medium
+  id: RMCArmorM3MediumPadded
+  name: M3 pattern padded marine armor
+
+- type: entity
+  parent: CMArmorM3Medium
+  id: RMCArmorM3MediumPadless
+  name: M3 pattern padless marine armor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard-padless.rsi
+
+- type: entity
+  parent: CMArmorM3Medium
+  id: RMCArmorM3MediumRidged
+  name: M3 pattern ridged marine armor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard-ridged.rsi
+
+- type: entity
+  parent: CMArmorM3Medium
+  id: RMCArmorM3MediumCarrier
+  name: M3 pattern carrier marine armor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard-carrier.rsi
+
+- type: entity
+  parent: CMArmorM3Medium
+  id: RMCArmorM3MediumSkull
+  name: M3 pattern skull marine armor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard-skull.rsi
+
+- type: entity
+  parent: CMArmorM3Medium
+  id: RMCArmorM3MediumSmooth
+  name: M3 pattern smooth marine armor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard-smooth.rsi
+
+- type: entity
   parent: CMArmorM3Medium
   id: CMArmorB12
   name: B12 pattern marine armor
@@ -52,6 +117,65 @@
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
+
+- type: entity
+  id: RMCArmorM3HeavyVariants
+  name: M3-EOD pattern heavy armor
+  description: A heavier version of the standard M3 pattern armor, the armor is primarily designed to withstand ballistic, explosive, and internal damage, with the drawback of increased bulk and thus reduced movement speed, alongside little additional protection from standard blunt force impacts and biological threats.
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light.rsi
+    state: icon
+  - type: RMCArmorVariant
+    defaultType: RMCArmorM3HeavyPadded
+    types:
+      Padded: RMCArmorM3HeavyPadded
+      Padless: RMCArmorM3HeavyPadless
+      Ridged: RMCArmorM3HeavyRidged
+      Carrier: RMCArmorM3HeavyCarrier
+      Skull: RMCArmorM3HeavySkull
+      Smooth: RMCArmorM3HeavySmooth
+
+- type: entity
+  parent: CMArmorM3Heavy
+  id: RMCArmorM3HeavyPadded
+
+- type: entity
+  parent: CMArmorM3Heavy
+  id: RMCArmorM3HeavyPadless
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod-padless.rsi
+
+- type: entity
+  parent: CMArmorM3Heavy
+  id: RMCArmorM3HeavyRidged
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod-ridged.rsi
+
+- type: entity
+  parent: CMArmorM3Heavy
+  id: RMCArmorM3HeavyCarrier
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod-carrier.rsi
+
+- type: entity
+  parent: CMArmorM3Heavy
+  id: RMCArmorM3HeavySkull
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod-skull.rsi
+
+- type: entity
+  parent: CMArmorM3Heavy
+  id: RMCArmorM3HeavySmooth
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod-smooth.rsi
 
 - type: entity
   parent: CMArmorM3Medium
@@ -122,6 +246,65 @@
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
+
+- type: entity
+  id: RMCArmorM3LightVariants
+  name: M3-L pattern light armor
+  description: A lighter, cut down version of the standard M3 pattern armor. It sacrifices durability for more speed.
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light.rsi
+    state: icon
+  - type: RMCArmorVariant
+    defaultType: RMCArmorM3LightPadded
+    types:
+      Padded: RMCArmorM3LightPadded
+      Padless: RMCArmorM3LightPadless
+      Ridged: RMCArmorM3LightRidged
+      Carrier: RMCArmorM3LightCarrier
+      Skull: RMCArmorM3LightSkull
+      Smooth: RMCArmorM3LightSmooth
+
+- type: entity
+  parent: CMArmorM3Light
+  id: RMCArmorM3LightPadded
+
+- type: entity
+  parent: CMArmorM3Light
+  id: RMCArmorM3LightPadless
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light-padless.rsi
+
+- type: entity
+  parent: CMArmorM3Light
+  id: RMCArmorM3LightRidged
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light-ridged.rsi
+
+- type: entity
+  parent: CMArmorM3Light
+  id: RMCArmorM3LightCarrier
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light-carrier.rsi
+
+- type: entity
+  parent: CMArmorM3Light
+  id: RMCArmorM3LightSkull
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light-skull.rsi
+
+- type: entity
+  parent: CMArmorM3Light
+  id: RMCArmorM3LightSmooth
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light-smooth.rsi
 
 - type: entity
   parent: RMCBaseMarineArmor

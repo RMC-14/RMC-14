@@ -115,6 +115,8 @@ namespace Content.Client.Chemistry.UI
             OutputEjectButton.Disabled = output is null;
             CreateBottleButton.Disabled = output?.Reagents == null;
             CreatePillButton.Disabled = output?.Entities == null;
+            // RMC - Change Pill Bottle Color Button
+            ChangePillBottleColorButton.Disabled = output is null;
 
             var remainingCapacity = output is null ? 0 : (output.MaxVolume - output.CurrentVolume).Int();
             var holdsReagents = output?.Reagents != null;
