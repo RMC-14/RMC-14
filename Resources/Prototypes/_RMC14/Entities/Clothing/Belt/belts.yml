@@ -67,6 +67,7 @@
     whitelist:
       tags:
       - RMCShellShotgun
+      - RMCCartridge458SOCOM
   - type: IgnoreContentsSize
     items:
       tags:

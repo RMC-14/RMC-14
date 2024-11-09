@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Damage;
+﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -19,6 +20,7 @@ public sealed class XenoHealSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -35,6 +37,9 @@ public sealed class XenoHealSystem : EntitySystem
     private void OnXenoHealAction(Entity<XenoHealComponent> ent, ref XenoHealActionEvent args)
     {
         if (args.Handled)
+            return;
+
+        if (!_rmcActions.TryUseAction(args.Performer, args.Action))
             return;
 
         args.Handled = true;

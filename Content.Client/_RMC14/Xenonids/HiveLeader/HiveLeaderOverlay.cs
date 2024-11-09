@@ -69,7 +69,7 @@ public sealed class HiveLeaderOverlay : Overlay
             var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
 
             if (!bounds.Translated(worldPos).Intersects(args.WorldAABB))
-                return;
+                continue;
 
             var worldMatrix = Matrix3x2.CreateTranslation(worldPos);
             var scaledWorld = Matrix3x2.Multiply(scaleMatrix, worldMatrix);
