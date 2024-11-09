@@ -196,6 +196,7 @@
   children:
   - RMCMarineSOPGeneral
   - RMCMarineSOPEquipment
+  - RMCMarineSOPDepartment
 
 # General Regulations
 - type: guideEntry
@@ -212,3 +213,11 @@
   name: rmc-guide-entry-rules-marine-sop-equipment
   text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPEquipment.xml"
   priority: 2
+
+# Department Regulations
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineSOPDepartment
+  name: rmc-guide-entry-rules-marine-sop-department
+  text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPDepartment.xml"
+  priority: 3
