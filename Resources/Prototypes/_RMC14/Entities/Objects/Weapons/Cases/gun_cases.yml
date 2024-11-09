@@ -132,7 +132,7 @@
       - RMCWeaponShotgunXM51
       - RMCMagazineShotgunXM51
       - RMCBoxShotgunBreaching
-      - RMCG8Pouch
+      - RMCXM51Holster
   - type: StorageFill
     contents:
     - id: RMCAttachmentXM51Stock
