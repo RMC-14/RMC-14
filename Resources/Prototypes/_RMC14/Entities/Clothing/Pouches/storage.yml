@@ -285,6 +285,7 @@
     whitelist:
       tags:
       - RMCShellShotgun
+      - RMCCartridge458SOCOM
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
     items:
@@ -307,6 +308,7 @@
     whitelist:
       tags:
       - RMCShellShotgun
+      - RMCCartridge458SOCOM
   - type: IgnoreContentsSize
     items:
       tags:
