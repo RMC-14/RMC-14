@@ -67,6 +67,7 @@
     whitelist:
       tags:
       - RMCShellShotgun
+      - RMCCartridge458SOCOM
   - type: IgnoreContentsSize
     items:
       tags:
@@ -788,3 +789,86 @@
     - id: RMCSpeedLoaderMateba
       amount: 5
     - id: RMCWeaponRevolverMateba
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCBeltXM51
+  name: M276 pattern XM51 holster rig
+  description: The M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version is for the XM51 breaching scattergun, allowing easier storage of the weapon. It features pouches for storing two magazines along with extra shells.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/xm51.rsi
+    layers:
+    - state: xm51
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      offset: 0.35, 0
+      visible: false
+    - state: icon
+  - type: Clothing
+    slots:
+    - belt
+    sprite: _RMC14/Objects/Clothing/Belt/xm51.rsi
+  - type: Storage
+    maxItemSize: Large
+    grid:
+    - 0,0,15,1 # 8 slots
+    whitelist:
+      tags:
+      - RMCWeaponShotgunXM51
+      - RMCMagazineShotgunXM51
+      - RMCShellShotgun # TODO RMC14 bullet handfuls
+  - type: Tag
+    tags:
+    - RMCG8Pouch
+  - type: FixedItemSizeStorage
+  - type: CMHolster
+    whitelist:
+      components:
+      - Gun
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
+    - popup: rmc-storage-limit-max-mags
+      count: 2
+      whitelist:
+        tags:
+        - RMCMagazineShotgunXM51
+  - type: CMStorageVisualizer
+    storageClosed: null
+    storageOpen: null
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCM300SOCOMBelt
+  name: M300 pattern .458 SOCOM loading rig
+  description: An ammunition belt designed to hold the large .458 SOCOM caliber bullets for the XM88 heavy rifle.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/SOCOM.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/SOCOM.rsi
+  - type: Item
+    size: Large
+  - type: Storage
+    maxItemSize: Large
+    grid:
+    - 0,0,13,3 # 14 slots
+    whitelist:
+      tags:
+      - RMCCartridge458SOCOM
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - RMCShellShotgun
+  - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - RMCBeltSOCOM
+
+- type: Tag
+  id: RMCBeltSOCOM

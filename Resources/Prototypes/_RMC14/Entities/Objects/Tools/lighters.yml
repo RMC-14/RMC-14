@@ -19,10 +19,78 @@
       map: ["flame"]
       visible: false
       shader: unshaded
+  - type: Item
+    sprite: Objects/Tools/lighters.rsi
   - type: Clothing
     quickEquip: false
     slots:
     - suitstorage
+
+- type: entity
+  name: cheap lighter
+  description: A cheap-as-free lighter.
+  parent: RMCZippo
+  id: RMCLighter
+  components:
+  - type: Item
+    heldPrefix: null
+  - type: ItemToggle
+    predictable: false
+    soundActivate:
+      collection: lighterOnSounds
+    soundDeactivate:
+      collection: lighterOffSounds
+  - type: Sprite
+    sprite:  _RMC14/Objects/Tools/Lighters/basic.rsi
+    layers:
+    - state: lighter_c
+      map: ["base"]
+    - state: lighter_c_on
+      map: ["top"]
+      visible: false
+    - state: lighter_c_on
+      map: ["open"]
+      visible: false
+    - state: lighter_flame
+      map: ["flame"]
+      visible: false
+      shader: unshaded
+  - type: ToggleableLightVisuals
+    spriteLayer: lighter_flame
+    inhandVisuals:
+      left:
+      - state: inhand-left-flame
+        shader: unshaded
+      right:
+      - state: inhand-right-flame
+        shader: unshaded
+  - type: RandomSprite
+    available:
+      - base:
+          lighter_c: ""
+        top:
+          lighter_c_on: ""
+        open:
+          lighter_c_on: ""
+      - base:
+          lighter_r: ""
+        top:
+          lighter_r_on: ""
+        open:
+          lighter_r_on: ""
+      - base:
+          lighter_g: ""
+        top:
+          lighter_g_on: ""
+        open:
+          lighter_g_on: ""
+      - base:
+          lighter_y: ""
+        top:
+          lighter_y_on: ""
+        open:
+          lighter_y_on: ""
+
 
 - type: entity
   name: We-Ya executive zippo lighter

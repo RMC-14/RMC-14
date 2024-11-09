@@ -35,6 +35,7 @@
   - type: XenoDevolve
     devolvesTo:
     - CMXenoLarva
+    canBeDevolvedByOther: false
   - type: XenoDevour
   - type: XenoPheromones
     pheromonesMultiplier: 2

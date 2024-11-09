@@ -22,6 +22,7 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: medic
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:

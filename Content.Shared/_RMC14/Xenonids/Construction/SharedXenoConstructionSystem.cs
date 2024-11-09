@@ -44,6 +44,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -196,6 +197,30 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoSecreteStructureAction(Entity<XenoConstructionComponent> xeno, ref XenoSecreteStructureActionEvent args)
     {
+        var snapped = args.Target.SnapToGrid(EntityManager, _map);
+        if (xeno.Comp.CanUpgrade &&
+            _rmcMap.HasAnchoredEntityEnumerator<XenoStructureUpgradeableComponent>(snapped, out var upgradeable) &&
+            upgradeable.Comp.To is { } to &&
+            _prototype.HasIndex(to))
+        {
+            var cost = upgradeable.Comp.Cost;
+            if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
+                return;
+
+            var msg = $"We regurgitate some resin and thicken the {Name(upgradeable)}, using {cost} plasma.";
+            _popup.PopupClient(msg, upgradeable, xeno);
+
+            if (_net.IsClient)
+                return;
+
+            QueueDel(upgradeable);
+            Spawn(to, snapped);
+            return;
+        }
+
+        if (!_interaction.InRangeUnobstructed(xeno, args.Target, 20))
+            return;
+
         if (xeno.Comp.BuildChoice is not { } choice ||
             !CanSecreteOnTilePopup(xeno, choice, args.Target, true, true))
         {
@@ -427,6 +452,15 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     {
         if (!TryComp(args.User, out XenoConstructionComponent? construction))
             return;
+
+        var snapped = args.Target.SnapToGrid(EntityManager, _map);
+        if (ent.Comp.CanUpgrade &&
+            construction.CanUpgrade &&
+            _rmcMap.HasAnchoredEntityEnumerator<XenoStructureUpgradeableComponent>(snapped, out var upgradeable) &&
+            upgradeable.Comp.To != null)
+        {
+            return;
+        }
 
         if (!CanSecreteOnTilePopup((args.User, construction), construction.BuildChoice, args.Target, ent.Comp.CheckStructureSelected, ent.Comp.CheckWeeds))
             args.Cancelled = true;
