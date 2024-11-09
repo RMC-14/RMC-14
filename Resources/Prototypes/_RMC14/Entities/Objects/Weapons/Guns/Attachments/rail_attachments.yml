@@ -473,9 +473,6 @@
         wieldedOnly: true
         inactiveOnly: true
       accuracyAddMult: -0.05
-    - conditions:
-        unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: 2 #TODO: Add flare gun modifiers when it's implemented.
 
 - type: Tag
   id: RMCAttachmentRail
