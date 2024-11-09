@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Dropship travel and cooldown times are the default from 13 again, 100
-      seconds to travel and 120 seconds to cool down. This gives marines more time
-      to prepare after a hijack announcement. Be ready to cycle dropships or wait
-      for dropship upgrades outside of that.
-    type: Tweak
-  id: 460
-  time: '2024-07-25T12:54:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3263
-- author: DrSmugleaf
-  changes:
   - message: Fixed hyposprays not having a delay on use for medically unskilled marines.
     type: Fix
   id: 461
@@ -4868,5 +4858,12 @@
   id: 959
   time: '2024-11-08T22:26:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4771
+- author: Vermidia
+  changes:
+  - message: Fixed doors, vending machines, and sentries having acid applied too fast
+    type: Fix
+  id: 960
+  time: '2024-11-09T04:18:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4769
 Name: RMC14
 Order: -1
