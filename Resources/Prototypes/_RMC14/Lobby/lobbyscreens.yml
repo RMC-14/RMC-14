@@ -21,3 +21,8 @@
 - type: lobbyBackground
   id: MarineMajor
   background: /Textures/_RMC14/Lobby/MarineMajor.png
+
+- type: lobbyBackground
+  id: Battered
+  background: /Textures/_RMC14/Lobby/Battered.png
+ 

@@ -4,6 +4,8 @@
   id: RMCBaseSentry
   name: turret
   components:
+  - type: Corrodible
+    timeToApply: 4
   - type: Item
     size: Normal
   - type: Clickable
@@ -78,6 +80,8 @@
         path: /Audio/Effects/double_beep.ogg
       VisionRadius: !type:Single
         5.0
+      AggroVisionRadius: !type:Single
+        6.0
   - type: MouseRotator
     angleTolerance: 5
     rotationSpeed: 180
@@ -293,6 +297,8 @@
         path: /Audio/Effects/double_beep.ogg
       VisionRadius: !type:Single
         10.0
+      AggroVisionRadius: !type:Single
+        11.0
   - type: Sentry
     upgrades: null
 
@@ -334,6 +340,8 @@
         path: /Audio/Effects/double_beep.ogg
       VisionRadius: !type:Single
         4.0
+      AggroVisionRadius: !type:Single
+        5.0
   - type: Sentry
     upgrades: null
     maxDeviation: 180
@@ -393,6 +401,8 @@
         path: /Audio/Effects/double_beep.ogg
       VisionRadius: !type:Single
         3.0
+      AggroVisionRadius: !type:Single
+        4.0
   - type: Sentry
     upgrades: null
     startingMagazine: RMCMagazineSentryShotgun

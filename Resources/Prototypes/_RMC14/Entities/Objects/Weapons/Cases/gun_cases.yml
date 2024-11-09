@@ -19,6 +19,34 @@
 
 - type: entity
   parent: RMCBaseGunCase
+  id: RMCCaseXM88
+  name: XM88 heavy rifle case
+  description: A gun case containing the XM88 Heavy Rifle, a prototype weapon designed for use against heavily armored infantry targets and light vehicles. Contains an ammunition belt, two boxes of ammunition, the XS-9 Targeting Relay attachment, and the stock for the rifle.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,11,1
+    whitelist:
+      components:
+      - Gun
+      tags:
+      - RMCAttachmentXM88Stock
+      - RMCAttachmentXS-9
+      - RMCBox458SOCOM
+      - RMCBox458SOCOM
+      - RMCBeltSOCOM
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleXM88
+    - id: RMCAttachmentXM88Stock
+    - id: RMCAttachmentXS-9
+    - id: RMCBox458SOCOM
+    - id: RMCBox458SOCOM
+    - id: RMCM300SOCOMBelt
+
+- type: entity
+  parent: RMCBaseGunCase
   id: RMCMK80Case
   name: MK80 pistol case
   description: A gun case containing the MK80. Comes with two magazines.
@@ -44,7 +72,7 @@
   description: A gun case containing the M54CE2 heavy assault rifle. You can get additional ammunition at requisitions.
   components:
   - type: Storage
-    maxItemSize: Huge
+    maxItemSize: Ginormous
     grid:
     - 0,0,7,1
     whitelist:
@@ -58,8 +86,6 @@
     - id: WeaponRifleM54CE2
     - id: CMMagazineRifleM54CE2
     - id: CMMagazineRifleM54CE2 # Replace with a holotargeting mag once that ammo is implemented.
-    - id: RMCAttachmentRailFlashlight
-    - id: RMCAttachmentBipod
 
 - type: entity
   parent: BaseStorageItem
@@ -89,3 +115,30 @@
     contents:
     - id: RMCWeaponPistolD18
     - id: RMCMagazinePistolD18
+
+- type: entity
+  parent: RMCBaseGunCase
+  id: RMCXM51Case
+  name: XM51 breaching scattergun case
+  description: A gun case containing the XM51 Breaching Scattergun. Comes with two spare magazines, two spare shell boxes, an optional stock and a belt to holster the weapon.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,9,1
+    whitelist:
+      tags:
+      - RMCAttachmentXM51Stock
+      - RMCWeaponShotgunXM51
+      - RMCMagazineShotgunXM51
+      - RMCBoxShotgunBreaching
+      - RMCG8Pouch
+  - type: StorageFill
+    contents:
+    - id: RMCAttachmentXM51Stock
+    - id: RMCWeaponShotgunXM51
+    - id: RMCMagazineShotgunXM51
+      amount: 2
+    - id: RMCBoxShotgunBreaching
+      amount: 2
+    - id: RMCBeltXM51

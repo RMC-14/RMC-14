@@ -38,3 +38,39 @@
       - Cigar
       - Trash
       - Burnt
+
+- type: entity
+  id: RMCTarbackTube
+  parent: BaseStorageItem
+  name: tarback tube
+  description: A single Tarback cigar in a protective metal tube. About as low-end as you can get. Rolled in Columbia.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigars/tarback_tube.rsi
+    state: tarbacktube_empty
+    layers:
+    - state: tarbacktube_empty
+      map: ["openLayer", "emptyLayer"]
+    - state:  tarbacktube
+      map: ["closedLayer"]
+      visible: false
+  - type: Storage
+    grid:
+    - 0,0,0,1
+    whitelist:
+      tags:
+      -  Cigar
+  - type: StorageFill
+    contents:
+    - id: CMTarbackCigar
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+    storageEmpty: emptyLayer
+  - type: Appearance
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

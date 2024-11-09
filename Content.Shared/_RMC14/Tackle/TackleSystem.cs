@@ -51,7 +51,9 @@ public sealed class TackleSystem : EntitySystem
         if (recently.Current < tackle.Threshold)
         {
             _adminLog.Add(LogType.RMCTackle, $"{ToPrettyString(user)} tried to tackle {ToPrettyString(target)}.");
-            _popup.PopupClient(Loc.GetString("cm-tackle-try-self", ("target", target.Owner)), user, user);
+
+            if (_net.IsServer)
+                _popup.PopupEntity(Loc.GetString("cm-tackle-try-self", ("target", target.Owner)), user, user);
 
             foreach (var session in Filter.PvsExcept(user).Recipients)
             {

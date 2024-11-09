@@ -23,11 +23,12 @@
     - name: Armor
       choices: { CMArmour: 1 }
       entries:
-      - id: CMArmorM3Light
+      - id: RMCArmorM3LightVariants
         name: light armor
-      - id: CMArmorM3Medium
+      - id: RMCArmorM3MediumVariants
         name: medium armor
-      - id: CMArmorM3Heavy
+        recommended: true
+      - id: RMCArmorM3HeavyVariants
         name: heavy armor
     - name: Backpack
       choices: { CMBackpack: 1 }
@@ -157,8 +158,8 @@
         points: 15
       - id: CMWebbingPouch
         points: 15
-    #- id: CMShoulderHolster
-    #  points: 15
+      - id: CMWebbingHolster
+        points: 15
       - id: RMCScabbardMacheteFilled
         points: 15
       - id: RMCPouchMacheteFilled

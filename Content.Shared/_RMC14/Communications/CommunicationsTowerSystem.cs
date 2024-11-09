@@ -95,12 +95,12 @@ public sealed class CommunicationsTowerSystem : EntitySystem
         if (!HasComp<MultitoolComponent>(args.Used))
             return;
 
-        var options = new List<string>
+        var options = new List<DialogOption>
         {
-            "Wipe communication frequencies",
-            "Add your faction's frequencies",
+            new("Wipe communication frequencies"),
+            new("Add your faction's frequencies"),
         };
-        _dialog.OpenDialog(ent, args.User, "TC-3T comms tower", options);
+        _dialog.OpenOptions(ent, args.User, "TC-3T comms tower", options);
     }
 
     private void OnTowerDialogChosen(Entity<CommunicationsTowerComponent> ent, ref DialogChosenEvent args)

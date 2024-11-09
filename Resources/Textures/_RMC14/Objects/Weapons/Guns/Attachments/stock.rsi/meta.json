@@ -211,7 +211,23 @@
     {
       "name": "type71_stock"
     },
-    { "name": "m60_stock"
+    {
+      "name": "m60_stock"
+    },
+    {
+      "name": "xm51_stock"
+    },
+    {
+      "name": "s_xm51_stock"
+    },
+    {
+      "name": "d_xm51_stock"
+    },
+    {
+      "name": "c_xm51_stock"
+    },
+    {
+      "name": "u_xm51_stock"
     }
   ]
 }

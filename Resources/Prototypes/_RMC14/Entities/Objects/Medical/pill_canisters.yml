@@ -9,6 +9,7 @@
     sprite: _RMC14/Objects/Chemistry/pill_canister.rsi
     layers:
     - state: pill_canister
+      map: [ "bottleSurfaceLayer" ]
     - state: open
       map: [ "openLayer" ]
     - state: closed
@@ -35,6 +36,21 @@
     sprite: _RMC14/Objects/Chemistry/pill_canister.rsi
   - type: GenericVisualizer
     visuals:
+      enum.PillBottleVisuals.Color:
+        bottleSurfaceLayer:
+          Orange: {state: pill_canister}
+          Blue: {state: pill_canister1}
+          Yellow: {state: pill_canister2}
+          Light_Purple: {state: pill_canister3}
+          Light_Grey: {state: pill_canister4}
+          White: {state: pill_canister5}
+          Light_Green: {state: pill_canister6}
+          Cyan: {state: pill_canister7}
+          Bordeaux: {state: pill_canister8}
+          Aquamarine: {state: pill_canister9}
+          Grey: {state: pill_canister10}
+          Red: {state: pill_canister11}
+          Black: {state: pill_canister12}
       enum.SharedBagOpenVisuals.BagState:
         openLayer:
           Open: { visible: true }
@@ -52,6 +68,14 @@
   - type: IconLabel
     textColor: White
     storedOffset: 3, 12
+  - type: UserInterface
+    interfaces:
+      enum.ChangePillBottleUIKey.Key:
+        type: RMCChangePillBottleColorBui
+        requireInputValidation: false
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+
 
 - type: entity
   parent: CMPillCanister
@@ -62,6 +86,7 @@
   - type: Sprite
     layers:
     - state: pill_canister11
+      map: [ "bottleSurfaceLayer" ]
     - state: open
       map: [ "openLayer" ]
     - state: closed
@@ -82,6 +107,7 @@
   - type: Sprite
     layers:
     - state: pill_canister1
+      map: [ "bottleSurfaceLayer" ]
     - state: open
       map: [ "openLayer" ]
     - state: closed
@@ -102,6 +128,7 @@
   - type: Sprite
     layers:
     - state: pill_canister6
+      map: [ "bottleSurfaceLayer" ]
     - state: open
       map: [ "openLayer" ]
     - state: closed
@@ -122,6 +149,7 @@
   - type: Sprite
     layers:
     - state: pill_canister3
+      map: [ "bottleSurfaceLayer" ]
     - state: open
       map: [ "openLayer" ]
     - state: closed
@@ -142,6 +170,7 @@
   - type: Sprite
     layers:
     - state: pill_canister2
+      map: [ "bottleSurfaceLayer" ]
     - state: open
       map: [ "openLayer" ]
     - state: closed
@@ -162,6 +191,7 @@
   - type: Sprite
     layers:
     - state: pill_canister7 # TODO RMC14 idk which canister this uses
+      map: [ "bottleSurfaceLayer" ]
     - state: open
       map: [ "openLayer" ]
     - state: closed
