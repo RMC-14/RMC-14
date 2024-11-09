@@ -54,6 +54,7 @@
     - DoorXenoResinThick
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+    canUpgrade: true
   - type: XenoDevour
   - type: XenoPheromones
     pheromonesMultiplier: 2.5

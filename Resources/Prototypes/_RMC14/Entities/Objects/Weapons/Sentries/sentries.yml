@@ -4,6 +4,8 @@
   id: RMCBaseSentry #Conversion Rate for turret vision range = CM + 1
   name: turret
   components:
+  - type: Corrodible
+    timeToApply: 4
   - type: Item
     size: Normal
   - type: Clickable

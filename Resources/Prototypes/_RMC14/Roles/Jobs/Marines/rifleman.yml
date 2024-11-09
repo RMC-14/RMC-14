@@ -10,6 +10,11 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - Rifleman
+  hasIcon: false
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: private
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
@@ -21,10 +26,6 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: "RFN"
-  hasIcon: false
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: private
 
 - type: startingGear
   id: CMGearRifleman

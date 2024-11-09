@@ -172,6 +172,8 @@
       enum.XenoParasiteGhostUI.Key:
         type: XenoParasiteGhostBui
         requireInputValidation: false
+      enum.DialogUiKey.Key:
+        type: DialogBui
   - type: TypingIndicator
     proto: alien
   - type: MovedByPressure

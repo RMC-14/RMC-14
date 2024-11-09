@@ -54,6 +54,9 @@
       enum.XenoFindParasiteUI.Key:
         type: FindParasiteBoundUserInterface
         requireInputValidation: false
+      enum.DialogUiKey.Key:
+        type: DialogBui
+        requireInputValidation: false
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui
   - type: IntrinsicUI

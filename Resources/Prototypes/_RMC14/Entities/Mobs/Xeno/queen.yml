@@ -51,8 +51,7 @@
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
     - ActionXenoGrowOvipositor
-#    - ActionXenoBanishXenonid
-#    - ActionXenoReadmitXenonid
+    - ActionXenoManageHive
 #    - ActionXenoRoyalJelly
 #    - ActionXenoMarkResin
     # Mature
@@ -199,3 +198,11 @@
     enabled: false
   - type: RMCPointing
     arrow: RMCPointingArrowBigQueen
+  - type: ManageHive
+  - type: HiveLeaderGranter
+  - type: XenoHeal
+
+- type: entity
+  id: XenoLeaderPheromoneRelay
+  components:
+  - type: XenoPheromones

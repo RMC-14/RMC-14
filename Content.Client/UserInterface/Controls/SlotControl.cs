@@ -17,6 +17,7 @@ namespace Content.Client.UserInterface.Controls
     {
         [Dependency] private readonly IEntityManager _entities = default!;
         [Dependency] private readonly IPrototypeManager _prototype = default!;
+        [Dependency] private readonly ILocalizationManager _loc = default!;
 
         public static int DefaultButtonSize = 64;
 
@@ -248,8 +249,12 @@ namespace Content.Client.UserInterface.Controls
             IconLabel.FontColorOverride = Color.White;
             if (_entities.TryGetComponent(Entity, out IconLabelComponent? iconLabel))
             {
-                if (iconLabel.LabelTextLocId is not null && Loc.TryGetString(iconLabel.LabelTextLocId, out String? labelText))
+                if (iconLabel.LabelTextLocId is not null && _loc.TryGetString(iconLabel.LabelTextLocId, out String? labelText, iconLabel.LabelTextParams.ToArray()))
                 {
+                    if (labelText.Length > iconLabel.LabelMaxSize)
+                    {
+                        return;
+                    }
                     IconLabel.Text = labelText;
                 }
 

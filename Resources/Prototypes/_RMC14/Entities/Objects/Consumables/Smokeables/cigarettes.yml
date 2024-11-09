@@ -136,7 +136,7 @@
       - Cigarette
   - type: StorageFill
     contents:
-    - id: Cigarette
+    - id: RMCCigarette
       amount: 20
   - type: ItemCounter
     count:
@@ -171,6 +171,34 @@
     quickEquip: false
     slots:
     - suitstorage
+
+- type: entity
+  parent: Cigarette
+  id: RMCCigarette
+  description: An unfiltered roll of tobacco and nicotine. Smoking this releases even more tar and soot into your mouth.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/unfiltered_roll.rsi
+    state: unlit-icon
+
+- type: entity
+  id: RMCCigaretteSpent
+  parent: RMCCigarette
+  suffix: spent
+  components:
+  - type: Sprite
+    state: burnt-icon
+  - type: Smokable
+    state: Burnt
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 20
+  - type: Tag
+    tags:
+      - Cigarette
+      - Trash
+      - Burnt
 
 - type: entity
   parent: RMCCigarettePackLuckySloths

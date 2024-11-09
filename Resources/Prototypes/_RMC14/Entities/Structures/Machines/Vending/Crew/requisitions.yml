@@ -43,10 +43,10 @@
         amount: 3
       - id: WeaponShotgunMOU53
         amount: 2
-      #- id: XM88 Heavy Rifle
-      #  amount: 3
-      #- id: RMCM54CE2Case
-      #  amount: 3
+      - id: RMCCaseXM88
+        amount: 3
+      - id: RMCM54CE2Case
+        amount: 3
       #- id: M41A Pulse Rifle MK1
       #  amount: 3
       #- id: M56D Heavy Machine Gun
@@ -57,8 +57,8 @@
       #  amount: 2
       #- id: M79 Grenade Launcher
       #  amount: 3
-      #- id: XM51 Breaching Scattergun
-      #  amount: 3
+      - id: RMCXM51Case
+        amount: 3
     - name: Explosives
       entries:
       - id: CMGrenadeFragOld
@@ -119,8 +119,8 @@
         amount: 1
       - id: RMCSatchelWelder
         amount: 5
-      #- id: IMP Ammo Rack
-      #   amount: 2
+      - id: RMCBackpackAmmo
+        amount: 2
       - id: RMCBackpackRTO
         amount: 2
       #- id: Parachute
@@ -268,13 +268,15 @@
     - name: Regular ammunition
       entries:
       - id: RMCBoxShotgunBuckshot
-        amount: 40
+        amount: 56
       - id: RMCBoxShotgunFlechette
-        amount: 40
+        amount: 56
       - id: RMCBoxShotgunSlugs
-        amount: 40
+        amount: 56
+      - id: RMCBoxShotgunBreaching
+        amount: 4
       - id: CMMagazineRifleM4SPR
-        amount: 45
+        amount: 60
       - id: CMMagazineRifleM54C
         amount: 100
       - id: CMMagazineSMGM63
@@ -282,7 +284,7 @@
       - id: RMCSpeedLoaderM44
         amount: 80
       - id: CMMagazinePistolM1984
-        amount: 102
+        amount: 100
     - name: Armor-piercing ammunition
       entries:
       - id: CMMagazinePistolM77AP
@@ -310,11 +312,13 @@
       #- id: M44 Heavy Speed Loader (.44)
       #  amount: 10
       - id: RMCSpeedLoader44Marksman
-        amount: 6
+        amount: 16 # TODO RMC14 6 once heavy is in
       #- id: M4A3 HP Magazine (9mm)
       #  amount: 2
-      #- id: M41AE2 Holo Target Rounds (10x24mm)
+      #- id: M54CE2 Holo Target Rounds (10x24mm)
       #  amount: 2
+      - id: RMCBox458SOCOM
+        amount: 4
     - name: Restricted firearm ammunition
       entries:
       - id: CMMagazinePistolMK80
@@ -323,8 +327,8 @@
         amount: 13
       #- id: M240 Incinerator Tank
       #  amount: 3
-#      - id: CMMagazineRifleM54CE2
-#        amount: 3
+      - id: CMMagazineRifleM54CE2
+        amount: 3
       #- id: M41A MK1 Magazine (10x24mm)
       #  amount: 5
       #- id: M41A MK1 AP Magazine (10x24mm)
@@ -333,8 +337,8 @@
       #  amount: 2
       #- id: M2C Box Magazine
       #  amount: 2
-      #- id: XM51 Magazine (16g)
-      #  amount: 3
+      - id: RMCMagazineShotgunXM51
+        amount: 3
     - name: Shotgun shell boxes # I don't think we have those yet
       entries: [ ]
       #- id: Shotgun Shell Box (Buckshot x 100)
@@ -467,18 +471,18 @@
         amount: 20
       - id: CMArmorHelmetM10Medic
         amount: 20
-      #- id: M3 Pattern Carrier Marine Armor
-      #  amount: 20
-      #- id: M3 Pattern Padded Marine Armor
-      #  amount: 20
-      #- id: M3 Pattern Padless Marine Armor
-      #  amount: 20
-      #- id: M3 Pattern Ridged Marine Armor
-      #  amount: 20
-      #- id: M3 Pattern Skull Marine Armor
-      #  amount: 20
-      - id: CMArmorM3Medium #TODO RMC: remove this when above is added
-        amount: 20
+      - id: RMCArmorM3MediumCarrier
+        amount: 15
+      - id: RMCArmorM3MediumPadded
+        amount: 15
+      - id: RMCArmorM3MediumPadless
+        amount: 15
+      - id: RMCArmorM3MediumRidged
+        amount: 15
+      - id: RMCArmorM3MediumSkull
+        amount: 15
+      - id: RMCArmorM3MediumSmooth
+        amount: 15
       - id: CMArmorM3Heavy
         amount: 10
       - id: CMArmorM3Light
