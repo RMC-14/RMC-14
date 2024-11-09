@@ -831,6 +831,7 @@
   - type: Clothing
     slots:
     - belt
+    - suitStorage
     sprite: _RMC14/Objects/Clothing/Belt/xm51.rsi
   - type: Storage
     maxItemSize: Large
@@ -841,9 +842,6 @@
       - RMCWeaponShotgunXM51
       - RMCMagazineShotgunXM51
       - RMCShellShotgun # TODO RMC14 bullet handfuls
-  - type: Tag
-    tags:
-    - RMCXM51Holster
   - type: FixedItemSizeStorage
   - type: CMHolster
     whitelist:
@@ -863,6 +861,9 @@
   - type: CMStorageVisualizer
     storageClosed: null
     storageOpen: null
+  - type: Tag
+    tags:
+    - RMCXM51Holster
 
 - type: Tag
   id: RMCXM51Holster
