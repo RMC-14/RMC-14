@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed hyposprays not having a delay on use for medically unskilled marines.
-    type: Fix
-  id: 461
-  time: '2024-07-25T22:02:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3272
-- author: DrSmugleaf
-  changes:
   - message: Fixed weapons specialist ammo erroneously saying that a limit was reached
       when trying to buy them. This limit only applies to kits.
     type: Fix
@@ -4865,5 +4858,21 @@
   id: 960
   time: '2024-11-09T04:18:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4769
+- author: DrSmugleaf
+  changes:
+  - message: Fixed stars sometimes not being shown to xenos for hive leaders.
+    type: Fix
+  - message: Fixed command tablet tacmap UI not opening.
+    type: Fix
+  - message: Fixed reagent grinder not being powered.
+    type: Fix
+  - message: Fixed queen heal not taking plasma.
+    type: Fix
+  - message: Fixed shotgun shell pouches and shotgun shell rig not being able to fit
+      458 SOCOM bullets.
+    type: Fix
+  id: 961
+  time: '2024-11-09T04:35:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4774
 Name: RMC14
 Order: -1
