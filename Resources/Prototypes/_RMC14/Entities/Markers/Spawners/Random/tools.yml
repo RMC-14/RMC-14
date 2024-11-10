@@ -82,7 +82,7 @@
       prototypes:
         # TODO:
         # technology_scanner x2
-        # packageWraprap x1
+        # packageWrap x1
         # bomb_supply x2
         - RMCSpawnerRandomPowercell # x3
         - RMCSpawnerRandomPowercell
