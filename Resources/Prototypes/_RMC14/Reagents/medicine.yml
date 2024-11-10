@@ -158,6 +158,7 @@
           min: 25
         key: ForcedSleep
         component: ForcedSleeping
+        refresh: false
         time: 2
         type: Add
 
