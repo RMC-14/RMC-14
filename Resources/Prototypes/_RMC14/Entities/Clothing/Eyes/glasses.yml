@@ -203,7 +203,7 @@
       enum.RMCEyeProtectionItemVisuals.Active:
         icon:
           True: { state: icon }
-          False: { state: icon_raised }
+          False: { state: up-icon }
 
 - type: entity
   parent: ClothingEyesBase

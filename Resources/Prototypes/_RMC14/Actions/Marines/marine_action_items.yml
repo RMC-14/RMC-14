@@ -64,10 +64,10 @@
   - type: InstantAction
     icon:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
-      state: icon_up
+      state: up-icon
     iconOn:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
-      state: icon_down
+      state: icon
     event: !type:ToggleActionEvent
     useDelay: 0.25
 
