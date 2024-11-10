@@ -1,5 +1,4 @@
-﻿# TODO RMC14 other effects
-- type: reagent
+﻿- type: reagent
   parent: [ CMReagentMedicine, Dylovene ]
   id: CMDylovene
   name: reagent-name-cmdylovene
@@ -13,7 +12,7 @@
       - !type:EqualHealthChange
         damage:
         - Toxin: -2
-      - !type:AdjustEyeDamage
+      - !type:ChemHealEyeDamage
         conditions:
         - !type:ReagentThreshold
           min: 30
@@ -43,12 +42,12 @@
         conditions:
         - !type:ReagentThreshold
           min: 50
-        key: Drunk
-        component: Drunk
-        time: 60
+        key: ForcedSleep
+        component: ForcedSleeping
+        time: 2
+        refresh: false
         type: Add
 
-# TODO RMC14 other effects
 # TODO add another alcohols to decrease
 - type: reagent
   parent: [ CMReagentMedicine, Ethylredoxrazine ]
@@ -104,7 +103,6 @@
           groups:
             Toxin: 6
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Arithrazine ]
   id: CMArithrazine
@@ -129,7 +127,12 @@
           min: 15
         damage:
           groups:
-            Brute: 3 # TODO: change to 1 eye damage + 2 brute damage
+            Brute: 2
+      - !type:ChemHealEyeDamage
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        amount: 1
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -153,12 +156,11 @@
         conditions:
         - !type:ReagentThreshold
           min: 25
-        key: Drunk
-        component: Drunk
-        time: 30
+        key: ForcedSleep
+        component: ForcedSleeping
+        time: 2
         type: Add
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Bicaridine ]
   id: CMBicaridine
@@ -217,7 +219,6 @@
             Asphyxiation: -1
             Cellular: -3
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Dermaline ]
   id: CMDermaline
@@ -249,7 +250,6 @@
             Burn: 9
             Toxin: 9
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Dexalin ]
   id: CMDexalin
@@ -280,7 +280,6 @@
             Brute: 4
             Toxin: 8
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, DexalinPlus ]
   id: CMDexalinPlus
@@ -352,7 +351,6 @@
         damage:
           Brute: 1
 
-# TODO RMC14 other effects
 # TODO RMC14 allow breathing in crit instead of reducing asphyxiation
 - type: reagent
   parent: [ CMReagentMedicine, Inaprovaline ]
@@ -401,7 +399,6 @@
         time: 40
         type: Add
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Kelotane ]
   id: CMKelotane
@@ -433,7 +430,6 @@
             Brute: 5.5
             Toxin: 5.5
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Leporazine ]
   id: CMLeporazine
@@ -468,12 +464,12 @@
         conditions:
         - !type:ReagentThreshold
           min: 50
-        key: Drunk
-        component: Drunk
-        time: 30
+        key: ForcedSleep
+        component: ForcedSleeping
+        time: 2
+        refresh: false
         type: Add
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, Tricordrazine ]
   id: CMTricordrazine
@@ -500,9 +496,15 @@
           min: 30
         damage:
           groups:
-            Brute: 1 # TODO: change to 0.5 eye damage + 0.5 brute damage
+            Brute: 0.5
             Burn: 0.5
             Toxin: 0.25
+      - !type:ChemHealEyeDamage
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        amount: 1 # can't make 0.5 eye damage because of int value
+        probability: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -516,12 +518,12 @@
         conditions:
         - !type:ReagentThreshold
           min: 50
-        key: Drunk
-        component: Drunk
-        time: 60
+        key: ForcedSleep
+        component: ForcedSleeping
+        time: 2
+        refresh: false
         type: Add
 
-# TODO RMC14 other effects
 - type: reagent
   parent: [ CMReagentMedicine, CMBicaridine ]
   id: CMMeralyne
@@ -552,8 +554,7 @@
             Burn: 9
             Toxin: 3
 
-# TODO RMC14 other effects
-# TODO RMC14 progressive eye healing
+# TODO RMC14 progressive eye healing ??? (for chemical eye damage healing is alrealdy progressive)
 # TODO RMC14 brain damage over 50u
 - type: reagent
   parent: [ CMReagentMedicine, CMDylovene ]
