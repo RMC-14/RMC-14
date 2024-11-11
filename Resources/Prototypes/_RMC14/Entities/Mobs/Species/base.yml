@@ -73,7 +73,7 @@
   - type: RMCSuitLight
   - type: HolocardState
   - type: Hunger
-    baseDecayRate: 0.5
+    baseDecayRate: 0.025
     thresholds:
       Overfed: 550
       Okay: 400
