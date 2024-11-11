@@ -742,3 +742,14 @@
     state: nova_quinn
   - type: PatronFigurine
     id: e017c450-686b-480b-bdc7-2fdbe1016f52
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronStella"Lake"Poley
+  name: Stella 'Lake' Poley figurine
+  description: "You're pretty sure this is a Diona. You're also pretty sure she's giving you the stink-eye."
+  components:
+  - type: Sprite
+    state: stella_lake_poley
+  - type: PatronFigurine
+    id: 53ad65dd-3846-41cc-b160-5357c9bfbb01
