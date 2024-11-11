@@ -426,15 +426,46 @@
   color: "#404030"
   metabolisms:
     Alcohol:
+      metabolismRate: 0.1
       effects:
-      - !type:ChemVomit
-        probability: 0.04
+      - !type:Drunk
+        boozePower: 6.38
+      - !type:Drunk
         conditions:
         - !type:ReagentThreshold
-          reagent: Ethanol
-          min: 12
+          min: 60
+        boozePower: 9.69
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 60
+        damage:
+          groups:
+            Toxin: 0.625
+            Oxygen: 1.25
+      - !type:ChemVomit
+        conditions:
+        - !type:ReagentThreshold
+          min: 60
+        probability: 0.12
       - !type:Drunk
-        boozePower: 2
+        conditions:
+        - !type:ReagentThreshold
+          min: 100
+        boozePower: 13.125
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 100
+        damage:
+          groups:
+            Toxin: 1.2
+            Oxygen: 2.5
+      - !type:ChemVomit
+        conditions:
+        - !type:ReagentThreshold
+          min: 100
+        probability: 0.25 #TODO Liver damage
 
 - type: reagent
   id: RMCSugar #Candy and grains
@@ -447,13 +478,14 @@
   unknown: true # Yes a health analyzer can't detect sugar. How about that
   metabolisms:
     Food:
+      metabolismRate: 0.1
       effects:
       - !type:SatiateHunger
         conditions:
-        - !type:ReagentThreshold #Only satiates when eaten with nutriment
+        - !type:ReagentThreshold #It needs it's thing to have some kinda food level to work
           reagent: Nutriment
           min: 0.1
-        factor: 1
+        factor: 0.18
   metamorphicSprite:
     sprite: Objects/Consumable/Drinks/sugarglass.rsi
     state: icon_empty
