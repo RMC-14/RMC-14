@@ -494,11 +494,11 @@
       #   points: 20
       - id: RMCMagazineSmartGun
         points: 20
-    # - name: Sidearm Ammunition # TODO RMC14 Port CO Sidearm
-    #   entries:
-    #   - id: CMMagazineMateba
-    #     points: 15
-    #   - id: CMMagazineMatebaAP
+    - name: Sidearm Ammunition
+      entries:
+      - id: RMCSpeedLoaderMateba
+        points: 15
+    #   - id: CMMagazineMatebaAP  # TODO RMC14 Port More Sidearm Ammo
     #     points: 20
     #   - id: CMMagazineDesertEagle
     #     points: 15
@@ -595,11 +595,15 @@
     - name: Personal Weapon
       choices: { CMWeapon: 1 }
       entries:
-      - id: CMWeaponPistolMK80  # These all come inside belts; but these don't exist so...
-        recommended: true       # TODO RMC14 Pistol Belt Fills
-      - id: CMWeaponPistolM1984
-      - id: CMWeaponPistolM77
-      - id: RMCWeaponRevolverM44
+      - id: RMCMK80BeltFilled
+        name: MK80 Pistol
+        recommended: true
+      - id: RMCM1984BeltFilled
+        name: M1984 Pistol
+      - id: CMM77BeltFilled
+        name: M77 Pistol
+      - id: RMCM44BeltFilled
+        name: M44 Revolver
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
