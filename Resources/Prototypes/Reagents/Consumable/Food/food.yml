@@ -12,16 +12,16 @@
       metabolismRate: 0.1
       effects:
       - !type:SatiateHunger
-        factor: 30
+        factor: 35
       - !type:ModifyBloodLevel
         conditions:
         - !type:Hunger
-          min: 400 #Should be 200 but just to make it so you only get blood when pretty full
+          min: 200
         amount: 0.5
-      - !type:SatiateHunger # Really need a property to track blood level so we don't just loss free nutrition
+      - !type:SatiateHunger
         conditions:
         - !type:Hunger
-          min: 400
+          min: 200
         factor: -5
   pricePerUnit: 2
 

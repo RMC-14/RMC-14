@@ -481,11 +481,7 @@
       metabolismRate: 0.1
       effects:
       - !type:SatiateHunger
-        conditions:
-        - !type:ReagentThreshold #It needs it's thing to have some kinda food level to work
-          reagent: Nutriment
-          min: 0.1
-        factor: 15 #Based off nutriments value
+        factor: 5
   metamorphicSprite:
     sprite: Objects/Consumable/Drinks/sugarglass.rsi
     state: icon_empty
