@@ -159,13 +159,13 @@
       - !type:ModifyBloodLevel
         conditions:
         - !type:Hunger
-          min: 72 # Note in CM it starts at 200+ nutrition, with max nutrition being 550, this is just converted to work with 200 max
+          min: 200
         amount: 1.5
       - !type:SatiateHunger
         conditions:
         - !type:Hunger
-          min: 72 # Ditto
-        factor: -6 #Note both scaled up because of metabolism rate
+          min: 200
+        factor: -15
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -177,7 +177,7 @@
         conditions:
         - !type:ReagentThreshold
           min: 50
-        factor: -27 #Unscaled to max -7.5 on CM with their 550 max hunger
+        factor: -75
 
 - type: reagent
   id: RMCLithium
@@ -442,7 +442,7 @@
         damage:
           groups:
             Toxin: 0.625
-            Oxygen: 1.25
+            Airloss: 1.25
       - !type:ChemVomit
         conditions:
         - !type:ReagentThreshold
@@ -460,7 +460,7 @@
         damage:
           groups:
             Toxin: 1.2
-            Oxygen: 2.5
+            Airloss: 2.5
       - !type:ChemVomit
         conditions:
         - !type:ReagentThreshold
@@ -485,7 +485,7 @@
         - !type:ReagentThreshold #It needs it's thing to have some kinda food level to work
           reagent: Nutriment
           min: 0.1
-        factor: 0.18 #Scaled with current hunger values
+        factor: 1 #Scaled with current hunger values
   metamorphicSprite:
     sprite: Objects/Consumable/Drinks/sugarglass.rsi
     state: icon_empty
