@@ -19,6 +19,9 @@
   metabolisms:
     Medicine:
       metabolismRate: 0.005 # 1 every 200 seconds?
+      effects:
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCChlorine
@@ -62,6 +65,9 @@
   metabolisms:
     Medicine:
       metabolismRate: 0.005 # 1 every 200 seconds?
+      effects:
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCFluorine
@@ -116,6 +122,9 @@
   metabolisms:
     Medicine:
       metabolismRate: 0.005 # 1 every 200 seconds?
+      effects:
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent #TODO if over blood limit take limb damage, oxy damage, move slower
   id: RMCIron
@@ -209,6 +218,9 @@
   metabolisms:
     Medicine:
       metabolismRate: 0.005 # 1 every 200 seconds?
+      effects:
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCPhosphorus
@@ -221,6 +233,9 @@
   metabolisms:
     Medicine:
       metabolismRate: 0.005 # 1 every 200 seconds?
+      effects:
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCRadium
@@ -283,6 +298,9 @@
   metabolisms:
     Medicine:
       metabolismRate: 0.005 # 1 every 200 seconds?
+      effects:
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCSodium
@@ -295,6 +313,9 @@
   metabolisms:
     Medicine:
       metabolismRate: 0.005 # 1 every 200 seconds?
+      effects:
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCUranium
@@ -336,6 +357,9 @@
   metabolisms:
     Medicine:
       metabolismRate: 0.005 # 1 every 200 seconds?
+      effects:
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCNitrogen
@@ -347,6 +371,9 @@
   metabolisms:
     Medicine:
       metabolismRate: 0.005 # 1 every 200 seconds?
+      effects:
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCEthanol
