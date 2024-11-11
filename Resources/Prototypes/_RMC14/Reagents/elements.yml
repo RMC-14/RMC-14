@@ -7,6 +7,13 @@
   physicalDesc: reagent-physical-desc-metallic
   flavor: metallic
   color: "#A8A8A8"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:ChemVomit
+        probability: 0
+
 
 - type: reagent
   id: RMCCarbon
@@ -110,6 +117,12 @@
   physicalDesc: reagent-physical-desc-metallic
   flavor: metallic
   color: "#F7C430"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCHydrogen
@@ -277,6 +290,12 @@
   physicalDesc: reagent-physical-desc-crystalline
   flavor: metallic
   color: "#A8A8A8"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCSilver
@@ -286,6 +305,12 @@
   physicalDesc: reagent-physical-desc-reasonably-metallic
   flavor: metallic
   color: "#D0D0D0"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCSulfur
