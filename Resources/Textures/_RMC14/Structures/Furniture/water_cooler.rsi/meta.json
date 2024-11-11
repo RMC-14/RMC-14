@@ -9,9 +9,9 @@
   "states": [
     {
       "name": "water_cooler"
-		},
-		{
-			"name": "water_cooler_2"
-		}
+    },
+    {
+      "name": "water_cooler_2"
+    }
   ]
 }
