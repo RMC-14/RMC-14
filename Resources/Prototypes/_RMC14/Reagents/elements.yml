@@ -252,14 +252,14 @@
       - !type:HealthChange
         damage:
           types:
-            Genetic: 0.5
+            Cellular: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 30
         damage:
           types:
-            Genetic: 2
+            Cellular: 2
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -331,14 +331,14 @@
       - !type:HealthChange
         damage:
           types:
-            Genetic: 0.5
+            Cellular: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 30
         damage:
           types:
-            Genetic: 2
+            Cellular: 2
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
