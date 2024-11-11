@@ -485,7 +485,7 @@
         - !type:ReagentThreshold #It needs it's thing to have some kinda food level to work
           reagent: Nutriment
           min: 0.1
-        factor: 0.18
+        factor: 0.18 #Scaled with current hunger values
   metamorphicSprite:
     sprite: Objects/Consumable/Drinks/sugarglass.rsi
     state: icon_empty
