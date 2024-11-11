@@ -265,7 +265,7 @@
         - !type:ReagentThreshold
           min: 50
         damage:
-          types:
+          groups:
             Brute: 2
 #TODO causes internal bleeding, OD organ damage, critical causes even more
 
@@ -344,7 +344,7 @@
         - !type:ReagentThreshold
           min: 50
         damage:
-          types:
+          groups:
             Brute: 2
 
 - type: reagent
