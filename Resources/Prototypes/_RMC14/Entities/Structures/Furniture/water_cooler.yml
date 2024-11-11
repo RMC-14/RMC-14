@@ -6,7 +6,19 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/water_cooler.rsi
-    state: water_cooler
+    state: water_cooler    
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.3
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - MobMask
+        - BulletImpassable
   - type: Appearance
   - type: SolutionContainerManager
     solutions:
