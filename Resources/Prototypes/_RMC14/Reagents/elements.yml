@@ -7,6 +7,7 @@
   physicalDesc: reagent-physical-desc-metallic
   flavor: metallic
   color: "#A8A8A8"
+  unknown: true
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -23,9 +24,10 @@
   physicalDesc: reagent-physical-desc-crystalline
   flavor: bitter
   color: "#1C1300"
+  unknown: true
   metabolisms:
     Medicine:
-      metabolismRate: 0.01 # 1 every 200 seconds in CM?
+      metabolismRate: 0.01 # 1 every 200 seconds in CM? 0.005 would be right but impossible because fixed point 2
       effects:
       - !type:ChemVomit
         probability: 0
@@ -38,7 +40,7 @@
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
   color: "#808080"
-  overdose: 30
+  unknown: true
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -148,7 +150,7 @@
   desc: reagent-desc-iron
   physicalDesc: reagent-physical-desc-metallic
   flavor: metallic
-  color: "#434b4d"
+  color: "#C8A5DC"
   overdose: 30
   metabolisms:
     Medicine:
@@ -184,7 +186,8 @@
   desc: reagent-desc-lithium
   physicalDesc: reagent-physical-desc-shiny
   flavor: metallic
-  color: "#ff356f"
+  color: "#808080"
+  unknown: true
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -209,6 +212,7 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: metallic
   color: "#484848"
+  unknown: true
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -229,6 +233,7 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: metallic
   color: "#A0A0A0"
+  unknown: true
   metabolisms:
     Medicine:
       metabolismRate: 0.01 # 1 every 200 seconds in CM?
@@ -244,6 +249,7 @@
   physicalDesc: reagent-physical-desc-powdery
   flavor: metallic
   color: "#832828"
+  unknown: true
   metabolisms:
     Medicine:
       metabolismRate: 0.01 # 1 every 200 seconds in CM?
@@ -260,7 +266,7 @@
   physicalDesc: reagent-physical-desc-glowing
   flavor: metallic
   color: "#C7C7C7"
-  overdose: 30
+  unknown: true
   metabolisms:
     Poison:
       effects:
@@ -292,6 +298,7 @@
   physicalDesc: reagent-physical-desc-crystalline
   flavor: metallic
   color: "#A8A8A8"
+  unknown: true
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -307,6 +314,7 @@
   physicalDesc: reagent-physical-desc-reasonably-metallic
   flavor: metallic
   color: "#D0D0D0"
+  unknown: true
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -322,6 +330,7 @@
   physicalDesc: reagent-physical-desc-powdery
   flavor: bitter
   color: "#BF8C00"
+  unknown: true
   metabolisms:
     Medicine:
       metabolismRate: 0.01 # 1 every 200 seconds in CM?
@@ -337,6 +346,7 @@
   physicalDesc: reagent-physical-desc-metallic
   flavor: bitter
   color: "#808080"
+  unknown: true
   metabolisms:
     Medicine:
       metabolismRate: 0.01 # 1 every 200 seconds in CM?
@@ -352,7 +362,7 @@
   physicalDesc: reagent-physical-desc-metallic
   flavor: metallic
   color: "#B8B8C0"
-  overdose: 30
+  unknown: true
   metabolisms:
     Poison:
       effects:
@@ -382,6 +392,7 @@
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
   color: "#808080"
+  unknown: true
   metabolisms:
     Medicine:
       metabolismRate: 0.01 # 1 every 200 seconds in CM?
@@ -396,6 +407,7 @@
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
   color: "#808080"
+  unknown: true
   metabolisms:
     Medicine:
       metabolismRate: 0.01 # 1 every 200 seconds in CM?
@@ -432,6 +444,7 @@
   physicalDesc: reagent-physical-desc-sweet
   flavor: sweet
   color: white
+  unknown: true # Yes a health analyzer can't detect sugar. How about that
   metabolisms:
     Food:
       effects:
@@ -456,8 +469,7 @@
   physicalDesc: reagent-physical-desc-oily
   flavor: acid
   color: "#DB5008"
-  recognizable: true
-  overdose: 30
+  unknown: true
   metabolisms:
     Poison:
       metabolismRate: 0.1
