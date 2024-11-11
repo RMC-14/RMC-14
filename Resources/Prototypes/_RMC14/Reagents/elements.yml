@@ -38,6 +38,7 @@
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
   color: "#808080"
+  overdose: 30
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -84,6 +85,7 @@
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
   color: "#808080"
+  overdose: 30
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -147,8 +149,7 @@
   physicalDesc: reagent-physical-desc-metallic
   flavor: metallic
   color: "#434b4d"
-  boilingPoint: 2862.0
-  meltingPoint: 1538.0
+  overdose: 30
   metabolisms:
     Medicine:
       metabolismRate: 0.1
@@ -162,7 +163,7 @@
         conditions:
         - !type:Hunger
           min: 72 # Ditto
-        factor: -0.6
+        factor: -6 #Note both scaled up because of metabolism rate
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -174,7 +175,7 @@
         conditions:
         - !type:ReagentThreshold
           min: 50
-        factor: -2.7 #Unscaled to max -7.5 on CM with their 550 max hunger
+        factor: -27 #Unscaled to max -7.5 on CM with their 550 max hunger
 
 - type: reagent
   id: RMCLithium
@@ -259,6 +260,7 @@
   physicalDesc: reagent-physical-desc-glowing
   flavor: metallic
   color: "#C7C7C7"
+  overdose: 30
   metabolisms:
     Poison:
       effects:
@@ -350,6 +352,7 @@
   physicalDesc: reagent-physical-desc-metallic
   flavor: metallic
   color: "#B8B8C0"
+  overdose: 30
   metabolisms:
     Poison:
       effects:
@@ -409,8 +412,6 @@
   physicalDesc: reagent-physical-desc-strong-smelling
   flavor: alcohol
   color: "#404030"
-  boilingPoint: 78.2
-  meltingPoint: -114.1
   metabolisms:
     Alcohol:
       effects:
@@ -456,6 +457,7 @@
   flavor: acid
   color: "#DB5008"
   recognizable: true
+  overdose: 30
   metabolisms:
     Poison:
       metabolismRate: 0.1
