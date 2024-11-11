@@ -269,6 +269,7 @@
   unknown: true
   metabolisms:
     Poison:
+      metabolismRate: 0.1
       effects:
       - !type:HealthChange
         damage:
@@ -365,6 +366,7 @@
   unknown: true
   metabolisms:
     Poison:
+      metabolismRate: 0.1
       effects:
       - !type:HealthChange
         damage:
