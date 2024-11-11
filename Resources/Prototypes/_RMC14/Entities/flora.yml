@@ -243,3 +243,27 @@
   components:
   - type: Sprite
     state: educated_rock
+
+- type: entity
+  parent: RMCBaseRockDestructible
+  id: RMCBoulder1
+  name: boulder
+  description: A large rock. It's not cooking anything.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Flora/boulder.rsi
+    state: boulder1
+
+- type: entity
+  parent: RMCBoulder1
+  id: RMCBoulder2
+  components:
+  - type: Sprite
+    state: boulder2
+    
+- type: entity
+  parent: RMCBoulder1
+  id: RMCBoulder3
+  components:
+  - type: Sprite
+    state: boulder3
