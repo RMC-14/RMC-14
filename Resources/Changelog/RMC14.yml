@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed dropships taking 1 second to travel.
-    type: Fix
-  id: 467
-  time: '2024-07-26T02:18:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3283
-- author: DrSmugleaf
-  changes:
   - message: Fixed the pheromones radial appearing in kingdom com. It now appears
       centered on your character.
     type: Fix
@@ -4876,5 +4869,12 @@
   id: 966
   time: '2024-11-12T05:53:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4728
+- author: CyberTropic
+  changes:
+  - message: Added couch, water cooler.
+    type: Add
+  id: 967
+  time: '2024-11-12T05:55:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4794
 Name: RMC14
 Order: -1
