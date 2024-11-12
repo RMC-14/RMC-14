@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed Requisitions not getting their free 80 m44 speed loaders round-start.
-    type: Fix
-  id: 465
-  time: '2024-07-25T22:55:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3276
-- author: DrSmugleaf
-  changes:
   - message: Fixed the Boiler's Bombard projectile colliding with xenonids of the
       same hive. It can now be shot through friendly xenonids.
     type: Fix
@@ -4877,5 +4870,12 @@
   id: 964
   time: '2024-11-09T05:23:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4775
+- author: CyberTropic
+  changes:
+  - message: Added random spawners for powercells, toolboxes, and tech supplies.
+    type: Add
+  id: 965
+  time: '2024-11-12T05:51:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4793
 Name: RMC14
 Order: -1
