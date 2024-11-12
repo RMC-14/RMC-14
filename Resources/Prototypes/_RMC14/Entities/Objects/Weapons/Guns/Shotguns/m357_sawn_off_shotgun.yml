@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [ RMCBaseBreechloader, RMCBaseAttachableHolder ]
+  parent: [ WeaponShotgunM357, RMCBaseAttachableHolder ]
   name: Sawn-Off M357 Rival
   id: WeaponShotgunM357Sawn
   description: A double barrel shotgun produced by Aegis. Archaic, sturdy, affordable. It has been artificially shortened to reduce range but increase damage and spread.

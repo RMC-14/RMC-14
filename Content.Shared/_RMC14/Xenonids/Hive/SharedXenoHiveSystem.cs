@@ -1,11 +1,17 @@
 ﻿using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Xenonids.Announce;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mind;
 using Content.Shared.Mobs;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
@@ -16,11 +22,18 @@ namespace Content.Shared._RMC14.Xenonids.Hive;
 
 public abstract class SharedXenoHiveSystem : EntitySystem
 {
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedNightVisionSystem _nightVision = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
 
     private EntityQuery<HiveComponent> _query;
@@ -242,6 +255,72 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             return false;
 
         return hive.Comp.FreeSlots.TryGetValue(caste, out value);
+    }
+
+    public void IncreaseBurrowedLarva(int amount)
+    {
+        var hives = EntityQueryEnumerator<HiveComponent>();
+        while (hives.MoveNext(out var uid, out var hive))
+        {
+            hive.BurrowedLarva += amount;
+            Dirty(uid, hive);
+        }
+    }
+
+    public void JoinBurrowedLarva(Entity<HiveComponent> hive, EntityUid user)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (hive.Comp.BurrowedLarva <= 0)
+            return;
+
+        EntityUid? spawned = null;
+
+        bool TrySpawnAt<T>() where T : Component
+        {
+            var candidates = EntityQueryEnumerator<T, HiveMemberComponent>();
+            while (candidates.MoveNext(out var uid, out _, out var member))
+            {
+                if (member.Hive != hive)
+                    continue;
+
+                if (_mobState.IsDead(uid))
+                    continue;
+
+                var position = _transform.GetMoverCoordinates(uid);
+                spawned = SpawnAtPosition(hive.Comp.BurrowedLarvaId, position);
+                return true;
+            }
+
+            return false;
+        }
+
+        if (!TrySpawnAt<HiveCoreComponent>() &&
+            !TrySpawnAt<XenoEvolutionGranterComponent>() &&
+            !TrySpawnAt<XenoComponent>())
+        {
+            return;
+        }
+
+        if (spawned == null)
+            return;
+
+        hive.Comp.BurrowedLarva--;
+        Dirty(hive);
+
+        _xeno.MakeXeno(spawned.Value);
+        _hive.SetHive(spawned.Value, hive);
+
+        if (TryComp(user, out ActorComponent? actor))
+        {
+            if (!_mind.TryGetMind(actor.PlayerSession.UserId, out var mind))
+                mind = _mind.CreateMind(actor.PlayerSession.UserId);
+
+            _mind.TransferTo(mind.Value, spawned);
+        }
+
+        _adminLog.Add(LogType.RMCBurrowedLarva, $"{ToPrettyString(user):player} took a burrowed larva from hive {ToPrettyString(hive):hive}.");
     }
 }
 

@@ -19,3 +19,7 @@
         grinder:
           True: {state: "juicer1"}
           False: {state: "juicer0"}
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 100
+    channel: Equipment

@@ -74,12 +74,13 @@
 
 - type: entity
   id: CMDefibrillator
-  parent: [CMBaseDefibrillator, RMCPowerCellSlot]
+  parent: [CMBaseDefibrillator, RMCPowerCellSlotUnremovable]
   suffix: RMC14
   components:
   - type: PowerCellDraw
     enabled: false
-    useRate: 100
+    useRate: 66
+  - type: RMCPowerUsageDisplay
 
 - type: entity
   id: CMDefibrillatorEmpty

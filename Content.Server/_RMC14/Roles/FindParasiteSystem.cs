@@ -4,18 +4,13 @@ using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared.Coordinates;
 using Content.Shared.Ghost;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Verbs;
 using Robust.Shared.Console;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Content.Server._RMC14.Roles.FindParasite;
+namespace Content.Server._RMC14.Roles;
+
 public sealed partial class FindParasiteSystem : EntitySystem
 {
     [Dependency] private readonly IConsoleHost _host = default!;

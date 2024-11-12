@@ -121,7 +121,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
 
     private void OnBackpackGetItemActions(Entity<RotaryPhoneBackpackComponent> ent, ref GetItemActionsEvent args)
     {
-        if (args.InHands || (args.SlotFlags & ent.Comp.Slot) == 0)
+        if ((args.SlotFlags & ent.Comp.Slot) == 0 && !args.InHands)
             return;
 
         args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId, ent);

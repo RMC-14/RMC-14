@@ -6,6 +6,7 @@ rmc-storage-limit-max-mags = You can't fit more magazines in the belt!
 rmc-storage-limit-max-loaders = You can't fit more speedloaders in the belt!
 rmc-storage-limit-max-shells = You can't fit more shells in the belt!
 rmc-storage-limit-max-ammo = You can't fit more ammo in the belt!
+rmc-storage-limit-max-ammo-webbing = You can't fit more ammo in the webbing!
 rmc-storage-limit-one-binoculars = That already holds a pair of binoculars!
 rmc-storage-limit-one-command-tablet = That already holds a tablet!
 rmc-storage-nothing-left = {CAPITALIZE(THE($storage))} is empty. Nothing to grab.

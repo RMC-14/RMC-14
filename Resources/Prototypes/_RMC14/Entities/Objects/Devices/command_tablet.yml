@@ -18,10 +18,12 @@
     interfaces:
       enum.MarineCommunicationsComputerUI.Key:
         type: MarineCommunicationsComputerBui
+      enum.TacticalMapComputerUi.Key:
+        type: TacticalMapComputerBui
   - type: MarineCommunicationsComputer
   - type: Tag
     tags:
     - CommandTablet
-  
+
 - type: Tag
   id: CommandTablet
