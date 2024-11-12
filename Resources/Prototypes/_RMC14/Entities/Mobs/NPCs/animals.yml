@@ -222,7 +222,7 @@
   parent: MarkerBase
   id: CMSpawnMobOrion
   name: Orion Spawner
-  suffix: RCM
+  suffix: RMC
   components:
   - type: Sprite
     layers:
@@ -237,7 +237,7 @@
   parent: MarkerBase
   id: RMCSpawnMobGarry
   name: Garry Spawner
-  suffix: RCM
+  suffix: RMC
   components:
   - type: Sprite
     layers:
