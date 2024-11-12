@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed the Boiler's Bombard projectile colliding with xenonids of the
-      same hive. It can now be shot through friendly xenonids.
-    type: Fix
-  id: 466
-  time: '2024-07-26T01:43:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3277
-- author: DrSmugleaf
-  changes:
   - message: Fixed dropships taking 1 second to travel.
     type: Fix
   id: 467
@@ -4877,5 +4869,12 @@
   id: 965
   time: '2024-11-12T05:51:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4793
+- author: FungiFellow
+  changes:
+  - message: Increased all Turrets Range by One Tile Parity :)
+    type: Tweak
+  id: 966
+  time: '2024-11-12T05:53:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4728
 Name: RMC14
 Order: -1
