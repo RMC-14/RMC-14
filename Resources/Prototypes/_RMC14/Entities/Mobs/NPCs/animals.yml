@@ -235,7 +235,7 @@
 
 - type: entity
   parent: MarkerBase
-  id: CMSpawnMobGarry
+  id: RMCSpawnMobGarry
   name: Garry Spawner
   suffix: RCM
   components:
