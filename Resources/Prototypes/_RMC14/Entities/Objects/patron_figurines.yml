@@ -753,3 +753,14 @@
     state: stella_lake_poley
   - type: PatronFigurine
     id: 53ad65dd-3846-41cc-b160-5357c9bfbb01
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDarfmanForgemog
+  name: Darfman Forgemog figurine
+  description: "With this little Darfman ye always be in safe hands."
+  components:
+  - type: Sprite
+    state: darfman_forgemog
+  - type: PatronFigurine
+    id: 1dcc1fcc-8332-4573-8784-62dc491fb41e
