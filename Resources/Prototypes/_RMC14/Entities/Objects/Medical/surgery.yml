@@ -172,6 +172,9 @@
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: CMScalpel
+  - type: Tag
+    tags:
+    - RMCScalpel
 
 # - Predator
 - type: entity
