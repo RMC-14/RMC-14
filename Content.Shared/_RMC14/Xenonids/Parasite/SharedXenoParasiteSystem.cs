@@ -450,9 +450,10 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        var time = _timing.CurTime;
+
         if (_net.IsServer)
         {
-            var time = _timing.CurTime;
             var aiQuery = EntityQueryEnumerator<ParasiteAIComponent>();
             while (aiQuery.MoveNext(out var uid, out var ai))
             {
