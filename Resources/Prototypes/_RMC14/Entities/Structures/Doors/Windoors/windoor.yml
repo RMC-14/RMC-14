@@ -24,6 +24,9 @@
     - state: panel_open
       map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       visible: false
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: Construction
     graph: CMWindoor
     node: windoor

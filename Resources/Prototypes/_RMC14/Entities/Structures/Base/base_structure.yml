@@ -16,6 +16,7 @@
   components:
   - type: Corrodible
     timeToApply: 4
+    structure: true
 
 - type: entity
   parent: BaseStructure

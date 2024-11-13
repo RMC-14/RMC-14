@@ -4,6 +4,9 @@
   id: RMCBaseSentry
   name: turret
   components:
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: Item
     size: Normal
   - type: Clickable

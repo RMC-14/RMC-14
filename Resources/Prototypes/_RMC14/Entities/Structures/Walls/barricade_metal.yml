@@ -3,6 +3,8 @@
   parent: CMBaseStructureCorrodible
   id: CMBarricadeBase
   components:
+  - type: Corrodible
+    structure: false
   - type: Rotatable
   - type: Appearance
   - type: Fixtures

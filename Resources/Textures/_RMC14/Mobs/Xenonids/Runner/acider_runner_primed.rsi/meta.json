@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/bb00705387c77af87cf86b948e6b34441c60300c/icons/mob/xenonids/runner.dmi, modified by Vermidia",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "alive",
+      "directions": 4,
+      "delays": [
+        [
+          0.5,
+          0.3,
+          0.5,
+          0.3
+        ],
+        [
+          0.5,
+          0.3,
+          0.5,
+          0.3
+        ],
+        [
+          0.5,
+          0.3,
+          0.5,
+          0.3
+        ],
+        [
+          0.5,
+          0.3,
+          0.5,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "sleeping",
+      "delays":  [
+        [
+          0.5,
+          0.3,
+          0.5,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "crit",
+      "delays":  [
+        [
+          0.5,
+          0.3,
+          0.5,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "dead"
+    },
+{
+      "name": "runner_walk_3",
+      "directions": 4
+    },
+    {
+      "name": "runner_walk_2",
+      "directions": 4
+    },
+    {
+      "name": "runner_walk_1",
+      "directions": 4
+    },
+    {
+      "name": "runner_walk_0",
+      "directions": 4
+    },
+    {
+      "name": "runner_rest_3"
+    },
+    {
+      "name": "runner_rest_2"
+    },
+    {
+      "name": "runner_rest_1"
+    },
+    {
+      "name": "runner_rest_0"
+    },
+    {
+      "name": "runner_downed_3"
+    },
+    {
+      "name": "runner_downed_2"
+    },
+    {
+      "name": "runner_downed_1"
+    },
+    {
+      "name": "runner_downed_0"
+    },
+    {
+      "name": "runner_dissection"
+    }
+  ]
+}
