@@ -11,7 +11,7 @@ public sealed partial class ForTheHiveComponent : Component
     public string? BaseSprite;
 
     [DataField, AutoNetworkedField]
-    public string? ActiveSprite; // Note sprite frames have to match base sprite or you'll get client errors
+    public string? ActiveSprite;
 
     [DataField, AutoNetworkedField]
     public TimeSpan AnimationTimeBase = TimeSpan.FromSeconds(3.2);
