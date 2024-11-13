@@ -6,7 +6,7 @@
     randomGear:
     - [ CMGrenadeHighExplosive ] # TODO RMC14 incendiary molotov
     - [ CMPackFlare ]
-    # TODO RMC14 nailgun
+    - [ WeaponNailgun ]
     - [ RMCFireAxe ]
     - [ CMWelder ] # TODO RMC14 industrial welder
     - [ CMAdvFirstAidKitFilled ]
@@ -31,7 +31,7 @@
     randomGear:
     - [ CMGrenadeHighExplosive ] # TODO RMC14 incendiary molotov
     - [ CMPackFlare ]
-    # TODO RMC14 nailgun
+    - [ WeaponNailgun ]
     - [ RMCFireAxe ]
     - [ CMWelder ] # TODO RMC14 industrial welder
     - [ CMAdvFirstAidKitFilled ]
@@ -56,7 +56,7 @@
     randomGear:
     - [ CMGrenadeHighExplosive ] # TODO RMC14 incendiary molotov
     - [ CMPackFlare ]
-    # TODO RMC14 nailgun
+    - [ WeaponNailgun ]
     - [ RMCFireAxe ]
     - [ CMWelder ] # TODO RMC14 industrial welder
     - [ CMAdvFirstAidKitFilled ]
@@ -81,7 +81,7 @@
     randomGear:
     - [ CMGrenadeHighExplosive ] # TODO RMC14 incendiary molotov
     - [ CMPackFlare ]
-    # TODO RMC14 nailgun
+    - [ WeaponNailgun ]
     - [ RMCFireAxe ]
     - [ CMWelder ] # TODO RMC14 industrial welder
     - [ CMAdvFirstAidKitFilled ]
