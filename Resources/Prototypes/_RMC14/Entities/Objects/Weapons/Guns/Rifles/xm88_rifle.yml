@@ -12,7 +12,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88.rsi
   - type: Gun
-    fireRate: 0.769
+    fireRate: 0.8
     shotsPerBurst: 1
     selectedMode: SemiAuto
     availableModes:
@@ -22,14 +22,16 @@
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
+    recoilWielded: 3
     recoilUnwielded: 5
-    scatterWielded: 3
-    baseFireRate: 0.769
+    scatterWielded: 6
+    scatterUnwielded: 20
+    baseFireRate: 0.8
   - type: WieldDelay
-    baseDelay: 0.2
+    baseDelay: 0.4
   - type: WieldableSpeedModifiers
     baseWalk: 0.92
-    baseSprint: 0.86
+    baseSprint: 0.87
   - type: PumpAction
     sound:
       path: /Audio/_RMC14/Weapons/Guns/Pump/gun_boomslang_lever.ogg
@@ -80,7 +82,7 @@
 - type: entity
   parent: BulletRifle10x24mm
   id: RMCCartridge458SOCOM-p
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -89,6 +91,13 @@
   - type: CMArmorPiercing
     amount: 10
   - type: GunStacksProjectile
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 7
+      falloff: 1
 
 - type: entity
   parent: RMCBoxShotgunBase

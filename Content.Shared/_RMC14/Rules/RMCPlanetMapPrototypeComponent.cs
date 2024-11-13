@@ -11,5 +11,5 @@ public sealed partial class RMCPlanetMapPrototypeComponent : Component
     public ResPath Map;
 
     [DataField(required: true), AutoNetworkedField]
-    public string Name;
+    public string Announcement = string.Empty;
 }

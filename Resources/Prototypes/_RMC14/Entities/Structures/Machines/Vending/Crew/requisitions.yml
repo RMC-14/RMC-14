@@ -45,8 +45,8 @@
         amount: 2
       - id: RMCCaseXM88
         amount: 3
-      #- id: RMCM54CE2Case
-      #  amount: 3
+      - id: RMCM54CE2Case
+        amount: 3
       #- id: M41A Pulse Rifle MK1
       #  amount: 3
       #- id: M56D Heavy Machine Gun
@@ -268,15 +268,15 @@
     - name: Regular ammunition
       entries:
       - id: RMCBoxShotgunBuckshot
-        amount: 40
+        amount: 56
       - id: RMCBoxShotgunFlechette
-        amount: 40
+        amount: 56
       - id: RMCBoxShotgunSlugs
-        amount: 40
+        amount: 56
       - id: RMCBoxShotgunBreaching
         amount: 4
       - id: CMMagazineRifleM4SPR
-        amount: 45
+        amount: 60
       - id: CMMagazineRifleM54C
         amount: 100
       - id: CMMagazineSMGM63
@@ -284,7 +284,7 @@
       - id: RMCSpeedLoaderM44
         amount: 80
       - id: CMMagazinePistolM1984
-        amount: 102
+        amount: 100
     - name: Armor-piercing ammunition
       entries:
       - id: CMMagazinePistolM77AP
@@ -312,11 +312,13 @@
       #- id: M44 Heavy Speed Loader (.44)
       #  amount: 10
       - id: RMCSpeedLoader44Marksman
-        amount: 6
+        amount: 16 # TODO RMC14 6 once heavy is in
       #- id: M4A3 HP Magazine (9mm)
       #  amount: 2
-      #- id: M41AE2 Holo Target Rounds (10x24mm)
+      #- id: M54CE2 Holo Target Rounds (10x24mm)
       #  amount: 2
+      - id: RMCBox458SOCOM
+        amount: 4
     - name: Restricted firearm ammunition
       entries:
       - id: CMMagazinePistolMK80
@@ -325,8 +327,8 @@
         amount: 13
       #- id: M240 Incinerator Tank
       #  amount: 3
-#      - id: CMMagazineRifleM54CE2
-#        amount: 3
+      - id: CMMagazineRifleM54CE2
+        amount: 3
       #- id: M41A MK1 Magazine (10x24mm)
       #  amount: 5
       #- id: M41A MK1 AP Magazine (10x24mm)

@@ -96,6 +96,8 @@
     slots:
     - ears
     - suitstorage
+  - type: PointLight
+    radius: 1.75
 
 - type: Tag
   id: RMCPenlight

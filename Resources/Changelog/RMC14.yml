@@ -1,94 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added the missing requirement for the Queen to be in her ovipositor for
-      other xenonids to gain evolution points past round-start. After 5 minutes pass,
-      xenonids will not gain evolution points if the Queen is not ovipositing.
-    type: Fix
-  id: 458
-  time: '2024-07-25T11:14:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3260
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenonids being able to watch other xenonids without a Queen.
-    type: Fix
-  id: 459
-  time: '2024-07-25T11:44:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3261
-- author: DrSmugleaf
-  changes:
-  - message: Dropship travel and cooldown times are the default from 13 again, 100
-      seconds to travel and 120 seconds to cool down. This gives marines more time
-      to prepare after a hijack announcement. Be ready to cycle dropships or wait
-      for dropship upgrades outside of that.
-    type: Tweak
-  id: 460
-  time: '2024-07-25T12:54:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3263
-- author: DrSmugleaf
-  changes:
-  - message: Fixed hyposprays not having a delay on use for medically unskilled marines.
-    type: Fix
-  id: 461
-  time: '2024-07-25T22:02:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3272
-- author: DrSmugleaf
-  changes:
-  - message: Fixed weapons specialist ammo erroneously saying that a limit was reached
-      when trying to buy them. This limit only applies to kits.
-    type: Fix
-  id: 462
-  time: '2024-07-25T22:01:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3271
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the Boiler's bombard ability not taking plasma to use. It now correctly
-      takes 200 plasma to use.
-    type: Fix
-  id: 463
-  time: '2024-07-25T22:09:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3273
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the Boiler's Bombard putting Spray Acid on cooldown, Bombard now
-      correctly only puts Acid Shroud on cooldown, and Acid Shroud puts both Bombard
-      and Spray acid on cooldown.
-    type: Fix
-  id: 464
-  time: '2024-07-25T22:40:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3274
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Requisitions not getting their free 80 m44 speed loaders round-start.
-    type: Fix
-  id: 465
-  time: '2024-07-25T22:55:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3276
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the Boiler's Bombard projectile colliding with xenonids of the
-      same hive. It can now be shot through friendly xenonids.
-    type: Fix
-  id: 466
-  time: '2024-07-26T01:43:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3277
-- author: DrSmugleaf
-  changes:
-  - message: Fixed dropships taking 1 second to travel.
-    type: Fix
-  id: 467
-  time: '2024-07-26T02:18:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3283
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the pheromones radial appearing in kingdom com. It now appears
-      centered on your character.
-    type: Fix
-  id: 468
-  time: '2024-07-26T02:17:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3282
-- author: DrSmugleaf
-  changes:
   - message: Temporarily remove heavy assault rifle mags from vendors until the heavy
       assault rifle is available, to not confuse people about where to get it.
     type: Fix
@@ -4817,5 +4729,151 @@
   id: 957
   time: '2024-11-08T09:21:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4755
+- author: DrSmugleaf
+  changes:
+  - message: Added burrowed larva, which replace player-less round-start larva and
+      are granted after a certain amount of marine late-joins, scaled by the role
+      of the marine (squad role vs not), and how late they join into the round. A
+      count of them is displayed in the watch Xeno UI.
+    type: Add
+  - message: Added hive leaders. The Queen can choose up to 4 hive leaders, which
+      will emit the same pheromones as her with her 4x pheromone multiplier while
+      she's in Ovi.
+    type: Add
+  - message: Added Queen AOE healing. She can use 600 plasma to remotely heal any
+      xenos in a 4-tile radius for 30% of their health each, only usable while she's
+      in Ovi.
+    type: Add
+  - message: Added the ability for the Queen to force a T2 or T3 xeno to devolve.
+      Any devolutions done in this way must have valid justification. Ask an admin
+      if unsure.
+    type: Add
+  - message: Added the ability for hivelords to upgrade regular resin structures to
+      thick resin structures by clicking them with the secrete resin ability. The
+      plasma cost will be the difference in cost between the upgraded and unupgraded
+      structures.
+    type: Add
+  - message: Added the M54CE2 to the Requisitions weapons vendor and the ASRS console.
+    type: Add
+  - message: Added grinders to the kitchen, medbay and research rooms.
+    type: Add
+  - message: Added both round-start ARES announcements, one greeting marines and one
+      announcing the planet.
+    type: Add
+  - message: Fixed not showing counts for votes. This will go away again once we have
+      vote accumulation like 13.
+    type: Fix
+  - message: Fixed Requisitions having too little of some ammo types in their vendors.
+    type: Fix
+  - message: Fixed the Scout Specialist not getting a JTAC radio encryption key.
+    type: Fix
+  - message: Fixed penlights having a larger light radius than intended.
+    type: Fix
+  - message: Fixed watermelon helmets giving blunt protection.
+    type: Fix
+  - message: Fixed dropship part fabricators being unanchorable.
+    type: Fix
+  - message: Fixed reagent tanks being anchorable and blocking interactions.
+    type: Fix
+  - message: Fixed there being more survivors in low-pop than intended, there are
+      now 20 marines per survivor instead of 10 marines per survivor, minimum 2 maximum
+      6.
+    type: Fix
+  id: 958
+  time: '2024-11-08T20:18:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4767
+- author: DrSmugleaf
+  changes:
+  - message: Fixed pill canisters not being able to be opened.
+    type: Fix
+  - message: Fixed not being able to demote hive leaders when you have 4, and not
+      getting popups when promoting and demoting hive leaders. These popups are on
+      your cursor since popups beyond your view range broke AGAIN.
+    type: Fix
+  - message: Fixed the XM51 breaching scattergun sounding like its being fired inside
+      your skull if used by someone else.
+    type: Fix
+  id: 959
+  time: '2024-11-08T22:26:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4771
+- author: Vermidia
+  changes:
+  - message: Fixed doors, vending machines, and sentries having acid applied too fast
+    type: Fix
+  id: 960
+  time: '2024-11-09T04:18:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4769
+- author: DrSmugleaf
+  changes:
+  - message: Fixed stars sometimes not being shown to xenos for hive leaders.
+    type: Fix
+  - message: Fixed command tablet tacmap UI not opening.
+    type: Fix
+  - message: Fixed reagent grinder not being powered.
+    type: Fix
+  - message: Fixed queen heal not taking plasma.
+    type: Fix
+  - message: Fixed shotgun shell pouches and shotgun shell rig not being able to fit
+      458 SOCOM bullets.
+    type: Fix
+  id: 961
+  time: '2024-11-09T04:35:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4774
+- author: Sigil
+  changes:
+  - message: Fixed The MOU and the M42A2 having burst fire.
+    type: Fix
+  - message: The sawn-off double-barrel shotgun now has a 2-round burst, same as the
+      normal double-barrel shotgun.
+    type: Fix
+  id: 962
+  time: '2024-11-09T05:21:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4777
+- author: Sigil
+  changes:
+  - message: You can now extract grenades from the UGL even when it's not attached
+      to a gun.
+    type: Fix
+  - message: You can no longer extract grenades from the UGL when the breech is closed.
+    type: Fix
+  id: 963
+  time: '2024-11-09T05:24:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4776
+- author: Vermidia
+  changes:
+  - message: Fixed XM88's stats (scatter was too low, falloff was slightly wrong,
+      etc)
+    type: Fix
+  id: 964
+  time: '2024-11-09T05:23:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4775
+- author: CyberTropic
+  changes:
+  - message: Added random spawners for powercells, toolboxes, and tech supplies.
+    type: Add
+  id: 965
+  time: '2024-11-12T05:51:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4793
+- author: FungiFellow
+  changes:
+  - message: Increased all Turrets Range by One Tile Parity :)
+    type: Tweak
+  id: 966
+  time: '2024-11-12T05:53:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4728
+- author: CyberTropic
+  changes:
+  - message: Added couch, water cooler.
+    type: Add
+  id: 967
+  time: '2024-11-12T05:55:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4794
+- author: CyberTropic
+  changes:
+  - message: Trees leave behind stumps when destroyed.
+    type: Add
+  id: 968
+  time: '2024-11-12T05:58:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4631
 Name: RMC14
 Order: -1
