@@ -1,8 +1,8 @@
 ﻿- type: job
   parent: CMSurvivor
   id: RMCMedicalSurvivor
-  name: cm-job-name-survivor #make new name
-  description: cm-job-description-survivor # Make new description
+  name: cm-job-name-survivor # make new job name
+  description: cm-job-description-survivor
   startingGear: RMCGearSurvivorDoctor
   accessGroups:
   - ColonistMedical
@@ -25,11 +25,11 @@
     back: CMSatchelMedical
     gloves: CMHandsLatex
     shoes: RMCShoesLaceup
-    id: CMIDCardColonist #Replace me with an ID with med access
+    id: CMIDCardColonist 
     eyes: RMCGlassesMedicalHUDGlasses
     ears: CMHeadsetColony
     pocket1: RMCM5Bayonet
-    pocket2: RMCFlashlightPen
+    pocket2: RMCFlashlight
 
 - type: entity
   parent: CMSpawnPointJobBase
