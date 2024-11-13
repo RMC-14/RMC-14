@@ -37,7 +37,7 @@
   name: survivor doctor spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivor
+    job_id: RMCMedicalSurvivor
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
