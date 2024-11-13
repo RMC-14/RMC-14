@@ -343,9 +343,9 @@
         conditions:
         - !type:RecentlyDefibrillated
         damage:
-        - Brute: -40
-        - Burn: -40
-        - Toxin: -40
+        - Brute: -20
+        - Burn: -20
+        - Toxin: -20
       - !type:AdjustReagent
         conditions:
         - !type:RecentlyDefibrillated
