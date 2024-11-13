@@ -450,42 +450,41 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        if (_net.IsClient)
-            return;
-
-
-        var time = _timing.CurTime;
-        var aiQuery = EntityQueryEnumerator<ParasiteAIComponent>();
-        while (aiQuery.MoveNext(out var uid, out var ai))
+        if (_net.IsServer)
         {
-            if (!_mobState.IsDead(uid) && !TerminatingOrDeleted(uid))
-                UpdateAI((uid, ai), time);
-        }
-
-        var trapQuery = EntityQueryEnumerator<TrapParasiteComponent>();
-        while (trapQuery.MoveNext(out var uid, out var trap))
-        {
-            if (trap.LeapAt > time)
-                continue;
-
-            if (_mobState.IsDead(uid) || TerminatingOrDeleted(uid))
-                continue;
-
-            _rmcNpc.WakeNPC(uid);
-
-            if (trap.DisableAt > time)
-                continue;
-
-            RemCompDeferred<TrapParasiteComponent>(uid);
-        }
-
-        var aiDelayQuery = EntityQueryEnumerator<ParasiteAIDelayAddComponent>();
-        while (aiDelayQuery.MoveNext(out var uid, out var aid))
-        {
-            if (time > aid.TimeToAI)
+            var time = _timing.CurTime;
+            var aiQuery = EntityQueryEnumerator<ParasiteAIComponent>();
+            while (aiQuery.MoveNext(out var uid, out var ai))
             {
-                EnsureComp<ParasiteAIComponent>(uid);
-                RemCompDeferred<ParasiteAIDelayAddComponent>(uid);
+                if (!_mobState.IsDead(uid) && !TerminatingOrDeleted(uid))
+                    UpdateAI((uid, ai), time);
+            }
+
+            var trapQuery = EntityQueryEnumerator<TrapParasiteComponent>();
+            while (trapQuery.MoveNext(out var uid, out var trap))
+            {
+                if (trap.LeapAt > time)
+                    continue;
+
+                if (_mobState.IsDead(uid) || TerminatingOrDeleted(uid))
+                    continue;
+
+                _rmcNpc.WakeNPC(uid);
+
+                if (trap.DisableAt > time)
+                    continue;
+
+                RemCompDeferred<TrapParasiteComponent>(uid);
+            }
+
+            var aiDelayQuery = EntityQueryEnumerator<ParasiteAIDelayAddComponent>();
+            while (aiDelayQuery.MoveNext(out var uid, out var aid))
+            {
+                if (time > aid.TimeToAI)
+                {
+                    EnsureComp<ParasiteAIComponent>(uid);
+                    RemCompDeferred<ParasiteAIDelayAddComponent>(uid);
+                }
             }
         }
 
