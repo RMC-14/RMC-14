@@ -1,6 +1,6 @@
 ﻿- type: job
   parent: CMSurvivor
-  id: RMCMedicalSurvivor
+  id: RMCEngineerSurvivor
   name: cm-job-name-survivor #make new name
   description: cm-job-description-survivor # Make new description
   startingGear: RMCGearSurvivorEngineer
