@@ -1,8 +1,8 @@
 ﻿- type: job
   parent: CMSurvivor
   id: RMCSecuritySurvivor
-  name: cm-job-name-survivor #make new name
-  description: cm-job-description-survivor # Make new description
+  name: cm-job-name-security-survivor 
+  description: cm-job-description-survivor
   startingGear: RMCGearSurvivorSecurity
   accessGroups:
   - ColonistSec
