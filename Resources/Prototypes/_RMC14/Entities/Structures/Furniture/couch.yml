@@ -1,0 +1,26 @@
+# Couch
+- type: entity
+  parent: SeatBase
+  id: RMCCouchMid
+  name: couch
+  description: Just like Space Ikea would have wanted.
+  suffix: Mid
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Strap
+    enabled: false
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/couch.rsi
+    state: couch_mid
+
+- type: entity
+  parent: RMCCouchMid
+  id: RMCCouchEnd
+  suffix: End
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/couch.rsi
+    state: couch_end

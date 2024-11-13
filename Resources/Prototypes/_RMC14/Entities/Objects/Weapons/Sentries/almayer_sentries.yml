@@ -45,7 +45,7 @@
       SoundTargetInLOS: !type:SoundPathSpecifier
         path: /Audio/Effects/double_beep.ogg
       VisionRadius: !type:Single
-        4.5
+        5.5
       AggroVisionRadius: !type:Single
         5.5
   - type: UserIFF
