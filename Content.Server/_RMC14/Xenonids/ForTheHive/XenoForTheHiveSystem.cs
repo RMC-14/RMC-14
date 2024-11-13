@@ -47,7 +47,6 @@ public sealed class XenoForTheHiveSystem : SharedXenoForTheHiveSystem
             respawn.RespawnAt = _timing.CurTime + time;
             respawn.RespawnAtCorpse = atCorpse;
             respawn.CorpseLocation = corpse;
-
         }
     }
 
@@ -86,6 +85,8 @@ public sealed class XenoForTheHiveSystem : SharedXenoForTheHiveSystem
 
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-for-the-hive-respawn-corpse-self"), spawn, spawn, Shared.Popups.PopupType.MediumCaution);
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-for-the-hive-respawn-corpse-others"), spawn, Filter.PvsExcept(spawn), true, Shared.Popups.PopupType.MediumCaution);
+
+                _audio.PlayPvs(respawn.CorpseSound, _transform.GetMoverCoordinates(spawn));
 
                 RemCompDeferred<XenoRespawnComponent>(ghost); // If this fails, somehow
                 continue;
