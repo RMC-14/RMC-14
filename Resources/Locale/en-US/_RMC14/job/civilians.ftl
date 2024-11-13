@@ -9,5 +9,11 @@ CMJobLiaison = Corporate Liaison
 
 # Survivors
 cm-job-name-survivor = Survivor
+cm-job-name-engineer-survivor = Engineer Survivor
+cm-job-name-medical-survivor = Medical Survivor
+cm-job-name-security-survivor = Security Survivor
 cm-job-description-survivor = You are a survivor of an attack on a corporate facility. You worked or lived in the colony/station, and managed to avoid the alien attacks... until now.
 CMJobSurvivor = Survivor
+RMCMedicalSurvivor = Medical Survivor
+RMCEngineerSurvivor = Engineer Survivor
+RMCSecuritySurvivor = Security Survivor
