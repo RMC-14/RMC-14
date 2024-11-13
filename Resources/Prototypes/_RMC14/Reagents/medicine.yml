@@ -7,16 +7,29 @@
   overdose: 30
   metabolisms:
     Medicine:
-      metabolismRate: 0.2
+      metabolismRate: 0.1
       effects:
       - !type:EqualHealthChange
         damage:
         - Toxin: -2
+      - !type:GenericStatusEffect
+        key: SeeingRainbows
+        component: SeeingRainbows
+        type: Remove
+        time: 20
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Toxin: 0.5
       - !type:ChemHealEyeDamage
         conditions:
         - !type:ReagentThreshold
           min: 30
         amount: 1
+        probability: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -25,27 +38,15 @@
           groups:
             Brute: 1
             Burn: 1
-            Toxin: 2
-      - !type:Jitter
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-      - !type:PopupMessage
-        conditions:
-        - !type:ReagentThreshold
-          min: 50
-        type: Local
-        visualType: Medium
-        messages: [ "generic-reagent-effect-nauseous" ]
-        probability: 0.2
+            Toxin: 3
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           min: 50
         key: ForcedSleep
         component: ForcedSleeping
-        time: 2
-        refresh: false
+        time: 30
+        refresh: true
         type: Add
 
 # TODO add another alcohols to decrease
@@ -58,10 +59,30 @@
   overdose: 30
   metabolisms:
     Medicine:
-      metabolismRate: 0.2
+      metabolismRate: 0.1
       effects:
       - !type:GenericStatusEffect
         key: Drunk
+        time: 3
+        type: Remove
+      - !type:GenericStatusEffect
+        key: Jitter
+        time: 3
+        type: Remove
+      - !type:GenericStatusEffect
+        key: ForcedSleep
+        time: 3
+        type: Remove
+      - !type:GenericStatusEffect
+        key: Stutter
+        time: 3
+        type: Remove
+      - !type:GenericStatusEffect
+        key: SlurredSpeech
+        time: 3
+        type: Remove
+      - !type:GenericStatusEffect
+        key: Drowsiness
         time: 3
         type: Remove
       - !type:AdjustReagent
@@ -101,7 +122,7 @@
           min: 50
         damage:
           groups:
-            Toxin: 6
+            Toxin: 4.5
 
 - type: reagent
   parent: [ CMReagentMedicine, Arithrazine ]
@@ -112,7 +133,7 @@
   overdose: 15
   metabolisms:
     Medicine:
-      metabolismRate: 0.05
+      metabolismRate: 0.025
       effects:
       - !type:EqualHealthChange
         damage:
@@ -120,46 +141,35 @@
       - !type:HealthChange
         damage:
           groups:
-            Brute: 1
+            Brute: 0.25
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 15
         damage:
           groups:
-            Brute: 2
+            Brute: 1
       - !type:ChemHealEyeDamage
         conditions:
         - !type:ReagentThreshold
           min: 15
         amount: 1
+        probability: 0.25
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 25
         damage:
           groups:
-            Brute: 4
-      - !type:Jitter
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-      - !type:PopupMessage
-        conditions:
-        - !type:ReagentThreshold
-          min: 25
-        type: Local
-        visualType: Medium
-        messages: [ "generic-reagent-effect-nauseous" ]
-        probability: 0.2
+            Brute: 2.5
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           min: 25
         key: ForcedSleep
         component: ForcedSleeping
-        refresh: false
-        time: 2
+        refresh: true
+        time: 30
         type: Add
 
 - type: reagent
@@ -171,7 +181,7 @@
   overdose: 30
   metabolisms:
     Medicine:
-      metabolismRate: 0.2
+      metabolismRate: 0.1
       effects:
       - !type:EqualHealthChange
         damage:
@@ -182,14 +192,14 @@
           min: 30
         damage:
           groups:
-            Burn: 1
+            Burn: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 50
         damage:
           groups:
-            Burn: 6
+            Burn: 5
             Toxin: 2
 
 # TODO RMC14 other effects (remove toxic reagents)
@@ -201,24 +211,23 @@
   color: "#4acaca"
   metabolisms:
     Medicine:
-      metabolismRate: 0.2
+      metabolismRate: 0.1
       effects:
       - !type:EqualHealthChange
         conditions:
         - !type:Temperature
           max: 170
         damage:
-        - Brute: -3
-        - Burn: -3
-        - Toxin: -3
+        - Brute: -3.5
+        - Burn: -3.5
+        - Toxin: -6
       - !type:HealthChange
         conditions:
         - !type:Temperature
           max: 170
         damage:
           types:
-            Asphyxiation: -1
-            Cellular: -3
+            Cellular: -2.25
 
 - type: reagent
   parent: [ CMReagentMedicine, Dermaline ]
@@ -229,7 +238,7 @@
   overdose: 15
   metabolisms:
     Medicine:
-      metabolismRate: 0.2
+      metabolismRate: 0.1
       effects:
       - !type:EqualHealthChange
         damage:
@@ -240,17 +249,19 @@
           min: 15
         damage:
           groups:
-            Burn: 1.5
-            Toxin: 1.5
+            Burn: 0.75
+            Toxin: 0.75
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 25
         damage:
           groups:
-            Burn: 9
-            Toxin: 9
+            Burn: 7.5
+            Toxin: 7.5
 
+# TODO implement CMLexorin
+# TODO Dexalin should remove 2 lexorin
 - type: reagent
   parent: [ CMReagentMedicine, Dexalin ]
   id: CMDexalin
@@ -260,27 +271,29 @@
   overdose: 30
   metabolisms:
     Medicine:
-      metabolismRate: 0.2
+      metabolismRate: 0.1
       effects:
       - !type:EqualHealthChange
         damage:
-        - Airloss: -4
+        - Airloss: -2
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 30
         damage:
           groups:
-            Toxin: 2
+            Toxin: 1
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 50
         damage:
           groups:
-            Brute: 4
-            Toxin: 8
+            Brute: 2
+            Toxin: 4
 
+# TODO implement CMLexorin
+# TODO DexalinPlus should remove 3 lexorin
 - type: reagent
   parent: [ CMReagentMedicine, DexalinPlus ]
   id: CMDexalinPlus
@@ -290,7 +303,7 @@
   overdose: 15
   metabolisms:
     Medicine:
-      metabolismRate: 0.2
+      metabolismRate: 0.1
       effects:
       - !type:RemoveDamage
         group: Airloss
@@ -307,11 +320,13 @@
           min: 25
         damage:
           groups:
-            Brute: 3
-            Toxin: 7.5
+            Brute: 2
+            Toxin: 6
 
 # TODO RMC14 other effects (pain)
 # TODO RMC14 injected only
+# TODO implement opiate receptor deficency
+# TODO CMEpinephrine should deal liver and brain damage over 20u
 - type: reagent
   parent: [ CMReagentMedicine, Epinephrine ]
   id: CMEpinephrine
@@ -322,21 +337,15 @@
   worksOnTheDead: true
   metabolisms:
     Medicine:
-      metabolismRate: 0.4
+      metabolismRate: 0.2
       effects:
       - !type:EqualHealthChange
         conditions:
         - !type:RecentlyDefibrillated
         damage:
-        - Brute: -16
-        - Burn: -16
-        - Toxin: -16
-      - !type:HealthChange
-        conditions:
-        - !type:RecentlyDefibrillated
-        damage:
-          types:
-            Asphyxiation: -16
+        - Brute: -40
+        - Burn: -40
+        - Toxin: -40
       - !type:AdjustReagent
         conditions:
         - !type:RecentlyDefibrillated
@@ -348,10 +357,28 @@
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
+          min: 10.5
+        damage:
+          groups:
+            Toxin: 0.75
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 10.5
+        key: SeeingRainbows # TODO change to hallucinations
+        component: SeeingRainbows
+        type: Add
+        time: 60
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
           min: 20
         damage:
-          Brute: 1
+          groups:
+            Airloss: 2
 
+# TODO pain related effects
+# TODO heart damage over 100u
 # TODO RMC14 allow breathing in crit instead of reducing asphyxiation
 - type: reagent
   parent: [ CMReagentMedicine, Inaprovaline ]
@@ -362,7 +389,7 @@
   overdose: 60
   metabolisms:
     Medicine:
-      metabolismRate: 0.2
+      metabolismRate: 0.1
       effects:
       - !type:HealthChange
         conditions:
@@ -375,29 +402,20 @@
         conditions:
         - !type:ReagentThreshold
           min: 60
-      - !type:GenericStatusEffect
+        time: 5
+      - !type:Paralyze
         conditions:
         - !type:ReagentThreshold
           min: 60
-        key: Stun
-        component: Stunned
-        time: 40
-        type: Add
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 60
-        key: KnockedDown
-        component: KnockedDown
-        time: 40
-        type: Add
+        paralyzeTime: 30
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           min: 100
-        key: Drunk
-        component: Drunk
-        time: 40
+        key: ForcedSleep
+        component: ForcedSleeping
+        time: 20
+        refresh: true
         type: Add
 
 - type: reagent
@@ -409,7 +427,7 @@
   overdose: 30
   metabolisms:
     Medicine:
-      metabolismRate: 0.2
+      metabolismRate: 0.1
       effects:
       - !type:EqualHealthChange
         damage:
@@ -420,16 +438,16 @@
           min: 30
         damage:
           groups:
-            Brute: 1
-            Toxin: 1
+            Brute: 0.5
+            Toxin: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 50
         damage:
           groups:
-            Brute: 5.5
-            Toxin: 5.5
+            Brute: 5
+            Toxin: 5
 
 - type: reagent
   parent: [ CMReagentMedicine, Leporazine ]
@@ -440,35 +458,24 @@
   overdose: 30
   metabolisms:
     Medicine:
-      metabolismRate: 0.2
+      metabolismRate: 0.1
       effects:
       - !type:StabilizeTemperature
         stable: 310
-        change: 60
-      - !type:GenericStatusEffect
+        change: 30
+      - !type:Paralyze
         conditions:
         - !type:ReagentThreshold
           min: 30
-        key: KnockedDown
-        component: KnockedDown
-        time: 40
-        type: Add
-      - !type:GenericStatusEffect
-        conditions:
-        - !type:ReagentThreshold
-          min: 30
-        key: Stun
-        component: Stunned
-        time: 40
-        type: Add
+        paralyzeTime: 30
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           min: 50
         key: ForcedSleep
         component: ForcedSleeping
-        time: 2
-        refresh: false
+        time: 30
+        refresh: true
         type: Add
 
 - type: reagent
@@ -480,49 +487,48 @@
   overdose: 30
   metabolisms:
     Medicine:
-      metabolismRate: 0.2
+      metabolismRate: 0.1
       effects:
       - !type:EqualHealthChange
         damage:
         - Brute: -0.5
         - Burn: -0.5
-        - Toxin: -0.5
+        - Toxin: -1
       - !type:HealthChange
         damage:
-          types:
-            Asphyxiation: -0.5
+          Airloss: -0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 30
         damage:
           groups:
-            Brute: 0.5
-            Burn: 0.5
-            Toxin: 0.25
+            Brute: 0.25
+            Burn: 0.25
+            Toxin: 0.5
       - !type:ChemHealEyeDamage
         conditions:
         - !type:ReagentThreshold
           min: 30
-        amount: 1 # can't make 0.5 eye damage because of int value
-        probability: 0.5
+        amount: 1 # can't make 0.25 eye damage because of int value
+        probability: 0.25
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 50
         damage:
           groups:
-            Brute: 2.5
+            Brute: 3
             Burn: 2.5
-            Toxin: 4
+            Toxin: 4.5
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
           min: 50
         key: ForcedSleep
         component: ForcedSleeping
-        time: 2
-        refresh: false
+        time: 30
+        refresh: true
         type: Add
 
 - type: reagent
@@ -534,7 +540,7 @@
   overdose: 15
   metabolisms:
     Medicine:
-      metabolismRate: 0.2
+      metabolismRate: 0.1
       effects:
       - !type:EqualHealthChange
         damage:
@@ -545,18 +551,19 @@
           min: 15
         damage:
           groups:
-            Burn: 1.5
+            Burn: 0.75
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 25
         damage:
           groups:
-            Burn: 9
+            Burn: 7.5
             Toxin: 3
 
 # TODO RMC14 progressive eye healing ??? (for chemical eye damage healing is alrealdy progressive)
 # TODO RMC14 brain damage over 50u
+# TODO implement blindness and blurness separetly from eye damage
 - type: reagent
   parent: [ CMReagentMedicine, CMDylovene ]
   id: CMImidazoline
@@ -566,7 +573,7 @@
   overdose: 30
   metabolisms:
     Medicine:
-      metabolismRate: 0.2
+      metabolismRate: 0.1
       effects:
       - !type:ChemHealEyeDamage
       - !type:HealthChange
@@ -584,10 +591,8 @@
           groups:
             Brute: 1
             Burn: 1
-            Toxin: 4
+            Toxin: 3
 
-# TODO RMC14 other effects
-# TODO RMC14 heal cloneloss
 - type: reagent
   parent: [ CMReagentMedicine, CMCryoxadone ]
   id: CMClonexadone
@@ -596,20 +601,20 @@
   color: "#51b4db"
   metabolisms:
     Medicine:
-      metabolismRate: 0.2
+      metabolismRate: 0.1
       effects:
       - !type:EqualHealthChange
         conditions:
         - !type:Temperature
           max: 170
         damage:
-        - Toxin: -6
-        - Brute: -6
-        - Burn: -6
+        - Toxin: -11.25
+        - Brute: -11.25
+        - Burn: -15
       - !type:HealthChange
         conditions:
         - !type:Temperature
           max: 170
         damage:
           types:
-            Cellular: -6
+            Cellular: -3.75
