@@ -66,7 +66,7 @@
         type: Remove
       - !type:AdjustReagent
         reagent: RMCEthanol
-        amount: -3
+        amount: -1.5
       - !type:AdjustReagent
         conditions:
         - !type:ReagentThreshold
