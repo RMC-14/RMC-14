@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: BaseItem
   abstract: true
-  id: RMCBaseSentry
+  id: RMCBaseSentry #Conversion Rate for turret vision range = CM + 1
   name: turret
   components:
   - type: Corrodible
@@ -80,7 +80,7 @@
       SoundTargetInLOS: !type:SoundPathSpecifier
         path: /Audio/Effects/double_beep.ogg
       VisionRadius: !type:Single
-        5.0
+        6.0
       AggroVisionRadius: !type:Single
         6.0
   - type: MouseRotator
@@ -297,7 +297,7 @@
       SoundTargetInLOS: !type:SoundPathSpecifier
         path: /Audio/Effects/double_beep.ogg
       VisionRadius: !type:Single
-        10.0
+        11.0
       AggroVisionRadius: !type:Single
         11.0
   - type: Sentry
@@ -340,7 +340,7 @@
       SoundTargetInLOS: !type:SoundPathSpecifier
         path: /Audio/Effects/double_beep.ogg
       VisionRadius: !type:Single
-        4.0
+        5.0
       AggroVisionRadius: !type:Single
         5.0
   - type: Sentry
@@ -401,7 +401,7 @@
       SoundTargetInLOS: !type:SoundPathSpecifier
         path: /Audio/Effects/double_beep.ogg
       VisionRadius: !type:Single
-        3.0
+        4.0
       AggroVisionRadius: !type:Single
         4.0
   - type: Sentry

@@ -119,10 +119,10 @@ public sealed class HiveLeaderSystem : EntitySystem
         if (ent.Owner == watching)
             return;
 
-        if (leaders.Count >= max)
+        if (!HasComp<HiveLeaderComponent>(watching) && leaders.Count >= max)
         {
             msg = $"You can't have more than {max} promoted leaders.";
-            _popup.PopupClient(msg, watching, ent, PopupType.MediumCaution);
+            _popup.PopupClient(msg, ent, PopupType.MediumCaution);
             return;
         }
 
@@ -132,7 +132,7 @@ public sealed class HiveLeaderSystem : EntitySystem
             ent.Comp.Leaders.Remove(watching);
 
             msg = $"You've demoted {Name(watching)} from Hive Leader.";
-            _popup.PopupClient(msg, watching, ent, PopupType.MediumCaution);
+            _popup.PopupClient(msg, ent, PopupType.MediumCaution);
 
             msg = $"{Name(ent)} has demoted you from Hive Leader. Your leadership rights and abilities have waned.";
             _popup.PopupEntity(msg, watching, watching, PopupType.MediumCaution);
@@ -147,7 +147,7 @@ public sealed class HiveLeaderSystem : EntitySystem
         Dirty(ent);
 
         msg = $"You've selected {Name(watching)} as a Hive Leader.";
-        _popup.PopupClient(msg, watching, ent, PopupType.Medium);
+        _popup.PopupClient(msg, ent, PopupType.Medium);
         msg = $"{Name(ent)} has selected you as a Hive Leader. The other Xenonids must listen to you. You will also act as a beacon for the Queen's pheromones.";
         _popup.PopupClient(msg, watching, watching, PopupType.Medium);
         _rmcChat.ChatMessageToOne(msg, watching);

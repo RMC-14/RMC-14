@@ -52,7 +52,7 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.bleed_time_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> CMMarinesPerXeno =
-        CVarDef.Create("rmc.marines_per_xeno", 5.25f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.marines_per_xeno", 6f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCPatronLobbyMessageTimeSeconds =
         CVarDef.Create("rmc.patron_lobby_message_time_seconds", 30, CVar.REPLICATED | CVar.SERVER);
@@ -236,8 +236,8 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.late_joins_per_burrowed_larva_early_threshold_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarvaEarly =
-        CVarDef.Create("rmc.late_joins_per_burrowed_larva_early", 4f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.late_joins_per_burrowed_larva_early", 5.5f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarva =
-        CVarDef.Create("rmc.late_joins_per_burrowed_larva", 2.5f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.late_joins_per_burrowed_larva", 4f, CVar.REPLICATED | CVar.SERVER);
 }

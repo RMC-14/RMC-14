@@ -3,6 +3,8 @@ using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
@@ -20,6 +22,7 @@ namespace Content.Shared._RMC14.Xenonids.Hive;
 
 public abstract class SharedXenoHiveSystem : EntitySystem
 {
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
@@ -322,6 +325,8 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
             _mind.TransferTo(mind.Value, spawned);
         }
+
+        _adminLog.Add(LogType.RMCBurrowedLarva, $"{ToPrettyString(user):player} took a burrowed larva from hive {ToPrettyString(hive):hive}.");
     }
 }
 

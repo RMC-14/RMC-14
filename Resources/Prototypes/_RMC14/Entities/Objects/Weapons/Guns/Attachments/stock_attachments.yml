@@ -628,13 +628,13 @@
         wieldedOnly: true
       accuracyAddMult: 0.3
       recoilFlat: -1
-      scatterFlat: -3
+      scatterFlat: -6
     - conditions:
         unwieldedOnly: true
       accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: -0.1
       recoilFlat: 1
-      scatterFlat: 7
+      scatterFlat: 14
 
 - type: Tag
   id: RMCAttachmentStock
