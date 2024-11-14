@@ -72,6 +72,7 @@ public sealed class XenoForTheHiveSystem : SharedXenoForTheHiveSystem
                 }
 
                 var spawn = SpawnAtPosition(respawn.Larva, respawn.CorpseLocation.Value);
+                _hive.SetHive(spawn, respawn.Hive);
 
                 if (!TryComp(ghost, out ActorComponent? actor))
                     continue;

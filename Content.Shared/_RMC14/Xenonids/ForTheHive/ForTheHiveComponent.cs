@@ -14,7 +14,7 @@ public sealed partial class ForTheHiveComponent : Component
     public string? ActiveSprite;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan AnimationTimeBase = TimeSpan.FromSeconds(3.2);
+    public TimeSpan AnimationTimeBase = TimeSpan.FromSeconds(1.6);
 
     [DataField, AutoNetworkedField]
     public TimeSpan Duration = TimeSpan.FromSeconds(20);
