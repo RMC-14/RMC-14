@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -64,6 +64,9 @@
     toggle: true
     inject:
       RMCMolecularAcid: 1 # TODO RMC14 6
+    tailDamage:
+      groups:
+        Brute: 27
   - type: XenoSprayAcid
     acid: XenoAcidSprayStrong
     barricadeDamage:
@@ -72,7 +75,7 @@
   - type: MeleeWeapon
     damage:
       groups:
-        Brute: 22.5
+        Brute: 22.5 
   - type: Tackle # min: 2, max: 6
     threshold: 5
     stun: 7

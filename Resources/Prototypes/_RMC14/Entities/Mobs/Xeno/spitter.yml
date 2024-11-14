@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -62,6 +62,9 @@
   - type: XenoTailStab
     inject:
       RMCMolecularAcid: 1 # TODO RMC14 2
+    tailDamage:
+      groups:
+        Brute: 30
   - type: CMArmor
     armor: 15
     explosionArmor: 20
