@@ -515,9 +515,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 }
             }
 
-            if (_net.IsClient)
-                continue;
-
             // 20 seconds before burst, spawn the larva
             if (infected.BurstAt <= time && infected.SpawnedLarva == null)
             {
@@ -537,6 +534,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             // Stasis slows this, while nesting makes it happen sooner
             if (infected.IncubationMultiplier != 1)
                 infected.BurstAt += TimeSpan.FromSeconds(1 - infected.IncubationMultiplier) * frameTime;
+
+            if (_net.IsClient)
+                continue;
 
             // Stages
             // Percentage of how far along we out to burst time times the number of stages, truncated. You can't go back a stage once you've reached one
