@@ -316,7 +316,7 @@
     angle: 60
     soundHit:
       collection: RCMXenoClaw
-    animation: WeaponArcBite
+    animation: WeaponArcClaw
     damage:
       groups:
         Brute: 12
