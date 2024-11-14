@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -73,6 +73,10 @@
     damage:
       groups:
         Brute: 22.5
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 27
   - type: Tackle # min: 2, max: 6
     threshold: 5
     stun: 7
