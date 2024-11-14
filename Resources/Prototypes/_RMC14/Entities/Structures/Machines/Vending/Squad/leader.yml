@@ -29,7 +29,7 @@
     #- id: CMM2CHeavyMachineGun
     #- id: CMM56DHeavyMachineGun
     #- id: CMM79GrenadeLauncher
-      - id: WeaponShotgunMOU53
+      - id: RMCMOU53Case
       - id: RMCCaseXM88
     - name: Armors
       entries:
