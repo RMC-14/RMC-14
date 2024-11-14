@@ -74,7 +74,6 @@
       time: 90 # seconds or 1.5 minutes
       dps: 20
       expendableLightDps: 23.4375
-      structures: false
     checkCanInteract: false
 
 - type: entity

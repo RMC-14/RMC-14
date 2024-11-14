@@ -157,11 +157,11 @@
     - ActionXenoForTheHive
     - ActionXenoDevolve
     hudOffset: -0.1,0.63
+    hidden: true
   - type: XenoStrain
     name: rmc-xeno-acider-name
     description: rmc-xeno-acider-description
-    popup: rmc-xeno-acider-popup
-    hidden: true
+    popup: rmc-xeno-acider-popup   
   - type: CMArmor
     armor: 15
   - type: MovementSpeedModifier
