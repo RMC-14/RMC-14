@@ -34,6 +34,8 @@
     scatterWielded: 10
     scatterUnwielded: 30
     baseFireRate: 0.625
+  - type: RMCExtraProjectilesDamageMods
+    damageMultiplier:  0.18
   - type: ItemSlots
     slots:
       gun_magazine:
