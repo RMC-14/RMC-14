@@ -94,6 +94,9 @@
   - type: Sprite
     state: brute
 
+- type: Tag
+  id: RMCMetalBarricade
+
 # Metal Barricade Tree
 - type: entity
   parent: CMBarricadeBase
@@ -155,6 +158,9 @@
     node: nodeMetal
   - type: RMCConstructionUpgradeTarget
     upgrades: ["RMCExplosiveUpgrade", "RMCBiohazardUpgrade", "RMCBruteUpgrade"]
+  - type: Tag
+    tags:
+    - RMCMetalBarricade
 
 # Metal Barricade Upgrades
 - type: entity

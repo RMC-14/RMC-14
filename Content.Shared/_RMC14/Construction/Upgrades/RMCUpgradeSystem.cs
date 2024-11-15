@@ -11,6 +11,7 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Prototypes;
 using Content.Shared.Stacks;
+using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -24,11 +25,8 @@ namespace Content.Shared._RMC14.Construction.Upgrades;
 public sealed class RMCUpgradeSystem : EntitySystem
 {
     [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly FixtureSystem _fixture = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -36,6 +34,7 @@ public sealed class RMCUpgradeSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     private readonly Dictionary<EntProtoId, RMCConstructionUpgradeComponent> _upgradePrototypes = new();
     private EntityQuery<RMCConstructionUpgradeItemComponent> _upgradeItemQuery;
@@ -65,15 +64,22 @@ public sealed class RMCUpgradeSystem : EntitySystem
         var user = args.User;
         var used = args.Used;
 
+        if (!_upgradeItemQuery.TryComp(used, out var upgradeItem))
+            return;
+
+        if (!_whitelist.IsValid(upgradeItem.Whitelist, ent))
+            return;
+
         if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillAmountRequired))
         {
             var failPopup = Loc.GetString("rmc-construction-failure", ("ent", ent));
             _popup.PopupClient(failPopup, ent, user, PopupType.SmallCaution);
+
             args.Handled = true;
             return;
         }
 
-        if (_upgradeItemQuery.HasComp(used) && ent.Comp.Upgrades != null)
+        if (ent.Comp.Upgrades != null)
         {
             _ui.OpenUi(ent.Owner, RMCConstructionUpgradeUiKey.Key, user);
             args.Handled = true;
@@ -141,7 +147,7 @@ public sealed class RMCUpgradeSystem : EntitySystem
         RaiseLocalEvent(ent.Owner, upgradeEv);
         RaiseLocalEvent(spawn, upgradeEv, broadcast: true);
 
-        QueueDel(ent);
+        QueueDel(ent.Owner);
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)

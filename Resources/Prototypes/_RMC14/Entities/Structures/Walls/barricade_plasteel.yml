@@ -19,6 +19,9 @@
   - type: RMCConstructionUpgrade
     upgradedEntity: RMCBarricadeBrutePlasteel
 
+- type: Tag
+  id: RMCPlasteelBarricade
+
 # Plasteel Barricade Tree
 - type: entity
   parent: CMBarricadeBase
@@ -94,6 +97,9 @@
     node: nodePlasteel
   - type: RMCConstructionUpgradeTarget
     upgrades: ["RMCExplosiveUpgradePlasteel", "RMCBiohazardUpgradePlasteel", "RMCBruteUpgradePlasteel"]
+  - type: Tag
+    tags:
+    - RMCPlasteelBarricade
 
 # Metal Barricade Upgrades
 - type: entity

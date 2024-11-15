@@ -36,6 +36,10 @@
   suffix: Filled
   components:
     - type: RMCConstructionUpgradeItem
+      whitelist:
+        tags:
+        - RMCMetalBarricade
+        - RMCPlasteelBarricade
     - type: Material
     - type: PhysicalComposition
       materialComposition:
