@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed climbing not ending until you step off weeds.
-    type: Fix
-  id: 480
-  time: '2024-07-30T08:03:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3404
 - author: Vermidia
   changes:
   - message: The regurgitation action now stuns the regurgitated host for 2 seconds
@@ -4887,5 +4880,23 @@
   id: 979
   time: '2024-11-15T06:17:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4832
+- author: Rainbeon
+  changes:
+  - message: Warrior Lunge will now register hits on Marines that are too close or
+      sharing the same tile as them, instead of making the Warrior uselessly fly through
+      them.
+    type: Fix
+  - message: Warrior Lunge's knockdown and stun is no longer predicted. It will no
+      longer lie about hitting when it actually missed, and no longer cause Marines
+      to appear on the floor for the rest of the game when it fails, but will appear
+      to happen slightly later on a successful hit.
+    type: Fix
+  - message: Warrior Fling is no longer predicted. It will no longer consume it's
+      cooldown on a mis-predicted hit, and will not appear to knock Marines down when
+      the ability actually failed.
+    type: Fix
+  id: 980
+  time: '2024-11-15T07:53:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4781
 Name: RMC14
 Order: -1
