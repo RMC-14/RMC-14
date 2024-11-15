@@ -188,7 +188,6 @@
         recommended: true
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
-        recommended: true
       - id: RMCPouchFirstResponder
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
