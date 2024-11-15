@@ -17,10 +17,10 @@ public sealed partial class RMCConstructionUpgradeComponent : Component
     /// The material that is consumed when the upgrade is used (If null, nothing will be consumed)
     /// </summary>
     [DataField, AutoNetworkedField]
-    public ProtoId<StackPrototype>? Material;
+    public ProtoId<StackPrototype>? Material = "CMSteel";
 
     [DataField, AutoNetworkedField]
-    public int Amount = 1;
+    public int Amount = 2;
 
     [DataField, AutoNetworkedField]
     public EntProtoId UpgradedEntity;

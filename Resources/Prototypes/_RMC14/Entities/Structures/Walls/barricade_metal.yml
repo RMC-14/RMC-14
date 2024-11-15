@@ -1,5 +1,40 @@
 - type: entity
   abstract: true
+  id: RMCBarricadeUpgradeBase
+  components:
+  - type: RMCConstructionUpgrade
+  - type: Sprite
+    sprite: _RMC14/Interface/barricade_upgrades.rsi
+
+- type: entity
+  parent: RMCBarricadeUpgradeBase
+  id: RMCExplosiveUpgrade
+  components:
+  - type: RMCConstructionUpgrade
+    upgradedEntity: CMBarricadeExplosive
+  - type: Sprite
+    state: explosive
+
+- type: entity
+  parent: RMCBarricadeUpgradeBase
+  id: RMCBiohazardUpgrade
+  components:
+  - type: RMCConstructionUpgrade
+    upgradedEntity: CMBarricadeBurn
+  - type: Sprite
+    state: burn
+
+- type: entity
+  parent: RMCBarricadeUpgradeBase
+  id: RMCBruteUpgrade
+  components:
+  - type: RMCConstructionUpgrade
+    upgradedEntity: CMBarricadeBrute
+  - type: Sprite
+    state: brute
+
+- type: entity
+  abstract: true
   parent: CMBaseStructureCorrodible
   id: CMBarricadeBase
   components:
