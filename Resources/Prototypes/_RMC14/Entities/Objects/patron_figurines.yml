@@ -764,3 +764,14 @@
     state: darfman_forgemog
   - type: PatronFigurine
     id: 1dcc1fcc-8332-4573-8784-62dc491fb41e
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRonanRickOShea
+  name: Ronan 'Rick' O'Shea figurine
+  description: "This commemorative figurine is a part of the 'Valiant Fall Memorial' collection- \"Sometimes the best marines are just the ones who show up.\""
+  components:
+  - type: Sprite
+    state: ronan_rick_oshea
+  - type: PatronFigurine
+    id: 2bd916e4-0245-4126-a6c7-31ddbd5ad55f
