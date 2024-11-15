@@ -75,7 +75,7 @@
   id: CMMREFoodSnack
   components:
   - type: Food
-    transferAmount: 1
+    transferAmount: 1.2
   - type: SolutionContainerManager
     solutions:
       food:

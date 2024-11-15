@@ -22,6 +22,7 @@
   minimapBackground:
    sprite: _RMC14/Interface/map_blips.rsi
    state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -40,6 +41,8 @@
         RMCSkillPowerLoader: 2
     - type: MarineOrders
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "CE"
 
 - type: startingGear
   id: CMGearChiefEngineer
@@ -68,3 +71,4 @@
 
 - type: playTimeTracker
   id: CMJobChiefEngineer
+  isHumanoid: true

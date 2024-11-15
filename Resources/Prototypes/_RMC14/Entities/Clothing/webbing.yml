@@ -167,6 +167,81 @@
 
 - type: entity
   parent: CMWebbingBase
+  id: CMWebbingHolster
+  name: shoulder holster
+  description: A handgun holster with an attached pouch, allowing two magazines or speedloaders to be stored along with it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster.rsi
+    state: holster
+  - type: Storage # Can hold sidearm plus two magazines
+    maxItemSize: Normal
+    grid:
+    - 0,0,5,1 #3 slots
+    whitelist:
+      tags:
+      - Sidearm
+      # TODO: Flare gun
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+  - type: FixedItemSizeStorage
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        tags:
+        - Sidearm
+    - popup: rmc-storage-limit-max-ammo-webbing
+      count: 2
+      whitelist:
+        tags:
+        - CMMagazinePistol
+        - RMCMagazineRevolver
+  - type: CMHolster
+    whitelist:
+      tags:
+      - Sidearm
+  - type: Webbing
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster.rsi
+      state: equipped
+    components: # grrrr all the components need to be duplicated
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+      - 0,0,5,1 #3 slots
+      whitelist:
+        tags:
+        - Sidearm
+        # TODO: Flare gun
+        - CMMagazinePistol
+        - RMCMagazineRevolver
+    - type: FixedItemSizeStorage
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: LimitedStorage
+      limits:
+      - popup: rmc-storage-limit-one-gun
+        whitelist:
+          tags:
+          - Sidearm
+      - popup: rmc-storage-limit-max-ammo-webbing
+        count: 2
+        whitelist:
+          tags:
+          - CMMagazinePistol
+          - RMCMagazineRevolver
+    - type: CMHolster
+      whitelist:
+        tags:
+        - Sidearm
+
+- type: entity
+  parent: CMWebbingBase
   id: CMWebbingPouch
   name: drop pouch
   description: A convenient pouch to carry loose items around.

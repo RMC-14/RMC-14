@@ -20,6 +20,7 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: smartgunner
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
@@ -32,6 +33,8 @@
     - type: CMVendorUser
       points: 45
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: "SG"
 
 - type: startingGear
   id: CMGearSmartGunOperator
@@ -52,6 +55,7 @@
 
 - type: playTimeTracker
   id: CMJobSmartGunOperator
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Map;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -25,9 +26,19 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+        SubscribeLocalEvent<CMRefillableSolutionComponent, ExaminedEvent>(OnRefillableSolutionExamined);
 
         SubscribeLocalEvent<CMSolutionRefillerComponent, InteractUsingEvent>(OnRefillerInteractUsing);
+
         SubscribeLocalEvent<RMCRefillSolutionOnStoreComponent, EntInsertedIntoContainerMessage>(OnRefillSolutionOnStoreInserted);
+    }
+
+    private void OnRefillableSolutionExamined(Entity<CMRefillableSolutionComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(CMRefillableSolutionComponent)))
+        {
+            args.PushMarkup("[color=cyan]This can be refilled by clicking on a medical vendor with it![/color]");
+        }
     }
 
     private void OnRefillerInteractUsing(Entity<CMSolutionRefillerComponent> ent, ref InteractUsingEvent args)

@@ -1,10 +1,7 @@
-# TODO RMC14 make names from dogtags addable
-
+# TODO RMC14 make dogtag names be show at the endscreen + memorial ghosts
 - type: entity
   parent: Memorial
-  id: CMMemorial
-  name: slab of victory
-  description: A ship memorial dedicated to the triumphs of the Marines and the fallen marines of this ship. On the left there are grand tales of victory etched into the slab. On the right there is a list of famous marines who have fallen in combat serving the Marines.
+  id: CMMemorialBase
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/memorial.rsi
@@ -24,7 +21,15 @@
     isCorrodible: false
 
 - type: entity
-  parent: CMMemorial
+  parent: CMMemorialBase
+  id: CMMemorial
+  name: slab of victory
+  description: A ship memorial dedicated to the triumphs of the Marines and the fallen marines of this ship. On the left there are grand tales of victory etched into the slab. On the right there is a list of famous marines who have fallen in combat serving the Marines.
+  components:
+  - type: RMCMemorial
+
+- type: entity
+  parent: CMMemorialBase
   id: CMMemorialMaintainers
   name: slab of remembrance
   description: A memorial to all Maintainer Team members that have retired from working on RMC-14. No mentor names are present.

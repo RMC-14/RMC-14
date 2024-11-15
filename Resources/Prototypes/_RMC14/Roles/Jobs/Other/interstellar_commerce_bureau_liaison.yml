@@ -39,6 +39,8 @@
   - type: Skills
     skills:
       RMCSkillVehicles: 1
+  - type: JobPrefix
+    prefix: "ICC Rep."
 
 - type: startingGear
   id: RMCGearICBLiaison

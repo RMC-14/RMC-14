@@ -31,6 +31,7 @@
   minimapBackground:
    sprite: _RMC14/Interface/map_blips.rsi
    state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -53,6 +54,8 @@
         RMCSkillVehicles: 1
     - type: MarineOrders
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "ASO"
 
 - type: startingGear
   id: CMGearASO
@@ -81,3 +84,4 @@
 
 - type: playTimeTracker
   id: CMJobAuxiliarySupportOfficer
+  isHumanoid: true

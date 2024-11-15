@@ -23,3 +23,5 @@
         Slash: 15
         Blunt: 15
         Structural: 40
+  - type: Prying
+    speedModifier: 100000

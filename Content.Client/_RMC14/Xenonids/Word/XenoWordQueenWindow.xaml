@@ -5,6 +5,6 @@
     MinSize="300 200">
     <BoxContainer Orientation="Vertical">
         <TextEdit Name="Text" Access="Public" HorizontalExpand="True" VerticalExpand="True"/>
-        <Button Name="SendButton" Access="Public" MinHeight="35" Text="Send to the hive" />
+        <Button Name="SendButton" Access="Public" MinHeight="35" Text="Send to the hive" StyleClasses="OpenBoth" />
     </BoxContainer>
 </controls:XenoWordQueenWindow>

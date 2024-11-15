@@ -30,6 +30,7 @@ using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Spawners;
+using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
@@ -80,6 +81,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
@@ -88,6 +90,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly RMCStationJobsSystem _rmcStationJobs = default!;
     [Dependency] private readonly RoleSystem _roles = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
@@ -421,11 +424,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             }
 
             // Any unfilled xeno slots become larva
-            for (var i = selectedXenos; i < totalXenos; i++)
-            {
-                // TODO RMC14 burrowed larva
-                SpawnXenoEnt(comp.LarvaEnt);
-            }
+            var unfilled = totalXenos - selectedXenos;
+            if (unfilled > 0)
+                _hive.IncreaseBurrowedLarva(unfilled);
 
             var survivorCandidates = new List<NetUserId>[Enum.GetValues<JobPriority>().Length];
             for (var i = 0; i < survivorCandidates.Length; i++)
@@ -584,7 +585,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     _hunger.SetHunger(ev.SpawnResult.Value, 50.0f, hunger);
             }
 
-            _gunIFF.SetUserFaction(ev.SpawnResult.Value, comp.MarineFaction);
+            var faction = HasComp<SurvivorComponent>(ev.SpawnResult.Value) ? comp.SurvivorFaction : comp.MarineFaction;
+            _gunIFF.SetUserFaction(ev.SpawnResult.Value, faction);
             return;
         }
     }
@@ -1105,9 +1107,29 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     {
         base.ActiveTick(uid, component, gameRule, frameTime);
 
-        if (Timing.CurTime >= component.NextCheck)
+        var time = Timing.CurTime;
+        component.StartTime ??= time;
+        var announcementTime = time - component.StartTime;
+        if (!component.AresGreetingDone && announcementTime >= component.AresGreetingDelay)
         {
-            component.NextCheck = Timing.CurTime + component.CheckEvery;
+            component.AresGreetingDone = true;
+            _marineAnnounce.AnnounceARES(default, "ARES. Online. Good morning, marines.", component.AresGreetingAudio,"rmc-announcement-ares-online");
+        }
+
+        if (!component.AresMapDone && announcementTime >= component.AresMapDelay)
+        {
+            component.AresMapDone = true;
+
+            if (SelectedPlanetMap != null &&
+                _rmcPlanet.PlanetPaths.TryGetValue(SelectedPlanetMap, out var planet))
+            {
+                _marineAnnounce.AnnounceARES(default, planet.Announcement, announcement: "rmc-announcement-ares-map");
+            }
+        }
+
+        if (time >= component.NextCheck)
+        {
+            component.NextCheck = time + component.CheckEvery;
             CheckRoundShouldEnd();
         }
 
@@ -1117,7 +1139,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         if (component.QueenDiedCheck == null)
             return;
 
-        if (Timing.CurTime >= component.QueenDiedCheck)
+        if (time >= component.QueenDiedCheck)
         {
             if (_xenoEvolution.HasLiving<XenoComponent>(4))
             {
@@ -1160,6 +1182,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             "prison" => "Fiorina Science Annex",
             "shiva" => "Shivas Snowball",
             "trijent" => "Trijent Dam",
+            "varadero" => "New Varadero",
             _ => name,
         };
     }

@@ -13,6 +13,9 @@
   abstract: true
   placement:
     mode: SnapgridCenter
+  components:
+  - type: Corrodible
+    timeToApply: 4
 
 - type: entity
   parent: BaseStructure
@@ -52,6 +55,7 @@
   abstract: true
   components:
   - type: Corrodible
+    timeToApply: 1
 
 # BaseWall
 - type: entity
@@ -143,17 +147,22 @@
   - type: ExplosionResistance
     damageCoefficient: 12.5 # Walls take 15x explosive damage, resin walls reduce that by 15%
   - type: DamageMultiplierFlags
-    flags: Turf
+    flags:
+    - Turf
+    - Xeno
 
 # Invisible Wall
 
 - type: entity
+  parent: MarkerBase
   id: RMCWallInvisibleBulletPassible
   name: wall blocker
   suffix: Projectile Passible
   placement:
     mode: SnapgridCenter
   components:
+  - type: Sprite
+    state: green
   - type: Transform
     anchored: true
   - type: Physics
@@ -171,6 +180,7 @@
           bounds: "-0.5,-0.5,0.5,0.5"
         mask:
         - FullTileMask
+        - MobMask
         layer:
         - HighImpassable
         - MidImpassable

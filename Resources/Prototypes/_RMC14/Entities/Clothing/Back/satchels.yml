@@ -242,3 +242,38 @@
     - id: CMPaper
     - id: RMCRadioHandheldColonyOff
     - id: CMCrowbar
+
+- type: entity
+  parent: CMSatchel
+  id: RMCBackpackRTO
+  name: UNMC radio telephone pack
+  description: A heavy-duty pack, used for telecommunications between central command. Commonly carried by RTOs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto.rsi
+    layers:
+    - state: icon
+  - type: CMStorageVisualizer
+    storageClosed: null
+    storageOpen: null
+  - type: RotaryPhone
+    category: Marine
+  - type: RotaryPhoneBackpack
+  - type: UserInterface
+    interfaces:
+      enum.TelephoneUiKey.Key:
+        type: TelephoneBui
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: GenericVisualizer
+    visuals:
+      enum.RotaryPhoneLayers.Layer:
+        base:
+          Base: { state: icon }
+          Ring: { state: ring }
+          Ear: { state: ear }
+  - type: Undisposable

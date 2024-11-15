@@ -23,6 +23,9 @@
   - type: XenoNestSurface
   - type: XenoConstructionPlasmaCost
     plasma: 120
+  - type: XenoStructureUpgradeable
+    to: WallXenoResinThick
+    cost: 50
   - type: MeleeReceivedMultiplier
     xenoDamage:
       types:
@@ -56,6 +59,8 @@
         Slash: 338
   - type: XenoConstructionPlasmaCost
     plasma: 170
+  - type: XenoStructureUpgradeable
+    to: null
 
 - type: entity
   parent: CMBaseWallXeno
@@ -116,6 +121,9 @@
   - type: IconSmooth
     key: walls
     base: membrane
+  - type: XenoStructureUpgradeable
+    to: WallXenoMembraneThick
+    cost: 25
 
 - type: entity
   parent: BaseMembraneXeno

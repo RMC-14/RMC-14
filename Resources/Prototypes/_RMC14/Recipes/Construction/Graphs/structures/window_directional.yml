@@ -1,0 +1,22 @@
+- type: constructionGraph
+  id: RMCWindowDirectional
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: windowDirectional
+          steps:
+            - material: CMGlass
+              amount: 1
+              doAfter: 1
+        - to: windowReinforcedDirectional
+          steps:
+            - material: CMGlassReinforced
+              amount: 1
+              doAfter: 1
+
+    - node: windowDirectional
+      entity: CMWindowDirectional
+
+    - node: windowReinforcedDirectional
+      entity: CMWindowReinforcedDirectional

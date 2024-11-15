@@ -48,9 +48,11 @@
     deselectOnMiss: false
     range: 20
     repeat: true
+    checkCanAccess: false
   - type: XenoConstructionAction
     checkStructureSelected: true
     checkWeeds: true
+    canUpgrade: true
 
 - type: entity
   id: ActionXenoOrderConstruction

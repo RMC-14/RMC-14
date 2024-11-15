@@ -21,6 +21,7 @@
   minimapBackground:
    sprite: _RMC14/Interface/map_blips.rsi
    state: background_mp
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -38,6 +39,8 @@
         RMCSkillPolice: 2
     - type: MarineOrders
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "MW"
 
 - type: startingGear
   id: CMGearMilitaryWarden
@@ -70,3 +73,4 @@
 
 - type: playTimeTracker
   id: CMJobMilitaryWarden
+  isHumanoid: true

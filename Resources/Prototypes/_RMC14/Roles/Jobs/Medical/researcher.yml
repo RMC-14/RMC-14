@@ -20,6 +20,7 @@
   minimapBackground:
    sprite: _RMC14/Interface/map_blips.rsi
    state: background_medical
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -31,6 +32,8 @@
         RMCSkillResearch: 1
         RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
+    - type: JobPrefix
+      prefix: "Rsr"
   hidden: true # TODO RMC14
 
 - type: startingGear
@@ -67,3 +70,4 @@
 
 - type: playTimeTracker
   id: CMJobResearcher
+  isHumanoid: true

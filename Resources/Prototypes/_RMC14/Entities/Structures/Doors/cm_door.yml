@@ -156,6 +156,7 @@
     flags: Breaching
   - type: Corrodible
     isCorrodible: true
+    timeToApply: 4
 
 - type: entity
   abstract: true

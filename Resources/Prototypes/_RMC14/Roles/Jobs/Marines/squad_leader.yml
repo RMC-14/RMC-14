@@ -20,6 +20,7 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: leader
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
@@ -43,6 +44,8 @@
       leader: true
     - type: SquadLeader
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "SL"
 
 - type: startingGear
   id: CMGearSquadLeader
@@ -64,6 +67,7 @@
 
 - type: playTimeTracker
   id: CMJobSquadLeader
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

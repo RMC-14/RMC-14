@@ -20,6 +20,7 @@
   minimapBackground:
    sprite: _RMC14/Interface/map_blips.rsi
    state: background_shipside
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -30,6 +31,8 @@
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillPowerLoader: 2
+    - type: JobPrefix
+      prefix: "OT"
   hidden: true # TODO RMC14
 
 - type: startingGear
@@ -60,3 +63,4 @@
 
 - type: playTimeTracker
   id: CMJobOrdnanceTech
+  isHumanoid: true

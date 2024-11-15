@@ -1,8 +1,10 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Input;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Database;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -25,6 +27,7 @@ namespace Content.Shared._RMC14.Inventory;
 
 public abstract class SharedCMInventorySystem : EntitySystem
 {
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -115,11 +118,16 @@ public abstract class SharedCMInventorySystem : EntitySystem
         if (comp.Contents.Count == 0)
             return;
 
+        // CMItemSlots-based holsters have their own eject verb, no need to add a duplicate
+        if (HasComp<CMItemSlotsComponent>(holster))
+            return;
+
         AlternativeVerb holsterVerb = new()
         {
             Act = () => Unholster(args.User, holster, out _),
-            Text = Loc.GetString("rmc-holster-verb"),
-            Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/eject.svg.192dpi.png"))
+            Text = Loc.GetString("rmc-storage-holster-eject-verb"),
+            IconEntity = GetNetEntity(comp.Contents[0]),
+            Priority = 5 // Higher priority to appear above folding verbs (for webbing-based holsters)
         };
         args.Verbs.Add(holsterVerb);
     }
@@ -284,7 +292,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
         }
 
         _appearance.SetData(ent, CMHolsterLayers.Fill, visuals);
-        _appearance.SetData(ent, CMHolsterLayers.Size, size);
     }
 
     private bool SlotCanInteract(EntityUid user, EntityUid holster, [NotNullWhen(true)] out ItemSlotsComponent? itemSlots)
@@ -311,8 +318,14 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
         foreach (var slot in itemSlots.Slots.Values.OrderBy(s => s.Priority))
         {
+            var item = slot.ContainerSlot?.ContainedEntity;
             if (_itemSlots.TryEjectToHands(holster, slot, user, true))
+            {
+                if (item != null)
+                    _adminLog.Add(LogType.RMCHolster, $"{ToPrettyString(user)} unholstered {ToPrettyString(item)}");
+
                 return true;
+            }
         }
 
         return false;
@@ -381,7 +394,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 if (HasComp<StorageComponent>(clothing) &&
                     _storage.CanInsert(clothing, item, out _))
                 {
-                    // TODO: Add storage holster to valid slots list
                     validSlots.Add(new HolsterSlot(priority, true, null, clothing, null));
                 }
             }
@@ -401,7 +413,10 @@ public abstract class SharedCMInventorySystem : EntitySystem
             // Try insert into ItemSlot-based holster
             if (slot.ItemSlot != null &&
                 _itemSlots.TryInsert(slot.Ent, slot.ItemSlot, item, user, excludeUserAudio: true))
+            {
+                _adminLog.Add(LogType.RMCHolster, $"{ToPrettyString(user)} holstered {ToPrettyString(item)}");
                 return;
+            }
 
             // Try insert into Storage-based holster
             if (slot.ItemSlot == null &&
@@ -413,6 +428,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 _hands.TryDrop(user, item);
                 _storage.Insert(slot.Ent, item, out _, user, storage, playSound: false);
                 _audio.PlayPredicted(holster.InsertSound, item, user);
+                _adminLog.Add(LogType.RMCHolster, $"{ToPrettyString(user)} holstered {ToPrettyString(item)}");
                 return;
             }
         }
@@ -575,7 +591,9 @@ public abstract class SharedCMInventorySystem : EntitySystem
             if (TryComp(item, out StorageComponent? storage) &&
                 TryGetLastInserted((item, holster), out var weapon))
             {
-                _hands.TryPickup(user, weapon);
+                if (!_hands.TryPickup(user, weapon))
+                    return false;
+
                 holster.Contents.Remove(weapon);
                 _audio.PlayPredicted(holster.EjectSound, item, user);
                 stop = true;
@@ -583,7 +601,10 @@ public abstract class SharedCMInventorySystem : EntitySystem
             }
 
             if (PickupSlot(user, item))
+            {
+                _adminLog.Add(LogType.RMCHolster, $"{ToPrettyString(user)} unholstered {ToPrettyString(item)}");
                 return true;
+            }
         }
 
         var ev = new IsUnholsterableEvent();
@@ -592,6 +613,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         if (!ev.Unholsterable)
             return false;
 
+        _adminLog.Add(LogType.RMCHolster, $"{ToPrettyString(user)} unholstered {ToPrettyString(item)}");
         return _hands.TryPickup(user, item);
     }
 

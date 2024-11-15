@@ -23,6 +23,7 @@
   minimapBackground:
    sprite: _RMC14/Interface/map_blips.rsi
    state: background_shipside
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -41,6 +42,8 @@
     - type: CMVendorUser
       points: 45
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: "DCC"
   hidden: false
 
 - type: startingGear
@@ -67,3 +70,4 @@
 
 - type: playTimeTracker
   id: CMJobDropshipCrewChief
+  isHumanoid: true

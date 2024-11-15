@@ -20,6 +20,7 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: spec
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
@@ -39,6 +40,8 @@
       extraPoints:
         Specialist: 120
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: "Spc"
 
 - type: startingGear
   id: CMGearWeaponsSpecialist
@@ -60,6 +63,7 @@
 
 - type: playTimeTracker
   id: CMJobWeaponsSpecialist
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -3,7 +3,6 @@ using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Whitelist;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
@@ -128,6 +127,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
                 continue;
 
             args.Args.Modes |= modSet.ExtraFireModes;
+            args.Args.Set = modSet.SetFireMode;
         }
     }
 

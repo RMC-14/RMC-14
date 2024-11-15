@@ -52,7 +52,7 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.bleed_time_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> CMMarinesPerXeno =
-        CVarDef.Create("rmc.marines_per_xeno", 5f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.marines_per_xeno", 6f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCPatronLobbyMessageTimeSeconds =
         CVarDef.Create("rmc.patron_lobby_message_time_seconds", 30, CVar.REPLICATED | CVar.SERVER);
@@ -83,7 +83,7 @@ public sealed class RMCCVars : CVars
     ///     Comma-separated list of maps to load as the planet in the distress signal gamemode.
     /// </summary>
     public static readonly CVarDef<string> RMCPlanetMaps =
-        CVarDef.Create("rmc.planet_maps", "/Maps/_RMC14/lv624.yml,/Maps/_RMC14/solaris.yml,/Maps/_RMC14/prison.yml,/Maps/_RMC14/shiva.yml,/Maps/_RMC14/trijent.yml", CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.planet_maps", "/Maps/_RMC14/lv624.yml,/Maps/_RMC14/solaris.yml,/Maps/_RMC14/prison.yml,/Maps/_RMC14/shiva.yml,/Maps/_RMC14/trijent.yml,/Maps/_RMC14/varadero.yml", CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCPlanetCoordinateVariance =
         CVarDef.Create("rmc.planet_coordinate_variance", 500, CVar.REPLICATED | CVar.SERVER);
@@ -212,17 +212,32 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.power_load_multiplier", 0.01f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCMarinesPerSurvivor =
-        CVarDef.Create("rmc.marines_per_survivor", 10, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.marines_per_survivor", 20, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCSurvivorsMinimum =
         CVarDef.Create("rmc.survivors_minimum", 2, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCSurvivorsMaximum =
-        CVarDef.Create("rmc.survivors_maximum", 8, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.survivors_maximum", 6, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCSpawnerMaxCorpses =
         CVarDef.Create("rmc.spawner_max_corpses", 25, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCHiveSpreadEarlyMinutes =
         CVarDef.Create("rmc.hive_spread_early_minutes", 40, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCNewPlayerTimeTotalHours =
+        CVarDef.Create("rmc.new_player_time_total_hours", 25, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCNewPlayerTimeJobHours =
+        CVarDef.Create("rmc.new_player_time_job_hours", 10, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarvaEarlyThresholdMinutes =
+        CVarDef.Create("rmc.late_joins_per_burrowed_larva_early_threshold_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarvaEarly =
+        CVarDef.Create("rmc.late_joins_per_burrowed_larva_early", 5.5f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarva =
+        CVarDef.Create("rmc.late_joins_per_burrowed_larva", 4f, CVar.REPLICATED | CVar.SERVER);
 }
