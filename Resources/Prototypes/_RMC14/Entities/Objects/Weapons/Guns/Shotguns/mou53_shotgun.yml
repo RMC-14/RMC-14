@@ -8,6 +8,9 @@
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53.rsi
+  - type: Tag
+    tags:
+    - RMCWeaponShotgunMOU53
   - type: Gun
     shotsPerBurst: 1
   - type: ShootUseDelay
@@ -49,7 +52,6 @@
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-stock:
-        startingAttachable: RMCAttachmentMOU53Stock
         whitelist:
           tags:
           - RMCAttachmentMOU53Stock
@@ -67,3 +69,6 @@
       rmc-aslot-rail: -0.02, 0.15
       rmc-aslot-stock: -0.65, -0.18
       rmc-aslot-underbarrel: 0.5, -0.25
+
+- type: Tag
+  id: RMCWeaponShotgunMOU53

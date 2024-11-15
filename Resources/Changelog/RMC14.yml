@@ -1,151 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Requisitions not getting their free 80 m44 speed loaders round-start.
-    type: Fix
-  id: 465
-  time: '2024-07-25T22:55:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3276
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the Boiler's Bombard projectile colliding with xenonids of the
-      same hive. It can now be shot through friendly xenonids.
-    type: Fix
-  id: 466
-  time: '2024-07-26T01:43:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3277
-- author: DrSmugleaf
-  changes:
-  - message: Fixed dropships taking 1 second to travel.
-    type: Fix
-  id: 467
-  time: '2024-07-26T02:18:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3283
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the pheromones radial appearing in kingdom com. It now appears
-      centered on your character.
-    type: Fix
-  id: 468
-  time: '2024-07-26T02:17:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3282
-- author: DrSmugleaf
-  changes:
-  - message: Temporarily remove heavy assault rifle mags from vendors until the heavy
-      assault rifle is available, to not confuse people about where to get it.
-    type: Fix
-  id: 469
-  time: '2024-07-26T02:30:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3284
-- author: BackeTako
-  changes:
-  - message: Fixed doors looking bright when bolted.
-    type: Fix
-  id: 470
-  time: '2024-07-27T06:09:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3337
-- author: UnicornOnLSD
-  changes:
-  - message: Meatzels can be found in marine MREs
-    type: Add
-  id: 471
-  time: '2024-07-27T06:15:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3333
-- author: Vermidia
-  changes:
-  - message: Fix bombard range being too small to take advantage of long-range sight
-    type: Fix
-  id: 472
-  time: '2024-07-27T06:21:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3321
-- author: MisterVAdos
-  changes:
-  - message: Added marine goggles.
-    type: Add
-  id: 473
-  time: '2024-07-27T06:40:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3189
-- author: thymol-blue
-  changes:
-  - message: Biohazardous barricades are now constructible with six metal rods.
-    type: Fix
-  id: 474
-  time: '2024-07-27T08:16:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3346
-- author: ShadowCommander
-  changes:
-  - message: Xenonids are now able to see resin walls, doors, and membrane through
-      walls.
-    type: Add
-  - message: Xenonids are now able to see eggs through walls.
-    type: Add
-  id: 475
-  time: '2024-07-27T08:33:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3003
-- author: BackeTako
-  changes:
-  - message: Fixed autolathe looking very bright.
-    type: Fix
-  - message: Fixed the snack vending machine looking very bright.
-    type: Fix
-  id: 476
-  time: '2024-07-27T11:52:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3356
-- author: Tunguso4ka
-  changes:
-  - message: Ported all hair from cm-ss13!
-    type: Add
-  id: 477
-  time: '2024-07-29T23:26:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3385
-- author: Vermidia
-  changes:
-  - message: Added binoculars for 5 points in the various squad vendors, and 2 can
-      be found roundstart in requisitions.
-    type: Add
-  id: 478
-  time: '2024-07-30T00:59:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3375
-- author: Vermidia
-  changes:
-  - message: Shaking someone out of a stun now only removes 6 seconds from the stun
-      instead of instantly ending it per help.
-    type: Tweak
-  - message: When shaken out of the initial infected state, you lose the blindness
-      & muteness that came with it
-    type: Fix
-  id: 479
-  time: '2024-07-30T08:01:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3403
-- author: DrSmugleaf
-  changes:
-  - message: Fixed climbing not ending until you step off weeds.
-    type: Fix
-  id: 480
-  time: '2024-07-30T08:03:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3404
-- author: Vermidia
-  changes:
-  - message: The regurgitation action now stuns the regurgitated host for 2 seconds
-    type: Add
-  id: 481
-  time: '2024-07-30T08:08:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3377
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added animations for building resin structures
-    type: Add
-  id: 482
-  time: '2024-07-30T08:14:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3267
-- author: Sigil
-  changes:
-  - message: Shotguns now show their fire delay visual as before. The popup, however,
-      is gone due to technical reasons.
-    type: Fix
-  id: 483
-  time: '2024-07-30T08:21:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3285
 - author: Vermidia
   changes:
   - message: Parasites & Lesser Drones no longer count for population when considering
@@ -4877,5 +4730,182 @@
   id: 964
   time: '2024-11-09T05:23:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4775
+- author: CyberTropic
+  changes:
+  - message: Added random spawners for powercells, toolboxes, and tech supplies.
+    type: Add
+  id: 965
+  time: '2024-11-12T05:51:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4793
+- author: FungiFellow
+  changes:
+  - message: Increased all Turrets Range by One Tile Parity :)
+    type: Tweak
+  id: 966
+  time: '2024-11-12T05:53:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4728
+- author: CyberTropic
+  changes:
+  - message: Added couch, water cooler.
+    type: Add
+  id: 967
+  time: '2024-11-12T05:55:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4794
+- author: CyberTropic
+  changes:
+  - message: Trees leave behind stumps when destroyed.
+    type: Add
+  id: 968
+  time: '2024-11-12T05:58:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4631
+- author: Vermidia
+  changes:
+  - message: Fixed breaching shells having no spread bullets, too much damage, and
+      no falloff
+    type: Fix
+  id: 969
+  time: '2024-11-15T02:42:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4819
+- author: Vermidia
+  changes:
+  - message: Fixed Boilers not exploding into acid gas on death.
+    type: Add
+  id: 970
+  time: '2024-11-15T02:44:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4822
+- author: Vermidia
+  changes:
+  - message: Xenos can now see leaders on the tacmap
+    type: Add
+  id: 971
+  time: '2024-11-15T04:52:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4830
+- author: Boaz1111
+  changes:
+  - message: Fixed the breaching shells reverting to buckshot shells under certain
+      circumstances.
+    type: Fix
+  id: 972
+  time: '2024-11-15T05:02:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4798
+- author: Aurallianz
+  changes:
+  - message: 'Boots can now hold: Screwdriver, Scalpel, ThrowingKnife & Holdout Pistol.'
+    type: Fix
+  - message: 'Mouth slot can now hold: Screwdriver.'
+    type: Fix
+  id: 973
+  time: '2024-11-15T05:04:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4811
+- author: CyberTropic
+  changes:
+  - message: Added a box for M84 CAS flares.
+    type: Add
+  - message: Made MRE and Flare boxes constructable from cardboard.
+    type: Add
+  - message: Fixed visuals for undeployed MRE and Flare boxes.
+    type: Fix
+  - message: Fixed spent CAS flares not being able to be picked up.
+    type: Fix
+  - message: Fixed being able to put CAS flares in regular flare pouches and vice
+      versa
+    type: Fix
+  id: 974
+  time: '2024-11-15T05:12:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4756
+- author: CyberTropic
+  changes:
+  - message: Added some filtration props
+    type: Add
+  id: 975
+  time: '2024-11-15T05:29:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4671
+- author: Vermidia
+  changes:
+  - message: Fixed bodybags and stasisbags stopping rot
+    type: Fix
+  id: 976
+  time: '2024-11-15T05:30:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4831
+- author: Whisper
+  changes:
+  - message: Added Stella 'Lake' Poley, Darfman Forgemog figurines.
+    type: Add
+  id: 977
+  time: '2024-11-15T05:31:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4797
+- author: Vermidia
+  changes:
+  - message: Fixed metabolism rate and properties of basic dispenser chems. Most dispenser
+      chems are shown as unknown on the health analyzer.
+    type: Fix
+  - message: Iron correctly heals more blood but also requires nutrition and drains
+      it as it processes.
+    type: Fix
+  - message: Nutriment heals blood if you're not hungry
+    type: Fix
+  - message: Modified Prepared MRES and components to intended values
+    type: Fix
+  id: 978
+  time: '2024-11-15T05:33:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4795
+- author: Rainbeon
+  changes:
+  - message: Fixed Bipods using the wrong deployment direction when being deployed
+      after a manual un-deploy. Bipods should no longer seem to "randomly" undeploy
+      when being fired.
+    type: Fix
+  id: 979
+  time: '2024-11-15T06:17:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4832
+- author: Rainbeon
+  changes:
+  - message: Warrior Lunge will now register hits on Marines that are too close or
+      sharing the same tile as them, instead of making the Warrior uselessly fly through
+      them.
+    type: Fix
+  - message: Warrior Lunge's knockdown and stun is no longer predicted. It will no
+      longer lie about hitting when it actually missed, and no longer cause Marines
+      to appear on the floor for the rest of the game when it fails, but will appear
+      to happen slightly later on a successful hit.
+    type: Fix
+  - message: Warrior Fling is no longer predicted. It will no longer consume it's
+      cooldown on a mis-predicted hit, and will not appear to knock Marines down when
+      the ability actually failed.
+    type: Fix
+  id: 980
+  time: '2024-11-15T07:53:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4781
+- author: Cyberanarchbee
+  changes:
+  - message: M890 Tactical Shotgun
+    type: Add
+  - message: M890 Tactical Shotgun Stock
+    type: Add
+  id: 981
+  time: '2024-11-15T08:06:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4193
+- author: crystalHex
+  changes:
+  - message: The Mateba barrel can now be re-attached to the gun after being removed.
+    type: Fix
+  - message: The M44 and Mateba speedloaders are no longer interchangable.
+    type: Fix
+  - message: The Mateba can now be reloaded one bullet at a time.
+    type: Fix
+  - message: Tweaked the damage and AP values of Mateba ammunition and the damage
+      multiplier of the Mateba itself.
+    type: Fix
+  id: 982
+  time: '2024-11-15T08:23:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4784
+- author: crystalHex
+  changes:
+  - message: Fixed pistol, revolver and Mateba holster belts missing suit storage
+      sprites. Also fixed revolver holster belt using incorrect sprites.
+    type: Fix
+  id: 983
+  time: '2024-11-15T08:22:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4707
 Name: RMC14
 Order: -1

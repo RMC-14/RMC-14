@@ -87,3 +87,12 @@
 
 - type: Tag
   id: RMCMacheteScabbard
+
+- type: Tag
+  id: RMCScalpel
+
+- type: Tag
+  id: RMCScrewdriver
+
+- type: Tag
+  id: ThrowingKnife

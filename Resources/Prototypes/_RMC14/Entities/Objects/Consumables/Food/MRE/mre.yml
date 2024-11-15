@@ -126,12 +126,14 @@
   - type: MREItem
 
 - type: entity
-  abstract: true
   parent: RMCBoxMagazineBase
-  id: RMCBoxMREBase
+  id: RMCBoxMREEmpty
   name: box of MREs
   description: A box of MREs. Nutritious, but not delicious.
   components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMREEmpty
   - type: ItemSlots
   - type: CMItemSlots
     count: 12
@@ -145,8 +147,14 @@
     - state: supply_crate
     - state: magaz_mre
       map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: supply_crate_lid
+      map: [ "lid" ]
   - type: GenericVisualizer
     visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
       enum.CMItemSlotsLayers.Fill:
         enum.CMItemSlotsLayers.Fill:
           Empty: { state: magaz_mre, visible: false }
@@ -154,9 +162,9 @@
           Medium: { state: magaz_mre_2, visible: true }
           High: { state: magaz_mre_3, visible: true }
           Full: { state: magaz_mre, visible: true }
-
+    
 - type: entity
-  parent: RMCBoxMREBase
+  parent: RMCBoxMREEmpty
   id: RMCBoxMRE
   suffix: Filled
   components:

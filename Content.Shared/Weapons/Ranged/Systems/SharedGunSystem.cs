@@ -553,8 +553,7 @@ public abstract partial class SharedGunSystem : EntitySystem
                 case AmmoComponent newAmmo:
                     if (_netManager.IsServer || GunPrediction)
                     {
-                        shotProjectiles.Add(ent!.Value);
-                        CreateAndFireProjectiles(ent.Value, newAmmo);
+                        CreateAndFireProjectiles(ent!.Value, newAmmo);
                     }
                     else
                     {

@@ -46,7 +46,7 @@
       SoundTargetInLOS: !type:SoundPathSpecifier
         path: /Audio/Effects/double_beep.ogg
       VisionRadius: !type:Single
-        9.0
+        10.0
       AggroVisionRadius: !type:Single
         10.0
   - type: MouseRotator
