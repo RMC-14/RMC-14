@@ -24,7 +24,7 @@
     chambers: [ True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null ]
   - type: GunDamageModifier
-    multiplier: 1.2 # TODO: set this to 1.5 once GunDamageModifier system is fixed
+    multiplier: 1.5
   - type: RMCSelectiveFire
     baseFireRate: 1.111
     scatterWielded: 8
