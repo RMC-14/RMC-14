@@ -47,6 +47,10 @@
       components:
       - Xeno
     hitsToInvulnerability: 3
+  - type: UserInterface
+    interfaces:
+      enum.RMCConstructionUpgradeUiKey.Key:
+        type: RMCConstructionUpgradeBui
 
 # Metal Barricade Tree
 - type: entity
