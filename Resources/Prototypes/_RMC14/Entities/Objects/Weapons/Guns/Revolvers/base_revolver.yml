@@ -38,8 +38,6 @@
     whitelist:
       tags:
       - RMCMagazineRevolver
-      - RMCSpeedLoaderM44
-      - RMCCartridgeRevolver44
     proto: RMCCartridgeRevolver44
     capacity: 6
     chambers: [ True, True, True, True, True, True ]

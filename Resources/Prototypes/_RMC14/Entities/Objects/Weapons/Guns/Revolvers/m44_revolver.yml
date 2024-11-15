@@ -9,6 +9,10 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m44.rsi
   - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+      - RMCSpeedLoaderM44
+      - RMCCartridgeRevolver44
     proto: RMCCartridgeRevolver44
     capacity: 7
     chambers: [ True, True, True, True, True, True, True ]
