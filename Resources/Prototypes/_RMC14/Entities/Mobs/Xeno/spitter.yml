@@ -64,7 +64,7 @@
       RMCMolecularAcid: 1 # TODO RMC14 2
     tailDamage:
       groups:
-        Brute: 30
+        Brute: 36
   - type: CMArmor
     armor: 15
     explosionArmor: 20
