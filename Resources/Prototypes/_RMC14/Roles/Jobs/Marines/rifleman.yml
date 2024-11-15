@@ -10,6 +10,11 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - Rifleman
+  hasIcon: false
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: private
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
@@ -19,10 +24,8 @@
     - type: CMVendorUser
       points: 45
     - type: SquadArmorWearer
-  hasIcon: false
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: private
+    - type: JobPrefix
+      prefix: "RFN"
 
 - type: startingGear
   id: CMGearRifleman
@@ -44,6 +47,7 @@
 
 - type: playTimeTracker
   id: CMJobRifleman
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

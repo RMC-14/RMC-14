@@ -24,6 +24,14 @@
       "directions": 4
     },
     {
+      "name": "p_stair_left_cap_half",
+      "directions": 4
+    },
+    {
+      "name": "p_stair_right_cap_half",
+      "directions": 4
+    },
+    {
       "name": "p_stair_solo_cap",
       "directions": 4
     },
@@ -44,6 +52,14 @@
       "directions": 4
     },
     {
+      "name": "p_stair_kutjevo_left_cap_half",
+      "directions": 4
+    },
+    {
+      "name": "p_stair_kutjevo_right_cap_half",
+      "directions": 4
+    },
+    {
       "name": "p_stair_kutjevo_solo_cap",
       "directions": 4
     },
@@ -61,6 +77,14 @@
     },
     {
       "name": "p_stair_ice_right_cap",
+      "directions": 4
+    },
+    {
+      "name": "p_stair_ice_left_cap_half",
+      "directions": 4
+    },
+    {
+      "name": "p_stair_ice_right_cap_half",
       "directions": 4
     },
     {

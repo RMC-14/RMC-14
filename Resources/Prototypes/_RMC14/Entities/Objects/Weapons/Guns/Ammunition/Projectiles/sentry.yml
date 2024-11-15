@@ -1,8 +1,8 @@
 ﻿- type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: CMBulletSentry10x50mm
   name: bullet (10x50mm)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
@@ -18,10 +18,10 @@
   - type: DeleteXenoResinOnHit
 
 - type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: RMCBulletSentry
   name: bullet (10x28mm)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi

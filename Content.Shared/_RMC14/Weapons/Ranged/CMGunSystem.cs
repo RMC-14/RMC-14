@@ -2,14 +2,14 @@
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Common;
-using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
-using Content.Shared.FixedPoint;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
@@ -24,7 +24,6 @@ using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
@@ -53,13 +52,15 @@ public sealed class CMGunSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly RMCProjectileSystem _rmcProjectileSystem = default!;
 
+    private EntityQuery<GunGroupSpreadPenaltyComponent> _gunGroupSpreadPenalty;
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ProjectileComponent> _projectileQuery;
 
-    private int blockArcCollisionGroup = (int)(CollisionGroup.HighImpassable | CollisionGroup.Impassable);
+    private readonly int _blockArcCollisionGroup = (int) (CollisionGroup.HighImpassable | CollisionGroup.Impassable);
 
     public override void Initialize()
     {
+        _gunGroupSpreadPenalty = GetEntityQuery<GunGroupSpreadPenaltyComponent>();
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
         _projectileQuery = GetEntityQuery<ProjectileComponent>();
 
@@ -100,6 +101,11 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<UserBlockShootingInsideContainersComponent, ShotAttemptedEvent>(OnUserBlockShootingInsideContainersAttemptShoot);
 
         SubscribeLocalEvent<RMCAmmoEjectComponent, ActivateInWorldEvent>(OnAmmoEjectActivateInWorld);
+
+        SubscribeLocalEvent<GunGroupSpreadPenaltyComponent, GotEquippedHandEvent>(OnGroupSpreadPenaltyEquippedHand);
+        SubscribeLocalEvent<GunGroupSpreadPenaltyComponent, GotUnequippedHandEvent>(OnGroupSpreadPenaltyUnequippedHand);
+        SubscribeLocalEvent<GunGroupSpreadPenaltyComponent, GunRefreshModifiersEvent>(OnGroupSpreadPenaltyRefreshModifiers);
+        SubscribeLocalEvent<GunGroupSpreadPenaltyComponent, AmmoShotEvent>(OnGroupSpreadPenaltyAmmoShot);
     }
 
     /// <summary>
@@ -172,10 +178,8 @@ public sealed class CMGunSystem : EntitySystem
     /// </summary>
     private void OnCollisionCheckArc(Entity<ProjectileFixedDistanceComponent> ent, ref PreventCollideEvent args)
     {
-        int otherLayers = (int)args.OtherFixture.CollisionLayer;
-        if (Comp<ProjectileFixedDistanceComponent>(ent).ArcProj && (args.OtherFixture.CollisionLayer & blockArcCollisionGroup) == 0)
+        if (ent.Comp.ArcProj && (args.OtherFixture.CollisionLayer & _blockArcCollisionGroup) == 0)
             args.Cancelled = true;
-        return;
     }
 
     private void OnEventToStopProjectile<T>(Entity<ProjectileFixedDistanceComponent> ent, ref T args)
@@ -228,6 +232,9 @@ public sealed class CMGunSystem : EntitySystem
     private void OnGunUserWhitelistAttemptShoot(Entity<GunUserWhitelistComponent> ent, ref AttemptShootEvent args)
     {
         if (args.Cancelled)
+            return;
+
+        if (HasComp<BypassInteractionChecksComponent>(args.User))
             return;
 
         if (_whitelist.IsValid(ent.Comp.Whitelist, args.User))
@@ -341,14 +348,13 @@ public sealed class CMGunSystem : EntitySystem
     private bool TryGetUserSkills(EntityUid gun, out Entity<SkillsComponent> user)
     {
         user = default;
-        if (!_container.TryGetContainingContainer((gun, null), out var container) ||
-            !HasComp<HandsComponent>(container.Owner) ||
-            !TryComp(container.Owner, out SkillsComponent? skills))
+        if (!TryGetGunUser(gun, out var gunUser) ||
+            !TryComp(gunUser, out SkillsComponent? skills))
         {
             return false;
         }
 
-        user = (container.Owner, skills);
+        user = (gunUser, skills);
         return true;
     }
 
@@ -432,6 +438,12 @@ public sealed class CMGunSystem : EntitySystem
             return;
         }
 
+        var cancelEvent = new RMCTryAmmoEjectEvent(args.User, false);
+        RaiseLocalEvent(gun.Owner, ref cancelEvent);
+
+        if (cancelEvent.Cancelled)
+            return;
+
         args.Handled = true;
 
         var ejectedAmmo = container.ContainedEntities[0];
@@ -458,5 +470,95 @@ public sealed class CMGunSystem : EntitySystem
             _audio.PlayPredicted(gun.Comp.EjectSound, gun.Owner, args.User);
 
         _hands.TryPickup(args.User, ejectedAmmo, hand);
+    }
+
+    private void OnGroupSpreadPenaltyEquippedHand(Entity<GunGroupSpreadPenaltyComponent> ent, ref GotEquippedHandEvent args)
+    {
+        RefreshGunHolderModifiers(ent);
+    }
+
+    private void OnGroupSpreadPenaltyUnequippedHand(Entity<GunGroupSpreadPenaltyComponent> ent, ref GotUnequippedHandEvent args)
+    {
+        RefreshGunHolderModifiers(ent);
+    }
+
+    private void OnGroupSpreadPenaltyRefreshModifiers(Entity<GunGroupSpreadPenaltyComponent> ent, ref GunRefreshModifiersEvent args)
+    {
+        if (!TryGetGunUser(ent, out var user))
+            return;
+
+        foreach (var hand in user.Comp.Hands)
+        {
+            if (hand.Value.HeldEntity is not { } held ||
+                held == ent.Owner ||
+                !_gunGroupSpreadPenalty.HasComp(hand.Value.HeldEntity))
+            {
+                continue;
+            }
+
+            args.CameraRecoilScalar += ent.Comp.Recoil;
+            args.AngleIncrease += ent.Comp.AngleIncrease;
+            args.MinAngle += ent.Comp.AngleIncrease / 2;
+            args.MaxAngle += ent.Comp.AngleIncrease;
+            break;
+        }
+    }
+
+    private void OnGroupSpreadPenaltyAmmoShot(Entity<GunGroupSpreadPenaltyComponent> ent, ref AmmoShotEvent args)
+    {
+        if (!TryGetGunUser(ent, out var user))
+            return;
+
+        var other = false;
+        foreach (var hand in user.Comp.Hands)
+        {
+            if (hand.Value.HeldEntity is { } held &&
+                held != ent.Owner &&
+                _gunGroupSpreadPenalty.HasComp(hand.Value.HeldEntity))
+            {
+                other = true;
+                break;
+            }
+        }
+
+        if (!other)
+            return;
+
+        foreach (var projectile in args.FiredProjectiles)
+        {
+            if (!_projectileQuery.TryComp(projectile, out var projectileComp))
+                continue;
+
+            projectileComp.Damage *= ent.Comp.DamageMultiplier;
+        }
+    }
+
+    private bool TryGetGunUser(EntityUid gun, out Entity<HandsComponent> user)
+    {
+        if (_container.TryGetContainingContainer((gun, null), out var container) &&
+            TryComp(container.Owner, out HandsComponent? hands))
+        {
+            user = (container.Owner, hands);
+            return true;
+        }
+
+        user = default;
+        return false;
+    }
+
+    private void RefreshGunHolderModifiers(EntityUid gun)
+    {
+        _gun.RefreshModifiers(gun);
+        if (!TryGetGunUser(gun, out var user))
+            return;
+
+        foreach (var hand in user.Comp.Hands)
+        {
+            if (hand.Value.HeldEntity is { } held &&
+                held != gun)
+            {
+                _gun.RefreshModifiers(held);
+            }
+        }
     }
 }

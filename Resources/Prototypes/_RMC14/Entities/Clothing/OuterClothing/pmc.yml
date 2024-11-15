@@ -1,6 +1,6 @@
 # PMC armors
 - type: entity
-  parent: CMArmorM3Medium
+  parent: [CMArmorM3Medium, RMCAllowSuitStorageClothingArmorPMC]
   id: RMCArmorM4PMC
   name: M4 pattern PMC armor
   description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind.
@@ -17,55 +17,6 @@
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
-    maxItemSize: Small
-    whitelist:
-      components:
-        - Gun
-        - BallisticAmmoProvider
-        - Stunbaton
-        - Bible
-        # TODO RMC14 motion detector, walkman
-        # TODO RMC14 machete/katana scabbard
-      tags:
-      - Handcuffs
-      - Crowbar
-      - CMMagazineRifle
-      - CMMagazineSmg
-      - CMMagazineSniper
-      - CMMagazinePistol
-      - RMCMagazineRevolver
-      - Sidearm
-      - Knife
-      - Flashlight
-      - MRE
-      - Grenade
-      - CMAutoInjector
-      - Cigarette
-      - PillPacket
-      - PillCanister
-      - CMSurgicalCase
-      - Syringe
-      - Hypospray
-      - CMOintment
-      - Brutepack
-      - CMBurnKit
-      - CMTraumaKit
-      - Bottle
-      - Pill
-      - PowerCell
-  - type: IgnoreContentsSize
-    items:
-      tags:
-      - Crowbar
-      - CMMagazineRifle
-      - CMMagazineSmg
-      - CMMagazineSniper
-      - CMMagazinePistol
-      - RMCMagazineRevolver
-      - MRE
-      - PillPacket
-      - PillCanister
-      - CMSurgicalCase
 
 - type: entity
   parent: RMCArmorM4PMC
@@ -82,9 +33,6 @@
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
     walkModifier: 0.897
     sprintModifier: 0.897
-  - type: Storage
-    grid:
-    - 0,0,3,1 # 2 slots
 
 - type: entity
   parent: RMCArmorM4PMCLight

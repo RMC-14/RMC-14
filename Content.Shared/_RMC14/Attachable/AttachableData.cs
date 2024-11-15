@@ -5,7 +5,6 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-
 namespace Content.Shared._RMC14.Attachable;
 
 [DataRecord, Serializable, NetSerializable]
@@ -49,7 +48,8 @@ public record struct AttachableWeaponRangedModifierSet(
 [DataRecord, Serializable, NetSerializable]
 public record struct AttachableWeaponFireModesModifierSet(
     AttachableModifierConditions? Conditions,
-    SelectiveFire ExtraFireModes
+    SelectiveFire ExtraFireModes,
+    SelectiveFire SetFireMode
 );
 
 // SS13 has move delay instead of speed. Move delay isn't implemented here, and approximating it through maths like fire delay is scuffed because of how the events used to change speed work.

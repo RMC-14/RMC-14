@@ -1,6 +1,6 @@
 # command
 department-CMCommand = Command
-cm-department-Command-description = The Command Department is the brains of the USS Almayer, leading and coordinating the squads and the other support staff of the ship to fight and win against the Aliens.
+cm-department-Command-description = The Command Department is the brains of the UNS Almayer, leading and coordinating the squads and the other support staff of the ship to fight and win against the Aliens.
 
 # military police
 department-CMMilitaryPolice = Military Police

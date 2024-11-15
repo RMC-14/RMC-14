@@ -62,6 +62,13 @@ public sealed class DropshipTerminalWeaponsFireMsg(bool first) : BoundUserInterf
 }
 
 [Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsNightVisionMsg(bool first, bool on) : BoundUserInterfaceMessage
+{
+    public readonly bool First = first;
+    public readonly bool On = on;
+}
+
+[Serializable, NetSerializable]
 public sealed class DropshipTerminalWeaponsTargetsPreviousMsg(bool first) : BoundUserInterfaceMessage
 {
     public readonly bool First = first;

@@ -18,6 +18,15 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/screwdriver_pickup.ogg
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Ears
+    - Suitstorage
+    - mask
+  - type: Tag
+    tags:
+    - RMCScrewdriver
 
 - type: entity
   parent: Wirecutter
@@ -39,6 +48,10 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/wirecutter_pickup.ogg
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Suitstorage
 
 - type: entity
   parent: Wrench
@@ -57,6 +70,10 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/wrench_pickup.ogg
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Suitstorage
 
 - type: entity
   parent: Multitool
@@ -76,6 +93,10 @@
     sound:
       path: /Audio/_RMC14/Handling/multitool_pickup.ogg
   - type: Multitool
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Suitstorage
 
 - type: entity
   parent: Crowbar
@@ -86,10 +107,9 @@
     state: icon
   - type: Item
     size: Small
-    sprite: _RMC14/Objects/Tools/crowbar.rsi
-    storedSprite:
-      sprite: _RMC14/Objects/Tools/crowbar.rsi
-      state: icon
+    sprite: null
+    storedSprite: null
+    shape: null
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/crowbar_pickup.ogg
@@ -98,6 +118,8 @@
     slots:
     - Belt
     - Suitstorage
+  - type: Prying
+    speedModifier: 100000
 
 - type: entity
   parent: CMCrowbar
@@ -112,6 +134,7 @@
     state: red-icon
   - type: Item
     heldPrefix: red
+    storedSprite: null
 
 - type: entity
   parent: HandLabeler

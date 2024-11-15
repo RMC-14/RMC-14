@@ -126,6 +126,9 @@ public abstract class SharedItemSystem : EntitySystem
 
     private void OnExamine(EntityUid uid, ItemComponent component, ExaminedEvent args)
     {
+        if (component.Size == "Invalid")
+            return;
+
         // show at end of message generally
         args.PushMarkup(Loc.GetString("item-component-on-examine-size",
             ("size", GetItemSizeLocale(component.Size))), priority: -1);

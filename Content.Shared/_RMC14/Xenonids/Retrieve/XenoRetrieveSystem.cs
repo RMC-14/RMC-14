@@ -3,16 +3,15 @@ using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
-using Content.Shared.Emoting;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
-using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
@@ -25,6 +24,7 @@ public sealed class XenoRetrieveSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
@@ -35,7 +35,6 @@ public sealed class XenoRetrieveSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
 
     public override void Initialize()
     {
@@ -47,7 +46,7 @@ public sealed class XenoRetrieveSystem : EntitySystem
     private void OnXenoRetrieveAction(Entity<XenoRetrieveComponent> xeno, ref XenoRetrieveActionEvent args)
     {
         var target = args.Target;
-        if (!_xeno.FromSameHive(xeno.Owner, target))
+        if (!_hive.FromSameHive(xeno.Owner, target))
         {
             var msg = Loc.GetString("rmc-xeno-not-same-hive");
             _popup.PopupClient(msg, xeno, xeno, PopupType.SmallCaution);
@@ -86,9 +85,6 @@ public sealed class XenoRetrieveSystem : EntitySystem
             return;
         }
 
-        if (!_rmcActions.CanUseActionPopup(xeno, args.Action))
-            return;
-
         args.Handled = true;
         var ev = new XenoRetrieveDoAfterEvent(GetNetEntity(args.Action));
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.Delay, ev, xeno, target)
@@ -110,7 +106,7 @@ public sealed class XenoRetrieveSystem : EntitySystem
 
             xeno.Comp.Visuals.Clear();
 
-            foreach (var tile in _line.DrawLine(xeno.Owner.ToCoordinates(), target.ToCoordinates(), TimeSpan.Zero))
+            foreach (var tile in _line.DrawLine(xeno.Owner.ToCoordinates(), target.ToCoordinates(), TimeSpan.Zero, out _))
             {
                 xeno.Comp.Visuals.Add(Spawn(xeno.Comp.Visual, tile.Coordinates));
             }

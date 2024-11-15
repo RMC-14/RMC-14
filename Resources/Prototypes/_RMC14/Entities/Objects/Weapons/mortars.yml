@@ -42,7 +42,6 @@
   - type: Mortar
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
     - trigger:
@@ -77,6 +76,11 @@
     blacklist:
       components:
       - Xeno
+  - type: RequireProjectileTarget
+  - type: ImmuneToMelee
+    whitelist:
+      components:
+      - Marine
 
 - type: entity
   abstract: true
@@ -108,6 +112,7 @@
     totalIntensity: 800
     canCreateVacuum: false
   - type: CMExplosionEffect
+  - type: RMCScorchEffect
   - type: MortarShell
 
 - type: entity

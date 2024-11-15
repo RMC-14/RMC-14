@@ -1,0 +1,53 @@
+# Base
+
+- type: tile
+  abstract: true
+  parent: CMPlanetBase
+  id: RMCPlanetSandBase
+  name: tiles-rmc-planet-auto-sand
+  
+# Sand_0
+
+- type: tile
+  parent: RMCPlanetSandBase
+  id: RMCPlanetSand0
+  sprite: /Textures/_RMC14/Tiles/planet/auto_sand/sand_0_var.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  
+# Sand_1
+
+- type: tile
+  parent: RMCPlanetSandBase
+  id: RMCPlanetSand1
+  sprite: /Textures/_RMC14/Tiles/planet/auto_sand/sand_1_var.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/_RMC14/Tiles/planet/auto_sand/sand_single_edge.png
+    NorthEast: /Textures/_RMC14/Tiles/planet/auto_sand/sand_single_edge.png
+    NorthWest: /Textures/_RMC14/Tiles/planet/auto_sand/sand_single_edge.png
+    SouthWest: /Textures/_RMC14/Tiles/planet/auto_sand/sand_single_edge.png
+    South: /Textures/_RMC14/Tiles/planet/auto_sand/sand_double_edge.png
+    East: /Textures/_RMC14/Tiles/planet/auto_sand/sand_double_edge.png
+    North: /Textures/_RMC14/Tiles/planet/auto_sand/sand_double_edge.png
+    West: /Textures/_RMC14/Tiles/planet/auto_sand/sand_double_edge.png
+    
+- type: tile
+  parent: RMCPlanetSand1
+  id: RMCPlanetSand1Rock
+  sprite: /Textures/_RMC14/Tiles/planet/auto_sand/sand_1_rock_var.png
+

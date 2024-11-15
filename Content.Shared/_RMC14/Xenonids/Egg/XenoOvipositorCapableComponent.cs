@@ -19,4 +19,10 @@ public sealed partial class XenoOvipositorCapableComponent : Component
 
     [DataField, AutoNetworkedField]
     public Vector2 Offset = new(-1, -1);
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId[] ActionIds = ["ActionXenoLeader", "ActionXenoHeal"];
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<EntProtoId, EntityUid> Actions = new();
 }
