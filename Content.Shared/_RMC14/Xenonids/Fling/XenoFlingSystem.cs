@@ -43,10 +43,12 @@ public sealed class XenoFlingSystem : EntitySystem
         if (attempt.Cancelled)
             return;
 
-        args.Handled = true;
-
         if (_net.IsServer)
+        {
+            args.Handled = true;
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
+        }
+            
 
         var targetId = args.Target;
         _rmcPulling.TryStopUserPullIfPulling(xeno, targetId);
@@ -64,10 +66,12 @@ public sealed class XenoFlingSystem : EntitySystem
         var length = diff.Length();
         diff *= xeno.Comp.Range / 3 / length;
 
-        _stun.TryParalyze(targetId, xeno.Comp.ParalyzeTime, true);
-        _throwing.TryThrow(targetId, diff, 10);
-
         if (_net.IsServer)
+        {
+            _stun.TryParalyze(targetId, xeno.Comp.ParalyzeTime, true);
+            _throwing.TryThrow(targetId, diff, 10);
+
             SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
+        } 
     }
 }
