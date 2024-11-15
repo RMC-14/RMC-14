@@ -101,6 +101,7 @@
     autoRot: true
   - type: RMCSize
     size: Big
+  - type: XenoDeathcloud
   - type: NeurotoxinInjector
     neuroPerSecond: 16
     injectInContact: false

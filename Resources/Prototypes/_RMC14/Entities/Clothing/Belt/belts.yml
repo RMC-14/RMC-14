@@ -569,7 +569,7 @@
   description: he M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version is universal and adjustable for different revolvers, along with six small pouches for speedloaders. It smells faintly of hay.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_revolver.rsi
     layers:
     - state: icon
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
@@ -582,7 +582,7 @@
     - state: full
       map: [ "closedLayer" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_revolver.rsi
     slots:
     - suitStorage
     - belt
@@ -755,7 +755,7 @@
     slots:
     - suitStorage
     - belt
-    sprite: _RMC14/Objects/Clothing/Belt/sparepouch.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/mateba_belt.rsi
   - type: Storage
     maxItemSize: Normal
     grid:

@@ -79,6 +79,7 @@
       recoilFlat: 2
       scatterFlat: 6
 
+
 - type: entity
   parent: RMCStockAttachmentBase
   id: RMCAttachmentMOU53Stock
@@ -179,6 +180,45 @@
     - RMCAttachmentDoubleBarrelShotgunStock
   - type: AttachableWieldDelayMods
     modifiers: []
+
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentM890Stock
+  name: M890 Tactical Stock
+  description: Standard Stock for the M890 tactical shotgun.
+  components:
+  - type: Sprite
+    state: tactical_stock_221
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM890Stock
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      walk: -0.059
+      sprint: -0.101
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.4
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.5
+      recoilFlat: -1
+      scatterFlat: -1
+    - conditions:
+        unwieldedOnly: true
+      accuracyMovementPenaltyAddMult: -1
+      accuracyAddMult: -0.15
+      recoilFlat: 2
+      scatterFlat: 6
+
+
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -638,6 +678,9 @@
 
 - type: Tag
   id: RMCAttachmentStock
+
+- type: Tag
+  id: RMCAttachmentM890Stock
 
 - type: Tag
   id: RMCAttachmentM42A2WoodenStock

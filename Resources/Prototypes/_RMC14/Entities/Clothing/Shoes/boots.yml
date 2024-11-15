@@ -23,6 +23,9 @@
           tags:
           - Knife
           - Holdout
+          - RMCScrewdriver
+          - RMCScalpel
+          - ThrowingKnife
         startingItem: RMCM5Bayonet
   - type: CMItemSlots
     startingItem: RMCM5Bayonet
@@ -56,6 +59,8 @@
           tags:
           - Knife
           - Holdout
+          - RMCScrewdriver
+          - RMCScalpel
   - type: Matchbox
   - type: CMHolster
   - type: CMItemSlots
