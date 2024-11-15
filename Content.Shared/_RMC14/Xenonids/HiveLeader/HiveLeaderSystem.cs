@@ -137,6 +137,8 @@ public sealed class HiveLeaderSystem : EntitySystem
             msg = $"{Name(ent)} has demoted you from Hive Leader. Your leadership rights and abilities have waned.";
             _popup.PopupEntity(msg, watching, watching, PopupType.MediumCaution);
             _rmcChat.ChatMessageToOne(msg, watching);
+            var evn = new HiveLeaderStatusChangedEvent(false);
+            RaiseLocalEvent(watching, ref evn);
             return;
         }
 
@@ -151,6 +153,8 @@ public sealed class HiveLeaderSystem : EntitySystem
         msg = $"{Name(ent)} has selected you as a Hive Leader. The other Xenonids must listen to you. You will also act as a beacon for the Queen's pheromones.";
         _popup.PopupClient(msg, watching, watching, PopupType.Medium);
         _rmcChat.ChatMessageToOne(msg, watching);
+        var ev = new HiveLeaderStatusChangedEvent(true);
+        RaiseLocalEvent(watching, ref ev);
         SyncPheromones(ent);
     }
 
@@ -190,6 +194,8 @@ public sealed class HiveLeaderSystem : EntitySystem
         foreach (var leader in ent.Comp.Leaders)
         {
             RemCompDeferred<HiveLeaderComponent>(leader);
+            var ev = new HiveLeaderStatusChangedEvent(false);
+            RaiseLocalEvent(leader, ref ev);
         }
 
         ent.Comp.Leaders.Clear();

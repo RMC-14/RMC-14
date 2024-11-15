@@ -73,6 +73,19 @@
   - type: RMCSuitLight
   - type: HolocardState
   - type: Hunger
+    baseDecayRate: 0.025
+    thresholds:
+      Overfed: 550
+      Okay: 400
+      Peckish: 250
+      Starving: 50
+      Dead: 0
+    hungerThresholdDecayModifiers:
+      Overfed: 1
+      Okay: 1
+      Peckish: 1
+      Starving: 1
+      Dead: 0
   - type: Thirst
     baseDecayRate: 0.01666666666
   - type: Body

@@ -24,13 +24,13 @@
       entries:
       - id: RMCKitRifleM4SPR
       - id: RMCKitCM54C
-      - id: RMCKitEngineering
     #- id: CMM240PyrotechnicianSupportKit
     #- id: CMM2CHeavyMachineGun
     #- id: CMM56DHeavyMachineGun
     #- id: CMM79GrenadeLauncher
-      - id: WeaponShotgunMOU53
+      - id: RMCMOU53Case
       - id: RMCCaseXM88
+      - id: RMCKitEngineering
     - name: Armors
       entries:
       - id: CMArmorM4
@@ -343,6 +343,10 @@
     maxItemSize: Huge
     grid:
     - 0,0,9,1
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
   - type: StorageFill
     contents:
     - id: RMCPouchConstructionFillLowGrade
