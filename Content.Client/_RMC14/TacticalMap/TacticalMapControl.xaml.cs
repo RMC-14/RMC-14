@@ -82,6 +82,7 @@ public sealed partial class TacticalMapControl : TextureRect
         var backgroundRsi = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/map_blips.rsi"), "background");
         var defibbableRsi = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/map_blips.rsi"), "defibbable");
         var undefibbableRsi = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/map_blips.rsi"), "undefibbable");
+        var hiveLeaderRsi = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Interface/map_blips.rsi"), "xenoleader");
         var background = system.Frame0(backgroundRsi);
         var draw = GetDrawDimensions(Texture);
         var offset = new Vector2(draw.Left, draw.Top);
@@ -94,6 +95,9 @@ public sealed partial class TacticalMapControl : TextureRect
                 handle.DrawTextureRect(blip.Background != null ? system.Frame0(blip.Background) : background, rect, blip.Color);
                 handle.DrawTextureRect(system.Frame0(blip.Image), rect);
 
+                if (blip.HiveLeader)
+                    handle.DrawTextureRect(system.Frame0(hiveLeaderRsi), rect);
+
                 switch (blip.Status)
                 {
                     case TacticalMapBlipStatus.Defibabble:
@@ -102,7 +106,7 @@ public sealed partial class TacticalMapControl : TextureRect
                     case TacticalMapBlipStatus.Undefibabble:
                         handle.DrawTextureRect(system.Frame0(undefibbableRsi), rect);
                         break;
-                }
+                } 
             }
         }
 
