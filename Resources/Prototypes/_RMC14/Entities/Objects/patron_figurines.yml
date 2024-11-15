@@ -745,7 +745,7 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronStella"Lake"Poley
+  id: RMCFigurinePatronStellaLakePoley
   name: Stella 'Lake' Poley figurine
   description: "You're pretty sure this is a Diona. You're also pretty sure she's giving you the stink-eye."
   components:
