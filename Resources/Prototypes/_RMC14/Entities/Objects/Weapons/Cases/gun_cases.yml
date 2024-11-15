@@ -142,3 +142,22 @@
     - id: RMCBoxShotgunBreaching
       amount: 2
     - id: RMCBeltXM51
+
+- type: entity
+  parent: RMCBaseGunCase
+  id: RMCMOU53Case
+  name: MOU53 shotgun case
+  description: A gun case containing the MOU53 shotgun. It does come loaded, but you'll still have to find ammunition as you go.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,2,1
+    whitelist:
+      tags:
+      - RMCWeaponShotgunMOU53
+      - RMCAttachmentMOU53Stock
+  - type: StorageFill
+    contents:
+    - id: WeaponShotgunMOU53
+    - id: RMCAttachmentMOU53Stock

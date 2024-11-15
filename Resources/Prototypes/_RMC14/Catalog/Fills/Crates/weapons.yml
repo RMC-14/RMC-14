@@ -69,7 +69,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: WeaponShotgunMOU53
+    - id: RMCMOU53Case
       amount: 2
 
 - type: entity
