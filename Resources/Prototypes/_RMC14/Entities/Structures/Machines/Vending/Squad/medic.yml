@@ -145,7 +145,8 @@
         points: 8
       - id: RMCBackpackRTO
         points: 15
-    #    CMWeldingGoggles: 3P
+      - id: RMCWeldingGoggles
+        points: 3
     - name: Utilities
       entries:
       - id: CMFireExtinguisherPortable
