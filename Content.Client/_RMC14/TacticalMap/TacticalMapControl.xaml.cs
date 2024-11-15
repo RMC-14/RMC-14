@@ -106,7 +106,7 @@ public sealed partial class TacticalMapControl : TextureRect
                     case TacticalMapBlipStatus.Undefibabble:
                         handle.DrawTextureRect(system.Frame0(undefibbableRsi), rect);
                         break;
-                } 
+                }
             }
         }
 
