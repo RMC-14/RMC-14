@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: thymol-blue
-  changes:
-  - message: Biohazardous barricades are now constructible with six metal rods.
-    type: Fix
-  id: 474
-  time: '2024-07-27T08:16:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3346
 - author: ShadowCommander
   changes:
   - message: Xenonids are now able to see resin walls, doors, and membrane through
@@ -4878,5 +4871,21 @@
   id: 973
   time: '2024-11-15T05:04:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4811
+- author: CyberTropic
+  changes:
+  - message: Added a box for M84 CAS flares.
+    type: Add
+  - message: Made MRE and Flare boxes constructable from cardboard.
+    type: Add
+  - message: Fixed visuals for undeployed MRE and Flare boxes.
+    type: Fix
+  - message: Fixed spent CAS flares not being able to be picked up.
+    type: Fix
+  - message: Fixed being able to put CAS flares in regular flare pouches and vice
+      versa
+    type: Fix
+  id: 974
+  time: '2024-11-15T05:12:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4756
 Name: RMC14
 Order: -1
