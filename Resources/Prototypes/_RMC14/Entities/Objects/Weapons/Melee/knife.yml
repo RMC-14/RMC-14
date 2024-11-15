@@ -97,9 +97,6 @@
     tags:
     - ThrowingKnife
 
-- type: Tag
-  id: ThrowingKnife
-
 - type: entity
   parent: [ RMCBaseMeleeWeapon, BaseKnife]
   id: CMM2132Machete
