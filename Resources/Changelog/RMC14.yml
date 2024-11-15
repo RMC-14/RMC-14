@@ -1,23 +1,4 @@
 ﻿Entries:
-- author: ShadowCommander
-  changes:
-  - message: Xenonids are now able to see resin walls, doors, and membrane through
-      walls.
-    type: Add
-  - message: Xenonids are now able to see eggs through walls.
-    type: Add
-  id: 475
-  time: '2024-07-27T08:33:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3003
-- author: BackeTako
-  changes:
-  - message: Fixed autolathe looking very bright.
-    type: Fix
-  - message: Fixed the snack vending machine looking very bright.
-    type: Fix
-  id: 476
-  time: '2024-07-27T11:52:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3356
 - author: Tunguso4ka
   changes:
   - message: Ported all hair from cm-ss13!
@@ -4887,5 +4868,19 @@
   id: 974
   time: '2024-11-15T05:12:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4756
+- author: CyberTropic
+  changes:
+  - message: Added some filtration props
+    type: Add
+  id: 975
+  time: '2024-11-15T05:29:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4671
+- author: Vermidia
+  changes:
+  - message: Fixed bodybags and stasisbags stopping rot
+    type: Fix
+  id: 976
+  time: '2024-11-15T05:30:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4831
 Name: RMC14
 Order: -1
