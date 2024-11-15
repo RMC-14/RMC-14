@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: UnicornOnLSD
-  changes:
-  - message: Meatzels can be found in marine MREs
-    type: Add
-  id: 471
-  time: '2024-07-27T06:15:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3333
 - author: Vermidia
   changes:
   - message: Fix bombard range being too small to take advantage of long-range sight
@@ -4875,5 +4868,12 @@
   id: 970
   time: '2024-11-15T02:44:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4822
+- author: Vermidia
+  changes:
+  - message: Xenos can now see leaders on the tacmap
+    type: Add
+  id: 971
+  time: '2024-11-15T04:52:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4830
 Name: RMC14
 Order: -1
