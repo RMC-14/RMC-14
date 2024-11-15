@@ -568,6 +568,33 @@ public sealed class AttachableToggleableSystem : EntitySystem
         Dirty(attachable);
     }
 
+    private void RemoveUnusedLocks(Entity<AttachableToggleableComponent> attachable, EntityUid? userUid)
+    {
+        if (userUid == null)
+            return;
+
+        if (attachable.Comp.BreakOnMove && TryComp<AttachableMovementLockedComponent>(userUid.Value, out var movementLockedComponent))
+        {
+            movementLockedComponent.AttachableList.Remove(attachable.Owner);
+            if (movementLockedComponent.AttachableList.Count == 0)
+                RemCompDeferred<AttachableMovementLockedComponent>(userUid.Value);
+        }
+
+        if (attachable.Comp.BreakOnRotate && TryComp<AttachableDirectionLockedComponent>(userUid.Value, out var directionLockedComponent))
+        {
+            directionLockedComponent.AttachableList.Remove(attachable.Owner);
+            if (directionLockedComponent.AttachableList.Count == 0)
+                RemCompDeferred<AttachableDirectionLockedComponent>(userUid.Value);
+        }
+
+        if (attachable.Comp.BreakOnFullRotate && TryComp<AttachableSideLockedComponent>(userUid.Value, out var sideLockedComponent))
+        {
+            sideLockedComponent.AttachableList.Remove(attachable.Owner);
+            if (sideLockedComponent.AttachableList.Count == 0)
+                RemCompDeferred<AttachableSideLockedComponent>(userUid.Value);
+        }
+    }
+
     private void FinishToggle(
         Entity<AttachableToggleableComponent> attachable,
         Entity<AttachableHolderComponent> holder,
@@ -603,6 +630,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
         {
             if (attachable.Comp.SupercedeHolder && holder.Comp.SupercedingAttachable == attachable.Owner)
                 _attachableHolderSystem.SetSupercedingAttachable(holder, null);
+
+            RemoveUnusedLocks(attachable, userUid);
+
             return;
         }
 
