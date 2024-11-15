@@ -68,9 +68,6 @@
     coverage: MOUTH
   - type: Item
     storedRotation: -90
-  - type: HideLayerClothing # TODO port pulled down sprite from SS13
-    slots:
-    - Snout # TODO make this hide markings optionally
 
 - type: entity
   parent: CMBaseMask
