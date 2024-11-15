@@ -130,6 +130,16 @@
     spawn: RMCSmokeNeurotoxinShroud
     range: 1
 
+- type: entity
+  parent: RMCSmokeAcid
+  id: RMCSmokeAcidDeathcloud
+  name: acid gas
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EvenSmoke
+    spawn: RMCSmokeAcidDeathcloud
+    range: 2
+
 - type: edgeSpreader
   id: RMCSmokeAcid
   updatesPerSecond: 2

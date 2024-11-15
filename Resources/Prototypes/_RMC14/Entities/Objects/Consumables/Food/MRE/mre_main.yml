@@ -65,7 +65,7 @@
   id: CMMREFoodMain
   components:
   - type: Food
-    transferAmount: 5
+    transferAmount: 4
   - type: SolutionContainerManager
     solutions:
       food:

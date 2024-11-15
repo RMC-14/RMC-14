@@ -1,5 +1,6 @@
 - type: entity
   id: RMCBaseTree
+  suffix: RMCBaseTree
   description: Yep, it's a tree.
   abstract: true
   components:
@@ -54,6 +55,7 @@
 - type: entity
   parent: RMCBaseTree
   id: RMCBaseTreeSnow
+  suffix: RMCBaseTreeSnow
   components:
   - type: Sprite
     sprite: Objects/Decoration/Flora/flora_treessnow.rsi
@@ -67,10 +69,37 @@
         density: 4000
         layer:
         - WallLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/tree_fell.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          RMCStump1:
+            min: 1
+            max: 1
+        offset: 0
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   parent: RMCBaseTree
   id: RMCBaseTreeLarge
+  suffix: RMCBaseTreeLarge
   components:
   - type: Sprite
     sprite: Objects/Decoration/Flora/flora_treeslarge.rsi
@@ -88,6 +117,7 @@
 - type: entity
   parent: RMCBaseTree
   id: RMCBaseTreeConifer
+  suffix: RMCBaseTreeConifer
   components:
   - type: Sprite
     sprite: Objects/Decoration/Flora/flora_treesconifer.rsi
@@ -101,10 +131,37 @@
         density: 3500
         layer:
         - WallLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/tree_fell.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          RMCStump2:
+            min: 1
+            max: 1
+        offset: 0
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   parent: RMCBaseTree
   id: RMCBaseTreeAlien
+  suffix: RMCBaseTreeAlien
   abstract: true
   name: strange tree
   description: Some kind of bizarre alien tree. It oozes with a sickly yellow sap.
@@ -121,10 +178,37 @@
         density: 4000
         layer:
         - WallLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/tree_fell.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          RMCStump3:
+            min: 1
+            max: 1
+        offset: 0
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   parent: RMCBaseTree
   id: RMCFloraTree01
+  suffix: RMCFloraTree01
   name: tree
   components:
   - type: Sprite
@@ -133,6 +217,7 @@
 - type: entity
   parent: RMCBaseTree
   id: RMCFloraTree02
+  suffix: RMCFloraTree02
   name: tree
   components:
   - type: Sprite
@@ -141,6 +226,7 @@
 - type: entity
   parent: RMCBaseTree
   id: RMCFloraTree03
+  suffix: RMCFloraTree03
   name: tree
   components:
   - type: Sprite
@@ -149,6 +235,7 @@
 - type: entity
   parent: RMCBaseTree
   id: RMCFloraTree04
+  suffix: RMCFloraTree04
   name: tree
   components:
   - type: Sprite
@@ -157,6 +244,7 @@
 - type: entity
   parent: RMCBaseTree
   id: RMCFloraTree05
+  suffix: RMCFloraTree05
   name: tree
   components:
   - type: Sprite
@@ -165,6 +253,7 @@
 - type: entity
   parent: RMCBaseTree
   id: RMCFloraTree06
+  suffix: RMCFloraTree06
   name: tree
   components:
   - type: Sprite
@@ -173,6 +262,7 @@
 - type: entity
   parent: RMCBaseTreeSnow
   id: RMCFloraTreeSnow01
+  suffix: RMCFloraTreeSnow01
   name: snowy tree
   components:
   - type: Sprite
@@ -181,6 +271,7 @@
 - type: entity
   parent: RMCBaseTreeSnow
   id: RMCFloraTreeSnow02
+  suffix: RMCFloraTreeSnow02
   name: snowy tree
   components:
   - type: Sprite
@@ -189,6 +280,7 @@
 - type: entity
   parent: RMCBaseTreeSnow
   id: RMCFloraTreeSnow03
+  suffix: RMCFloraTreeSnow03
   name: snowy tree
   components:
   - type: Sprite
@@ -197,6 +289,7 @@
 - type: entity
   parent: RMCBaseTreeSnow
   id: RMCFloraTreeSnow04
+  suffix: RMCFloraTreeSnow04
   name: snowy tree
   components:
   - type: Sprite
@@ -205,6 +298,7 @@
 - type: entity
   parent: RMCBaseTreeSnow
   id: RMCFloraTreeSnow05
+  suffix: RMCFloraTreeSnow05
   name: snowy tree
   components:
   - type: Sprite
@@ -213,6 +307,7 @@
 - type: entity
   parent: RMCBaseTreeSnow
   id: RMCFloraTreeSnow06
+  suffix: RMCFloraTreeSnow06
   name: snowy tree
   components:
   - type: Sprite
@@ -221,6 +316,7 @@
 - type: entity
   parent: RMCBaseTreeSnow
   id: RMCFloraTreeStump
+  suffix: RMCFloraTreeStump
   name: tree stump
   components:
   - type: Sprite
@@ -229,6 +325,7 @@
 - type: entity
   parent: RMCBaseTreeLarge
   id: RMCFloraTreeLarge01
+  suffix: RMCFloraTreeLarge01
   name: large tree
   components:
   - type: Sprite
@@ -237,6 +334,7 @@
 - type: entity
   parent: RMCBaseTreeLarge
   id: RMCFloraTreeLarge02
+  suffix: RMCFloraTreeLarge02
   name: large tree
   components:
   - type: Sprite
@@ -245,6 +343,7 @@
 - type: entity
   parent: RMCBaseTreeLarge
   id: RMCFloraTreeLarge03
+  suffix: RMCFloraTreeLarge03
   name: large tree
   components:
   - type: Sprite
@@ -253,6 +352,7 @@
 - type: entity
   parent: RMCBaseTreeLarge
   id: RMCFloraTreeLarge04
+  suffix: RMCFloraTreeLarge04
   name: large tree
   components:
   - type: Sprite
@@ -261,6 +361,7 @@
 - type: entity
   parent: RMCBaseTreeLarge
   id: RMCFloraTreeLarge05
+  suffix: RMCFloraTreeLarge05
   name: large tree
   components:
   - type: Sprite
@@ -269,6 +370,7 @@
 - type: entity
   parent: RMCBaseTreeLarge
   id: RMCFloraTreeLarge06
+  suffix: RMCFloraTreeLarge06
   name: large tree
   components:
   - type: Sprite
@@ -277,6 +379,7 @@
 - type: entity
   parent: RMCBaseTreeConifer
   id: RMCFloraTreeConifer01
+  suffix: RMCFloraTreeConifer01
   name: snowy conifer
   components:
   - type: Sprite
@@ -285,6 +388,7 @@
 - type: entity
   parent: RMCBaseTreeConifer
   id: RMCFloraTreeConifer02
+  suffix: RMCFloraTreeConifer02
   name: snowy conifer
   components:
   - type: Sprite
@@ -293,6 +397,7 @@
 - type: entity
   parent: RMCBaseTreeConifer
   id: RMCFloraTreeConifer03
+  suffix: RMCFloraTreeConifer03
   name: snowy conifer
   components:
   - type: Sprite
@@ -301,6 +406,7 @@
 - type: entity
   parent: RMCBaseTreeConifer
   id: RMCFloraTreeStumpConifer
+  suffix: RMCFloraTreeStumpConifer
   name: tree stump
   components:
   - type: Sprite
@@ -309,6 +415,7 @@
 - type: entity
   parent: RMCBaseTreeAlien
   id: RMCAlienTree01
+  suffix: RMCAlienTree01
   components:
   - type: Sprite
     state: treealien01

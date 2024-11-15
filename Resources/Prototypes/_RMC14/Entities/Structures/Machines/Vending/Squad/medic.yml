@@ -226,14 +226,6 @@
         name: m276 lifesaver bag (full)
       - id: CMBeltMedicalFilled
         name: m276 medical storage rig (full)
-        recommended: true
-      - id: RMCBeltHolsterPistol
-      - id: RMCBeltHolsterRevolver
-      - id: RMCBeltHolsterSMG
-      - id: RMCBeltHolsterSMGPouch
-      #- id: RMCBeltHolsterFlareGun
-      - id: RMCM276ShotgunShellLoadingRig
-      - id: RMCBeltGrenade
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -242,6 +234,9 @@
      #- id: RMCPouchMedkit
 #       recommended: true
         name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
+#     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
+#       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+#       recommended: true  
       - id: RMCPouchAutoinjector
       - id: RMCPouchFirstResponder
       - id: RMCPouchReagentCanisterBicaridine
@@ -250,8 +245,6 @@
         name: Pressurized Reagent Canister Pouch\n(Kelotane)
       - id: RMCPouchReagentCanisterTricordrazine
         name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
-#     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
-#       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
       - id: RMCPouchReagentCanister
         name: Pressurized Reagent Canister Pouch\n(EMPTY)
       - id: RMCPouchVialFill
