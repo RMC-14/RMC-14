@@ -127,9 +127,9 @@
   description: A unique corporate made semi-automatic shotgun with a rapid fire rate and an attached Underslung Grenade Launcher. Holds 8 shotgun shells in the chamber.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/M890.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/M890.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890.rsi
   - type: Gun
     shotsPerBurst: 1
   - type: ShootUseDelay
