@@ -787,7 +787,7 @@
   - type: StorageFill
     contents:
     - id: RMCSpeedLoaderMateba
-      amount: 6
+      amount: 5
     - id: RMCWeaponRevolverMateba
 
 - type: entity
