@@ -1,9 +1,11 @@
 - type: entity
-  parent: BodyBag
+  parent: BaseDeployFoldable
   id: CMBodyBag
   name: body bag
   description: A folded bag designed for the storage and transportation of cadavers.
   components:
+  - type: Item
+    size: Small
   - type: Sprite
     sprite: _RMC14/Objects/Medical/bodybags.rsi
     layers:
@@ -26,6 +28,69 @@
       components:
       - Xeno
   - type: HealthScannableContainer
+  - type: Tag
+    tags:
+    - BodyBag
+  - type: Clickable
+  - type: InteractionOutline
+  - type: MovedByPressure
+  - type: Physics
+    bodyType: Dynamic
+  - type: Transform
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.4,0.25,0.1"
+        density: 20
+        mask:
+        - ItemMask
+  - type: EntityStorage
+    capacity: 1
+    isCollidableWhenOpen: true
+    closeSound:
+      path: /Audio/Misc/zip.ogg
+    openSound:
+      path: /Audio/Misc/zip.ogg
+  - type: EntityStorageLayingDownOverride
+  - type: PaperLabel
+    labelSlot:
+      insertVerbText: Attach Label
+      ejectVerbText: Remove Label
+      whitelist:
+        components:
+        - Paper
+      blacklist:
+        tags:
+        - Book
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PaperLabelVisuals.HasLabel:
+        enum.PaperLabelVisuals.Layer:
+          True: {visible: true}
+          False: {visible: false}
+      enum.PaperLabelVisuals.LabelType:
+        enum.PaperLabelVisuals.Layer:
+          Paper: { state: paper }
+          Bounty: { state: bounty }
+          CaptainsPaper: { state: captains_paper }
+          Invoice: { state: invoice }
+      enum.FoldedVisuals.State:
+        foldedLayer:
+          True: {visible: true}
+          False: {visible: false}
+        unfoldedLayer:
+          True: {visible: false}
+          False: {visible: true}
+  - type: Pullable
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      entity_storage: !type:Container
+      paper_label: !type:ContainerSlot
 
 - type: entity
   parent: CMBodyBag
@@ -37,7 +102,7 @@
 
 - type: entity
   parent: CMBodyBag
-  id: CMStasisBag # TODO RMC14 This needs to halt infected timers or something
+  id: CMStasisBag
   name: stasis bag
   description: A folded, reusable bag designed to prevent additional damage to an occupant.
   components:
