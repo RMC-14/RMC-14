@@ -27,4 +27,7 @@ public sealed partial class RMCConstructionUpgradeComponent : Component
 
     [DataField, AutoNetworkedField]
     public LocId UpgradedPopup;
+
+    [DataField, AutoNetworkedField]
+    public LocId FailurePopup = "rmc-construction-no-metal";
 }

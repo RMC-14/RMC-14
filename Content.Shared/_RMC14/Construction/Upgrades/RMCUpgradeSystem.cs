@@ -1,9 +1,8 @@
-﻿using System.Collections.Immutable;
-using Content.Shared._RMC14.Dropship;
-using Content.Shared._RMC14.Ladder;
-using Content.Shared._RMC14.Map;
+﻿using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Construction.Components;
 using Content.Shared.Coordinates;
+using Content.Shared.Damage;
 using Content.Shared.Doors.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -24,8 +23,10 @@ namespace Content.Shared._RMC14.Construction.Upgrades;
 
 public sealed class RMCUpgradeSystem : EntitySystem
 {
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -34,9 +35,9 @@ public sealed class RMCUpgradeSystem : EntitySystem
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
 
-    public ImmutableArray<EntityPrototype> UpgradePrototypes { get; private set; }
-
+    private readonly Dictionary<EntProtoId, RMCConstructionUpgradeComponent> _upgradePrototypes = new();
     private EntityQuery<RMCConstructionUpgradeItemComponent> _upgradeItemQuery;
 
     public override void Initialize()
@@ -64,7 +65,15 @@ public sealed class RMCUpgradeSystem : EntitySystem
         var user = args.User;
         var used = args.Used;
 
-        if (_upgradeItemQuery.HasComp(used))
+        if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillAmountRequired))
+        {
+            var failPopup = Loc.GetString("rmc-construction-failure", ("ent", ent));
+            _popup.PopupClient(failPopup, ent, user, PopupType.SmallCaution);
+            args.Handled = true;
+            return;
+        }
+
+        if (_upgradeItemQuery.HasComp(used) && ent.Comp.Upgrades != null)
         {
             _ui.OpenUi(ent.Owner, RMCConstructionUpgradeUiKey.Key, user);
             args.Handled = true;
@@ -77,13 +86,8 @@ public sealed class RMCUpgradeSystem : EntitySystem
 
         var user = args.Actor;
 
-        if (!_prototypes.TryIndex(args.Upgrade, out var upgradeProto))
+        if (!_upgradePrototypes.TryGetValue(args.Upgrade, out var upgradeComp))
             return;
-
-        if (!TryGetUpgrade(args.Upgrade, out var upgrade))
-            return;
-
-        var upgradeComp = upgrade.Comp;
 
         EntityUid? upgradeItem = null;
 
@@ -108,6 +112,8 @@ public sealed class RMCUpgradeSystem : EntitySystem
             {
                 if (!_stack.Use(upgradeItem.Value, upgradeComp.Amount, stack))
                 {
+                    var failPopup = Loc.GetString(upgradeComp.FailurePopup, ("ent", ent));
+                    _popup.PopupClient(failPopup, ent, user, PopupType.SmallCaution);
                     return;
                 }
             }
@@ -115,22 +121,27 @@ public sealed class RMCUpgradeSystem : EntitySystem
 
         if (_net.IsClient)
             return;
-    }
 
-    public bool TryGetUpgrade(EntProtoId prototype, out Entity<RMCConstructionUpgradeComponent> upgrade)
-    {
-        var upgradeQuery = EntityQueryEnumerator<RMCConstructionUpgradeComponent, MetaDataComponent>();
-        while (upgradeQuery.MoveNext(out var uid, out var comp, out var metaData))
-        {
-            if (metaData.EntityPrototype?.ID != prototype.Id)
-                continue;
+        var coordinates = _transform.GetMapCoordinates(ent);
+        var rotation = _transform.GetWorldRotation(ent);
 
-            upgrade = (uid, comp);
-            return true;
-        }
+        DamageSpecifier? transferredDamage = null;
 
-        upgrade = default;
-        return false;
+        if (TryComp<DamageableComponent>(ent, out var damageComp))
+            transferredDamage = damageComp.Damage;
+
+        var spawn = Spawn(upgradeComp.UpgradedEntity, coordinates, rotation: rotation);
+        _popup.PopupEntity(Loc.GetString(upgradeComp.UpgradedPopup), spawn, user);
+
+        // transfer damage
+        if (transferredDamage != null && TryComp<DamageableComponent>(spawn, out var newDamageComp))
+            _damageable.SetDamage(spawn, newDamageComp, transferredDamage);
+
+        var upgradeEv = new RMCConstructionUpgradedEvent(spawn, ent.Owner);
+        RaiseLocalEvent(ent.Owner, upgradeEv);
+        RaiseLocalEvent(spawn, upgradeEv, broadcast: true);
+
+        QueueDel(ent);
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
@@ -141,13 +152,27 @@ public sealed class RMCUpgradeSystem : EntitySystem
 
     private void RefreshUpgradePrototypes()
     {
-        var entBuilder = ImmutableArray.CreateBuilder<EntityPrototype>();
-        foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
-        {
-            if (entity.HasComponent<RMCConstructionUpgradeComponent>())
-                entBuilder.Add(entity);
-        }
+        _upgradePrototypes.Clear();
 
-        UpgradePrototypes = entBuilder.ToImmutable();
+        foreach (var prototype in _prototypes.EnumeratePrototypes<EntityPrototype>())
+        {
+            if (prototype.TryGetComponent(out RMCConstructionUpgradeComponent? upgrade, _compFactory))
+                _upgradePrototypes[prototype.ID] = upgrade;
+        }
+    }
+}
+
+/// <summary>
+///     This event that is raised when an entity is ugraded
+/// </summary>
+public sealed class RMCConstructionUpgradedEvent : EntityEventArgs
+{
+    public readonly EntityUid New;
+    public readonly EntityUid Old;
+
+    public RMCConstructionUpgradedEvent(EntityUid newUid, EntityUid oldUid)
+    {
+        New = newUid;
+        Old = oldUid;
     }
 }
