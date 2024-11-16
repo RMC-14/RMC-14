@@ -12,7 +12,6 @@ using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Stunnable;
 using Content.Shared.Whitelist;
-using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 using static Content.Shared.Storage.StorageComponent;
 
