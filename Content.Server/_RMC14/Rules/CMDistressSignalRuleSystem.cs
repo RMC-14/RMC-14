@@ -21,6 +21,8 @@ using Content.Server.Station.Systems;
 using Content.Server.Voting;
 using Content.Server.Voting.Managers;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Armor.Ghillie;
+using Content.Shared._RMC14.Armor.ThermalCloak;
 using Content.Shared._RMC14.Bioscan;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
@@ -37,6 +39,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
 using Content.Shared.Fax.Components;
@@ -102,6 +105,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IVoteManager _voteManager = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
+    [Dependency] private readonly ThermalCloakSystem _thermalCloak = default!;
+    [Dependency] private readonly SharedGhillieSuitSystem _ghillieSuit = default!;
 
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();
@@ -763,6 +768,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             var marines = EntityQueryEnumerator<ActorComponent, MarineComponent, MobStateComponent, TransformComponent>();
             var marinesAlive = false;
+            var marineList = new List<EntityUid>();
             while (marines.MoveNext(out var marineId, out _, out _, out var mobState, out var xform))
             {
                 if (HasComp<VictimInfectedComponent>(marineId) ||
@@ -782,6 +788,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                      _almayerMaps.Contains(xform.MapID)))
                 {
                     marinesAlive = true;
+                    marineList.Add(marineId);
                 }
 
                 if (marinesAlive)
@@ -817,6 +824,39 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 distress.Result = DistressSignalRuleResult.AllDied;
                 EndRound();
                 continue;
+            }
+
+            if (marineList.Count == 1)
+            {
+                // TODO add ghost alert for last human
+                var lastMarine = marineList.Last();
+
+                var cloak = _thermalCloak.FindWornCloak(lastMarine);
+                var ghillie = _ghillieSuit.FindSuit(lastMarine);
+
+                if (cloak != null && cloak.Value.Comp.Enabled)
+                {
+                    _thermalCloak.SetInvisibility(cloak.Value, lastMarine, false, true);
+
+                    if (TryComp<InstantActionComponent>(cloak.Value.Comp.Action, out var action))
+                    {
+                        action.Cooldown = (Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2)); // FUCK YOU
+                        action.UseDelay = TimeSpan.FromHours(2);
+                        Dirty(cloak.Value.Comp.Action.Value, action);
+                    }
+                }
+
+                if (ghillie != null && ghillie.Value.Comp.Enabled)
+                {
+                    _ghillieSuit.ToggleInvisibility(ghillie.Value, lastMarine, false);
+
+                    if (TryComp<InstantActionComponent>(ghillie.Value.Comp.Action, out var action))
+                    {
+                        action.Cooldown = (Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2)); // FUCK YOU
+                        action.UseDelay = TimeSpan.FromHours(2);
+                        Dirty(ghillie.Value.Comp.Action.Value, action);
+                    }
+                }
             }
 
             if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
