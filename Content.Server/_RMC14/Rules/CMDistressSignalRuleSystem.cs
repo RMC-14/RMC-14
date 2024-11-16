@@ -21,6 +21,8 @@ using Content.Server.Station.Systems;
 using Content.Server.Voting;
 using Content.Server.Voting.Managers;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Armor.Ghillie;
+using Content.Shared._RMC14.Armor.ThermalCloak;
 using Content.Shared._RMC14.Bioscan;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
@@ -37,6 +39,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
 using Content.Shared.Fax.Components;
@@ -102,6 +105,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IVoteManager _voteManager = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
+    [Dependency] private readonly ThermalCloakSystem _thermalCloak = default!;
+    [Dependency] private readonly SharedGhillieSuitSystem _ghillieSuit = default!;
 
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();
@@ -318,9 +323,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 return xenoEnt;
             }
 
-            var totalXenos = (int) Math.Round(Math.Max(1, ev.PlayerPool.Count / _marinesPerXeno));
-            var totalSurvivors = (int) Math.Round(ev.PlayerPool.Count / _marinesPerSurvivor);
-            totalSurvivors = (int) Math.Clamp(totalSurvivors, _minimumSurvivors, _maximumSurvivors);
+            var totalXenos = (int)Math.Round(Math.Max(1, ev.PlayerPool.Count / _marinesPerXeno));
+            var totalSurvivors = (int)Math.Round(ev.PlayerPool.Count / _marinesPerSurvivor);
+            totalSurvivors = (int)Math.Clamp(totalSurvivors, _minimumSurvivors, _maximumSurvivors);
             var marines = ev.PlayerPool.Count - totalXenos - totalSurvivors;
             var jobSlotScaling = _config.GetCVar(RMCCVars.RMCJobSlotScaling);
             if (marines > 0 && jobSlotScaling)
@@ -370,7 +375,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (profile.JobPriorities.TryGetValue(comp.QueenJob, out var priority) &&
                     priority > JobPriority.Never)
                 {
-                    xenoCandidates[(int) priority].Add(id);
+                    xenoCandidates[(int)priority].Add(id);
                 }
             }
 
@@ -408,7 +413,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (profile.JobPriorities.TryGetValue(comp.XenoSelectableJob, out var priority) &&
                     priority > JobPriority.Never)
                 {
-                    xenoCandidates[(int) priority].Add(id);
+                    xenoCandidates[(int)priority].Add(id);
                 }
             }
 
@@ -446,7 +451,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (profile.JobPriorities.TryGetValue(comp.SurvivorJob, out var priority) &&
                     priority > JobPriority.Never)
                 {
-                    survivorCandidates[(int) priority].Add(id);
+                    survivorCandidates[(int)priority].Add(id);
                 }
             }
 
@@ -684,7 +689,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             {
                 if (_prefsManager.TryGetCachedPreferences(player.UserId, out var preferences))
                 {
-                    var profile = (HumanoidCharacterProfile) preferences.GetProfile(preferences.SelectedCharacterIndex);
+                    var profile = (HumanoidCharacterProfile)preferences.GetProfile(preferences.SelectedCharacterIndex);
                     if (profile.JobPriorities.TryGetValue(distress.XenoSelectableJob, out var xenoPriority) &&
                         xenoPriority > JobPriority.Never)
                     {
@@ -764,6 +769,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             var marines = EntityQueryEnumerator<ActorComponent, MarineComponent, MobStateComponent, TransformComponent>();
             var marinesAlive = false;
+            var marineList = new List<EntityUid>();
             while (marines.MoveNext(out var marineId, out _, out _, out var mobState, out var xform))
             {
                 if (HasComp<VictimInfectedComponent>(marineId) ||
@@ -780,6 +786,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                      _almayerMaps.Contains(xform.MapID)))
                 {
                     marinesAlive = true;
+                    marineList.Add(marineId);
                 }
 
                 if (marinesAlive)
@@ -815,6 +822,39 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 distress.Result = DistressSignalRuleResult.AllDied;
                 EndRound();
                 continue;
+            }
+
+            if (marineList.Count == 1)
+            {
+                // TODO add ghost alert for last human
+                var lastMarine = marineList.Last();
+
+                var cloak = _thermalCloak.FindWornCloak(lastMarine);
+                var ghillie = _ghillieSuit.FindSuit(lastMarine);
+
+                if (cloak != null && cloak.Value.Comp.Enabled)
+                {
+                    _thermalCloak.SetInvisibility(cloak.Value, lastMarine, false, true);
+
+                    if (TryComp<InstantActionComponent>(cloak.Value.Comp.Action, out var action))
+                    {
+                        action.Cooldown = (Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2)); // FUCK YOU
+                        action.UseDelay = TimeSpan.FromHours(2);
+                        Dirty(cloak.Value.Comp.Action.Value, action);
+                    }
+                }
+
+                if (ghillie != null && ghillie.Value.Comp.Enabled)
+                {
+                    _ghillieSuit.ToggleInvisibility(ghillie.Value, lastMarine, false);
+
+                    if (TryComp<InstantActionComponent>(ghillie.Value.Comp.Action, out var action))
+                    {
+                        action.Cooldown = (Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2)); // FUCK YOU
+                        action.UseDelay = TimeSpan.FromHours(2);
+                        Dirty(ghillie.Value.Comp.Action.Value, action);
+                    }
+                }
             }
 
             if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
@@ -1113,7 +1153,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         if (!component.AresGreetingDone && announcementTime >= component.AresGreetingDelay)
         {
             component.AresGreetingDone = true;
-            _marineAnnounce.AnnounceARES(default, "ARES. Online. Good morning, marines.", component.AresGreetingAudio,"rmc-announcement-ares-online");
+            _marineAnnounce.AnnounceARES(default, "ARES. Online. Good morning, marines.", component.AresGreetingAudio, "rmc-announcement-ares-online");
         }
 
         if (!component.AresMapDone && announcementTime >= component.AresMapDelay)
@@ -1198,7 +1238,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         var vote = new VoteOptions
         {
             Title = Loc.GetString("rmc-distress-signal-next-map-title"),
-            Options = planets.Select(p => ((string, object)) (GetPlanetName(p), p)).ToList(),
+            Options = planets.Select(p => ((string, object))(GetPlanetName(p), p)).ToList(),
             Duration = TimeSpan.FromMinutes(2),
         };
         vote.SetInitiatorOrServer(null);
@@ -1209,13 +1249,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             string picked;
             if (args.Winner == null)
             {
-                picked = (string) _random.Pick(args.Winners);
+                picked = (string)_random.Pick(args.Winners);
                 var msg = Loc.GetString("rmc-distress-signal-next-map-tie", ("picked", GetPlanetName(picked)));
                 _chatManager.DispatchServerAnnouncement(msg);
             }
             else
             {
-                picked = (string) args.Winner;
+                picked = (string)args.Winner;
                 var msg = Loc.GetString("rmc-distress-signal-next-map-win", ("winner", GetPlanetName(picked)));
                 _chatManager.DispatchServerAnnouncement(msg);
             }
