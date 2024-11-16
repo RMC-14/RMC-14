@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bhole_reference_01"
+    },
+    {
+      "name": "bhole_reference_02"
+    },
+    {
+      "name": "bhole_reference_03"
+    },
+    {
+      "name": "bhole_reference_04"
+    },
+    {
+      "name": "bhole_reference_05"
+    },
+    {
+      "name": "bhole_reference_06"
+    },
+    {
+      "name": "bhole_reference_07"
+    },
+    {
+      "name": "bhole_reference_08"
+    }
+  ]
+}
