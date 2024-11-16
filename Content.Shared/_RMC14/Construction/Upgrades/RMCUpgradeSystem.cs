@@ -1,23 +1,11 @@
-﻿using Content.Shared._RMC14.Map;
-using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared.Construction.Components;
-using Content.Shared.Coordinates;
+﻿using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Damage;
-using Content.Shared.Doors.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.Maps;
-using Content.Shared.Physics;
 using Content.Shared.Popups;
-using Content.Shared.Prototypes;
 using Content.Shared.Stacks;
 using Content.Shared.Whitelist;
-using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
-using Robust.Shared.Physics.Collision.Shapes;
-using Robust.Shared.Physics.Components;
-using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Construction.Upgrades;
