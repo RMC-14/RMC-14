@@ -176,7 +176,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         {
             if (time > damageableCorrodingComponent.NextDamageAt)
             {
-                _damageable.TryChangeDamage(uid, damageableCorrodingComponent.Damage, true);
+                _damageable.TryChangeDamage(uid, damageableCorrodingComponent.Damage);
                 damageableCorrodingComponent.NextDamageAt = time.Add(TimeSpan.FromSeconds(CorrosiveAcidTickDelaySeconds));
             }
 
