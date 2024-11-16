@@ -124,6 +124,10 @@ public sealed class RMCUpgradeSystem : EntitySystem
                 }
             }
         }
+        else
+        {
+            QueueDel(upgradeItem);
+        }
 
         if (_net.IsClient)
             return;

@@ -122,6 +122,8 @@
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/burn_barricade_cracks.rsi
+    - type: RMCConstructionUpgradeTarget
+      upgrades: null
 
 - type: entity
   parent: RMCBarricadePlasteel
@@ -143,6 +145,8 @@
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/brute_barricade_cracks.rsi
+    - type: RMCConstructionUpgradeTarget
+      upgrades: null
 
 - type: entity
   parent: RMCBarricadePlasteel
@@ -163,6 +167,8 @@
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/explosive_barricade_cracks.rsi
+    - type: RMCConstructionUpgradeTarget
+      upgrades: null
 
 - type: entity
   parent: CMBarricadeMetalDoor
