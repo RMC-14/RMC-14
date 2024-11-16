@@ -298,8 +298,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
         if (!args.HasDirectionalMovement)
             return;
 
-        foreach (var attachableUid in user.Comp.AttachableList)
+        for (var i = user.Comp.AttachableList.Count - 1; i >= 0; i--)
         {
+            var attachableUid = user.Comp.AttachableList[i];
             if (!TryComp(attachableUid, out AttachableToggleableComponent? toggleableComponent) ||
                 !toggleableComponent.Active ||
                 !toggleableComponent.BreakOnMove)
@@ -309,8 +310,6 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
             Toggle((attachableUid, toggleableComponent), user.Owner, toggleableComponent.DoInterrupt);
         }
-
-        RemCompDeferred<AttachableMovementLockedComponent>(user);
     }
 
     private void CheckUserBreakOnRotate(Entity<AttachableDirectionLockedComponent?> user)
@@ -326,8 +325,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
         if (Transform(user.Owner).LocalRotation.GetCardinalDir() == user.Comp.LockedDirection)
             return;
 
-        foreach (EntityUid attachableUid in user.Comp.AttachableList)
+        for (var i = user.Comp.AttachableList.Count - 1; i >= 0; i--)
         {
+            var attachableUid = user.Comp.AttachableList[i];
             if (!TryComp(attachableUid, out AttachableToggleableComponent? toggleableComponent) ||
                 !toggleableComponent.Active ||
                 !toggleableComponent.BreakOnRotate)
@@ -337,8 +337,6 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
             Toggle((attachableUid, toggleableComponent), user.Owner, toggleableComponent.DoInterrupt);
         }
-
-        RemCompDeferred<AttachableDirectionLockedComponent>(user);
     }
 
     private void CheckUserBreakOnFullRotate(Entity<AttachableSideLockedComponent?> user, EntityCoordinates playerPos, EntityCoordinates targetPos)
@@ -364,8 +362,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
         if (differenceFromLockedAngle > -90 && differenceFromLockedAngle < 90)
             return;
 
-        foreach (EntityUid attachableUid in user.Comp.AttachableList)
+        for (var i = user.Comp.AttachableList.Count - 1; i >= 0; i--)
         {
+            var attachableUid = user.Comp.AttachableList[i];
             if (!TryComp(attachableUid, out AttachableToggleableComponent? toggleableComponent) ||
                 !toggleableComponent.Active ||
                 !toggleableComponent.BreakOnFullRotate)
@@ -375,8 +374,6 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
             Toggle((attachableUid, toggleableComponent), user.Owner, toggleableComponent.DoInterrupt);
         }
-
-        RemCompDeferred<AttachableSideLockedComponent>(user);
     }
 #endregion
 
