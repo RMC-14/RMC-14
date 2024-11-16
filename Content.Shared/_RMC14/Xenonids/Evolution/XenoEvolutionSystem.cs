@@ -387,6 +387,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
             var slotCount = oldHive.Comp.FreeSlots.ToDictionary();
             while (current.MoveNext(out var existingComp, out var member))
             {
+                if (_mobState.IsDead(member))
+                    continue;
+
                 if (member.Hive != oldHive.Owner || !existingComp.CountedInSlots)
                     continue;
 
