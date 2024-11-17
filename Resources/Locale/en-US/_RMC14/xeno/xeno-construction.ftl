@@ -5,7 +5,7 @@ cm-xeno-construction-failed-select-structure = We need to select a structure to 
 cm-xeno-construction-failed-requires-support = {CAPITALIZE(MAKEPLURAL($choice))} need a wall or resin door next to them to stand up.
 
 rmc-xeno-construction-no-map-resin-hole = The ground isn't solid
-rmc-xeno-construction-must-weeds-resin-hole = Resin holes must be built on weeds.
+rmc-xeno-construction-must-have-weeds-resin-hole = Resin holes must be built on weeds.
 rmc-xeno-construction-blocked-resin-hole = There's something built here already.
 rmc-xeno-construction-similar-too-close-resin-hole = There are other resin holes nearby!
 
@@ -41,10 +41,17 @@ rmc-xeno-construction-resin-hole-acid-name = acid
 
 rmc-xeno-construction-tunnel-empty-non-xeno-enter-failure = You stare into the dark abyss
 rmc-xeno-construction-tunnel-occupied-non-xeno-enter-failure = You stare into the dark abyss, making out what appears to be two little lights... almost like something is watching
+rmc-xeno-construction-tunnel-full-xeno-enter-failure = The tunnel is too crowded, wait for others to exit!
 
-rmc-xeno-construction-no-map-resin-tunnel = The ground isn't solid
-rmc-xeno-construction-blocked-resin-tunnel = There's something built here already.
+rmc-xeno-construction-tunnel-large-xeno-enter = We begin heaving our monstrous bulk into {$tunnelName}
+rmc-xeno-construction-tunnel-default-xeno-enter = We begin crawling down into {$tunnelName}
+
+rmc-xeno-construction-no-map-tunnel = The ground isn't solid
+rmc-xeno-construction-blocked-tunnel = There's something built here already.
 
 rmc-xeno-construction-resin-tunnel-uproot = We start uprooting the node so we can dig a tunnel in its place...
-rmc-xeno-construction-resin-tunnel-create-tunnel = We start digging
+rmc-xeno-construction-resin-tunnel-create-tunnel = We start digging...
+
 rmc-xeno-construction-default-tunnel-name = Tunnel {$tunnelNumber}
+rmc-xeno-construction-failed-tunnel-rename = Tunnel names must be unique!
+rmc-xeno-construction-tunnel-examine = The pheromone scent reads: {$tunnelName}

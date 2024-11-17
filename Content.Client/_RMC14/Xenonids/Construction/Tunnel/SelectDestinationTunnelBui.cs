@@ -14,9 +14,10 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
 {
     private SelectDestinationTunnelWindow? _window;
     private NetEntity? _selectedTunnel;
+    private IEntityManager _entManager;
     public SelectDestinationTunnelBui(EntityUid ent, Enum key) : base(ent, key)
     {
-
+        _entManager = IoCManager.Resolve<IEntityManager>();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -34,6 +35,12 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
 
         foreach (var (name, netTunnel) in newState.HiveTunnels)
         {
+            var tunnel = _entManager.GetEntity(netTunnel);
+            if (tunnel == this.Owner)
+            {
+                continue;
+            }
+
             ItemList.Item item = new(_window.SelectableTunnels)
             {
                 Text = name,

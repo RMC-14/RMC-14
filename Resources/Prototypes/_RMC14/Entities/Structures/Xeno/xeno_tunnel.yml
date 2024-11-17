@@ -36,8 +36,8 @@
     transparency: 0.2
   - type: XenoTunnel
   - type: UserInterface
-      interfaces:
-        enum.SelectDestinationTunnelUI.Key:
-          type: SelectDestinationTunnelBui
-        enum.NameTunnelUI.Key:
-          type: NameNewTunnelBui
+    interfaces:
+      enum.SelectDestinationTunnelUI.Key:
+        type: SelectDestinationTunnelBui
+      enum.NameTunnelUI.Key:
+        type: NameTunnelBui

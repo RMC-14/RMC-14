@@ -16,6 +16,7 @@ public sealed partial class NameTunnelWindow : DefaultWindow
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        Title = Loc.GetString("xeno-ui-name-new-tunnel-title");
+        Title = Loc.GetString("xeno-ui-name-tunnel-title");
+        SubmitButton.Text = Loc.GetString("xeno-ui-name-tunnel-submit-text");
     }
 }

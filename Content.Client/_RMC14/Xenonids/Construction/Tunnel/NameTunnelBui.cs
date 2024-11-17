@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using JetBrains.Annotations;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using System;
 using System.Collections.Generic;
@@ -17,32 +18,32 @@ public sealed partial class NameTunnelBui : BoundUserInterface
     {
 
     }
+
     protected override void Open()
     {
         base.Open();
 
-        _window = new NameTunnelWindow();
-        _window.OnClose += Close;
+        _window = this.CreateWindow<NameTunnelWindow>();
+
         _window.OpenCentered();
 
         var tunnelInput = _window.TunnelName;
 
         _window.SubmitButton.OnPressed += (BaseButton.ButtonEventArgs args) =>
         {
-            var tunnelName = tunnelInput.Text;
-            if (!tunnelName.Trim().Any())
+            var tunnelName = tunnelInput.Text.Trim();
+            if (tunnelName.Length == 0)
             {
                 return;
             }
             SendMessage(new NameTunnelMessage(tunnelName));
+            // If tunnel naming suceeds, the server shuts down the ui
         };
     }
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);
-        if (!disposing)
-            return;
-
+        if (!disposing) return;
         _window?.Dispose();
     }
 }

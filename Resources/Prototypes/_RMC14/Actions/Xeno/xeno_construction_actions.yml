@@ -149,4 +149,9 @@
   components:
   - type: InstantAction
     event: !type:XenoDigTunnelActionEvent
-      plasmaCost: 200
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: build_tunnel
+    useDelay: 300
+

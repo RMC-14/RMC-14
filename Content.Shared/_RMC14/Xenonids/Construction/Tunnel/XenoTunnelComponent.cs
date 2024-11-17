@@ -15,15 +15,28 @@ public sealed partial class XenoTunnelComponent : Component
 {
     public const string ContainedMobsContainerId = "rmc_xeno_tunnel_mob_container";
 
-    /// <summary>
-    /// How long it takes to enter this tunnel
-    /// </summary>
     [DataField]
-    public TimeSpan EnterDelay = new(0, 0, 6);
+    public int MaxMobs = 3;
 
-    /// <summary>
-    /// How long it takes to move from this tunnel to another one
-    /// </summary>
+    /// How long it takes to enter this tunnel
+
     [DataField]
-    public TimeSpan MoveDelay = new(0, 0, 4);
+    public TimeSpan SmallXenoEnterDelay = new(0, 0, 1);
+
+    [DataField]
+    public TimeSpan StandardXenoEnterDelay = new(0, 0, 4);
+
+    [DataField]
+    public TimeSpan LargeXenoEnterDelay = new(0, 0, 12);
+
+    /// How long it takes to move from this tunnel to another one
+
+    [DataField]
+    public TimeSpan SmallXenoMoveDelay = new(0, 0, 1);
+
+    [DataField]
+    public TimeSpan StandardXenoMoveDelay = new(0, 0, 2);
+
+    [DataField]
+    public TimeSpan LargeXenoMoveDelay = new(0, 0, 6);
 }

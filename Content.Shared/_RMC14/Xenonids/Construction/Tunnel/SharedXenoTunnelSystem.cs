@@ -10,6 +10,7 @@ using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
+using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
@@ -31,8 +32,53 @@ public abstract partial class SharedXenoTunnelSystem : EntitySystem
 {
     private const string TunnelPrototypeId = "XenoTunnel";
 
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] protected readonly SharedXenoHiveSystem _hive = default!;
 
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<XenoTunnelComponent, ExaminedEvent>(OnExamine);
+    }
+
+    private void OnExamine(Entity<XenoTunnelComponent> xenoTunnel, ref ExaminedEvent args)
+    {
+        if (!HasComp<XenoComponent>(args.Examiner))
+            return;
+
+        if (!TryGetHiveTunnelName(xenoTunnel, out var tunnelName))
+        {
+            return;
+        }
+
+        using (args.PushGroup(nameof(XenoEggRetrieverComponent)))
+        {
+            args.PushMarkup(Loc.GetString("rmc-xeno-construction-tunnel-examine", ("tunnelName", tunnelName)));
+        }
+    }
+
+    public bool TryGetHiveTunnelName(Entity<XenoTunnelComponent> xenoTunnel, [NotNullWhen(true)] out string? tunnelName)
+    {
+        tunnelName = null;
+        var hive = _hive.GetHive(xenoTunnel.Owner);
+        if (hive is null)
+        {
+            return false;
+        }
+
+        var hiveTunnels = hive.Value.Comp.HiveTunnels;
+
+        foreach (var tunnel in hiveTunnels)
+        {
+            if (tunnel.Value == xenoTunnel.Owner)
+            {
+                tunnelName = tunnel.Key;
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     public bool TryPlaceTunnel(EntityUid associatedHiveEnt, string name, EntityCoordinates buildLocation, [NotNullWhen(true)] out EntityUid? tunnelEnt)
     {
@@ -132,8 +178,6 @@ public sealed partial class SelectDestinationTunnelInterfaceState : BoundUserInt
     }
 }
 
-
-[Serializable, NetSerializable]
 public sealed partial class XenoDigTunnelActionEvent : InstantActionEvent
 {
     [DataField]

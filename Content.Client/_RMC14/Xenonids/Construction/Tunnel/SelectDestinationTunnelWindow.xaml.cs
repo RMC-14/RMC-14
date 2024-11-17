@@ -17,5 +17,6 @@ public sealed partial class SelectDestinationTunnelWindow : DefaultWindow
         IoCManager.InjectDependencies(this);
 
         Title = Loc.GetString("xeno-ui-select-destination-tunnel-title");
+        SelectButton.Text = Loc.GetString("xeno-ui-select-destination-tunnel-submit-text");
     }
 }
