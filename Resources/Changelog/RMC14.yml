@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added the overwatch console, giving Command roles a way to quickly get
-      information on all squads, their role composition, head count and the ability
-      to watch each marine through their helmet's camera.
-    type: Add
-  id: 486
-  time: '2024-08-01T03:16:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3101
-- author: DrSmugleaf
-  changes:
   - message: Added the M4SPR, M54C and Engineering kits to the Squad Leader's gear
       rack.
     type: Add
@@ -4909,5 +4900,13 @@
   id: 985
   time: '2024-11-16T06:46:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4842
+- author: Vermidia
+  changes:
+  - message: Fixed fortified and crested defenders not getting stunned by rockets.
+      They will get stunned but still appear crested/fortified.
+    type: Fix
+  id: 986
+  time: '2024-11-17T04:45:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4853
 Name: RMC14
 Order: -1
