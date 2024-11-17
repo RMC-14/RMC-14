@@ -289,8 +289,6 @@
     multipliers:
       Turf: 5
       Breaching: 10.8
-  - type: UniqueAction
-  - type: PumpAction
   - type: UseDelay
   - type: AttachableToggleable
     userOnly: true
