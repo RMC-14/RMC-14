@@ -84,7 +84,7 @@ public sealed class XenoCrestSystem : EntitySystem
 
     private void OnXenoCrestBeforeStatusAdded(Entity<XenoCrestComponent> xeno, ref BeforeStatusEffectAddedEvent args)
     {
-        if (xeno.Comp.Fortified && xeno.Comp.ImmuneToStatuses.Contains(args.Key))
+        if (xeno.Comp.Lowered && xeno.Comp.ImmuneToStatuses.Contains(args.Key))
             args.Cancelled = true;
     }
 
