@@ -321,8 +321,8 @@
       #  amount: 2
       #- id: CMMagazineBoxM2C
       #  amount: 2
-      #- id: Box of Breaching Shells (16g)
-      #  amount: 2
+      - id: RMCBoxShotgunBreaching
+        amount: 2
       #- id: CMBatonSlugsHIRR
       #  amount: 6
       #- id: CMStarShellN74AGMS
