@@ -8,6 +8,9 @@
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/custombuilt.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/custombuilt.rsi
+    slots:
+    - suitStorage
+    - belt
   - type: Gun
     shotsPerBurst: 2
   - type: ShootUseDelay
