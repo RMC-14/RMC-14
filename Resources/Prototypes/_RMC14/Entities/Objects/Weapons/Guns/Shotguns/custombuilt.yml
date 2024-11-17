@@ -55,7 +55,7 @@
       rmc-aslot-rail: -0.025, 0.125 #ADJUST ME
       rmc-aslot-underbarrel: 0.30, -0.31 #ADJUST ME
 
-﻿- type: entity
+- type: entity
   parent: BaseItem
   id: WeaponShotgunCustomBuilt
   name: damaged custom built shotgun
