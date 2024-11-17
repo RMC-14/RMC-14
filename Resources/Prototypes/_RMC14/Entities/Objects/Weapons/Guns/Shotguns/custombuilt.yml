@@ -51,16 +51,15 @@
           - RMCAttachmentLaserSight
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.825, 0.06
-      rmc-aslot-rail: -0.025, 0.125
-      rmc-aslot-stock: -0.50, 0.065
-      rmc-aslot-underbarrel: 0.30, -0.31
+      rmc-aslot-barrel: 0.825, 0.06 #ADJUST ME
+      rmc-aslot-rail: -0.025, 0.125 #ADJUST ME
+      rmc-aslot-underbarrel: 0.30, -0.31 #ADJUST ME
 
 ﻿- type: entity
   parent: BaseItem
   id: WeaponShotgunCustomBuilt
   name: damaged custom built shotgun
-  description: 
+  description: A cobbled-together pile of scrap and alien wood. Point end towards things you want to die. Has a burst fire feature, as if it needed it. Well, it had one, this one's barrel has apparently exploded outwards like an overripe grape. Guess that's what happens when you DIY a shotgun.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/custombuilt.rsi
