@@ -1,4 +1,5 @@
-﻿using Content.Shared.Actions;
+﻿using Content.Shared._RMC14.Overwatch;
+using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Rounding;
@@ -21,6 +22,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
         SubscribeLocalEvent<NightVisionComponent, AfterAutoHandleStateEvent>(OnNightVisionAfterHandle);
         SubscribeLocalEvent<NightVisionComponent, ComponentRemove>(OnNightVisionRemove);
         SubscribeLocalEvent<NightVisionComponent, ToggleNightVisionAlertEvent>(OnNightVisionToggle);
+        SubscribeLocalEvent<NightVisionComponent, OverwatchStartEvent>(OnOverwatchStart);
 
         SubscribeLocalEvent<NightVisionItemComponent, GetItemActionsEvent>(OnNightVisionItemGetActions);
         SubscribeLocalEvent<NightVisionItemComponent, ToggleActionEvent>(OnNightVisionItemToggle);
@@ -57,6 +59,11 @@ public abstract class SharedNightVisionSystem : EntitySystem
     private void OnNightVisionToggle(Entity<NightVisionComponent> ent, ref ToggleNightVisionAlertEvent args)
     {
         Toggle((ent, ent));
+    }
+
+    private void OnOverwatchStart(Entity<NightVisionComponent> ent, ref OverwatchStartEvent args)
+    {
+        DisableNightVisionItem(ent.Comp.Item, ent.Owner);
     }
 
     private void OnNightVisionItemGetActions(Entity<NightVisionItemComponent> ent, ref GetItemActionsEvent args)
@@ -153,6 +160,9 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
     private void EnableNightVisionItem(Entity<NightVisionItemComponent> item, EntityUid user)
     {
+        var ev = new NightVisionStartEvent();
+        RaiseLocalEvent(user, ref ev);
+
         DisableNightVisionItem(item, item.Comp.User);
 
         item.Comp.User = user;
@@ -164,6 +174,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
         {
             var nightVision = EnsureComp<NightVisionComponent>(user);
             nightVision.State = NightVisionState.Full;
+            nightVision.Item = item.Owner;
             Dirty(user, nightVision);
         }
 
@@ -176,6 +187,14 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
     protected virtual void NightVisionRemoved(Entity<NightVisionComponent> ent)
     {
+    }
+
+    public void DisableNightVisionItem(EntityUid item, EntityUid? user)
+    {
+        if (!TryComp(item, out NightVisionItemComponent? comp))
+            return;
+
+        DisableNightVisionItem((item, comp), user);
     }
 
     protected void DisableNightVisionItem(Entity<NightVisionItemComponent> item, EntityUid? user)

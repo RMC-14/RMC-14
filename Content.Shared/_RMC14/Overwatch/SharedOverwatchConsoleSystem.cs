@@ -1,9 +1,12 @@
 ﻿using System.Linq;
+using Content.Shared._RMC14.FarSight;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Scoping;
 using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Damage;
@@ -65,6 +68,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         SubscribeLocalEvent<OverwatchWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
         SubscribeLocalEvent<OverwatchWatchingComponent, DamageChangedEvent>(OnWatchingDamageChanged);
+        SubscribeLocalEvent<OverwatchWatchingComponent, FarSightStartEvent>(OnFarSightStart);
+        SubscribeLocalEvent<OverwatchWatchingComponent, NightVisionStartEvent>(OnNightVisionStart);
 
         SubscribeLocalEvent<SquadMemberComponent, SquadMemberUpdatedEvent>(OnSquadMemberUpdated);
 
@@ -128,6 +133,16 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         if (_net.IsServer)
             _popup.PopupEntity("The pain kicked you out of the console!", ent, ent, PopupType.MediumCaution);
+    }
+
+    private void OnFarSightStart(Entity<OverwatchWatchingComponent> ent, ref FarSightStartEvent args)
+    {
+        TryLocalUnwatch(ent);
+    }
+
+    private void OnNightVisionStart(Entity<OverwatchWatchingComponent> ent, ref NightVisionStartEvent args)
+    {
+        TryLocalUnwatch(ent);
     }
 
     private void OnSquadMemberUpdated(Entity<SquadMemberComponent> ent, ref SquadMemberUpdatedEvent args)

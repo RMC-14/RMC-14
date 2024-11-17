@@ -1,8 +1,12 @@
-﻿using Content.Shared.Actions;
+﻿using Content.Shared._RMC14.FarSight;
+using Content.Shared._RMC14.Overwatch;
+using Content.Shared._RMC14.Scoping;
+using Content.Shared.Actions;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.FarSight;
 
@@ -11,6 +15,7 @@ public sealed class FarSightSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContentEyeSystem _eye = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
 
     public override void Initialize()
@@ -19,6 +24,8 @@ public sealed class FarSightSystem : EntitySystem
         SubscribeLocalEvent<FarSightItemComponent, FarSightActionEvent>(OnFarSightAction);
         SubscribeLocalEvent<FarSightItemComponent, GotUnequippedEvent>(OnFarSightUnequipped);
         SubscribeLocalEvent<FarSightItemComponent, GotEquippedEvent>(OnFarSightEquipped);
+
+        SubscribeLocalEvent<FarSightComponent, OverwatchStartEvent>(OnOverwatchStart);
     }
 
     private void OnFarSightGetItemActions(Entity<FarSightItemComponent> ent, ref GetItemActionsEvent args)
@@ -35,13 +42,17 @@ public sealed class FarSightSystem : EntitySystem
         if (args.Handled)
             return;
 
+        var user = args.Performer;
+
+        var ev = new FarSightStartEvent();
+        RaiseLocalEvent(user, ref ev);
+
         args.Handled = true;
 
         ent.Comp.Enabled = !ent.Comp.Enabled;
         Dirty(ent);
 
-        var user = args.Performer;
-        SetZoom(ent.Comp.Enabled, user, ent.Comp);
+        SetZoom(ent.Comp.Enabled, user, ent);
 
         _actions.SetToggled(ent.Comp.Action, ent.Comp.Enabled);
         _appearance.SetData(ent, FarSightItemVisuals.Active, ent.Comp.Enabled);
@@ -54,7 +65,13 @@ public sealed class FarSightSystem : EntitySystem
         if (!_inventory.InSlotWithFlags((ent, null, null), ent.Comp.Slots))
             return;
 
-        SetZoom(ent.Comp.Enabled, user, ent.Comp);
+        if (ent.Comp.Enabled)
+        {
+            var ev = new FarSightStartEvent();
+            RaiseLocalEvent(user, ref ev);
+        }
+
+        SetZoom(ent.Comp.Enabled, user, ent);
     }
 
     private void OnFarSightUnequipped(Entity<FarSightItemComponent> ent, ref GotUnequippedEvent args)
@@ -64,20 +81,41 @@ public sealed class FarSightSystem : EntitySystem
         if (_inventory.InSlotWithFlags((ent, null, null), ent.Comp.Slots))
             return;
 
-        SetZoom(false, user, ent.Comp);
+        SetZoom(false, user, ent);
     }
 
-    private void SetZoom(bool activated, EntityUid user, FarSightItemComponent comp)
+    private void OnOverwatchStart(Entity<FarSightComponent> ent, ref OverwatchStartEvent args)
+    {
+        var item = ent.Comp.Item;
+
+        if (!TryComp(item, out FarSightItemComponent? farSight))
+            return;
+
+        SetZoom(false, ent.Owner, (item, farSight));
+    }
+
+    private void SetZoom(bool activated, EntityUid user, Entity<FarSightItemComponent> item)
     {
         if (activated)
         {
-            _eye.SetMaxZoom(user, comp.Zoom);
-            _eye.SetZoom(user, comp.Zoom);
+            _eye.SetMaxZoom(user, item.Comp.Zoom);
+            _eye.SetZoom(user, item.Comp.Zoom);
+
+            if (!_timing.ApplyingState)
+            {
+                // Give user component to be able to tell they're using farsight
+                var farSight = EnsureComp<FarSightComponent>(user);
+                farSight.Item = item.Owner;
+                Dirty(user, farSight);
+            }
         }
         else
         {
             if (TryComp<EyeComponent>(user, out var eye))
                 _eye.SetMaxZoom(user, eye.Zoom);
+
+            if (TryComp(user, out FarSightComponent? farSight))
+                RemCompDeferred<FarSightComponent>(user);
 
             _eye.ResetZoom(user);
         }
