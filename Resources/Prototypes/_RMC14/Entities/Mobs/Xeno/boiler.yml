@@ -63,7 +63,7 @@
   - type: XenoTailStab
     toggle: true
     inject:
-      RMCMolecularAcid: 1 # TODO RMC14 6
+      RMCMolecularAcid: 6
   - type: XenoSprayAcid
     acid: XenoAcidSprayStrong
     barricadeDamage:

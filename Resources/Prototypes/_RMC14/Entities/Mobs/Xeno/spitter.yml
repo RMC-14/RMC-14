@@ -61,7 +61,7 @@
         Heat: 5
   - type: XenoTailStab
     inject:
-      RMCMolecularAcid: 1 # TODO RMC14 2
+      RMCMolecularAcid: 2
   - type: CMArmor
     armor: 15
     explosionArmor: 20
