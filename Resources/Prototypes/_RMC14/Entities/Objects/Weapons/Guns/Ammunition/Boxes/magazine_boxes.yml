@@ -39,6 +39,12 @@
     blacklist:
       components:
       - Xeno
+  - type: Tag
+    tags:
+    - RMCAmmoBox
+
+- type: Tag
+  id: RMCAmmoBox
 
 - type: entity
   abstract: true
@@ -739,7 +745,7 @@
       whitelist:
         tags:
         - RMCSpeedLoaderM44
-        
+
 # Nailgun
 
 - type: entity
@@ -1097,3 +1103,102 @@
       whitelist:
         tags:
         - RMCShellShotgunIncendiaryBuckshot
+
+- type: entity
+  parent: RMCBoxShellsBase
+  id: RMCBoxShellsBreachingEmpty
+  name: shell box (Breaching x 120)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsBreachingEmpty
+  - type: Sprite
+    layers:
+    - state: base_breach
+    - state: shells_breach
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_shells
+    - state: base_breach_lid
+      map: [ "lid" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: shells_breach, visible: false }
+          Low: { state: shells_breach_1, visible: true }
+          Medium: { state: shells_breach_2, visible: true }
+          High: { state: shells_breach_3, visible: true }
+          Full: { state: shells_breach, visible: true }
+  - type: CMItemSlots
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBreaching
+
+- type: entity
+  parent: RMCBoxShellsBreachingEmpty
+  id: RMCBoxShellsBreaching
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCShellShotgunBreaching
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBreaching
+
+- type: entity
+  parent: RMCBoxMagazineBase
+  id: RMCBoxBullets458Empty
+  name: .458 bullets box crate (x300 rounds) # TODO RMC14 this is 297 since its multiples of 9
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxBullets458Empty
+  - type: Sprite
+    layers:
+    - state: base_458
+    - state: rounds_458
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_458
+    - state: base_458_lid
+      map: [ "lid" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: rounds_458, visible: false }
+          Low: { state: rounds_458_1, visible: true }
+          Medium: { state: rounds_458_2, visible: true }
+          High: { state: rounds_458_3, visible: true }
+          Full: { state: rounds_458, visible: true }
+  - type: CMItemSlots
+    count: 33
+    slot:
+      whitelist:
+        tags:
+        - RMCCartridge458SOCOM
+
+- type: entity
+  parent: RMCBoxBullets458Empty
+  id: RMCBoxBullets458
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCCartridge458SOCOM

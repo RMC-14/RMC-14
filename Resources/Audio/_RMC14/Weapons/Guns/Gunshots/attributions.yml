@@ -3,6 +3,11 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/6e21e9e5b88b44c7402c2f984f16cc36116b07b0/sound/weapons/gun_88m4_v7.ogg"
 
+- files: ["gun_boomslang_fire.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/41a9b4198368b478eb611f74e810142d2761aa10/sound/weapons/gun_boomslang_fire.ogg"
+
 - files: ["gun_m1984_1.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
@@ -62,6 +67,11 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/a3b7bc4f4388bf291ccfeceac7d471961c224b45/sound/weapons/gun_shotgun_u7.ogg"
+
+- files: ["gun_shotgun_xm51.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/sound/weapons/gun_shotgun_xm51.ogg"
 
 - files: ["gun_silenced_shot1.ogg"]
   license: "CC-BY-SA-3.0"
@@ -128,9 +138,9 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/0cbe3e21446a2af36c317845afbc5fdd9c208ee8/sound/weapons/nailgun_fire.ogg"
-  
+
 - files: ["gun_m60.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_m60.ogg"
-  
+

@@ -438,6 +438,12 @@ public sealed class CMGunSystem : EntitySystem
             return;
         }
 
+        var cancelEvent = new RMCTryAmmoEjectEvent(args.User, false);
+        RaiseLocalEvent(gun.Owner, ref cancelEvent);
+
+        if (cancelEvent.Cancelled)
+            return;
+
         args.Handled = true;
 
         var ejectedAmmo = container.ContainedEntities[0];

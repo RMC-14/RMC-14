@@ -199,12 +199,12 @@
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
-      - id: CMArmorM3Light
+      - id: RMCArmorM3LightVariants
         name: light armor
-      - id: CMArmorM3Medium
+      - id: RMCArmorM3MediumVariants
         name: medium armor
         recommended: true
-      - id: CMArmorM3Heavy
+      - id: RMCArmorM3HeavyVariants
         name: heavy armor
     - name: Backpack
       choices: { CMBackpack: 1 }
@@ -263,9 +263,9 @@
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
-      #- id: CMShoulderHolster
       - id: CMWebbing
       - id: CMWebbingPouch
+      - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }
       entries:

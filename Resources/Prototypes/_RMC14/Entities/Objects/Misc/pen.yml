@@ -18,6 +18,7 @@
     quickEquip: false
     slots:
     - Suitstorage
+    - Ears
 
 - type: entity
   parent: CMPen

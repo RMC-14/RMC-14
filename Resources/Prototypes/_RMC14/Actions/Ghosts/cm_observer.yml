@@ -39,3 +39,16 @@
       sprite: _RMC14/Actions/observer_actions.rsi
       state: find_parasite
     event: !type:FindParasiteActionEvent
+
+- type: entity
+  id: ActionJoinXeno
+  name: Join as Xeno
+  description: Find burrowed larva to join as.
+  components:
+  - type: InstantAction
+    checkCanInteract: false
+    icon:
+      sprite: _RMC14/Actions/observer_actions.rsi
+      state: join_xeno
+    event: !type:JoinXenoActionEvent
+    useDelay: 0.5

@@ -65,12 +65,16 @@
     damageContainers:
     - Biological
   - type: GhostColor
-  # RCM - FindParasite Event
+  # RMC - FindParasite Event
   - type: FindParasite
+  - type: JoinXeno
   - type: UserInterface
     interfaces:
       enum.XenoFindParasiteUI.Key:
         type: FindParasiteBoundUserInterface
+        requireInputValidation: false
+      enum.DialogUiKey.Key:
+        type: DialogBui
         requireInputValidation: false
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui

@@ -118,23 +118,21 @@
         amount: 2
       - id: CMWebbingPouch
         amount: 1
-#      - id: Shoulder Holster
-#        amount: 1
+      - id: CMWebbingHolster
+        amount: 1
     - name: Armor
       entries:
-#      - id: M3 Pattern Carrier Marine Armor
-#        amount: 15
-#      - id: M3 Pattern Padded Marine Armor
-#        amount: 15
-#      - id: M3 Pattern Padless Marine Armor
-#        amount: 15
-#      - id: M3 Pattern Ridged Marine Armor
-#        amount: 15
-#      - id: M3 Pattern Skull Marine Armor
-#        amount: 15
-#      - id: M3 Pattern Smooth Marine Armor
-#        amount: 15
-      - id: CMArmorM3Medium #TODO RMC: remove this when the above is added
+      - id: RMCArmorM3MediumCarrier
+        amount: 15
+      - id: RMCArmorM3MediumPadded
+        amount: 15
+      - id: RMCArmorM3MediumPadless
+        amount: 15
+      - id: RMCArmorM3MediumRidged
+        amount: 15
+      - id: RMCArmorM3MediumSkull
+        amount: 15
+      - id: RMCArmorM3MediumSmooth
         amount: 15
       - id: CMArmorM3Heavy
         amount: 10
@@ -166,8 +164,8 @@
         amount: 1
       - id: RMCSatchelWelder
         amount: 2
-#      - id: Radio Telephone Backpack
-#        amount: 1
+      - id: RMCBackpackRTO
+        amount: 1
     - name: Belts
       entries:
       - id: CMBeltMarine

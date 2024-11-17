@@ -167,7 +167,7 @@
         recommended: true
       - id: CMWebbingPouch
       - id: CMWebbing
-      #- id: CMWebbingHolster # TODO RMC14 Shoulder Holster Webbing
+      - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }
       entries:
@@ -414,7 +414,7 @@
     #- id: CMTacticalWaistcoat # TODO Port Waistcoat
       - id: CMWebbingPouch
       - id: CMWebbing
-    #- id: CMWebbingHolster # TODO RMC14 Shoulder Holster Webbing
+      - id: CMWebbingHolster
     - name: Huds
       choices: { CMHud: 1 }
       entries:
@@ -667,7 +667,7 @@
         recommended: true
       - id: CMWebbingPouch
       - id: CMWebbing
-      #- id: CMWebbingHolster # TODO RMC14 Shoulder Holster Webbing
+      - id: CMWebbingHolster
     - name: Hats
       choices: { CMHat: 1 }
       entries:
