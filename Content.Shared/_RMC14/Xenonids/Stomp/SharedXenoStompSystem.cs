@@ -43,8 +43,6 @@ public sealed class XenoStompSystem : EntitySystem
         if (ev.Cancelled)
             return;
 
-        args.Handled = true;
-
         if (!TryComp(xeno, out TransformComponent? xform) ||
             _mobState.IsDead(xeno))
         {
@@ -53,6 +51,8 @@ public sealed class XenoStompSystem : EntitySystem
 
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
+
+        args.Handled = true;
 
         _receivers.Clear();
         _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.Range, _receivers);
