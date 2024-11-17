@@ -29,3 +29,22 @@
     contents:
     - id: RMCBoxShellsFlechette
       amount: 1
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxShellsShotgunBreaching
+  name: Shell box (120x breaching shells)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxShellsBreaching
+      amount: 1
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxAmmo458
+  name: .458 bullets box (.458 x 300)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxBullets458

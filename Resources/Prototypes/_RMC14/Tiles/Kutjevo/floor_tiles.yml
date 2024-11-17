@@ -70,48 +70,6 @@
   parent: RMCFloorKutjevoMiscBase
   id: RMCFloorKutjevoScorched2
   sprite: /Textures/_RMC14/Tiles/kutjevo/floorscorched2.png
-  
-# Catwalk
-
-- type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoCatwalk0
-  sprite: /Textures/_RMC14/Tiles/kutjevo/catwalk_0.png
-
-- type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoCatwalk1
-  sprite: /Textures/_RMC14/Tiles/kutjevo/catwalk_1.png
-
-- type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoCatwalk2
-  sprite: /Textures/_RMC14/Tiles/kutjevo/catwalk_2.png
-
-- type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoCatwalk3
-  sprite: /Textures/_RMC14/Tiles/kutjevo/catwalk_3.png
-
-- type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoCatwalk4
-  sprite: /Textures/_RMC14/Tiles/kutjevo/catwalk_4.png
-
-- type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoCatwalk5
-  sprite: /Textures/_RMC14/Tiles/kutjevo/catwalk_5.png
-
-- type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoCatwalk6
-  sprite: /Textures/_RMC14/Tiles/kutjevo/catwalk_6.png
-
-- type: tile
-  parent: RMCFloorKutjevoMiscBase
-  id: RMCFloorKutjevoCatwalk7
-  sprite: /Textures/_RMC14/Tiles/kutjevo/catwalk_7.png
 
 # Plating
 - type: tile

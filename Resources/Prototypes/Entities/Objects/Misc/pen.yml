@@ -26,10 +26,6 @@
         maxDistance: 2
   - type: UseDelay
     delay: 1.5
-  - type: Clothing
-    quickEquip: false
-    slots:
-    - Ears
 
 - type: entity
   parent: Pen

@@ -437,6 +437,57 @@
       allowMovement: true
       doAfter: 0
 
+- type: entity
+  parent: RMCAttachmentScopeBase
+  id: RMCAttachmentXS-9
+  name: XS-9 targeting relay
+  description: While still in development, the XS-9 Targeting Relay has many features -- most of them disabled for the field testing -- functions slightly better than a standard scope.
+  components:
+  - type: Sprite
+    state: miniscope
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCAttachmentXS-9
+  - type: AttachableVisuals
+  - type: AttachableToggleable
+    breakOnMove: false
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: boomslang-scope
+    actionName: Look through the XS-9 Scope
+    actionDesc: A mostly disabled XS-9, it still functions as a scope though.
+  - type: AttachableToggleableSimpleActivate
+  - type: Scope
+    zoomLevels:
+    - zoom: 1
+      offset: 14
+      allowMovement: true
+      doAfter: 0
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      walk: -0.31
+      sprint: -0.448
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.4
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      fireDelayFlat: 0.15
+      accuracyAddMult: 0.35
+      damageFalloffAddMult: -0.2
+    - conditions:
+        wieldedOnly: true
+        inactiveOnly: true
+      accuracyAddMult: -0.05
+    - conditions:
+        unwieldedOnly: true
+      accuracyMovementPenaltyAddMult: 2 #TODO: Add flare gun modifiers when it's implemented.
+
 - type: Tag
   id: RMCAttachmentRail
 
@@ -472,3 +523,6 @@
 
 - type: Tag
   id: RMCM96SIntegratedScope
+
+- type: Tag
+  id: RMCAttachmentXS-9

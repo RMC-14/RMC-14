@@ -394,7 +394,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 if (HasComp<StorageComponent>(clothing) &&
                     _storage.CanInsert(clothing, item, out _))
                 {
-                    // TODO: Add storage holster to valid slots list
                     validSlots.Add(new HolsterSlot(priority, true, null, clothing, null));
                 }
             }
@@ -423,11 +422,11 @@ public abstract class SharedCMInventorySystem : EntitySystem
             if (slot.ItemSlot == null &&
                 TryComp(slot.Ent, out StorageComponent? storage) &&
                 TryComp(slot.Ent, out CMHolsterComponent? holster) &&
-                !holster.Contents.Contains(item))
+                !holster.Contents.Contains(item) &&
+                _hands.TryDrop(user, item) &&
+                _storage.Insert(slot.Ent, item, out _, user, storage, playSound: false))
             {
                 holster.Contents.Add(item);
-                _hands.TryDrop(user, item);
-                _storage.Insert(slot.Ent, item, out _, user, storage, playSound: false);
                 _audio.PlayPredicted(holster.InsertSound, item, user);
                 _adminLog.Add(LogType.RMCHolster, $"{ToPrettyString(user)} holstered {ToPrettyString(item)}");
                 return;
@@ -592,7 +591,9 @@ public abstract class SharedCMInventorySystem : EntitySystem
             if (TryComp(item, out StorageComponent? storage) &&
                 TryGetLastInserted((item, holster), out var weapon))
             {
-                _hands.TryPickup(user, weapon);
+                if (!_hands.TryPickup(user, weapon))
+                    return false;
+
                 holster.Contents.Remove(weapon);
                 _audio.PlayPredicted(holster.EjectSound, item, user);
                 stop = true;

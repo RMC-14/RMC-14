@@ -9,4 +9,7 @@ public sealed partial class XenoDevolveComponent : Component
 {
     [DataField, AutoNetworkedField]
     public EntProtoId[] DevolvesTo;
+
+    [DataField, AutoNetworkedField]
+    public bool CanBeDevolvedByOther = true;
 }

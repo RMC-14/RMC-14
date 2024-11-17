@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Chat;
 
@@ -43,5 +44,33 @@ public abstract class SharedCMChatSystem : EntitySystem
         float audioVolume = 0,
         NetUserId? author = null)
     {
+    }
+
+    public virtual void ChatMessageToOne(
+        string message,
+        EntityUid target,
+        ChatChannel channel = ChatChannel.Local,
+        bool hideChat = false,
+        Color? colorOverride = null,
+        bool recordReplay = false,
+        string? audioPath = null,
+        float audioVolume = 0,
+        NetUserId? author = null)
+    {
+        if (!TryComp(target, out ActorComponent? actor))
+            return;
+
+        ChatMessageToOne(channel,
+            message,
+            message,
+            default,
+            hideChat,
+            actor.PlayerSession.Channel,
+            colorOverride,
+            recordReplay,
+            audioPath,
+            audioVolume,
+            author
+        );
     }
 }

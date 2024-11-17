@@ -858,3 +858,36 @@
   - type: Sprite
     sprite: _RMC14/Objects/Flora/flora_plantalien.rsi
     state: alienplant1
+    
+# Stumps
+- type: entity
+  parent: RMCBaseBush
+  id: RMCStump1
+  suffix: RMCStump1
+  name: tree stump
+  description: There used to be a tree here.
+  components:
+  - type: Sprite
+    sprite: Objects/Decoration/Flora/flora_treessnow.rsi
+    state: treestump
+    offset: 0,0.7
+    
+- type: entity
+  parent: RMCStump1
+  id: RMCStump2
+  suffix: RMCStump2
+  components:
+  - type: Sprite
+    sprite: Objects/Decoration/Flora/flora_treesconifer.rsi
+    state: treestumpconifer
+    offset: 0,1.15
+
+- type: entity
+  parent: RMCStump1
+  id: RMCStump3
+  suffix: RMCStump3
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Flora/flora_treealien.rsi
+    state: treestumpalien
+    offset: 0,0.7

@@ -69,16 +69,25 @@ public abstract class SharedRMCMapSystem : EntitySystem
         return new RMCAnchoredEntitiesEnumerator(_transform, anchored, facing);
     }
 
-    public bool HasAnchoredEntityEnumerator<T>(EntityCoordinates coords, Direction? offset = null, DirectionFlag facing = DirectionFlag.None) where T : IComponent
+    public bool HasAnchoredEntityEnumerator<T>(EntityCoordinates coords, out Entity<T> ent, Direction? offset = null, DirectionFlag facing = DirectionFlag.None) where T : IComponent
     {
+        ent = default;
         var anchored = GetAnchoredEntitiesEnumerator(coords, offset, facing);
         while (anchored.MoveNext(out var uid))
         {
-            if (HasComp<T>(uid))
-                return true;
+            if (!TryComp(uid, out T? comp))
+                continue;
+
+            ent = (uid, comp);
+            return true;
         }
 
         return false;
+    }
+
+    public bool HasAnchoredEntityEnumerator<T>(EntityCoordinates coords, Direction? offset = null, DirectionFlag facing = DirectionFlag.None) where T : IComponent
+    {
+        return HasAnchoredEntityEnumerator<T>(coords, out _, offset, facing);
     }
 
     public bool TryGetTileRefForEnt(EntityCoordinates ent, out Entity<MapGridComponent> grid, out TileRef tile)

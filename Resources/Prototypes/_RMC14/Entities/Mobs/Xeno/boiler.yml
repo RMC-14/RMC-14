@@ -63,7 +63,7 @@
   - type: XenoTailStab
     toggle: true
     inject:
-      RMCMolecularAcid: 1 # TODO RMC14 6
+      RMCMolecularAcid: 6
   - type: XenoSprayAcid
     acid: XenoAcidSprayStrong
     barricadeDamage:
@@ -101,6 +101,7 @@
     autoRot: true
   - type: RMCSize
     size: Big
+  - type: XenoDeathcloud
   - type: NeurotoxinInjector
     neuroPerSecond: 16
     injectInContact: false

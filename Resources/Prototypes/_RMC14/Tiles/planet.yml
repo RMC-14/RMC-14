@@ -799,6 +799,16 @@
   - 1.0
   - 1.0
   - 1.0
+  edgeSpritePriority: 0
+  edgeSprites:
+    SouthEast: /Textures/_RMC14/Tiles/varadero/layer1_single_edge.png
+    NorthEast: /Textures/_RMC14/Tiles/varadero/layer1_single_edge.png
+    NorthWest: /Textures/_RMC14/Tiles/varadero/layer1_single_edge.png
+    SouthWest: /Textures/_RMC14/Tiles/varadero/layer1_single_edge.png
+    South: /Textures/_RMC14/Tiles/varadero/layer1_double_edge.png
+    East: /Textures/_RMC14/Tiles/varadero/layer1_double_edge.png
+    North: /Textures/_RMC14/Tiles/varadero/layer1_double_edge.png
+    West: /Textures/_RMC14/Tiles/varadero/layer1_double_edge.png
 
 - type: tile
   parent: CMPlanetBase
