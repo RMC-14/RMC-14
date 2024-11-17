@@ -14,8 +14,8 @@
       - !type:HealthChange
         damage:
           groups:
-            Burn: 0.5 # Toxic 1
-            Toxin: 0.25 # Corrosive 2
+            Burn: 0.5 # Corrosive 2
+            Toxin: 0.25 # Toxic 1
       - !type:PopupMessage
         type: Local
         visualType: SmallCaution
