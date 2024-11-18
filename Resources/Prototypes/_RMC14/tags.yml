@@ -113,7 +113,4 @@
   id: RMCScalpel
 
 - type: Tag
-  id: RMCScrewdriver
-
-- type: Tag
   id: ThrowingKnife

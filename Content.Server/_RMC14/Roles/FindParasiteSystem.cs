@@ -63,8 +63,8 @@ public sealed partial class FindParasiteSystem : EntitySystem
 
         while (parasiteThrowers.MoveNext(out var throwerEnt, out var parasiteThrower))
         {
-            if (parasiteThrower.CurParasites <= parasiteThrower.ReservedParasites &&
-                parasiteThrower.CurParasites > 0)
+            if (parasiteThrower.CurParasites <= parasiteThrower.ReservedParasites ||
+                parasiteThrower.CurParasites == 0)
             {
                 continue;
             }
@@ -94,15 +94,21 @@ public sealed partial class FindParasiteSystem : EntitySystem
         var netEnt = args.Entity;
         var ent = _entities.GetEntity(netEnt);
 
-        if (!TryComp(ent, out GhostComponent? ghostComp) ||
-            !TryComp(ent, out ActorComponent? actComp) ||
-            !_net.IsServer)
-        {
-            return;
-        }
+        var netSpawner = args.Spawner;
+        var spawner = _entities.GetEntity(netSpawner);
 
-        var followCommand = "follow " + args.Spawner.Id;
-        _host.ExecuteCommand(actComp.PlayerSession, followCommand);
+        var ev = new GetVerbsEvent<AlternativeVerb>(ent, spawner, null, null, true, true, true, new());
+        RaiseLocalEvent(ev);
+
+        foreach (var action in ev.Verbs)
+        {
+            if (action.Text != Loc.GetString("verb-follow-text") || action.Act is null)
+            {
+                continue;
+            }
+            action.Act.Invoke();
+            break;
+        }
     }
 
     private void TakeParasiteRole(Entity<FindParasiteComponent> parasiteFinderEnt, ref TakeParasiteRoleMessage args)

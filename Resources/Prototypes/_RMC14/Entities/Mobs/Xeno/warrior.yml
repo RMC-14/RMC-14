@@ -65,6 +65,10 @@
     damage:
       groups:
         Brute: 35
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 48
   - type: Tackle # min: 2, max: 4
     threshold: 4
     stun: 5
