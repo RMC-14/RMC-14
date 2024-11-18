@@ -1,23 +1,43 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/33e0129daa96bc985ef17333dc17e86b1ca318f0/icons/obj/items/clothing/belts.dmi https://github.com/cmss13-devs/cmss13/blob/4047c473d4d2f3e58e68efdec5aa95d0676bf4d1/icons/mob/humans/onmob/items_righthand_1.dmi https://github.com/cmss13-devs/cmss13/blob/4047c473d4d2f3e58e68efdec5aa95d0676bf4d1/icons/mob/humans/onmob/items_lefthand_1.dmi https://github.com/cmss13-devs/cmss13/blob/a1079f4912a96473dae51cceaa1d74eafb3939e2/icons/mob/humans/onmob/belt.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/168c8a79a3d858a8c531ff7ed0bc3033e47d1d16/icons/mob/humans/onmob/suit_slot.dmi, https://github.com/cmss13-devs/cmss13/blob/207f72c0f8ca3762632938b51fd1c41bca2c7747/icons/mob/humans/onmob/belt.dmi, https://github.com/cmss13-devs/cmss13/blob/168c8a79a3d858a8c531ff7ed0bc3033e47d1d16/icons/obj/items/clothing/belts.dmi, https://github.com/cmss13-devs/cmss13/blob/168c8a79a3d858a8c531ff7ed0bc3033e47d1d16/icons/mob/humans/onmob/items_lefthand_1.dmi, https://github.com/cmss13-devs/cmss13/blob/168c8a79a3d858a8c531ff7ed0bc3033e47d1d16/icons/mob/humans/onmob/items_righthand_1.dmi",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "icon"
+      "name": "equipped-SUITSTORAGE",
+      "directions": 4
     },
     {
-      "name": "icon-front"
+      "name": "c-equipped-SUITSTORAGE",
+      "directions": 4
     },
     {
-      "name": "half"
+      "name": "full-equipped-SUITSTORAGE",
+      "directions": 4
     },
     {
-      "name": "full"
+      "name": "c-full-equipped-SUITSTORAGE",
+      "directions": 4
+    },
+    {
+      "name": "s-equipped-SUITSTORAGE",
+      "directions": 4
+    },
+    {
+      "name": "s-full-equipped-SUITSTORAGE",
+      "directions": 4
+    },
+    {
+      "name": "d-equipped-SUITSTORAGE",
+      "directions": 4
+    },
+    {
+      "name": "d-full-equipped-SUITSTORAGE",
+      "directions": 4
     },
     {
       "name": "equipped-BELT",
@@ -28,11 +48,107 @@
       "directions": 4
     },
     {
+      "name": "s-equipped-BELT",
+      "directions": 4
+    },
+    {
+      "name": "s-full-equipped-BELT",
+      "directions": 4
+    },
+    {
+      "name": "d-equipped-BELT",
+      "directions": 4
+    },
+    {
+      "name": "d-full-equipped-BELT",
+      "directions": 4
+    },
+    {
+      "name": "c-equipped-BELT",
+      "directions": 4
+    },
+    {
+      "name": "c-full-equipped-BELT",
+      "directions": 4
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "half"
+    },
+    {
+      "name": "full"
+    },
+    {
+      "name": "icon-front"
+    },
+    {
+      "name": "s-icon"
+    },
+    {
+      "name": "s-half"
+    },
+    {
+      "name": "s-full"
+    },
+    {
+      "name": "s-icon-front"
+    },
+    {
+      "name": "d-icon"
+    },
+    {
+      "name": "d-half"
+    },
+    {
+      "name": "d-full"
+    },
+    {
+      "name": "d-icon-front"
+    },
+    {
+      "name": "c-icon"
+    },
+    {
+      "name": "c-half"
+    },
+    {
+      "name": "c-full"
+    },
+    {
+      "name": "c-icon-front"
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "s-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "d-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "c-inhand-left",
+      "directions": 4
+    },
+    {
       "name": "inhand-right",
       "directions": 4
     },
     {
-      "name": "inhand-left",
+      "name": "s-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "d-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "c-inhand-right",
       "directions": 4
     }
   ]

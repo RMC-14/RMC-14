@@ -108,3 +108,9 @@
 
 - type: Tag
   id: RMCG8Pouch
+
+- type: Tag
+  id: RMCScalpel
+
+- type: Tag
+  id: ThrowingKnife

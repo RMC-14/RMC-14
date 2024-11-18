@@ -180,8 +180,8 @@
       #   points: 5
       - id: RMCAttachmentMagneticHarness
         points: 12
-      #- id: RMCBackpackRadioTelephone # TODO RMC14 Radio Telephone Pack (RTO FTL Pack)
-      #  points: 15
+      - id: RMCBackpackRTO
+        points: 15
       - id: RMCBinoculars
         points: 5
       - id: RMCRangefinder

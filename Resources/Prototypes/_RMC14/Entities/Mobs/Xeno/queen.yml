@@ -87,6 +87,10 @@
     damage:
       groups:
         Brute: 40
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 54
   - type: XenoOvipositorCapable
   - type: Tackle # min: 2, max: 6
     threshold: 4

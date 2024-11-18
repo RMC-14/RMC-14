@@ -1,6 +1,6 @@
 ﻿- type: entity
   abstract: true
-  parent: RMCBaseBullet
+  parent: CMBulletBase
   id: CMPelletShotgunBase
   categories:
   - HideSpawnMenu
@@ -165,8 +165,10 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 85
+        Blunt: 55
   - type: CMArmorPiercing
     amount: 5
-  - type: TimedDespawn
-    lifetime: 0.075
+  - type: ProjectileSpread
+    proto: RMCPelletShotgunBreaching
+    count: 4
+    spread: 16
