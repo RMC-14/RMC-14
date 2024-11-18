@@ -34,7 +34,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     {
         if (!_skills.HasSkill(args.Actor, ent.Comp.OverwatchSkill, ent.Comp.OverwatchSkillLevel))
         {
-            _popup.PopupCursor("You are not trained in overwatch!", args.Actor, PopupType.LargeCaution);
+            _popup.PopupClient("You are not trained in overwatch!", args.Actor, PopupType.LargeCaution);
             return;
         }
 
