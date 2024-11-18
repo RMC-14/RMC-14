@@ -25,6 +25,10 @@
     damage:
       groups:
         Brute: 22.5
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 30
   - type: Xeno
     role: CMXenoDrone
     hudOffset: 0,0.15
