@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added Alex Gregory figurine
-    type: Add
-  id: 489
-  time: '2024-08-01T05:08:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3431
 - author: gorillagaming
   changes:
   - message: Players are now notified of the current planet when they spawn as well!
@@ -4880,5 +4873,47 @@
   id: 988
   time: '2024-11-17T04:48:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4855
+- author: DrSmugleaf
+  changes:
+  - message: Fixed getting pulled stopping your movement until you tap a movement
+      key again.
+    type: Fix
+  - message: Fixed joining as burrowed larva sometimes leaving behind a catatonic
+      larva.
+    type: Fix
+  - message: Fixed non-smart gun operators being able to use a smart gun operator's
+      night vision sight.
+    type: Fix
+  - message: Fixed staff officers not being able to buy a radio telephone pack for
+      15 points in their vendor.
+    type: Fix
+  - message: Fixed the automated munition squad vendor not having 2 boxes of breaching
+      shells.
+    type: Fix
+  - message: Fixed the underbarrel shotgun needing to be pumped and it not starting
+      loaded with 5 buckshot shells.
+    type: Fix
+  - message: Fixed the command tablet's tactical map button not working and it incorrectly
+      having an overwatch button.
+    type: Fix
+  - message: Fixed the nanomed blocking movement.
+    type: Fix
+  - message: Fixed the reagent tank not being able to be anchored.
+    type: Fix
+  - message: Fixed weak resin walls being upgradeable by hivelords.
+    type: Fix
+  - message: Fixed hivelords being able to upgrade resin structures from infinite
+      range.
+    type: Fix
+  - message: Fixed parasites and larva being able to destroy fusion reactors and geothermal
+      generators.
+    type: Fix
+  - message: Fixed the XM51 breaching scattergun getting dual-wield penalties.
+    type: Fix
+  - message: Fixed thick vines in LV not occluding vision.
+    type: Fix
+  id: 989
+  time: '2024-11-18T06:55:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4856
 Name: RMC14
 Order: -1
