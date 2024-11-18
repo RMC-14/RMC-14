@@ -30,7 +30,7 @@
     cycleable: false
     whitelist:
       tags:
-      - CMShellShotgun
+      - RMCShellShotgun
     capacity: 6
   - type: AttachableHolder
     slots:
