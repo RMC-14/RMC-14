@@ -1,21 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed the coif and sterile mask blocking eating pills and food, or being
-      given a pill to eat.
-    type: Fix
-  id: 495
-  time: '2024-08-01T08:05:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3439
-- author: Whisper
-  changes:
-  - message: Added admin fax area. You can now fax High Command, Provost, and WE-YA.
-    type: Add
-  id: 496
-  time: '2024-08-01T09:29:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3203
-- author: DrSmugleaf
-  changes:
   - message: The Queen's Screech description now tells you what blocks the Screech.
       Smokes and boiler gas are intended to block the Screech and are now mentioned
       in its description.
@@ -4915,5 +4900,23 @@
   id: 994
   time: '2024-11-18T06:59:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4836
+- author: Vermidia
+  changes:
+  - message: Fixed stasis bags being able to hold corpses
+    type: Fix
+  - message: Fix stasis bags lasting forever. They now have 15 minutes of stasis per
+      bag that goes down as someone is kept inside. Once they run out they turned
+      into trash.
+    type: Fix
+  id: 995
+  time: '2024-11-18T07:02:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4835
+- author: blueDev2
+  changes:
+  - message: Fixed Find Parasite Action
+    type: Fix
+  id: 996
+  time: '2024-11-18T07:02:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4759
 Name: RMC14
 Order: -1
