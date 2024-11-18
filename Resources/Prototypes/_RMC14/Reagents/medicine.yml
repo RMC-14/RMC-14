@@ -133,7 +133,7 @@
   overdose: 15
   metabolisms:
     Medicine:
-      metabolismRate: 0.025
+      metabolismRate: 0.03
       effects:
       - !type:EqualHealthChange
         damage:
