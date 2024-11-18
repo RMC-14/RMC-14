@@ -343,7 +343,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (!Resolve(watcher, ref watcher.Comp))
             return;
 
-        _eye.SetTarget(watcher, watcher, watcher);
+        _eye.SetTarget(watcher, null);
     }
 
     private OverwatchConsoleBuiState GetOverwatchBuiState()
