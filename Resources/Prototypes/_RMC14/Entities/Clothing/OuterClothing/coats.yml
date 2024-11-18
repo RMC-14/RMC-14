@@ -16,6 +16,7 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
+  - type: PlaytimeMedalHolder
 
 - type: entity
   abstract: true
@@ -248,7 +249,7 @@
 - type: entity
   parent: CMCoatOfficer
   id: RMCCoatService
-  description: A service jacket typically worn by officers of the USCM. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  description: A service jacket typically worn by officers of the UNMC. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/d_coat.rsi

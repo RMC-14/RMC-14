@@ -64,8 +64,8 @@
       groups:
         Brute: 24
   - type: Tackle
-    stunMin: 4
-    stunMax: 5
+    min: 4
+    max: 5
   - type: WhitelistPickup
     whitelist:
       components:
