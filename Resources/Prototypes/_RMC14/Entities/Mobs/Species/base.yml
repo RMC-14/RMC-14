@@ -16,8 +16,18 @@
         restitution: 0.0
         mask:
         - MobMask
+        - BarbedBarricade
         layer:
-        - MobLayer
+        - Opaque
+        - XenoProjectileImpassable
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.25
+        density: 185
+        restitution: 0.0
+        layer:
+        - BulletImpassable
   - type: SolutionContainerManager
   - type: InjectableSolution
     solution: chemicals
@@ -60,8 +70,22 @@
     - FootstepSound
     - DoorBumpOpener
   - type: Marine
+  - type: RMCSuitLight
   - type: HolocardState
   - type: Hunger
+    baseDecayRate: 0.025
+    thresholds:
+      Overfed: 550
+      Okay: 400
+      Peckish: 250
+      Starving: 50
+      Dead: 0
+    hungerThresholdDecayModifiers:
+      Overfed: 1
+      Okay: 1
+      Peckish: 1
+      Starving: 1
+      Dead: 0
   - type: Thirst
     baseDecayRate: 0.01666666666
   - type: Body
@@ -112,6 +136,8 @@
       enum.CMMobStateActionsUI.Key:
         type: CMGhostActionBui
         requireInputValidation: false
+      enum.TacticalMapUserUi.Key:
+        type: TacticalMapUserBui
   - type: Infectable
   - type: Tackleable
   - type: Tackle
@@ -131,6 +157,9 @@
     coldDamageThreshold: 260
     currentTemperature: 310.15
     specificHeat: 42
+  - type: TemperatureSpeed
+    thresholds:
+      273: 1
   - type: ThermalRegulator
     metabolismHeat: 800
     radiatedHeat: 100
@@ -147,17 +176,27 @@
       types:
         Asphyxiation: -0.33
   - type: NoSlip
+  - type: NoClothingSlowdown
+  - type: RMCSize
+    size: Humanoid
   - type: AffectableByWeeds
   - type: UserIFF
   - type: UserLimitHits
   - type: MovementIgnoreGravity
   - type: SlowOnPull
-    multiplier: 0.6
     slowdowns:
-    - multiplier: 0.5
+    - multiplier: 0.7575
       whitelist:
         components:
-        - Xeno
+        - Marine
+    - multiplier: 0.8725
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.59
+      whitelist:
+        components:
+        - XenoHeavy
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -178,6 +217,7 @@
   - type: CrashLandable
   - type: StunShakeable
   - type: StunShakeableUser
+  - type: MindCheck
   - type: GenericVisualizer
     visuals:
       enum.CreamPiedVisuals.Creamed:
@@ -199,3 +239,23 @@
   - type: ActiveInputMover
   - type: DropItemsOnRest
   - type: UserBlockShootingInsideContainers
+  - type: TacticalMapTracked
+    trackDead: true
+  - type: TacticalMapUser
+    actionId: RMCActionOpenTacticalMapMarine
+    marines: true
+  - type: EmoteCooldown
+  - type: FiremanCarriable
+  - type: CanFiremanCarry
+  - type: RMCSuicide
+    damage:
+      types:
+        Piercing: 100
+        Asphyxiation: 200
+  - type: RMCUserPryingRequiresTool
+  - type: BlockEntityStorage
+    whitelist:
+      components:
+      - CanBeSupplyDropped
+  - type: NewPlayerLabel
+  - type: MarineMapTracked

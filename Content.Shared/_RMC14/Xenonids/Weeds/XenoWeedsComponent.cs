@@ -33,4 +33,10 @@ public sealed partial class XenoWeedsComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan MaxRandomDelete = TimeSpan.FromSeconds(10);
+
+    [DataField, AutoNetworkedField]
+    public bool SpreadsOnSemiWeedable = false;
+
+    [DataField, AutoNetworkedField]
+    public float FruitGrowthMultiplier = 1.0f;
 }

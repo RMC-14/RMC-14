@@ -1,0 +1,62 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorKutjevoMultiBase
+  name: tiles-cm-default-multipanel
+  suffix: kutjevo
+
+- type: tile
+  parent: RMCFloorKutjevoMultiBase
+  id: RMCFloorKutjevoTanMulti0
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_multi_0.png
+  
+- type: tile
+  parent: RMCFloorKutjevoMultiBase
+  id: RMCFloorKutjevoTanMulti1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_multi_1.png
+  
+- type: tile
+  parent: RMCFloorKutjevoMultiBase
+  id: RMCFloorKutjevoTanMulti2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_multi_2.png
+  
+- type: tile
+  parent: RMCFloorKutjevoMultiBase
+  id: RMCFloorKutjevoTanMulti3
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_multi_3.png
+  
+- type: tile
+  parent: RMCFloorKutjevoMultiBase
+  id: RMCFloorKutjevoTanMulti4
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_multi_4.png
+  
+- type: tile
+  parent: RMCFloorKutjevoMultiBase
+  id: RMCFloorKutjevoMulti0
+  sprite: /Textures/_RMC14/Tiles/kutjevo/multi_tiles_0.png
+  
+- type: tile
+  parent: RMCFloorKutjevoMultiBase
+  id: RMCFloorKutjevoMulti1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/multi_tiles_1.png
+  
+- type: tile
+  parent: RMCFloorKutjevoMultiBase
+  id: RMCFloorKutjevoMulti2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/multi_tiles_2.png
+  
+- type: tile
+  parent: RMCFloorKutjevoMultiBase
+  id: RMCFloorKutjevoMulti3
+  sprite: /Textures/_RMC14/Tiles/kutjevo/multi_tiles_3.png
+  
+- type: tile
+  parent: RMCFloorKutjevoMultiBase
+  id: RMCFloorKutjevoMulti4
+  sprite: /Textures/_RMC14/Tiles/kutjevo/multi_tiles_4.png
+  
+- type: tile
+  parent: RMCFloorKutjevoMultiBase
+  id: RMCFloorKutjevoMulti5
+  sprite: /Textures/_RMC14/Tiles/kutjevo/multi_tiles_5.png
+  

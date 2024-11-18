@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from CM-SS13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/mask.dmi, equipped-MASK-reptilian modified by DangerRevolution on github. ",
+  "copyright": "Taken from CM-SS13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/mask.dmi, equipped-MASK-reptilian modified by DangerRevolution on github, equipped-MASK-avali modified by DasIrrlicht ",
   "size": {
     "x": 32,
     "y": 32
@@ -24,6 +24,14 @@
     },
     {
       "name": "up-equipped-MASK-reptilian",
+      "directions": 4
+    },
+    {
+      "name": "equipped-MASK-avali",
+      "directions": 4
+    },
+    {
+      "name": "up-equipped-MASK-avali",
       "directions": 4
     }
   ]

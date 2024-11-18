@@ -56,6 +56,9 @@ public sealed class RMCCameraBui : BoundUserInterface
         if (!EntMan.TryGetComponent(Owner, out RMCCameraComputerComponent? computer))
             return;
 
+        if (computer.Title is { } title)
+            _window.Title = Loc.GetString(title);
+
         _window.CamerasContainer.DisposeAllChildren();
         var currentNetCamera = EntMan.GetNetEntity(computer.CurrentCamera);
         var ids = CollectionsMarshal.AsSpan(computer.CameraIds);

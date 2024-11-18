@@ -1,7 +1,5 @@
 ﻿- type: entity
-  parent:
-  - RMCAreaProtectionMetal
-  - RMCAreaBase
+  parent: RMCAreaBase
   id: RMCAreaSupply
 
 - type: entity

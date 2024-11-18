@@ -20,6 +20,8 @@
     Head: MobArachnidHead
     Snout: MobHumanoidAnyMarking
     Chest: MobArachnidTorso
+    Underwear: MobHumanoidAnyMarking
+    Undershirt: MobHumanoidAnyMarking
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking

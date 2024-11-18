@@ -16,6 +16,13 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - MarineMain
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: xo
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -40,6 +47,9 @@
     - type: MarineOrders
     - type: CMVendorUser
       points: 120
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: "XO"
 
 - type: startingGear
   id: CMGearExecutiveOfficer
@@ -67,3 +77,4 @@
 
 - type: playTimeTracker
   id: CMJobExecutiveOfficer
+  isHumanoid: true

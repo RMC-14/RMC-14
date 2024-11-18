@@ -1,6 +1,11 @@
 ﻿using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Body.Organ;
+using Content.Shared.Coordinates;
+using Content.Shared.Examine;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
+using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Medical.Stasis;
@@ -8,6 +13,10 @@ namespace Content.Shared._RMC14.Medical.Stasis;
 public sealed class CMStasisBagSystem : EntitySystem
 {
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly MobStateSystem _mobstate = default!;
+    [Dependency] private readonly SharedEntityStorageSystem _entStorage = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private EntityQuery<OrganComponent> _organQuery;
 
@@ -19,6 +28,7 @@ public sealed class CMStasisBagSystem : EntitySystem
 
         SubscribeLocalEvent<CMStasisBagComponent, ContainerIsInsertingAttemptEvent>(OnStasisInsert);
         SubscribeLocalEvent<CMStasisBagComponent, ContainerIsRemovingAttemptEvent>(OnStasisRemove);
+        SubscribeLocalEvent<CMStasisBagComponent, ExaminedEvent>(OnStasisExamine);
 
         SubscribeLocalEvent<CMInStasisComponent, CMMetabolizeAttemptEvent>(OnBloodstreamMetabolizeAttempt);
         SubscribeLocalEvent<CMInStasisComponent, MapInitEvent>(OnInStasisMapInit);
@@ -35,6 +45,19 @@ public sealed class CMStasisBagSystem : EntitySystem
     private void OnStasisRemove(Entity<CMStasisBagComponent> ent, ref ContainerIsRemovingAttemptEvent args)
     {
         OnRemove(ent, args.EntityUid);
+    }
+
+    private void OnStasisExamine(Entity<CMStasisBagComponent> ent, ref ExaminedEvent args)
+    {
+        string msg = "rmc-stasis-new";
+
+        if (ent.Comp.StasisLeft / ent.Comp.StasisMaxTime < 0.33f)
+            msg = "rmc-stasis-very-used";
+        else if (ent.Comp.StasisLeft / ent.Comp.StasisMaxTime < 0.66f)
+            msg = "rmc-stasis-used";
+
+        args.PushMarkup(Loc.GetString(msg));
+
     }
 
     private void OnBloodstreamMetabolizeAttempt(Entity<CMInStasisComponent> ent, ref CMMetabolizeAttemptEvent args)
@@ -78,6 +101,46 @@ public sealed class CMStasisBagSystem : EntitySystem
     private void OnRemove(Entity<CMStasisBagComponent> bag, EntityUid target)
     {
         RemCompDeferred<CMInStasisComponent>(target);
+    }
+
+    public override void Update(float frameTime)
+    {
+        var stasisQuery = EntityQueryEnumerator<CMStasisBagComponent>();
+
+        while (stasisQuery.MoveNext(out var uid, out var bag))
+        {
+            if (!_container.TryGetContainer(uid, "entity_storage", out var container))
+                return;
+
+            if (container.ContainedEntities.Count <= 0)
+                return;
+
+            bool inStasis = false;
+            foreach (var ent in container.ContainedEntities)
+            {
+                if(_mobstate.IsDead(ent))
+                {
+                    _entStorage.OpenStorage(uid);
+                    _popup.PopupEntity(Loc.GetString("rmc-stasis-reject-dead"), uid, PopupType.SmallCaution);
+                    return;
+                }
+
+                if (HasComp<CMInStasisComponent>(ent))
+                    inStasis = true;
+            }
+
+            if (!inStasis)
+                return;
+
+            bag.StasisLeft -= TimeSpan.FromSeconds(frameTime);
+
+            if(bag.StasisLeft <= TimeSpan.Zero)
+            {
+                _entStorage.EmptyContents(uid);
+                SpawnAtPosition(bag.UsedBag, uid.ToCoordinates());
+                QueueDel(uid);
+            }
+        }
     }
 
     public bool CanBodyMetabolize(EntityUid body)

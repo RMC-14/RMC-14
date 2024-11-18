@@ -1,6 +1,6 @@
-﻿- type: statusIcon
+﻿- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconEmpty
   icon:
-    sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/cm_job_icons.rsi
     state: empty

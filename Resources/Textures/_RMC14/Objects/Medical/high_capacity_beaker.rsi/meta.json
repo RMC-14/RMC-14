@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/4c03b0ed78e7565ec0fb4112f4f2e59421e239cc/icons/obj/items/chemistry.dmi,https://github.com/cmss13-devs/cmss13/blob/4c03b0ed78e7565ec0fb4112f4f2e59421e239cc/icons/obj/items/reagentfillings.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "beakerbluespace"
+    },
+    {
+      "name": "inhand-left"
+    },
+    {
+      "name": "inhand-right"
+    },
+    {
+      "name": "lid_beakerbluespace"
+    },
+    {
+      "name": "beakerbluespace1"
+    },
+    {
+      "name": "beakerbluespace2"
+    },
+    {
+      "name": "beakerbluespace3"
+    },
+    {
+      "name": "beakerbluespace4"
+    },
+    {
+      "name": "beakerbluespace5"
+    }
+  ]
+}

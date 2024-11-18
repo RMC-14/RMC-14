@@ -6,16 +6,23 @@
   desc: reagent-desc-nutriment
   physicalDesc: reagent-physical-desc-opaque
   flavor: nutriment
-  color: "#24591F"
+  color: "#664330"
   metabolisms:
     Food:
+      metabolismRate: 0.1
       effects:
       - !type:SatiateHunger
-  plantMetabolism:
-  - !type:PlantAdjustNutrition
-    amount: 1.5
-  - !type:PlantAdjustHealth
-    amount: 0.75
+        factor: 35
+      - !type:ModifyBloodLevel
+        conditions:
+        - !type:Hunger
+          min: 200
+        amount: 0.5
+      - !type:SatiateHunger
+        conditions:
+        - !type:Hunger
+          min: 200
+        factor: -5
   pricePerUnit: 2
 
 - type: reagent

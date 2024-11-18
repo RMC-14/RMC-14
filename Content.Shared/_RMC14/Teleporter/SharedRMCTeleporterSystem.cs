@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Marines;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
+using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
@@ -32,37 +33,27 @@ public abstract class SharedRMCTeleporterSystem : EntitySystem
 
     private void OnTeleportStartCollide(Entity<RMCTeleporterComponent> ent, ref StartCollideEvent args)
     {
-        if (_almayerQuery.HasComp(args.OtherEntity) ||
-            _dropshipQuery.HasComp(args.OtherEntity) ||
-            _mapGridQuery.HasComp(args.OtherEntity))
+        var other = args.OtherEntity;
+        if (_almayerQuery.HasComp(other) ||
+            _dropshipQuery.HasComp(other) ||
+            _mapGridQuery.HasComp(other))
         {
             return;
         }
 
-        var user = _transform.GetMapCoordinates(args.OtherEntity);
+        var otherCoords = _transform.GetMapCoordinates(other);
         var teleporter = _transform.GetMapCoordinates(ent);
-        if (user.MapId != teleporter.MapId)
+        if (otherCoords.MapId != teleporter.MapId)
             return;
 
-        var diff = user.Position - teleporter.Position;
+        var diff = otherCoords.Position - teleporter.Position;
         if (diff.Length() > 10)
             return;
 
-        if (TryComp(args.OtherEntity, out PullerComponent? puller) &&
-            TryComp(puller.Pulling, out PullableComponent? pullable))
-        {
-            _pulling.TryStopPull(puller.Pulling.Value, pullable, args.OtherEntity);
-        }
-
-        if (TryComp(args.OtherEntity, out PullableComponent? otherPullable) &&
-            otherPullable.Puller != null)
-        {
-            _pulling.TryStopPull(args.OtherEntity, otherPullable, otherPullable.Puller.Value);
-        }
-
         teleporter = teleporter.Offset(diff);
         teleporter = teleporter.Offset(ent.Comp.Adjust);
-        _transform.SetMapCoordinates(args.OtherEntity, teleporter);
+
+        HandlePulling(other, teleporter);
     }
 
     private void OnViewerStartCollide(Entity<RMCTeleporterViewerComponent> ent, ref StartCollideEvent args)
@@ -101,5 +92,38 @@ public abstract class SharedRMCTeleporterSystem : EntitySystem
 
     protected virtual void RemoveViewer(Entity<RMCTeleporterViewerComponent> viewer, ICommonSession player)
     {
+    }
+
+    public IEnumerable<Entity<RMCTeleporterViewerComponent>> GetMatchingTeleporterViewers(Entity<RMCTeleporterViewerComponent> viewer)
+    {
+        var viewers = EntityQueryEnumerator<RMCTeleporterViewerComponent>();
+        while (viewers.MoveNext(out var otherUid, out var otherViewer))
+        {
+            if (viewer.Owner != otherUid && viewer.Comp.Id == otherViewer.Id)
+                yield return (otherUid, otherViewer);
+        }
+    }
+
+    public void HandlePulling(EntityUid user, MapCoordinates teleport)
+    {
+        if (TryComp(user, out PullableComponent? otherPullable) &&
+            otherPullable.Puller != null)
+        {
+            _pulling.TryStopPull(user, otherPullable, otherPullable.Puller.Value);
+        }
+
+        if (TryComp(user, out PullerComponent? puller) &&
+            TryComp(puller.Pulling, out PullableComponent? pullable))
+        {
+            var pulling = puller.Pulling.Value;
+            _pulling.TryStopPull(pulling, pullable, user);
+            _transform.SetMapCoordinates(user, teleport);
+            _transform.SetMapCoordinates(pulling, teleport);
+            _pulling.TryStartPull(user, pulling);
+        }
+        else
+        {
+            _transform.SetMapCoordinates(user, teleport);
+        }
     }
 }

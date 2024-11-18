@@ -35,13 +35,13 @@
     heldPrefix: null
   - type: Storage
     grid:
-    - 0,0,13,1 # 7 slots
+    - 0,0,5,1
     whitelist:
       tags:
       - Matchstick
   - type: StorageFill
     contents:
-    - id: Matchstick
+    - id: RMCMatchstickPaper
       amount: 6
   - type: ItemCounter
     count:
@@ -55,7 +55,6 @@
     - mpacket5
     - mpacket6
   - type: MREItem
-  - type: FixedItemSizeStorage
   - type: InteractedBlacklist
     blacklist:
       components:

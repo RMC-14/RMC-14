@@ -37,6 +37,8 @@ public sealed class RMCPatronTier
 
     public bool ShowOnCredits { get; set; }
 
+    public bool GhostColor { get; set; }
+
     public bool NamedItems { get; set; }
 
     public bool Figurines { get; set; }
@@ -66,6 +68,7 @@ public sealed class RMCPatron
     public int TierId { get; set; }
 
     public RMCPatronTier Tier { get; set; } = default!;
+    public int? GhostColor { get; set; } = default!;
     public RMCPatronLobbyMessage? LobbyMessage { get; set; } = default!;
     public RMCPatronRoundEndMarineShoutout? RoundEndMarineShoutout { get; set; } = default!;
     public RMCPatronRoundEndXenoShoutout? RoundEndXenoShoutout { get; set; } = default!;
@@ -104,6 +107,9 @@ public sealed class RMCNamedItems
 
     [StringLength(20)]
     public string? ArmorName { get; set; } = default!;
+
+    [StringLength(20)]
+    public string? SentryName { get; set; } = default!;
 }
 
 [Table("rmc_linked_accounts_logs")]
@@ -172,4 +178,15 @@ public sealed class RMCRoleTimerExclude
     public Player Player { get; set; } = default!;
 
     public string Tracker { get; set; } = default!;
+}
+
+[Table("rmc_squad_preferences")]
+public sealed class RMCSquadPreference
+{
+    [Key, ForeignKey("Player")]
+    public int ProfileId { get; set; }
+
+    public Profile Profile { get; set; } = default!;
+
+    public string? Squad { get; set; } // EntProtoId<SquadTeamComponent>
 }

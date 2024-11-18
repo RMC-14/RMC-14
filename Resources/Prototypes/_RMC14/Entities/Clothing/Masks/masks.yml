@@ -18,8 +18,17 @@
     sprite: _RMC14/Objects/Clothing/Mask/gas.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/gas.rsi
+    slots:
+    - Mask
+    - Suitstorage
   - type: Item
     size: Small
+  - type: Tag
+    tags:
+    - GasMask
+
+- type: Tag
+  id: GasMask
 
 - type: entity
   parent: CMBaseMask
@@ -59,3 +68,18 @@
     coverage: MOUTH
   - type: Item
     storedRotation: -90
+
+- type: entity
+  parent: CMBaseMask
+  id: RMCMaskRebreather
+  name: rebreather
+  description: A close-fitting device that instantly heats or cools down air when you inhale so it doesn't damage your lungs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/rebreather.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/rebreather.rsi
+    slots:
+    - Mask
+  - type: Item
+    size: Small

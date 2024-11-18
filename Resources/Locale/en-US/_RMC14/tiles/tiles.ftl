@@ -31,6 +31,11 @@ tiles-cm-grass = grass tile
 tiles-cm-dirt-grass = dirt grass tile
 tiles-cm-rock = rock tile
 tiles-rmc-red-desert = red desert tile
+tiles-rmc-desert-water-shore = shore
+tiles-rmc-coagulation = coagulation
+
+tiles-rmc-asphalt = asphalt tile
+tiles-rmc-cement = cement tile
 
 tiles-cm-default-alpha = alpha metal tile
 tiles-cm-default-bravo = bravo metal tile
@@ -43,6 +48,10 @@ tiles-cm-default-green = green metal tile
 tiles-cm-default-purple = purple metal tile
 tiles-cm-default-red = red metal tile
 tiles-cm-default-yellow = yellow metal tile
+tiles-cm-default-orange = orange metal tile
+tiles-cm-default-cyan = cyan metal tile
+tiles-cm-default-tan = tan metal tile
+tiles-cm-default-grey = grey metal tile
 
 tiles-cm-floor = floor
 
@@ -50,3 +59,9 @@ tiles-rmc-striped = striped tile
 tiles-rmc-research = research containment tile
 tiles-rmc-tcomms = tcomms tile
 tiles-rmc-outer-hull = outer hull tile
+
+tiles-rmc-escape-pod = escape pod tile
+
+tiles-rmc-grate = grate tile
+
+tiles-rmc-supply-pad = supply pad tile

@@ -1,7 +1,7 @@
 - type: entity
   id: RMCCrateMedicalSurgery
   parent: CMCrateSecureSurgery
-  name: surgery crate (anesthetics,surgeon gear)
+  name: surgery crate (tray,anesthetics,surgeon gear)
   components:
   - type: StorageFill
     contents:

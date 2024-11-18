@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Body.Components;
 using Content.Shared.Destructible;
 using Content.Shared.Foldable;
@@ -45,6 +46,7 @@ public abstract class SharedEntityStorageSystem : EntitySystem
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
     [Dependency] private   readonly WeldableSystem _weldable = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
 
     public const string ContainerName = "entity_storage";
 
@@ -130,6 +132,9 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         if (!HasComp<HandsComponent>(args.Entity))
             return;
 
+        if (!_actionBlocker.CanMove(args.Entity))
+            return;
+
         if (_timing.CurTime < component.NextInternalOpenAttempt)
             return;
 
@@ -137,9 +142,7 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         Dirty(uid, component);
 
         if (component.OpenOnMove)
-        {
             TryOpenStorage(args.Entity, uid);
-        }
     }
 
     protected void OnFoldAttempt(EntityUid uid, SharedEntityStorageComponent component, ref FoldAttemptEvent args)
@@ -426,7 +429,7 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         // law prevents it
         // 6. if this is an item, then mobs must only be eaten if some other component prevents
         // pick-up interactions while a mob is inside (e.g. foldable)
-        var attemptEvent = new InsertIntoEntityStorageAttemptEvent();
+        var attemptEvent = new InsertIntoEntityStorageAttemptEvent(container);
         RaiseLocalEvent(toInsert, ref attemptEvent);
         if (attemptEvent.Cancelled)
             return false;
@@ -485,9 +488,6 @@ public abstract class SharedEntityStorageSystem : EntitySystem
                 component.RemovedMasks = 0;
             }
         }
-
-        if (TryComp<PlaceableSurfaceComponent>(uid, out var surface))
-            _placeableSurface.SetPlaceable(uid, component.Open, surface);
 
         _appearance.SetData(uid, StorageVisuals.Open, component.Open);
         _appearance.SetData(uid, StorageVisuals.HasContents, component.Contents.ContainedEntities.Count > 0);

@@ -1,4 +1,6 @@
-﻿using Content.Shared.Roles;
+﻿using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Preferences;
+using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
@@ -20,17 +22,7 @@ public sealed partial class TotalJobsTimeRequirement : JobRequirement
     [DataField(required: true)]
     public TimeSpan Time;
 
-    /// <summary>
-    /// If true, requirement will return false if playtime above the specified time.
-    /// </summary>
-    /// <value>
-    /// <c>False</c> by default.<br />
-    /// <c>True</c> for invert general requirement
-    /// </value>
-    [DataField]
-    public bool Inverted;
-
-    public bool TryRequirementsMet(JobRequirement requirement, IReadOnlyDictionary<string, TimeSpan> playTimes, out FormattedMessage? reason, IEntityManager entManager, IPrototypeManager prototypes)
+    public bool TryRequirementsMet(IReadOnlyDictionary<string, TimeSpan> playTimes, out FormattedMessage? reason, IEntityManager entManager, IPrototypeManager prototypes)
     {
         reason = null;
         var playtime = TimeSpan.Zero;
@@ -84,5 +76,14 @@ public sealed partial class TotalJobsTimeRequirement : JobRequirement
 
             return true;
         }
+    }
+
+    public override bool Check(IEntityManager entManager,
+        IPrototypeManager protoManager,
+        HumanoidCharacterProfile? profile,
+        IReadOnlyDictionary<string, TimeSpan> playTimes,
+        [NotNullWhen(false)] out FormattedMessage? reason)
+    {
+        return TryRequirementsMet(playTimes, out reason, entManager, protoManager);
     }
 }

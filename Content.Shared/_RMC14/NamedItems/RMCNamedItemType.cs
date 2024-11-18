@@ -9,4 +9,5 @@ public enum RMCNamedItemType
     Sidearm,
     Helmet,
     Armor,
+    Sentry,
 }

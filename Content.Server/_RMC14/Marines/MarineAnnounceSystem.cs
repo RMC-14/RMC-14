@@ -2,16 +2,18 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.Mind;
-using Content.Server.Popups;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Roles.Jobs;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
+using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Survivor;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
+using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Robust.Server.Audio;
 using Robust.Shared.Audio;
@@ -33,13 +35,15 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly JobSystem _job = default!;
     [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
+    [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private int _characterLimit = 1000;
     public readonly SoundSpecifier DefaultAnnouncementSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/Marine/notice2.ogg");
+    public readonly SoundSpecifier DefaultSquadSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/tech_notification.ogg");
 
     public override void Initialize()
     {
@@ -74,10 +78,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         UpdatePlanetMap(computer);
     }
 
-    private void OnMarineCommunicationsComputerMsg(
-        Entity<MarineCommunicationsComputerComponent> ent,
-        ref MarineCommunicationsComputerMsg args
-        )
+    private void OnMarineCommunicationsComputerMsg(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsComputerMsg args)
     {
         _ui.CloseUi(ent.Owner, MarineCommunicationsComputerUI.Key);
 
@@ -149,6 +150,8 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
                 HasComp<MarineComponent>(e) ||
                 HasComp<GhostComponent>(e)
             );
+
+        filter.RemoveWhereAttachedEntity(HasComp<SurvivorComponent>);
 
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
         _audio.PlayGlobal(sound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));
@@ -235,5 +238,15 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 
         AnnounceToMarines(message, sound);
         _adminLogs.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(source):player} ARES announced message: {message}");
+    }
+
+    public override void AnnounceSquad(string message, EntProtoId<SquadTeamComponent> squad, SoundSpecifier? sound = null)
+    {
+        base.AnnounceSquad(message, squad, sound);
+
+        var filter = Filter.Empty().AddWhereAttachedEntity(e => _squad.IsInSquad(e, squad));
+
+        _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
+        _audio.PlayGlobal(sound ?? DefaultSquadSound, filter, true, AudioParams.Default.WithVolume(-2f));
     }
 }

@@ -1,0 +1,13 @@
+- type: entity
+  parent: BaseItem
+  id: RMCDeskFlag # TODO RMC14
+  name: old USMC desk flag
+  description: A relic of a bygone era, you roughly remember learning about it in history class, the flag of the once great United States Marine Corps. Semper Fi.
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite:  _RMC14/Objects/Misc/desk_flag.rsi
+    state: usmcflag2

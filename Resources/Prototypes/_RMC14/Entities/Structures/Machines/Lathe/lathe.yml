@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: [ BaseMachinePowered, RMCConstructibleMachine ]
   id: CMAutolathe
   name: autolathe
   description: It produces items using metal and glass.
@@ -33,8 +33,10 @@
   - type: Lathe
     idleState: autolathe
     runningState: autolathe_n
+    producingSound: /Audio/_RMC14/Machines/print.ogg
     staticRecipes:
     - RMCBucket
+    - CMBucketMop
 #    - Janitorial bucket (10000 metal)
 #    - Flashlight (62 metal, 25 glass)
     - CMFireExtinguisher
@@ -83,10 +85,13 @@
 #    - Camera assembly (875 metal, 375 glass)
 #    - Matrix assembly (9375 metal)
   - type: MaterialStorage
+    storage:
+      CMSteel: 800
+      CMGlass: 100
     whitelist:
       tags:
       - Metal
-      - Sheet
+      - RMCGlass
   - type: Destructible
     thresholds:
     - trigger:
@@ -116,3 +121,5 @@
     price: 800
   - type: Machine
     board: CMAutolatheMachineCircuitboard
+  - type: Corrodible
+    isCorrodible: false

@@ -16,7 +16,6 @@ namespace Content.Client._RMC14.Xenonids.Pheromones;
 [UsedImplicitly]
 public sealed class XenoPheromonesBui : BoundUserInterface
 {
-    [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly IClyde _displayManager = default!;
     [Dependency] private readonly IInputManager _inputManager = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
@@ -34,8 +33,8 @@ public sealed class XenoPheromonesBui : BoundUserInterface
     {
         IoCManager.InjectDependencies(this);
 
-        _sprite = _entities.System<SpriteSystem>();
-        _transform = _entities.System<TransformSystem>();
+        _sprite = EntMan.System<SpriteSystem>();
+        _transform = EntMan.System<TransformSystem>();
     }
 
     protected override void Open()

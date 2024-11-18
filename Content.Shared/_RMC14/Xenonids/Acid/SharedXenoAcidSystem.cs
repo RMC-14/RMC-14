@@ -24,8 +24,10 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+
     protected int CorrosiveAcidTickDelaySeconds;
-    protected string CorrosiveAcidDamageTypeStr = "Heat";
+    protected ProtoId<DamageTypePrototype> CorrosiveAcidDamageTypeStr = "Heat";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -34,16 +36,22 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         SubscribeLocalEvent<XenoAcidComponent, DoAfterAttemptEvent<XenoCorrosiveAcidDoAfterEvent>>(OnXenoCorrosiveAcidDoAfterAttempt);
         SubscribeLocalEvent<XenoAcidComponent, XenoCorrosiveAcidDoAfterEvent>(OnXenoCorrosiveAcidDoAfter);
 
-        Subs.CVar(_config, RMCCVars.RMCCorrosiveAcidTickDelaySeconds, obj =>
-        {
-            CorrosiveAcidTickDelaySeconds = obj;
-            OnXenoAcidSystemCVarsUpdated();
-        }, true);
-        Subs.CVar(_config, RMCCVars.RMCCorrosiveAcidDamageType, obj =>
-        {
-            CorrosiveAcidDamageTypeStr = obj;
-            OnXenoAcidSystemCVarsUpdated();
-        }, true);
+        Subs.CVar(_config,
+            RMCCVars.RMCCorrosiveAcidTickDelaySeconds,
+            obj =>
+            {
+                CorrosiveAcidTickDelaySeconds = obj;
+                OnXenoAcidSystemCVarsUpdated();
+            },
+            true);
+        Subs.CVar(_config,
+            RMCCVars.RMCCorrosiveAcidDamageType,
+            obj =>
+            {
+                CorrosiveAcidDamageTypeStr = obj;
+                OnXenoAcidSystemCVarsUpdated();
+            },
+            true);
     }
 
     private void OnXenoAcidSystemCVarsUpdated()
@@ -60,17 +68,20 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     private void OnXenoCorrosiveAcid(Entity<XenoAcidComponent> xeno, ref XenoCorrosiveAcidEvent args)
     {
         if (xeno.Owner != args.Performer ||
-            !CheckCorrodiblePopups(xeno, args.Target))
+            !CheckCorrodiblePopups(xeno, args.Target, out var time))
         {
             return;
         }
 
-        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.AcidDelay, new XenoCorrosiveAcidDoAfterEvent(args), xeno, args.Target)
+        args.Handled = true;
+
+        var doAfter = new DoAfterArgs(EntityManager, xeno, time, new XenoCorrosiveAcidDoAfterEvent(args), xeno, args.Target)
         {
             BreakOnMove = true,
             RequireCanInteract = false,
             AttemptFrequency = AttemptFrequency.StartAndEnd
         };
+
         _doAfter.TryStartDoAfter(doAfter);
     }
 
@@ -88,7 +99,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         if (args.Handled || args.Cancelled || args.Target is not { } target)
             return;
 
-        if (!CheckCorrodiblePopups(xeno, target))
+        if (!CheckCorrodiblePopups(xeno, target, out var _))
             return;
 
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
@@ -113,8 +124,9 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         });
     }
 
-    private bool CheckCorrodiblePopups(Entity<XenoAcidComponent> xeno, EntityUid target)
+    private bool CheckCorrodiblePopups(Entity<XenoAcidComponent> xeno, EntityUid target, out TimeSpan time)
     {
+        time = TimeSpan.Zero;
         if (!TryComp(target, out CorrodibleComponent? corrodible) ||
             !corrodible.IsCorrodible)
         {
@@ -122,11 +134,13 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             return false;
         }
 
-        if (HasComp<TimedCorrodingComponent>(target))
+        if (HasComp<TimedCorrodingComponent>(target) || HasComp<DamageableCorrodingComponent>(target))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-acid-already-corroding", ("target", target)), xeno, xeno);
             return false;
         }
+
+        time = corrodible.TimeToApply;
 
         return true;
     }
@@ -145,6 +159,12 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             {
                 _damageable.TryChangeDamage(uid, damageableCorrodingComponent.Damage, true);
                 damageableCorrodingComponent.NextDamageAt = time.Add(TimeSpan.FromSeconds(CorrosiveAcidTickDelaySeconds));
+            }
+
+            if (time > damageableCorrodingComponent.AcidExpiresAt)
+            {
+                QueueDel(damageableCorrodingComponent.Acid);
+                RemCompDeferred<DamageableCorrodingComponent>(uid);
             }
         }
 

@@ -83,10 +83,35 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+  - type: Corrodible
+    timeToApply: 4
   - type: ActivatableUIBlacklist
     blacklist:
       components:
       - Xeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Breakage"]
+      - !type:EjectVendorItems
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
 
 - type: vendingMachineInventory
   id: CMVendomat
@@ -194,9 +219,10 @@
 - type: vendingMachineInventory
   id: CMVendorCigs
   startingInventory:
-    RMCCigarettePackLuckySloths: 50 
-    RMCTarbackCase: 15
-    Lighter: 25
+    RMCCigarettePackLuckySloths: 50
+    RMCTarbackTube: 20
+    RMCMatchboxFull: 15
+    RMCLighter: 25
     RMCZippo: 10
 
 
@@ -220,7 +246,7 @@
 - type: vendingMachineInventory
   id: CMVendorSec
   startingInventory: # TODO RMC14
-    CMHandcuffs: 8
+    RMCHandcuffs: 8
     Zipties: 10
     GrenadeFlashBang: 4
     RMCWeaponTaser: 4
@@ -229,14 +255,14 @@
     RMCFlashlight: 4
     CMBeltSecurityMP: 10
     CMFlash: 5
-    FoodBoxDonut: 12
+    RMCBoxDonut: 12
     # Evidence box 6
     CMArmorHelmetM10MP: 6
     CMHeadCapMP: 6
     CMJumpsuitMP: 2
     CMHeadBeretRed: 6
     CMGlassesSecurity: 3
-    CMHeadsetMPO: 6
+    CMHeadset: 6
 
 
 # Senior Enlisted Advisor
@@ -268,7 +294,6 @@
     CMFirstAidKitFilled: 2
     CMBurnAidKitFilled: 2 #firstaid fire 2
     #MedkitRadiationFilled: 1 #firstaid rad 1
-    CMHeadsetAlpha: 6
     # Crew Monitor
 
 

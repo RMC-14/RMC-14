@@ -6,20 +6,16 @@ public static class RMCDirectionExtensions
     {
         switch (direction)
         {
+            case Direction.North:
             case Direction.South:
                 return (Direction.West, Direction.East);
             case Direction.SouthEast:
-                return (Direction.SouthWest, Direction.NorthEast);
-            case Direction.East:
-                return (Direction.North, Direction.South);
-            case Direction.NorthEast:
-                return (Direction.NorthWest, Direction.SouthEast);
-            case Direction.North:
-                return (Direction.West, Direction.East);
             case Direction.NorthWest:
                 return (Direction.SouthWest, Direction.NorthEast);
+            case Direction.East:
             case Direction.West:
                 return (Direction.North, Direction.South);
+            case Direction.NorthEast:
             case Direction.SouthWest:
                 return (Direction.NorthWest, Direction.SouthEast);
             default:

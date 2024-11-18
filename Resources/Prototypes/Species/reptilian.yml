@@ -18,6 +18,8 @@
     Head: MobReptilianHead
     Snout: MobHumanoidAnyMarking
     Chest: MobReptilianTorso
+    Underwear: MobHumanoidAnyMarking
+    Undershirt: MobHumanoidAnyMarking
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
@@ -64,7 +66,7 @@
       points: 1
       required: false
     Chest:
-      points: 1
+      points: 3
       required: false
     Legs:
       points: 2

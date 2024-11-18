@@ -11,6 +11,7 @@ public sealed class LinkAccountManager : IPostInjectInit
 
     public SharedRMCPatronTier? Tier { get; private set; }
     public bool Linked { get; private set; }
+    public Color? GhostColor { get; private set; }
     public SharedRMCLobbyMessage? LobbyMessage { get; private set; }
     public SharedRMCRoundEndShoutouts? RoundEndShoutout { get; private set; }
 
@@ -26,6 +27,7 @@ public sealed class LinkAccountManager : IPostInjectInit
     {
         Tier = ev.Patron?.Tier;
         Linked = ev.Patron?.Linked ?? false;
+        GhostColor = ev.Patron?.GhostColor;
         LobbyMessage = ev.Patron?.LobbyMessage;
         RoundEndShoutout = ev.Patron?.RoundEndShoutout;
         Updated?.Invoke();
@@ -44,7 +46,7 @@ public sealed class LinkAccountManager : IPostInjectInit
 
     public bool CanViewPatronPerks()
     {
-        return Tier is { } tier && (tier.NamedItems || tier.Figurines || tier.LobbyMessage || tier.RoundEndShoutout);
+        return Tier is { } tier && (tier.GhostColor || tier.NamedItems || tier.Figurines || tier.LobbyMessage || tier.RoundEndShoutout);
     }
 
     void IPostInjectInit.PostInject()
@@ -53,6 +55,8 @@ public sealed class LinkAccountManager : IPostInjectInit
         _net.RegisterNetMessage<LinkAccountRequestMsg>();
         _net.RegisterNetMessage<LinkAccountStatusMsg>(OnStatus);
         _net.RegisterNetMessage<RMCPatronListMsg>(OnPatronList);
+        _net.RegisterNetMessage<RMCClearGhostColorMsg>();
+        _net.RegisterNetMessage<RMCChangeGhostColorMsg>();
         _net.RegisterNetMessage<RMCChangeLobbyMessageMsg>();
         _net.RegisterNetMessage<RMCChangeMarineShoutoutMsg>();
         _net.RegisterNetMessage<RMCChangeXenoShoutoutMsg>();
