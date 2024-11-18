@@ -22,7 +22,7 @@
     recoilUnwielded: 4
     scatterWielded: 10
     scatterUnwielded: 20
-    baseFireRate: 1.2
+    baseFireRate: 0.85
     burstScatterMult: 4
   - type: GunDamageModifier
     multiplier: 1
