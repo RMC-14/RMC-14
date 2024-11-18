@@ -1,44 +1,4 @@
 ﻿Entries:
-- author: gorillagaming
-  changes:
-  - message: Players are now notified of the current planet when they spawn as well!
-    type: Add
-  id: 490
-  time: '2024-08-01T05:13:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3360
-- author: P-MCT
-  changes:
-  - message: Fixed portable fire extinguishers and breaching charges not fitting into
-      the normal toolbelt rig and tools pouch.
-    type: Fix
-  id: 491
-  time: '2024-08-01T05:27:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3423
-- author: Vermidia
-  changes:
-  - message: Crushers can now use their defensive shield ability that lasts 7 seconds,
-      which gives them a 200 hitpoint shield that takes 10 less damage from all sources,
-      and for a short while gives them explosion immunity.
-    type: Add
-  id: 492
-  time: '2024-08-01T05:42:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3365
-- author: Vermidia
-  changes:
-  - message: Parasites now get a different sprite and announcement if they die from
-      infecting a host.
-    type: Tweak
-  id: 493
-  time: '2024-08-01T05:43:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3419
-- author: Whisper
-  changes:
-  - message: Eating and drinking certain items should no longer make the chem mixing
-      sound.
-    type: Fix
-  id: 494
-  time: '2024-08-01T06:08:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3357
 - author: DrSmugleaf
   changes:
   - message: Fixed the coif and sterile mask blocking eating pills and food, or being
@@ -4915,5 +4875,45 @@
   id: 989
   time: '2024-11-18T06:55:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4856
+- author: DrSmugleaf
+  changes:
+  - message: Colorblind friendly mode (in Escape > Options > Accessibility) now changes
+      the color of Almayer radio messages from gray to green.
+    type: Add
+  id: 990
+  time: '2024-11-18T06:59:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4847
+- author: Vermidia
+  changes:
+  - message: Fixed being able to put anything back into MREs
+    type: Fix
+  - message: The ColMarTech food vendor now has MREs available in it
+    type: Add
+  id: 991
+  time: '2024-11-18T07:00:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4848
+- author: Whisper
+  changes:
+  - message: Added Ronan 'Rick' O'Shea, James Rockler figurine.
+    type: Add
+  - message: Updated Nesart Onan figurine.
+    type: Add
+  id: 992
+  time: '2024-11-18T07:01:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4839
+- author: Vermidia
+  changes:
+  - message: Leaving a container stuns you for 4 seconds
+    type: Fix
+  id: 993
+  time: '2024-11-18T07:00:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4841
+- author: Binbagg
+  changes:
+  - message: Adjusted tail stab damage to be parity
+    type: Tweak
+  id: 994
+  time: '2024-11-18T06:59:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4836
 Name: RMC14
 Order: -1
