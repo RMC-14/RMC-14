@@ -54,8 +54,8 @@
           - RMCAttachmentLaserSight
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.825, 0.06 #ADJUST ME
-      rmc-aslot-rail: -0.025, 0.125 #ADJUST ME
-      rmc-aslot-underbarrel: 0.30, -0.31 #ADJUST ME
+      rmc-aslot-barrel: 0.780, 0.06 
+      rmc-aslot-rail: -0.025, 0.125 
+      rmc-aslot-underbarrel: 0.30, -0.31 
 
 # Theres a damaged version of this with worse stats, make sure to use the "busted" state as the base/icon for it
