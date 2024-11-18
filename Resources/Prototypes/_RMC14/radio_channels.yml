@@ -14,6 +14,7 @@
   keycode: "g" #; and g in cm13
   frequency: 1480
   color: "#B4B4B4"
+  colorblindColor: "#6FD08C"
   longRange: true
   tower: true
   planet: false
