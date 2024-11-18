@@ -37,11 +37,14 @@
   - type: DamageOverTime
     affectsDead: false
     affectsInfectedNested: false
-    damage:
+    armorPiercingDamage:
       groups:
         Burn: 20
       types:
         Asphyxiation: 3
+    damage:
+      groups:
+        Burn: 17.5
     barricadeDamage:
       types:
         Heat: 11.5
