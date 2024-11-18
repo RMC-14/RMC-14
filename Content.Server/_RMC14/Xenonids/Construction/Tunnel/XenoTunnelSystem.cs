@@ -299,6 +299,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
                 enterMessageLocID = "rmc-xeno-construction-tunnel-default-xeno-enter";
                 break;
             case RMCSizes.Big:
+            case RMCSizes.Immobile:
                 enterDelay = comp.LargeXenoEnterDelay;
                 enterMessageLocID = "rmc-xeno-construction-tunnel-large-xeno-enter";
                 break;
@@ -357,6 +358,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
                 moveDelay = comp.StandardXenoMoveDelay;
                 break;
             case RMCSizes.Big:
+            case RMCSizes.Immobile:
                 moveDelay = comp.LargeXenoMoveDelay;
                 break;
             default:
