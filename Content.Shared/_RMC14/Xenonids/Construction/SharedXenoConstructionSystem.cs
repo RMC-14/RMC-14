@@ -203,6 +203,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             upgradeable.Comp.To is { } to &&
             _prototype.HasIndex(to))
         {
+            if (!_interaction.InRangeUnobstructed(xeno.Owner, upgradeable.Owner, popup: true))
+                return;
+
             var cost = upgradeable.Comp.Cost;
             if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
                 return;

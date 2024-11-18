@@ -73,6 +73,8 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ml66a_sight.rsi
   - type: NightVisionItem
+    skills:
+      RMCSkillSmartGun: 1
   - type: ClothingRequireEquipped
     whitelist:
       components:
