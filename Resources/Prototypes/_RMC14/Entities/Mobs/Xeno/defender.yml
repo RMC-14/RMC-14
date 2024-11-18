@@ -73,9 +73,8 @@
     tailDamage:
       groups:
         Brute: 36
-  - type: Tackle # min: 2, max: 4
-    threshold: 4
-    stun: 5
+  - type: Tackle
+    max: 4
   - type: Fixtures
     fixtures:
       fix1:

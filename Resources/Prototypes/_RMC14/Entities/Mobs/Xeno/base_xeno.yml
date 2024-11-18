@@ -321,7 +321,6 @@
       groups:
         Brute: 12
   - type: Tackle
-    chance: 0.35
   - type: XenoClaws
 
 - type: entity

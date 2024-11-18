@@ -72,10 +72,12 @@
     damage:
       groups:
         Brute: 25
-  - type: Tackle # min: 2, max: 6
-    threshold: 5
-    stun: 9
+  - type: Tackle
+    min: 2
+    max: 6
     chance: 0.45
+    stunMin: 4
+    stunMax: 5
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5

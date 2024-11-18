@@ -63,9 +63,9 @@
     tailDamage:
       groups:
         Brute: 24
-  - type: Tackle  # min: 4, max: 5
-    threshold: 5
-    stun: 5
+  - type: Tackle
+    stunMin: 4
+    stunMax: 5
   - type: WhitelistPickup
     whitelist:
       components:

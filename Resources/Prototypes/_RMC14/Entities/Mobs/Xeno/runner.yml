@@ -90,10 +90,12 @@
     tailDamage:
       groups:
         Brute: 30
-  - type: Tackle # min: 4, max: 5
-    threshold: 5
-    stun: 8
-    chance: 0.40
+  - type: Tackle
+    min: 4
+    max: 5
+    chance: 0.4
+    stunMin: 4
+    stunMax: 4
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.55
     baseSprintSpeed: 10
