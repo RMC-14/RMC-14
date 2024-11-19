@@ -125,6 +125,7 @@
     flags: Turf
   - type: ReceiverXenoClaws
     hitsToDestroy: 20
+  - type: Appearance
   - type: BulletholeVisuals
 
 - type: entity

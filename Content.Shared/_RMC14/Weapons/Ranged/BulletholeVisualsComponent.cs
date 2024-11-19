@@ -18,5 +18,5 @@ public sealed partial class BulletholeVisualsComponent : Component
 [Serializable, NetSerializable]
 public enum BulletholeVisualLayers
 {
-    Base,
+    State,
 }

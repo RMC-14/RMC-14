@@ -18,7 +18,7 @@ public sealed class BulletholeVisualsSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     // Bullethole overlays
-    private const int BulletholeStates = 10;
+    private const int BulletholeStates = 1;
     private const int MaxBulletholeCount = 8;
     private const string BulletholeRsiPath = "/Textures/_RMC14/Effects/bullethole.rsi";
 
@@ -32,8 +32,12 @@ public sealed class BulletholeVisualsSystem : EntitySystem
         if (!TryComp(args.Tool, out BallisticAmmoComponent? ballisticAmmoComponent))
             return;
 
+        if (!TryComp<AppearanceComponent>(ent, out var app))
+            return;
+
         ent.Comp.BulletholeCount++;
-        Logger.Debug($"BulletholeVisuals at {ToPrettyString(ent)} with {ToPrettyString(args.Tool)}: there are {ent.Comp.BulletholeCount} holes");
-        _appearance.SetData(ent, BulletholeVisualLayers.State, level);
+        var stateString = $"bhole_reference_{(ent.Comp.BulletholeCount >= 8 ? 8 : ent.Comp.BulletholeCount):00}";
+        Logger.Debug($"BulletholeVisuals at {ToPrettyString(ent)} with {ToPrettyString(args.Tool)}: there are {ent.Comp.BulletholeCount} holes -> Sending state {stateString}");
+        _appearance.SetData(ent, BulletholeVisualLayers.State, stateString, app);
     }
 }
