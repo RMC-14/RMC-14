@@ -12,8 +12,6 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 20
-        - ReagentId: Vitamin
-          Quantity: 5
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
@@ -26,6 +24,15 @@
   components:
   - type: Sprite
     state: cornbread
+  - type: Food
+    transferAmount: 3
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 9
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
 
 - type: entity
   parent: CMMarinePreparedMealBase
@@ -35,6 +42,15 @@
   components:
   - type: Sprite
     state: chicken
+  - type: Food
+    transferAmount: 3.33
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
 
 - type: entity
   parent: CMMarinePreparedMealBase
@@ -44,6 +60,15 @@
   components:
   - type: Sprite
     state: pasta
+  - type: Food
+    transferAmount: 3
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 9
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
 
 - type: entity
   parent: CMMarinePreparedMealBase
@@ -53,6 +78,15 @@
   components:
   - type: Sprite
     state: pizza
+  - type: Food
+    transferAmount: 8
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 8
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
 
 - type: entity
   parent: CMMarinePreparedMealBase
@@ -62,6 +96,15 @@
   components:
   - type: Sprite
     state: pork
+  - type: Food
+    transferAmount: 4.5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 9
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
 
 - type: entity
   parent: CMMarinePreparedMealBase
@@ -71,11 +114,20 @@
   components:
   - type: Sprite
     state: tofu
+  - type: Food
+    transferAmount: 2
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 2
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
 
 # Empty Tray
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: BaseItem
   id: RMCTray_empty
   name: empty tray

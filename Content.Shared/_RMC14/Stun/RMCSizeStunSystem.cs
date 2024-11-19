@@ -60,6 +60,16 @@ public sealed class RMCSizeStunSystem : EntitySystem
         return ent.Comp.Size >= RMCSizes.VerySmallXeno;
     }
 
+    public bool TryGetSize(EntityUid ent, out RMCSizes size)
+    {
+        size = default;
+        if (!TryComp(ent, out RMCSizeComponent? sizeComp))
+            return false;
+
+        size = sizeComp.Size;
+        return true;
+    }
+
     private void OnSizeStunMapInit(Entity<RMCStunOnHitComponent> projectile, ref MapInitEvent args)
     {
         projectile.Comp.ShotFrom = _transform.GetMoverCoordinates(projectile.Owner);

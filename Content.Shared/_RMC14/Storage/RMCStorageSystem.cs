@@ -1,16 +1,19 @@
-﻿using Content.Shared._RMC14.Marines.Skills;
+﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
-using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Stunnable;
 using Content.Shared.Whitelist;
 using Robust.Shared.Timing;
+using Robust.Shared.Containers;
 using static Content.Shared.Storage.StorageComponent;
 
 namespace Content.Shared._RMC14.Storage;
@@ -18,6 +21,7 @@ namespace Content.Shared._RMC14.Storage;
 public sealed class RMCStorageSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -28,11 +32,13 @@ public sealed class RMCStorageSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
 
     private readonly List<EntityUid> _toRemove = new();
 
     private EntityQuery<StorageComponent> _storageQuery;
 
+    private readonly TimeSpan STUN_STORAGE = TimeSpan.FromSeconds(4);
     public override void Initialize()
     {
         _storageQuery = GetEntityQuery<StorageComponent>();
@@ -46,14 +52,17 @@ public sealed class RMCStorageSystem : EntitySystem
 
         SubscribeLocalEvent<StorageCloseOnMoveComponent, GotEquippedEvent>(OnStorageEquip);
 
-        Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, sub =>
+        SubscribeLocalEvent<BlockEntityStorageComponent, InsertIntoEntityStorageAttemptEvent>(OnBlockInsertIntoEntityStorageAttempt);
+        SubscribeLocalEvent<MarineComponent, EntGotRemovedFromContainerMessage>(OnRemovedMarineFromContainer);
+
+        Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, subs =>
         {
-            sub.Event<BoundUIOpenedEvent>(OnCloseOnMoveUIOpened);
+            subs.Event<BoundUIOpenedEvent>(OnCloseOnMoveUIOpened);
         });
 
-        Subs.BuiEvents<StorageOpenComponent>(StorageUiKey.Key, sub =>
+        Subs.BuiEvents<StorageOpenComponent>(StorageUiKey.Key, subs =>
         {
-            sub.Event<BoundUIClosedEvent>(OnCloseOnMoveUIClosed);
+            subs.Event<BoundUIClosedEvent>(OnCloseOnMoveUIClosed);
         });
 
         UpdatesAfter.Add(typeof(SharedStorageSystem));
@@ -171,12 +180,26 @@ public sealed class RMCStorageSystem : EntitySystem
         var coordinates = GetNetCoordinates(_transform.GetMoverCoordinates(user));
         EnsureComp<StorageOpenComponent>(ent).OpenedAt[user] = coordinates;
     }
+
     private void OnStorageEquip(Entity<StorageCloseOnMoveComponent> ent, ref GotEquippedEvent args)
     {
         _ui.CloseUi(ent.Owner, StorageUiKey.Key, args.Equipee);
         if (TryComp<StorageOpenComponent>(ent, out var comp))
             comp.OpenedAt.Remove(args.Equipee);
     }
+
+    private void OnBlockInsertIntoEntityStorageAttempt(Entity<BlockEntityStorageComponent> ent, ref InsertIntoEntityStorageAttemptEvent args)
+    {
+        if (_entityWhitelist.IsWhitelistPassOrNull(ent.Comp.Whitelist, args.Container))
+            args.Cancelled = true;
+    }
+
+    private void OnRemovedMarineFromContainer(Entity<MarineComponent> ent, ref EntGotRemovedFromContainerMessage args)
+    {
+        if (_timing.IsFirstTimePredicted)
+            _stun.TryStun(ent, STUN_STORAGE, true);
+    }
+
     private void OnCloseOnMoveUIClosed(Entity<StorageOpenComponent> ent, ref BoundUIClosedEvent args)
     {
         ent.Comp.OpenedAt.Remove(args.Actor);
@@ -210,6 +233,9 @@ public sealed class RMCStorageSystem : EntitySystem
             var storedCount = 0;
             foreach (var stored in limited.Comp2.StoredItems.Keys)
             {
+                if (stored == toInsert)
+                    continue;
+
                 if (!_whitelist.IsWhitelistPass(limit.Whitelist, stored))
                     continue;
 
@@ -226,6 +252,34 @@ public sealed class RMCStorageSystem : EntitySystem
         }
 
         return true;
+    }
+
+    public bool TryGetLastItem(Entity<StorageComponent?> storage, out EntityUid item)
+    {
+        item = default;
+        if (!Resolve(storage, ref storage.Comp, false))
+            return false;
+
+        ItemStorageLocation? lastLocation = null;
+        foreach (var (stored, location) in storage.Comp.StoredItems)
+        {
+            if (lastLocation is not { } last ||
+                last.Position.Y < location.Position.Y)
+            {
+                item = stored;
+                lastLocation = location;
+                continue;
+            }
+
+            if (last.Position.Y == location.Position.Y &&
+                last.Position.X > location.Position.X)
+            {
+                item = stored;
+                lastLocation = location;
+            }
+        }
+
+        return item != default;
     }
 
     public override void Update(float frameTime)

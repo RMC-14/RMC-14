@@ -1,0 +1,13 @@
+- type: emoteSounds
+  id: RMCUnisexAvali
+  sounds:
+    Scream:
+      path: /Audio/_RMC14/Voice/Avali/avali_scream.ogg
+
+- type: emoteSounds
+  parent: [RMCUnisexAvali, RMCMaleHuman]
+  id: RMCMaleAvali
+
+- type: emoteSounds
+  parent: [RMCUnisexAvali, RMCFemaleHuman]
+  id: RMCFemaleAvali

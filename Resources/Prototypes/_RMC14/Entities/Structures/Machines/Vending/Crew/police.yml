@@ -44,8 +44,8 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-#     - id: CMM276GeneralPistolHolsterRig
-#     - id: CMM276M44HolsterRig
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
       - id: RMCBeltUtilityGeneral
     - name: Pouches
       choices: { RMCPouch: 2 }
@@ -64,7 +64,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
-#     - id: Rebreather
+      - id: RMCMaskRebreather
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
@@ -117,9 +117,9 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
       - id: RMCBeltUtilityGeneral
-#     - id: CMM276GeneralPistolHolsterRig
-#     - id: CMM276M44HolsterRig
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -137,7 +137,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
-#     - id: Rebreather
+      - id: RMCMaskRebreather
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:

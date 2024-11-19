@@ -1,11 +1,13 @@
 ﻿using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Systems;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Battery;
 
 public sealed class RMCGunBatterySystem : EntitySystem
 {
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private EntityQuery<GunDrainBatteryOnShootComponent> _gunDrainBatteryQuery;
 
@@ -39,6 +41,9 @@ public sealed class RMCGunBatterySystem : EntitySystem
 
     public void RefreshBatteryDrain(Entity<GunDrainBatteryOnShootComponent?> gun)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (!_gunDrainBatteryQuery.Resolve(gun, ref gun.Comp, false))
             return;
 

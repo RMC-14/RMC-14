@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Marines;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
+using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
@@ -49,29 +50,10 @@ public abstract class SharedRMCTeleporterSystem : EntitySystem
         if (diff.Length() > 10)
             return;
 
-        if (TryComp(other, out PullableComponent? otherPullable) &&
-            otherPullable.Puller != null)
-        {
-            _pulling.TryStopPull(other, otherPullable, otherPullable.Puller.Value);
-        }
-
         teleporter = teleporter.Offset(diff);
         teleporter = teleporter.Offset(ent.Comp.Adjust);
 
-        Log.Info(teleporter.ToString());
-        if (TryComp(other, out PullerComponent? puller) &&
-            TryComp(puller.Pulling, out PullableComponent? pullable))
-        {
-            var pulling = puller.Pulling.Value;
-            _pulling.TryStopPull(pulling, pullable, other);
-            _transform.SetMapCoordinates(other, teleporter);
-            _transform.SetMapCoordinates(pulling, teleporter);
-            _pulling.TryStartPull(other, pulling);
-        }
-        else
-        {
-            _transform.SetMapCoordinates(other, teleporter);
-        }
+        HandlePulling(other, teleporter);
     }
 
     private void OnViewerStartCollide(Entity<RMCTeleporterViewerComponent> ent, ref StartCollideEvent args)
@@ -119,6 +101,29 @@ public abstract class SharedRMCTeleporterSystem : EntitySystem
         {
             if (viewer.Owner != otherUid && viewer.Comp.Id == otherViewer.Id)
                 yield return (otherUid, otherViewer);
+        }
+    }
+
+    public void HandlePulling(EntityUid user, MapCoordinates teleport)
+    {
+        if (TryComp(user, out PullableComponent? otherPullable) &&
+            otherPullable.Puller != null)
+        {
+            _pulling.TryStopPull(user, otherPullable, otherPullable.Puller.Value);
+        }
+
+        if (TryComp(user, out PullerComponent? puller) &&
+            TryComp(puller.Pulling, out PullableComponent? pullable))
+        {
+            var pulling = puller.Pulling.Value;
+            _pulling.TryStopPull(pulling, pullable, user);
+            _transform.SetMapCoordinates(user, teleport);
+            _transform.SetMapCoordinates(pulling, teleport);
+            _pulling.TryStartPull(user, pulling);
+        }
+        else
+        {
+            _transform.SetMapCoordinates(user, teleport);
         }
     }
 }

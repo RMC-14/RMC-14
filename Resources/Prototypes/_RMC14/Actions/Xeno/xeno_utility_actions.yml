@@ -11,3 +11,115 @@
       state: transfer_plasma
     event: !type:XenoTransferPlasmaActionEvent
     range: 2
+
+- type: entity
+  id: ActionXenoResinSurge
+  parent: ActionXenoBase
+  name: Resin Surge (75)
+  description: Speeds up fruit growth by 5 seconds when used on fruit, creates temporary walls when used on weeds or use on existing walls to reinforce them with 6000 hp for 15 seconds. #or create patches of sticky resin. TODO RMC14
+  components:
+  - type: EntityWorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: gardener_resin_surge
+    event: !type:XenoResinSurgeActionEvent
+    range: 7
+    useDelay: 10
+    whitelist:
+      components:
+      - XenoConstruct
+      - XenoFruit
+      - XenoWeeds
+  - type: XenoResinSurgeAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoRetrieve
+  name: Retrieve (180 plasma, 100 energy)
+  description: Pull a xenonid to you if they are still, with a 0.6 second doafter.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: retrieve
+    event: !type:XenoRetrieveActionEvent
+    range: 7
+  - type: XenoActionPlasma
+    cost: 180
+  - type: XenoActionEnergy
+    cost: 100
+  - type: ActionCooldown
+    cooldown: 10
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoAid
+  name: Aid Xenonid (100 plasma, 100 energy)
+  description: Heal a nearby ally Xeno or remove ailments and stuns from a further away ally Xeno. Healing another Xeno will also heal you, and half your remaning points will be consumed for extra healing.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_aid
+    event: !type:XenoAidActionEvent
+    range: 8
+    useDelay: 10
+  - type: XenoActionPlasma
+    cost: 100
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoAidToggle
+  name: Toggle Aid Type
+  description: Toggles between healing or removing ailments with Aid Xenonid.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: warden_heal
+    iconOn:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: warden_rejuvenate
+    event: !type:XenoAidToggleActionEvent
+    useDelay: 0.5
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoLeader
+  name: Choose/Follow Xenonid Leaders
+  description: Promotes and demotes xenonid leaders, or watches them. Promoting a xeno to leader will make them emit your pheromones around themselves.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: xeno_lead
+    event: !type:HiveLeaderActionEvent
+    useDelay: 3
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoHeal
+  name: Heal Xenonid (600) # TODO RMC14 proper plasma costs
+  description: Heals xenonids in a 4 tile range around where you click for 30% of their health over 20 seconds.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: heal_xeno
+    event: !type:XenoHealActionEvent
+    useDelay: 8
+    checkCanAccess: false
+    range: -1
+  - type: XenoActionPlasma
+    cost: 600

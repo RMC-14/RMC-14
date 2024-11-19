@@ -132,6 +132,7 @@
     - id: RMCThermalTarpFolded
 #    - id: RMCPlasticExplosives
 #      amount: 2
+    - id: CMEncryptionKeyJTAC
     - id: RMCLaserDesignatorScout
     - id: RMCScoutShoes
   - type: CMChangeUserOnVend

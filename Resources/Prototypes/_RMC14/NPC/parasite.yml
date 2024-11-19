@@ -1,15 +1,22 @@
 ﻿- type: htnCompound
-  id: RMCParasiteCompound
+  id: RMCParasiteActiveCompound
   branches:
-  - tasks:
-    - !type:HTNCompoundTask
-      task: RMCParasiteLeap
   - tasks:
     - !type:HTNCompoundTask
       task: RMCParasiteInfect
   - tasks:
     - !type:HTNCompoundTask
-      task: RMCParasiteIdle
+      task: RMCParasiteLeap
+
+- type: htnCompound
+  id: RMCParasiteDyingCompound
+  branches:
+  - tasks:
+    - !type:HTNCompoundTask
+      task: RMCParasiteEgg # TODO RMC14 Eggmorpher function
+  - tasks:
+    - !type:HTNCompoundTask
+      task: RMCParasiteResinTrap
 
 - type: htnCompound
   id: RMCParasiteLeap
@@ -26,27 +33,13 @@
       - !type:TargetInRangePrecondition
         targetKey: Target
         rangeKey: VisionRadius
-      - !type:TargetInLOSPrecondition
-        targetKey: Target
-        rangeKey: VisionRadius
       operator: !type:LeapOperator
         targetKey: Target
 
     - !type:HTNPrimitiveTask
       operator: !type:SetFloatOperator
-        targetKey: MinimumIdleTime
-        amount: 5
-
-    - !type:HTNPrimitiveTask
-      operator: !type:SetFloatOperator
-        targetKey: MaximumIdleTime
-        amount: 15
-
-    - !type:HTNPrimitiveTask
-      operator: !type:RandomOperator
         targetKey: IdleTime
-        minKey: MinimumIdleTime
-        maxKey: MaximumIdleTime
+        amount: 5
 
     - !type:HTNPrimitiveTask
       preconditions:
@@ -77,28 +70,14 @@
       - !type:TargetInRangePrecondition
         targetKey: TargetDown
         rangeKey: InteractRange
-      - !type:TargetInLOSPrecondition
-        targetKey: TargetDown
-        rangeKey: InteractRange
       operator: !type:InteractWithOperator
         targetKey: TargetDown
         expectDoAfter: true
 
     - !type:HTNPrimitiveTask
       operator: !type:SetFloatOperator
-        targetKey: MinimumIdleTime
-        amount: 5
-
-    - !type:HTNPrimitiveTask
-      operator: !type:SetFloatOperator
-        targetKey: MaximumIdleTime
-        amount: 15
-
-    - !type:HTNPrimitiveTask
-      operator: !type:RandomOperator
         targetKey: IdleTime
-        minKey: MinimumIdleTime
-        maxKey: MaximumIdleTime
+        amount: 5
 
     - !type:HTNPrimitiveTask
       preconditions:
@@ -113,33 +92,9 @@
         key: TargetDown
 
 - type: htnCompound
-  id: RMCParasiteIdle
+  id: RMCParasiteEgg
   branches:
   - tasks:
-
-     - !type:HTNPrimitiveTask
-       operator: !type:SetFloatOperator
-         targetKey: MinimumIdleTime
-         amount: 15
-
-     - !type:HTNPrimitiveTask
-       operator: !type:SetFloatOperator
-         targetKey: MaximumIdleTime
-         amount: 25
-
-     - !type:HTNPrimitiveTask
-       operator: !type:RandomOperator
-         targetKey: IdleTime
-         minKey: MinimumIdleTime
-         maxKey: MaximumIdleTime
-
-     - !type:HTNPrimitiveTask
-       preconditions:
-       - !type:KeyExistsPrecondition
-         key: IdleTime
-       operator: !type:WaitOperator
-         key: IdleTime
-
      - !type:HTNPrimitiveTask
        operator: !type:UtilityOperator
          proto: RMCNearbyEggs
@@ -164,6 +119,34 @@
          proto: RMCNearbyEggs
          key: Egg
 
+- type: htnCompound
+  id: RMCParasiteResinTrap
+  branches:
+  - tasks:
+     - !type:HTNPrimitiveTask
+       operator: !type:UtilityOperator
+         proto: RMCNearbyResinTraps
+         key: Trap
+
+     - !type:HTNPrimitiveTask
+       preconditions:
+       - !type:KeyExistsPrecondition
+         key: Trap
+       - !type:TargetInRangePrecondition
+         targetKey: Trap
+         rangeKey: InteractRange
+       - !type:TargetInLOSPrecondition
+         targetKey: Trap
+         rangeKey: InteractRange
+       operator: !type:InteractWithOperator
+         targetKey: Trap
+
+       services:
+       - !type:UtilityService
+         id: TrapService
+         proto: RMCNearbyResinTraps
+         key: Trap
+
 - type: utilityQuery
   id: RMCNearbyLeapInfectable
   query:
@@ -179,8 +162,6 @@
     curve: !type:PresetCurve
       preset: TargetDistance
   - !type:TargetAccessibleCon
-    curve: !type:BoolCurve
-  - !type:TargetInLOSOrCurrentCon
     curve: !type:BoolCurve
 
 - type: utilityQuery
@@ -199,8 +180,6 @@
       preset: TargetDistance
   - !type:TargetAccessibleCon
     curve: !type:BoolCurve
-  - !type:TargetInLOSOrCurrentCon
-    curve: !type:BoolCurve
 
 - type: utilityQuery
   id: RMCNearbyEggs
@@ -210,6 +189,24 @@
     - type: XenoEgg
   considerations:
   - !type:TargetOpenEggCon
+    curve: !type:BoolCurve
+  - !type:TargetDistanceCon
+    curve: !type:PresetCurve
+      preset: TargetDistance
+  - !type:TargetAccessibleCon
+    curve: !type:BoolCurve
+  - !type:TargetInLOSOrCurrentCon
+    curve: !type:BoolCurve
+
+
+- type: utilityQuery
+  id: RMCNearbyResinTraps
+  query:
+  - !type:ComponentQuery
+    components:
+    - type: XenoResinHole
+  considerations:
+  - !type:TargetIsEmptyResinTrapCon
     curve: !type:BoolCurve
   - !type:TargetDistanceCon
     curve: !type:PresetCurve

@@ -79,6 +79,10 @@ public sealed class PopupUIController : UIController, IOnStateEntered<GameplaySt
                 font = _largeFont;
                 color = Color.Red;
                 break;
+            case PopupType.MediumXeno:
+                font = _largeFont;
+                color = Color.FromHex("#C400FF");
+                break;
         }
 
         var dimensions = handle.GetDimensions(font, popup.Text, scale);

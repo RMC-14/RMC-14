@@ -14,7 +14,6 @@
     maxFillLevels: 5
     fillBaseName: book
   - type: Damageable
-    damageModifierSet: Metallic
     damageContainer: Inorganic
   - type: Destructible
     thresholds:

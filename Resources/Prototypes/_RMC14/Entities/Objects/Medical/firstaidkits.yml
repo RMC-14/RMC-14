@@ -30,7 +30,7 @@
       - Brutepack
       - Bloodpack
       #      - TODO RMC14 splint
-      #      - TODO RMC14 penlight
+      - RMCPenlight
       - CMAutoInjector
       #      - TODO RMC14 syringe cases
       #      - TODO RMC14 surgical cases

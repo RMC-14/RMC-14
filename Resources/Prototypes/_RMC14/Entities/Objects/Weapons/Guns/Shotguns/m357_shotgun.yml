@@ -1,0 +1,59 @@
+﻿- type: entity
+  parent: [ RMCBaseBreechloader, RMCBaseAttachableHolder ]
+  name: M357 Rival
+  id: WeaponShotgunM357
+  description: A double barrel shotgun produced by Aegis. Archaic, sturdy, affordable. Only holds two 12g shells at a time.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/doublebarrel.rsi
+  - type: Gun
+    shotsPerBurst: 2
+  - type: ShootUseDelay
+  - type: BallisticAmmoProvider
+    cycleable: true
+    whitelist:
+      tags:
+      - RMCShellShotgun
+    capacity: 2
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 10
+    scatterUnwielded: 20
+    baseFireRate: 2
+    burstScatterMult: 1
+  - type: Construction
+    graph: M357Sawn
+    node: start
+    deconstructionTarget: null
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentDoubleBarrelShotgunStock
+        whitelist:
+          tags:
+          - RMCAttachmentDoubleBarrelShotgunStock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentGyroscopicStabilizer
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.81, 0.06
+      rmc-aslot-rail: -0.025, 0.09
+      rmc-aslot-stock: -0.55, -0.05
+      rmc-aslot-underbarrel: 0.25, -0.31

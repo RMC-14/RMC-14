@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Map;
@@ -89,6 +89,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 subs.Event<DropshipTerminalWeaponsChangeScreenMsg>(OnWeaponsChangeScreenMsg);
                 subs.Event<DropshipTerminalWeaponsChooseWeaponMsg>(OnWeaponsChooseWeaponMsg);
                 subs.Event<DropshipTerminalWeaponsFireMsg>(OnWeaponsFireMsg);
+                subs.Event<DropshipTerminalWeaponsNightVisionMsg>(OnWeaponsNightVisionMsg);
                 subs.Event<DropshipTerminalWeaponsExitMsg>(OnWeaponsExitMsg);
                 subs.Event<DropshipTerminalWeaponsCancelMsg>(OnWeaponsCancelMsg);
                 subs.Event<DropshipTerminalWeaponsAdjustOffsetMsg>(OnWeaponsAdjustOffset);
@@ -111,6 +112,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (args.Ignite)
             return;
 
+        _physics.SetBodyType(ent, BodyType.Dynamic);
         RemCompDeferred<DropshipTargetComponent>(ent);
     }
 
@@ -127,7 +129,10 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     {
         using (args.PushGroup(nameof(FlareSignalComponent)))
         {
-            args.PushMarkup(Loc.GetString("rmc-laser-designator-signal-flare-examine"));
+            if (TryComp(ent, out ExpendableLightComponent? expendable) && expendable.CurrentState != ExpendableLightState.Dead)
+            {
+                args.PushMarkup(Loc.GetString("rmc-laser-designator-signal-flare-examine"));
+            }
         }
     }
 
@@ -374,6 +379,16 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         AddComp(inFlight, inFlightComp, true);
     }
 
+    private void OnWeaponsNightVisionMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsNightVisionMsg args)
+    {
+        if (_net.IsClient)
+            return;
+
+        ent.Comp.NightVision = args.On;
+        if (ent.Comp.Target is { } target)
+            _eye.SetDrawLight(target, !ent.Comp.NightVision);
+    }
+
     private void OnWeaponsExitMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsExitMsg args)
     {
         ref var screen = ref args.First ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
@@ -455,6 +470,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         RemovePvsActors(ent);
         ent.Comp.Target = target;
         _eye.SetOffset(target.Value, ent.Comp.Offset);
+        _eye.SetDrawLight(target.Value, !ent.Comp.NightVision);
         AddPvsActors(ent);
 
         RefreshWeaponsUI(ent);

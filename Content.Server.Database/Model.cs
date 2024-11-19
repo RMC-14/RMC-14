@@ -28,6 +28,7 @@ namespace Content.Server.Database
         public DbSet<AdminLog> AdminLog { get; set; } = null!;
         public DbSet<AdminLogPlayer> AdminLogPlayer { get; set; } = null!;
         public DbSet<Whitelist> Whitelist { get; set; } = null!;
+        public DbSet<Blacklist> Blacklist { get; set; } = null!;
         public DbSet<ServerBan> Ban { get; set; } = default!;
         public DbSet<ServerUnban> Unban { get; set; } = default!;
         public DbSet<ServerBanExemption> BanExemption { get; set; } = default!;
@@ -454,6 +455,7 @@ namespace Content.Server.Database
         public Preference Preference { get; set; } = null!;
         public RMCNamedItems? NamedItems { get; set; }
         public RMCSquadPreference? SquadPreference { get; set; }
+        public string ArmorPreference { get; set; } = null!;
     }
 
     public class Job
@@ -630,6 +632,15 @@ namespace Content.Server.Database
 
     [Table("whitelist")]
     public class Whitelist
+    {
+        [Required, Key] public Guid UserId { get; set; }
+    }
+
+    /// <summary>
+    /// List of users who are on the "blacklist". This is a list that may be used by Whitelist implementations to deny access to certain users.
+    /// </summary>
+    [Table("blacklist")]
+    public class Blacklist
     {
         [Required, Key] public Guid UserId { get; set; }
     }

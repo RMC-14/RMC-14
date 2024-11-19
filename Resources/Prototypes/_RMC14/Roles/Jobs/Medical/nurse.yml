@@ -16,7 +16,11 @@
   - CMMedbay
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: medic
+    state: nurse
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_shipside
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -26,6 +30,8 @@
         RMCSkillMedical: 3
         RMCSkillSurgery: 1
     - type: RMCUserBulkyArmorIncapable
+    - type: JobPrefix
+      prefix: "Nurse"
 
 - type: startingGear
   id: CMGearNurse
@@ -65,3 +71,4 @@
 
 - type: playTimeTracker
   id: CMJobNurse
+  isHumanoid: true
