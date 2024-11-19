@@ -17,6 +17,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Borgs;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
@@ -82,6 +83,15 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
             [
                 typeof(SharedArmorSystem), typeof(BlockingSystem), typeof(InventorySystem), typeof(SharedBorgSystem),
                 typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem),
+            ]);
+
+        SubscribeLocalEvent<DamageModifierComponent, GetMeleeDamageEvent>(OnDamageModifierGetMeleeDamage);
+
+        SubscribeLocalEvent<DamageReceivedComponent, DamageModifyEvent>(OnDamageReceivedDamageModify,
+            after:
+            [
+                typeof(SharedArmorSystem), typeof(BlockingSystem), typeof(InventorySystem), typeof(SharedBorgSystem),
+                typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem)
             ]);
     }
 
@@ -173,6 +183,22 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
             return;
 
         args.Damage *= remaining.Float() / modifyTotal.Float();
+    }
+
+    private void OnDamageModifierGetMeleeDamage(Entity<DamageModifierComponent> ent, ref GetMeleeDamageEvent args)
+    {
+        args.Damage *= ent.Comp.Multiplier;
+    }
+
+    private void OnDamageReceivedDamageModify(Entity<DamageReceivedComponent> ent, ref DamageModifyEvent args)
+    {
+        foreach (var (type, amount) in args.Damage.DamageDict)
+        {
+            if (amount <= FixedPoint2.Zero)
+                continue;
+
+            args.Damage.DamageDict[type] *= ent.Comp.Multiplier;
+        }
     }
 
     public DamageSpecifier DistributeHealing(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)
