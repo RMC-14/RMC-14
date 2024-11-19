@@ -320,7 +320,7 @@
           min: 25
         damage:
           groups:
-            Brute: 2
+            Brute: 3
             Toxin: 6
 
 # TODO RMC14 other effects (pain)
