@@ -208,7 +208,7 @@ public sealed class ThermalCloakSystem : EntitySystem
     {
         var cloak = FindWornCloak(uid);
         if (cloak.HasValue)
-            SetInvisibility(cloak.Value, uid, false, true);
+            SetInvisibility(cloak.Value, uid, enabling, forced);
     }
 
     private void OnAttemptShoot(Entity<GunComponent> ent, ref AttemptShootEvent args)
