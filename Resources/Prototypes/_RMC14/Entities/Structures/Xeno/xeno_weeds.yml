@@ -91,6 +91,7 @@
     soundGroups:
       Brute:
         collection: XenoResinBreak
+  - type: ExplosionRandomResistance
 #  - type: Physics
 #    bodyType: Static
 #  - type: FootstepModifier

@@ -1,4 +1,5 @@
 using Content.Shared.Coordinates;
+using Content.Shared.Explosion;
 using Content.Shared.Throwing;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
@@ -18,6 +19,8 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         SubscribeLocalEvent<CMExplosionEffectComponent, CMExplosiveTriggeredEvent>(OnExplosionEffectTriggered);
 
         SubscribeLocalEvent<RMCExplosiveDeleteWallsComponent, CMExplosiveTriggeredEvent>(OnDeleteWallsTriggered);
+
+        SubscribeLocalEvent<ExplosionRandomResistanceComponent, GetExplosionResistanceEvent>(OnExplosionRandomResistanceGet);
     }
 
     private void OnExplosionEffectTriggered(Entity<CMExplosionEffectComponent> ent, ref CMExplosiveTriggeredEvent args)
@@ -34,6 +37,13 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         {
             QueueDel(wall);
         }
+    }
+
+    private void OnExplosionRandomResistanceGet(Entity<ExplosionRandomResistanceComponent> ent, ref GetExplosionResistanceEvent args)
+    {
+        // this only gets used on the server so randomness isn't an issue for prediction
+        var resistance = _random.NextFloat(ent.Comp.Min.Float(), ent.Comp.Max.Float());
+        args.DamageCoefficient *= resistance;
     }
 
     public void DoEffect(Entity<CMExplosionEffectComponent> ent)
