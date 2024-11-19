@@ -2,6 +2,17 @@
   parent: CMSurvivor
   id: CMSurvivorHostile
   name: cm-job-name-survivor-hostile
-  description: cm-job-description-survivor-hostile
+  description: cm-job-description-survivor-hostile 
+  playTimeTracker: RMCJobSurvivorHostile
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 18000 # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsEngineering
+    time: 18000 # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 18000 # 5 hours
 
 # TOFO: RMC, Hostile Faction Tags
