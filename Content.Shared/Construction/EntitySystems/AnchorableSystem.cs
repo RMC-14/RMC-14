@@ -89,7 +89,7 @@ public sealed partial class AnchorableSystem : EntitySystem
     {
         if (component.Flags == AnchorableFlags.None)
         {
-            args.PushText("It cannot be anchored or unanchored.");
+            args.PushText("It cannot be anchored nor unanchored.");
             return;
         }
 
