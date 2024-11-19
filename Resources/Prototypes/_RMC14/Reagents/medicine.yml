@@ -249,7 +249,7 @@
           min: 15
         damage:
           groups:
-            Burn: 0.75
+            Brute: 0.75
             Toxin: 0.75
       - !type:HealthChange
         conditions:
@@ -257,7 +257,7 @@
           min: 25
         damage:
           groups:
-            Burn: 7.5
+            Brute: 7.5
             Toxin: 7.5
 
 # TODO implement CMLexorin
