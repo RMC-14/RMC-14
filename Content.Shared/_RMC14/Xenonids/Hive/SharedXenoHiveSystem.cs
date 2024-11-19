@@ -317,7 +317,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             if (!_mind.TryGetMind(actor.PlayerSession.UserId, out var mind))
                 mind = _mind.CreateMind(actor.PlayerSession.UserId);
 
-            _mind.TransferTo(mind.Value, spawned);
+            _mind.TransferTo(mind.Value, spawned, ghostCheckOverride: true);
         }
 
         _adminLog.Add(LogType.RMCBurrowedLarva, $"{ToPrettyString(user):player} took a burrowed larva from hive {ToPrettyString(hive):hive}.");

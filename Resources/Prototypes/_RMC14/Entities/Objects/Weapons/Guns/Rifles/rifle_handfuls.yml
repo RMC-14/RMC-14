@@ -9,7 +9,7 @@
     - state: SOCOM1
       map: [ "base" ]
   - type: CartridgeAmmo
-    proto: RMCCartridge458SOCOM-p
+    proto: RMCBullet458SOCOM
   - type: Stack
     count: 9
     stackType: RMCCartridge458SOCOM
