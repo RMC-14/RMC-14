@@ -1,14 +1,10 @@
-﻿using System.Linq;
-using Content.Shared._RMC14.Xenonids;
-using Content.Shared.Clothing;
-using Content.Shared.Clothing.EntitySystems;
+﻿using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
-using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Medal;
@@ -18,7 +14,6 @@ public abstract class SharedPlaytimeMedalSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -33,7 +28,6 @@ public abstract class SharedPlaytimeMedalSystem : EntitySystem
         SubscribeLocalEvent<PlaytimeMedalHolderComponent, EntRemovedFromContainerMessage>(OnPlaytimeMedalHolderRemovedContainer);
         SubscribeLocalEvent<PlaytimeMedalHolderComponent, InteractUsingEvent>(OnPlaytimeMedalHolderInteractUsing);
         SubscribeLocalEvent<PlaytimeMedalHolderComponent, GotEquippedEvent>(OnPlaytimeMedalHolderGotEquipped);
-        SubscribeLocalEvent<PlaytimeMedalHolderComponent, GetEquipmentVisualsEvent>(OnPlaytimeMedalHolderGetEquipmentVisuals, after: [typeof(ClothingSystem)]);
         SubscribeLocalEvent<PlaytimeMedalHolderComponent, GetVerbsEvent<EquipmentVerb>>(OnPlaytimeMedalHolderGetEquipmentVerbs);
     }
 
@@ -118,25 +112,6 @@ public abstract class SharedPlaytimeMedalSystem : EntitySystem
 
         _container.EmptyContainer(container);
         _item.VisualsChanged(ent);
-    }
-
-    private void OnPlaytimeMedalHolderGetEquipmentVisuals(Entity<PlaytimeMedalHolderComponent> ent, ref GetEquipmentVisualsEvent args)
-    {
-        if (!TryComp(ent.Comp.Medal, out PlaytimeMedalComponent? medal) ||
-            medal.PlayerSprite is not { } sprite)
-        {
-            return;
-        }
-
-        var key = $"enum.{nameof(MedalVisualLayers)}.{nameof(MedalVisualLayers.Base)}";
-        if (args.Layers.Any(t => t.Item1 == key))
-            return;
-
-        args.Layers.Add((key, new PrototypeLayerData
-        {
-            RsiPath = sprite.RsiPath.CanonPath,
-            State = sprite.RsiState,
-        }));
     }
 
     private void OnPlaytimeMedalHolderGetEquipmentVerbs(Entity<PlaytimeMedalHolderComponent> ent, ref GetVerbsEvent<EquipmentVerb> args)

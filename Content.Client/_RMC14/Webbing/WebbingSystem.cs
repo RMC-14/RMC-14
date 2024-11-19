@@ -47,7 +47,7 @@ public sealed class WebbingSystem : SharedWebbingSystem
         args.Layers.Add(($"enum.{nameof(WebbingVisualLayers)}.{nameof(WebbingVisualLayers.Base)}", new PrototypeLayerData
         {
             RsiPath = sprite.RsiPath.CanonPath,
-            State = sprite.RsiState
+            State = sprite.RsiState,
         }));
     }
 
