@@ -52,3 +52,7 @@
     - sprite: Markers/jobs.rsi
       state: green
     - state: survivor
+
+- type: playTimeTracker
+  id: RMCJobSurvivorSecurity
+  isHumanoid: true
