@@ -51,8 +51,7 @@ public sealed class ThermalCloakSystem : EntitySystem
         SubscribeLocalEvent<EntityActiveInvisibleComponent, VaporHitEvent>(OnVaporHit);
         SubscribeLocalEvent<EntityActiveInvisibleComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<EntityActiveInvisibleComponent, XenoDevouredEvent>(OnDevour);
-
-        SubscribeLocalEvent<VictimInfectedComponent, ComponentStartup>(OnInfectedComponentStartup);
+        SubscribeLocalEvent<EntityActiveInvisibleComponent, XenoParasiteInfectEvent>(OnParasiteInfect);
 
         SubscribeLocalEvent<GunComponent, AttemptShootEvent>(OnAttemptShoot);
         SubscribeLocalEvent<ExplodeOnTriggerComponent, UseInHandEvent>(OnTimerUse);
@@ -262,7 +261,7 @@ public sealed class ThermalCloakSystem : EntitySystem
         TrySetInvisibility(ent.Owner, false, true);
     }
 
-    private void OnInfectedComponentStartup(Entity<VictimInfectedComponent> ent, ref ComponentStartup args)
+    private void OnParasiteInfect(Entity<EntityActiveInvisibleComponent> ent, ref XenoParasiteInfectEvent args)
     {
         TrySetInvisibility(ent.Owner, false, true);
     }
