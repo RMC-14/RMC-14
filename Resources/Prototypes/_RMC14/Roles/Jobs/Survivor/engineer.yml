@@ -3,6 +3,17 @@
   id: RMCEngineerSurvivor
   name: cm-job-name-survivor #make new name
   description: cm-job-description-survivor # Make new description
+  playTimeTracker: RMCJobSurvivorEngineer
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 18000 # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsEngineering
+    time: 18000 # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 18000 # 5 hours
   startingGear: RMCGearSurvivorEngineer
   accessGroups:
   - ColonistEngi
