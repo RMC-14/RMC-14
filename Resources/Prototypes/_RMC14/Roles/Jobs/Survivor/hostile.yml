@@ -1,0 +1,5 @@
+﻿- type: job
+  parent: CMSurvivor
+  id: CMSurvivorHostile
+  name: cm-job-name-survivor-hostile
+  description: cm-job-description-survivor-hostile
