@@ -145,7 +145,7 @@
   - type: PlacementReplacement
     key: walls
   - type: ExplosionResistance
-    damageCoefficient: 12.5 # Walls take 15x explosive damage, resin walls reduce that by 15%
+    damageCoefficient: 3.64
   - type: DamageMultiplierFlags
     flags:
     - Turf
