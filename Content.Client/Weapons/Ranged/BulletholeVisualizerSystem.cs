@@ -22,8 +22,6 @@ public sealed class BulletholeVisualizerSystem : VisualizerSystem<BulletholeVisu
 
     protected override void OnAppearanceChange(EntityUid uid, BulletholeVisualsComponent component, ref AppearanceChangeEvent args)
     {
-        Logger.Debug($"Picked up appearance change on BholeVisuals: {BulletholeRsiPath}");
-
         if (args.Sprite is not { } sprite)
             return;
 
@@ -32,7 +30,6 @@ public sealed class BulletholeVisualizerSystem : VisualizerSystem<BulletholeVisu
 
         if (!sprite.LayerMapTryGet(BulletholeVisualsLayers.Bullethole, out var layer))
             layer = sprite.LayerMapReserveBlank(BulletholeVisualsLayers.Bullethole);
-
 
         Logger.Debug($"Setting sprite to state {state}");
         var valid = !string.IsNullOrWhiteSpace(state);
