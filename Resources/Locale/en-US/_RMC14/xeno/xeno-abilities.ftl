@@ -184,3 +184,21 @@ rmc-xeno-resin-surge-wall-self = We surge the resin, creating an unstable wall!
 rmc-xeno-resin-surge-wall-others = {CAPITALIZE(THE($xeno))} surges the resin, creating an unstable wall!
 rmc-xeno-resin-surge-sticky-self = We surge the deep resin, creating an unstable sticky resin patch!
 rmc-xeno-resin-surge-sticky-others = {CAPITALIZE(THE($xeno))} surges deep resin, creating an unstable sticky resin patch!
+
+# Burrow
+rmc-xeno-burrow-down-start = We begin burrowing ourselves into the ground.
+rmc-xeno-burrow-down-failure-break = We stop burrowing.
+rmc-xeno-burrow-down-failure-bad-area = There's no way to burrow here.
+rmc-xeno-burrow-down-finish = We burrow ourselves into the ground.
+
+rmc-xeno-burrow-resurface-cooldown-finish = We can now surface.
+rmc-xeno-burrow-move-cooldown-finish = We can now tunnel while burrowed.
+
+rmc-xeno-burrow-move-start = We start tunneling!
+rmc-xeno-burrow-move-failure = There's no way to tunnel over there.
+rmc-xeno-burrow-move-failure-solid = We can't tunnel into a solid wall!
+rmc-xeno-burrow-move-failure-bad-area = There's no way to tunnel over there.
+rmc-xeno-burrow-move-failure-coolown = We must wait some time to do this.
+rmc-xeno-burrow-move-finish = We tunnel to the target.
+
+rmc-xeno-burrow-failure-space = We make tunnels, not wormholes

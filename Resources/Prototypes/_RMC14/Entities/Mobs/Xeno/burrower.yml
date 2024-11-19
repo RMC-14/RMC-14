@@ -34,7 +34,7 @@
     - ActionXenoDigTunnel
     - ActionXenoPlantWeeds
     - ActionXenoResinHole
-    #    - ActionXenoBurrow
+    - ActionXenoBurrow
     - ActionXenoTremor
     - ActionXenoDevolve
     tier: 2
@@ -60,6 +60,8 @@
     range: 6
     plasmaCost: 100
     paralyzeTime: 2
+    sound: /Audio/_RMC14/Xeno/alien_footstep_charge1.ogg
+  - type: XenoBurrow
   - type: MeleeWeapon
     damage:
       groups:
