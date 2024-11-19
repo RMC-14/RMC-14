@@ -3,6 +3,17 @@
   id: RMCSecuritySurvivor
   name: cm-job-name-security-survivor 
   description: cm-job-description-survivor
+  playTimeTracker: RMCJobSurvivorSecurity
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 18000 # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsEngineering
+    time: 18000 # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 18000 # 5 hours
   startingGear: RMCGearSurvivorSecurity
   accessGroups:
   - ColonistSec
