@@ -49,7 +49,7 @@ public sealed class MutinySystem : EntitySystem
 
                 Verb mutineer = new()
                 {
-                    Text = Loc.GetString("admin-verb-text-make-mutineer"),
+                    Text = "Make mutineer",
                     Category = VerbCategory.Antag,
                     Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/cm_job_icons.rsi"),
                         "hudmutineer"),
@@ -58,7 +58,7 @@ public sealed class MutinySystem : EntitySystem
                         MakeMutineer(args.Target);
                     },
                     Impact = LogImpact.High,
-                    Message = Loc.GetString("admin-verb-make-traitor"),
+                    Message = "Make mutineer",
                 };
                 args.Verbs.Add(mutineer);
             }
