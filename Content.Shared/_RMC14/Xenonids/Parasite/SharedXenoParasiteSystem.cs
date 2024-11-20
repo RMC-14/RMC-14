@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Pheromones;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Chat.Prototypes;
@@ -79,6 +80,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         SubscribeLocalEvent<XenoParasiteComponent, ThrowItemAttemptEvent>(OnParasiteThrowAttempt);
         SubscribeLocalEvent<XenoParasiteComponent, PullAttemptEvent>(OnParasiteTryPull);
         SubscribeLocalEvent<XenoParasiteComponent, GettingPickedUpAttemptEvent>(OnParasiteTryPickup);
+        SubscribeLocalEvent<XenoParasiteComponent, BeforeDamageChangedEvent>(OnParasiteBeforeDamageChanged);
 
         SubscribeLocalEvent<ParasiteSpentComponent, MapInitEvent>(OnParasiteSpentMapInit);
         SubscribeLocalEvent<ParasiteSpentComponent, UpdateMobStateEvent>(OnParasiteSpentUpdateMobState,
@@ -226,6 +228,12 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("rmc-xeno-parasite-player-pickup", ("parasite", ent)), ent, args.User, PopupType.SmallCaution);
             args.Cancel();
         }
+    }
+
+    private void OnParasiteBeforeDamageChanged(Entity<XenoParasiteComponent> ent, ref BeforeDamageChangedEvent args)
+    {
+        if (ent.Comp.InfectedVictim != null && !ent.Comp.FellOff) // cannot damage while infecting host
+            args.Cancelled = true;
     }
 
     protected virtual void ParasiteLeapHit(Entity<XenoParasiteComponent> parasite)
@@ -421,6 +429,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         parasite.Comp.InfectedVictim = victim;
         parasite.Comp.FallOffAt = _timing.CurTime + parasite.Comp.FallOffDelay;
         Dirty(parasite);
+
+        RemCompDeferred<ParasiteAIComponent>(parasite);
 
         ParasiteLeapHit(parasite);
         return true;
