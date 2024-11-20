@@ -261,4 +261,7 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCPlaytimeXenoPostfixTwoTimeHours =
         CVarDef.Create("rmc.playtime_xeno_prefix_two_time_hours", 300, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCDisconnectedXenoGhostRoleTimeSeconds =
+        CVarDef.Create("rmc.disconnected_xeno_ghost_role_time_seconds", 300, CVar.REPLICATED | CVar.SERVER);
 }

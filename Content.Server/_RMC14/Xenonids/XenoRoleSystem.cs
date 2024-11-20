@@ -15,6 +15,7 @@ using Robust.Server.GameStates;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Xenonids;
 
@@ -22,6 +23,7 @@ public sealed class XenoRoleSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
     [Dependency] private readonly PlayTimeTrackingSystem _playTime = default!;
@@ -29,7 +31,9 @@ public sealed class XenoRoleSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
     [Dependency] private readonly RoleSystem _role = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+
+    private TimeSpan _disconnectedXenoGhostRoleTime;
 
     private TimeSpan _rankTwoTime;
     private TimeSpan _rankThreeTime;
@@ -53,6 +57,7 @@ public sealed class XenoRoleSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.RMCPlaytimeSilverMedalTimeHours, v => _rankThreeTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeGoldMedalTimeHours, v => _rankFourTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimePlatinumMedalTimeHours, v => _rankFiveTime = TimeSpan.FromHours(v), true);
+        Subs.CVar(_config, RMCCVars.RMCDisconnectedXenoGhostRoleTimeSeconds, v => _disconnectedXenoGhostRoleTime = TimeSpan.FromSeconds(v), true);
     }
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
@@ -63,6 +68,8 @@ public sealed class XenoRoleSystem : EntitySystem
 
     private void OnPlayerAttached(Entity<XenoComponent> xeno, ref PlayerAttachedEvent args)
     {
+        RemCompDeferred<XenoDisconnectedComponent>(xeno);
+
         if (!_mind.TryGetMind(args.Player.UserId, out var mind))
             return;
 
@@ -85,6 +92,10 @@ public sealed class XenoRoleSystem : EntitySystem
 
     private void OnPlayerDetached(Entity<XenoComponent> xeno, ref PlayerDetachedEvent args)
     {
+        var disconnected = EnsureComp<XenoDisconnectedComponent>(xeno);
+        disconnected.At = _timing.CurTime;
+        Dirty(xeno, disconnected);
+
         if (_hive.GetHive(xeno.Owner) is {} hive)
             _pvsOverride.RemoveForceSend(hive, args.Player);
     }
@@ -154,5 +165,27 @@ public sealed class XenoRoleSystem : EntitySystem
         Dirty(xeno, rankComp);
 
         _nameModifier.RefreshNameModifiers(xeno);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var time = _timing.CurTime;
+        var disconnectedQuery = EntityQueryEnumerator<XenoDisconnectedComponent>();
+        while (disconnectedQuery.MoveNext(out var uid, out var comp))
+        {
+            if (time < comp.At + _disconnectedXenoGhostRoleTime)
+                continue;
+
+            if (!_mind.TryGetMind(uid, out var mindId, out var mind))
+            {
+                RemCompDeferred<XenoDisconnectedComponent>(uid);
+                continue;
+            }
+
+            _mind.TransferTo(mindId, null, createGhost: true, mind: mind);
+            RemCompDeferred<XenoDisconnectedComponent>(uid);
+        }
     }
 }
