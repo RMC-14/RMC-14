@@ -28,6 +28,7 @@ namespace Content.Shared._RMC14.Marines.Squads;
 
 public sealed class SquadSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly EncryptionKeySystem _encryptionKey = default!;
     [Dependency] private readonly SharedIdCardSystem _id = default!;
@@ -331,6 +332,9 @@ public sealed class SquadSystem : EntitySystem
 
         var ev = new SquadMemberUpdatedEvent(team);
         RaiseLocalEvent(marine, ref ev);
+
+        if (Prototype(team)?.ID is { } squadProto)
+            _appearance.SetData(marine, SquadVisuals.Squad, squadProto);
     }
 
     private void MarineSetTitle(EntityUid marine, string title)

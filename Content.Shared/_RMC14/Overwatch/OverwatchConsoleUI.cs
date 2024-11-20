@@ -63,6 +63,9 @@ public sealed class OverwatchConsoleShowHiddenBuiMsg(bool show) : BoundUserInter
 }
 
 [Serializable, NetSerializable]
+public sealed class OverwatchConsoleTransferMarineBuiMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
 public sealed class OverwatchConsoleWatchBuiMsg(NetEntity target) : BoundUserInterfaceMessage
 {
     public readonly NetEntity Target = target;
@@ -121,7 +124,7 @@ public record struct OverwatchSquad(NetEntity Id, string Name, Color Color, NetE
 
 [Serializable, NetSerializable]
 public readonly record struct OverwatchMarine(
-    NetEntity Marine,
+    NetEntity Id,
     NetEntity Camera,
     string Name,
     MobState State,

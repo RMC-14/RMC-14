@@ -146,7 +146,7 @@ public sealed partial class OverwatchSquadView : Control
             if (!showHidden)
             {
                 var hidden = console.Hidden;
-                if (i >= marines.Count || hidden.Contains(marines[i].Marine))
+                if (i >= marines.Count || hidden.Contains(marines[i].Id))
                 {
                     MakeViewVisible(i, false);
                     continue;

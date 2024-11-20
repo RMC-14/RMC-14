@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Squads;
@@ -13,6 +14,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
@@ -26,10 +28,12 @@ namespace Content.Shared._RMC14.Overwatch;
 
 public abstract class SharedOverwatchConsoleSystem : EntitySystem
 {
+    [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -62,6 +66,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _planetQuery = GetEntityQuery<RMCPlanetComponent>();
 
         SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIOpenedEvent>(OnBUIOpened);
+        SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSelectedEvent>(OnTransferMarineSelected);
+        SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSquadEvent>(OnTransferMarineSquad);
 
         SubscribeLocalEvent<OverwatchWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
         SubscribeLocalEvent<OverwatchWatchingComponent, DamageChangedEvent>(OnWatchingDamageChanged);
@@ -77,6 +83,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             subs.Event<OverwatchConsoleSetLocationBuiMsg>(OnOverwatchSetLocationBui);
             subs.Event<OverwatchConsoleShowDeadBuiMsg>(OnOverwatchShowDeadBui);
             subs.Event<OverwatchConsoleShowHiddenBuiMsg>(OnOverwatchShowHiddenBui);
+            subs.Event<OverwatchConsoleTransferMarineBuiMsg>(OnOverwatchTransferMarineBui);
             subs.Event<OverwatchConsoleWatchBuiMsg>(OnOverwatchWatchBui);
             subs.Event<OverwatchConsoleHideBuiMsg>(OnOverwatchHideBui);
             subs.Event<OverwatchConsolePromoteLeaderBuiMsg>(OnOverwatchPromoteLeaderBui);
@@ -96,6 +103,92 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         var state = GetOverwatchBuiState();
         _ui.SetUiState(ent.Owner, OverwatchConsoleUI.Key, state);
+    }
+
+    private void OnTransferMarineSelected(Entity<OverwatchConsoleComponent> ent, ref OverwatchTransferMarineSelectedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryGetEntity(args.Actor, out var actor))
+            return;
+
+        EntityUid? currentSquad = null;
+        if (TryGetEntity(args.Marine, out var marine) &&
+            _squad.TryGetMemberSquad(marine.Value, out var marineSquad))
+        {
+            currentSquad = marineSquad;
+        }
+
+        var state = GetOverwatchBuiState();
+        var options = new List<DialogOption>();
+        foreach (var squad in state.Squads)
+        {
+            if (currentSquad == GetEntity(squad.Id))
+                continue;
+
+            options.Add(new DialogOption(squad.Name, new OverwatchTransferMarineSquadEvent(args.Actor, args.Marine, squad.Id)));
+        }
+
+        _dialog.OpenOptions(ent, actor.Value, "Squad Selection", options, "Choose the marine's new squad");
+    }
+
+    private void OnTransferMarineSquad(Entity<OverwatchConsoleComponent> ent, ref OverwatchTransferMarineSquadEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (GetEntity(args.Actor) is not { Valid: true } actor)
+            return;
+
+        var squadId = args.Squad;
+        var state = GetOverwatchBuiState();
+        if (!state.Squads.TryFirstOrNull(s => s.Id == squadId, out var squad))
+        {
+            _popup.PopupCursor("You can't transfer marines to that squad!", actor, PopupType.LargeCaution);
+            return;
+        }
+
+        if (!TryGetEntity(args.Marine, out var marineId))
+        {
+            _popup.PopupCursor("That marine is KIA.", actor, PopupType.LargeCaution);
+            return;
+        }
+
+        if (_mobState.IsDead(marineId.Value))
+        {
+            _popup.PopupCursor($"{Name(marineId.Value)} is KIA.", actor, PopupType.LargeCaution);
+            return;
+        }
+
+        if (squad.Value.Leader != null && HasComp<SquadLeaderComponent>(marineId))
+        {
+            _popup.PopupCursor($"Transfer aborted. {squad.Value.Name} can't have another Squad Leader.", actor, PopupType.LargeCaution);
+            return;
+        }
+
+        if (!TryGetEntity(squad.Value.Id, out var squadEnt))
+        {
+            _popup.PopupCursor("You can't transfer marines to that squad!", actor, PopupType.LargeCaution);
+            return;
+        }
+
+        if (_squad.TryGetMemberSquad(marineId.Value, out var currentSquad) &&
+            currentSquad.Owner == GetEntity(args.Squad))
+        {
+            _popup.PopupCursor($"{Name(marineId.Value)} is already in {Name(squadEnt.Value)}!", actor, PopupType.LargeCaution);
+            return;
+        }
+
+        _squad.AssignSquad(marineId.Value, squadEnt.Value, null);
+
+        var selfMsg = $"{Name(marineId.Value)} has been transfered from squad '{Name(currentSquad)}' to squad '{Name(squadEnt.Value)}'. Logging to enlistment file.";
+        _marineAnnounce.AnnounceSingle(selfMsg, actor);
+        _popup.PopupCursor(selfMsg, actor, PopupType.Large);
+
+        var targetMsg = $"You've been transfered to {Name(squadEnt.Value)}!";
+        _marineAnnounce.AnnounceSingle(targetMsg, marineId.Value);
+        _popup.PopupEntity(targetMsg, marineId.Value, marineId.Value, PopupType.Large);
     }
 
     private void OnWatchingMoveInput(Entity<OverwatchWatchingComponent> ent, ref MoveInputEvent args)
@@ -196,6 +289,33 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     {
         ent.Comp.ShowHidden = args.Show;
         Dirty(ent);
+    }
+
+    private void OnOverwatchTransferMarineBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleTransferMarineBuiMsg args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (ent.Comp.Squad is not { } selectedSquad)
+            return;
+
+        var state = GetOverwatchBuiState();
+        var options = new List<DialogOption>();
+        if (state.Marines.TryGetValue(selectedSquad, out var marines))
+        {
+            foreach (var marine in marines)
+            {
+                var option = new DialogOption
+                {
+                    Text = $"{marine.Name}",
+                    Event = new OverwatchTransferMarineSelectedEvent(GetNetEntity(args.Actor), marine.Id),
+                };
+
+                options.Add(option);
+            }
+        }
+
+        _dialog.OpenOptions(ent, args.Actor, "Transfer Marine", options, "Choose marine to transfer");
     }
 
     private void OnOverwatchWatchBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleWatchBuiMsg args)

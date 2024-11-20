@@ -59,7 +59,7 @@
                                         ModulateSelfOverride="#D3B400" MinWidth="120" />
                                 <Button Name="TransferMarineButton" Access="Public"
                                         Text="Transfer marine" StyleClasses="OpenBoth"
-                                        ModulateSelfOverride="#D3B400" Visible="False" />
+                                        ModulateSelfOverride="#D3B400" />
                             </BoxContainer>
                         </PanelContainer>
                         <BoxContainer Orientation="Vertical" Margin="5"

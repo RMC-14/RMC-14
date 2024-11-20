@@ -93,6 +93,8 @@
         type: OverwatchConsoleBui
       enum.TacticalMapComputerUi.Key:
         type: TacticalMapComputerBui
+      enum.DialogUiKey.Key:
+        type: DialogBui
   - type: RequiresSkill
     skills:
       RMCSkillOverwatch: 1

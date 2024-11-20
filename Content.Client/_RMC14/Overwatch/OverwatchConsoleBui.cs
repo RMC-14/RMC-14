@@ -141,6 +141,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                     SendPredictedMessage(new OverwatchConsoleShowHiddenBuiMsg(!console.ShowHidden));
 
                 monitor.TransferMarineButton.Label.ModulateSelfOverride = Color.Black;
+                monitor.TransferMarineButton.OnPressed += _ => SendPredictedMessage(new OverwatchConsoleTransferMarineBuiMsg());
 
                 if (EntMan.TryGetComponent(Owner, out SupplyDropComputerComponent? supplyDrop))
                 {
@@ -241,7 +242,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                     {
                         Text = marine.Name,
                         StyleClasses = { "OpenBoth" },
-                        Margin = margin,
+                        Margin = new Thickness(2, 0),
                     };
 
                     watchButton.OnPressed += _ => SendPredictedMessage(new OverwatchConsoleWatchBuiMsg(marine.Camera));
@@ -299,15 +300,15 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                     ToolTip = "Promote marine to Squad Leader",
                 };
 
-                if (_overwatchConsole.IsHidden((Owner, console), marine.Marine) &&
-                    marine.Marine != squad.Leader)
+                if (_overwatchConsole.IsHidden((Owner, console), marine.Id) &&
+                    marine.Id != squad.Leader)
                 {
                     hideButton.Text = "+";
                     hideButton.ModulateSelfOverride = Color.FromHex("#248E34");
                     hideButton.ToolTip = "Show marine";
                 }
 
-                if (squad.Leader == marine.Marine)
+                if (squad.Leader == marine.Id)
                 {
                     hideButton.Visible = false;
                     promoteButton.Visible = false;
@@ -315,12 +316,12 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
 
                 hideButton.OnPressed += _ =>
                 {
-                    var hidden = !_overwatchConsole.IsHidden((Owner, console), marine.Marine);
-                    SendPredictedMessage(new OverwatchConsoleHideBuiMsg(marine.Marine, hidden));
+                    var hidden = !_overwatchConsole.IsHidden((Owner, console), marine.Id);
+                    SendPredictedMessage(new OverwatchConsoleHideBuiMsg(marine.Id, hidden));
                 };
 
                 promoteButton.OnPressed += _ =>
-                    SendPredictedMessage(new OverwatchConsolePromoteLeaderBuiMsg(marine.Marine));
+                    SendPredictedMessage(new OverwatchConsolePromoteLeaderBuiMsg(marine.Id));
 
                 panel = CreatePanel(50);
                 hideButton.Margin = margin;
@@ -356,7 +357,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                 {
                     if (_overwatchConsole.IsSquadLeader(roleId) &&
                         squad.Leader != null &&
-                        marines.TryFirstOrNull(m => m.Marine == squad.Leader.Value, out var leader))
+                        marines.TryFirstOrNull(m => m.Id == squad.Leader.Value, out var leader))
                     {
                         roleDeployed = leader.Value.Name;
                         roleAlive = leader.Value.State == MobState.Dead
