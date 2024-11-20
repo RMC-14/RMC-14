@@ -11,7 +11,7 @@ public sealed partial class BulletholeComponent : Component
     public int BulletholeCount = 0;
 
     [DataField, AutoNetworkedField]
-    public int BulletholeState;
+    public int BulletholeState = -1;
 }
 
 [Serializable, NetSerializable]
@@ -23,5 +23,5 @@ public enum BulletholeVisuals
 [Serializable, NetSerializable]
 public enum BulletholeVisualsLayers : byte
 {
-    Bullethole
+    Bullethole,
 }

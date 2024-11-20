@@ -1,15 +1,17 @@
 using Content.Shared._RMC14.Weapons.Ranged.Ammo;
 using Content.Shared.Damage;
+using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
 public sealed class BulletholeSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     // Bullethole overlays
-    private const int BulletholeStates = 1;
-    private const int MaxBulletholeCount = 8;
+    private const int MaxBulletholeState = 1;
+    private const int MaxBulletholeCount = 24;
     private const string BulletholeRsiPath = "/Textures/_RMC14/Effects/bullethole.rsi";
 
     public override void Initialize()
@@ -27,7 +29,10 @@ public sealed class BulletholeSystem : EntitySystem
         if (!TryComp<AppearanceComponent>(ent, out var app))
             return;
 
-        var stateString = $"bhole_reference_{(ent.Comp.BulletholeCount >= 8 ? 8 : ent.Comp.BulletholeCount):00}";
+        if (ent.Comp.BulletholeState < 1 || ent.Comp.BulletholeState > MaxBulletholeState)
+            ent.Comp.BulletholeState = _random.Next(1, MaxBulletholeState + 1);
+
+        var stateString = $"bhole_{ent.Comp.BulletholeState}_{(ent.Comp.BulletholeCount >= MaxBulletholeCount ? MaxBulletholeCount : ent.Comp.BulletholeCount)}";
         _appearance.SetData(ent, BulletholeVisuals.State, stateString, app);
     }
 }

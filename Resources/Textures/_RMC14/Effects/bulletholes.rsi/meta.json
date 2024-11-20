@@ -8,28 +8,100 @@
   },
   "states": [
     {
-      "name": "bhole_reference_01"
+      "name": "bhole_reference_1"
     },
     {
-      "name": "bhole_reference_02"
+      "name": "bhole_reference_2"
     },
     {
-      "name": "bhole_reference_03"
+      "name": "bhole_reference_3"
     },
     {
-      "name": "bhole_reference_04"
+      "name": "bhole_reference_4"
     },
     {
-      "name": "bhole_reference_05"
+      "name": "bhole_reference_5"
     },
     {
-      "name": "bhole_reference_06"
+      "name": "bhole_reference_6"
     },
     {
-      "name": "bhole_reference_07"
+      "name": "bhole_reference_7"
     },
     {
-      "name": "bhole_reference_08"
-    }
+      "name": "bhole_reference_8"
+    },
+	{
+	  "name": "bhole_1_1"
+	},
+	{
+	  "name": "bhole_1_2"
+	},
+	{
+	  "name": "bhole_1_3"
+	},
+	{
+	  "name": "bhole_1_4"
+	},
+	{
+	  "name": "bhole_1_5"
+	},
+	{
+	  "name": "bhole_1_6"
+	},
+	{
+	  "name": "bhole_1_7"
+	},
+	{
+	  "name": "bhole_1_8"
+	},
+	{
+	  "name": "bhole_1_9"
+	},
+	{
+	  "name": "bhole_1_10"
+	},
+	{
+	  "name": "bhole_1_11"
+	},
+	{
+	  "name": "bhole_1_12"
+	},
+	{
+	  "name": "bhole_1_13"
+	},
+	{
+	  "name": "bhole_1_14"
+	},
+	{
+	  "name": "bhole_1_15"
+	},
+	{
+	  "name": "bhole_1_16"
+	},
+	{
+	  "name": "bhole_1_17"
+	},
+	{
+	  "name": "bhole_1_18"
+	},
+	{
+	  "name": "bhole_1_19"
+	},
+	{
+	  "name": "bhole_1_20"
+	},
+	{
+	  "name": "bhole_1_21"
+	},
+	{
+	  "name": "bhole_1_22"
+	},
+	{
+	  "name": "bhole_1_23"
+	},
+	{
+	  "name": "bhole_1_24"
+	}
   ]
 }
