@@ -517,6 +517,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                     continue;
 
                 para.FellOff = true;
+                Dirty(uid, para);
+
                 _inventory.TryUnequip(infectedVictim, "mask", true, true, true);
 
                 var victimComp = EnsureComp<VictimInfectedComponent>(infectedVictim);
