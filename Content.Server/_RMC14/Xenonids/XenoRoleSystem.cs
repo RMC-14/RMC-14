@@ -5,8 +5,10 @@ using Content.Server.Roles;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Maturing;
 using Content.Shared._RMC14.Xenonids.Rank;
 using Content.Shared.GameTicking;
+using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Robust.Server.GameStates;
@@ -21,6 +23,7 @@ public sealed class XenoRoleSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
     [Dependency] private readonly PlayTimeTrackingSystem _playTime = default!;
     [Dependency] private readonly PlayTimeTrackingManager _playTimeManager = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -41,7 +44,10 @@ public sealed class XenoRoleSystem : EntitySystem
 
         SubscribeLocalEvent<XenoComponent, PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<XenoComponent, PlayerDetachedEvent>(OnPlayerDetached);
+
         SubscribeLocalEvent<ActorComponent, HiveChangedEvent>(OnHiveChanged);
+
+        SubscribeLocalEvent<XenoRankComponent, RefreshNameModifiersEvent>(OnRankRefreshName);
 
         Subs.CVar(_config, RMCCVars.RMCPlaytimeBronzeMedalTimeHours, v => _rankTwoTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeSilverMedalTimeHours, v => _rankThreeTime = TimeSpan.FromHours(v), true);
@@ -95,18 +101,37 @@ public sealed class XenoRoleSystem : EntitySystem
             _pvsOverride.AddForceSend(newHive, session);
     }
 
-    private void UpdateRank(EntityUid xeno, ICommonSession player, string jobId, HumanoidCharacterProfile profile)
+    private void OnRankRefreshName(Entity<XenoRankComponent> ent, ref RefreshNameModifiersEvent args)
     {
-        if (!profile.PlaytimePerks)
+        if (HasComp<XenoMaturingComponent>(ent))
             return;
 
+        var rank = ent.Comp.Rank switch
+        {
+            0 => "rmc-xeno-young",
+            2 => "rmc-xeno-mature",
+            3 => "rmc-xeno-elder",
+            4 => "rmc-xeno-ancient",
+            5 => "rmc-xeno-prime",
+            _ => null,
+        };
+
+        if (rank == null)
+            return;
+
+        args.AddModifier(rank);
+    }
+
+    private void UpdateRank(EntityUid xeno, ICommonSession player, string jobId, HumanoidCharacterProfile profile)
+    {
         if (!HasComp<XenoComponent>(xeno))
             return;
 
-        if (!_prototype.TryIndex(jobId, out JobPrototype? job) ||
-            !_playTimeManager.TryGetTrackerTime(player, job.PlayTimeTracker, out var time))
+        var time = TimeSpan.Zero;
+        if (_prototype.TryIndex(jobId, out JobPrototype? job) &&
+            _playTimeManager.TryGetTrackerTime(player, job.PlayTimeTracker, out var nullableTime))
         {
-            return;
+            time = nullableTime.Value;
         }
 
         int rank;
@@ -127,5 +152,7 @@ public sealed class XenoRoleSystem : EntitySystem
         var rankComp = EnsureComp<XenoRankComponent>(xeno);
         rankComp.Rank = rank;
         Dirty(xeno, rankComp);
+
+        _nameModifier.RefreshNameModifiers(xeno);
     }
 }

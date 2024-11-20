@@ -7,5 +7,5 @@ namespace Content.Shared._RMC14.Sprite;
 public sealed partial class SpriteColorComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public Color Color;
+    public Color Color = Color.White;
 }

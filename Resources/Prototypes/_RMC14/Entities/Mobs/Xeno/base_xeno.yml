@@ -21,13 +21,6 @@
     - !type:HTNCompoundTask
       task: MeleeAttackTargetCompound
 
-- type: nameIdentifierGroup
-  id: CMXeno
-  fullName: false
-  prefix: XX
-  minValue: 1
-  maxValue: 999
-
 - type: emote
   id: CMXenoDeathGasp
   name: chat-emote-name-deathgasp
@@ -86,8 +79,6 @@
     baseWalkSpeed: 2.2
     baseSprintSpeed: 4
   - type: Climbing
-  - type: NameIdentifier
-    group: CMXeno
   - type: Insulated
   - type: Input
     context: "human"
@@ -285,6 +276,7 @@
   - type: XenoMapTracked
   - type: StunOnExplosionReceived
     weak: true
+  - type: AssignXenoName
 
 - type: entity
   abstract: true

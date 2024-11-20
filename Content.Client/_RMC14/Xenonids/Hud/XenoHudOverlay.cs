@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Energy;
+using Content.Shared._RMC14.Xenonids.Maturing;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Stacks;
@@ -49,7 +50,7 @@ public sealed class XenoHudOverlay : Overlay
     private readonly EntityQuery<MobStateComponent> _mobStateQuery;
     private readonly EntityQuery<MobThresholdsComponent> _mobThresholdsQuery;
     private readonly EntityQuery<XenoEnergyComponent> _xenoEnergyQuery;
-    private readonly EntityQuery<XenoRankComponent> _xenoRankQuery;
+    private readonly EntityQuery<XenoMaturingComponent> _xenoMaturingQuery;
     private readonly EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
     private readonly EntityQuery<TransformComponent> _xformQuery;
     private readonly EntityQuery<XenoShieldComponent> _xenoShieldQuery;
@@ -79,7 +80,7 @@ public sealed class XenoHudOverlay : Overlay
         _mobStateQuery = _entity.GetEntityQuery<MobStateComponent>();
         _mobThresholdsQuery = _entity.GetEntityQuery<MobThresholdsComponent>();
         _xenoEnergyQuery = _entity.GetEntityQuery<XenoEnergyComponent>();
-        _xenoRankQuery = _entity.GetEntityQuery<XenoRankComponent>();
+        _xenoMaturingQuery = _entity.GetEntityQuery<XenoMaturingComponent>();
         _xenoPlasmaQuery = _entity.GetEntityQuery<XenoPlasmaComponent>();
         _xformQuery = _entity.GetEntityQuery<TransformComponent>();
         _xenoShieldQuery = _entity.GetEntityQuery<XenoShieldComponent>();
@@ -256,7 +257,7 @@ public sealed class XenoHudOverlay : Overlay
         var ranks = _entity.EntityQueryEnumerator<XenoRankComponent, SpriteComponent, TransformComponent>();
         while (ranks.MoveNext(out var uid, out var comp, out var sprite, out var xform))
         {
-            if (comp.Rank < 2 || comp.Rank > 5)
+            if (comp.Rank < 2 || comp.Rank > 5 || _xenoMaturingQuery.HasComp(uid))
                 continue;
 
             if (xform.MapID != args.MapId)

@@ -417,6 +417,24 @@ namespace Content.Client.Lobby.UI
 
             #endregion
 
+            #region Xeno Prefix
+
+            XenoPrefix.OnTextChanged += args =>
+            {
+                SetXenoPrefix(args.Text);
+            };
+
+            #endregion
+
+            #region Xeno Postfix
+
+            XenoPostfix.OnTextChanged += args =>
+            {
+                SetXenoPostfix(args.Text);
+            };
+
+            #endregion
+
             #region Eyes
 
             EyeColorPicker.OnEyeColorPicked += newColor =>
@@ -851,6 +869,8 @@ namespace Content.Client.Lobby.UI
             UpdateCMarkingsFacialHair();
             UpdateNamedItems();
             UpdatePlaytimePerks();
+            UpdateXenoPrefix();
+            UpdateXenoPostfix();
 
             RefreshAntags();
             RefreshJobs();
@@ -1334,6 +1354,18 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
+        private void SetXenoPrefix(string prefix)
+        {
+            Profile = Profile?.WithXenoPrefix(prefix);
+            SetDirty();
+        }
+
+        private void SetXenoPostfix(string postfix)
+        {
+            Profile = Profile?.WithXenoPostfix(postfix);
+            SetDirty();
+        }
+
         public bool IsDirty
         {
             get => _isDirty;
@@ -1675,6 +1707,16 @@ namespace Content.Client.Lobby.UI
         private void UpdatePlaytimePerks()
         {
             PlaytimePerksButton.Pressed = Profile?.PlaytimePerks ?? true;
+        }
+
+        private void UpdateXenoPrefix()
+        {
+            XenoPrefix.Text = Profile?.XenoPrefix ?? string.Empty;
+        }
+
+        private void UpdateXenoPostfix()
+        {
+            XenoPostfix.Text = Profile?.XenoPostfix ?? string.Empty;
         }
 
         private void UpdateSaveButton()

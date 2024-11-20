@@ -252,4 +252,13 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCPlaytimePlatinumMedalTimeHours =
         CVarDef.Create("rmc.playtime_platinum_medal_time_hours", 175, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCPlaytimeXenoPrefixThreeTimeHours =
+        CVarDef.Create("rmc.playtime_xeno_prefix_three_time_hours", 124, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCPlaytimeXenoPostfixTimeHours =
+        CVarDef.Create("rmc.playtime_xeno_postfix_time_hours", 24, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCPlaytimeXenoPostfixTwoTimeHours =
+        CVarDef.Create("rmc.playtime_xeno_prefix_two_time_hours", 300, CVar.REPLICATED | CVar.SERVER);
 }
