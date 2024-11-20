@@ -126,7 +126,7 @@
   - type: ReceiverXenoClaws
     hitsToDestroy: 20
   - type: Appearance
-  - type: BulletholeVisuals
+  - type: Bullethole
 
 - type: entity
   parent:

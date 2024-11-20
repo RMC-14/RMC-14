@@ -46,4 +46,4 @@
     layers:
     - state: bullet
       shader: unshaded
-  - type: BallisticAmmo
+  - type: BulletholeGenerator

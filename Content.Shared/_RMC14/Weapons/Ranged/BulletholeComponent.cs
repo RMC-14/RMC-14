@@ -1,12 +1,11 @@
-using Content.Shared._RMC14.Xenonids.Damage;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(BulletholeVisualsSystem))]
-public sealed partial class BulletholeVisualsComponent : Component
+[Access(typeof(BulletholeSystem))]
+public sealed partial class BulletholeComponent : Component
 {
     [DataField, AutoNetworkedField]
     public int BulletholeCount = 0;
@@ -16,7 +15,13 @@ public sealed partial class BulletholeVisualsComponent : Component
 }
 
 [Serializable, NetSerializable]
-public enum BulletholeVisualLayers
+public enum BulletholeVisuals
 {
     State,
+}
+
+[Serializable, NetSerializable]
+public enum BulletholeVisualsLayers : byte
+{
+    Bullethole
 }
