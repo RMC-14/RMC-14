@@ -252,6 +252,7 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
                     continue;
                 }
                 actComp.Enabled = false;
+                Dirty(action.Id, actComp);
             }
 
         }
@@ -267,6 +268,7 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
                 var actComp = action.Comp;
 
                 actComp.Enabled = true;
+                Dirty(action.Id, actComp);
             }
 
             _audio.PlayPvs(comp.BurrowUpSound, ent);
