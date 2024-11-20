@@ -7,10 +7,10 @@ using Robust.Shared.Toolshed;
 
 namespace Content.Server._RMC14.Antag;
 
-[ToolshedCommand, AdminCommand(AdminFlags.VarEdit)]
+[ToolshedCommand, AdminCommand(AdminFlags.Admin)]
 public sealed class MutinyCommand : ToolshedCommand
 {
-    [CommandImplementation("end")]
+    [CommandImplementation("end"), AdminCommand(AdminFlags.Fun)]
     public void EndMutiny([CommandInvocationContext] IInvocationContext ctx)
     {
         var mutineers = EntityManager.EntityQueryEnumerator<MutineerComponent>();
@@ -53,7 +53,7 @@ public sealed class MutinyCommand : ToolshedCommand
         return HasComp<MutineerComponent>(marine) ? "Yes" : "No";
     }
 
-    [CommandImplementation("makemutineer")]
+    [CommandImplementation("makemutineer"), AdminCommand(AdminFlags.Fun)]
     public EntityUid MakeMutineer([CommandInvocationContext] IInvocationContext ctx,
         [PipedArgument] EntityUid marine)
     {
@@ -62,14 +62,14 @@ public sealed class MutinyCommand : ToolshedCommand
         return marine;
     }
 
-    [CommandImplementation("makemutineer")]
+    [CommandImplementation("makemutineer"), AdminCommand(AdminFlags.Fun)]
     public IEnumerable<EntityUid> MakeMutineer([CommandInvocationContext] IInvocationContext ctx,
         [PipedArgument] IEnumerable<EntityUid> marines)
     {
         return marines.Select(marine => MakeMutineer(ctx, marine));
     }
 
-    [CommandImplementation("removemutineer")]
+    [CommandImplementation("removemutineer"), AdminCommand(AdminFlags.Fun)]
     public EntityUid RemoveMutineer([CommandInvocationContext] IInvocationContext ctx,
         [PipedArgument] EntityUid marine)
     {
@@ -78,7 +78,7 @@ public sealed class MutinyCommand : ToolshedCommand
         return marine;
     }
 
-    [CommandImplementation("removemutineer")]
+    [CommandImplementation("removemutineer"), AdminCommand(AdminFlags.Fun)]
     public IEnumerable<EntityUid> RemoveMutineer([CommandInvocationContext] IInvocationContext ctx,
         [PipedArgument] IEnumerable<EntityUid> marines)
     {
