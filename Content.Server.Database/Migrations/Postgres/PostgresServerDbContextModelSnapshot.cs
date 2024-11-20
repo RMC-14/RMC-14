@@ -844,6 +844,12 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("jsonb")
                         .HasColumnName("markings");
 
+                    b.Property<bool>("PlaytimePerks")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true)
+                        .HasColumnName("playtime_perks");
+
                     b.Property<int>("PreferenceId")
                         .HasColumnType("integer")
                         .HasColumnName("preference_id");

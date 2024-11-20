@@ -1,28 +1,58 @@
-﻿using Content.Server.Mind;
+﻿using Content.Server.GameTicking;
+using Content.Server.Mind;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Roles;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Rank;
+using Content.Shared.GameTicking;
+using Content.Shared.Preferences;
+using Content.Shared.Roles;
 using Robust.Server.GameStates;
+using Robust.Shared.Configuration;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Xenonids;
 
 public sealed class XenoRoleSystem : EntitySystem
 {
+    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly PlayTimeTrackingSystem _playTime = default!;
+    [Dependency] private readonly PlayTimeTrackingManager _playTimeManager = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
     [Dependency] private readonly RoleSystem _role = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+
+    private TimeSpan _rankTwoTime;
+    private TimeSpan _rankThreeTime;
+    private TimeSpan _rankFourTime;
+    private TimeSpan _rankFiveTime;
 
     public override void Initialize()
     {
         base.Initialize();
 
+        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
+
         SubscribeLocalEvent<XenoComponent, PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<XenoComponent, PlayerDetachedEvent>(OnPlayerDetached);
         SubscribeLocalEvent<ActorComponent, HiveChangedEvent>(OnHiveChanged);
+
+        Subs.CVar(_config, RMCCVars.RMCPlaytimeBronzeMedalTimeHours, v => _rankTwoTime = TimeSpan.FromHours(v), true);
+        Subs.CVar(_config, RMCCVars.RMCPlaytimeSilverMedalTimeHours, v => _rankThreeTime = TimeSpan.FromHours(v), true);
+        Subs.CVar(_config, RMCCVars.RMCPlaytimeGoldMedalTimeHours, v => _rankFourTime = TimeSpan.FromHours(v), true);
+        Subs.CVar(_config, RMCCVars.RMCPlaytimePlatinumMedalTimeHours, v => _rankFiveTime = TimeSpan.FromHours(v), true);
+    }
+
+    private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
+    {
+        if (ev.JobId is { } job)
+            UpdateRank(ev.Mob, ev.Player, job, ev.Profile);
     }
 
     private void OnPlayerAttached(Entity<XenoComponent> xeno, ref PlayerAttachedEvent args)
@@ -35,6 +65,16 @@ public sealed class XenoRoleSystem : EntitySystem
 
         _role.MindAddJobRole(mind.Value, jobPrototype: xeno.Comp.Role);
         _playTime.PlayerRolesChanged(args.Player);
+
+        try
+        {
+            var profile = _gameTicker.GetPlayerProfile(args.Player);
+            UpdateRank(xeno, args.Player, xeno.Comp.Role, profile);
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error setting xeno rank for {ToPrettyString(xeno)}:\n{e}");
+        }
     }
 
     private void OnPlayerDetached(Entity<XenoComponent> xeno, ref PlayerDetachedEvent args)
@@ -53,5 +93,39 @@ public sealed class XenoRoleSystem : EntitySystem
 
         if (args.Hive is {} newHive)
             _pvsOverride.AddForceSend(newHive, session);
+    }
+
+    private void UpdateRank(EntityUid xeno, ICommonSession player, string jobId, HumanoidCharacterProfile profile)
+    {
+        if (!profile.PlaytimePerks)
+            return;
+
+        if (!HasComp<XenoComponent>(xeno))
+            return;
+
+        if (!_prototype.TryIndex(jobId, out JobPrototype? job) ||
+            !_playTimeManager.TryGetTrackerTime(player, job.PlayTimeTracker, out var time))
+        {
+            return;
+        }
+
+        int rank;
+        if (time > _rankFiveTime)
+            rank = 5;
+        else if (time > _rankFourTime)
+            rank = 4;
+        else if (time > _rankThreeTime)
+            rank = 3;
+        else if (time > _rankTwoTime)
+            rank = 2;
+        else if (!profile.PlaytimePerks)
+            rank = 1;
+        else
+            rank = 0;
+
+        // TODO RMC14 names
+        var rankComp = EnsureComp<XenoRankComponent>(xeno);
+        rankComp.Rank = rank;
+        Dirty(xeno, rankComp);
     }
 }

@@ -67,6 +67,10 @@ namespace Content.Server.Database
                 .HasIndex(p => new {p.Slot, PrefsId = p.PreferenceId})
                 .IsUnique();
 
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.PlaytimePerks)
+                .HasDefaultValue(true);
+
             modelBuilder.Entity<Antag>()
                 .HasIndex(p => new {HumanoidProfileId = p.ProfileId, p.AntagName})
                 .IsUnique();
@@ -456,6 +460,7 @@ namespace Content.Server.Database
         public RMCNamedItems? NamedItems { get; set; }
         public RMCSquadPreference? SquadPreference { get; set; }
         public string ArmorPreference { get; set; } = null!;
+        public bool PlaytimePerks { get; set; } = true;
     }
 
     public class Job

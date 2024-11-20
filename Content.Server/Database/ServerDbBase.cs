@@ -284,7 +284,8 @@ namespace Content.Server.Database
                     HelmetName = profile.NamedItems?.HelmetName,
                     ArmorName = profile.NamedItems?.ArmorName,
                     SentryName = profile.NamedItems?.SentryName,
-                }
+                },
+                profile.PlaytimePerks
             );
         }
 
@@ -375,6 +376,8 @@ namespace Content.Server.Database
                 ArmorName = humanoid.NamedItems.ArmorName,
                 SentryName = humanoid.NamedItems.SentryName,
             };
+
+            profile.PlaytimePerks = humanoid.PlaytimePerks;
 
             return profile;
         }

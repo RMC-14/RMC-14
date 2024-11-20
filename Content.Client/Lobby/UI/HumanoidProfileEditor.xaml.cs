@@ -408,6 +408,15 @@ namespace Content.Client.Lobby.UI
 
             #endregion SquadPreference
 
+            #region PlaytimePerks
+
+            PlaytimePerksButton.OnPressed += args =>
+            {
+                SetPlaytimePerks(args.Button.Pressed);
+            };
+
+            #endregion
+
             #region Eyes
 
             EyeColorPicker.OnEyeColorPicked += newColor =>
@@ -841,6 +850,7 @@ namespace Content.Client.Lobby.UI
             UpdateCMarkingsHair();
             UpdateCMarkingsFacialHair();
             UpdateNamedItems();
+            UpdatePlaytimePerks();
 
             RefreshAntags();
             RefreshJobs();
@@ -1318,6 +1328,12 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
+        private void SetPlaytimePerks(bool playtimePerks)
+        {
+            Profile = Profile?.WithPlaytimePerks(playtimePerks);
+            SetDirty();
+        }
+
         public bool IsDirty
         {
             get => _isDirty;
@@ -1654,6 +1670,11 @@ namespace Content.Client.Lobby.UI
             NamedItems.Helmet.Text = Profile?.NamedItems.HelmetName ?? string.Empty;
             NamedItems.Armor.Text = Profile?.NamedItems.ArmorName ?? string.Empty;
             NamedItems.Sentry.Text = Profile?.NamedItems.SentryName ?? string.Empty;
+        }
+
+        private void UpdatePlaytimePerks()
+        {
+            PlaytimePerksButton.Pressed = Profile?.PlaytimePerks ?? true;
         }
 
         private void UpdateSaveButton()

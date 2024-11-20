@@ -1,11 +1,11 @@
-﻿using Content.Server.GameTicking;
-using Content.Server.Hands.Systems;
+﻿using Content.Server.Hands.Systems;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Medal;
 using Content.Shared._RMC14.Survivor;
 using Content.Shared.Coordinates;
+using Content.Shared.GameTicking;
 using Content.Shared.Roles;
 using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
@@ -42,6 +42,9 @@ public sealed class PlaytimeMedalSystem : SharedPlaytimeMedalSystem
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
+        if (!ev.Profile.PlaytimePerks)
+            return;
+
         if (!HasComp<MarineComponent>(ev.Mob) || HasComp<SurvivorComponent>(ev.Mob))
             return;
 

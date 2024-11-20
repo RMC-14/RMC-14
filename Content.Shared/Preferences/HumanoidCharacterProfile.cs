@@ -142,6 +142,9 @@ namespace Content.Shared.Preferences
         [DataField]
         public SharedRMCNamedItems NamedItems { get; private set; } = new();
 
+        [DataField]
+        public bool PlaytimePerks { get; private set; } = new();
+
         public HumanoidCharacterProfile(
             string name,
             string flavortext,
@@ -158,7 +161,8 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts,
-            SharedRMCNamedItems namedItems)
+            SharedRMCNamedItems namedItems,
+            bool playtimePerks)
         {
             Name = name;
             FlavorText = flavortext;
@@ -191,6 +195,7 @@ namespace Content.Shared.Preferences
             }
 
             NamedItems = namedItems;
+            PlaytimePerks = playtimePerks;
         }
 
         /// <summary>Copy constructor</summary>
@@ -210,7 +215,8 @@ namespace Content.Shared.Preferences
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
-                other.NamedItems)
+                other.NamedItems,
+                other.PlaytimePerks)
         {
         }
 
@@ -338,6 +344,11 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile WithSquadPreference(EntProtoId<SquadTeamComponent>? squadPreference)
         {
             return new(this) { SquadPreference = squadPreference };
+        }
+
+        public HumanoidCharacterProfile WithPlaytimePerks(bool playtimePerks)
+        {
+            return new(this) { PlaytimePerks = playtimePerks };
         }
 
         public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<ProtoId<JobPrototype>, JobPriority>> jobPriorities)
@@ -509,6 +520,7 @@ namespace Content.Shared.Preferences
             if (FlavorText != other.FlavorText) return false;
             if (NamedItems != other.NamedItems) return false;
             if (ArmorPreference != other.ArmorPreference) return false;
+            if (PlaytimePerks != other.PlaytimePerks) return false;
             return Appearance.MemberwiseEquals(other.Appearance);
         }
 
@@ -791,6 +803,7 @@ namespace Content.Shared.Preferences
             hashCode.Add(SquadPreference);
             hashCode.Add((int)PreferenceUnavailable);
             hashCode.Add(NamedItems);
+            hashCode.Add(PlaytimePerks);
             return hashCode.ToHashCode();
         }
 
