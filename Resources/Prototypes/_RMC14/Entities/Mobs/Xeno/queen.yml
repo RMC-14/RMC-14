@@ -205,6 +205,8 @@
   - type: ManageHive
   - type: HiveLeaderGranter
   - type: XenoHeal
+  - type: StunOnExplosionReceived
+    weak: false
 
 - type: entity
   id: XenoLeaderPheromoneRelay

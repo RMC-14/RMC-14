@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Server.Atmos.EntitySystems;
+using Content.Shared._RMC14.Explosion;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
 using Content.Shared.Database;
@@ -468,7 +469,8 @@ public sealed partial class ExplosionSystem
 
                 // TODO EXPLOSIONS turn explosions into entities, and pass the the entity in as the damage origin.
                 _damageableSystem.TryChangeDamage(entity, damage, ignoreResistances: true);
-
+                var ev = new ExplosionReceivedEvent(epicenter, damage);
+                RaiseLocalEvent(entity, ref ev);
             }
         }
 
