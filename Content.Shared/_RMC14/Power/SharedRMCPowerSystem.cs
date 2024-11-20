@@ -509,7 +509,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             (float) delay.TotalSeconds,
             quality,
             new RMCFusionReactorRepairDoAfterEvent(state),
-            ent.Comp.WeldingCost
+            ent.Comp.WeldingCost,
+            duplicateCondition: DuplicateConditions.SameTool
         );
 
         if (!toolUsed)
