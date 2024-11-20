@@ -13,16 +13,12 @@ public sealed partial class IFFToggleComponent : Component
     public bool Enabled = true;
 
     //do not change during runtime
-    [DataField(required: true), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public bool RequireIDLock = false;
 
     //do not change during runtime
-    [DataField(required: true), AutoNetworkedField]
-    public bool ChangeStats = false;
-
-    //do not change during runtime
     [DataField, AutoNetworkedField]
-    public bool StatChangeOnIFFEnabled = false;
+    public bool ChangeStats = false;
 
     [DataField, AutoNetworkedField]
     public Dictionary<SelectiveFire, SelectiveFireModifierSet> IFFModifiers = new()

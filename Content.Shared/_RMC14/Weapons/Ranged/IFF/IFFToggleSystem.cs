@@ -36,11 +36,7 @@ public sealed class IFFToggleSystem : EntitySystem
             {
                 ent.Comp.BaseFireModes = comp.BaseFireModes;
                 ent.Comp.BaseModifiers = new Dictionary<SelectiveFire, SelectiveFireModifierSet>(comp.Modifiers);
-
-                if (ent.Comp.StatChangeOnIFFEnabled)
-                {
-                    SetStats(ent);
-                }
+                SetStats(ent);
             }
         }
     }
@@ -103,7 +99,7 @@ public sealed class IFFToggleSystem : EntitySystem
 
             _audio.PlayPredicted(ent.Comp.ToggleSound, ent, args.Performer);
 
-            if (ent.Comp.StatChangeOnIFFEnabled)
+            if (ent.Comp.ChangeStats)
                 ResetStats(ent);
 
             if (_actions.TryGetActionData(ent.Comp.Action, out var action))
@@ -125,7 +121,7 @@ public sealed class IFFToggleSystem : EntitySystem
 
             _audio.PlayPredicted(ent.Comp.ToggleSound, ent, args.Performer);
 
-            if (ent.Comp.StatChangeOnIFFEnabled)
+            if (ent.Comp.ChangeStats)
                 SetStats(ent);
 
             if (_actions.TryGetActionData(ent.Comp.Action, out var action))
