@@ -334,11 +334,12 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         return true;
     }
 
-    private bool IsInfectable(EntityUid parasite, EntityUid victim)
+    private bool IsInfectable(Entity<XenoParasiteComponent> parasite, EntityUid victim)
     {
         return HasComp<InfectableComponent>(victim)
                && !HasComp<ParasiteSpentComponent>(parasite)
-               && !HasComp<VictimInfectedComponent>(victim);
+               && !HasComp<VictimInfectedComponent>(victim)
+               && parasite.Comp.InfectedVictim == null;
     }
 
     private bool CanInfectPopup(Entity<XenoParasiteComponent> parasite, EntityUid victim, EntityUid user, bool popup = true, bool force = false)
