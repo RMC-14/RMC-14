@@ -91,7 +91,7 @@ public sealed class RMCStandingSystem : EntitySystem
     private void OnLeaveDown(Entity<DownOnEnterComponent> mob, ref EntRemovedFromContainerMessage args)
     {
         if (HasComp<KnockedDownComponent>(args.Entity) || _mob.IsIncapacitated(args.Entity))
-            _standing.Down(args.Entity, false, false, true, true);
+            _standing.Down(args.Entity, false, true, true, true);
         else
             _standing.Stand(args.Entity);
     }
