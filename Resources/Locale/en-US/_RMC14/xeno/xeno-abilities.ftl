@@ -189,6 +189,7 @@ rmc-xeno-resin-surge-sticky-others = {CAPITALIZE(THE($xeno))} surges deep resin,
 rmc-xeno-burrow-down-start = We begin burrowing ourselves into the ground.
 rmc-xeno-burrow-down-failure-break = We stop burrowing.
 rmc-xeno-burrow-down-failure-bad-area = There's no way to burrow here.
+rmc-xeno-burrow-down-failure-rest = We cannot burrow while resting!
 rmc-xeno-burrow-down-finish = We burrow ourselves into the ground.
 
 rmc-xeno-burrow-resurface-cooldown-finish = We can now surface.

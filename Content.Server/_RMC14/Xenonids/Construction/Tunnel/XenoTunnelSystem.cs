@@ -462,7 +462,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         if (!canPlaceStructure)
         {
             popupType = popupType + "-tunnel";
-            _popup.PopupEntity(popupType, user, user, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString(popupType), user, user, PopupType.SmallCaution);
             return false;
         }
         return true;
