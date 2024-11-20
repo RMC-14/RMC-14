@@ -336,10 +336,11 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     private bool IsInfectable(Entity<XenoParasiteComponent> parasite, EntityUid victim)
     {
-        return HasComp<InfectableComponent>(victim)
+        return TryComp<InfectableComponent>(victim, out var infected)
+               && parasite.Comp.InfectedVictim == null
+               && !infected.BeingInfected
                && !HasComp<ParasiteSpentComponent>(parasite)
-               && !HasComp<VictimInfectedComponent>(victim)
-               && parasite.Comp.InfectedVictim == null;
+               && !HasComp<VictimInfectedComponent>(victim);
     }
 
     private bool CanInfectPopup(Entity<XenoParasiteComponent> parasite, EntityUid victim, EntityUid user, bool popup = true, bool force = false)
@@ -386,6 +387,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (!CanInfectPopup(parasite, victim, parasite, popup, force))
             return false;
 
+        if (!TryComp(victim, out InfectableComponent? infectable))
+            return false;
+
         if (_net.IsServer)
         {
             var pos = _transform.GetWorldPosition(victim);
@@ -409,12 +413,14 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             return false;
 
         if (_net.IsServer &&
-            TryComp(victim, out InfectableComponent? infectable) &&
             TryComp(victim, out HumanoidAppearanceComponent? appearance) &&
             infectable.Sound.TryGetValue(appearance.Sex, out var sound))
         {
             _audio.PlayPvs(sound, victim);
         }
+
+        infectable.BeingInfected = true;
+        Dirty(victim, infectable);
 
         _stun.TryParalyze(victim, parasite.Comp.ParalyzeTime, true);
         _status.TryAddStatusEffect(victim, "Muted", parasite.Comp.ParalyzeTime, true, "Muted");
@@ -505,15 +511,22 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         {
             if (para.FallOffAt < time && !para.FellOff && para.InfectedVictim != null)
             {
+                var infectedVictim = para.InfectedVictim.Value;
+
+                if (!TryComp(infectedVictim, out InfectableComponent? infectable))
+                    continue;
+
                 para.FellOff = true;
+                _inventory.TryUnequip(infectedVictim, "mask", true, true, true);
 
-                _inventory.TryUnequip(uid, "mask", true, true, true);
-
-                var victimComp = EnsureComp<VictimInfectedComponent>(para.InfectedVictim.Value);
+                var victimComp = EnsureComp<VictimInfectedComponent>(infectedVictim);
                 victimComp.Hive = _hive.GetHive(uid)?.Owner;
 
                 // TODO RMC14 also do damage to the parasite
                 EnsureComp<ParasiteSpentComponent>(uid);
+
+                infectable.BeingInfected = false;
+                Dirty(infectedVictim, infectable);
             }
         }
 

@@ -23,7 +23,7 @@ public sealed partial class XenoParasiteComponent : Component
     ///     How long it takes for the parasite to fall off the victim's mask, finishing the infecting process.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan FallOffDelay = TimeSpan.FromSeconds(35);
+    public TimeSpan FallOffDelay = TimeSpan.FromSeconds(15);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan? FallOffAt;

@@ -8,6 +8,9 @@ namespace Content.Shared._RMC14.Xenonids.Parasite;
 public sealed partial class InfectableComponent : Component
 {
     [DataField, AutoNetworkedField]
+    public bool BeingInfected = false;
+
+    [DataField, AutoNetworkedField]
     public Dictionary<Sex, SoundSpecifier> Sound = new()
     {
         [Sex.Male] = new SoundPathSpecifier("/Audio/_RMC14/Voice/Human/infected_male.ogg"),
