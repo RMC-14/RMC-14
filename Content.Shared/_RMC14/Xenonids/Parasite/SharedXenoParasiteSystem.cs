@@ -250,7 +250,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     private void OnVictimInfectedMapInit(Entity<VictimInfectedComponent> victim, ref MapInitEvent args)
     {
-        victim.Comp.FallOffAt = _timing.CurTime + victim.Comp.FallOffDelay;
         victim.Comp.BurstAt = _timing.CurTime + victim.Comp.BurstDelay;
     }
 
@@ -409,10 +408,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             _audio.PlayPvs(sound, victim);
         }
 
-        var time = _timing.CurTime;
-        var victimComp = EnsureComp<VictimInfectedComponent>(victim);
-        victimComp.AttachedAt = time;
-        victimComp.Hive = _hive.GetHive(parasite.Owner)?.Owner;
         _stun.TryParalyze(victim, parasite.Comp.ParalyzeTime, true);
         _status.TryAddStatusEffect(victim, "Muted", parasite.Comp.ParalyzeTime, true, "Muted");
         _status.TryAddStatusEffect(victim, "TemporaryBlindness", parasite.Comp.ParalyzeTime, true, "TemporaryBlindness");
@@ -420,11 +415,11 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         _inventory.TryEquip(victim, parasite.Owner, "mask", true, true, true);
 
-        // TODO RMC14 also do damage to the parasite
-        EnsureComp<ParasiteSpentComponent>(parasite);
-
         var unremovable = EnsureComp<UnremoveableComponent>(parasite);
         unremovable.DeleteOnDrop = false;
+
+        parasite.Comp.InfectedVictim = victim;
+        parasite.Comp.FallOffAt = _timing.CurTime + parasite.Comp.FallOffDelay;
         Dirty(parasite);
 
         ParasiteLeapHit(parasite);
@@ -495,15 +490,26 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             }
         }
 
+        var paraQuery = EntityQueryEnumerator<XenoParasiteComponent>();
+        while (paraQuery.MoveNext(out var uid, out var para))
+        {
+            if (para.FallOffAt < time && !para.FellOff && para.InfectedVictim != null)
+            {
+                para.FellOff = true;
+
+                _inventory.TryUnequip(uid, "mask", true, true, true);
+
+                var victimComp = EnsureComp<VictimInfectedComponent>(para.InfectedVictim.Value);
+                victimComp.Hive = _hive.GetHive(uid)?.Owner;
+
+                // TODO RMC14 also do damage to the parasite
+                EnsureComp<ParasiteSpentComponent>(uid);
+            }
+        }
+
         var query = EntityQueryEnumerator<VictimInfectedComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var infected, out var xform))
         {
-            if (infected.FallOffAt < time && !infected.FellOff)
-            {
-                infected.FellOff = true;
-                _inventory.TryUnequip(uid, "mask", true, true, true);
-            }
-
             if (infected.BurstAt + infected.AutoBurstTime <= time && infected.SpawnedLarva != null)
             {
                 TryBurst((uid, infected));
