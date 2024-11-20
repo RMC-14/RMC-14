@@ -191,10 +191,10 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.gun_prediction_log_hits", false, CVar.SERVER | CVar.REPLICATED);
 
     public static readonly CVarDef<float> RMCGunPredictionCoordinateDeviation =
-        CVarDef.Create("rmc.gun_prediction_coordinate_deviation", 1f, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("rmc.gun_prediction_coordinate_deviation", 1.5f, CVar.SERVER | CVar.REPLICATED);
 
     public static readonly CVarDef<float> RMCGunPredictionLowestCoordinateDeviation =
-        CVarDef.Create("rmc.gun_prediction_lowest_coordinate_deviation", 1f, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("rmc.gun_prediction_lowest_coordinate_deviation", 1.5f, CVar.SERVER | CVar.REPLICATED);
 
     public static readonly CVarDef<float> RMCGunPredictionAabbEnlargement =
         CVarDef.Create("rmc.gun_prediction_aabb_enlargement", 0.3f, CVar.SERVER | CVar.REPLICATED);
