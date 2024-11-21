@@ -20,17 +20,6 @@
     state: hole
   - type: InteractionOutline
   - type: Clickable
-  - type: Damageable
-    damageContainer: StructuralXeno
-    damageModifierSet: Resin
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 140
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
   - type: RMCNightVisionVisible
     priority: -1
     transparency: 0.2

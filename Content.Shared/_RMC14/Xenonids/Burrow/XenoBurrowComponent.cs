@@ -13,7 +13,7 @@ public sealed partial class XenoBurrowComponent : Component
     /// <summary>
     /// Opacity for fellow xenos when burrowed
     /// </summary>
-    public const float BurrowOpacity = 0.2f;
+    public const float BurrowOpacity = 0.5f;
 
     /// <summary>
     /// Whether the xeno is currently burrowed or not

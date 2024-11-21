@@ -28,3 +28,4 @@
     delay: 0.25
   - type: Appearance
   - type: EntrenchingTool
+  - type: XenoTunnelFiller

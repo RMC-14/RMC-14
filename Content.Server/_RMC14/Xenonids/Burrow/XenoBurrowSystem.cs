@@ -92,7 +92,7 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
             _doAfter.TryStartDoAfter(moveDoAfterArgs);
 
             comp.NextTunnelAt = null;
-            comp.ForcedUnburrowAt = null; 
+            comp.ForcedUnburrowAt = null;
             _audio.PlayPvs(comp.BurrowDownSound, ent);
         }
         else

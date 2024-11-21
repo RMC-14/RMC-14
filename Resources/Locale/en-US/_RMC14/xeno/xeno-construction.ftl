@@ -48,6 +48,7 @@ rmc-xeno-construction-tunnel-default-xeno-enter = We begin crawling down into {$
 
 rmc-xeno-construction-no-map-tunnel = The ground isn't solid.
 rmc-xeno-construction-blocked-tunnel = There's something built here already.
+rmc-xeno-construction-bad-area = There's no way to burrow here.
 
 rmc-xeno-construction-resin-tunnel-uproot = We start uprooting the node so we can dig a tunnel in its place...
 rmc-xeno-construction-resin-tunnel-create-tunnel = We start digging...

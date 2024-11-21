@@ -32,7 +32,7 @@ public abstract partial class SharedXenoTunnelSystem : EntitySystem
 {
     private const string TunnelPrototypeId = "XenoTunnel";
 
-    [Dependency] protected readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] protected readonly SharedXenoHiveSystem hive = default!;
 
     public override void Initialize()
     {
@@ -60,7 +60,7 @@ public abstract partial class SharedXenoTunnelSystem : EntitySystem
     public bool TryGetHiveTunnelName(Entity<XenoTunnelComponent> xenoTunnel, [NotNullWhen(true)] out string? tunnelName)
     {
         tunnelName = null;
-        var hive = _hive.GetHive(xenoTunnel.Owner);
+        var hive = this.hive.GetHive(xenoTunnel.Owner);
         if (hive is null)
         {
             return false;
@@ -96,7 +96,7 @@ public abstract partial class SharedXenoTunnelSystem : EntitySystem
         var newTunnel = Spawn(TunnelPrototypeId, buildLocation);
         tunnelEnt = newTunnel;
 
-        _hive.SetHive(newTunnel, associatedHiveEnt);
+        hive.SetHive(newTunnel, associatedHiveEnt);
 
         return hiveComp.HiveTunnels.TryAdd(name, newTunnel);
     }
@@ -146,6 +146,12 @@ public sealed partial class XenoPlaceResinTunnelDestroyWeedSourceDoAfterEvent : 
 
     [DataField]
     public int PlasmaCost = 200;
+}
+
+[Serializable, NetSerializable]
+public sealed partial class XenoCollapseTunnelDoAfterEvent : SimpleDoAfterEvent
+{
+
 }
 
 [Serializable, NetSerializable]
