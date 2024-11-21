@@ -1,5 +1,13 @@
 ﻿rmc-xeno-strain-specialized-into = It has specialized into a {$strain}.
 
+rmc-xeno-dancer-name = Dancer
+rmc-xeno-dancer-description = TODO
+rmc-xeno-dancer-popup = A performance fit for a Queen, this one will become my instrument of death.
+
+rmc-xeno-vanguard-name = Vanguard
+rmc-xeno-vanguard-description = TODO
+rmc-xeno-vanguard-popup = Fearless you are born, fearless you serve, fearless you die. This one will become my Vanguard.
+
 rmc-xeno-warden-name = Warden
 rmc-xeno-warden-description = You trade your acid ball, acid spray, dash, and a small bit of your slash damage and speed to become an effective medic.
   You gain the ability to:

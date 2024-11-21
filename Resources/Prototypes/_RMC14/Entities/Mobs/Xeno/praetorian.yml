@@ -99,7 +99,6 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: praetorian
-  - type: AcidTrap
   - type: SlowOnPull
     slowdowns:
     - multiplier: 0.5875
@@ -137,7 +136,10 @@
   - type: XenoAcidBall
   - type: XenoEvolution
     strains:
+    - RMCXenoPraetorianDancer
+    - RMCXenoPraetorianVanguard
     - RMCXenoPraetorianWarden
+  - type: AcidTrap
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -204,3 +206,69 @@
       whitelist:
         components:
         - XenoHeavy
+  - type: AcidTrap
+
+- type: entity
+  parent: CMXenoPraetorianBase
+  id: RMCXenoPraetorianDancer
+  suffix: Dancer
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Praetorian/dancer_praetorian.rsi
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcidNormal
+    # ActionXenoImpale
+    # ActionXenoDodge
+    # ActionXenoTailTripe
+    - ActionXenoDevolve
+    hidden: true
+  - type: XenoStrain
+    name: rmc-xeno-dancer-name
+    description: rmc-xeno-dancer-description
+    popup: rmc-xeno-dancer-popup
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 4.2
+  - type: AcidTrap
+  - type: CMArmor
+    armor: 20
+  - type: XenoClaws
+    clawType: Sharp
+
+- type: entity
+  parent: CMXenoPraetorianBase
+  id: RMCXenoPraetorianVanguard
+  suffix: Vanguard
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Praetorian/vanguard_praetorian.rsi
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      590: Critical
+      690: Dead
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    # ActionXenoImpale
+    # ActionXenoDodge
+    # ActionXenoTailTripe
+    - ActionXenoDevolve
+    hidden: true
+  - type: XenoStrain
+    name: rmc-xeno-vanguard-name
+    description: rmc-xeno-vanguard-description
+    popup: rmc-xeno-vanguard-popup
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 4.12
+  - type: XenoClaws
+    clawType: Sharp
