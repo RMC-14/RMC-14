@@ -85,7 +85,7 @@
       whitelist:
         components:
         - XenoLight
-    - multiplier: 0.24
+    - multiplier: 0.2475
       whitelist:
         components:
         - XenoHeavy
@@ -207,6 +207,20 @@
       damage:
         types:
           Heat: 1
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.59
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.655
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.3825
+      whitelist:
+        components:
+        - XenoHeavy
 
 
 
