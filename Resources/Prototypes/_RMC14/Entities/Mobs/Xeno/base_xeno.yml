@@ -277,6 +277,7 @@
   - type: StunOnExplosionReceived
     weak: true
   - type: AssignXenoName
+  - type: MobGibbedByExplosionType
 
 - type: entity
   abstract: true

@@ -1,17 +1,22 @@
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Fortify;
+using Content.Shared.Body.Systems;
 using Content.Shared.Coordinates;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Explosion;
+using Content.Shared.FixedPoint;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Explosion;
 
 public abstract class SharedRMCExplosionSystem : EntitySystem
 {
+    [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
@@ -19,6 +24,8 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+
+    private static readonly ProtoId<DamageTypePrototype> StructuralDamage = "Structural";
 
     private readonly HashSet<Entity<RMCWallExplosionDeletableComponent>> _walls = new();
 
@@ -31,6 +38,9 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         SubscribeLocalEvent<ExplosionRandomResistanceComponent, GetExplosionResistanceEvent>(OnExplosionRandomResistanceGet);
 
         SubscribeLocalEvent<StunOnExplosionReceivedComponent, ExplosionReceivedEvent>(OnStunOnExplosionReceivedBeforeExplode);
+
+        SubscribeLocalEvent<DestroyedByExplosionTypeComponent, ExplosionReceivedEvent>(OnDestroyedByExplosionReceived);
+        SubscribeLocalEvent<MobGibbedByExplosionTypeComponent, ExplosionReceivedEvent>(OnMobGibbedByExplosionReceived);
     }
 
     private void OnExplosionEffectTriggered(Entity<CMExplosionEffectComponent> ent, ref CMExplosiveTriggeredEvent args)
@@ -96,6 +106,39 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             else
                 _stun.TrySlowdown(ent, TimeSpan.FromSeconds(factor / 3), true);
         }
+    }
+
+    private void OnDestroyedByExplosionReceived(Entity<DestroyedByExplosionTypeComponent> ent, ref ExplosionReceivedEvent args)
+    {
+        if (args.Explosion != ent.Comp.Explosion ||
+            args.Damage.GetTotal() < ent.Comp.Threshold)
+        {
+            return;
+        }
+
+        if (!TerminatingOrDeleted(ent))
+            QueueDel(ent);
+    }
+
+    private void OnMobGibbedByExplosionReceived(Entity<MobGibbedByExplosionTypeComponent> ent, ref ExplosionReceivedEvent args)
+    {
+        if (args.Explosion != ent.Comp.Explosion)
+            return;
+
+        var total = FixedPoint2.Zero;
+        foreach (var (type, amount) in args.Damage.DamageDict)
+        {
+            if (type == StructuralDamage)
+                continue;
+
+            total += amount;
+        }
+
+        if (total < ent.Comp.Threshold)
+            return;
+
+        if (!TerminatingOrDeleted(ent))
+            _body.GibBody(ent);
     }
 
     public void DoEffect(Entity<CMExplosionEffectComponent> ent)

@@ -167,6 +167,8 @@ public sealed class PowerLoaderSystem : EntitySystem
 
     private void OnUserActivateInWorld(Entity<PowerLoaderComponent> ent, ref UserActivateInWorldEvent args)
     {
+        var grabEv = new PowerLoaderGrabEvent(ent, args.Target, GetBuckled(ent).ToList(), args.Target);
+        RaiseLocalEvent(args.Target, ref grabEv);
         if (!CanPickupPopup(ent, args.Target, out var delay))
             return;
 
@@ -319,6 +321,11 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         var user = new Entity<PowerLoaderComponent?>(args.User, null);
         var used = args.Used;
+        var powerLoaderEv = new PowerLoaderInteractEvent(args.User, target, args.Used, GetBuckled(args.User).ToList());
+        RaiseLocalEvent(used, ref powerLoaderEv);
+        if (powerLoaderEv.Handled)
+            return;
+
         if (!CanAttachPopup(ref user, target, used, out var delay, out _))
             return;
 

@@ -220,6 +220,7 @@
     - FootstepSound
     - DoorBumpOpener
     - AnomalyHost
+  - type: MobGibbedByExplosionType
 
 - type: entity
   save: false

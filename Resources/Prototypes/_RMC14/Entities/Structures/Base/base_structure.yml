@@ -36,6 +36,7 @@
         collection: XenoResinBreak
   - type: XenoConstruct
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: NpcFactionMember
     factions:
     - RMCXeno
@@ -121,6 +122,7 @@
     isCorrodible: true
   - type: Clickable
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: DamageMultiplierFlags
     flags: Turf
   - type: ReceiverXenoClaws
