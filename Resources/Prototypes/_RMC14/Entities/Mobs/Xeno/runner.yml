@@ -169,8 +169,8 @@
   - type: CMArmor
     armor: 15
   - type: MovementSpeedModifier
-    baseWalkSpeed: 5.55
-    baseSprintSpeed: 6.66
+    baseWalkSpeed: 1.565
+    baseSprintSpeed: 6.5
   - type: XenoAcid
     canMeltStructures: false
   - type: XenoEnergy
