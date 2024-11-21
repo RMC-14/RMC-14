@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.Fireman;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Coordinates;
 using Content.Shared.Interaction;
@@ -380,13 +381,16 @@ public sealed class RMCPullingSystem : EntitySystem
             _pulling.TryStopPull(uid, pullable);
         }
 
-        var pullerQuery = EntityQueryEnumerator<PullerComponent, TransformComponent>();
-        while (pullerQuery.MoveNext(out var uid, out var puller, out var xform))
+        var pullerQuery = EntityQueryEnumerator<PullerComponent, TransformComponent, CanFiremanCarryComponent>();
+        while (pullerQuery.MoveNext(out var uid, out var puller, out var xform, out var firemanCarry))
         {
             if (HasComp<MouseRotatorComponent>(uid))
                 continue;
 
             if (puller.Pulling == null)
+                continue;
+
+            if (firemanCarry.Carrying != null)
                 continue;
 
             if (!_timing.ApplyingState)
