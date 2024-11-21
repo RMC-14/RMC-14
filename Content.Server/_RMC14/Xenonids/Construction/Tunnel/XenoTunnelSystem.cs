@@ -324,8 +324,6 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
                 enterDelay = comp.LargeXenoEnterDelay;
                 enterMessageLocID = "rmc-xeno-construction-tunnel-large-xeno-enter";
                 break;
-            default:
-                return;
         }
 
         if (tunnelName is string)
@@ -378,8 +376,6 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             case RMCSizes.Immobile:
                 moveDelay = comp.LargeXenoMoveDelay;
                 break;
-            default:
-                return;
         }
 
         var ev = new TraverseXenoTunnelDoAfterEvent();
