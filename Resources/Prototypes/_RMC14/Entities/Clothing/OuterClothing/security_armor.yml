@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: RMCBaseArmor
+  parent: [RMCAllowSuitStorageClothingArmorVest, RMCBaseArmor]
   id: RMCArmorSecurity
   name: security armor
   description: An armored vest that protects against some damage. This one has a Weston-Yamada corporate badge.
@@ -7,8 +7,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/security_armor.rsi
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
+    walkModifier: .814
+    sprintModifier: .814
   - type: CMArmor
     armor: 15 # TODO RMC14 20 bullet
     bio: 20
