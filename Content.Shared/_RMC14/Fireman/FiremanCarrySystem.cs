@@ -115,8 +115,8 @@ public sealed class FiremanCarrySystem : EntitySystem
         carrier.Carrying = ent;
         Dirty(user, carrier);
 
-        if (!_timing.ApplyingState && !HasComp<MouseRotatorComponent>(ent))
-            RemCompDeferred<NoRotateOnMoveComponent>(ent);
+        if (!_timing.ApplyingState && !HasComp<MouseRotatorComponent>(user))
+            RemCompDeferred<NoRotateOnMoveComponent>(user);
 
         args.Handled = true;
 
