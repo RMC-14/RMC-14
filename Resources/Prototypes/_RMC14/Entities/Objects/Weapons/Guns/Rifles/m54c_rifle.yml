@@ -1,9 +1,13 @@
-﻿- type: entity
+- type: entity
   parent: CMBaseWeaponRifle
   name: M54C assault rifle MK2
   id: WeaponRifleM54C
   description: The standard issue rifle of the Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.
   components:
+ # - type: Tag
+ #   tags:
+ #   - WeaponRifleM54C
+ #   - RMCGunBipodEnabled
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c.rsi
     layers:

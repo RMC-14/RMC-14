@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: RMCSecuritySurvivor
   name: cm-job-name-security-survivor 
@@ -39,7 +39,7 @@
       faction: FactionSurvivor
   hasIcon: false
 
-﻿- type: startingGear
+- type: startingGear
   id: RMCGearSurvivorSecurity
   equipment:
     head: CMHeadBeretRed

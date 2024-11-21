@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: RMCMedicalSurvivor
   name: cm-job-name-medical-survivor
@@ -40,7 +40,7 @@
   hasIcon: false
 
 
-﻿- type: startingGear
+- type: startingGear
   id: RMCGearSurvivorDoctor #RMC TODO Outer clothing: Labcoat, 15 bio armor
   equipment:
     head: CMHeadCapSurgBlue
