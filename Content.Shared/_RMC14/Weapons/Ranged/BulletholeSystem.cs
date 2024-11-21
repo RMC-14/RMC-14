@@ -31,7 +31,10 @@ public sealed class BulletholeSystem : EntitySystem
         if (ent.Comp.BulletholeState < 1 || ent.Comp.BulletholeState > MaxBulletholeState)
             ent.Comp.BulletholeState = _random.Next(1, MaxBulletholeState + 1);
 
-        var stateString = $"bhole_{ent.Comp.BulletholeState}_{(ent.Comp.BulletholeCount >= MaxBulletholeCount ? MaxBulletholeCount : ent.Comp.BulletholeCount)}";
+        var displayState = ent.Comp.BulletholeState;
+        var displayCount = ent.Comp.BulletholeCount >= MaxBulletholeCount ? MaxBulletholeCount : ent.Comp.BulletholeCount
+        var stateString = $"bhole_{displayState}_{displayCount}";
+
         _appearance.SetData(ent, BulletholeVisuals.State, stateString, app);
     }
 }
