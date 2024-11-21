@@ -29,6 +29,7 @@ using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -530,7 +531,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 var larvaContainer = _container.EnsureContainer<ContainerSlot>(uid, infected.LarvaContainerId);
                 var spawned = SpawnInContainerOrDrop(infected.BurstSpawn, uid, larvaContainer.ID);
 
-                _hive.SetHive(spawned, infected.Hive);
+                if (HasComp<XenoComponent>(spawned))
+                    _hive.SetHive(spawned, infected.Hive);
 
                 infected.CurrentStage = 6;
                 infected.SpawnedLarva = spawned;
@@ -795,6 +797,25 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         }
 
         return true;
+    }
+
+    public void SetBurstSpawn(Entity<VictimInfectedComponent> burst, EntProtoId spawn)
+    {
+        burst.Comp.BurstSpawn = spawn;
+        Dirty(burst);
+    }
+
+    public void SetBurstSound(Entity<VictimInfectedComponent> burst, SoundSpecifier sound)
+    {
+        burst.Comp.BurstSound = sound;
+        Dirty(burst);
+    }
+
+    public void TryStartBurst(Entity<VictimInfectedComponent> burst)
+    {
+        burst.Comp.BurstAt = TimeSpan.Zero;
+        Dirty(burst);
+        TryBurst(burst);
     }
 }
 
