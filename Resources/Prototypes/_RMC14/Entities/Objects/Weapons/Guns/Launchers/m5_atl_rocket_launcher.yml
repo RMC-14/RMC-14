@@ -65,6 +65,7 @@
       rmc-aslot-rail: -0.057, 0.162
   - type: IgnorePredictionHide
   - type: GunIgnorePrediction
+  - type: AssistedReloadWeapon
 
 # 84mm HE
 - type: entity
@@ -91,6 +92,7 @@
     state: m5_84mm_he
     suffix: false
   - type: IgnorePredictionHide
+  - type: AssistedReloadAmmo
 
 - type: entity
   id: RMCProjectileRocket84mm
