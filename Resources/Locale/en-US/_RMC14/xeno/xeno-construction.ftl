@@ -56,3 +56,6 @@ rmc-xeno-construction-resin-tunnel-create-tunnel = We start digging...
 rmc-xeno-construction-default-tunnel-name = Tunnel {$tunnelNumber}
 rmc-xeno-construction-failed-tunnel-rename = Tunnel names must be unique!
 rmc-xeno-construction-tunnel-examine = The pheromone scent reads: {$tunnelName}
+
+rmc-xeno-construction-tunnel-fill = You start collapsing the tunnel!
+rmc-xeno-construction-tunnel-fill-xeno-drop = The tunnel suddenly collapses, forcing you out!
