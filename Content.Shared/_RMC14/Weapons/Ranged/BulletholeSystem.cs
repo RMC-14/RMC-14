@@ -10,9 +10,8 @@ public sealed class BulletholeSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
 
     // Bullethole overlays
-    private const int MaxBulletholeState = 1;
+    private const int MaxBulletholeState = 10;
     private const int MaxBulletholeCount = 24;
-    private const string BulletholeRsiPath = "/Textures/_RMC14/Effects/bullethole.rsi";
 
     public override void Initialize()
     {

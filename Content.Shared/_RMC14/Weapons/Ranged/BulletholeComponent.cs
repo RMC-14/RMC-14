@@ -11,7 +11,7 @@ public sealed partial class BulletholeComponent : Component
     public int BulletholeCount = 0;
 
     [DataField, AutoNetworkedField]
-    public int BulletholeState = -1;
+    public int BulletholeState;
 }
 
 [Serializable, NetSerializable]
