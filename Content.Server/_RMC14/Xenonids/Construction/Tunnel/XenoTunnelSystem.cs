@@ -519,6 +519,12 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         var mobContainer = _container.EnsureContainer<Container>(xenoTunnel.Owner, XenoTunnelComponent.ContainedMobsContainerId);
 
         var tempMobList = new List<EntityUid>(mobContainer.ContainedEntities);
+        var hiveTuple = hive.GetHive(xenoTunnel.Owner);
+        if (hiveTuple is not null && TryGetHiveTunnelName(xenoTunnel, out var tunnelName))
+        {
+            var hiveComp = hiveTuple.Value.Comp;
+            hiveComp.HiveTunnels.Remove(tunnelName);
+        }
 
         foreach (var mob in tempMobList)
         {
