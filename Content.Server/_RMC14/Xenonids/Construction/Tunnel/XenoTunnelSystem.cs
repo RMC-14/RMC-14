@@ -298,7 +298,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
         if (mobContainer.Count >= xenoTunnel.Comp.MaxMobs)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-full-xeno-enter-failure"), enteringEntity, enteringEntity);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-full-xeno-failure"), enteringEntity, enteringEntity);
             return;
         }
 
@@ -360,6 +360,13 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             return;
         }
 
+        var mobContainer = _container.EnsureContainer<Container>(xenoTunnel.Owner, XenoTunnelComponent.ContainedMobsContainerId);
+        if (mobContainer.Count >= xenoTunnel.Comp.MaxMobs)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-full-xeno-failure"), traversingXeno, traversingXeno);
+            return;
+        }
+
 
         if (!TryComp(traversingXeno, out RMCSizeComponent? xenoSize))
         {
@@ -401,6 +408,12 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         var enteringEntity = args.User;
 
         var mobContainer = _container.EnsureContainer<Container>(ent, XenoTunnelComponent.ContainedMobsContainerId);
+        if (mobContainer.Count >= xenoTunnel.Comp.MaxMobs)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-full-xeno-failure"), enteringEntity, enteringEntity);
+            return;
+        }
+
         _container.Insert(enteringEntity, mobContainer);
         EnsureComp<InXenoTunnelComponent>(enteringEntity);
         _ui.OpenUi(ent, SelectDestinationTunnelUI.Key, enteringEntity);
@@ -425,6 +438,11 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         }
 
         var mobContainer = _container.EnsureContainer<Container>(ent, XenoTunnelComponent.ContainedMobsContainerId);
+        if (mobContainer.Count >= comp.MaxMobs)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-full-xeno-failure"), traversingXeno, traversingXeno);
+            return;
+        }
 
         _container.Insert(traversingXeno, mobContainer);
         _ui.OpenUi(destinationXenoTunnel.Owner, SelectDestinationTunnelUI.Key, args.User);

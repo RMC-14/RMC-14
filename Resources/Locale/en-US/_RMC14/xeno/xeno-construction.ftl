@@ -41,7 +41,8 @@ rmc-xeno-construction-resin-hole-acid-name = acid
 
 rmc-xeno-construction-tunnel-empty-non-xeno-enter-failure = You stare into the dark abyss
 rmc-xeno-construction-tunnel-occupied-non-xeno-enter-failure = You stare into the dark abyss, making out what appears to be two little lights... almost like something is watching
-rmc-xeno-construction-tunnel-full-xeno-enter-failure = The tunnel is too crowded, wait for others to exit!
+
+rmc-xeno-construction-tunnel-full-xeno-failure = The tunnel is too crowded, wait for others to exit!
 
 rmc-xeno-construction-tunnel-large-xeno-enter = We begin heaving our monstrous bulk into {$tunnelName}
 rmc-xeno-construction-tunnel-default-xeno-enter = We begin crawling down into {$tunnelName}
