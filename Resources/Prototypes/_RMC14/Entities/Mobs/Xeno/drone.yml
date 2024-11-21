@@ -75,7 +75,7 @@
     max: 200
     evolvesTo:
     - CMXenoCarrier
-#    - CMXenoBurrower
+    - CMXenoBurrower
     - CMXenoHivelord
     evolvesToWithoutPoints:
     - CMXenoQueen
