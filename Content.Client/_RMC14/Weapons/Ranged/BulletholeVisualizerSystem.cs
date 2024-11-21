@@ -1,7 +1,7 @@
 using Content.Shared._RMC14.Weapons.Ranged;
 using Robust.Client.GameObjects;
 
-namespace Content.Client.Weapons.Ranged;
+namespace Content.Client._RMC14.Weapons.Ranged;
 
 public sealed class BulletholeVisualizerSystem : VisualizerSystem<BulletholeComponent>
 {
