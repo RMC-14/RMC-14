@@ -28,7 +28,7 @@
       preset: RMCSurvivorPresetMedical
 
 ﻿- type: startingGear
-  id: RMCGearSurvivorDoctor #Port Outer clothing: Labcoat, 15 bio armor
+  id: RMCGearSurvivorDoctor #RMC TODO Outer clothing: Labcoat, 15 bio armor
   equipment:
     head: CMHeadCapSurgBlue
     mask: CMMaskSterile
