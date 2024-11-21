@@ -1,8 +1,10 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Coordinates;
+using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.MouseRotator;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
@@ -37,6 +39,7 @@ public sealed class RMCPullingSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly RotateToFaceSystem _rotateTo = default!;
 
     private readonly SoundSpecifier _pullSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg")
     {
@@ -66,6 +69,8 @@ public sealed class RMCPullingSystem : EntitySystem
         SubscribeLocalEvent<PreventPulledWhileAliveComponent, PullStoppedMessage>(OnPreventPulledWhileAliveStop);
 
         SubscribeLocalEvent<PullableComponent, PullStartedMessage>(OnPullAnimation);
+
+        SubscribeLocalEvent<PullerComponent, PullStoppedMessage>(OnPullerPullStopped);
 
         SubscribeLocalEvent<BeingPulledComponent, PullStoppedMessage>(OnBeingPulledPullStopped);
     }
@@ -293,6 +298,15 @@ public sealed class RMCPullingSystem : EntitySystem
         RemCompDeferred<BeingPulledComponent>(ent);
     }
 
+    private void OnPullerPullStopped(Entity<PullerComponent> ent, ref PullStoppedMessage args)
+    {
+        if (args.PulledUid == ent.Owner)
+            return;
+
+        if (!_timing.ApplyingState && !HasComp<MouseRotatorComponent>(ent))
+            RemCompDeferred<NoRotateOnMoveComponent>(ent);
+    }
+
     public bool IsPulling(Entity<PullerComponent?> user, Entity<PullableComponent?> target)
     {
         if (!Resolve(user, ref user.Comp, false) ||
@@ -364,6 +378,25 @@ public sealed class RMCPullingSystem : EntitySystem
                 continue;
 
             _pulling.TryStopPull(uid, pullable);
+        }
+
+        var pullerQuery = EntityQueryEnumerator<PullerComponent, TransformComponent>();
+        while (pullerQuery.MoveNext(out var uid, out var puller, out var xform))
+        {
+            if (HasComp<MouseRotatorComponent>(uid))
+                continue;
+
+            if (puller.Pulling == null)
+                continue;
+
+            if (!_timing.ApplyingState)
+                EnsureComp<NoRotateOnMoveComponent>(uid);
+
+            var pulledCoords = _transform.GetMapCoordinates(puller.Pulling.Value).Position;
+            var pullerCoords = _transform.GetMapCoordinates(uid, xform: xform).Position;
+
+            var angle = (pulledCoords - pullerCoords).ToWorldAngle().GetCardinalDir().ToAngle();
+            _rotateTo.TryFaceAngle(uid, angle, xform);
         }
     }
 }
