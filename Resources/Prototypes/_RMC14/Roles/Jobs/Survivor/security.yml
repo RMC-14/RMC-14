@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMSurvivor
+  parent: CMJobBase
   id: RMCSecuritySurvivor
   name: cm-job-name-security-survivor 
   description: cm-job-description-survivor
@@ -15,6 +15,9 @@
     group: CMJobsMedical
     time: 18000 # 5 hours
   startingGear: RMCGearSurvivorSecurity
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-nobody
   accessGroups:
   - ColonistSec
   special:
@@ -22,10 +25,19 @@
     components:
     - type: Skills
       skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillPolice: 2
         RMCSkillCqc: 2
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetSecurity
+    - type: Survivor
+    - type: MotionDetectorTracked
+    - type: UserIFF
+      faction: FactionSurvivor
+  hasIcon: false
 
 ﻿- type: startingGear
   id: RMCGearSurvivorSecurity
