@@ -7,14 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Xenonids.Burrow;
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class XenoBurrowComponent : Component
 {
-    /// <summary>
-    /// Opacity for fellow xenos when burrowed
-    /// </summary>
-    public const float BurrowOpacity = 0.5f;
-
     /// <summary>
     /// Whether the xeno is currently burrowed or not
     /// </summary>

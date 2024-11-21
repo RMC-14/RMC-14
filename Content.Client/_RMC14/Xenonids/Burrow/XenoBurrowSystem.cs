@@ -23,48 +23,23 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<XenoBurrowComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<XenoBurrowComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<XenoBurrowComponent, AfterAutoHandleStateEvent>(OnBurrowChange);
     }
 
-    private void OnStartup(Entity<XenoBurrowComponent> ent, ref ComponentStartup args)
+    private void OnBurrowChange(EntityUid ent, XenoBurrowComponent comp, ref AfterAutoHandleStateEvent args)
     {
-        if (!TryComp(ent, out SpriteComponent? sprite))
-            return;
-
-        sprite.PostShader = _prototype.Index<ShaderPrototype>("RMCInvisible").InstanceUnique();
-    }
-
-    private void OnShutdown(Entity<XenoBurrowComponent> ent, ref ComponentShutdown args)
-    {
-        if (TerminatingOrDeleted(ent))
-            return;
-
-        if (!TryComp(ent, out SpriteComponent? sprite))
-            return;
-
-        sprite.PostShader = null;
-    }
-
-    public override void Update(float frameTime)
-    {
-        var burrowed = EntityQueryEnumerator<XenoBurrowComponent, SpriteComponent>();
         var localEntity = _player.LocalEntity;
         var isXeno = HasComp<XenoComponent>(localEntity);
-
-        while (burrowed.MoveNext(out var uid, out var comp, out var sprite))
+        if (!TryComp(ent, out SpriteComponent? spriteComp))
         {
-            var opacity = 0f;
-
-            if (isXeno)
-            {
-                opacity = XenoBurrowComponent.BurrowOpacity;
-            }
-            if (!comp.Active)
-            {
-                opacity = 1f;
-            }
-            sprite.PostShader?.SetParameter("visibility", opacity);
+            return;
         }
+
+        if (comp.Active && !isXeno)
+        {
+            spriteComp.Visible = false;
+            return;
+        }
+        spriteComp.Visible = true;
     }
 }

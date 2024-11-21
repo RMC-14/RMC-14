@@ -3,6 +3,7 @@ using Content.Server.DoAfter;
 using Content.Server.Popups;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.NightVision;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Burrow;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.ActionBlocker;
@@ -40,6 +41,7 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
     [Dependency] private readonly IGameTiming _time = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly SharedActionsSystem _action = default!;
+    [Dependency] private readonly AppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {
@@ -253,12 +255,12 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
 
         RMCNightVisionVisibleComponent? nightVisionComp;
         TryComp(ent, out nightVisionComp);
-
+        _appearance.SetData(xenoBurrower, XenoVisualLayers.Burrow, comp.Active);
         if (active)
         {
             if (nightVisionComp is not null)
             {
-                nightVisionComp.Transparency = 1f - XenoBurrowComponent.BurrowOpacity;
+                nightVisionComp.Transparency = 1f;
             }
 
             foreach (var action in actions)
@@ -272,7 +274,6 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
                 actComp.Enabled = false;
                 Dirty(action.Id, actComp);
             }
-
         }
         else
         {

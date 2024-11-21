@@ -307,19 +307,16 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             return;
         }
 
-        var enterDelay = comp.StandardXenoEnterDelay;
         string? tunnelName;
+
+        var enterDelay = comp.StandardXenoEnterDelay;
         TryGetHiveTunnelName(xenoTunnel, out tunnelName);
-        string? enterMessageLocID;
+        string enterMessageLocID = "rmc-xeno-construction-tunnel-default-xeno-enter";
+
         switch (xenoSize.Size)
         {
-            case RMCSizes.VerySmallXeno:
             case RMCSizes.Small:
                 enterDelay = comp.SmallXenoEnterDelay;
-                enterMessageLocID = "rmc-xeno-construction-tunnel-default-xeno-enter";
-                break;
-            case RMCSizes.Xeno:
-                enterDelay = comp.StandardXenoEnterDelay;
                 enterMessageLocID = "rmc-xeno-construction-tunnel-default-xeno-enter";
                 break;
             case RMCSizes.Big:
@@ -331,7 +328,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
                 return;
         }
 
-        if (tunnelName is string && enterMessageLocID is string)
+        if (tunnelName is string)
         {
             _popup.PopupEntity(Loc.GetString(enterMessageLocID, ("tunnelName", tunnelName)), enteringEntity, enteringEntity);
         }
@@ -374,12 +371,8 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         var moveDelay = comp.StandardXenoMoveDelay;
         switch (xenoSize.Size)
         {
-            case RMCSizes.VerySmallXeno:
             case RMCSizes.Small:
                 moveDelay = comp.SmallXenoMoveDelay;
-                break;
-            case RMCSizes.Xeno:
-                moveDelay = comp.StandardXenoMoveDelay;
                 break;
             case RMCSizes.Big:
             case RMCSizes.Immobile:
