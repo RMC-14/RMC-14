@@ -208,6 +208,7 @@
         - XenoHeavy
   - type: AcidTrap
 
+# Note in CM due to byond magic neither dancer nor vanguard are actually faster than base prae
 - type: entity
   parent: CMXenoPraetorianBase
   id: RMCXenoPraetorianDancer
@@ -231,9 +232,6 @@
     name: rmc-xeno-dancer-name
     description: rmc-xeno-dancer-description
     popup: rmc-xeno-dancer-popup
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 2.2
-    baseSprintSpeed: 4.2
   - type: AcidTrap
   - type: CMArmor
     armor: 20
@@ -267,8 +265,5 @@
     name: rmc-xeno-vanguard-name
     description: rmc-xeno-vanguard-description
     popup: rmc-xeno-vanguard-popup
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 2.2
-    baseSprintSpeed: 4.12
   - type: XenoClaws
     clawType: Sharp
