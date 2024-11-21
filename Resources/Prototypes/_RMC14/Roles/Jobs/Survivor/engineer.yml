@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMSurvivor
+  parent: CMJobBase
   id: RMCEngineerSurvivor
   name: cm-job-name-engineer-survivor
   description: cm-job-description-survivor
@@ -15,6 +15,9 @@
     group: CMJobsMedical
     time: 18000 # 5 hours
   startingGear: RMCGearSurvivorEngineer
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-nobody
   accessGroups:
   - ColonistEngi
   special:
@@ -24,8 +27,16 @@
       skills:
         RMCSkillConstruction: 3
         RMCSkillEngineer: 3
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetEngineer
+    - type: Survivor
+    - type: MotionDetectorTracked
+    - type: UserIFF
+      faction: FactionSurvivor
+  hasIcon: false
  
 - type: startingGear
   id: RMCGearSurvivorEngineer
