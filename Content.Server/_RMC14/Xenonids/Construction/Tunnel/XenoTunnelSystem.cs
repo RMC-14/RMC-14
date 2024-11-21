@@ -489,11 +489,12 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             }
             args.Handled = true;
             var ev = new XenoCollapseTunnelDoAfterEvent();
-            var doAfterArgs = new DoAfterArgs(_entities, args.User, tunnelFillerComp.FillDelay, ev, xenoTunnel.Owner)
+            var doAfterArgs = new DoAfterArgs(_entities, args.User, tunnelFillerComp.FillDelay, ev, xenoTunnel.Owner, xenoTunnel, tool)
             {
                 BreakOnMove = true,
+                NeedHand = true,
                 BreakOnDropItem = true,
-                BreakOnHandChange = true
+                BreakOnHandChange = true,
             };
 
             _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-fill"), args.User, args.User);
