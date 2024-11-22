@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added twenty more spaceborne gauss turrets around every landing zone.
-    type: Tweak
-  id: 499
-  time: '2024-08-01T10:12:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3443
-- author: crystalHex
-  changes:
-  - message: Speedloaders can now be stored in armor storage.
-    type: Fix
-  id: 500
-  time: '2024-08-01T21:06:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3453
 - author: KalimbaMachine
   changes:
   - message: Reworked RMC Clipboard to show paper
@@ -4909,5 +4895,22 @@
   id: 998
   time: '2024-11-19T12:38:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4867
+- author: CyberTropic
+  changes:
+  - message: Added bulletholes.
+    type: Add
+  id: 999
+  time: '2024-11-22T00:06:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4896
+- author: Rainbeon
+  changes:
+  - message: Tackling no longer goes on cooldown if it fails to connect on the server.
+    type: Fix
+  - message: Fixed the tackle success popup not being unpredicted like the tackle
+      attempt message.
+    type: Fix
+  id: 1000
+  time: '2024-11-22T00:06:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4899
 Name: RMC14
 Order: -1
