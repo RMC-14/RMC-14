@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added filters to the Overwatch console for dead, hidden, shipside and
-      planetside marines.
-    type: Add
-  - message: Added being able to manually hide specific marines on the Overwatch console.
-      Pressing show hidden will show them again, and let you unhide them.
-    type: Add
-  - message: Fixed marines in cryo-storage being shown in the overwatch console marine
-      list.
-    type: Fix
-  id: 504
-  time: '2024-08-03T12:32:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3494
 - author: CaasGit
   changes:
   - message: Make folders work as expected.
@@ -4916,5 +4902,14 @@
   id: 1003
   time: '2024-11-22T00:15:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4891
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Scouts now uncloak when they get infected by a parasite.
+    type: Tweak
+  - message: Fix ghillie suit cloak breaking when you press the walk button.
+    type: Fix
+  id: 1004
+  time: '2024-11-22T00:18:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4877
 Name: RMC14
 Order: -1
