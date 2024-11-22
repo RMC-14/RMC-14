@@ -28,6 +28,7 @@
   - type: Physics
     bodyType: Static
   - type: InteractionPopup
+    interactDelay: 10
     interactSuccessString: comp-window-knock
     messagePerceivedByOthers: comp-window-knock
     interactSuccessSound:
