@@ -55,8 +55,14 @@
     whitelist:
       components:
       - ScoutWhitelist
-    cloakSound: /Audio/_RMC14/Effects/Cloak/cloak_scout_on.ogg
-    uncloakSound: /Audio/_RMC14/Effects/Cloak/cloak_scout_off.ogg
+    cloakSound:
+      path: /Audio/_RMC14/Effects/Cloak/cloak_scout_on.ogg
+      params:
+        variation: 0.09
+    uncloakSound:
+      path: /Audio/_RMC14/Effects/Cloak/cloak_scout_off.ogg
+      params:
+        variation: 0.09
   - type: Corrodible
     isCorrodible: false
 

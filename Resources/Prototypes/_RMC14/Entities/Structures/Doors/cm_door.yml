@@ -96,6 +96,7 @@
   - type: RMCDropshipBlocked
   - type: Corrodible
     isCorrodible: false
+    structure: true
 
 - type: entity
   abstract: true

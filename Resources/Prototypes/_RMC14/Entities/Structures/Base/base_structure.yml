@@ -16,6 +16,7 @@
   components:
   - type: Corrodible
     timeToApply: 4
+    structure: true
 
 - type: entity
   parent: BaseStructure
@@ -125,6 +126,8 @@
     flags: Turf
   - type: ReceiverXenoClaws
     hitsToDestroy: 20
+  - type: Appearance
+  - type: Bullethole
 
 - type: entity
   parent:

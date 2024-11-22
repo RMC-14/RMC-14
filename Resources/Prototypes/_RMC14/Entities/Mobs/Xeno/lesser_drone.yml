@@ -95,6 +95,8 @@
     trapLevel: 1
     cost: 70
     spray: XenoAcidSprayTrapWeak
+  - type: Evasion
+    evasion: 10
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.563
     baseSprintSpeed: 4.167

@@ -83,6 +83,8 @@
     - CMXenoHivelord
     evolvesToWithoutPoints:
     - CMXenoQueen
+  - type: Evasion
+    evasion: 20
 
 - type: entity
   parent: CMXenoDroneBase
