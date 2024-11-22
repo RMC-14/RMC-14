@@ -1,4 +1,4 @@
-﻿- type: department
+- type: department
   parent: CMDepartmentBase
   id: CMSurvivor
   name: department-CMSurvivor
@@ -6,3 +6,7 @@
   color: "#C38312"
   roles:
   - CMSurvivor
+  - CMSurvivorHostile
+  - RMCEngineerSurvivor
+  - RMCSecuritySurvivor
+  - RMCMedicalSurvivor

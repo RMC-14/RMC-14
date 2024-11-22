@@ -48,10 +48,28 @@ public sealed class SurvivorRuleSystem : SharedSurvivorSystem
     /// <returns></returns>
     private string MakeBriefing(EntityUid mob)
     {
-        var planet = _distressSignal.SelectedPlanetMapName ?? string.Empty;
-        var briefing = Loc.GetString("clf-civilian-role-briefing",("planet", planet));
+        string planet = _distressSignal.SelectedPlanetMapName ?? string.Empty;
+        string ModifyPlanetNameSurvivor(string planet)
+        {
+            // TODO RMC14 save these somewhere and avert the shitcode
+            var name = planet.Replace("/Maps/_RMC14/", "").Replace(".yml", "");
+            return name switch
+            {
+                "LV-624" => "the self-sustaining LV-624 colony",
+                "Solaris Ridge" => "an underfunded virology labsite most called Solaris Ridge",
+                "Fiorina Science Annex" => "the Fiorina research complex",
+                "Shivas Snowball" => "the Shivas habitat-factory",
+                "Trijent Dam" => "the famous Trijent dam",
+                "New Varadero" => "the archaeology digsite, Varadero",
+                _ => name,
+            };
+
+        }
+        var briefing = Loc.GetString("clf-civilian-role-briefing", ("planet", ModifyPlanetNameSurvivor(planet)));
 
         return briefing;
 
     }
 }
+
+
