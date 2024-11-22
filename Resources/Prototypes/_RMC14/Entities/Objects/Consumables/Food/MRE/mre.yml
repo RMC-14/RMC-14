@@ -92,6 +92,7 @@
     - id: CMExecutiveWEYAMatchbook
       orGroup: matchbook
   - type: FixedItemSizeStorage
+  - type: RemoveOnlyStorage
   - type: InteractedBlacklist
     blacklist:
       components:

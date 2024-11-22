@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
@@ -167,6 +168,9 @@ public sealed class ChatUIController : UIController
     public ChatSelectChannel SelectableChannels { get; private set; }
     private ChatSelectChannel PreferredChannel { get; set; } = ChatSelectChannel.OOC;
 
+    private bool _colorBlindMode;
+    private ImmutableArray<(string Color, string ColorblindColor)> _colorBlindReplacements = ImmutableArray<(string Color, string ColorblindColor)>.Empty;
+
     public event Action<ChatSelectChannel>? CanSendChannelsChanged;
     public event Action<ChatChannel>? FilterableChannelsChanged;
     public event Action<ChatSelectChannel>? SelectableChannelsChanged;
@@ -239,7 +243,16 @@ public sealed class ChatUIController : UIController
         }
 
         _config.OnValueChanged(CCVars.ChatWindowOpacity, OnChatWindowOpacityChanged);
+        _config.OnValueChanged(CCVars.AccessibilityColorblindFriendly, v => _colorBlindMode = v, true);
 
+        var colors = new List<(string Color, string ColorblindColor)>();
+        foreach (var channel in _prototypeManager.EnumeratePrototypes<RadioChannelPrototype>())
+        {
+            if (channel.ColorblindColor is { } colorblindColor)
+                colors.Add((channel.Color.ToHex(), colorblindColor.ToHex()));
+        }
+
+        _colorBlindReplacements = colors.ToImmutableArray();
     }
 
     public void OnScreenLoad()
@@ -816,6 +829,15 @@ public sealed class ChatUIController : UIController
 
     public void ProcessChatMessage(ChatMessage msg, bool speechBubble = true)
     {
+        if (_colorBlindMode)
+        {
+            foreach (var (color, colorblindColor) in _colorBlindReplacements)
+            {
+                msg.Message = msg.Message.Replace($"[color={color}]", $"[color={colorblindColor}]");
+                msg.WrappedMessage = msg.WrappedMessage.Replace($"[color={color}]", $"[color={colorblindColor}]");
+            }
+        }
+
         // color the name unless it's something like "the old man"
         if ((msg.Channel == ChatChannel.Local || msg.Channel == ChatChannel.Whisper) && _chatNameColorsEnabled)
         {

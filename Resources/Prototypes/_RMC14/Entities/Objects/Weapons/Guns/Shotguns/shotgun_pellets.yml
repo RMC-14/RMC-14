@@ -170,5 +170,5 @@
     amount: 5
   - type: ProjectileSpread
     proto: RMCPelletShotgunBreaching
-    count: 3
+    count: 4
     spread: 16
