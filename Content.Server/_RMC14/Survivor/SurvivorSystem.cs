@@ -48,7 +48,7 @@ public sealed class SurvivorRuleSystem : SharedSurvivorSystem
     /// <returns></returns>
     private string MakeBriefing(EntityUid mob)
     {
-        string planet = _distressSignal.SelectedPlanetMapName ?? string.Empty;
+                string planet = _distressSignal.SelectedPlanetMapName ?? string.Empty;
         string ModifyPlanetNameSurvivor(string planet)
         {
             // TODO RMC14 save these somewhere and avert the shitcode
@@ -70,6 +70,4 @@ public sealed class SurvivorRuleSystem : SharedSurvivorSystem
         return briefing;
 
     }
-}
-
-
+ }
