@@ -17,7 +17,6 @@
     tags:
     - WeaponRifleM54CE2
     - RMCGunBipodFullAuto
-    - RMCGunBipodEnabled
   - type: Gun
     shotsPerBurst: 5
     selectedMode: SemiAuto

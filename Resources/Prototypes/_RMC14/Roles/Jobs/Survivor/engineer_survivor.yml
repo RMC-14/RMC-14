@@ -1,9 +1,9 @@
-- type: job
+﻿- type: job
   parent: CMJobBase
-  id: RMCSecuritySurvivor
-  name: cm-job-name-security-survivor 
+  id: RMCEngineerSurvivor
+  name: cm-job-name-engineer-survivor
   description: cm-job-description-survivor
-  playTimeTracker: RMCJobSurvivorSecurity
+  playTimeTracker: RMCJobSurvivorEngineer
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMSquad
@@ -14,51 +14,51 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 18000 # 5 hours
-  startingGear: RMCGearSurvivorSecurity
+  startingGear: RMCGearSurvivorEngineer
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-nobody
   accessGroups:
-  - ColonistSec
+  - ColonistEngi
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
-        RMCSkillConstruction: 1
+        RMCSkillConstruction: 3
+        RMCSkillEngineer: 3
         RMCSkillEndurance: 2
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
-        RMCSkillPolice: 2
-        RMCSkillCqc: 2
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetSecurity
+      preset: RMCSurvivorPresetEngineer
     - type: Survivor
     - type: MotionDetectorTracked
     - type: UserIFF
       faction: FactionSurvivor
   hasIcon: false
-
+ 
 - type: startingGear
-  id: RMCGearSurvivorSecurity
+  id: RMCGearSurvivorEngineer
   equipment:
-    head: CMHeadBeretRed
-    eyes: CMGlassesSecurity
-    jumpsuit: ClothingUniformJumpsuitSec 
-    back: CMSatchelSecurity
-    shoes: RMCShoesJackboots
-    id: CMIDCardColonist # Marshalls actually get a badge looking thang
+    head: ClothingHeadHatBeretEngineering
+    eyes: ClothingEyesGlassesMeson
+    gloves: CMHandsInsulated
+    jumpsuit: ClothingUniformJumpsuitEngineering
+    back: CMSatchelEngineer
+    shoes: ClothingShoesColorOrange
+    id: CMIDCardColonist
     ears: CMHeadsetColony
     pocket1: RMCM5Bayonet
     pocket2: RMCFlashlight
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorSecurity
-  name: survivor security spawn point
+  id: RMCSpawnPointSurvivorEngineer
+  name: survivor engineer spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSecuritySurvivor
+    job_id: RMCEngineerSurvivor
   - type: Sprite
     layers:
     - sprite: Markers/jobs.rsi
@@ -66,5 +66,5 @@
     - state: survivor
 
 - type: playTimeTracker
-  id: RMCJobSurvivorSecurity
+  id: RMCJobSurvivorEngineer
   isHumanoid: true
