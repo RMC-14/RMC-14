@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Sigil
-  changes:
-  - message: The spec GL can no longer phase its grenades through doors.
-    type: Fix
-  id: 502
-  time: '2024-08-03T04:11:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3491
-- author: Vermidia
-  changes:
-  - message: Fixed charge hitting allied xenos.
-    type: Fix
-  id: 503
-  time: '2024-08-03T12:28:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3468
 - author: DrSmugleaf
   changes:
   - message: Added filters to the Overwatch console for dead, hidden, shipside and
@@ -4913,5 +4899,22 @@
   id: 1001
   time: '2024-11-22T00:13:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4879
+- author: DummeHytteOst
+  changes:
+  - message: Xenos are now more tech illiterate.
+    type: Tweak
+  - message: Fixed Xenos being able to use security cameras, the all-in-one grinder,
+      and the booze dispenser.
+    type: Fix
+  id: 1002
+  time: '2024-11-22T00:14:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4881
+- author: DummeHytteOst
+  changes:
+  - message: Fixed Xenos not being able to devour standing victims that aren't moving.
+    type: Fix
+  id: 1003
+  time: '2024-11-22T00:15:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4891
 Name: RMC14
 Order: -1
