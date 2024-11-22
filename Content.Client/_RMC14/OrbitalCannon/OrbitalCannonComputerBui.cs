@@ -14,12 +14,14 @@ public sealed class OrbitalCannonComputerBui : BoundUserInterface
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private readonly ContainerSystem _container;
+    private readonly OrbitalCannonSystem _orbitalCannon;
 
     private OrbitalCannonWindow? _window;
 
     public OrbitalCannonComputerBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _container = EntMan.System<ContainerSystem>();
+        _orbitalCannon = EntMan.System<OrbitalCannonSystem>();
     }
 
     protected override void Open()
@@ -64,14 +66,15 @@ public sealed class OrbitalCannonComputerBui : BoundUserInterface
 
         switch (computer.Status)
         {
-            case CannonStatus.Unloaded:
+            case OrbitalCannonStatus.Unloaded:
                 _window.TrayButtonOne.Text = "Load tray";
                 _window.TrayButtonOne.Visible = true;
                 _window.TrayButtonOne.OnPressed += LoadTray;
                 _window.TrayButtonTwo.Visible = false;
                 _window.TrayButtonLabel.Visible = false;
+                _window.TrayButtonOne.Disabled = computer.Warhead == null || computer.Fuel == 0;
                 break;
-            case CannonStatus.Loaded:
+            case OrbitalCannonStatus.Loaded:
                 _window.TrayButtonOne.Text = "Unload tray";
                 _window.TrayButtonOne.Visible = true;
                 _window.TrayButtonOne.OnPressed += UnloadTray;
@@ -80,7 +83,7 @@ public sealed class OrbitalCannonComputerBui : BoundUserInterface
                 _window.TrayButtonTwo.OnPressed += ChamberTray;
                 _window.TrayButtonLabel.Visible = false;
                 break;
-            case CannonStatus.Chambered:
+            case OrbitalCannonStatus.Chambered:
                 _window.TrayButtonOne.Visible = false;
                 _window.TrayButtonTwo.Visible = false;
                 _window.TrayButtonLabel.Text = "The tray is chambered, you cannot unchamber it.";

@@ -628,6 +628,12 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
     }
 
+    public void TrySyncHands(Entity<PowerLoaderComponent?> loader)
+    {
+        if (Resolve(loader, ref loader.Comp, false))
+            SyncHands((loader, loader.Comp));
+    }
+
     private void DeleteVirtuals(Entity<PowerLoaderComponent> loader, EntityUid user)
     {
         var virtualContainer = _container.EnsureContainer<Container>(loader, loader.Comp.VirtualContainerId);

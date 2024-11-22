@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Camera;
+using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Extensions;
 using Content.Shared._RMC14.Map;
@@ -41,6 +42,7 @@ public abstract class SharedMortarSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
@@ -424,7 +426,7 @@ public abstract class SharedMortarSystem : EntitySystem
         return false;
     }
 
-    private void PopupWarning(MapCoordinates coordinates, float range, LocId warning, LocId warningAbove)
+    public void PopupWarning(MapCoordinates coordinates, float range, LocId warning, LocId warningAbove)
     {
         foreach (var session in _player.NetworkedSessions)
         {

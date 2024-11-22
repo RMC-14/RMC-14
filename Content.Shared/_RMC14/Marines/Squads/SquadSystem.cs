@@ -380,6 +380,14 @@ public sealed class SquadSystem : EntitySystem
         return member.Comp.Squad is { } memberSquad && Prototype(memberSquad)?.ID == squad.Id;
     }
 
+    public bool IsInSquad(Entity<SquadMemberComponent?> member, EntityUid squad)
+    {
+        if (!Resolve(member, ref member.Comp, false))
+            return false;
+
+        return member.Comp.Squad is { } memberSquad && memberSquad == squad;
+    }
+
     public void PromoteSquadLeader(Entity<SquadMemberComponent?> toPromote, EntityUid user)
     {
         if (HasComp<SquadLeaderComponent>(toPromote))

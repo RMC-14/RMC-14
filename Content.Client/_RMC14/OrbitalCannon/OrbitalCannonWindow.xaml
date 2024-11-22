@@ -11,7 +11,7 @@
         <RichTextLabel Text="[bold]Fuel status[/bold]" Margin="0 20 0 0" />
         <ui:BlueHorizontalSeparator />
         <Label Name="FuelStatusLabel" Access="Public" HorizontalExpand="True" />
-        <Label Name="FuelRequirementsLabel" Access="Public" Margin="0 5 0 0" />
+        <Label Name="FuelRequirementsLabel" Access="Public" Margin="0 20 0 0" />
         <RichTextLabel Text="[bold]Tray status[/bold]" Margin="0 20 0 0" />
         <ui:BlueHorizontalSeparator />
         <Button Name="TrayButtonOne" Access="Public" StyleClasses="OpenBoth" />

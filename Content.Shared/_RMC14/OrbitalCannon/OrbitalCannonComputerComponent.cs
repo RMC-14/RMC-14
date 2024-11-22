@@ -16,5 +16,5 @@ public sealed partial class OrbitalCannonComputerComponent : Component
     public List<WarheadFuelRequirement> FuelRequirements = new();
 
     [DataField, AutoNetworkedField]
-    public CannonStatus Status = CannonStatus.Unloaded;
+    public OrbitalCannonStatus Status = OrbitalCannonStatus.Unloaded;
 }

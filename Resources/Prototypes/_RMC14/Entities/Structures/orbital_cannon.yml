@@ -22,11 +22,21 @@
         - WallLayer
   - type: Sprite
     sprite: _RMC14/Structures/orbital_cannon.rsi
-    state: obc_unloaded
     offset: 1.5, 0.5
+    layers:
+    - state: obc_unloaded
+      map: [ "base" ]
   - type: Clickable
   - type: InteractionOutline
   - type: OrbitalCannon
+  - type: Appearance
+  - type: GenericVisualizer # TODO RMC14 animations
+    visuals:
+      enum.OrbitalCannonVisuals.Base:
+        base:
+          Loaded: { state: obc_loaded }
+          Unloaded: { state: obc_unloaded }
+          Chambered: { state: obc_chambered }
 
 - type: entity
   id: RMCOrbitalCannonFuel
@@ -153,6 +163,8 @@
       slope: 10
       max: 90
       delay: 0.6
+  - type: WarpPoint
+    location: 1 orbital bombardment
 
 - type: entity
   id: RMCOrbitalCannonComputer

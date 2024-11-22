@@ -107,7 +107,36 @@ public sealed class OverwatchConsoleSupplyDropSaveBuiMsg(int longitude, int lati
 }
 
 [Serializable, NetSerializable]
-public sealed class OverwatchConsoleSupplyDropCommentBuiMsg(int index, string comment) : BoundUserInterfaceMessage
+public sealed class OverwatchConsoleLocationCommentBuiMsg(int index, string comment) : BoundUserInterfaceMessage
+{
+    public readonly int Index = index;
+    public readonly string Comment = comment;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleOrbitalLongitudeBuiMsg(int longitude) : BoundUserInterfaceMessage
+{
+    public readonly int Longitude = longitude;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleOrbitalLatitudeBuiMsg(int latitude) : BoundUserInterfaceMessage
+{
+    public readonly int Latitude = latitude;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleOrbitalLaunchBuiMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleOrbitalSaveBuiMsg(int longitude, int latitude) : BoundUserInterfaceMessage
+{
+    public readonly int Longitude = longitude;
+    public readonly int Latitude = latitude;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleOrbitalCommentBuiMsg(int index, string comment) : BoundUserInterfaceMessage
 {
     public readonly int Index = index;
     public readonly string Comment = comment;

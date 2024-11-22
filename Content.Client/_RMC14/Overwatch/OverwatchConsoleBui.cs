@@ -164,6 +164,23 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                         SendPredictedMessage(msg);
                     };
 
+                monitor.OrbitalLongitude.Value = console.OrbitalCoordinates.X;
+                monitor.OrbitalLatitude.Value = console.OrbitalCoordinates.Y;
+                monitor.OrbitalLongitude.OnValueChanged +=
+                    args => SendPredictedMessage(new OverwatchConsoleOrbitalLongitudeBuiMsg((int) args.Value));
+                monitor.OrbitalLatitude.OnValueChanged +=
+                    args => SendPredictedMessage(new OverwatchConsoleOrbitalLatitudeBuiMsg((int) args.Value));
+                monitor.OrbitalFireButton.OnPressed +=
+                    _ => SendPredictedMessage(new OverwatchConsoleOrbitalLaunchBuiMsg());
+                monitor.OrbitalSaveButton.OnPressed +=
+                    _ =>
+                    {
+                        var longitude = (int)monitor.Longitude.Value;
+                        var latitude = (int)monitor.Latitude.Value;
+                        var msg = new OverwatchConsoleOrbitalSaveBuiMsg(longitude, latitude);
+                        SendPredictedMessage(msg);
+                    };
+
                 monitor.MessageSquadButton.OnPressed += _ =>
                 {
                     var window = new OverwatchTextInputWindow();
@@ -538,102 +555,147 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                 ? "Hide hidden"
                 : "Show hidden";
 
+            var margin = new Thickness(2);
             if (supplyDrop != null)
             {
                 squad.HasCrate = supplyDrop.HasCrate;
                 squad.NextLaunchAt = supplyDrop.NextLaunchAt;
-                squad.Longitudes.DisposeAllChildren();
 
-                var margin = new Thickness(2);
-                var panel = CreatePanel(50);
-                panel.AddChild(new Label
-                {
-                    Text = "LONG.",
-                    Margin = margin,
-                });
-                squad.Longitudes.AddChild(panel);
-
-                squad.Latitudes.DisposeAllChildren();
-                panel = CreatePanel(50);
-                panel.AddChild(new Label
-                {
-                    Text = "LAT.",
-                    Margin = margin,
-                });
-                squad.Latitudes.AddChild(panel);
-
-                squad.Comments.DisposeAllChildren();
-                panel = CreatePanel(50);
-                panel.AddChild(new Label
-                {
-                    Text = "COMMENT",
-                    Margin = margin,
-                });
-                squad.Comments.AddChild(panel);
-
-                squad.Saves.DisposeAllChildren();
-                panel = CreatePanel(50);
-                panel.AddChild(new Label
-                {
-                    Text = " ",
-                    Margin = margin,
-                });
-
-                squad.Saves.AddChild(panel);
-
-                for (var i = 0; i < console.SupplyDropLocations.Length; i++)
-                {
-                    if (console.SupplyDropLocations[i] is not { } location)
-                        continue;
-
-                    panel = CreatePanel(50);
-                    panel.AddChild(new Label
-                    {
-                        Text = $"{location.Longitude}",
-                        Margin = margin,
-                    });
-                    squad.Longitudes.AddChild(panel);
-
-                    panel = CreatePanel(50);
-                    panel.AddChild(new Label
-                    {
-                        Text = $"{location.Latitude}",
-                        Margin = margin,
-                    });
-                    squad.Latitudes.AddChild(panel);
-
-                    var comment = new LineEdit { Text = $"{location.Comment}" };
-                    var index = i;
-                    comment.OnTextEntered += args => SaveComment(index, args.Text);
-
-                    panel = CreatePanel(50);
-                    panel.AddChild(comment);
-                    squad.Comments.AddChild(panel);
-
-                    panel = CreatePanel(50);
-                    var saveButton = new Button
-                    {
-                        MaxWidth = 25,
-                        MaxHeight = 25,
-                        VerticalAlignment = VAlignment.Top,
-                        StyleClasses = { "OpenBoth" },
-                        Text = "<",
-                        ModulateSelfOverride = Color.FromHex("#D3B400"),
-                        ToolTip = "Save Comment",
-                    };
-                    saveButton.OnPressed += _ =>
+                AddSaving(squad.Longitudes, squad.Latitudes, squad.Comments, squad.Saves, margin);
+                AddSavedLocation(
+                    console.SavedLocations,
+                    margin,
+                    squad.Longitudes,
+                    squad.Latitudes,
+                    squad.Comments,
+                    squad.Saves,
+                    location =>
                     {
                         squad.Longitude.Value = location.Longitude;
                         squad.Latitude.Value = location.Latitude;
 
                         SendPredictedMessage(new OverwatchConsoleSupplyDropLongitudeBuiMsg(location.Longitude));
                         SendPredictedMessage(new OverwatchConsoleSupplyDropLatitudeBuiMsg(location.Latitude));
-                    };
-
-                    panel.AddChild(saveButton);
-                    squad.Saves.AddChild(panel);
-                }
+                    }
+                );
             }
+
+            AddSaving(squad.OrbitalLongitudes, squad.OrbitalLatitudes, squad.OrbitalComments, squad.OrbitalSaves, margin);
+            AddSavedLocation(
+                console.SavedLocations,
+                margin,
+                squad.OrbitalLongitudes,
+                squad.OrbitalLatitudes,
+                squad.OrbitalComments,
+                squad.OrbitalSaves,
+                location =>
+                {
+                    squad.Longitude.Value = location.Longitude;
+                    squad.Latitude.Value = location.Latitude;
+
+                    SendPredictedMessage(new OverwatchConsoleOrbitalLongitudeBuiMsg(location.Longitude));
+                    SendPredictedMessage(new OverwatchConsoleOrbitalLatitudeBuiMsg(location.Latitude));
+                }
+            );
+
+            squad.HasOrbital = console.HasOrbital;
+        }
+    }
+
+    private void AddSaving(BoxContainer longitudes, BoxContainer latitudes, BoxContainer comments, BoxContainer saves, Thickness margin)
+    {
+        longitudes.DisposeAllChildren();
+
+        var panel = CreatePanel(50);
+        panel.AddChild(new Label
+        {
+            Text = "LONG.",
+            Margin = margin,
+        });
+        longitudes.AddChild(panel);
+
+        latitudes.DisposeAllChildren();
+        panel = CreatePanel(50);
+        panel.AddChild(new Label
+        {
+            Text = "LAT.",
+            Margin = margin,
+        });
+        latitudes.AddChild(panel);
+
+        comments.DisposeAllChildren();
+        panel = CreatePanel(50);
+        panel.AddChild(new Label
+        {
+            Text = "COMMENT",
+            Margin = margin,
+        });
+        comments.AddChild(panel);
+
+        saves.DisposeAllChildren();
+        panel = CreatePanel(50);
+        panel.AddChild(new Label
+        {
+            Text = " ",
+            Margin = margin,
+        });
+
+        saves.AddChild(panel);
+    }
+
+    private void AddSavedLocation(
+        OverwatchSavedLocation?[] locations,
+        Thickness margin,
+        BoxContainer longitudes,
+        BoxContainer latitudes,
+        BoxContainer comments,
+        BoxContainer saves,
+        Action<OverwatchSavedLocation> onSave)
+    {
+        for (var i = 0; i < locations.Length; i++)
+        {
+            if (locations[i] is not { } location)
+                continue;
+
+            var panel = CreatePanel(50);
+            panel.AddChild(new Label
+            {
+                Text = $"{location.Longitude}",
+                Margin = margin,
+            });
+            longitudes.AddChild(panel);
+
+            panel = CreatePanel(50);
+            panel.AddChild(new Label
+            {
+                Text = $"{location.Latitude}",
+                Margin = margin,
+            });
+            latitudes.AddChild(panel);
+
+            var comment = new LineEdit { Text = $"{location.Comment}" };
+            var index = i;
+            comment.OnTextEntered += args => SaveComment(index, args.Text);
+
+            panel = CreatePanel(50);
+            panel.AddChild(comment);
+            comments.AddChild(panel);
+
+            panel = CreatePanel(50);
+            var saveButton = new Button
+            {
+                MaxWidth = 25,
+                MaxHeight = 25,
+                VerticalAlignment = VAlignment.Top,
+                StyleClasses = { "OpenBoth" },
+                Text = "<",
+                ModulateSelfOverride = Color.FromHex("#D3B400"),
+                ToolTip = "Save Comment",
+            };
+            saveButton.OnPressed += _ => onSave(location);
+
+            panel.AddChild(saveButton);
+            saves.AddChild(panel);
         }
     }
 
@@ -674,7 +736,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
         if (text.Length > 50)
             text = text[..50];
 
-        SendPredictedMessage(new OverwatchConsoleSupplyDropCommentBuiMsg(index, text));
+        SendPredictedMessage(new OverwatchConsoleLocationCommentBuiMsg(index, text));
     }
 
     public void Refresh()

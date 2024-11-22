@@ -7,6 +7,9 @@ namespace Content.Shared._RMC14.OrbitalCannon;
 public sealed partial class OrbitalCannonExplosionComponent : Component
 {
     [DataField, AutoNetworkedField]
+    public bool Laser;
+
+    [DataField, AutoNetworkedField]
     public List<OrbitalCannonExplosion> Steps = new();
 
     [DataField, AutoNetworkedField]
