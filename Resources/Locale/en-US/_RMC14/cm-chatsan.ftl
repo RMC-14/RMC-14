@@ -241,6 +241,24 @@ cm-chatsan-replacement-cat = feline host
 cm-chatsan-word-cats = cats
 cm-chatsan-replacement-cats = feline hosts
 
+cm-chatsan-word-vulpkanin = vulpkanin
+cm-chatsan-replacement-vulpkanin = canine host
+
+cm-chatsan-word-vulpkanins = vulpkanins
+cm-chatsan-replacement-vulpkanins = canine hosts
+
+cm-chatsan-word-vulp = vulp
+cm-chatsan-replacement-vulp = canine host
+
+cm-chatsan-word-vulps = vulps
+cm-chatsan-replacement-vulps = canine hosts
+
+cm-chatsan-word-dog = dog
+cm-chatsan-replacement-dog = canine host
+
+cm-chatsan-word-dogs = dogs
+cm-chatsan-replacement-dogs = canine hosts
+
 cm-chatsan-word-avali = avali
 cm-chatsan-replacement-avali = four-eared host
 
