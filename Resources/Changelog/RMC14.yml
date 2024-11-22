@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Sigil
-  changes:
-  - message: You can no longer use binoculars when not holding them in your active
-      hand.
-    type: Fix
-  id: 512
-  time: '2024-08-04T09:21:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3526
 - author: Whisper
   changes:
   - message: Added Shawn Fox, Madelynn 'Buzz' Lewis figurines
@@ -4954,5 +4946,12 @@
   id: 1011
   time: '2024-11-22T09:00:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4816
+- author: TsjipTsjip
+  changes:
+  - message: Mutiny tooling.
+    type: Add
+  id: 1012
+  time: '2024-11-22T09:01:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4882
 Name: RMC14
 Order: -1
