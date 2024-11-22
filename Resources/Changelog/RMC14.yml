@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: KalimbaMachine
-  changes:
-  - message: Reworked RMC Clipboard to show paper
-    type: Tweak
-  id: 501
-  time: '2024-08-02T04:33:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3471
 - author: Sigil
   changes:
   - message: The spec GL can no longer phase its grenades through doors.
@@ -4912,5 +4905,13 @@
   id: 1000
   time: '2024-11-22T00:06:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4899
+- author: Vermidia
+  changes:
+  - message: Fixed Bodybags and Stasisbags letting you perform some actions by having
+      them down you on enter (you still don't your drop held items)
+    type: Fix
+  id: 1001
+  time: '2024-11-22T00:13:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4879
 Name: RMC14
 Order: -1
