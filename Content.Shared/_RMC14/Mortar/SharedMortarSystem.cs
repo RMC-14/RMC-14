@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Chat;
 using Content.Shared.Construction.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
@@ -451,8 +452,8 @@ public abstract class SharedMortarSystem : EntitySystem
 
             if (chat)
             {
-                msg = "[font size=16][color=red][/color][/font]";
-                _rmcChat.ChatMessageToOne(msg, recipient);
+                msg = $"[bold][font size=24][color=red]\n{msg}\n[/color][/font][/bold]";
+                _rmcChat.ChatMessageToOne(ChatChannel.Radio, msg, msg, default, false, session.Channel);
             }
         }
     }
