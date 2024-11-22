@@ -106,6 +106,11 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<GunGroupSpreadPenaltyComponent, GotUnequippedHandEvent>(OnGroupSpreadPenaltyUnequippedHand);
         SubscribeLocalEvent<GunGroupSpreadPenaltyComponent, GunRefreshModifiersEvent>(OnGroupSpreadPenaltyRefreshModifiers);
         SubscribeLocalEvent<GunGroupSpreadPenaltyComponent, AmmoShotEvent>(OnGroupSpreadPenaltyAmmoShot);
+
+        SubscribeLocalEvent<AssistedReloadAmmoComponent, AfterInteractEvent>(OnAssistedReloadAmmoAfterInteract);
+
+        SubscribeLocalEvent<AssistedReloadWeaponComponent, ItemWieldedEvent>(OnAssistedReloadWeaponWielded);
+        SubscribeLocalEvent<AssistedReloadWeaponComponent, ItemUnwieldedEvent>(OnAssistedReloadWeaponUnwielded);
     }
 
     /// <summary>
@@ -560,5 +565,86 @@ public sealed class CMGunSystem : EntitySystem
                 _gun.RefreshModifiers(held);
             }
         }
+    }
+
+    private void OnAssistedReloadAmmoAfterInteract(Entity<AssistedReloadAmmoComponent> ent, ref AfterInteractEvent args)
+    {
+        if (!args.CanReach || args.Target == null)
+            return;
+
+        TryAssistedReload(args.User, args.Target.Value, ent);
+    }
+
+    private bool IsBehindTarget(EntityUid user, EntityUid target)
+    {
+        var targetFacingDirection = Transform(target).LocalRotation.GetCardinalDir();
+        var behindAngle = targetFacingDirection.GetOpposite().ToAngle();
+
+        var userMapPos = _transform.GetMapCoordinates(user);
+        var targetMapPos = _transform.GetMapCoordinates(target);
+        var currentAngle = (userMapPos.Position - targetMapPos.Position).ToWorldAngle();
+
+        var differenceFromBehindAngle = (behindAngle.Degrees - currentAngle.Degrees + 180 + 360) % 360 - 180;
+        
+        if (differenceFromBehindAngle > -45 && differenceFromBehindAngle < 45)
+            return true;
+
+        return false;
+    }
+
+    private void TryAssistedReload(EntityUid user, EntityUid target, Entity<AssistedReloadAmmoComponent> ammo)
+    {
+        if (!TryComp<AssistedReloadReceiverComponent>(target, out var reloadReceiver))
+            return;
+
+        if (reloadReceiver.Weapon == null)
+            return;
+
+        if (!TryComp<BallisticAmmoProviderComponent>(reloadReceiver.Weapon, out var ballisticAmmoProvider))
+            return;
+
+        if (_whitelist.IsWhitelistFailOrNull(ballisticAmmoProvider.Whitelist, ammo.Owner))
+        {
+            var failMismatchPopup = Loc.GetString("rmc-assisted-reload-fail-mismatch", ("ammo", ammo.Owner), ("weapon", reloadReceiver.Weapon));
+            _popup.PopupClient(failMismatchPopup, user, user, PopupType.SmallCaution);
+            return;
+        }
+
+        if (!IsBehindTarget(user, target))
+        {
+            var failAnglePopup = Loc.GetString("rmc-assisted-reload-fail-angle", ("target", target));
+            _popup.PopupClient(failAnglePopup, user, user, PopupType.SmallCaution);
+            return;
+        }
+
+        if (!_gun.TryAmmoInsert(reloadReceiver.Weapon.Value, ballisticAmmoProvider, ammo.Owner, user, reloadReceiver.Weapon.Value, ammo.Comp.InsertDelay))
+        {
+            var failFullPopup = Loc.GetString("rmc-assisted-reload-fail-full", ("target", target), ("weapon", reloadReceiver.Weapon));
+            _popup.PopupClient(failFullPopup, user, user, PopupType.SmallCaution);
+            return;
+        }
+
+        var userPopup = Loc.GetString("rmc-assisted-reload-start-user", ("target", target), ("weapon", reloadReceiver.Weapon));
+        var targetPopup = Loc.GetString("rmc-assisted-reload-start-target", ("reloader", user), ("weapon", reloadReceiver.Weapon), ("ammo", ammo.Owner));
+
+        _popup.PopupClient(userPopup, user, user);
+        _popup.PopupEntity(targetPopup, target, target);
+    }
+
+    private void OnAssistedReloadWeaponWielded(Entity<AssistedReloadWeaponComponent> ent, ref ItemWieldedEvent args)
+    {
+        if (!TryGetGunUser(ent.Owner, out var wielder))
+            return;
+
+        var receiver = EnsureComp<AssistedReloadReceiverComponent>(wielder);
+        receiver.Weapon = ent.Owner;
+    }
+
+    private void OnAssistedReloadWeaponUnwielded(Entity<AssistedReloadWeaponComponent> ent, ref ItemUnwieldedEvent args)
+    {
+        if (!TryGetGunUser(ent.Owner, out var wielder))
+            return;
+
+        RemCompDeferred<AssistedReloadReceiverComponent>(wielder);
     }
 }
