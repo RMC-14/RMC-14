@@ -24,5 +24,5 @@ public sealed partial class XenoResinWalkerComponent : Component
     public TimeSpan PlasmaUseDelay = TimeSpan.FromSeconds(0.5);
 
     [DataField, AutoNetworkedField]
-    public float SpeedMultiplier = 1.66f;
+    public float SpeedMultiplier = 1.88f;
 }

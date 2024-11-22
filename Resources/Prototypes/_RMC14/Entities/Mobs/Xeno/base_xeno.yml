@@ -83,8 +83,8 @@
     popup: defibrillator-xeno
     showOnExamine: false
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2.2
-    baseSprintSpeed: 4
+    baseWalkSpeed: 1.613
+    baseSprintSpeed: 4.545
   - type: Climbing
   - type: NameIdentifier
     group: CMXeno
@@ -219,15 +219,12 @@
   - type: StandingState
   - type: SlowOnPull
     slowdowns:
-      - multiplier: 0.6
+      - multiplier: 0.423
         whitelist:
           components:
           - Marine
-      - multiplier: 0.665
-        whitelist:
-          components:
           - XenoLight
-      - multiplier: 0.445
+      - multiplier: 0.268
         whitelist:
           components:
           - XenoHeavy

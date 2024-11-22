@@ -59,8 +59,8 @@
       components:
       - Xeno
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2.7
-    baseSprintSpeed: 5
+    baseWalkSpeed: 1.786
+    baseSprintSpeed: 6.25
   - type: DamageOffWeeds
     damage:
       types:

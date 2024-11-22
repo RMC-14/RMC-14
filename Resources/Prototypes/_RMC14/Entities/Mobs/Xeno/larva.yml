@@ -59,8 +59,8 @@
   - type: Flammable
     canResistFire: false
   - type: MovementSpeedModifier
-    baseWalkSpeed: 3.7
-    baseSprintSpeed: 6.7
+    baseWalkSpeed: 1.923
+    baseSprintSpeed: 8.333
   - type: Speech
     speechSounds: XenonidLarva
     allowedEmotes: [ "XenoRoar" ]

@@ -18,7 +18,7 @@ public sealed partial class XenoChargeSpitComponent : Component
     public int Armor = 5;
 
     [DataField, AutoNetworkedField]
-    public float Speed = 1.4f;
+    public float Speed = 1.44f;
 
     [DataField, AutoNetworkedField]
     public EntProtoId Effect = "RMCEffectEmpowerGreen";

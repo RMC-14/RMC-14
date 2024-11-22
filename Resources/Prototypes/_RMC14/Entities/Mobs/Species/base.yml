@@ -183,20 +183,24 @@
   - type: UserIFF
   - type: UserLimitHits
   - type: MovementIgnoreGravity
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.667
+    baseSprintSpeed: 5
   - type: SlowOnPull
     slowdowns:
-    - multiplier: 0.7575
+    - multiplier: 0.4
       whitelist:
         components:
         - Marine
-    - multiplier: 0.8725
-      whitelist:
-        components:
         - XenoLight
-    - multiplier: 0.59
+    - multiplier: 0.25
       whitelist:
         components:
         - XenoHeavy
+    - multiplier: 0.5
+      whitelist:
+        tags:
+        - BodyBag
   - type: MobThresholds
     thresholds:
       0: Alive

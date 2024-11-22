@@ -88,19 +88,16 @@
         layer:
         - BulletImpassable
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2
-    baseSprintSpeed: 3.5
+    baseWalkSpeed: 1.429
+    baseSprintSpeed: 3.333
   - type: SlowOnPull
     slowdowns:
-    - multiplier: 0.6125
+    - multiplier: 0.5
       whitelist:
         components:
         - Marine
-    - multiplier: 0.6675
-      whitelist:
-        components:
         - XenoLight
-    - multiplier: 0.445
+    - multiplier: 0.333
       whitelist:
         components:
         - XenoHeavy

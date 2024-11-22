@@ -14,7 +14,7 @@ public sealed partial class XenoCrestComponent : Component
     public int Armor = 5;
 
     [DataField, AutoNetworkedField]
-    public float SpeedMultiplier = 0.70f;
+    public float SpeedMultiplier = 0.706f;
 
     [DataField, AutoNetworkedField]
     public string[] ImmuneToStatuses = { "KnockedDown" };

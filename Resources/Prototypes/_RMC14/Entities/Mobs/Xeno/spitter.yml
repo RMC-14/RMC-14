@@ -77,19 +77,16 @@
     stun: 9
     chance: 0.45
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2
-    baseSprintSpeed: 3.5
+    baseWalkSpeed: 1.515
+    baseSprintSpeed: 3.846
   - type: SlowOnPull
     slowdowns:
-    - multiplier: 0.6375
+    - multiplier: 0.464
       whitelist:
         components:
         - Marine
-    - multiplier: 0.7075
-      whitelist:
-        components:
         - XenoLight
-    - multiplier: 0.475
+    - multiplier: 0.302
       whitelist:
         components:
         - XenoHeavy

@@ -100,17 +100,17 @@
       sprite: _RMC14/Interface/map_blips.rsi
       state: praetorian
   - type: AcidTrap
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.563
+    baseSprintSpeed: 4.167
   - type: SlowOnPull
     slowdowns:
-    - multiplier: 0.5875
+    - multiplier: 0.444
       whitelist:
         components:
         - Marine
-    - multiplier: 0.645
-      whitelist:
-        components:
         - XenoLight
-    - multiplier: 0.4275
+    - multiplier: 0.286
       whitelist:
         components:
         - XenoHeavy
@@ -188,19 +188,16 @@
       groups:
         Brute: 36
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2.2
-    baseSprintSpeed: 3.4
+    baseWalkSpeed: 1.504
+    baseSprintSpeed: 3.773
   - type: SlowOnPull
     slowdowns:
-    - multiplier: 0.64
+    - multiplier: 0.469
       whitelist:
         components:
         - Marine
-    - multiplier: 0.7025
-      whitelist:
-        components:
         - XenoLight
-    - multiplier: 0.475
+    - multiplier: 0.306
       whitelist:
         components:
         - XenoHeavy

@@ -15,7 +15,7 @@ public sealed partial class XenoActiveInvisibleComponent : Component
     public TimeSpan FullCooldown = TimeSpan.FromSeconds(20);
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 SpeedMultiplier = FixedPoint2.New(1.15);
+    public FixedPoint2 SpeedMultiplier = FixedPoint2.New(1.14);
 
     [DataField, AutoNetworkedField]
     public bool DidPopup;
