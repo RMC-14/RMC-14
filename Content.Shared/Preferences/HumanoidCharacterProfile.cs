@@ -2,13 +2,16 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.NamedItems;
+using Content.Shared._RMC14.Xenonids.Name;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
 using Content.Shared.Traits;
+using Linguini.Shared.Util;
 using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
@@ -142,6 +145,15 @@ namespace Content.Shared.Preferences
         [DataField]
         public SharedRMCNamedItems NamedItems { get; private set; } = new();
 
+        [DataField]
+        public bool PlaytimePerks { get; private set; }
+
+        [DataField]
+        public string XenoPrefix { get; private set; } = string.Empty;
+
+        [DataField]
+        public string XenoPostfix { get; private set; } = string.Empty;
+
         public HumanoidCharacterProfile(
             string name,
             string flavortext,
@@ -158,7 +170,10 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts,
-            SharedRMCNamedItems namedItems)
+            SharedRMCNamedItems namedItems,
+            bool playtimePerks,
+            string xenoPrefix,
+            string xenoPostfix)
         {
             Name = name;
             FlavorText = flavortext;
@@ -191,6 +206,9 @@ namespace Content.Shared.Preferences
             }
 
             NamedItems = namedItems;
+            PlaytimePerks = playtimePerks;
+            XenoPrefix = xenoPrefix;
+            XenoPostfix = xenoPostfix;
         }
 
         /// <summary>Copy constructor</summary>
@@ -210,7 +228,10 @@ namespace Content.Shared.Preferences
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
-                other.NamedItems)
+                other.NamedItems,
+                other.PlaytimePerks,
+                other.XenoPrefix,
+                other.XenoPostfix)
         {
         }
 
@@ -338,6 +359,21 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile WithSquadPreference(EntProtoId<SquadTeamComponent>? squadPreference)
         {
             return new(this) { SquadPreference = squadPreference };
+        }
+
+        public HumanoidCharacterProfile WithPlaytimePerks(bool playtimePerks)
+        {
+            return new(this) { PlaytimePerks = playtimePerks };
+        }
+
+        public HumanoidCharacterProfile WithXenoPrefix(string prefix)
+        {
+            return new(this) { XenoPrefix = prefix };
+        }
+
+        public HumanoidCharacterProfile WithXenoPostfix(string postfix)
+        {
+            return new(this) { XenoPostfix = postfix };
         }
 
         public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<ProtoId<JobPrototype>, JobPriority>> jobPriorities)
@@ -509,6 +545,9 @@ namespace Content.Shared.Preferences
             if (FlavorText != other.FlavorText) return false;
             if (NamedItems != other.NamedItems) return false;
             if (ArmorPreference != other.ArmorPreference) return false;
+            if (PlaytimePerks != other.PlaytimePerks) return false;
+            if (XenoPrefix != other.XenoPrefix) return false;
+            if (XenoPostfix != other.XenoPostfix) return false;
             return Appearance.MemberwiseEquals(other.Appearance);
         }
 
@@ -711,6 +750,45 @@ namespace Content.Shared.Preferences
                 ArmorName = ValidateNamedItem(NamedItems.ArmorName),
                 SentryName = ValidateNamedItem(NamedItems.SentryName),
             };
+
+            string ValidateXenoName(string xenoName, bool numberEndingAllowed)
+            {
+                xenoName = xenoName.ToUpperInvariant();
+                for (var i = 0; i < xenoName.Length; i++)
+                {
+                    var c = xenoName[i];
+                    if (i > 0 && numberEndingAllowed && (c > '0' || c < '9'))
+                        continue;
+
+                    if (c < 'A' || c > 'Z')
+                        return string.Empty;
+                }
+
+                return xenoName;
+            }
+
+            XenoPrefix = XenoPrefix.Trim();
+            XenoPostfix = XenoPostfix.Trim();
+
+            var xenoName = collection.Resolve<IEntityManager>().System<SharedXenoNameSystem>();
+            var prefixMax = xenoName.GetMaxXenoPrefixLength(session);
+            var postfixMax = xenoName.GetMaxXenoPostfixLength(session);
+            if (XenoPrefix.Length > prefixMax)
+                XenoPrefix = XenoPrefix[..prefixMax];
+
+            XenoPrefix = ValidateXenoName(XenoPrefix, false);
+
+            if (XenoPrefix.Length > 2)
+            {
+                XenoPostfix = string.Empty;
+            }
+            else
+            {
+                if (XenoPostfix.Length > postfixMax)
+                    XenoPostfix = XenoPostfix[..postfixMax];
+
+                XenoPostfix = ValidateXenoName(XenoPostfix, true);
+            }
         }
 
         /// <summary>
@@ -791,6 +869,9 @@ namespace Content.Shared.Preferences
             hashCode.Add(SquadPreference);
             hashCode.Add((int)PreferenceUnavailable);
             hashCode.Add(NamedItems);
+            hashCode.Add(PlaytimePerks);
+            hashCode.Add(XenoPrefix);
+            hashCode.Add(XenoPostfix);
             return hashCode.ToHashCode();
         }
 

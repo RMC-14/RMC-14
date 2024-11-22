@@ -65,6 +65,32 @@
                                     <Control HorizontalExpand="True"/>
                                     <OptionButton Name="ArmorPreferenceButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
+                                <!-- Playtime Perks -->
+                                <BoxContainer HorizontalExpand="True">
+                                    <Label Text="{Loc 'humanoid-profile-editor-enable-playtime-perks'}" />
+                                    <Control HorizontalExpand="True"/>
+                                    <Button Name="PlaytimePerksButton" Pressed="True" ToggleMode="True" Text="{Loc 'humanoid-profile-editor-enable'}" HorizontalAlignment="Right" />
+                                </BoxContainer>
+                                <!-- Xeno Prefix -->
+                                <BoxContainer HorizontalExpand="True">
+                                    <Label Text="{Loc 'humanoid-profile-editor-xeno-prefix'}" />
+                                    <Control HorizontalExpand="True"/>
+                                    <TextureButton Name="XenoPrefixInfoButton" Scale="0.3 0.3"
+                                                   VerticalAlignment="Center"
+                                                   ToolTip="{Loc 'humanoid-profile-editor-xeno-prefix-tooltip'}"
+                                                   StyleClasses="SpeciesInfoDefault" />
+                                    <LineEdit Name="XenoPrefix" HorizontalAlignment="Right" MinWidth="100" />
+                                </BoxContainer>
+                                <!-- Xeno Postfix -->
+                                <BoxContainer HorizontalExpand="True">
+                                    <Label Text="{Loc 'humanoid-profile-editor-xeno-postfix'}" />
+                                    <Control HorizontalExpand="True"/>
+                                    <TextureButton Name="XenoPostfixInfoButton" Scale="0.3 0.3"
+                                                   VerticalAlignment="Center"
+                                                   ToolTip="{Loc 'humanoid-profile-editor-xeno-postfix-tooltip'}"
+                                                   StyleClasses="SpeciesInfoDefault" />
+                                    <LineEdit Name="XenoPostfix" HorizontalAlignment="Right" MinWidth="100" />
+                                </BoxContainer>
                                 <userInterface:BlueHorizontalSeparator Margin="0 5" />
                                 <!-- Species -->
                                 <BoxContainer HorizontalExpand="True">

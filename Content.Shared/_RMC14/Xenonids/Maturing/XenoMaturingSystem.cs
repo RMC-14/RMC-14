@@ -12,7 +12,6 @@ namespace Content.Shared._RMC14.Xenonids.Maturing;
 public sealed class XenoMaturingSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -21,27 +20,30 @@ public sealed class XenoMaturingSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<XenoMaturingComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<XenoMaturingComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<XenoMaturingComponent, ComponentRemove>(OnRemove);
+        SubscribeLocalEvent<XenoMaturingComponent, RefreshNameModifiersEvent>(OnRefreshNameModifiers);
         SubscribeLocalEvent<XenoMaturingComponent, ExaminedEvent>(OnExamined);
-    }
-
-    private void OnRemove(Entity<XenoMaturingComponent> ent, ref ComponentRemove args)
-    {
-        _nameModifier.RefreshNameModifiers(ent.Owner);
     }
 
     private void OnMapInit(Entity<XenoMaturingComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.MatureAt = _timing.CurTime + ent.Comp.Delay;
         Dirty(ent);
+        _nameModifier.RefreshNameModifiers(ent.Owner);
+    }
 
-        var meta = MetaData(ent);
-        var prefix = Loc.GetString("rmc-xeno-immature-prefix");
-        if (meta.EntityName.StartsWith(prefix))
+    private void OnRemove(Entity<XenoMaturingComponent> ent, ref ComponentRemove args)
+    {
+        if (TerminatingOrDeleted(ent))
             return;
 
-        _metaData.SetEntityName(ent, $"{prefix} {meta.EntityName}", meta);
+        _nameModifier.RefreshNameModifiers(ent.Owner);
+    }
+
+    private void OnRefreshNameModifiers(Entity<XenoMaturingComponent> ent, ref RefreshNameModifiersEvent args)
+    {
+        args.AddModifier("rmc-xeno-immature-prefix");
     }
 
     private void OnExamined(Entity<XenoMaturingComponent> ent, ref ExaminedEvent args)
@@ -91,13 +93,7 @@ public sealed class XenoMaturingSystem : EntitySystem
                 _actions.AddAction(uid, action);
             }
 
-            var meta = MetaData(uid);
-            var prefix = Loc.GetString("rmc-xeno-immature-prefix");
-            if (meta.EntityName.StartsWith(prefix))
-                _metaData.SetEntityName(uid, meta.EntityName[prefix.Length..].Trim(), meta);
-
             _popup.PopupEntity(Loc.GetString("rmc-xeno-immature-mature"), uid, uid, PopupType.Large);
-
             RemCompDeferred<XenoMaturingComponent>(uid);
         }
     }
