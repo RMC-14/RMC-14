@@ -38,8 +38,8 @@
     - type: UserIFF
       faction: FactionSurvivor
   hasIcon: false
-
-﻿- type: startingGear
+  
+- type: startingGear
   id: RMCGearSurvivorSecurity
   equipment:
     head: CMHeadBeretRed
