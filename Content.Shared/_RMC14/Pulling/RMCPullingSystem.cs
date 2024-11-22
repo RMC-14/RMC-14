@@ -381,26 +381,28 @@ public sealed class RMCPullingSystem : EntitySystem
             _pulling.TryStopPull(uid, pullable);
         }
 
-        var pullerQuery = EntityQueryEnumerator<PullerComponent, TransformComponent, CanFiremanCarryComponent>();
-        while (pullerQuery.MoveNext(out var uid, out var puller, out var xform, out var firemanCarry))
+        var pullableQuery = EntityQueryEnumerator<BeingPulledComponent, PullableComponent, TransformComponent, FiremanCarriableComponent>();
+        while (pullableQuery.MoveNext(out var uid, out _, out var pullable, out var xform, out var firemanCarry))
         {
-            if (HasComp<MouseRotatorComponent>(uid))
+            if (pullable.Puller == null)
                 continue;
 
-            if (puller.Pulling == null)
+            var puller = pullable.Puller.Value;
+
+            if (firemanCarry.BeingCarried)
                 continue;
 
-            if (firemanCarry.Carrying != null)
+            if (HasComp<MouseRotatorComponent>(puller))
                 continue;
 
             if (!_timing.ApplyingState)
-                EnsureComp<NoRotateOnMoveComponent>(uid);
+                EnsureComp<NoRotateOnMoveComponent>(puller);
 
-            var pulledCoords = _transform.GetMapCoordinates(puller.Pulling.Value).Position;
-            var pullerCoords = _transform.GetMapCoordinates(uid, xform: xform).Position;
+            var pulledCoords = _transform.GetMapCoordinates(uid, xform: xform).Position;
+            var pullerCoords = _transform.GetMapCoordinates(puller).Position;
 
             var angle = (pulledCoords - pullerCoords).ToWorldAngle().GetCardinalDir().ToAngle();
-            _rotateTo.TryFaceAngle(uid, angle, xform);
+            _rotateTo.TryFaceAngle(puller, angle, xform);
         }
     }
 }
