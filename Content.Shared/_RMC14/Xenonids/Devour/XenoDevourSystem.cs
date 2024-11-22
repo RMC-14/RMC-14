@@ -371,16 +371,6 @@ public sealed class XenoDevourSystem : EntitySystem
             return false;
         }
 
-        if (!_standing.IsDown(victim))
-        {
-            if (popup)
-            {
-                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-resisting", ("target", victim)), victim, xeno, PopupType.MediumCaution);
-            }
-
-            return false;
-        }
-
         if (TryComp(victim, out BuckleComponent? buckle) && buckle.BuckledTo is { } strap)
         {
             if (popup)

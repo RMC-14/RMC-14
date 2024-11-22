@@ -63,7 +63,9 @@
   - type: Appearance
   - type: RMCNameItemOnVend
     item: PrimaryGun
-  - type: GunGroupSpreadPenalty
+  - type: GunDualWielding
+    weaponGroup: Heavy
+  - type: GunPointBlank
 
 - type: entity
   parent: BaseMagazineRifle

@@ -441,7 +441,9 @@ public sealed class XenoEggSystem : EntitySystem
         }
 
         SetEggState(egg, XenoEggState.Opening);
-        _audio.PlayPredicted(egg.Comp.OpenSound, egg, user);
+
+        if (_timing.IsFirstTimePredicted)
+            _audio.PlayPredicted(egg.Comp.OpenSound, egg, user);
 
         if (_net.IsClient)
             return true;

@@ -48,6 +48,8 @@
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 80
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.05
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -186,6 +188,11 @@
       ignoreModifiers: true
     - range: 7
       falloff: 4
+  - type: RMCProjectileAccuracy
+    accuracy: 105
+    thresholds:
+    - range: 5
+      falloff: 10
 
 - type: Tag
   id: RMCMagazineSmartGun

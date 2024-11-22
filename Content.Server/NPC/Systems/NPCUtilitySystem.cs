@@ -391,7 +391,9 @@ public sealed class NPCUtilitySystem : EntitySystem
             }
             case TargetInfectableCon:
             {
-                return HasComp<InfectableComponent>(targetUid) && !HasComp<VictimInfectedComponent>(targetUid) ? 1f : 0f;
+                return TryComp<InfectableComponent>(targetUid, out var infectable)
+                        && !infectable.BeingInfected
+                        && !HasComp<VictimInfectedComponent>(targetUid) ? 1f : 0f;
             }
             case TargetOpenEggCon:
             {

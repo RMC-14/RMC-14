@@ -4,4 +4,8 @@ namespace Content.Shared._RMC14.Xenonids.Acid;
 
 [RegisterComponent, NetworkedComponent]
 [Access(typeof(SharedXenoAcidSystem))]
-public sealed partial class XenoAcidComponent : Component;
+public sealed partial class XenoAcidComponent : Component
+{
+    [DataField]
+    public bool CanMeltStructures = true;
+}

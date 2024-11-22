@@ -62,6 +62,9 @@
   - type: XenoTailStab
     inject:
       RMCMolecularAcid: 2
+    tailDamage:
+      groups:
+        Brute: 36
   - type: CMArmor
     armor: 15
     explosionArmor: 20

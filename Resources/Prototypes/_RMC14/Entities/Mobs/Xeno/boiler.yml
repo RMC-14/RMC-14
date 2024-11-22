@@ -64,6 +64,9 @@
     toggle: true
     inject:
       RMCMolecularAcid: 6
+    tailDamage:
+      groups:
+        Brute: 30
   - type: XenoSprayAcid
     acid: XenoAcidSprayStrong
     barricadeDamage:

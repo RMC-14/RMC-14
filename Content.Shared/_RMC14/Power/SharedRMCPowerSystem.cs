@@ -13,6 +13,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
+using Content.Shared.Weapons.Melee;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Random;
@@ -353,7 +354,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
     private void OnFusionReactorInteractHand(Entity<RMCFusionReactorComponent> ent, ref InteractHandEvent args)
     {
         var user = args.User;
-        if (!HasComp<XenoComponent>(user))
+        if (!HasComp<XenoComponent>(user) || !HasComp<MeleeWeaponComponent>(user))
             return;
 
         if (ent.Comp.State == RMCFusionReactorState.Weld)

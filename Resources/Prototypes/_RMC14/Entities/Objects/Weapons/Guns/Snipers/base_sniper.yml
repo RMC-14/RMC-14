@@ -15,7 +15,9 @@
     baseSprint: 0.559
   - type: WieldDelay
     baseDelay: 0.8
-  - type: GunGroupSpreadPenalty
+  - type: GunDualWielding
+    weaponGroup: Rifle
+  - type: GunPointBlank
 
 - type: entity
   parent: CMBaseCartridgeRifle
