@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the Overwatch Console bugging out until a reconnect.
-    type: Fix
-  id: 514
-  time: '2024-08-04T11:19:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3529
 - author: crystalHex
   changes:
   - message: Hive core now has a warp point.
@@ -4953,5 +4946,32 @@
   id: 1013
   time: '2024-11-22T09:55:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4806
+- author: DrSmugleaf
+  changes:
+  - message: Added orbital bombardment. The cannon is loaded far west first floor,
+      and fired through the overwatch console in CIC.
+    type: Add
+  - message: Added squad transfers through the overwatch console.
+    type: Add
+  - message: Added playtime medals, which make you spawn with one depending on your
+      playtime for that role.
+    type: Add
+  - message: Added xeno ranks, which change your name depending on your playtime with
+      that caste.
+    type: Add
+  - message: Added custom xeno names, which unlock with total xeno playtime.
+    type: Add
+  - message: Added Mizuno 'Kitty' Drakonovisch figurine.
+    type: Add
+  - message: Fixed tackles not working like 13, see the Discord for an explanation.
+    type: Fix
+  - message: Possibly fix a bug that would make it so long rounds lagged for anyone
+      that heavily used the overwatch console or security cameras.
+    type: Fix
+  - message: Fixed webbing verbs not showing up instantly when right clicking an uniform.
+    type: Fix
+  id: 1014
+  time: '2024-11-22T20:52:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4904
 Name: RMC14
 Order: -1
