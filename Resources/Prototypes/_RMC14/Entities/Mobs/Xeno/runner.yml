@@ -98,7 +98,7 @@
       sprite: _RMC14/Interface/map_blips.rsi
       state: runner
   - type: MovementSpeedModifier
-    baseWalkSpeed: 5.55
+    baseWalkSpeed: 2
     baseSprintSpeed: 10
 
 - type: entity
@@ -169,8 +169,8 @@
   - type: CMArmor
     armor: 15
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1.565
-    baseSprintSpeed: 6.5
+    baseWalkSpeed: 1.9
+    baseSprintSpeed: 8
   - type: XenoAcid
     canMeltStructures: false
   - type: XenoEnergy
