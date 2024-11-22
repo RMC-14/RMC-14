@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Booze-O-Mat is now access locked!
-    type: Fix
-  id: 507
-  time: '2024-08-03T12:38:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3474
 - author: DrSmugleaf
   changes:
   - message: Fixed spaceborne gauss turrets not shooting at crit xenonids. They will
@@ -4912,5 +4905,12 @@
   id: 1006
   time: '2024-11-22T00:26:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4876
+- author: Irrlicht
+  changes:
+  - message: Adjusted Avali Front & Back Sprite to make wings look slightly more natural
+    type: Tweak
+  id: 1007
+  time: '2024-11-22T00:33:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4768
 Name: RMC14
 Order: -1
