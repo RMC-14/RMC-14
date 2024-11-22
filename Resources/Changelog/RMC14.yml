@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed spaceborne gauss turrets not shooting at crit xenonids. They will
-      no longer be merciful.
-    type: Fix
-  id: 508
-  time: '2024-08-03T23:47:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3516
-- author: DrSmugleaf
-  changes:
   - message: Fixed xenonid eggs being corrodible by xenonid acid.
     type: Fix
   id: 509
@@ -4912,5 +4904,18 @@
   id: 1007
   time: '2024-11-22T00:33:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4768
+- author: crystalHex
+  changes:
+  - message: The XM51 rig can now be equipped in the suit storage slot of marine armor.
+    type: Fix
+  - message: The pistol and revolver holster rigs can now be equipped in jacket storage
+      slots.
+    type: Fix
+  - message: The XM51 gun case can no longer store Mateba holster belts and G8-A general
+      utility pouches.
+    type: Fix
+  id: 1008
+  time: '2024-11-22T00:44:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4782
 Name: RMC14
 Order: -1
