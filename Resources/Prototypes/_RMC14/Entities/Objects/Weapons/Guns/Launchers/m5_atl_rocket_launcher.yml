@@ -143,6 +143,11 @@
     color: orange
     energy: 0.5
   - type: IgnorePredictionHide
+  - type: RMCProjectileAccuracy
+    accuracy: 95
+    thresholds:
+    - range: 7
+      falloff: 10
 
 # 84mm AP
 
@@ -199,5 +204,10 @@
     stunAmount: 6
     knockdownAmount: 6
   - type: IgnorePredictionHide
+  - type: RMCProjectileAccuracy
+    accuracy: 125
+    thresholds:
+    - range: 6
+      falloff: 10
 
 # TODO RMC14 84mm WP

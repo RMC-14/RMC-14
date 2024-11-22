@@ -1,4 +1,5 @@
-﻿using Content.Shared.Buckle.Components;
+﻿using Content.Shared._RMC14.Evasion;
+using Content.Shared.Buckle.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
@@ -27,6 +28,8 @@ public sealed class RMCStandingSystem : EntitySystem
 
         SubscribeLocalEvent<DownOnEnterComponent, EntInsertedIntoContainerMessage>(OnEnterDown);
         SubscribeLocalEvent<DownOnEnterComponent, EntRemovedFromContainerMessage>(OnLeaveDown);
+
+        SubscribeLocalEvent<StandingStateComponent, EvasionRefreshModifiersEvent>(OnStandingStateEvasionRefresh);
     }
 
     private void OnDropBuckled(Entity<DropItemsOnRestComponent> drop, ref BuckledEvent args)
@@ -94,5 +97,13 @@ public sealed class RMCStandingSystem : EntitySystem
             _standing.Down(args.Entity, false, true, true, true);
         else
             _standing.Stand(args.Entity);
+    }
+
+    private void OnStandingStateEvasionRefresh(Entity<StandingStateComponent> entity, ref EvasionRefreshModifiersEvent args)
+    {
+        if (entity.Owner != args.Entity.Owner || !_standing.IsDown(entity.Owner, entity.Comp))
+            return;
+
+        args.Evasion += (int) EvasionModifiers.Rest;
     }
 }

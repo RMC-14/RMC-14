@@ -112,6 +112,8 @@
         Piercing: 30
   - type: CMArmorPiercing
     amount: 20
+  - type: RMCProjectileAccuracy
+    accuracy: 125
 
 - type: Tag
   id: RMCMagazinePistolSU6
