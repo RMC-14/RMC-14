@@ -94,7 +94,6 @@ public sealed class XenoRoleSystem : EntitySystem
     {
         var disconnected = EnsureComp<XenoDisconnectedComponent>(xeno);
         disconnected.At = _timing.CurTime;
-        Dirty(xeno, disconnected);
 
         if (_hive.GetHive(xeno.Owner) is {} hive)
             _pvsOverride.RemoveForceSend(hive, args.Player);
