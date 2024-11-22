@@ -24,6 +24,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Robust.Shared.Utility.SpriteSpecifier;
 using Content.Shared._RMC14.Stealth;
+using Content.Shared._RMC14.Xenonids.Finesse;
 
 namespace Content.Client._RMC14.Xenonids.Hud;
 
@@ -119,6 +120,7 @@ public sealed class XenoHudOverlay : Overlay
                 DrawDeadIcon(in args, scaleMatrix, rotationMatrix);
 
             DrawAcidStacks(in args, scaleMatrix, rotationMatrix);
+            DrawMarkedIcons(in args, scaleMatrix, rotationMatrix);
         }
 
         if (isXeno || isAdminGhost)
@@ -240,6 +242,44 @@ public sealed class XenoHudOverlay : Overlay
 
             var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) texture.Height / EyeManager.PixelsPerMeter * bounds.Height;
             var xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float) texture.Width / EyeManager.PixelsPerMeter * bounds.Width;
+
+            var position = new Vector2(xOffset, yOffset);
+            handle.DrawTexture(texture, position);
+        }
+    }
+
+    private void DrawMarkedIcons(in OverlayDrawArgs args, Matrix3x2 scaleMatrix, Matrix3x2 rotationMatrix)
+    {
+        var handle = args.WorldHandle;
+        var stacks = _entity
+            .AllEntityQueryEnumerator<XenoMarkedComponent, SpriteComponent, TransformComponent>();
+        while (stacks.MoveNext(out var uid, out var comp, out var sprite, out var xform))
+        {
+            if (xform.MapID != args.MapId)
+                continue;
+
+            if (_container.IsEntityOrParentInContainer(uid, xform: xform))
+                continue;
+
+            if (_invisQuery.HasComp(uid))
+                continue;
+
+            var bounds = sprite.Bounds;
+            var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
+
+            if (!bounds.Translated(worldPos).Intersects(args.WorldAABB))
+                continue;
+
+            var worldMatrix = Matrix3x2.CreateTranslation(worldPos);
+            var scaledWorld = Matrix3x2.Multiply(scaleMatrix, worldMatrix);
+            var matrix = Matrix3x2.Multiply(rotationMatrix, scaledWorld);
+            handle.SetTransform(matrix);
+
+            var icon = new Rsi(_rsiPath, $"prae_tag");
+            var texture = _sprite.GetFrame(icon, _timing.CurTime - comp.TimeAdded, false);
+
+            var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float)texture.Height / EyeManager.PixelsPerMeter * bounds.Height;
+            var xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float)texture.Width / EyeManager.PixelsPerMeter * bounds.Width;
 
             var position = new Vector2(xOffset, yOffset);
             handle.DrawTexture(texture, position);

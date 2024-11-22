@@ -225,7 +225,7 @@
     - ActionXenoAcidNormal
     # ActionXenoImpale
     # ActionXenoDodge
-    # ActionXenoTailTripe
+    # ActionXenoTailTrip
     - ActionXenoDevolve
     hidden: true
   - type: XenoStrain
@@ -237,6 +237,7 @@
     armor: 20
   - type: XenoClaws
     clawType: Sharp
+  - type: XenoFinesse
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -256,9 +257,10 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    # ActionXenoImpale
-    # ActionXenoDodge
-    # ActionXenoTailTripe
+    # ActionXenoPierce
+    # ActionXenoDashAndSlash
+    # ActionXenoCleave
+    # ActionXenoToggleCleave
     - ActionXenoDevolve
     hidden: true
   - type: XenoStrain
