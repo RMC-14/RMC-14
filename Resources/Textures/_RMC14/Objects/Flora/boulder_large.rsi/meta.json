@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/2adceaf92b78a982a51f120ffede9c35f4f21245/icons/obj/structures/props/boulder_large.dmi",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "boulder_large1"
+    },
+    {
+      "name": "boulder_large2"
+    }
+  ]
+}
