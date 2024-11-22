@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: Tunguso4ka
   changes:
-  - message: Added pickup and drop sounds for tools!
-    type: Add
-  - message: Added equip and unequip sounds for clothing!
-    type: Add
-  id: 506
-  time: '2024-08-03T12:36:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3483
-- author: Tunguso4ka
-  changes:
   - message: Booze-O-Mat is now access locked!
     type: Fix
   id: 507
@@ -4914,5 +4905,12 @@
   id: 1005
   time: '2024-11-22T00:23:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4898
+- author: DummeHytteOst
+  changes:
+  - message: Fixed food trays leaving behind an empty tray when eaten.
+    type: Fix
+  id: 1006
+  time: '2024-11-22T00:26:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4876
 Name: RMC14
 Order: -1
