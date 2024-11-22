@@ -169,8 +169,8 @@
   - type: CMArmor
     armor: 15
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1.9
-    baseSprintSpeed: 8
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 6.5
   - type: XenoAcid
     canMeltStructures: false
   - type: XenoEnergy
@@ -209,12 +209,15 @@
           Heat: 1
   - type: SlowOnPull
     slowdowns:
-    - multiplier: 0.38
+    - multiplier: 0.59
       whitelist:
         components:
         - Marine
+    - multiplier: 0.655
+      whitelist:
+        components:
         - XenoLight
-    - multiplier: 0.21
+    - multiplier: 0.3825
       whitelist:
         components:
         - XenoHeavy
