@@ -140,6 +140,9 @@
     - RMCXenoPraetorianVanguard
     - RMCXenoPraetorianWarden
   - type: AcidTrap
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.56
+    baseSprintSpeed: 4.17
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -190,8 +193,8 @@
       groups:
         Brute: 36
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2.2
-    baseSprintSpeed: 3.4
+    baseWalkSpeed: 1.5
+    baseSprintSpeed: 3.77
   - type: SlowOnPull
     slowdowns:
     - multiplier: 0.64
@@ -238,6 +241,9 @@
   - type: XenoClaws
     clawType: Sharp
   - type: XenoFinesse
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.6
+    baseSprintSpeed: 4.65
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -269,3 +275,6 @@
     popup: rmc-xeno-vanguard-popup
   - type: XenoClaws
     clawType: Sharp
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.5
+    baseSprintSpeed: 4.44
