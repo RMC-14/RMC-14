@@ -20,6 +20,8 @@
   - type: Sprite
     sprite: _RMC14/Areas/areas_kutjevo.rsi
     state: shuttle
+  - type: Area
+    landingZone: true
 
 - type: entity
   parent: RMCAreaBase
@@ -29,6 +31,8 @@
   - type: Sprite
     sprite: _RMC14/Areas/areas_kutjevo.rsi
     state: shuttle2
+  - type: Area
+    landingZone: true
 
 - type: entity
   parent: RMCAreaKutjevo
