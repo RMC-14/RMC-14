@@ -10,6 +10,8 @@ rmc-emote-mew = mews.
 rmc-emote-growl = growls.
 rmc-emote-purr = purrs.
 
+rmc-emote-name-warcry = Warcry
+
 rmc-emote-name-xeno-roar = Roar
 rmc-emote-name-xeno-tail-swipe = Tail Swipe
 rmc-emote-name-xeno-help = Call for Help
