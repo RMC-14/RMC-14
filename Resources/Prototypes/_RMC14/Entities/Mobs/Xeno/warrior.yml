@@ -74,12 +74,15 @@
     stun: 5
   - type: SlowOnPull
     slowdowns:
-    - multiplier: 0.306
+    - multiplier: 0.4525
       whitelist:
         components:
         - Marine
+    - multiplier: 0.5025
+      whitelist:
+        components:
         - XenoLight
-    - multiplier: 0.216
+    - multiplier: 0.3625
       whitelist:
         components:
         - XenoHeavy

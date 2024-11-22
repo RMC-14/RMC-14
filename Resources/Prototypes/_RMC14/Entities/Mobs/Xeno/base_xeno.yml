@@ -224,7 +224,11 @@
           components:
           - Marine
           - XenoLight
-      - multiplier: 0.268
+      - multiplier: 0.665
+        whitelist:
+          components:
+          - XenoLight
+      - multiplier: 0.445
         whitelist:
           components:
           - XenoHeavy

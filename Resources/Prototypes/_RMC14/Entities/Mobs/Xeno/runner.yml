@@ -99,12 +99,15 @@
     baseSprintSpeed: 10
   - type: SlowOnPull
     slowdowns:
-    - multiplier: 0.328
+    - multiplier: 0.3825
       whitelist:
         components:
         - Marine
+    - multiplier: 0.425
+      whitelist:
+        components:
         - XenoLight
-    - multiplier: 0.178
+    - multiplier: 0.24
       whitelist:
         components:
         - XenoHeavy

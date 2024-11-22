@@ -98,13 +98,3 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.563
     baseSprintSpeed: 4.167
-  - type: SlowOnPull
-    slowdowns:
-    - multiplier: 0.444
-      whitelist:
-        components:
-        - Marine
-        - XenoLight
-    - multiplier: 0.286
-      whitelist:
-        components:
