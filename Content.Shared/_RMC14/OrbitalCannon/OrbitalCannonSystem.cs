@@ -513,21 +513,21 @@ public sealed class OrbitalCannonSystem : EntitySystem
                 var planetEntCoordinates = _transform.ToCoordinates(planetCoordinates);
                 _audio.PlayPvs(cannon.TravelSound, planetEntCoordinates, AudioParams.Default.WithMaxDistance(75));
 
-                _mortar.PopupWarning(planetCoordinates, 30, "rmc-ob-warning-one", "rmc-ob-warning-above-one");
+                _mortar.PopupWarning(planetCoordinates, 30, "rmc-ob-warning-one", "rmc-ob-warning-above-one", true);
             }
 
             if (!firing.WarnedOne && time > firing.StartedAt + firing.WarnOneDelay)
             {
                 firing.WarnedOne = true;
                 Dirty(uid, firing);
-                _mortar.PopupWarning(planetCoordinates, 25, "rmc-ob-warning-two", "rmc-ob-warning-above-two");
+                _mortar.PopupWarning(planetCoordinates, 25, "rmc-ob-warning-two", "rmc-ob-warning-above-two", true);
             }
 
             if (!firing.WarnedTwo && time > firing.StartedAt + firing.WarnTwoDelay)
             {
                 firing.WarnedTwo = true;
                 Dirty(uid, firing);
-                _mortar.PopupWarning(planetCoordinates, 15, "rmc-ob-warning-three", "rmc-ob-warning-above-three");
+                _mortar.PopupWarning(planetCoordinates, 15, "rmc-ob-warning-three", "rmc-ob-warning-above-three", true);
             }
 
             if (!firing.Impacted && time > firing.StartedAt + firing.ImpactDelay)

@@ -99,8 +99,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             subs.Event<OverwatchConsoleOrbitalLongitudeBuiMsg>(OnOverwatchOrbitalCoordinatesBui);
             subs.Event<OverwatchConsoleOrbitalLatitudeBuiMsg>(OnOverwatchOrbitalCoordinatesBui);
             subs.Event<OverwatchConsoleOrbitalLaunchBuiMsg>(OnOverwatchOrbitalLaunchBui);
-            subs.Event<OverwatchConsoleOrbitalSaveBuiMsg>(OnOverwatchOrbitalSaveBui);
-            subs.Event<OverwatchConsoleOrbitalCommentBuiMsg>(OnOverwatchOrbitalCommentBui);
+            // subs.Event<OverwatchConsoleOrbitalSaveBuiMsg>(OnOverwatchOrbitalSaveBui);
+            // subs.Event<OverwatchConsoleOrbitalCommentBuiMsg>(OnOverwatchOrbitalCommentBui);
             subs.Event<OverwatchConsoleSendMessageBuiMsg>(OnOverwatchSendMessageBui);
         });
     }
@@ -471,15 +471,15 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _orbitalCannon.Fire(cannon, ent.Comp.OrbitalCoordinates, args.Actor, squad);
     }
 
-    private void OnOverwatchOrbitalSaveBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleOrbitalSaveBuiMsg args)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void OnOverwatchOrbitalCommentBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleOrbitalCommentBuiMsg args)
-    {
-        throw new NotImplementedException();
-    }
+    // private void OnOverwatchOrbitalSaveBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleOrbitalSaveBuiMsg args)
+    // {
+    //     throw new NotImplementedException();
+    // }
+    //
+    // private void OnOverwatchOrbitalCommentBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleOrbitalCommentBuiMsg args)
+    // {
+    //     throw new NotImplementedException();
+    // }
 
     private void OnOverwatchSendMessageBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSendMessageBuiMsg args)
     {

@@ -189,7 +189,7 @@
                                         ModulateSelfOverride="#D3B400" TextAlign="Center" />
                             </BoxContainer>
                             <ui:BlueHorizontalSeparator SetWidth="2" Margin="5 0" />
-                            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                            <BoxContainer Orientation="Vertical" HorizontalExpand="True" Visible="False">
                                 <Label Text="Max 3 stored coordinates. Will overwrite oldest first." />
                                 <BoxContainer Orientation="Horizontal">
                                     <BoxContainer Name="Longitudes" Access="Public" Orientation="Vertical" />

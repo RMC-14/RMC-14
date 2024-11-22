@@ -426,7 +426,7 @@ public abstract class SharedMortarSystem : EntitySystem
         return false;
     }
 
-    public void PopupWarning(MapCoordinates coordinates, float range, LocId warning, LocId warningAbove)
+    public void PopupWarning(MapCoordinates coordinates, float range, LocId warning, LocId warningAbove, bool chat = false)
     {
         foreach (var session in _player.NetworkedSessions)
         {
@@ -448,6 +448,12 @@ public abstract class SharedMortarSystem : EntitySystem
                 ? Loc.GetString(warningAbove)
                 : Loc.GetString(warning, ("direction", direction));
             _popup.PopupEntity(msg, recipient, recipient, PopupType.LargeCaution);
+
+            if (chat)
+            {
+                msg = "[font size=16][color=red][/color][/font]";
+                _rmcChat.ChatMessageToOne(msg, recipient);
+            }
         }
     }
 
