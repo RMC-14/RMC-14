@@ -219,11 +219,10 @@
   - type: StandingState
   - type: SlowOnPull
     slowdowns:
-      - multiplier: 0.423
+      - multiplier: 0.6
         whitelist:
           components:
           - Marine
-          - XenoLight
       - multiplier: 0.665
         whitelist:
           components:
