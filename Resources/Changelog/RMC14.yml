@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CaasGit
-  changes:
-  - message: Make folders work as expected.
-    type: Fix
-  id: 505
-  time: '2024-08-03T12:35:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3496
 - author: Tunguso4ka
   changes:
   - message: Added pickup and drop sounds for tools!
@@ -4911,5 +4904,15 @@
   id: 1004
   time: '2024-11-22T00:18:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4877
+- author: Rainbeon
+  changes:
+  - message: Added the Assisted Reload mechanic. You can now perform an assisted reload
+      on a SADAR (M5-ATL) by clicking on a player that is actively wielding a SADAR
+      while you are behind them. This will load the SADAR in just 3 seconds, as opposed
+      to the 6 second self-load time.
+    type: Add
+  id: 1005
+  time: '2024-11-22T00:23:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4898
 Name: RMC14
 Order: -1
