@@ -43,6 +43,7 @@
       - RMCSMGPouchHolster
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
+      - RMCXM51Holster
       - RMCMotionDetector
       #TODO walkman
 
