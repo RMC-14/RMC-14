@@ -71,7 +71,7 @@ public sealed partial class ActiveForTheHiveComponent : Component
     public TimeSpan CorpseSpawnTime = TimeSpan.FromSeconds(0.5);
 
     [DataField]
-    public FixedPoint2 SlowDown = FixedPoint2.New(0.75);
+    public FixedPoint2 SlowDown = FixedPoint2.New(0.45);
 
     [DataField]
     public ComponentRegistry? MobAcid;
