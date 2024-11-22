@@ -111,7 +111,7 @@ public sealed class XenoRestSystem : EntitySystem
     private void OnXenoSecreteStructureAttempt(Entity<XenoRestingComponent> xeno, ref XenoSecreteStructureAttemptEvent args)
     {
         _popup.PopupClient(Loc.GetString("rmc-xeno-rest-cant-secrete"), xeno, xeno);
-        args.Cancelled = true;
+        args.Cancel();
     }
 
     private void OnXenoRestingHeadbuttAttempt(Entity<XenoRestingComponent> xeno, ref XenoHeadbuttAttemptEvent args)
