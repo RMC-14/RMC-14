@@ -1,4 +1,4 @@
-- type: department
+﻿- type: department
   parent: CMDepartmentBase
   id: CMSurvivor
   name: department-CMSurvivor
@@ -7,6 +7,6 @@
   roles:
   - CMSurvivor
   - CMSurvivorHostile
+  - RMCMedicalSurvivor
   - RMCEngineerSurvivor
   - RMCSecuritySurvivor
-  - RMCMedicalSurvivor

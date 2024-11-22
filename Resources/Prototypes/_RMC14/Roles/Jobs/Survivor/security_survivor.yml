@@ -1,0 +1,70 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCSecuritySurvivor
+  name: cm-job-name-security-survivor 
+  description: cm-job-description-survivor
+  playTimeTracker: RMCJobSurvivorSecurity
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 18000 # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsEngineering
+    time: 18000 # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 18000 # 5 hours
+  startingGear: RMCGearSurvivorSecurity
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-nobody
+  accessGroups:
+  - ColonistSec
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillPolice: 2
+        RMCSkillCqc: 2
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetSecurity
+    - type: Survivor
+    - type: MotionDetectorTracked
+    - type: UserIFF
+      faction: FactionSurvivor
+  hasIcon: false
+  
+- type: startingGear
+  id: RMCGearSurvivorSecurity
+  equipment:
+    head: CMHeadBeretRed
+    eyes: CMGlassesSecurity
+    jumpsuit: ClothingUniformJumpsuitSec 
+    back: CMSatchelSecurity
+    shoes: RMCShoesJackboots
+    id: CMIDCardColonist # Marshalls actually get a badge looking thang
+    ears: CMHeadsetColony
+    pocket1: RMCM5Bayonet
+    pocket2: RMCFlashlight
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorSecurity
+  name: survivor security spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSecuritySurvivor
+  - type: Sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - state: survivor
+
+- type: playTimeTracker
+  id: RMCJobSurvivorSecurity
+  isHumanoid: true

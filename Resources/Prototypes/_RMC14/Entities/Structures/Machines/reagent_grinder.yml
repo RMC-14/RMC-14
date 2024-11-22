@@ -23,3 +23,7 @@
     idleLoad: 5
     activeLoad: 100
     channel: Equipment
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

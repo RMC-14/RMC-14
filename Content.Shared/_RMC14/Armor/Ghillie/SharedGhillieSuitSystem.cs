@@ -17,6 +17,7 @@ using Content.Shared._RMC14.Chemistry;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Coordinates;
 using Robust.Shared.Network;
+using Content.Shared._RMC14.Armor.ThermalCloak;
 
 namespace Content.Shared._RMC14.Armor.Ghillie;
 
@@ -31,6 +32,7 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly ThermalCloakSystem _thermalCloak = default!;
 
     public override void Initialize()
     {
@@ -171,8 +173,7 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
             EnsureComp<EntityIFFComponent>(user);
             RemCompDeferred<RMCNightVisionVisibleComponent>(user);
 
-            if (_net.IsServer)
-                SpawnAttachedTo(comp.CloakEffect, user.ToCoordinates());
+            _thermalCloak.SpawnCloakEffects(user, comp.CloakEffect);
         }
 
         if (!enabling && TryComp<EntityActiveInvisibleComponent>(user, out var invisible))
@@ -228,6 +229,9 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
 
     private void OnMove(Entity<RMCPassiveStealthComponent> ent, ref MoveInputEvent args)
     {
+        if (!args.HasDirectionalMovement)
+            return;
+
         TryToggleInvisibility(ent.Owner, false);
     }
 
