@@ -267,6 +267,12 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         }
     }
 
+    public void IncreaseBurrowedLarva(Entity<HiveComponent> hive, int amount)
+    {
+        hive.Comp.BurrowedLarva += amount;
+        Dirty(hive);
+    }
+
     public void JoinBurrowedLarva(Entity<HiveComponent> hive, EntityUid user)
     {
         if (_net.IsClient)
