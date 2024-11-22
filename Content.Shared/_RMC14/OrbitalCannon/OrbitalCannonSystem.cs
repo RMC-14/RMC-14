@@ -9,7 +9,9 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Mortar;
 using Content.Shared._RMC14.PowerLoader;
 using Content.Shared._RMC14.Rules;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
+using Content.Shared.Database;
 using Content.Shared.Ghost;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
@@ -28,6 +30,7 @@ namespace Content.Shared._RMC14.OrbitalCannon;
 
 public sealed class OrbitalCannonSystem : EntitySystem
 {
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -435,15 +438,17 @@ public sealed class OrbitalCannonSystem : EntitySystem
         var offset = misfuel + 1;
         var offsetX = offset * _random.Next(-3, 3);
         var offsetY = offset * _random.Next(-3, 3);
+        var adjustedCoords = fireCoordinates + new Vector2i(offsetX, offsetY);
 
         var firing = EnsureComp<OrbitalCannonFiringComponent>(cannon);
-        firing.Coordinates = fireCoordinates + new Vector2i(offsetX, offsetY);
+        firing.Coordinates = adjustedCoords;
         firing.WarheadName = Name(warhead);
         firing.Squad = squad;
         firing.StartedAt = time;
         Dirty(cannon, firing);
 
         _popup.PopupCursor("Orbital bombardment launched!", user);
+        _adminLog.Add(LogType.RMCOrbitalBombardment, $"{ToPrettyString(user)} launched orbital bombardment at {fireCoordinates} for squad {ToPrettyString(squad)}, misfuel: {misfuel}, final coords: {adjustedCoords}");
         return true;
     }
 
