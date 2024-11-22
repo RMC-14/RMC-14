@@ -12,7 +12,7 @@ public sealed partial class VictimCripplingStrikeSlowedComponent : Component
     public TimeSpan ExpireAt;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 SpeedMultiplier = FixedPoint2.New(0.75);
+    public FixedPoint2 SpeedMultiplier = FixedPoint2.New(0.33);
 
     [DataField, AutoNetworkedField]
     public float DamageMult = 1;
