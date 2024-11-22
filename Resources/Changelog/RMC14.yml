@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added Shawn Fox, Madelynn 'Buzz' Lewis figurines
-    type: Add
-  id: 513
-  time: '2024-08-04T11:19:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3470
 - author: DrSmugleaf
   changes:
   - message: Fixed the Overwatch Console bugging out until a reconnect.
@@ -4953,5 +4946,12 @@
   id: 1012
   time: '2024-11-22T09:01:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4882
+- author: CyberTropic
+  changes:
+  - message: Kutjevo Refinery
+    type: Add
+  id: 1013
+  time: '2024-11-22T09:55:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4806
 Name: RMC14
 Order: -1
