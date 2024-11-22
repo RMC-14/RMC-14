@@ -214,7 +214,8 @@ public sealed class FiremanCarrySystem : EntitySystem
 
     private void OnCarrierPullStopped(Entity<CanFiremanCarryComponent> ent, ref PullStoppedMessage args)
     {
-        StopPull(ent, args.PulledUid);
+        if (ent.Owner == args.PullerUid && ent.Comp.Carrying == args.PulledUid)
+            StopPull(ent, args.PulledUid);
     }
 
     private void OnCarrierPullSlowdownAttempt(Entity<CanFiremanCarryComponent> ent, ref PullSlowdownAttemptEvent args)
