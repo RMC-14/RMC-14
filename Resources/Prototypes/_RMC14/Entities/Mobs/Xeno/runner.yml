@@ -77,15 +77,15 @@
     chance: 0.40
   - type: SlowOnPull
     slowdowns:
-    - multiplier: 0.3825
+    - multiplier: 0.33
       whitelist:
         components:
         - Marine
-    - multiplier: 0.425
+    - multiplier: 0.33
       whitelist:
         components:
         - XenoLight
-    - multiplier: 0.2475
+    - multiplier: 0.18
       whitelist:
         components:
         - XenoHeavy
@@ -209,15 +209,15 @@
           Heat: 1
   - type: SlowOnPull
     slowdowns:
-    - multiplier: 0.59
+    - multiplier: 0.38
       whitelist:
         components:
         - Marine
-    - multiplier: 0.655
+    - multiplier: 0.38
       whitelist:
         components:
         - XenoLight
-    - multiplier: 0.3825
+    - multiplier: 0.21
       whitelist:
         components:
         - XenoHeavy
