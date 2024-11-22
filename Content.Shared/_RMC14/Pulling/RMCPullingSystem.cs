@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.Fireman;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
@@ -26,6 +27,7 @@ namespace Content.Shared._RMC14.Pulling;
 
 public sealed class RMCPullingSystem : EntitySystem
 {
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -376,6 +378,9 @@ public sealed class RMCPullingSystem : EntitySystem
         while (pulledQuery.MoveNext(out var uid, out _, out var input, out var pullable))
         {
             if ((input.HeldMoveButtons & MoveButtons.AnyDirection) == 0)
+                continue;
+
+            if (!_actionBlocker.CanMove(uid))
                 continue;
 
             _pulling.TryStopPull(uid, pullable);
