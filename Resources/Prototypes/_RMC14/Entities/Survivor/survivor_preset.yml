@@ -23,7 +23,7 @@
 
 # Medical
 
-﻿- type: entity
+- type: entity
   id: RMCSurvivorPresetMedical
   name: medical survivor preset
   components:
