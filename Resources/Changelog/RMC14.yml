@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added vendor points and weapons spec skills to the admin actions ui.
-    type: Add
-  id: 511
-  time: '2024-08-04T02:04:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3517
 - author: Sigil
   changes:
   - message: You can no longer use binoculars when not holding them in your active
@@ -4947,5 +4940,19 @@
   id: 1010
   time: '2024-11-22T08:49:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4752
+- author: Vermidia
+  changes:
+  - message: Added Acider Runner, who can apply acid to marines on hit, and gains
+      acid reserves which they can spend on boiler-level acid that can be applied
+      quickly or become a living time bomb For The Hive!
+    type: Add
+  - message: Corrosive acid no longer ignores barricade resistances for damage.
+    type: Fix
+  - message: Fix boiler gas not doing armor ignoring damage, it now does greater damage
+      with only a small portion being effected by armor.
+    type: Fix
+  id: 1011
+  time: '2024-11-22T09:00:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4816
 Name: RMC14
 Order: -1
