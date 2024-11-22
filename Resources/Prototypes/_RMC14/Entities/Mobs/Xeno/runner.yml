@@ -77,15 +77,15 @@
     chance: 0.40
   - type: SlowOnPull
     slowdowns:
-    - multiplier: 0.33
+    - multiplier: 0.3825
       whitelist:
         components:
         - Marine
-    - multiplier: 0.33
+    - multiplier: 0.425
       whitelist:
         components:
         - XenoLight
-    - multiplier: 0.18
+    - multiplier: 0.2475
       whitelist:
         components:
         - XenoHeavy
@@ -98,7 +98,7 @@
       sprite: _RMC14/Interface/map_blips.rsi
       state: runner
   - type: MovementSpeedModifier
-    baseWalkSpeed: 2
+    baseWalkSpeed: 5.55
     baseSprintSpeed: 10
 
 - type: entity
@@ -213,9 +213,6 @@
       whitelist:
         components:
         - Marine
-    - multiplier: 0.38
-      whitelist:
-        components:
         - XenoLight
     - multiplier: 0.21
       whitelist:
