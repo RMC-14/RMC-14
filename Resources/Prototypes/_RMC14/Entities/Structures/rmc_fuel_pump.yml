@@ -34,8 +34,10 @@
     offset: -0.5,0
     layers:
     - state: fuelpump_off
+      map: [ "unpowered" ]
     - state: fuelpump_off
-      map: ["enum.EvacuationPumpLayers.Layer"]
+      map: [ "enum.EvacuationPumpLayers.Layer" ]
+      visible: false
   - type: Appearance
   - type: GenericVisualizer
     visuals:      
@@ -50,4 +52,7 @@
         enum.EvacuationPumpLayers.Layer:
           True: { visible: true }
           False: { visible: false }
+        unpowered:
+          True: { visible: false }
+          False: { visible: true }
         
