@@ -21,6 +21,7 @@
       enum.TacticalMapComputerUi.Key:
         type: TacticalMapComputerBui
   - type: MarineCommunicationsComputer
+  - type: TacticalMapComputer
   - type: Tag
     tags:
     - CommandTablet

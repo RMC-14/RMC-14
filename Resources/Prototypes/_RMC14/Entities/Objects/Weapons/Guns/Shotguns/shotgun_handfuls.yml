@@ -251,13 +251,6 @@
   spawn: CMShellShotgunIncendiaryBuckshot
   maxCount: 5
 
-- type: stack
-  id: RMCShellShotgunBreaching
-  name: handful of light breaching shell
-  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: breaching_shell_1 }
-  spawn: RMCShellShotgunBreaching
-  maxCount: 5
-
 - type: Tag
   id: RMCShellShotgun
 
