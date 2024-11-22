@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: crystalHex
-  changes:
-  - message: Hive core now has a warp point.
-    type: Tweak
-  id: 515
-  time: '2024-08-04T23:13:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3530
 - author: DrSmugleaf
   changes:
   - message: Fixed nested marines not being able to see anything.
@@ -4973,5 +4966,16 @@
   id: 1014
   time: '2024-11-22T20:52:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4904
+- author: DrSmugleaf
+  changes:
+  - message: Fixed not being able to pull stunned marines.
+    type: Fix
+  - message: Fixed the mateba belt worn sprite being giant.
+    type: Fix
+  - message: Fixed the Queen not looking like she's in Ovi.
+    type: Fix
+  id: 1015
+  time: '2024-11-22T22:50:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4911
 Name: RMC14
 Order: -1
