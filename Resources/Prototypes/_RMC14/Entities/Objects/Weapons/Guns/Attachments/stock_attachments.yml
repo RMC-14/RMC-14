@@ -210,7 +210,6 @@
       scatterFlat: -1
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
