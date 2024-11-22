@@ -99,20 +99,6 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: praetorian
-  - type: SlowOnPull
-    slowdowns:
-    - multiplier: 0.5875
-      whitelist:
-        components:
-        - Marine
-    - multiplier: 0.645
-      whitelist:
-        components:
-        - XenoLight
-    - multiplier: 0.4275
-      whitelist:
-        components:
-        - XenoHeavy
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -143,6 +129,20 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.56
     baseSprintSpeed: 4.17
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.44
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.44
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.29
+      whitelist:
+        components:
+        - XenoHeavy
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -197,21 +197,20 @@
     baseSprintSpeed: 3.77
   - type: SlowOnPull
     slowdowns:
-    - multiplier: 0.64
+    - multiplier: 0.47
       whitelist:
         components:
         - Marine
-    - multiplier: 0.7025
+    - multiplier: 0.47
       whitelist:
         components:
         - XenoLight
-    - multiplier: 0.475
+    - multiplier: 0.31
       whitelist:
         components:
         - XenoHeavy
   - type: AcidTrap
 
-# Note in CM due to byond magic neither dancer nor vanguard are actually faster than base prae
 - type: entity
   parent: CMXenoPraetorianBase
   id: RMCXenoPraetorianDancer
@@ -244,6 +243,20 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.6
     baseSprintSpeed: 4.65
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.42
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.42
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.26
+      whitelist:
+        components:
+        - XenoHeavy
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -278,3 +291,17 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.5
     baseSprintSpeed: 4.44
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.43
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.43
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.27
+      whitelist:
+        components:
+        - XenoHeavy
