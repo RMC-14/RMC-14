@@ -23,6 +23,6 @@ public sealed partial class XenoRespawnComponent : Component
     [DataField]
     public EntProtoId Larva = "CMXenoLarva";
 
-	[DataField]
-	public SoundSpecifier CorpseSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/xeno_newlarva.ogg");
+    [DataField]
+    public SoundSpecifier CorpseSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/xeno_newlarva.ogg");
 }
