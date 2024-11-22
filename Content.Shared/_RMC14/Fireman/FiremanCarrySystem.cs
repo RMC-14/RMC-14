@@ -6,6 +6,8 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Mobs;
+using Content.Shared.MouseRotator;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
@@ -112,6 +114,9 @@ public sealed class FiremanCarrySystem : EntitySystem
 
         carrier.Carrying = ent;
         Dirty(user, carrier);
+
+        if (!_timing.ApplyingState && !HasComp<MouseRotatorComponent>(user))
+            RemCompDeferred<NoRotateOnMoveComponent>(user);
 
         args.Handled = true;
 

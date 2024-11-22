@@ -80,7 +80,9 @@ public sealed class TackleSystem : EntitySystem
         else
         {
             _adminLog.Add(LogType.RMCTackle, $"{ToPrettyString(user)} tackled down {ToPrettyString(target)}.");
-            _popup.PopupEntity(Loc.GetString("cm-tackle-success-self", ("target", target.Owner)), user, user);
+
+            if (_net.IsServer)
+                _popup.PopupEntity(Loc.GetString("cm-tackle-success-self", ("target", target.Owner)), user, user);
 
             foreach (var session in Filter.PvsExcept(user).Recipients)
             {

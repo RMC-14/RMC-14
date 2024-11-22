@@ -23,6 +23,9 @@
     scatterUnwielded: 18
     baseFireRate: 2
     burstScatterMult: 1
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.95
   - type: BallisticAmmoProvider
     cycleable: true
     whitelist:

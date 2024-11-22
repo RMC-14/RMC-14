@@ -1,0 +1,515 @@
+﻿- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaKutjevo
+  name: Kutjevo Refinery
+  suffix: Kutjevo Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_kutjevo.rsi
+    state: kutjevo
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#C19504E7'
+
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaShuttleDrop1Kutjevo
+  name: Kutjevo - Dropship Alamo Landing Zone
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_kutjevo.rsi
+    state: shuttle
+  - type: Area
+    landingZone: true
+
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaShuttleDrop2Kutjevo
+  name: Kutjevo - Dropship Normandy Landing Zone
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_kutjevo.rsi
+    state: shuttle2
+  - type: Area
+    landingZone: true
+
+- type: entity
+  parent: RMCAreaKutjevo
+  id: RMCAreaKutjevoExterior
+  name: Kutjevo - Exterior
+  components:
+  - type: Sprite
+    state: ext
+
+- type: entity
+  parent: RMCAreaKutjevo
+  id: RMCAreaKutjevoInterior
+  name: Kutjevo - Interior
+  components:
+  - type: Sprite
+    state: int
+  - type: Area
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaKutjevoInterior
+  id: RMCAreaKutjevoInteriorOob
+  name: Kutjevo -  Out Of Bounds
+  components:
+  - type: Sprite
+    state: oob
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorOob
+  id: RMCAreaKutjevoInteriorOobDevRoom
+  name: Kutjevo - Credits Room
+  components:
+  - type: Sprite
+    state: kutjevo
+  - type: Area
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaKutjevoExterior
+  id: RMCAreaKutjevoExteriorLzPad
+  name: Kutjevo Auxilliary Landing Zone
+  components:
+  - type: Sprite
+    state: lz_pad
+  - type: Area
+    resinAllowed: false
+    landingZone: true
+
+- type: entity
+  parent: RMCAreaKutjevoExterior
+  id: RMCAreaKutjevoExteriorLzDunes
+  name: Kutjevo - Landing Zone Dunes
+  components:
+  - type: Sprite
+    state: lz_dunes
+  - type: Area
+    resinAllowed: false
+    landingZone: true
+
+- type: entity
+  parent: RMCAreaKutjevoExterior
+  id: RMCAreaKutjevoExteriorLzRiver
+  name: Kutjevo - Power Station River
+  components:
+  - type: Sprite
+    state: lz_river
+
+- type: entity
+  parent: RMCAreaKutjevoExterior
+  id: RMCAreaKutjevoExteriorSpring
+  name: Kutjevo - Southern Spring
+  components:
+  - type: Sprite
+    state: lz_river
+
+- type: entity
+  parent: RMCAreaKutjevoExterior
+  id: RMCAreaKutjevoExteriorScrubland
+  name: Kutjevo - North Scrubland
+  components:
+  - type: Sprite
+    state: scrubland
+
+- type: entity
+  parent: RMCAreaKutjevoExteriorScrubland
+  id: RMCAreaKutjevoExteriorScrublandSouth
+  name: Kutjevo - South Scrubland
+
+- type: entity
+  parent: RMCAreaKutjevoExterior
+  id: RMCAreaKutjevoExteriorStonyfields
+  name: Kutjevo - Stony Fields
+  components:
+  - type: Sprite
+    state: stone_fields
+
+- type: entity
+  parent: RMCAreaKutjevoExterior
+  id: RMCAreaKutjevoExteriorNorthwestColony
+  name: Kutjevo - Northwest Colony Grounds
+  components:
+  - type: Sprite
+    state: rf_dunes
+
+- type: entity
+  parent: RMCAreaKutjevoExterior
+  id: RMCAreaKutjevoExteriorRunoffDunes
+  name: Kutjevo - Runoff Dunes
+  components:
+  - type: Sprite
+    state: rf_dunes
+
+- type: entity
+  parent: RMCAreaKutjevoExterior
+  id: RMCAreaKutjevoExteriorRunoffRiver
+  name: Kutjevo - Runoff River
+  components:
+  - type: Sprite
+    state: rf_river
+
+- type: entity
+  parent: RMCAreaKutjevoExterior
+  id: RMCAreaKutjevoExteriorRunoffBridge
+  name: Kutjevo - Runoff Bridge
+  components:
+  - type: Sprite
+    state: rf_bridge
+
+- type: entity
+  parent: RMCAreaKutjevoExterior
+  id: RMCAreaKutjevoExteriorOverlook
+  name: Kutjevo - Runoff River Overlook
+  components:
+  - type: Sprite
+    state: rf_overlook
+
+- type: entity
+  parent: RMCAreaKutjevoExterior
+  id: RMCAreaKutjevoExteriorBotanyBayExt
+  name: Kutjevo - Space Weed Farm Exterior
+  components:
+  - type: Sprite
+    state: weed_ext
+
+- type: entity
+  parent: RMCAreaKutjevoExterior
+  id: RMCAreaKutjevoExteriorConstruction
+  name: Kutjevo - Abandoned Construction
+  components:
+  - type: Sprite
+    state: construction
+
+- type: entity
+  parent: RMCAreaKutjevoExterior
+  id: RMCAreaKutjevoExteriorComplexBorder
+  name: Kutjevo Complex - Exterior
+  components:
+  - type: Sprite
+    state: kutjevo
+
+- type: entity
+  parent: RMCAreaKutjevoExteriorComplexBorder
+  id: RMCAreaKutjevoExteriorComplexBorderBotanyMedicalCave
+  name: Kutjevo Complex - Botany - Medical Cave
+  components:
+  - type: Sprite
+    state: med_ext
+
+- type: entity
+  parent: RMCAreaKutjevoExteriorComplexBorder
+  id: RMCAreaKutjevoExteriorComplexBorderMedPark
+  name: Kutjevo Complex - Medical Park
+  components:
+  - type: Sprite
+    state: med_ext
+
+- type: entity
+  parent: RMCAreaKutjevoExteriorComplexBorder
+  id: RMCAreaKutjevoExteriorComplexBorderMedRec
+  name: Kutjevo Complex - Water Tank Cave
+  components:
+  - type: Sprite
+    state: construction2
+
+- type: entity
+  parent: RMCAreaKutjevoExterior
+  id: RMCAreaKutjevoExteriorTelecomm
+  name: Kutjevo - Communications Relay
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: ass_line
+
+- type: entity
+  parent: RMCAreaKutjevoExteriorTelecomm
+  id: RMCAreaKutjevoExteriorTelecommLz1North
+  name: Kutjevo - North LZ1 Communications Relay
+
+- type: entity
+  parent: RMCAreaKutjevoExteriorTelecomm
+  id: RMCAreaKutjevoExteriorTelecommLz1South
+  name: Kutjevo - South LZ1 Communications Relay
+
+- type: entity
+  parent: RMCAreaKutjevoExteriorTelecomm
+  id: RMCAreaKutjevoExteriorTelecommLz2North
+  name: Kutjevo - North LZ2 Communications Relay
+
+- type: entity
+  parent: RMCAreaKutjevoExteriorTelecomm
+  id: RMCAreaKutjevoExteriorTelecommLz2South
+  name: Kutjevo - South LZ2 Communications Relay
+
+- type: entity
+  parent: RMCAreaKutjevoInterior
+  id: RMCAreaKutjevoInteriorComplex
+  name: Kutjevo Complex
+  components:
+  - type: Sprite
+    state: kutjevo
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorComplex
+  id: RMCAreaKutjevoInteriorComplexBotany
+  name: Kutjevo Complex - Botany Bay
+  components:
+  - type: Sprite
+    state: botany0
+  - type: Area
+    minimapColor: '#812DA2EE'
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorComplexBotany
+  id: RMCAreaKutjevoInteriorComplexBotanyEast
+  name: Kutjevo Complex - Botany East Hall
+  components:
+  - type: Sprite
+    state: botany1
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorComplexBotany
+  id: RMCAreaKutjevoInteriorComplexBotanyEastTech
+  name: Kutjevo Complex - Powerplant Access Hall
+  components:
+  - type: Sprite
+    state: botany1
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorComplexBotany
+  id: RMCAreaKutjevoInteriorComplexBotanyLocks
+  name: Kutjevo Complex - Botany Stormlocks
+  components:
+  - type: Sprite
+    state: botany0
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorComplex
+  id: RMCAreaKutjevoInteriorComplexMed
+  name: Kutjevo Complex - Medical Foyer
+  components:
+  - type: Sprite
+    state: med0
+  - type: Area
+    minimapColor: '#3DBF75EE'
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorComplexMed
+  id: RMCAreaKutjevoInteriorComplexMedAutoDoc
+  name: Kutjevo Complex - Medical Autodoc Hallway
+  components:
+  - type: Sprite
+    state: med2
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorComplexMed
+  id: RMCAreaKutjevoInteriorComplexMedOperating
+  name: Kutjevo Complex - Medical Operation Hallway
+  components:
+  - type: Sprite
+    state: med3
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorComplexMed
+  id: RMCAreaKutjevoInteriorComplexMedTriage
+  name: Kutjevo Complex - Medical Triage Hallway
+  components:
+  - type: Sprite
+    state: med4
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorComplexMed
+  id: RMCAreaKutjevoInteriorComplexMedCells
+  name: Kutjevo Complex - Medical Cryocells
+  components:
+  - type: Sprite
+    state: med5
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorComplexMed
+  id: RMCAreaKutjevoInteriorComplexMedPano
+  name: Kutjevo Complex - Medical Panopticon
+  components:
+  - type: Sprite
+    state: med3
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorComplexMed
+  id: RMCAreaKutjevoInteriorComplexMedLocks
+  name: Kutjevo Complex - Medical Stormlocks
+  components:
+  - type: Sprite
+    state: med1
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorComplex
+  id: RMCAreaKutjevoInteriorComplexNorthwestDorms
+  name: Kutjevo Complex - Northwest Colony Dorms
+  components:
+  - type: Sprite
+    state: colony_int
+    landingZone: true
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorComplex
+  id: RMCAreaKutjevoInteriorComplexNorthwestFlightControl
+  name: Kutjevo Complex - Northwest Flight Control Room
+  components:
+  - type: Sprite
+    state: colony_int
+    landingZone: true
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorComplex
+  id: RMCAreaKutjevoInteriorComplexNorthwestSecurityCheckpoint
+  name: Kutjevo Complex - Northwest Security Checkpoint
+  components:
+  - type: Sprite
+    state: colony_int
+  - type: Area
+    minimapColor: '#A22D2DEE'
+    landingZone: true
+
+- type: entity
+  parent: RMCAreaKutjevoInterior
+  id: RMCAreaKutjevoInteriorPower
+  name: Kutjevo - Hydroelectric Dam Substation
+  components:
+  - type: Sprite
+    state: power
+  - type: Area
+    minimapColor: '#C19504E7'
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorPower
+  id: RMCAreaKutjevoInteriorPowerComms
+  name: Kutjevo - Hydroelectric Dam Comms Relay
+  components:
+  - type: Sprite
+    state: power
+
+- type: entity
+  parent: RMCAreaKutjevoInterior
+  id: RMCAreaKutjevoInteriorConstruction
+  name: Kutjevo - Abandoned Construction Interior
+  components:
+  - type: Sprite
+    state: construction_int
+
+- type: entity
+  parent: RMCAreaKutjevoInterior
+  id: RMCAreaKutjevoInteriorForemansOffice
+  name: Kutjevo - Foreman's Office
+  components:
+  - type: Sprite
+    state: foremans
+
+- type: entity
+  parent: RMCAreaKutjevoInterior
+  id: RMCAreaKutjevoInteriorBotanyBayInt
+  name: Kutjevo - Space Weed Farm Interior
+  components:
+  - type: Sprite
+    state: weed_int
+
+- type: entity
+  parent: RMCAreaKutjevoInterior
+  id: RMCAreaKutjevoInteriorPowerPt2ElectricBoogaloo
+  name: Kutjevo - Power Plant
+  components:
+  - type: Sprite
+    state: power_2
+
+- type: entity
+  parent: RMCAreaKutjevoInterior
+  id: RMCAreaKutjevoInteriorColony
+  name: Kutjevo - Colony Building Interior
+  components:
+  - type: Sprite
+    state: colony_int
+
+- type: entity
+  parent: RMCAreaKutjevoInterior
+  id: RMCAreaKutjevoInteriorColonyCentral
+  name: Kutjevo - Central Colony Caves
+  components:
+  - type: Sprite
+    state: colony_caves_0
+  - type: Area
+    minimapColor: '#3F3C3CEF'
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorColonyCentral
+  id: RMCAreaKutjevoInteriorColonyCentralMineElevator
+  name: Kutjevo - Central Colony Elevator
+  components:
+  - type: Sprite
+    state: colony_caves_0
+
+- type: entity
+  parent: RMCAreaKutjevoInterior
+  id: RMCAreaKutjevoInteriorColonyNorth
+  name: Kutjevo - North Colony Caves
+  components:
+  - type: Sprite
+    state: colony_caves_1
+
+- type: entity
+  parent: RMCAreaKutjevoInterior
+  id: RMCAreaKutjevoInteriorColonySEast
+  name: Kutjevo - North East Colony Caves
+  components:
+  - type: Sprite
+    state: colony_caves_2
+
+- type: entity
+  parent: RMCAreaKutjevoInterior
+  id: RMCAreaKutjevoInteriorColonyNEast
+  name: Kutjevo - South East Colony Caves
+  components:
+  - type: Sprite
+    state: colony_caves_2
+
+- type: entity
+  parent: RMCAreaKutjevoInterior
+  id: RMCAreaKutjevoInteriorColonySouth
+  name: Kutjevo - South Colony Caves
+  components:
+  - type: Sprite
+    state: colony_caves_3
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorColonySouth
+  id: RMCAreaKutjevoInteriorColonySouthPower2
+  name: Kutjevo - South Colony Treatment Plant
+  components:
+  - type: Sprite
+    state: colony_caves_3
+  - type: Area
+    minimapColor: '#5A4501E7'
+

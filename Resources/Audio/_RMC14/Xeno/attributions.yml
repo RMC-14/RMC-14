@@ -342,3 +342,18 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/effects/alien_egg_burst.ogg"
+
+- files: ["runner_charging_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/ecc58c70907fcc5ec13dec62e6d3a973c991e32b/sound/effects/runner_charging_1.ogg"
+
+- files: ["runner_charging_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/ecc58c70907fcc5ec13dec62e6d3a973c991e32b/sound/effects/runner_charging_2.ogg"
+
+- files: ["xeno_newlarva.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/19c2300177ed8da4d25d111aa1a7f8d356552a21/sound/effects/xeno_newlarva.ogg"

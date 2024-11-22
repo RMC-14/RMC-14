@@ -27,6 +27,9 @@
     scatterWielded: 6
     scatterUnwielded: 20
     baseFireRate: 0.8
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.1
+    accuracyMultiplierUnwielded: 0.5
   - type: WieldDelay
     baseDelay: 0.4
   - type: WieldableSpeedModifiers
@@ -98,6 +101,11 @@
       ignoreModifiers: true
     - range: 7
       falloff: 1
+  - type: RMCProjectileAccuracy
+    accuracy: 90
+    thresholds:
+    - range: 14
+      falloff: 10
 
 - type: entity
   parent: RMCBoxShotgunBase

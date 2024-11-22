@@ -26,6 +26,9 @@
     blacklist:
       components:
       - Xeno
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: Anchorable
     flags:
     - None

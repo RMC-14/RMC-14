@@ -28,6 +28,8 @@
   - type: XenoProjectile
   - type: ProjectileMaxRange
     max: 7
+  - type: RMCProjectileAccuracy
+    accuracy: 165
 
 - type: entity
   abstract: true
@@ -58,6 +60,8 @@
     amount: 10
   - type: XenoProjectile
     deleteOnFriendlyXeno: true
+  - type: RMCProjectileAccuracy
+    accuracy: 110
 
 - type: entity
   parent: XenoSpitProjectile
@@ -154,6 +158,8 @@
     deleteOnFriendlyXeno: false
   - type: ProjectileMaxRange
     max: 4
+  - type: RMCProjectileAccuracy
+    accuracy: 135
 
 - type: entity
   parent: XenoBaseProjectile
@@ -196,6 +202,8 @@
     whitelist:
       components:
       - Marine
+  - type: RMCProjectileAccuracy
+    accuracy: 95
 
 - type: entity
   parent: XenoBaseProjectile
@@ -241,6 +249,8 @@
     coughDamage:
         groups:
           Brute: 5
+  - type: RMCProjectileAccuracy
+    accuracy: 95
 
 - type: entity
   parent: XenoSpitProjectile
@@ -256,6 +266,8 @@
     damage:
       types:
         Heat: 30
+  - type: RMCProjectileAccuracy
+    accuracy: 110
 
 - type: entity
   parent: XenoAcidBallSpitProjectile
@@ -265,6 +277,8 @@
   components:
   - type: XenoProjectileShieldOnHit
   - type: PreventCollideWithDead
+  - type: RMCProjectileAccuracy
+    accuracy: 160
 
 - type: entity
   parent: XenoSpitProjectile

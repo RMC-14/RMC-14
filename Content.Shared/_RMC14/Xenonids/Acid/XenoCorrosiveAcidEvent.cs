@@ -13,6 +13,9 @@ public sealed partial class XenoCorrosiveAcidEvent : EntityTargetActionEvent
     public FixedPoint2 PlasmaCost = 100;
 
     [DataField]
+    public int EnergyCost = 0;
+
+    [DataField]
     public TimeSpan Time = TimeSpan.FromSeconds(225);
 
     [DataField]
@@ -20,5 +23,8 @@ public sealed partial class XenoCorrosiveAcidEvent : EntityTargetActionEvent
 
     [DataField]
     public float ExpendableLightDps = 2.5f;
+
+    [DataField]
+    public float ApplyTimeMultiplier = 1;
 
 }

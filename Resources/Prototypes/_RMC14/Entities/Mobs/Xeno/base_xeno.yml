@@ -254,6 +254,7 @@
     keys:
     - enum.VendingMachineUiKey.Key
     - enum.PaperUiKey.Key
+    - enum.RMCCameraUiKey.Key
   - type: ActiveInputMover
   - type: HiveTracker
   - type: RequireProjectileTarget
@@ -274,6 +275,8 @@
       sprite: _RMC14/Interface/map_blips.rsi
       state: background_xeno
   - type: XenoMapTracked
+  - type: Evasion
+  - type: RMCWeaponAccuracy # This is so projectiles fired by xenos get a correctly-generated seed for RNG.
   - type: StunOnExplosionReceived
     weak: true
   - type: AssignXenoName

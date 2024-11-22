@@ -418,6 +418,9 @@
     tags:
     - RMCSmartGunSidearmHolster
 
+- type: Tag
+  id: RMCSmartGunSidearmHolster
+
 - type: entity
   parent: CMBeltMarine
   id: RMCBeltGrenade
@@ -505,6 +508,9 @@
     tags:
     - RMCSmartPistolHolster
 
+- type: Tag
+  id: RMCSmartPistolHolster
+
 - type: entity
   parent: CMBeltMarine
   id: RMCBeltHolsterPistol
@@ -562,6 +568,9 @@
     tags:
     - RMCGeneralPistolHolster
 
+- type: Tag
+  id: RMCGeneralPistolHolster
+
 - type: entity
   parent: CMBeltMarine
   id: RMCBeltHolsterRevolver
@@ -614,6 +623,9 @@
     tags:
     - RMCGeneralRevolverHolster
 
+- type: Tag
+  id: RMCGeneralRevolverHolster
+
 - type: entity
   parent: ClothingBeltBase # Can't have storage slots on this one
   id: RMCBeltHolsterSMG
@@ -654,6 +666,9 @@
     tags:
     - RMCSMGHolster
 
+- type: Tag
+  id: RMCSMGHolster
+
 - type: entity
   parent: CMBeltBaseStorage
   id: RMCBeltUtilityGeneral
@@ -678,6 +693,9 @@
   - type: Tag
     tags:
     - RMCG8Pouch
+
+- type: Tag
+  id: RMCG8Pouch
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -734,6 +752,9 @@
     tags:
     - RMCSMGPouchHolster
 
+- type: Tag
+  id: RMCSMGPouchHolster
+
 - type: entity
   parent: CMBeltBaseStorage
   id: RMCMatebaBelt
@@ -766,7 +787,7 @@
   #      - EngineerKit # TODO RMC14
   - type: Tag
     tags:
-    - RMCG8Pouch
+    - RMCMatebaHolster
   - type: FixedItemSizeStorage
   - type: CMHolster
     whitelist:
@@ -778,6 +799,9 @@
       whitelist:
         components:
         - Gun
+
+- type: Tag
+  id: RMCMatebaHolster
 
 - type: entity
   parent: RMCMatebaBelt
@@ -807,6 +831,7 @@
   - type: Clothing
     slots:
     - belt
+    - suitStorage
     sprite: _RMC14/Objects/Clothing/Belt/xm51.rsi
   - type: Storage
     maxItemSize: Large
@@ -817,9 +842,6 @@
       - RMCWeaponShotgunXM51
       - RMCMagazineShotgunXM51
       - RMCShellShotgun # TODO RMC14 bullet handfuls
-  - type: Tag
-    tags:
-    - RMCG8Pouch
   - type: FixedItemSizeStorage
   - type: CMHolster
     whitelist:
@@ -839,6 +861,12 @@
   - type: CMStorageVisualizer
     storageClosed: null
     storageOpen: null
+  - type: Tag
+    tags:
+    - RMCXM51Holster
+
+- type: Tag
+  id: RMCXM51Holster
 
 - type: entity
   parent: CMBeltBaseStorage
