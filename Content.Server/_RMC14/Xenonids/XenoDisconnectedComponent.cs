@@ -1,9 +1,8 @@
-﻿using Robust.Shared.GameStates;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+﻿using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server._RMC14.Xenonids;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
+[RegisterComponent, AutoGenerateComponentPause]
 [Access(typeof(XenoRoleSystem))]
 public sealed partial class XenoDisconnectedComponent : Component
 {
