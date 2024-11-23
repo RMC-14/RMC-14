@@ -99,6 +99,20 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: praetorian
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.5875
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.645
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.4275
+      whitelist:
+        components:
+        - XenoHeavy
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -126,23 +140,6 @@
     - RMCXenoPraetorianVanguard
     - RMCXenoPraetorianWarden
   - type: AcidTrap
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 1.56
-    baseSprintSpeed: 4.17
-  - type: SlowOnPull
-    slowdowns:
-    - multiplier: 0.44
-      whitelist:
-        components:
-        - Marine
-    - multiplier: 0.44
-      whitelist:
-        components:
-        - XenoLight
-    - multiplier: 0.29
-      whitelist:
-        components:
-        - XenoHeavy
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -193,19 +190,19 @@
       groups:
         Brute: 36
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1.5
-    baseSprintSpeed: 3.77
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 3.4
   - type: SlowOnPull
     slowdowns:
-    - multiplier: 0.47
+    - multiplier: 0.64
       whitelist:
         components:
         - Marine
-    - multiplier: 0.47
+    - multiplier: 0.7025
       whitelist:
         components:
         - XenoLight
-    - multiplier: 0.31
+    - multiplier: 0.475
       whitelist:
         components:
         - XenoHeavy
@@ -240,23 +237,6 @@
   - type: XenoClaws
     clawType: Sharp
   - type: XenoFinesse
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 1.6
-    baseSprintSpeed: 4.65
-  - type: SlowOnPull
-    slowdowns:
-    - multiplier: 0.42
-      whitelist:
-        components:
-        - Marine
-    - multiplier: 0.42
-      whitelist:
-        components:
-        - XenoLight
-    - multiplier: 0.26
-      whitelist:
-        components:
-        - XenoHeavy
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -288,20 +268,3 @@
     popup: rmc-xeno-vanguard-popup
   - type: XenoClaws
     clawType: Sharp
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 1.5
-    baseSprintSpeed: 4.44
-  - type: SlowOnPull
-    slowdowns:
-    - multiplier: 0.43
-      whitelist:
-        components:
-        - Marine
-    - multiplier: 0.43
-      whitelist:
-        components:
-        - XenoLight
-    - multiplier: 0.27
-      whitelist:
-        components:
-        - XenoHeavy
