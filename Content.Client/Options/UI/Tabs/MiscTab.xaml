@@ -5,6 +5,10 @@
     <BoxContainer Orientation="Vertical">
         <ScrollContainer VerticalExpand="True" HorizontalExpand="True">
             <BoxContainer Orientation="Vertical" Margin="8 8 8 8" VerticalExpand="True">
+                <Label Text="{Loc 'cm-ui-rmc14'}"
+                       FontColorOverride="{x:Static s:StyleNano.NanoGold}"
+                       StyleClasses="LabelKeyText"/>
+                <CheckBox Name="RMCAutoPunctuate" Text="{Loc 'rmc-ui-auto-punctuate'}" Margin="0 0 0 5" />
                 <Label Text="{Loc 'ui-options-general-ui-style'}"
                        StyleClasses="LabelKeyText"/>
                 <ui:OptionDropDown Name="DropDownHudTheme" Title="{Loc 'ui-options-hud-theme'}" />
