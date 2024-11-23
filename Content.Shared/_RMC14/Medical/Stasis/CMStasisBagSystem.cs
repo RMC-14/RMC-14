@@ -109,6 +109,9 @@ public sealed class CMStasisBagSystem : EntitySystem
 
         while (stasisQuery.MoveNext(out var uid, out var bag))
         {
+            if (TerminatingOrDeleted(uid))
+                continue;
+
             if (!_container.TryGetContainer(uid, "entity_storage", out var container))
                 continue;
 
