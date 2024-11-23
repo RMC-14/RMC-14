@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Xenonids.Construction;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-[Access(typeof(SharedXenoConstructionSystem), typeof(ResinWhisperSystem))]
+[Access(typeof(SharedXenoConstructionSystem), typeof(ResinWhispererSystem))]
 public sealed partial class XenoConstructionComponent : Component
 {
     [DataField, AutoNetworkedField]

@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
+using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -15,14 +16,14 @@ using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 
-public sealed partial class ResinWhisperSystem : EntitySystem
+public sealed partial class ResinWhispererSystem : EntitySystem
 {
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedDoorSystem _door = default!;
+    [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
+
 
     private List<EntProtoId> _resinDoorPrototypes = new() { "DoorXenoResin", "DoorXenoResinThick" };
 
@@ -30,11 +31,10 @@ public sealed partial class ResinWhisperSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ResinWhisperComponent, XenoSecreteStructureAdjustFields>(OnRemoteSecreteStructure);
-        //SubscribeLocalEvent<ResinWhisperComponent, UserActivateInWorldEvent>(OnRemoteOpenDoor);
+        SubscribeLocalEvent<ResinWhispererComponent, XenoSecreteStructureAdjustFields>(OnRemoteSecreteStructure);
     }
 
-    private void OnRemoteSecreteStructure(EntityUid ent, ResinWhisperComponent comp, XenoSecreteStructureAdjustFields args)
+    private void OnRemoteSecreteStructure(EntityUid ent, ResinWhispererComponent comp, XenoSecreteStructureAdjustFields args)
     {
         if (!TryComp(ent, out XenoConstructionComponent? constructComp))
         {
@@ -64,7 +64,7 @@ public sealed partial class ResinWhisperSystem : EntitySystem
             return;
         }
 
-        if (!_interaction.InRangeUnobstructed(ent, args.TargetCoordinates, comp.MaxRemoteConstructDistance))
+        if (!_examineSystem.InRangeUnOccluded(ent, args.TargetCoordinates, comp.MaxRemoteConstructDistance))
         {
             return;
         }
@@ -77,10 +77,5 @@ public sealed partial class ResinWhisperSystem : EntitySystem
 
         constructComp.BuildDelay = comp.StandardConstructDelay.Value.Multiply(comp.RemoteConstructDelayMultiplier);
         constructComp.BuildRange = comp.MaxRemoteConstructDistance;
-    }
-
-    private void OnRemoteOpenDoor(EntityUid ent, ResinWhisperComponent comp, UserActivateInWorldEvent args)
-    {
-
     }
 }

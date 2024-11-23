@@ -56,7 +56,7 @@ public sealed class CMDoorSystem : EntitySystem
 
     private void OnDoorAltVerb(EntityUid uid, DoorComponent component, GetVerbsEvent<AlternativeVerb> args)
     {
-        if (HasComp<ResinWhisperComponent>(args.User))
+        if (HasComp<ResinWhispererComponent>(args.User))
         {
             args.Verbs.Add(new AlternativeVerb()
             {
