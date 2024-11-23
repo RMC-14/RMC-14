@@ -110,10 +110,10 @@ public sealed class CMStasisBagSystem : EntitySystem
         while (stasisQuery.MoveNext(out var uid, out var bag))
         {
             if (!_container.TryGetContainer(uid, "entity_storage", out var container))
-				continue;
+                continue;
 
             if (container.ContainedEntities.Count <= 0)
-				continue;
+                continue;
 
             bool inStasis = false;
             foreach (var ent in container.ContainedEntities)
@@ -130,7 +130,7 @@ public sealed class CMStasisBagSystem : EntitySystem
             }
 
             if (!inStasis)
-				continue;
+                continue;
 
             bag.StasisLeft -= TimeSpan.FromSeconds(frameTime);
 
