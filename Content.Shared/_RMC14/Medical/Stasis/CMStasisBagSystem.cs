@@ -110,10 +110,10 @@ public sealed class CMStasisBagSystem : EntitySystem
         while (stasisQuery.MoveNext(out var uid, out var bag))
         {
             if (!_container.TryGetContainer(uid, "entity_storage", out var container))
-                return;
+				continue;
 
             if (container.ContainedEntities.Count <= 0)
-                return;
+				continue;
 
             bool inStasis = false;
             foreach (var ent in container.ContainedEntities)
@@ -122,7 +122,7 @@ public sealed class CMStasisBagSystem : EntitySystem
                 {
                     _entStorage.OpenStorage(uid);
                     _popup.PopupEntity(Loc.GetString("rmc-stasis-reject-dead"), uid, PopupType.SmallCaution);
-                    return;
+                    continue;
                 }
 
                 if (HasComp<CMInStasisComponent>(ent))
@@ -130,7 +130,7 @@ public sealed class CMStasisBagSystem : EntitySystem
             }
 
             if (!inStasis)
-                return;
+				continue;
 
             bag.StasisLeft -= TimeSpan.FromSeconds(frameTime);
 
