@@ -1,3 +1,5 @@
+using Content.Shared.FixedPoint;
+using Robust.Shared.GameStates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,16 +9,25 @@ using System.Threading.Tasks;
 namespace Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 
 /// <summary>
-/// Allows the entity to build resin structures at a distance
+/// Allows the entity to build resin structures at a distance. Depends on XenoConstructionComponent.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class ResinWhisperComponent : Component
 {
+    /// <summary>
+    /// Normal Construction Delay from XenoConstructionComponent
+    /// </summary>
     [DataField]
-    public TimeSpan? ConstructDelay = null;
+    public TimeSpan? StandardConstructDelay = null;
+
+    /// <summary>
+    /// Normal Construction Max Distance from XenoConstructionComponent
+    /// </summary>
+    [DataField]
+    public FixedPoint2? MaxConstructDistance = null;
 
     [DataField]
-    public float MaxRemoteDistance = 30f;
+    public float MaxRemoteConstructDistance = 50f;
 
     /// <summary>
     /// Multiplier of the resin structure build delay

@@ -227,7 +227,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        var attempt = new XenoSecreteStructureAttemptEvent(snapped);
+        var attempt = new XenoSecreteStructureAttemptEvent(args.Target);
         RaiseLocalEvent(xeno, attempt);
 
         if (attempt.Cancelled)
@@ -454,6 +454,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
 
         var snapped = args.Target.SnapToGrid(EntityManager, _map);
+
+        var adjustEv = new XenoSecreteStructureAdjustFields(snapped);
+        RaiseLocalEvent(args.User, ref adjustEv);
+
         if (ent.Comp.CanUpgrade &&
             construction.CanUpgrade &&
             _rmcMap.HasAnchoredEntityEnumerator<XenoStructureUpgradeableComponent>(snapped, out var upgradeable) &&

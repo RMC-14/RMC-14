@@ -1,5 +1,12 @@
 using Content.Shared._RMC14.Xenonids.Construction.Events;
+using Content.Shared._RMC14.Xenonids.Weeds;
+using Content.Shared.Doors.Components;
+using Content.Shared.Doors.Systems;
+using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
+using Content.Shared.Popups;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Prototypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,39 +19,68 @@ public sealed partial class ResinWhisperSystem : EntitySystem
 {
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly SharedDoorSystem _door = default!;
+
+    private List<EntProtoId> _resinDoorPrototypes = new() { "DoorXenoResin", "DoorXenoResinThick" };
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ResinWhisperComponent, XenoSecreteStructureAttemptEvent>(OnRemoteSecreteStructure);
+        SubscribeLocalEvent<ResinWhisperComponent, XenoSecreteStructureAdjustFields>(OnRemoteSecreteStructure);
+        //SubscribeLocalEvent<ResinWhisperComponent, UserActivateInWorldEvent>(OnRemoteOpenDoor);
     }
 
-    private void OnRemoteSecreteStructure(EntityUid ent, ResinWhisperComponent comp, XenoSecreteStructureAttemptEvent args)
+    private void OnRemoteSecreteStructure(EntityUid ent, ResinWhisperComponent comp, XenoSecreteStructureAdjustFields args)
     {
-        if (_interaction.InRangeUnobstructed(ent, args.TargetCoords) && comp.ConstructDelay is TimeSpan)
-        {
-            constructComp.BuildDelay = comp.ConstructDelay.Value;
-            return;
-        }
-
-        if (!_interaction.InRangeUnobstructed(ent, args.TargetCoords, 0))
-        {
-            args.Cancel();
-            return;
-        }
-
         if (!TryComp(ent, out XenoConstructionComponent? constructComp))
         {
-            args.Cancel();
             return;
         }
 
-        if (comp.ConstructDelay is null)
+        if (comp.StandardConstructDelay is TimeSpan)
         {
-            comp.ConstructDelay = constructComp.BuildDelay;
+            constructComp.BuildDelay = comp.StandardConstructDelay.Value;
+        }
+        else
+        {
+            comp.StandardConstructDelay = constructComp.BuildDelay;
         }
 
-        constructComp.BuildDelay = comp.ConstructDelay.Value.Multiply(comp.RemoteConstructDelayMultiplier);
+        if (comp.MaxConstructDistance is FixedPoint2)
+        {
+            constructComp.BuildRange = comp.MaxConstructDistance.Value;
+        }
+        else
+        {
+            comp.MaxConstructDistance = constructComp.BuildRange;
+        }
+
+        if (_interaction.InRangeUnobstructed(ent, args.TargetCoordinates, comp.MaxConstructDistance.Value.Float()))
+        {
+            return;
+        }
+
+        if (!_interaction.InRangeUnobstructed(ent, args.TargetCoordinates, comp.MaxRemoteConstructDistance))
+        {
+            return;
+        }
+
+        if (!_weeds.IsOnWeeds(ent))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-remote-failed-need-on-weeds"), ent, ent);
+            return;
+        }
+
+        constructComp.BuildDelay = comp.StandardConstructDelay.Value.Multiply(comp.RemoteConstructDelayMultiplier);
+        constructComp.BuildRange = comp.MaxRemoteConstructDistance;
+    }
+
+    private void OnRemoteOpenDoor(EntityUid ent, ResinWhisperComponent comp, UserActivateInWorldEvent args)
+    {
+
     }
 }

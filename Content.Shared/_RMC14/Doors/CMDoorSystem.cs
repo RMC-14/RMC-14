@@ -1,6 +1,9 @@
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Access.Systems;
+using Content.Shared.Database;
 using Content.Shared.Directions;
 using Content.Shared.Doors;
 using Content.Shared.Doors.Components;
@@ -8,10 +11,13 @@ using Content.Shared.Doors.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Prying.Components;
+using Content.Shared.Prying.Systems;
+using Content.Shared.Verbs;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Map.Enumerators;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Doors;
@@ -25,14 +31,20 @@ public sealed class CMDoorSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
+    [Dependency] private readonly PryingSystem _prying = default!;
+
 
     private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<CMDoubleDoorComponent> _doubleQuery;
+    private List<EntProtoId> _resinDoorPrototypes = new() { "DoorXenoResin", "DoorXenoResinThick" };
 
     public override void Initialize()
     {
         _doorQuery = GetEntityQuery<DoorComponent>();
         _doubleQuery = GetEntityQuery<CMDoubleDoorComponent>();
+
+        SubscribeLocalEvent<DoorComponent, GetVerbsEvent<AlternativeVerb>>(OnDoorAltVerb);
 
         // TODO RMC14 there is an edge case where one door can close but the other can't, to fix this CanClose should be checked on the adjacent door when a double door tries to close
         SubscribeLocalEvent<CMDoubleDoorComponent, DoorStateChangedEvent>(OnDoorStateChanged);
@@ -40,6 +52,58 @@ public sealed class CMDoorSystem : EntitySystem
         SubscribeLocalEvent<RMCDoorButtonComponent, ActivateInWorldEvent>(OnButtonActivateInWorld);
 
         SubscribeLocalEvent<RMCPodDoorComponent, BeforePryEvent>(OnPodDoorBeforePry);
+    }
+
+    private void OnDoorAltVerb(EntityUid uid, DoorComponent component, GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (HasComp<ResinWhisperComponent>(args.User))
+        {
+            args.Verbs.Add(new AlternativeVerb()
+            {
+                Impact = LogImpact.Low,
+                Act = () =>
+                {
+                    var target = args.Target;
+                    var user = args.User;
+
+                    if (!_weeds.IsOnWeeds(user))
+                    {
+                        _popup.PopupClient(Loc.GetString("rmc-xeno-construction-remote-failed-need-on-weeds"), user, user);
+                        return;
+                    }
+
+                    if (Prototype(target) is not EntityPrototype targetProto ||
+                        !_resinDoorPrototypes.Contains(targetProto.ID) ||
+                        !TryComp(target, out DoorComponent? doorComp))
+                    {
+                        return;
+                    }
+
+                    if (_doors.TryToggleDoor(target))
+                    {
+                        if (doorComp.State == DoorState.Opening)
+                        {
+                            _popup.PopupClient(Loc.GetString("rmc-xeno-construction-remote-open-door"), user, user);
+                        }
+                        if (doorComp.State == DoorState.Closing)
+                        {
+                            _popup.PopupClient(Loc.GetString("rmc-xeno-construction-remote-close-door"), user, user);
+                        }
+                    }
+                }
+            });
+        }
+
+        if (args.CanInteract && args.CanAccess && HasComp<PryingComponent>(args.User))
+        {
+            args.Verbs.Add(new AlternativeVerb()
+            {
+                Text = Loc.GetString("door-pry"),
+                Impact = LogImpact.Low,
+                Act = () => _prying.TryPry(uid, args.User, out _, args.User),
+            });
+        }
+
     }
 
     private void OnDoorStateChanged(Entity<CMDoubleDoorComponent> door, ref DoorStateChangedEvent args)

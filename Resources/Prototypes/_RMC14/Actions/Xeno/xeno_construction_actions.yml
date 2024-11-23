@@ -46,7 +46,7 @@
       state: secrete_resin
     event: !type:XenoSecreteStructureActionEvent
     deselectOnMiss: false
-    range: 20
+    range: 40
     repeat: true
     checkCanAccess: false
   - type: XenoConstructionAction
