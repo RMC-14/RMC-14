@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: RMCSecuritySurvivor
   name: cm-job-name-security-survivor 
-  description: cm-job-description-survivor
+  description: cm-job-description-survivor-security
   playTimeTracker: RMCJobSurvivorSecurity
   requirements:
   - !type:DepartmentTimeRequirement
@@ -37,6 +37,8 @@
     - type: MotionDetectorTracked
     - type: UserIFF
       faction: FactionSurvivor
+    - type: SurvivorRoleBriefing
+      survivorRoleBriefing: security-role-briefing
   hasIcon: false
 
 - type: startingGear
@@ -47,7 +49,7 @@
     jumpsuit: ClothingUniformJumpsuitSec 
     back: CMSatchelSecurity
     shoes: RMCShoesJackboots
-    id: CMIDCardColonist # Marshalls actually get a badge looking thang
+    id: CMIDCardColonistSecurity # Marshalls actually get a badge looking thang
     ears: CMHeadsetColony
     pocket1: RMCM5Bayonet
     pocket2: RMCFlashlight

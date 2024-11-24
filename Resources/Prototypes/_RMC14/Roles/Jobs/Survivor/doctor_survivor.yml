@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: RMCMedicalSurvivor
   name: cm-job-name-medical-survivor
-  description: cm-job-description-survivor
+  description: cm-job-description-survivor-doctor
   playTimeTracker: RMCJobSurvivorMedical
   requirements:
   - !type:DepartmentTimeRequirement
@@ -20,13 +20,13 @@
   supervisors: cm-job-supervisors-nobody
   accessGroups:
   - ColonistMedical
+  - CMAccessMedical
+  - CMMedbay #exists so that medical survivors have access to we-ya-meds
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillMedical: 3
@@ -37,6 +37,8 @@
     - type: MotionDetectorTracked
     - type: UserIFF
       faction: FactionSurvivor
+    - type: SurvivorRoleBriefing
+      survivorRoleBriefing: doctor-role-briefing
   hasIcon: false
 
 
@@ -49,7 +51,7 @@
     back: CMSatchelMedical
     gloves: CMHandsLatex
     shoes: RMCShoesLaceup
-    id: CMIDCardColonist 
+    id: CMIDCardColonistDoctor 
     eyes: RMCGlassesMedicalHUDGlasses
     ears: CMHeadsetColony
     pocket1: RMCM5Bayonet

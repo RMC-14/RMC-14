@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: CMSurvivorHostile
   name: cm-job-name-survivor-hostile
@@ -14,7 +14,7 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 18000 # 5 hours
-  startingGear: RMCGearSurvivor
+  startingGear: RMCGearSurvivorHostile
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-nobody
@@ -29,13 +29,31 @@
         RMCSkillEndurance: 2
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
+        RMCSkillPolice: 2
+        RMCSkillCqc: 2
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetCivilian
     - type: Survivor
     - type: MotionDetectorTracked
     - type: UserIFF
       faction: FactionSurvivor
+    - type: SurvivorRoleBriefing
+      survivorRoleBriefing: clf-civilian-role-briefing
   hasIcon: false
+
+- type: startingGear
+  id: RMCGearSurvivorHostile
+  equipment:
+    neck: ClothingNeckCloakCLF
+    jumpsuit: RMCJumpsuitFreelancer
+    back: RMCSatchelCivilianFill
+    shoes: RMCShoesBlack
+    outerClothing: RMCCoatMilitiaBrace
+    id: CMIDCardColonistHostile
+    ears: CMHeadset
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchGeneral
+    gloves: RMCHandsVeteran
 
 - type: entity
   parent: CMSpawnPointJobBase

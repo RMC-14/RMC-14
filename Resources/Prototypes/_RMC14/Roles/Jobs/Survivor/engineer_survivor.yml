@@ -1,8 +1,8 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: RMCEngineerSurvivor
   name: cm-job-name-engineer-survivor
-  description: cm-job-description-survivor
+  description: cm-job-description-survivor-engineer
   playTimeTracker: RMCJobSurvivorEngineer
   requirements:
   - !type:DepartmentTimeRequirement
@@ -36,6 +36,8 @@
     - type: MotionDetectorTracked
     - type: UserIFF
       faction: FactionSurvivor
+    - type: SurvivorRoleBriefing
+      survivorRoleBriefing: engineer-role-briefing
   hasIcon: false
  
 - type: startingGear
@@ -47,7 +49,7 @@
     jumpsuit: ClothingUniformJumpsuitEngineering
     back: CMSatchelEngineer
     shoes: ClothingShoesColorOrange
-    id: CMIDCardColonist
+    id: CMIDCardColonistEngineer
     ears: CMHeadsetColony
     pocket1: RMCM5Bayonet
     pocket2: RMCFlashlight

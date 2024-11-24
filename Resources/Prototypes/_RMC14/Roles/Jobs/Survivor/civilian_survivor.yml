@@ -35,6 +35,8 @@
     - type: MotionDetectorTracked
     - type: UserIFF
       faction: FactionSurvivor
+    - type: SurvivorRoleBriefing
+      survivorRoleBriefing: civilian-role-briefing
   hasIcon: false
 
 - type: startingGear
