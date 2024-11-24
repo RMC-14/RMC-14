@@ -797,3 +797,14 @@
     state: mizuno_kitty_drakonovisch
   - type: PatronFigurine
     id: d6a58381-b2a8-4caf-a22a-fd76ca53b1ae
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMerlinLeander
+  name: Merlin Leander figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: merlin_leander
+  - type: PatronFigurine
+    id: efe40ec4-b685-4025-8239-fdea3da1e019
