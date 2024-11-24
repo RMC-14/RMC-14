@@ -32,7 +32,7 @@
         RMCSkillPolice: 2
         RMCSkillCqc: 2
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetCivilian
+      preset: RMCSurvivorPresetCivilianCLF
     - type: Survivor
     - type: MotionDetectorTracked
     - type: UserIFF
