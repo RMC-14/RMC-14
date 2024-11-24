@@ -5,6 +5,8 @@
   name: closet
   description: It's a basic storage unit.
   components:
+  - type: Transform
+    anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Closets/standard.rsi
     layers:
@@ -24,6 +26,12 @@
     blacklist:
       components:
       - Xeno
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
+  - type: Anchorable
+    flags:
+    - None
 
 - type: entity
   parent: CMClosetBase

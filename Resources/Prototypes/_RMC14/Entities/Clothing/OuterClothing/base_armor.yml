@@ -18,6 +18,7 @@
   - type: Clothing
     equipSound:
       path: /Audio/_RMC14/Machines/armor_equip.ogg
+  - type: PlaytimeMedalHolder
 
 - type: entity
   abstract: true
@@ -43,6 +44,7 @@
       - RMCSMGPouchHolster
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
+      - RMCXM51Holster
       - RMCMotionDetector
       #TODO walkman
 

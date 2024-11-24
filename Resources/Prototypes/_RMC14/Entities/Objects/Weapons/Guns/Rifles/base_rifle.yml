@@ -65,7 +65,12 @@
   parent: CMBaseWeaponRifleNoDualWieldPenalty
   id: CMBaseWeaponRifle
   components:
-  - type: GunGroupSpreadPenalty
+  - type: GunDualWielding
+    weaponGroup: Rifle
+  - type: GunPointBlank
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.65
 
 - type: entity
   parent: BaseMagazineRifle

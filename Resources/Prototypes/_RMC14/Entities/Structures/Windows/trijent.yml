@@ -64,6 +64,7 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFrameChigusa
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowChigusa
     node: windowChigusa
@@ -134,6 +135,7 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFrameHangar
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowHangar
     node: windowHangar
@@ -204,6 +206,7 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFrameBunker
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowBunker
     node: windowBunker

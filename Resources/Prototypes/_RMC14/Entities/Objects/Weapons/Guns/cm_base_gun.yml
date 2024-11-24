@@ -36,6 +36,8 @@
   - type: Gun
     meleeCooldownOnShoot: false
     resetOnHandSelected: false
+  - type: RMCWeaponAccuracy
+  - type: GunSkilledAccuracy
 
 - type: entity
   parent: BaseBullet
@@ -46,3 +48,5 @@
     layers:
     - state: bullet
       shader: unshaded
+  - type: BulletholeGenerator
+  - type: RMCProjectileAccuracy

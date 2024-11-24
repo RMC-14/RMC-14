@@ -1,0 +1,247 @@
+﻿- type: entity
+  id: RMCOrbitalCannon
+  name: orbital cannon
+  description: "The UNMC Orbital Cannon System. Used for shooting large targets on the planet that is orbited. It accelerates its payload with solid fuel for devastating results upon impact."
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,0.49,3.49,2.49"
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
+  - type: Sprite
+    sprite: _RMC14/Structures/orbital_cannon.rsi
+    offset: 1.5, 0.5
+    layers:
+    - state: obc_unloaded
+      map: [ "base" ]
+  - type: Clickable
+  - type: InteractionOutline
+  - type: OrbitalCannon
+  - type: Appearance
+  - type: GenericVisualizer # TODO RMC14 animations
+    visuals:
+      enum.OrbitalCannonVisuals.Base:
+        base:
+          Loaded: { state: obc_loaded }
+          Unloaded: { state: obc_unloaded }
+          Chambered: { state: obc_chambered }
+
+- type: entity
+  id: RMCOrbitalCannonFuel
+  name: solid fuel
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/almayer_props.rsi
+    state: ob_fuel
+  - type: Clickable
+  - type: InteractionOutline
+  - type: PowerLoaderGrabbable
+    virtualRight: RMCVirtualDropshipGearRight
+    virtualLeft: RMCVirtualDropshipGearLeft
+  - type: Item
+  - type: OrbitalCannonFuel
+
+- type: entity
+  abstract: true
+  id: RMCOrbitalCannonWarheadBase
+  name: orbital warhead
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/almayer_props.rsi
+    state: ob_warhead1
+  - type: OrbitalCannonWarhead
+  - type: Clickable
+  - type: InteractionOutline
+  - type: PowerLoaderGrabbable
+    virtualRight: RMCVirtualDropshipGearRight
+    virtualLeft: RMCVirtualDropshipGearLeft
+  - type: Item
+
+- type: entity
+  parent: RMCOrbitalCannonWarheadBase
+  id: RMCOrbitalCannonWarheadExplosive
+  name: HE orbital warhead
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/almayer_props.rsi
+    state: ob_warhead_1
+  - type: OrbitalCannonWarhead
+    explosion: RMCOrbitalCannonExplosionExplosive
+
+- type: entity
+  parent: RMCOrbitalCannonWarheadBase
+  id: RMCOrbitalCannonWarheadIncendiary
+  name: incendiary orbital warhead
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/almayer_props.rsi
+    state: ob_warhead_2
+
+- type: entity
+  parent: RMCOrbitalCannonWarheadBase
+  id: RMCOrbitalCannonWarheadCluster
+  name: cluster orbital warhead
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/almayer_props.rsi
+    state: ob_warhead_3
+
+- type: entity
+  id: RMCOrbitalCannonWarheadSpawner
+  name: random orbital warhead
+  description: "This is a random orbital warhead."
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/almayer_props.rsi
+    state: ob_warhead_1
+  - type: RandomSpawner
+    prototypes:
+    - RMCOrbitalCannonWarheadExplosive
+#    - RMCOrbitalCannonWarheadCluster # TODO RMC14
+#    - RMCOrbitalCannonWarheadIncendiary # TODO RMC14
+
+- type: entity
+  parent: MarkerBase
+  id: RMCOrbitalCannonExplosionExplosive
+  name: explosive OB explosion
+  suffix: FIRES AN OB!!!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: OrbitalCannonExplosion
+    steps:
+    - type: RMCOB
+      total: 5000
+      slope: 1500
+      max: 200
+      delay: 1
+    - type: RMCOB
+      total: 50000
+      slope: 10
+      max: 90
+      delay: 0.3
+    - type: RMCOB
+      total: 50000
+      slope: 10
+      max: 90
+      delay: 0.6
+  - type: WarpPoint
+    location: 1 orbital bombardment
+
+- type: entity
+  id: RMCOrbitalCannonComputer
+  name: orbital cannon console
+  description: "The console controlling the orbital cannon loading systems."
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: ob_console # TODO RMC14 powered off, broken
+  - type: Clickable
+  - type: InteractionOutline
+  - type: UserInterface
+    interfaces:
+      enum.OrbitalCannonComputerUI.Key:
+        type: OrbitalCannonComputerBui
+  - type: ActivatableUI
+    key: enum.OrbitalCannonComputerUI.Key
+  - type: OrbitalCannonComputer
+
+- type: entity
+  parent: CMSeatBase
+  id: RMCOrbitalCannonChair
+  name: seat
+  description: "A comfortable seat."
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+    rot: 90
+  - type: Sprite
+    sprite: _RMC14/Structures/objects.rsi
+    state: ob_chair
+  - type: Strap
+
+- type: entity
+  id: RMCOrbitalCannonCableConnector
+  name: cannon cable connector
+  description: "A connector for the large cannon cables."
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
+  - type: Sprite
+    sprite: _RMC14/Structures/almayer_props.rsi
+    state: cannon_cable_connector
+
+- type: entity
+  id: RMCOrbitalCannonCable
+  name: cannon cables
+  description: "Some large cables."
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/almayer_props.rsi
+    state: cannon_cables
+  - type: Tag
+    tags:
+    - HideContextMenu

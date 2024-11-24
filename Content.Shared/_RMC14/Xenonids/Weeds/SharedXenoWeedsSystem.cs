@@ -261,10 +261,9 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         {
             if (_blockWeedsQuery.HasComp(uid))
                 return false;
+
             if (source && HasComp<XenoResinHoleComponent>(uid))
-            {
                 return false;
-            }
         }
 
         return true;

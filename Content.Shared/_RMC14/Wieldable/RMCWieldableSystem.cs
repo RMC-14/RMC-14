@@ -217,6 +217,9 @@ public sealed class RMCWieldableSystem : EntitySystem
 
     public void OnShotAttempt(Entity<WieldDelayComponent> wieldable, ref ShotAttemptedEvent args)
     {
+        if (!wieldable.Comp.PreventFiring)
+            return;
+
         if (!TryComp(wieldable.Owner, out UseDelayComponent? useDelayComponent) ||
             !_useDelaySystem.IsDelayed((wieldable.Owner, useDelayComponent), wieldUseDelayID) ||
             !_useDelaySystem.TryGetDelayInfo((wieldable.Owner, useDelayComponent), out var info, wieldUseDelayID))

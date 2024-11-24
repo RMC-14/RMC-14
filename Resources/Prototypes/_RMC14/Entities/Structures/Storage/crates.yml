@@ -44,6 +44,9 @@
     isPlaceable: false
   - type: Damageable
     damageContainer: StructuralInorganic
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: Destructible
     thresholds:
     - trigger:
