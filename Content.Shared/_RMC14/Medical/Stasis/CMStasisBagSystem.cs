@@ -7,6 +7,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Containers;
+using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Medical.Stasis;
 
@@ -17,6 +18,7 @@ public sealed class CMStasisBagSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobstate = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entStorage = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     private EntityQuery<OrganComponent> _organQuery;
 
@@ -105,13 +107,13 @@ public sealed class CMStasisBagSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        if (_net.IsClient)
+            return;
+
         var stasisQuery = EntityQueryEnumerator<CMStasisBagComponent>();
 
         while (stasisQuery.MoveNext(out var uid, out var bag))
         {
-            if (TerminatingOrDeleted(uid))
-                continue;
-
             if (!_container.TryGetContainer(uid, "entity_storage", out var container))
                 continue;
 
