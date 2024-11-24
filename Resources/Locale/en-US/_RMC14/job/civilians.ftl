@@ -8,10 +8,10 @@ cm-job-description-liaison = Be the direct line of communication between the Alm
 CMJobLiaison = Corporate Liaison
 
 # Survivors
-cm-job-name-survivor = Survivor
-cm-job-name-engineer-survivor = Engineer Survivor
-cm-job-name-medical-survivor = Medical Survivor
-cm-job-name-security-survivor = Security Survivor
+cm-job-name-survivor = Civilian Colonist
+cm-job-name-engineer-survivor = Colony Engineer
+cm-job-name-medical-survivor = Colony EMT
+cm-job-name-security-survivor = Marshall Bureau Officer
 cm-job-name-survivor-hostile = CLF Survivor
 cm-job-description-survivor = You are a survivor of an attack on a corporate facility. You worked or lived in the colony/station, and managed to avoid the alien attacks... until now.
 cm-job-description-survivor-hostile = You are a survivor of an attack on a corporate facility. You worked or lived in the colony/station, and managed to avoid the alien attacks... until now. You can choose to be immediately hostile to marines, as long as you obey the Rules of Engagement.
