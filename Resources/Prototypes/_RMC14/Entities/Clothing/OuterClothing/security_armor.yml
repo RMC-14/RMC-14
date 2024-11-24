@@ -7,8 +7,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/security_armor.rsi
   - type: ClothingSpeedModifier
-    walkModifier: .814
-    sprintModifier: .814
+    walkModifier: .725
+    sprintModifier: .725
   - type: CMArmor
     armor: 15 # TODO RMC14 20 bullet
     bio: 20
