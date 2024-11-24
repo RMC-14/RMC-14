@@ -69,6 +69,7 @@ public sealed class SurvivorRuleSystem : SharedSurvivorSystem
                 "Shivas Snowball" => "the Shivas habitat-factory",
                 "Trijent Dam" => "the famous Trijent dam",
                 "New Varadero" => "the archaeology digsite Varadero",
+                "Kutjevo" => "the water purification facility Kutjevo",
                 _ => name,
             };
 
