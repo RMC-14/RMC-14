@@ -168,7 +168,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             var weeds = Spawn(args.Prototype, coordinates);
             _adminLogs.Add(LogType.RMCXenoPlantWeeds, $"Xeno {ToPrettyString(xeno):xeno} planted weeds {ToPrettyString(weeds):weeds} at {coordinates}");
-            //_hive.SetSameHive(xeno.Owner, weeds);
+            _hive.SetSameHive(xeno.Owner, weeds);
         }
 
         _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, xeno);
@@ -286,6 +286,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (_net.IsServer)
         {
             var structure = Spawn(args.StructureId, coordinates);
+            _hive.SetSameHive(xeno.Owner, structure);
             _adminLogs.Add(LogType.RMCXenoConstruct, $"Xeno {ToPrettyString(xeno):xeno} constructed {ToPrettyString(structure):structure} at {coordinates}");
         }
 

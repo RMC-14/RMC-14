@@ -139,7 +139,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                 neighborWeedsComp.Source = source;
                 sourceWeeds?.Spread.Add(neighborWeeds);
 
-                //_hive.SetSameHive(uid, neighborWeeds);
+                _hive.SetSameHive(uid, neighborWeeds);
 
                 Dirty(neighborWeeds, neighborWeedsComp);
 

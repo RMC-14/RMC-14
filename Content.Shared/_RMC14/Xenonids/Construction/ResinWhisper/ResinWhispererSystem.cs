@@ -71,7 +71,7 @@ public sealed partial class ResinWhispererSystem : EntitySystem
 
         if (!_weeds.IsOnWeeds(ent))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-remote-failed-need-on-weeds"), ent, ent);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-construction-remote-failed-need-on-weeds"), ent, ent);
             return;
         }
 
