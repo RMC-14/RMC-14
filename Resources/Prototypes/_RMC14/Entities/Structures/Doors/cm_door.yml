@@ -153,6 +153,7 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: DamageMultiplierFlags
     flags: Breaching
   - type: Corrodible

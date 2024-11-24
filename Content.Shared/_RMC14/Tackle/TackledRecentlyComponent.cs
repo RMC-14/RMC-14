@@ -1,17 +1,14 @@
-﻿using Content.Shared.FixedPoint;
-using Robust.Shared.GameStates;
+﻿using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Tackle;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(TackleSystem))]
 public sealed partial class TackledRecentlyComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public FixedPoint2 Current;
+    public Dictionary<EntityUid, TackleTracker> Trackers = new();
 
     [DataField, AutoNetworkedField]
-    public TimeSpan LastTackled;
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan LastTackledDuration;
+    public TimeSpan ExpireAfter = TimeSpan.FromSeconds(4);
 }

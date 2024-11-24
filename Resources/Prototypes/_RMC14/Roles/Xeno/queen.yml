@@ -29,3 +29,4 @@
 
 - type: playTimeTracker
   id: CMJobXenoQueen
+  isXeno: true

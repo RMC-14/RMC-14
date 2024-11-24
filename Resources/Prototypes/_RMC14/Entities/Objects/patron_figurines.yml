@@ -786,3 +786,14 @@
     state: james_rockler
   - type: PatronFigurine
     id: 61b5d28b-7664-4b12-9018-d848ca3945cc
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMizunoKittyDrakonovisch
+  name: Mizuno 'Kitty' Drakonovisch figurine
+  description: "The best kitty cat in the marine corps. Delta cat marine, loves headpats. Chases mice and lasers."
+  components:
+  - type: Sprite
+    state: mizuno_kitty_drakonovisch
+  - type: PatronFigurine
+    id: d6a58381-b2a8-4caf-a22a-fd76ca53b1ae

@@ -71,10 +71,12 @@
     tailDamage:
       groups:
         Brute: 30
-  - type: Tackle # min: 4, max: 5
-    threshold: 5
-    stun: 8
-    chance: 0.40
+  - type: Tackle
+    min: 4
+    max: 5
+    chance: 0.4
+    stunMin: 4
+    stunMax: 4
   - type: SlowOnPull
     slowdowns:
     - multiplier: 0.3825
@@ -165,7 +167,7 @@
   - type: XenoStrain
     name: rmc-xeno-acider-name
     description: rmc-xeno-acider-description
-    popup: rmc-xeno-acider-popup   
+    popup: rmc-xeno-acider-popup
   - type: CMArmor
     armor: 15
   - type: MovementSpeedModifier

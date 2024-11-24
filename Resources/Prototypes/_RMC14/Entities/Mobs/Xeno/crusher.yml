@@ -75,9 +75,7 @@
   - type: XenoMeleeSlow
     slowTime: 2
     effect: RMCEffectCrusherSlow
-  - type: Tackle # min: 2, max: 6
-    threshold: 5
-    stun: 5
+  - type: Tackle
     chance: 0.25
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.66
@@ -105,3 +103,5 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: crusher
+  - type: StunOnExplosionReceived
+    weak: false

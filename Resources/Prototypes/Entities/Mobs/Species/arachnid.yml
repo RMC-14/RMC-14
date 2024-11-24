@@ -93,6 +93,7 @@
       - map: [ "ears" ]
       - map: [ "outerClothing" ]
       - map: [ "enum.WebbingVisualLayers.Base" ]
+      - map: [ "enum.MedalVisualLayers.Base" ]
       - map: [ "eyes" ]
       - map: [ "belt" ]
       - map: [ "enum.HumanoidVisualLayers.Tail" ] # Mentioned in moth code: This needs renaming lol.

@@ -24,6 +24,7 @@ public sealed class CMChatSystem : SharedCMChatSystem
 
     public override void Initialize()
     {
+        base.Initialize();
         SubscribeLocalEvent<MarineComponent, ChatMessageAfterGetRecipients>(OnMarineAfterGetRecipients);
         SubscribeLocalEvent<XenoComponent, ChatMessageAfterGetRecipients>(OnXenoAfterGetRecipients);
     }
@@ -101,6 +102,33 @@ public sealed class CMChatSystem : SharedCMChatSystem
             audioPath,
             audioVolume,
             author
+        );
+    }
+
+    public override void ChatMessageToMany(
+        string message,
+        string wrappedMessage,
+        Filter filter,
+        ChatChannel channel,
+        EntityUid source = default,
+        bool hideChat = false,
+        Color? colorOverride = null,
+        bool recordReplay = false,
+        string? audioPath = null,
+        float audioVolume = 0,
+        NetUserId? author = null)
+    {
+        _chat.ChatMessageToManyFiltered(
+            filter,
+            channel,
+            message,
+            wrappedMessage,
+            source,
+            hideChat,
+            recordReplay,
+            colorOverride,
+            audioPath,
+            audioVolume
         );
     }
 }

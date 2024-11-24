@@ -64,4 +64,18 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         SoundSpecifier? sound = null)
     {
     }
+
+    public virtual void AnnounceSquad(
+        string message,
+        EntityUid squad,
+        SoundSpecifier? sound = null)
+    {
+    }
+
+    public virtual void AnnounceSingle(
+        string message,
+        EntityUid receiver,
+        SoundSpecifier? sound = null)
+    {
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.Fireman;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
@@ -26,6 +27,7 @@ namespace Content.Shared._RMC14.Pulling;
 
 public sealed class RMCPullingSystem : EntitySystem
 {
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -378,11 +380,14 @@ public sealed class RMCPullingSystem : EntitySystem
             if ((input.HeldMoveButtons & MoveButtons.AnyDirection) == 0)
                 continue;
 
+            if (!_actionBlocker.CanMove(uid))
+                continue;
+
             _pulling.TryStopPull(uid, pullable);
         }
 
-        var pullableQuery = EntityQueryEnumerator<BeingPulledComponent, PullableComponent, TransformComponent, FiremanCarriableComponent>();
-        while (pullableQuery.MoveNext(out var uid, out _, out var pullable, out var xform, out var firemanCarry))
+        var pullableQuery = EntityQueryEnumerator<BeingPulledComponent, PullableComponent, FiremanCarriableComponent>();
+        while (pullableQuery.MoveNext(out var uid, out _, out var pullable, out var firemanCarry))
         {
             if (pullable.Puller == null)
                 continue;
@@ -398,11 +403,11 @@ public sealed class RMCPullingSystem : EntitySystem
             if (!_timing.ApplyingState)
                 EnsureComp<NoRotateOnMoveComponent>(puller);
 
-            var pulledCoords = _transform.GetMapCoordinates(uid, xform: xform).Position;
+            var pulledCoords = _transform.GetMapCoordinates(uid).Position;
             var pullerCoords = _transform.GetMapCoordinates(puller).Position;
 
             var angle = (pulledCoords - pullerCoords).ToWorldAngle().GetCardinalDir().ToAngle();
-            _rotateTo.TryFaceAngle(puller, angle, xform);
+            _rotateTo.TryFaceAngle(puller, angle);
         }
     }
 }

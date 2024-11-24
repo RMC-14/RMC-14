@@ -37,6 +37,7 @@
         collection: XenoResinBreak
   - type: XenoConstruct
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: NpcFactionMember
     factions:
     - RMCXeno
@@ -122,6 +123,7 @@
     isCorrodible: true
   - type: Clickable
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: DamageMultiplierFlags
     flags: Turf
   - type: ReceiverXenoClaws
@@ -148,7 +150,7 @@
   - type: PlacementReplacement
     key: walls
   - type: ExplosionResistance
-    damageCoefficient: 12.5 # Walls take 15x explosive damage, resin walls reduce that by 15%
+    damageCoefficient: 3.64
   - type: DamageMultiplierFlags
     flags:
     - Turf

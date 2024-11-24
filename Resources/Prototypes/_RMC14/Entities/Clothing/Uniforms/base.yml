@@ -22,6 +22,7 @@
     tags:
     - ClothMade
     - WhitelistChameleon
+  - type: PlaytimeMedalHolder
 
 - type: entity
   abstract: true

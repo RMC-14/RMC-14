@@ -54,6 +54,7 @@
     baseSprint: 0.559
   - type: WieldDelay
     baseDelay: 1.2
+    preventFiring: true
   - type: AttachableHolder
     slots:
       rmc-aslot-rail:
