@@ -183,6 +183,9 @@
   - type: UserIFF
   - type: UserLimitHits
   - type: MovementIgnoreGravity
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.7
+    baseSprintSpeed: 5
   - type: SlowOnPull
     slowdowns:
     - multiplier: 0.7575
