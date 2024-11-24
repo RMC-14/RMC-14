@@ -45,3 +45,6 @@
     solutions:
       tank:
         maxVol: 1000
+  - type: Corrodible
+    timeToApply: 4
+    structure: true

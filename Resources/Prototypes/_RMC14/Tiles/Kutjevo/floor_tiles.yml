@@ -75,6 +75,7 @@
 - type: tile
   parent: CMFloorPlating
   id: RMCFloorPlatingKutjevo
+  isSubfloor: true
   sprite: /Textures/_RMC14/Tiles/kutjevo/plating.png
   
 - type: tile

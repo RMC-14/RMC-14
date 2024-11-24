@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/4aff6b0a6fbc1b5f31ba7575a70dc39838e1970f/icons/obj/structures/props/almayer_props.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "recycler"
+    },
+    {
+      "name": "mapping_comp",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "mapping_comp_off"
+    },
+    {
+      "name": "mps"
+    },
+    {
+      "name": "mps_off"
+    },
+    {
+      "name": "sensor_comp1",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "sensor_comp1_off"
+    },
+    {
+      "name": "sensor_comp2",
+      "delays": [
+        [
+          1,
+          0.4,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "sensor_comp2_off"
+    },
+    {
+      "name": "sensor_comp3",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "sensor_comp3_off"
+    },
+    {
+      "name": "\u002Bhacked",
+      "delays": [
+        [
+          2,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "hangarbox"
+    },
+    {
+      "name": "flare_launcher"
+    },
+    {
+      "name": "handheld1"
+    },
+    {
+      "name": "hangar_comp"
+    },
+    {
+      "name": "hangar_comp_open"
+    },
+    {
+      "name": "flight_recorder"
+    },
+    {
+      "name": "chaff_launcher"
+    },
+    {
+      "name": "equip_base"
+    },
+    {
+      "name": "equip_base_front"
+    },
+    {
+      "name": "equip_base_r_wing"
+    },
+    {
+      "name": "equip_base_l_wing"
+    },
+    {
+      "name": "advanced_camera_installed",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "advanced_camera"
+    },
+    {
+      "name": "cannon_cables"
+    },
+    {
+      "name": "cannon_cable_connector"
+    },
+    {
+      "name": "ob_warhead_1"
+    },
+    {
+      "name": "ob_warhead_2"
+    },
+    {
+      "name": "ob_warhead_3"
+    },
+    {
+      "name": "ob_fuel"
+    },
+    {
+      "name": "floor_sentry_installed",
+      "directions": 4
+    },
+    {
+      "name": "floor_sentry_deployed"
+    }
+  ]
+}

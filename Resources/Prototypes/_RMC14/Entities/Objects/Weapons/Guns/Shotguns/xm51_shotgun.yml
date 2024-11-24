@@ -36,6 +36,9 @@
     baseFireRate: 0.625
   - type: RMCExtraProjectilesDamageMods
     damageMultiplier:  0.18
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.8
+    accuracyMultiplierUnwielded: 0.6
   - type: ItemSlots
     slots:
       gun_magazine:

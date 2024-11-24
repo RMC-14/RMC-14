@@ -13,6 +13,11 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/7853d79df1827a2a4907fb3162b6319662dbc1ba/sound/items/detector.ogg"
 
+- files: ["ob_alert.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/81bbf5d8226c8ab52fc71461498080bb49c4c996/sound/effects/ob_alert.ogg"
+
 - files: ["tech_notification.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"

@@ -46,6 +46,9 @@
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 30
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.5
   - type: WieldableSpeedModifiers
     baseWalk: 0.696
     baseSprint: 0.559

@@ -5,6 +5,10 @@ cm-xeno-not-enough-plasma = You don't have enough plasma!
 rmc-xeno-not-enough-energy = Your health reserves are insufficient!
 rmc-xeno-energy-increase-user = You feel your internal health reserves increase!
 
+# Acid reserves
+rmc-xeno-not-enough-acid = Your don't have enough acid built up!
+rmc-xeno-acid-increase-user = You feel your acid reserves increase!
+
 # Construction
 cm-xeno-choose-resin-structure = Choose Resin Structure
 cm-xeno-order-construction = Build Structure
@@ -51,6 +55,7 @@ cm-xeno-weeds-source-already-here = There is already a resin node here!
 # Corrosive acid
 cm-xeno-acid-not-corrodible = We cannot dissolve {THE($target)}!
 cm-xeno-acid-already-corroding = {THE($target)} already has corrosive acid on it!
+rmc-xeno-acid-structure-unmeltable = We can only melt barricades and items!
 
 # Paralyzing Slash
 cm-xeno-paralyzing-slash-activate = Our next slash will apply neurotoxin!
@@ -184,3 +189,12 @@ rmc-xeno-resin-surge-wall-self = We surge the resin, creating an unstable wall!
 rmc-xeno-resin-surge-wall-others = {CAPITALIZE(THE($xeno))} surges the resin, creating an unstable wall!
 rmc-xeno-resin-surge-sticky-self = We surge the deep resin, creating an unstable sticky resin patch!
 rmc-xeno-resin-surge-sticky-others = {CAPITALIZE(THE($xeno))} surges deep resin, creating an unstable sticky resin patch!
+
+# For The Hive!
+rmc-xeno-for-the-hive-container = It is too cramped in here to activate this!
+rmc-xeno-for-the-hive-cancel = We remove all our explosive acid before it combusted.
+rmc-xeno-for-the-hive-activate = Our stomach starts turning and twisting, getting ready to compress the built up acid.
+rmc-xeno-for-the-hive-announce = ;FOR THE HIVE!!!
+rmc-xeno-for-the-hive-respawn-fail = You couldn't reincarnate!
+rmc-xeno-for-the-hive-respawn-corpse-self = The hive has no core! We manage to emerge from our old husk as a larva!
+rmc-xeno-for-the-hive-respawn-corpse-others = A larva suddenly emerges from a dead husk!

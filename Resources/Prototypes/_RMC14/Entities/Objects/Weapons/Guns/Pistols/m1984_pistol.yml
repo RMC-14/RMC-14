@@ -13,6 +13,8 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1984.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1984.rsi
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
   - type: ItemSlots
     slots:
       gun_magazine:
