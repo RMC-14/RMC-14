@@ -802,7 +802,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronMerlinLeander
   name: Merlin Leander figurine
-  description: ""
+  description: "Limited edition wizard figurine. This one seems blissful."
   components:
   - type: Sprite
     state: merlin_leander
