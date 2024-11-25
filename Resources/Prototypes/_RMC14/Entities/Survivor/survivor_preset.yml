@@ -120,5 +120,4 @@
     primaryWeapons:
     - [ RMCBeltMarineAR10, WeaponRifleAR10]
     - [ RMCBeltMarineMP5, WeaponSMGMP5 ]
-    - [ RMCBeltMarineShells, WeaponShotgunCustomBuilt ]
     primaryWeaponChance: 0.6

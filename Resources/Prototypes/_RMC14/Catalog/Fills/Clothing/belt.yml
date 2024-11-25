@@ -160,7 +160,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMCartridge9mmSMG
+    - id: CMMagazineSMGMP5
       amount: 5
 
 
