@@ -1,4 +1,4 @@
-name: Rust
+name: Map checker
 
 on:
   pull_request:
