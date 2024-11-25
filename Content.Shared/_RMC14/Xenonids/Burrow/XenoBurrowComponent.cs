@@ -26,13 +26,13 @@ public sealed partial class XenoBurrowComponent : Component
     /// How long it takes for the xeno to burrow down
     /// </summary>
     [DataField]
-    public TimeSpan BurrowLength = new TimeSpan(0, 0, 0, 1, 500);
+    public TimeSpan BurrowLength = TimeSpan.FromSeconds(1.5);
 
     /// <summary>
     /// How long the xeno must wait before burrowing back up or tunneling
     /// </summary>
     [DataField]
-    public TimeSpan TunnelCooldown = new TimeSpan(0, 0, 0, 2);
+    public TimeSpan TunnelCooldown = TimeSpan.FromSeconds(2);
 
     public TimeSpan? NextTunnelAt;
 
@@ -40,7 +40,7 @@ public sealed partial class XenoBurrowComponent : Component
     /// How long the xeno can stay burrowed
     /// </summary>
     [DataField]
-    public TimeSpan BurrowMaxDuration = new TimeSpan(0, 0, 9);
+    public TimeSpan BurrowMaxDuration = TimeSpan.FromSeconds(9);
 
     public TimeSpan? ForcedUnburrowAt;
 

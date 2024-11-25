@@ -13,5 +13,5 @@ namespace Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 public sealed partial class XenoTunnelFillerComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public TimeSpan FillDelay = new(0, 0, 30);
+    public TimeSpan FillDelay = TimeSpan.FromSeconds(30);
 }

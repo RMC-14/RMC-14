@@ -21,22 +21,22 @@ public sealed partial class XenoTunnelComponent : Component
     /// How long it takes to enter this tunnel
 
     [DataField]
-    public TimeSpan SmallXenoEnterDelay = new(0, 0, 1);
+    public TimeSpan SmallXenoEnterDelay = TimeSpan.FromSeconds(1);
 
     [DataField]
-    public TimeSpan StandardXenoEnterDelay = new(0, 0, 4);
+    public TimeSpan StandardXenoEnterDelay = TimeSpan.FromSeconds(4);
 
     [DataField]
-    public TimeSpan LargeXenoEnterDelay = new(0, 0, 12);
+    public TimeSpan LargeXenoEnterDelay = TimeSpan.FromSeconds(12);
 
     /// How long it takes to move from this tunnel to another one
 
     [DataField]
-    public TimeSpan SmallXenoMoveDelay = new(0, 0, 1);
+    public TimeSpan SmallXenoMoveDelay = TimeSpan.FromSeconds(1);
 
     [DataField]
-    public TimeSpan StandardXenoMoveDelay = new(0, 0, 2);
+    public TimeSpan StandardXenoMoveDelay = TimeSpan.FromSeconds(2);
 
     [DataField]
-    public TimeSpan LargeXenoMoveDelay = new(0, 0, 6);
+    public TimeSpan LargeXenoMoveDelay = TimeSpan.FromSeconds(6);
 }
