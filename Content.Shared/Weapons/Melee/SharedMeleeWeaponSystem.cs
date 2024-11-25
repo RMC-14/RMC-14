@@ -426,7 +426,10 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                     break;
                 case DisarmAttackEvent disarm:
                     if (!DoDisarm(user, disarm, weaponUid, weapon, session))
+                    {
+                        // weapon.NextAttack = curTime;
                         return false;
+                    }
 
                     animation = weapon.Animation;
                     break;
@@ -729,6 +732,9 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
     public static string? GetHighestDamageSound(DamageSpecifier modifiedDamage, IPrototypeManager protoManager)
     {
+        if (modifiedDamage.GetTotal() <= FixedPoint2.Zero)
+            return null;
+
         var groups = modifiedDamage.GetDamagePerGroup(protoManager);
 
         // Use group if it's exclusive, otherwise fall back to type.

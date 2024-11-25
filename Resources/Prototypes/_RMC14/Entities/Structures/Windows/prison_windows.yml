@@ -59,6 +59,7 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFramePrison
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowPrison
     node: windowPrison
@@ -127,6 +128,7 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFramePrison
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowPrison
     node: windowPrisonReinforced

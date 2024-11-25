@@ -43,6 +43,9 @@
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.25
+    accuracyMultiplierUnwielded: 1.2
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -117,6 +120,11 @@
       falloff: 6
   - type: CMArmorPiercing
     amount: 25
+  - type: RMCProjectileAccuracy
+    accuracy: 100
+    thresholds:
+    - range: 5
+      falloff: 10
 
 - type: Tag
   id: RMCMagazineSMGNailgun

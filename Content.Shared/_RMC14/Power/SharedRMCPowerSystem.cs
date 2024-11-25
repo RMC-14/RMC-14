@@ -13,6 +13,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
+using Content.Shared.Weapons.Melee;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Random;
@@ -33,7 +34,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly RMCSpriteSystem _sprite = default!;
+    [Dependency] private readonly SharedRMCSpriteSystem _sprite = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
 
     protected readonly HashSet<EntityUid> ToUpdate = new();
@@ -353,7 +354,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
     private void OnFusionReactorInteractHand(Entity<RMCFusionReactorComponent> ent, ref InteractHandEvent args)
     {
         var user = args.User;
-        if (!HasComp<XenoComponent>(user))
+        if (!HasComp<XenoComponent>(user) || !HasComp<MeleeWeaponComponent>(user))
             return;
 
         if (ent.Comp.State == RMCFusionReactorState.Weld)
@@ -508,7 +509,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             (float) delay.TotalSeconds,
             quality,
             new RMCFusionReactorRepairDoAfterEvent(state),
-            ent.Comp.WeldingCost
+            ent.Comp.WeldingCost,
+            duplicateCondition: DuplicateConditions.SameTool
         );
 
         if (!toolUsed)

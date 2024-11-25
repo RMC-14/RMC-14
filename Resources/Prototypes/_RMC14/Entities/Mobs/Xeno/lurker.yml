@@ -70,9 +70,13 @@
     damage:
       groups:
         Brute: 35
-  - type: Tackle # min: 2, max: 6
-    threshold: 4
-    stun: 5
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 42
+  - type: Tackle
+    stunMin: 2
+    stunMax: 6
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.7
     baseSprintSpeed: 5

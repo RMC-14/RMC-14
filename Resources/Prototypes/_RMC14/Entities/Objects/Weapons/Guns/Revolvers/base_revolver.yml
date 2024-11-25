@@ -38,8 +38,6 @@
     whitelist:
       tags:
       - RMCMagazineRevolver
-      - RMCSpeedLoaderM44
-      - RMCCartridgeRevolver44
     proto: RMCCartridgeRevolver44
     capacity: 6
     chambers: [ True, True, True, True, True, True ]
@@ -53,6 +51,11 @@
     item: Sidearm
   - type: GunUnskilledPenalty
     angleIncrease: 5
+  - type: GunDualWielding
+    weaponGroup: Handgun
+  - type: GunPointBlank
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 0.85
 
 - type: Tag
   id: RMCMagazineRevolver

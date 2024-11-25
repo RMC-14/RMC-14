@@ -1,11 +1,11 @@
 using System.Numerics;
 using Content.Server.Atmos.EntitySystems;
+using Content.Shared._RMC14.Explosion;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Explosion;
 using Content.Shared.Explosion.Components;
-using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Projectiles;
@@ -16,6 +16,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -64,6 +65,8 @@ public sealed partial class ExplosionSystem
     private readonly List<(EntityUid, DamageSpecifier)> _toDamage = new();
 
     private List<EntityUid> _anchored = new();
+
+    private static readonly EntProtoId ShockwaveSmoke = "RMCFogShockwave";
 
     private void OnMapChanged(MapChangedEvent ev)
     {
@@ -212,7 +215,7 @@ public sealed partial class ExplosionSystem
         EntityUid? cause)
     {
         var size = grid.Comp.TileSize;
-        var gridBox = new Box2(tile * size, (tile + 1) * size);
+        var gridBox = new Box2(tile * size, (tile + 1) * size).Scale(0.9f);
 
         // get the entities on a tile. Note that we cannot process them directly, or we get
         // enumerator-changed-while-enumerating errors.
@@ -254,6 +257,9 @@ public sealed partial class ExplosionSystem
                 tileBlocked |= IsBlockingTurf(entity);
             }
         }
+
+        if (!tileBlocked)
+            Spawn(ShockwaveSmoke, new EntityCoordinates(grid.Owner, tile));
 
         // Next, we get the intersecting entities AGAIN, but purely for throwing. This way, glass shards spawned from
         // windows will be flung outwards, and not stay where they spawned. This is however somewhat unnecessary, and a
@@ -469,7 +475,8 @@ public sealed partial class ExplosionSystem
 
                 // TODO EXPLOSIONS turn explosions into entities, and pass the the entity in as the damage origin.
                 _damageableSystem.TryChangeDamage(entity, damage, ignoreResistances: true);
-
+                var ev = new ExplosionReceivedEvent(id, epicenter, damage);
+                RaiseLocalEvent(entity, ref ev);
             }
         }
 

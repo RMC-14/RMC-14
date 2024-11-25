@@ -225,3 +225,16 @@
       state: reserve_parasite
     event: !type:XenoReserveParasiteActionEvent
     useDelay: 1
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoManageHive
+  name: Manage The Hive
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: xeno_readmit
+    event: !type:ManageHiveActionEvent
+    useDelay: 0.5

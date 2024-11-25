@@ -1,6 +1,6 @@
 ﻿- type: entity
   abstract: true
-  parent: RMCBaseBullet
+  parent: CMBulletBase
   id: CMPelletShotgunBase
   categories:
   - HideSpawnMenu
@@ -37,6 +37,10 @@
       ignoreModifiers: true
     - range: 0
       falloff: 1
+  - type: RMCProjectileAccuracy
+    thresholds:
+    - range: 4
+      falloff: 10
   - type: RMCStunOnHit
 
 - type: entity
@@ -67,6 +71,11 @@
     stunTime: 1
     superSlowTime: 2
     slowTime: 6
+  - type: RMCProjectileAccuracy
+    accuracy: 100
+    thresholds:
+    - range: 8
+      falloff: 10
 
 - type: entity
   parent: CMPelletShotgunBase
@@ -90,6 +99,8 @@
       ignoreModifiers: true
     - range: 0
       falloff: 1
+  - type: RMCProjectileAccuracy
+    accuracy: 95
   # todo rmc14 add burning
 
 - type: entity
@@ -113,6 +124,8 @@
       falloff: 1
   - type: StaminaDamageOnCollide
     damage: 45
+  - type: RMCProjectileAccuracy
+    accuracy: 100
 
 - type: entity
   parent: CMPelletShotgunBase
@@ -165,8 +178,10 @@
   - type: Projectile
     damage:
       types:
-        Blunt: 85
+        Blunt: 55
   - type: CMArmorPiercing
     amount: 5
-  - type: TimedDespawn
-    lifetime: 0.075
+  - type: ProjectileSpread
+    proto: RMCPelletShotgunBreaching
+    count: 4
+    spread: 16

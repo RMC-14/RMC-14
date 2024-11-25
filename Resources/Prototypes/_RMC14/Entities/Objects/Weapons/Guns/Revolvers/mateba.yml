@@ -15,13 +15,22 @@
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mateba.ogg
   - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+      - RMCSpeedLoaderMateba
+      - RMCCartridgeRevolverMateba
     proto: RMCCartridgeRevolverMateba
     capacity: 6
     chambers: [ True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null ]
+  - type: GunDamageModifier
+    multiplier: 1.5
   - type: RMCSelectiveFire
     baseFireRate: 1.111
     scatterWielded: 8
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.1
+    accuracyMultiplierUnwielded: 0.75
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -107,12 +116,14 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 72
+        Piercing: 60
   - type: CMArmorPiercing
-    amount: 5
+    amount: 20
   - type: RMCStunOnHit
     maxRange: 4
     stunTime: 1
+  - type: RMCProjectileAccuracy
+    accuracy: 90
 
 - type: Tag
   id: RMCSpeedLoaderMateba

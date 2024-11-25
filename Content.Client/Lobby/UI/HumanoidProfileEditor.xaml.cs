@@ -408,6 +408,33 @@ namespace Content.Client.Lobby.UI
 
             #endregion SquadPreference
 
+            #region PlaytimePerks
+
+            PlaytimePerksButton.OnPressed += args =>
+            {
+                SetPlaytimePerks(args.Button.Pressed);
+            };
+
+            #endregion
+
+            #region Xeno Prefix
+
+            XenoPrefix.OnTextChanged += args =>
+            {
+                SetXenoPrefix(args.Text);
+            };
+
+            #endregion
+
+            #region Xeno Postfix
+
+            XenoPostfix.OnTextChanged += args =>
+            {
+                SetXenoPostfix(args.Text);
+            };
+
+            #endregion
+
             #region Eyes
 
             EyeColorPicker.OnEyeColorPicked += newColor =>
@@ -841,6 +868,9 @@ namespace Content.Client.Lobby.UI
             UpdateCMarkingsHair();
             UpdateCMarkingsFacialHair();
             UpdateNamedItems();
+            UpdatePlaytimePerks();
+            UpdateXenoPrefix();
+            UpdateXenoPostfix();
 
             RefreshAntags();
             RefreshJobs();
@@ -1318,6 +1348,24 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
+        private void SetPlaytimePerks(bool playtimePerks)
+        {
+            Profile = Profile?.WithPlaytimePerks(playtimePerks);
+            SetDirty();
+        }
+
+        private void SetXenoPrefix(string prefix)
+        {
+            Profile = Profile?.WithXenoPrefix(prefix);
+            SetDirty();
+        }
+
+        private void SetXenoPostfix(string postfix)
+        {
+            Profile = Profile?.WithXenoPostfix(postfix);
+            SetDirty();
+        }
+
         public bool IsDirty
         {
             get => _isDirty;
@@ -1654,6 +1702,21 @@ namespace Content.Client.Lobby.UI
             NamedItems.Helmet.Text = Profile?.NamedItems.HelmetName ?? string.Empty;
             NamedItems.Armor.Text = Profile?.NamedItems.ArmorName ?? string.Empty;
             NamedItems.Sentry.Text = Profile?.NamedItems.SentryName ?? string.Empty;
+        }
+
+        private void UpdatePlaytimePerks()
+        {
+            PlaytimePerksButton.Pressed = Profile?.PlaytimePerks ?? true;
+        }
+
+        private void UpdateXenoPrefix()
+        {
+            XenoPrefix.Text = Profile?.XenoPrefix ?? string.Empty;
+        }
+
+        private void UpdateXenoPostfix()
+        {
+            XenoPostfix.Text = Profile?.XenoPostfix ?? string.Empty;
         }
 
         private void UpdateSaveButton()

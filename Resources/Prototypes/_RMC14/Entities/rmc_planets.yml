@@ -1,0 +1,55 @@
+﻿- type: entity
+  id: RMCPlanetLV624
+  name: LV-624
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/lv624.yml
+    announcement: "An automated distress signal has been received from the archaeological site of Lazarus Landing, on the border world of LV-624. A response team from the UNS Almayer will be dispatched shortly to investigate."
+
+- type: entity
+  id: RMCPlanetSolaris
+  name: Solaris Ridge
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/solaris.yml
+    announcement: "Weston-Yamada has lost contact with one of its Biological Storage Facilities, Solaris Ridge, on the planet of LV-1413. The UNS Almayer has been requested to look into the blackout by Weston-Yamada."
+
+- type: entity
+  id: RMCPlanetShiva
+  name: Shiva's Snowball
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/shiva.yml
+    announcement: "An automated distress signal has been received from archaeology site \"Shiva's Snowball\", on border ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+
+- type: entity
+  id: RMCPlanetFiorina
+  name: Fiorina's Science Annex
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/prison.yml
+    announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+
+- type: entity
+  id: RMCPlanetTrijent
+  name: Trijent Dam
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/trijent.yml
+    announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
+
+- type: entity
+  id: RMCPlanetVaradero
+  name: New Varadero
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/varadero.yml
+    announcement: "An automated distress signal has been received from UN Outpost New Varadero. A response team from the UNS Almayer will be dispatched shortly to investigate.
+      Designation: Island research station and mining facility
+
+      Population: 47
+      Current Temperature: 68F Interior, 97F Exterior
+      Outpost Commander: UN Rep. Steve Haifisch
+      Telecommunications Array: Repairs required
+
+      No further information available at this time."

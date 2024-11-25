@@ -1,5 +1,5 @@
-﻿using Robust.Shared.Audio;
-using Content.Shared.FixedPoint;
+﻿using Content.Shared.FixedPoint;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -40,6 +40,9 @@ public sealed partial class XenoConstructionComponent : Component
     [DataField, AutoNetworkedField]
     public SoundSpecifier BuildSound = new SoundCollectionSpecifier("RMCResinBuild")
     {
-        Params = AudioParams.Default.WithVolume(-10f)
+        Params = AudioParams.Default.WithVolume(-10f),
     };
+
+    [DataField, AutoNetworkedField]
+    public bool CanUpgrade;
 }

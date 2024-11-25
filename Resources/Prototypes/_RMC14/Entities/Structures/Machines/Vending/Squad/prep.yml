@@ -321,8 +321,8 @@
       #  amount: 2
       #- id: CMMagazineBoxM2C
       #  amount: 2
-      #- id: Box of Breaching Shells (16g)
-      #  amount: 2
+      - id: RMCBoxShotgunBreaching
+        amount: 2
       #- id: CMBatonSlugsHIRR
       #  amount: 6
       #- id: CMStarShellN74AGMS
@@ -432,8 +432,8 @@
         amount: 5
       - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 2
-#      - id: RMCAttachmentS5RedDotSight # UNCOMMENT THIS WHEN ACCURACY IS IMPLEMENTED
-#        amount: 4
+      - id: RMCAttachmentS5RedDotSight
+        amount: 4
       - id: RMCAttachmentS6ReflexSight
         amount: 4
       - id: RMCAttachmentS84xTelescopicScope

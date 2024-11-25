@@ -1,7 +1,7 @@
 ﻿- type: entity
   abstract: true
   parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
-  id: CMBaseWeaponRifle
+  id: CMBaseWeaponRifleNoDualWieldPenalty
   components:
   - type: Gun
     shotsPerBurst: 3
@@ -60,7 +60,17 @@
   - type: Appearance
   - type: RMCNameItemOnVend
     item: PrimaryGun
-  - type: GunGroupSpreadPenalty
+
+- type: entity
+  parent: CMBaseWeaponRifleNoDualWieldPenalty
+  id: CMBaseWeaponRifle
+  components:
+  - type: GunDualWielding
+    weaponGroup: Rifle
+  - type: GunPointBlank
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.65
 
 - type: entity
   parent: BaseMagazineRifle

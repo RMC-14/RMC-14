@@ -34,3 +34,6 @@
     tags:
     - Taser
     - Sidearm
+  - type: GunPointBlank
+  - type: GunDualWielding
+    weaponGroup: Handgun

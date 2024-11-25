@@ -2,6 +2,8 @@
   parent: CMTileBase
   id: CMFloorStripedBase
   name: tiles-cm-striped
+  baseTurf: ""
+  deconstructTools: [ ]
 
 - type: tile
   parent: CMFloorStripedBase

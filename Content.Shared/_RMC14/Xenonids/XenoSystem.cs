@@ -55,10 +55,8 @@ public sealed class XenoSystem : EntitySystem
 
     private EntityQuery<AffectableByWeedsComponent> _affectableQuery;
     private EntityQuery<DamageableComponent> _damageableQuery;
-    private EntityQuery<MarineComponent> _marineQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<MobThresholdsComponent> _mobThresholdsQuery;
-    private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<XenoFriendlyComponent> _xenoFriendlyQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
     private EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
@@ -75,10 +73,8 @@ public sealed class XenoSystem : EntitySystem
 
         _affectableQuery = GetEntityQuery<AffectableByWeedsComponent>();
         _damageableQuery = GetEntityQuery<DamageableComponent>();
-        _marineQuery = GetEntityQuery<MarineComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
         _mobThresholdsQuery = GetEntityQuery<MobThresholdsComponent>();
-        _xenoQuery = GetEntityQuery<XenoComponent>();
         _xenoFriendlyQuery = GetEntityQuery<XenoFriendlyComponent>();
         _xenoNestedQuery = GetEntityQuery<XenoNestedComponent>();
         _xenoPlasmaQuery = GetEntityQuery<XenoPlasmaComponent>();

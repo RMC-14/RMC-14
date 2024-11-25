@@ -12,4 +12,7 @@ public sealed partial class CorrodibleComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan TimeToApply = TimeSpan.FromSeconds(4);
+
+    [DataField, AutoNetworkedField]
+    public bool Structure = false;
 }

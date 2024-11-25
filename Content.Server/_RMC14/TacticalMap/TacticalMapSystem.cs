@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared.Actions;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Database;
@@ -95,6 +96,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, MindAddedMessage>(OnActiveTrackedMindAdded);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, SquadMemberUpdatedEvent>(OnActiveSquadMemberUpdated);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, MobStateChangedEvent>(OnActiveMobStateChanged);
+        SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, HiveLeaderStatusChangedEvent>(OnHiveLeaderStatusChanged);
 
         SubscribeLocalEvent<RottingComponent, MapInitEvent>(OnRottingMapInit);
         SubscribeLocalEvent<RottingComponent, ComponentRemove>(OnRottingRemove);
@@ -256,6 +258,13 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         UpdateTracked(ent);
     }
 
+    private void OnHiveLeaderStatusChanged(Entity<ActiveTacticalMapTrackedComponent> ent, ref HiveLeaderStatusChangedEvent args)
+    {
+        UpdateIcon(ent);
+        UpdateHiveLeader(ent, args.BecameLeader);
+        UpdateTracked(ent);
+    }
+
     private void OnRottingMapInit(Entity<RottingComponent> ent, ref MapInitEvent args)
     {
         if (_activeTacticalMapTrackedQuery.TryComp(ent, out var active))
@@ -385,6 +394,9 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         {
             tracked.Comp.Icon = iconComp.Icon;
             tracked.Comp.Background = iconComp.Background;
+
+            UpdateSquadBackground(tracked);
+
             return;
         }
 
@@ -396,11 +408,19 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         }
 
         tracked.Comp.Icon = jobProto.MinimapIcon;
+        tracked.Comp.Background = jobProto.MinimapBackground;
+        UpdateSquadBackground(tracked);
+
+    }
+
+    private void UpdateSquadBackground(Entity<ActiveTacticalMapTrackedComponent> tracked)
+    {
         //Don't get job background if we have a squad, and if we do and it doesn't have it's own background
         //Still don't apply it
         if (!_squad.TryGetMemberSquad(tracked.Owner, out var squad))
-            tracked.Comp.Background = jobProto.MinimapBackground;
-        else if (squad.Comp.MinimapBackground == null)
+            return;
+
+        if (squad.Comp.MinimapBackground == null)
             tracked.Comp.Background = null;
         else
             tracked.Comp.Background = squad.Comp.MinimapBackground;
@@ -425,6 +445,11 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         }
         else
             tracked.Comp.Color = Color.White;
+    }
+
+    private void UpdateHiveLeader(Entity<ActiveTacticalMapTrackedComponent> tracked, bool isLeader)
+    {
+        tracked.Comp.HiveLeader = isLeader;
     }
 
     private void UpdateTracked(Entity<ActiveTacticalMapTrackedComponent> ent)
@@ -452,7 +477,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         else if (_mobState.IsDead(ent))
             status = TacticalMapBlipStatus.Defibabble;
 
-        var blip = new TacticalMapBlip(indices, icon, ent.Comp.Color, status, ent.Comp.Background);
+        var blip = new TacticalMapBlip(indices, icon, ent.Comp.Color, status, ent.Comp.Background, ent.Comp.HiveLeader);
         if (_marineMapTrackedQuery.HasComp(ent))
         {
             tacticalMap.MarineBlips[ent.Owner.Id] = blip;

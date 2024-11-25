@@ -63,7 +63,10 @@
   - type: XenoTailStab
     toggle: true
     inject:
-      RMCMolecularAcid: 1 # TODO RMC14 6
+      RMCMolecularAcid: 6
+    tailDamage:
+      groups:
+        Brute: 30
   - type: XenoSprayAcid
     acid: XenoAcidSprayStrong
     barricadeDamage:
@@ -73,10 +76,10 @@
     damage:
       groups:
         Brute: 22.5
-  - type: Tackle # min: 2, max: 6
-    threshold: 5
-    stun: 7
+  - type: Tackle
     chance: 0.25
+    stunMin: 3
+    stunMax: 4
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
@@ -101,6 +104,7 @@
     autoRot: true
   - type: RMCSize
     size: Big
+  - type: XenoDeathcloud
   - type: NeurotoxinInjector
     neuroPerSecond: 16
     injectInContact: false

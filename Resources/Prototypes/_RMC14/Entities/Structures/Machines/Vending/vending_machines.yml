@@ -83,6 +83,9 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: ActivatableUIBlacklist
     blacklist:
       components:
