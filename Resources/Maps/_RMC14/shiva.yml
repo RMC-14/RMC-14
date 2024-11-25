@@ -51951,23 +51951,6 @@ entities:
     - type: Transform
       pos: 211.5,151.5
       parent: 1
-- proto: CMStampCMP
-  entities:
-  - uid: 1786
-    components:
-    - type: Transform
-      pos: 61.5,55.5
-      parent: 1
-  - uid: 7956
-    components:
-    - type: Transform
-      pos: 118.5,70.5
-      parent: 1
-  - uid: 7987
-    components:
-    - type: Transform
-      pos: 115.5,79.5
-      parent: 1
 - proto: CMStunbaton
   entities:
   - uid: 14344
