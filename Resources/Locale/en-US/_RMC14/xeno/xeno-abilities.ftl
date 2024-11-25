@@ -195,6 +195,8 @@ rmc-xeno-for-the-hive-container = It is too cramped in here to activate this!
 rmc-xeno-for-the-hive-cancel = We remove all our explosive acid before it combusted.
 rmc-xeno-for-the-hive-activate = Our stomach starts turning and twisting, getting ready to compress the built up acid.
 rmc-xeno-for-the-hive-announce = ;FOR THE HIVE!!!
-rmc-xeno-for-the-hive-respawn-fail = You couldn't reincarnate!
-rmc-xeno-for-the-hive-respawn-corpse-self = The hive has no core! We manage to emerge from our old husk as a larva!
-rmc-xeno-for-the-hive-respawn-corpse-others = A larva suddenly emerges from a dead husk!
+
+# Generic Respawn
+rmc-xeno-respawn-fail = You couldn't reincarnate!
+rmc-xeno-respawn-corpse-self = The hive has no core! We manage to emerge from our old husk as a larva!
+rmc-xeno-respawn-corpse-others = A larva suddenly emerges from a dead husk!

@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Coordinates;
@@ -32,6 +32,7 @@ public sealed class XenoHealSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoHealComponent, XenoHealActionEvent>(OnXenoHealAction);
+        SubscribeLocalEvent<XenoComponent, XenoApplySalveActionEvent>(OnXenoApplySalveAction);
     }
 
     private void OnXenoHealAction(Entity<XenoHealComponent> ent, ref XenoHealActionEvent args)
@@ -69,15 +70,21 @@ public sealed class XenoHealSystem : EntitySystem
                 continue;
 
             var heal = EnsureComp<XenoBeingHealedComponent>(xeno);
-            heal.Amount = threshold.Value * ent.Comp.Percentage /
+            XenoHealStack healStack = new();
+            healStack.HealAmount = threshold.Value * ent.Comp.Percentage /
                           (ent.Comp.Duration.TotalSeconds * 10) *
                           (ent.Comp.TimeBetweenHeals.TotalSeconds * 10);
-            heal.Duration = ent.Comp.Duration;
+            healStack.Charges = (int)(ent.Comp.Duration.TotalSeconds / ent.Comp.TimeBetweenHeals.TotalSeconds);
+            heal.HealStacks.Add(healStack);
             heal.TimeBetweenHeals = ent.Comp.TimeBetweenHeals;
-            heal.Start = time;
 
             SpawnAttachedTo(ent.Comp.HealEffect, xeno.Owner.ToCoordinates());
         }
+    }
+
+    private void OnXenoApplySalveAction(EntityUid ent, XenoComponent comp, XenoApplySalveActionEvent args)
+    {
+
     }
 
     public override void Update(float frameTime)
@@ -88,24 +95,45 @@ public sealed class XenoHealSystem : EntitySystem
         {
             if (time < heal.NextHealAt)
                 continue;
-
-            if (time >= heal.Start + heal.Duration ||
-                _mobState.IsDead(uid))
+            if (heal.HealStacks.Count == 0 || _mobState.IsDead(uid))
             {
                 RemCompDeferred<XenoBeingHealedComponent>(uid);
                 continue;
             }
 
-            heal.NextHealAt = time + heal.TimeBetweenHeals;
-            Dirty(uid, heal);
+            List<XenoHealStack> finishedStacks = new();
 
-            var damage = _rmcDamageable.DistributeHealing(uid, BruteGroup, heal.Amount);
-            var totalHeal = damage.GetTotal();
-            var leftover = heal.Amount - totalHeal;
-            if (leftover > FixedPoint2.Zero)
-                damage = _rmcDamageable.DistributeHealing(uid, BruteGroup, leftover, damage);
+            foreach (var healStack in heal.HealStacks)
+            {
+                if (healStack.Charges == 0)
+                {
+                    finishedStacks.Add(healStack);
+                    continue;
+                }
 
-            _damageable.TryChangeDamage(uid, -damage, true);
+                heal.NextHealAt = time + heal.TimeBetweenHeals;
+                Dirty(uid, heal);
+
+                var damage = _rmcDamageable.DistributeHealing(uid, BruteGroup, healStack.HealAmount);
+                var totalHeal = damage.GetTotal();
+                var leftover = healStack.HealAmount - totalHeal;
+                if (leftover > FixedPoint2.Zero)
+                    damage = _rmcDamageable.DistributeHealing(uid, BruteGroup, leftover, damage);
+
+                _damageable.TryChangeDamage(uid, -damage, true);
+
+                healStack.Charges--;
+
+                if (!heal.ParallizeHealing)
+                {
+                    break;
+                }
+            }
+
+            foreach (var stack in finishedStacks)
+            {
+                heal.HealStacks.Remove(stack);
+            }
         }
     }
 }

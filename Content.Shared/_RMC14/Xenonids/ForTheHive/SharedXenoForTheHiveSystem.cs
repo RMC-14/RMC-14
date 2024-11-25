@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Evolution;

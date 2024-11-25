@@ -13,6 +13,21 @@
     range: 2
 
 - type: entity
+  id: ActionXenoHealerDroneTransferPlasma
+  parent: ActionXenoBase
+  name: Transfer plasma (100) # TODO RMC14 proper plasma costs
+  description: Give plasma to a nearby xenonid.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: transfer_plasma
+    event: !type:XenoTransferPlasmaActionEvent
+      amount: 100
+    range: 2
+
+- type: entity
   id: ActionXenoResinSurge
   parent: ActionXenoBase
   name: Resin Surge (75)
