@@ -808,3 +808,15 @@
     state: merlin_leander
   - type: PatronFigurine
     id: efe40ec4-b685-4025-8239-fdea3da1e019
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKaziPriestess
+  name: Kazi Priestess figurine
+  description: "\"Wait, you wanted a supply drop sent to those cords? Shit..\""
+  components:
+  - type: Sprite
+    state: kazi_priestess
+  - type: PatronFigurine
+    id: 916cba8a-e995-43a4-b1fd-8c9e512e8471
+
