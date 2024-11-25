@@ -126,7 +126,6 @@
     - conditions:
         unwieldedOnly: true
       accuracyAddMult: 0.05
-      accuracyMovementPenaltyAddMult: 1
 
 - type: entity
   parent: RMCRailAttachmentBase
@@ -151,7 +150,6 @@
     - conditions:
         unwieldedOnly: true
       accuracyAddMult: 0.05
-      accuracyMovementPenaltyAddMult: 1
 
 - type: entity
   abstract: true
@@ -229,9 +227,6 @@
         wieldedOnly: true
         inactiveOnly: true
       accuracyAddMult: -0.05
-    - conditions:
-        unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: 2
 
 - type: entity
   parent: RMCAttachmentS84xTelescopicScope
@@ -300,10 +295,7 @@
     - conditions:
         wieldedOnly: true
         inactiveOnly: true
-      accuracyAddMult: -0.05
-    - conditions:
-        unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: 2 #TODO: Add flare gun modifiers when it's implemented.
+      accuracyAddMult: -0.05 #TODO: Add flare gun modifiers when it's implemented.
 
 - type: entity
   parent: RMCAttachmentS42xTelescopicMiniscope
@@ -421,9 +413,6 @@
         wieldedOnly: true
         inactiveOnly: true
       accuracyAddMult: -0.05
-    - conditions:
-        unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: 2
   - type: Scope
     zoomLevels:
     - name: 4x
@@ -484,9 +473,6 @@
         wieldedOnly: true
         inactiveOnly: true
       accuracyAddMult: -0.05
-    - conditions:
-        unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: 2 #TODO: Add flare gun modifiers when it's implemented.
 
 - type: Tag
   id: RMCAttachmentRail

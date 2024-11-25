@@ -47,9 +47,10 @@
     plasma: 1000
     maxPlasma: 1000
     plasmaRegenOnWeeds: 4.5
-  - type: Tackle # min: 2, max: 4
-    threshold: 4
-    stun: 7
+  - type: Tackle
+    max: 4
+    stunMin: 3
+    stunMax: 4
   - type: WhitelistPickup
     whitelist:
       components:
@@ -83,6 +84,8 @@
     - CMXenoHivelord
     evolvesToWithoutPoints:
     - CMXenoQueen
+  - type: Evasion
+    evasion: 20
 
 - type: entity
   parent: CMXenoDroneBase

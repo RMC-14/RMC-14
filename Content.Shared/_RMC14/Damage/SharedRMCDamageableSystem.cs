@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Armor;
+﻿using System.Linq;
+using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Orders;
@@ -17,6 +18,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Silicons.Borgs;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
@@ -43,6 +45,11 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
+    private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
+    private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
+
+    private readonly HashSet<ProtoId<DamageTypePrototype>> _bruteTypes = new();
+    private readonly HashSet<ProtoId<DamageTypePrototype>> _burnTypes = new();
     private readonly List<string> _types = [];
 
     private EntityQuery<BarricadeComponent> _barricadeQuery;
@@ -83,6 +90,34 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 typeof(SharedArmorSystem), typeof(BlockingSystem), typeof(InventorySystem), typeof(SharedBorgSystem),
                 typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem),
             ]);
+
+        SubscribeLocalEvent<DamageDealtModifierComponent, GetMeleeDamageEvent>(OnDamageModifierGetMeleeDamage);
+
+        SubscribeLocalEvent<DamageReceivedModifierComponent, DamageModifyEvent>(OnDamageReceivedDamageModify,
+            after:
+            [
+                typeof(SharedArmorSystem), typeof(BlockingSystem), typeof(InventorySystem), typeof(SharedBorgSystem),
+                typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem)
+            ]);
+
+        _bruteTypes.Clear();
+        _burnTypes.Clear();
+
+        if (_prototypes.TryIndex(BruteGroup, out var bruteProto))
+        {
+            foreach (var type in bruteProto.DamageTypes)
+            {
+                _bruteTypes.Add(type);
+            }
+        }
+
+        if (_prototypes.TryIndex(BurnGroup, out var burnProto))
+        {
+            foreach (var type in burnProto.DamageTypes)
+            {
+                _burnTypes.Add(type);
+            }
+        }
     }
 
     private void OnDamageMobStateMapInit(Entity<DamageMobStateComponent> ent, ref MapInitEvent args)
@@ -173,6 +208,27 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
             return;
 
         args.Damage *= remaining.Float() / modifyTotal.Float();
+    }
+
+    private void OnDamageModifierGetMeleeDamage(Entity<DamageDealtModifierComponent> ent, ref GetMeleeDamageEvent args)
+    {
+        args.Damage *= ent.Comp.MeleeMultiplier;
+    }
+
+    private void OnDamageReceivedDamageModify(Entity<DamageReceivedModifierComponent> ent, ref DamageModifyEvent args)
+    {
+        foreach (var (type, amount) in args.Damage.DamageDict)
+        {
+            if (amount <= FixedPoint2.Zero)
+                continue;
+
+            if (ent.Comp.Multiplier != 1)
+                args.Damage.DamageDict[type] *= ent.Comp.Multiplier;
+            if (ent.Comp.BruteMultiplier != 1 && _bruteTypes.Contains(type))
+                args.Damage.DamageDict[type] *= ent.Comp.BruteMultiplier;
+            else if (ent.Comp.BurnMultiplier != 1 && _burnTypes.Contains(type))
+                args.Damage.DamageDict[type] *= ent.Comp.BurnMultiplier;
+        }
     }
 
     public DamageSpecifier DistributeHealing(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)

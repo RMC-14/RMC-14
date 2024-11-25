@@ -87,6 +87,7 @@
           False: {visible: true}
   - type: Pullable
   - type: ItemSlots
+  - type: DownOnEnter
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container

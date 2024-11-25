@@ -99,3 +99,5 @@
     accent: ReplacementAccent
     replacement: mumble
   - type: Blindfold
+  - type: StandingState
+    downSound: null

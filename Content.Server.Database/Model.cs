@@ -67,6 +67,18 @@ namespace Content.Server.Database
                 .HasIndex(p => new {p.Slot, PrefsId = p.PreferenceId})
                 .IsUnique();
 
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.PlaytimePerks)
+                .HasDefaultValue(true);
+
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.XenoPrefix)
+                .HasDefaultValue(string.Empty);
+
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.XenoPostfix)
+                .HasDefaultValue(string.Empty);
+
             modelBuilder.Entity<Antag>()
                 .HasIndex(p => new {HumanoidProfileId = p.ProfileId, p.AntagName})
                 .IsUnique();
@@ -456,6 +468,9 @@ namespace Content.Server.Database
         public RMCNamedItems? NamedItems { get; set; }
         public RMCSquadPreference? SquadPreference { get; set; }
         public string ArmorPreference { get; set; } = null!;
+        public bool PlaytimePerks { get; set; } = true;
+        public string XenoPrefix { get; set; } = string.Empty;
+        public string XenoPostfix { get; set; } = string.Empty;
     }
 
     public class Job

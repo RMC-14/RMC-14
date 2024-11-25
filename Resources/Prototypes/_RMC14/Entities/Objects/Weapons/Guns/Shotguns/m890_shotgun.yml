@@ -1,7 +1,6 @@
-﻿
-- type: entity
+﻿- type: entity
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
-  name: M890 Tactical Shotgun
+  name: M890 tactical shotgun
   id: WeaponShotgunM890
   description: A unique corporate made semi-automatic shotgun with a rapid fire rate and an attached Underslung Grenade Launcher. Holds 8 shotgun shells in the chamber.
   components:
@@ -26,7 +25,7 @@
     cycleable: false
     whitelist:
       tags:
-      - CMShellShotgun
+      - RMCShellShotgun
     capacity: 8
   - type: AttachableHolder
     slots:

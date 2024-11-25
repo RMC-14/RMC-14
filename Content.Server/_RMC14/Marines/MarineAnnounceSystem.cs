@@ -249,4 +249,24 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
         _audio.PlayGlobal(sound ?? DefaultSquadSound, filter, true, AudioParams.Default.WithVolume(-2f));
     }
+
+    public override void AnnounceSquad(string message, EntityUid squad, SoundSpecifier? sound = null)
+    {
+        base.AnnounceSquad(message, squad, sound);
+
+        var filter = Filter.Empty().AddWhereAttachedEntity(e => _squad.IsInSquad(e, squad));
+
+        _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
+        _audio.PlayGlobal(sound ?? DefaultSquadSound, filter, true, AudioParams.Default.WithVolume(-2f));
+    }
+
+    public override void AnnounceSingle(string message, EntityUid receiver, SoundSpecifier? sound = null)
+    {
+        base.AnnounceSingle(message, receiver, sound);
+
+        if (TryComp(receiver, out ActorComponent? actor))
+            _chatManager.ChatMessageToOne(ChatChannel.Radio, message, message, default, false, actor.PlayerSession.Channel);
+
+        _audio.PlayEntity(sound, receiver, receiver, AudioParams.Default.WithVolume(-2f));
+    }
 }

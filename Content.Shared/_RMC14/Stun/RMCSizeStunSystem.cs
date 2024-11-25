@@ -120,21 +120,24 @@ public sealed class RMCSizeStunSystem : EntitySystem
             }
 
             _stun.TryParalyze(args.Target, stun, true);
-
-            EnsureComp<AmmoSlowedComponent>(args.Target, out var ammoSlowed);
-
-            ammoSlowed.ExpireTime = _timing.CurTime + slow;
-            ammoSlowed.SuperExpireTime = _timing.CurTime + superSlow;
-            ammoSlowed.SuperSlowActive = true;
-
-            Dirty(args.Target, ammoSlowed);
-
-            _movementSpeed.RefreshMovementSpeedModifiers(args.Target);
+            Superslow(args.Target, slow, superSlow);
 
             _popup.PopupEntity(Loc.GetString("rmc-xeno-stun-shaken"), args.Target, args.Target, PopupType.MediumCaution);
         }
         else
             _stamina.TakeStaminaDamage(args.Target, args.Damage.GetTotal().Float());
+    }
+
+    public void Superslow(EntityUid ent, TimeSpan slow, TimeSpan superSlow)
+    {
+        EnsureComp<AmmoSlowedComponent>(ent, out var ammoSlowed);
+
+        ammoSlowed.ExpireTime = _timing.CurTime + slow;
+        ammoSlowed.SuperExpireTime = _timing.CurTime + superSlow;
+        ammoSlowed.SuperSlowActive = true;
+
+        Dirty(ent, ammoSlowed);
+        _movementSpeed.RefreshMovementSpeedModifiers(ent);
     }
 
     public override void Update(float frameTime)
