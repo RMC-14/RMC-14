@@ -46,4 +46,109 @@
       rmc-aslot-rail: -0.065, 0.125
       rmc-aslot-underbarrel: 0.312, -0.25
 
+- type: entity
+  parent: RMCBaseSpeedLoader44
+  id: RMCSpeedLoaderSPP
+  name: "ZHNK-72 Speed Loader"
+  description: Holds seven (7) 7.62x38mmR rounds for use in the ZHNK-72.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/m44.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: base-5
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: base
+    steps: 6
+    zeroVisible: false
+  - type: BallisticAmmoProvider
+    proto: RMCCartridgeRevolverZHNK
+    capacity: 7
+  - type: Appearance
 
+- type: entity
+  parent: RMCSpeedLoaderM44
+  id: RMCSpeedLoaderSPPShrap
+  name: "ZHNK-72 Shrapnel Speed Loader"
+  description: Holds seven (7) 7.62x38mmR Shrapnel rounds. Acts similarly to buckshot. 
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/m44.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: base-5
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: base-unshaded-5
+      color: "#FF744F"
+      map: [ "enum.GunVisualLayers.MagUnshaded" ]
+  - type: BallisticAmmoProvider
+    proto: RMCCartridgeRevolverZHNKShrap
+    capacity: 7
+
+- type: entity
+  id: RMCCartridgeRevolverZHNK
+  name: cartridge (7.62x38mmR)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRevolverZHNK
+  - type: CartridgeAmmo
+    proto: CMBulletRevolverZHNK
+
+- type: entity
+  id: RMCCartridgeRevolverZHNKShrap
+  name: cartridge (.44)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRevolver44
+  - type: CartridgeAmmo
+    proto: RMCBulletRevolverZHNKShrap
+
+- type: entity
+  parent: CMBulletBase
+  id: CMBulletRevolverZHNK
+  name: bullet (7.62x38mmR)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 84
+  - type: CMArmorPiercing
+    amount: 20
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletRevolverZHNKShrap #TODO: IT ACTS LIKE BUCKSHOT
+  name: bullet (7.62x38mmR Shrapnel)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 9999
+      ignoreModifiers: true
+  - type: CMArmorPiercing
+    amount: 35
+
+- type: Tag
+  id: RMCSpeedLoaderSPP
+
+- type: Tag
+  id: RMCSpeedLoaderSPPShrap
+
+- type: Tag
+  id: RMCCartridgeRevolverZHNKShrap
+
+- type: Tag
+  id: RMCCartridgeRevolverZHNK
