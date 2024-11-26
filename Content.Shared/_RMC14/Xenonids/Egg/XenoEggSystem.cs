@@ -381,9 +381,10 @@ public sealed class XenoEggSystem : EntitySystem
 
     private bool CanTrigger(EntityUid user)
     {
-        return HasComp<InfectableComponent>(user) &&
-               !HasComp<VictimInfectedComponent>(user) &&
-               !_mobState.IsDead(user);
+        return TryComp<InfectableComponent>(user, out var infected)
+               && !infected.BeingInfected
+               && !_mobState.IsDead(user)
+               && !HasComp<VictimInfectedComponent>(user);
     }
 
     public bool Open(Entity<XenoEggComponent> egg, EntityUid? user, out EntityUid? spawned)
