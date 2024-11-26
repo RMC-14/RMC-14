@@ -38,7 +38,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                     ? Loc.GetString("ghost-target-window-current-button", ("name", warp.DisplayName))
                     : warp.DisplayName;
 
-                _categories[warp.CategoryName].Add((warpName, warp.Entity, warp.CategoryColor));
+                _categories[warp.CategoryName].Add((warpName, warp.Entity, warp.WarpColor));
             }
         }
 

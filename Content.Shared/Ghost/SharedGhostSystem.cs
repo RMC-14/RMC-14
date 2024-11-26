@@ -75,13 +75,13 @@ namespace Content.Shared.Ghost
     [Serializable, NetSerializable]
     public struct GhostWarp
     {
-        public GhostWarp(NetEntity entity, string displayName, bool isWarpPoint, string? categoryName, string? categoryColor)
+        public GhostWarp(NetEntity entity, string displayName, bool isWarpPoint, string? categoryName, string? warpColor)
         {
             Entity = entity;
             DisplayName = displayName;
             IsWarpPoint = isWarpPoint;
             CategoryName = categoryName ?? "Other";
-            CategoryColor = categoryColor ?? "#D3D3D3"; // light grey
+            WarpColor = warpColor ?? "#D3D3D3"; // light grey
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Content.Shared.Ghost
         /// <summary>
         /// The color of each button in the category, should match the color of the department or a squad.
         /// </summary>
-        public string CategoryColor { get; }
+        public string WarpColor { get; }
     }
 
     /// <summary>

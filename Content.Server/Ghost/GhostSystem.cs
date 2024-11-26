@@ -371,15 +371,15 @@ namespace Content.Server.Ghost
                 if (_jobs.MindTryGetJob(mind?.Mind, out var jobProto)) {
                     var playerInfo = $"{Comp<MetaDataComponent>(attached).EntityName} ({jobName})";
                     if (_jobs.TryGetPrimaryDepartment(jobProto.ID, out var departmentProto)) {
-                        var categoryColor = departmentProto.Color;
+                        var warpColor = departmentProto.Color;
                         if (TryComp(attached, out SquadMemberComponent? member)) // if they are in a squad, we use the squad colors instead.
                         {
                             if (TryComp(member.Squad, out SquadTeamComponent? squadComp))
                             {
-                                categoryColor = squadComp.Color;
+                                warpColor = squadComp.Color;
                             }
                         }
-                        yield return new GhostWarp(GetNetEntity(attached), playerInfo, false, departmentProto.CustomName ?? Loc.GetString(departmentProto.Name), categoryColor.ToHex());
+                        yield return new GhostWarp(GetNetEntity(attached), playerInfo, false, departmentProto.CustomName ?? Loc.GetString(departmentProto.Name), warpColor.ToHex());
                     } else {
                         yield return new GhostWarp(GetNetEntity(attached), playerInfo, false, null, null); // no department was found, i'm probably going to need to create more departments, pmc and such.
                     }
