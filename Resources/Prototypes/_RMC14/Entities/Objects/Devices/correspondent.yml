@@ -2,6 +2,7 @@
   parent: BaseItem
   id: RMCCorrespondentMicrophone
   name: microphone
+  suffix: RMC
   description: To report on the events where no other correspondent has gone before. Now with sound!
   components:
   - type: Sprite
