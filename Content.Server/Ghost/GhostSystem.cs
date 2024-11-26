@@ -368,9 +368,11 @@ namespace Content.Server.Ghost
                 if(!_mobState.IsAlive(attached) && !_mobState.IsCritical(attached)) continue;
 
                 var jobName = _jobs.MindTryGetJobName(mind?.Mind);
-                if (_jobs.MindTryGetJob(mind?.Mind, out var jobProto)) {
+                if (_jobs.MindTryGetJob(mind?.Mind, out var jobProto)) 
+                {
                     var playerInfo = $"{Comp<MetaDataComponent>(attached).EntityName} ({jobName})";
-                    if (_jobs.TryGetPrimaryDepartment(jobProto.ID, out var departmentProto)) {
+                    if (_jobs.TryGetPrimaryDepartment(jobProto.ID, out var departmentProto)) 
+                    {
                         var warpColor = departmentProto.Color;
                         if (TryComp(attached, out SquadMemberComponent? member)) // if they are in a squad, we use the squad colors instead.
                         {
