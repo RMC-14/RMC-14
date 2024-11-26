@@ -11,9 +11,8 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
     [GenerateTypedNameReferences]
     public sealed partial class GhostTargetWindow : DefaultWindow
     {
-        private List<(string, NetEntity)> _warps = new();
         private string _searchText = string.Empty;
-
+        private Dictionary<string, List<(string, NetEntity, string)>> _categories = new();
         public event Action<NetEntity>? WarpClicked;
         public event Action? OnGhostnadoClicked;
 
@@ -24,23 +23,23 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
 
             GhostnadoButton.OnPressed += _ => OnGhostnadoClicked?.Invoke();
         }
-
         public void UpdateWarps(IEnumerable<GhostWarp> warps)
         {
-            // Server COULD send these sorted but how about we just use the client to do it instead
-            _warps = warps
-                .OrderBy(w => w.IsWarpPoint)
-                .ThenBy(w => w.DisplayName, Comparer<string>.Create(
-                    (x, y) => string.Compare(x, y, StringComparison.Ordinal)))
-                .Select(w =>
-                {
-                    var name = w.IsWarpPoint
-                        ? Loc.GetString("ghost-target-window-current-button", ("name", w.DisplayName))
-                        : w.DisplayName;
+            _categories.Clear();
 
-                    return (name, w.Entity);
-                })
-                .ToList();
+            foreach (var warp in warps)
+            {
+                if (!_categories.ContainsKey(warp.CategoryName))
+                {
+                    _categories[warp.CategoryName] = new List<(string, NetEntity, string)>();
+                }
+
+                var warpName = warp.IsWarpPoint
+                    ? Loc.GetString("ghost-target-window-current-button", ("name", warp.DisplayName))
+                    : warp.DisplayName;
+
+                _categories[warp.CategoryName].Add((warpName, warp.Entity, warp.CategoryColor));
+            }
         }
 
         public void Populate()
@@ -51,23 +50,36 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
 
         private void AddButtons()
         {
-            foreach (var (name, warpTarget) in _warps)
+            foreach (var (categoryName, warps) in _categories)
             {
-                var currentButtonRef = new Button
+                var categoryLabel = new Label
                 {
-                    Text = name,
-                    TextAlign = Label.AlignMode.Right,
+                    Text = categoryName,
                     HorizontalAlignment = HAlignment.Center,
                     VerticalAlignment = VAlignment.Center,
                     SizeFlagsStretchRatio = 1,
-                    MinSize = new Vector2(340, 20),
-                    ClipText = true,
                 };
+                ButtonContainer.AddChild(categoryLabel);
 
-                currentButtonRef.OnPressed += _ => WarpClicked?.Invoke(warpTarget);
-                currentButtonRef.Visible = ButtonIsVisible(currentButtonRef);
+                foreach (var (name, warpTarget, colorHex) in warps)
+                {
+                    var currentButtonRef = new Button
+                    {
+                        Text = name,
+                        TextAlign = Label.AlignMode.Right,
+                        HorizontalAlignment = HAlignment.Center,
+                        VerticalAlignment = VAlignment.Center,
+                        SizeFlagsStretchRatio = 1,
+                        Modulate = Color.FromHex(colorHex), 
+                        MinSize = new Vector2(340, 20),
+                        ClipText = true,
+                    };
 
-                ButtonContainer.AddChild(currentButtonRef);
+                    currentButtonRef.OnPressed += _ => WarpClicked?.Invoke(warpTarget);
+                    currentButtonRef.Visible = ButtonIsVisible(currentButtonRef);
+
+                    ButtonContainer.AddChild(currentButtonRef);
+                }
             }
         }
 
@@ -90,7 +102,6 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             _searchText = args.Text;
 
             UpdateVisibleButtons();
-            // Reset scroll bar so they can see the relevant results.
             GhostScroll.SetScrollValue(Vector2.Zero);
         }
     }

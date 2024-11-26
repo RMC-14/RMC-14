@@ -75,11 +75,13 @@ namespace Content.Shared.Ghost
     [Serializable, NetSerializable]
     public struct GhostWarp
     {
-        public GhostWarp(NetEntity entity, string displayName, bool isWarpPoint)
+        public GhostWarp(NetEntity entity, string displayName, bool isWarpPoint, string? categoryName, string? categoryColor)
         {
             Entity = entity;
             DisplayName = displayName;
             IsWarpPoint = isWarpPoint;
+            CategoryName = categoryName ?? "Other";
+            CategoryColor = categoryColor ?? "#D3D3D3"; // light grey
         }
 
         /// <summary>
@@ -96,7 +98,17 @@ namespace Content.Shared.Ghost
         /// <summary>
         /// Whether this warp represents a warp point or a player
         /// </summary>
-        public bool IsWarpPoint { get;  }
+        public bool IsWarpPoint { get; }
+
+        /// <summary>
+        /// The name of the category to which the warp belongs to, for mobs it's just the department.
+        /// </summary>
+        public string CategoryName { get; }
+
+        /// <summary>
+        /// The color of the category label, should match the color of the department.
+        /// </summary>
+        public string CategoryColor { get; }
     }
 
     /// <summary>

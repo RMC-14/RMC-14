@@ -23,6 +23,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Storage.Components;
+using Content.Shared._RMC14.Marines.Squads;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
@@ -349,7 +350,7 @@ namespace Content.Server.Ghost
 
             while (allQuery.MoveNext(out var uid, out var warp))
             {
-                yield return new GhostWarp(GetNetEntity(uid), warp.Location ?? Name(uid), true);
+                yield return new GhostWarp(GetNetEntity(uid), warp.Location ?? Name(uid), true, null, null); // locations will fall under the other cateogry
             }
         }
 
@@ -364,11 +365,25 @@ namespace Content.Server.Ghost
 
                 TryComp<MindContainerComponent>(attached, out var mind);
 
-                var jobName = _jobs.MindTryGetJobName(mind?.Mind);
-                var playerInfo = $"{Comp<MetaDataComponent>(attached).EntityName} ({jobName})";
+                if(!_mobState.IsAlive(attached) && !_mobState.IsCritical(attached)) continue;
 
-                if (_mobState.IsAlive(attached) || _mobState.IsCritical(attached))
-                    yield return new GhostWarp(GetNetEntity(attached), playerInfo, false);
+                var jobName = _jobs.MindTryGetJobName(mind?.Mind);
+                if (_jobs.MindTryGetJob(mind?.Mind, out var jobProto)) {
+                    var playerInfo = $"{Comp<MetaDataComponent>(attached).EntityName} ({jobName})";
+                    if (_jobs.TryGetPrimaryDepartment(jobProto.ID, out var departmentProto)) {
+                        var categoryColor = departmentProto.Color;
+                        if (TryComp(attached, out SquadMemberComponent? member)) // if they are in a squad, we use the squad colors instead.
+                        {
+                            if (TryComp(member.Squad, out SquadTeamComponent? squadComp))
+                            {
+                                categoryColor = squadComp.Color;
+                            }
+                        }
+                        yield return new GhostWarp(GetNetEntity(attached), playerInfo, false, departmentProto.CustomName ?? Loc.GetString(departmentProto.Name), categoryColor.ToHex());
+                    } else {
+                        yield return new GhostWarp(GetNetEntity(attached), playerInfo, false, null, null); // no department was found, i'm probably going to need to create more departments, pmc and such.
+                    }
+                }
             }
         }
 
