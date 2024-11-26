@@ -9,6 +9,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Slowing;
 using Content.Shared.Alert;
 using Content.Shared.Clothing.Components;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Explosion;
@@ -64,7 +65,7 @@ public sealed class RMCArmorSystem : EntitySystem
             equipmentEntityID = randomType;
         }
 
-        var equipmentEntity = Spawn(equipmentEntityID);
+        var equipmentEntity = Spawn(equipmentEntityID, coordinates: args.Item.ToCoordinates());
         InventorySystem.TryEquip(ent, equipmentEntity, "outerClothing", force: true, predicted: false);
 
         QueueDel(args.Item);
