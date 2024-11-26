@@ -1,7 +1,13 @@
 ﻿rmc-xeno-strain-specialized-into = It has specialized into a {$strain}.
 
 rmc-xeno-dancer-name = Dancer
-rmc-xeno-dancer-description = TODO
+rmc-xeno-dancer-description = You trade your acid spit, acid ball, acid spray, dash, and a small bit of armor for high single-target damage.
+   You gain the ability to:
+   - Break walls and other simple structures with your melee attack.
+   - Cause enemies to be marked on melee and tailstab hits which effects your other abilities.
+   - Impale an enemy for your melee damage and pierce some armor, hitting twice on marked.
+   - Trip an enemy to disarm them, or stun them if marked.
+   - Gain a temporary speed boost thats doubled around your enemies.
 rmc-xeno-dancer-popup = A performance fit for a Queen, this one will become my instrument of death.
 
 rmc-xeno-vanguard-name = Vanguard
@@ -12,8 +18,8 @@ rmc-xeno-warden-name = Warden
 rmc-xeno-warden-description = You trade your acid ball, acid spray, dash, and a small bit of your slash damage and speed to become an effective medic.
   You gain the ability to:
   - Emit strong pheromones.
-  - An ability that retrieves endangered, knocked-down or resting allies and pulls them to your location.
-  - An internal hitpoint pool that fills with every slash against your enemies, which can be spent to aid your allies and yourself by healing them or curing their ailments.
+  - Retrieve endangered, knocked-down or resting allies and pull them to your location.
+  - Use an internal hitpoint pool that fills with every slash against your enemies, which can be spent to aid your allies and yourself by healing them or curing their ailments.
 rmc-xeno-warden-popup = This one will deny her sisters' deaths until they earn it. Fight or be forgotten.
 
 rmc-xeno-gardener-name = Gardener

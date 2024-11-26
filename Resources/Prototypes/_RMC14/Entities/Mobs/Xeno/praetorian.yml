@@ -191,7 +191,7 @@
         Brute: 36
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.2
-    baseSprintSpeed: 3.4
+    baseSprintSpeed: 3.5
   - type: SlowOnPull
     slowdowns:
     - multiplier: 0.64
@@ -222,9 +222,9 @@
     - ActionXenoWatch
     - ActionXenoTailStab
     - ActionXenoAcidNormal
-    # ActionXenoImpale
-    # ActionXenoDodge
-    # ActionXenoTailTrip
+    - ActionXenoImpale
+    - ActionXenoDodge
+    - ActionXenoTailTrip
     - ActionXenoDevolve
     hidden: true
   - type: XenoStrain
@@ -237,6 +237,12 @@
   - type: XenoClaws
     clawType: Sharp
   - type: XenoFinesse
+  - type: XenoDodge
+  - type: XenoImpale
+    damage:
+      groups:
+        Brute: 40
+  - type: XenoTailTrip
 
 - type: entity
   parent: CMXenoPraetorianBase
