@@ -20,6 +20,13 @@ rmc-xeno-gardener-description = You trade your choice of resin secretions, your 
   - Speed up the growth of your fruits.
 rmc-xeno-gardener-popup = The glory of gardening: hands in the weeds, head in the dark, heart with resin.
 
+rmc-xeno-healer-name = Healer
+rmc-xeno-healer-description = You lose your choice of resin secretions, a chunk of your slash damage, and you will experience a slighty-increased difficulty in tackling hosts in exchange for strong pheromones, and the ability to heal your sisters wounds.
+    You gain the ability to:
+    - Plant up to 3 lesser resin fruits
+    - Heal sisters by using plasma and some of your health.
+rmc-xeno-healer-popup = Divided we fall, united we win. We live for the hive, we die for the hive.
+
 rmc-xeno-acider-name = Acider
 rmc-xeno-acider-description = You trade your leap, bone chips, long-range sight, and a little speed to gain more health, some armor, and a new organ that fills with volatile acid over time.
   You gain the ability to:

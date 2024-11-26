@@ -138,3 +138,17 @@
     range: -1
   - type: XenoActionPlasma
     cost: 600
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoApplySalve
+  name: Apply Salve (200)
+  description: Apply a salve to heal allied Xenos
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: apply_salve
+    event: !type:XenoApplySalveActionEvent

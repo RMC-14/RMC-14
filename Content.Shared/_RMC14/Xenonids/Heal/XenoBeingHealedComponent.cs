@@ -6,7 +6,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Xenonids.Heal;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(XenoHealSystem))]
 public sealed partial class XenoBeingHealedComponent : Component
 {
@@ -15,12 +15,6 @@ public sealed partial class XenoBeingHealedComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool ParallizeHealing = true;
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan TimeBetweenHeals;
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan NextHealAt;
 }
 
 [UsedImplicitly]
@@ -32,4 +26,10 @@ public sealed partial class XenoHealStack
 
     [DataField]
     public int Charges;
+
+    [DataField]
+    public TimeSpan TimeBetweenHeals;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    public TimeSpan NextHealAt;
 }

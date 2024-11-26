@@ -2,8 +2,8 @@
 cm-xeno-not-enough-plasma = You don't have enough plasma!
 
 # Energy
-rmc-xeno-not-enough-energy = Your health reserves are insufficient!
-rmc-xeno-energy-increase-user = You feel your internal health reserves increase!
+rmc-xeno-not-enough-energy = Your energy reserves are insufficient!
+rmc-xeno-energy-increase-user = You feel your internal energy reserves increase!
 
 # Acid reserves
 rmc-xeno-not-enough-acid = Your don't have enough acid built up!
@@ -200,3 +200,14 @@ rmc-xeno-for-the-hive-announce = ;FOR THE HIVE!!!
 rmc-xeno-respawn-fail = You couldn't reincarnate!
 rmc-xeno-respawn-corpse-self = The hive has no core! We manage to emerge from our old husk as a larva!
 rmc-xeno-respawn-corpse-others = A larva suddenly emerges from a dead husk!
+
+# Apply Salve
+rmc-xeno-apply-salve-target-not-xeno-failure = The target cannot be healed!
+rmc-xeno-apply-salve-target-self-failure = We can't heal ourself with our own resin salve!
+rmc-xeno-apply-salve-target-hostile-failure = {$target_xeno} is hostile to our hive!
+rmc-xeno-apply-salve-target-too-far-away-failure = We can't apply our resin salve from here!
+rmc-xeno-apply-salve-target-dead-failure = {$target_xeno} is dead!
+rmc-xeno-apply-salve-target-full-health-failure = {$target_xeno} is already at full health!
+
+rmc-xeno-apply-salve-self = We regurgitate our vital fluids and some plasma to create a regenerative resin salve and apply it to {$target_xeno}'s wounds. We feel weakened...
+rmc-xeno-apply-salve-target = {$healer_xeno} covers our wounds with a regenerative resin salve. We feel reinvigorated!

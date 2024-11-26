@@ -177,7 +177,9 @@
   suffix: Healer
   components:
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Drone/gardener_drone.rsi # TODO: port sprite
+    sprite: _RMC14/Mobs/Xenonids/Drone/healer_drone.rsi
+  - type: RMCXenoDamageVisuals
+    prefix: drone
   - type: Xeno
     actionIds:
     - ActionXenoRest
@@ -189,7 +191,7 @@
     - ActionXenoPlantWeeds
     - ActionXenoFruitPlantLesser
     - ActionXenoHealerDroneTransferPlasma
-    # - ActionXenoApplySalve
+    - ActionXenoApplySalve
     # - ActionXenoSacrifice
     - ActionXenoDevolve
   - type: XenoPlasma
@@ -204,9 +206,9 @@
   - type: XenoPheromones
     pheromonesMultiplier: 2.5
   - type: XenoStrain
-    name: rmc-xeno-gardener-name # TODO: port strain texts
-    description: rmc-xeno-gardener-description
-    popup: rmc-xeno-gardener-popup
+    name: rmc-xeno-healer-name
+    description: rmc-xeno-healer-description
+    popup: rmc-xeno-healer-popup
   - type: XenoFruitPlanter
     fruitChoice: XenoFruitLesser
     canPlant:
@@ -217,5 +219,9 @@
     stunMin: 3
     stunMax: 4
     chance: 0.30
-  - type: XenoHealer
-  # TODO: rest of the fucking owl
+  - type: XenoEnergy
+    max: 7500
+    gain: 0
+    gainAttack: 0
+    gainAttackDowned: 0
+  #- type: XenoHealer
