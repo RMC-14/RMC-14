@@ -1,8 +1,11 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids.Announce;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Strain;
 using Content.Shared.Coordinates;
@@ -10,15 +13,17 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Heal;
 
-public sealed class XenoHealSystem : EntitySystem
+public abstract class SharedXenoHealSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedInteractionSystem _interact = default!;
@@ -34,6 +39,8 @@ public sealed class XenoHealSystem : EntitySystem
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -45,6 +52,7 @@ public sealed class XenoHealSystem : EntitySystem
     {
         SubscribeLocalEvent<XenoHealComponent, XenoHealActionEvent>(OnXenoHealAction);
         SubscribeLocalEvent<XenoComponent, XenoApplySalveActionEvent>(OnXenoApplySalveAction);
+        SubscribeLocalEvent<XenoComponent, XenoSacraficeHealActionEvent>(OnXenoSacraficeHealAction);
     }
 
     private void OnXenoHealAction(Entity<XenoHealComponent> ent, ref XenoHealActionEvent args)
@@ -183,11 +191,178 @@ public sealed class XenoHealSystem : EntitySystem
 
         _popup.PopupClient(Loc.GetString("rmc-xeno-apply-salve-target", ("healer_xeno", ent)), target, PopupType.SmallCaution);
 
-        if (!healedHealerOrSmallXeno && TryComp(ent, out XenoEnergyComponent? xenoEnergyComp))
+        if (!healedHealerOrSmallXeno && TryComp(ent, out XenoEnergyComponent? xenoEnergyComp) && !_xenoEnergy.HasEnergy((ent, xenoEnergyComp), xenoEnergyComp.Max))
         {
             _xenoEnergy.AddEnergy((ent, xenoEnergyComp), (int)damageTaken, false);
+            if (_xenoEnergy.HasEnergy((ent, xenoEnergyComp), xenoEnergyComp.Max))
+            {
+                _popup.PopupClient(Loc.GetString("rmc-xeno-sacrafice-heal-will-respawn"), ent, PopupType.Large);
+            }
         }
         Dirty(target, heal);
+    }
+
+    private void OnXenoSacraficeHealAction(EntityUid ent, XenoComponent comp, XenoSacraficeHealActionEvent args)
+    {
+        var target = args.Target;
+
+        LocId? failureMessageId = null;
+
+        if (!HasComp<XenoComponent>(target))
+        {
+            failureMessageId = "rmc-xeno-sacrafice-heal-target-not-xeno-failure";
+        }
+
+        if (ent == target)
+        {
+            failureMessageId = "rmc-xeno-sacrafice-heal-target-self-failure";
+        }
+
+        if (HasComp<XenoParasiteComponent>(target) ||
+            (TryComp(target, out RMCSizeComponent? rmcSizeComp) && rmcSizeComp.Size == RMCSizes.VerySmallXeno))
+        {
+            failureMessageId = "rmc-xeno-sacrafice-heal-target-low-level-failure";
+        }
+
+        if (!_hive.FromSameHive(ent, target))
+        {
+            failureMessageId = "rmc-xeno-sacrafice-heal-target-hostile-failure";
+        }
+
+        if (!_interact.InRangeUnobstructed(ent, target, args.Range))
+        {
+            failureMessageId = "rmc-xeno-sacrafice-heal-target-too-far-away-failure";
+        }
+
+        if (_mobState.IsDead(target))
+        {
+            failureMessageId = "rmc-xeno-sacrafice-heal-target-dead-failure";
+        }
+
+        if (TryComp(target, out DamageableComponent? targetDamageComp) && targetDamageComp.TotalDamage == 0)
+        {
+            failureMessageId = "rmc-xeno-sacrafice-heal-target-full-health-failure";
+        }
+
+        if (failureMessageId is LocId)
+        {
+            _popup.PopupClient(Loc.GetString(failureMessageId, ("target_xeno", target.ToString())), ent);
+            return;
+        }
+
+        if (!TryComp(target, out targetDamageComp) ||
+            !TryComp(ent, out DamageableComponent? userDamageComp) ||
+            !TryComp(target, out MobThresholdsComponent? targetThresholdsComp) ||
+            !TryComp(ent, out MobThresholdsComponent? userThresholdsComp))
+        {
+            return;
+        }
+
+        FixedPoint2? targetCriticalThreshold = null;
+        foreach (var threshold in targetThresholdsComp.Thresholds)
+        {
+            if (threshold.Value == Shared.Mobs.MobState.Critical)
+            {
+                targetCriticalThreshold = threshold.Key;
+            }
+        }
+
+        FixedPoint2? userDeathThreshold = null;
+        foreach (var threshold in userThresholdsComp.Thresholds)
+        {
+            if (threshold.Value == Shared.Mobs.MobState.Dead)
+            {
+                userDeathThreshold = threshold.Key;
+            }
+        }
+
+        if (userDeathThreshold is null ||
+            targetCriticalThreshold is null)
+        {
+            return;
+        }
+
+        SacraficialHealShout(ent);
+        _xenoAnnounce.AnnounceSameHive(ent, Loc.GetString("rmc-xeno-sacrafice-heal-target-announcement", ("healer_xeno", ent), ("target_xeno", target)), popup:PopupType.Large);
+        _popup.PopupEntity(Loc.GetString("rmc-xeno-sacrafice-heal-target-enviorment", ("healer_xeno", ent), ("target_xeno", target)), ent, PopupType.Medium);
+
+        // Heal from crit
+        var targetTotalDamage = targetDamageComp.TotalDamage;
+        var diffToThreshold = targetTotalDamage - targetCriticalThreshold.Value;
+
+        if (diffToThreshold > 0)
+            Heal(target, diffToThreshold);
+
+        // Use up user's health to heal target
+        var userTotalDamage = userDamageComp.TotalDamage;
+        var remainingHealth = userDeathThreshold.Value - userTotalDamage;
+        var healAmount = remainingHealth * args.TransferProportion;
+        Heal(target, healAmount);
+
+        SpawnAttachedTo(args.HealEffect, target.ToCoordinates());
+
+        var corpsePosition = _transform.GetMoverCoordinates(ent);
+
+        var killDamageSpecifier = new DamageSpecifier
+        {
+            DamageDict =
+            {
+                [BluntGroup] = (FixedPoint2) (remainingHealth + 100),
+            },
+        };
+        _damageable.TryChangeDamage(ent, killDamageSpecifier, ignoreResistances: true, interruptsDoAfters: false);
+
+        if (!TryComp(ent, out XenoEnergyComponent? xenoEnergyComp) ||
+            !_xenoEnergy.HasEnergy((ent, xenoEnergyComp), xenoEnergyComp.Max))
+        {
+            return;
+        }
+
+        if (GetHiveCore(ent, out var core))
+            SacraficialHealRespawn(ent, args.RespawnDelay);
+        else
+            SacraficialHealRespawn(ent, args.RespawnDelay, true, corpsePosition);
+
+    }
+
+    private void Heal(EntityUid target, FixedPoint2 amount)
+    {
+        var damage = _rmcDamageable.DistributeHealing(target, BruteGroup, amount);
+        var totalHeal = damage.GetTotal();
+        var leftover = amount - totalHeal;
+        if (leftover > FixedPoint2.Zero)
+            damage = _rmcDamageable.DistributeHealing(target, BruteGroup, leftover, damage);
+
+        _damageable.TryChangeDamage(target, -damage, true);
+    }
+
+    private bool GetHiveCore(EntityUid xeno, out EntityUid? core)
+    {
+        var cores = EntityQueryEnumerator<HiveCoreComponent, HiveMemberComponent>();
+        while (cores.MoveNext(out var uid, out var _, out var _))
+        {
+            if (!_hive.FromSameHive(xeno, uid))
+                continue;
+
+            if (_mobState.IsDead(uid))
+                continue;
+
+            core = uid;
+            return true;
+        }
+
+        core = null;
+        return false;
+    }
+
+    protected virtual void SacraficialHealShout(EntityUid xeno)
+    {
+
+    }
+
+    protected virtual void SacraficialHealRespawn(EntityUid xeno, TimeSpan time, bool atCorpse = false, EntityCoordinates? corpse = null)
+    {
+
     }
 
     public override void Update(float frameTime)
@@ -219,13 +394,7 @@ public sealed class XenoHealSystem : EntitySystem
 
                 Dirty(uid, heal);
 
-                var damage = _rmcDamageable.DistributeHealing(uid, BruteGroup, healStack.HealAmount);
-                var totalHeal = damage.GetTotal();
-                var leftover = healStack.HealAmount - totalHeal;
-                if (leftover > FixedPoint2.Zero)
-                    damage = _rmcDamageable.DistributeHealing(uid, BruteGroup, leftover, damage);
-
-                _damageable.TryChangeDamage(uid, -damage, true);
+                Heal(uid, healStack.HealAmount);
 
                 healStack.NextHealAt = time + healStack.TimeBetweenHeals;
                 healStack.Charges = healStack.Charges - 1;

@@ -152,3 +152,17 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: apply_salve
     event: !type:XenoApplySalveActionEvent
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoSacrifice
+  name: Sacrifice
+  description: Sacrifice your life to heal a sister. YOU WILL ONLY RESPAWN IF YOU MAXED OUT YOUR ENERGY BY HEALING SISTERS.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: screech
+    event: !type:XenoSacraficeHealActionEvent
