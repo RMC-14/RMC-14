@@ -213,15 +213,15 @@ rmc-xeno-apply-salve-self = We regurgitate our vital fluids and some plasma to c
 rmc-xeno-apply-salve-target = {$healer_xeno} covers our wounds with a regenerative resin salve. We feel reinvigorated!
 
 # Sacrafical Heal
-rmc-xeno-sacrafice-heal-will-respawn = We have gained enough energy! We will be reborn when we sacrafice ourself!
+rmc-xeno-sacrifice-heal-will-respawn = We have gained enough energy! We will be reborn when we sacrifice ourself!
 
-rmc-xeno-sacrafice-heal-target-not-xeno-failure = The target cannot be healed!
-rmc-xeno-sacrafice-heal-target-self-failure = We can't heal ourself!
-rmc-xeno-sacrafice-heal-target-hostile-failure = {$target_xeno} is hostile to our hive!
-rmc-xeno-sacrafice-heal-target-low-level-failure = It would be a waste...
-rmc-xeno-sacrafice-heal-target-too-far-away-failure = We need to be closer to {$target_xeno}.
-rmc-xeno-sacrafice-heal-target-dead-failure = {$target_xeno} is dead!
-rmc-xeno-sacrafice-heal-target-full-health-failure = {$target_xeno} is already at full health!
+rmc-xeno-sacrifice-heal-target-not-xeno-failure = The target cannot be healed!
+rmc-xeno-sacrifice-heal-target-self-failure = We can't heal ourself!
+rmc-xeno-sacrifice-heal-target-hostile-failure = {$target_xeno} is hostile to our hive!
+rmc-xeno-sacrifice-heal-target-low-level-failure = It would be a waste...
+rmc-xeno-sacrifice-heal-target-too-far-away-failure = We need to be closer to {$target_xeno}.
+rmc-xeno-sacrifice-heal-target-dead-failure = {$target_xeno} is dead!
+rmc-xeno-sacrifice-heal-target-full-health-failure = {$target_xeno} is already at full health!
 
-rmc-xeno-sacrafice-heal-target-announcement = {$healer_xeno} sacrifices itself to heal {$target_xeno}!
-rmc-xeno-sacrafice-heal-target-enviorment = {$healer_xeno} explodes in a deluge of regenerative resin salve, covering {$target_xeno} in it!
+rmc-xeno-sacrifice-heal-target-announcement = {$healer_xeno} sacrifices itself to heal {$target_xeno}!
+rmc-xeno-sacrifice-heal-target-enviorment = {$healer_xeno} explodes in a deluge of regenerative resin salve, covering {$target_xeno} in it!

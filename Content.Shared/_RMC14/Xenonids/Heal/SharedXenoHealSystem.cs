@@ -196,7 +196,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
             _xenoEnergy.AddEnergy((ent, xenoEnergyComp), (int)damageTaken, false);
             if (_xenoEnergy.HasEnergy((ent, xenoEnergyComp), xenoEnergyComp.Max))
             {
-                _popup.PopupClient(Loc.GetString("rmc-xeno-sacrafice-heal-will-respawn"), ent, PopupType.Large);
+                _popup.PopupClient(Loc.GetString("rmc-xeno-sacrifice-heal-will-respawn"), ent, PopupType.Large);
             }
         }
         Dirty(target, heal);
@@ -210,38 +210,38 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
         if (!HasComp<XenoComponent>(target))
         {
-            failureMessageId = "rmc-xeno-sacrafice-heal-target-not-xeno-failure";
+            failureMessageId = "rmc-xeno-sacrifice-heal-target-not-xeno-failure";
         }
 
         if (ent == target)
         {
-            failureMessageId = "rmc-xeno-sacrafice-heal-target-self-failure";
+            failureMessageId = "rmc-xeno-sacrifice-heal-target-self-failure";
         }
 
         if (HasComp<XenoParasiteComponent>(target) ||
             (TryComp(target, out RMCSizeComponent? rmcSizeComp) && rmcSizeComp.Size == RMCSizes.VerySmallXeno))
         {
-            failureMessageId = "rmc-xeno-sacrafice-heal-target-low-level-failure";
+            failureMessageId = "rmc-xeno-sacrifice-heal-target-low-level-failure";
         }
 
         if (!_hive.FromSameHive(ent, target))
         {
-            failureMessageId = "rmc-xeno-sacrafice-heal-target-hostile-failure";
+            failureMessageId = "rmc-xeno-sacrifice-heal-target-hostile-failure";
         }
 
         if (!_interact.InRangeUnobstructed(ent, target, args.Range))
         {
-            failureMessageId = "rmc-xeno-sacrafice-heal-target-too-far-away-failure";
+            failureMessageId = "rmc-xeno-sacrifice-heal-target-too-far-away-failure";
         }
 
         if (_mobState.IsDead(target))
         {
-            failureMessageId = "rmc-xeno-sacrafice-heal-target-dead-failure";
+            failureMessageId = "rmc-xeno-sacrifice-heal-target-dead-failure";
         }
 
         if (TryComp(target, out DamageableComponent? targetDamageComp) && targetDamageComp.TotalDamage == 0)
         {
-            failureMessageId = "rmc-xeno-sacrafice-heal-target-full-health-failure";
+            failureMessageId = "rmc-xeno-sacrifice-heal-target-full-health-failure";
         }
 
         if (failureMessageId is LocId)
@@ -283,8 +283,8 @@ public abstract class SharedXenoHealSystem : EntitySystem
         }
 
         SacraficialHealShout(ent);
-        _xenoAnnounce.AnnounceSameHive(ent, Loc.GetString("rmc-xeno-sacrafice-heal-target-announcement", ("healer_xeno", ent), ("target_xeno", target)), popup:PopupType.Large);
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-sacrafice-heal-target-enviorment", ("healer_xeno", ent), ("target_xeno", target)), ent, PopupType.Medium);
+        _xenoAnnounce.AnnounceSameHive(ent, Loc.GetString("rmc-xeno-sacrifice-heal-target-announcement", ("healer_xeno", ent), ("target_xeno", target)), popup:PopupType.Large);
+        _popup.PopupEntity(Loc.GetString("rmc-xeno-sacrifice-heal-target-enviorment", ("healer_xeno", ent), ("target_xeno", target)), ent, PopupType.Medium);
 
         // Heal from crit
         var targetTotalDamage = targetDamageComp.TotalDamage;
