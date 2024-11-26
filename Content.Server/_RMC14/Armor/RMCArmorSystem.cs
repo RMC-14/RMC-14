@@ -27,6 +27,7 @@ public sealed class RMCArmorSystem : EntitySystem
 {
     [Dependency] private readonly IServerPreferencesManager _prefs = default!;
     [Dependency] protected readonly InventorySystem InventorySystem = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private EntityQuery<RMCArmorVariantComponent> _armorVariantQuery;
 
@@ -65,7 +66,7 @@ public sealed class RMCArmorSystem : EntitySystem
             equipmentEntityID = randomType;
         }
 
-        var equipmentEntity = Spawn(equipmentEntityID, coordinates: args.Item.ToCoordinates());
+        var equipmentEntity = Spawn(equipmentEntityID, _transform.GetMapCoordinates(ent));
         InventorySystem.TryEquip(ent, equipmentEntity, "outerClothing", force: true, predicted: false);
 
         QueueDel(args.Item);
