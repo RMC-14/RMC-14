@@ -71,7 +71,7 @@ public sealed class MutinySystem : SharedMutinySystem
 
         if (TryComp<ActorComponent>(ent, out var actor))
         {
-            _chatManager.DispatchServerMessage(actor.PlayerSession, "You have been made a mutineer by a Game Admin. You may now participate in the ongoing mutiny.");
+            _chatManager.DispatchServerMessage(actor.PlayerSession, Loc.GetString("mutineer-status-added"));
             _chatManager.SendAdminAnnouncement($"Player {actor.PlayerSession.Name} was made a mutineer.");
         }
 
@@ -85,7 +85,7 @@ public sealed class MutinySystem : SharedMutinySystem
 
         if (TryComp<ActorComponent>(ent, out var actorComponent))
         {
-            _chatManager.DispatchServerMessage(actorComponent.PlayerSession, "The mutiny you were a part of has ended. You are no longer permitted to participate in mutiny activity.");
+            _chatManager.DispatchServerMessage(actorComponent.PlayerSession, Loc.GetString("mutineer-status-removed"));
             _chatManager.SendAdminAnnouncement($"Player {actorComponent.PlayerSession.Name} is no longer a mutineer.");
         }
 
