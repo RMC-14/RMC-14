@@ -106,7 +106,7 @@ namespace Content.Shared.Ghost
         public string CategoryName { get; }
 
         /// <summary>
-        /// The color of the category label, should match the color of the department.
+        /// The color of each button in the category, should match the color of the department or a squad.
         /// </summary>
         public string CategoryColor { get; }
     }
