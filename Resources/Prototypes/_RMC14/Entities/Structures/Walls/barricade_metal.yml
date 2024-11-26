@@ -160,9 +160,13 @@
     node: nodeMetal
   - type: RMCConstructionUpgradeTarget
     upgrades: ["RMCExplosiveUpgrade", "RMCBiohazardUpgrade", "RMCBruteUpgrade"]
+  - type: NailgunRepairable
+    repairMaterials: [CMSteel, CMPlasteel]
+    repairValues: [-45, -60]
   - type: Tag
     tags:
     - RMCMetalBarricade
+
 
 # Metal Barricade Upgrades
 - type: entity
