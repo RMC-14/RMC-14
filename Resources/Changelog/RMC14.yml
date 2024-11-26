@@ -1,19 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed nested marines not being able to see anything.
-    type: Fix
-  - message: Fixed xenonids being able to attack marines that are both nested and
-      infected.
-    type: Fix
-  - message: Fixed the client sometimes falsely showing the red color flash effect
-      when attacking something that they can't, like allied xenonids.
-    type: Fix
-  id: 516
-  time: '2024-08-05T03:08:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3540
-- author: DrSmugleaf
-  changes:
   - message: Fixed the M276 pattern combat toolbelt rig being able to hold more than
       one pistol. It is now limited to one gun max.
     type: Fix
@@ -4977,5 +4964,12 @@
   id: 1015
   time: '2024-11-22T22:50:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4911
+- author: Vermidia
+  changes:
+  - message: Fixed hypersleep pods stunning on exit
+    type: Fix
+  id: 1016
+  time: '2024-11-24T07:22:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4927
 Name: RMC14
 Order: -1
