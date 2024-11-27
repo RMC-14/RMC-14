@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added marine armor light visuals
-    type: Add
-  id: 526
-  time: '2024-08-07T23:44:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3455
 - author: FungiFellow
   changes:
   - message: Added Penlights into the Med Essential Bundle
@@ -4974,5 +4967,12 @@
   id: 1025
   time: '2024-11-27T01:27:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4932
+- author: CyberTropic
+  changes:
+  - message: Added fuel pump animation.
+    type: Add
+  id: 1026
+  time: '2024-11-27T01:30:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4905
 Name: RMC14
 Order: -1
