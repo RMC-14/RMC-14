@@ -820,3 +820,13 @@
   - type: PatronFigurine
     id: 916cba8a-e995-43a4-b1fd-8c9e512e8471
 
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMarrik
+  name: Marrik' figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: marrik
+  - type: PatronFigurine
+    id: b39ea987-0b8c-4f36-a6a8-06febbead49d
