@@ -549,7 +549,14 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 }
             }
 
-            // 20 seconds before burst, spawn the larva
+            // Stasis slows this, while nesting makes it happen sooner
+            if (infected.IncubationMultiplier != 1)
+                infected.BurstAt += TimeSpan.FromSeconds(1 - infected.IncubationMultiplier) * frameTime;
+
+            if (_net.IsClient)
+                continue;
+
+            // spawn the larva
             if (infected.BurstAt <= time && infected.SpawnedLarva == null)
             {
                 var larvaContainer = _container.EnsureContainer<ContainerSlot>(uid, infected.LarvaContainerId);
@@ -564,14 +571,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
                 EnsureComp<BursterComponent>(spawned, out var burster);
                 burster.BurstFrom = uid;
+                Dirty(spawned, burster);
             }
-
-            // Stasis slows this, while nesting makes it happen sooner
-            if (infected.IncubationMultiplier != 1)
-                infected.BurstAt += TimeSpan.FromSeconds(1 - infected.IncubationMultiplier) * frameTime;
-
-            if (_net.IsClient)
-                continue;
 
             // Stages
             // Percentage of how far along we out to burst time times the number of stages, truncated. You can't go back a stage once you've reached one
@@ -837,7 +838,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (TryComp(burst, out MobStateComponent? mobState))
             _mobState.UpdateMobState(burst, mobState);
     }
-    
+
     public void SetBurstSpawn(Entity<VictimInfectedComponent> burst, EntProtoId spawn)
     {
         burst.Comp.BurstSpawn = spawn;
