@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Xenonids are now able to see the hive core through walls.
-    type: Add
-  id: 520
-  time: '2024-08-06T03:06:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3555
-- author: Vermidia
-  changes:
-  - message: Opening backpacks in hand is now instant, and doesn't close as long as
-      you keep them inhand
-    type: Tweak
-  id: 521
-  time: '2024-08-06T03:11:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3544
 - author: Sigil
   changes:
   - message: Hopefully fixed guns shrinking when you put size-changing attachments
@@ -4969,5 +4954,20 @@
   id: 1019
   time: '2024-11-27T01:18:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4946
+- author: Vermidia
+  changes:
+  - message: Being unstunned while a parasite is still on your face keeps you muffled
+      and blind.
+    type: Fix
+  id: 1020
+  time: '2024-11-27T01:20:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4909
+- author: Whisper
+  changes:
+  - message: Updated Stella 'Lake' Poley, added Merlin Leander, Kazi Priestess figurine.
+    type: Add
+  id: 1021
+  time: '2024-11-27T01:20:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4914
 Name: RMC14
 Order: -1
