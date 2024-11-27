@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: You can now put lids on bottles.
-    type: Add
-  id: 523
-  time: '2024-08-07T00:29:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3546
-- author: Vermidia
-  changes:
-  - message: Vaulting is no longer cancelled by damage
-    type: Fix
-  id: 524
-  time: '2024-08-07T22:46:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3569
 - author: KalimbaMachine
   changes:
   - message: Allow Lighters to be stored in cigarette packs!
@@ -4974,5 +4960,19 @@
   id: 1022
   time: '2024-11-27T01:22:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4917
+- author: Rainbeon
+  changes:
+  - message: Fixed under-tile plating slowing pulls by ~10%.
+    type: Fix
+  id: 1023
+  time: '2024-11-27T01:26:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4934
+- author: Vermidia
+  changes:
+  - message: Fixed new stasis mechanics not working
+    type: Fix
+  id: 1024
+  time: '2024-11-27T01:25:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4919
 Name: RMC14
 Order: -1
