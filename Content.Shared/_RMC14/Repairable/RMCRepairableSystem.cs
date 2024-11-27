@@ -164,10 +164,10 @@ public sealed class RMCRepairableSystem : EntitySystem
 
         var user = args.User;
 
-        if (!TryComp(user, out HandsComponent? handsComp))
+        if (!TryComp(used, out NailgunComponent? nailgunComp))
             return;
 
-        if (!TryComp(used, out NailgunComponent? nailgunComponent))
+        if (!TryComp(user, out HandsComponent? handsComp))
             return;
 
         if (!TryComp(repairable, out DamageableComponent? damageable) ||
@@ -186,17 +186,15 @@ public sealed class RMCRepairableSystem : EntitySystem
             return;
         }
 
-        var repairValue = GetRepairValue(repairable, handsComp, nailgunComponent, out _);
+        var repairValue = GetRepairValue(repairable, handsComp, nailgunComp, out EntityUid? held);
 
-        if (repairValue >= FixedPoint2.Zero)
+        if (held == null || repairValue >= FixedPoint2.Zero)
         {
             _popup.PopupClient(Loc.GetString("rmc-nailgun-no-material-message",  ("target", repairable)), user, PopupType.SmallCaution);
             return;
         }
 
-        _popup.PopupClient($"{repairValue}", user, PopupType.Medium);
-
-        var delay = nailgunComponent.NailingSpeed;
+        var delay = nailgunComp.NailingSpeed;
 
         var ev = new RMCNailgunRepairableDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, repairable, used: args.Used)
@@ -212,6 +210,66 @@ public sealed class RMCRepairableSystem : EntitySystem
             var othersMsg = Loc.GetString("rmc-repairable-start-others", ("user", user), ("target", repairable));
             _popup.PopupPredicted(selfMsg, othersMsg, user, user);
         }
+    }
+
+    private void OnNailgunRepairableDoAfter(Entity<NailgunRepairableComponent> repairable,
+        ref RMCNailgunRepairableDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        args.Handled = true;
+
+        //Check conditions again
+        if (args.Used is not {} used)
+            return;
+
+        var user = args.User;
+
+        if (!TryComp(used, out NailgunComponent? nailgunComponent))
+            return;
+
+        var getAmmoCountEv = new GetAmmoCountEvent();
+        RaiseLocalEvent(used, ref getAmmoCountEv);
+
+        if (getAmmoCountEv.Count < 4)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-nailgun-no-nails-message"), user, PopupType.SmallCaution);
+            return;
+        }
+
+        if (!TryComp(user, out HandsComponent? handsComp))
+            return;
+
+        var repairValue = GetRepairValue(repairable, handsComp, nailgunComponent, out EntityUid? held);
+        if (held == null || repairValue >= FixedPoint2.Zero)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-nailgun-lost-stack"), user, PopupType.SmallCaution);
+            return;
+        }
+
+        //Checks passed, do repair actions
+        var heal = _rmcDamageable.DistributeTypes(repairable.Owner, repairValue);
+        _damageable.TryChangeDamage(repairable, heal);
+
+        if (TryComp(held, out StackComponent? stack))
+        {
+            _stack.SetCount((EntityUid)held, stack.Count - nailgunComponent.MaterialPerRepair);
+        }
+
+        var ammo = new List<(EntityUid? Entity, IShootable Shootable)>();
+        var ev = new TakeAmmoEvent(4, ammo, Transform(user).Coordinates, user);
+        RaiseLocalEvent(used, ev);
+
+        foreach (var (bullet, _) in ev.Ammo)
+        {
+            QueueDel(bullet);
+        }
+
+        var selfMsg = Loc.GetString("rmc-nailgun-finish-self", ("material", held), ("target", repairable));
+        var othersMsg = Loc.GetString("rmc-repairable-finish-others", ("user", user), ("material", held), ("target", repairable));
+        _popup.PopupPredicted(selfMsg, othersMsg, user, user);
+        _audio.PlayPredicted(nailgunComponent.RepairSound, repairable, user);
     }
 
     private float GetRepairValue(Entity<NailgunRepairableComponent> repairable,
@@ -242,65 +300,5 @@ public sealed class RMCRepairableSystem : EntitySystem
         }
 
         return repairValue;
-    }
-
-    private void OnNailgunRepairableDoAfter(Entity<NailgunRepairableComponent> repairable,
-        ref RMCNailgunRepairableDoAfterEvent args)
-    {
-        if (args.Cancelled || args.Handled)
-            return;
-
-        args.Handled = true;
-        if (args.Used is not {} used)
-            return;
-
-        var user = args.User;
-
-        if (!TryComp(used, out NailgunComponent? nailgunComponent))
-            return;
-
-        var getAmmoCountEv = new GetAmmoCountEvent();
-        RaiseLocalEvent(used, ref getAmmoCountEv);
-
-        if (getAmmoCountEv.Count < 4)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-nailgun-no-nails-message"), user, PopupType.SmallCaution);
-            return;
-        }
-
-        if (!TryComp(user, out HandsComponent? handsComp))
-            return;
-
-        var amount = GetRepairValue(repairable, handsComp, nailgunComponent, out EntityUid? held);
-        if (held == null)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-nailgun-lost-stack"), user, PopupType.SmallCaution);
-            return;
-        }
-
-        //Checks passed, do repair actions
-        var heal = _rmcDamageable.DistributeTypes(repairable.Owner, amount);
-        _damageable.TryChangeDamage(repairable, heal);
-
-        if (TryComp(held, out StackComponent? stack))
-        {
-            _stack.SetCount((EntityUid)held, stack.Count - nailgunComponent.MaterialPerRepair);
-        }
-
-        var ammo = new List<(EntityUid? Entity, IShootable Shootable)>();
-        var ev = new TakeAmmoEvent(4, ammo, Transform(user).Coordinates, user);
-        RaiseLocalEvent(used, ev);
-
-        foreach (var (bullet, _) in ev.Ammo)
-        {
-            QueueDel(bullet);
-        }
-
-        _popup.PopupClient($"{amount}", user, PopupType.Medium);
-
-        var selfMsg = Loc.GetString("rmc-nailgun-finish-self", ("material", held), ("target", repairable));
-        var othersMsg = Loc.GetString("rmc-repairable-finish-others", ("user", user), ("material", held), ("target", repairable));
-        _popup.PopupPredicted(selfMsg, othersMsg, user, user);
-        _audio.PlayPredicted(nailgunComponent.RepairSound, repairable, user);
     }
 }
