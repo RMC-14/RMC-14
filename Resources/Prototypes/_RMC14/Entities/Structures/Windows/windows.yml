@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: CMBaseStructureCorrodible
   id: CMBaseWindow # TODO RMC14 this needs to be 2 separate entities eventually
@@ -27,6 +27,14 @@
     price: 75
   - type: Physics
     bodyType: Static
+  - type: InteractionPopup
+    interactDelay: 10
+    interactSuccessString: comp-window-knock
+    messagePerceivedByOthers: comp-window-knock
+    interactSuccessSound:
+      path: /Audio/Effects/glass_knock.ogg
+      params:
+        variation: 0.125
   - type: Fixtures
     fixtures:
       fix1:
