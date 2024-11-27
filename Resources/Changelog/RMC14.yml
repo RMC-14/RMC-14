@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Sigil
-  changes:
-  - message: Hopefully fixed guns shrinking when you put size-changing attachments
-      on them. If you encounter this bug after this is merged, report it.
-    type: Fix
-  id: 522
-  time: '2024-08-06T03:10:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3551
 - author: Vermidia
   changes:
   - message: You can now put lids on bottles.
@@ -4969,5 +4961,18 @@
   id: 1021
   time: '2024-11-27T01:20:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4914
+- author: Rainbeon
+  changes:
+  - message: Re-enabled tackle cooldown reduction on a miss. Missing a tackle will
+      now put it on a 0.6 second cooldown, instead of a full-length cooldown.
+    type: Fix
+  - message: Fixed no visual effect occuring on a tackle miss.
+    type: Fix
+  - message: Fixed being able to try to tackle a very far away object that you would
+      otherwise always fail to tackle.
+    type: Fix
+  id: 1022
+  time: '2024-11-27T01:22:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4917
 Name: RMC14
 Order: -1
