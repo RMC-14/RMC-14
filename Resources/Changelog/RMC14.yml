@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: FungiFellow
-  changes:
-  - message: Added Penlights into the Med Essential Bundle
-    type: Add
-  id: 527
-  time: '2024-08-07T23:49:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3538
 - author: DrSmugleaf
   changes:
   - message: Added CMO Pandi Fackler and Jermaine 'Bait' McClune figurines.
@@ -4974,5 +4967,13 @@
   id: 1026
   time: '2024-11-27T01:30:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4905
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added an option to automatically punctuate character messages in the
+      settings
+    type: Add
+  id: 1027
+  time: '2024-11-27T01:36:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4924
 Name: RMC14
 Order: -1
