@@ -74,10 +74,10 @@
       scatterFlat: -6
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -0.75
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
+
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -116,7 +116,6 @@
       scatterFlat: -2
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: -0.1
       recoilFlat: 2
       scatterFlat: 2
@@ -158,7 +157,6 @@
       scatterFlat: -6
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -2
       accuracyAddMult: -0.25
       recoilFlat: 1
       scatterFlat: 10
@@ -179,6 +177,44 @@
     - RMCAttachmentDoubleBarrelShotgunStock
   - type: AttachableWieldDelayMods
     modifiers: []
+
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentM890Stock
+  name: M890 Tactical Stock
+  description: Standard Stock for the M890 tactical shotgun.
+  components:
+  - type: Sprite
+    state: tactical_stock_221
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM890Stock
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      walk: -0.059
+      sprint: -0.101
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.4
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.5
+      recoilFlat: -1
+      scatterFlat: -1
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: -0.15
+      recoilFlat: 2
+      scatterFlat: 6
+
+
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -204,7 +240,6 @@
       accuracyAddMult: 0.05
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: -0.05
 
 - type: entity
@@ -244,7 +279,6 @@
       scatterFlat: -8
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -2
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
@@ -313,7 +347,6 @@
     - conditions:
         unwieldedOnly: true
         activeOnly: true
-      accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
@@ -434,9 +467,6 @@
       accuracyAddMult: 0.35
       recoilFlat: -3
       scatterFlat: -10
-    - conditions:
-        unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
 
 - type: entity
   parent: RMCStockAttachmentCollapsibleBase
@@ -486,7 +516,6 @@
     - conditions:
         unwieldedOnly: true
         activeOnly: true
-      accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 2
@@ -535,7 +564,6 @@
     - conditions:
         unwieldedOnly: true
         activeOnly: true
-      accuracyMovementPenaltyAddMult: -2
       accuracyAddMult: 0.2
       recoilFlat: -2
 
@@ -631,13 +659,15 @@
       scatterFlat: -6
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: -0.1
       recoilFlat: 1
       scatterFlat: 14
 
 - type: Tag
   id: RMCAttachmentStock
+
+- type: Tag
+  id: RMCAttachmentM890Stock
 
 - type: Tag
   id: RMCAttachmentM42A2WoodenStock

@@ -21,13 +21,6 @@
     - !type:HTNCompoundTask
       task: MeleeAttackTargetCompound
 
-- type: nameIdentifierGroup
-  id: CMXeno
-  fullName: false
-  prefix: XX
-  minValue: 1
-  maxValue: 999
-
 - type: emote
   id: CMXenoDeathGasp
   name: chat-emote-name-deathgasp
@@ -86,8 +79,6 @@
     baseWalkSpeed: 2.2
     baseSprintSpeed: 4
   - type: Climbing
-  - type: NameIdentifier
-    group: CMXeno
   - type: Insulated
   - type: Input
     context: "human"
@@ -263,6 +254,7 @@
     keys:
     - enum.VendingMachineUiKey.Key
     - enum.PaperUiKey.Key
+    - enum.RMCCameraUiKey.Key
   - type: ActiveInputMover
   - type: HiveTracker
   - type: RequireProjectileTarget
@@ -283,6 +275,12 @@
       sprite: _RMC14/Interface/map_blips.rsi
       state: background_xeno
   - type: XenoMapTracked
+  - type: Evasion
+  - type: RMCWeaponAccuracy # This is so projectiles fired by xenos get a correctly-generated seed for RNG.
+  - type: StunOnExplosionReceived
+    weak: true
+  - type: AssignXenoName
+  - type: MobGibbedByExplosionType
 
 - type: entity
   abstract: true
@@ -321,7 +319,6 @@
       groups:
         Brute: 12
   - type: Tackle
-    chance: 0.35
   - type: XenoClaws
 
 - type: entity

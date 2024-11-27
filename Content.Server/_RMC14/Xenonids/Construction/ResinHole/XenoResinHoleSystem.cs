@@ -360,8 +360,9 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 return;
             }
 
-            args.Continue = HasComp<InfectableComponent>(args.Tripper) &&
-                !HasComp<VictimInfectedComponent>(args.Tripper);
+            args.Continue = TryComp<InfectableComponent>(args.Tripper, out var infected)
+                && !infected.BeingInfected
+                && !HasComp<VictimInfectedComponent>(args.Tripper);
             return;
         }
         else if (_mobState.IsDead(args.Tripper) || _standing.IsDown(args.Tripper))

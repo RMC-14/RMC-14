@@ -23,6 +23,7 @@
     slots:
     - Ears
     - Suitstorage
+    - Mask
 
 - type: entity
   parent: Wirecutter

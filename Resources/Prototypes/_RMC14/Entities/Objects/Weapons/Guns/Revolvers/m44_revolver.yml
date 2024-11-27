@@ -9,6 +9,10 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m44.rsi
   - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+      - RMCSpeedLoaderM44
+      - RMCCartridgeRevolver44
     proto: RMCCartridgeRevolver44
     capacity: 7
     chambers: [ True, True, True, True, True, True, True ]
@@ -149,6 +153,8 @@
         Piercing: 72
   - type: CMArmorPiercing
     amount: 5
+  - type: RMCProjectileAccuracy
+    accuracy: 90
 
 - type: entity
   parent: CMBulletBase
@@ -166,6 +172,11 @@
       ignoreModifiers: true
   - type: CMArmorPiercing
     amount: 35
+  - type: RMCProjectileAccuracy
+    accuracy: 90
+    thresholds:
+    - range: 12
+      falloff: 10
 
 - type: Tag
   id: RMCSpeedLoaderM44

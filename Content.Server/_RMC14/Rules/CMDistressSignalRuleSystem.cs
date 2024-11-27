@@ -8,6 +8,7 @@ using Content.Server.Chat.Managers;
 using Content.Server.Fax;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
+using Content.Server.Ghost.Roles.Components;
 using Content.Server.Mind;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Preferences.Managers;
@@ -639,7 +640,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private void OnMobStateChanged<T>(Entity<T> ent, ref MobStateChangedEvent args) where T : IComponent?
     {
         if (args.NewMobState == MobState.Dead)
+        {
+            RemCompDeferred<GhostRoleComponent>(ent);
             CheckRoundShouldEnd();
+        }
     }
 
     private void OnCompRemove<T>(Entity<T> ent, ref ComponentRemove args) where T : IComponent?
@@ -732,7 +736,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             {
                 distress.Hijack = true;
                 distress.AbandonedAt ??= time + distress.AbandonedDelay;
-                _hive.SetSeeThroughContainers(distress.Hive, true);
             }
 
             _almayerMaps.Clear();
@@ -772,6 +775,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 {
                     continue;
                 }
+
+                if (_containers.IsEntityInContainer(marineId))
+                    continue;
 
                 if (_mobState.IsAlive(marineId, mobState) &&
                     (distress.AbandonedAt == null ||

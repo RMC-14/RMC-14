@@ -15,4 +15,7 @@ public sealed partial class WieldDelayComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan ModifiedDelay = TimeSpan.FromSeconds(0.4);
+
+    [DataField, AutoNetworkedField]
+    public bool PreventFiring; // TODO RMC14 this should support increased spread, decreased accuracy, and be applied to sniper/amr
 }

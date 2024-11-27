@@ -160,12 +160,30 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (!_xenoWeeds.CanPlaceWeedsPopup((gridUid, grid), tile, xeno, args.UseOnSemiWeedable, true))
             return;
 
+        if (_rmcMap.HasAnchoredEntityEnumerator<XenoWeedsComponent>(coordinates, out var oldWeeds))
+        {
+            if (oldWeeds.Comp.IsSource)
+            {
+                _popup.PopupClient("There's a pod here already!", oldWeeds, xeno, PopupType.SmallCaution);
+                return;
+            }
+
+            if (oldWeeds.Comp.BlockOtherWeeds)
+            {
+                _popup.PopupClient("These weeds are too strong to plant a node on!", oldWeeds, xeno, PopupType.SmallCaution);
+                return;
+            }
+        }
+
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
             return;
 
         args.Handled = true;
         if (_net.IsServer)
         {
+            if (oldWeeds != default)
+                QueueDel(oldWeeds);
+
             var weeds = Spawn(args.Prototype, coordinates);
             _adminLogs.Add(LogType.RMCXenoPlantWeeds, $"Xeno {ToPrettyString(xeno):xeno} planted weeds {ToPrettyString(weeds):weeds} at {coordinates}");
             _hive.SetSameHive(xeno.Owner, weeds);
@@ -203,6 +221,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             upgradeable.Comp.To is { } to &&
             _prototype.HasIndex(to))
         {
+            if (!_interaction.InRangeUnobstructed(xeno.Owner, upgradeable.Owner, popup: true))
+                return;
+
             var cost = upgradeable.Comp.Cost;
             if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
                 return;

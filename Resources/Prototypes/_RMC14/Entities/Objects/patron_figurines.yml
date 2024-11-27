@@ -742,3 +742,81 @@
     state: nova_quinn
   - type: PatronFigurine
     id: e017c450-686b-480b-bdc7-2fdbe1016f52
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronStellaLakePoley
+  name: Stella 'Lake' Poley figurine
+  description: "You're pretty sure this is a Diona. You're also pretty sure she's giving you the stink-eye."
+  components:
+  - type: Sprite
+    state: stella_lake_poley
+  - type: PatronFigurine
+    id: 53ad65dd-3846-41cc-b160-5357c9bfbb01
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDarfmanForgemog
+  name: Darfman Forgemog figurine
+  description: "With this little Darfman ye always be in safe hands."
+  components:
+  - type: Sprite
+    state: darfman_forgemog
+  - type: PatronFigurine
+    id: 1dcc1fcc-8332-4573-8784-62dc491fb41e
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRonanRickOShea
+  name: Ronan 'Rick' O'Shea figurine
+  description: "This commemorative figurine is a part of the 'Valiant Fall Memorial' collection- \"Sometimes the best marines are just the ones who show up.\""
+  components:
+  - type: Sprite
+    state: ronan_rick_oshea
+  - type: PatronFigurine
+    id: 2bd916e4-0245-4126-a6c7-31ddbd5ad55f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJamesRockler
+  name: James Rockler figurine
+  description: "Just a lizard with heterochromia."
+  components:
+  - type: Sprite
+    state: james_rockler
+  - type: PatronFigurine
+    id: 61b5d28b-7664-4b12-9018-d848ca3945cc
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMizunoKittyDrakonovisch
+  name: Mizuno 'Kitty' Drakonovisch figurine
+  description: "The best kitty cat in the marine corps. Delta cat marine, loves headpats. Chases mice and lasers."
+  components:
+  - type: Sprite
+    state: mizuno_kitty_drakonovisch
+  - type: PatronFigurine
+    id: d6a58381-b2a8-4caf-a22a-fd76ca53b1ae
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMerlinLeander
+  name: Merlin Leander figurine
+  description: "Limited edition wizard figurine. This one seems blissful."
+  components:
+  - type: Sprite
+    state: merlin_leander
+  - type: PatronFigurine
+    id: efe40ec4-b685-4025-8239-fdea3da1e019
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKaziPriestess
+  name: Kazi Priestess figurine
+  description: "\"Wait, you wanted a supply drop sent to those cords? Shit..\""
+  components:
+  - type: Sprite
+    state: kazi_priestess
+  - type: PatronFigurine
+    id: 916cba8a-e995-43a4-b1fd-8c9e512e8471
+

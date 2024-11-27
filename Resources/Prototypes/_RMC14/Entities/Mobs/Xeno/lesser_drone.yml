@@ -59,9 +59,13 @@
     damage:
       groups:
         Brute: 20
-  - type: Tackle  # min: 4, max: 5
-    threshold: 5
-    stun: 5
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 24
+  - type: Tackle
+    min: 4
+    max: 5
   - type: WhitelistPickup
     whitelist:
       components:
@@ -91,3 +95,5 @@
     trapLevel: 1
     cost: 70
     spray: XenoAcidSprayTrapWeak
+  - type: Evasion
+    evasion: 10

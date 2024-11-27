@@ -61,7 +61,10 @@
         Heat: 5
   - type: XenoTailStab
     inject:
-      RMCMolecularAcid: 1 # TODO RMC14 2
+      RMCMolecularAcid: 2
+    tailDamage:
+      groups:
+        Brute: 36
   - type: CMArmor
     armor: 15
     explosionArmor: 20
@@ -69,10 +72,12 @@
     damage:
       groups:
         Brute: 25
-  - type: Tackle # min: 2, max: 6
-    threshold: 5
-    stun: 9
+  - type: Tackle
+    min: 2
+    max: 6
     chance: 0.45
+    stunMin: 4
+    stunMax: 5
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5

@@ -35,6 +35,9 @@
     scatterUnwielded: 20
     baseFireRate: 4
     burstScatterMult: 1
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.3
+    accuracyMultiplierUnwielded: 0.65
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -215,6 +218,11 @@
       falloff: 4
   - type: CMArmorPiercing
     amount: 5
+  - type: RMCProjectileAccuracy
+    accuracy: 105
+    thresholds:
+    - range: 16
+      falloff: 10
 
 - type: entity
   parent: BulletRifle10x24mm

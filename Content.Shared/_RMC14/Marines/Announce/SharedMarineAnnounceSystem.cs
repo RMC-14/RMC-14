@@ -34,7 +34,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     {
         if (!_skills.HasSkill(args.Actor, ent.Comp.OverwatchSkill, ent.Comp.OverwatchSkillLevel))
         {
-            _popup.PopupCursor("You are not trained in overwatch!", args.Actor, PopupType.LargeCaution);
+            _popup.PopupClient("You are not trained in overwatch!", args.Actor, PopupType.LargeCaution);
             return;
         }
 
@@ -61,6 +61,20 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     public virtual void AnnounceSquad(
         string message,
         EntProtoId<SquadTeamComponent> squad,
+        SoundSpecifier? sound = null)
+    {
+    }
+
+    public virtual void AnnounceSquad(
+        string message,
+        EntityUid squad,
+        SoundSpecifier? sound = null)
+    {
+    }
+
+    public virtual void AnnounceSingle(
+        string message,
+        EntityUid receiver,
         SoundSpecifier? sound = null)
     {
     }

@@ -189,7 +189,6 @@
       burstScatterAddMult: -2
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -3
       scatterFlat: -10
     - conditions:
         unwieldedOnly: true
@@ -225,7 +224,6 @@
       scatterFlat: -2
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: 0.05
       scatterFlat: -4
 
@@ -282,16 +280,15 @@
       tags:
       - RMCShellShotgunBuckshot
     capacity: 5
-    proto: null
+    proto: CMShellShotgunBuckshot
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
   - type: GunDamageMultipliers
     multipliers:
       Turf: 5
       Breaching: 10.8
-  - type: UniqueAction
-  - type: PumpAction
   - type: UseDelay
+  - type: RMCWeaponAccuracy
   - type: AttachableToggleable
     userOnly: true
     attachedOnly: true
@@ -463,7 +460,6 @@
       burstScatterAddMult: -2
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: 1
       accuracyAddMult: -0.15
       scatterFlat: 2
 
@@ -585,7 +581,6 @@
       scatterFlat: -2
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
       scatterFlat: -4
 
 - type: Tag

@@ -1,8 +1,19 @@
 - type: entity
   abstract: true
+  categories: [ HideSpawnMenu ]
+  id: RMCBarricadeUpgradeBase
+  components:
+  - type: RMCConstructionUpgrade
+  - type: Sprite
+    sprite: _RMC14/Interface/barricade_upgrades.rsi
+
+- type: entity
+  abstract: true
   parent: CMBaseStructureCorrodible
   id: CMBarricadeBase
   components:
+  - type: Corrodible
+    structure: false
   - type: Rotatable
   - type: Appearance
   - type: Fixtures
@@ -47,13 +58,53 @@
       components:
       - Xeno
     hitsToInvulnerability: 3
+  - type: UserInterface
+    interfaces:
+      enum.RMCConstructionUpgradeUiKey.Key:
+        type: RMCConstructionUpgradeBui
+
+- type: entity
+  parent: RMCBarricadeUpgradeBase
+  id: RMCExplosiveUpgrade
+  name: composite upgrade (++Explosive, ++Projectile, ++Fire)
+  components:
+  - type: RMCConstructionUpgrade
+    upgradedPopup: rmc-construction-upgrade-explosive
+    upgradedEntity: CMBarricadeExplosive
+  - type: Sprite
+    state: explosive
+
+- type: entity
+  parent: RMCBarricadeUpgradeBase
+  id: RMCBiohazardUpgrade
+  name: biohazard upgrade (+Burn)
+  components:
+  - type: RMCConstructionUpgrade
+    upgradedPopup: rmc-construction-upgrade-burn
+    upgradedEntity: CMBarricadeBurn
+  - type: Sprite
+    state: burn
+
+- type: entity
+  parent: RMCBarricadeUpgradeBase
+  id: RMCBruteUpgrade
+  name: reinforced upgrade (+Brute)
+  components:
+  - type: RMCConstructionUpgrade
+    upgradedPopup: rmc-construction-upgrade-brute
+    upgradedEntity: CMBarricadeBrute
+  - type: Sprite
+    state: brute
+
+- type: Tag
+  id: RMCMetalBarricade
 
 # Metal Barricade Tree
 - type: entity
   parent: CMBarricadeBase
   id: CMBarricadeMetal
   name: metal barricade
-  description: A metal barricade that keeps the unwanted out. Upgradable with metal, plasteel, or metal rods for different attributes. Repair with a welder.
+  description: A sturdy and easily assembled barricade made of metal plates, often used for quick fortifications. Use a blowtorch to repair.
   components:
   - type: Climbable
   - type: Anchorable
@@ -107,13 +158,17 @@
   - type: Construction
     graph: BarricadeMetalGraph
     node: nodeMetal
+  - type: RMCConstructionUpgradeTarget
+    upgrades: ["RMCExplosiveUpgrade", "RMCBiohazardUpgrade", "RMCBruteUpgrade"]
+  - type: Tag
+    tags:
+    - RMCMetalBarricade
 
 # Metal Barricade Upgrades
 - type: entity
   parent: CMBarricadeMetal
   id: CMBarricadeBurn
-  name: anti-biohazard barricade
-  description: A barricade incredibly resistant to corrosive and fire damage. Repair with a welder.
+  suffix: Biohazard
   components:
     - type: Sprite
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
@@ -130,15 +185,13 @@
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/burn_barricade_cracks.rsi
-    - type: Construction
-      graph: BarricadeMetalGraph
-      node: nodeBurnUpgrade
+    - type: RMCConstructionUpgradeTarget
+      upgrades: null
 
 - type: entity
   parent: CMBarricadeMetal
   id: CMBarricadeBrute
-  name: reinforced barricade
-  description: A heavy-duty barricade reinforced with metal and resistant against thrashing. Repair with a welder.
+  suffix: Reinforced
   components:
     - type: Sprite
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
@@ -155,15 +208,13 @@
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/brute_barricade_cracks.rsi
-    - type: Construction
-      graph: BarricadeMetalGraph
-      node: nodeBruteUpgrade
+    - type: RMCConstructionUpgradeTarget
+      upgrades: null
 
 - type: entity
   parent: CMBarricadeMetal
   id: CMBarricadeExplosive
-  name: blast-resistant barricade
-  description: An blast-resistant barricade made out of the same stuff in EODs. Repair with a welder.
+  suffix: Composite
   components:
     - type: Sprite
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
@@ -179,9 +230,8 @@
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/explosive_barricade_cracks.rsi
-    - type: Construction
-      graph: BarricadeMetalGraph
-      node: nodeExplosiveUpgrade
+    - type: RMCConstructionUpgradeTarget
+      upgrades: null
 
 # Turnstile (not sure how to make a one-way door so for now it is a glorified fence)
 - type: entity

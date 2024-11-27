@@ -87,11 +87,15 @@
     damage:
       groups:
         Brute: 40
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 54
   - type: XenoOvipositorCapable
-  - type: Tackle # min: 2, max: 6
-    threshold: 4
-    stun: 11
+  - type: Tackle
     chance: 0.55
+    stunMin: 5
+    stunMax: 6
   - type: Fixtures
     fixtures:
       fix1:
@@ -201,6 +205,8 @@
   - type: ManageHive
   - type: HiveLeaderGranter
   - type: XenoHeal
+  - type: StunOnExplosionReceived
+    weak: false
 
 - type: entity
   id: XenoLeaderPheromoneRelay

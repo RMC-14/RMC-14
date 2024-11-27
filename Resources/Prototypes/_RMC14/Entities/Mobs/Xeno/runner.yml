@@ -1,10 +1,11 @@
 ﻿- type: entity
+  abstract: true
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
-  id: CMXenoRunner
+  id: CMXenoRunnerBase
   name: Runner
   description: A small red alien that looks like it could run fairly quickly...
   components:
@@ -17,11 +18,11 @@
     - Alive
     - Critical
     - Dead
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      230: Critical
-      330: Dead
+  - type: Xeno
+    role: CMXenoRunner
+    tier: 1
+    hudOffset: 0,0.63
+    unlockAt: 300 # 5 minutes
   - type: Fixtures
     fixtures:
       fix1:
@@ -43,33 +44,13 @@
         density: 185
         layer:
         - BulletImpassable
-  - type: Xeno
-    role: CMXenoRunner
-    actionIds:
-    - ActionXenoRest
-    - ActionXenoRegurgitate
-    - ActionXenoWatch
-    - ActionXenoTailStab
-    - ActionXenoHide
-    - ActionXenoLeap
-    - ActionXenoBoneChips
-    - ActionXenoZoom
-    - ActionXenoDevolve
-    tier: 1
-    hudOffset: 0,0.63
-    unlockAt: 300 # 5 minutes
   - type: XenoLight
   - type: XenoDevolve
     devolvesTo:
     - CMXenoLarva
     canBeDevolvedByOther: false
-  - type: XenoBoneChips
   - type: XenoDevour
   - type: XenoHide
-  - type: XenoLeap
-    delay: 0
-    knockdownTime: 2
-    leapSound: /Audio/_RMC14/Xeno/alien_pounce.ogg
   - type: XenoPlasma
     plasma: 0
     maxPlasma: 0
@@ -86,13 +67,16 @@
     damage:
       groups:
         Brute: 22.5
-  - type: Tackle # min: 4, max: 5
-    threshold: 5
-    stun: 8
-    chance: 0.40
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 5.55
-    baseSprintSpeed: 10
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 30
+  - type: Tackle
+    min: 4
+    max: 5
+    chance: 0.4
+    stunMin: 4
+    stunMax: 4
   - type: SlowOnPull
     slowdowns:
     - multiplier: 0.3825
@@ -103,7 +87,7 @@
       whitelist:
         components:
         - XenoLight
-    - multiplier: 0.24
+    - multiplier: 0.2475
       whitelist:
         components:
         - XenoHeavy
@@ -115,3 +99,130 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: runner
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 5.55
+    baseSprintSpeed: 10
+
+- type: entity
+  parent: CMXenoRunnerBase
+  id: CMXenoRunner
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      230: Critical
+      330: Dead
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoHide
+    - ActionXenoLeap
+    - ActionXenoBoneChips
+    - ActionXenoZoom
+    - ActionXenoDevolve
+  - type: XenoBoneChips
+  - type: XenoLeap
+    delay: 0
+    knockdownTime: 2
+    leapSound: /Audio/_RMC14/Xeno/alien_pounce.ogg
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 5.55
+    baseSprintSpeed: 10
+  - type: XenoEvolution
+    strains:
+    - RMCXenoRunnerAcider
+
+- type: entity
+  parent: CMXenoRunnerBase
+  id: RMCXenoRunnerAcider
+  suffix: Acider
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Runner/acider_runner.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base", "enum.ForTheHiveVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      345: Critical
+      445: Dead
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoHide
+    - ActionXenoAcidAcider
+    - ActionXenoForTheHive
+    - ActionXenoDevolve
+    hudOffset: -0.1,0.63
+    hidden: true
+  - type: XenoStrain
+    name: rmc-xeno-acider-name
+    description: rmc-xeno-acider-description
+    popup: rmc-xeno-acider-popup
+  - type: CMArmor
+    armor: 15
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 6.5
+  - type: XenoAcid
+    canMeltStructures: false
+  - type: XenoEnergy
+    max: 1000
+    gain: 1
+    gainAttack: 14
+    gainAttackDowned: 8
+    ignoreLateInfected: true
+    popupGain: rmc-xeno-acid-increase-user
+    popupNotEnough: rmc-xeno-not-enough-acid
+  - type: PointLight
+    enabled: false
+    radius: 3
+    softness: 1
+    autoRot: true
+    color: "#22FF22"
+  - type: XenoAcidSlash
+    acid:
+    - type: UserAcided
+      armorPiercing: 40
+      damage:
+        types:
+          Heat: 1
+      duration: 20
+  - type: ForTheHive
+    baseSprite: _RMC14/Mobs/Xenonids/Runner/acider_runner.rsi
+    activeSprite: _RMC14/Mobs/Xenonids/Runner/acider_runner_primed.rsi
+    baseDamage:
+      types:
+        Heat: 1
+    acid:
+    - type: UserAcided
+      armorPiercing: 40
+      damage:
+        types:
+          Heat: 1
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.59
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.655
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.3825
+      whitelist:
+        components:
+        - XenoHeavy
+
+
+

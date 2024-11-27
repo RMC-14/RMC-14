@@ -35,13 +35,13 @@
         amount: 50
       #- id: CMWeaponFlareM82F
       #  amount: 20
-    - name: Restricted Sidearms
+    - name: Restricted Firearms
       entries:
       - id: RMCMK80Case
         amount: 4
       - id: RMCSmartPistolCase
         amount: 3
-      - id: WeaponShotgunMOU53
+      - id: RMCMOU53Case
         amount: 2
       - id: RMCCaseXM88
         amount: 3
@@ -385,8 +385,8 @@
         amount: 11
       - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 5
-      #- id: RMCAttachmentS5RedDotSight # UNCOMMENT WHEN ACCURACY IS IMPLEMENTED
-      #  amount: 10
+      - id: RMCAttachmentS5RedDotSight
+        amount: 10
       - id: RMCAttachmentS6ReflexSight
         amount: 10
       - id: RMCAttachmentS84xTelescopicScope

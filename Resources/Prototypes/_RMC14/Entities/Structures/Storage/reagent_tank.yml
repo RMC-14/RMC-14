@@ -45,6 +45,6 @@
     solutions:
       tank:
         maxVol: 1000
-  - type: Anchorable
-    flags:
-    - None
+  - type: Corrodible
+    timeToApply: 4
+    structure: true

@@ -60,6 +60,13 @@
   - type: Sprite
     state: prison_catwalk
 
+- type: entity
+  parent: CMCatwalk
+  id: RMCCatwalkKutjevo
+  components:
+  - type: Sprite
+    state: kutjevo_catwalk
+
 # Monorail
 
 - type: entity

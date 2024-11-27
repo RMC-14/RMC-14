@@ -54,6 +54,7 @@
     baseSprint: 0.559
   - type: WieldDelay
     baseDelay: 1.2
+    preventFiring: true
   - type: AttachableHolder
     slots:
       rmc-aslot-rail:
@@ -65,6 +66,7 @@
       rmc-aslot-rail: -0.057, 0.162
   - type: IgnorePredictionHide
   - type: GunIgnorePrediction
+  - type: AssistedReloadWeapon
 
 # 84mm HE
 - type: entity
@@ -91,6 +93,7 @@
     state: m5_84mm_he
     suffix: false
   - type: IgnorePredictionHide
+  - type: AssistedReloadAmmo
 
 - type: entity
   id: RMCProjectileRocket84mm
@@ -141,6 +144,11 @@
     color: orange
     energy: 0.5
   - type: IgnorePredictionHide
+  - type: RMCProjectileAccuracy
+    accuracy: 95
+    thresholds:
+    - range: 7
+      falloff: 10
 
 # 84mm AP
 
@@ -197,5 +205,10 @@
     stunAmount: 6
     knockdownAmount: 6
   - type: IgnorePredictionHide
+  - type: RMCProjectileAccuracy
+    accuracy: 125
+    thresholds:
+    - range: 6
+      falloff: 10
 
 # TODO RMC14 84mm WP

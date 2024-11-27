@@ -26,6 +26,9 @@
       visible: false
   - type: Corrodible
     timeToApply: 4
+    structure: true
+  - type: Damageable
+    damageModifierSet: null
   - type: Construction
     graph: CMWindoor
     node: windoor

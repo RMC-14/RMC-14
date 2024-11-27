@@ -1,9 +1,33 @@
+- type: entity
+  parent: RMCExplosiveUpgrade
+  id: RMCExplosiveUpgradePlasteel
+  components:
+  - type: RMCConstructionUpgrade
+    upgradedEntity: RMCBarricadeExplosivePlasteel
+
+- type: entity
+  parent: RMCBiohazardUpgrade
+  id: RMCBiohazardUpgradePlasteel
+  components:
+  - type: RMCConstructionUpgrade
+    upgradedEntity: RMCBarricadeBurnPlasteel
+
+- type: entity
+  parent: RMCBruteUpgrade
+  id: RMCBruteUpgradePlasteel
+  components:
+  - type: RMCConstructionUpgrade
+    upgradedEntity: RMCBarricadeBrutePlasteel
+
+- type: Tag
+  id: RMCPlasteelBarricade
+
 # Plasteel Barricade Tree
 - type: entity
   parent: CMBarricadeBase
   id: RMCBarricadePlasteel
   name: plasteel barricade
-  description: A sturdy and easily assembled barricade made of reinforced plasteel plates, the pinnacle of strongpoints. Upgradable with metal, plasteel, or metal rods for different attributes. Repair with a welder.
+  description: A sturdy and easily assembled barricade made of reinforced plasteel plates, the pinnacle of strongpoints. Use a blowtorch to repair.
   components:
   - type: Climbable
   - type: Anchorable
@@ -71,13 +95,17 @@
   - type: Construction
     graph: BarricadePlasteelGraph
     node: nodePlasteel
+  - type: RMCConstructionUpgradeTarget
+    upgrades: ["RMCExplosiveUpgradePlasteel", "RMCBiohazardUpgradePlasteel", "RMCBruteUpgradePlasteel"]
+  - type: Tag
+    tags:
+    - RMCPlasteelBarricade
 
 # Metal Barricade Upgrades
 - type: entity
   parent: RMCBarricadePlasteel
   id: RMCBarricadeBurnPlasteel
-  name: plasteel anti-biohazard barricade
-  description: A sturdy barricade incredibly resistant to corrosive and fire damage but breaks easier. Repair with a welder.
+  suffix: Biohazard
   components:
     - type: Sprite
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
@@ -94,15 +122,13 @@
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/burn_barricade_cracks.rsi
-    - type: Construction
-      graph: BarricadePlasteelGraph
-      node: nodeBurnUpgrade
+    - type: RMCConstructionUpgradeTarget
+      upgrades: null
 
 - type: entity
   parent: RMCBarricadePlasteel
   id: RMCBarricadeBrutePlasteel
-  name: plasteel reinforced barricade
-  description: A heavy-duty plasteel barricade reinforced with metal and resistant against thrashing. Repair with a welder.
+  suffix: Reinforced
   components:
     - type: Sprite
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
@@ -119,15 +145,13 @@
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/brute_barricade_cracks.rsi
-    - type: Construction
-      graph: BarricadePlasteelGraph
-      node: nodeBruteUpgrade
+    - type: RMCConstructionUpgradeTarget
+      upgrades: null
 
 - type: entity
   parent: RMCBarricadePlasteel
   id: RMCBarricadeExplosivePlasteel
-  name: plasteel blast-resistant barricade
-  description: An sturdy blast-resistant barricade made out of the same stuff in EODs. Repair with a welder.
+  suffix: Composite
   components:
     - type: Sprite
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
@@ -143,9 +167,8 @@
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/explosive_barricade_cracks.rsi
-    - type: Construction
-      graph: BarricadePlasteelGraph
-      node: nodeExplosiveUpgrade
+    - type: RMCConstructionUpgradeTarget
+      upgrades: null
 
 - type: entity
   parent: CMBarricadeMetalDoor

@@ -1,6 +1,6 @@
 - type: entity
   id: CMDisposalUnit
-  parent: DisposalUnit
+  parent: DisposalUnitBase
   name: disposal unit
   description: A pneumatic waste disposal unit.
   components:
@@ -21,11 +21,34 @@
       map: [ "enum.DisposalUnitVisualLayers.OverlayFull" ]
     - state: dispover-handle
       map: [ "enum.DisposalUnitVisualLayers.OverlayEngaged" ]
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -6
   - type: ApcPowerReceiver
     powerLoad: 0
     needsPower: false
+#  - type: Construction | TODO RMC14: Construction graph for steps to unanchor
+  - type: DisposalUnit
   - type: ThrowInsertContainer
+    containerId: disposals
     probability: 0
+  - type: RequireProjectileTarget
   - type: InteractedBlacklist
     blacklist:
       components:

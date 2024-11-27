@@ -385,8 +385,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
             var current = EntityQueryEnumerator<XenoComponent, HiveMemberComponent>();
             var slotCount = oldHive.Comp.FreeSlots.ToDictionary();
-            while (current.MoveNext(out var existingComp, out var member))
+            while (current.MoveNext(out var uid, out var existingComp, out var member))
             {
+                if (_mobState.IsDead(uid))
+                    continue;
+
                 if (member.Hive != oldHive.Owner || !existingComp.CountedInSlots)
                     continue;
 
@@ -556,8 +559,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         var newXeno = TransferXeno(xeno, to);
-        var ev = new XenoDevolvedEvent(xeno);
-        RaiseLocalEvent(newXeno, ref ev);
+        var ev = new XenoDevolvedEvent(xeno, newXeno);
+        RaiseLocalEvent(newXeno, ref ev, true);
 
         _adminLog.Add(LogType.RMCDevolve, $"Xenonid {ToPrettyString(xeno)} devolved into {ToPrettyString(newXeno)}");
 
