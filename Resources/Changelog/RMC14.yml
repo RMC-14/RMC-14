@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Rainbeon
   changes:
-  - message: Surgical Line and Synth Graft now notify the patient that someone is
-      trying to treat them.
-    type: Add
-  id: 519
-  time: '2024-08-06T03:06:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3556
-- author: Rainbeon
-  changes:
   - message: Xenonids are now able to see the hive core through walls.
     type: Add
   id: 520
@@ -4970,5 +4962,12 @@
   id: 1018
   time: '2024-11-27T01:15:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4951
+- author: Rainbeon
+  changes:
+  - message: Transferring ammo between magazines now functions again.
+    type: Fix
+  id: 1019
+  time: '2024-11-27T01:18:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4946
 Name: RMC14
 Order: -1
