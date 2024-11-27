@@ -180,3 +180,37 @@
     solution: tank
   - type: DrawableSolution
     solution: tank
+
+- type: entity
+  parent: CMBackpack
+  id: RMCBackpackAmmo
+  name: IMP ammo rack
+  description: A bare IMP frame with buckles designed to hold multiple ammo cans, but can fit any cumbersome box thanks to Marine ingenuity. Helps you lug around extra rounds or supplies.
+  components:
+  - type: Item
+    size: Huge
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/standard.rsi
+  - type: FixedItemSizeStorage
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/ammo_rack.rsi
+    layers:
+    - state: ammo_pack-0
+      map: ["enum.StorageFillLayers.Fill"]
+  - type: ClothingSpeedModifier
+    walkModifier: 0.7
+    sprintModifier: 0.7
+  - type: HeldSpeedModifier
+  - type: StorageFillVisualizer
+    fillBaseName: ammo_pack
+    maxFillLevels: 4
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,5,1 #3 slots
+    whitelist:
+      tags:
+      - RMCAmmoBox
+  - type: CMStorageVisualizer
+    storageClosed: null
+    storageOpen: null
+

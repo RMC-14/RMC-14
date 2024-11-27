@@ -13,14 +13,40 @@ public sealed class RMCClothingSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
 
+    private EntityQuery<ClothingLimitComponent> _clothingLimitQuery;
+
     public override void Initialize()
     {
+        _clothingLimitQuery = GetEntityQuery<ClothingLimitComponent>();
+
+        SubscribeLocalEvent<ClothingLimitComponent, BeingEquippedAttemptEvent>(OnClothingLimitBeingEquippedAttempt);
+
         SubscribeLocalEvent<ClothingRequireEquippedComponent, BeingEquippedAttemptEvent>(OnRequireEquippedBeingEquippedAttempt);
 
         SubscribeLocalEvent<NoClothingSlowdownComponent, ComponentStartup>(OnNoClothingSlowUpdate);
         SubscribeLocalEvent<NoClothingSlowdownComponent, DidEquipEvent>(OnNoClothingSlowUpdate);
         SubscribeLocalEvent<NoClothingSlowdownComponent, DidUnequipEvent>(OnNoClothingSlowUpdate);
         SubscribeLocalEvent<NoClothingSlowdownComponent, RefreshMovementSpeedModifiersEvent>(OnNoClothingSlowRefresh);
+    }
+
+    private void OnClothingLimitBeingEquippedAttempt(Entity<ClothingLimitComponent> ent, ref BeingEquippedAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if ((args.SlotFlags & ent.Comp.Slot) == 0)
+            return;
+
+        var slots = _inventory.GetSlotEnumerator(args.EquipTarget, ent.Comp.Slot);
+        while (slots.MoveNext(out var slot))
+        {
+            if (_clothingLimitQuery.TryComp(slot.ContainedEntity, out var otherLimit) &&
+                otherLimit.Id == ent.Comp.Id)
+            {
+                args.Reason = "rmc-clothing-limit";
+                args.Cancel();
+            }
+        }
     }
 
     private void OnNoClothingSlowUpdate<T>(Entity<NoClothingSlowdownComponent> ent, ref T args) where T : EntityEventArgs

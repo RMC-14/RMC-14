@@ -56,6 +56,27 @@
     checkCanInteract: false
 
 - type: entity
+  parent: ActionXenoAcidNormal
+  id: ActionXenoAcidAcider
+  name: Strong Corrosive Acid (100 acid)
+  description: Melts down barricades or items over time. You cannot melt structures.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: corrosive_acid
+    event: !type:XenoCorrosiveAcidEvent
+      acidId: XenoAcidStrong
+      plasmaCost: 0
+      energyCost: 100
+      applyTimeMultiplier: 0.25
+      time: 90 # seconds or 1.5 minutes
+      dps: 20
+      expendableLightDps: 23.4375
+    checkCanInteract: false
+
+- type: entity
   id: ActionXenoRegurgitate
   parent: ActionXenoBase
   name: Regurgitate
@@ -90,6 +111,12 @@
   id: ActionXenoTailStabCorrosive
   name: Corrosive Tail Stab
   description: Launches an attack towards a given direction. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid into the target, dealing damage over time.[/color]
+
+- type: entity
+  parent: ActionXenoTailStab
+  id: ActionXenoTailStabBoiler
+  name: Corrosive Tail Stab
+  description: Launches an attack towards a given direction. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid or neurotoxin into the target, dealing damage or stunning over time. Which type depends on current gas type.[/color]
 
 - type: entity
   id: ActionXenoLeap
@@ -171,7 +198,7 @@
   id: ActionXenoSlowingSpit
   parent: ActionXenoBase
   name: Slowing Spit (20) # TODO RMC14 proper plasma costs
-  description: Launches a damageless projectile that will slow the first enemy that it hits, and paralyze them if they have no armor.
+  description: Launches a damageless projectile that will slow the first enemy that it hits, and paralyze them if they have no armor. It'll also drain helpful substances from their body.
   components:
   - type: EntityWorldTargetAction
     itemIconStyle: NoItem
@@ -179,7 +206,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: xeno_spit
     event: !type:XenoSlowingSpitActionEvent
-    useDelay: 1.5
+    useDelay: 2
     range: 15
     checkCanAccess: false
   - type: ActionBlockIfResting
@@ -196,7 +223,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: acid_shotgun
     event: !type:XenoScatteredSpitActionEvent
-    useDelay: 8
+    useDelay: 6
     range: 15
     checkCanAccess: false
   - type: ActionBlockIfResting
@@ -507,3 +534,17 @@
     - ActionXenoSprayAcidBoiler
     cooldown: 30
     onPerform: false
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoForTheHive
+  name: For The Hive!
+  description: Prime yourself to detonate in a massive acid explosion in 20 seconds. Requires 200 acid at the minimum. The more acid reserves you have, the larger and more damaging the explosion will be. It will also coat barricades and mobs in acid, in a range equal to 1/2th the damage range. Damage is less the farther the mob is from the explosion. You will be slowed, change visually, and make an a loud wailing sound charging up. Dying will prevent the explosion from going off, but if successful you will respawn as a larva at your hive's hive core or at your corpse if theres none. Using this ability while primed will cancel the explosion at the cost of a 1/4th of your acid reserves.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: screech
+    event: !type:XenoForTheHiveActionEvent
+  

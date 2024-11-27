@@ -17,7 +17,7 @@
 
 # Military Warden
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: JumpsuitMarine
   id: CMJumpsuitWarden
   name: military warden uniform
   description: Standard-issue Military Warden uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
@@ -26,7 +26,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/standard.rsi
 
 - type: entity
-  parent: CMJumpsuitWarden
+  parent: RMCMarineUniformBase
   id: CMJumpsuitWardenBlue
   name: blue warden uniform
   description: The insignia on this uniform tells you that this uniform belongs to the Warden..
@@ -35,7 +35,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/blue.rsi
 
 - type: entity
-  parent: CMJumpsuitWarden
+  parent: RMCMarineUniformBase
   id: CMJumpsuitWardenRed
   name: red warden uniform
   description: A standard-issue warden uniform.
@@ -44,7 +44,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/red.rsi
 
 - type: entity
-  parent: CMJumpsuitWarden
+  parent: RMCMarineUniformBase
   id: CMJumpsuitWardenCorporate
   name: corporate warden uniform
   description: A standard-issue warden uniform.
@@ -53,7 +53,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/corporate.rsi
 
 - type: entity
-  parent: CMJumpsuitWarden
+  parent: RMCMarineUniformBase
   id: CMJumpsuitWardenNavy
   name: navy warden uniform
   description: A navy variant of warden uniform.
@@ -62,7 +62,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/navy.rsi
 
 - type: entity
-  parent: CMJumpsuitWarden
+  parent: RMCMarineUniformBase
   id: CMJumpsuitWardenTan
   name: tan warden uniform
   description: A standard-issue warden uniform.

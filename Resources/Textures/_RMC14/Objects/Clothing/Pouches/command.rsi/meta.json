@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/274dffcf8574897b6b8fbcad07d81aa0f28292bb/icons/obj/items/clothing/pouches.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/274dffcf8574897b6b8fbcad07d81aa0f28292bb/icons/obj/items/clothing/pouches.dmi, https://github.com/cmss13-devs/cmss13/blob/168c8a79a3d858a8c531ff7ed0bc3033e47d1d16/icons/obj/items/clothing/belts.dmi, https://github.com/cmss13-devs/cmss13/blob/347170c05aa4f348aed66c7d7b277a24d321c847/icons/obj/items/clothing/pouches.dmi, https://github.com/cmss13-devs/cmss13/blob/347170c05aa4f348aed66c7d7b277a24d321c847/icons/obj/items/clothing/pouches.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -12,6 +12,21 @@
     },
     {
       "name": "closed"
+    },
+    {
+      "name": "cmateba"
+    },
+    {
+      "name": "command_pouch_binos"
+    },
+    {
+      "name": "command_pouch_binos_flap"
+    },
+    {
+      "name": "command_pouch_tablet"
+    },
+    {
+      "name": "command_pouch_tablet_flap"
     }
   ]
 }

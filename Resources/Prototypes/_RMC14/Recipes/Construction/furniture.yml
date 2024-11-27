@@ -217,3 +217,23 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+
+#misc
+
+- type: construction
+  parent: RMC
+  id: RMCBed
+  name: bed
+  description: A mattress seated on a rectangular metallic frame.
+  graph: RMCBed
+  startNode: start
+  targetNode: bed
+  category: construction-category-cm-furniture
+  icon:
+    sprite: _RMC14/Structures/Furniture/bed.rsi
+    state: bed
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

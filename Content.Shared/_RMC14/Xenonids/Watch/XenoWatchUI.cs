@@ -13,9 +13,10 @@ public enum XenoWatchUIKey : byte
 public readonly record struct Xeno(NetEntity Entity, string Name, EntProtoId? Id);
 
 [Serializable, NetSerializable]
-public sealed class XenoWatchBuiState(List<Xeno> xenos) : BoundUserInterfaceState
+public sealed class XenoWatchBuiState(List<Xeno> xenos, int burrowedLarva) : BoundUserInterfaceState
 {
     public readonly List<Xeno> Xenos = xenos;
+    public readonly int BurrowedLarva = burrowedLarva;
 }
 
 [Serializable, NetSerializable]

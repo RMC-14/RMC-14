@@ -15,6 +15,23 @@
 
 - type: entity
   parent: CMHandsBlackMarine
+  id: RMCHandsLatexMarine # TODO RMC14 armor
+  name: marine medical combat gloves
+  description: Standard issue marine sterile gloves, offers regular protection whilst offering the user a better grip when performing medical work.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/latex.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/latex.rsi
+  - type: Fiber
+    fiberMaterial: fibers-latex
+    fiberColor: fibers-white
+  - type: Tag
+    tags:
+    - RMCGlovesLatex
+
+- type: entity
+  parent: CMHandsBlackMarine
   id: RMCHandsM3G4
   name: M3-G4 grenadier gloves
   description: A pair of plated, but nimble, gloves.

@@ -14,4 +14,7 @@ public sealed partial class RoofingEntityComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool CanMortar;
+
+    [DataField, AutoNetworkedField]
+    public bool CanOrbitalBombard;
 }

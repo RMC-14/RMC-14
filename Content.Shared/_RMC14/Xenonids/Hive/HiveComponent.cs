@@ -50,4 +50,22 @@ public sealed partial class HiveComponent : Component
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NewCoreAt;
+
+    [DataField, AutoNetworkedField]
+    public bool HijackSurged;
+
+    [DataField, AutoNetworkedField]
+    public int BurrowedLarva;
+
+    [DataField, AutoNetworkedField]
+    public int BurrowedLarvaSlotFactor = 4;
+
+    [DataField, AutoNetworkedField]
+    public bool LateJoinGainLarva;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 LateJoinMarines;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId BurrowedLarvaId = "CMXenoLarva";
 }

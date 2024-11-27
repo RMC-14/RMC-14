@@ -111,7 +111,7 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
                 var invis = EnsureComp<EntityActiveInvisibleComponent>(uid);
                 if (time < stealthComp.Delay)
                 {
-                    invis.Opacity = (float) (1 - (time / stealthComp.Delay) * (1 - stealthComp.MinOpacity)); // Linear function from 1 to MinOpacity
+                    invis.Opacity = (float) (stealthComp.MaxOpacity - (time / stealthComp.Delay) * (stealthComp.MaxOpacity - stealthComp.MinOpacity)); // Linear function from 1 to MinOpacity
                 }
                 else
                 {
@@ -128,7 +128,7 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
 
                 if (time < stealthComp.Delay)
                 {
-                    invis.Opacity = (float) (stealthComp.MinOpacity + (time / stealthComp.Delay) * (1 - stealthComp.MinOpacity) ); // Linear function from MinOpacity to 1
+                    invis.Opacity = (float) (stealthComp.MinOpacity + (time / stealthComp.Delay) * (stealthComp.MaxOpacity - stealthComp.MinOpacity) ); // Linear function from MinOpacity to 1
                     Dirty(uid, invis);
                     continue;
                 }

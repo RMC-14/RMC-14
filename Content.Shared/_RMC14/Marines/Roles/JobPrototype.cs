@@ -39,4 +39,10 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
 
     [DataField]
     public SpriteSpecifier.Rsi? MinimapIcon;
+
+    [DataField]
+    public SpriteSpecifier.Rsi? MinimapBackground;
+
+    [DataField]
+    public float RoleWeight;
 }

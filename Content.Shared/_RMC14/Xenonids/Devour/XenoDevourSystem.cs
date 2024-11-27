@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Armor;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
@@ -21,6 +21,7 @@ using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -67,6 +68,7 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<DevouredComponent, IsEquippingAttemptEvent>(OnDevouredIsEquippingAttempt);
         SubscribeLocalEvent<DevouredComponent, IsUnequippingAttemptEvent>(OnDevouredIsUnequippingAttempt);
         SubscribeLocalEvent<DevouredComponent, AttackAttemptEvent>(OnDevouredAttackAttempt);
+        SubscribeLocalEvent<DevouredComponent, ShotAttemptedEvent>(OnDevouredShotAttempted);
 
         SubscribeLocalEvent<XenoDevourComponent, CanDropTargetEvent>(OnXenoCanDropTarget);
         SubscribeLocalEvent<XenoDevourComponent, ActivateInWorldEvent>(OnXenoActivate);
@@ -173,8 +175,16 @@ public sealed class XenoDevourSystem : EntitySystem
 
     private void OnDevouredIsUnequippingAttempt(Entity<DevouredComponent> devoured, ref IsUnequippingAttemptEvent args)
     {
-        // if (!HasComp<UsableWhileDevouredComponent>(args.Equipment))
+        if (TryComp<UsableWhileDevouredComponent>(args.Equipment, out var usableDevoured) && usableDevoured.CanUnequip)
+            return;
+
         args.Cancel();
+    }
+
+    private void OnDevouredShotAttempted(Entity<DevouredComponent> devoured, ref ShotAttemptedEvent args)
+    {
+        if (!HasComp<GunUsableWhileDevouredComponent>(args.Used))
+            args.Cancel();
     }
 
     private void OnXenoCanDropTarget(Entity<XenoDevourComponent> xeno, ref CanDropTargetEvent args)
@@ -353,16 +363,6 @@ public sealed class XenoDevourSystem : EntitySystem
 
             if (popup)
                 _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-stomach-full"), victim, xeno, PopupType.SmallCaution);
-
-            return false;
-        }
-
-        if (!_standing.IsDown(victim))
-        {
-            if (popup)
-            {
-                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-resisting", ("target", victim)), victim, xeno, PopupType.MediumCaution);
-            }
 
             return false;
         }

@@ -22,7 +22,7 @@
         - FullTileLayer
   - type: AccessReader
   - type: Door
-    canPry: false
+    canPry: false # TODO RMC14
     crushDamage:
       types:
         Blunt: 25 # yowch
@@ -52,6 +52,15 @@
     sprite: _RMC14/Structures/Doors/Shutters/Almayer/poddoor.rsi
   - type: MinimapColor
     color: "#451e5eb8"
+
+- type: entity
+  parent: RMCPodDoorAlmayer
+  id: RMCPodDoorAlmayerLocked
+  description: That looks like it doesn't open easily. Maybe look for a button or use a breaching charge?
+  suffix: Locked
+  components:
+  - type: Door
+    canPry: false
 
 - type: entity
   parent: RMCPodDoorAlmayer

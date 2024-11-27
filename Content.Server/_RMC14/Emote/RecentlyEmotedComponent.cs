@@ -7,9 +7,9 @@ namespace Content.Server._RMC14.Emote;
 [Access(typeof(RMCEmoteSystem))]
 public sealed partial class RecentlyEmotedComponent : Component
 {
-    [DataField, AutoNetworkedField]
+    [DataField]
     public TimeSpan Cooldown = TimeSpan.FromSeconds(0.8);
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public Dictionary<ProtoId<EmotePrototype>, TimeSpan> Emotes = new();
 }

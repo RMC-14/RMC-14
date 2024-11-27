@@ -557,6 +557,19 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("ban_template", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.Blacklist", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("UserId")
+                        .HasName("PK_blacklist");
+
+                    b.ToTable("blacklist", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.ConnectionLog", b =>
                 {
                     b.Property<int>("Id")
@@ -782,6 +795,11 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("integer")
                         .HasColumnName("age");
 
+                    b.Property<string>("ArmorPreference")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("armor_preference");
+
                     b.Property<string>("CharacterName")
                         .IsRequired()
                         .HasColumnType("text")
@@ -826,6 +844,12 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("jsonb")
                         .HasColumnName("markings");
 
+                    b.Property<bool>("PlaytimePerks")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true)
+                        .HasColumnName("playtime_perks");
+
                     b.Property<int>("PreferenceId")
                         .HasColumnType("integer")
                         .HasColumnName("preference_id");
@@ -856,6 +880,20 @@ namespace Content.Server.Database.Migrations.Postgres
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("species");
+
+                    b.Property<string>("XenoPostfix")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("")
+                        .HasColumnName("xeno_postfix");
+
+                    b.Property<string>("XenoPrefix")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("")
+                        .HasColumnName("xeno_prefix");
 
                     b.HasKey("Id")
                         .HasName("PK_profile");
@@ -1081,6 +1119,10 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("uuid")
                         .HasColumnName("player_id");
 
+                    b.Property<int?>("GhostColor")
+                        .HasColumnType("integer")
+                        .HasColumnName("ghost_color");
+
                     b.Property<int>("TierId")
                         .HasColumnType("integer")
                         .HasColumnName("tier_id");
@@ -1164,6 +1206,10 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Property<bool>("Figurines")
                         .HasColumnType("boolean")
                         .HasColumnName("figurines");
+
+                    b.Property<bool>("GhostColor")
+                        .HasColumnType("boolean")
+                        .HasColumnName("ghost_color");
 
                     b.Property<bool>("LobbyMessage")
                         .HasColumnType("boolean")

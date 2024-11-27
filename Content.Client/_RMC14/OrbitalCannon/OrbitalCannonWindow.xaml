@@ -1,0 +1,21 @@
+﻿<controls:OrbitalCannonWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.OrbitalCannon"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    Title="Orbital Cannon Console"
+    MinSize="400 300">
+    <BoxContainer Orientation="Vertical">
+        <RichTextLabel Text="[bold]Warhead status[/bold]" />
+        <ui:BlueHorizontalSeparator />
+        <RichTextLabel Name="WarheadStatusLabel" Access="Public" />
+        <RichTextLabel Text="[bold]Fuel status[/bold]" Margin="0 20 0 0" />
+        <ui:BlueHorizontalSeparator />
+        <Label Name="FuelStatusLabel" Access="Public" HorizontalExpand="True" />
+        <Label Name="FuelRequirementsLabel" Access="Public" Margin="0 20 0 0" />
+        <RichTextLabel Text="[bold]Tray status[/bold]" Margin="0 20 0 0" />
+        <ui:BlueHorizontalSeparator />
+        <Button Name="TrayButtonOne" Access="Public" StyleClasses="OpenBoth" />
+        <Button Name="TrayButtonTwo" Access="Public" StyleClasses="OpenBoth" />
+        <RichTextLabel Name="TrayButtonLabel" Access="Public" />
+    </BoxContainer>
+</controls:OrbitalCannonWindow>

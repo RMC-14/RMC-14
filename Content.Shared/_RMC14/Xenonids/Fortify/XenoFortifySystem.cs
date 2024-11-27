@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Armor;
+﻿using System.Linq;
+using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Crest;
 using Content.Shared._RMC14.Xenonids.Headbutt;
@@ -13,7 +14,6 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Physics.Systems;
-using System.Linq;
 using static Content.Shared._RMC14.Xenonids.Fortify.XenoFortifyComponent;
 using static Content.Shared.Physics.CollisionGroup;
 

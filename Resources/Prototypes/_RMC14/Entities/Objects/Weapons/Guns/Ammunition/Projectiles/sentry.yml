@@ -1,8 +1,8 @@
 ﻿- type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: CMBulletSentry10x50mm
   name: bullet (10x50mm)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
@@ -16,12 +16,17 @@
   - type: CMArmorPiercing
     amount: 100
   - type: DeleteXenoResinOnHit
+  - type: RMCProjectileAccuracy
+    accuracy: 110
+    thresholds:
+    - range: 22
+      falloff: 10
 
 - type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: RMCBulletSentry
   name: bullet (10x28mm)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
@@ -34,3 +39,8 @@
         Piercing: 30
   - type: CMArmorPiercing
     amount: 35
+  - type: RMCProjectileAccuracy
+    accuracy: 110
+    thresholds:
+    - range: 22
+      falloff: 10
