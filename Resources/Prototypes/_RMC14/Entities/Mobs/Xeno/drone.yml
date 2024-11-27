@@ -110,6 +110,7 @@
   - type: XenoEvolution
     strains:
     - CMXenoDroneGardener
+    - CMXenoDroneHealer
   - type: XenoAcid
   - type: AcidTrap
     trapLevel: 1
