@@ -126,7 +126,7 @@
   - HideSpawnMenu
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod.rsi
     state: icon
   - type: RMCArmorVariant
     defaultType: RMCArmorM3HeavyPadded
