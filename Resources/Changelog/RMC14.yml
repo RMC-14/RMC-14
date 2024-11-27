@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: KalimbaMachine
-  changes:
-  - message: Allow Lighters to be stored in cigarette packs!
-    type: Tweak
-  id: 525
-  time: '2024-08-07T22:49:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3522
 - author: Dutch-VanDerLinde
   changes:
   - message: Added marine armor light visuals
@@ -4974,5 +4967,12 @@
   id: 1024
   time: '2024-11-27T01:25:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4919
+- author: beck-thompson
+  changes:
+  - message: Body armor lights are now predicted. Yay!
+    type: Fix
+  id: 1025
+  time: '2024-11-27T01:27:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4932
 Name: RMC14
 Order: -1
