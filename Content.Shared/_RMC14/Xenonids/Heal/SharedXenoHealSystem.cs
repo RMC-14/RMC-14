@@ -284,7 +284,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
         SacraficialHealShout(ent);
         _xenoAnnounce.AnnounceSameHive(ent, Loc.GetString("rmc-xeno-sacrifice-heal-target-announcement", ("healer_xeno", ent), ("target_xeno", target)), popup:PopupType.Large);
-        _popup.PopupPredicted(Loc.GetString("rmc-xeno-sacrifice-heal-target-enviorment", ("healer_xeno", ent), ("target_xeno", target)), ent, ent, PopupType.Medium);
+        _popup.PopupPredicted(Loc.GetString("rmc-xeno-sacrifice-heal-target-enviorment", ("healer_xeno", ent), ("target_xeno", target)), target, ent, PopupType.Medium);
 
         // Heal from crit
         var targetTotalDamage = targetDamageComp.TotalDamage;
