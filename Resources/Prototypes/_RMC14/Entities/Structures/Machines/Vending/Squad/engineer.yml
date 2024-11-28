@@ -230,6 +230,8 @@
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltMortar
       - id: CMBeltUtilityFilled
+        # mandatory: true, TODO allow vendors to mark entries as mandatory
+      - id: RMCBeltConstruction
         recommended: true
       - id: RMCBeltGrenade
     - name: Pouches
@@ -246,7 +248,8 @@
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
         recommended: true
-      #- id: CMElectronicsPouchFull
+      - id: RMCPouchElectronicsFill
+        name: electronics pouch (Full)
       - id: RMCPouchExplosive
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
@@ -256,7 +259,7 @@
       - id: RMCPouchGeneralMedium
       - id: RMCPouchPistol
       - id: RMCPouchToolsFill
-        name: Tools pouch (Filled)
+        name: Tools pouch (Full)
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
@@ -266,6 +269,8 @@
       - id: CMWebbing
       - id: CMWebbingPouch
       - id: CMWebbingHolster
+      - id: RMCToolWebbingSmallFilled
+        name: small tool webbing (Full)
     - name: Mask
       choices: { CMMask: 1 }
       entries:
