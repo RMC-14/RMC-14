@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Corpsmen helmets allow medics to change holocards by examination
-    type: Fix
-  id: 530
-  time: '2024-08-07T23:58:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3573
 - author: Lank
   changes:
   - message: Added the Scout Weapon Specialist, and their associated gear.
@@ -4973,5 +4966,13 @@
   id: 1029
   time: '2024-11-28T01:29:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4965
+- author: blueDev2
+  changes:
+  - message: Fixed a case where resin traps would not be shown above weeds if the
+      weeds they are on are removed and then built back again.
+    type: Fix
+  id: 1030
+  time: '2024-11-28T06:32:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4968
 Name: RMC14
 Order: -1
