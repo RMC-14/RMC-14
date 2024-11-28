@@ -158,7 +158,6 @@
       - Material
       - Sentry
       - FullSandbag
-  - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMBeltUtility
