@@ -231,9 +231,9 @@
       - id: CMBeltMortar
       - id: CMBeltUtilityFilled
         # mandatory: true, TODO allow vendors to mark entries as mandatory
+      - id: RMCBeltGrenade
       - id: RMCBeltConstruction
         recommended: true
-      - id: RMCBeltGrenade
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
