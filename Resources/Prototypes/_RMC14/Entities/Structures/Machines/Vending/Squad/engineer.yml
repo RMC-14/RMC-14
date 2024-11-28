@@ -230,6 +230,7 @@
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltMortar
       - id: CMBeltUtilityFilled
+        name: M276 pattern toolbelt rig (Full)
         # mandatory: true, TODO allow vendors to mark entries as mandatory
       - id: RMCBeltGrenade
       - id: RMCBeltConstruction
