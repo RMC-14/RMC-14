@@ -426,10 +426,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                     break;
                 case DisarmAttackEvent disarm:
                     if (!DoDisarm(user, disarm, weaponUid, weapon, session))
-                    {
-                        // weapon.NextAttack = curTime;
-                        return false;
-                    }
+                        weapon.NextAttack = curTime + TimeSpan.FromSeconds(0.6);
 
                     animation = weapon.Animation;
                     break;

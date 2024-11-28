@@ -1,11 +1,11 @@
 using System.Linq;
 using Content.Server.Administration;
-using Content.Shared._RMC14.Antag.Components;
+using Content.Shared._RMC14.Marines.Mutiny;
 using Content.Shared.Administration;
 using Robust.Shared.Player;
 using Robust.Shared.Toolshed;
 
-namespace Content.Server._RMC14.Antag;
+namespace Content.Server._RMC14.Marines.Mutiny;
 
 [ToolshedCommand, AdminCommand(AdminFlags.Admin)]
 public sealed class MutinyCommand : ToolshedCommand

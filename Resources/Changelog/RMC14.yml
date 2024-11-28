@@ -1,108 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the M276 pattern combat toolbelt rig being able to hold more than
-      one pistol. It is now limited to one gun max.
-    type: Fix
-  id: 517
-  time: '2024-08-05T03:43:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3542
-- author: Vermidia
-  changes:
-  - message: Xenos can no longer nest the dead.
-    type: Fix
-  id: 518
-  time: '2024-08-06T03:04:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3553
-- author: Rainbeon
-  changes:
-  - message: Surgical Line and Synth Graft now notify the patient that someone is
-      trying to treat them.
-    type: Add
-  id: 519
-  time: '2024-08-06T03:06:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3556
-- author: Rainbeon
-  changes:
-  - message: Xenonids are now able to see the hive core through walls.
-    type: Add
-  id: 520
-  time: '2024-08-06T03:06:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3555
-- author: Vermidia
-  changes:
-  - message: Opening backpacks in hand is now instant, and doesn't close as long as
-      you keep them inhand
-    type: Tweak
-  id: 521
-  time: '2024-08-06T03:11:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3544
-- author: Sigil
-  changes:
-  - message: Hopefully fixed guns shrinking when you put size-changing attachments
-      on them. If you encounter this bug after this is merged, report it.
-    type: Fix
-  id: 522
-  time: '2024-08-06T03:10:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3551
-- author: Vermidia
-  changes:
-  - message: You can now put lids on bottles.
-    type: Add
-  id: 523
-  time: '2024-08-07T00:29:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3546
-- author: Vermidia
-  changes:
-  - message: Vaulting is no longer cancelled by damage
-    type: Fix
-  id: 524
-  time: '2024-08-07T22:46:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3569
-- author: KalimbaMachine
-  changes:
-  - message: Allow Lighters to be stored in cigarette packs!
-    type: Tweak
-  id: 525
-  time: '2024-08-07T22:49:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3522
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added marine armor light visuals
-    type: Add
-  id: 526
-  time: '2024-08-07T23:44:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3455
-- author: FungiFellow
-  changes:
-  - message: Added Penlights into the Med Essential Bundle
-    type: Add
-  id: 527
-  time: '2024-08-07T23:49:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3538
-- author: DrSmugleaf
-  changes:
-  - message: Added CMO Pandi Fackler and Jermaine 'Bait' McClune figurines.
-    type: Add
-  - message: Patrons will now spawn with their figurine in-hand or in their backpack.
-    type: Add
-  id: 528
-  time: '2024-08-07T23:50:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3579
-- author: Vermidia
-  changes:
-  - message: You can use a machete or throwing knife while devoured
-    type: Tweak
-  id: 529
-  time: '2024-08-07T23:53:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3566
-- author: blueDev2
-  changes:
-  - message: Corpsmen helmets allow medics to change holocards by examination
-    type: Fix
-  id: 530
-  time: '2024-08-07T23:58:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3573
 - author: Lank
   changes:
   - message: Added the Scout Weapon Specialist, and their associated gear.
@@ -4971,5 +4867,112 @@
   id: 1016
   time: '2024-11-24T07:22:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4927
+- author: Vermidia
+  changes:
+  - message: Fixed acider runners being able to acid some walls.
+    type: Fix
+  id: 1017
+  time: '2024-11-27T01:14:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4956
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed infected marines from triggering reggs or parasite traps
+    type: Fix
+  id: 1018
+  time: '2024-11-27T01:15:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4951
+- author: Rainbeon
+  changes:
+  - message: Transferring ammo between magazines now functions again.
+    type: Fix
+  id: 1019
+  time: '2024-11-27T01:18:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4946
+- author: Vermidia
+  changes:
+  - message: Being unstunned while a parasite is still on your face keeps you muffled
+      and blind.
+    type: Fix
+  id: 1020
+  time: '2024-11-27T01:20:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4909
+- author: Whisper
+  changes:
+  - message: Updated Stella 'Lake' Poley, added Merlin Leander, Kazi Priestess figurine.
+    type: Add
+  id: 1021
+  time: '2024-11-27T01:20:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4914
+- author: Rainbeon
+  changes:
+  - message: Re-enabled tackle cooldown reduction on a miss. Missing a tackle will
+      now put it on a 0.6 second cooldown, instead of a full-length cooldown.
+    type: Fix
+  - message: Fixed no visual effect occuring on a tackle miss.
+    type: Fix
+  - message: Fixed being able to try to tackle a very far away object that you would
+      otherwise always fail to tackle.
+    type: Fix
+  id: 1022
+  time: '2024-11-27T01:22:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4917
+- author: Rainbeon
+  changes:
+  - message: Fixed under-tile plating slowing pulls by ~10%.
+    type: Fix
+  id: 1023
+  time: '2024-11-27T01:26:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4934
+- author: Vermidia
+  changes:
+  - message: Fixed new stasis mechanics not working
+    type: Fix
+  id: 1024
+  time: '2024-11-27T01:25:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4919
+- author: beck-thompson
+  changes:
+  - message: Body armor lights are now predicted. Yay!
+    type: Fix
+  id: 1025
+  time: '2024-11-27T01:27:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4932
+- author: CyberTropic
+  changes:
+  - message: Added fuel pump animation.
+    type: Add
+  id: 1026
+  time: '2024-11-27T01:30:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4905
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added an option to automatically punctuate character messages in the
+      settings
+    type: Add
+  id: 1027
+  time: '2024-11-27T01:36:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4924
+- author: DrSmugleaf
+  changes:
+  - message: Fixed parasites being able to hide under generators.
+    type: Fix
+  id: 1028
+  time: '2024-11-27T10:40:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4966
+- author: Whisper
+  changes:
+  - message: Added Marrik', Xalos-of-Europa figurines.
+    type: Add
+  id: 1029
+  time: '2024-11-28T01:29:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4965
+- author: blueDev2
+  changes:
+  - message: Fixed a case where resin traps would not be shown above weeds if the
+      weeds they are on are removed and then built back again.
+    type: Fix
+  id: 1030
+  time: '2024-11-28T06:32:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4968
 Name: RMC14
 Order: -1
