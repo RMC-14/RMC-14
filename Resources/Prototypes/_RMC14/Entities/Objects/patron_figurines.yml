@@ -820,3 +820,32 @@
   - type: PatronFigurine
     id: 916cba8a-e995-43a4-b1fd-8c9e512e8471
 
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMarrik
+  name: Marrik' figurine
+  description: "A vorpal recreation of a stoic law enforcer. You aren't sure how this was made... His gleaming red eye seems to follow your every move. Reeks of Blood and Metal."
+  components:
+  - type: Sprite
+    state: marrik
+  - type: PatronFigurine
+    id: b39ea987-0b8c-4f36-a6a8-06febbead49d
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Effects/teleport_departure.ogg
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 180.0
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronXalos-Of-Europa
+  name: Xalos-Of-Europa figurine
+  description: "Wait, what's the QM doing out of Req!?"
+  components:
+  - type: Sprite
+    state: xalos-of-europa
+  - type: PatronFigurine
+    id: f1c563b6-24cd-4212-9005-b67a07a7e5da
