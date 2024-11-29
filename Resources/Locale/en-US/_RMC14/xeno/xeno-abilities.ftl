@@ -19,6 +19,7 @@ cm-xeno-cant-reach-there = You can't reach there!
 cm-xeno-cant-build-in-self = You can't build structures that close!
 rmc-xeno-construction-unique-exists = There's already a {$choice} built!
 rmc-xeno-construction-hive-limit-met = We have reached the limit of {$choice} the hive can support!
+rmc-xeno-construction-requires-hive-weeds = {$choice} must be built on hive weeds!
 rmc-xeno-cant-build-new-yet = We can't build a new {$choice} yet!
 
 # Evolve

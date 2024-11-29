@@ -13,6 +13,7 @@ using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Atmos;
+using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -428,6 +429,22 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
+        if (!_transformQuery.TryComp(xeno.Owner, out var xform) ||
+            _transform.GetGrid((xeno.Owner, xform)) is not { Valid: true } gridId ||
+            !TryComp(gridId, out MapGridComponent? grid))
+        {
+            return;
+        }
+
+        if (!HasComp<HiveConstructionRequiresHiveWeedsComponent>(target) && _xenoWeeds.IsOnHiveWeeds((gridId, grid), target.ToCoordinates()))
+        {
+            _popup.PopupClient(
+                Loc.GetString("rmc-xeno-construction-requires-hive-weeds", ("choice", target)),
+                target,
+                args.User);
+            return;
+        }
+
         if (_net.IsClient)
             return;
 
@@ -690,10 +707,18 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (choice != null &&
             _prototype.TryIndex(choice, out var choiceProto))
         {
+
+            if (choiceProto.HasComponent<HiveConstructionRequiresHiveWeedsComponent>(_compFactory) && !_xenoWeeds.IsOnHiveWeeds((gridId, grid), target))
+            {
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-requires-hive-weeds", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
+                return false;
+            }
+
+
             if (choiceProto.TryGetComponent(out HiveConstructionLimitedComponent? limited, _compFactory) &&
                 !CanPlaceLimitedHiveStructure(xeno.Owner, limited, out var limit))
             {
-                // server-only as the core may not be in the client's PVS bubble
+                // server-only as the structure may not be in the client's PVS bubble
                 if (_net.IsServer)
                     if (limit == 1)
                         _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-unique-exists", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);

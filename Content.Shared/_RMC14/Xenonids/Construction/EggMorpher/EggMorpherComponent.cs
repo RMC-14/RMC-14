@@ -24,7 +24,7 @@ public sealed partial class EggMorpherComponent : Component
     /// Max parasites that can be grown passively within the egg morpher
     /// </summary>
     [DataField]
-    public int GrowMax = 6;
+    public int GrowMaxParasites = 6;
 
     [DataField]
     public int ReservedParasites = 0;
