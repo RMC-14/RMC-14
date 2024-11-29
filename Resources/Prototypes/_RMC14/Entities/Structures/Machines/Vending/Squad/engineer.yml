@@ -249,8 +249,8 @@
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
         recommended: true
-      - id: RMCPouchElectronicsFill
-        name: electronics pouch (Full)
+      # - id: RMCPouchElectronicsFill
+        # name: electronics pouch (Full)
       - id: RMCPouchExplosive
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
