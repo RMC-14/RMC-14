@@ -1189,6 +1189,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             "shiva" => "Shivas Snowball",
             "trijent" => "Trijent Dam",
             "varadero" => "New Varadero",
+            "kutjevo" => "Kutjevo Refinery",
             _ => name,
         };
     }
