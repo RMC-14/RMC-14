@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the chemical dispenser and chemmaster having no skill check. They
-      now have a skill requirement of medical 3 (Nurse, Doctor, Researcher CMO, XO,
-      CO, but excludes the Hospital Corpsman).
-    type: Fix
-  - message: Fixed the overwatch console having no skill check. It now has a skill
-      requirement of overwatch 1 (SO, XO, CO, Warden, ASO, pilots, IO, CE, CMO, CMP,
-      SEA and QM)
-    type: Fix
-  id: 535
-  time: '2024-08-08T02:44:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3582
 - author: FungiFellow
   changes:
   - message: Added M44 Speedloader Boxes
@@ -4972,5 +4959,13 @@
   id: 1034
   time: '2024-11-29T05:07:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4975
+- author: Rainbeon
+  changes:
+  - message: Xeno ghosts will now retain their full xeno names, including rank, caste,
+      letters, and number ID.
+    type: Fix
+  id: 1035
+  time: '2024-11-29T05:08:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4921
 Name: RMC14
 Order: -1
