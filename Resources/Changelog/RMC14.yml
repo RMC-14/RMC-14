@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: gorillagaming
-  changes:
-  - message: The selected planet now updates correctely
-    type: Fix
-  id: 533
-  time: '2024-08-08T00:56:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3331
-- author: P-MCT
-  changes:
-  - message: Added Scottish trait/accent.
-    type: Add
-  id: 534
-  time: '2024-08-08T00:03:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3561
 - author: DrSmugleaf
   changes:
   - message: Fixed the chemical dispenser and chemmaster having no skill check. They
@@ -4972,5 +4958,19 @@
   id: 1032
   time: '2024-11-29T05:04:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4977
+- author: DummeHytteOst
+  changes:
+  - message: Fixed M16 bullets doing too much damage (56 > 40)
+    type: Fix
+  id: 1033
+  time: '2024-11-29T05:06:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4976
+- author: DummeHytteOst
+  changes:
+  - message: Legal Closet is no longer movable
+    type: Fix
+  id: 1034
+  time: '2024-11-29T05:07:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4975
 Name: RMC14
 Order: -1
