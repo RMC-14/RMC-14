@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: FungiFellow
-  changes:
-  - message: Added M44 Speedloader Boxes
-    type: Add
-  - message: Cargo Can Order M44 Reg and Marksman Rounds
-    type: Add
-  id: 536
-  time: '2024-08-08T02:59:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3559
 - author: DrSmugleaf
   changes:
   - message: Fixed being able to attack or shoot while lying down. This includes beds
@@ -4967,5 +4958,17 @@
   id: 1035
   time: '2024-11-29T05:08:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4921
+- author: Rainbeon
+  changes:
+  - message: Fixed being knocked down causing you to be dragged faster by ~25%. This
+      means Xenos can not drag away Marines as quickly, and Marines can not drag critical
+      or dead Marines as fast either without the assistance of a Rollerbed.
+    type: Fix
+  - message: The sound for a knock down will now always apply upon a successful tackle,
+      even if the target is already knocked down.
+    type: Tweak
+  id: 1036
+  time: '2024-11-29T08:34:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4971
 Name: RMC14
 Order: -1
