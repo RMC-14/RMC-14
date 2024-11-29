@@ -8,8 +8,11 @@ namespace Content.Shared._RMC14.Repairable;
 public sealed partial class NailgunRepairableComponent : Component
 {
     [DataField]
-    public List<string> RepairMaterials = new();
+    public float RepairMetal = 0;
 
     [DataField]
-    public List<float> RepairValues = new();
+    public float RepairPlasteel = 0;
+
+    [DataField]
+    public float RepairWood = 0;
 }

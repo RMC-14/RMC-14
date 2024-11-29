@@ -129,6 +129,10 @@
     skill: RMCSkillConstruction
     delay: 10
     fuelUsed: 2
+  - type: NailgunRepairable
+    # cm13 max_health%: 0.3, 0.45
+    repairMetal: -135
+    repairPlasteel: -200
   - type: Destructible
     thresholds:
     - trigger:
@@ -160,10 +164,6 @@
     node: nodeMetal
   - type: RMCConstructionUpgradeTarget
     upgrades: ["RMCExplosiveUpgrade", "RMCBiohazardUpgrade", "RMCBruteUpgrade"]
-  - type: NailgunRepairable
-    repairMaterials: [CMSteel, CMPlasteel]
-    # cm13 repair% * cm13 health: 0.3 * 450, 0.45 * 450
-    repairValues: [-135, -200]
   - type: Tag
     tags:
     - RMCMetalBarricade
@@ -406,6 +406,10 @@
     skill: RMCSkillConstruction
     delay: 10
     fuelUsed: 2
+  - type: NailgunRepairable
+    # cm13 max_health%: 0.3, 0.45
+    repairMetal: -120
+    repairPlasteel: -180
   - type: Destructible
     thresholds:
     - trigger:

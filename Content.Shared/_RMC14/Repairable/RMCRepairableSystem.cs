@@ -290,10 +290,20 @@ public sealed class RMCRepairableSystem : EntitySystem
 
                 if (stackComponent.Count < nailgunComponent.MaterialPerRepair)
                     continue;
-                var repairValueIndex = repairable.Comp.RepairMaterials.FindIndex(x => x == stackType);
-                if (repairValueIndex != -1 && repairable.Comp.RepairValues.Count > repairValueIndex)
+
+                if (stackType == "CMSteel")
                 {
-                    repairValue = repairable.Comp.RepairValues[repairValueIndex];
+                    repairValue = repairable.Comp.RepairMetal;
+                    break;
+                }
+                if (stackType == "CMPlasteel")
+                {
+                    repairValue = repairable.Comp.RepairPlasteel;
+                    break;
+                }
+                if (stackType == "RMCPlankWood")
+                {
+                    repairValue = repairable.Comp.RepairWood;
                     break;
                 }
             }
