@@ -17,7 +17,8 @@ cm-xeno-requires-more-plasma = {THE($construction)} requires {$plasma} more plas
 cm-xeno-construction-plasma-left = A {$construction} construction is designated here. It requires [color=cyan]{$plasma}[/color] more plasma.
 cm-xeno-cant-reach-there = You can't reach there!
 cm-xeno-cant-build-in-self = You can't build structures that close!
-cm-xeno-unique-exists = There's already a {$choice} built!
+rmc-xeno-construction-unique-exists = There's already a {$choice} built!
+rmc-xeno-construction-hive-limit-met = We have reached the limit of {$choice} the hive can support!
 rmc-xeno-cant-build-new-yet = We can't build a new {$choice} yet!
 
 # Evolve
