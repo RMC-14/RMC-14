@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Added undershirts and underwear markings, check your Marking customization
-      menu!
-    type: Add
-  id: 532
-  time: '2024-08-08T00:40:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3499
 - author: gorillagaming
   changes:
   - message: The selected planet now updates correctely
@@ -4972,5 +4964,13 @@
   id: 1031
   time: '2024-11-29T04:39:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4970
+- author: DummeHytteOst
+  changes:
+  - message: XOs have been given a coat, senior command headset, Leather satchle,
+      and the MP radio channel.
+    type: Add
+  id: 1032
+  time: '2024-11-29T05:04:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4977
 Name: RMC14
 Order: -1
