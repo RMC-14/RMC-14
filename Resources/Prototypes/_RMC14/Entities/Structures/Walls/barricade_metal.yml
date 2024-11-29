@@ -168,7 +168,6 @@
     tags:
     - RMCMetalBarricade
 
-
 # Metal Barricade Upgrades
 - type: entity
   parent: CMBarricadeMetal
