@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added Mazy 'The Fortress' Tusji figurine.
-    type: Add
-  id: 544
-  time: '2024-08-11T03:52:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3613
 - author: Vermidia
   changes:
   - message: Larva and parasites can no longer nest hosts
@@ -4969,5 +4962,22 @@
   id: 1043
   time: '2024-11-30T07:37:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4985
+- author: Vermidia
+  changes:
+  - message: Fixed Humanoids being slower than intended when unarmored. Armor speeds
+      have mostly not changed.
+    type: Fix
+  - message: Slowing effects caused by Xenos should slow marines more (they weren't
+      slowing enough before).
+    type: Fix
+  - message: Fixed IMP ammo rack slowing marines down more than intended.
+    type: Fix
+  - message: Bodybags and stasis bags slow on drag.
+    type: Fix
+  - message: Fix bonechips slowing the wrong amount.
+    type: Fix
+  id: 1044
+  time: '2024-11-30T07:41:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4931
 Name: RMC14
 Order: -1
