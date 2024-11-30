@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: crystalHex
-  changes:
-  - message: Fixed being able to use nightvision items in pockets.
-    type: Fix
-  id: 548
-  time: '2024-08-13T01:05:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3612
 - author: MACMAN2003
   changes:
   - message: Fixed a pixel offset on the welder chestrig.
@@ -4979,5 +4972,18 @@
   id: 1047
   time: '2024-11-30T12:14:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4989
+- author: DoguhanOzgurAkca
+  changes:
+  - message: Changed the MK80, M1984, M44 and M77 sidearms in XO vendor to come with
+      belts and ammunition.
+    type: Add
+  - message: Added descriptions to the DDC vendor first-aid pouches.
+    type: Fix
+  - message: Adding the sidearm ammunition tab to CO vendor which currently only has
+      Mateba speedloader.
+    type: Fix
+  id: 1048
+  time: '2024-11-30T13:11:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4796
 Name: RMC14
 Order: -1
