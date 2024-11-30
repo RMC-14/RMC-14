@@ -1,23 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed being able to attack or shoot while lying down. This includes beds
-      and roller beds.
-    type: Fix
-  - message: You now drop your items when lying down. Remember to holster your gun,
-      or grab the marine's gun if you are a corpsman.
-    type: Fix
-  id: 537
-  time: '2024-08-08T02:59:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3584
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenonids being able to build resin structures on top of nested
-      marines.
-    type: Fix
-  id: 538
-  time: '2024-08-08T12:13:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3585
 - author: Dutch-VanDerLinde
   changes:
   - message: The ghostrole for larvae will now appear 20 seconds before the host bursts
@@ -4970,5 +4951,19 @@
   id: 1036
   time: '2024-11-29T08:34:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4971
+- author: Sigil
+  changes:
+  - message: Fixed the smartgun being able to PB.
+    type: Fix
+  id: 1037
+  time: '2024-11-30T05:52:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4944
+- author: PolarTundraa
+  changes:
+  - message: Allowed Vulpkanin to use gauze/scar markings
+    type: Add
+  id: 1038
+  time: '2024-11-30T05:53:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4972
 Name: RMC14
 Order: -1
