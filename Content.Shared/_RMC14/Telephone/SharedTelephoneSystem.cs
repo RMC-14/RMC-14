@@ -178,6 +178,13 @@ public abstract class SharedTelephoneSystem : EntitySystem
             return;
         }
 
+        // Emit the popup on a successful call.
+        // Check for the marine component cause we don't want walls calling phones.
+        if (TryComp<MarineComponent>(user, out var marine) && TryComp<MetaDataComponent>(user, out var meta))
+        {
+            _popup.PopupEntity($"{meta.EntityName} dials a number on the rotary phone.", ent);
+        }
+
         ent.Comp.Idle = false;
         ent.Comp.LastCall = time;
         Dirty(ent);
