@@ -48,12 +48,6 @@
     plasma: 600
     maxPlasma: 600
     plasmaRegenOnWeeds: 4.5
-  - type: Tackle
-    min: 3
-    max: 4
-    stunMin: 4
-    stunMax: 5
-    chance: 0.4
   - type: XenoAcid
   - type: CMArmor
     armor: 25
