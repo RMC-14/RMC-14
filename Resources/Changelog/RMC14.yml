@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added Astor Debb figurine.
-    type: Add
-  id: 542
-  time: '2024-08-11T01:03:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3602
-- author: Rainbeon
-  changes:
-  - message: Fixed Spitter/Boiler's Spray Acid ability not costing plasma to use.
-      It now correctly costs 40 plasma.
-    type: Fix
-  id: 543
-  time: '2024-08-11T01:08:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3605
 - author: DrSmugleaf
   changes:
   - message: Added Mazy 'The Fortress' Tusji figurine.
@@ -4970,5 +4955,19 @@
   id: 1041
   time: '2024-11-30T07:32:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4974
+- author: CyberTropic
+  changes:
+  - message: Added nailgun repair functionality.
+    type: Add
+  id: 1042
+  time: '2024-11-30T07:37:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4979
+- author: DummeHytteOst
+  changes:
+  - message: Xenos can't burn them self on lights anymore.
+    type: Fix
+  id: 1043
+  time: '2024-11-30T07:37:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4985
 Name: RMC14
 Order: -1
