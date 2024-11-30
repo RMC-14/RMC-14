@@ -231,5 +231,11 @@
   text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPNONModDepartment.xml"
   priority: 4
 
+
+# NON-Modifiable Deployment Restrictions
   #- The Chief Engineer may deploy to the FOB if there is an Auxillary Support Officer on board, but still requires permission from them or the [color=#008000][bold]Commander[/bold][/color]. In the absence of an ASO, the Chief Engineer must remain aboard the ship.
   #- They may deploy with the purpose of building the FOB, and securing telecommunications, but must leave if these areas are no longer considered secure.
+
+  #- CIC personnel may request up to three volunteers from the MILPOL to be deployed to the FOB and secure areas to protect deployed shipside crew. This is unrelated to COMOFF escorts, and can be overridden by either higher ranking personnel or the COMMANDER.
+  #- At least one MILPOL must remain on the ship at all times. If the CHIEFMP is present, it must be them.
+  #- The Warden may deploy to perform requested arrests in the absence of MILPOL officers, but should otherwise remain on the ship.
