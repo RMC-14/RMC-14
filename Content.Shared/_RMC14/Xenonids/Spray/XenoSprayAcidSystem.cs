@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Chemistry;
+﻿using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Map;
@@ -48,6 +49,8 @@ public sealed class XenoSprayAcidSystem : EntitySystem
         SubscribeLocalEvent<SprayAcidedComponent, MapInitEvent>(OnSprayAcidedMapInit);
         SubscribeLocalEvent<SprayAcidedComponent, ComponentRemove>(OnSprayAcidedRemove);
         SubscribeLocalEvent<SprayAcidedComponent, VaporHitEvent>(OnSprayAcidedVaporHit);
+
+        SubscribeLocalEvent<XenoAcidSplatterComponent, ExtinguishFireAttemptEvent>(OnAcidSplatterExtinguishFireAttempt);
     }
 
     private void OnSprayAcidAction(Entity<XenoSprayAcidComponent> xeno, ref XenoSprayAcidActionEvent args)
@@ -115,6 +118,12 @@ public sealed class XenoSprayAcidSystem : EntitySystem
         }
     }
 
+    private void OnAcidSplatterExtinguishFireAttempt(Entity<XenoAcidSplatterComponent> ent, ref ExtinguishFireAttemptEvent args)
+    {
+        if (ent.Comp.Xeno == args.Target)
+            args.Cancelled = true;
+    }
+
     private void TryAcid(Entity<XenoSprayAcidComponent> acid, RMCAnchoredEntitiesEnumerator anchored)
     {
         while (anchored.MoveNext(out var uid))
@@ -152,6 +161,10 @@ public sealed class XenoSprayAcidSystem : EntitySystem
                     continue;
 
                 var spawned = Spawn(active.Acid, acid.Coordinates);
+                var splatter = EnsureComp<XenoAcidSplatterComponent>(spawned);
+                splatter.Xeno = uid;
+                Dirty(spawned, splatter);
+
                 if (_xenoSprayAcidQuery.TryComp(uid, out var xenoSprayAcid))
                 {
                     var spray = new Entity<XenoSprayAcidComponent>(uid, xenoSprayAcid);

@@ -101,7 +101,7 @@
       falloff: 1
   - type: RMCProjectileAccuracy
     accuracy: 95
-  # todo rmc14 add burning
+  - type: IgniteOnProjectileHit
 
 - type: entity
   parent: CMPelletShotgunBase
@@ -159,11 +159,12 @@
   parent: CMPelletShotgunBuckshot
   id: CMPelletShotgunIncendiaryBuckshot
   name: incendiary buckshot shell
-  components: # TODO RMC14 add burning
+  components:
   - type: ProjectileSpread
     proto: CMPelletShotgunIncendiaryBuckshot
     count: 4
     spread: 20
+  - type: IgniteOnProjectileHit
 
 - type: entity
   parent: CMPelletShotgunBase

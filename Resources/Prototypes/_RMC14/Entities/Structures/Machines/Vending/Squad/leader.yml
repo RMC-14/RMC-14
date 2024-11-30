@@ -103,8 +103,8 @@
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
         points: 18
-    #- id: CMM40HIDPIncendiaryPacketx3
-    #  points: 18
+      - id: RMCPacketGrenadeIncendiaryFilled
+        points: 18
     #- id: CMM40HPDPWhitePhosphorusPacketx3
     #  points: 18
       - id: RMCPacketGrenadeSmokeFilled

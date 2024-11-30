@@ -67,8 +67,8 @@
       #  amount: 4
       - id: CMGrenadeHighExplosive
         amount: 25
-      #- id: M40 HIDP Incendiary Grenade
-      #  amount: 4
+      - id: RMCGrenadeIncendiary
+        amount: 4
       #- id: M40 HPDP White Phosphorus Smoke Grenade
       #  amount: 4
       - id: CMGrenadeSmoke

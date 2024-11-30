@@ -701,7 +701,7 @@ public abstract partial class SharedGunSystem : EntitySystem
                     var newuid = Spawn(ammoSpreadComp.Proto, fromEnt);
                     ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, gunUid, user);
                     shotProjectiles.Add(newuid);
-                    MarkPredicted(newuid, i + 1);
+                    MarkPredicted(newuid, i);
                 }
             }
             else
