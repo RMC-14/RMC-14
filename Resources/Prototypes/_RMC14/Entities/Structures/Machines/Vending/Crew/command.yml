@@ -103,8 +103,8 @@
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
-      - id: CMArmorM4 # TODO: Port Officer Armour
-      - id: ArmorHelmetM10 # TODO: Port Officer Helmet
+      - id: RMCArmorM3SO
+      - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
       - id: CMHandsBlackMarine
       - id: CMMRE
@@ -401,9 +401,9 @@
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
-      - id: CMArmorM4 # TODO: Port CO Armour
-      - id: ArmorHelmetM10 # TODO: Port CO Helmet
-      - id: CMHandsBlackMarine # TODO: Port CO Gloves
+      - id: RMCArmorM3CO
+      - id: CMArmorHelmetM10CO
+      - id: RMCHandsCOGloves
       - id: CMBootsBlackFilled
     - name: Accessories
       choices: { CMAccessories: 1 }
@@ -616,8 +616,8 @@
     - name: Combat Equipment
       takeAll: CMEquipment
       entries:
-      - id: CMArmorM4 # TODO: Port Officer Armour
-      - id: ArmorHelmetM10 # TODO: Port Officer Helmet
+      - id: RMCArmorM3SO
+      - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
       - id: CMHandsBlackMarine
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
