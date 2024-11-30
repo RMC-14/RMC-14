@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added Chad Scott, Worships-The-Gods figurines
-    type: Add
-  id: 551
-  time: '2024-08-16T03:24:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3670
 - author: Dutch-VanDerLinde
   changes:
   - message: Added xeno speech sounds
@@ -5038,5 +5031,12 @@
   id: 1050
   time: '2024-11-30T22:05:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4996
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the M54C folding stock do-after cancelling when you move
+    type: Fix
+  id: 1051
+  time: '2024-11-30T23:06:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4991
 Name: RMC14
 Order: -1
