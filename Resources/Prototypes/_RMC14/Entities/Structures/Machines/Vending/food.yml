@@ -73,7 +73,7 @@
         amount: 5
       - id: RMCDrinkAlcoholWhiskey
         amount: 5
-      - id: RMCDrinkAlcoholWine
+      - id: RMCDrinkAlcoholPurpleWine
         amount: 5
       - id: RMCDrinkAlcoholMelonLiquor
         amount: 2
