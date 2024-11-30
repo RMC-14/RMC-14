@@ -277,3 +277,76 @@
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
+
+- type: entity
+  parent: CMWebbing
+  id: RMCToolWebbingSmall
+  name: small tool webbing
+  description: A brown synthcotton webbing that is similar in function to civilian tool aprons, but is more durable for field usage. This is the small low-budget version.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,11,1 #6 slots
+    whitelist:
+      tags:
+      - Crowbar
+      - Screwdriver
+      - Wirecutter
+      - Wrench
+      - CableCoil
+      - Multitool
+      - PowerCell
+      # TODO nailgun
+      components:
+      - Welder
+      - PowerCell
+      - EntrenchingTool
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - EntrenchingTool
+      - LightReplacer
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,11,1 #6 slots
+      whitelist:
+        tags:
+        - Crowbar
+        - Screwdriver
+        - Wirecutter
+        - Wrench
+        - CableCoil
+        - Multitool
+        - PowerCell
+        # TODO nailgun
+        components:
+        - Welder
+        - PowerCell
+        - EntrenchingTool
+    - type: FixedItemSizeStorage
+    - type: IgnoreContentsSize
+      items:
+        components:
+        - EntrenchingTool
+        - LightReplacer
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+
+- type: entity
+  parent: RMCToolWebbingSmall
+  id: RMCToolWebbingSmallFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWrench
+    - id: CMWelder
+    - id: CMCrowbar
+    - id: CMWirecutter
+    - id: CMMultitool

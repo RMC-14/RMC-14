@@ -31,16 +31,15 @@
     - ActionXenoTailStab
     - ActionXenoAcidNormal
     - ActionXenoOrderConstruction
-    #    - ActionXenoDigTunnel
+    - ActionXenoDigTunnel
     - ActionXenoPlantWeeds
     - ActionXenoResinHole
-    #    - ActionXenoBurrow
-    #    - ActionXenoTremor
+    - ActionXenoBurrow
+    - ActionXenoTremor
     - ActionXenoDevolve
     tier: 2
     hudOffset: 0,0.56
     unlockAt: 420 # 7 minutes
-    hidden: true # TODO RMC: remove when burrower is implemented
   - type: XenoLight
   - type: XenoDevolve
     devolvesTo:
@@ -54,6 +53,14 @@
     armor: 25
     explosionArmor: 40
   - type: XenoDevour
+  - type: XenoStomp
+    selfEffect: CMEffectSelfStomp
+    shortRange: 0
+    range: 6
+    plasmaCost: 100
+    paralyzeTime: 2
+    sound: /Audio/_RMC14/Xeno/alien_footstep_charge1.ogg
+  - type: XenoBurrow
   - type: MeleeWeapon
     damage:
       groups:

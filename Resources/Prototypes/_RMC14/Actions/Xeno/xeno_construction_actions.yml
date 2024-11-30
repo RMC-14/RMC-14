@@ -142,3 +142,18 @@
   - type: InstantAction
     event: !type:XenoFruitPlantActionEvent
       plasmaCost: 50
+
+- type: entity
+  id: ActionXenoDigTunnel
+  parent: ActionXenoBase
+  name: Dig Tunnel (200)
+  description: Dig a tunnel for speedy transportation across the hive.
+  components:
+  - type: InstantAction
+    event: !type:XenoDigTunnelActionEvent
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: build_tunnel
+    useDelay: 300
+
