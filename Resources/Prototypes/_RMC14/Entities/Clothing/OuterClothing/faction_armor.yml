@@ -14,8 +14,8 @@
     bio: 15 # CLOTHING_ARMOR_MEDIUMLOW
     explosionArmor: 40 # CLOTHING_ARMOR_VERYHIGH
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
-    walkModifier: 0.814
-    sprintModifier: 0.814
+    walkModifier: 0.725
+    sprintModifier: 0.725
   - type: Storage
     grid:
     - 0,0,7,1 # 4 slots
@@ -76,8 +76,8 @@
     bio: 20
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
-    walkModifier: 0.814
-    sprintModifier: 0.814
+    walkModifier: 0.725
+    sprintModifier: 0.725
 
 # Freelancer
 - type: entity
@@ -93,8 +93,8 @@
     bio: 15
     explosionArmor: 20
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
-    walkModifier: 0.814
-    sprintModifier: 0.814
+    walkModifier: 0.725
+    sprintModifier: 0.725
   - type: ExplosionResistance
     damageCoefficient: 0
     worn: false
@@ -119,8 +119,8 @@
     armor: 18 # CLOTHING_ARMOR_MEDIUM (melee); CLOTHING_ARMOR_MEDIUMLOW (bullets)
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
-    walkModifier: 0.814
-    sprintModifier: 0.814
+    walkModifier: 0.725
+    sprintModifier: 0.725
   - type: WieldSlowdownCompensation
     walk: 0.12
     sprint: 0.198
@@ -194,8 +194,8 @@
     bio: 20
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
-    walkModifier: 0.814
-    sprintModifier: 0.814
+    walkModifier: 0.725
+    sprintModifier: 0.725
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
@@ -267,8 +267,8 @@
     bio: 20
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
-    walkModifier: 0.897
-    sprintModifier: 0.897
+    walkModifier: 0.725
+    sprintModifier: 0.725
 
 - type: entity
   parent: RMCArmorPMCRiot
@@ -299,8 +299,8 @@
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
     bio: 10 # CLOTHING_ARMOR_LOW
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_HEAVY
-    walkModifier: 0.68
-    sprintModifier: 0.68
+    walkModifier: 0.62
+    sprintModifier: 0.62
 
 - type: entity
   parent: RMCArmorCBRN

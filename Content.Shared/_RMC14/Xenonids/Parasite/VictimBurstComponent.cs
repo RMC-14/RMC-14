@@ -1,6 +1,5 @@
 ﻿using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
-using static Robust.Shared.Utility.SpriteSpecifier;
 
 namespace Content.Shared._RMC14.Xenonids.Parasite;
 
@@ -9,8 +8,17 @@ namespace Content.Shared._RMC14.Xenonids.Parasite;
 public sealed partial class VictimBurstComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public Enum BurstLayer = VictimInfectedLayer.Burst;
+    public BurstVisualState State = BurstVisualState.Bursting;
 
     [DataField, AutoNetworkedField]
-    public SpriteSpecifier BurstSprite = new Rsi(new ResPath("/Textures/_RMC14/Effects/burst.rsi"), "bursted_stand");
+    public Enum Layer = BurstLayer.Base;
+
+    [DataField, AutoNetworkedField]
+    public ResPath BurstPath = new("/Textures/_RMC14/Effects/burst.rsi");
+
+    [DataField, AutoNetworkedField]
+    public string BurstState = "bursted_stand";
+
+    [DataField, AutoNetworkedField]
+    public string BurstingState = "burst_stand";
 }

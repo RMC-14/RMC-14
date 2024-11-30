@@ -35,7 +35,7 @@
         amount: 50
       #- id: CMWeaponFlareM82F
       #  amount: 20
-    - name: Restricted Sidearms
+    - name: Restricted Firearms
       entries:
       - id: RMCMK80Case
         amount: 4

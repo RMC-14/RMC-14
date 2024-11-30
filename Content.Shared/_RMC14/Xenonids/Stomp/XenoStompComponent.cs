@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
@@ -27,10 +27,10 @@ public sealed partial class XenoStompComponent : Component
     public float Range = 2;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId SelfEffect = "CMEffectSelfStomp";
+    public EntProtoId? SelfEffect;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId Effect = "CMEffectStomp";
+    public EntProtoId? Effect;
 
     // TODO RMC14 bang.ogg
     [DataField, AutoNetworkedField]

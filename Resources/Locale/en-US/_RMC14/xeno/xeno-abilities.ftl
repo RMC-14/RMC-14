@@ -190,11 +190,34 @@ rmc-xeno-resin-surge-wall-others = {CAPITALIZE(THE($xeno))} surges the resin, cr
 rmc-xeno-resin-surge-sticky-self = We surge the deep resin, creating an unstable sticky resin patch!
 rmc-xeno-resin-surge-sticky-others = {CAPITALIZE(THE($xeno))} surges deep resin, creating an unstable sticky resin patch!
 
+# Burrow
+rmc-xeno-burrow-down-start = We begin burrowing ourselves into the ground.
+rmc-xeno-burrow-down-failure-break = We stop burrowing.
+rmc-xeno-burrow-down-failure-bad-area = There's no way to burrow here.
+rmc-xeno-burrow-down-failure-rest = We cannot burrow while resting!
+rmc-xeno-burrow-down-finish = We burrow ourselves into the ground.
+
+rmc-xeno-burrow-resurface-cooldown-finish = We can now surface.
+rmc-xeno-burrow-move-cooldown-finish = We can now tunnel while burrowed.
+
+rmc-xeno-burrow-move-start = We start tunneling!
+rmc-xeno-burrow-move-failure = There's no way to tunnel over there.
+rmc-xeno-burrow-move-failure-solid = We can't tunnel into a solid wall!
+rmc-xeno-burrow-move-failure-bad-area = There's no way to tunnel over there.
+rmc-xeno-burrow-move-failure-coolown = We must wait some time to do this.
+rmc-xeno-burrow-move-finish = We tunnel to the target.
+
+rmc-xeno-burrow-failure-space = We make tunnels, not wormholes
+
 # For The Hive!
 rmc-xeno-for-the-hive-container = It is too cramped in here to activate this!
 rmc-xeno-for-the-hive-cancel = We remove all our explosive acid before it combusted.
 rmc-xeno-for-the-hive-activate = Our stomach starts turning and twisting, getting ready to compress the built up acid.
 rmc-xeno-for-the-hive-announce = ;FOR THE HIVE!!!
+
+rmc-xeno-for-the-hive-respawn-fail = You couldn't reincarnate!
+rmc-xeno-for-the-hive-respawn-corpse-self = The hive has no core! We manage to emerge from our old husk as a larva!
+rmc-xeno-for-the-hive-respawn-corpse-others = A larva suddenly emerges from a dead husk!
 
 # Generic Respawn
 rmc-xeno-respawn-fail = You couldn't reincarnate!
@@ -225,3 +248,16 @@ rmc-xeno-sacrifice-heal-target-full-health-failure = {$target_xeno} is already a
 
 rmc-xeno-sacrifice-heal-target-announcement = {$healer_xeno} sacrifices itself to heal {$target_xeno}!
 rmc-xeno-sacrifice-heal-target-enviorment = {$healer_xeno} explodes in a deluge of regenerative resin salve, covering {$target_xeno} in it!
+
+# Dodge
+rmc-xeno-dodge-self = We can now weave through our enemies!
+rmc-xeno-dodge-end = We can no longer weave through our enemies!
+
+# Vanguard Shield
+rmc-xeno-shield-vanguard-hit = Our shield took the hit!
+rmc-xeno-shield-vanguard-regen = We feel our defensive shell regenerate! It'll block one hit!
+rmc-xeno-shield-vanguard-break = We feel our defensive shell shatter!
+
+# Toggle Cleave
+rmc-xeno-toggle-cleave-root = We will now root our enemies with our cleave.
+rmc-xeno-toggle-cleave-fling = We will now throw our enemies with our cleave.
