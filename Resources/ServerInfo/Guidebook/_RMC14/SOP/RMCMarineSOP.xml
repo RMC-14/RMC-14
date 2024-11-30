@@ -2,7 +2,7 @@
   # Standard Operating Procedure
 
   ## Commanding Officer Privileges
-  - The [color=#00CBFE][bold]Commanding Officer[/bold][/color] may alter any aspect of SOP (unless otherwise noted) as long as these changes do not contridict marine law.
+  - The [color=#00CBFE][bold]Commanding Officer[/bold][/color] may alter any aspect of SOP (unless otherwise noted) as long as these changes do not contridict marine law. They may not modify marine law.
   - Should there be any concerns about the use of this privilege, any personnel may contact [color=#ffa500][bold]Provost Marshal Office[/bold][/color] to inquire about the legitimacy of changes and request they be overturned.
   - [color=#ff000d][bold]MP[/bold][/color] must be informed of any changes made to SOP before it is implemented.
   - The SOP may not be modified to the extent of causing grief or physically burdening marines. Modifications such as walking only, or modifing SOP to imprison a marine for a custom offence with malicious intent is not permitted.
@@ -12,9 +12,7 @@
   - [textlink="General Regulations" link="RMCMarineSOPGeneral"]
   - [textlink="Equipment" link="RMCMarineSOPEquipment"]
   - [textlink="Department" link="RMCMarineSOPDepartment"]
-  - [textlink="NON-Modifiable Department" link="RMCMarineSOPNONModDepartment"]
-  - [textlink="NON-Modifiable SOP" link=""]
-  - [textlink="NON-Modifiable Command SOP" link=""]
-  - [textlink="NON-Modifiable Deployment Restrictions" link=""]
+  - [textlink="NON-Modifiable SOP" link="RMCMarineSOPNONMod"]
+
 
 </Document>

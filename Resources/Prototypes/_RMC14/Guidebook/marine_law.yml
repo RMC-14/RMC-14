@@ -197,7 +197,7 @@
   - RMCMarineSOPGeneral
   - RMCMarineSOPEquipment
   - RMCMarineSOPDepartment
-  - RMCMarineSOPNONModDepartment
+  - RMCMarineSOPNONMod
 
 # General Regulations
 - type: guideEntry
@@ -223,16 +223,32 @@
   text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPDepartment.xml"
   priority: 3
 
+# NON-Modifiable
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineSOPNONMod
+  name: rmc-guide-entry-rules-marine-sop-nonmod
+  text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPNONMod.xml"
+  priority: 4
+  children:
+  - RMCMarineSOPNONModDepartment
+
 # NON-Modifiable Department Regulations
 - type: guideEntry
   parent: RMC
   id: RMCMarineSOPNONModDepartment
   name: rmc-guide-entry-rules-marine-sop-nonmod-department
   text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPNONModDepartment.xml"
-  priority: 4
+  priority: 1
 
 
 # NON-Modifiable Deployment Restrictions
+
+  #- The COMMANDER and COMOFF have the right to deploy to command troops from a direct point of view.
+  #- Deployments should be done for the sake of ordering the troops and not for personal glory or objectives.
+  #- DUTYOFF are not given this right.
+  # more info in deployment prerequisites and conditions, and frontline command
+
   #- The Chief Engineer may deploy to the FOB if there is an Auxillary Support Officer on board, but still requires permission from them or the [color=#008000][bold]Commander[/bold][/color]. In the absence of an ASO, the Chief Engineer must remain aboard the ship.
   #- They may deploy with the purpose of building the FOB, and securing telecommunications, but must leave if these areas are no longer considered secure.
 
