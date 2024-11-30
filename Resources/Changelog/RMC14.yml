@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added Dalton Harris figurine.
-    type: Add
-  id: 550
-  time: '2024-08-13T01:24:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3640
 - author: Whisper
   changes:
   - message: Added Chad Scott, Worships-The-Gods figurines
@@ -4996,5 +4989,54 @@
   id: 1049
   time: '2024-11-30T13:31:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4987
+- author: DrSmugleaf
+  changes:
+  - message: Added fire, incendiary ammo, mortar, ob, grenades, molotovs, but not
+      flamers yet. Green fire slows down anyone inside and halves the armor of xenos
+      inside. Moving through fire deals additional damage. Both marines and xenos
+      can put out fires on teammates. Marines can use fire extinguishers to put out
+      fires, and xenos can buy out fires by clicking on them.
+    type: Add
+  - message: 'Added molotov crafting:'
+    type: Add
+  - message: Added swapping battieres on APCs.
+    type: Add
+  - message: Added scaling vendor contents depending on the total amount of marines.
+      The current available items are the minimum used.
+    type: Add
+  - message: Added vendors increasing the amount of items that they have with late-joins.
+    type: Add
+  - message: Ported some alcohols.
+    type: Add
+  - message: Added a 25x HEDP crate to Requisitions for $10000.
+    type: Add
+  - message: Added Carlo Miguel and Emily 'Klutz' Rathen figurines.
+    type: Add
+  - message: Fixed humanoids not having an additional 25 crit health (125 > 150).
+    type: Fix
+  - message: Fixed being able to put armed grenades into storages.
+    type: Fix
+  - message: Fixed a visual bug wheere bullets looked as if they were blocked by acid
+      splatters.
+    type: Fix
+  - message: Fixed a visual bug where shotguns looked as if they shot an additional
+      delayed shot.
+    type: Fix
+  - message: Fixed taking over a xeno ghost role not updating its name.
+    type: Fix
+  - message: Fixed the M54CE2 and XM88 not coming loaded.
+    type: Fix
+  - message: Fixed comms towers being toggleable by xenos.
+    type: Fix
+  - message: Fixed comms towers being too resistant too damage.
+    type: Fix
+  - message: Fixed Kutjevo Refinery not having a round-start announcement.
+    type: Fix
+  - message: Updated the Booze-o-Mat to have RMC-specific alcohol. More to be ported
+      later.
+    type: Tweak
+  id: 1050
+  time: '2024-11-30T22:05:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4996
 Name: RMC14
 Order: -1
