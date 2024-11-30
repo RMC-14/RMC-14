@@ -423,18 +423,18 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     private void OnFinishMoveThroughTunnel(Entity<XenoTunnelComponent> destinationXenoTunnel, ref TraverseXenoTunnelDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled)
-        {
             return;
-        }
+
         var (ent, comp) = destinationXenoTunnel;
         var traversingXeno = args.User;
         var startingTunnel = args.Used!.Value;
 
         // If the xeno leaves the tunnel, prevent teleportation
         if (!_container.ContainsEntity(startingTunnel, traversingXeno))
-        {
             return;
-        }
+
+        if (_transform.GetMap(startingTunnel) != _transform.GetMap(destinationXenoTunnel.Owner))
+            return;
 
         var mobContainer = _container.EnsureContainer<Container>(ent, XenoTunnelComponent.ContainedMobsContainerId);
         if (mobContainer.Count >= comp.MaxMobs)
