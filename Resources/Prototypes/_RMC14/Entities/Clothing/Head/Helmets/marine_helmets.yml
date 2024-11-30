@@ -34,14 +34,31 @@
 
 - type: entity
   parent: ArmorHelmetM10
+  id: RMCArmorHelmetM10SO
+  name: M10 pattern officer helmet
+  description: A special variant of the M10 Pattern Helmet worn by Officers of the UNMC, attracting the attention of the grunts and sniper fire alike.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/officer/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/officer/jungle.rsi
+
+- type: entity
+  parent: ArmorHelmetM10
   id: CMArmorHelmetM10CO
-  name: M10 helmet CO
-  description: A special variant of the M10 Pattern Helmet worn by the Commanding Officer of the Marines.
+  name: M10 pattern commanding officer helmet
+  description: A special M10 Pattern Helmet worn by Commanding Officers of the UNMC. It reads on the label, 'The difference between an open-casket and closed-casket funeral. Wear on head for best results.'.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/co.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/co.rsi
+  - type: CMArmor
+    armor: 30
+    bio: 25
+    explosionArmor: 10 #same as base m10 helmet
+    #todo RMC: melee armor: 25
+    #todo RMC: energy armor: 15
 
 - type: entity
   parent: ArmorHelmetM10

@@ -118,6 +118,49 @@
 
 - type: entity
   parent: CMBeltUtility
+  id: RMCBeltConstruction
+  name: M277 pattern construction rig
+  description: The M277 is a common rig used by Combat Technicians to carry around materials and other supplies. It consists of a modular belt with various clips. This version sacrifices storage space for specialized material loading clips.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,11,1 # 6 slots
+    whitelist:
+      tags:
+      - Crowbar
+      - Screwdriver
+      - Wirecutter
+      - Wrench
+      - CableCoil
+      - Multitool
+      - Flashlight
+      - PowerCell
+      - CMFireExtinguisherPortable
+      - RMCExplosiveBreachingCharge
+#     - # TODO nailgun, circuit board, plastic explosives, stock parts
+      components:
+      - Welder
+      - PowerCell
+      - TrayScanner
+      - GasAnalyzer
+      - LightReplacer
+      - EntrenchingTool
+      - BarbedWire
+      - Material
+      - Sentry
+      - EmptySandbag
+      - FullSandbag
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - EntrenchingTool
+      - LightReplacer
+      - Material
+      - Sentry
+      - FullSandbag
+
+- type: entity
+  parent: CMBeltUtility
   id: CMBeltUtilityCombat
   name: M276 pattern combat toolbelt rig
   description: The M276 pattern combat toolbelt rig is an alternative load-bearing equipment of the UNMC for engineers conducting repairs within combat zones. It consists of a modular belt with various clips and pouches for tools along with a holster for a sidearm. Due to the bulk of the sidearm, it is unable to hold as many tools as its standard counterpart.
@@ -813,6 +856,50 @@
     - id: RMCSpeedLoaderMateba
       amount: 5
     - id: RMCWeaponRevolverMateba
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCMK80BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolMK80
+      amount: 6
+    - id: CMWeaponPistolMK80
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCM1984BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM1984
+      amount: 6
+    - id: CMWeaponPistolM1984
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: CMM77BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM77AP
+      amount: 6
+    - id: CMWeaponPistolM77
+
+- type: entity
+  parent: RMCBeltHolsterRevolver
+  id: RMCM44BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderM44
+      amount: 6
+    - id: RMCWeaponRevolverM44
 
 - type: entity
   parent: CMBeltBaseStorage

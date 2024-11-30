@@ -197,8 +197,8 @@
     - state: ammo_pack-0
       map: ["enum.StorageFillLayers.Fill"]
   - type: ClothingSpeedModifier
-    walkModifier: 0.7
-    sprintModifier: 0.7
+    walkModifier: 0.710
+    sprintModifier: 0.710
   - type: HeldSpeedModifier
   - type: StorageFillVisualizer
     fillBaseName: ammo_pack

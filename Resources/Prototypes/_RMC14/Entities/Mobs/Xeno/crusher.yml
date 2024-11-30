@@ -45,6 +45,8 @@
     damage:
       types:
         Blunt: 65
+    selfEffect: CMEffectSelfStomp
+    effect: CMEffectStomp
   - type: XenoCharge
     damage:
       types:

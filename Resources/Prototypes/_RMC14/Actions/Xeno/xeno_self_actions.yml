@@ -252,3 +252,20 @@
       state: prae_dodge
     event: !type:XenoDodgeActionEvent
     useDelay: 19
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoBurrow
+  name: Burrow
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: burrow
+    event: !type:XenoBurrowActionEvent
+    range: -1
+    repeat: true
+    deselectOnMiss: false
+    checkCanAccess : false
+  - type: ActionBlockIfResting
