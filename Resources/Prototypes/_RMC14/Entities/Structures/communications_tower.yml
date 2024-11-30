@@ -73,6 +73,10 @@
     channel: Equipment
   - type: Corrodible
     isCorrodible: false
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   abstract: true
