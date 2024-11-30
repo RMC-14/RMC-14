@@ -208,6 +208,8 @@
       - cost: 2000
         crate: RMCCrateMortarShellHE
       - cost: 2000
+        crate: RMCCrateMortarShellIncendiary
+      - cost: 2000
         crate: RMCCrateMortarShellFlare
 #    - name: Operations
 #      entries: []
