@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Larva and parasites can no longer nest hosts
-    type: Fix
-  - message: Xenos that can't put up parasites can no longer infect with them or put
-      them back into eggs by pulling them.
-    type: Fix
-  id: 545
-  time: '2024-08-13T00:42:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3638
 - author: coolmankid12345
   changes:
   - message: Marine icons and Xeno plasma/health for spectators to see
@@ -4979,5 +4969,15 @@
   id: 1044
   time: '2024-11-30T07:41:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4931
+- author: blueDev2
+  changes:
+  - message: Add Burrower, a xeno that can build tunnels and burrow into the ground
+      to ambush marines
+    type: Add
+  - message: Add Tunnels that xenos can use to fast travel across the map
+    type: Add
+  id: 1045
+  time: '2024-11-30T11:28:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4670
 Name: RMC14
 Order: -1
