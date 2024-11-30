@@ -157,14 +157,30 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/command.rsi
-    layers: # TODO RMC14 on sprite binoculars and tablet
+    layers:
     - state: cmateba
       map: [ "enum.CMHolsterLayers.Fill" ]
       visible: false
       offset: -0.19, 0
     - state: icon
+    - state: command_pouch_binos
+      map: ["command_pouch_binos"]
+      visible: false
+    - state: command_pouch_tablet
+      map: ["command_pouch_tablet"]
+      visible: false
     - state: closed
       map: [ "closedLayer" ]
+  - type: ItemMapper
+    mapLayers:
+      command_pouch_binos:
+        whitelist:
+          tags:
+          - Binoculars
+      command_pouch_tablet:
+        whitelist:
+          tags:
+          - CommandTablet
   - type: Storage
     maxItemSize: Normal
     grid:
