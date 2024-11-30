@@ -47,6 +47,8 @@ rmc-xeno-construction-tunnel-full-xeno-failure = The tunnel is too crowded, wait
 rmc-xeno-construction-tunnel-large-xeno-enter = We begin heaving our monstrous bulk into {$tunnelName}
 rmc-xeno-construction-tunnel-default-xeno-enter = We begin crawling down into {$tunnelName}
 
+rmc-xeno-construction-tunnel-xeno-immobile-failure = We cannot move at all!
+
 rmc-xeno-construction-no-map-tunnel = The ground isn't solid.
 rmc-xeno-construction-blocked-tunnel = There's something built here already.
 rmc-xeno-construction-bad-area = There's no way to burrow here.

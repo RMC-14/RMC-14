@@ -10,6 +10,7 @@ using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
@@ -43,6 +44,8 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly PlayerSystem _player = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     public int NextTempTunnelId
     { get; private set; }
     public override void Initialize()
@@ -291,6 +294,12 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             return;
         }
 
+        if (!_actionBlocker.CanMove(enteringEntity))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-xeno-immobile-failure"), enteringEntity, enteringEntity);
+            return;
+        }
+
         if (!TryComp(enteringEntity, out RMCSizeComponent? xenoSize))
         {
             return;
@@ -403,6 +412,13 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             return;
         }
 
+        if (!_actionBlocker.CanMove(enteringEntity))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-xeno-immobile-failure"), enteringEntity, enteringEntity);
+            return;
+        }
+
+
         _container.Insert(enteringEntity, mobContainer);
         EnsureComp<InXenoTunnelComponent>(enteringEntity);
         _ui.OpenUi(ent, SelectDestinationTunnelUI.Key, enteringEntity);
@@ -454,7 +470,10 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             Impact = LogImpact.Low,
         };
 
-        args.Verbs.Add(renameTunnelVerb);
+        if (_hive.FromSameHive(xenoTunnel.Owner, uid))
+        {
+            args.Verbs.Add(renameTunnelVerb);
+        }
     }
     private void GetAllAvailableTunnels(Entity<XenoTunnelComponent> destinationXenoTunnel, ref OpenBoundInterfaceMessage args)
     {
@@ -575,6 +594,11 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             return false;
         }
 
-        return TryPlaceTunnel(builder.Comp.Hive.Value, name, builder.Owner.ToCoordinates(), out tunnelEnt);
+        var hasPlacedTunnel = TryPlaceTunnel(builder.Comp.Hive.Value, name, builder.Owner.ToCoordinates(), out tunnelEnt);
+
+        if (tunnelEnt is EntityUid)
+            _hive.SetSameHive(builder.Owner, tunnelEnt.Value);
+
+        return hasPlacedTunnel;
     }
 }
