@@ -732,7 +732,7 @@
     blacklist:
       tags:
       - CMFirstAidKit # TODO RMC14
-  #      - EngineerKit # TODO RMC14
+      - RMCEngineerKit # TODO RMC14
   - type: Tag
     tags:
     - RMCG8Pouch
@@ -827,7 +827,7 @@
     blacklist:
       tags:
       - CMFirstAidKit # TODO RMC14
-  #      - EngineerKit # TODO RMC14
+      - RMCEngineerKit # TODO RMC14
   - type: Tag
     tags:
     - RMCMatebaHolster
