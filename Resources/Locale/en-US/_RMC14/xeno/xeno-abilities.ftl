@@ -217,3 +217,17 @@ rmc-xeno-for-the-hive-announce = ;FOR THE HIVE!!!
 rmc-xeno-for-the-hive-respawn-fail = You couldn't reincarnate!
 rmc-xeno-for-the-hive-respawn-corpse-self = The hive has no core! We manage to emerge from our old husk as a larva!
 rmc-xeno-for-the-hive-respawn-corpse-others = A larva suddenly emerges from a dead husk!
+
+# Dodge
+rmc-xeno-dodge-self = We can now weave through our enemies!
+rmc-xeno-dodge-end = We can no longer weave through our enemies!
+
+# Vanguard Shield
+rmc-xeno-shield-vanguard-hit = Our shield took the hit!
+rmc-xeno-shield-vanguard-regen = We feel our defensive shell regenerate! It'll block one hit!
+rmc-xeno-shield-vanguard-break = We feel our defensive shell shatter!
+
+# Toggle Cleave
+rmc-xeno-toggle-cleave-root = We will now root our enemies with our cleave.
+rmc-xeno-toggle-cleave-fling = We will now throw our enemies with our cleave.
+
