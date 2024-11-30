@@ -37,6 +37,7 @@ using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.CCVar;
@@ -1329,6 +1330,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         while (query.MoveNext(out var weeds, out _))
         {
             _hive.SetHive(weeds, hive);
+        }
+
+        var tunnelQuery = EntityQueryEnumerator<XenoTunnelComponent>();
+        while (tunnelQuery.MoveNext(out var uid, out _))
+        {
+            _hive.SetHive(uid, hive);
         }
     }
 }
