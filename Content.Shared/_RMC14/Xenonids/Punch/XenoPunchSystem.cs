@@ -81,13 +81,13 @@ public sealed class XenoPunchSystem : EntitySystem
             SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
     }
 
-    private void OnRefreshCleaveRooted(Entity<PunchSlowedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    private void OnPunchSlowRefresh(Entity<PunchSlowedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
         var modifier = ent.Comp.SlowAmount.Float();
         args.ModifySpeed(modifier, modifier);
     }
 
-    private void OnCleaveRootedRemoved(Entity<PunchSlowedComponent> ent, ref ComponentRemove args)
+    private void OnPunchSlowRemoved(Entity<PunchSlowedComponent> ent, ref ComponentRemove args)
     {
         if (!TerminatingOrDeleted(ent))
             _speed.RefreshMovementSpeedModifiers(ent);

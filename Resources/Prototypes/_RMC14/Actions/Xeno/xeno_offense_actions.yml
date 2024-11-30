@@ -548,7 +548,6 @@
       state: screech
     event: !type:XenoForTheHiveActionEvent
   
-
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoImpale
