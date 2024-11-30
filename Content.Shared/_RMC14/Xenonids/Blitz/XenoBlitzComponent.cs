@@ -8,11 +8,10 @@ namespace Content.Shared._RMC14.Xenonids.Blitz;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class XenoBlitzComponent : Component
 {
+    [DataField, AutoNetworkedField]
+    public int PlasmaCost = 50;
 
-	[DataField, AutoNetworkedField]
-	public int PlasmaCost = 50;
-
-	[DataField, AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public TimeSpan BaseUseDelay = TimeSpan.FromSeconds(0);
 
     [DataField, AutoNetworkedField]
