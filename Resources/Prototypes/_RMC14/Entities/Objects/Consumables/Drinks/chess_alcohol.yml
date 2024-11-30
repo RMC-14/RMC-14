@@ -3,9 +3,6 @@
   id: RMCDrinkAlcoholVodkaChess
   name: red star vodka
   description: A promotional chess themed bottle of Red Star Vodka.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/vodka.rsi
 
 - type: entity
   parent: RMCDrinkAlcoholVodkaChess

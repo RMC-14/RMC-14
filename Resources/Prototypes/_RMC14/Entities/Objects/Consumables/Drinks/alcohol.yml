@@ -198,7 +198,7 @@
   description: "Red Star Vodka: A staple of the enemy's diet. Who knew that liquid potato could smell this potent. The bottle reads, 'Ra Ra Red Star Man: Lover of the Finer Things.' Or at least that's what you assume...you can't read Russian."
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/vodka.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/red_star_vodka.rsi
   - type: SolutionContainerManager
     solutions:
       drink:
