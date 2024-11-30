@@ -871,14 +871,3 @@
     state: emily_klutz_rathen
   - type: PatronFigurine
     id: e8819228-95ea-4a3b-8e1c-0e7eaa55cb90
-
-- type: entity
-  parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronBeatriceBeaBootes
-  name: Beatrice 'Bea' Bootes figurine
-  description: ""
-  components:
-  - type: Sprite
-    state: beatrice_bea_bootes
-  - type: PatronFigurine
-    id: bb4d5e20-1aab-462d-aed4-d85454667d5c
