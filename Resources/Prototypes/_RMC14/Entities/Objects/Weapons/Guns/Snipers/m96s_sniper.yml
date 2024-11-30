@@ -238,8 +238,8 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 50
-        Heat: 10
+        Piercing: 100 # TODO RMC14 50 when aimed shot is in please someone help im dying
+        Heat: 20 # TODO RMC14 10 when aimed shot is in please someone help im dying
   - type: CMArmorPiercing
     amount: 20
   - type: IgniteOnProjectileHit
