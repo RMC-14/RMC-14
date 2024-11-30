@@ -12,8 +12,8 @@
     bio: 20
     explosionArmor: 15
   - type: ClothingSpeedModifier
-    walkModifier: 0.727
-    sprintModifier: 0.727
+    walkModifier: 0.666
+    sprintModifier: 0.666
   - type: ExplosionResistance
     damageCoefficient: 0
     worn: false
@@ -112,8 +112,8 @@
     walk: 0.12
     sprint: 0.198
   - type: ClothingSpeedModifier
-    walkModifier: 0.68
-    sprintModifier: 0.68
+    walkModifier: 0.62
+    sprintModifier: 0.62
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
@@ -247,8 +247,8 @@
   - type: CMArmor
     explosionArmor: 30
   - type: ClothingSpeedModifier # light armor speed
-    walkModifier: .814
-    sprintModifier: .814
+    walkModifier: .725
+    sprintModifier: .725
   - type: Corrodible
     isCorrodible: false
 
@@ -265,8 +265,8 @@
     bio: 15
     explosionArmor: 20
   - type: ClothingSpeedModifier
-    walkModifier: .814
-    sprintModifier: .814
+    walkModifier: .725
+    sprintModifier: .725
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
@@ -343,8 +343,8 @@
     bio: 15
     explosionArmor: 20
   - type: ClothingSpeedModifier
-    walkModifier: .814
-    sprintModifier: .814
+    walkModifier: .725
+    sprintModifier: .725
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
@@ -366,8 +366,8 @@
   - type: Corrodible
     isCorrodible: false
   - type: ClothingSpeedModifier # light armor speed
-    walkModifier: .814
-    sprintModifier: .814
+    walkModifier: .725
+    sprintModifier: .725
   - type: CMArmor
     armor: 25
   - type: Tag
@@ -466,8 +466,8 @@
   - type: Corrodible
     isCorrodible: false
   - type: ClothingSpeedModifier # light armor speed
-    walkModifier: .814
-    sprintModifier: .814
+    walkModifier: .725
+    sprintModifier: .725
   - type: GhillieSuit
     whitelist:
       components:
@@ -487,8 +487,8 @@
     grid:
     - 0,0,3,1 # 2 slots
   - type: ClothingSpeedModifier
-    walkModifier: .814
-    sprintModifier: .814
+    walkModifier: .725
+    sprintModifier: .725
   - type: ClothingBlockBackpack
   - type: SmartGunArmor
 
@@ -506,8 +506,8 @@
     bio: 15
     explosionArmor: 20
   - type: ClothingSpeedModifier
-    walkModifier: 0.814
-    sprintModifier: 0.814
+    walkModifier: 0.725
+    sprintModifier: 0.725
   - type: Storage
     maxItemSize: Small
     grid:
