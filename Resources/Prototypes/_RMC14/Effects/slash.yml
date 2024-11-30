@@ -13,3 +13,15 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+- type: entity
+  parent: WeaponArcClaw
+  id: RMCWeaponArcXenoClaw
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: Sprite
+    sprite: _RMC14/Effects/attacks.rsi
+    noRot: true
+    state: slash
