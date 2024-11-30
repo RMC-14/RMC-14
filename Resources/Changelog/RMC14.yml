@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: coolmankid12345
-  changes:
-  - message: Marine icons and Xeno plasma/health for spectators to see
-    type: Add
-  id: 546
-  time: '2024-08-13T00:51:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3340
-- author: Whisper
-  changes:
-  - message: Added Nesart Onan, updated Satoru Suzuki figurines.
-    type: Add
-  id: 547
-  time: '2024-08-13T00:51:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3615
 - author: crystalHex
   changes:
   - message: Fixed being able to use nightvision items in pockets.
@@ -4979,5 +4965,19 @@
   id: 1045
   time: '2024-11-30T11:28:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4670
+- author: TsjipTsjip
+  changes:
+  - message: Phones now make a popup including the name of who initiated the call.
+    type: Add
+  id: 1046
+  time: '2024-11-30T12:14:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4988
+- author: Rainbeon
+  changes:
+  - message: Turning into a Xeno strain no longer consumes points.
+    type: Fix
+  id: 1047
+  time: '2024-11-30T12:14:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4989
 Name: RMC14
 Order: -1
