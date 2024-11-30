@@ -125,7 +125,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
                     break;
 
                 case AltFireAttackType.Disarm:
-                    ClientDisarm(entity, mousePos, coordinates);
+                    ClientDisarm(entity, mousePos, coordinates, weapon);
                     break;
             }
 
@@ -138,7 +138,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
             // If it's an unarmed attack then do a disarm
             if (weapon.AltDisarm && weaponUid == entity)
             {
-                ClientDisarm(entity, mousePos, coordinates);
+                ClientDisarm(entity, mousePos, coordinates, weapon);
                 return;
             }
 
@@ -230,8 +230,13 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         RaisePredictiveEvent(new HeavyAttackEvent(GetNetEntity(meleeUid), entities.GetRange(0, Math.Min(MaxTargets, entities.Count)), GetNetCoordinates(coordinates)));
     }
 
-    private void ClientDisarm(EntityUid attacker, MapCoordinates mousePos, EntityCoordinates coordinates)
+    private void ClientDisarm(EntityUid attacker, MapCoordinates mousePos, EntityCoordinates coordinates, MeleeWeaponComponent meleeComponent)
     {
+        var attackerPos = TransformSystem.GetMapCoordinates(attacker);
+
+        if (mousePos.MapId != attackerPos.MapId || (attackerPos.Position - mousePos.Position).Length() > meleeComponent.Range)
+            return;
+
         EntityUid? target = null;
 
         if (_stateManager.CurrentState is GameplayStateBase screen)

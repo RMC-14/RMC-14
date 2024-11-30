@@ -1,8 +1,10 @@
 ﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
+using Content.Shared.Standing;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Timing;
 
@@ -14,6 +16,7 @@ public sealed class XenoEnergySystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly StandingStateSystem _stand = default!;
 
     public override void Initialize()
     {
@@ -31,19 +34,25 @@ public sealed class XenoEnergySystem : EntitySystem
             return;
 
         var isHit = false;
+        var isDown = false;
         foreach (var hit in args.HitEntities)
         {
             if (!_xeno.CanAbilityAttackTarget(xeno.Owner, hit))
                 continue;
 
+            if (xeno.Comp.IgnoreLateInfected && TryComp<VictimInfectedComponent>(hit, out var infect) && infect.CurrentStage >= infect.FinalSymptomsStart)
+                continue;
+
             isHit = true;
+            if (_stand.IsDown(hit))
+                isDown = true;
             break;
         }
 
         if (!isHit)
             return;
 
-        AddEnergy(xeno, xeno.Comp.GainAttack);
+        AddEnergy(xeno, (int) ( isDown ? xeno.Comp.GainAttackDowned : xeno.Comp.GainAttack));
     }
 
     private void OnXenoProjectileHitUser(Entity<XenoEnergyComponent> xeno, ref XenoProjectileHitUserEvent args)
@@ -77,7 +86,7 @@ public sealed class XenoEnergySystem : EntitySystem
     public void AddEnergy(Entity<XenoEnergyComponent> xeno, int energy, bool popup = true)
     {
         if (popup && xeno.Comp.Current < xeno.Comp.Max && energy > 0)
-            _popup.PopupClient(Loc.GetString("rmc-xeno-energy-increase-user"), xeno, xeno);
+            _popup.PopupClient(Loc.GetString(xeno.Comp.PopupGain), xeno, xeno);
 
         xeno.Comp.Current = Math.Min(xeno.Comp.Max, xeno.Comp.Current + energy);
         Dirty(xeno);
@@ -92,7 +101,7 @@ public sealed class XenoEnergySystem : EntitySystem
     {
         void DoPopup()
         {
-            var popup = Loc.GetString("rmc-xeno-not-enough-energy");
+            var popup = Loc.GetString(xeno.Comp != null ? xeno.Comp.PopupNotEnough : "rmc-xeno-not-enough-energy");
             if (predicted)
                 _popup.PopupClient(popup, xeno, xeno, PopupType.SmallCaution);
             else
@@ -143,7 +152,7 @@ public sealed class XenoEnergySystem : EntitySystem
         if (TryRemoveEnergy((xeno, xeno.Comp), energy))
             return true;
 
-        _popup.PopupClient(Loc.GetString("rmc-xeno-not-enough-energy"), xeno, xeno);
+        _popup.PopupClient(Loc.GetString(xeno.Comp.PopupNotEnough), xeno, xeno);
         return false;
     }
 

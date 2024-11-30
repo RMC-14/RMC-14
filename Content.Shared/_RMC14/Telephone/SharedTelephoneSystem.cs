@@ -247,6 +247,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
 
         _hands.TryPickupAnyHand(user, telephone);
         EnsureComp<PickedUpPhoneComponent>(telephone);
+        PlayGrabSound(rotary);
     }
 
     private void ReturnPhone(EntityUid rotary, EntityUid telephone, EntityUid? user)
@@ -262,6 +263,8 @@ public abstract class SharedTelephoneSystem : EntitySystem
             _hands.TryDropIntoContainer(user.Value, telephone, container);
         else
             _container.Insert(telephone, container);
+
+        PlayGrabSound(rotary);
     }
 
     private void HangUp(EntityUid self, EntityUid other)
@@ -291,6 +294,17 @@ public abstract class SharedTelephoneSystem : EntitySystem
     private void StopSound(EntityUid ent)
     {
         _ambientSound.SetSound(ent, new SoundPathSpecifier(""));
+    }
+
+    private void PlayGrabSound(EntityUid rotary)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp(rotary, out RotaryPhoneComponent? comp))
+            return;
+
+        _audio.PlayPvs(comp.GrabSound, rotary);
     }
 
     protected bool TryGetOtherPhone(EntityUid rotary, out EntityUid other)

@@ -64,6 +64,12 @@
   - type: RMCFireGroup
     group: Shotgun
     delay: 4
+  - type: GunDualWielding
+    weaponGroup: Shotgun
+  - type: GunPointBlank
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.15
+    accuracyMultiplierUnwielded: 0.95
 
 - type: entity
   abstract: true

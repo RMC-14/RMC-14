@@ -18,6 +18,11 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/ffb422a67f9bf44cec61e72ef275e48fe769e952/sound/weapons/gun_mortar_unpack.ogg"
 
+- files: ["gun_orbital_travel.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/5fc3c2ca34b8ebabe139555a33d56b65cfa2479b/sound/weapons/gun_orbital_travel.ogg"
+
 - files: ["pierce.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"

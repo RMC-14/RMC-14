@@ -12,6 +12,8 @@
   parent: CMBaseStructureCorrodible
   id: CMBarricadeBase
   components:
+  - type: Corrodible
+    structure: false
   - type: Rotatable
   - type: Appearance
   - type: Fixtures
@@ -102,7 +104,7 @@
   parent: CMBarricadeBase
   id: CMBarricadeMetal
   name: metal barricade
-  description: A metal barricade that keeps the unwanted out. Upgradable with metal, plasteel, or metal rods for different attributes. Repair with a welder.
+  description: A sturdy and easily assembled barricade made of metal plates, often used for quick fortifications. Use a blowtorch to repair.
   components:
   - type: Climbable
   - type: Anchorable

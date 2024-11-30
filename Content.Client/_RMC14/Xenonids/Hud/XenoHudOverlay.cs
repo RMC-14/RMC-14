@@ -1,13 +1,16 @@
 using System.Numerics;
 using Content.Client._RMC14.Medical.HUD;
 using Content.Client._RMC14.NightVision;
+using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.Shields;
+using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Energy;
+using Content.Shared._RMC14.Xenonids.Maturing;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared._RMC14.Mobs;
-using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Stacks;
+using Content.Shared._RMC14.Xenonids.Rank;
 using Content.Shared.Damage;
 using Content.Shared.Ghost;
 using Content.Shared.Mobs;
@@ -22,9 +25,9 @@ using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using static Robust.Shared.Utility.SpriteSpecifier;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Xenonids.Finesse;
+using static Robust.Shared.Utility.SpriteSpecifier;
 
 namespace Content.Client._RMC14.Xenonids.Hud;
 
@@ -49,6 +52,7 @@ public sealed class XenoHudOverlay : Overlay
     private readonly EntityQuery<MobStateComponent> _mobStateQuery;
     private readonly EntityQuery<MobThresholdsComponent> _mobThresholdsQuery;
     private readonly EntityQuery<XenoEnergyComponent> _xenoEnergyQuery;
+    private readonly EntityQuery<XenoMaturingComponent> _xenoMaturingQuery;
     private readonly EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
     private readonly EntityQuery<TransformComponent> _xformQuery;
     private readonly EntityQuery<XenoShieldComponent> _xenoShieldQuery;
@@ -78,6 +82,7 @@ public sealed class XenoHudOverlay : Overlay
         _mobStateQuery = _entity.GetEntityQuery<MobStateComponent>();
         _mobThresholdsQuery = _entity.GetEntityQuery<MobThresholdsComponent>();
         _xenoEnergyQuery = _entity.GetEntityQuery<XenoEnergyComponent>();
+        _xenoMaturingQuery = _entity.GetEntityQuery<XenoMaturingComponent>();
         _xenoPlasmaQuery = _entity.GetEntityQuery<XenoPlasmaComponent>();
         _xformQuery = _entity.GetEntityQuery<TransformComponent>();
         _xenoShieldQuery = _entity.GetEntityQuery<XenoShieldComponent>();
@@ -120,7 +125,8 @@ public sealed class XenoHudOverlay : Overlay
                 DrawDeadIcon(in args, scaleMatrix, rotationMatrix);
 
             DrawAcidStacks(in args, scaleMatrix, rotationMatrix);
-            DrawMarkedIcons(in args, scaleMatrix, rotationMatrix);
+			DrawMarkedIcons(in args, scaleMatrix, rotationMatrix);
+			DrawRank(in args, scaleMatrix, rotationMatrix);
         }
 
         if (isXeno || isAdminGhost)
@@ -248,13 +254,15 @@ public sealed class XenoHudOverlay : Overlay
         }
     }
 
-    private void DrawMarkedIcons(in OverlayDrawArgs args, Matrix3x2 scaleMatrix, Matrix3x2 rotationMatrix)
+    private void DrawRank(in OverlayDrawArgs args, Matrix3x2 scaleMatrix, Matrix3x2 rotationMatrix)
     {
         var handle = args.WorldHandle;
-        var stacks = _entity
-            .AllEntityQueryEnumerator<XenoMarkedComponent, SpriteComponent, TransformComponent>();
-        while (stacks.MoveNext(out var uid, out var comp, out var sprite, out var xform))
+        var ranks = _entity.EntityQueryEnumerator<XenoRankComponent, SpriteComponent, TransformComponent>();
+        while (ranks.MoveNext(out var uid, out var comp, out var sprite, out var xform))
         {
+            if (comp.Rank < 2 || comp.Rank > 5 || _xenoMaturingQuery.HasComp(uid))
+                continue;
+
             if (xform.MapID != args.MapId)
                 continue;
 
@@ -275,18 +283,56 @@ public sealed class XenoHudOverlay : Overlay
             var matrix = Matrix3x2.Multiply(rotationMatrix, scaledWorld);
             handle.SetTransform(matrix);
 
-            var icon = new Rsi(_rsiPath, $"prae_tag");
-            var texture = _sprite.GetFrame(icon, _timing.CurTime - comp.TimeAdded, false);
+            var icon = new Rsi(_rsiPath, $"hudxenoupgrade{comp.Rank}");
+            var texture = _sprite.GetFrame(icon, _timing.CurTime);
 
-            var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float)texture.Height / EyeManager.PixelsPerMeter * bounds.Height;
-            var xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float)texture.Width / EyeManager.PixelsPerMeter * bounds.Width;
+            var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float) texture.Height / EyeManager.PixelsPerMeter * bounds.Height;
+            var xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float) texture.Width / EyeManager.PixelsPerMeter * bounds.Width;
 
             var position = new Vector2(xOffset, yOffset);
             handle.DrawTexture(texture, position);
         }
     }
 
-    private void DrawInfectedIcon(in OverlayDrawArgs args, Matrix3x2 scaleMatrix, Matrix3x2 rotationMatrix)
+	private void DrawMarkedIcons(in OverlayDrawArgs args, Matrix3x2 scaleMatrix, Matrix3x2 rotationMatrix)
+	{
+		var handle = args.WorldHandle;
+		var stacks = _entity
+			.AllEntityQueryEnumerator<XenoMarkedComponent, SpriteComponent, TransformComponent>();
+		while (stacks.MoveNext(out var uid, out var comp, out var sprite, out var xform))
+		{
+			if (xform.MapID != args.MapId)
+				continue;
+
+			if (_container.IsEntityOrParentInContainer(uid, xform: xform))
+				continue;
+
+			if (_invisQuery.HasComp(uid))
+				continue;
+
+			var bounds = sprite.Bounds;
+			var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
+
+			if (!bounds.Translated(worldPos).Intersects(args.WorldAABB))
+				continue;
+
+			var worldMatrix = Matrix3x2.CreateTranslation(worldPos);
+			var scaledWorld = Matrix3x2.Multiply(scaleMatrix, worldMatrix);
+			var matrix = Matrix3x2.Multiply(rotationMatrix, scaledWorld);
+			handle.SetTransform(matrix);
+
+			var icon = new Rsi(_rsiPath, $"prae_tag");
+			var texture = _sprite.GetFrame(icon, _timing.CurTime - comp.TimeAdded, false);
+
+			var yOffset = (bounds.Height + sprite.Offset.Y) / 2f - (float)texture.Height / EyeManager.PixelsPerMeter * bounds.Height;
+			var xOffset = (bounds.Width + sprite.Offset.X) / 2f - (float)texture.Width / EyeManager.PixelsPerMeter * bounds.Width;
+
+			var position = new Vector2(xOffset, yOffset);
+			handle.DrawTexture(texture, position);
+		}
+	}
+
+	private void DrawInfectedIcon(in OverlayDrawArgs args, Matrix3x2 scaleMatrix, Matrix3x2 rotationMatrix)
     {
         var handle = args.WorldHandle;
         var infected = _entity.AllEntityQueryEnumerator<VictimInfectedComponent, SpriteComponent, TransformComponent>();

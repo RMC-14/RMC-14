@@ -1,8 +1,12 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.Fireman;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
+using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.MouseRotator;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
@@ -23,6 +27,7 @@ namespace Content.Shared._RMC14.Pulling;
 
 public sealed class RMCPullingSystem : EntitySystem
 {
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -37,6 +42,7 @@ public sealed class RMCPullingSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly RotateToFaceSystem _rotateTo = default!;
 
     private readonly SoundSpecifier _pullSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg")
     {
@@ -45,8 +51,12 @@ public sealed class RMCPullingSystem : EntitySystem
 
     private const string PullEffect = "CMEffectGrab";
 
+    private EntityQuery<FiremanCarriableComponent> _firemanQuery;
+
     public override void Initialize()
     {
+        _firemanQuery = GetEntityQuery<FiremanCarriableComponent>();
+
         SubscribeLocalEvent<ParalyzeOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
         SubscribeLocalEvent<InfectOnPullAttemptComponent, PullAttemptEvent>(OnInfectOnPullAttempt);
 
@@ -66,6 +76,8 @@ public sealed class RMCPullingSystem : EntitySystem
         SubscribeLocalEvent<PreventPulledWhileAliveComponent, PullStoppedMessage>(OnPreventPulledWhileAliveStop);
 
         SubscribeLocalEvent<PullableComponent, PullStartedMessage>(OnPullAnimation);
+
+        SubscribeLocalEvent<PullerComponent, PullStoppedMessage>(OnPullerPullStopped);
 
         SubscribeLocalEvent<BeingPulledComponent, PullStoppedMessage>(OnBeingPulledPullStopped);
     }
@@ -293,6 +305,15 @@ public sealed class RMCPullingSystem : EntitySystem
         RemCompDeferred<BeingPulledComponent>(ent);
     }
 
+    private void OnPullerPullStopped(Entity<PullerComponent> ent, ref PullStoppedMessage args)
+    {
+        if (args.PulledUid == ent.Owner)
+            return;
+
+        if (!_timing.ApplyingState && !HasComp<MouseRotatorComponent>(ent))
+            RemCompDeferred<NoRotateOnMoveComponent>(ent);
+    }
+
     public bool IsPulling(Entity<PullerComponent?> user, Entity<PullableComponent?> target)
     {
         if (!Resolve(user, ref user.Comp, false) ||
@@ -363,7 +384,34 @@ public sealed class RMCPullingSystem : EntitySystem
             if ((input.HeldMoveButtons & MoveButtons.AnyDirection) == 0)
                 continue;
 
+            if (!_actionBlocker.CanMove(uid))
+                continue;
+
             _pulling.TryStopPull(uid, pullable);
+        }
+
+        var pullableQuery = EntityQueryEnumerator<BeingPulledComponent, PullableComponent>();
+        while (pullableQuery.MoveNext(out var uid, out _, out var pullable))
+        {
+            if (pullable.Puller == null)
+                continue;
+
+            var puller = pullable.Puller.Value;
+
+            if (_firemanQuery.TryComp(uid, out var fireman) && fireman.BeingCarried)
+                continue;
+
+            if (HasComp<MouseRotatorComponent>(puller))
+                continue;
+
+            if (!_timing.ApplyingState)
+                EnsureComp<NoRotateOnMoveComponent>(puller);
+
+            var pulledCoords = _transform.GetMapCoordinates(uid).Position;
+            var pullerCoords = _transform.GetMapCoordinates(puller).Position;
+
+            var angle = (pulledCoords - pullerCoords).ToWorldAngle().GetCardinalDir().ToAngle();
+            _rotateTo.TryFaceAngle(puller, angle);
         }
     }
 }

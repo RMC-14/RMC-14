@@ -381,9 +381,10 @@ public sealed class XenoEggSystem : EntitySystem
 
     private bool CanTrigger(EntityUid user)
     {
-        return HasComp<InfectableComponent>(user) &&
-               !HasComp<VictimInfectedComponent>(user) &&
-               !_mobState.IsDead(user);
+        return TryComp<InfectableComponent>(user, out var infected)
+               && !infected.BeingInfected
+               && !_mobState.IsDead(user)
+               && !HasComp<VictimInfectedComponent>(user);
     }
 
     public bool Open(Entity<XenoEggComponent> egg, EntityUid? user, out EntityUid? spawned)
@@ -441,7 +442,9 @@ public sealed class XenoEggSystem : EntitySystem
         }
 
         SetEggState(egg, XenoEggState.Opening);
-        _audio.PlayPredicted(egg.Comp.OpenSound, egg, user);
+
+        if (_timing.IsFirstTimePredicted)
+            _audio.PlayPredicted(egg.Comp.OpenSound, egg, user);
 
         if (_net.IsClient)
             return true;

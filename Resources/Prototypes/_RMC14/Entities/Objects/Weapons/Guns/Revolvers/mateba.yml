@@ -28,6 +28,9 @@
   - type: RMCSelectiveFire
     baseFireRate: 1.111
     scatterWielded: 8
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.1
+    accuracyMultiplierUnwielded: 0.75
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -119,6 +122,8 @@
   - type: RMCStunOnHit
     maxRange: 4
     stunTime: 1
+  - type: RMCProjectileAccuracy
+    accuracy: 90
 
 - type: Tag
   id: RMCSpeedLoaderMateba

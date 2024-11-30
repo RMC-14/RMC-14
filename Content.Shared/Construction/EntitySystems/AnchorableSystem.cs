@@ -88,7 +88,10 @@ public sealed partial class AnchorableSystem : EntitySystem
     private void OnAnchoredExamine(EntityUid uid, AnchorableComponent component, ExaminedEvent args)
     {
         if (component.Flags == AnchorableFlags.None)
+        {
+            args.PushText("It cannot be anchored nor unanchored.");
             return;
+        }
 
         var isAnchored = Comp<TransformComponent>(uid).Anchored;
         var messageId = isAnchored ? "examinable-anchored" : "examinable-unanchored";

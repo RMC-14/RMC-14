@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
@@ -11,6 +12,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly EvasionSystem _evasionSystem = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -34,6 +36,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         SubscribeLocalEvent<HoldOrderComponent, DamageModifyEvent>(OnDamageModify);
 
         SubscribeLocalEvent<MoveOrderComponent, ComponentShutdown>(OnMoveShutdown);
+        SubscribeLocalEvent<MoveOrderComponent, EvasionRefreshModifiersEvent>(OnMoveOrderEvasionRefresh);
     }
 
     private void OnDamageModify(Entity<HoldOrderComponent> orders, ref DamageModifyEvent args)
@@ -75,6 +78,18 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
     private void OnMoveShutdown(Entity<MoveOrderComponent> uid, ref ComponentShutdown ev)
     {
         _movementSpeed.RefreshMovementSpeedModifiers(uid);
+        _evasionSystem.RefreshEvasionModifiers(uid.Owner);
+    }
+
+    private void OnMoveOrderEvasionRefresh(Entity<MoveOrderComponent> entity, ref EvasionRefreshModifiersEvent args)
+    {
+        if (entity.Owner != args.Entity.Owner)
+            return;
+
+        if (entity.Comp.Received.Count == 0)
+            return;
+
+        args.Evasion += entity.Comp.Received[0].Multiplier * entity.Comp.EvasionModifier;
     }
 
     protected virtual void OnAction(Entity<MarineOrdersComponent> orders, ref FocusActionEvent args)
@@ -112,8 +127,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         var level = Math.Max(1, _skills.GetSkill(orders.Owner, orders.Comp.Skill));
         var duration = orders.Comp.Duration * (level + 1);
 
-        // TODO RMC14 implement focus order effects
-        // _actions.SetCooldown(orders.Comp.FocusActionEntity, orders.Comp.Cooldown);
+        _actions.SetCooldown(orders.Comp.FocusActionEntity, orders.Comp.Cooldown);
         _actions.SetCooldown(orders.Comp.MoveActionEntity, orders.Comp.Cooldown);
         _actions.SetCooldown(orders.Comp.HoldActionEntity, orders.Comp.Cooldown);
 
@@ -143,6 +157,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         comp.Received.Sort((a, b) => a.CompareTo(b));
 
         _movementSpeed.RefreshMovementSpeedModifiers(receiver);
+        _evasionSystem.RefreshEvasionModifiers(receiver);
     }
 
     private void RemoveExpired<T>() where T : IComponent, IOrderComponent
