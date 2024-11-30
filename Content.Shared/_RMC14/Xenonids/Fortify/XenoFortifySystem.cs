@@ -13,6 +13,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
+using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using static Content.Shared._RMC14.Xenonids.Fortify.XenoFortifyComponent;
 using static Content.Shared.Physics.CollisionGroup;
@@ -25,6 +26,7 @@ public sealed class XenoFortifySystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly FixtureSystem _fixtures = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -167,6 +169,7 @@ public sealed class XenoFortifySystem : EntitySystem
 
         _fixtures.DestroyFixture(xeno, FixtureId);
         _transform.Unanchor(xeno, Transform(xeno));
+        _physics.TrySetBodyType(xeno, BodyType.KinematicController);
 
         FortifyUpdated(xeno);
     }

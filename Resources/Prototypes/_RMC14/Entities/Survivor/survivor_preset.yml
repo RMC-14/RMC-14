@@ -4,7 +4,7 @@
   components:
   - type: SurvivorPreset
     randomGear:
-    - [ CMGrenadeHighExplosive ] # TODO RMC14 incendiary molotov
+    - [ RMCGrenadeMolotov ]
     - [ CMPackFlare ]
     # TODO RMC14 nailgun
     - [ RMCFireAxe ]

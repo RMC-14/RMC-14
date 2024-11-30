@@ -229,7 +229,6 @@
       falloff: 10
       buildup: true
 
-# TODO RMC14 incendiary
 - type: entity
   parent: CMBulletSniper10x28mm
   id: CMBulletSniper10x28mmIncendiary
@@ -243,6 +242,7 @@
         Heat: 10
   - type: CMArmorPiercing
     amount: 20
+  - type: IgniteOnProjectileHit
 
 # TODO RMC14 slow
 - type: entity

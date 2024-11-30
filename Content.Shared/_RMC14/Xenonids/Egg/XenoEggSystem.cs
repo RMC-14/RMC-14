@@ -34,6 +34,8 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -64,6 +66,7 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -178,7 +181,10 @@ public sealed class XenoEggSystem : EntitySystem
     private void OnXenoAttachedRemove(Entity<XenoAttachedOvipositorComponent> attached, ref ComponentRemove args)
     {
         if (!TerminatingOrDeleted(attached) && TryComp(attached, out TransformComponent? xform))
+        {
             _transform.Unanchor(attached, xform);
+            _physics.TrySetBodyType(attached, BodyType.KinematicController);
+        }
 
         var ev = new XenoOvipositorChangedEvent(false);
         RaiseLocalEvent(attached, ref ev, true);

@@ -25,6 +25,7 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private EntityQuery<IgnorePredictionHideComponent> _ignorePredictionHideQuery;
+    private EntityQuery<IgnorePredictionHitComponent> _ignorePredictionHitQuery;
     private EntityQuery<SpriteComponent> _spriteQuery;
 
     public override void Initialize()
@@ -32,6 +33,7 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
         base.Initialize();
 
         _ignorePredictionHideQuery = GetEntityQuery<IgnorePredictionHideComponent>();
+        _ignorePredictionHitQuery = GetEntityQuery<IgnorePredictionHitComponent>();
         _spriteQuery = GetEntityQuery<SpriteComponent>();
 
         SubscribeLocalEvent<PhysicsUpdateBeforeSolveEvent>(OnBeforeSolve);
@@ -89,7 +91,8 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
             return;
 
         if (!TryComp(ent, out ProjectileComponent? projectile) ||
-            !TryComp(ent, out PhysicsComponent? physics))
+            !TryComp(ent, out PhysicsComponent? physics) ||
+            _ignorePredictionHitQuery.HasComp(args.OtherEntity))
         {
             return;
         }
@@ -139,10 +142,16 @@ public sealed class GunPredictionSystem : SharedGunPredictionSystem
             var hit = new HashSet<(NetEntity, MapCoordinates)>();
             foreach (var contact in contacts)
             {
+                if (_ignorePredictionHitQuery.HasComp(contact))
+                    continue;
+
                 var netEnt = GetNetEntity(contact);
                 var pos = _transform.GetMapCoordinates(contact);
                 hit.Add((netEnt, pos));
             }
+
+            if (hit.Count == 0)
+                continue;
 
             var ev = new PredictedProjectileHitEvent(uid.Id, hit);
             RaiseNetworkEvent(ev);

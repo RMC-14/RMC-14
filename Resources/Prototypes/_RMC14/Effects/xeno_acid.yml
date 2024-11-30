@@ -70,6 +70,8 @@
       components:
       - Marine
   - type: UncloakOnHit
+  - type: ExtinguishFire
+  - type: IgnorePredictionHit
 
 - type: entity
   parent: XenoAcidSprayWeak

@@ -68,8 +68,8 @@
       state: supply
   - type: ApcPowerReceiver
   - type: RMCPowerReceiver
-    idleLoad: 10000
-    activeLoad: 1
+    idleLoad: 0
+    activeLoad: 10000
     channel: Equipment
   - type: Corrodible
     isCorrodible: false
