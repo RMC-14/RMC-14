@@ -129,6 +129,10 @@
     skill: RMCSkillConstruction
     delay: 10
     fuelUsed: 2
+  - type: NailgunRepairable
+    # cm13 max_health%: 0.3, 0.45
+    repairMetal: -135
+    repairPlasteel: -200
   - type: Destructible
     thresholds:
     - trigger:
@@ -401,6 +405,10 @@
     skill: RMCSkillConstruction
     delay: 10
     fuelUsed: 2
+  - type: NailgunRepairable
+    # cm13 max_health%: 0.3, 0.45
+    repairMetal: -120
+    repairPlasteel: -180
   - type: Destructible
     thresholds:
     - trigger:
