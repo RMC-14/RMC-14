@@ -14,8 +14,8 @@ rmc-xeno-vanguard-name = Vanguard
 rmc-xeno-vanguard-description = You trade your spit, acid ball, acid spray, corrosive acid, and some health for a strong one hit shield that recharges out of combat.
    You gain the ability to:
    - Break walls and other simple structures with your slash attack.
-   - Pierce through up to 3 enemies in a line, recharging your shield if you hit at least 2.
-   - Use your dash to get into a group and use it again to hit enemies all around you, recharging your shield if you hit at least 1.
+   - Pierce through enemies in a line, recharging your shield if you hit at least 2.
+   - Blitz to get into a group of enemies and use it again to hit all around you, recharging your shield if you hit at least 1.
    - Cleave an enemy either flinging them or rooting them in place, both stronger with your shield up.
 rmc-xeno-vanguard-popup = Fearless you are born, fearless you serve, fearless you die. This one will become my Vanguard.
 
