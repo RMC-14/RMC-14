@@ -37,7 +37,7 @@ public sealed partial class XenoBlitzComponent : Component
     public SoundSpecifier Sound = new SoundCollectionSpecifier("AlienClaw");
 
     [DataField, AutoNetworkedField]
-    public TimeSpan SlashDashTime = TimeSpan.FromSeconds(2);
+    public TimeSpan SlashDashTime = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]
     public float Range = 1.5f;

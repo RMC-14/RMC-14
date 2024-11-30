@@ -588,7 +588,7 @@
   parent: ActionXenoBase
   id: ActionXenoPierce
   name: Pierce (50)
-  description: Pierce through enemies in a line doing higher damage and piercing some armor. Hitting 2 or more recharges your shield.
+  description: Pierce through enemies in a line doing high damage and piercing some armor. Hitting 2 or more recharges your shield.
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -606,7 +606,7 @@
   parent: ActionXenoDash
   id: ActionXenoBlitz
   name: Blitz (50)
-  description: Dash a short distance towards a given location. After 2 seconds or if you use it again before then, damages enemies around you. Hitting 1 or more recharges your shield.
+  description: Dash a short distance towards a given location. After 3 seconds or if you use it again before then, damages enemies around you. Hitting 1 or more recharges your shield.
   components:
   - type: WorldTargetAction
     useDelay: 0
@@ -616,7 +616,7 @@
   parent: ActionXenoBase
   id: ActionXenoCleave
   name: Cleave
-  description: Root an enemy for a second or fling them depending on the toggle. The effects are doubled if your shield is up.
+  description: Root an enemy for a second or fling them depending on the toggle. The effect and distance are doubled if your shield is up.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
