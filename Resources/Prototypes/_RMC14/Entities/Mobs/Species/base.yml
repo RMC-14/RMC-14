@@ -142,7 +142,6 @@
   - type: Infectable
   - type: Tackleable
   - type: Tackle
-    stun: 10
   - type: XenoNestable
   - type: Devourable
   - type: ImmuneToClothingRequiredStepTrigger
