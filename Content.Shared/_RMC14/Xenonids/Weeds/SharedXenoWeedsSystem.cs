@@ -289,8 +289,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         var query = EntityQueryEnumerator<DamageOffWeedsComponent, DamageableComponent>();
         while (query.MoveNext(out var uid, out var damage, out var damageable))
         {
-            if (TryComp(uid, out AffectableByWeedsComponent? affected) &&
-                affected.OnXenoWeeds ||
+            if ((TryComp(uid, out AffectableByWeedsComponent? affected) && affected.OnXenoWeeds) ||
                 HasComp<InXenoTunnelComponent>(uid))
             {
                 if (damage.DamageAt != null)
