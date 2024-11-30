@@ -858,6 +858,50 @@
     - id: RMCWeaponRevolverMateba
 
 - type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCMK80BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolMK80
+      amount: 6
+    - id: CMWeaponPistolMK80
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCM1984BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM1984
+      amount: 6
+    - id: CMWeaponPistolM1984
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: CMM77BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM77AP
+      amount: 6
+    - id: CMWeaponPistolM77
+
+- type: entity
+  parent: RMCBeltHolsterRevolver
+  id: RMCM44BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderM44
+      amount: 6
+    - id: RMCWeaponRevolverM44
+
+- type: entity
   parent: CMBeltBaseStorage
   id: RMCBeltXM51
   name: M276 pattern XM51 holster rig
