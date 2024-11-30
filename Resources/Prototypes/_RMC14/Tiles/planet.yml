@@ -815,3 +815,34 @@
   id: RMCPlanetMultiTileDark
   name: multi tile dark
   sprite: /Textures/_RMC14/Tiles/varadero/grey_multi_tiles.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetShale
+  name: shale
+  sprite: /Textures/_RMC14/Tiles/planet/auto_shale/shale_1.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  edgeSpritePriority: 0
+  edgeSprites:
+    SouthEast: /Textures/_RMC14/Tiles/planet/auto_shale/shale_outercorner_4.png
+    NorthEast: /Textures/_RMC14/Tiles/planet/auto_shale/shale_outercorner_5.png
+    NorthWest: /Textures/_RMC14/Tiles/planet/auto_shale/shale_outercorner_6.png
+    SouthWest: /Textures/_RMC14/Tiles/planet/auto_shale/shale_outercorner_7.png
+    South: /Textures/_RMC14/Tiles/planet/auto_shale/shale_innercorner_0.png
+    East: /Textures/_RMC14/Tiles/planet/auto_shale/shale_innercorner_1.png
+    North: /Textures/_RMC14/Tiles/planet/auto_shale/shale_innercorner_2.png
+    West: /Textures/_RMC14/Tiles/planet/auto_shale/shale_innercorner_3.png
+
+- type: tile
+  parent: RMCPlanetShale
+  id: RMCPlanetShaleAlt
+  sprite: /Textures/_RMC14/Tiles/planet/auto_shale/shale_2.png
