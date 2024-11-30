@@ -32,9 +32,9 @@ public sealed class XenoPunchSystem : EntitySystem
     {
         SubscribeLocalEvent<XenoPunchComponent, XenoPunchActionEvent>(OnXenoPunchAction);
 
-		SubscribeLocalEvent<PunchSlowedComponent, ComponentRemove>(OnPunchSlowRemoved);
-		SubscribeLocalEvent<PunchSlowedComponent, RefreshMovementSpeedModifiersEvent>(OnPunchSlowRefresh);
-	}
+        SubscribeLocalEvent<PunchSlowedComponent, ComponentRemove>(OnPunchSlowRemoved);
+        SubscribeLocalEvent<PunchSlowedComponent, RefreshMovementSpeedModifiersEvent>(OnPunchSlowRefresh);
+    }
 
     private void OnXenoPunchAction(Entity<XenoPunchComponent> xeno, ref XenoPunchActionEvent args)
     {
@@ -81,17 +81,17 @@ public sealed class XenoPunchSystem : EntitySystem
             SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
     }
 
-	private void OnRefreshCleaveRooted(Entity<PunchSlowedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
-	{
-        var modifier = ent.Comp.SlowAmount.Double();
-		args.ModifySpeed(modifier, modifier);
-	}
+    private void OnRefreshCleaveRooted(Entity<PunchSlowedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    {
+        var modifier = ent.Comp.SlowAmount.Float();
+        args.ModifySpeed(modifier, modifier);
+    }
 
-	private void OnCleaveRootedRemoved(Entity<PunchSlowedComponent> ent, ref ComponentRemove args)
-	{
-		if (!TerminatingOrDeleted(ent))
-			_speed.RefreshMovementSpeedModifiers(ent);
-	}
+    private void OnCleaveRootedRemoved(Entity<PunchSlowedComponent> ent, ref ComponentRemove args)
+    {
+        if (!TerminatingOrDeleted(ent))
+            _speed.RefreshMovementSpeedModifiers(ent);
+    }
 
     public override void Update(float frameTime)
     {
