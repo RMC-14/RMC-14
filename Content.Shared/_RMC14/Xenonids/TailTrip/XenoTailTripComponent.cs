@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+﻿using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.TailTrip;
@@ -26,5 +27,8 @@ public sealed partial class XenoTailTripComponent : Component
 
     [DataField]
     public EntProtoId SlowEffect = "RMCEffectDancerSlow";
+
+    [DataField]
+	public SoundSpecifier Sound = new SoundCollectionSpecifier("XenoTailSwipe");
 
 }

@@ -6,31 +6,31 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Impale;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(XenoImpaleSystem))]
 public sealed partial class XenoImpaleComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int PlasmaCost = 80;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public DamageSpecifier Damage = new();
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntProtoId Animation = "RMCEffectTailHit";
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_tail_attack.ogg");
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int AP = 10;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public ProtoId<EmotePrototype>? Emote = "XenoRoar";
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan? EmoteCooldown = TimeSpan.FromSeconds(5);
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan SecondImpaleTime = TimeSpan.FromSeconds(0.4);
 }

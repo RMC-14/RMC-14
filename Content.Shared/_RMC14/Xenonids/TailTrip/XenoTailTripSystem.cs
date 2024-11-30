@@ -5,6 +5,7 @@ using Content.Shared.Coordinates;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.Stunnable;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -19,6 +20,7 @@ public sealed class XenoTailTripSystem : EntitySystem
     [Dependency] private readonly SharedStutteringSystem _stutter = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -45,6 +47,7 @@ public sealed class XenoTailTripSystem : EntitySystem
             SpawnAttachedTo(xeno.Comp.TailEffect, args.Target.ToCoordinates());
 
         EnsureComp<XenoSweepingComponent>(xeno);
+        _audio.PlayPredicted(xeno.Comp.Sound, xeno, xeno);
 
         if (HasComp<XenoMarkedComponent>(args.Target))
         {

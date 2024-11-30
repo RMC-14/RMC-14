@@ -140,7 +140,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: prae_dash
     event: !type:XenoLeapActionEvent
-    useDelay: 11
+    useDelay: 10
     checkCanAccess: false
 
 - type: entity
@@ -549,5 +549,68 @@
     deselectOnMiss: false
   - type: XenoOffensiveAction
   - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoPierce
+  name: Pierce (50)
+  description: Pierce through enemies in a line doing higher damage and piercing some armor. Hitting 2 or more recharges your shield.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_pierce
+    event: !type:XenoPierceActionEvent
+    range: 15
+    useDelay: 3
+    checkCanAccess: false
+  - type: XenoOffensiveAction
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoDash
+  id: ActionXenoBlitz
+  name: Blitz (50)
+  description: Dash a short distance towards a given location. After 2 seconds or if you use it again before then, damages enemies around you. Hitting 1 or more recharges your shield.
+  components:
+  - type: WorldTargetAction
+    useDelay: 0
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoCleave
+  name: Cleave
+  description: Root an enemy for a second or fling them depending on the toggle. The effects are doubled if your shield is up.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_cleave_action
+    event: !type:XenoCleaveActionEvent
+    range: 1.5
+    useDelay: 12
+    deselectOnMiss: false
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoToggleCleave
+  name: Toggle Cleave Type
+  description: Toggle between your Cleave rooting enemies or flinging enemies.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_cleave_root
+    iconOn:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_cleave_fling
+    event: !type:XenoToggleCleaveActionEvent
+
     
     

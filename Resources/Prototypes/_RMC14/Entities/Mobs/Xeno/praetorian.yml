@@ -126,7 +126,7 @@
     plasmaCost: 80
     doAfter: 0.5
   - type: XenoLeap
-    plasmaCost: 50
+    plasmaCost: 40
     delay: 0
     knockdownTime: 0
     range: 6
@@ -262,10 +262,10 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    # ActionXenoPierce
-    # ActionXenoDashAndSlash
-    # ActionXenoCleave
-    # ActionXenoToggleCleave
+    - ActionXenoPierce
+    - ActionXenoBlitz
+    - ActionXenoCleave
+    - ActionXenoToggleCleave
     - ActionXenoDevolve
     hidden: true
   - type: XenoStrain
@@ -274,3 +274,20 @@
     popup: rmc-xeno-vanguard-popup
   - type: XenoClaws
     clawType: Sharp
+  - type: XenoShield
+  - type: VanguardShield
+  - type: XenoPierce
+    damage:
+      groups:
+        Brute: 45
+  - type: XenoLeap
+    plasmaCost: 50
+    delay: 0
+    knockdownTime: 0
+    range: 6
+    moveDelayTime: 0
+  - type: XenoBlitz
+    damage:
+      groups:
+        Brute: 40
+  - type: XenoCleave
