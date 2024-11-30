@@ -1,13 +1,12 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Server.Players;
 using Content.Shared._RMC14.Areas;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Devour;
-using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
@@ -24,16 +23,6 @@ using Content.Shared.Verbs;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
-using Robust.Shared.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Server._RMC14.Xenonids.Construction.Tunnel;
 
@@ -102,9 +91,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         }
 
         if (!_xenoPlasma.HasPlasmaPopup(xenoBuilder.Owner, args.PlasmaCost, false))
-        {
             return;
-        }
 
         if (_area.TryGetArea(location, out var area, out _, out _))
         {
@@ -135,7 +122,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             args.Handled = true;
             return;
         }
-        _xenoPlasma.TryRemovePlasma(xenoBuilder.Owner, args.PlasmaCost);
+
         var createTunnelEv = new XenoDigTunnelDoAfter(args.Prototype, args.PlasmaCost);
         var doAfterTunnelCreationArgs = new DoAfterArgs(EntityManager, xenoBuilder.Owner, args.CreateTunnelDelay, createTunnelEv, xenoBuilder.Owner)
         {
@@ -210,9 +197,11 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         }
 
         if (args.Handled || args.Cancelled)
-        {
             return;
-        }
+
+        if (!_xenoPlasma.HasPlasmaPopup(xenoBuilder.Owner, args.PlasmaCost))
+            return;
+
         var tunnelFailureMessage = Loc.GetString("rmc-xeno-construction-failed-tunnel-rename");
 
         var location = _transform.GetMoverCoordinates(xenoBuilder).SnapToGrid(_entities);
@@ -239,7 +228,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     private void OnNameTunnel(Entity<XenoTunnelComponent> xenoTunnel, ref NameTunnelMessage args)
     {
         var name = args.TunnelName;
-        var hive = base.hive.GetHive(xenoTunnel.Owner);
+        var hive = Hive.GetHive(xenoTunnel.Owner);
         if (hive is null)
         {
             return;
@@ -469,7 +458,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     }
     private void GetAllAvailableTunnels(Entity<XenoTunnelComponent> destinationXenoTunnel, ref OpenBoundInterfaceMessage args)
     {
-        var hive = base.hive.GetHive(destinationXenoTunnel.Owner);
+        var hive = Hive.GetHive(destinationXenoTunnel.Owner);
         if (hive is null ||
             !TryComp(hive, out HiveComponent? hiveComp))
         {
@@ -537,7 +526,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         var mobContainer = _container.EnsureContainer<Container>(xenoTunnel.Owner, XenoTunnelComponent.ContainedMobsContainerId);
 
         var tempMobList = new List<EntityUid>(mobContainer.ContainedEntities);
-        var hiveTuple = hive.GetHive(xenoTunnel.Owner);
+        var hiveTuple = Hive.GetHive(xenoTunnel.Owner);
         if (hiveTuple is not null && TryGetHiveTunnelName(xenoTunnel, out var tunnelName))
         {
             var hiveComp = hiveTuple.Value.Comp;
