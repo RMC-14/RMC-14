@@ -11,6 +11,7 @@ using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
@@ -45,6 +46,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly PlayerSystem _player = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     public int NextTempTunnelId
     { get; private set; }
     public override void Initialize()
@@ -217,15 +219,12 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             return;
         }
 
-        var newTunnelName = Loc.GetString("rmc-xeno-construction-default-tunnel-name", ("tunnelNumber", NextTempTunnelId));
-
-        if (!TryPlaceTunnel(xenoBuilder.Owner, newTunnelName, out var newTunnelEnt))
+        if (!TryPlaceTunnel(xenoBuilder.Owner, null, out var newTunnelEnt))
         {
             _popup.PopupEntity(tunnelFailureMessage, xenoBuilder.Owner, xenoBuilder.Owner);
             return;
         }
 
-        NextTempTunnelId++;
         _ui.OpenUi(newTunnelEnt.Value, NameTunnelUI.Key, xenoBuilder.Owner);
 
         args.Handled = true;
@@ -579,7 +578,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         }
         return true;
     }
-    public bool TryPlaceTunnel(Entity<HiveMemberComponent?> builder, string name, [NotNullWhen(true)] out EntityUid? tunnelEnt)
+    public bool TryPlaceTunnel(Entity<HiveMemberComponent?> builder, string? name, [NotNullWhen(true)] out EntityUid? tunnelEnt)
     {
         tunnelEnt = null;
         if (!Resolve(builder, ref builder.Comp) ||
@@ -588,6 +587,17 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             return false;
         }
 
-        return TryPlaceTunnel(builder.Comp.Hive.Value, name, builder.Owner.ToCoordinates(), out tunnelEnt);
+        if (name is null)
+        {
+            name = Loc.GetString("rmc-xeno-construction-default-tunnel-name", ("tunnelNumber", NextTempTunnelId));
+            NextTempTunnelId++;
+        }
+
+        var hasPlacedTunnel = TryPlaceTunnel(builder.Comp.Hive.Value, name, builder.Owner.ToCoordinates(), out tunnelEnt);
+        if (tunnelEnt is EntityUid)
+            _hive.SetSameHive(builder.Owner, tunnelEnt.Value);
+
+        return hasPlacedTunnel;
+
     }
 }

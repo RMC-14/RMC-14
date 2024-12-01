@@ -1,0 +1,11 @@
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerXenoTunnel
+  name: Xeno Tunnel Spawner
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: xeno_tunnel
+  - type: XenoTunnelSpawner

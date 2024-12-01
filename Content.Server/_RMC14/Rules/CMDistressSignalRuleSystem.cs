@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Stations;
+using Content.Server._RMC14.Xenonids.Construction.Tunnel;
 using Content.Server._RMC14.Xenonids.Hive;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
@@ -108,6 +109,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IVoteManager _voteManager = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
+    [Dependency] private readonly XenoTunnelSystem _xenoTunnel = default!;
 
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();
@@ -214,6 +216,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             }
 
             SetFriendlyHives(comp.Hive);
+            SpawnTunnelsFromMarkers(comp.Hive);
 
             SpawnSquads((uid, comp));
             SpawnAdminFaxArea();
@@ -1332,10 +1335,20 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             _hive.SetHive(weeds, hive);
         }
 
-        var tunnelQuery = EntityQueryEnumerator<XenoTunnelComponent>();
-        while (tunnelQuery.MoveNext(out var uid, out _))
+    }
+    /// <summary>
+    /// Spawn tunnels from marker entities and ensure they are set to the correct hive
+    /// </summary>
+    public void SpawnTunnelsFromMarkers(EntityUid hive)
+    {
+        var tunnelSpawnerQuery = EntityQueryEnumerator<XenoTunnelSpawnerComponent>();
+        while (tunnelSpawnerQuery.MoveNext(out var uid, out var tunnelSpawnerComp))
         {
-            _hive.SetHive(uid, hive);
+            if (tunnelSpawnerComp.TunnelName is null)
+            {
+                continue;
+            }
+            _xenoTunnel.TryPlaceTunnel(hive, tunnelSpawnerComp.TunnelName, uid.ToCoordinates(), out _);
         }
     }
 }
