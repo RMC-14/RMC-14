@@ -349,7 +349,7 @@
       - id: CMJumpsuitCOService
       - id: CMJumpsuitCOFormalWhite
       - id: CMJumpsuitCOFormalBlack
-      - id: CMCoatOfficer # TODO: Check this is the service variant
+      - id: RMCCoatOfficerCamo # TODO: Check this is the service variant
       - id: CMCoatMP
       - id: RMCShoesLaceup
       - id: RMCShoesLaceupBrown # RMC Addition

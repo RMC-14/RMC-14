@@ -25,6 +25,7 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Bioscan;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.HyperSleep;
@@ -78,6 +79,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly XenoHiveSystem _hive = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
+    [Dependency] private readonly ItemCamouflageSystem _camo = default!;
     [Dependency] private readonly MarineSystem _marines = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
@@ -201,6 +203,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             }
 
             SetFriendlyHives(comp.Hive);
+
+            SetCamoType();
 
             SpawnSquads((uid, comp));
             SpawnAdminFaxArea();
@@ -533,6 +537,21 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (!rule.Comp.Squads.ContainsKey(id))
                 rule.Comp.Squads[id] = Spawn(id);
         }
+    }
+
+    public void SetCamoType(CamouflageType? ct = null)
+    {
+        if (ct != null)
+        {
+            _camo.CurrentMapCamouflage = (CamouflageType)ct;
+            return;
+        }
+        if (SelectedPlanetMap != null &&
+    _rmcPlanet.PlanetPaths.TryGetValue(SelectedPlanetMap, out var planet))
+        {
+            _camo.CurrentMapCamouflage = planet.Camouflage;
+        }
+
     }
 
     private void OnPlayerSpawning(PlayerSpawningEvent ev)

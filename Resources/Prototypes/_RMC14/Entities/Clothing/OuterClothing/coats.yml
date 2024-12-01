@@ -242,6 +242,19 @@
 
 # Officer
 - type: entity
+  parent: CMCoatOfficer
+  id: RMCCoatOfficerCamo
+  suffix: Camo Replacer
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMCoatOfficer
+      Desert: RMCCoatService
+      Snow: CMCoatLong
+      Classic: CMCoatOfficer
+      Urban: CMCoatOfficer
+
+- type: entity
   parent: RMCBaseJacket
   id: CMCoatOfficer
   name: marine service jacket
