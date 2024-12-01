@@ -410,6 +410,10 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 continue;
             }
 
+            //Continue if trap has emptied or been replaced with a parasite
+            if (holeComponent.TrapPrototype is null || holeComponent.TrapPrototype == XenoResinHoleComponent.ParasitePrototype)
+                continue;
+
             //Check if each Resin Hole is still colliding with tripper
             if (!_physicsQuery.TryGetComponent(resinHole, out var physics))
             {
