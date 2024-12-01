@@ -279,7 +279,7 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
         {
             if (nightVisionComp is not null)
             {
-                nightVisionComp.Transparency = 0f;
+                nightVisionComp.Transparency = null;
             }
 
             foreach (var action in actions)
