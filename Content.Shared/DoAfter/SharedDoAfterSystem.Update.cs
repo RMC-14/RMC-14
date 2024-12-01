@@ -70,6 +70,18 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
                 continue;
             }
 
+            if (!doAfter.Completed && !doAfter.Cancelled && doAfter.Args.TargetEffect != null)
+            {
+                if (doAfter.LastEffectSpawnTime == null || time - doAfter.LastEffectSpawnTime.Value >= TimeSpan.FromSeconds(1))
+                {
+                    if (xformQuery.TryGetComponent(doAfter.Args.Target, out var targetXform))
+                    {
+                        SpawnAttachedTo(doAfter.Args.TargetEffect, targetXform.Coordinates);
+                        doAfter.LastEffectSpawnTime = time;
+                    }
+                }
+            }
+
             if (ShouldCancel(doAfter, xformQuery, handsQuery))
             {
                 InternalCancel(doAfter, comp);
