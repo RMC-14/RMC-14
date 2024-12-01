@@ -156,7 +156,7 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
     {
         var coordinates = _transform.GetMoverCoordinates(ent.Owner).SnapToGrid();
 
-        if (_area.TryGetArea(coordinates, out var area, out _, out _) &&
+        if (!_area.TryGetArea(coordinates, out var area, out _, out _)  ||
             area.NoTunnel)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-burrow-down-failure-bad-area"), ent, ent);
@@ -194,7 +194,7 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
             return false;
         }
 
-        if (_area.TryGetArea(target, out var area, out _, out _) &&
+        if (!_area.TryGetArea(target, out var area, out _, out _) ||
             area.NoTunnel)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-burrow-move-failure-bad-area"), ent, ent);

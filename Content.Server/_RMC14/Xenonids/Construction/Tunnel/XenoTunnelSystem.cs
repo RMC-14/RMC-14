@@ -96,13 +96,10 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         if (!_xenoPlasma.HasPlasmaPopup(xenoBuilder.Owner, args.PlasmaCost, false))
             return;
 
-        if (_area.TryGetArea(location, out var area, out _, out _))
+        if (!_area.TryGetArea(location, out var area, out _, out _) || area.NoTunnel)
         {
-            if (area.NoTunnel)
-            {
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-area"), xenoBuilder, xenoBuilder);
-                return;
-            }
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-area"), xenoBuilder, xenoBuilder);
+            return;
         }
 
         if (_xenoWeeds.GetWeedsOnFloor((gridId, grid), location, true) is EntityUid weedSource)
@@ -470,7 +467,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             Impact = LogImpact.Low,
         };
 
-        if (_hive.FromSameHive(xenoTunnel.Owner, uid))
+        if (_hive.FromSameHive(xenoTunnel.Owner, uid) && HasComp<TunnelRenamerComponent>(uid))
         {
             args.Verbs.Add(renameTunnelVerb);
         }

@@ -57,6 +57,7 @@
       - XenoParasite
       - XenoEgg
       - XenoFruit
+  - type: TunnelRenamer
   - type: EggPlantTime
     plantTime: 2.5
   - type: MultiHandedHolder
