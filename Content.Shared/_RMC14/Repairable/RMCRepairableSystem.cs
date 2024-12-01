@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Content.Shared._RMC14.Damage;
+﻿using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
@@ -156,8 +155,6 @@ public sealed class RMCRepairableSystem : EntitySystem
 
         var used = args.Used;
 
-        args.Handled = true;
-
         var user = args.User;
 
         if (!TryComp(used, out NailgunComponent? nailgunComp))
@@ -166,6 +163,7 @@ public sealed class RMCRepairableSystem : EntitySystem
         if (!TryComp(user, out HandsComponent? handsComp))
             return;
 
+        args.Handled = true;
         if (!TryComp(repairable, out DamageableComponent? damageable) ||
             damageable.TotalDamage <= FixedPoint2.Zero)
         {
