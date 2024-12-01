@@ -14,7 +14,7 @@ namespace Content.Client._RMC14.UserInterface.Systems.Ghost.Controls
         private string _searchText = string.Empty;
 
         /// <summary>
-        /// Nested dictionary, first string corresponds to a department, second string is a special state or location, the tuple in the end is the warp data.
+        /// Nested dictionary, first string corresponds to a area, second string is a department, the tuple in the end is the warp data.
         /// </summary>
         private Dictionary<string, Dictionary<string, List<(string, NetEntity, string)>>> _categories = new();
 
