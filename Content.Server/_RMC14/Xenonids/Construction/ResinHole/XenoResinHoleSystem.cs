@@ -433,6 +433,8 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 return;
             }
         }
+
+        RemCompDeferred<InResinHoleRangeComponent>(tripper);
     }
 
     private bool CanPlaceResinHole(EntityUid user, EntityCoordinates coords)
