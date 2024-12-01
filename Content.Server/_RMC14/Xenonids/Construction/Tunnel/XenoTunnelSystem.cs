@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Server.Administration.Logs;
 using Content.Server.Players;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Stun;
@@ -31,6 +32,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 {
     //private const string TunnelPrototypeId = "XenoTunnel";
 
+    [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -64,13 +66,17 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         SubscribeLocalEvent<XenoTunnelComponent, TraverseXenoTunnelDoAfterEvent>(OnFinishMoveThroughTunnel);
 
         SubscribeLocalEvent<XenoTunnelComponent, OpenBoundInterfaceMessage>(GetAllAvailableTunnels);
-        SubscribeLocalEvent<XenoTunnelComponent, NameTunnelMessage>(OnNameTunnel);
 
         SubscribeLocalEvent<XenoTunnelComponent, GetVerbsEvent<ActivationVerb>>(OnGetRenameVerb);
         SubscribeLocalEvent<XenoTunnelComponent, InteractUsingEvent>(OnFillTunnel);
         SubscribeLocalEvent<XenoTunnelComponent, XenoCollapseTunnelDoAfterEvent>(OnColapseTunnelFinish);
 
         SubscribeLocalEvent<InXenoTunnelComponent, RegurgitateEvent>(OnRegurgitateInTunnel);
+
+        Subs.BuiEvents<XenoTunnelComponent>(NameTunnelUI.Key, subs =>
+        {
+            subs.Event<NameTunnelMessage>(OnNameTunnel);
+        });
     }
 
     private void OnCreateTunnel(Entity<XenoComponent> xenoBuilder, ref XenoDigTunnelActionEvent args)
@@ -228,6 +234,9 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     private void OnNameTunnel(Entity<XenoTunnelComponent> xenoTunnel, ref NameTunnelMessage args)
     {
         var name = args.TunnelName;
+        if (name.Length > 50)
+            name = name[..50];
+
         var hive = Hive.GetHive(xenoTunnel.Owner);
         if (hive is null)
         {
@@ -251,6 +260,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             return;
         }
 
+        _adminLog.Add(LogType.RMCXenoTunnel, $"{ToPrettyString(args.Actor)} renamed {ToPrettyString(xenoTunnel)} to {name}");
         if (curName is string)
         {
             hiveTunnels.Remove(curName);
@@ -426,18 +436,18 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     private void OnFinishMoveThroughTunnel(Entity<XenoTunnelComponent> destinationXenoTunnel, ref TraverseXenoTunnelDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled)
-        {
             return;
-        }
+
         var (ent, comp) = destinationXenoTunnel;
         var traversingXeno = args.User;
         var startingTunnel = args.Used!.Value;
 
         // If the xeno leaves the tunnel, prevent teleportation
         if (!_container.ContainsEntity(startingTunnel, traversingXeno))
-        {
             return;
-        }
+
+        if (_transform.GetMap(startingTunnel) != _transform.GetMap(destinationXenoTunnel.Owner))
+            return;
 
         var mobContainer = _container.EnsureContainer<Container>(ent, XenoTunnelComponent.ContainedMobsContainerId);
         if (mobContainer.Count >= comp.MaxMobs)
@@ -454,6 +464,9 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
     private void OnGetRenameVerb(Entity<XenoTunnelComponent> xenoTunnel, ref GetVerbsEvent<ActivationVerb> args)
     {
+        if (!HasComp<XenoComponent>(args.User))
+            return;
+
         var uid = args.User;
 
         var renameTunnelVerb = new ActivationVerb

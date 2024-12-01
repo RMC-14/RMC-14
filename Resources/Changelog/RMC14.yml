@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added Chad Scott, Worships-The-Gods figurines
-    type: Add
-  id: 551
-  time: '2024-08-16T03:24:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3670
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added xeno speech sounds
-    type: Add
-  id: 552
-  time: '2024-08-16T03:38:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3679
-- author: Vermidia
-  changes:
-  - message: Fixed auto-injectors being able to draw from containers.
-    type: Fix
-  id: 553
-  time: '2024-08-16T03:39:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3681
 - author: Vermidia
   changes:
   - message: Xenos will no longer look stunned if killed by an AP rocket.
@@ -5038,5 +5017,33 @@
   id: 1050
   time: '2024-11-30T22:05:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4996
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the M54C folding stock do-after cancelling when you move
+    type: Fix
+  id: 1051
+  time: '2024-11-30T23:06:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4991
+- author: DrSmugleaf
+  changes:
+  - message: Fixed M40 HIDP incendiary grenades not fitting into grenade launchers
+      and underbarrel grenade launchers.
+    type: Fix
+  - message: Fixed non-xenos being able to rename tunnels.
+    type: Fix
+  id: 1052
+  time: '2024-11-30T23:08:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4998
+- author: DrSmugleaf
+  changes:
+  - message: Fixed not being able to upgrade barricades.
+    type: Fix
+  - message: Fixed xeno tunnels blocking bullets.
+    type: Fix
+  - message: Fixed xenos being able to tunnel through maps.
+    type: Fix
+  id: 1053
+  time: '2024-11-30T23:51:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4999
 Name: RMC14
 Order: -1
