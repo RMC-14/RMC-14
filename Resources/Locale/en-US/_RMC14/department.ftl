@@ -27,8 +27,8 @@ department-CMAuxiliarySupport = Auxiliary Combat Support
 cm-department-AuxiliarySupport-description = The Auxiliary support personnel are tasked with supporting the marines either by providing support through firepower or other means.
 
 # other
-department-CMOther = Other
-cm-department-Other-description = ""
+department-CMOther = Other Support
+cm-department-Other-description = Provide vital assistance across various non-combat tasks that help maintain the operational efficiency of the ship and support its crew in ways that do not directly involve combat."
 
 # survivor
 department-CMSurvivor = Survivor

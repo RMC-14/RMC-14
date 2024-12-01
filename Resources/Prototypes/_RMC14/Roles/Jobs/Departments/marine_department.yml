@@ -3,7 +3,7 @@
   id: CMSquad
   name: department-CMSquad
   description: cm-department-Marine-description
-  color: "#DE3A3A"
+  color: "#01B5EE"
   roles:
   - CMRifleman
   - CMSquadLeader

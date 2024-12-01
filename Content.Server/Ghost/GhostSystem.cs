@@ -34,12 +34,15 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System.Linq;
 using System.Numerics;
+using Content.Server._RMC14.Ghost;
+using Content.Shared._RMC14.Ghost;
 
 namespace Content.Server.Ghost
 {
     public sealed class GhostSystem : SharedGhostSystem
     {
         [Dependency] private readonly SharedActionsSystem _actions = default!;
+        [Dependency] private readonly RMCGhostSystemHelper _rmcGhostHelper = default!;
         [Dependency] private readonly SharedEyeSystem _eye = default!;
         [Dependency] private readonly FollowerSystem _followerSystem = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
@@ -289,7 +292,7 @@ namespace Content.Server.Ghost
                 return;
             }
 
-            var response = new GhostWarpsResponseEvent(GetPlayerWarps(entity).Concat(GetLocationWarps()).ToList());
+            var response = new RMCGhostWarpsResponseEvent(_rmcGhostHelper.GetWarps(entity));
             RaiseNetworkEvent(response, args.SenderSession.Channel);
         }
 

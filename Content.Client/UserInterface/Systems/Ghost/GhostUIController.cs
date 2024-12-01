@@ -3,6 +3,7 @@ using Content.Client.Ghost;
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Client.UserInterface.Systems.Ghost.Widgets;
 using Content.Shared.Ghost;
+using Content.Shared._RMC14.Ghost;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 
@@ -42,7 +43,7 @@ public sealed class GhostUIController : UIController, IOnSystemChanged<GhostSyst
         system.PlayerUpdated += OnPlayerUpdated;
         system.PlayerAttached += OnPlayerAttached;
         system.PlayerDetached += OnPlayerDetached;
-        system.GhostWarpsResponse += OnWarpsResponse;
+        system.RMCGhostWarpsResponse += OnWarpsResponse;
         system.GhostRoleCountUpdated += OnRoleCountUpdated;
     }
 
@@ -52,7 +53,7 @@ public sealed class GhostUIController : UIController, IOnSystemChanged<GhostSyst
         system.PlayerUpdated -= OnPlayerUpdated;
         system.PlayerAttached -= OnPlayerAttached;
         system.PlayerDetached -= OnPlayerDetached;
-        system.GhostWarpsResponse -= OnWarpsResponse;
+        system.RMCGhostWarpsResponse -= OnWarpsResponse;
         system.GhostRoleCountUpdated -= OnRoleCountUpdated;
     }
 
@@ -91,12 +92,12 @@ public sealed class GhostUIController : UIController, IOnSystemChanged<GhostSyst
         Gui?.Hide();
     }
 
-    private void OnWarpsResponse(GhostWarpsResponseEvent msg)
+    private void OnWarpsResponse(RMCGhostWarpsResponseEvent msg)
     {
         if (Gui?.TargetWindow is not { } window)
             return;
 
-        window.UpdateWarps(msg.Warps);
+        window.UpdateWarps(msg.RMCWarps);
         window.Populate();
     }
 
