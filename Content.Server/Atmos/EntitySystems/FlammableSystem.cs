@@ -294,6 +294,14 @@ namespace Content.Server.Atmos.EntitySystems
             if (!Resolve(uid, ref flammable))
                 return;
 
+            var attemptEv = new RMCIgniteAttemptEvent();
+            RaiseLocalEvent(uid, attemptEv);
+
+            if (attemptEv.Cancelled)
+            {
+                return;
+            }
+
             flammable.FireStacks = MathF.Min(MathF.Max(flammable.MinimumFireStacks, stacks), flammable.MaximumFireStacks);
             Dirty(uid, flammable);
 

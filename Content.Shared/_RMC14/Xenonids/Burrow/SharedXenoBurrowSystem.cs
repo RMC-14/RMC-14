@@ -1,7 +1,9 @@
+using Content.Shared._RMC14.Atmos;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Movement.Events;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Map;
@@ -24,6 +26,9 @@ public abstract partial class SharedXenoBurrowSystem : EntitySystem
         SubscribeLocalEvent<XenoBurrowComponent, BeforeStatusEffectAddedEvent>(PreventEffects);
         SubscribeLocalEvent<XenoBurrowComponent, BeforeDamageChangedEvent>(PreventDamage);
         SubscribeLocalEvent<XenoBurrowComponent, PreventCollideEvent>(PreventCollision);
+        SubscribeLocalEvent<XenoBurrowComponent, RMCIgniteAttemptEvent>(PreventFire);
+        SubscribeLocalEvent<XenoBurrowComponent, InteractionAttemptEvent>(PreventInteraction);
+
     }
 
     private void PreventExamine(EntityUid ent, XenoBurrowComponent comp, ref ExamineAttemptEvent args)
@@ -63,6 +68,25 @@ public abstract partial class SharedXenoBurrowSystem : EntitySystem
     }
 
     private void PreventCollision(EntityUid ent, XenoBurrowComponent comp, ref PreventCollideEvent args)
+    {
+        if (args.Cancelled || !comp.Active)
+        {
+            return;
+        }
+
+        args.Cancelled = true;
+    }
+
+    private void PreventFire(EntityUid ent, XenoBurrowComponent comp, ref RMCIgniteAttemptEvent args)
+    {
+        if (args.Cancelled || !comp.Active)
+        {
+            return;
+        }
+
+        args.Cancel();
+    }
+    private void PreventInteraction(EntityUid ent, XenoBurrowComponent comp, ref InteractionAttemptEvent args)
     {
         if (args.Cancelled || !comp.Active)
         {

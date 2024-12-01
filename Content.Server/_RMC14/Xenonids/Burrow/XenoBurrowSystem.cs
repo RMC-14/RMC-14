@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Xenonids.Burrow;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
@@ -252,8 +253,7 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
 
         var actions = _action.GetActions(ent);
 
-        RMCNightVisionVisibleComponent? nightVisionComp;
-        TryComp(ent, out nightVisionComp);
+        TryComp(ent, out RMCNightVisionVisibleComponent? nightVisionComp);
         _appearance.SetData(xenoBurrower, XenoVisualLayers.Burrow, comp.Active);
         if (active)
         {
