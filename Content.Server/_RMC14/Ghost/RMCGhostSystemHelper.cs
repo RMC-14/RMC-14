@@ -98,7 +98,7 @@ namespace Content.Server._RMC14.Ghost
                     ("entityName", entityName),
                     ("jobName", jobName));
 
-                    if (_jobs.TryGetPrimaryDepartment(jobProto.ID, out var departmentProto))
+                    if (_jobs.TryGetDepartment(jobProto.ID, out var departmentProto))
                     {
                         var warpColor = departmentProto.Color;
 
