@@ -42,7 +42,6 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -274,6 +273,7 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
                 actComp.Enabled = false;
                 Dirty(action.Id, actComp);
             }
+            _transform.AnchorEntity(ent);
         }
         else
         {
@@ -289,6 +289,8 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
                 actComp.Enabled = true;
                 Dirty(action.Id, actComp);
             }
+
+            _transform.Unanchor(ent);
 
             _audio.PlayPvs(comp.BurrowUpSound, ent);
         }

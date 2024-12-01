@@ -20,7 +20,6 @@ public abstract partial class SharedXenoBurrowSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<XenoBurrowComponent, ExamineAttemptEvent>(PreventExamine);
-        SubscribeLocalEvent<XenoBurrowComponent, UpdateCanMoveEvent>(PreventMovement);
 
         SubscribeLocalEvent<XenoBurrowComponent, BeforeStatusEffectAddedEvent>(PreventEffects);
         SubscribeLocalEvent<XenoBurrowComponent, BeforeDamageChangedEvent>(PreventDamage);
@@ -35,16 +34,6 @@ public abstract partial class SharedXenoBurrowSystem : EntitySystem
         }
 
         if (HasComp<XenoComponent>(args.Examiner))
-        {
-            return;
-        }
-
-        args.Cancel();
-    }
-
-    private void PreventMovement(EntityUid ent, XenoBurrowComponent comp, ref UpdateCanMoveEvent args)
-    {
-        if (args.Cancelled || !comp.Active)
         {
             return;
         }

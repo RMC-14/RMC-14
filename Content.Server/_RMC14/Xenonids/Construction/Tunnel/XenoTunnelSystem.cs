@@ -301,7 +301,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             return;
         }
 
-        if (!_actionBlocker.CanMove(enteringEntity))
+        if (!_actionBlocker.CanMove(enteringEntity) || Transform(enteringEntity).Anchored)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-xeno-immobile-failure"), enteringEntity, enteringEntity);
             return;
@@ -335,7 +335,6 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         {
             _popup.PopupEntity(Loc.GetString(enterMessageLocID, ("tunnelName", tunnelName)), enteringEntity, enteringEntity);
         }
-
         var ev = new EnterXenoTunnelDoAfterEvent();
         var doAfterArgs = new DoAfterArgs(_entities, enteringEntity, enterDelay, ev, xenoTunnel.Owner)
         {
@@ -419,7 +418,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             return;
         }
 
-        if (!_actionBlocker.CanMove(enteringEntity))
+        if (!_actionBlocker.CanMove(enteringEntity) || Transform(enteringEntity).Anchored)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-xeno-immobile-failure"), enteringEntity, enteringEntity);
             return;
