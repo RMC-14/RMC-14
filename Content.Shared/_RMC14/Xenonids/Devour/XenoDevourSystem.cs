@@ -426,10 +426,11 @@ public sealed class XenoDevourSystem : EntitySystem
         if (!_container.TryGetContainer(xeno, xeno.Comp.DevourContainerId, out var container) ||
             !_container.Remove(devoured.Owner, container))
         {
-            var ev = new RegurgitateEvent(_entManager.GetNetEntity(xeno.Owner), _entManager.GetNetEntity(devoured.Owner));
-            RaiseLocalEvent(xeno, ev);
             return true;
         }
+
+        var ev = new RegurgitateEvent(_entManager.GetNetEntity(xeno.Owner), _entManager.GetNetEntity(devoured.Owner));
+        RaiseLocalEvent(xeno, ev);
 
         if (doFeedback)
             DoFeedback((xeno, xeno.Comp));
