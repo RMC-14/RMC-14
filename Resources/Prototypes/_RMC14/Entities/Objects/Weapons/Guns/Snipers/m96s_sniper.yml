@@ -34,6 +34,8 @@
     recoilWielded: 1
     scatterWielded: 0
     baseFireRate: 0.667
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 3
   - type: WieldDelay
     baseDelay: 1.2
   - type: ItemSlots
@@ -218,6 +220,14 @@
       ignoreModifiers: true
   - type: CMArmorPiercing
     amount: 50
+  - type: RMCProjectileAccuracy
+    accuracy: 125
+    thresholds:
+    - range: 32
+      falloff: 10
+    - range: 4
+      falloff: 10
+      buildup: true
 
 # TODO RMC14 incendiary
 - type: entity

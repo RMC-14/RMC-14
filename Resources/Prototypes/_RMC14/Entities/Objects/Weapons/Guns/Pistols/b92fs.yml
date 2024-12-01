@@ -25,6 +25,8 @@
           - RMCMagazinePistolB92FS
   - type: GunDamageModifier
     multiplier: 0.9
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.25
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:

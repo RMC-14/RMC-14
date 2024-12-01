@@ -74,7 +74,6 @@
       scatterFlat: -6
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -0.75
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
@@ -117,7 +116,6 @@
       scatterFlat: -2
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: -0.1
       recoilFlat: 2
       scatterFlat: 2
@@ -159,7 +157,6 @@
       scatterFlat: -6
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -2
       accuracyAddMult: -0.25
       recoilFlat: 1
       scatterFlat: 10
@@ -213,7 +210,6 @@
       scatterFlat: -1
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
@@ -244,7 +240,6 @@
       accuracyAddMult: 0.05
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: -0.05
 
 - type: entity
@@ -284,7 +279,6 @@
       scatterFlat: -8
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -2
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
@@ -353,7 +347,6 @@
     - conditions:
         unwieldedOnly: true
         activeOnly: true
-      accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
@@ -474,9 +467,6 @@
       accuracyAddMult: 0.35
       recoilFlat: -3
       scatterFlat: -10
-    - conditions:
-        unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
 
 - type: entity
   parent: RMCStockAttachmentCollapsibleBase
@@ -526,7 +516,6 @@
     - conditions:
         unwieldedOnly: true
         activeOnly: true
-      accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 2
@@ -575,7 +564,6 @@
     - conditions:
         unwieldedOnly: true
         activeOnly: true
-      accuracyMovementPenaltyAddMult: -2
       accuracyAddMult: 0.2
       recoilFlat: -2
 
@@ -671,7 +659,6 @@
       scatterFlat: -6
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: -0.1
       recoilFlat: 1
       scatterFlat: 14

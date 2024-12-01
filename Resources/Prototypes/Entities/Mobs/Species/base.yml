@@ -32,6 +32,7 @@
     - map: [ "outerClothing" ]
     - map: [ "enum.SquadArmorLayers.Armor" ]
     - map: [ "enum.WebbingVisualLayers.Base" ]
+    - map: [ "enum.MedalVisualLayers.Base" ]
     - map: [ "eyes" ]
     - map: [ "belt" ]
     - map: [ "neck" ]
@@ -219,6 +220,7 @@
     - FootstepSound
     - DoorBumpOpener
     - AnomalyHost
+  - type: MobGibbedByExplosionType
 
 - type: entity
   save: false
@@ -329,7 +331,8 @@
     - map: [ "shoes" ]
     - map: [ "ears" ]
     - map: [ "outerClothing" ]
-    - map: ["enum.WebbingVisualLayers.Base"]
+    - map: [ "enum.WebbingVisualLayers.Base" ]
+    - map: [ "enum.MedalVisualLayers.Base" ]
     - map: [ "eyes" ]
     - map: [ "belt" ]
     - map: [ "id" ]

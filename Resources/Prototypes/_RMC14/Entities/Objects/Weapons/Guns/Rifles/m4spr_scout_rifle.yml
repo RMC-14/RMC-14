@@ -22,6 +22,8 @@
     scatterWielded: 2.5
     scatterUnwielded: 8
     baseFireRate: 1.8
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.1
   - type: GunDamageModifier
     multiplier: 1.1 # Lower to allow for normal M4SPR mags to have lower damage. A19 mags do more damage to compensate.
   - type: WieldableSpeedModifiers
@@ -175,6 +177,14 @@
         Piercing: 55
   - type: CMArmorPiercing
     amount: 35
+  - type: RMCProjectileAccuracy
+    accuracy: 105
+    thresholds:
+    - range: 16
+      falloff: 10
+    - range: 4
+      falloff: 10
+      buildup: true
 
 - type: entity
   parent: RMCBaseBullet
@@ -193,6 +203,13 @@
     stunTime: 1
     superSlowTime: 4
     slowTime: 10
+  - type: RMCProjectileAccuracy
+    accuracy: 75
+    thresholds:
+    - range: 16
+      falloff: 10
+    - range: 4
+      falloff: 10
 
 - type: Tag
   id: RMCMagazineRifleM4SPRA19

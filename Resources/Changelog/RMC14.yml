@@ -1,63 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: The Toggle Internals verb no longer shows up in the context menu if no
-      breathing tool is equipped and internals are off.
-    type: Tweak
-  id: 510
-  time: '2024-08-04T02:04:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3518
-- author: DrSmugleaf
-  changes:
-  - message: Added vendor points and weapons spec skills to the admin actions ui.
-    type: Add
-  id: 511
-  time: '2024-08-04T02:04:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3517
-- author: Sigil
-  changes:
-  - message: You can no longer use binoculars when not holding them in your active
-      hand.
-    type: Fix
-  id: 512
-  time: '2024-08-04T09:21:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3526
-- author: Whisper
-  changes:
-  - message: Added Shawn Fox, Madelynn 'Buzz' Lewis figurines
-    type: Add
-  id: 513
-  time: '2024-08-04T11:19:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3470
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the Overwatch Console bugging out until a reconnect.
-    type: Fix
-  id: 514
-  time: '2024-08-04T11:19:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3529
-- author: crystalHex
-  changes:
-  - message: Hive core now has a warp point.
-    type: Tweak
-  id: 515
-  time: '2024-08-04T23:13:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3530
-- author: DrSmugleaf
-  changes:
-  - message: Fixed nested marines not being able to see anything.
-    type: Fix
-  - message: Fixed xenonids being able to attack marines that are both nested and
-      infected.
-    type: Fix
-  - message: Fixed the client sometimes falsely showing the red color flash effect
-      when attacking something that they can't, like allied xenonids.
-    type: Fix
-  id: 516
-  time: '2024-08-05T03:08:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3540
-- author: DrSmugleaf
-  changes:
   - message: Fixed the M276 pattern combat toolbelt rig being able to hold more than
       one pistol. It is now limited to one gun max.
     type: Fix
@@ -4918,5 +4861,115 @@
   id: 1009
   time: '2024-11-22T00:46:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4857
+- author: Sigil
+  changes:
+  - message: The accuracy mechanic has been implemented. Projectiles can now miss
+      creatures and pass through them without doing damage. Accuracy depends on the
+      specific projectile and the firing weapon's multiplier. The latter can be seen
+      by examining any given weapon. Accuracy decays rapidly past a certain distance.
+    type: Add
+  - message: Evasion implemented. It is subtracted from any impacting projectiles'
+      accuracy. The spec invisibility items now grant a massive bonus to evasion against
+      friendly fire. Tasers ignore FF evasion.
+    type: Add
+  - message: 'A new attachment is now publicly available: the red-dot sight. It improves
+      the accuracy multiplier of the weapon it''s attached to. The exact values can
+      be seen by examining it. Some other attachments also affect accuracy. Examine
+      them to see the effects.'
+    type: Add
+  - message: 'THIS IS A PUBLIC SERVICE ANNOUNCEMENT: THE FOCUS ORDER IS BAD. DO NOT
+      USE IT. The focus order is now available to any marines able to use orders.
+      It slightly improves the accuracy of all projectiles fired while under its effect.'
+    type: Add
+  - message: PBs have been implemented. A "PB" is a point-blank shot. You need to
+      click directly on the target creature in melee range of you to make a PB. A
+      PB always hits the target, ignoring its evasion, the shot's accuracy and any
+      creatures between the shooter and the target. If the target is prone, it takes
+      +20% damage from the PB. Note that you can't PB yourself on full-auto and will
+      instead shoot normally.
+    type: Add
+  - message: Dual-wielding weapons in the same weapon group now worsens their scatter
+      and accuracy. Dual-wielding weapons no longer affects their damage.
+    type: Tweak
+  - message: The mobility order buffs the evasion of any marines under its effect.
+    type: Tweak
+  - message: The laser sight is now available in the SG gear rack.
+    type: Fix
+  id: 1010
+  time: '2024-11-22T08:49:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4752
+- author: Vermidia
+  changes:
+  - message: Added Acider Runner, who can apply acid to marines on hit, and gains
+      acid reserves which they can spend on boiler-level acid that can be applied
+      quickly or become a living time bomb For The Hive!
+    type: Add
+  - message: Corrosive acid no longer ignores barricade resistances for damage.
+    type: Fix
+  - message: Fix boiler gas not doing armor ignoring damage, it now does greater damage
+      with only a small portion being effected by armor.
+    type: Fix
+  id: 1011
+  time: '2024-11-22T09:00:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4816
+- author: TsjipTsjip
+  changes:
+  - message: Mutiny tooling.
+    type: Add
+  id: 1012
+  time: '2024-11-22T09:01:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4882
+- author: CyberTropic
+  changes:
+  - message: Kutjevo Refinery
+    type: Add
+  id: 1013
+  time: '2024-11-22T09:55:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4806
+- author: DrSmugleaf
+  changes:
+  - message: Added orbital bombardment. The cannon is loaded far west first floor,
+      and fired through the overwatch console in CIC.
+    type: Add
+  - message: Added squad transfers through the overwatch console.
+    type: Add
+  - message: Added playtime medals, which make you spawn with one depending on your
+      playtime for that role.
+    type: Add
+  - message: Added xeno ranks, which change your name depending on your playtime with
+      that caste.
+    type: Add
+  - message: Added custom xeno names, which unlock with total xeno playtime.
+    type: Add
+  - message: Added Mizuno 'Kitty' Drakonovisch figurine.
+    type: Add
+  - message: Fixed tackles not working like 13, see the Discord for an explanation.
+    type: Fix
+  - message: Possibly fix a bug that would make it so long rounds lagged for anyone
+      that heavily used the overwatch console or security cameras.
+    type: Fix
+  - message: Fixed webbing verbs not showing up instantly when right clicking an uniform.
+    type: Fix
+  id: 1014
+  time: '2024-11-22T20:52:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4904
+- author: DrSmugleaf
+  changes:
+  - message: Fixed not being able to pull stunned marines.
+    type: Fix
+  - message: Fixed the mateba belt worn sprite being giant.
+    type: Fix
+  - message: Fixed the Queen not looking like she's in Ovi.
+    type: Fix
+  id: 1015
+  time: '2024-11-22T22:50:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4911
+- author: Vermidia
+  changes:
+  - message: Fixed hypersleep pods stunning on exit
+    type: Fix
+  id: 1016
+  time: '2024-11-24T07:22:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4927
 Name: RMC14
 Order: -1

@@ -385,8 +385,8 @@
         amount: 11
       - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 5
-      #- id: RMCAttachmentS5RedDotSight # UNCOMMENT WHEN ACCURACY IS IMPLEMENTED
-      #  amount: 10
+      - id: RMCAttachmentS5RedDotSight
+        amount: 10
       - id: RMCAttachmentS6ReflexSight
         amount: 10
       - id: RMCAttachmentS84xTelescopicScope
