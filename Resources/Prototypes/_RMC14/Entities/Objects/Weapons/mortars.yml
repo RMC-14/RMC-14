@@ -117,6 +117,28 @@
 
 - type: entity
   parent: RMCMortarShellBase
+  id: RMCMortarShellIncendiary
+  name: 80mm incendiary mortar shell
+  description: An 80mm mortar shell, loaded with a Type B napalm charge. Perfect for long-range area denial.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/mortar.rsi
+    state: mortar_ammo_inc
+  - type: Explosive
+    explosionType: RMCMortar
+    maxIntensity: 30 # max 150 brute, 150 burn
+    intensitySlope: 6
+    totalIntensity: 800
+    canCreateVacuum: false
+  - type: CMExplosionEffect
+  - type: RMCScorchEffect
+  - type: MortarShell
+  - type: TileFireOnTrigger
+    spawn: RMCTileFireGreen
+    range: 5
+
+- type: entity
+  parent: RMCMortarShellBase
   id: RMCMortarShellFlare
   name: 80mm flare/camera mortar shell
   description: An 80mm mortar shell, loaded with an illumination flare / camera combo, attached to a parachute.

@@ -238,3 +238,34 @@
       state: xeno_readmit
     event: !type:ManageHiveActionEvent
     useDelay: 0.5
+
+- type: entity
+  id: ActionXenoDodge
+  parent: ActionXenoBase
+  name: Dodge (200)
+  description: Gain a speed boost for 7 seconds. Your speed is doubled near enemies.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_dodge
+    event: !type:XenoDodgeActionEvent
+    useDelay: 19
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoBurrow
+  name: Burrow
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: burrow
+    event: !type:XenoBurrowActionEvent
+    range: -1
+    repeat: true
+    deselectOnMiss: false
+    checkCanAccess : false
+  - type: ActionBlockIfResting

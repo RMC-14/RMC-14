@@ -2,6 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Server.Hands.Systems;
 using Content.Server.Mind;
+using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -122,7 +123,13 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         if (!_hands.TryGetEmptyHand(xeno, out var _))
             return;
 
-        if (RemoveParasite(xeno) is not EntityUid newParasite)
+        if (HasComp<OnFireComponent>(xeno))
+        {
+            _popup.PopupEntity("Retrieving a stored parasite while we're on fire would burn it!", xeno, args.Performer, PopupType.MediumCaution);
+            return;
+        }
+
+        if (RemoveParasite(xeno) is not { } newParasite)
             return;
 
         _hive.SetSameHive(xeno.Owner, newParasite);

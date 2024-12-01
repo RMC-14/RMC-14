@@ -1,0 +1,22 @@
+- type: entity
+  id: XenoTunnel
+  name: Tunnel
+  description: A tunnel entrance. Looks like it was dug by some kind of clawed beast.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_tunnel.rsi
+    state: hole
+  - type: InteractionOutline
+  - type: Clickable
+  - type: RMCNightVisionVisible
+    priority: -1
+    transparency: 0.2
+  - type: XenoTunnel
+  - type: UserInterface
+    interfaces:
+      enum.SelectDestinationTunnelUI.Key:
+        type: SelectDestinationTunnelBui
+      enum.NameTunnelUI.Key:
+        type: NameTunnelBui

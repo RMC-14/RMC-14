@@ -99,7 +99,6 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: praetorian
-  - type: AcidTrap
   - type: SlowOnPull
     slowdowns:
     - multiplier: 0.5875
@@ -127,7 +126,7 @@
     plasmaCost: 80
     doAfter: 0.5
   - type: XenoLeap
-    plasmaCost: 50
+    plasmaCost: 40
     delay: 0
     knockdownTime: 0
     range: 6
@@ -137,7 +136,10 @@
   - type: XenoAcidBall
   - type: XenoEvolution
     strains:
+    - RMCXenoPraetorianDancer
+    - RMCXenoPraetorianVanguard
     - RMCXenoPraetorianWarden
+  - type: AcidTrap
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -189,7 +191,7 @@
         Brute: 36
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.2
-    baseSprintSpeed: 3.4
+    baseSprintSpeed: 3.5
   - type: SlowOnPull
     slowdowns:
     - multiplier: 0.64
@@ -204,3 +206,88 @@
       whitelist:
         components:
         - XenoHeavy
+  - type: AcidTrap
+
+- type: entity
+  parent: CMXenoPraetorianBase
+  id: RMCXenoPraetorianDancer
+  suffix: Dancer
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Praetorian/dancer_praetorian.rsi
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcidNormal
+    - ActionXenoImpale
+    - ActionXenoDodge
+    - ActionXenoTailTrip
+    - ActionXenoDevolve
+    hidden: true
+  - type: XenoStrain
+    name: rmc-xeno-dancer-name
+    description: rmc-xeno-dancer-description
+    popup: rmc-xeno-dancer-popup
+  - type: AcidTrap
+  - type: CMArmor
+    armor: 20
+  - type: XenoClaws
+    clawType: Sharp
+  - type: XenoFinesse
+  - type: XenoDodge
+  - type: XenoImpale
+    damage:
+      groups:
+        Brute: 40
+  - type: XenoTailTrip
+
+- type: entity
+  parent: CMXenoPraetorianBase
+  id: RMCXenoPraetorianVanguard
+  suffix: Vanguard
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Praetorian/vanguard_praetorian.rsi
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      590: Critical
+      690: Dead
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoPierce
+    - ActionXenoBlitz
+    - ActionXenoCleave
+    - ActionXenoToggleCleave
+    - ActionXenoDevolve
+    hidden: true
+  - type: XenoStrain
+    name: rmc-xeno-vanguard-name
+    description: rmc-xeno-vanguard-description
+    popup: rmc-xeno-vanguard-popup
+  - type: XenoClaws
+    clawType: Sharp
+  - type: XenoShield
+  - type: VanguardShield
+  - type: XenoPierce
+    damage:
+      groups:
+        Brute: 45
+  - type: XenoLeap
+    plasmaCost: 50
+    delay: 0
+    knockdownTime: 0
+    range: 6
+    moveDelayTime: 0
+  - type: XenoBlitz
+    damage:
+      groups:
+        Brute: 40
+  - type: XenoCleave

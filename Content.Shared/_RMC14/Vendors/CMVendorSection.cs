@@ -26,7 +26,7 @@ public sealed partial class CMVendorSection
 
 [DataDefinition]
 [Serializable, NetSerializable]
-public sealed partial class CMVendorEntry
+public sealed partial record CMVendorEntry
 {
     [DataField(required: true)]
     public EntProtoId Id;
@@ -45,4 +45,10 @@ public sealed partial class CMVendorEntry
 
     [DataField]
     public bool Recommended;
+
+    [DataField]
+    public int? Multiplier;
+
+    [DataField]
+    public int? Max;
 }

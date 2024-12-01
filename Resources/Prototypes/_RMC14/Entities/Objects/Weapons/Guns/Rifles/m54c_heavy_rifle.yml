@@ -56,6 +56,7 @@
     slots:
       gun_magazine:
         name: Magazine
+        startingItem: CMMagazineRifleM54CE2
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_unload.ogg
         priority: 2

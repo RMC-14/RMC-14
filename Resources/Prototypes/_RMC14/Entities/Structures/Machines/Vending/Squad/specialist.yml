@@ -32,16 +32,16 @@
       entries:
       - id: RMCMagazineRifleM4SPRA19Impact
         points: 40
-#      - id: RMCMagazineRifleM4SPRA19 # TODO rmc14 RMCMagazineRifleM4SPRA19Incendiary
-#        points: 40
+      - id: RMCMagazineRifleM4SPRA19Incendiary
+        points: 40
       - id: RMCMagazineRifleM4SPRA19
         points: 40
     - name: Extra Sniper Ammunition
       entries:
 #      - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
 #        points: 40
-#      - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
-#        points: 40
+      - id: CMMagazineSniperM96SIncendiary
+        points: 40
       - id: CMMagazineSniperM96S
         points: 40
     - name: Extra Demolitionist Ammunition
@@ -66,8 +66,10 @@
         name: M40 HSDP Smoke Grenades (x6)
         points: 20
         spawn: 6
-    #- id: M40HIDPIncendiaryGrenadesx6
-    #  points: 40
+      - id: RMCPacketGrenadeIncendiaryFilled
+        name: M40 HIDP Incendiary Grenades (x6)
+        points: 40
+        spawn: 6
     #- id: M40HPDPWhitePhosphorusGrenadesx6
     #  points: 40
     #- id: M74AGMFFragmentationGrenadesx6
