@@ -14,6 +14,7 @@
   - CMAccessCMP # chief MP
   - CMAccessCO # commanding officer
   - CMAccessCommand # all command level doors, including bridge. May need to be split.
+  - CMAccessSenior # senior command access (CMO, ASO, CMP, XO, CO, SEA)
   - CMAccessCrewman # access for dropship maintenance doors
   - CMAccessChemistry # access for chem doors and chem machines
   - CMAccessDelta # Squad prep access
@@ -43,6 +44,48 @@
 # XO/EO Uses this.
 - type: accessGroup
   id: MarineMain
+  tags:
+  - CMAccessAlpha
+  - CMAccessArmory
+  - CMAccessASO
+  - CMAccessBravo
+  - CMAccessBrig
+  - CMAccessCE
+  - CMAccessCharlie
+  - CMAccessCMO
+  - CMAccessCMP
+  - CMAccessCommand
+  - CMAccessSenior
+  - CMAccessCrewman
+  - CMAccessChemistry
+  - CMAccessDelta
+  - CMAccessDropship
+  - CMAccessEngineering
+  - CMAccessCombatTechPrep
+  - CMAccessFTLPrep
+  - CMAccessKitchen
+  - CMAccessMaint
+  - CMAccessMarinePrep
+  - CMAccessMedical
+  - CMAccessMedPrep
+  - CMAccessOT
+  - CMAccessPilot
+  - CMAccessPress
+  - CMAccessQM
+  - CMAccessRequisitions
+  - CMAccessResearch
+  - CMAccessSEA
+  - CMAccessSmartPrep
+  - CMAccessSpecPrep
+  - CMAccessSquadLeaderPrep
+  - CMAccessMarineRifleman
+
+# all ship-side access besides senior
+# SO uses this.
+# Liaison uses this.
+# SEA uses this.
+- type: accessGroup
+  id: MarineMainNoSenior
   tags:
   - CMAccessAlpha
   - CMAccessArmory

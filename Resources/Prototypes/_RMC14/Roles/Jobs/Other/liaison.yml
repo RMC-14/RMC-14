@@ -13,7 +13,7 @@
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-we-ya
   accessGroups:
-  - MarineMain
+  - MarineMainNoSenior
   - RMCWeYa
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
