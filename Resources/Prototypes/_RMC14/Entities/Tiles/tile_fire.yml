@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: RMCTileFire
   name: fire
   placement:
@@ -29,6 +29,8 @@
   - type: InteractionOutline
   - type: PointLight
     radius: 2
+    energy: 2
+    color: "#FFBF00"
   - type: EffectVisuals
   - type: Tag
     tags:
@@ -64,6 +66,8 @@
     layers:
     - map: [ "base" ]
       state: green_4
+  - type: PointLight
+    color: "#00cf5a"
   - type: RMCIgniteOnCollide
     maxStacks: 10
     tileDamage:
@@ -98,6 +102,8 @@
     layers:
     - map: [ "base" ]
       state: white_4
+  - type: PointLight
+    color: "#C8FFFF"
   - type: RMCIgniteOnCollide
     intensity: 80
     duration: 70
