@@ -28,9 +28,8 @@
   - type: Clickable
   - type: InteractionOutline
   - type: PointLight
-    radius: 2
-    energy: 2
-    color: "#FFBF00"
+    radius: 4.75
+    color: "#bfa902"
   - type: EffectVisuals
   - type: Tag
     tags:
@@ -67,7 +66,7 @@
     - map: [ "base" ]
       state: green_4
   - type: PointLight
-    color: "#00cf5a"
+    color: "#069420"
   - type: RMCIgniteOnCollide
     maxStacks: 10
     tileDamage:
@@ -103,7 +102,7 @@
     - map: [ "base" ]
       state: white_4
   - type: PointLight
-    color: "#C8FFFF"
+    color: "#8fcbeb"
   - type: RMCIgniteOnCollide
     intensity: 80
     duration: 70
