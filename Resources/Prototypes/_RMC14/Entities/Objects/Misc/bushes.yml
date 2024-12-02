@@ -861,7 +861,7 @@
   - type: PointLight
     castShadows: false
     radius: 2
-    color: "#E2C333"
+    color: "#F1d450"
     
 # Stumps
 - type: entity
