@@ -7,6 +7,7 @@ using Content.Shared.Coordinates;
 using Robust.Shared.Audio;
 using Robust.Shared.Random;
 
+
 namespace Content.Server._RMC14.Evacuation;
 
 public sealed class EvacuationSystem : SharedEvacuationSystem
@@ -25,6 +26,7 @@ public sealed class EvacuationSystem : SharedEvacuationSystem
         base.Initialize();
         _evacuationDoorQuery = GetEntityQuery<EvacuationDoorComponent>();
     }
+
 
     protected override void LaunchEvacuationFTL(EntityUid grid, float crashLandChance, SoundSpecifier? launchSound)
     {
