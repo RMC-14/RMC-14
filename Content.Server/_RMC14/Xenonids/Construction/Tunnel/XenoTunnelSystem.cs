@@ -72,6 +72,8 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         SubscribeLocalEvent<XenoTunnelComponent, XenoCollapseTunnelDoAfterEvent>(OnColapseTunnelFinish);
 
         SubscribeLocalEvent<InXenoTunnelComponent, RegurgitateEvent>(OnRegurgitateInTunnel);
+        SubscribeLocalEvent<InXenoTunnelComponent, ComponentInit>(OnInTunnel);
+        SubscribeLocalEvent<InXenoTunnelComponent, ComponentRemove>(OnOutTunnel);
 
         Subs.BuiEvents<XenoTunnelComponent>(NameTunnelUI.Key, subs =>
         {
@@ -565,9 +567,20 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         {
             _transform.DropNextTo(mob, xenoTunnel.Owner);
             _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-fill-xeno-drop"), mob, mob);
+            RemCompDeferred<InXenoTunnelComponent>(mob);
         }
 
         QueueDel(xenoTunnel.Owner);
+    }
+
+    private void OnInTunnel(Entity<InXenoTunnelComponent> tunneledXeno, ref ComponentInit args)
+    {
+        DisableAllAbilities(tunneledXeno.Owner);
+    }
+
+    private void OnOutTunnel(Entity<InXenoTunnelComponent> tunneledXeno, ref ComponentRemove args)
+    {
+        EnableAllAbilities(tunneledXeno.Owner);
     }
 
     private void OnRegurgitateInTunnel(Entity<InXenoTunnelComponent> tunneledXeno, ref RegurgitateEvent args)
@@ -593,6 +606,24 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             return false;
         }
         return true;
+    }
+
+    private void DisableAllAbilities(EntityUid ent)
+    {
+        SetEnabledStatusAllAbilities(ent, false);
+    }
+
+    private void EnableAllAbilities(EntityUid ent)
+    {
+        SetEnabledStatusAllAbilities(ent, true);
+    }
+    private void SetEnabledStatusAllAbilities(EntityUid ent, bool newStatus)
+    {
+        var actions = _action.GetActions(ent);
+        foreach ((var actionEnt, var actionComp) in actions)
+        {
+            actionComp.Enabled = newStatus;
+        }
     }
     public bool TryPlaceTunnel(Entity<HiveMemberComponent?> builder, string name, [NotNullWhen(true)] out EntityUid? tunnelEnt)
     {
