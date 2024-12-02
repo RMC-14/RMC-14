@@ -13,7 +13,7 @@
   - CMAccessCMO # chief medical officer
   - CMAccessCMP # chief MP
   - CMAccessCO # commanding officer
-  - CMAccessCommand # all command level doors, including bridge. May need to be split.
+  - CMAccessCommand # all command level doors, including bridge
   - CMAccessSenior # senior command access (CMO, ASO, CMP, XO, CO, SEA)
   - CMAccessCrewman # access for dropship maintenance doors
   - CMAccessChemistry # access for chem doors and chem machines
