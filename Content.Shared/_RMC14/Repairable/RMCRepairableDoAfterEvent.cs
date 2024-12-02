@@ -5,3 +5,6 @@ namespace Content.Shared._RMC14.Repairable;
 
 [Serializable, NetSerializable]
 public sealed partial class RMCRepairableDoAfterEvent : SimpleDoAfterEvent;
+
+[Serializable, NetSerializable]
+public sealed partial class RMCNailgunRepairableDoAfterEvent : SimpleDoAfterEvent;

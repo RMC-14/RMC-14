@@ -48,7 +48,7 @@ public sealed class PowerLoaderSystem : EntitySystem
     [Dependency] private readonly SharedMoverController _mover = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
@@ -180,6 +180,23 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
         DeleteVirtuals(ent, buckle);
+    }
+
+    private void OnUserActivateInWorld(Entity<PowerLoaderComponent> ent, ref UserActivateInWorldEvent args)
+    {
+        var grabEv = new PowerLoaderGrabEvent(ent, args.Target, GetBuckled(ent).ToList(), args.Target);
+        RaiseLocalEvent(args.Target, ref grabEv);
+        if (!CanPickupPopup(ent, args.Target, out var delay))
+            return;
+
+        var ev = new PowerLoaderGrabDoAfterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, ent, delay, ev, ent, args.Target)
+        {
+            BreakOnMove = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+        };
+
+        _doAfter.TryStartDoAfter(doAfter);
     }
 
     private void OnGrabDoAfter(Entity<PowerLoaderComponent> ent, ref PowerLoaderGrabDoAfterEvent args)
@@ -371,6 +388,11 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         var user = new Entity<PowerLoaderComponent?>(args.User, null);
         var used = args.Used;
+        var powerLoaderEv = new PowerLoaderInteractEvent(args.User, target, args.Used, GetBuckled(args.User).ToList());
+        RaiseLocalEvent(used, ref powerLoaderEv);
+        if (powerLoaderEv.Handled)
+            return;
+
 
         var slotEv = new GetAttachementSlotEvent(_entityManager.GetNetEntity(user), _entityManager.GetNetEntity(used));
         RaiseLocalEvent(target, slotEv);
@@ -878,6 +900,12 @@ public sealed class PowerLoaderSystem : EntitySystem
                 }
             }
         }
+    }
+
+    public void TrySyncHands(Entity<PowerLoaderComponent?> loader)
+    {
+        if (Resolve(loader, ref loader.Comp, false))
+            SyncHands((loader, loader.Comp));
     }
 
     private void DeleteVirtuals(Entity<PowerLoaderComponent> loader, EntityUid user)

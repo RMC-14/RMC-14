@@ -43,6 +43,14 @@
 
 - type: entity
   parent: RMCCableCoil
+  id: RMCCableCoil30
+  suffix: 30
+  components:
+  - type: Stack
+    count: 30
+
+- type: entity
+  parent: RMCCableCoil
   id: RMCCableCoil20
   suffix: 20
   components:

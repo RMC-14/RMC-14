@@ -19,8 +19,8 @@
     proto: moth
   - type: Vocal
     sounds:
-      Male: UnisexMoth
-      Female: UnisexMoth
+      Male: RMCMaleMoth
+      Female: RMCFemaleMoth
       Unsexed: UnisexMoth
   - type: DamageVisuals
     damageOverlayGroups:
@@ -67,6 +67,7 @@
     - map: [ "outerClothing" ]
     - map: [ "enum.SquadArmorLayers.Armor" ]
     - map: [ "enum.WebbingVisualLayers.Base" ]
+    - map: [ "enum.MedalVisualLayers.Base" ]
     - map: [ "eyes" ]
     - map: [ "belt" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ]
@@ -87,3 +88,5 @@
       state: "creampie_moth"
       visible: false
     - map: [ "acided" ]
+    - map: [ "enum.NewPlayerLayers.Layer" ]
+      visible: false

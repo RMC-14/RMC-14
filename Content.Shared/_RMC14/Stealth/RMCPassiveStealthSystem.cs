@@ -28,6 +28,9 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
 
     private void OnInit(Entity<RMCPassiveStealthComponent> ent, ref ComponentInit args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (Paused(ent.Owner))
             return;
 
@@ -37,6 +40,9 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
 
     private void OnFolded(Entity<RMCPassiveStealthComponent> ent, ref FoldedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (ent.Comp.Enabled == null)
             return;
 
@@ -52,6 +58,9 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
 
     private void OnToggle(Entity<RMCPassiveStealthComponent> ent, ref ActivateInWorldEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (!ent.Comp.Toggleable)
             return;
 
@@ -102,7 +111,7 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
                 var invis = EnsureComp<EntityActiveInvisibleComponent>(uid);
                 if (time < stealthComp.Delay)
                 {
-                    invis.Opacity = (float) (1 - (time / stealthComp.Delay) * (1 - stealthComp.MinOpacity)); // Linear function from 1 to MinOpacity
+                    invis.Opacity = (float) (stealthComp.MaxOpacity - (time / stealthComp.Delay) * (stealthComp.MaxOpacity - stealthComp.MinOpacity)); // Linear function from 1 to MinOpacity
                 }
                 else
                 {
@@ -119,7 +128,7 @@ public sealed class RMCPassiveStealthSystem : EntitySystem
 
                 if (time < stealthComp.Delay)
                 {
-                    invis.Opacity = (float) (stealthComp.MinOpacity + (time / stealthComp.Delay) * (1 - stealthComp.MinOpacity) ); // Linear function from MinOpacity to 1
+                    invis.Opacity = (float) (stealthComp.MinOpacity + (time / stealthComp.Delay) * (stealthComp.MaxOpacity - stealthComp.MinOpacity) ); // Linear function from MinOpacity to 1
                     Dirty(uid, invis);
                     continue;
                 }

@@ -76,6 +76,14 @@
     {
       "name": "o2-inhand-left",
       "directions": 4
+    },
+    {
+      "name": "firefirstaid-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "firefirstaid-inhand-right",
+      "directions": 4
     }
   ]
 }

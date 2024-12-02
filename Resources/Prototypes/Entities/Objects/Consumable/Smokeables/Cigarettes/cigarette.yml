@@ -14,7 +14,9 @@
   - type: SpaceGarbage
   - type: Clothing
     sprite: Objects/Consumable/Smokeables/Cigarettes/cigarette.rsi
-    slots: [ mask ]
+    slots:
+    - mask
+    - ears
     equippedPrefix: unlit
   - type: Item
     size: Tiny

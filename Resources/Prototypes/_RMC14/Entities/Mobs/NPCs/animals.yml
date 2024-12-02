@@ -10,6 +10,12 @@
   - type: RMCNightVisionVisible
   - type: InfectStopOnDeath
   - type: CrashLandable
+  - type: PressureImmunity
+  - type: Respirator
+    minSaturation: 5.0
+  - type: Temperature
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
 
 - type: entity
   parent: [MobMonkey, RMCSmallHost]
@@ -18,12 +24,6 @@
   components:
   - type: GhostRole
     prob: 0
-  - type: Respirator
-    damage: {}
-    damageRecovery: {}
-  - type: Barotrauma
-    damage: {}
-
 
 - type: entity
   parent: [MobKobold, RMCSmallHost]
@@ -32,11 +32,6 @@
   components:
   - type: GhostRole
     prob: 0
-  - type: Respirator
-    damage: {}
-    damageRecovery: {}
-  - type: Barotrauma
-    damage: {}
 
 - type: entity
   parent: MobMouse
@@ -46,6 +41,12 @@
   - type: GhostRole
     prob: 0
   - type: CrashLandable
+  - type: PressureImmunity
+  - type: Respirator
+    minSaturation: 5.0
+  - type: Temperature
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
 
 - type: entity
   parent: MobMouse1
@@ -54,6 +55,12 @@
   components:
   - type: GhostRole
     prob: 0
+  - type: PressureImmunity
+  - type: Respirator
+    minSaturation: 5.0
+  - type: Temperature
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
 
 - type: entity
   parent: MobMouse2
@@ -62,6 +69,12 @@
   components:
   - type: GhostRole
     prob: 0
+  - type: PressureImmunity
+  - type: Respirator
+    minSaturation: 5.0
+  - type: Temperature
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
 
 - type: entity
   parent: MobCorgiPuppy
@@ -73,6 +86,12 @@
     follow: true
     location: Mister Wiggles
   - type: CrashLandable
+  - type: PressureImmunity
+  - type: Respirator
+    minSaturation: 5.0
+  - type: Temperature
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
 
 - type: entity
   parent: MobCatCalico
@@ -84,6 +103,46 @@
     follow: true
     location: Jones
   - type: CrashLandable
+  - type: PressureImmunity
+  - type: Respirator
+    minSaturation: 5.0
+  - type: Temperature
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
+
+- type: entity
+  parent: MobCatCalico
+  id: RMCMobOrion
+  name: Orion
+  description: A domesticated, feline pet. The collar says 'Orion'.
+  components:
+  - type: WarpPoint
+    follow: true
+    location: Orion
+  - type: CrashLandable
+  - type: PressureImmunity
+  - type: Respirator
+    minSaturation: 5.0
+  - type: Temperature
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
+
+- type: entity
+  parent: MobCat
+  id: RMCMobGarry
+  name: Garry
+  description: Her fur has the look and feel of velvet, and her tail quivers occasionally.
+  components:
+  - type: WarpPoint
+    follow: true
+    location: Garry
+  - type: CrashLandable
+  - type: PressureImmunity
+  - type: Respirator
+    minSaturation: 5.0
+  - type: Temperature
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
 
 # Spawners
 
@@ -158,3 +217,34 @@
   - type: ConditionalSpawner
     prototypes:
     - CMMobJones
+
+- type: entity
+  parent: MarkerBase
+  id: CMSpawnMobOrion
+  name: Orion Spawner
+  suffix: RMC
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: cat2
+      sprite: Mobs/Pets/cat.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobOrion
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnMobGarry
+  name: Garry Spawner
+  suffix: RMC
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: cat
+      sprite: Mobs/Pets/cat.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobGarry
+

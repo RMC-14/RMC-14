@@ -39,7 +39,9 @@ rmc-dropship-weapons-cams = CAMS
 rmc-dropship-weapons-cancel = CANCEL
 rmc-dropship-weapons-exit = EXIT
 
-rmc-dropship-weapons-offset-calibration = Offset Calibration
+rmc-dropship-weapons-offset-calibration = Camera
+  Offset
+rmc-dropship-weapons-offset-calibration-does-not-affect-direct-bombardment = Does not affect direct bombardment!
 
 rmc-dropship-weapons-fire = FIRE
 rmc-dropship-weapons-strike = STRIKE

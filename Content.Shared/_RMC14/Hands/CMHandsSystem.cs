@@ -1,7 +1,12 @@
-﻿using Content.Shared.Hands.Components;
+﻿using Content.Shared._RMC14.Storage;
+using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Mobs;
+using Content.Shared.Popups;
+using Content.Shared.Storage;
+using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 
@@ -11,6 +16,9 @@ public sealed class CMHandsSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly RMCStorageSystem _rmcStorage = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
@@ -19,6 +27,7 @@ public sealed class CMHandsSystem : EntitySystem
         SubscribeLocalEvent<WhitelistPickupByComponent, GettingPickedUpAttemptEvent>(OnWhitelistGettingPickedUpAttempt);
         SubscribeLocalEvent<WhitelistPickupComponent, PickupAttemptEvent>(OnWhitelistPickUpAttempt);
         SubscribeLocalEvent<DropHeldOnIncapacitateComponent, MobStateChangedEvent>(OnDropMobStateChanged);
+        SubscribeLocalEvent<RMCStorageEjectHandComponent, GetVerbsEvent<AlternativeVerb>>(OnStorageEjectHandVerbs);
     }
 
     private void OnXenoHandsMapInit(Entity<GiveHandsComponent> ent, ref MapInitEvent args)
@@ -64,6 +73,29 @@ public sealed class CMHandsSystem : EntitySystem
         }
     }
 
+    private void OnStorageEjectHandVerbs(Entity<RMCStorageEjectHandComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanInteract)
+            return;
+
+        if (!_inventory.TryGetContainingSlot(ent.Owner, out var slot))
+            return;
+
+        var user = args.User;
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Text = "Unequip",
+            Act = () =>
+            {
+                if (_inventory.TryGetContainingSlot(ent.Owner, out slot) &&
+                    _inventory.TryUnequip(user, user, slot.Name, checkDoafter: true))
+                {
+                    _hands.TryPickupAnyHand(user, ent.Owner);
+                }
+            },
+        });
+    }
+
     public bool IsPickupByAllowed(Entity<WhitelistPickupByComponent?> item, Entity<WhitelistPickupComponent?> user)
     {
         Resolve(item, ref item.Comp, false);
@@ -88,6 +120,47 @@ public sealed class CMHandsSystem : EntitySystem
             return false;
 
         user = container.Owner;
+        return true;
+    }
+
+    public bool TryStorageEjectHand(EntityUid user, string handName)
+    {
+        if (!_hands.TryGetHand(user, handName, out var hand) ||
+            hand.HeldEntity is not { } held)
+        {
+            return false;
+        }
+
+        return TryStorageEjectHand(user, held);
+    }
+
+    public bool TryStorageEjectHand(EntityUid user, EntityUid item)
+    {
+        if (!TryComp(item, out RMCStorageEjectHandComponent? eject) ||
+            !TryComp(item, out StorageComponent? storage))
+        {
+            return false;
+        }
+
+        if (eject.Whitelist != null)
+        {
+            foreach (var contained in storage.Container.ContainedEntities)
+            {
+                if (_whitelist.IsWhitelistPass(eject.Whitelist, contained))
+                {
+                    _hands.TryPickupAnyHand(user, contained);
+                    return true;
+                }
+            }
+        }
+
+        if (!_rmcStorage.TryGetLastItem((item, storage), out var last))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-storage-nothing-left", ("storage", item)), user, user);
+            return true;
+        }
+
+        _hands.TryPickupAnyHand(user, last);
         return true;
     }
 }

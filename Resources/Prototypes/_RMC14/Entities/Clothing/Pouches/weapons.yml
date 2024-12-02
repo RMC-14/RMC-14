@@ -43,7 +43,7 @@
     layers:
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: m1984 # TODO RMC14 per-gun underlay
-      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
       visible: false
     - state: icon
   - type: ContainerContainer
@@ -53,7 +53,7 @@
     slots:
       pouch:
         name: Pouch
-        insertSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_sheathe.ogg 
+        insertSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_sheathe.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_draw.ogg
         whitelist:
           tags:

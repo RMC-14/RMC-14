@@ -2,9 +2,9 @@
   id: HiveCoreXeno
   name: hive core # TODO RMC14 allow other structures to be built
   description: A giant pulsating mound of mass. It looks very much alive.
-  components: # TODO RMC14 block ob, mortar and air strikes
+  components: # TODO RMC14 block ob
   - type: Transform
-    anchored: true # TODO RMC14 cooldown if destroyed
+    anchored: true
   - type: Physics
   - type: Fixtures
     fixtures:
@@ -38,12 +38,25 @@
   - type: GhostRole
     name: roles-lesser-drone-name
     description: roles-lesser-drone-description
+    raffle:
+      settings: short
   - type: GhostRoleMobSpawner
     availableTakeovers: 2
     deleteOnSpawn: false
     prototype: CMXenoLesserDrone
   - type: HiveConstructionUnique
     id: HiveCoreXeno
+  - type: RoofingEntity
+    range: 10
+  - type: EvolutionBonus
+  - type: WarpPoint
+    location: hive core
+  - type: XenoMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: core
 
 - type: entity
   id: HiveCoreXenoConstructionNode

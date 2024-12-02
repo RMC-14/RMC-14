@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/8d2ee2746ce1b8aa5a876266951a8d9f92499aff/icons/obj/items/clothing/backpacks.dmi and https://github.com/cmss13-devs/cmss13/blob/38ced94fc7dee11e73f66f6c008983493aac13a5/icons/mob/humans/onmob/back.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "ammo_pack-0"
+    },
+    {
+      "name": "ammo_pack-1"
+    },
+    {
+      "name": "ammo_pack-2"
+    },
+    {
+      "name": "ammo_pack-3"
+    },
+    {
+      "name": "equipped-BACKPACK",
+      "directions": 4
+    },
+    {
+      "name": "equipped-BACKPACK_0",
+      "directions": 4
+    },
+    {
+      "name": "equipped-BACKPACK_1",
+      "directions": 4
+    },
+    {
+      "name": "equipped-BACKPACK_2",
+      "directions": 4
+    }
+  ]
+}

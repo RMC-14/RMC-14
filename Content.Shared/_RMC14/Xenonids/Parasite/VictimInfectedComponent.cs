@@ -42,18 +42,6 @@ public sealed partial class VictimInfectedComponent : Component
     public EntityUid? SpawnedLarva;
 
     /// <summary>
-    ///     How long it takes for the parasite to fall off the victim's mask.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public TimeSpan FallOffDelay = TimeSpan.FromSeconds(35);
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan FallOffAt;
-
-    [DataField, AutoNetworkedField]
-    public bool FellOff;
-
-    /// <summary>
     ///     How long it takes for the larva to burst out of the victim.
     /// </summary>
     [DataField, AutoNetworkedField]
@@ -64,9 +52,6 @@ public sealed partial class VictimInfectedComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan AutoBurstTime = TimeSpan.FromSeconds(60);
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan AttachedAt;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan BurstAt;
@@ -140,6 +125,9 @@ public sealed partial class VictimInfectedComponent : Component
     [DataField]
     public bool DidBurstWarning = false;
 
+    [DataField, AutoNetworkedField]
+    public bool IsBursting = false;
+
     [DataField]
     public TimeSpan BaseKnockdownTime = TimeSpan.FromSeconds(1);
 
@@ -157,4 +145,10 @@ public sealed partial class VictimInfectedComponent : Component
 
     [DataField]
     public DamageSpecifier InfectionDamage = new() { DamageDict = new() { { "Blunt", 1 } } };
+
+    /// <summary>
+    ///     How long the do-after of the larva bursting takes.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan BurstDoAfterDelay = TimeSpan.FromSeconds(3);
 }

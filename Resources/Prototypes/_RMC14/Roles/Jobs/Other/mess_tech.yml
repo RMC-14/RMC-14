@@ -10,6 +10,13 @@
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - MessTech
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: mst
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_shipside
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -19,6 +26,9 @@
         RMCSkillDomestics: 2
         RMCSkillEngineer: 1
         RMCSkillFirearms: 2
+        RMCSkillFireman: 1
+    - type: JobPrefix
+      prefix: "MST"
   hidden: true # TODO RMC14
 
 - type: startingGear

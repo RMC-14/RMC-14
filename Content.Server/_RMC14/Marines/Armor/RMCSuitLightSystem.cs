@@ -21,9 +21,9 @@ public sealed class RMCSuitLightSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCSuitLightComponent, ClothingGotUnequippedEvent>(OnUnequip);
-        SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<VictimInfectedComponent, ComponentStartup>(OnComponentStartup);
-        SubscribeLocalEvent<MarineComponent, XenoDevouredEvent>(OnDevour);
+        SubscribeLocalEvent<RMCSuitLightComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<RMCSuitLightComponent, XenoParasiteInfectEvent>(OnParasiteInfect);
+        SubscribeLocalEvent<RMCSuitLightComponent, XenoDevouredEvent>(OnDevour);
     }
 
     private void OnUnequip(Entity<RMCSuitLightComponent> ent, ref ClothingGotUnequippedEvent args)
@@ -31,35 +31,30 @@ public sealed class RMCSuitLightSystem : EntitySystem
         ShortLights(ent.Owner, args.Wearer);
     }
 
-    private void OnMobStateChanged(MobStateChangedEvent args)
+    private void OnMobStateChanged(Entity<RMCSuitLightComponent> ent, ref MobStateChangedEvent args)
     {
-        var uid = args.Target;
-
         if (args.NewMobState != MobState.Dead)
             return;
 
-        var suit = FindSuit(uid);
-
-        if (suit != null)
-            ShortLights(suit.Value.Owner, uid);
+        TryShortLights(ent.Owner);
     }
 
-    private void OnComponentStartup(Entity<VictimInfectedComponent> ent, ref ComponentStartup args)
+    private void OnParasiteInfect(Entity<RMCSuitLightComponent> ent, ref XenoParasiteInfectEvent args)
     {
-        var uid = ent.Owner;
-        var suit = FindSuit(uid);
-
-        if (suit != null)
-            ShortLights(suit.Value.Owner, uid);
+        TryShortLights(ent.Owner);
     }
 
-    private void OnDevour(Entity<MarineComponent> ent, ref XenoDevouredEvent args)
+    private void OnDevour(Entity<RMCSuitLightComponent> ent, ref XenoDevouredEvent args)
     {
-        var uid = ent.Owner;
-        var suit = FindSuit(uid);
+        TryShortLights(ent.Owner);
+    }
+
+    public void TryShortLights(EntityUid user)
+    {
+        var suit = FindSuit(user);
 
         if (suit != null)
-            ShortLights(suit.Value.Owner, uid);
+            ShortLights(suit.Value.Owner, user);
     }
 
     public void ShortLights(EntityUid armor, EntityUid user)

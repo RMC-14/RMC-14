@@ -1,4 +1,4 @@
-﻿// ReSharper disable once CheckNamespace
+// ReSharper disable once CheckNamespace
 namespace Content.Shared.Maps;
 
 public sealed partial class ContentTileDefinition
@@ -7,11 +7,20 @@ public sealed partial class ContentTileDefinition
     public bool CanDig;
 
     [DataField]
+    public bool CanBurrow = true;
+
+    [DataField]
     public bool WeedsSpreadable = true;
+
+    [DataField]
+    public bool SemiWeedable = false;
 
     [DataField]
     public bool BlockConstruction;
 
     [DataField]
     public bool BlockAnchoring;
+
+    [DataField]
+    public Color MinimapColor;
 }

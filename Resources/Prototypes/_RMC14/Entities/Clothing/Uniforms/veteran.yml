@@ -15,3 +15,39 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/PMC/officer.rsi
+
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitVeteranPMCCommando
+  name: PMC commando uniform
+  description: An armored uniform worn by We-Ya elite commandos. It is well protected while remaining light and comfortable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/PMC/commando.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitVeteranPMCCorporate
+  name: We-Ya corporate security uniform
+  description: An armored uniform worn by We-Ya corporate security members. This variant is commonly worn by what are known as 'goons'.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/PMC/corporate.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+
+- type: entity
+  parent: JumpsuitMarine
+  id: RMCJumpsuitVeteranPMCCorporateLead
+  name: We-Ya corporate security uniform
+  description: An armored uniform worn by We-Ya corporate security members. This variant is commonly worn by the lead of the 'goonsquad', as they are colloquially known.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/PMC/corporate_lead.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold

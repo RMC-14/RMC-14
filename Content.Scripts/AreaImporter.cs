@@ -119,8 +119,15 @@ public class AreaImporter
                 else if (TryExtract(icon, out result))
                 {
                     isDefault = false;
+                    var rsiPath = result.Replace(".dmi", ".rsi").Replace("icons/turf/", "").Replace("'", "");
+                    rsiPath = rsiPath switch
+                    {
+                        "area_shiva.rsi" => "areas_shiva.rsi",
+                        _ => rsiPath,
+                    };
+
                     rsi = new Rsi(
-                        new ResPath($"_RMC14/Areas/{result.Replace(".dmi", ".rsi")}"),
+                        new ResPath($"_RMC14/Areas/{rsiPath}"),
                         rsi.RsiState
                     );
                 }
@@ -139,6 +146,7 @@ public class AreaImporter
                         case "CEILING_NO_PROTECTION":
                         case "CEILING_NONE":
                         case "CEILING_GLASS":
+                            isDefault = false;
                             SetAreaComp(AreaField.CAS, true);
                             SetAreaComp(AreaField.fulton, true);
                             SetAreaComp(AreaField.mortarPlacement, true);
@@ -150,6 +158,7 @@ public class AreaImporter
                             break;
                         case "CEILING_PROTECTION_TIER_1":
                         case "CEILING_METAL":
+                            isDefault = false;
                             SetAreaComp(AreaField.CAS, true);
                             SetAreaComp(AreaField.fulton, true);
                             SetAreaComp(AreaField.mortarPlacement, false);
@@ -162,6 +171,7 @@ public class AreaImporter
                         case "CEILING_PROTECTION_TIER_2":
                         case "CEILING_UNDERGROUND_METAL_ALLOW_CAS":
                         case "CEILING_UNDERGROUND_ALLOW_CAS":
+                            isDefault = false;
                             SetAreaComp(AreaField.CAS, true);
                             SetAreaComp(AreaField.fulton, false);
                             SetAreaComp(AreaField.mortarPlacement, false);
@@ -174,6 +184,7 @@ public class AreaImporter
                         case "CEILING_PROTECTION_TIER_3":
                         case "CEILING_UNDERGROUND_BLOCK_CAS":
                         case "CEILING_UNDERGROUND_METAL_BLOCK_CAS":
+                            isDefault = false;
                             SetAreaComp(AreaField.CAS, false);
                             SetAreaComp(AreaField.fulton, false);
                             SetAreaComp(AreaField.lasing, false);
@@ -189,6 +200,7 @@ public class AreaImporter
                         case "CEILING_REINFORCED_METAL":
                         case "CEILING_RESIN":
                         case "CEILING_MAX":
+                            isDefault = false;
                             SetAreaComp(AreaField.CAS, false);
                             SetAreaComp(AreaField.fulton, false);
                             SetAreaComp(AreaField.lasing, false);

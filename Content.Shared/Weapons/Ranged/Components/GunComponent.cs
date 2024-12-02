@@ -188,7 +188,7 @@ public sealed partial class GunComponent : Component
     /// The base value for how fast the projectile moves.
     /// </summary>
     [DataField]
-    public float ProjectileSpeed = 51f;
+    public float ProjectileSpeed = 62f;
 
     /// <summary>
     /// How fast the projectile moves.
@@ -233,6 +233,9 @@ public sealed partial class GunComponent : Component
     /// </summary>
     [DataField]
     public bool ClumsyProof = false;
+
+    [DataField]
+    public bool MeleeCooldownOnShoot = true;
 }
 
 [Flags]

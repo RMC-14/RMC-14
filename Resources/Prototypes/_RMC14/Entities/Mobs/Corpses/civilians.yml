@@ -16,7 +16,7 @@
   storage:
     back:
     - RMCM5Bayonet
-    # Radio
+    - RMCRadioHandheldColonyOff
 
 # Chef
 - type: entity
@@ -48,6 +48,7 @@
   - type: Loadout
     prototypes: [ RMCGearCorpseDoctor ]
   - type: VictimBurst
+    state: Burst
 
 - type: startingGear
   id: RMCGearCorpseDoctor
@@ -59,9 +60,9 @@
     gloves: CMHandsLatex
     id: CMIDCardColonist
     ears: CMHeadsetColony
-#  storage:
-#    back:
-#    # radio
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
 
 # Engineer
 - type: entity
@@ -71,6 +72,7 @@
   - type: Loadout
     prototypes: [ RMCGearCorpseEngineer ]
   - type: VictimBurst
+    state: Burst
 
 - type: startingGear
   id: RMCGearCorpseEngineer
@@ -85,9 +87,9 @@
     id: CMIDCardColonist
     ears: CMHeadsetColony
     belt: CMBeltUtilityFilled
-#  storage:
-#    back:
-#    # radio
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
 
 # Scientist
 - type: entity
@@ -97,6 +99,7 @@
   - type: Loadout
     prototypes: [ RMCGearCorpseScientist ]
   - type: VictimBurst
+    state: Burst
 
 - type: startingGear
   id: RMCGearCorpseScientist
@@ -108,9 +111,9 @@
     outerClothing: ClothingOuterCoatLab
     id: CMIDCardColonist
     ears: CMHeadsetColony
-#  storage:
-#    back:
-#    # radio
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
 #    # motion detector
 #    # good research notes
 
@@ -122,6 +125,7 @@
   - type: Loadout
     prototypes: [ RMCGearCorpseMiner ]
   - type: VictimBurst
+    state: Burst
 
 - type: startingGear
   id: RMCGearCorpseMiner
@@ -129,15 +133,15 @@
     jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
     back: CMBackpackEngineer
     shoes: CMBootsBlackFilled
-#    head: Hard Hat
-#    outerClothing: Hazard Vest
+    head: RMCHardHat
+    outerClothing: RMCHazardVest
     id:  CMIDCardColonist
     ears: CMHeadsetColony
     pocket1: RMCPouchToolsFill
   storage:
     back:
     - RMCFlashlightLantern
-#    # radio
+    - RMCRadioHandheldColonyOff
 
 # Security
 - type: entity
@@ -147,6 +151,7 @@
   - type: Loadout
     prototypes: [ RMCGearCorpseSecurity ]
   - type: VictimBurst
+    state: Burst
 
 - type: startingGear
   id: RMCGearCorpseSecurity
@@ -162,7 +167,7 @@
   storage:
     back:
     - RMCM5Bayonet
-#    # radio
+    - RMCRadioHandheldColonyOff
 
 # Marshal Bureau Deputy
 - type: entity
@@ -172,6 +177,7 @@
   - type: Loadout
     prototypes: [ RMCGearCorpseDeputy ]
   - type: VictimBurst
+    state: Burst
 
 - type: startingGear
   id: RMCGearCorpseDeputy
@@ -193,6 +199,7 @@
   - type: Loadout
     prototypes: [ RMCGearCorpseLiaison ]
   - type: VictimBurst
+    state: Burst
 
 - type: startingGear
   id: RMCGearCorpseLiaison
@@ -200,13 +207,13 @@
     jumpsuit: CMJumpsuitLiaisonField
     back: CMSatchel
     shoes: RMCShoesLaceup
-#    eyes: aviators
+    eyes: RMCGlassesAviators
     id: CMIDCardLiaison
     ears: RMCHeadsetDistressWeYa
 #    belt: /obj/item/storage/belt/gun/m4a3/mod88
-#  storage:
-#    back:
-#    # radio
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
 
 # Prison Guard
 - type: entity
@@ -225,9 +232,9 @@
     gloves: CMHandsBlackMarine
     id: CMIDCardColonist
     ears: CMHeadsetColony
-#  storage:
-#    back:
-#    # radio
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
 
 # Colonist
 - type: entity
@@ -251,3 +258,32 @@
   id: RMCHumanCorpseColonistBurst
   components:
   - type: VictimBurst
+    state: Burst
+
+# We-Ya Goon
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseWeYaGoon
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseWeYaGoon ]
+
+- type: startingGear
+  id: RMCGearCorpseWeYaGoon # TODO RMC14 headset, backpack, general pistol holster rig
+  equipment:
+    head: ArmorHelmetPMCCorporate
+    jumpsuit: RMCJumpsuitVeteranPMCCorporate
+    outerClothing: RMCArmorM4PMCCorporate
+    back: CMBackpackMarine
+    gloves: RMCHandsVeteran
+    shoes: RMCBootsCorporate
+    id: RMCIDCardPMCColony
+    ears: CMHeadsetColony
+    pocket1: RMCPouchFirstAidInjectors
+  storage:
+    back:
+    - CMStunbaton
+    - CMCrowbar
+    - CMMagazinePistolM77AP
+    - CMMagazinePistolM77AP
+    - CMMagazinePistolM77AP

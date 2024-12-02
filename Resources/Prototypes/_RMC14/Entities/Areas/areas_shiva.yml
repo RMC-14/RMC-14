@@ -55,11 +55,31 @@
   parent: RMCAreaShiva
   id: RMCAreaShivaExterior
   name: Shiva's Snowball - Exterior
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaShiva
   id: RMCAreaShivaInterior
   name: Shiva's Snowball - Interior
+  components:
+  - type: Area
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
   parent: RMCAreaShivaInterior

@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Marines;
 using Content.Shared.Ghost;
 using Content.Shared.Actions;
 using Content.Shared._RMC14.Mobs;
@@ -30,8 +31,10 @@ namespace Content.Server._RMC14.Mobs
         {
             _actions.AddAction(uid, ref comp.ToggleMarineHudEntity, comp.ToggleMarineHud);
             _actions.AddAction(uid, ref comp.ToggleXenoHudEntity, comp.ToggleXenoHud);
+            _actions.AddAction(uid, ref comp.FindParasiteEntity, comp.FindParasite);
 
-            EnsureComp<CMGhostMarineHudComponent>(uid);
+            EnsureComp<ShowMarineIconsComponent>(uid);
+            EnsureComp<ShowHealthIconsComponent>(uid);
             EnsureComp<CMGhostXenoHudComponent>(uid);
         }
 
@@ -39,14 +42,16 @@ namespace Content.Server._RMC14.Mobs
         {
             args.Handled = true;
 
-            if (HasComp<CMGhostMarineHudComponent>(uid))
+            if (HasComp<ShowMarineIconsComponent>(uid))
             {
-                RemComp<CMGhostMarineHudComponent>(uid);
+                RemComp<ShowMarineIconsComponent>(uid);
+                RemCompDeferred<ShowHealthIconsComponent>(uid);
                 _actions.SetToggled(comp.ToggleMarineHudEntity, true);
             }
             else
             {
-                AddComp<CMGhostMarineHudComponent>(uid);
+                AddComp<ShowMarineIconsComponent>(uid);
+                EnsureComp<ShowHealthIconsComponent>(uid);
                 _actions.SetToggled(comp.ToggleMarineHudEntity, false);
             }
         }

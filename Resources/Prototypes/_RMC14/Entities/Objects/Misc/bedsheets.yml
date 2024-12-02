@@ -16,6 +16,9 @@
     size: Small
   - type: StaticPrice
     price: 100
+  - type: Tag
+    tags:
+    - Bedsheet
 
 - type: entity
   parent: CMBedsheetBase

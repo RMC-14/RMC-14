@@ -35,6 +35,11 @@
   description: Sheets made out of metal. They have been dubbed Metal Sheets.
   suffix: Filled
   components:
+    - type: RMCConstructionUpgradeItem
+      whitelist:
+        tags:
+        - RMCMetalBarricade
+        - RMCPlasteelBarricade
     - type: Material
     - type: PhysicalComposition
       materialComposition:
@@ -63,6 +68,17 @@
     - type: Stack
       stackType: CMSteel
       count: 10
+
+- type: entity
+  parent: CMSheetMetal
+  id: CMSheetMetal20
+  suffix: "20"
+  components:
+    - type: Sprite
+      state: metal_3
+    - type: Stack
+      stackType: CMSteel
+      count: 20
 
 - type: entity
   parent: CMSheetMetal
