@@ -20,6 +20,16 @@
 
 - type: entity
   parent: RMCCrateMortarAmmo
+  id: RMCCrateMortarShellIncendiary
+  name: M402 mortar shells crate (x6 Incend)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMortarShellIncendiary
+      amount: 6
+
+- type: entity
+  parent: RMCCrateMortarAmmo
   id: RMCCrateMortarShellFlare
   name: M402 mortar shells crate (x6 Flare/Camera)
   components:

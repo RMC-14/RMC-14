@@ -64,9 +64,9 @@ public sealed class XenoFlingSystem : EntitySystem
         var target = _transform.GetMapCoordinates(targetId);
         var diff = target.Position - origin.Position;
         var length = diff.Length();
-        diff *= xeno.Comp.Range / 3 / length;
+        diff = diff.Normalized() * xeno.Comp.Range;
 
-        if (_net.IsServer)
+		if (_net.IsServer)
         {
             _stun.TryParalyze(targetId, xeno.Comp.ParalyzeTime, true);
             _throwing.TryThrow(targetId, diff, 10);

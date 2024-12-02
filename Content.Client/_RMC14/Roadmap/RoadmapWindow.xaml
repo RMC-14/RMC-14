@@ -45,6 +45,7 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Firearms skill" Text="Each marine role has a different firearms skill. This impacts how accurate they are with guns" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Burrower" Text="Lay the foundations for resin traps in strategic locations or the Hive's flanks. Flank your way around the map with the tunnel ability and dig tunnels to allow for quick transportation of fellow Aliens from the hive to the frontlines" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Communications objective" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="New Varadero" Text="Planet map, ported by Aurallianz Star" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Survivors" Text="A role that starts on the planet and must try to survive until rescued by the Marines" />
@@ -72,11 +73,10 @@
                 </BoxContainer>
                 <BoxContainer Name="SecondVersion" Access="Public" Orientation="Vertical"  HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Upcoming" />
-                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Burrower" Text="Lay the foundations for resin traps in strategic locations or the Hive's flanks. Flank your way around the map with the tunnel ability and dig tunnels to allow for quick transportation of fellow Aliens from the hive to the frontlines" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Intelligence officer" />
+                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Limb damage" Text="Each limb on a marine will be able to take damage separately, being able to detach upon receiving too much damage and requiring individual treatment" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Blood types" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Ravager" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Limb damage" Text="Each limb on a marine will be able to take damage separately, being able to detach upon receiving too much damage and requiring individual treatment" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Pain and painkillers" Text="Wounds will cause pain which can be dulled with painkillers" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="More surgeries" Text="Foreign object removal, internal bleeding surgery, fractures" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Construction skill" Text="Allows you to build more advanced constructs" />

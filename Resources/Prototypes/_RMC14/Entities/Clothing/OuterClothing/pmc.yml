@@ -12,8 +12,8 @@
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
-    walkModifier: 0.814
-    sprintModifier: 0.814
+    walkModifier: 0.725
+    sprintModifier: 0.725
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
@@ -43,8 +43,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/corporate.rsi
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
-    walkModifier: 0.814
-    sprintModifier: 0.814
+    walkModifier: 0.725
+    sprintModifier: 0.725
 
 - type: entity
   parent: RMCArmorM4PMCCorporate
@@ -119,8 +119,8 @@
     walk: 0.24
     sprint: 0.384
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_MEDIUM
-    walkModifier: 0.727
-    sprintModifier: 0.727
+    walkModifier: 0.666
+    sprintModifier: 0.666
   - type: Corrodible
     isCorrodible: false
 

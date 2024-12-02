@@ -53,3 +53,11 @@
       Telecommunications Array: Repairs required
 
       No further information available at this time."
+
+- type: entity
+  id: RMCPlanetKutjevo
+  name: Kutjevo Refinery
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/kutjevo.yml
+    announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."

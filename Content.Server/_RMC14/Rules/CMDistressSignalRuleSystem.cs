@@ -30,12 +30,14 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Scaling;
 using Content.Shared._RMC14.Spawners;
 using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.CCVar;
@@ -50,6 +52,7 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
+using Content.Shared.Roles.Jobs;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -78,6 +81,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly XenoHiveSystem _hive = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
+    [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly MarineSystem _marines = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
@@ -96,6 +100,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly RoleSystem _roles = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
     [Dependency] private readonly PlayTimeTrackingSystem _playTimeTracking = default!;
+    [Dependency] private readonly ScalingSystem _scaling = default!;
     [Dependency] private readonly StationJobsSystem _stationJobs = default!;
     [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
@@ -110,6 +115,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private string _planetMaps = default!;
     private float _marinesPerXeno;
+    private bool _autoBalance;
+    private float _autoBalanceStep;
+    private float _autoBalanceMin;
+    private float _autoBalanceMax;
     private float _marinesPerSurvivor;
     private float _maximumSurvivors;
     private float _minimumSurvivors;
@@ -158,6 +167,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         Subs.CVar(_config, RMCCVars.RMCPlanetMaps, v => _planetMaps = v, true);
         Subs.CVar(_config, RMCCVars.CMMarinesPerXeno, v => _marinesPerXeno = v, true);
+        Subs.CVar(_config, RMCCVars.RMCAutoBalance, v => _autoBalance = v, true);
+        Subs.CVar(_config, RMCCVars.RMCAutoBalanceStep, v => _autoBalanceStep = v, true);
+        Subs.CVar(_config, RMCCVars.RMCAutoBalanceMax, v => _autoBalanceMax = v, true);
+        Subs.CVar(_config, RMCCVars.RMCAutoBalanceMin, v => _autoBalanceMin = v, true);
         Subs.CVar(_config, RMCCVars.RMCMarinesPerSurvivor, v => _marinesPerSurvivor = v, true);
         Subs.CVar(_config, RMCCVars.RMCSurvivorsMaximum, v => _maximumSurvivors = v, true);
         Subs.CVar(_config, RMCCVars.RMCSurvivorsMinimum, v => _minimumSurvivors = v, true);
@@ -621,6 +634,38 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         StartPlanetVote();
         ResetSelectedPlanet();
         _config.SetCVar(CCVars.GameDisallowLateJoins, false);
+
+        if (!_autoBalance)
+            return;
+
+        var rules = QueryAllRules();
+        while (rules.MoveNext(out var comp, out _))
+        {
+            var adjust = comp.Result switch
+            {
+                DistressSignalRuleResult.None => 0,
+                DistressSignalRuleResult.MajorMarineVictory => -1,
+                DistressSignalRuleResult.MinorMarineVictory => -1,
+                DistressSignalRuleResult.MajorXenoVictory => 1,
+                DistressSignalRuleResult.MinorXenoVictory => 0, // hijack but all xenos die
+                DistressSignalRuleResult.AllDied => 0,
+                _ => throw new ArgumentOutOfRangeException(),
+            };
+
+            if (adjust == 0)
+                continue;
+
+            var value = _marinesPerXeno;
+            value += adjust * _autoBalanceStep;
+
+            if (value > _autoBalanceMax)
+                value = _autoBalanceMax;
+            else if (value < _autoBalanceMin)
+                value = _autoBalanceMin;
+
+            _config.SetCVar(RMCCVars.CMMarinesPerXeno, value);
+            break;
+        }
     }
 
     private void OnDropshipHijackLanded(ref DropshipHijackLandedEvent ev)
@@ -1115,6 +1160,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         var time = Timing.CurTime;
         component.StartTime ??= time;
+
+        _scaling.TryStartScaling(component.MarineFaction);
+
         var announcementTime = time - component.StartTime;
         if (!component.AresGreetingDone && announcementTime >= component.AresGreetingDelay)
         {
@@ -1189,6 +1237,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             "shiva" => "Shivas Snowball",
             "trijent" => "Trijent Dam",
             "varadero" => "New Varadero",
+            "kutjevo" => "Kutjevo Refinery",
             _ => name,
         };
     }
@@ -1281,6 +1330,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         while (query.MoveNext(out var weeds, out _))
         {
             _hive.SetHive(weeds, hive);
+        }
+
+        var tunnelQuery = EntityQueryEnumerator<XenoTunnelComponent>();
+        while (tunnelQuery.MoveNext(out var uid, out _))
+        {
+            _hive.SetHive(uid, hive);
         }
     }
 }

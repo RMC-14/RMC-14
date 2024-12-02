@@ -58,7 +58,7 @@
   parent: ActionXenoBase
   id: ActionXenoAid
   name: Aid Xenonid (100 plasma, 100 energy)
-  description: Heal a nearby ally Xeno or remove ailments and stuns from a further away ally Xeno. Healing another Xeno will also heal you, and half your remaning points will be consumed for extra healing.
+  description: Heal a nearby ally Xeno or remove ailments and stuns from a further away ally Xeno. Healing another Xeno will also heal you, and half your remaning points will be consumed for extra healing. [color=red]This can't heal ignited xenonids![/color]
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem

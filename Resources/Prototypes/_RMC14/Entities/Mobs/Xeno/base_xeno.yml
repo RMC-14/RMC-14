@@ -281,6 +281,12 @@
     weak: true
   - type: AssignXenoName
   - type: MobGibbedByExplosionType
+  - type: TileFirePatter
+  - type: CanBeFirePatted
+  - type: FirePatter
+    blacklist:
+      components:
+      - Marine
 
 - type: entity
   abstract: true
@@ -314,7 +320,7 @@
     angle: 60
     soundHit:
       collection: RCMXenoClaw
-    animation: WeaponArcBite
+    animation: RMCWeaponArcXenoClaw
     damage:
       groups:
         Brute: 12
@@ -386,7 +392,7 @@
     canResistFire: true
     damage: #per second, scales with number of fire 'stacks'
       types:
-        Heat: 3
+        Heat: 1
 
 - type: entity
   abstract: true

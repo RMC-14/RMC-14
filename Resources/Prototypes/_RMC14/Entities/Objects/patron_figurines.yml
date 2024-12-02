@@ -632,8 +632,8 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronBeatriceBeaBootes
   name: Beatrice 'Bea' Bootes figurine
-  description: "Adopted and raised in Madawaska, Maine, this lesbian felinid tries her best. She'd go on to join the UNMC and become a sergeant made of tungsten. She lost her wife to a horrific accident and sunk to rock bottom, but she prevailed. She's a social democrat whose a leading member of The Doves. Her opponents throw rumors of her committing multiple crimes such as eating human organs, bombing a children's hospital plus a funeral, and being a SPP agent. She's quite silly but deeply caring. Aspires to be a CO.
-    :3"
+  description: "Adopted and raised in Madawaska, Maine, this lesbian felinid tries her best. She'd go on to join the UNMC and become a sergeant made of platinum and tungsten. She lost her wife to a horrific accident and sunk to rock bottom, but she prevailed. She's a social democrat whose a leading member of The Doves.
+    She works hard to ensure that her grunts all embrace in victory, alive and happy. She's also open to feedback. She's been accused of a war crime and even eating human organs, but we don't talk about that.:3"
   components:
   - type: Sprite
     state: beatrice_bea_bootes
@@ -797,3 +797,77 @@
     state: mizuno_kitty_drakonovisch
   - type: PatronFigurine
     id: d6a58381-b2a8-4caf-a22a-fd76ca53b1ae
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMerlinLeander
+  name: Merlin Leander figurine
+  description: "Limited edition wizard figurine. This one seems blissful."
+  components:
+  - type: Sprite
+    state: merlin_leander
+  - type: PatronFigurine
+    id: efe40ec4-b685-4025-8239-fdea3da1e019
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKaziPriestess
+  name: Kazi Priestess figurine
+  description: "\"Wait, you wanted a supply drop sent to those cords? Shit..\""
+  components:
+  - type: Sprite
+    state: kazi_priestess
+  - type: PatronFigurine
+    id: 916cba8a-e995-43a4-b1fd-8c9e512e8471
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMarrik
+  name: Marrik' figurine
+  description: "A vorpal recreation of a stoic law enforcer. You aren't sure how this was made... His gleaming red eye seems to follow your every move. Reeks of Blood and Metal."
+  components:
+  - type: Sprite
+    state: marrik
+  - type: PatronFigurine
+    id: b39ea987-0b8c-4f36-a6a8-06febbead49d
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Effects/teleport_departure.ogg
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 180.0
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronXalos-Of-Europa
+  name: Xalos-Of-Europa figurine
+  description: "Wait, what's the QM doing out of Req!?"
+  components:
+  - type: Sprite
+    state: xalos-of-europa
+  - type: PatronFigurine
+    id: f1c563b6-24cd-4212-9005-b67a07a7e5da
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCarlosMiguel
+  name: Carlos Miguel figurine
+  description: "Ex Sergeant of the Portuguese Army. Now serving the UNMC, always protecting his comrades and his booze."
+  components:
+  - type: Sprite
+    state: carlos_miguel
+  - type: PatronFigurine
+    id: e134647e-688a-40b3-a5b4-30df41dafa67
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronEmilyKlutzRathen
+  name: Emily 'Klutz' Rathen figurine
+  description: "A figurine of Emily 'Klutz' Rathen. It looks chipped and scuffed from being dropped repeatedly. The base is very small and uneven, making it want to fall over at all times."
+  components:
+  - type: Sprite
+    state: emily_klutz_rathen
+  - type: PatronFigurine
+    id: e8819228-95ea-4a3b-8e1c-0e7eaa55cb90

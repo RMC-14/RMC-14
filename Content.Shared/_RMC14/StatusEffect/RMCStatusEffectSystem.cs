@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Prototypes;
 
@@ -15,6 +16,7 @@ public sealed class RMCStatusEffectSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<SkillsComponent, RMCStatusEffectTimeEvent>(OnSkillsStatusEffectTime);
+        SubscribeLocalEvent<XenoComponent, RMCStatusEffectTimeEvent>(OnXenoStatusEffectTime);
     }
 
     private void OnSkillsStatusEffectTime(Entity<SkillsComponent> ent, ref RMCStatusEffectTimeEvent args)
@@ -29,5 +31,13 @@ public sealed class RMCStatusEffectSystem : EntitySystem
         var skill = (endurance - 1) * 0.08;
         var multiplier = 1 - skill; // TODO RMC14 hunter/synthetic/monkey/zombie/human hero multiplier
         args.Duration *= multiplier;
+    }
+
+    private void OnXenoStatusEffectTime(Entity<XenoComponent> ent, ref RMCStatusEffectTimeEvent args)
+    {
+        if (args.Key != Knockdown && args.Key != Stun)
+            return;
+
+        args.Duration *= 0.667;
     }
 }

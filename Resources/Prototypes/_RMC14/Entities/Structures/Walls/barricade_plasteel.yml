@@ -27,7 +27,7 @@
   parent: CMBarricadeBase
   id: RMCBarricadePlasteel
   name: plasteel barricade
-  description: A sturdy and easily assembled barricade made of reinforced plasteel plates, the pinnacle of strongpoints. Upgradable with metal, plasteel, or metal rods for different attributes. Repair with a welder.
+  description: A sturdy and easily assembled barricade made of reinforced plasteel plates, the pinnacle of strongpoints. Use a blowtorch to repair.
   components:
   - type: Climbable
   - type: Anchorable
@@ -66,6 +66,9 @@
     skill: RMCSkillConstruction
     delay: 10
     fuelUsed: 2
+  - type: NailgunRepairable
+    # cm13 max_health%: 0.45
+    repairPlasteel: -400
   - type: Destructible
     thresholds:
     - trigger:
@@ -188,6 +191,9 @@
     skill: RMCSkillConstruction
     delay: 10
     fuelUsed: 2
+  - type: NailgunRepairable
+    # cm13 max_health%: 0.3
+    repairPlasteel: -240
   - type: Destructible
     thresholds:
     - trigger:
