@@ -1,6 +1,7 @@
 ﻿using Content.Server.GameTicking;
 using Content.Shared._RMC14.Xenonids.Name;
 using Content.Shared.GameTicking;
+using Content.Shared.Mind;
 using Content.Shared.NameModifier.EntitySystems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
@@ -10,6 +11,7 @@ namespace Content.Server._RMC14.Name;
 public sealed class XenoNameSystem : SharedXenoNameSystem
 {
     [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
 
@@ -47,6 +49,9 @@ public sealed class XenoNameSystem : SharedXenoNameSystem
             name.Postfix = profile.XenoPostfix;
             _nameModifier.RefreshNameModifiers(xeno);
             RemCompDeferred<AssignXenoNameComponent>(xeno);
+
+            if (_mind.TryGetMind(xeno, out var _, out var mind) && TryComp<MetaDataComponent>(xeno, out var xenoMetaData))
+                mind.CharacterName = xenoMetaData.EntityName;
         }
         catch (Exception e)
         {

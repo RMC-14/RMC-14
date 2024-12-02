@@ -313,6 +313,7 @@
     - RMCAttachmentStock
     - RMCAttachmentM54CStockCollapsible
   - type: AttachableToggleable
+    doAfterBreakOnMove: false
     doAfter: 0.5
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi

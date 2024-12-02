@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared.Body.Systems;
@@ -18,7 +19,9 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 {
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
@@ -40,6 +43,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         SubscribeLocalEvent<StunOnExplosionReceivedComponent, ExplosionReceivedEvent>(OnStunOnExplosionReceivedBeforeExplode);
 
         SubscribeLocalEvent<DestroyedByExplosionTypeComponent, ExplosionReceivedEvent>(OnDestroyedByExplosionReceived);
+
         SubscribeLocalEvent<MobGibbedByExplosionTypeComponent, ExplosionReceivedEvent>(OnMobGibbedByExplosionReceived);
     }
 
@@ -72,6 +76,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         var factor = Math.Round(damage.Double() * 0.05) / 2;
         factor = Math.Min(20, factor);
 
+        // TODO RMC14 don't reduce if explosion is on same tile
         if (_standing.IsDown(ent))
             factor *= 0.5;
 

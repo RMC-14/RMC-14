@@ -67,6 +67,9 @@ public sealed class XenoLeapSystem : EntitySystem
 
     private void OnXenoLeapAction(Entity<XenoLeapComponent> xeno, ref XenoLeapActionEvent args)
     {
+        if (args.Handled)
+            return;
+
         var attempt = new XenoLeapAttemptEvent();
         RaiseLocalEvent(xeno, ref attempt);
 

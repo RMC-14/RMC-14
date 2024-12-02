@@ -69,16 +69,46 @@
       enum.RMCApcVisualsLayers.Layer:
         base:
           Working: { state: base }
-          Broken: { state: apcewires }
+          WiresExposed: { state: apcewires }
+          CoverOpenBattery: { state: apc2 }
+          CoverOpenNoBattery: { state: apc1 }
         enum.WiresVisualLayers.MaintenancePanel: # TODO RMC14
           Working: { visible: false }
-          Broken: { visible: false }
+          WiresExposed: { visible: false }
         enum.ApcVisualLayers.ChargeState: # TODO RMC14
           Working: { visible: true }
-          Broken: { visible: false }
-#        enum.ApcVisualLayers.InterfaceLock: # TODO RMC14
-#          Working: { visible: false }
-#          Broken: { visible: false }
+          WiresExposed: { visible: false }
+          CoverOpenBattery: { visible: false }
+          CoverOpenNoBattery: { visible: false }
+        enum.ApcVisualLayers.InterfaceLock:
+          Working: { visible: true }
+          WiresExposed: { visible: false }
+          CoverOpenBattery: { visible: false }
+          CoverOpenNoBattery: { visible: false }
+        enum.ApcVisualLayers.PanelLock:
+          Working: { visible: true }
+          WiresExposed: { visible: false }
+          CoverOpenBattery: { visible: false }
+          CoverOpenNoBattery: { visible: false }
+        enum.ApcVisualLayers.Equipment:
+          Working: { visible: true }
+          WiresExposed: { visible: false }
+          CoverOpenBattery: { visible: false }
+          CoverOpenNoBattery: { visible: false }
+        enum.ApcVisualLayers.Lighting:
+          Working: { visible: true }
+          WiresExposed: { visible: false }
+          CoverOpenBattery: { visible: false }
+          CoverOpenNoBattery: { visible: false }
+        enum.ApcVisualLayers.Environment:
+          Working: { visible: true }
+          WiresExposed: { visible: false }
+          CoverOpenBattery: { visible: false }
+          CoverOpenNoBattery: { visible: false }
+      enum.RMCApcVisualsLayers.Lock:
+        enum.ApcVisualLayers.InterfaceLock:
+          true: { state: apcox-1 }
+          false: { state: apcox-0 }
 #        enum.ApcVisualLayers.PanelLock: # TODO RMC14
 #          Working: { visible: false }
 #          Broken: { visible: false }

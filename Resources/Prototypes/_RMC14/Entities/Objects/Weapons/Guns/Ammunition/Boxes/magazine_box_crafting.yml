@@ -290,19 +290,19 @@
     state: base_flech
   objectType: Item
 
-# - type: construction
-  # parent: RMC
-  # name: Shell Box (Incendiary)
-  # id: RMCBoxShellsIncendiaryEmpty
-  # graph: RMCBoxMagazine
-  # startNode: start
-  # targetNode: RMCBoxShellsIncendiaryEmpty
-  # category: construction-category-cm-box-magazine
-  # description: A box for holding shells.
-  # icon:
-    # sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    # state: base_inc
-  # objectType: Item
+- type: construction
+  parent: RMC
+  name: Shell Box (Incendiary)
+  id: RMCBoxShellsIncendiaryEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxShellsIncendiaryEmpty
+  category: construction-category-cm-box-magazine
+  description: A box for holding shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_inc
+  objectType: Item
 
 # - type: construction
   # parent: RMC
@@ -318,19 +318,19 @@
     # state: base_bean
   # objectType: Item
 
-# - type: construction
-  # parent: RMC
-  # name: Shell Box (Inc Buckshot)
-  # id: RMCBoxShellsIncendiaryBuckshotEmpty
-  # graph: RMCBoxMagazine
-  # startNode: start
-  # targetNode: RMCBoxShellsIncendiaryBuckshotEmpty
-  # category: construction-category-cm-box-magazine
-  # description: A box for holding shells.
-  # icon:
-    # sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    # state: base_incbuck
-  # objectType: Item
+- type: construction
+  parent: RMC
+  name: Shell Box (Inc Buckshot)
+  id: RMCBoxShellsIncendiaryBuckshotEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxShellsIncendiaryBuckshotEmpty
+  category: construction-category-cm-box-magazine
+  description: A box for holding shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_incbuck
+  objectType: Item
 
 - type: construction
   parent: RMC
@@ -346,7 +346,7 @@
     state: base_breach
   objectType: Item
 
-  # Misc
+# Misc
 
 - type: construction
   parent: RMC
@@ -390,7 +390,7 @@
     state: supply_crate
   objectType: Item
 
-  # Construct graphs
+# Construct graphs
 - type: constructionGraph
   parent: RMC
   id: RMCBoxMagazine
@@ -528,21 +528,21 @@
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
-    # - to: RMCBoxShellsIncendiaryEmpty
-      # steps:
-      # - material: RMCSheetCardboard
-        # amount: 1
-        # doAfter: 1
+    - to: RMCBoxShellsIncendiaryEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 1
     # - to: RMCBoxShellsBeanbagEmpty
       # steps:
       # - material: RMCSheetCardboard
         # amount: 1
         # doAfter: 1
-    # - to: RMCBoxShellsIncendiaryBuckshotEmpty
-      # steps:
-      # - material: RMCSheetCardboard
-        # amount: 1
-        # doAfter: 1
+    - to: RMCBoxShellsIncendiaryBuckshotEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 1
     - to: RMCBoxShellsBreachingEmpty
       steps:
       - material: RMCSheetCardboard
@@ -631,12 +631,12 @@
     entity: RMCBoxShellsSlugsEmpty
   - node: RMCBoxShellsFlechetteEmpty
     entity: RMCBoxShellsFlechetteEmpty
-  # - node: RMCBoxShellsIncendiaryEmpty
-    # entity: RMCBoxShellsIncendiaryEmpty
+  - node: RMCBoxShellsIncendiaryEmpty
+    entity: RMCBoxShellsIncendiaryEmpty
   # - node: RMCBoxShellsBeanbagEmpty
     # entity: RMCBoxShellsBeanbagEmpty
-  # - node: RMCBoxShellsIncendiaryBuckshotEmpty
-    # entity: RMCBoxShellsIncendiaryBuckshotEmpty
+  - node: RMCBoxShellsIncendiaryBuckshotEmpty
+    entity: RMCBoxShellsIncendiaryBuckshotEmpty
   - node: RMCBoxShellsBreachingEmpty
     entity: RMCBoxShellsBreachingEmpty
 

@@ -46,6 +46,33 @@
       path: /Audio/Effects/woodenclosetclose.ogg
     openSound:
       path: /Audio/Effects/woodenclosetopen.ogg
+# Colored
+- type: entity
+  parent: CMClosetBase
+  id: RMCClosetBlack
+  name: formal closet
+  description: It's a storage unit for formal clothing.
+  components:
+  - type: Sprite
+    sprite: _RMC14\Structures\Storage\Closets\black.rsi
+
+- type: entity
+  parent: CMClosetBase
+  id: RMCClosetBlue
+  name: legal closet
+  description: It's a storage unit for courtroom apparel and items.
+  components:
+  - type: Sprite
+    sprite: _RMC14\Structures\Storage\Closets\blue.rsi
+
+- type: entity
+  parent: CMClosetBase
+  id: RMCClosetPurple
+  name: custodial closet
+  description: It's a storage unit for janitorial clothes and gear.
+  components:
+  - type: Sprite
+    sprite: _RMC14\Structures\Storage\Closets\purple.rsi
 
 # Utilities
 - type: entity

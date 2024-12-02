@@ -206,7 +206,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return;
 
         var newXeno = TransferXeno(xeno, args.Choice);
-        var ev = new NewXenoEvolvedEvent(xeno, newXeno);
+        var ev = new NewXenoEvolvedEvent(xeno, newXeno, false);
         RaiseLocalEvent(newXeno, ref ev, true);
 
         _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} chose strain {ToPrettyString(newXeno)}");
@@ -237,7 +237,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         args.Handled = true;
 
         var newXeno = TransferXeno(xeno, args.Choice);
-        var ev = new NewXenoEvolvedEvent(xeno, newXeno);
+        var ev = new NewXenoEvolvedEvent(xeno, newXeno, true);
         RaiseLocalEvent(newXeno, ref ev, true);
 
         _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} evolved into {ToPrettyString(newXeno)}");
@@ -252,7 +252,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private void OnXenoEvolutionNewEvolved(Entity<XenoEvolutionComponent> xeno, ref NewXenoEvolvedEvent args)
     {
-        TransferPoints((args.OldXeno, args.OldXeno), xeno, true);
+        TransferPoints((args.OldXeno, args.OldXeno), xeno, args.SubtractPoints);
         _jitter.DoJitter(xeno, xeno.Comp.EvolutionJitterDuration, true, 80, 8, true);
     }
 
