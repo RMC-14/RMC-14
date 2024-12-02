@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Announce;
@@ -26,6 +27,8 @@ namespace Content.Shared._RMC14.Xenonids.Heal;
 public abstract class SharedXenoHealSystem : EntitySystem
 {
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedRMCFlammableSystem _flammable = default!;
+
     [Dependency] private readonly SharedInteractionSystem _interact = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -76,8 +79,11 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
         foreach (var xeno in _xenos)
         {
-            if (_mobState.IsDead(xeno))
+            if (_mobState.IsDead(xeno) ||
+                _flammable.IsOnFire(xeno.Owner))
+            {
                 continue;
+            }
 
             if (!_mobThreshold.TryGetIncapThreshold(xeno, out var threshold) ||
                 threshold <= FixedPoint2.Zero)
@@ -332,7 +338,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
         var totalHeal = damage.GetTotal();
         var leftover = amount - totalHeal;
         if (leftover > FixedPoint2.Zero)
-            damage = _rmcDamageable.DistributeHealing(target, BruteGroup, leftover, -damage);
+            damage = _rmcDamageable.DistributeHealing(target, BurnGroup, leftover, -damage);
         _damageable.TryChangeDamage(target, -damage, true);
     }
 
