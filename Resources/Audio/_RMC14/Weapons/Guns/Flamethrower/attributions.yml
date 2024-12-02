@@ -1,0 +1,19 @@
+﻿- files: ["gun_flamethrower_empty.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/weapons/gun_flamethrower_empty.ogg"
+
+- files: ["gun_flamethrower1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/weapons/gun_flamethrower1.ogg"
+
+- files: ["gun_flamethrower2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/weapons/gun_flamethrower2.ogg"
+
+- files: ["gun_flamethrower3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/weapons/gun_flamethrower3.ogg"

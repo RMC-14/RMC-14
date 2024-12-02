@@ -1,32 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added Dalton Harris figurine.
-    type: Add
-  id: 550
-  time: '2024-08-13T01:24:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3640
-- author: Whisper
-  changes:
-  - message: Added Chad Scott, Worships-The-Gods figurines
-    type: Add
-  id: 551
-  time: '2024-08-16T03:24:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3670
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added xeno speech sounds
-    type: Add
-  id: 552
-  time: '2024-08-16T03:38:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3679
-- author: Vermidia
-  changes:
-  - message: Fixed auto-injectors being able to draw from containers.
-    type: Fix
-  id: 553
-  time: '2024-08-16T03:39:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3681
 - author: Vermidia
   changes:
   - message: Xenos will no longer look stunned if killed by an AP rocket.
@@ -4996,5 +4968,82 @@
   id: 1049
   time: '2024-11-30T13:31:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4987
+- author: DrSmugleaf
+  changes:
+  - message: Added fire, incendiary ammo, mortar, ob, grenades, molotovs, but not
+      flamers yet. Green fire slows down anyone inside and halves the armor of xenos
+      inside. Moving through fire deals additional damage. Both marines and xenos
+      can put out fires on teammates. Marines can use fire extinguishers to put out
+      fires, and xenos can buy out fires by clicking on them.
+    type: Add
+  - message: 'Added molotov crafting:'
+    type: Add
+  - message: Added swapping battieres on APCs.
+    type: Add
+  - message: Added scaling vendor contents depending on the total amount of marines.
+      The current available items are the minimum used.
+    type: Add
+  - message: Added vendors increasing the amount of items that they have with late-joins.
+    type: Add
+  - message: Ported some alcohols.
+    type: Add
+  - message: Added a 25x HEDP crate to Requisitions for $10000.
+    type: Add
+  - message: Added Carlo Miguel and Emily 'Klutz' Rathen figurines.
+    type: Add
+  - message: Fixed humanoids not having an additional 25 crit health (125 > 150).
+    type: Fix
+  - message: Fixed being able to put armed grenades into storages.
+    type: Fix
+  - message: Fixed a visual bug wheere bullets looked as if they were blocked by acid
+      splatters.
+    type: Fix
+  - message: Fixed a visual bug where shotguns looked as if they shot an additional
+      delayed shot.
+    type: Fix
+  - message: Fixed taking over a xeno ghost role not updating its name.
+    type: Fix
+  - message: Fixed the M54CE2 and XM88 not coming loaded.
+    type: Fix
+  - message: Fixed comms towers being toggleable by xenos.
+    type: Fix
+  - message: Fixed comms towers being too resistant too damage.
+    type: Fix
+  - message: Fixed Kutjevo Refinery not having a round-start announcement.
+    type: Fix
+  - message: Updated the Booze-o-Mat to have RMC-specific alcohol. More to be ported
+      later.
+    type: Tweak
+  id: 1050
+  time: '2024-11-30T22:05:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4996
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the M54C folding stock do-after cancelling when you move
+    type: Fix
+  id: 1051
+  time: '2024-11-30T23:06:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4991
+- author: DrSmugleaf
+  changes:
+  - message: Fixed M40 HIDP incendiary grenades not fitting into grenade launchers
+      and underbarrel grenade launchers.
+    type: Fix
+  - message: Fixed non-xenos being able to rename tunnels.
+    type: Fix
+  id: 1052
+  time: '2024-11-30T23:08:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4998
+- author: DrSmugleaf
+  changes:
+  - message: Fixed not being able to upgrade barricades.
+    type: Fix
+  - message: Fixed xeno tunnels blocking bullets.
+    type: Fix
+  - message: Fixed xenos being able to tunnel through maps.
+    type: Fix
+  id: 1053
+  time: '2024-11-30T23:51:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4999
 Name: RMC14
 Order: -1

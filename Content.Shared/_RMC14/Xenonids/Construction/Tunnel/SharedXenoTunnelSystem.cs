@@ -1,30 +1,12 @@
-using Content.Shared._RMC14.Xenonids;
-using Content.Shared._RMC14.Xenonids.Construction;
-using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
-using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
-using Content.Shared.Coordinates;
-using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
-using Content.Shared.Interaction;
-using Content.Shared.Movement.Events;
-using Content.Shared.Popups;
-using Robust.Shared.Containers;
 using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 
@@ -32,7 +14,7 @@ public abstract partial class SharedXenoTunnelSystem : EntitySystem
 {
     private const string TunnelPrototypeId = "XenoTunnel";
 
-    [Dependency] protected readonly SharedXenoHiveSystem hive = default!;
+    [Dependency] protected readonly SharedXenoHiveSystem Hive = default!;
 
     public override void Initialize()
     {
@@ -60,7 +42,7 @@ public abstract partial class SharedXenoTunnelSystem : EntitySystem
     public bool TryGetHiveTunnelName(Entity<XenoTunnelComponent> xenoTunnel, [NotNullWhen(true)] out string? tunnelName)
     {
         tunnelName = null;
-        var hive = this.hive.GetHive(xenoTunnel.Owner);
+        var hive = this.Hive.GetHive(xenoTunnel.Owner);
         if (hive is null)
         {
             return false;
@@ -96,7 +78,7 @@ public abstract partial class SharedXenoTunnelSystem : EntitySystem
         var newTunnel = Spawn(TunnelPrototypeId, buildLocation);
         tunnelEnt = newTunnel;
 
-        hive.SetHive(newTunnel, associatedHiveEnt);
+        Hive.SetHive(newTunnel, associatedHiveEnt);
 
         return hiveComp.HiveTunnels.TryAdd(name, newTunnel);
     }
