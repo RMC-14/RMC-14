@@ -100,6 +100,7 @@
     - CMEntrenchingTool
     - CMLightReplacer
 #    - CMAPCElectronics # TODO RMC14 uncomment when power
+    - RMCNailgunTactical
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

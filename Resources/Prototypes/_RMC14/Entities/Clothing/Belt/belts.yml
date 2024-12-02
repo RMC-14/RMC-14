@@ -101,7 +101,8 @@
       - PowerCell
       - CMFireExtinguisherPortable
       - RMCExplosiveBreachingCharge
-#      - # TODO nailgun, circuit board
+      - RMCNailgunCompact
+#      - # TODO circuit board
       components:
       - Welder
       - PowerCell
@@ -137,7 +138,8 @@
       - PowerCell
       - CMFireExtinguisherPortable
       - RMCExplosiveBreachingCharge
-#     - # TODO nailgun, circuit board, plastic explosives, stock parts
+      - RMCNailgunCompact
+#     - # TODO circuit board, plastic explosives, stock parts
       components:
       - Welder
       - PowerCell
@@ -200,7 +202,8 @@
       - PowerCell
       - CMFireExtinguisherPortable
       - RMCShellShotgun
-#      - # TODO nailgun, circuit board
+      - RMCNailgunCompact
+#      - # TODO circuit board
       components:
       - Welder
       - PowerCell
