@@ -1,8 +1,9 @@
-﻿using Content.Shared._RMC14.Marines.Skills;
+﻿using Content.Shared._RMC14.Medical.Defibrillator;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Access.Components;
 using Content.Shared.Atmos.Rotting;
-using Content.Shared.Disposal;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -10,12 +11,9 @@ using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
-using Content.Shared.Interaction;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using Content.Shared._RMC14.Medical.Defibrillator;
-using Content.Shared._RMC14.Xenonids.Parasite;
 
 namespace Content.Shared._RMC14.Marines.Dogtags;
 
