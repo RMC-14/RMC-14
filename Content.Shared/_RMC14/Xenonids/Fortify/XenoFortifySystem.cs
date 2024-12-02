@@ -172,10 +172,10 @@ public sealed class XenoFortifySystem : EntitySystem
             Dirty(xeno.Owner, size);
         }
 
-		if (TryComp<StunOnExplosionReceivedComponent>(xeno, out var explode))
-			_explode.ChangeExplosionStunResistance(xeno, explode, xeno.Comp.BaseWeakToExplosionStuns);
+        if (TryComp<StunOnExplosionReceivedComponent>(xeno, out var explode))
+            _explode.ChangeExplosionStunResistance(xeno, explode, xeno.Comp.BaseWeakToExplosionStuns);
 
-		_fixtures.DestroyFixture(xeno, FixtureId);
+        _fixtures.DestroyFixture(xeno, FixtureId);
         _transform.Unanchor(xeno, Transform(xeno));
         _physics.TrySetBodyType(xeno, BodyType.KinematicController);
 

@@ -72,7 +72,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
     public void ChangeExplosionStunResistance(EntityUid ent, StunOnExplosionReceivedComponent? comp, bool isStunnable)
     {
-        if (!Resolve(ent, comp, false))
+        if (!Resolve(ent, ref comp, false))
             return;
 
         comp.Weak = isStunnable;
