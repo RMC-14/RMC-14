@@ -14,6 +14,8 @@ using Content.Shared.Interaction;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared._RMC14.Medical.Defibrillator;
+using Content.Shared._RMC14.Xenonids.Parasite;
 
 namespace Content.Shared._RMC14.Marines.Dogtags;
 
@@ -27,6 +29,7 @@ public sealed class DogtagsSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
 
     readonly EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillPolice";
     readonly int SkillRequired = 2;
@@ -89,18 +92,36 @@ public sealed class DogtagsSystem : EntitySystem
         OnGetVerbTags(tags, ref args.Args);
     }
 
+    private bool CanTakeTags(EntityUid wearer, EntityUid taker)
+    {
+        if (wearer == taker)
+            return false;
+
+        if (!_mob.IsDead(wearer))
+            return false;
+
+        if (!_rotting.IsRotten(wearer) &&
+            !HasComp<CMDefibrillatorBlockedComponent>(wearer) &&
+            !HasComp<VictimBurstComponent>(wearer) &&
+            !_skills.HasSkill(taker, Skill, SkillRequired))
+            return false;
+
+        return true;
+    }
+
     private void OnGetVerbTags(Entity<TakeableTagsComponent> tags, ref GetVerbsEvent<EquipmentVerb> args)
     {
-        if (!args.CanInteract || args.Hands == null || tags.Comp.TagsTaken || HasComp<XenoComponent>(args.User))
+        if (!args.CanInteract ||
+            !args.CanAccess ||
+            args.Hands == null ||
+            tags.Comp.TagsTaken ||
+            HasComp<XenoComponent>(args.User))
             return;
 
         var wearer = Transform(tags).ParentUid;
         var user = args.User;
 
-        if (user == wearer)
-            return;
-
-        if (!_rotting.IsRotten(wearer) && !_skills.HasSkill(user, Skill, SkillRequired) || !_mob.IsDead(wearer))
+        if (!CanTakeTags(wearer, user))
             return;
 
         var verb = new EquipmentVerb()
@@ -116,12 +137,6 @@ public sealed class DogtagsSystem : EntitySystem
 
     private void TakeTags(Entity<TakeableTagsComponent> tags, EntityUid user, EntityUid wearer)
     {
-        if (user == wearer)
-            return;
-
-        if (!_rotting.IsRotten(wearer) && !_skills.HasSkill(user, Skill, SkillRequired))
-            return;
-
         if (tags.Comp.TagsTaken)
         {
             _popup.PopupClient(Loc.GetString("rmc-dogtags-already-taken", ("target", wearer)), user);
@@ -133,6 +148,12 @@ public sealed class DogtagsSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("rmc-dogtags-still-alive"), user);
             return;
         }
+
+        if (!CanTakeTags(wearer, user))
+            return;
+
+        if (!_interaction.InRangeAndAccessible(user, wearer))
+            return;
 
         tags.Comp.TagsTaken = true;
         _appearance.SetData(tags, DogtagVisuals.Taken, true);
