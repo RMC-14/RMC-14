@@ -139,6 +139,11 @@ public abstract class SharedXenoHealSystem : EntitySystem
             failureMessageId = "rmc-xeno-apply-salve-target-dead-failure";
         }
 
+        if (_flammable.IsOnFire(target))
+        {
+            failureMessageId = "rmc-xeno-apply-salve-target-on-fire-failure";
+        }
+
         if (TryComp(target, out DamageableComponent? damageComp) && damageComp.TotalDamage == 0)
         {
             failureMessageId = "rmc-xeno-apply-salve-target-full-health-failure";

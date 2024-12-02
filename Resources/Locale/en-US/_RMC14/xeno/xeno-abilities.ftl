@@ -231,6 +231,7 @@ rmc-xeno-apply-salve-target-self-failure = We can't heal ourself with our own re
 rmc-xeno-apply-salve-target-hostile-failure = {$target_xeno} is hostile to our hive!
 rmc-xeno-apply-salve-target-too-far-away-failure = We can't apply our resin salve from here!
 rmc-xeno-apply-salve-target-dead-failure = {$target_xeno} is dead!
+rmc-xeno-apply-salve-target-on-fire-failure = Extinguish {$target_xeno} first or the flames will burn our resin salve away!
 rmc-xeno-apply-salve-target-full-health-failure = {$target_xeno} is already at full health!
 
 rmc-xeno-apply-salve-self = We regurgitate our vital fluids and some plasma to create a regenerative resin salve and apply it to {$target_xeno}'s wounds. We feel weakened...
