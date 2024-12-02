@@ -13,6 +13,8 @@ using Robust.Shared.Map.Enumerators;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Survivor;
+using Content.Shared._RMC14.Marines;
 
 namespace Content.Shared._RMC14.Doors;
 
@@ -58,7 +60,7 @@ public sealed class CMDoorSystem : EntitySystem
     private void OnButtonActivateInWorld(Entity<RMCDoorButtonComponent> button, ref ActivateInWorldEvent args)
     {
         var user = args.User;
-        if (HasComp<XenoComponent>(user))
+        if (!HasComp<MarineComponent>(user) || !HasComp<SurvivorComponent>(user))
             return;
 
         if (!_accessReader.IsAllowed(user, button))
