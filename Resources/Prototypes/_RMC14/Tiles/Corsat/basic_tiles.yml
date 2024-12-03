@@ -1,45 +1,90 @@
 ﻿- type: tile
   abstract: true
   parent: CMTileBase
-  id: CMFloorCorsatMarkedBase
-  name: tiles-cm-default-marked
+  id: CMFloorCorsatBasicBase
+  name: tiles-cm-default-basic
 
 - type: tile
-  parent: CMFloorCorsatMarkedBase
-  id: CMFloorCorsatMarked
-  sprite: /Textures/_RMC14/Tiles/corsat/marked.png
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicBox
+  sprite: /Textures/_RMC14/Tiles/corsat/box.png
 
 - type: tile
-  parent: CMFloorCorsatMarkedBase
-  id: CMFloorCorsatArrowEast
-  sprite: /Textures/_RMC14/Tiles/corsat/arrow_east.png
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicBox
+  sprite: /Textures/_RMC14/Tiles/corsat/box.png
 
 - type: tile
-  parent: CMFloorCorsatMarkedBase
-  id: CMFloorCorsatArrowNorth
-  sprite: /Textures/_RMC14/Tiles/corsat/arrow_north.png
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicLightPlate
+  sprite: /Textures/_RMC14/Tiles/corsat/lightplate.png
 
 - type: tile
-  parent: CMFloorCorsatMarkedBase
-  id: CMFloorCorsatArrowSouth
-  sprite: /Textures/_RMC14/Tiles/corsat/arrow_south.png
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicLightSpiral
+  sprite: /Textures/_RMC14/Tiles/corsat/lightspiral.png
 
 - type: tile
-  parent: CMFloorCorsatMarkedBase
-  id: CMFloorCorsatArrowWest
-  sprite: /Textures/_RMC14/Tiles/corsat/arrow_west.png
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicOfficeSquares
+  sprite: /Textures/_RMC14/Tiles/corsat/officesquares.png
 
 - type: tile
-  parent: CMFloorCorsatMarkedBase
-  id: CMFloorCorsatCargo
-  sprite: /Textures/_RMC14/Tiles/corsat/cargo.png
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicOfficeTiles
+  sprite: /Textures/_RMC14/Tiles/corsat/officetiles.png
 
 - type: tile
-  parent: CMFloorCorsatMarkedBase
-  id: CMFloorCorsatSigma
-  sprite: /Textures/_RMC14/Tiles/corsat/sigma.png
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicRetroSquares
+  sprite: /Textures/_RMC14/Tiles/corsat/retrosquares.png
 
 - type: tile
-  parent: CMFloorCorsatMarkedBase
-  id: CMFloorCorsatSigma
-  sprite: /Textures/_RMC14/Tiles/corsat/theta .png
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicRetroSquaresLight
+  sprite: /Textures/_RMC14/Tiles/corsat/retrosquareslight.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicRetroSquaresLightRough
+  sprite: /Textures/_RMC14/Tiles/corsat/retrosquareslightrough.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicSpiralBlueOffice
+  sprite: /Textures/_RMC14/Tiles/corsat/spiralblueoffice.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicSpiralOffice
+  sprite: /Textures/_RMC14/Tiles/corsat/spiraloffice.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicSpiralPlate
+  sprite: /Textures/_RMC14/Tiles/corsat/spiralplate.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicSpiralWoodAlt
+  sprite: /Textures/_RMC14/Tiles/corsat/spiralwoodalt.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicSterilePlate
+  sprite: /Textures/_RMC14/Tiles/corsat/sterileplate.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicTan
+  sprite: /Textures/_RMC14/Tiles/corsat/sterileplate.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicTComms
+  sprite: /Textures/_RMC14/Tiles/corsat/tcomms.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicWhiteBlueFull
+  sprite: /Textures/_RMC14/Tiles/corsat/whitebluefull.png
