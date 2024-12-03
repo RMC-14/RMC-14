@@ -33,4 +33,7 @@ public sealed partial class XenoFortifyComponent : Component
 
     [DataField, AutoNetworkedField]
     public RMCSizes? OriginalSize;
+
+    [DataField, AutoNetworkedField]
+    public bool BaseWeakToExplosionStuns = true;
 }

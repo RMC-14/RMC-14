@@ -2,7 +2,7 @@
   abstract: true
   id: CMApcBase
   name: area power controller
-  description: This model doesn't let you change its power cell yet!
+  description: A control terminal for the area electrical systems.
   categories: [ HideSpawnMenu ]
   components:
   - type: Transform

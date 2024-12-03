@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Crest;
 using Content.Shared._RMC14.Xenonids.Headbutt;
@@ -29,6 +30,7 @@ public sealed class XenoFortifySystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedRMCExplosionSystem _explode = default!;
 
     public override void Initialize()
     {
@@ -151,6 +153,9 @@ public sealed class XenoFortifySystem : EntitySystem
             Dirty(xeno.Owner, size);
         }
 
+        if (TryComp<StunOnExplosionReceivedComponent>(xeno, out var explode))
+            _explode.ChangeExplosionStunResistance(xeno, explode, false);
+
         _fixtures.TryCreateFixture(xeno, xeno.Comp.Shape, FixtureId, hard: true, collisionLayer: (int) WallLayer);
         _transform.AnchorEntity((xeno, Transform(xeno)));
 
@@ -166,6 +171,9 @@ public sealed class XenoFortifySystem : EntitySystem
             size.Size = xeno.Comp.OriginalSize ?? RMCSizes.Xeno;
             Dirty(xeno.Owner, size);
         }
+
+        if (TryComp<StunOnExplosionReceivedComponent>(xeno, out var explode))
+            _explode.ChangeExplosionStunResistance(xeno, explode, xeno.Comp.BaseWeakToExplosionStuns);
 
         _fixtures.DestroyFixture(xeno, FixtureId);
         _transform.Unanchor(xeno, Transform(xeno));
