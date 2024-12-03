@@ -661,6 +661,14 @@
     state: jester-who-helps
   - type: PatronFigurine
     id: 15d914f4-e436-496a-afe0-0e127297ed36
+  - type: EmitSoundOnUse
+    sound:
+      collection: FootstepJester
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 30
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -837,7 +845,7 @@
         volume: 5
         maxDistance: 1
   - type: UseDelay
-    delay: 180.0
+    delay: 30
 
 - type: entity
   parent: RMCBaseFigurinePatron
