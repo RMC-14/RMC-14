@@ -2,8 +2,8 @@
   parent: CamoTest
   id: CamoTestBase
   name: Camo Test
-  description: debug test object for camo proof of concept, will replace itself.
-  suffix: Debug
+  description: debug test object for camo proof of concept, will replace itself with a camouflaged variant.
+  suffix: Camo Replace
   components:
   - type: ItemCamouflage
     camouflageVariations:
