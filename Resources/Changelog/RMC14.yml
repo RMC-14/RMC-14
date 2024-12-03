@@ -1,22 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Double doors no longer have solid hitboxes on one half of the door when
-      open.
-    type: Fix
-  id: 557
-  time: '2024-08-16T03:44:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3662
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the Queen making no stomp sound when pulled. By making her unable
-      to be pulled while alive, not stunned and not knocked down. You did this to
-      yourselves. This is the best you are getting for now because I don't feel like
-      ahelping more people about it while I go fix footstep sound code.
-    type: Fix
-  id: 558
-  time: '2024-08-16T03:43:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3683
 - author: crystalHex
   changes:
   - message: Added descriptions to squad leader's kits.
@@ -5044,5 +5026,19 @@
   id: 1056
   time: '2024-12-03T04:56:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5010
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed xenos being able to see ID card / dogtag names by examining.
+    type: Fix
+  id: 1057
+  time: '2024-12-03T05:01:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5004
+- author: Vermidia
+  changes:
+  - message: Fixed Defender being immune to explosion stuns when unfortified.
+    type: Fix
+  id: 1058
+  time: '2024-12-03T05:00:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5021
 Name: RMC14
 Order: -1
