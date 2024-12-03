@@ -28,8 +28,8 @@
   - type: Clickable
   - type: InteractionOutline
   - type: PointLight
-    radius: 4.75
-    color: "#bfa902"
+    radius: 5
+    color: "#bf6d02"
   - type: EffectVisuals
   - type: Tag
     tags:
