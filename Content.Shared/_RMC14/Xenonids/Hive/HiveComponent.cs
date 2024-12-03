@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -39,6 +40,9 @@ public sealed partial class HiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool SeeThroughContainers;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? CurrentQueen;
 
     [DataField, AutoNetworkedField]
     public TimeSpan? LastQueenDeath;

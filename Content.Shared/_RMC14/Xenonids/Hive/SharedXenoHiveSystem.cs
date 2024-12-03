@@ -10,6 +10,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -81,6 +82,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         if (GetHive(ent.Owner) is {} hive)
         {
             hive.Comp.LastQueenDeath = _timing.CurTime;
+            hive.Comp.CurrentQueen = null;
             Dirty(hive);
         }
     }
@@ -200,6 +202,13 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             return false;
 
         return memberHive.Owner == hive;
+    }
+
+    public bool SetHiveQueen(EntityUid queen, Entity<HiveComponent> hive)
+    {
+        hive.Comp.CurrentQueen = queen;
+        Dirty(hive);
+        return true;
     }
 
     public bool TryGetStructureLimit(Entity<HiveComponent> hive, EntProtoId structureProtoId, out int limit)

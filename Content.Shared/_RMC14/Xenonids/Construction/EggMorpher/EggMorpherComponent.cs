@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 
+[RegisterComponent]
 public sealed partial class EggMorpherComponent : Component
 {
     /// <summary>

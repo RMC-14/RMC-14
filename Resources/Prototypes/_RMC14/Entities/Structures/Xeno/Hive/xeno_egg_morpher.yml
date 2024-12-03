@@ -15,6 +15,7 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: EggMorpher
   - type: HiveConstructionRequiresHiveWeeds
   - type: HiveConstructionLimited
     id: HiveEggMorpherXeno
@@ -40,6 +41,7 @@
   - type: HiveConstructionNode
     initialPlasmaCost: 400
     plasmaCost: 450
+    spawn: HiveEggMorpherXeno
   - type: HiveConstructionRequiresHiveWeeds
   - type: HiveConstructionLimited
     id: HiveEggMorpherXeno
