@@ -28,7 +28,7 @@
   supervisors: cm-job-supervisors-co
   whitelisted: true
   accessGroups:
-  - MarineMainNoSenior
+  - MarineMain
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: sea
