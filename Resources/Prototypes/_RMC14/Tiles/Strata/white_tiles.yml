@@ -6,5 +6,20 @@
 
 - type: tile
   parent: CMFloorStrataWhiteBase
-  id: CMFloorStrataWhiteCyan1
-  sprite: /Textures/_RMC14/Tiles/strata/white_cyan1.png
+  id: CMFloorStrataWhiteCyan10
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan1_0.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan11
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan1_1.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan12
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan1_2.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan13
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan1_3.png
