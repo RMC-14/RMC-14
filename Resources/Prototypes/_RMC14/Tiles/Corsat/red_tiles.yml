@@ -6,60 +6,60 @@
 
 - type: tile
   parent: CMFloorCorsatRedBase
-  id: CMFloorCorsatRed_0
+  id: CMFloorCorsatRed0
   sprite: /Textures/_RMC14/Tiles/corsat/red_0.png
 
 - type: tile
   parent: CMFloorCorsatRedBase
-  id: CMFloorCorsatRed_1
+  id: CMFloorCorsatRed1
   sprite: /Textures/_RMC14/Tiles/corsat/red_1.png
 
 - type: tile
   parent: CMFloorCorsatRedBase
-  id: CMFloorCorsatRed_2
+  id: CMFloorCorsatRed2
   sprite: /Textures/_RMC14/Tiles/corsat/red_2.png
 
 - type: tile
   parent: CMFloorCorsatRedBase
-  id: CMFloorCorsatRed_3
+  id: CMFloorCorsatRed3
   sprite: /Textures/_RMC14/Tiles/corsat/red_3.png
 
 - type: tile
   parent: CMFloorCorsatRedBase
-  id: CMFloorCorsatRed_4
+  id: CMFloorCorsatRed4
   sprite: /Textures/_RMC14/Tiles/corsat/red_4.png
 
 - type: tile
   parent: CMFloorCorsatRedBase
-  id: CMFloorCorsatRed_5
+  id: CMFloorCorsatRed5
   sprite: /Textures/_RMC14/Tiles/corsat/red_5.png
 
 - type: tile
   parent: CMFloorCorsatRedBase
-  id: CMFloorCorsatRed_6
+  id: CMFloorCorsatRed6
   sprite: /Textures/_RMC14/Tiles/corsat/red_6.png
 
 - type: tile
   parent: CMFloorCorsatRedBase
-  id: CMFloorCorsatRed_7
+  id: CMFloorCorsatRed7
   sprite: /Textures/_RMC14/Tiles/corsat/red_7.png
 
 - type: tile
   parent: CMFloorCorsatRedBase
-  id: CMFloorCorsatRedCorner_0
+  id: CMFloorCorsatRedCorner0
   sprite: /Textures/_RMC14/Tiles/corsat/redcorner_0.png
 
 - type: tile
   parent: CMFloorCorsatRedBase
-  id: CMFloorCorsatRedCorner_1
+  id: CMFloorCorsatRedCorner1
   sprite: /Textures/_RMC14/Tiles/corsat/redcorner_1.png
 
 - type: tile
   parent: CMFloorCorsatRedBase
-  id: CMFloorCorsatRedCorner_2
+  id: CMFloorCorsatRedCorner2
   sprite: /Textures/_RMC14/Tiles/corsat/redcorner_2.png
 
 - type: tile
   parent: CMFloorCorsatRedBase
-  id: CMFloorCorsatRedCorner_3
+  id: CMFloorCorsatRedCorner3
   sprite: /Textures/_RMC14/Tiles/corsat/redcorner_3.png
