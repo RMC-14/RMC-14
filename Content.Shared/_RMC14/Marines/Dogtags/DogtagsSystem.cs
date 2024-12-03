@@ -160,8 +160,9 @@ public sealed class DogtagsSystem : EntitySystem
             return;
 
         var tag = SpawnNextToOrDrop(tags.Comp.InfoTag, wearer);
+		Dirty(tags);
 
-        var comp = EnsureComp<InformationTagsComponent>(tag);
+		var comp = EnsureComp<InformationTagsComponent>(tag);
         GetTagInformation(tags, out var name, out var job, out var blood);
         InfoTagInfo tagInfo = new InfoTagInfo()
         {
