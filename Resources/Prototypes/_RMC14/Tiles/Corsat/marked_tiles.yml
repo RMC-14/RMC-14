@@ -1,0 +1,10 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorCorsatMarkedBase
+  name: tiles-cm-default-marked
+
+- type: tile
+  parent: CMFloorCorsatMarkedBase
+  id: CMFloorCorsatMarked
+  sprite: /Textures/_RMC14/Tiles/corsat/marked.png
