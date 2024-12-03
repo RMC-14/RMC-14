@@ -1,0 +1,10 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorStrataWhiteBase
+  name: tiles-cm-default-white
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan1
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan1.png

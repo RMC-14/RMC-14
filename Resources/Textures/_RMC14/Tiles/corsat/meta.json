@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "license": null,
-  "copyright": null,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/6b4eeea257437bd337dc64f006f2cf4411cfe0a7/icons/turf/floors/corsat.dmi",
   "size": {
     "x": 32,
     "y": 32
