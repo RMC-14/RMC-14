@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: crystalHex
-  changes:
-  - message: Added descriptions to squad leader's kits.
-    type: Tweak
-  id: 559
-  time: '2024-08-16T06:29:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3686
 - author: DrSmugleaf
   changes:
   - message: Added Sukuna Kurze figurine.
@@ -5040,5 +5033,19 @@
   id: 1058
   time: '2024-12-03T05:00:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5021
+- author: DrSmugleaf
+  changes:
+  - message: Fixed APC description mentioning that you can't swap the battery yet.
+    type: Fix
+  - message: Fixed playtime perks not being enabled by default.
+    type: Fix
+  - message: Fixed incendiary slugs not stunning.
+    type: Fix
+  - message: Fixed the Weapons Specialist's vendors giving you HIDP packets instead
+      of individual HIDP grenades.
+    type: Fix
+  id: 1059
+  time: '2024-12-03T05:12:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5037
 Name: RMC14
 Order: -1
