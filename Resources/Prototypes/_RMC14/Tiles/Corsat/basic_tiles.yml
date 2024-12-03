@@ -11,11 +11,6 @@
 
 - type: tile
   parent: CMFloorCorsatBasicBase
-  id: CMFloorCorsatBasicBox
-  sprite: /Textures/_RMC14/Tiles/corsat/box.png
-
-- type: tile
-  parent: CMFloorCorsatBasicBase
   id: CMFloorCorsatBasicLightPlate
   sprite: /Textures/_RMC14/Tiles/corsat/lightplate.png
 

@@ -41,15 +41,15 @@
 
 - type: tile
   parent: CMFloorCorsatMarkedBase
-  id: CMFloorCorsatSigma
+  id: CMFloorCorsatTheta
   sprite: /Textures/_RMC14/Tiles/corsat/theta.png
 
 - type: tile
   parent: CMFloorCorsatMarkedBase
-  id: CMFloorCorsatSigma
+  id: CMFloorCorsatGamma
   sprite: /Textures/_RMC14/Tiles/corsat/gamma.png
 
 - type: tile
   parent: CMFloorCorsatMarkedBase
-  id: CMFloorCorsatSigma
+  id: CMFloorCorsatOmega
   sprite: /Textures/_RMC14/Tiles/corsat/omega.png
