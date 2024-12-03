@@ -83,7 +83,6 @@
 # all ship-side access besides senior
 # SO uses this.
 # Liaison uses this.
-# SEA uses this.
 - type: accessGroup
   id: MarineMainNoSenior
   tags:
