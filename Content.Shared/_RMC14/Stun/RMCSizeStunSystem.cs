@@ -98,11 +98,13 @@ public sealed class RMCSizeStunSystem : EntitySystem
             _physics.SetLinearVelocity(args.Target, Vector2.Zero);
             _physics.SetAngularVelocity(args.Target, 0f);
 
-            var direction = (_transform.GetMoverCoordinates(args.Target).Position - bullet.Comp.ShotFrom.Value.Position).Normalized();
-
-            _throwing.TryThrow(args.Target, direction, 1, animated: false, playSound: false, doSpin: false);
-
-            // RMC-14 TODO Thrown into obstacle mechanics
+            var vec = _transform.GetMoverCoordinates(args.Target).Position - bullet.Comp.ShotFrom.Value.Position;
+            if (vec.Length() != 0)
+            {
+                var direction = vec.Normalized();
+                _throwing.TryThrow(args.Target, direction, 1, animated: false, playSound: false, doSpin: false);
+                // RMC-14 TODO Thrown into obstacle mechanics
+            }
         }
 
         //Stun part

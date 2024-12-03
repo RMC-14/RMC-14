@@ -1,61 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Xenos will no longer look stunned if killed by an AP rocket.
-    type: Fix
-  - message: Defenders will no longer look stunned if hit by an AP rocket while fortified.
-    type: Fix
-  id: 554
-  time: '2024-08-16T03:39:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3680
-- author: Vermidia
-  changes:
-  - message: Added plasteel barricades, craftable with 6 plasteel. They have more
-      health than normal barricades but take longer to set up.
-    type: Add
-  id: 555
-  time: '2024-08-16T03:45:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3661
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed duplicate traits in the character Traits tab. Check to make sure
-      that your selected traits are still correct!
-    type: Fix
-  id: 556
-  time: '2024-08-16T03:43:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3606
-- author: blueDev2
-  changes:
-  - message: Double doors no longer have solid hitboxes on one half of the door when
-      open.
-    type: Fix
-  id: 557
-  time: '2024-08-16T03:44:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3662
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the Queen making no stomp sound when pulled. By making her unable
-      to be pulled while alive, not stunned and not knocked down. You did this to
-      yourselves. This is the best you are getting for now because I don't feel like
-      ahelping more people about it while I go fix footstep sound code.
-    type: Fix
-  id: 558
-  time: '2024-08-16T03:43:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3683
-- author: crystalHex
-  changes:
-  - message: Added descriptions to squad leader's kits.
-    type: Tweak
-  id: 559
-  time: '2024-08-16T06:29:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3686
-- author: DrSmugleaf
-  changes:
-  - message: Added Sukuna Kurze figurine.
-    type: Add
-  id: 560
-  time: '2024-08-16T08:58:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3685
 - author: DrSmugleaf
   changes:
   - message: Added a popup when someone else throws something.
@@ -5045,5 +4988,67 @@
   id: 1053
   time: '2024-11-30T23:51:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4999
+- author: CyberTropic
+  changes:
+  - message: Fixed some areas on Kutjevo not properly blocking CAS and OB.
+    type: Fix
+  id: 1054
+  time: '2024-12-03T04:54:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5035
+- author: Vermidia
+  changes:
+  - message: Fix range at which info tags are collectable
+    type: Fix
+  - message: Info tags can now also be collected unskilled from recently bursted or
+      suicided humanoids.
+    type: Tweak
+  id: 1055
+  time: '2024-12-03T04:54:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5020
+- author: Vermidia
+  changes:
+  - message: Fix tunnels not appearing on the tacmap
+    type: Fix
+  id: 1056
+  time: '2024-12-03T04:56:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5010
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed xenos being able to see ID card / dogtag names by examining.
+    type: Fix
+  id: 1057
+  time: '2024-12-03T05:01:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5004
+- author: Vermidia
+  changes:
+  - message: Fixed Defender being immune to explosion stuns when unfortified.
+    type: Fix
+  id: 1058
+  time: '2024-12-03T05:00:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5021
+- author: DrSmugleaf
+  changes:
+  - message: Fixed APC description mentioning that you can't swap the battery yet.
+    type: Fix
+  - message: Fixed playtime perks not being enabled by default.
+    type: Fix
+  - message: Fixed incendiary slugs not stunning.
+    type: Fix
+  - message: Fixed the Weapons Specialist's vendors giving you HIDP packets instead
+      of individual HIDP grenades.
+    type: Fix
+  id: 1059
+  time: '2024-12-03T05:12:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5037
+- author: Whisper
+  changes:
+  - message: Added Ranuko figurine.
+    type: Add
+  - message: Reduced use delay of some figurines, as they only play on the same tile
+      they are used.
+    type: Fix
+  id: 1060
+  time: '2024-12-03T05:55:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5036
 Name: RMC14
 Order: -1

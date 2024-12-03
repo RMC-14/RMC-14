@@ -287,6 +287,7 @@
     blacklist:
       components:
       - Marine
+  - type: BlockIdExamine
 
 - type: entity
   abstract: true
