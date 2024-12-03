@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added Sukuna Kurze figurine.
-    type: Add
-  id: 560
-  time: '2024-08-16T08:58:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3685
-- author: DrSmugleaf
-  changes:
   - message: Added a popup when someone else throws something.
     type: Add
   id: 561
@@ -5047,5 +5040,15 @@
   id: 1059
   time: '2024-12-03T05:12:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5037
+- author: Whisper
+  changes:
+  - message: Added Ranuko figurine.
+    type: Add
+  - message: Reduced use delay of some figurines, as they only play on the same tile
+      they are used.
+    type: Fix
+  id: 1060
+  time: '2024-12-03T05:55:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5036
 Name: RMC14
 Order: -1
