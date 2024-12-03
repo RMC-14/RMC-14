@@ -22,27 +22,27 @@
 - type: tile
   parent: CMFloorCorsatGreenBase
   id: CMFloorCorsatDarkGreen_3
-  sprite: /Textures/_RMC14/Tiles/corsat/darkgreen_4.png
+  sprite: /Textures/_RMC14/Tiles/corsat/darkgreen_3.png
 
 - type: tile
   parent: CMFloorCorsatGreenBase
   id: CMFloorCorsatDarkGreen_4
-  sprite: /Textures/_RMC14/Tiles/corsat/darkgreen_5.png
+  sprite: /Textures/_RMC14/Tiles/corsat/darkgreen_4.png
 
 - type: tile
   parent: CMFloorCorsatGreenBase
   id: CMFloorCorsatDarkGreen_5
-  sprite: /Textures/_RMC14/Tiles/corsat/darkgreen_6.png
+  sprite: /Textures/_RMC14/Tiles/corsat/darkgreen_5.png
 
 - type: tile
   parent: CMFloorCorsatGreenBase
   id: CMFloorCorsatDarkGreen_6
-  sprite: /Textures/_RMC14/Tiles/corsat/darkgreen_7.png
+  sprite: /Textures/_RMC14/Tiles/corsat/darkgreen_6.png
 
 - type: tile
   parent: CMFloorCorsatGreenBase
   id: CMFloorCorsatDarkGreen_7
-  sprite: /Textures/_RMC14/Tiles/corsat/darkgreen_8.png
+  sprite: /Textures/_RMC14/Tiles/corsat/darkgreen_7.png
 
 - type: tile
   parent: CMFloorCorsatGreenBase
@@ -62,7 +62,7 @@
 - type: tile
   parent: CMFloorCorsatGreenBase
   id: CMFloorCorsatDarkGreenCorner_3
-  sprite: /Textures/_RMC14/Tiles/corsat/darkgreencorner_4.png
+  sprite: /Textures/_RMC14/Tiles/corsat/darkgreencorner_3.png
 
 - type: tile
   parent: CMFloorCorsatGreenBase
@@ -82,27 +82,27 @@
 - type: tile
   parent: CMFloorCorsatGreenBase
   id: CMFloorCorsatGreen_3
-  sprite: /Textures/_RMC14/Tiles/corsat/green_4.png
+  sprite: /Textures/_RMC14/Tiles/corsat/green_3.png
 
 - type: tile
   parent: CMFloorCorsatGreenBase
   id: CMFloorCorsatGreen_4
-  sprite: /Textures/_RMC14/Tiles/corsat/green_5.png
+  sprite: /Textures/_RMC14/Tiles/corsat/green_4.png
 
 - type: tile
   parent: CMFloorCorsatGreenBase
   id: CMFloorCorsatGreen_5
-  sprite: /Textures/_RMC14/Tiles/corsat/green_6.png
+  sprite: /Textures/_RMC14/Tiles/corsat/green_5.png
 
 - type: tile
   parent: CMFloorCorsatGreenBase
   id: CMFloorCorsatGreen_6
-  sprite: /Textures/_RMC14/Tiles/corsat/green_7.png
+  sprite: /Textures/_RMC14/Tiles/corsat/green_6.png
 
 - type: tile
   parent: CMFloorCorsatGreenBase
   id: CMFloorCorsatGreen_7
-  sprite: /Textures/_RMC14/Tiles/corsat/green_8.png
+  sprite: /Textures/_RMC14/Tiles/corsat/green_7.png
 
 - type: tile
   parent: CMFloorCorsatGreenBase
@@ -122,7 +122,7 @@
 - type: tile
   parent: CMFloorCorsatGreenBase
   id: CMFloorCorsatGreenCorner_3
-  sprite: /Textures/_RMC14/Tiles/corsat/greencorner_4.png
+  sprite: /Textures/_RMC14/Tiles/corsat/greencorner_3.png
 
 - type: tile
   parent: CMFloorCorsatGreenBase
@@ -142,17 +142,17 @@
 - type: tile
   parent: CMFloorCorsatGreenBase
   id: CMFloorCorsatGreenWhite_3
-  sprite: /Textures/_RMC14/Tiles/corsat/greenwhite_4.png
+  sprite: /Textures/_RMC14/Tiles/corsat/greenwhite_3.png
 
 - type: tile
   parent: CMFloorCorsatGreenBase
   id: CMFloorCorsatGreenWhite_4
-  sprite: /Textures/_RMC14/Tiles/corsat/greenwhite_5.png
+  sprite: /Textures/_RMC14/Tiles/corsat/greenwhite_4.png
 
 - type: tile
   parent: CMFloorCorsatGreenBase
   id: CMFloorCorsatGreenWhite_5
-  sprite: /Textures/_RMC14/Tiles/corsat/greenwhite_6.png
+  sprite: /Textures/_RMC14/Tiles/corsat/greenwhite_5.png
 
 - type: tile
   parent: CMFloorCorsatGreenBase
@@ -182,4 +182,4 @@
 - type: tile
   parent: CMFloorCorsatGreenBase
   id: CMFloorCorsatGreenWhiteCorner_3
-  sprite: /Textures/_RMC14/Tiles/corsat/greenwhitecorner_4.png
+  sprite: /Textures/_RMC14/Tiles/corsat/greenwhitecorner_3.png
