@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Xenos will no longer look stunned if killed by an AP rocket.
-    type: Fix
-  - message: Defenders will no longer look stunned if hit by an AP rocket while fortified.
-    type: Fix
-  id: 554
-  time: '2024-08-16T03:39:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3680
-- author: Vermidia
-  changes:
-  - message: Added plasteel barricades, craftable with 6 plasteel. They have more
-      health than normal barricades but take longer to set up.
-    type: Add
-  id: 555
-  time: '2024-08-16T03:45:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3661
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed duplicate traits in the character Traits tab. Check to make sure
@@ -5045,5 +5028,22 @@
   id: 1053
   time: '2024-11-30T23:51:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4999
+- author: CyberTropic
+  changes:
+  - message: Fixed some areas on Kutjevo not properly blocking CAS and OB.
+    type: Fix
+  id: 1054
+  time: '2024-12-03T04:54:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5035
+- author: Vermidia
+  changes:
+  - message: Fix range at which info tags are collectable
+    type: Fix
+  - message: Info tags can now also be collected unskilled from recently bursted or
+      suicided humanoids.
+    type: Tweak
+  id: 1055
+  time: '2024-12-03T04:54:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5020
 Name: RMC14
 Order: -1
