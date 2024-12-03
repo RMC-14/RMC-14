@@ -17,8 +17,10 @@ using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
+using Content.Shared.Hands;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Mobs;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
@@ -59,6 +61,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         SubscribeLocalEvent<XenoComponent, XenoDigTunnelDoAfter>(OnFinishCreateTunnel);
 
         SubscribeLocalEvent<XenoTunnelComponent, InteractHandEvent>(OnInteract);
+        SubscribeLocalEvent<XenoTunnelComponent, GetVerbsEvent<InteractionVerb>>(OnGetInteractVerbs);
         SubscribeLocalEvent<XenoTunnelComponent, ContainerRelayMovementEntityEvent>(OnAttemptMoveInTunnel);
         SubscribeLocalEvent<XenoTunnelComponent, TraverseXenoTunnelMessage>(OnMoveThroughTunnel);
 
@@ -74,6 +77,8 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         SubscribeLocalEvent<InXenoTunnelComponent, RegurgitateEvent>(OnRegurgitateInTunnel);
         SubscribeLocalEvent<InXenoTunnelComponent, ComponentInit>(OnInTunnel);
         SubscribeLocalEvent<InXenoTunnelComponent, ComponentRemove>(OnOutTunnel);
+        SubscribeLocalEvent<InXenoTunnelComponent, DropAttemptEvent>(OnTryDropInTunnel);
+        SubscribeLocalEvent<InXenoTunnelComponent, MobStateChangedEvent>(OnDeathInTunnel);
 
         Subs.BuiEvents<XenoTunnelComponent>(NameTunnelUI.Key, subs =>
         {
@@ -271,6 +276,22 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         _ui.CloseUi(xenoTunnel.Owner, NameTunnelUI.Key, args.Actor);
     }
 
+    private void OnGetInteractVerbs(Entity<XenoTunnelComponent> xenoTunnel, ref GetVerbsEvent<InteractionVerb> args)
+    {
+        var user = args.User;
+        var target = args.Target;
+        var interactVerb = new InteractionVerb()
+        {
+            Act = () =>
+            {
+                var ev = new InteractHandEvent(user, target);
+                RaiseLocalEvent(xenoTunnel, ev);
+            },
+            Text = Loc.GetString("xeno-ui-enter-tunnel-verb")
+        };
+
+        args.Verbs.Add(interactVerb);
+    }
     private void OnInteract(Entity<XenoTunnelComponent> xenoTunnel, ref InteractHandEvent args)
     {
         var (ent, comp) = xenoTunnel;
@@ -565,9 +586,8 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
         foreach (var mob in tempMobList)
         {
-            _transform.DropNextTo(mob, xenoTunnel.Owner);
+            RemoveFromTunnel(mob, mobContainer.Owner);
             _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-fill-xeno-drop"), mob, mob);
-            RemCompDeferred<InXenoTunnelComponent>(mob);
         }
 
         QueueDel(xenoTunnel.Owner);
@@ -583,6 +603,27 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         EnableAllAbilities(tunneledXeno.Owner);
     }
 
+    private void OnTryDropInTunnel(Entity<InXenoTunnelComponent> tunneledXeno, ref DropAttemptEvent args)
+    {
+        args.Cancel();
+    }
+
+    private void OnDeathInTunnel(Entity<InXenoTunnelComponent> tunneledXeno, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState != MobState.Dead)
+        {
+            return;
+        }
+
+        if (!_container.TryGetContainingContainer(tunneledXeno, out var mobContainer))
+        {
+            return;
+        }
+
+        var tunnel = mobContainer.Owner;
+        RemoveFromTunnel(tunneledXeno, tunnel);
+    }
+
     private void OnRegurgitateInTunnel(Entity<InXenoTunnelComponent> tunneledXeno, ref RegurgitateEvent args)
     {
         var regurgitated = _entities.GetEntity(args.NetRegurgitated);
@@ -592,7 +633,13 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         }
 
         var tunnel = mobContainer.Owner;
-        _transform.DropNextTo(regurgitated, tunnel);
+        RemoveFromTunnel(regurgitated, tunnel);
+    }
+
+    private void RemoveFromTunnel(EntityUid tunneledMob, EntityUid tunnel)
+    {
+        RemCompDeferred<InXenoTunnelComponent>(tunneledMob);
+        _transform.DropNextTo(tunneledMob, tunnel);
     }
 
     private bool CanPlaceTunnelPopup(EntityUid user, EntityCoordinates coords)
