@@ -524,7 +524,6 @@
     state: colony_caves_3
   - type: Area
     minimapColor: '#5A4501E7'
-  - type: Area
     CAS: false
     OB: false
 
