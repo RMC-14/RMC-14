@@ -661,6 +661,14 @@
     state: jester-who-helps
   - type: PatronFigurine
     id: 15d914f4-e436-496a-afe0-0e127297ed36
+  - type: EmitSoundOnUse
+    sound:
+      collection: FootstepJester
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 30
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -837,7 +845,7 @@
         volume: 5
         maxDistance: 1
   - type: UseDelay
-    delay: 180.0
+    delay: 30
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -871,3 +879,15 @@
     state: emily_klutz_rathen
   - type: PatronFigurine
     id: e8819228-95ea-4a3b-8e1c-0e7eaa55cb90
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRanuko
+  name: Ranuko figurine
+  description: "You know a patch up with a smile is close at hand with this Avali."
+  components:
+  - type: Sprite
+    state: ranuko
+  - type: PatronFigurine
+    id: 6d896f2e-3a36-4c55-bd80-eb72242de43b
+
