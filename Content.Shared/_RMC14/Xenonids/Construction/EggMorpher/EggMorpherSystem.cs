@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
+using Content.Shared.Verbs;
 using Robust.Shared.Timing;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,13 @@ public sealed partial class EggMorpherSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _time = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<EggMorpherComponent, XenoChangeParasiteReserveMessage>(OnChangeParasiteReserve);
+        SubscribeLocalEvent<EggMorpherComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
     }
 
     public override void Update(float frameTime)
@@ -53,6 +56,27 @@ public sealed partial class EggMorpherSystem : EntitySystem
     private void OnChangeParasiteReserve(Entity<EggMorpherComponent> eggMorpher, ref XenoChangeParasiteReserveMessage args)
     {
         eggMorpher.Comp.ReservedParasites = args.NewReserve;
+    }
+
+    private void OnGetVerbs(Entity<EggMorpherComponent> eggMorpher, ref GetVerbsEvent<ActivationVerb> args)
+    {
+        var user = args.User;
+        if (!_hive.FromSameHive(user, eggMorpher.Owner))
+        {
+            return;
+        }
+
+        var changeReserveVerb = new ActivationVerb()
+        {
+            Text = Loc.GetString("xeno-reserve-parasites-verb"),
+            Act = () =>
+            {
+                _ui.OpenUi(eggMorpher.Owner, XenoReserveParasiteChangeUI.Key, user);
+
+            }
+        };
+
+        args.Verbs.Add(changeReserveVerb);
     }
 
     private TimeSpan GetParasiteSpawnCooldown(Entity<EggMorpherComponent> eggMorpher)

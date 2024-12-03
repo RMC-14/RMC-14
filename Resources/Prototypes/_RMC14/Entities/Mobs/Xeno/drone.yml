@@ -75,6 +75,8 @@
     buildDelay: 2
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+    - HiveEggMorpherXenoConstructionNode
+    - HiveClusterXenoConstructionNode
   - type: XenoEvolution
     canEvolveWithoutGranter: true
     max: 200

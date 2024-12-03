@@ -19,6 +19,10 @@
   - type: HiveConstructionRequiresHiveWeeds
   - type: HiveConstructionLimited
     id: HiveEggMorpherXeno
+  - type: UserInterface
+    interfaces:
+      enum.XenoReserveParasiteChangeUI.Key:
+        type: ReserveParasitesBoundUserInterface
 
 - type: entity
   id: HiveEggMorpherXenoConstructionNode
