@@ -22,6 +22,8 @@
   - type: RMCNightVisionVisible
     priority: -1
     transparency: 0.2
+  - type: XenoConstruct
+    destroyWeeds: false
 
 - type: entity
   abstract: true
