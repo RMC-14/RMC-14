@@ -5,8 +5,11 @@
   description: A disgusting biomass generator that reeks of rotting flesh. Capable of producing parasites on its own.
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Xenos/hive_structures.rsi
-    state: eggmorph
+    layers:
+    - sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+      state: eggmorph
+    - sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+      state: eggmorph_overlay
   - type: Fixtures
     fixtures:
       fix1:
@@ -59,9 +62,13 @@
   description: A disgusting biomass generator that reeks of rotting flesh. Looks like a marker for something.
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Xenos/hive_structures.rsi
-    state: eggmorph
-    color: '#FFFFFFAA'
+    layers:
+    - sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+      state: eggmorph
+      color: '#FFFFFFAA'
+    - sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+      state: eggmorph_overlay
+      color: '#FFFFFFAA'
   - type: Destructible
     thresholds:
     - trigger:
