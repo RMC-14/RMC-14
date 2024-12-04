@@ -240,20 +240,6 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
 
-# Officer
-- type: entity
-  parent: CMCoatOfficer
-  id: RMCCoatOfficerCamo
-  suffix: Camo Replacer
-  components:
-  - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: CMCoatOfficer
-      Desert: RMCCoatService
-      Snow: CMCoatLong
-      Classic: CMCoatOfficer
-      Urban: CMCoatOfficer
-
 - type: entity
   parent: RMCBaseJacket
   id: CMCoatOfficer
@@ -268,12 +254,13 @@
 - type: entity
   parent: CMCoatOfficer
   id: RMCCoatService
+  suffix: Jungle
   description: A service jacket typically worn by officers of the UNMC. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/d_coat.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/d_coat.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
   - type: CMArmor
     armor: 10 # TODO RMC14 10 melee
   - type: Appearance
@@ -284,12 +271,55 @@
   - type: FoldableClothing
     foldedEquippedPrefix: jacket
 
-# Longcoat - This is the service jacket but for snow maps
 - type: entity
-  parent: CMCoatOfficer
-  id: CMCoatLong
+  parent: RMCCoatService
+  id: RMCCoatServiceCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCCoatService
+      Desert: RMCCoatServiceDesert
+      Snow: RMCCoatServiceSnow
+      Classic: RMCCoatServiceClassic
+      Urban: RMCCoatServiceUrban
+
+- type: entity
+  parent: RMCCoatService
+  id: RMCCoatServiceDesert
+  suffix: Desert
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/long_coat.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/desert.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/long_coat.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/desert.rsi 
+
+- type: entity
+  parent: RMCCoatService
+  id: RMCCoatServiceSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/snow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/snow.rsi 
+
+- type: entity
+  parent: RMCCoatService
+  id: RMCCoatServiceClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/classic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/classic.rsi 
+
+- type: entity
+  parent: RMCCoatService
+  id: RMCCoatServiceUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/urban.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/urban.rsi 

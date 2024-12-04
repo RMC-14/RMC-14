@@ -8,11 +8,11 @@
   },
   "states": [
     {
-      "name": "u_mortar_m402",
+      "name": "mortar_m402",
       "directions": 4
     },
     {
-      "name": "u_mortar_m402_fire",
+      "name": "mortar_m402_fire",
       "directions": 4,
       "delays": [
         [
@@ -34,7 +34,7 @@
       ]
     },
     {
-      "name": "u_mortar_m402_carry"
+      "name": "mortar_m402_carry"
     }
   ]
 }
