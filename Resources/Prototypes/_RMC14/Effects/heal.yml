@@ -22,3 +22,11 @@
   components:
   - type: Sprite
     color: "#F5007A"
+
+- type: entity
+  parent: RMCEffectHeal
+  id: RMCEffectHealQueen
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    color: "#D9F500"

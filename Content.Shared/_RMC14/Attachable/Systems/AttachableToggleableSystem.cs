@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
@@ -37,6 +38,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly UseDelaySystem _useDelaySystem = default!;
 
     private const string attachableToggleUseDelayID = "RMCAttachableToggle";
@@ -46,7 +48,8 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<AttachableToggleableComponent, ActivateInWorldEvent>(OnActivateInWorld);
+        SubscribeLocalEvent<AttachableToggleableComponent, ActivateInWorldEvent>(OnActivateInWorld,
+            after: new[] { typeof(CMGunSystem) });
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableAlteredEvent>(OnAttachableAltered,
             after: new[] { typeof(AttachableModifiersSystem) });
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableToggleableInterruptEvent>(OnAttachableToggleableInterrupt);
@@ -229,11 +232,13 @@ public sealed class AttachableToggleableSystem : EntitySystem
     private void OnGunShot(Entity<AttachableToggleableComponent> attachable, ref AttachableRelayedEvent<GunShotEvent> args)
     {
         CheckUserBreakOnRotate(args.Args.User);
+        CheckUserBreakOnFullRotate(args.Args.User, args.Args.FromCoordinates, args.Args.ToCoordinates);
     }
 
     private void OnGunShot(Entity<AttachableToggleableComponent> attachable, ref GunShotEvent args)
     {
         CheckUserBreakOnRotate(args.User);
+        CheckUserBreakOnFullRotate(args.User, args.FromCoordinates, args.ToCoordinates);
     }
 
     private void OnAttemptShoot(Entity<AttachableGunPreventShootComponent> gun, ref AttemptShootEvent args)
@@ -293,8 +298,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
         if (!args.HasDirectionalMovement)
             return;
 
-        foreach (var attachableUid in user.Comp.AttachableList)
+        for (var i = user.Comp.AttachableList.Count - 1; i >= 0; i--)
         {
+            var attachableUid = user.Comp.AttachableList[i];
             if (!TryComp(attachableUid, out AttachableToggleableComponent? toggleableComponent) ||
                 !toggleableComponent.Active ||
                 !toggleableComponent.BreakOnMove)
@@ -304,8 +310,6 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
             Toggle((attachableUid, toggleableComponent), user.Owner, toggleableComponent.DoInterrupt);
         }
-
-        RemCompDeferred<AttachableMovementLockedComponent>(user);
     }
 
     private void CheckUserBreakOnRotate(Entity<AttachableDirectionLockedComponent?> user)
@@ -321,8 +325,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
         if (Transform(user.Owner).LocalRotation.GetCardinalDir() == user.Comp.LockedDirection)
             return;
 
-        foreach (EntityUid attachableUid in user.Comp.AttachableList)
+        for (var i = user.Comp.AttachableList.Count - 1; i >= 0; i--)
         {
+            var attachableUid = user.Comp.AttachableList[i];
             if (!TryComp(attachableUid, out AttachableToggleableComponent? toggleableComponent) ||
                 !toggleableComponent.Active ||
                 !toggleableComponent.BreakOnRotate)
@@ -332,8 +337,43 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
             Toggle((attachableUid, toggleableComponent), user.Owner, toggleableComponent.DoInterrupt);
         }
+    }
 
-        RemCompDeferred<AttachableDirectionLockedComponent>(user);
+    private void CheckUserBreakOnFullRotate(Entity<AttachableSideLockedComponent?> user, EntityCoordinates playerPos, EntityCoordinates targetPos)
+    {
+        if (user.Comp == null)
+        {
+            if (!TryComp(user.Owner, out AttachableSideLockedComponent? lockedComponent))
+                return;
+
+            user.Comp = lockedComponent;
+        }
+
+        if (user.Comp.LockedDirection == null)
+            return;
+
+        var initialAngle = user.Comp.LockedDirection.Value.ToAngle();
+        var playerMapPos = _transformSystem.ToMapCoordinates(playerPos);
+        var targetMapPos = _transformSystem.ToMapCoordinates(targetPos);
+        var currentAngle = (targetMapPos.Position - playerMapPos.Position).ToWorldAngle();
+        
+        var differenceFromLockedAngle = (currentAngle.Degrees - initialAngle.Degrees + 180 + 360) % 360 - 180;
+
+        if (differenceFromLockedAngle > -90 && differenceFromLockedAngle < 90)
+            return;
+
+        for (var i = user.Comp.AttachableList.Count - 1; i >= 0; i--)
+        {
+            var attachableUid = user.Comp.AttachableList[i];
+            if (!TryComp(attachableUid, out AttachableToggleableComponent? toggleableComponent) ||
+                !toggleableComponent.Active ||
+                !toggleableComponent.BreakOnFullRotate)
+            {
+                continue;
+            }
+
+            Toggle((attachableUid, toggleableComponent), user.Owner, toggleableComponent.DoInterrupt);
+        }
     }
 #endregion
 
@@ -525,6 +565,33 @@ public sealed class AttachableToggleableSystem : EntitySystem
         Dirty(attachable);
     }
 
+    private void RemoveUnusedLocks(Entity<AttachableToggleableComponent> attachable, EntityUid? userUid)
+    {
+        if (userUid == null)
+            return;
+
+        if (attachable.Comp.BreakOnMove && TryComp<AttachableMovementLockedComponent>(userUid.Value, out var movementLockedComponent))
+        {
+            movementLockedComponent.AttachableList.Remove(attachable.Owner);
+            if (movementLockedComponent.AttachableList.Count == 0)
+                RemCompDeferred<AttachableMovementLockedComponent>(userUid.Value);
+        }
+
+        if (attachable.Comp.BreakOnRotate && TryComp<AttachableDirectionLockedComponent>(userUid.Value, out var directionLockedComponent))
+        {
+            directionLockedComponent.AttachableList.Remove(attachable.Owner);
+            if (directionLockedComponent.AttachableList.Count == 0)
+                RemCompDeferred<AttachableDirectionLockedComponent>(userUid.Value);
+        }
+
+        if (attachable.Comp.BreakOnFullRotate && TryComp<AttachableSideLockedComponent>(userUid.Value, out var sideLockedComponent))
+        {
+            sideLockedComponent.AttachableList.Remove(attachable.Owner);
+            if (sideLockedComponent.AttachableList.Count == 0)
+                RemCompDeferred<AttachableSideLockedComponent>(userUid.Value);
+        }
+    }
+
     private void FinishToggle(
         Entity<AttachableToggleableComponent> attachable,
         Entity<AttachableHolderComponent> holder,
@@ -560,6 +627,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
         {
             if (attachable.Comp.SupercedeHolder && holder.Comp.SupercedingAttachable == attachable.Owner)
                 _attachableHolderSystem.SetSupercedingAttachable(holder, null);
+
+            RemoveUnusedLocks(attachable, userUid);
+
             return;
         }
 
@@ -576,6 +646,15 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
             if (directionLockedComponent.LockedDirection == null)
                 directionLockedComponent.LockedDirection = Transform(userUid.Value).LocalRotation.GetCardinalDir();
+        }
+        
+        if (attachable.Comp.BreakOnFullRotate && userUid != null)
+        {
+            var sideLockedComponent = EnsureComp<AttachableSideLockedComponent>(userUid.Value);
+            sideLockedComponent.AttachableList.Add(attachable.Owner);
+
+            if (sideLockedComponent.LockedDirection == null)
+                sideLockedComponent.LockedDirection = Transform(userUid.Value).LocalRotation.GetCardinalDir();
         }
 
         if (!attachable.Comp.SupercedeHolder)

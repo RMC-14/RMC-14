@@ -81,7 +81,7 @@
       amount: 1
     Sulfur:
       amount: 1
-    Oxygen: 
+    Oxygen:
       amount: 2
   products:
     SulfuricAcid: 3
@@ -278,21 +278,21 @@
   products:
     Fluorosurfactant: 5
 
-- type: reaction
-  id: Desoxyephedrine
-  impact: Medium
-  minTemp: 370
-  reactants:
-    Ephedrine:
-      amount: 1
-    Carbon:
-      amount: 1
-    Iodine:
-      amount: 1
-    Phosphorus:
-     amount: 1
-  products:
-    Desoxyephedrine: 4 #I kinda remember having to heat this up, and if you heated it up too much, it went boom, I can't remember the specific values tho.
+#- type: reaction
+#  id: Desoxyephedrine
+#  impact: Medium
+#  minTemp: 370
+#  reactants:
+#    Ephedrine:
+#      amount: 1
+#    Carbon:
+#      amount: 1
+#    Iodine:
+#      amount: 1
+#    Phosphorus:
+#     amount: 1
+#  products:
+#    Desoxyephedrine: 4 #I kinda remember having to heat this up, and if you heated it up too much, it went boom, I can't remember the specific values tho.
 
 - type: reaction
   id: Stimulants

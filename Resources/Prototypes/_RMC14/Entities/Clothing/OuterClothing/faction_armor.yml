@@ -14,38 +14,12 @@
     bio: 15 # CLOTHING_ARMOR_MEDIUMLOW
     explosionArmor: 40 # CLOTHING_ARMOR_VERYHIGH
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
-    walkModifier: 0.814
-    sprintModifier: 0.814
+    walkModifier: 0.725
+    sprintModifier: 0.725
   - type: Storage
     grid:
     - 0,0,7,1 # 4 slots
     maxItemSize: Small
-    whitelist:
-      tags:
-      - CMMagazineRifle
-      - CMMagazineSmg
-      - CMMagazineSniper
-      - CMMagazinePistol
-      - RMCMagazineRevolver
-      - Sidearm
-      - Knife
-      - Flashlight
-      - MRE
-      - Grenade
-      - CMAutoInjector
-      - Cigarette
-      - PillPacket
-      - PillCanister
-      - CMSurgicalCase
-      - Syringe
-      - Hypospray
-      - CMOintment
-      - Brutepack
-      - CMBurnKit
-      - CMTraumaKit
-      - Bottle
-      - Pill
-      - PowerCell
 
 # Iron Bear
 - type: entity
@@ -102,8 +76,8 @@
     bio: 20
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
-    walkModifier: 0.814
-    sprintModifier: 0.814
+    walkModifier: 0.725
+    sprintModifier: 0.725
 
 # Freelancer
 - type: entity
@@ -119,8 +93,8 @@
     bio: 15
     explosionArmor: 20
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
-    walkModifier: 0.814
-    sprintModifier: 0.814
+    walkModifier: 0.725
+    sprintModifier: 0.725
   - type: ExplosionResistance
     damageCoefficient: 0
     worn: false
@@ -128,32 +102,6 @@
     grid:
     - 0,0,3,1 # 2 slots
     maxItemSize: Small
-    whitelist:
-      tags:
-      - CMMagazineRifle
-      - CMMagazineSmg
-      - CMMagazineSniper
-      - CMMagazinePistol
-      - RMCMagazineRevolver
-      - Sidearm
-      - Knife
-      - Flashlight
-      - MRE
-      - Grenade
-      - CMAutoInjector
-      - Cigarette
-      - PillPacket
-      - PillCanister
-      - CMSurgicalCase
-      - Syringe
-      - Hypospray
-      - CMOintment
-      - Brutepack
-      - CMBurnKit
-      - CMTraumaKit
-      - Bottle
-      - Pill
-      - PowerCell
 
 # Colonial militia
 # TODO: implement storage whitelist for this
@@ -171,8 +119,8 @@
     armor: 18 # CLOTHING_ARMOR_MEDIUM (melee); CLOTHING_ARMOR_MEDIUMLOW (bullets)
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
-    walkModifier: 0.814
-    sprintModifier: 0.814
+    walkModifier: 0.725
+    sprintModifier: 0.725
   - type: WieldSlowdownCompensation
     walk: 0.12
     sprint: 0.198
@@ -234,7 +182,7 @@
 # Mercenaries
 # TODO: implement storage whitelist for this
 - type: entity
-  parent: RMCArmorM4PMC
+  parent: [RMCAllowSuitStorageClothingArmorRoyal, RMCArmorM4PMC]
   id: RMCArmorMercenary
   name: mercenary K12 ceramic plated armor
   description: A set of grey, heavy ceramic armor with dark blue highlights. It is the standard uniform of an unknown mercenary group working in the sector.
@@ -246,47 +194,12 @@
     bio: 20
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
-    walkModifier: 0.814
-    sprintModifier: 0.814
+    walkModifier: 0.725
+    sprintModifier: 0.725
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
     maxItemSize: Small
-    whitelist:
-      components:
-        - Gun
-        - BallisticAmmoProvider
-        - Stunbaton
-        - Bible
-        # TODO RMC14 motion detector, walkman
-        # TODO RMC14 machete/katana scabbard
-      tags:
-      - Handcuffs
-      - Crowbar
-      - CMMagazineRifle
-      - CMMagazineSmg
-      - CMMagazineSniper
-      - CMMagazinePistol
-      - RMCMagazineRevolver
-      - Sidearm
-      - Knife
-      - Flashlight
-      - MRE
-      - Grenade
-      - CMAutoInjector
-      - Cigarette
-      - PillPacket
-      - PillCanister
-      - CMSurgicalCase
-      - Syringe
-      - Hypospray
-      - CMOintment
-      - Brutepack
-      - CMBurnKit
-      - CMTraumaKit
-      - Bottle
-      - Pill
-      - PowerCell
 
 - type: entity
   parent: RMCArmorMercenary
@@ -302,41 +215,6 @@
     grid:
     - 0,0,1,1 # 1 slot
     maxItemSize: Small
-    whitelist:
-      components:
-        - Gun
-        - BallisticAmmoProvider
-        - Stunbaton
-        - Bible
-        # TODO RMC14 motion detector, walkman
-        # TODO RMC14 machete/katana scabbard
-      tags:
-      - Handcuffs
-      - Crowbar
-      - CMMagazineRifle
-      - CMMagazineSmg
-      - CMMagazineSniper
-      - CMMagazinePistol
-      - RMCMagazineRevolver
-      - Sidearm
-      - Knife
-      - Flashlight
-      - MRE
-      - Grenade
-      - CMAutoInjector
-      - Cigarette
-      - PillPacket
-      - PillCanister
-      - CMSurgicalCase
-      - Syringe
-      - Hypospray
-      - CMOintment
-      - Brutepack
-      - CMBurnKit
-      - CMTraumaKit
-      - Bottle
-      - Pill
-      - PowerCell
 
 # TODO: Implement storage whitelist for this
 - type: entity
@@ -351,41 +229,6 @@
     grid:
     - 0,0,5,1 # 3 slots
     maxItemSize: Small
-    whitelist:
-      components:
-        - Gun
-        - BallisticAmmoProvider
-        - Stunbaton
-        - Bible
-        # TODO RMC14 motion detector, walkman
-        # TODO RMC14 machete/katana scabbard
-      tags:
-      - Handcuffs
-      - Crowbar
-      - CMMagazineRifle
-      - CMMagazineSmg
-      - CMMagazineSniper
-      - CMMagazinePistol
-      - RMCMagazineRevolver
-      - Sidearm
-      - Knife
-      - Flashlight
-      - MRE
-      - Grenade
-      - CMAutoInjector
-      - Cigarette
-      - PillPacket
-      - PillCanister
-      - CMSurgicalCase
-      - Syringe
-      - Hypospray
-      - CMOintment
-      - Brutepack
-      - CMBurnKit
-      - CMTraumaKit
-      - Bottle
-      - Pill
-      - PowerCell
 
 - type: entity
   parent: RMCArmorMercenary
@@ -424,8 +267,8 @@
     bio: 20
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
-    walkModifier: 0.897
-    sprintModifier: 0.897
+    walkModifier: 0.725
+    sprintModifier: 0.725
 
 - type: entity
   parent: RMCArmorPMCRiot
@@ -456,8 +299,8 @@
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
     bio: 10 # CLOTHING_ARMOR_LOW
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_HEAVY
-    walkModifier: 0.68
-    sprintModifier: 0.68
+    walkModifier: 0.62
+    sprintModifier: 0.62
 
 - type: entity
   parent: RMCArmorCBRN

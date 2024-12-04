@@ -14,29 +14,32 @@ public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<VictimBurstComponent, AppearanceChangeEvent>(OnVictimBurstAppearanceChanged);
+        SubscribeLocalEvent<VictimBurstComponent, ComponentStartup>(SetVisuals);
+        SubscribeLocalEvent<VictimBurstComponent, VictimBurstStateChangedEvent>(SetVisuals);
     }
 
-    private void OnVictimBurstAppearanceChanged(Entity<VictimBurstComponent> ent, ref AppearanceChangeEvent args)
+    private void SetVisuals<T>(Entity<VictimBurstComponent> ent, ref T args)
     {
-        if (args.Sprite is not { } sprite)
+        if (!TryComp(ent, out SpriteComponent? sprite))
             return;
 
-        if (!_appearance.TryGetData(ent, ent.Comp.BurstLayer, out bool burst, args.Component))
+        var state = ent.Comp.State switch
+        {
+            BurstVisualState.Bursting => ent.Comp.BurstingState,
+            BurstVisualState.Burst => ent.Comp.BurstState,
+            _ => null
+        };
+
+        if (!sprite.LayerMapTryGet(ent.Comp.Layer, out var layer))
+        {
+            layer = sprite.LayerMapReserveBlank(ent.Comp.Layer);
+            sprite.LayerSetRSI(layer, ent.Comp.BurstPath);
+        }
+
+        if (string.IsNullOrWhiteSpace(state))
             return;
 
-        if (!sprite.LayerMapTryGet(ent.Comp.BurstLayer, out var layer))
-            layer = sprite.LayerMapReserveBlank(ent.Comp.BurstLayer);
-
-        if (burst)
-        {
-            sprite.LayerSetSprite(layer, ent.Comp.BurstSprite);
-            sprite.LayerSetVisible(layer, true);
-        }
-        else
-        {
-            sprite.LayerSetVisible(layer, true);
-        }
+        sprite.LayerSetState(layer, state);
     }
 
     public override void FrameUpdate(float frameTime)

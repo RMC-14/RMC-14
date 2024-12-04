@@ -23,7 +23,6 @@
       types:
         Slash: 15
         Blunt: 20
-        Structural: 20
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Tag

@@ -59,6 +59,7 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFrameStrata
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowStrata
     node: windowStrata

@@ -23,7 +23,7 @@ public sealed partial class XenoFortifyComponent : Component
     public float ExplosionMultiplier = 0.4f;
 
     [DataField, AutoNetworkedField]
-    public string[] ImmuneToStatuses = { "Stun", "KnockedDown" };
+    public string[] ImmuneToStatuses = { "KnockedDown" };
 
     [DataField]
     public IPhysShape Shape = new PhysShapeCircle(0.49f);
@@ -33,4 +33,7 @@ public sealed partial class XenoFortifyComponent : Component
 
     [DataField, AutoNetworkedField]
     public RMCSizes? OriginalSize;
+
+    [DataField, AutoNetworkedField]
+    public bool BaseWeakToExplosionStuns = true;
 }

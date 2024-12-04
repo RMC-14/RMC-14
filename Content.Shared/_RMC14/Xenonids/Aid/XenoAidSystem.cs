@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Xenonids.Energy;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Strain;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
@@ -24,6 +25,7 @@ public sealed class XenoAidSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
@@ -38,24 +40,32 @@ public sealed class XenoAidSystem : EntitySystem
     private void OnXenoAidAction(Entity<XenoAidComponent> xeno, ref XenoAidActionEvent args)
     {
         var target = args.Target;
-        if (!_xeno.FromSameHive(xeno.Owner, target))
+
+        if(!HasComp<XenoComponent>(target))
+        {
+            var msg = Loc.GetString("rmc-xeno-heal-sisters");
+            _popup.PopupClient(msg, xeno, xeno, PopupType.SmallCaution);
+            return;
+        }
+
+        if (!_hive.FromSameHive(xeno.Owner, target))
         {
             var msg = Loc.GetString("rmc-xeno-not-same-hive");
-            _popup.PopupClient(msg, xeno, xeno, PopupType.SmallCaution);
+            _popup.PopupClient(msg, target, xeno, PopupType.SmallCaution);
             return;
         }
 
         if (xeno.Owner == target)
         {
             var msg = Loc.GetString("rmc-xeno-aid-self");
-            _popup.PopupClient(msg, xeno, xeno, PopupType.SmallCaution);
+            _popup.PopupClient(msg, target, xeno, PopupType.SmallCaution);
             return;
         }
 
         if (_mobState.IsDead(target))
         {
-            var msg = Loc.GetString("rmc-xeno-aid-dead");
-            _popup.PopupClient(msg, xeno, xeno, PopupType.SmallCaution);
+            var msg = Loc.GetString("rmc-xeno-aid-on-fire");
+            _popup.PopupClient(msg, target, xeno, PopupType.SmallCaution);
             return;
         }
 
@@ -65,6 +75,13 @@ public sealed class XenoAidSystem : EntitySystem
             {
                 if (!_interaction.InRangeUnobstructed(xeno.Owner, target))
                     return;
+
+                if (!_xeno.CanHeal(target))
+                {
+                    var msg = Loc.GetString("rmc-xeno-aid-on-fire");
+                    _popup.PopupClient(msg, target, xeno, PopupType.SmallCaution);
+                    return;
+                }
 
                 if (!_xenoEnergy.TryRemoveEnergyPopup(xeno.Owner, xeno.Comp.EnergyCost))
                     return;
@@ -86,7 +103,7 @@ public sealed class XenoAidSystem : EntitySystem
                 _damageable.TryChangeDamage(xeno, toHeal);
 
                 var selfMsg = Loc.GetString("rmc-xeno-heal-self", ("target", target));
-                _popup.PopupClient(selfMsg, xeno, xeno);
+                _popup.PopupClient(selfMsg, target, xeno);
 
                 var targetMsg = Loc.GetString("rmc-xeno-heal-target", ("target", target));
                 _popup.PopupEntity(targetMsg, target, target);
@@ -115,7 +132,7 @@ public sealed class XenoAidSystem : EntitySystem
                 }
 
                 var selfMsg = Loc.GetString("rmc-xeno-heal-ailments-self", ("target", target));
-                _popup.PopupClient(selfMsg, xeno, xeno);
+                _popup.PopupClient(selfMsg, target, xeno);
 
                 var targetMsg = Loc.GetString("rmc-xeno-heal-ailments-target", ("target", target));
                 _popup.PopupEntity(targetMsg, target, target);

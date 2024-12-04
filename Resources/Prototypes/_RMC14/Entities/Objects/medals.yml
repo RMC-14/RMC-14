@@ -1,0 +1,90 @@
+﻿- type: entity
+  parent: BaseItem
+  id: RMCMedalBase
+  name: medal
+  description: A medal.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/bronze.rsi
+    state: icon
+  - type: PlaytimeMedal
+
+- type: entity
+  parent: RMCMedalBase
+  id: RMCMedalBronze
+  name: bronze medal
+  description: A bronze medal.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/bronze.rsi
+    state: icon
+  - type: PlaytimeMedal
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/bronze.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCMedalBronze
+  id: RMCMedalBronzeService
+  name: bronze service medal
+  description: A bronze medal awarded for a marine's service within the UNMC. It is a very common medal, and is typically the first medal a marine would receive.
+
+- type: entity
+  parent: RMCMedalBase
+  id: RMCMedalSilver
+  name: silver medal
+  description: A silver medal.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/silver.rsi
+    state: icon
+  - type: PlaytimeMedal
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/silver.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCMedalSilver
+  id: RMCMedalSilverService
+  name: silver service medal
+  description: A shiny silver medal awarded for a marine's service within the UNMC. It is a somewhat common medal which signifies the amount of time a marine has spent in the line of duty.
+
+- type: entity
+  parent: RMCMedalBase
+  id: RMCMedalGold
+  name: gold medal
+  description: A prestigious golden medal.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/gold.rsi
+    state: icon
+  - type: PlaytimeMedal
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/gold.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCMedalGold
+  id: RMCMedalGoldService
+  name: gold service medal
+  description: A prestigious gold medal awarded for a marine's service within the UNMC. It is a rare medal which signifies the amount of time a marine has spent in the line of duty.
+
+- type: entity
+  parent: RMCMedalBase
+  id: RMCMedalPlatinum
+  name: platinum medal
+  description: A very prestigious platinum medal, only able to be handed out by generals due to special circumstances.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/platinum.rsi
+    state: icon
+  - type: PlaytimeMedal
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/platinum.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCMedalPlatinum
+  id: RMCMedalPlatinumService
+  name: platinum service medal
+  description: The highest service medal that can be awarded to a marine; such medals are hand-given by UNMC Generals to a marine. It signifies the sheer amount of time a marine has spent in the line of duty.

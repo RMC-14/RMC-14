@@ -65,7 +65,7 @@ public sealed class XenoBrutalizeSystem : EntitySystem
                 _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { extra }, filter);
             }
 
-            if (currHits >= xeno.Comp.MaxTargets)
+            if (xeno.Comp.MaxTargets != null && currHits >= xeno.Comp.MaxTargets)
                 break;
 
             if (_net.IsServer)

@@ -194,6 +194,7 @@ public sealed class CMArmorSystem : EntitySystem
             armorPiercing += piercingEv.Piercing;
         }
 
+        ev.Armor = (int) (ev.Armor * ev.ArmorModifier);
         ev.Armor -= armorPiercing;
         ev.Bio -= armorPiercing;
 

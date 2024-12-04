@@ -7,6 +7,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
+using Content.Shared._RMC14.Rules;
 using Content.Shared.Chasm;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
@@ -46,7 +47,6 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 
     private int _starting;
     private int _gain;
-    private int _startingDollarsPerMarine;
 
     private readonly HashSet<Entity<MobStateComponent>> _toPit = new();
 
@@ -68,7 +68,6 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 
         Subs.CVar(_config, RMCCVars.RMCRequisitionsStartingBalance, v => _starting = v, true);
         Subs.CVar(_config, RMCCVars.RMCRequisitionsBalanceGain, v => _gain = v, true);
-        Subs.CVar(_config, RMCCVars.RMCRequisitionsStartingDollarsPerMarine, v => _startingDollarsPerMarine = v, true);
     }
 
     private void OnComputerMapInit(Entity<RequisitionsComputerComponent> ent, ref MapInitEvent args)
@@ -477,8 +476,17 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             if (!account.Started)
             {
                 account.Started = true;
-                var marines = Count<MarineComponent>();
-                account.Balance = _starting + marines * _startingDollarsPerMarine;
+                var marines = 0;
+                var marinesQuery = EntityQueryEnumerator<MarineComponent, TransformComponent>();
+                while (marinesQuery.MoveNext(out var marineId, out var xform))
+                {
+                    if (HasComp<RMCPlanetComponent>(xform.MapUid))
+                        continue;
+
+                    marines++;
+                }
+
+                account.Balance = _starting + marines * StartingDollarsPerMarine;
                 Dirty(uid, account);
 
                 updateUI = true;

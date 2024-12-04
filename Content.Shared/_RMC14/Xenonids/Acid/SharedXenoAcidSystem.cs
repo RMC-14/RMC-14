@@ -10,6 +10,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Configuration;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Xenonids.Energy;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
@@ -24,6 +25,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
 
     protected int CorrosiveAcidTickDelaySeconds;
     protected ProtoId<DamageTypePrototype> CorrosiveAcidDamageTypeStr = "Heat";
@@ -68,14 +70,14 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     private void OnXenoCorrosiveAcid(Entity<XenoAcidComponent> xeno, ref XenoCorrosiveAcidEvent args)
     {
         if (xeno.Owner != args.Performer ||
-            !CheckCorrodiblePopups(xeno, args.Target))
+            !CheckCorrodiblePopups(xeno, args.Target, out var time))
         {
             return;
         }
 
         args.Handled = true;
 
-        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.AcidDelay, new XenoCorrosiveAcidDoAfterEvent(args), xeno, args.Target)
+        var doAfter = new DoAfterArgs(EntityManager, xeno, time * args.ApplyTimeMultiplier, new XenoCorrosiveAcidDoAfterEvent(args), xeno, args.Target)
         {
             BreakOnMove = true,
             RequireCanInteract = false,
@@ -99,10 +101,13 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         if (args.Handled || args.Cancelled || args.Target is not { } target)
             return;
 
-        if (!CheckCorrodiblePopups(xeno, target))
+        if (!CheckCorrodiblePopups(xeno, target, out var _))
             return;
 
-        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
+        if (args.PlasmaCost != 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
+            return;
+
+        if (args.EnergyCost != 0 && !_xenoEnergy.TryRemoveEnergyPopup(xeno.Owner, args.EnergyCost))
             return;
 
         if (_net.IsClient)
@@ -110,22 +115,12 @@ public abstract class SharedXenoAcidSystem : EntitySystem
 
         args.Handled = true;
 
-        var acid = SpawnAttachedTo(args.AcidId, target.ToCoordinates());
-
-        var ev = new CorrodingEvent(acid, args.Dps, args.ExpendableLightDps);
-        RaiseLocalEvent(target, ref ev);
-        if (ev.Cancelled)
-            return;
-
-        AddComp(target, new TimedCorrodingComponent
-        {
-            Acid = acid,
-            CorrodesAt = _timing.CurTime + args.Time
-        });
+        ApplyAcid(args.AcidId, target, args.Dps, args.ExpendableLightDps, args.Time);
     }
 
-    private bool CheckCorrodiblePopups(Entity<XenoAcidComponent> xeno, EntityUid target)
+    private bool CheckCorrodiblePopups(Entity<XenoAcidComponent> xeno, EntityUid target, out TimeSpan time)
     {
+        time = TimeSpan.Zero;
         if (!TryComp(target, out CorrodibleComponent? corrodible) ||
             !corrodible.IsCorrodible)
         {
@@ -139,7 +134,34 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             return false;
         }
 
+        if (!xeno.Comp.CanMeltStructures && corrodible.Structure)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-acid-structure-unmeltable"), xeno, xeno);
+            return false;
+        }
+
+        time = corrodible.TimeToApply;
+
         return true;
+    }
+
+    public void ApplyAcid(EntProtoId acidId, EntityUid target, float dps, float lightDps, TimeSpan time)
+    {
+        if (_net.IsClient)
+            return;
+
+        var acid = SpawnAttachedTo(acidId, target.ToCoordinates());
+
+        var ev = new CorrodingEvent(acid, dps, lightDps);
+        RaiseLocalEvent(target, ref ev);
+        if (ev.Cancelled)
+            return;
+
+        AddComp(target, new TimedCorrodingComponent
+        {
+            Acid = acid,
+            CorrodesAt = _timing.CurTime + time
+        });
     }
 
     public override void Update(float frameTime)
@@ -154,7 +176,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         {
             if (time > damageableCorrodingComponent.NextDamageAt)
             {
-                _damageable.TryChangeDamage(uid, damageableCorrodingComponent.Damage, true);
+                _damageable.TryChangeDamage(uid, damageableCorrodingComponent.Damage);
                 damageableCorrodingComponent.NextDamageAt = time.Add(TimeSpan.FromSeconds(CorrosiveAcidTickDelaySeconds));
             }
 

@@ -361,6 +361,21 @@ namespace Content.Client.Lobby.UI
 
             #endregion SpawnPriority
 
+            #region ArmorPreference
+
+            foreach (var value in Enum.GetValues<ArmorPreference>())
+            {
+                ArmorPreferenceButton.AddItem(value.ToString(), (int) value);
+            }
+
+            ArmorPreferenceButton.OnItemSelected += args =>
+            {
+                ArmorPreferenceButton.SelectId(args.Id);
+                SetArmorPreference((ArmorPreference) args.Id);
+            };
+
+            #endregion ArmorPreference
+
             #region SquadPreference
 
             SquadPreferenceButton.AddItem(Loc.GetString("loadout-none"), 0);
@@ -392,6 +407,33 @@ namespace Content.Client.Lobby.UI
             };
 
             #endregion SquadPreference
+
+            #region PlaytimePerks
+
+            PlaytimePerksButton.OnPressed += args =>
+            {
+                SetPlaytimePerks(args.Button.Pressed);
+            };
+
+            #endregion
+
+            #region Xeno Prefix
+
+            XenoPrefix.OnTextChanged += args =>
+            {
+                SetXenoPrefix(args.Text);
+            };
+
+            #endregion
+
+            #region Xeno Postfix
+
+            XenoPostfix.OnTextChanged += args =>
+            {
+                SetXenoPostfix(args.Text);
+            };
+
+            #endregion
 
             #region Eyes
 
@@ -785,6 +827,9 @@ namespace Content.Client.Lobby.UI
             PreviewDummy = _controller.LoadProfileEntity(Profile, JobOverride, ShowClothes.Pressed);
             SpriteView.SetEntity(PreviewDummy);
             _entManager.System<MetaDataSystem>().SetEntityName(PreviewDummy, Profile.Name);
+
+            // Check and set the dirty flag to enable the save/reset buttons as appropriate.
+            SetDirty();
         }
 
         /// <summary>
@@ -813,6 +858,7 @@ namespace Content.Client.Lobby.UI
             UpdateGenderControls();
             UpdateSkinColor();
             UpdateSpawnPriorityControls();
+            UpdateArmorPreferenceControls();
             UpdateSquadPreferenceControls();
             UpdateAgeEdit();
             UpdateEyePickers();
@@ -822,6 +868,9 @@ namespace Content.Client.Lobby.UI
             UpdateCMarkingsHair();
             UpdateCMarkingsFacialHair();
             UpdateNamedItems();
+            UpdatePlaytimePerks();
+            UpdateXenoPrefix();
+            UpdateXenoPostfix();
 
             RefreshAntags();
             RefreshJobs();
@@ -847,6 +896,9 @@ namespace Content.Client.Lobby.UI
                 return;
 
             _entManager.System<HumanoidAppearanceSystem>().LoadProfile(PreviewDummy, Profile);
+
+            // Check and set the dirty flag to enable the save/reset buttons as appropriate.
+            SetDirty();
         }
 
         private void OnSpeciesInfoButtonPressed(BaseButton.ButtonEventArgs args)
@@ -1085,7 +1137,6 @@ namespace Content.Client.Lobby.UI
                 roleLoadout.AddLoadout(loadoutGroup, loadoutProto, _prototypeManager);
                 _loadoutWindow.RefreshLoadouts(roleLoadout, session, collection);
                 Profile = Profile?.WithLoadout(roleLoadout);
-                SetDirty();
                 ReloadPreview();
             };
 
@@ -1094,7 +1145,6 @@ namespace Content.Client.Lobby.UI
                 roleLoadout.RemoveLoadout(loadoutGroup, loadoutProto, _prototypeManager);
                 _loadoutWindow.RefreshLoadouts(roleLoadout, session, collection);
                 Profile = Profile?.WithLoadout(roleLoadout);
-                SetDirty();
                 ReloadPreview();
             };
 
@@ -1104,7 +1154,6 @@ namespace Content.Client.Lobby.UI
             _loadoutWindow.OnClose += () =>
             {
                 JobOverride = null;
-                SetDirty();
                 ReloadPreview();
             };
 
@@ -1129,7 +1178,6 @@ namespace Content.Client.Lobby.UI
                 return;
 
             Profile = Profile.WithCharacterAppearance(Profile.Appearance.WithMarkings(markings.GetForwardEnumerator().ToList()));
-            SetDirty();
             ReloadProfilePreview();
         }
 
@@ -1197,7 +1245,6 @@ namespace Content.Client.Lobby.UI
                 }
             }
 
-            SetDirty();
             ReloadProfilePreview();
         }
 
@@ -1228,7 +1275,6 @@ namespace Content.Client.Lobby.UI
         {
             Profile = Profile?.WithAge(newAge);
             ReloadPreview();
-            SetDirty();
         }
 
         private void SetSex(Sex newSex)
@@ -1251,14 +1297,12 @@ namespace Content.Client.Lobby.UI
             UpdateGenderControls();
             Markings.SetSex(newSex);
             ReloadPreview();
-            SetDirty();
         }
 
         private void SetGender(Gender newGender)
         {
             Profile = Profile?.WithGender(newGender);
             ReloadPreview();
-            SetDirty();
         }
 
         private void SetSpecies(string newSpecies)
@@ -1272,7 +1316,6 @@ namespace Content.Client.Lobby.UI
             RefreshLoadouts();
             UpdateSexControls(); // update sex for new species
             UpdateSpeciesGuidebookIcon();
-            SetDirty();
             ReloadPreview();
         }
 
@@ -1293,9 +1336,33 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
+        private void SetArmorPreference(ArmorPreference newArmorPreference)
+        {
+            Profile = Profile?.WithArmorPreference(newArmorPreference);
+            SetDirty();
+        }
+
         private void SetSquadPreference(EntProtoId<SquadTeamComponent>? newSquadPreference)
         {
             Profile = Profile?.WithSquadPreference(newSquadPreference);
+            SetDirty();
+        }
+
+        private void SetPlaytimePerks(bool playtimePerks)
+        {
+            Profile = Profile?.WithPlaytimePerks(playtimePerks);
+            SetDirty();
+        }
+
+        private void SetXenoPrefix(string prefix)
+        {
+            Profile = Profile?.WithXenoPrefix(prefix);
+            SetDirty();
+        }
+
+        private void SetXenoPostfix(string postfix)
+        {
+            Profile = Profile?.WithXenoPostfix(postfix);
             SetDirty();
         }
 
@@ -1491,6 +1558,16 @@ namespace Content.Client.Lobby.UI
             SpawnPriorityButton.SelectId((int) Profile.SpawnPriority);
         }
 
+        private void UpdateArmorPreferenceControls()
+        {
+            if (Profile == null)
+            {
+                return;
+            }
+
+            ArmorPreferenceButton.SelectId((int) Profile.ArmorPreference);
+        }
+
         private void UpdateSquadPreferenceControls()
         {
             if (Profile == null)
@@ -1625,6 +1702,21 @@ namespace Content.Client.Lobby.UI
             NamedItems.Helmet.Text = Profile?.NamedItems.HelmetName ?? string.Empty;
             NamedItems.Armor.Text = Profile?.NamedItems.ArmorName ?? string.Empty;
             NamedItems.Sentry.Text = Profile?.NamedItems.SentryName ?? string.Empty;
+        }
+
+        private void UpdatePlaytimePerks()
+        {
+            PlaytimePerksButton.Pressed = Profile?.PlaytimePerks ?? true;
+        }
+
+        private void UpdateXenoPrefix()
+        {
+            XenoPrefix.Text = Profile?.XenoPrefix ?? string.Empty;
+        }
+
+        private void UpdateXenoPostfix()
+        {
+            XenoPostfix.Text = Profile?.XenoPostfix ?? string.Empty;
         }
 
         private void UpdateSaveButton()

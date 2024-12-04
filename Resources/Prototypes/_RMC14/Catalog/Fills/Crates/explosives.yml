@@ -10,6 +10,16 @@
 
 - type: entity
   parent: RMCCrateExplosives
+  id: RMCCrateGrenadesIncendiary
+  name: M40 HIDP incendiary grenades crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPacketGrenadeIncendiaryFilled
+      amount: 2
+
+- type: entity
+  parent: RMCCrateExplosives
   id: RMCCrateGrenadesFrag
   name: M40 HEFA fragmentation grenades crate (x6)
   components:
@@ -27,7 +37,6 @@
     contents:
     - id: RMCPacketGrenadeSmokeFilled
       amount: 2
-
 
 - type: entity
   parent: RMCCrateExplosives
@@ -48,3 +57,13 @@
     contents:
     - id: RMCExplosiveBreachingCharge
       amount: 4
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesHighExplosiveBox
+  name: M40 HEDP blast grenade box crate (x25)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeHighExplosive
+      amount: 25

@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Chemistry;
+﻿using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Map;
@@ -27,7 +28,7 @@ public sealed class XenoSprayAcidSystem : EntitySystem
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
@@ -48,10 +49,15 @@ public sealed class XenoSprayAcidSystem : EntitySystem
         SubscribeLocalEvent<SprayAcidedComponent, MapInitEvent>(OnSprayAcidedMapInit);
         SubscribeLocalEvent<SprayAcidedComponent, ComponentRemove>(OnSprayAcidedRemove);
         SubscribeLocalEvent<SprayAcidedComponent, VaporHitEvent>(OnSprayAcidedVaporHit);
+
+        SubscribeLocalEvent<XenoAcidSplatterComponent, ExtinguishFireAttemptEvent>(OnAcidSplatterExtinguishFireAttempt);
     }
 
     private void OnSprayAcidAction(Entity<XenoSprayAcidComponent> xeno, ref XenoSprayAcidActionEvent args)
     {
+        if (!_xenoPlasma.HasPlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
+            return;
+
         var ev = new XenoSprayAcidDoAfter(GetNetCoordinates(args.Target));
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.DoAfter, ev, xeno) { BreakOnMove = true };
         _doAfter.TryStartDoAfter(doAfter);
@@ -63,12 +69,12 @@ public sealed class XenoSprayAcidSystem : EntitySystem
             return;
 
         args.Handled = true;
+        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
+            return;
+
         _audio.PlayPredicted(xeno.Comp.Sound, xeno, xeno);
 
         if (_net.IsClient)
-            return;
-
-        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
 
         foreach (var (actionId, action) in _actions.GetActions(xeno))
@@ -112,6 +118,12 @@ public sealed class XenoSprayAcidSystem : EntitySystem
         }
     }
 
+    private void OnAcidSplatterExtinguishFireAttempt(Entity<XenoAcidSplatterComponent> ent, ref ExtinguishFireAttemptEvent args)
+    {
+        if (ent.Comp.Xeno == args.Target)
+            args.Cancelled = true;
+    }
+
     private void TryAcid(Entity<XenoSprayAcidComponent> acid, RMCAnchoredEntitiesEnumerator anchored)
     {
         while (anchored.MoveNext(out var uid))
@@ -149,6 +161,10 @@ public sealed class XenoSprayAcidSystem : EntitySystem
                     continue;
 
                 var spawned = Spawn(active.Acid, acid.Coordinates);
+                var splatter = EnsureComp<XenoAcidSplatterComponent>(spawned);
+                splatter.Xeno = uid;
+                Dirty(spawned, splatter);
+
                 if (_xenoSprayAcidQuery.TryComp(uid, out var xenoSprayAcid))
                 {
                     var spray = new Entity<XenoSprayAcidComponent>(uid, xenoSprayAcid);

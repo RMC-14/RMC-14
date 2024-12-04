@@ -83,10 +83,36 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: ActivatableUIBlacklist
     blacklist:
       components:
       - Xeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Breakage"]
+      - !type:EjectVendorItems
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
 
 - type: vendingMachineInventory
   id: CMVendomat
@@ -195,8 +221,9 @@
   id: CMVendorCigs
   startingInventory:
     RMCCigarettePackLuckySloths: 50
-    RMCTarbackCase: 15
-    Lighter: 25
+    RMCTarbackTube: 20
+    RMCMatchboxFull: 15
+    RMCLighter: 25
     RMCZippo: 10
 
 
@@ -236,7 +263,7 @@
     CMJumpsuitMP: 2
     CMHeadBeretRed: 6
     CMGlassesSecurity: 3
-    CMHeadsetMPO: 6
+    CMHeadset: 6
 
 
 # Senior Enlisted Advisor

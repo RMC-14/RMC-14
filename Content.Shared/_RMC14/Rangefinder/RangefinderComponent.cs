@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.DoAfter;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -30,6 +31,9 @@ public sealed partial class RangefinderComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan SwitchModeDelay = TimeSpan.FromSeconds(0.5);
+
+    [DataField, AutoNetworkedField]
+    public DoAfter.DoAfter? DoAfter;
 
     [DataField, AutoNetworkedField]
     public TimeSpan Delay = TimeSpan.FromSeconds(10);

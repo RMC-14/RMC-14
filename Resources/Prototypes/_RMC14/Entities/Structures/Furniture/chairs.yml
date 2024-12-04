@@ -5,6 +5,9 @@
   id: CMSeatBase
   name: abstract chair
   components:
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/chairs.rsi
     state: chair
