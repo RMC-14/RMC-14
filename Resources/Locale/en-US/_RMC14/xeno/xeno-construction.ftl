@@ -64,3 +64,5 @@ rmc-xeno-construction-tunnel-fill-xeno-drop = The tunnel suddenly collapses, for
 rmc-xeno-construction-egg-morpher-no-parasites = There are no parasites in the egg morpher!
 rmc-xeno-construction-egg-morpher-attempt-insert-non-parasite = You can't put that in the egg morpher!
 rmc-xeno-construction-egg-morpher-already-full = This egg morpher is already full!
+
+rmc-xeno-construction-egg-morpher-examine = Sheltering: {$cur_paras}/{$max_paras} parasites.

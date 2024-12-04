@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Hands;
+using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -24,9 +25,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
+namespace Content.Server._RMC14.Xenonids.Construction.EggMorpher;
 
-public sealed partial class EggMorpherSystem : EntitySystem
+public sealed partial class EggMorpherSystem : SharedEggMorpherSystem
 {
     [Dependency] private readonly IGameTiming _time = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -87,14 +88,12 @@ public sealed partial class EggMorpherSystem : EntitySystem
     {
         var user = args.User;
 
-        args.Handled = true;
-
         if (!TryCreateParasiteFromEggMorpher(eggMorpher, out var newParasite))
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-egg-morpher-no-parasites"), eggMorpher, user);
             return;
         }
-
+        args.Handled = true;
         _hand.TryPickup(user, newParasite.Value);
     }
     private void OnInteractUsing(Entity<EggMorpherComponent> eggMorpher, ref InteractUsingEvent args)
@@ -104,7 +103,6 @@ public sealed partial class EggMorpherSystem : EntitySystem
         var user = args.User;
         var used = args.Used;
 
-        args.Handled = true;
         if (!HasComp<XenoParasiteComponent>(used))
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-egg-morpher-attempt-insert-non-parasite"), eggMorpher, user);
@@ -117,6 +115,7 @@ public sealed partial class EggMorpherSystem : EntitySystem
             return;
         }
 
+        args.Handled = true;
         QueueDel(used);
         comp.CurParasites++;
     }
