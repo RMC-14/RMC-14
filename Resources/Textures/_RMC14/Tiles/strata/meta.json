@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/6b4eeea257437bd337dc64f006f2cf4411cfe0a7/icons/turf/floors/strata_floor.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/2718327e8fcc87862959bc58bf16416e208ac85d/icons/turf/floors/strata_floor.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -9,6 +9,18 @@
   "states": [
     {
       "name": "white_cyan1",
+      "directions": 4
+    },
+    {
+      "name": "white_cyan2",
+      "directions": 4
+    },
+    {
+      "name": "white_cyan3",
+      "directions": 8
+    },
+    {
+      "name": "white_cyan4",
       "directions": 4
     }
   ]
