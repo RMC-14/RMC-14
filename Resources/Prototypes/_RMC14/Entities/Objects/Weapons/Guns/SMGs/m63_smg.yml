@@ -40,6 +40,9 @@
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.75
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -91,6 +94,10 @@
       rmc-aslot-rail: 0.032, 0.155
       rmc-aslot-stock: -0.81, 0.032
       rmc-aslot-underbarrel: 0.25, -0.25
+  - type: Tag
+    tags:
+    - RMCWeaponSMG
+    - RMCWeaponSMGM63
 
 - type: entity
   parent: BaseMagazineRifle
@@ -190,9 +197,9 @@
     proto: Bullet10x20mmAP
 
 - type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: Bullet10x20mm
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -207,11 +214,16 @@
       falloff: 6
   - type: CMArmorPiercing
     amount: 5
+  - type: RMCProjectileAccuracy
+    accuracy: 100
+    thresholds:
+    - range: 4
+      falloff: 10
 
 - type: entity
   parent: Bullet10x20mm
   id: Bullet10x20mmAP
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -219,6 +231,9 @@
         Piercing: 26
   - type: CMArmorPiercing
     amount: 30
+
+- type: Tag
+  id: RMCWeaponSMGM63
 
 - type: Tag
   id: CMMagazineSMGM63

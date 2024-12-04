@@ -1,8 +1,10 @@
-﻿using Content.Client._RMC14.Roadmap;
+﻿using Content.Client._RMC14.LinkAccount;
+using Content.Client._RMC14.Roadmap;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Guidebook;
 using Content.Client.UserInterface.Systems.Info;
+using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Content.Shared.CCVar;
 using JetBrains.Annotations;
 using Robust.Client.Console;
@@ -26,10 +28,20 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
     [Dependency] private readonly InfoUIController _info = default!;
     [Dependency] private readonly OptionsUIController _options = default!;
     [Dependency] private readonly GuidebookUIController _guidebook = default!;
+    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
 
     private Options.UI.EscapeMenu? _escapeWindow;
 
-    private MenuButton? EscapeButton => UIManager.GetActiveUIWidgetOrNull<MenuBar.Widgets.GameTopMenuBar>()?.EscapeButton;
+    private MenuButton? EscapeButton => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>()?.EscapeButton;
+
+    public override void Initialize()
+    {
+        _linkAccount.Updated += () =>
+        {
+            if (_escapeWindow != null)
+                _escapeWindow.PatronPerksButton.Visible = _linkAccount.CanViewPatronPerks();
+        };
+    }
 
     public void UnloadButton()
     {
@@ -68,6 +80,13 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
         {
             CloseEscapeWindow();
             _changelog.ToggleWindow();
+        };
+
+        _escapeWindow.PatronPerksButton.Visible = _linkAccount.CanViewPatronPerks();
+        _escapeWindow.PatronPerksButton.OnPressed += _ =>
+        {
+            CloseEscapeWindow();
+            UIManager.GetUIController<LinkAccountUIController>().TogglePatronPerksWindow();
         };
 
         _escapeWindow.RoadmapButton.OnPressed += _ =>

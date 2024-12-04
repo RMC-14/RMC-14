@@ -32,16 +32,16 @@
       entries:
       - id: RMCMagazineRifleM4SPRA19Impact
         points: 40
-#      - id: RMCMagazineRifleM4SPRA19 # TODO rmc14 RMCMagazineRifleM4SPRA19Incendiary
-#        points: 40
+      - id: RMCMagazineRifleM4SPRA19Incendiary
+        points: 40
       - id: RMCMagazineRifleM4SPRA19
         points: 40
     - name: Extra Sniper Ammunition
       entries:
 #      - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
 #        points: 40
-#      - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
-#        points: 40
+      - id: CMMagazineSniperM96SIncendiary
+        points: 40
       - id: CMMagazineSniperM96S
         points: 40
     - name: Extra Demolitionist Ammunition
@@ -66,8 +66,10 @@
         name: M40 HSDP Smoke Grenades (x6)
         points: 20
         spawn: 6
-    #- id: M40HIDPIncendiaryGrenadesx6
-    #  points: 40
+      - id: RMCGrenadeIncendiary
+        name: M40 HIDP Incendiary Grenades (x6)
+        points: 40
+        spawn: 6
     #- id: M40HPDPWhitePhosphorusGrenadesx6
     #  points: 40
     #- id: M74AGMFFragmentationGrenadesx6
@@ -117,10 +119,11 @@
       entries:
       - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
-    #- id: CMM276GeneralPistolHolsterRig
-    #- id: CMM276M63HolsterRig
-    #- id: CMM276M44HolsterRig
-    #- id: CMM276M82FHolsterRig
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterSMG
+      - id: RMCBeltHolsterSMGPouch
+    #- id: RMCBeltHolsterFlareGun
       - id: RMCM276ShotgunShellLoadingRig
     - name: Pouches
       choices: { RMCPouch: 2 }
@@ -150,14 +153,15 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbingBlack
-      #- id: CMShoulderHolster
       - id: CMWebbing
       - id: CMWebbingPouch
+      - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather
     - name: Restricted Firearms
       entries:
       - id: RMCMK80Case
@@ -178,7 +182,8 @@
         points: 6
       - id: RMCPouchMacheteFilled
         points: 15
-    #- id: CMMarineRadioTelephonePack
+      - id: RMCBackpackRTO
+        points: 15
     #- id: CMFuelTankStrapPouch
     #- id: CMWeldingGoggles
       - id: RMCPouchGeneralLarge
@@ -189,10 +194,12 @@
         points: 15
     - name: Utilities
       entries:
-      - id: CMFireExtinguisherPortable
-        points: 5
       - id: CMRollerBedSpawnFolded
         points: 5
+      - id: CMFireExtinguisherPortable
+        points: 5
+      - id: RMCMotionDetector
+        points: 10
     #- id: CMFultonDeviceStack
     #- id: CMMotionDetector
       - id: RMCWhistle

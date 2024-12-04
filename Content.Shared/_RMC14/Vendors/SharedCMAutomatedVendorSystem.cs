@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Scaling;
 using Content.Shared._RMC14.Webbing;
 using Content.Shared.Access.Components;
 using Content.Shared.Clothing.Components;
@@ -43,6 +44,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<MarineScaleChangedEvent>(OnMarineScaleChanged);
+
+        SubscribeLocalEvent<CMAutomatedVendorComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<CMAutomatedVendorComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
 
         SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedHandEvent>(OnRecentlyGotEquipped);
@@ -52,6 +56,50 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         {
             subs.Event<CMVendorVendBuiMsg>(OnVendBui);
         });
+    }
+
+    private void OnMarineScaleChanged(ref MarineScaleChangedEvent ev)
+    {
+        var vendors = EntityQueryEnumerator<CMAutomatedVendorComponent>();
+        while (vendors.MoveNext(out var uid, out var vendor))
+        {
+            var changed = false;
+            foreach (var section in vendor.Sections)
+            {
+                foreach (var entry in section.Entries)
+                {
+                    if (entry.Multiplier is not { } multiplier ||
+                        entry.Max is not { } max)
+                    {
+                        continue;
+                    }
+
+                    var newMax = (int) Math.Round(ev.New * multiplier);
+                    var toAdd = newMax - max;
+                    if (toAdd <= 0)
+                        continue;
+
+                    entry.Amount += toAdd;
+                    entry.Max += toAdd;
+                    changed = true;
+                }
+            }
+
+            if (changed)
+                Dirty(uid, vendor);
+        }
+    }
+
+    private void OnMapInit(Entity<CMAutomatedVendorComponent> ent, ref MapInitEvent args)
+    {
+        foreach (var section in ent.Comp.Sections)
+        {
+            foreach (var entry in section.Entries)
+            {
+                entry.Multiplier = entry.Amount;
+                entry.Max = entry.Amount;
+            }
+        }
     }
 
     private void OnUIOpenAttempt(Entity<CMAutomatedVendorComponent> vendor, ref ActivatableUIOpenAttemptEvent args)
@@ -210,7 +258,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                     }
                     else // Does not exist on the currently checked vendor
                         specVendorComponent.GlobalSharedVends.Add(args.Entry, maxAmongVendors);
-                    Dirty(specVendorComponent);
+                    Dirty(vendorId, specVendorComponent);
                 }
 
                 thisSpecVendor.GlobalSharedVends[args.Entry] = maxAmongVendors;
@@ -224,7 +272,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 else
                     thisSpecVendor.GlobalSharedVends[args.Entry] += 1;
 
-                Dirty(thisSpecVendor);
+                Dirty(vendor, thisSpecVendor);
             }
         }
 

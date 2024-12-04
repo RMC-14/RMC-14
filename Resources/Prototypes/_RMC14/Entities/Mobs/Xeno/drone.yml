@@ -25,15 +25,21 @@
     damage:
       groups:
         Brute: 22.5
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 30
   - type: Xeno
     role: CMXenoDrone
     hudOffset: 0,0.15
     tier: 1
     bypassTierCount: true
     unlockAt: 60 # 1 minute
+  - type: XenoLight
   - type: XenoDevolve
     devolvesTo:
     - CMXenoLarva
+    canBeDevolvedByOther: false
   - type: XenoDevour
   - type: XenoPheromones
     pheromonesMultiplier: 2
@@ -41,9 +47,10 @@
     plasma: 1000
     maxPlasma: 1000
     plasmaRegenOnWeeds: 4.5
-  - type: Tackle # min: 2, max: 4
-    threshold: 4
-    stun: 7
+  - type: Tackle
+    max: 4
+    stunMin: 3
+    stunMax: 4
   - type: WhitelistPickup
     whitelist:
       components:
@@ -64,10 +71,6 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: drone
-  - type: AcidTrap
-    trapLevel: 1
-    cost: 70
-    spray: XenoAcidSprayTrapWeak
   - type: XenoConstruction
     buildDelay: 2
     canOrderConstruction:
@@ -77,10 +80,12 @@
     max: 200
     evolvesTo:
     - CMXenoCarrier
-#    - CMXenoBurrower
+    - CMXenoBurrower
     - CMXenoHivelord
     evolvesToWithoutPoints:
     - CMXenoQueen
+  - type: Evasion
+    evasion: 20
 
 - type: entity
   parent: CMXenoDroneBase
@@ -106,6 +111,10 @@
     strains:
     - CMXenoDroneGardener
   - type: XenoAcid
+  - type: AcidTrap
+    trapLevel: 1
+    cost: 70
+    spray: XenoAcidSprayTrapWeak
   - type: XenoConstruction
     canBuild:
     - WallXenoResin
@@ -147,6 +156,7 @@
     critHealMultiplier: 0.3465  # 5% increased regeneration
     standHealingMultiplier: 0.42
     restHealMultiplier: 1.05
+    hidden: true
   - type: XenoStrain
     name: rmc-xeno-gardener-name
     description: rmc-xeno-gardener-description

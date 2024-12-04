@@ -41,6 +41,12 @@ public sealed partial class AttachableToggleableComponent : Component
     public bool BreakOnRotate = false;
 
     /// <summary>
+    /// If set to true, the attachment will deactivate upon rotating 90 degrees away from the one it was activated in.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool BreakOnFullRotate = false;
+
+    /// <summary>
     /// If set to true, the attachment can only be toggled when the holder is wielded.
     /// </summary>
     [DataField, AutoNetworkedField]

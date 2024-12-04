@@ -6,6 +6,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -112,6 +113,11 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (_net.IsClient)
             return true;
 
+        var ammoShotEvent = new AmmoShotEvent()
+        {
+            FiredProjectiles = new List<EntityUid>(shots)
+        };
+
         var originalDiff = targetMap.Position - origin.Position;
         for (var i = 0; i < shots; i++)
         {
@@ -128,6 +134,8 @@ public sealed class XenoProjectileSystem : EntitySystem
             diff *= speed / diff.Length();
 
             _gun.ShootProjectile(projectile, diff, xenoVelocity, xeno, xeno, speed);
+
+            ammoShotEvent.FiredProjectiles.Add(projectile);
 
             // let hive member logic apply
             EnsureComp<XenoProjectileComponent>(projectile);
@@ -149,60 +157,8 @@ public sealed class XenoProjectileSystem : EntitySystem
             }
         }
 
+        RaiseLocalEvent(xeno, ammoShotEvent);
+
         return true;
-    }
-
-    public bool TryShootAt(
-        EntityUid xeno,
-        EntityUid? target,
-        EntityCoordinates? targetCoords,
-        FixedPoint2 plasma,
-        EntProtoId projectileId,
-        SoundSpecifier? sound,
-        int shots,
-        Angle deviation,
-        float speed,
-        float? fixedDistance = null)
-    {
-        if (target is { Valid: true })
-        {
-            if (_mobState.IsDead(target.Value))
-            {
-                targetCoords = _transform.GetMoverCoordinates(target.Value);
-            }
-            else
-            {
-                return TryShoot(
-                    xeno,
-                    _transform.GetMoverCoordinates(target.Value),
-                    plasma,
-                    projectileId,
-                    sound,
-                    shots,
-                    deviation,
-                    speed,
-                    fixedDistance,
-                    target
-                );
-            }
-        }
-
-        if (targetCoords != null && targetCoords.Value.IsValid(EntityManager))
-        {
-            return TryShoot(
-                xeno,
-                targetCoords.Value,
-                plasma,
-                projectileId,
-                sound,
-                shots,
-                deviation,
-                speed,
-                fixedDistance,
-                target
-            );
-        }
-
-        return false;
     }
 }

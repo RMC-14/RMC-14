@@ -34,6 +34,8 @@
     recoilWielded: 1
     scatterWielded: 0
     baseFireRate: 0.667
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 3
   - type: WieldDelay
     baseDelay: 1.2
   - type: ItemSlots
@@ -197,10 +199,10 @@
     proto: CMBulletSniper10x99mmAntiMateriel
 
 - type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: CMBulletSniper10x28mm
   name: bullet (10x28mm)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
@@ -218,28 +220,36 @@
       ignoreModifiers: true
   - type: CMArmorPiercing
     amount: 50
+  - type: RMCProjectileAccuracy
+    accuracy: 125
+    thresholds:
+    - range: 32
+      falloff: 10
+    - range: 4
+      falloff: 10
+      buildup: true
 
-# TODO RMC14 incendiary
 - type: entity
   parent: CMBulletSniper10x28mm
   id: CMBulletSniper10x28mmIncendiary
   name: bullet (10x28mm)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 50
-        Heat: 10
+        Piercing: 100 # TODO RMC14 50 when aimed shot is in please someone help im dying
+        Heat: 20 # TODO RMC14 10 when aimed shot is in please someone help im dying
   - type: CMArmorPiercing
     amount: 20
+  - type: IgniteOnProjectileHit
 
 # TODO RMC14 slow
 - type: entity
   parent: CMBulletSniper10x28mm
   id: CMBulletSniper10x28mmFlak
   name: bullet (10x28mm)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -252,7 +262,7 @@
   parent: CMBulletSniper10x28mm
   id: CMBulletSniper10x99mmAntiMateriel
   name: bullet (10x99mm)
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

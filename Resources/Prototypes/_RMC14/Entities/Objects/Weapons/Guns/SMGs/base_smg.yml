@@ -32,6 +32,12 @@
     item: PrimaryGun
   - type: GunUnskilledPenalty
     angleIncrease: 20
+  - type: Tag
+    tags:
+    - RMCWeaponSMG
+  - type: GunDualWielding
+    weaponGroup: Submachinegun
+  - type: GunPointBlank
 
 - type: entity
   parent: BaseCartridgeCaselessRifle
@@ -40,6 +46,9 @@
   components:
   - type: CartridgeAmmo
     deleteOnSpawn: true
+
+- type: Tag
+  id: RMCWeaponSMG
 
 - type: Tag
   id: CMMagazineSmg

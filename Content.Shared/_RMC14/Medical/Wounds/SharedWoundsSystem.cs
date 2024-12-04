@@ -10,6 +10,8 @@ using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Stacks;
@@ -42,6 +44,8 @@ public abstract class SharedWoundsSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<MobStateComponent, CMBleedAttemptEvent>(OnMobStateBleedAttempt);
+
         SubscribeLocalEvent<WoundableComponent, DamageChangedEvent>(OnWoundableDamaged);
         SubscribeLocalEvent<WoundableComponent, CMBleedEvent>(OnWoundableBleed);
 
@@ -55,6 +59,12 @@ public abstract class SharedWoundsSystem : EntitySystem
 
         Subs.CVar(_config, RMCCVars.CMBloodlossMultiplier, v => _bloodlossMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMBleedTimeMultiplier, v => _bleedTimeMultiplier = v, true);
+    }
+
+    private void OnMobStateBleedAttempt(Entity<MobStateComponent> ent, ref CMBleedAttemptEvent args)
+    {
+        if (ent.Comp.CurrentState == MobState.Dead)
+            args.Cancelled = true;
     }
 
     private void OnWoundableDamaged(Entity<WoundableComponent> ent, ref DamageChangedEvent args)

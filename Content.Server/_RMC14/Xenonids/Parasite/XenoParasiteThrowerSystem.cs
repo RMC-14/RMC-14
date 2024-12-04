@@ -2,6 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Server.Hands.Systems;
 using Content.Server.Mind;
+using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -122,7 +123,13 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         if (!_hands.TryGetEmptyHand(xeno, out var _))
             return;
 
-        if (RemoveParasite(xeno) is not EntityUid newParasite)
+        if (HasComp<OnFireComponent>(xeno))
+        {
+            _popup.PopupEntity("Retrieving a stored parasite while we're on fire would burn it!", xeno, args.Performer, PopupType.MediumCaution);
+            return;
+        }
+
+        if (RemoveParasite(xeno) is not { } newParasite)
             return;
 
         _hive.SetSameHive(xeno.Owner, newParasite);
@@ -186,6 +193,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         if (args.NewMobState != MobState.Dead)
             return;
         DropAllStoredParasites(xeno, 0.75f);
+        RemCompDeferred<XenoParasiteThrowerComponent>(xeno.Owner);
     }
 
     private bool DropAllStoredParasites(Entity<XenoParasiteThrowerComponent> xeno, float chance = 1.0f)
@@ -244,7 +252,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
 
     private void UpdateParasiteClingers(Entity<XenoParasiteThrowerComponent> xeno)
     {
-        var parasiteNumber = Math.Min(Math.Ceiling((((double)xeno.Comp.CurParasites / xeno.Comp.MaxParasites) * xeno.Comp.NumPositions)), xeno.Comp.NumPositions - 1);
+        var parasiteNumber = Math.Min(Math.Ceiling((((double)xeno.Comp.CurParasites / xeno.Comp.MaxParasites) * xeno.Comp.NumPositions)), xeno.Comp.NumPositions);
 
         var overlayNumbers = xeno.Comp.VisiblePositions.Count(position => position == true);
 

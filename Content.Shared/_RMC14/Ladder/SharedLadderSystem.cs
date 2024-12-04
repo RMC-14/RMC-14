@@ -255,7 +255,7 @@ public abstract class SharedLadderSystem : EntitySystem
         if (!Resolve(watcher, ref watcher.Comp))
             return;
 
-        _eye.SetTarget(watcher, watcher, watcher);
+        _eye.SetTarget(watcher, null);
     }
 
     protected bool CanWatchPopup(Entity<LadderComponent> ladder, EntityUid user)

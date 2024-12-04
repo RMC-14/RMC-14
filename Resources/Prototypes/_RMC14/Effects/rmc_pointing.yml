@@ -1,0 +1,20 @@
+﻿- type: entity
+  parent: PointingArrow
+  id: RMCPointingArrowBig
+  save: false
+  components:
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Sprite
+    sprite: _RMC14/Effects/pointing.rsi
+    state: big_arrow
+
+- type: entity
+  parent: PointingArrow
+  id: RMCPointingArrowBigQueen
+  save: false
+  components:
+  - type: Sprite
+    sprite: _RMC14/Effects/pointing.rsi
+    state: big_arrow_queen

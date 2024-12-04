@@ -18,7 +18,7 @@ public sealed partial class XenoCrestComponent : Component
     public float SpeedMultiplier;
 
     [DataField, AutoNetworkedField]
-    public string ImmuneToStatus = "Stun";
+    public string[] ImmuneToStatuses = { "KnockedDown" };
 
     [DataField, AutoNetworkedField]
     public RMCSizes CrestSize = RMCSizes.Big;

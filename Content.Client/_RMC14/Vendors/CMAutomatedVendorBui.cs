@@ -53,7 +53,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                         uiEntry.Texture.Textures = SpriteComponent.GetPrototypeTextures(entity, _resource)
                             .Select(o => o.Default)
                             .ToList();
-                        uiEntry.Panel.Button.Label.Text = entry.Name ?? entity.Name;
+                        uiEntry.Panel.Button.Label.Text = entry.Name?.Replace("\\n", "\n") ?? entity.Name;
 
                         var name = entity.Name;
                         var color = CMAutomatedVendorPanel.DefaultColor;

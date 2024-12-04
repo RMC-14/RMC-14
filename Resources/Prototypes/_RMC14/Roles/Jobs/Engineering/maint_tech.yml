@@ -12,7 +12,11 @@
   - MaintTech
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: engi
+    state: mt
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_shipside
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -22,7 +26,10 @@
         RMCSkillConstruction: 3
         RMCSkillEngineer: 3
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillPowerLoader: 2
+    - type: JobPrefix
+      prefix: "MT"
 
 - type: startingGear
   id: CMGearMaintTech
@@ -51,3 +58,4 @@
 
 - type: playTimeTracker
   id: CMJobMaintTech
+  isHumanoid: true

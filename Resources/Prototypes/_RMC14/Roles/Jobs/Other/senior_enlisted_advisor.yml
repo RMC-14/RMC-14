@@ -32,6 +32,10 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: sea
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_medical
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -57,6 +61,10 @@
     - type: MarineOrders
     - type: CMVendorUser
       points: 45
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: "SEA"
+    - type: SeeNewPlayers
 
 - type: startingGear
   id: CMGearSeniorEnlistedAdvisor
@@ -86,10 +94,11 @@
   id: CMGuidebookRoleSEA
   name: Senior Enlisted Advisor
   description: Mentor for the Marines!
-  noSpawn: false
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: senior_enlisted_advisor
 
 - type: playTimeTracker
   id: CMJobSeniorEnlistedAdvisor
+  isHumanoid: true

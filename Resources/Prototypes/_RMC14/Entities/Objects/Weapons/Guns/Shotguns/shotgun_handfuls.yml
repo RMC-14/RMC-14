@@ -29,10 +29,47 @@
 
 - type: stack
   id: RMCShellShotgunBuckshot
-  name: handful of buckshot shell
+  name: handful of buckshot shells
   icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: buckshot_shell_1 }
   spawn: CMShellShotgunBuckshot
   maxCount: 5
+
+- type: entity
+  parent: CMShellShotgunBase
+  id: RMCShellShotgunBreaching
+  name: handful of breaching shells
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi
+    layers:
+    - state: breaching_shell_1
+      map: [ "base" ]
+  - type: CartridgeAmmo
+    proto: RMCPelletShotgunBreaching
+  - type: Stack
+    count: 6
+    stackType: RMCShellShotgunBreaching
+    baseLayer: base
+    layerStates:
+    - breaching_shell_1
+    - breaching_shell_1
+    - breaching_shell_2
+    - breaching_shell_3
+    - breaching_shell_4
+    - breaching_shell_5
+    - breaching_shell_6
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCShellShotgun
+    - RMCShellShotgunBreaching
+
+- type: stack
+  id: RMCShellShotgunBreaching
+  name: handful of breaching shells
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: breaching_shell_1 }
+  spawn: RMCShellShotgunBreaching
+  maxCount: 6
 
 - type: entity
   parent: CMShellShotgunBase
@@ -118,7 +155,6 @@
       map: [ "base" ]
   - type: CartridgeAmmo
     proto: CMPelletShotgunBeanbag
-
   - type: Stack
     count: 5
     stackType: RMCShellShotgunBeanbag
@@ -235,3 +271,6 @@
 
 - type: Tag
   id: RMCShellShotgunIncendiaryBuckshot
+
+- type: Tag
+  id: RMCShellShotgunBreaching

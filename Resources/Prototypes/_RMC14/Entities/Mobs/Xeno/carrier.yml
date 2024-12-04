@@ -53,6 +53,7 @@
     tier: 2
     hudOffset: 0,0.19
     unlockAt: 300 # 5 minutes
+  - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
     - CMXenoDrone
@@ -72,15 +73,32 @@
     damage:
       groups:
         Brute: 27.5
-  - type: Tackle # min: 2, max: 4
-    threshold: 4
-    stun: 9
-    chance: 0.50
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 42
+  - type: Tackle
+    max: 4
+    chance: 0.5
+    stunMin: 4
+    stunMax: 5
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
   - type: SlowOnPull
-    multiplier: 0.5
+    slowdowns:
+    - multiplier: 0.6375
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.7075
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.475
+      whitelist:
+        components:
+        - XenoHeavy
   - type: EggPlantTime
     plantTime: 1
   - type: WhitelistPickup

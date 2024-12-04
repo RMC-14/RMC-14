@@ -1,8 +1,8 @@
 ﻿using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using Content.Shared.Atmos;
 using Content.Shared.Coordinates;
-using Content.Shared.Directions;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Tag;
@@ -24,10 +24,17 @@ public abstract class SharedRMCMapSystem : EntitySystem
 
     private EntityQuery<MapGridComponent> _mapGridQuery;
 
+    public readonly ImmutableArray<AtmosDirection> AtmosCardinalDirections = ImmutableArray.Create(
+        AtmosDirection.South,
+        AtmosDirection.East,
+        AtmosDirection.North,
+        AtmosDirection.West
+    );
+
     public readonly ImmutableArray<Direction> CardinalDirections = ImmutableArray.Create(
+        Direction.North,
         Direction.South,
         Direction.East,
-        Direction.North,
         Direction.West
     );
 
@@ -49,24 +56,38 @@ public abstract class SharedRMCMapSystem : EntitySystem
             return RMCAnchoredEntitiesEnumerator.Empty;
         }
 
-        if (offset != null)
-            coords = coords.Offset(offset.Value);
-
         var indices = _map.CoordinatesToTile(gridId, gridComp, coords);
-        var anchored = _map.GetAnchoredEntitiesEnumerator(gridId, gridComp, indices);
+        return GetAnchoredEntitiesEnumerator((gridId, gridComp), indices, offset, facing);
+    }
+
+    public RMCAnchoredEntitiesEnumerator GetAnchoredEntitiesEnumerator(Entity<MapGridComponent> grid, Vector2i indices, Direction? offset = null, DirectionFlag facing = DirectionFlag.None)
+    {
+        if (offset != null)
+            indices = indices.Offset(offset.Value);
+
+        var anchored = _map.GetAnchoredEntitiesEnumerator(grid, grid, indices);
         return new RMCAnchoredEntitiesEnumerator(_transform, anchored, facing);
+    }
+
+    public bool HasAnchoredEntityEnumerator<T>(EntityCoordinates coords, out Entity<T> ent, Direction? offset = null, DirectionFlag facing = DirectionFlag.None) where T : IComponent
+    {
+        ent = default;
+        var anchored = GetAnchoredEntitiesEnumerator(coords, offset, facing);
+        while (anchored.MoveNext(out var uid))
+        {
+            if (!TryComp(uid, out T? comp))
+                continue;
+
+            ent = (uid, comp);
+            return true;
+        }
+
+        return false;
     }
 
     public bool HasAnchoredEntityEnumerator<T>(EntityCoordinates coords, Direction? offset = null, DirectionFlag facing = DirectionFlag.None) where T : IComponent
     {
-        var anchored = GetAnchoredEntitiesEnumerator(coords, offset, facing);
-        while (anchored.MoveNext(out var uid))
-        {
-            if (HasComp<T>(uid))
-                return true;
-        }
-
-        return false;
+        return HasAnchoredEntityEnumerator<T>(coords, out _, offset, facing);
     }
 
     public bool TryGetTileRefForEnt(EntityCoordinates ent, out Entity<MapGridComponent> grid, out TileRef tile)
@@ -95,16 +116,26 @@ public abstract class SharedRMCMapSystem : EntitySystem
         return _turf.IsTileBlocked(turf.Value, group);
     }
 
-    public bool TileHasStructure(EntityCoordinates coordinates)
+    public bool IsTileBlocked(MapCoordinates coordinates, CollisionGroup group = CollisionGroup.Impassable)
+    {
+        return IsTileBlocked(_transform.ToCoordinates(coordinates), group);
+    }
+
+    public bool TileHasAnyTag(EntityCoordinates coordinates, params ProtoId<TagPrototype>[] tag)
     {
         var anchored = GetAnchoredEntitiesEnumerator(coordinates);
         while (anchored.MoveNext(out var uid))
         {
-            if (_tag.HasTag(uid, StructureTag))
+            if (_tag.HasAnyTag(uid, tag))
                 return true;
         }
 
         return false;
+    }
+
+    public bool TileHasStructure(EntityCoordinates coordinates)
+    {
+        return TileHasAnyTag(coordinates, StructureTag);
     }
 
     public bool TryGetTileDef(EntityCoordinates coordinates, [NotNullWhen(true)] out ContentTileDefinition? def)

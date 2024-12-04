@@ -38,7 +38,7 @@ public sealed partial class XenoShieldSystem : EntitySystem
         SubscribeLocalEvent<XenoShieldComponent, DamageModifyEvent>(OnDamage, after: [typeof(CMArmorSystem)]);
     }
 
-    public void OnDamage(Entity<XenoShieldComponent> ent, ref DamageModifyEvent args)
+    private void OnDamage(Entity<XenoShieldComponent> ent, ref DamageModifyEvent args)
     {
         if (!ent.Comp.Active)
             return;
@@ -82,8 +82,7 @@ public sealed partial class XenoShieldSystem : EntitySystem
     public void ApplyShield(EntityUid uid, ShieldType type, FixedPoint2 amount, TimeSpan? duration = null,
         double decay = 0, bool addShield = false, double maxShield = 200)
     {
-        if (!EnsureComp<XenoShieldComponent>(uid, out var shieldComp))
-            return;
+        var shieldComp = EnsureComp<XenoShieldComponent>(uid);
 
         if (shieldComp.Active && shieldComp.Shield == type)
         {

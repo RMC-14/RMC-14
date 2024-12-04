@@ -9,4 +9,10 @@ public sealed partial class CorrodibleComponent : Component
     // TODO RMC14 intel and nuke shouldn't be corrodible
     [DataField, AutoNetworkedField]
     public bool IsCorrodible = true;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan TimeToApply = TimeSpan.FromSeconds(4);
+
+    [DataField, AutoNetworkedField]
+    public bool Structure = false;
 }

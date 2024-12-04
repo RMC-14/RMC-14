@@ -83,6 +83,9 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: ActivatableUIBlacklist
     blacklist:
       components:
@@ -218,8 +221,9 @@
   id: CMVendorCigs
   startingInventory:
     RMCCigarettePackLuckySloths: 50
-    RMCTarbackCase: 15
-    Lighter: 25
+    RMCTarbackTube: 20
+    RMCMatchboxFull: 15
+    RMCLighter: 25
     RMCZippo: 10
 
 
@@ -259,7 +263,7 @@
     CMJumpsuitMP: 2
     CMHeadBeretRed: 6
     CMGlassesSecurity: 3
-    CMHeadsetMPO: 6
+    CMHeadset: 6
 
 
 # Senior Enlisted Advisor

@@ -24,6 +24,9 @@
     color: "#E61919"
     accessLevels:
     - CMAccessAlpha
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_alpha
 
 - type: entity
   parent: SquadBase
@@ -35,6 +38,9 @@
     color: "#FFC32D"
     accessLevels:
     - CMAccessBravo
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_bravo
 
 - type: entity
   parent: SquadBase
@@ -46,6 +52,9 @@
     color: "#C864C8"
     accessLevels:
     - CMAccessCharlie
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_charlie
 
 - type: entity
   parent: SquadBase
@@ -57,6 +66,9 @@
     color: "#4148C8"
     accessLevels:
     - CMAccessDelta
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_delta
 
 - type: entity
   parent: SquadBase
@@ -70,6 +82,9 @@
     - CMAccessBravo
     - CMAccessCharlie
     - CMAccessDelta
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_echo
 
 - type: entity
   parent: SquadBase
@@ -83,3 +98,8 @@
     - CMAccessBravo
     - CMAccessCharlie
     - CMAccessDelta
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_foxtrot
+
+#TODO RMC-14 Intel needs to use their custom background

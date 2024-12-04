@@ -1,6 +1,5 @@
 using System.Linq;
 using Content.Server._RMC14.NPC;
-using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.NPC.Queries;
 using Content.Server.NPC.Queries.Considerations;
@@ -14,6 +13,8 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.Atmos.Components;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.Fluids.Components;
@@ -53,7 +54,7 @@ public sealed class NPCUtilitySystem : EntitySystem
     [Dependency] private readonly OpenableSystem _openable = default!;
     [Dependency] private readonly PuddleSystem _puddle = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SolutionContainerSystem _solutions = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!;
     [Dependency] private readonly WeldableSystem _weldable = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
@@ -359,6 +360,12 @@ public sealed class NPCUtilitySystem : EntitySystem
 
                 return 0f;
             }
+            case TargetOnFireCon:
+                {
+                    if (TryComp(targetUid, out FlammableComponent? fire) && fire.OnFire)
+                        return 1f;
+                    return 0f;
+                }
             case TargetIsNotDeadCon:
             {
                 return !_mobState.IsDead(targetUid) ? 1f : 0f;
@@ -383,7 +390,9 @@ public sealed class NPCUtilitySystem : EntitySystem
             }
             case TargetInfectableCon:
             {
-                return HasComp<InfectableComponent>(targetUid) && !HasComp<VictimInfectedComponent>(targetUid) ? 1f : 0f;
+                return TryComp<InfectableComponent>(targetUid, out var infectable)
+                        && !infectable.BeingInfected
+                        && !HasComp<VictimInfectedComponent>(targetUid) ? 1f : 0f;
             }
             case TargetOpenEggCon:
             {
