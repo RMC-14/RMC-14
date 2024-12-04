@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -5,11 +6,14 @@ using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Stunnable;
 using Content.Shared.Verbs;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using System;
@@ -31,9 +35,15 @@ public sealed partial class EggMorpherSystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly SharedHandsSystem _hand = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     public override void Initialize()
     {
         base.Initialize();
+
+        SubscribeLocalEvent<EggMorpherComponent, InteractHandEvent>(OnInteractHand);
+        SubscribeLocalEvent<EggMorpherComponent, InteractUsingEvent>(OnInteractUsing);
+
 
         SubscribeLocalEvent<EggMorpherComponent, XenoChangeParasiteReserveMessage>(OnChangeParasiteReserve);
         SubscribeLocalEvent<EggMorpherComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
@@ -72,6 +82,45 @@ public sealed partial class EggMorpherSystem : EntitySystem
             }
         }
     }
+
+    private void OnInteractHand(Entity<EggMorpherComponent> eggMorpher, ref InteractHandEvent args)
+    {
+        var user = args.User;
+
+        args.Handled = true;
+
+        if (!TryCreateParasiteFromEggMorpher(eggMorpher, out var newParasite))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-egg-morpher-no-parasites"), eggMorpher, user);
+            return;
+        }
+
+        _hand.TryPickup(user, newParasite.Value);
+    }
+    private void OnInteractUsing(Entity<EggMorpherComponent> eggMorpher, ref InteractUsingEvent args)
+    {
+        var (ent, comp) = eggMorpher;
+
+        var user = args.User;
+        var used = args.Used;
+
+        args.Handled = true;
+        if (!HasComp<XenoParasiteComponent>(used))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-egg-morpher-attempt-insert-non-parasite"), eggMorpher, user);
+            return;
+        }
+
+        if (comp.MaxParasites <= comp.CurParasites)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-egg-morpher-already-full"), eggMorpher, user);
+            return;
+        }
+
+        QueueDel(used);
+        comp.CurParasites++;
+    }
+
 
     private void OnChangeParasiteReserve(Entity<EggMorpherComponent> eggMorpher, ref XenoChangeParasiteReserveMessage args)
     {
@@ -124,6 +173,7 @@ public sealed partial class EggMorpherSystem : EntitySystem
             return false;
         }
         comp.CurParasites--;
+
         parasite = SpawnAtPosition(EggMorpherComponent.ParasitePrototype, ent.ToCoordinates());
         Dirty(eggMorpher);
         return true;

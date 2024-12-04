@@ -60,3 +60,7 @@ rmc-xeno-construction-tunnel-examine = The pheromone scent reads: {$tunnelName}
 
 rmc-xeno-construction-tunnel-fill = You start collapsing the tunnel!
 rmc-xeno-construction-tunnel-fill-xeno-drop = The tunnel suddenly collapses, forcing you out!
+
+rmc-xeno-construction-egg-morpher-no-parasites = There are no parasites in the egg morpher!
+rmc-xeno-construction-egg-morpher-attempt-insert-non-parasite = You can't put that in the egg morpher!
+rmc-xeno-construction-egg-morpher-already-full = This egg morpher is already full!
