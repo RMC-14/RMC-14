@@ -1,11 +1,22 @@
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
+using Content.Shared.Coordinates;
+using Content.Shared.Database;
+using Content.Shared.Ghost;
+using Content.Shared.Interaction;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.StepTrigger.Systems;
+using Content.Shared.Stunnable;
 using Content.Shared.Verbs;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,12 +27,20 @@ public sealed partial class EggMorpherSystem : EntitySystem
     [Dependency] private readonly IGameTiming _time = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<EggMorpherComponent, XenoChangeParasiteReserveMessage>(OnChangeParasiteReserve);
         SubscribeLocalEvent<EggMorpherComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
+
+        SubscribeLocalEvent<EggMorpherComponent, StepTriggerAttemptEvent>(OnEggMorpherStepAttempt);
+        SubscribeLocalEvent<EggMorpherComponent, StepTriggeredOffEvent>(OnEggMorpherStepTriggered);
+
     }
 
     public override void Update(float frameTime)
@@ -43,6 +62,7 @@ public sealed partial class EggMorpherSystem : EntitySystem
             {
                 eggMorpherComp.CurParasites++;
                 eggMorpherComp.NextSpawnAt = newSpawnTime;
+                Dirty(eggMorpherEnt, eggMorpherComp);
                 continue;
             }
 
@@ -60,23 +80,95 @@ public sealed partial class EggMorpherSystem : EntitySystem
 
     private void OnGetVerbs(Entity<EggMorpherComponent> eggMorpher, ref GetVerbsEvent<ActivationVerb> args)
     {
+        var (ent, comp) = eggMorpher;
         var user = args.User;
-        if (!_hive.FromSameHive(user, eggMorpher.Owner))
+        if (_hive.FromSameHive(user, ent))
         {
-            return;
+            var changeReserveVerb = new ActivationVerb()
+            {
+                Text = Loc.GetString("xeno-reserve-parasites-verb"),
+                Act = () =>
+                {
+                    _ui.OpenUi(ent, XenoReserveParasiteChangeUI.Key, user);
+                }
+            };
+
+            args.Verbs.Add(changeReserveVerb);
         }
 
-        var changeReserveVerb = new ActivationVerb()
+        if (HasComp<ActorComponent>(user) && HasComp<GhostComponent>(user) &&
+            comp.CurParasites > comp.ReservedParasites && comp.CurParasites > 0)
         {
-            Text = Loc.GetString("xeno-reserve-parasites-verb"),
-            Act = () =>
+            var parasiteVerb = new ActivationVerb
             {
-                _ui.OpenUi(eggMorpher.Owner, XenoReserveParasiteChangeUI.Key, user);
+                Text = Loc.GetString("rmc-xeno-egg-ghost-verb"),
+                Act = () =>
+                {
+                    _ui.TryOpenUi(ent, XenoParasiteGhostUI.Key, user);
+                },
 
-            }
-        };
+                Impact = LogImpact.High,
+            };
 
-        args.Verbs.Add(changeReserveVerb);
+            args.Verbs.Add(parasiteVerb);
+        }
+    }
+
+    public bool TryCreateParasiteFromEggMorpher(Entity<EggMorpherComponent> eggMorpher, [NotNullWhen(true)] out EntityUid? parasite)
+    {
+        parasite = null;
+
+        var (ent, comp) = eggMorpher;
+        if (comp.CurParasites <= comp.ReservedParasites || comp.CurParasites <= 0)
+        {
+            return false;
+        }
+        comp.CurParasites--;
+        parasite = SpawnAtPosition(EggMorpherComponent.ParasitePrototype, ent.ToCoordinates());
+        Dirty(eggMorpher);
+        return true;
+    }
+
+    private void OnEggMorpherStepAttempt(Entity<EggMorpherComponent> eggMorpher, ref StepTriggerAttemptEvent args)
+    {
+        if (CanTrigger(args.Tripper))
+            args.Continue = true;
+    }
+
+    private void OnEggMorpherStepTriggered(Entity<EggMorpherComponent> eggMorpher, ref StepTriggeredOffEvent args)
+    {
+        TryTrigger(eggMorpher, args.Tripper);
+    }
+
+    private bool CanTrigger(EntityUid user)
+    {
+        return TryComp<InfectableComponent>(user, out var infected)
+               && !infected.BeingInfected
+               && !_mobState.IsDead(user)
+               && !HasComp<VictimInfectedComponent>(user);
+    }
+
+    private bool TryTrigger(Entity<EggMorpherComponent> eggMorpher, EntityUid tripper)
+    {
+        if (!CanTrigger(tripper))
+        {
+            return false;
+        }
+
+        if (!_interaction.InRangeUnobstructed(eggMorpher.Owner, tripper))
+        {
+            return false;
+        }
+
+        if (!TryCreateParasiteFromEggMorpher(eggMorpher, out var spawnedParasite))
+        {
+            return false;
+        }
+
+        var parasiteComp = EnsureComp<XenoParasiteComponent>(spawnedParasite.Value);
+        _parasite.Infect((spawnedParasite.Value, parasiteComp), tripper, force: true);
+
+        return true;
     }
 
     private TimeSpan GetParasiteSpawnCooldown(Entity<EggMorpherComponent> eggMorpher)
