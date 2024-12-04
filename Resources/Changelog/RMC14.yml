@@ -1,27 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added a popup when someone else throws something.
-    type: Add
-  id: 561
-  time: '2024-08-16T12:40:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3688
-- author: Vermidia
-  changes:
-  - message: Fixed some xeno pull speeds. Runner pulls faster, boiler pulls the same
-      as most xenos, and warrior pulls a little slower then they used to.
-    type: Fix
-  id: 562
-  time: '2024-08-16T12:39:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3650
-- author: Vermidia
-  changes:
-  - message: Barricades can now only be hit a maximum of three times per second by
-      xenos. Same for resin structures and marines.
-    type: Fix
-  id: 563
-  time: '2024-08-18T04:11:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3684
 - author: Vermidia
   changes:
   - message: Fixed hyposprays being able to draw from containers. Use a bottle on
@@ -5050,5 +5027,26 @@
   id: 1060
   time: '2024-12-03T05:55:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5036
+- author: Vermidia
+  changes:
+  - message: Fixed marine base movement speed being 10% too slow.
+    type: Fix
+  id: 1061
+  time: '2024-12-04T01:07:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5043
+- author: CyberTropic
+  changes:
+  - message: Fixed evac shuttles landing offset from game grid.
+    type: Fix
+  id: 1062
+  time: '2024-12-04T06:44:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5048
+- author: Vermidia
+  changes:
+  - message: Fixed xeno AOE abilities hitting devoured marines
+    type: Fix
+  id: 1063
+  time: '2024-12-04T06:45:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5046
 Name: RMC14
 Order: -1

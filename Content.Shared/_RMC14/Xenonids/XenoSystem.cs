@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -334,6 +335,9 @@ public sealed class XenoSystem : EntitySystem
             return false;
 
         if (_mobState.IsDead(target))
+            return false;
+
+        if (HasComp<DevouredComponent>(target))
             return false;
 
         if (_xenoNestedQuery.HasComp(target))

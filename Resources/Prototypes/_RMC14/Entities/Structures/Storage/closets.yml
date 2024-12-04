@@ -54,7 +54,7 @@
   description: It's a storage unit for formal clothing.
   components:
   - type: Sprite
-    sprite: _RMC14\Structures\Storage\Closets\black.rsi
+    sprite: _RMC14/Structures/Storage/Closets/black.rsi
 
 - type: entity
   parent: CMClosetBase
@@ -63,7 +63,7 @@
   description: It's a storage unit for courtroom apparel and items.
   components:
   - type: Sprite
-    sprite: _RMC14\Structures\Storage\Closets\blue.rsi
+    sprite: _RMC14/Structures/Storage/Closets/blue.rsi
 
 - type: entity
   parent: CMClosetBase
@@ -72,7 +72,7 @@
   description: It's a storage unit for janitorial clothes and gear.
   components:
   - type: Sprite
-    sprite: _RMC14\Structures\Storage\Closets\purple.rsi
+    sprite: _RMC14/Structures/Storage/Closets/purple.rsi
 
 # Utilities
 - type: entity
