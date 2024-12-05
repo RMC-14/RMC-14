@@ -46,7 +46,6 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruct = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly PlayerSystem _player = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
@@ -109,7 +108,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         if (!_xenoPlasma.HasPlasmaPopup(xenoBuilder.Owner, args.PlasmaCost, false))
             return;
 
-        if (!_area.TryGetArea(location, out var area, out _, out _) || area.NoTunnel)
+        if (!Area.TryGetArea(location, out var area, out _, out _) || area.NoTunnel)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-area"), xenoBuilder, xenoBuilder);
             return;
@@ -224,9 +223,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             return;
         }
 
-        var newTunnelName = Loc.GetString("rmc-xeno-construction-default-tunnel-name", ("tunnelNumber", NextTempTunnelId));
-
-        if (!TryPlaceTunnel(xenoBuilder.Owner, newTunnelName, out var newTunnelEnt))
+        if (!TryPlaceTunnel(xenoBuilder.Owner, null, out var newTunnelEnt))
         {
             _popup.PopupEntity(tunnelFailureMessage, xenoBuilder.Owner, xenoBuilder.Owner);
             return;
@@ -672,7 +669,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             actionComp.Enabled = newStatus;
         }
     }
-    public bool TryPlaceTunnel(Entity<HiveMemberComponent?> builder, string name, [NotNullWhen(true)] out EntityUid? tunnelEnt)
+    public bool TryPlaceTunnel(Entity<HiveMemberComponent?> builder, string? name, [NotNullWhen(true)] out EntityUid? tunnelEnt)
     {
         tunnelEnt = null;
         if (!Resolve(builder, ref builder.Comp) ||

@@ -56,7 +56,9 @@ rmc-xeno-construction-bad-area = There's no way to burrow here.
 rmc-xeno-construction-resin-tunnel-uproot = We start uprooting the node so we can dig a tunnel in its place...
 rmc-xeno-construction-resin-tunnel-create-tunnel = We start digging...
 
-rmc-xeno-construction-default-tunnel-name = Tunnel {$tunnelNumber}
+rmc-xeno-construction-default-tunnel-name = {$areaName} ({$coordX}, {$coordY}) {$greekLetter}
+rmc-xeno-construction-default-area-name = Unknown
+
 rmc-xeno-construction-failed-tunnel-rename = Tunnel names must be unique!
 rmc-xeno-construction-tunnel-examine = The pheromone scent reads: {$tunnelName}
 
