@@ -117,10 +117,9 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/standard/snow-urban.rsi
     
-    
 - type: entity
   parent: CMBackpackMarine
-  id: RMCBackpackCamo
+  id: RMCBackpackMarineCamo
   suffix: Camo Replace
   components:
   - type: ItemCamouflage

@@ -2,6 +2,7 @@
   parent: RMCBaseEquipmentCase
   id: CMSniperEquipmentCase
   name: sniper equipment case
+  suffix: Jungle
   description: "A large case containing your very own long-range M96S sniper rifle, M45 ghillie armor and helmet, M42 scout sight, ammunition, spotter equipment, and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
   components:
   - type: StorageFill
@@ -17,7 +18,7 @@
     - id: CMWeaponPistolMK80
     - id: CMMagazinePistolMK80
       amount: 2
-    - id: CMM96SSniperRifle
+    - id: WeaponM96SSniperRifleJungle
 #    - id: CMFacepaintSniper
 #    - id: CMSpotter
   - type: CMChangeUserOnVend
@@ -28,6 +29,7 @@
   parent: RMCBaseEquipmentCase
   id: RMCGrenadeSpecEquipmentCase
   name: heavy grenadier equipment case
+  suffix: Jungle
   description: "A large case containing a heavy-duty multi-shot M83 grenade launcher, M3-G4 grenadier armor and helmet, significant amount of various M40 grenades and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
   components:
   - type: Sprite
@@ -42,7 +44,7 @@
     - 0,0,21,1
   - type: StorageFill
     contents:
-    - id: WeaponLauncherM83 # check IFF
+    - id: WeaponLauncherM83Jungle # check IFF
     - id: RMCBeltGrenadeLargeFilled
     - id: RMCSatchelGrenadeSpec # ID lock
     - id: RMCSatchelGrenadeSpec
@@ -61,6 +63,7 @@
   parent: RMCBaseEquipmentCase
   id: RMCDemoSpecEquipmentCase
   name: demolitionist equipment case
+  suffix: Jungle
   description: "A large case containing a heavy-caliber M5 Anti-Tank Launcher, reinforced M3-T light armor, five 84mm rockets, and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
   components:
   - type: Sprite
@@ -101,6 +104,7 @@
   parent: RMCBaseEquipmentCase
   id: RMCScoutSpecEquipmentCase
   name: scout equipment case
+  suffix: Jungle
   description: "A large case containing an M4RA battle rifle, M3-S light armor and helmet, M4RA battle sight, M68 thermal cloak, V3 reactive thermal tarp, ammunition and additional pieces of equipment.\nNOTE: You cannot put items back inside this case."
   components:
   - type: Sprite
@@ -128,7 +132,7 @@
     - id: CMWeaponPistolMK80
     - id: CMMagazinePistolMK80
       amount: 2
-    - id: WeaponRifleM4SPRCustom
+    - id: WeaponRifleM4SPRCustomJungle
     - id: RMCThermalTarpFolded
 #    - id: RMCPlasticExplosives
 #      amount: 2

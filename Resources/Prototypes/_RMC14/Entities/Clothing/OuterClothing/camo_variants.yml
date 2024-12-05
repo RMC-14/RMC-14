@@ -395,7 +395,7 @@
       Desert: RMCArmorM3SODesert
       Snow: RMCArmorM3SOSnow
       Classic: RMCArmorM3SOClassic
-      Urban: RMCArmoRM3SOUrban
+      Urban: RMCArmorM3SOUrban
 
 - type: entity
   parent: CMArmorM3VLSynth

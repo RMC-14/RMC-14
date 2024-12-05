@@ -27,7 +27,7 @@
       entries:
       - id: CMJumpsuitBO
         name: service uniform
-      - id: CMJumpsuitOperations
+      - id: CMJumpsuitOperationsCamo
         name: operations uniform
         recommended: true
       - id: CMHandsBlackMarine
@@ -39,13 +39,11 @@
     - name: Hat
       choices: { CMHat: 1 }
       entries:
-      - id: CMHeadBeret
+      - id: RMCHeadBeretCamo
         recommended: true
-      - id: CMHeadBeretTan
+      - id: RMCHeadCapFlippableCamo
         recommended: true
-      - id: CMHeadCap
-        recommended: true
-      - id: CMHeadCapOfficer
+      - id: RMCHeadCapOfficerCamo
         recommended: true
       - id: CMHeadCapPeakedService
         recommended: true
@@ -65,11 +63,11 @@
       - id: CMSatchel
     - name: Other Supplies
       entries:
-      - id: RMCBinoculars
+      - id: RMCBinocularsCamo
         points: 5
-      - id: RMCRangefinder
+      - id: RMCRangefinderCamo
         points: 8
-      - id: RMCLaserDesignator
+      - id: RMCLaserDesignatorCamo
         points: 12
         recommended: true
       - id: RMCFlashlight
@@ -103,8 +101,8 @@
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
-      - id: RMCArmorM3SO
-      - id: RMCArmorHelmetM10SO
+      - id: RMCArmorM3SOCamo
+      - id: RMCArmorHelmetM10SOCamo
       - id: CMBootsBlackFilled
       - id: CMHandsBlackMarine
       - id: CMMRE
@@ -125,7 +123,7 @@
       - id: CMBeltMarine
         recommended: true
       - id: CMBeltUtilityFilled
-      - id: CMBeltMedicBagFilled
+      - id: RMCBeltMedicBagCamoFilled
       - id: CMBeltMedicalFilled
       - id: RMCBeltHolsterSMGPouch
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
@@ -182,11 +180,11 @@
         points: 12
       - id: RMCBackpackRTO
         points: 15
-      - id: RMCBinoculars
+      - id: RMCBinocularsCamo
         points: 5
-      - id: RMCRangefinder
+      - id: RMCRangefinderCamo
         points: 8
-      - id: RMCLaserDesignator
+      - id: RMCLaserDesignatorCamo
         points: 12
         recommended: true
       #- id: RMCDataDetector # TODO RMC14 Data Detector
@@ -226,8 +224,8 @@
     - name: Captain's Primary
       choices: { CMPrimary: 1 }
       entries:
-      - id: WeaponRifleM54C # TODO RMC14 MK1 Pulse Rifle needs to replace this; as well as the magazines below.
-      - id: WeaponShotgunM42A2
+      - id: WeaponRifleM54CCamo # TODO RMC14 MK1 Pulse Rifle needs to replace this; as well as the magazines below.
+      - id: WeaponShotgunM42A2Camo
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM54C
@@ -300,11 +298,11 @@
         points: 5
       - id: CMEntrenchingTool
         points: 1
-      - id: RMCBinoculars
+      - id: RMCBinocularsCamo
         points: 5
-      - id: RMCRangefinder
+      - id: RMCRangefinderCamo
         points: 8
-      - id: RMCLaserDesignator
+      - id: RMCLaserDesignatorCamo
         points: 12
       - id: RMCWhistle
         points: 5
@@ -333,9 +331,10 @@
     - name: Utility
       entries:
       - id: CMJumpsuitBO
-      - id: CMJumpsuitOperations
-      - id: CMHeadCapCO
-      - id: CMHeadBeretCO
+      - id: CMJumpsuitCOCamo
+      - id: CMJumpsuitOperationsCamo
+      - id: RMCHeadCapCOCamo
+      - id: RMCHeadBeretCOCamo
       - id: CMBootsBlackFilled
       - id: CMHandsBlackMarine
     - name: Utility Extras
@@ -349,7 +348,7 @@
       - id: CMJumpsuitCOService
       - id: CMJumpsuitCOFormalWhite
       - id: CMJumpsuitCOFormalBlack
-      - id: RMCCoatOfficerCamo # TODO: Check this is the service variant
+      - id: RMCCoatServiceCamo
       - id: CMCoatMP
       - id: RMCShoesLaceup
       - id: RMCShoesLaceupBrown # RMC Addition
@@ -358,7 +357,7 @@
       - id: CMHeadBeretCO
       - id: CMHeadBeretCOWhite
       - id: CMHeadBeretCOBlack
-      - id: CMHeadCap # TODO: Check this is the service variant. If so, parent and rename.
+      - id: RMCHeadCapFlippableCamo # TODO: Check this is the service variant. If so, parent and rename.
     - name: Service Extras
       entries:
       - id: CMCoatCOBomber
@@ -424,18 +423,18 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: RMCBeltUtilityGeneral
+      - id: RMCBeltUtilityGeneralCamo
         recommended: true
       - id: CMBeltSecurityMPFilled
         recommended: true
-      - id: CMBeltMedicBagFilled
+      - id: RMCBeltMedicBagCamoFilled
         recommended: true
-      - id: CMBeltMarine
+      - id: RMCBeltMarineCamo
         recommended: true
       - id: CMBeltUtilityCombat
         recommended: true
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
-      - id: RMCM276ShotgunShellLoadingRig
+      - id: RMCBeltShotgunCamo
     - name: Pouches
       choices: { CMPouch: 2 }
       entries:
@@ -474,10 +473,10 @@
     - name: Commander's Primary
       choices: { CMProtagGun: 1 }
       entries:
-      - id: WeaponRifleM54C # TODO RMC14 Port M46C Protag Gun
+      - id: WeaponRifleM54CCamo # TODO RMC14 Port M46C Protag Gun
         name: Commander's M54C
         recommended: true # TODO RMC14 Make choices: colour the options brown
-      - id: CMSmartGunOperatorEquipmentCaseBelt # TODO RMC14 Port M56C Smart Protag Gun
+      - id: RMCSGOEquipmentCaseBeltCamo # TODO RMC14 Port M56C Smart Protag Gun
         name: Commander's Smartgun
         recommended: true # TODO RMC14 Make choices: colour the options brown
     - name: Primary Ammunition
@@ -590,7 +589,7 @@
       choices: { CMUniform: 1 }
       entries:
       - id: CMJumpsuitBO
-      - id: CMJumpsuitOperations
+      - id: CMJumpsuitOperationsCamo
       - id: RMCVendorBundleXOFormal
     - name: Personal Weapon
       choices: { CMWeapon: 1 }
@@ -607,21 +606,21 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: RMCBeltUtilityGeneral
+      - id: RMCBeltUtilityGeneralCamo
         recommended: true
       - id: CMBeltSecurityMPFilled
         recommended: true
-      - id: CMBeltMedicBag
+      - id: RMCBeltMedicBagCamoFilled
         recommended: true
-      - id: CMBeltMarine
+      - id: RMCBeltMarineCamo
         recommended: true
       - id: CMBeltUtilityCombat
         recommended: true
     - name: Combat Equipment
       takeAll: CMEquipment
       entries:
-      - id: RMCArmorM3SO
-      - id: RMCArmorHelmetM10SO
+      - id: RMCArmorM3SOCamo
+      - id: RMCArmorHelmetM10SOCamo
       - id: CMBootsBlackFilled
       - id: CMHandsBlackMarine
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
@@ -675,10 +674,10 @@
     - name: Hats
       choices: { CMHat: 1 }
       entries:
-      - id: CMHeadBeret # TODO: Port Officer Beret
+      - id: RMCHeadBeretCamo # TODO: Port Officer Beret
       - id: CMHeadCapPeakedService
-      - id: CMHeadCap # TODO: Port Patrol Cap
-      - id: CMHeadCapOfficer
+      - id: RMCHeadCapFlippableCamo # TODO: Port Patrol Cap
+      - id: RMCHeadCapOfficerCamo
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

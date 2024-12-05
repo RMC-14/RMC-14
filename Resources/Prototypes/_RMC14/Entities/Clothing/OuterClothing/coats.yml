@@ -175,12 +175,66 @@
   parent: RMCBaseJacket
   id: CMCoatASO
   name: auxiliary support officer jacket
+  suffix: Jungle
   description: A comfortable vest for officers who are expected to work long hours staring at rows of numbers and inspecting equipment from knives to torpedos to entire dropships.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
+
+- type: entity
+  parent: CMCoatASO
+  id: RMCCoatASOCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMCoatASO
+      Desert: RMCCoatASODesert
+      Snow: RMCCoatASOSnow
+      Classic: RMCCoatASOClassic
+      Urban: RMCCoatASOUrban
+
+- type: entity
+  parent: CMCoatASO
+  id: RMCCoatASODesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/desert.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/desert.rsi  
+
+- type: entity
+  parent: CMCoatASO
+  id: RMCCoatASOSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/snow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/snow.rsi  
+
+- type: entity
+  parent: CMCoatASO
+  id: RMCCoatASOClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/classic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/classic.rsi  
+
+- type: entity
+  parent: CMCoatASO
+  id: RMCCoatASOUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/urban.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/urban.rsi  
 
 # Commanding Officer
 - type: entity

@@ -70,7 +70,7 @@
   id: CMGearSeniorEnlistedAdvisor
   equipment:
     jumpsuit: CMJumpsuitBO
-    back: CMSatchelMarine
+    back: RMCSatchelMarineCamo
     shoes: CMBootsBrownFilled
     head: CMHeadCapDrill
     id: CMIDCardSeniorEnlistedAdvisor

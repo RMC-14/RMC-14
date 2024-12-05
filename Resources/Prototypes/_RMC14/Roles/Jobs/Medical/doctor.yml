@@ -38,7 +38,7 @@
   id: CMGearDoctor
   equipment:
     jumpsuit: CMScrubsBlue
-    back: CMSatchelMarine
+    back: RMCSatchelMarineCamo
     shoes: ClothingShoesColorWhite
     id: CMIDCardDoctor
     ears: CMHeadsetMedical # TODO RMC14 Medical Vender
@@ -47,8 +47,8 @@
   id: CMGearDoctorEquipped
   equipment:
     jumpsuit: CMScrubsBlue
-    outerClothing: CMCoatLong
-    back: CMSatchelMarine
+    outerClothing: RMCCoatServiceSnow
+    back: RMCSatchelMarineCamo
     gloves: CMHandsLatex
     shoes: RMCShoesWhite
     head: CMHeadCapSurgBlue

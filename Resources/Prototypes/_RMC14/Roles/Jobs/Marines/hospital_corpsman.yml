@@ -42,19 +42,19 @@
 - type: startingGear
   id: CMGearHospitalCorpsman
   equipment:
-    back: CMSatchelMarineMedic
+    back: RMCSatchelMarineMedicCamo
     id: CMDogtagHospitalCorpsman
 
 - type: startingGear
   id: CMGearHospitalCorpsmanEquipped
   equipment:
-    jumpsuit: CMJumpsuitMarineMedic
-    back: CMSatchelMarineMedic
+    jumpsuit: CMJumpsuitMarineMedicCamo
+    back: RMCSatchelMarineMedicCamo
     shoes: CMBootsBlackFilled
     gloves: CMHandsBlackMarine
     eyes: RMCGlassesMedicalHUDGlasses
-    head: CMArmorHelmetM10Medic
-    outerClothing: CMArmorM3Medium
+    head: RMCArmorHelmetM10MedicCamo
+    outerClothing: RMCArmorM3MediumPaddedCamo
     id: CMDogtagHospitalCorpsman
     ears: CMHeadsetAlphaMedic
     belt: CMBeltMedicBagFilled

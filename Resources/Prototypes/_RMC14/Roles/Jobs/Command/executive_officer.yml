@@ -57,8 +57,8 @@
     jumpsuit: CMJumpsuitBO
     back: CMSatchel
     shoes: RMCShoesLaceup
-    head: CMHeadCap
-    outerClothing: CMCoatOfficer
+    head: RMCHeadCapFlippableCamo
+    outerClothing: RMCCoatServiceCamo
     id: CMIDCardExecutiveOfficer
     ears: CMHeadsetSeniorCommand
 

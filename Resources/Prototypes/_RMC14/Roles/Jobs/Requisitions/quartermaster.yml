@@ -46,7 +46,7 @@
   id: CMGearQuartermaster
   equipment:
     jumpsuit: CMJumpsuitQM
-    back: CMSatchelMarineTech
+    back: RMCSatchelMarineTechCamo
     shoes: CMBootsBlack
     head: CMHeadCapCargo
     gloves: CMHandsInsulated

@@ -49,7 +49,7 @@
   id: CMGearResearcherEquipped
   equipment:
     jumpsuit: CMJumpsuitResearch
-    back: CMSatchelMarine
+    back: RMCSatchelMarineCamo
     gloves: CMHandsLatex
     shoes: RMCShoesLaceup
     id: CMIDCardResearcher

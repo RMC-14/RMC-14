@@ -103,7 +103,7 @@
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: WeaponRifleM4CJungle
-      Desert: WeaponRifleM54CDesert
+      Desert: WeaponRifleM54C
       Snow: WeaponRifleM4CSnow
       Classic: WeaponRifleM4CClassic
       Urban: WeaponRifleM4CUrban

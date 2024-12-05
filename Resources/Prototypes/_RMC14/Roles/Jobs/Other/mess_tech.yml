@@ -38,7 +38,7 @@
     jumpsuit: CMJumpsuitMessTech
     outerClothing: CMCoatMessTech
     gloves: CMHandsLatex
-    back: CMSatchelMarine
+    back: RMCSatchelMarineCamo
     shoes: CMBootsBlack
     id: CMIDCardMessTech
     ears: CMHeadsetChef

@@ -31,12 +31,12 @@
   - type: RMCArmorVariant
     defaultType: RMCArmorM3MediumPadded
     types:
-      Padded: RMCArmorM3MediumPadded
-      Padless: RMCArmorM3MediumPadless
-      Ridged: RMCArmorM3MediumRidged
-      Carrier: RMCArmorM3MediumCarrier
-      Skull: RMCArmorM3MediumSkull
-      Smooth: RMCArmorM3MediumSmooth
+      Padded: RMCArmorM3MediumPaddedCamo
+      Padless: RMCArmorM3MediumPadlessCamo
+      Ridged: RMCArmorM3MediumRidgedCamo
+      Carrier: RMCArmorM3MediumCarrierCamo
+      Skull: RMCArmorM3MediumSkullCamo
+      Smooth: RMCArmorM3MediumSmoothCamo
 
 - type: entity
   parent: CMArmorM3Medium
@@ -138,12 +138,12 @@
   - type: RMCArmorVariant
     defaultType: RMCArmorM3HeavyPadded
     types:
-      Padded: RMCArmorM3HeavyPadded
-      Padless: RMCArmorM3HeavyPadless
-      Ridged: RMCArmorM3HeavyRidged
-      Carrier: RMCArmorM3HeavyCarrier
-      Skull: RMCArmorM3HeavySkull
-      Smooth: RMCArmorM3HeavySmooth
+      Padded: RMCArmorM3HeavyPaddedCamo
+      Padless: RMCArmorM3HeavyPadlessCamo
+      Ridged: RMCArmorM3HeavyRidgedCamo
+      Carrier: RMCArmorM3HeavyCarrierCamo
+      Skull: RMCArmorM3HeavySkullCamo
+      Smooth: RMCArmorM3HeavySmoothCamo
 
 - type: entity
   parent: CMArmorM3Heavy
@@ -302,12 +302,12 @@
   - type: RMCArmorVariant
     defaultType: RMCArmorM3LightPadded
     types:
-      Padded: RMCArmorM3LightPadded
-      Padless: RMCArmorM3LightPadless
-      Ridged: RMCArmorM3LightRidged
-      Carrier: RMCArmorM3LightCarrier
-      Skull: RMCArmorM3LightSkull
-      Smooth: RMCArmorM3LightSmooth
+      Padded: RMCArmorM3LightPaddedCamo
+      Padless: RMCArmorM3LightPadlessCamo
+      Ridged: RMCArmorM3LightRidgedCamo
+      Carrier: RMCArmorM3LightCarrierCamo
+      Skull: RMCArmorM3LightSkullCamo
+      Smooth: RMCArmorM3LightSmoothCamo
 
 - type: entity
   parent: CMArmorM3Light
