@@ -32,7 +32,7 @@
         doAfter: 2
 
   - node: windowStrataReinforced
-    entity: CMWindowStrataReinforced
+    entity: RMCWindowStrataReinforced
     edges:
     - to: windowFrameStrataReinforced
       completed:
