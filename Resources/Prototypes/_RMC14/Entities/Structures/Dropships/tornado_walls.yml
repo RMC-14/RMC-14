@@ -243,6 +243,84 @@
   - type: Occluder
     enabled: false
 
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoEngineLeft61
+  name: engine
+  suffix: Left
+  components:
+  - type: Sprite
+    state: 61
+  - type: Icon
+    state: 61
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoEngineRight65
+  name: engine
+  suffix: Right
+  components:
+  - type: Sprite
+    state: 65
+  - type: Icon
+    state: 65
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoEngineLeft66
+  name: engine
+  suffix: Left
+  components:
+  - type: Sprite
+    state: 66
+  - type: Icon
+    state: 66
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoEngineRight70
+  name: engine
+  suffix: Right
+  components:
+  - type: Sprite
+    state: 70
+  - type: Icon
+    state: 70
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoEngineLeft71
+  name: engine
+  suffix: Left
+  components:
+  - type: Sprite
+    state: 71
+  - type: Icon
+    state: 71
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoEngineRight74
+  name: engine
+  suffix: Right
+  components:
+  - type: Sprite
+    state: 74
+  - type: Icon
+    state: 74
+  - type: Occluder
+    enabled: false
+
 # Walls -----
 - type: entity
   parent: RMCBaseTornadoWall
@@ -373,3 +451,190 @@
     state: 59
   - type: Icon
     state: 59
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWallStandard62
+  suffix: 62
+  components:
+  - type: Sprite
+    state: 62
+  - type: Icon
+    state: 62
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWallStandard64
+  suffix: 64
+  components:
+  - type: Sprite
+    state: 64
+  - type: Icon
+    state: 64
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWallStandard67
+  suffix: 67
+  components:
+  - type: Sprite
+    state: 67
+  - type: Icon
+    state: 67
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWallStandard68
+  suffix: 68
+  components:
+  - type: Sprite
+    state: 68
+  - type: Icon
+    state: 68
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWallStandard69
+  suffix: 69
+  components:
+  - type: Sprite
+    state: 69
+  - type: Icon
+    state: 69
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWallStandard72
+  suffix: 72
+  components:
+  - type: Sprite
+    state: 72
+  - type: Icon
+    state: 72
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWallStandard73
+  suffix: 73
+  components:
+  - type: Sprite
+    state: 73
+  - type: Icon
+    state: 73
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWallStandard76
+  suffix: 76
+  components:
+  - type: Sprite
+    state: 76
+  - type: Icon
+    state: 76
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWallStandard78
+  suffix: 78
+  components:
+  - type: Sprite
+    state: 78
+  - type: Icon
+    state: 78
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWallStandard79
+  suffix: 79
+  components:
+  - type: Sprite
+    state: 79
+  - type: Icon
+    state: 79
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWallStandard80
+  suffix: 80
+  components:
+  - type: Sprite
+    state: 80
+  - type: Icon
+    state: 80
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWallStandard83
+  suffix: 83
+  components:
+  - type: Sprite
+    state: 83
+  - type: Icon
+    state: 83
+
+# Windows ----
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWindow86
+  name: window
+  suffix: 86
+  components:
+  - type: Sprite
+    state: 86
+  - type: Icon
+    state: 86
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWindow89
+  name: window
+  suffix: 89
+  components:
+  - type: Sprite
+    state: 89
+  - type: Icon
+    state: 89
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWindow100
+  name: window
+  suffix: 100
+  components:
+  - type: Sprite
+    state: 100
+  - type: Icon
+    state: 100
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWindow101
+  name: window
+  suffix: 101
+  components:
+  - type: Sprite
+    state: 101
+  - type: Icon
+    state: 101
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWindow102
+  name: window
+  suffix: 102
+  components:
+  - type: Sprite
+    state: 102
+  - type: Icon
+    state: 102
+  - type: Occluder
+    enabled: false
