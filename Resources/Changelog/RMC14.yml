@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed hyposprays being able to draw from containers. Use a bottle on
-      it to refill it.
-    type: Fix
-  id: 564
-  time: '2024-08-18T04:19:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3669
 - author: blueDev2
   changes:
   - message: Drone evolution to queen cooldown after queen death is properly indicated
@@ -5048,5 +5040,12 @@
   id: 1063
   time: '2024-12-04T06:45:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5046
+- author: Vermidia
+  changes:
+  - message: Fixed Dancer Praetorian's dodge double speed buff counting downed marines.
+    type: Fix
+  id: 1064
+  time: '2024-12-05T23:55:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5058
 Name: RMC14
 Order: -1
