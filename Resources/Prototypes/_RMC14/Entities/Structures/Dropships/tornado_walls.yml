@@ -524,6 +524,16 @@
 
 - type: entity
   parent: RMCBaseTornadoWall
+  id: RMCTornadoWallStandard75
+  suffix: 75
+  components:
+  - type: Sprite
+    state: 75
+  - type: Icon
+    state: 75
+
+- type: entity
+  parent: RMCBaseTornadoWall
   id: RMCTornadoWallStandard76
   suffix: 76
   components:
@@ -572,6 +582,26 @@
   - type: Icon
     state: 83
 
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWallStandard95
+  suffix: 95
+  components:
+  - type: Sprite
+    state: 95
+  - type: Icon
+    state: 95
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWallStandard99
+  suffix: 99
+  components:
+  - type: Sprite
+    state: 99
+  - type: Icon
+    state: 99
+
 # Windows ----
 
 - type: entity
@@ -597,6 +627,19 @@
     state: 89
   - type: Icon
     state: 89
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseTornadoWall
+  id: RMCTornadoWindow97
+  name: window
+  suffix: 97
+  components:
+  - type: Sprite
+    state: 97
+  - type: Icon
+    state: 97
   - type: Occluder
     enabled: false
 
