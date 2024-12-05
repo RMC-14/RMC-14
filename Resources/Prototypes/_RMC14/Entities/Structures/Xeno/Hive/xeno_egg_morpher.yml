@@ -60,6 +60,7 @@
   parent: BaseHiveStructureNode
   name: Egg Morpher
   description: A disgusting biomass generator that reeks of rotting flesh. Looks like a marker for something.
+  suffix: Construction
   components:
   - type: Sprite
     layers:
