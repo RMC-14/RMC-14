@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Drone evolution to queen cooldown after queen death is properly indicated
-      in the popup.
-    type: Fix
-  id: 565
-  time: '2024-08-18T04:18:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3701
-- author: DrSmugleaf
-  changes:
-  - message: Fixed being able to shoot from within body bags and other containers.
-    type: Fix
-  id: 566
-  time: '2024-08-18T04:18:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3702
 - author: Vermidia
   changes:
   - message: Added Boiler's neurotoxin gas, which is more oriented for capturing and
@@ -5047,5 +5032,21 @@
   id: 1064
   time: '2024-12-05T23:55:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5058
+- author: Rainbeon
+  changes:
+  - message: Halved the speed bonus Frenzy gives while pulling to more closely match
+      CM13. This means overall pulling speeds are reduced by ~10% total.
+    type: Fix
+  id: 1065
+  time: '2024-12-05T23:56:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5057
+- author: Rainbeon
+  changes:
+  - message: Fixed Resin Hole Acid Traps not triggering when a Marine stands up after
+      being dragged in.
+    type: Fix
+  id: 1066
+  time: '2024-12-05T23:57:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5008
 Name: RMC14
 Order: -1
