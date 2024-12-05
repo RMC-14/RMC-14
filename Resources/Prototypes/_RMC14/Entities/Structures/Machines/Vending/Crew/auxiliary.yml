@@ -53,10 +53,13 @@
       choices: { CMPouches: 2 }
       entries:
       - id: RMCPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
         recommended: true
       - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment)
         recommended: true
       - id: RMCPouchFirstAidPills
+        name: first-aid pouch (pills)
         recommended: true
       - id: RMCPouchFirstResponder
       - id: RMCPouchFlareFilled

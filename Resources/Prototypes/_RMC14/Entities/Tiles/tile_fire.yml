@@ -1,0 +1,114 @@
+﻿- type: entity
+  id: RMCTileFire
+  name: fire
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 100
+        layer:
+        - MobMask
+        hard: false
+  - type: Sprite
+    sprite: _RMC14/Effects/fire.rsi
+    noRot: true
+    drawdepth: FloorObjects
+    layers:
+    - map: [ "base" ]
+      state: red_4
+  - type: Clickable
+  - type: InteractionOutline
+  - type: PointLight
+    radius: 2
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: RMCIgniteOnCollide
+    tileDamage:
+      types:
+        Heat: 0.5
+  - type: DamageOnCollide
+    damageDead: false
+    damage:
+      types:
+        Heat: 45
+  - type: TileFire
+    id: RMCTileFire
+    extinguishInstantly: true
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: red_1 }
+          Two: { state: red_2 }
+          Three: { state: red_3 }
+          Four: { state: red_4 }
+  - type: IgnorePredictionHit
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireGreen
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: green_4
+  - type: RMCIgniteOnCollide
+    maxStacks: 10
+    tileDamage:
+      types:
+        Heat: 1
+    armorMultiplier: 0.5
+    armorWhitelist:
+      components:
+      - Xeno
+  - type: TileFire
+    id: RMCTileFireGreen
+    extinguishInstantly: false
+    patExtinguishMultiplier: 2
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.666
+    sprintSpeedModifier: 0.666
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: green_1 }
+          Two: { state: green_2 }
+          Three: { state: green_3 }
+          Four: { state: green_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireOB
+  components:
+  - type: Sprite
+    color: "#C8FFFF"
+    layers:
+    - map: [ "base" ]
+      state: white_4
+  - type: RMCIgniteOnCollide
+    intensity: 80
+    duration: 70
+  - type: TileFire
+    id: RMCTileFireOB
+    extinguishInstantly: false
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: white_1 }
+          Two: { state: white_2 }
+          Three: { state: white_3 }
+          Four: { state: white_4 }

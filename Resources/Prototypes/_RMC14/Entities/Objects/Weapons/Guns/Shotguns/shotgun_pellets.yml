@@ -78,20 +78,14 @@
       falloff: 10
 
 - type: entity
-  parent: CMPelletShotgunBase
+  parent: CMPelletShotgunSlug
   id: CMPelletShotgunIncendiary
   name: incendiary slug
   components:
-  - type: CMArmorPiercing
-    amount: 20
   - type: Projectile
     damage:
       types:
         Heat: 55
-  - type: ProjectileSpread
-    proto: CMPelletShotgunIncendiary
-    count: 1
-    spread: 5
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 12
@@ -101,7 +95,7 @@
       falloff: 1
   - type: RMCProjectileAccuracy
     accuracy: 95
-  # todo rmc14 add burning
+  - type: IgniteOnProjectileHit
 
 - type: entity
   parent: CMPelletShotgunBase
@@ -159,11 +153,12 @@
   parent: CMPelletShotgunBuckshot
   id: CMPelletShotgunIncendiaryBuckshot
   name: incendiary buckshot shell
-  components: # TODO RMC14 add burning
+  components:
   - type: ProjectileSpread
     proto: CMPelletShotgunIncendiaryBuckshot
     count: 4
     spread: 20
+  - type: IgniteOnProjectileHit
 
 - type: entity
   parent: CMPelletShotgunBase

@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Serialization;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids;
 
@@ -9,5 +9,6 @@ public enum XenoVisualLayers : byte
     Hide,
     Crest,
     Fortify,
-    Ovipositor
+    Ovipositor,
+    Burrow
 }

@@ -196,7 +196,7 @@ public sealed class RMCStorageSystem : EntitySystem
 
     private void OnRemovedMarineFromContainer(Entity<MarineComponent> ent, ref EntGotRemovedFromContainerMessage args)
     {
-        if (_timing.IsFirstTimePredicted)
+        if (!HasComp<NoStunOnExitComponent>(args.Container.Owner) && _timing.IsFirstTimePredicted)
             _stun.TryStun(ent, STUN_STORAGE, true);
     }
 

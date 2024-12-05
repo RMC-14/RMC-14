@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/turf/walls/strata_ice.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "strata_ice"
+    },
+    {
+      "name": "strata_ice0",
+      "directions": 4
+    },
+    {
+      "name": "strata_ice1",
+      "directions": 4
+    },
+    {
+      "name": "strata_ice2",
+      "directions": 4
+    },
+    {
+      "name": "strata_ice3",
+      "directions": 4
+    },
+    {
+      "name": "strata_ice4",
+      "directions": 4
+    },
+    {
+      "name": "strata_ice5",
+      "directions": 4
+    },
+    {
+      "name": "strata_ice6",
+      "directions": 4
+    },
+    {
+      "name": "strata_ice7",
+      "directions": 4
+    }
+  ]
+}

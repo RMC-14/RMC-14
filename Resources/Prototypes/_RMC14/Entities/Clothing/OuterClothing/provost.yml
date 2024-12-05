@@ -12,8 +12,8 @@
     bio: 15
     explosionArmor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
-    walkModifier: 0.814
-    sprintModifier: 0.814
+    walkModifier: 0.725
+    sprintModifier: 0.725
   - type: Storage
     grid:
     - 0,0,5,1 # 3 slots

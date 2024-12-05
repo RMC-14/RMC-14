@@ -208,7 +208,9 @@ public sealed class XenoSpitSystem : EntitySystem
 
         if (spit.Comp.Slow > TimeSpan.Zero)
         {
-            EnsureComp<SlowedBySpitComponent>(target).ExpiresAt = _timing.CurTime + spit.Comp.Slow;
+            var slow = EnsureComp<SlowedBySpitComponent>(target);
+            slow.ExpiresAt = _timing.CurTime + spit.Comp.Slow;
+            slow.SuperSlow = spit.Comp.SuperSlow;
             _movementSpeed.RefreshMovementSpeedModifiers(target);
         }
 
@@ -308,7 +310,7 @@ public sealed class XenoSpitSystem : EntitySystem
     private void OnSlowedBySpitRefreshMovement(Entity<SlowedBySpitComponent> slowed, ref RefreshMovementSpeedModifiersEvent args)
     {
         if (slowed.Comp.ExpiresAt > _timing.CurTime)
-            args.ModifySpeed(slowed.Comp.Multiplier, slowed.Comp.Multiplier);
+            args.ModifySpeed( slowed.Comp.SuperSlow ? slowed.Comp.SuperMultiplier : slowed.Comp.Multiplier, slowed.Comp.Multiplier);
     }
 
     private void OnUserAcidedMapInit(Entity<UserAcidedComponent> ent, ref MapInitEvent args)

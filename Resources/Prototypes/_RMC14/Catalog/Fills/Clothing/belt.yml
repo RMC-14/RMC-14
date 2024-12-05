@@ -97,7 +97,9 @@
     - id: CMGrenadeHighExplosive
       amount: 5
     - id: CMGrenadeFrag
-      amount: 3
+      amount: 1
+    - id: RMCGrenadeIncendiary
+      amount: 2
     # TODO Original is 3 HEDP, 2 HIDP incen, 2 airburst frag, 1 airburst incen
 
 - type: entity
@@ -110,7 +112,9 @@
     - id: CMGrenadeHighExplosive
       amount: 12
     - id: CMGrenadeFrag
-      amount: 6
+      amount: 3
+    - id: RMCGrenadeIncendiary
+      amount: 3
     # TODO Original is 6 HEDP, 3 HIDP incen, 6 airburst frag, 3 airburst incen
 
 - type: entity
