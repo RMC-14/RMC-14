@@ -5,6 +5,7 @@
   description: cm-job-description-rifleman
   playTimeTracker: CMJobRifleman
   startingGear: CMGearRifleman
+  dummyStartingGear: CMGearRiflemanEquipped
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
@@ -40,7 +41,7 @@
     back: RMCSatchelMarineCamo
     shoes: CMBootsBlackFilled
     head: ArmorHelmetM10Camo
-    outerClothing: RMCArmorM3MediumPaddedCamo
+    outerClothing: RMCArmorM3MediumVariants
     gloves: CMHandsBlackMarine
     id: CMDogtagRifleman
     ears: CMHeadsetAlpha

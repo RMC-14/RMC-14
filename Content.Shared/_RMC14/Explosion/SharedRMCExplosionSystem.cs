@@ -70,6 +70,14 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         args.DamageCoefficient *= resistance;
     }
 
+    public void ChangeExplosionStunResistance(EntityUid ent, StunOnExplosionReceivedComponent? comp, bool isStunnable)
+    {
+        if (!Resolve(ent, ref comp, false))
+            return;
+
+        comp.Weak = isStunnable;
+    }
+
     private void OnStunOnExplosionReceivedBeforeExplode(Entity<StunOnExplosionReceivedComponent> ent, ref ExplosionReceivedEvent args)
     {
         var damage = args.Damage.GetTotal();
@@ -81,7 +89,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             factor *= 0.5;
 
         _sizeStun.TryGetSize(ent, out var size);
-        if (factor > 0 && ent.Comp.Weak && !HasComp<XenoFortifyComponent>(ent))
+        if (factor > 0 && ent.Comp.Weak)
         {
             var stunTime = TimeSpan.FromSeconds(factor / 2.5);
             _stun.TryStun(ent, stunTime, true);

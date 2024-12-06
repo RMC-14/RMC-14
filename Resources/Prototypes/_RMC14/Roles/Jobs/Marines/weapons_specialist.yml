@@ -9,6 +9,7 @@
     department: CMSquad
     time: 18000 # 5 hours
   startingGear: CMGearWeaponsSpecialist
+  dummyStartingGear: CMGearWeaponsSpecialistEquipped
   icon: "CMJobIconWeaponsSpecialist"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
@@ -56,7 +57,6 @@
     back: RMCSatchelMarineCamo
     shoes: CMBootsBlackFilled
     head: ArmorHelmetM10Camo
-    outerClothing: RMCArmorM3MediumPaddedCamo
     gloves: CMHandsBlackMarine
     id: CMDogtagWeaponsSpecialist
     ears: CMHeadsetAlpha

@@ -9,6 +9,7 @@
     department: CMSquad
     time: 3600 # 1 hour
   startingGear: CMGearCombatTech
+  dummyStartingGear: CMGearCombatTechEquipped
   icon: "CMJobIconCombatTech"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
@@ -49,9 +50,8 @@
     jumpsuit: CMJumpsuitMarineEngineerCamo
     back: RMCSatchelMarineTechCamo
     shoes: CMBootsBlackFilled
-    eyes: ClothingEyesGlassesMeson
     head: RMCArmorHelmetM10TechCamo
-    outerClothing: RMCArmorM3MediumPaddedCamo
+    outerClothing: RMCArmorM3MediumVariants
     gloves: CMHandsInsulated
     id: CMDogtagCombatTech
     ears: CMHeadsetAlphaEngineer

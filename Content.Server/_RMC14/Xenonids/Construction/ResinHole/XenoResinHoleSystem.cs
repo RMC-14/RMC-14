@@ -24,12 +24,15 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
+using Content.Shared.Standing;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Robust.Server.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Player;
 using static Content.Shared.Physics.CollisionGroup;
@@ -60,14 +63,19 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruct = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
 
     private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
 
     private static readonly EntProtoId ResinHolePrototype = "XenoResinHole";
+    private EntityQuery<PhysicsComponent> _physicsQuery;
+
     public override void Initialize()
     {
         base.Initialize();
+
+        _physicsQuery = GetEntityQuery<PhysicsComponent>();
 
         SubscribeLocalEvent<XenoComponent, XenoPlaceResinHoleActionEvent>(OnPlaceXenoResinHole);
         SubscribeLocalEvent<XenoComponent, XenoPlaceResinHoleDestroyWeedSourceDoAfterEvent>(OnCompleteRemoveWeedSource);
@@ -84,6 +92,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         SubscribeLocalEvent<XenoResinHoleComponent, StepTriggeredOffEvent>(OnXenoResinHoleStepTriggered);
         SubscribeLocalEvent<XenoResinHoleComponent, ExaminedEvent>(OnExamine);
 
+        SubscribeLocalEvent<InResinHoleRangeComponent, StoodEvent>(OnInRangeStand);
     }
 
     private void OnPlaceXenoResinHole(Entity<XenoComponent> xeno, ref XenoPlaceResinHoleActionEvent args)
@@ -370,6 +379,9 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         }
         else if (_mobState.IsDead(args.Tripper) || _standing.IsDown(args.Tripper))
         {
+            var inRange = EnsureComp<InResinHoleRangeComponent>(args.Tripper);
+            if (!inRange.HoleList.Contains(resinHole))
+                inRange.HoleList.Add(resinHole);
             args.Continue = false;
             return;
         }
@@ -384,6 +396,49 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             _stun.TryParalyze(args.Tripper, resinHole.Comp.StepStunDuration, true);
         }
         ActivateTrap(resinHole);
+    }
+
+    private void OnInRangeStand(Entity<InResinHoleRangeComponent> tripper, ref StoodEvent args)
+    {
+        for (var i  = tripper.Comp.HoleList.Count - 1; i >= 0; i--)
+        {
+            var resinHole = tripper.Comp.HoleList[i];
+
+            if (!TryComp<XenoResinHoleComponent>(resinHole, out var holeComponent))
+            {
+                tripper.Comp.HoleList.Remove(resinHole);
+                continue;
+            }
+
+            //Continue if trap has emptied or been replaced with a parasite
+            if (holeComponent.TrapPrototype is null || holeComponent.TrapPrototype == XenoResinHoleComponent.ParasitePrototype)
+                continue;
+
+            //Check if each Resin Hole is still colliding with tripper
+            if (!_physicsQuery.TryGetComponent(resinHole, out var physics))
+            {
+                tripper.Comp.HoleList.Remove(resinHole);
+                continue;
+            }
+
+            foreach (var ent in _physics.GetContactingEntities(resinHole, physics))
+            {
+                if (ent != tripper.Owner)
+                    continue;
+
+                ActivateTrap((resinHole, holeComponent));
+                tripper.Comp.HoleList.Remove(resinHole);
+
+                if (tripper.Comp.HoleList.Count == 0)
+                {
+                    RemCompDeferred<InResinHoleRangeComponent>(tripper);
+                }
+                //Only trigger one trap maximum per stand-up
+                return;
+            }
+        }
+
+        RemCompDeferred<InResinHoleRangeComponent>(tripper);
     }
 
     private bool CanPlaceResinHole(EntityUid user, EntityCoordinates coords)

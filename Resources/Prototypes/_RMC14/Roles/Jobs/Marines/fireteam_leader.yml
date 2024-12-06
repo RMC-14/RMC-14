@@ -9,6 +9,7 @@
     department: CMSquad
     time: 28800 # 8 hours
   startingGear: CMGearFireteamLeader
+  dummyStartingGear: CMGearFireteamLeaderEquipped
   icon: "CMJobIconFireteamLeader"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
