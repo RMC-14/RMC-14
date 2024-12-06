@@ -52,7 +52,7 @@
     jumpsuit: CMJumpsuitMarineMedic
     back: CMSatchelMarineMedic
     shoes: CMBootsBlackFilled
-    gloves: CMHandsBlackMarine
+    gloves: RMCHandsLatexMarine
     head: CMArmorHelmetM10Medic
     outerClothing: RMCArmorM3MediumVariants
     id: CMDogtagHospitalCorpsman
