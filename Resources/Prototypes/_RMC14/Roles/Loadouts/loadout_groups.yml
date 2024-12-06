@@ -3,7 +3,7 @@
 # need to make a backpack within loadouts or the storage items won't spawn
 - type: loadoutGroup
   id: MarineBackpack
-  name: Backpack
+  name: rmc-loadout-group-backpack
   minLimit: 1
   hidden: true
   loadouts:
@@ -11,7 +11,7 @@
 
 - type: loadoutGroup
   id: MarineLeatherBackpack
-  name: Backpack
+  name: rmc-loadout-group-backpack
   minLimit: 1
   hidden: true
   loadouts:
@@ -19,7 +19,7 @@
 
 - type: loadoutGroup
   id: MarineTechnicianBackpack
-  name: Backpack
+  name: rmc-loadout-group-backpack
   minLimit: 1
   hidden: true
   loadouts:
@@ -27,7 +27,7 @@
 
 - type: loadoutGroup
   id: MarineMedicBackpack
-  name: Backpack
+  name: rmc-loadout-group-backpack
   minLimit: 1
   hidden: true
   loadouts:
@@ -35,7 +35,7 @@
 
 - type: loadoutGroup
   id: MarineSecurityBackpack
-  name: Backpack
+  name: rmc-loadout-group-backpack
   minLimit: 1
   hidden: true
   loadouts:
