@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Reactive.Linq;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Stations;
@@ -124,6 +125,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private float _minimumSurvivors;
     private string _adminFaxAreaMap = string.Empty;
     private int _mapVoteExcludeLast;
+    private bool _useCarryoverVoting;
 
     private readonly List<MapId> _almayerMaps = [];
 
@@ -140,6 +142,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     [ViewVariables]
     public string? OperationName { get; private set; }
+
+    private Dictionary<string, int> _carryoverVotes = new();
 
     public override void Initialize()
     {
@@ -176,8 +180,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCSurvivorsMinimum, v => _minimumSurvivors = v, true);
         Subs.CVar(_config, RMCCVars.RMCAdminFaxAreaMap, v => _adminFaxAreaMap = v, true);
         Subs.CVar(_config, RMCCVars.RMCPlanetMapVoteExcludeLast, v => _mapVoteExcludeLast = v, true);
+        Subs.CVar(_config, RMCCVars.RMCUseCarryoverVoting, v => _useCarryoverVoting = v, true);
 
         ReloadPrototypes();
+
+        _carryoverVotes = _planetMaps.Split(",").ToDictionary(k => k, _ => 0);
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
@@ -1253,7 +1260,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         var vote = new VoteOptions
         {
             Title = Loc.GetString("rmc-distress-signal-next-map-title"),
-            Options = planets.Select(p => ((string, object)) (GetPlanetName(p), p)).ToList(),
+            Options = planets.Select(p => ((string, object))(_carryoverVotes[p] > 0 ? $"{GetPlanetName(p)} [+{_carryoverVotes[p]}]" : GetPlanetName(p), p)).ToList(),
             Duration = TimeSpan.FromMinutes(2),
         };
         vote.SetInitiatorOrServer(null);
@@ -1262,18 +1269,30 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         handle.OnFinished += (_, args) =>
         {
             string picked;
-            if (args.Winner == null)
+            
+            var voteResult = planets.Zip(args.Votes);
+            var adjustedVotes = voteResult.Select(p => (p.Item1, p.Item2 + _carryoverVotes[p.Item1])).ToList();
+            var maxVotes = adjustedVotes.Max(v => v.Item2);
+            var winningMaps = adjustedVotes.Where(item => item.Item2 == maxVotes).Select(item => item.Item1).ToList();
+
+            if (winningMaps.Count > 1)
             {
-                picked = (string) _random.Pick(args.Winners);
+                picked = _random.Pick(winningMaps);
                 var msg = Loc.GetString("rmc-distress-signal-next-map-tie", ("picked", GetPlanetName(picked)));
                 _chatManager.DispatchServerAnnouncement(msg);
             }
             else
             {
-                picked = (string) args.Winner;
+                picked = winningMaps.First();
                 var msg = Loc.GetString("rmc-distress-signal-next-map-win", ("winner", GetPlanetName(picked)));
                 _chatManager.DispatchServerAnnouncement(msg);
             }
+
+            foreach (var (planet, votes) in planets.Zip(args.Votes))
+            {
+                _carryoverVotes[planet] = _useCarryoverVoting ? _carryoverVotes[planet] + votes : 0;
+            }
+            _carryoverVotes[picked] = 0;
 
             SelectedPlanetMap = picked;
             SelectedPlanetMapName = GetPlanetName(picked);
