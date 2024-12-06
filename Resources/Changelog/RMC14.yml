@@ -1,36 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Added Boiler's neurotoxin gas, which is more oriented for capturing and
-      causes a slew of chaotic effects if it builds up enough.
-    type: Add
-  id: 567
-  time: '2024-08-18T04:17:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3649
-- author: diraven
-  changes:
-  - message: Xeno acid corrosion system was reworked and extended.
-    type: Add
-  - message: Flares now lose their burn time rather than disappear after a set amount
-      of time if corroded.
-    type: Add
-  - message: Barricades are now damaged over time rather than disappear after a set
-      amount of time if corroded.
-    type: Add
-  - message: Slightly nerfed acid corrosion times for them to be closer to CM13 values.
-    type: Tweak
-  id: 568
-  time: '2024-08-18T04:20:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3062
-- author: Vermidia
-  changes:
-  - message: Larva auto-burst time has been upped to 60 (from 20) seconds
-    type: Fix
-  - message: Larva can now move to burst immediately from their host
-    type: Fix
-  id: 569
-  time: '2024-08-18T04:21:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3700
 - author: Dutch-VanDerLinde
   changes:
   - message: You can now give most jumpsuits an alternative look by folding them.
@@ -5048,5 +5016,29 @@
   id: 1066
   time: '2024-12-05T23:57:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5008
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed auto punctuation causing messages like "Lol" to not sanitize
+    type: Fix
+  id: 1067
+  time: '2024-12-06T00:00:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5045
+- author: Rainbeon
+  changes:
+  - message: You can now freely switch hands and wield/unwield while deploying and
+      using a Bipod.
+    type: Tweak
+  id: 1068
+  time: '2024-12-06T00:01:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5052
+- author: Rainbeon
+  changes:
+  - message: The buttons for choosing resin structures for Drone castes are now much
+      more responsive. It will now immediately select the option you click on, instead
+      of cancelling if you drag your mouse away before letting go of the mouse button.
+    type: Tweak
+  id: 1069
+  time: '2024-12-06T00:00:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5050
 Name: RMC14
 Order: -1
