@@ -12,6 +12,7 @@
     department: CMSquad
     time: 3600 # 1 hour
   startingGear: CMGearHospitalCorpsman
+  dummyStartingGear: CMGearHospitalCorpsmanEquipped
   icon: "CMJobIconHospitalCorpsman"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
@@ -54,7 +55,7 @@
     gloves: CMHandsBlackMarine
     eyes: RMCGlassesMedicalHUDGlasses
     head: CMArmorHelmetM10Medic
-    outerClothing: CMArmorM3Medium
+    outerClothing: RMCArmorM3MediumVariants
     id: CMDogtagHospitalCorpsman
     ears: CMHeadsetAlphaMedic
     belt: CMBeltMedicBagFilled

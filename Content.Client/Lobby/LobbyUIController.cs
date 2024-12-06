@@ -6,6 +6,7 @@ using Content.Client.Inventory;
 using Content.Client.Lobby.UI;
 using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Station;
+using Content.Shared._RMC14.Armor;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
 using Content.Shared.GameTicking;
@@ -41,6 +42,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     [Dependency] private readonly JobRequirementsManager _requirements = default!;
     [Dependency] private readonly MarkingManager _markings = default!;
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+    [Dependency] private readonly CMArmorSystem _armorSystem = default!;
     [UISystemDependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
     [UISystemDependency] private readonly ClientInventorySystem _inventory = default!;
     [UISystemDependency] private readonly StationSpawningSystem _spawn = default!;
@@ -436,9 +438,14 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         if (!_prototypeManager.TryIndex(job.StartingGear, out var gear))
             return;
 
+        _prototypeManager.TryIndex(job.DummyStartingGear, out var dummyGear);
+
         foreach (var slot in slots)
         {
             var itemType = ((IEquipmentLoadout) gear).GetGear(slot.Name);
+
+            if (itemType == string.Empty && dummyGear != null)
+                itemType = ((IEquipmentLoadout) dummyGear).GetGear(slot.Name);
 
             if (_inventory.TryUnequip(dummy, slot.Name, out var unequippedItem, silent: true, force: true, reparent: false))
             {
@@ -448,6 +455,17 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
             if (itemType != string.Empty)
             {
                 var item = EntityManager.SpawnEntity(itemType, MapCoordinates.Nullspace);
+
+                if (EntityManager.TryGetComponent<RMCArmorVariantComponent>(item, out var variantComponent))
+                {
+                    var variantItemProtoId = _armorSystem.GetArmorVariant((item, variantComponent), profile.ArmorPreference);
+                    var variantItem = EntityManager.SpawnEntity(variantItemProtoId, MapCoordinates.Nullspace);
+                    _inventory.TryEquip(dummy, variantItem, slot.Name, true, true);
+                    EntityManager.QueueDeleteEntity(item);
+
+                    continue;
+                }
+
                 _inventory.TryEquip(dummy, item, slot.Name, true, true);
             }
         }
