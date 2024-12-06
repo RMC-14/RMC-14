@@ -469,23 +469,6 @@
   - FoodHealthyRMC
 
 - type: roleLoadout
-  id: JobCMLiaison
-  points: 7
-  groups:
-  - MarineLeatherBackpack
-  - EyewearRMC
-  - MasksRMC
-  - HeadwearRMC
-  - PaperworkRMC
-  - PlushiesRMC
-  - WeaponsRMC
-  - CannedDrinksRMC
-  - FlasksRMC
-  - FoodSweetsRMC
-  - FoodPackagedRMC
-  - FoodHealthyRMC
-
-- type: roleLoadout
   id: JobCMMessTech
   points: 7
   groups:

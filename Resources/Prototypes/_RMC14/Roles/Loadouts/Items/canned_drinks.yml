@@ -108,15 +108,6 @@
     - CMDrinkCanAle
 
 - type: loadout
-  id: AleIpaRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 3
-  storage:
-    back:
-    - CMDrinkCanAle
-
-- type: loadout
   id: LiteBeerRMC
   effects:
   - !type:PointsCostLoadoutEffect
