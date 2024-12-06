@@ -77,7 +77,7 @@
     back:
     - RMCFoodSnackChipsPepper
 
-# Food (sweets)
+# Food (healthy)
 - type: loadout
   id: AppleRMC
   cost: 2
