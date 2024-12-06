@@ -337,7 +337,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
     }
 
-    private void Heal(EntityUid target, FixedPoint2 amount)
+    public void Heal(EntityUid target, FixedPoint2 amount)
     {
         var damage = _rmcDamageable.DistributeHealing(target, BruteGroup, amount);
         var totalHeal = damage.GetTotal();

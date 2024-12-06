@@ -1,5 +1,8 @@
 using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Rest;
+using Content.Shared.Damage;
+using Content.Shared.Popups;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System;
@@ -16,7 +19,9 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    //[Dependency] private readonly SharedXenoHealSystem _heal = default!;
+    [Dependency] private readonly SharedXenoHealSystem _heal = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -32,9 +37,10 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
 
         while (recoverNodes.MoveNext(out var ent, out var comp))
         {
-            if (comp.NextHealAt > curTime)
+            if (comp.NextHealAt < curTime)
             {
                 TryHealRandomXeno((ent, comp));
+                comp.NextHealAt = null;
             }
 
             if (comp.NextHealAt is null)
@@ -51,7 +57,8 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
         var possibleTargets = new List<EntityUid>();
         foreach (var nearbyEntity in nearbyEntities)
         {
-            if (!_hive.FromSameHive(ent, nearbyEntity) || !HasComp<XenoComponent>(nearbyEntity))
+            if (!_hive.FromSameHive(ent, nearbyEntity) || !HasComp<XenoComponent>(nearbyEntity) || !HasComp<XenoRestingComponent>(nearbyEntity) ||
+                !TryComp<DamageableComponent>(nearbyEntity, out var damageComp) || damageComp.TotalDamage() <= 0)
             {
                 continue;
             }
@@ -65,7 +72,8 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
         }
         var selectedTarget = _random.Pick(possibleTargets);
 
-        // _heal.heal(selectedTarget, comp.HealAmount);
+        _heal.Heal(selectedTarget, comp.HealAmount);
+        _popup.PopupClient(Loc.GetString("rmc-xeno-construction-recovery-node-heal-target"), selectedTarget, selectedTarget);
         return true;
     }
 }

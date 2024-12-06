@@ -66,3 +66,5 @@ rmc-xeno-construction-egg-morpher-attempt-insert-non-parasite = You can't put th
 rmc-xeno-construction-egg-morpher-already-full = This egg morpher is already full!
 
 rmc-xeno-construction-egg-morpher-examine = Sheltering: {$cur_paras}/{$max_paras} parasites.
+
+rmc-xeno-construction-recovery-node-heal-target = You feel a warm aura envelop you.
