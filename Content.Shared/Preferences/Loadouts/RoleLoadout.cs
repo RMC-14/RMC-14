@@ -42,6 +42,8 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
             weh.SelectedLoadouts.Add(selected.Key, new List<Loadout>(selected.Value));
         }
 
+        weh.Points = Points;
+
         return weh;
     }
 
@@ -192,6 +194,8 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
 
             var loadouts = new List<Loadout>();
             SelectedLoadouts[group] = loadouts;
+
+            Points = roleProto.Points;
 
             if (groupProto.MinLimit > 0)
             {

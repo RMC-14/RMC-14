@@ -1,81 +1,63 @@
 # Eyewear
 - type: loadout
   id: AviatorsRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 2
+  cost: 2
   storage:
     back:
     - RMCGlassesAviators
 
 - type: loadout
   id: EyepatchRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 2
+  cost: 2
   storage:
     back:
     - ClothingEyesEyepatch
 
 - type: loadout
   id: GlassesRPGRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 2
+  cost: 2
   storage:
     back:
     - RMCGlassesMarineRpg
 
 - type: loadout
   id: GogglesRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 2
+  cost: 2
   storage:
     back:
     - RMCGogglesBallistic
 
 - type: loadout
   id: GogglesPrescriptionRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 2
+  cost: 2
   storage:
     back:
     - RMCGogglesPrescriptionBallistic
 
 - type: loadout
   id: GogglesAdvancedRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 2
+  cost: 2
   storage:
     back:
     - RMCGogglesBallisticSquad
 
 - type: loadout
   id: GogglesM1A1RMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 2
+  cost: 2
   storage:
     back:
     - RMCGogglesM1A1Ballistic
 
 - type: loadout
   id: PersonalShadesRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 2
+  cost: 2
   storage:
     back:
     - RMCSunglassesBig
 
 - type: loadout
   id: SunglassesRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 2
+  cost: 2
   storage:
     back:
     - RMCSunglasses

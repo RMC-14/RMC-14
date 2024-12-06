@@ -1,126 +1,98 @@
 # Canned Drinks
 - type: loadout
   id: BottledWaterRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 1
+  cost: 1
   storage:
     back:
     - CMDrinkWEYAWaterBottle30
 
 - type: loadout
   id: GrapeJuiceRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 2
+  cost: 2
   storage:
     back:
     - CMDrinkCanGrape
 
 - type: loadout
   id: LemonLimeRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 2
+  cost: 2
   storage:
     back:
     - CMDrinkCanLemonLime
 
 - type: loadout
   id: IcedTeaRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 2
+  cost: 2
   storage:
     back:
     - CMDrinkCanIcedTea
 
 - type: loadout
   id: ColaRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 2
+  cost: 2
   storage:
     back:
     - CMDrinkCanCola
 
 - type: loadout
   id: MountainWindRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 2
+  cost: 2
   storage:
     back:
     - CMDrinkCanMountainWind
 
 - type: loadout
   id: SpaceUpRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 2
+  cost: 2
   storage:
     back:
     - CMDrinkCanSpaceUp
 
 - type: loadout
   id: BobdaRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 2
+  cost: 2
   storage:
     back:
     - CMDrinkCanBobdaClassic
 
 - type: loadout
   id: DietBobdaRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 2
+  cost: 2
   storage:
     back:
     - CMDrinkCanBobdaDiet
 
 - type: loadout
   id: BodaRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 3
+  cost: 3
   storage:
     back:
     - CMDrinkCanBoda
 
 - type: loadout
   id: BodaPlyusRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 3
+  cost: 3
   storage:
     back:
     - CMDrinkCanBodaPlyus
 
 - type: loadout
   id: AleIpaRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 3
+  cost: 3
   storage:
     back:
     - CMDrinkCanAle
 
 - type: loadout
   id: LiteBeerRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 3
+  cost: 3
   storage:
     back:
     - CMDrinkCanBeerLite
 
 - type: loadout
   id: ThirteenLokoRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 3
+  cost: 3
   storage:
     back:
     - CMDrinkCanThirteenLoko

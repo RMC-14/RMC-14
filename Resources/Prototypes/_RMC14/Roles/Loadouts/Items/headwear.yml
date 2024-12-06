@@ -1,81 +1,63 @@
 # Headwear
 - type: loadout
   id: SquadBeretRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 3
+  cost: 3
   storage:
     back:
     - RMCHeadBeretSquad
 
 - type: loadout
   id: GreenBeretRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 3
+  cost: 3
   storage:
     back:
     - RMCHeadBeretGreen
 
 - type: loadout
   id: TanBeretRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 3
+  cost: 3
   storage:
     back:
     - CMHeadBeretTan
 
 - type: loadout
   id: CapRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 3
+  cost: 3
   storage:
     back:
     - CMHeadCap
 
 - type: loadout
   id: BrownHeadbandRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 3
+  cost: 3
   storage:
     back:
     - CMHeadBandBrown
 
 - type: loadout
   id: GreenHeadbandRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 3
+  cost: 3
   storage:
     back:
     - CMHeadBandGreen
 
 - type: loadout
   id: GrayHeadbandRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 3
+  cost: 3
   storage:
     back:
     - CMHeadBandGray
 
 - type: loadout
   id: RedHeadbandRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 3
+  cost: 3
   storage:
     back:
     - CMHeadBandRed
 
 - type: loadout
   id: TanHeadbandRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 3
+  cost: 3
   storage:
     back:
     - CMHeadBandTan
