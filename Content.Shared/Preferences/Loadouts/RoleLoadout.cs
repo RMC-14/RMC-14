@@ -166,6 +166,9 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
         {
             effect.Apply(this);
         }
+
+        if (loadoutProto.Cost != null && Points != null)
+            Points -= loadoutProto.Cost;
     }
 
     /// <summary>
@@ -245,6 +248,15 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
         {
             reason = FormattedMessage.FromUnformatted("loadouts-prototype-missing");
             return false;
+        }
+
+        if (loadoutProto.Cost != null && Points != null)
+        {
+            if (Points < loadoutProto.Cost)
+            {
+                reason = FormattedMessage.FromUnformatted(Loc.GetString("loadout-group-points-insufficient"));
+                return false;
+            }
         }
 
         var valid = true;
