@@ -58,7 +58,7 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
         foreach (var nearbyEntity in nearbyEntities)
         {
             if (!_hive.FromSameHive(ent, nearbyEntity) || !HasComp<XenoComponent>(nearbyEntity) || !HasComp<XenoRestingComponent>(nearbyEntity) ||
-                !TryComp<DamageableComponent>(nearbyEntity, out var damageComp) || damageComp.TotalDamage() <= 0)
+                !TryComp<DamageableComponent>(nearbyEntity, out var damageComp) || damageComp.TotalDamage <= 0)
             {
                 continue;
             }
