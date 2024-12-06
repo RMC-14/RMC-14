@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: crystalHex
-  changes:
-  - message: Added the drop pouch.
-    type: Add
-  id: 574
-  time: '2024-08-18T04:56:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3678
 - author: blueDev2
   changes:
   - message: Barricades now drop mats based on remaining health when deconstructed.
@@ -5034,5 +5027,13 @@
   id: 1073
   time: '2024-12-06T00:26:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4994
+- author: Rainbeon
+  changes:
+  - message: Fixed Burrowed Larva not registering as a new entity on the round end
+      summary.
+    type: Fix
+  id: 1074
+  time: '2024-12-06T04:18:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5064
 Name: RMC14
 Order: -1
