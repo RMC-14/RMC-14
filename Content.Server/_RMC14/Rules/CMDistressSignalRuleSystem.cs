@@ -1254,14 +1254,14 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         if (!_config.GetCVar(RMCCVars.RMCPlanetMapVote))
             return;
 
-        if (!_useCarryoverVoting) {
-            foreach (var (planet, votes) in planets.Zip(args.Votes))
+        var planets = _planetMaps.Split(",").ToList();
+        if (!_useCarryoverVoting)
+        {
+            foreach (var planet in planets)
             {
                 _carryoverVotes[planet] = 0;
             }
         }
-
-        var planets = _planetMaps.Split(",").ToList();
         planets.RemoveAll(p => _lastPlanetMaps.Contains(p));
 
         var vote = new VoteOptions
