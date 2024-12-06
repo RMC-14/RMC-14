@@ -1,0 +1,125 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorCorsatBlueBase
+  name: tiles-cm-default-blue
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlue0
+  sprite: /Textures/_RMC14/Tiles/corsat/blue_0.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlue1
+  sprite: /Textures/_RMC14/Tiles/corsat/blue_1.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlue2
+  sprite: /Textures/_RMC14/Tiles/corsat/blue_2.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlue3
+  sprite: /Textures/_RMC14/Tiles/corsat/blue_3.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlue4
+  sprite: /Textures/_RMC14/Tiles/corsat/blue_4.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlue5
+  sprite: /Textures/_RMC14/Tiles/corsat/blue_5.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlue6
+  sprite: /Textures/_RMC14/Tiles/corsat/blue_6.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlue7
+  sprite: /Textures/_RMC14/Tiles/corsat/blue_7.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlueCorner0
+  sprite: /Textures/_RMC14/Tiles/corsat/bluecorner_0.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlueCorner1
+  sprite: /Textures/_RMC14/Tiles/corsat/bluecorner_1.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlueCorner2
+  sprite: /Textures/_RMC14/Tiles/corsat/bluecorner_2.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlueCorner3
+  sprite: /Textures/_RMC14/Tiles/corsat/bluecorner_3.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlueGrey0
+  sprite: /Textures/_RMC14/Tiles/corsat/bluegrey_0.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlueGrey1
+  sprite: /Textures/_RMC14/Tiles/corsat/bluegrey_1.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlueGrey2
+  sprite: /Textures/_RMC14/Tiles/corsat/bluegrey_2.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlueGrey3
+  sprite: /Textures/_RMC14/Tiles/corsat/bluegrey_3.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlueGrey4
+  sprite: /Textures/_RMC14/Tiles/corsat/bluegrey_4.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlueGrey5
+  sprite: /Textures/_RMC14/Tiles/corsat/bluegrey_5.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlueGrey6
+  sprite: /Textures/_RMC14/Tiles/corsat/bluegrey_6.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlueGrey7
+  sprite: /Textures/_RMC14/Tiles/corsat/bluegrey_7.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlueGreyCorner0
+  sprite: /Textures/_RMC14/Tiles/corsat/bluegreycorner_0.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlueGreyCorner1
+  sprite: /Textures/_RMC14/Tiles/corsat/bluegreycorner_1.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlueGreyCorner2
+  sprite: /Textures/_RMC14/Tiles/corsat/bluegreycorner_2.png
+
+- type: tile
+  parent: CMFloorCorsatBlueBase
+  id: CMFloorCorsatBlueGreyCorner3
+  sprite: /Textures/_RMC14/Tiles/corsat/bluegreycorner_3.png

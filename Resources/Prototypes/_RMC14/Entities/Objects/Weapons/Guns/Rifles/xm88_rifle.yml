@@ -39,12 +39,12 @@
     sound:
       path: /Audio/_RMC14/Weapons/Guns/Pump/gun_boomslang_lever.ogg
   - type: BallisticAmmoProvider
-    cycleable: false
+    cycleable: true
     whitelist:
       tags:
       - RMCCartridge458SOCOM
     capacity: 9
-    proto: null
+    proto: RMCCartridge458SOCOM
     soundInsert:
       collection: CMShotgunLoad
   - type: GunDamageModifier

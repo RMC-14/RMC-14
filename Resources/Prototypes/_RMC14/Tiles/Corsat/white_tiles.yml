@@ -1,0 +1,125 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorCorsatWhiteBase
+  name: tiles-cm-default-white
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhite0
+  sprite: /Textures/_RMC14/Tiles/corsat/white_0.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhite1
+  sprite: /Textures/_RMC14/Tiles/corsat/white_1.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhite2
+  sprite: /Textures/_RMC14/Tiles/corsat/white_2.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhite3
+  sprite: /Textures/_RMC14/Tiles/corsat/white_3.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhite4
+  sprite: /Textures/_RMC14/Tiles/corsat/white_4.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhite5
+  sprite: /Textures/_RMC14/Tiles/corsat/white_5.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhite6
+  sprite: /Textures/_RMC14/Tiles/corsat/white_6.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhite7
+  sprite: /Textures/_RMC14/Tiles/corsat/white_7.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhiteCorner0
+  sprite: /Textures/_RMC14/Tiles/corsat/whitecorner_0.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhiteCorner1
+  sprite: /Textures/_RMC14/Tiles/corsat/whitecorner_1.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhiteCorner2
+  sprite: /Textures/_RMC14/Tiles/corsat/whitecorner_2.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhiteCorner3
+  sprite: /Textures/_RMC14/Tiles/corsat/whitecorner_3.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhiteTan0
+  sprite: /Textures/_RMC14/Tiles/corsat/whitetan_0.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhiteTan1
+  sprite: /Textures/_RMC14/Tiles/corsat/whitetan_1.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhiteTan2
+  sprite: /Textures/_RMC14/Tiles/corsat/whitetan_2.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhiteTan3
+  sprite: /Textures/_RMC14/Tiles/corsat/whitetan_3.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhiteTan4
+  sprite: /Textures/_RMC14/Tiles/corsat/whitetan_4.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhiteTan5
+  sprite: /Textures/_RMC14/Tiles/corsat/whitetan_5.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhiteTan6
+  sprite: /Textures/_RMC14/Tiles/corsat/whitetan_6.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhiteTan7
+  sprite: /Textures/_RMC14/Tiles/corsat/whitetan_7.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhiteTanCorner0
+  sprite: /Textures/_RMC14/Tiles/corsat/whitetancorner_0.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhiteTanCorner1
+  sprite: /Textures/_RMC14/Tiles/corsat/whitetancorner_1.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhiteTanCorner2
+  sprite: /Textures/_RMC14/Tiles/corsat/whitetancorner_2.png
+
+- type: tile
+  parent: CMFloorCorsatWhiteBase
+  id: CMFloorCorsatWhiteTanCorner3
+  sprite: /Textures/_RMC14/Tiles/corsat/whitetancorner_3.png

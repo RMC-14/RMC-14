@@ -1,16 +1,12 @@
 using Content.Shared.Actions;
+using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Movement.Events;
-using Content.Shared.Verbs;
-using Robust.Shared.Map;
-using Robust.Shared.Serialization;
-using Content.Shared.Movement.Events;
-using Content.Shared.Projectiles;
 using Content.Shared.StatusEffect;
-using Content.Shared.Verbs;
+using Robust.Shared.Map;
 using Robust.Shared.Physics.Events;
-using Content.Shared.Damage;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.Burrow;
 
@@ -29,8 +25,6 @@ public abstract partial class SharedXenoBurrowSystem : EntitySystem
         SubscribeLocalEvent<XenoBurrowComponent, BeforeStatusEffectAddedEvent>(PreventEffects);
         SubscribeLocalEvent<XenoBurrowComponent, BeforeDamageChangedEvent>(PreventDamage);
         SubscribeLocalEvent<XenoBurrowComponent, PreventCollideEvent>(PreventCollision);
-
-        //SubscribeLocalEvent<XenoBurrowComponent, >
     }
 
     private void PreventExamine(EntityUid ent, XenoBurrowComponent comp, ref ExamineAttemptEvent args)

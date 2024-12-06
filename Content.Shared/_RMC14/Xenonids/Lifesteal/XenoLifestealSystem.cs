@@ -20,6 +20,7 @@ public sealed class XenoLifestealSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _rmcEmote = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _targets = new();
 
@@ -41,6 +42,9 @@ public sealed class XenoLifestealSystem : EntitySystem
     private void OnMeleeHit(Entity<XenoLifestealComponent> xeno, ref MeleeHitEvent args)
     {
         if (!args.IsHit)
+            return;
+
+        if (!_xeno.CanHeal(xeno.Owner))
             return;
 
         var found = false;

@@ -32,9 +32,9 @@ public abstract class SharedRMCMapSystem : EntitySystem
     );
 
     public readonly ImmutableArray<Direction> CardinalDirections = ImmutableArray.Create(
+        Direction.North,
         Direction.South,
         Direction.East,
-        Direction.North,
         Direction.West
     );
 
@@ -121,16 +121,21 @@ public abstract class SharedRMCMapSystem : EntitySystem
         return IsTileBlocked(_transform.ToCoordinates(coordinates), group);
     }
 
-    public bool TileHasStructure(EntityCoordinates coordinates)
+    public bool TileHasAnyTag(EntityCoordinates coordinates, params ProtoId<TagPrototype>[] tag)
     {
         var anchored = GetAnchoredEntitiesEnumerator(coordinates);
         while (anchored.MoveNext(out var uid))
         {
-            if (_tag.HasTag(uid, StructureTag))
+            if (_tag.HasAnyTag(uid, tag))
                 return true;
         }
 
         return false;
+    }
+
+    public bool TileHasStructure(EntityCoordinates coordinates)
+    {
+        return TileHasAnyTag(coordinates, StructureTag);
     }
 
     public bool TryGetTileDef(EntityCoordinates coordinates, [NotNullWhen(true)] out ContentTileDefinition? def)

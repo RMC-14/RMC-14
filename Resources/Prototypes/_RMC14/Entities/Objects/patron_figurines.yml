@@ -632,8 +632,8 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronBeatriceBeaBootes
   name: Beatrice 'Bea' Bootes figurine
-  description: "Adopted and raised in Madawaska, Maine, this lesbian felinid tries her best. She'd go on to join the UNMC and become a sergeant made of tungsten. She lost her wife to a horrific accident and sunk to rock bottom, but she prevailed. She's a social democrat whose a leading member of The Doves. Her opponents throw rumors of her committing multiple crimes such as eating human organs, bombing a children's hospital plus a funeral, and being a SPP agent. She's quite silly but deeply caring. Aspires to be a CO.
-    :3"
+  description: "Adopted and raised in Madawaska, Maine, this lesbian felinid tries her best. She'd go on to join the UNMC and become a sergeant made of platinum and tungsten. She lost her wife to a horrific accident and sunk to rock bottom, but she prevailed. She's a social democrat whose a leading member of The Doves.
+    She works hard to ensure that her grunts all embrace in victory, alive and happy. She's also open to feedback. She's been accused of a war crime and even eating human organs, but we don't talk about that.:3"
   components:
   - type: Sprite
     state: beatrice_bea_bootes
@@ -661,6 +661,14 @@
     state: jester-who-helps
   - type: PatronFigurine
     id: 15d914f4-e436-496a-afe0-0e127297ed36
+  - type: EmitSoundOnUse
+    sound:
+      collection: FootstepJester
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 30
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -837,7 +845,7 @@
         volume: 5
         maxDistance: 1
   - type: UseDelay
-    delay: 180.0
+    delay: 30
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -849,3 +857,37 @@
     state: xalos-of-europa
   - type: PatronFigurine
     id: f1c563b6-24cd-4212-9005-b67a07a7e5da
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCarlosMiguel
+  name: Carlos Miguel figurine
+  description: "Ex Sergeant of the Portuguese Army. Now serving the UNMC, always protecting his comrades and his booze."
+  components:
+  - type: Sprite
+    state: carlos_miguel
+  - type: PatronFigurine
+    id: e134647e-688a-40b3-a5b4-30df41dafa67
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronEmilyKlutzRathen
+  name: Emily 'Klutz' Rathen figurine
+  description: "A figurine of Emily 'Klutz' Rathen. It looks chipped and scuffed from being dropped repeatedly. The base is very small and uneven, making it want to fall over at all times."
+  components:
+  - type: Sprite
+    state: emily_klutz_rathen
+  - type: PatronFigurine
+    id: e8819228-95ea-4a3b-8e1c-0e7eaa55cb90
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRanuko
+  name: Ranuko figurine
+  description: "You know a patch up with a smile is close at hand with this Avali."
+  components:
+  - type: Sprite
+    state: ranuko
+  - type: PatronFigurine
+    id: 6d896f2e-3a36-4c55-bd80-eb72242de43b
+

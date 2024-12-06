@@ -47,7 +47,6 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 
     private int _starting;
     private int _gain;
-    private int _startingDollarsPerMarine;
 
     private readonly HashSet<Entity<MobStateComponent>> _toPit = new();
 
@@ -69,7 +68,6 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 
         Subs.CVar(_config, RMCCVars.RMCRequisitionsStartingBalance, v => _starting = v, true);
         Subs.CVar(_config, RMCCVars.RMCRequisitionsBalanceGain, v => _gain = v, true);
-        Subs.CVar(_config, RMCCVars.RMCRequisitionsStartingDollarsPerMarine, v => _startingDollarsPerMarine = v, true);
     }
 
     private void OnComputerMapInit(Entity<RequisitionsComputerComponent> ent, ref MapInitEvent args)
@@ -488,7 +486,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
                     marines++;
                 }
 
-                account.Balance = _starting + marines * _startingDollarsPerMarine;
+                account.Balance = _starting + marines * StartingDollarsPerMarine;
                 Dirty(uid, account);
 
                 updateUI = true;

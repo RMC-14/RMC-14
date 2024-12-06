@@ -1,8 +1,10 @@
-﻿using System.Numerics;
+﻿using System.Linq;
+using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Sprite;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Access.Components;
 using Content.Shared.Damage;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
@@ -11,6 +13,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.PowerCell;
 using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Melee;
@@ -55,6 +58,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         SubscribeLocalEvent<RMCApcComponent, EntityTerminatingEvent>(OnApcRemove);
         SubscribeLocalEvent<RMCApcComponent, BreakageEventArgs>(OnApcBreakage);
         SubscribeLocalEvent<RMCApcComponent, InteractUsingEvent>(OnApcInteractUsing);
+        SubscribeLocalEvent<RMCApcComponent, InteractHandEvent>(OnApcInteractHand);
         SubscribeLocalEvent<RMCApcComponent, ActivatableUIOpenAttemptEvent>(OnApcActivatableUIOpenAttempt);
         SubscribeLocalEvent<RMCApcComponent, ExaminedEvent>(OnApcExamined);
 
@@ -76,6 +80,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             subs =>
             {
                 subs.Event<RMCApcSetChannelBuiMsg>(OnApcSetChannelBuiMsg);
+                subs.Event<RMCApcCoverBuiMsg>(OnApcCover);
             });
     }
 
@@ -136,27 +141,137 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
     private void OnApcBreakage(Entity<RMCApcComponent> ent, ref BreakageEventArgs args)
     {
+        ent.Comp.State = RMCApcState.WiresExposed;
         ent.Comp.Broken = true;
         Dirty(ent);
-        _appearance.SetData(ent, RMCApcVisualsLayers.Layer, RMCApcVisuals.Broken);
+
+        _appearance.SetData(ent, RMCApcVisualsLayers.Layer, RMCApcState.WiresExposed);
     }
 
     private void OnApcInteractUsing(Entity<RMCApcComponent> ent, ref InteractUsingEvent args)
     {
-        if (!_tool.HasQuality(args.Used, ent.Comp.RepairTool))
+        var user = args.User;
+        if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
+        {
+            _popup.PopupClient($"You don't know how to use the {Name(ent)}'s interface.", ent, user, SmallCaution);
             return;
+        }
+
+        var used = args.Used;
+        if (_tool.HasQuality(used, ent.Comp.CrowbarTool))
+        {
+            switch (ent.Comp.State)
+            {
+                case RMCApcState.Working:
+                case RMCApcState.WiresExposed:
+                    if (ent.Comp.CoverLockedButton)
+                    {
+                        _popup.PopupClient("The cover is locked and cannot be opened.", user, user, MediumCaution);
+                        return;
+                    }
+
+                    ent.Comp.State =
+                        _container.TryGetContainer(ent, ent.Comp.CellContainerSlot, out var container) &&
+                        container.ContainedEntities.Count > 0
+                            ? RMCApcState.CoverOpenBattery
+                            : RMCApcState.CoverOpenNoBattery;
+                    Dirty(ent);
+                    _appearance.SetData(ent, RMCApcVisualsLayers.Layer, ent.Comp.State);
+                    break;
+                case RMCApcState.CoverOpenBattery:
+                case RMCApcState.CoverOpenNoBattery:
+                    ent.Comp.State = RMCApcState.Working;
+                    Dirty(ent);
+                    _appearance.SetData(ent, RMCApcVisualsLayers.Layer, ent.Comp.State);
+                    break;
+            }
+        }
+
+        if (HasComp<PowerCellComponent>(used) && ent.Comp.State == RMCApcState.CoverOpenNoBattery)
+        {
+            var container = _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.CellContainerSlot);
+            _hands.TryDropIntoContainer(user, used, container);
+            if (container.ContainedEntities.Count > 0)
+            {
+                ent.Comp.State = RMCApcState.CoverOpenBattery;
+                Dirty(ent);
+                _appearance.SetData(ent, RMCApcVisualsLayers.Layer, ent.Comp.State);
+                ToUpdate.Add(ent);
+            }
+
+            return;
+        }
+
+        if (TryComp(used, out AccessComponent? access))
+        {
+            var hasAccess = access.Tags.Any(t => ent.Comp.Access.Contains(t));
+            if (!hasAccess)
+            {
+                _popup.PopupClient("Access denied.", ent, user, SmallCaution);
+                return;
+            }
+
+            ent.Comp.Locked = !ent.Comp.Locked;
+            Dirty(ent);
+        }
+
+        if (!_tool.HasQuality(used, ent.Comp.RepairTool))
+            return;
+
+        ent.Comp.State = ent.Comp.State switch
+        {
+            RMCApcState.Working => RMCApcState.WiresExposed,
+            RMCApcState.WiresExposed => RMCApcState.Working,
+            _ => ent.Comp.State,
+        };
 
         ent.Comp.Broken = false;
         Dirty(ent);
-        _appearance.SetData(ent, RMCApcVisualsLayers.Layer, RMCApcVisuals.Working);
+
+        _appearance.SetData(ent, RMCApcVisualsLayers.Layer, ent.Comp.State);
 
         if (TryComp(ent, out DamageableComponent? damageable))
             _damageable.SetAllDamage(ent, damageable, FixedPoint2.Zero);
     }
 
+    private void OnApcInteractHand(Entity<RMCApcComponent> ent, ref InteractHandEvent args)
+    {
+        if (ent.Comp.State != RMCApcState.CoverOpenBattery)
+            return;
+
+        if (!_container.TryGetContainer(ent, ent.Comp.CellContainerSlot, out var container))
+            return;
+
+        foreach (var contained in container.ContainedEntities)
+        {
+            if (_container.Remove(contained, container))
+            {
+                _hands.TryPickupAnyHand(args.User, contained);
+
+                ent.Comp.State = RMCApcState.CoverOpenNoBattery;
+                ent.Comp.ChargePercentage = 0;
+                Dirty(ent);
+
+                _appearance.SetData(ent, RMCApcVisualsLayers.Layer, ent.Comp.State);
+                ToUpdate.Add(ent);
+                break;
+            }
+        }
+    }
+
     private void OnApcActivatableUIOpenAttempt(Entity<RMCApcComponent> ent, ref ActivatableUIOpenAttemptEvent args)
     {
-        if (ent.Comp.Broken)
+        if (args.Cancelled)
+            return;
+
+        if (!_skills.HasSkill(args.User, ent.Comp.Skill, ent.Comp.SkillLevel))
+        {
+            args.Cancel();
+            _popup.PopupClient($"You don't know how to use the {Name(ent)}'s interface.", ent, args.User, SmallCaution);
+            return;
+        }
+
+        if (ent.Comp.State != RMCApcState.Working)
             args.Cancel();
     }
 
@@ -167,8 +282,20 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
         using (args.PushGroup(nameof(RMCApcComponent)))
         {
-            if (ent.Comp.Broken)
-                args.PushMarkup("Use a [color=cyan]screwdriver[/color] to repair it!");
+            var markup = ent.Comp.State switch
+            {
+                RMCApcState.Working => "Use:\n" +
+                                       "- An [color=cyan]engineering ID[/color] to lock or unlock the interface.\n" +
+                                       "- A [color=cyan]crowbar[/color] to open the cover.\n" +
+                                       "- A [color=cyan]screwdriver[/color] to expose the wires.",
+                RMCApcState.WiresExposed => "Use a [color=cyan]screwdriver[/color] to unexpose the wires or a [color=cyan]crowbar[/color] to open the cover!",
+                RMCApcState.CoverOpenBattery => "Use an [color=cyan]empty hand[/color] to remove the battery or a [color=cyan]crowbar[/color] to close the cover!",
+                RMCApcState.CoverOpenNoBattery => "Use a [color=cyan]battery[/color] to put in a battery!",
+                _ => null,
+            };
+
+            if (markup != null)
+                args.PushMarkup(markup);
         }
     }
 
@@ -435,13 +562,24 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
     private void OnApcSetChannelBuiMsg(Entity<RMCApcComponent> ent, ref RMCApcSetChannelBuiMsg args)
     {
-        return; // TODO RMC14
-
+        return;
         var channel = (int) args.Channel;
         if (args.Channel < 0 || channel >= ent.Comp.Channels.Length)
             return;
 
-        ent.Comp.Channels[channel].On = args.On;
+        ent.Comp.Channels[channel].Button = args.State;
+        Dirty(ent);
+    }
+
+    private void OnApcCover(Entity<RMCApcComponent> ent, ref RMCApcCoverBuiMsg args)
+    {
+        if (ent.Comp.State != RMCApcState.Working ||
+            ent.Comp.Locked)
+        {
+            return;
+        }
+
+        ent.Comp.CoverLockedButton = !ent.Comp.CoverLockedButton;
         Dirty(ent);
     }
 

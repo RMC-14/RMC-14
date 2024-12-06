@@ -103,9 +103,10 @@
   - type: Flammable
     fireSpread: false
     canResistFire: true
+    firestackFade: 1
     damage:
       types:
-        Heat: 3
+        Heat: 1
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Generic_mob_burning
@@ -141,7 +142,6 @@
   - type: Infectable
   - type: Tackleable
   - type: Tackle
-    stun: 10
   - type: XenoNestable
   - type: Devourable
   - type: ImmuneToClothingRequiredStepTrigger
@@ -207,7 +207,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      125: Critical
+      150: Critical
       200: Dead
   - type: MobStateActions
     actions:
@@ -267,3 +267,8 @@
   - type: NewPlayerLabel
   - type: MarineMapTracked
   - type: Evasion
+  - type: CanBeFirePatted
+  - type: FirePatter
+    blacklist:
+      components:
+      - Xeno

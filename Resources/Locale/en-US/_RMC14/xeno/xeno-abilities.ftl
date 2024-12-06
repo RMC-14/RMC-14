@@ -171,6 +171,7 @@ rmc-xeno-retrieve-finish-target = We are pulled toward {$user}!
 # Aid
 rmc-xeno-aid-self = We cannot heal ourself!
 rmc-xeno-aid-dead = {$target} is already dead!
+rmc-xeno-aid-on-fire = We cannot heal this xeno!
 rmc-xeno-heal-self = We heal {$target}!
 rmc-xeno-heal-target = We are healed by {$target}!
 rmc-xeno-heal-others = {$user} places its claws on {$target}, and its wounds are quickly sealed!
