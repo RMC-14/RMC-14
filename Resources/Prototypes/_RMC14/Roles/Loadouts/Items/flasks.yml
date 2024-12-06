@@ -1,0 +1,27 @@
+# Flasks
+- type: loadout
+  id: CanteenRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - CMCanteen
+
+- type: loadout
+  id: MetalFlaskRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - CMMetalFlask
+
+- type: loadout
+  id: MetalFlaskRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - CMMetalFlask

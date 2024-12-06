@@ -39,14 +39,12 @@
 - type: startingGear
   id: CMGearFireteamLeader
   equipment:
-    back: CMSatchelMarine
     id: CMDogtagFireteamLeader
 
 - type: startingGear
   id: CMGearFireteamLeaderEquipped
   equipment:
     jumpsuit: JumpsuitMarine
-    back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: CMArmorHelmetM12
     outerClothing: CMArmorM4

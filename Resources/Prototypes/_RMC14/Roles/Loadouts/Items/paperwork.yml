@@ -1,0 +1,81 @@
+# Paperwork
+- type: loadout
+  id: PenRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 1
+  storage:
+    back:
+    - CMPen
+
+- type: loadout
+  id: PenFountainRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 3
+  storage:
+    back:
+    - CMPenFountain
+
+- type: loadout
+  id: PaperRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 1
+  storage:
+    back:
+    - CMPaper
+
+- type: loadout
+  id: ClipboardRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - CMClipboard
+
+- type: loadout
+  id: FolderBlackRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - CMFolderBlack
+
+- type: loadout
+  id: FolderBlueRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - CMFolderBlue
+
+- type: loadout
+  id: FolderRedRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - CMFolderRed
+
+- type: loadout
+  id: FolderWhiteRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - CMFolderWhite
+
+- type: loadout
+  id: FolderYellowRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - CMFolderYellow

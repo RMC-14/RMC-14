@@ -227,7 +227,7 @@
   id: RMCGearCorpsePrisonGuard
   equipment:
     jumpsuit: ClothingUniformJumpsuitSec
-    back: CMSatchelSecurity
+    Security
     shoes: RMCShoesJackboots
     gloves: CMHandsBlackMarine
     id: CMIDCardColonist

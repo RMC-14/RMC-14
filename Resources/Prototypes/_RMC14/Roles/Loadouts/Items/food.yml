@@ -1,0 +1,164 @@
+# Food (sweets)
+- type: loadout
+  id: ChocolateBarRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - FoodSnackChocolateBar
+
+- type: loadout
+  id: CookieRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - FoodBakedCookie
+
+- type: loadout
+  id: FortuneCookieRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 3
+  storage:
+    back:
+    - CMFortuneCookie
+
+- type: loadout
+  id: DonutRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - RMCFoodDonut
+
+# Food (packaged)
+- type: loadout
+  id: JerkyRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - FoodSnackSus
+
+- type: loadout
+  id: MeatBarRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - RMCFoodSnackEATBar
+
+- type: loadout
+  id: ChipsRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - RMCFoodSnackKeplarCrisps
+
+- type: loadout
+  id: BurritoRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - RMCFoodSnackBurritoPackaged
+
+- type: loadout
+  id: CheeseburgerRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - RMCFoodSnackCheeseburgerPackaged
+
+- type: loadout
+  id: HotdogRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - RMCFoodSnackHotdogPackaged
+
+- type: loadout
+  id: PepperChipsRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - RMCFoodSnackChipsPepper
+
+# Food (sweets)
+- type: loadout
+  id: AppleRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - FoodApple
+
+- type: loadout
+  id: CarrotRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - FoodCarrot
+
+- type: loadout
+  id: CornRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - FoodCorn
+
+- type: loadout
+  id: LemonRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - FoodLemon
+
+- type: loadout
+  id: LimeRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - FoodLime
+
+- type: loadout
+  id: OrangeRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - FoodOrange
+
+- type: loadout
+  id: PotatoRMC
+  effects:
+  - !type:PointsCostLoadoutEffect
+    cost: 2
+  storage:
+    back:
+    - FoodPotato
