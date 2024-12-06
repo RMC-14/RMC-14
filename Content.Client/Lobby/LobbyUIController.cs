@@ -42,12 +42,12 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     [Dependency] private readonly JobRequirementsManager _requirements = default!;
     [Dependency] private readonly MarkingManager _markings = default!;
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
-    [Dependency] private readonly CMArmorSystem _armorSystem = default!;
     [UISystemDependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
     [UISystemDependency] private readonly ClientInventorySystem _inventory = default!;
     [UISystemDependency] private readonly StationSpawningSystem _spawn = default!;
     [UISystemDependency] private readonly GuidebookSystem _guide = default!;
     [UISystemDependency] private readonly LoadoutSystem _loadouts = default!;
+    [UISystemDependency] private readonly CMArmorSystem _armorSystem = default!;
 
     private CharacterSetupGui? _characterSetup;
     private HumanoidProfileEditor? _profileEditor;
