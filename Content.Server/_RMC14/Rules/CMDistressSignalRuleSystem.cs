@@ -1254,6 +1254,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         if (!_config.GetCVar(RMCCVars.RMCPlanetMapVote))
             return;
 
+        if (!_useCarryoverVoting) {
+            foreach (var (planet, votes) in planets.Zip(args.Votes))
+            {
+                _carryoverVotes[planet] = 0;
+            }
+        }
+
         var planets = _planetMaps.Split(",").ToList();
         planets.RemoveAll(p => _lastPlanetMaps.Contains(p));
 
@@ -1269,7 +1276,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         handle.OnFinished += (_, args) =>
         {
             string picked;
-            
+
             var voteResult = planets.Zip(args.Votes);
             var adjustedVotes = voteResult.Select(p => (p.Item1, p.Item2 + _carryoverVotes[p.Item1])).ToList();
             var maxVotes = adjustedVotes.Max(v => v.Item2);
