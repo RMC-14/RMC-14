@@ -1,9 +1,7 @@
 # Weapons
 - type: loadout
   id: HoldoutPistolRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 4
+  cost: 4
   storage:
     back:
     - RMCD18Case

@@ -1,63 +1,49 @@
 # Plushies
 - type: loadout
   id: PlushieFarwaRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 4
+  cost: 4
   storage:
     back:
     - CMPlushieFarwa
 
 - type: loadout
   id: PlushieBarricadeRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 4
+  cost: 4
   storage:
     back:
     - CMPlushieBarricade
 
 - type: loadout
   id: PlushieBeeRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 4
+  cost: 4
   storage:
     back:
     - CMPlushieBee
 
 - type: loadout
   id: PlushieSharkRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 4
+  cost: 4
   storage:
     back:
     - PlushieSharkGrey
 
 - type: loadout
   id: PlushieMothRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 4
+  cost: 4
   storage:
     back:
     - PlushieMoth
 
 - type: loadout
   id: PlushieRockRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 4
+  cost: 4
   storage:
     back:
     - CMPlushieRock
 
 - type: loadout
   id: PlushieTherapyRMC
-  effects:
-  - !type:PointsCostLoadoutEffect
-    cost: 4
+  cost: 4
   storage:
     back:
     - CMPlushieTherapy
