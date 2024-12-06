@@ -164,7 +164,7 @@
   id: FoodSweetsRMC
   name: rmc-loadout-group-foods-sweets
   minLimit: 0
-  maxLimit: 2
+  maxLimit: 4
   loadouts:
   - ChocolateBarRMC
   - CookieRMC
@@ -191,7 +191,7 @@
   id: FoodHealthyRMC
   name: rmc-loadout-group-foods-healthy
   minLimit: 0
-  maxLimit: 2
+  maxLimit: 7
   loadouts:
   - AppleRMC
   - CarrotRMC
