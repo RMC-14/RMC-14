@@ -891,3 +891,14 @@
   - type: PatronFigurine
     id: 6d896f2e-3a36-4c55-bd80-eb72242de43b
 
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronConsumes-the-Petrol
+  name: Consumes-the-Petrol figurine
+  description: "That one lizard everyone tolerates. No, not that one. The other one. No, the other other- you know what, forget it."
+  components:
+  - type: Sprite
+    state: consumes-the-petrol
+  - type: PatronFigurine
+    id: 25ab89f4-a9a7-44c7-8538-c94e8a086e92
