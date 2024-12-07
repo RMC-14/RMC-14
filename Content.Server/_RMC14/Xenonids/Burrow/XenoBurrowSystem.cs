@@ -293,7 +293,7 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
             }
 
             _transform.Unanchor(ent);
-            _physics.SetBodyType(ent, BodyType.Kinematic)
+            _physics.SetBodyType(ent, BodyType.Kinematic);
 
             _audio.PlayPvs(comp.BurrowUpSound, ent);
         }
