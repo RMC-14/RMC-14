@@ -8,7 +8,7 @@
 
 - type: entity
   parent: CMAirlockCommand
-  id: CMAirlockCommandSeniorLocked
+  id: CMAirlockSeniorLocked
   suffix: Senior, Locked
   components:
   - type: AccessReader
