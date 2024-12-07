@@ -233,14 +233,14 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                 if (marine.Camera == default)
                 {
                     var watchLabel = new RichTextLabel();
-                    watchLabel.SetMarkupPermissive($"[color={YellowColor}]{name} (NO HELMET)[/color]\n{Loc.GetString("rmc-overwatch-marine-pronouns", ("target", _entity.GetEntity(marine.Id)))}");
+                    watchLabel.SetMarkupPermissive($"[color={YellowColor}]{name} (NO HELMET)[/color]\n{Loc.GetString("rmc-overwatch-marine-pronouns", ("target", _entity.GetEntity(marine.Marine)))}");
                     watchControl = watchLabel;
                 }
                 else
                 {
                     var watchButton = new Button
                     {
-                        Text = $"{marine.Name}\n{Loc.GetString("rmc-overwatch-marine-pronouns", ("target", _entity.GetEntity(marine.Id)))}",
+                        Text = $"{marine.Name}\n{Loc.GetString("rmc-overwatch-marine-pronouns", ("target", _entity.GetEntity(marine.Marine)))}",
                         StyleClasses = { "OpenBoth" },
                         Margin = margin,
                     };
