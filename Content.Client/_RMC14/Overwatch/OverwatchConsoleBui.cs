@@ -26,6 +26,8 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
     private const string RedColor = "#A42625";
     private const string YellowColor = "#CED22B";
 
+    private const int PanelMinHeight = 52;
+
     [ViewVariables]
     private OverwatchConsoleWindow? _window;
 
@@ -249,12 +251,12 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                     watchControl = watchButton;
                 }
 
-                var panel = CreatePanel(50);
+                var panel = CreatePanel(PanelMinHeight);
                 watchControl.Margin = margin;
                 panel.AddChild(watchControl);
                 monitor.Names.AddChild(panel);
 
-                panel = CreatePanel(50);
+                panel = CreatePanel(PanelMinHeight);
                 panel.AddChild(new Label
                 {
                     Text = roleName,
@@ -274,7 +276,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
 
                 var state = new RichTextLabel { Margin = margin };
                 state.SetMarkupPermissive($"[color={color}]{mobState}[/color]");
-                panel = CreatePanel(50);
+                panel = CreatePanel(PanelMinHeight);
                 panel.AddChild(state);
                 monitor.States.AddChild(panel);
 
@@ -323,13 +325,13 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                 promoteButton.OnPressed += _ =>
                     SendPredictedMessage(new OverwatchConsolePromoteLeaderBuiMsg(marine.Marine));
 
-                panel = CreatePanel(50);
+                panel = CreatePanel(PanelMinHeight);
                 hideButton.Margin = margin;
                 panel.AddChild(hideButton);
                 var buttonsContainer = new BoxContainer { Orientation = LayoutOrientation.Horizontal };
                 buttonsContainer.AddChild(panel);
 
-                panel = CreatePanel(50);
+                panel = CreatePanel(PanelMinHeight);
                 promoteButton.Margin = margin;
                 panel.AddChild(promoteButton);
                 buttonsContainer.AddChild(panel);
@@ -545,7 +547,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                 squad.Longitudes.DisposeAllChildren();
 
                 var margin = new Thickness(2);
-                var panel = CreatePanel(50);
+                var panel = CreatePanel(PanelMinHeight);
                 panel.AddChild(new Label
                 {
                     Text = "LONG.",
@@ -554,7 +556,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                 squad.Longitudes.AddChild(panel);
 
                 squad.Latitudes.DisposeAllChildren();
-                panel = CreatePanel(50);
+                panel = CreatePanel(PanelMinHeight);
                 panel.AddChild(new Label
                 {
                     Text = "LAT.",
@@ -563,7 +565,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                 squad.Latitudes.AddChild(panel);
 
                 squad.Comments.DisposeAllChildren();
-                panel = CreatePanel(50);
+                panel = CreatePanel(PanelMinHeight);
                 panel.AddChild(new Label
                 {
                     Text = "COMMENT",
@@ -572,7 +574,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                 squad.Comments.AddChild(panel);
 
                 squad.Saves.DisposeAllChildren();
-                panel = CreatePanel(50);
+                panel = CreatePanel(PanelMinHeight);
                 panel.AddChild(new Label
                 {
                     Text = " ",
@@ -586,7 +588,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                     if (console.SupplyDropLocations[i] is not { } location)
                         continue;
 
-                    panel = CreatePanel(50);
+                    panel = CreatePanel(PanelMinHeight);
                     panel.AddChild(new Label
                     {
                         Text = $"{location.Longitude}",
@@ -594,7 +596,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                     });
                     squad.Longitudes.AddChild(panel);
 
-                    panel = CreatePanel(50);
+                    panel = CreatePanel(PanelMinHeight);
                     panel.AddChild(new Label
                     {
                         Text = $"{location.Latitude}",
@@ -606,11 +608,11 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                     var index = i;
                     comment.OnTextEntered += args => SaveComment(index, args.Text);
 
-                    panel = CreatePanel(50);
+                    panel = CreatePanel(PanelMinHeight);
                     panel.AddChild(comment);
                     squad.Comments.AddChild(panel);
 
-                    panel = CreatePanel(50);
+                    panel = CreatePanel(PanelMinHeight);
                     var saveButton = new Button
                     {
                         MaxWidth = 25,
