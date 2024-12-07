@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Explosion;
@@ -43,6 +44,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCCameraShakeSystem _rmcCameraShake = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
+    [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
@@ -580,10 +582,20 @@ public sealed class OrbitalCannonSystem : EntitySystem
             var step = explosion.Steps[explosion.Current];
             if (time >= explosion.LastStepAt + step.Delay)
             {
-                var coordinates = _transform.GetMapCoordinates(uid);
-                _rmcExplosion.QueueExplosion(coordinates, step.Type, step.Total, step.Slope, step.Max, uid);
                 explosion.Current++;
                 Dirty(uid, explosion);
+
+                if (step.Type != default)
+                {
+                    var coordinates = _transform.GetMapCoordinates(uid);
+                    _rmcExplosion.QueueExplosion(coordinates, step.Type, step.Total, step.Slope, step.Max, uid);
+                }
+
+                if (step.Fire is { } fire && step.FireRange > 0)
+                {
+                    var coordinates = _transform.GetMoverCoordinates(uid);
+                    _rmcFlammable.SpawnFireDiamond(fire, coordinates, step.FireRange);
+                }
             }
         }
     }

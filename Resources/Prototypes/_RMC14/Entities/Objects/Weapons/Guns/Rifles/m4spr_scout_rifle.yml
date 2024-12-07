@@ -89,12 +89,13 @@
           - CMMagazineRifleM4SPRExt
           - RMCMagazineRifleM4SPRA19
           - RMCMagazineRifleM4SPRA19Impact
+          - RMCMagazineRifleM4SPRA19Incendiary
 
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleM4SPRA19
-  name: "M4SPR A19 magazine (high-velocity)"
-  description: "A magazine of high-velocity A19 rounds for use in the M4SPR battle rifle."
+  name: "A19 HV magazine (10x24mm)"
+  description: "A magazine of A19 high velocity rounds for use in the M4SPR custom battle rifle. The M4SPR custom battle rifle is the only gun that can chamber these rounds."
   components:
   - type: Tag
     tags:
@@ -118,8 +119,8 @@
 - type: entity
   parent: RMCMagazineRifleM4SPRA19
   id: RMCMagazineRifleM4SPRA19Impact
-  name: "M4SPR A19 magazine (high-velocity high impact)"
-  description: "A magazine of high-velocity high impact A19 rounds for use in the M4SPR battle rifle."
+  name: "A19 HV high impact magazine (10x24mm)"
+  description: "A magazine of A19 HV high impact rounds for use in the M4RA battle rifle. The M4RA battle rifle is the only gun that can chamber these rounds."
   components:
   - type: Tag
     tags:
@@ -139,6 +140,31 @@
       map: ["enum.GunVisualLayers.Mag"]
     - state: ammo_band
       color: "#00CDEA"
+
+- type: entity
+  parent: RMCMagazineRifleM4SPRA19
+  id: RMCMagazineRifleM4SPRA19Incendiary
+  name: "A19 HV incendiary magazine (10x24mm)"
+  description: "A magazine of A19 HV incendiary rounds for use in the M4RA battle rifle. The M4RA battle rifle is the only gun that can chamber these rounds."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleM4SPRA19Incendiary
+  - type: BallisticAmmoProvider
+    proto: RMCCartridgeRifleM4SPRA19Incendiary
+    whitelist:
+      tags:
+      - RMCCartridgeRifleM4SPRA19Incendiary
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4spra19.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#9C2219"
 
 - type: entity
   parent: CMBaseCartridgeRifle
@@ -165,6 +191,19 @@
     - RMCCartridgeRifleM4SPRA19Impact
   - type: CartridgeAmmo
     proto: BulletRifleM4SPRA19Impact
+
+- type: entity
+  parent: RMCCartridgeRifleM4SPRA19
+  id: RMCCartridgeRifleM4SPRA19Incendiary
+  name: cartridge (A19 high-velocity incendiary)
+  description: A high-velocity incendiary A19 cartridge. Fits in M4SPR custom magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleM4SPRA19Incendiary
+  - type: CartridgeAmmo
+    proto: BulletRifleM4SPRA19Incendiary
 
 - type: entity
   parent: RMCBaseBullet
@@ -211,6 +250,21 @@
     - range: 4
       falloff: 10
 
+- type: entity
+  parent: RMCBaseBullet
+  id: BulletRifleM4SPRA19Incendiary
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: CMArmorPiercing
+    amount: 25
+  - type: RMCProjectileAccuracy
+    accuracy: 95
+  - type: IgniteOnProjectileHit
+
 - type: Tag
   id: RMCMagazineRifleM4SPRA19
 
@@ -218,7 +272,13 @@
   id: RMCMagazineRifleM4SPRA19Impact
 
 - type: Tag
+  id: RMCMagazineRifleM4SPRA19Incendiary
+
+- type: Tag
   id: RMCCartridgeRifleM4SPRA19
 
 - type: Tag
   id: RMCCartridgeRifleM4SPRA19Impact
+
+- type: Tag
+  id: RMCCartridgeRifleM4SPRA19Incendiary

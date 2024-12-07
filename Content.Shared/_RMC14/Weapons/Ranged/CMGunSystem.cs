@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Projectiles;
@@ -367,8 +368,13 @@ public sealed class CMGunSystem : EntitySystem
 
     private void OnGunPointBlankAmmoShot(Entity<GunPointBlankComponent> gun, ref AmmoShotEvent args)
     {
-        if (!TryComp(gun.Owner, out GunComponent? gunComp) || gunComp.Target == null || !HasComp<TransformComponent>(gunComp.Target))
+        if (!TryComp(gun.Owner, out GunComponent? gunComp) ||
+            gunComp.Target == null ||
+            !HasComp<TransformComponent>(gunComp.Target) ||
+            !HasComp<EvasionComponent>(gunComp.Target))
+        {
             return;
+        }
 
         if (gunComp.SelectedMode == SelectiveFire.FullAuto && TryGetGunUser(gun.Owner, out var user) && gunComp.Target.Value == user.Owner)
             return;
@@ -693,7 +699,7 @@ public sealed class CMGunSystem : EntitySystem
         var currentAngle = (userMapPos.Position - targetMapPos.Position).ToWorldAngle();
 
         var differenceFromBehindAngle = (behindAngle.Degrees - currentAngle.Degrees + 180 + 360) % 360 - 180;
-        
+
         if (differenceFromBehindAngle > -45 && differenceFromBehindAngle < 45)
             return true;
 

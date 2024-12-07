@@ -10,7 +10,7 @@
     - id: CMArmorHelmetM45
     - id: CMGlassesM42ScoutSight
     - id: CMMagazineSniperM96S
-    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
+    - id: CMMagazineSniperM96SIncendiary
       amount: 2
     - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
     - id: CMBackpackSniper
@@ -120,7 +120,7 @@
     - id: RMCGlassesM4SPRBattleSight
     - id: RMCMagazineRifleM4SPRA19
       amount: 4
-    - id: RMCMagazineRifleM4SPRA19 # TODO: RMCMagazineRifleM4SPRA19Incendiary
+    - id: RMCMagazineRifleM4SPRA19Incendiary
       amount: 2
     - id: RMCMagazineRifleM4SPRA19Impact
       amount: 2

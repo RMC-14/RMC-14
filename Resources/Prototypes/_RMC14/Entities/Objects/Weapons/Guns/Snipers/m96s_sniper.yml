@@ -229,7 +229,6 @@
       falloff: 10
       buildup: true
 
-# TODO RMC14 incendiary
 - type: entity
   parent: CMBulletSniper10x28mm
   id: CMBulletSniper10x28mmIncendiary
@@ -239,10 +238,11 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 50
-        Heat: 10
+        Piercing: 100 # TODO RMC14 50 when aimed shot is in please someone help im dying
+        Heat: 20 # TODO RMC14 10 when aimed shot is in please someone help im dying
   - type: CMArmorPiercing
     amount: 20
+  - type: IgniteOnProjectileHit
 
 # TODO RMC14 slow
 - type: entity

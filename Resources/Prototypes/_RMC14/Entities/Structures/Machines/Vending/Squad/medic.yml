@@ -98,7 +98,8 @@
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
         points: 18
-    #    CMM40HIDPIncendiaryPacketx3grenades: 18P
+      - id: RMCPacketGrenadeIncendiaryFilled
+        points: 18
     #    CMM40HPDPWhitePhosphorusPacketx3grenades: 18P
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
@@ -236,7 +237,7 @@
         name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
 #     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
 #       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
-#       recommended: true  
+#       recommended: true
       - id: RMCPouchAutoinjector
       - id: RMCPouchFirstResponder
       - id: RMCPouchReagentCanisterBicaridine
