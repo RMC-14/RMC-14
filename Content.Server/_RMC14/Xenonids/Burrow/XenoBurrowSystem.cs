@@ -19,6 +19,7 @@ using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Physics;
 using Robust.Shared.Timing;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,7 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
+    [Dependency] private readonly PhysicsSystem _physics = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -291,6 +293,7 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
             }
 
             _transform.Unanchor(ent);
+            _physics.SetBodyType(ent, BodyType.Kinematic)
 
             _audio.PlayPvs(comp.BurrowUpSound, ent);
         }
