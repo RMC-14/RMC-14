@@ -46,4 +46,7 @@ public sealed partial class XenoBlitzComponent : Component
 
     [DataField, AutoNetworkedField]
     public int HitsToRecharge = 1;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan FirstPartActivatedAt;
 }
