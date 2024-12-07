@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Server.Atmos.Components;
 using Content.Server.Spreader;
 using Content.Shared._RMC14.Map;
@@ -25,6 +25,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly EntityManager _entities = default!;
 
     private static readonly ProtoId<TagPrototype> IgnoredTag = "SpreaderIgnore";
 
@@ -179,6 +180,9 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                             surface.Weedable = anchoredId;
                             Dirty(weedable.Entity.Value, surface);
                         }
+
+                        var ev = new AfterEntityWeedingEvent(_entities.GetNetEntity(neighborWeeds), _entities.GetNetEntity(anchoredId));
+                        RaiseLocalEvent(anchoredId, ev);
 
                         sourceWeeds?.Spread.Add(weedable.Entity.Value);
                     }

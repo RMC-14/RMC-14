@@ -73,3 +73,45 @@
     id: HiveCoreXeno
   - type: WarpPoint
     location: hive core
+
+
+- type: entity
+  id: HivePylonXeno
+  parent: BaseHiveStructure
+  name: hive pylon
+  description: A towering spike of resin. Its base pulsates with large tendrils.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+    state: pylon
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: HivePylon
+  - type: XenoWeedsSpreading
+  - type: XenoWeeds
+    range: 7
+    spawns: XenoHiveWeeds
+    level: 3
+    blockOtherWeeds: true
+  - type: GhostRole
+    name: roles-lesser-drone-name
+    description: roles-lesser-drone-description
+    raffle:
+      settings: short
+  - type: GhostRoleMobSpawner
+    availableTakeovers: 2
+    deleteOnSpawn: false
+    prototype: CMXenoLesserDrone
+  - type: HiveConstructionLimited
+    id: HivePylonXeno
+  - type: RoofingEntity
+    range: 10
+    canOrbitalBombard : true
+  - type: WarpPoint
+    location: hive pylon
