@@ -92,7 +92,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
         }
 
         var activeSquad = GetActiveSquad();
-        var margin = new Thickness(2);
+        var margin = new Thickness(2, 0);
         foreach (var squad in s.Squads)
         {
             if (!s.Marines.TryGetValue(squad.Id, out var marines))
@@ -260,7 +260,6 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                     {
                         Text = $"{marine.Name} {Loc.GetString("rmc-overwatch-marine-pronouns", ("target", _entity.GetEntity(marine.Id)))}",
                         StyleClasses = { "OpenBoth" },
-                        Margin = new Thickness(2, 0),
                     };
 
                     watchButton.OnPressed += _ => SendPredictedMessage(new OverwatchConsoleWatchBuiMsg(marine.Camera));
