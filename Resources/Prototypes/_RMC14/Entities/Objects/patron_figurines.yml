@@ -917,7 +917,7 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronkaelsharkvoss
-  name: kael 'shark' voss figurine
+  name: Kael 'Shark' Voss figurine
   description: "A hug hungry little Sharky."
   components:
   - type: Sprite
