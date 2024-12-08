@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: You can choose to tuck in features (like hair, moth antenna, etc) on
-      helmets.
-    type: Add
-  id: 576
-  time: '2024-08-18T05:00:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3600
 - author: Rainbeon
   changes:
   - message: You can now view player character descriptions from much further away.
@@ -5058,5 +5050,13 @@
   id: 1075
   time: '2024-12-08T03:48:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5006
+- author: Vermidia
+  changes:
+  - message: Fixed Vanguard Prae's blitz having an 11 sec cooldown from the time of
+      the AOE slash instead of the time from the initial dash.
+    type: Fix
+  id: 1076
+  time: '2024-12-08T03:50:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5076
 Name: RMC14
 Order: -1
