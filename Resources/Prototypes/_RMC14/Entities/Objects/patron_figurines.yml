@@ -902,3 +902,14 @@
     state: consumes-the-petrol
   - type: PatronFigurine
     id: 25ab89f4-a9a7-44c7-8538-c94e8a086e92
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLennyDugs
+  name: Lenny Dugs figurine
+  description: "Greenhorn. Bumpkin. Marine. He didn't wanna be here. You didn't want him here. But he's what we got. The figurine smells vaguely of country air."
+  components:
+  - type: Sprite
+    state: lenny_dugs
+  - type: PatronFigurine
+    id: b43bf6fc-8970-4536-aa0e-6cf70168fda9
