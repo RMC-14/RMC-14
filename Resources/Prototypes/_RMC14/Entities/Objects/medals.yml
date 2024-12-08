@@ -151,7 +151,7 @@
   parent: RMCMedalRibbonRed
   id: RMCMedalRibbonRedService
   name: red award ribbon
-  description: A vibrant red ribbon awarded to civilians for placing second in  a UNMC-sponsored event. It is a rare award, signifying their dedication and support for the organization.
+  description: A vibrant red ribbon awarded to civilians for placing second in a UNMC-sponsored event. It is a rare award, signifying their dedication and support for the organization.
   
 - type: entity
   parent: RMCMedalBase
