@@ -14,6 +14,12 @@
     priority: -1
     transparency: 0.2
   - type: XenoTunnel
+  - type: XenoMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: xenotunnel
   - type: UserInterface
     interfaces:
       enum.SelectDestinationTunnelUI.Key:

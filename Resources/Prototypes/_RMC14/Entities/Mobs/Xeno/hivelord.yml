@@ -78,6 +78,7 @@
     chance: 0.45
     stunMin: 4
     stunMax: 5
+  - type: TunnelRenamer
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.66
     baseSprintSpeed: 3
