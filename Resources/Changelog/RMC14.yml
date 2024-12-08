@@ -1,118 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed hyposprays being able to draw from containers. Use a bottle on
-      it to refill it.
-    type: Fix
-  id: 564
-  time: '2024-08-18T04:19:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3669
-- author: blueDev2
-  changes:
-  - message: Drone evolution to queen cooldown after queen death is properly indicated
-      in the popup.
-    type: Fix
-  id: 565
-  time: '2024-08-18T04:18:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3701
-- author: DrSmugleaf
-  changes:
-  - message: Fixed being able to shoot from within body bags and other containers.
-    type: Fix
-  id: 566
-  time: '2024-08-18T04:18:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3702
-- author: Vermidia
-  changes:
-  - message: Added Boiler's neurotoxin gas, which is more oriented for capturing and
-      causes a slew of chaotic effects if it builds up enough.
-    type: Add
-  id: 567
-  time: '2024-08-18T04:17:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3649
-- author: diraven
-  changes:
-  - message: Xeno acid corrosion system was reworked and extended.
-    type: Add
-  - message: Flares now lose their burn time rather than disappear after a set amount
-      of time if corroded.
-    type: Add
-  - message: Barricades are now damaged over time rather than disappear after a set
-      amount of time if corroded.
-    type: Add
-  - message: Slightly nerfed acid corrosion times for them to be closer to CM13 values.
-    type: Tweak
-  id: 568
-  time: '2024-08-18T04:20:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3062
-- author: Vermidia
-  changes:
-  - message: Larva auto-burst time has been upped to 60 (from 20) seconds
-    type: Fix
-  - message: Larva can now move to burst immediately from their host
-    type: Fix
-  id: 569
-  time: '2024-08-18T04:21:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3700
-- author: Dutch-VanDerLinde
-  changes:
-  - message: You can now give most jumpsuits an alternative look by folding them.
-    type: Add
-  id: 570
-  time: '2024-08-18T04:31:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3659
-- author: DangerRevolution
-  changes:
-  - message: Added the Commanding Officer's equipment and weapon vendors.
-    type: Add
-  - message: Added the Executive Officer's equipment and weapon vendors.
-    type: Add
-  - message: Added the Staff Officer's equipment and weapon vendors
-    type: Add
-  - message: Added the Pilot & Dropship Crew Chiefs' equipment and weapon vendors.
-    type: Add
-  id: 571
-  time: '2024-08-18T04:37:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3629
-- author: Vermidia
-  changes:
-  - message: Fixed the Lurker's Crippling Strike not doing 20% extra damage, and added
-      a visual effect on the person hit.
-    type: Fix
-  id: 572
-  time: '2024-08-18T04:45:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3639
-- author: MACMAN2003
-  changes:
-  - message: Added special ballistic goggles that change color to match the squad
-      of the wearer.
-    type: Add
-  id: 573
-  time: '2024-08-18T04:52:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3622
-- author: crystalHex
-  changes:
-  - message: Added the drop pouch.
-    type: Add
-  id: 574
-  time: '2024-08-18T04:56:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3678
-- author: blueDev2
-  changes:
-  - message: Barricades now drop mats based on remaining health when deconstructed.
-      Barbed barricades drop barbed wires when deconstructed
-    type: Fix
-  id: 575
-  time: '2024-08-18T04:59:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3621
-- author: Vermidia
-  changes:
-  - message: You can choose to tuck in features (like hair, moth antenna, etc) on
-      helmets.
-    type: Add
-  id: 576
-  time: '2024-08-18T05:00:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3600
 - author: Rainbeon
   changes:
   - message: You can now view player character descriptions from much further away.
@@ -5048,5 +4934,129 @@
   id: 1063
   time: '2024-12-04T06:45:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5046
+- author: Vermidia
+  changes:
+  - message: Fixed Dancer Praetorian's dodge double speed buff counting downed marines.
+    type: Fix
+  id: 1064
+  time: '2024-12-05T23:55:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5058
+- author: Rainbeon
+  changes:
+  - message: Halved the speed bonus Frenzy gives while pulling to more closely match
+      CM13. This means overall pulling speeds are reduced by ~10% total.
+    type: Fix
+  id: 1065
+  time: '2024-12-05T23:56:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5057
+- author: Rainbeon
+  changes:
+  - message: Fixed Resin Hole Acid Traps not triggering when a Marine stands up after
+      being dragged in.
+    type: Fix
+  id: 1066
+  time: '2024-12-05T23:57:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5008
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed auto punctuation causing messages like "Lol" to not sanitize
+    type: Fix
+  id: 1067
+  time: '2024-12-06T00:00:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5045
+- author: Rainbeon
+  changes:
+  - message: You can now freely switch hands and wield/unwield while deploying and
+      using a Bipod.
+    type: Tweak
+  id: 1068
+  time: '2024-12-06T00:01:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5052
+- author: Rainbeon
+  changes:
+  - message: The buttons for choosing resin structures for Drone castes are now much
+      more responsive. It will now immediately select the option you click on, instead
+      of cancelling if you drag your mouse away before letting go of the mouse button.
+    type: Tweak
+  id: 1069
+  time: '2024-12-06T00:00:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5050
+- author: CyberTropic
+  changes:
+  - message: Strange plants on LV now emit light.
+    type: Fix
+  id: 1070
+  time: '2024-12-06T00:03:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5029
+- author: CyberTropic
+  changes:
+  - message: Fixed some pryable shutters in Kutjevo that led out of the AO and into
+      space.
+    type: Fix
+  id: 1071
+  time: '2024-12-06T00:02:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5039
+- author: DummeHytteOst
+  changes:
+  - message: Basic, green and white fires, no longer emit a basic white light, they
+      emit their own unique color of light.
+    type: Add
+  id: 1072
+  time: '2024-12-06T00:27:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5026
+- author: MetalSage
+  changes:
+  - message: Added flashlight boxes and crafting them with cardboard sheets.
+    type: Add
+  id: 1073
+  time: '2024-12-06T00:26:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4994
+- author: Rainbeon
+  changes:
+  - message: Fixed Burrowed Larva not registering as a new entity on the round end
+      summary.
+    type: Fix
+  id: 1074
+  time: '2024-12-06T04:18:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5064
+- author: blueDev2
+  changes:
+  - message: Fixed tunnels renaming, they are now only renamable by a xeno of drone
+      evolution and from the same hive
+    type: Fix
+  - message: Tunnels' default name is now in parity
+    type: Fix
+  - message: Mapped tunnels are properly named and associated to the hive
+    type: Fix
+  - message: Fixed xenos going into tunnels while unable to move
+    type: Fix
+  - message: Fixed involuntary regurgitation from leaving marines in tunnels
+    type: Fix
+  - message: Fixed burrowers being moved from explosives
+    type: Fix
+  - message: Fixed burrowers from being set on fire while burrowed
+    type: Fix
+  - message: Fixed burrower stomp range from being too large, (range of 4 now, used
+      to be a range of 6)
+    type: Fix
+  - message: Add Tunnels to the tactical maps
+    type: Fix
+  - message: Burrowers now are visible to fellow xenos in night vision
+    type: Fix
+  - message: Xenos cannot drop items while in tunnels
+    type: Fix
+  - message: Xenos cannot use actions while in tunnels
+    type: Fix
+  id: 1075
+  time: '2024-12-08T03:48:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5006
+- author: Vermidia
+  changes:
+  - message: Fixed Vanguard Prae's blitz having an 11 sec cooldown from the time of
+      the AOE slash instead of the time from the initial dash.
+    type: Fix
+  id: 1076
+  time: '2024-12-08T03:50:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5076
 Name: RMC14
 Order: -1

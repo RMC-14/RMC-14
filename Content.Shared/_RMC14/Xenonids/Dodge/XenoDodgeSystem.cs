@@ -2,6 +2,7 @@
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Standing;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -16,6 +17,7 @@ public sealed class XenoDodgeSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _crowd = new();
     public override void Initialize()
@@ -30,10 +32,10 @@ public sealed class XenoDodgeSystem : EntitySystem
 
     private void OnXenoActionDodge(Entity<XenoDodgeComponent> xeno, ref XenoDodgeActionEvent args)
     {
-		if (args.Handled)
-			return;
+        if (args.Handled)
+            return;
 
-		if (!_plasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
+        if (!_plasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
 
         args.Handled = true;
@@ -84,7 +86,7 @@ public sealed class XenoDodgeSystem : EntitySystem
             bool crowd = false;
             foreach (var mob in _crowd)
             {
-                if (_xeno.CanAbilityAttackTarget(uid, mob))
+                if (_xeno.CanAbilityAttackTarget(uid, mob) && !_standing.IsDown(mob))
                 {
                     crowd = true;
                     break;

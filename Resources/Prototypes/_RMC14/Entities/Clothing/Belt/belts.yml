@@ -122,6 +122,10 @@
   name: M277 pattern construction rig
   description: The M277 is a common rig used by Combat Technicians to carry around materials and other supplies. It consists of a modular belt with various clips. This version sacrifices storage space for specialized material loading clips.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/construction.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/construction.rsi
   - type: Storage
     grid:
     - 0,0,11,1 # 6 slots

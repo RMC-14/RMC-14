@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Stations;
+using Content.Server._RMC14.Xenonids.Construction.Tunnel;
 using Content.Server._RMC14.Xenonids.Hive;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
@@ -108,6 +109,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IVoteManager _voteManager = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
+    [Dependency] private readonly XenoTunnelSystem _xenoTunnel = default!;
 
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();
@@ -1333,9 +1335,17 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         }
 
         var tunnelQuery = EntityQueryEnumerator<XenoTunnelComponent>();
-        while (tunnelQuery.MoveNext(out var uid, out _))
+        var tunnels = new List<EntityUid>();
+
+        while (tunnelQuery.MoveNext(out var ent, out _))
         {
-            _hive.SetHive(uid, hive);
+            tunnels.Add(ent);
+        }
+        // Replace all pre-mapped tunnels with a new tunnel with name and associated with the hive
+        foreach (var tunnel in tunnels)
+        {
+            _xenoTunnel.TryPlaceTunnel(hive, null, tunnel.ToCoordinates(), out _);
+            QueueDel(tunnel);
         }
     }
 }
