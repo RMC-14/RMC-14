@@ -350,3 +350,52 @@
     - id: CMCrowbar
     - id: CMWirecutter
     - id: CMMultitool
+    
+- type: entity
+  parent: CMWebbingBase
+  id: CMWebbingKnives
+  name: M272 pattern knife vest
+  description: An older generation M272 pattern knife vest once employed by the UNMC. Can hold up to 5 knives. It is made of synthcotton.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_knife.rsi
+    state: webbing
+  - type: Storage
+    grid:
+    - 0,0,9,1 # 5 slots
+    whitelist:
+      tags:
+        - Knife
+        - ThrowingKnife
+  - type: FixedItemSizeStorage
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: CMHolster
+  - type: Webbing
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Webbing/webbing_knife.rsi
+      state: equipped
+    components:
+    - type: Storage
+      grid:
+      - 0,0,9,1 # 5 slots
+      whitelist:
+        tags:
+          - Knife
+          - ThrowingKnife
+    - type: FixedItemSizeStorage
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: CMHolster
+
+- type: entity
+  parent: CMWebbingKnives
+  id: CMWebbingKnivesFilled
+  suffix: Filled
+  components:
+  - type: StorageFill    
+    contents:
+      - id: CMM11Knife
+        amount: 5
