@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Barricades now drop mats based on remaining health when deconstructed.
-      Barbed barricades drop barbed wires when deconstructed
-    type: Fix
-  id: 575
-  time: '2024-08-18T04:59:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3621
 - author: Vermidia
   changes:
   - message: You can choose to tuck in features (like hair, moth antenna, etc) on
@@ -5035,5 +5027,36 @@
   id: 1074
   time: '2024-12-06T04:18:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5064
+- author: blueDev2
+  changes:
+  - message: Fixed tunnels renaming, they are now only renamable by a xeno of drone
+      evolution and from the same hive
+    type: Fix
+  - message: Tunnels' default name is now in parity
+    type: Fix
+  - message: Mapped tunnels are properly named and associated to the hive
+    type: Fix
+  - message: Fixed xenos going into tunnels while unable to move
+    type: Fix
+  - message: Fixed involuntary regurgitation from leaving marines in tunnels
+    type: Fix
+  - message: Fixed burrowers being moved from explosives
+    type: Fix
+  - message: Fixed burrowers from being set on fire while burrowed
+    type: Fix
+  - message: Fixed burrower stomp range from being too large, (range of 4 now, used
+      to be a range of 6)
+    type: Fix
+  - message: Add Tunnels to the tactical maps
+    type: Fix
+  - message: Burrowers now are visible to fellow xenos in night vision
+    type: Fix
+  - message: Xenos cannot drop items while in tunnels
+    type: Fix
+  - message: Xenos cannot use actions while in tunnels
+    type: Fix
+  id: 1075
+  time: '2024-12-08T03:48:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5006
 Name: RMC14
 Order: -1
