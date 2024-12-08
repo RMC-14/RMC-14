@@ -913,3 +913,14 @@
     state: lenny_dugs
   - type: PatronFigurine
     id: b43bf6fc-8970-4536-aa0e-6cf70168fda9
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronkaelsharkvoss
+  name: kael 'shark' voss figurine
+  description: "A hug hungry little Sharky."
+  components:
+  - type: Sprite
+    state: kael_shark_voss
+  - type: PatronFigurine
+    id: 58c2cefc-1796-4ca4-b6e6-5dbda5b8f506
