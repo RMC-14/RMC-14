@@ -178,6 +178,12 @@
   id: RMCAreaSavannahCIC
   name: Combat Information Centre
 
+- type: entity
+  parent:
+  - RMCAreaSavannahCommand
+  id: RMCAreaSavannahASO
+  name: ASO, IO and Command Cryo
+
 # MEDICAL
 
 - type: entity
