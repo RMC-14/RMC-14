@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   id: RMCTileFire
   name: fire
   placement:
@@ -43,6 +43,7 @@
     damage:
       types:
         Heat: 45
+    ignoreResistances: true
   - type: TileFire
     id: RMCTileFire
     extinguishInstantly: true

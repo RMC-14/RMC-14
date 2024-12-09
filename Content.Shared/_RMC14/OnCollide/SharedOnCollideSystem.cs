@@ -59,13 +59,13 @@ public abstract class SharedOnCollideSystem : EntitySystem
         var didEmote = false;
         if (ent.Comp.Chain == null || AddToChain(ent.Comp.Chain.Value, other))
         {
-            _damageable.TryChangeDamage(other, ent.Comp.Damage);
+            _damageable.TryChangeDamage(other, ent.Comp.Damage, ent.Comp.IgnoreResistances);
             DoEmote(ent, other);
             didEmote = true;
         }
         else
         {
-            _damageable.TryChangeDamage(other, ent.Comp.ChainDamage);
+            _damageable.TryChangeDamage(other, ent.Comp.ChainDamage, ent.Comp.IgnoreResistances);
         }
 
         _xenoSpit.SetAcidCombo(other, ent.Comp.AcidComboDuration, ent.Comp.AcidComboDamage, ent.Comp.AcidComboParalyze);
