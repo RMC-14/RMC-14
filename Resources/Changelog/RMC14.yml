@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: You can now view player character descriptions from much further away.
-    type: Tweak
-  id: 577
-  time: '2024-08-18T05:03:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3626
 - author: DrSmugleaf
   changes:
   - message: Fixed xenonids not being able to open hypersleep chambers, body bags,
@@ -5058,5 +5051,12 @@
   id: 1076
   time: '2024-12-08T03:50:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5076
+- author: Whisper
+  changes:
+  - message: Added Consumes-the-Petrol, Lenny Dugs, Kael 'Shark' Voss figurine.
+    type: Add
+  id: 1077
+  time: '2024-12-09T00:30:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5083
 Name: RMC14
 Order: -1
