@@ -6,7 +6,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.Xenonids.Heal;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(XenoHealSystem))]
+[Access(typeof(SharedXenoHealSystem))]
 public sealed partial class XenoHealComponent : Component
 {
     [DataField, AutoNetworkedField]
