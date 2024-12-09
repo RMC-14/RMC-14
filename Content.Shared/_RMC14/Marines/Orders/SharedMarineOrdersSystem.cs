@@ -183,6 +183,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
     {
         _actions.StartUseDelay(orders.Comp.HoldActionEntity);
         _actions.StartUseDelay(orders.Comp.MoveActionEntity);
+        _actions.StartUseDelay(orders.Comp.FocusActionEntity);
     }
 
     public override void Update(float frameTime)
