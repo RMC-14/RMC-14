@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Server.Atmos.Components;
 using Content.Server.Spreader;
 using Content.Shared._RMC14.Map;
