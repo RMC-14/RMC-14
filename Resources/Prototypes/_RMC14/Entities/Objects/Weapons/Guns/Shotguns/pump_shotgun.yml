@@ -3,11 +3,15 @@
   name: M42A2 Pump Shotgun
   id: WeaponShotgunM42A2
   description: An Aegis Battlefield Armaments classic design, the M42A2 combines close-range firepower with long term reliability. Needs to be pumped.
+  suffix: Desert
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/desert.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/desert.rsi
   - type: Gun
     shotsPerBurst: 1
   - type: ShootUseDelay
@@ -57,3 +61,62 @@
       rmc-aslot-rail: -0.025, 0.125
       rmc-aslot-stock: -0.375, -0.029
       rmc-aslot-underbarrel: 0.25, -0.31
+
+#camo variants
+- type: entity
+  parent: WeaponShotgunM42A2
+  id: WeaponShotgunM42A2Camo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: WeaponShotgunM42A2Jungle
+      Desert: WeaponShotgunM42A2
+      Snow: WeaponShotgunM42A2Snow
+      Classic: WeaponShotgunM42A2Classic
+      Urban: WeaponShotgunM42A2Urban
+
+- type: entity
+  parent: WeaponShotgunM42A2  
+  id: WeaponShotgunM42A2Jungle
+  suffix: Jungle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/jungle.rsi
+
+- type: entity
+  parent: WeaponShotgunM42A2  
+  id: WeaponShotgunM42A2Snow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/snow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/snow.rsi
+
+- type: entity
+  parent: WeaponShotgunM42A2  
+  id: WeaponShotgunM42A2Classic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/classic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/classic.rsi
+
+- type: entity
+  parent: WeaponShotgunM42A2  
+  id: WeaponShotgunM42A2Urban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/urban.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/urban.rsi
+
+
+
+
+

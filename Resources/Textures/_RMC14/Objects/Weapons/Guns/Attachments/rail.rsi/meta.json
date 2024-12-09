@@ -141,6 +141,21 @@
     },
     {
       "name": "m96s-scope"
+    },
+    {
+      "name": "u_boomslang-scope_a"
+    },
+    {
+      "name": "s_boomslang-scope_a"
+    },
+    {
+      "name": "d_boomslang-scope_a"
+    },
+    {
+      "name": "c_boomslang-scope_a"
+    },
+    {
+      "name": "boomslang-scope_a"
     }
   ]
 }

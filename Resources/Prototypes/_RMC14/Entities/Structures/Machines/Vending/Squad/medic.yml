@@ -130,9 +130,9 @@
         points: 6
     - name: Armors
       entries:
-      - id: CMArmorB12
+      - id: RMCArmorB12Camo
         points: 28
-      - id: CMArmorM4
+      - id: RMCArmorM4Camo
         points: 16
     - name: Restricted Firearms
       entries:
@@ -157,11 +157,11 @@
         points: 3
     - name: Binoculars
       entries:
-      - id: RMCBinoculars
+      - id: RMCBinocularsCamo
         points: 5
-      - id: RMCRangefinder
+      - id: RMCRangefinderCamo
         points: 10
-      - id: RMCLaserDesignator
+      - id: RMCLaserDesignatorCamo
         points: 15
     - name: Helmet Optics
       entries: [ ]
@@ -217,13 +217,13 @@
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
-      - id: CMBackpackMarineMedic
-      - id: CMSatchelMarineMedic
+      - id: RMCBackpackMarineMedicCamo
+      - id: RMCSatchelMarineMedicCamo
         recommended: true
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: CMBeltMedicBagFilled
+      - id: RMCBeltMedicBagCamoFilled
         name: m276 lifesaver bag (full)
       - id: CMBeltMedicalFilled
         name: m276 medical storage rig (full)

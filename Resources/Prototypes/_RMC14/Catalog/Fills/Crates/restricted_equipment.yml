@@ -5,8 +5,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMArmorM4
-    - id: CMArmorHelmetM12
+    - id: RMCArmorM4Camo
+    - id: RMCArmorHelmetM12Camo
 
 - type: entity
   id: RMCCrateRestrictedEquipmentArmorB12
@@ -15,5 +15,5 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMArmorB12
-    - id: CMArmorHelmetM11
+    - id: RMCArmorB12Camo
+    - id: RMCArmorHelmetM11Camo

@@ -61,14 +61,14 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: CMBeltMedicBagFilled
+      - id: RMCBeltMedicBagCamoFilled
       - id: CMBeltMedicalFilled
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
-      - id: CMBackpackMarine
+      - id: RMCBackpackMarineCamo
         name: backpack
-      - id: CMSatchelMarine
+      - id: RMCSatchelMarineCamo
         name: satchel
       - id: CMBackpackMedical
       - id: CMSatchelMedical

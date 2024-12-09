@@ -38,12 +38,12 @@
       - RMCBeltSOCOM
   - type: StorageFill
     contents:
-    - id: WeaponRifleXM88
-    - id: RMCAttachmentXM88Stock
-    - id: RMCAttachmentXS-9
+    - id: WeaponRifleXM88Camo
+    - id: RMCAttachmentXM88StockCamo
+    - id: RMCAttachmentXS-9Camo
     - id: RMCBox458SOCOM
     - id: RMCBox458SOCOM
-    - id: RMCM300SOCOMBelt
+    - id: RMCM300SOCOMBeltCamo
 
 - type: entity
   parent: RMCBaseGunCase
@@ -83,9 +83,9 @@
       - RMCAttachmentBipod
   - type: StorageFill
     contents:
-    - id: WeaponRifleM54CE2
-    - id: CMMagazineRifleM54CE2
-    - id: CMMagazineRifleM54CE2 # Replace with a holotargeting mag once that ammo is implemented.
+    - id: WeaponRifleM54CE2Camo
+    - id: CMMagazineRifleM54CE2Camo
+    - id: CMMagazineRifleM54CE2Camo # Replace with a holotargeting mag once that ammo is implemented.
 
 - type: entity
   parent: BaseStorageItem
@@ -135,8 +135,8 @@
       - RMCXM51Holster
   - type: StorageFill
     contents:
-    - id: RMCAttachmentXM51Stock
-    - id: RMCWeaponShotgunXM51
+    - id: RMCAttachmentXM51StockCamo
+    - id: RMCWeaponShotgunXM51Camo
     - id: RMCMagazineShotgunXM51
       amount: 2
     - id: RMCBoxShotgunBreaching
@@ -159,5 +159,5 @@
       - RMCAttachmentMOU53Stock
   - type: StorageFill
     contents:
-    - id: WeaponShotgunMOU53
+    - id: WeaponShotgunMOU53Camo
     - id: RMCAttachmentMOU53Stock
