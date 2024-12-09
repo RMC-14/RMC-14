@@ -17,3 +17,31 @@
         density: 100
         layer:
         - DropshipImpassable
+
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCUtilityAttachmentPoint
+  name: utility attach point
+  description: An attachment point for utility systems
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/dropship_attachment_points.rsi
+    layers:
+    - state: "equip_base"
+      map: [ "enum.DropshipUtilityPointLayers.AttachedUtility"]
+    - state: "equip_base"
+      map: [ "enum.DropshipUtilityPointLayers.AttachementBase"]
+  - type: Icon
+    sprite: _RMC14/Structures/Machines/dropship_attachment_points.rsi
+    state: "equip_base"
+  - type: Physics
+    canCollide: false
+  - type: Occluder
+    enabled: false
+  - type: InteractionOutline
+  - type: Clickable
+  - type: DropshipUtilityPoint
+  - type: Appearance
+  - type: Tag
+    tags:
+    - RMCDropshipUtilityPoint
