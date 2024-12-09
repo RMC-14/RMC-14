@@ -58,8 +58,8 @@
   id: CMGearCMOEquipped
   equipment:
     jumpsuit: CMJumpsuitCMO
-    outerClothing: CMCoatLong
-    back: CMSatchelMarine
+    outerClothing: RMCCoatServiceJacketSnow
+    back: RMCSatchelMarineCamo
     gloves: CMHandsLatex
     shoes: RMCShoesWhite
     head: CMHeadCapCMO

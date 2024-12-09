@@ -48,7 +48,7 @@
   id: CMGearChiefEngineer
   equipment:
     jumpsuit: CMJumpsuitChiefEngineer
-    back: CMSatchelMarineTech
+    back: RMCSatchelMarineTechCamo
     shoes: CMBootsBlack
     gloves: CMHandsInsulated
     id: CMIDCardChiefEngineer

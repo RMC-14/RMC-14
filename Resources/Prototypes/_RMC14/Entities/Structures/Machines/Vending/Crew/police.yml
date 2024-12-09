@@ -29,7 +29,7 @@
     - name: Armor
       takeAll: CMArmor
       entries:
-      - id: CMArmorM2MP
+      - id: RMCArmorM2MPCamo
       - id: CMHeadBeretRed
     - name: Handgun Case
 #     choices: { CMGunCase: 1 }
@@ -46,7 +46,7 @@
       entries:
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
-      - id: RMCBeltUtilityGeneral
+      - id: RMCBeltUtilityGeneralCamo
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -102,7 +102,7 @@
     - name: Armor
       takeAll: CMArmor
       entries:
-      - id: CMArmorM3Warden
+      - id: RMCArmorM3WardenCamo
       - id: CMHeadCapWarden
     - name: Handgun Case
 #     choices: { CMGunCase: 1 }
@@ -119,7 +119,7 @@
       entries:
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
-      - id: RMCBeltUtilityGeneral
+      - id: RMCBeltUtilityGeneralCamo
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:

@@ -1,0 +1,277 @@
+﻿#m42a2 solid stock camos
+- type: entity
+  parent: RMCAttachmentM42A2WoodenStock
+  id: RMCAttachmentM42A2WoodenStockCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCAttachmentM42A2WoodenStockJungle
+      Desert: RMCAttachmentM42A2WoodenStock
+      Snow: RMCAttachmentM42A2WoodenStockSnow
+      Classic: RMCAttachmentM42A2WoodenStockClassic
+      Urban: RMCAttachmentM42A2WoodenStockUrban
+
+- type: entity
+  parent: RMCAttachmentM42A2WoodenStock
+  id: RMCAttachmentM42A2WoodenStockJungle
+  suffix: Jungle
+  components:
+  - type: Sprite
+    state: stock
+
+- type: entity
+  parent: RMCAttachmentM42A2WoodenStock
+  id: RMCAttachmentM42A2WoodenStockSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    state: s_stock
+
+- type: entity
+  parent: RMCAttachmentM42A2WoodenStock
+  id: RMCAttachmentM42A2WoodenStockClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    state: c_stock
+
+- type: entity
+  parent: RMCAttachmentM42A2WoodenStock
+  id: RMCAttachmentM42A2WoodenStockUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    state: u_stock
+
+#XM51 stock camos
+- type: entity
+  parent: RMCAttachmentXM51Stock
+  id: RMCAttachmentXM51StockCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCAttachmentXM51Stock
+      Desert: RMCAttachmentXM51StockDesert
+      Snow: RMCAttachmentXM51StockSnow
+      Classic: RMCAttachmentXM51StockClassic
+      Urban: RMCAttachmentXM51StockUrban
+
+- type: entity
+  parent: RMCAttachmentXM51Stock
+  id: RMCAttachmentXM51StockDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    state: d_xm51_stock
+
+- type: entity
+  parent: RMCAttachmentXM51Stock
+  id: RMCAttachmentXM51StockSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    state: s_xm51_stock
+
+- type: entity
+  parent: RMCAttachmentXM51Stock
+  id: RMCAttachmentXM51StockClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    state: c_xm51_stock
+
+- type: entity
+  parent: RMCAttachmentXM51Stock
+  id: RMCAttachmentXM51StockUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    state: u_xm51_stock
+
+#xm88 stock camos
+- type: entity
+  parent: RMCAttachmentXM88Stock
+  id: RMCAttachmentXM88StockCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCAttachmentXM88StockJungle
+      Desert: RMCAttachmentXM88Stock
+      Snow: RMCAttachmentXM88StockSnow
+      Classic: RMCAttachmentXM88StockClassic
+      Urban: RMCAttachmentXM88StockUrban
+
+- type: entity
+  parent: RMCAttachmentXM88Stock
+  id: RMCAttachmentXM88StockUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    state: u_boomslang-stock
+
+- type: entity
+  parent: RMCAttachmentXM88Stock
+  id: RMCAttachmentXM88StockClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    state: c_boomslang-stock
+
+- type: entity
+  parent: RMCAttachmentXM88Stock
+  id: RMCAttachmentXM88StockSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    state: s_boomslang-stock
+
+- type: entity
+  parent: RMCAttachmentXM88Stock
+  id: RMCAttachmentXM88StockJungle
+  suffix: Jungle
+  components:
+  - type: Sprite
+    state: boomslang-stock
+
+#solid m54c stock camos
+- type: entity
+  parent: RMCAttachmentM54CStockSolid
+  id: RMCAttachmentM54CStockSolidCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCAttachmentM54CStockSolidJungle
+      Desert: RMCAttachmentM54CStockSolid
+      Snow: RMCAttachmentM54CStockSolidSnow
+      Classic: RMCAttachmentM54CStockSolidClassic
+      Urban: RMCAttachmentM54CStockSolidUrban
+
+- type: entity
+  parent: RMCAttachmentM54CStockSolid
+  id: RMCAttachmentM54CStockSolidJungle
+  suffix: Jungle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/jungle.rsi
+    state: m54c-solid
+
+- type: entity
+  parent: RMCAttachmentM54CStockSolid
+  id: RMCAttachmentM54CStockSolidSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+    state: m54c-solid
+
+- type: entity
+  parent: RMCAttachmentM54CStockSolid
+  id: RMCAttachmentM54CStockSolidClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/classic.rsi
+    state: m54c-solid
+
+- type: entity
+  parent: RMCAttachmentM54CStockSolid
+  id: RMCAttachmentM54CStockSolidUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/urban.rsi
+    state: m54c-solid
+
+#collapsible m54c stock camos
+- type: entity
+  parent: RMCAttachmentM54CStockCollapsible
+  id: RMCAttachmentM54CStockCollapsibleCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCAttachmentM54CStockCollapsibleJungle
+      Desert: RMCAttachmentM54CStockCollapsible
+      Snow: RMCAttachmentM54CStockCollapsibleSnow
+      Classic: RMCAttachmentM54CStockCollapsibleClassic
+      Urban: RMCAttachmentM54CStockCollapsibleUrban
+
+- type: entity
+  parent: RMCAttachmentM54CStockCollapsible
+  id: RMCAttachmentM54CStockCollapsibleJungle
+  suffix: Jungle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/jungle.rsi
+    state: m54c-col
+  - type: AttachableToggleable
+    doAfterBreakOnMove: false
+    doAfter: 0.5
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/jungle.rsi
+      state: m54c-col
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/jungle.rsi
+      state: m54c-col-on
+    actionName: Toggle M54C Folding Stock
+
+- type: entity
+  parent: RMCAttachmentM54CStockCollapsible
+  id: RMCAttachmentM54CStockCollapsibleSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+    state: m54c-col
+  - type: AttachableToggleable
+    doAfterBreakOnMove: false
+    doAfter: 0.5
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+      state: m54c-col
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+      state: m54c-col-on
+    actionName: Toggle M54C Folding Stock
+
+- type: entity
+  parent: RMCAttachmentM54CStockCollapsible
+  id: RMCAttachmentM54CStockCollapsibleClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/classic.rsi
+    state: m54c-col
+  - type: AttachableToggleable
+    doAfterBreakOnMove: false
+    doAfter: 0.5
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/classic.rsi
+      state: m54c-col
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/classic.rsi
+      state: m54c-col-on
+    actionName: Toggle M54C Folding Stock
+
+- type: entity
+  parent: RMCAttachmentM54CStockCollapsible
+  id: RMCAttachmentM54CStockCollapsibleUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/urban.rsi
+    state: m54c-col
+  - type: AttachableToggleable
+    doAfterBreakOnMove: false
+    doAfter: 0.5
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/urban.rsi
+      state: m54c-col
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/urban.rsi
+      state: m54c-col-on
+    actionName: Toggle M54C Folding Stock

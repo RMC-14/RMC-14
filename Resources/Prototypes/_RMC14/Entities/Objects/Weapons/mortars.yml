@@ -2,10 +2,11 @@
   parent: BaseItem
   id: RMCMortarKit
   name: M402 mortar portable kit
+  suffix: Classic
   description: A manual, crew-operated mortar system intended to rain down 80mm goodness on anything it's aimed at. Needs to be set down first.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/mortar.rsi
+    sprite: _RMC14/Objects/Weapons/mortar/classic.rsi
     layers:
     - map: [ "mortar" ]
       state: mortar_m402_carry
@@ -81,6 +82,64 @@
     whitelist:
       components:
       - Marine
+
+#camo variants
+- type: entity
+  parent: RMCMortarKit
+  id: RMCMortarKitCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCMortarKitJungle
+      Desert: RMCMortarKitDesert
+      Snow: RMCMortarKitSnow
+      Classic: RMCMortarKit
+      Urban: RMCMortarKitUrban
+
+- type: entity
+  parent: RMCMortarKit
+  id: RMCMortarKitJungle
+  suffix: Jungle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/mortar/jungle.rsi
+    layers:
+    - map: [ "mortar" ]
+      state: mortar_m402_carry
+
+- type: entity
+  parent: RMCMortarKit
+  id: RMCMortarKitDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/mortar/desert.rsi
+    layers:
+    - map: [ "mortar" ]
+      state: mortar_m402_carry
+
+- type: entity
+  parent: RMCMortarKit
+  id: RMCMortarKitSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/mortar/snow.rsi
+    layers:
+    - map: [ "mortar" ]
+      state: mortar_m402_carry
+
+- type: entity
+  parent: RMCMortarKit
+  id: RMCMortarKitUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/mortar/urban.rsi
+    layers:
+    - map: [ "mortar" ]
+      state: mortar_m402_carry
 
 - type: entity
   abstract: true

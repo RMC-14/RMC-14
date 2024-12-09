@@ -4,10 +4,11 @@
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: JumpsuitMarine
   name: Marine uniform
+  suffix: Jungle
   description: Standard-issue Marine uniform. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/standard.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/standard/jungle.rsi
 
 - type: entity
   parent: RMCMarineUniformBase
@@ -22,30 +23,33 @@
   parent: JumpsuitMarine
   id: CMJumpsuitMarineEngineer
   name: Marine ComTech uniform
+  suffix: Jungle
   description: Standard-issue Marine combat technician fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/engineer.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/jungle.rsi
 
 # Hospital Corpsman
 - type: entity
   parent: JumpsuitMarine
   id: CMJumpsuitMarineMedic
   name: Marine corpsman uniform
+  suffix: Jungle
   description: Standard-issue Marine hospital corpsman fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/medic.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/medic/jungle.rsi
 
 # RTO / FTL
 - type: entity
   parent: JumpsuitMarine
   id: CMJumpsuitMarineRTO
   name: marine radio telephone operator uniform
+  suffix: Jungle
   description: Standard-issue RTO fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/rto.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/rto/jungle.rsi
 
 # Sniper
 - type: entity
@@ -58,9 +62,10 @@
   parent: RMCMarineUniformBase
   id: CMJumpsuitMarineTanker
   name: marine tanker uniform
+  suffix: Jungle
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tanker.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/jungle.rsi
 
 # Supply
 
@@ -137,9 +142,10 @@
   id: CMJumpsuitCO
   name: commanding officer uniform
   description: Standard-issue Commanding Officer uniform.
+  suffix: Jungle
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/jungle.rsi
 
 - type: entity
   parent: CMJumpsuitCO
@@ -199,23 +205,27 @@
   parent: JumpsuitMarine
   id: CMJumpsuitOperations
   name: marine operations uniform
+  suffix: Jungle
   description: An operations uniform worn by members of the marines. Do the corps proud. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Command/operations.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/boiler/jungle.rsi
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: sleeves
 
 # IO
 - type: entity
   parent: RMCMarineUniformBase
   id: CMJumpsuitIO
   name: marine intelligence officer uniform
+  suffix: Jungle
   description: Tighter than a vice. Slicker than beard oil. Covered from head to toe in pouches, pockets, bags, straps, and belts. Clearly, you are not only the most intelligent of intelligence officers, but the most fashionable as well. This suit took an entire R&D team five days to develop. It is more expensive than the entire Almayer... probably.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Command/io.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/intel/jungle.rsi
 
 # Auxiliary
 
@@ -224,10 +234,11 @@
   parent: JumpsuitMarine
   id: CMJumpsuitPilot
   name: pilot officer bodysuit
+  suffix: Jungle
   description: A bodysuit worn by pilot officers of the marines, and is meant for survival in inhospitable conditions. Fly the marines onwards to glory. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/jungle.rsi
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold

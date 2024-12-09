@@ -5,11 +5,11 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCBinoculars
+    - id: RMCBinocularsCamo
       amount: 2
-    - id: RMCLaserDesignator
+    - id: RMCLaserDesignatorCamo
       amount: 2
-    - id: RMCRangefinder
+    - id: RMCRangefinderCamo
       amount: 2
 
 - type: entity
