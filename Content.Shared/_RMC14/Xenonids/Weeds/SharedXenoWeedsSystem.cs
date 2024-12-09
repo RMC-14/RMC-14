@@ -16,6 +16,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
@@ -45,6 +46,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     private EntityQuery<XenoWeedsComponent> _weedsQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<BlockWeedsComponent> _blockWeedsQuery;
+
+    private readonly EntProtoId HiveWeedProtoId = "XenoHiveWeeds";
 
     public override void Initialize()
     {
@@ -163,6 +166,19 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         ent.Comp.OnXenoWeeds = any;
         Dirty(ent);
+    }
+
+    public bool IsOnHiveWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)
+    {
+        var weed = GetWeedsOnFloor(grid, coordinates, sourceOnly);
+        if (!TryComp(weed, out XenoWeedsComponent? weedComp))
+        {
+            return false;
+        }
+
+        // Some structures produce hive weed and act like a hive weed source, but they themselves are not hiveweeds.
+        // For the purposes of this function, those structures are hive weed sources.
+        return (weedComp.Spawns == HiveWeedProtoId);
     }
 
     public bool IsOnWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)
