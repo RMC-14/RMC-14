@@ -8,6 +8,16 @@
   icon: "CMJobIconMaintTech"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-ce
+  ranks:
+    RMCRankLanceCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobMaintTech
+      time: 252000 # 70 hours
+    RMCRankPrivateFirstClass:
+    - !type:RoleTimeRequirement
+      role: CMJobMaintTech
+      time: 36000 # 10 hours
+    RMCRankPrivate: []
   accessGroups:
   - MaintTech
   minimapIcon:
