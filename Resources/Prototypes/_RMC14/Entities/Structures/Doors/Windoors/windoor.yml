@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseWindoor
   id: CMWindoor
   name: glass door
@@ -28,7 +28,19 @@
     timeToApply: 4
     structure: true
   - type: Damageable
-    damageModifierSet: null
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
   - type: Construction
     graph: CMWindoor
     node: windoor
@@ -83,5 +95,19 @@
     needsPower: false
   - type: RMCDropshipBlocked
   - type: ImmuneToUnarmed
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
   - type: AccessReader
     containerAccessProvider: null

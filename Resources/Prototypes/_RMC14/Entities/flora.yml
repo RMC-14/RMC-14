@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseTree
+  parent: RMCBaseTree
   id: RMCBasePalm
   abstract: true
   components:
@@ -204,6 +204,7 @@
 - type: entity
   parent: RMCBasePalm
   id: RMCFloraTreePalm01
+  suffix: RMCFloraTreePalm01
   name: palm tree
   components:
   - type: Sprite
@@ -212,6 +213,7 @@
 - type: entity
   parent: RMCBasePalm
   id: RMCFloraTreePalm02
+  suffix: RMCFloraTreePalm02
   name: palm tree
   components:
   - type: Sprite
