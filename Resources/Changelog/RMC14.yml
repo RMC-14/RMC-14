@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Armed grenades can no longer be inserted into Grenade Launchers.
-    type: Fix
-  id: 582
-  time: '2024-08-18T11:24:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3646
 - author: DrSmugleaf
   changes:
   - message: The CMP temporarily has access to the regular MP equipment rack until
@@ -4985,5 +4978,14 @@
   id: 1081
   time: '2024-12-09T05:58:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5088
+- author: CyberTropic
+  changes:
+  - message: Added M272 pattern knife vest.
+    type: Add
+  - message: Fixed Requisitions not being able to buy webbing vests and shoulder holsters.
+    type: Fix
+  id: 1082
+  time: '2024-12-09T06:01:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5085
 Name: RMC14
 Order: -1
