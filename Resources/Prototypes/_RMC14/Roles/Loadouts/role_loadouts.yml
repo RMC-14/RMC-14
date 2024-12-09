@@ -1,0 +1,539 @@
+# TODO Helmet accessories
+# TODO Recreational
+# TODO Miscellaneous
+
+# Auxiliary Support
+- type: roleLoadout
+  id: JobCMAuxiliarySupportOfficer
+  points: 7
+  groups:
+  - MarineLeatherBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMDropshipCrewChief
+  points: 7
+  groups:
+  - MarineLeatherBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMPilotDropship
+  points: 7
+  groups:
+  - MarineLeatherBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMPilotGunship
+  points: 7
+  groups:
+  - MarineLeatherBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMIntelOfficer
+  points: 7
+  groups:
+  - MarineBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+# Command
+- type: roleLoadout
+  id: JobCMCommandingOfficer
+  points: 7
+  groups:
+  - MarineLeatherBackpack
+  - CommandingOfficerRoleSpecificRMC
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMExecutiveOfficer
+  points: 7
+  groups:
+  - MarineLeatherBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMStaffOfficer
+  points: 7
+  groups:
+  - MarineBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+# Engineering
+- type: roleLoadout
+  id: JobCMChiefEngineer
+  points: 7
+  groups:
+  - MarineTechnicianBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMMaintTech
+  points: 7
+  groups:
+  - MarineTechnicianBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMOrdnanceTech
+  points: 7
+  groups:
+  - MarineTechnicianBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+# Squad Roles
+- type: roleLoadout
+  id: JobCMCombatTech
+  points: 7
+  groups:
+  - MarineTechnicianBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMFireteamLeader
+  points: 7
+  groups:
+  - MarineBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMHospitalCorpsman
+  points: 7
+  groups:
+  - MarineMedicBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMRifleman
+  points: 7
+  groups:
+  - MarineBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMSmartGunOperator
+  points: 7
+  groups:
+  - MarineBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMSquadLeader
+  points: 7
+  groups:
+  - MarineBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMWeaponsSpecialist
+  points: 7
+  groups:
+  - MarineBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+# Medical
+- type: roleLoadout
+  id: JobCMCMO
+  points: 7
+  groups:
+  - MarineLeatherBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMDoctor
+  points: 7
+  groups:
+  - MarineBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMNurse
+  points: 7
+  groups:
+  - MarineBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMResearcher
+  points: 7
+  groups:
+  - MarineLeatherBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+# Military Police
+- type: roleLoadout
+  id: JobCMChiefMP
+  points: 7
+  groups:
+  - MarineSecurityBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMMilitaryPolice
+  points: 7
+  groups:
+  - MarineSecurityBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMMilitaryWarden
+  points: 7
+  groups:
+  - MarineSecurityBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+# Other
+- type: roleLoadout
+  id: JobCMCorrespondent
+  points: 7
+  groups:
+  - MarineLeatherBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMLiaison
+  points: 7
+  groups:
+  - MarineLeatherBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMMessTech
+  points: 7
+  groups:
+  - MarineBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMSeniorEnlistedAdvisor
+  points: 7
+  groups:
+  - MarineBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+# Requsitions
+- type: roleLoadout
+  id: JobCMCargoTech
+  points: 7
+  groups:
+  - MarineTechnicianBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+
+- type: roleLoadout
+  id: JobCMQuartermaster
+  points: 7
+  groups:
+  - MarineTechnicianBackpack
+  - EyewearRMC
+  - MasksRMC
+  - HeadwearRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC

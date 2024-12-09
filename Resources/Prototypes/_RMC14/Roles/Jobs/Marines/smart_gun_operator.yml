@@ -46,7 +46,6 @@
   id: CMGearSmartGunOperatorEquipped
   equipment:
     jumpsuit: JumpsuitMarine
-    back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
     outerClothing: CMArmorSmartGunCombatHarness
