@@ -1238,6 +1238,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             "trijent" => "Trijent Dam",
             "varadero" => "New Varadero",
             "kutjevo" => "Kutjevo Refinery",
+            "chances_claim" => "LV-522 Chance's Claim",
             _ => name,
         };
     }
