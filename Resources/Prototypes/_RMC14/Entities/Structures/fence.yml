@@ -17,6 +17,7 @@
     base: fence
     mode: CardinalFlags
   - type: Damageable
+    damageModifierSet: null
   - type: Destructible
     thresholds:
     - trigger:
