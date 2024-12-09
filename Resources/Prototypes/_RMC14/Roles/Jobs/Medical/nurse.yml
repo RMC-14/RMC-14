@@ -38,7 +38,6 @@
   equipment:
     jumpsuit: RMCScrubsLightBlue
     neck: RMCNurseArmband
-    back: CMSatchelMarine
     shoes: ClothingShoesColorWhite
     id: CMIDCardNurse
     ears: CMHeadsetMedical # TODO RMC14 Medical Vender
@@ -48,7 +47,6 @@
   equipment:
     jumpsuit: RMCScrubsLightBlue
     neck: RMCNurseArmband
-    back: CMSatchelMarine
     gloves: CMHandsLatex
     shoes: RMCShoesWhite
     head: CMHeadCapSurgOrange

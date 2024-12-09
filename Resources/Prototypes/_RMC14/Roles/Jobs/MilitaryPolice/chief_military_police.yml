@@ -53,7 +53,6 @@
   id: CMGearChiefMP
   equipment:
     jumpsuit: CMJumpsuitWO
-    back: CMSatchelSecurity
     shoes: CMBootsBlackFilled
     head: CMHeadBeretWO
     eyes: CMGlassesSecurity

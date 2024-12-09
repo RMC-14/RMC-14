@@ -47,14 +47,12 @@
 - type: startingGear
   id: CMGearWeaponsSpecialist
   equipment:
-    back: CMSatchelMarine
     id: CMDogtagWeaponsSpecialist
 
 - type: startingGear
   id: CMGearWeaponsSpecialistEquipped
   equipment:
     jumpsuit: JumpsuitMarine
-    back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
     gloves: CMHandsBlackMarine

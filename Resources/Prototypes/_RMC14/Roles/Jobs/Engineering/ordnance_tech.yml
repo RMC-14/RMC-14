@@ -39,7 +39,6 @@
   id: CMGearOrdnanceTech
   equipment:
     jumpsuit: CMJumpsuitOrdnanceTech
-    back: CMSatchelMarineTech
     shoes: CMBootsBlack
     gloves: CMHandsInsulated
     id: CMIDCardOrdnanceTech

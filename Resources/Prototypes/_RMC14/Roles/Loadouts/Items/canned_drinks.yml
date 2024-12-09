@@ -1,0 +1,98 @@
+# Canned Drinks
+- type: loadout
+  id: BottledWaterRMC
+  cost: 1
+  storage:
+    back:
+    - CMDrinkWEYAWaterBottle30
+
+- type: loadout
+  id: GrapeJuiceRMC
+  cost: 2
+  storage:
+    back:
+    - CMDrinkCanGrape
+
+- type: loadout
+  id: LemonLimeRMC
+  cost: 2
+  storage:
+    back:
+    - CMDrinkCanLemonLime
+
+- type: loadout
+  id: IcedTeaRMC
+  cost: 2
+  storage:
+    back:
+    - CMDrinkCanIcedTea
+
+- type: loadout
+  id: ColaRMC
+  cost: 2
+  storage:
+    back:
+    - CMDrinkCanCola
+
+- type: loadout
+  id: MountainWindRMC
+  cost: 2
+  storage:
+    back:
+    - CMDrinkCanMountainWind
+
+- type: loadout
+  id: SpaceUpRMC
+  cost: 2
+  storage:
+    back:
+    - CMDrinkCanSpaceUp
+
+- type: loadout
+  id: BobdaRMC
+  cost: 2
+  storage:
+    back:
+    - CMDrinkCanBobdaClassic
+
+- type: loadout
+  id: DietBobdaRMC
+  cost: 2
+  storage:
+    back:
+    - CMDrinkCanBobdaDiet
+
+- type: loadout
+  id: BodaRMC
+  cost: 3
+  storage:
+    back:
+    - CMDrinkCanBoda
+
+- type: loadout
+  id: BodaPlyusRMC
+  cost: 3
+  storage:
+    back:
+    - CMDrinkCanBodaPlyus
+
+- type: loadout
+  id: AleIpaRMC
+  cost: 3
+  storage:
+    back:
+    - CMDrinkCanAle
+
+- type: loadout
+  id: LiteBeerRMC
+  cost: 3
+  storage:
+    back:
+    - CMDrinkCanBeerLite
+
+- type: loadout
+  id: ThirteenLokoRMC
+  cost: 3
+  storage:
+    back:
+    - CMDrinkCanThirteenLoko

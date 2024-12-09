@@ -1,0 +1,14 @@
+# Flasks
+- type: loadout
+  id: CanteenRMC
+  cost: 2
+  storage:
+    back:
+    - CMCanteen
+
+- type: loadout
+  id: MetalFlaskRMC
+  cost: 2
+  storage:
+    back:
+    - CMMetalFlask

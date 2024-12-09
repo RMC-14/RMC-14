@@ -35,7 +35,6 @@
   id: CMGearMaintTech
   equipment:
     jumpsuit: CMJumpsuitMaintTech
-    back: CMSatchelMarineTech
     shoes: CMBootsBlack
     gloves: CMHandsInsulated
     id: CMIDCardMaintTech

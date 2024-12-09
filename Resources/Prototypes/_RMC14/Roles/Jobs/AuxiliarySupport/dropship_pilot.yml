@@ -47,7 +47,6 @@
   id: CMGearPilotDropship
   equipment:
     jumpsuit: CMJumpsuitPilot
-    back: CMSatchel
     shoes: CMBootsBlackFilled
     id: CMIDCardPilotDropship
     ears: CMHeadsetPilot
