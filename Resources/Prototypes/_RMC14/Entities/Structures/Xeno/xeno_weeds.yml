@@ -204,7 +204,8 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-
+  - type: XenoConstructionPlasmaCost
+    plasma: 75
 - type: entity
   id: XenoWeedsWall
   name: weeds
