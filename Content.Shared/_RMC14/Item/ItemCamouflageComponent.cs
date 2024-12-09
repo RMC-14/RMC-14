@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Item;
 
@@ -11,6 +11,8 @@ public sealed partial class ItemCamouflageComponent : Component
     [DataField(required: true), AutoNetworkedField]
     public Dictionary<CamouflageType, EntProtoId> CamouflageVariations = new();
 }
+
+[Serializable, NetSerializable]
 public enum CamouflageType : byte
 {
     Jungle = 1, //default

@@ -1,50 +1,46 @@
-using Robust.Shared.Network;
-using Content.Shared.Item;
-using Content.Shared.Inventory;
 using Robust.Shared.Containers;
-using Content.Shared.Roles;
+using Robust.Shared.Network;
 using Robust.Shared.Timing;
-using Content.Shared.Weapons.Reflect;
 
 namespace Content.Shared._RMC14.Item;
 
 public sealed class ItemCamouflageSystem : EntitySystem
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly InventorySystem _inv = default!;
     [Dependency] private readonly SharedContainerSystem _cont = default!;
     [Dependency] private readonly IGameTiming _time = default!;
 
     [ViewVariables(VVAccess.ReadWrite)]
     public CamouflageType CurrentMapCamouflage { get; set; } = CamouflageType.Jungle;
 
-    public Queue<Entity<ItemCamouflageComponent>> Comps = new();
+    private readonly Queue<Entity<ItemCamouflageComponent>> _items = new();
 
     public override void Initialize()
     {
         SubscribeLocalEvent<ItemCamouflageComponent, MapInitEvent>(OnMapInit);
     }
+
     //thank you smugleaf!
     public override void Update(float frameTime)
     {
-        if (Comps.Count == 0)
+        if (_items.Count == 0)
             return;
-        foreach (var ent in Comps)
+
+        while (_items.TryDequeue(out var ent))
         {
-            if (TryComp(ent.Owner, out MetaDataComponent? meta))
-            {
-                if (meta.LastModifiedTick != _time.CurTick)
-                {
-                    Replace(ent);
-                    Comps.Dequeue();
-                    break;
-                }
-            }
+            if (!TryComp(ent.Owner, out MetaDataComponent? meta))
+                continue;
+
+            if (meta.LastModifiedTick == _time.CurTick)
+                continue;
+
+            Replace(ent);
+            _items.Dequeue();
+            break;
         }
     }
 
-    public void Replace(Entity<ItemCamouflageComponent> ent)
+    private void Replace(Entity<ItemCamouflageComponent> ent)
     {
         if (_net.IsClient)
             return;
@@ -69,31 +65,36 @@ public sealed class ItemCamouflageSystem : EntitySystem
         }
     }
 
-    public void OnMapInit(Entity<ItemCamouflageComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<ItemCamouflageComponent> ent, ref MapInitEvent args)
     {
         if (_net.IsClient)
             return;
-        Comps.Enqueue(ent);
+
+        _items.Enqueue(ent);
     }
 
     private void ReplaceWithCamouflaged(Entity<ItemCamouflageComponent> ent, CamouflageType type)
     {
+        if (!ent.Comp.CamouflageVariations.TryGetValue(type, out var spawn))
+        {
+            Log.Error($"No {type} camouflage variation found for {ToPrettyString(ent)}");
+            return;
+        }
+
         if (_cont.IsEntityInContainer(ent.Owner))
         {
-            {
-                _cont.TryGetContainingContainer((Entity<TransformComponent?, MetaDataComponent?>)ent.Owner,
-                    out var cont);
-                if (cont == null)
-                    return;
-                _cont.Remove((Entity<TransformComponent?, MetaDataComponent?>)ent.Owner, cont, true, true);
-                _entityManager.SpawnInContainerOrDrop(ent.Comp.CamouflageVariations[type].Id, cont.Owner, cont.ID);
-                _entityManager.QueueDeleteEntity(ent.Owner);
-            }
+            _cont.TryGetContainingContainer((ent.Owner, null), out var cont);
+            if (cont == null)
+                return;
+
+            _cont.Remove(ent.Owner, cont, true, true);
+            SpawnInContainerOrDrop(spawn, cont.Owner, cont.ID);
+            QueueDel(ent.Owner);
         }
         else
         {
-            _entityManager.SpawnNextToOrDrop(ent.Comp.CamouflageVariations[type], ent.Owner);
-            _entityManager.QueueDeleteEntity(ent.Owner);
+            SpawnNextToOrDrop(ent.Comp.CamouflageVariations[type], ent.Owner);
+            QueueDel(ent.Owner);
         }
     }
 }

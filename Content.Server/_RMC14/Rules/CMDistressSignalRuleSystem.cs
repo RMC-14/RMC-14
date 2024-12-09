@@ -556,15 +556,15 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     {
         if (ct != null)
         {
-            _camo.CurrentMapCamouflage = (CamouflageType)ct;
+            _camo.CurrentMapCamouflage = ct.Value;
             return;
         }
+
         if (SelectedPlanetMap != null &&
-    _rmcPlanet.PlanetPaths.TryGetValue(SelectedPlanetMap, out var planet))
+            _rmcPlanet.PlanetPaths.TryGetValue(SelectedPlanetMap, out var planet))
         {
             _camo.CurrentMapCamouflage = planet.Camouflage;
         }
-
     }
 
     private void OnPlayerSpawning(PlayerSpawningEvent ev)
