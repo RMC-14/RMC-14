@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed xenonids not being able to open hypersleep chambers, body bags,
-      closets, morgues and crematoriums. Xenonids still cannot close them nor be inserted
-      into them.
-    type: Fix
-  id: 578
-  time: '2024-08-18T05:21:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3703
-- author: DrSmugleaf
-  changes:
   - message: Fixed xeno eggs being buildable on top of normal doors.
     type: Fix
   id: 579
@@ -5058,5 +5049,15 @@
   id: 1077
   time: '2024-12-09T00:30:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5083
+- author: Vermidia
+  changes:
+  - message: Fixed matchboxes not being tiny, and tarback tubes, and cigar cases not
+      being small.
+    type: Fix
+  - message: Fixed handfuls, cigpacks, and matchboxes not fitting in helmets.
+    type: Fix
+  id: 1078
+  time: '2024-12-09T00:32:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5071
 Name: RMC14
 Order: -1
