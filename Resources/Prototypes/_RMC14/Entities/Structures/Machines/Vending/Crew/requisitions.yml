@@ -101,10 +101,10 @@
         amount: 5
       - id: CMWebbingPouch
         amount: 2
-      #- id: Shoulder Holster
-      #  amount: 2
-      #- id: Knife Webbing
-      #  amount: 1
+      - id: CMWebbingHolster
+        amount: 2
+      - id: CMWebbingKnivesFilled
+        amount: 1
     - name: Backpacks
       entries:
       - id: CMBackpackMarine
