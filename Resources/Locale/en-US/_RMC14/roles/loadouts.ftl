@@ -10,5 +10,6 @@ rmc-loadout-group-flasks = Flasks
 rmc-loadout-group-foods-sweets = Food (sweets)
 rmc-loadout-group-foods-packaged = Food (packaged)
 rmc-loadout-group-foods-healthy = Food (healthy)
+rmc-loadout-group-role-specific = Role specific
 
 loadout-group-points-insufficient = You have insufficient points!
