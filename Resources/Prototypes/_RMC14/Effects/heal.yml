@@ -17,6 +17,17 @@
 
 - type: entity
   parent: RMCEffectHeal
+  id: RMCEffectHealBusy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1.5
+  - type: Sprite
+    color: "#FFFFFF"
+    state: busy_medical
+
+- type: entity
+  parent: RMCEffectHeal
   id: RMCEffectHealAilments
   categories: [ HideSpawnMenu ]
   components:

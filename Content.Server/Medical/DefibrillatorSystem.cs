@@ -160,6 +160,7 @@ public sealed class DefibrillatorSystem : EntitySystem
                 BreakOnHandChange = false,
                 BreakOnMove = !component.AllowDoAfterMovement,
                 DuplicateCondition = DuplicateConditions.SameEvent,
+                TargetEffect = "RMCEffectHealBusy",
             });
     }
 
