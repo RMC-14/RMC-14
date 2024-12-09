@@ -37,7 +37,39 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMWebbing # TODO RMC14 this needs both webbing types
+      - id: CMWebbing
+        amount: 4
+
+- type: entity
+  id: RMCCrateClothingWebbingVest
+  parent: RMCCrateWeldable
+  name: brown and black webbing crate (x2 each)
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMWebbingBrown
+        amount: 2
+      - id: CMWebbingBlack
+        amount: 2
+
+- type: entity
+  id: RMCCrateClothingWebbingKnife
+  parent: RMCCrateWeldable
+  name: knife vest crate (x3)
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMWebbingKnivesFilled
+        amount: 3
+        
+- type: entity
+  id: RMCCrateClothingWebbingHolster
+  parent: RMCCrateWeldable
+  name: shoulder holster crate (x4)
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMWebbingHolster
         amount: 4
 
 - type: entity

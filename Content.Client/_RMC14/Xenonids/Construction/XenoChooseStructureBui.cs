@@ -42,6 +42,7 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
 
                 var control = new XenoChoiceControl();
                 control.Button.Group = group;
+                control.Button.Mode = 0;
 
                 var name = structure.Name;
                 if (_xenoConstruction.GetStructurePlasmaCost(structureId) is { } cost)

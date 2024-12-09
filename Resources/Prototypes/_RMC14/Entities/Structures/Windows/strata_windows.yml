@@ -17,6 +17,24 @@
     node: windowFrameStrata
 
 - type: entity
+  parent: RMCWindowFrameColonyReinforced
+  id: RMCWindowFrameStrataReinforced
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/strata_frame.rsi
+    state: strata_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/strata_frame.rsi
+    state: strata_frame0
+  - type: IconSmooth
+    key: walls
+    base: strata_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowStrataReinforced
+    node: windowFrameStrataReinforced
+
+- type: entity
   parent: CMBaseWindow
   id: RMCWindowStrata
   name: window
@@ -54,6 +72,57 @@
           - !type:SpawnEntitiesBehavior
             spawn:
               CMShardGlass:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameStrata
+  - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
+  - type: Construction
+    graph: RMCWindowStrata
+    node: windowStrata
+
+- type: entity
+  parent: CMBaseWindow
+  id: RMCWindowStrataReinforced
+  name: reinforced window
+  description: A glass window. Light refracts incorrectly when looking through. It looks rather strong. Might take a few good hits to shatter it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/strata_window.rsi
+    state: strata_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/strata_window.rsi
+    state: strata_window0
+  - type: IconSmooth
+    key: walls
+    base: strata_window
+    mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
                 min: 1
                 max: 1
           - !type:ChangeConstructionNodeBehavior

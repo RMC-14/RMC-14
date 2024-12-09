@@ -294,6 +294,14 @@ namespace Content.Server.Atmos.EntitySystems
             if (!Resolve(uid, ref flammable))
                 return;
 
+            var attemptEv = new RMCIgniteAttemptEvent();
+            RaiseLocalEvent(uid, attemptEv);
+
+            if (attemptEv.Cancelled)
+            {
+                return;
+            }
+
             flammable.FireStacks = MathF.Min(MathF.Max(flammable.MinimumFireStacks, stacks), flammable.MaximumFireStacks);
             Dirty(uid, flammable);
 
@@ -491,7 +499,7 @@ namespace Content.Server.Atmos.EntitySystems
                     else
                         damage = flammable.Intensity / 5f * flammable.Damage;
 
-                    _damageableSystem.TryChangeDamage(uid, damage, interruptsDoAfters: false);
+                    _damageableSystem.TryChangeDamage(uid, damage, true, false);
 
                     AdjustFireStacks(uid, flammable.Resisting ? flammable.ResistStacks : -0.25f, flammable, flammable.OnFire);
                 }
