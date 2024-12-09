@@ -113,6 +113,12 @@
       - cost: 2000
         crate: RMCCrateClothingWebbing
       - cost: 2000
+        crate: RMCCrateClothingWebbingVest
+      - cost: 2000
+        crate: RMCCrateClothingWebbingKnife
+      - cost: 3000
+        crate: RMCCrateClothingWebbingHolster
+      - cost: 2000
         crate: RMCCrateClothingWebbingPouch
       - cost: 3000
         crate: RMCCrateClothingOfficerOutfit

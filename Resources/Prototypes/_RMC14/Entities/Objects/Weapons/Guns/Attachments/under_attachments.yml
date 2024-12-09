@@ -45,7 +45,6 @@
     - RMCAttachmentUnderbarrel
     - RMCAttachmentBipod
   - type: AttachableToggleable
-    needHand: true
     heldOnlyActivate: true
     userOnly: true
     doInterrupt: true
@@ -54,6 +53,7 @@
     breakOnFullRotate: true
     doAfter: 1.5
     deactivateDoAfter: 0
+    doAfterNeedHand: false
     instantToggle: Brace
     useDelay: 0.5
     activatePopupText: attachable-popup-activate-deploy-on-ground

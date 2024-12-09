@@ -63,6 +63,7 @@ public sealed class XenoBlitzSystem : EntitySystem
                 return;
             xeno.Comp.Dashed = true;
             _actions.SetUseDelay(args.Action, xeno.Comp.BaseUseDelay);
+            xeno.Comp.FirstPartActivatedAt = _timing.CurTime;
             //Don't handle - let the leap go through
         }
 
@@ -112,10 +113,10 @@ public sealed class XenoBlitzSystem : EntitySystem
         if (_net.IsServer && hits > 0)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
-		if (hits >= xeno.Comp.HitsToRecharge)
-			_vanguard.RegenShield(xeno);
+        if (hits >= xeno.Comp.HitsToRecharge)
+            _vanguard.RegenShield(xeno);
 
-		Dirty(xeno);
+        Dirty(xeno);
     }
 
     private void SetBlitzDelays(Entity<XenoBlitzComponent> xeno)
@@ -134,8 +135,13 @@ public sealed class XenoBlitzSystem : EntitySystem
         if (bliz == null)
             return;
 
-        _actions.SetUseDelay(bliz, xeno.Comp.FinishedUseDelay);
-        _actions.SetCooldown(bliz, xeno.Comp.FinishedUseDelay);
+        var blitzCooldownTime = xeno.Comp.FinishedUseDelay - (_timing.CurTime - xeno.Comp.FirstPartActivatedAt);
+
+        if (blitzCooldownTime < TimeSpan.Zero)
+            blitzCooldownTime = TimeSpan.Zero;
+
+        _actions.SetUseDelay(bliz, blitzCooldownTime);
+        _actions.SetCooldown(bliz, blitzCooldownTime);
     }
 
     public override void Update(float frameTime)

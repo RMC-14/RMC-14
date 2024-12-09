@@ -24,5 +24,8 @@ public sealed partial class XenoFrenzyPheromonesComponent : Component
     public FixedPoint2 MovementSpeedModifier = 0.06;
 
     [DataField, AutoNetworkedField]
+    public FixedPoint2 PullMovementSpeedModifier = 0.03;
+
+    [DataField, AutoNetworkedField]
     public List<ProtoId<DamageTypePrototype>> DamageTypes = new() { "Blunt", "Slash", "Piercing" };
 }

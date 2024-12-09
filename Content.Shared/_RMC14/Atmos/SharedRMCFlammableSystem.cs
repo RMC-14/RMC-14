@@ -12,6 +12,7 @@ using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Directions;
 using Content.Shared.DoAfter;
+using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
@@ -51,6 +52,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -59,6 +61,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
 
+    private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<FlammableComponent> _flammableQuery;
     private EntityQuery<RMCIgniteOnCollideComponent> _igniteOnCollideQuery;
     private EntityQuery<ProjectileComponent> _projectileQuery;
@@ -66,6 +69,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     public override void Initialize()
     {
+        _doorQuery = GetEntityQuery<DoorComponent>();
         _flammableQuery = GetEntityQuery<FlammableComponent>();
         _igniteOnCollideQuery = GetEntityQuery<RMCIgniteOnCollideComponent>();
         _projectileQuery = GetEntityQuery<ProjectileComponent>();
@@ -240,10 +244,18 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     private void OnIgniteCollide(Entity<RMCIgniteOnCollideComponent> ent, ref StartCollideEvent args)
     {
-        if (!Ignite(args.OtherEntity, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks))
+        var flammableEnt = new Entity<FlammableComponent?>(args.OtherEntity, null);
+        if (!Resolve(flammableEnt, ref flammableEnt.Comp, false))
+            return;
+
+        var wasOnFire = IsOnFire(flammableEnt);
+        if (!Ignite(flammableEnt, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks))
             return;
 
         EnsureComp<SteppingOnFireComponent>(args.OtherEntity);
+
+        if (!wasOnFire && IsOnFire(flammableEnt))
+            _damageable.TryChangeDamage(flammableEnt, flammableEnt.Comp.Damage * ent.Comp.Intensity, true);
     }
 
     private void OnIgniteDamageCollide(Entity<RMCIgniteOnCollideComponent> ent, ref DamageCollideEvent args)
@@ -365,8 +377,16 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             }
 
             var nextRange = range - 1;
-            if (_rmcMap.TileHasAnyTag(target, StructureTag, WallTag))
-                nextRange = 0;
+            var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(target);
+            while (anchored.MoveNext(out var uid))
+            {
+                if (_tag.HasAnyTag(uid, StructureTag, WallTag) &&
+                    !_doorQuery.HasComp(uid))
+                {
+                    nextRange = 0;
+                    break;
+                }
+            }
 
             SpawnFireChain(spawn, chain, target, intensity, duration);
             if (nextRange == 0)
