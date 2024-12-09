@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Xenonids.Burrow;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
@@ -18,6 +19,7 @@ using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Physics;
 using Robust.Shared.Timing;
 using System;
 using System.Collections.Generic;
@@ -42,7 +44,7 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
-
+    [Dependency] private readonly PhysicsSystem _physics = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -156,7 +158,7 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
     {
         var coordinates = _transform.GetMoverCoordinates(ent.Owner).SnapToGrid();
 
-        if (_area.TryGetArea(coordinates, out var area, out _, out _) &&
+        if (!_area.TryGetArea(coordinates, out var area, out _, out _)  ||
             area.NoTunnel)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-burrow-down-failure-bad-area"), ent, ent);
@@ -194,7 +196,7 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
             return false;
         }
 
-        if (_area.TryGetArea(target, out var area, out _, out _) &&
+        if (!_area.TryGetArea(target, out var area, out _, out _) ||
             area.NoTunnel)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-burrow-move-failure-bad-area"), ent, ent);
@@ -253,8 +255,7 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
 
         var actions = _action.GetActions(ent);
 
-        RMCNightVisionVisibleComponent? nightVisionComp;
-        TryComp(ent, out nightVisionComp);
+        TryComp(ent, out RMCNightVisionVisibleComponent? nightVisionComp);
         _appearance.SetData(xenoBurrower, XenoVisualLayers.Burrow, comp.Active);
         if (active)
         {
@@ -274,12 +275,13 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
                 actComp.Enabled = false;
                 Dirty(action.Id, actComp);
             }
+            _transform.AnchorEntity(ent);
         }
         else
         {
             if (nightVisionComp is not null)
             {
-                nightVisionComp.Transparency = 0f;
+                nightVisionComp.Transparency = null;
             }
 
             foreach (var action in actions)
@@ -289,6 +291,9 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
                 actComp.Enabled = true;
                 Dirty(action.Id, actComp);
             }
+
+            _transform.Unanchor(ent);
+            _physics.SetBodyType(ent, BodyType.KinematicController);
 
             _audio.PlayPvs(comp.BurrowUpSound, ent);
         }
