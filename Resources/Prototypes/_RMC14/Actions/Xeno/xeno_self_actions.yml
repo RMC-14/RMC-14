@@ -267,5 +267,6 @@
     range: -1
     repeat: true
     deselectOnMiss: false
-    checkCanAccess : false
+    checkCanAccess: false
+    checkCanInteract: false
   - type: ActionBlockIfResting

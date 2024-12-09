@@ -1,4 +1,4 @@
-using Content.Server.Atmos.EntitySystems;
+using System.Diagnostics.CodeAnalysis;
 using Content.Server.DoAfter;
 using Content.Server.Popups;
 using Content.Shared._RMC14.Areas;
@@ -8,25 +8,18 @@ using Content.Shared._RMC14.Xenonids.Burrow;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
-using Content.Shared.Atmos.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
-using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Maps;
+using Content.Shared.Physics;
+using Content.Shared.Popups;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
-using Robust.Server.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Timing;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Server._RMC14.Xenonids.Burrow;
 
@@ -92,7 +85,7 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
             }
             var duration = new TimeSpan(0, 0, (int)distance);
             var moveEv = new XenoBurrowMoveDoAfter(_entities.GetNetCoordinates(target));
-            var moveDoAfterArgs = new DoAfterArgs(_entities, ent, duration, moveEv, ent);
+            var moveDoAfterArgs = new DoAfterArgs(_entities, ent, duration, moveEv, ent) { RequireCanInteract = false };
             _doAfter.TryStartDoAfter(moveDoAfterArgs);
 
             comp.NextTunnelAt = null;
@@ -101,18 +94,31 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
         }
         else
         {
-            if (!CanBurrowPopup((ent, comp)))
+            if (TryComp(ent, out DoAfterComponent? doAfterComp))
             {
-                return;
+                foreach (var doAfter in doAfterComp.DoAfters)
+                {
+                    if (!doAfter.Value.Cancelled && !doAfter.Value.Completed)
+                    {
+                        _popup.PopupEntity("We can't do that right now!", ent, ent, PopupType.SmallCaution);
+                        return;
+                    }
+                }
             }
+
+            if (!CanBurrowPopup((ent, comp)))
+                return;
+
             var burrowEv = new XenoBurrowDownDoAfter();
             var burrowDoAfterArgs = new DoAfterArgs(_entities, ent, comp.BurrowLength, burrowEv, ent)
             {
                 BreakOnMove = true,
-                DuplicateCondition = DuplicateConditions.SameEvent,
+                DuplicateCondition = DuplicateConditions.None,
                 CancelDuplicate = true
             };
-            _doAfter.TryStartDoAfter(burrowDoAfterArgs);
+
+            if (_doAfter.TryStartDoAfter(burrowDoAfterArgs))
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-burrow-down-start"), ent, ent);
         }
     }
 
@@ -182,7 +188,6 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
             return false;
         }
 
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-burrow-down-start"), ent, ent);
         return true;
     }
 
@@ -214,7 +219,7 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
                 return false;
             }
 
-            if (_turf.IsTileBlocked(tile, Shared.Physics.CollisionGroup.Impassable))
+            if (_turf.IsTileBlocked(tile, CollisionGroup.Impassable))
             {
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-burrow-move-failure-solid"), ent, ent);
                 return false;
