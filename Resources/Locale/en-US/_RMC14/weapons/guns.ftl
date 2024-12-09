@@ -16,6 +16,21 @@ rmc-shoot-use-delay = You need to wait {$seconds} seconds before shooting {THE($
 rmc-shoot-harness-required = Harness required
 rmc-wear-smart-gun-required = You must have your smart gun equipped to wear these.
 
+rmc-shoot-id-lock-unauthorized = Trigger locked. Unauthorized user.
+rmc-id-lock-unauthorized = Action denied. Unauthorized user.
+rmc-id-lock-authorization = You pick up the {$gun}, registering yourself as its owner.
+rmc-id-lock-authorization-combat = The {$gun} beeps, registering yourself as its owner.
+rmc-id-lock-toggle-lock = You {$action} the id lock on the {$gun}.
+
+rmc-id-lock-color-unauthorized = red
+rmc-id-lock-color-authorized = chartreuse
+rmc-id-lock-toggle-on = lock
+rmc-id-lock-toggle-off = unlock
+
+rmc-iff-toggle = You {$action} the IFF on the {$gun}.
+rmc-iff-toggle-off = disable
+rmc-iff-toggle-on = enable
+
 rmc-revolver-spin = You spin the cylinder.
 
 rmc-examine-text-weapon-accuracy = The current accuracy multiplier is [color={$colour}]{TOSTRING($accuracy, "F2")}[/color].
@@ -24,6 +39,9 @@ rmc-examine-text-scatter-max = Current maximum scatter is [color={$colour}]{TOST
 rmc-examine-text-scatter-min = Current minimum scatter is [color={$colour}]{TOSTRING($scatter, "F1")}[/color] degrees.
 rmc-examine-text-shots-to-max-scatter = It takes [color={$colour}]{$shots}[/color] shots to reach maximum scatter.
 rmc-examine-text-iff = [color=cyan]This gun will ignore and shoot past friendlies![/color]
+rmc-examine-text-id-lock-no-user = [color=chartreuse]It's unregistered. Pick it up to register yourself as its owner.[/color]
+rmc-examine-text-id-lock = [color=chartreuse]It is registered to [/color][color={$color}]{$name}[/color][color=chartreuse].[/color]
+rmc-examine-text-id-lock-unlocked = [color=chartreuse]It is registered to [/color][color={$color}]{$name}[/color][color=chartreuse], but has its fire restrictions unlocked.[/color]
 
 rmc-gun-rack-examine = [bold]Press your [color=cyan]unique action[/color] keybind (Spacebar by default) to rack before shooting.[/bold]
 rmc-gun-rack-first-with = You need to rack the gun with {$key} first!
