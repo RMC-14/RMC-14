@@ -474,8 +474,8 @@
     - name: Commander's Primary
       choices: { CMProtagGun: 1 }
       entries:
-      - id: WeaponRifleM54C # TODO RMC14 Port M46C Protag Gun
-        name: Commander's M54C
+      - id: WeaponRifleM59A
+        name: M59A Prototype Rifle
         recommended: true # TODO RMC14 Make choices: colour the options brown
       - id: CMSmartGunOperatorEquipmentCaseBelt # TODO RMC14 Port M56C Smart Protag Gun
         name: Commander's Smartgun
