@@ -1185,7 +1185,7 @@
         name: tools pouch (empty)
       - id: RMCPouchConstruction
       - id: RMCPouchSling
-    - name: ACCESSORIES
+    - name: Accessories
       jobs:
       - CMAuxiliarySupportOfficer
       choices: { CMAccessories: 1 }
