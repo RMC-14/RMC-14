@@ -66,8 +66,12 @@ public abstract class SharedCMInventorySystem : EntitySystem
         SlotFlags.LEGS
     ];
 
+    private EntityQuery<RMCPickupDroppedItemsComponent> _pickupDroppedItemsQuery;
+
     public override void Initialize()
     {
+        _pickupDroppedItemsQuery = GetEntityQuery<RMCPickupDroppedItemsComponent>();
+
         SubscribeLocalEvent<GunComponent, IsUnholsterableEvent>(AllowUnholster);
         SubscribeLocalEvent<MeleeWeaponComponent, IsUnholsterableEvent>(AllowUnholster);
 
@@ -275,13 +279,13 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     protected void HandleDroppedItem(Entity<ItemComponent> ent, EntityUid user)
     {
-        if (TryComp<RMCPickupDroppedItemsComponent>(user, out var pickupDroppedItems))
+        if (_pickupDroppedItemsQuery.TryComp(user, out var pickupDroppedItems))
             pickupDroppedItems.DroppedItems.Add(ent.Owner);
     }
 
     protected void TryPickupDroppedItems(EntityUid user)
     {
-        if (!TryComp<RMCPickupDroppedItemsComponent>(user, out var pickupDroppedItems))
+        if (!_pickupDroppedItemsQuery.TryComp(user, out var pickupDroppedItems))
             return;
 
         foreach (var item in pickupDroppedItems.DroppedItems)
