@@ -930,7 +930,6 @@
     # ////////////////////////////////////
     # Quartermaster
     # ////////////////////////////////////
-    sections:
     - name: Standard Equipment
       jobs:
       - CMQuartermaster
