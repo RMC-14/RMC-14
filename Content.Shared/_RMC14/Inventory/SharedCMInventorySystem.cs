@@ -22,7 +22,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Inventory;
 
@@ -88,7 +87,8 @@ public abstract class SharedCMInventorySystem : EntitySystem
         SubscribeLocalEvent<CMHolsterComponent, EntInsertedIntoContainerMessage>(OnHolsterEntInsertedIntoContainer);
         SubscribeLocalEvent<CMHolsterComponent, EntRemovedFromContainerMessage>(OnHolsterEntRemovedFromContainer);
 
-        SubscribeLocalEvent<ItemComponent, RMCDroppedEvent>(OnItemDropped);
+        SubscribeLocalEvent<RMCPickupDroppedItemsComponent, DroppedEvent>(OnItemDropped);
+        SubscribeLocalEvent<RMCPickupDroppedItemsComponent, RMCDroppedEvent>(OnItemDropped);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMHolsterPrimary,
@@ -267,12 +267,17 @@ public abstract class SharedCMInventorySystem : EntitySystem
         ContentsUpdated(ent);
     }
 
-    protected void OnItemDropped(Entity<ItemComponent> ent, ref RMCDroppedEvent args)
+    protected void OnItemDropped(Entity<RMCPickupDroppedItemsComponent> ent, ref DroppedEvent args)
     {
         HandleDroppedItem(ent, args.User);
     }
 
-    protected void HandleDroppedItem(Entity<ItemComponent> ent, EntityUid user)
+    protected void OnItemDropped(Entity<RMCPickupDroppedItemsComponent> ent, ref RMCDroppedEvent args)
+    {
+        HandleDroppedItem(ent, args.User);
+    }
+
+    protected void HandleDroppedItem(Entity<RMCPickupDroppedItemsComponent> ent, EntityUid user)
     {
         if (_pickupDroppedItemsQuery.TryComp(user, out var pickupDroppedItems))
             pickupDroppedItems.DroppedItems.Add(ent.Owner);
