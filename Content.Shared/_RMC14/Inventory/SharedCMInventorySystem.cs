@@ -87,8 +87,8 @@ public abstract class SharedCMInventorySystem : EntitySystem
         SubscribeLocalEvent<CMHolsterComponent, EntInsertedIntoContainerMessage>(OnHolsterEntInsertedIntoContainer);
         SubscribeLocalEvent<CMHolsterComponent, EntRemovedFromContainerMessage>(OnHolsterEntRemovedFromContainer);
 
-        SubscribeLocalEvent<RMCPickupDroppedItemsComponent, DroppedEvent>(OnItemDropped);
-        SubscribeLocalEvent<RMCPickupDroppedItemsComponent, RMCDroppedEvent>(OnItemDropped);
+        SubscribeLocalEvent<RMCItemPickupComponent, DroppedEvent>(OnItemDropped);
+        SubscribeLocalEvent<RMCItemPickupComponent, RMCDroppedEvent>(OnItemDropped);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMHolsterPrimary,
