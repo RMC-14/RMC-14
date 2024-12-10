@@ -288,7 +288,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         if (!_pickupDroppedItemsQuery.TryComp(user, out var pickupDroppedItems))
             return;
 
-        foreach (var item in pickupDroppedItems.DroppedItems)
+        foreach (var item in pickupDroppedItems.DroppedItems.ToList())
         {
             // Remove the item from the list, break the loop if the user can pickup the item.
             // Otherwise, continue through the loop.
