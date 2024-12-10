@@ -798,6 +798,7 @@
     # ////////////////////////////////////
     # CE Shipside Gear
     - name: Shipside Gear
+      entries: [ ]
       jobs:
       - CMChiefEngineer
     - name: Standard Equipment
@@ -887,6 +888,7 @@
         name: small tool webbing (Full)
     # CE Deployment Gear
     - name: Deployment Gear
+      entries: [ ]
       jobs:
       - CMChiefEngineer
     - name: Combat Equipment
@@ -1126,7 +1128,7 @@
     # ////////////////////////////////////
     # Auxiliary Support Officer
     # ////////////////////////////////////
-    - name: STANDARD EQUIPMENT
+    - name: Standard Equipment
       jobs:
       - CMAuxiliarySupportOfficer
       takeAll: CMStandard
