@@ -46,17 +46,14 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                 var section = vendor.Sections[sectionIndex];
 
                 var validJob = true;
-                if (section.Jobs != null && _player.LocalSession != null)
+                if (_player.LocalSession != null && _mind.TryGetMind(_player.LocalSession.UserId, out var mindId))
                 {
-                    if (_mind.TryGetMind(_player.LocalSession.UserId, out var mindId))
+                    foreach (var job in section.Jobs)
                     {
-                        foreach (var job in section.Jobs)
-                        {
-                            if (!_job.MindHasJobWithId(mindId, job.Id))
-                                validJob = false;
-                            else
-                                validJob = true;
-                        }
+                        if (!_job.MindHasJobWithId(mindId, job.Id))
+                            validJob = false;
+                        else
+                            validJob = true;
                     }
                 }
 
@@ -185,7 +182,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         for (var sectionIndex = 0; sectionIndex < vendor.Sections.Count; sectionIndex++)
         {
             var section = vendor.Sections[sectionIndex];
-            var uiSection = (CMAutomatedVendorSection)_window.Sections.GetChild(sectionIndex);
+            var uiSection = (CMAutomatedVendorSection) _window.Sections.GetChild(sectionIndex);
             uiSection.Label.SetMessage(GetSectionName(user, section));
 
             var sectionDisabled = false;
@@ -202,7 +199,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
             for (var entryIndex = 0; entryIndex < section.Entries.Count; entryIndex++)
             {
                 var entry = section.Entries[entryIndex];
-                var uiEntry = (CMAutomatedVendorEntry)uiSection.Entries.GetChild(entryIndex);
+                var uiEntry = (CMAutomatedVendorEntry) uiSection.Entries.GetChild(entryIndex);
                 var disabled = sectionDisabled || entry.Amount <= 0;
                 if (section.TakeAll is { } takeAllId)
                 {
@@ -235,7 +232,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
 
             for (var entryIndex = 0; entryIndex < section.Entries.Count; entryIndex++)
             {
-                var uiEntry = (CMAutomatedVendorEntry)uiSection.Entries.GetChild(entryIndex);
+                var uiEntry = (CMAutomatedVendorEntry) uiSection.Entries.GetChild(entryIndex);
                 uiEntry.Amount.Visible = anyAmount;
             }
         }

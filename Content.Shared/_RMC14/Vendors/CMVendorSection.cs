@@ -25,7 +25,7 @@ public sealed partial class CMVendorSection
     public int? SharedSpecLimit;
 
     [DataField]
-    public List<ProtoId<JobPrototype>>? Jobs;
+    public List<ProtoId<JobPrototype>> Jobs = new();
 }
 
 [DataDefinition]
