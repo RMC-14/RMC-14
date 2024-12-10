@@ -288,7 +288,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         if (!_pickupDroppedItemsQuery.TryComp(user, out var pickupDroppedItems))
             return;
 
-        foreach (var item in pickupDroppedItems.DroppedItems.Distinct().ToList())
+        foreach (var item in pickupDroppedItems.DroppedItems.Distinct().Reverse())
         {
             if (!_container.IsEntityInContainer(item) && _interaction.InRangeUnobstructed(user, item) && _hands.TryPickupAnyHand(user, item))
             {
