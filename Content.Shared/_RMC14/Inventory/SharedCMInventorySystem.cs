@@ -288,17 +288,13 @@ public abstract class SharedCMInventorySystem : EntitySystem
         if (!_pickupDroppedItemsQuery.TryComp(user, out var pickupDroppedItems))
             return;
 
-        foreach (var item in pickupDroppedItems.DroppedItems.ToList())
+        foreach (var item in pickupDroppedItems.DroppedItems)
         {
-            // Remove the item from the list, break the loop if the user can pickup the item.
-            // Otherwise, continue through the loop.
-            pickupDroppedItems.DroppedItems.Remove(item);
-
-            if (!_interaction.InRangeUnobstructed(user, item))
-                continue;
-
-            if (_hands.TryPickupAnyHand(user, item))
+            if (!_interaction.InRangeUnobstructed(user, item) && _hands.TryPickupAnyHand(user, item))
+            {
+                pickupDroppedItems.DroppedItems.Remove(item);
                 break;
+            }
         }
     }
 
