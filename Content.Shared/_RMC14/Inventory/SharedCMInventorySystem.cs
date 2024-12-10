@@ -298,10 +298,10 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
         foreach (var item in pickupDroppedItems.DroppedItems.Distinct().Reverse())
         {
-            if (!_container.IsEntityInContainer(item) && _interaction.InRangeUnobstructed(user, item) && _hands.TryPickupAnyHand(user, item))
+            if (!_container.IsEntityInContainer(item) && _interaction.InRangeUnobstructed(user, item))
             {
-                pickupDroppedItems.DroppedItems.Remove(item);
-                break;
+                if (_hands.TryPickupAnyHand(user, item))
+                    break;
             }
         }
     }
