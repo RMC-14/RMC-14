@@ -267,17 +267,17 @@ public abstract class SharedCMInventorySystem : EntitySystem
         ContentsUpdated(ent);
     }
 
-    protected void OnItemDropped(Entity<RMCPickupDroppedItemsComponent> ent, ref DroppedEvent args)
+    protected void OnItemDropped(Entity<RMCItemPickupComponent> ent, ref DroppedEvent args)
     {
         HandleDroppedItem(ent, args.User);
     }
 
-    protected void OnItemDropped(Entity<RMCPickupDroppedItemsComponent> ent, ref RMCDroppedEvent args)
+    protected void OnItemDropped(Entity<RMCItemPickupComponent> ent, ref RMCDroppedEvent args)
     {
         HandleDroppedItem(ent, args.User);
     }
 
-    protected void HandleDroppedItem(Entity<RMCPickupDroppedItemsComponent> ent, EntityUid user)
+    protected void HandleDroppedItem(Entity<RMCItemPickupComponent> ent, EntityUid user)
     {
         if (_pickupDroppedItemsQuery.TryComp(user, out var pickupDroppedItems))
             pickupDroppedItems.DroppedItems.Add(ent.Owner);
