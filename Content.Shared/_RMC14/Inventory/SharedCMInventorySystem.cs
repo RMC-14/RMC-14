@@ -82,6 +82,8 @@ public abstract class SharedCMInventorySystem : EntitySystem
         SubscribeLocalEvent<CMHolsterComponent, EntInsertedIntoContainerMessage>(OnHolsterEntInsertedIntoContainer);
         SubscribeLocalEvent<CMHolsterComponent, EntRemovedFromContainerMessage>(OnHolsterEntRemovedFromContainer);
 
+        SubscribeLocalEvent<ItemComponent, RMCDroppedEvent>(OnItemDropped);
+
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMHolsterPrimary,
                 InputCmdHandler.FromDelegate(session =>
@@ -106,6 +108,12 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 {
                     if (session?.AttachedEntity is { } entity)
                         OnHolster(entity, 3, CMHolsterChoose.Last);
+                }, handle: false))
+            .Bind(CMKeyFunctions.RMCPickUpDroppedItems,
+                InputCmdHandler.FromDelegate(session =>
+                {
+                    if (session?.AttachedEntity is { } entity)
+                        TryPickupDroppedItems(entity);
                 }, handle: false))
             .Register<SharedCMInventorySystem>();
     }
@@ -251,6 +259,35 @@ public abstract class SharedCMInventorySystem : EntitySystem
         ent.Comp.Contents.Remove(item);
 
         ContentsUpdated(ent);
+    }
+
+    protected void OnItemDropped(Entity<ItemComponent> ent, ref RMCDroppedEvent args)
+    {
+        var user = args.User;
+
+        if (TryComp<RMCPickupDroppedItems>(user, out var pickupDroppedItems))
+            pickupDroppedItems.DroppedItems.Add(ent.Owner);
+    }
+
+    protected void TryPickupDroppedItems(EntityUid user)
+    {
+        if (!TryComp<RMCPickupDroppedItems>(user, out var pickupDroppedItems))
+            return;
+
+        foreach (var item in pickupDroppedItems.DroppedItems)
+        {
+            // Remove the item from the list, break the loop if the user can pickup the item. Else, continue through the loop.
+            pickupDroppedItems.DroppedItems.Remove(item);
+
+            if (_hands.TryPickup(user, item))
+            {
+                break;
+            }
+            else
+            {
+                continue;
+            }
+        }
     }
 
     protected virtual void ContentsUpdated(Entity<CMItemSlotsComponent> ent)
