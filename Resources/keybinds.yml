@@ -627,5 +627,4 @@ binds:
   key: Space
 - function: RMCPickUpDroppedItems
   type: State
-  key: E
-  mod1: Shift
+  key: R

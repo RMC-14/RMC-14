@@ -39,6 +39,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
 
     private readonly SlotFlags[] _order =
@@ -87,7 +88,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
         SubscribeLocalEvent<CMHolsterComponent, EntInsertedIntoContainerMessage>(OnHolsterEntInsertedIntoContainer);
         SubscribeLocalEvent<CMHolsterComponent, EntRemovedFromContainerMessage>(OnHolsterEntRemovedFromContainer);
 
-        SubscribeLocalEvent<ItemComponent, DroppedEvent>(OnItemDropped);
         SubscribeLocalEvent<ItemComponent, RMCDroppedEvent>(OnItemDropped);
 
         CommandBinds.Builder
@@ -267,11 +267,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
         ContentsUpdated(ent);
     }
 
-    protected void OnItemDropped(Entity<ItemComponent> ent, ref DroppedEvent args)
-    {
-        HandleDroppedItem(ent, args.User);
-    }
-
     protected void OnItemDropped(Entity<ItemComponent> ent, ref RMCDroppedEvent args)
     {
         HandleDroppedItem(ent, args.User);
@@ -293,14 +288,11 @@ public abstract class SharedCMInventorySystem : EntitySystem
             // Remove the item from the list, break the loop if the user can pickup the item. Else, continue through the loop.
             pickupDroppedItems.DroppedItems.Remove(item);
 
-            if (_hands.TryPickup(user, item))
-            {
-                break;
-            }
-            else
-            {
+            if (!_interaction.InRangeUnobstructed(user, item))
                 continue;
-            }
+
+            if (_hands.TryPickupAnyHand(user, item))
+                break;
         }
     }
 

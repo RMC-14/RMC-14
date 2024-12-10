@@ -8,5 +8,5 @@ namespace Content.Shared._RMC14.Inventory;
 public sealed partial class RMCPickupDroppedItemsComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public ValueList<EntityUid> DroppedItems = new();
+    public List<EntityUid> DroppedItems = new();
 }
