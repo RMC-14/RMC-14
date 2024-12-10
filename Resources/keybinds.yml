@@ -625,3 +625,6 @@ binds:
 - function: CMXenoWideSwing
   type: State
   key: Space
+- function: RMCPickUpDroppedItems
+  type: State
+  key: R

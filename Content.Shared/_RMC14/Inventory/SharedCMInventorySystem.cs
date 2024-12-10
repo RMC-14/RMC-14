@@ -5,9 +5,11 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
+using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Popups;
@@ -21,7 +23,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Inventory;
 
@@ -38,6 +39,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
     [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
 
     private readonly SlotFlags[] _order =
@@ -65,8 +67,12 @@ public abstract class SharedCMInventorySystem : EntitySystem
         SlotFlags.LEGS
     ];
 
+    private EntityQuery<RMCPickupDroppedItemsComponent> _pickupDroppedItemsQuery;
+
     public override void Initialize()
     {
+        _pickupDroppedItemsQuery = GetEntityQuery<RMCPickupDroppedItemsComponent>();
+
         SubscribeLocalEvent<GunComponent, IsUnholsterableEvent>(AllowUnholster);
         SubscribeLocalEvent<MeleeWeaponComponent, IsUnholsterableEvent>(AllowUnholster);
 
@@ -81,6 +87,9 @@ public abstract class SharedCMInventorySystem : EntitySystem
         SubscribeLocalEvent<CMHolsterComponent, AfterAutoHandleStateEvent>(OnHolsterComponentHandleState);
         SubscribeLocalEvent<CMHolsterComponent, EntInsertedIntoContainerMessage>(OnHolsterEntInsertedIntoContainer);
         SubscribeLocalEvent<CMHolsterComponent, EntRemovedFromContainerMessage>(OnHolsterEntRemovedFromContainer);
+
+        SubscribeLocalEvent<RMCItemPickupComponent, DroppedEvent>(OnItemDropped);
+        SubscribeLocalEvent<RMCItemPickupComponent, RMCDroppedEvent>(OnItemDropped);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMHolsterPrimary,
@@ -106,6 +115,12 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 {
                     if (session?.AttachedEntity is { } entity)
                         OnHolster(entity, 3, CMHolsterChoose.Last);
+                }, handle: false))
+            .Bind(CMKeyFunctions.RMCPickUpDroppedItems,
+                InputCmdHandler.FromDelegate(session =>
+                {
+                    if (session?.AttachedEntity is { } entity)
+                        TryPickupDroppedItems(entity);
                 }, handle: false))
             .Register<SharedCMInventorySystem>();
     }
@@ -251,6 +266,40 @@ public abstract class SharedCMInventorySystem : EntitySystem
         ent.Comp.Contents.Remove(item);
 
         ContentsUpdated(ent);
+    }
+
+    protected void OnItemDropped(Entity<RMCItemPickupComponent> ent, ref DroppedEvent args)
+    {
+        HandleDroppedItem(ent, args.User);
+    }
+
+    protected void OnItemDropped(Entity<RMCItemPickupComponent> ent, ref RMCDroppedEvent args)
+    {
+        HandleDroppedItem(ent, args.User);
+    }
+
+    protected void HandleDroppedItem(Entity<RMCItemPickupComponent> item, EntityUid user)
+    {
+        if (_pickupDroppedItemsQuery.TryComp(user, out var pickupDroppedItems))
+            pickupDroppedItems.DroppedItems.Add(item.Owner);
+    }
+
+    protected void TryPickupDroppedItems(EntityUid user)
+    {
+        if (!_pickupDroppedItemsQuery.TryComp(user, out var pickupDroppedItems))
+            return;
+
+        foreach (var item in pickupDroppedItems.DroppedItems.Distinct().Reverse())
+        {
+            if (!_container.IsEntityInContainer(item) && _interaction.InRangeUnobstructed(user, item))
+            {
+                if (_hands.TryPickupAnyHand(user, item))
+                {
+                    pickupDroppedItems.DroppedItems.Remove(item);
+                    break;
+                }
+            }
+        }
     }
 
     protected virtual void ContentsUpdated(Entity<CMItemSlotsComponent> ent)
