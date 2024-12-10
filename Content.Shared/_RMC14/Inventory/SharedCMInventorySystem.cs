@@ -8,6 +8,7 @@ using Content.Shared.Database;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Popups;
@@ -82,6 +83,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         SubscribeLocalEvent<CMHolsterComponent, EntInsertedIntoContainerMessage>(OnHolsterEntInsertedIntoContainer);
         SubscribeLocalEvent<CMHolsterComponent, EntRemovedFromContainerMessage>(OnHolsterEntRemovedFromContainer);
 
+        SubscribeLocalEvent<ItemComponent, DroppedEvent>(OnItemDropped);
         SubscribeLocalEvent<ItemComponent, RMCDroppedEvent>(OnItemDropped);
 
         CommandBinds.Builder
@@ -261,10 +263,18 @@ public abstract class SharedCMInventorySystem : EntitySystem
         ContentsUpdated(ent);
     }
 
+    protected void OnItemDropped(Entity<ItemComponent> ent, ref DroppedEvent args)
+    {
+        HandleDroppedItem(ent, args.User);
+    }
+
     protected void OnItemDropped(Entity<ItemComponent> ent, ref RMCDroppedEvent args)
     {
-        var user = args.User;
+        HandleDroppedItem(ent, args.User);
+    }
 
+    protected void HandleDroppedItem(Entity<ItemComponent> ent, EntityUid user)
+    {
         if (TryComp<RMCPickupDroppedItems>(user, out var pickupDroppedItems))
             pickupDroppedItems.DroppedItems.Add(ent.Owner);
     }
