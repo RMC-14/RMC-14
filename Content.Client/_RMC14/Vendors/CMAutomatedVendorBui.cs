@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using Content.Shared._RMC14.Medical.Refill;
 using Content.Shared._RMC14.Vendors;
+using Content.Shared.Mind;
+using Content.Shared.Roles.Jobs;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -20,6 +22,8 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IResourceCache _resource = default!;
+    [Dependency] private readonly SharedJobSystem _job = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
 
     private CMAutomatedVendorWindow? _window;
 
@@ -40,6 +44,22 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
             for (var sectionIndex = 0; sectionIndex < vendor.Sections.Count; sectionIndex++)
             {
                 var section = vendor.Sections[sectionIndex];
+
+                var validJob = true;
+                if (_player.LocalSession != null && _mind.TryGetMind(_player.LocalSession.UserId, out var mindId))
+                {
+                    foreach (var job in section.Jobs)
+                    {
+                        if (!_job.MindHasJobWithId(mindId, job.Id))
+                            validJob = false;
+                        else
+                            validJob = true;
+                    }
+                }
+
+                if (!validJob)
+                    continue;
+
                 var uiSection = new CMAutomatedVendorSection();
                 uiSection.Label.SetMessage(GetSectionName(user, section));
 
