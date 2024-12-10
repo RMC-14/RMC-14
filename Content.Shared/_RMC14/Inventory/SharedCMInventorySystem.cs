@@ -285,10 +285,10 @@ public abstract class SharedCMInventorySystem : EntitySystem
         HandleDroppedItem(ent, args.User);
     }
 
-    protected void HandleDroppedItem(Entity<RMCItemPickupComponent> ent, EntityUid user)
+    protected void HandleDroppedItem(Entity<RMCItemPickupComponent> item, EntityUid user)
     {
         if (_pickupDroppedItemsQuery.TryComp(user, out var pickupDroppedItems))
-            pickupDroppedItems.DroppedItems.Add(ent.Owner);
+            pickupDroppedItems.DroppedItems.Add(item.Owner);
     }
 
     protected void TryPickupDroppedItems(EntityUid user)
