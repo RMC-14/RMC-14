@@ -285,7 +285,8 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
         foreach (var item in pickupDroppedItems.DroppedItems)
         {
-            // Remove the item from the list, break the loop if the user can pickup the item. Else, continue through the loop.
+            // Remove the item from the list, break the loop if the user can pickup the item.
+            // Otherwise, continue through the loop.
             pickupDroppedItems.DroppedItems.Remove(item);
 
             if (!_interaction.InRangeUnobstructed(user, item))
