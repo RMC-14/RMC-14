@@ -609,7 +609,7 @@
       - id: CMHeadsetSeniorCommand
       - id: CMSatchel
       - id: CMMRE
-    - name: Uniform # TODO: Port this.
+    - name: Uniform
       jobs:
       - CMExecutiveOfficer
       choices: { CMUniform: 1 }
