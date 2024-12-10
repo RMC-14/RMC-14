@@ -5,6 +5,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
+using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -89,6 +90,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
         SubscribeLocalEvent<RMCItemPickupComponent, DroppedEvent>(OnItemDropped);
         SubscribeLocalEvent<RMCItemPickupComponent, RMCDroppedEvent>(OnItemDropped);
+        SubscribeLocalEvent<RMCItemPickupComponent, GotEquippedHandEvent>(OnItemEquipped);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.CMHolsterPrimary,
@@ -265,6 +267,12 @@ public abstract class SharedCMInventorySystem : EntitySystem
         ent.Comp.Contents.Remove(item);
 
         ContentsUpdated(ent);
+    }
+
+    private void OnItemEquipped(Entity<RMCItemPickupComponent> ent, ref GotEquippedHandEvent args)
+    {
+        if (_pickupDroppedItemsQuery.TryComp(args.User, out var pickupDroppedItems))
+            pickupDroppedItems.DroppedItems.Remove(ent.Owner);
     }
 
     protected void OnItemDropped(Entity<RMCItemPickupComponent> ent, ref DroppedEvent args)
