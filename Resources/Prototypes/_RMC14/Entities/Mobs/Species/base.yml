@@ -272,3 +272,4 @@
     blacklist:
       components:
       - Xeno
+  - type: RMCPickupDroppedItems
