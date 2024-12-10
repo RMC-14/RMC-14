@@ -294,7 +294,10 @@ public abstract class SharedCMInventorySystem : EntitySystem
             if (!_container.IsEntityInContainer(item) && _interaction.InRangeUnobstructed(user, item))
             {
                 if (_hands.TryPickupAnyHand(user, item))
+                {
+                    pickupDroppedItems.DroppedItems.Remove(item);
                     break;
+                }
             }
         }
     }
