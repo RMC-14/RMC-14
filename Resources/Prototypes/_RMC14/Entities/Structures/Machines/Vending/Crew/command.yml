@@ -1010,6 +1010,7 @@
       jobs:
       - CMCMO
       choices: { CMEyewear: 1 }
+      entries:
       - id: RMCGlassesMedicalHUDGlasses
       # - id: RMCGlassesMedicalHUDGlassesPrescription TODO
       # - id: RMCGlasesReagentScannerHUD TODO
