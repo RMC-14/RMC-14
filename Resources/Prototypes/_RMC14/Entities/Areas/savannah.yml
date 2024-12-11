@@ -77,6 +77,18 @@
     sprite: _RMC14/Areas/savannah.rsi
     state: other
 
+- type: entity
+  parent:
+  - RMCAreaSavannahCorridorAmidship
+  id: RMCAreaSavannahCorridorEngineering
+  name: Engineering Corridor
+
+- type: entity
+  parent:
+  - RMCAreaSavannahCorridorAmidship
+  id: RMCAreaSavannahCorridorEscape
+  name: Escape Pods Corridor
+
 # BRIG
 
 - type: entity
@@ -183,6 +195,12 @@
   - RMCAreaSavannahCommand
   id: RMCAreaSavannahASO
   name: ASO, IO and Command Cryo
+
+- type: entity
+  parent:
+  - RMCAreaSavannahCommand
+  id: RMCAreaSavannahTComms
+  name: TComms
 
 # MEDICAL
 
@@ -345,3 +363,21 @@
   - RMCAreaSavannah
   id: RMCAreaSavannahBriefing
   name: Briefing
+
+- type: entity
+  parent:
+  - RMCAreaSavannah
+  id: RMCAreaSavannahLifeboatAmidship
+  name: Lifeboat Docking Amidship
+
+- type: entity
+  parent:
+  - RMCAreaSavannahLifeboatAmidship
+  id: RMCAreaSavannahLifeboatStarboard
+  name: Lifeboat Docking Starboard
+  
+- type: entity
+  parent:
+  - RMCAreaSavannahLifeboatAmidship
+  id: RMCAreaSavannahLifeboatPort
+  name: Lifeboat Docking Port
