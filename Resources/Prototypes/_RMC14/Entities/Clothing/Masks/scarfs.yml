@@ -1,0 +1,202 @@
+- type: entity
+  parent: [ClothingMaskBaseButcherable, BaseFoldable]
+  id: RMCBaseScarfMask
+  abstract: true
+  components:
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+  - type: FoldableClothing
+    foldedEquippedPrefix: flipped
+    foldedHeldPrefix: flipped
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon
+      map: ["foldedLayer"]
+      visible: false
+  - type: IngestionBlocker
+
+- type: entity
+  parent: RMCBaseScarfMask
+  id: RMCBaseScarfDown
+  suffix: down
+  abstract: true
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    equippedPrefix: down
+  - type: Item
+    heldPrefix: down
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: icon
+      map: ["foldedLayer"]
+      visible: true
+
+# SQUADS
+
+- type: entity
+  parent: RMCBaseScarfMask
+  id: RMCMaskScarfAlpha
+  name: tactical wrap
+  description: A tactical wrap used by soldiers to conceal their face.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/alpha.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/alpha.rsi
+  - type: IdentityBlocker
+    coverage: MOUTH
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfAlpha]
+  id: RMCMaskScarfAlphaDown
+  name: tactical wrap
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfBravo
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/bravo.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/bravo.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfBravo]
+  id: RMCMaskScarfBravoDown
+  name: tactical wrap
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfCharlie
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/charlie.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/charlie.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfCharlie]
+  id: RMCMaskScarfCharlieDown
+  name: tactical wrap
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfDelta
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/delta.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/delta.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfDelta]
+  id: RMCMaskScarfDeltaDown
+  name: tactical wrap
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfEcho
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/echo.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/echo.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfEcho]
+  id: RMCMaskScarfEchoDown
+  name: tactical wrap
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfFoxtrot
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/foxtrot.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/foxtrot.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfFoxtrot]
+  id: RMCMaskScarfFoxtrotDown
+  name: tactical wrap
+
+# COLOURS
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfRed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/alpha.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/alpha.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfRed]
+  id: RMCMaskScarfRedDown
+  name: tactical wrap
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/black.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfBlack]
+  id: RMCMaskScarfBlackDown
+  name: tactical wrap
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfGray
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/gray.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/gray.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfGray]
+  id: RMCMaskScarfGrayDown
+  name: tactical wrap
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfGreen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/green.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfGreen]
+  id: RMCMaskScarfGreenDown
+  name: tactical wrap
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfTan
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/tan.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/tan.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfTan]
+  id: RMCMaskScarfTanDown
+  name: tactical wrap
