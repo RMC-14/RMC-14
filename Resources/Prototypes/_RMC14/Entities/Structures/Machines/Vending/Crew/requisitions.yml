@@ -525,6 +525,16 @@
         amount: 20
       - id: CMMaskCoif
         amount: 10
+      - id: RMCMaskScarfRed
+        amount: 10
+      - id: RMCMaskScarfBlack
+        amount: 10
+      - id: RMCMaskScarfGray
+        amount: 10
+      - id: RMCMaskScarfGreen
+        amount: 10
+      - id: RMCMaskScarfTan
+        amount: 10
       - id: RMCMaskRebreather
         amount: 20
     - name: Miscellaneous
