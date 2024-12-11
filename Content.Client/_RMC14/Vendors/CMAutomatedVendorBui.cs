@@ -22,13 +22,16 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IResourceCache _resource = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
+
+    private readonly SharedJobSystem _job;
+    private readonly SharedMindSystem _mind;
 
     private CMAutomatedVendorWindow? _window;
 
     public CMAutomatedVendorBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
+        _job = EntMan.System<SharedJobSystem>();
+        _mind = EntMan.System<SharedMindSystem>();
     }
 
     protected override void Open()
