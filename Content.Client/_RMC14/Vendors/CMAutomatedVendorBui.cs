@@ -60,11 +60,11 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                     }
                 }
 
-                if (!validJob)
-                    continue;
-
                 var uiSection = new CMAutomatedVendorSection();
                 uiSection.Label.SetMessage(GetSectionName(user, section));
+
+                if (!validJob)
+                    uiSection.Visible = false; // hide the section
 
                 for (var entryIndex = 0; entryIndex < section.Entries.Count; entryIndex++)
                 {
