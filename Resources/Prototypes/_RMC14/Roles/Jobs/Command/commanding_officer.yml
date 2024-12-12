@@ -74,6 +74,7 @@
   equipment:
     jumpsuit: CMJumpsuitBO
     back: CMSatchel
+    belt: RMCMatebaBeltFilled
     shoes: CMShoesLaceupCommander
     head: CMHeadBeretCO
     outerClothing: RMCCoatService
