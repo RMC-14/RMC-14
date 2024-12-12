@@ -28,7 +28,7 @@
   id: RMCPodDoorButtonSeniorLocked
   parent: RMCPodDoorButton
   name: button
-  suffix: Senior
+  suffix: Senior, Locked
   description: A remote control-switch for a door.
   components:
   - type: AccessReader
