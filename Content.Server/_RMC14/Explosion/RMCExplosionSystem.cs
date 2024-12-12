@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Server._RMC14.Effect;
 using Content.Server.Decals;
 using Content.Server.Explosion.Components;
 using Content.Server.Explosion.EntitySystems;
@@ -90,7 +91,7 @@ public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
         _trigger.HandleTimerTrigger(ent, args.User, ent.Comp.Delay, ent.Comp.BeepInterval, null, null);
     }
 
-    private void OnExplosionEffectTriggered(Entity<RMCScorchEffectComponent> ent, ref CMExplosiveTriggeredEvent args)
+    private void OnExplosionEffectTriggered(Entity<Effect.RMCScorchEffectComponent> ent, ref CMExplosiveTriggeredEvent args)
     {
         if (_scorchDecals.Length == 0)
             return;

@@ -57,6 +57,8 @@
           Three: { state: red_3 }
           Four: { state: red_4 }
   - type: IgnorePredictionHit
+  - type: RMCScorchEffectOnSpawn
+    decalTag: burnt
 
 - type: entity
   parent: RMCTileFire
