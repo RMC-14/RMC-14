@@ -17,6 +17,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using RMCScorchEffectComponent = Content.Server._RMC14.Scorch.RMCScorchEffectComponent;
 
 namespace Content.Server._RMC14.Explosion;
 
@@ -91,7 +92,7 @@ public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
         _trigger.HandleTimerTrigger(ent, args.User, ent.Comp.Delay, ent.Comp.BeepInterval, null, null);
     }
 
-    private void OnExplosionEffectTriggered(Entity<Effect.RMCScorchEffectComponent> ent, ref CMExplosiveTriggeredEvent args)
+    private void OnExplosionEffectTriggered(Entity<RMCScorchEffectComponent> ent, ref CMExplosiveTriggeredEvent args)
     {
         if (_scorchDecals.Length == 0)
             return;
