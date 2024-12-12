@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Numerics;
-using Content.Server._RMC14.Effect;
 using Content.Server.Decals;
 using Content.Server.Explosion.Components;
 using Content.Server.Explosion.EntitySystems;
@@ -17,7 +16,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using RMCScorchEffectComponent = Content.Server._RMC14.Scorch.RMCScorchEffectComponent;
+using Content.Server._RMC14.Scorch;
 
 namespace Content.Server._RMC14.Explosion;
 
