@@ -994,9 +994,9 @@
 
 - type: entity
   parent: CMBeltBaseStorage
-  id: RMCDeagleBelt
-  name: M276 pattern Desert Eagle holster rig
-  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Desert Eagle, along with six small pouches for magazines.
+  id: RMCMagnumAutomaticBelt
+  name: M276 pattern Magnum Automatic holster rig
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Magnum Automatic, along with six small pouches for magazines.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
@@ -1026,7 +1026,7 @@
   #      - EngineerKit # TODO RMC14
   - type: Tag
     tags:
-    - RMCDeagleHolster
+    - RMCMagnumAutomaticHolster
   - type: FixedItemSizeStorage
   - type: CMHolster
     whitelist:
@@ -1040,17 +1040,17 @@
         - Gun
 
 - type: Tag
-  id: RMCDeagleHolster
+  id: RMCMagnumAutomaticHolster
 
 - type: entity
-  parent: RMCDeagleBelt
-  id: RMCDeagleBeltFilled
+  parent: RMCMagnumAutomaticBelt
+  id: RMCMagnumAutomaticBeltFilled
   suffix: Filled
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazinePistolDeagleHI
+    - id: CMMagazinePistolMagnumAutomaticHI
       amount: 4
-    - id: CMMagazinePistolDeagleHIAP
+    - id: CMMagazinePistolMagnumAutomaticHIAP
       amount: 2
-    - id: CMWeaponPistolCOdeagle
+    - id: CMWeaponPistolCOMagnumAutomatic

@@ -1,7 +1,7 @@
 - type: entity
   parent: CMWeaponPistolBase
-  id: CMWeaponPistolCOdeagle
-  name: Vintage Desert Eagle
+  id: CMWeaponPistolCOMagnumAutomatic
+  name: Vintage Magnum Automatic
   description: A bulky 50 caliber pistol with a serious kick. Hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. Very elegant.
   components:
   - type: Gun
@@ -16,9 +16,9 @@
     baseFireRate: 1.43
     burstScatterMult: 7
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/deaglecustom.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/magnumautomaticvintage.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/deaglecustom.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/magnumautomaticvintage.rsi
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 7.2
     accuracyMultiplierUnwielded: 3.9
@@ -31,9 +31,9 @@
         priority: 2
         whitelist:
           tags:
-          - CMMagazinePistolDeagleHI
-          - CMMagazinePistolDeagleHIAP
-        startingItem: CMMagazinePistolDeagleHI
+          - CMMagazinePistolMagnumAutomaticHI
+          - CMMagazinePistolMagnumAutomaticHIAP
+        startingItem: CMMagazinePistolMagnumAutomaticHI
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -60,13 +60,13 @@
 
 - type: entity
   parent: CMBaseMagazinePistol
-  id: CMMagazinePistolDeagleHI
-  name: High Impact Desert Eagle Magazine (.50AE)
+  id: CMMagazinePistolMagnumAutomaticHI
+  name: High Impact Magnum Automatic Magazine (.50AE)
   components:
   - type: Tag
     tags:
     - CMMagazinePistol
-    - CMMagazinePistolDeagleHI
+    - CMMagazinePistolMagnumAutomaticHI
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -75,7 +75,7 @@
     proto: CMCartridgePistolHI50AE
     capacity: 7
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/deagle.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/magnumautomatic.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -113,13 +113,13 @@
 
 - type: entity
   parent: CMBaseMagazinePistol
-  id: CMMagazinePistolDeagleHIAP
-  name: High Impact Armor-Piercing Desert Eagle Magazine (.50AE)
+  id: CMMagazinePistolMagnumAutomaticHIAP
+  name: High Impact Armor-Piercing Magnum Automatic Magazine (.50AE)
   components:
   - type: Tag
     tags:
     - CMMagazinePistol
-    - CMMagazinePistolDeagleHIAP
+    - CMMagazinePistolMagnumAutomaticHIAP
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -128,7 +128,7 @@
     proto: CMCartridgePistolHIAP50AE
     capacity: 7
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/deagle.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/magnumautomatic.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -165,13 +165,13 @@
     accuracy: 90
 
 - type: Tag
-  id: CMMagazinePistolDeagleHI
+  id: CMMagazinePistolMagnumAutomaticHI
 
 - type: Tag
   id: CMCartridgePistolHI50AE
 
 - type: Tag
-  id: CMMagazinePistolDeagleHIAP
+  id: CMMagazinePistolMagnumAutomaticHIAP
 
 - type: Tag
   id: CMCartridgePistolHIAP50AE
