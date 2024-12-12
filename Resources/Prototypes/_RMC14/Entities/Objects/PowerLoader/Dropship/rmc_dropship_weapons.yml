@@ -27,7 +27,7 @@
     cost: 400
   - type: DropshipWeapon
     abbreviation: GAU
-    fireDelay: 2
+    fireDelay: 10
     fireInTransport: true
     skills:
       all:

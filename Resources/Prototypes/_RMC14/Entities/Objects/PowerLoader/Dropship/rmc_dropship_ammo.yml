@@ -50,12 +50,15 @@
   - type: DropshipFabricatorPrintable
     cost: 325
   - type: DropshipAmmo
-    bulletSpread: 4
+    bulletSpread: 0
     damage:
       groups:
-        Brute: 80
-    armorPiercing: 40
-    travelTime: 6
+        Brute: 400
+    armorPiercing: 20
+    travelTime: 3
+    rounds: 5
+    maxRounds: 5
+    roundsPerShot: 1
 
 - type: entity
   id: RMCEffectExplosionParticle
