@@ -69,7 +69,7 @@ public abstract class SharedPumpActionSystem : EntitySystem
         args.Handled = true;
 
         if (_net.IsServer)
-            _audio.PlayPvs(ent.Comp.Sound, args.User);
+            _audio.PlayPvs(ent.Comp.Sound, args.UserUid);
     }
 
     private void OnEntRemovedFromContainer(Entity<PumpActionComponent> ent, ref EntRemovedFromContainerMessage args)
