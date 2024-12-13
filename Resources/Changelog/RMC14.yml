@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed no ground sound playing after all bullets land with the GAU-21.
-    type: Fix
-  - message: Fixed the ghost of dropship ammo shot in the past lingering around and
-      lagging the server.
-    type: Fix
-  id: 595
-  time: '2024-08-20T11:59:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3761
-- author: DrSmugleaf
-  changes:
   - message: Fixed CAS fire exploding grenades and destroying everything in your pockets.
     type: Fix
   id: 596
@@ -4980,5 +4970,13 @@
   id: 1094
   time: '2024-12-13T14:14:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5111
+- author: Dutch-VanDerLinde
+  changes:
+  - message: CMO, ASO, CE, CMP, and QM now have access to the senior officer vendor,
+      each job getting unique contents in the vendor.
+    type: Add
+  id: 1095
+  time: '2024-12-13T14:16:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5106
 Name: RMC14
 Order: -1
