@@ -144,4 +144,6 @@ public enum LogType
     RMCTackle = RMCMarineAnnounce + 19,
     RMCHolster = RMCMarineAnnounce + 20,
     RMCBurrowedLarva = RMCMarineAnnounce + 21,
+    RMCOrbitalBombardment = RMCMarineAnnounce + 22,
+    RMCXenoTunnel = RMCMarineAnnounce + 23,
 }

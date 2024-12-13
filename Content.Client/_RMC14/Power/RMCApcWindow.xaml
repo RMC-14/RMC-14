@@ -4,7 +4,7 @@
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     Title="APC" MinSize="450 450">
     <BoxContainer Orientation="Vertical">
-        <RichTextLabel Name="LockedLabel" Access="Public" Visible="False" />
+        <RichTextLabel Name="LockedLabel" Access="Public" Visible="True" />
         <RichTextLabel Name="PowerStatusLabel" Access="Public" Margin="0 10 0 0" />
         <ui:BlueHorizontalSeparator />
         <BoxContainer Orientation="Horizontal" Visible="False">
@@ -33,9 +33,9 @@
             <RichTextLabel Text="[color=#5B88B0]Total Load:[/color]" MinWidth="120" />
             <RichTextLabel Name="TotalLoadWatts" Access="Public" />
         </BoxContainer>
-        <RichTextLabel Name="MiscLabel" Access="Public" Margin="0 25 0 0" Visible="False" />
-        <ui:BlueHorizontalSeparator Visible="False" />
-        <BoxContainer Orientation="Horizontal" Visible="False">
+        <RichTextLabel Name="MiscLabel" Access="Public" Margin="0 25 0 0" Visible="True" />
+        <ui:BlueHorizontalSeparator Visible="True" />
+        <BoxContainer Orientation="Horizontal" Visible="True">
             <RichTextLabel Text="[color=#5B88B0]Cover Lock:[/color]" />
             <Control HorizontalExpand="True" />
             <Button Name="CoverButton" Access="Public" StyleClasses="OpenBoth" />

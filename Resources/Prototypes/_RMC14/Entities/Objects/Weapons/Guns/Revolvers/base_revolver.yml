@@ -51,6 +51,11 @@
     item: Sidearm
   - type: GunUnskilledPenalty
     angleIncrease: 5
+  - type: GunDualWielding
+    weaponGroup: Handgun
+  - type: GunPointBlank
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 0.85
 
 - type: Tag
   id: RMCMagazineRevolver

@@ -284,7 +284,10 @@ namespace Content.Server.Database
                     HelmetName = profile.NamedItems?.HelmetName,
                     ArmorName = profile.NamedItems?.ArmorName,
                     SentryName = profile.NamedItems?.SentryName,
-                }
+                },
+                profile.PlaytimePerks,
+                profile.XenoPrefix,
+                profile.XenoPostfix
             );
         }
 
@@ -375,6 +378,10 @@ namespace Content.Server.Database
                 ArmorName = humanoid.NamedItems.ArmorName,
                 SentryName = humanoid.NamedItems.SentryName,
             };
+
+            profile.PlaytimePerks = humanoid.PlaytimePerks;
+            profile.XenoPrefix = humanoid.XenoPrefix;
+            profile.XenoPostfix = humanoid.XenoPostfix;
 
             return profile;
         }
@@ -1683,13 +1690,13 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 .ToListAsync(cancellationToken: cancel);
         }
 
-        public async Task<bool> IsJobWhitelisted(Guid player, ProtoId<JobPrototype> job)
+        public async Task<bool> IsJobWhitelisted(Guid player, ProtoId<JobPrototype> job, CancellationToken cancel = default)
         {
-            await using var db = await GetDb();
+            await using var db = await GetDb(cancel);
             return await db.DbContext.RoleWhitelists
                 .Where(w => w.PlayerUserId == player)
                 .Where(w => w.RoleId == job.Id)
-                .AnyAsync();
+                .AnyAsync(cancel);
         }
 
         public async Task<bool> RemoveJobWhitelist(Guid player, ProtoId<JobPrototype> job)

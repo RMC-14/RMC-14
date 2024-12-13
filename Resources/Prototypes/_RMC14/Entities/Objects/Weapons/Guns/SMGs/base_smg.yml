@@ -35,8 +35,9 @@
   - type: Tag
     tags:
     - RMCWeaponSMG
-  - type: GunGroupSpreadPenalty
-    damageMultiplier: 0.4
+  - type: GunDualWielding
+    weaponGroup: Submachinegun
+  - type: GunPointBlank
 
 - type: entity
   parent: BaseCartridgeCaselessRifle

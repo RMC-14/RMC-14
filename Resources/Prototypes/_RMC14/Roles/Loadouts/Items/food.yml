@@ -1,0 +1,128 @@
+# Food (sweets)
+- type: loadout
+  id: ChocolateBarRMC
+  cost: 2
+  storage:
+    back:
+    - FoodSnackChocolateBar
+
+- type: loadout
+  id: CookieRMC
+  cost: 2
+  storage:
+    back:
+    - FoodBakedCookie
+
+- type: loadout
+  id: FortuneCookieRMC
+  cost: 3
+  storage:
+    back:
+    - CMFortuneCookie
+
+- type: loadout
+  id: DonutRMC
+  cost: 2
+  storage:
+    back:
+    - RMCFoodDonut
+
+# Food (packaged)
+- type: loadout
+  id: JerkyRMC
+  cost: 2
+  storage:
+    back:
+    - FoodSnackSus
+
+- type: loadout
+  id: MeatBarRMC
+  cost: 2
+  storage:
+    back:
+    - RMCFoodSnackEATBar
+
+- type: loadout
+  id: ChipsRMC
+  cost: 2
+  storage:
+    back:
+    - RMCFoodSnackKeplarCrisps
+
+- type: loadout
+  id: BurritoRMC
+  cost: 2
+  storage:
+    back:
+    - RMCFoodSnackBurritoPackaged
+
+- type: loadout
+  id: CheeseburgerRMC
+  cost: 2
+  storage:
+    back:
+    - RMCFoodSnackCheeseburgerPackaged
+
+- type: loadout
+  id: HotdogRMC
+  cost: 2
+  storage:
+    back:
+    - RMCFoodSnackHotdogPackaged
+
+- type: loadout
+  id: PepperChipsRMC
+  cost: 2
+  storage:
+    back:
+    - RMCFoodSnackChipsPepper
+
+# Food (healthy)
+- type: loadout
+  id: AppleRMC
+  cost: 2
+  storage:
+    back:
+    - FoodApple
+
+- type: loadout
+  id: CarrotRMC
+  cost: 2
+  storage:
+    back:
+    - FoodCarrot
+
+- type: loadout
+  id: CornRMC
+  cost: 2
+  storage:
+    back:
+    - FoodCorn
+
+- type: loadout
+  id: LemonRMC
+  cost: 2
+  storage:
+    back:
+    - FoodLemon
+
+- type: loadout
+  id: LimeRMC
+  cost: 2
+  storage:
+    back:
+    - FoodLime
+
+- type: loadout
+  id: OrangeRMC
+  cost: 2
+  storage:
+    back:
+    - FoodOrange
+
+- type: loadout
+  id: PotatoRMC
+  cost: 2
+  storage:
+    back:
+    - FoodPotato

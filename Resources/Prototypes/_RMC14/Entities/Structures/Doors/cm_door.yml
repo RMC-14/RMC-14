@@ -96,6 +96,7 @@
   - type: RMCDropshipBlocked
   - type: Corrodible
     isCorrodible: false
+    structure: true
 
 - type: entity
   abstract: true
@@ -152,6 +153,7 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: DamageMultiplierFlags
     flags: Breaching
   - type: Corrodible

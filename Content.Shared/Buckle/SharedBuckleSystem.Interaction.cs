@@ -1,5 +1,3 @@
-using System.Linq;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
@@ -47,7 +45,14 @@ public abstract partial class SharedBuckleSystem
         }
         else
         {
-            var doAfterArgs = new DoAfterArgs(EntityManager, args.User, component.BuckleDoafterTime, new BuckleDoAfterEvent(), args.Dragged, args.Dragged, uid)
+            var delay = component.BuckleDoafterTime;
+            if (TryComp(args.Dragged, out BuckleComponent? buckle) &&
+                buckle.BuckleDelay != null)
+            {
+                delay = buckle.BuckleDelay.Value;
+            }
+
+            var doAfterArgs = new DoAfterArgs(EntityManager, args.User, delay, new BuckleDoAfterEvent(), args.Dragged, args.Dragged, uid)
             {
                 BreakOnMove = true,
                 BreakOnDamage = true,
@@ -116,6 +121,9 @@ public abstract partial class SharedBuckleSystem
     private void OnBuckleInteractHand(Entity<BuckleComponent> ent, ref InteractHandEvent args)
     {
         if (args.Handled)
+            return;
+
+        if (!ent.Comp.ClickUnbuckle)
             return;
 
         if (ent.Comp.BuckledTo != null)

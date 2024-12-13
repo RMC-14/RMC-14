@@ -6,6 +6,7 @@
   components:
   - type: Corrodible
     timeToApply: 4
+    structure: true
   - type: Item
     size: Normal
   - type: Clickable
@@ -126,6 +127,7 @@
   - type: RMCNameItemOnVend
     item: Sentry
   - type: RequireProjectileTarget
+  - type: RMCWeaponAccuracy
 
 - type: htnCompound
   id: RMCSentryCompound
@@ -301,6 +303,9 @@
         11.0
   - type: Sentry
     upgrades: null
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 4
+    accuracyMultiplierUnwielded: 4
 
 - type: entity
   parent: RMCSentry
@@ -407,3 +412,39 @@
     upgrades: null
     startingMagazine: RMCMagazineSentryShotgun
     magazineTag: RMCMagazineSentryShotgun
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 2
+    accuracyMultiplierUnwielded: 2
+
+- type: entity
+  parent: RMCBaseTurret
+  id: RMCTurretGaussDumb
+  name: damaged UN-577 gauss turret
+  description: A deployable, semi-automated turret with AI targeting capabilities. Armed with an M30 Autocannon and a high-capacity drum magazine. This one's IFF system has been fried via acid damage, and it will open fire on any targets within range.
+  components:
+  - type: Gun
+    fireRate: 2.5
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: RMCCartridgeSentry
+    capacity: 99999
+  - type: NpcFactionMember
+    factions:
+    - RMCDumb
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: MaxRotation
+    deviation: 75
+  - type: ProjectileDamageReceived
+    multiplier: 0.1

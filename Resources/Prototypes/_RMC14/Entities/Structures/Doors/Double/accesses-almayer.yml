@@ -1,0 +1,118 @@
+# Req
+- type: entity
+  parent: CMDoubleDoorAlmayerGlass
+  id: CMDoubleDoorRequisitionsGlassLocked
+  suffix: Requisitions, Glass, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessRequisitions" ], [ "CMAccessCommand" ] ]
+
+- type: entity
+  parent: CMDoubleDoorAlmayerSolid
+  id: CMDoubleDoorRequisitionsSolidLocked
+  suffix: Requisitions, Solid, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessRequisitions" ], [ "CMAccessCommand" ] ]
+
+# Engi
+- type: entity
+  parent: CMDoubleDoorEngineerGlass
+  id: CMDoubleDoorEngineerGlassLocked
+  suffix: Engineer, Glass, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessEngineering" ], [ "CMAccessCommand" ] ]
+
+- type: entity
+  parent: CMDoubleDoorEngineerSolid
+  id: CMDoubleDoorEngineerSolidLocked
+  suffix: Engineer, Solid, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessEngineering" ], [ "CMAccessCommand" ] ]
+
+# Medical
+- type: entity
+  parent: CMDoubleDoorMedicalGlass
+  id: CMDoubleDoorMedicalGlassLocked
+  suffix: Medical, Glass, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessMedical" ], [ "CMAccessCommand" ] ]
+
+- type: entity
+  parent: CMDoubleDoorMedicalSolid
+  id: CMDoubleDoorMedicalSolidLocked
+  suffix: Medical, Solid, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessMedical" ], [ "CMAccessCommand" ] ]
+
+# Chemistry
+- type: entity
+  parent: CMDoubleDoorMedicalGlass
+  id: CMDoubleDoorChemistryGlassLocked
+  suffix: Chemistry, Glass, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessChemistry" ], [ "CMAccessCommand" ] ]
+
+- type: entity
+  parent: CMDoubleDoorMedicalSolid
+  id: CMDoubleDoorChemistrySolidLocked
+  suffix: Chemistry, Solid, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessChemistry" ], [ "CMAccessCommand" ] ]
+
+# Research
+- type: entity
+  parent: CMDoubleDoorMedicalGlass
+  id: CMDoubleDoorResearchGlassLocked
+  suffix: Research, Glass, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessResearch" ], [ "RMCAccessWeYa" ] ]
+
+- type: entity
+  parent: CMDoubleDoorMedicalSolid
+  id: CMDoubleDoorResearchSolidLocked
+  suffix: Research, Solid, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessResearch" ], [ "RMCAccessWeYa" ] ]
+
+# Pilots
+- type: entity
+  parent: CMDoubleDoorGenericGlass
+  id: CMDoubleDoorPilotsGlassLocked
+  suffix: Pilots, Glass, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessDropship" ], [ "CMAccessCommand" ] ]
+
+- type: entity
+  parent: CMDoubleDoorGenericSolid
+  id: CMDoubleDoorPilotsSolidLocked
+  suffix: Pilots, Solid, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessDropship" ], [ "CMAccessCommand" ] ]
+
+# Security
+- type: entity
+  parent: CMDoubleDoorSecurityGlass
+  id: CMDoubleDoorSecurityGlassLocked
+  suffix: Security, Glass, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessBrig" ], [ "CMAccessCommand" ] ]
+
+- type: entity
+  parent: CMDoubleDoorSecuritySolid
+  id: CMDoubleDoorSecuritySolidLocked
+  suffix: Security, Solid, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessBrig" ], [ "CMAccessCommand" ] ]

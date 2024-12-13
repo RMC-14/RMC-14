@@ -18,6 +18,7 @@ public enum DropshipTerminalWeaponsScreen
     StrikeWeapon,
     Cams,
     SelectingWeapon,
+    Medevac,
 }
 
 [Serializable, NetSerializable]
@@ -32,6 +33,12 @@ public sealed class DropshipTerminalWeaponsChooseWeaponMsg(bool first, NetEntity
 {
     public readonly bool First = first;
     public readonly NetEntity Weapon = weapon;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsChooseMedevacMsg(bool first) : BoundUserInterfaceMessage
+{
+    public readonly bool First = first;
 }
 
 [Serializable, NetSerializable]
@@ -62,26 +69,31 @@ public sealed class DropshipTerminalWeaponsFireMsg(bool first) : BoundUserInterf
 }
 
 [Serializable, NetSerializable]
-public sealed class DropshipTerminalWeaponsNightVisionMsg(bool first, bool on) : BoundUserInterfaceMessage
+public sealed class DropshipTerminalWeaponsNightVisionMsg(bool on) : BoundUserInterfaceMessage
 {
-    public readonly bool First = first;
     public readonly bool On = on;
 }
 
 [Serializable, NetSerializable]
-public sealed class DropshipTerminalWeaponsTargetsPreviousMsg(bool first) : BoundUserInterfaceMessage
-{
-    public readonly bool First = first;
-}
+public sealed class DropshipTerminalWeaponsTargetsPreviousMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
-public sealed class DropshipTerminalWeaponsTargetsNextMsg(bool first) : BoundUserInterfaceMessage
-{
-    public readonly bool First = first;
-}
+public sealed class DropshipTerminalWeaponsTargetsNextMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
 public sealed class DropshipTerminalWeaponsTargetsSelectMsg(NetEntity target) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity Target = target;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsMedevacPreviousMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsMedevacNextMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsMedevacSelectMsg(NetEntity target) : BoundUserInterfaceMessage
 {
     public readonly NetEntity Target = target;
 }

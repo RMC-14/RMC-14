@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Marines.Skills;
+﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
@@ -9,8 +10,10 @@ using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Stunnable;
 using Content.Shared.Whitelist;
 using Robust.Shared.Timing;
+using Robust.Shared.Containers;
 using static Content.Shared.Storage.StorageComponent;
 
 namespace Content.Shared._RMC14.Storage;
@@ -29,11 +32,13 @@ public sealed class RMCStorageSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
 
     private readonly List<EntityUid> _toRemove = new();
 
     private EntityQuery<StorageComponent> _storageQuery;
 
+    private readonly TimeSpan STUN_STORAGE = TimeSpan.FromSeconds(4);
     public override void Initialize()
     {
         _storageQuery = GetEntityQuery<StorageComponent>();
@@ -48,6 +53,7 @@ public sealed class RMCStorageSystem : EntitySystem
         SubscribeLocalEvent<StorageCloseOnMoveComponent, GotEquippedEvent>(OnStorageEquip);
 
         SubscribeLocalEvent<BlockEntityStorageComponent, InsertIntoEntityStorageAttemptEvent>(OnBlockInsertIntoEntityStorageAttempt);
+        SubscribeLocalEvent<MarineComponent, EntGotRemovedFromContainerMessage>(OnRemovedMarineFromContainer);
 
         Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, subs =>
         {
@@ -186,6 +192,12 @@ public sealed class RMCStorageSystem : EntitySystem
     {
         if (_entityWhitelist.IsWhitelistPassOrNull(ent.Comp.Whitelist, args.Container))
             args.Cancelled = true;
+    }
+
+    private void OnRemovedMarineFromContainer(Entity<MarineComponent> ent, ref EntGotRemovedFromContainerMessage args)
+    {
+        if (!HasComp<NoStunOnExitComponent>(args.Container.Owner) && _timing.IsFirstTimePredicted)
+            _stun.TryStun(ent, STUN_STORAGE, true);
     }
 
     private void OnCloseOnMoveUIClosed(Entity<StorageOpenComponent> ent, ref BoundUIClosedEvent args)

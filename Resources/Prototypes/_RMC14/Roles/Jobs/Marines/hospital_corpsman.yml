@@ -12,6 +12,7 @@
     department: CMSquad
     time: 3600 # 1 hour
   startingGear: CMGearHospitalCorpsman
+  dummyStartingGear: CMGearHospitalCorpsmanEquipped
   icon: "CMJobIconHospitalCorpsman"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
@@ -42,19 +43,16 @@
 - type: startingGear
   id: CMGearHospitalCorpsman
   equipment:
-    back: CMSatchelMarineMedic
     id: CMDogtagHospitalCorpsman
 
 - type: startingGear
   id: CMGearHospitalCorpsmanEquipped
   equipment:
-    jumpsuit: CMJumpsuitMarineMedic
-    back: CMSatchelMarineMedic
+    jumpsuit: CMJumpsuitMarineMedicCamo
     shoes: CMBootsBlackFilled
-    gloves: CMHandsBlackMarine
-    eyes: RMCGlassesMedicalHUDGlasses
-    head: CMArmorHelmetM10Medic
-    outerClothing: CMArmorM3Medium
+    gloves: RMCHandsLatexMarine
+    head: RMCArmorHelmetM10MedicCamo
+    outerClothing: RMCArmorM3MediumVariants
     id: CMDogtagHospitalCorpsman
     ears: CMHeadsetAlphaMedic
     belt: CMBeltMedicBagFilled

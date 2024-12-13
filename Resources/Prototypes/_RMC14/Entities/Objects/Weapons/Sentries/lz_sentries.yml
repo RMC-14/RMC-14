@@ -129,3 +129,5 @@
     curve: !type:BoolCurve
   - !type:TargetInLOSOrCurrentCon
     curve: !type:BoolCurve
+  - !type:CanFaceCon
+    curve: !type:BoolCurve

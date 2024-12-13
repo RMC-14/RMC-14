@@ -24,6 +24,8 @@ public abstract class SharedOnCollideSystem : EntitySystem
     private EntityQuery<CollideChainComponent> _collideChainQuery;
     private EntityQuery<DamageOnCollideComponent> _damageOnCollideQuery;
 
+    private readonly List<Entity<DamageOnCollideComponent>> _damageOnCollide = new();
+
     public override void Initialize()
     {
         _collideChainQuery = GetEntityQuery<CollideChainComponent>();
@@ -57,13 +59,13 @@ public abstract class SharedOnCollideSystem : EntitySystem
         var didEmote = false;
         if (ent.Comp.Chain == null || AddToChain(ent.Comp.Chain.Value, other))
         {
-            _damageable.TryChangeDamage(other, ent.Comp.Damage);
+            _damageable.TryChangeDamage(other, ent.Comp.Damage, ent.Comp.IgnoreResistances);
             DoEmote(ent, other);
             didEmote = true;
         }
         else
         {
-            _damageable.TryChangeDamage(other, ent.Comp.ChainDamage);
+            _damageable.TryChangeDamage(other, ent.Comp.ChainDamage, ent.Comp.IgnoreResistances);
         }
 
         _xenoSpit.SetAcidCombo(other, ent.Comp.AcidComboDuration, ent.Comp.AcidComboDamage, ent.Comp.AcidComboParalyze);
@@ -116,18 +118,31 @@ public abstract class SharedOnCollideSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        var query = EntityQueryEnumerator<DamageOnCollideComponent>();
-        while (query.MoveNext(out var uid, out var comp))
+        _damageOnCollide.Clear();
+
+        try
         {
-            if (comp.InitDamaged)
-                continue;
-
-            comp.InitDamaged = true;
-
-            foreach (var contact in _physics.GetEntitiesIntersectingBody(uid, (int) comp.Collision))
+            var query = EntityQueryEnumerator<DamageOnCollideComponent>();
+            while (query.MoveNext(out var uid, out var comp))
             {
-                OnCollide((uid, comp), contact);
+                if (comp.InitDamaged)
+                    continue;
+
+                comp.InitDamaged = true;
+                _damageOnCollide.Add((uid, comp));
             }
+
+            foreach (var entity in _damageOnCollide)
+            {
+                foreach (var contact in _physics.GetEntitiesIntersectingBody(entity, (int) entity.Comp.Collision))
+                {
+                    OnCollide(entity, contact);
+                }
+            }
+        }
+        finally
+        {
+            _damageOnCollide.Clear();
         }
     }
 }

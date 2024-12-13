@@ -1,10 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.StatusEffect;
 using Content.Shared.Alert;
 using Content.Shared.Rejuvenate;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Shared.StatusEffect
 {
@@ -174,6 +174,10 @@ namespace Content.Shared.StatusEffect
                 return false;
             if (!CanApplyEffect(uid, key, status))
                 return false;
+
+            var ev = new RMCStatusEffectTimeEvent(key, time);
+            RaiseLocalEvent(uid, ref ev);
+            time = ev.Duration;
 
             // we already checked if it has the index in CanApplyEffect so a straight index and not tryindex here
             // is fine

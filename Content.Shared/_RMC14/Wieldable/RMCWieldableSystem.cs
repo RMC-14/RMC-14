@@ -42,13 +42,13 @@ public sealed class RMCWieldableSystem : EntitySystem
 
         SubscribeLocalEvent<WieldSlowdownCompensationComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<WieldSlowdownCompensationComponent, GotUnequippedEvent>(OnGotUnequipped);
+        SubscribeLocalEvent<WieldSlowdownCompensationComponent, InventoryRelayedEvent<RefreshWieldSlowdownCompensationEvent>>(OnRefreshWieldSlowdownCompensation);
 
         SubscribeLocalEvent<WieldDelayComponent, GotEquippedHandEvent>(OnGotEquippedHand);
         SubscribeLocalEvent<WieldDelayComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<WieldDelayComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<WieldDelayComponent, ShotAttemptedEvent>(OnShotAttempt);
         SubscribeLocalEvent<WieldDelayComponent, ItemWieldedEvent>(OnItemWieldedWithDelay);
-
 
         SubscribeLocalEvent<InventoryComponent, RefreshWieldSlowdownCompensationEvent>(_inventorySystem.RelayEvent);
     }
@@ -156,13 +156,13 @@ public sealed class RMCWieldableSystem : EntitySystem
         RaiseLocalEvent(user.Owner, ref ev);
 
         user.Comp.Walk = ev.Walk;
-        user.Comp.Walk = ev.Sprint;
+        user.Comp.Sprint = ev.Sprint;
     }
 
-    private void OnRefreshWieldSlowdownCompensation(Entity<WieldSlowdownCompensationComponent> armour, ref InventoryRelayedEvent<RefreshWieldSlowdownCompensationEvent> args)
+    private void OnRefreshWieldSlowdownCompensation(Entity<WieldSlowdownCompensationComponent> armor, ref InventoryRelayedEvent<RefreshWieldSlowdownCompensationEvent> args)
     {
-        args.Args.Walk += armour.Comp.Walk;
-        args.Args.Sprint += armour.Comp.Sprint;
+        args.Args.Walk += armor.Comp.Walk;
+        args.Args.Sprint += armor.Comp.Sprint;
     }
 #endregion
 
@@ -217,6 +217,9 @@ public sealed class RMCWieldableSystem : EntitySystem
 
     public void OnShotAttempt(Entity<WieldDelayComponent> wieldable, ref ShotAttemptedEvent args)
     {
+        if (!wieldable.Comp.PreventFiring)
+            return;
+
         if (!TryComp(wieldable.Owner, out UseDelayComponent? useDelayComponent) ||
             !_useDelaySystem.IsDelayed((wieldable.Owner, useDelayComponent), wieldUseDelayID) ||
             !_useDelaySystem.TryGetDelayInfo((wieldable.Owner, useDelayComponent), out var info, wieldUseDelayID))

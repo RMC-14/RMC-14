@@ -1,4 +1,4 @@
-﻿# TODO RMC14 cutting
+# TODO RMC14 cutting
 - type: entity
   parent: BaseFenceMetal
   id: CMFence
@@ -17,6 +17,8 @@
     base: fence
     mode: CardinalFlags
   - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
   - type: Destructible
     thresholds:
     - trigger:

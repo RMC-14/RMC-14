@@ -5,10 +5,15 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
+using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Popups;
+using Content.Shared.Stacks;
 using Content.Shared.Tools.Systems;
+using Content.Shared.Weapons.Ranged;
+using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 
@@ -25,14 +30,19 @@ public sealed class RMCRepairableSystem : EntitySystem
     [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedStackSystem _stack = default!;
+    [Dependency] private readonly SharedGunSystem _gun = default!;
 
     const string SOLUTION_WELDER = "Welder";
-    const string REAGANT_WELDER = "WeldingFuel";
+    const string REAGENT_WELDER = "WeldingFuel";
 
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCRepairableComponent, InteractUsingEvent>(OnRepairableInteractUsing);
         SubscribeLocalEvent<RMCRepairableComponent, RMCRepairableDoAfterEvent>(OnRepairableDoAfter);
+
+        SubscribeLocalEvent<NailgunRepairableComponent, InteractUsingEvent>(OnNailgunRepairableInteractUsing);
+        SubscribeLocalEvent<NailgunRepairableComponent, RMCNailgunRepairableDoAfterEvent>(OnNailgunRepairableDoAfter);
     }
 
     private void OnRepairableInteractUsing(Entity<RMCRepairableComponent> repairable, ref InteractUsingEvent args)
@@ -122,7 +132,7 @@ public sealed class RMCRepairableSystem : EntitySystem
         if (!_solution.TryGetSolution((tool, welderCon), SOLUTION_WELDER, out var solutionComp, out var solution))
             return false;
 
-        if (solution.GetTotalPrototypeQuantity(REAGANT_WELDER) == 0 || solution.GetTotalPrototypeQuantity(REAGANT_WELDER) < fuelUsed)
+        if (solution.GetTotalPrototypeQuantity(REAGENT_WELDER) == 0 || solution.GetTotalPrototypeQuantity(REAGENT_WELDER) < fuelUsed)
         {
             _popup.PopupClient(Loc.GetString("welder-component-no-fuel-message"), user, PopupType.SmallCaution);
             return false;
@@ -130,10 +140,169 @@ public sealed class RMCRepairableSystem : EntitySystem
 
         if (!attempt && _net.IsServer)
         {
-            _solution.RemoveReagent(solutionComp.Value, REAGANT_WELDER, fuelUsed);
+            _solution.RemoveReagent(solutionComp.Value, REAGENT_WELDER, fuelUsed);
             Dirty(solutionComp.Value);
         }
 
         return true;
+    }
+
+    private void OnNailgunRepairableInteractUsing(Entity<NailgunRepairableComponent> repairable,
+        ref InteractUsingEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        var used = args.Used;
+
+        var user = args.User;
+
+        if (!TryComp(used, out NailgunComponent? nailgunComp))
+            return;
+
+        if (!TryComp(user, out HandsComponent? handsComp))
+            return;
+
+        args.Handled = true;
+        if (!TryComp(repairable, out DamageableComponent? damageable) ||
+            damageable.TotalDamage <= FixedPoint2.Zero)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-repairable-not-damaged", ("target", repairable)), user, user, PopupType.SmallCaution);
+            return;
+        }
+
+        var getAmmoCountEv = new GetAmmoCountEvent();
+        RaiseLocalEvent(used, ref getAmmoCountEv);
+
+        if (getAmmoCountEv.Count < 4)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-nailgun-no-nails-message"), user, PopupType.SmallCaution);
+            return;
+        }
+
+        var repairValue = GetRepairValue(repairable, handsComp, nailgunComp, out EntityUid? held);
+
+        if (held == null || repairValue >= FixedPoint2.Zero)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-nailgun-no-material-message",  ("target", repairable)), user, PopupType.SmallCaution);
+            return;
+        }
+
+        var delay = nailgunComp.NailingSpeed;
+
+        var ev = new RMCNailgunRepairableDoAfterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, repairable, used: args.Used)
+        {
+            BreakOnMove = true,
+            BlockDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent
+        };
+
+        if (_doAfter.TryStartDoAfter(doAfter))
+        {
+            var selfMsg = Loc.GetString("rmc-repairable-start-self", ("target", repairable));
+            var othersMsg = Loc.GetString("rmc-repairable-start-others", ("user", user), ("target", repairable));
+            _popup.PopupPredicted(selfMsg, othersMsg, user, user);
+        }
+    }
+
+    private void OnNailgunRepairableDoAfter(Entity<NailgunRepairableComponent> repairable,
+        ref RMCNailgunRepairableDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        args.Handled = true;
+
+        //Check conditions again
+        if (args.Used is not {} used)
+            return;
+
+        var user = args.User;
+
+        if (!TryComp(used, out NailgunComponent? nailgunComponent))
+            return;
+
+        var getAmmoCountEv = new GetAmmoCountEvent();
+        RaiseLocalEvent(used, ref getAmmoCountEv);
+
+        if (getAmmoCountEv.Count < 4)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-nailgun-no-nails-message"), user, PopupType.SmallCaution);
+            return;
+        }
+
+        if (!TryComp(user, out HandsComponent? handsComp))
+            return;
+
+        var repairValue = GetRepairValue(repairable, handsComp, nailgunComponent, out EntityUid? held);
+        if (held == null || repairValue >= FixedPoint2.Zero)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-nailgun-lost-stack"), user, PopupType.SmallCaution);
+            return;
+        }
+
+        //Checks passed, do repair actions
+        var heal = _rmcDamageable.DistributeTypes(repairable.Owner, repairValue);
+        _damageable.TryChangeDamage(repairable, heal);
+
+        if (TryComp(held, out StackComponent? stack))
+        {
+            _stack.SetCount((EntityUid)held, stack.Count - nailgunComponent.MaterialPerRepair);
+        }
+
+        var ammo = new List<(EntityUid? Entity, IShootable Shootable)>();
+        var ev = new TakeAmmoEvent(4, ammo, Transform(user).Coordinates, user);
+        RaiseLocalEvent(used, ev);
+
+        foreach (var (bullet, _) in ev.Ammo)
+        {
+            QueueDel(bullet);
+        }
+
+        var selfMsg = Loc.GetString("rmc-nailgun-finish-self", ("material", held), ("target", repairable));
+        var othersMsg = Loc.GetString("rmc-repairable-finish-others", ("user", user), ("material", held), ("target", repairable));
+        _popup.PopupPredicted(selfMsg, othersMsg, user, user);
+        _audio.PlayPredicted(nailgunComponent.RepairSound, repairable, user);
+    }
+
+    private float GetRepairValue(Entity<NailgunRepairableComponent> repairable,
+        HandsComponent handsComp,
+        NailgunComponent nailgunComponent,
+        out EntityUid? heldStack)
+    {
+        float repairValue = 0;
+        heldStack = null;
+        foreach (var hand in handsComp.Hands.Values)
+        {
+            if (hand.HeldEntity is { } held)
+            {
+                if (!TryComp(held, out StackComponent? stackComponent))
+                    continue;
+                var stackType = stackComponent.StackTypeId;
+                heldStack = held;
+
+                if (stackComponent.Count < nailgunComponent.MaterialPerRepair)
+                    continue;
+
+                if (stackType == "CMSteel")
+                {
+                    repairValue = repairable.Comp.RepairMetal;
+                    break;
+                }
+                if (stackType == "CMPlasteel")
+                {
+                    repairValue = repairable.Comp.RepairPlasteel;
+                    break;
+                }
+                if (stackType == "RMCPlankWood")
+                {
+                    repairValue = repairable.Comp.RepairWood;
+                    break;
+                }
+            }
+        }
+
+        return repairValue;
     }
 }

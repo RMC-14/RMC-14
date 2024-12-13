@@ -427,5 +427,6 @@
     tags:
     - Wall
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Corrodible
     isCorrodible: true

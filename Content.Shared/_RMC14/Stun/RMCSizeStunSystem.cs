@@ -98,11 +98,13 @@ public sealed class RMCSizeStunSystem : EntitySystem
             _physics.SetLinearVelocity(args.Target, Vector2.Zero);
             _physics.SetAngularVelocity(args.Target, 0f);
 
-            var direction = (_transform.GetMoverCoordinates(args.Target).Position - bullet.Comp.ShotFrom.Value.Position).Normalized();
-
-            _throwing.TryThrow(args.Target, direction, 1, animated: false, playSound: false, doSpin: false);
-
-            // RMC-14 TODO Thrown into obstacle mechanics
+            var vec = _transform.GetMoverCoordinates(args.Target).Position - bullet.Comp.ShotFrom.Value.Position;
+            if (vec.Length() != 0)
+            {
+                var direction = vec.Normalized();
+                _throwing.TryThrow(args.Target, direction, 1, animated: false, playSound: false, doSpin: false);
+                // RMC-14 TODO Thrown into obstacle mechanics
+            }
         }
 
         //Stun part
@@ -120,21 +122,24 @@ public sealed class RMCSizeStunSystem : EntitySystem
             }
 
             _stun.TryParalyze(args.Target, stun, true);
-
-            EnsureComp<AmmoSlowedComponent>(args.Target, out var ammoSlowed);
-
-            ammoSlowed.ExpireTime = _timing.CurTime + slow;
-            ammoSlowed.SuperExpireTime = _timing.CurTime + superSlow;
-            ammoSlowed.SuperSlowActive = true;
-
-            Dirty(args.Target, ammoSlowed);
-
-            _movementSpeed.RefreshMovementSpeedModifiers(args.Target);
+            Superslow(args.Target, slow, superSlow);
 
             _popup.PopupEntity(Loc.GetString("rmc-xeno-stun-shaken"), args.Target, args.Target, PopupType.MediumCaution);
         }
         else
             _stamina.TakeStaminaDamage(args.Target, args.Damage.GetTotal().Float());
+    }
+
+    public void Superslow(EntityUid ent, TimeSpan slow, TimeSpan superSlow)
+    {
+        EnsureComp<AmmoSlowedComponent>(ent, out var ammoSlowed);
+
+        ammoSlowed.ExpireTime = _timing.CurTime + slow;
+        ammoSlowed.SuperExpireTime = _timing.CurTime + superSlow;
+        ammoSlowed.SuperSlowActive = true;
+
+        Dirty(ent, ammoSlowed);
+        _movementSpeed.RefreshMovementSpeedModifiers(ent);
     }
 
     public override void Update(float frameTime)

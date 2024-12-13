@@ -18,19 +18,19 @@
     - name: Smart Gun Set (Mandatory)
       takeAll: CMSmartGunSet
       entries:
-      - id: CMSmartGunOperatorEquipmentCase
+      - id: RMCSGOEquipmentCaseCamo
     - name: Gun Attachments
       choices: { CMGunAttachments: 1 }
       entries:
-#      - id: RMCAttachmentLaserSight # TODO RMC14 when other pistols are available here
-#      - id: RMCAttachmentS5RedDotSight # Uncomment when accuracy is implemented.
+      - id: RMCAttachmentLaserSight
+      - id: RMCAttachmentS5RedDotSight
       - id: RMCAttachmentS6ReflexSight
     - name: Explosives
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
         points: 30
-    #- id: CMM40HIDPIncendiaryPacketx3
-    #  points: 30
+      - id: RMCPacketGrenadeIncendiaryFilled
+        points: 30
     #- id: CMM40HPDPWhitePhosphorusPacketx3
     #  points: 30
       - id: RMCPacketGrenadeSmokeFilled
@@ -79,11 +79,11 @@
         points: 15
     - name: Binoculars
       entries:
-      - id: RMCBinoculars
+      - id: RMCBinocularsCamo
         points: 5
-      - id: RMCRangefinder
+      - id: RMCRangefinderCamo
         points: 10
-      - id: RMCLaserDesignator
+      - id: RMCLaserDesignatorCamo
         points: 15
     - name: Helmet Optics
       entries: [ ]
@@ -132,7 +132,7 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: CMBeltSmartGunOperatorFilled
+      - id: RMCBeltSGOCamoFilled
       - id: RMCBeltSmartGunOperatorPistolFilled
     - name: Pouches
       choices: { RMCPouch: 2 }

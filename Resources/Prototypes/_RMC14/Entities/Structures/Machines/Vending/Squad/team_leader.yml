@@ -19,8 +19,8 @@
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
         points: 18
-    #- id: CMM40HIDPIncendiaryPacketx3
-    #  points: 18
+      - id: RMCPacketGrenadeIncendiaryFilled
+        points: 18
     #- id: CMM40HPDPWhitePhosphorusPacketx3
     #  points: 18
       - id: RMCPacketGrenadeSmokeFilled
@@ -73,7 +73,7 @@
     #  points: 30
     - name: Armors
       entries:
-      - id: CMArmorB12
+      - id: RMCArmorB12Camo
         points: 30
     - name: Clothing Items
       entries:
@@ -120,7 +120,7 @@
         points: 5
     - name: Binoculars
       entries:
-      - id: RMCBinoculars
+      - id: RMCBinocularsCamo
         points: 5
     - name: Helmet Optics
       entries: [ ]
@@ -158,22 +158,22 @@
       takeAll: CMStandard
       entries:
       - id: CMVendorBundleFireteamLeaderApparel
-      - id: CMArmorM4
+      - id: RMCArmorM4Camo
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
       - id: RMCVendorBundleCrewFireteamLeader
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: RMCBeltUtilityGeneral
-      - id: CMBeltMarine
+      - id: RMCBeltUtilityGeneralCamo
+      - id: RMCBeltMarineCamo
         recommended: true
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch
     #- id: RMCBeltHolsterFlareGun
-      - id: RMCM276ShotgunShellLoadingRig
+      - id: RMCBeltShotgunCamo
       - id: CMBeltUtilityFilled
         recommended: true
       - id: RMCBeltGrenade
@@ -232,4 +232,4 @@
     bundle:
     - RMCPackFlareCAS
     - RMCPackFlareCAS
-    - RMCLaserDesignator
+    - RMCLaserDesignatorCamo

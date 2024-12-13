@@ -108,7 +108,27 @@
   description: The standard-issue pack of the Marine forces. Designed to lug gear into the battlefield.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/standard.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/standard/jungle-desert-classic.rsi
+    
+- type: entity
+  parent: CMBackpackMarine
+  id: RMCBackpackMarineSU
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/standard/snow-urban.rsi
+    
+- type: entity
+  parent: CMBackpackMarine
+  id: RMCBackpackMarineCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMBackpackMarine
+      Desert: CMBackpackMarine
+      Classic: CMBackpackMarine
+      Snow: RMCBackpackMarineSU
+      Urban: RMCBackpackMarineSU
 
 - type: entity
   parent: CMBackpackMarine
@@ -117,7 +137,27 @@
   description: A standard-issue backpack worn by Marine medics.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/medic.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/medic/jungle-desert-classic.rsi
+
+- type: entity
+  parent: CMBackpackMarineMedic
+  id: RMCBackpackMarineMedicCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMBackpackMarineMedic
+      Desert: CMBackpackMarineMedic
+      Classic: CMBackpackMarineMedic
+      Snow: RMCBackpackMarineMedicSU
+      Urban: RMCBackpackMarineMedicSU
+
+- type: entity
+  parent: CMBackpackMarineMedic
+  id: RMCBackpackMarineMedicSU
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/medic/snow-urban.rsi
 
 - type: entity
   parent: CMBackpackMarine
@@ -126,7 +166,27 @@
   description: A standard-issue backpack worn by Marine technicians.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/techi.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/tech/jungle-desert-classic.rsi
+
+- type: entity
+  parent: CMBackpackMarineTech
+  id: RMCBackpackMarineTechSU
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/tech/snow-urban.rsi
+
+- type: entity
+  parent: CMBackpackMarineTech
+  id: RMCBackpackMarineTechCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMBackpackMarineTech
+      Desert: CMBackpackMarineTech
+      Classic: CMBackpackMarineTech
+      Snow: RMCBackpackMarineTechSU
+      Urban: RMCBackpackMarineTechSU
 
 # Specific
 - type: entity
@@ -136,7 +196,7 @@
   description: A backpack specifically designed to hold ammunition for the M402 mortar.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/mortar.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/mortar/jungle-desert-classic.rsi
   - type: Storage
     maxItemSize: Huge
     grid:
@@ -147,13 +207,33 @@
   - type: FixedItemSizeStorage
 
 - type: entity
+  parent: CMBackpackMortar
+  id: RMCBackpackMortarSU
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/mortar/snow-urban.rsi 
+
+- type: entity
+  parent: CMBackpackMortar
+  id: RMCBackpackMortarCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMBackpackMortar
+      Desert: CMBackpackMortar
+      Classic: CMBackpackMortar
+      Snow: RMCBackpackMortarSU
+      Urban: RMCBackpackMortarSU
+
+- type: entity
   parent: CMBackpack
   id: CMBackpackWelder
   name: Marine technician welderpack
   description: A specialized backpack worn by Marine technicians. It carries a fueltank for quick welder refueling and use.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/welder.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/welder/jungle-desert-classic.rsi
   - type: Storage
     maxItemSize: Normal
     grid:
@@ -182,6 +262,26 @@
     solution: tank
 
 - type: entity
+  parent: CMBackpackWelder
+  id: RMCBackpackWelderCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMBackpackWelder
+      Desert: CMBackpackWelder
+      Classic: CMBackpackWelder
+      Snow: RMCBackpackWelderSU
+      Urban: RMCBackpackWelderSU
+
+- type: entity
+  parent: CMBackpackWelder
+  id: RMCBackpackWelderSU
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/welder/snow-urban.rsi 
+
+- type: entity
   parent: CMBackpack
   id: RMCBackpackAmmo
   name: IMP ammo rack
@@ -197,8 +297,8 @@
     - state: ammo_pack-0
       map: ["enum.StorageFillLayers.Fill"]
   - type: ClothingSpeedModifier
-    walkModifier: 0.7
-    sprintModifier: 0.7
+    walkModifier: 0.710
+    sprintModifier: 0.710
   - type: HeldSpeedModifier
   - type: StorageFillVisualizer
     fillBaseName: ammo_pack

@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Medical.Surgery;
+﻿using System.Linq;
+using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Slowing;
@@ -10,6 +11,7 @@ using Content.Shared.Explosion;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Preferences;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Armor;
@@ -194,6 +196,7 @@ public sealed class CMArmorSystem : EntitySystem
             armorPiercing += piercingEv.Piercing;
         }
 
+        ev.Armor = (int) (ev.Armor * ev.ArmorModifier);
         ev.Armor -= armorPiercing;
         ev.Bio -= armorPiercing;
 
@@ -255,5 +258,23 @@ public sealed class CMArmorSystem : EntitySystem
     {
         ent.Comp.Amount = amount;
         Dirty(ent);
+    }
+
+    public EntProtoId GetArmorVariant(Entity<RMCArmorVariantComponent> ent, ArmorPreference preference)
+    {
+        var comp = ent.Comp;
+        var equipmentEntityID = comp.DefaultType;
+
+        if (comp.Types.TryGetValue(preference.ToString(), out var equipment))
+            equipmentEntityID = equipment;
+
+        if (preference == ArmorPreference.Random)
+        {
+            var random = new System.Random();
+            var randomType = comp.Types.ElementAt(random.Next(0, comp.Types.Count)).Value;
+            equipmentEntityID = randomType;
+        }
+
+        return equipmentEntityID;
     }
 }

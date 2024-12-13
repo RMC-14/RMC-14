@@ -1,0 +1,301 @@
+﻿#---replacers---
+- type: entity
+  parent: JumpsuitMarine
+  id: JumpsuitMarineCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: JumpsuitMarine
+      Desert: JumpsuitMarineDesert
+      Snow: JumpsuitMarineSnow
+      Classic: JumpsuitMarineClassic
+      Urban: JumpsuitMarineUrban   
+      
+- type: entity
+  parent: CMJumpsuitMarineEngineer
+  id: CMJumpsuitMarineEngineerCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMJumpsuitMarineEngineer
+      Desert: CMJumpsuitMarineEngineerDesert
+      Snow: CMJumpsuitMarineEngineerSnow
+      Classic: CMJumpsuitMarineEngineerClassic
+      Urban: CMJumpsuitMarineEngineerUrban
+
+- type: entity
+  parent: CMJumpsuitMarineMedic
+  id: CMJumpsuitMarineMedicCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMJumpsuitMarineMedic
+      Desert: CMJumpsuitMarineMedicDesert
+      Snow: CMJumpsuitMarineMedicSnow
+      Classic: CMJumpsuitMarineMedicClassic
+      Urban: CMJumpsuitMarineMedicUrban
+      
+- type: entity
+  parent: CMJumpsuitMarineRTO
+  id: CMJumpsuitMarineRTOCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMJumpsuitMarineRTO
+      Desert: CMJumpsuitMarineRTODesert
+      Snow: CMJumpsuitMarineRTOSnow
+      Classic: CMJumpsuitMarineRTOClassic
+      Urban: CMJumpsuitMarineRTOUrban 
+
+- type: entity
+  parent: CMJumpsuitCO
+  id: CMJumpsuitCOCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMJumpsuitCO
+      Desert: CMJumpsuitCODesert
+      Snow: CMJumpsuitCOSnow
+      Classic: CMJumpsuitCOClassic
+      Urban: CMJumpsuitCOUrban
+
+- type: entity
+  parent: CMJumpsuitOperations
+  id: CMJumpsuitOperationsCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMJumpsuitOperations
+      Desert: CMJumpsuitOperationsDesert
+      Snow: CMJumpsuitOperationsSnow
+      Classic: CMJumpsuitOperationsClassic
+      Urban: CMJumpsuitOperationsUrban
+      
+#---actual camo variants---
+#desert
+- type: entity
+  parent: CMJumpsuitMarineRTO
+  id: CMJumpsuitMarineRTODesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/rto/desert.rsi     
+      
+- type: entity
+  parent: JumpsuitMarine
+  id: JumpsuitMarineDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/standard/desert.rsi        
+
+- type: entity
+  parent: CMJumpsuitMarineEngineer
+  id: CMJumpsuitMarineEngineerDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/desert.rsi         
+
+- type: entity
+  parent: CMJumpsuitMarineMedic
+  id: CMJumpsuitMarineMedicDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/medic/desert.rsi
+
+- type: entity
+  parent: CMJumpsuitCO
+  id: CMJumpsuitCODesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/desert.rsi
+
+- type: entity
+  parent: CMJumpsuitOperations
+  id: CMJumpsuitOperationsDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/boiler/desert.rsi
+
+#snow
+
+- type: entity
+  parent: CMJumpsuitMarineRTO
+  id: CMJumpsuitMarineRTOSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/rto/snow.rsi     
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-jacket-verb-unfold
+    foldVerbText: rmc-jacket-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: scarf
+      
+- type: entity
+  parent: JumpsuitMarine
+  id: JumpsuitMarineSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/standard/snow.rsi        
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-jacket-verb-unfold
+    foldVerbText: rmc-jacket-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: scarf
+
+- type: entity
+  parent: CMJumpsuitMarineEngineer
+  id: CMJumpsuitMarineEngineerSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/snow.rsi         
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-jacket-verb-unfold
+    foldVerbText: rmc-jacket-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: scarf
+
+- type: entity
+  parent: CMJumpsuitMarineMedic
+  id: CMJumpsuitMarineMedicSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/medic/snow.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-jacket-verb-unfold
+    foldVerbText: rmc-jacket-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: scarf
+
+- type: entity
+  parent: CMJumpsuitCO
+  id: CMJumpsuitCOSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/snow.rsi
+
+- type: entity
+  parent: CMJumpsuitOperations
+  id: CMJumpsuitOperationsSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/boiler/snow.rsi
+
+#classic
+- type: entity
+  parent: CMJumpsuitMarineRTO
+  id: CMJumpsuitMarineRTOClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/rto/classic.rsi     
+      
+- type: entity
+  parent: JumpsuitMarine
+  id: JumpsuitMarineClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/standard/classic.rsi        
+
+- type: entity
+  parent: CMJumpsuitMarineEngineer
+  id: CMJumpsuitMarineEngineerClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/classic.rsi         
+
+- type: entity
+  parent: CMJumpsuitMarineMedic
+  id: CMJumpsuitMarineMedicClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/medic/classic.rsi
+
+- type: entity
+  parent: CMJumpsuitCO
+  id: CMJumpsuitCOClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/classic.rsi
+
+- type: entity
+  parent: CMJumpsuitOperations
+  id: CMJumpsuitOperationsClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/boiler/classic.rsi
+
+#urban
+- type: entity
+  parent: CMJumpsuitMarineRTO
+  id: CMJumpsuitMarineRTOUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/rto/urban.rsi     
+      
+- type: entity
+  parent: JumpsuitMarine
+  id: JumpsuitMarineUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/standard/urban.rsi        
+
+- type: entity
+  parent: CMJumpsuitMarineEngineer
+  id: CMJumpsuitMarineEngineerUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/urban.rsi         
+
+- type: entity
+  parent: CMJumpsuitMarineMedic
+  id: CMJumpsuitMarineMedicUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/medic/urban.rsi
+
+- type: entity
+  parent: CMJumpsuitCO
+  id: CMJumpsuitCOUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/urban.rsi
+
+- type: entity
+  parent: CMJumpsuitOperations
+  id: CMJumpsuitOperationsUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/boiler/urban.rsi
+
