@@ -26,7 +26,7 @@ public sealed class ItemCamouflageSystem : EntitySystem
         if (_items.Count == 0)
             return;
 
-        while (_items.TryDequeue(out var ent))
+        foreach (var ent in _items)
         {
             if (!TryComp(ent.Owner, out MetaDataComponent? meta))
                 continue;

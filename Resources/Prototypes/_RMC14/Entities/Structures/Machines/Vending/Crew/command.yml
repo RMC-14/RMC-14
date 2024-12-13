@@ -728,7 +728,7 @@
       entries:
       - id: RMCHeadBeretCamo # TODO: Port Officer Beret
       - id: CMHeadCapPeakedService
-      - id: RMCCapFlippableCamo # TODO: Port Patrol Cap
+      - id: RMCHeadCapFlippableCamo # TODO: Port Patrol Cap
       - id: RMCHeadCapOfficerCamo
     # ////////////////////////////////////
     # Chief MP
