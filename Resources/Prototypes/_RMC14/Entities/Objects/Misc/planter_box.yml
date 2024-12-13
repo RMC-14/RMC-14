@@ -17,3 +17,12 @@
     drawdepth: FloorTiles
     state: planter_box
   - type: Appearance
+
+- type: entity
+  parent: RMCPlanterBox
+  id: RMCSoilNet
+  name: soil net
+  description: Scientists use these suspended nets to superimpose a grid over a patch of ground for study.
+  components:
+  - type: Sprite
+    state: soil_grid

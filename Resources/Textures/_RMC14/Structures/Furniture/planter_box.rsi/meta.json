@@ -9,6 +9,9 @@
   "states": [
     {
       "name": "planter_box"
+    },
+    {
+      "name": "soil_grid"
     }
   ]
 }
