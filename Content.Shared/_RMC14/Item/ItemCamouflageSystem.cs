@@ -1,3 +1,5 @@
+using Content.Shared.Storage;
+using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
@@ -8,6 +10,7 @@ public sealed class ItemCamouflageSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedContainerSystem _cont = default!;
+    [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly IGameTiming _time = default!;
 
     [ViewVariables(VVAccess.ReadWrite)]
@@ -18,6 +21,7 @@ public sealed class ItemCamouflageSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<ItemCamouflageComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<StorageComponent, ItemCamouflageEvent>(OnItemCamoflage);
     }
 
     //thank you smugleaf!
@@ -100,5 +104,13 @@ public sealed class ItemCamouflageSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
 
         QueueDel(ent.Owner);
+    }
+
+    private void OnItemCamoflage(Entity<StorageComponent> ent, ref ItemCamouflageEvent args)
+    {
+        var oldItem = args.Old;
+        var newItem = args.New;
+
+        _storage.TransferEntities(oldItem, newItem);
     }
 }
