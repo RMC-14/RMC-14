@@ -34,7 +34,7 @@
     - name: Jacket
       choices: { CMCoat: 1}
       entries:
-      - id: CMCoatOfficer
+      - id: RMCCoatServiceCamo
         recommended: true
     - name: Hat
       choices: { CMHat: 1 }
