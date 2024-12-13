@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Fixed larva speech sounds being heard globally (stereo instead of mono),
-      resulting in them being "too loud".
-    type: Fix
-  id: 591
-  time: '2024-08-20T11:14:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3750
 - author: DrSmugleaf
   changes:
   - message: Fixed crash land damage bypassing the damage limit of 719, making those
@@ -4986,5 +4978,12 @@
   id: 1090
   time: '2024-12-13T12:20:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5096
+- author: CyberTropic
+  changes:
+  - message: Added carryover planet voting system from 13.
+    type: Add
+  id: 1091
+  time: '2024-12-13T12:28:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5067
 Name: RMC14
 Order: -1
