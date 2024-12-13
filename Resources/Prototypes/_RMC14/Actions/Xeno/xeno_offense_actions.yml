@@ -420,7 +420,7 @@
   id: ActionXenoScreech
   parent: ActionXenoBase
   name: Screech (250)
-  description: A wide area of effect stun, screeches upon activation. [color=red]This is blocked by solid walls, smoke, and boiler gas, but not windows![/color]
+  description: A wide area of effect stun, screeches upon activation. [color=red]This will also stun parasites, and is blocked by solid walls, smoke, and boiler gas, but not windows![/color]
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -561,7 +561,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: screech
     event: !type:XenoForTheHiveActionEvent
-  
+
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoImpale
