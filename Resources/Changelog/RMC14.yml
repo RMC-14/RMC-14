@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed corrosive ccid on barricades not expiring after 45 seconds.
-    type: Fix
-  id: 603
-  time: '2024-08-22T00:43:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3772
 - author: MetalSage
   changes:
   - message: Add high capacity beaker, dropper, grinder, nanomed
@@ -4984,5 +4977,13 @@
   id: 1102
   time: '2024-12-13T17:12:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5103
+- author: DrSmugleaf
+  changes:
+  - message: Fixed xenos not being able to turn off flashlights and other sources
+      of light by clicking on them.
+    type: Fix
+  id: 1103
+  time: '2024-12-13T18:19:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5123
 Name: RMC14
 Order: -1
