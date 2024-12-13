@@ -256,3 +256,6 @@
   - type: Tag
     tags:
     - RMCWeldingGoggles
+
+- type: Tag
+  id: RMCWeldingGoggles
