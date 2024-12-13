@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: tsp01, DrSmugleaf
-  changes:
-  - message: Added squad preference in character customization.
-    type: Add
-  - message: Fixed squads being able to have multiple SLs, SGOs, or weapons specs
-      if one cryos and another one late-joins.
-    type: Fix
-  id: 606
-  time: '2024-08-23T00:16:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3237
-- author: CaasGit
-  changes:
-  - message: Fax Machines now print local files using the CMPaper sprite.
-    type: Fix
-  id: 607
-  time: '2024-08-23T00:31:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3790
 - author: DrSmugleaf
   changes:
   - message: Fixed stopping targeting with a laser designator stopping already in-flight
@@ -4984,5 +4967,19 @@
   id: 1105
   time: '2024-12-13T19:09:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5124
+- author: noctyrnal
+  changes:
+  - message: Shiva has recieved a parity update.
+    type: Add
+  id: 1106
+  time: '2024-12-13T21:54:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5127
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed loadouts not spawning your selected items in your bag.
+    type: Fix
+  id: 1107
+  time: '2024-12-13T21:55:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5128
 Name: RMC14
 Order: -1
