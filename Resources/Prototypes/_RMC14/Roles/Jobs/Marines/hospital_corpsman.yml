@@ -48,10 +48,10 @@
 - type: startingGear
   id: CMGearHospitalCorpsmanEquipped
   equipment:
-    jumpsuit: CMJumpsuitMarineMedic
+    jumpsuit: CMJumpsuitMarineMedicCamo
     shoes: CMBootsBlackFilled
     gloves: RMCHandsLatexMarine
-    head: CMArmorHelmetM10Medic
+    head: RMCArmorHelmetM10MedicCamo
     outerClothing: RMCArmorM3MediumVariants
     id: CMDogtagHospitalCorpsman
     ears: CMHeadsetAlphaMedic

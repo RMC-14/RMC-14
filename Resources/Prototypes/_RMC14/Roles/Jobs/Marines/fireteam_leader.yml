@@ -45,11 +45,11 @@
 - type: startingGear
   id: CMGearFireteamLeaderEquipped
   equipment:
-    jumpsuit: JumpsuitMarine
+    jumpsuit: JumpsuitMarineCamo
     shoes: CMBootsBlackFilled
-    head: CMArmorHelmetM12
-    outerClothing: CMArmorM4
-    gloves: CMHandsBlackMarine
+    head: RMCArmorHelmetM12Camo
+    outerClothing: RMCArmorM4Camo
+    gloves: CMHandsInsulated
     id: CMDogtagFireteamLeader
     ears: CMHeadsetAlphaTeamLeader
 

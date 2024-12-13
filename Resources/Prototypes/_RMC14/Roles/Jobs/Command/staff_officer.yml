@@ -55,7 +55,7 @@
   equipment:
     jumpsuit: CMJumpsuitBO
     shoes: RMCShoesLaceup
-    head: CMHeadCap
+    head: RMCHeadCapFlippableCamo
     id: CMIDCardStaffOfficer
     ears: RMCHeadsetMarineCommand
 

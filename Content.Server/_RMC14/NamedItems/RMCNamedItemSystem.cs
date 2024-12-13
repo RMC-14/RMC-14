@@ -1,11 +1,13 @@
 ﻿using System.Linq;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server.Administration.Logs;
+using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
+using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Storage;
 
 namespace Content.Server._RMC14.NamedItems;
@@ -14,7 +16,7 @@ public sealed class RMCNamedItemSystem : EntitySystem
 {
     [Dependency] private readonly IAdminLogManager _adminLogs = default!;
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
 
     private EntityQuery<RMCNameItemOnVendComponent> _nameItemOnVendQuery;
 
@@ -26,6 +28,9 @@ public sealed class RMCNamedItemSystem : EntitySystem
 
         SubscribeLocalEvent<RMCUserNamedItemsComponent, RMCAutomatedVendedUserEvent>(OnAutomatedVenderUser);
         SubscribeLocalEvent<RMCNameItemOnVendComponent, SentryUpgradedEvent>(OnSentryUpgraded);
+
+        SubscribeLocalEvent<RMCNamedItemComponent, ItemCamouflageEvent>(OnItemCamouflage);
+        SubscribeLocalEvent<RMCNamedItemComponent, RefreshNameModifiersEvent>(OnItemRefreshNameModifiers);
     }
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
@@ -69,6 +74,22 @@ public sealed class RMCNamedItemSystem : EntitySystem
         NameItem(args.User, args.NewSentry, name);
     }
 
+    private void OnItemCamouflage(Entity<RMCNamedItemComponent> ent, ref ItemCamouflageEvent args)
+    {
+        if (!TryComp(args.Old, out RMCNamedItemComponent? old))
+            return;
+
+        var namedNew = EnsureComp<RMCNamedItemComponent>(args.New);
+        namedNew.Name = old.Name;
+
+        _nameModifier.RefreshNameModifiers(args.New);
+    }
+
+    private void OnItemRefreshNameModifiers(Entity<RMCNamedItemComponent> ent, ref RefreshNameModifiersEvent args)
+    {
+        args.AddModifier("rmc-patron-named-item", extraArgs: ("name", ent.Comp.Name));
+    }
+
     private bool TryNameItem(Entity<RMCUserNamedItemsComponent> ent, Entity<RMCNameItemOnVendComponent> item)
     {
         var names = ent.Comp.Names;
@@ -109,16 +130,19 @@ public sealed class RMCNamedItemSystem : EntitySystem
         return true;
     }
 
-    private bool NameItem(EntityUid player, EntityUid item, string? name)
+    private void NameItem(EntityUid player, EntityUid item, string? name)
     {
         if (string.IsNullOrWhiteSpace(name))
-            return false;
+            return;
 
         name = name.Trim();
         var metaData = MetaData(item);
         var newName = $"'{name}' {metaData.EntityName}";
-        _metaData.SetEntityName(item, newName, metaData);
+
+        var named = EnsureComp<RMCNamedItemComponent>(item);
+        named.Name = name;
+        _nameModifier.RefreshNameModifiers(item);
+
         _adminLogs.Add(LogType.RMCNamedItem, $"{ToPrettyString(player):player} named item {ToPrettyString(item):item} with name {newName}");
-        return true;
     }
 }
