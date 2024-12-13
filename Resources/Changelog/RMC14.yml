@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed crash land damage bypassing the damage limit of 719, making those
-      that are crash-landed unrevivable.
-    type: Fix
-  id: 592
-  time: '2024-08-20T11:34:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3758
-- author: DrSmugleaf
-  changes:
   - message: Fixed dropships being able to shoot their weapons while recharging or
       launching.
     type: Fix
@@ -4985,5 +4977,12 @@
   id: 1091
   time: '2024-12-13T12:28:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5067
+- author: MetalSage
+  changes:
+  - message: Welding goggles added.
+    type: Add
+  id: 1092
+  time: '2024-12-13T12:29:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5075
 Name: RMC14
 Order: -1
