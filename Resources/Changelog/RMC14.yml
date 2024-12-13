@@ -1,26 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed dropships being able to shoot their weapons while recharging or
-      launching.
-    type: Fix
-  - message: Fixed some rounds automatically choosing the hangar bays as primary landing
-      zone on round-start, making it impossible for xenos to call down a dropship
-      for hijack.
-    type: Fix
-  id: 593
-  time: '2024-08-20T11:34:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3759
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the We-Ya-Med plus, chem, and marinemed not regenerating their
-      reagents.
-    type: Fix
-  id: 594
-  time: '2024-08-20T11:35:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3760
-- author: DrSmugleaf
-  changes:
   - message: Fixed no ground sound playing after all bullets land with the GAU-21.
     type: Fix
   - message: Fixed the ghost of dropship ammo shot in the past lingering around and
@@ -4984,5 +4964,21 @@
   id: 1092
   time: '2024-12-13T12:29:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5075
+- author: DrSmugleaf
+  changes:
+  - message: Added Mentor Help, used to ask questions about the game. Press F1 to
+      access it.
+    type: Add
+  id: 1093
+  time: '2024-12-13T14:15:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5084
+- author: noctyrnal
+  changes:
+  - message: Added Tactical Wraps. They can be found in uniform vendors in prep rooms,
+      or in requisitions.
+    type: Add
+  id: 1094
+  time: '2024-12-13T14:14:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5111
 Name: RMC14
 Order: -1
