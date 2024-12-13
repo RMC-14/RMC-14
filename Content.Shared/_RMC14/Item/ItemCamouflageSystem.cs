@@ -81,6 +81,7 @@ public sealed class ItemCamouflageSystem : EntitySystem
             return;
         }
 
+        EntityUid newEnt;
         if (_cont.IsEntityInContainer(ent.Owner))
         {
             _cont.TryGetContainingContainer((ent.Owner, null), out var cont);
@@ -88,13 +89,16 @@ public sealed class ItemCamouflageSystem : EntitySystem
                 return;
 
             _cont.Remove(ent.Owner, cont, true, true);
-            SpawnInContainerOrDrop(spawn, cont.Owner, cont.ID);
-            QueueDel(ent.Owner);
+            newEnt = SpawnInContainerOrDrop(spawn, cont.Owner, cont.ID);
         }
         else
         {
-            SpawnNextToOrDrop(ent.Comp.CamouflageVariations[type], ent.Owner);
-            QueueDel(ent.Owner);
+            newEnt = SpawnNextToOrDrop(ent.Comp.CamouflageVariations[type], ent.Owner);
         }
+
+        var ev = new ItemCamouflageEvent(ent, newEnt);
+        RaiseLocalEvent(ent, ref ev);
+
+        QueueDel(ent.Owner);
     }
 }
