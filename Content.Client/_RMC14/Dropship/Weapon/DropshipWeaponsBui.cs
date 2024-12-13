@@ -442,8 +442,8 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
 
         weapons.TryGetValue(0, out one);
         weapons.TryGetValue(1, out two);
-        weapons.TryGetValue(3, out three);
-        weapons.TryGetValue(4, out four);
+        weapons.TryGetValue(2, out three);
+        weapons.TryGetValue(3, out four);
 
         utility.TryGetValue(0, out utilityOne);
         utility.TryGetValue(1, out utilityTwo);

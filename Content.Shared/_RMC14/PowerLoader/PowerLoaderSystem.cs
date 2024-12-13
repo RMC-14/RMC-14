@@ -76,6 +76,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, PickupAttemptEvent>(OnGrabbablePickupAttempt);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, AfterInteractEvent>(OnGrabbableAfterInteract);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, CombatModeShouldHandInteractEvent>(OnGrababbleShouldInteract);
+        SubscribeLocalEvent<PowerLoaderGrabbableComponent, BeforeRangedInteractEvent>(OnGrabbableBeforeRangedInteract);
 
         // Detach events and doAfters
         SubscribeLocalEvent<DropshipWeaponPointComponent, ActivateInWorldEvent>(OnPointActivateInWorld);
@@ -85,8 +86,6 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<DropshipUtilityPointComponent, DropshipDetachDoAfterEvent>(OnDropshipDetach);
 
         // Attach events and doAfters
-        SubscribeLocalEvent<PowerLoaderAttachableComponent, BeforeRangedInteractEvent>(OnAttachableBeforeRangedInteract);
-
         SubscribeLocalEvent<DropshipWeaponPointComponent, GetAttachementSlotEvent>(OnGetSlot);
         SubscribeLocalEvent<DropshipUtilityPointComponent, GetAttachementSlotEvent>(OnGetSlot);
 
@@ -379,45 +378,6 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
     }
 
-    private void OnAttachableBeforeRangedInteract(Entity<PowerLoaderAttachableComponent> ent, ref BeforeRangedInteractEvent args)
-    {
-        if (args.Target is not { } target)
-            return;
-
-        args.Handled = true;
-
-        var user = new Entity<PowerLoaderComponent?>(args.User, null);
-        var used = args.Used;
-        var powerLoaderEv = new PowerLoaderInteractEvent(args.User, target, args.Used, GetBuckled(args.User).ToList());
-        RaiseLocalEvent(used, ref powerLoaderEv);
-        if (powerLoaderEv.Handled)
-            return;
-
-
-        var slotEv = new GetAttachementSlotEvent(_entityManager.GetNetEntity(user), _entityManager.GetNetEntity(used));
-        RaiseLocalEvent(target, slotEv);
-        var slot = _container.EnsureContainer<ContainerSlot>(target, slotEv.SlotId);
-
-        if (slot is null)
-        {
-            return;
-        }
-
-        if (!TryComp(used, out PowerLoaderAttachableComponent? attachableComponent) ||
-            !_tag.HasAnyTag(target, attachableComponent.AttachableTypes))
-        {
-            return;
-        }
-
-        var ev = new DropshipAttachDoAfterEvent(EntityManager.GetNetEntity(target), EntityManager.GetNetEntity(used), slot.ID);
-        var doAfter = new DoAfterArgs(EntityManager, user, attachableComponent.AttachDelay, ev, target, target, used)
-        {
-            BreakOnMove = true,
-            DuplicateCondition = DuplicateConditions.SameEvent,
-        };
-        _doAfter.TryStartDoAfter(doAfter);
-    }
-
     private void OnGetSlot(Entity<DropshipWeaponPointComponent> ent, ref GetAttachementSlotEvent args)
     {
         var user = new Entity<PowerLoaderComponent?>(_entityManager.GetEntity(args.User), null);
@@ -604,6 +564,45 @@ public sealed class PowerLoaderSystem : EntitySystem
     {
         if (!HasComp<PowerLoaderComponent>(args.User))
             args.Cancelled = true;
+    }
+
+    private void OnGrabbableBeforeRangedInteract(Entity<PowerLoaderGrabbableComponent> ent, ref BeforeRangedInteractEvent args)
+    {
+        if (args.Target is not { } target)
+            return;
+
+        args.Handled = true;
+
+        var user = new Entity<PowerLoaderComponent?>(args.User, null);
+        var used = args.Used;
+        var powerLoaderEv = new PowerLoaderInteractEvent(args.User, target, args.Used, GetBuckled(args.User).ToList());
+        RaiseLocalEvent(used, ref powerLoaderEv);
+        if (powerLoaderEv.Handled)
+            return;
+
+
+        var slotEv = new GetAttachementSlotEvent(_entityManager.GetNetEntity(user), _entityManager.GetNetEntity(used));
+        RaiseLocalEvent(target, slotEv);
+        var slot = _container.EnsureContainer<ContainerSlot>(target, slotEv.SlotId);
+
+        if (slot is null)
+        {
+            return;
+        }
+
+        if (!TryComp(used, out PowerLoaderAttachableComponent? attachableComponent) ||
+            !_tag.HasAnyTag(target, attachableComponent.AttachableTypes))
+        {
+            return;
+        }
+
+        var ev = new DropshipAttachDoAfterEvent(EntityManager.GetNetEntity(target), EntityManager.GetNetEntity(used), slot.ID);
+        var doAfter = new DoAfterArgs(EntityManager, user, attachableComponent.AttachDelay, ev, target, target, used)
+        {
+            BreakOnMove = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+        };
+        _doAfter.TryStartDoAfter(doAfter);
     }
 
     private void OnActivePilotPreventCollide(Entity<ActivePowerLoaderPilotComponent> ent, ref PreventCollideEvent args)

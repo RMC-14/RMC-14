@@ -6,6 +6,7 @@ using Content.Shared.Coordinates;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
+using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Systems;
 
@@ -13,6 +14,7 @@ public abstract class SharedMedevacSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly DropshipUtilitySystem _dropshipUtility = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly MedevacStretcherSystem _stretcher = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
@@ -54,7 +56,9 @@ public abstract class SharedMedevacSystem : EntitySystem
         var dropshipUtilEnt = new Entity<DropshipUtilityComponent>(ent.Owner, utilComp);
         if (!_dropshipUtility.IsActivatable(dropshipUtilEnt, args.User, out var popup))
         {
-            _popup.PopupClient(popup, targetCoord, args.User);
+            if (_net.IsServer)
+                _popup.PopupCoordinates(popup, targetCoord, args.User);
+
             return;
         }
 
