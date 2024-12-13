@@ -38,14 +38,13 @@
 - type: startingGear
   id: CMGearMilitaryPolice
   equipment:
-    jumpsuit: CMJumpsuitMPBlack
-    back: CMSatchelSecurity
+    jumpsuit: RMCJumpsuitMPCamo
     shoes: CMBootsBlackFilled
     head: CMHeadBeretRed
     eyes: CMGlassesSecurity
     gloves: CMHandsBlackMarine
     id: CMIDCardMilitaryPolice
-    outerClothing: CMArmorM2MP
+    outerClothing: RMCArmorM2MPCamo
     ears: CMHeadsetMPO
     belt: CMBeltSecurityMPFilled
     #    pocket1: TODO RMC14 tape recorder

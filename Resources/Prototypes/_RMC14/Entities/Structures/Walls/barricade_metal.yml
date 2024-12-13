@@ -303,12 +303,13 @@
       delay: 10
       fuelUsed: 2
     - type: Damageable
-      damageContainer: Inorganic
+      damageContainer: StructuralMarine
+      damageModifierSet: StructuralMarine
     - type: Destructible
       thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 100
+          damage: 30
         behaviors:
         - !type:PlaySoundBehavior
           sound:
@@ -375,6 +376,18 @@
     - type: Sprite
       layers:
       - state: wire_rail
+      - map: [ "acided" ]
+    - type: Construction
+      graph: BarricadeHandrailGraph
+      node: nodeHandrail
+
+- type: entity
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeSmallWire
+  components:
+    - type: Sprite
+      layers:
+      - state: small_wire
       - map: [ "acided" ]
     - type: Construction
       graph: BarricadeHandrailGraph

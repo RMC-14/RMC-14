@@ -1,0 +1,7 @@
+# Weapons
+- type: loadout
+  id: HoldoutPistolRMC
+  cost: 4
+  storage:
+    back:
+    - RMCD18Case

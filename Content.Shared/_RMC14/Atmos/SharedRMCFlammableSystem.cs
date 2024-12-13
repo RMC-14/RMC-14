@@ -102,7 +102,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     private void OnIgniteOnProjectileHit(Entity<IgniteOnProjectileHitComponent> ent, ref ProjectileHitEvent args)
     {
-        Ignite(args.Target, ent.Comp.Stacks, ent.Comp.Intensity, ent.Comp.Duration);
+        Ignite(args.Target, ent.Comp.Stacks, ent.Comp.Intensity, ent.Comp.Duration, false);
     }
 
     private void OnTileFireMapInit(Entity<TileFireComponent> ent, ref MapInitEvent args)
@@ -321,7 +321,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         return Resolve(ent, ref ent.Comp, false) && ent.Comp.OnFire;
     }
 
-    public virtual bool Ignite(Entity<FlammableComponent?> flammable, int intensity, int duration, int? maxStacks)
+    public virtual bool Ignite(Entity<FlammableComponent?> flammable, int intensity, int duration, int? maxStacks, bool igniteDamage = true)
     {
         // TODO RMC14
         return false;

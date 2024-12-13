@@ -16,6 +16,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Content.Server._RMC14.Scorch;
 
 namespace Content.Server._RMC14.Explosion;
 

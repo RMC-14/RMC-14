@@ -3,7 +3,7 @@
   id: RMCAreaLv522
   components:
   - type: Sprite
-    state: lv-626
+    state: unknown
   - type: Area
     buildSpecial: true
     powerNet: ground
@@ -962,7 +962,7 @@
   name: Atmospheric Processor
   components:
   - type: Sprite
-    state: engineering
+    state: unknown
   - type: Area
     CAS: false
     fulton: false
