@@ -43,7 +43,6 @@
   id: CMGearIntelOfficer
   equipment:
     jumpsuit: CMJumpsuitIO
-    back: RMCSatchelMarineCamo
     shoes: CMBootsBlackFilled
     id: CMIDCardIntelOfficer
 

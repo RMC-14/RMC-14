@@ -39,7 +39,6 @@
   id: CMGearMilitaryPolice
   equipment:
     jumpsuit: RMCJumpsuitMPCamo
-    back: CMSatchelSecurity
     shoes: CMBootsBlackFilled
     head: CMHeadBeretRed
     eyes: CMGlassesSecurity

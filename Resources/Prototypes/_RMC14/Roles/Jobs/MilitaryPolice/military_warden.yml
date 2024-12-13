@@ -46,7 +46,6 @@
   id: CMGearMilitaryWarden
   equipment:
     jumpsuit: RMCJumpsuitWardenCamo
-    back: CMSatchelSecurity
     shoes: CMBootsBlackFilled
     head: CMHeadCapWarden
     eyes: CMGlassesSecurity

@@ -54,7 +54,6 @@
   id: CMGearStaffOfficer
   equipment:
     jumpsuit: CMJumpsuitBO
-    back: RMCSatchelMarineCamo
     shoes: RMCShoesLaceup
     head: RMCHeadCapFlippableCamo
     id: CMIDCardStaffOfficer

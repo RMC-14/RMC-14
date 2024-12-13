@@ -55,7 +55,6 @@
   id: CMGearExecutiveOfficer
   equipment:
     jumpsuit: CMJumpsuitBO
-    back: CMSatchel
     shoes: RMCShoesLaceup
     head: RMCHeadCapFlippableCamo
     outerClothing: RMCCoatServiceCamo

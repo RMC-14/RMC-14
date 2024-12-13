@@ -33,7 +33,6 @@
   id: CMGearCargoTech
   equipment:
     jumpsuit: CMJumpsuitCargoTech
-    back: RMCSatchelMarineTechCamo
     shoes: CMBootsBlack
     head: CMHeadCapCargo
     gloves: CMHandsInsulated

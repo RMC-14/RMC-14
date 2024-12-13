@@ -220,6 +220,7 @@ public abstract partial class SharedCMSurgerySystem
         var doAfter = new DoAfterArgs(EntityManager, user, 2, ev, body, part)
         {
             BreakOnMove = true,
+            TargetEffect = "RMCEffectHealBusy",
         };
         _doAfter.TryStartDoAfter(doAfter);
     }
