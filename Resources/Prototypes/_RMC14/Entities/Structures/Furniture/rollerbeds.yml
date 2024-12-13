@@ -15,12 +15,12 @@
     noRot: true
     layers:
     - state: roller_down
-      map: ["unfoldedLayer"]
+      map: [ "unfoldedLayer" ]
     - state: folded
-      map: ["foldedLayer"]
+      map: [ "foldedLayer" ]
       visible: false
     - state: roller_up
-      map: ["buckledLayer"]
+      map: [ "buckledLayer" ]
       visible: false
   - type: Item
     size: Small
@@ -61,12 +61,12 @@
   - type: Sprite
     layers:
     - state: surgical_down
-      map: ["unfoldedLayer"]
+      map: [ "unfoldedLayer" ]
     - state: surgical_folded
-      map: ["foldedLayer"]
+      map: [ "foldedLayer" ]
       visible: false
     - state: surgical_up
-      map: ["buckledLayer"]
+      map: [ "buckledLayer" ]
       visible: false
   - type: Appearance
 
@@ -82,41 +82,40 @@
 
 # Copied most of RollerBed prototype except for pullable
 - type: entity
-  parent: [BaseItem, BaseDeployFoldable]
+  parent: [ BaseDeployFoldable ]
   id: RMCMedevacStretcher
   name: Medevac stretcher
   description: A collapsible stretcher that can be activated to send patients to an overhead dropship.
   components:
-  - type: MedevacStretcher
+  - type: Item
+    size: Small
+  - type: Clickable
+  - type: InteractionOutline
+  - type: CollisionWake
   - type: Transform
     noRot: true
-  - type: Item
-    size: Normal
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/rollerbeds.rsi
     noRot: true
     drawdepth: OverMobs
     layers:
     - state: stretcher_down
-      map: ["unfoldedLayer"]
+      map: [ "unfoldedLayer" ]
     - state: stretcher_folded
-      map: ["foldedLayer"]
+      map: [ "foldedLayer" ]
       visible: false
     - state: stretcher_box
-      map: ["buckledLayer"]
+      map: [ "buckledLayer" ]
       visible: false
     - state: beacon_active_up
-      map: ["buckledBeaconLayer"]
+      map: [ "buckledBeaconLayer" ]
       visible: false
     - state: winched_stretcher
-      map: ["stretcherAnimatedLayer"]
+      map: [ "stretcherAnimatedLayer" ]
       visible: false
-  - type: MovedByPressure
-  - type: DamageOnHighSpeedImpact
-    soundHit:
-      collection: MetalThud
-  - type: InteractionOutline
   - type: Physics
+    bodyType: Dynamic
+    fixedRotation: false
   - type: Fixtures
     fixtures:
       fix1:
@@ -126,20 +125,6 @@
         density: 80
         mask:
         - MobMask
-  - type: Damageable
-  - type: Destructible
-    thresholds:
-      - trigger:
-          !type:DamageTrigger
-          damage: 50
-        behaviors:
-          - !type:DoActsBehavior
-            acts: ["Destruction"]
-          - !type:SpawnEntitiesBehavior
-            spawn:
-              SheetSteel1:
-                min: 1
-                max: 1
   - type: Strap
     position: Down
     rotation: -90
@@ -150,25 +135,24 @@
     visuals:
       enum.StrapVisuals.State:
         buckledLayer:
-          True: {visible: true}
-          False: {visible: false}
+          True: { visible: true }
+          False: { visible: false }
       enum.FoldedVisuals.State: # Copypasta from BaseFoldable b/c collections don't merge when overriding component prototypes.
         foldedLayer:
-          True: {visible: true}
-          False: {visible: false}
+          True: { visible: true }
+          False: { visible: false }
         unfoldedLayer:
-          True: {visible: false}
-          False: {visible: true}
+          True: { visible: false }
+          False: { visible: true }
       enum.MedevacStretcherVisuals.BeaconState:
         buckledBeaconLayer:
-          On: {visible: true}
-          Off: {visible: false}
+          On: { visible: true }
+          Off: { visible: false }
       enum.MedevacStretcherVisuals.MedevacingState:
         buckledLayer:
-          True: {state: winched_stretcher}
-          False: {state: stretcher_box}
-  - type: StaticPrice
-    price: 120
+          True: { state: winched_stretcher }
+          False: { state: stretcher_box }
+  - type: MedevacStretcher
 
 - type: entity
   parent: RMCMedevacStretcher

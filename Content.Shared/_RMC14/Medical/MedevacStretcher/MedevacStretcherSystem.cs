@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Dropship.Utility.Events;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
@@ -124,6 +125,9 @@ public sealed class MedevacStretcherSystem : EntitySystem
 
     private void OnInteract(Entity<MedevacStretcherComponent> ent, ref InteractHandEvent args)
     {
+        if (HasComp<XenoComponent>(args.User))
+            return;
+
         if (args.Handled)
             return;
 
