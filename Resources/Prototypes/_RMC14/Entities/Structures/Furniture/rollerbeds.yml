@@ -84,7 +84,7 @@
 - type: entity
   parent: [ BaseDeployFoldable ]
   id: RMCMedevacStretcher
-  name: Medevac stretcher
+  name: medevac stretcher
   description: A collapsible stretcher that can be activated to send patients to an overhead dropship.
   components:
   - type: Item
