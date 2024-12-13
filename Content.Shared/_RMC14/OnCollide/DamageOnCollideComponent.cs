@@ -49,4 +49,7 @@ public sealed partial class DamageOnCollideComponent : Component
 
     [DataField]
     public TimeSpan Paralyze;
+
+    [DataField]
+    public bool IgnoreResistances;
 }

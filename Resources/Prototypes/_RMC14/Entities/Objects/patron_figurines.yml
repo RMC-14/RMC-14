@@ -902,3 +902,25 @@
     state: consumes-the-petrol
   - type: PatronFigurine
     id: 25ab89f4-a9a7-44c7-8538-c94e8a086e92
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLennyDugs
+  name: Lenny Dugs figurine
+  description: "Greenhorn. Bumpkin. Marine. He didn't wanna be here. You didn't want him here. But he's what we got. The figurine smells vaguely of country air."
+  components:
+  - type: Sprite
+    state: lenny_dugs
+  - type: PatronFigurine
+    id: b43bf6fc-8970-4536-aa0e-6cf70168fda9
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronkaelsharkvoss
+  name: Kael 'Shark' Voss figurine
+  description: "A hug hungry little Sharky."
+  components:
+  - type: Sprite
+    state: kael_shark_voss
+  - type: PatronFigurine
+    id: 58c2cefc-1796-4ca4-b6e6-5dbda5b8f506

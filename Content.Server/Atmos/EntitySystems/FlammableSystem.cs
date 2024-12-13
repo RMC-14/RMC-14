@@ -499,7 +499,7 @@ namespace Content.Server.Atmos.EntitySystems
                     else
                         damage = flammable.Intensity / 5f * flammable.Damage;
 
-                    _damageableSystem.TryChangeDamage(uid, damage, interruptsDoAfters: false);
+                    _damageableSystem.TryChangeDamage(uid, damage, true, false);
 
                     AdjustFireStacks(uid, flammable.Resisting ? flammable.ResistStacks : -0.25f, flammable, flammable.OnFire);
                 }
