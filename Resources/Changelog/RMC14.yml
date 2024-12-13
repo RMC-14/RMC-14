@@ -1,20 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed stopping targeting with a laser designator stopping already in-flight
-      GAU-21 bullets from arriving after they have already been fired.
-    type: Fix
-  - message: Fixed the ground sound after the GAU-21 bullets have all arrived not
-      playing, or playing so loudly that it CAS's your eardrums.
-    type: Fix
-  - message: Actually fixed the ghost of ammo long shot past from sticking around
-      lagging the server.
-    type: Fix
-  id: 608
-  time: '2024-08-23T02:04:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3799
-- author: DrSmugleaf
-  changes:
   - message: Examining a dropship weapon attach point will now tell you what gun and
       ammo it has loaded, and how many rounds it has left.
     type: Add
@@ -4981,5 +4967,22 @@
   id: 1107
   time: '2024-12-13T21:55:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5128
+- author: DrSmugleaf
+  changes:
+  - message: Fixed OBs not being able to be loaded.
+    type: Fix
+  - message: Fixed one dropship weapon not being usable.
+    type: Fix
+  - message: Fixed Chance's Claim blue rock tiles being weedable.
+    type: Fix
+  - message: Fixed Chance's Claim areas next to LZ being weedable early.
+    type: Fix
+  - message: Fixed medevac sometimes not giving correct feedback with popups.
+    type: Fix
+  - message: Fixed not being able to pick up some items dispensed from vendors.
+    type: Fix
+  id: 1108
+  time: '2024-12-13T22:07:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5129
 Name: RMC14
 Order: -1
