@@ -151,6 +151,7 @@
         buckledLayer:
           True: { state: winched_stretcher }
           False: { state: stretcher_box }
+  - type: Corrodible
   - type: MedevacStretcher
 
 - type: entity

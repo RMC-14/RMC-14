@@ -54,7 +54,7 @@
         - MachineLayer
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
+    damageModifierSet: null
   - type: InteractionOutline
   - type: Destructible
     thresholds:
