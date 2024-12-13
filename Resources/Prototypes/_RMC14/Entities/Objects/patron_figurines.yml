@@ -599,7 +599,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronRhettRainmanMcIndrick
   name: Rhett 'Rainman' McIndrick figurine
-  description: Former Scout Sergeant McIndrick. "Where's the glory in waiting?"
+  description: "There's a difference between trying something different when regular procedure fails- and starting off with the same losing strategy. Are you surprising anyone?"
   components:
   - type: Sprite
     state: rhett_rainman_mcindrick
@@ -924,14 +924,3 @@
     state: kael_shark_voss
   - type: PatronFigurine
     id: 58c2cefc-1796-4ca4-b6e6-5dbda5b8f506
-
-- type: entity
-  parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronRhettRainmanMcIndrick
-  name: Rhett 'Rainman' McIndrick figurine
-  description: "There's a difference between trying something different when regular procedure fails- and starting off with the same losing strategy. Are you surprising anyone?"
-  components:
-  - type: Sprite
-    state: rhett_rainman_mcindrick
-  - type: PatronFigurine
-    id: a0091382-d6c6-4fb1-8cf6-cd4eb49ae4e1
