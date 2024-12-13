@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added The Soil of Martyrs figurine.
-    type: Add
-  id: 599
-  time: '2024-08-21T08:55:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3770
-- author: diraven
-  changes:
-  - message: Corrosive acid can't be applied to barricades multiple times any more.
-    type: Fix
-  id: 600
-  time: '2024-08-21T23:50:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3786
-- author: MetalSage
-  changes:
-  - message: Added supply crates containing M4 and B12 armor
-    type: Add
-  id: 601
-  time: '2024-08-22T00:08:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3776
 - author: Tunguso4ka
   changes:
   - message: Signal Flare pack now has the correct name.
@@ -4980,5 +4959,30 @@
   id: 1098
   time: '2024-12-13T17:07:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5063
+- author: TsjipTsjip
+  changes:
+  - message: Correspondent microphone can no longer be used to play MIDI files.
+    type: Remove
+  id: 1099
+  time: '2024-12-13T17:11:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4949
+- author: blueDev2
+  changes:
+  - message: Add medevac utility system to dropships and medevac stretchers.
+    type: Add
+  - message: Added being able to buckle stasis bags to roller beds and medevac stretchers.
+      Pulling a stasis bag without a roller bed will now correctly result in a movement
+      speed penalty.
+    type: Add
+  id: 1100
+  time: '2024-12-13T17:09:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3844
+- author: MetalSage
+  changes:
+  - message: Added visual effects when you heal Marines
+    type: Add
+  id: 1101
+  time: '2024-12-13T17:10:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5007
 Name: RMC14
 Order: -1
