@@ -5,14 +5,14 @@
   description: A prototype M59A, an experimental rifle platform built to outperform the standard M54C. Back issue only. Uses standard MK1 & MK2 rifle magazines.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m46c.rsi #TODO RMC: Change when new sprites
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/desert.rsi #TODO RMC: Change when new sprites
     layers:
-    - state: base
+    - state: bolt-open
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m46c.rsi #TODO RMC: Change when new sprites
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/desert.rsi #TODO RMC: Change when new sprites
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -118,3 +118,56 @@
       rmc-aslot-rail: 0.1, 0.16
       rmc-aslot-stock: -0.78, 0.0325
       rmc-aslot-underbarrel: 0.35, -0.343
+
+- type: entity
+  parent: WeaponRifleM59A
+  id: WeaponRifleM59ACamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: WeaponRifleM59AJungle
+      Desert: WeaponRifleM59A
+      Snow: WeaponRifleM9ASnow
+      Classic: WeaponRifleM59AClassic
+      Urban: WeaponRifleM9AUrban    
+
+- type: entity
+  parent: WeaponRifleM59A
+  id: WeaponRifleM59AJungle
+  suffix: Jungle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/jungle.rsi
+
+- type: entity
+  parent: WeaponRifleM59A
+  id: WeaponRifleM59ASnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/snow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/snow.rsi
+
+- type: entity
+  parent: WeaponRifleM59A
+  id: WeaponRifleM59AClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/classic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/classic.rsi
+
+- type: entity
+  parent: WeaponRifleM59A
+  id: WeaponRifleM59AUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/urban.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/urban.rsi
