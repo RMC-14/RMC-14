@@ -1,5 +1,6 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Rules;
@@ -43,7 +44,10 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         SubscribeLocalEvent<DropshipWeaponPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
         SubscribeLocalEvent<DropshipWeaponPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
-        SubscribeLocalEvent<DropshipWeaponPointComponent, ExaminedEvent>(OnAttachmentExamined);
+
+        SubscribeLocalEvent<DropshipUtilityPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
+        SubscribeLocalEvent<DropshipUtilityPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
+         SubscribeLocalEvent<DropshipWeaponPointComponent, ExaminedEvent>(OnAttachmentExamined);
 
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key,
             subs =>
@@ -69,6 +73,9 @@ public abstract class SharedDropshipSystem : EntitySystem
                 continue;
 
             if (HasComp<DropshipWeaponPointComponent>(uid))
+                ent.Comp.AttachmentPoints.Add(uid);
+
+            if (HasComp<DropshipUtilityPointComponent>(uid))
                 ent.Comp.AttachmentPoints.Add(uid);
         }
 
@@ -204,7 +211,28 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
     }
 
+    private void OnAttachmentPointMapInit(Entity<DropshipUtilityPointComponent> ent, ref MapInitEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (TryGetGridDropship(ent, out var dropship))
+        {
+            dropship.Comp.AttachmentPoints.Add(ent);
+            Dirty(dropship);
+        }
+    }
+
     private void OnAttachmentPointRemove<T>(Entity<DropshipWeaponPointComponent> ent, ref T args)
+    {
+        if (TryGetGridDropship(ent, out var dropship))
+        {
+            dropship.Comp.AttachmentPoints.Remove(ent);
+            Dirty(dropship);
+        }
+    }
+
+    private void OnAttachmentPointRemove<T>(Entity<DropshipUtilityPointComponent> ent, ref T args)
     {
         if (TryGetGridDropship(ent, out var dropship))
         {

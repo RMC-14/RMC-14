@@ -4,39 +4,37 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
 
-namespace Content.Shared._RMC14.Dropship.Weapon;
+namespace Content.Shared._RMC14.Dropship.Utility.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SharedDropshipWeaponSystem))]
-public sealed partial class DropshipWeaponComponent : Component
+public sealed partial class DropshipUtilityComponent : Component
 {
-    [DataField(required: true), AutoNetworkedField]
-    public string Abbreviation = string.Empty;
-
     [DataField, AutoNetworkedField]
-    public TimeSpan FireDelay = TimeSpan.FromSeconds(2);
+    public TimeSpan ActivateDelay = TimeSpan.FromSeconds(2);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan? NextFireAt;
+    public TimeSpan? NextActivateAt;
 
     [DataField, AutoNetworkedField]
-    public bool FireInTransport;
+    public bool ActivateInTransport;
 
     [DataField, AutoNetworkedField]
     public SkillWhitelist? Skills;
 
     [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi? WeaponAttachedSprite;
+    public SpriteSpecifier.Rsi? UtilityAttachedSprite;
 
-    [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi? AmmoEmptyAttachedSprite;
+    public EntityUid? AttachmentPoint;
 
-    [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi? AmmoAttachedSprite;
+    /// <summary>
+    /// Cached target of the weapons terminal
+    /// </summary>
+    [AutoNetworkedField]
+    public EntityUid? Target = null;
 }
 
 [Serializable, NetSerializable]
-public enum DropshipWeaponVisuals
+public enum DropshipUtilityVisuals
 {
     Sprite,
     State,
