@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: crystalHex
-  changes:
-  - message: Added bipods to requisitions vendor.
-    type: Tweak
-  - message: Added missing attachment crates to requisitions catalog.
-    type: Tweak
-  id: 584
-  time: '2024-08-18T20:07:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3709
-- author: crystalHex
-  changes:
-  - message: Added the M276 G8-A general utility pouch to the appropriate vendors.
-    type: Add
-  id: 585
-  time: '2024-08-18T20:09:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3620
 - author: Dutch-VanDerLinde
   changes:
   - message: Parasites now rip off marine's helmets.
@@ -4991,5 +4975,19 @@
   id: 1083
   time: '2024-12-09T09:52:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5090
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Burrower being able to acid and perform other do-afters while burrowing.
+    type: Fix
+  id: 1084
+  time: '2024-12-13T11:26:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5092
+- author: CyberTropic
+  changes:
+  - message: Added burn scorch marks to fire.
+    type: Add
+  id: 1085
+  time: '2024-12-13T11:26:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5117
 Name: RMC14
 Order: -1
