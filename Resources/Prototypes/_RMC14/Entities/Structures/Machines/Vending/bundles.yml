@@ -162,16 +162,3 @@
     - CMSurgicalCaseFilled
     - RMCFlashlightPen
 #   - Syringe case # TODO RMC14 syringe cases
-
-- type: entity
-  parent: CMVendorBundleRiflemanApparel
-  id: RMCVendorBundleSquadScarf
-  name: squad tactical wrap
-  description: Contains a tactical wrap, colored to your squad.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/black.rsi
-    state: icon
-  - type: CMVendorBundle
-    bundle:
-    - RMCVendorScarfSquad

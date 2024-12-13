@@ -82,7 +82,6 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
-      - id: RMCVendorBundleSquadScarf
       - id: RMCMaskRebreather
     - name: Engineering Supplies
       entries:

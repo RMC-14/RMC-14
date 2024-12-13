@@ -57,15 +57,3 @@
       SquadBravo: CMHeadsetBravoMedic
       SquadCharlie: CMHeadsetCharlieMedic
       SquadDelta: CMHeadsetDeltaMedic
-
-- type: entity
-  id: RMCVendorScarfSquad
-  categories:
-  - HideSpawnMenu
-  components:
-  - type: CMVendorMapToSquad
-    map:
-      SquadAlpha: RMCMaskScarfAlpha
-      SquadBravo: RMCMaskScarfBravo
-      SquadCharlie: RMCMaskScarfCharlie
-      SquadDelta: RMCMaskScarfDelta
