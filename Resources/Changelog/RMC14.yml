@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: fix neurotoxin dizziness lasting forever
-    type: Fix
-  id: 589
-  time: '2024-08-19T00:25:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3717
-- author: DrSmugleaf
-  changes:
-  - message: Fixed some areas on LV and other planets incorrectly blocking CAS.
-    type: Fix
-  id: 590
-  time: '2024-08-19T02:59:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3732
 - author: Whisper
   changes:
   - message: Fixed larva speech sounds being heard globally (stereo instead of mono),
@@ -4982,5 +4968,23 @@
   id: 1088
   time: '2024-12-13T11:34:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5102
+- author: CyberTropic
+  changes:
+  - message: Fixed overlapping washing machines.
+    type: Fix
+  id: 1089
+  time: '2024-12-13T12:20:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5100
+- author: DummeHytteOst
+  changes:
+  - message: Windoors now make a noise when shattering.
+    type: Add
+  - message: Fixed handrails, windoors and fences having too much health.
+    type: Tweak
+  - message: Palm trees no longer drop upstream logs.
+    type: Fix
+  id: 1090
+  time: '2024-12-13T12:20:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5096
 Name: RMC14
 Order: -1
