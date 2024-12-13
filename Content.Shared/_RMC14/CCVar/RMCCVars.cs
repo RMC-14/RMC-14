@@ -184,6 +184,9 @@ public sealed class RMCCVars : CVars
     public static readonly CVarDef<int> RMCPlanetMapVoteExcludeLast =
         CVarDef.Create("rmc.planet_map_vote_exclude_last", 2, CVar.SERVER | CVar.SERVERONLY);
 
+    public static readonly CVarDef<bool> RMCUseCarryoverVoting =
+        CVarDef.Create("rmc.planet_map_vote_carryover", true, CVar.SERVER | CVar.SERVERONLY);
+
     public static readonly CVarDef<int> RMCTacticalMapAnnounceCooldownSeconds =
         CVarDef.Create("rmc.tactical_map_announce_cooldown_seconds", 240, CVar.SERVER | CVar.SERVERONLY);
 
