@@ -1,0 +1,15 @@
+# Masks
+# TODO Scarves, face wrap
+- type: loadout
+  id: CoifRMC
+  cost: 2
+  storage:
+    back:
+    - CMMaskCoif
+
+- type: loadout
+  id: GasMaskRMC
+  cost: 2
+  storage:
+    back:
+    - CMMaskGas

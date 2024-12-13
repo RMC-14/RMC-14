@@ -190,6 +190,21 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             Dirty(actor, user);
         }
 
+        var validJob = true;
+        if (_mind.TryGetMind(args.Actor, out var mindId, out _))
+        {
+            foreach (var job in section.Jobs)
+            {
+                if (!_job.MindHasJobWithId(mindId, job.Id))
+                    validJob = false;
+                else
+                    validJob = true;
+            }
+        }
+
+        if (!validJob)
+            return;
+
         if (section.Choices is { } choices)
         {
             user = EnsureComp<CMVendorUserComponent>(actor);

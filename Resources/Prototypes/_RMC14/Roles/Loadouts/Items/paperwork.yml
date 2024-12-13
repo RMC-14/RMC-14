@@ -1,0 +1,63 @@
+# Paperwork
+- type: loadout
+  id: PenRMC
+  cost: 1
+  storage:
+    back:
+    - CMPen
+
+- type: loadout
+  id: PenFountainRMC
+  cost: 3
+  storage:
+    back:
+    - CMPenFountain
+
+- type: loadout
+  id: PaperRMC
+  cost: 1
+  storage:
+    back:
+    - CMPaper
+
+- type: loadout
+  id: ClipboardRMC
+  cost: 2
+  storage:
+    back:
+    - CMClipboard
+
+- type: loadout
+  id: FolderBlackRMC
+  cost: 2
+  storage:
+    back:
+    - CMFolderBlack
+
+- type: loadout
+  id: FolderBlueRMC
+  cost: 2
+  storage:
+    back:
+    - CMFolderBlue
+
+- type: loadout
+  id: FolderRedRMC
+  cost: 2
+  storage:
+    back:
+    - CMFolderRed
+
+- type: loadout
+  id: FolderWhiteRMC
+  cost: 2
+  storage:
+    back:
+    - CMFolderWhite
+
+- type: loadout
+  id: FolderYellowRMC
+  cost: 2
+  storage:
+    back:
+    - CMFolderYellow

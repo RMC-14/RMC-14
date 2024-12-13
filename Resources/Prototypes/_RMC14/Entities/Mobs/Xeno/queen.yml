@@ -96,6 +96,7 @@
     chance: 0.55
     stunMin: 5
     stunMax: 6
+  - type: TunnelRenamer
   - type: Fixtures
     fixtures:
       fix1:

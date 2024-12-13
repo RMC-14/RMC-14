@@ -2,12 +2,13 @@
   parent: [ RMCBaseBreechloader, RMCBaseAttachableHolder ]
   name: MOU53 break action shotgun
   id: WeaponShotgunMOU53
+  suffix: Jungle
   description: A limited production Kerchner MOU53 triple break action classic. Respectable damage output at medium ranges, while the Aegis M42 is the king of CQC, the Kerchner MOU53 is what hits the broadside of that barn. This specific model cannot safely fire buckshot shells.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53/jungle.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53/jungle.rsi
   - type: Tag
     tags:
     - RMCWeaponShotgunMOU53
@@ -72,6 +73,61 @@
       rmc-aslot-rail: -0.02, 0.15
       rmc-aslot-stock: -0.65, -0.18
       rmc-aslot-underbarrel: 0.5, -0.25
+
+#camo variants
+- type: entity
+  parent: WeaponShotgunMOU53
+  id: WeaponShotgunMOU53Camo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: WeaponShotgunMOU53
+      Desert: WeaponShotgunMOU53Desert
+      Snow: WeaponShotgunMOU53Snow
+      Classic: WeaponShotgunMOU53Classic
+      Urban: WeaponShotgunMOU53Urban
+
+- type: entity
+  parent: WeaponShotgunMOU53
+  id: WeaponShotgunMOU53Desert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53/desert.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53/desert.rsi
+
+- type: entity
+  parent: WeaponShotgunMOU53  
+  id: WeaponShotgunMOU53Snow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53/snow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53/snow.rsi
+
+- type: entity
+  parent: WeaponShotgunMOU53  
+  id: WeaponShotgunMOU53Classic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53/classic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53/classic.rsi
+
+- type: entity
+  parent: WeaponShotgunMOU53  
+  id: WeaponShotgunMOU53Urban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53/urban.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53/urban.rsi
+
 
 - type: Tag
   id: RMCWeaponShotgunMOU53

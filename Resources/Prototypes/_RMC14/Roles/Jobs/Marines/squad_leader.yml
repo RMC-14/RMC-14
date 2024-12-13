@@ -9,6 +9,7 @@
     department: CMSquad
     time: 36000 # 10 hours
   startingGear: CMGearSquadLeader
+  dummyStartingGear: CMGearSquadLeaderEquipped
   icon: "CMJobIconSquadLeader"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
@@ -50,17 +51,15 @@
 - type: startingGear
   id: CMGearSquadLeader
   equipment:
-    back: CMSatchelMarine
     id: CMDogtagSquadLeader
 
 - type: startingGear
   id: CMGearSquadLeaderEquipped
   equipment:
-    jumpsuit: JumpsuitMarine
-    back: CMSatchelMarine
+    jumpsuit: JumpsuitMarineCamo
     shoes: CMBootsBlackFilled
-    head: CMArmorHelmetM11
-    outerClothing: CMArmorM3Medium
+    head: RMCArmorHelmetM11Camo
+    outerClothing: RMCArmorB12Camo
     gloves: CMHandsBlackMarine
     id: CMDogtagSquadLeader
     ears: CMHeadsetAlphaLeader

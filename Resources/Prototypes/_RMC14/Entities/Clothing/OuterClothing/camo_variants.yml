@@ -1,0 +1,1449 @@
+#---camo replacers---
+#m3 medium armor
+- type: entity
+  parent: RMCArmorM3MediumPadded
+  id: RMCArmorM3MediumPaddedCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3MediumPadded
+      Desert: RMCArmorM3MediumPaddedDesert
+      Snow: RMCArmorM3MediumPaddedSnow
+      Classic: RMCArmorM3MediumPaddedClassic
+      Urban: RMCArmorM3MediumPaddedUrban
+
+- type: entity
+  parent: RMCArmorM3MediumPadless
+  id: RMCArmorM3MediumPadlessCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3MediumPadless
+      Desert: RMCArmorM3MediumPadlessDesert
+      Snow: RMCArmorM3MediumPadlessSnow
+      Classic: RMCArmorM3MediumPadlessClassic
+      Urban: RMCArmorM3MediumPadlessUrban
+
+- type: entity
+  parent: RMCArmorM3MediumRidged
+  id: RMCArmorM3MediumRidgedCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3MediumRidged
+      Desert: RMCArmorM3MediumRidgedDesert
+      Snow: RMCArmorM3MediumRidgedSnow
+      Classic: RMCArmorM3MediumRidgedClassic
+      Urban: RMCArmorM3MediumRidgedUrban
+
+- type: entity
+  parent: RMCArmorM3MediumCarrier
+  id: RMCArmorM3MediumCarrierCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3MediumCarrier
+      Desert: RMCArmorM3MediumCarrierDesert
+      Snow: RMCArmorM3MediumCarrierSnow
+      Classic: RMCArmorM3MediumCarrierClassic
+      Urban: RMCArmorM3MediumCarrierUrban
+
+- type: entity
+  parent: RMCArmorM3MediumSkull
+  id: RMCArmorM3MediumSkullCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3MediumSkull
+      Desert: RMCArmorM3MediumSkullDesert
+      Snow: RMCArmorM3MediumSkullSnow
+      Classic: RMCArmorM3MediumSkullClassic
+      Urban: RMCArmorM3MediumSkullUrban
+
+- type: entity
+  parent: RMCArmorM3MediumSmooth
+  id: RMCArmorM3MediumSmoothCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3MediumSmooth
+      Desert: RMCArmorM3MediumSmoothDesert
+      Snow: RMCArmorM3MediumSmoothSnow
+      Classic: RMCArmorM3MediumSmoothClassic
+      Urban: RMCArmorM3MediumSmoothUrban
+
+#m3 eod heavy armor
+- type: entity
+  parent: RMCArmorM3HeavyPadded
+  id: RMCArmorM3HeavyPaddedCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3HeavyPadded
+      Desert: RMCArmorM3HeavyPaddedDesert
+      Snow: RMCArmorM3HeavyPaddedSnow
+      Classic: RMCArmorM3HeavyPaddedClassic
+      Urban: RMCArmorM3HeavyPaddedUrban
+
+- type: entity
+  parent: RMCArmorM3HeavyPadless
+  id: RMCArmorM3HeavyPadlessCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3HeavyPadless
+      Desert: RMCArmorM3HeavyPadlessDesert
+      Snow: RMCArmorM3HeavyPadlessSnow
+      Classic: RMCArmorM3HeavyPadlessClassic
+      Urban: RMCArmorM3HeavyPadlessUrban
+
+- type: entity
+  parent: RMCArmorM3HeavyRidged
+  id: RMCArmorM3HeavyRidgedCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3HeavyRidged
+      Desert: RMCArmorM3HeavyRidgedDesert
+      Snow: RMCArmorM3HeavyRidgedSnow
+      Classic: RMCArmorM3HeavyRidgedClassic
+      Urban: RMCArmorM3HeavyRidgedUrban
+
+- type: entity
+  parent: RMCArmorM3HeavyCarrier
+  id: RMCArmorM3HeavyCarrierCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3HeavyCarrier
+      Desert: RMCArmorM3HeavyCarrierDesert
+      Snow: RMCArmorM3HeavyCarrierSnow
+      Classic: RMCArmorM3HeavyCarrierClassic
+      Urban: RMCArmorM3HeavyCarrierUrban
+
+- type: entity
+  parent: RMCArmorM3HeavySkull
+  id: RMCArmorM3HeavySkullCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3HeavySkull
+      Desert: RMCArmorM3HeavySkullDesert
+      Snow: RMCArmorM3HeavySkullSnow
+      Classic: RMCArmorM3HeavySkullClassic
+      Urban: RMCArmorM3HeavySkullUrban
+
+- type: entity
+  parent: RMCArmorM3HeavySmooth
+  id: RMCArmorM3HeavySmoothCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3HeavySmooth
+      Desert: RMCArmorM3HeavySmoothDesert
+      Snow: RMCArmorM3HeavySmoothSnow
+      Classic: RMCArmorM3HeavySmoothClassic
+      Urban: RMCArmorM3HeavySmoothUrban
+
+#m3 light armor
+- type: entity
+  parent: RMCArmorM3LightPadded
+  id: RMCArmorM3LightPaddedCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3LightPadded
+      Desert: RMCArmorM3LightPaddedDesert
+      Snow: RMCArmorM3LightPaddedSnow
+      Classic: RMCArmorM3LightPaddedClassic
+      Urban: RMCArmorM3LightPaddedUrban
+
+- type: entity
+  parent: RMCArmorM3LightPadless
+  id: RMCArmorM3LightPadlessCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3LightPadless
+      Desert: RMCArmorM3LightPadlessDesert
+      Snow: RMCArmorM3LightPadlessSnow
+      Classic: RMCArmorM3LightPadlessClassic
+      Urban: RMCArmorM3LightPadlessUrban
+
+- type: entity
+  parent: RMCArmorM3LightRidged
+  id: RMCArmorM3LightRidgedCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3LightRidged
+      Desert: RMCArmorM3LightRidgedDesert
+      Snow: RMCArmorM3LightRidgedSnow
+      Classic: RMCArmorM3LightRidgedClassic
+      Urban: RMCArmorM3LightRidgedUrban
+
+- type: entity
+  parent: RMCArmorM3LightCarrier
+  id: RMCArmorM3LightCarrierCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3LightCarrier
+      Desert: RMCArmorM3LightCarrierDesert
+      Snow: RMCArmorM3LightCarrierSnow
+      Classic: RMCArmorM3LightCarrierClassic
+      Urban: RMCArmorM3LightCarrierUrban
+
+- type: entity
+  parent: RMCArmorM3LightSkull
+  id: RMCArmorM3LightSkullCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3LightSkull
+      Desert: RMCArmorM3LightSkullDesert
+      Snow: RMCArmorM3LightSkullSnow
+      Classic: RMCArmorM3LightSkullClassic
+      Urban: RMCArmorM3LightSkullUrban
+
+- type: entity
+  parent: RMCArmorM3LightSmooth
+  id: RMCArmorM3LightSmoothCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3LightSmooth
+      Desert: RMCArmorM3LightSmoothDesert
+      Snow: RMCArmorM3LightSmoothSnow
+      Classic: RMCArmorM3LightSmoothClassic
+      Urban: RMCArmorM3LightSmoothUrban
+
+#spec armors
+- type: entity
+  parent: RMCArmorM3G4
+  id: RMCArmorM3G4Camo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3G4
+      Desert: RMCArmorM3G4Desert
+      Snow: RMCArmorM3G4Snow
+      Classic: RMCArmorM3G4Classic
+      Urban: RMCArmorM3G4Urban
+
+- type: entity
+  parent: RMCArmorM3TDemo
+  id: RMCArmorM3TDemoCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3TDemo
+      Desert: RMCArmorM3TDemoDesert
+      Snow: RMCArmorM3TDemoSnow
+      Classic: RMCArmorM3TDemoClassic
+      Urban: RMCArmorM3TDemoUrban
+
+- type: entity
+  parent: RMCArmorM3Scout
+  id: RMCArmorM3ScoutCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3Scout
+      Desert: RMCArmorM3ScoutDesert
+      Snow: RMCArmorM3ScoutSnow
+      Classic: RMCArmorM3ScoutClassic
+      Urban: RMCArmorM3ScoutUrban
+
+- type: entity
+  parent: CMArmorM45
+  id: RMCArmorM45Camo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMArmorM45
+      Desert: RMCArmorM45Desert
+      Snow: RMCArmorM45Snow
+      Classic: RMCArmorM45Classic
+      Urban: RMCArmorM45Urban
+
+- type: entity
+  parent: CMArmorM35
+  id: RMCArmorM35Camo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMArmorM35
+      Desert: RMCArmorM35Desert
+      Snow: RMCArmorM35Snow
+      Classic: RMCArmorM35Classic
+      Urban: RMCArmorM35Urban
+
+- type: entity
+  parent: CMArmorSmartGunCombatHarness
+  id: RMCSGHarnessCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMArmorSmartGunCombatHarness
+      Desert: RMCSGHarnessDesert
+      Snow: RMCSGHarnessSnow
+      Classic: RMCSGHarnessClassic
+      Urban: RMCSGHarnessUrban
+
+#mp armors
+
+- type: entity
+  parent: CMArmorM2MP
+  id: RMCArmorM2MPCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMArmorM2MP
+      Desert: RMCArmorM2MPDesert
+      Snow: RMCArmorM2MPSnow
+      Classic: RMCArmorM2MPClassic
+      Urban: RMCArmorM2MPUrban
+
+- type: entity
+  parent: CMArmorM3Warden
+  id: RMCArmorM3WardenCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMArmorM3Warden
+      Desert: RMCArmorM3WardenDesert
+      Snow: RMCArmorM3WardenSnow
+      Classic: RMCArmorM3WardenClassic
+      Urban: RMCArmorM3WardenUrban
+
+- type: entity
+  parent: CMArmorM3WO
+  id: RMCArmorM3WOCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMArmorM3WO
+      Desert: RMCArmorM3WODesert
+      Snow: RMCArmorM3WOSnow
+      Classic: RMCArmorM3WOClassic
+      Urban: RMCArmorM3WOUrban
+
+# misc armors
+
+- type: entity
+  parent: CMArmorM4
+  id: RMCArmorM4Camo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMArmorM4
+      Desert: RMCArmorM4Desert
+      Snow: RMCArmorM4Snow
+      Classic: RMCArmorM4Classic
+      Urban: RMCArmorM4Urban
+
+- type: entity
+  parent: CMArmorB12
+  id: RMCArmorB12Camo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMArmorB12
+      Desert: RMCArmorB12Desert
+      Snow: RMCArmorB12Snow
+      Classic: RMCArmorB12Classic
+      Urban: RMCArmorB12Urban
+
+- type: entity
+  parent: RMCArmorM3SO
+  id: RMCArmorM3SOCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCArmorM3SO
+      Desert: RMCArmorM3SODesert
+      Snow: RMCArmorM3SOSnow
+      Classic: RMCArmorM3SOClassic
+      Urban: RMCArmorM3SOUrban
+
+- type: entity
+  parent: CMArmorM3VLSynth
+  id: RMCArmorM3VLSynthCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMArmorM3VLSynth
+      Desert: RMCArmorM3VLSynthDesert
+      Snow: RMCArmorM3VLSynthSnow
+      Classic: RMCArmorM3VLSynthClassic
+      Urban: RMCArmorM3VLSynthUrban
+
+# ----------- ACTUAL CAMOUFLAGE VARIANTS BELOW ---------------
+#- desert -
+#--- medium armor
+- type: entity
+  parent: RMCArmorM3MediumPadded
+  id: RMCArmorM3MediumPaddedDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/desert.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumPadless
+  id: RMCArmorM3MediumPadlessDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padless/desert.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumRidged
+  id: RMCArmorM3MediumRidgedDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/ridged/desert.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumCarrier
+  id: RMCArmorM3MediumCarrierDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/carrier/desert.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumSkull
+  id: RMCArmorM3MediumSkullDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/skull/desert.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumSmooth
+  id: RMCArmorM3MediumSmoothDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/smooth/desert.rsi
+
+#--- heavy armor
+
+- type: entity
+  parent: RMCArmorM3HeavyPadded
+  id: RMCArmorM3HeavyPaddedDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/desert.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavyPadless
+  id: RMCArmorM3HeavyPadlessDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padless/desert.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavyRidged
+  id: RMCArmorM3HeavyRidgedDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/ridged/desert.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavyCarrier
+  id: RMCArmorM3HeavyCarrierDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/carrier/desert.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavySkull
+  id: RMCArmorM3HeavySkullDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/skull/desert.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavySmooth
+  id: RMCArmorM3HeavySmoothDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/smooth/desert.rsi
+
+#--- light
+- type: entity
+  parent: RMCArmorM3LightPadded
+  id: RMCArmorM3LightPaddedDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padded/desert.rsi
+
+- type: entity
+  parent: RMCArmorM3LightPadless
+  id: RMCArmorM3LightPadlessDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padless/desert.rsi
+
+- type: entity
+  parent: RMCArmorM3LightRidged
+  id: RMCArmorM3LightRidgedDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/ridged/desert.rsi
+
+- type: entity
+  parent: RMCArmorM3LightCarrier
+  id: RMCArmorM3LightCarrierDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/carrier/desert.rsi
+
+- type: entity
+  parent: RMCArmorM3LightSkull
+  id: RMCArmorM3LightSkullDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/skull/desert.rsi
+
+- type: entity
+  parent: RMCArmorM3LightSmooth
+  id: RMCArmorM3LightSmoothDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/smooth/desert.rsi
+
+#--- spec armors
+- type: entity
+  parent: RMCArmorM3G4
+  id: RMCArmorM3G4Desert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/g4/desert.rsi
+
+- type: entity
+  parent: RMCArmorM3TDemo
+  id: RMCArmorM3TDemoDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/t/desert.rsi
+
+- type: entity
+  parent: RMCArmorM3Scout
+  id: RMCArmorM3ScoutDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/scout/desert.rsi
+
+- type: entity
+  parent: CMArmorM45
+  id: RMCArmorM45Desert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/desert.rsi
+
+- type: entity
+  parent: CMArmorM35
+  id: RMCArmorM35Desert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/desert.rsi
+
+- type: entity
+  parent: CMArmorSmartGunCombatHarness
+  id: RMCSGHarnessDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a/desert.rsi
+
+#--- MP armors
+
+- type: entity
+  parent: CMArmorM2MP
+  id: RMCArmorM2MPDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/desert.rsi
+
+- type: entity
+  parent: CMArmorM3Warden
+  id: RMCArmorM3WardenDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/desert.rsi
+
+- type: entity
+  parent: CMArmorM3WO
+  id: RMCArmorM3WODesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/desert.rsi
+
+#--- Misc armors
+
+- type: entity
+  parent: CMArmorM4
+  id: RMCArmorM4Desert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m4/desert.rsi
+
+- type: entity
+  parent: CMArmorB12
+  id: RMCArmorB12Desert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12/desert.rsi
+
+- type: entity
+  parent: RMCArmorM3SO
+  id: RMCArmorM3SODesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/officer/desert.rsi
+
+- type: entity
+  parent: CMArmorM3VLSynth
+  id: RMCArmorM3VLSynthDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/desert.rsi
+
+#-----------------------------------------
+#-------------- SNOW ---------------------
+#-----------------------------------------
+#medium armor
+- type: entity
+  parent: RMCArmorM3MediumPadded
+  id: RMCArmorM3MediumPaddedSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/snow.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumPadless
+  id: RMCArmorM3MediumPadlessSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padless/snow.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumRidged
+  id: RMCArmorM3MediumRidgedSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/ridged/snow.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumCarrier
+  id: RMCArmorM3MediumCarrierSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/carrier/snow.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumSkull
+  id: RMCArmorM3MediumSkullSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/skull/snow.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumSmooth
+  id: RMCArmorM3MediumSmoothSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/smooth/snow.rsi
+
+#--- heavy armor
+
+- type: entity
+  parent: RMCArmorM3HeavyPadded
+  id: RMCArmorM3HeavyPaddedSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/snow.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavyPadless
+  id: RMCArmorM3HeavyPadlessSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padless/snow.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavyRidged
+  id: RMCArmorM3HeavyRidgedSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/ridged/snow.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavyCarrier
+  id: RMCArmorM3HeavyCarrierSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/carrier/snow.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavySkull
+  id: RMCArmorM3HeavySkullSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/skull/snow.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavySmooth
+  id: RMCArmorM3HeavySmoothSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/smooth/snow.rsi
+
+#--- light
+- type: entity
+  parent: RMCArmorM3LightPadded
+  id: RMCArmorM3LightPaddedSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padded/snow.rsi
+
+- type: entity
+  parent: RMCArmorM3LightPadless
+  id: RMCArmorM3LightPadlessSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padless/snow.rsi
+
+- type: entity
+  parent: RMCArmorM3LightRidged
+  id: RMCArmorM3LightRidgedSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/ridged/snow.rsi
+
+- type: entity
+  parent: RMCArmorM3LightCarrier
+  id: RMCArmorM3LightCarrierSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/carrier/snow.rsi
+
+- type: entity
+  parent: RMCArmorM3LightSkull
+  id: RMCArmorM3LightSkullSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/skull/snow.rsi
+
+- type: entity
+  parent: RMCArmorM3LightSmooth
+  id: RMCArmorM3LightSmoothSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/smooth/snow.rsi
+
+#--- spec armors
+- type: entity
+  parent: RMCArmorM3G4
+  id: RMCArmorM3G4Snow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/g4/snow.rsi
+
+- type: entity
+  parent: RMCArmorM3TDemo
+  id: RMCArmorM3TDemoSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/t/snow.rsi
+
+- type: entity
+  parent: RMCArmorM3Scout
+  id: RMCArmorM3ScoutSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/scout/snow.rsi
+
+- type: entity
+  parent: CMArmorM45
+  id: RMCArmorM45Snow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/snow.rsi
+
+- type: entity
+  parent: CMArmorM35
+  id: RMCArmorM35Snow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/snow.rsi
+
+- type: entity
+  parent: CMArmorSmartGunCombatHarness
+  id: RMCSGHarnessSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a/snow.rsi
+
+#--- MP armors
+
+- type: entity
+  parent: CMArmorM2MP
+  id: RMCArmorM2MPSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/snow.rsi
+
+- type: entity
+  parent: CMArmorM3Warden
+  id: RMCArmorM3WardenSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/snow.rsi
+
+- type: entity
+  parent: CMArmorM3WO
+  id: RMCArmorM3WOSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/snow.rsi
+
+#--- Misc armors
+
+- type: entity
+  parent: CMArmorM4
+  id: RMCArmorM4Snow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m4/snow.rsi
+
+- type: entity
+  parent: CMArmorB12
+  id: RMCArmorB12Snow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12/snow.rsi
+
+- type: entity
+  parent: RMCArmorM3SO
+  id: RMCArmorM3SOSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/officer/snow.rsi
+
+- type: entity
+  parent: CMArmorM3VLSynth
+  id: RMCArmorM3VLSynthSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/snow.rsi
+#-----------------------------------------
+#-------------- CLASSIC ------------------
+#-----------------------------------------
+#medium armor
+- type: entity
+  parent: RMCArmorM3MediumPadded
+  id: RMCArmorM3MediumPaddedClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/classic.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumPadless
+  id: RMCArmorM3MediumPadlessClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padless/classic.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumRidged
+  id: RMCArmorM3MediumRidgedClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/ridged/classic.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumCarrier
+  id: RMCArmorM3MediumCarrierClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/carrier/classic.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumSkull
+  id: RMCArmorM3MediumSkullClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/skull/classic.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumSmooth
+  id: RMCArmorM3MediumSmoothClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/smooth/classic.rsi
+
+#--- heavy armor
+
+- type: entity
+  parent: RMCArmorM3HeavyPadded
+  id: RMCArmorM3HeavyPaddedClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/classic.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavyPadless
+  id: RMCArmorM3HeavyPadlessClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padless/classic.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavyRidged
+  id: RMCArmorM3HeavyRidgedClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/ridged/classic.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavyCarrier
+  id: RMCArmorM3HeavyCarrierClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/carrier/classic.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavySkull
+  id: RMCArmorM3HeavySkullClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/skull/classic.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavySmooth
+  id: RMCArmorM3HeavySmoothClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/smooth/classic.rsi
+
+#--- light
+- type: entity
+  parent: RMCArmorM3LightPadded
+  id: RMCArmorM3LightPaddedClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padded/classic.rsi
+
+- type: entity
+  parent: RMCArmorM3LightPadless
+  id: RMCArmorM3LightPadlessClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padless/classic.rsi
+
+- type: entity
+  parent: RMCArmorM3LightRidged
+  id: RMCArmorM3LightRidgedClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/ridged/classic.rsi
+
+- type: entity
+  parent: RMCArmorM3LightCarrier
+  id: RMCArmorM3LightCarrierClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/carrier/classic.rsi
+
+- type: entity
+  parent: RMCArmorM3LightSkull
+  id: RMCArmorM3LightSkullClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/skull/classic.rsi
+
+- type: entity
+  parent: RMCArmorM3LightSmooth
+  id: RMCArmorM3LightSmoothClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/smooth/classic.rsi
+
+#--- spec armors
+- type: entity
+  parent: RMCArmorM3G4
+  id: RMCArmorM3G4Classic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/g4/classic.rsi
+
+- type: entity
+  parent: RMCArmorM3TDemo
+  id: RMCArmorM3TDemoClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/t/classic.rsi
+
+- type: entity
+  parent: RMCArmorM3Scout
+  id: RMCArmorM3ScoutClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/scout/classic.rsi
+
+- type: entity
+  parent: CMArmorM45
+  id: RMCArmorM45Classic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/classic.rsi
+
+- type: entity
+  parent: CMArmorM35
+  id: RMCArmorM35Classic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/classic.rsi
+
+- type: entity
+  parent: CMArmorSmartGunCombatHarness
+  id: RMCSGHarnessClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a/classic.rsi
+
+#--- MP armors
+
+- type: entity
+  parent: CMArmorM2MP
+  id: RMCArmorM2MPClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/classic.rsi
+
+- type: entity
+  parent: CMArmorM3Warden
+  id: RMCArmorM3WardenClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/classic.rsi
+
+- type: entity
+  parent: CMArmorM3WO
+  id: RMCArmorM3WOClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/classic.rsi
+
+#--- Misc armors
+
+- type: entity
+  parent: CMArmorM4
+  id: RMCArmorM4Classic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m4/classic.rsi
+
+- type: entity
+  parent: CMArmorB12
+  id: RMCArmorB12Classic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12/classic.rsi
+
+- type: entity
+  parent: RMCArmorM3SO
+  id: RMCArmorM3SOClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/officer/classic.rsi
+
+- type: entity
+  parent: CMArmorM3VLSynth
+  id: RMCArmorM3VLSynthClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/classic.rsi
+
+#-----------------------------------------
+#-------------- URBAN --------------------
+#-----------------------------------------
+#medium armor
+- type: entity
+  parent: RMCArmorM3MediumPadded
+  id: RMCArmorM3MediumPaddedUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumPadless
+  id: RMCArmorM3MediumPadlessUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padless/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumRidged
+  id: RMCArmorM3MediumRidgedUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/ridged/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumCarrier
+  id: RMCArmorM3MediumCarrierUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/carrier/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumSkull
+  id: RMCArmorM3MediumSkullUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/skull/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3MediumSmooth
+  id: RMCArmorM3MediumSmoothUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/smooth/urban.rsi
+
+#--- heavy armor
+
+- type: entity
+  parent: RMCArmorM3HeavyPadded
+  id: RMCArmorM3HeavyPaddedUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavyPadless
+  id: RMCArmorM3HeavyPadlessUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padless/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavyRidged
+  id: RMCArmorM3HeavyRidgedUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/ridged/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavyCarrier
+  id: RMCArmorM3HeavyCarrierUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/carrier/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavySkull
+  id: RMCArmorM3HeavySkullUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/skull/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3HeavySmooth
+  id: RMCArmorM3HeavySmoothUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/smooth/urban.rsi
+
+#--- light
+- type: entity
+  parent: RMCArmorM3LightPadded
+  id: RMCArmorM3LightPaddedUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padded/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3LightPadless
+  id: RMCArmorM3LightPadlessUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padless/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3LightRidged
+  id: RMCArmorM3LightRidgedUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/ridged/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3LightCarrier
+  id: RMCArmorM3LightCarrierUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/carrier/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3LightSkull
+  id: RMCArmorM3LightSkullUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/skull/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3LightSmooth
+  id: RMCArmorM3LightSmoothUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/smooth/urban.rsi
+
+#--- spec armors
+- type: entity
+  parent: RMCArmorM3G4
+  id: RMCArmorM3G4Urban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/g4/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3TDemo
+  id: RMCArmorM3TDemoUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/t/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3Scout
+  id: RMCArmorM3ScoutUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/scout/urban.rsi
+
+- type: entity
+  parent: CMArmorM45
+  id: RMCArmorM45Urban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/urban.rsi
+
+- type: entity
+  parent: CMArmorM35
+  id: RMCArmorM35Urban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/urban.rsi
+
+- type: entity
+  parent: CMArmorSmartGunCombatHarness
+  id: RMCSGHarnessUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a/urban.rsi
+
+#--- MP armors
+
+- type: entity
+  parent: CMArmorM2MP
+  id: RMCArmorM2MPUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/urban.rsi
+
+- type: entity
+  parent: CMArmorM3Warden
+  id: RMCArmorM3WardenUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/urban.rsi
+
+- type: entity
+  parent: CMArmorM3WO
+  id: RMCArmorM3WOUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/urban.rsi
+
+#--- Misc armors
+
+- type: entity
+  parent: CMArmorM4
+  id: RMCArmorM4Urban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m4/urban.rsi
+
+- type: entity
+  parent: CMArmorB12
+  id: RMCArmorB12Urban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12/urban.rsi
+
+- type: entity
+  parent: RMCArmorM3SO
+  id: RMCArmorM3SOUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/officer/urban.rsi
+
+- type: entity
+  parent: CMArmorM3VLSynth
+  id: RMCArmorM3VLSynthUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/urban.rsi

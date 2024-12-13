@@ -390,6 +390,20 @@
     state: supply_crate
   objectType: Item
 
+- type: construction
+  parent: RMC
+  name: Supply Box (Flashlights)
+  id: RMCBoxFlashlightsEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxFlashlightsEmpty
+  category: construction-category-cm-box-magazine
+  description: A box of flashlights to brighten your day!
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: flashlightbox
+  objectType: Item
+
 # Construct graphs
 - type: constructionGraph
   parent: RMC
@@ -565,6 +579,11 @@
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 1
+    - to: RMCBoxFlashlightsEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 1
 
   # Why the fuck do you even need these nodes???
 
@@ -647,3 +666,5 @@
     entity: RMCBoxPackFlareEmpty
   - node: RMCBoxPackFlareCASEmpty
     entity: RMCBoxPackFlareCASEmpty
+  - node: RMCBoxFlashlightsEmpty
+    entity: RMCBoxFlashlightsEmpty
