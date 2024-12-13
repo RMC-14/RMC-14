@@ -255,4 +255,7 @@
   - type: Appearance
   - type: Tag
     tags:
-    - RMCWeldingGoggles
+    - RMCWeldingGoggle
+
+- type: Tag
+  id: RMCWeldingGoggle
