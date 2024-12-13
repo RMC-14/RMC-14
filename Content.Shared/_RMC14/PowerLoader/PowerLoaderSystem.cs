@@ -1,8 +1,7 @@
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
-using Content.Shared._RMC14.Dropship.Utility;
+using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
@@ -21,8 +20,8 @@ using Content.Shared.Mobs;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Tag;
 using Content.Shared.Stunnable;
+using Content.Shared.Tag;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -31,6 +30,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using static Content.Shared.Interaction.SharedInteractionSystem;
 using static Content.Shared.Physics.CollisionGroup;
+using DropshipUtilityComponent = Content.Shared._RMC14.Dropship.Utility.Components.DropshipUtilityComponent;
 
 namespace Content.Shared._RMC14.PowerLoader;
 

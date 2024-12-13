@@ -13,7 +13,6 @@ public sealed partial class DropshipWeaponComponent : Component
     [DataField(required: true), AutoNetworkedField]
     public string Abbreviation = string.Empty;
 
-
     [DataField, AutoNetworkedField]
     public TimeSpan FireDelay = TimeSpan.FromSeconds(2);
 

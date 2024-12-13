@@ -1,26 +1,18 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
-using Content.Shared._RMC14.Dropship.Utility;
+using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Interaction;
-using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Content.Shared._RMC14.Dropship.Utility;
+namespace Content.Shared._RMC14.Dropship.Utility.Systems;
 
-public sealed partial class DropshipUtilitySystem : EntitySystem
+public sealed class DropshipUtilitySystem : EntitySystem
 {
-    [Dependency] private readonly EntityManager _entityManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedDropshipSystem _dropship = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -38,13 +30,10 @@ public sealed partial class DropshipUtilitySystem : EntitySystem
     private void OnTargetChange(Entity<DropshipUtilityPointComponent> ent, ref DropshipTargetChangedEvent args)
     {
         var slot = _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.UtilitySlotId);
-        var utilityEntity = slot.ContainedEntity;
-        if (utilityEntity is null ||
-            !TryComp(utilityEntity, out DropshipUtilityComponent? utilityComp))
-        {
+        if (!TryComp(slot.ContainedEntity, out DropshipUtilityComponent? utilityComp))
             return;
-        }
-        utilityComp.Target = _entityManager.GetEntity(args.DropshipTarget);
+
+        utilityComp.Target = GetEntity(args.DropshipTarget);
     }
 
     /// <summary>
@@ -54,11 +43,8 @@ public sealed partial class DropshipUtilitySystem : EntitySystem
     {
         var slot = _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.UtilitySlotId);
         var utilityEntity = slot.ContainedEntity;
-        if (utilityEntity is null ||
-    !TryComp(utilityEntity, out DropshipUtilityComponent? utilityComp))
-        {
+        if (!HasComp<DropshipUtilityComponent>(utilityEntity))
             return;
-        }
 
         var ev = new InteractHandEvent(args.User, args.Target);
         RaiseLocalEvent(utilityEntity.Value, ev);

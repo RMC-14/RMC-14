@@ -36,7 +36,7 @@
     utilityAttachedSprite:
       sprite: _RMC14/Objects/dropship_utility_attachments.rsi
       state: medevac_system_deployed
-    activateDelay: 60
+    activateDelay: 20
     activateInTransport: true
     skills:
       all:

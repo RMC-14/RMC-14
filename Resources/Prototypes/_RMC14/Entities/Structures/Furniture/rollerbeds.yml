@@ -95,6 +95,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/rollerbeds.rsi
     noRot: true
+    drawdepth: OverMobs
     layers:
     - state: stretcher_down
       map: ["unfoldedLayer"]
