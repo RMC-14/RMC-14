@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed CAS fire exploding grenades and destroying everything in your pockets.
-    type: Fix
-  id: 596
-  time: '2024-08-20T12:11:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3762
 - author: Vermidia
   changes:
   - message: Fixed First responder pouch not holding pill packets and ointment
@@ -4978,5 +4971,12 @@
   id: 1095
   time: '2024-12-13T14:16:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5106
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Queen screech not stunning parasites.
+    type: Fix
+  id: 1096
+  time: '2024-12-13T14:26:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5118
 Name: RMC14
 Order: -1
