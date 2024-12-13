@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: MetalSage
-  changes:
-  - message: Add high capacity beaker, dropper, grinder, nanomed
-    type: Add
-  id: 604
-  time: '2024-08-22T00:54:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3779
-- author: ShadowCommander, DrSmugleaf
-  changes:
-  - message: Added Squad Leader tracker for marines and xenonid Queen tracker for
-      xenonids.
-    type: Add
-  id: 605
-  time: '2024-08-22T23:18:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3492
 - author: tsp01, DrSmugleaf
   changes:
   - message: Added squad preference in character customization.
@@ -4985,5 +4970,19 @@
   id: 1103
   time: '2024-12-13T18:19:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5123
+- author: MACMAN2003
+  changes:
+  - message: Added camouflaged variants of marine weapons, armor, and equipment.
+    type: Add
+  id: 1104
+  time: '2024-12-13T18:38:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5054
+- author: DrSmugleaf
+  changes:
+  - message: Fixed medals not always showing above backpacks and other clothing items.
+    type: Fix
+  id: 1105
+  time: '2024-12-13T19:09:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5124
 Name: RMC14
 Order: -1
