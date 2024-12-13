@@ -75,3 +75,5 @@
   - type: RMCScorchEffectOnSpawn
     probability: 0.5
     tileLimit: 4
+    scatter: true
+    randomRotation: true

@@ -288,6 +288,7 @@
       components:
       - Marine
   - type: BlockIdExamine
+  - type: NoStunOnExit
 
 - type: entity
   abstract: true
