@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added Seth Sleeper figurine.
-    type: Add
-  id: 598
-  time: '2024-08-21T08:53:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3773
-- author: DrSmugleaf
-  changes:
   - message: Added The Soil of Martyrs figurine.
     type: Add
   id: 599
@@ -4980,5 +4973,12 @@
   id: 1097
   time: '2024-12-13T16:30:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5119
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added marine loadouts!
+    type: Add
+  id: 1098
+  time: '2024-12-13T17:07:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5063
 Name: RMC14
 Order: -1
