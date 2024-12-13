@@ -12,7 +12,7 @@
       Snow: ArmorHelmetM10Snow
       Classic: ArmorHelmetM10Classic
       Urban: ArmorHelmetM10Urban
-      
+
 - type: entity
   parent: CMArmorHelmetM11
   id: RMCArmorHelmetM11Camo
@@ -46,7 +46,7 @@
   components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: RMCArmorHelmetM10Medic
+      Jungle: CMArmorHelmetM10Medic
       Desert: RMCArmorHelmetM10MedicDesert
       Snow: RMCArmorHelmetM10MedicSnow
       Classic: RMCArmorHelmetM10MedicClassic
@@ -200,7 +200,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/standard/desert.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/standard/desert.rsi
-      
+
 - type: entity
   parent: CMArmorHelmetM11
   id: RMCArmorHelmetM11Desert
@@ -349,7 +349,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/standard/snow.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/standard/snow.rsi
-      
+
 - type: entity
   parent: CMArmorHelmetM11
   id: RMCArmorHelmetM11Snow
@@ -498,7 +498,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/standard/classic.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/standard/classic.rsi
-      
+
 - type: entity
   parent: CMArmorHelmetM11
   id: RMCArmorHelmetM11Classic
@@ -647,7 +647,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/standard/urban.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/standard/urban.rsi
-      
+
 - type: entity
   parent: CMArmorHelmetM11
   id: RMCArmorHelmetM11Urban

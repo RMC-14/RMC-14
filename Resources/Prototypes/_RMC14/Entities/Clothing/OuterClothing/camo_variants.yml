@@ -12,7 +12,7 @@
       Snow: RMCArmorM3MediumPaddedSnow
       Classic: RMCArmorM3MediumPaddedClassic
       Urban: RMCArmorM3MediumPaddedUrban
-      
+
 - type: entity
   parent: RMCArmorM3MediumPadless
   id: RMCArmorM3MediumPadlessCamo
@@ -38,7 +38,7 @@
       Snow: RMCArmorM3MediumRidgedSnow
       Classic: RMCArmorM3MediumRidgedClassic
       Urban: RMCArmorM3MediumRidgedUrban
-      
+
 - type: entity
   parent: RMCArmorM3MediumCarrier
   id: RMCArmorM3MediumCarrierCamo
@@ -51,7 +51,7 @@
       Snow: RMCArmorM3MediumCarrierSnow
       Classic: RMCArmorM3MediumCarrierClassic
       Urban: RMCArmorM3MediumCarrierUrban
-      
+
 - type: entity
   parent: RMCArmorM3MediumSkull
   id: RMCArmorM3MediumSkullCamo
@@ -260,7 +260,7 @@
       Jungle: RMCArmorM3TDemo
       Desert: RMCArmorM3TDemoDesert
       Snow: RMCArmorM3TDemoSnow
-      Classic: RMCArmorMTDemoClassic
+      Classic: RMCArmorM3TDemoClassic
       Urban: RMCArmorM3TDemoUrban
 
 - type: entity

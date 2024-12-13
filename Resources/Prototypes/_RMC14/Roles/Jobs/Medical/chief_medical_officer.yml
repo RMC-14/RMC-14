@@ -57,7 +57,7 @@
   id: CMGearCMOEquipped
   equipment:
     jumpsuit: CMJumpsuitCMO
-    outerClothing: RMCCoatServiceJacketSnow
+    outerClothing: RMCCoatServiceSnow
     gloves: CMHandsLatex
     shoes: RMCShoesWhite
     head: CMHeadCapCMO
