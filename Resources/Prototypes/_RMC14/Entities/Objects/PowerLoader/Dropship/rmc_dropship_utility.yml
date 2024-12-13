@@ -24,7 +24,7 @@
 - type: entity
   parent: RMCDropshipAttachmentUtility
   id: RMCDropshipAttachmentMedevac
-  name: RMU-4M Medevac System
+  name: RMU-4M medevac system
   description: A winch system to lift injured marines on medical stretchers onto the dropship. Attaches to the crew served attach point at the back of the drop-ship.
   components:
   - type: Sprite
