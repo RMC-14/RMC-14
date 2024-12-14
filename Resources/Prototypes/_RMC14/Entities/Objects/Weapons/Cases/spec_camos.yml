@@ -1,6 +1,6 @@
 ﻿#definers
 - type: entity
-  parent: CMSniperEquipmentCase
+  parent: RMCBaseEquipmentCase
   id: RMCSniperEquipmentCaseCamo
   suffix: Camo Replace
   components:
@@ -13,7 +13,7 @@
       Urban: RMCSniperEquipmentCaseUrban
 
 - type: entity
-  parent: RMCGrenadeSpecEquipmentCase
+  parent: RMCBaseEquipmentCase
   id: RMCGrenadeSpecEquipmentCaseCamo
   suffix: Camo Replace
   components:
@@ -26,7 +26,7 @@
       Urban: RMCGrenadeSpecEquipmentCaseUrban
 
 - type: entity
-  parent: RMCDemoSpecEquipmentCase
+  parent: RMCBaseEquipmentCase
   id: RMCDemoSpecEquipmentCaseCamo
   suffix: Camo Replace
   components:
@@ -39,7 +39,7 @@
       Urban: RMCDemoSpecEquipmentCaseUrban
 
 - type: entity
-  parent: RMCScoutSpecEquipmentCase
+  parent: RMCBaseEquipmentCase
   id: RMCScoutSpecEquipmentCaseCamo
   suffix: Camo Replace
   components:
