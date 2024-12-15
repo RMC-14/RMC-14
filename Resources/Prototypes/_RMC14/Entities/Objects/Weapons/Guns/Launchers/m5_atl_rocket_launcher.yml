@@ -256,10 +256,6 @@
         - BulletImpassable
         restitution: 0.0
         density: 20
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/m5spec_projectiles.rsi
-    layers:
-    - state: m5_84mm_wp
   - type: PointLight
     radius: 3.5
     color: blue
