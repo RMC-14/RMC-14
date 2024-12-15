@@ -6,7 +6,7 @@
   playTimeTracker: CMJobChiefMP
   requirements:
   - !type:TotalJobsTimeRequirement
-    group: CMJobsMarinePolice
+    group: CMJobsMilitaryPolice
     time: 54000 # 15 hours
   - !type:TotalJobsTimeRequirement
     group: CMJobsCommand

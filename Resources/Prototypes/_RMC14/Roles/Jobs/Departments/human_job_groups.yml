@@ -72,3 +72,17 @@
     - CMExecutiveOfficer
     - CMStaffOfficer
     - CMAuxiliarySupportOfficer
+
+- type: entity
+  id: CMJobsMilitaryPolice
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: JobGroup
+    name: role-timer-military-police-roles
+    color: "#DE3A3A"
+    jobs:
+    - CMChiefMP
+    - CMMilitaryWarden
+    - CMMilitaryPolice
+    - CMCommandingOfficer

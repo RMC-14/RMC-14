@@ -6,7 +6,7 @@
   playTimeTracker: CMJobMilitaryWarden
   requirements:
   - !type:TotalJobsTimeRequirement
-    group: CMJobsMarinePolice
+    group: CMJobsMilitaryPolice
     time: 36000 # 10 hours
   weight: 5
   startingGear: CMGearMilitaryWarden

@@ -12,7 +12,7 @@
     group: CMJobsEngineering
     time: 36000 # 10 hours
   - !type:TotalJobsTimeRequirement
-    group: CMJobsMarinePolice
+    group: CMJobsMilitaryPolice
     time: 36000 # 10 hours
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
