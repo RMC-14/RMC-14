@@ -586,12 +586,6 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         if (slot is null)
         {
-            if (HasComp<DropshipAmmoComponent>(used) &&
-                args.Target != null &&
-                HasComp<DropshipAmmoComponent>(args.Target))
-            {
-
-            }
             return;
         }
 
