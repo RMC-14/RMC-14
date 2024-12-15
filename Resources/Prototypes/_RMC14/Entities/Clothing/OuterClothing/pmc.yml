@@ -116,8 +116,8 @@
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 40 # CLOTHING_ARMOR_VERYHIGH
   - type: WieldSlowdownCompensation
-    walk: 0.24
-    sprint: 0.384
+    walk: 0.429
+    sprint: 0.429
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_MEDIUM
     walkModifier: 0.666
     sprintModifier: 0.666
@@ -137,8 +137,8 @@
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 40 # CLOTHING_ARMOR_VERYHIGH
   - type: WieldSlowdownCompensation
-    walk: 0.24
-    sprint: 0.384
+    walk: 0.429
+    sprint: 0.429
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_MEDIUM
     walkModifier: 0.727
     sprintModifier: 0.727

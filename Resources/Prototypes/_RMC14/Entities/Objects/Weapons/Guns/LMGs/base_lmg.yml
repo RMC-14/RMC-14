@@ -35,9 +35,6 @@
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 6
   - type: Wieldable
-  - type: WieldableSpeedModifiers
-    baseWalk: 0.8
-    baseSprint: 0.69
   - type: WieldDelay
     baseDelay: 0.6
   - type: Item

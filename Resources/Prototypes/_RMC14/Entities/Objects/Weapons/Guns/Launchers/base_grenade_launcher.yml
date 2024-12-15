@@ -48,8 +48,8 @@
   - type: Wieldable
   - type: GunRequiresWield
   - type: WieldableSpeedModifiers
-    baseWalk: 0.696
-    baseSprint: 0.559
+    baseWalk: 0.5
+    baseSprint: 0.5
   - type: WieldDelay
     baseDelay: 0.8
   - type: Clothing

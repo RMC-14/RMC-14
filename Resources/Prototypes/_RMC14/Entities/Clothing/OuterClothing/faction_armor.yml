@@ -122,8 +122,8 @@
     walkModifier: 0.725
     sprintModifier: 0.725
   - type: WieldSlowdownCompensation
-    walk: 0.12
-    sprint: 0.198
+    walk: 0.34
+    sprint: 0.34
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots

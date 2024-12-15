@@ -50,8 +50,8 @@
   - type: ShootAtFixedPoint
     shootArcProj: false
   - type: WieldableSpeedModifiers
-    baseWalk: 0.696
-    baseSprint: 0.559
+    baseWalk: 0.5
+    baseSprint: 0.5
   - type: WieldDelay
     baseDelay: 1.2
     preventFiring: true

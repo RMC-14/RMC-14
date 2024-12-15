@@ -33,8 +33,8 @@
         shotsToMaxScatter: 4
   - type: Wieldable
   - type: WieldableSpeedModifiers
-    baseWalk: 0.8
-    baseSprint: 0.69
+    baseWalk: 0.66
+    baseSprint: 0.66
   - type: WieldDelay
     baseDelay: 0.6
   - type: Item

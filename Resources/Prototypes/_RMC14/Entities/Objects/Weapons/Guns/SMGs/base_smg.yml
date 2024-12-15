@@ -24,8 +24,8 @@
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 4
   - type: WieldableSpeedModifiers
-    baseWalk: 0.92
-    baseSprint: 0.864
+    baseWalk: 0.725
+    baseSprint: 0.725
   - type: WieldDelay
     baseDelay: 0.2
   - type: RMCNameItemOnVend

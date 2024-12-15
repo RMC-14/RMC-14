@@ -34,8 +34,8 @@
   - type: WieldDelay
     baseDelay: 0.4
   - type: WieldableSpeedModifiers
-    baseWalk: 0.92
-    baseSprint: 0.87
+    baseWalk: 0.725
+    baseSprint: 0.725
   - type: PumpAction
     sound:
       path: /Audio/_RMC14/Weapons/Guns/Pump/gun_boomslang_lever.ogg

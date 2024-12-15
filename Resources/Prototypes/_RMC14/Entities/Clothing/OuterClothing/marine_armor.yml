@@ -116,8 +116,8 @@
     bio: 25
     explosionArmor: 35
   - type: WieldSlowdownCompensation
-    walk: 0.12
-    sprint: 0.198
+    walk: 0.34
+    sprint: 0.34
   - type: ClothingSpeedModifier
     walkModifier: 0.62
     sprintModifier: 0.62
