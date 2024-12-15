@@ -1,0 +1,49 @@
+# Plushies
+- type: loadout
+  id: PlushieFarwaRMC
+  cost: 4
+  storage:
+    back:
+    - CMPlushieFarwa
+
+- type: loadout
+  id: PlushieBarricadeRMC
+  cost: 4
+  storage:
+    back:
+    - CMPlushieBarricade
+
+- type: loadout
+  id: PlushieBeeRMC
+  cost: 4
+  storage:
+    back:
+    - CMPlushieBee
+
+- type: loadout
+  id: PlushieSharkRMC
+  cost: 4
+  storage:
+    back:
+    - PlushieSharkGrey
+
+- type: loadout
+  id: PlushieMothRMC
+  cost: 4
+  storage:
+    back:
+    - PlushieMoth
+
+- type: loadout
+  id: PlushieRockRMC
+  cost: 4
+  storage:
+    back:
+    - CMPlushieRock
+
+- type: loadout
+  id: PlushieTherapyRMC
+  cost: 4
+  storage:
+    back:
+    - CMPlushieTherapy

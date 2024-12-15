@@ -73,11 +73,10 @@
   id: CMGearCommandingOfficer
   equipment:
     jumpsuit: CMJumpsuitBO
-    back: CMSatchel
     belt: RMCMatebaBeltFilled
     shoes: CMShoesLaceupCommander
-    head: CMHeadBeretCO
-    outerClothing: RMCCoatService
+    head: RMCHeadBeretCOCamo
+    outerClothing: RMCCoatServiceCamo
     id: CMIDCardCommandingOfficer
     ears: CMHeadsetSeniorCommand
     pocket1: RMCPouchCommand

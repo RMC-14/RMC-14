@@ -1,18 +1,19 @@
 ﻿- type: entity
   parent: CMBaseWeaponSMG
   name: M63 submachine gun
+  suffix: Desert
   id: WeaponSMGM63
   description: The Aegis Battlefield Armaments M-63 submachinegun. Occasionally carried by light-infantry, scouts, engineers and medics.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/desert.rsi
     layers:
-    - state: base
+    - state: bolt-open
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/desert.rsi
   - type: Gun
     shotsPerBurst: 3
     soundGunshot:
@@ -98,6 +99,80 @@
     tags:
     - RMCWeaponSMG
     - RMCWeaponSMGM63
+
+#camo variations
+- type: entity
+  parent: WeaponSMGM63
+  id: WeaponSMGM63Camo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: WeaponSMGM63Jungle
+      Desert: WeaponSMGM63
+      Classic: WeaponSMGM63Classic
+      Snow: WeaponSMGM63Snow
+      Urban: WeaponSMGM63Urban
+
+- type: entity
+  parent: WeaponSMGM63
+  id: WeaponSMGM63Jungle
+  suffix: Jungle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/jungle.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/jungle.rsi
+
+- type: entity
+  parent: WeaponSMGM63
+  id: WeaponSMGM63Classic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/classic.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/classic.rsi
+
+- type: entity
+  parent: WeaponSMGM63
+  id: WeaponSMGM63Urban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/urban.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/urban.rsi
+
+- type: entity
+  parent: WeaponSMGM63
+  id: WeaponSMGM63Snow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/snow.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/snow.rsi
 
 - type: entity
   parent: BaseMagazineRifle

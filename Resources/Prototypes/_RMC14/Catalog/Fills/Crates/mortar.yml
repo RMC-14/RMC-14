@@ -5,8 +5,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMortarKit
-    - id: CMBackpackMortar
+    - id: RMCMortarKitCamo
+    - id: RMCBackpackMortarCamo
 
 - type: entity
   parent: RMCCrateMortarAmmo

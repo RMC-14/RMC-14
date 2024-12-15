@@ -41,16 +41,14 @@
 - type: startingGear
   id: CMGearCombatTech
   equipment:
-    back: CMSatchelMarineTech
     id: CMDogtagCombatTech
 
 - type: startingGear
   id: CMGearCombatTechEquipped
   equipment:
-    jumpsuit: CMJumpsuitMarineEngineer
-    back: CMSatchelMarineTech
+    jumpsuit: CMJumpsuitMarineEngineerCamo
     shoes: CMBootsBlackFilled
-    head: CMArmorHelmetM10Tech
+    head: RMCArmorHelmetM10TechCamo
     outerClothing: RMCArmorM3MediumVariants
     gloves: CMHandsInsulated
     id: CMDogtagCombatTech

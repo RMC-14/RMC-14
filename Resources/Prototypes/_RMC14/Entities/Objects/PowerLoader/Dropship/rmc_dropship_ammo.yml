@@ -11,6 +11,10 @@
   - type: DropshipAmmo
     rounds: 400
     maxRounds: 400
+  - type: PowerLoaderAttachable
+    attachableTypes:
+    - RMCDropshipWeaponPoint
+  - type: PowerLoaderDetachable
 
 - type: entity
   parent: RMCDropshipAttachmentAmmo
@@ -75,3 +79,5 @@
   - type: RMCScorchEffectOnSpawn
     probability: 0.5
     tileLimit: 4
+    scatter: true
+    randomRotation: true
