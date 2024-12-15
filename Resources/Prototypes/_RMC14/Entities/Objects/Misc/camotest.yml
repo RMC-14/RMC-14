@@ -5,14 +5,21 @@
   description: debug test object for camo proof of concept, will replace itself with a camouflaged variant.
   suffix: Camo Replace
   components:
+  - type: Sprite
+    layers: 
+    - state: icon
+      map: ["base"]
   - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: CamoTest
-      Desert: CamoTestDesert
-      Snow: CamoTestSnow
-      Classic: CamoTestClassic
-      Urban: CamoTestUrban
-    
+  - type: GenericVisualizer
+    visuals: 
+      enum.CamouflageState.Layer:
+        base:
+          Jungle: {sprite: _RMC14/Objects/Misc/camotest/jungle.rsi}
+          Desert: {sprite: _RMC14/Objects/Misc/camotest/desert.rsi}
+          Snow: {sprite: _RMC14/Objects/Misc/camotest/snow.rsi}
+          Classic: {sprite: _RMC14/Objects/Misc/camotest/classic.rsi}
+          Urban: {sprite: _RMC14/Objects/Misc/camotest/urban.rsi}
+
 - type: entity
   parent: CMCrowbar
   id: CamoTest
