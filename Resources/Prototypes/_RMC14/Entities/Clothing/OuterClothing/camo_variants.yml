@@ -5,13 +5,22 @@
   id: RMCArmorM3MediumPaddedCamo
   suffix: Camo Replace
   components:
+  - type: Appearance
+  - type: Sprite
+    layers:
+    - state: icon
+      sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/jungle.rsi
+      map: ["base"]
+  - type: GenericVisualizer
+    visuals: 
+      enum.CamouflageState.Layer:
+        base:
+          Jungle: {sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/jungle.rsi}
+          Desert: {sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/desert.rsi}
+          Snow: {sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/snow.rsi}
+          Classic: {sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/classic.rsi}
+          Urban: {sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/urban.rsi}
   - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: RMCArmorM3MediumPadded
-      Desert: RMCArmorM3MediumPaddedDesert
-      Snow: RMCArmorM3MediumPaddedSnow
-      Classic: RMCArmorM3MediumPaddedClassic
-      Urban: RMCArmorM3MediumPaddedUrban
 
 - type: entity
   parent: RMCArmorM3MediumPadless

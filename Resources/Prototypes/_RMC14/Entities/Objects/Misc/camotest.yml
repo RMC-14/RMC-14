@@ -5,6 +5,7 @@
   description: debug test object for camo proof of concept, will replace itself with a camouflaged variant.
   suffix: Camo Replace
   components:
+  - type: Appearance
   - type: Sprite
     layers: 
     - state: icon

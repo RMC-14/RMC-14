@@ -73,7 +73,7 @@ public sealed class ItemCamouflageSystem : EntitySystem
 
     private void ReplaceWithCamouflaged(Entity<ItemCamouflageComponent> ent, CamouflageType type)
     {
-        _appearance.SetData(ent.Owner, CamouflageState.Layer, CamouflageType.Desert);
+        _appearance.SetData(ent.Owner, CamouflageState.Layer, type);
         Dirty(ent, ent.Comp);
     }
 }
