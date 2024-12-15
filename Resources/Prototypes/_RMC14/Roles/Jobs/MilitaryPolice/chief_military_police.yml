@@ -5,11 +5,11 @@
   description: cm-job-description-chief-mp
   playTimeTracker: CMJobChiefMP
   requirements:
-  - !type:DepartmentTimeRequirement
-    department: CMMilitaryPolice
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMarinePolice
     time: 54000 # 15 hours
-  - !type:DepartmentTimeRequirement
-    department: CMCommand
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsCommand
     time: 18000 # 5 hours
   weight: 5
   startingGear: CMGearChiefMP

@@ -11,14 +11,14 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsEngineering
     time: 36000 # 10 hours
-  - !type:DepartmentTimeRequirement
-    department: CMMilitaryPolice
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMarinePolice
     time: 36000 # 10 hours
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 36000 # 10 hours
-  - !type:DepartmentTimeRequirement
-    department: CMCommand
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsCommand
     time: 18000 # 5 hours
   weight: 5
   startingGear: CMGearSeniorEnlistedAdvisor

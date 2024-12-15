@@ -5,8 +5,8 @@
   description: cm-job-description-executive-officer
   playTimeTracker: CMJobExecutiveOfficer
   requirements:
-  - !type:DepartmentTimeRequirement
-    department: CMCommand
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsCommand
     time: 18000 # 5 hours
   weight: 5
   startingGear: CMGearExecutiveOfficer

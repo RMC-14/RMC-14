@@ -58,3 +58,17 @@
     - CMDropshipCrewChief
     - CMPilotDropship
     - CMPilotGunship
+
+- type: entity
+  id: CMJobsCommand
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: JobGroup
+    name: role-timer-command-roles
+    color: "#334E6D"
+    jobs:
+    - CMCommandingOfficer
+    - CMExecutiveOfficer
+    - CMStaffOfficer
+    - CMAuxiliarySupportOfficer
