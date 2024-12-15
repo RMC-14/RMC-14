@@ -205,12 +205,12 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                     foreach (var anchoredId in _anchored)
                     {
                         if (!_xenoWeedableQuery.TryComp(anchoredId, out var weedable) ||
-                            weedable.Entity != null ||
                             !TryComp(anchoredId, out TransformComponent? weedableTransform) ||
                             !weedableTransform.Anchored)
                         {
                             continue;
                         }
+
                         var ev = new AfterEntityWeedingEvent(_entities.GetNetEntity(neighborWeeds), _entities.GetNetEntity(anchoredId));
                         RaiseLocalEvent(anchoredId, ev);
 
