@@ -48,7 +48,6 @@
   id: CMGearCMO
   equipment:
     jumpsuit: CMJumpsuitCMO
-    back: CMSatchel
     shoes: ClothingShoesColorWhite
     id: CMIDCardCMO
     # TODO RMC14 random chemical synthesis note
@@ -58,8 +57,7 @@
   id: CMGearCMOEquipped
   equipment:
     jumpsuit: CMJumpsuitCMO
-    outerClothing: CMCoatLong
-    back: CMSatchelMarine
+    outerClothing: RMCCoatServiceSnow
     gloves: CMHandsLatex
     shoes: RMCShoesWhite
     head: CMHeadCapCMO

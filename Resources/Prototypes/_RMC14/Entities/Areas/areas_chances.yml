@@ -3,7 +3,7 @@
   id: RMCAreaLv522
   components:
   - type: Sprite
-    state: lv-626
+    state: unknown
   - type: Area
     buildSpecial: true
     powerNet: ground
@@ -82,6 +82,7 @@
   - type: Area
     landingZone: true
     minimapColor: '#EBE5E5E3'
+    resinAllowed: false
 
 - type: entity
   parent: RMCAreaLv522LandingZone1
@@ -111,6 +112,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    resinAllowed: false
 
 - type: entity
   parent: RMCAreaLv522LandingZone1Tunnel
@@ -155,6 +157,7 @@
   - type: Area
     landingZone: true
     minimapColor: '#EBE5E5E3'
+    resinAllowed: false
 
 - type: entity
   parent: RMCAreaLv522LandingZone2
@@ -330,6 +333,8 @@
   components:
   - type: Sprite
     state: south
+  - type: Area
+    resinAllowed: false
 
 - type: entity
   parent: RMCAreaLv522OutdoorsColonyStreets
@@ -338,6 +343,8 @@
   components:
   - type: Sprite
     state: southeast
+  - type: Area
+    resinAllowed: false
 
 - type: entity
   parent: RMCAreaLv522OutdoorsColonyStreets
@@ -346,6 +353,8 @@
   components:
   - type: Sprite
     state: southwest
+  - type: Area
+    resinAllowed: false
 
 - type: entity
   parent: RMCAreaLv522OutdoorsColonyStreets
@@ -431,6 +440,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    resinAllowed: false
 
 - type: entity
   parent: RMCAreaLv522IndoorsLoneBuildings
@@ -834,6 +844,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    resinAllowed: false
 
 - type: entity
   parent: RMCAreaLv522Indoors
@@ -858,6 +869,8 @@
   components:
   - type: Sprite
     state: yellow
+  - type: Area
+    resinAllowed: false
 
 - type: entity
   parent: RMCAreaLv522IndoorsCBlock
@@ -962,7 +975,7 @@
   name: Atmospheric Processor
   components:
   - type: Sprite
-    state: engineering
+    state: unknown
   - type: Area
     CAS: false
     fulton: false

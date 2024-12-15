@@ -1,0 +1,270 @@
+- type: entity
+  parent: RMCHeadBeret
+  id: RMCHeadBeretCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCHeadBeret
+      Desert: RMCHeadBeretDesert
+      Snow: RMCHeadBeretSnow
+      Classic: RMCHeadBeretClassic
+      Urban: RMCHeadBeretUrban
+  
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCHeadCapFlippableCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: RMCHeadCapFlippable
+      Desert: RMCHeadCapFlippableDesert
+      Snow: RMCHeadCapFlippableSnow
+      Classic: RMCHeadCapFlippableClassic
+      Urban: RMCHeadCapFlippableUrban
+
+- type: entity
+  parent: CMHeadCapOfficer
+  id: RMCHeadCapOfficerCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMHeadCapOfficer
+      Desert: RMCHeadCapOfficerDesert
+      Snow: RMCHeadCapOfficerSnow
+      Classic: RMCHeadCapOfficerClassic
+      Urban: RMCHeadCapOfficerUrban
+      
+- type: entity
+  parent: CMHeadCapCO
+  id: RMCHeadCapCOCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMHeadCapCO
+      Desert: RMCHeadCapCODesert
+      Snow: RMCHeadCapCOSnow
+      Classic: RMCHeadCapCOClassic
+      Urban: RMCHeadCapCOUrban
+
+- type: entity
+  parent: CMHeadBeretCO
+  id: RMCHeadBeretCOCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMHeadBeretCO
+      Desert: RMCHeadBeretCODesert
+      Snow: RMCHeadBeretCOSnow
+      Classic: RMCHeadBeretCOClassic
+      Urban: RMCHeadBeretCOUrban
+
+- type: entity
+  parent: RMCHeadBeret
+  id: RMCHeadBeretDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret/desert.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret/desert.rsi
+
+- type: entity
+  parent: CMHeadBeretCO
+  id: RMCHeadBeretCODesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/desert.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/desert.rsi
+
+- type: entity
+  parent: CMHeadCapCO
+  id: RMCHeadCapCODesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/cap/desert.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/cap/desert.rsi  
+
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCHeadCapFlippableDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap/desert.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap/desert.rsi
+
+- type: entity
+  parent: CMHeadCapOfficer
+  id: RMCHeadCapOfficerDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer/desert.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer/desert.rsi
+
+# Snow
+
+- type: entity
+  parent: RMCHeadBeret
+  id: RMCHeadBeretSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret/snow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret/snow.rsi
+
+- type: entity
+  parent: CMHeadBeretCO
+  id: RMCHeadBeretCOSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/snow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/snow.rsi
+
+- type: entity
+  parent: CMHeadCapCO
+  id: RMCHeadCapCOSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/cap/snow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/cap/snow.rsi  
+
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCHeadCapFlippableSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap/snow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap/snow.rsi
+
+- type: entity
+  parent: CMHeadCapOfficer
+  id: RMCHeadCapOfficerSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer/snow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer/snow.rsi
+
+#Classic
+
+- type: entity
+  parent: RMCHeadBeret
+  id: RMCHeadBeretClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret/classic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret/classic.rsi
+
+- type: entity
+  parent: CMHeadBeretCO
+  id: RMCHeadBeretCOClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/classic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/classic.rsi
+
+- type: entity
+  parent: CMHeadCapCO
+  id: RMCHeadCapCOClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/cap/classic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/cap/classic.rsi  
+
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCHeadCapFlippableClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap/classic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap/classic.rsi
+
+- type: entity
+  parent: CMHeadCapOfficer
+  id: RMCHeadCapOfficerClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer/classic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer/classic.rsi
+
+# Urban
+- type: entity
+  parent: RMCHeadBeret
+  id: RMCHeadBeretUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret/urban.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret/urban.rsi
+
+- type: entity
+  parent: CMHeadBeretCO
+  id: RMCHeadBeretCOUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/urban.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/urban.rsi
+
+- type: entity
+  parent: CMHeadCapCO
+  id: RMCHeadCapCOUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/cap/urban.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/cap/urban.rsi  
+
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCHeadCapFlippableUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap/urban.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap/urban.rsi
+
+- type: entity
+  parent: CMHeadCapOfficer
+  id: RMCHeadCapOfficerUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer/urban.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer/urban.rsi
+      
