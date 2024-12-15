@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Server.Atmos.Components;
 using Content.Server.Spreader;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Weeds;
@@ -26,6 +27,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly EntityManager _entities = default!;
+    [Dependency] private readonly AppearanceSystem _appearance = default!;
 
     private static readonly ProtoId<TagPrototype> IgnoredTag = "SpreaderIgnore";
 
@@ -47,6 +49,42 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
         _xenoNestSurfaceQuery = GetEntityQuery<XenoNestSurfaceComponent>();
         _xenoWeedableQuery = GetEntityQuery<XenoWeedableComponent>();
         _xenoWeedsQuery = GetEntityQuery<XenoWeedsComponent>();
+
+        SubscribeLocalEvent<ReplaceWeedSourceOnWeedingComponent, AfterEntityWeedingEvent>(OnWeedOver);
+    }
+
+    private void OnWeedOver(Entity<ReplaceWeedSourceOnWeedingComponent> weedSource, ref AfterEntityWeedingEvent args)
+    {
+        var (ent, comp) = weedSource;
+        var weededEntity = _entities.GetEntity(args.CoveredEntity);
+
+        if (!TryComp(ent, out XenoWeedsComponent? weedComp) ||
+            Prototype(weededEntity) is not EntityPrototype weededEntityProto ||
+            !comp.ReplacementPairs.TryGetValue(weededEntityProto.ID, out var replacementId))
+        {
+            return;
+        }
+
+        var newWeedSource = SpawnAtPosition(replacementId, weedSource.Owner.ToCoordinates());
+        if (!TryComp(newWeedSource, out XenoWeedsComponent? newWeedSourceComp))
+        {
+            QueueDel(newWeedSource);
+            return;
+        }
+
+        _hive.SetSameHive(ent, newWeedSource);
+
+        var curWeeds = weedComp.Spread;
+        foreach (var curWeed in curWeeds)
+        {
+            var curWeedComp = EnsureComp<XenoWeedsComponent>(curWeed);
+            curWeedComp.Range = newWeedSourceComp.Range;
+            curWeedComp.Source = newWeedSource;
+            newWeedSourceComp.Spread.Add(curWeed);
+        }
+        curWeeds.Clear();
+        RemComp<XenoWeedsSpreadingComponent>(newWeedSource);
+        QueueDel(ent);
     }
 
     public override void Update(float frameTime)
@@ -173,6 +211,19 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                         {
                             continue;
                         }
+                        var ev = new AfterEntityWeedingEvent(_entities.GetNetEntity(neighborWeeds), _entities.GetNetEntity(anchoredId));
+                        RaiseLocalEvent(anchoredId, ev);
+
+                        if (source is not null)
+                            RaiseLocalEvent(source.Value, ev);
+
+                        neighborWeedsComp.LocalWeeded.Add(anchoredId);
+                        _appearance.SetData(anchoredId, WeededEntityLayers.Layer, true);
+
+                        if (weedable.Spawn is null)
+                        {
+                            continue;
+                        }
 
                         weedable.Entity = SpawnAtPosition(weedable.Spawn, anchoredId.ToCoordinates());
                         if (_xenoNestSurfaceQuery.TryComp(weedable.Entity, out var surface))
@@ -180,9 +231,6 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                             surface.Weedable = anchoredId;
                             Dirty(weedable.Entity.Value, surface);
                         }
-
-                        var ev = new AfterEntityWeedingEvent(_entities.GetNetEntity(neighborWeeds), _entities.GetNetEntity(anchoredId));
-                        RaiseLocalEvent(anchoredId, ev);
 
                         sourceWeeds?.Spread.Add(weedable.Entity.Value);
                     }

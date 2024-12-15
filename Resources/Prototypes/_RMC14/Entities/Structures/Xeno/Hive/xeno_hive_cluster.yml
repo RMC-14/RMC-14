@@ -20,6 +20,9 @@
     spawns: XenoHiveWeeds
     level: 3
     blockOtherWeeds: true
+  - type: ReplaceWeedSourceOnWeeding
+    replacementPairs:
+      RMCCommunicationsTower: HivePylonXeno
   - type: XenoWeedsSpreading
   - type: HiveConstructionLimited
     id: HiveClusterXeno

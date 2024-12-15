@@ -132,7 +132,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnConstructMapInit(Entity<XenoConstructComponent> ent, ref MapInitEvent args)
     {
-        if (!ent.Comp.DestroyWeeds)
+        if (!ent.Comp.DestroyWeedNodes)
             return;
 
         var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(ent);
@@ -141,7 +141,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             if (TerminatingOrDeleted(uid) || EntityManager.IsQueuedForDeletion(uid))
                 continue;
 
-            if (!_xenoWeedsQuery.HasComp(uid))
+            if (!_xenoWeedsQuery.TryComp(uid, out var weedComp) || !weedComp.IsSource)
                 continue;
 
             QueueDel(uid);
