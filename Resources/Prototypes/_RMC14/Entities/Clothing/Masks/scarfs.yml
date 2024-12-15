@@ -43,6 +43,23 @@
 
 - type: entity
   parent: RMCBaseScarfMask
+  id: RMCMaskScarfSquad
+  name: squad tactical wrap
+  suffix: DO NOT MAP
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/gray.rsi
+  - type: RMCMapToSquad
+    map:
+      SquadAlpha: RMCMaskScarfAlpha
+      SquadBravo: RMCMaskScarfBravo
+      SquadCharlie: RMCMaskScarfCharlie
+      SquadDelta: RMCMaskScarfDelta
+      SquadEcho: RMCMaskScarfEcho
+      SquadFoxtrot: RMCMaskScarfFoxtrot
+
+- type: entity
+  parent: RMCBaseScarfMask
   id: RMCMaskScarfAlpha
   name: tactical wrap
   description: A tactical wrap used by soldiers to conceal their face.

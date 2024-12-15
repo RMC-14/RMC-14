@@ -1,7 +1,9 @@
 ﻿using System.Collections.Immutable;
+using System.IO.IsolatedStorage;
 using System.Linq;
 using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Pointing;
@@ -9,6 +11,7 @@ using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Clothing;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
@@ -21,6 +24,8 @@ using Content.Shared.Radio.Components;
 using Content.Shared.Radio.EntitySystems;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
+using Content.Shared.Storage;
+using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -32,6 +37,7 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly EncryptionKeySystem _encryptionKey = default!;
     [Dependency] private readonly SharedIdCardSystem _id = default!;
+    [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly SharedMarineSystem _marine = default!;
@@ -43,6 +49,7 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedRMCBanSystem _rmcBan = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
+    [Dependency] private readonly SharedStorageSystem _storage = default!;
 
     private static readonly ProtoId<JobPrototype> SquadLeaderJob = "CMSquadLeader";
 
@@ -76,6 +83,8 @@ public sealed class SquadSystem : EntitySystem
 
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EncryptionChannelsChangedEvent>(OnSquadLeaderHeadsetChannelsChanged);
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EntityTerminatingEvent>(OnSquadLeaderHeadsetTerminating);
+
+        SubscribeLocalEvent<SquadMemberComponent, StartingGearEquippedEvent>(OnStartingGear);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
@@ -186,6 +195,61 @@ public sealed class SquadSystem : EntitySystem
             leader.Headset = null;
             Dirty(ent.Comp.Leader, leader);
         }
+    }
+
+    private void OnStartingGear(Entity<SquadMemberComponent> ent, ref StartingGearEquippedEvent args)
+    {
+        var squad = ent.Comp.Squad;
+
+        if (squad == null)
+            return;
+
+        if (_inventory.TryGetContainerSlotEnumerator(ent.Owner, out var slots, SlotFlags.All))
+        {
+            while (slots.MoveNext(out var containerSlot))
+            {
+                if (containerSlot.ContainedEntity != null)
+                {
+                    var containerSlotEntity = containerSlot.ContainedEntity.Value;
+
+                    if (TryComp<RMCMapToSquadComponent>(containerSlotEntity, out var mapToSquad))
+                    {
+                        MapToSquad((containerSlotEntity, mapToSquad), ent.Owner, squad.Value);
+                    }
+                    else if (TryComp<StorageComponent>(containerSlotEntity, out var storage))
+                    {
+                        foreach (var contained in storage.Container.ContainedEntities)
+                        {
+                            if (!TryComp<RMCMapToSquadComponent>(contained, out var mapToSquadStorage))
+                                continue;
+
+                            MapToSquad((contained, mapToSquadStorage), containerSlotEntity, squad.Value);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void MapToSquad(Entity<RMCMapToSquadComponent> ent, EntityUid equipee, EntityUid squad)
+    {
+        EntProtoId? item = null;
+
+        if (CompOrNull<MetaDataComponent>(squad)?.EntityPrototype is { } squadPrototype &&
+            ent.Comp.Map.TryGetValue(squadPrototype.ID, out var mapped))
+        {
+            item = mapped;
+        }
+
+        if (item.HasValue)
+        {
+            var newItem = SpawnNextToOrDrop(item, equipee);
+
+            if (TryComp<ClothingComponent>(newItem, out var clothing))
+                _cmInventory.TryEquipClothing(equipee, (newItem, clothing));
+        }
+
+        QueueDel(ent);
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)

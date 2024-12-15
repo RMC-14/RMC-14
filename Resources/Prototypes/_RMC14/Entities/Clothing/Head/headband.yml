@@ -52,6 +52,24 @@
 
 # Squad headbands
 - type: entity
+  parent: RMCBaseScarfMask
+  id: RMCHeadBandSquad
+  name: squad headband
+  suffix: DO NOT MAP
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/headband/gray.rsi
+  - type: RMCMapToSquad
+    map:
+      SquadAlpha: CMHeadBandAlpha
+      SquadBravo: CMHeadBandBravo
+      SquadCharlie: CMHeadBandCharlie
+      SquadDelta: CMHeadBandDelta
+      SquadEcho: CMHeadBandEcho
+      SquadFoxtrot: CMHeadBandFoxtrot
+      # TODO SquadIntel: CMHeadBandIntel
+
+- type: entity
   parent: CMHeadBandGreen
   id: CMHeadBandAlpha
   name: alpha headband
