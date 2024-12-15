@@ -232,8 +232,11 @@
   priority: 4
   children:
   - RMCMarineSOPNONModDepartment
+  - RMCMarineSOPNONModCommand
+  - RMCMarineSOPNONModDeployment
+  - RMCMarineSOPNONModThirdparty
 
-# NON-Modifiable Department Regulations
+# NON-Modifiable Department
 - type: guideEntry
   parent: RMC
   id: RMCMarineSOPNONModDepartment
@@ -241,8 +244,43 @@
   text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPNONModDepartment.xml"
   priority: 1
 
+# NON-Modifiable Command
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineSOPNONModCommand
+  name: rmc-guide-entry-rules-marine-sop-nonmod-command
+  text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPNONModCommand.xml"
+  priority: 2
+
+# NON-Modifiable Command
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineSOPNONModDeployment
+  name: rmc-guide-entry-rules-marine-sop-nonmod-deployment
+  text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPNONModDeployment.xml"
+  priority: 3
+
+# NON-Modifiable Command
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineSOPNONModThirdparty
+  name: rmc-guide-entry-rules-marine-sop-nonmod-thirdparty
+  text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPNONModThirdparty.xml"
+  priority: 4
 
 # NON-Modifiable Deployment Restrictions
+
+  #- nuclear protocol
+
+  #- field deployment
+
+  #- deployment prerequisites
+
+  #- conditions
+
+  #- frontline command
+
+  #Personnel normally restricted to shipside duties such as doctors and Military Police may be deployed to a FOB freely; however special circumstances or clearances are needed, either via the CO or via the relevant department head, if not conflicting with Marine Law or SOP, to proceed outside the FOB.
 
   #- The COMMANDER and COMOFF have the right to deploy to command troops from a direct point of view.
   #- Deployments should be done for the sake of ordering the troops and not for personal glory or objectives.
