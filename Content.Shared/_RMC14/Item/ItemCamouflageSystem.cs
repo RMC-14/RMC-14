@@ -1,3 +1,5 @@
+using Content.Shared.Clothing.EntitySystems;
+using Content.Shared.Item;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -7,6 +9,8 @@ public sealed class ItemCamouflageSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly ClothingSystem _clothing = default!;
+    [Dependency] private readonly SharedItemSystem _itemSystem = default!;
     [Dependency] private readonly IGameTiming _time = default!;
 
     [ViewVariables(VVAccess.ReadWrite)]
@@ -74,6 +78,7 @@ public sealed class ItemCamouflageSystem : EntitySystem
     private void ReplaceWithCamouflaged(Entity<ItemCamouflageComponent> ent, CamouflageType type)
     {
         _appearance.SetData(ent.Owner, CamouflageState.Layer, type);
+        
         Dirty(ent, ent.Comp);
     }
 }

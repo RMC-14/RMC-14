@@ -100,13 +100,17 @@
   id: WeaponRifleM54CCamo
   suffix: Camo Replace
   components:
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals: 
+      enum.CamouflageState.Layer:
+        base:
+          Jungle: {sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/jungle.rsi}
+          Desert: {sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/desert.rsi}
+          Snow: {sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi}
+          Classic: {sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/classic.rsi}
+          Urban: {sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/urban.rsi}
   - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: WeaponRifleM4CJungle
-      Desert: WeaponRifleM54C
-      Snow: WeaponRifleM4CSnow
-      Classic: WeaponRifleM4CClassic
-      Urban: WeaponRifleM4CUrban
 
 - type: entity
   parent: WeaponRifleM54C
