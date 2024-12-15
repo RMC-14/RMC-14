@@ -37,9 +37,6 @@
     falloffMultiplier: 0
   - type: WieldDelay
     baseDelay: 0.2
-  - type: WieldableSpeedModifiers
-    baseWalk: 0.92
-    baseSprint: 0.86
   - type: ItemSlots
     slots:
       gun_magazine:
