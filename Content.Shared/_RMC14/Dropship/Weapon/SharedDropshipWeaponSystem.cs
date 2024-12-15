@@ -277,7 +277,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         {
             foreach (var buckled in args.Buckled)
             {
-                _popup.PopupClient(Loc.GetString("rmc-power-loader-wrong-ammo"), args.Target, buckled);
+                _popup.PopupClient(Loc.GetString("rmc-power-loader-wrong-ammo"), args.Target, buckled, PopupType.SmallCaution);
             }
             return;
         }
@@ -286,7 +286,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         {
             foreach (var buckled in args.Buckled)
             {
-                _popup.PopupClient(Loc.GetString("rmc-power-loader-full-ammo", ("ammo", args.Target)), args.Target, buckled);
+                _popup.PopupClient(Loc.GetString("rmc-power-loader-full-ammo", ("ammo", args.Target)), args.Target, buckled, PopupType.SmallCaution);
             }
             return;
         }
