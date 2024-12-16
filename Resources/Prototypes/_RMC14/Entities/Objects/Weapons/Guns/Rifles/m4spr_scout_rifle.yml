@@ -28,8 +28,10 @@
   - type: GunDamageModifier
     multiplier: 1.1 # Lower to allow for normal M4SPR mags to have lower damage. A19 mags do more damage to compensate.
   - type: WieldableSpeedModifiers
-    baseWalk: 0.94
-    baseSprint: 0.88
+    base: 0.725
+    light: 1
+    medium: 1
+    heavy: 1  
   - type: Gun
     shotsPerBurst: 2
     selectedMode: SemiAuto

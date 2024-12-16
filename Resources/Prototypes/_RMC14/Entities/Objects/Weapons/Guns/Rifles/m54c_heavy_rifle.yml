@@ -51,8 +51,10 @@
     accuracyMultiplier: 1
     accuracyMultiplierUnwielded: 0.5
   - type: WieldableSpeedModifiers
-    baseWalk: 0.696
-    baseSprint: 0.559
+    base: 0.5
+    light: 0.69
+    medium: 0.75
+    heavy: 0.806
   - type: ItemSlots
     slots:
       gun_magazine:

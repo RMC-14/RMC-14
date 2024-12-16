@@ -11,6 +11,8 @@
     armor: 20
     bio: 20
     explosionArmor: 15
+  - type: RMCArmorSpeedTier
+    speedTier: medium
   - type: ClothingSpeedModifier
     walkModifier: 0.666
     sprintModifier: 0.666
@@ -115,9 +117,8 @@
     armor: 25
     bio: 25
     explosionArmor: 35
-  - type: WieldSlowdownCompensation
-    walk: 0.12
-    sprint: 0.198
+  - type: RMCArmorSpeedTier
+    speedTier: heavy
   - type: ClothingSpeedModifier
     walkModifier: 0.62
     sprintModifier: 0.62
@@ -272,6 +273,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/t/jungle.rsi
   - type: CMArmor
     explosionArmor: 30
+  - type: RMCArmorSpeedTier
+    speedTier: light
   - type: ClothingSpeedModifier # light armor speed
     walkModifier: .725
     sprintModifier: .725
@@ -290,6 +293,8 @@
     armor: 15
     bio: 15
     explosionArmor: 20
+  - type: RMCArmorSpeedTier
+    speedTier: light
   - type: ClothingSpeedModifier
     walkModifier: .725
     sprintModifier: .725
@@ -373,6 +378,8 @@
     armor: 15
     bio: 15
     explosionArmor: 20
+  - type: RMCArmorSpeedTier
+    speedTier: light
   - type: ClothingSpeedModifier
     walkModifier: .725
     sprintModifier: .725
@@ -397,6 +404,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/scout/jungle.rsi
   - type: Corrodible
     isCorrodible: false
+  - type: RMCArmorSpeedTier
+    speedTier: light
   - type: ClothingSpeedModifier # light armor speed
     walkModifier: .725
     sprintModifier: .725
@@ -450,6 +459,8 @@
     unequipDelay: 0.5
   - type: CMArmor
     armor: 0 # CLOTHING_ARMOR_NONE
+  - type: RMCArmorSpeedTier
+    speedTier: super light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
     walkModifier: 0.949
     sprintModifier: 0.949
@@ -501,6 +512,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/jungle.rsi
   - type: Corrodible
     isCorrodible: false
+  - type: RMCArmorSpeedTier
+    speedTier: light
   - type: ClothingSpeedModifier # light armor speed
     walkModifier: .725
     sprintModifier: .725
@@ -523,6 +536,8 @@
     maxItemSize: Small
     grid:
     - 0,0,3,1 # 2 slots
+  - type: RMCArmorSpeedTier
+    speedTier: light
   - type: ClothingSpeedModifier
     walkModifier: .725
     sprintModifier: .725
@@ -543,6 +558,8 @@
     armor: 25
     bio: 15
     explosionArmor: 20
+  - type: RMCArmorSpeedTier
+    speedTier: light
   - type: ClothingSpeedModifier
     walkModifier: 0.725
     sprintModifier: 0.725
