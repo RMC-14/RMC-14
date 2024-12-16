@@ -71,8 +71,8 @@ public sealed class XenoSoakSystem : EntitySystem
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-soak-end-self"), xeno, xeno, PopupType.MediumCaution);
             _popup.PopupEntity(Loc.GetString("rmc-xeno-soak-end-others", ("xeno", xeno)), xeno, Filter.PvsExcept(xeno), true, PopupType.MediumCaution);
-			SpawnAttachedTo(xeno.Comp.RageEffect, xeno.Owner.ToCoordinates());
-		}
+            SpawnAttachedTo(xeno.Comp.RageEffect, xeno.Owner.ToCoordinates());
+        }
     }
 
     public override void Update(float frameTime)
