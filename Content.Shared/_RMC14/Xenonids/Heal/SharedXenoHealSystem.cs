@@ -188,6 +188,8 @@ public abstract class SharedXenoHealSystem : EntitySystem
         _damageable.TryChangeDamage(ent, damageTakenSpecifier, ignoreResistances: true, interruptsDoAfters: false);
         _popup.PopupClient(Loc.GetString("rmc-xeno-apply-salve-self", ("target_xeno", target)), ent, PopupType.Medium);
 
+        args.Handled = true;
+
         var heal = EnsureComp<XenoBeingHealedComponent>(target);
         XenoHealStack healStack = new();
         healStack.Charges = (int) (args.TotalHealDuration.TotalSeconds / args.TimeBetweenHeals.TotalSeconds);
