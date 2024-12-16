@@ -54,6 +54,9 @@
     - DoorXenoResinThick
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+    - HiveEggMorpherXenoConstructionNode
+    - HiveClusterXenoConstructionNode
+    - HiveRecoveryNodeXenoConstructionNode
     canUpgrade: true
   - type: XenoDevour
   - type: XenoPheromones
