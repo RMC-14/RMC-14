@@ -41,6 +41,14 @@
     {
       "name": "up-equipped-MASK-vulpkanin",
       "directions": 4
+    },
+    {
+      "name": "equipped-MASK-rodentia",
+      "directions": 4
+    },
+    {
+      "name": "up-equipped-MASK-rodentia",
+      "directions": 4
     }
   ]
 }

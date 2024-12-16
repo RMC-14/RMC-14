@@ -24,6 +24,10 @@
       "directions": 4
     },
     {
+      "name": "equipped-MASK-rodentia",
+      "directions": 4
+    },
+    {
       "name": "inhand-left",
       "directions": 4
     },
