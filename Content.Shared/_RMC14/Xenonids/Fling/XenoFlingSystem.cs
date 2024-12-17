@@ -48,10 +48,10 @@ public sealed class XenoFlingSystem : EntitySystem
             args.Handled = true;
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
         }
-            
+
 
         var targetId = args.Target;
-        _rmcPulling.TryStopUserPullIfPulling(xeno, targetId);
+        _rmcPulling.TryStopAllPullsIfBeingPulled(targetId);
 
         var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage);
         if (damage?.GetTotal() > FixedPoint2.Zero)
@@ -66,7 +66,7 @@ public sealed class XenoFlingSystem : EntitySystem
         var length = diff.Length();
         diff = diff.Normalized() * xeno.Comp.Range;
 
-		if (_net.IsServer)
+        if (_net.IsServer)
         {
             _stun.TryParalyze(targetId, xeno.Comp.ParalyzeTime, true);
             _throwing.TryThrow(targetId, diff, 10);

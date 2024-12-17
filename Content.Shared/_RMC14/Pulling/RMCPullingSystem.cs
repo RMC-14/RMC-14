@@ -283,6 +283,17 @@ public sealed class RMCPullingSystem : EntitySystem
         _pulling.TryStopPull(puller.Pulling.Value, pullable, user);
     }
 
+    public void TryStopAllPullsIfBeingPulled(EntityUid pulled)
+    {
+       if (!TryComp<PullableComponent>(pulled, out var pullable) ||
+            pullable.Puller == null)
+        {
+            return;
+        }
+
+        _pulling.TryStopPull(pulled, pullable);
+    }
+
     private void OnPullAnimation(Entity<PullableComponent> ent, ref PullStartedMessage args)
     {
         if (args.PulledUid != ent.Owner)

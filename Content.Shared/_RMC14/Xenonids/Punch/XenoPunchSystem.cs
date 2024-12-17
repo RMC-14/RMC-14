@@ -56,7 +56,7 @@ public sealed class XenoPunchSystem : EntitySystem
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
         var targetId = args.Target;
-        _rmcPulling.TryStopUserPullIfPulling(xeno, targetId);
+        _rmcPulling.TryStopAllPullsIfBeingPulled(targetId);
 
         var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage);
         if (damage?.GetTotal() > FixedPoint2.Zero)

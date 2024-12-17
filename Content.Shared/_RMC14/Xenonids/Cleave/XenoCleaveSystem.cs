@@ -19,7 +19,7 @@ public sealed class XenoCleaveSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly VanguardShieldSystem _vanguard = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcpulling = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
@@ -51,7 +51,7 @@ public sealed class XenoCleaveSystem : EntitySystem
         if (xeno.Comp.Flings)
         {
             var flingRange = buffed ? xeno.Comp.FlingDistanceBuffed : xeno.Comp.FlingDistance;
-            _rmcpulling.TryStopUserPullIfPulling(xeno, args.Target);
+            _rmcPulling.TryStopAllPullsIfBeingPulled(args.Target);
 
             //From fling
             var origin = _transform.GetMapCoordinates(xeno);
