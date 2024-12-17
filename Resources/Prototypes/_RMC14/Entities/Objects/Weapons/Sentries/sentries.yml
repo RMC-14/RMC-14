@@ -321,7 +321,6 @@
         11.0
   - type: Sentry
     deployDelay: 2
-    undeployDelay: 2
     upgrades: null
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 4
@@ -429,6 +428,7 @@
       AggroVisionRadius: !type:Single
         4.0
   - type: Sentry
+    undeployDelay: 1.5
     upgrades: null
     startingMagazine: RMCMagazineSentryShotgun
     magazineTag: RMCMagazineSentryShotgun
