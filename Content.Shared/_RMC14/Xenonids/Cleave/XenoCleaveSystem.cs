@@ -57,7 +57,6 @@ public sealed class XenoCleaveSystem : EntitySystem
             var origin = _transform.GetMapCoordinates(xeno);
             var target = _transform.GetMapCoordinates(args.Target);
             var diff = target.Position - origin.Position;
-            var length = diff.Length();
             diff = diff.Normalized() * flingRange;
 
             if (_net.IsServer)

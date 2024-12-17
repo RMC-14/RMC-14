@@ -84,7 +84,6 @@ public sealed class XenoChargeSystem : EntitySystem
         var coordinates = GetCoordinates(args.Coordinates);
         var origin = _transform.GetMapCoordinates(xeno);
         var diff = _transform.ToMapCoordinates(coordinates).Position - origin.Position;
-        var length = diff.Length();
         diff = diff.Normalized() * xeno.Comp.Range;
 
         xeno.Comp.Charge = diff;
@@ -128,7 +127,6 @@ public sealed class XenoChargeSystem : EntitySystem
         var origin = _transform.GetMapCoordinates(xeno);
         var target = _transform.GetMapCoordinates(targetId);
         var diff = target.Position - origin.Position;
-        var length = diff.Length();
         diff = diff.Normalized() * xeno.Comp.Range;
 
         _stun.TryParalyze(targetId, xeno.Comp.StunTime, true);

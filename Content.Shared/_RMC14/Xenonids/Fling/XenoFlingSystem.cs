@@ -63,7 +63,6 @@ public sealed class XenoFlingSystem : EntitySystem
         var origin = _transform.GetMapCoordinates(xeno);
         var target = _transform.GetMapCoordinates(targetId);
         var diff = target.Position - origin.Position;
-        var length = diff.Length();
         diff = diff.Normalized() * xeno.Comp.Range;
 
         if (_net.IsServer)
