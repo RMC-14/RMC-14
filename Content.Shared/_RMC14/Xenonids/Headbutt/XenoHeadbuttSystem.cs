@@ -81,7 +81,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
         var target = _transform.GetMapCoordinates(args.Target);
         var diff = target.Position - origin.Position;
         var length = diff.Length();
-        diff *= xeno.Comp.Range / length;
+        diff = diff.Normalized() * xeno.Comp.Range;
 
         xeno.Comp.Charge = diff;
         Dirty(xeno);
@@ -134,7 +134,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
         var target = _transform.GetMapCoordinates(args.Target);
         var diff = target.Position - origin.Position;
         var length = diff.Length();
-        diff *= range / length;
+        diff = diff.Normalized() * range;
 
         _throwing.TryThrow(targetId, diff, 10);
 
