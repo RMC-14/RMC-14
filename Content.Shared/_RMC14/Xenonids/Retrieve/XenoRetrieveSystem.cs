@@ -158,7 +158,7 @@ public sealed class XenoRetrieveSystem : EntitySystem
         if (!_rmcActions.TryUseAction(xeno, action.Value))
             return;
 
-        _rmcPulling.TryStopAllPullsIfBeingPulled(target);
+        _rmcPulling.TryStopAllPullsFromAndOn(target);
 
         var length = direction.Length();
         var distance = Math.Clamp(length, 0.1f, xeno.Comp.Range);

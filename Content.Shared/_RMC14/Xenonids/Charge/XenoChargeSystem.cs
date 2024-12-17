@@ -79,11 +79,13 @@ public sealed class XenoChargeSystem : EntitySystem
         if (args.Cancelled)
             return;
 
+        _rmcPulling.TryStopAllPullsFromAndOn(xeno);
+
         var coordinates = GetCoordinates(args.Coordinates);
         var origin = _transform.GetMapCoordinates(xeno);
         var diff = _transform.ToMapCoordinates(coordinates).Position - origin.Position;
         var length = diff.Length();
-        diff *= xeno.Comp.Range / length;
+        diff = diff.Normalized() * xeno.Comp.Range;
 
         xeno.Comp.Charge = diff;
         Dirty(xeno);
@@ -121,7 +123,7 @@ public sealed class XenoChargeSystem : EntitySystem
             _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { targetId }, filter);
         }
 
-        _rmcPulling.TryStopAllPullsIfBeingPulled(targetId);
+        _rmcPulling.TryStopAllPullsFromAndOn(targetId);
 
         var origin = _transform.GetMapCoordinates(xeno);
         var target = _transform.GetMapCoordinates(targetId);

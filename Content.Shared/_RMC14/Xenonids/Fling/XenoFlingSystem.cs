@@ -51,7 +51,7 @@ public sealed class XenoFlingSystem : EntitySystem
 
 
         var targetId = args.Target;
-        _rmcPulling.TryStopAllPullsIfBeingPulled(targetId);
+        _rmcPulling.TryStopAllPullsFromAndOn(targetId);
 
         var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage);
         if (damage?.GetTotal() > FixedPoint2.Zero)

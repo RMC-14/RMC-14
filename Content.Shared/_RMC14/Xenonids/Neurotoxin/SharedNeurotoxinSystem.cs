@@ -180,7 +180,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 // This is how we randomly move them - by throwing
                 if (_blocker.CanMove(uid))
                 {
-                    _rmcPulling.TryStopAllPullsIfBeingPulled(uid);
+                    _rmcPulling.TryStopPullsOn(uid);
                     _physics.SetLinearVelocity(uid, Vector2.Zero);
                     _physics.SetAngularVelocity(uid, 0f);
                     _throwing.TryThrow(uid, _random.NextAngle().ToVec().Normalized(), 1, animated: false, playSound: false, doSpin: false);

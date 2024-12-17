@@ -69,7 +69,7 @@ public sealed class XenoTailSweepSystem : EntitySystem
             if (!_xeno.CanAbilityAttackTarget(xeno, marine))
                 return;
 
-            _rmcPulling.TryStopAllPullsIfBeingPulled(marine);
+            _rmcPulling.TryStopAllPullsFromAndOn(marine);
 
             var marineCoords = _transform.GetMapCoordinates(marine);
             var diff = marineCoords.Position - origin.Position;

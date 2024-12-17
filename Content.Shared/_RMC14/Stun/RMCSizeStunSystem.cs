@@ -103,7 +103,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
             var vec = _transform.GetMoverCoordinates(args.Target).Position - bullet.Comp.ShotFrom.Value.Position;
             if (vec.Length() != 0)
             {
-                _rmcPulling.TryStopAllPullsIfBeingPulled(args.Target);
+                _rmcPulling.TryStopPullsOn(args.Target);
                 var direction = vec.Normalized();
                 _throwing.TryThrow(args.Target, direction, 1, animated: false, playSound: false, doSpin: false);
                 // RMC-14 TODO Thrown into obstacle mechanics

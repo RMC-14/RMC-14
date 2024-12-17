@@ -62,7 +62,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
 
-        _rmcPulling.TryStopAllPullsIfBeingPulled(args.Target);
+        _rmcPulling.TryStopAllPullsFromAndOn(xeno);
 
         args.Handled = true;
 
@@ -107,6 +107,8 @@ public sealed class XenoHeadbuttSystem : EntitySystem
             var filter = Filter.Pvs(targetId, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
             _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { targetId }, filter);
         }
+
+        _rmcPulling.TryStopAllPullsFromAndOn(targetId);
 
         var origin = _transform.GetMapCoordinates(xeno);
         var target = _transform.GetMapCoordinates(targetId);

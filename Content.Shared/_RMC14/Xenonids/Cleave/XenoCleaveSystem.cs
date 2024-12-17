@@ -51,7 +51,7 @@ public sealed class XenoCleaveSystem : EntitySystem
         if (xeno.Comp.Flings)
         {
             var flingRange = buffed ? xeno.Comp.FlingDistanceBuffed : xeno.Comp.FlingDistance;
-            _rmcPulling.TryStopAllPullsIfBeingPulled(args.Target);
+            _rmcPulling.TryStopAllPullsFromAndOn(args.Target);
 
             //From fling
             var origin = _transform.GetMapCoordinates(xeno);
