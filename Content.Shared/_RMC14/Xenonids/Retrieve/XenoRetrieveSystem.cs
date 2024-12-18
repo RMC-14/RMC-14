@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Line;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Rest;
@@ -35,6 +36,7 @@ public sealed class XenoRetrieveSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
 
     public override void Initialize()
     {
@@ -155,6 +157,8 @@ public sealed class XenoRetrieveSystem : EntitySystem
 
         if (!_rmcActions.TryUseAction(xeno, action.Value))
             return;
+
+        _rmcPulling.TryStopAllPullsFromAndOn(target);
 
         var length = direction.Length();
         var distance = Math.Clamp(length, 0.1f, xeno.Comp.Range);

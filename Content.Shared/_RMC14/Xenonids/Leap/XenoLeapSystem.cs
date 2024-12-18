@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Invisibility;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -40,7 +41,7 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -123,8 +124,7 @@ public sealed class XenoLeapSystem : EntitySystem
             return;
         }
 
-        if (TryComp(xeno, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
-            _pulling.TryStopPull(puller.Pulling.Value, pullable, xeno);
+        _rmcPulling.TryStopAllPullsFromAndOn(xeno);
 
         var origin = _transform.GetMapCoordinates(xeno);
         var target = _transform.ToMapCoordinates(args.Coordinates);

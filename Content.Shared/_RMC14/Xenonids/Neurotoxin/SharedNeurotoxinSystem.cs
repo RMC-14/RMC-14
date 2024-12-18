@@ -22,6 +22,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Shared.Projectiles;
+using Content.Shared._RMC14.Pulling;
 
 namespace Content.Shared._RMC14.Xenonids.Neurotoxin;
 
@@ -43,6 +44,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _marines = new();
     public override void Initialize()
@@ -178,6 +180,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 // This is how we randomly move them - by throwing
                 if (_blocker.CanMove(uid))
                 {
+                    _rmcPulling.TryStopPullsOn(uid);
                     _physics.SetLinearVelocity(uid, Vector2.Zero);
                     _physics.SetAngularVelocity(uid, 0f);
                     _throwing.TryThrow(uid, _random.NextAngle().ToVec().Normalized(), 1, animated: false, playSound: false, doSpin: false);
