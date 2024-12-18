@@ -100,7 +100,7 @@ public sealed class ItemCamouflageSystem : EntitySystem
             newEnt = SpawnNextToOrDrop(ent.Comp.CamouflageVariations[type], ent.Owner);
         }
 
-        var ev = new ItemCamouflageEvent(ent, newEnt);
+        var ev = new ItemCamouflageEvent(ent, newEnt, ent.Comp.OverrideStorageReplace);
         RaiseLocalEvent(ent, ref ev);
 
         QueueDel(ent.Owner);
@@ -108,6 +108,9 @@ public sealed class ItemCamouflageSystem : EntitySystem
 
     private void OnItemCamoflage(Entity<StorageComponent> ent, ref ItemCamouflageEvent args)
     {
+        if (args.ReplaceOverride)
+            return;
+
         var oldItem = args.Old;
         var newItem = args.New;
 

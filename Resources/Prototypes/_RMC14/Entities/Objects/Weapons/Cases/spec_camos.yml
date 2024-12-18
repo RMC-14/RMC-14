@@ -5,6 +5,7 @@
   suffix: Camo Replace
   components:
   - type: ItemCamouflage
+    overrideStorageReplace: true
     camouflageVariations:
       Jungle: CMSniperEquipmentCase
       Desert: RMCSniperEquipmentCaseDesert
@@ -18,6 +19,7 @@
   suffix: Camo Replace
   components:
   - type: ItemCamouflage
+    overrideStorageReplace: true
     camouflageVariations:
       Jungle: RMCGrenadeSpecEquipmentCase
       Desert: RMCGrenadeSpecEquipmentCaseDesert
@@ -31,6 +33,7 @@
   suffix: Camo Replace
   components:
   - type: ItemCamouflage
+    overrideStorageReplace: true
     camouflageVariations:
       Jungle: RMCDemoSpecEquipmentCase
       Desert: RMCDemoSpecEquipmentCaseDesert
@@ -44,6 +47,7 @@
   suffix: Camo Replace
   components:
   - type: ItemCamouflage
+    overrideStorageReplace: true
     camouflageVariations:
       Jungle: RMCScoutSpecEquipmentCase
       Desert: RMCScoutSpecEquipmentCaseDesert
