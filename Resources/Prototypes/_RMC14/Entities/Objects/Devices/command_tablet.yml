@@ -25,6 +25,8 @@
   - type: Tag
     tags:
     - CommandTablet
+  - type: Corrodible
+    isCorrodible: false
 
 - type: Tag
   id: CommandTablet

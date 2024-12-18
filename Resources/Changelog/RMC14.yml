@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Examining a dropship weapon attach point will now tell you what gun and
-      ammo it has loaded, and how many rounds it has left.
-    type: Add
-  id: 609
-  time: '2024-08-23T02:44:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3800
-- author: Vermidia
-  changes:
-  - message: The M96S Scoped Rifle no longer has any scatter when wielded.
-    type: Fix
-  id: 610
-  time: '2024-08-24T07:03:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3812
 - author: Vermidia
   changes:
   - message: Fixed monkeys suffocating while nested.
@@ -4984,5 +4969,29 @@
   id: 1108
   time: '2024-12-13T22:07:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5129
+- author: Rainbeon
+  changes:
+  - message: Fully overhauled wield speeds to be more in line with CM13.
+    type: Tweak
+  - message: SMGs, XM88, and the M4SPR (normal and Scout variant) no longer have any
+      wield slowdown specifically when wearing armor.
+    type: Tweak
+  - message: Grenade Launchers, Rocket Launchers, Smartguns, Sniper Rifles, and the
+      M54CE2 Heavy Rifle now move at a fixed speed of 2.5 m/s when wielded, regardless
+      of worn armor.
+    type: Tweak
+  - message: All other weapons are now faster when wielded while wearing armor, but
+      slower when not wearing armor.
+    type: Tweak
+  id: 1109
+  time: '2024-12-16T03:04:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5150
+- author: DummeHytteOst
+  changes:
+  - message: Fixed being able to acid the command tablet.
+    type: Fix
+  id: 1110
+  time: '2024-12-16T03:04:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5157
 Name: RMC14
 Order: -1
