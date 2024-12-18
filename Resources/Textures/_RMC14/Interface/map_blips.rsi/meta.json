@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/570fc8f2777381f4a88b4029da2540c72f91b253/icons/ui_icons/map_blips.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f70a04a0fc7c5365a4f8799cd055a5df43ba7487/icons/ui_icons/map_blips.dmi",
   "size": {
     "x": 7,
     "y": 7
@@ -616,6 +616,9 @@
     },
     {
       "name": "hellhound"
+    },
+    {
+      "name": "sensor_tower"
     }
   ]
 }
