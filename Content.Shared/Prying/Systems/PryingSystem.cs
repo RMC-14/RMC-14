@@ -29,7 +29,6 @@ public sealed class PryingSystem : EntitySystem
         base.Initialize();
 
         // Mob prying doors
-        SubscribeLocalEvent<DoorComponent, GetVerbsEvent<AlternativeVerb>>(OnDoorAltVerb);
         SubscribeLocalEvent<DoorComponent, DoorPryDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<DoorComponent, InteractUsingEvent>(TryPryDoor);
     }
@@ -42,21 +41,7 @@ public sealed class PryingSystem : EntitySystem
         args.Handled = TryPry(uid, args.User, out _, args.Used);
     }
 
-    private void OnDoorAltVerb(EntityUid uid, DoorComponent component, GetVerbsEvent<AlternativeVerb> args)
-    {
-        if (!args.CanInteract || !args.CanAccess)
-            return;
-
-        if (!TryComp<PryingComponent>(args.User, out _))
-            return;
-
-        args.Verbs.Add(new AlternativeVerb()
-        {
-            Text = Loc.GetString("door-pry"),
-            Impact = LogImpact.Low,
-            Act = () => TryPry(uid, args.User, out _, args.User),
-        });
-    }
+    // Adding Door alternative actions is moved to the CMDoorSystem as multiple systems need to add alternative actions
 
     /// <summary>
     /// Attempt to pry an entity.
