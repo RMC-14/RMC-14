@@ -102,3 +102,9 @@
 
 - type: Tag
   id: ThrowingKnife
+
+- type: Tag
+  id: RMCCircuitboard
+
+- type: Tag
+  id: RMCEngineerKit

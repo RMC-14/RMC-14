@@ -31,7 +31,7 @@
     blacklist:
       tags:
       - CMFirstAidKit # TODO RMC14 medical skill
-  #      - EngineerKit # TODO RMC14
+      - RMCEngineerKit # TODO RMC14
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
