@@ -67,6 +67,11 @@
   loadouts:
   - CoifRMC
   - GasMaskRMC
+  - MaskScarfRedRMC
+  - MaskScarfBlackRMC
+  - MaskScarfGrayRMC
+  - MaskScarfGreenRMC
+  - MaskScarfTanRMC
 
 # Headwear
 - type: loadoutGroup
