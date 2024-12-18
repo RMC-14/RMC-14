@@ -131,6 +131,7 @@
   - type: GunToggleableRecoil
   - type: GunToggleableAutoFire
   - type: GunToggleableMotionDetector
+  - type: IFFToggle
   - type: MotionDetector
     handToggleable: false
     toggleSound: null
