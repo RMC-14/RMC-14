@@ -54,8 +54,8 @@
   - type: Clickable
   - type: InteractionOutline
   - type: PowerLoaderGrabbable
-    virtualRight: RMCVirtualDropshipGearRight
-    virtualLeft: RMCVirtualDropshipGearLeft
+    virtualRight: RMCVirtualFuelRight
+    virtualLeft: RMCVirtualFuelLeft
   - type: Item
   - type: OrbitalCannonFuel
 
@@ -77,8 +77,8 @@
   - type: Clickable
   - type: InteractionOutline
   - type: PowerLoaderGrabbable
-    virtualRight: RMCVirtualDropshipGearRight
-    virtualLeft: RMCVirtualDropshipGearLeft
+    virtualRight: RMCVirtualWarheadRight
+    virtualLeft: RMCVirtualWarheadLeft
   - type: Item
 
 - type: entity

@@ -505,7 +505,6 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         _container.RemoveEntity(container, contained);
 
-        // TODO RMC14 partial ammo transfers between boxes, only delete if 0
         if (TryComp(contained, out DropshipAmmoComponent? ammo) &&
             ammo.Rounds < ammo.RoundsPerShot)
         {
