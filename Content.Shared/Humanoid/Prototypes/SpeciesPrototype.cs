@@ -128,5 +128,5 @@ public enum SpeciesNaming : byte
     FirstLast,
     FirstDashFirst,
     TheFirstofLast,
-    LastFirst,
+    LastFirst,        // this is for Rodentia
 }

@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "portfiend",
+  "license": "AGPLv3",
+  "copyright": "Taken from Delta-V at commit https://github.com/DeltaV-Station/Delta-v/tree/f49142ca8d7ceac483094444c372e849309dc02b/, https://github.com/DeltaV-Station/Delta-v/tree/f49142ca8d7ceac483094444c372e849309dc02b/Resources/Textures/DeltaV/Mobs/Customization/Rodentia/ear_markings.rsi. Sprites created by portfiend.",
   "size": {"x": 32, "y": 32},
   "states": [
     {

@@ -2,9 +2,9 @@
   id: RMCUnisexRodentia
   sounds:
     Scream:
-      path: /Audio/_RMC14/Voice/Rodentia/mouse_squeak.ogg
+      path: /Audio/Animals/mouse_squeak.ogg
     Squeak:
-      path: /Audio/_RMC14/Voice/Rodentia/mouse_squeak.ogg
+      path: /Audio/Animals/mouse_squeak.ogg
 
 - type: emoteSounds
   parent: [RMCUnisexRodentia, RMCMaleHuman]
