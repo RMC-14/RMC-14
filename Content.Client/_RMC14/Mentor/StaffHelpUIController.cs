@@ -32,13 +32,15 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
     private readonly Dictionary<NetUserId, List<MentorMessage>> _messages = new();
     private readonly Dictionary<NetUserId, string> _destinationNames = new();
 
-    private bool _isMentor;
+    public bool IsMentor { get; private set; }
     private bool _canReMentor;
     private StaffHelpWindow? _staffHelpWindow;
     private MentorHelpWindow? _mentorHelpWindow;
     private MentorWindow? _mentorWindow;
     private string? _mHelpSound;
     private bool _unread;
+
+    public event Action? MentorStatusUpdated;
 
     public override void Initialize()
     {
@@ -53,10 +55,10 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
 
     private void OnMentorStatus(MentorStatusMsg msg)
     {
-        _isMentor = msg.IsMentor;
+        IsMentor = msg.IsMentor;
         _canReMentor = msg.CanReMentor;
 
-        if (_isMentor)
+        if (IsMentor)
         {
             if (_mentorHelpWindow is { IsOpen: true })
             {
@@ -72,6 +74,8 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
                 OpenMentorOrHelpWindow();
             }
         }
+
+        MentorStatusUpdated?.Invoke();
     }
 
     private void OnMentorHelpReceived(MentorMessagesReceivedMsg msg)
@@ -82,7 +86,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
             if (message.Author != _player.LocalUser)
                 other = true;
 
-            if (_isMentor &&
+            if (IsMentor &&
                 _mentorWindow is not { IsOpen: true })
             {
                 _unread = true;
@@ -117,7 +121,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
             _audio?.PlayGlobal(_mHelpSound, Filter.Local(), false);
             _clyde.RequestWindowAttention();
 
-            if (!_isMentor)
+            if (!IsMentor)
             {
                 if (OpenWindow(ref _mentorHelpWindow, CreateMentorHelpWindow, () => _mentorHelpWindow = null))
                 {
@@ -178,7 +182,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
     {
         SetAHelpButtonPressed(false);
         _unread = false;
-        if (_isMentor)
+        if (IsMentor)
         {
             if (OpenWindow(ref _mentorWindow, CreateMentorWindow, () => _mentorWindow = null))
             {

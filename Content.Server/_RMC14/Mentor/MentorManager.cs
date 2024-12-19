@@ -167,9 +167,9 @@ public sealed class MentorManager : IPostInjectInit
         return _mentors.TryGetValue(player, out var mentor) && mentor;
     }
 
-    public IEnumerable<string> GetActiveMentors()
+    public IEnumerable<ICommonSession> GetActiveMentors()
     {
-        return _activeMentors.Select(m => m.Name);
+        return _activeMentors.AsReadOnly();
     }
 
     public void ReMentor(NetUserId user)
