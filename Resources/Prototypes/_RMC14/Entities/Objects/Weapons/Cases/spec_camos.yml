@@ -2,6 +2,7 @@
 - type: entity
   parent: CMSniperEquipmentCase
   id: RMCSniperEquipmentCaseCamo
+  name: sniper equipment case
   suffix: Camo Replace
   components:
   - type: ItemCamouflage
@@ -11,10 +12,14 @@
       Snow: RMCSniperEquipmentCaseSnow
       Classic: RMCSniperEquipmentCaseClassic
       Urban: RMCSniperEquipmentCaseUrban
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: SniperWhitelist
 
 - type: entity
   parent: RMCGrenadeSpecEquipmentCase
   id: RMCGrenadeSpecEquipmentCaseCamo
+  name: heavy grenadier equipment case
   suffix: Camo Replace
   components:
   - type: ItemCamouflage
@@ -24,10 +29,14 @@
       Snow: RMCGrenadeSpecEquipmentCaseSnow
       Classic: RMCGrenadeSpecEquipmentCaseClassic
       Urban: RMCGrenadeSpecEquipmentCaseUrban
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: GrenadeSpecWhitelist
 
 - type: entity
   parent: RMCDemoSpecEquipmentCase
   id: RMCDemoSpecEquipmentCaseCamo
+  name: demolitionist equipment case
   suffix: Camo Replace
   components:
   - type: ItemCamouflage
@@ -37,10 +46,14 @@
       Snow: RMCDemoSpecEquipmentCaseSnow
       Classic: RMCDemoSpecEquipmentCaseClassic
       Urban: RMCDemoSpecEquipmentCaseUrban
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: DemoSpecWhitelist
 
 - type: entity
   parent: RMCScoutSpecEquipmentCase
   id: RMCScoutSpecEquipmentCaseCamo
+  name: scout equipment case
   suffix: Camo Replace
   components:
   - type: ItemCamouflage
@@ -50,6 +63,9 @@
       Snow: RMCScoutSpecEquipmentCaseSnow
       Classic: RMCScoutSpecEquipmentCaseClassic
       Urban: RMCScoutSpecEquipmentCaseUrban
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: ScoutWhitelist
 
 #desert
 - type: entity
@@ -72,7 +88,7 @@
       amount: 2
     - id: CMM96SSniperRifle
 #    - id: CMFacepaintSniper
-#    - id: CMSpotter  
+#    - id: CMSpotter
 
 - type: entity
   parent: RMCGrenadeSpecEquipmentCase
@@ -168,7 +184,7 @@
       amount: 2
     - id: WeaponM96SSniperRifleSnow
 #    - id: CMFacepaintSniper
-#    - id: CMSpotter  
+#    - id: CMSpotter
 
 - type: entity
   parent: RMCGrenadeSpecEquipmentCase
@@ -264,7 +280,7 @@
       amount: 2
     - id: WeaponM96SSniperRifleClassic
 #    - id: CMFacepaintSniper
-#    - id: CMSpotter  
+#    - id: CMSpotter
 
 - type: entity
   parent: RMCGrenadeSpecEquipmentCase
@@ -360,7 +376,7 @@
       amount: 2
     - id: WeaponM96SSniperRifleUrban
 #    - id: CMFacepaintSniper
-#    - id: CMSpotter  
+#    - id: CMSpotter
 
 - type: entity
   parent: RMCGrenadeSpecEquipmentCase
