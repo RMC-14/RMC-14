@@ -281,7 +281,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
     {
         var author = message.AuthorName;
         if (message.IsMentor)
-            author = $"[bold][color=red]{author}[/color][/bold]";
+            author = $"[bold][color=orange]{author}[/color][/bold]";
 
         var text = $"{message.Time:HH:mm} {author}: {FormattedMessage.EscapeText(message.Text)}";
         return FormattedMessage.FromMarkupPermissive(text);
