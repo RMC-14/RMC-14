@@ -14,11 +14,11 @@
       holidays: 
       - FestiveSeason
       entries:
-      - id: CMMarinePreparedMealCookies
+      - id: RMCMarinePreparedMealCookies
         amount: 25
-      - id: CMMarinePreparedMealGingerbread
+      - id: RMCMarinePreparedMealGingerbread
         amount: 25
-      - id: CMMarinePreparedMealFruitcake
+      - id: RMCMarinePreparedMealFruitcake
         amount: 25
     - name: Prepared Meals
       entries:

@@ -51,7 +51,7 @@ namespace Content.Server.Holiday
             }
 
             RaiseLocalEvent(new HolidaysRefreshedEvent(_currentHolidays));
-            _rmcHoliday.SetHolidays(_currentHolidays.Select(x => x.ID).ToList());
+            _rmcHoliday.SetActiveHolidays(_currentHolidays.Select(x => x.ID).ToList());
         }
 
         public void DoGreet()
