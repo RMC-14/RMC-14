@@ -164,7 +164,7 @@ public sealed class XenoEnergySystem : EntitySystem
             return;
 
         xeno.Comp.Current = int.Max(0, xeno.Comp.Current - plasma);
-        UpdateAlert(xeno);
+        UpdateAlert((xeno, xeno.Comp));
         Dirty(xeno);
     }
 
