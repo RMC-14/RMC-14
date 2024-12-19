@@ -224,7 +224,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         if (!validJob)
             return;
-        
+
         var validHoliday = section.Holidays.Count < 1;
         foreach (var holiday in section.Holidays)
         {

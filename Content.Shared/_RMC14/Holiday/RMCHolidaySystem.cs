@@ -1,17 +1,17 @@
-﻿namespace Content.Shared._RMC14.Holiday;
+﻿using Robust.Shared.Network;
+
+namespace Content.Shared._RMC14.Holiday;
 
 public sealed class RMCHolidaySystem : EntitySystem
 {
 
     private List<string> _holidays = new();
 
+    [Dependency] private readonly INetManager _net = default!;
+
     public void SetHolidays(List<string> holidays)
     {
         _holidays = holidays;
-        foreach (var holiday in _holidays)
-        {
-            Logger.Debug(holiday);
-        }
     }
 
     public List<string> GetActiveHolidays()
