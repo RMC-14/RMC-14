@@ -1,0 +1,15 @@
+- type: emoteSounds
+  id: RMCUnisexRodentia
+  sounds:
+    Scream:
+      path: /Audio/Animals/mouse_squeak.ogg
+    Squeak:
+      path: /Audio/Animals/mouse_squeak.ogg
+
+- type: emoteSounds
+  parent: [RMCUnisexRodentia, RMCMaleHuman]
+  id: RMCMaleRodentia
+
+- type: emoteSounds
+  parent: [RMCUnisexRodentia, RMCFemaleHuman]
+  id: RMCFemaleRodentia
