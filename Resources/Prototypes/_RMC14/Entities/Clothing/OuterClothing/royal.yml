@@ -20,6 +20,8 @@
     armor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
     bio: 20
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
+  - type: RMCArmorSpeedTier
+    speedTier: light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
     walkModifier: 0.725
     sprintModifier: 0.725
@@ -55,9 +57,8 @@
     armor: 32 # CLOTHING_ARMOR_HIGH (melee); CLOTHING_ARMOR_HIGHPLUS (bullet)
     explosionArmor: 35 # CLOTHING_ARMOR_HIGHPLUS
     bio: 20 # CLOTHING_ARMOR_MEDIUM
+  - type: RMCArmorSpeedTier
+    speedTier: heavy
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LOWHEAVY
     walkModifier: 0.64
     sprintModifier: 0.64
-  - type: WieldSlowdownCompensation
-    walk: 0.12
-    sprint: 0.198

@@ -13,6 +13,7 @@
     - state: tn_color-1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
+    - state: t_inactive
   - type: Fixtures
     fixtures:
       fix1:
@@ -48,3 +49,40 @@
   - type: Corrodible
     timeToApply: 4
     structure: true
+
+- type: entity
+  parent: RMCTankReagentEmpty
+  id: RMCTankReagentWater
+  name: water tank
+  description: A water tank, holds water.
+  suffix: full
+  components:
+  - type: Sprite
+    layers:
+    - state: watertank
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        reagents:
+        - ReagentId: Water
+          Quantity: 1000
+
+- type: entity
+  parent: RMCTankReagentEmpty
+  id: RMCTankReagentFuel
+  name: fuel tank
+  description: A fuel tank, for holding welding fuel.
+  suffix: full
+  components:
+  - type: Sprite
+    layers:
+    - state: weldtank
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 1000
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 60

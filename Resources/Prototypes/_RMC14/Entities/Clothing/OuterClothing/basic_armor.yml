@@ -10,6 +10,8 @@
   - type: Clothing
     equipDelay: 2
     unequipDelay: 2
+  - type: RMCArmorSpeedTier
+    speedTier: light
   - type: ClothingSpeedModifier
     walkModifier: 0.725
     sprintModifier: 0.725
