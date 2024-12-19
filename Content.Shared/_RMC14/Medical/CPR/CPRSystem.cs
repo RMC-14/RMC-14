@@ -186,7 +186,8 @@ public sealed class CPRSystem : EntitySystem
             BreakOnMove = true,
             NeedHand = true,
             BlockDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameEvent
+            DuplicateCondition = DuplicateConditions.SameEvent,
+            TargetEffect = "RMCEffectHealBusy",
         };
         _doAfter.TryStartDoAfter(doAfter);
 

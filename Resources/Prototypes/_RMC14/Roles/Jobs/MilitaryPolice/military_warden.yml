@@ -45,14 +45,13 @@
 - type: startingGear
   id: CMGearMilitaryWarden
   equipment:
-    jumpsuit: CMJumpsuitWarden
-    back: CMSatchelSecurity
+    jumpsuit: RMCJumpsuitWardenCamo
     shoes: CMBootsBlackFilled
     head: CMHeadCapWarden
     eyes: CMGlassesSecurity
     gloves: CMHandsBlackMarine
     id: CMIDCardMilitaryWarden
-    outerClothing: CMArmorM3Warden
+    outerClothing: RMCArmorM3WardenCamo
     ears: CMHeadsetCMP
     belt: CMBeltSecurityMPFilled
     #    pocket1: TODO RMC14 tape recorder

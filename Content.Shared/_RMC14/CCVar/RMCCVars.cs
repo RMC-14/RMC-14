@@ -98,7 +98,7 @@ public sealed class RMCCVars : CVars
     ///     Comma-separated list of maps to load as the planet in the distress signal gamemode.
     /// </summary>
     public static readonly CVarDef<string> RMCPlanetMaps =
-        CVarDef.Create("rmc.planet_maps", "/Maps/_RMC14/lv624.yml,/Maps/_RMC14/solaris.yml,/Maps/_RMC14/prison.yml,/Maps/_RMC14/shiva.yml,/Maps/_RMC14/trijent.yml,/Maps/_RMC14/varadero.yml,/Maps/_RMC14/kutjevo.yml", CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.planet_maps", "/Maps/_RMC14/lv624.yml,/Maps/_RMC14/solaris.yml,/Maps/_RMC14/prison.yml,/Maps/_RMC14/shiva.yml,/Maps/_RMC14/trijent.yml,/Maps/_RMC14/varadero.yml,/Maps/_RMC14/kutjevo.yml,/Maps/_RMC14/chances.yml", CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCPlanetCoordinateVariance =
         CVarDef.Create("rmc.planet_coordinate_variance", 500, CVar.REPLICATED | CVar.SERVER);
@@ -183,6 +183,9 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCPlanetMapVoteExcludeLast =
         CVarDef.Create("rmc.planet_map_vote_exclude_last", 2, CVar.SERVER | CVar.SERVERONLY);
+
+    public static readonly CVarDef<bool> RMCUseCarryoverVoting =
+        CVarDef.Create("rmc.planet_map_vote_carryover", true, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<int> RMCTacticalMapAnnounceCooldownSeconds =
         CVarDef.Create("rmc.tactical_map_announce_cooldown_seconds", 240, CVar.SERVER | CVar.SERVERONLY);
@@ -285,4 +288,13 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCMarineScalingBonus =
         CVarDef.Create("rmc.marine_scaling_bonus", 0f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCMentorHelpRateLimitPeriod =
+        CVarDef.Create("rmc.mentor_help_rate_limit_period", 2f, CVar.SERVERONLY);
+
+    public static readonly CVarDef<int> RMCMentorHelpRateLimitCount =
+        CVarDef.Create("rmc.mentor_help_rate_limit_count", 10, CVar.SERVERONLY);
+
+    public static readonly CVarDef<string> RMCMentorHelpSound =
+        CVarDef.Create("rmc.mentor_help_sound", "/Audio/_RMC14/Effects/Admin/mhelp.ogg", CVar.ARCHIVE | CVar.CLIENTONLY);
 }

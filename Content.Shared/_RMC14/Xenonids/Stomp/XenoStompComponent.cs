@@ -24,7 +24,7 @@ public sealed partial class XenoStompComponent : Component
     public float ShortRange = 0.5f;
 
     [DataField, AutoNetworkedField]
-    public float Range = 2;
+    public float Range = 2.82f;
 
     [DataField, AutoNetworkedField]
     public EntProtoId? SelfEffect;

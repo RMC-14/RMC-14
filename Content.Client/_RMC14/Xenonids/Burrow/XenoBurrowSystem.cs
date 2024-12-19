@@ -1,4 +1,5 @@
 using Content.Client.Players;
+using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Burrow;
@@ -30,16 +31,22 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
     {
         var localEntity = _player.LocalEntity;
         var isXeno = HasComp<XenoComponent>(localEntity);
-        if (!TryComp(ent, out SpriteComponent? spriteComp))
+        if (TryComp(ent, out SpriteComponent? spriteComp))
         {
-            return;
+            spriteComp.Visible = !comp.Active || isXeno;
         }
 
-        if (comp.Active && !isXeno)
+        if (TryComp(ent, out RMCNightVisionVisibleComponent? nightVisionVisibleComp))
         {
-            spriteComp.Visible = false;
-            return;
+            if (comp.Active && !isXeno)
+            {
+                nightVisionVisibleComp.Transparency = 1f;
+            }
+            else
+            {
+                nightVisionVisibleComp.Transparency = null;
+            }
         }
-        spriteComp.Visible = true;
+
     }
 }

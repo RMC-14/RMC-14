@@ -56,6 +56,60 @@
     - suitstorage
 
 - type: entity
+  parent: RMCBoxMagazineBase
+  id: RMCBoxFlashlightsEmpty
+  name: box of flashlights
+  description: A box of flashlights to brighten your day!
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxFlashlightsEmpty
+  - type: Item
+    size: Huge
+  - type: CMItemSlots
+    count: 8
+    slot:
+      name: Flashlight
+      whitelist:
+        tags:
+        - Flashlight
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    layers:
+    - state: flashlightbox_deployed
+      map: [ "un_lid" ]
+      visible: false
+    - state: magaz_flashlight
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: flashlightbox
+      map: [ "lid" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        un_lid:
+          True: { visible: true }
+          False: { visible: false }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: magaz_flashlight, visible: false }
+          Low: { state: magaz_flashlight_1, visible: true }
+          Medium: { state: magaz_flashlight_2, visible: true }
+          High: { state: magaz_flashlight_3, visible: true }
+          Full: { state: magaz_flashlight, visible: true }
+
+- type: entity
+  parent: RMCBoxFlashlightsEmpty
+  id: RMCBoxFlashlights
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCFlashlight
+
+- type: entity
   parent: RMCFlashlightBase
   id: RMCFlashlight
   name: flashlight

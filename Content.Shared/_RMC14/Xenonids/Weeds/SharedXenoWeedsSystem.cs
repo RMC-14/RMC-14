@@ -1,6 +1,7 @@
-﻿using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
+using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
@@ -288,8 +289,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         var query = EntityQueryEnumerator<DamageOffWeedsComponent, DamageableComponent>();
         while (query.MoveNext(out var uid, out var damage, out var damageable))
         {
-            if (TryComp(uid, out AffectableByWeedsComponent? affected) &&
-                affected.OnXenoWeeds)
+            if ((TryComp(uid, out AffectableByWeedsComponent? affected) && affected.OnXenoWeeds) ||
+                HasComp<InXenoTunnelComponent>(uid))
             {
                 if (damage.DamageAt != null)
                 {

@@ -13,10 +13,11 @@ public sealed class PlaytimeMedalSystem : SharedPlaytimeMedalSystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<PlaytimeMedalHolderComponent, GetEquipmentVisualsEvent>(OnPlaytimeMedalHolderGetEquipmentVisuals, after: [typeof(ClothingSystem)]);
+        SubscribeLocalEvent<PlaytimeMedalHolderComponent, GetEquipmentVisualsEvent>(OnHolderGetEquipmentVisuals, after: [typeof(ClothingSystem)]);
+        SubscribeLocalEvent<PlaytimeMedalHolderComponent, EquipmentVisualsUpdatedEvent>(OnHolderVisualsUpdated, after: [typeof(ClothingSystem)]);
     }
 
-    private void OnPlaytimeMedalHolderGetEquipmentVisuals(Entity<PlaytimeMedalHolderComponent> ent, ref GetEquipmentVisualsEvent args)
+    private void OnHolderGetEquipmentVisuals(Entity<PlaytimeMedalHolderComponent> ent, ref GetEquipmentVisualsEvent args)
     {
         var clothingSprite = CompOrNull<SpriteComponent>(ent);
         if (!TryComp(ent.Comp.Medal, out PlaytimeMedalComponent? medal) ||
@@ -42,7 +43,7 @@ public sealed class PlaytimeMedalSystem : SharedPlaytimeMedalSystem
 
         PlayerMedalUpdated?.Invoke();
 
-        var key = $"enum.{nameof(MedalVisualLayers)}.{nameof(MedalVisualLayers.Base)}";
+        var key = GetKey();
         if (args.Layers.Any(t => t.Item1 == key))
             return;
 
@@ -51,5 +52,32 @@ public sealed class PlaytimeMedalSystem : SharedPlaytimeMedalSystem
             RsiPath = sprite.RsiPath.CanonPath,
             State = sprite.RsiState,
         }));
+    }
+
+    private void OnHolderVisualsUpdated(Entity<PlaytimeMedalHolderComponent> ent, ref EquipmentVisualsUpdatedEvent args)
+    {
+        var key = GetKey();
+        if (!args.RevealedLayers.Contains(key))
+            return;
+
+        if (!TryComp(args.Equipee, out SpriteComponent? sprite))
+            return;
+
+        if (!sprite.LayerMapTryGet(key, out var layer) ||
+            !sprite.TryGetLayer(layer, out var layerData))
+        {
+            return;
+        }
+
+        var data = layerData.ToPrototypeData();
+        sprite.RemoveLayer(layer);
+
+        layer = sprite.LayerMapReserveBlank(key);
+        sprite.LayerSetData(layer, data);
+    }
+
+    private string GetKey()
+    {
+        return $"enum.{nameof(MedalVisualLayers)}.{nameof(MedalVisualLayers.Base)}";
     }
 }

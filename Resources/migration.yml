@@ -912,3 +912,7 @@ CheapLighter: RMCLighter
 
 # 2024-11-28
 ClosetLegal: RMCClosetBlue
+
+# 2024-12-17
+WeldingFuelTank: RMCTankReagentFuel
+WaterTank: RMCTankReagentWater
