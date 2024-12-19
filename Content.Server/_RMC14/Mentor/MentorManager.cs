@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server.Administration.Managers;
 using Content.Server.Database;
 using Content.Server.Players.RateLimiting;
 using Content.Shared._RMC14.CCVar;
@@ -17,6 +18,7 @@ namespace Content.Server._RMC14.Mentor;
 
 public sealed class MentorManager : IPostInjectInit
 {
+    [Dependency] private readonly IAdminManager _admin = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly ILogManager _log = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -75,8 +77,8 @@ public sealed class MentorManager : IPostInjectInit
         if (!_player.TryGetSessionById(destination, out var destinationSession))
             return;
 
-        var author = message.MsgChannel.UserId;
-        if (!_player.TryGetSessionById(author, out var authorSession) ||
+        var author = message.MsgChannel;
+        if (!_player.TryGetSessionById(author.UserId, out var authorSession) ||
             !_activeMentors.Contains(authorSession))
         {
             return;
@@ -85,7 +87,7 @@ public sealed class MentorManager : IPostInjectInit
         SendMentorMessage(
             destination,
             destinationSession.Name,
-            author,
+            authorSession,
             authorSession.Name,
             message.Message,
             destinationSession.Channel
@@ -97,7 +99,7 @@ public sealed class MentorManager : IPostInjectInit
         if (!_player.TryGetSessionById(message.MsgChannel.UserId, out var author))
             return;
 
-        SendMentorMessage(author.UserId, author.Name, author.UserId, author.Name, message.Message, message.MsgChannel);
+        SendMentorMessage(author.UserId, author.Name, author, author.Name, message.Message, message.MsgChannel);
     }
 
     private void OnDeMentor(DeMentorMsg message)
@@ -123,7 +125,7 @@ public sealed class MentorManager : IPostInjectInit
         _net.ServerSendMessage(msg, player.Channel);
     }
 
-    private void SendMentorMessage(NetUserId destination, string destinationName, NetUserId author, string authorName, string message, INetChannel destinationChannel)
+    private void SendMentorMessage(NetUserId destination, string destinationName, ICommonSession author, string authorName, string message, INetChannel destinationChannel)
     {
         if (string.IsNullOrWhiteSpace(message))
             return;
@@ -132,20 +134,22 @@ public sealed class MentorManager : IPostInjectInit
         var isMentor = false;
         foreach (var active in _activeMentors)
         {
-            if (active.UserId == author)
+            if (active.UserId == author.UserId)
                 isMentor = true;
 
             recipients.Add(active.Channel);
         }
 
+        var isAdmin = _admin.IsAdmin(author);
         var mentorMsg = new MentorMessage(
             destination,
             destinationName,
-            author,
+            author.UserId,
             authorName,
             message,
             DateTime.Now,
-            isMentor
+            isMentor,
+            isAdmin
         );
         var messages = new List<MentorMessage> { mentorMsg };
         var receive = new MentorMessagesReceivedMsg { Messages = messages };

@@ -330,7 +330,7 @@ internal sealed partial class ChatManager : IChatManager
                 default,
                 false,
                 client,
-                audioPath: isSource ? _netConfigManager.GetClientCVar(client, RMCCVars.RMCMentorHelpSound) : default,
+                audioPath: isSource ? _netConfigManager.GetClientCVar(client, RMCCVars.RMCMentorChatSound) : default,
                 audioVolume: isSource ? _netConfigManager.GetClientCVar(client, RMCCVars.RMCMentorChatVolume) : default,
                 author: player.UserId);
         }

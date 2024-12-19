@@ -24,7 +24,8 @@ public sealed class MentorMessagesReceivedMsg : NetMessage
             var text = buffer.ReadString();
             var time = DateTime.FromBinary(buffer.ReadInt64());
             var isMentor = buffer.ReadBoolean();
-            var message = new MentorMessage(destination, destinationName, author, authorName, text, time, isMentor);
+            var isAdmin = buffer.ReadBoolean();
+            var message = new MentorMessage(destination, destinationName, author, authorName, text, time, isMentor, isAdmin);
             Messages.Add(message);
         }
     }
@@ -41,6 +42,7 @@ public sealed class MentorMessagesReceivedMsg : NetMessage
             buffer.Write(message.Text);
             buffer.Write(message.Time.ToBinary());
             buffer.Write(message.IsMentor);
+            buffer.Write(message.IsAdmin);
         }
     }
 }

@@ -300,8 +300,13 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
     private FormattedMessage CreateMessageLabel(MentorMessage message)
     {
         var author = message.AuthorName;
-        if (message.IsMentor)
-            author = $"[bold][color=orange]{author}[/color][/bold]";
+        if (message.Author != message.Destination)
+        {
+            if (message.IsAdmin)
+                author = $"[bold][color=red]{author}[/color][/bold]";
+            else if (message.IsMentor)
+                author = $"[bold][color=orange]{author}[/color][/bold]";
+        }
 
         var text = $"{message.Time:HH:mm} {author}: {FormattedMessage.EscapeText(message.Text)}";
         return FormattedMessage.FromMarkupPermissive(text);

@@ -79,7 +79,7 @@ public sealed class RMCDiscordSystem : EntitySystem
                             default,
                             false,
                             client,
-                            audioPath: _net.GetClientCVar(client, RMCCVars.RMCMentorHelpSound),
+                            audioPath: _net.GetClientCVar(client, RMCCVars.RMCMentorChatSound),
                             audioVolume: _net.GetClientCVar(client, RMCCVars.RMCMentorChatVolume)
                         );
                     }
