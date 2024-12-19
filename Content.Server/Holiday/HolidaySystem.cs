@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
+using Content.Shared._RMC14.Holiday;
 using Content.Shared.CCVar;
 using Content.Shared.Holiday;
 using Robust.Shared.Configuration;
@@ -14,6 +15,7 @@ namespace Content.Server.Holiday
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly IChatManager _chatManager = default!;
         [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+        [Dependency] private readonly RMCHolidaySystem _rmcHoliday = default!;
 
         [ViewVariables]
         private readonly List<HolidayPrototype> _currentHolidays = new();
@@ -49,6 +51,7 @@ namespace Content.Server.Holiday
             }
 
             RaiseLocalEvent(new HolidaysRefreshedEvent(_currentHolidays));
+            _rmcHoliday.SetHolidays(_currentHolidays.Select(x => x.ID).ToList());
         }
 
         public void DoGreet()
