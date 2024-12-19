@@ -24,6 +24,7 @@
                       SizeFlagsStretchRatio="3">
             <OutputPanel Name="Messages" Access="Public"
                          VerticalExpand="True" />
+            <RichTextLabel Name="TypingIndicator" Access="Public" />
             <LineEdit Name="Chat" Access="Public" HorizontalExpand="True" Editable="False" />
         </BoxContainer>
     </BoxContainer>

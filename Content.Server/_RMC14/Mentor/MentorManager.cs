@@ -13,6 +13,7 @@ using Robust.Server.Player;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Mentor;
 
@@ -24,6 +25,7 @@ public sealed class MentorManager : IPostInjectInit
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly PlayerRateLimitManager _rateLimit = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UserDbDataManager _userDb = default!;
 
     private const string RateLimitKey = "MentorHelp";
@@ -31,6 +33,7 @@ public sealed class MentorManager : IPostInjectInit
 
     private readonly List<ICommonSession> _activeMentors = new();
     private readonly Dictionary<NetUserId, bool> _mentors = new();
+    private readonly Dictionary<NetUserId, (TimeSpan Timestamp, bool Typing)> _typingUpdateTimestamps = new();
 
     private async Task LoadData(ICommonSession player, CancellationToken cancel)
     {
@@ -112,6 +115,27 @@ public sealed class MentorManager : IPostInjectInit
         ReMentor(message.MsgChannel.UserId);
     }
 
+    private void OnClientTypingUpdated(MentorHelpClientTypingUpdated msg)
+    {
+        var author = msg.MsgChannel;
+        var authorId = author.UserId;
+        if (_typingUpdateTimestamps.TryGetValue(authorId, out var tuple) &&
+            tuple.Typing == msg.Typing &&
+            tuple.Timestamp + TimeSpan.FromSeconds(1) > _timing.RealTime)
+        {
+            return;
+        }
+
+        _typingUpdateTimestamps[authorId] = (_timing.RealTime, msg.Typing);
+
+        var isMentor = IsMentor(authorId);
+        var destination = msg.Destination;
+        if (!isMentor && authorId != msg.Destination)
+            return;
+
+        SendTypingUpdate(author, destination, msg.Typing);
+    }
+
     private void SendMentorStatus(ICommonSession player)
     {
         var isMentor = _activeMentors.Contains(player);
@@ -164,6 +188,26 @@ public sealed class MentorManager : IPostInjectInit
                 _log.RootSawmill.Error($"Error sending mentor help message:\n{e}");
             }
         }
+
+        SendTypingUpdate(author.Channel, destination, false);
+    }
+
+    private void SendTypingUpdate(INetChannel author, Guid destination, bool typing)
+    {
+        var update = new MentorHelpTypingUpdated
+        {
+            Author = author.UserName,
+            Destination = destination,
+            Typing = typing,
+        };
+
+        foreach (var admin in GetActiveMentors())
+        {
+            if (admin.UserId == author.UserId)
+                continue;
+
+            _net.ServerSendMessage(update, admin.Channel);
+        }
     }
 
     public bool IsMentor(NetUserId player)
@@ -209,6 +253,8 @@ public sealed class MentorManager : IPostInjectInit
         _net.RegisterNetMessage<MentorMessagesReceivedMsg>();
         _net.RegisterNetMessage<DeMentorMsg>(OnDeMentor);
         _net.RegisterNetMessage<ReMentorMsg>(OnReMentor);
+        _net.RegisterNetMessage<MentorHelpClientTypingUpdated>(OnClientTypingUpdated);
+        _net.RegisterNetMessage<MentorHelpTypingUpdated>();
         _userDb.AddOnLoadPlayer(LoadData);
         _userDb.AddOnFinishLoad(FinishLoad);
         _userDb.AddOnPlayerDisconnect(ClientDisconnected);

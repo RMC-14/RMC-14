@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 using Content.Client.Administration.Systems;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Bwoink;
@@ -16,7 +17,9 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Client._RMC14.Mentor;
 
@@ -27,10 +30,12 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [UISystemDependency] private readonly AudioSystem? _audio = default!;
 
     private readonly Dictionary<NetUserId, List<MentorMessage>> _messages = new();
     private readonly Dictionary<NetUserId, string> _destinationNames = new();
+    private readonly Dictionary<NetUserId, (List<string> People, CancellationTokenSource Cancel)> _peopleTyping = new();
 
     public bool IsMentor { get; private set; }
     private bool _canReMentor;
@@ -39,6 +44,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
     private MentorWindow? _mentorWindow;
     private string? _mHelpSound;
     private bool _unread;
+    private (TimeSpan Timestamp, bool Typing) _lastTypingUpdateSent;
 
     public event Action? MentorStatusUpdated;
 
@@ -50,6 +56,8 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         _net.RegisterNetMessage<MentorHelpMsg>();
         _net.RegisterNetMessage<DeMentorMsg>();
         _net.RegisterNetMessage<ReMentorMsg>();
+        _net.RegisterNetMessage<MentorHelpClientTypingUpdated>();
+        _net.RegisterNetMessage<MentorHelpTypingUpdated>(OnMentorHelpTypingUpdated);
         _config.OnValueChanged(RMCCVars.RMCMentorHelpSound, v => _mHelpSound = v, true);
     }
 
@@ -123,12 +131,54 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
 
             if (!IsMentor)
             {
-                if (OpenWindow(ref _mentorHelpWindow, CreateMentorHelpWindow, () => _mentorHelpWindow = null))
+                if (OpenWindow(ref _mentorHelpWindow,
+                        CreateMentorHelpWindow,
+                        () => _mentorHelpWindow = null,
+                        window => window.Chat,
+                        _ => _player.LocalUser))
                 {
                     _mentorHelpWindow.OpenCentered();
                 }
             }
         }
+    }
+
+    private void OnMentorHelpTypingUpdated(MentorHelpTypingUpdated message)
+    {
+        var id = new NetUserId(message.Destination);
+        var author = message.Author;
+        if (!message.Typing)
+        {
+            if (_peopleTyping.TryGetValue(id, out var oldTyping))
+                oldTyping.People.Remove(author);
+
+            UpdateTypingIndicator();
+            return;
+        }
+
+        if (!_peopleTyping.TryGetValue(id, out var typing))
+        {
+            typing = (new List<string>(), new CancellationTokenSource());
+            _peopleTyping[id] = typing;
+        }
+
+        if (typing.People.Contains(author))
+            return;
+
+        typing.People.Add(author);
+        typing.Cancel.Cancel();
+        typing.Cancel = new CancellationTokenSource();
+        Timer.Spawn(TimeSpan.FromSeconds(10),
+            () =>
+            {
+                if (_peopleTyping.TryGetValue(id, out typing))
+                    typing.People.Remove(author);
+
+                UpdateTypingIndicator();
+            },
+            typing.Cancel.Token);
+
+        UpdateTypingIndicator();
     }
 
     public void OnSystemLoaded(BwoinkSystem system)
@@ -184,7 +234,11 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         _unread = false;
         if (IsMentor)
         {
-            if (OpenWindow(ref _mentorWindow, CreateMentorWindow, () => _mentorWindow = null))
+            if (OpenWindow(ref _mentorWindow,
+                    CreateMentorWindow,
+                    () => _mentorWindow = null,
+                    window => window.Chat,
+                    window => window.SelectedPlayer))
             {
                 foreach (var destination in _messages.Keys)
                 {
@@ -196,7 +250,11 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         }
         else
         {
-            if (OpenWindow(ref _mentorHelpWindow, CreateMentorHelpWindow, () => _mentorHelpWindow = null))
+            if (OpenWindow(ref _mentorHelpWindow,
+                    CreateMentorHelpWindow,
+                    () => _mentorHelpWindow = null,
+                    window => window.Chat,
+                    _ => _player.LocalUser))
             {
                 _mentorHelpWindow.OpenCentered();
             }
@@ -272,6 +330,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
             _mentorWindow.SelectedPlayer = player;
             _mentorWindow.Messages.Clear();
             _mentorWindow.Chat.Editable = true;
+            UpdateTypingIndicator();
             if (!_messages.TryGetValue(player, out var authorMessages))
                 return;
 
@@ -287,13 +346,42 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         _mentorWindow.PlayerDict[player] = playerButton;
     }
 
-    private bool OpenWindow<T>([NotNullWhen(true)] ref T? window, Func<T> create, Action onClose) where T : DefaultWindow
+    private bool OpenWindow<T>(
+        [NotNullWhen(true)] ref T? window,
+        Func<T> create,
+        Action onClose,
+        Func<T, LineEdit> edit,
+        Func<T, NetUserId?> selectedPlayer
+    ) where T : DefaultWindow
     {
         if (window != null)
             return true;
 
         window = create();
         window.OnClose += onClose;
+
+        var windowCopy = window;
+        edit(window).OnTextChanged += args =>
+        {
+            var destination = selectedPlayer(windowCopy);
+            if (destination == null)
+                return;
+
+            var typing = args.Text.Length > 0;
+            if (_lastTypingUpdateSent.Typing == typing &&
+                _lastTypingUpdateSent.Timestamp + TimeSpan.FromSeconds(1) > _timing.RealTime)
+            {
+                return;
+            }
+
+            _lastTypingUpdateSent = (_timing.RealTime, typing);
+            _net.ClientSendMessage(new MentorHelpClientTypingUpdated
+            {
+                Destination = destination.Value,
+                Typing = typing,
+            });
+        };
+
         return true;
     }
 
@@ -319,5 +407,32 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
 
         if (_aHelp.GameAHelpButton != null)
             _aHelp.GameAHelpButton.Pressed = pressed;
+    }
+
+    private void UpdateTypingIndicator()
+    {
+        if (_mentorWindow is not { IsOpen: true })
+            return;
+
+        var players = string.Empty;
+        var count = 0;
+        if (_peopleTyping.TryGetValue(_mentorWindow.SelectedPlayer, out var typing))
+        {
+            players = string.Join(", ", typing.People);
+            count = typing.People.Count;
+        }
+
+        var msg = new FormattedMessage();
+        msg.PushColor(Color.LightGray);
+        var text = count == 0
+            ? string.Empty
+            : Loc.GetString("bwoink-system-typing-indicator",
+                ("players", players),
+                ("count", count));
+
+        msg.AddText(text);
+        msg.Pop();
+
+        _mentorWindow.TypingIndicator.SetMessage(msg);
     }
 }
