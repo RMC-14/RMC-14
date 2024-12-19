@@ -102,27 +102,12 @@ public sealed class MentorManager : IPostInjectInit
 
     private void OnDeMentor(DeMentorMsg message)
     {
-        if (!_player.TryGetSessionById(message.MsgChannel.UserId, out var session) ||
-            !_activeMentors.Contains(session))
-        {
-            return;
-        }
-
-        _activeMentors.Remove(session);
-        SendMentorStatus(session);
+        DeMentor(message.MsgChannel.UserId);
     }
 
     private void OnReMentor(ReMentorMsg message)
     {
-        if (!_player.TryGetSessionById(message.MsgChannel.UserId, out var session) ||
-            !_mentors.TryGetValue(session.UserId, out var mentor) ||
-            !mentor)
-        {
-            return;
-        }
-
-        _activeMentors.Add(session);
-        SendMentorStatus(session);
+        ReMentor(message.MsgChannel.UserId);
     }
 
     private void SendMentorStatus(ICommonSession player)
@@ -175,6 +160,41 @@ public sealed class MentorManager : IPostInjectInit
                 _log.RootSawmill.Error($"Error sending mentor help message:\n{e}");
             }
         }
+    }
+
+    public bool IsMentor(NetUserId player)
+    {
+        return _mentors.TryGetValue(player, out var mentor) && mentor;
+    }
+
+    public IEnumerable<string> GetActiveMentors()
+    {
+        return _activeMentors.Select(m => m.Name);
+    }
+
+    public void ReMentor(NetUserId user)
+    {
+        if (!_player.TryGetSessionById(user, out var session) ||
+            !_mentors.TryGetValue(session.UserId, out var mentor) ||
+            !mentor)
+        {
+            return;
+        }
+
+        _activeMentors.Add(session);
+        SendMentorStatus(session);
+    }
+
+    public void DeMentor(NetUserId user)
+    {
+        if (!_player.TryGetSessionById(user, out var session) ||
+            !_activeMentors.Contains(session))
+        {
+            return;
+        }
+
+        _activeMentors.Remove(session);
+        SendMentorStatus(session);
     }
 
     void IPostInjectInit.PostInject()
