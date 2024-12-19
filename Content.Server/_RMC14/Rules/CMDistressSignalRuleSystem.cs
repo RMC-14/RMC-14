@@ -1,5 +1,4 @@
 using System.Linq;
-using System.Reactive.Linq;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Stations;
@@ -55,7 +54,6 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
-using Content.Shared.Roles.Jobs;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -85,7 +83,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly XenoHiveSystem _hive = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly ItemCamouflageSystem _camo = default!;
-    [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly MarineSystem _marines = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
@@ -118,7 +115,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private readonly HashSet<string> _operationPrefixes = new();
     private readonly HashSet<string> _operationSuffixes = new();
 
-    private string _planetMaps = default!;
     private float _marinesPerXeno;
     private bool _autoBalance;
     private float _autoBalanceStep;
@@ -136,18 +132,18 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private EntityQuery<HyperSleepChamberComponent> _hyperSleepChamberQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
 
-    private readonly Queue<string> _lastPlanetMaps = new();
+    private readonly Queue<EntProtoId<RMCPlanetMapPrototypeComponent>> _lastPlanetMaps = new();
 
     [ViewVariables]
-    private string? SelectedPlanetMap { get; set; }
+    private RMCPlanet? SelectedPlanetMap { get; set; }
 
     [ViewVariables]
-    public string? SelectedPlanetMapName { get; private set; }
+    public string? SelectedPlanetMapName => SelectedPlanetMap?.Proto.Name;
 
     [ViewVariables]
     public string? OperationName { get; private set; }
 
-    private Dictionary<string, int> _carryoverVotes = new();
+    private readonly Dictionary<EntProtoId<RMCPlanetMapPrototypeComponent>, int> _carryoverVotes = new();
 
     public override void Initialize()
     {
@@ -173,7 +169,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         SubscribeLocalEvent<XenoEvolutionGranterComponent, MapInitEvent>(OnMapInit);
 
-        Subs.CVar(_config, RMCCVars.RMCPlanetMaps, v => _planetMaps = v, true);
         Subs.CVar(_config, RMCCVars.CMMarinesPerXeno, v => _marinesPerXeno = v, true);
         Subs.CVar(_config, RMCCVars.RMCAutoBalance, v => _autoBalance = v, true);
         Subs.CVar(_config, RMCCVars.RMCAutoBalanceStep, v => _autoBalanceStep = v, true);
@@ -187,8 +182,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCUseCarryoverVoting, v => _useCarryoverVoting = v, true);
 
         ReloadPrototypes();
-
-        _carryoverVotes = _planetMaps.Split(",").ToDictionary(k => k, _ => 0);
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
@@ -569,11 +562,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             return;
         }
 
-        if (SelectedPlanetMap != null &&
-            _rmcPlanet.PlanetPaths.TryGetValue(SelectedPlanetMap, out var planet))
-        {
-            _camo.CurrentMapCamouflage = planet.Camouflage;
-        }
+        if (SelectedPlanetMap != null)
+            _camo.CurrentMapCamouflage = SelectedPlanetMap.Value.Comp.Camouflage;
     }
 
     private void OnPlayerSpawning(PlayerSpawningEvent ev)
@@ -931,13 +921,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         //Just in case the planet was not selected before now
         var planet = SelectRandomPlanet();
-        _lastPlanetMaps.Enqueue(planet);
+        _lastPlanetMaps.Enqueue(planet.Proto.ID);
         while (_lastPlanetMaps.Count > 0 && _lastPlanetMaps.Count > _mapVoteExcludeLast)
         {
             _lastPlanetMaps.Dequeue();
         }
 
-        if (!_mapLoader.TryLoad(mapId, planet, out var grids))
+        if (!_mapLoader.TryLoad(mapId, planet.Comp.Map.ToString(), out var grids))
             return false;
 
         var map = _mapManager.GetMapEntityId(mapId);
@@ -1202,10 +1192,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         {
             component.AresMapDone = true;
 
-            if (SelectedPlanetMap != null &&
-                _rmcPlanet.PlanetPaths.TryGetValue(SelectedPlanetMap, out var planet))
+            if (SelectedPlanetMap != null)
             {
-                _marineAnnounce.AnnounceARES(default, planet.Announcement, announcement: "rmc-announcement-ares-map");
+                var announcement = SelectedPlanetMap.Value.Comp.Announcement;
+                _marineAnnounce.AnnounceARES(default, announcement, announcement: "rmc-announcement-ares-map");
             }
         }
 
@@ -1236,39 +1226,19 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         }
     }
 
-    private string SelectRandomPlanet()
+    private RMCPlanet SelectRandomPlanet()
     {
         if (SelectedPlanetMap != null)
-            return SelectedPlanetMap;
+            return SelectedPlanetMap.Value;
 
-        SelectedPlanetMap = _random.Pick(_planetMaps.Split(","));
-        SelectedPlanetMapName = GetPlanetName(SelectedPlanetMap);
-
-        return SelectedPlanetMap;
+        var planet = _random.Pick(_rmcPlanet.GetCandidates());
+        SelectedPlanetMap = planet;
+        return planet;
     }
 
     private void ResetSelectedPlanet()
     {
         SelectedPlanetMap = null;
-        SelectedPlanetMapName = null;
-    }
-
-    private string GetPlanetName(string planet)
-    {
-        // TODO RMC14 save these somewhere and avert the shitcode
-        var name = planet.Replace("/Maps/_RMC14/", "").Replace(".yml", "");
-        return name switch
-        {
-            "lv624" => "LV-624",
-            "solaris" => "Solaris Ridge",
-            "prison" => "Fiorina Science Annex",
-            "shiva" => "Shivas Snowball",
-            "trijent" => "Trijent Dam",
-            "varadero" => "New Varadero",
-            "kutjevo" => "Kutjevo Refinery",
-            "chances" => "LV-522 Chance's Claim",
-            _ => name,
-        };
     }
 
     private void StartPlanetVote()
@@ -1276,20 +1246,32 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         if (!_config.GetCVar(RMCCVars.RMCPlanetMapVote))
             return;
 
-        var planets = _planetMaps.Split(",").ToList();
+        var planets = _rmcPlanet.GetCandidates();
         if (!_useCarryoverVoting)
         {
             foreach (var planet in planets)
             {
-                _carryoverVotes[planet] = 0;
+                _carryoverVotes[planet.Proto.ID] = 0;
             }
         }
-        planets.RemoveAll(p => _lastPlanetMaps.Contains(p));
+
+        planets.RemoveAll(p => _lastPlanetMaps.Contains(p.Proto.ID));
+
+        var options = new List<(string text, object data)>();
+        foreach (var planet in planets)
+        {
+            var name = planet.Proto.Name;
+            var votes = _carryoverVotes.GetValueOrDefault(planet.Proto.ID);
+            if (votes > 0)
+                name = $"{name} [+{votes}]";
+
+            options.Add((name, planet.Comp.Map.ToString()));
+        }
 
         var vote = new VoteOptions
         {
             Title = Loc.GetString("rmc-distress-signal-next-map-title"),
-            Options = planets.Select(p => ((string, object))(_carryoverVotes[p] > 0 ? $"{GetPlanetName(p)} [+{_carryoverVotes[p]}]" : GetPlanetName(p), p)).ToList(),
+            Options = options,
             Duration = TimeSpan.FromMinutes(2),
         };
         vote.SetInitiatorOrServer(null);
@@ -1297,34 +1279,34 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         var handle = _voteManager.CreateVote(vote);
         handle.OnFinished += (_, args) =>
         {
-            string picked;
+            RMCPlanet picked;
 
             var voteResult = planets.Zip(args.Votes);
-            var adjustedVotes = voteResult.Select(p => (p.Item1, p.Item2 + _carryoverVotes[p.Item1])).ToList();
+            var adjustedVotes = voteResult.Select(p => (p.Item1, p.Item2 + _carryoverVotes.GetValueOrDefault(p.First.Proto.ID))).ToList();
             var maxVotes = adjustedVotes.Max(v => v.Item2);
             var winningMaps = adjustedVotes.Where(item => item.Item2 == maxVotes).Select(item => item.Item1).ToList();
 
             if (winningMaps.Count > 1)
             {
                 picked = _random.Pick(winningMaps);
-                var msg = Loc.GetString("rmc-distress-signal-next-map-tie", ("picked", GetPlanetName(picked)));
+                var msg = Loc.GetString("rmc-distress-signal-next-map-tie", ("picked", picked.Proto.Name));
                 _chatManager.DispatchServerAnnouncement(msg);
             }
             else
             {
                 picked = winningMaps.First();
-                var msg = Loc.GetString("rmc-distress-signal-next-map-win", ("winner", GetPlanetName(picked)));
+                var msg = Loc.GetString("rmc-distress-signal-next-map-win", ("winner", picked.Proto.Name));
                 _chatManager.DispatchServerAnnouncement(msg);
             }
 
             foreach (var (planet, votes) in planets.Zip(args.Votes))
             {
-                _carryoverVotes[planet] = _useCarryoverVoting ? _carryoverVotes[planet] + votes : 0;
+                var id = planet.Proto.ID;
+                _carryoverVotes[id] = _useCarryoverVoting ? _carryoverVotes.GetValueOrDefault(id) + votes : 0;
             }
-            _carryoverVotes[picked] = 0;
 
+            _carryoverVotes[picked.Proto.ID] = 0;
             SelectedPlanetMap = picked;
-            SelectedPlanetMapName = GetPlanetName(picked);
         };
     }
 
@@ -1372,7 +1354,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     /// Sets the hive of all loaded xeno friendly entities (e.g. weeds).
     /// Only makes sense for distress signal with 1 hive, with multiple hives you would need to determine which weeds belong to which hive
     /// </summary>
-    public void SetFriendlyHives(EntityUid hive)
+    private void SetFriendlyHives(EntityUid hive)
     {
         var query = EntityQueryEnumerator<XenoFriendlyComponent>();
         while (query.MoveNext(out var weeds, out _))
