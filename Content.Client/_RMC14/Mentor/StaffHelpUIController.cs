@@ -57,9 +57,21 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         _canReMentor = msg.CanReMentor;
 
         if (_isMentor)
-            _mentorHelpWindow?.Close();
+        {
+            if (_mentorHelpWindow is { IsOpen: true })
+            {
+                _mentorHelpWindow.Close();
+                OpenMentorOrHelpWindow();
+            }
+        }
         else
-            _mentorWindow?.Close();
+        {
+            if (_mentorWindow is { IsOpen: true })
+            {
+                _mentorWindow.Close();
+                OpenMentorOrHelpWindow();
+            }
+        }
     }
 
     private void OnMentorHelpReceived(MentorMessagesReceivedMsg msg)
@@ -146,7 +158,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         UIManager.ClickSound();
 
         if (_unread)
-            _staffHelpWindow.MentorHelpButton.StyleClasses.Add(StyleNano.StyleClassButtonColorRed);
+            _staffHelpWindow.MentorHelpButton.AddStyleClass(StyleNano.StyleClassButtonColorRed);
 
         _staffHelpWindow.AdminHelpButton.OnPressed += _ =>
         {
@@ -157,30 +169,34 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
 
         _staffHelpWindow.MentorHelpButton.OnPressed += _ =>
         {
-            SetAHelpButtonPressed(false);
-            _unread = false;
-            if (_isMentor)
-            {
-                if (OpenWindow(ref _mentorWindow, CreateMentorWindow, () => _mentorWindow = null))
-                {
-                    foreach (var destination in _messages.Keys)
-                    {
-                        MentorAddPlayerButton(destination);
-                    }
-
-                    _mentorWindow.OpenCentered();
-                }
-            }
-            else
-            {
-                if (OpenWindow(ref _mentorHelpWindow, CreateMentorHelpWindow, () => _mentorHelpWindow = null))
-                {
-                    _mentorHelpWindow.OpenCentered();
-                }
-            }
-
+            OpenMentorOrHelpWindow();
             _staffHelpWindow.Close();
         };
+    }
+
+    private void OpenMentorOrHelpWindow()
+    {
+        SetAHelpButtonPressed(false);
+        _unread = false;
+        if (_isMentor)
+        {
+            if (OpenWindow(ref _mentorWindow, CreateMentorWindow, () => _mentorWindow = null))
+            {
+                foreach (var destination in _messages.Keys)
+                {
+                    MentorAddPlayerButton(destination);
+                }
+
+                _mentorWindow.OpenCentered();
+            }
+        }
+        else
+        {
+            if (OpenWindow(ref _mentorHelpWindow, CreateMentorHelpWindow, () => _mentorHelpWindow = null))
+            {
+                _mentorHelpWindow.OpenCentered();
+            }
+        }
     }
 
     private MentorHelpWindow CreateMentorHelpWindow()
