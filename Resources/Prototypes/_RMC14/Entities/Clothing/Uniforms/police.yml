@@ -20,7 +20,7 @@
   description: Standard-issue Military Warden uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/jungle.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/warden/jungle.rsi
   - type: FoldableClothing
     foldedEquippedPrefix: sleeves
 
@@ -144,7 +144,7 @@
   suffix: Desert
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/desert.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/warden/desert.rsi
 
 - type: entity
   parent: CMJumpsuitWarden
@@ -152,7 +152,7 @@
   suffix: Snow
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/snow.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/warden/snow.rsi
 
 - type: entity
   parent: CMJumpsuitWarden
@@ -160,7 +160,7 @@
   suffix: Classic
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/classic.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/warden/classic.rsi
 
 - type: entity
   parent: CMJumpsuitWarden
@@ -168,7 +168,7 @@
   suffix: Urban
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/urban.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/warden/urban.rsi
 
 - type: entity
   parent: CMJumpsuitWO
