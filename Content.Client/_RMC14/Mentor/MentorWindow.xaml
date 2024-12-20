@@ -25,7 +25,13 @@
             <OutputPanel Name="Messages" Access="Public"
                          VerticalExpand="True" />
             <RichTextLabel Name="TypingIndicator" Access="Public" />
-            <LineEdit Name="Chat" Access="Public" HorizontalExpand="True" Editable="False" />
+            <RichTextLabel Name="ClaimIndicator" Access="Public" />
+            <BoxContainer Orientation="Horizontal">
+                <LineEdit Name="Chat" Access="Public" HorizontalExpand="True"
+                          Editable="False" />
+                <Button Name="ClaimButton" Access="Public" Text="Claim"
+                        StyleClasses="OpenBoth" Visible="False" />
+            </BoxContainer>
         </BoxContainer>
     </BoxContainer>
 </controls:MentorWindow>

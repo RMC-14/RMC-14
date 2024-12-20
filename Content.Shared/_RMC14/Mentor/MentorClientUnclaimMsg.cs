@@ -4,19 +4,19 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Mentor;
 
-public sealed class MentorHelpMsg : NetMessage
+public sealed class MentorClientUnclaimMsg : NetMessage
 {
     public override MsgGroups MsgGroup => MsgGroups.Core;
 
-    public string Message = string.Empty;
+    public Guid Destination;
 
     public override void ReadFromBuffer(NetIncomingMessage buffer, IRobustSerializer serializer)
     {
-        Message = buffer.ReadString();
+        Destination = buffer.ReadGuid();
     }
 
     public override void WriteToBuffer(NetOutgoingMessage buffer, IRobustSerializer serializer)
     {
-        buffer.Write(Message);
+        buffer.Write(Destination);
     }
 }

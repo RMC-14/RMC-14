@@ -12,7 +12,7 @@ public sealed class DeMentorCommand : LocalizedCommands
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        if (shell.Player?.UserId is { } user)
-            _mentor.DeMentor(user);
+        if (shell.Player is { } user)
+            _mentor.DeMentor(user.Channel);
     }
 }
