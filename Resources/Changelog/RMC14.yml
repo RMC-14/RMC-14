@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed unholstering your gun with F not working.
-    type: Fix
-  - message: Fixed Russian accent being very difficult for cyrillic language speakers
-      to read, by removing the A to cyrillic D conversion.
-    type: Fix
-  id: 622
-  time: '2024-08-24T12:05:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3818
 - author: Vermidia
   changes:
   - message: CMO now has squad and engi comms
@@ -4990,5 +4980,12 @@
   id: 1121
   time: '2024-12-21T13:35:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5167
+- author: Vermidia
+  changes:
+  - message: Fixed scouts being able to prime smoke and incendiary nades while cloaked
+    type: Fix
+  id: 1122
+  time: '2024-12-21T13:37:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5159
 Name: RMC14
 Order: -1
