@@ -1111,9 +1111,9 @@
       - CMCMO
       choices: { CMWeapon: 1 }
       entries:
-      - id: CMWeaponPistolM1984 # TODO BELT
-      - id: CMWeaponPistolMK80 # TODO BELT
-      - id: RMCWeaponRevolverM44 # TODO BELT
+      - id: RMCM1984BeltFilled
+      - id: RMCMK80BeltFilled
+      - id: RMCM44BeltFilled
         recommended: true
     - name: Combat Equipment (Combat Use Only)
       jobs:
