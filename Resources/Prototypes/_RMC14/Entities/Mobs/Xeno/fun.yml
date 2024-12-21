@@ -1,5 +1,7 @@
 ﻿- type: entity
-  parent: CMXenoRunner
+  parent:
+  - CMXenoRunner
+  - RMCXenoCommendationReceiver
   id: RMCXenoRouny
   name: Rouny
   suffix: RMC14
@@ -14,7 +16,9 @@
     hidden: true
 
 - type: entity
-  parent: CMXenoRunner
+  parent:
+  - CMXenoRunner
+  - RMCXenoCommendationReceiver
   id: RMCXenoWehny
   name: Wehny
   description: A cruel, cruel joke made by some sick individual.

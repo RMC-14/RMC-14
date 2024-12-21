@@ -300,4 +300,10 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCMentorChatVolume =
         CVarDef.Create("rmc.mentor_help_volume", -5f, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
+    public static readonly CVarDef<int> RMCJelliesPerQueen =
+        CVarDef.Create("rmc.jellies_per_queen", 5, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
+    public static readonly CVarDef<int> RMCCommendationMaxLength =
+        CVarDef.Create("rmc.commendation_max_length", 1000, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 }

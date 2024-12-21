@@ -208,6 +208,7 @@
   - type: XenoHeal
   - type: StunOnExplosionReceived
     weak: false
+  - type: CommendationGiver
 
 - type: entity
   id: XenoLeaderPheromoneRelay

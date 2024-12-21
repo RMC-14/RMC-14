@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Server._RMC14.Commendations;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Stations;
@@ -44,6 +45,7 @@ using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
+using Content.Shared.Database;
 using Content.Shared.Fax.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
@@ -74,6 +76,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IBanManager _bans = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private readonly CommendationSystem _commendation = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ContainerSystem _containers = default!;
@@ -857,8 +860,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             if (xenosAlive && !marinesAlive)
             {
-                distress.Result = DistressSignalRuleResult.MajorXenoVictory;
-                EndRound();
+                EndRound(distress, DistressSignalRuleResult.MajorXenoVictory);
                 continue;
             }
 
@@ -867,22 +869,19 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 // TODO RMC14 this should be when the dropship crashes, not if xenos ever boarded
                 if (distress.Hijack)
                 {
-                    distress.Result = DistressSignalRuleResult.MinorXenoVictory;
-                    EndRound();
+                    EndRound(distress, DistressSignalRuleResult.MinorXenoVictory);
                     continue;
                 }
                 else
                 {
-                    distress.Result = DistressSignalRuleResult.MajorMarineVictory;
-                    EndRound();
+                    EndRound(distress, DistressSignalRuleResult.MajorMarineVictory);
                     continue;
                 }
             }
 
             if (!xenosAlive && !marinesAlive)
             {
-                distress.Result = DistressSignalRuleResult.AllDied;
-                EndRound();
+                EndRound(distress, DistressSignalRuleResult.AllDied);
                 continue;
             }
 
@@ -902,15 +901,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (Timing.CurTime >= distress.QueenDiedCheck)
             {
                 if (_xenoEvolution.HasLiving<XenoComponent>(4))
-                {
-                    distress.Result = DistressSignalRuleResult.MinorMarineVictory;
-                    EndRound();
-                }
+                    EndRound(distress, DistressSignalRuleResult.MinorMarineVictory);
                 else
-                {
-                    distress.Result = DistressSignalRuleResult.MajorMarineVictory;
-                    EndRound();
-                }
+                    EndRound(distress, DistressSignalRuleResult.MajorMarineVictory);
             }
         }
     }
@@ -1169,7 +1162,31 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         ref RoundEndTextAppendEvent args)
     {
         base.AppendRoundEndText(uid, component, gameRule, ref args);
-        args.AddLine($"{Loc.GetString($"cm-distress-signal-{component.Result.ToString().ToLower()}")}");
+
+        var result = component.Result ??= DistressSignalRuleResult.None;
+        args.AddLine($"{Loc.GetString($"cm-distress-signal-{result.ToString().ToLower()}")}");
+
+        var commendations = _commendation.GetCommendations();
+        var marineAwards = commendations.Where(c => c.Type == CommendationType.Medal).ToArray();
+        if (marineAwards.Length > 0)
+        {
+            args.AddLine(Loc.GetString("cm-distress-signal-medals"));
+            foreach (var award in marineAwards)
+            {
+                // TODO RMC14 rank
+                args.AddLine($"{award.Receiver} is awarded the {award.Name}: '{award.Text}'");
+            }
+        }
+
+        var xenoAwards = commendations.Where(c => c.Type == CommendationType.Jelly).ToArray();
+        if (xenoAwards.Length > 0)
+        {
+            args.AddLine(Loc.GetString("cm-distress-signal-jellies"));
+            foreach (var award in xenoAwards)
+            {
+                args.AddLine($"{award.Receiver} is awarded the {award.Name}: '{award.Text}' by {award.Giver}");
+            }
+        }
     }
 
     protected override void ActiveTick(EntityUid uid, CMDistressSignalRuleComponent component, GameRuleComponent gameRule, float frameTime)
@@ -1205,6 +1222,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             CheckRoundShouldEnd();
         }
 
+        if (component.EndAtAllClear != null &&
+            time >= component.EndAtAllClear)
+        {
+            _roundEnd.EndRound();
+            return;
+        }
+
         if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
             component.QueenDiedCheck = null;
 
@@ -1214,15 +1238,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         if (time >= component.QueenDiedCheck)
         {
             if (_xenoEvolution.HasLiving<XenoComponent>(4))
-            {
-                component.Result = DistressSignalRuleResult.MinorMarineVictory;
-                EndRound();
-            }
+                EndRound(component, DistressSignalRuleResult.MinorMarineVictory);
             else
-            {
-                component.Result = DistressSignalRuleResult.MajorMarineVictory;
-                EndRound();
-            }
+                EndRound(component, DistressSignalRuleResult.MajorMarineVictory);
         }
     }
 
@@ -1345,9 +1363,30 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         }
     }
 
-    private void EndRound()
+    private void EndRound(CMDistressSignalRuleComponent rule, DistressSignalRuleResult result)
     {
-        _roundEnd.EndRound();
+        if (rule.Result != null)
+            return;
+
+        rule.Result = result;
+        switch (rule.Result)
+        {
+            case DistressSignalRuleResult.MajorMarineVictory:
+                _marineAnnounce.AnnounceRadio(default,
+                    "ARES v3.2 announces, \"Bioscan complete. No unknown lifeform signature detected.\"",
+                    rule.AllClearChannel);
+                _marineAnnounce.AnnounceRadio(default,
+                    "ARES v3.2 announces, \"Saving operational report to archive.\"",
+                    rule.AllClearChannel);
+                _marineAnnounce.AnnounceRadio(default,
+                    "ARES v3.2 announces, \"Commencing final systems scan in 3 minutes.\"",
+                    rule.AllClearChannel);
+                rule.EndAtAllClear ??= Timing.CurTime + rule.AllClearEndDelay;
+                break;
+            default:
+                _roundEnd.EndRound();
+                break;
+        }
     }
 
     /// <summary>

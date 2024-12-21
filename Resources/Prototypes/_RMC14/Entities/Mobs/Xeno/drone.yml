@@ -5,6 +5,7 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoDroneBase
   name: Drone
   description: An alien drone.

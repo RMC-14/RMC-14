@@ -4,6 +4,7 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoDefender
   name: Defender
   description: An alien with an armored crest.
