@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed ammo boxes not being light-attackable with left click.
-    type: Fix
-  - message: Fixed lobby messages not being displayed for players still in the lobby
-      mid-round.
-    type: Fix
-  id: 621
-  time: '2024-08-24T10:49:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3817
-- author: DrSmugleaf
-  changes:
   - message: Fixed unholstering your gun with F not working.
     type: Fix
   - message: Fixed Russian accent being very difficult for cyrillic language speakers
@@ -4993,5 +4983,12 @@
   id: 1120
   time: '2024-12-21T13:24:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5169
+- author: MACMAN2003
+  changes:
+  - message: Demolition specialists no longer get two M5-ATLs
+    type: Fix
+  id: 1121
+  time: '2024-12-21T13:35:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5167
 Name: RMC14
 Order: -1
