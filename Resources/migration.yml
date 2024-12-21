@@ -912,3 +912,21 @@ CheapLighter: RMCLighter
 
 # 2024-11-28
 ClosetLegal: RMCClosetBlue
+
+
+# 2024-12-14
+WeaponRifleM54C: WeaponRifleM54CCamo
+WeaponRifleM54CE2: WeaponRifleM54CE2Camo
+WeaponRifleM4SPR: WeaponRifleM4SPRCamo
+WeaponSMGM63: WeaponSMGM63Camo
+WeaponShotgunM42A2: WeaponShotgunM42A2Camo
+CMM96SSniperRifle: WeaponM96SSniperRifleCamo
+WeaponLauncherM83: WeaponLauncherM83Camo
+RMCBinoculars: RMCBinocularsCamo
+RMCMortarKit: RMCMortarKitCamo
+ArmorHelmetM10: ArmorHelmetM10Camo
+
+# 2024-12-17
+WeldingFuelTank: RMCTankReagentFuel
+WaterTank: RMCTankReagentWater
+

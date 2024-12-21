@@ -24,6 +24,8 @@
     - id: RMCMagazineSmartGun
     - id: RMCMagazineSmartGun
 
+#have to make camo specific crates, because otherwise the contents will just spill out on spawn
+
 - type: entity
   parent: CMSmartGunOperatorEquipmentCase
   id: CMSmartGunOperatorEquipmentCaseBelt
@@ -38,3 +40,161 @@
     - id: RMCPowerCellSmartgun
     - id: CMArmorSmartGunCombatHarness
     - id: CMBeltSmartGunOperatorFilled
+
+- type: entity
+  parent: CMSmartGunOperatorEquipmentCase
+  id: RMCSGOEquipmentCaseBeltDesert
+  suffix: Desert
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,1
+  - type: StorageFill
+    contents:
+    - id: RMCGlassesSmartGunSight
+    - id: RMCSmartGunDesert
+    - id: RMCPowerCellSmartgun
+    - id: RMCSGHarnessDesert
+    - id: RMCBeltSGODesertFilled
+
+- type: entity
+  parent: CMSmartGunOperatorEquipmentCase
+  id: RMCSGOEquipmentCaseBeltSnow
+  suffix: Snow
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,1
+  - type: StorageFill
+    contents:
+    - id: RMCGlassesSmartGunSight
+    - id: RMCSmartGunSnow
+    - id: RMCPowerCellSmartgun
+    - id: RMCSGHarnessSnow
+    - id: RMCBeltSGOSUFilled
+
+- type: entity
+  parent: CMSmartGunOperatorEquipmentCase
+  id: RMCSGOEquipmentCaseBeltClassic
+  suffix: Classic
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,1
+  - type: StorageFill
+    contents:
+    - id: RMCGlassesSmartGunSight
+    - id: RMCSmartGunClassic
+    - id: RMCPowerCellSmartgun
+    - id: RMCSGHarnessClassic
+    - id: CMBeltSmartGunOperatorFilled
+
+- type: entity
+  parent: CMSmartGunOperatorEquipmentCase
+  id: RMCSGOEquipmentCaseBeltUrban
+  suffix: Urban
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,1
+  - type: StorageFill
+    contents:
+    - id: RMCGlassesSmartGunSight
+    - id: RMCSmartGunUrban
+    - id: RMCPowerCellSmartgun
+    - id: RMCSGHarnessUrban
+    - id: RMCBeltSGOSUFilled
+
+- type: entity
+  parent: RMCBaseEquipmentCase
+  id: RMCSGOEquipmentCaseBeltCamo
+  name: ML66A smart gun system case
+  description: "A large case containing an ML66A Smartgun, ML66A combat harness, head mounted sight and powerpack.\n\nNOTE: You cannot put items back inside this case."
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    overrideStorageReplace: true
+    camouflageVariations:
+      Jungle: CMSmartGunOperatorEquipmentCaseBelt
+      Snow: RMCSGOEquipmentCaseBeltSnow
+      Desert: RMCSGOEquipmentCaseBeltDesert
+      Classic: RMCSGOEquipmentCaseBeltClassic
+      Urban: RMCSGOEquipmentCaseBeltUrban
+
+- type: entity
+  parent: RMCBaseEquipmentCase
+  id: RMCSGOEquipmentCaseCamo
+  name: ML66A smart gun system case
+  description: "A large case containing an ML66A Smartgun, ML66A combat harness, head mounted sight and powerpack.\n\nNOTE: You cannot put items back inside this case."
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    overrideStorageReplace: true
+    camouflageVariations:
+      Jungle: CMSmartGunOperatorEquipmentCase
+      Snow: RMCSGOEquipmentCaseSnow
+      Desert: RMCSGOEquipmentCaseDesert
+      Classic: RMCSGOEquipmentCaseClassic
+      Urban: RMCSGOEquipmentCaseUrban
+
+- type: entity
+  parent: CMSmartGunOperatorEquipmentCase
+  id: RMCSGOEquipmentCaseDesert
+  suffix: Desert
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGlassesSmartGunSight
+    - id: RMCSmartGunDesert
+    - id: RMCPowerCellSmartgun
+    - id: RMCSGHarnessDesert
+    - id: RMCMagazineSmartGunDesert
+    - id: RMCMagazineSmartGunDesert
+    - id: RMCMagazineSmartGunDesert
+
+- type: entity
+  parent: CMSmartGunOperatorEquipmentCase
+  id: RMCSGOEquipmentCaseSnow
+  suffix: Snow
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGlassesSmartGunSight
+    - id: RMCSmartGunSnow
+    - id: RMCPowerCellSmartgun
+    - id: RMCSGHarnessSnow
+    - id: RMCMagazineSmartGunSnow
+    - id: RMCMagazineSmartGunSnow
+    - id: RMCMagazineSmartGunSnow
+
+- type: entity
+  parent: CMSmartGunOperatorEquipmentCase
+  id: RMCSGOEquipmentCaseClassic
+  suffix: Classic
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGlassesSmartGunSight
+    - id: RMCSmartGunClassic
+    - id: RMCPowerCellSmartgun
+    - id: RMCSGHarnessClassic
+    - id: RMCMagazineSmartGunClassic
+    - id: RMCMagazineSmartGunClassic
+    - id: RMCMagazineSmartGunClassic
+
+- type: entity
+  parent: CMSmartGunOperatorEquipmentCase
+  id: RMCSGOEquipmentCaseUrban
+  suffix: Urban
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGlassesSmartGunSight
+    - id: RMCSmartGunUrban
+    - id: RMCPowerCellSmartgun
+    - id: RMCSGHarnessUrban
+    - id: RMCMagazineSmartGunUrban
+    - id: RMCMagazineSmartGunUrban
+    - id: RMCMagazineSmartGunUrban
+
+

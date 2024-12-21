@@ -46,7 +46,10 @@
   description: A single Tarback cigar in a protective metal tube. About as low-end as you can get. Rolled in Columbia.
   components:
   - type: Item
-    size: Normal
+    size: Small
+  - type: Clothing
+    slots:
+    - belt
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigars/tarback_tube.rsi
     state: tarbacktube_empty

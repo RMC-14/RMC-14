@@ -54,9 +54,6 @@
     - ActionXenoManageHive
 #    - ActionXenoRoyalJelly
 #    - ActionXenoMarkResin
-    # Mature
-#    - ActionXenoSpit
-#    - ActionXenoToggleSpitType
     tier: 0
     bypassTierCount: true
     unlockAt: 0
@@ -96,6 +93,7 @@
     chance: 0.55
     stunMin: 5
     stunMax: 6
+  - type: TunnelRenamer
   - type: Fixtures
     fixtures:
       fix1:
@@ -173,8 +171,11 @@
     deadThreshold: 1100
     addComponents:
     - type: XenoScreech
+    - type: XenoToggleSpit
     addActions:
     - ActionXenoScreech
+    - ActionXenoSpitQueen
+    - ActionXenoToggleSpitType
   - type: RMCSize
     size: Immobile
   - type: RMCXenoDamageVisuals
@@ -207,6 +208,9 @@
   - type: XenoHeal
   - type: StunOnExplosionReceived
     weak: false
+  - type: XenoSpit
+    projectileId: XenoQueenNeuroSpitProjectile
+    plasmaCost: 50
 
 - type: entity
   id: XenoLeaderPheromoneRelay

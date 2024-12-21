@@ -39,6 +39,13 @@ rmc-xeno-gardener-description = You trade your choice of resin secretions, corro
   - Speed up the growth of your fruits.
 rmc-xeno-gardener-popup = The glory of gardening: hands in the weeds, head in the dark, heart with resin.
 
+rmc-xeno-healer-name = Healer
+rmc-xeno-healer-description = You lose your choice of resin secretions, a chunk of your slash damage, and you will experience a slighty-increased difficulty in tackling hosts in exchange for strong pheromones, and the ability to heal your sisters wounds.
+    You gain the ability to:
+    - Plant up to 3 lesser resin fruits
+    - Heal sisters by using plasma and some of your health.
+rmc-xeno-healer-popup = Divided we fall, united we win. We live for the hive, we die for the hive.
+
 rmc-xeno-resin-whisperer-name = Resin Whisperer
 rmc-xeno-resin-whisperer-description = You lose your corrosive acid, your ability to secrete thick resin, your ability to reinforce resin secretions, sacrifice your ability to plant weed nodes outside of weeds, and you sacrifice a fifth of your plasma reserves to enhance your vision and gain a stronger connection to the resin. You can now remotely place resin secretions including weed nodes up to a distance of twelve paces!
   You gain the ability to:

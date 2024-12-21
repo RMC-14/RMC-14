@@ -21,7 +21,7 @@ public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
             args.Show = true;
     }
 
-    public override bool Ignite(Entity<FlammableComponent?> flammable, int intensity, int duration, int? maxStacks)
+    public override bool Ignite(Entity<FlammableComponent?> flammable, int intensity, int duration, int? maxStacks, bool igniteDamage = true)
     {
         base.Ignite(flammable, intensity, duration, maxStacks);
 

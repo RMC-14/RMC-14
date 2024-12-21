@@ -2,15 +2,16 @@
   parent: CMBaseWeaponRifle
   name: XM88 Heavy Rifle
   id: WeaponRifleXM88
-  description: An experimental man-portable anti-material rifle chambered in .458 SOCOM. It must be manually chambered for every shot.
+  suffix: Desert
+  description: An experimental man-portable anti-materiel rifle chambered in .458 SOCOM. It must be manually chambered for every shot.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/desert.rsi
     layers:
-    - state: base
+    - state: icon
       map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/desert.rsi
   - type: Gun
     fireRate: 0.8
     shotsPerBurst: 1
@@ -33,8 +34,10 @@
   - type: WieldDelay
     baseDelay: 0.4
   - type: WieldableSpeedModifiers
-    baseWalk: 0.92
-    baseSprint: 0.87
+    base: 0.725
+    light: 1
+    medium: 1
+    heavy: 1
   - type: PumpAction
     sound:
       path: /Audio/_RMC14/Weapons/Guns/Pump/gun_boomslang_lever.ogg
@@ -77,10 +80,76 @@
           - RMCAttachmentXM88Stock
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.76, 0.0
-      rmc-aslot-rail: -0.1, 0.13
+      rmc-aslot-barrel: 0.59375, 0.0
+      rmc-aslot-rail: -0.15625, 0.15625
       rmc-aslot-underbarrel: 0.24, -0.3
-      rmc-aslot-stock: -0.485, 0.0285
+      rmc-aslot-stock: -0.5625, 0.03125
+
+#camo variants
+- type: entity
+  parent: WeaponRifleXM88
+  id: WeaponRifleXM88Camo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: WeaponRifleXM88Jungle
+      Snow: WeaponRifleXM88Snow
+      Desert: WeaponRifleXM88
+      Urban: WeaponRifleXM88Urban
+      Classic: WeaponRifleXM88Classic
+
+- type: entity
+  parent: WeaponRifleXM88
+  id: WeaponRifleXM88Snow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/snow.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/snow.rsi
+
+- type: entity
+  parent: WeaponRifleXM88
+  id: WeaponRifleXM88Jungle
+  suffix: Jungle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/jungle.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/jungle.rsi
+
+- type: entity
+  parent: WeaponRifleXM88
+  id: WeaponRifleXM88Urban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/urban.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/urban.rsi
+
+- type: entity
+  parent: WeaponRifleXM88
+  id: WeaponRifleXM88Classic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/classic.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/classic.rsi
 
 - type: entity
   parent: BulletRifle10x24mm

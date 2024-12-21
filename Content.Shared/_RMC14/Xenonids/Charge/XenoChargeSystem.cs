@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Animation;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
@@ -31,6 +32,7 @@ public sealed class XenoChargeSystem : EntitySystem
     [Dependency] private readonly XenoAnimationsSystem _xenoAnimations = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
@@ -77,11 +79,12 @@ public sealed class XenoChargeSystem : EntitySystem
         if (args.Cancelled)
             return;
 
+        _rmcPulling.TryStopAllPullsFromAndOn(xeno);
+
         var coordinates = GetCoordinates(args.Coordinates);
         var origin = _transform.GetMapCoordinates(xeno);
         var diff = _transform.ToMapCoordinates(coordinates).Position - origin.Position;
-        var length = diff.Length();
-        diff *= xeno.Comp.Range / length;
+        diff = diff.Normalized() * xeno.Comp.Range;
 
         xeno.Comp.Charge = diff;
         Dirty(xeno);
@@ -119,11 +122,12 @@ public sealed class XenoChargeSystem : EntitySystem
             _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { targetId }, filter);
         }
 
+        _rmcPulling.TryStopAllPullsFromAndOn(targetId);
+
         var origin = _transform.GetMapCoordinates(xeno);
         var target = _transform.GetMapCoordinates(targetId);
         var diff = target.Position - origin.Position;
-        var length = diff.Length();
-        diff *= xeno.Comp.Range / 3 / length;
+        diff = diff.Normalized() * xeno.Comp.Range;
 
         _stun.TryParalyze(targetId, xeno.Comp.StunTime, true);
         _throwing.TryThrow(targetId, diff, 10);

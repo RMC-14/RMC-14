@@ -28,7 +28,8 @@
   - type: Clickable
   - type: InteractionOutline
   - type: PointLight
-    radius: 2
+    radius: 5
+    color: "#bf6d02"
   - type: EffectVisuals
   - type: Tag
     tags:
@@ -42,6 +43,7 @@
     damage:
       types:
         Heat: 45
+    ignoreResistances: true
   - type: TileFire
     id: RMCTileFire
     extinguishInstantly: true
@@ -55,6 +57,9 @@
           Three: { state: red_3 }
           Four: { state: red_4 }
   - type: IgnorePredictionHit
+  - type: RMCScorchEffectOnSpawn
+    decalTag: burnt
+    tileLimit: 3
 
 - type: entity
   parent: RMCTileFire
@@ -64,6 +69,8 @@
     layers:
     - map: [ "base" ]
       state: green_4
+  - type: PointLight
+    color: "#069420"
   - type: RMCIgniteOnCollide
     maxStacks: 10
     tileDamage:
@@ -98,6 +105,8 @@
     layers:
     - map: [ "base" ]
       state: white_4
+  - type: PointLight
+    color: "#8fcbeb"
   - type: RMCIgniteOnCollide
     intensity: 80
     duration: 70

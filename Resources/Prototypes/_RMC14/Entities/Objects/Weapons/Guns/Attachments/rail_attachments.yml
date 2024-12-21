@@ -430,10 +430,11 @@
   parent: RMCAttachmentScopeBase
   id: RMCAttachmentXS-9
   name: XS-9 targeting relay
+  suffix: Desert
   description: While still in development, the XS-9 Targeting Relay has many features -- most of them disabled for the field testing -- functions slightly better than a standard scope.
   components:
   - type: Sprite
-    state: miniscope
+    state: d_boomslang-scope
   - type: Tag
     tags:
     - RMCAttachmentRail
@@ -443,7 +444,7 @@
     breakOnMove: false
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
-      state: boomslang-scope
+      state: d_boomslang-scope
     actionName: Look through the XS-9 Scope
     actionDesc: A mostly disabled XS-9, it still functions as a scope though.
   - type: AttachableToggleableSimpleActivate

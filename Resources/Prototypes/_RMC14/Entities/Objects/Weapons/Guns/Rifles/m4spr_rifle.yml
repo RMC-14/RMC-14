@@ -2,12 +2,13 @@
   parent: CMBaseWeaponRifle
   name: M4SPR battle rifle
   id: WeaponRifleM4SPR
+  suffix: Desert
   description: The M4SPR battle rifle is a designated marksman rifle in service with the Marine. Sporting a bullpup configuration, the M4SPR battle rifle is perfect for reconnaissance and fire support teams.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/desert.rsi
     layers:
-    - state: base
+    - state: bolt-open
       map: [ "enum.GunVisualLayers.Base" ]
     - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
       state: d_m4spr_barrel
@@ -15,7 +16,7 @@
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/desert.rsi
   - type: Gun
     shotsPerBurst: 0
     selectedMode: SemiAuto
@@ -37,8 +38,10 @@
   - type: WieldDelay
     baseDelay: 0.2
   - type: WieldableSpeedModifiers
-    baseWalk: 0.92
-    baseSprint: 0.86
+    base: 0.725
+    light: 1
+    medium: 1
+    heavy: 1
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -84,6 +87,111 @@
       rmc-aslot-barrel: 1.18, 0.0
       rmc-aslot-rail: 0.225, 0.125
       rmc-aslot-underbarrel: 0.62, -0.31
+
+- type: entity
+  parent: WeaponRifleM4SPR
+  id: WeaponRifleM4SPRFilled
+  suffix: Filled
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: CMMagazineRifleM4SPR
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/l42_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM4SPR
+          - CMMagazineRifleM4SPRAP
+          - CMMagazineRifleM4SPRExt
+
+#camo variants
+- type: entity
+  parent: WeaponRifleM4SPR
+  id: WeaponRifleM4SPRCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: WeaponRifleM4SPRJungle
+      Desert: WeaponRifleM4SPR
+      Snow: WeaponRifleM4SPRSnow
+      Classic: WeaponRifleM4SPRClassic
+      Urban: WeaponRifleM4SPRUrban
+
+- type: entity
+  parent: WeaponRifleM4SPR
+  id: WeaponRifleM4SPRJungle
+  suffix: Jungle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/jungle.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: m4spr_barrel
+      offset: 0.65, 0
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/jungle.rsi
+
+- type: entity
+  parent: WeaponRifleM4SPR
+  id: WeaponRifleM4SPRSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/snow.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: s_m4spr_barrel
+      offset: 0.65, 0
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/snow.rsi
+
+- type: entity
+  parent: WeaponRifleM4SPR
+  id: WeaponRifleM4SPRClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/classic.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: c_m4spr_barrel
+      offset: 0.65, 0
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/classic.rsi
+
+- type: entity
+  parent: WeaponRifleM4SPR
+  id: WeaponRifleM4SPRUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/urban.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: u_m4spr_barrel
+      offset: 0.65, 0
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/urban.rsi
 
 - type: entity
   parent: CMMagazineRifleBase

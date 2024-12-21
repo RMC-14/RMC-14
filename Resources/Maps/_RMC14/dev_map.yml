@@ -1734,6 +1734,18 @@ entities:
         -3,-17: RMCAreaAlmayerLifeboatPumpsNorth2
         -4,-16: RMCAreaAlmayerLifeboatPumpsNorth2
         -4,-17: RMCAreaAlmayerLifeboatPumpsNorth2
+    - type: Dropship
+      crashWarningSound: !type:SoundPathSpecifier
+        params:
+          volume: -5
+        path: /Audio/_RMC14/Announcements/ARES/dropship_emergency.ogg
+      attachmentPoints: []
+      marineHijackSound: !type:SoundPathSpecifier
+        params:
+          volume: -5
+        path: /Audio/_RMC14/Announcements/ARES/hijack.ogg
+      localHijackSound: !type:SoundPathSpecifier
+        path: /Audio/_RMC14/Machines/Shuttle/queen_alarm.ogg
 - proto: AirlockExternal
   entities:
   - uid: 3
@@ -3692,7 +3704,7 @@ entities:
       pos: 13.5,10.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -6659.2544
+      secondsUntilStateChange: -6704.6123
       state: Opening
   - uid: 400
     components:
@@ -3771,8 +3783,11 @@ entities:
   - uid: 413
     components:
     - type: Transform
+      anchored: False
       pos: -6.5,-5.5
-      parent: 2
+      parent: 179
+    - type: Physics
+      bodyType: Dynamic
 - proto: CMApcLowCapacity
   entities:
   - uid: 1338
@@ -9102,6 +9117,17 @@ entities:
     - type: Transform
       pos: -6.5,-8.5
       parent: 2
+- proto: RMCDropshipAttachmentMedevac
+  entities:
+  - uid: 1375
+    components:
+    - type: Transform
+      pos: -7.5,-5.5
+      parent: 2
+    - type: UseDelay
+      delays:
+        medevac_system_delay:
+          length: 3
 - proto: RMCFlashlight
   entities:
   - uid: 1267
@@ -9497,6 +9523,13 @@ entities:
     components:
     - type: Transform
       pos: -6.5,-1.5
+      parent: 2
+- proto: RMCUtilityAttachmentPoint
+  entities:
+  - uid: 1374
+    components:
+    - type: Transform
+      pos: -6.5,-5.5
       parent: 2
 - proto: RMCWeaponLauncherM5ATL
   entities:
