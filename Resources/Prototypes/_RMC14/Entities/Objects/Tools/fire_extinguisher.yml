@@ -11,6 +11,7 @@
     sprite: _RMC14/Objects/fire_extinguisher.rsi
   - type: Spray
     transferAmount: 5
+    sprayedPrototype: RMCExtinguisherSpray
   - type: SolutionContainerManager
     solutions:
       spray:
@@ -71,3 +72,10 @@
     - CMFireExtinguisherPortable
   - type: Clothing
     sprite: _RMC14/Objects/fire_extinguisher_mini.rsi
+
+- type: entity
+  parent: ExtinguisherSpray
+  id: RMCExtinguisherSpray
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Undisposable
