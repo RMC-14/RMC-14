@@ -26,6 +26,7 @@
   minimapBackground:
    sprite: _RMC14/Interface/map_blips.rsi
    state: xeno_ruler
+  jobEntity: CMXenoQueen
 
 - type: playTimeTracker
   id: CMJobXenoQueen

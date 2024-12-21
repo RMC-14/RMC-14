@@ -4,6 +4,7 @@
   name: cm-job-name-selectable-xenonid
   playTimeTracker: CMJobSelectableXeno
   hidden: false
+  jobEntity: CMXenoLarva
 
 - type: playTimeTracker
   id: CMJobSelectableXeno
