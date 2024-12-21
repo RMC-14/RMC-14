@@ -1,37 +1,4 @@
 ﻿Entries:
-- author: Lank
-  changes:
-  - message: Scout now hides external markings (wings, frills, tails, etc.) while
-      cloaked, and is slightly less visible overall.
-    type: Tweak
-  - message: Scout's A19 magazines now have a unique sprite.
-    type: Tweak
-  - message: Scout is now correctly not decloaked by acid spit.
-    type: Fix
-  id: 613
-  time: '2024-08-24T07:06:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3743
-- author: FungiFellow
-  changes:
-  - message: Infiltrator Boots are now part of WS Scout Kit
-    type: Add
-  id: 614
-  time: '2024-08-24T07:07:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3740
-- author: KalimbaMachine
-  changes:
-  - message: Added SEA Equipment and Gun Racks!
-    type: Add
-  id: 615
-  time: '2024-08-24T07:12:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3791
-- author: DrSmugleaf
-  changes:
-  - message: Hopefully fix an error that makes some round starts lag to death.
-    type: Fix
-  id: 616
-  time: '2024-08-24T07:20:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3813
 - author: DrSmugleaf
   changes:
   - message: Fixed being able to build and anchor constructions on stairs.
@@ -4993,5 +4960,37 @@
   id: 1112
   time: '2024-12-21T13:17:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5182
+- author: CyberTropic
+  changes:
+  - message: Added festive meals!
+    type: Add
+  id: 1113
+  time: '2024-12-21T13:21:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5177
+- author: MACMAN2003
+  changes:
+  - message: Roundstart guns are now appropriately camouflaged.
+    type: Fix
+  - message: The staff officer vendor now vends camouflaged items.
+    type: Fix
+  - message: The cap that the loadout gives is now camouflaged.
+    type: Fix
+  id: 1114
+  time: '2024-12-21T13:21:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5130
+- author: Tunguso4ka
+  changes:
+  - message: Added trash bag in Maintenance Technician set.
+    type: Add
+  id: 1115
+  time: '2024-12-21T13:19:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5178
+- author: FungiFellow
+  changes:
+  - message: Gave D18 an Additional Mag and Disabled Auto-Eject
+    type: Tweak
+  id: 1116
+  time: '2024-12-21T13:20:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5184
 Name: RMC14
 Order: -1
