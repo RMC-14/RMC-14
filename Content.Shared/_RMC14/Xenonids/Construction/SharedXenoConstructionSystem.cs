@@ -14,6 +14,7 @@ using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Atmos;
+using Content.Shared.Coordinates;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Database;
@@ -111,8 +112,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<HiveConstructionNodeComponent, ExaminedEvent>(OnHiveConstructionNodeExamined);
         SubscribeLocalEvent<HiveConstructionNodeComponent, ActivateInWorldEvent>(OnHiveConstructionNodeActivated);
 
-        SubscribeLocalEvent<HiveCoreComponent, MapInitEvent>(OnHiveCoreMapInit);
-
         SubscribeLocalEvent<XenoConstructionSupportComponent, ComponentRemove>(OnCheckAdjacentCollapse);
         SubscribeLocalEvent<XenoConstructionSupportComponent, EntityTerminatingEvent>(OnCheckAdjacentCollapse);
 
@@ -133,7 +132,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnConstructMapInit(Entity<XenoConstructComponent> ent, ref MapInitEvent args)
     {
-        if (!ent.Comp.DestroyWeeds)
+        if (!ent.Comp.DestroyWeedNodes)
             return;
 
         var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(ent);
@@ -142,7 +141,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             if (TerminatingOrDeleted(uid) || EntityManager.IsQueuedForDeletion(uid))
                 continue;
 
-            if (!_xenoWeedsQuery.HasComp(uid))
+            if (!_xenoWeedsQuery.TryComp(uid, out var weedComp) || !weedComp.IsSource)
                 continue;
 
             QueueDel(uid);
@@ -438,6 +437,22 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
+        if (!_transformQuery.TryComp(xeno.Owner, out var xform) ||
+            _transform.GetGrid((xeno.Owner, xform)) is not { Valid: true } gridId ||
+            !TryComp(gridId, out MapGridComponent? grid))
+        {
+            return;
+        }
+
+        if (!HasComp<HiveConstructionRequiresHiveWeedsComponent>(target) && _xenoWeeds.IsOnHiveWeeds((gridId, grid), target.ToCoordinates()))
+        {
+            _popup.PopupClient(
+                Loc.GetString("rmc-xeno-construction-requires-hive-weeds", ("choice", target)),
+                target,
+                args.User);
+            return;
+        }
+
         if (_net.IsClient)
             return;
 
@@ -445,27 +460,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var hive = _hive.GetHive(target);
         _hive.SetHive(spawn, hive);
 
-        _adminLogs.Add(LogType.RMCXenoOrderConstructionComplete, $"Xeno {ToPrettyString(xeno):xeno} completed construction of {ToPrettyString(target):xeno} which turned into {ToPrettyString(spawn):spawn} at {transform.Coordinates}");
-
         QueueDel(target);
 
-        if (!TryComp<HiveConstructionUniqueComponent>(spawn, out var unique))
-            return;
-
-        var uniques = EntityQueryEnumerator<HiveConstructionUniqueComponent, HiveMemberComponent>();
-        while (uniques.MoveNext(out var uid, out var otherUnique, out var member))
-        {
-            // don't troll other hives or itself
-            if (uid == spawn || member.Hive == hive?.Owner)
-                continue;
-
-            if (otherUnique.Id == unique.Id &&
-                !TerminatingOrDeleted(uid) &&
-                !EntityManager.IsQueuedForDeletion(uid))
-            {
-                QueueDel(uid);
-            }
-        }
+        _adminLogs.Add(LogType.RMCXenoOrderConstructionComplete, $"Xeno {ToPrettyString(xeno):xeno} completed construction of {ToPrettyString(target):xeno} which turned into {ToPrettyString(spawn):spawn} at {transform.Coordinates}");
     }
 
     private void OnActionConstructionChosen(Entity<XenoChooseConstructionActionComponent> xeno, ref XenoConstructionChosenEvent args)
@@ -532,15 +529,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         };
 
         _doAfter.TryStartDoAfter(doAfter);
-    }
-
-    private void OnHiveCoreMapInit(Entity<HiveCoreComponent> ent, ref MapInitEvent args)
-    {
-        if (_net.IsClient)
-            return;
-
-        var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _map);
-        Spawn(ent.Comp.Spawns, coordinates);
     }
 
     private void OnCheckAdjacentCollapse<T>(Entity<XenoConstructionSupportComponent> ent, ref T args)
@@ -727,17 +715,30 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (choice != null &&
             _prototype.TryIndex(choice, out var choiceProto))
         {
-            if (choiceProto.TryGetComponent(out HiveConstructionUniqueComponent? unique, _compFactory) &&
-                OtherUniqueExists(unique.Id))
-            {
-                // server-only as the core may not be in the client's PVS bubble
-                if (_net.IsServer)
-                    _popup.PopupEntity(Loc.GetString("cm-xeno-unique-exists", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
 
+            if (choiceProto.HasComponent<HiveConstructionRequiresHiveWeedsComponent>(_compFactory) && !_xenoWeeds.IsOnHiveWeeds((gridId, grid), target))
+            {
+                if (_net.IsServer)
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-requires-hive-weeds", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
                 return false;
             }
 
-            if (_hive.GetHive(xeno.Owner) is {} hive && hive.Comp.NewCoreAt > _timing.CurTime)
+
+            if (choiceProto.TryGetComponent(out HiveConstructionLimitedComponent? limited, _compFactory) &&
+                !CanPlaceLimitedHiveStructure(xeno.Owner, limited, out var limit))
+            {
+                // server-only as the structure may not be in the client's PVS bubble
+                if (_net.IsServer)
+                    if (limit == 1)
+                        _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-unique-exists", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
+                    else
+                    {
+                        _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-hive-limit-met", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
+                    }
+                return false;
+            }
+
+            if (choiceProto.HasComponent<HiveComponent>(_compFactory) && _hive.GetHive(xeno.Owner) is {} hive && hive.Comp.NewCoreAt > _timing.CurTime)
             {
                 if (_net.IsServer)
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-cant-build-new-yet", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
@@ -749,18 +750,33 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         return true;
     }
 
-    private bool OtherUniqueExists(EntProtoId id)
+    private bool CanPlaceLimitedHiveStructure(EntityUid hiveMember, HiveConstructionLimitedComponent comp, [NotNullWhen(true)] out int? limit)
     {
-        var uniques = EntityQueryEnumerator<HiveConstructionUniqueComponent>();
-        while (uniques.MoveNext(out var otherUnique))
+        limit = null;
+        var id = comp.Id;
+        var hive = _hive.GetHive(hiveMember);
+        if (hive is null)
+        {
+            return false;
+        }
+        if (!_hive.TryGetStructureLimit(hive.Value, id, out var trueLimit))
+        {
+            return false;
+        }
+
+        limit = trueLimit;
+
+        var curCount = 0;
+        var limitedConstructs = EntityQueryEnumerator<HiveConstructionLimitedComponent, HiveMemberComponent>();
+        while (limitedConstructs.MoveNext(out var otherUnique, out var otherHive))
         {
             if (otherUnique.Id == id)
             {
-                return true;
+                curCount++;
             }
         }
 
-        return false;
+        return (limit > curCount);
     }
 
     private bool IsSupported(Entity<MapGridComponent> grid, EntityCoordinates coordinates)
