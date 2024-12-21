@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Xenonids.Animation;
+﻿using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Xenonids.Animation;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
@@ -24,7 +25,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ThrownItemSystem _thrownItem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -61,8 +62,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
 
-        if (TryComp(xeno, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
-            _pulling.TryStopPull(puller.Pulling.Value, pullable, xeno);
+        _rmcPulling.TryStopAllPullsFromAndOn(xeno);
 
         args.Handled = true;
 
@@ -107,6 +107,8 @@ public sealed class XenoHeadbuttSystem : EntitySystem
             var filter = Filter.Pvs(targetId, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
             _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { targetId }, filter);
         }
+
+        _rmcPulling.TryStopAllPullsFromAndOn(targetId);
 
         var origin = _transform.GetMapCoordinates(xeno);
         var target = _transform.GetMapCoordinates(targetId);
