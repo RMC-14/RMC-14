@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: CMO now has squad and engi comms
-    type: Add
-  id: 623
-  time: '2024-08-27T00:16:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3846
 - author: Whisper
   changes:
   - message: Added Darting 'Sleepy' Groth figurine
@@ -4987,5 +4980,12 @@
   id: 1122
   time: '2024-12-21T13:37:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5159
+- author: noctyrnal
+  changes:
+  - message: Added scarves to loadouts.
+    type: Add
+  id: 1123
+  time: '2024-12-21T13:39:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5151
 Name: RMC14
 Order: -1
