@@ -3,7 +3,7 @@
   parent: SeatBase
   id: RMCCouchMid
   name: couch
-  description: Just like Space Ikea would have wanted.
+  description: Just like Spess-kea would have wanted.
   suffix: Mid
   placement:
     mode: SnapgridCenter
