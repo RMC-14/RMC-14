@@ -1,36 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed being able to build and anchor constructions on stairs.
-    type: Fix
-  - message: Lowered the pointing delay back down from 2 seconds to 1 second.
-    type: Tweak
-  id: 617
-  time: '2024-08-24T07:57:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3815
-- author: Tunguso4ka
-  changes:
-  - message: North of Solaris Marshal's now have cave wall.
-    type: Add
-  id: 618
-  time: '2024-08-24T08:02:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3765
-- author: Whisper
-  changes:
-  - message: Added Lance Victors figurine.
-    type: Add
-  id: 619
-  time: '2024-08-24T08:04:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3814
-- author: DrSmugleaf
-  changes:
-  - message: Added Bred Dahne figurine.
-    type: Add
-  id: 620
-  time: '2024-08-24T08:12:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3816
-- author: DrSmugleaf
-  changes:
   - message: Fixed ammo boxes not being light-attackable with left click.
     type: Fix
   - message: Fixed lobby messages not being displayed for players still in the lobby
@@ -4992,5 +4962,36 @@
   id: 1116
   time: '2024-12-21T13:20:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5184
+- author: Vermidia
+  changes:
+  - message: Add sensor tower tacmap icon
+    type: Add
+  id: 1117
+  time: '2024-12-21T13:24:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5161
+- author: Vermidia
+  changes:
+  - message: Fixed being able to melee faster with guns by switching between them
+    type: Fix
+  id: 1118
+  time: '2024-12-21T13:23:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5162
+- author: Vermidia
+  changes:
+  - message: Fixed xeno abilities that move a target not breaking pulls.
+    type: Fix
+  id: 1119
+  time: '2024-12-21T13:23:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5168
+- author: Vermidia
+  changes:
+  - message: Fixed mini sentries being unable to be hit with spit
+    type: Fix
+  - message: Fixed sniper sentries not having a slightly faster deploy time and shotgun
+      sentries not having a faster undeploy time.
+    type: Fix
+  id: 1120
+  time: '2024-12-21T13:24:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5169
 Name: RMC14
 Order: -1
