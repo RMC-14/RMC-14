@@ -1,15 +1,10 @@
 using Content.Shared.Actions;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Xenonids.Heal;
 
-public sealed partial class XenoSacraficeHealActionEvent : EntityTargetActionEvent
+public sealed partial class XenoSacrificeHealActionEvent : EntityTargetActionEvent
 {
     [DataField]
     public float Range = 2.0F;
