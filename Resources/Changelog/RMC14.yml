@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: crystalHex
-  changes:
-  - message: Added descriptions to bundles/kits.
-    type: Tweak
-  id: 626
-  time: '2024-08-27T00:30:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3834
 - author: MetalSage
   changes:
   - message: Fixed accesses on windoors
@@ -4989,5 +4982,15 @@
   id: 1125
   time: '2024-12-21T13:45:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5156
+- author: Vermidia
+  changes:
+  - message: Fixed acid spit having the same sprite as neuro spits
+    type: Fix
+  - message: Added the missing ability for mature queens to use neurotoxin (like sentinels
+      but doesn't care about armor) or acid (spitter charged spit) spits.
+    type: Add
+  id: 1126
+  time: '2024-12-21T13:48:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5068
 Name: RMC14
 Order: -1
