@@ -20,7 +20,6 @@
   - type: WieldDelay
   - type: AltFireMelee
   - type: MeleeWeapon
-    resetOnHandSelected: false
     attackRate: 1
     damage:
       types:
