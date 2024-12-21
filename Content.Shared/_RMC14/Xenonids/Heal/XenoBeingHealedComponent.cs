@@ -1,25 +1,35 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared.FixedPoint;
+using JetBrains.Annotations;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Xenonids.Heal;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(XenoHealSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(SharedXenoHealSystem))]
 public sealed partial class XenoBeingHealedComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public FixedPoint2 Amount;
+    public List<XenoHealStack> HealStacks = new();
 
     [DataField, AutoNetworkedField]
-    public TimeSpan Duration;
+    public bool ParallizeHealing = true;
+}
 
-    [DataField, AutoNetworkedField]
+[UsedImplicitly]
+[DataDefinition, Serializable, NetSerializable]
+public sealed partial class XenoHealStack
+{
+    [DataField]
+    public FixedPoint2 HealAmount;
+
+    [DataField]
+    public int Charges;
+
+    [DataField]
     public TimeSpan TimeBetweenHeals;
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan NextHealAt;
-
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
-    public TimeSpan Start;
 }
