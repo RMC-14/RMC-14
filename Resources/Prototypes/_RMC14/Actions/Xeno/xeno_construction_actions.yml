@@ -55,6 +55,27 @@
     canUpgrade: true
 
 - type: entity
+  id: ActionXenoCoerceResin
+  parent: ActionXenoBase
+  name: Coerce Resin
+  description: "Builds the structure chosen with the 'Choose Resin Structure' action. You may also build within line of sight if you are on weeds."
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: secrete_resin
+    event: !type:XenoSecreteStructureActionEvent
+    deselectOnMiss: false
+    range: 0
+    repeat: true
+    checkCanAccess: false
+  - type: XenoConstructionAction
+    checkStructureSelected: true
+    checkWeeds: true
+    canUpgrade: false
+
+- type: entity
   id: ActionXenoOrderConstruction
   parent: ActionXenoBase
   name: Order Construction
