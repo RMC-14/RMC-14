@@ -393,7 +393,7 @@
         amount: 1
       - id: RMCScabbardMacheteFilled
         amount: 5
-      - id: RMCBinoculars
+      - id: RMCBinocularsCamo
         amount: 1
       #- id: CMFoldingBarricadesMB6x3
       #  amount: 2
