@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Marines;
-﻿using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Coordinates;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Pulling.Systems;
@@ -26,6 +27,7 @@ public sealed class XenoLungeSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
@@ -57,11 +59,12 @@ public sealed class XenoLungeSystem : EntitySystem
 
         args.Handled = true;
 
+        _rmcPulling.TryStopAllPullsFromAndOn(xeno);
+
         var origin = _transform.GetMapCoordinates(xeno);
         var target = _transform.GetMapCoordinates(args.Target);
         var diff = target.Position - origin.Position;
-        var length = diff.Length();
-        diff *= xeno.Comp.Range / length;
+        diff = diff.Normalized() * xeno.Comp.Range;
 
         xeno.Comp.Charge = diff;
         Dirty(xeno);

@@ -12,7 +12,7 @@ namespace Content.Shared._RMC14.Repairable;
 public sealed partial class RMCRepairableComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public FixedPoint2 Heal = FixedPoint2.New(-50);
+    public FixedPoint2 Heal = FixedPoint2.New(50);
 
     [DataField, AutoNetworkedField]
     public TimeSpan Delay = TimeSpan.FromSeconds(4);

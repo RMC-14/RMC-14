@@ -10,6 +10,10 @@ public sealed partial class ItemCamouflageComponent : Component
     //you have to add a prototype for each camo type.
     [DataField(required: true), AutoNetworkedField]
     public Dictionary<CamouflageType, EntProtoId> CamouflageVariations = new();
+
+    //for weapon spec boxes, to prevent two M5-ATLs
+    [DataField, AutoNetworkedField]
+    public bool OverrideStorageReplace = false;
 }
 
 [Serializable, NetSerializable]
