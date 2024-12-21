@@ -13,6 +13,21 @@
     range: 2
 
 - type: entity
+  id: ActionXenoHealerDroneTransferPlasma
+  parent: ActionXenoBase
+  name: Transfer plasma (100) # TODO RMC14 proper plasma costs
+  description: Give plasma to a nearby xenonid.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: transfer_plasma
+    event: !type:XenoTransferPlasmaActionEvent
+      amount: 100
+    range: 2
+
+- type: entity
   id: ActionXenoResinSurge
   parent: ActionXenoBase
   name: Resin Surge (75)
@@ -123,3 +138,32 @@
     range: -1
   - type: XenoActionPlasma
     cost: 600
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoApplySalve
+  name: Apply Salve (200)
+  description: Apply a salve to heal allied Xenos
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: apply_salve
+    event: !type:XenoApplySalveActionEvent
+    useDelay: 1
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoSacrifice
+  name: Sacrifice
+  description: Sacrifice your life to heal a sister. [color=red]YOU WILL ONLY RESPAWN IF YOU MAXED OUT YOUR ENERGY BY HEALING SISTERS.[/color]
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: screech
+    event: !type:XenoSacrificeHealActionEvent

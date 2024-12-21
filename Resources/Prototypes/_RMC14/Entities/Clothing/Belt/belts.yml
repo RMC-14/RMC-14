@@ -548,7 +548,7 @@
   - type: IgnoreContentsSize
     items:
       tags:
-      - RMCMagazineSmartGun
+      - RMCMagazineSmartGunCamo
 
 - type: entity
   parent: CMBeltSmartGunOperator

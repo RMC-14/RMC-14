@@ -310,9 +310,12 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
             var total = equal?.GetTotal() ?? FixedPoint2.Zero;
             var left = amount - total;
             if (left <= FixedPoint2.Zero)
+            {
                 break;
+            }
 
             equal = DistributeHealing(damageable, group.ID, left, equal);
+            amount = left;
         }
 
         return equal ?? new DamageSpecifier();
