@@ -187,12 +187,13 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
+    - ActionXenoAcidWeak
     - ActionXenoPheromones
     - ActionXenoOrderConstruction
     - ActionXenoPlantWeeds
     - ActionXenoFruitPlantLesser
-    - ActionXenoHealerDroneTransferPlasma
     - ActionXenoApplySalve
+    - ActionXenoHealerDroneTransferPlasma
     - ActionXenoSacrifice
     - ActionXenoDevolve
   - type: XenoPlasma
@@ -225,4 +226,5 @@
     gain: 0
     gainAttack: 0
     gainAttackDowned: 0
+  - type: XenoAcid
   #- type: XenoHealer
