@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: MetalSage
-  changes:
-  - message: Fixed accesses on windoors
-    type: Fix
-  id: 627
-  time: '2024-08-27T09:09:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3854
 - author: Vermidia
   changes:
   - message: Fix mobs continuing to hold pulls on death
@@ -4992,5 +4985,14 @@
   id: 1126
   time: '2024-12-21T13:48:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5068
+- author: blueDev2
+  changes:
+  - message: Added Healer, a drone strain that can use up it's own health to heal
+      allied xenos. They can also instantly sacrifice themselves to heal an allied
+      xeno by 75% of their current health.
+    type: Add
+  id: 1127
+  time: '2024-12-21T14:10:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4947
 Name: RMC14
 Order: -1
