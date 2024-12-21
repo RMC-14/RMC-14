@@ -10,6 +10,16 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/food.rsi
   - type: CMAutomatedVendor
     sections:
+    - name: Festive Meals
+      holidays: 
+      - FestiveSeason
+      entries:
+      - id: RMCMarinePreparedMealCookies
+        amount: 25
+      - id: RMCMarinePreparedMealGingerbread
+        amount: 25
+      - id: RMCMarinePreparedMealFruitcake
+        amount: 25
     - name: Prepared Meals
       entries:
       - id: CMMRE
