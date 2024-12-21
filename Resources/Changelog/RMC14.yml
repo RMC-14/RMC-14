@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added Darting 'Sleepy' Groth figurine
-    type: Add
-  id: 624
-  time: '2024-08-27T00:25:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3830
 - author: Vermidia
   changes:
   - message: Added the Crusher's and Lurker's missing slow on hit. The Lurker's slow
@@ -4987,5 +4980,12 @@
   id: 1123
   time: '2024-12-21T13:39:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5151
+- author: DummeHytteOst
+  changes:
+  - message: Fixed lockers/closets having more HP than intended.
+    type: Fix
+  id: 1124
+  time: '2024-12-21T13:43:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5141
 Name: RMC14
 Order: -1
