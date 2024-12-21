@@ -242,11 +242,29 @@
         acts: [ "Destruction" ]
   - type: GunDamageModifier
     multiplier: 0.4
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+      sentry:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20
+        layer: 
+        - BulletImpassable
+        hard: false
   - type: Sentry
     deployDelay: 0.75
     undeployDelay: 0.75
     upgrades: null
-    deployFixture: null
 
 - type: entity
   parent: RMCSentry
@@ -302,6 +320,7 @@
       AggroVisionRadius: !type:Single
         11.0
   - type: Sentry
+    deployDelay: 2
     upgrades: null
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 4
@@ -409,9 +428,43 @@
       AggroVisionRadius: !type:Single
         4.0
   - type: Sentry
+    undeployDelay: 1.5
     upgrades: null
     startingMagazine: RMCMagazineSentryShotgun
     magazineTag: RMCMagazineSentryShotgun
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 2
     accuracyMultiplierUnwielded: 2
+
+- type: entity
+  parent: RMCBaseTurret
+  id: RMCTurretGaussDumb
+  name: damaged UN-577 gauss turret
+  description: A deployable, semi-automated turret with AI targeting capabilities. Armed with an M30 Autocannon and a high-capacity drum magazine. This one's IFF system has been fried via acid damage, and it will open fire on any targets within range.
+  components:
+  - type: Gun
+    fireRate: 2.5
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: RMCCartridgeSentry
+    capacity: 99999
+  - type: NpcFactionMember
+    factions:
+    - RMCDumb
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: MaxRotation
+    deviation: 75
+  - type: ProjectileDamageReceived
+    multiplier: 0.1

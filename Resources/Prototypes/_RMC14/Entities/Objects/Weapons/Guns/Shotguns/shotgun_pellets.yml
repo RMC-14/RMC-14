@@ -67,7 +67,7 @@
   - type: CMArmorPiercing
     amount: 20
   - type: RMCStunOnHit
-    maxRange: 6
+    maxRange: 6.5
     stunTime: 1
     superSlowTime: 2
     slowTime: 6
@@ -78,20 +78,14 @@
       falloff: 10
 
 - type: entity
-  parent: CMPelletShotgunBase
+  parent: CMPelletShotgunSlug
   id: CMPelletShotgunIncendiary
   name: incendiary slug
   components:
-  - type: CMArmorPiercing
-    amount: 20
   - type: Projectile
     damage:
       types:
         Heat: 55
-  - type: ProjectileSpread
-    proto: CMPelletShotgunIncendiary
-    count: 1
-    spread: 5
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 12

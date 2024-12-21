@@ -1,0 +1,217 @@
+# Backpacks
+# only reason this exists is because starting gear is applied AFTER loadouts
+# need to make a backpack within loadouts or the storage items won't spawn
+- type: loadoutGroup
+  id: MarineBackpack
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - MarineSatchel
+
+- type: loadoutGroup
+  id: MarineLeatherBackpack
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - MarineLeatherSatchel
+
+- type: loadoutGroup
+  id: MarineTechnicianBackpack
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - MarineTechnicianSatchel
+
+- type: loadoutGroup
+  id: MarineMedicBackpack
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - MarineMedicSatchel
+
+- type: loadoutGroup
+  id: MarineSecurityBackpack
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - MarineSecuritySatchel
+
+# Eyewear
+- type: loadoutGroup
+  id: EyewearRMC
+  name: rmc-loadout-group-eyewear
+  minLimit: 0
+  maxLimit: 9
+  loadouts:
+  - AviatorsRMC
+  - EyepatchRMC
+  - GlassesRPGRMC
+  - GogglesRMC
+  - GogglesPrescriptionRMC
+  - GogglesAdvancedRMC
+  - GogglesM1A1RMC
+  - PersonalShadesRMC
+  - SunglassesRMC
+
+# Masks
+- type: loadoutGroup
+  id: MasksRMC
+  name: rmc-loadout-group-masks
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - CoifRMC
+  - GasMaskRMC
+  - MaskScarfRedRMC
+  - MaskScarfBlackRMC
+  - MaskScarfGrayRMC
+  - MaskScarfGreenRMC
+  - MaskScarfTanRMC
+
+# Headwear
+- type: loadoutGroup
+  id: HeadwearRMC
+  name: rmc-loadout-group-headwear
+  minLimit: 0
+  maxLimit: 9
+  loadouts:
+  - SquadBeretRMC
+  - GreenBeretRMC
+  - TanBeretRMC
+  - CapRMC
+  - BrownHeadbandRMC
+  - GreenHeadbandRMC
+  - GrayHeadbandRMC
+  - RedHeadbandRMC
+  - TanHeadbandRMC
+
+# Paperwork
+- type: loadoutGroup
+  id: PaperworkRMC
+  name: rmc-loadout-group-paperwork
+  minLimit: 0
+  maxLimit: 9
+  loadouts:
+  - PenRMC
+  - PenFountainRMC
+  - PaperRMC
+  - ClipboardRMC
+  - FolderBlackRMC
+  - FolderBlueRMC
+  - FolderRedRMC
+  - FolderWhiteRMC
+  - FolderYellowRMC
+  # TODO Notepad
+
+# Plushies
+- type: loadoutGroup
+  id: PlushiesRMC
+  name: rmc-loadout-group-plushies
+  minLimit: 0
+  maxLimit: 7
+  loadouts:
+  - PlushieFarwaRMC
+  - PlushieBarricadeRMC
+  - PlushieBeeRMC
+  - PlushieSharkRMC
+  - PlushieMothRMC
+  - PlushieRockRMC
+  - PlushieTherapyRMC
+
+# Weapons
+- type: loadoutGroup
+  id: WeaponsRMC
+  name: rmc-loadout-group-weapons
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - HoldoutPistolRMC
+
+# Canned Drinks
+- type: loadoutGroup
+  id: CannedDrinksRMC
+  name: rmc-loadout-group-canned-drinks
+  minLimit: 0
+  maxLimit: 14
+  loadouts:
+  - BottledWaterRMC
+  - GrapeJuiceRMC
+  - LemonLimeRMC
+  - IcedTeaRMC
+  - ColaRMC
+  - MountainWindRMC
+  - SpaceUpRMC
+  - BobdaRMC
+  - DietBobdaRMC
+  - BodaRMC
+  - BodaPlyusRMC
+  - AleIpaRMC
+  - LiteBeerRMC
+  - ThirteenLokoRMC
+
+# Flasks
+- type: loadoutGroup
+  id: FlasksRMC
+  name: rmc-loadout-group-flasks
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - CanteenRMC
+  - MetalFlaskRMC
+
+# Food (sweets)
+- type: loadoutGroup
+  id: FoodSweetsRMC
+  name: rmc-loadout-group-foods-sweets
+  minLimit: 0
+  maxLimit: 4
+  loadouts:
+  - ChocolateBarRMC
+  - CookieRMC
+  - FortuneCookieRMC
+  - DonutRMC
+
+# Food (packaged)
+- type: loadoutGroup
+  id: FoodPackagedRMC
+  name: rmc-loadout-group-foods-packaged
+  minLimit: 0
+  maxLimit: 7
+  loadouts:
+  - JerkyRMC
+  - MeatBarRMC
+  - ChipsRMC
+  - BurritoRMC
+  - CheeseburgerRMC
+  - HotdogRMC
+  - PepperChipsRMC
+
+# Food (healthy)
+- type: loadoutGroup
+  id: FoodHealthyRMC
+  name: rmc-loadout-group-foods-healthy
+  minLimit: 0
+  maxLimit: 7
+  loadouts:
+  - AppleRMC
+  - CarrotRMC
+  - CornRMC
+  - LemonRMC
+  - LimeRMC
+  - OrangeRMC
+  - PotatoRMC
+
+# Role Specific
+- type: loadoutGroup
+  id: CommandingOfficerRoleSpecificRMC
+  name: rmc-loadout-group-role-specific
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ColBeretRMC
+  - LtColBeretRMC

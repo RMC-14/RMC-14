@@ -332,7 +332,6 @@
     - map: [ "ears" ]
     - map: [ "outerClothing" ]
     - map: [ "enum.WebbingVisualLayers.Base" ]
-    - map: [ "enum.MedalVisualLayers.Base" ]
     - map: [ "eyes" ]
     - map: [ "belt" ]
     - map: [ "id" ]
@@ -347,6 +346,7 @@
     - map: [ "head" ]
     - map: [ "pocket1" ]
     - map: [ "pocket2" ]
+    - map: [ "enum.MedalVisualLayers.Base" ]
   - type: Appearance
   - type: HumanoidAppearance
     species: Human

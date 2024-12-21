@@ -11,6 +11,8 @@
     armor: 20 # CLOTHING_ARMOR_MEDIUM
     bio: 15
     explosionArmor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+  - type: RMCArmorSpeedTier
+    speedTier: light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
     walkModifier: 0.725
     sprintModifier: 0.725
@@ -47,6 +49,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Provost/light.rsi
+  - type: RMCArmorSpeedTier
+    speedTier: very light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
     walkModifier: 0.897
     sprintModifier: 0.897

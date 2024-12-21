@@ -15,13 +15,13 @@
     sections:
     - name: Primary firearms
       entries:
-      - id: WeaponRifleM4SPR
+      - id: WeaponRifleM4SPRCamo
         amount: 10
-      - id: WeaponShotgunM42A2
+      - id: WeaponShotgunM42A2Camo
         amount: 15
-      - id: WeaponSMGM63
+      - id: WeaponSMGM63Camo
         amount: 30
-      - id: WeaponRifleM54C
+      - id: WeaponRifleM54CCamo
         amount: 30
         recommended: true
     - name: Primary ammunition
@@ -40,11 +40,11 @@
         amount: 25
     - name: Sidearms
       entries:
-      - id: CMWeaponPistolM77
+      - id: CMWeaponPistolM77Empty
         amount: 25
-      - id: RMCWeaponRevolverM44
+      - id: RMCWeaponRevolverM44Empty
         amount: 25
-      - id: CMWeaponPistolM1984
+      - id: CMWeaponPistolM1984Empty
         amount: 25
       #- id: WeaponFlareM82F
       #  amount: 10
@@ -60,7 +60,7 @@
       entries:
       - id: RMCAttachmentM63StockCollapsible
         amount: 10
-      - id: RMCAttachmentM54CStockCollapsible
+      - id: RMCAttachmentM54CStockCollapsibleCamo
         amount: 10
       - id: RMCAttachmentRailFlashlight
         amount: 25
@@ -98,7 +98,7 @@
         amount: 15
       - id: CMBootsBrown
         amount: 15
-      - id: JumpsuitMarine
+      - id: JumpsuitMarineCamo
         amount: 15
       - id: CMHandsBrown
         amount: 15
@@ -106,7 +106,7 @@
         amount: 15
       - id: CMHeadset
         amount: 15
-      - id: ArmorHelmetM10
+      - id: ArmorHelmetM10Camo
         amount: 15
     - name: Webbings
       entries:
@@ -122,35 +122,35 @@
         amount: 1
     - name: Armor
       entries:
-      - id: RMCArmorM3MediumCarrier
+      - id: RMCArmorM3MediumCarrierCamo
         amount: 15
-      - id: RMCArmorM3MediumPadded
+      - id: RMCArmorM3MediumPaddedCamo
         amount: 15
-      - id: RMCArmorM3MediumPadless
+      - id: RMCArmorM3MediumPadlessCamo
         amount: 15
-      - id: RMCArmorM3MediumRidged
+      - id: RMCArmorM3MediumRidgedCamo
         amount: 15
-      - id: RMCArmorM3MediumSkull
+      - id: RMCArmorM3MediumSkullCamo
         amount: 15
-      - id: RMCArmorM3MediumSmooth
+      - id: RMCArmorM3MediumSmoothCamo
         amount: 15
-      - id: CMArmorM3Heavy
+      - id: RMCArmorM3HeavyPaddedCamo
         amount: 10
-      - id: CMArmorM3Light
+      - id: RMCArmorM3LightPaddedCamo
         amount: 10
     - name: Backpack
       entries:
-      - id: CMBackpackMarine
+      - id: RMCBackpackMarineCamo
         amount: 15
-      - id: CMBackpackMarineTech
+      - id: RMCBackpackMarineTechCamo
         amount: 15
       - id: CMBackpackMedical
         amount: 15
-      - id: CMSatchelMarine
+      - id: RMCSatchelMarineCamo
         amount: 15
 #      - id: Marine Chestrig
 #        amount: 15
-      - id: CMSatchelMarineTech
+      - id: RMCSatchelMarineTechCamo
         amount: 15
       - id: RMCSatchelWelderChestrig
         amount: 15
@@ -160,7 +160,7 @@
         amount: 5
     - name: Restricted Backpacks
       entries:
-      - id: CMBackpackWelder
+      - id: RMCBackpackWelderCamo
         amount: 1
       - id: RMCSatchelWelder
         amount: 2
@@ -168,7 +168,7 @@
         amount: 1
     - name: Belts
       entries:
-      - id: CMBeltMarine
+      - id: RMCBeltMarineCamo
         amount: 15
       - id: RMCBeltGrenade
         amount: 10
@@ -184,10 +184,10 @@
         amount: 10
 #      - id: M276 Pattern M82F Holster Rig
 #        amount: 5
-      - id: CMBeltKnifeFilled
+      - id: RMCBeltKnifeCamoFilled
         name: M276 Knife Rig (Full)
         amount: 15
-      - id: RMCBeltUtilityGeneral
+      - id: RMCBeltUtilityGeneralCamo
         amount: 15
     - name: Pouches
       entries:
@@ -303,7 +303,7 @@
         amount: 2
     - name: Special Ammunition
       entries:
-      - id: RMCMagazineSmartGun
+      - id: RMCMagazineSmartGunCamo
         amount: 1
       #- id: CMSpeedLoaderM44Heavy
       #  amount: 2
@@ -393,7 +393,7 @@
         amount: 1
       - id: RMCScabbardMacheteFilled
         amount: 5
-      - id: RMCBinoculars
+      - id: RMCBinocularsCamo
         amount: 1
       #- id: CMFoldingBarricadesMB6x3
       #  amount: 2
@@ -462,13 +462,13 @@
         amount: 3
     - name: Stock
       entries:
-      - id: RMCAttachmentM42A2WoodenStock
+      - id: RMCAttachmentM42A2WoodenStockCamo
         amount: 2
       - id: RMCAttachmentM63ArmBrace
         amount: 2
       - id: RMCAttachmentM63Stock
         amount: 2
-      - id: RMCAttachmentM54CStockSolid
+      - id: RMCAttachmentM54CStockSolidCamo
         amount: 2
       - id: RMCAttachmentM44MagnumSharpshooterStock
         amount: 2

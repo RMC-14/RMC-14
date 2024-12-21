@@ -57,6 +57,7 @@
       - XenoParasite
       - XenoEgg
       - XenoFruit
+  - type: TunnelRenamer
   - type: EggPlantTime
     plantTime: 2.5
   - type: MultiHandedHolder
@@ -113,6 +114,7 @@
   - type: XenoEvolution
     strains:
     - CMXenoDroneGardener
+    - CMXenoDroneHealer
     - CMXenoDroneHealer
   - type: XenoAcid
   - type: AcidTrap
@@ -190,12 +192,13 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
+    - ActionXenoAcidWeak
     - ActionXenoPheromones
     - ActionXenoOrderConstruction
     - ActionXenoPlantWeeds
     - ActionXenoFruitPlantLesser
-    - ActionXenoHealerDroneTransferPlasma
     - ActionXenoApplySalve
+    - ActionXenoHealerDroneTransferPlasma
     - ActionXenoSacrifice
     - ActionXenoDevolve
   - type: XenoPlasma
@@ -228,4 +231,5 @@
     gain: 0
     gainAttack: 0
     gainAttackDowned: 0
+  - type: XenoAcid
   #- type: XenoHealer

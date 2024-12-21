@@ -3,27 +3,26 @@
   parent: JumpsuitMarine
   id: CMJumpsuitMP
   name: military police jumpsuit
+  suffix: Jungle
   description: Standard-issue Military Police uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/standard.rsi
-
-- type: entity
-  parent: CMJumpsuitMP
-  id: CMJumpsuitMPBlack
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/black.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/standard/jungle.rsi
+  - type: FoldableClothing
+    foldedEquippedPrefix: sleeves
 
 # Military Warden
 - type: entity
   parent: JumpsuitMarine
   id: CMJumpsuitWarden
   name: military warden uniform
+  suffix: Jungle
   description: Standard-issue Military Warden uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/standard.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/warden/jungle.rsi
+  - type: FoldableClothing
+    foldedEquippedPrefix: sleeves
 
 - type: entity
   parent: RMCMarineUniformBase
@@ -78,5 +77,140 @@
   description: A uniform typically worn by a Chief MP of the UNMC. It has shards of light Kevlar to help protect against stabbing weapons, bullets, and shrapnel from explosions. This uniform includes a small EMF distributor to help nullify energy-based weapon fire, along with a hazmat chemical filter woven throughout the material to ward off biological and radiation hazards.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/wo.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/wo/jungle.rsi
 
+#camo variants
+- type: entity
+  parent: CMJumpsuitMP
+  id: RMCJumpsuitMPCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMJumpsuitMP
+      Desert: RMCJumpsuitMPDesert
+      Snow: RMCJumpsuitMPSnow
+      Classic: RMCJumpsuitMPClassic
+      Urban: RMCJumpsuitMPUrban   
+
+- type: entity
+  parent: CMJumpsuitMP
+  id: RMCJumpsuitMPDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/standard/desert.rsi
+
+- type: entity
+  parent: CMJumpsuitMP
+  id: RMCJumpsuitMPSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/standard/snow.rsi
+
+- type: entity
+  parent: CMJumpsuitMP
+  id: RMCJumpsuitMPClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/standard/classic.rsi
+
+- type: entity
+  parent: CMJumpsuitMP
+  id: RMCJumpsuitMPUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/standard/urban.rsi
+
+- type: entity
+  parent: CMJumpsuitWarden
+  id: RMCJumpsuitWardenCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMJumpsuitWarden
+      Desert: RMCJumpsuitWardenDesert
+      Snow: RMCJumpsuitWardenSnow
+      Classic: RMCJumpsuitWardenClassic
+      Urban: RMCJumpsuitWardenUrban   
+
+- type: entity
+  parent: CMJumpsuitWarden
+  id: RMCJumpsuitWardenDesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/warden/desert.rsi
+
+- type: entity
+  parent: CMJumpsuitWarden
+  id: RMCJumpsuitWardenSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/warden/snow.rsi
+
+- type: entity
+  parent: CMJumpsuitWarden
+  id: RMCJumpsuitWardenClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/warden/classic.rsi
+
+- type: entity
+  parent: CMJumpsuitWarden
+  id: RMCJumpsuitWardenUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/warden/urban.rsi
+
+- type: entity
+  parent: CMJumpsuitWO
+  id: RMCJumpsuitWOCamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMJumpsuitWO
+      Desert: RMCJumpsuitWODesert
+      Snow: RMCJumpsuitWOSnow
+      Classic: RMCJumpsuitWOClassic
+      Urban: RMCJumpsuitWOUrban   
+
+- type: entity
+  parent: CMJumpsuitWO
+  id: RMCJumpsuitWODesert
+  suffix: Desert
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/wo/desert.rsi
+
+- type: entity
+  parent: CMJumpsuitWO
+  id: RMCJumpsuitWOSnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/wo/snow.rsi
+
+- type: entity
+  parent: CMJumpsuitWO
+  id: RMCJumpsuitWOClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/wo/classic.rsi
+
+- type: entity
+  parent: CMJumpsuitWO
+  id: RMCJumpsuitWOUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/wo/urban.rsi

@@ -2,17 +2,18 @@
   name: M54CE2 heavy assault rifle
   parent: CMBaseWeaponRifle
   id: WeaponRifleM54CE2
+  suffix: Desert
   description: A large squad support weapon capable of laying down sustained suppressing fire from a mounted position. While unstable and less accurate, it can be lugged and shot with two hands.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/desert.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/desert.rsi
   - type: Tag
     tags:
     - WeaponRifleM54CE2
@@ -50,8 +51,10 @@
     accuracyMultiplier: 1
     accuracyMultiplierUnwielded: 0.5
   - type: WieldableSpeedModifiers
-    baseWalk: 0.696
-    baseSprint: 0.559
+    base: 0.5
+    light: 0.69
+    medium: 0.75
+    heavy: 0.806
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -95,9 +98,108 @@
       rmc-aslot-stock: -0.875, 0.0325
       rmc-aslot-underbarrel: 0.35, -0.4
 
+#camouflage variants
+- type: entity
+  parent: WeaponRifleM54CE2
+  id: WeaponRifleM54CE2Camo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: WeaponRifleM54CE2Jungle
+      Desert: WeaponRifleM54CE2
+      Snow: WeaponRifleM54CE2Snow
+      Classic: WeaponRifleM54CE2Classic
+      Urban: WeaponRifleM54CE2Urban
+
+- type: entity
+  parent: WeaponRifleM54CE2
+  id: WeaponRifleM54CE2Jungle
+  suffix: Jungle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/jungle.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: CMMagazineRifleM54CE2Jungle
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54CE2
+
+- type: entity
+  parent: WeaponRifleM54CE2
+  id: WeaponRifleM54CE2Snow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/snow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/snow.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: CMMagazineRifleM54CE2Snow
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54CE2
+
+- type: entity
+  parent: WeaponRifleM54CE2
+  id: WeaponRifleM54CE2Classic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/classic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/classic.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: CMMagazineRifleM54CE2Classic
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54CE2
+
+- type: entity
+  parent: WeaponRifleM54CE2
+  id: WeaponRifleM54CE2Urban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/urban.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/urban.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: CMMagazineRifleM54CE2Urban
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54CE2
+
 - type: entity
   parent: CMMagazineRifleM54C
   id: CMMagazineRifleM54CE2
+  suffix: Desert
   name: "M54CE2 magazine (10x24mm)"
   components:
   - type: Tag
@@ -112,7 +214,7 @@
     proto: CMCartridgeRifle10x24mm
     capacity: 300
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -123,6 +225,51 @@
     steps: 2
     zeroVisible: false
   - type: Appearance
+
+- type: entity
+  parent: CMMagazineRifleM54CE2
+  id: CMMagazineRifleM54CE2Camo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMMagazineRifleM54CE2Jungle
+      Desert: CMMagazineRifleM54CE2
+      Snow: CMMagazineRifleM54CE2Snow
+      Classic: CMMagazineRifleM54CE2Classic
+      Urban: CMMagazineRifleM54CE2Urban
+
+- type: entity
+  parent: CMMagazineRifleM54CE2
+  id: CMMagazineRifleM54CE2Jungle
+  suffix: Jungle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/jungle.rsi
+
+- type: entity
+  parent: CMMagazineRifleM54CE2
+  id: CMMagazineRifleM54CE2Snow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/snow.rsi
+
+- type: entity
+  parent: CMMagazineRifleM54CE2
+  id: CMMagazineRifleM54CE2Classic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/classic.rsi
+
+- type: entity
+  parent: CMMagazineRifleM54CE2
+  id: CMMagazineRifleM54CE2Urban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/urban.rsi
 
 - type: Tag
   id: WeaponRifleM54CE2

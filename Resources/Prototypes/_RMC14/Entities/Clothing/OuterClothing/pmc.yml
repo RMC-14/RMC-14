@@ -115,9 +115,8 @@
     armor: 40 # CLOTHING_ARMOR_HIGH (melee); CLOTHING_ARMOR_ULTRAHIGH (bullets); going with an intermediate value until more damage types get implemented
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 40 # CLOTHING_ARMOR_VERYHIGH
-  - type: WieldSlowdownCompensation
-    walk: 0.24
-    sprint: 0.384
+  - type: RMCArmorSpeedTier
+    speedTier: medium
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_MEDIUM
     walkModifier: 0.666
     sprintModifier: 0.666
@@ -136,9 +135,8 @@
     armor: 45 # CLOTHING_ARMOR_VERYHIGH (melee); CLOTHING_ARMOR_ULTRAHIGH (bullets); going with an intermediate value until more damage types get implemented (more likely to be hit by bullets than melee)
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 40 # CLOTHING_ARMOR_VERYHIGH
-  - type: WieldSlowdownCompensation
-    walk: 0.24
-    sprint: 0.384
+  - type: RMCArmorSpeedTier
+    speedTier: light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_MEDIUM
     walkModifier: 0.727
     sprintModifier: 0.727

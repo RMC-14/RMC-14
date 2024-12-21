@@ -5,7 +5,7 @@
   parent: CMPlanetBase
   id: RMCPlanetSandBase
   name: tiles-rmc-planet-auto-sand
-  
+
 # Sand_0
 
 - type: tile
@@ -18,7 +18,7 @@
   - 1.0
   - 1.0
   - 1.0
-  
+
 # Sand_1
 
 - type: tile
@@ -45,9 +45,23 @@
     East: /Textures/_RMC14/Tiles/planet/auto_sand/sand_double_edge.png
     North: /Textures/_RMC14/Tiles/planet/auto_sand/sand_double_edge.png
     West: /Textures/_RMC14/Tiles/planet/auto_sand/sand_double_edge.png
-    
+
 - type: tile
   parent: RMCPlanetSand1
   id: RMCPlanetSand1Rock
   sprite: /Textures/_RMC14/Tiles/planet/auto_sand/sand_1_rock_var.png
 
+- type: tile
+  parent: RMCPlanetSandBase
+  id: RMCPlanetSandVaradero
+  sprite: /Textures/_RMC14/Tiles/planet/auto_sand/varadero_0.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0

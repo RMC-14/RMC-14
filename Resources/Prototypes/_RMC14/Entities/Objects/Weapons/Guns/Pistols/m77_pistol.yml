@@ -76,6 +76,23 @@
       rmc-aslot-underbarrel: 0.31, -0.186
 
 - type: entity
+  parent: CMWeaponPistolM77
+  id: CMWeaponPistolM77Empty
+  suffix: Empty
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazinePistolM77AP
+
+
+- type: entity
   parent: CMBaseMagazinePistol
   id: CMMagazinePistolM77AP
   name: M77 AP magazine (9mm)

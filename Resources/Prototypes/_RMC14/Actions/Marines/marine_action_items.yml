@@ -95,3 +95,13 @@
   - type: InstantAction
     itemIconStyle: BigItem
     event: !type:ToggleActionEvent
+
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionToggleWeldingGoggles
+  name: Toggle the welding goggles
+  description: Change the positions of the welding goggles on your forehead.
+  components:
+  - type: InstantAction
+    itemIconStyle: BigItem
+    event: !type:ToggleActionEvent

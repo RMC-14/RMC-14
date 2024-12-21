@@ -125,14 +125,14 @@
     interactSuccessSound:
       collection: FenceRattle
   - type: RMCRepairable
-    heal: -200
+    heal: 200
     skill: RMCSkillConstruction
     delay: 10
     fuelUsed: 2
   - type: NailgunRepairable
     # cm13 max_health%: 0.3, 0.45
-    repairMetal: -135
-    repairPlasteel: -200
+    repairMetal: 135
+    repairPlasteel: 200
   - type: Destructible
     thresholds:
     - trigger:
@@ -298,17 +298,18 @@
       - map: [ "acided" ]
     - type: Physics
     - type: RMCRepairable
-      heal: -200
+      heal: 200
       skill: RMCSkillConstruction
       delay: 10
       fuelUsed: 2
     - type: Damageable
-      damageContainer: Inorganic
+      damageContainer: StructuralMarine
+      damageModifierSet: StructuralMarine
     - type: Destructible
       thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 100
+          damage: 30
         behaviors:
         - !type:PlaySoundBehavior
           sound:
@@ -380,6 +381,18 @@
       graph: BarricadeHandrailGraph
       node: nodeHandrail
 
+- type: entity
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeSmallWire
+  components:
+    - type: Sprite
+      layers:
+      - state: small_wire
+      - map: [ "acided" ]
+    - type: Construction
+      graph: BarricadeHandrailGraph
+      node: nodeHandrail
+
 # Metal Barricade Doors
 - type: entity
   parent: CMBarricadeBase
@@ -401,14 +414,14 @@
     - map: [ "acided" ]
     drawdepth: WallTops
   - type: RMCRepairable
-    heal: -200
+    heal: 200
     skill: RMCSkillConstruction
     delay: 10
     fuelUsed: 2
   - type: NailgunRepairable
     # cm13 max_health%: 0.3, 0.45
-    repairMetal: -120
-    repairPlasteel: -180
+    repairMetal: 120
+    repairPlasteel: 180
   - type: Destructible
     thresholds:
     - trigger:

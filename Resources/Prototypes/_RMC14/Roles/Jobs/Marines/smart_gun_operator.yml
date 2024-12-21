@@ -9,6 +9,7 @@
       department: CMSquad
       time: 18000 # 5 hours
   startingGear: CMGearSmartGunOperator
+  dummyStartingGear: CMGearSmartGunOperatorEquipped
   icon: "CMJobIconSmartGunOperator"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
@@ -44,11 +45,10 @@
 - type: startingGear
   id: CMGearSmartGunOperatorEquipped
   equipment:
-    jumpsuit: JumpsuitMarine
-    back: CMSatchelMarine
+    jumpsuit: JumpsuitMarineCamo
     shoes: CMBootsBlackFilled
-    head: ArmorHelmetM10
-    outerClothing: CMArmorM3Medium
+    head: ArmorHelmetM10Camo
+    outerClothing: RMCSGHarnessCamo
     gloves: CMHandsBlackMarine
     id: CMDogtagSmartGunOperator
     ears: CMHeadsetAlpha

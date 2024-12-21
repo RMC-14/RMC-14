@@ -599,7 +599,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronRhettRainmanMcIndrick
   name: Rhett 'Rainman' McIndrick figurine
-  description: Former Scout Sergeant McIndrick. "Where's the glory in waiting?"
+  description: "There's a difference between trying something different when regular procedure fails- and starting off with the same losing strategy. Are you surprising anyone?"
   components:
   - type: Sprite
     state: rhett_rainman_mcindrick
@@ -661,6 +661,14 @@
     state: jester-who-helps
   - type: PatronFigurine
     id: 15d914f4-e436-496a-afe0-0e127297ed36
+  - type: EmitSoundOnUse
+    sound:
+      collection: FootstepJester
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 30
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -837,7 +845,7 @@
         volume: 5
         maxDistance: 1
   - type: UseDelay
-    delay: 180.0
+    delay: 30
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -871,3 +879,48 @@
     state: emily_klutz_rathen
   - type: PatronFigurine
     id: e8819228-95ea-4a3b-8e1c-0e7eaa55cb90
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRanuko
+  name: Ranuko figurine
+  description: "You know a patch up with a smile is close at hand with this Avali."
+  components:
+  - type: Sprite
+    state: ranuko
+  - type: PatronFigurine
+    id: 6d896f2e-3a36-4c55-bd80-eb72242de43b
+
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronConsumes-the-Petrol
+  name: Consumes-the-Petrol figurine
+  description: "That one lizard everyone tolerates. No, not that one. The other one. No, the other other- you know what, forget it."
+  components:
+  - type: Sprite
+    state: consumes-the-petrol
+  - type: PatronFigurine
+    id: 25ab89f4-a9a7-44c7-8538-c94e8a086e92
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLennyDugs
+  name: Lenny Dugs figurine
+  description: "Greenhorn. Bumpkin. Marine. He didn't wanna be here. You didn't want him here. But he's what we got. The figurine smells vaguely of country air."
+  components:
+  - type: Sprite
+    state: lenny_dugs
+  - type: PatronFigurine
+    id: b43bf6fc-8970-4536-aa0e-6cf70168fda9
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronkaelsharkvoss
+  name: Kael 'Shark' Voss figurine
+  description: "A hug hungry little Sharky."
+  components:
+  - type: Sprite
+    state: kael_shark_voss
+  - type: PatronFigurine
+    id: 58c2cefc-1796-4ca4-b6e6-5dbda5b8f506

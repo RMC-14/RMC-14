@@ -10,9 +10,9 @@
     state: generic_headset
   - type: CMVendorBundle
     bundle:
-    - ArmorHelmetM10
+    - ArmorHelmetM10Camo
     - CMVendorHeadsetSquad
-    - JumpsuitMarine
+    - JumpsuitMarineCamo
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -24,9 +24,9 @@
   components:
   - type: CMVendorBundle
     bundle:
-    - CMArmorHelmetM12
+    - RMCArmorHelmetM12Camo
     - CMVendorHeadsetSquadFTL
-    - JumpsuitMarine
+    - JumpsuitMarineCamo
     - CMHandsInsulated
     - CMBootsBlackFilled
 
@@ -38,9 +38,9 @@
   components:
   - type: CMVendorBundle
     bundle:
-    - CMArmorHelmetM10Medic # TODO RMC14 M4
+    - RMCArmorHelmetM10MedicCamo # TODO RMC14 M4
     - CMVendorHeadsetSquadCorpsman
-    - CMJumpsuitMarineMedic
+    - CMJumpsuitMarineMedicCamo
     - CMBootsBlackFilled
 
 - type: entity
@@ -58,7 +58,7 @@
     - CMDefibrillator
     - CMAdvFirstAidKitFilled
     - CMHealthAnalyzer
-#    - TODO RMC14 medevac
+    - RMCMedevacStretcherFolded
     - CMRollerBedSpawnFolded
     - CMSurgicalLine
     - CMSynthGraft
@@ -75,9 +75,9 @@
   components:
   - type: CMVendorBundle
     bundle:
-    - CMArmorHelmetM10Tech # TODO RMC14 M4
+    - RMCArmorHelmetM10TechCamo # TODO RMC14 M4
     - CMVendorHeadsetSquadComTech
-    - CMJumpsuitMarineEngineer
+    - CMJumpsuitMarineEngineerCamo
     - CMHandsInsulated
     - CMBootsBlackFilled
 
@@ -109,9 +109,9 @@
   components:
   - type: CMVendorBundle
     bundle:
-    - CMArmorHelmetM11 # TODO RMC14 M4
+    - RMCArmorHelmetM11Camo # TODO RMC14 M4
     - CMVendorHeadsetSquadLeader
-    - JumpsuitMarine
+    - JumpsuitMarineCamo
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -124,7 +124,7 @@
   - type: CMVendorBundle
     bundle:
     - CMVendorHeadsetSquad
-    - JumpsuitMarine
+    - JumpsuitMarineCamo
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -141,7 +141,7 @@
     bundle:
     - CMGlassesSecurity
     - CMBeltSecurityMPFilled
-    - CMArmorHelmetM10MP
+    - RMCArmorHelmetM10MPCamo
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

@@ -33,18 +33,18 @@
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
-      - id: CMBackpackMarine
+      - id: RMCBackpackMarineCamo
         name: backpack
-      - id: CMSatchelMarine
+      - id: RMCSatchelMarineCamo
         name: satchel
         recommended: true
       - id: RMCScabbardShotgun
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: CMBeltMarine
+      - id: RMCBeltMarineCamo
         recommended: true
-      - id: CMBeltKnifeFilled
+      - id: RMCBeltKnifeCamoFilled
         name: M276 knife rig (full)
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
@@ -53,7 +53,7 @@
       #    RMCBeltHolsterFlareGun #TODO: Make this
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtility
-      - id: RMCBeltUtilityGeneral
+      - id: RMCBeltUtilityGeneralCamo
       - id: RMCBeltGrenade
     - name: Pouches
       choices: { RMCPouch: 2 }
@@ -144,9 +144,9 @@
         points: 10
     - name: Armors
       entries:
-      - id: CMArmorB12
+      - id: RMCArmorB12Camo
         points: 30
-      - id: CMArmorM4
+      - id: RMCArmorM4Camo
         points: 20
     - name: Clothing Items
       entries:
@@ -192,11 +192,11 @@
         points: 5
     - name: Binoculars
       entries:
-      - id: RMCBinoculars
+      - id: RMCBinocularsCamo
         points: 5
-      - id: RMCRangefinder
+      - id: RMCRangefinderCamo
         points: 10
-      - id: RMCLaserDesignator
+      - id: RMCLaserDesignatorCamo
         points: 15
     - name: Helmet Optics
       entries: [ ]
