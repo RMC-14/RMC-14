@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Added the Crusher's and Lurker's missing slow on hit. The Lurker's slow
-      only applies to knocked out marines.
-    type: Fix
-  id: 625
-  time: '2024-08-27T00:29:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3843
 - author: crystalHex
   changes:
   - message: Added descriptions to bundles/kits.
@@ -4987,5 +4979,15 @@
   id: 1124
   time: '2024-12-21T13:43:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5141
+- author: Vermidia
+  changes:
+  - message: Powerloader sprites inhand are now different depending on what was picked
+      up.
+    type: Add
+  - message: You can now transfer ammo between dropship ammo boxes with a powerloader.
+    type: Add
+  id: 1125
+  time: '2024-12-21T13:45:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5156
 Name: RMC14
 Order: -1
