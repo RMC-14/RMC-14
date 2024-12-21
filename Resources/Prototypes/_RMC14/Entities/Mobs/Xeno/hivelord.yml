@@ -21,6 +21,7 @@
       0: Alive
       550: Critical
       650: Dead
+  - type: Xeno
     tier: 2
     hudOffset: 0,0.35
     unlockAt: 180 # 3 minutes
@@ -142,9 +143,9 @@
     - ActionXenoTailStab
     - ActionXenoPheromones
     - ActionXenoOrderConstruction
-    - ActionXenoZoom
     - ActionXenoChooseStructure
     - ActionXenoCoerceResin
+    - ActionXenoZoom
     - ActionXenoTransferPlasma
     - ActionXenoResinWalker
     - ActionXenoDevolve
@@ -162,9 +163,6 @@
     maxPlasma: 800
     plasmaRegenOnWeeds: 5.5
   - type: XenoZoom
-    offsetLength: 6
-    speed: 0.8
-    doAfter: 0.5
   - type: ResinWhisperer
     maxRemoteConstructDistance: 13
   - type: XenoStrain
