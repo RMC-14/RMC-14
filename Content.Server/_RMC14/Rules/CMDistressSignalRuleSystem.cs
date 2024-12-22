@@ -87,11 +87,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly ItemCamouflageSystem _camo = default!;
     [Dependency] private readonly MarineSystem _marines = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
+    [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly PlayTimeTrackingSystem _playTime = default!;
@@ -670,6 +671,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 DistressSignalRuleResult.MajorXenoVictory => 1,
                 DistressSignalRuleResult.MinorXenoVictory => 0, // hijack but all xenos die
                 DistressSignalRuleResult.AllDied => 0,
+                null => 0,
                 _ => throw new ArgumentOutOfRangeException(),
             };
 
@@ -1170,22 +1172,28 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         var marineAwards = commendations.Where(c => c.Type == CommendationType.Medal).ToArray();
         if (marineAwards.Length > 0)
         {
+            args.AddLine(string.Empty);
             args.AddLine(Loc.GetString("cm-distress-signal-medals"));
             foreach (var award in marineAwards)
             {
                 // TODO RMC14 rank
                 args.AddLine($"{award.Receiver} is awarded the {award.Name}: '{award.Text}'");
             }
+
+            args.AddLine(string.Empty);
         }
 
         var xenoAwards = commendations.Where(c => c.Type == CommendationType.Jelly).ToArray();
         if (xenoAwards.Length > 0)
         {
+            args.AddLine(string.Empty);
             args.AddLine(Loc.GetString("cm-distress-signal-jellies"));
             foreach (var award in xenoAwards)
             {
                 args.AddLine($"{award.Receiver} is awarded the {award.Name}: '{award.Text}' by {award.Giver}");
             }
+
+            args.AddLine(string.Empty);
         }
     }
 
@@ -1372,14 +1380,16 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         switch (rule.Result)
         {
             case DistressSignalRuleResult.MajorMarineVictory:
-                _marineAnnounce.AnnounceRadio(default,
-                    "ARES v3.2 announces, \"Bioscan complete. No unknown lifeform signature detected.\"",
+                var ent = Spawn();
+                _metaData.SetEntityName(ent, "ARES v3.2");
+                _marineAnnounce.AnnounceRadio(ent,
+                    "Bioscan complete. No unknown lifeform signature detected.",
                     rule.AllClearChannel);
-                _marineAnnounce.AnnounceRadio(default,
-                    "ARES v3.2 announces, \"Saving operational report to archive.\"",
+                _marineAnnounce.AnnounceRadio(ent,
+                    "Saving operational report to archive.",
                     rule.AllClearChannel);
-                _marineAnnounce.AnnounceRadio(default,
-                    "ARES v3.2 announces, \"Commencing final systems scan in 3 minutes.\"",
+                _marineAnnounce.AnnounceRadio(ent,
+                    "Commencing final systems scan in 3 minutes.",
                     rule.AllClearChannel);
                 rule.EndAtAllClear ??= Timing.CurTime + rule.AllClearEndDelay;
                 break;
