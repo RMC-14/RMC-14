@@ -1112,8 +1112,11 @@
       choices: { CMWeapon: 1 }
       entries:
       - id: RMCM1984BeltFilled
-      - id: RMCMK80BeltFilled
+        name: M1984 service pistol
+      - id: CMM77BeltFilled
+        name: M77 pistol
       - id: RMCM44BeltFilled
+        name: M44 revolver
         recommended: true
     - name: Combat Equipment (Combat Use Only)
       jobs:
