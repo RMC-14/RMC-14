@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: crystalHex
   changes:
-  - message: Added various crates to the requisitions catalog (flare packs, binoculars).
-    type: Tweak
-  id: 630
-  time: '2024-08-30T09:02:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3882
-- author: crystalHex
-  changes:
   - message: The fireteam leader now starts with the M12 helmet.
     type: Fix
   id: 631
@@ -4996,5 +4989,13 @@
   id: 1129
   time: '2024-12-22T01:04:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5186
+- author: blueDev2
+  changes:
+  - message: Add Hive Whisperer strain of Hivelord, a Xeno able to create resin structures
+      from a distance.
+    type: Add
+  id: 1130
+  time: '2024-12-22T01:17:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4926
 Name: RMC14
 Order: -1
