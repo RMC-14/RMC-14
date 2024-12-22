@@ -9,6 +9,7 @@ using Content.Shared.Administration;
 using Content.Shared.Players.RateLimiting;
 using Content.Shared.Roles;
 using Robust.Server.Player;
+using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -17,6 +18,7 @@ namespace Content.Server._RMC14.Mentor;
 
 public sealed class MentorManager : IPostInjectInit
 {
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly ILogManager _log = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -185,16 +187,22 @@ public sealed class MentorManager : IPostInjectInit
         _net.RegisterNetMessage<MentorMessagesReceivedMsg>();
         _net.RegisterNetMessage<DeMentorMsg>(OnDeMentor);
         _net.RegisterNetMessage<ReMentorMsg>(OnReMentor);
+
         _userDb.AddOnLoadPlayer(LoadData);
         _userDb.AddOnFinishLoad(FinishLoad);
         _userDb.AddOnPlayerDisconnect(ClientDisconnected);
-        _rateLimit.Register(
-            RateLimitKey,
-            new RateLimitRegistration(
-                RMCCVars.RMCMentorHelpRateLimitPeriod,
-                RMCCVars.RMCMentorHelpRateLimitCount,
-                _ => { }
-            )
-        );
+
+        if (_config.IsCVarRegistered(RMCCVars.RMCMentorHelpRateLimitPeriod.Name) &&
+            _config.IsCVarRegistered(RMCCVars.RMCMentorHelpRateLimitCount.Name))
+        {
+            _rateLimit.Register(
+                RateLimitKey,
+                new RateLimitRegistration(
+                    RMCCVars.RMCMentorHelpRateLimitPeriod,
+                    RMCCVars.RMCMentorHelpRateLimitCount,
+                    _ => { }
+                )
+            );
+        }
     }
 }
