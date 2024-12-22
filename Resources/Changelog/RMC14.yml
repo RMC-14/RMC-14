@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fix larva burst in bags being stuck in said bags
-    type: Fix
-  id: 645
-  time: '2024-08-31T23:53:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3899
-- author: Vermidia
-  changes:
   - message: You can now get a general idea of a sentries health by examining it
     type: Fix
   - message: Fixed being able to activate sentries right next to other active sentries
@@ -5002,5 +4995,14 @@
   id: 1144
   time: '2024-12-22T21:50:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5206
+- author: DrSmugleaf
+  changes:
+  - message: Fixed rounds never ending.
+    type: Fix
+  - message: Added Cyril 'Cloves' Culkins figurine.
+    type: Add
+  id: 1145
+  time: '2024-12-22T23:45:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5212
 Name: RMC14
 Order: -1
