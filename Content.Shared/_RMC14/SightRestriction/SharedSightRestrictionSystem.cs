@@ -48,7 +48,7 @@ public sealed class SharedSightRestrictionSystem : EntitySystem
     private void OnSightRestrictionStartup(Entity<SightRestrictionItemComponent> ent, ref ComponentStartup args)
     {
         var user = Transform(ent.Owner).ParentUid;
-        if (!user.Valid)
+        if (user == null)
             return;
 
         AddSightRestrict(user, ent);
@@ -57,7 +57,7 @@ public sealed class SharedSightRestrictionSystem : EntitySystem
     private void OnSightRestrictionShutdown(Entity<SightRestrictionItemComponent> ent, ref ComponentShutdown args)
     {
         var user = Transform(ent.Owner).ParentUid;
-        if (!user.Valid)
+        if (user == null)
             return;
 
         if (!TryComp<SightRestrictionComponent>(user, out var restrictComp))
