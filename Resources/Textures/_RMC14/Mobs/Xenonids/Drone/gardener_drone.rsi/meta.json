@@ -43,24 +43,27 @@
       "name": "sleeping"
     },
     {
-      "name": "sleeping_overlay"
+      "name": "gardener_rest"
+    },
+    {
+      "name": "gardener_dead"
     },
     {
       "name": "alive",
       "directions": 4
     },
     {
-      "name": "alive_overlay",
+      "name": "gardener_walk",
       "directions": 4
     },
     {
       "name": "dead"
     },
     {
-      "name": "downed"
+      "name": "crit"
     },
     {
-      "name": "downed_overlay"
+      "name": "gardener_downed"
     },
     {
       "name": "drone_downed_0"

@@ -41,7 +41,7 @@
         acts: [ "Breakage" ]
   - type: CommunicationsTower
   - type: RMCRepairable
-    heal: -150
+    heal: 150
     skillRequired: 1
     delay: 5
     fuelUsed: 0
