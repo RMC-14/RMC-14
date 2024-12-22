@@ -208,7 +208,7 @@
   parent: RMCMagazineRifleM4SPRA19
   id: RMCMagazineRifleM4SPRA19Impact
   name: "A19 HV high impact magazine (10x24mm)"
-  description: "A magazine of A19 HV high impact rounds for use in the M4RA battle rifle. The M4RA battle rifle is the only gun that can chamber these rounds."
+  description: "A magazine of A19 HV high impact rounds for use in the M4SPR custom battle rifle. The M4SPR custom battle rifle is the only gun that can chamber these rounds."
   components:
   - type: Tag
     tags:
@@ -233,7 +233,7 @@
   parent: RMCMagazineRifleM4SPRA19
   id: RMCMagazineRifleM4SPRA19Incendiary
   name: "A19 HV incendiary magazine (10x24mm)"
-  description: "A magazine of A19 HV incendiary rounds for use in the M4RA battle rifle. The M4RA battle rifle is the only gun that can chamber these rounds."
+  description: "A magazine of A19 HV incendiary rounds for use in the M4SPR custom battle rifle. The M4SPR custom battle rifle is the only gun that can chamber these rounds."
   components:
   - type: Tag
     tags:
