@@ -323,8 +323,8 @@ public abstract class SharedXenoHealSystem : EntitySystem
         var totalHeal = damage.GetTotal();
         var leftover = amount - totalHeal;
         if (leftover > FixedPoint2.Zero)
-            damage = _rmcDamageable.DistributeHealing(target, BurnGroup, leftover, -damage);
-        _damageable.TryChangeDamage(target, damage, true);
+            damage = _rmcDamageable.DistributeHealing(target, BurnGroup, leftover, damage);
+        _damageable.TryChangeDamage(target, -damage, true);
     }
 
     private bool GetHiveCore(EntityUid xeno)

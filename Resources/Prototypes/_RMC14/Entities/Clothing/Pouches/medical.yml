@@ -240,6 +240,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/frt_med.rsi
   - type: Storage
+    maxItemSize: Large
     grid:
     - 0,0,7,1 #4 slots
     whitelist:
@@ -405,9 +406,42 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/medkit.rsi
-  - type: Storage # TODO RMC14 medical skill 2 only
+  - type: StorageStoreSkillRequired
+    entries:      
+    - whitelist:
+        tags:
+        - DiscreteHealthAnalyzer
+        - Dropper
+        - Pill
+        - Bottle
+        - Syringe
+        - PillCanister
+        - CMTraumaKit
+        - CMBurnKit
+        - CMOintment
+        - Brutepack
+        - CMBloodPack
+      # - TODO RMC14 splint
+        - CMAutoInjector
+      # - TODO RMC14 syringe case
+        - CMSurgicalCase
+        - CMFireExtinguisherPortable
+        - CMRollerBed
+        - CMSurgicalLine
+        - CMSynthGraft
+        - CMRollerBed
+        - BodyBag
+#       - TODO RMC14 fixovein
+        - Hypospray
+        components:
+        - Hypospray
+      skills:
+        all:
+          RMCSkillMedical: 2    
+  - type: Storage
     grid:
     - 0,0,13,1 #7 slots
+    maxItemSize: Large
     whitelist:
       tags:
       - DiscreteHealthAnalyzer

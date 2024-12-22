@@ -1,67 +1,6 @@
 ﻿Entries:
 - author: crystalHex
   changes:
-  - message: Added the G8-A general utility belt and drop pouch to dropship crew and
-      command vendors.
-    type: Tweak
-  id: 633
-  time: '2024-08-30T09:11:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3864
-- author: KalimbaMachine
-  changes:
-  - message: Adds Corporate Liaison Wardrobe!
-    type: Add
-  id: 634
-  time: '2024-08-30T09:11:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3852
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Armor lamps now turn off when the user dies, gets infected, devoured,
-      or unequips the armor.
-    type: Tweak
-  id: 635
-  time: '2024-08-30T09:18:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3858
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Melee weapons now do x1.5 extra damage against xenonids.
-    type: Add
-  id: 636
-  time: '2024-08-30T09:19:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3850
-- author: Vermidia
-  changes:
-  - message: Fixed Crusher stomp damaging marines more than half a tile away from
-      the crusher that aren't laying down
-    type: Fix
-  id: 637
-  time: '2024-08-30T09:22:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3823
-- author: Vermidia
-  changes:
-  - message: Hyposprays now have vials, which can be tactically reloaded by using
-      a hypo on one, or you can swap them in with a vial in hand.
-    type: Add
-  - message: You can now toggle a Hypospray's transfer amount.
-    type: Fix
-  - message: Hyposprays can't inject into beakers
-    type: Fix
-  - message: Hyposprays from We-Ya Meds now come with a vial of tricordizine. You
-      can use the vial or the hypo with the vial inserted on a We-Ya Med to refill
-      it.
-    type: Fix
-  - message: Vial pouches can now be selected by corpsman as a pouch option. Comes
-      with 6 vials
-    type: Add
-  - message: Droppers are now available in the We-Ya Med Plus
-    type: Add
-  - message: You can add lids to beakers, large beakers, and high capacity beakers
-    type: Fix
-  id: 638
-  time: '2024-08-30T09:27:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3842
-- author: crystalHex
-  changes:
   - message: Added the drop pouch crate to requisitions catalog.
     type: Tweak
   id: 639
@@ -4990,5 +4929,67 @@
   id: 1132
   time: '2024-12-22T03:21:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5192
+- author: Rainbeon
+  changes:
+  - message: Fixed Fire Extinguishers not removing the acid effect on Marines when
+      spraying them.
+    type: Fix
+  id: 1133
+  time: '2024-12-22T05:25:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5194
+- author: Vermidia
+  changes:
+  - message: Added medical kit pouch to corpsman gear rack and requisitions.
+    type: Add
+  id: 1134
+  time: '2024-12-22T05:25:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3545
+- author: MACMAN2003
+  changes:
+  - message: Added the CO's M59A prototype rifle.
+    type: Add
+  - message: Gave the ML66A smart gun the option to disable its IFF.
+    type: Add
+  id: 1135
+  time: '2024-12-22T05:37:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4880
+- author: Vermidia
+  changes:
+  - message: Fixed a few medical pouches not being able to store pill bottles
+    type: Fix
+  - message: Fixed medical rig starting with ointment and not burn kits
+    type: Fix
+  id: 1136
+  time: '2024-12-22T10:11:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5195
+- author: Vermidia
+  changes:
+  - message: Fixed defender's fortify and toggle crest sharing a cooldown.
+    type: Fix
+  - message: Fixed headbutt not doing reduced damage and having less range with crest
+      lowered, and not having lower knockback normally.
+    type: Fix
+  - message: Fixed headbutt not having slight armor piercing.
+    type: Fix
+  - message: Fixed defender's explosion armor from fortify being applied differently
+      than other similar explosion armor increasing abilities. (Damage from explosions
+      may be slightly higher).
+    type: Fix
+  - message: Defenders can now attack structures while fortified. They can attack
+      mobs using their tail "slam" (tail stab but renamed).
+    type: Fix
+  - message: Added steelcrest defender. They can move and headbutt while fortified
+      at the cost of less armor from it.
+    type: Add
+  id: 1137
+  time: '2024-12-22T10:50:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5158
+- author: paige404
+  changes:
+  - message: The Rodentia species are now enlisted in the marines.
+    type: Add
+  id: 1138
+  time: '2024-12-22T11:33:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5174
 Name: RMC14
 Order: -1
