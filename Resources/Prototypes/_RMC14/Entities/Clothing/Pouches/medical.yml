@@ -407,7 +407,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/medkit.rsi
   - type: StorageStoreSkillRequired
-    entries:      
+    entries:
     - whitelist:
         tags:
         - DiscreteHealthAnalyzer
@@ -429,7 +429,6 @@
         - CMRollerBed
         - CMSurgicalLine
         - CMSynthGraft
-        - CMRollerBed
         - BodyBag
 #       - TODO RMC14 fixovein
         - Hypospray
@@ -437,7 +436,7 @@
         - Hypospray
       skills:
         all:
-          RMCSkillMedical: 2    
+          RMCSkillMedical: 2
   - type: Storage
     grid:
     - 0,0,13,1 #7 slots
@@ -463,7 +462,6 @@
       - CMRollerBed
       - CMSurgicalLine
       - CMSynthGraft
-      - CMRollerBed
       - BodyBag
 #      - TODO RMC14 fixovein
       - Hypospray
