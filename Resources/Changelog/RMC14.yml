@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: crystalHex
   changes:
-  - message: The fireteam leader now starts with the M12 helmet.
-    type: Fix
-  id: 631
-  time: '2024-08-30T09:06:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3876
-- author: crystalHex
-  changes:
   - message: Xenos can no longer light flares on ground.
     type: Fix
   - message: Xenos can no longer remove webbings from jumpsuits.
@@ -4997,5 +4990,12 @@
   id: 1130
   time: '2024-12-22T01:17:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4926
+- author: MetalSage
+  changes:
+  - message: Added engineering kit
+    type: Add
+  id: 1131
+  time: '2024-12-22T03:19:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4992
 Name: RMC14
 Order: -1
