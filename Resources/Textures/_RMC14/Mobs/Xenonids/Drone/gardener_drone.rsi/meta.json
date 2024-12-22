@@ -57,7 +57,7 @@
       "name": "dead"
     },
     {
-      "name": "downed"
+      "name": "crit"
     },
     {
       "name": "downed_overlay"
