@@ -950,3 +950,14 @@
     scale: 0.6, 0.4
   - type: PatronFigurine
     id: 26df12fd-dcd8-4399-a0fa-d2c5eb4e72d8
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCyrilClovesCulkins
+  name: Cyril 'Cloves' Culkins figurine
+  description: "\"People sleep peaceably in their beds at night only because rough men stand ready to do violence on their behalf.\" - Orwell."
+  components:
+  - type: Sprite
+    state: cyril_cloves_culkins
+  - type: PatronFigurine
+    id: 22d7b4a3-3635-4d69-9696-c91df2047fa9
