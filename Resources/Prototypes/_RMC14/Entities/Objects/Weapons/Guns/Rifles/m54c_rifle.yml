@@ -102,11 +102,11 @@
   components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: WeaponRifleM4CJungle
+      Jungle: WeaponRifleM54CJungle
       Desert: WeaponRifleM54C
-      Snow: WeaponRifleM4CSnow
-      Classic: WeaponRifleM4CClassic
-      Urban: WeaponRifleM4CUrban
+      Snow: WeaponRifleM54CSnow
+      Classic: WeaponRifleM54CClassic
+      Urban: WeaponRifleM54CUrban
 
 - type: entity
   parent: WeaponRifleM54C
@@ -162,7 +162,7 @@
 
 - type: entity
   parent: WeaponRifleM54C
-  id: WeaponRifleM4CJungle
+  id: WeaponRifleM54CJungle
   suffix: Jungle
   components:
   - type: Sprite
@@ -214,7 +214,7 @@
 
 - type: entity
   parent: WeaponRifleM54C
-  id: WeaponRifleM4CSnow
+  id: WeaponRifleM54CSnow
   suffix: Snow
   components:
   - type: Sprite
@@ -265,7 +265,7 @@
 
 - type: entity
   parent: WeaponRifleM54C
-  id: WeaponRifleM4CClassic
+  id: WeaponRifleM54CClassic
   suffix: Classic
   components:
   - type: Sprite
@@ -316,7 +316,7 @@
 
 - type: entity
   parent: WeaponRifleM54C
-  id: WeaponRifleM4CUrban
+  id: WeaponRifleM54CUrban
   suffix: Urban
   components:
   - type: Sprite

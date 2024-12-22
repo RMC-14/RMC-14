@@ -3,7 +3,7 @@
   name: XM88 Heavy Rifle
   id: WeaponRifleXM88
   suffix: Desert
-  description: An experimental man-portable anti-material rifle chambered in .458 SOCOM. It must be manually chambered for every shot.
+  description: An experimental man-portable anti-materiel rifle chambered in .458 SOCOM. It must be manually chambered for every shot.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/desert.rsi

@@ -5,7 +5,6 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
-using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -441,7 +440,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 // If holster has StorageComponent
                 // And item can be inserted
                 if (HasComp<StorageComponent>(clothing) &&
-                    _storage.CanInsert(clothing, item, out _))
+                    _storage.CanInsert(clothing, item, user, out _))
                 {
                     validSlots.Add(new HolsterSlot(priority, true, null, clothing, null));
                 }

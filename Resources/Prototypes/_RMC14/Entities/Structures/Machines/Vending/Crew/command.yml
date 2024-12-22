@@ -34,7 +34,7 @@
     - name: Jacket
       choices: { CMCoat: 1}
       entries:
-      - id: CMCoatOfficer
+      - id: RMCCoatServiceCamo
         recommended: true
     - name: Hat
       choices: { CMHat: 1 }
@@ -127,7 +127,7 @@
       - id: CMBeltMedicalFilled
       - id: RMCBeltHolsterSMGPouch
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
-      - id: RMCM276ShotgunShellLoadingRig
+      - id: RMCBeltShotgunCamo
       - id: RMCBeltGrenade
     - name: Pouches
       choices: { CMPouches: 2 }
@@ -473,8 +473,8 @@
     - name: Commander's Primary
       choices: { CMProtagGun: 1 }
       entries:
-      - id: WeaponRifleM54CCamo # TODO RMC14 Port M46C Protag Gun
-        name: Commander's M54C
+      - id: WeaponRifleM59ACamo
+        name: M59A Prototype Rifle
         recommended: true # TODO RMC14 Make choices: colour the options brown
       - id: RMCSGOEquipmentCaseBeltCamo # TODO RMC14 Port M56C Smart Protag Gun
         name: Commander's Smartgun
