@@ -930,3 +930,6 @@ ArmorHelmetM10: ArmorHelmetM10Camo
 WeldingFuelTank: RMCTankReagentFuel
 WaterTank: RMCTankReagentWater
 
+# 2024-12-22
+ClothingHeadHatWelding: RMCWeldingMask
+ClothingEyesGlassesMeson: RMCWeldingGoggles

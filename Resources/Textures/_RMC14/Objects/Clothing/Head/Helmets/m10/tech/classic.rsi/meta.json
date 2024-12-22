@@ -24,6 +24,9 @@
     },
     {
       "name": "enabled-icon"
+    },
+    {
+      "name": "enabled-equipped-HELMET"
     }
   ]
 }
