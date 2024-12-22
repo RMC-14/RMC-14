@@ -436,8 +436,7 @@
         - Hypospray
     skills:
       all:
-        RMCSkillMedical: 2
-      
+        RMCSkillMedical: 2    
   - type: Storage
     grid:
     - 0,0,13,1 #7 slots
