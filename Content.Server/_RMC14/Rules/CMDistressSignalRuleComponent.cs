@@ -113,4 +113,13 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public TimeSpan? StartTime;
+
+    [DataField]
+    public bool ScalingDone;
+
+    [DataField]
+    public double Scale = 1;
+
+    [DataField]
+    public double MaxScale = 1;
 }

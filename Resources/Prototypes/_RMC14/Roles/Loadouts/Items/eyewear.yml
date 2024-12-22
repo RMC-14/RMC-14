@@ -1,0 +1,63 @@
+# Eyewear
+- type: loadout
+  id: AviatorsRMC
+  cost: 2
+  storage:
+    back:
+    - RMCGlassesAviators
+
+- type: loadout
+  id: EyepatchRMC
+  cost: 2
+  storage:
+    back:
+    - ClothingEyesEyepatch
+
+- type: loadout
+  id: GlassesRPGRMC
+  cost: 2
+  storage:
+    back:
+    - RMCGlassesMarineRpg
+
+- type: loadout
+  id: GogglesRMC
+  cost: 2
+  storage:
+    back:
+    - RMCGogglesBallistic
+
+- type: loadout
+  id: GogglesPrescriptionRMC
+  cost: 2
+  storage:
+    back:
+    - RMCGogglesPrescriptionBallistic
+
+- type: loadout
+  id: GogglesAdvancedRMC
+  cost: 2
+  storage:
+    back:
+    - RMCGogglesBallisticSquad
+
+- type: loadout
+  id: GogglesM1A1RMC
+  cost: 2
+  storage:
+    back:
+    - RMCGogglesM1A1Ballistic
+
+- type: loadout
+  id: PersonalShadesRMC
+  cost: 2
+  storage:
+    back:
+    - RMCSunglassesBig
+
+- type: loadout
+  id: SunglassesRMC
+  cost: 2
+  storage:
+    back:
+    - RMCSunglasses

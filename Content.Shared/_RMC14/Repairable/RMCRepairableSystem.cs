@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Content.Shared._RMC14.Damage;
+﻿using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
@@ -109,8 +108,8 @@ public sealed class RMCRepairableSystem : EntitySystem
         if (args.Used == null || !UseFuel(args.Used.Value, args.User, repairable.Comp.FuelUsed))
             return;
 
-        var heal = _rmcDamageable.DistributeTypes(repairable.Owner, repairable.Comp.Heal);
-        _damageable.TryChangeDamage(repairable, heal);
+        var heal = -_rmcDamageable.DistributeTypesTotal(repairable.Owner, repairable.Comp.Heal);
+        _damageable.TryChangeDamage(repairable, heal, true);
 
         var user = args.User;
         var selfMsg = Loc.GetString("rmc-repairable-finish-self", ("target", repairable));
@@ -156,8 +155,6 @@ public sealed class RMCRepairableSystem : EntitySystem
 
         var used = args.Used;
 
-        args.Handled = true;
-
         var user = args.User;
 
         if (!TryComp(used, out NailgunComponent? nailgunComp))
@@ -166,6 +163,7 @@ public sealed class RMCRepairableSystem : EntitySystem
         if (!TryComp(user, out HandsComponent? handsComp))
             return;
 
+        args.Handled = true;
         if (!TryComp(repairable, out DamageableComponent? damageable) ||
             damageable.TotalDamage <= FixedPoint2.Zero)
         {
@@ -245,8 +243,8 @@ public sealed class RMCRepairableSystem : EntitySystem
         }
 
         //Checks passed, do repair actions
-        var heal = _rmcDamageable.DistributeTypes(repairable.Owner, repairValue);
-        _damageable.TryChangeDamage(repairable, heal);
+        var heal = -_rmcDamageable.DistributeTypesTotal(repairable.Owner, repairValue);
+        _damageable.TryChangeDamage(repairable, heal, true);
 
         if (TryComp(held, out StackComponent? stack))
         {

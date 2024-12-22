@@ -21,6 +21,12 @@ public sealed partial class LoadoutPrototype : IPrototype, IEquipmentLoadout
     public ProtoId<StartingGearPrototype>? StartingGear;
 
     /// <summary>
+    /// How much point cost this loadout costs.
+    /// </summary>
+    [DataField]
+    public int? Cost;
+
+    /// <summary>
     /// Effects to be applied when the loadout is applied.
     /// These can also return true or false for validation purposes.
     /// </summary>

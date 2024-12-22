@@ -4,6 +4,11 @@ cm-xeno-construction-failed-cant-build = We can't build there!
 cm-xeno-construction-failed-select-structure = We need to select a structure to build first! Use the "Choose Resin Structure" action.
 cm-xeno-construction-failed-requires-support = {CAPITALIZE(MAKEPLURAL($choice))} need a wall or resin door next to them to stand up.
 
+rmc-xeno-construction-remote-failed-need-on-weeds = We must be standing on weeds to establish a connection to the resin.
+rmc-xeno-construction-remote-construct = We focus our plasma into the weeds below us and force the weeds to secrete resin!
+rmc-xeno-construction-remote-open-door = We focus our connection to the resin and remotely open the resin door.
+rmc-xeno-construction-remote-close-door = We focus our connection to the resin and remotely close the resin door.
+
 rmc-xeno-construction-no-map-resin-hole = The ground isn't solid
 rmc-xeno-construction-must-have-weeds-resin-hole = Resin holes must be built on weeds.
 rmc-xeno-construction-blocked-resin-hole = There's something built here already.
@@ -47,6 +52,8 @@ rmc-xeno-construction-tunnel-full-xeno-failure = The tunnel is too crowded, wait
 rmc-xeno-construction-tunnel-large-xeno-enter = We begin heaving our monstrous bulk into {$tunnelName}
 rmc-xeno-construction-tunnel-default-xeno-enter = We begin crawling down into {$tunnelName}
 
+rmc-xeno-construction-tunnel-xeno-immobile-failure = We cannot move at all!
+
 rmc-xeno-construction-no-map-tunnel = The ground isn't solid.
 rmc-xeno-construction-blocked-tunnel = There's something built here already.
 rmc-xeno-construction-bad-area = There's no way to burrow here.
@@ -54,7 +61,9 @@ rmc-xeno-construction-bad-area = There's no way to burrow here.
 rmc-xeno-construction-resin-tunnel-uproot = We start uprooting the node so we can dig a tunnel in its place...
 rmc-xeno-construction-resin-tunnel-create-tunnel = We start digging...
 
-rmc-xeno-construction-default-tunnel-name = Tunnel {$tunnelNumber}
+rmc-xeno-construction-default-tunnel-name = {$areaName} ({$coordX}, {$coordY}) {$greekLetter}
+rmc-xeno-construction-default-area-name = Unknown
+
 rmc-xeno-construction-failed-tunnel-rename = Tunnel names must be unique!
 rmc-xeno-construction-tunnel-examine = The pheromone scent reads: {$tunnelName}
 

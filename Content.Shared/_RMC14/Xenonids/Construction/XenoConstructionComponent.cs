@@ -1,4 +1,5 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
@@ -7,7 +8,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Xenonids.Construction;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-[Access(typeof(SharedXenoConstructionSystem))]
+[Access(typeof(SharedXenoConstructionSystem), typeof(ResinWhispererSystem))]
 public sealed partial class XenoConstructionComponent : Component
 {
     [DataField, AutoNetworkedField]

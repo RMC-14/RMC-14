@@ -43,9 +43,9 @@
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
-      - id: CMBackpackMarineTech
-      - id: CMSatchelMarineTech
-      - id: CMBackpackWelder
+      - id: RMCBackpackMarineTechCamo
+      - id: RMCSatchelMarineTechCamo
+      - id: RMCBackpackWelderCamo
         recommended: true
       - id: RMCSatchelWelder
       - id: RMCSatchelWelderChestrig
@@ -53,7 +53,7 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: RMCBeltUtilityGeneral
+      - id: RMCBeltUtilityGeneralCamo
       - id: CMBeltUtilityFilled
         name: M276 Toolbelt Rig (Full)
     - name: Pouches
@@ -99,6 +99,6 @@
     bundle:
     - CMLightReplacer
     # demo scanner
-    # trash bag
-    # mechanical toolbox
+    - TrashBag
+    - RMCToolboxMechanicalFilled
     - RMCFlashlight

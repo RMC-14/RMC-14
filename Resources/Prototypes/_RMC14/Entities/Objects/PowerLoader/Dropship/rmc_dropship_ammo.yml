@@ -11,6 +11,14 @@
   - type: DropshipAmmo
     rounds: 400
     maxRounds: 400
+  - type: PowerLoaderAttachable
+    attachableTypes:
+    - RMCDropshipWeaponPoint
+  - type: PowerLoaderDetachable
+  - type: PowerLoaderGrabbable
+    virtualRight: RMCVirtualDropshipAmmoRight
+    virtualLeft: RMCVirtualDropshipAmmoLeft
+  - type: Appearance
 
 - type: entity
   parent: RMCDropshipAttachmentAmmo
@@ -19,11 +27,14 @@
   description: "A crate full of PGU-100 30mm Multi-Purpose ammo designed to penetrate light (non reinforced) structures, as well as shred infantry, IAVs, LAVs, IMVs, and MRAPs. Works in large areas for use on Class 4 and superior alien insectoid infestations, as well as fitting within the armaments allowed for use against a tier 4 insurgency as well as higher tiers. However, it lacks armor penetrating capabilities, for which Anti-Tank 30mm ammo is needed. Can be loaded into the GAU-21 30mm cannon."
   components:
   - type: Sprite
-    state: 30mm_crate
+    layers:
+    - state: 30mm_crate_10
+      map: [ "enum.DropshipAmmoVisuals.Fill"]
   - type: DropshipFabricatorPrintable
     category: Ammo
     cost: 275
   - type: DropshipAmmo
+    ammoType: 30mm_crate
     rounds: 400
     maxRounds: 400
     roundsPerShot: 40
@@ -46,10 +57,13 @@
   description: "A crate full of PGU-105 Specialized 30mm APFSDS Titanium-Tungsten alloy penetrators, made for countering peer and near peer APCs, IFVs, and MBTs in CAS support. It is designed to penetrate up to the equivalent 1350mm of RHA when launched from a GAU-21. It is much less effective against soft targets however, in which case 30mm ball ammunition is recommended. WARNING: discarding petals from the ammunition can be harmful if the dropship does not pull out at the needed speeds. Please consult page 3574 of the manual, available for order at any AEGIS store. Can be loaded into the GAU-21 30mm cannon."
   components:
   - type: Sprite
-    state: 30mm_crate_hv
+    layers:
+    - state: 30mm_crate_hv_10
+      map: [ "enum.DropshipAmmoVisuals.Fill" ]
   - type: DropshipFabricatorPrintable
     cost: 325
   - type: DropshipAmmo
+    ammoType: 30mm_crate_hv
     bulletSpread: 4
     damage:
       groups:
@@ -75,3 +89,5 @@
   - type: RMCScorchEffectOnSpawn
     probability: 0.5
     tileLimit: 4
+    scatter: true
+    randomRotation: true

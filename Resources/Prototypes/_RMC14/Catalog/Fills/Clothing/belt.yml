@@ -37,6 +37,27 @@
     startingItem: CMM11Knife
 
 - type: entity
+  parent: RMCBeltKnifeSDU
+  id: RMCBeltKnifeSDUFilled
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMM11Knife  
+
+- type: entity
+  parent: CMBeltKnife
+  id: RMCBeltKnifeCamoFilled
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMBeltKnifeFilled
+      Snow: RMCBeltKnifeSDUFilled
+      Desert: RMCBeltKnifeSDUFilled
+      Urban: RMCBeltKnifeSDUFilled
+      Classic: CMBeltKnifeFilled
+
+- type: entity
   parent: CMBeltMedical
   id: CMBeltMedicalFilled
   suffix: Filled
@@ -88,6 +109,75 @@
     # TODO RMC14 tramadol and perixadon pills, splint
 
 - type: entity
+  parent: RMCBeltMedicBagDesert
+  id: RMCBeltMedicBagDesertFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBurnKit10
+      amount: 2
+    - id: CMTraumaKit10
+      amount: 2
+    - id: CMEpinephrineAutoInjector
+      amount: 1
+    - id: CMDexalinPlusAutoInjector
+      amount: 1
+    # TODO RMC14 oxycodone autoinjector
+    - id: CMPillCanisterBicaridine
+      amount: 1
+    - id: CMPillCanisterDexalin
+      amount: 1
+    - id: CMPillCanisterDylovene
+      amount: 1
+    - id: CMPillCanisterKelotane
+      amount: 1
+    - id: CMPillCanisterInaprovaline
+      amount: 1
+    # TODO RMC14 tramadol and perixadon pills, splint  
+
+- type: entity
+  parent: RMCBeltMedicBagSU
+  id: RMCBeltMedicBagSUFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBurnKit10
+      amount: 2
+    - id: CMTraumaKit10
+      amount: 2
+    - id: CMEpinephrineAutoInjector
+      amount: 1
+    - id: CMDexalinPlusAutoInjector
+      amount: 1
+    # TODO RMC14 oxycodone autoinjector
+    - id: CMPillCanisterBicaridine
+      amount: 1
+    - id: CMPillCanisterDexalin
+      amount: 1
+    - id: CMPillCanisterDylovene
+      amount: 1
+    - id: CMPillCanisterKelotane
+      amount: 1
+    - id: CMPillCanisterInaprovaline
+      amount: 1
+    # TODO RMC14 tramadol and perixadon pills, splint   
+
+- type: entity
+  parent: CMBeltMedicBag
+  id: RMCBeltMedicBagCamoFilled
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMBeltMedicBagFilled
+      Snow: RMCBeltMedicBagSUFilled
+      Desert: RMCBeltMedicBagDesertFilled
+      Urban: RMCBeltMedicBagSUFilled
+      Classic: CMBeltMedicBagFilled
+
+- type: entity
   parent: RMCBeltGrenade
   id: RMCBeltGrenadeFilled
   suffix: Filled
@@ -97,7 +187,9 @@
     - id: CMGrenadeHighExplosive
       amount: 5
     - id: CMGrenadeFrag
-      amount: 3
+      amount: 1
+    - id: RMCGrenadeIncendiary
+      amount: 2
     # TODO Original is 3 HEDP, 2 HIDP incen, 2 airburst frag, 1 airburst incen
 
 - type: entity
@@ -110,7 +202,9 @@
     - id: CMGrenadeHighExplosive
       amount: 12
     - id: CMGrenadeFrag
-      amount: 6
+      amount: 3
+    - id: RMCGrenadeIncendiary
+      amount: 3
     # TODO Original is 6 HEDP, 3 HIDP incen, 6 airburst frag, 3 airburst incen
 
 - type: entity
@@ -122,6 +216,39 @@
     contents:
     - id: RMCMagazineSmartGun
       amount: 2
+
+- type: entity
+  parent: RMCBeltSGOSU
+  id: RMCBeltSGOSUFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSmartGunCamo
+      amount: 2
+
+- type: entity
+  parent: RMCBeltSGODesert
+  id: RMCBeltSGODesertFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSmartGunCamo
+      amount: 2
+
+- type: entity
+  parent: CMBeltSmartGunOperator
+  id: RMCBeltSGOCamoFilled
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: CMBeltSmartGunOperatorFilled
+      Snow: RMCBeltSGOSUFilled
+      Desert: RMCBeltSGODesertFilled
+      Urban: RMCBeltSGOSUFilled
+      Classic: CMBeltSmartGunOperatorFilled
 
 - type: entity
   parent: RMCBeltSmartGunOperatorPistol

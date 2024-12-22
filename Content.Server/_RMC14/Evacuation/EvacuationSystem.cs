@@ -1,4 +1,5 @@
-﻿using Content.Server.Shuttles.Components;
+﻿using System.Numerics;
+using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.Evacuation;
@@ -69,7 +70,7 @@ public sealed class EvacuationSystem : SharedEvacuationSystem
                 }
             }
 
-            _shuttle.FTLToCoordinates(grid, shuttle, location, Angle.Zero, hyperspaceTime: 3);
+            _shuttle.FTLToCoordinates(grid, shuttle, location.Offset(new Vector2(-0.5f, -0.5f)), Angle.Zero, hyperspaceTime: 3);
             return;
         }
 

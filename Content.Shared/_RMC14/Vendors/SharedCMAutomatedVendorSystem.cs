@@ -1,7 +1,9 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.Inventory;
+using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Scaling;
 using Content.Shared._RMC14.Webbing;
 using Content.Shared.Access.Components;
 using Content.Shared.Clothing.Components;
@@ -43,15 +45,63 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<MarineScaleChangedEvent>(OnMarineScaleChanged);
+
+        SubscribeLocalEvent<CMAutomatedVendorComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<CMAutomatedVendorComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
 
         SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedHandEvent>(OnRecentlyGotEquipped);
         SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedEvent>(OnRecentlyGotEquipped);
+        SubscribeLocalEvent<RMCRecentlyVendedComponent, ItemCamouflageEvent>(OnRecentlyCamouflage);
 
         Subs.BuiEvents<CMAutomatedVendorComponent>(CMAutomatedVendorUI.Key, subs =>
         {
             subs.Event<CMVendorVendBuiMsg>(OnVendBui);
         });
+    }
+
+    private void OnMarineScaleChanged(ref MarineScaleChangedEvent ev)
+    {
+        var vendors = EntityQueryEnumerator<CMAutomatedVendorComponent>();
+        while (vendors.MoveNext(out var uid, out var vendor))
+        {
+            var changed = false;
+            foreach (var section in vendor.Sections)
+            {
+                foreach (var entry in section.Entries)
+                {
+                    if (entry.Multiplier is not { } multiplier ||
+                        entry.Max is not { } max)
+                    {
+                        continue;
+                    }
+
+                    var newMax = (int) Math.Round(ev.New * multiplier);
+                    var toAdd = newMax - max;
+                    if (toAdd <= 0)
+                        continue;
+
+                    entry.Amount += toAdd;
+                    entry.Max += toAdd;
+                    changed = true;
+                }
+            }
+
+            if (changed)
+                Dirty(uid, vendor);
+        }
+    }
+
+    private void OnMapInit(Entity<CMAutomatedVendorComponent> ent, ref MapInitEvent args)
+    {
+        foreach (var section in ent.Comp.Sections)
+        {
+            foreach (var entry in section.Entries)
+            {
+                entry.Multiplier = entry.Amount;
+                entry.Max = entry.Amount;
+            }
+        }
     }
 
     private void OnUIOpenAttempt(Entity<CMAutomatedVendorComponent> vendor, ref ActivatableUIOpenAttemptEvent args)
@@ -100,6 +150,21 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         RemCompDeferred<WallMountComponent>(ent);
     }
 
+    private void OnRecentlyCamouflage(Entity<RMCRecentlyVendedComponent> ent, ref ItemCamouflageEvent args)
+    {
+        var recently = EnsureComp<RMCRecentlyVendedComponent>(args.New);
+        foreach (var prevent in ent.Comp.PreventCollide)
+        {
+            recently.PreventCollide.Add(prevent);
+        }
+
+        Dirty(args.New, recently);
+
+        var mount = EnsureComp<WallMountComponent>(args.New);
+        mount.Arc = Angle.FromDegrees(360);
+        Dirty(args.New, mount);
+    }
+
     protected virtual void OnVendBui(Entity<CMAutomatedVendorComponent> vendor, ref CMVendorVendBuiMsg args)
     {
         var comp = vendor.Comp;
@@ -141,6 +206,21 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
             Dirty(actor, user);
         }
+
+        var validJob = true;
+        if (_mind.TryGetMind(args.Actor, out var mindId, out _))
+        {
+            foreach (var job in section.Jobs)
+            {
+                if (!_job.MindHasJobWithId(mindId, job.Id))
+                    validJob = false;
+                else
+                    validJob = true;
+            }
+        }
+
+        if (!validJob)
+            return;
 
         if (section.Choices is { } choices)
         {
