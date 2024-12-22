@@ -41,7 +41,21 @@ public sealed class PryingSystem : EntitySystem
         args.Handled = TryPry(uid, args.User, out _, args.Used);
     }
 
-    // Adding Door alternative actions is moved to the CMDoorSystem as multiple systems need to add alternative actions
+    private void OnDoorAltVerb(EntityUid uid, DoorComponent component, GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanInteract || !args.CanAccess)
+            return;
+
+        if (!TryComp<PryingComponent>(args.User, out _))
+            return;
+
+        args.Verbs.Add(new AlternativeVerb()
+        {
+            Text = Loc.GetString("door-pry"),
+            Impact = LogImpact.Low,
+            Act = () => TryPry(uid, args.User, out _, args.User),
+        });
+    }
 
     /// <summary>
     /// Attempt to pry an entity.

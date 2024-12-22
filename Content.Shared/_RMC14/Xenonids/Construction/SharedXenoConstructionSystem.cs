@@ -5,7 +5,6 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
-using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -255,7 +254,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         var attempt = new XenoSecreteStructureAttemptEvent(args.Target);
-        RaiseLocalEvent(xeno, attempt);
+        RaiseLocalEvent(xeno, ref attempt);
 
         if (attempt.Cancelled)
             return;
@@ -608,7 +607,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         return target.GetTileRef(EntityManager, _map) is { } tile &&
                !tile.IsSpace() &&
                tile.GetContentTileDefinition().Sturdy &&
-               !_turf.IsTileBlocked(tile, CollisionGroup.Impassable) &&
+               !_turf.IsTileBlocked(tile, Impassable) &&
                !_xenoNest.HasAdjacentNestFacing(target);
     }
 
