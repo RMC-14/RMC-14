@@ -1,31 +1,20 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/bb00705387c77af87cf86b948e6b34441c60300c/icons/mob/xenonids/drone.dmi",
+  "copyright": "Sprites by @aleksh and @.sigma_draconis.",
   "size": {
     "x": 48,
     "y": 48
   },
   "states": [
     {
-      "name": "alive",
-      "directions": 4
+      "name": "drone_rest_2"
     },
     {
-      "name": "sleeping"
+      "name": "drone_rest_3"
     },
     {
-      "name": "crit"
-    },
-    {
-      "name": "dead"
-    },
-    {
-      "name": "drone_walk_3",
-      "directions": 4
-    },
-    {
-      "name": "drone_walk_2",
+      "name": "drone_walk_0",
       "directions": 4
     },
     {
@@ -33,35 +22,55 @@
       "directions": 4
     },
     {
-      "name": "drone_walk_0",
+      "name": "drone_walk_2",
       "directions": 4
     },
     {
-      "name": "drone_rest_3"
+      "name": "drone_walk_3",
+      "directions": 4
     },
     {
-      "name": "drone_rest_2"
+      "name": "sleeping"
     },
     {
-      "name": "drone_rest_1"
+      "name": "alive",
+      "directions": 4
     },
     {
-      "name": "drone_rest_0"
+      "name": "dead"
     },
     {
-      "name": "drone_downed_3"
-    },
-    {
-      "name": "drone_downed_2"
-    },
-    {
-      "name": "drone_downed_1"
+      "name": "downed"
     },
     {
       "name": "drone_downed_0"
     },
     {
-      "name": "drone_dissection"
+      "name": "drone_downed_1"
+    },
+    {
+      "name": "drone_downed_2"
+    },
+    {
+      "name": "drone_downed_3"
+    },
+    {
+      "name": "drone_egg",
+      "directions": 4
+    },
+    {
+      "name": "drone_parasite_left",
+      "directions": 4
+    },
+    {
+      "name": "drone_parasite_right",
+      "directions": 4
+    },
+    {
+      "name": "drone_rest_0"
+    },
+    {
+      "name": "drone_rest_1"
     }
   ]
 }

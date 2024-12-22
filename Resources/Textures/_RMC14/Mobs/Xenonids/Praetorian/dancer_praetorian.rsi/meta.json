@@ -1,31 +1,23 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/bb00705387c77af87cf86b948e6b34441c60300c/icons/mob/xenonids/praetorian.dmi",
+  "copyright": "Sprites by @aleksh and @.sigma_draconis.",
   "size": {
     "x": 64,
     "y": 64
   },
   "states": [
     {
-      "name": "alive",
-      "directions": 4
+      "name": "praetorian_rest_1"
     },
     {
-      "name": "sleeping"
+      "name": "praetorian_rest_2"
     },
     {
-      "name": "crit"
+      "name": "praetorian_rest_3"
     },
     {
-      "name": "dead"
-    },
-    {
-      "name": "praetorian_walk_3",
-      "directions": 4
-    },
-    {
-      "name": "praetorian_walk_2",
+      "name": "praetorian_walk_0",
       "directions": 4
     },
     {
@@ -33,35 +25,40 @@
       "directions": 4
     },
     {
-      "name": "praetorian_walk_0",
+      "name": "praetorian_walk_2",
       "directions": 4
     },
     {
-      "name": "praetorian_rest_3"
+      "name": "praetorian_walk_3",
+      "directions": 4
     },
     {
-      "name": "praetorian_rest_2"
+      "name": "sleeping"
     },
     {
-      "name": "praetorian_rest_1"
+      "name": "alive",
+      "directions": 4
     },
     {
-      "name": "praetorian_rest_0"
+      "name": "dead"
     },
     {
-      "name": "praetorian_downed_3"
-    },
-    {
-      "name": "praetorian_downed_2"
-    },
-    {
-      "name": "praetorian_downed_1"
+      "name": "downed"
     },
     {
       "name": "praetorian_downed_0"
     },
     {
-      "name": "praetorian_dissection"
+      "name": "praetorian_downed_1"
+    },
+    {
+      "name": "praetorian_downed_2"
+    },
+    {
+      "name": "praetorian_downed_3"
+    },
+    {
+      "name": "praetorian_rest_0"
     }
   ]
 }
