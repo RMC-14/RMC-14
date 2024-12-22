@@ -21,6 +21,9 @@
       "name": "sleeping"
     },
     {
+      "name": "warrior_downed_1"
+    },
+    {
       "name": "warrior_downed_2"
     },
     {
@@ -28,9 +31,6 @@
     },
     {
       "name": "warrior_downed_4"
-    },
-    {
-      "name": "warrior_downed_3"
     },
     {
       "name": "warrior_rest_0"
