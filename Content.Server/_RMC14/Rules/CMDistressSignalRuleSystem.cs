@@ -883,6 +883,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             if (!xenosAlive && !marinesAlive)
             {
+                if (GameTicker.RoundDuration() < distress.AllDiedCheckDelay)
+                    continue;
+
                 EndRound(distress, DistressSignalRuleResult.AllDied);
                 continue;
             }
@@ -1373,6 +1376,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private void EndRound(CMDistressSignalRuleComponent rule, DistressSignalRuleResult result)
     {
+        Log.Info($"Attempting to set {nameof(rule)} result to {result}");
         if (rule.Result != null)
             return;
 

@@ -132,4 +132,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public ProtoId<RadioChannelPrototype> AllClearChannel = "MarineCommand";
+
+    [DataField]
+    public TimeSpan AllDiedCheckDelay = TimeSpan.FromMinutes(1);
 }
