@@ -151,7 +151,7 @@
     - ActionXenoResinWalker
     - ActionXenoDevolve
   - type: XenoConstruction
-    buildDelay: 1
+    buildDelay: 2.5
     canBuild:
     - WallXenoResin
     - WallXenoMembrane
