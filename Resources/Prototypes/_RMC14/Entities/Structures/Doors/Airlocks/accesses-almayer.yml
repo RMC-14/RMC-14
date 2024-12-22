@@ -166,6 +166,7 @@
   - type: PaintableAirlock
     department: CMOther
 
+# Security
 - type: entity
   parent: CMAirlockSecurity
   id: CMAirlockSecurityLocked
@@ -182,26 +183,19 @@
   - type: AccessReader
     access: [ [ "CMAccessBrig" ], [ "CMAccessCommand" ] ]
 
+# Liaison
 - type: entity
-  parent: CMDoubleDoorSecurityGlass
-  id: CMDoubleDoorSecurityGlassLocked
-  suffix: Security, Glass, Locked
+  parent: CMAirlock
+  id: CMAirlockLiaisonLocked
+  suffix: Liaison, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessBrig" ], [ "CMAccessCommand" ] ]
+    access: [ [ "RMCAccessWeYa" ] ]
 
 - type: entity
-  parent: CMDoubleDoorSecuritySolid
-  id: CMDoubleDoorSecuritySolidLocked
-  suffix: Security, Solid, Locked
+  parent: CMAirlockMaint
+  id: CMAirlockMaintLiaisonLocked
+  suffix: Liaison, Locked, Maint
   components:
   - type: AccessReader
-    access: [ [ "CMAccessBrig" ], [ "CMAccessCommand" ] ]
-
-- type: entity
-  parent: CMDoubleDoorMedicalGlass
-  id: CMDoubleDoorMedicalGlassLocked
-  suffix: Medical, Glass
-  components:
-  - type: AccessReader
-    access: [ [ "CMAccessMedical" ], [ "CMAccessCommand" ] ]
+    access: [ [ "RMCAccessWeYa" ] ]

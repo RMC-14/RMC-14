@@ -14,21 +14,30 @@
   supervisors: cm-job-supervisors-cmo
   accessGroups:
   - CMMedbay
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: doctor
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_medical
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
         RMCSkillFirearms: 0
+        RMCSkillFireman: 1
         RMCSkillMedical: 3
         RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
+    - type: JobPrefix
+      prefix: "Doc"
 
 - type: startingGear
   id: CMGearDoctor
   equipment:
     jumpsuit: CMScrubsBlue
-    back: CMSatchelMarine
     shoes: ClothingShoesColorWhite
     id: CMIDCardDoctor
     ears: CMHeadsetMedical # TODO RMC14 Medical Vender
@@ -37,8 +46,7 @@
   id: CMGearDoctorEquipped
   equipment:
     jumpsuit: CMScrubsBlue
-    outerClothing: CMCoatLong
-    back: CMSatchelMarine
+    outerClothing: RMCCoatServiceSnow
     gloves: CMHandsLatex
     shoes: RMCShoesWhite
     head: CMHeadCapSurgBlue
@@ -61,3 +69,4 @@
 
 - type: playTimeTracker
   id: CMJobDoctor
+  isHumanoid: true

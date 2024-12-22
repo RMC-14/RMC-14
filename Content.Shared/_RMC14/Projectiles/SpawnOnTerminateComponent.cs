@@ -20,4 +20,7 @@ public sealed partial class SpawnOnTerminateComponent : Component
 
     [DataField, AutoNetworkedField]
     public PopupType? PopupType;
+
+    [DataField, AutoNetworkedField]
+    public bool ProjectileAdjust = true;
 }

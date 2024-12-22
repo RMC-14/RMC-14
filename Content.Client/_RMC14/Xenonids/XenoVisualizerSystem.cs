@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Movement;
@@ -65,7 +65,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
     public void UpdateSprite(Entity<SpriteComponent?, MobStateComponent?, AppearanceComponent?, InputMoverComponent?, ThrownItemComponent?, XenoLeapingComponent?, KnockedDownComponent?> entity)
     {
         var (_, sprite, mobState, appearance, input, thrown, leaping, knocked) = entity;
-        if (!Resolve(entity, ref sprite, ref appearance))
+        if (!Resolve(entity, ref sprite, ref appearance, false))
             return;
 
         var state = MobState.Alive;
@@ -73,7 +73,7 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
             state = mobState.CurrentState;
 
         Resolve(entity, ref input, ref thrown, ref leaping, ref knocked, false);
-        if (knocked != null)
+        if (knocked != null && state != MobState.Dead)
             state = MobState.Critical;
 
         if (sprite is not { BaseRSI: { } rsi } ||
@@ -136,6 +136,14 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
                     rsi.TryGetState("crest", out _))
                 {
                     sprite.LayerSetState(layer, "crest");
+                    break;
+                }
+
+                if (AppearanceSystem.TryGetData(entity, XenoVisualLayers.Burrow, out bool burrowed, appearance) &&
+                    burrowed &&
+                    rsi.TryGetState("burrowed", out _))
+                {
+                    sprite.LayerSetState(layer, "burrowed");
                     break;
                 }
 

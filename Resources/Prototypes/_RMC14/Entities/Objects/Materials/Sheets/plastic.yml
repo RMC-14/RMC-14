@@ -45,6 +45,7 @@
   - type: Tag
     tags:
     - Sheet
+    - Plastic
 
 - type: entity
   parent: RMCSheetPlastic

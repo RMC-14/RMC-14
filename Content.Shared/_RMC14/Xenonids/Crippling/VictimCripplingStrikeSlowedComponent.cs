@@ -13,4 +13,10 @@ public sealed partial class VictimCripplingStrikeSlowedComponent : Component
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 SpeedMultiplier = FixedPoint2.New(0.75);
+
+    [DataField, AutoNetworkedField]
+    public float DamageMult = 1;
+
+    [DataField, AutoNetworkedField]
+    public bool WasHit = false;
 }

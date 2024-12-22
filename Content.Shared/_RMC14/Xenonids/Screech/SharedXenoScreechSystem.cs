@@ -1,4 +1,6 @@
 ﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
@@ -12,6 +14,7 @@ namespace Content.Shared._RMC14.Xenonids.Screech;
 public sealed class XenoScreechSystem : EntitySystem
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
@@ -19,14 +22,15 @@ public sealed class XenoScreechSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
 
+    private readonly HashSet<Entity<MarineComponent>> _marines = new();
+    private readonly HashSet<Entity<XenoParasiteComponent>> _parasites = new();
+
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<XenoScreechComponent, XenoScreechActionEvent>(OnXenoScreechAction);
     }
-
-    private readonly HashSet<Entity<MarineComponent>> _receivers = new();
 
     private void OnXenoScreechAction(Entity<XenoScreechComponent> xeno, ref XenoScreechActionEvent args)
     {
@@ -50,10 +54,10 @@ public sealed class XenoScreechSystem : EntitySystem
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
-        _receivers.Clear();
-        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.StunRange, _receivers);
+        _parasites.Clear();
+        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.StunRange, _parasites);
 
-        foreach (var receiver in _receivers)
+        foreach (var receiver in _parasites)
         {
             if (_mobState.IsDead(receiver))
                 continue;
@@ -61,38 +65,43 @@ public sealed class XenoScreechSystem : EntitySystem
             if (!_examineSystem.InRangeUnOccluded(xeno.Owner, receiver.Owner))
                 continue;
 
-            if (TryComp(xeno, out XenoComponent? xenoComp) &&
-                TryComp(receiver, out XenoComponent? targetXeno) &&
-                xenoComp.Hive == targetXeno.Hive)
-            {
+            if (_hive.FromSameHive(xeno.Owner, receiver.Owner))
                 continue;
-            }
 
             _stun.TryStun(receiver, xeno.Comp.StunTime, false);
         }
 
-        _receivers.Clear();
-        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParalyzeRange, _receivers);
+        _marines.Clear();
+        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParalyzeRange, _marines);
 
-        foreach (var receiver in _receivers)
+        _parasites.Clear();
+        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParalyzeRange, _parasites);
+
+        foreach (var receiver in _marines)
         {
-            if (_mobState.IsDead(receiver))
-                continue;
+            Stun(xeno, receiver, xeno.Comp.ParalyzeTime);
+        }
 
-            if (!_examineSystem.InRangeUnOccluded(xeno.Owner, receiver.Owner))
-                continue;
-
-            if (TryComp(xeno, out XenoComponent? xenoComp) &&
-                TryComp(receiver, out XenoComponent? targetXeno) &&
-                xenoComp.Hive == targetXeno.Hive)
-            {
-                continue;
-            }
-
-            _stun.TryParalyze(receiver, xeno.Comp.ParalyzeTime, true);
+        foreach (var receiver in _parasites)
+        {
+            Stun(xeno, receiver, xeno.Comp.ParalyzeTime);
         }
 
         if (_net.IsServer)
             SpawnAttachedTo(xeno.Comp.Effect, xeno.Owner.ToCoordinates());
+    }
+
+    private void Stun(EntityUid xeno, EntityUid receiver, TimeSpan time)
+    {
+        if (_mobState.IsDead(receiver))
+            return;
+
+        if (!_examineSystem.InRangeUnOccluded(xeno, receiver))
+            return;
+
+        if (_hive.FromSameHive(xeno, receiver))
+            return;
+
+        _stun.TryParalyze(receiver, time, true);
     }
 }

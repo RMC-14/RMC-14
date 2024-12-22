@@ -32,6 +32,13 @@
   whitelisted: true
   accessGroups:
   - ShipMasterAccess
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: co
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -56,17 +63,24 @@
         RMCSkillSurgery: 1
         RMCSkillVehicles: 1
     - type: MarineOrders
+    - type: CMVendorUser
+      points: 120
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: "CO"
 
 - type: startingGear
   id: CMGearCommandingOfficer
   equipment:
-    jumpsuit: CMJumpsuitCO
-    back: CMSatchel
+    jumpsuit: CMJumpsuitBO
+    belt: RMCMatebaBeltFilled
     shoes: CMShoesLaceupCommander
-    head: CMHeadBeretCO
-    outerClothing: CMCoatOfficer
+    head: RMCHeadBeretCOCamo
+    outerClothing: RMCCoatServiceCamo
     id: CMIDCardCommandingOfficer
     ears: CMHeadsetSeniorCommand
+    pocket1: RMCPouchCommand
+    pocket2: RMCPouchGeneralLarge
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -83,3 +97,4 @@
 
 - type: playTimeTracker
   id: CMJobCommandingOfficer
+  isHumanoid: true

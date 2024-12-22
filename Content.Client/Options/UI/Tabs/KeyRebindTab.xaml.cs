@@ -164,6 +164,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(CMKeyFunctions.CMHolsterSecondary);
             AddButton(CMKeyFunctions.CMHolsterTertiary);
             AddButton(CMKeyFunctions.CMHolsterQuaternary);
+            AddButton(CMKeyFunctions.RMCPickUpDroppedItems);
 
             AddHeader("ui-options-header-general");
             AddCheckBox("ui-options-hotkey-keymap", _cfg.GetCVar(CVars.DisplayUSQWERTYHotkeys), HandleToggleUSQWERTYCheckbox);
@@ -209,6 +210,9 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.MovePulledObject);
             AddButton(ContentKeyFunctions.ReleasePulledObject);
             AddButton(ContentKeyFunctions.Point);
+            AddButton(ContentKeyFunctions.RotateObjectClockwise);
+            AddButton(ContentKeyFunctions.RotateObjectCounterclockwise);
+            AddButton(ContentKeyFunctions.FlipObject);
 
             AddHeader("ui-options-header-ui");
             AddButton(ContentKeyFunctions.FocusChat);

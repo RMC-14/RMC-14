@@ -14,8 +14,10 @@
   - type: CMAutomatedVendor
     jobs:
     - CMMilitaryPolice
+    - CMChiefMP # TODO RMC14 chief mp vendor
     sections:
     - name: Police Set (Mandatory)
+      takeAll: CMPoliceSet
       entries:
       - id: RMCVendorBundleMilitaryPoliceApparel
     - name: Standard Equipment
@@ -27,7 +29,7 @@
     - name: Armor
       takeAll: CMArmor
       entries:
-      - id: CMArmorM2MP
+      - id: RMCArmorM2MPCamo
       - id: CMHeadBeretRed
     - name: Handgun Case
 #     choices: { CMGunCase: 1 }
@@ -41,10 +43,10 @@
       - id: CMSatchelSecurity
     - name: Belt
       choices: { CMBelt: 1 }
-      entries: []
-#     - id: CMM276GeneralPistolHolsterRig
-#     - id: CMM276M44HolsterRig
-#     - M276 G8-A General Utility Pouch
+      entries:
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
+      - id: RMCBeltUtilityGeneralCamo
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -62,7 +64,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
-#     - id: Rebreather
+      - id: RMCMaskRebreather
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
@@ -88,6 +90,7 @@
     - CMMilitaryWarden
     sections:
     - name: Police Set (Mandatory)
+      takeAll: CMPoliceSet
       entries:
       - id: RMCVendorBundleMilitaryPoliceApparel
     - name: Standard Equipment
@@ -99,7 +102,7 @@
     - name: Armor
       takeAll: CMArmor
       entries:
-      - id: CMArmorM3Warden
+      - id: RMCArmorM3WardenCamo
       - id: CMHeadCapWarden
     - name: Handgun Case
 #     choices: { CMGunCase: 1 }
@@ -113,10 +116,10 @@
       - id: CMSatchelSecurity
     - name: Belt
       choices: { CMBelt: 1 }
-      entries: []
-#     - id: CMM276GeneralPistolHolsterRig
-#     - id: CMM276M44HolsterRig
-#     - M276 G8-A General Utility Pouch
+      entries:
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
+      - id: RMCBeltUtilityGeneralCamo
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -134,7 +137,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
-#     - id: Rebreather
+      - id: RMCMaskRebreather
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:

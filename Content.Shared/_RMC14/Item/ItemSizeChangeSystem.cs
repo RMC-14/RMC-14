@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Attachable.Systems;
+using Content.Shared._RMC14.Explosion;
 using Content.Shared.Item;
 using Robust.Shared.Prototypes;
 
@@ -15,8 +16,10 @@ public sealed partial class ItemSizeChangeSystem : EntitySystem
     {
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
-        SubscribeLocalEvent<ItemSizeChangeComponent, MapInitEvent>(OnMapInit,
+        SubscribeLocalEvent<ItemSizeChangeComponent, MapInitEvent>(OnItemSizeChangeMapInit,
             before: new[] { typeof(AttachableHolderSystem) });
+
+        SubscribeLocalEvent<ChangeItemSizeOnTimerTriggerComponent, RMCActiveTimerTriggerEvent>(OnChangeItemSizeOnTimerTrigger);
 
         InitItemSizes();
     }
@@ -27,6 +30,17 @@ public sealed partial class ItemSizeChangeSystem : EntitySystem
             return;
 
         InitItemSizes();
+    }
+
+    private void OnItemSizeChangeMapInit(Entity<ItemSizeChangeComponent> item, ref MapInitEvent args)
+    {
+        InitItem(item);
+        RefreshItemSizeModifiers((item.Owner, item.Comp));
+    }
+
+    private void OnChangeItemSizeOnTimerTrigger(Entity<ChangeItemSizeOnTimerTriggerComponent> ent, ref RMCActiveTimerTriggerEvent args)
+    {
+        _itemSystem.SetSize(ent, ent.Comp.Size);
     }
 
     private void InitItemSizes()
@@ -44,17 +58,14 @@ public sealed partial class ItemSizeChangeSystem : EntitySystem
         _sortedSizes.Sort();
     }
 
-    private void OnMapInit(Entity<ItemSizeChangeComponent> item, ref MapInitEvent args)
-    {
-        InitItem(item);
-        RefreshItemSizeModifiers((item.Owner, item.Comp));
-    }
-
     public void RefreshItemSizeModifiers(Entity<ItemSizeChangeComponent?> item)
     {
-        item.Comp = EnsureComp<ItemSizeChangeComponent>(item.Owner);
+        if (item.Comp == null)
+            item.Comp = EnsureComp<ItemSizeChangeComponent>(item.Owner);
+        else if (!InitItem((item.Owner, item.Comp)))
+            return;
 
-        if (item.Comp == null || !InitItem((item.Owner, item.Comp)) || item.Comp.BaseSize == null)
+        if (item.Comp == null || item.Comp.BaseSize == null)
             return;
 
         var ev = new GetItemSizeModifiersEvent(item.Comp.BaseSize.Value);
@@ -73,11 +84,25 @@ public sealed partial class ItemSizeChangeSystem : EntitySystem
         if (!onlyNull && item.Comp.BaseSize != null)
             return true;
 
+        if (_sortedSizes.Count <= 0)
+        {
+            InitItemSizes();
+
+            if (_sortedSizes.Count <= 0)
+                return false;
+        }
+
         if (!TryComp(item.Owner, out ItemComponent? itemComponent) || !_prototypeManager.TryIndex(itemComponent.Size, out ItemSizePrototype? prototype))
             return false;
 
-        item.Comp.BaseSize = _sortedSizes.IndexOf(prototype);
+        var size = _sortedSizes.IndexOf(prototype);
+
+        if (size < 0)
+            return false;
+
+        item.Comp.BaseSize = size;
         Dirty(item);
+
         return true;
     }
 }

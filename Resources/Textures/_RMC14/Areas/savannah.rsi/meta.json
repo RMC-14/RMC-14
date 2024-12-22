@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by Tunguso4ka (github) for RMC-14",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "savannah"
+    },
+    {
+      "name": "command"
+    },
+    {
+      "name": "medical"
+    },
+    {
+      "name": "engineering"
+    },
+    {
+      "name": "requi"
+    },
+    {
+      "name": "security"
+    },
+    {
+      "name": "other"
+    },
+    {
+      "name": "alpha_bravo"
+    },
+    {
+      "name": "alpha"
+    },
+    {
+      "name": "bravo"
+    },
+    {
+      "name": "charlie_delta"
+    },
+    {
+      "name": "charlie"
+    },
+    {
+      "name": "delta"
+    },
+    {
+      "name": "blank"
+    }
+  ]
+}

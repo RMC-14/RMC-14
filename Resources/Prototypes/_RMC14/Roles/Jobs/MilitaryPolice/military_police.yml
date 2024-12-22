@@ -15,6 +15,13 @@
   supervisors: cm-job-supervisors-cmp
   accessGroups:
   - MP
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: mp
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_mp
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -25,18 +32,19 @@
         RMCSkillFirearms: 1
         RMCSkillFireman: 2
         RMCSkillPolice: 2
+    - type: JobPrefix
+      prefix: "MP"
 
 - type: startingGear
   id: CMGearMilitaryPolice
   equipment:
-    jumpsuit: CMJumpsuitMPBlack
-    back: CMSatchelSecurity
+    jumpsuit: RMCJumpsuitMPCamo
     shoes: CMBootsBlackFilled
     head: CMHeadBeretRed
     eyes: CMGlassesSecurity
     gloves: CMHandsBlackMarine
     id: CMIDCardMilitaryPolice
-    outerClothing: CMArmorM2MP
+    outerClothing: RMCArmorM2MPCamo
     ears: CMHeadsetMPO
     belt: CMBeltSecurityMPFilled
     #    pocket1: TODO RMC14 tape recorder
@@ -57,3 +65,4 @@
 
 - type: playTimeTracker
   id: CMJobMilitaryPolice
+  isHumanoid: true

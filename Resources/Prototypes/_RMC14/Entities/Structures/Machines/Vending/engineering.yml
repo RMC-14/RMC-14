@@ -14,20 +14,26 @@
     denyState: deny-unshaded
     ejectState: eject-unshaded
   - type: AccessReader
-    access: [["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
+    access: [["CMAccessCombatTechPrep"], ["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
 
 - type: vendingMachineInventory
   id: CMVendorTool
   startingInventory:
-    RMCFlashlight: 4
-    ClothingHeadHatHardhatBlue: 4
+    RMCFlashlight: 4 #TODO combat variant?
+    RMCHardhatBlue: 4
     CMHandsInsulated: 4
-    ClothingBeltUtility: 4
+    CMBeltUtility: 4
     ClothingEyesGlassesMeson: 4
     ClothingHeadHatWelding: 4
+    RMCEngineerKit: 2
+    #Atmos scanner
+    #Demo scanner
+    #Meson scanner
+    #Reagent scanner
     trayScanner: 4
     CMCrowbar: 8
     CMWelder: 8
+    CMWelderSmall: 4
     CMScrewdriver: 8
     CMWirecutter: 8
     CMWrench: 8
@@ -55,8 +61,16 @@
     CrewMonitoringComputerCircuitboard: 2
     IDComputerCircuitboard: 2
     StationRecordsComputerCircuitboard: 2
+# Supply ordering console
+# Reserach data terminal
 #    CMPortableGeneratorPacmanMachineCircuitBoard: 5
     CMSMESMachineCircuitboard: 2
+# Air alarm
+# security camera monitor
+# television set
+# station alerts
+# arcade
+# atmospheric monitor
 
 
 # Electronics
@@ -101,10 +115,12 @@
     TimerTrigger: 4
     ProximitySensor: 4
     RemoteSignaller: 4
-    Bucket: 6
+    RMCBucket: 6
+    CMBucketMop: 2
     CMStockPartMatterBin: 8
     CMStockPartManipulatorMicro: 8
     CMStockPartCapacitor: 8
+    #TODO Console screen, scanning module
 
 
 # Science

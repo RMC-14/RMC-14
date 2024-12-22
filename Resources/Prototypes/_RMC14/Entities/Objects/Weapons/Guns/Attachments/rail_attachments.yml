@@ -83,6 +83,9 @@
     - RMCAttachmentRail
     - RMCAttachmentRailFlashlight
     - Flashlight
+  - type: Construction
+    graph: RMCFlashLightGraph
+    node: RailLight
 
 - type: entity
   parent: RMCRailAttachmentBase
@@ -123,7 +126,6 @@
     - conditions:
         unwieldedOnly: true
       accuracyAddMult: 0.05
-      accuracyMovementPenaltyAddMult: 1
 
 - type: entity
   parent: RMCRailAttachmentBase
@@ -148,7 +150,6 @@
     - conditions:
         unwieldedOnly: true
       accuracyAddMult: 0.05
-      accuracyMovementPenaltyAddMult: 1
 
 - type: entity
   abstract: true
@@ -176,7 +177,11 @@
     requireWielding: true
     attachment: true
     useInHand: true
-    delay: 0
+    zoomLevels:
+    - zoom: 1
+      offset: 15
+      allowMovement: false
+      doAfter: 0
 
 - type: entity
   parent: RMCAttachmentScopeBase
@@ -196,14 +201,17 @@
     actionDesc: An AEGIS S8 telescopic eye piece. Fixed at 4x zoom.
   - type: AttachableToggleableSimpleActivate
   - type: Scope
-    zoom: 1.6
-    offset: 14
+    zoomLevels:
+    - zoom: 1.6
+      offset: 14
+      allowMovement: false
+      doAfter: 0
   - type: AttachableSpeedMods
     modifiers:
-      - conditions:
-          wieldedOnly: true
-        walk: -0.23
-        sprint: -0.35
+    - conditions:
+        wieldedOnly: true
+      walk: -0.23
+      sprint: -0.35
   - type: AttachableWieldDelayMods
     modifiers:
     - delay: 0.4
@@ -219,9 +227,6 @@
         wieldedOnly: true
         inactiveOnly: true
       accuracyAddMult: -0.05
-    - conditions:
-        unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: 2
 
 - type: entity
   parent: RMCAttachmentS84xTelescopicScope
@@ -266,14 +271,17 @@
     actionDesc: An AEGIS S4 telescoping eye piece. Fixed at a modest 2x zoom.
   - type: AttachableToggleableSimpleActivate
   - type: Scope
-    offset: 13
-    allowMovement: true
+    zoomLevels:
+    - zoom: 1
+      offset: 13
+      allowMovement: true
+      doAfter: 0
   - type: AttachableSpeedMods
     modifiers:
-      - conditions:
-          activeOnly: true
-        walk: -0.31
-        sprint: -0.448
+    - conditions:
+        activeOnly: true
+      walk: -0.31
+      sprint: -0.448
   - type: AttachableWieldDelayMods
     modifiers:
     - delay: 0.4
@@ -287,10 +295,7 @@
     - conditions:
         wieldedOnly: true
         inactiveOnly: true
-      accuracyAddMult: -0.05
-    - conditions:
-        unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: 2 #TODO: Add flare gun modifiers when it's implemented.
+      accuracyAddMult: -0.05 #TODO: Add flare gun modifiers when it's implemented.
 
 - type: entity
   parent: RMCAttachmentS42xTelescopicMiniscope
@@ -311,7 +316,11 @@
     actionName: Look through WeYa S4 2x Advanced Telescopic Mini-Scope
     actionDesc: An AEGIS S4 telescoping eye piece, custom-tuned by WeYa scientists to be as ergonomic as possible.
   - type: Scope
-    offset: 14
+    zoomLevels:
+    - zoom: 1
+      offset: 14
+      allowMovement: true
+      doAfter: 0
   - type: AttachableSpeedMods
     modifiers: []
 
@@ -340,7 +349,7 @@
   parent: RMCAttachmentS42xTelescopicMiniscope
   id: RMCAttachmentB8SmartScope
   name: B8 smart-scope
-  description: An experimental B8 Smart-Scope. Based on the technologies used in the Smart Gun by AEGIS, this sight has integrated IFF systems. It can only attach to the M4SPR Battle Rifle. # TODO RMC14 and M44 Combat Revolver.
+  description: An experimental B8 Smart-Scope. Based on the technologies used in the Smart Gun by AEGIS, this sight has integrated IFF systems. It can only attach to the M4SPR Battle Rifle and the M44 Combat Revolver.
   components:
   - type: Sprite
     state: iffbarrel
@@ -377,14 +386,94 @@
     - RMCAttachmentRail
     - RMCM96SIntegratedScope
   - type: AttachableToggleable
+    breakOnMove: false
+    actionsToRelayWhitelist:
+      tags:
+      - RMCActionCycleZoomLevel
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: m96s-scope
     actionName: Look through M96S Integrated Scope
     actionDesc: Lets you see further.
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      walk: -0.31
+      sprint: -0.448
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - fireDelayFlat: 0.1
+    - conditions:
+        activeOnly: true
+      fireDelayFlat: 0.25
+      accuracyAddMult: 0.35
+      damageFalloffAddMult: -0.4
+    - conditions:
+        wieldedOnly: true
+        inactiveOnly: true
+      accuracyAddMult: -0.05
   - type: Scope
-    zoom: 1.25 # TODO RMC14 2x and 4x zoom
-    delay: 1
+    zoomLevels:
+    - name: 4x
+      zoom: 1.6
+      offset: 14
+      allowMovement: false
+      doAfter: 0
+    - name: 2x
+      zoom: 1
+      offset: 14
+      allowMovement: true
+      doAfter: 0
+
+- type: entity
+  parent: RMCAttachmentScopeBase
+  id: RMCAttachmentXS-9
+  name: XS-9 targeting relay
+  suffix: Desert
+  description: While still in development, the XS-9 Targeting Relay has many features -- most of them disabled for the field testing -- functions slightly better than a standard scope.
+  components:
+  - type: Sprite
+    state: d_boomslang-scope
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCAttachmentXS-9
+  - type: AttachableVisuals
+  - type: AttachableToggleable
+    breakOnMove: false
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: d_boomslang-scope
+    actionName: Look through the XS-9 Scope
+    actionDesc: A mostly disabled XS-9, it still functions as a scope though.
+  - type: AttachableToggleableSimpleActivate
+  - type: Scope
+    zoomLevels:
+    - zoom: 1
+      offset: 14
+      allowMovement: true
+      doAfter: 0
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      walk: -0.31
+      sprint: -0.448
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.4
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      fireDelayFlat: 0.15
+      accuracyAddMult: 0.35
+      damageFalloffAddMult: -0.2
+    - conditions:
+        wieldedOnly: true
+        inactiveOnly: true
+      accuracyAddMult: -0.05
 
 - type: Tag
   id: RMCAttachmentRail
@@ -421,3 +510,6 @@
 
 - type: Tag
   id: RMCM96SIntegratedScope
+
+- type: Tag
+  id: RMCAttachmentXS-9

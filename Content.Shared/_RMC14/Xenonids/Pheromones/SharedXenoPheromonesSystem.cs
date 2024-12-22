@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
@@ -7,6 +8,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
@@ -66,6 +68,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, ComponentRemove>(OnFrenzyRemove);
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, GetMeleeDamageEvent>(OnFrenzyGetMeleeDamage);
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, RefreshMovementSpeedModifiersEvent>(OnFrenzyMovementSpeedModifiers);
+        SubscribeLocalEvent<XenoFrenzyPheromonesComponent, PullStartedMessage>(OnFrenzyPullStarted, after: [typeof(RMCPullingSystem)] );
+        SubscribeLocalEvent<XenoFrenzyPheromonesComponent, PullStoppedMessage>(OnFrenzyPullStopped, after: [typeof(RMCPullingSystem)] );
+
 
         SubscribeLocalEvent<XenoActivePheromonesComponent, MobStateChangedEvent>(OnActiveMobStateChanged);
 
@@ -116,6 +121,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         var active = EnsureComp<XenoActivePheromonesComponent>(xeno);
         active.Pheromones = args.Pheromones;
         Dirty(xeno, active);
+
+        var ev = new XenoPheromonesActivatedEvent();
+        RaiseLocalEvent(xeno, ref ev);
 
         _entityLookup.GetEntitiesInRange(xeno.Owner.ToCoordinates(), xeno.Comp.PheromonesRange, active.Receivers);
     }
@@ -173,7 +181,20 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     private void OnFrenzyMovementSpeedModifiers(Entity<XenoFrenzyPheromonesComponent> frenzy, ref RefreshMovementSpeedModifiersEvent args)
     {
         var speed = 1 + (frenzy.Comp.MovementSpeedModifier * frenzy.Comp.Multiplier).Float();
+        if (HasComp<PullingSlowedComponent>(frenzy.Owner))
+            speed = 1 + (frenzy.Comp.PullMovementSpeedModifier * frenzy.Comp.Multiplier).Float();
+        
         args.ModifySpeed(speed, speed);
+    }
+
+    private void OnFrenzyPullStarted(Entity<XenoFrenzyPheromonesComponent> frenzy, ref PullStartedMessage args)
+    {
+        _movementSpeed.RefreshMovementSpeedModifiers(args.PullerUid);
+    }
+
+    private void OnFrenzyPullStopped(Entity<XenoFrenzyPheromonesComponent> frenzy, ref PullStoppedMessage args)
+    {
+        _movementSpeed.RefreshMovementSpeedModifiers(args.PullerUid);
     }
 
     private void AssignMaxMultiplier(ref FixedPoint2 a, FixedPoint2 b)
@@ -181,7 +202,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         a = FixedPoint2.Max(a, b);
     }
 
-    private void DeactivatePheromones(Entity<XenoPheromonesComponent?> xeno)
+    public void DeactivatePheromones(Entity<XenoPheromonesComponent?> xeno)
     {
         if (!Resolve(xeno, ref xeno.Comp, false))
             return;
@@ -192,14 +213,36 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
                 _actions.SetToggled(actionId, false);
         }
 
-        if (HasComp<XenoActivePheromonesComponent>(xeno))
-        {
-            if (_net.IsServer)
-                RemComp<XenoActivePheromonesComponent>(xeno);
-
-            _popup.PopupClient(Loc.GetString("cm-xeno-pheromones-stop"), xeno, xeno);
+        if (!HasComp<XenoActivePheromonesComponent>(xeno))
             return;
-        }
+
+        if (_net.IsServer)
+            RemComp<XenoActivePheromonesComponent>(xeno);
+
+        _popup.PopupClient(Loc.GetString("cm-xeno-pheromones-stop"), xeno, xeno);
+        var pheroEv = new XenoPheromonesDeactivatedEvent();
+        RaiseLocalEvent(xeno, ref pheroEv);
+    }
+
+    public void TryActivatePheromonesObject(Entity<XenoPheromonesObjectComponent?> ent)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return;
+
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp(ent, out XenoPheromonesComponent? comp))
+            return;
+
+        var active = EnsureComp<XenoActivePheromonesComponent>(ent);
+        active.Pheromones = ent.Comp.Pheromones;
+        Dirty(ent, active);
+
+        _entityLookup.GetEntitiesInRange(ent.Owner.ToCoordinates(), comp.PheromonesRange, active.Receivers);
+
+        var ev = new XenoPheromonesActivatedEvent();
+        RaiseLocalEvent(ent, ref ev);
     }
 
     public override void Update(float frameTime)
@@ -259,7 +302,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
             pheromones.NextPheromonesPlasmaUse = _timing.CurTime + _pheromonePlasmaUseDelay;
             Dirty(uid, pheromones);
 
-            if (!_xenoPlasma.TryRemovePlasma(uid, pheromones.PheromonesPlasmaUpkeep))
+            if (!HasComp<XenoPheromonesObjectComponent>(uid) &&
+                pheromones.PheromonesPlasmaUpkeep > 0 &&
+                !_xenoPlasma.TryRemovePlasma(uid, pheromones.PheromonesPlasmaUpkeep))
             {
                 _pheromonesJob.Pheromones.RemoveAt(_pheromonesJob.Pheromones.Count - 1);
                 RemCompDeferred<XenoActivePheromonesComponent>(uid);

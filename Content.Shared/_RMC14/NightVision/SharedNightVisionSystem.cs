@@ -1,6 +1,8 @@
-﻿using Content.Shared.Actions;
+﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.Actions;
 using Content.Shared.Alert;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Popups;
 using Content.Shared.Rounding;
 using Content.Shared.Toggleable;
 using Robust.Shared.Timing;
@@ -12,6 +14,8 @@ public abstract class SharedNightVisionSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
@@ -20,6 +24,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
         SubscribeLocalEvent<NightVisionComponent, MapInitEvent>(OnNightVisionMapInit);
         SubscribeLocalEvent<NightVisionComponent, AfterAutoHandleStateEvent>(OnNightVisionAfterHandle);
         SubscribeLocalEvent<NightVisionComponent, ComponentRemove>(OnNightVisionRemove);
+        SubscribeLocalEvent<NightVisionComponent, ToggleNightVisionAlertEvent>(OnNightVisionToggle);
 
         SubscribeLocalEvent<NightVisionItemComponent, GetItemActionsEvent>(OnNightVisionItemGetActions);
         SubscribeLocalEvent<NightVisionItemComponent, ToggleActionEvent>(OnNightVisionItemToggle);
@@ -53,9 +58,17 @@ public abstract class SharedNightVisionSystem : EntitySystem
         NightVisionRemoved(ent);
     }
 
+    private void OnNightVisionToggle(Entity<NightVisionComponent> ent, ref ToggleNightVisionAlertEvent args)
+    {
+        Toggle((ent, ent));
+    }
+
     private void OnNightVisionItemGetActions(Entity<NightVisionItemComponent> ent, ref GetItemActionsEvent args)
     {
         if (args.InHands || !ent.Comp.Toggleable)
+            return;
+
+        if (ent.Comp.SlotFlags != args.SlotFlags)
             return;
 
         args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId);
@@ -72,11 +85,17 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
     private void OnNightVisionItemGotEquipped(Entity<NightVisionItemComponent> ent, ref GotEquippedEvent args)
     {
-        ToggleNightVisionItem(ent, args.Equipee);
+        if (ent.Comp.SlotFlags != args.SlotFlags)
+            return;
+
+        EnableNightVisionItem(ent, args.Equipee);
     }
 
     private void OnNightVisionItemGotUnequipped(Entity<NightVisionItemComponent> ent, ref GotUnequippedEvent args)
     {
+        if (ent.Comp.SlotFlags != args.SlotFlags)
+            return;
+
         DisableNightVisionItem(ent, args.Equipee);
     }
 
@@ -140,6 +159,12 @@ public abstract class SharedNightVisionSystem : EntitySystem
     {
         DisableNightVisionItem(item, item.Comp.User);
 
+        if (item.Comp.Skills != null && !_skills.HasAllSkills(user, item.Comp.Skills))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-skills-hud-toggle"), user, user, PopupType.MediumCaution);
+            return;
+        }
+
         item.Comp.User = user;
         Dirty(item);
 
@@ -163,7 +188,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
     {
     }
 
-    protected void DisableNightVisionItem(Entity<NightVisionItemComponent> item, EntityUid? user)
+    public void DisableNightVisionItem(Entity<NightVisionItemComponent> item, EntityUid? user)
     {
         _actions.SetToggled(item.Comp.Action, false);
 

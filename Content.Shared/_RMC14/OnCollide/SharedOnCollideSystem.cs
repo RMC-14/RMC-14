@@ -1,4 +1,6 @@
-﻿using Content.Shared._RMC14.Xenonids.Projectile.Spit;
+﻿using Content.Shared._RMC14.Armor.ThermalCloak;
+using Content.Shared._RMC14.Xenonids.Projectile;
+using Content.Shared._RMC14.Xenonids.Projectile.Spit;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Stunnable;
@@ -15,11 +17,14 @@ public abstract class SharedOnCollideSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly ThermalCloakSystem _cloak = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly XenoSpitSystem _xenoSpit = default!;
 
     private EntityQuery<CollideChainComponent> _collideChainQuery;
     private EntityQuery<DamageOnCollideComponent> _damageOnCollideQuery;
+
+    private readonly List<Entity<DamageOnCollideComponent>> _damageOnCollide = new();
 
     public override void Initialize()
     {
@@ -45,19 +50,22 @@ public abstract class SharedOnCollideSystem : EntitySystem
         if (!ent.Comp.DamageDead && _mobState.IsDead(other))
             return;
 
+        if(HasComp<UncloakOnHitComponent>(ent.Owner))
+            _cloak.TrySetInvisibility(other, false, true);
+
         ent.Comp.Damaged.Add(other);
         Dirty(ent);
 
         var didEmote = false;
         if (ent.Comp.Chain == null || AddToChain(ent.Comp.Chain.Value, other))
         {
-            _damageable.TryChangeDamage(other, ent.Comp.Damage);
+            _damageable.TryChangeDamage(other, ent.Comp.Damage, ent.Comp.IgnoreResistances);
             DoEmote(ent, other);
             didEmote = true;
         }
         else
         {
-            _damageable.TryChangeDamage(other, ent.Comp.ChainDamage);
+            _damageable.TryChangeDamage(other, ent.Comp.ChainDamage, ent.Comp.IgnoreResistances);
         }
 
         _xenoSpit.SetAcidCombo(other, ent.Comp.AcidComboDuration, ent.Comp.AcidComboDamage, ent.Comp.AcidComboParalyze);
@@ -69,6 +77,9 @@ public abstract class SharedOnCollideSystem : EntitySystem
             if (!didEmote)
                 DoEmote(ent, other);
         }
+
+        var ev = new DamageCollideEvent(other);
+        RaiseLocalEvent(ent, ref ev);
     }
 
     protected virtual void DoEmote(Entity<DamageOnCollideComponent> ent, EntityUid other)
@@ -107,18 +118,31 @@ public abstract class SharedOnCollideSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        var query = EntityQueryEnumerator<DamageOnCollideComponent>();
-        while (query.MoveNext(out var uid, out var comp))
+        _damageOnCollide.Clear();
+
+        try
         {
-            if (comp.InitDamaged)
-                continue;
-
-            comp.InitDamaged = true;
-
-            foreach (var contact in _physics.GetEntitiesIntersectingBody(uid, (int) comp.Collision))
+            var query = EntityQueryEnumerator<DamageOnCollideComponent>();
+            while (query.MoveNext(out var uid, out var comp))
             {
-                OnCollide((uid, comp), contact);
+                if (comp.InitDamaged)
+                    continue;
+
+                comp.InitDamaged = true;
+                _damageOnCollide.Add((uid, comp));
             }
+
+            foreach (var entity in _damageOnCollide)
+            {
+                foreach (var contact in _physics.GetEntitiesIntersectingBody(entity, (int) entity.Comp.Collision))
+                {
+                    OnCollide(entity, contact);
+                }
+            }
+        }
+        finally
+        {
+            _damageOnCollide.Clear();
         }
     }
 }

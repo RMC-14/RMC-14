@@ -2,16 +2,18 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.Mind;
-using Content.Server.Popups;
 using Content.Server.Radio.EntitySystems;
 using Content.Server.Roles.Jobs;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
+using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Survivor;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
+using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Robust.Server.Audio;
 using Robust.Shared.Audio;
@@ -33,12 +35,15 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly JobSystem _job = default!;
     [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
+    [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private int _characterLimit = 1000;
+    public readonly SoundSpecifier DefaultAnnouncementSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/Marine/notice2.ogg");
+    public readonly SoundSpecifier DefaultSquadSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/tech_notification.ogg");
 
     public override void Initialize()
     {
@@ -57,12 +62,18 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         Subs.CVar(_config, CCVars.ChatMaxMessageLength, limit => _characterLimit = limit, true);
     }
 
-    private void OnMapInit(Entity<MarineCommunicationsComputerComponent> computer, ref MapInitEvent args)
+    private void OnMapInit(
+        Entity<MarineCommunicationsComputerComponent> computer,
+        ref MapInitEvent args
+        )
     {
         UpdatePlanetMap(computer);
     }
 
-    private void OnBUIOpened(Entity<MarineCommunicationsComputerComponent> computer, ref BoundUIOpenedEvent args)
+    private void OnBUIOpened(
+        Entity<MarineCommunicationsComputerComponent> computer,
+        ref BoundUIOpenedEvent args
+        )
     {
         UpdatePlanetMap(computer);
     }
@@ -74,8 +85,8 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         var time = _timing.CurTime;
         if (_timing.CurTime < ent.Comp.LastAnnouncement + ent.Comp.Cooldown)
         {
-            // TODO RMC14 localize
-            _popup.PopupClient($"Please allow at least {(int) ent.Comp.Cooldown.TotalSeconds} seconds to pass between announcements", args.Actor);
+            var cooldownMessage = Loc.GetString("rmc-announcement-cooldown", ("seconds", (int) ent.Comp.Cooldown.TotalSeconds));
+            _popup.PopupClient(cooldownMessage, args.Actor);
             return;
         }
 
@@ -83,13 +94,16 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         if (text.Length > _characterLimit)
             text = text[.._characterLimit].Trim();
 
-        Announce(args.Actor, text, ent.Comp.Sound);
+        AnnounceSigned(args.Actor, text);
 
         ent.Comp.LastAnnouncement = time;
         Dirty(ent);
     }
 
-    private void OnMarineCommunicationsDesignatePrimaryLZMsg(Entity<MarineCommunicationsComputerComponent> computer, ref MarineCommunicationsDesignatePrimaryLZMsg args)
+    private void OnMarineCommunicationsDesignatePrimaryLZMsg(
+        Entity<MarineCommunicationsComputerComponent> computer,
+        ref MarineCommunicationsDesignatePrimaryLZMsg args
+        )
     {
         var user = args.Actor;
         if (!TryGetEntity(args.LZ, out var lz))
@@ -98,10 +112,12 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
             return;
         }
 
-        _dropship.TryDesignatePrimaryLZ(user, lz.Value, computer.Comp.Sound);
+        _dropship.TryDesignatePrimaryLZ(user, lz.Value);
     }
 
-    private void UpdatePlanetMap(Entity<MarineCommunicationsComputerComponent> computer)
+    private void UpdatePlanetMap(
+        Entity<MarineCommunicationsComputerComponent> computer
+        )
     {
         var planet = _distressSignal.SelectedPlanetMapName ?? string.Empty;
         var operation = _distressSignal.OperationName ?? string.Empty;
@@ -118,9 +134,61 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         _ui.SetUiState(computer.Owner, MarineCommunicationsComputerUI.Key, state);
     }
 
-    public void Announce(EntityUid sender, string message, SoundSpecifier sound)
+
+    /// <summary>
+    /// Dispatches already wrapped announcement to Marines.
+    /// </summary>
+    /// <param name="message">The content of the announcement.</param>
+    /// <param name="sound">GlobalSound for announcement.</param>
+    public void AnnounceToMarines(
+        string message,
+        SoundSpecifier? sound = null
+        )
     {
-        // TODO RMC14 localize this
+        var filter = Filter.Empty()
+            .AddWhereAttachedEntity(e =>
+                HasComp<MarineComponent>(e) ||
+                HasComp<GhostComponent>(e)
+            );
+
+        filter.RemoveWhereAttachedEntity(HasComp<SurvivorComponent>);
+
+        _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
+        _audio.PlayGlobal(sound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));
+    }
+
+    /// <summary>
+    /// Dispatches an unsigned announcement to Marines.
+    /// </summary>
+    /// <param name="message">The content of the announcement.</param>
+    /// <param name="author">The author of the message, UNMC High Command by default.</param>
+    /// <param name="sound">GlobalSound for announcement.</param>
+    public void AnnounceHighCommand(
+        string message,
+        string? author = null,
+        SoundSpecifier? sound = null
+        )
+    {
+        author ??= Loc.GetString("rmc-announcement-author-highcommand");
+        var wrappedMessage = Loc.GetString("rmc-announcement-message", ("author", author), ("message", message));
+
+        AnnounceToMarines(wrappedMessage);
+    }
+
+    /// <summary>
+    /// Dispatches a signed announcement to Marines.
+    /// </summary>
+    /// <param name="sender">EntityUid of sender, for job and name params.</param>
+    /// <param name="message">The content of the announcement.</param>
+    /// <param name="author">The author of the message, Command by default.</param>
+    /// <param name="sound">GlobalSound for announcement.</param>
+    public void AnnounceSigned(
+        EntityUid sender,
+        string message,
+        string? author = null,
+        SoundSpecifier? sound = null
+        )
+    {
         // TODO RMC14 rank
         var job = string.Empty;
         if (_mind.TryGetMind(sender, out var mindId, out _) &&
@@ -129,9 +197,9 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
             job = jobName;
         }
 
+        author ??= Loc.GetString("rmc-announcement-author"); // Get "Command" fluent string if author==null
         var name = Name(sender);
-        var wrappedMessage =
-            $"[font size=14][bold][color=white]Command Announcement[/color][/bold][/font]\n[font size=12][color=red]\n{message}\n\nSigned by,\n{job} {name}[/color][/font]";
+        var wrappedMessage = Loc.GetString("rmc-announcement-message-signed", ("author", author), ("message", message), ("job", job), ("name", name));
 
         // TODO RMC14 receivers
         var filter = Filter.Empty()
@@ -139,12 +207,16 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
                 HasComp<MarineComponent>(e) ||
                 HasComp<GhostComponent>(e)
             );
-        _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrappedMessage, default, false, true, null);
-        _audio.PlayGlobal(sound, filter, true, AudioParams.Default.WithVolume(-2f));
+
+        AnnounceToMarines(wrappedMessage);
         _adminLogs.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(sender):source} marine announced message: {message}");
     }
 
-    public override void AnnounceRadio(EntityUid sender, string message, ProtoId<RadioChannelPrototype> channel)
+    public override void AnnounceRadio(
+        EntityUid sender,
+        string message,
+        ProtoId<RadioChannelPrototype> channel
+        )
     {
         base.AnnounceRadio(sender, message, channel);
 
@@ -152,19 +224,49 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         _radio.SendRadioMessage(sender, message, channel, sender);
     }
 
-    public override void AnnounceARES(EntityUid? source, string message, SoundSpecifier sound)
+    public override void AnnounceARES(
+        EntityUid? source,
+        string message,
+        SoundSpecifier? sound = null,
+        LocId? announcement = null
+        )
     {
-        base.AnnounceARES(source, message, sound);
+        base.AnnounceARES(source, message, sound, announcement);
 
+        announcement ??= "rmc-announcement-ares-message";
+        message = Loc.GetString(announcement, ("message", FormattedMessage.EscapeText(message)));
+
+        AnnounceToMarines(message, sound);
         _adminLogs.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(source):player} ARES announced message: {message}");
+    }
 
-        var filter = Filter.Empty()
-            .AddWhereAttachedEntity(e => HasComp<MarineComponent>(e) || HasComp<GhostComponent>(e));
-        var headerText = "[color=white][font size=16][bold]ARES v3.2 Operation Staging Order[/bold][/font][/color]\n\n";
-        var wrapped = FormattedMessage.EscapeText(message);
-        message = $"{headerText}[color=red][font size=14][bold]{wrapped}[/bold][/font][/color]\n";
+    public override void AnnounceSquad(string message, EntProtoId<SquadTeamComponent> squad, SoundSpecifier? sound = null)
+    {
+        base.AnnounceSquad(message, squad, sound);
+
+        var filter = Filter.Empty().AddWhereAttachedEntity(e => _squad.IsInSquad(e, squad));
+
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
+        _audio.PlayGlobal(sound ?? DefaultSquadSound, filter, true, AudioParams.Default.WithVolume(-2f));
+    }
 
-        _audio.PlayGlobal(sound, filter, true, AudioParams.Default.WithVolume(-2f));
+    public override void AnnounceSquad(string message, EntityUid squad, SoundSpecifier? sound = null)
+    {
+        base.AnnounceSquad(message, squad, sound);
+
+        var filter = Filter.Empty().AddWhereAttachedEntity(e => _squad.IsInSquad(e, squad));
+
+        _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
+        _audio.PlayGlobal(sound ?? DefaultSquadSound, filter, true, AudioParams.Default.WithVolume(-2f));
+    }
+
+    public override void AnnounceSingle(string message, EntityUid receiver, SoundSpecifier? sound = null)
+    {
+        base.AnnounceSingle(message, receiver, sound);
+
+        if (TryComp(receiver, out ActorComponent? actor))
+            _chatManager.ChatMessageToOne(ChatChannel.Radio, message, message, default, false, actor.PlayerSession.Channel);
+
+        _audio.PlayEntity(sound, receiver, receiver, AudioParams.Default.WithVolume(-2f));
     }
 }

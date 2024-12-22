@@ -75,6 +75,9 @@ namespace Content.Client.Input
             human.AddFunction(ContentKeyFunctions.OpenBackpack);
             human.AddFunction(ContentKeyFunctions.OpenBelt);
             human.AddFunction(ContentKeyFunctions.MouseMiddle);
+            human.AddFunction(ContentKeyFunctions.RotateObjectClockwise);
+            human.AddFunction(ContentKeyFunctions.RotateObjectCounterclockwise);
+            human.AddFunction(ContentKeyFunctions.FlipObject);
             human.AddFunction(ContentKeyFunctions.ArcadeUp);
             human.AddFunction(ContentKeyFunctions.ArcadeDown);
             human.AddFunction(ContentKeyFunctions.ArcadeLeft);
@@ -141,6 +144,7 @@ namespace Content.Client.Input
             human.AddFunction(CMKeyFunctions.CMHolsterTertiary);
             human.AddFunction(CMKeyFunctions.CMHolsterQuaternary);
             human.AddFunction(CMKeyFunctions.CMXenoWideSwing);
+            human.AddFunction(CMKeyFunctions.RMCPickUpDroppedItems);
         }
     }
 }

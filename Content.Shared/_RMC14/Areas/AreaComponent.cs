@@ -16,7 +16,10 @@ public sealed partial class AreaComponent : Component
     public bool Lasing;
 
     [DataField, AutoNetworkedField]
-    public bool Mortar;
+    public bool MortarPlacement;
+
+    [DataField, AutoNetworkedField]
+    public bool MortarFire;
 
     [DataField, AutoNetworkedField]
     public bool Medevac;
@@ -56,7 +59,7 @@ public sealed partial class AreaComponent : Component
     public double HijackEvacuationWeight;
 
     [DataField, AutoNetworkedField]
-    public AreaHijackEvacuationType? HijackEvacuationType;
+    public AreaHijackEvacuationType HijackEvacuationType = AreaHijackEvacuationType.None;
 
     [DataField, AutoNetworkedField]
     public string? PowerNet;
@@ -66,4 +69,7 @@ public sealed partial class AreaComponent : Component
 
     [DataField, AutoNetworkedField]
     public int ZLevel;
+
+    [DataField, AutoNetworkedField]
+    public bool LandingZone;
 }

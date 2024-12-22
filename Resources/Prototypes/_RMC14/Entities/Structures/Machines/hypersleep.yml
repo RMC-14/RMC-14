@@ -49,10 +49,11 @@
         enum.HyperSleepChamberLayers.Base:
           True: { state: closed }
           False: { state: open }
-  - type: InteractedBlacklist
+  - type: InsertBlacklist
     blacklist:
       components:
       - Xeno
+  - type: NoStunOnExit
 
 - type: entity
   parent: CMHyperSleepChamber

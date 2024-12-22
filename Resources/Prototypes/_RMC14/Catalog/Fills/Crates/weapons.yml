@@ -1,53 +1,83 @@
 - type: entity
-  id: CMCrateM54C
-  parent: CMCrateWeapons
+  id: RMCCrateM54C
+  parent: RMCCrateWeapons
   name: M54C MK1 Rifle Crate (x2 MK2, x2 magazines)
   components:
   - type: StorageFill
     contents:
-      - id: WeaponRifleM54C
+      - id: WeaponRifleM54CCamo
         amount: 2
       - id: CMMagazineRifleM54C
         amount: 2
 
 - type: entity
-  id: CMCrateM54CE2
-  parent: CMCrateWeapons
-  name: M54CE2 HAR crate (HAR x2, HAR ammo box x2)
+  parent: RMCCrateWeapons
+  id: RMCCrateM54CE2
+  name: M54CE2 HPR crate (HAR x2, HAR ammo box x2)
   components:
   - type: StorageFill
     contents:
-      - id: WeaponRifleM54CE2
-        amount: 2
-      - id: CMMagazineRifleM54CE2
-        amount: 2
+    - id: RMCM54CE2Case
+      amount: 2
 
 - type: entity
-  id: CMCrateMK80
-  parent: CMCrateWeapons
+  id: RMCCrateMK80
+  parent: RMCCrateWeapons
   name: MK80 Hand Cannon Crate (x2)
   components:
   - type: StorageFill
     contents:
     - id: RMCMK80Case
       amount: 2
+    - id: CMMagazinePistolMK80
+      amount: 4
 
 - type: entity
-  parent: CMCrateWeapons
+  id: RMCCrateXM88
+  parent: RMCCrateWeapons
+  name: XM88 Heavy Rifle crate (XM88 x2)
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCCaseXM88
+        amount: 2
+
+- type: entity
+  parent: RMCCrateWeapons
   id: RMCCrateSmartGunSet
   name: ML66A Smart Gun System Package
   components:
   - type: StorageFill
     contents:
-    - id: CMSmartGunOperatorEquipmentCase
+    - id: RMCSGOEquipmentCaseCamo
       amount: 1
 
 - type: entity
-  id: CMCrateSU6
-  parent: CMCrateWeapons
+  id: RMCCrateSU6
+  parent: RMCCrateWeapons
   name: SU-6 Smart Pistol Crate (x2)
   components:
   - type: StorageFill
     contents:
     - id: RMCSmartPistolCase
+      amount: 2
+
+- type: entity
+  id: RMCCrateMOU53
+  parent: RMCCrateWeapons
+  name: MOU-53 Break Action Shotgun Crate (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMOU53Case
+      amount: 2
+
+- type: entity
+  parent: RMCCrateWeapons
+  id: RMCCrateXM51
+  name: XM51 Breaching Scattergun Crate (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCXM51Case
       amount: 2

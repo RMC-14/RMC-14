@@ -8,7 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
-using Content.Shared._RMC14.LinkAccount;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -29,6 +28,8 @@ namespace Content.Server.Database
     public abstract class ServerDbBase
     {
         private readonly ISawmill _opsLog;
+
+        public event Action<DatabaseNotification>? OnNotificationReceived;
 
         /// <param name="opsLog">Sawmill to trace log database operations to.</param>
         public ServerDbBase(ISawmill opsLog)
@@ -53,7 +54,8 @@ namespace Content.Server.Database
                     .ThenInclude(l => l.Groups)
                     .ThenInclude(group => group.Loadouts)
                 .Include(p => p.Profiles).ThenInclude(p => p.NamedItems)
-                .AsSingleQuery()
+                .Include(p => p.Profiles).ThenInclude(p => p.SquadPreference)
+                .AsSplitQuery()
                 .SingleOrDefaultAsync(p => p.UserId == userId.UserId, cancel);
 
             if (prefs is null)
@@ -105,6 +107,7 @@ namespace Content.Server.Database
                     .ThenInclude(l => l.Groups)
                     .ThenInclude(group => group.Loadouts)
                 .Include(p => p.NamedItems)
+                .Include(p => p.SquadPreference)
                 .AsSplitQuery()
                 .SingleOrDefault(h => h.Slot == slot);
 
@@ -115,6 +118,8 @@ namespace Content.Server.Database
                     .Preference
                     .Include(p => p.Profiles)
                     .ThenInclude(p => p.NamedItems)
+                    .Include(p => p.Profiles)
+                    .ThenInclude(p => p.SquadPreference)
                     .SingleAsync(p => p.UserId == userId.UserId);
 
                 prefs.Profiles.Add(newProfile);
@@ -198,6 +203,11 @@ namespace Content.Server.Database
                 sex = sexVal;
 
             var spawnPriority = (SpawnPriorityPreference) profile.SpawnPriority;
+            var squadPreference = profile.SquadPreference?.Squad;
+
+            var armorPreference = ArmorPreference.Random;
+            if (Enum.TryParse<ArmorPreference>(profile.ArmorPreference, true, out var armorVal))
+                armorPreference = armorVal;
 
             var gender = sex == Sex.Male ? Gender.Male : Gender.Female;
             if (Enum.TryParse<Gender>(profile.Gender, true, out var genderVal))
@@ -223,7 +233,9 @@ namespace Content.Server.Database
 
             foreach (var role in profile.Loadouts)
             {
-                var loadout = new RoleLoadout(role.RoleName);
+                var loadout = new RoleLoadout(role.RoleName)
+                {
+                };
 
                 foreach (var group in role.Groups)
                 {
@@ -258,6 +270,8 @@ namespace Content.Server.Database
                     markings
                 ),
                 spawnPriority,
+                armorPreference,
+                squadPreference,
                 jobs,
                 (PreferenceUnavailableMode) profile.PreferenceUnavailable,
                 antags.ToHashSet(),
@@ -269,7 +283,11 @@ namespace Content.Server.Database
                     SidearmName = profile.NamedItems?.SidearmName,
                     HelmetName = profile.NamedItems?.HelmetName,
                     ArmorName = profile.NamedItems?.ArmorName,
-                }
+                    SentryName = profile.NamedItems?.SentryName,
+                },
+                profile.PlaytimePerks,
+                profile.XenoPrefix,
+                profile.XenoPostfix
             );
         }
 
@@ -297,6 +315,8 @@ namespace Content.Server.Database
             profile.EyeColor = appearance.EyeColor.ToHex();
             profile.SkinColor = appearance.SkinColor.ToHex();
             profile.SpawnPriority = (int) humanoid.SpawnPriority;
+            profile.ArmorPreference = humanoid.ArmorPreference.ToString();
+            profile.SquadPreference = new RMCSquadPreference { Squad = humanoid.SquadPreference };
             profile.Markings = markings;
             profile.Slot = slot;
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
@@ -355,8 +375,13 @@ namespace Content.Server.Database
                 PrimaryGunName = humanoid.NamedItems.PrimaryGunName,
                 SidearmName = humanoid.NamedItems.SidearmName,
                 HelmetName = humanoid.NamedItems.HelmetName,
-                ArmorName = humanoid.NamedItems.ArmorName
+                ArmorName = humanoid.NamedItems.ArmorName,
+                SentryName = humanoid.NamedItems.SentryName,
             };
+
+            profile.PlaytimePerks = humanoid.PlaytimePerks;
+            profile.XenoPrefix = humanoid.XenoPrefix;
+            profile.XenoPostfix = humanoid.XenoPostfix;
 
             return profile;
         }
@@ -445,13 +470,16 @@ namespace Content.Server.Database
             await db.DbContext.SaveChangesAsync();
         }
 
-        protected static async Task<ServerBanExemptFlags?> GetBanExemptionCore(DbGuard db, NetUserId? userId)
+        protected static async Task<ServerBanExemptFlags?> GetBanExemptionCore(
+            DbGuard db,
+            NetUserId? userId,
+            CancellationToken cancel = default)
         {
             if (userId == null)
                 return null;
 
             var exemption = await db.DbContext.BanExemption
-                .SingleOrDefaultAsync(e => e.UserId == userId.Value.UserId);
+                .SingleOrDefaultAsync(e => e.UserId == userId.Value.UserId, cancellationToken: cancel);
 
             return exemption?.Flags;
         }
@@ -482,11 +510,11 @@ namespace Content.Server.Database
             await db.DbContext.SaveChangesAsync();
         }
 
-        public async Task<ServerBanExemptFlags> GetBanExemption(NetUserId userId)
+        public async Task<ServerBanExemptFlags> GetBanExemption(NetUserId userId, CancellationToken cancel)
         {
-            await using var db = await GetDb();
+            await using var db = await GetDb(cancel);
 
-            var flags = await GetBanExemptionCore(db, userId);
+            var flags = await GetBanExemptionCore(db, userId, cancel);
             return flags ?? ServerBanExemptFlags.None;
         }
 
@@ -1081,6 +1109,29 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await db.DbContext.SaveChangesAsync();
         }
 
+        public async Task<bool> GetBlacklistStatusAsync(NetUserId player)
+        {
+            await using var db = await GetDb();
+
+            return await db.DbContext.Blacklist.AnyAsync(w => w.UserId == player);
+        }
+
+        public async Task AddToBlacklistAsync(NetUserId player)
+        {
+            await using var db = await GetDb();
+
+            db.DbContext.Blacklist.Add(new Blacklist() { UserId = player });
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task RemoveFromBlacklistAsync(NetUserId player)
+        {
+            await using var db = await GetDb();
+            var entry = await db.DbContext.Blacklist.SingleAsync(w => w.UserId == player);
+            db.DbContext.Blacklist.Remove(entry);
+            await db.DbContext.SaveChangesAsync();
+        }
+
         #endregion
 
         #region Uploaded Resources Logs
@@ -1639,13 +1690,13 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 .ToListAsync(cancellationToken: cancel);
         }
 
-        public async Task<bool> IsJobWhitelisted(Guid player, ProtoId<JobPrototype> job)
+        public async Task<bool> IsJobWhitelisted(Guid player, ProtoId<JobPrototype> job, CancellationToken cancel = default)
         {
-            await using var db = await GetDb();
+            await using var db = await GetDb(cancel);
             return await db.DbContext.RoleWhitelists
                 .Where(w => w.PlayerUserId == player)
                 .Where(w => w.RoleId == job.Id)
-                .AnyAsync();
+                .AnyAsync(cancel);
         }
 
         public async Task<bool> RemoveJobWhitelist(Guid player, ProtoId<JobPrototype> job)
@@ -1716,6 +1767,17 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 .Include(p => p.Player)
                 .Include(p => p.Tier)
                 .ToListAsync();
+        }
+
+        public async Task SetGhostColor(Guid player, System.Drawing.Color? color)
+        {
+            await using var db = await GetDb();
+            var patron = await db.DbContext.RMCPatrons.FirstOrDefaultAsync(p => p.PlayerId == player);
+            if (patron == null)
+                return;
+
+            patron.GhostColor = color?.ToArgb();
+            await db.DbContext.SaveChangesAsync();
         }
 
         public async Task SetLobbyMessage(Guid player, string message)
@@ -1885,6 +1947,16 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             public abstract ServerDbContext DbContext { get; }
 
             public abstract ValueTask DisposeAsync();
+        }
+
+        protected void NotificationReceived(DatabaseNotification notification)
+        {
+            OnNotificationReceived?.Invoke(notification);
+        }
+
+        public virtual void Shutdown()
+        {
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Content.Shared.Buckle.Components;
+using Content.Shared.Buckle.Components;
+using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
@@ -32,7 +33,34 @@ public abstract partial class SharedBuckleSystem
         if (!StrapCanDragDropOn(uid, args.User, uid, args.Dragged, component))
             return;
 
-        args.Handled = TryBuckle(args.Dragged, args.User, uid, popup: false);
+        if (!XenoCheck(args.User, args.Dragged))
+            return;
+
+        if (args.Dragged == args.User)
+        {
+            if (!TryComp(args.User, out BuckleComponent? buckle))
+                return;
+
+            args.Handled = TryBuckle(args.User, args.User, uid, buckle);
+        }
+        else
+        {
+            var delay = component.BuckleDoafterTime;
+            if (TryComp(args.Dragged, out BuckleComponent? buckle) &&
+                buckle.BuckleDelay != null)
+            {
+                delay = buckle.BuckleDelay.Value;
+            }
+
+            var doAfterArgs = new DoAfterArgs(EntityManager, args.User, delay, new BuckleDoAfterEvent(), args.Dragged, args.Dragged, uid)
+            {
+                BreakOnMove = true,
+                BreakOnDamage = true,
+                AttemptFrequency = AttemptFrequency.EveryTick
+            };
+
+            _doAfter.TryStartDoAfter(doAfterArgs);
+        }
     }
 
     private bool StrapCanDragDropOn(
@@ -65,20 +93,37 @@ public abstract partial class SharedBuckleSystem
         if (!TryComp(args.User, out BuckleComponent? buckle))
             return;
 
-        if (buckle.BuckledTo == null)
+        // Buckle self
+        if (buckle.BuckledTo == null && component.BuckleOnInteractHand && StrapHasSpace(uid, buckle, component))
+        {
             TryBuckle(args.User, args.User, uid, buckle, popup: true);
-        else if (buckle.BuckledTo == uid)
-            TryUnbuckle(args.User, args.User, buckle, popup: true);
-        else
+            args.Handled = true;
             return;
+        }
+
+        // Unbuckle self
+        if (buckle.BuckledTo == uid && TryUnbuckle(args.User, args.User, buckle, popup: true))
+        {
+            args.Handled = true;
+            return;
+        }
+
+        // Unbuckle others
+        if (component.BuckledEntities.TryFirstOrNull(out var buckled) && TryUnbuckle(buckled.Value, args.User))
+        {
+            args.Handled = true;
+            return;
+        }
 
         // TODO BUCKLE add out bool for whether a pop-up was generated or not.
-        args.Handled = true;
     }
 
     private void OnBuckleInteractHand(Entity<BuckleComponent> ent, ref InteractHandEvent args)
     {
         if (args.Handled)
+            return;
+
+        if (!ent.Comp.ClickUnbuckle)
             return;
 
         if (ent.Comp.BuckledTo != null)

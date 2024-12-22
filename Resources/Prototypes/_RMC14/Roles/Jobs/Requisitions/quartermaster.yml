@@ -16,6 +16,13 @@
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - CMQM
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: cargo
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -31,12 +38,14 @@
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
     - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: "QM"
 
 - type: startingGear
   id: CMGearQuartermaster
   equipment:
     jumpsuit: CMJumpsuitQM
-    back: CMSatchelMarineTech
     shoes: CMBootsBlack
     head: CMHeadCapCargo
     gloves: CMHandsInsulated
@@ -44,6 +53,8 @@
     ears: CMHeadsetQM
     pocket1: RMCPouchGeneralMedium
     pocket2: CMFlash
+  inhand:
+  - CMStampApproved
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -60,3 +71,4 @@
 
 - type: playTimeTracker
   id: CMJobQuartermaster
+  isHumanoid: true

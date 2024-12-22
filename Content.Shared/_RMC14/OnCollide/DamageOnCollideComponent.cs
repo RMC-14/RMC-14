@@ -20,7 +20,7 @@ public sealed partial class DamageOnCollideComponent : Component
     [DataField(required: true)]
     public DamageSpecifier Damage = new();
 
-    [DataField(required: true)]
+    [DataField]
     public DamageSpecifier ChainDamage = new();
 
     [DataField, AutoNetworkedField]
@@ -39,9 +39,6 @@ public sealed partial class DamageOnCollideComponent : Component
     public CollisionGroup Collision = CollisionGroup.FullTileLayer;
 
     [DataField]
-    public bool ReduceChainDamage;
-
-    [DataField]
     public TimeSpan AcidComboDuration;
 
     [DataField]
@@ -52,4 +49,7 @@ public sealed partial class DamageOnCollideComponent : Component
 
     [DataField]
     public TimeSpan Paralyze;
+
+    [DataField]
+    public bool IgnoreResistances;
 }

@@ -19,29 +19,29 @@
     sections:
     - name: Weapons Specialist Sets
       choices: { SquadSpecKit: 1 }
-      sharedSpecLimit: 2 # 2 as requested until Scout and Pyro are added
+      sharedSpecLimit: 2 # 2 as requested until Pyro is added
       entries:
-      - id: RMCDemoSpecEquipmentCase
-      - id: RMCGrenadeSpecEquipmentCase
+      - id: RMCDemoSpecEquipmentCaseCamo
+      - id: RMCGrenadeSpecEquipmentCaseCamo
       #  points: 0
       #- id: PyroSet
       #  points: 0
-      #- id: ScoutSet
-      - id: CMSniperEquipmentCase
+      - id: RMCScoutSpecEquipmentCaseCamo
+      - id: RMCSniperEquipmentCaseCamo
     - name: Extra Scout Ammunition
-      entries: [ ]
-    #- id: A19HighVelocityImpactMagazine
-    #  points: 40
-    #- id: A19HighVelocityIncendiaryMagazine
-    #  points: 40
-    #- id: A19HighVelocityMagazine
-    #  points: 40
+      entries:
+      - id: RMCMagazineRifleM4SPRA19Impact
+        points: 40
+      - id: RMCMagazineRifleM4SPRA19Incendiary
+        points: 40
+      - id: RMCMagazineRifleM4SPRA19
+        points: 40
     - name: Extra Sniper Ammunition
       entries:
 #      - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
 #        points: 40
-#      - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
-#        points: 40
+      - id: CMMagazineSniperM96SIncendiary
+        points: 40
       - id: CMMagazineSniperM96S
         points: 40
     - name: Extra Demolitionist Ammunition
@@ -66,8 +66,10 @@
         name: M40 HSDP Smoke Grenades (x6)
         points: 20
         spawn: 6
-    #- id: M40HIDPIncendiaryGrenadesx6
-    #  points: 40
+      - id: RMCGrenadeIncendiary
+        name: M40 HIDP Incendiary Grenades (x6)
+        points: 40
+        spawn: 6
     #- id: M40HPDPWhitePhosphorusGrenadesx6
     #  points: 40
     #- id: M74AGMFFragmentationGrenadesx6
@@ -109,19 +111,20 @@
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
-      - id: CMBackpackMarine
-      - id: CMSatchelMarine
+      - id: RMCBackpackMarineCamo
+      - id: RMCSatchelMarineCamo
         recommended: true
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-    #- id: CMG8AGeneralUtilityPouch
-      - id: CMBeltMarine
-    #- id: CMM276GeneralPistolHolsterRig
-    #- id: CMM276M63HolsterRig
-    #- id: CMM276M44HolsterRig
-    #- id: CMM276M82FHolsterRig
-    #- id: CMM276ShotgunShellLoadingRig
+      - id: RMCBeltUtilityGeneralCamo
+      - id: RMCBeltMarineCamo
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterSMG
+      - id: RMCBeltHolsterSMGPouch
+    #- id: RMCBeltHolsterFlareGun
+      - id: RMCM276ShotgunShellLoadingRig
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -150,14 +153,15 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbingBlack
-      #- id: CMShoulderHolster
       - id: CMWebbing
-    #- id: CMDropPouch
+      - id: CMWebbingPouch
+      - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather
     - name: Restricted Firearms
       entries:
       - id: RMCMK80Case
@@ -174,10 +178,12 @@
         points: 10
     - name: Clothing Items
       entries:
-    #- id: CMScabbardMacheteFull
+      - id: RMCScabbardMacheteFilled
+        points: 6
       - id: RMCPouchMacheteFilled
         points: 15
-    #- id: CMMarineRadioTelephonePack
+      - id: RMCBackpackRTO
+        points: 15
     #- id: CMFuelTankStrapPouch
     #- id: CMWeldingGoggles
       - id: RMCPouchGeneralLarge
@@ -188,26 +194,32 @@
         points: 15
     - name: Utilities
       entries:
-      - id: CMFireExtinguisherPortable
-        points: 5
       - id: CMRollerBedSpawnFolded
         points: 5
+      - id: CMFireExtinguisherPortable
+        points: 5
+      - id: RMCMotionDetector
+        points: 10
     #- id: CMFultonDeviceStack
     #- id: CMMotionDetector
       - id: RMCWhistle
         points: 5
     - name: Binoculars
       entries:
-      - id: RMCBinoculars
+      - id: RMCBinocularsCamo
         points: 5
+      - id: RMCLaserDesignatorCamo
+        points: 15
     - name: Helmet Optics
       entries: [ ]
     #- id: CMMedicalHelmetOptic
     #- id: CMWeldingVisor
     - name: Pamphlets
-      entries: [ ]
-    #- id: CMPamphletJTAC
-    #- id: CMPamphletEngineering
+      entries:
+      - id: CMPamphletJTAC
+        points: 15
+      - id: CMPamphletEngineer
+        points: 15
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer

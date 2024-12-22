@@ -3,7 +3,6 @@ using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Whitelist;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
@@ -15,7 +14,9 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableGetExamineDataEvent>(OnRangedModsGetExamineData);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetFireModesEvent>>(OnRangedGetFireModes);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetFireModeValuesEvent>>(OnRangedModsGetFireModeValues);
+        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetDamageFalloffEvent>>(OnRangedModsGetDamageFalloff);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetGunDamageModifierEvent>>(OnRangedModsGetGunDamage);
+        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetWeaponAccuracyEvent>>(OnRangedModsGetWeaponAccuracy);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GunRefreshModifiersEvent>>(OnRangedModsRefreshModifiers);
     }
 
@@ -35,6 +36,10 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
     private List<string> GetEffectStrings(AttachableWeaponRangedModifierSet modSet)
     {
         var result = new List<string>();
+
+        if (modSet.AccuracyAddMult != 0)
+            result.Add(Loc.GetString("rmc-attachable-examine-ranged-accuracy",
+                ("colour", modifierExamineColour), ("sign", modSet.AccuracyAddMult > 0 ? '+' : ""), ("accuracy", modSet.AccuracyAddMult)));
 
         if (modSet.ScatterFlat != 0)
             result.Add(Loc.GetString("rmc-attachable-examine-ranged-scatter",
@@ -63,6 +68,10 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
         if (modSet.ProjectileSpeedFlat != 0)
             result.Add(Loc.GetString("rmc-attachable-examine-ranged-projectile-speed",
                 ("colour", modifierExamineColour), ("sign", modSet.ProjectileSpeedFlat > 0 ? '+' : ""), ("projectileSpeed", modSet.ProjectileSpeedFlat)));
+
+        if (modSet.DamageFalloffAddMult != 0)
+            result.Add(Loc.GetString("rmc-attachable-examine-ranged-damage-falloff",
+                ("colour", modifierExamineColour), ("sign", modSet.DamageFalloffAddMult > 0 ? '+' : ""), ("falloff", modSet.DamageFalloffAddMult)));
 
         return result;
     }
@@ -123,12 +132,24 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
                 continue;
 
             args.Args.Modes |= modSet.ExtraFireModes;
+            args.Args.Set = modSet.SetFireMode;
+        }
+    }
+
+    private void OnRangedModsGetDamageFalloff(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableRelayedEvent<GetDamageFalloffEvent> args)
+    {
+        foreach (var modSet in attachable.Comp.Modifiers)
+        {
+            if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
+                continue;
+
+            args.Args.FalloffMultiplier += modSet.DamageFalloffAddMult;
         }
     }
 
     private void OnRangedModsGetGunDamage(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableRelayedEvent<GetGunDamageModifierEvent> args)
     {
-        foreach(var modSet in attachable.Comp.Modifiers)
+        foreach (var modSet in attachable.Comp.Modifiers)
         {
             if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
                 continue;
@@ -137,9 +158,20 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
         }
     }
 
+    private void OnRangedModsGetWeaponAccuracy(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableRelayedEvent<GetWeaponAccuracyEvent> args)
+    {
+        foreach (var modSet in attachable.Comp.Modifiers)
+        {
+            if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
+                continue;
+
+            args.Args.AccuracyMultiplier += modSet.AccuracyAddMult;
+        }
+    }
+
     private void OnRangedModsGetFireModeValues(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableRelayedEvent<GetFireModeValuesEvent> args)
     {
-        foreach(var modSet in attachable.Comp.Modifiers)
+        foreach (var modSet in attachable.Comp.Modifiers)
         {
             if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
                 continue;

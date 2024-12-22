@@ -6,7 +6,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.Explosion;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedCMExplosionSystem))]
+[Access(typeof(SharedRMCExplosionSystem))]
 public sealed partial class CMVocalizeTriggerComponent : Component
 {
     [DataField, AutoNetworkedField]

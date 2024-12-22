@@ -9,6 +9,7 @@
       department: CMSquad
       time: 18000 # 5 hours
   startingGear: CMGearSmartGunOperator
+  dummyStartingGear: CMGearSmartGunOperatorEquipped
   icon: "CMJobIconSmartGunOperator"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
@@ -17,35 +18,44 @@
   overwatchSortPriority: -2
   overwatchShowName: true
   overwatchRoleName: Smart Gun Operator
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: smartgunner
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillJtac: 1
         RMCSkillSmartGun: 1
     - type: CMVendorUser
       points: 45
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: "SG"
 
 - type: startingGear
   id: CMGearSmartGunOperator
   equipment:
-    jumpsuit: JumpsuitMarine # TODO RMC14 all squad roles should spawn with no jumpsuit but still have clothes on
     id: CMDogtagSmartGunOperator
 
 - type: startingGear
   id: CMGearSmartGunOperatorEquipped
   equipment:
-    jumpsuit: JumpsuitMarine
-    back: CMSatchelMarine
+    jumpsuit: JumpsuitMarineCamo
     shoes: CMBootsBlackFilled
-    head: ArmorHelmetM10
-    outerClothing: CMArmorM3Medium
+    head: ArmorHelmetM10Camo
+    outerClothing: RMCSGHarnessCamo
     gloves: CMHandsBlackMarine
     id: CMDogtagSmartGunOperator
     ears: CMHeadsetAlpha
+
+- type: playTimeTracker
+  id: CMJobSmartGunOperator
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -60,5 +70,39 @@
       state: green
     - state: smart_gun_operator
 
-- type: playTimeTracker
-  id: CMJobSmartGunOperator
+- type: entity
+  parent: CMSpawnPointSmartGunOperator
+  id: CMSpawnPointSmartGunOperatorAlpha
+  suffix: Alpha
+  components:
+  - type: SquadSpawner
+    squad: SquadAlpha
+    role: CMSmartGunOperator
+
+- type: entity
+  parent: CMSpawnPointSmartGunOperator
+  id: CMSpawnPointSmartGunOperatorBravo
+  suffix: Bravo
+  components:
+  - type: SquadSpawner
+    squad: SquadBravo
+    role: CMSmartGunOperator
+
+- type: entity
+  parent: CMSpawnPointSmartGunOperator
+  id: CMSpawnPointSmartGunOperatorCharlie
+  suffix: Charlie
+  components:
+  - type: SquadSpawner
+    squad: SquadCharlie
+    role: CMSmartGunOperator
+
+- type: entity
+  parent: CMSpawnPointSmartGunOperator
+  id: CMSpawnPointSmartGunOperatorDelta
+  suffix: Delta
+  components:
+  - type: SquadSpawner
+    squad: SquadDelta
+    role: CMSmartGunOperator
+

@@ -1,5 +1,6 @@
-﻿using Robust.Shared.Audio;
+using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 using Content.Shared.FixedPoint;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -7,7 +8,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Xenonids.Construction;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-[Access(typeof(SharedXenoConstructionSystem))]
+[Access(typeof(SharedXenoConstructionSystem), typeof(ResinWhispererSystem))]
 public sealed partial class XenoConstructionComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -40,6 +41,9 @@ public sealed partial class XenoConstructionComponent : Component
     [DataField, AutoNetworkedField]
     public SoundSpecifier BuildSound = new SoundCollectionSpecifier("RMCResinBuild")
     {
-        Params = AudioParams.Default.WithVolume(-10f)
+        Params = AudioParams.Default.WithVolume(-10f),
     };
+
+    [DataField, AutoNetworkedField]
+    public bool CanUpgrade;
 }

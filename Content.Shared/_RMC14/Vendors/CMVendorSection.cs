@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Prototypes;
+﻿using Content.Shared.Roles;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Vendors;
@@ -22,11 +23,14 @@ public sealed partial class CMVendorSection
     // Only used by Spec Vendors to mark the kit section for RMCVendorSpecialistComponent logic.
     [DataField]
     public int? SharedSpecLimit;
+
+    [DataField]
+    public List<ProtoId<JobPrototype>> Jobs = new();
 }
 
 [DataDefinition]
 [Serializable, NetSerializable]
-public sealed partial class CMVendorEntry
+public sealed partial record CMVendorEntry
 {
     [DataField(required: true)]
     public EntProtoId Id;
@@ -45,4 +49,10 @@ public sealed partial class CMVendorEntry
 
     [DataField]
     public bool Recommended;
+
+    [DataField]
+    public int? Multiplier;
+
+    [DataField]
+    public int? Max;
 }

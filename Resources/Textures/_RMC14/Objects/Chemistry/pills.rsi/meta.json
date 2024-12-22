@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/c268b16daf2e8da819958cdc7d02e7f906c370cd/icons/obj/items/chemistry.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/4494b45ba5bfd996d1618df134ff1e728eabb501/icons/obj/items/chemistry.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -72,6 +72,9 @@
     },
     {
       "name": "pill21"
+    },
+    {
+      "name": "pill22"
     }
   ]
 }

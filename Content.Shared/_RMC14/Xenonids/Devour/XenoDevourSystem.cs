@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Armor;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
@@ -21,6 +21,7 @@ using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -42,6 +43,7 @@ public sealed class XenoDevourSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly EntityManager _entManager = default!;
 
     private EntityQuery<DevouredComponent> _devouredQuery;
     private EntityQuery<XenoDevourComponent> _xenoDevourQuery;
@@ -67,6 +69,7 @@ public sealed class XenoDevourSystem : EntitySystem
         SubscribeLocalEvent<DevouredComponent, IsEquippingAttemptEvent>(OnDevouredIsEquippingAttempt);
         SubscribeLocalEvent<DevouredComponent, IsUnequippingAttemptEvent>(OnDevouredIsUnequippingAttempt);
         SubscribeLocalEvent<DevouredComponent, AttackAttemptEvent>(OnDevouredAttackAttempt);
+        SubscribeLocalEvent<DevouredComponent, ShotAttemptedEvent>(OnDevouredShotAttempted);
 
         SubscribeLocalEvent<XenoDevourComponent, CanDropTargetEvent>(OnXenoCanDropTarget);
         SubscribeLocalEvent<XenoDevourComponent, ActivateInWorldEvent>(OnXenoActivate);
@@ -173,16 +176,28 @@ public sealed class XenoDevourSystem : EntitySystem
 
     private void OnDevouredIsUnequippingAttempt(Entity<DevouredComponent> devoured, ref IsUnequippingAttemptEvent args)
     {
-        // if (!HasComp<UsableWhileDevouredComponent>(args.Equipment))
+        if (TryComp<UsableWhileDevouredComponent>(args.Equipment, out var usableDevoured) && usableDevoured.CanUnequip)
+            return;
+
+        args.Cancel();
+    }
+
+    private void OnDevouredShotAttempted(Entity<DevouredComponent> devoured, ref ShotAttemptedEvent args)
+    {
+        if (!HasComp<GunUsableWhileDevouredComponent>(args.Used))
             args.Cancel();
     }
 
     private void OnXenoCanDropTarget(Entity<XenoDevourComponent> xeno, ref CanDropTargetEvent args)
     {
-        if (HasComp<DevourableComponent>(args.Dragged) && xeno.Owner == args.User)
-            args.CanDrop = true;
+        if (args.Handled)
+            return;
 
-        args.Handled = true;
+        if (HasComp<DevourableComponent>(args.Dragged) && xeno.Owner == args.User)
+        {
+            args.CanDrop = true;
+            args.Handled = true;
+        }
     }
 
     private void OnXenoActivate(Entity<XenoDevourComponent> xeno, ref ActivateInWorldEvent args)
@@ -235,6 +250,9 @@ public sealed class XenoDevourSystem : EntitySystem
 
             _popup.PopupEntity(Loc.GetString("cm-xeno-devour-observer", ("user", xeno.Owner), ("target", target)), xeno, recipient, PopupType.MediumCaution);
         }
+
+        var ev = new XenoDevouredEvent(target, xeno.Owner);
+        RaiseLocalEvent(target, ref ev, true);
     }
 
     private void OnXenoRegurgitateAction(Entity<XenoDevourComponent> xeno, ref XenoRegurgitateActionEvent args)
@@ -252,6 +270,9 @@ public sealed class XenoDevourSystem : EntitySystem
         _audio.PlayPredicted(xeno.Comp.RegurgitateSound, xeno, xeno);
         foreach (var ent in ents)
         {
+            var ev = new RegurgitateEvent(_entManager.GetNetEntity(xeno.Owner), _entManager.GetNetEntity(ent));
+            RaiseLocalEvent(xeno, ev);
+
             _stun.TryStun(ent, xeno.Comp.RegurgitationStun, true);
             if (_net.IsServer)
                 SpawnAttachedTo(xeno.Comp.RegurgitateEffect, ent.ToCoordinates());
@@ -350,16 +371,6 @@ public sealed class XenoDevourSystem : EntitySystem
             return false;
         }
 
-        if (!_standing.IsDown(victim))
-        {
-            if (popup)
-            {
-                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-resisting", ("target", victim)), victim, xeno, PopupType.MediumCaution);
-            }
-
-            return false;
-        }
-
         if (TryComp(victim, out BuckleComponent? buckle) && buckle.BuckledTo is { } strap)
         {
             if (popup)
@@ -417,6 +428,9 @@ public sealed class XenoDevourSystem : EntitySystem
         {
             return true;
         }
+
+        var ev = new RegurgitateEvent(_entManager.GetNetEntity(xeno.Owner), _entManager.GetNetEntity(devoured.Owner));
+        RaiseLocalEvent(xeno, ev);
 
         if (doFeedback)
             DoFeedback((xeno, xeno.Comp));
@@ -490,3 +504,11 @@ public sealed class XenoDevourSystem : EntitySystem
         }
     }
 }
+
+/// <summary>
+/// Event that is raised whenever a mob is devoured by another mob
+/// </summary>
+/// <param name="Target">The Entity who was devoured</param>
+/// <param name="User">The Entity who caused the devouring</param>
+[ByRefEvent]
+public record struct XenoDevouredEvent(EntityUid Target, EntityUid User);

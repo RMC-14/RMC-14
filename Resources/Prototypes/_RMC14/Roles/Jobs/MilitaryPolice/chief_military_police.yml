@@ -19,6 +19,13 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - CMP
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: cmp
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_mp
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -38,18 +45,20 @@
         RMCSkillOverwatch: 1
         RMCSkillPolice: 2
     - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: "CMP"
 
 - type: startingGear
   id: CMGearChiefMP
   equipment:
-    jumpsuit: CMJumpsuitWO
-    back: CMSatchelSecurity
+    jumpsuit: RMCJumpsuitWOCamo
     shoes: CMBootsBlackFilled
     head: CMHeadBeretWO
     eyes: CMGlassesSecurity
     gloves: CMHandsBlackMarine
     id: CMIDCardChiefMP
-    outerClothing: CMArmorM3WO
+    outerClothing: RMCArmorM3WOCamo
     ears: CMHeadsetCMP
     belt: CMBeltSecurityMPFilled
     #    pocket1: TODO RMC14 tape recorder
@@ -70,3 +79,4 @@
 
 - type: playTimeTracker
   id: CMJobChiefMP
+  isHumanoid: true

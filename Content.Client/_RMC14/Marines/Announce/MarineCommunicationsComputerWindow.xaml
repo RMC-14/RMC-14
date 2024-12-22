@@ -14,6 +14,9 @@
             <Label Name="OperationName" Access="Public" />
         </BoxContainer>
         <cc:HSeparator Color="#4972A1" Margin="0 5" />
+        <Button Name="TacticalMapButton" Access="Public" Text="Tactical Map" StyleClasses="OpenBoth" />
+        <Button Name="OverwatchButton" Access="Public" Text="Overwatch" StyleClasses="OpenBoth" />
+        <cc:HSeparator Color="#4972A1" Margin="0 5" />
         <BoxContainer Name="LandingZonesSection" Access="Public" Orientation="Vertical">
             <Label Text="Designate Primary LZ" />
             <BoxContainer Name="LandingZonesContainer" Access="Public" Orientation="Vertical" />

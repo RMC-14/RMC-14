@@ -16,6 +16,13 @@
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - CMCE
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: ce
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -33,13 +40,14 @@
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
     - type: MarineOrders
-  hidden: true # TODO RMC14
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: "CE"
 
 - type: startingGear
   id: CMGearChiefEngineer
   equipment:
     jumpsuit: CMJumpsuitChiefEngineer
-    back: CMSatchelMarineTech
     shoes: CMBootsBlack
     gloves: CMHandsInsulated
     id: CMIDCardChiefEngineer
@@ -62,3 +70,4 @@
 
 - type: playTimeTracker
   id: CMJobChiefEngineer
+  isHumanoid: true

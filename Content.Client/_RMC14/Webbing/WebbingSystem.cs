@@ -18,6 +18,7 @@ public sealed class WebbingSystem : SharedWebbingSystem
 
     public override void Initialize()
     {
+        base.Initialize();
         SubscribeLocalEvent<WebbingClothingComponent, AfterAutoHandleStateEvent>(OnClothingState);
         SubscribeLocalEvent<WebbingClothingComponent, GetEquipmentVisualsEvent>(OnWebbingClothingEquipmentVisuals,
             after: [typeof(ClientClothingSystem)]);
@@ -43,10 +44,10 @@ public sealed class WebbingSystem : SharedWebbingSystem
             clothingSprite.LayerSetState(clothingLayer, sprite.RsiState);
         }
 
-        args.Layers.Add(($"enum.{nameof(WebbingVisualLayers.Base)}", new PrototypeLayerData
+        args.Layers.Add(($"enum.{nameof(WebbingVisualLayers)}.{nameof(WebbingVisualLayers.Base)}", new PrototypeLayerData
         {
             RsiPath = sprite.RsiPath.CanonPath,
-            State = sprite.RsiState
+            State = sprite.RsiState,
         }));
     }
 

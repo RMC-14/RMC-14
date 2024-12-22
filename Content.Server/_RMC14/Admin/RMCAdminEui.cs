@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server._RMC14.Rules;
+using Content.Server._RMC14.Xenonids.Hive;
 using Content.Server.Administration;
 using Content.Server.Administration.Managers;
 using Content.Server.EUI;
@@ -15,6 +16,7 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Administration;
 using Content.Shared.Eui;
 using Content.Shared.Mobs.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.Reflection;
 using Robust.Shared.Utility;
 
@@ -29,7 +31,7 @@ public sealed class RMCAdminEui : BaseEui
 
     private readonly RMCAdminSystem _rmcAdmin;
     private readonly SharedCMAutomatedVendorSystem _automatedVendor;
-    private readonly SharedXenoHiveSystem _hive;
+    private readonly XenoHiveSystem _hive;
     private readonly MindSystem _mind;
     private readonly SquadSystem _squad;
     private readonly SharedTransformSystem _transform;
@@ -43,7 +45,7 @@ public sealed class RMCAdminEui : BaseEui
 
         _rmcAdmin = _entities.System<RMCAdminSystem>();
         _automatedVendor = _entities.System<SharedCMAutomatedVendorSystem>();
-        _hive = _entities.System<SharedXenoHiveSystem>();
+        _hive = _entities.System<XenoHiveSystem>();
         _mind = _entities.System<MindSystem>();
         _squad = _entities.System<SquadSystem>();
         _transform = _entities.System<SharedTransformSystem>();
@@ -63,7 +65,7 @@ public sealed class RMCAdminEui : BaseEui
         _admin.OnPermsChanged -= OnAdminPermsChanged;
     }
 
-    public static RMCAdminEuiState CreateState(IEntityManager entities)
+    public static RMCAdminEuiState CreateState(IEntityManager entities, Guid tacticalMapLines)
     {
         var squadSys = entities.System<SquadSystem>();
         var hives = new List<Hive>();
@@ -89,8 +91,8 @@ public sealed class RMCAdminEui : BaseEui
 
         var mobState = entities.System<MobStateSystem>();
         var xenos = new List<Xeno>();
-        var xenoQuery = entities.EntityQueryEnumerator<XenoComponent, MetaDataComponent>();
-        while (xenoQuery.MoveNext(out var uid, out _, out var metaData))
+        var xenoQuery = entities.EntityQueryEnumerator<ActorComponent, XenoComponent, MetaDataComponent>();
+        while (xenoQuery.MoveNext(out var uid, out _, out _, out var metaData))
         {
             if (metaData.EntityPrototype is not { } proto)
                 continue;
@@ -102,8 +104,8 @@ public sealed class RMCAdminEui : BaseEui
         }
 
         var marines = 0;
-        var marinesQuery = entities.EntityQueryEnumerator<MarineComponent>();
-        while (marinesQuery.MoveNext(out var uid, out _))
+        var marinesQuery = entities.EntityQueryEnumerator<ActorComponent, MarineComponent>();
+        while (marinesQuery.MoveNext(out var uid, out _, out _))
         {
             if (mobState.IsDead(uid))
                 continue;
@@ -111,14 +113,15 @@ public sealed class RMCAdminEui : BaseEui
             marines++;
         }
 
-        var marinesPerXeno = entities.System<CMDistressSignalRuleSystem>().MarinesPerXeno.ToDictionary();
-
-        return new RMCAdminEuiState(hives, squads, xenos, marines, marinesPerXeno);
+        var rmcAdmin = entities.System<RMCAdminSystem>();
+        var history = rmcAdmin.LinesDrawn.Reverse().Select(l => (l.Id, l.Actor, l.Round)).ToList();
+        var lines = rmcAdmin.LinesDrawn.FirstOrDefault(l => l.Item1 == tacticalMapLines);
+        return new RMCAdminEuiState(hives, squads, xenos, marines, history, lines);
     }
 
     public override EuiStateBase GetNewState()
     {
-        var state = CreateState(_entities);
+        var state = CreateState(_entities, default);
 
         _entities.TryGetEntity(_target, out var target);
         var specialistSkills = new List<(string Name, bool Present)>();
@@ -150,7 +153,8 @@ public sealed class RMCAdminEui : BaseEui
             state.Squads,
             state.Xenos,
             state.Marines,
-            state.MarinesPerXeno,
+            state.TacticalMapHistory,
+            state.TacticalMapLines,
             specialistSkills,
             points,
             extraPoints
@@ -241,14 +245,17 @@ public sealed class RMCAdminEui : BaseEui
                     _entities.TryGetEntity(changeHive.Hive.Id, out var hive))
                 {
                     _xeno.MakeXeno(target.Value);
-                    _xeno.SetHive(target.Value, hive.Value);
+                    _hive.SetHive(target.Value, hive.Value);
                 }
 
                 break;
             }
             case RMCAdminCreateHiveMsg createHive:
             {
-                _hive.CreateHive(createHive.Name);
+                var hive = _hive.CreateHive(createHive.Name);
+                // automatically set the xeno's hive to the one you just created
+                if (_entities.TryGetEntity(_target, out var target))
+                    _hive.SetHive(target.Value, hive);
                 StateDirty();
                 break;
             }
@@ -277,10 +284,7 @@ public sealed class RMCAdminEui : BaseEui
 
                 var coordinates = _transform.GetMoverCoordinates(entity);
                 var newXeno = _entities.SpawnAttachedTo(transformXeno.XenoId, coordinates);
-                if (_entities.TryGetComponent(entity, out XenoComponent? xeno))
-                    _xeno.SetHive(newXeno, xeno.Hive);
-                else if (_entities.EntityQuery<CMDistressSignalRuleComponent>().TryFirstOrDefault(out var ruleComponent))
-                    _xeno.SetHive(newXeno, ruleComponent.Hive);
+                _hive.SetSameHive(entity, newXeno);
 
                 if (_mind.TryGetMind(entity, out var mindId, out var mind))
                 {

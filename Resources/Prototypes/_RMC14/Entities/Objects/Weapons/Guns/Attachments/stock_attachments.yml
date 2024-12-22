@@ -41,7 +41,8 @@
   parent: RMCStockAttachmentBase
   id: RMCAttachmentM42A2WoodenStock
   name: M42A2 wooden stock
-  description: A non-standard heavy wooden stock for the M42A2 Shotgun. More cumbersome than the standard issue stakeout, but reduces recoil and improves accuracy. Allegedly makes a pretty good club in a fight too.
+  suffix: Desert
+  description: A non-standard heavy wooden stock for the M42A2 Shotgun. More cumbersome than the standard issue stakeout, but reduces recoil and scatter. Allegedly makes a pretty good club in a fight too.
   components:
   - type: Sprite
     state: d-stock
@@ -60,6 +61,11 @@
   - type: AttachableWieldDelayMods
     modifiers:
       - delay: 0.4
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 10
   - type: AttachableWeaponRangedMods
     modifiers:
     - conditions:
@@ -69,10 +75,93 @@
       scatterFlat: -6
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
+
+
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentMOU53Stock
+  name: MOU53 tactical stock
+  description: A metal stock fitted specifically for the MOU53 break action shotgun.
+  components:
+  - type: Sprite
+    state: ou_stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentMOU53Stock
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 10
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      walk: -0.050
+      sprint: -0.10
+  - type: AttachableWieldDelayMods
+    modifiers:
+      - delay: 0.3
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.3
+      recoilFlat: -4
+      scatterFlat: -2
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: -0.1
+      recoilFlat: 2
+      scatterFlat: 2
+
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentXM51Stock # TODO RMC14 burst
+  name: XM51 stock
+  suffix: Jungle
+  description: A specialized stock designed for XM51 breaching shotguns. Helps the user absorb the recoil of the weapon while also reducing scatter. Integrated mechanisms inside the stock allow use of a devastating two-shot burst. This comes at a cost of the gun becoming too unwieldy to holster, worse handling and mobility.
+  components:
+  - type: Sprite
+    state: xm51_stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentXM51Stock
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      walk: -0.059
+      sprint: -0.101
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.4
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 10
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.15
+      recoilFlat: -2
+      scatterFlat: -6
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: -0.25
+      recoilFlat: 1
+      scatterFlat: 10
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -90,6 +179,44 @@
     - RMCAttachmentDoubleBarrelShotgunStock
   - type: AttachableWieldDelayMods
     modifiers: []
+
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentM890Stock
+  name: M890 Tactical Stock
+  description: Standard Stock for the M890 tactical shotgun.
+  components:
+  - type: Sprite
+    state: tactical_stock_221
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM890Stock
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      walk: -0.059
+      sprint: -0.101
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.4
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.5
+      recoilFlat: -1
+      scatterFlat: -1
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: -0.15
+      recoilFlat: 2
+      scatterFlat: 6
+
+
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -115,17 +242,17 @@
       accuracyAddMult: 0.05
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: -0.05
 
 - type: entity
   parent: RMCStockAttachmentBase
   id: RMCAttachmentM54CStockSolid
   name: M54C solid stock
-  description: A rare stock distributed in small numbers to UNMC forces. Compatible with the M54C, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
+  suffix: Desert
+  description: A rare stock distributed in small numbers to UNMC forces. Compatible with the M54C, this stock reduces recoil and scatter, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
     state: m54c-solid
   - type: Tag
     tags:
@@ -155,7 +282,6 @@
       scatterFlat: -8
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -2
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
@@ -164,7 +290,7 @@
   parent: RMCAttachmentM54CStockSolid
   id: RMCAttachmentM54CStockSolidMarksman
   name: M54C marksman stock
-  description: A rare stock distributed in small numbers to UNMC forces. Compatible with the M54C, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
+  description: A rare stock distributed in small numbers to UNMC forces. Compatible with the M54C, this stock reduces recoil and scatter, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
@@ -180,22 +306,24 @@
   parent: RMCStockAttachmentCollapsibleBase
   id: RMCAttachmentM54CStockCollapsible
   name: M54C folding stock
-  description: The standard back end of any gun starting with M54. Compatible with the M54C series, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
+  suffix: Desert
+  description: The standard back end of any gun starting with M54. Compatible with the M54C series, this stock reduces recoil and scatter, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
     state: m54c-col
   - type: Tag
     tags:
     - RMCAttachmentStock
     - RMCAttachmentM54CStockCollapsible
   - type: AttachableToggleable
+    doAfterBreakOnMove: false
     doAfter: 0.5
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
       state: m54c-col
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
       state: m54c-col-on
     actionName: Toggle M54C Folding Stock
   - type: AttachableSizeMods
@@ -224,11 +352,10 @@
     - conditions:
         unwieldedOnly: true
         activeOnly: true
-      accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
-
+      
 - type: entity
   parent: RMCStockAttachmentBase
   id: RMCAttachmentM16Stock
@@ -312,7 +439,7 @@
   parent: RMCStockAttachmentBase
   id: RMCAttachmentM63Stock
   name: submachinegun stock
-  description: A rare AEGIS stock distributed in small numbers to UNMC forces. Compatible with the M63, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl.
+  description: A rare AEGIS stock distributed in small numbers to UNMC forces. Compatible with the M63, this stock reduces recoil and scatter, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl.
   components:
   - type: Sprite
     state: smgstock
@@ -345,15 +472,12 @@
       accuracyAddMult: 0.35
       recoilFlat: -3
       scatterFlat: -10
-    - conditions:
-        unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
 
 - type: entity
   parent: RMCStockAttachmentCollapsibleBase
   id: RMCAttachmentM63StockCollapsible
   name: submachinegun folding stock
-  description: A Kirchner brand K2 M63 folding stock, standard issue in the UNMC. The stock, when extended, reduces recoil and improves accuracy, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl. This stock can collapse in, removing all positive and negative effects.
+  description: A Kirchner brand K2 M63 folding stock, standard issue in the UNMC. The stock, when extended, reduces recoil and scatter, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl. This stock can collapse in, removing all positive and negative effects.
   components:
   - type: Sprite
     state: smgstockcol
@@ -397,7 +521,6 @@
     - conditions:
         unwieldedOnly: true
         activeOnly: true
-      accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 2
@@ -446,7 +569,6 @@
     - conditions:
         unwieldedOnly: true
         activeOnly: true
-      accuracyMovementPenaltyAddMult: -2
       accuracyAddMult: 0.2
       recoilFlat: -2
 
@@ -505,11 +627,59 @@
       recoilFlat: 2
       scatterFlat: 6
 
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentXM88Stock
+  name: XM88 padded stock
+  suffix: Desert
+  description: A specially made compound polymer stock reinforced with aluminum rods and thick rubber padding to shield the user from recoil. Fitted specifically for the XM88 Heavy Rifle.
+  components:
+  - type: Sprite
+    state: d_boomslang-stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentXM88Stock
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 5
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      walk: -0.050
+      sprint: -0.10
+  - type: AttachableWieldDelayMods
+    modifiers:
+      - delay: 0.3
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.3
+      recoilFlat: -1
+      scatterFlat: -6
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: -0.1
+      recoilFlat: 1
+      scatterFlat: 14
+
 - type: Tag
   id: RMCAttachmentStock
 
 - type: Tag
+  id: RMCAttachmentM890Stock
+
+- type: Tag
   id: RMCAttachmentM42A2WoodenStock
+
+- type: Tag
+  id: RMCAttachmentXM51Stock
 
 - type: Tag
   id: RMCAttachmentDoubleBarrelShotgunStock
@@ -546,3 +716,9 @@
 
 - type: Tag
   id: RMCAttachmentM44MagnumSharpshooterStock
+
+- type: Tag
+  id: RMCAttachmentMOU53Stock
+
+- type: Tag
+  id: RMCAttachmentXM88Stock

@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: CMExecutiveOfficer
   name: cm-job-name-executive-officer
@@ -9,13 +9,20 @@
     department: CMCommand
     time: 18000 # 5 hours
   weight: 5
-  startingGear: CMGearStaffOfficer
+  startingGear: CMGearExecutiveOfficer
   icon: "CMJobIconExecutiveOfficer"
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: cm-job-supervisors-co
   accessGroups:
   - MarineMain
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: xo
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -38,15 +45,19 @@
         RMCSkillSurgery: 1
         RMCSkillVehicles: 1
     - type: MarineOrders
+    - type: CMVendorUser
+      points: 120
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: "XO"
 
 - type: startingGear
   id: CMGearExecutiveOfficer
   equipment:
     jumpsuit: CMJumpsuitBO
-    back: CMSatchel
     shoes: RMCShoesLaceup
-    head: CMHeadCap
-    outerClothing: CMCoatOfficer
+    head: RMCHeadCapFlippableCamo
+    outerClothing: RMCCoatServiceCamo
     id: CMIDCardExecutiveOfficer
     ears: CMHeadsetSeniorCommand
 
@@ -65,3 +76,4 @@
 
 - type: playTimeTracker
   id: CMJobExecutiveOfficer
+  isHumanoid: true

@@ -1,16 +1,17 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Body.Systems;
-using Content.Server.Chemistry.Containers.EntitySystems;
+using Content.Server.Electrocution;
 using Content.Server.Explosion.Components;
 using Content.Server.Flash;
 using Content.Server.Pinpointer;
-using Content.Shared.Flash.Components;
 using Content.Server.Radio.EntitySystems;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Database;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Explosion.Components.OnTrigger;
+using Content.Shared.Flash.Components;
 using Content.Shared.Implants.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -30,8 +31,6 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Player;
-using Content.Shared.Coordinates;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Explosion.EntitySystems
@@ -73,8 +72,9 @@ namespace Content.Server.Explosion.EntitySystems
         [Dependency] private readonly RadioSystem _radioSystem = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly SolutionContainerSystem _solutionContainerSystem = default!;
+        [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
         [Dependency] private readonly InventorySystem _inventory = default!;
+        [Dependency] private readonly ElectrocutionSystem _electrocution = default!;
 
         public override void Initialize()
         {
@@ -104,6 +104,7 @@ namespace Content.Server.Explosion.EntitySystems
 
             SubscribeLocalEvent<AnchorOnTriggerComponent, TriggerEvent>(OnAnchorTrigger);
             SubscribeLocalEvent<SoundOnTriggerComponent, TriggerEvent>(OnSoundTrigger);
+            SubscribeLocalEvent<ShockOnTriggerComponent, TriggerEvent>(HandleShockTrigger);
             SubscribeLocalEvent<RattleComponent, TriggerEvent>(HandleRattleTrigger);
         }
 
@@ -118,6 +119,24 @@ namespace Content.Server.Explosion.EntitySystems
             {
                 _audio.PlayPvs(component.Sound, uid); // have the sound follow the entity itself
             }
+        }
+
+        private void HandleShockTrigger(Entity<ShockOnTriggerComponent> shockOnTrigger, ref TriggerEvent args)
+        {
+            if (!_container.TryGetContainingContainer(shockOnTrigger, out var container))
+                return;
+
+            var containerEnt = container.Owner;
+            var curTime = _timing.CurTime;
+
+            if (curTime < shockOnTrigger.Comp.NextTrigger)
+            {
+                // The trigger's on cooldown.
+                return;
+            }
+
+            _electrocution.TryDoElectrocution(containerEnt, null, shockOnTrigger.Comp.Damage, shockOnTrigger.Comp.Duration, true);
+            shockOnTrigger.Comp.NextTrigger = curTime + shockOnTrigger.Comp.Cooldown;
         }
 
         private void OnAnchorTrigger(EntityUid uid, AnchorOnTriggerComponent component, TriggerEvent args)
@@ -180,6 +199,7 @@ namespace Content.Server.Explosion.EntitySystems
             args.Handled = true;
         }
 
+
         private void HandleRattleTrigger(EntityUid uid, RattleComponent component, TriggerEvent args)
         {
             if (!TryComp<SubdermalImplantComponent>(uid, out var implanted))
@@ -189,7 +209,7 @@ namespace Content.Server.Explosion.EntitySystems
                 return;
 
             // Gets location of the implant
-            var posText = FormattedMessage.RemoveMarkup(_navMap.GetNearestBeaconString(uid));
+            var posText = FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString(uid));
             var critMessage = Loc.GetString(component.CritMessage, ("user", implanted.ImplantedEntity.Value), ("position", posText));
             var deathMessage = Loc.GetString(component.DeathMessage, ("user", implanted.ImplantedEntity.Value), ("position", posText));
 
@@ -208,7 +228,7 @@ namespace Content.Server.Explosion.EntitySystems
         private void OnTriggerCollide(EntityUid uid, TriggerOnCollideComponent component, ref StartCollideEvent args)
         {
             if (args.OurFixtureId == component.FixtureID && (!component.IgnoreOtherNonHard || args.OtherFixture.Hard))
-                Trigger(uid);
+                Trigger(uid, args.OtherEntity);
         }
 
         private void OnSpawnTriggered(EntityUid uid, TriggerOnSpawnComponent component, MapInitEvent args)
@@ -308,7 +328,7 @@ namespace Content.Server.Explosion.EntitySystems
                         return;
 
                     _adminLogger.Add(LogType.Trigger,
-                        $"{ToPrettyString(user.Value):user} started a {delay} second timer trigger on entity {ToPrettyString(uid):timer}, which contains {SolutionContainerSystem.ToPrettyString(solutionA)} in one beaker and {SolutionContainerSystem.ToPrettyString(solutionB)} in the other.");
+                        $"{ToPrettyString(user.Value):user} started a {delay} second timer trigger on entity {ToPrettyString(uid):timer}, which contains {SharedSolutionContainerSystem.ToPrettyString(solutionA)} in one beaker and {SharedSolutionContainerSystem.ToPrettyString(solutionB)} in the other.");
                 }
                 else
                 {
@@ -331,7 +351,7 @@ namespace Content.Server.Explosion.EntitySystems
             active.TimeUntilBeep = initialBeepDelay == null ? active.BeepInterval : initialBeepDelay.Value;
 
             var ev = new ActiveTimerTriggerEvent(uid, user);
-            RaiseLocalEvent(uid, ref ev);
+            RaiseLocalEvent(uid, ref ev, true);
 
             if (TryComp<AppearanceComponent>(uid, out var appearance))
                 _appearance.SetData(uid, TriggerVisuals.VisualState, TriggerVisualState.Primed, appearance);

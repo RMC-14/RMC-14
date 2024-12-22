@@ -1,17 +1,23 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.Inventory;
+using Content.Shared._RMC14.Item;
+using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Scaling;
 using Content.Shared._RMC14.Webbing;
 using Content.Shared.Access.Components;
 using Content.Shared.Clothing.Components;
+using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
+using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.UserInterface;
+using Content.Shared.Wall;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -30,6 +36,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedWebbingSystem _webbing = default!;
 
@@ -38,12 +45,63 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<MarineScaleChangedEvent>(OnMarineScaleChanged);
+
+        SubscribeLocalEvent<CMAutomatedVendorComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<CMAutomatedVendorComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
+
+        SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedHandEvent>(OnRecentlyGotEquipped);
+        SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedEvent>(OnRecentlyGotEquipped);
+        SubscribeLocalEvent<RMCRecentlyVendedComponent, ItemCamouflageEvent>(OnRecentlyCamouflage);
 
         Subs.BuiEvents<CMAutomatedVendorComponent>(CMAutomatedVendorUI.Key, subs =>
         {
             subs.Event<CMVendorVendBuiMsg>(OnVendBui);
         });
+    }
+
+    private void OnMarineScaleChanged(ref MarineScaleChangedEvent ev)
+    {
+        var vendors = EntityQueryEnumerator<CMAutomatedVendorComponent>();
+        while (vendors.MoveNext(out var uid, out var vendor))
+        {
+            var changed = false;
+            foreach (var section in vendor.Sections)
+            {
+                foreach (var entry in section.Entries)
+                {
+                    if (entry.Multiplier is not { } multiplier ||
+                        entry.Max is not { } max)
+                    {
+                        continue;
+                    }
+
+                    var newMax = (int) Math.Round(ev.New * multiplier);
+                    var toAdd = newMax - max;
+                    if (toAdd <= 0)
+                        continue;
+
+                    entry.Amount += toAdd;
+                    entry.Max += toAdd;
+                    changed = true;
+                }
+            }
+
+            if (changed)
+                Dirty(uid, vendor);
+        }
+    }
+
+    private void OnMapInit(Entity<CMAutomatedVendorComponent> ent, ref MapInitEvent args)
+    {
+        foreach (var section in ent.Comp.Sections)
+        {
+            foreach (var entry in section.Entries)
+            {
+                entry.Multiplier = entry.Amount;
+                entry.Max = entry.Amount;
+            }
+        }
     }
 
     private void OnUIOpenAttempt(Entity<CMAutomatedVendorComponent> vendor, ref ActivatableUIOpenAttemptEvent args)
@@ -87,6 +145,26 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         args.Cancel();
     }
 
+    private void OnRecentlyGotEquipped<T>(Entity<RMCRecentlyVendedComponent> ent, ref T args)
+    {
+        RemCompDeferred<WallMountComponent>(ent);
+    }
+
+    private void OnRecentlyCamouflage(Entity<RMCRecentlyVendedComponent> ent, ref ItemCamouflageEvent args)
+    {
+        var recently = EnsureComp<RMCRecentlyVendedComponent>(args.New);
+        foreach (var prevent in ent.Comp.PreventCollide)
+        {
+            recently.PreventCollide.Add(prevent);
+        }
+
+        Dirty(args.New, recently);
+
+        var mount = EnsureComp<WallMountComponent>(args.New);
+        mount.Arc = Angle.FromDegrees(360);
+        Dirty(args.New, mount);
+    }
+
     protected virtual void OnVendBui(Entity<CMAutomatedVendorComponent> vendor, ref CMVendorVendBuiMsg args)
     {
         var comp = vendor.Comp;
@@ -128,6 +206,21 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
             Dirty(actor, user);
         }
+
+        var validJob = true;
+        if (_mind.TryGetMind(args.Actor, out var mindId, out _))
+        {
+            foreach (var job in section.Jobs)
+            {
+                if (!_job.MindHasJobWithId(mindId, job.Id))
+                    validJob = false;
+                else
+                    validJob = true;
+            }
+        }
+
+        if (!validJob)
+            return;
 
         if (section.Choices is { } choices)
         {
@@ -197,7 +290,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                     }
                     else // Does not exist on the currently checked vendor
                         specVendorComponent.GlobalSharedVends.Add(args.Entry, maxAmongVendors);
-                    Dirty(specVendorComponent);
+                    Dirty(vendorId, specVendorComponent);
                 }
 
                 thisSpecVendor.GlobalSharedVends[args.Entry] = maxAmongVendors;
@@ -211,7 +304,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 else
                     thisSpecVendor.GlobalSharedVends[args.Entry] += 1;
 
-                Dirty(thisSpecVendor);
+                Dirty(vendor, thisSpecVendor);
             }
         }
 
@@ -296,7 +389,21 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
 
         var spawn = SpawnNextToOrDrop(toVend, vendor);
-        if (!Grab(player, spawn) && TryComp(spawn, out TransformComponent? xform))
+        var recently = EnsureComp<RMCRecentlyVendedComponent>(spawn);
+        var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(spawn);
+        while (anchored.MoveNext(out var uid))
+        {
+            recently.PreventCollide.Add(uid);
+        }
+
+        Dirty(spawn, recently);
+
+        var mount = EnsureComp<WallMountComponent>(spawn);
+        mount.Arc = Angle.FromDegrees(360);
+        Dirty(spawn, mount);
+
+        var grabbed = Grab(player, spawn);
+        if (!grabbed && TryComp(spawn, out TransformComponent? xform))
             _transform.SetLocalPosition(spawn, xform.LocalPosition + offset, xform);
 
         var ev = new RMCAutomatedVendedUserEvent(spawn);

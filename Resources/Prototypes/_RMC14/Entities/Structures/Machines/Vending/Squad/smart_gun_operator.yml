@@ -18,23 +18,23 @@
     - name: Smart Gun Set (Mandatory)
       takeAll: CMSmartGunSet
       entries:
-      - id: CMSmartGunOperatorEquipmentCase
+      - id: RMCSGOEquipmentCaseCamo
     - name: Gun Attachments
       choices: { CMGunAttachments: 1 }
       entries:
-#      - id: RMCAttachmentLaserSight # TODO RMC14 when other pistols are available here
-#      - id: RMCAttachmentS5RedDotSight # Uncomment when accuracy is implemented.
+      - id: RMCAttachmentLaserSight
+      - id: RMCAttachmentS5RedDotSight
       - id: RMCAttachmentS6ReflexSight
     - name: Explosives
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
         points: 30
-    #- id: CMM40HIDPIncendiaryPacketx3
-    #  points: 30
+      - id: RMCPacketGrenadeIncendiaryFilled
+        points: 30
     #- id: CMM40HPDPWhitePhosphorusPacketx3
     #  points: 30
-    #- id: CMM40HSDPSmokePacketx3
-    #  points: 15
+      - id: RMCPacketGrenadeSmokeFilled
+        points: 15
     #- id: CMM74AGM-FragAirburstPacketx3
     #  points: 20
     #- id: CMM74AGM-IncendiaryAirburstPacketx3
@@ -59,8 +59,8 @@
         points: 15
     - name: Clothing Items
       entries:
-    #- id: CMScabbardMacheteFull
-    #  points: 6
+      - id: RMCScabbardMacheteSGFilled
+        points: 15
     #- id: CMFuelTankStrapPouch
     #  points: 5
       - id: RMCPouchGeneralLarge
@@ -79,12 +79,12 @@
         points: 15
     - name: Binoculars
       entries:
-      - id: RMCBinoculars
+      - id: RMCBinocularsCamo
         points: 5
-    #- id: CMRangeFinder
-    #  points: 10
-    #- id: CMLaserDesignator
-    #  points: 15
+      - id: RMCRangefinderCamo
+        points: 10
+      - id: RMCLaserDesignatorCamo
+        points: 15
     - name: Helmet Optics
       entries: [ ]
     #- id: CMMedicalHelmetOptic
@@ -92,11 +92,11 @@
     #- id: CMWeldingVisor
     #  points: 5
     - name: Pamphlets
-      entries: [ ]
-    #- id: CMPamphletJTAC
-    #  points: 15
-    #- id: CMPamphletEngineering
-    #  points: 15
+      entries:
+      - id: CMPamphletJTAC
+        points: 15
+      - id: CMPamphletEngineer
+        points: 15
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
@@ -132,8 +132,8 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-     #- id: CMM802SmartGunOperatorSidearmBeltFilled
-      - id: CMBeltSmartGunOperatorFilled
+      - id: RMCBeltSGOCamoFilled
+      - id: RMCBeltSmartGunOperatorPistolFilled
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -163,11 +163,12 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbingBlack
-    #- id: CMShoulderHolster
       - id: CMWebbing
-    #- id: CMDropPouch
+      - id: CMWebbingPouch
+      - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather

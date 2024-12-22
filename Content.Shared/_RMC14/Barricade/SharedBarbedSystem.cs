@@ -1,17 +1,20 @@
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Barricade.Components;
+using Content.Shared._RMC14.Construction.Upgrades;
 using Content.Shared.Climbing.Events;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors;
 using Content.Shared.Doors.Components;
 using Content.Shared.Interaction;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared._RMC14.Barricade;
 
@@ -20,6 +23,8 @@ public abstract class SharedBarbedSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private readonly FixtureSystem _fixture = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedStackSystem _stacks = default!;
     [Dependency] private readonly SharedToolSystem _toolSystem = default!;
@@ -39,6 +44,7 @@ public abstract class SharedBarbedSystem : EntitySystem
         SubscribeLocalEvent<BarbedComponent, DoorStateChangedEvent>(OnDoorStateChanged);
         SubscribeLocalEvent<BarbedComponent, AttemptClimbEvent>(OnClimbAttempt);
         SubscribeLocalEvent<BarbedComponent, CMGetArmorPiercingEvent>(OnGetArmorPiercing);
+        SubscribeLocalEvent<BarbedComponent, RMCConstructionUpgradedEvent>(OnConstructionUpgraded);
     }
 
     public void OnInteractUsing(EntityUid uid, BarbedComponent component, InteractUsingEvent args)
@@ -88,9 +94,7 @@ public abstract class SharedBarbedSystem : EntitySystem
     {
         // If the targeted entity gets barbed during the doafter, end the doafter
         if (barbed.Comp.IsBarbed)
-        {
             args.Cancel();
-        }
     }
 
     private void OnDoAfter(Entity<BarbedComponent> barbed, ref BarbedDoAfterEvent args)
@@ -100,19 +104,18 @@ public abstract class SharedBarbedSystem : EntitySystem
 
         // If the targeted entity gets barbed during the doafter, don't use up a barbed wire
         if (barbed.Comp.IsBarbed)
-        {
             return;
-        }
 
         args.Handled = true;
 
         if (TryComp<StackComponent>(args.Used.Value, out var stackComp))
-        {
             _stacks.Use(args.Used.Value, 1, stackComp);
-        }
 
         barbed.Comp.IsBarbed = true;
         Dirty(barbed);
+
+        if (_fixture.GetFixtureOrNull(barbed, barbed.Comp.FixtureId) is { } fixture)
+            _physics.AddCollisionLayer(barbed, barbed.Comp.FixtureId, fixture, (int) CollisionGroup.BarbedBarricade);
 
         UpdateAppearance(barbed);
 
@@ -134,6 +137,9 @@ public abstract class SharedBarbedSystem : EntitySystem
 
         barbed.Comp.IsBarbed = false;
         Dirty(barbed);
+
+        if (_fixture.GetFixtureOrNull(barbed, barbed.Comp.FixtureId) is { } fixture)
+            _physics.RemoveCollisionLayer(barbed, barbed.Comp.FixtureId, fixture, (int) CollisionGroup.BarbedBarricade);
 
         UpdateAppearance(barbed);
 
@@ -167,6 +173,15 @@ public abstract class SharedBarbedSystem : EntitySystem
     {
         if (barbed.Comp.IsBarbed)
             args.Piercing = 1000;
+    }
+
+    private void OnConstructionUpgraded(Entity<BarbedComponent> barbed, ref RMCConstructionUpgradedEvent args)
+    {
+        var newComp = EnsureComp<BarbedComponent>(args.New);
+        newComp.IsBarbed = barbed.Comp.IsBarbed;
+
+        Dirty(args.New, newComp);
+        UpdateAppearance((args.New, newComp));
     }
 
     protected void UpdateAppearance(Entity<BarbedComponent> barbed)
