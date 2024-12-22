@@ -75,7 +75,7 @@
     - id: CMPillCanisterInaprovaline
       amount: 1
     # TODO RMC14 tramadol and perixadon pills, splint
-    - id: CMOintment10
+    - id: CMBurnKit10
       amount: 1
     - id: CMTraumaKit10
       amount: 1

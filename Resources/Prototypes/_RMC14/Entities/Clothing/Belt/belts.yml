@@ -55,7 +55,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/marine/desert.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/marine/desert.rsi  
+    sprite: _RMC14/Objects/Clothing/Belt/marine/desert.rsi
 
 - type: entity
   parent: CMBeltMarine
@@ -126,7 +126,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/shotgun/desert.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/shotgun/desert.rsi  
+    sprite: _RMC14/Objects/Clothing/Belt/shotgun/desert.rsi
 
 - type: entity
   parent: RMCM276ShotgunShellLoadingRig
@@ -316,7 +316,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/knife/snow-desert-urban.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/knife/snow-desert-urban.rsi  
+    sprite: _RMC14/Objects/Clothing/Belt/knife/snow-desert-urban.rsi
 
 - type: entity
   parent: CMBeltKnife
@@ -912,8 +912,8 @@
     - 0,0,9,1 # 9 slots
     blacklist:
       tags:
-      - CMFirstAidKit # TODO RMC14
-  #      - EngineerKit # TODO RMC14
+      - CMFirstAidKit
+      - RMCEngineerKit
   - type: Tag
     tags:
     - RMCG8Pouch
@@ -1038,8 +1038,8 @@
     - 0,0,13,1 # 7 slots
     blacklist:
       tags:
-      - CMFirstAidKit # TODO RMC14
-  #      - EngineerKit # TODO RMC14
+      - CMFirstAidKit
+      - RMCEngineerKit
   - type: Tag
     tags:
     - RMCMatebaHolster

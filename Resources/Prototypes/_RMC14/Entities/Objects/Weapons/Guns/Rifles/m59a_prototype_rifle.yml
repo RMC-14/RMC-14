@@ -1,0 +1,172 @@
+﻿- type: entity
+  parent: CMBaseWeaponRifle
+  name: M59A prototype rifle
+  id: WeaponRifleM59A
+  description: A prototype M59A, an experimental rifle platform built to outperform the standard M54C. Back issue only. Uses standard MK1 & MK2 rifle magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/desert.rsi #TODO RMC: Change when new sprites
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/desert.rsi #TODO RMC: Change when new sprites
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: Gun
+    shotsPerBurst: 4
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    soundGunshot:
+      collection: CMM54CShoot
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    # - FullAuto #TODO RMC: re-enable when the full auto fire mode switch crash to desktop is fixed
+    recoilUnwielded: 4
+    #fireDelay: 0.2332
+    scatterWielded: 6
+    scatterUnwielded: 20
+    baseFireRate: 4.85 #semi auto is -> 171 rpm - 2.86/s
+    burstScatterMult: 3
+    modifiers:
+      SemiAuto:
+        fireDelay: 0.15
+      Burst:
+        fireDelay: 0.1 #290 rpm - 4.85/s
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        fireDelay: 0  #290rpm - 4.85/s same as burst
+        maxScatterModifier: 8
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: GunIDLock
+  - type: GunIFF
+    enabled: true
+  - type: IFFToggle
+    requireIDLock: true
+    changeStats: true
+    iFFFireModes:
+    - SemiAuto
+    iFFModifiers:
+      SemiAuto:
+        fireDelay: 0.25 #133 rpm - 2.22/s
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54C
+          - CMMagazineRifleM54CAP
+          - CMMagazineRifleM54CExt
+          #TODO RMC: Add the MK1 mags here when they are added
+        startingItem: CMMagazineRifleM54C #TODO RMC: Change to incend magazine when that is added, parity.
+  - type: GunDamageModifier
+    multiplier: 1.15
+  - type: RMCMagneticItem
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        whitelist:
+          tags:
+          - RMCAttachmentM54CStockCollapsible
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentVerticalGrip
+          #TODO RMC: add underbarrel flamer (and adv underbarrel flamer) and underbarrel extinguisher here when they are added
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.75, 0.00
+      rmc-aslot-rail: 0.1, 0.16
+      rmc-aslot-stock: -0.78, 0.0325
+      rmc-aslot-underbarrel: 0.35, -0.343
+
+- type: entity
+  parent: WeaponRifleM59A
+  id: WeaponRifleM59ACamo
+  suffix: Camo Replace
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: WeaponRifleM59AJungle
+      Desert: WeaponRifleM59A
+      Snow: WeaponRifleM59ASnow
+      Classic: WeaponRifleM59AClassic
+      Urban: WeaponRifleM59AUrban
+
+- type: entity
+  parent: WeaponRifleM59A
+  id: WeaponRifleM59AJungle
+  suffix: Jungle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/jungle.rsi
+
+- type: entity
+  parent: WeaponRifleM59A
+  id: WeaponRifleM59ASnow
+  suffix: Snow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/snow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/snow.rsi
+
+- type: entity
+  parent: WeaponRifleM59A
+  id: WeaponRifleM59AClassic
+  suffix: Classic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/classic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/classic.rsi
+
+- type: entity
+  parent: WeaponRifleM59A
+  id: WeaponRifleM59AUrban
+  suffix: Urban
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/urban.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/urban.rsi

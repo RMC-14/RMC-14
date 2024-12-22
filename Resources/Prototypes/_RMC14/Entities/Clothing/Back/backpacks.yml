@@ -28,10 +28,7 @@
     maxItemSize: Normal
     grid:
     - 0,0,20,1
-    blacklist:
-      tags:
-      - CMFirstAidKit # TODO RMC14 medical skill
-  #      - EngineerKit # TODO RMC14
+    blacklist: {}
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -47,6 +44,20 @@
     blacklist:
       components:
       - Xeno
+  - type: StorageStoreSkillRequired
+    entries:
+#    - whitelist:
+#        tags:
+#        - RMCEngineerKit
+#      skills:
+#        all:
+#          RMCSkillEngineer: 2
+    - whitelist:
+        tags:
+        - CMFirstAidKit
+      skills:
+        all:
+          RMCSkillMedical: 2
 
 - type: entity
   parent: CMPersonalStorageBase
@@ -109,14 +120,14 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/standard/jungle-desert-classic.rsi
-    
+
 - type: entity
   parent: CMBackpackMarine
   id: RMCBackpackMarineSU
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/standard/snow-urban.rsi
-    
+
 - type: entity
   parent: CMBackpackMarine
   id: RMCBackpackMarineCamo
@@ -211,7 +222,7 @@
   id: RMCBackpackMortarSU
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/mortar/snow-urban.rsi 
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/mortar/snow-urban.rsi
 
 - type: entity
   parent: CMBackpackMortar
@@ -279,7 +290,7 @@
   id: RMCBackpackWelderSU
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/welder/snow-urban.rsi 
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/welder/snow-urban.rsi
 
 - type: entity
   parent: CMBackpack
