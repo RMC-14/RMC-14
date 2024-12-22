@@ -19,10 +19,6 @@ Small fixes/refactors are exempt. Media may be used in SS14 progress reports wit
 - [ ] I have added media to this PR or it does not require an ingame showcase.
 <!-- You should understand that not following the above may get your PR closed at maintainer’s discretion -->
 
-## Breaking changes
-<!-- List any breaking changes, including namespaces, public class/method/field changes, prototype renames; and provide instructions for fixing them.
-This will be posted in #codebase-changes. -->
-
 **Changelog**
 <!-- Add a Changelog entry to make players aware of new features or changes that could affect gameplay.
 Make sure to read the guidelines and take this Changelog template out of the comment block in order for it to show up.
