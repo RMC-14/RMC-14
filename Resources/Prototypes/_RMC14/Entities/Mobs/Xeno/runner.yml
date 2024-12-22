@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent:
   - CMXenoDeveloped
@@ -183,6 +183,7 @@
     ignoreLateInfected: true
     popupGain: rmc-xeno-acid-increase-user
     popupNotEnough: rmc-xeno-not-enough-acid
+    alert: XenoEnergyAcider
   - type: PointLight
     enabled: false
     radius: 3

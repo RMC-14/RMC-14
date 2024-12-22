@@ -40,5 +40,5 @@ public sealed partial class XenoEnergyComponent : Component
     public string PopupNotEnough = "rmc-xeno-not-enough-energy";
 
     [DataField, AutoNetworkedField]
-    public ProtoId<AlertPrototype> Alert = "XenoEnergy";
+    public ProtoId<AlertPrototype> Alert = "XenoEnergyBase";
 }

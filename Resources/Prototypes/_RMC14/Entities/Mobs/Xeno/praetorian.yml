@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent:
   - CMXenoDeveloped
@@ -172,6 +172,7 @@
   - type: XenoSpit
     projectileId: XenoSpitProjectilePraetorianWarden
   - type: XenoEnergy
+    alert: XenoEnergyWarden
   - type: XenoRetrieve
   - type: XenoAid
   - type: XenoSprayAcid
