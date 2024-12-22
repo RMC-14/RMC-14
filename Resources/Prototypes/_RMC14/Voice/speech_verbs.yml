@@ -6,3 +6,12 @@
   - chat-speech-verb-vulpkanin-2
   - chat-speech-verb-vulpkanin-3
   - chat-speech-verb-vulpkanin-4
+
+- type: speechVerb
+  id: Rodentia
+  name: chat-speech-verb-name-rodentia
+  speechVerbStrings:
+  - chat-speech-verb-rodentia-1
+  - chat-speech-verb-rodentia-2
+  - chat-speech-verb-rodentia-3
+  - chat-speech-verb-rodentia-4
