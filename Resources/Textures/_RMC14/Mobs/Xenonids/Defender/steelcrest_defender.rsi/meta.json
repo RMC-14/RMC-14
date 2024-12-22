@@ -1,12 +1,16 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "Sprites by @aleksh and @.sigma_draconis.",
+  "license": null,
+  "copyright": null,
   "size": {
-    "x": 64,
-    "y": 64
+    "x": 32,
+    "y": 32
   },
   "states": [
+    {
+      "name": "steelcrest_fortify_0",
+      "directions": 4
+    },
     {
       "name": "steelcrest_fortify_1",
       "directions": 4
@@ -32,16 +36,20 @@
       "name": "steelcrest_rest_3"
     },
     {
-      "name": "steelcrest_walk_0"
+      "name": "steelcrest_walk_0",
+      "directions": 4
     },
     {
-      "name": "steelcrest_walk_1"
+      "name": "steelcrest_walk_1",
+      "directions": 4
     },
     {
-      "name": "steelcrest_walk_2"
+      "name": "steelcrest_walk_2",
+      "directions": 4
     },
     {
-      "name": "steelcrest_walk_3"
+      "name": "steelcrest_walk_3",
+      "directions": 4
     },
     {
       "name": "alive",
@@ -91,9 +99,6 @@
     },
     {
       "name": "steelcrest_downed_3"
-    },
-    {
-      "name": "steelcrest_fortify_0"
     }
   ]
 }
