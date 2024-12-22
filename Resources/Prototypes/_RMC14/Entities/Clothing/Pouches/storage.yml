@@ -13,8 +13,8 @@
       components:
       - Bible
       tags:
-      - CMFirstAidKit # TODO RMC14
-      - RMCEngineerKit # TODO RMC14
+      - CMFirstAidKit
+      - RMCEngineerKit
       - RMCBoxStorage
 
 

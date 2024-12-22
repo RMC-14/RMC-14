@@ -30,8 +30,8 @@
     - 0,0,20,1
     blacklist:
       tags:
-      - CMFirstAidKit # TODO RMC14 medical skill
-      - RMCEngineerKit # TODO RMC14
+      - CMFirstAidKit
+      - RMCEngineerKit
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
