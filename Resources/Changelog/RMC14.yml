@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed Crusher stomp damaging marines more than half a tile away from
-      the crusher that aren't laying down
-    type: Fix
-  id: 637
-  time: '2024-08-30T09:22:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3823
-- author: Vermidia
-  changes:
   - message: Hyposprays now have vials, which can be tactically reloaded by using
       a hypo on one, or you can swap them in with a vial in hand.
     type: Add
@@ -4993,5 +4985,27 @@
   id: 1136
   time: '2024-12-22T10:11:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5195
+- author: Vermidia
+  changes:
+  - message: Fixed defender's fortify and toggle crest sharing a cooldown.
+    type: Fix
+  - message: Fixed headbutt not doing reduced damage and having less range with crest
+      lowered, and not having lower knockback normally.
+    type: Fix
+  - message: Fixed headbutt not having slight armor piercing.
+    type: Fix
+  - message: Fixed defender's explosion armor from fortify being applied differently
+      than other similar explosion armor increasing abilities. (Damage from explosions
+      may be slightly higher).
+    type: Fix
+  - message: Defenders can now attack structures while fortified. They can attack
+      mobs using their tail "slam" (tail stab but renamed).
+    type: Fix
+  - message: Added steelcrest defender. They can move and headbutt while fortified
+      at the cost of less armor from it.
+    type: Add
+  id: 1137
+  time: '2024-12-22T10:50:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5158
 Name: RMC14
 Order: -1
