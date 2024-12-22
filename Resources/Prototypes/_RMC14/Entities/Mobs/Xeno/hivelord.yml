@@ -5,6 +5,7 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoHivelordBase
   name: Hivelord
   description: A builder of really big hives.
@@ -150,6 +151,7 @@
     - ActionXenoTransferPlasma
     - ActionXenoResinWalker
     - ActionXenoDevolve
+    hidden: true
   - type: XenoConstruction
     buildDelay: 1
     canBuild:

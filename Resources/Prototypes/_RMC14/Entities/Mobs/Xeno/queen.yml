@@ -212,6 +212,7 @@
   - type: XenoSpit
     projectileId: XenoQueenNeuroSpitProjectile
     plasmaCost: 50
+  - type: CommendationGiver
 
 - type: entity
   id: XenoLeaderPheromoneRelay

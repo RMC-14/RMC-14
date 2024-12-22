@@ -213,8 +213,6 @@ public sealed partial class StorageContainer : BaseWindow
         }
 
         #endregion
-
-        BuildItemPieces();
     }
 
     public void BuildBackground()
@@ -272,6 +270,15 @@ public sealed partial class StorageContainer : BaseWindow
         var boundingGrid = storageComp.Grid.GetBoundingBox();
         var size = _emptyTexture!.Size * 2;
         var containedEntities = storageComp.Container.ContainedEntities.Reverse().ToArray();
+        if (_lastUpdate.Grid.Equals(boundingGrid) &&
+            _lastUpdate.Contained.SequenceEqual(containedEntities) &&
+            _lastUpdate.Stored.Count == storageComp.StoredItems.Count &&
+            _lastUpdate.Stored.All(kvp => storageComp.StoredItems.TryGetValue(kvp.Key, out var v) && kvp.Value == v))
+        {
+            return;
+        }
+
+        _lastUpdate = (boundingGrid, containedEntities, storageComp.StoredItems);
 
         //todo. at some point, we may want to only rebuild the pieces that have actually received new data.
 
