@@ -1,25 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: FTLs get insulated gloves as part of their kit
-    type: Fix
-  id: 643
-  time: '2024-08-30T22:49:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3894
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Boiler gas spreading into itself and causing massive amounts of
-      lag. Re-enabled Boiler evolution.
-    type: Fix
-  - message: Fixed mortars and sentries not being attackable by xenoniods.
-    type: Fix
-  - message: Fixed Requisitions not being able to buy sentry magazines.
-    type: Fix
-  id: 644
-  time: '2024-08-30T22:59:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3897
-- author: Vermidia
-  changes:
   - message: Fix larva burst in bags being stuck in said bags
     type: Fix
   id: 645
@@ -5006,5 +4987,20 @@
   id: 1142
   time: '2024-12-22T21:26:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5207
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed scarves blocking feeding someone pills.
+    type: Fix
+  id: 1143
+  time: '2024-12-22T21:49:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5208
+- author: Vermidia
+  changes:
+  - message: Fixed Medical Kit pouch being called a revival pouch in the corpsman
+      vendor
+    type: Fix
+  id: 1144
+  time: '2024-12-22T21:50:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5206
 Name: RMC14
 Order: -1
