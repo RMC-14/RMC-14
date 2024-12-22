@@ -55,7 +55,7 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.bleed_time_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> CMMarinesPerXeno =
-        CVarDef.Create("rmc.marines_per_xeno", 8f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.marines_per_xeno", 4.5f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<bool> RMCAutoBalance =
         CVarDef.Create("rmc.auto_balance", true, CVar.REPLICATED | CVar.SERVER);
@@ -64,7 +64,7 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.auto_balance_step", 0.5f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCAutoBalanceMin =
-        CVarDef.Create("rmc.auto_balance_min", 7f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.auto_balance_min", 4f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCAutoBalanceMax =
         CVarDef.Create("rmc.auto_balance_max", 11f, CVar.REPLICATED | CVar.SERVER);
@@ -82,11 +82,11 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.requisitions_starting_balance", 0, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCRequisitionsBalanceGain =
-        CVarDef.Create("rmc.requisitions_balance_gain", 750, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.requisitions_balance_gain", 550, CVar.REPLICATED | CVar.SERVER);
 
     // TODO RMC14 400
     public static readonly CVarDef<int> RMCRequisitionsStartingDollarsPerMarine =
-        CVarDef.Create("rmc.requisitions_starting_dollars_per_marine", 1750, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.requisitions_starting_dollars_per_marine", 1150, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<string> RMCDiscordToken =
         CVarDef.Create("rmc.discord_token", "", CVar.SERVER | CVar.SERVERONLY | CVar.CONFIDENTIAL);
