@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/bb00705387c77af87cf86b948e6b34441c60300c/icons/mob/xenonids/warrior.dmi",
+  "copyright": "Sprites by @aleksh and @.sigma_draconis.",
   "size": {
     "x": 64,
     "y": 64
@@ -12,24 +12,40 @@
       "directions": 4
     },
     {
-      "name": "sleeping"
-    },
-    {
-      "name": "crit"
-    },
-    {
       "name": "dead"
     },
     {
-      "name": "agility",
-      "directions": 4
+      "name": "downed"
     },
     {
-      "name": "warrior_walk_3",
-      "directions": 4
+      "name": "sleeping"
     },
     {
-      "name": "warrior_walk_2",
+      "name": "warrior_crit_overlay_2"
+    },
+    {
+      "name": "warrior_crit_overlay_3"
+    },
+    {
+      "name": "warrior_crit_overlay_4"
+    },
+    {
+      "name": "warrior_downed_3"
+    },
+    {
+      "name": "warrior_rest_0"
+    },
+    {
+      "name": "warrior_rest_1"
+    },
+    {
+      "name": "warrior_rest_2"
+    },
+    {
+      "name": "warrior_rest_3"
+    },
+    {
+      "name": "warrior_walk_0",
       "directions": 4
     },
     {
@@ -37,35 +53,12 @@
       "directions": 4
     },
     {
-      "name": "warrior_walk_0",
+      "name": "warrior_walk_2",
       "directions": 4
     },
     {
-      "name": "warrior_rest_3"
-    },
-    {
-      "name": "warrior_rest_2"
-    },
-    {
-      "name": "warrior_rest_1"
-    },
-    {
-      "name": "warrior_rest_0"
-    },
-    {
-      "name": "warrior_downed_3"
-    },
-    {
-      "name": "warrior_downed_2"
-    },
-    {
-      "name": "warrior_downed_1"
-    },
-    {
-      "name": "warrior_downed_0"
-    },
-    {
-      "name": "warrior_dissection"
+      "name": "warrior_walk_3",
+      "directions": 4
     }
   ]
 }

@@ -31,7 +31,7 @@
         Brute: 30
   - type: Xeno
     role: CMXenoDrone
-    hudOffset: 0,0.15
+    hudOffset: -0.1,0.15
     tier: 1
     bypassTierCount: true
     unlockAt: 60 # 1 minute

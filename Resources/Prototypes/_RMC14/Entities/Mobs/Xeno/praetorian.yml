@@ -37,7 +37,7 @@
     - ActionXenoSprayAcidPraetorian
     - ActionXenoDevolve
     tier: 3
-    hudOffset: 0,0.16
+    hudOffset: -0.15,0.16
     unlockAt: 900 # 15 minutes
   - type: XenoHeavy
   - type: XenoDevolve

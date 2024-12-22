@@ -1,24 +1,76 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/cbb0fc429f67f860763e178b774eaa81820f8842/icons/mob/xenonids/lesser_drone.dmi and modified by Vermidia",
+  "copyright": "Sprites by @aleksh and @.sigma_draconis.",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "alive",
+      "name": "lesser_walk_1",
+      "directions": 4
+    },
+    {
+      "name": "lesser_walk_2",
+      "directions": 4
+    },
+    {
+      "name": "lesser_walk_3",
       "directions": 4
     },
     {
       "name": "sleeping"
     },
     {
-      "name": "crit"
+      "name": "alive",
+      "directions": 4
     },
     {
       "name": "dead"
+    },
+    {
+      "name": "downed"
+    },
+    {
+      "name": "lesser_downed_0"
+    },
+    {
+      "name": "lesser_downed_1"
+    },
+    {
+      "name": "lesser_downed_2"
+    },
+    {
+      "name": "lesser_downed_3"
+    },
+    {
+      "name": "lesser_egg",
+      "directions": 4
+    },
+    {
+      "name": "lesser_parasite_left",
+      "directions": 4
+    },
+    {
+      "name": "lesser_parasite_right",
+      "directions": 4
+    },
+    {
+      "name": "lesser_rest_0"
+    },
+    {
+      "name": "lesser_rest_1"
+    },
+    {
+      "name": "lesser_rest_2"
+    },
+    {
+      "name": "lesser_rest_3"
+    },
+    {
+      "name": "lesser_walk_0",
+      "directions": 4
     }
   ]
 }
