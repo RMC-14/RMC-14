@@ -1,31 +1,35 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/bb00705387c77af87cf86b948e6b34441c60300c/icons/mob/xenonids/boiler.dmi",
+    "copyright": "Sprites by @aleksh and @.sigma_draconis.",
   "size": {
     "x": 64,
     "y": 64
   },
   "states": [
     {
-      "name": "alive",
-      "directions": 4
+      "name": "boiler_downed_1"
     },
     {
-      "name": "sleeping"
+      "name": "boiler_downed_2"
     },
     {
-      "name": "crit"
+      "name": "boiler_downed_3"
     },
     {
-      "name": "dead"
+      "name": "boiler_rest_0"
     },
     {
-      "name": "boiler_walk_3",
-      "directions": 4
+      "name": "boiler_rest_1"
     },
     {
-      "name": "boiler_walk_2",
+      "name": "boiler_rest_2"
+    },
+    {
+      "name": "boiler_rest_3"
+    },
+    {
+      "name": "boiler_walk_0",
       "directions": 4
     },
     {
@@ -33,29 +37,25 @@
       "directions": 4
     },
     {
-      "name": "boiler_walk_0",
+      "name": "boiler_walk_2",
       "directions": 4
     },
     {
-      "name": "boiler_rest_3"
+      "name": "boiler_walk_3",
+      "directions": 4
     },
     {
-      "name": "boiler_rest_2"
+      "name": "dead"
     },
     {
-      "name": "boiler_rest_1"
+      "name": "downed"
     },
     {
-      "name": "boiler_rest_0"
+      "name": "sleeping"
     },
     {
-      "name": "boiler_downed_3"
-    },
-    {
-      "name": "boiler_downed_2"
-    },
-    {
-      "name": "boiler_downed_1"
+      "name": "alive",
+      "directions": 4
     },
     {
       "name": "boiler_downed_0"

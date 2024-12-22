@@ -23,6 +23,7 @@ public sealed partial class ChannelFilterPopup : Popup
         ChatChannel.Admin,
         ChatChannel.AdminAlert,
         ChatChannel.AdminChat,
+        ChatChannel.MentorChat,
         ChatChannel.Server
     };
 

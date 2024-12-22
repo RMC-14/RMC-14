@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprites by @aleksh and @.sigma_draconis.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "lesser_rest_1"
+    },
+    {
+      "name": "lesser_rest_2"
+    },
+    {
+      "name": "lesser_rest_3"
+    },
+    {
+      "name": "lesser_walk_0"
+    },
+    {
+      "name": "lesser_walk_1"
+    },
+    {
+      "name": "lesser_walk_2"
+    },
+    {
+      "name": "lesser_walk_3"
+    },
+    {
+      "name": "sleeping"
+    },
+    {
+      "name": "alive"
+    },
+    {
+      "name": "dead"
+    },
+    {
+      "name": "downed"
+    },
+    {
+      "name": "lesser_downed_0"
+    },
+    {
+      "name": "lesser_downed_1"
+    },
+    {
+      "name": "lesser_downed_2"
+    },
+    {
+      "name": "lesser_downed_3"
+    },
+    {
+      "name": "lesser_egg"
+    },
+    {
+      "name": "lesser_parasite_left"
+    },
+    {
+      "name": "lesser_parasite_right"
+    },
+    {
+      "name": "lesser_rest_0"
+    }
+  ]
+}

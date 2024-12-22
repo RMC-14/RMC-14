@@ -1,34 +1,47 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/bb00705387c77af87cf86b948e6b34441c60300c/icons/mob/xenonids/spitter.dmi",
+  "copyright": "Sprites by @aleksh and @.sigma_draconis.",
   "size": {
     "x": 48,
     "y": 48
   },
   "states": [
     {
-      "name": "alive",
-      "directions": 4
+      "name": "dead"
+    },
+    {
+      "name": "downed"
     },
     {
       "name": "sleeping"
     },
     {
-      "name": "crit"
+      "name": "spitter_downed_0"
     },
     {
-      "name": "dead"
+      "name": "spitter_downed_1"
     },
     {
-      "name": "spitter_dissection"
+      "name": "spitter_downed_2"
     },
     {
-      "name": "spitter_walk_3",
-      "directions": 4
+      "name": "spitter_downed_3"
     },
     {
-      "name": "spitter_walk_2",
+      "name": "spitter_rest_0"
+    },
+    {
+      "name": "spitter_rest_1"
+    },
+    {
+      "name": "spitter_rest_2"
+    },
+    {
+      "name": "spitter_rest_3"
+    },
+    {
+      "name": "spitter_walk_0",
       "directions": 4
     },
     {
@@ -36,32 +49,16 @@
       "directions": 4
     },
     {
-      "name": "spitter_walk_0",
+      "name": "spitter_walk_2",
       "directions": 4
     },
     {
-      "name": "spitter_rest_3"
+      "name": "spitter_walk_3",
+      "directions": 4
     },
     {
-      "name": "spitter_rest_2"
-    },
-    {
-      "name": "spitter_rest_1"
-    },
-    {
-      "name": "spitter_rest_0"
-    },
-    {
-      "name": "spitter_downed_3"
-    },
-    {
-      "name": "spitter_downed_2"
-    },
-    {
-      "name": "spitter_downed_1"
-    },
-    {
-      "name": "spitter_downed_0"
+      "name": "alive",
+      "directions": 4
     }
   ]
 }

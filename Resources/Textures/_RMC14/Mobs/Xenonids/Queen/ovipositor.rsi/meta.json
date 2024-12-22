@@ -1,10 +1,10 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/dbebd43ba8a4af592a7c59920fa00ede7b06067c/icons/mob/xenonids/ovipositor.dmi",
+  "copyright": "Sprites by @aleksh and @.sigma_draconis.",
   "size": {
-    "x": 96,
-    "y": 96
+    "x": 32,
+    "y": 32
   },
   "states": [
     {
@@ -14,97 +14,6 @@
           0.1,
           0.1,
           0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.2,
-          0.1,
-          0.1,
-          0.2,
-          0.1,
-          0.2,
-          0.1
-        ]
-      ]
-    },
-    {
-      "name": "destroyed",
-      "delays": [
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ]
-      ]
-    },
-    {
-      "name": "dismount",
-      "delays": [
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ]
-      ]
-    },
-    {
-      "name": "explosion",
-      "delays": [
-        [
-          0.1,
-          0.2,
-          0.3,
-          0.05,
-          0.04,
-          0.060000002,
-          0.060000002,
-          0.060000002,
-          0.060000002,
-          0.07,
-          0.07,
-          0.08,
-          0.089999996,
-          0.1,
-          0.1,
-          0.1
-        ]
-      ]
-    },
-    {
-      "name": "molted"
-    },
-    {
-      "name": "ovipositor"
-    },
-    {
-      "name": "gibbed"
-    },
-    {
-      "name": "decay",
-      "delays": [
-        [
-          0.1,
-          0.2,
           0.1,
           0.1
         ]

@@ -1,68 +1,43 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/65b6faf5d824cf41b4a0053f45869348694ee61b/icons/mob/xenonids/facehugger.dmi, rotational sprites provided by Zonalar, sleeping sprite modified by Vermidia",
+  "copyright": "Sprites by @aleksh and @.sigma_draconis.",
   "size": {
-    "x": 48,
-    "y": 48
+    "x": 32,
+    "y": 32
   },
   "states": [
     {
       "name": "alive",
-      "directions": 4,
-      "delays": [
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ],
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ],
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ],
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ]
-      ]
-    },
-    {
-      "name": "crit"
-    },
-    {
-      "name": "sleeping"
+      "directions": 4
     },
     {
       "name": "dead"
     },
     {
-      "name": "thrown"
+      "name": "downed"
     },
     {
       "name": "impregnated"
+    },
+    {
+      "name": "equipped-MASK",
+      "directions": 4
+    },
+    {
+      "name": "parasite_downed_0"
+    },
+    {
+      "name": "parasite_downed_1"
+    },
+    {
+      "name": "parasite_downed_2"
+    },
+    {
+      "name": "parasite_downed_3"
+    },
+    {
+      "name": "sleeping"
     }
   ]
 }
