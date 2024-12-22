@@ -198,6 +198,7 @@
     - ActionXenoHealerDroneTransferPlasma
     - ActionXenoSacrifice
     - ActionXenoDevolve
+    hidden: true
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000

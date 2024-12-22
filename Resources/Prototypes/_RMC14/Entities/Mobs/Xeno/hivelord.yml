@@ -151,6 +151,7 @@
     - ActionXenoTransferPlasma
     - ActionXenoResinWalker
     - ActionXenoDevolve
+    hidden: true
   - type: XenoConstruction
     buildDelay: 1
     canBuild:
