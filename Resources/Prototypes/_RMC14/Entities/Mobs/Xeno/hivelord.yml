@@ -31,7 +31,6 @@
     devolvesTo:
     - CMXenoDrone
   - type: XenoAcid
-    canUpgrade: true
   - type: XenoDevour
   - type: XenoPheromones
     pheromonesMultiplier: 2.5
@@ -120,6 +119,7 @@
     - DoorXenoResinThick
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+    canUpgrade: true
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000

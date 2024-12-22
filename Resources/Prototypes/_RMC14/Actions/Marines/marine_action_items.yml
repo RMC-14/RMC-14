@@ -53,9 +53,6 @@
     icon:
       sprite: _RMC14/Actions/id_lock_actions.rsi
       state: id_lock_locked
-    iconOff:
-      sprite: _RMC14/Actions/id_lock_actions.rsi
-      state: id_lock_unlocked
     event: !type:ToggleActionEvent
 
 - type: entity
@@ -68,9 +65,6 @@
     icon:
       sprite: _RMC14/Actions/iff_toggle_actions.rsi
       state: iff_toggle_on
-    iconOff:
-      sprite: _RMC14/Actions/iff_toggle_actions.rsi
-      state: iff_toggle_off
     event: !type:ToggleActionEvent
 
 - type: entity
