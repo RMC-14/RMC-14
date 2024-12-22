@@ -19,7 +19,7 @@
       tags:
       - RMCCircuitboard
       - Flashlight
-      - RMCWeldingGoggles
+      # - TODO RMC14 RMCWeldingGoggles
       # - TODO RMC14 RMCAnalyzer
       # - TODO RMC14 RMCDemoScanner
       # - TODO RMC14 RMCReagentScanner
@@ -47,3 +47,7 @@
     blacklist:
       components:
       - Xeno
+  - type: StorageNestedOpenSkillRequired
+    skills:
+      all:
+        RMCSkillEngineer: 2
