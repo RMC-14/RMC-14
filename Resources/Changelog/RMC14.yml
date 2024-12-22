@@ -1,71 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fix mobs continuing to hold pulls on death
-    type: Fix
-  id: 628
-  time: '2024-08-30T09:03:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3877
-- author: Vermidia
-  changes:
-  - message: Added 2 new colors of doctor scrubs. Sprites are also updated and the
-      nurse's armband is now a separate item worn on your neck slot
-    type: Add
-  id: 629
-  time: '2024-08-30T09:03:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3868
-- author: crystalHex
-  changes:
-  - message: Added various crates to the requisitions catalog (flare packs, binoculars).
-    type: Tweak
-  id: 630
-  time: '2024-08-30T09:02:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3882
-- author: crystalHex
-  changes:
-  - message: The fireteam leader now starts with the M12 helmet.
-    type: Fix
-  id: 631
-  time: '2024-08-30T09:06:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3876
-- author: crystalHex
-  changes:
-  - message: Xenos can no longer light flares on ground.
-    type: Fix
-  - message: Xenos can no longer remove webbings from jumpsuits.
-    type: Fix
-  - message: Xenos can no longer toggle attachables or internals.
-    type: Fix
-  - message: Xenos can no longer see or change gun fire modes.
-    type: Fix
-  - message: Xenos can no longer (attempt to) pray.
-    type: Fix
-  id: 632
-  time: '2024-08-30T09:08:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3875
-- author: crystalHex
-  changes:
-  - message: Added the G8-A general utility belt and drop pouch to dropship crew and
-      command vendors.
-    type: Tweak
-  id: 633
-  time: '2024-08-30T09:11:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3864
-- author: KalimbaMachine
-  changes:
-  - message: Adds Corporate Liaison Wardrobe!
-    type: Add
-  id: 634
-  time: '2024-08-30T09:11:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3852
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Armor lamps now turn off when the user dies, gets infected, devoured,
-      or unequips the armor.
-    type: Tweak
-  id: 635
-  time: '2024-08-30T09:18:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3858
 - author: Dutch-VanDerLinde
   changes:
   - message: Melee weapons now do x1.5 extra damage against xenonids.
@@ -4994,5 +4927,69 @@
   id: 1127
   time: '2024-12-21T14:10:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4947
+- author: DummeHytteOst
+  changes:
+  - message: Fixed extinguisher spray going into disposal.
+    type: Fix
+  id: 1128
+  time: '2024-12-22T01:05:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5188
+- author: Rainbeon
+  changes:
+  - message: You now receive a popup when others pat out fire on you.
+    type: Add
+  - message: Everyone else now receives a popup when a fire is patted out on others,
+      too.
+    type: Add
+  id: 1129
+  time: '2024-12-22T01:04:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5186
+- author: blueDev2
+  changes:
+  - message: Add Hive Whisperer strain of Hivelord, a Xeno able to create resin structures
+      from a distance.
+    type: Add
+  id: 1130
+  time: '2024-12-22T01:17:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4926
+- author: MetalSage
+  changes:
+  - message: Added engineering kit
+    type: Add
+  id: 1131
+  time: '2024-12-22T03:19:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4992
+- author: Rainbeon
+  changes:
+  - message: Fixed the Scout's M4SPR custom battle rifle being referred to by the
+      wrong name in the WS vendor and equipment case.
+    type: Fix
+  id: 1132
+  time: '2024-12-22T03:21:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5192
+- author: Rainbeon
+  changes:
+  - message: Fixed Fire Extinguishers not removing the acid effect on Marines when
+      spraying them.
+    type: Fix
+  id: 1133
+  time: '2024-12-22T05:25:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5194
+- author: Vermidia
+  changes:
+  - message: Added medical kit pouch to corpsman gear rack and requisitions.
+    type: Add
+  id: 1134
+  time: '2024-12-22T05:25:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3545
+- author: MACMAN2003
+  changes:
+  - message: Added the CO's M59A prototype rifle.
+    type: Add
+  - message: Gave the ML66A smart gun the option to disable its IFF.
+    type: Add
+  id: 1135
+  time: '2024-12-22T05:37:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4880
 Name: RMC14
 Order: -1

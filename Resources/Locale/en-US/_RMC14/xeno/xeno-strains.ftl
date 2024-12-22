@@ -46,6 +46,12 @@ rmc-xeno-healer-description = You lose your choice of resin secretions, a chunk 
     - Heal sisters by using plasma and some of your health.
 rmc-xeno-healer-popup = Divided we fall, united we win. We live for the hive, we die for the hive.
 
+rmc-xeno-resin-whisperer-name = Resin Whisperer
+rmc-xeno-resin-whisperer-description = You lose your corrosive acid, your ability to secrete thick resin, your ability to reinforce resin secretions, sacrifice your ability to plant weed nodes outside of weeds, and you sacrifice a fifth of your plasma reserves to enhance your vision and gain a stronger connection to the resin. You can now remotely place resin secretions including weed nodes up to a distance of twelve paces!
+  You gain the ability to:
+  - Secrete Resin and Weeds Remotely
+rmc-xeno-resin-whisperer-popup = We let the resin guide us. It whispers, so listen closely.
+
 rmc-xeno-acider-name = Acider
 rmc-xeno-acider-description = You trade your leap, bone chips, long-range sight, and a little speed to gain more health, some armor, and a new organ that fills with volatile acid over time.
   You gain the ability to:
