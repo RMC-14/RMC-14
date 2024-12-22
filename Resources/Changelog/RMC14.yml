@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Melee weapons now do x1.5 extra damage against xenonids.
-    type: Add
-  id: 636
-  time: '2024-08-30T09:19:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3850
 - author: Vermidia
   changes:
   - message: Fixed Crusher stomp damaging marines more than half a tile away from
@@ -4991,5 +4984,14 @@
   id: 1135
   time: '2024-12-22T05:37:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4880
+- author: Vermidia
+  changes:
+  - message: Fixed a few medical pouches not being able to store pill bottles
+    type: Fix
+  - message: Fixed medical rig starting with ointment and not burn kits
+    type: Fix
+  id: 1136
+  time: '2024-12-22T10:11:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5195
 Name: RMC14
 Order: -1
