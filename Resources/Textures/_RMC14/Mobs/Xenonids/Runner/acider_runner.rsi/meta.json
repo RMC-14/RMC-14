@@ -8,14 +8,21 @@
   },
   "states": [
     {
+      "name": "runner_walk_3",
+      "directions": 4
+    },
+    {
+      "name": "sleeping"
+    },
+    {
       "name": "alive",
       "directions": 4
     },
     {
-      "name": "dead"
+      "name": "crit"
     },
     {
-      "name": "downed"
+      "name": "dead"
     },
     {
       "name": "runner_downed_0"
@@ -52,13 +59,6 @@
     {
       "name": "runner_walk_2",
       "directions": 4
-    },
-    {
-      "name": "runner_walk_3",
-      "directions": 4
-    },
-    {
-      "name": "sleeping"
     }
   ]
 }

@@ -14,22 +14,27 @@
       "name": "drone_rest_3"
     },
     {
-      "name": "drone_walk_0"
+      "name": "drone_walk_0",
+      "directions": 4
     },
     {
-      "name": "drone_walk_1"
+      "name": "drone_walk_1",
+      "directions": 4
     },
     {
-      "name": "drone_walk_2"
+      "name": "drone_walk_2",
+      "directions": 4
     },
     {
-      "name": "drone_walk_3"
+      "name": "drone_walk_3",
+      "directions": 4
     },
     {
       "name": "sleeping"
     },
     {
-      "name": "alive"
+      "name": "alive",
+      "directions": 4
     },
     {
       "name": "dead"

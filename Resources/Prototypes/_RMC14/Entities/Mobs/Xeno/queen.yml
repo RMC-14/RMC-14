@@ -57,6 +57,7 @@
     tier: 0
     bypassTierCount: true
     unlockAt: 0
+    hudOffset: -0.1,0
   - type: XenoHeavy
   - type: XenoAcid
   - type: XenoConstruction
