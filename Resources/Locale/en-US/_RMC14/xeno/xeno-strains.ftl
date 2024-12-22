@@ -59,3 +59,11 @@ rmc-xeno-acider-description = You trade your leap, bone chips, long-range sight,
   - Gain acid reserves from slashing your enemies, and passively over time, which can be spent on corrosive acid as strong as a boiler's but applied much faster.
   - Become a living bomb using all your stored up acid. Survive for 20 seconds and you explode, coating your enemies and their defenses with acid. You'll reincarnate as a larva afterwards.
 rmc-xeno-acider-popup = This one will be the last thing they hear. A martyr.
+
+rmc-xeno-steelcrest-name = Steelcrest
+rmc-xeno-steelcrest-description = You trade your tail sweep and a small amount of slash damage for increased headbutt damage and fortified mobility to become a moving tank.
+   You gain the ability to:
+   - Move while fortified. Being fortified gives less armor and more directional armor, and no longer protects you from explosion stun.
+   - Headbutt while fortified. Headbutt doesn't lose damage and keeps it's higher range with high knockback.
+   - Soak in damage for 6 seconds for a small heal that also refreshes your tail slam.
+rmc-xeno-steelcrest-popup = This one, like my will, is indomitable. It will become my steel crest against all that defy me.

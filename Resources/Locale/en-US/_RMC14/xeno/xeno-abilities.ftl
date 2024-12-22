@@ -41,13 +41,16 @@ rmc-xeno-evolution-start-self = We begin to twist and contort.
 rmc-xeno-evolution-start-others = {$xeno} begins to twist and contort.
 
 # Fortify
-cm-xeno-fortify-cant-headbutt = You can't headbutt while fortifying!
-cm-xeno-fortify-cant-rest = You can't rest while fortifying!
-cm-xeno-fortify-cant-tail-sweep = You can't tail sweep while fortifying!
-cm-xeno-fortify-cant-toggle-crest = You can't lower your crest while fortifying!
+cm-xeno-fortify-cant-headbutt = We can't headbutt while fortifying!
+cm-xeno-fortify-cant-rest = We can't rest while fortifying!
+cm-xeno-fortify-cant-tail-sweep = We can't tail sweep while fortifying!
+cm-xeno-fortify-cant-toggle-crest = We can't lower our crest while fortifying!
+
+# Headbutt
+rmc-xeno-headbutt-too-far = We can't headbutt from this distance with our crest lowered!
 
 # Leap
-cm-xeno-leap-cancelled = You cancel your leap!
+cm-xeno-leap-cancelled = We cancel our leap!
 
 # Plant weeds
 cm-xeno-weeds-source-already-here = There is already a resin node here!
@@ -263,3 +266,11 @@ rmc-xeno-shield-vanguard-break = We feel our defensive shell shatter!
 # Toggle Cleave
 rmc-xeno-toggle-cleave-root = We will now root our enemies with our cleave.
 rmc-xeno-toggle-cleave-fling = We will now throw our enemies with our cleave.
+
+# Soak
+rmc-xeno-soak-self = We begin to tank incoming damage!
+rmc-xeno-soak-others = {CAPITALIZE(THE($xeno))} begins to tank incoming damage!
+rmc-xeno-soak-end-fail = We stop taking incoming damage.
+rmc-xeno-soak-end-self = We feel enraged after taking in oncoming damage! Our tail slam's cooldown is reset and we heal!
+rmc-xeno-soak-end-others =  {CAPITALIZE(THE($xeno))} gets enraged after being damaged enough!
+
