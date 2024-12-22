@@ -141,7 +141,7 @@ public sealed class SmartEquipSystem : EntitySystem
                     return;
             }
 
-            if (!_storage.CanInsert(slotItem, handItem.Value, out var reason))
+            if (!_storage.CanInsert(slotItem, handItem.Value, session.AttachedEntity, out var reason))
             {
                 if (reason != null)
                     _popup.PopupClient(Loc.GetString(reason), uid, uid);
@@ -154,7 +154,7 @@ public sealed class SmartEquipSystem : EntitySystem
 
             // if the hand item stacked with the things in inventory, but there's no more space left for the rest
             // of the stack, place the stack back in hand rather than dropping it on the floor
-            if (stacked != null && !_storage.CanInsert(slotItem, handItem.Value, out _))
+            if (stacked != null && !_storage.CanInsert(slotItem, handItem.Value, session.AttachedEntity, out _))
             {
                 if (TryComp<StackComponent>(handItem.Value, out var handStack) && handStack.Count > 0)
                     _hands.TryPickup(uid, handItem.Value, handsComp: hands);
