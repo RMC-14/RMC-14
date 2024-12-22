@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fix mobs continuing to hold pulls on death
-    type: Fix
-  id: 628
-  time: '2024-08-30T09:03:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3877
-- author: Vermidia
-  changes:
-  - message: Added 2 new colors of doctor scrubs. Sprites are also updated and the
-      nurse's armband is now a separate item worn on your neck slot
-    type: Add
-  id: 629
-  time: '2024-08-30T09:03:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3868
 - author: crystalHex
   changes:
   - message: Added various crates to the requisitions catalog (flare packs, binoculars).
@@ -4994,5 +4979,22 @@
   id: 1127
   time: '2024-12-21T14:10:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4947
+- author: DummeHytteOst
+  changes:
+  - message: Fixed extinguisher spray going into disposal.
+    type: Fix
+  id: 1128
+  time: '2024-12-22T01:05:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5188
+- author: Rainbeon
+  changes:
+  - message: You now receive a popup when others pat out fire on you.
+    type: Add
+  - message: Everyone else now receives a popup when a fire is patted out on others,
+      too.
+    type: Add
+  id: 1129
+  time: '2024-12-22T01:04:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5186
 Name: RMC14
 Order: -1
