@@ -1,17 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: You can now get a general idea of a sentries health by examining it
-    type: Fix
-  - message: Fixed being able to activate sentries right next to other active sentries
-    type: Fix
-  - message: You can rotate placed sentries with a screwdriver
-    type: Fix
-  id: 646
-  time: '2024-09-04T20:41:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3937
-- author: Vermidia
-  changes:
   - message: Fix Lifesaver Bag not starting with an epinephrine autoinjector
     type: Fix
   id: 647
@@ -5004,5 +4993,12 @@
   id: 1145
   time: '2024-12-22T23:45:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5212
+- author: Rainbeon
+  changes:
+  - message: Fixed Boiler globs phasing through resin walls, membranes, and doors.
+    type: Fix
+  id: 1146
+  time: '2024-12-23T03:21:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5215
 Name: RMC14
 Order: -1
