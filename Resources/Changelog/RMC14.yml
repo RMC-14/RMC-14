@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fix Lifesaver Bag not starting with an epinephrine autoinjector
-    type: Fix
-  id: 647
-  time: '2024-09-04T21:07:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3905
-- author: Vermidia
-  changes:
   - message: Medilathe, useable by med staff and makes various medical supplies out
       of plastic, such as hyposprays, high-capacity beakers, and stasis bags.
     type: Add
@@ -5000,5 +4993,14 @@
   id: 1146
   time: '2024-12-23T03:21:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5215
+- author: Rainbeon
+  changes:
+  - message: Fixed the Hivelord Resin Whisperer's Remote Build being too restrictive
+      on Line of Sight. You now only need to see any tiny part of a tile to remote
+      build on it, similar to CM13.
+    type: Fix
+  id: 1147
+  time: '2024-12-23T03:25:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5214
 Name: RMC14
 Order: -1
