@@ -50,7 +50,8 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (args.Cancelled || ent.Comp.DeleteOnFriendlyXeno)
             return;
 
-        if (_hive.FromSameHive(ent.Owner, args.OtherEntity))
+        if (_hive.FromSameHive(ent.Owner, args.OtherEntity) && 
+            (HasComp<XenoComponent>(args.OtherEntity) || HasComp<HiveCoreComponent>(args.OtherEntity)))
             args.Cancelled = true;
     }
 
