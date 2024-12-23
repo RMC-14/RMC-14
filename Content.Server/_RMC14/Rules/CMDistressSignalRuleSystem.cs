@@ -883,7 +883,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             if (!xenosAlive && !marinesAlive)
             {
-                if (GameTicker.RoundDuration() < distress.AllDiedCheckDelay)
+                if (distress.StartTime == null || Timing.CurTime - distress.StartTime < distress.AllDiedCheckDelay)
                     continue;
 
                 EndRound(distress, DistressSignalRuleResult.AllDied);
