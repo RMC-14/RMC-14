@@ -1,0 +1,38 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCWeldingMask
+  name: welding mask
+  description: Protects the eyes from welders, approved by the mad scientist association.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/welding.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/welding.rsi
+  - type: ItemToggle
+    activated: true
+  - type: ToggleClothing
+    action: RMCActionToggleWeldingMask
+  - type: ComponentToggler
+    components:
+    - type: EyeProtection
+    - type: SightRestrictionItem
+      restriction:
+        impairFull: 3.0
+        impairPartial: 2.0
+        alphaOuter: 1.0
+        alphaInner: 0.0
+  - type: RMCItemToggleClothingVisuals
+    prefix: up
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: {state: icon-up}
+          False: {state: icon}
+  - type: Appearance
+  - type: Tag
+    tags:
+    - RMCWeldingGoggle
+  - type: HideLayerClothing
+    slots:
+    - Snout

@@ -103,7 +103,36 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/tech/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/tech/jungle.rsi
-  - type: EyeProtection # TODO RMC14 toggleable
+  - type: ItemToggle
+    activated: false
+    soundActivate:
+      path: /Audio/_RMC14/Handling/hud_on.ogg
+      params:
+        variation: 0.250
+    soundDeactivate:
+      path: /Audio/_RMC14/Handling/hud_off.ogg
+      params:
+        variation: 0.250
+  - type: ToggleClothing
+    action: RMCActionToggleWeldingHelmet # TODO Welding visor
+  - type: ComponentToggler
+    components:
+    - type: EyeProtection
+    - type: SightRestrictionItem
+      restriction:
+        impairFull: 3.0
+        impairPartial: 2.0
+        alphaOuter: 1.0
+        alphaInner: 0.0
+  - type: RMCItemToggleClothingVisuals
+    prefix: enabled
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: {state: enabled-icon}
+          False: {state: icon}
+  - type: Appearance
 
 # M11
 - type: entity

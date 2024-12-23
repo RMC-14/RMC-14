@@ -100,7 +100,7 @@
         amount: 3
       - id: RMCHazardVest
         amount: 3
-      - id: ClothingHeadHatWelding # TODO RMC14 use cm prototype
+      - id: RMCWeldingMask
         amount: 2
       - id: RMCHardHat
         amount: 1

@@ -32,7 +32,7 @@
       - id: RMCHardhatWhite
       - id: RMCHardhatOrange
       - id: RMCHardhatBlue
-      # Welding helmet
+      - id: RMCWeldingMask
     - name: Suit
       choices: { CMSuit: 1 }
       entries:
