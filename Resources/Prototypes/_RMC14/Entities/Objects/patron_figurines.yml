@@ -931,8 +931,8 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronMarkSholl
-  name: Mark Sholl figurine
-  description: ""
+  name: Mark 'Blacklung' Sholl figurine
+  description: "A figurine of Mark 'Blacklung' Sholl. It depicts him with his usual 'Smokes like a chimney' nature on full display and tired eyes. Around his neck you see a well worn whistle with the words \"Cat wrangler\" engraved on the top."
   components:
   - type: Sprite
     state: mark_sholl
