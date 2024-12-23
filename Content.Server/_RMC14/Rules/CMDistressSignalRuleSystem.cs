@@ -883,9 +883,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             if (!xenosAlive && !marinesAlive)
             {
-                if (distress.StartTime == null || Timing.CurTime - distress.StartTime < distress.AllDiedCheckDelay)
-                    continue;
-
                 EndRound(distress, DistressSignalRuleResult.AllDied);
                 continue;
             }
@@ -1376,6 +1373,18 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private void EndRound(CMDistressSignalRuleComponent rule, DistressSignalRuleResult result)
     {
+        // you might be wondering what this check is doing here
+        // the answer is simple
+        // the absolute unit that wrote game rule system and game ticker made a conveniently named ActiveTick method
+        // that gets ticked BEFORE THE FUCKING ROUND IS SETUP
+        // so no marines and no xenos means instant mutual annihilation
+        // therefore we wait an arbitrary 1 minute
+        // i fucking hate my life dude
+        // i slept 3 hours and have to stay up to manually end ANOTHER ROUND OF RMC14
+        // TODO RMC14 why are we still here
+        if (rule.StartTime == null || Timing.CurTime - rule.StartTime < rule.RoundEndCheckDelay)
+            return;
+
         Log.Info($"Attempting to set {nameof(rule)} result to {result}");
         if (rule.Result != null)
             return;
