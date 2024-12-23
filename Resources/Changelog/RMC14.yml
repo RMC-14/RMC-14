@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Marines not wearing shoes slows them down
-    type: Fix
-  id: 649
-  time: '2024-09-04T21:10:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3910
 - author: DrSmugleaf
   changes:
   - message: Fixed some areas incorrectly allowing or prohibiting mortar fire and
@@ -4996,5 +4989,13 @@
   id: 1148
   time: '2024-12-23T03:27:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5216
+- author: Vermidia
+  changes:
+  - message: Fixed Healer drone pheromones not being the same strength as warden prae
+      pheromones.
+    type: Fix
+  id: 1149
+  time: '2024-12-23T04:08:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5219
 Name: RMC14
 Order: -1
