@@ -140,7 +140,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
         if (failureMessageId != null)
         {
-            _popup.PopupClient(Loc.GetString(failureMessageId, ("target_xeno", target.ToString())), ent);
+            _popup.PopupClient(Loc.GetString(failureMessageId, ("target_xeno", target)), ent);
             return;
         }
 
@@ -238,7 +238,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
         if (failureMessageId != null)
         {
-            _popup.PopupClient(Loc.GetString(failureMessageId, ("target_xeno", target.ToString())), ent);
+            _popup.PopupClient(Loc.GetString(failureMessageId, ("target_xeno", target)), ent);
             return;
         }
 
