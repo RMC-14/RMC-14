@@ -30,7 +30,23 @@ public sealed class DialogBui : BoundUserInterface
             _window = null;
         }
 
-        _window ??= this.CreateWindow<RMCDialogOptionsWindow>();
+        if (_window == null)
+        {
+            var newWindow = this.CreateWindow<RMCDialogOptionsWindow>();
+            _window = newWindow;
+
+            newWindow.Search.OnTextChanged += args =>
+            {
+                foreach (var child in newWindow.Options.Children)
+                {
+                    if (child is not Button { Text: not null } button)
+                        continue;
+
+                    button.Visible = button.Text.Contains(args.Text, StringComparison.OrdinalIgnoreCase);
+                }
+            };
+        }
+
         if (!_window.IsOpen)
             _window.OpenCentered();
 
