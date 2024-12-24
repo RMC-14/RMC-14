@@ -108,8 +108,9 @@
 
 - type: entity
   parent: RMCBaseWelder
-  id: CMWelder
+  id: RMCBlowtorchNoBlind
   name: blowtorch
+  abstract: true
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Tools/welder.rsi
@@ -165,10 +166,16 @@
     quickEquip: false
     slots:
     - Suitstorage
+
+- type: entity
+  parent: RMCBlowtorchNoBlind
+  id: CMWelder
+  name: blowtorch
+  components:
   - type: RequiresEyeProtection
 
 - type: entity
-  parent: RMCBaseWelder # doesn't require eye protection
+  parent: RMCBlowtorchNoBlind # doesn't require eye protection
   id: CMWelderSmall
   name: ME3 hand welder
   description: A compact, handheld welding torch used by the Marines for cutting and welding jobs on the field. Due to the small size and slow strength, its function is limited compared to a full-sized technician's blowtorch.

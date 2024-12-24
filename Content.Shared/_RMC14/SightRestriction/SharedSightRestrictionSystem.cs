@@ -14,7 +14,7 @@ using Content.Shared.Rounding;
 using Content.Shared.StatusEffect;
 using Content.Shared.Toggleable;
 using Content.Shared.Tools.Components;
-
+using Robust.Shared.Collections;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.SightRestriction;
@@ -39,31 +39,73 @@ public sealed class SharedSightRestrictionSystem : EntitySystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<SightRestrictionItemComponent, GotEquippedEvent>(OnEquipped);
+        SubscribeLocalEvent<SightRestrictionItemComponent, GotUnequippedEvent>(OnUnequipped);
+
         SubscribeLocalEvent<SightRestrictionItemComponent, ComponentStartup>(OnSightRestrictionStartup);
         SubscribeLocalEvent<SightRestrictionItemComponent, ComponentShutdown>(OnSightRestrictionShutdown);
 
         SubscribeLocalEvent<SightRestrictionComponent, SightRestrictionChangedEvent>(OnSightRestrictionChanged);
     }
 
+    private void OnEquipped(Entity<SightRestrictionItemComponent> ent, ref GotEquippedEvent args)
+    {
+        UpdateSightRestriction(args.Equipee);
+    }
+
+    private void OnUnequipped(Entity<SightRestrictionItemComponent> ent, ref GotUnequippedEvent args)
+    {
+        UpdateSightRestriction(args.Equipee);
+    }
+
     private void OnSightRestrictionStartup(Entity<SightRestrictionItemComponent> ent, ref ComponentStartup args)
     {
         var user = Transform(ent.Owner).ParentUid;
-        if (user == null)
-            return;
-
-        AddSightRestrict(user, ent);
+        UpdateSightRestriction(user);
     }
 
     private void OnSightRestrictionShutdown(Entity<SightRestrictionItemComponent> ent, ref ComponentShutdown args)
     {
         var user = Transform(ent.Owner).ParentUid;
-        if (user == null)
-            return;
+        UpdateSightRestriction(user);
+    }
 
-        if (!TryComp<SightRestrictionComponent>(user, out var restrictComp))
-            return;
+    private void UpdateSightRestriction(EntityUid user)
+    {
+        var sightRestrict = EnsureComp<SightRestrictionComponent>(user);
+        var validItems = new ValueList<EntityUid>();
 
-        RemoveSightRestrict((user, restrictComp), ent);
+        if (_inventory.TryGetContainerSlotEnumerator(user, out var slots, SlotFlags.All))
+        {
+            while (slots.MoveNext(out var containerSlot))
+            {
+                var containedEntity = containerSlot.ContainedEntity;
+
+                if (containedEntity == null)
+                    continue;
+
+                if (!TryComp<SightRestrictionItemComponent>(containedEntity, out var restriction))
+                    continue;
+
+                AddSightRestrict(user, (containedEntity.Value, restriction));
+                validItems.Add(containedEntity.Value);
+            }
+        }
+
+        var toRemove = new ValueList<EntityUid>();
+
+        foreach (var restriction in sightRestrict.Restrictions)
+        {
+            var item = restriction.Key;
+
+            if (!validItems.Contains(item))
+                toRemove.Add(item);
+        }
+
+        foreach (var item in toRemove)
+        {
+            RemoveSightRestrict((user, sightRestrict), item);
+        }
     }
 
     private void OnSightRestrictionChanged(Entity<SightRestrictionComponent> user, ref SightRestrictionChangedEvent args)
