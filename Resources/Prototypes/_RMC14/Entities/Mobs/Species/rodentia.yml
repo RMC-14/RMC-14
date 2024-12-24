@@ -1,0 +1,87 @@
+- type: entity
+  save: false
+  name: Urist McRat
+  parent: CMBaseMobSpeciesOrganic
+  id: CMMobRodentia
+  suffix: RMC14
+  components:
+  - type: HumanoidAppearance
+    species: Rodentia
+    hideLayersOnEquip:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
+  - type: Icon
+    sprite: _RMC14/Mobs/Rodentia/parts.rsi
+    state: full
+  - type: Speech
+    speechVerb: Rodentia
+    speechSounds: Squeak
+    allowedEmotes: ['Squeak']
+  - type: Sprite
+    netsync: false
+    noRot: true
+    drawdepth: Mobs
+    # scale: 1, 0.8        # same as RMC dwarves (please reconsider allowing dwarf-sized rodentia)
+    layers:
+      - map: [ "enum.HumanoidVisualLayers.Chest" ]
+      - map: [ "enum.HumanoidVisualLayers.Head" ]
+      - map: [ "enum.HumanoidVisualLayers.Snout" ]
+      - map: [ "enum.HumanoidVisualLayers.Eyes" ]
+      - map: [ "enum.HumanoidVisualLayers.RArm" ]
+      - map: [ "enum.HumanoidVisualLayers.LArm" ]
+      - map: [ "enum.HumanoidVisualLayers.RLeg" ]
+      - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+      - map: [ "enum.HumanoidVisualLayers.Undershirt" ]
+      - map: [ "enum.HumanoidVisualLayers.Underwear" ]
+      - map: [ "jumpsuit" ]
+      - map: [ "enum.HumanoidVisualLayers.LHand" ]
+      - map: [ "enum.HumanoidVisualLayers.RHand" ]
+      - map: [ "enum.HumanoidVisualLayers.LFoot" ]
+      - map: [ "enum.HumanoidVisualLayers.RFoot" ]
+      - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
+        color: "#ffffff"
+        sprite: Objects/Misc/handcuffs.rsi
+        state: body-overlay-2
+        visible: false
+      - map: [ "id" ]
+      - map: [ "gloves" ]
+      - map: [ "shoes" ]
+      - map: [ "ears" ]
+      - map: [ "outerClothing" ]
+      - map: [ "eyes" ]
+      - map: [ "belt" ]
+      - map: [ "neck" ]
+      - map: [ "back" ]
+      - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+      - map: [ "enum.HumanoidVisualLayers.Hair" ]
+      - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
+      - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
+      - map: [ "enum.HumanoidVisualLayers.Tail" ]
+      - map: [ "mask" ]
+      - map: [ "head" ]
+      - map: [ "pocket1" ]
+      - map: [ "pocket2" ]
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Weapons/pierce.ogg
+    animation: WeaponArcClaw
+  - type: Vocal
+    sounds:
+      Male: RMCMaleRodentia
+      Female: RMCFemaleRodentia
+      Unsexed: RMCMaleRodentia
+  - type: Inventory
+    speciesId: rodentia
+
+- type: entity
+  save: false
+  name: Rodentia Dummy
+  parent: BaseSpeciesDummy
+  id: MobRodentiaDummy
+  categories: [ HideSpawnMenu ]
+  description: A dummy rodentia meant to be used in character setup.
+  components:
+  - type: HumanoidAppearance
+    species: Rodentia

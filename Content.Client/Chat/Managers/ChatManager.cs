@@ -53,6 +53,10 @@ internal sealed class ChatManager : IChatManager
                 _consoleHost.ExecuteCommand($"asay \"{CommandParsing.Escape(str)}\"");
                 break;
 
+            case ChatSelectChannel.Mentor:
+                _consoleHost.ExecuteCommand($"msay \"{CommandParsing.Escape(str)}\"");
+                break;
+
             case ChatSelectChannel.Emotes:
                 _consoleHost.ExecuteCommand($"me \"{CommandParsing.Escape(str)}\"");
                 break;

@@ -46,12 +46,12 @@
       - Xeno
   - type: StorageStoreSkillRequired
     entries:
-#    - whitelist:
-#        tags:
-#        - RMCEngineerKit
-#      skills:
-#        all:
-#          RMCSkillEngineer: 2
+    - whitelist:
+        tags:
+        - RMCEngineerKit
+      skills:
+        all:
+          RMCSkillEngineer: 2
     - whitelist:
         tags:
         - CMFirstAidKit

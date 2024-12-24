@@ -7,5 +7,5 @@ public enum DistressSignalRuleResult
     MinorMarineVictory,
     MajorXenoVictory,
     MinorXenoVictory,
-    AllDied
+    AllDied,
 }

@@ -58,7 +58,6 @@
   - type: IFFToggle
     requireIDLock: true
     changeStats: true
-    statChangeOnIFFEnabled: true
     iFFFireModes:
     - SemiAuto
     iFFModifiers:
@@ -128,9 +127,9 @@
     camouflageVariations:
       Jungle: WeaponRifleM59AJungle
       Desert: WeaponRifleM59A
-      Snow: WeaponRifleM9ASnow
+      Snow: WeaponRifleM59ASnow
       Classic: WeaponRifleM59AClassic
-      Urban: WeaponRifleM9AUrban    
+      Urban: WeaponRifleM59AUrban
 
 - type: entity
   parent: WeaponRifleM59A

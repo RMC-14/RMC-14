@@ -5,6 +5,7 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoHivelordBase
   name: Hivelord
   description: A builder of really big hives.
@@ -23,25 +24,13 @@
       650: Dead
   - type: Xeno
     tier: 2
-    hudOffset: 0,0.35
+    hudOffset: -0.1,0.1
     unlockAt: 180 # 3 minutes
   - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
     - CMXenoDrone
   - type: XenoAcid
-  - type: XenoConstruction
-    buildDelay: 1
-    canBuild:
-    - WallXenoResinThick
-    - WallXenoMembraneThick
-    - DoorXenoResinThick
-    canOrderConstruction:
-    - HiveCoreXenoConstructionNode
-    - HiveEggMorpherXenoConstructionNode
-    - HiveClusterXenoConstructionNode
-    - HiveRecoveryNodeXenoConstructionNode
-    canUpgrade: true
   - type: XenoDevour
   - type: XenoPheromones
     pheromonesMultiplier: 2.5
@@ -130,6 +119,7 @@
     - DoorXenoResinThick
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+    canUpgrade: true
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000
@@ -161,6 +151,7 @@
     - ActionXenoTransferPlasma
     - ActionXenoResinWalker
     - ActionXenoDevolve
+    hidden: true
   - type: XenoConstruction
     buildDelay: 1
     canBuild:

@@ -5,6 +5,7 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoRunnerBase
   name: Runner
   description: A small red alien that looks like it could run fairly quickly...
@@ -21,7 +22,7 @@
   - type: Xeno
     role: CMXenoRunner
     tier: 1
-    hudOffset: 0,0.63
+    hudOffset: -0.15,0.25
     unlockAt: 300 # 5 minutes
   - type: Fixtures
     fixtures:
@@ -162,7 +163,6 @@
     - ActionXenoAcidAcider
     - ActionXenoForTheHive
     - ActionXenoDevolve
-    hudOffset: -0.1,0.63
     hidden: true
   - type: XenoStrain
     name: rmc-xeno-acider-name

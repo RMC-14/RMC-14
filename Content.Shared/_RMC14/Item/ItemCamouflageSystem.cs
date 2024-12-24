@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Containers;
@@ -30,10 +31,13 @@ public sealed class ItemCamouflageSystem : EntitySystem
         if (_items.Count == 0)
             return;
 
-        foreach (var ent in _items)
+        foreach (var ent in _items.ToList())
         {
             if (!TryComp(ent.Owner, out MetaDataComponent? meta))
+            {
+                _items.Dequeue();
                 continue;
+            }
 
             if (meta.LastModifiedTick == _time.CurTick)
                 continue;

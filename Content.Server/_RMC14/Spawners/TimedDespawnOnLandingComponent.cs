@@ -4,6 +4,9 @@
 [Access(typeof(RMCSpawnerSystem))]
 public sealed partial class TimedDespawnOnLandingComponent : Component
 {
+    [DataField, AutoNetworkedField]
+    public TimeSpan StartDespawnAt = TimeSpan.FromMinutes(15);
+
     [DataField]
     public float Lifetime = 1200;
 }

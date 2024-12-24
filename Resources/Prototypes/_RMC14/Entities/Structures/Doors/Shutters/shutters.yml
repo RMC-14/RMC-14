@@ -1,6 +1,6 @@
 - type: entity
   parent: CMBaseStructureCorrodible
-  id: RMCShutterBase
+  id: RMCShutterBaseIndestructible
   abstract: true
   name: shutters
   description: That looks like it doesn't open easily.
@@ -52,7 +52,7 @@
       path: /Audio/_RMC14/Machines/blastdoor.ogg
     performCollisionCheck: false
     canCrush: false
-    canPry: true
+    canPry: false
   - type: Appearance
   - type: UserInterface
     interfaces:
@@ -63,9 +63,6 @@
     mode: NoSprite
   - type: Airtight
   - type: Occluder
-  - type: RMCWallExplosionDeletable
-  - type: DestroyedByExplosionType
-    threshold: 1
   - type: MinimapColor
     color: "#451e5eb8"
   - type: WallMount
@@ -75,6 +72,17 @@
     idleLoad: 1
     activeLoad: 20
     channel: Environment
+
+- type: entity
+  parent: RMCShutterBaseIndestructible
+  id: RMCShutterBase
+  abstract: true
+  components:
+  - type: Door
+    canPry: true
+  - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
+    threshold: 1
 
 - type: entity
   parent: RMCShutterBase
