@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed some areas incorrectly allowing or prohibiting mortar fire and
-      placement. For example, the buildings in Solaris now correctly block a mortar
-      from being deployed inside, but don't prevent one placed outside firing a shell
-      into the building.
-    type: Fix
-  id: 650
-  time: '2024-09-06T08:02:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3951
 - author: Whisper
   changes:
   - message: Added Walks-The-Graves figurine.
@@ -4997,5 +4987,15 @@
   id: 1149
   time: '2024-12-23T04:08:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5219
+- author: Vermidia
+  changes:
+  - message: Fixed revival mix not showing up as revival mix in the corpsman vend
+    type: Fix
+  - message: Fixed CMO, SEA, and Nurses/Doctors not being able to get a medical kit
+      pouch from their vends.
+    type: Fix
+  id: 1150
+  time: '2024-12-24T02:21:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5222
 Name: RMC14
 Order: -1
