@@ -117,56 +117,10 @@
       rmc-aslot-rail: 0.1, 0.16
       rmc-aslot-stock: -0.78, 0.0325
       rmc-aslot-underbarrel: 0.35, -0.343
-
-- type: entity
-  parent: WeaponRifleM59A
-  id: WeaponRifleM59ACamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: WeaponRifleM59AJungle
-      Desert: WeaponRifleM59A
-      Snow: WeaponRifleM59ASnow
-      Classic: WeaponRifleM59AClassic
-      Urban: WeaponRifleM59AUrban
-
-- type: entity
-  parent: WeaponRifleM59A
-  id: WeaponRifleM59AJungle
-  suffix: Jungle
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/jungle.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/jungle.rsi
-
-- type: entity
-  parent: WeaponRifleM59A
-  id: WeaponRifleM59ASnow
-  suffix: Snow
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/snow.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/snow.rsi
-
-- type: entity
-  parent: WeaponRifleM59A
-  id: WeaponRifleM59AClassic
-  suffix: Classic
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/classic.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/classic.rsi
-
-- type: entity
-  parent: WeaponRifleM59A
-  id: WeaponRifleM59AUrban
-  suffix: Urban
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/urban.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m59a/urban.rsi
+      Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m59a/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Rifles/m59a/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Rifles/m59a/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Rifles/m59a/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Rifles/m59a/urban.rsi

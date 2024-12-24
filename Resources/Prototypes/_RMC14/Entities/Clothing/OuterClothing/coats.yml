@@ -182,59 +182,13 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
-
-- type: entity
-  parent: CMCoatASO
-  id: RMCCoatASOCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: CMCoatASO
-      Desert: RMCCoatASODesert
-      Snow: RMCCoatASOSnow
-      Classic: RMCCoatASOClassic
-      Urban: RMCCoatASOUrban
-
-- type: entity
-  parent: CMCoatASO
-  id: RMCCoatASODesert
-  suffix: Desert
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/desert.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/desert.rsi  
-
-- type: entity
-  parent: CMCoatASO
-  id: RMCCoatASOSnow
-  suffix: Snow
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/snow.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/snow.rsi  
-
-- type: entity
-  parent: CMCoatASO
-  id: RMCCoatASOClassic
-  suffix: Classic
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/classic.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/classic.rsi  
-
-- type: entity
-  parent: CMCoatASO
-  id: RMCCoatASOUrban
-  suffix: Urban
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/urban.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/urban.rsi  
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/urban.rsi
 
 # Commanding Officer
 - type: entity
@@ -324,56 +278,10 @@
     foldVerbText: rmc-buttons-verb-fold
   - type: FoldableClothing
     foldedEquippedPrefix: jacket
-
-- type: entity
-  parent: RMCCoatService
-  id: RMCCoatServiceCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: RMCCoatService
-      Desert: RMCCoatServiceDesert
-      Snow: RMCCoatServiceSnow
-      Classic: RMCCoatServiceClassic
-      Urban: RMCCoatServiceUrban
-
-- type: entity
-  parent: RMCCoatService
-  id: RMCCoatServiceDesert
-  suffix: Desert
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/desert.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/desert.rsi 
-
-- type: entity
-  parent: RMCCoatService
-  id: RMCCoatServiceSnow
-  suffix: Snow
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/snow.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/snow.rsi 
-
-- type: entity
-  parent: RMCCoatService
-  id: RMCCoatServiceClassic
-  suffix: Classic
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/classic.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/classic.rsi 
-
-- type: entity
-  parent: RMCCoatService
-  id: RMCCoatServiceUrban
-  suffix: Urban
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/urban.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/urban.rsi 
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Coats/service/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Coats/service/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Coats/service/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Coats/service/urban.rsi

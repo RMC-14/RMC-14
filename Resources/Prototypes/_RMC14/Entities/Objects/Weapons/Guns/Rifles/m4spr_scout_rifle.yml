@@ -13,6 +13,7 @@
     - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
       state: d_m4spr_custom_barrel
       offset: 0.65, 0
+      map: [ "enum.ItemCamouflageLayers.Layer" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: RMCSelectiveFire
@@ -31,7 +32,7 @@
     base: 0.725
     light: 1
     medium: 1
-    heavy: 1  
+    heavy: 1
   - type: Gun
     shotsPerBurst: 2
     selectedMode: SemiAuto
@@ -93,91 +94,13 @@
           - RMCMagazineRifleM4SPRA19
           - RMCMagazineRifleM4SPRA19Impact
           - RMCMagazineRifleM4SPRA19Incendiary
-
-- type: entity
-  parent: WeaponRifleM4SPRCustom
-  id: WeaponRifleM4SPRCustomCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: WeaponRifleM4SPRCustomJungle
-      Desert: WeaponRifleM4SPRCustom
-      Snow: WeaponRifleM4SPRCustomSnow
-      Classic: WeaponRifleM4SPRCustomClassic
-      Urban: WeaponRifleM4SPRCustomUrban
-
-- type: entity
-  parent: WeaponRifleM4SPRCustom
-  id: WeaponRifleM4SPRCustomJungle
-  suffix: Jungle
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/jungle.rsi
-    layers:
-    - state: bolt-open
-      map: [ "enum.GunVisualLayers.Base" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
-      state: m4spr_custom_barrel
-      offset: 0.65, 0
-    - state: mag-0
-      map: [ "enum.GunVisualLayers.Mag" ]
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/jungle.rsi
-
-- type: entity
-  parent: WeaponRifleM4SPRCustom
-  id: WeaponRifleM4SPRCustomSnow
-  suffix: Snow
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/snow.rsi
-    layers:
-    - state: bolt-open
-      map: [ "enum.GunVisualLayers.Base" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
-      state: s_m4spr_custom_barrel
-      offset: 0.65, 0
-    - state: mag-0
-      map: [ "enum.GunVisualLayers.Mag" ]
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/snow.rsi
-
-- type: entity
-  parent: WeaponRifleM4SPRCustom
-  id: WeaponRifleM4SPRCustomUrban
-  suffix: Urban
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/urban.rsi
-    layers:
-    - state: bolt-open
-      map: [ "enum.GunVisualLayers.Base" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
-      state: u_m4spr_custom_barrel
-      offset: 0.65, 0
-    - state: mag-0
-      map: [ "enum.GunVisualLayers.Mag" ]
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/urban.rsi
-    
-- type: entity
-  parent: WeaponRifleM4SPRCustom
-  id: WeaponRifleM4SPRCustomClassic
-  suffix: Classic
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/classic.rsi
-    layers:
-    - state: bolt-open
-      map: [ "enum.GunVisualLayers.Base" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
-      state: c_m4spr_custom_barrel
-      offset: 0.65, 0
-    - state: mag-0
-      map: [ "enum.GunVisualLayers.Mag" ]
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/classic.rsi
+      Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/urban.rsi
 
 - type: entity
   parent: CMMagazineRifleBase

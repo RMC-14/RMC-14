@@ -258,9 +258,9 @@
     CMFlash: 5
     RMCBoxDonut: 12
     # Evidence box 6
-    RMCArmorHelmetM10MPCamo: 6
+    CMArmorHelmetM10MP: 6
     CMHeadCapMP: 6
-    RMCJumpsuitMPCamo: 2
+    CMJumpsuitMP: 2
     CMHeadBeretRed: 6
     CMGlassesSecurity: 3
     CMHeadset: 6

@@ -915,16 +915,16 @@ ClosetLegal: RMCClosetBlue
 
 
 # 2024-12-14
-WeaponRifleM54C: WeaponRifleM54CCamo
-WeaponRifleM54CE2: WeaponRifleM54CE2Camo
-WeaponRifleM4SPR: WeaponRifleM4SPRCamo
-WeaponSMGM63: WeaponSMGM63Camo
-WeaponShotgunM42A2: WeaponShotgunM42A2Camo
-CMM96SSniperRifle: WeaponM96SSniperRifleCamo
-WeaponLauncherM83: WeaponLauncherM83Camo
-RMCBinoculars: RMCBinocularsCamo
-RMCMortarKit: RMCMortarKitCamo
-ArmorHelmetM10: ArmorHelmetM10Camo
+#WeaponRifleM54C: WeaponRifleM54CCamo
+#WeaponRifleM54CE2: WeaponRifleM54CE2Camo
+#WeaponRifleM4SPR: WeaponRifleM4SPRCamo
+#WeaponSMGM63: WeaponSMGM63Camo
+#WeaponShotgunM42A2: WeaponShotgunM42A2Camo
+#CMM96SSniperRifle: WeaponM96SSniperRifleCamo
+#WeaponLauncherM83: WeaponLauncherM83Camo
+#RMCBinoculars: RMCBinocularsCamo
+#RMCMortarKit: RMCMortarKitCamo
+#ArmorHelmetM10: ArmorHelmetM10Camo
 
 # 2024-12-17
 WeldingFuelTank: RMCTankReagentFuel
@@ -934,3 +934,14 @@ WaterTank: RMCTankReagentWater
 WeldingFuelTankFull: RMCTankReagentFuel
 WaterTankFull: RMCTankReagentWater
 
+# 2024-12-24
+WeaponRifleM54CCamo: WeaponRifleM54C
+WeaponRifleM54CE2Camo: WeaponRifleM54CE2
+WeaponRifleM4SPRCamo: WeaponRifleM4SPR
+WeaponSMGM63Camo: WeaponSMGM63
+WeaponShotgunM42A2Camo: WeaponShotgunM42A2
+WeaponM96SSniperRifleCamo: CMM96SSniperRifle
+WeaponLauncherM83Camo: WeaponLauncherM83
+RMCBinocularsCamo: RMCBinoculars
+RMCMortarKitCamo: RMCMortarKit
+ArmorHelmetM10Camo: ArmorHelmetM10

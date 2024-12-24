@@ -13,6 +13,7 @@
     - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
       state: d_m4spr_barrel
       offset: 0.65, 0
+      map: [ "barrel" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
@@ -87,6 +88,20 @@
       rmc-aslot-barrel: 1.18, 0.0
       rmc-aslot-rail: 0.225, 0.125
       rmc-aslot-underbarrel: 0.62, -0.31
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/urban.rsi
+    layers:
+      barrel:
+        Jungle: m4spr_barrel
+        Desert: d_m4spr_barrel
+        Snow: s_m4spr_barrel
+        Classic: c_m4spr_barrel
+        Urban: u_m4spr_barrel
 
 - type: entity
   parent: WeaponRifleM4SPR
@@ -106,92 +121,13 @@
           - CMMagazineRifleM4SPR
           - CMMagazineRifleM4SPRAP
           - CMMagazineRifleM4SPRExt
-
-#camo variants
-- type: entity
-  parent: WeaponRifleM4SPR
-  id: WeaponRifleM4SPRCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: WeaponRifleM4SPRJungle
-      Desert: WeaponRifleM4SPR
-      Snow: WeaponRifleM4SPRSnow
-      Classic: WeaponRifleM4SPRClassic
-      Urban: WeaponRifleM4SPRUrban
-
-- type: entity
-  parent: WeaponRifleM4SPR
-  id: WeaponRifleM4SPRJungle
-  suffix: Jungle
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/jungle.rsi
-    layers:
-    - state: bolt-open
-      map: [ "enum.GunVisualLayers.Base" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
-      state: m4spr_barrel
-      offset: 0.65, 0
-    - state: mag-0
-      map: [ "enum.GunVisualLayers.Mag" ]
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/jungle.rsi
-
-- type: entity
-  parent: WeaponRifleM4SPR
-  id: WeaponRifleM4SPRSnow
-  suffix: Snow
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/snow.rsi
-    layers:
-    - state: bolt-open
-      map: [ "enum.GunVisualLayers.Base" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
-      state: s_m4spr_barrel
-      offset: 0.65, 0
-    - state: mag-0
-      map: [ "enum.GunVisualLayers.Mag" ]
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/snow.rsi
-
-- type: entity
-  parent: WeaponRifleM4SPR
-  id: WeaponRifleM4SPRClassic
-  suffix: Classic
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/classic.rsi
-    layers:
-    - state: bolt-open
-      map: [ "enum.GunVisualLayers.Base" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
-      state: c_m4spr_barrel
-      offset: 0.65, 0
-    - state: mag-0
-      map: [ "enum.GunVisualLayers.Mag" ]
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/classic.rsi
-
-- type: entity
-  parent: WeaponRifleM4SPR
-  id: WeaponRifleM4SPRUrban
-  suffix: Urban
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/urban.rsi
-    layers:
-    - state: bolt-open
-      map: [ "enum.GunVisualLayers.Base" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
-      state: u_m4spr_barrel
-      offset: 0.65, 0
-    - state: mag-0
-      map: [ "enum.GunVisualLayers.Mag" ]
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/urban.rsi
+      Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/urban.rsi
 
 - type: entity
   parent: CMMagazineRifleBase

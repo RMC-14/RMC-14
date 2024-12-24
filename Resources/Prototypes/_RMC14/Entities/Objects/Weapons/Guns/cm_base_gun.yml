@@ -37,6 +37,7 @@
     resetOnHandSelected: false
   - type: RMCWeaponAccuracy
   - type: GunSkilledAccuracy
+  - type: Appearance
 
 - type: entity
   parent: BaseBullet

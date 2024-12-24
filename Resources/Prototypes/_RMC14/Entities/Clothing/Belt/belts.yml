@@ -47,37 +47,13 @@
       - CMMagazineRifle
       - CMMagazineSmg
   - type: FixedItemSizeStorage
-
-- type: entity
-  parent: CMBeltMarine
-  id: RMCBeltMarineDesert
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/marine/desert.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/marine/desert.rsi
-
-- type: entity
-  parent: CMBeltMarine
-  id: RMCBeltMarineSU
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/marine/snow-urban.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/marine/snow-urban.rsi
-
-- type: entity
-  parent: CMBeltMarine
-  id: RMCBeltMarineCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: CMBeltMarine
-      Snow: RMCBeltMarineSU
-      Desert: RMCBeltMarineDesert
-      Urban: RMCBeltMarineSU
-      Classic: CMBeltMarine
+      Jungle: _RMC14/Objects/Clothing/Belt/marine/jungle-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/marine/snow-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/marine/desert.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/marine/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/marine/jungle-classic.rsi
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -105,37 +81,13 @@
       - CMMagazineRifle
       - CMMagazineSmg
   - type: FixedItemSizeStorage
-
-- type: entity
-  parent: RMCM276ShotgunShellLoadingRig
-  id: RMCBeltShotgunCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: RMCM276ShotgunShellLoadingRig
-      Snow: RMCBeltShotgunSU
-      Desert: RMCBeltShotgunDesert
-      Urban: RMCBeltShotgunSU
-      Classic: RMCM276ShotgunShellLoadingRig
-
-- type: entity
-  parent: RMCM276ShotgunShellLoadingRig
-  id: RMCBeltShotgunDesert
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/shotgun/desert.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/shotgun/desert.rsi
-
-- type: entity
-  parent: RMCM276ShotgunShellLoadingRig
-  id: RMCBeltShotgunSU
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/shotgun/snow-urban.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/shotgun/snow-urban.rsi
+      Jungle: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/shotgun/snow-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/shotgun/desert.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/shotgun/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -308,28 +260,13 @@
       whitelist:
         tags:
         - ThrowingKnife
-
-- type: entity
-  parent: CMBeltKnife
-  id: RMCBeltKnifeSDU
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/knife/snow-desert-urban.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/knife/snow-desert-urban.rsi
-
-- type: entity
-  parent: CMBeltKnife
-  id: RMCBeltKnifeCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: CMBeltKnife
-      Snow: RMCBeltKnifeSDU
-      Desert: RMCBeltKnifeSDU
-      Urban: RMCBeltKnifeSDU
-      Classic: CMBeltKnife
+      Jungle: _RMC14/Objects/Clothing/Belt/knife/jungle-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/knife/snow-desert-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/knife/snow-desert-urban.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/knife/snow-desert-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/knife/jungle-classic.rsi
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -413,37 +350,13 @@
     items:
       tags:
       - PillCanister
-
-- type: entity
-  parent: CMBeltMedicBag
-  id: RMCBeltMedicBagSU
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
-
-- type: entity
-  parent: CMBeltMedicBag
-  id: RMCBeltMedicBagDesert
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/medicbag/desert.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/medicbag/desert.rsi
-
-- type: entity
-  parent: CMBeltMedicBag
-  id: RMCBeltMedicBagCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: CMBeltMedicBag
-      Snow: RMCBeltMedicBagSU
-      Desert: RMCBeltMedicBagDesert
-      Urban: RMCBeltMedicBagSU
-      Classic: CMBeltMedicBag
+      Jungle: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/medicbag/desert.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -490,37 +403,13 @@
     whitelist:
       components:
       - Gun
-
-- type: entity
-  parent: CMBeltMortar
-  id: RMCBeltMortarSU
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/mortar/snow-urban.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/mortar/snow-urban.rsi
-
-- type: entity
-  parent: CMBeltMortar
-  id: RMCBeltMortarDesert
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/mortar/desert.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/mortar/desert.rsi
-
-- type: entity
-  parent: CMBeltMortar
-  id: RMCBeltMortarCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: CMBeltMortar
-      Snow: RMCBeltMortarSU
-      Desert: RMCBeltMortarDesert
-      Urban: RMCBeltMortarSU
-      Classic: CMBeltMortar
+      Jungle: _RMC14/Objects/Clothing/Belt/mortar/jungle-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/mortar/snow-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/mortar/desert.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/mortar/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/mortar/jungle-classic.rsi
 
 - type: entity
   parent: CMBeltMarine
@@ -550,37 +439,13 @@
     items:
       tags:
       - RMCMagazineSmartGun
-
-- type: entity
-  parent: CMBeltSmartGunOperator
-  id: RMCBeltSGOSU
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator/snow-urban.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator/snow-urban.rsi
-
-- type: entity
-  parent: CMBeltSmartGunOperator
-  id: RMCBeltSGODesert
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator/desert.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator/desert.rsi
-
-- type: entity
-  parent: CMBeltSmartGunOperator
-  id: RMCBeltSGOCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: CMBeltSmartGunOperator
-      Snow: RMCBeltSGOSU
-      Desert: RMCBeltSGODesert
-      Urban: RMCBeltSGOSU
-      Classic: CMBeltSmartGunOperator
+      Jungle: _RMC14/Objects/Clothing/Belt/smart_gun_operator/jungle-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/smart_gun_operator/snow-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/smart_gun_operator/desert.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/smart_gun_operator/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/smart_gun_operator/jungle-classic.rsi
 
 - type: entity
   parent: CMBeltMarine
@@ -917,37 +782,13 @@
   - type: Tag
     tags:
     - RMCG8Pouch
-
-- type: entity
-  parent: RMCBeltUtilityGeneral
-  id: RMCBeltUtilityGeneralSU
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/sparepouch/snow-urban.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/sparepouch/snow-urban.rsi
-
-- type: entity
-  parent: RMCBeltUtilityGeneral
-  id: RMCBeltUtilityGeneralDesert
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/sparepouch/desert.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/sparepouch/desert.rsi
-
-- type: entity
-  parent: RMCBeltUtilityGeneral
-  id: RMCBeltUtilityGeneralCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: RMCBeltUtilityGeneral
-      Snow: RMCBeltUtilityGeneralSU
-      Desert: RMCBeltUtilityGeneralDesert
-      Urban: RMCBeltUtilityGeneralSU
-      Classic: RMCBeltUtilityGeneral
+      Jungle: _RMC14/Objects/Clothing/Belt/sparepouch/jungle-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/sparepouch/snow-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/sparepouch/desert.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/sparepouch/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/sparepouch/jungle-classic.rsi
 
 - type: Tag
   id: RMCG8Pouch
@@ -1196,38 +1037,13 @@
   - type: Tag
     tags:
     - RMCBeltSOCOM
-
-- type: entity
-  parent: RMCM300SOCOMBelt
-  id: RMCM300SOCOMBeltSU
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/xm88/snow-urban.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/xm88/snow-urban.rsi
-
-- type: entity
-  parent: RMCM300SOCOMBelt
-  id: RMCM300SOCOMBeltDesert
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/xm88/desert.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/xm88/desert.rsi
-
-- type: entity
-  parent: RMCM300SOCOMBelt
-  id: RMCM300SOCOMBeltCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: RMCM300SOCOMBelt
-      Snow: RMCM300SOCOMBeltSU
-      Desert: RMCM300SOCOMBeltDesert
-      Urban: RMCM300SOCOMBeltSU
-      Classic: RMCM300SOCOMBelt
-
+      Jungle: _RMC14/Objects/Clothing/Belt/xm88/jungle-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/xm88/snow-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/xm88/desert.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/xm88/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/xm88/jungle-classic.rsi
 
 - type: Tag
   id: RMCBeltSOCOM
