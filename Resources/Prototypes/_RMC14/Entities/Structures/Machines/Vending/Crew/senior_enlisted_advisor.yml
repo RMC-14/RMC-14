@@ -41,7 +41,7 @@
       - id: RMCPouchMagazineLarge
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchShotgunLarge
-#      - id: RMCPouchMedkit
+      - id: RMCPouchMedkit
       - id: RMCPouchPistol
       - id: RMCPouchSling
     - name: Armor
