@@ -77,6 +77,9 @@
     buildDelay: 2
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+    - HiveEggMorpherXenoConstructionNode
+    - HiveClusterXenoConstructionNode
+    - HiveRecoveryNodeXenoConstructionNode
   - type: XenoEvolution
     canEvolveWithoutGranter: true
     max: 200
@@ -112,6 +115,7 @@
   - type: XenoEvolution
     strains:
     - CMXenoDroneGardener
+    - CMXenoDroneHealer
     - CMXenoDroneHealer
   - type: XenoAcid
   - type: AcidTrap
