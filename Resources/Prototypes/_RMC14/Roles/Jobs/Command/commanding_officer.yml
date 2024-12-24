@@ -23,6 +23,16 @@
   - !type:RoleTimeRequirement
     role: CMJobExecutiveOfficer
     time: 36000 #10 hrs
+  ranks:
+    RMCRankColonel:
+    - !type:RoleTimeRequirement
+      role: CMJobCommandingOfficer
+      time: 630000 # 175 hours
+    RMCRankLieutenantColonel:
+    - !type:RoleTimeRequirement
+      role: CMJobCommandingOfficer
+      time: 252000 # 70 hours
+    RMCRankMajor: []
   weight: 10
   startingGear: CMGearCommandingOfficer
   icon: "CMJobIconCommandingOfficer"
