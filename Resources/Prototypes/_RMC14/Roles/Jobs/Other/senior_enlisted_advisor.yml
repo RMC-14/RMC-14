@@ -74,6 +74,11 @@
     head: CMHeadCapDrill
     id: CMIDCardSeniorEnlistedAdvisor
     ears: RMCHeadsetSEA
+    pocket1: CMFlash
+    pocket2: RMCPouchGeneralLarge
+  inhand:
+  - RMCBinoculars
+  - RMCWhistle
 
 - type: entity
   parent: CMSpawnPointJobBase
