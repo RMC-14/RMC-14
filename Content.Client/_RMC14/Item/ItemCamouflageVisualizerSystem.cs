@@ -1,5 +1,6 @@
 ﻿using Content.Client._RMC14.Attachable.Components;
 using Content.Client._RMC14.Attachable.Systems;
+using Content.Client.Items.Systems;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Item;
 using Content.Shared.Clothing.Components;
@@ -15,6 +16,7 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
 {
     [Dependency] private readonly AttachableHolderVisualsSystem _attachableHolderVisuals = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
+    [Dependency] private readonly ItemSystem _item = default!;
     [Dependency] private readonly IResourceCache _resource = default!;
 
     protected override void OnAppearanceChange(EntityUid uid, ItemCamouflageComponent component, ref AppearanceChangeEvent args)
@@ -108,5 +110,7 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
                 }
             }
         }
+
+        _item.VisualsChanged(uid);
     }
 }
