@@ -398,6 +398,12 @@
 
 - type: entity
   abstract: true
+  id: RMCXenoCommendationReceiver
+  components:
+  - type: CommendationReceiver
+
+- type: entity
+  abstract: true
   id: RMCXenoSpeechSounds
   components:
   - type: Speech

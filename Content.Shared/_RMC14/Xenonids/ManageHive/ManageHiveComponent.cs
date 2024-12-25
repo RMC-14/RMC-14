@@ -9,4 +9,7 @@ public sealed partial class ManageHiveComponent : Component
 {
     [DataField, AutoNetworkedField]
     public FixedPoint2 DevolvePlasmaCost = 500;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 JellyPlasmaCost = 500;
 }

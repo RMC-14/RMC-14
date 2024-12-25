@@ -5,6 +5,7 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoDroneBase
   name: Drone
   description: An alien drone.
@@ -31,7 +32,7 @@
         Brute: 30
   - type: Xeno
     role: CMXenoDrone
-    hudOffset: 0,0.15
+    hudOffset: -0.1,0.15
     tier: 1
     bypassTierCount: true
     unlockAt: 60 # 1 minute
@@ -197,6 +198,7 @@
     - ActionXenoHealerDroneTransferPlasma
     - ActionXenoSacrifice
     - ActionXenoDevolve
+    hidden: true
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000
@@ -207,7 +209,7 @@
       groups:
         Brute: 17
   - type: XenoPheromones
-    pheromonesMultiplier: 2.5
+    pheromonesMultiplier: 3
   - type: XenoStrain
     name: rmc-xeno-healer-name
     description: rmc-xeno-healer-description
@@ -223,6 +225,7 @@
     stunMax: 4
     chance: 0.30
   - type: XenoEnergy
+    alert: XenoEnergyHealer
     max: 7500
     gain: 0
     gainAttack: 0

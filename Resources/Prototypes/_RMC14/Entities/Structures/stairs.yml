@@ -12,7 +12,6 @@
     sprite: _RMC14/Structures/stairs.rsi
     state: p_stair_full
     drawdepth: FloorTiles
-  - type: BlockWeeds
 
 - type: entity
   id: RMCStairsCorner
@@ -92,7 +91,7 @@
   components:
   - type: Sprite
     state: p_stair_kutjevo_right_cap
-    
+
 - type: entity
   id: RMCStairsKutjevoLeftHalf
   parent: RMCStairs

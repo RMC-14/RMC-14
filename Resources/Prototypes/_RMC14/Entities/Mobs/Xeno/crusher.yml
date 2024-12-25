@@ -4,6 +4,7 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoCrusher
   name: Crusher
   description: A huge alien with an enormous armored crest.
@@ -34,7 +35,7 @@
     - ActionXenoDefensiveShield
     - ActionXenoDevolve
     tier: 3
-    hudOffset: 0,0.375
+    hudOffset: -0.15,0.1
     unlockAt: 900 # 15 minutes
   - type: XenoHeavy
   - type: XenoDevolve

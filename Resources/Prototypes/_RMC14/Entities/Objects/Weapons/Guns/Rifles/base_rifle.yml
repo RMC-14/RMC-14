@@ -73,6 +73,7 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1
     accuracyMultiplierUnwielded: 0.65
+  - type: GunGroupPenalty
 
 - type: entity
   parent: BaseMagazineRifle

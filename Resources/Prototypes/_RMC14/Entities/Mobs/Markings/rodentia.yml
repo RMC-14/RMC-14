@@ -1,0 +1,579 @@
+# HEAD
+
+## DEFAULTS
+
+- type: marking
+  id: RodentiaHeadTopEarDefault
+  markingCategory: HeadTop
+  bodyPart: HeadTop
+  speciesRestriction: [Rodentia]
+  coloring:
+    default:
+      type: !type:TattooColoring
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/ear_markings.rsi
+      state: mouse
+    - sprite: _RMC14/Mobs/Rodentia/ear_markings.rsi
+      state: mouse_overlay
+
+- type: marking
+  id: RodentiaTailDefault
+  markingCategory: Tail
+  bodyPart: Tail
+  speciesRestriction: [Rodentia]
+  coloring:
+    default:
+      type: !type:TattooColoring
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/tail_markings.rsi
+      state: mouse
+
+## EARS
+
+- type: marking
+  id: RodentiaHeadTopEarBat
+  markingCategory: HeadTop
+  bodyPart: HeadTop
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/ear_markings.rsi
+      state: bat
+
+- type: marking
+  id: RodentiaHeadTopEarBatLarge
+  markingCategory: HeadTop
+  bodyPart: HeadTop
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/ear_markings.rsi
+      state: bat_large
+
+- type: marking
+  id: RodentiaHeadTopEarHamster
+  markingCategory: HeadTop
+  bodyPart: HeadTop
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/ear_markings.rsi
+      state: hamster
+    - sprite: _RMC14/Mobs/Rodentia/ear_markings.rsi
+      state: hamster_overlay
+
+- type: marking
+  id: RodentiaHeadTopEarLong
+  markingCategory: HeadTop
+  bodyPart: HeadTop
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/ear_markings.rsi
+      state: long
+    - sprite: _RMC14/Mobs/Rodentia/ear_markings.rsi
+      state: long_overlay
+
+- type: marking
+  id: RodentiaHeadTopEarMouse
+  markingCategory: HeadTop
+  bodyPart: HeadTop
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/ear_markings.rsi
+      state: mouse
+    - sprite: _RMC14/Mobs/Rodentia/ear_markings.rsi
+      state: mouse_overlay
+
+- type: marking
+  id: RodentiaHeadTopEarMouseLarge
+  markingCategory: HeadTop
+  bodyPart: HeadTop
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/ear_markings.rsi
+      state: mouse_large
+    - sprite: _RMC14/Mobs/Rodentia/ear_markings.rsi
+      state: mouse_large_overlay
+
+- type: marking
+  id: RodentiaHeadTopEarNone
+  markingCategory: HeadTop
+  bodyPart: HeadTop
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/ear_markings.rsi
+      state: none
+
+- type: marking
+  id: RodentiaHeadTopEarPointy
+  markingCategory: HeadTop
+  bodyPart: HeadTop
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/ear_markings.rsi
+      state: pointy
+
+- type: marking
+  id: RodentiaHeadTopEarRabbit
+  markingCategory: HeadTop
+  bodyPart: HeadTop
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/ear_markings.rsi
+      state: rabbit
+    - sprite: _RMC14/Mobs/Rodentia/ear_markings.rsi
+      state: rabbit_overlay
+
+- type: marking
+  id: RodentiaHeadTopEarSmall
+  markingCategory: HeadTop
+  bodyPart: HeadTop
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/ear_markings.rsi
+      state: small
+
+## SNOUTS
+
+- type: marking
+  id: RodentiaSnoutBat
+  markingCategory: Snout
+  bodyPart: Snout
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/snout_markings.rsi
+      state: bat
+    - sprite: _RMC14/Mobs/Rodentia/snout_markings.rsi
+      state: bat_nose
+
+- type: marking
+  id: RodentiaSnoutBatCounter
+  markingCategory: Snout
+  bodyPart: Snout
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/snout_markings.rsi
+      state: bat
+    - sprite: _RMC14/Mobs/Rodentia/snout_markings.rsi
+      state: bat_nose
+    - sprite: _RMC14/Mobs/Rodentia/snout_markings.rsi
+      state: bat_overlay
+
+- type: marking
+  id: RodentiaSnoutFlat
+  markingCategory: Snout
+  bodyPart: Snout
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/snout_markings.rsi
+      state: flat
+    - sprite: _RMC14/Mobs/Rodentia/snout_markings.rsi
+      state: flat_nose
+
+- type: marking
+  id: RodentiaSnoutFlatCounter
+  markingCategory: Snout
+  bodyPart: Snout
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/snout_markings.rsi
+      state: flat
+    - sprite: _RMC14/Mobs/Rodentia/snout_markings.rsi
+      state: flat_nose
+    - sprite: _RMC14/Mobs/Rodentia/snout_markings.rsi
+      state: flat_overlay
+
+- type: marking
+  id: RodentiaSnoutRound
+  markingCategory: Snout
+  bodyPart: Snout
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/snout_markings.rsi
+      state: round
+    - sprite: _RMC14/Mobs/Rodentia/snout_markings.rsi
+      state: round_nose
+
+- type: marking
+  id: RodentiaSnoutRoundCounter
+  markingCategory: Snout
+  bodyPart: Snout
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/snout_markings.rsi
+      state: round
+    - sprite: _RMC14/Mobs/Rodentia/snout_markings.rsi
+      state: round_nose
+    - sprite: _RMC14/Mobs/Rodentia/snout_markings.rsi
+      state: round_overlay
+
+## CHEEKS
+
+- type: marking
+  id: RodentiaCheeksRound
+  markingCategory: HeadSide
+  bodyPart: HeadSide
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/cheek_markings.rsi
+      state: cheeks
+
+- type: marking
+  id: RodentiaCheeksRoundCounter
+  markingCategory: HeadSide
+  bodyPart: HeadSide
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/cheek_markings.rsi
+      state: cheeks
+    - sprite: _RMC14/Mobs/Rodentia/cheek_markings.rsi
+      state: cheeks_overlay
+
+- type: marking
+  id: RodentiaCheeksFluff
+  markingCategory: HeadSide
+  bodyPart: HeadSide
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/cheek_markings.rsi
+      state: fluff
+
+- type: marking
+  id: RodentiaCheeksFluffCounter
+  markingCategory: HeadSide
+  bodyPart: HeadSide
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/cheek_markings.rsi
+      state: fluff
+    - sprite: _RMC14/Mobs/Rodentia/cheek_markings.rsi
+      state: fluff_overlay
+
+- type: marking
+  id: RodentiaCheeksFluffAlt
+  markingCategory: HeadSide
+  bodyPart: HeadSide
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/cheek_markings.rsi
+      state: fluff_alt
+
+- type: marking
+  id: RodentiaCheeksFluffAltCounter
+  markingCategory: HeadSide
+  bodyPart: HeadSide
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/cheek_markings.rsi
+      state: fluff_alt
+    - sprite: _RMC14/Mobs/Rodentia/cheek_markings.rsi
+      state: fluff_alt_overlay
+
+- type: marking
+  id: RodentiaCheeksWhiskers
+  markingCategory: Head # for no-cost markings
+  bodyPart: HeadTop # for layering
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/cheek_markings.rsi
+      state: whiskers
+
+# BODY
+
+## TAIL
+
+- type: marking
+  id: RodentiaTailBeaver
+  markingCategory: Tail
+  bodyPart: Tail
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/tail_markings.rsi
+      state: beaver
+
+- type: marking
+  id: RodentiaTailHamster
+  markingCategory: Tail
+  bodyPart: Tail
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/tail_markings.rsi
+      state: hamster
+
+- type: marking
+  id: RodentiaTailLong
+  markingCategory: Tail
+  bodyPart: Tail
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/tail_markings.rsi
+      state: long
+
+- type: marking
+  id: RodentiaTailLongCounter
+  markingCategory: Tail
+  bodyPart: Tail
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/tail_markings.rsi
+      state: long
+    - sprite: _RMC14/Mobs/Rodentia/tail_markings.rsi
+      state: long_overlay
+
+- type: marking
+  id: RodentiaTailLongCounterTip
+  markingCategory: Tail
+  bodyPart: Tail
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/tail_markings.rsi
+      state: long
+    - sprite: _RMC14/Mobs/Rodentia/tail_markings.rsi
+      state: long_overlay
+    - sprite: _RMC14/Mobs/Rodentia/tail_markings.rsi
+      state: long_tip
+
+- type: marking
+  id: RodentiaTailMouse
+  markingCategory: Tail
+  bodyPart: Tail
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/tail_markings.rsi
+      state: mouse
+
+- type: marking
+  id: RodentiaTailRabbit
+  markingCategory: Tail
+  bodyPart: Tail
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/tail_markings.rsi
+      state: rabbit
+
+- type: marking
+  id: RodentiaTailRabbitCounter
+  markingCategory: Tail
+  bodyPart: Tail
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/tail_markings.rsi
+      state: rabbit
+    - sprite: _RMC14/Mobs/Rodentia/tail_markings.rsi
+      state: rabbit_overlay
+
+- type: marking
+  id: RodentiaTailShort
+  markingCategory: Tail
+  bodyPart: Tail
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/tail_markings.rsi
+      state: short
+
+- type: marking
+  id: RodentiaTailSquirrel
+  markingCategory: Tail
+  bodyPart: Tail
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/tail_markings.rsi
+      state: squirrel
+
+- type: marking
+  id: RodentiaTailSquirrelBicolor
+  markingCategory: Tail
+  bodyPart: Tail
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/tail_markings.rsi
+      state: squirrel
+    - sprite: _RMC14/Mobs/Rodentia/tail_markings.rsi
+      state: squirrel_overlay
+
+## PATTERNS
+
+- type: marking
+  id: RodentiaChestCountershade
+  markingCategory: Chest
+  bodyPart: Chest
+  speciesRestriction: [Rodentia]
+  sexRestriction: Male
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/body_markings.rsi
+      state: countershade
+
+- type: marking
+  id: RodentiaChestCountershadeF
+  markingCategory: Chest
+  bodyPart: Chest
+  speciesRestriction: [Rodentia]
+  sexRestriction: Female
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/body_markings.rsi
+      state: countershade_f
+
+- type: marking
+  id: RodentiaLegLeftCountershade
+  markingCategory: Legs
+  bodyPart: LLeg
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/parts.rsi
+      state: l_leg
+    - sprite: _RMC14/Mobs/Rodentia/body_markings.rsi
+      state: countershade_lleg
+
+- type: marking
+  id: RodentiaLegRightCountershade
+  markingCategory: Legs
+  bodyPart: RLeg
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/parts.rsi
+      state: r_leg
+    - sprite: _RMC14/Mobs/Rodentia/body_markings.rsi
+      state: countershade_rleg
+
+- type: marking
+  id: RodentiaChestFawn
+  markingCategory: Chest
+  bodyPart: Chest
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/body_markings.rsi
+      state: fawn
+
+- type: marking
+  id: RodentiaChestHooded
+  markingCategory: Chest
+  bodyPart: Chest
+  speciesRestriction: [Rodentia]
+  sexRestriction: Male
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/body_markings.rsi
+      state: hooded
+
+- type: marking
+  id: RodentiaChestHoodedF
+  markingCategory: Chest
+  bodyPart: Chest
+  speciesRestriction: [Rodentia]
+  sexRestriction: Female
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/body_markings.rsi
+      state: hooded_f
+
+### HEAD PATTERNS
+
+- type: marking
+  id: RodentiaHeadBlaze
+  markingCategory: Head
+  bodyPart: Head
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/parts.rsi
+      state: head_m
+    - sprite: _RMC14/Mobs/Rodentia/head_markings.rsi
+      state: blaze
+
+- type: marking
+  id: RodentiaHeadRound
+  markingCategory: Head
+  bodyPart: Head
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/parts.rsi
+      state: head_m
+    - sprite: _RMC14/Mobs/Rodentia/head_markings.rsi
+      state: round
+
+# BASE BODY PARTS
+
+## HEAD
+
+- type: marking
+  id: RodentiaHeadBasic
+  markingCategory: Head
+  bodyPart: Head
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/parts.rsi
+      state: head_m
+
+## ARMS
+
+- type: marking
+  id: RodentiaArmLeftBasic
+  markingCategory: Arms
+  bodyPart: LArm
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/parts.rsi
+      state: l_arm
+
+- type: marking
+  id: RodentiaArmRightBasic
+  markingCategory: Arms
+  bodyPart: RArm
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/parts.rsi
+      state: r_arm
+
+## LEGS
+
+- type: marking
+  id: RodentiaLegLeftBasic
+  markingCategory: Legs
+  bodyPart: LLeg
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/parts.rsi
+      state: l_leg
+
+- type: marking
+  id: RodentiaLegRightBasic
+  markingCategory: Legs
+  bodyPart: RLeg
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/parts.rsi
+      state: r_leg
+
+## HANDS
+
+- type: marking
+  id: RodentiaHandLeftBasic
+  markingCategory: Arms
+  bodyPart: LHand
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/parts.rsi
+      state: l_hand
+
+- type: marking
+  id: RodentiaHandRightBasic
+  markingCategory: Arms
+  bodyPart: RHand
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/parts.rsi
+      state: r_hand
+
+## FEET
+
+- type: marking
+  id: RodentiaFootLeftBasic
+  markingCategory: Legs
+  bodyPart: LFoot
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/parts.rsi
+      state: l_foot
+
+- type: marking
+  id: RodentiaFootRightBasic
+  markingCategory: Legs
+  bodyPart: RFoot
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _RMC14/Mobs/Rodentia/parts.rsi
+      state: r_foot

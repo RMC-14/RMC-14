@@ -24,6 +24,13 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: ItemCamouflage
+    states:
+      Jungle: binoculars
+      Desert: d_binoculars
+      Snow: s_binoculars
+      Classic: c_binoculars
+      Urban: u_binoculars
 
 - type: entity
   parent: RMCBinoculars
@@ -36,6 +43,7 @@
     sprite: _RMC14/Objects/Devices/binoculars.rsi
     layers:
     - state: rangefinder
+      map: [ "enum.ItemCamouflageLayers.Layer" ]
     - map: [ "light" ]
   - type: Rangefinder
   - type: UseDelay
@@ -51,6 +59,13 @@
         light:
           Rangefinder: { state: laser_range }
           Designator: { state: laser_cas }
+  - type: ItemCamouflage
+    states:
+      Jungle: rangefinder
+      Desert: d_rangefinder
+      Snow: s_rangefinder
+      Classic: c_rangefinder
+      Urban: u_rangefinder
 
 - type: entity
   parent: RMCRangefinder

@@ -265,6 +265,27 @@ cm-chatsan-replacement-avali = four-eared host
 cm-chatsan-word-avalis = avalis
 cm-chatsan-replacement-avalis = four-eared hosts
 
+cm-chatsan-word-rodentia = rodentia
+cm-chatsan-replacement-rodentia = squeaking host
+
+cm-chatsan-word-rodentias = rodentias
+cm-chatsan-replacement-rodentias = squeaking hosts
+
+cm-chatsan-word-rodentiae = rodentiae
+cm-chatsan-replacement-rodentiae = squeaking hosts
+
+cm-chatsan-word-rat = rat
+cm-chatsan-replacement-rat = squeaking host
+
+cm-chatsan-word-rats = rats
+cm-chatsan-replacement-rats = squeaking hosts
+
+cm-chatsan-word-mouse = mouse
+cm-chatsan-replacement-mouse = squeaking host
+
+cm-chatsan-word-mice = mice
+cm-chatsan-replacement-mice = squeaking hosts
+
 cm-chatsan-word-grenade = grenade
 cm-chatsan-replacement-grenade = boomstick
 

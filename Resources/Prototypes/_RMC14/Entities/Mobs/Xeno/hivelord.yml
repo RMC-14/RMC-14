@@ -1,17 +1,17 @@
 ﻿- type: entity
+  abstract: true
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
-  id: CMXenoHivelord
+  - RMCXenoCommendationReceiver
+  id: CMXenoHivelordBase
   name: Hivelord
   description: A builder of really big hives.
   components:
   - type: GhostRole
     name: cm-job-name-xeno-hivelord
-  - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Hivelord/hivelord.rsi
   - type: MobState
     allowedStates:
     - Alive
@@ -23,45 +23,17 @@
       550: Critical
       650: Dead
   - type: Xeno
-    role: CMXenoHivelord
-    actionIds:
-    - ActionXenoRest
-    - ActionXenoRegurgitate
-    - ActionXenoWatch
-    - ActionXenoTailStab
-    - ActionXenoAcidNormal
-    - ActionXenoPheromones
-    - ActionXenoOrderConstruction
-    - ActionXenoPlantWeeds
-    - ActionXenoChooseStructure
-    - ActionXenoSecreteStructure
-    - ActionXenoTransferPlasma
-    - ActionXenoResinWalker
-    - ActionXenoDevolve
     tier: 2
-    hudOffset: 0,0.35
+    hudOffset: -0.1,0.1
     unlockAt: 180 # 3 minutes
   - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
     - CMXenoDrone
   - type: XenoAcid
-  - type: XenoConstruction
-    buildDelay: 1
-    canBuild:
-    - WallXenoResinThick
-    - WallXenoMembraneThick
-    - DoorXenoResinThick
-    canOrderConstruction:
-    - HiveCoreXenoConstructionNode
-    canUpgrade: true
   - type: XenoDevour
   - type: XenoPheromones
     pheromonesMultiplier: 2.5
-  - type: XenoPlasma
-    plasma: 1000
-    maxPlasma: 1000
-    plasmaRegenOnWeeds: 5.5
   - type: CMArmor
     explosionArmor: 10
   - type: XenoResinWalker
@@ -116,4 +88,89 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: hivelord
+
+- type: entity
+  parent: CMXenoHivelordBase
+  id: CMXenoHivelord
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Hivelord/hivelord.rsi
+  - type: Xeno
+    role: CMXenoHivelord
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcidNormal
+    - ActionXenoPheromones
+    - ActionXenoOrderConstruction
+    - ActionXenoPlantWeeds
+    - ActionXenoChooseStructure
+    - ActionXenoSecreteStructure
+    - ActionXenoTransferPlasma
+    - ActionXenoResinWalker
+    - ActionXenoDevolve
+  - type: XenoConstruction
+    buildDelay: 1
+    canBuild:
+    - WallXenoResinThick
+    - WallXenoMembraneThick
+    - DoorXenoResinThick
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode
+    canUpgrade: true
+  - type: XenoPlasma
+    plasma: 1000
+    maxPlasma: 1000
+    plasmaRegenOnWeeds: 5.5
   - type: AcidTrap
+  - type: XenoEvolution
+    strains:
+    - CMXenoHivelordResinWhisperer
+
+- type: entity
+  parent: CMXenoHivelordBase
+  id: CMXenoHivelordResinWhisperer
+  suffix: Resin Whisperer
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Hivelord/resin_whisperer_hivelord.rsi
+  - type: Xeno
+    role: CMXenoHivelord
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoPheromones
+    - ActionXenoOrderConstruction
+    - ActionXenoChooseStructure
+    - ActionXenoCoerceResin
+    - ActionXenoZoom
+    - ActionXenoTransferPlasma
+    - ActionXenoResinWalker
+    - ActionXenoDevolve
+    hidden: true
+  - type: XenoConstruction
+    buildDelay: 1
+    canBuild:
+    - WallXenoResin
+    - WallXenoMembrane
+    - DoorXenoResin
+    - XenoWeedsSource
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode
+  - type: XenoPlasma
+    plasma: 800
+    maxPlasma: 800
+    plasmaRegenOnWeeds: 5.5
+  - type: XenoZoom
+  - type: ResinWhisperer
+    maxRemoteConstructDistance: 13
+  - type: XenoStrain
+    name: rmc-xeno-resin-whisperer-name
+    description: rmc-xeno-resin-whisperer-description
+    popup: rmc-xeno-resin-whisperer-popup
+
+

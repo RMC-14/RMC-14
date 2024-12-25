@@ -3,7 +3,7 @@
   parent: SeatBase
   id: RMCCouchMid
   name: couch
-  description: Just like Space Ikea would have wanted.
+  description: A piece of Swedish flat pack furniture, just dont ask the MTs for an Allen key.
   suffix: Mid
   placement:
     mode: SnapgridCenter
