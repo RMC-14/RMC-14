@@ -167,7 +167,7 @@ public sealed class XenoHiveCoreSystem : SharedXenoHiveCoreSystem
         var tripper = args.Tripper;
         if (CanTrigger(tripper))
         {
-            // _hive.IncreaseBurrowedLarva(1);
+            _hive.IncreaseBurrowedLarva(1);
             QueueDel(tripper);
         }
     }
