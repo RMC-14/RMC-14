@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added being able to see what's on the other side of the stairs that transport
-      you between the two floors of the Almayer.
-    type: Add
-  - message: Fixed not being able to pull things through the Almayer stairs.
-    type: Fix
-  id: 654
-  time: '2024-09-06T08:47:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3953
-- author: DrSmugleaf
-  changes:
   - message: Fixed Queen/SL trackers not accounting for the player's camera rotation.
       Having your camera rotated will now change where the tracker points.
     type: Fix
@@ -5001,5 +4991,12 @@
   id: 1153
   time: '2024-12-25T05:58:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5227
+- author: DrSmugleaf
+  changes:
+  - message: Fix rementoring as an active mentors ending you duplicate messages.
+    type: Fix
+  id: 1154
+  time: '2024-12-25T06:16:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5228
 Name: RMC14
 Order: -1
