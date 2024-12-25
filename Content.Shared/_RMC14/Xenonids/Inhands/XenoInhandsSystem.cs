@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Hands;
+using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
@@ -29,37 +30,34 @@ public sealed class XenoInhandsSystem : EntitySystem
 
     public void OnXenoSpritePickedUp(Entity<XenoInhandsComponent> xeno, ref DidEquipHandEvent args)
     {
-        UpdateHands(args.User);
+        UpdateHand(args.User, args.Hand);
     }
 
     public void OnXenoSpriteDropped(Entity<XenoInhandsComponent> xeno, ref DidUnequipHandEvent args)
     {
-        UpdateHands(args.User);
+        UpdateHand(args.User, args.Hand);
     }
-    private void UpdateHands(EntityUid user)
+    private void UpdateHand(EntityUid user, Hand hand)
     {
         if (!TryComp<XenoInhandsComponent>(user, out var inhands))
             return;
 
-        foreach (var hand in _hands.EnumerateHands(user))
+        if (hand.Location == HandLocation.Middle)
+            return;
+
+        string held = string.Empty;
+
+        if (hand.HeldEntity != null)
         {
-            if (hand.Location == Shared.Hands.Components.HandLocation.Middle)
-                continue;
-
-            string held = string.Empty;
-
-            if (hand.HeldEntity != null)
+            if (TryComp<XenoInhandSpriteComponent>(hand.HeldEntity, out var inhandSprite))
             {
-                if (TryComp<XenoInhandSpriteComponent>(hand.HeldEntity, out var inhandSprite))
-                {
-                    held = inhandSprite.StateName ?? string.Empty;
-                }
+                held = inhandSprite.StateName ?? string.Empty;
             }
-
-            _appearance.SetData(user,
-                hand.Location == Shared.Hands.Components.HandLocation.Left ? XenoInhandVisuals.Left : XenoInhandVisuals.Right,
-                held);
         }
+
+        _appearance.SetData(user,
+        hand.Location == HandLocation.Left ? XenoInhandVisuals.Left : XenoInhandVisuals.Right,
+        held);
     }
 
     private void OnMobStateChanged(Entity<XenoInhandsComponent> xeno, ref MobStateChangedEvent args)
