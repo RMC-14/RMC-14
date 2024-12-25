@@ -37,7 +37,7 @@ public sealed partial class XenoApplySalveActionEvent : EntityTargetActionEvent
     public TimeSpan TimeBetweenHeals = TimeSpan.FromSeconds(1);
 
     [DataField]
-    public TimeSpan TotalHealDuration = TimeSpan.FromSeconds(10);
+    public TimeSpan TotalHealDuration = TimeSpan.FromSeconds(5);
 
     [DataField]
     public EntProtoId HealEffect = "RMCEffectHeal";

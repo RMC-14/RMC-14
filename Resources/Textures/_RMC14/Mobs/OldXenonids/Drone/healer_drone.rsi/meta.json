@@ -62,6 +62,22 @@
     },
     {
       "name": "drone_dissection"
+    },
+    {
+      "name": "salved",
+      "directions": 4
+    },
+    {
+      "name": "salved_rest"
+    },
+    {
+      "name": "salved_downed",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
     }
   ]
 }

@@ -181,6 +181,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Drone/healer_drone.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.XenoHealerVisualLayers.Goop" ]
+      visible: false
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
   - type: RMCXenoDamageVisuals
     prefix: drone
   - type: Xeno
@@ -231,4 +238,5 @@
     gainAttack: 0
     gainAttackDowned: 0
   - type: XenoAcid
+  - type: XenoSalveVisuals
   #- type: XenoHealer
