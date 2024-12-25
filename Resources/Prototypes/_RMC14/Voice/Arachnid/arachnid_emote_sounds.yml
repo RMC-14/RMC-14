@@ -1,0 +1,3 @@
+- type: emoteSounds
+  parent: [RMCBaseMaleSounds, UnisexArachnid]
+  id: RMCUnisexArachnid
