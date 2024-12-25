@@ -77,7 +77,7 @@
       rmc-aslot-underbarrel: 0.21875, -0.343
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/classic.rsi
+      Jungle:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/jungle.rsi
       Desert:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/desert.rsi
       Snow:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/snow.rsi
       Classic:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/classic.rsi
