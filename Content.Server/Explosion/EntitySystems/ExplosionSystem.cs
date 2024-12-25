@@ -398,6 +398,7 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
 
     private void CameraShake(float range, MapCoordinates epicenter, float totalIntensity)
     {
+        return;
         var players = Filter.Empty();
         players.AddInRange(epicenter, range, _playerManager, EntityManager);
 
