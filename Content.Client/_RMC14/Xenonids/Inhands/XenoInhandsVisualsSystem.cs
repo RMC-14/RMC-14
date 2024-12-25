@@ -52,14 +52,15 @@ public sealed class XenoInhandsVisualsSystem : VisualizerSystem<XenoInhandsCompo
 
                 string stateString = $"{component.Prefix}_{name}_{layerDef.ToString().ToLower()}";
 
-                if (downed)
+
+                if (ovi)
+                    stateString += "_" + component.Ovi;
+                else if (downed)
                     stateString += "_" + component.Downed;
                 else if (resting)
                     stateString += "_" + component.Resting;
-                else if (ovi)
-                    stateString += "_" + component.Ovi;
 
-                RSI? rsi = sprite.LayerGetActualRSI(XenoInhandVisualLayers.Left);
+                RSI? rsi = sprite.LayerGetActualRSI(layerDef);
 
                 if (rsi == null)
                     continue;

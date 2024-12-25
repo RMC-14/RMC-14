@@ -17,8 +17,8 @@ public sealed class XenoInhandsSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     public override void Initialize()
     {
-        SubscribeLocalEvent<XenoInhandSpriteComponent, GotEquippedHandEvent>(OnXenoSpritePickedUp);
-        SubscribeLocalEvent<XenoInhandSpriteComponent, DroppedEvent>(OnXenoSpriteDropped);
+        SubscribeLocalEvent<XenoInhandsComponent, DidEquipHandEvent>(OnXenoSpritePickedUp);
+        SubscribeLocalEvent<XenoInhandsComponent, DidUnequipHandEvent>(OnXenoSpriteDropped);
 
         SubscribeLocalEvent<XenoInhandsComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<XenoInhandsComponent, XenoRestEvent>(OnVisualsRest);
@@ -27,12 +27,12 @@ public sealed class XenoInhandsSystem : EntitySystem
         SubscribeLocalEvent<XenoInhandsComponent, XenoOvipositorChangedEvent>(OnVisualsOvipositor);
     }
 
-    public void OnXenoSpritePickedUp(Entity<XenoInhandSpriteComponent> item, ref GotEquippedHandEvent args)
+    public void OnXenoSpritePickedUp(Entity<XenoInhandsComponent> xeno, ref DidEquipHandEvent args)
     {
         UpdateHands(args.User);
     }
 
-    public void OnXenoSpriteDropped(Entity<XenoInhandSpriteComponent> item, ref DroppedEvent args)
+    public void OnXenoSpriteDropped(Entity<XenoInhandsComponent> xeno, ref DidUnequipHandEvent args)
     {
         UpdateHands(args.User);
     }
