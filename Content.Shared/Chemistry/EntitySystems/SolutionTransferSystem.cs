@@ -8,6 +8,7 @@ using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.Chemistry.EntitySystems;
 
@@ -22,6 +23,7 @@ public sealed class SolutionTransferSystem : EntitySystem
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
     /// <summary>
     ///     Default transfer amounts for the set-transfer verb.
     /// </summary>
@@ -101,7 +103,7 @@ public sealed class SolutionTransferSystem : EntitySystem
 
     private void OnAfterInteract(Entity<SolutionTransferComponent> ent, ref AfterInteractEvent args)
     {
-        if (!args.CanReach || args.Target is not {} target)
+        if (!args.CanReach || args.Target is not {} target || !_gameTiming.IsFirstTimePredicted)
             return;
 
         var (uid, comp) = ent;
