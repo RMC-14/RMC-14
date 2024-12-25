@@ -91,65 +91,13 @@
       Turf: 30
       Breaching: 15
       Xeno: 0.23 # TODO RMC14 pylon 6
-
-#camo variants
-- type: entity
-  parent: RMCWeaponShotgunXM51
-  id: RMCWeaponShotgunXM51Camo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: RMCWeaponShotgunXM51
-      Desert: RMCWeaponShotgunXM51Desert
-      Snow: RMCWeaponShotgunXM51Snow
-      Classic: RMCWeaponShotgunXM51Classic
-      Urban: RMCWeaponShotgunXM51Urban
-
-- type: entity
-  parent: RMCWeaponShotgunXM51  
-  id: RMCWeaponShotgunXM51Desert
-  suffix: Desert
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/xm51/desert.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/xm51/desert.rsi
-
-- type: entity
-  parent: RMCWeaponShotgunXM51  
-  id: RMCWeaponShotgunXM51Snow
-  suffix: Snow
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/xm51/snow.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/xm51/snow.rsi
-
-- type: entity
-  parent: RMCWeaponShotgunXM51
-  id: RMCWeaponShotgunXM51Classic
-  suffix: Classic
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/xm51/classic.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/xm51/classic.rsi
-
-- type: entity
-  parent: RMCWeaponShotgunXM51
-  id: RMCWeaponShotgunXM51Urban
-  suffix: Urban
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/xm51/urban.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/xm51/urban.rsi
-
-
-
-
-
+      Jungle: _RMC14/Objects/Weapons/Guns/Shotguns/xm51/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Shotguns/xm51/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Shotguns/xm51/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Shotguns/xm51/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Shotguns/xm51/urban.rsi
 
 - type: Tag
   id: RMCWeaponShotgunXM51

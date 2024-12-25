@@ -19,6 +19,13 @@
   - type: ExplosionResistance
     damageCoefficient: 0
     worn: false
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/urban.rsi
 
 - type: entity
   id: RMCArmorM3MediumVariants
@@ -33,12 +40,12 @@
   - type: RMCArmorVariant
     defaultType: RMCArmorM3MediumPadded
     types:
-      Padded: RMCArmorM3MediumPaddedCamo
-      Padless: RMCArmorM3MediumPadlessCamo
-      Ridged: RMCArmorM3MediumRidgedCamo
-      Carrier: RMCArmorM3MediumCarrierCamo
-      Skull: RMCArmorM3MediumSkullCamo
-      Smooth: RMCArmorM3MediumSmoothCamo
+      Padded: RMCArmorM3MediumPadded
+      Padless: RMCArmorM3MediumPadless
+      Ridged: RMCArmorM3MediumRidged
+      Carrier: RMCArmorM3MediumCarrier
+      Skull: RMCArmorM3MediumSkull
+      Smooth: RMCArmorM3MediumSmooth
 
 - type: entity
   parent: CMArmorM3Medium
@@ -54,6 +61,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padless/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padless/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padless/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padless/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padless/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padless/urban.rsi
 
 - type: entity
   parent: CMArmorM3Medium
@@ -63,6 +77,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/ridged/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/ridged/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/ridged/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/ridged/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/ridged/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/ridged/urban.rsi
 
 - type: entity
   parent: CMArmorM3Medium
@@ -72,6 +93,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/carrier/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/carrier/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/carrier/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/carrier/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/carrier/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/carrier/urban.rsi
 
 - type: entity
   parent: CMArmorM3Medium
@@ -81,6 +109,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/skull/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/skull/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/skull/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/skull/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/skull/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/skull/urban.rsi
 
 - type: entity
   parent: CMArmorM3Medium
@@ -90,6 +125,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/smooth/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/smooth/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/smooth/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/smooth/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/smooth/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/smooth/urban.rsi
 
 - type: entity
   parent: CMArmorM3Medium
@@ -104,6 +146,13 @@
     armor: 25
     bio: 25
     explosionArmor: 20
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12/urban.rsi
 
 - type: entity
   parent: CMArmorM3Medium
@@ -125,6 +174,13 @@
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/urban.rsi
 
 - type: entity
   id: RMCArmorM3HeavyVariants
@@ -139,12 +195,12 @@
   - type: RMCArmorVariant
     defaultType: RMCArmorM3HeavyPadded
     types:
-      Padded: RMCArmorM3HeavyPaddedCamo
-      Padless: RMCArmorM3HeavyPadlessCamo
-      Ridged: RMCArmorM3HeavyRidgedCamo
-      Carrier: RMCArmorM3HeavyCarrierCamo
-      Skull: RMCArmorM3HeavySkullCamo
-      Smooth: RMCArmorM3HeavySmoothCamo
+      Padded: RMCArmorM3HeavyPadded
+      Padless: RMCArmorM3HeavyPadless
+      Ridged: RMCArmorM3HeavyRidged
+      Carrier: RMCArmorM3HeavyCarrier
+      Skull: RMCArmorM3HeavySkull
+      Smooth: RMCArmorM3HeavySmooth
 
 - type: entity
   parent: CMArmorM3Heavy
@@ -158,6 +214,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padless/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padless/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padless/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padless/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padless/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padless/urban.rsi
 
 - type: entity
   parent: CMArmorM3Heavy
@@ -166,6 +229,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/ridged/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/ridged/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/ridged/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/ridged/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/ridged/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/ridged/urban.rsi
 
 - type: entity
   parent: CMArmorM3Heavy
@@ -174,6 +244,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/carrier/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/carrier/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/carrier/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/carrier/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/carrier/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/carrier/urban.rsi
 
 - type: entity
   parent: CMArmorM3Heavy
@@ -182,6 +259,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/skull/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/skull/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/skull/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/skull/jungle.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/skull/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/skull/urban.rsi
 
 - type: entity
   parent: CMArmorM3Heavy
@@ -190,6 +274,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/smooth/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/smooth/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/smooth/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/smooth/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/smooth/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/smooth/urban.rsi
 
 - type: entity
   parent: CMArmorM3Medium
@@ -202,6 +293,13 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/jungle.rsi
   - type: CMArmor
     bio: 15
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/urban.rsi
 
 - type: entity
   parent: CMArmorM2MP
@@ -212,6 +310,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/urban.rsi
 
 #Officer armors
 - type: entity
@@ -227,6 +332,13 @@
     maxItemSize: Small
     grid:
     - 0,0,5,1 # 3 slots
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/officer/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/officer/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/officer/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/officer/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/officer/urban.rsi
 
 - type: entity
   parent: CMArmorM2MP
@@ -261,6 +373,13 @@
     explosionArmor: 40
   - type: Corrodible
     isCorrodible: false
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/g4/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/g4/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/g4/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/g4/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/g4/urban.rsi
 
 - type: entity
   parent: CMArmorM3Medium
@@ -280,6 +399,13 @@
     sprintModifier: .725
   - type: Corrodible
     isCorrodible: false
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/t/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/t/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/t/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/t/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/t/urban.rsi
 
 - type: entity
   parent: CMArmorM3Medium
@@ -315,16 +441,24 @@
   - type: RMCArmorVariant
     defaultType: RMCArmorM3LightPadded
     types:
-      Padded: RMCArmorM3LightPaddedCamo
-      Padless: RMCArmorM3LightPadlessCamo
-      Ridged: RMCArmorM3LightRidgedCamo
-      Carrier: RMCArmorM3LightCarrierCamo
-      Skull: RMCArmorM3LightSkullCamo
-      Smooth: RMCArmorM3LightSmoothCamo
+      Padded: RMCArmorM3LightPadded
+      Padless: RMCArmorM3LightPadless
+      Ridged: RMCArmorM3LightRidged
+      Carrier: RMCArmorM3LightCarrier
+      Skull: RMCArmorM3LightSkull
+      Smooth: RMCArmorM3LightSmooth
 
 - type: entity
   parent: CMArmorM3Light
   id: RMCArmorM3LightPadded
+  components:
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padded/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padded/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padded/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padded/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padded/urban.rsi
 
 - type: entity
   parent: CMArmorM3Light
@@ -333,6 +467,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padless/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padless/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padless/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padless/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padless/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padless/urban.rsi
 
 - type: entity
   parent: CMArmorM3Light
@@ -341,6 +482,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/ridged/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/ridged/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/ridged/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/ridged/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/ridged/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/ridged/urban.rsi
 
 - type: entity
   parent: CMArmorM3Light
@@ -349,6 +497,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/carrier/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/carrier/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/carrier/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/carrier/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/carrier/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/carrier/urban.rsi
 
 - type: entity
   parent: CMArmorM3Light
@@ -357,6 +512,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/skull/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/skull/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/skull/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/skull/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/skull/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/skull/urban.rsi
 
 - type: entity
   parent: CMArmorM3Light
@@ -365,6 +527,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/smooth/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/smooth/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/smooth/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/smooth/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/smooth/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/smooth/urban.rsi
 
 - type: entity
   parent: RMCBaseMarineArmor
@@ -414,6 +583,13 @@
   - type: Tag
     tags:
       - RMCScoutArmor
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/scout/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/scout/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/scout/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/scout/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/scout/urban.rsi
 
 - type: entity
   parent: CMArmorM3Light
@@ -469,6 +645,13 @@
     - 0,0,5,1 # 3 slots
   - type: RMCBulkyArmor
     isBulky: false
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl-synth/urban.rsi
 
 # m4
 - type: entity
@@ -486,6 +669,13 @@
     - 0,0,7,1 # 4 slots
   - type: CMArmor
     bio: 25
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m4/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m4/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m4/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m4/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m4/urban.rsi
 
 # m35
 - type: entity
@@ -499,6 +689,13 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/jungle.rsi
   - type: Corrodible
     isCorrodible: false
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/urban.rsi
 
 # m45
 - type: entity
@@ -521,6 +718,13 @@
     whitelist:
       components:
       - SniperWhitelist
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/urban.rsi
 
 # Smart Gun
 - type: entity
@@ -543,6 +747,13 @@
     sprintModifier: .725
   - type: ClothingBlockBackpack
   - type: SmartGunArmor
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a/urban.rsi
 
 # M2
 - type: entity
@@ -567,3 +778,10 @@
     maxItemSize: Small
     grid:
     - 0,0,3,1 # 2 slots
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/urban.rsi

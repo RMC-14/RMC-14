@@ -36,9 +36,9 @@
 - type: startingGear
   id: CMGearRiflemanEquipped
   equipment:
-    jumpsuit: JumpsuitMarineCamo
+    jumpsuit: JumpsuitMarine
     shoes: CMBootsBlackFilled
-    head: ArmorHelmetM10Camo
+    head: ArmorHelmetM10
     outerClothing: RMCArmorM3MediumVariants
     gloves: CMHandsBlackMarine
     id: CMDogtagRifleman

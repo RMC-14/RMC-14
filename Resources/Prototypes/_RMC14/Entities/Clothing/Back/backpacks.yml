@@ -120,26 +120,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/standard/jungle-desert-classic.rsi
-
-- type: entity
-  parent: CMBackpackMarine
-  id: RMCBackpackMarineSU
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/standard/snow-urban.rsi
-
-- type: entity
-  parent: CMBackpackMarine
-  id: RMCBackpackMarineCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: CMBackpackMarine
-      Desert: CMBackpackMarine
-      Classic: CMBackpackMarine
-      Snow: RMCBackpackMarineSU
-      Urban: RMCBackpackMarineSU
+      Jungle: _RMC14/Objects/Clothing/Back/Backpacks/Marines/standard/jungle-desert-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Backpacks/Marines/standard/jungle-desert-classic.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Backpacks/Marines/standard/jungle-desert-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Backpacks/Marines/standard/snow-urban.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/standard/snow-urban.rsi
 
 - type: entity
   parent: CMBackpackMarine
@@ -149,26 +136,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/medic/jungle-desert-classic.rsi
-
-- type: entity
-  parent: CMBackpackMarineMedic
-  id: RMCBackpackMarineMedicCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: CMBackpackMarineMedic
-      Desert: CMBackpackMarineMedic
-      Classic: CMBackpackMarineMedic
-      Snow: RMCBackpackMarineMedicSU
-      Urban: RMCBackpackMarineMedicSU
-
-- type: entity
-  parent: CMBackpackMarineMedic
-  id: RMCBackpackMarineMedicSU
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/medic/snow-urban.rsi
+      Jungle: _RMC14/Objects/Clothing/Back/Backpacks/Marines/medic/jungle-desert-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Backpacks/Marines/medic/jungle-desert-classic.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Backpacks/Marines/medic/jungle-desert-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Backpacks/Marines/medic/snow-urban.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/medic/snow-urban.rsi
 
 - type: entity
   parent: CMBackpackMarine
@@ -178,26 +152,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/tech/jungle-desert-classic.rsi
-
-- type: entity
-  parent: CMBackpackMarineTech
-  id: RMCBackpackMarineTechSU
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/tech/snow-urban.rsi
-
-- type: entity
-  parent: CMBackpackMarineTech
-  id: RMCBackpackMarineTechCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: CMBackpackMarineTech
-      Desert: CMBackpackMarineTech
-      Classic: CMBackpackMarineTech
-      Snow: RMCBackpackMarineTechSU
-      Urban: RMCBackpackMarineTechSU
+      Jungle: _RMC14/Objects/Clothing/Back/Backpacks/Marines/tech/jungle-desert-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Backpacks/Marines/tech/jungle-desert-classic.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Backpacks/Marines/tech/jungle-desert-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Backpacks/Marines/tech/snow-urban.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/tech/snow-urban.rsi
 
 # Specific
 - type: entity
@@ -216,26 +177,13 @@
       components:
       - MortarShell
   - type: FixedItemSizeStorage
-
-- type: entity
-  parent: CMBackpackMortar
-  id: RMCBackpackMortarSU
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/mortar/snow-urban.rsi
-
-- type: entity
-  parent: CMBackpackMortar
-  id: RMCBackpackMortarCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: CMBackpackMortar
-      Desert: CMBackpackMortar
-      Classic: CMBackpackMortar
-      Snow: RMCBackpackMortarSU
-      Urban: RMCBackpackMortarSU
+      Jungle: _RMC14/Objects/Clothing/Back/Backpacks/Marines/mortar/jungle-desert-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Backpacks/Marines/mortar/jungle-desert-classic.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Backpacks/Marines/mortar/jungle-desert-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Backpacks/Marines/mortar/snow-urban.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/mortar/snow-urban.rsi
 
 - type: entity
   parent: CMBackpack
@@ -271,26 +219,13 @@
     solution: tank
   - type: DrawableSolution
     solution: tank
-
-- type: entity
-  parent: CMBackpackWelder
-  id: RMCBackpackWelderCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: CMBackpackWelder
-      Desert: CMBackpackWelder
-      Classic: CMBackpackWelder
-      Snow: RMCBackpackWelderSU
-      Urban: RMCBackpackWelderSU
-
-- type: entity
-  parent: CMBackpackWelder
-  id: RMCBackpackWelderSU
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/welder/snow-urban.rsi
+      Jungle: _RMC14/Objects/Clothing/Back/Backpacks/Marines/welder/jungle-desert-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Backpacks/Marines/welder/jungle-desert-classic.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Backpacks/Marines/welder/jungle-desert-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Backpacks/Marines/welder/snow-urban.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/welder/snow-urban.rsi
 
 - type: entity
   parent: CMBackpack

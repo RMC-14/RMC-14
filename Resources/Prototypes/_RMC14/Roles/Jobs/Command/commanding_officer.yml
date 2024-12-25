@@ -76,8 +76,8 @@
     jumpsuit: CMJumpsuitBO
     belt: RMCMatebaBeltFilled
     shoes: CMShoesLaceupCommander
-    head: RMCHeadBeretCOCamo
-    outerClothing: RMCCoatServiceCamo
+    head: CMHeadBeretCO
+    outerClothing: RMCCoatService
     id: CMIDCardCommandingOfficer
     ears: CMHeadsetSeniorCommand
     pocket1: RMCPouchCommand

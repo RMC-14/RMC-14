@@ -84,72 +84,13 @@
       rmc-aslot-rail: -0.15625, 0.15625
       rmc-aslot-underbarrel: 0.24, -0.3
       rmc-aslot-stock: -0.5625, 0.03125
-
-#camo variants
-- type: entity
-  parent: WeaponRifleXM88
-  id: WeaponRifleXM88Camo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: WeaponRifleXM88Jungle
-      Snow: WeaponRifleXM88Snow
-      Desert: WeaponRifleXM88
-      Urban: WeaponRifleXM88Urban
-      Classic: WeaponRifleXM88Classic
-
-- type: entity
-  parent: WeaponRifleXM88
-  id: WeaponRifleXM88Snow
-  suffix: Snow
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/snow.rsi
-    layers:
-    - state: icon
-      map: [ "enum.GunVisualLayers.Base" ]
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/snow.rsi
-
-- type: entity
-  parent: WeaponRifleXM88
-  id: WeaponRifleXM88Jungle
-  suffix: Jungle
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/jungle.rsi
-    layers:
-    - state: icon
-      map: [ "enum.GunVisualLayers.Base" ]
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/jungle.rsi
-
-- type: entity
-  parent: WeaponRifleXM88
-  id: WeaponRifleXM88Urban
-  suffix: Urban
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/urban.rsi
-    layers:
-    - state: icon
-      map: [ "enum.GunVisualLayers.Base" ]
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/urban.rsi
-
-- type: entity
-  parent: WeaponRifleXM88
-  id: WeaponRifleXM88Classic
-  suffix: Classic
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/classic.rsi
-    layers:
-    - state: icon
-      map: [ "enum.GunVisualLayers.Base" ]
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/classic.rsi
+      Jungle: _RMC14/Objects/Weapons/Guns/Rifles/xm88/jungle.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Rifles/xm88/snow.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Rifles/xm88/desert.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Rifles/xm88/urban.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Rifles/xm88/classic.rsi
 
 - type: entity
   parent: BulletRifle10x24mm
