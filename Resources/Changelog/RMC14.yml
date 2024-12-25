@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed the loading screen showing non-RMC14 tips.
-    type: Fix
-  id: 653
-  time: '2024-09-06T08:28:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3952
-- author: DrSmugleaf
-  changes:
   - message: Added being able to see what's on the other side of the stairs that transport
       you between the two floors of the Almayer.
     type: Add
@@ -4995,5 +4988,18 @@
   id: 1152
   time: '2024-12-25T05:35:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5226
+- author: DrSmugleaf
+  changes:
+  - message: Fixed northern Solaris having incorrect areas, fixes north-most comms
+      tower not being able to be powered.
+    type: Fix
+  - message: Added an initial delay of 40 minutes before the Queen can call down a
+      dropship or hijack one that is on the landing zone.
+    type: Add
+  - message: Landing zone turrets now start despawning at 20 minutes instead of 15.
+    type: Tweak
+  id: 1153
+  time: '2024-12-25T05:58:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5227
 Name: RMC14
 Order: -1
