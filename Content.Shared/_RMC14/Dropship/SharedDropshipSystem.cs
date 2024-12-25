@@ -109,9 +109,6 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         if (!TryDropshipLaunchPopup(ent, args.User, true))
             args.Cancel();
-
-        if (!TryDropshipHijackPopup(ent, args.User, true))
-            args.Cancel();
     }
 
     private void OnNavigationOpen(Entity<DropshipNavigationComputerComponent> ent, ref AfterActivatableUIOpenEvent args)
@@ -370,7 +367,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         return true;
     }
 
-    private bool TryDropshipHijackPopup(EntityUid computer, Entity<DropshipHijackerComponent?> user, bool predicted)
+    protected bool TryDropshipHijackPopup(EntityUid computer, Entity<DropshipHijackerComponent?> user, bool predicted)
     {
         var roundDuration = _gameTicker.RoundDuration();
         if (HasComp<DropshipHijackerComponent>(user) && roundDuration < _hijackInitialDelay)
