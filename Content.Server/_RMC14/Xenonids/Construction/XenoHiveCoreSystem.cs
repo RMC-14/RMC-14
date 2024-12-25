@@ -158,7 +158,7 @@ public sealed class XenoHiveCoreSystem : SharedXenoHiveCoreSystem
     private bool CanTrigger(EntityUid user)
     {
         return TryComp<XenoComponent>(user, out var xeno)
-               && xeno.Role == "CMXenoLarva"
+               && xeno.Role.Id == "CMXenoLarva"
                && _mobState.IsDead(user);
     }
 
@@ -167,7 +167,7 @@ public sealed class XenoHiveCoreSystem : SharedXenoHiveCoreSystem
         var tripper = args.Tripper;
         if (CanTrigger(tripper))
         {
-            _hive.IncreaseBurrowedLarva(1);
+            // _hive.IncreaseBurrowedLarva(1);
             QueueDel(tripper);
         }
     }
