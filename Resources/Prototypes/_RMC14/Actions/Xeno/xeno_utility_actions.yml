@@ -152,7 +152,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: apply_salve
     event: !type:XenoApplySalveActionEvent
-    useDelay: 1
+    useDelay: 0.5
 
 - type: entity
   parent: ActionXenoBase
