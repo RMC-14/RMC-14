@@ -192,7 +192,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
             EnsureComp<DropshipInFlyByComponent>(dropshipId.Value);
         }
-
         else if (!hijack && newDestination != null && newDestination.Ship != null)
         {
             Log.Warning($"{ToPrettyString(user)} tried to launch to occupied dropship destination {ToPrettyString(destination)}");
