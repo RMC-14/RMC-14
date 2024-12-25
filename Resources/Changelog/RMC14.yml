@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added Walks-The-Graves figurine.
-    type: Add
-  id: 651
-  time: '2024-09-06T08:03:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3932
 - author: Vermidia
   changes:
   - message: Added Sniper and Omni sentry upgrades! Sniper has x2 as much range and
@@ -4997,5 +4990,12 @@
   id: 1150
   time: '2024-12-24T02:21:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5222
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Patreon named items perk not being applied to items in cases.
+    type: Fix
+  id: 1151
+  time: '2024-12-25T00:42:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5224
 Name: RMC14
 Order: -1
