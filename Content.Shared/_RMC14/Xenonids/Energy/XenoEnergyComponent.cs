@@ -1,5 +1,7 @@
-﻿using Robust.Shared.GameStates;
+using Content.Shared.Alert;
+using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Energy;
 
@@ -36,4 +38,7 @@ public sealed partial class XenoEnergyComponent : Component
 
     [DataField, AutoNetworkedField]
     public string PopupNotEnough = "rmc-xeno-not-enough-energy";
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<AlertPrototype> Alert = "XenoEnergyBase";
 }
