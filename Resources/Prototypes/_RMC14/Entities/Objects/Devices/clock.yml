@@ -1,0 +1,12 @@
+- type: entity
+  parent: BaseItem
+  id: RMCDigitalClcok
+  name: digital clock
+  description: A battery powered clock, able to keep time within about 5 seconds... it was never that accurate.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: Objects/Devices/Clocks.rsi
+    state: digital_clock
+  - type: Clock
