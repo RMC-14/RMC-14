@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Added Sniper and Omni sentry upgrades! Sniper has x2 as much range and
-      x4 as much damage, but fires slower. Omni has no restriction to it's turning
-      radius, but does 30% less damage and 1 less range.
-    type: Add
-  id: 652
-  time: '2024-09-06T08:08:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3933
 - author: DrSmugleaf
   changes:
   - message: Fixed the loading screen showing non-RMC14 tips.
@@ -4997,5 +4988,12 @@
   id: 1151
   time: '2024-12-25T00:42:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5224
+- author: Vermidia
+  changes:
+  - message: Fixed arachnids not making sounds for some emotes
+    type: Fix
+  id: 1152
+  time: '2024-12-25T05:35:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5226
 Name: RMC14
 Order: -1
