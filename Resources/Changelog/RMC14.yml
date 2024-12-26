@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed security cameras on Savannah not having names.
-    type: Fix
-  id: 658
-  time: '2024-09-06T10:22:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3957
-- author: DrSmugleaf
-  changes:
   - message: Fixed xenonid eggs being able to be placed under vendors, lockers, crates,
       chairs, etc.
     type: Fix
@@ -5003,5 +4996,14 @@
   id: 1157
   time: '2024-12-26T23:54:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5238
+- author: Vermidia
+  changes:
+  - message: 'Fixed Healer salve healing over 10 seconds: It now heals over 5 seconds.'
+    type: Fix
+  - message: Fixed Healer salve cooldown being 1 second instead of 0.5 seconds.
+    type: Fix
+  id: 1158
+  time: '2024-12-26T23:55:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5232
 Name: RMC14
 Order: -1
