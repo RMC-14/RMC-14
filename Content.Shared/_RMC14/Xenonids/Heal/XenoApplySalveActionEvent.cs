@@ -31,7 +31,7 @@ public sealed partial class XenoApplySalveActionEvent : EntityTargetActionEvent
     public FixedPoint2 StandardHealAmount = 100F;
 
     [DataField]
-    public FixedPoint2 SmallHealAmount = 85F;
+    public FixedPoint2 SmallHealAmount = 15F;
 
     [DataField]
     public TimeSpan TimeBetweenHeals = TimeSpan.FromSeconds(1);
