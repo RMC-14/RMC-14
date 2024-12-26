@@ -130,9 +130,9 @@
         points: 6
     - name: Armors
       entries:
-      - id: RMCArmorB12Camo
+      - id: CMArmorB12
         points: 28
-      - id: RMCArmorM4Camo
+      - id: CMArmorM4
         points: 16
     - name: Restricted Firearms
       entries:
@@ -157,11 +157,11 @@
         points: 3
     - name: Binoculars
       entries:
-      - id: RMCBinocularsCamo
+      - id: RMCBinoculars
         points: 5
-      - id: RMCRangefinderCamo
+      - id: RMCRangefinder
         points: 10
-      - id: RMCLaserDesignatorCamo
+      - id: RMCLaserDesignator
         points: 15
     - name: Helmet Optics
       entries: [ ]
@@ -217,13 +217,13 @@
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
-      - id: RMCBackpackMarineMedicCamo
-      - id: RMCSatchelMarineMedicCamo
+      - id: CMBackpackMarineMedic
+      - id: CMSatchelMarineMedic
         recommended: true
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: RMCBeltMedicBagCamoFilled
+      - id: CMBeltMedicBagFilled
         name: m276 lifesaver bag (full)
       - id: CMBeltMedicalFilled
         name: m276 medical storage rig (full)
@@ -231,6 +231,7 @@
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchReagentCanisterTricordrazineRevival
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
         recommended: true
       - id: RMCPouchMedkit
         recommended: true

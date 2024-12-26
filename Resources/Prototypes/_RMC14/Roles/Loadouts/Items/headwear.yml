@@ -25,7 +25,7 @@
   cost: 3
   storage:
     back:
-    - RMCHeadCapFlippableCamo
+    - RMCHeadCapFlippable
 
 - type: loadout
   id: BrownHeadbandRMC

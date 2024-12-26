@@ -229,6 +229,7 @@
     stunMax: 4
     chance: 0.30
   - type: XenoEnergy
+    alert: XenoEnergyHealer
     max: 7500
     gain: 0
     gainAttack: 0

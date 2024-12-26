@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/mob/hud/alien_standard.dmi and modified",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "power_display_full",
+      "delays": [
+        [
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "power_display_16",
+      "delays": [
+        [
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "power_display_15",
+      "delays": [
+        [
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "power_display_14",
+      "delays": [
+        [
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "power_display_13",
+      "delays": [
+        [
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "power_display_12",
+      "delays": [
+        [
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "power_display_11",
+      "delays": [
+        [
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "power_display_10",
+      "delays": [
+        [
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "power_display_9",
+      "delays": [
+        [
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "power_display_8",
+      "delays": [
+        [
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "power_display_7",
+      "delays": [
+        [
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "power_display_6",
+      "delays": [
+        [
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "power_display_5",
+      "delays": [
+        [
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "power_display_4",
+      "delays": [
+        [
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "power_display_3",
+      "delays": [
+        [
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "power_display_2",
+      "delays": [
+        [
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "power_display_1",
+      "delays": [
+        [
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "power_display_0",
+      "delays": [
+        [
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "power_display_empty"
+    }
+  ]
+}

@@ -84,6 +84,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
         if (!HasComp<DropshipHijackerComponent>(args.User))
             return;
 
+        if (!TryDropshipHijackPopup(ent, args.User, false))
+            return;
+
         if (TryComp(ent, out TransformComponent? xform) &&
             TryComp(xform.ParentUid, out DropshipComponent? dropship) &&
             dropship.Crashed)
@@ -192,7 +195,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
             EnsureComp<DropshipInFlyByComponent>(dropshipId.Value);
         }
-
         else if (!hijack && newDestination != null && newDestination.Ship != null)
         {
             Log.Warning($"{ToPrettyString(user)} tried to launch to occupied dropship destination {ToPrettyString(destination)}");

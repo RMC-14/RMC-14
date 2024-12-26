@@ -5,6 +5,10 @@ cm-xeno-not-enough-plasma = You don't have enough plasma!
 rmc-xeno-not-enough-energy = Your energy reserves are insufficient!
 rmc-xeno-energy-increase-user = You feel your internal energy reserves increase!
 
+# Internal Health
+rmc-xeno-not-enough-internal-health = Your health reserves are insufficient!
+rmc-xeno-internal-health-increase-user = You feel your internal health reserves increase!
+
 # Acid reserves
 rmc-xeno-not-enough-acid = Your don't have enough acid built up!
 rmc-xeno-acid-increase-user = You feel your acid reserves increase!

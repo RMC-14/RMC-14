@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent:
   - CMXenoDeveloped
@@ -173,6 +173,9 @@
   - type: XenoSpit
     projectileId: XenoSpitProjectilePraetorianWarden
   - type: XenoEnergy
+    alert: XenoEnergyWarden
+    popupGain: rmc-xeno-internal-health-increase-user
+    popupNotEnough: rmc-xeno-not-enough-internal-health
   - type: XenoRetrieve
   - type: XenoAid
   - type: XenoSprayAcid

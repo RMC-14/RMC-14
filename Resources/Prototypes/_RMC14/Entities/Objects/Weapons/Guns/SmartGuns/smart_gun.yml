@@ -145,128 +145,13 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: -0.1875, 0.125
-
-#camo variations
-- type: entity
-  parent: RMCSmartGun
-  id: RMCSmartGunCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: RMCSmartGun
-      Desert: RMCSmartGunDesert
-      Snow: RMCSmartGunSnow
-      Classic: RMCSmartGunClassic
-      Urban: RMCSmartGunUrban
-
-- type: entity
-  parent: RMCSmartGun
-  id: RMCSmartGunDesert
-  suffix: Desert
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/desert.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/desert.rsi
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: RMCMagazineSmartGunDesert
-        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
-        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - RMCMagazineSmartGun
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: RMCPowerCellSmartgun
-        whitelist:
-          components:
-          - SmartGunBattery
-
-- type: entity
-  parent: RMCSmartGun
-  id: RMCSmartGunSnow
-  suffix: Snow
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/snow.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/snow.rsi
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: RMCMagazineSmartGunSnow
-        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
-        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - RMCMagazineSmartGun
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: RMCPowerCellSmartgun
-        whitelist:
-          components:
-          - SmartGunBattery
-
-- type: entity
-  parent: RMCSmartGun
-  id: RMCSmartGunClassic
-  suffix: Classic
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/classic.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/classic.rsi
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: RMCMagazineSmartGunClassic
-        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
-        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - RMCMagazineSmartGun
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: RMCPowerCellSmartgun
-        whitelist:
-          components:
-          - SmartGunBattery
-
-- type: entity
-  parent: RMCSmartGun
-  id: RMCSmartGunUrban
-  suffix: Urban
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/urban.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/urban.rsi
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: RMCMagazineSmartGunUrban
-        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
-        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - RMCMagazineSmartGun
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-        startingItem: RMCPowerCellSmartgun
-        whitelist:
-          components:
-          - SmartGunBattery
+      Jungle: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/urban.rsi
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -293,52 +178,13 @@
   - type: Clothing
     slots:
     - suitStorage
-
-#camo variations
-- type: entity
-  parent: RMCMagazineSmartGun
-  id: RMCMagazineSmartGunCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: RMCMagazineSmartGun
-      Desert: RMCMagazineSmartGunDesert
-      Snow: RMCMagazineSmartGunSnow
-      Classic: RMCMagazineSmartGunClassic
-      Urban: RMCMagazineSmartGunUrban
-
-- type: entity
-  parent: RMCMagazineSmartGun
-  id: RMCMagazineSmartGunDesert
-  suffix: Desert
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/desert.rsi
-
-- type: entity
-  parent: RMCMagazineSmartGun
-  id: RMCMagazineSmartGunSnow
-  suffix: Snow
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/snow.rsi
-
-- type: entity
-  parent: RMCMagazineSmartGun
-  id: RMCMagazineSmartGunClassic
-  suffix: Classic
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/classic.rsi
-
-- type: entity
-  parent: RMCMagazineSmartGun
-  id: RMCMagazineSmartGunUrban
-  suffix: Urban
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/urban.rsi
+      Jungle: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/urban.rsi
 
 - type: entity
   parent: CMBaseCartridgeRifle

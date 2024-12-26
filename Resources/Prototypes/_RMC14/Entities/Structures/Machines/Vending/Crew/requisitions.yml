@@ -17,13 +17,13 @@
     sections:
     - name: Primary firearms
       entries:
-      - id: WeaponShotgunM42A2Camo
+      - id: WeaponShotgunM42A2
         amount: 30
-      - id: WeaponSMGM63Camo
+      - id: WeaponSMGM63
         amount: 60
-      - id: WeaponRifleM54CCamo
+      - id: WeaponRifleM54C
         amount: 60
-      - id: WeaponRifleM4SPRCamo
+      - id: WeaponRifleM4SPR
         amount: 20
     - name: Sidearms
       entries:
@@ -107,15 +107,15 @@
         amount: 1
     - name: Backpacks
       entries:
-      - id: RMCBackpackMarineCamo
+      - id: CMBackpackMarine
         amount: 15
       - id: RMCScabbardShotgun
         amount: 10
       #- id: Pyrotechnician G4-1 Fueltank
       #  amount: 2
-      - id: RMCBackpackWelderCamo
+      - id: CMBackpackWelder
         amount: 2
-      - id: RMCBackpackMortarCamo
+      - id: CMBackpackMortar
         amount: 1
       - id: RMCSatchelWelder
         amount: 5
@@ -129,13 +129,13 @@
         amount: 2
     - name: Belts
       entries:
-      - id: RMCBeltUtilityGeneralCamo
+      - id: RMCBeltUtilityGeneral
         amount: 2
-      - id: RMCBeltMarineCamo
+      - id: CMBeltMarine
         amount: 15
       - id: RMCBeltHolsterPistol
         amount: 10
-      - id: RMCBeltKnifeCamoFilled
+      - id: CMBeltKnifeFilled
         name: M276 Knife Rig (Full)
         amount: 5
       - id: RMCBeltHolsterSMG
@@ -148,9 +148,9 @@
         amount: 5
       #- id: M276 M82F Holster Rig
       #  amount: 2
-      - id: RMCBeltShotgunCamo
+      - id: RMCM276ShotgunShellLoadingRig
         amount: 10
-      - id: RMCBeltMortarCamo
+      - id: CMBeltMortar
         amount: 2
     - name: Pouches
       entries:
@@ -223,11 +223,11 @@
         amount: 4
       #- id: Data Detector
       #  amount: 4
-      - id: RMCBinocularsCamo
+      - id: RMCBinoculars
         amount: 2
-      - id: RMCRangefinderCamo
+      - id: RMCRangefinder
         amount: 1
-      - id: RMCLaserDesignatorCamo
+      - id: RMCLaserDesignator
         amount: 1
       #- id: Welding Goggles
       #  amount: 3
@@ -307,7 +307,7 @@
       entries:
       - id: RMCPowerCellSmartgun
         amount: 4
-      - id: RMCMagazineSmartGunCamo
+      - id: RMCMagazineSmartGun
         amount: 4
       #- id: M44 Heavy Speed Loader (.44)
       #  amount: 10
@@ -327,7 +327,7 @@
         amount: 13
       #- id: M240 Incinerator Tank
       #  amount: 3
-      - id: CMMagazineRifleM54CE2Camo
+      - id: CMMagazineRifleM54CE2
         amount: 3
       #- id: M41A MK1 Magazine (10x24mm)
       #  amount: 5
@@ -419,7 +419,7 @@
         amount: 10
     - name: Stock
       entries:
-      - id: RMCAttachmentM42A2WoodenStockCamo
+      - id: RMCAttachmentM42A2WoodenStock
         amount: 5
       - id: RMCAttachmentM63ArmBrace
         amount: 5
@@ -427,9 +427,9 @@
         amount: 5
       - id: RMCAttachmentM63Stock
         amount: 5
-      - id: RMCAttachmentM54CStockSolidCamo
+      - id: RMCAttachmentM54CStockSolid
         amount: 5
-      - id: RMCAttachmentM54CStockCollapsibleCamo
+      - id: RMCAttachmentM54CStockCollapsible
         amount: 5
       - id: RMCAttachmentM44MagnumSharpshooterStock
         amount: 5
@@ -451,41 +451,41 @@
     sections:
     - name: Uniform
       entries:
-      - id: RMCBackpackMarineCamo
+      - id: CMBackpackMarine
         amount: 20
       - id: CMBootsBlack
         amount: 20
-      - id: RMCBeltMarineCamo
+      - id: CMBeltMarine
         amount: 10
-      - id: RMCBeltShotgunCamo
+      - id: RMCM276ShotgunShellLoadingRig
         amount: 10
-      - id: RMCSatchelMarineCamo
+      - id: CMSatchelMarine
         amount: 20
-      - id: JumpsuitMarineCamo
+      - id: JumpsuitMarine
         amount: 20
     - name: Armor
       entries:
-      - id: ArmorHelmetM10Camo
+      - id: ArmorHelmetM10
         amount: 20
-      - id: RMCArmorHelmetM10TechCamo
+      - id: CMArmorHelmetM10Tech
         amount: 20
-      - id: RMCArmorHelmetM10MedicCamo
+      - id: CMArmorHelmetM10Medic
         amount: 20
-      - id: RMCArmorM3MediumCarrierCamo
+      - id: RMCArmorM3MediumCarrier
         amount: 15
-      - id: RMCArmorM3MediumPaddedCamo
+      - id: RMCArmorM3MediumPadded
         amount: 15
-      - id: RMCArmorM3MediumPadlessCamo
+      - id: RMCArmorM3MediumPadless
         amount: 15
-      - id: RMCArmorM3MediumRidgedCamo
+      - id: RMCArmorM3MediumRidged
         amount: 15
-      - id: RMCArmorM3MediumSkullCamo
+      - id: RMCArmorM3MediumSkull
         amount: 15
-      - id: RMCArmorM3MediumSmoothCamo
+      - id: RMCArmorM3MediumSmooth
         amount: 15
-      - id: RMCArmorM3HeavyPaddedCamo
+      - id: RMCArmorM3HeavyPadded
         amount: 10
-      - id: RMCArmorM3LightPaddedCamo
+      - id: RMCArmorM3LightPadded
         amount: 10
     - name: Gloves
       entries:

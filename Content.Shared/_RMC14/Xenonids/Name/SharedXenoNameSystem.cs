@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Players.PlayTimeTracking;
 using Robust.Shared.Configuration;
@@ -29,7 +30,7 @@ public abstract class SharedXenoNameSystem : EntitySystem
         SubscribeLocalEvent<XenoDevolvedEvent>(OnXenoDevolved);
 
         SubscribeLocalEvent<XenoNameComponent, RefreshNameModifiersEvent>(OnRefreshNameModifiers);
-        SubscribeLocalEvent<XenoNameComponent, PlayerAttachedEvent>(OnPlayerAttached);
+        SubscribeLocalEvent<XenoNameComponent, MindAddedMessage>(OnMindAdded);
 
         Subs.CVar(_config,
             RMCCVars.RMCPlaytimeXenoPrefixThreeTimeHours,
@@ -71,11 +72,14 @@ public abstract class SharedXenoNameSystem : EntitySystem
 
         var number = ent.Comp.Number;
         args.AddModifier("rmc-xeno-name", extraArgs: [("rank", rank), ("prefix", prefix), ("number", number), ("postfix", postfix)]);
+
+        if (_mind.TryGetMind(ent, out var _, out var mind))
+            mind.CharacterName = args.GetModifiedName();
     }
 
-    private void OnPlayerAttached(Entity<XenoNameComponent> ent, ref PlayerAttachedEvent args)
+    private void OnMindAdded(EntityUid uid, XenoNameComponent component, MindAddedMessage args)
     {
-        SetupName(ent);
+        SetupName(uid);
     }
 
     private TimeSpan GetXenoPlaytime(ICommonSession player)
@@ -134,9 +138,6 @@ public abstract class SharedXenoNameSystem : EntitySystem
         RemComp<AssignXenoNameComponent>(newXeno);
 
         _nameModifier.RefreshNameModifiers(newXeno);
-
-        if (_mind.TryGetMind(newXeno, out var _, out var mind) && TryComp<MetaDataComponent>(newXeno, out var xenoMetaData))
-            mind.CharacterName = xenoMetaData.EntityName;
     }
 
     public virtual void SetupName(EntityUid xeno)
