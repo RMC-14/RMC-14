@@ -116,6 +116,10 @@
       state: alive
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
   - type: Physics
     bodyType: KinematicController
   - type: Fixtures

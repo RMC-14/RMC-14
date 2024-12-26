@@ -88,6 +88,8 @@
     - CMXenoQueen
   - type: Evasion
     evasion: 20
+  - type: XenoInhands
+    prefix: drone
 
 - type: entity
   parent: CMXenoDroneBase
@@ -137,6 +139,10 @@
     - map: [ "enum.XenoFruitVisualLayers.Base" ]
       visible: false
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
       visible: false
   - type: XenoFruitPlanterVisuals
     rsi: _RMC14/Mobs/Xenonids/Drone/gardener_drone.rsi
