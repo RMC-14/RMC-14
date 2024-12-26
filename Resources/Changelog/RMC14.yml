@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed larva not healing off weeds. They will now heal regardless of whether
-      or not they are on weeds.
-    type: Fix
-  id: 657
-  time: '2024-09-06T09:20:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3956
-- author: DrSmugleaf
-  changes:
   - message: Fixed security cameras on Savannah not having names.
     type: Fix
   id: 658
@@ -5000,5 +4992,16 @@
   id: 1156
   time: '2024-12-26T10:50:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5230
+- author: Vermidia
+  changes:
+  - message: Fixed carrier parasite overlays and parasite mask sprites. The trap sprite
+      for parasites has been changed aswell.
+    type: Fix
+  - message: Xenonids that can carry eggs and parasites now have inhand sprites for
+      them.
+    type: Add
+  id: 1157
+  time: '2024-12-26T23:54:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5238
 Name: RMC14
 Order: -1
