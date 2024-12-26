@@ -15,9 +15,13 @@
         layer:
         - BulletImpassable
         density: 200
+      xeno_hive_core:
+        shape:
+          !type:PhysShapeCircle
+          radius: 1
         hard: false
         mask:
-        - MobLayer
+        - SmallMobLayer
   - type: CollisionWake
     enabled: false
   - type: Sprite
