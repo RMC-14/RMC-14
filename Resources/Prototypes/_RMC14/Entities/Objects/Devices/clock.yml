@@ -9,7 +9,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Devices/clocks.rsi
     state: digital_clock
-  - type: Clock
+  - type: RMCClock
 
 - type: entity
   id: RMCCatClock
@@ -20,7 +20,7 @@
     drawdepth: WallMountedItems
     sprite: _RMC14/Objects/Devices/clocks.rsi
     state: cat_clock_motion
-  - type: Clock
+  - type: RMCClock
   - type: WallMount
   - type: Clickable
   - type: InteractionOutline
