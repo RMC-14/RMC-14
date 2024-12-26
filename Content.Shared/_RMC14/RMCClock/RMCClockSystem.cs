@@ -16,7 +16,7 @@ public abstract class RMCClockSystem : EntitySystem
 
     private void OnExamined(Entity<RMCClockComponent> ent, ref ExaminedEvent args)
     {
-            args.PushText(GetClockTimeText(ent));
+        args.PushText(GetClockTimeText(ent));
     }
 
     public string GetClockTimeText(Entity<RMCClockComponent> ent)
