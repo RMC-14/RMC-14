@@ -75,6 +75,16 @@
     },
     {
       "name": "drone_rest_1"
+    },
+    {
+      "name": "salved",
+      "directions": 4
+    },
+    {
+      "name": "salved_downed"
+    },
+    {
+      "name": "salved_rest"
     }
   ]
 }

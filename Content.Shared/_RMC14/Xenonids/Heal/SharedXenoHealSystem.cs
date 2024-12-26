@@ -189,6 +189,9 @@ public abstract class SharedXenoHealSystem : EntitySystem
         healStack.NextHealAt = _timing.CurTime + healStack.TimeBetweenHeals;
         heal.HealStacks.Add(healStack);
         heal.ParallizeHealing = true;
+        var salved = EnsureComp<RecentlySalvedComponent>(ent);
+        salved.ExpiresAt = _timing.CurTime + args.TotalHealDuration;
+
         SpawnAttachedTo(args.HealEffect, target.ToCoordinates());
 
         _audio.PlayPredicted(args.HealSound, target.ToCoordinates(), ent);

@@ -143,7 +143,7 @@
   parent: ActionXenoBase
   id: ActionXenoApplySalve
   name: Apply Salve (200)
-  description: Apply a salve to heal allied Xenos
+  description: Apply a salve to use some of your health to heal allied Xenos up to 100 health over 5 seconds. You can stack multiple salves.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -152,13 +152,13 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: apply_salve
     event: !type:XenoApplySalveActionEvent
-    useDelay: 1
+    useDelay: 0.5
 
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoSacrifice
   name: Sacrifice
-  description: Sacrifice your life to heal a sister. [color=red]YOU WILL ONLY RESPAWN IF YOU MAXED OUT YOUR ENERGY BY HEALING SISTERS.[/color]
+  description: Sacrifice your life to heal a sister. [color=red]YOU WILL ONLY RESPAWN IF YOU MAXED OUT YOUR TRANSFERRED HEALTH BY HEALING SISTERS.[/color]
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
