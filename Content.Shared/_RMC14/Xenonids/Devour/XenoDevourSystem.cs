@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Armor;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
@@ -43,6 +43,7 @@ public sealed class XenoDevourSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly EntityManager _entManager = default!;
 
     private EntityQuery<DevouredComponent> _devouredQuery;
     private EntityQuery<XenoDevourComponent> _xenoDevourQuery;
@@ -269,6 +270,9 @@ public sealed class XenoDevourSystem : EntitySystem
         _audio.PlayPredicted(xeno.Comp.RegurgitateSound, xeno, xeno);
         foreach (var ent in ents)
         {
+            var ev = new RegurgitateEvent(_entManager.GetNetEntity(xeno.Owner), _entManager.GetNetEntity(ent));
+            RaiseLocalEvent(xeno, ev);
+
             _stun.TryStun(ent, xeno.Comp.RegurgitationStun, true);
             if (_net.IsServer)
                 SpawnAttachedTo(xeno.Comp.RegurgitateEffect, ent.ToCoordinates());
@@ -367,16 +371,6 @@ public sealed class XenoDevourSystem : EntitySystem
             return false;
         }
 
-        if (!_standing.IsDown(victim))
-        {
-            if (popup)
-            {
-                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-resisting", ("target", victim)), victim, xeno, PopupType.MediumCaution);
-            }
-
-            return false;
-        }
-
         if (TryComp(victim, out BuckleComponent? buckle) && buckle.BuckledTo is { } strap)
         {
             if (popup)
@@ -434,6 +428,9 @@ public sealed class XenoDevourSystem : EntitySystem
         {
             return true;
         }
+
+        var ev = new RegurgitateEvent(_entManager.GetNetEntity(xeno.Owner), _entManager.GetNetEntity(devoured.Owner));
+        RaiseLocalEvent(xeno, ev);
 
         if (doFeedback)
             DoFeedback((xeno, xeno.Comp));

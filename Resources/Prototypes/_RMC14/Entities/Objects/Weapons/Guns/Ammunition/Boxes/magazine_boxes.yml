@@ -953,9 +953,9 @@
   id: RMCBoxShellsIncendiaryEmpty
   name: shell box (Incendiary x 100)
   components:
-  # - type: Construction
-    # graph: RMCBoxMagazine
-    # node: RMCBoxShellsIncendiaryEmpty
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsIncendiaryEmpty
   - type: Sprite
     layers:
     - state: base_inc
@@ -1057,9 +1057,9 @@
   id: RMCBoxShellsIncendiaryBuckshotEmpty
   name: shell box (Incendiary Buckshot x 100)
   components:
-  # - type: Construction
-    # graph: RMCBoxMagazine
-    # node: RMCBoxShellsIncendiaryBuckshotEmpty
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsIncendiaryBuckshotEmpty
   - type: Sprite
     layers:
     - state: base_incbuck

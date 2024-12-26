@@ -1,0 +1,37 @@
+﻿<controls:MentorWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Mentor"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    SetSize="900 500"
+    Title="Mentor Help">
+    <BoxContainer Orientation="Horizontal">
+        <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BackgroundColor="#202028" />
+            </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True"
+                              VerticalExpand="True">
+                    <ScrollContainer HScrollEnabled="False" VScrollEnabled="True"
+                                     HorizontalExpand="True" VerticalExpand="True">
+                        <BoxContainer Name="Players" Access="Public" Orientation="Vertical"
+                                      VerticalExpand="True" />
+                    </ScrollContainer>
+                    <Button Name="DeMentorButton" Access="Public" Text="De-Mentor"
+                            StyleClasses="OpenBoth" />
+                </BoxContainer>
+        </PanelContainer>
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True"
+                      SizeFlagsStretchRatio="3">
+            <OutputPanel Name="Messages" Access="Public"
+                         VerticalExpand="True" />
+            <RichTextLabel Name="TypingIndicator" Access="Public" />
+            <RichTextLabel Name="ClaimIndicator" Access="Public" />
+            <BoxContainer Orientation="Horizontal">
+                <LineEdit Name="Chat" Access="Public" HorizontalExpand="True"
+                          Editable="False" />
+                <Button Name="ClaimButton" Access="Public" Text="Claim"
+                        StyleClasses="OpenBoth" Visible="False" />
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</controls:MentorWindow>

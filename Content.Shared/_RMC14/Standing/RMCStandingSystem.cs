@@ -1,9 +1,13 @@
-﻿using Content.Shared.Buckle.Components;
+﻿using Content.Shared._RMC14.Evasion;
+using Content.Shared.Buckle.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Standing;
+using Content.Shared.Stunnable;
+using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Standing;
 
@@ -11,6 +15,7 @@ public sealed class RMCStandingSystem : EntitySystem
 {
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly MobStateSystem _mob = default!;
 
     public override void Initialize()
     {
@@ -19,6 +24,12 @@ public sealed class RMCStandingSystem : EntitySystem
         SubscribeLocalEvent<DropItemsOnRestComponent, IsEquippingAttemptEvent>(OnDropIsEquippingAttempt);
         SubscribeLocalEvent<DropItemsOnRestComponent, IsUnequippingAttemptEvent>(OnDropIsUnequippingAttempt);
         SubscribeLocalEvent<DropItemsOnRestComponent, AttackAttemptEvent>(CancelIfResting);
+        SubscribeLocalEvent<DropItemsOnRestComponent, UseAttemptEvent>(CancelIfResting);
+
+        SubscribeLocalEvent<DownOnEnterComponent, EntInsertedIntoContainerMessage>(OnEnterDown);
+        SubscribeLocalEvent<DownOnEnterComponent, EntRemovedFromContainerMessage>(OnLeaveDown);
+
+        SubscribeLocalEvent<StandingStateComponent, EvasionRefreshModifiersEvent>(OnStandingStateEvasionRefresh);
     }
 
     private void OnDropBuckled(Entity<DropItemsOnRestComponent> drop, ref BuckledEvent args)
@@ -73,5 +84,26 @@ public sealed class RMCStandingSystem : EntitySystem
         }
 
         return false;
+    }
+
+    private void OnEnterDown(Entity<DownOnEnterComponent> mob, ref EntInsertedIntoContainerMessage args)
+    {
+        _standing.Down(args.Entity, false, false, true, true);
+    }
+
+    private void OnLeaveDown(Entity<DownOnEnterComponent> mob, ref EntRemovedFromContainerMessage args)
+    {
+        if (HasComp<KnockedDownComponent>(args.Entity) || _mob.IsIncapacitated(args.Entity))
+            _standing.Down(args.Entity, false, true, true, true);
+        else
+            _standing.Stand(args.Entity);
+    }
+
+    private void OnStandingStateEvasionRefresh(Entity<StandingStateComponent> entity, ref EvasionRefreshModifiersEvent args)
+    {
+        if (entity.Owner != args.Entity.Owner || !_standing.IsDown(entity.Owner, entity.Comp))
+            return;
+
+        args.Evasion += (int) EvasionModifiers.Rest;
     }
 }

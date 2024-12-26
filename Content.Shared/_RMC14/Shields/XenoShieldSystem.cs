@@ -38,7 +38,7 @@ public sealed partial class XenoShieldSystem : EntitySystem
         SubscribeLocalEvent<XenoShieldComponent, DamageModifyEvent>(OnDamage, after: [typeof(CMArmorSystem)]);
     }
 
-    public void OnDamage(Entity<XenoShieldComponent> ent, ref DamageModifyEvent args)
+    private void OnDamage(Entity<XenoShieldComponent> ent, ref DamageModifyEvent args)
     {
         if (!ent.Comp.Active)
             return;

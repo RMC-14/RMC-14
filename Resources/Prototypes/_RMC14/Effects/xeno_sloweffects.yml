@@ -53,3 +53,11 @@
   components:
   - type: TimedDespawn
     lifetime: 2
+
+- type: entity
+  parent: CMEffectStomp
+  id: RMCEffectDancerSlow
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.3

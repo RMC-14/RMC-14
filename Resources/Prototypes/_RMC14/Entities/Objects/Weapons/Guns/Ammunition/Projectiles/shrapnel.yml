@@ -37,3 +37,8 @@
     amount: 20
   - type: TimedDespawn
     lifetime: 0.25
+  - type: RMCProjectileAccuracy
+    accuracy: 100
+    thresholds:
+    - range: 32
+      falloff: 10

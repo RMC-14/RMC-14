@@ -1,5 +1,7 @@
+using Content.Server._RMC14.Commendations;
 using Content.Server._RMC14.Discord;
 using Content.Server._RMC14.LinkAccount;
+using Content.Server._RMC14.Mentor;
 using Content.Server._RMC14.PlayTimeTracking;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
@@ -81,6 +83,8 @@ namespace Content.Server.IoC
             IoCManager.Register<LinkAccountManager>();
             IoCManager.Register<RMCPlayTimeManager>();
             IoCManager.Register<RMCDiscordManager>();
+            IoCManager.Register<MentorManager>();
+            IoCManager.Register<CommendationManager>();
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using Content.Shared._RMC14.Medical.Refill;
 using Content.Shared._RMC14.Vendors;
+using Content.Shared.Mind;
+using Content.Shared.Roles.Jobs;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -21,10 +23,15 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IResourceCache _resource = default!;
 
+    private readonly SharedJobSystem _job;
+    private readonly SharedMindSystem _mind;
+
     private CMAutomatedVendorWindow? _window;
 
     public CMAutomatedVendorBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
+        _job = EntMan.System<SharedJobSystem>();
+        _mind = EntMan.System<SharedMindSystem>();
     }
 
     protected override void Open()
@@ -40,8 +47,24 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
             for (var sectionIndex = 0; sectionIndex < vendor.Sections.Count; sectionIndex++)
             {
                 var section = vendor.Sections[sectionIndex];
+
+                var validJob = true;
+                if (_player.LocalSession != null && _mind.TryGetMind(_player.LocalSession.UserId, out var mindId))
+                {
+                    foreach (var job in section.Jobs)
+                    {
+                        if (!_job.MindHasJobWithId(mindId, job.Id))
+                            validJob = false;
+                        else
+                            validJob = true;
+                    }
+                }
+
                 var uiSection = new CMAutomatedVendorSection();
                 uiSection.Label.SetMessage(GetSectionName(user, section));
+
+                if (!validJob)
+                    uiSection.Visible = false; // hide the section
 
                 for (var entryIndex = 0; entryIndex < section.Entries.Count; entryIndex++)
                 {

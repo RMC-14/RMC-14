@@ -85,6 +85,7 @@
     normalState: normal-unshaded
   - type: Corrodible
     timeToApply: 4
+    structure: true
   - type: ActivatableUIBlacklist
     blacklist:
       components:
@@ -429,7 +430,7 @@
   id: CMVendorIngredient
   startingInventory:
     FoodContainerEgg: 12
-    FoodMeatFish: 12
+#    FoodMeatFish: 12
     FoodMeat: 12
     ReagentContainerCornmeal: 12
     ReagentContainerRice: 12

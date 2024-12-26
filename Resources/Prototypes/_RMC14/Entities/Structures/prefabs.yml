@@ -1,0 +1,135 @@
+﻿- type: entity
+  abstract: true
+  id: RMCPrefabBase
+  name: prefabricated structure
+  description: This structure is made of metal support rods and robust poly-kevlon plastics. A derivative of the stuff used in UA ballistics vests, UNMC and SPP uniforms. The loose walls roll with each gust of wind.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,1.5,1.9"
+        density: 190
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/prefabs.rsi
+    offset: 0.5, 0.5
+  - type: Clickable
+  - type: Occluder
+    boundingBox: "-0.5,-0.5,1.5,1.9"
+  - type: DeleteOnExplosion
+
+- type: entity
+  abstract: true
+  id: RMCPrefabBaseTop
+  name: prefabricated structure
+  description: This structure is made of metal support rods and robust poly-kevlon plastics. A derivative of the stuff used in UA ballistics vests, UNMC and SPP uniforms. The loose walls roll with each gust of wind.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.1,0.1"
+        density: 190
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/prefabs.rsi
+    offset: 0.5, 0.5
+  - type: Clickable
+  - type: DeleteOnExplosion
+
+- type: entity
+  parent: RMCPrefabBase
+  id: RMCPrefabBlueBase
+  suffix: Blue, Base
+  components:
+  - type: Sprite
+    state: blu
+
+- type: entity
+  parent: RMCPrefabBaseTop
+  id: RMCPrefabBlueTop
+  suffix: Blue, Top
+  components:
+  - type: Sprite
+    state: blu_trim
+
+- type: entity
+  parent: RMCPrefabBase
+  id: RMCPrefabOrangeBase
+  suffix: Orange, Base
+  components:
+  - type: Sprite
+    state: orange
+
+- type: entity
+  parent: RMCPrefabBaseTop
+  id: RMCPrefabOrangeTop
+  suffix: Orange, Top
+  components:
+  - type: Sprite
+    state: orange_trim
+
+- type: entity
+  parent: RMCPrefabBase
+  id: RMCPrefabPinkBase
+  suffix: Pink, Base
+  components:
+  - type: Sprite
+    state: pink
+
+- type: entity
+  parent: RMCPrefabBaseTop
+  id: RMCPrefabPinkTop
+  suffix: Pink, Top
+  components:
+  - type: Sprite
+    state: pink_trim
+
+- type: entity
+  parent: RMCPrefabBase
+  id: RMCPrefabRedBase
+  suffix: Red, Base
+  components:
+  - type: Sprite
+    state: red
+
+- type: entity
+  parent: RMCPrefabBaseTop
+  id: RMCPrefabRedTop
+  suffix: Red, Top
+  components:
+  - type: Sprite
+    state: red_trim
+
+- type: entity
+  parent: RMCPrefabBase
+  id: RMCPrefabWhiteBase
+  suffix: White, Base
+  components:
+  - type: Sprite
+    state: white
+
+- type: entity
+  parent: RMCPrefabBaseTop
+  id: RMCPrefabWhiteTop
+  suffix: White, Top
+  components:
+  - type: Sprite
+    state: white_trim

@@ -1,4 +1,6 @@
 ﻿using Content.Shared._RMC14.Marines.Announce;
+using Content.Shared._RMC14.Overwatch;
+using Content.Shared._RMC14.TacticalMap;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
@@ -17,8 +19,17 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
             return;
 
         _window = new MarineCommunicationsComputerWindow();
-        _window.TacticalMapButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsOpenMapMsg());
-        _window.OverwatchButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsOverwatchMsg());
+
+        if (EntMan.HasComponent<TacticalMapComputerComponent>(Owner))
+            _window.TacticalMapButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsOpenMapMsg());
+        else
+            _window.TacticalMapButton.Visible = false;
+
+        if (EntMan.HasComponent<OverwatchConsoleComponent>(Owner))
+            _window.OverwatchButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsOverwatchMsg());
+        else
+            _window.OverwatchButton.Visible = false;
+
         _window.Send.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsComputerMsg( Rope.Collapse(_window.Text.TextRope)));
         OnStateUpdate();
 

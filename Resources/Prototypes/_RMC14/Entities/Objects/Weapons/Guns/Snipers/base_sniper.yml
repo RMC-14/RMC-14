@@ -11,11 +11,15 @@
     baseFireModes:
     - SemiAuto
   - type: WieldableSpeedModifiers
-    baseWalk: 0.696
-    baseSprint: 0.559
+    base: 0.5
+    light: 0.69
+    medium: 0.75
+    heavy: 0.806  
   - type: WieldDelay
     baseDelay: 0.8
-  - type: GunGroupSpreadPenalty
+  - type: GunDualWielding
+    weaponGroup: Rifle
+  - type: GunPointBlank
 
 - type: entity
   parent: CMBaseCartridgeRifle

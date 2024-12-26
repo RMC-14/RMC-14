@@ -38,8 +38,7 @@
 - type: startingGear
   id: CMGearMilitaryPolice
   equipment:
-    jumpsuit: CMJumpsuitMPBlack
-    back: CMSatchelSecurity
+    jumpsuit: CMJumpsuitMP
     shoes: CMBootsBlackFilled
     head: CMHeadBeretRed
     eyes: CMGlassesSecurity

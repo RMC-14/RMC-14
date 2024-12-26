@@ -26,7 +26,7 @@
     - ActionXenoHide
     - ActionXenoLeap
     tier: 0
-    hudOffset: 0,0.4
+    hudOffset: -0.1,0.1
     contributesToVictory: false
     countedInSlots: false
     unlockAt: 0
@@ -95,3 +95,9 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: parasite
+  - type: AddAccentClothing
+    accent: ReplacementAccent
+    replacement: mumble
+  - type: Blindfold
+  - type: StandingState
+    downSound: null

@@ -1,4 +1,5 @@
 ﻿rmc-dropship-pre-flight-fueling = The shuttle is still undergoing pre-flight fueling and cannot depart yet. Please wait another {$minutes} minutes before trying again.
+rmc-dropship-pre-hijack = This terminal won't be operational for another {$minutes} minutes.
 
 rmc-dropship-weapons-title = Weapons Console
 
@@ -64,6 +65,11 @@ rmc-dropship-weapons-fire-cooldown = {$weapon} just fired, wait for it to cool d
 rmc-dropship-weapons-point-gun = It has a {$weapon} loaded.
 rmc-dropship-weapons-point-ammo = It has a {$ammo} loaded.
 rmc-dropship-weapons-rounds-left = It has {$current} out of {$max} rounds left.
+
+rmc-dropship-utility-activate-not-flying = Utility Systems can only activate while in flight.
+rmc-dropship-utility-not-flyby = {$utility} can only be used during flyby.
+rmc-dropship-utility-not-skilled = You don't have the training to use this system!
+rmc-dropship-utility-cooldown = {$utility} was just used, you need to wait a bit before using it again.
 
 rmc-dropship-flyby-no-skill = You don't have the skill to perform a flyby.
 

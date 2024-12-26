@@ -18,7 +18,10 @@
   - type: Item
     sprite: Objects/Tools/matches.rsi
     heldPrefix: matchbox
-    size: Small
+    size: Tiny
+  - type: Clothing
+    slots:
+    - belt
   - type: StorageFillVisualizer
     maxFillLevels: 7
     fillBaseName: matchbox

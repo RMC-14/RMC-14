@@ -2,15 +2,16 @@
   name: M83 grenade launcher
   parent: [ RMCBaseWeaponGrenadeLauncher ]
   id: WeaponLauncherM83
+  suffix: Desert
   description: A heavy, 6-shot grenade launcher used by the UNMC for area denial and big explosions.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/desert.rsi
     layers:
     - state: icon
       map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/desert.rsi
   - type: RMCSelectiveFire
     baseFireRate: 0.3125
   - type: GunUserWhitelist
@@ -33,3 +34,10 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: 0.0, 0.185
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/urban.rsi

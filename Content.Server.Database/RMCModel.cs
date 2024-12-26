@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Content.Shared.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace Content.Server.Database;
@@ -189,4 +190,37 @@ public sealed class RMCSquadPreference
     public Profile Profile { get; set; } = default!;
 
     public string? Squad { get; set; } // EntProtoId<SquadTeamComponent>
+}
+
+[Table("rmc_commendations")]
+public sealed class RMCCommendation
+{
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id;
+
+    [ForeignKey("Giver")]
+    public Guid GiverId { get; set; }
+
+    public Player Giver { get; set; } = default!;
+
+    [ForeignKey("Receiver")]
+    public Guid ReceiverId { get; set; }
+
+    public Player Receiver { get; set; } = default!;
+
+    [ForeignKey("Round")]
+    public int RoundId { get; set; }
+
+    public Round Round { get; set; } = default!;
+
+    public string GiverName { get; set; } = string.Empty;
+
+    public string ReceiverName { get; set; } = string.Empty;
+
+    public string Name { get; set; } = string.Empty;
+
+    public string Text { get; set; } = string.Empty;
+
+    public CommendationType Type { get; set; }
 }

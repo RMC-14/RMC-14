@@ -1,0 +1,28 @@
+- type: entity
+  parent: BaseStructure
+  id: RMCPlanterBox
+  name: grow box
+  description: A root lattice is half buried inside the grow box.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Structures/Furniture/planter_box.rsi
+    drawdepth: FloorTiles
+    state: planter_box
+  - type: Appearance
+
+- type: entity
+  parent: RMCPlanterBox
+  id: RMCSoilNet
+  name: soil net
+  description: Scientists use these suspended nets to superimpose a grid over a patch of ground for study.
+  components:
+  - type: Sprite
+    state: soil_grid

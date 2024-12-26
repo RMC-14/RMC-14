@@ -241,11 +241,50 @@ cm-chatsan-replacement-cat = feline host
 cm-chatsan-word-cats = cats
 cm-chatsan-replacement-cats = feline hosts
 
+cm-chatsan-word-vulpkanin = vulpkanin
+cm-chatsan-replacement-vulpkanin = canine host
+
+cm-chatsan-word-vulpkanins = vulpkanins
+cm-chatsan-replacement-vulpkanins = canine hosts
+
+cm-chatsan-word-vulp = vulp
+cm-chatsan-replacement-vulp = canine host
+
+cm-chatsan-word-vulps = vulps
+cm-chatsan-replacement-vulps = canine hosts
+
+cm-chatsan-word-dog = dog
+cm-chatsan-replacement-dog = canine host
+
+cm-chatsan-word-dogs = dogs
+cm-chatsan-replacement-dogs = canine hosts
+
 cm-chatsan-word-avali = avali
 cm-chatsan-replacement-avali = four-eared host
 
 cm-chatsan-word-avalis = avalis
 cm-chatsan-replacement-avalis = four-eared hosts
+
+cm-chatsan-word-rodentia = rodentia
+cm-chatsan-replacement-rodentia = squeaking host
+
+cm-chatsan-word-rodentias = rodentias
+cm-chatsan-replacement-rodentias = squeaking hosts
+
+cm-chatsan-word-rodentiae = rodentiae
+cm-chatsan-replacement-rodentiae = squeaking hosts
+
+cm-chatsan-word-rat = rat
+cm-chatsan-replacement-rat = squeaking host
+
+cm-chatsan-word-rats = rats
+cm-chatsan-replacement-rats = squeaking hosts
+
+cm-chatsan-word-mouse = mouse
+cm-chatsan-replacement-mouse = squeaking host
+
+cm-chatsan-word-mice = mice
+cm-chatsan-replacement-mice = squeaking hosts
 
 cm-chatsan-word-grenade = grenade
 cm-chatsan-replacement-grenade = boomstick

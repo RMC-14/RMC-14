@@ -1,0 +1,53 @@
+- type: entity
+  parent: BaseStorageItem
+  id: RMCEngineerKit
+  name: engineer kit
+  description: A combat engineering toolkit intended to carry electrical and mechanical supplies into combat. With engineering training you can fit this in a backpack.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/engineer_kit.rsi
+    layers:
+    - state: toolkit
+    - state: toolkit_empty
+      map: [ "openLayer" ]
+      visible: false
+  - type: Storage # TODO RMC14 require medical skill for opening this while in another container
+    maxItemSize: Small
+    grid:
+    - 0,0,13,1 # 7 slots
+    whitelist:
+      tags:
+      - RMCCircuitboard
+      - Flashlight
+      # - TODO RMC14 RMCWeldingGoggles
+      # - TODO RMC14 RMCAnalyzer
+      # - TODO RMC14 RMCDemoScanner
+      # - TODO RMC14 RMCReagentScanner
+      - CableCoil
+      - PowerCell
+      # - TODO RMC14 RMCAssembly
+      # - TODO RMC14 RMCStockParts,
+      # - TODO RMC14 RMCPlasticExplosive,
+      components:
+      - TrayScanner
+  - type: FixedItemSizeStorage
+  - type: Item
+    size: Normal
+  - type: Tag
+    tags:
+    - RMCEngineerKit
+  - type: GenericVisualizer
+    visuals:
+      enum.SharedBagOpenVisuals.BagState:
+        openLayer:
+          Open: { visible: true }
+          Closed: { visible: false }
+  - type: Appearance
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: StorageNestedOpenSkillRequired
+    skills:
+      all:
+        RMCSkillEngineer: 2

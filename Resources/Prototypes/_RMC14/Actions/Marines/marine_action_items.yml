@@ -44,6 +44,30 @@
     useDelay: 0.25
 
 - type: entity
+  parent: ActionMarineToggleable
+  id: RMCActionToggleIDLock
+  name: Toggle ID lock
+  description: Toggles the ID lock on the gun, allowing anyone to use it.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _RMC14/Actions/id_lock_actions.rsi
+      state: id_lock_locked
+    event: !type:ToggleActionEvent
+
+- type: entity
+  parent: ActionMarineToggleable
+  id: RMCActionToggleIFF
+  name: Toggle IFF
+  description: Toggles the IFF on the gun.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _RMC14/Actions/iff_toggle_actions.rsi
+      state: iff_toggle_on
+    event: !type:ToggleActionEvent
+
+- type: entity
   parent: ActionMarineBase
   id: CMActionToggleAttachable
   name: Toggle Attachable
@@ -91,6 +115,16 @@
   id: RMCActionToggleMedhud
   name: Toggle Medical HUD
   description: Toggle the optical matrix of the medical HUD.
+  components:
+  - type: InstantAction
+    itemIconStyle: BigItem
+    event: !type:ToggleActionEvent
+
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionToggleWeldingGoggles
+  name: Toggle the welding goggles
+  description: Change the positions of the welding goggles on your forehead.
   components:
   - type: InstantAction
     itemIconStyle: BigItem

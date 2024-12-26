@@ -15,12 +15,12 @@
     noRot: true
     layers:
     - state: roller_down
-      map: ["unfoldedLayer"]
+      map: [ "unfoldedLayer" ]
     - state: folded
-      map: ["foldedLayer"]
+      map: [ "foldedLayer" ]
       visible: false
     - state: roller_up
-      map: ["buckledLayer"]
+      map: [ "buckledLayer" ]
       visible: false
   - type: Item
     size: Small
@@ -61,12 +61,12 @@
   - type: Sprite
     layers:
     - state: surgical_down
-      map: ["unfoldedLayer"]
+      map: [ "unfoldedLayer" ]
     - state: surgical_folded
-      map: ["foldedLayer"]
+      map: [ "foldedLayer" ]
       visible: false
     - state: surgical_up
-      map: ["buckledLayer"]
+      map: [ "buckledLayer" ]
       visible: false
   - type: Appearance
 
@@ -80,4 +80,90 @@
   - type: Strap
     enabled: false
 
+# Copied most of RollerBed prototype except for pullable
+- type: entity
+  parent: [ BaseDeployFoldable ]
+  id: RMCMedevacStretcher
+  name: medevac stretcher
+  description: A collapsible stretcher that can be activated to send patients to an overhead dropship.
+  components:
+  - type: Item
+    size: Small
+  - type: Clickable
+  - type: InteractionOutline
+  - type: CollisionWake
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/rollerbeds.rsi
+    noRot: true
+    drawdepth: OverMobs
+    layers:
+    - state: stretcher_down
+      map: [ "unfoldedLayer" ]
+    - state: stretcher_folded
+      map: [ "foldedLayer" ]
+      visible: false
+    - state: stretcher_box
+      map: [ "buckledLayer" ]
+      visible: false
+    - state: beacon_active_up
+      map: [ "buckledBeaconLayer" ]
+      visible: false
+    - state: winched_stretcher
+      map: [ "stretcherAnimatedLayer" ]
+      visible: false
+  - type: Physics
+    bodyType: Dynamic
+    fixedRotation: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 80
+        mask:
+        - MobMask
+  - type: Strap
+    position: Down
+    rotation: -90
+    buckleOffset: "0,0.15"
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.StrapVisuals.State:
+        buckledLayer:
+          True: { visible: true }
+          False: { visible: false }
+      enum.FoldedVisuals.State: # Copypasta from BaseFoldable b/c collections don't merge when overriding component prototypes.
+        foldedLayer:
+          True: { visible: true }
+          False: { visible: false }
+        unfoldedLayer:
+          True: { visible: false }
+          False: { visible: true }
+      enum.MedevacStretcherVisuals.BeaconState:
+        buckledBeaconLayer:
+          On: { visible: true }
+          Off: { visible: false }
+      enum.MedevacStretcherVisuals.MedevacingState:
+        buckledLayer:
+          True: { state: winched_stretcher }
+          False: { state: stretcher_box }
+  - type: Corrodible
+  - type: MedevacStretcher
+  - type: Tag
+    tags:
+    - CMRollerBed
+
+- type: entity
+  parent: RMCMedevacStretcher
+  id: RMCMedevacStretcherFolded
+  suffix: folded
+  components:
+  - type: Foldable
+    folded: true
+  - type: Strap
+    enabled: false
 # TODO RMC14 medevac stretcher

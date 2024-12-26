@@ -4,14 +4,34 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoBoiler
-  name: Boiler # TODO RMC14 3x fire damage from fires (not all burn damage!)
+  name: Boiler
   description: A huge, grotesque xenonid covered in glowing, oozing acid slime.
   components:
   - type: GhostRole
     name: cm-job-name-xeno-boiler
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Boiler/boiler.rsi
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 185
+        mask:
+        - MobMask
+        - BarbedBarricade
+        layer:
+        - MobLayer
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 185
+        layer:
+        - BulletImpassable
   - type: MobState
     allowedStates:
     - Alive
@@ -37,7 +57,7 @@
     - ActionXenoAcidShroud
     - ActionXenoDevolve
     tier: 3
-    hudOffset: 0,0.35
+    hudOffset: -0.15,0.05
     unlockAt: 900 # 15 minutes
   - type: XenoHeavy
   - type: XenoDevolve
@@ -63,7 +83,10 @@
   - type: XenoTailStab
     toggle: true
     inject:
-      RMCMolecularAcid: 1 # TODO RMC14 6
+      RMCMolecularAcid: 6
+    tailDamage:
+      groups:
+        Brute: 30
   - type: XenoSprayAcid
     acid: XenoAcidSprayStrong
     barricadeDamage:
@@ -73,10 +96,10 @@
     damage:
       groups:
         Brute: 22.5
-  - type: Tackle # min: 2, max: 6
-    threshold: 5
-    stun: 7
+  - type: Tackle
     chance: 0.25
+    stunMin: 3
+    stunMax: 4
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
@@ -122,3 +145,7 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: boiler
+  - type: Flammable
+    damage: #per second, scales with number of fire 'stacks'
+      types:
+        Heat: 3

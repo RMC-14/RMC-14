@@ -267,6 +267,12 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         }
     }
 
+    public void IncreaseBurrowedLarva(Entity<HiveComponent> hive, int amount)
+    {
+        hive.Comp.BurrowedLarva += amount;
+        Dirty(hive);
+    }
+
     public void JoinBurrowedLarva(Entity<HiveComponent> hive, EntityUid user)
     {
         if (_net.IsClient)
@@ -275,7 +281,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         if (hive.Comp.BurrowedLarva <= 0)
             return;
 
-        EntityUid? spawned = null;
+        EntityUid? larva = null;
 
         bool TrySpawnAt<T>() where T : Component
         {
@@ -289,7 +295,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
                     continue;
 
                 var position = _transform.GetMoverCoordinates(uid);
-                spawned = SpawnAtPosition(hive.Comp.BurrowedLarvaId, position);
+                larva = SpawnAtPosition(hive.Comp.BurrowedLarvaId, position);
                 return true;
             }
 
@@ -303,21 +309,20 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             return;
         }
 
-        if (spawned == null)
+        if (larva == null)
             return;
 
         hive.Comp.BurrowedLarva--;
         Dirty(hive);
 
-        _xeno.MakeXeno(spawned.Value);
-        _hive.SetHive(spawned.Value, hive);
+        _xeno.MakeXeno(larva.Value);
+        _hive.SetHive(larva.Value, hive);
 
         if (TryComp(user, out ActorComponent? actor))
         {
-            if (!_mind.TryGetMind(actor.PlayerSession.UserId, out var mind))
-                mind = _mind.CreateMind(actor.PlayerSession.UserId);
+            var newMind = _mind.CreateMind(actor.PlayerSession.UserId, EntityManager.GetComponent<MetaDataComponent>(larva.Value).EntityName);
 
-            _mind.TransferTo(mind.Value, spawned);
+            _mind.TransferTo(newMind, larva, ghostCheckOverride: true);
         }
 
         _adminLog.Add(LogType.RMCBurrowedLarva, $"{ToPrettyString(user):player} took a burrowed larva from hive {ToPrettyString(hive):hive}.");

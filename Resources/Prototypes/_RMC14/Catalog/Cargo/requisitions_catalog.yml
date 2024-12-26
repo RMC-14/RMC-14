@@ -113,6 +113,12 @@
       - cost: 2000
         crate: RMCCrateClothingWebbing
       - cost: 2000
+        crate: RMCCrateClothingWebbingVest
+      - cost: 2000
+        crate: RMCCrateClothingWebbingKnife
+      - cost: 3000
+        crate: RMCCrateClothingWebbingHolster
+      - cost: 2000
         crate: RMCCrateClothingWebbingPouch
       - cost: 3000
         crate: RMCCrateClothingOfficerOutfit
@@ -154,6 +160,8 @@
       entries:
       - cost: 3000
         crate: RMCCrateGrenadesHighExplosive
+      - cost: 4000
+        crate: RMCCrateGrenadesIncendiary
       - cost: 3000
         crate: RMCCrateGrenadesFrag
       # leaving this commented, as it is not parity, but we might want it in the future
@@ -163,6 +171,8 @@
         crate: RMCCrateGrenadesFragOld
       - cost: 4000
         crate: RMCCrateBreachingCharges
+      - cost: 10000
+        crate: RMCCrateGrenadesHighExplosiveBox
     - name: Food
       entries:
       - cost: 1000
@@ -203,6 +213,8 @@
         crate: RMCCrateMortarKit
       - cost: 2000
         crate: RMCCrateMortarShellHE
+      - cost: 2000
+        crate: RMCCrateMortarShellIncendiary
       - cost: 2000
         crate: RMCCrateMortarShellFlare
 #    - name: Operations
@@ -277,8 +289,8 @@
         crate: RMCCrateMagazineM4SPRCustomStandard
       - cost: 3000
         crate: RMCCrateMagazineM4SPRCustomImpact
-#      - cost: 3000
-#        crate: RMCCrateMagazineM4SPRCustomIncendiary These ones are straight downgrades and thus shouldn't be for sale
+      - cost: 3000
+        crate: RMCCrateMagazineM4SPRCustomIncendiary
 #      - cost: 4000
 
 

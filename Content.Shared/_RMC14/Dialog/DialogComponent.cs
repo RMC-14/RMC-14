@@ -25,6 +25,9 @@ public sealed partial class DialogComponent : Component
     public DialogInputEvent? InputEvent;
 
     [DataField, AutoNetworkedField]
+    public bool LargeInput;
+
+    [DataField, AutoNetworkedField]
     public object? ConfirmEvent;
 
     [DataField, AutoNetworkedField]

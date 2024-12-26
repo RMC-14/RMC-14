@@ -47,7 +47,6 @@
   id: CMGearPilotGunship
   equipment:
     jumpsuit: CMJumpsuitPilot
-    back: CMSatchel
     shoes: CMBootsBlackFilled
     id: CMIDCardPilotGunship
     ears: CMHeadsetPilot
