@@ -1,4 +1,6 @@
-﻿namespace Content.Shared._RMC14.RMCClock;
+﻿using Robust.Shared.GameStates;
 
-[RegisterComponent]
+namespace Content.Shared._RMC14.RMCClock;
+
+[RegisterComponent, NetworkedComponent]
 public sealed partial class RMCClockComponent : Component;
