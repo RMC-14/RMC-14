@@ -138,7 +138,6 @@
   - type: Tag
     tags:
     - Cartridge
-    - CMCartridgePistol9mm
     - CMCartridgePistol9mmAP
   - type: CartridgeAmmo
     proto: CMBulletPistolM77AP
@@ -150,6 +149,9 @@
   description: A pistol magazine. This one contains armor-piercing bullets, which have noticeably higher stopping power on well-armored targets, and noticeably less on unarmored or lightly-armored targets.
   components:
   - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CMCartridgePistol9mmAP
     proto: CMCartridgePistolM77AP
   # Todo AP magazine sprite
 
