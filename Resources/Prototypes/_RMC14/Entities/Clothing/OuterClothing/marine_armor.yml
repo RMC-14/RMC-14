@@ -536,7 +536,7 @@
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/smooth/urban.rsi
 
 - type: entity
-  parent: RMCBaseMarineArmor
+  parent: RMCBaseMarineArmorLight
   id: CMArmorPress
   name: press body armor
   description: Body armor used by war correspondents in battles and wars across the universe.
