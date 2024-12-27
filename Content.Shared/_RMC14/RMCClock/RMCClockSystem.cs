@@ -5,7 +5,7 @@ using Content.Shared.GameTicking;
 
 namespace Content.Shared._RMC14.RMCClock;
 
-public abstract class RMCClockSystem : EntitySystem
+public sealed class RMCClockSystem : EntitySystem
 {
     [Dependency] private readonly SharedGameTicker _ticker = default!;
 
@@ -16,15 +16,10 @@ public abstract class RMCClockSystem : EntitySystem
 
     private void OnExamined(Entity<RMCClockComponent> ent, ref ExaminedEvent args)
     {
-        args.PushText(GetClockTimeText(ent));
-    }
-
-    public string GetClockTimeText(Entity<RMCClockComponent> ent)
-    {
-        var time = (EntityQuery<GlobalTimeManagerComponent>().FirstOrDefault()?.TimeOffset ?? TimeSpan.Zero) + _ticker.RoundDuration();
-
+        var owner = ent.Owner;
         var date = DateTime.Now.AddYears(100).ToString("dd MMMM, yyyy");
+        var time = _ticker.RoundDuration().ToString(@"hh\:mm");
 
-        return $"The {ent} reads {date} - {time:hh\\:mm}";
+        args.PushMarkup(Loc.GetString("rmc-clock-examine", ("device", owner), ("date", date), ("time", time)));
     }
 }
