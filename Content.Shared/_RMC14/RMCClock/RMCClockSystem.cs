@@ -18,7 +18,8 @@ public sealed class RMCClockSystem : EntitySystem
     {
         var owner = ent.Owner;
         var date = DateTime.Now.AddYears(100).ToString("dd MMMM, yyyy");
-        var time = _ticker.RoundDuration().ToString(@"hh\:mm");
+        var worldTime = (EntityQuery<GlobalTimeManagerComponent>().FirstOrDefault()?.TimeOffset ?? TimeSpan.Zero) + _ticker.RoundDuration();
+        var time = worldTime.ToString(@"hh\:mm");
 
         args.PushMarkup(Loc.GetString("rmc-clock-examine", ("device", owner), ("date", date), ("time", time)));
     }
