@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: ChemicalMedipen
   id: CMAutoInjector
@@ -62,6 +62,7 @@
     sprite: null
   - type: Hypospray
     transferAmount: 58 # TODO RMC14 77
+    injectSound: /Audio/_RMC14/Medical/air_release.ogg
   - type: SolutionContainerManager
     solutions:
       pen:
