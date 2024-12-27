@@ -15,7 +15,6 @@ using Content.Shared.Mobs.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared.StepTrigger.Components;
 using Content.Shared.StepTrigger.Systems;
 
 namespace Content.Server._RMC14.Xenonids.Construction;

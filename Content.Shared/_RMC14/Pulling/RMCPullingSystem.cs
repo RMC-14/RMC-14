@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.Fireman;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
@@ -22,6 +23,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+
 
 namespace Content.Shared._RMC14.Pulling;
 
@@ -203,7 +205,9 @@ public sealed class RMCPullingSystem : EntitySystem
         if (args.Cancelled || ent.Owner == args.PulledUid)
             return;
 
-        if (_mobState.IsDead(args.PulledUid))
+        if (_mobState.IsDead(args.PulledUid)
+            && !(TryComp<XenoComponent>(args.PulledUid, out var xeno)
+            && xeno.Role.Id == "CMXenoLarva"))
         {
             _popup.PopupClient(Loc.GetString("cm-pull-whitelist-denied-dead", ("name", args.PulledUid)), args.PulledUid, args.PullerUid);
             args.Cancelled = true;
@@ -386,7 +390,9 @@ public sealed class RMCPullingSystem : EntitySystem
                 continue;
             }
 
-            if (_mobState.IsDead(pulling))
+            if (_mobState.IsDead(pulling)
+                && !(TryComp<XenoComponent>(pulling, out var xeno)
+                && xeno.Role.Id == "CMXenoLarva"))
                 _pulling.TryStopPull(pulling, pullable, uid);
         }
 
