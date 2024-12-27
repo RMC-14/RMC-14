@@ -1,4 +1,4 @@
-﻿# m54c
+# m54c
 - type: entity
   parent: RMCCrateAmmo
   id: RMCCrateBoxMagazineRifleM54C
@@ -103,14 +103,14 @@
     contents:
     - id: RMCBoxMagazinePistolM1984
 
-#- type: entity # TODO RMC14 needs ammo mags completed, box is done
-#  parent: RMCCrateAmmo
-#  id: RMCCrateBoxMagazinePistolM1984AP
-#  name: Magazine box (M1984, 16x AP mags)
-#  components:
-#  - type: StorageFill
-#    contents:
-#    - id: RMCBoxMagazinePistolM1984AP
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazinePistolM1984AP
+  name: Magazine box (M1984, 16x AP mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolM1984AP
 
 # M77
 - type: entity

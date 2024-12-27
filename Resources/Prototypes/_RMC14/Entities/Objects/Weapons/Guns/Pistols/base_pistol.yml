@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder]
   abstract: true
   id: CMWeaponPistolBase
@@ -89,6 +89,7 @@
   abstract: true
   parent: BaseMagazinePistol
   id: CMBaseMagazinePistol
+  description: A pistol magazine.
   components:
   - type: MagazineVisuals
     magState: mag
@@ -119,18 +120,6 @@
   - type: RMCProjectileDamageFalloff
   - type: RMCProjectileAccuracy
     accuracy: 60
-
-- type: entity
-  parent: CMBulletBase
-  id: CMBulletPistol9mm
-  name: bullet (9mm)
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 40
-  - type: CMArmorPiercing
-    amount: 10
 
 - type: Tag
   id: CMMagazinePistol

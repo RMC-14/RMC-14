@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMWeaponPistolBase
   id: CMWeaponPistolM1984
   name: M1984 service pistol
@@ -92,6 +92,19 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
 
+#9mm
+- type: entity
+  parent: CMBulletBase
+  id: CMBulletPistol9mm
+  name: bullet (9mm)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: CMArmorPiercing
+    amount: 10
+
 - type: entity
   id: CMCartridgePistol9mm
   name: cartridge (9mm)
@@ -103,6 +116,42 @@
     - CMCartridgePistol9mm
   - type: CartridgeAmmo
     proto: CMBulletPistol9mm
+
+#9mmAP
+- type: entity
+  parent: CMBulletBase
+  id: CMBulletPistolM77AP
+  name: bullet (9mm AP)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 25
+  - type: CMArmorPiercing
+    amount: 40
+
+- type: entity
+  id: CMCartridgePistolM77AP
+  name: cartridge (9mm AP)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridgePistol9mm
+    - CMCartridgePistol9mmAP
+  - type: CartridgeAmmo
+    proto: CMBulletPistolM77AP
+
+- type: entity
+  parent: CMMagazinePistolM1984
+  id: RMCMagazinePistolM1984AP
+  name: M1984 AP magazine (9mm)
+  description: A pistol magazine. This one contains armor-piercing bullets, which have noticeably higher stopping power on well-armored targets, and noticeably less on unarmored or lightly-armored targets.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CMCartridgePistolM77AP
+  # Todo AP magazine sprite
 
 - type: Tag
   id: CMMagazinePistolM1984
