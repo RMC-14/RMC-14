@@ -972,3 +972,14 @@
     state: hexathele_hasselti
   - type: PatronFigurine
     id: dc4f0fcb-3cfe-4229-9af8-532865e8a5f3
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronFaePetrovic
+  name: Fae Petrovic figurine
+  description: "A figurine of a very handsome* engineer. You feel like you've seen him around here before, but since when was he an engineer?"
+  components:
+  - type: Sprite
+    state: fae_petrovic
+  - type: PatronFigurine
+    id: 7e9f0b8b-c918-4482-b12f-ae4dd1c43d49
