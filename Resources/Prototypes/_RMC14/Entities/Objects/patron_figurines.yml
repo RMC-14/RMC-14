@@ -961,3 +961,14 @@
     state: cyril_cloves_culkins
   - type: PatronFigurine
     id: 22d7b4a3-3635-4d69-9696-c91df2047fa9
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronHexatheleHasselti
+  name: Hexathele Hasselti figurine
+  description: "Womp Womp."
+  components:
+  - type: Sprite
+    state: hexathele_hasselti
+  - type: PatronFigurine
+    id: dc4f0fcb-3cfe-4229-9af8-532865e8a5f3
