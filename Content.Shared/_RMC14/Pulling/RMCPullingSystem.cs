@@ -205,9 +205,7 @@ public sealed class RMCPullingSystem : EntitySystem
         if (args.Cancelled || ent.Owner == args.PulledUid)
             return;
 
-        if (_mobState.IsDead(args.PulledUid)
-            && !(TryComp<XenoComponent>(args.PulledUid, out var xeno)
-            && xeno.Role.Id == "CMXenoLarva"))
+        if (_mobState.IsDead(args.PulledUid) && !HasComp<IgnoreBlockPullingDeadComponent>(args.PulledUid))
         {
             _popup.PopupClient(Loc.GetString("cm-pull-whitelist-denied-dead", ("name", args.PulledUid)), args.PulledUid, args.PullerUid);
             args.Cancelled = true;
@@ -390,9 +388,7 @@ public sealed class RMCPullingSystem : EntitySystem
                 continue;
             }
 
-            if (_mobState.IsDead(pulling)
-                && !(TryComp<XenoComponent>(pulling, out var xeno)
-                && xeno.Role.Id == "CMXenoLarva"))
+            if (_mobState.IsDead(pulling) && !HasComp<IgnoreBlockPullingDeadComponent>(pulling))
                 _pulling.TryStopPull(pulling, pullable, uid);
         }
 
