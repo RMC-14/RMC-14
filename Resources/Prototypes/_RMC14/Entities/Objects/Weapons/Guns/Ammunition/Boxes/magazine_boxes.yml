@@ -518,7 +518,7 @@
         tags:
         - CMMagazinePistolM1984
 
-- type: entity # TODO RMC14 this box is done but needs mags made, dont forget to add it to crafting and cargo
+- type: entity
   parent: RMCBoxMagazineBase
   id: RMCBoxMagazinePistolM1984AP
   name: magazine box (AP M1984 x 16)
