@@ -33,12 +33,13 @@
       - RMCPenlight
       - CMAutoInjector
       #      - TODO RMC14 syringe cases
-      #      - TODO RMC14 surgical cases
       - CMSurgicalLine
       - CMSynthGraft
       - CMRollerBed
       - BodyBag
       - Hypospray
+      - CMBloodPack
+      - CMSurgicalCase
       components:
       - Hypospray
   - type: Item
@@ -63,6 +64,10 @@
     blacklist:
       components:
       - Xeno
+  - type: StorageNestedOpenSkillRequired
+    skills:
+      all:
+        RMCSkillMedical: 2
 
 - type: entity
   parent: CMFirstAidKit

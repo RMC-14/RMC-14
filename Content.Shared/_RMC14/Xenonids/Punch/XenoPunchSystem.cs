@@ -56,7 +56,7 @@ public sealed class XenoPunchSystem : EntitySystem
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
         var targetId = args.Target;
-        _rmcPulling.TryStopUserPullIfPulling(xeno, targetId);
+        _rmcPulling.TryStopAllPullsFromAndOn(targetId);
 
         var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage);
         if (damage?.GetTotal() > FixedPoint2.Zero)
@@ -68,7 +68,6 @@ public sealed class XenoPunchSystem : EntitySystem
         var origin = _transform.GetMapCoordinates(xeno);
         var target = _transform.GetMapCoordinates(targetId);
         var diff = target.Position - origin.Position;
-        var length = diff.Length();
         diff = diff.Normalized() * xeno.Comp.Range;
 
         _throwing.TryThrow(targetId, diff, 10);

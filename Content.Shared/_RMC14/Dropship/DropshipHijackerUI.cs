@@ -17,5 +17,5 @@ public sealed class DropshipHijackerDestinationChosenBuiMsg(NetEntity destinatio
 [Serializable, NetSerializable]
 public enum DropshipHijackerUiKey
 {
-    Key
+    Key,
 }
