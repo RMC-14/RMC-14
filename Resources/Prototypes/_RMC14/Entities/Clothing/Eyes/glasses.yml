@@ -264,6 +264,20 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/aviators.rsi
     slots:
+    - EYES
+    - MASK
+    
+- type: entity
+  parent: ClothingEyesBase
+  id: RMCHipsterGlasses
+  name: prescription glasses
+  description: Boring glasses, makes you look smart and potentially reputable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/hipster.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/hipster.rsi
+    slots:
     - MASK
     - EYES
 
