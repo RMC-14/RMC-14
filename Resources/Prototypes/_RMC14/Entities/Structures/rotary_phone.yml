@@ -44,6 +44,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/wallmount_phone.rsi
+    layers:
+      - state: wall_phone
+        map: [ "base" ]
   - type: GenericVisualizer
     visuals:
       enum.RotaryPhoneLayers.Layer:
