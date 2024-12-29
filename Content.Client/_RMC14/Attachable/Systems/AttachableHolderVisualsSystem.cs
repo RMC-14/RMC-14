@@ -1,5 +1,4 @@
 using Content.Client._RMC14.Attachable.Components;
-using Content.Shared._RMC14.Attachable;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Attachable.Systems;
@@ -11,14 +10,14 @@ namespace Content.Client._RMC14.Attachable.Systems;
 public sealed class AttachableHolderVisualsSystem : EntitySystem
 {
     [Dependency] private readonly AttachableHolderSystem _attachableHolderSystem = default!;
-    
+
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<AttachableHolderVisualsComponent, EntRemovedFromContainerMessage>(OnDetached);
         SubscribeLocalEvent<AttachableHolderVisualsComponent, AttachableHolderAttachablesAlteredEvent>(OnAttachablesAltered);
-        
+
         SubscribeLocalEvent<AttachableVisualsComponent, AppearanceChangeEvent>(OnAttachableAppearanceChange);
     }
 
@@ -72,7 +71,7 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
 
                 SetAttachableOverlay(holder, attachable, args.SlotId);
                 break;
-            
+
             case AttachableAlteredType.AppearanceChanged:
                 SetAttachableOverlay(holder, attachable, args.SlotId, suffix);
                 break;
@@ -96,6 +95,24 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
         string slotId,
         string suffix = "")
     {
+        RefreshVisuals(holder, attachable, slotId, suffix);
+    }
+
+    private void OnAttachableAppearanceChange(Entity<AttachableVisualsComponent> attachable, ref AppearanceChangeEvent args)
+    {
+        if (!attachable.Comp.RedrawOnAppearanceChange ||
+            !_attachableHolderSystem.TryGetHolder(attachable.Owner, out var holderUid) ||
+            !_attachableHolderSystem.TryGetSlotId(holderUid.Value, attachable.Owner, out var slotId))
+        {
+            return;
+        }
+
+        var holderEvent = new AttachableHolderAttachablesAlteredEvent(attachable.Owner, slotId, AttachableAlteredType.AppearanceChanged);
+        RaiseLocalEvent(holderUid.Value, ref holderEvent);
+    }
+
+    public void RefreshVisuals(Entity<AttachableHolderVisualsComponent> holder, Entity<AttachableVisualsComponent> attachable, string slotId, string suffix)
+    {
         if (!holder.Comp.Offsets.ContainsKey(slotId) ||
             !TryComp(holder, out SpriteComponent? holderSprite))
         {
@@ -105,12 +122,13 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
         if (!TryComp(attachable, out SpriteComponent? attachableSprite))
             return;
 
+        attachable.Comp.LastSlotId = slotId;
+        attachable.Comp.LastSuffix = suffix;
+
         var rsi = attachableSprite.LayerGetActualRSI(attachable.Comp.Layer)?.Path;
         var state = attachableSprite.LayerGetState(attachable.Comp.Layer).ToString();
         if (attachable.Comp.Rsi is { } rsiPath)
-        {
             rsi = rsiPath;
-        }
 
         if (!string.IsNullOrWhiteSpace(attachable.Comp.Prefix))
             state = attachable.Comp.Prefix;
@@ -138,18 +156,5 @@ public sealed class AttachableHolderVisualsSystem : EntitySystem
         }
 
         holderSprite.LayerMapSet(slotId, holderSprite.AddLayer(layerData));
-    }
-    
-    private void OnAttachableAppearanceChange(Entity<AttachableVisualsComponent> attachable, ref AppearanceChangeEvent args)
-    {
-        if (!attachable.Comp.RedrawOnAppearanceChange ||
-            !_attachableHolderSystem.TryGetHolder(attachable.Owner, out var holderUid) ||
-            !_attachableHolderSystem.TryGetSlotId(holderUid.Value, attachable.Owner, out var slotId))
-        {
-            return;
-        }
-        
-        var holderEvent = new AttachableHolderAttachablesAlteredEvent(attachable.Owner, slotId, AttachableAlteredType.AppearanceChanged);
-        RaiseLocalEvent(holderUid.Value, ref holderEvent);
     }
 }

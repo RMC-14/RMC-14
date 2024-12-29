@@ -31,6 +31,7 @@ public abstract class SharedDropshipSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private TimeSpan _dropshipInitialDelay;
+    private TimeSpan _hijackInitialDelay;
 
     public override void Initialize()
     {
@@ -62,6 +63,7 @@ public abstract class SharedDropshipSystem : EntitySystem
             });
 
         Subs.CVar(_config, RMCCVars.RMCDropshipInitialDelayMinutes, v => _dropshipInitialDelay = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCDropshipHijackInitialDelayMinutes, v => _hijackInitialDelay = TimeSpan.FromMinutes(v), true);
     }
 
     private void OnDropshipMapInit(Entity<DropshipComponent> ent, ref MapInitEvent args)
@@ -133,6 +135,9 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
 
         if (!TryDropshipLaunchPopup(ent, user, false))
+            return;
+
+        if (!TryDropshipHijackPopup(ent, user, false))
             return;
 
         var userTransform = Transform(user);
@@ -348,8 +353,27 @@ public abstract class SharedDropshipSystem : EntitySystem
         var roundDuration = _gameTicker.RoundDuration();
         if (roundDuration < _dropshipInitialDelay)
         {
-            var minutesLeft = Math.Max(1, (int) (_dropshipInitialDelay- roundDuration).TotalMinutes);
+            var minutesLeft = Math.Max(1, (int)(_dropshipInitialDelay - roundDuration).TotalMinutes);
             var msg = Loc.GetString("rmc-dropship-pre-flight-fueling", ("minutes", minutesLeft));
+
+            if (predicted)
+                _popup.PopupClient(msg, computer, user, PopupType.MediumCaution);
+            else
+                _popup.PopupEntity(msg, computer, user, PopupType.MediumCaution);
+
+            return false;
+        }
+
+        return true;
+    }
+
+    protected bool TryDropshipHijackPopup(EntityUid computer, Entity<DropshipHijackerComponent?> user, bool predicted)
+    {
+        var roundDuration = _gameTicker.RoundDuration();
+        if (HasComp<DropshipHijackerComponent>(user) && roundDuration < _hijackInitialDelay)
+        {
+            var minutesLeft = Math.Max(1, (int)(_hijackInitialDelay - roundDuration).TotalMinutes);
+            var msg = Loc.GetString("rmc-dropship-pre-hijack", ("minutes", minutesLeft));
 
             if (predicted)
                 _popup.PopupClient(msg, computer, user, PopupType.MediumCaution);

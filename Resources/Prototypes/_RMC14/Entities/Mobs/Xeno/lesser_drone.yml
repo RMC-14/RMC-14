@@ -98,3 +98,5 @@
     spray: XenoAcidSprayTrapWeak
   - type: Evasion
     evasion: 10
+  - type: XenoInhands
+    prefix: lesser

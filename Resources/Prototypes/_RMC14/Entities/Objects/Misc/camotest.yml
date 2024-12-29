@@ -1,21 +1,6 @@
 ﻿- type: entity
-  parent: CamoTest
-  id: CamoTestBase
-  name: Camo Test
-  description: debug test object for camo proof of concept, will replace itself with a camouflaged variant.
-  suffix: Camo Replace
-  components:
-  - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: CamoTest
-      Desert: CamoTestDesert
-      Snow: CamoTestSnow
-      Classic: CamoTestClassic
-      Urban: CamoTestUrban
-    
-- type: entity
   parent: CMCrowbar
-  id: CamoTest
+  id: Test
   name: jungle camo test
   suffix: Jungle
   description: junjle
@@ -23,47 +8,10 @@
   - type: Sprite
     sprite: _RMC14/Objects/Misc/camotest/jungle.rsi
     state: icon
-
-- type: entity
-  parent: CamoTest
-  id: CamoTestDesert
-  name: desert camo test
-  suffix: Desert
-  description: sand
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Misc/camotest/desert.rsi
-    state: icon
-  
-- type: entity
-  parent: CamoTest
-  id: CamoTestSnow
-  name: snow christmas test
-  suffix: Snow
-  description: ah! so jolly!
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Misc/camotest/snow.rsi
-    state: icon
-
-- type: entity
-  parent: CamoTest
-  id: CamoTestClassic
-  name: classic camo test
-  suffix: Classic
-  description: gray
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Misc/camotest/classic.rsi
-    state: icon
-  
-- type: entity
-  parent: CamoTest
-  id: CamoTestUrban
-  name: urban camo test
-  suffix: Urban
-  description: city
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Misc/camotest/urban.rsi
-    state: icon
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Misc/camotest/jungle.rsi
+      Desert: _RMC14/Objects/Misc/camotest/desert.rsi
+      Snow: _RMC14/Objects/Misc/camotest/snow.rsi
+      Classic: _RMC14/Objects/Misc/camotest/classic.rsi
+      Urban: _RMC14/Objects/Misc/camotest/urban.rsi

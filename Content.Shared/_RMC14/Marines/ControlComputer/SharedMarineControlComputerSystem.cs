@@ -1,14 +1,33 @@
-﻿using Content.Shared._RMC14.Evacuation;
+﻿using Content.Shared._RMC14.Commendations;
+using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Evacuation;
+using Content.Shared._RMC14.Survivor;
+using Content.Shared.Database;
+using Content.Shared.Popups;
 using Content.Shared.UserInterface;
+using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Marines.ControlComputer;
 
 public abstract class SharedMarineControlComputerSystem : EntitySystem
 {
+    [Dependency] private readonly SharedCommendationSystem _commendation = default!;
+    [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedEvacuationSystem _evacuation = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+
+    private static readonly string[] MedalNames =
+    [
+        "Distinguished conduct medal",
+        "Bronze heart medal",
+        "Medal of valor",
+        "Medal of exceptional heroism",
+    ];
 
     public override void Initialize()
     {
@@ -17,10 +36,14 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         SubscribeLocalEvent<EvacuationProgressEvent>(OnRefreshComputers);
 
         SubscribeLocalEvent<MarineControlComputerComponent, BeforeActivatableUIOpenEvent>(OnComputerBeforeUIOpen);
+        SubscribeLocalEvent<MarineControlComputerComponent, MarineControlComputerMedalMarineEvent>(OnComputerMedalMarine);
+        SubscribeLocalEvent<MarineControlComputerComponent, MarineControlComputerMedalNameEvent>(OnComputerMedalName);
+        SubscribeLocalEvent<MarineControlComputerComponent, MarineControlComputerMedalMessageEvent>(OnComputerMedalMessage);
 
         Subs.BuiEvents<MarineControlComputerComponent>(MarineControlComputerUi.Key,
             subs =>
             {
+                subs.Event<MarineControlComputerMedalMsg>(OnMedal);
                 subs.Event<MarineControlComputerToggleEvacuationMsg>(OnToggleEvacuationMsg);
             });
     }
@@ -33,6 +56,102 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
     private void OnComputerBeforeUIOpen(Entity<MarineControlComputerComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
         RefreshComputers();
+    }
+
+    private void OnComputerMedalMarine(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerMedalMarineEvent args)
+    {
+        if (!TryGetEntity(args.Actor, out var actor) ||
+            !TryGetEntity(args.Marine, out var marine))
+        {
+            return;
+        }
+
+        if (marine == actor)
+        {
+            _popup.PopupClient("You can't give yourself a medal!", actor, PopupType.MediumCaution);
+            return;
+        }
+
+        if (_net.IsClient)
+            return;
+
+        var options = new List<DialogOption>();
+        foreach (var name in MedalNames)
+        {
+            options.Add(new DialogOption(name, new MarineControlComputerMedalNameEvent(args.Actor, args.Marine, name)));
+        }
+
+        _dialog.OpenOptions(ent, actor.Value, "Medal Type", options, "What type of medal do you want to award?");
+    }
+
+    private void OnComputerMedalName(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerMedalNameEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryGetEntity(args.Actor, out var actor))
+            return;
+
+        var ev = new MarineControlComputerMedalMessageEvent(args.Actor, args.Marine, args.Name);
+        _dialog.OpenInput(ent, actor.Value, "What should the medal citation read?", ev, true);
+    }
+
+    private void OnComputerMedalMessage(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerMedalMessageEvent args)
+    {
+        if (!TryGetEntity(args.Actor, out var actor) ||
+            !TryGetEntity(args.Marine, out var marine) ||
+            !HasComp<CommendationGiverComponent>(actor) ||
+            !TryComp(marine, out CommendationReceiverComponent? receiver) ||
+            receiver.LastPlayerId == null ||
+            string.IsNullOrWhiteSpace(args.Message.Trim()))
+        {
+            return;
+        }
+
+        _commendation.GiveCommendation(actor.Value, marine.Value, args.Name, args.Message, CommendationType.Medal);
+
+        if (_net.IsClient)
+            return;
+
+        _popup.PopupCursor("Medal awarded", actor.Value, PopupType.Large);
+    }
+
+    private void OnMedal(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerMedalMsg args)
+    {
+        if (!TryComp(args.Actor, out ActorComponent? actorComp))
+            return;
+
+        if (!HasComp<CommendationGiverComponent>(args.Actor))
+        {
+            _popup.PopupClient("Only a Senior Officer can award medals!", args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        if (_net.IsClient)
+            return;
+
+        // TODO RMC14 gibbed marines
+        var actor = GetNetEntity(args.Actor);
+        var options = new List<DialogOption>();
+        var receivers = EntityQueryEnumerator<CommendationReceiverComponent, MarineComponent>();
+        while (receivers.MoveNext(out var uid, out var receiver, out _))
+        {
+            if (receiver.LastPlayerId == null ||
+                Guid.Parse(receiver.LastPlayerId) == actorComp.PlayerSession.UserId)
+            {
+                continue;
+            }
+
+            if (HasComp<SurvivorComponent>(uid))
+                continue;
+
+            if (uid == args.Actor)
+                continue;
+
+            options.Add(new DialogOption(Name(uid), new MarineControlComputerMedalMarineEvent(actor, GetNetEntity(uid))));
+        }
+
+        _dialog.OpenOptions(ent, args.Actor, "Medal Recipient", options, "Who do you want to award a medal to?");
     }
 
     private void OnToggleEvacuationMsg(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerToggleEvacuationMsg args)

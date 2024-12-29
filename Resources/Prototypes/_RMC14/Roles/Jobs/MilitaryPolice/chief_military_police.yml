@@ -52,13 +52,13 @@
 - type: startingGear
   id: CMGearChiefMP
   equipment:
-    jumpsuit: RMCJumpsuitWOCamo
+    jumpsuit: CMJumpsuitWO
     shoes: CMBootsBlackFilled
     head: CMHeadBeretWO
     eyes: CMGlassesSecurity
     gloves: CMHandsBlackMarine
     id: CMIDCardChiefMP
-    outerClothing: RMCArmorM3WOCamo
+    outerClothing: CMArmorM3WO
     ears: CMHeadsetCMP
     belt: CMBeltSecurityMPFilled
     #    pocket1: TODO RMC14 tape recorder

@@ -140,7 +140,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
         if (failureMessageId != null)
         {
-            _popup.PopupClient(Loc.GetString(failureMessageId, ("target_xeno", target.ToString())), ent);
+            _popup.PopupClient(Loc.GetString(failureMessageId, ("target_xeno", target)), ent);
             return;
         }
 
@@ -189,6 +189,9 @@ public abstract class SharedXenoHealSystem : EntitySystem
         healStack.NextHealAt = _timing.CurTime + healStack.TimeBetweenHeals;
         heal.HealStacks.Add(healStack);
         heal.ParallizeHealing = true;
+        var salved = EnsureComp<RecentlySalvedComponent>(ent);
+        salved.ExpiresAt = _timing.CurTime + args.TotalHealDuration;
+
         SpawnAttachedTo(args.HealEffect, target.ToCoordinates());
 
         _audio.PlayPredicted(args.HealSound, target.ToCoordinates(), ent);
@@ -238,7 +241,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
         if (failureMessageId != null)
         {
-            _popup.PopupClient(Loc.GetString(failureMessageId, ("target_xeno", target.ToString())), ent);
+            _popup.PopupClient(Loc.GetString(failureMessageId, ("target_xeno", target)), ent);
             return;
         }
 
@@ -323,8 +326,8 @@ public abstract class SharedXenoHealSystem : EntitySystem
         var totalHeal = damage.GetTotal();
         var leftover = amount - totalHeal;
         if (leftover > FixedPoint2.Zero)
-            damage = _rmcDamageable.DistributeHealing(target, BurnGroup, leftover, -damage);
-        _damageable.TryChangeDamage(target, damage, true);
+            damage = _rmcDamageable.DistributeHealing(target, BurnGroup, leftover, damage);
+        _damageable.TryChangeDamage(target, -damage, true);
     }
 
     private bool GetHiveCore(EntityUid xeno)
