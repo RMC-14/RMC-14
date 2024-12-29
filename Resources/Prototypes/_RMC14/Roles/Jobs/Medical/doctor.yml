@@ -40,7 +40,6 @@
     jumpsuit: CMScrubsBlue
     shoes: ClothingShoesColorWhite
     id: CMIDCardDoctor
-    ears: CMHeadsetMedical # TODO RMC14 Medical Vender
 
 - type: startingGear
   id: CMGearDoctorEquipped

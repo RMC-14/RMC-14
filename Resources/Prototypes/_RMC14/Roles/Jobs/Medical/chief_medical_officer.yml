@@ -50,7 +50,6 @@
     shoes: ClothingShoesColorWhite
     id: CMIDCardCMO
     # TODO RMC14 random chemical synthesis note
-    ears: CMHeadsetCMO
 
 - type: startingGear
   id: CMGearCMOEquipped
