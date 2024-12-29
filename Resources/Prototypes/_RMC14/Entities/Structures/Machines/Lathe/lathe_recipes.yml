@@ -168,3 +168,10 @@
   completetime: 4
   materials:
     CMSteel: 400 # 15000
+
+- type: latheRecipe
+  id: RMCKitchenKnife
+  result: RMCKitchenKnife
+  completetime: 4
+  materials:
+    CMSteel: 400 # 15000
