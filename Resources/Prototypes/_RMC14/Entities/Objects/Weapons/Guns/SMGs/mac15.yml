@@ -125,6 +125,13 @@
 - type: entity
   parent: CMCartridge9mmSMG
   description: A 9mm cartridge for the mac-15 submachinegun.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CMCartridge9mmSMG
+  - type: CartridgeAmmo
+    proto: CMBullet9mmSMG
 
 - type: entity
   parent: Bullet10x20mm
