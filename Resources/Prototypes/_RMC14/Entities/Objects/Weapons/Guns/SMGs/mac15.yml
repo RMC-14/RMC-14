@@ -6,18 +6,18 @@
   suffix: Filled
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/mp5.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/mac15.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/mp5.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/mac15.rsi
   - type: Gun
     shotsPerBurst: 3
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/smg_light.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mac15.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
