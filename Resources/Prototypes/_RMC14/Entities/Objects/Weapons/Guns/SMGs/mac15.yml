@@ -51,13 +51,13 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: CMMagazineSMGMP5
+        startingItem: CMMagazineSMGMAC15
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
         priority: 2
         whitelist:
           tags:
-          - CMMagazineSMGMP5
+          - CMMagazineSMGMAC15
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -93,14 +93,14 @@
 
 - type: entity
   parent: BaseMagazineRifle
-  id: CMMagazineSMGMP5
-  name: "MP5 magazine (9mm)"
-  description: "A 9mm magazine for the MP5."
+  id: CMMagazineSMGMAC15
+  name: "MAC-15 magazine (9mm)"
+  description: "A 9mm magazine for the MAC-15."
   components:
   - type: Tag
     tags:
     - CMMagazineSmg
-    - CMMagazineSMGMP5
+    - CMMagazineSMGMAC15
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -109,7 +109,7 @@
     proto: CMCartridge9mmSMG
     capacity: 30
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mp5.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mac15.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -126,7 +126,7 @@
   parent: CMCartridge10x20mm
   id: CMCartridge9mmSMG
   name: cartridge (9mm SMG)
-  description: A 9mm cartridge for the mp5 submachinegun.
+  description: A 9mm cartridge for the mac-15 submachinegun.
   components:
   - type: Tag
     tags:
