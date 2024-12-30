@@ -15,6 +15,51 @@
     },
     {
       "name": "recovery"
+    },
+    {
+      "name": "frenzy_weak"
+    },
+    {
+      "name": "warding_weak"
+    },
+    {
+      "name": "recovery_weak"
+    },
+    {
+      "name": "frenzy_strong"
+    },
+    {
+      "name": "warding_strong"
+    },
+    {
+      "name": "recovery_strong"
+    },
+    {
+      "name": "frenzy_hivelord"
+    },
+    {
+      "name": "warding_hivelord"
+    },
+    {
+      "name": "recovery_hivelord"
+    },
+    {
+      "name": "frenzy_queen"
+    },
+    {
+      "name": "warding_queen"
+    },
+    {
+      "name": "recovery_queen"
+    },
+    {
+      "name": "frenzy_king"
+    },
+    {
+      "name": "warding_king"
+    },
+    {
+      "name": "recovery_king"
     }
   ]
 }

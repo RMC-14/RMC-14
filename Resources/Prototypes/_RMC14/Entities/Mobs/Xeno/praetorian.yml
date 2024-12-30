@@ -170,6 +170,7 @@
     popup: rmc-xeno-warden-popup
   - type: XenoPheromones
     pheromonesMultiplier: 3
+    pheroSuffix: strong
   - type: XenoSpit
     projectileId: XenoSpitProjectilePraetorianWarden
   - type: XenoEnergy

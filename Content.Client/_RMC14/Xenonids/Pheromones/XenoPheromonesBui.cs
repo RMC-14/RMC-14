@@ -23,6 +23,7 @@ public sealed class XenoPheromonesBui : BoundUserInterface
 
     private readonly SpriteSystem _sprite;
     private readonly TransformSystem _transform;
+    private readonly SharedXenoPheromonesSystem _pheros;
 
     [ViewVariables]
     private XenoPheromonesMenu? _xenoPheromonesMenu;
@@ -35,6 +36,7 @@ public sealed class XenoPheromonesBui : BoundUserInterface
 
         _sprite = EntMan.System<SpriteSystem>();
         _transform = EntMan.System<TransformSystem>();
+        _pheros = EntMan.System<SharedXenoPheromonesSystem>();
     }
 
     protected override void Open()
@@ -67,9 +69,9 @@ public sealed class XenoPheromonesBui : BoundUserInterface
             helpButton.AddChild(helpTexture);
             parent.AddChild(helpButton);
 
-            AddPheromonesButton(XenoPheromones.Frenzy, parent);
-            AddPheromonesButton(XenoPheromones.Warding, parent);
-            AddPheromonesButton(XenoPheromones.Recovery, parent);
+            AddPheromonesButton(XenoPheromones.Frenzy, parent, Owner);
+            AddPheromonesButton(XenoPheromones.Warding, parent, Owner);
+            AddPheromonesButton(XenoPheromones.Recovery, parent, Owner);
         }
 
         var vpSize = _displayManager.ScreenSize;
@@ -80,15 +82,19 @@ public sealed class XenoPheromonesBui : BoundUserInterface
         _xenoPheromonesMenu.OpenCenteredAt(pos);
     }
 
-    private void AddPheromonesButton(XenoPheromones pheromone, RadialContainer parent)
+    private void AddPheromonesButton(XenoPheromones pheromone, RadialContainer parent, EntityUid owner)
     {
         var name = pheromone.ToString().ToLowerInvariant();
+        var suffix = _pheros.GetPheroSuffix((owner, null));
+
+        if (suffix != null)
+            suffix = "_" + suffix;
 
         var texture = new TextureRect
         {
             VerticalAlignment = Control.VAlignment.Center,
             HorizontalAlignment = Control.HAlignment.Center,
-            Texture = _sprite.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_pheromones.rsi"), name)),
+            Texture = _sprite.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_pheromones.rsi"), name + suffix)),
             TextureScale = new Vector2(2f, 2f),
         };
 
