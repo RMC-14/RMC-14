@@ -81,7 +81,8 @@
 - type: entity
   parent: RMCCondiment
   id: RMCCondimentSugar
-  suffix: Sugar
+  name: sugar
+  description: Tasty space sugar!
   components:
   - type: SolutionContainerManager
     solutions:
@@ -90,10 +91,58 @@
         - ReagentId: Sugar
           Quantity: 50
 
+# Ketchup
+- type: entity
+  parent: RMCCondiment
+  id: RMCCondimentKetchup
+  name: ketchup
+  description: You feel more American already.
+  components:
+  - type: Sprite
+    state: ketchup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Ketchup
+          Quantity: 50
+
+# Soy Sauce 
+- type: entity
+  parent: RMCCondiment
+  id: RMCCondimentSoysauce
+  name: soy sauce
+  description: A salty soy-based flavoring.
+  components:
+  - type: Sprite
+    state: soysauce
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Soysauce
+          Quantity: 50
+
+# Corn Oil 
+- type: entity
+  parent: RMCCondiment
+  id: RMCCondimentCornOil
+  name: corn oil
+  description: A delicious oil used in cooking. Made from corn.
+  components:
+  - type: Sprite
+    state: oliveoil
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: OilOlive
+          Quantity: 50
+
 # Salt
 - type: entity
   parent: RMCCondimentSmall
-  id: RMCCondimentSalt
+  id: RMCCondimentSmallSalt
   name: salt shaker
   description: Salt. From space oceans, presumably.
   components:
@@ -109,7 +158,7 @@
 # Pepper
 - type: entity
   parent: RMCCondimentSmall
-  id: RMCCondimentPepper
+  id: RMCCondimentSmallPepper
   name: pepper mill
   description: Often used to flavor food or make people sneeze.
   components:
