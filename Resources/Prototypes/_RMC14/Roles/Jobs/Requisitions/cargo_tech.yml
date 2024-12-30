@@ -1,9 +1,12 @@
 - type: job
-  parent: CMJobShipBase
+  parent: CMJobBase
   id: CMCargoTech
   name: cm-job-name-cargotech
   description: cm-job-description-cargotech
   playTimeTracker: CMJobCargoTech
+  requirements:
+  - !type:AgeRequirement
+    requiredAge: 20
   startingGear: CMGearCargoTech
   icon: "CMJobIconCargoTech"
   joinNotifyCrew: false

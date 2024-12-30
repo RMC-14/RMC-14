@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobShipBase
+  parent: CMJobBase
   id: CMExecutiveOfficer
   name: cm-job-name-executive-officer
   description: cm-job-description-executive-officer

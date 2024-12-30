@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobShipBase
+  parent: CMJobBase
   id: CMChiefMP
   name: cm-job-name-chief-mp
   description: cm-job-description-chief-mp

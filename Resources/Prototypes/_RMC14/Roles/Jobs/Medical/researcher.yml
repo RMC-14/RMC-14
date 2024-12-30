@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobShipBase
+  parent: CMJobBase
   id: CMResearcher
   name: cm-job-name-researcher
   description: cm-job-description-researcher
@@ -8,6 +8,8 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 18000 # 5 hours
+  - !type:AgeRequirement
+    requiredAge: 20
   startingGear: CMGearResearcher
   icon: "CMJobIconResearcher"
   joinNotifyCrew: false

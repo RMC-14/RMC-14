@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobShipBase
+  parent: CMJobBase
   id: CMSeniorEnlistedAdvisor
   name: cm-job-name-senior-enlisted-advisor
   description: cm-job-description-senior-enlisted-advisor

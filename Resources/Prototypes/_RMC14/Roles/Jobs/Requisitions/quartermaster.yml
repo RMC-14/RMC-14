@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobShipBase
+  parent: CMJobBase
   id: CMQuartermaster
   name: cm-job-name-quartermaster
   description: cm-job-description-quartermaster

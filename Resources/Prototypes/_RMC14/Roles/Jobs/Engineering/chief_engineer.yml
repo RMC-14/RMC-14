@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobShipBase
+  parent: CMJobBase
   id: CMChiefEngineer
   name: cm-job-name-chief-engineer
   description: cm-job-description-chief-engineer

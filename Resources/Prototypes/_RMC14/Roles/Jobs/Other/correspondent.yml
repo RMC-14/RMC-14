@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobShipBase
+  parent: CMJobBase
   id: CMCorrespondent
   name: cm-job-name-correspondent
   description: cm-job-description-correspondent
@@ -8,6 +8,8 @@
   - !type:TotalDepartmentsTimeRequirement
     group: CMDepartmentsHuman
     time: 36000 # 10 hours
+  - !type:AgeRequirement
+    requiredAge: 20
   startingGear: CMGearCorrespondent
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false

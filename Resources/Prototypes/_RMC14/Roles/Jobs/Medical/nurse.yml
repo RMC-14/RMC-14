@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobShipBase
+  parent: CMJobBase
   id: CMNurse
   name: cm-job-name-nurse
   description: cm-job-description-nurse
@@ -8,6 +8,8 @@
   - !type:TotalDepartmentsTimeRequirement
     group: CMDepartmentsHuman
     time: 3600 # 1 hour
+  - !type:AgeRequirement
+    requiredAge: 20
   startingGear: CMGearNurse
   icon: "CMJobIconNurse"
   joinNotifyCrew: false

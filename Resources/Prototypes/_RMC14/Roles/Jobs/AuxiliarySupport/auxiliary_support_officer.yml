@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobShipBase
+  parent: CMJobBase
   id: CMAuxiliarySupportOfficer
   name: cm-job-name-aso
   description: cm-job-description-aso

@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobShipBase
+  parent: CMJobBase
   id: CMCMO
   name: cm-job-name-cmo
   description: cm-job-description-cmo
@@ -8,6 +8,8 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 36000 # 10 hours
+  - !type:AgeRequirement
+    requiredAge: 20
   weight: 5
   startingGear: CMGearCMO
   icon: "CMJobIconCMO"

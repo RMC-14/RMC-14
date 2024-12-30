@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobShipBase
+  parent: CMJobBase
   id: CMPilotGunship
   name: cm-job-name-gunship-pilot
   description: cm-job-description-gunship-pilot
@@ -8,6 +8,8 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsDropship
     time: 7200 # 2 hours
+  - !type:AgeRequirement
+    requiredAge: 20
   startingGear: CMGearPilotGunship
   icon: "CMJobIconPilotGunship"
   joinNotifyCrew: false

@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobShipBase
+  parent: CMJobBase
   id: CMDropshipCrewChief
   name: cm-job-name-dcc
   description: cm-job-description-dcc
@@ -11,6 +11,8 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 3600 # 1 hours
+  - !type:AgeRequirement
+    requiredAge: 20
   startingGear: CMGearDCC
   icon: "CMJobIconDCC"
   joinNotifyCrew: false

@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobShipBase
+  parent: CMJobBase
   id: CMPilotDropship
   name: cm-job-name-dropship-pilot
   description: cm-job-description-dropship-pilot
@@ -8,6 +8,8 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsDropship
     time: 7200 # 2 hours
+  - !type:AgeRequirement
+    requiredAge: 20
   startingGear: CMGearPilotDropship
   icon: "CMJobIconPilotDropship"
   joinNotifyCrew: false

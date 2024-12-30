@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobShipBase
+  parent: CMJobBase
   id: CMMilitaryWarden
   name: cm-job-name-militarywarden
   description: cm-job-description-militarywarden
