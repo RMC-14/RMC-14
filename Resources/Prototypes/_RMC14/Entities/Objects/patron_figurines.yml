@@ -983,3 +983,14 @@
     state: fae_petrovic
   - type: PatronFigurine
     id: 7e9f0b8b-c918-4482-b12f-ae4dd1c43d49
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKasumi
+  name: Kasumi figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: kasumi
+  - type: PatronFigurine
+    id: 8cbef018-4e1b-48f8-b6e2-d830a02695a7
