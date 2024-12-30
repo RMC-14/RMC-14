@@ -32,11 +32,11 @@
     - 0,0,5,1
     whitelist:
       tags:
-      - CMWeaponPistolMK80
+      - RMCMK80
       - CMMagazinePistolMK80
   - type: StorageFill
     contents:
-    - id: CMWeaponPistolMK80
+    - id: RMCMK80
     - id: CMMagazinePistolMK80
       amount: 2
 
@@ -53,13 +53,13 @@
     - 0,0,15,1
     whitelist:
       tags:
-      - CMWeaponPistolM77
+      - RMCWeaponPistolM77
       - CMMagazinePistolM77AP
       - RMCAttachmentRailFlashlight
   - type: StorageFill
     contents:
     - id: RMCAttachmentRailFlashlight
-    - id: CMWeaponPistolM77
+    - id: RMCWeaponPistolM77
     - id: CMMagazinePistolM77AP
       amount: 6
 

@@ -64,10 +64,10 @@
   id: RMCSmartPistolHolster
 
 - type: Tag
-  id: CMWeaponPistolMK80
+  id: RMCMK80
 
 - type: Tag
-  id: CMWeaponPistolM77
+  id: RMCWeaponPistolM77
 
 - type: Tag
   id: RMCWeaponRevolverM44

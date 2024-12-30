@@ -27,7 +27,7 @@
         amount: 20
     - name: Sidearms
       entries:
-      - id: CMWeaponPistolM77
+      - id: RMCWeaponPistolM77
         amount: 50
       - id: RMCWeaponRevolverM44
         amount: 50

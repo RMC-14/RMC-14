@@ -56,7 +56,7 @@
         recommended: true
       - id: CMWeaponPistolM1984
         recommended: true
-      - id: CMWeaponPistolMK80
+      - id: RMCMK80
         recommended: true
     - name: Backpack
       choices: { CMBackpack: 1 }
@@ -235,10 +235,10 @@
     - name: Personal Weapon
       choices: { CMWeapon: 1 }
       entries:
-      - id: CMWeaponPistolMK80  # These all come inside belts; but these don't exist so...
+      - id: RMCMK80  # These all come inside belts; but these don't exist so...
         recommended: true       # TODO RMC14 Pistol Belt Fills
       - id: CMWeaponPistolM1984
-      - id: CMWeaponPistolM77
+      - id: RMCWeaponPistolM77
       - id: RMCWeaponRevolverM44
     - name: Belt
       choices: { CMBelt: 1 }

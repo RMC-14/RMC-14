@@ -180,7 +180,7 @@
 - type: guideEntry
   parent: RMC
   id: RMCMarineLawCOProvisions
-  name: rmc-guide-entry-marine-co-provisions
+  name: rmc-guide-entry-marine-law-co-provisions
   text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawCOProvisions.xml"
   priority: 7
 
