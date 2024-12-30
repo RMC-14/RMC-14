@@ -1,0 +1,163 @@
+# Base
+- type: entity
+  parent: BaseItem
+  id: RMCCondiment
+  name: condiment container
+  description: Just your average condiment container.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/condiments.rsi
+    state: emptycondiment
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+  - type: DrawableSolution
+    solution: food
+  - type: DrainableSolution
+    solution: food
+  - type: Drink
+    solution: food
+  - type: Openable
+    sound:
+      collection: pop
+    closeable: true
+  - type: RefillableSolution
+    solution: food
+  - type: Spillable
+    solution: food
+  - type: SolutionTransfer
+    canChangeTransferAmount: true
+    minTransferAmount: 5
+    maxTransferAmount: 50
+
+- type: entity
+  abstract: true
+  parent: RMCCondiment
+  id: RMCCondimentSmall
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+  - type: SolutionTransfer
+    maxTransferAmount: 20
+
+- type: entity
+  abstract: true
+  parent: RMCCondiment
+  id: RMCCondimentHotsauce
+  name: hotsauce parent object
+  components:
+  - type: Sprite
+    state: icon
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 60
+        reagents:
+        - ReagentId: Hotsauce
+          Quantity: 60
+  - type: SolutionTransfer
+    maxTransferAmount: 60
+
+# Enzyme
+- type: entity
+  parent: RMCCondiment
+  id: RMCCondimentEnzyme
+  name: universal enzyme
+  description: Used in cooking various dishes.
+  components:
+  - type: Sprite
+    state: enzyme
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Enzyme
+          Quantity: 50
+
+# Sugar
+- type: entity
+  parent: RMCCondiment
+  id: RMCCondimentSugar
+  suffix: Sugar
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Sugar
+          Quantity: 50
+
+# Salt
+- type: entity
+  parent: RMCCondimentSmall
+  id: RMCCondimentSalt
+  name: salt shaker
+  description: Salt. From space oceans, presumably.
+  components:
+  - type: Sprite
+    state: saltshakersmall
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: TableSalt
+          Quantity: 20
+
+# Pepper
+- type: entity
+  parent: RMCCondimentSmall
+  id: RMCCondimentPepper
+  name: pepper mill
+  description: Often used to flavor food or make people sneeze.
+  components:
+  - type: Sprite
+    state: peppermillsmall
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Blackpepper
+          Quantity: 50
+
+# Hotsauces
+# Cholula
+- type: entity
+  parent: RMCCondimentHotsauce
+  id: RMCCondimentHotsauceCholula
+  name: Cholula bottle
+  description: A bottle of Weston-Yamada brand Cholula hot sauce.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Sauces/cholula.rsi
+
+- type: entity
+  parent: RMCCondimentHotsauce
+  id: RMCCondimentHotsauceFranks
+  name: Frank's Red Hot bottle
+  description: A bottle of Weston-Yamada brand Frank's Red Hot hot sauce.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Sauces/franks.rsi
+
+- type: entity
+  parent: RMCCondimentHotsauce
+  id: RMCCondimentHotsauceSriracha
+  name: Sriracha bottle
+  description: A bottle of Weston-Yamada brand Sriracha hot sauce.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Sauces/sriracha.rsi
+
+- type: entity
+  parent: RMCCondimentHotsauce
+  id: RMCCondimentHotsauceTabasco
+  name: Tabasco bottle
+  description: A bottle of Weston-Yamada brand Tabasco hot sauce.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Sauces/tabasco.rsi
+
+# TODO RMC14 Franks Macho sauce and Coldsauce from Shivas

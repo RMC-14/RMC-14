@@ -391,9 +391,9 @@
     KitchenKnife: 3
     DrinkGlass: 8
     CMJumpsuitMessTech: 2
-    FoodShakerSalt: 4
-    FoodShakerPepper: 4
-    FoodCondimentBottleEnzyme: 1
+    RMCCondimentSalt: 4
+    RMCCondimentPepper: 4
+    RMCCondimentEnzyme: 1
 
 
 # BODA
@@ -438,9 +438,9 @@
     ReagentContainerFlour: 12
     ReagentContainerSugar: 12
     ReagentContainerOliveoil: 12
-    FoodCondimentBottleEnzyme: 12
-    FoodShakerSalt: 12
-    FoodShakerPepper: 12
+    RMCCondimentEnzyme: 12
+    RMCCondimentSalt: 12
+    RMCCondimentPepper: 12
     # TODO RMC14 Mint 12
     FoodApple: 12
     FoodBanana: 12
