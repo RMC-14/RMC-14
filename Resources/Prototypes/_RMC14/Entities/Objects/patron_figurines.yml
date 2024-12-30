@@ -994,3 +994,14 @@
     state: kasumi
   - type: PatronFigurine
     id: 8cbef018-4e1b-48f8-b6e2-d830a02695a7
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMuz
+  name: Muz figurine
+  description: "\"Just look at these muscles!\""
+  components:
+  - type: Sprite
+    state: muz
+  - type: PatronFigurine
+    id: 9b71f867-1868-4528-9f90-9a9db58a86cf
