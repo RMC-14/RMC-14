@@ -1005,3 +1005,14 @@
     state: muz
   - type: PatronFigurine
     id: 9b71f867-1868-4528-9f90-9a9db58a86cf
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNovaStargazer
+  name: Nova Stargazer figurine
+  description: "Rumor says if you interact with it enough, it might squeak."
+  components:
+  - type: Sprite
+    state: nova_stargazer
+  - type: PatronFigurine
+    id: 421d0be9-1b66-41dd-9077-617a1f3c0d7f
