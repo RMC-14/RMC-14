@@ -107,7 +107,7 @@
       tags:
       - CMCartridge9mmSMG
     proto: CMCartridge9mmSMG
-    capacity: 30
+    capacity: 25
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mac15.rsi
     layers:
