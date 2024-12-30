@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: CMJobShipBase
   id: CMSeniorEnlistedAdvisor
   name: cm-job-name-senior-enlisted-advisor
   description: cm-job-description-senior-enlisted-advisor
@@ -20,6 +20,8 @@
   - !type:DepartmentTimeRequirement
     department: CMCommand
     time: 18000 # 5 hours
+  - !type:AgeRequirement
+    requiredAge: 40
   weight: 5
   startingGear: CMGearSeniorEnlistedAdvisor
   icon: "CMJobIconSEA"

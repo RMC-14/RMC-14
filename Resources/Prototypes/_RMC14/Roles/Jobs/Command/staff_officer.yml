@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobBase
+  parent: CMJobShipBase
   id: CMStaffOfficer
   name: cm-job-name-staff-officer
   description: cm-job-description-staff-officer
@@ -11,6 +11,8 @@
   - !type:TotalDepartmentsTimeRequirement
     group: CMDepartmentsHuman
     time: 54000 # 15 hours
+  - !type:AgeRequirement
+    requiredAge: 25
   weight: 5
   startingGear: CMGearStaffOfficer
   icon: "CMJobIconStaffOfficer"

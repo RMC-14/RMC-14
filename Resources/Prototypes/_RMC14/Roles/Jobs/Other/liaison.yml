@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobBase
+  parent: CMJobShipBase
   id: CMLiaison
   name: cm-job-name-liaison
   description: cm-job-description-liaison

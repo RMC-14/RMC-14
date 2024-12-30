@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobBase
+  parent: CMJobShipBase
   id: CMAuxiliarySupportOfficer
   name: cm-job-name-aso
   description: cm-job-description-aso
@@ -17,6 +17,8 @@
   - !type:DepartmentTimeRequirement
     department: CMAuxiliarySupport
     time: 18000 # 5 hours
+  - !type:AgeRequirement
+    requiredAge: 27
   weight: 5
   startingGear: CMGearASO
   icon: "CMJobIconASO"

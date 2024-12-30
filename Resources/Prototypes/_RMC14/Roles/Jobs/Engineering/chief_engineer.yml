@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: CMJobShipBase
   id: CMChiefEngineer
   name: cm-job-name-chief-engineer
   description: cm-job-description-chief-engineer
@@ -8,6 +8,8 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsEngineering
     time: 36000 # 10 hours
+  - !type:AgeRequirement
+    requiredAge: 27
   weight: 5
   startingGear: CMGearChiefEngineer
   icon: "CMJobIconChiefEngineer"

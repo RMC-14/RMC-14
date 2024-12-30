@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobBase
+  parent: CMJobShipBase
   id: CMPilotDropship
   name: cm-job-name-dropship-pilot
   description: cm-job-description-dropship-pilot

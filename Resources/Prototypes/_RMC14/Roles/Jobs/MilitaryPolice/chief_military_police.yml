@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: CMJobShipBase
   id: CMChiefMP
   name: cm-job-name-chief-mp
   description: cm-job-description-chief-mp
@@ -11,6 +11,8 @@
   - !type:DepartmentTimeRequirement
     department: CMCommand
     time: 18000 # 5 hours
+  - !type:AgeRequirement
+    requiredAge: 27
   weight: 5
   startingGear: CMGearChiefMP
   icon: "CMJobIconChiefMP"

@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: CMJobShipBase
   id: CMQuartermaster
   name: cm-job-name-quartermaster
   description: cm-job-description-quartermaster
@@ -8,6 +8,8 @@
   - !type:DepartmentTimeRequirement
     department: CMRequisitions
     time: 36000 # 10 hours
+  - !type:AgeRequirement
+    requiredAge: 27
   weight: 5
   startingGear: CMGearQuartermaster
   icon: "CMJobIconQuartermaster"

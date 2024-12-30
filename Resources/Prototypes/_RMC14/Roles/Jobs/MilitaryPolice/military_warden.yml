@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: CMJobShipBase
   id: CMMilitaryWarden
   name: cm-job-name-militarywarden
   description: cm-job-description-militarywarden
@@ -8,6 +8,8 @@
   - !type:DepartmentTimeRequirement
     department: CMMilitaryPolice
     time: 36000 # 10 hours
+  - !type:AgeRequirement
+    requiredAge: 27
   weight: 5
   startingGear: CMGearMilitaryWarden
   icon: "CMJobIconMilitaryWarden"

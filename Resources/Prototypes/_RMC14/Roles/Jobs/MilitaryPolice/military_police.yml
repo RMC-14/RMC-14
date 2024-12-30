@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: CMJobShipBase
   id: CMMilitaryPolice
   name: cm-job-name-militarypolice
   description: cm-job-description-militarypolice
@@ -8,6 +8,8 @@
   - !type:DepartmentTimeRequirement
     department: CMSquad
     time: 36000 # 10 hours
+  - !type:AgeRequirement
+    requiredAge: 27
   weight: 5
   startingGear: CMGearMilitaryPolice
   icon: "CMJobIconMilitaryPolice"

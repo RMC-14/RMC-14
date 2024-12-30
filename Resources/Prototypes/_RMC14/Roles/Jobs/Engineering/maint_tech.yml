@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobBase
+  parent: CMJobShipBase
   id: CMMaintTech
   name: cm-job-name-maint-tech
   description: cm-job-description-maint-tech

@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobBase
+  parent: CMJobShipBase
   id: CMCMO
   name: cm-job-name-cmo
   description: cm-job-description-cmo

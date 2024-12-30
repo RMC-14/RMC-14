@@ -10,6 +10,14 @@
   id: CMJobSquadBase
   hasSquad: true
 
+- type: job
+  abstract: true
+  parent: CMJobBase
+  id: CMJobShipBase
+  requirements:
+  - !type:AgeRequirement
+    requiredAge: 20
+
 - type: department
   abstract: true
   id: CMDepartmentBase

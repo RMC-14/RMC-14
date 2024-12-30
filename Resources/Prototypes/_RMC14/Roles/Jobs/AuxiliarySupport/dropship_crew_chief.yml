@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobBase
+  parent: CMJobShipBase
   id: CMDropshipCrewChief
   name: cm-job-name-dcc
   description: cm-job-description-dcc

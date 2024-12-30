@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: CMJobShipBase
   id: CMExecutiveOfficer
   name: cm-job-name-executive-officer
   description: cm-job-description-executive-officer
@@ -8,6 +8,8 @@
   - !type:DepartmentTimeRequirement
     department: CMCommand
     time: 18000 # 5 hours
+  - !type:AgeRequirement
+    requiredAge: 35
   weight: 5
   startingGear: CMGearExecutiveOfficer
   icon: "CMJobIconExecutiveOfficer"

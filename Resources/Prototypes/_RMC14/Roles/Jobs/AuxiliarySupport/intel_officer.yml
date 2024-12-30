@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobBase
+  parent: CMJobShipBase
   id: CMIntelOfficer
   name: cm-job-name-intel
   description: cm-job-description-intel

@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobBase
+  parent: CMJobShipBase
   id: CMCorrespondent
   name: cm-job-name-correspondent
   description: cm-job-description-correspondent

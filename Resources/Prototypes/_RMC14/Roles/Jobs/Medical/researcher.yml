@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobBase
+  parent: CMJobShipBase
   id: CMResearcher
   name: cm-job-name-researcher
   description: cm-job-description-researcher

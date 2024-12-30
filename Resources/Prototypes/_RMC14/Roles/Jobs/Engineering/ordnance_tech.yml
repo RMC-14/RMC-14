@@ -1,6 +1,6 @@
 ﻿- type: job
   id: CMOrdnanceTech
-  parent: CMJobBase
+  parent: CMJobShipBase
   name: cm-job-name-ordnance-tech
   description: cm-job-description-ordnance-tech
   playTimeTracker: CMJobOrdnanceTech

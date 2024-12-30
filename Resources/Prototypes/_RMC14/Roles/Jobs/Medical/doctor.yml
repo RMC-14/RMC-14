@@ -1,5 +1,5 @@
 ﻿- type: job
-  parent: CMJobBase
+  parent: CMJobShipBase
   id: CMDoctor
   name: cm-job-name-doctor
   description: cm-job-description-doctor
