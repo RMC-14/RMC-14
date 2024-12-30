@@ -387,13 +387,18 @@
   id: CMVendorDinnerware
   startingInventory:
     # TODO RMC14 Tray: 8
-    Fork: 6
-    KitchenKnife: 3
+    RMCFork: 6
+    RMCKitchenKnifeChef: 3
     DrinkGlass: 8
     CMJumpsuitMessTech: 2
     RMCCondimentSmallSalt: 4
     RMCCondimentSmallPepper: 4
     RMCCondimentEnzyme: 1
+    RMCCondiment: 8
+    # TODO RMC14 make next items Mess Tech only
+    RMCSpoon: 2
+    RMCRollingPin: 2
+    RMCKitchenKnifeButcher: 2
 
 
 # BODA
