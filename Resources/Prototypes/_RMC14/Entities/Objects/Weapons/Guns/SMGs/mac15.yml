@@ -105,8 +105,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridge9mmSMG
-    proto: CMCartridge9mmSMG
+      - CMCartridge9mmSMGMAC15
+    proto: CMCartridge9mmSMGMAC15
     capacity: 25
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mac15.rsi
