@@ -15,7 +15,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/SMGs/mac15.rsi
   - type: Gun
-    shotsPerBurst: 3
+    shotsPerBurst: 1
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
   - type: RMCSelectiveFire
@@ -23,27 +23,27 @@
     - SemiAuto
     - Burst
     - FullAuto
-    recoilWielded: 1
-    recoilUnwielded: 1
-    scatterWielded: 6
-    scatterUnwielded: 12
-    baseFireRate: 4
+    recoilWielded: 0
+    recoilUnwielded: 0
+    scatterWielded: 12
+    scatterUnwielded: 10
+    baseFireRate: 10
     burstScatterMult: 3
     modifiers:
       Burst:
-        fireDelay: 0.0999
+        fireDelay: 0.0666
         maxScatterModifier: 10
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
-        shotsToMaxScatter: 6
+        shotsToMaxScatter: 8
       FullAuto:
-        maxScatterModifier: 3
+        maxScatterModifier: 16
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
-        shotsToMaxScatter: 4
+        shotsToMaxScatter: 70 
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 1.2
-    accuracyMultiplierUnwielded: 0.8
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 1
   - type: MagazineAmmoProvider
     autoEject: false
     soundAutoEject: null
@@ -89,7 +89,7 @@
       rmc-aslot-rail: 0.032, 0.09
       rmc-aslot-underbarrel: 0.45, -0.31
   - type: GunDamageModifier
-    multiplier: 1.2
+    multiplier: 0.9
 
 - type: entity
   parent: BaseMagazineRifle
