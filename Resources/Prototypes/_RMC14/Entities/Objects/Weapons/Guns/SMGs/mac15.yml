@@ -132,11 +132,7 @@
     - Cartridge
     - CMCartridge9mmSMGMAC15
   - type: CartridgeAmmo
-    proto: CMBullet9mmSMGMAC
-
-- type: entity
-  parent: Bullet10x20mm
-  id: CMBullet9mmSMGMAC #Yes it does use a seperate type of 9mm thats mechanically identical to 10x20mm for some reason
+    proto: Bullet10x20mm
 
 - type: Tag
   id: CMMagazineSMGMAC15
