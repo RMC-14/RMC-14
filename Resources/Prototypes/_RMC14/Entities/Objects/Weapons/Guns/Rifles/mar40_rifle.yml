@@ -1,22 +1,19 @@
 - type: entity
   parent: CMBaseWeaponRifle
-  name: AR10 Assault Rifle
-  id: WeaponRifleAR10
-  description: An earlier version of the more widespread M16 rifle. Considered to be the father of the 20th century rifle. How one of these ended up here is a mystery of its own. It is chambered in 7.62x51mm.
+  name: MAR40 Assault Rifle
+  id: WeaponRifleMAR40
+  description: A cheap, reliable assault rifle chambered in 7.62x39mm. Commonly found in the hands of criminals or mercenaries, or in the hands of the UPP or CLF.
   suffix: Filled
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/ar10.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/mar40.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi # Stock has no effects, no reason to make it an attachment
-      state: ar10_stock
-      offset: -0.5, 0
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/ar10.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/mar40.rsi
   - type: Gun
     shotsPerBurst: 3
     selectedMode: SemiAuto
