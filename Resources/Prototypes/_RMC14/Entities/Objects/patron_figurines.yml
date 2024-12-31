@@ -988,7 +988,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKasumi
   name: Kasumi figurine
-  #description: ""
+  description: "She's doing her part, are you?"
   components:
   - type: Sprite
     state: kasumi
