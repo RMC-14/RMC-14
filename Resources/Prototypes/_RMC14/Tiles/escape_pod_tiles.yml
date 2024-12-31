@@ -3,6 +3,7 @@
   id: RMCFloorEscapePod00
   name: tiles-rmc-escape-pod
   sprite: /Textures/_RMC14/Tiles/escape_pods/floor0_0.png
+  canPlaceTunnel: false
 
 - type: tile
   parent: RMCFloorEscapePod00
