@@ -164,6 +164,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(CMKeyFunctions.CMHolsterSecondary);
             AddButton(CMKeyFunctions.CMHolsterTertiary);
             AddButton(CMKeyFunctions.CMHolsterQuaternary);
+            AddButton(CMKeyFunctions.CMXenoWideSwing);
             AddButton(CMKeyFunctions.RMCPickUpDroppedItems);
 
             AddHeader("ui-options-header-general");
