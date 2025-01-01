@@ -52,13 +52,13 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: RMCMagazineRifleMAR40
+        startingItem: CMMagazineRifleMAR40
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_unload.ogg
         priority: 2
         whitelist:
           tags:
-          - RMCMagazineRifleMAR40
+          - CMMagazineRifleMAR40
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1
     accuracyMultiplierUnwielded: 0.65
@@ -92,20 +92,20 @@
 
 - type: entity
   parent: CMMagazineRifleBase
-  id: RMCMagazineRifleMAR40
+  id: CMMagazineRifleMAR40
   name: "MAR magazine (7.62x39mm)"
   description: A 7.62x39mm magazine for the MAR series of firearms.
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleMAR40
+    - CMMagazineRifleMAR40
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgeRifleMAR40
-    proto: RMCCartridgeRifleMAR40
+      - CMCartridgeRifleMAR40
+    proto: CMCartridgeRifleMAR40
     capacity: 40
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mar40.rsi
@@ -130,8 +130,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgeRifleMAR40
-    proto: RMCCartridgeRifleMAR40
+      - CMCartridgeRifleMAR40
+    proto: CMCartridgeRifleMAR40
     capacity: 60
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mar40e.rsi
@@ -148,14 +148,14 @@
 
 - type: entity
   parent: CMBaseCartridgeRifle
-  id: RMCCartridgeRifleMAR40
+  id: CMCartridgeRifleMAR40
   name: Cartridge (7.62x39mm)
   description: A 7.62x39mm rifle cartridge
   components:
   - type: Tag
     tags:
     - Cartridge
-    - RMCCartridgeRifleMAR40
+    - CMCartridgeRifleMAR40
   - type: CartridgeAmmo
     proto: BulletRifleMAR40
 
@@ -170,7 +170,7 @@
         Piercing: 55
 
 - type: Tag
-  id: RMCMagazineRifleMAR40
+  id: CMMagazineRifleMAR40
 
 - type: Tag
-  id: RMCCartridgeRifleMAR40
+  id: CMCartridgeRifleMAR40
