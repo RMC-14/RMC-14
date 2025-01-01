@@ -1,6 +1,6 @@
 - type: entity
   parent: CMBaseWeaponRifle
-  name: MAR40 Assault Rifle
+  name: MAR-40 Assault Rifle
   id: WeaponRifleMAR40
   description: A cheap, reliable assault rifle chambered in 7.62x39mm. Commonly found in the hands of criminals or mercenaries, or in the hands of the UPP or CLF.
   suffix: Filled
@@ -21,7 +21,7 @@
     - SemiAuto
     - Burst
     soundGunshot:
-      collection: CMAR10Shoot
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mar40.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -45,13 +45,13 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: RMCMagazineRifleAR10
-        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
-        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        startingItem: RMCMagazineRifleMAR40
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_unload.ogg
         priority: 2
         whitelist:
           tags:
-          - RMCMagazineRifleAR10
+          - RMCMagazineRifleMAR40
   - type: GunDamageModifier
     multiplier: 1.4
   - type: RMCWeaponAccuracy
@@ -92,22 +92,22 @@
 
 - type: entity
   parent: CMMagazineRifleBase
-  id: RMCMagazineRifleAR10
-  name: "AR10 Magazine (7.62x51mm)"
+  id: RMCMagazineRifleMAR40
+  name: "MAR magazine (7.62x39mm)"
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleAR10
+    - RMCMagazineRifleMAR40
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgeRifleAR10
-    proto: RMCCartridgeRifleAR10
+      - RMCCartridgeRifleMAR40
+    proto: RMCCartridgeRifleMAR40
     capacity: 20
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/ar10.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mar40.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -117,20 +117,20 @@
 
 - type: entity
   parent: CMBaseCartridgeRifle
-  id: RMCCartridgeRifleAR10
-  name: Cartridge (7.62x51)
-  description: A 7.62x51 rifle cartridge
+  id: RMCCartridgeRifleMAR40
+  name: Cartridge (7.62x39mm)
+  description: A 7.62x39mm rifle cartridge
   components:
   - type: Tag
     tags:
     - Cartridge
-    - RMCCartridgeRifleAR10
+    - RMCCartridgeRifleMAR40
   - type: CartridgeAmmo
-    proto: BulletRifleAR10
+    proto: BulletRifleMAR40
 
 - type: entity
   parent: RMCBaseBullet
-  id: BulletRifleAR10
+  id: BulletRifleMAR40
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -153,7 +153,7 @@
       falloff: 10
 
 - type: Tag
-  id: RMCMagazineRifleAR10
+  id: RMCMagazineRifleMAR40
 
 - type: Tag
   id: RMCCartridgeRifleAR10
