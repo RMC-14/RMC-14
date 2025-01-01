@@ -126,7 +126,7 @@
 - type: entity
   parent: CMMagazineSMGMAC15
   id: CMMagazineSMGMAC15Ext
-  name: "MAC-15 extended magazine (9mm)"
+  name: MAC-15 extended magazine (9mm)
   components:
   - type: BallisticAmmoProvider
     capacity: 50
