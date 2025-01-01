@@ -96,7 +96,7 @@
   parent: BaseMagazineRifle
   id: CMMagazineSMGMAC15
   name: MAC-15 magazine (9mm)
-  description: "A 9mm magazine for the MAC-15."
+  description: A 9mm magazine for the MAC-15.
   components:
   - type: Tag
     tags:
