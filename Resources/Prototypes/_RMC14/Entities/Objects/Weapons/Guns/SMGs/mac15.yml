@@ -58,6 +58,7 @@
         whitelist:
           tags:
           - CMMagazineSMGMAC15
+          - CMMagazineSMGMAC15Ext
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -158,3 +159,6 @@
 
 - type: Tag
   id: CMCartridge9mmSMGMAC15
+
+- type: Tag
+  id: CMMagazineSMGMAC15Ext
