@@ -1,52 +1,43 @@
 - type: entity
   parent: CMWeaponPistolBase
-  id: CMWeaponPistolMK80
-  name: MK80 pistol
-  description: A massive, formidable semi-automatic handgun chambered in 9mm squash-head rounds. A common sight throughout both UN and TSE space, often held by both We-Ya PMC units and corporate executives. This weapon is also undergoing limited field testing as part of the Marines' next generation pistol program. The slide is engraved with the We-Ya logo reminding you who's really in charge.
+  id: CMWeaponPistolM10
+  name: M10 Auto Pistol
+  description: The Armat Battlefield Systems M10 Auto Pistol, a compact, rapid-firing sidearm designed for close-quarters defense. With a 40-round magazine, it emphasizes fire rate over precision, providing effective suppressive fire in short-range engagements.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mk80.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m10.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mk80.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m10.rsi
   - type: MeleeWeapon
     damage:
       types:
         Blunt: 8
   - type: Gun
-    shotsPerBurst: 3
     availableModes:
     - SemiAuto
-    - Burst
+    - FullAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mk80.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m10_auto_pistol.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
     - Burst
     recoilWielded: 1
     recoilUnwielded: 2
-    scatterWielded: 10
-    scatterUnwielded: 10
-    baseFireRate: 2
-    burstScatterMult: 4
-    modifiers:
-      Burst:
-        fireDelay: 0.1665
-        maxScatterModifier: 10
-        useBurstScatterMult: true
-        unwieldedScatterMultiplier: 2
-        shotsToMaxScatter: 6
+    scatterWielded: 14
+    scatterUnwielded: 16
+    baseFireRate: 10
   - type: ItemSlots
     slots:
       gun_magazine:
         name: Magazine
-        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
-        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_unload.ogg
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
         priority: 2
         whitelist:
           tags:
-          - CMMagazinePistolMK80
-        startingItem: CMMagazinePistolMK80
+          - CMMagazinePistolM10
+        startingItem: CMMagazinePistolM10
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -62,12 +53,7 @@
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
-      rmc-aslot-underbarrel:
-        locked: true
-        startingAttachable: RMCAttachmentLaserLightModule
-        whitelist:
-          tags:
-          - RMCAttachmentLaserLightModule
+          - RMCAttachmentMagneticHarness
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.685, 0.125
@@ -76,27 +62,26 @@
   - type: Tag
     tags:
     - Sidearm
-    - RMCMK80
+    - RMCM10
 
 - type: entity
   parent: CMBaseMagazinePistol
-  id: CMMagazinePistolMK80
-  name: MK80 magazine (9mm Squash-Head)
+  id: CMMagazinePistolM10
+  name: M10 HV magazine (10x20mm)
   components:
   - type: Tag
     tags:
     - CMMagazinePistol
-    - CMMagazinePistolMK80
+    - CMMagazinePistolM10
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgePistol9mm
-      - RMCCartridgePistol9mmSquashHead #MK80 is specially chambered to take these rounds, regular pistols cannot.
-    proto: RMCCartridgePistol9mmSquashHead
-    capacity: 18
+      - RMCCartridgePistolM10
+    proto: RMCCartridgePistolM10
+    capacity: 40
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mk80.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m10.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -104,40 +89,19 @@
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
-  id: RMCCartridgePistol9mmSquashHead
-  name: cartridge (9mm Squash-Head)
+  id: RMCCartridgePistolM10
+  name:  M10 HV magazine (10x20mm)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
     tags:
     - Cartridge
-    - RMCCartridgePistol9mmSquashHead
+    - RMCCartridgePistolM10
   - type: CartridgeAmmo
-    proto: RCMBulletPistol9mmSquashHead
-
-- type: entity # todo rmc14 this is missing a lot of effects, shrapnel, debilitate etc
-  parent: CMBulletBase
-  id: RCMBulletPistol9mmSquashHead
-  name: bullet (9mm Squash-Head)
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 45
-  - type: RMCProjectileDamageFalloff
-    thresholds:
-    - range: 22
-      falloff: 9999
-      ignoreModifiers: true
-    - range: 6
-      falloff: 5
-  - type: CMArmorPiercing
-    amount: 30
-  - type: RMCProjectileAccuracy
-    accuracy: 105
+    proto: Bullet10x20mm
 
 - type: Tag
-  id: CMMagazinePistolMK80
+  id: CMMagazinePistolM10
 
 - type: Tag
-  id: RMCCartridgePistol9mmSquashHead
+  id: RMCCartridgePistolM10
