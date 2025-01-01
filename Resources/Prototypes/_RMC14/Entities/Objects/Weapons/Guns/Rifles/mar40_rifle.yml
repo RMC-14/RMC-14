@@ -20,24 +20,31 @@
     availableModes:
     - SemiAuto
     - Burst
+    - FullAuto
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mar40.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
     - Burst
-    recoilUnwielded: 3
-    scatterWielded: 4
+    - FullAuto
+    recoilUnwielded: 4
+    scatterWielded: 8
     scatterUnwielded: 20
     baseFireRate: 2
-    burstScatterMult: 2
+    burstScatterMult: 3
     modifiers:
       Burst:
         fireDelay: 0.1665
         maxScatterModifier: 10
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
-        shotsToMaxScatter: 6
+        shotsToMaxScatter: 4
+      FullAuto:
+        maxScatterModifier: 13
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 15
   - type: MagazineAmmoProvider
     autoEject: false
     soundAutoEject: null
@@ -52,11 +59,9 @@
         whitelist:
           tags:
           - RMCMagazineRifleMAR40
-  - type: GunDamageModifier
-    multiplier: 1.4
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 1.4
-    accuracyMultiplierUnwielded: 0.5
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.65
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -73,17 +78,12 @@
           - RMCAttachmentMagneticHarness
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
-          - RMCAttachmentS84xTelescopicScope
-          - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-underbarrel:
         whitelist:
           tags:
-          - RMCAttachmentAngledGrip
           - RMCAttachmentBipod
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
-          - RMCAttachmentLaserSight      
-          - RMCAttachmentVerticalGrip
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.75, 0.00
@@ -94,6 +94,7 @@
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleMAR40
   name: "MAR magazine (7.62x39mm)"
+  description: A 7.62x39mm magazine for the MAR series of firearms.
   components:
   - type: Tag
     tags:
@@ -105,7 +106,7 @@
       tags:
       - RMCCartridgeRifleMAR40
     proto: RMCCartridgeRifleMAR40
-    capacity: 20
+    capacity: 40
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mar40.rsi
     layers:
@@ -113,6 +114,36 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: entity
+  parent: CMMagazineRifleMAR40
+  id: CMMagazineRifleMAR40Ext
+  name: "MAR magazine (7.62x39mm)"
+  description: A 7.62x39mm magazine for the MAR series of firearms.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CMMagazineRifleMAR40Ext
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifleMAR40
+    proto: RMCCartridgeRifleMAR40
+    capacity: 60
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mar40e.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
   - type: Appearance
 
 - type: entity
@@ -129,28 +160,14 @@
     proto: BulletRifleMAR40
 
 - type: entity
-  parent: RMCBaseBullet
+  parent: BulletRifle10x24mm
   id: BulletRifleMAR40
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 40
-  - type: CMArmorPiercing
-    amount: 5
-  - type: RMCProjectileDamageFalloff
-    thresholds:
-    - range: 24
-      falloff: 9999
-      ignoreModifiers: true
-    - range: 7
-      falloff: 4
-  - type: RMCProjectileAccuracy
-    accuracy: 105
-    thresholds:
-    - range: 16
-      falloff: 10
+        Piercing: 55
 
 - type: Tag
   id: RMCMagazineRifleMAR40
