@@ -59,10 +59,6 @@
       rmc-aslot-barrel: 0.685, 0.125
       rmc-aslot-rail: -0.125, 0.215
       rmc-aslot-underbarrel: 0.284, -0.19
-  - type: Tag
-    tags:
-    - Sidearm
-    - RMCM10
 
 - type: entity
   parent: CMBaseMagazinePistol
@@ -89,9 +85,9 @@
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
+  parent: CMCartridgePistolBase
   id: RMCCartridgePistolM10
   name:  M10 HV magazine (10x20mm)
-  parent: CMCartridgePistolBase
   components:
   - type: Tag
     tags:
