@@ -59,6 +59,7 @@
         whitelist:
           tags:
           - CMMagazineRifleMAR40
+          - CMMagazineRifleMAR40Ext
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1
     accuracyMultiplierUnwielded: 0.65
@@ -93,7 +94,7 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: CMMagazineRifleMAR40
-  name: "MAR magazine (7.62x39mm)"
+  name: MAR magazine (7.62x39mm)
   description: A 7.62x39mm magazine for the MAR series of firearms.
   components:
   - type: Tag
@@ -119,8 +120,8 @@
 - type: entity
   parent: CMMagazineRifleMAR40
   id: CMMagazineRifleMAR40Ext
-  name: "MAR magazine (7.62x39mm)"
-  description: A 7.62x39mm magazine for the MAR series of firearms.
+  name: MAR extended magazine (7.62x39mm)
+  description: A 7.62x39mm MAR magazine, this one carries more rounds than the average magazine.
   components:
   - type: Tag
     tags:
@@ -174,3 +175,6 @@
 
 - type: Tag
   id: CMCartridgeRifleMAR40
+
+- type: Tag
+  id: CMMagazineRifleMAR40Ext
