@@ -20,12 +20,14 @@
     availableModes:
     - SemiAuto
     - Burst
+    - FullAuto
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mar40.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
     - Burst
+    - FullAuto
     recoilUnwielded: 4
     scatterWielded: 8
     scatterUnwielded: 20
@@ -37,7 +39,12 @@
         maxScatterModifier: 10
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
-        shotsToMaxScatter: 6
+        shotsToMaxScatter: 4
+      FullAuto:
+        maxScatterModifier: 13
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 15
   - type: MagazineAmmoProvider
     autoEject: false
     soundAutoEject: null
@@ -52,11 +59,9 @@
         whitelist:
           tags:
           - RMCMagazineRifleMAR40
-  - type: GunDamageModifier
-    multiplier: 1.4
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 1.4
-    accuracyMultiplierUnwielded: 0.5
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.65
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -73,17 +78,12 @@
           - RMCAttachmentMagneticHarness
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
-          - RMCAttachmentS84xTelescopicScope
-          - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-underbarrel:
         whitelist:
           tags:
-          - RMCAttachmentAngledGrip
           - RMCAttachmentBipod
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
-          - RMCAttachmentLaserSight      
-          - RMCAttachmentVerticalGrip
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.75, 0.00
@@ -94,6 +94,7 @@
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleMAR40
   name: "MAR magazine (7.62x39mm)"
+  description: A 7.62x39mm magazine for the MAR series of firearms.
   components:
   - type: Tag
     tags:
@@ -105,7 +106,7 @@
       tags:
       - RMCCartridgeRifleMAR40
     proto: RMCCartridgeRifleMAR40
-    capacity: 20
+    capacity: 40
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mar40.rsi
     layers:
@@ -136,7 +137,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 40
+        Piercing: 55
   - type: CMArmorPiercing
     amount: 5
   - type: RMCProjectileDamageFalloff
