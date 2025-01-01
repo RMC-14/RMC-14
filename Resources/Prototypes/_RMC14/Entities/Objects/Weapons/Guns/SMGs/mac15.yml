@@ -123,6 +123,24 @@
     zeroOnlyOnEmpty: true
   - type: Appearance
 
+- type: entity
+  parent: CMMagazineSMGMAC15
+  id: CMMagazineSMGMAC15Ext
+  name: "MAC-15 extended magazine (9mm)"
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 50
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mac15e.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - CMMagazineSMGMAC15Ext
 
 - type: entity
   parent: CMCartridge9mmSMG
