@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Audio;
+using Robust.Shared.Audio;
 
 namespace Content.Server._RMC14.Trigger;
 
@@ -17,4 +17,13 @@ public sealed partial class OnShootTriggerAmmoTimerComponent : Component
 
     [DataField]
     public SoundSpecifier? BeepSound;
+
+    [DataField]
+    public Enum TimerStart = TimerStartMode.OnShoot;
 }
+
+public enum TimerStartMode : byte
+{
+    OnShoot,
+    OnHitGround
+};
