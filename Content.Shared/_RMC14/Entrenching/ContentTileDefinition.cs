@@ -7,7 +7,7 @@ public sealed partial class ContentTileDefinition
     public bool CanDig;
 
     [DataField]
-    public bool CanBurrow = true;
+    public bool CanPlaceTunnel = true;
 
     [DataField]
     public bool WeedsSpreadable = true;
