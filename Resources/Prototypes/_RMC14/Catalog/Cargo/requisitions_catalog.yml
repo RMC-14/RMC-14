@@ -26,8 +26,8 @@
         crate: RMCCrateBoxMagazineSMGM63AP
       - cost: 2000
         crate: RMCCrateBoxMagazinePistolM1984
-#      - cost: 3000 # TODO RMC14 this crate is completed but needs mags
-#        crate: RMCCrateBoxMagazinePistolM1984AP
+      - cost: 3000
+        crate: RMCCrateBoxMagazinePistolM1984AP
       - cost: 3000
         crate: RMCCrateBoxShellsShotgunSlugs
       - cost: 3000
