@@ -1,8 +1,9 @@
 ﻿- type: entity
-  parent: ShardBase
+  parent: BaseItem
   id: CMShardBase
   abstract: true
   components:
+  - type: Sharp
   - type: Sprite
     layers:
       - sprite: _RMC14/Objects/Materials/shards.rsi
@@ -16,6 +17,33 @@
         medium: ""
         small: ""
         tiny: ""
+  - type: Item
+    sprite: Objects/Materials/Shards/shard.rsi
+    size: Tiny
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 2
+  - type: Tag
+    tags:
+    - Trash
+  - type: SpaceGarbage
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Glass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: MeleeWeapon
+    attackRate: 1
+    damage:
+      types:
+        Slash: 3.5
 
 - type: entity
   parent: CMShardBase
