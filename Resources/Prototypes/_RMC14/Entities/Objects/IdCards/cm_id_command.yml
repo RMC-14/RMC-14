@@ -48,3 +48,28 @@
     - CMAccessHighCommand
     - CMAccessXenoQueen
     - CMAccessXeno
+
+- type: entity
+  parent: IDCardStandard # Is more-or-less a copy of the admin ID due to being for High-Ranked Provost-Marshal types that should be only used by admins.
+  id: CMIDCardProvostSectorMarshal
+  name: Provost Sector Marshal ID card
+  suffix: Admin
+  description: A gold-plated holo-badge reserved for those exclusively above your rank, this one bares the symbol of the Provost Marshal's office.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/gold_id.rsi
+    state: gold
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/gold_id.rsi
+  - type: Item
+    heldPrefix: green
+  - type: Access
+    groups:
+    - ShipMasterAccess
+    - Colony
+    - Corp
+    - RMCWeYa
+    tags:
+    - CMAccessHighCommand
