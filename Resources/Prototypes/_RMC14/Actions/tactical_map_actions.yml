@@ -23,7 +23,7 @@
   - type: InstantAction
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: toggle_queen_zoom
+      state: xeno_tacmap
 
 - type: entity
   parent: RMCActionOpenTacticalMap
