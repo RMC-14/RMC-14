@@ -182,7 +182,7 @@ public sealed class RMCRepairableSystem : EntitySystem
 
         var repairValue = GetRepairValue(repairable, handsComp, nailgunComp, out EntityUid? held);
 
-        if (held == null || repairValue >= FixedPoint2.Zero)
+        if (held == null || repairValue <= FixedPoint2.Zero)
         {
             _popup.PopupClient(Loc.GetString("rmc-nailgun-no-material-message",  ("target", repairable)), user, PopupType.SmallCaution);
             return;
@@ -236,7 +236,7 @@ public sealed class RMCRepairableSystem : EntitySystem
             return;
 
         var repairValue = GetRepairValue(repairable, handsComp, nailgunComponent, out EntityUid? held);
-        if (held == null || repairValue >= FixedPoint2.Zero)
+        if (held == null || repairValue <= FixedPoint2.Zero)
         {
             _popup.PopupClient(Loc.GetString("rmc-nailgun-lost-stack"), user, PopupType.SmallCaution);
             return;
