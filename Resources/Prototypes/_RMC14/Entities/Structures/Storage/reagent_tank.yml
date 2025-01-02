@@ -86,3 +86,18 @@
   - type: Explosive
     explosionType: Default
     totalIntensity: 60
+  - type: ReagentTank
+    tankType: Fuel
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:SolutionExplosionBehavior
+        solution: tank
+  - type: DamageOnToolInteract
+    tools: Welding
+    weldingDamage:
+      types:
+        Heat: 100
