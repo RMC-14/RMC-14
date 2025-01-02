@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   save: false
   parent: BaseMobSpecies
   id: CMBaseMobSpeciesOrganic
@@ -221,6 +221,7 @@
     factions:
     - UNMC
   - type: RMCNightVisionVisible
+    priority: 1
   - type: CrashLandable
   - type: StunShakeable
   - type: StunShakeableUser
