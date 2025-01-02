@@ -13,7 +13,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/desert.rsi
   - type: Gun
-    fireRate: 0.8
+    fireRate: 0.6896
     shotsPerBurst: 1
     selectedMode: SemiAuto
     availableModes:
@@ -27,7 +27,7 @@
     recoilUnwielded: 5
     scatterWielded: 6
     scatterUnwielded: 20
-    baseFireRate: 0.8
+    baseFireRate: 0.6896
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.1
     accuracyMultiplierUnwielded: 0.5

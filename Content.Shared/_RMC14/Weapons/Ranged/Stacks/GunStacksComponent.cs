@@ -15,16 +15,16 @@ public sealed partial class GunStacksComponent : Component
     public int MaxAP = 50;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 DamageIncrease = FixedPoint2.New(0.5);
+    public FixedPoint2 DamageIncrease = FixedPoint2.New(0.2);
 
     [DataField, AutoNetworkedField]
-    public float SetFireRate = 1.4285f;
+    public float SetFireRate = 0.7692f;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastHitAt;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan StacksExpire = TimeSpan.FromSeconds(4);
+    public TimeSpan StacksExpire = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
     public int Hits;
