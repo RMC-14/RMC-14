@@ -1,37 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed Queen/SL trackers not accounting for the player's camera rotation.
-      Having your camera rotated will now change where the tracker points.
-    type: Fix
-  id: 655
-  time: '2024-09-06T09:04:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3954
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the combat technician's equipment rack missing the option to buy
-      a mortar operator belt.
-    type: Fix
-  id: 656
-  time: '2024-09-06T09:09:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3955
-- author: DrSmugleaf
-  changes:
-  - message: Fixed larva not healing off weeds. They will now heal regardless of whether
-      or not they are on weeds.
-    type: Fix
-  id: 657
-  time: '2024-09-06T09:20:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3956
-- author: DrSmugleaf
-  changes:
-  - message: Fixed security cameras on Savannah not having names.
-    type: Fix
-  id: 658
-  time: '2024-09-06T10:22:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3957
-- author: DrSmugleaf
-  changes:
   - message: Fixed xenonid eggs being able to be placed under vendors, lockers, crates,
       chairs, etc.
     type: Fix
@@ -4998,5 +4967,43 @@
   id: 1154
   time: '2024-12-25T06:16:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5228
+- author: Rainbeon
+  changes:
+  - message: Taking a Xeno ghost role that previously belonged to someone else no
+      longer causes your ghost to commit identity theft.
+    type: Fix
+  - message: Fixed the Queen's ghost staying immature forever. It will now update
+      correctly to change into the playtime rank when she matures.
+    type: Fix
+  id: 1155
+  time: '2024-12-26T10:50:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5233
+- author: DrSmugleaf
+  changes:
+  - message: Added a search bar to the player list for medals and jellies.
+    type: Tweak
+  id: 1156
+  time: '2024-12-26T10:50:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5230
+- author: Vermidia
+  changes:
+  - message: Fixed carrier parasite overlays and parasite mask sprites. The trap sprite
+      for parasites has been changed aswell.
+    type: Fix
+  - message: Xenonids that can carry eggs and parasites now have inhand sprites for
+      them.
+    type: Add
+  id: 1157
+  time: '2024-12-26T23:54:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5238
+- author: Vermidia
+  changes:
+  - message: 'Fixed Healer salve healing over 10 seconds: It now heals over 5 seconds.'
+    type: Fix
+  - message: Fixed Healer salve cooldown being 1 second instead of 0.5 seconds.
+    type: Fix
+  id: 1158
+  time: '2024-12-26T23:55:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5232
 Name: RMC14
 Order: -1

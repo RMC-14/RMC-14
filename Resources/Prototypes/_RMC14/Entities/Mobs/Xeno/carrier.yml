@@ -26,6 +26,10 @@
       visible: false
     - map: [ "enum.ParasiteOverlayLayers.Back" ]
       visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
   - type: MobState
     allowedStates:
     - Alive
@@ -120,3 +124,5 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: carrier
+  - type: XenoInhands
+    prefix: carrier
