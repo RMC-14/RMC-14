@@ -11,7 +11,7 @@
   cost: 2
   storage:
     back:
-    - ClothingEyesEyepatch
+    - RMCEyepatch
 
 - type: loadout
   id: GlassesRPGRMC

@@ -101,7 +101,8 @@
       - id: RMCSunglasses
         amount: 1
 #      - id: Prescription Sunglasses
-#      - id: Prescription Glasses
+      - id: RMCHipsterGlasses
+        amount: 1
     - name: Gloves
       entries:
       - id: CMHandsBrown #Placeholder
