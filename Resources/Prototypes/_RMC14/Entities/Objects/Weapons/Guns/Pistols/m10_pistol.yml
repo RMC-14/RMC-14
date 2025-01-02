@@ -21,7 +21,7 @@
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
-    - Burst
+    - FullAuto
     recoilWielded: 1
     recoilUnwielded: 2
     scatterWielded: 14
