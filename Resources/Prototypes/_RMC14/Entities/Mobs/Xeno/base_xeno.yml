@@ -321,6 +321,7 @@
     canDisarm: true
     disarmFailChance: 0
   - type: MeleeWeapon
+    autoAttack: true
     widePrimary: true
     altDisarm: true
     angle: 60
