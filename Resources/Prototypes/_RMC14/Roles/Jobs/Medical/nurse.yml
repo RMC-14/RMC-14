@@ -40,7 +40,6 @@
     neck: RMCNurseArmband
     shoes: ClothingShoesColorWhite
     id: CMIDCardNurse
-    ears: CMHeadsetMedical # TODO RMC14 Medical Vender
 
 - type: startingGear
   id: CMGearNurseEquipped
