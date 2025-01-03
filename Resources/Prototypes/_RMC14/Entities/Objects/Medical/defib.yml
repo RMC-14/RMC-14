@@ -22,7 +22,7 @@
   - type: Item
     size: Normal
     sprite: _RMC14/Objects/Medical/defib.rsi
-    prefix: defib
+    heldPrefix: defib
   - type: Speech
     speechVerb: Robotic
   - type: ItemToggle

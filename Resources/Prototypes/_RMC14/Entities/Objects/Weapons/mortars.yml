@@ -38,7 +38,6 @@
     - Unanchorable
   - type: Item
     size: Huge
-    prefix: mortar
   - type: Corrodible
     isCorrodible: false
   - type: Mortar
