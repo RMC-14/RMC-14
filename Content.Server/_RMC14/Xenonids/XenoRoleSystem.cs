@@ -6,6 +6,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Maturing;
+using Content.Shared._RMC14.Xenonids.Name;
 using Content.Shared._RMC14.Xenonids.Rank;
 using Content.Shared.GameTicking;
 using Content.Shared.NameModifier.EntitySystems;
@@ -51,7 +52,7 @@ public sealed class XenoRoleSystem : EntitySystem
 
         SubscribeLocalEvent<ActorComponent, HiveChangedEvent>(OnHiveChanged);
 
-        SubscribeLocalEvent<XenoRankComponent, RefreshNameModifiersEvent>(OnRankRefreshName);
+        SubscribeLocalEvent<XenoRankComponent, RefreshNameModifiersEvent>(OnRankRefreshName, before: new[] { typeof(SharedXenoNameSystem) });
 
         Subs.CVar(_config, RMCCVars.RMCPlaytimeBronzeMedalTimeHours, v => _rankTwoTime = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCPlaytimeSilverMedalTimeHours, v => _rankThreeTime = TimeSpan.FromHours(v), true);

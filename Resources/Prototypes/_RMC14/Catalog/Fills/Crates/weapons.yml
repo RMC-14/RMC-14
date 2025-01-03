@@ -5,7 +5,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: WeaponRifleM54CCamo
+      - id: WeaponRifleM54C
         amount: 2
       - id: CMMagazineRifleM54C
         amount: 2
@@ -49,7 +49,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCSGOEquipmentCaseCamo
+    - id: CMSmartGunOperatorEquipmentCase
       amount: 1
 
 - type: entity

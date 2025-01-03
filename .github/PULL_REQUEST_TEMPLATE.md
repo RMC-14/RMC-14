@@ -18,10 +18,7 @@ Small fixes/refactors are exempt. Media may be used in SS14 progress reports wit
 - [ ] I have read and am following the [Pull Request and Changelog Guidelines](https://docs.spacestation14.com/en/general-development/codebase-info/pull-request-guidelines.html).
 - [ ] I have added media to this PR or it does not require an ingame showcase.
 <!-- You should understand that not following the above may get your PR closed at maintainer’s discretion -->
-
-## Breaking changes
-<!-- List any breaking changes, including namespaces, public class/method/field changes, prototype renames; and provide instructions for fixing them.
-This will be posted in #codebase-changes. -->
+- [ ] By submitting this code and/or assets, I confirm that I either own them or have provided the correct necessary licenses to use and distribute them. I agree to be fully responsible for any legal claims or issues arising from the use of these materials.
 
 **Changelog**
 <!-- Add a Changelog entry to make players aware of new features or changes that could affect gameplay.

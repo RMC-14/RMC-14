@@ -1,10 +1,11 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoPraetorianBase
   name: Praetorian
   description: A huge, looming beast of an alien.
@@ -37,7 +38,7 @@
     - ActionXenoSprayAcidPraetorian
     - ActionXenoDevolve
     tier: 3
-    hudOffset: 0,0.16
+    hudOffset: -0.15,0.16
     unlockAt: 900 # 15 minutes
   - type: XenoHeavy
   - type: XenoDevolve
@@ -172,6 +173,9 @@
   - type: XenoSpit
     projectileId: XenoSpitProjectilePraetorianWarden
   - type: XenoEnergy
+    alert: XenoEnergyWarden
+    popupGain: rmc-xeno-internal-health-increase-user
+    popupNotEnough: rmc-xeno-not-enough-internal-health
   - type: XenoRetrieve
   - type: XenoAid
   - type: XenoSprayAcid

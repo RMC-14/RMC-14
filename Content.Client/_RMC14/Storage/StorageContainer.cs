@@ -1,4 +1,5 @@
-﻿using Robust.Client.Graphics;
+﻿using Content.Shared.Storage;
+using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 
@@ -8,6 +9,9 @@ namespace Content.Client.UserInterface.Systems.Storage.Controls;
 
 public sealed partial class StorageContainer
 {
+    private (Box2i Grid, EntityUid[] Contained, Dictionary<EntityUid, ItemStorageLocation> Stored) _lastUpdate =
+        (default, Array.Empty<EntityUid>(), new Dictionary<EntityUid, ItemStorageLocation>());
+
     private PanelContainer? WrapBorders(Control control, int? fixedSizeX, int x, int right)
     {
         if (fixedSizeX != null &&

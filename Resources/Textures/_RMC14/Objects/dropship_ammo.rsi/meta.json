@@ -1,17 +1,236 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9d6826cfca155f055d1616ed287aaebe9196aae9/icons/obj/structures/props/almayer_props.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/4aff6b0a6fbc1b5f31ba7575a70dc39838e1970f/icons/obj/structures/props/dropship_ammo.dmi",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "30mm_crate"
+      "name": "30mm_crate_10"
     },
     {
-      "name": "30mm_crate_hv"
+      "name": "30mm_crate_0"
+    },
+    {
+      "name": "30mm_crate_1"
+    },
+    {
+      "name": "30mm_crate_2"
+    },
+    {
+      "name": "30mm_crate_3"
+    },
+    {
+      "name": "30mm_crate_4"
+    },
+    {
+      "name": "30mm_crate_5"
+    },
+    {
+      "name": "30mm_crate_6"
+    },
+    {
+      "name": "30mm_crate_7"
+    },
+    {
+      "name": "30mm_crate_8"
+    },
+    {
+      "name": "30mm_crate_9"
+    },
+    {
+      "name": "minirocket_6"
+    },
+    {
+      "name": "minirocket_0"
+    },
+    {
+      "name": "minirocket_1"
+    },
+    {
+      "name": "minirocket_2"
+    },
+    {
+      "name": "minirocket_3"
+    },
+    {
+      "name": "minirocket_4"
+    },
+    {
+      "name": "minirocket_5"
+    },
+    {
+      "name": "30mm_crate_hv_10"
+    },
+    {
+      "name": "30mm_crate_hv_0"
+    },
+    {
+      "name": "30mm_crate_hv_1"
+    },
+    {
+      "name": "30mm_crate_hv_2"
+    },
+    {
+      "name": "30mm_crate_hv_3"
+    },
+    {
+      "name": "30mm_crate_hv_4"
+    },
+    {
+      "name": "30mm_crate_hv_5"
+    },
+    {
+      "name": "30mm_crate_hv_6"
+    },
+    {
+      "name": "30mm_crate_hv_7"
+    },
+    {
+      "name": "30mm_crate_hv_8"
+    },
+    {
+      "name": "30mm_crate_hv_9"
+    },
+    {
+      "name": "laser_battery_10",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "laser_battery_0"
+    },
+    {
+      "name": "laser_battery_1",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "laser_battery_2",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "laser_battery_3",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "laser_battery_4",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "laser_battery_5",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "laser_battery_6",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "laser_battery_7",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "laser_battery_8",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "laser_battery_9",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "minirocket_flr_6"
+    },
+    {
+      "name": "minirocket_flr_0"
+    },
+    {
+      "name": "minirocket_flr_1"
+    },
+    {
+      "name": "minirocket_flr_2"
+    },
+    {
+      "name": "minirocket_flr_3"
+    },
+    {
+      "name": "minirocket_flr_4"
+    },
+    {
+      "name": "minirocket_flr_5"
+    },
+    {
+      "name": "minirocket_inc_6"
+    },
+    {
+      "name": "minirocket_inc_0"
+    },
+    {
+      "name": "minirocket_inc_1"
+    },
+    {
+      "name": "minirocket_inc_2"
+    },
+    {
+      "name": "minirocket_inc_3"
+    },
+    {
+      "name": "minirocket_inc_4"
+    },
+    {
+      "name": "minirocket_inc_5"
+    },
+    {
+      "name": "launchable_sentry"
     }
   ]
 }

@@ -25,7 +25,7 @@
 
 # Iron Bear
 - type: entity
-  parent: RMCArmorM4PMC
+  parent: CMArmorM4PMC
   id: CMArmorIronBear
   name: H1 Iron Bears vest
   description: A protective vest worn by Iron Bears mercenaries.
@@ -42,7 +42,7 @@
 
 # Dutch's Dozen
 - type: entity
-  parent: RMCArmorM4PMC
+  parent: CMArmorM4PMC
   id: CMArmorDutchVest
   name: D2 armored vest
   description: A protective vest worn by some seriously experienced mercs.
@@ -66,7 +66,7 @@
 # TODO: remove shoulder light from this
 # TODO: implement storage whitelist for this
 - type: entity
-  parent: RMCArmorM4PMC
+  parent: CMArmorM4PMC
   id: CMArmorDutchJacket
   name: safari jacket
   description: A tailored hunting jacket, cunningly lined with segmented armor plates. Sometimes the game shoots back.
@@ -193,7 +193,7 @@
 # Mercenaries
 # TODO: implement storage whitelist for this
 - type: entity
-  parent: [RMCAllowSuitStorageClothingArmorRoyal, RMCArmorM4PMC]
+  parent: [RMCAllowSuitStorageClothingArmorRoyal, CMArmorM4PMC]
   id: RMCArmorMercenary
   name: mercenary K12 ceramic plated armor
   description: A set of grey, heavy ceramic armor with dark blue highlights. It is the standard uniform of an unknown mercenary group working in the sector.
@@ -268,7 +268,7 @@
 
 # Riot armor
 - type: entity
-  parent: RMCArmorM4PMC
+  parent: CMArmorM4PMC
   id: RMCArmorPMCRiot
   name: UN-M1 riot armor
   description: Based on the M3 pattern employed by the UNMC, the UN-M1 body armor is employed by security, riot control and union-busting teams. While robust against melee and bullet attacks, it critically lacks coverage of the legs and arms.

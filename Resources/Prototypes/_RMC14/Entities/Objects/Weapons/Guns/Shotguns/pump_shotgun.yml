@@ -61,62 +61,10 @@
       rmc-aslot-rail: -0.025, 0.125
       rmc-aslot-stock: -0.375, -0.029
       rmc-aslot-underbarrel: 0.25, -0.31
-
-#camo variants
-- type: entity
-  parent: WeaponShotgunM42A2
-  id: WeaponShotgunM42A2Camo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: WeaponShotgunM42A2Jungle
-      Desert: WeaponShotgunM42A2
-      Snow: WeaponShotgunM42A2Snow
-      Classic: WeaponShotgunM42A2Classic
-      Urban: WeaponShotgunM42A2Urban
-
-- type: entity
-  parent: WeaponShotgunM42A2  
-  id: WeaponShotgunM42A2Jungle
-  suffix: Jungle
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/jungle.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/jungle.rsi
-
-- type: entity
-  parent: WeaponShotgunM42A2  
-  id: WeaponShotgunM42A2Snow
-  suffix: Snow
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/snow.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/snow.rsi
-
-- type: entity
-  parent: WeaponShotgunM42A2  
-  id: WeaponShotgunM42A2Classic
-  suffix: Classic
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/classic.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/classic.rsi
-
-- type: entity
-  parent: WeaponShotgunM42A2  
-  id: WeaponShotgunM42A2Urban
-  suffix: Urban
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/urban.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/urban.rsi
-
-
-
-
-
+      Jungle: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/urban.rsi

@@ -16,7 +16,6 @@
     - state: icon
       map: ["foldedLayer"]
       visible: false
-  - type: IngestionBlocker
 
 - type: entity
   parent: RMCBaseScarfMask

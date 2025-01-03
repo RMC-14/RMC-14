@@ -40,6 +40,7 @@
   - type: GunDualWielding
     weaponGroup: Submachinegun
   - type: GunPointBlank
+  - type: GunGroupPenalty
 
 - type: entity
   parent: BaseCartridgeCaselessRifle

@@ -153,6 +153,9 @@
           False: { state: stretcher_box }
   - type: Corrodible
   - type: MedevacStretcher
+  - type: Tag
+    tags:
+    - CMRollerBed
 
 - type: entity
   parent: RMCMedevacStretcher

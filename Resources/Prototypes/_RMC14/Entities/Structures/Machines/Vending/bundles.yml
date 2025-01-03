@@ -10,9 +10,9 @@
     state: generic_headset
   - type: CMVendorBundle
     bundle:
-    - ArmorHelmetM10Camo
+    - ArmorHelmetM10
     - CMVendorHeadsetSquad
-    - JumpsuitMarineCamo
+    - JumpsuitMarine
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -24,9 +24,9 @@
   components:
   - type: CMVendorBundle
     bundle:
-    - RMCArmorHelmetM12Camo
+    - CMArmorHelmetM12
     - CMVendorHeadsetSquadFTL
-    - JumpsuitMarineCamo
+    - JumpsuitMarine
     - CMHandsInsulated
     - CMBootsBlackFilled
 
@@ -38,9 +38,9 @@
   components:
   - type: CMVendorBundle
     bundle:
-    - RMCArmorHelmetM10MedicCamo # TODO RMC14 M4
+    - CMArmorHelmetM10Medic # TODO RMC14 M4
     - CMVendorHeadsetSquadCorpsman
-    - CMJumpsuitMarineMedicCamo
+    - CMJumpsuitMarineMedic
     - CMBootsBlackFilled
 
 - type: entity
@@ -75,9 +75,9 @@
   components:
   - type: CMVendorBundle
     bundle:
-    - RMCArmorHelmetM10TechCamo # TODO RMC14 M4
+    - CMArmorHelmetM10Tech # TODO RMC14 M4
     - CMVendorHeadsetSquadComTech
-    - CMJumpsuitMarineEngineerCamo
+    - CMJumpsuitMarineEngineer
     - CMHandsInsulated
     - CMBootsBlackFilled
 
@@ -109,9 +109,9 @@
   components:
   - type: CMVendorBundle
     bundle:
-    - RMCArmorHelmetM11Camo # TODO RMC14 M4
+    - CMArmorHelmetM11 # TODO RMC14 M4
     - CMVendorHeadsetSquadLeader
-    - JumpsuitMarineCamo
+    - JumpsuitMarine
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -124,7 +124,7 @@
   - type: CMVendorBundle
     bundle:
     - CMVendorHeadsetSquad
-    - JumpsuitMarineCamo
+    - JumpsuitMarine
     - CMHandsBlackMarine
     - CMBootsBlackFilled
 
@@ -141,7 +141,7 @@
     bundle:
     - CMGlassesSecurity
     - CMBeltSecurityMPFilled
-    - RMCArmorHelmetM10MPCamo
+    - CMArmorHelmetM10MP
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

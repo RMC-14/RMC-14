@@ -150,7 +150,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineSmartGunCamo
+    - id: RMCMagazineSmartGun
       amount: 2
 
 # Smart Pistol
@@ -171,7 +171,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazineRifleM54CE2Camo
+    - id: CMMagazineRifleM54CE2
       amount: 2
 
 # M44 Revolver
