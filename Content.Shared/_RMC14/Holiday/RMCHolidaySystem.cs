@@ -1,7 +1,8 @@
-﻿namespace Content.Shared._RMC14.Holiday;
+namespace Content.Shared._RMC14.Holiday;
 
 public abstract class SharedRMCHolidaySystem : EntitySystem
 {
+
     public List<string> GetActiveHolidays()
     {
         var query = EntityQueryEnumerator<RMCHolidayTrackerComponent>();
