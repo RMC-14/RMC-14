@@ -211,7 +211,7 @@
     - range: 6
       falloff: 10
 
-# TODO RMC14 84mm WP
+# RMC14 84mm WP
 
 - type: entity
   id: RMCRocket84mmWhitePhosphorous
@@ -231,7 +231,6 @@
     state: m5_84mm_wp
     suffix: false
   - type: IgnorePredictionHide
-
 
 - type: entity
   id: RMCProjectileRocket84mmWhitePhosphorous
@@ -279,3 +278,6 @@
   - type: TileFireOnTrigger
     spawn: RMCTileFireBlue
     range: 3
+  - type: SpawnOnTerminate
+    spawn: RMCSmoke
+    projectileAdjust: false
