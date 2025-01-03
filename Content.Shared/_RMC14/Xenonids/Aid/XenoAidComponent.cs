@@ -10,9 +10,6 @@ namespace Content.Shared._RMC14.Xenonids.Aid;
 public sealed partial class XenoAidComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public XenoAidMode Mode = XenoAidMode.Healing;
-
-    [DataField, AutoNetworkedField]
     public FixedPoint2 Heal = 150;
 
     [DataField, AutoNetworkedField]
@@ -32,4 +29,7 @@ public sealed partial class XenoAidComponent : Component
 
     [DataField, AutoNetworkedField]
     public ProtoId<StatusEffectPrototype>[] AilmentsRemove = ["KnockedDown", "Stun", "SlowedDown"];
+
+    [DataField]
+    public ComponentRegistry ComponentsRemove;
 }
