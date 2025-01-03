@@ -79,6 +79,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private EntityQuery<XenoWeedsComponent> _xenoWeedsQuery;
 
     private const string XenoStructuresAnimation = "RMCEffect";
+    private const string DefaultXenoStructuresAnimation = "RMCEffectXenoBuildAlert";
 
     private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
@@ -264,13 +265,21 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
 
         var effectID = XenoStructuresAnimation + choice;
+
         var coordinates = GetNetCoordinates(args.Target);
         var entityCoords = GetCoordinates(coordinates);
         EntityUid? effect = null;
 
-        if (_prototype.TryIndex(effectID, out var effectProto) && _net.IsServer)
+        if (_net.IsServer)
         {
-            effect = Spawn(effectID, entityCoords);
+            if (_prototype.TryIndex(effectID, out var _))
+            {
+                effect = Spawn(effectID, entityCoords);
+            }
+            else
+            {
+                effect = Spawn(DefaultXenoStructuresAnimation, entityCoords);
+            }
             RaiseNetworkEvent(new XenoConstructionAnimationStartEvent(GetNetEntity(effect.Value), GetNetEntity(xeno)), Filter.PvsExcept(effect.Value));
         }
 
@@ -680,10 +689,31 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         if (checkStructureSelected &&
             buildChoice is { } choice &&
-            _prototype.TryIndex(choice, out var choiceProto) &&
-            choiceProto.HasComponent<XenoConstructionRequiresSupportComponent>(_compFactory))
+            _prototype.TryIndex(choice, out var choiceProto))
         {
-            if (!IsSupported((gridId, grid), target))
+            if (xeno.Comp.XenoStructureSlots.TryGetValue(buildChoice.Value, out var xenoLimit))
+            {
+                var xenoLimitedStructures = EntityQueryEnumerator<XenoConstructLimitedComponent>();
+                var limitedCount = 0;
+                while (xenoLimitedStructures.MoveNext(out var limitedStructure, out var limitedStructureComp))
+                {
+                    if (limitedStructureComp.Builder == xeno &&
+                        Prototype(limitedStructure) is EntityPrototype limitedStructureProto &&
+                        limitedStructureProto.ID == buildChoice)
+                    {
+                        limitedCount++;
+                    }
+                }
+
+                if (xenoLimit <= limitedCount)
+                {
+                    _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-limited", ("choice", choiceProto.Name)), target, xeno);
+                    return false;
+                }
+            }
+
+            if (choiceProto.HasComponent<XenoConstructionRequiresSupportComponent>(_compFactory) &&
+                !IsSupported((gridId, grid), target))
             {
                 _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-requires-support", ("choice", choiceProto.Name)), target, xeno);
                 return false;

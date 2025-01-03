@@ -1,4 +1,4 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
@@ -45,4 +45,7 @@ public sealed partial class XenoConstructionComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool CanUpgrade;
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<EntProtoId, int> XenoStructureSlots = new() { };
 }

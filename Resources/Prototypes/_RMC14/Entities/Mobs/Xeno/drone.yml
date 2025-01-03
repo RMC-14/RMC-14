@@ -121,6 +121,9 @@
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
+    - XenoResinSpike
+    XenoStructureSlots:
+    XenoResinSpike: 3
 
 - type: entity
   parent: CMXenoDroneBase
