@@ -21,7 +21,8 @@
           False: { visible: false }
   - type: Item
     size: Normal
-    sprite: Objects/Specific/Medical/defib.rsi
+    sprite: _RMC14/Objects/Medical/defib.rsi
+    heldPrefix: defib
   - type: Speech
     speechVerb: Robotic
   - type: ItemToggle

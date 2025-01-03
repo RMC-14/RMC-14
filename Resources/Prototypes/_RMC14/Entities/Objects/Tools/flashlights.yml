@@ -9,7 +9,6 @@
       types:
         Blunt: 0
   - type: HandheldLight
-    addPrefix: false
     blinkingBehaviourId: blinking
     radiatingBehaviourId: radiating
   - type: LightBehaviour
@@ -134,6 +133,8 @@
   name: penlight
   description: A pen-sized light, used by medical staff.
   components:
+  - type: HandheldLight
+    addPrefix: false
   - type: Sprite
     sprite: _RMC14/Objects/Tools/Light/penlight.rsi
     layers:
@@ -162,6 +163,8 @@
   name: desk lamp
   description: A desk lamp with an adjustable mount.
   components:
+  - type: HandheldLight
+    addPrefix: false
   - type: Sprite
     sprite: _RMC14/Objects/Tools/Light/lamp.rsi
     layers:

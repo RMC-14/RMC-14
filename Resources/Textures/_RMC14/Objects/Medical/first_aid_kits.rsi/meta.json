@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/ca94d2e8715b73103fa9f213be53d343359b4107/icons/obj/items/storage.dmi, https://github.com/cmss13-devs/cmss13/blob/bec6653d487a49aa2b5a8e0c97bed9612f620211/icons/mob/humans/onmob/items_righthand_0.dmi, https://github.com/cmss13-devs/cmss13/blob/bec6653d487a49aa2b5a8e0c97bed9612f620211/icons/mob/humans/onmob/items_lefthand_0.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/ca94d2e8715b73103fa9f213be53d343359b4107/icons/obj/items/storage.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_lefthand.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -83,6 +83,30 @@
     },
     {
       "name": "firefirstaid-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "purplefirstaid-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "purplefirstaid-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "radfirstaid-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "radfirstaid-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "beserk-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "beserk-inhand-right",
       "directions": 4
     }
   ]

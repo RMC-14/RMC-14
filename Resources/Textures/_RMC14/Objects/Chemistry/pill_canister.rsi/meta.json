@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/311e8f06c0eae7c6a0ab71ba04943c93c55850eb/icons/obj/items/chemistry.dmi, https://github.com/cmss13-devs/cmss13/blob/60ca3cddb69147cb17fcaef3b0514586292a4c55/icons/mob/humans/onmob/items_lefthand_0.dmi, https://github.com/cmss13-devs/cmss13/blob/81c7806eb705f3a6b43085056cef1be0055d8ed2/icons/mob/humans/onmob/items_righthand_0.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/311e8f06c0eae7c6a0ab71ba04943c93c55850eb/icons/obj/items/chemistry.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_lefthand.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -58,6 +58,102 @@
     },
     {
       "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "1-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "1-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "2-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "2-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "3-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "3-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "4-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "4-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "5-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "5-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "6-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "6-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "7-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "7-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "8-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "8-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "9-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "9-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "10-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "10-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "11-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "11-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "12-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "12-inhand-right",
       "directions": 4
     }
   ]
