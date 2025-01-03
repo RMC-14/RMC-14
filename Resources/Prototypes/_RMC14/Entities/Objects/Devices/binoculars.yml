@@ -7,6 +7,7 @@
   components:
   - type: Item
     size: Small
+    heldPrefix: binoculars
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
     state: binoculars
@@ -39,6 +40,8 @@
   suffix: Jungle
   description: "A pair of binoculars with a rangefinding function. Click a tile to acquire it's coordinates."
   components:
+  - type: Item
+    heldPrefix: rangefinders
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
     layers:

@@ -26,6 +26,7 @@
         type: PaperBoundUserInterface
   - type: Item
     size: Tiny
+    heldPrefix: paper
   - type: Tag
     tags:
     - Document

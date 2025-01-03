@@ -85,7 +85,6 @@
       visible: false
   - type: Item
     size: Small
-    sprite: _RMC14/Objects/Medical/beaker.rsi
   - type: SolutionContainerVisuals
     maxFillLevels: 5
     fillBaseName: beaker
@@ -128,7 +127,6 @@
       map: ["enum.OpenableVisuals.Layer"]
       visible: false
   - type: Item
-    sprite: _RMC14/Objects/Medical/large_beaker.rsi
   - type: SolutionContainerManager
     solutions:
       beaker:
@@ -171,7 +169,6 @@
       map: ["enum.OpenableVisuals.Layer"]
       visible: false
   - type: Item
-    sprite: _RMC14/Objects/Medical/high_capacity_beaker.rsi
   - type: SolutionContainerManager
     solutions:
       beaker:
