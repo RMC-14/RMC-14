@@ -23,11 +23,11 @@
       "name": "bodybag_used"
     },
     {
-      "name": "cryobag-inhand-left",
+      "name": "inhand-left",
       "directions": 4
     },
     {
-      "name": "cyrobag-inhand-right",
+      "name": "inhand-right",
       "directions": 4
     }
   ]
