@@ -1016,3 +1016,14 @@
     state: nova_stargazer
   - type: PatronFigurine
     id: 421d0be9-1b66-41dd-9077-617a1f3c0d7f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKippedKipper
+  name: Kipped Kipper figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: kipped_kipper
+  - type: PatronFigurine
+    id: f49eb544-509a-4991-a3f6-c05dec083389
