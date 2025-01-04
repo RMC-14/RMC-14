@@ -1021,7 +1021,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKippedKipper
   name: Kipped Kipper figurine
-  description: ""
+  description: "This thing is putting off a serious amount of heat, good for warming up on shiva's snowball."
   components:
   - type: Sprite
     state: kipped_kipper
