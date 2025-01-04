@@ -640,7 +640,7 @@
   parent: ActionXenoBase
   id: ActionXenoCleaveRoot
   name: Cleave Root
-  description: Root an enemy for a second. The durations is higher if your shield is up.
+  description: Root an enemy for a second. The duration is higher if your shield is up.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
