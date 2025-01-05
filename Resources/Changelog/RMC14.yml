@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Resized Felinids to normal size.
-    type: Tweak
-  id: 660
-  time: '2024-09-06T11:26:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3947
 - author: DrSmugleaf
   changes:
   - message: Fixed shotgun slug ammo not firing any projectiles.
@@ -5004,5 +4997,13 @@
   id: 1159
   time: '2025-01-05T01:38:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5296
+- author: SG6732
+  changes:
+  - message: Made the attachment points for the M59 better match with the sprite.
+      No more floating magnetic harnesses.
+    type: Fix
+  id: 1160
+  time: '2025-01-05T01:39:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5295
 Name: RMC14
 Order: -1
