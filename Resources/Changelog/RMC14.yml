@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Backpacks instant open on the floor
-    type: Fix
-  id: 663
-  time: '2024-09-10T22:17:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3969
-- author: Vermidia
-  changes:
   - message: Fix Runner pull speed being much faster than it should be
     type: Fix
   id: 664
@@ -5005,5 +4998,12 @@
   id: 1162
   time: '2025-01-05T01:43:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5272
+- author: CyberTropic
+  changes:
+  - message: Added holiday vendor system.
+    type: Add
+  id: 1163
+  time: '2025-01-05T01:50:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5297
 Name: RMC14
 Order: -1
