@@ -12,6 +12,9 @@
   - type: Tag
     tags:
     - RMCRackParts
+  - type: Construction
+    graph: RMCRackParts
+    node: parts
 
 - type: Tag
   id: RMCRackParts
