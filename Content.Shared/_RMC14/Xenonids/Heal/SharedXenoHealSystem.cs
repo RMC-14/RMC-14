@@ -299,11 +299,13 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
         var corpsePosition = _transform.GetMoverCoordinates(ent);
 
+        // This damage is completely arbitrary, just to ensure the drone dies EVEN WITH WARDING.
+        // TODO: Gib the healing xeno here
         var killDamageSpecifier = new DamageSpecifier
         {
             DamageDict =
             {
-                [BluntGroup] = remainingHealth + 100,
+                [BluntGroup] = remainingHealth * 100 + 3000,
             },
         };
         _damageable.TryChangeDamage(ent, killDamageSpecifier, ignoreResistances: true, interruptsDoAfters: false);
