@@ -46,13 +46,9 @@
           tags:
           - RMCAttachmentM890Stock
       rmc-aslot-underbarrel:
+        locked: true
         whitelist:
           tags:
-          - RMCAttachmentAngledGrip
-          - RMCAttachmentGyroscopicStabilizer
-          - RMCAttachmentLaserSight
-          - RMCAttachmentVerticalGrip
-          - RMCAttachmentFlashlightGrip
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.825, 0.06
