@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fix Runner pull speed being much faster than it should be
-    type: Fix
-  id: 664
-  time: '2024-09-10T22:17:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3979
-- author: Vermidia
-  changes:
   - message: Parasites now have AI. They will try to leap and infect nearby hosts,
       and return to eggs on their own after some time.
     type: Add
@@ -5005,5 +4998,12 @@
   id: 1163
   time: '2025-01-05T01:50:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5297
+- author: DummeHytteOst
+  changes:
+  - message: Added the ability to change the xeno wide swing keybind, in the options.
+    type: Add
+  id: 1164
+  time: '2025-01-05T01:52:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5276
 Name: RMC14
 Order: -1
