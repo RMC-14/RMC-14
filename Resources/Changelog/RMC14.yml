@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Sigil
-  changes:
-  - message: "You can now remove ammo from shotguns and grenade launchers. To do so,\
-      \ press the \"activate item in world\" hotkey \u2014 E by default. This hotkey\
-      \ also works for other weapons."
-    type: Add
-  id: 668
-  time: '2024-09-10T22:23:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3543
 - author: KalimbaMachine
   changes:
   - message: Clipboard Upgrades!
@@ -5006,5 +4997,15 @@
   id: 1167
   time: '2025-01-05T02:02:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5250
+- author: CyberTropic
+  changes:
+  - message: Some glasses can now be worn in the mask slot, in addition to the eyes
+      slot.
+    type: Fix
+  - message: Added prescription glasses for the CL.
+    type: Add
+  id: 1168
+  time: '2025-01-05T05:39:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5256
 Name: RMC14
 Order: -1
