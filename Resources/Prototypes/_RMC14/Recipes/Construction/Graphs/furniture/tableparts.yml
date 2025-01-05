@@ -5,19 +5,6 @@
     - node: start
       actions:
         - !type:DeleteEntity {}
-      edges:
-      - to: Metal
-        steps:
-        - tag: RMCTableMetal
-          doAfter: 1
-      - to: Wood
-        steps:
-        - tag: RMCTableWood
-          doAfter: 1
-      - to: WoodCarpet
-        steps:
-        - tag: RMCTablePartWoodCarpet
-          doAfter: 1
     - node: Metal
       edges:
       - to: start
