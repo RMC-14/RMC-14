@@ -18,7 +18,7 @@ public sealed partial class GunStacksComponent : Component
     public FixedPoint2 DamageIncrease = FixedPoint2.New(0.2);
 
     [DataField, AutoNetworkedField]
-    public float SetFireRate = 1.11f;
+    public float SetFireRate = 1.4285f;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastHitAt;
