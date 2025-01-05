@@ -45,7 +45,6 @@
         - !type:SpawnPrototype
           prototype: CMSheetMetal1
           amount: 1
-        - !type:DeleteEntity { }
         steps:
         - tool: Anchoring
           doAfter: 1
