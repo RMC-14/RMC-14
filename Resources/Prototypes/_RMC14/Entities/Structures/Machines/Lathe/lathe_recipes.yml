@@ -174,4 +174,4 @@
   result: RMCRackParts
   completetime: 4
   materials:
-    CMSteel: 100 # 2500(4687 metal)
+    CMSteel: 125 # 2500(4687 metal)
