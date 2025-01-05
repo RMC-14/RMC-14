@@ -26,6 +26,9 @@ public sealed partial class CMVendorSection
 
     [DataField]
     public List<ProtoId<JobPrototype>> Jobs = new();
+
+    [DataField]
+    public List<string> Holidays = new();
 }
 
 [DataDefinition]
