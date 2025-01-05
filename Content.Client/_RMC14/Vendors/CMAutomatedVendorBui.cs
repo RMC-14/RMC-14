@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Content.Shared._RMC14.Holiday;
 using Content.Shared._RMC14.Medical.Refill;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared.Mind;
@@ -25,6 +26,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
 
     private readonly SharedJobSystem _job;
     private readonly SharedMindSystem _mind;
+    private readonly SharedRMCHolidaySystem _rmcHoliday;
 
     private CMAutomatedVendorWindow? _window;
 
@@ -32,6 +34,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
     {
         _job = EntMan.System<SharedJobSystem>();
         _mind = EntMan.System<SharedMindSystem>();
+        _rmcHoliday = EntMan.System<SharedRMCHolidaySystem>();
     }
 
     protected override void Open()
@@ -60,10 +63,17 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                     }
                 }
 
+                var validHoliday = section.Holidays.Count == 0;
+                foreach (var holiday in section.Holidays)
+                {
+                    if (_rmcHoliday.IsActiveHoliday(holiday))
+                        validHoliday = true;
+                }
+
                 var uiSection = new CMAutomatedVendorSection();
                 uiSection.Label.SetMessage(GetSectionName(user, section));
 
-                if (!validJob)
+                if (!validJob || !validHoliday)
                     uiSection.Visible = false; // hide the section
 
                 for (var entryIndex = 0; entryIndex < section.Entries.Count; entryIndex++)

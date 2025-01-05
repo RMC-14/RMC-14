@@ -1,85 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenonid eggs being able to be placed under vendors, lockers, crates,
-      chairs, etc.
-    type: Fix
-  id: 659
-  time: '2024-09-06T10:49:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3958
-- author: Rainbeon
-  changes:
-  - message: Resized Felinids to normal size.
-    type: Tweak
-  id: 660
-  time: '2024-09-06T11:26:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3947
-- author: DrSmugleaf
-  changes:
-  - message: Fixed shotgun slug ammo not firing any projectiles.
-    type: Fix
-  id: 661
-  time: '2024-09-06T12:10:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3959
-- author: Vermidia
-  changes:
-  - message: Fix crusher and lurker melee slows lasting for the rest of the round
-    type: Fix
-  id: 662
-  time: '2024-09-08T01:22:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3960
-- author: Vermidia
-  changes:
-  - message: Backpacks instant open on the floor
-    type: Fix
-  id: 663
-  time: '2024-09-10T22:17:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3969
-- author: Vermidia
-  changes:
-  - message: Fix Runner pull speed being much faster than it should be
-    type: Fix
-  id: 664
-  time: '2024-09-10T22:17:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3979
-- author: Vermidia
-  changes:
-  - message: Parasites now have AI. They will try to leap and infect nearby hosts,
-      and return to eggs on their own after some time.
-    type: Add
-  id: 665
-  time: '2024-09-10T22:18:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3928
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Updated LV-624's Research Landing Zone
-    type: Tweak
-  id: 666
-  time: '2024-09-10T22:21:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3975
-- author: crystalHex
-  changes:
-  - message: Whistles can now be used from the action bar.
-    type: Tweak
-  id: 667
-  time: '2024-09-10T22:20:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3838
-- author: Sigil
-  changes:
-  - message: "You can now remove ammo from shotguns and grenade launchers. To do so,\
-      \ press the \"activate item in world\" hotkey \u2014 E by default. This hotkey\
-      \ also works for other weapons."
-    type: Add
-  id: 668
-  time: '2024-09-10T22:23:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3543
-- author: KalimbaMachine
-  changes:
-  - message: Clipboard Upgrades!
-    type: Tweak
-  id: 669
-  time: '2024-09-10T22:23:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3879
 - author: Vermidia
   changes:
   - message: Added ammo stuns. They don't impact big xenos (t3s, hivelord, queen)
@@ -5005,5 +4924,89 @@
   id: 1158
   time: '2024-12-26T23:55:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5232
+- author: Vermidia
+  changes:
+  - message: Added many more inhands for various items (mostly medical ones)
+    type: Add
+  id: 1159
+  time: '2025-01-05T01:38:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5296
+- author: SG6732
+  changes:
+  - message: Made the attachment points for the M59 better match with the sprite.
+      No more floating magnetic harnesses.
+    type: Fix
+  id: 1160
+  time: '2025-01-05T01:39:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5295
+- author: blueDev2
+  changes:
+  - message: Fixed healer drone sometimes leaving behind an alive drone body on sacrifice.
+    type: Fix
+  id: 1161
+  time: '2025-01-05T01:42:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5277
+- author: DummeHytteOst
+  changes:
+  - message: Fixed metal rods not fitting in the construction rig.
+    type: Fix
+  id: 1162
+  time: '2025-01-05T01:43:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5272
+- author: CyberTropic
+  changes:
+  - message: Added holiday vendor system.
+    type: Add
+  id: 1163
+  time: '2025-01-05T01:50:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5297
+- author: DummeHytteOst
+  changes:
+  - message: Added the ability to change the xeno wide swing keybind, in the options.
+    type: Add
+  id: 1164
+  time: '2025-01-05T01:52:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5276
+- author: CyberTropic
+  changes:
+  - message: Fixed nailgun not accepting repair materials.
+    type: Fix
+  id: 1165
+  time: '2025-01-05T01:53:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5270
+- author: Whisper
+  changes:
+  - message: Added Hexathele Hasselti, Fae Petrovic, Kasumi, Muz, and Kipped Kipper
+      figurines.
+    type: Add
+  id: 1166
+  time: '2025-01-05T01:58:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5247
+- author: Vermidia
+  changes:
+  - message: Healer drone's now have a salve overlay that runs out when the last salve's
+      duration runs out.
+    type: Add
+  id: 1167
+  time: '2025-01-05T02:02:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5250
+- author: CyberTropic
+  changes:
+  - message: Some glasses can now be worn in the mask slot, in addition to the eyes
+      slot.
+    type: Fix
+  - message: Added prescription glasses for the CL.
+    type: Add
+  id: 1168
+  time: '2025-01-05T05:39:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5256
+- author: SG6732
+  changes:
+  - message: Added the ability to dismantle rack parts into a single metal sheet per
+      part.
+    type: Add
+  id: 1169
+  time: '2025-01-05T09:17:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5307
 Name: RMC14
 Order: -1
