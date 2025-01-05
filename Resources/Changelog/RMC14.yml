@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: crystalHex
-  changes:
-  - message: Whistles can now be used from the action bar.
-    type: Tweak
-  id: 667
-  time: '2024-09-10T22:20:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3838
 - author: Sigil
   changes:
   - message: "You can now remove ammo from shotguns and grenade launchers. To do so,\
@@ -5005,5 +4998,13 @@
   id: 1166
   time: '2025-01-05T01:58:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5247
+- author: Vermidia
+  changes:
+  - message: Healer drone's now have a salve overlay that runs out when the last salve's
+      duration runs out.
+    type: Add
+  id: 1167
+  time: '2025-01-05T02:02:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5250
 Name: RMC14
 Order: -1
