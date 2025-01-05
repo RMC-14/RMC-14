@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Updated LV-624's Research Landing Zone
-    type: Tweak
-  id: 666
-  time: '2024-09-10T22:21:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3975
 - author: crystalHex
   changes:
   - message: Whistles can now be used from the action bar.
@@ -5004,5 +4997,13 @@
   id: 1165
   time: '2025-01-05T01:53:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5270
+- author: Whisper
+  changes:
+  - message: Added Hexathele Hasselti, Fae Petrovic, Kasumi, Muz, and Kipped Kipper
+      figurines.
+    type: Add
+  id: 1166
+  time: '2025-01-05T01:58:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5247
 Name: RMC14
 Order: -1
