@@ -43,7 +43,9 @@
   - type: Tag
     tags:
       - RMCTablePartReinforced
-      - RMCTablePartMetal
+      - RMCTablePartMetalReinforced
+  - type: Construction
+    node: MetalReinforced  
 
 - type: Tag
   id: RMCTablePartReinforced
@@ -61,7 +63,6 @@
       - RMCTablePartWood
       - RMCTablePartWoodPart 
   - type: Construction
-    graph: RMCTablePart
     node: Wood
 
 - type: Tag
@@ -111,7 +112,6 @@
       - RMCTablePartGambling
       - RMCTablePartWoodCarpet
   - type: Construction
-    graph: RMCTablePart
     node: WoodCarpet
 
 - type: Tag
@@ -134,6 +134,9 @@
 
 - type: Tag
   id: RMCTablePartMetal
+
+- type: Tag
+  id: RMCTablePartMetalReinforced
 
 - type: Tag
   id: RMCTablePartWoodPart
