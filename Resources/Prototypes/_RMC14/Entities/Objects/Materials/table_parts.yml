@@ -127,6 +127,7 @@
   - type: Tag
     tags:
       - RMCTablePartAlmayer
+      - RMCTablePartMetal
 
 - type: Tag
   id: RMCTablePartAlmayer
