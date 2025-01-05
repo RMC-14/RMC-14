@@ -4,6 +4,7 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoBurrower
   name: Burrower
   description: A beefy alien with sharp claws.
@@ -38,7 +39,7 @@
     - ActionXenoTremor
     - ActionXenoDevolve
     tier: 2
-    hudOffset: 0,0.56
+    hudOffset: -0.15,0.56
     unlockAt: 420 # 7 minutes
   - type: XenoLight
   - type: XenoDevolve
@@ -56,7 +57,7 @@
   - type: XenoStomp
     selfEffect: CMEffectSelfStomp
     shortRange: 0
-    range: 6
+    range: 4
     plasmaCost: 100
     paralyzeTime: 2
     sound: /Audio/_RMC14/Xeno/alien_footstep_charge1.ogg
@@ -75,6 +76,7 @@
     chance: 0.4
     stunMin: 4
     stunMax: 5
+  - type: TunnelRenamer
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5

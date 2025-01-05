@@ -4,6 +4,7 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/lv624.yml
+    camouflage: Jungle
     announcement: "An automated distress signal has been received from the archaeological site of Lazarus Landing, on the border world of LV-624. A response team from the UNS Almayer will be dispatched shortly to investigate."
 
 - type: entity
@@ -12,22 +13,26 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/solaris.yml
+    camouflage: Desert
     announcement: "Weston-Yamada has lost contact with one of its Biological Storage Facilities, Solaris Ridge, on the planet of LV-1413. The UNS Almayer has been requested to look into the blackout by Weston-Yamada."
 
 - type: entity
   id: RMCPlanetShiva
-  name: Shiva's Snowball
+  name: Shivas Snowball
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/shiva.yml
+    camouflage: Snow
     announcement: "An automated distress signal has been received from archaeology site \"Shiva's Snowball\", on border ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
 
 - type: entity
   id: RMCPlanetFiorina
-  name: Fiorina's Science Annex
+  name: Fiorina Science Annex
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/prison.yml
+    camouflage: Classic
+    minPlayers: 130
     announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
 
 - type: entity
@@ -36,6 +41,8 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/trijent.yml
+    camouflage: Desert
+    minPlayers: 130
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
 
 - type: entity
@@ -44,6 +51,7 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/varadero.yml
+    camouflage: Jungle
     announcement: "An automated distress signal has been received from UN Outpost New Varadero. A response team from the UNS Almayer will be dispatched shortly to investigate.
       Designation: Island research station and mining facility
 
@@ -60,4 +68,14 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/kutjevo.yml
+    camouflage: Desert
     announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."
+
+- type: entity
+  id: RMCPlanetChances
+  name: LV-522 Chance's Claim
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/chances.yml
+    camouflage: Classic
+    announcement: "Pan-Pan. This is the commanding officer of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet LV-522 in the immediate area of Chance's Claim. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."

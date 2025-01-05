@@ -75,15 +75,12 @@
       state: crest_defense
     event: !type:XenoToggleCrestActionEvent
     useDelay: 2
-  - type: ActionSharedCooldown
-    id: ActionXenoToggleCrest
-    cooldown: 2
 
 - type: entity
   id: ActionXenoFortify
   parent: ActionXenoBase
   name: Fortify
-  description: Become immobile and impassable to mobs, dramatically increasing your resistance to direct damage. Damage is further reduced from the direction you are facing. You can't be stunned while fortified and count as two sizes bigger.
+  description: Become immobile and impassable to mobs, dramatically increasing your resistance to direct damage and explosions. Damage is further reduced from the direction you are facing. You can't be stunned by minor explosions. You count as two sizes bigger while fortified and still can attack structures or use tail slam.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -92,9 +89,12 @@
       state: fortify
     event: !type:XenoFortifyActionEvent
     useDelay: 5
-  - type: ActionSharedCooldown
-    id: ActionXenoToggleCrest
-    cooldown: 5
+
+- type: entity
+  id: ActionXenoFortifySteelcrest
+  parent: ActionXenoFortify
+  name: Fortify
+  description: Become much slower, increasing your resistance to direct damage and explosions. Damage is greatly reduced from the direction you are facing. You count as two sizes bigger while fortified and still can attack strcutures or use tail slam, but your slashes do less damage.
 
 - type: entity
   id: ActionXenoResinWalker
@@ -243,7 +243,7 @@
   id: ActionXenoDodge
   parent: ActionXenoBase
   name: Dodge (200)
-  description: Gain a speed boost for 7 seconds. Your speed is doubled near enemies.
+  description: Gain a speed boost for 7 seconds. Your speed is doubled near standing enemies.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -257,6 +257,7 @@
   parent: ActionXenoBase
   id: ActionXenoBurrow
   name: Burrow
+  description: Burrow underground preventing you from getting hit from all sources. Once burrowed click a tile to move to it and resurface after a doafter that depends on distance.
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -267,5 +268,22 @@
     range: -1
     repeat: true
     deselectOnMiss: false
-    checkCanAccess : false
+    checkCanAccess: false
+    checkCanInteract: false
   - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoSoak
+  name: Soak (20)
+  description: Soak in damage for 6 seconds. If you take 140 damage or higher, you regen 75 health and your tail slam gets refreshed.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: soak
+    event: !type:XenoSoakActionEvent
+    useDelay: 17
+  - type: ActionBlockIfResting
+  

@@ -1,18 +1,19 @@
 ﻿- type: entity
   parent: CMBaseWeaponSMG
   name: M63 submachine gun
+  suffix: Desert
   id: WeaponSMGM63
   description: The Aegis Battlefield Armaments M-63 submachinegun. Occasionally carried by light-infantry, scouts, engineers and medics.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/desert.rsi
     layers:
-    - state: base
+    - state: bolt-open
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/desert.rsi
   - type: Gun
     shotsPerBurst: 3
     soundGunshot:
@@ -98,6 +99,13 @@
     tags:
     - RMCWeaponSMG
     - RMCWeaponSMGM63
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/SMGs/m63/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/SMGs/m63/desert.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/SMGs/m63/classic.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/SMGs/m63/snow.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/SMGs/m63/urban.rsi
 
 - type: entity
   parent: BaseMagazineRifle

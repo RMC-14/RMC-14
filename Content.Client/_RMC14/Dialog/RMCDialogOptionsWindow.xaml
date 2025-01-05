@@ -9,5 +9,6 @@
         <ScrollContainer HScrollEnabled="False" VScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True" MinHeight="250" MaxHeight="500">
             <BoxContainer Name="Options" Access="Public" Orientation="Vertical" />
         </ScrollContainer>
+        <LineEdit Name="Search" Access="Public" PlaceHolder="Search..." />
     </BoxContainer>
 </controls:RMCDialogOptionsWindow>

@@ -101,10 +101,10 @@
         amount: 5
       - id: CMWebbingPouch
         amount: 2
-      #- id: Shoulder Holster
-      #  amount: 2
-      #- id: Knife Webbing
-      #  amount: 1
+      - id: CMWebbingHolster
+        amount: 2
+      - id: CMWebbingKnivesFilled
+        amount: 1
     - name: Backpacks
       entries:
       - id: CMBackpackMarine
@@ -156,8 +156,8 @@
       entries:
       - id: RMCPouchAutoinjector
         amount: 1
-      #- id: RMCPouchMedkit
-      #  amount: 2
+      - id: RMCPouchMedkit
+        amount: 2
       - id: RMCPouchFirstAidInjectors
         amount: 5
       - id: RMCPouchFirstResponder
@@ -489,9 +489,9 @@
         amount: 15
       - id: RMCArmorM3MediumSmooth
         amount: 15
-      - id: CMArmorM3Heavy
+      - id: RMCArmorM3HeavyPadded
         amount: 10
-      - id: CMArmorM3Light
+      - id: RMCArmorM3LightPadded
         amount: 10
     - name: Gloves
       entries:

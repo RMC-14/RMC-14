@@ -1,0 +1,1222 @@
+﻿- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaLv522
+  components:
+  - type: Sprite
+    state: unknown
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#6C6767D8'
+
+- type: entity
+  parent: RMCAreaLv522
+  id: RMCAreaLv522Indoors
+  name: Chance's Claim - Outdoors
+  components:
+  - type: Sprite
+    state: cliff_blocked
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522
+  id: RMCAreaLv522Outdoors
+  name: Chance's Claim - Outdoors
+  components:
+  - type: Sprite
+    state: cliff_blocked
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522
+  id: RMCAreaLv522Oob
+  name: LV522 - Out Of Bounds
+  components:
+  - type: Sprite
+    state: unknown
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: true
+
+- type: entity
+  parent: RMCAreaLv522Oob
+  id: RMCAreaLv522OobWYVault
+  name: LV522 - Weyland Secure Vault
+  components:
+  - type: Sprite
+    state: blue
+
+- type: entity
+  parent: RMCAreaLv522
+  id: RMCAreaLv522LandingZone1
+  name: Chance's Claim - Landing Zone One
+  components:
+  - type: Sprite
+    state: explored
+  - type: Area
+    landingZone: true
+    minimapColor: '#EBE5E5E3'
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaLv522LandingZone1
+  id: RMCAreaLv522LandingZone1Ceiling
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522LandingZone1
+  id: RMCAreaLv522LandingZone1Tunnel
+  name: Chance's Claim - Landing Zone One Tunnels
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaLv522LandingZone1Tunnel
+  id: RMCAreaLv522LandingZone1TunnelFar
+  name: Chance's Claim - Landing Zone One Tunnels
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    landingZone: false
+
+- type: entity
+  parent: RMCAreaShuttleDrop1
+  id: RMCAreaShuttleDrop1Lv522
+  name: Chance's Claim - Dropship Alamo Landing Zone
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: shuttle
+
+- type: entity
+  parent: RMCAreaLv522LandingZone1
+  id: RMCAreaLv522LandingZone1Lz1Console
+  name: Chance's Claim - Dropship Alamo Console
+  components:
+  - type: Sprite
+    state: tcomsatcham
+
+- type: entity
+  parent: RMCAreaLv522
+  id: RMCAreaLv522LandingZone2
+  name: Chance's Claim - Landing Zone Two
+  components:
+  - type: Sprite
+    state: explored
+  - type: Area
+    landingZone: true
+    minimapColor: '#EBE5E5E3'
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaLv522LandingZone2
+  id: RMCAreaLv522LandingZone2Ceiling
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaShuttleDrop2
+  id: RMCAreaShuttleDrop2Lv522
+  name: Chance's Claim - Dropship Normandy Landing Zone
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: shuttle2
+
+- type: entity
+  parent: RMCAreaLv522LandingZone2
+  id: RMCAreaLv522LandingZone2Lz2Console
+  name: Chance's Claim - Dropship Normandy Console
+  components:
+  - type: Sprite
+    state: tcomsatcham
+
+- type: entity
+  parent: RMCAreaLv522
+  id: RMCAreaLv522LandingZoneForecon
+  name: Chance's Claim - FORECON Shuttle
+  components:
+  - type: Sprite
+    state: shuttle
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522LandingZoneForecon
+  id: RMCAreaLv522LandingZoneForeconLandingZone3
+  name: Chance's claim - Landing Zone 3
+  components:
+  - type: Sprite
+    state: blue
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522LandingZoneForecon
+  id: RMCAreaLv522LandingZoneForeconLandingZone4
+  name: Chance's claim - Landing Zone 4
+  components:
+  - type: Sprite
+    state: blue
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522LandingZoneForecon
+  id: RMCAreaLv522LandingZoneForeconUD6Typhoon
+  name: Chance's Claim - UD6 Typhoon
+
+- type: entity
+  parent: RMCAreaLv522LandingZoneForecon
+  id: RMCAreaLv522LandingZoneForeconUD6Tornado
+  name: Chance's Claim - UD6 Tornado
+
+- type: entity
+  parent: RMCAreaLv522Outdoors
+  id: RMCAreaLv522OutdoorsColonyStreets
+  name: Colony Streets
+  components:
+  - type: Sprite
+    state: green
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522OutdoorsColonyStreets
+  id: RMCAreaLv522OutdoorsColonyStreetsContainers
+  name: Colony Streets - Container Yard
+  components:
+  - type: Sprite
+    state: yellow
+
+- type: entity
+  parent: RMCAreaLv522OutdoorsColonyStreets
+  id: RMCAreaLv522OutdoorsColonyStreetsWindbreaker
+  name: Colony Windbreakers
+  components:
+  - type: Sprite
+    state: tcomsatcham
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522OutdoorsColonyStreetsWindbreaker
+  id: RMCAreaLv522OutdoorsColonyStreetsWindbreakerObservation
+  name: Colony Windbreakers - Observation
+  components:
+  - type: Sprite
+    state: purple
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522OutdoorsColonyStreets
+  id: RMCAreaLv522OutdoorsColonyStreetsCentralStreets
+  name: Central Streets - West
+  components:
+  - type: Sprite
+    state: west
+
+- type: entity
+  parent: RMCAreaLv522OutdoorsColonyStreets
+  id: RMCAreaLv522OutdoorsColonyStreetsEastCentralStreet
+  name: Central Streets - East
+  components:
+  - type: Sprite
+    state: east
+
+- type: entity
+  parent: RMCAreaLv522OutdoorsColonyStreets
+  id: RMCAreaLv522OutdoorsColonyStreetsSouthStreet
+  name: Colony Streets - South
+  components:
+  - type: Sprite
+    state: south
+  - type: Area
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaLv522OutdoorsColonyStreets
+  id: RMCAreaLv522OutdoorsColonyStreetsSouthEastStreet
+  name: Colony Streets - Southeast
+  components:
+  - type: Sprite
+    state: southeast
+  - type: Area
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaLv522OutdoorsColonyStreets
+  id: RMCAreaLv522OutdoorsColonyStreetsSouthWestStreet
+  name: Colony Streets - Southwest
+  components:
+  - type: Sprite
+    state: southwest
+  - type: Area
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaLv522OutdoorsColonyStreets
+  id: RMCAreaLv522OutdoorsColonyStreetsNorthWestStreet
+  name: Colony Streets - Northwest
+  components:
+  - type: Sprite
+    state: northwest
+
+- type: entity
+  parent: RMCAreaLv522OutdoorsColonyStreets
+  id: RMCAreaLv522OutdoorsColonyStreetsNorthEastStreet
+  name: Colony Streets - Northeast
+  components:
+  - type: Sprite
+    state: northeast
+
+- type: entity
+  parent: RMCAreaLv522OutdoorsColonyStreets
+  id: RMCAreaLv522OutdoorsColonyStreetsNorthStreet
+  name: Colony Streets - North
+  components:
+  - type: Sprite
+    state: north
+
+- type: entity
+  parent: RMCAreaLv522OutdoorsColonyStreets
+  id: RMCAreaLv522OutdoorsColonyStreetsWinde
+  name: Colony Streets - Northwest
+  components:
+  - type: Sprite
+    state: northwest
+
+- type: entity
+  parent: RMCAreaLv522Indoors
+  id: RMCAreaLv522IndoorsLoneBuildings
+  name: LV522 - Lone buildings
+  components:
+  - type: Sprite
+    state: green
+
+- type: entity
+  parent: RMCAreaLv522Indoors
+  id: RMCAreaLv522IndoorsToilet
+  name: LV522 - Outdoor Toilets
+  components:
+  - type: Sprite
+    state: green
+
+- type: entity
+  parent: RMCAreaLv522IndoorsLoneBuildings
+  id: RMCAreaLv522IndoorsLoneBuildingsEngineering
+  name: Emergency Engineering
+  components:
+  - type: Sprite
+    state: engine_smes
+  - type: Area
+    minimapColor: '#C19504E7'
+
+- type: entity
+  parent: RMCAreaLv522IndoorsLoneBuildings
+  id: RMCAreaLv522IndoorsLoneBuildingsSpaceport
+  name: North LZ1 - Spaceport
+  components:
+  - type: Sprite
+    state: red
+  - type: Area
+    minimapColor: '#EBE5E5E3'
+
+- type: entity
+  parent: RMCAreaLv522IndoorsLoneBuildings
+  id: RMCAreaLv522IndoorsLoneBuildingsOutdoorBot
+  name: East LZ1 - Outdoor T-Comms
+  components:
+  - type: Sprite
+    state: yellow
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaLv522IndoorsLoneBuildings
+  id: RMCAreaLv522IndoorsLoneBuildingsStorageBlocks
+  name: Outdoor Storage
+  components:
+  - type: Sprite
+    state: blue
+
+- type: entity
+  parent: RMCAreaLv522IndoorsLoneBuildings
+  id: RMCAreaLv522IndoorsLoneBuildingsChunk
+  name: Chunk 'N Dump
+  components:
+  - type: Sprite
+    state: blue
+
+- type: entity
+  parent: RMCAreaLv522Indoors
+  id: RMCAreaLv522IndoorsABlock
+  name: A-Block
+  components:
+  - type: Sprite
+    state: blue
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlock
+  id: RMCAreaLv522IndoorsABlockAdmin
+  name: A-Block - Colony Operations Centre
+  components:
+  - type: Sprite
+    state: mechbay
+  - type: Area
+    minimapColor: '#2D3FA2EE'
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlock
+  id: RMCAreaLv522IndoorsABlockDorms
+  name: A-Block - Western Dorms And Offices
+  components:
+  - type: Sprite
+    state: fitness
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlockDorms
+  id: RMCAreaLv522IndoorsABlockDormsGlass
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlock
+  id: RMCAreaLv522IndoorsABlockFitness
+  name: A-Block - Fitness Centre
+  components:
+  - type: Sprite
+    state: fitness
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlockFitness
+  id: RMCAreaLv522IndoorsABlockFitnessGlass
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlock
+  id: RMCAreaLv522IndoorsABlockHallway
+  name: A-Block - South Operations Hallway
+  components:
+  - type: Sprite
+    state: green
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlockHallway
+  id: RMCAreaLv522IndoorsABlockHallwayDamage
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlock
+  id: RMCAreaLv522IndoorsABlockMedical
+  name: A-Block - Medical
+  components:
+  - type: Sprite
+    state: medbay
+  - type: Area
+    minimapColor: '#3DBF75EE'
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlockMedical
+  id: RMCAreaLv522IndoorsABlockMedicalGlass
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlock
+  id: RMCAreaLv522IndoorsABlockSecurity
+  name: A-Block - Security
+  components:
+  - type: Sprite
+    state: head_quarters
+  - type: Area
+    minimapColor: '#A22D2DEE'
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlockSecurity
+  id: RMCAreaLv522IndoorsABlockSecurityGlass
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlock
+  id: RMCAreaLv522IndoorsABlockKitchen
+  name: A-Block - Kitchen And Dining
+  components:
+  - type: Sprite
+    state: kitchen
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlockKitchen
+  id: RMCAreaLv522IndoorsABlockKitchenGlass
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlockKitchen
+  id: RMCAreaLv522IndoorsABlockKitchenDamage
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlock
+  id: RMCAreaLv522IndoorsABlockExecutive
+  name: A-Block - Executive Suite
+  components:
+  - type: Sprite
+    state: captain
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlockExecutive
+  id: RMCAreaLv522IndoorsABlockExecutiveGlass
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlock
+  id: RMCAreaLv522IndoorsABlockDormNorth
+  name: A-Block - Northern Shared Dorms
+  components:
+  - type: Sprite
+    state: fitness
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlock
+  id: RMCAreaLv522IndoorsABlockBridges
+  name: A-Block - Western Dorms To Security Bridge
+  components:
+  - type: Sprite
+    state: hallc1
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlockBridges
+  id: RMCAreaLv522IndoorsABlockBridgesDormsFitness
+  name: A-Block - Corporate To Fitness Bridge
+  components:
+  - type: Sprite
+    state: hallc1
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlockBridges
+  id: RMCAreaLv522IndoorsABlockBridgesCorpoFitness
+  name: A-Block - Western Dorms To Fitness
+  components:
+  - type: Sprite
+    state: hallc1
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlockBridges
+  id: RMCAreaLv522IndoorsABlockBridgesCorpo
+  name: A-Block - Security To Corporate Bridge
+  components:
+  - type: Sprite
+    state: hallc1
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlockBridges
+  id: RMCAreaLv522IndoorsABlockBridgesOpCentre
+  name: A-Block - Security To Operations Centre Bridge
+  components:
+  - type: Sprite
+    state: hallc1
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlockBridges
+  id: RMCAreaLv522IndoorsABlockBridgesGardenBridge
+  name: A-Block - Garden Bridge
+  components:
+  - type: Sprite
+    state: hallc2
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlock
+  id: RMCAreaLv522IndoorsABlockCorpo
+  name: A-Block - Corporate Office
+  components:
+  - type: Sprite
+    state: toxlab
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlockCorpo
+  id: RMCAreaLv522IndoorsABlockCorpoGlass
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522IndoorsABlock
+  id: RMCAreaLv522IndoorsABlockGarden
+  name: A-Block - West Operations Garden
+  components:
+  - type: Sprite
+    state: green
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522Indoors
+  id: RMCAreaLv522IndoorsBBlock
+  name: B-Block
+  components:
+  - type: Sprite
+    state: red
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522IndoorsBBlock
+  id: RMCAreaLv522IndoorsBBlockHydro
+  name: B-Block - Hydroponics
+  components:
+  - type: Sprite
+    state: hydro
+  - type: Area
+    minimapColor: '#812DA2EE'
+
+- type: entity
+  parent: RMCAreaLv522IndoorsBBlockHydro
+  id: RMCAreaLv522IndoorsBBlockHydroGlass
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522IndoorsBBlock
+  id: RMCAreaLv522IndoorsBBlockBar
+  name: B-Block - Bar
+  components:
+  - type: Sprite
+    state: cafeteria
+
+- type: entity
+  parent: RMCAreaLv522IndoorsBBlock
+  id: RMCAreaLv522IndoorsBBlockBridge
+  name: B-Block - Hydroponics Bridge Network
+  components:
+  - type: Sprite
+    state: hallc1
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaLv522Indoors
+  id: RMCAreaLv522IndoorsCBlock
+  name: C-Block
+  components:
+  - type: Sprite
+    state: green
+
+- type: entity
+  parent: RMCAreaLv522IndoorsCBlock
+  id: RMCAreaLv522IndoorsCBlockCargo
+  name: C-Block - Cargo
+  components:
+  - type: Sprite
+    state: primarystorage
+
+- type: entity
+  parent: RMCAreaLv522IndoorsCBlock
+  id: RMCAreaLv522IndoorsCBlockMining
+  name: C-Block - Mining
+  components:
+  - type: Sprite
+    state: yellow
+  - type: Area
+    resinAllowed: false
+
+- type: entity
+  parent: RMCAreaLv522IndoorsCBlock
+  id: RMCAreaLv522IndoorsCBlockGarage
+  name: C-Block - Garage
+  components:
+  - type: Sprite
+    state: storage
+
+- type: entity
+  parent: RMCAreaLv522IndoorsCBlock
+  id: RMCAreaLv522IndoorsCBlockCasino
+  name: C-Block - Casino
+  components:
+  - type: Sprite
+    state: purple
+
+- type: entity
+  parent: RMCAreaLv522IndoorsCBlock
+  id: RMCAreaLv522IndoorsCBlockBridge
+  name: C-Block - Cargo To Garage Bridge
+  components:
+  - type: Sprite
+    state: hallc1
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522IndoorsCBlock
+  id: RMCAreaLv522IndoorsCBlockTComm
+  name: C-Block - West Garage T-comms
+  components:
+  - type: Sprite
+    state: hallc1
+
+- type: entity
+  parent: RMCAreaLv522Outdoors
+  id: RMCAreaLv522OutdoorsNRockies
+  name: North Colony - Rockies
+  components:
+  - type: Sprite
+    state: away
+
+- type: entity
+  parent: RMCAreaLv522Outdoors
+  id: RMCAreaLv522OutdoorsNwRockies
+  name: Northwest Colony - Rockies
+  components:
+  - type: Sprite
+    state: away1
+
+- type: entity
+  parent: RMCAreaLv522Outdoors
+  id: RMCAreaLv522OutdoorsWRockies
+  name: West Colony - Rockies
+  components:
+  - type: Sprite
+    state: away2
+
+- type: entity
+  parent: RMCAreaLv522Outdoors
+  id: RMCAreaLv522OutdoorsPNRockies
+  name: North Processor - Rockies
+  components:
+  - type: Sprite
+    state: away
+
+- type: entity
+  parent: RMCAreaLv522Outdoors
+  id: RMCAreaLv522OutdoorsPNwRockies
+  name: Northwest Processor - Rockies
+  components:
+  - type: Sprite
+    state: away1
+
+- type: entity
+  parent: RMCAreaLv522Outdoors
+  id: RMCAreaLv522OutdoorsPWRockies
+  name: West Processor - Rockies
+  components:
+  - type: Sprite
+    state: away2
+
+- type: entity
+  parent: RMCAreaLv522Outdoors
+  id: RMCAreaLv522OutdoorsPERockies
+  name: East Processor - Rockies
+  components:
+  - type: Sprite
+    state: away3
+
+- type: entity
+  parent: RMCAreaLv522
+  id: RMCAreaLv522Atmos
+  name: Atmospheric Processor
+  components:
+  - type: Sprite
+    state: unknown
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    minimapColor: '#C19504E7'
+
+- type: entity
+  parent: RMCAreaLv522Atmos
+  id: RMCAreaLv522AtmosOutdoor
+  name: Atmospheric Processor - Outdoors
+  components:
+  - type: Sprite
+    state: quart
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv522Atmos
+  id: RMCAreaLv522AtmosEastReactor
+  name: Atmospheric Processor - Eastern Reactor
+  components:
+  - type: Sprite
+    state: blue
+
+- type: entity
+  parent: RMCAreaLv522AtmosEastReactor
+  id: RMCAreaLv522AtmosEastReactorNorth
+  name: Atmospheric Processor - Outer East Reactor - North
+  components:
+  - type: Sprite
+    state: yellow
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaLv522AtmosEastReactor
+  id: RMCAreaLv522AtmosEastReactorSouth
+  name: Atmospheric Processor - Outer East Reactor - south
+  components:
+  - type: Sprite
+    state: red
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaLv522AtmosEastReactorSouth
+  id: RMCAreaLv522AtmosEastReactorSouthCas
+  components:
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaLv522AtmosEastReactor
+  id: RMCAreaLv522AtmosEastReactorEast
+  name: Atmospheric Processor - Outer East Reactor - east
+  components:
+  - type: Sprite
+    state: green
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaLv522AtmosEastReactor
+  id: RMCAreaLv522AtmosEastReactorWest
+  name: Atmospheric Processor - Outer East Reactor - west
+  components:
+  - type: Sprite
+    state: purple
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaLv522Atmos
+  id: RMCAreaLv522AtmosWestReactor
+  name: Atmospheric Processor - Western Reactor
+  components:
+  - type: Sprite
+    state: blue
+
+- type: entity
+  parent: RMCAreaLv522Atmos
+  id: RMCAreaLv522AtmosCargoIntake
+  name: Atmospheric Processor - Cargo Intake
+  components:
+  - type: Sprite
+    state: yellow
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaLv522Atmos
+  id: RMCAreaLv522AtmosCommandCentre
+  name: Atmospheric Processor - Central Command
+  components:
+  - type: Sprite
+    state: red
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaLv522Atmos
+  id: RMCAreaLv522AtmosNorthCommandCentre
+  name: Atmospheric Processor - North Command Centre Checkpoint
+  components:
+  - type: Sprite
+    state: green
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaLv522Atmos
+  id: RMCAreaLv522AtmosFilt
+  name: Atmospheric Processor - Filtration System
+  components:
+  - type: Sprite
+    state: mechbay
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaLv522Atmos
+  id: RMCAreaLv522AtmosWayInCommandCentre
+  name: Atmospheric Processor - North Corpo Reactor Entrance
+  components:
+  - type: Sprite
+    state: blue
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaLv522Atmos
+  id: RMCAreaLv522AtmosSewer
+  name: Atmospheric Processor - Sewer
+  components:
+  - type: Sprite
+    state: red
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaLv522Atmos
+  id: RMCAreaLv522AtmosReactorGarage
+  name: Atmospheric Processor - Garage
+  components:
+  - type: Sprite
+    state: green
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false

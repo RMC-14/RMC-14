@@ -38,7 +38,6 @@
         RMCSkillPolice: 1
         RMCSkillResearch: 1
         RMCSkillSurgery: 2
-    - type: RMCUserBulkyArmorIncapable
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
@@ -48,7 +47,6 @@
   id: CMGearCMO
   equipment:
     jumpsuit: CMJumpsuitCMO
-    back: CMSatchel
     shoes: ClothingShoesColorWhite
     id: CMIDCardCMO
     # TODO RMC14 random chemical synthesis note
@@ -58,8 +56,7 @@
   id: CMGearCMOEquipped
   equipment:
     jumpsuit: CMJumpsuitCMO
-    outerClothing: CMCoatLong
-    back: CMSatchelMarine
+    outerClothing: RMCCoatService
     gloves: CMHandsLatex
     shoes: RMCShoesWhite
     head: CMHeadCapCMO

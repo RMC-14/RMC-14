@@ -14,6 +14,7 @@
       - Bible
       tags:
       - CMFirstAidKit
+      - RMCEngineerKit
       - RMCBoxStorage
 
 
@@ -67,8 +68,28 @@
     - id: RMCSpaceCash1000 # TODO RMC14 tape recorder
 
 
-# flamertank / fueltank.rsi
-
+# Fuel Tank Pouch
+- type: entity
+  parent: [RMCPouchOpenClosed, RMCPouchStorage]
+  id: RMCPouchFuelTank
+  name: fuel tank strap pouch
+  description: Two ring straps to loop around M240-pattern napalm tanks. Handle with care.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/fueltank.rsi
+  - type: Storage
+    grid:
+    - 0,0,3,1 #2 slots
+    whitelist:
+      tags:
+      - FireExtinguisher
+      # - TODO RMC14 M240
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - FireExtinguisher
+      # - TODO RMC14 M240
 
 # Survival Pouch
 - type: entity

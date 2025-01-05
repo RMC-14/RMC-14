@@ -40,11 +40,11 @@
         amount: 25
     - name: Sidearms
       entries:
-      - id: CMWeaponPistolM77
+      - id: CMWeaponPistolM77Empty
         amount: 25
-      - id: RMCWeaponRevolverM44
+      - id: RMCWeaponRevolverM44Empty
         amount: 25
-      - id: CMWeaponPistolM1984
+      - id: CMWeaponPistolM1984Empty
         amount: 25
       #- id: WeaponFlareM82F
       #  amount: 10
@@ -134,9 +134,9 @@
         amount: 15
       - id: RMCArmorM3MediumSmooth
         amount: 15
-      - id: CMArmorM3Heavy
+      - id: RMCArmorM3HeavyPadded
         amount: 10
-      - id: CMArmorM3Light
+      - id: RMCArmorM3LightPadded
         amount: 10
     - name: Backpack
       entries:

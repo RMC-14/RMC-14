@@ -231,10 +231,10 @@
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchReagentCanisterTricordrazineRevival
-        recommended: true
-     #- id: RMCPouchMedkit
-#       recommended: true
         name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
+        recommended: true
+      - id: RMCPouchMedkit
+        recommended: true
 #     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
 #       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
 #       recommended: true
@@ -250,7 +250,6 @@
         name: Pressurized Reagent Canister Pouch\n(EMPTY)
       - id: RMCPouchVialFill
       - id: RMCPouchMedical
-        recommended: true # TODO unrecommend when medkit pouch is real
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
       - id: RMCPouchFirstAidSplintsGauzeOintment

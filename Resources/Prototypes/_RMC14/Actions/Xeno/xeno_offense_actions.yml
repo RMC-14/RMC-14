@@ -107,6 +107,11 @@
   - type: XenoTailStabAction
 
 - type: entity
+  id: ActionXenoTailSlam
+  parent: ActionXenoTailStab
+  name: Tail Slam
+
+- type: entity
   parent: ActionXenoTailStab
   id: ActionXenoTailStabCorrosive
   name: Corrosive Tail Stab
@@ -168,7 +173,7 @@
   id: ActionXenoHeadbutt
   parent: ActionXenoBase
   name: Headbutt (10) # TODO RMC14 proper plasma costs
-  description: Charge towards the targeted enemy and push back the first enemy hit.
+  description: Charge towards the targeted enemy and push back the first enemy hit, piercing armor slightly. Does less damage but has more knockback when crest is lowered.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -420,7 +425,7 @@
   id: ActionXenoScreech
   parent: ActionXenoBase
   name: Screech (250)
-  description: A wide area of effect stun, screeches upon activation. [color=red]This is blocked by solid walls, smoke, and boiler gas, but not windows![/color]
+  description: A wide area of effect stun, screeches upon activation. [color=red]This will also stun parasites, and is blocked by solid walls, smoke, and boiler gas, but not windows![/color]
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -561,7 +566,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: screech
     event: !type:XenoForTheHiveActionEvent
-  
+
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoImpale
@@ -659,4 +664,27 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: prae_cleave_fling
     event: !type:XenoToggleCleaveActionEvent
+
+- type: entity
+  id: ActionXenoSpitQueen
+  parent: ActionXenoSpit
+  name: Xeno Spit (50/25)
+  description: Launches a projectile that will either paralyze the first enemy it hits or damage them and cover them in acid.
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoToggleSpitType
+  name: Toggle Spit Type
+  description: Toggle between Neurotoxic or Acidic spit. Neurotoxic has less range and costs 50 plasma, and knocks down the first enemy it hits. Acidic has more range and costs 25 plasma, and damages and covers in acid the first enemy it hits.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: shift_spit_neurotoxin
+    iconOn:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: shift_spit_xeno_acid
+    event: !type:XenoSpitToggleActionEvent
 

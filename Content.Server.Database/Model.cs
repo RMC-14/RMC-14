@@ -56,6 +56,7 @@ namespace Content.Server.Database
         public DbSet<RMCPatronRoundEndXenoShoutout> RMCPatronRoundEndXenoShoutouts { get; set; } = default!;
         public DbSet<RMCRoleTimerExclude> RMCRoleTimerExcludes { get; set; } = default!;
         public DbSet<RMCSquadPreference> RMCSquadPreferences { get; set; } = default!;
+        public DbSet<RMCCommendation> RMCCommendations { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -413,6 +414,27 @@ namespace Content.Server.Database
                 .HasForeignKey(r => r.PlayerId)
                 .HasPrincipalKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RMCCommendation>()
+                .HasKey(c => c.Id);
+
+            modelBuilder.Entity<RMCCommendation>()
+                .Property(c => c.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<RMCCommendation>()
+                .HasOne(r => r.Giver)
+                .WithMany(p => p.CommendationsGiven)
+                .HasForeignKey(r => r.GiverId)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RMCCommendation>()
+                .HasOne(r => r.Receiver)
+                .WithMany(p => p.CommendationsReceived)
+                .HasForeignKey(r => r.ReceiverId)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public virtual IQueryable<AdminLog> SearchLogs(IQueryable<AdminLog> query, string searchText)
@@ -643,6 +665,8 @@ namespace Content.Server.Database
         public RMCLinkingCodes? LinkingCodes { get; set; }
         public List<RMCLinkedAccountLogs> LinkedAccountLogs { get; set; } = default!;
         public List<RMCRoleTimerExclude> RoleTimerExcludes { get; set; } = default!;
+        public List<RMCCommendation> CommendationsGiven { get; set; } = default!;
+        public List<RMCCommendation> CommendationsReceived { get; set; } = default!;
     }
 
     [Table("whitelist")]
@@ -711,6 +735,8 @@ namespace Content.Server.Database
 
         [ForeignKey("Server")] public int ServerId { get; set; }
         public Server Server { get; set; } = default!;
+
+        public List<RMCCommendation> Commendations { get; set; } = default!;
     }
 
     public class Server

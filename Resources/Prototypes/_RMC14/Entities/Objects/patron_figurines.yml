@@ -599,7 +599,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronRhettRainmanMcIndrick
   name: Rhett 'Rainman' McIndrick figurine
-  description: Former Scout Sergeant McIndrick. "Where's the glory in waiting?"
+  description: "There's a difference between trying something different when regular procedure fails- and starting off with the same losing strategy. Are you surprising anyone?"
   components:
   - type: Sprite
     state: rhett_rainman_mcindrick
@@ -661,6 +661,14 @@
     state: jester-who-helps
   - type: PatronFigurine
     id: 15d914f4-e436-496a-afe0-0e127297ed36
+  - type: EmitSoundOnUse
+    sound:
+      collection: FootstepJester
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 30
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -837,7 +845,7 @@
         volume: 5
         maxDistance: 1
   - type: UseDelay
-    delay: 180.0
+    delay: 30
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -867,7 +875,155 @@
   name: Emily 'Klutz' Rathen figurine
   description: "A figurine of Emily 'Klutz' Rathen. It looks chipped and scuffed from being dropped repeatedly. The base is very small and uneven, making it want to fall over at all times."
   components:
+  - type: Transform
+    noRot: true
   - type: Sprite
     state: emily_klutz_rathen
+    rotation: 90
   - type: PatronFigurine
     id: e8819228-95ea-4a3b-8e1c-0e7eaa55cb90
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRanuko
+  name: Ranuko figurine
+  description: "You know a patch up with a smile is close at hand with this Avali."
+  components:
+  - type: Sprite
+    state: ranuko
+  - type: PatronFigurine
+    id: 6d896f2e-3a36-4c55-bd80-eb72242de43b
+
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronConsumes-the-Petrol
+  name: Consumes-the-Petrol figurine
+  description: "That one lizard everyone tolerates. No, not that one. The other one. No, the other other- you know what, forget it."
+  components:
+  - type: Sprite
+    state: consumes-the-petrol
+  - type: PatronFigurine
+    id: 25ab89f4-a9a7-44c7-8538-c94e8a086e92
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLennyDugs
+  name: Lenny Dugs figurine
+  description: "Greenhorn. Bumpkin. Marine. He didn't wanna be here. You didn't want him here. But he's what we got. The figurine smells vaguely of country air."
+  components:
+  - type: Sprite
+    state: lenny_dugs
+  - type: PatronFigurine
+    id: b43bf6fc-8970-4536-aa0e-6cf70168fda9
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronkaelsharkvoss
+  name: Kael 'Shark' Voss figurine
+  description: "A hug hungry little Sharky."
+  components:
+  - type: Sprite
+    state: kael_shark_voss
+  - type: PatronFigurine
+    id: 58c2cefc-1796-4ca4-b6e6-5dbda5b8f506
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMarkSholl
+  name: Mark 'Blacklung' Sholl figurine
+  description: "A figurine of Mark 'Blacklung' Sholl. It depicts him with his usual 'Smokes like a chimney' nature on full display and tired eyes. Around his neck you see a well worn whistle with the words \"Cat wrangler\" engraved on the top."
+  components:
+  - type: Sprite
+    state: mark_sholl
+  - type: PatronFigurine
+    id: 9f601ba2-d7dd-46dd-8409-3757346d0ffd
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDaveBigDaveSmall
+  name: Dave 'Big Dave' Small figurine
+  description: "Life-sized if not bigger. A companion along your travels"
+  components:
+  - type: Sprite
+    state: dave_big_dave_small
+    scale: 0.6, 0.4
+  - type: PatronFigurine
+    id: 26df12fd-dcd8-4399-a0fa-d2c5eb4e72d8
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCyrilClovesCulkins
+  name: Cyril 'Cloves' Culkins figurine
+  description: "\"People sleep peaceably in their beds at night only because rough men stand ready to do violence on their behalf.\" - Orwell."
+  components:
+  - type: Sprite
+    state: cyril_cloves_culkins
+  - type: PatronFigurine
+    id: 22d7b4a3-3635-4d69-9696-c91df2047fa9
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronHexatheleHasselti
+  name: Hexathele Hasselti figurine
+  description: "Womp Womp."
+  components:
+  - type: Sprite
+    state: hexathele_hasselti
+  - type: PatronFigurine
+    id: dc4f0fcb-3cfe-4229-9af8-532865e8a5f3
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronFaePetrovic
+  name: Fae Petrovic figurine
+  description: "A figurine of a very handsome* engineer. You feel like you've seen him around here before, but since when was he an engineer?"
+  components:
+  - type: Sprite
+    state: fae_petrovic
+  - type: PatronFigurine
+    id: 7e9f0b8b-c918-4482-b12f-ae4dd1c43d49
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKasumi
+  name: Kasumi figurine
+  description: "She's doing her part, are you?"
+  components:
+  - type: Sprite
+    state: kasumi
+  - type: PatronFigurine
+    id: 8cbef018-4e1b-48f8-b6e2-d830a02695a7
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMuz
+  name: Muz figurine
+  description: "\"Just look at these muscles!\""
+  components:
+  - type: Sprite
+    state: muz
+  - type: PatronFigurine
+    id: 9b71f867-1868-4528-9f90-9a9db58a86cf
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNovaStargazer
+  name: Nova Stargazer figurine
+  description: "Rumor says if you interact with it enough, it might squeak."
+  components:
+  - type: Sprite
+    state: nova_stargazer
+  - type: PatronFigurine
+    id: 421d0be9-1b66-41dd-9077-617a1f3c0d7f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKippedKipper
+  name: Kipped Kipper figurine
+  description: "This thing is putting off a serious amount of heat, good for warming up on shiva's snowball."
+  components:
+  - type: Sprite
+    state: kipped_kipper
+  - type: PatronFigurine
+    id: f49eb544-509a-4991-a3f6-c05dec083389

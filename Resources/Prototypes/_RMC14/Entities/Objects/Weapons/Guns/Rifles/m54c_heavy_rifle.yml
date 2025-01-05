@@ -2,17 +2,18 @@
   name: M54CE2 heavy assault rifle
   parent: CMBaseWeaponRifle
   id: WeaponRifleM54CE2
+  suffix: Desert
   description: A large squad support weapon capable of laying down sustained suppressing fire from a mounted position. While unstable and less accurate, it can be lugged and shot with two hands.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/desert.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/desert.rsi
   - type: Tag
     tags:
     - WeaponRifleM54CE2
@@ -50,8 +51,10 @@
     accuracyMultiplier: 1
     accuracyMultiplierUnwielded: 0.5
   - type: WieldableSpeedModifiers
-    baseWalk: 0.696
-    baseSprint: 0.559
+    base: 0.5
+    light: 0.69
+    medium: 0.75
+    heavy: 0.806
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -94,10 +97,18 @@
       rmc-aslot-rail: 0.125, 0.185
       rmc-aslot-stock: -0.875, 0.0325
       rmc-aslot-underbarrel: 0.35, -0.4
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/urban.rsi
 
 - type: entity
   parent: CMMagazineRifleM54C
   id: CMMagazineRifleM54CE2
+  suffix: Desert
   name: "M54CE2 magazine (10x24mm)"
   components:
   - type: Tag
@@ -112,7 +123,7 @@
     proto: CMCartridgeRifle10x24mm
     capacity: 300
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -123,6 +134,13 @@
     steps: 2
     zeroVisible: false
   - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/urban.rsi
 
 - type: Tag
   id: WeaponRifleM54CE2

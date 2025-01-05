@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -27,6 +28,7 @@ public sealed class XenoTailSweepSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _hit = new();
 
@@ -67,9 +69,11 @@ public sealed class XenoTailSweepSystem : EntitySystem
             if (!_xeno.CanAbilityAttackTarget(xeno, marine))
                 return;
 
+            _rmcPulling.TryStopAllPullsFromAndOn(marine);
+
             var marineCoords = _transform.GetMapCoordinates(marine);
             var diff = marineCoords.Position - origin.Position;
-            diff *= xeno.Comp.Range / 3;
+            diff = diff.Normalized() * xeno.Comp.Range;
 
             if (xeno.Comp.Damage is { } damage)
                 _damageable.TryChangeDamage(marine, damage);

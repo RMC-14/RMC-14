@@ -278,3 +278,53 @@
       - id: CMMaskGas
       - id: CMMaskCoif
       - id: RMCMaskRebreather
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechSCTTools
+  name: ColMarTech squad comTech tools vendor
+  description: A vending machine that stores various extra tools that are useful on the field.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCombatTechPrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/tool.rsi
+    layers:
+    - state: "off"
+      map: [ "enum.VendingMachineVisualLayers.Base" ]
+    - state: "normal-unshaded"
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+  - type: CMAutomatedVendor
+    jobs:
+    - CMCombatTech
+    sections:
+    - name: Equipment
+      entries:
+      - id: CMBeltUtility
+        name: utility tool belt
+        amount: 4
+      - id: RMCCableCoil
+        amount: 4
+      - id: ClothingEyesGlassesMeson # TODO RMC14 welding goggles
+        amount: 2
+      - id: RMCEngineerKit
+        amount: 2
+    - name: Tools
+      entries:
+      - id: CMWelder
+        amount: 4
+      - id: CMCrowbar
+        amount: 4
+      - id: CMScrewdriver
+        amount: 4
+      - id: CMWirecutter
+        amount: 4
+      - id: CMWrench
+        amount: 4
+      - id: CMWrench
+        amount: 4
+      - id: CMMultitool
+        amount: 4
+      - id: CMWelderSmall
+        amount: 2

@@ -1690,13 +1690,13 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 .ToListAsync(cancellationToken: cancel);
         }
 
-        public async Task<bool> IsJobWhitelisted(Guid player, ProtoId<JobPrototype> job)
+        public async Task<bool> IsJobWhitelisted(Guid player, ProtoId<JobPrototype> job, CancellationToken cancel = default)
         {
-            await using var db = await GetDb();
+            await using var db = await GetDb(cancel);
             return await db.DbContext.RoleWhitelists
                 .Where(w => w.PlayerUserId == player)
                 .Where(w => w.RoleId == job.Id)
-                .AnyAsync();
+                .AnyAsync(cancel);
         }
 
         public async Task<bool> RemoveJobWhitelist(Guid player, ProtoId<JobPrototype> job)
@@ -1913,6 +1913,39 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             db.DbContext.RMCRoleTimerExcludes.Remove(exclusion);
             await db.DbContext.SaveChangesAsync();
             return true;
+        }
+
+        public async Task AddCommendation(Guid giver,
+            Guid receiver,
+            string giverName,
+            string receiverName,
+            string name,
+            string text,
+            CommendationType type,
+            int round)
+        {
+            await using var db = await GetDb();
+            db.DbContext.RMCCommendations.Add(new RMCCommendation
+            {
+                GiverId = giver,
+                ReceiverId = receiver,
+                GiverName = giverName,
+                ReceiverName = receiverName,
+                Name = name,
+                Text = text,
+                Type = type,
+                RoundId = round,
+            });
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<RMCCommendation>> GetCommendations(Guid player)
+        {
+            await using var db = await GetDb();
+            return  await db.DbContext.RMCCommendations
+                .Where(c => c.ReceiverId == player)
+                .ToListAsync();
         }
 
         #endregion

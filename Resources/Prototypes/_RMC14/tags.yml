@@ -68,6 +68,12 @@
   id: RMCRocketAmmo84mm
 
 - type: Tag
+  id: RMCDropshipWeaponPoint
+
+- type: Tag
+  id: RMCDropshipUtilityPoint
+
+- type: Tag
   id: WeaponSMGM63
 
 - type: Tag
@@ -96,3 +102,9 @@
 
 - type: Tag
   id: ThrowingKnife
+
+- type: Tag
+  id: RMCCircuitboard
+
+- type: Tag
+  id: RMCEngineerKit

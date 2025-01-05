@@ -175,12 +175,20 @@
   parent: RMCBaseJacket
   id: CMCoatASO
   name: auxiliary support officer jacket
+  suffix: Jungle
   description: A comfortable vest for officers who are expected to work long hours staring at rows of numbers and inspecting equipment from knives to torpedos to entire dropships.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/urban.rsi
 
 # Commanding Officer
 - type: entity
@@ -240,7 +248,6 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
 
-# Officer
 - type: entity
   parent: RMCBaseJacket
   id: CMCoatOfficer
@@ -255,12 +262,13 @@
 - type: entity
   parent: CMCoatOfficer
   id: RMCCoatService
+  suffix: Jungle
   description: A service jacket typically worn by officers of the UNMC. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/d_coat.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/d_coat.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
   - type: CMArmor
     armor: 10 # TODO RMC14 10 melee
   - type: Appearance
@@ -270,13 +278,10 @@
     foldVerbText: rmc-buttons-verb-fold
   - type: FoldableClothing
     foldedEquippedPrefix: jacket
-
-# Longcoat - This is the service jacket but for snow maps
-- type: entity
-  parent: CMCoatOfficer
-  id: CMCoatLong
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/long_coat.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/long_coat.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Coats/service/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Coats/service/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Coats/service/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Coats/service/urban.rsi

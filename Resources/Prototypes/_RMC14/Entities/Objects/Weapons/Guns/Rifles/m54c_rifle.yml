@@ -5,14 +5,14 @@
   description: The standard issue rifle of the Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/desert.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/desert.rsi
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -94,6 +94,13 @@
       rmc-aslot-rail: 0.1, 0.16
       rmc-aslot-stock: -0.78, 0.0325
       rmc-aslot-underbarrel: 0.35, -0.343
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m54c/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Rifles/m54c/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Rifles/m54c/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Rifles/m54c/urban.rsi
 
 - type: entity
   parent: CMMagazineRifleBase

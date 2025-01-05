@@ -227,3 +227,35 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/aviators.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/aviators.rsi
+
+- type: entity
+  parent: ClothingEyesBase
+  id: RMCWeldingGoggles
+  name: welding goggles
+  description: Protects the eyes from welders, approved by the mad scientist association.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
+  - type: ItemToggle
+    activated: true
+  - type: ToggleClothing
+    action: RMCActionToggleWeldingGoggles
+  - type: ComponentToggler
+    components:
+    - type: EyeProtection
+  - type: RMCItemToggleClothingVisuals
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: {state: icon-on}
+          False: {state: icon}
+  - type: Appearance
+  - type: Tag
+    tags:
+    - RMCWeldingGoggle
+
+- type: Tag
+  id: RMCWeldingGoggle

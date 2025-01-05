@@ -58,7 +58,7 @@
     - CMDefibrillator
     - CMAdvFirstAidKitFilled
     - CMHealthAnalyzer
-#    - TODO RMC14 medevac
+    - RMCMedevacStretcherFolded
     - CMRollerBedSpawnFolded
     - CMSurgicalLine
     - CMSynthGraft

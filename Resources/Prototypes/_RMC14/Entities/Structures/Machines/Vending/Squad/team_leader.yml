@@ -175,6 +175,7 @@
     #- id: RMCBeltHolsterFlareGun
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
+        name: M276 pattern toolbelt rig (Full)
         recommended: true
       - id: RMCBeltGrenade
     - name: Pouches

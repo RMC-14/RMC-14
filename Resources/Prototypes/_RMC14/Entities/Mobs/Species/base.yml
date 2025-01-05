@@ -200,10 +200,10 @@
       whitelist:
         components:
         - XenoHeavy
-#    - multiplier: 0.645
-#      whitelist:
-#        tags:
-#        - Bodybag
+    - multiplier: 0.645
+      whitelist:
+        tags:
+        - BodyBag
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -272,3 +272,5 @@
     blacklist:
       components:
       - Xeno
+  - type: RMCPickupDroppedItems
+  - type: CommendationReceiver
