@@ -146,3 +146,66 @@
           steps:
             - tool: Anchoring
               doAfter: 1
+
+- type: constructionGraph
+  parent: RMC
+  id: RMCTableParts
+  start: start
+  graph:
+  - node: start
+    actions:
+    - !type:DestroyEntity {}
+  - node: parts
+    entity: RMCTableParts
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMSheetMetal1
+        amount: 1
+      steps:
+      - tool: Anchoring
+        doAfter: 1
+
+- type: constructionGraph
+  parent: RMC
+  id: RMCReinforcedTableParts
+  start: start
+  graph:
+  - node: start
+    actions:
+    - !type:DestroyEntity {}
+  - node: parts
+    entity: RMCReinforcedTableParts
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMSheetMetal1
+        amount: 1
+      - !type:SpawnPrototype
+        prototype: CMRodMetal1
+        amount: 1
+      steps:
+      - tool: Anchoring
+        doAfter: 1
+
+- type: constructionGraph
+  parent: RMC
+  id: RMCWoodenTableParts
+  start: start
+  graph:
+  - node: start
+    actions:
+    - !type:DestroyEntity {}
+  - node: parts
+    entity: RMCWoodenTableParts
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: RMCPlankWood1
+        amount: 1
+      steps:
+      - tool: Anchoring
+        doAfter: 1

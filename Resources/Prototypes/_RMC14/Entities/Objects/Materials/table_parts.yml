@@ -10,7 +10,6 @@
   - type: Item
     size: Normal
 
-
 - type: entity
   parent: RMCTablePartBase
   id: RMCTablePartTan
@@ -21,6 +20,9 @@
   - type: Tag
     tags:
       - RMCTablePartTan
+  - type: Construction
+    graph: RMCTableParts
+    node: parts
 
 - type: Tag
   id: RMCTablePartTan
@@ -36,6 +38,9 @@
   - type: Tag
     tags:
       - RMCTablePartReinforced
+  - type: Construction
+    graph: RMCReinforcedTableParts
+    node: parts
 
 - type: Tag
   id: RMCTablePartReinforced
@@ -51,6 +56,9 @@
   - type: Tag
     tags:
       - RMCTablePartWood
+  - type: Construction
+    graph: RMCWoodenTableParts
+    node: parts
 
 - type: Tag
   id: RMCTablePartWood
@@ -66,6 +74,9 @@
   - type: Tag
     tags:
       - RMCTablePartWoodPoor
+  - type: Construction
+    graph: RMCWoodenTableParts
+    node: parts
 
 - type: Tag
   id: RMCTablePartWoodPoor
@@ -81,6 +92,9 @@
   - type: Tag
     tags:
       - RMCTablePartWoodFancy
+  - type: Construction
+    graph: RMCWoodenTableParts
+    node: parts
 
 - type: Tag
   id: RMCTablePartWoodFancy
@@ -95,6 +109,9 @@
   - type: Tag
     tags:
       - RMCTablePartGambling
+  - type: Construction
+    graph: RMCWoodenTableParts
+    node: parts
 
 - type: Tag
   id: RMCTablePartGambling
@@ -109,6 +126,9 @@
   - type: Tag
     tags:
       - RMCTablePartAlmayer
+  - type: Construction
+    graph: RMCTableParts
+    node: parts
 
 - type: Tag
   id: RMCTablePartAlmayer
