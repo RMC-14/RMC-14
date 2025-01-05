@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Parasites now have AI. They will try to leap and infect nearby hosts,
-      and return to eggs on their own after some time.
-    type: Add
-  id: 665
-  time: '2024-09-10T22:18:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3928
 - author: Dutch-VanDerLinde
   changes:
   - message: Updated LV-624's Research Landing Zone
@@ -5005,5 +4997,12 @@
   id: 1164
   time: '2025-01-05T01:52:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5276
+- author: CyberTropic
+  changes:
+  - message: Fixed nailgun not accepting repair materials.
+    type: Fix
+  id: 1165
+  time: '2025-01-05T01:53:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5270
 Name: RMC14
 Order: -1
