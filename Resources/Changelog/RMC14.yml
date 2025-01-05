@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed shotgun slug ammo not firing any projectiles.
-    type: Fix
-  id: 661
-  time: '2024-09-06T12:10:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3959
 - author: Vermidia
   changes:
   - message: Fix crusher and lurker melee slows lasting for the rest of the round
@@ -5005,5 +4998,12 @@
   id: 1160
   time: '2025-01-05T01:39:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5295
+- author: blueDev2
+  changes:
+  - message: Fixed healer drone sometimes leaving behind an alive drone body on sacrifice.
+    type: Fix
+  id: 1161
+  time: '2025-01-05T01:42:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5277
 Name: RMC14
 Order: -1
