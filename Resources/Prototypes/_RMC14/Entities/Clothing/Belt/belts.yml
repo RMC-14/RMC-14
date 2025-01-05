@@ -155,6 +155,7 @@
       - PowerCell
       - CMFireExtinguisherPortable
       - RMCExplosiveBreachingCharge
+      - RodMetal1 
 #     - # TODO nailgun, circuit board, plastic explosives, stock parts
       components:
       - Welder
