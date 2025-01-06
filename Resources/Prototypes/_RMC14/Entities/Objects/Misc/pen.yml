@@ -12,6 +12,7 @@
   - type: Item
     size: Tiny
     sprite: _RMC14/Objects/Misc/paper.rsi
+    heldPrefix: pen
   - type: Clothing
     equippedPrefix: pen
     sprite: _RMC14/Objects/Misc/paper.rsi

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/commit/f165d66c3a8b4ab02e6af02035c28e344d0bac69, https://github.com/cmss13-devs/cmss13/blob/91b9c6e2948606041342d99f7d35c723ce475cd9/icons/obj/items/storage/kits.dmi, https://github.com/cmss13-devs/cmss13/blob/bec6653d487a49aa2b5a8e0c97bed9612f620211/icons/mob/humans/onmob/items_righthand_0.dmi, https://github.com/cmss13-devs/cmss13/blob/bec6653d487a49aa2b5a8e0c97bed9612f620211/icons/mob/humans/onmob/items_lefthand_0.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/commit/f165d66c3a8b4ab02e6af02035c28e344d0bac69, https://github.com/cmss13-devs/cmss13/blob/91b9c6e2948606041342d99f7d35c723ce475cd9/icons/obj/items/storage/kits.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/equipment/tools_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/equipment/tools_righthand.dmi",
   "size": {
     "x": 32,
     "y": 32
