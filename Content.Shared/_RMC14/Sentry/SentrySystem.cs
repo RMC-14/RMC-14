@@ -103,7 +103,8 @@ public sealed class SentrySystem : EntitySystem
             return;
 
         var ev = new SentryDeployDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, args.User, sentry.Comp.DeployDelay, ev, sentry)
+        var delay = sentry.Comp.DeployDelay * _skills.GetSkillDelayMultiplier(args.User, sentry.Comp.DelaySkill);
+        var doAfter = new DoAfterArgs(EntityManager, args.User, delay, ev, sentry)
         {
             BreakOnMove = true,
         };
@@ -503,7 +504,8 @@ public sealed class SentrySystem : EntitySystem
             return;
 
         var ev = new SentryDisassembleDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, sentry.Comp.UndeployDelay, ev, sentry)
+        var delay = sentry.Comp.UndeployDelay * _skills.GetSkillDelayMultiplier(user, sentry.Comp.DelaySkill);
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, sentry)
         {
             BreakOnMove = true,
         };

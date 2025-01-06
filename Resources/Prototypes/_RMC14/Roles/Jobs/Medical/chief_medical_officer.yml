@@ -38,7 +38,6 @@
         RMCSkillPolice: 1
         RMCSkillResearch: 1
         RMCSkillSurgery: 2
-    - type: RMCUserBulkyArmorIncapable
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
@@ -57,7 +56,7 @@
   id: CMGearCMOEquipped
   equipment:
     jumpsuit: CMJumpsuitCMO
-    outerClothing: RMCCoatServiceSnow
+    outerClothing: RMCCoatService
     gloves: CMHandsLatex
     shoes: RMCShoesWhite
     head: CMHeadCapCMO

@@ -841,6 +841,7 @@
     East: /Textures/_RMC14/Tiles/planet/auto_shale/layer1_double_edge.png
     North: /Textures/_RMC14/Tiles/planet/auto_shale/layer1_double_edge.png
     West: /Textures/_RMC14/Tiles/planet/auto_shale/layer1_double_edge.png
+  weedsSpreadable: false
 
 - type: tile
   parent: RMCPlanetShale

@@ -19,12 +19,18 @@ public sealed class MentorMessagesReceivedMsg : NetMessage
         {
             var destination = new NetUserId(buffer.ReadGuid());
             var destinationName = buffer.ReadString();
-            var author = new NetUserId(buffer.ReadGuid());
+
+            var hasAuthor = buffer.ReadBoolean();
+            NetUserId? author = null;
+            if (hasAuthor)
+                author = new NetUserId(buffer.ReadGuid());
+
             var authorName = buffer.ReadString();
             var text = buffer.ReadString();
             var time = DateTime.FromBinary(buffer.ReadInt64());
             var isMentor = buffer.ReadBoolean();
-            var message = new MentorMessage(destination, destinationName, author, authorName, text, time, isMentor);
+            var isAdmin = buffer.ReadBoolean();
+            var message = new MentorMessage(destination, destinationName, author, authorName, text, time, isMentor, isAdmin);
             Messages.Add(message);
         }
     }
@@ -36,11 +42,22 @@ public sealed class MentorMessagesReceivedMsg : NetMessage
         {
             buffer.Write(message.Destination.UserId);
             buffer.Write(message.DestinationName);
-            buffer.Write(message.Author.UserId);
+
+            if (message.Author != null)
+            {
+                buffer.Write(true);
+                buffer.Write(message.Author.Value);
+            }
+            else
+            {
+                buffer.Write(false);
+            }
+
             buffer.Write(message.AuthorName);
             buffer.Write(message.Text);
             buffer.Write(message.Time.ToBinary());
             buffer.Write(message.IsMentor);
+            buffer.Write(message.IsAdmin);
         }
     }
 }
