@@ -22,7 +22,7 @@
   - type: Xeno
     role: CMXenoRunner
     tier: 1
-    hudOffset: -0.15,0.25
+    hudOffset: -0.15,0.6
     unlockAt: 300 # 5 minutes
   - type: Fixtures
     fixtures:

@@ -961,3 +961,69 @@
     state: cyril_cloves_culkins
   - type: PatronFigurine
     id: 22d7b4a3-3635-4d69-9696-c91df2047fa9
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronHexatheleHasselti
+  name: Hexathele Hasselti figurine
+  description: "Womp Womp."
+  components:
+  - type: Sprite
+    state: hexathele_hasselti
+  - type: PatronFigurine
+    id: dc4f0fcb-3cfe-4229-9af8-532865e8a5f3
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronFaePetrovic
+  name: Fae Petrovic figurine
+  description: "A figurine of a very handsome* engineer. You feel like you've seen him around here before, but since when was he an engineer?"
+  components:
+  - type: Sprite
+    state: fae_petrovic
+  - type: PatronFigurine
+    id: 7e9f0b8b-c918-4482-b12f-ae4dd1c43d49
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKasumi
+  name: Kasumi figurine
+  description: "She's doing her part, are you?"
+  components:
+  - type: Sprite
+    state: kasumi
+  - type: PatronFigurine
+    id: 8cbef018-4e1b-48f8-b6e2-d830a02695a7
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMuz
+  name: Muz figurine
+  description: "\"Just look at these muscles!\""
+  components:
+  - type: Sprite
+    state: muz
+  - type: PatronFigurine
+    id: 9b71f867-1868-4528-9f90-9a9db58a86cf
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNovaStargazer
+  name: Nova Stargazer figurine
+  description: "Rumor says if you interact with it enough, it might squeak."
+  components:
+  - type: Sprite
+    state: nova_stargazer
+  - type: PatronFigurine
+    id: 421d0be9-1b66-41dd-9077-617a1f3c0d7f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKippedKipper
+  name: Kipped Kipper figurine
+  description: "This thing is putting off a serious amount of heat, good for warming up on shiva's snowball."
+  components:
+  - type: Sprite
+    state: kipped_kipper
+  - type: PatronFigurine
+    id: f49eb544-509a-4991-a3f6-c05dec083389
