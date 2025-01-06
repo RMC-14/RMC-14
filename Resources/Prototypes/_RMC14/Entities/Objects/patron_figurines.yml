@@ -1027,3 +1027,14 @@
     state: kipped_kipper
   - type: PatronFigurine
     id: f49eb544-509a-4991-a3f6-c05dec083389
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKyrus
+  name: Kyrus figurine
+  description: "Just a simple engineer doing engineer things."
+  components:
+  - type: Sprite
+    state: kyrus
+  - type: PatronFigurine
+    id: 60d42aa6-88d9-4322-b782-109e17d81620
