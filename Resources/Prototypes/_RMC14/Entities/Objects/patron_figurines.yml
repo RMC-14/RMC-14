@@ -875,8 +875,11 @@
   name: Emily 'Klutz' Rathen figurine
   description: "A figurine of Emily 'Klutz' Rathen. It looks chipped and scuffed from being dropped repeatedly. The base is very small and uneven, making it want to fall over at all times."
   components:
+  - type: Transform
+    noRot: true
   - type: Sprite
     state: emily_klutz_rathen
+    rotation: 90
   - type: PatronFigurine
     id: e8819228-95ea-4a3b-8e1c-0e7eaa55cb90
 
@@ -924,3 +927,37 @@
     state: kael_shark_voss
   - type: PatronFigurine
     id: 58c2cefc-1796-4ca4-b6e6-5dbda5b8f506
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMarkSholl
+  name: Mark 'Blacklung' Sholl figurine
+  description: "A figurine of Mark 'Blacklung' Sholl. It depicts him with his usual 'Smokes like a chimney' nature on full display and tired eyes. Around his neck you see a well worn whistle with the words \"Cat wrangler\" engraved on the top."
+  components:
+  - type: Sprite
+    state: mark_sholl
+  - type: PatronFigurine
+    id: 9f601ba2-d7dd-46dd-8409-3757346d0ffd
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDaveBigDaveSmall
+  name: Dave 'Big Dave' Small figurine
+  description: "Life-sized if not bigger. A companion along your travels"
+  components:
+  - type: Sprite
+    state: dave_big_dave_small
+    scale: 0.6, 0.4
+  - type: PatronFigurine
+    id: 26df12fd-dcd8-4399-a0fa-d2c5eb4e72d8
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCyrilClovesCulkins
+  name: Cyril 'Cloves' Culkins figurine
+  description: "\"People sleep peaceably in their beds at night only because rough men stand ready to do violence on their behalf.\" - Orwell."
+  components:
+  - type: Sprite
+    state: cyril_cloves_culkins
+  - type: PatronFigurine
+    id: 22d7b4a3-3635-4d69-9696-c91df2047fa9

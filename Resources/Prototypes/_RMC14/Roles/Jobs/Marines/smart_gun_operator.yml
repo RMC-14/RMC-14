@@ -45,10 +45,10 @@
 - type: startingGear
   id: CMGearSmartGunOperatorEquipped
   equipment:
-    jumpsuit: JumpsuitMarineCamo
+    jumpsuit: JumpsuitMarine
     shoes: CMBootsBlackFilled
-    head: ArmorHelmetM10Camo
-    outerClothing: RMCSGHarnessCamo
+    head: ArmorHelmetM10
+    outerClothing: CMArmorSmartGunCombatHarness
     gloves: CMHandsBlackMarine
     id: CMDogtagSmartGunOperator
     ears: CMHeadsetAlpha

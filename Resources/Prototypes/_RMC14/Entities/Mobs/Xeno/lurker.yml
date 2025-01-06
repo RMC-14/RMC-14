@@ -4,6 +4,7 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoLurker
   name: Lurker
   description: A beefy, fast alien with sharp claws.
@@ -34,7 +35,7 @@
     - ActionXenoCripplingStrike
     - ActionXenoDevolve
     tier: 2
-    hudOffset: 0,0.16
+    hudOffset: -0.15,0.05
     unlockAt: 540 # 9 minutes
   - type: XenoLight
   - type: XenoDevolve

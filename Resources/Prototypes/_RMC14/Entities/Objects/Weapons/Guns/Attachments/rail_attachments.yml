@@ -474,6 +474,13 @@
         wieldedOnly: true
         inactiveOnly: true
       accuracyAddMult: -0.05
+  - type: ItemCamouflage
+    states:
+      Jungle: boomslang-scope
+      Desert: d_boomslang-scope
+      Snow: s_boomslang-scope
+      Classic: c_boomslang-scope
+      Urban: u_boomslang-scope
 
 - type: Tag
   id: RMCAttachmentRail

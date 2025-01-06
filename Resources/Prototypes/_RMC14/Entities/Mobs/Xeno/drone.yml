@@ -5,6 +5,7 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoDroneBase
   name: Drone
   description: An alien drone.
@@ -31,7 +32,7 @@
         Brute: 30
   - type: Xeno
     role: CMXenoDrone
-    hudOffset: 0,0.15
+    hudOffset: -0.1,0.15
     tier: 1
     bypassTierCount: true
     unlockAt: 60 # 1 minute
@@ -87,6 +88,8 @@
     - CMXenoQueen
   - type: Evasion
     evasion: 20
+  - type: XenoInhands
+    prefix: drone
 
 - type: entity
   parent: CMXenoDroneBase
@@ -137,6 +140,10 @@
       visible: false
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
   - type: XenoFruitPlanterVisuals
     rsi: _RMC14/Mobs/Xenonids/Drone/gardener_drone.rsi
     prefix: gardener
@@ -180,6 +187,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Drone/healer_drone.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.XenoHealerVisualLayers.Goop" ]
+      visible: false
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
   - type: RMCXenoDamageVisuals
     prefix: drone
   - type: Xeno
@@ -197,6 +211,7 @@
     - ActionXenoHealerDroneTransferPlasma
     - ActionXenoSacrifice
     - ActionXenoDevolve
+    hidden: true
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000
@@ -207,7 +222,7 @@
       groups:
         Brute: 17
   - type: XenoPheromones
-    pheromonesMultiplier: 2.5
+    pheromonesMultiplier: 3
   - type: XenoStrain
     name: rmc-xeno-healer-name
     description: rmc-xeno-healer-description
@@ -223,9 +238,11 @@
     stunMax: 4
     chance: 0.30
   - type: XenoEnergy
+    alert: XenoEnergyHealer
     max: 7500
     gain: 0
     gainAttack: 0
     gainAttackDowned: 0
   - type: XenoAcid
+  - type: XenoSalveVisuals
   #- type: XenoHealer

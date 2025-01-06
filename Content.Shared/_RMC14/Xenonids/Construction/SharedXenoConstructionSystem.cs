@@ -5,7 +5,6 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
-using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -248,16 +247,13 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        if (!_interaction.InRangeUnobstructed(xeno, args.Target, 20))
-            return;
-
         if (xeno.Comp.BuildChoice is not { } choice ||
             !CanSecreteOnTilePopup(xeno, choice, args.Target, true, true))
         {
             return;
         }
 
-        var attempt = new XenoSecreteStructureAttemptEvent();
+        var attempt = new XenoSecreteStructureAttemptEvent(args.Target);
         RaiseLocalEvent(xeno, ref attempt);
 
         if (attempt.Cancelled)
@@ -268,7 +264,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var entityCoords = GetCoordinates(coordinates);
         EntityUid? effect = null;
 
-        if (_prototype.TryIndex(effectID, out var effectProto) && _net.IsServer)
+        if (_prototype.TryIndex(effectID, out var effectProto, false) && _net.IsServer)
         {
             effect = Spawn(effectID, entityCoords);
             RaiseNetworkEvent(new XenoConstructionAnimationStartEvent(GetNetEntity(effect.Value), GetNetEntity(xeno)), Filter.PvsExcept(effect.Value));
@@ -316,6 +312,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (_net.IsServer)
         {
             var structure = Spawn(args.StructureId, coordinates);
+            _hive.SetSameHive(xeno.Owner, structure);
             _adminLogs.Add(LogType.RMCXenoConstruct, $"Xeno {ToPrettyString(xeno):xeno} constructed {ToPrettyString(structure):structure} at {coordinates}");
         }
 
@@ -484,6 +481,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
 
         var snapped = args.Target.SnapToGrid(EntityManager, _map);
+
+        var adjustEv = new XenoSecreteStructureAdjustFields(snapped);
+        RaiseLocalEvent(args.User, ref adjustEv);
+
         if (ent.Comp.CanUpgrade &&
             construction.CanUpgrade &&
             _rmcMap.HasAnchoredEntityEnumerator<XenoStructureUpgradeableComponent>(snapped, out var upgradeable) &&
@@ -606,7 +607,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         return target.GetTileRef(EntityManager, _map) is { } tile &&
                !tile.IsSpace() &&
                tile.GetContentTileDefinition().Sturdy &&
-               !_turf.IsTileBlocked(tile, CollisionGroup.Impassable) &&
+               !_turf.IsTileBlocked(tile, Impassable) &&
                !_xenoNest.HasAdjacentNestFacing(target);
     }
 

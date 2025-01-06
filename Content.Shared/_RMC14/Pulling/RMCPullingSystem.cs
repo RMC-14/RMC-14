@@ -421,6 +421,8 @@ public sealed class RMCPullingSystem : EntitySystem
                 continue;
 
             var puller = pullable.Puller.Value;
+            if (puller == default)
+                continue;
 
             if (_firemanQuery.TryComp(uid, out var fireman) && fireman.BeingCarried)
                 continue;
