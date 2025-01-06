@@ -1,6 +1,8 @@
 ﻿- type: department
   parent: CMDepartmentBase
   id: CMSurvivor
+  categories:
+  - HideSpawnMenu
   name: department-CMSurvivor
   description: cm-department-Survivor-description
   color: "#C38312"
