@@ -166,6 +166,9 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(CMKeyFunctions.CMHolsterQuaternary);
             AddButton(CMKeyFunctions.RMCPickUpDroppedItems);
 
+            AddHeader("ui-options-header-rmc-xeno");
+            AddButton(CMKeyFunctions.CMXenoWideSwing);
+
             AddHeader("ui-options-header-general");
             AddCheckBox("ui-options-hotkey-keymap", _cfg.GetCVar(CVars.DisplayUSQWERTYHotkeys), HandleToggleUSQWERTYCheckbox);
 

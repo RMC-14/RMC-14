@@ -25,14 +25,14 @@
   cost: 4
   storage:
     back:
-    - PlushieSharkGrey
+    - RMCPlushieSharkGrey
 
 - type: loadout
   id: PlushieMothRMC
   cost: 4
   storage:
     back:
-    - PlushieMoth
+    - RMCPlushieMoth
 
 - type: loadout
   id: PlushieRockRMC

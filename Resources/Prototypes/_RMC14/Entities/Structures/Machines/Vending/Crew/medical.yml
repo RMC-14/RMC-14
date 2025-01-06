@@ -61,14 +61,14 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: RMCBeltMedicBagCamoFilled
+      - id: CMBeltMedicBagFilled
       - id: CMBeltMedicalFilled
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
-      - id: RMCBackpackMarineCamo
+      - id: CMBackpackMarine
         name: backpack
-      - id: RMCSatchelMarineCamo
+      - id: CMSatchelMarine
         name: satchel
       - id: CMBackpackMedical
       - id: CMSatchelMedical
@@ -84,7 +84,8 @@
         name: first-aid pouch (pills)
       - id: RMCPouchFirstResponder
       - id: RMCPouchMedical
-      #- id: CMMedicalKitPouch
+      - id: RMCPouchMedkit
+        recommended: true
       - id: RMCPouchReagentCanisterBicaridine
         recommended: true
         name: Pressurized Reagent Canister Pouch\n(Bicaridine)

@@ -53,6 +53,14 @@
       rmc-aslot-underbarrel: 0.375, -0.155
 
 - type: entity
+  parent: RMCWeaponRevolverM44
+  id: RMCWeaponRevolverM44Empty
+  suffix: Empty
+  components:
+  - type: RevolverAmmoProvider
+    proto: null
+
+- type: entity
   id: RMCBaseSpeedLoader44
   name: "M44 speed loader (.44)"
   parent: BaseItem

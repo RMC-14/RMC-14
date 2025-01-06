@@ -62,7 +62,7 @@
     - RMCTablePartTan
     - RMCTablePartAlmayer
     - RMCTablePartReinforced
-#    - Rack parts (4687 metal)
+    - RMCRackParts
     - CMScalpel
     - CMCircularSaw
     - CMSurgicalDrill

@@ -82,64 +82,13 @@
     whitelist:
       components:
       - Marine
-
-#camo variants
-- type: entity
-  parent: RMCMortarKit
-  id: RMCMortarKitCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: RMCMortarKitJungle
-      Desert: RMCMortarKitDesert
-      Snow: RMCMortarKitSnow
-      Classic: RMCMortarKit
-      Urban: RMCMortarKitUrban
-
-- type: entity
-  parent: RMCMortarKit
-  id: RMCMortarKitJungle
-  suffix: Jungle
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/mortar/jungle.rsi
-    layers:
-    - map: [ "mortar" ]
-      state: mortar_m402_carry
-
-- type: entity
-  parent: RMCMortarKit
-  id: RMCMortarKitDesert
-  suffix: Desert
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/mortar/desert.rsi
-    layers:
-    - map: [ "mortar" ]
-      state: mortar_m402_carry
-
-- type: entity
-  parent: RMCMortarKit
-  id: RMCMortarKitSnow
-  suffix: Snow
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/mortar/snow.rsi
-    layers:
-    - map: [ "mortar" ]
-      state: mortar_m402_carry
-
-- type: entity
-  parent: RMCMortarKit
-  id: RMCMortarKitUrban
-  suffix: Urban
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/mortar/urban.rsi
-    layers:
-    - map: [ "mortar" ]
-      state: mortar_m402_carry
+      Jungle: _RMC14/Objects/Weapons/mortar/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/mortar/desert.rsi
+      Snow: _RMC14/Objects/Weapons/mortar/snow.rsi
+      Classic: _RMC14/Objects/Weapons/mortar/classic.rsi
+      Urban: _RMC14/Objects/Weapons/mortar/urban.rsi
 
 - type: entity
   abstract: true
@@ -161,6 +110,8 @@
   name: 80mm high explosive mortar shell
   description: An 80mm mortar shell, loaded with a high explosive charge.
   components:
+  - type: Item
+    heldPrefix: he
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/mortar.rsi
     state: mortar_ammo_he
@@ -180,6 +131,8 @@
   name: 80mm incendiary mortar shell
   description: An 80mm mortar shell, loaded with a Type B napalm charge. Perfect for long-range area denial.
   components:
+  - type: Item
+    heldPrefix: inc
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/mortar.rsi
     state: mortar_ammo_inc
@@ -202,6 +155,8 @@
   name: 80mm flare/camera mortar shell
   description: An 80mm mortar shell, loaded with an illumination flare / camera combo, attached to a parachute.
   components:
+  - type: Item
+    heldPrefix: flr
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/mortar.rsi
     state: mortar_ammo_flr

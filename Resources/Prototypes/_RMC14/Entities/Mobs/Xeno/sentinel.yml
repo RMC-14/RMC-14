@@ -4,6 +4,7 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoSentinel
   name: Sentinel
   description: A slithery, spitting kind of alien.
@@ -35,7 +36,7 @@
     - ActionXenoParalyzingSlash
     - ActionXenoDevolve
     tier: 1
-    hudOffset: 0,0.157
+    hudOffset: -0.15,0.157
     unlockAt: 300 # 5 minutes
   - type: XenoLight
   - type: XenoDevolve

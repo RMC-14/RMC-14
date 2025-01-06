@@ -4,7 +4,11 @@
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     Title="Almayer Control Console" MinSize="350 350">
     <BoxContainer Orientation="Vertical">
-        <RichTextLabel Text="[bold]Emergency measures[/bold]" />
+        <RichTextLabel Text="[bold]Ship Control[/bold]" />
+        <ui:BlueHorizontalSeparator />
+        <Button Name="MedalButton" Access="Public" Text="Give a medal"
+                StyleClasses="OpenBoth" />
+        <RichTextLabel Text="[bold]Emergency measures[/bold]" Margin="0 20 0 0" />
         <ui:BlueHorizontalSeparator />
         <Button Name="EvacuationButton" Access="Public" HorizontalExpand="True"
                 StyleClasses="OpenBoth" TextAlign="Left" />

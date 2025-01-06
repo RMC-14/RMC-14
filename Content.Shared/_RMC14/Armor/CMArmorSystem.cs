@@ -53,7 +53,12 @@ public sealed class CMArmorSystem : EntitySystem
 
         SubscribeLocalEvent<ClothingComponent, BeingEquippedAttemptEvent>(OnClothingEquippedAttempt);
 
+        SubscribeLocalEvent<RMCArmorSpeedTierComponent, GotEquippedEvent>(OnArmorSpeedTierGotEquipped);
+        SubscribeLocalEvent<RMCArmorSpeedTierComponent, GotUnequippedEvent>(OnArmorSpeedTierGotUnequipped);
+        SubscribeLocalEvent<RMCArmorSpeedTierComponent, InventoryRelayedEvent<RefreshArmorSpeedTierEvent>>(OnRefreshArmorSpeedTier);
+
         SubscribeLocalEvent<InventoryComponent, RMCEquipAttemptEvent>(_inventory.RelayEvent);
+        SubscribeLocalEvent<InventoryComponent, RefreshArmorSpeedTierEvent>(_inventory.RelayEvent);
     }
 
     private void OnMapInit(Entity<CMArmorComponent> armored, ref MapInitEvent args)
@@ -276,5 +281,32 @@ public sealed class CMArmorSystem : EntitySystem
         }
 
         return equipmentEntityID;
+    }
+
+    private void OnArmorSpeedTierGotEquipped(Entity<RMCArmorSpeedTierComponent> armour, ref GotEquippedEvent args)
+    {
+        EnsureComp(args.Equipee, out RMCArmorSpeedTierUserComponent comp);
+
+        RefreshArmorSpeedTier((args.Equipee, comp));
+    }
+
+    private void OnArmorSpeedTierGotUnequipped(Entity<RMCArmorSpeedTierComponent> armour, ref GotUnequippedEvent args)
+    {
+        EnsureComp(args.Equipee, out RMCArmorSpeedTierUserComponent comp);
+
+        RefreshArmorSpeedTier((args.Equipee, comp));
+    }
+
+    private void RefreshArmorSpeedTier(Entity<RMCArmorSpeedTierUserComponent> user)
+    {
+        var ev = new RefreshArmorSpeedTierEvent(~SlotFlags.POCKET);
+        RaiseLocalEvent(user.Owner, ref ev);
+
+        user.Comp.SpeedTier = ev.SpeedTier;
+    }
+
+    private void OnRefreshArmorSpeedTier(Entity<RMCArmorSpeedTierComponent> armor, ref InventoryRelayedEvent<RefreshArmorSpeedTierEvent> args)
+    {
+        args.Args.SpeedTier = armor.Comp.SpeedTier;
     }
 }
