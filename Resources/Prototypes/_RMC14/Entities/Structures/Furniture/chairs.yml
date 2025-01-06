@@ -23,7 +23,6 @@
   - type: Physics
     bodyType: Static
   - type: Anchorable
-  - type: Rotatable
   - type: Construction
     graph: CMSeat
     node: chair
@@ -58,8 +57,6 @@
     state: comfychair
   - type: Transform
     anchored: true
-  - type: Rotatable
-    rotateWhileAnchored: true
   - type: Physics
     bodyType: Static
   - type: Anchorable
@@ -132,8 +129,6 @@
   components:
   - type: Sprite
     state: comfychair_alpha
-  - type: Rotatable
-    rotateWhileAnchored: false
 
 - type: entity
   parent: CMChairComfy
@@ -143,8 +138,6 @@
   components:
   - type: Sprite
     state: comfychair_bravo
-  - type: Rotatable
-    rotateWhileAnchored: false
 
 - type: entity
   parent: CMChairComfy
@@ -154,8 +147,6 @@
   components:
   - type: Sprite
     state: comfychair_charlie
-  - type: Rotatable
-    rotateWhileAnchored: false
 
 - type: entity
   parent: CMChairComfy
@@ -165,8 +156,6 @@
   components:
   - type: Sprite
     state: comfychair_delta
-  - type: Rotatable
-    rotateWhileAnchored: false
 
 # Office chair
 - type: entity
@@ -176,8 +165,6 @@
   components:
   - type: Sprite
     state: officechair_dark
-  - type: Rotatable
-    rotateWhileAnchored: true
   - type: Construction
     graph: CMSeat
     node: chairOfficeDark
@@ -202,7 +189,6 @@
   components:
   - type: Sprite
     state: wooden_chair
-  - type: Rotatable
   - type: Damageable
     damageModifierSet: Wood
   - type: Tag
