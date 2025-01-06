@@ -1,11 +1,11 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   id: CMXenoWarrior
-  name: Warrior
+  name: Воин
   description: A beefy alien with an armored carapace.
   components:
   - type: GhostRole
@@ -56,6 +56,8 @@
     evolvesTo:
     - CMXenoCrusher
     - CMXenoPraetorian
+    strains:
+    - CMXenoWarriorBoxer
   - type: CMArmor
     armor: 20
     explosionArmor: 40
@@ -65,6 +67,111 @@
     damage:
       groups:
         Brute: 35
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 48
+  - type: Tackle
+    max: 4
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.4525
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.5025
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.3625
+      whitelist:
+        components:
+        - XenoHeavy
+  - type: XenoLifesteal
+  - type: RMCXenoDamageVisuals
+    prefix: warrior
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: warrior
+
+- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  id: CMXenoWarriorBoxer
+  name: 
+  description: Мускулистый ксено с бронированными лапами.
+  components:
+  - type: GhostRole
+    name: Воин
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Warrior/warrior.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      500: Critical
+      600: Dead
+  - type: Xeno
+    role: CMXenoWarrior
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoToggleCrest
+    - ActionXenoDash
+    - ActionXenoFling
+    - ActionXenoDevolve
+    tier: 2
+    hudOffset: 0,0.25
+    unlockAt: 540 # 9 minutes
+  - type: XenoLight
+  - type: XenoStrain
+    name: Берсерк
+    description: rmc-xeno-boxer-description
+    popup: Мои мышцы сильны, а воля крепка, пусть враги улья познают мой гнев
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoDefender
+  - type: XenoDevour
+  - type: XenoFling
+  - type: XenoLeap
+    rechargeTime: 0
+    plasmaCost: 40
+    delay: 0
+    knockdownTime: 0
+    range: 4
+    moveDelayTime: 0
+  - type: XenoPlasma
+    plasma: 0
+    maxPlasma: 120
+    plasmaRegenOnWeeds: 2
+  - type: XenoEvolution
+    max: 500
+    evolvesTo:
+    - CMXenoCrusher
+    - CMXenoPraetorian
+  - type: CMArmor
+    armor: 20
+    explosionArmor: 40
+  - type: XenoCrest
+    Armor: 10
+    SpeedMultiplier: 0.8
+    CrestSize: Immobile
+  - type: XenoClaws
+    clawType: Sharp
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 40
   - type: XenoTailStab
     tailDamage:
       groups:
