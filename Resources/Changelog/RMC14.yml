@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added being able to look through ladders without moving through them.
-      This can be done Alt+Clicking the ladder, or by dragging the ladder to yourself
-      like in SS13.
-    type: Add
-  id: 674
-  time: '2024-09-11T01:17:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3986
-- author: DrSmugleaf
-  changes:
   - message: Fixed pressing shift undeploying your bipod, stopping overwatch, stopping
       xenonid watch, etc.
     type: Fix
@@ -4967,5 +4958,12 @@
   id: 1173
   time: '2025-01-07T09:55:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5291
+- author: Rainbeon
+  changes:
+  - message: Fixed glass shards preventing doors and resin doors from closing.
+    type: Fix
+  id: 1174
+  time: '2025-01-07T10:01:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5257
 Name: RMC14
 Order: -1
