@@ -10,8 +10,8 @@
         <TextEdit Name="MessageTextEdit" Access="Public" VerticalExpand="True" MinSize="500 150" />
         <BoxContainer Orientation="Horizontal" Margin="0 5">
             <Control HorizontalExpand="True" />
-            <Button Text="Cancel" Name="CancelButton" Access="Public" StyleClasses="OpenBoth" MinWidth="100" Margin="0 0 20 0" />
-            <Button Text="Confirm" Name="OkButton" Access="Public" StyleClasses="OpenBoth" MinWidth="100" />
+            <Button Text="{Loc rmc-dialog-cancel}" Name="CancelButton" Access="Public" StyleClasses="OpenBoth" MinWidth="100" Margin="0 0 20 0" />
+            <Button Text="{Loc rmc-dialog-confirm}" Name="OkButton" Access="Public" StyleClasses="OpenBoth" MinWidth="100" />
             <Control HorizontalExpand="True" />
         </BoxContainer>
     </BoxContainer>
