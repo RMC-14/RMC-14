@@ -1,24 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Added ammo stuns. They don't impact big xenos (t3s, hivelord, queen)
-      or very small ones (parasites, larva) but apply stun and slowdown and knock
-      xenos back.
-    type: Add
-  - message: Added scout high impact ammo. It has a max effect range of 32 but gets
-      worse the farther the bullet travels.
-    type: Add
-  - message: Added stuns to buckshot and slug ammo, with slug giving worse effects
-      but having a better range.
-    type: Add
-  - message: Fixed some stun and slow timers being 1/2 as long as intended (stomp,
-      coughing blood, regurgitation)
-    type: Fix
-  - message: Neurotoxin no longer makes you blue
-    type: Fix
-  id: 670
-  time: '2024-09-10T22:22:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3965
 - author: Sigil
   changes:
   - message: The M96S integrated scope can now toggle between 2x and 4x magnification.
@@ -5008,5 +4988,12 @@
   id: 1169
   time: '2025-01-05T09:17:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5307
+- author: blueDev2
+  changes:
+  - message: Fixed tunnels not costing plasma when placed not on a node.
+    type: Fix
+  id: 1170
+  time: '2025-01-07T09:51:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5322
 Name: RMC14
 Order: -1
