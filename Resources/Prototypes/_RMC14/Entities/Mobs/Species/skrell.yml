@@ -1,0 +1,24 @@
+- type: entity
+  save: false
+  parent: CMBaseMobSpeciesOrganic
+  id: RMCMobSkrell
+  name: Urist R McFish
+  suffix: RMC14
+  components:
+  - type: HumanoidAppearance
+    species: Skrell
+  - type: Vocal
+    sounds:
+      Male: RMCMaleSkrell
+      Unsexed: RMCMaleSkrell
+      Female: RMCFemaleSkrell
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#7a8bf2"
+
+- type: entity
+  parent: BaseSpeciesDummy
+  id: MobSkrellDummy
+  categories: [ HideSpawnMenu ]
