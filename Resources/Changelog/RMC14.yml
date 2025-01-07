@@ -1,22 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed Boiler Bombard popup spam, it now has a 1 second cooldown between
-      attempts.
-    type: Fix
-  id: 677
-  time: '2024-09-11T03:00:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3994
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the elevator not killing you after vaulting the railing into a
-      lowered or lowering elevator.
-    type: Fix
-  id: 678
-  time: '2024-09-11T03:00:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3993
-- author: DrSmugleaf
-  changes:
   - message: Added sounds at round-end for each round outcome, made by Bolgarich.
     type: Add
   - message: Added planet map vote. In the lobby, a vote will be made for the next
@@ -4968,5 +4952,20 @@
   id: 1176
   time: '2025-01-07T10:04:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5261
+- author: DummeHytteOst
+  changes:
+  - message: You can no longer devour currently nested hosts.
+    type: Fix
+  id: 1177
+  time: '2025-01-07T10:10:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5244
+- author: Vermidia
+  changes:
+  - message: Fixed Praetorian spit's doing slightly less damage than intended (25
+      > 30), and acid ball range being higher than intended (4 > 3).
+    type: Fix
+  id: 1178
+  time: '2025-01-07T10:09:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5269
 Name: RMC14
 Order: -1
