@@ -1,0 +1,54 @@
+- type: constructionGraph
+  id: RMCTablePart
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:DeleteEntity {}
+    - node: Metal
+      edges:
+      - to: start
+        completed:
+          - !type:SpawnPrototype
+            prototype: CMSheetMetal1
+            amount: 1
+        steps:
+          - tool: Anchoring
+            doAfter: 1
+    - node: MetalReinforced
+      edges:
+      - to: start
+        completed:
+          - !type:SpawnPrototype
+            prototype: CMSheetMetal1
+            amount: 1
+          - !type:SpawnPrototype
+            prototype: CMRodMetal1
+            amount: 1
+        steps:
+          - tool: Anchoring
+            doAfter: 1
+    - node: Wood
+      edges:
+      - to: start
+        completed:
+          - !type:SpawnPrototype
+            prototype: RMCPlankWood1
+            amount: 1
+        steps:
+          - tool: Anchoring
+            doAfter: 1
+    - node: WoodCarpet
+      edges:
+      - to: start
+        completed:
+          - !type:SpawnPrototype
+            prototype: RMCPlankWood1
+            amount: 1
+          # - !type:SpawnPrototype #Todo make carpets
+          #   prototype: RMCCarpet1
+          #   amount: 1
+        steps:
+          - tool: Anchoring
+            doAfter: 1
+
