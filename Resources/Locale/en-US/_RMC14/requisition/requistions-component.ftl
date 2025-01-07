@@ -1,6 +1,6 @@
 # Requisition Computer
 requisition-paperwork-receiver-name = Logistics Branch
-requisition-paperwork-reward-message = Confirmation Received! Transfered ${$amount} from budget surplus
+requisition-paperwork-reward-message = Confirmation Received! transferred ${$amount} from budget surplus
 
 # Requisition Invoice
 requisition-paper-print-name = {$name} invoice

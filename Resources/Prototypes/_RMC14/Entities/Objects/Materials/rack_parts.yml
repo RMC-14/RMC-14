@@ -1,0 +1,20 @@
+- type: entity
+  parent: BaseItem
+  id: RMCRackParts
+  name: rack parts
+  description: A collapsable kit for a three-shelf rack with four telescoping legs. Some assembly required.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Materials/rack_parts.rsi
+    state: icon
+  - type: Item
+    size: Normal
+  - type: Tag
+    tags:
+    - RMCRackParts
+  - type: Construction
+    graph: RMCRackParts
+    node: parts
+
+- type: Tag
+  id: RMCRackParts

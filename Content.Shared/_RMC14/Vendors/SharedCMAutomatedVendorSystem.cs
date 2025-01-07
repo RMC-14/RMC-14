@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+using System.Numerics;
+using Content.Shared._RMC14.Holiday;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Squads;
@@ -38,6 +39,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedWebbingSystem _webbing = default!;
+    [Dependency] private readonly SharedRMCHolidaySystem _rmcHoliday = default!;
 
     // TODO RMC14 make this a prototype
     public const string SpecialistPoints = "Specialist";
@@ -203,6 +205,16 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
 
         if (!validJob)
+            return;
+
+        var validHoliday = section.Holidays.Count == 0;
+        foreach (var holiday in section.Holidays)
+        {
+            if (_rmcHoliday.IsActiveHoliday(holiday))
+                validHoliday = true;
+        }
+
+        if (!validHoliday)
             return;
 
         if (section.Choices is { } choices)
