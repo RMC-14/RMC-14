@@ -544,7 +544,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/press.rsi
   - type: ItemCamouflage # this is needed, otherwise it looks like M3MediumArmor
-    camouflageVariations:
+    camouflageVariations: { }
 
 - type: Tag
   id: RMCScoutArmor
