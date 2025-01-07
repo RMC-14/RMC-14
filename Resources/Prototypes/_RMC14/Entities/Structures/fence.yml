@@ -23,13 +23,61 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 50
+        damage: 600
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+        - !type:PlaySoundBehavior
+          sound:
+            path: /Audio/Items/wirecutter.ogg
+        - !type:ChangeConstructionNodeBehavior
+          node: rmcFenceBroken
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
   - type: Construction
     graph: CMFence
     node: fenceMetal
   - type: RMCDropshipBlocked
   - type: MinimapColor
     color: "#8d2294ad"
+
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCFenceBroken
+  name: broken fence
+  description: A mess of broken wire strewn between two poles, it's not blocking anyone's way through.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/fences.rsi
+    state: brokenfence0
+  - type: PlacementReplacement
+    key: walls
+  - type: IconSmooth
+    key: walls
+    base: brokenfence
+    mode: CardinalFlags
+  - type: Physics
+    canCollide: false
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: RMCDropshipBlocked
+  - type: MinimapColor
+    color: "#8d2294ad"
+  - type: Construction
+    graph: CMFence
+    node: rmcFenceBroken
