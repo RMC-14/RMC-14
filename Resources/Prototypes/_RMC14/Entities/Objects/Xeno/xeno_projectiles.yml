@@ -310,7 +310,7 @@
   - type: PreventCollideWithDead
   - type: RMCProjectileAccuracy
     accuracy: 160
- - type: ProjectileMaxRange
+  - type: ProjectileMaxRange
     max: 7
 
 - type: entity
