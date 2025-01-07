@@ -55,13 +55,20 @@
       "name": "hivelord_downed_3"
     },
     {
-      "name": "hivelord_egg"
+      "name": "hivelord_egg_left",
+      "directions": 4
     },
     {
-      "name": "hivelord_parasite_left"
+      "name": "hivelord_egg_right",
+      "directions": 4
     },
     {
-      "name": "hivelord_parasite_right"
+      "name": "hivelord_parasite_left",
+      "directions": 4
+    },
+    {
+      "name": "hivelord_parasite_right",
+      "directions": 4
     },
     {
       "name": "hivelord_rest_0"

@@ -91,6 +91,8 @@
     - CMXenoQueen
   - type: Evasion
     evasion: 20
+  - type: XenoInhands
+    prefix: drone
 
 - type: entity
   parent: CMXenoDroneBase
@@ -142,6 +144,10 @@
       visible: false
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
   - type: XenoFruitPlanterVisuals
     rsi: _RMC14/Mobs/Xenonids/Drone/gardener_drone.rsi
     prefix: gardener
@@ -185,6 +191,17 @@
   components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Drone/healer_drone.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.XenoHealerVisualLayers.Goop" ]
+      visible: false
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
   - type: RMCXenoDamageVisuals
     prefix: drone
   - type: Xeno
@@ -235,4 +252,5 @@
     gainAttack: 0
     gainAttackDowned: 0
   - type: XenoAcid
+  - type: XenoSalveVisuals
   #- type: XenoHealer

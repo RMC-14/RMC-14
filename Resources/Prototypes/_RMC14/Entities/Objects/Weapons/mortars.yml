@@ -110,6 +110,8 @@
   name: 80mm high explosive mortar shell
   description: An 80mm mortar shell, loaded with a high explosive charge.
   components:
+  - type: Item
+    heldPrefix: he
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/mortar.rsi
     state: mortar_ammo_he
@@ -129,6 +131,8 @@
   name: 80mm incendiary mortar shell
   description: An 80mm mortar shell, loaded with a Type B napalm charge. Perfect for long-range area denial.
   components:
+  - type: Item
+    heldPrefix: inc
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/mortar.rsi
     state: mortar_ammo_inc
@@ -151,6 +155,8 @@
   name: 80mm flare/camera mortar shell
   description: An 80mm mortar shell, loaded with an illumination flare / camera combo, attached to a parachute.
   components:
+  - type: Item
+    heldPrefix: flr
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/mortar.rsi
     state: mortar_ammo_flr

@@ -74,7 +74,7 @@
   - type: Clothing
     quickEquip: false
     slots: [mask]
-    sprite: _RMC14/Mobs/Xenonids/Parasite/parasite_mask.rsi
+    sprite: _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
   - type: HideLayerClothing
     slots:
     - Snout
@@ -101,3 +101,5 @@
   - type: Blindfold
   - type: StandingState
     downSound: null
+  - type: XenoInhandSprite
+    stateName: parasite
