@@ -4,7 +4,9 @@
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     Title="APC" MinSize="450 450">
     <BoxContainer Orientation="Vertical">
-        <RichTextLabel Name="LockedLabel" Access="Public" Visible="True" />
+        <controls:StripeBack>
+            <RichTextLabel Name="LockedLabel" Access="Public" Visible="True" />
+        </controls:StripeBack>
         <RichTextLabel Name="PowerStatusLabel" Access="Public" Margin="0 10 0 0" />
         <ui:BlueHorizontalSeparator />
         <BoxContainer Orientation="Horizontal" Visible="False">
