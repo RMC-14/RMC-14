@@ -293,6 +293,8 @@
         Heat: 30
   - type: RMCProjectileAccuracy
     accuracy: 110
+  - type: ProjectileMaxRange
+    max: 3
 
 - type: entity
   parent: XenoAcidBallSpitProjectile
@@ -300,10 +302,16 @@
   categories:
   - HideSpawnMenu
   components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 30
   - type: XenoProjectileShieldOnHit
   - type: PreventCollideWithDead
   - type: RMCProjectileAccuracy
     accuracy: 160
+  - type: ProjectileMaxRange
+    max: 7
 
 - type: entity
   parent: XenoSpitProjectile
@@ -314,7 +322,7 @@
   - type: Projectile
     damage:
       types:
-        Heat: 25
+        Heat: 30
 
 - type: entity
   id: XenoAcidBallProjectile
