@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed Queen screech not unbuckling power loader operators.
-    type: Fix
-  id: 676
-  time: '2024-09-11T01:51:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3991
-- author: DrSmugleaf
-  changes:
   - message: Fixed Boiler Bombard popup spam, it now has a 1 second cooldown between
       attempts.
     type: Fix
@@ -4966,5 +4959,14 @@
   id: 1175
   time: '2025-01-07T10:03:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5262
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the radio telephone backpack phone on sprite appearing incorrectly.
+    type: Fix
+  - message: Added a wall-mounted telephone, expect to see it on the Almayer.
+    type: Add
+  id: 1176
+  time: '2025-01-07T10:04:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5261
 Name: RMC14
 Order: -1
