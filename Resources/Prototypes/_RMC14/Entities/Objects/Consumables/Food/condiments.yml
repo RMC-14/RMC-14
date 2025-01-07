@@ -107,7 +107,7 @@
         - ReagentId: Ketchup
           Quantity: 50
 
-# Soy Sauce 
+# Soy Sauce
 - type: entity
   parent: RMCCondiment
   id: RMCCondimentSoysauce
@@ -123,7 +123,7 @@
         - ReagentId: Soysauce
           Quantity: 50
 
-# Corn Oil 
+# Corn Oil
 - type: entity
   parent: RMCCondiment
   id: RMCCondimentCornOil
@@ -185,8 +185,8 @@
 - type: entity
   parent: RMCCondimentHotsauce
   id: RMCCondimentHotsauceFranks
-  name: Frank's Red Hot bottle
-  description: A bottle of Weston-Yamada brand Frank's Red Hot hot sauce.
+  name: red hot bottle
+  description: A bottle of Weston-Yamada brand Red Hot hot sauce.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/Sauces/franks.rsi
