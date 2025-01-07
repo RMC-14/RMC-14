@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed sentries being able to fit non-sentry magazines.
-    type: Fix
-  id: 673
-  time: '2024-09-10T22:56:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3982
-- author: DrSmugleaf
-  changes:
   - message: Added being able to look through ladders without moving through them.
       This can be done Alt+Clicking the ladder, or by dragging the ladder to yourself
       like in SS13.
@@ -4965,5 +4958,14 @@
   id: 1172
   time: '2025-01-07T09:53:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5317
+- author: DummeHytteOst
+  changes:
+  - message: Fixed the XM88's damage increase on hit being higher than intended (50%
+      > 20%) and the duration until its combo stacks expire being higher than intended
+      (4 > 2).
+    type: Fix
+  id: 1173
+  time: '2025-01-07T09:55:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5291
 Name: RMC14
 Order: -1
