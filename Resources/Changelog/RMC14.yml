@@ -1,48 +1,4 @@
 ﻿Entries:
-- author: Sigil
-  changes:
-  - message: The M96S integrated scope can now toggle between 2x and 4x magnification.
-      The former allows you to move while aiming.
-    type: Add
-  - message: 'Damage falloff for bullets added. In broad strokes: The further you
-      are from your target, the less damage your shots will do. Notable weapons and
-      attachments: M63 bullets start rapidly losing damage past 4 tiles, the M4SPR
-      removes falloff from its ammo, M96S ammo has no falloff, buckshot becomes useless
-      at 4 tiles, slugs at 8 and flechettes at 12, active scopes reduce falloff and
-      the silencer increases it.'
-    type: Add
-  - message: The masterkey now deals massively increased damage to walls, doors and
-      certain other structures. Its damage to other targets has been reduced to its
-      intended values. The primary pellet now deals 55 damage, while the three additional
-      ones deal 20 each.
-    type: Tweak
-  - message: Brought all scope doafters in line with how they are on CM.
-    type: Tweak
-  - message: A weapon with a magnetic harness attached no longer becomes immune to
-      gravity if you throw it while something else is in your suit storage.
-    type: Fix
-  - message: Buckshot, slugs and flechettes now do piercing damage instead of blunt.
-    type: Fix
-  - message: The masterkey can no longer be fired when the gun it's attached to is
-      not wielded.
-    type: Fix
-  - message: The bipod can no longer be instantly deployed on glass shards.
-    type: Fix
-  - message: The masterkey can no longer use ammo other than buckshot.
-    type: Fix
-  - message: The arm brace now properly deactivates when swapped out while still active,
-      and doesn't permanently glue the SMG to your arm.
-    type: Fix
-  id: 671
-  time: '2024-09-10T22:26:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3422
-- author: CaasGit
-  changes:
-  - message: Allow for body bags to be health scanned.
-    type: Fix
-  id: 672
-  time: '2024-09-10T22:39:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3919
 - author: DrSmugleaf
   changes:
   - message: Fixed sentries being able to fit non-sentry magazines.
@@ -4995,5 +4951,19 @@
   id: 1170
   time: '2025-01-07T09:51:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5322
+- author: DummeHytteOst
+  changes:
+  - message: You can now deconstruct tableparts with a wrench.
+    type: Add
+  id: 1171
+  time: '2025-01-07T09:54:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5315
+- author: CyberTropic
+  changes:
+  - message: Added breakable fences.
+    type: Add
+  id: 1172
+  time: '2025-01-07T09:53:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5317
 Name: RMC14
 Order: -1
