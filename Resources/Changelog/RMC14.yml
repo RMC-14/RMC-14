@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed pressing shift undeploying your bipod, stopping overwatch, stopping
-      xenonid watch, etc.
-    type: Fix
-  id: 675
-  time: '2024-09-11T01:45:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3988
-- author: DrSmugleaf
-  changes:
   - message: Fixed Queen screech not unbuckling power loader operators.
     type: Fix
   id: 676
@@ -4965,5 +4957,14 @@
   id: 1174
   time: '2025-01-07T10:01:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5257
+- author: Vermidia
+  changes:
+  - message: Fixed welding tanks not filling welders
+    type: Fix
+  - message: Fixed welding tanks not exploding
+    type: Fix
+  id: 1175
+  time: '2025-01-07T10:03:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5262
 Name: RMC14
 Order: -1
