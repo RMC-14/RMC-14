@@ -1,17 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added sounds at round-end for each round outcome, made by Bolgarich.
-    type: Add
-  - message: Added planet map vote. In the lobby, a vote will be made for the next
-      planet map to play on. This excludes the planet map that was selected for the
-      last round.
-    type: Add
-  id: 679
-  time: '2024-09-11T07:40:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4001
-- author: DrSmugleaf
-  changes:
   - message: Added the xenonid hive core's missing ability to block CAS and mortar
       fire within a 10 tile radius.
     type: Add
@@ -4967,5 +4956,12 @@
   id: 1178
   time: '2025-01-07T10:09:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5269
+- author: SG6732
+  changes:
+  - message: Tweaked the M4SPR's barrel attachment point to look better with the bayonet.
+    type: Tweak
+  id: 1179
+  time: '2025-01-07T10:33:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5287
 Name: RMC14
 Order: -1
