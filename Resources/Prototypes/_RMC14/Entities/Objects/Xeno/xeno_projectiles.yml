@@ -293,7 +293,7 @@
         Heat: 30
   - type: RMCProjectileAccuracy
     accuracy: 110
- - type: ProjectileMaxRange
+  - type: ProjectileMaxRange
     max: 3
 
 - type: entity
