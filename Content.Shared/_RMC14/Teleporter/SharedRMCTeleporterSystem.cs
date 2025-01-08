@@ -115,6 +115,12 @@ public abstract class SharedRMCTeleporterSystem : EntitySystem
         if (TryComp(user, out PullerComponent? puller) &&
             TryComp(puller.Pulling, out PullableComponent? pullable))
         {
+            if (TryComp(puller.Pulling, out PullerComponent? otherPullingPuller) &&
+                TryComp(otherPullingPuller.Pulling, out PullableComponent? otherPullingPullable))
+            {
+                _pulling.TryStopPull(otherPullingPuller.Pulling.Value, otherPullingPullable, puller.Pulling);
+            }
+
             var pulling = puller.Pulling.Value;
             _pulling.TryStopPull(pulling, pullable, user);
             _transform.SetMapCoordinates(user, teleport);
