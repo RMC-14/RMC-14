@@ -2,6 +2,8 @@
   id: XenoArmor
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/xeno_armor.rsi
+    state: armor_max
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_armor.rsi
     state: armor_100
   - sprite: /Textures/_RMC14/Interface/Alerts/xeno_armor.rsi
     state: armor_90
@@ -26,4 +28,4 @@
   name: Armor
   description: Your armor. It reduces damage taken.
   minSeverity: 0
-  maxSeverity: 10
+  maxSeverity: 11
