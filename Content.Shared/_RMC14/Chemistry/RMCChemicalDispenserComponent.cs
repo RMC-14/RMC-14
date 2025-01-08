@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Chemistry;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-[Access(typeof(RMCChemistrySystem))]
+[Access(typeof(SharedRMCChemistrySystem))]
 public sealed partial class RMCChemicalDispenserComponent : Component
 {
     [DataField, AutoNetworkedField]

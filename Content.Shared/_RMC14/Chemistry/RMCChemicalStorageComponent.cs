@@ -6,7 +6,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.Chemistry;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(RMCChemistrySystem))]
+[Access(typeof(SharedRMCChemistrySystem))]
 public sealed partial class RMCChemicalStorageComponent : Component
 {
     [DataField, AutoNetworkedField]

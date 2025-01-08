@@ -8,13 +8,14 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
+using Robust.Shared.GameStates;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Chemistry;
 
-public sealed class RMCChemistrySystem : EntitySystem
+public abstract class SharedRMCChemistrySystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
@@ -28,6 +29,9 @@ public sealed class RMCChemistrySystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<SolutionComponent, ComponentGetState>(OnSolutionGetState);
+        SubscribeLocalEvent<SolutionComponent, ComponentHandleState>(OnSolutionHandleState);
+
         SubscribeLocalEvent<DetailedExaminableSolutionComponent, ExaminedEvent>(OnDetailedSolutionExamined);
 
         SubscribeLocalEvent<RMCChemicalDispenserComponent, MapInitEvent>(OnDispenserMapInit);
@@ -43,6 +47,20 @@ public sealed class RMCChemistrySystem : EntitySystem
                 subs.Event<RMCChemicalDispenserEjectBeakerBuiMsg>(OnChemicalDispenserEjectBeakerMsg);
                 subs.Event<RMCChemicalDispenserDispenseBuiMsg>(OnChemicalDispenserDispenseMsg);
             });
+    }
+
+    private void OnSolutionGetState(Entity<SolutionComponent> ent, ref ComponentGetState args)
+    {
+        var s = new Solution(ent.Comp.Solution);
+        args.State = new SolutionComponentState(s);
+    }
+
+    private void OnSolutionHandleState(Entity<SolutionComponent> ent, ref ComponentHandleState args)
+    {
+        if (args.Current is not SolutionComponentState s)
+            return;
+
+        ent.Comp.Solution = new Solution(s.Solution);
     }
 
     private void OnDetailedSolutionExamined(Entity<DetailedExaminableSolutionComponent> ent, ref ExaminedEvent args)
@@ -131,14 +149,14 @@ public sealed class RMCChemistrySystem : EntitySystem
         if (!_itemSlots.TryGetSlot(ent, ent.Comp.ContainerSlotId, out var slot) ||
             slot.ContainerSlot?.ContainedEntity is not { } contained ||
             !_solution.TryGetMixableSolution(contained, out var solutionEnt, out _) ||
-            !ent.Comp.Settings.Contains(args.Amount) ||
-            !TryGetStorage(ent.Comp.Network, out var storage))
+            !ent.Comp.Settings.Contains(args.Amount))
         {
             return;
         }
 
         _solution.SplitSolution(solutionEnt.Value, args.Amount);
-        Dirty(ent);
+        Log.Info(solutionEnt.Value.Comp.Solution.Volume.ToString());
+        DispenserUpdated(ent);
     }
 
     private void OnChemicalDispenserEjectBeakerMsg(Entity<RMCChemicalDispenserComponent> ent, ref RMCChemicalDispenserEjectBeakerBuiMsg args)
@@ -182,6 +200,9 @@ public sealed class RMCChemistrySystem : EntitySystem
         var storages = EntityQueryEnumerator<RMCChemicalStorageComponent>();
         while (storages.MoveNext(out var storageId, out var storageComp))
         {
+            if (IsClientSide(storageId))
+                continue;
+
             if (storageComp.Network == network)
             {
                 storage = (storageId, storageComp);
@@ -204,6 +225,10 @@ public sealed class RMCChemistrySystem : EntitySystem
             dispenserComp.Energy = energy;
             Dirty(dispenserId, dispenserComp);
         }
+    }
+
+    protected virtual void DispenserUpdated(Entity<RMCChemicalDispenserComponent> ent)
+    {
     }
 
     public override void Update(float frameTime)
