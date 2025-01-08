@@ -80,7 +80,7 @@
           - RMCAttachmentXM88Stock
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.75, 0.0
+      rmc-aslot-barrel: 0.71875, 0.0
       rmc-aslot-rail: -0.15625, 0.0625
       rmc-aslot-underbarrel: 0.24, -0.3
       rmc-aslot-stock: -0.56, 0.03
