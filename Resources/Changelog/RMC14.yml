@@ -1,126 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Added ammo stuns. They don't impact big xenos (t3s, hivelord, queen)
-      or very small ones (parasites, larva) but apply stun and slowdown and knock
-      xenos back.
-    type: Add
-  - message: Added scout high impact ammo. It has a max effect range of 32 but gets
-      worse the farther the bullet travels.
-    type: Add
-  - message: Added stuns to buckshot and slug ammo, with slug giving worse effects
-      but having a better range.
-    type: Add
-  - message: Fixed some stun and slow timers being 1/2 as long as intended (stomp,
-      coughing blood, regurgitation)
-    type: Fix
-  - message: Neurotoxin no longer makes you blue
-    type: Fix
-  id: 670
-  time: '2024-09-10T22:22:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3965
-- author: Sigil
-  changes:
-  - message: The M96S integrated scope can now toggle between 2x and 4x magnification.
-      The former allows you to move while aiming.
-    type: Add
-  - message: 'Damage falloff for bullets added. In broad strokes: The further you
-      are from your target, the less damage your shots will do. Notable weapons and
-      attachments: M63 bullets start rapidly losing damage past 4 tiles, the M4SPR
-      removes falloff from its ammo, M96S ammo has no falloff, buckshot becomes useless
-      at 4 tiles, slugs at 8 and flechettes at 12, active scopes reduce falloff and
-      the silencer increases it.'
-    type: Add
-  - message: The masterkey now deals massively increased damage to walls, doors and
-      certain other structures. Its damage to other targets has been reduced to its
-      intended values. The primary pellet now deals 55 damage, while the three additional
-      ones deal 20 each.
-    type: Tweak
-  - message: Brought all scope doafters in line with how they are on CM.
-    type: Tweak
-  - message: A weapon with a magnetic harness attached no longer becomes immune to
-      gravity if you throw it while something else is in your suit storage.
-    type: Fix
-  - message: Buckshot, slugs and flechettes now do piercing damage instead of blunt.
-    type: Fix
-  - message: The masterkey can no longer be fired when the gun it's attached to is
-      not wielded.
-    type: Fix
-  - message: The bipod can no longer be instantly deployed on glass shards.
-    type: Fix
-  - message: The masterkey can no longer use ammo other than buckshot.
-    type: Fix
-  - message: The arm brace now properly deactivates when swapped out while still active,
-      and doesn't permanently glue the SMG to your arm.
-    type: Fix
-  id: 671
-  time: '2024-09-10T22:26:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3422
-- author: CaasGit
-  changes:
-  - message: Allow for body bags to be health scanned.
-    type: Fix
-  id: 672
-  time: '2024-09-10T22:39:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3919
-- author: DrSmugleaf
-  changes:
-  - message: Fixed sentries being able to fit non-sentry magazines.
-    type: Fix
-  id: 673
-  time: '2024-09-10T22:56:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3982
-- author: DrSmugleaf
-  changes:
-  - message: Added being able to look through ladders without moving through them.
-      This can be done Alt+Clicking the ladder, or by dragging the ladder to yourself
-      like in SS13.
-    type: Add
-  id: 674
-  time: '2024-09-11T01:17:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3986
-- author: DrSmugleaf
-  changes:
-  - message: Fixed pressing shift undeploying your bipod, stopping overwatch, stopping
-      xenonid watch, etc.
-    type: Fix
-  id: 675
-  time: '2024-09-11T01:45:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3988
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Queen screech not unbuckling power loader operators.
-    type: Fix
-  id: 676
-  time: '2024-09-11T01:51:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3991
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Boiler Bombard popup spam, it now has a 1 second cooldown between
-      attempts.
-    type: Fix
-  id: 677
-  time: '2024-09-11T03:00:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3994
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the elevator not killing you after vaulting the railing into a
-      lowered or lowering elevator.
-    type: Fix
-  id: 678
-  time: '2024-09-11T03:00:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3993
-- author: DrSmugleaf
-  changes:
-  - message: Added sounds at round-end for each round outcome, made by Bolgarich.
-    type: Add
-  - message: Added planet map vote. In the lobby, a vote will be made for the next
-      planet map to play on. This excludes the planet map that was selected for the
-      last round.
-    type: Add
-  id: 679
-  time: '2024-09-11T07:40:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4001
 - author: DrSmugleaf
   changes:
   - message: Added the xenonid hive core's missing ability to block CAS and mortar
@@ -5008,5 +4886,82 @@
   id: 1169
   time: '2025-01-05T09:17:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5307
+- author: blueDev2
+  changes:
+  - message: Fixed tunnels not costing plasma when placed not on a node.
+    type: Fix
+  id: 1170
+  time: '2025-01-07T09:51:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5322
+- author: DummeHytteOst
+  changes:
+  - message: You can now deconstruct tableparts with a wrench.
+    type: Add
+  id: 1171
+  time: '2025-01-07T09:54:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5315
+- author: CyberTropic
+  changes:
+  - message: Added breakable fences.
+    type: Add
+  id: 1172
+  time: '2025-01-07T09:53:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5317
+- author: DummeHytteOst
+  changes:
+  - message: Fixed the XM88's damage increase on hit being higher than intended (50%
+      > 20%) and the duration until its combo stacks expire being higher than intended
+      (4 > 2).
+    type: Fix
+  id: 1173
+  time: '2025-01-07T09:55:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5291
+- author: Rainbeon
+  changes:
+  - message: Fixed glass shards preventing doors and resin doors from closing.
+    type: Fix
+  id: 1174
+  time: '2025-01-07T10:01:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5257
+- author: Vermidia
+  changes:
+  - message: Fixed welding tanks not filling welders
+    type: Fix
+  - message: Fixed welding tanks not exploding
+    type: Fix
+  id: 1175
+  time: '2025-01-07T10:03:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5262
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the radio telephone backpack phone on sprite appearing incorrectly.
+    type: Fix
+  - message: Added a wall-mounted telephone, expect to see it on the Almayer.
+    type: Add
+  id: 1176
+  time: '2025-01-07T10:04:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5261
+- author: DummeHytteOst
+  changes:
+  - message: You can no longer devour currently nested hosts.
+    type: Fix
+  id: 1177
+  time: '2025-01-07T10:10:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5244
+- author: Vermidia
+  changes:
+  - message: Fixed Praetorian spit's doing slightly less damage than intended (25
+      > 30), and acid ball range being higher than intended (4 > 3).
+    type: Fix
+  id: 1178
+  time: '2025-01-07T10:09:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5269
+- author: SG6732
+  changes:
+  - message: Tweaked the M4SPR's barrel attachment point to look better with the bayonet.
+    type: Tweak
+  id: 1179
+  time: '2025-01-07T10:33:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5287
 Name: RMC14
 Order: -1

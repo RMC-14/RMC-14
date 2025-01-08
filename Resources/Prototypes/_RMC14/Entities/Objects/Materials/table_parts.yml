@@ -9,6 +9,12 @@
     sprite: _RMC14/Objects/Materials/table_parts.rsi
   - type: Item
     size: Normal
+  - type: Construction
+    graph: RMCTablePart
+    node: Metal
+  - type: Tag
+    tags:
+    - RMCTablePartMetal
 
 
 - type: entity
@@ -21,6 +27,7 @@
   - type: Tag
     tags:
       - RMCTablePartTan
+      - RMCTablePartMetal
 
 - type: Tag
   id: RMCTablePartTan
@@ -36,6 +43,9 @@
   - type: Tag
     tags:
       - RMCTablePartReinforced
+      - RMCTablePartMetalReinforced
+  - type: Construction
+    node: MetalReinforced  
 
 - type: Tag
   id: RMCTablePartReinforced
@@ -51,6 +61,9 @@
   - type: Tag
     tags:
       - RMCTablePartWood
+      - RMCTablePartWoodPart 
+  - type: Construction
+    node: Wood
 
 - type: Tag
   id: RMCTablePartWood
@@ -66,6 +79,7 @@
   - type: Tag
     tags:
       - RMCTablePartWoodPoor
+      - RMCTablePartWoodPart
 
 - type: Tag
   id: RMCTablePartWoodPoor
@@ -81,6 +95,7 @@
   - type: Tag
     tags:
       - RMCTablePartWoodFancy
+      - RMCTablePartWoodPart
 
 - type: Tag
   id: RMCTablePartWoodFancy
@@ -95,6 +110,9 @@
   - type: Tag
     tags:
       - RMCTablePartGambling
+      - RMCTablePartWoodCarpet
+  - type: Construction
+    node: WoodCarpet
 
 - type: Tag
   id: RMCTablePartGambling
@@ -109,6 +127,19 @@
   - type: Tag
     tags:
       - RMCTablePartAlmayer
+      - RMCTablePartMetal
 
 - type: Tag
   id: RMCTablePartAlmayer
+
+- type: Tag
+  id: RMCTablePartMetal
+
+- type: Tag
+  id: RMCTablePartMetalReinforced
+
+- type: Tag
+  id: RMCTablePartWoodPart
+
+- type: Tag
+  id: RMCTablePartWoodCarpet
