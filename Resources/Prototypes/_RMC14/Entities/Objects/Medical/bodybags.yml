@@ -165,7 +165,7 @@
 
 - type: entity
   parent: CMBodyBag
-  id: RMCThermalTarp # TODO RMC14 This needs to halt infected timers or something
+  id: RMCThermalTarp
   name: V3 reactive thermal tarp
   description: A more compact and improved version of the V2 thermal tarp, intended primarily for the transportation of deceased or wounded marines. It has improved cloaking technology than earlier models, allowing it to cloak to a greater degree and faster, but can only be used with special training.
   components:
