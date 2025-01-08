@@ -78,4 +78,30 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         SoundSpecifier? sound = null)
     {
     }
+
+    /// <summary>
+    /// Dispatches already wrapped announcement to Marines.
+    /// </summary>
+    /// <param name="message">The content of the announcement.</param>
+    /// <param name="sound">GlobalSound for announcement.</param>
+    public virtual void AnnounceToMarines(
+        string message,
+        SoundSpecifier? sound = null
+    )
+    {
+    }
+
+    /// <summary>
+    /// Dispatches an unsigned announcement to Marines.
+    /// </summary>
+    /// <param name="message">The content of the announcement.</param>
+    /// <param name="author">The author of the message, UNMC High Command by default.</param>
+    /// <param name="sound">GlobalSound for announcement.</param>
+    public virtual void AnnounceHighCommand(
+        string message,
+        string? author = null,
+        SoundSpecifier? sound = null
+    )
+    {
+    }
 }

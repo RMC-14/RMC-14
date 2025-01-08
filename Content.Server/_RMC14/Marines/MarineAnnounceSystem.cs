@@ -134,13 +134,12 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         _ui.SetUiState(computer.Owner, MarineCommunicationsComputerUI.Key, state);
     }
 
-
     /// <summary>
     /// Dispatches already wrapped announcement to Marines.
     /// </summary>
     /// <param name="message">The content of the announcement.</param>
     /// <param name="sound">GlobalSound for announcement.</param>
-    public void AnnounceToMarines(
+    public override void AnnounceToMarines(
         string message,
         SoundSpecifier? sound = null
         )
@@ -157,13 +156,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         _audio.PlayGlobal(sound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));
     }
 
-    /// <summary>
-    /// Dispatches an unsigned announcement to Marines.
-    /// </summary>
-    /// <param name="message">The content of the announcement.</param>
-    /// <param name="author">The author of the message, UNMC High Command by default.</param>
-    /// <param name="sound">GlobalSound for announcement.</param>
-    public void AnnounceHighCommand(
+    public override void AnnounceHighCommand(
         string message,
         string? author = null,
         SoundSpecifier? sound = null
