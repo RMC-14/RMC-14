@@ -65,6 +65,8 @@
           Quantity: 6
         - ReagentId: TableSalt
           Quantity: 2
+  - type: Extractable
+    grindableSolutionName: food
 
 - type: entity
   parent: CMMREFoodSide

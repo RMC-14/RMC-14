@@ -1,0 +1,15 @@
+﻿- type: entity
+  parent: FoodGoldenApple
+  id: RMCFoodGoldenApple
+  name: golden apple
+  description: Emblazoned upon the apple is the word 'Kallisti'.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
+        - ReagentId: Gold
+          Quantity: 2
