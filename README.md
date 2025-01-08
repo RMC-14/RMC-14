@@ -1,4 +1,4 @@
-WH14K is RMC-14 fork is inspired by Foxhole, WH40K Soulstorm, that runs on [Robust Toolbox](https://github.com/space-wizards/RobustToolbox).
+WH14 is RMC-14 fork is inspired by Foxhole, WH40K Soulstorm, that runs on [Robust Toolbox](https://github.com/space-wizards/RobustToolbox).
 
 The design goal of this fork is to attempt to replicate the feel and experience of planetary warfare in 40.000, using SS14 as a foundation.
 
@@ -26,7 +26,7 @@ We are happy to accept contributions from anybody. Get in Discord if you want to
 
 All original SS14 and RMC-14 code for the content repository is licensed under [MIT](https://github.com/space-wizards/space-station-14/blob/master/LICENSE.TXT).
 
-All original code and sprites under CC BY-NC-SA-4.0 [CC BY-NC-SA-4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+All WH14 code and sprites under CC BY-NC-SA-4.0 [CC BY-NC-SA-4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 Most original assets are licensed under [CC-BY-SA-3.0](https://creativecommons.org/licenses/by-sa/3.0/) unless stated otherwise. Assets have their license and the copyright in the metadata file. [Example](https://github.com/space-wizards/space-station-14/blob/master/Resources/Textures/Objects/Tools/crowbar.rsi/meta.json).
 
