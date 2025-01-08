@@ -1,5 +1,4 @@
 ﻿using Content.Shared._RMC14.Marines;
-using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
@@ -14,7 +13,6 @@ namespace Content.Shared._RMC14.Xenonids.Screech;
 public sealed class XenoScreechSystem : EntitySystem
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
@@ -57,15 +55,7 @@ public sealed class XenoScreechSystem : EntitySystem
         _marines.Clear();
         _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.StunRange, _marines);
 
-        _parasites.Clear();
-        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.StunRange, _parasites);
-
         foreach (var receiver in _marines)
-        {
-            Stun(xeno, receiver, xeno.Comp.StunTime, true);
-        }
-
-        foreach (var receiver in _parasites)
         {
             Stun(xeno, receiver, xeno.Comp.StunTime, true);
         }
@@ -73,17 +63,17 @@ public sealed class XenoScreechSystem : EntitySystem
         _marines.Clear();
         _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParalyzeRange, _marines);
 
-        _parasites.Clear();
-        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParalyzeRange, _parasites);
-
         foreach (var receiver in _marines)
         {
             Stun(xeno, receiver, xeno.Comp.ParalyzeTime, false);
         }
 
+        _parasites.Clear();
+        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParasiteStunRange, _parasites);
+
         foreach (var receiver in _parasites)
         {
-            Stun(xeno, receiver, xeno.Comp.ParalyzeTime, false);
+            Stun(xeno, receiver, xeno.Comp.ParasiteStunTime, true);
         }
 
         if (_net.IsServer)
@@ -96,9 +86,6 @@ public sealed class XenoScreechSystem : EntitySystem
             return;
 
         if (!_examineSystem.InRangeUnOccluded(xeno, receiver))
-            return;
-
-        if (_hive.FromSameHive(xeno, receiver))
             return;
 
         if (stun)

@@ -1,5 +1,4 @@
-﻿using System.Numerics;
-using Content.Shared.FixedPoint;
+﻿using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -25,6 +24,12 @@ public sealed partial class XenoScreechComponent : Component
 
     [DataField, AutoNetworkedField]
     public float ParalyzeRange = 4;
+
+    [DataField, AutoNetworkedField]
+    public float ParasiteStunRange = 11.2838f;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan ParasiteStunTime = TimeSpan.FromSeconds(8);
 
     [DataField, AutoNetworkedField]
     public EntProtoId Effect = "CMEffectScreech";
