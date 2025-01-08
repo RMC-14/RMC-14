@@ -180,7 +180,6 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
         QueueDel(args.Target);
 
-        _xenoPlasma.TryRemovePlasma(xenoBuilder.Owner, args.PlasmaCost);
         var createTunnelEv = new XenoDigTunnelDoAfter(args.Prototype, args.PlasmaCost);
         var doAfterTunnelCreationArgs = new DoAfterArgs(EntityManager, xenoBuilder.Owner, args.CreateTunnelDelay, createTunnelEv, xenoBuilder.Owner)
         {
@@ -222,6 +221,8 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             _popup.PopupEntity(tunnelFailureMessage, xenoBuilder.Owner, xenoBuilder.Owner);
             return;
         }
+
+        _xenoPlasma.TryRemovePlasma(xenoBuilder.Owner, args.PlasmaCost);
 
         if (!TryPlaceTunnel(xenoBuilder.Owner, null, out var newTunnelEnt))
         {
