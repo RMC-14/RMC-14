@@ -96,6 +96,8 @@
       behaviors:
       - !type:SolutionExplosionBehavior
         solution: tank
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
   - type: DamageOnToolInteract
     tools: Welding
     weldingDamage:
