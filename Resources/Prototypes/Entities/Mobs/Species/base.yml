@@ -152,7 +152,7 @@
   - type: IdExaminable
   - type: Hands
   - type: ComplexInteraction
-  - type: Internals
+#  - type: Internals
   - type: FloatingVisuals
   - type: Climbing
   - type: Cuffable
