@@ -8,6 +8,8 @@
             <ScrollContainer VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
                 <BoxContainer Orientation="Vertical" Name="NotesContainer" Access="Public" VerticalExpand="True" />
             </ScrollContainer>
+            <RichTextLabel Text="[italic]These notes will fade with time.[/italic]" />
+            <RichTextLabel Text="[italic]Notes are used to track history or pattern of behavior.[/italic]" />
         </BoxContainer>
     </PanelContainer>
 </ui:FancyWindow>
