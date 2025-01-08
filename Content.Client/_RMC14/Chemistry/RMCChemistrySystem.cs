@@ -4,7 +4,7 @@ using Robust.Client.Player;
 
 namespace Content.Client._RMC14.Chemistry;
 
-public sealed class RMCChemistryUISystem : EntitySystem
+public sealed class RMCChemistryUISystem : SharedRMCChemistrySystem
 {
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
@@ -16,6 +16,11 @@ public sealed class RMCChemistryUISystem : EntitySystem
     }
 
     private void OnDispenserAfterState(Entity<RMCChemicalDispenserComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        UpdateDispenserUI(ent);
+    }
+
+    private void UpdateDispenserUI(Entity<RMCChemicalDispenserComponent> ent)
     {
         try
         {
@@ -32,6 +37,12 @@ public sealed class RMCChemistryUISystem : EntitySystem
         {
             Log.Error($"Error refreshing {nameof(RMCChemicalDispenserBui)}\n{e}");
         }
+    }
+
+    protected override void DispenserUpdated(Entity<RMCChemicalDispenserComponent> ent)
+    {
+        base.DispenserUpdated(ent);
+        UpdateDispenserUI(ent);
     }
 
     public override void Update(float frameTime)
