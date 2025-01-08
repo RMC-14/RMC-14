@@ -322,8 +322,6 @@
         amount: 4
       - id: CMWrench
         amount: 4
-      - id: CMWrench
-        amount: 4
       - id: CMMultitool
         amount: 4
       - id: CMWelderSmall
