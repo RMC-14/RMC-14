@@ -192,7 +192,7 @@ namespace Content.Server.Explosion.EntitySystems
             foreach (var entity in query)
             {
                 var transform = Transform(entity);
-                if (!_random.Prob(component.Probability) || !_interaction.InRangeUnobstructed(uid, transform.Coordinates))
+                if (!_random.Prob(component.Probability) || !_interaction.InRangeUnobstructed(uid, transform.Coordinates, component.Range))
                     continue;
 
                 _stun.TryStun(entity, stunTime, true);
