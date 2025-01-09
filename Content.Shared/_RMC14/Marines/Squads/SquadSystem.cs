@@ -466,7 +466,7 @@ public sealed class SquadSystem : EntitySystem
         var squad = toPromote.Comp?.Squad;
         if (TryComp(toPromote, out ActorComponent? actor) && squad != null)
         {
-            var message = Loc.GetString("rmc-squad-promoted-leader", ("name", Name(squad.Value)));
+            var message = Loc.GetString("rmc-squad-promoted-leader", ("squad", Name(squad.Value)));
             _rmcChat.ChatMessageToOne(ChatChannel.Local, message, message, default, false, actor.PlayerSession.Channel, Color.FromHex("#0084FF"), true);
         }
 
