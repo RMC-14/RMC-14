@@ -98,6 +98,10 @@
       Snow: _RMC14/Objects/Weapons/Guns/Shotguns/xm51/snow.rsi
       Classic: _RMC14/Objects/Weapons/Guns/Shotguns/xm51/classic.rsi
       Urban: _RMC14/Objects/Weapons/Guns/Shotguns/xm51/urban.rsi
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
+      state: all
 
 - type: Tag
   id: RMCWeaponShotgunXM51

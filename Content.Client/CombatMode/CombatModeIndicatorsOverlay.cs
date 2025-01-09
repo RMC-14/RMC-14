@@ -1,14 +1,16 @@
 using System.Numerics;
 using Content.Client.Hands.Systems;
+using Content.Shared._RMC14.CombatMode;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
-using Robust.Client.Serialization;
 using Robust.Client.UserInterface;
 using Robust.Shared.Enums;
-using Robust.Shared.Graphics;
 using Robust.Shared.Utility;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using Color = Robust.Shared.Maths.Color;
 
 namespace Content.Client.CombatMode;
 
@@ -25,10 +27,14 @@ public sealed class CombatModeIndicatorsOverlay : Overlay
     private readonly IEyeManager _eye;
     private readonly CombatModeSystem _combat;
     private readonly HandsSystem _hands = default!;
+    private readonly RMCCombatModeSystem _rmcCombatMode;
+    private readonly SpriteSystem _sprite;
+    private readonly IClyde _clyde;
 
     private readonly Texture _gunSight;
     private readonly Texture _gunBoltSight;
     private readonly Texture _meleeSight;
+    private readonly ICursor _crosshairCursor;
 
     public override OverlaySpace Space => OverlaySpace.ScreenSpace;
 
@@ -52,6 +58,11 @@ public sealed class CombatModeIndicatorsOverlay : Overlay
             "gun_bolt_sight"));
         _meleeSight = spriteSys.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/Interface/Misc/crosshair_pointers.rsi"),
              "melee_sight"));
+
+        _rmcCombatMode = entMan.System<RMCCombatModeSystem>();
+        _sprite = entMan.System<SpriteSystem>();
+        _clyde = IoCManager.Resolve<IClyde>();
+        _crosshairCursor = _clyde.CreateCursor(new Image<Rgba32>(1, 1), Vector2i.One);
     }
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)
@@ -81,6 +92,21 @@ public sealed class CombatModeIndicatorsOverlay : Overlay
         var limitedScale = uiScale > 1.25f ? 1.25f : uiScale;
 
         var sight = isHandGunItem ? (isGunBolted ? _gunSight : _gunBoltSight) : _meleeSight;
+        if (handEntity != null && _rmcCombatMode.GetCrosshair(handEntity.Value) is { } crosshair)
+        {
+            sight = _sprite.Frame0(crosshair);
+            _clyde.SetCursor(_crosshairCursor);
+
+            var sightSize = sight.Size * limitedScale;
+            var rect = UIBox2.FromDimensions(mousePos - sightSize * 0.5f, sightSize);
+            args.ScreenHandle.DrawTextureRect(sight, rect);
+            return;
+        }
+        else
+        {
+            _clyde.SetCursor(null);
+        }
+
         DrawSight(sight, args.ScreenHandle, mousePos, limitedScale * Scale);
     }
 

@@ -39,7 +39,7 @@
     base: 0.666
     light: 0.921
     medium: 0.865
-    heavy: 0.865  
+    heavy: 0.865
   - type: WieldDelay
     baseDelay: 0.6
   - type: Item
@@ -68,6 +68,10 @@
   - type: GunDualWielding
     weaponGroup: Heavy
   - type: GunPointBlank
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/lmg_mouse.rsi
+      state: all
 
 - type: entity
   parent: BaseMagazineRifle
