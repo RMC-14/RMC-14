@@ -1038,3 +1038,14 @@
     state: kyrus
   - type: PatronFigurine
     id: 60d42aa6-88d9-4322-b782-109e17d81620
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronTalerynVogsburg
+  name: Taleryn Vogsburg figurine
+  description: "\"My only crime was playing a saz.\" -Taleryn Vogsburg"
+  components:
+  - type: Sprite
+    state: taleryn_vogsburg
+  - type: PatronFigurine
+    id: 4424328e-e2fb-41a8-b572-045186b30245
