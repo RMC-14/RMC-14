@@ -1,4 +1,4 @@
-# port from Frontier
+# port from Baystation12
 
 - type: species
   id: Skrell
@@ -6,6 +6,7 @@
   roundStart: true
   prototype: RMCMobSkrell
   sprites: MobSkrellSprites
+  defaultSkinTone: "#8cd7a3"
   markingLimits: MobSkrellMarkingLimits
   dollPrototype: MobSkrellDummy
   skinColoration: Hues

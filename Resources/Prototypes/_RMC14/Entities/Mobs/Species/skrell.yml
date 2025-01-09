@@ -2,11 +2,13 @@
   save: false
   parent: CMBaseMobSpeciesOrganic
   id: RMCMobSkrell
-  name: Urist R McFish
+  name: Urist R McFrog
   suffix: RMC14
   components:
   - type: HumanoidAppearance
     species: Skrell
+  - type: Speech
+    allowedEmotes: [ 'RMCSkrellPeep', 'RMCSkrellAnger', 'RMCSkrellTrill', 'RMCSkrellWarble' ]
   - type: Vocal
     sounds:
       Male: RMCMaleSkrell
@@ -16,7 +18,7 @@
     damageOverlayGroups:
       Brute:
         sprite: Mobs/Effects/brute_damage.rsi
-        color: "#7a8bf2"
+        color: "#1d2cbf"
 
 - type: entity
   parent: BaseSpeciesDummy
