@@ -484,6 +484,9 @@ public abstract class SharedTelephoneSystem : EntitySystem
             {
                 _ambientSound.SetSound(uid, BusySound);
                 _ambientSound.SetVolume(uid, BusySound.Params.Volume);
+
+                dialing.Other = null;
+                Dirty(uid, dialing);
             }
 
             if (dialing.Other is not { } other)
