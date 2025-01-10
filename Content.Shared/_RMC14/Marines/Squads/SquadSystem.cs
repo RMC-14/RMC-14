@@ -45,6 +45,7 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
 
     private static readonly ProtoId<JobPrototype> SquadLeaderJob = "CMSquadLeader";
+    public static readonly EntProtoId<SquadTeamComponent> EchoSquadId = "SquadEcho";
 
     public ImmutableArray<EntityPrototype> SquadPrototypes { get; private set; }
     public ImmutableArray<JobPrototype> SquadRolePrototypes { get; private set; }
@@ -243,6 +244,11 @@ public sealed class SquadSystem : EntitySystem
 
         squad = (member.Comp.Squad.Value, team);
         return true;
+    }
+
+    public bool HasSquad(EntProtoId id)
+    {
+        return TryGetSquad(id, out _);
     }
 
     public bool TryEnsureSquad(EntProtoId id, out Entity<SquadTeamComponent> squad)

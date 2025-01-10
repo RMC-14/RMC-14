@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.TacticalMap;
 using JetBrains.Annotations;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
 
@@ -18,12 +19,18 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
         if (_window != null)
             return;
 
-        _window = new MarineCommunicationsComputerWindow();
+        _window = this.CreateWindow<MarineCommunicationsComputerWindow>();
 
         if (EntMan.HasComponent<TacticalMapComputerComponent>(Owner))
             _window.TacticalMapButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsOpenMapMsg());
         else
             _window.TacticalMapButton.Visible = false;
+
+        if (EntMan.TryGetComponent<MarineCommunicationsComputerComponent>(Owner, out var computer) &&
+            computer.CanCreateEcho)
+        {
+            _window.EchoButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsEchoSquadMsg());
+        }
 
         if (EntMan.HasComponent<OverwatchConsoleComponent>(Owner))
             _window.OverwatchButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsOverwatchMsg());
@@ -32,8 +39,6 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
 
         _window.Send.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsComputerMsg( Rope.Collapse(_window.Text.TextRope)));
         OnStateUpdate();
-
-        _window.OpenCentered();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -41,7 +46,7 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
         OnStateUpdate();
     }
 
-    private void OnStateUpdate()
+    public void OnStateUpdate()
     {
         if (_window == null)
             return;
@@ -61,13 +66,10 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
 
             _window.LandingZonesSection.Visible = s.LandingZones.Count > 0;
         }
-    }
 
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-
-        if (disposing)
-            _window?.Close();
+        _window.EchoButton.Visible =
+            EntMan.TryGetComponent<MarineCommunicationsComputerComponent>(Owner, out var computer) &&
+            computer.CanCreateEcho;
+        _window.EchoSeparator.Visible = _window.EchoButton.Visible;
     }
 }

@@ -12,6 +12,9 @@ public enum MarineCommunicationsComputerUI
 public sealed class MarineCommunicationsOpenMapMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
+public sealed class MarineCommunicationsEchoSquadMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
 public sealed class MarineCommunicationsOverwatchMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]

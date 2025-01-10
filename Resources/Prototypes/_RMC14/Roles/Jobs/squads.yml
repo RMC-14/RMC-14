@@ -72,22 +72,6 @@
 
 - type: entity
   parent: SquadBase
-  id: SquadEcho
-  name: Echo
-  components:
-  - type: SquadTeam
-    color: "#67D692"
-    accessLevels:
-    - CMAccessAlpha
-    - CMAccessBravo
-    - CMAccessCharlie
-    - CMAccessDelta
-    minimapBackground:
-     sprite: _RMC14/Interface/map_blips.rsi
-     state: background_echo
-
-- type: entity
-  parent: SquadBase
   id: SquadFoxtrot
   name: Foxtrot
   components:
@@ -102,4 +86,30 @@
      sprite: _RMC14/Interface/map_blips.rsi
      state: background_foxtrot
 
-#TODO RMC-14 Intel needs to use their custom background
+- type: entity
+  parent: SquadBase
+  id: SquadEcho
+  name: Echo
+  components:
+  - type: SquadTeam
+    color: "#67D692"
+    accessLevels:
+    - CMAccessAlpha
+    - CMAccessBravo
+    - CMAccessCharlie
+    - CMAccessDelta
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_echo
+
+- type: entity
+  parent: SquadBase
+  id: SquadIntel
+  name: Intel
+  components:
+  - type: SquadTeam
+    color: "#053818"
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_intel
+    canSupplyDrop: false
