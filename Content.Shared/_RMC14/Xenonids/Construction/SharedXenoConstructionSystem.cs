@@ -268,7 +268,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         if (_net.IsServer)
         {
-            if (_prototype.TryIndex(effectID, out var _))
+            if (_prototype.TryIndex(effectID, out var _, false))
             {
                 effect = Spawn(effectID, entityCoords);
             }
@@ -321,6 +321,11 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (_net.IsServer)
         {
             var structure = Spawn(args.StructureId, coordinates);
+            if (TryComp(structure, out XenoConstructLimitedComponent? constructLimitedComp))
+            {
+                constructLimitedComp.Builder = xeno.Owner;
+                Dirty(structure, constructLimitedComp);
+            }
             _hive.SetSameHive(xeno.Owner, structure);
             _adminLogs.Add(LogType.RMCXenoConstruct, $"Xeno {ToPrettyString(xeno):xeno} constructed {ToPrettyString(structure):structure} at {coordinates}");
         }
@@ -692,7 +697,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             buildChoice is { } choice &&
             _prototype.TryIndex(choice, out var choiceProto))
         {
-            if (xeno.Comp.XenoStructureSlots.TryGetValue(buildChoice.Value, out var xenoLimit))
+            if (TryGetStructureSlotCount(xeno.Comp, buildChoice.Value, out var xenoLimit))
             {
                 var xenoLimitedStructures = EntityQueryEnumerator<XenoConstructLimitedComponent>();
                 var limitedCount = 0;
@@ -872,5 +877,13 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return false;
         }
         return true;
+    }
+
+    public bool TryGetStructureSlotCount(XenoConstructionComponent xenoConstructionComp, EntProtoId choice, [NotNullWhen(true)] out int? limit)
+    {
+        limit = null;
+        var result = xenoConstructionComp.XenoStructureSlots.TryGetValue(choice, out var limitCount);
+        limit = limitCount;
+        return result;
     }
 }
