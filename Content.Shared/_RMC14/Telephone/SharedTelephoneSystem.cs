@@ -482,7 +482,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
             // Play busy sound after voicemail ends
             if (time > dialing.LastVoicemail + phone.VoicemailTimeoutDelay && dialing.DidVoicemail && !dialing.DidVoicemailTimeout)
             {
-                dialing.DidVoicemailTimeout = false;
+                dialing.DidVoicemailTimeout = true;
                 Dirty(uid, dialing);
 
                 _ambientSound.SetSound(uid, BusySound);
