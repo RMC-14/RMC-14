@@ -26,6 +26,9 @@ public sealed partial class NightVisionComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Green;
+
+    [DataField, AutoNetworkedField]
+    public bool BlockScopes;
 }
 
 [Serializable, NetSerializable]

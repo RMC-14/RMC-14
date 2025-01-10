@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+using Content.Shared._RMC14.Scoping;
 using Content.Shared.Actions;
 using Content.Shared.Interaction;
+using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.PowerCell;
@@ -15,19 +17,28 @@ namespace Content.Shared._RMC14.Visor;
 public sealed class VisorSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedPowerCellSystem _powerCell = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<InventoryComponent, ScopedEvent>(OnInventoryScoped);
+
         SubscribeLocalEvent<CycleableVisorComponent, GetItemActionsEvent>(OnCycleableVisorGetItemActions);
         SubscribeLocalEvent<CycleableVisorComponent, CycleVisorActionEvent>(OnCycleableVisorAction);
         SubscribeLocalEvent<CycleableVisorComponent, InteractUsingEvent>(OnCycleableVisorInteractUsing, before: [typeof(SharedStorageSystem)]);
+        SubscribeLocalEvent<CycleableVisorComponent, InventoryRelayedEvent<ScopedEvent>>(OnCycleableVisorScoped);
 
         SubscribeLocalEvent<VisorComponent, ActivateVisorEvent>(OnVisorActivate);
         SubscribeLocalEvent<VisorComponent, DeactivateVisorEvent>(OnVisorDeactivate);
         SubscribeLocalEvent<VisorComponent, PowerCellChangedEvent>(OnCycleableVisorPowerCellChanged);
+    }
+
+    private void OnInventoryScoped(Entity<InventoryComponent> ent, ref ScopedEvent args)
+    {
+        _inventory.RelayEvent(ent, ref args);
     }
 
     private void OnCycleableVisorGetItemActions(Entity<CycleableVisorComponent> ent, ref GetItemActionsEvent args)
@@ -52,12 +63,13 @@ public sealed class VisorSystem : EntitySystem
             return;
         }
 
+        args.Handled = true;
         ref var current = ref ent.Comp.CurrentVisor;
         if (current != null &&
             containers.TryGetValue(current.Value, out var currentContainer) &&
             currentContainer.ContainedEntity is { } currentContained)
         {
-            var ev = new DeactivateVisorEvent(ent);
+            var ev = new DeactivateVisorEvent(ent, args.Performer);
             RaiseLocalEvent(currentContained, ref ev);
         }
 
@@ -73,6 +85,9 @@ public sealed class VisorSystem : EntitySystem
         {
             var ev = new ActivateVisorEvent(ent, args.Performer);
             RaiseLocalEvent(newContained, ref ev);
+
+            if (!ev.Handled)
+                current = null;
         }
     }
 
@@ -100,7 +115,7 @@ public sealed class VisorSystem : EntitySystem
         {
             foreach (var contained in currentContainer.ContainedEntities)
             {
-                var ev = new DeactivateVisorEvent(ent);
+                var ev = new DeactivateVisorEvent(ent, args.User);
                 RaiseLocalEvent(contained, ref ev);
             }
         }
@@ -120,6 +135,23 @@ public sealed class VisorSystem : EntitySystem
 
         ent.Comp.CurrentVisor = null;
         Dirty(ent);
+    }
+
+    private void OnCycleableVisorScoped(Entity<CycleableVisorComponent> ent, ref InventoryRelayedEvent<ScopedEvent> args)
+    {
+        var ev = new VisorRelayedEvent<ScopedEvent>(ent, args.Args);
+        foreach (var containerId in ent.Comp.Containers)
+        {
+            if (!_container.TryGetContainer(ent, containerId, out var container))
+                continue;
+
+            foreach (var contained in container.ContainedEntities)
+            {
+                RaiseLocalEvent(contained, ref ev);
+            }
+        }
+
+        args.Args = ev.Event;
     }
 
     private void OnVisorActivate(Entity<VisorComponent> ent, ref ActivateVisorEvent args)
@@ -143,7 +175,7 @@ public sealed class VisorSystem : EntitySystem
             return;
         }
 
-        var ev = new DeactivateVisorEvent((visorContainer.Owner, cycleable));
+        var ev = new DeactivateVisorEvent((visorContainer.Owner, cycleable), null);
         RaiseLocalEvent(ent, ref ev);
     }
 
@@ -162,10 +194,6 @@ public sealed class VisorSystem : EntitySystem
             {
                 msg = $"You connect the {Name(visor)} to {Name(cycleable)}.";
                 _popup.PopupClient(msg, cycleable, user);
-
-                if (visor.Comp.Add != null)
-                    EntityManager.AddComponents(cycleable, visor.Comp.Add);
-
                 return true;
             }
         }
@@ -173,5 +201,32 @@ public sealed class VisorSystem : EntitySystem
         msg = $"{Name(cycleable)} has used all of its visor attachment sockets.";
         _popup.PopupClient(msg, cycleable, user, PopupType.SmallCaution);
         return true;
+    }
+
+    public void DeactivateVisor(Entity<CycleableVisorComponent> cycleable, Entity<VisorComponent?> visor, EntityUid user)
+    {
+        ref var current = ref cycleable.Comp.CurrentVisor;
+        if (current == null)
+            return;
+
+        if (current < 0 || current >= cycleable.Comp.Containers.Count)
+            return;
+
+        var containerId = cycleable.Comp.Containers[current.Value];
+        if (!_container.TryGetContainer(cycleable, containerId, out var container))
+            return;
+
+        foreach (var contained in container.ContainedEntities)
+        {
+            if (contained == visor.Owner)
+            {
+                var ev = new DeactivateVisorEvent(cycleable, user);
+                RaiseLocalEvent(contained, ref ev);
+
+                current = null;
+                Dirty(cycleable);
+                return;
+            }
+        }
     }
 }
