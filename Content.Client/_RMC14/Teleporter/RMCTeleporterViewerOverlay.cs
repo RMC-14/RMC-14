@@ -1,6 +1,7 @@
 using System.Numerics;
 using System.Runtime.InteropServices;
 using Content.Client._RMC14.NightVision;
+using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Teleporter;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Physics;
@@ -28,6 +29,7 @@ public sealed class RMCTeleporterViewerOverlay : Overlay
 
     private readonly EntityQuery<SpriteComponent> _spriteQuery;
     private readonly EntityQuery<RMCTeleporterViewerComponent> _teleporterViewerQuery;
+    private readonly EntityQuery<TileFireComponent> _tileFireQuery;
     private readonly EntityQuery<TransformComponent> _transformQuery;
     private readonly EntityQuery<XenoComponent> _xenoQuery;
 
@@ -49,6 +51,7 @@ public sealed class RMCTeleporterViewerOverlay : Overlay
 
         _spriteQuery = _entity.GetEntityQuery<SpriteComponent>();
         _teleporterViewerQuery = _entity.GetEntityQuery<RMCTeleporterViewerComponent>();
+        _tileFireQuery = _entity.GetEntityQuery<TileFireComponent>();
         _transformQuery = _entity.GetEntityQuery<TransformComponent>();
         _xenoQuery = _entity.GetEntityQuery<XenoComponent>();
     }
@@ -86,8 +89,12 @@ public sealed class RMCTeleporterViewerOverlay : Overlay
                     if (_container.IsEntityInContainer(viewerContact))
                         continue;
 
-                    if (viewerContactTransform.Anchored && !_xenoQuery.HasComp(viewerContact))
+                    if (viewerContactTransform.Anchored &&
+                        !_xenoQuery.HasComp(viewerContact) &&
+                        !_tileFireQuery.HasComp(viewerContact))
+                    {
                         continue;
+                    }
 
                     // technically you could use try delta here for the vast majority of cases
                     // since they share a parent entity uid but i don't got time to do that

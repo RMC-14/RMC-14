@@ -2,6 +2,8 @@
   id: XenoTunnel
   name: Tunnel
   description: A tunnel entrance. Looks like it was dug by some kind of clawed beast.
+  placement:
+    mode: SnapgridCenter
   components:
   - type: Transform
     anchored: true

@@ -81,6 +81,7 @@
   - type: MarineIFF
   - type: SleepNPC
   - type: WakeNPCOnDropshipLanding
+  - type: BlockXenoConstruction
 
 - type: htnCompound
   id: RMCTurretCompound
