@@ -1,17 +1,17 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Body.Systems;
+using Content.Server.Electrocution;
 using Content.Server.Explosion.Components;
 using Content.Server.Flash;
-using Content.Server.Electrocution;
 using Content.Server.Pinpointer;
-using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Flash.Components;
 using Content.Server.Radio.EntitySystems;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Database;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Explosion.Components.OnTrigger;
+using Content.Shared.Flash.Components;
 using Content.Shared.Implants.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -31,10 +31,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Player;
-using Content.Shared.Coordinates;
 using Robust.Shared.Utility;
-using Robust.Shared.Timing;
 
 namespace Content.Server.Explosion.EntitySystems
 {
@@ -354,7 +351,7 @@ namespace Content.Server.Explosion.EntitySystems
             active.TimeUntilBeep = initialBeepDelay == null ? active.BeepInterval : initialBeepDelay.Value;
 
             var ev = new ActiveTimerTriggerEvent(uid, user);
-            RaiseLocalEvent(uid, ref ev);
+            RaiseLocalEvent(uid, ref ev, true);
 
             if (TryComp<AppearanceComponent>(uid, out var appearance))
                 _appearance.SetData(uid, TriggerVisuals.VisualState, TriggerVisualState.Primed, appearance);

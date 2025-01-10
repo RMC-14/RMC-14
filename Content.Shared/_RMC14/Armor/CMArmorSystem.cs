@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Medical.Surgery;
+﻿using System.Linq;
+using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Slowing;
@@ -10,6 +11,8 @@ using Content.Shared.Explosion;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Preferences;
+using Content.Shared.Rounding;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Armor;
@@ -23,6 +26,7 @@ public sealed class CMArmorSystem : EntitySystem
 
     private static readonly ProtoId<DamageGroupPrototype> ArmorGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BioGroup = "Burn";
+    private static readonly int MaxXenoArmor = 55;
 
     public override void Initialize()
     {
@@ -51,14 +55,33 @@ public sealed class CMArmorSystem : EntitySystem
 
         SubscribeLocalEvent<ClothingComponent, BeingEquippedAttemptEvent>(OnClothingEquippedAttempt);
 
+        SubscribeLocalEvent<RMCArmorSpeedTierComponent, GotEquippedEvent>(OnArmorSpeedTierGotEquipped);
+        SubscribeLocalEvent<RMCArmorSpeedTierComponent, GotUnequippedEvent>(OnArmorSpeedTierGotUnequipped);
+        SubscribeLocalEvent<RMCArmorSpeedTierComponent, InventoryRelayedEvent<RefreshArmorSpeedTierEvent>>(OnRefreshArmorSpeedTier);
+
         SubscribeLocalEvent<InventoryComponent, RMCEquipAttemptEvent>(_inventory.RelayEvent);
+        SubscribeLocalEvent<InventoryComponent, RefreshArmorSpeedTierEvent>(_inventory.RelayEvent);
     }
 
     private void OnMapInit(Entity<CMArmorComponent> armored, ref MapInitEvent args)
     {
-        if (TryComp<XenoComponent>(armored, out var xeno)){
-            string? armorMessage = armored.Comp.Armor + " / " + armored.Comp.Armor;
-            _alerts.ShowAlert(armored, xeno.ArmorAlert, 0, dynamicMessage: armorMessage); //TODO RMC14 update message when Armor level can actually change
+        UpdateArmorValue((armored, armored.Comp));
+    }
+
+    public void UpdateArmorValue(Entity<CMArmorComponent?> armored)
+    {
+        if (!Resolve(armored, ref armored.Comp, false))
+            return;
+
+        if (TryComp<XenoComponent>(armored, out var xeno))
+        {
+            var ev = new CMGetArmorEvent(SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING);
+            RaiseLocalEvent(armored, ref ev);
+            string? armorMessage = ev.Armor * ev.ArmorModifier + " / " + armored.Comp.Armor;
+            var max = _alerts.GetMaxSeverity(xeno.ArmorAlert);
+
+            var severity = max - ContentHelpers.RoundToLevels(ev.Armor * ev.ArmorModifier, MaxXenoArmor, max + 1);
+            _alerts.ShowAlert(armored, xeno.ArmorAlert, (short)severity, dynamicMessage: armorMessage);
         }
     }
 
@@ -194,6 +217,7 @@ public sealed class CMArmorSystem : EntitySystem
             armorPiercing += piercingEv.Piercing;
         }
 
+        ev.Armor = (int) (ev.Armor * ev.ArmorModifier);
         ev.Armor -= armorPiercing;
         ev.Bio -= armorPiercing;
 
@@ -255,5 +279,50 @@ public sealed class CMArmorSystem : EntitySystem
     {
         ent.Comp.Amount = amount;
         Dirty(ent);
+    }
+
+    public EntProtoId GetArmorVariant(Entity<RMCArmorVariantComponent> ent, ArmorPreference preference)
+    {
+        var comp = ent.Comp;
+        var equipmentEntityID = comp.DefaultType;
+
+        if (comp.Types.TryGetValue(preference.ToString(), out var equipment))
+            equipmentEntityID = equipment;
+
+        if (preference == ArmorPreference.Random)
+        {
+            var random = new System.Random();
+            var randomType = comp.Types.ElementAt(random.Next(0, comp.Types.Count)).Value;
+            equipmentEntityID = randomType;
+        }
+
+        return equipmentEntityID;
+    }
+
+    private void OnArmorSpeedTierGotEquipped(Entity<RMCArmorSpeedTierComponent> armour, ref GotEquippedEvent args)
+    {
+        EnsureComp(args.Equipee, out RMCArmorSpeedTierUserComponent comp);
+
+        RefreshArmorSpeedTier((args.Equipee, comp));
+    }
+
+    private void OnArmorSpeedTierGotUnequipped(Entity<RMCArmorSpeedTierComponent> armour, ref GotUnequippedEvent args)
+    {
+        EnsureComp(args.Equipee, out RMCArmorSpeedTierUserComponent comp);
+
+        RefreshArmorSpeedTier((args.Equipee, comp));
+    }
+
+    private void RefreshArmorSpeedTier(Entity<RMCArmorSpeedTierUserComponent> user)
+    {
+        var ev = new RefreshArmorSpeedTierEvent(~SlotFlags.POCKET);
+        RaiseLocalEvent(user.Owner, ref ev);
+
+        user.Comp.SpeedTier = ev.SpeedTier;
+    }
+
+    private void OnRefreshArmorSpeedTier(Entity<RMCArmorSpeedTierComponent> armor, ref InventoryRelayedEvent<RefreshArmorSpeedTierEvent> args)
+    {
+        args.Args.SpeedTier = armor.Comp.SpeedTier;
     }
 }

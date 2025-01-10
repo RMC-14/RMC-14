@@ -142,7 +142,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (!TryComp<MeleeWeaponComponent>(uid, out var melee))
             return;
 
-        if (melee.NextAttack > component.NextFire)
+        if (component.MeleeCooldownOnShoot && melee.NextAttack > component.NextFire)
         {
             component.NextFire = melee.NextAttack;
             Dirty(uid, component);
@@ -553,8 +553,7 @@ public abstract partial class SharedGunSystem : EntitySystem
                 case AmmoComponent newAmmo:
                     if (_netManager.IsServer || GunPrediction)
                     {
-                        shotProjectiles.Add(ent!.Value);
-                        CreateAndFireProjectiles(ent.Value, newAmmo);
+                        CreateAndFireProjectiles(ent!.Value, newAmmo);
                     }
                     else
                     {
@@ -702,7 +701,7 @@ public abstract partial class SharedGunSystem : EntitySystem
                     var newuid = Spawn(ammoSpreadComp.Proto, fromEnt);
                     ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, gunUid, user);
                     shotProjectiles.Add(newuid);
-                    MarkPredicted(newuid, i + 1);
+                    MarkPredicted(newuid, i);
                 }
             }
             else

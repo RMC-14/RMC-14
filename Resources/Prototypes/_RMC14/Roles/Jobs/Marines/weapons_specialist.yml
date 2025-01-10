@@ -19,6 +19,7 @@
       time: 36000 # 10 hours
     RMCRankLanceCorporal: []
   startingGear: CMGearWeaponsSpecialist
+  dummyStartingGear: CMGearWeaponsSpecialistEquipped
   icon: "CMJobIconWeaponsSpecialist"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
@@ -30,6 +31,7 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: spec
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
@@ -55,17 +57,14 @@
 - type: startingGear
   id: CMGearWeaponsSpecialist
   equipment:
-    back: CMSatchelMarine
     id: CMDogtagWeaponsSpecialist
 
 - type: startingGear
   id: CMGearWeaponsSpecialistEquipped
   equipment:
     jumpsuit: JumpsuitMarine
-    back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
-    outerClothing: CMArmorM3Medium
     gloves: CMHandsBlackMarine
     id: CMDogtagWeaponsSpecialist
     ears: CMHeadsetAlpha

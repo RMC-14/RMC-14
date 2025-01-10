@@ -60,5 +60,20 @@ public abstract class SharedWatchXenoSystem : EntitySystem
             return;
 
         _eye.SetTarget(watcher, null, watcher);
+        var ev = new XenoUnwatchEvent();
+        RaiseLocalEvent(watcher, ref ev);
+    }
+
+    public bool TryGetWatched(Entity<XenoWatchingComponent?> watching, out EntityUid watched)
+    {
+        if (!Resolve(watching, ref watching.Comp, false) ||
+            watching.Comp.Watching == null)
+        {
+            watched = default;
+            return false;
+        }
+
+        watched = watching.Comp.Watching.Value;
+        return true;
     }
 }

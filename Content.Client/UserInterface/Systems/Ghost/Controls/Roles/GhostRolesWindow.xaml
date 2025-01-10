@@ -2,15 +2,18 @@
             Title="{Loc 'ghost-roles-window-title'}"
             MinSize="490 400"
             SetSize="490 500">
-    <Label Name="NoRolesMessage"
-           Text="{Loc 'ghost-roles-window-no-roles-available-label'}"
-           VerticalAlignment="Top" />
-    <ScrollContainer VerticalExpand="True"
-                     HScrollEnabled="False">
-        <BoxContainer Orientation="Vertical"
-                      Name="EntryContainer"
-                      VerticalExpand="True">
-            <!-- Ghost role entries are added here by code -->
-        </BoxContainer>
-    </ScrollContainer>
+    <BoxContainer Orientation="Vertical">
+        <RichTextLabel Text="[bold]Use the join as xeno or find parasite actions on the top left if you want to join as a xenonid![/bold]" />
+        <Label Name="NoRolesMessage"
+               Text="{Loc 'ghost-roles-window-no-roles-available-label'}"
+               VerticalAlignment="Top" />
+        <ScrollContainer VerticalExpand="True"
+                         HScrollEnabled="False">
+            <BoxContainer Orientation="Vertical"
+                          Name="EntryContainer"
+                          VerticalExpand="True">
+                <!-- Ghost role entries are added here by code -->
+            </BoxContainer>
+        </ScrollContainer>
+    </BoxContainer>
 </DefaultWindow>

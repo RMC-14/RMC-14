@@ -32,9 +32,9 @@ public abstract class SharedRMCMapSystem : EntitySystem
     );
 
     public readonly ImmutableArray<Direction> CardinalDirections = ImmutableArray.Create(
+        Direction.North,
         Direction.South,
         Direction.East,
-        Direction.North,
         Direction.West
     );
 
@@ -69,16 +69,25 @@ public abstract class SharedRMCMapSystem : EntitySystem
         return new RMCAnchoredEntitiesEnumerator(_transform, anchored, facing);
     }
 
-    public bool HasAnchoredEntityEnumerator<T>(EntityCoordinates coords, Direction? offset = null, DirectionFlag facing = DirectionFlag.None) where T : IComponent
+    public bool HasAnchoredEntityEnumerator<T>(EntityCoordinates coords, out Entity<T> ent, Direction? offset = null, DirectionFlag facing = DirectionFlag.None) where T : IComponent
     {
+        ent = default;
         var anchored = GetAnchoredEntitiesEnumerator(coords, offset, facing);
         while (anchored.MoveNext(out var uid))
         {
-            if (HasComp<T>(uid))
-                return true;
+            if (!TryComp(uid, out T? comp))
+                continue;
+
+            ent = (uid, comp);
+            return true;
         }
 
         return false;
+    }
+
+    public bool HasAnchoredEntityEnumerator<T>(EntityCoordinates coords, Direction? offset = null, DirectionFlag facing = DirectionFlag.None) where T : IComponent
+    {
+        return HasAnchoredEntityEnumerator<T>(coords, out _, offset, facing);
     }
 
     public bool TryGetTileRefForEnt(EntityCoordinates ent, out Entity<MapGridComponent> grid, out TileRef tile)
@@ -112,16 +121,21 @@ public abstract class SharedRMCMapSystem : EntitySystem
         return IsTileBlocked(_transform.ToCoordinates(coordinates), group);
     }
 
-    public bool TileHasStructure(EntityCoordinates coordinates)
+    public bool TileHasAnyTag(EntityCoordinates coordinates, params ProtoId<TagPrototype>[] tag)
     {
         var anchored = GetAnchoredEntitiesEnumerator(coordinates);
         while (anchored.MoveNext(out var uid))
         {
-            if (_tag.HasTag(uid, StructureTag))
+            if (_tag.HasAnyTag(uid, tag))
                 return true;
         }
 
         return false;
+    }
+
+    public bool TileHasStructure(EntityCoordinates coordinates)
+    {
+        return TileHasAnyTag(coordinates, StructureTag);
     }
 
     public bool TryGetTileDef(EntityCoordinates coordinates, [NotNullWhen(true)] out ContentTileDefinition? def)

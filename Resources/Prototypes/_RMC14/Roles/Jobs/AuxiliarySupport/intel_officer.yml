@@ -19,6 +19,7 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: io
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -44,7 +45,6 @@
   id: CMGearIntelOfficer
   equipment:
     jumpsuit: CMJumpsuitIO
-    back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     id: CMIDCardIntelOfficer
 

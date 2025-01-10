@@ -9,14 +9,16 @@ public enum DialogUiKey
 }
 
 [Serializable, NetSerializable]
-public sealed class DialogBuiState(string title, List<string> options) : BoundUserInterfaceState
-{
-    public readonly string Title = title;
-    public readonly List<string> Options = options;
-}
-
-[Serializable, NetSerializable]
-public sealed class DialogChosenBuiMsg(int index) : BoundUserInterfaceMessage
+public sealed class DialogOptionBuiMsg(int index) : BoundUserInterfaceMessage
 {
     public readonly int Index = index;
 }
+
+[Serializable, NetSerializable]
+public sealed class DialogInputBuiMsg(string input) : BoundUserInterfaceMessage
+{
+    public readonly string Input = input;
+}
+
+[Serializable, NetSerializable]
+public sealed class DialogConfirmBuiMsg : BoundUserInterfaceMessage;

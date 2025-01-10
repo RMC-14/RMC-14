@@ -26,7 +26,7 @@ public sealed partial class OverwatchConsoleComponent : Component
     public HashSet<NetEntity> Hidden = new();
 
     [DataField, AutoNetworkedField]
-    public OverwatchSupplyDropLocation?[] SupplyDropLocations = new OverwatchSupplyDropLocation?[3];
+    public OverwatchSavedLocation?[] SavedLocations = new OverwatchSavedLocation?[3];
 
     [DataField, AutoNetworkedField]
     public int LastLocation;
@@ -39,4 +39,13 @@ public sealed partial class OverwatchConsoleComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool CanMessageSquad = true;
+
+    [DataField, AutoNetworkedField]
+    public bool HasOrbital;
+
+    [DataField, AutoNetworkedField]
+    public Vector2i OrbitalCoordinates;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan NextOrbitalLaunch;
 }

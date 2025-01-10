@@ -1,0 +1,114 @@
+- type: entity
+  abstract: true
+  id: RMCBarrelPileBase
+  name: barrel pile
+  description: big pile energy.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,2.4,2.5"
+        density: 190
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/barrel_yard.rsi
+    offset: 1, 1
+  - type: Clickable
+  - type: DeleteOnExplosion
+
+- type: entity
+  parent: RMCBarrelPileBase
+  id: RMCBarrelPileYard
+  components:
+  - type: Sprite
+    state: pile_0
+
+- type: entity
+  parent: BaseStructureDynamic
+  id: RMCBarrelBase
+  name: barrel
+  description: A storage barrel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/barrels.rsi
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.18,-0.48,0.18,0.48"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: null
+  - type: InteractionOutline
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+
+- type: entity
+  parent: RMCBarrelBase
+  id: RMCBarrelBlue
+  name: blue barrel
+  description: A blue storage barrel.
+  components:
+  - type: Sprite
+    state: barrel_blue
+
+- type: entity
+  parent: RMCBarrelBase
+  id: RMCBarrelGreen
+  name: green barrel
+  description: A green storage barrel.
+  components:
+  - type: Sprite
+    state: barrel_green
+
+- type: entity
+  parent: RMCBarrelBase
+  id: RMCBarrelRed
+  name: red barrel
+  description: A red storage barrel.
+  components:
+  - type: Sprite
+    state: barrel_red
+
+- type: entity
+  parent: RMCBarrelBase
+  id: RMCBarrelWhite
+  name: white barrel
+  description: A white storage barrel.
+  components:
+  - type: Sprite
+    state: barrel_white
+
+- type: entity
+  parent: RMCBarrelBase
+  id: RMCBarrelYellow
+  name: yellow barrel
+  description: A yellow storage barrel.
+  components:
+  - type: Sprite
+    state: barrel_yellow

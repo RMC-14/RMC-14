@@ -6,6 +6,10 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/shower.rsi
     layers:

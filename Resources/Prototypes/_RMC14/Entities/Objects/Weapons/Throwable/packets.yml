@@ -52,7 +52,6 @@
     - id: CMGrenadeHighExplosive
       amount: 3
 
-
 - type: entity
   parent: CMPacketBase
   id: CMPacketGrenadeFrag
@@ -76,7 +75,6 @@
     - id: CMGrenadeFrag
       amount: 3
 
-
 - type: entity
   parent: CMPacketBase
   id: RMCPacketGrenadeSmoke
@@ -98,6 +96,29 @@
   - type: StorageFill
     contents:
     - id: CMGrenadeSmoke
+      amount: 3
+
+- type: entity
+  parent: CMPacketBase
+  id: RMCPacketGrenadeIncendiary
+  name: HIDP grenade packet
+  description: It contains three HIDP incendiary grenades.
+  components:
+  - type: Sprite
+    layers:
+    - state: hidp_packet
+      map: [ "closedLayer" ]
+    - state: hidp_packet_e
+      map: [ "openLayer", "emptyLayer"]
+
+- type: entity
+  parent: RMCPacketGrenadeIncendiary
+  id: RMCPacketGrenadeIncendiaryFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGrenadeIncendiary
       amount: 3
 
 - type: entity

@@ -84,7 +84,8 @@
         name: first-aid pouch (pills)
       - id: RMCPouchFirstResponder
       - id: RMCPouchMedical
-      #- id: CMMedicalKitPouch
+      - id: RMCPouchMedkit
+        recommended: true
       - id: RMCPouchReagentCanisterBicaridine
         recommended: true
         name: Pressurized Reagent Canister Pouch\n(Bicaridine)

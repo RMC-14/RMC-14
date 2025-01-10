@@ -35,8 +35,9 @@
       - RMCFlask
       - CMScalpel
       - Figurine
+      - Matchbox
       tags:
-#      - TODO RMC14 matchbox
+      - CigPack 
       - Cigarette
 #      - TODO RMC14 cards
       - Slice
@@ -45,7 +46,7 @@
 #      - TODO RMC14 helmet garb
       - Pen
       - Crayon
-#      - TODO RMC14 handful of bullets
+      - RMCHandful
       - Flashlight
       - Brutepack
       - CMOintment

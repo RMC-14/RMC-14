@@ -44,6 +44,9 @@
     isPlaceable: false
   - type: Damageable
     damageContainer: StructuralInorganic
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: Destructible
     thresholds:
     - trigger:
@@ -92,8 +95,8 @@
       types:
         Blunt: 5000
   - type: PowerLoaderGrabbable
-    virtualRight: RMCVirtualDropshipGearRight
-    virtualLeft: RMCVirtualDropshipGearLeft
+    virtualRight: RMCVirtualCrateRight
+    virtualLeft: RMCVirtualCrateLeft
 
 - type: entity
   parent: BaseStructureDynamic

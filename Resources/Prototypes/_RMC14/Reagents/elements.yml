@@ -7,8 +7,14 @@
   physicalDesc: reagent-physical-desc-metallic
   flavor: metallic
   color: "#A8A8A8"
-  boilingPoint: 2327.0
-  meltingPoint: 660.0
+  unknown: true
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:ChemVomit
+        probability: 0
+
 
 - type: reagent
   id: RMCCarbon
@@ -18,8 +24,13 @@
   physicalDesc: reagent-physical-desc-crystalline
   flavor: bitter
   color: "#1C1300"
-  boilingPoint: 4200.0
-  meltingPoint: 3550.0
+  unknown: true
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.01 # 1 every 200 seconds in CM? 0.005 would be right but impossible because fixed point 2
+      effects:
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCChlorine
@@ -29,24 +40,29 @@
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
   color: "#808080"
-  meltingPoint: -101.5
-  boilingPoint: -34.04
-  plantMetabolism:
-    - !type:PlantAdjustWater
-      amount: -0.5
-    - !type:PlantAdjustToxins
-      amount: 15
-    - !type:PlantAdjustWeeds
-      amount: -3
-    - !type:PlantAdjustHealth
-      amount: -1
+  unknown: true
   metabolisms:
     Poison:
+      metabolismRate: 0.1
       effects:
       - !type:HealthChange
         damage:
-          types:
-            Poison: 2
+          groups:
+            Brute: 0.25
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Brute: 1
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Brute: 2.5
 
 - type: reagent
   id: RMCCopper
@@ -56,28 +72,12 @@
   physicalDesc: reagent-physical-desc-metallic
   flavor: metallic
   color: "#6E3B08"
-  boilingPoint: 2595.0
-  meltingPoint: 1083.0
   metabolisms:
-    Poison:
-      metabolismRate: 0.1
-      effects:
-      - !type:HealthChange
-        conditions:
-        - !type:OrganType
-          type: Arachnid
-          shouldHave: false
-        damage:
-          types:
-            Poison: 0.1
     Medicine:
+      metabolismRate: 0.01 # 1 every 200 seconds in CM?
       effects:
-      - !type:ModifyBloodLevel
-        conditions:
-        - !type:OrganType
-          type: Arachnid
-          shouldHave: true
-        amount: 0.4
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCFluorine
@@ -87,25 +87,31 @@
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
   color: "#808080"
-  boilingPoint: -188.11
-  meltingPoint: -219.67
-  plantMetabolism:
-    - !type:PlantAdjustWater
-      amount: -0.5
-    - !type:PlantAdjustToxins
-      amount: 25
-    - !type:PlantAdjustWeeds
-      amount: -4
-    - !type:PlantAdjustHealth
-      amount: -2
+  overdose: 30
   metabolisms:
     Poison:
+      metabolismRate: 0.1
       effects:
       - !type:HealthChange
         damage:
-          types:
-            Caustic: 0.5
-            Poison: 0.5
+          groups:
+            Burn: 0.5
+            Toxin: 0.375
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Burn: 1.0
+            Toxin: 0.75
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage: #TODO liver damage on high
+          groups:
+            Toxin: 2.5
 
 - type: reagent
   id: RMCGold
@@ -115,8 +121,12 @@
   physicalDesc: reagent-physical-desc-metallic
   flavor: metallic
   color: "#F7C430"
-  boilingPoint: 2700.0
-  meltingPoint: 1064.76
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCHydrogen
@@ -126,10 +136,14 @@
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
   color: "#808080"
-  boilingPoint: -253.0
-  meltingPoint: -259.2
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.01 # 1 every 200 seconds in CM?
+      effects:
+      - !type:ChemVomit
+        probability: 0
 
-- type: reagent
+- type: reagent #TODO if over blood limit take limb damage, oxy damage, move slower
   id: RMCIron
   name: reagent-name-iron
   group: Elements
@@ -137,28 +151,33 @@
   physicalDesc: reagent-physical-desc-metallic
   flavor: metallic
   color: "#C8A5DC"
-  boilingPoint: 2862.0
-  meltingPoint: 1538.0
+  overdose: 30
   metabolisms:
-    Poison:
-      metabolismRate: 0.1
-      effects:
-      - !type:HealthChange
-        conditions:
-        - !type:OrganType
-          type: Arachnid
-          shouldHave: true
-        damage:
-          types:
-            Poison: 0.1
     Medicine:
+      metabolismRate: 0.1
       effects:
       - !type:ModifyBloodLevel
         conditions:
-        - !type:OrganType
-          type: Arachnid
-          shouldHave: false
-        amount: 0.4
+        - !type:Hunger
+          min: 200
+        amount: 1.5
+      - !type:SatiateHunger
+        conditions:
+        - !type:Hunger
+          min: 200
+        factor: -15
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Toxin: 1.5
+      - !type:SatiateHunger
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        factor: -75
 
 - type: reagent
   id: RMCLithium
@@ -168,8 +187,7 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: metallic
   color: "#808080"
-  meltingPoint: 180.5
-  boilingPoint: 1330.0
+  unknown: true
   metabolisms:
     Poison:
       metabolismRate: 0.1
@@ -184,6 +202,7 @@
       - !type:Emote
         emote: Laugh
         probability: 0.05
+#TODO brain damage on OD and COD
 
 - type: reagent
   id: RMCMercury
@@ -193,18 +212,18 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: metallic
   color: "#484848"
-  meltingPoint: -38.83
-  boilingPoint: 356.73
+  unknown: true
   metabolisms:
     Poison:
+      metabolismRate: 0.1
       effects:
-      - !type:HealthChange
-        damage:
-          types:
-            Poison: 1
       - !type:GenericStatusEffect
         key: Stutter
         component: ScrambledAccent
+#TODO brain damage, OD more brain damage and jitter, COD applies neuro
+#Chance to paralyze/stun, lowers body temp on OD and brain damage on COD
+#Message on processing, brain damage on OD, paralyze on COD
+#Each diff property
 
 - type: reagent
   id: RMCPotassium
@@ -214,8 +233,13 @@
   physicalDesc: reagent-physical-desc-shiny
   flavor: metallic
   color: "#A0A0A0"
-  meltingPoint: 65.5
-  boilingPoint: 759.0
+  unknown: true
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.01 # 1 every 200 seconds in CM?
+      effects:
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCPhosphorus
@@ -225,15 +249,13 @@
   physicalDesc: reagent-physical-desc-powdery
   flavor: metallic
   color: "#832828"
-  meltingPoint: 44.2
-  boilingPoint: 280.5
-  plantMetabolism:
-    - !type:PlantAdjustNutrition
-      amount: 0.1
-    - !type:PlantAdjustWater
-      amount: -0.5
-    - !type:PlantAdjustWeeds
-      amount: -2
+  unknown: true
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.01 # 1 every 200 seconds in CM?
+      effects:
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCRadium
@@ -244,8 +266,30 @@
   physicalDesc: reagent-physical-desc-glowing
   flavor: metallic
   color: "#C7C7C7"
-  meltingPoint: 700.0
-  boilingPoint: 1737.0
+  unknown: true
+  metabolisms:
+    Poison:
+      metabolismRate: 0.1
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Cellular: 0.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          types:
+            Cellular: 2
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Brute: 2
+#TODO causes internal bleeding, OD organ damage, critical causes even more
 
 - type: reagent
   id: RMCSilicon
@@ -255,15 +299,13 @@
   physicalDesc: reagent-physical-desc-crystalline
   flavor: metallic
   color: "#A8A8A8"
-  boilingPoint: 3265.0
-  meltingPoint: 1414.0
+  unknown: true
   metabolisms:
-    Poison:
+    Medicine:
+      metabolismRate: 0.1
       effects:
-      - !type:HealthChange
-        damage:
-          types:
-            Poison: 1.5
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCSilver
@@ -272,9 +314,14 @@
   desc: reagent-desc-silver
   physicalDesc: reagent-physical-desc-reasonably-metallic
   flavor: metallic
-  color: "#d0d0d0"
-  boilingPoint: 2212.0
-  meltingPoint: 960.5
+  color: "#D0D0D0"
+  unknown: true
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCSulfur
@@ -284,15 +331,13 @@
   physicalDesc: reagent-physical-desc-powdery
   flavor: bitter
   color: "#BF8C00"
-  boilingPoint: 445.0
-  meltingPoint: 120.0
+  unknown: true
   metabolisms:
-    Poison:
+    Medicine:
+      metabolismRate: 0.01 # 1 every 200 seconds in CM?
       effects:
-      - !type:HealthChange
-        damage:
-          types:
-            Caustic: 0.1
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCSodium
@@ -302,8 +347,13 @@
   physicalDesc: reagent-physical-desc-metallic
   flavor: bitter
   color: "#808080"
-  meltingPoint: 97.8
-  boilingPoint: 883.0
+  unknown: true
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.01 # 1 every 200 seconds in CM?
+      effects:
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCUranium
@@ -313,25 +363,29 @@
   physicalDesc: reagent-physical-desc-metallic
   flavor: metallic
   color: "#B8B8C0"
-  meltingPoint: 1133.0
-  boilingPoint: 4131.0
-  plantMetabolism:
-  - !type:PlantAdjustMutationLevel
-    amount: 0.6
-  - !type:PlantAdjustToxins
-    amount: 4
-  - !type:PlantAdjustHealth
-    amount: -1.5
-  - !type:PlantAdjustMutationMod
-    probability: 0.2
-    amount: 0.1
+  unknown: true
   metabolisms:
     Poison:
+      metabolismRate: 0.1
       effects:
       - !type:HealthChange
         damage:
           types:
-            Radiation: 2
+            Cellular: 0.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          types:
+            Cellular: 2
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Brute: 2
 
 - type: reagent
   id: RMCOxygen
@@ -340,27 +394,13 @@
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
   color: "#808080"
-  boilingPoint: -183.0
-  meltingPoint: -218.4
+  unknown: true
   metabolisms:
-    Gas:
+    Medicine:
+      metabolismRate: 0.01 # 1 every 200 seconds in CM?
       effects:
-      - !type:Oxygenate
-        conditions:
-        - !type:OrganType
-          type: Human
-      - !type:Oxygenate
-        conditions:
-        - !type:OrganType
-          type: Animal
-      - !type:Oxygenate
-        conditions:
-        - !type:OrganType
-          type: Rat
-      - !type:Oxygenate
-        conditions:
-        - !type:OrganType
-          type: Plant
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCNitrogen
@@ -369,15 +409,13 @@
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
   color: "#808080"
-  boilingPoint: -195.8
-  meltingPoint: -210.0
+  unknown: true
   metabolisms:
-    Poison:
+    Medicine:
+      metabolismRate: 0.01 # 1 every 200 seconds in CM?
       effects:
-      - !type:HealthChange
-        damage:
-          types:
-            Cold: 1 # liquid nitrogen is cold
+      - !type:ChemVomit
+        probability: 0
 
 - type: reagent
   id: RMCEthanol
@@ -388,19 +426,48 @@
   physicalDesc: reagent-physical-desc-strong-smelling
   flavor: alcohol
   color: "#404030"
-  boilingPoint: 78.2
-  meltingPoint: -114.1
   metabolisms:
     Alcohol:
+      metabolismRate: 0.1
       effects:
-      - !type:ChemVomit
-        probability: 0.04
+      - !type:Drunk
+        boozePower: 6.38
+      - !type:Drunk
         conditions:
         - !type:ReagentThreshold
-          reagent: Ethanol
-          min: 12
+          min: 60
+        boozePower: 9.69
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 60
+        damage:
+          groups:
+            Toxin: 0.625
+            Airloss: 1.25
+      - !type:ChemVomit
+        conditions:
+        - !type:ReagentThreshold
+          min: 60
+        probability: 0.12
       - !type:Drunk
-        boozePower: 2
+        conditions:
+        - !type:ReagentThreshold
+          min: 100
+        boozePower: 13.125
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 100
+        damage:
+          groups:
+            Toxin: 1.2
+            Airloss: 2.5
+      - !type:ChemVomit
+        conditions:
+        - !type:ReagentThreshold
+          min: 100
+        probability: 0.25 #TODO Liver damage
 
 - type: reagent
   id: RMCSugar #Candy and grains
@@ -410,23 +477,13 @@
   physicalDesc: reagent-physical-desc-sweet
   flavor: sweet
   color: white
-  meltingPoint: 146.0
+  unknown: true # Yes a health analyzer can't detect sugar. How about that
   metabolisms:
     Food:
+      metabolismRate: 0.1
       effects:
       - !type:SatiateHunger
-        conditions:
-        - !type:ReagentThreshold #Only satiates when eaten with nutriment
-          reagent: Nutriment
-          min: 0.1
-        factor: 1
-  plantMetabolism:
-  - !type:PlantAdjustNutrition
-    amount: 0.1
-  - !type:PlantAdjustWeeds
-    amount: 2
-  - !type:PlantAdjustPests
-    amount: 2
+        factor: 5
   metamorphicSprite:
     sprite: Objects/Consumable/Drinks/sugarglass.rsi
     state: icon_empty
@@ -442,42 +499,30 @@
   physicalDesc: reagent-physical-desc-oily
   flavor: acid
   color: "#DB5008"
-  recognizable: true
-  boilingPoint: 337.0
-  meltingPoint: 10.31
-  plantMetabolism:
-  - !type:PlantAdjustToxins
-    amount: 10
-  - !type:PlantAdjustWeeds
-    amount: -2
-  - !type:PlantAdjustHealth
-    amount: -5
-  reactiveEffects:
-    Acidic:
-      methods: [ Touch ]
-      effects:
-      - !type:HealthChange
-        scaleByQuantity: true
-        ignoreResistances: false
-        damage:
-          types:
-            Caustic: 0.1
-      - !type:Emote
-        emote: Scream
-        probability: 0.1
+  unknown: true
   metabolisms:
+    #TODO hurts on inject equal to amount
     Poison:
-      metabolismRate: 3.00 # Okay damage, high metabolism rate. You need a lot of units to crit. Simulates acid burning through you fast.
+      metabolismRate: 0.05
       effects:
       - !type:HealthChange
         damage:
-          types:
-            Caustic: 5
-      - !type:PopupMessage
-        type: Local
-        visualType: Large
-        messages: [ "generic-reagent-effect-burning-insides" ]
-        probability: 0.33
-      - !type:Emote
-        emote: Scream
-        probability: 0.2
+          groups:
+            Burn: 0.75
+            Toxin: 0.25
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Burn: 3
+            Toxin: 0.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Burn: 7.5
+            Toxin: 2.5

@@ -1,0 +1,80 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorCorsatBasicBase
+  name: tiles-cm-default-basic
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicBox
+  sprite: /Textures/_RMC14/Tiles/corsat/box.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicLightPlate
+  sprite: /Textures/_RMC14/Tiles/corsat/lightplate.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicLightSpiral
+  sprite: /Textures/_RMC14/Tiles/corsat/lightspiral.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicOfficeSquares
+  sprite: /Textures/_RMC14/Tiles/corsat/officesquares.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicOfficeTiles
+  sprite: /Textures/_RMC14/Tiles/corsat/officetiles.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicRetroSquares
+  sprite: /Textures/_RMC14/Tiles/corsat/retrosquares.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicRetroSquaresLight
+  sprite: /Textures/_RMC14/Tiles/corsat/retrosquareslight.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicRetroSquaresLightRough
+  sprite: /Textures/_RMC14/Tiles/corsat/retrosquareslightrough.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicSpiralBlueOffice
+  sprite: /Textures/_RMC14/Tiles/corsat/spiralblueoffice.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicSpiralOffice
+  sprite: /Textures/_RMC14/Tiles/corsat/spiraloffice.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicSpiralPlate
+  sprite: /Textures/_RMC14/Tiles/corsat/spiralplate.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicSpiralWoodAlt
+  sprite: /Textures/_RMC14/Tiles/corsat/spiralwoodalt.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicSterilePlate
+  sprite: /Textures/_RMC14/Tiles/corsat/sterileplate.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicTan
+  sprite: /Textures/_RMC14/Tiles/corsat/sterileplate.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicWhiteBlueFull
+  sprite: /Textures/_RMC14/Tiles/corsat/whitebluefull.png

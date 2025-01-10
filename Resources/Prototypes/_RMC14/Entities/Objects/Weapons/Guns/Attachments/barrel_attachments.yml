@@ -126,6 +126,7 @@
   - type: Tag
     tags:
     - RMCAttachmentBarrel
+    - RMCAttachmentMatebaStandard
   - type: AttachableVisuals
   - type: AttachableWeaponRangedMods
 

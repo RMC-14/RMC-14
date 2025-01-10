@@ -19,6 +19,14 @@ rmc-announcement-ares-lz-designated = Command Order Issued:
 
     {$name} has been designated as the primary landing zone.
 
+rmc-announcement-ares-online = [color=white][font size=16][bold]ARES Online[/bold][/font][/color][color=red][font size=14][bold]
+
+    {$message}[/bold][/font][/color]
+
+rmc-announcement-ares-map = [color=white][font size=16][bold]UNS Almayer[/bold][/font][/color][color=red][font size=14][bold]
+
+    {$message}[/bold][/font][/color]
+
 rmc-announcement-cooldown = Please allow at least {$seconds} seconds to pass between announcements
 
 

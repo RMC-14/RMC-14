@@ -12,3 +12,4 @@
 
 - type: playTimeTracker
   id: CMJobXenoLurker
+  isXeno: true

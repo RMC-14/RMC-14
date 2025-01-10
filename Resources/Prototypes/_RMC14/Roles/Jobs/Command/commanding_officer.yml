@@ -48,6 +48,7 @@
   minimapBackground:
    sprite: _RMC14/Interface/map_blips.rsi
    state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -77,12 +78,12 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: "CO"
+    - type: CommendationGiver
 
 - type: startingGear
   id: CMGearCommandingOfficer
   equipment:
     jumpsuit: CMJumpsuitBO
-    back: CMSatchel
     belt: RMCMatebaBeltFilled
     shoes: CMShoesLaceupCommander
     head: CMHeadBeretCO

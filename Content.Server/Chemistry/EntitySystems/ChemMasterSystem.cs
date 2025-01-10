@@ -1,9 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Server._RMC14.IconLabel;
 using Content.Server.Chemistry.Components;
 using Content.Server.Labels;
 using Content.Server.Popups;
 using Content.Server.Storage.EntitySystems;
+using Content.Shared._RMC14.IconLabel;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
@@ -38,6 +40,9 @@ namespace Content.Server.Chemistry.EntitySystems
         [Dependency] private readonly StorageSystem _storageSystem = default!;
         [Dependency] private readonly LabelSystem _labelSystem = default!;
         [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+
+        // RMC - Add Icon labels to custom chemical containers
+        [Dependency] private readonly RMCIconLabelSystem _rmcIconLabel = default!;
 
         [ValidatePrototypeId<EntityPrototype>]
         private const string PillPrototypeId = "CMPill";
@@ -204,6 +209,12 @@ namespace Content.Server.Chemistry.EntitySystems
 
             _labelSystem.Label(container, message.Label);
 
+            /// RMC - Add Icon Label Text to custom pill bottle
+            if (TryComp(container, out IconLabelComponent? iconLabel))
+            {
+                _rmcIconLabel.SetText((container, iconLabel), "rmc-custom-container-label-text", ("customLabel", message.Label));
+            }
+
             for (var i = 0; i < message.Number; i++)
             {
                 var item = Spawn(PillPrototypeId, Transform(container).Coordinates);
@@ -251,6 +262,13 @@ namespace Content.Server.Chemistry.EntitySystems
                 return;
 
             _labelSystem.Label(container, message.Label);
+
+            /// RMC - Add Icon Label Text to custom chemical bottle
+            if (TryComp(container, out IconLabelComponent? iconLabel))
+            {
+                _rmcIconLabel.SetText((container, iconLabel), "rmc-custom-container-label-text", ("customLabel", message.Label));
+            }
+
             _solutionContainerSystem.TryAddSolution(soln.Value, withdrawal);
 
             // Log bottle creation by a user

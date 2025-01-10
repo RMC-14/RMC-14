@@ -43,13 +43,15 @@ public sealed class XenoFlingSystem : EntitySystem
         if (attempt.Cancelled)
             return;
 
-        args.Handled = true;
-
         if (_net.IsServer)
+        {
+            args.Handled = true;
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
+        }
+
 
         var targetId = args.Target;
-        _rmcPulling.TryStopUserPullIfPulling(xeno, targetId);
+        _rmcPulling.TryStopAllPullsFromAndOn(targetId);
 
         var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage);
         if (damage?.GetTotal() > FixedPoint2.Zero)
@@ -61,13 +63,14 @@ public sealed class XenoFlingSystem : EntitySystem
         var origin = _transform.GetMapCoordinates(xeno);
         var target = _transform.GetMapCoordinates(targetId);
         var diff = target.Position - origin.Position;
-        var length = diff.Length();
-        diff *= xeno.Comp.Range / 3 / length;
-
-        _stun.TryParalyze(targetId, xeno.Comp.ParalyzeTime, true);
-        _throwing.TryThrow(targetId, diff, 10);
+        diff = diff.Normalized() * xeno.Comp.Range;
 
         if (_net.IsServer)
+        {
+            _stun.TryParalyze(targetId, xeno.Comp.ParalyzeTime, true);
+            _throwing.TryThrow(targetId, diff, 10);
+
             SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
+        } 
     }
 }

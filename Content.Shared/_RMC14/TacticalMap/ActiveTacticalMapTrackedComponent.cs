@@ -21,4 +21,7 @@ public sealed partial class ActiveTacticalMapTrackedComponent : Component
 
     [DataField]
     public SpriteSpecifier.Rsi? Background;
+
+    [DataField]
+    public bool HiveLeader;
 }

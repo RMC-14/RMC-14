@@ -151,3 +151,30 @@
       map: [ "full" ]
     - state: incendiarybuck_e
       map: [ "empty" ]
+
+- type: entity
+  parent: RMCBoxShotgunBase
+  id: RMCBoxShotgunBreaching
+  name: box of breaching shells
+  description: A box filled with breaching shotgun shells. 16 Gauge.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCShellShotgunBreaching
+  - type: StorageFill
+    contents:
+    - id: RMCShellShotgunBreaching
+      amount: 5
+  - type: Sprite
+    layers:
+    - state: breaching
+      map: [ "full" ]
+    - state: breaching_e
+      map: [ "empty" ]
+  - type: Tag
+    tags:
+    - RMCBoxShotgunBreaching
+
+- type: Tag
+  id: RMCBoxShotgunBreaching

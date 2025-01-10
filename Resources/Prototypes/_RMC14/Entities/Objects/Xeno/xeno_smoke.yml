@@ -23,7 +23,7 @@
     state: smoke2
     color: "#62821D"
   - type: TimedDespawn
-    lifetime: 10
+    lifetime: 12
   - type: Tag
     tags:
     - HideContextMenu
@@ -37,11 +37,13 @@
   - type: DamageOverTime
     affectsDead: false
     affectsInfectedNested: false
-    damage:
-      groups:
-        Burn: 20
+    armorPiercingDamage:
       types:
+        Heat: 20
         Asphyxiation: 3
+    damage:
+      types:
+        Heat: 17.5
     barricadeDamage:
       types:
         Heat: 11.5
@@ -75,7 +77,7 @@
     state: smoke2
     color: "#FFBF58"
   - type: TimedDespawn
-    lifetime: 10
+    lifetime: 12
   - type: Tag
     tags:
     - HideContextMenu
@@ -109,6 +111,39 @@
       components:
       - Marine
   - type: DeleteOnExplosion
+  
+- type: entity
+  id: RMCSmokeRunner
+  name: acid smoke
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        mask:
+        - MobMask
+        layer:
+        - MidImpassable
+  - type: Occluder
+  - type: Sprite
+    sprite: _RMC14/Effects/smoke.rsi
+    state: smoke2
+    color: "#86B028"
+  - type: TimedDespawn
+    lifetime: 2
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Appearance
+  - type: DeleteOnExplosion
+
 
 - type: entity
   parent: RMCSmokeAcid
@@ -129,6 +164,16 @@
   - type: EvenSmoke
     spawn: RMCSmokeNeurotoxinShroud
     range: 1
+
+- type: entity
+  parent: RMCSmokeAcid
+  id: RMCSmokeAcidDeathcloud
+  name: acid gas
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EvenSmoke
+    spawn: RMCSmokeAcidDeathcloud
+    range: 2
 
 - type: edgeSpreader
   id: RMCSmokeAcid

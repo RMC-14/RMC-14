@@ -18,9 +18,9 @@
   description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This is the standard variant, designed for bulk ammunition-carrying operations.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/marine.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/marine/jungle-classic.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/marine.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/marine/jungle-classic.rsi
   - type: Item
     size: Large
   - type: Storage
@@ -47,6 +47,13 @@
       - CMMagazineRifle
       - CMMagazineSmg
   - type: FixedItemSizeStorage
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Belt/marine/jungle-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/marine/snow-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/marine/desert.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/marine/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/marine/jungle-classic.rsi
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -55,9 +62,9 @@
   description: An ammunition belt designed to hold shotgun shells. # or individual bullets. TODO RMC14
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/shotgun.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/shotgun.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
   - type: Item
     size: Large
   - type: Storage
@@ -67,12 +74,20 @@
     whitelist:
       tags:
       - RMCShellShotgun
+      - RMCCartridge458SOCOM
   - type: IgnoreContentsSize
     items:
       tags:
       - CMMagazineRifle
       - CMMagazineSmg
   - type: FixedItemSizeStorage
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/shotgun/snow-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/shotgun/desert.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/shotgun/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -114,6 +129,54 @@
       - EntrenchingTool
       - LightReplacer
   - type: FixedItemSizeStorage
+
+- type: entity
+  parent: CMBeltUtility
+  id: RMCBeltConstruction
+  name: M277 pattern construction rig
+  description: The M277 is a common rig used by Combat Technicians to carry around materials and other supplies. It consists of a modular belt with various clips. This version sacrifices storage space for specialized material loading clips.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/construction.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/construction.rsi
+  - type: Storage
+    grid:
+    - 0,0,11,1 # 6 slots
+    whitelist:
+      tags:
+      - Crowbar
+      - Screwdriver
+      - Wirecutter
+      - Wrench
+      - CableCoil
+      - Multitool
+      - Flashlight
+      - PowerCell
+      - CMFireExtinguisherPortable
+      - RMCExplosiveBreachingCharge
+      - RodMetal1 
+#     - # TODO nailgun, circuit board, plastic explosives, stock parts
+      components:
+      - Welder
+      - PowerCell
+      - TrayScanner
+      - GasAnalyzer
+      - LightReplacer
+      - EntrenchingTool
+      - BarbedWire
+      - Material
+      - Sentry
+      - EmptySandbag
+      - FullSandbag
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - EntrenchingTool
+      - LightReplacer
+      - Material
+      - Sentry
+      - FullSandbag
 
 - type: entity
   parent: CMBeltUtility
@@ -183,9 +246,9 @@
   description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is specially designed to store knives. Not commonly issued, but kept in service.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/knife.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/knife/jungle-classic.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/knife.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/knife/jungle-classic.rsi
   - type: ItemSlots
   - type: CMHolster
   - type: UsableWhileDevoured
@@ -198,6 +261,13 @@
       whitelist:
         tags:
         - ThrowingKnife
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Belt/knife/jungle-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/knife/snow-desert-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/knife/snow-desert-urban.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/knife/snow-desert-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/knife/jungle-classic.rsi
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -249,9 +319,9 @@
   description: The M276 is the standard load-bearing equipment of the UNMC. This configuration mounts a duffel bag filled with a range of injectors and light medical supplies, and is common among medics.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/medicbag.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/medicbag.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi
   - type: Storage
     maxItemSize: Small
     grid:
@@ -281,6 +351,13 @@
     items:
       tags:
       - PillCanister
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/medicbag/desert.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -289,7 +366,7 @@
   description: An M276 load-bearing rig configured to carry ammunition for the M402 mortar, along with a sidearm.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/mortar.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/mortar/jungle-classic.rsi
     layers:
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: m1984 # TODO RMC14 per-gun underlay
@@ -302,7 +379,7 @@
     - state: full
       map: [ "closedLayer" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/mortar.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/mortar/jungle-classic.rsi
   - type: Storage
     maxItemSize: Huge
     whitelist:
@@ -327,6 +404,13 @@
     whitelist:
       components:
       - Gun
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Belt/mortar/jungle-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/mortar/snow-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/mortar/desert.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/mortar/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/mortar/jungle-classic.rsi
 
 - type: entity
   parent: CMBeltMarine
@@ -335,9 +419,9 @@
   description: Despite the fact that 1. drum magazines are incredibly non-ergonomical, and 2. require incredibly precise machining in order to fit universally (spoiler, they don't, adding further to the myth of 'Smart Gun Personalities'), the Marines decided to issue a modified marine belt (more formally known by the designation M280) with hooks and dust covers (overly complex for the average jarhead) for the ML66A system's drum munitions. When the carry catch on the drum isn't getting stuck in the oiled up velcro, the rig actually does do a decent job at holding a plentiful amount of drums. But at the end of the day, compared to standard rigs... it sucks, but isn't that what being a Marine is all about?
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator/jungle-classic.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator/jungle-classic.rsi
   - type: Storage
     maxItemSize: Normal
     grid:
@@ -356,12 +440,19 @@
     items:
       tags:
       - RMCMagazineSmartGun
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Belt/smart_gun_operator/jungle-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/smart_gun_operator/snow-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/smart_gun_operator/desert.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/smart_gun_operator/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/smart_gun_operator/jungle-classic.rsi
 
 - type: entity
   parent: CMBeltMarine
   id: RMCBeltSmartGunOperatorPistol
   name: M802 pattern smart gun operator sidearm rig
-  description: The M802 is a limited-issue mark of USCM load-bearing equipment, designed to carry smartgun ammunition and a sidearm.
+  description: The M802 is a limited-issue mark of UNMC load-bearing equipment, designed to carry smartgun ammunition and a sidearm.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator_pistol.rsi
@@ -416,6 +507,9 @@
   - type: Tag
     tags:
     - RMCSmartGunSidearmHolster
+
+- type: Tag
+  id: RMCSmartGunSidearmHolster
 
 - type: entity
   parent: CMBeltMarine
@@ -504,11 +598,14 @@
     tags:
     - RMCSmartPistolHolster
 
+- type: Tag
+  id: RMCSmartPistolHolster
+
 - type: entity
   parent: CMBeltMarine
   id: RMCBeltHolsterPistol
   name: M276 pattern general pistol holster rig
-  description: The M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
@@ -561,14 +658,17 @@
     tags:
     - RMCGeneralPistolHolster
 
+- type: Tag
+  id: RMCGeneralPistolHolster
+
 - type: entity
   parent: CMBeltMarine
   id: RMCBeltHolsterRevolver
   name: M276 pattern general revolver holster rig
-  description: he M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version is universal and adjustable for different revolvers, along with six small pouches for speedloaders. It smells faintly of hay.
+  description: he M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is universal and adjustable for different revolvers, along with six small pouches for speedloaders. It smells faintly of hay.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_revolver.rsi
     layers:
     - state: icon
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
@@ -581,7 +681,7 @@
     - state: full
       map: [ "closedLayer" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_revolver.rsi
     slots:
     - suitStorage
     - belt
@@ -612,6 +712,9 @@
   - type: Tag
     tags:
     - RMCGeneralRevolverHolster
+
+- type: Tag
+  id: RMCGeneralRevolverHolster
 
 - type: entity
   parent: ClothingBeltBase # Can't have storage slots on this one
@@ -653,6 +756,9 @@
     tags:
     - RMCSMGHolster
 
+- type: Tag
+  id: RMCSMGHolster
+
 - type: entity
   parent: CMBeltBaseStorage
   id: RMCBeltUtilityGeneral
@@ -660,23 +766,33 @@
   description: A small, lightweight pouch that can be clipped onto M3 Pattern armor to provide additional storage. The newer G8-A model, while uncomfortable, can also be clipped around the waist.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/sparepouch.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/sparepouch/jungle-classic.rsi
   - type: Clothing
     slots:
     - suitStorage
     - belt
-    sprite: _RMC14/Objects/Clothing/Belt/sparepouch.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/sparepouch/jungle-classic.rsi
   - type: Storage
     maxItemSize: Normal
     grid:
     - 0,0,9,1 # 9 slots
     blacklist:
       tags:
-      - CMFirstAidKit # TODO RMC14
-  #      - EngineerKit # TODO RMC14
+      - CMFirstAidKit
+      - RMCEngineerKit
   - type: Tag
     tags:
     - RMCG8Pouch
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Belt/sparepouch/jungle-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/sparepouch/snow-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/sparepouch/desert.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/sparepouch/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/sparepouch/jungle-classic.rsi
+
+- type: Tag
+  id: RMCG8Pouch
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -733,6 +849,9 @@
     tags:
     - RMCSMGPouchHolster
 
+- type: Tag
+  id: RMCSMGPouchHolster
+
 - type: entity
   parent: CMBeltBaseStorage
   id: RMCMatebaBelt
@@ -754,18 +873,18 @@
     slots:
     - suitStorage
     - belt
-    sprite: _RMC14/Objects/Clothing/Belt/sparepouch.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/mateba_belt.rsi
   - type: Storage
     maxItemSize: Normal
     grid:
     - 0,0,13,1 # 7 slots
     blacklist:
       tags:
-      - CMFirstAidKit # TODO RMC14
-  #      - EngineerKit # TODO RMC14
+      - CMFirstAidKit
+      - RMCEngineerKit
   - type: Tag
     tags:
-    - RMCG8Pouch
+    - RMCMatebaHolster
   - type: FixedItemSizeStorage
   - type: CMHolster
     whitelist:
@@ -778,6 +897,9 @@
         components:
         - Gun
 
+- type: Tag
+  id: RMCMatebaHolster
+
 - type: entity
   parent: RMCMatebaBelt
   id: RMCMatebaBeltFilled
@@ -788,3 +910,141 @@
     - id: RMCSpeedLoaderMateba
       amount: 5
     - id: RMCWeaponRevolverMateba
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCMK80BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolMK80
+      amount: 6
+    - id: CMWeaponPistolMK80
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCM1984BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM1984
+      amount: 6
+    - id: CMWeaponPistolM1984
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: CMM77BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM77AP
+      amount: 6
+    - id: CMWeaponPistolM77
+
+- type: entity
+  parent: RMCBeltHolsterRevolver
+  id: RMCM44BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderM44
+      amount: 6
+    - id: RMCWeaponRevolverM44
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCBeltXM51
+  name: M276 pattern XM51 holster rig
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the XM51 breaching scattergun, allowing easier storage of the weapon. It features pouches for storing two magazines along with extra shells.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/xm51.rsi
+    layers:
+    - state: xm51
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      offset: 0.35, 0
+      visible: false
+    - state: icon
+  - type: Clothing
+    slots:
+    - belt
+    - suitStorage
+    sprite: _RMC14/Objects/Clothing/Belt/xm51.rsi
+  - type: Storage
+    maxItemSize: Large
+    grid:
+    - 0,0,15,1 # 8 slots
+    whitelist:
+      tags:
+      - RMCWeaponShotgunXM51
+      - RMCMagazineShotgunXM51
+      - RMCShellShotgun # TODO RMC14 bullet handfuls
+  - type: FixedItemSizeStorage
+  - type: CMHolster
+    whitelist:
+      components:
+      - Gun
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
+    - popup: rmc-storage-limit-max-mags
+      count: 2
+      whitelist:
+        tags:
+        - RMCMagazineShotgunXM51
+  - type: CMStorageVisualizer
+    storageClosed: null
+    storageOpen: null
+  - type: Tag
+    tags:
+    - RMCXM51Holster
+
+- type: Tag
+  id: RMCXM51Holster
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCM300SOCOMBelt
+  name: M300 pattern .458 SOCOM loading rig
+  description: An ammunition belt designed to hold the large .458 SOCOM caliber bullets for the XM88 heavy rifle.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/xm88/jungle-classic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/xm88/jungle-classic.rsi
+  - type: Item
+    size: Large
+  - type: Storage
+    maxItemSize: Large
+    grid:
+    - 0,0,13,3 # 14 slots
+    whitelist:
+      tags:
+      - RMCCartridge458SOCOM
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - RMCShellShotgun
+  - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - RMCBeltSOCOM
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Belt/xm88/jungle-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/xm88/snow-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/xm88/desert.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/xm88/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/xm88/jungle-classic.rsi
+
+- type: Tag
+  id: RMCBeltSOCOM

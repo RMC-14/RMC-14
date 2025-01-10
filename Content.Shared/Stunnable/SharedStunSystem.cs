@@ -276,7 +276,7 @@ public abstract class SharedStunSystem : EntitySystem
 
     private void OnKnockedTileFriction(EntityUid uid, KnockedDownComponent component, ref TileFrictionEvent args)
     {
-        args.Modifier *= KnockDownModifier;
+        //args.Modifier *= KnockDownModifier;
     }
 
     #region Attempt Event Handling

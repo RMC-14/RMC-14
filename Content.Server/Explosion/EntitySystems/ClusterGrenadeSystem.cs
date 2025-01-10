@@ -1,6 +1,5 @@
 using System.Numerics;
 using Content.Server.Explosion.Components;
-using Robust.Shared.Spawners;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared.Explosion.Components;
@@ -117,7 +116,7 @@ public sealed class ClusterGrenadeSystem : EntitySystem
                         var grenadeTimer = EnsureComp<ActiveTimerTriggerComponent>(grenade);
                         grenadeTimer.TimeRemaining = (clug.BaseTriggerDelay + grenadeDelay);
                         var ev = new ActiveTimerTriggerEvent(grenade, uid);
-                        RaiseLocalEvent(uid, ref ev);
+                        RaiseLocalEvent(uid, ref ev, true);
                     }
                 }
 

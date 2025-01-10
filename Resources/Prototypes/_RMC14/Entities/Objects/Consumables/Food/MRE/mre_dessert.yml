@@ -83,7 +83,7 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 2
-        - ReagentId: Sugar
+        - ReagentId: RMCSugar
           Quantity: 2
         - ReagentId: Theobromine
           Quantity: 1

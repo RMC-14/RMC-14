@@ -5,7 +5,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Sprite;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(RMCSpriteSystem))]
+[Access(typeof(SharedRMCSpriteSystem))]
 public sealed partial class SpriteSetRenderOrderComponent : Component
 {
     [DataField, AutoNetworkedField]

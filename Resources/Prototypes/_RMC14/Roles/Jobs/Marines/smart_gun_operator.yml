@@ -19,6 +19,7 @@
       time: 36000 # 10 hours
     RMCRankLanceCorporal: []
   startingGear: CMGearSmartGunOperator
+  dummyStartingGear: CMGearSmartGunOperatorEquipped
   icon: "CMJobIconSmartGunOperator"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
@@ -30,6 +31,7 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: smartgunner
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
@@ -54,10 +56,9 @@
   id: CMGearSmartGunOperatorEquipped
   equipment:
     jumpsuit: JumpsuitMarine
-    back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
-    outerClothing: CMArmorM3Medium
+    outerClothing: CMArmorSmartGunCombatHarness
     gloves: CMHandsBlackMarine
     id: CMDogtagSmartGunOperator
     ears: CMHeadsetAlpha

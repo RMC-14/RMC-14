@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Standing;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
@@ -43,8 +43,6 @@ public sealed class XenoStompSystem : EntitySystem
         if (ev.Cancelled)
             return;
 
-        args.Handled = true;
-
         if (!TryComp(xeno, out TransformComponent? xform) ||
             _mobState.IsDead(xeno))
         {
@@ -53,6 +51,8 @@ public sealed class XenoStompSystem : EntitySystem
 
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
+
+        args.Handled = true;
 
         _receivers.Clear();
         _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.Range, _receivers);
@@ -66,7 +66,7 @@ public sealed class XenoStompSystem : EntitySystem
                 continue;
 
             _stun.TryParalyze(receiver, xeno.Comp.ParalyzeTime, true);
-            if (_net.IsServer)
+            if (_net.IsServer && xeno.Comp.Effect is not null)
                 SpawnAttachedTo(xeno.Comp.Effect, receiver.Owner.ToCoordinates());
 
             if (xform.Coordinates.TryDistance(EntityManager, receiver.Owner.ToCoordinates(), out var distance) && distance <= xeno.Comp.ShortRange)
@@ -83,7 +83,7 @@ public sealed class XenoStompSystem : EntitySystem
             }
         }
 
-        if (_net.IsServer)
+        if (_net.IsServer && xeno.Comp.SelfEffect is not null)
             SpawnAttachedTo(xeno.Comp.SelfEffect, xeno.Owner.ToCoordinates());
     }
 }

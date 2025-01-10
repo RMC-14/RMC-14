@@ -1,11 +1,13 @@
 ﻿using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Weapons.Ranged;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -49,7 +51,8 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (args.Cancelled || ent.Comp.DeleteOnFriendlyXeno)
             return;
 
-        if (_hive.FromSameHive(ent.Owner, args.OtherEntity))
+        if (_hive.FromSameHive(ent.Owner, args.OtherEntity) && 
+            (HasComp<XenoComponent>(args.OtherEntity) || HasComp<HiveCoreComponent>(args.OtherEntity)))
             args.Cancelled = true;
     }
 
@@ -112,6 +115,11 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (_net.IsClient)
             return true;
 
+        var ammoShotEvent = new AmmoShotEvent()
+        {
+            FiredProjectiles = new List<EntityUid>(shots)
+        };
+
         var originalDiff = targetMap.Position - origin.Position;
         for (var i = 0; i < shots; i++)
         {
@@ -128,6 +136,8 @@ public sealed class XenoProjectileSystem : EntitySystem
             diff *= speed / diff.Length();
 
             _gun.ShootProjectile(projectile, diff, xenoVelocity, xeno, xeno, speed);
+
+            ammoShotEvent.FiredProjectiles.Add(projectile);
 
             // let hive member logic apply
             EnsureComp<XenoProjectileComponent>(projectile);
@@ -148,6 +158,8 @@ public sealed class XenoProjectileSystem : EntitySystem
                 Dirty(projectile, targeted);
             }
         }
+
+        RaiseLocalEvent(xeno, ammoShotEvent);
 
         return true;
     }

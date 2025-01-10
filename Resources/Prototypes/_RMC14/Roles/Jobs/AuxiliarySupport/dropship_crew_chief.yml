@@ -33,6 +33,7 @@
   minimapBackground:
    sprite: _RMC14/Interface/map_blips.rsi
    state: background_shipside
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -59,7 +60,6 @@
   id: CMGearDCC
   equipment:
     jumpsuit: CMJumpsuitDCC
-    back: CMSatchel
     shoes: CMBootsBlackFilled
     id: CMIDCardDCC
     ears: CMHeadsetPilot

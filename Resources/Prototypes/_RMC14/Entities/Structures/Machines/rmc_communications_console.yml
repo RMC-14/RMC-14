@@ -66,6 +66,8 @@
     interfaces:
       enum.MarineControlComputerUi.Key:
         type: MarineControlComputerBui
+      enum.DialogUiKey.Key:
+        type: DialogBui
   - type: MarineControlComputer
 
 - type: entity
@@ -93,6 +95,8 @@
         type: OverwatchConsoleBui
       enum.TacticalMapComputerUi.Key:
         type: TacticalMapComputerBui
+      enum.DialogUiKey.Key:
+        type: DialogBui
   - type: RequiresSkill
     skills:
       RMCSkillOverwatch: 1

@@ -35,6 +35,11 @@
   description: Sheets made out of metal. They have been dubbed Metal Sheets.
   suffix: Filled
   components:
+    - type: RMCConstructionUpgradeItem
+      whitelist:
+        tags:
+        - RMCMetalBarricade
+        - RMCPlasteelBarricade
     - type: Material
     - type: PhysicalComposition
       materialComposition:

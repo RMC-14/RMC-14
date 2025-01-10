@@ -786,10 +786,10 @@
     sprite: Clothing/Head/Hats/melon.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/melon.rsi
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.95
+#  - type: Armor
+#    modifiers:
+#      coefficients:
+#        Blunt: 0.95
 
 - type: entity
   parent: ClothingHeadBase

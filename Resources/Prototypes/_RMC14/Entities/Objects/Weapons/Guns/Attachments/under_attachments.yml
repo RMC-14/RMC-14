@@ -45,7 +45,6 @@
     - RMCAttachmentUnderbarrel
     - RMCAttachmentBipod
   - type: AttachableToggleable
-    needHand: true
     heldOnlyActivate: true
     userOnly: true
     doInterrupt: true
@@ -54,6 +53,7 @@
     breakOnFullRotate: true
     doAfter: 1.5
     deactivateDoAfter: 0
+    doAfterNeedHand: false
     instantToggle: Brace
     useDelay: 0.5
     activatePopupText: attachable-popup-activate-deploy-on-ground
@@ -104,6 +104,7 @@
           tags:
           - RMCGunBipodFullAuto
       extraFireModes: FullAuto
+      setFireMode: FullAuto
     modifiers:
     - conditions:
         inactiveOnly: true
@@ -188,7 +189,6 @@
       burstScatterAddMult: -2
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -3
       scatterFlat: -10
     - conditions:
         unwieldedOnly: true
@@ -224,7 +224,6 @@
       scatterFlat: -2
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: 0.05
       scatterFlat: -4
 
@@ -281,16 +280,15 @@
       tags:
       - RMCShellShotgunBuckshot
     capacity: 5
-    proto: null
+    proto: CMShellShotgunBuckshot
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
   - type: GunDamageMultipliers
     multipliers:
       Turf: 5
       Breaching: 10.8
-  - type: UniqueAction
-  - type: PumpAction
   - type: UseDelay
+  - type: RMCWeaponAccuracy
   - type: AttachableToggleable
     userOnly: true
     attachedOnly: true
@@ -462,7 +460,6 @@
       burstScatterAddMult: -2
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: 1
       accuracyAddMult: -0.15
       scatterFlat: 2
 
@@ -584,7 +581,6 @@
       scatterFlat: -2
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
       scatterFlat: -4
 
 - type: Tag

@@ -62,28 +62,16 @@
   id: RMCSmartPistol
 
 - type: Tag
-  id: RMCSmartPistolHolster
-
-- type: Tag
-  id: RMCGeneralPistolHolster
-
-- type: Tag
-  id: RMCGeneralRevolverHolster
-
-- type: Tag
-  id: RMCSmartGunSidearmHolster
-
-- type: Tag
-  id: RMCSMGHolster
-
-- type: Tag
-  id: RMCSMGPouchHolster
-
-- type: Tag
   id: RMCMK80
 
 - type: Tag
   id: RMCRocketAmmo84mm
+
+- type: Tag
+  id: RMCDropshipWeaponPoint
+
+- type: Tag
+  id: RMCDropshipUtilityPoint
 
 - type: Tag
   id: WeaponSMGM63
@@ -107,4 +95,16 @@
   id: RMCMacheteScabbard
 
 - type: Tag
-  id: RMCG8Pouch
+  id: RMCScalpel
+
+- type: Tag
+  id: RMCScrewdriver
+
+- type: Tag
+  id: ThrowingKnife
+
+- type: Tag
+  id: RMCCircuitboard
+
+- type: Tag
+  id: RMCEngineerKit

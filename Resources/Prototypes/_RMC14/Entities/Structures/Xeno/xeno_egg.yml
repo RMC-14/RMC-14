@@ -82,6 +82,8 @@
         type: XenoParasiteGhostBui
         requireInputValidation: false
   - type: RequireProjectileTarget
+  - type: XenoInhandSprite
+    stateName: egg
 
 - type: entity
   parent: BaseItem

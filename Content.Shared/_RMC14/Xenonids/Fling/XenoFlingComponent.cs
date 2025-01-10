@@ -1,6 +1,5 @@
 ﻿using System.Numerics;
 using Content.Shared.Damage;
-using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -15,7 +14,7 @@ public sealed partial class XenoFlingComponent : Component
     public DamageSpecifier Damage = new();
 
     [DataField, AutoNetworkedField]
-    public float Range = 10;
+    public float Range = 3.5f; // 4 tiles from start
 
     [DataField, AutoNetworkedField]
     public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(2);

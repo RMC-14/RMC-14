@@ -163,6 +163,17 @@
     contents:
     - id: RMCBoxMagazinePistolSU6
 
+# M54CE2
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineM54CE2
+  name: M54CE2 HAR Magazines crate (HAR ammo box x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineRifleM54CE2
+      amount: 2
+
 # M44 Revolver
 - type: entity
   parent: RMCCrateAmmo
@@ -201,3 +212,15 @@
     contents:
     - id: RMCMagazineSentryShotgun
       amount: 2
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazineBreaching
+  name: XM51 Ammo (2x mags) (1x small breaching shell box)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineShotgunXM51
+      amount: 2
+    - id: RMCBoxShotgunBreaching
+      amount: 1

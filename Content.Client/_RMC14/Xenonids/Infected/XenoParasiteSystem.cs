@@ -14,52 +14,32 @@ public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<VictimBurstComponent, AppearanceChangeEvent>(OnVictimBurstAppearanceChanged);
-        SubscribeLocalEvent<VictimInfectedComponent, AppearanceChangeEvent>(OnVictimInfectedAppearanceChanged);
+        SubscribeLocalEvent<VictimBurstComponent, ComponentStartup>(SetVisuals);
+        SubscribeLocalEvent<VictimBurstComponent, VictimBurstStateChangedEvent>(SetVisuals);
     }
 
-    private void OnVictimBurstAppearanceChanged(Entity<VictimBurstComponent> ent, ref AppearanceChangeEvent args)
+    private void SetVisuals<T>(Entity<VictimBurstComponent> ent, ref T args)
     {
-        if (args.Sprite is not { } sprite)
+        if (!TryComp(ent, out SpriteComponent? sprite))
             return;
 
-        if (!_appearance.TryGetData(ent, ent.Comp.BurstLayer, out bool burst, args.Component))
+        var state = ent.Comp.State switch
+        {
+            BurstVisualState.Bursting => ent.Comp.BurstingState,
+            BurstVisualState.Burst => ent.Comp.BurstState,
+            _ => null
+        };
+
+        if (!sprite.LayerMapTryGet(ent.Comp.Layer, out var layer))
+        {
+            layer = sprite.LayerMapReserveBlank(ent.Comp.Layer);
+            sprite.LayerSetRSI(layer, ent.Comp.BurstPath);
+        }
+
+        if (string.IsNullOrWhiteSpace(state))
             return;
 
-        if (!sprite.LayerMapTryGet(ent.Comp.BurstLayer, out var layer))
-            layer = sprite.LayerMapReserveBlank(ent.Comp.BurstLayer);
-
-        if (burst)
-        {
-            sprite.LayerSetSprite(layer, ent.Comp.BurstSprite);
-            sprite.LayerSetVisible(layer, true);
-        }
-        else
-        {
-            sprite.LayerSetVisible(layer, true);
-        }
-    }
-
-    private void OnVictimInfectedAppearanceChanged(Entity<VictimInfectedComponent> ent, ref AppearanceChangeEvent args)
-    {
-        if (args.Sprite is not { } sprite)
-            return;
-
-        if (!_appearance.TryGetData(ent, ent.Comp.BurstingLayer, out bool bursting, args.Component))
-            return;
-
-        if (!sprite.LayerMapTryGet(ent.Comp.BurstingLayer, out var layer))
-            layer = sprite.LayerMapReserveBlank(ent.Comp.BurstingLayer);
-
-        if (bursting)
-        {
-            sprite.LayerSetSprite(layer, ent.Comp.BurstingSprite);
-            sprite.LayerSetVisible(layer, true);
-        }
-        else
-        {
-            sprite.LayerSetVisible(layer, false);
-        }
+        sprite.LayerSetState(layer, state);
     }
 
     public override void FrameUpdate(float frameTime)

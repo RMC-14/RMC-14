@@ -58,6 +58,11 @@
     blacklist:
       components:
       - Xeno
+  - type: Clothing
+    slots:
+    - belt
+  - type: Item
+    size: Small
 
 - type: entity
   parent: CigarCase

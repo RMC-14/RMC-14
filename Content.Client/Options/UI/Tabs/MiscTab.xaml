@@ -1,10 +1,15 @@
 ﻿<tabs:MiscTab xmlns="https://spacestation14.io"
               xmlns:tabs="clr-namespace:Content.Client.Options.UI.Tabs"
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-              xmlns:ui="clr-namespace:Content.Client.Options.UI">
+              xmlns:ui="clr-namespace:Content.Client.Options.UI"
+              xmlns:s="clr-namespace:Content.Client.Stylesheets">
     <BoxContainer Orientation="Vertical">
         <ScrollContainer VerticalExpand="True" HorizontalExpand="True">
             <BoxContainer Orientation="Vertical" Margin="8 8 8 8" VerticalExpand="True">
+                <Label Text="{Loc 'cm-ui-rmc14'}"
+                       FontColorOverride="{x:Static s:StyleNano.NanoGold}"
+                       StyleClasses="LabelKeyText"/>
+                <CheckBox Name="RMCAutoPunctuate" Text="{Loc 'rmc-ui-auto-punctuate'}" Margin="0 0 0 5" />
                 <Label Text="{Loc 'ui-options-general-ui-style'}"
                        StyleClasses="LabelKeyText"/>
                 <ui:OptionDropDown Name="DropDownHudTheme" Title="{Loc 'ui-options-hud-theme'}" />

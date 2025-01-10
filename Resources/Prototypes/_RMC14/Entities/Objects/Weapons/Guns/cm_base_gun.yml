@@ -20,7 +20,6 @@
   - type: WieldDelay
   - type: AltFireMelee
   - type: MeleeWeapon
-    resetOnHandSelected: false
     attackRate: 1
     damage:
       types:
@@ -36,6 +35,9 @@
   - type: Gun
     meleeCooldownOnShoot: false
     resetOnHandSelected: false
+  - type: RMCWeaponAccuracy
+  - type: GunSkilledAccuracy
+  - type: Appearance
 
 - type: entity
   parent: BaseBullet
@@ -46,3 +48,5 @@
     layers:
     - state: bullet
       shader: unshaded
+  - type: BulletholeGenerator
+  - type: RMCProjectileAccuracy

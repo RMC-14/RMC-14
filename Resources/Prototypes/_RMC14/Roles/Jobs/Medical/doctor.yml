@@ -22,6 +22,7 @@
   minimapBackground:
    sprite: _RMC14/Interface/map_blips.rsi
    state: background_medical
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -39,7 +40,6 @@
   id: CMGearDoctor
   equipment:
     jumpsuit: CMScrubsBlue
-    back: CMSatchelMarine
     shoes: ClothingShoesColorWhite
     id: CMIDCardDoctor
     ears: CMHeadsetMedical # TODO RMC14 Medical Vender
@@ -48,8 +48,7 @@
   id: CMGearDoctorEquipped
   equipment:
     jumpsuit: CMScrubsBlue
-    outerClothing: CMCoatLong
-    back: CMSatchelMarine
+    outerClothing: RMCCoatService
     gloves: CMHandsLatex
     shoes: RMCShoesWhite
     head: CMHeadCapSurgBlue

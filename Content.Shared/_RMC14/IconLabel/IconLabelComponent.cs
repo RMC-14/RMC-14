@@ -11,6 +11,12 @@ public sealed partial class IconLabelComponent : Component
     [DataField, AutoNetworkedField]
     public LocId? LabelTextLocId;
 
+    /// <summary>
+    /// Localization parameters should be used if the label is not certain at compile-time
+    /// </summary>
+    [AutoNetworkedField]
+    public List<(string, object)> LabelTextParams = new();
+
     [DataField, AutoNetworkedField]
     public int TextSize = 1;
 
@@ -19,4 +25,7 @@ public sealed partial class IconLabelComponent : Component
 
     [DataField, AutoNetworkedField]
     public Vector2i StoredOffset = new(0, 0);
+
+    [DataField, AutoNetworkedField]
+    public int LabelMaxSize = 2;
 }

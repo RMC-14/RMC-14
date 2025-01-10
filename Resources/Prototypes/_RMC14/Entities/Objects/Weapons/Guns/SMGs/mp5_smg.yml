@@ -41,6 +41,9 @@
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
+    accuracyMultiplierUnwielded: 0.8
   - type: MagazineAmmoProvider
     autoEject: false
     soundAutoEject: null

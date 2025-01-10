@@ -31,6 +31,7 @@
   minimapBackground:
    sprite: _RMC14/Interface/map_blips.rsi
    state: background_mp
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -55,7 +56,6 @@
   id: CMGearMilitaryWarden
   equipment:
     jumpsuit: CMJumpsuitWarden
-    back: CMSatchelSecurity
     shoes: CMBootsBlackFilled
     head: CMHeadCapWarden
     eyes: CMGlassesSecurity

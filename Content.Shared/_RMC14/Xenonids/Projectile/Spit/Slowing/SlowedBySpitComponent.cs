@@ -7,9 +7,15 @@ namespace Content.Shared._RMC14.Xenonids.Projectile.Spit.Slowing;
 [Access(typeof(XenoSpitSystem))]
 public sealed partial class SlowedBySpitComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public float Multiplier = 0.75f;
+	[DataField, AutoNetworkedField]
+	public bool SuperSlow = true;
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+	[DataField, AutoNetworkedField]
+    public float SuperMultiplier = 0.33f;
+
+	[DataField, AutoNetworkedField]
+	public float Multiplier = 0.66f;
+
+	[DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan ExpiresAt;
 }

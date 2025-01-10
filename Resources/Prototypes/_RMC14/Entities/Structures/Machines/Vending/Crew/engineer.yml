@@ -99,6 +99,6 @@
     bundle:
     - CMLightReplacer
     # demo scanner
-    # trash bag
-    # mechanical toolbox
+    - TrashBag
+    - RMCToolboxMechanicalFilled
     - RMCFlashlight

@@ -1,0 +1,49 @@
+# Masks
+- type: loadout
+  id: CoifRMC
+  cost: 2
+  storage:
+    back:
+    - CMMaskCoif
+
+- type: loadout
+  id: GasMaskRMC
+  cost: 2
+  storage:
+    back:
+    - CMMaskGas
+
+- type: loadout
+  id: MaskScarfRedRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskScarfRed
+
+- type: loadout
+  id: MaskScarfBlackRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskScarfBlack
+
+- type: loadout
+  id: MaskScarfGrayRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskScarfGray
+
+- type: loadout
+  id: MaskScarfGreenRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskScarfGreen
+
+- type: loadout
+  id: MaskScarfTanRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskScarfTan

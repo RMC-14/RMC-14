@@ -2,26 +2,36 @@
   parent: RMCWeaponRevolverBase
   id: RMCWeaponRevolverMateba
   name: Mateba autorevolver custom
+  suffix: Jungle
   description: The .454 Mateba 6 Unica autorevolver is a semi-automatic handcannon that uses its own recoil to rotate the cylinders. Extremely rare, prohibitively costly, and unyieldingly powerful, it's found in the hands of a select few high-ranking UNMC officials. Stylish, sophisticated, and above all, extremely deadly.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba/jungle.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba/jungle.rsi
   - type: Gun
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mateba.ogg
   - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+      - RMCSpeedLoaderMateba
+      - RMCCartridgeRevolverMateba
     proto: RMCCartridgeRevolverMateba
     capacity: 6
     chambers: [ True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null ]
+  - type: GunDamageModifier
+    multiplier: 1.5
   - type: RMCSelectiveFire
     baseFireRate: 1.111
     scatterWielded: 8
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.1
+    accuracyMultiplierUnwielded: 0.75
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -41,6 +51,13 @@
     offsets:
       rmc-aslot-barrel: 0.215, 0.19
       rmc-aslot-rail: -0.11, 0.22
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Pistols/mateba/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Pistols/mateba/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Pistols/mateba/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Pistols/mateba/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Pistols/mateba/urban.rsi
 
 - type: entity
   id: RMCBaseSpeedLoaderMateba
@@ -107,12 +124,14 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 72
+        Piercing: 60
   - type: CMArmorPiercing
-    amount: 5
+    amount: 20
   - type: RMCStunOnHit
-    maxRange: 4
+    maxRange: 4.5
     stunTime: 1
+  - type: RMCProjectileAccuracy
+    accuracy: 90
 
 - type: Tag
   id: RMCSpeedLoaderMateba

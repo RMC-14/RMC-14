@@ -28,6 +28,7 @@
   minimapBackground:
    sprite: _RMC14/Interface/map_blips.rsi
    state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -53,7 +54,6 @@
   id: CMGearChiefEngineer
   equipment:
     jumpsuit: CMJumpsuitChiefEngineer
-    back: CMSatchelMarineTech
     shoes: CMBootsBlack
     gloves: CMHandsInsulated
     id: CMIDCardChiefEngineer

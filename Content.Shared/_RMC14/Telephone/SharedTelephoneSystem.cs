@@ -121,7 +121,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
 
     private void OnBackpackGetItemActions(Entity<RotaryPhoneBackpackComponent> ent, ref GetItemActionsEvent args)
     {
-        if (args.InHands || (args.SlotFlags & ent.Comp.Slot) == 0)
+        if ((args.SlotFlags & ent.Comp.Slot) == 0 && !args.InHands)
             return;
 
         args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId, ent);
@@ -176,6 +176,13 @@ public abstract class SharedTelephoneSystem : EntitySystem
         {
             _popup.PopupEntity("No transmitters could be located to call!", user, user, PopupType.MediumCaution);
             return;
+        }
+
+        // Emit the popup on a successful call.
+        // Check for the marine component cause we don't want walls calling phones.
+        if (TryComp<MarineComponent>(user, out var marine) && TryComp(user, out MetaDataComponent? marinemeta) && TryComp(ent, out MetaDataComponent? phonemeta))
+        {
+            _popup.PopupEntity($"{marinemeta.EntityName} dials a number on the {phonemeta.EntityName}.", ent);
         }
 
         ent.Comp.Idle = false;
@@ -247,6 +254,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
 
         _hands.TryPickupAnyHand(user, telephone);
         EnsureComp<PickedUpPhoneComponent>(telephone);
+        PlayGrabSound(rotary);
     }
 
     private void ReturnPhone(EntityUid rotary, EntityUid telephone, EntityUid? user)
@@ -262,6 +270,8 @@ public abstract class SharedTelephoneSystem : EntitySystem
             _hands.TryDropIntoContainer(user.Value, telephone, container);
         else
             _container.Insert(telephone, container);
+
+        PlayGrabSound(rotary);
     }
 
     private void HangUp(EntityUid self, EntityUid other)
@@ -291,6 +301,17 @@ public abstract class SharedTelephoneSystem : EntitySystem
     private void StopSound(EntityUid ent)
     {
         _ambientSound.SetSound(ent, new SoundPathSpecifier(""));
+    }
+
+    private void PlayGrabSound(EntityUid rotary)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp(rotary, out RotaryPhoneComponent? comp))
+            return;
+
+        _audio.PlayPvs(comp.GrabSound, rotary);
     }
 
     protected bool TryGetOtherPhone(EntityUid rotary, out EntityUid other)
@@ -453,22 +474,19 @@ public abstract class SharedTelephoneSystem : EntitySystem
             if (phone.Idle)
                 continue;
 
-            phone.Idle = true;
-            Dirty(uid, phone);
-
             if (dialing.Other is not { } other)
                 continue;
 
-            if (!HasComp<RotaryPhoneDialingComponent>(other) ||
-                !HasComp<RotaryPhoneReceivingComponent>(other))
-            {
+            if (!HasComp<RotaryPhoneReceivingComponent>(other))
                 continue;
-            }
 
             if (!HasPickedUp(other) &&
                 time > phone.LastCall + phone.DialingIdleDelay &&
                 phone.DialingIdleSound is { } sound)
             {
+                phone.Idle = true;
+                Dirty(uid, phone);
+
                 _ambientSound.SetSound(uid, sound);
                 _ambientSound.SetVolume(uid, sound.Params.Volume);
             }

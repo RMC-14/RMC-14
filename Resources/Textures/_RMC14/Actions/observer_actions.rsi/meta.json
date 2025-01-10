@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Uses throw_parasite.png from cmss13 at https://github.com/cmss13-devs/cmss13/blob/cfa259bbd2d627ed94a359fa8c0dec63006f49fa/icons/mob/hud/actions_xeno.dmi as a base, touched up by BlueDev2",
+  "copyright": "Uses throw_parasite.png from cmss13 at https://github.com/cmss13-devs/cmss13/blob/cfa259bbd2d627ed94a359fa8c0dec63006f49fa/icons/mob/hud/actions_xeno.dmi as a base, touched up by BlueDev2, https://github.com/cmss13-devs/cmss13/blob/c943826676fa4ac8a222d0d1a21ab7d1199b010a/icons/mob/hud/actions.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -9,6 +9,9 @@
   "states": [
     {
       "name": "find_parasite"
+    },
+    {
+      "name": "join_xeno"
     }
   ]
 }

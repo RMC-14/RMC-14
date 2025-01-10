@@ -31,6 +31,7 @@
   minimapBackground:
    sprite: _RMC14/Interface/map_blips.rsi
    state: background_mp
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -47,8 +48,7 @@
 - type: startingGear
   id: CMGearMilitaryPolice
   equipment:
-    jumpsuit: CMJumpsuitMPBlack
-    back: CMSatchelSecurity
+    jumpsuit: CMJumpsuitMP
     shoes: CMBootsBlackFilled
     head: CMHeadBeretRed
     eyes: CMGlassesSecurity

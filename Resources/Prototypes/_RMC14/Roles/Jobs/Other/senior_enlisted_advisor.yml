@@ -53,6 +53,7 @@
   minimapBackground:
    sprite: _RMC14/Interface/map_blips.rsi
    state: background_medical
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -87,7 +88,6 @@
   id: CMGearSeniorEnlistedAdvisor
   equipment:
     jumpsuit: CMJumpsuitBO
-    back: CMSatchelMarine
     shoes: CMBootsBrownFilled
     head: CMHeadCapDrill
     id: CMIDCardSeniorEnlistedAdvisor

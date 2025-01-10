@@ -77,6 +77,7 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFrameKutjevo
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowKutjevo
     node: windowKutjevo
@@ -127,6 +128,7 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFrameKutjevoReinforced
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowKutjevoReinforced
     node: windowKutjevoReinforced

@@ -29,7 +29,6 @@
         priority: 2
         whitelist:
           tags:
-          - Holdout
           - RMCMagazinePistolHoldout
   - type: AttachableHolder
     slots:
@@ -52,6 +51,9 @@
       rmc-aslot-barrel: 0.71, 0.095
       rmc-aslot-rail: -0.065, 0.125
       rmc-aslot-underbarrel: 0.312, -0.25
+  - type: Tag
+    tags:
+    - Holdout
 
 - type: entity
   parent: CMBaseMagazinePistol
