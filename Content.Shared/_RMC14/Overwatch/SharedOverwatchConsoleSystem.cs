@@ -530,7 +530,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         while (query.MoveNext(out var uid, out var team))
         {
             var netUid = GetNetEntity(uid);
-            var squad = new OverwatchSquad(netUid, Name(uid), team.Color, null);
+            var squad = new OverwatchSquad(netUid, Name(uid), team.Color, null, team.CanSupplyDrop);
             var members = marines.GetOrNew(netUid);
             foreach (var member in team.Members)
             {

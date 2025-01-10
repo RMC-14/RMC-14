@@ -34,4 +34,7 @@ public sealed partial class SquadTeamComponent : Component
 
     [DataField]
     public Dictionary<ProtoId<JobPrototype>, int> MaxRoles = new();
+
+    [DataField]
+    public bool CanSupplyDrop = true;
 }
