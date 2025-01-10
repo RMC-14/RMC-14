@@ -60,7 +60,8 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
 
     private void Off()
     {
-        _overlay.RemoveOverlay(new NightVisionOverlay());
+        _overlay.RemoveOverlay<NightVisionOverlay>();
+        _overlay.RemoveOverlay<NightVisionFilterOverlay>();
         _light.DrawLighting = true;
     }
 
@@ -69,6 +70,9 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
         if (ent.Comp.Overlay)
             _overlay.AddOverlay(new NightVisionOverlay());
 
+        if (ent.Comp.Green)
+            _overlay.AddOverlay(new NightVisionFilterOverlay());
+
         _light.DrawLighting = true;
     }
 
@@ -76,6 +80,9 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
     {
         if (ent.Comp.Overlay)
             _overlay.AddOverlay(new NightVisionOverlay());
+
+        if (ent.Comp.Green)
+            _overlay.AddOverlay(new NightVisionFilterOverlay());
 
         _light.DrawLighting = false;
     }

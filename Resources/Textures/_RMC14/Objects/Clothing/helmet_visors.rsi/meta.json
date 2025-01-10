@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0525b5ada7da1afcd9b260e76d5fea01500d9c8d/icons/obj/items/clothing/helmet_visors.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "sight_up"
+    },
+    {
+      "name": "sight_empty"
+    },
+    {
+      "name": "hud_sight"
+    },
+    {
+      "name": "hud_sight_up"
+    },
+    {
+      "name": "nvg_sight"
+    },
+    {
+      "name": "meson_sight_up"
+    },
+    {
+      "name": "med_sight"
+    },
+    {
+      "name": "med_sight_up"
+    },
+    {
+      "name": "sec_sight"
+    },
+    {
+      "name": "sec_sight_up"
+    },
+    {
+      "name": "blank_hud_sight_down"
+    },
+    {
+      "name": "hud_sight_down"
+    },
+    {
+      "name": "nvg_sight_down"
+    },
+    {
+      "name": "med_sight_down"
+    },
+    {
+      "name": "sec_sight_down"
+    }
+  ]
+}

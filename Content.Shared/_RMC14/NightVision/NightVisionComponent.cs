@@ -23,6 +23,9 @@ public sealed partial class NightVisionComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool SeeThroughContainers;
+
+    [DataField, AutoNetworkedField]
+    public bool Green;
 }
 
 [Serializable, NetSerializable]
@@ -30,5 +33,5 @@ public enum NightVisionState
 {
     Off,
     Half,
-    Full
+    Full,
 }

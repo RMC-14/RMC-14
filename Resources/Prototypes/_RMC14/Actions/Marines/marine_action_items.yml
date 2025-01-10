@@ -129,3 +129,17 @@
   - type: InstantAction
     itemIconStyle: BigItem
     event: !type:ToggleActionEvent
+
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionCycleVisor
+  name: Cycle helmet HUD
+  description: Cycles the currently active visor.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: sight_up
+    event: !type:CycleVisorActionEvent
+    useDelay: 0.5
