@@ -21,7 +21,7 @@
     RMCRankCaptain:
     - !type:RoleTimeRequirement
       role: CMJobAuxiliarySupportOfficer
-      time: 630000 # 175 hours
+      time: 252000 # 70 hours
     RMCRankFirstLT: []
   weight: 5
   startingGear: CMGearASO
