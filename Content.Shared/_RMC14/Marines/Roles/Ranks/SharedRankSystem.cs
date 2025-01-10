@@ -1,5 +1,4 @@
-﻿using Content.Shared.Clothing;
-using Content.Shared.Examine;
+﻿using Content.Shared.Examine;
 using Content.Shared.Humanoid;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
