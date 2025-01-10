@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added Honkzee Beezs figurine.
-    type: Add
-  id: 682
-  time: '2024-09-11T09:24:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4003
 - author: Vermidia
   changes:
   - message: Sniper sentry only does 2x as much damage as a normal sentry
@@ -4975,5 +4968,12 @@
   id: 1181
   time: '2025-01-09T03:13:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5329
+- author: Whisper
+  changes:
+  - message: Added Kyrus, Taleryn Vogsburg figurine.
+    type: Add
+  id: 1182
+  time: '2025-01-10T04:48:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5319
 Name: RMC14
 Order: -1
