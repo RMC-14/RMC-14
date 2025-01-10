@@ -15,4 +15,7 @@ public sealed partial class RotaryPhoneDialingComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool DidVoicemail = false;
+
+    [DataField, AutoNetworkedField]
+    public bool DidVoicemailTimeout = false;
 }

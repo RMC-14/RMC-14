@@ -480,13 +480,13 @@ public abstract class SharedTelephoneSystem : EntitySystem
                 continue;
 
             // Play busy sound after voicemail ends
-            if (time > dialing.LastVoicemail + phone.VoicemailTimeoutDelay && dialing.DidVoicemail)
+            if (time > dialing.LastVoicemail + phone.VoicemailTimeoutDelay && dialing.DidVoicemail && !dialing.DidVoicemailTimeout)
             {
+                dialing.DidVoicemailTimeout = false;
+                Dirty(uid, dialing);
+
                 _ambientSound.SetSound(uid, BusySound);
                 _ambientSound.SetVolume(uid, BusySound.Params.Volume);
-
-                dialing.Other = null;
-                Dirty(uid, dialing);
             }
 
             if (dialing.Other is not { } other)
