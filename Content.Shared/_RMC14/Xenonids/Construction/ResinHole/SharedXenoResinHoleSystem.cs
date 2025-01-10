@@ -14,7 +14,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 
-public abstract partial class SharedXenoResinHoleSystem : EntitySystem
+public abstract class SharedXenoResinHoleSystem : EntitySystem
 {
     [Dependency] protected readonly SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] protected readonly MobStateSystem _mobState = default!;
