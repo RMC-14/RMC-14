@@ -1,7 +1,7 @@
 ﻿{
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a86a9e2e57e5c00195cab704713a4962e8bc973a/icons/obj/items/weapons/projectiles.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/fa49380893336c8a0827f7dc8d5004b86f3e5a67/icons/obj/items/weapons/projectiles.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -17,7 +17,27 @@
       ]
     },
     {
-      "name": "xeno_acid",
+      "name": "xeno_acid_weak",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "xeno_acid_normal",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "xeno_acid_strong",
       "delays": [
         [
           0.1,
