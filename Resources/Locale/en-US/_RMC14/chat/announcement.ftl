@@ -4,12 +4,12 @@ rmc-announcement-message = [font size=14][bold][color=white]{$author} Announceme
 
     {$message}
 
-rmc-announcement-message-signed = [font size=14][bold][color=white]{$author} Announcement[/color][/bold][/font][font size=12][color=red]
+rmc-announcement-message-signed = [font size=14][bold][color=white]{$author} Announcement[/color][/bold][/font][font size=13][color=red]
 
-    {$message}[italic]
+    {$message}[bold][italic]
 
-     Signed by,
-     {$name}[/italic][/color][/font]
+    Signed by,
+    {$name}[/italic][/bold][/color][/font]
 
 rmc-announcement-ares-message = [color=white][font size=16][bold]ARES v3.2 Operation Staging Order[/bold][/font][/color][color=red][font size=14][bold]
 
