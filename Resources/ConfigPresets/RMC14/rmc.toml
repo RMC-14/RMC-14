@@ -49,7 +49,7 @@ discord = "https://discord.gg/rouny"
 github = "https://github.com/RMC-14/RMC-14"
 patreon = "https://www.patreon.com/RMC14"
 #website = ""
-#wiki = ""
+wiki = "https://wiki.rouny-ss14.com"
 
 [net]
 tickrate = 25
