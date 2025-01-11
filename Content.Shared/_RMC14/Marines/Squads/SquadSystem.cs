@@ -203,24 +203,24 @@ public sealed class SquadSystem : EntitySystem
 
         if (_inventory.TryGetContainerSlotEnumerator(ent.Owner, out var slots, SlotFlags.All))
         {
-            while (slots.MoveNext(out var containerSlot))
+            while (slots.MoveNext(out var slot))
             {
-                if (containerSlot.ContainedEntity != null)
+                if (slot.ContainedEntity != null)
                 {
-                    var containerSlotEntity = containerSlot.ContainedEntity.Value;
+                    var slotEntity = slot.ContainedEntity.Value;
 
-                    if (TryComp<RMCMapToSquadComponent>(containerSlotEntity, out var mapToSquad))
+                    if (TryComp<RMCMapToSquadComponent>(slotEntity, out var mapToSquad))
                     {
-                        MapToSquad((containerSlotEntity, mapToSquad), user, user, squad);
+                        MapToSquad((slotEntity, mapToSquad), user, squad, null);
                     }
-                    else if (TryComp<StorageComponent>(containerSlotEntity, out var storage))
+                    else if (TryComp<StorageComponent>(slotEntity, out var storage))
                     {
                         foreach (var contained in storage.Container.ContainedEntities)
                         {
                             if (!TryComp<RMCMapToSquadComponent>(contained, out var mapToSquadStorage))
                                 continue;
 
-                            MapToSquad((contained, mapToSquadStorage), containerSlotEntity, user, squad);
+                            MapToSquad((contained, mapToSquadStorage), user, squad, slotEntity);
                         }
                     }
                 }
@@ -228,7 +228,7 @@ public sealed class SquadSystem : EntitySystem
         }
     }
 
-    private void MapToSquad(Entity<RMCMapToSquadComponent> ent, EntityUid equipee, EntityUid user, EntityUid squad)
+    private void MapToSquad(Entity<RMCMapToSquadComponent> ent, EntityUid user, EntityUid squad, EntityUid? storage)
     {
         if (_net.IsClient)
             return;
@@ -243,7 +243,10 @@ public sealed class SquadSystem : EntitySystem
 
         if (item.HasValue)
         {
-            var newItem = SpawnNextToOrDrop(item, equipee);
+            var newItem = SpawnNextToOrDrop(item, user);
+
+            if (storage != null)
+                _storage.Insert(storage.Value, newItem, out _, playSound: false);
 
             if (TryComp<ClothingComponent>(newItem, out var clothing))
                 _cmInventory.TryEquipClothing(user, (newItem, clothing));
