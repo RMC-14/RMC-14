@@ -228,3 +228,65 @@
   parent: [RMCBaseScarfDown, RMCMaskScarfTan]
   id: RMCMaskScarfTanDown
   name: tan tactical wrap
+
+# Torn Scarf
+- type: entity
+  parent: ClothingMaskBaseButcherable
+  id: RMCMaskTornScarfBlack
+  name: tactical scarf
+  description: A tactical scarf used to keep warm in the cold.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/black.rsi
+
+- type: entity
+  parent: RMCMaskTornScarfBlack
+  id: RMCMaskTornScarfDesert
+  name: desert tactical scarf
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/desert.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/desert.rsi
+
+- type: entity
+  parent: RMCMaskTornScarfBlack
+  id: RMCMaskTornScarfGreen
+  name: green tactical scarf
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/green.rsi
+
+- type: entity
+  parent: RMCMaskTornScarfBlack
+  id: RMCMaskTornScarfGrey
+  name: grey tactical scarf
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/grey.rsi
+
+- type: entity
+  parent: RMCMaskTornScarfBlack
+  id: RMCMaskTornScarfUrban
+  name: urban tactical scarf
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/urban.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/urban.rsi
+
+- type: entity
+  parent: RMCMaskTornScarfBlack
+  id: RMCMaskTornScarfSnow
+  name: snow tactical scarf
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/snow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/snow.rsi
