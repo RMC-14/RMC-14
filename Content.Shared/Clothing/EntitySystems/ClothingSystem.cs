@@ -200,7 +200,7 @@ public abstract class ClothingSystem : EntitySystem
         args.Additive += ent.Comp.StripDelay;
     }
 
-    private void CheckEquipmentForLayerHide(EntityUid equipment, EntityUid equipee)
+    public void CheckEquipmentForLayerHide(EntityUid equipment, EntityUid equipee)
     {
         if (TryComp(equipment, out HideLayerClothingComponent? clothesComp) && TryComp(equipee, out HumanoidAppearanceComponent? appearanceComp))
             ToggleVisualLayers(equipee, clothesComp.Slots, appearanceComp.HideLayersOnEquip);
