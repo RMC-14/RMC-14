@@ -47,8 +47,10 @@
           - RMCAttachmentM890Stock
       rmc-aslot-underbarrel:
         locked: true
+        startingAttachable: RMCAttachmentU1GrenadeLauncher
         whitelist:
           tags:
+          - RMCAttachmentU1GrenadeLauncher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.825, 0.06
