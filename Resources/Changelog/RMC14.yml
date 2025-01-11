@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Added extra Signal Flare packs to the FTL vendor
-    type: Add
-  id: 698
-  time: '2024-09-14T21:34:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4048
 - author: DrSmugleaf
   changes:
   - message: Temporarily doubled sniper spec bullet damage from 70 to 140 until aimed
@@ -4971,5 +4964,14 @@
   id: 1197
   time: '2025-01-11T13:39:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5347
+- author: blueDev2
+  changes:
+  - message: UGL launched grenades timer starts on landing.
+    type: Add
+  - message: Timer is extended to 1.5 seconds.
+    type: Add
+  id: 1198
+  time: '2025-01-11T13:53:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5248
 Name: RMC14
 Order: -1
