@@ -52,12 +52,14 @@
 
 # Squad headbands
 - type: entity
-  parent: RMCBaseScarfMask
+  parent: CMHeadBandGreen
   id: RMCHeadBandSquad
-  name: squad headband
+  name: UNMC squad headband
   suffix: DO NOT MAP
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/headband/gray.rsi
+  - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/headband/gray.rsi
   - type: RMCMapToSquad
     map:

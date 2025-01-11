@@ -41,12 +41,14 @@
 # SQUADS
 
 - type: entity
-  parent: RMCBaseScarfMask
+  parent: RMCMaskScarfAlpha
   id: RMCMaskScarfSquad
-  name: squad tactical wrap
+  name: UNMC squad tactical wrap
   suffix: DO NOT MAP
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/gray.rsi
+  - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/gray.rsi
   - type: RMCMapToSquad
     map:
