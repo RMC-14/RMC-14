@@ -114,8 +114,7 @@ public sealed partial class CrusherShieldSystem : EntitySystem
         if (!ent.Comp.ExplosionResistApplying)
             return;
 
-        // TODO RMC14 halved like armor for now
-        var explosionResist = ent.Comp.ExplosionResistance / 2;
+        var explosionResist = ent.Comp.ExplosionResistance;
 
         var resist = (float) Math.Pow(1.1, explosionResist / 5.0); // From armor calcualtion
         args.DamageCoefficient /= resist;

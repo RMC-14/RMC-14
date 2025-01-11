@@ -335,7 +335,7 @@
       visible: false
   - type: Item
     size: Small
-    sprite: _RMC14/Objects/Medical/beaker.rsi
+    sprite: _RMC14/Objects/Chemistry/vials.rsi
   - type: SolutionContainerVisuals
     maxFillLevels: 5
     fillBaseName: vial

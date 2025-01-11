@@ -139,7 +139,7 @@
         Piercing: 30
   - type: ProjectileSpread
     proto: CMPelletShotgunFlechette
-    count: 3
+    count: 4
     spread: 15
   - type: RMCProjectileDamageFalloff
     thresholds:

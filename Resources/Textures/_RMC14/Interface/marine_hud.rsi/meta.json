@@ -1,0 +1,474 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/eabcd63600b1e64d4b5c00ef43ea9e2d844c79d4/icons/mob/hud/marine_hud.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "orders"
+    },
+    {
+      "name": "hudfocus"
+    },
+    {
+      "name": "hudhold"
+    },
+    {
+      "name": "hudmove"
+    },
+    {
+      "name": "squad_hud"
+    },
+    {
+      "name": "hudsquad"
+    },
+    {
+      "name": "hudmarinebordercommand"
+    },
+    {
+      "name": "hudsquad_rmp"
+    },
+    {
+      "name": "hudsquad_crmp"
+    },
+    {
+      "name": "hudsquad_cmp"
+    },
+    {
+      "name": "hudsquad_warden"
+    },
+    {
+      "name": "hudsquad_mp"
+    },
+    {
+      "name": "hudsquad_mpcadet"
+    },
+    {
+      "name": "hudsquad_general"
+    },
+    {
+      "name": "hudsquad_co"
+    },
+    {
+      "name": "hudsquad_vo"
+    },
+    {
+      "name": "hudsquad_xo"
+    },
+    {
+      "name": "hudsquad_aso"
+    },
+    {
+      "name": "hudsquad_syn"
+    },
+    {
+      "name": "hudsquad_syn_k9"
+    },
+    {
+      "name": "hudsquad_so"
+    },
+    {
+      "name": "hudsquad_gp"
+    },
+    {
+      "name": "hudsquad_dcc"
+    },
+    {
+      "name": "hudsquad_ce"
+    },
+    {
+      "name": "hudsquad_mt"
+    },
+    {
+      "name": "hudsquad_ot"
+    },
+    {
+      "name": "hudsquad_messtech"
+    },
+    {
+      "name": "hudsquad_cmo"
+    },
+    {
+      "name": "hudsquad_doctor"
+    },
+    {
+      "name": "hudsquad_researcher"
+    },
+    {
+      "name": "hudsquad_nurse"
+    },
+    {
+      "name": "hudsquad_ro"
+    },
+    {
+      "name": "hudsquad_ct"
+    },
+    {
+      "name": "hudsquad_sea"
+    },
+    {
+      "name": "hudsquad_leader_a"
+    },
+    {
+      "name": "hudsquad_leader"
+    },
+    {
+      "name": "hudsquad_tl"
+    },
+    {
+      "name": "hudsquad_spec"
+    },
+    {
+      "name": "hudsquad_gun"
+    },
+    {
+      "name": "hudsquad_engi"
+    },
+    {
+      "name": "hudsquad_med"
+    },
+    {
+      "name": "hudsquad_tc"
+    },
+    {
+      "name": "hudsquad_ass"
+    },
+    {
+      "name": "hudsquad_load"
+    },
+    {
+      "name": "hudsquad_tech"
+    },
+    {
+      "name": "hudsquad_medk9"
+    },
+    {
+      "name": "hudsquad_ft1"
+    },
+    {
+      "name": "hudsquad_ft2"
+    },
+    {
+      "name": "hudsquad_ft3"
+    },
+    {
+      "name": "hudsquad_ftl"
+    },
+    {
+      "name": "wo"
+    },
+    {
+      "name": "hudsquad_hgsl"
+    },
+    {
+      "name": "hudsquad_vhg"
+    },
+    {
+      "name": "hudsquad_hg"
+    },
+    {
+      "name": "hudsquad_hgalt"
+    },
+    {
+      "name": "hudsquad_hgspec"
+    },
+    {
+      "name": "hudsquad_wo_co"
+    },
+    {
+      "name": "hudsquad_wo_xo"
+    },
+    {
+      "name": "hudsquad_wo_mcrew"
+    },
+    {
+      "name": "hudsquad_wo_ro"
+    },
+    {
+      "name": "hudsquad_wo_chemist"
+    },
+    {
+      "name": "hudsquad_wo_doctor"
+    },
+    {
+      "name": "hudsquad_wo_cmo"
+    },
+    {
+      "name": "provost"
+    },
+    {
+      "name": "hudsquad_pve"
+    },
+    {
+      "name": "hudsquad_pva"
+    },
+    {
+      "name": "hudsquad_pvi"
+    },
+    {
+      "name": "hudsquad_pvtml"
+    },
+    {
+      "name": "hudsquad_pvm"
+    },
+    {
+      "name": "hudsquad_pvdm"
+    },
+    {
+      "name": "hudsquad_pvci"
+    },
+    {
+      "name": "hudsquad_pvuc"
+    },
+    {
+      "name": "hudsquad_tisio"
+    },
+    {
+      "name": "hudsquad_tissa"
+    },
+    {
+      "name": "hudsquad_io"
+    },
+    {
+      "name": "specops"
+    },
+    {
+      "name": "hudsquad_soccmd"
+    },
+    {
+      "name": "hudsquad_soctl_a"
+    },
+    {
+      "name": "hudsquad_soctl"
+    },
+    {
+      "name": "hudsquad_soc"
+    },
+    {
+      "name": "allegiance"
+    },
+    {
+      "name": "hudclf"
+    },
+    {
+      "name": "hudupp"
+    },
+    {
+      "name": "hudw-y"
+    },
+    {
+      "name": "hudress"
+    },
+    {
+      "name": "hudmutineer"
+    },
+    {
+      "name": "pmc"
+    },
+    {
+      "name": "pmc_sd"
+    },
+    {
+      "name": "pmc_ld"
+    },
+    {
+      "name": "pmc_td"
+    },
+    {
+      "name": "pmc_syn"
+    },
+    {
+      "name": "pmc_ct"
+    },
+    {
+      "name": "pmc_md"
+    },
+    {
+      "name": "upp"
+    },
+    {
+      "name": "upp_squad_circle"
+    },
+    {
+      "name": "upp_background"
+    },
+    {
+      "name": "upp_pvt"
+    },
+    {
+      "name": "upp_med"
+    },
+    {
+      "name": "upp_sapper"
+    },
+    {
+      "name": "upp_spec"
+    },
+    {
+      "name": "upp_sl"
+    },
+    {
+      "name": "upp_sl_a"
+    },
+    {
+      "name": "upp_mp"
+    },
+    {
+      "name": "upp_lt"
+    },
+    {
+      "name": "upp_slt"
+    },
+    {
+      "name": "upp_xo"
+    },
+    {
+      "name": "upp_co"
+    },
+    {
+      "name": "upp_hc"
+    },
+    {
+      "name": "upp_synth"
+    },
+    {
+      "name": "upp_com"
+    },
+    {
+      "name": "upp_commed"
+    },
+    {
+      "name": "upp_comsl"
+    },
+    {
+      "name": "upp_vc"
+    },
+    {
+      "name": "upp_doc"
+    },
+    {
+      "name": "upp_log"
+    },
+    {
+      "name": "upp_commi"
+    },
+    {
+      "name": "clf"
+    },
+    {
+      "name": "clf_engi"
+    },
+    {
+      "name": "clf_med"
+    },
+    {
+      "name": "clf_spec"
+    },
+    {
+      "name": "clf_sl"
+    },
+    {
+      "name": "clf_sl_a"
+    },
+    {
+      "name": "clf_synth"
+    },
+    {
+      "name": "clf_cellcom"
+    },
+    {
+      "name": "clf_mil"
+    },
+    {
+      "name": "cmb"
+    },
+    {
+      "name": "cmb_mar"
+    },
+    {
+      "name": "cmb_dep"
+    },
+    {
+      "name": "cmb_syn"
+    },
+    {
+      "name": "cmb_icc"
+    },
+    {
+      "name": "cmb_obs"
+    },
+    {
+      "name": "cmb_rco"
+    },
+    {
+      "name": "cmb_medt"
+    },
+    {
+      "name": "cmb_brch"
+    },
+    {
+      "name": "cmb_rsyn"
+    },
+    {
+      "name": "cmb_spec"
+    },
+    {
+      "name": "rmc"
+    },
+    {
+      "name": "rmc_breacher"
+    },
+    {
+      "name": "rmc_marksman"
+    },
+    {
+      "name": "rmc_rifleman"
+    },
+    {
+      "name": "rmc_smartgunner"
+    },
+    {
+      "name": "rmc_teamleader"
+    },
+    {
+      "name": "rmc_lieutenant"
+    },
+    {
+      "name": "rmc_commander"
+    },
+    {
+      "name": "hudsquad_dp"
+    },
+    {
+      "name": "holocards"
+    },
+    {
+      "name": "holo_card_black",
+      "directions": 4
+    },
+    {
+      "name": "holo_card_red",
+      "directions": 4
+    },
+    {
+      "name": "holo_card_orange",
+      "directions": 4
+    },
+    {
+      "name": "holo_card_purple",
+      "directions": 4
+    },
+    {
+      "name": "nspa"
+    },
+    {
+      "name": "nspa_sgt"
+    },
+    {
+      "name": "nspa_con"
+    }
+  ]
+}

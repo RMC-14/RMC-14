@@ -1,4 +1,4 @@
-<p align="center"> <img alt="Space Station 14" width="400" height="400" src="https://github.com/RMC-14/RMC-14/assets/121047731/84edde1b-1a1f-452e-a9b9-64759a865f64" /></p>
+<p align="center"> <img alt="Space Station 14" width="400" height="400" src="https://github.com/user-attachments/assets/320ad459-8997-4e5b-9f7e-fc7e7d7dcb73" /></p>
 
 RMC-14 is inspired by CM13, Space Station 13, that runs on [Robust Toolbox](https://github.com/space-wizards/RobustToolbox).
 
@@ -15,8 +15,6 @@ If you want to host or create content for RMC-14, this is the repo you need. It 
 ## Contributing
 
 We are happy to accept contributions from anybody. Get in Discord if you want to help. We've got a [list of issues](https://github.com/RMC-14/RMC-14/issues) that need to be done and anybody can pick them up. Don't be afraid to ask for help either!
-
-We are not currently accepting translations of the game on our main repository. If you would like to translate the game into another language consider creating a fork or contributing to a fork.
 
 ## Building
 

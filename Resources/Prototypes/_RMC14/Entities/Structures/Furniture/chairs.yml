@@ -23,7 +23,6 @@
   - type: Physics
     bodyType: Static
   - type: Anchorable
-  - type: Rotatable
   - type: Construction
     graph: CMSeat
     node: chair
@@ -58,8 +57,6 @@
     state: comfychair
   - type: Transform
     anchored: true
-  - type: Rotatable
-    rotateWhileAnchored: true
   - type: Physics
     bodyType: Static
   - type: Anchorable
@@ -127,7 +124,7 @@
 - type: entity
   parent: CMChairComfy
   id: CMChairComfyAlpha
-  description: A simple chair permanently attached to the floor. Covered with a squeaky and way too hard faux-leather, unevenly painted in Alpha squad red. Only for the bravest and freshest Marine recruits.
+  description: A simple chair permanently attached to the floor, with the spinning parts removed to force soldiers with low attention spans to keep still during briefings. Covered with a squeaky and way too hard faux-leather, unevenly painted in Alpha squad red. Only for the bravest and freshest Marine recruits.
   suffix: Alpha
   components:
   - type: Sprite
@@ -136,7 +133,7 @@
 - type: entity
   parent: CMChairComfy
   id: CMChairComfyBravo
-  description: A simple chair permanently attached to the floor. Covered with a squeaky and way too hard faux-leather, unevenly painted in Bravo squad brown. Certified fortified on all sides from enemy incursion.
+  description: A simple chair permanently attached to the floor, with the spinning parts removed to force soldiers with low attention spans to keep still during briefings. Covered with a squeaky and way too hard faux-leather, unevenly painted in Bravo squad brown. Certified fortified on all sides from enemy incursion.
   suffix: Bravo
   components:
   - type: Sprite
@@ -145,7 +142,7 @@
 - type: entity
   parent: CMChairComfy
   id: CMChairComfyCharlie
-  description: A simple chair permanently attached to the floor. Covered with a squeaky and way too hard faux-leather, unevenly painted in Charlie squad purple. Feels out of place without a full breakfast to accompany it.
+  description: A simple chair permanently attached to the floor, with the spinning parts removed to force soldiers with low attention spans to keep still during briefings. Covered with a squeaky and way too hard faux-leather, unevenly painted in Charlie squad purple. Feels out of place without a full breakfast to accompany it.
   suffix: Charlie
   components:
   - type: Sprite
@@ -154,7 +151,7 @@
 - type: entity
   parent: CMChairComfy
   id: CMChairComfyDelta
-  description: A simple chair permanently attached to the floor. Covered with a squeaky and way too hard faux-leather, unevenly painted in Delta squad blue. This chair is most likely to be the first to fight and first to die.
+  description: A simple chair permanently attached to the floor, with the spinning parts removed to force soldiers with low attention spans to keep still during briefings. Covered with a squeaky and way too hard faux-leather, unevenly painted in Delta squad blue. This chair is most likely to be the first to fight and first to die.
   suffix: Delta
   components:
   - type: Sprite
@@ -168,8 +165,6 @@
   components:
   - type: Sprite
     state: officechair_dark
-  - type: Rotatable
-    rotateWhileAnchored: true
   - type: Construction
     graph: CMSeat
     node: chairOfficeDark
@@ -194,7 +189,6 @@
   components:
   - type: Sprite
     state: wooden_chair
-  - type: Rotatable
   - type: Damageable
     damageModifierSet: Wood
   - type: Tag

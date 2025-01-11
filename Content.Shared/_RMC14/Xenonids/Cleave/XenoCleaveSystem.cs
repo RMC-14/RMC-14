@@ -27,7 +27,6 @@ public sealed class XenoCleaveSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoCleaveComponent, XenoCleaveActionEvent>(OnCleaveAction);
-        SubscribeLocalEvent<XenoCleaveComponent, XenoToggleCleaveActionEvent>(OnCleaveToggleAction);
 
         SubscribeLocalEvent<CleaveRootedComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshCleaveRooted);
         SubscribeLocalEvent<CleaveRootedComponent, ComponentRemove>(OnCleaveRootedRemoved);
@@ -48,7 +47,7 @@ public sealed class XenoCleaveSystem : EntitySystem
 
         args.Handled = true;
 
-        if (xeno.Comp.Flings)
+        if (args.Flings)
         {
             var flingRange = buffed ? xeno.Comp.FlingDistanceBuffed : xeno.Comp.FlingDistance;
             _rmcPulling.TryStopAllPullsFromAndOn(args.Target);
@@ -80,19 +79,6 @@ public sealed class XenoCleaveSystem : EntitySystem
             }
         }
     }
-
-    private void OnCleaveToggleAction(Entity<XenoCleaveComponent> xeno, ref XenoToggleCleaveActionEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        args.Handled = true;
-        xeno.Comp.Flings = !xeno.Comp.Flings;
-        _actions.SetToggled(args.Action, xeno.Comp.Flings);
-        _popups.PopupClient(Loc.GetString(xeno.Comp.Flings ? "rmc-xeno-toggle-cleave-fling" : "rmc-xeno-toggle-cleave-root"), xeno, xeno);
-        Dirty(xeno);
-    }
-
     private void OnRefreshCleaveRooted(Entity<CleaveRootedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
         args.ModifySpeed(0, 0);

@@ -387,13 +387,18 @@
   id: CMVendorDinnerware
   startingInventory:
     # TODO RMC14 Tray: 8
-    Fork: 6
-    KitchenKnife: 3
+    RMCFork: 6
+    RMCKitchenKnifeChef: 3
     DrinkGlass: 8
     CMJumpsuitMessTech: 2
-    FoodShakerSalt: 4
-    FoodShakerPepper: 4
-    FoodCondimentBottleEnzyme: 1
+    RMCCondimentSmallSalt: 4
+    RMCCondimentSmallPepper: 4
+    RMCCondimentEnzyme: 1
+    RMCCondiment: 8
+    # TODO RMC14 make next items Mess Tech only
+    RMCSpoon: 2
+    RMCRollingPin: 2
+    RMCKitchenKnifeButcher: 2
 
 
 # BODA
@@ -432,15 +437,14 @@
     FoodContainerEgg: 12
 #    FoodMeatFish: 12
     FoodMeat: 12
-    ReagentContainerCornmeal: 12
-    ReagentContainerRice: 12
-    ReagentContainerMayo: 12
+    DrinkMilkCarton: 12
+    DrinkSoyMilkCarton: 12
+    RMCCondimentEnzyme: 12
     ReagentContainerFlour: 12
-    ReagentContainerSugar: 12
-    ReagentContainerOliveoil: 12
-    FoodCondimentBottleEnzyme: 12
-    FoodShakerSalt: 12
-    FoodShakerPepper: 12
+    RMCCondimentSugar: 12
+    RMCCondimentCornOil: 12
+    RMCCondimentSmallSalt: 12
+    RMCCondimentSmallPepper: 12
     # TODO RMC14 Mint 12
     FoodApple: 12
     FoodBanana: 12
