@@ -213,7 +213,9 @@ public sealed class SquadSystem : EntitySystem
 
         if (squad == null)
         {
-            QueueDel(item);
+            if (mapToSquad.DeleteWithNoSquad)
+                QueueDel(item);
+
             return;
         }
 

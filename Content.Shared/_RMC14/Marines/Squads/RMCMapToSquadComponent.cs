@@ -12,4 +12,7 @@ public sealed partial class RMCMapToSquadComponent : Component
 {
     [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId, EntProtoId> Map = new();
+
+    [DataField, AutoNetworkedField]
+    public bool DeleteWithNoSquad = true;
 }

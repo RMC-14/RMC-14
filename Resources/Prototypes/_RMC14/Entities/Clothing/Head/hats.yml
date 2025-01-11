@@ -413,13 +413,14 @@
   id: RMCHeadBeretSquad
   name: UNMC squad beret
   description: For those who want to show pride and have nothing to lose (in their head, at least).
-  suffix: DO NOT MAP
+  suffix: None
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
   - type: RMCMapToSquad
+    deleteWithNoSquad: false
     map:
       SquadAlpha: RMCHeadBeretSquadAlpha
       SquadBravo: RMCHeadBeretSquadBravo
