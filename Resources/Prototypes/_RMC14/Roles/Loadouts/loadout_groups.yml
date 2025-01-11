@@ -66,16 +66,23 @@
   id: MasksRMC
   name: rmc-loadout-group-masks
   minLimit: 0
-  maxLimit: 8
+  maxLimit: 15
   loadouts:
+  - BalaclavaRMC
+  - BalaclavaGreenRMC
   - CoifRMC
-  - GasMaskRMC
   - MaskScarfSquadRMC
   - MaskScarfRedRMC
   - MaskScarfBlackRMC
   - MaskScarfGrayRMC
   - MaskScarfGreenRMC
   - MaskScarfTanRMC
+  - GasMaskRMC
+  - CoifGreenRMC
+  - CoifGreyRMC
+  - CoifTanRMC
+  - BalaclavaSkullBlueRMC
+  - BalaclavaSkullBlackRMC
 
 # Headwear
 - type: loadoutGroup
