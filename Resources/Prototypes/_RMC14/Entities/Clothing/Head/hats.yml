@@ -408,23 +408,101 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/DressBlues/officer.rsi
 
 # The squad beret
-# TODO: display the squad badge one the item icon as well
 - type: entity
   parent: CMHeadBeret
   id: RMCHeadBeretSquad
-  name: squad beret
+  name: UNMC squad beret
   description: For those who want to show pride and have nothing to lose (in their head, at least).
+  suffix: None
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
-  - type: SquadArmor
-    layer: Helmet
-    slot: HEAD
-    rsi:
-      sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
-      state: badge
-    leaderRsi:
-      sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
-      state: badge
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
+  - type: RMCMapToSquad
+    map:
+      SquadAlpha: RMCHeadBeretSquadAlpha
+      SquadBravo: RMCHeadBeretSquadBravo
+      SquadCharlie: RMCHeadBeretSquadCharlie
+      SquadDelta: RMCHeadBeretSquadDelta
+      SquadEcho: RMCHeadBeretSquadEcho
+      SquadFoxtrot: RMCHeadBeretSquadFoxtrot
+      # TODO SquadIntel: RMCHeadBeretSquadIntel
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretSquadAlpha
+  name: UNMC squad beret
+  description: Often found atop heads, slightly less found on those still attached.
+  suffix: Alpha
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/alpha.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/alpha.rsi
+
+- type: entity
+  parent: RMCHeadBeretSquadAlpha
+  id: RMCHeadBeretSquadBravo
+  description: It has quite a lot of debris on it, the person wearing this probably moves less than a wall.
+  suffix: Bravo
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/bravo.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/bravo.rsi
+
+- type: entity
+  parent: RMCHeadBeretSquadAlpha
+  id: RMCHeadBeretSquadCharlie
+  description: Still has some morning toast crumbs on it.
+  suffix: Charlie
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/charlie.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/charlie.rsi
+
+- type: entity
+  parent: RMCHeadBeretSquadAlpha
+  id: RMCHeadBeretSquadDelta
+  description: Hard to consider protection, but these types of people don't seek protection.
+  suffix: Delta
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/delta.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/delta.rsi
+
+- type: entity
+  parent: RMCHeadBeretSquadAlpha
+  id: RMCHeadBeretSquadEcho
+  description: Tightly Woven, as it should be.
+  suffix: Echo
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/echo.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/echo.rsi
+
+- type: entity
+  parent: RMCHeadBeretSquadAlpha
+  id: RMCHeadBeretSquadFoxtrot
+  description: Looks and feels starched, cold to the touch.
+  suffix: Foxtrot
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/foxtrot.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/foxtrot.rsi
+
+- type: entity
+  parent: RMCHeadBeretSquadAlpha
+  id: RMCHeadBeretSquadIntel
+  description: Looks more intellegent than the person wearing it.
+  suffix: Intel
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/intel.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/intel.rsi

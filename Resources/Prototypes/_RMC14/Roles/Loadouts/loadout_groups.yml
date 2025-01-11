@@ -46,27 +46,31 @@
   id: EyewearRMC
   name: rmc-loadout-group-eyewear
   minLimit: 0
-  maxLimit: 9
+  maxLimit: 12
   loadouts:
   - AviatorsRMC
   - EyepatchRMC
   - GlassesRPGRMC
+  - GlassesPrescriptionRMC
   - GogglesRMC
   - GogglesPrescriptionRMC
+  - GogglesBlackRMC
+  - GogglesOrangeRMC # TODO add prescription variants of all the goggles
   - GogglesAdvancedRMC
   - GogglesM1A1RMC
   - PersonalShadesRMC
-  - SunglassesRMC
+  - SunglassesRMC # TODO prescription sunglasses
 
 # Masks
 - type: loadoutGroup
   id: MasksRMC
   name: rmc-loadout-group-masks
   minLimit: 0
-  maxLimit: 2
+  maxLimit: 8
   loadouts:
   - CoifRMC
   - GasMaskRMC
+  - MaskScarfSquadRMC
   - MaskScarfRedRMC
   - MaskScarfBlackRMC
   - MaskScarfGrayRMC
@@ -78,7 +82,7 @@
   id: HeadwearRMC
   name: rmc-loadout-group-headwear
   minLimit: 0
-  maxLimit: 9
+  maxLimit: 10
   loadouts:
   - SquadBeretRMC
   - GreenBeretRMC
@@ -89,6 +93,7 @@
   - GrayHeadbandRMC
   - RedHeadbandRMC
   - TanHeadbandRMC
+  - SquadHeadbandRMC
 
 # Paperwork
 - type: loadoutGroup

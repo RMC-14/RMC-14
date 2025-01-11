@@ -14,6 +14,13 @@
     - CMMaskGas
 
 - type: loadout
+  id: MaskScarfSquadRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskScarfSquad
+
+- type: loadout
   id: MaskScarfRedRMC
   cost: 2
   storage:

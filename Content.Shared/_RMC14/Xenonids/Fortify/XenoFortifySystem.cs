@@ -35,6 +35,7 @@ public sealed class XenoFortifySystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _explode = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
+    [Dependency] private readonly CMArmorSystem _armor = default!;
 
     public override void Initialize()
     {
@@ -243,6 +244,9 @@ public sealed class XenoFortifySystem : EntitySystem
             if (action.BaseEvent is XenoFortifyActionEvent)
                 _actions.SetToggled(actionId, xeno.Comp.Fortified);
         }
+
+        _armor.UpdateArmorValue((xeno, null));
+
 
         Dirty(xeno);
 
