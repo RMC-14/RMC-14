@@ -35,6 +35,20 @@
     - RMCGogglesPrescriptionBallistic
 
 - type: loadout
+  id: GogglesBlackRMC
+  cost: 2
+  storage:
+    back:
+    - RMCGogglesBallisticBlack
+
+- type: loadout
+  id: GogglesOrangeRMC
+  cost: 2
+  storage:
+    back:
+    - RMCGogglesBallisticOrange
+
+- type: loadout
   id: GogglesAdvancedRMC
   cost: 2
   storage:

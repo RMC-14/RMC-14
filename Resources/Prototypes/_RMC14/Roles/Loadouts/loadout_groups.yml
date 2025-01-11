@@ -53,10 +53,12 @@
   - GlassesRPGRMC
   - GogglesRMC
   - GogglesPrescriptionRMC
+  - GogglesBlackRMC
+  - GogglesOrangeRMC # TODO add prescription variants of all the goggles
   - GogglesAdvancedRMC
   - GogglesM1A1RMC
   - PersonalShadesRMC
-  - SunglassesRMC
+  - SunglassesRMC # TODO prescription sunglasses
 
 # Masks
 - type: loadoutGroup
