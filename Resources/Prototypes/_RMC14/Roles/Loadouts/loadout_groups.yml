@@ -73,7 +73,7 @@
   id: HeadwearRMC
   name: rmc-loadout-group-headwear
   minLimit: 0
-  maxLimit: 9
+  maxLimit: 10
   loadouts:
   - SquadBeretRMC
   - GreenBeretRMC

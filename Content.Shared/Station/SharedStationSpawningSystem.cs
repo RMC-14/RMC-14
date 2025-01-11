@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -171,6 +172,9 @@ public abstract class SharedStationSpawningSystem : EntitySystem
                             var ev = new CMStorageItemFillEvent((ent, item), storage);
                             RaiseLocalEvent(slotEnt.Value, ref ev);
                         }
+
+                        var gearEv = new RMCStartingGearEquippedEvent(entity, ent);
+                        RaiseLocalEvent(entity, ref gearEv);
 
                         _storage.Insert(slotEnt.Value, ent, out _, storageComp: storage, playSound: false);
                     }

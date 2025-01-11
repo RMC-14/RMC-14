@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Pointing;
+using Content.Shared._RMC14.Roles;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Chat;
@@ -83,7 +84,7 @@ public sealed class SquadSystem : EntitySystem
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EncryptionChannelsChangedEvent>(OnSquadLeaderHeadsetChannelsChanged);
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EntityTerminatingEvent>(OnSquadLeaderHeadsetTerminating);
 
-        SubscribeLocalEvent<SquadMemberComponent, StartingGearEquippedEvent>(OnStartingGear);
+        SubscribeLocalEvent<SquadMemberComponent, RMCStartingGearEquippedEvent>(OnStartingGear);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
@@ -196,41 +197,20 @@ public sealed class SquadSystem : EntitySystem
         }
     }
 
-    private void OnStartingGear(Entity<SquadMemberComponent> ent, ref StartingGearEquippedEvent args)
+    private void OnStartingGear(Entity<SquadMemberComponent> ent, ref RMCStartingGearEquippedEvent args)
     {
         var squad = ent.Comp.Squad;
 
         if (squad == null)
             return;
 
-        if (_inventory.TryGetContainerSlotEnumerator(ent.Owner, out var slots, SlotFlags.All))
-        {
-            while (slots.MoveNext(out var containerSlot))
-            {
-                if (containerSlot.ContainedEntity != null)
-                {
-                    var containerSlotEntity = containerSlot.ContainedEntity.Value;
+        if (!TryComp<RMCMapToSquadComponent>(args.Item, out var mapToSquad))
+            return;
 
-                    if (TryComp<RMCMapToSquadComponent>(containerSlotEntity, out var mapToSquad))
-                    {
-                        MapToSquad((containerSlotEntity, mapToSquad), ent.Owner, squad.Value);
-                    }
-                    else if (TryComp<StorageComponent>(containerSlotEntity, out var storage))
-                    {
-                        foreach (var contained in storage.Container.ContainedEntities)
-                        {
-                            if (!TryComp<RMCMapToSquadComponent>(contained, out var mapToSquadStorage))
-                                continue;
-
-                            MapToSquad((contained, mapToSquadStorage), containerSlotEntity, squad.Value);
-                        }
-                    }
-                }
-            }
-        }
+        MapToSquad((args.Item, mapToSquad), Transform(args.Item).ParentUid, ent, squad.Value);
     }
 
-    private void MapToSquad(Entity<RMCMapToSquadComponent> ent, EntityUid equipee, EntityUid squad)
+    private void MapToSquad(Entity<RMCMapToSquadComponent> ent, EntityUid equipee, EntityUid user, EntityUid squad)
     {
         EntProtoId? item = null;
 
@@ -245,7 +225,7 @@ public sealed class SquadSystem : EntitySystem
             var newItem = SpawnNextToOrDrop(item, equipee);
 
             if (TryComp<ClothingComponent>(newItem, out var clothing))
-                _cmInventory.TryEquipClothing(equipee, (newItem, clothing));
+                _cmInventory.TryEquipClothing(user, (newItem, clothing));
         }
 
         QueueDel(ent);
