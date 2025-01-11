@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Marines.ControlComputer;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Overwatch;
@@ -16,6 +17,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
+    [Dependency] private readonly SharedMarineControlComputerSystem _marineControlComputer = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
@@ -32,6 +34,7 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
                 subs.Event<MarineCommunicationsOpenMapMsg>(OnMarineCommunicationsOpenMapMsg);
                 subs.Event<MarineCommunicationsEchoSquadMsg>(OnMarineCommunicationsEchoMsg);
                 subs.Event<MarineCommunicationsOverwatchMsg>(OnMarineCommunicationsOverwatchMsg);
+                subs.Event<MarineControlComputerMedalMsg>(OnMarineCommunicationsMedalMsg);
             });
     }
 
@@ -97,6 +100,14 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         }
 
         _ui.TryOpenUi(ent.Owner, OverwatchConsoleUI.Key, args.Actor);
+    }
+
+    private void OnMarineCommunicationsMedalMsg(Entity<MarineCommunicationsComputerComponent> ent, ref MarineControlComputerMedalMsg args)
+    {
+        if (!ent.Comp.CanGiveMedals)
+            return;
+
+        _marineControlComputer.GiveMedal(ent, args.Actor);
     }
 
     public virtual void AnnounceRadio(

@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines.Announce;
+using Content.Shared._RMC14.Marines.ControlComputer;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.TacticalMap;
 using JetBrains.Annotations;
@@ -20,6 +21,17 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
             return;
 
         _window = this.CreateWindow<MarineCommunicationsComputerWindow>();
+
+        if (EntMan.TryGetComponent(Owner, out MarineCommunicationsComputerComponent? communications) &&
+            communications.CanGiveMedals)
+        {
+            _window.MedalButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerMedalMsg());
+            _window.MedalButton.Visible = true;
+        }
+        else
+        {
+            _window.MedalButton.Visible = false;
+        }
 
         if (EntMan.HasComponent<TacticalMapComputerComponent>(Owner))
             _window.TacticalMapButton.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsOpenMapMsg());
