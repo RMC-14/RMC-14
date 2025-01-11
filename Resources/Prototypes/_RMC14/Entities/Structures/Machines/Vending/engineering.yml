@@ -30,7 +30,7 @@
     #Demo scanner
     #Meson scanner
     #Reagent scanner
-    trayScanner: 4
+    CMTRayScanner: 4
     CMCrowbar: 8
     CMWelder: 8
     CMWelderSmall: 4
