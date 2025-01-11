@@ -1,5 +1,19 @@
 # Masks
 - type: loadout
+  id: BalaclavaRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskBalaclava
+
+- type: loadout
+  id: BalaclavaGreenRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskBalaclavaGreen
+
+- type: loadout
   id: CoifRMC
   cost: 2
   storage:
@@ -12,6 +26,13 @@
   storage:
     back:
     - CMMaskGas
+
+- type: loadout
+  id: MaskScarfSquadRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskScarfSquad
 
 - type: loadout
   id: MaskScarfRedRMC
@@ -47,3 +68,80 @@
   storage:
     back:
     - RMCMaskScarfTan
+
+- type: loadout
+  id: TornScarfBlackRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskTornScarfBlack
+
+- type: loadout
+  id: TornScarfDesertRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskTornScarfDesert
+
+- type: loadout
+  id: TornScarfGreenRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskTornScarfGreen
+
+- type: loadout
+  id: TornScarfGreyRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskTornScarfGrey
+
+- type: loadout
+  id: TornScarfUrbanRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskTornScarfUrban
+
+- type: loadout
+  id: TornScarfSnowRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskTornScarfSnow
+
+- type: loadout
+  id: CoifGreenRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskCoifGreen
+
+- type: loadout
+  id: CoifGreyRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskCoifGrey
+
+- type: loadout
+  id: CoifTanRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskCoifTan
+
+- type: loadout
+  id: BalaclavaSkullBlueRMC
+  cost: 4
+  storage:
+    back:
+    - RMCMaskBalaclavaSkullBlue
+
+- type: loadout
+  id: BalaclavaSkullBlackRMC
+  cost: 4
+  storage:
+    back:
+    - RMCMaskBalaclavaSkullBlack

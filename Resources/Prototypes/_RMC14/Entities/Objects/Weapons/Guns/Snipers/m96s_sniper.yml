@@ -75,92 +75,13 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-underbarrel: 0.21875, -0.343
-
-#camo variations
-- type: entity
-  parent: CMM96SSniperRifle
-  id: WeaponM96SSniperRifleCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: WeaponM96SSniperRifleJungle
-      Desert: CMM96SSniperRifle
-      Snow: WeaponM96SSniperRifleSnow
-      Classic: WeaponM96SSniperRifleClassic
-      Urban: WeaponM96SSniperRifleUrban
-
-- type: entity
-  parent: CMM96SSniperRifle
-  id: WeaponM96SSniperRifleClassic
-  suffix: Classic
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s/classic.rsi
-    layers:
-    - state: bolt-open
-      map: [ "enum.GunVisualLayers.Base" ]
-    - state: mag-0
-      map: [ "enum.GunVisualLayers.Mag" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
-      state: sniperbarrel
-      offset: 0.715, 0.025  
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s/classic.rsi
-
-- type: entity
-  parent: CMM96SSniperRifle
-  id: WeaponM96SSniperRifleSnow
-  suffix: Snow
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s/snow.rsi
-    layers:
-    - state: bolt-open
-      map: [ "enum.GunVisualLayers.Base" ]
-    - state: mag-0
-      map: [ "enum.GunVisualLayers.Mag" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
-      state: sniperbarrel
-      offset: 0.715, 0.025  
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s/snow.rsi
-
-- type: entity
-  parent: CMM96SSniperRifle
-  id: WeaponM96SSniperRifleUrban
-  suffix: Urban
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s/urban.rsi
-    layers:
-    - state: bolt-open
-      map: [ "enum.GunVisualLayers.Base" ]
-    - state: mag-0
-      map: [ "enum.GunVisualLayers.Mag" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
-      state: sniperbarrel
-      offset: 0.715, 0.025  
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s/urban.rsi
-
-- type: entity
-  parent: CMM96SSniperRifle
-  id: WeaponM96SSniperRifleJungle
-  suffix: Jungle
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s/jungle.rsi
-    layers:
-    - state: bolt-open
-      map: [ "enum.GunVisualLayers.Base" ]
-    - state: mag-0
-      map: [ "enum.GunVisualLayers.Mag" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
-      state: sniperbarrel
-      offset: 0.715, 0.025  
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s/jungle.rsi
+      Jungle:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/jungle.rsi
+      Desert:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/desert.rsi
+      Snow:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/snow.rsi
+      Classic:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/classic.rsi
+      Urban:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/urban.rsi
 
 - type: entity
   parent: BaseMagazineRifle

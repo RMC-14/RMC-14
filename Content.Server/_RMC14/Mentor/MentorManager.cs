@@ -34,7 +34,7 @@ public sealed class MentorManager : IPostInjectInit
     private const string RateLimitKey = "MentorHelp";
     private static readonly ProtoId<JobPrototype> MentorJob = "CMSeniorEnlistedAdvisor";
 
-    private readonly List<ICommonSession> _activeMentors = new();
+    private readonly HashSet<ICommonSession> _activeMentors = new();
     private readonly Dictionary<NetUserId, bool> _mentors = new();
     private readonly Dictionary<NetUserId, (TimeSpan Timestamp, bool Typing)> _typingUpdateTimestamps = new();
     private readonly Dictionary<NetUserId, List<NetUserId>> _destinationClaims = new();
@@ -363,7 +363,7 @@ public sealed class MentorManager : IPostInjectInit
 
     public IEnumerable<ICommonSession> GetActiveMentors()
     {
-        return _activeMentors.AsReadOnly();
+        return _activeMentors;
     }
 
     public void ReMentor(NetUserId user)

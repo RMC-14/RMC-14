@@ -4,7 +4,6 @@ using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.FixedPoint;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -25,7 +24,6 @@ public sealed class XenoProjectileSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -51,7 +49,7 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (args.Cancelled || ent.Comp.DeleteOnFriendlyXeno)
             return;
 
-        if (_hive.FromSameHive(ent.Owner, args.OtherEntity) && 
+        if (_hive.FromSameHive(ent.Owner, args.OtherEntity) &&
             (HasComp<XenoComponent>(args.OtherEntity) || HasComp<HiveCoreComponent>(args.OtherEntity)))
             args.Cancelled = true;
     }
@@ -119,6 +117,9 @@ public sealed class XenoProjectileSystem : EntitySystem
         {
             FiredProjectiles = new List<EntityUid>(shots)
         };
+
+        if (target != null && !_xeno.CanAbilityAttackTarget(xeno, target.Value, true))
+            target = null;
 
         var originalDiff = targetMap.Position - origin.Position;
         for (var i = 0; i < shots; i++)

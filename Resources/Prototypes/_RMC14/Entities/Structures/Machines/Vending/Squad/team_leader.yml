@@ -73,7 +73,7 @@
     #  points: 30
     - name: Armors
       entries:
-      - id: RMCArmorB12Camo
+      - id: CMArmorB12
         points: 30
     - name: Clothing Items
       entries:
@@ -120,7 +120,7 @@
         points: 5
     - name: Binoculars
       entries:
-      - id: RMCBinocularsCamo
+      - id: RMCBinoculars
         points: 5
     - name: Helmet Optics
       entries: [ ]
@@ -158,22 +158,22 @@
       takeAll: CMStandard
       entries:
       - id: CMVendorBundleFireteamLeaderApparel
-      - id: RMCArmorM4Camo
+      - id: CMArmorM4
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
       - id: RMCVendorBundleCrewFireteamLeader
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: RMCBeltUtilityGeneralCamo
-      - id: RMCBeltMarineCamo
+      - id: RMCBeltUtilityGeneral
+      - id: CMBeltMarine
         recommended: true
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterSMGPouch
     #- id: RMCBeltHolsterFlareGun
-      - id: RMCBeltShotgunCamo
+      - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
         recommended: true
@@ -233,4 +233,4 @@
     bundle:
     - RMCPackFlareCAS
     - RMCPackFlareCAS
-    - RMCLaserDesignatorCamo
+    - RMCLaserDesignator

@@ -109,6 +109,9 @@ public sealed class RMCCVars : CVars
     public static readonly CVarDef<float> RMCDropshipInitialDelayMinutes =
         CVarDef.Create("rmc.dropship_initial_delay_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCDropshipHijackInitialDelayMinutes =
+        CVarDef.Create("rmc.dropship_hijack_initial_delay_minutes", 40, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<float> RMCLandingZonePrimaryAutoMinutes =
         CVarDef.Create("rmc.landing_zone_primary_auto_minutes", 25f, CVar.REPLICATED | CVar.SERVER);
 
@@ -324,4 +327,7 @@ public sealed class RMCCVars : CVars
     /// </summary>
     public static readonly CVarDef<float> RMCRoundEndNoEorgPopupTime =
         CVarDef.Create("game.round_end_eorg_popup_time", 5f, CVar.SERVER | CVar.REPLICATED);
+
+    public static readonly CVarDef<int> RMCXenoEvolveSameCasteCooldownSeconds =
+        CVarDef.Create("rmc.xeno_evolve_same_caste_cooldown_seconds", 300, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 }

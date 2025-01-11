@@ -2,7 +2,7 @@
 - type: loadout
   id: MarineSatchel
   equipment:
-    back: RMCSatchelMarineCamo
+    back: CMSatchelMarine
 
 - type: loadout
   id: MarineLeatherSatchel
@@ -12,12 +12,12 @@
 - type: loadout
   id: MarineTechnicianSatchel
   equipment:
-    back: RMCSatchelMarineTechCamo
+    back: CMSatchelMarineTech
 
 - type: loadout
   id: MarineMedicSatchel
   equipment:
-    back: RMCSatchelMarineMedicCamo
+    back: CMSatchelMarineMedic
 
 - type: loadout
   id: MarineSecuritySatchel

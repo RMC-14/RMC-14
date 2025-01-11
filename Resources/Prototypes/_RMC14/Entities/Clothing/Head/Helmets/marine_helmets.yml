@@ -10,6 +10,13 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/standard/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/standard/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Helmets/m10/standard/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Helmets/m10/standard/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Helmets/m10/standard/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Helmets/m10/standard/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Helmets/m10/standard/urban.rsi
 
 - type: entity
   parent: ArmorHelmetM10
@@ -22,6 +29,13 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/mp/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/mp/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Helmets/m10/mp/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Helmets/m10/mp/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Helmets/m10/mp/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Helmets/m10/mp/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Helmets/m10/mp/urban.rsi
 
 - type: entity
   parent: ArmorHelmetM10
@@ -34,6 +48,13 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/wo/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/wo/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Helmets/m10/wo/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Helmets/m10/wo/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Helmets/m10/wo/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Helmets/m10/wo/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Helmets/m10/wo/urban.rsi
 
 - type: entity
   parent: ArmorHelmetM10
@@ -46,6 +67,13 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/officer/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/officer/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Helmets/m10/officer/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Helmets/m10/officer/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Helmets/m10/officer/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Helmets/m10/officer/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Helmets/m10/officer/urban.rsi
 
 - type: entity
   parent: ArmorHelmetM10
@@ -91,6 +119,13 @@
     leaderRsi:
       sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
       state: sql-helmet-medic
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/urban.rsi
 
 - type: entity
   parent: ArmorHelmetM10
@@ -104,6 +139,13 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/tech/jungle.rsi
   - type: EyeProtection # TODO RMC14 toggleable
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Helmets/m10/tech/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Helmets/m10/tech/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Helmets/m10/tech/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Helmets/m10/tech/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Helmets/m10/tech/urban.rsi
 
 # M11
 - type: entity
@@ -117,6 +159,13 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m11/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m11/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Helmets/m11/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Helmets/m11/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Helmets/m11/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Helmets/m11/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Helmets/m11/urban.rsi
 
 # M12
 - type: entity
@@ -130,6 +179,13 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m12/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m12/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Helmets/m12/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Helmets/m12/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Helmets/m12/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Helmets/m12/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Helmets/m12/urban.rsi
 
 # M30
 - type: entity
@@ -143,6 +199,13 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m30/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m30/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Helmets/m30/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Helmets/m30/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Helmets/m30/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Helmets/m30/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Helmets/m30/urban.rsi
 
 # Press
 - type: entity
@@ -168,6 +231,13 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/scout/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/scout/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Helmets/m3/scout/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Helmets/m3/scout/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Helmets/m3/scout/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Helmets/m3/scout/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Helmets/m3/scout/urban.rsi
 
 # M3-G4 Grenadier Spec
 - type: entity
@@ -186,6 +256,13 @@
     explosionArmor: 50
   - type: ParasiteResistance
     maxCount: 6
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Helmets/m3/g4/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Helmets/m3/g4/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Helmets/m3/g4/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Helmets/m3/g4/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Helmets/m3/g4/urban.rsi
 
 # M35 Pyro Spec
 - type: entity
@@ -199,6 +276,13 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m35/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m35/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Helmets/m35/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Helmets/m35/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Helmets/m35/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Helmets/m35/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Helmets/m35/urban.rsi
 
 # M45 Sniper Spec
 - type: entity
@@ -218,6 +302,13 @@
     - Snout
     - HeadTop
     - HeadSide
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Helmets/m45/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Helmets/m45/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Helmets/m45/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Helmets/m45/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Helmets/m45/urban.rsi
 
 # M3-T Demo Spec
 - type: entity
@@ -231,3 +322,10 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/jungle.rsi # TODO RMC14 Give hearing protection component if ear damage is added
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/urban.rsi

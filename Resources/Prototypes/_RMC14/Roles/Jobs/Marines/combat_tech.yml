@@ -46,9 +46,9 @@
 - type: startingGear
   id: CMGearCombatTechEquipped
   equipment:
-    jumpsuit: CMJumpsuitMarineEngineerCamo
+    jumpsuit: CMJumpsuitMarineEngineer
     shoes: CMBootsBlackFilled
-    head: RMCArmorHelmetM10TechCamo
+    head: CMArmorHelmetM10Tech
     outerClothing: RMCArmorM3MediumVariants
     gloves: CMHandsInsulated
     id: CMDogtagCombatTech

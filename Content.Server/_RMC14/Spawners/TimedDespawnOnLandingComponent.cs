@@ -5,7 +5,7 @@
 public sealed partial class TimedDespawnOnLandingComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public TimeSpan StartDespawnAt = TimeSpan.FromMinutes(15);
+    public TimeSpan StartDespawnAt = TimeSpan.FromMinutes(20);
 
     [DataField]
     public float Lifetime = 1200;

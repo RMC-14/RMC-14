@@ -1,4 +1,5 @@
-﻿using Content.Shared.Administration;
+﻿using System.Linq;
+using Content.Shared.Administration;
 using Robust.Shared.Console;
 
 namespace Content.Server._RMC14.Mentor;
@@ -18,6 +19,6 @@ public sealed class MentorWhoCommand : LocalizedCommands
         if (!_mentor.IsMentor(shell.Player.UserId))
             return;
 
-        shell.WriteLine(string.Join("\n", _mentor.GetActiveMentors()));
+        shell.WriteLine(string.Join("\n", _mentor.GetActiveMentors().Order()));
     }
 }

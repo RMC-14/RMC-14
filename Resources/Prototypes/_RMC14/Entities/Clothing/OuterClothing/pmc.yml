@@ -1,7 +1,7 @@
 # PMC armors
 - type: entity
   parent: [CMArmorM3Medium, RMCAllowSuitStorageClothingArmorPMC]
-  id: RMCArmorM4PMC
+  id: CMArmorM4PMC
   name: M4 pattern PMC armor
   description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind.
   components:
@@ -19,8 +19,8 @@
     - 0,0,3,1 # 2 slots
 
 - type: entity
-  parent: RMCArmorM4PMC
-  id: RMCArmorM4PMCLight
+  parent: CMArmorM4PMC
+  id: CMArmorM4PMCLight
   name: M4 pattern light PMC armor
   description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. Has some armor plating removed for extra mobility.
   components:
@@ -35,8 +35,8 @@
     sprintModifier: 0.897
 
 - type: entity
-  parent: RMCArmorM4PMCLight
-  id: RMCArmorM4PMCCorporate
+  parent: CMArmorM4PMCLight
+  id: CMArmorM4PMCCorporate
   name: M1 pattern corporate security armor
   description: A basic vest with a We-Ya badge on the right breast. This is commonly worn by low-level guards protecting We-Ya facilities.
   components:
@@ -47,16 +47,16 @@
     sprintModifier: 0.725
 
 - type: entity
-  parent: RMCArmorM4PMCCorporate
-  id: RMCArmorM4PMCCorporateLead
+  parent: CMArmorM4PMCCorporate
+  id: CMArmorM4PMCCorporateLead
   description: A basic vest with a We-Ya badge on the right breast. This variant is worn by low-level guards that have elevated in rank due to 'good conduct in the field', also known as corporate bootlicking.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/corporate_lead.rsi
 
 - type: entity
-  parent: RMCArmorM4PMC
-  id: RMCArmorM4PMCLeader
+  parent: CMArmorM4PMC
+  id: CMArmorM4PMCLeader
   name: M4 pattern PMC leader armor
   description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. This particular suit looks like it belongs to a high-ranking officer.
   components:
@@ -64,8 +64,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/officer.rsi
 
 - type: entity
-  parent: RMCArmorM4PMC
-  id: RMCArmorM4PMCSniper
+  parent: CMArmorM4PMC
+  id: CMArmorM4PMCSniper
   name: M4 pattern PMC sniper armor
   description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. This particular suit looks like it belongs to a high-ranking officer.
   components:
@@ -73,8 +73,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/sniper.rsi
 
 - type: entity
-  parent: RMCArmorM4PMCLight
-  id: RMCArmorM4PMCSynth
+  parent: CMArmorM4PMCLight
+  id: CMArmorM4PMCSynth
   name: M4 pattern PMC synthetic armor
   description: A serious modification of the standard M3 armor. This variant was designed for PMC Support Units in the field, with every armor insert removed. It's designed with the idea of a high speed lifesaver in mind.
   components:
@@ -92,7 +92,7 @@
 
 - type: entity
   parent: CMArmorSmartGunCombatHarness
-  id: RMCArmorM4PMCSmartGunHarness
+  id: CMArmorM4PMCSmartGunHarness
   name: PMC gun operator armor
   description: A modification of the standard M3 armor. Hooked up with harnesses and straps allowing the user to carry a ML66A Smart Gun.
   components:
@@ -104,8 +104,8 @@
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
 
 - type: entity
-  parent: RMCArmorM4PMCSmartGunHarness
-  id: RMCArmorM4PMCSmartGunHarnessCommando
+  parent: CMArmorM4PMCSmartGunHarness
+  id: CMArmorM4PMCSmartGunHarnessCommando
   name: M5Xg exoskeleton gun operator armor
   description: A complex system of overlapping plates intended to render the wearer all but impervious to small arms fire. A passive exoskeleton supports the weight of the armor, allowing a human to carry its massive bulk. This variant is designed to support ML66A Smart Gun.
   components:
@@ -124,8 +124,8 @@
     isCorrodible: false
 
 - type: entity
-  parent: RMCArmorM4PMC
-  id: RMCArmorM4PMCCommando
+  parent: CMArmorM4PMC
+  id: CMArmorM4PMCCommando
   name: M5X exoskeleton armor
   description: A complex system of overlapping plates intended to render the wearer all but impervious to small arms fire. A passive exoskeleton supports the weight of the armor, allowing a human to carry its massive bulk.
   components:

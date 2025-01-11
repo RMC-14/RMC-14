@@ -88,6 +88,8 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: hivelord
+  - type: XenoInhands
+    prefix: hivelord
 
 - type: entity
   parent: CMXenoHivelordBase

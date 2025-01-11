@@ -1,4 +1,4 @@
-﻿using Content.Server.Explosion.EntitySystems;
+using Content.Server.Explosion.EntitySystems;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Events;
@@ -14,6 +14,8 @@ public sealed class RMCTriggerSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<OnShootTriggerAmmoTimerComponent, AmmoShotEvent>(OnTriggerTimerAmmoShot);
+        SubscribeLocalEvent<TriggerOnThrowEndComponent, StopThrowEvent>(OnThrownAmmoStops);
+
         SubscribeLocalEvent<TriggerOnFixedDistanceStopComponent, ProjectileFixedDistanceStopEvent>(OnTriggerOnFixedDistanceStop);
     }
 
@@ -21,8 +23,24 @@ public sealed class RMCTriggerSystem : EntitySystem
     {
         foreach (var projectile in args.FiredProjectiles)
         {
-            _trigger.HandleTimerTrigger(projectile, null, ent.Comp.Delay, ent.Comp.BeepInterval, ent.Comp.InitialBeepDelay, ent.Comp.BeepSound);
+            switch (ent.Comp.TimerStart)
+            {
+                case TimerStartMode.OnShoot:
+                    _trigger.HandleTimerTrigger(projectile, null, ent.Comp.Delay, ent.Comp.BeepInterval, ent.Comp.InitialBeepDelay, ent.Comp.BeepSound);
+                    break;
+                case TimerStartMode.OnHitGround:
+                    var primtedAmmoComp = EnsureComp<TriggerOnThrowEndComponent>(projectile);
+                    primtedAmmoComp.Delay = TimeSpan.FromSeconds(ent.Comp.Delay);
+                    break;
+
+            }
         }
+    }
+
+    private void OnThrownAmmoStops(Entity<TriggerOnThrowEndComponent> ent, ref StopThrowEvent args)
+    {
+        var active = EnsureComp<ActiveTriggerOnThrowEndComponent>(ent);
+        active.TriggerAt = _timing.CurTime + ent.Comp.Delay;
     }
 
     private void OnTriggerOnFixedDistanceStop(Entity<TriggerOnFixedDistanceStopComponent> ent, ref ProjectileFixedDistanceStopEvent args)

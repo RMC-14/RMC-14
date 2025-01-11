@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Alert;
@@ -158,11 +158,14 @@ public sealed class XenoPlasmaSystem : EntitySystem
 
     private void UpdateAlert(Entity<XenoPlasmaComponent> xeno)
     {
-        var level = MathF.Max(0f, xeno.Comp.Plasma.Float());
-        var max = _alerts.GetMaxSeverity(xeno.Comp.Alert);
-        var severity = max - ContentHelpers.RoundToLevels(level, xeno.Comp.MaxPlasma, max + 1);
-        string? plasmaResourceMessage = (int)xeno.Comp.Plasma + " / " + xeno.Comp.MaxPlasma;
-        _alerts.ShowAlert(xeno, xeno.Comp.Alert, (short) severity, dynamicMessage: plasmaResourceMessage);
+        if (xeno.Comp.MaxPlasma != 0)
+        {
+            var level = MathF.Max(0f, xeno.Comp.Plasma.Float());
+            var max = _alerts.GetMaxSeverity(xeno.Comp.Alert);
+            var severity = max - ContentHelpers.RoundToLevels(level, xeno.Comp.MaxPlasma, max + 1);
+            string? plasmaResourceMessage = (int)xeno.Comp.Plasma + " / " + xeno.Comp.MaxPlasma;
+            _alerts.ShowAlert(xeno, xeno.Comp.Alert, (short)severity, dynamicMessage: plasmaResourceMessage);
+        }
     }
 
     public bool HasPlasma(Entity<XenoPlasmaComponent> xeno, FixedPoint2 plasma)

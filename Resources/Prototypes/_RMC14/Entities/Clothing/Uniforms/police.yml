@@ -10,6 +10,13 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/standard/jungle.rsi
   - type: FoldableClothing
     foldedEquippedPrefix: sleeves
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/MP/standard/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/MP/standard/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/MP/standard/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/MP/standard/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/MP/standard/urban.rsi
 
 # Military Warden
 - type: entity
@@ -23,6 +30,13 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/warden/jungle.rsi
   - type: FoldableClothing
     foldedEquippedPrefix: sleeves
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/MP/warden/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/MP/warden/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/MP/warden/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/MP/warden/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/MP/warden/urban.rsi
 
 - type: entity
   parent: RMCMarineUniformBase
@@ -78,139 +92,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/wo/jungle.rsi
-
-#camo variants
-- type: entity
-  parent: CMJumpsuitMP
-  id: RMCJumpsuitMPCamo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: CMJumpsuitMP
-      Desert: RMCJumpsuitMPDesert
-      Snow: RMCJumpsuitMPSnow
-      Classic: RMCJumpsuitMPClassic
-      Urban: RMCJumpsuitMPUrban   
-
-- type: entity
-  parent: CMJumpsuitMP
-  id: RMCJumpsuitMPDesert
-  suffix: Desert
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/standard/desert.rsi
-
-- type: entity
-  parent: CMJumpsuitMP
-  id: RMCJumpsuitMPSnow
-  suffix: Snow
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/standard/snow.rsi
-
-- type: entity
-  parent: CMJumpsuitMP
-  id: RMCJumpsuitMPClassic
-  suffix: Classic
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/standard/classic.rsi
-
-- type: entity
-  parent: CMJumpsuitMP
-  id: RMCJumpsuitMPUrban
-  suffix: Urban
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/standard/urban.rsi
-
-- type: entity
-  parent: CMJumpsuitWarden
-  id: RMCJumpsuitWardenCamo
-  suffix: Camo Replace
-  components:
-  - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: CMJumpsuitWarden
-      Desert: RMCJumpsuitWardenDesert
-      Snow: RMCJumpsuitWardenSnow
-      Classic: RMCJumpsuitWardenClassic
-      Urban: RMCJumpsuitWardenUrban   
-
-- type: entity
-  parent: CMJumpsuitWarden
-  id: RMCJumpsuitWardenDesert
-  suffix: Desert
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/warden/desert.rsi
-
-- type: entity
-  parent: CMJumpsuitWarden
-  id: RMCJumpsuitWardenSnow
-  suffix: Snow
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/warden/snow.rsi
-
-- type: entity
-  parent: CMJumpsuitWarden
-  id: RMCJumpsuitWardenClassic
-  suffix: Classic
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/warden/classic.rsi
-
-- type: entity
-  parent: CMJumpsuitWarden
-  id: RMCJumpsuitWardenUrban
-  suffix: Urban
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/warden/urban.rsi
-
-- type: entity
-  parent: CMJumpsuitWO
-  id: RMCJumpsuitWOCamo
-  suffix: Camo Replace
-  components:
-  - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: CMJumpsuitWO
-      Desert: RMCJumpsuitWODesert
-      Snow: RMCJumpsuitWOSnow
-      Classic: RMCJumpsuitWOClassic
-      Urban: RMCJumpsuitWOUrban   
-
-- type: entity
-  parent: CMJumpsuitWO
-  id: RMCJumpsuitWODesert
-  suffix: Desert
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/wo/desert.rsi
-
-- type: entity
-  parent: CMJumpsuitWO
-  id: RMCJumpsuitWOSnow
-  suffix: Snow
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/wo/snow.rsi
-
-- type: entity
-  parent: CMJumpsuitWO
-  id: RMCJumpsuitWOClassic
-  suffix: Classic
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/wo/classic.rsi
-
-- type: entity
-  parent: CMJumpsuitWO
-  id: RMCJumpsuitWOUrban
-  suffix: Urban
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/wo/urban.rsi
+      Jungle: _RMC14/Objects/Clothing/Uniforms/MP/wo/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/MP/wo/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/MP/wo/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/MP/wo/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/MP/wo/urban.rsi

@@ -56,10 +56,10 @@
 - type: startingGear
   id: CMGearSquadLeaderEquipped
   equipment:
-    jumpsuit: JumpsuitMarineCamo
+    jumpsuit: JumpsuitMarine
     shoes: CMBootsBlackFilled
-    head: RMCArmorHelmetM11Camo
-    outerClothing: RMCArmorB12Camo
+    head: CMArmorHelmetM11
+    outerClothing: CMArmorB12
     gloves: CMHandsBlackMarine
     id: CMDogtagSquadLeader
     ears: CMHeadsetAlphaLeader

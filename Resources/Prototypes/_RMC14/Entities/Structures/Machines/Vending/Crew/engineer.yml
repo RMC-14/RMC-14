@@ -43,9 +43,9 @@
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
-      - id: RMCBackpackMarineTechCamo
-      - id: RMCSatchelMarineTechCamo
-      - id: RMCBackpackWelderCamo
+      - id: CMBackpackMarineTech
+      - id: CMSatchelMarineTech
+      - id: CMBackpackWelder
         recommended: true
       - id: RMCSatchelWelder
       - id: RMCSatchelWelderChestrig
@@ -53,7 +53,7 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: RMCBeltUtilityGeneralCamo
+      - id: RMCBeltUtilityGeneral
       - id: CMBeltUtilityFilled
         name: M276 Toolbelt Rig (Full)
     - name: Pouches

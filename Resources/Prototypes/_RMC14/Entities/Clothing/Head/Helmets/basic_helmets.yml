@@ -37,7 +37,7 @@
       - Figurine
       - Matchbox
       tags:
-      - CigPack 
+      - CigPack
       - Cigarette
 #      - TODO RMC14 cards
       - Slice
@@ -77,6 +77,7 @@
     leaderRsi:
       sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
       state: sql-helmet
+  - type: CycleableVisor
 
 - type: entity
   id: RMCFoldableHelmetBase

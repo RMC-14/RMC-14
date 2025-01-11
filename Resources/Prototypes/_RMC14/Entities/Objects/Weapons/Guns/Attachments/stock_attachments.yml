@@ -36,6 +36,7 @@
     actionDesc: Extend the stock.
   - type: AttachableWieldDelayMods
     modifiers: []
+  - type: Appearance
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -78,6 +79,13 @@
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
+  - type: ItemCamouflage
+    states:
+      Jungle: stock
+      Desert: d_stock
+      Snow: s_stock
+      Classic: c_stock
+      Urban: u_stock
 
 
 - type: entity
@@ -162,6 +170,13 @@
       accuracyAddMult: -0.25
       recoilFlat: 1
       scatterFlat: 10
+  - type: ItemCamouflage
+    states:
+      Jungle: xm51_stock
+      Desert: d_xm51_stock
+      Snow: s_xm51_stock
+      Classic: c_xm51_stock
+      Urban: u_xm51_stock
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -285,6 +300,13 @@
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/urban.rsi
 
 - type: entity
   parent: RMCAttachmentM54CStockSolid
@@ -306,7 +328,6 @@
   parent: RMCStockAttachmentCollapsibleBase
   id: RMCAttachmentM54CStockCollapsible
   name: M54C folding stock
-  suffix: Desert
   description: The standard back end of any gun starting with M54. Compatible with the M54C series, this stock reduces recoil and scatter, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
   components:
   - type: Sprite
@@ -355,7 +376,14 @@
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
-      
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/urban.rsi
+
 - type: entity
   parent: RMCStockAttachmentBase
   id: RMCAttachmentM16Stock
@@ -635,6 +663,7 @@
   description: A specially made compound polymer stock reinforced with aluminum rods and thick rubber padding to shield the user from recoil. Fitted specifically for the XM88 Heavy Rifle.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
     state: d_boomslang-stock
   - type: AttachableVisuals
     suffix: ""
@@ -668,6 +697,13 @@
       accuracyAddMult: -0.1
       recoilFlat: 1
       scatterFlat: 14
+  - type: ItemCamouflage
+    states:
+      Jungle: boomslang-stock
+      Desert: d_boomslang-stock
+      Snow: s_boomslang-stock
+      Classic: c_boomslang-stock
+      Urban: u_boomslang-stock
 
 - type: Tag
   id: RMCAttachmentStock

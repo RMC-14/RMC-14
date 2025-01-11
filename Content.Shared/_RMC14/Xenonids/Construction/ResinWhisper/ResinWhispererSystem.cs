@@ -7,9 +7,7 @@ using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 
@@ -22,18 +20,16 @@ public sealed class ResinWhispererSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
 
-    private readonly List<EntProtoId> _resinDoorPrototypes = new() { "DoorXenoResin", "DoorXenoResinThick" };
-
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DoorComponent, GetVerbsEvent<AlternativeVerb>>(OnDoorAltVerb);
+        SubscribeLocalEvent<ResinDoorComponent, GetVerbsEvent<AlternativeVerb>>(OnDoorAltVerb);
 
         SubscribeLocalEvent<ResinWhispererComponent, XenoSecreteStructureAdjustFields>(OnRemoteSecreteStructure);
     }
 
-    private void OnDoorAltVerb(Entity<DoorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    private void OnDoorAltVerb(Entity<ResinDoorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         if (!HasComp<ResinWhispererComponent>(args.User))
             return;
@@ -52,12 +48,8 @@ public sealed class ResinWhispererSystem : EntitySystem
                     return;
                 }
 
-                if (Prototype(target) is not { } targetProto ||
-                    !_resinDoorPrototypes.Contains(targetProto.ID) ||
-                    !TryComp(target, out DoorComponent? doorComp))
-                {
+                if (!TryComp(target, out DoorComponent? doorComp))
                     return;
-                }
 
                 if (!_door.TryToggleDoor(target))
                     return;
@@ -132,7 +124,7 @@ public sealed class ResinWhispererSystem : EntitySystem
                 default:
                     break;
             }
-                
+
             if (_examineSystem.InRangeUnOccluded(ent, pointCoordinates, ent.Comp.MaxRemoteConstructDistance))
             {
                 return true;

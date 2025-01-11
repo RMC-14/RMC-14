@@ -50,13 +50,12 @@
     shoes: ClothingShoesColorWhite
     id: CMIDCardCMO
     # TODO RMC14 random chemical synthesis note
-    ears: CMHeadsetCMO
 
 - type: startingGear
   id: CMGearCMOEquipped
   equipment:
     jumpsuit: CMJumpsuitCMO
-    outerClothing: RMCCoatServiceSnow
+    outerClothing: RMCCoatService
     gloves: CMHandsLatex
     shoes: RMCShoesWhite
     head: CMHeadCapCMO

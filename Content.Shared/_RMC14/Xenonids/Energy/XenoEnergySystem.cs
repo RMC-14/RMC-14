@@ -1,6 +1,8 @@
-﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile;
+using Content.Shared.Alert;
+using Content.Shared.Rounding;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
@@ -12,20 +14,38 @@ namespace Content.Shared._RMC14.Xenonids.Energy;
 
 public sealed class XenoEnergySystem : EntitySystem
 {
+    [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly StandingStateSystem _stand = default!;
 
+    private void OnXenoPlasmaMapInit(Entity<XenoEnergyComponent> ent, ref MapInitEvent args)
+    {
+        UpdateAlert(ent);
+    }
+
     public override void Initialize()
     {
+        SubscribeLocalEvent<XenoEnergyComponent, MapInitEvent>(OnXenoEnergyMapInit);
+        SubscribeLocalEvent<XenoEnergyComponent, ComponentRemove>(OnXenoEnergyRemove);
         SubscribeLocalEvent<XenoEnergyComponent, MeleeHitEvent>(OnMeleeHit);
         SubscribeLocalEvent<XenoEnergyComponent, XenoProjectileHitUserEvent>(OnXenoProjectileHitUser);
         SubscribeLocalEvent<XenoEnergyComponent, RejuvenateEvent>(OnRejuvenate);
 
         SubscribeLocalEvent<XenoActionEnergyComponent, RMCActionUseAttemptEvent>(OnXenoActionEnergyUseAttempt);
         SubscribeLocalEvent<XenoActionEnergyComponent, RMCActionUseEvent>(OnXenoActionEnergyUse);
+    }
+
+    private void OnXenoEnergyMapInit(Entity<XenoEnergyComponent> ent, ref MapInitEvent args)
+    {
+        UpdateAlert(ent);
+    }
+
+    private void OnXenoEnergyRemove(Entity<XenoEnergyComponent> ent, ref ComponentRemove args)
+    {
+        _alerts.ClearAlert(ent, ent.Comp.Alert);
     }
 
     private void OnMeleeHit(Entity<XenoEnergyComponent> xeno, ref MeleeHitEvent args)
@@ -53,17 +73,31 @@ public sealed class XenoEnergySystem : EntitySystem
             return;
 
         AddEnergy(xeno, (int) ( isDown ? xeno.Comp.GainAttackDowned : xeno.Comp.GainAttack));
+        UpdateAlert(xeno);
     }
 
     private void OnXenoProjectileHitUser(Entity<XenoEnergyComponent> xeno, ref XenoProjectileHitUserEvent args)
     {
         if (_xeno.CanAbilityAttackTarget(xeno, args.Hit))
+        {
             AddEnergy(xeno, xeno.Comp.GainAttack);
+            UpdateAlert(xeno);
+        }
     }
 
     private void OnRejuvenate(Entity<XenoEnergyComponent> ent, ref RejuvenateEvent args)
     {
         AddEnergy(ent, ent.Comp.Max);
+        UpdateAlert(ent);
+    }
+
+    private void UpdateAlert(Entity<XenoEnergyComponent> xeno)
+    {
+        var level = MathF.Max(0f, xeno.Comp.Current);
+        var max = _alerts.GetMaxSeverity(xeno.Comp.Alert);
+        var severity = max - ContentHelpers.RoundToLevels(level, xeno.Comp.Max, max + 1);
+        string? energyResourceMessage = (int)xeno.Comp.Current + " / " + xeno.Comp.Max;
+        _alerts.ShowAlert(xeno, xeno.Comp.Alert, (short)severity, dynamicMessage: energyResourceMessage);
     }
 
     private void OnXenoActionEnergyUseAttempt(Entity<XenoActionEnergyComponent> action, ref RMCActionUseAttemptEvent args)
@@ -90,6 +124,7 @@ public sealed class XenoEnergySystem : EntitySystem
 
         xeno.Comp.Current = Math.Min(xeno.Comp.Max, xeno.Comp.Current + energy);
         Dirty(xeno);
+        UpdateAlert(xeno);
     }
 
     public bool HasEnergy(Entity<XenoEnergyComponent> xeno, int energy)
@@ -129,6 +164,7 @@ public sealed class XenoEnergySystem : EntitySystem
             return;
 
         xeno.Comp.Current = int.Max(0, xeno.Comp.Current - plasma);
+        UpdateAlert((xeno, xeno.Comp));
         Dirty(xeno);
     }
 

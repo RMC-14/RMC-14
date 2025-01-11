@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent:
   - CMXenoDeveloped
@@ -159,9 +159,9 @@
     - ActionXenoPheromones
     - ActionXenoSpit
     - ActionXenoSprayAcidWarden
-    - ActionXenoAid
+    - ActionXenoAidHeal
+    - ActionXenoAidRejuvenate
     - ActionXenoRetrieve
-    - ActionXenoAidToggle
     - ActionXenoDevolve
     hidden: true
   - type: XenoStrain
@@ -173,8 +173,13 @@
   - type: XenoSpit
     projectileId: XenoSpitProjectilePraetorianWarden
   - type: XenoEnergy
+    alert: XenoEnergyWarden
+    popupGain: rmc-xeno-internal-health-increase-user
+    popupNotEnough: rmc-xeno-not-enough-internal-health
   - type: XenoRetrieve
   - type: XenoAid
+    componentsRemove:
+    - type: AmmoSlowed
   - type: XenoSprayAcid
     acid: XenoAcidSprayStrong
     plasmaCost: 130
@@ -265,8 +270,8 @@
     - ActionXenoTailStab
     - ActionXenoPierce
     - ActionXenoBlitz
-    - ActionXenoCleave
-    - ActionXenoToggleCleave
+    - ActionXenoCleaveRoot
+    - ActionXenoCleaveFling
     - ActionXenoDevolve
     hidden: true
   - type: XenoStrain
