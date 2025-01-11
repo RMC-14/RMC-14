@@ -1,26 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Defenders with lowered crests will no longer be affected by ammo stuns
-    type: Fix
-  id: 693
-  time: '2024-09-14T01:12:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4033
-- author: Vermidia
-  changes:
-  - message: Ghosts can now see health bars and icons, and xeno pheromones
-    type: Add
-  id: 694
-  time: '2024-09-14T20:42:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4032
-- author: Vermidia
-  changes:
-  - message: Fixed forced movement (ammo stuns, neurotoxin stumbles) keeping your
-      momentum
-    type: Fix
-  id: 695
-  time: '2024-09-14T20:42:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4023
 - author: DrSmugleaf
   changes:
   - message: Fixed combat technicians not being able to access the tool storage machine
@@ -4980,5 +4958,28 @@
   id: 1192
   time: '2025-01-11T08:39:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5101
+- author: DummeHytteOst
+  changes:
+  - message: Removed the option for players to disable all recoil.
+    type: Fix
+  id: 1193
+  time: '2025-01-11T08:43:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5220
+- author: DummeHytteOst
+  changes:
+  - message: Removed explosions shaking your screen.
+    type: Remove
+  id: 1194
+  time: '2025-01-11T08:43:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5221
+- author: J C Denton
+  changes:
+  - message: Fixed CMO, Doctor, Nurse and Maintenance Technician starting with a headset.
+    type: Fix
+  - message: Survivors now spawn with a Colony key in their headset.
+    type: Tweak
+  id: 1195
+  time: '2025-01-11T08:43:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5263
 Name: RMC14
 Order: -1
