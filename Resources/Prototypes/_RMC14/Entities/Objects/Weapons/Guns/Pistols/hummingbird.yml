@@ -1,6 +1,6 @@
 - type: entity
   parent: CMWeaponPistolBase
-  id: RMCWeaponPistolD18 # TODO Add entry for it in loadouts, use RMCD18Case. Costs 4 points in CM13. Also to be mapped in on LV-624
+  id: RMCWeaponPistolD18 # TODO Map in on LV-624
   name: D18 Hummingbird
   description: The D18 Hummingbird Pistol was produced in the mid-2170s as a cheap and concealable firearm for CLF Sleeper Cell agents for assassinations and ambushes, and is able to be concealed in shoes and workboots.
   components:
@@ -13,6 +13,9 @@
     scatterUnwielded: 6
     baseFireRate: 10
     burstScatterMult: 3
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
   - type: Item
     size: Tiny
   - type: GunDamageModifier
@@ -25,6 +28,7 @@
     slots:
       gun_magazine:
         name: Magazine
+        startingItem: RMCMagazinePistolD18
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
         priority: 2

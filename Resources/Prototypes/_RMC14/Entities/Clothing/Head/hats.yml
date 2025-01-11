@@ -21,6 +21,13 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/beret/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/beret/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/beret/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/beret/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/beret/urban.rsi
 
 - type: entity
   parent: CMHeadBeret
@@ -73,6 +80,13 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/CO/beret/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/CO/beret/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/CO/beret/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/CO/beret/urban.rsi
 
 - type: entity
   parent: CMHeadBeret
@@ -220,6 +234,13 @@
   - type: FoldableClothing
     foldedEquippedPrefix: flipped
     foldedHeldPrefix: flipped
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/cap/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/cap/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/cap/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/cap/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/cap/urban.rsi
 
 - type: entity
   parent: RMCHeadCapFlippable
@@ -231,6 +252,13 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/cap/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/cap/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/CO/cap/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/CO/cap/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/CO/cap/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/CO/cap/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/CO/cap/urban.rsi
 
 - type: entity
   parent: CMHeadCap
@@ -274,6 +302,13 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/cap_officer/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/cap_officer/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/cap_officer/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/cap_officer/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/cap_officer/urban.rsi
 
 - type: entity
   parent: CMHeadCap

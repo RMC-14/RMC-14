@@ -116,6 +116,10 @@
       state: alive
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
   - type: Physics
     bodyType: KinematicController
   - type: Fixtures
@@ -395,6 +399,12 @@
     damage: #per second, scales with number of fire 'stacks'
       types:
         Heat: 1
+
+- type: entity
+  abstract: true
+  id: RMCXenoCommendationReceiver
+  components:
+  - type: CommendationReceiver
 
 - type: entity
   abstract: true

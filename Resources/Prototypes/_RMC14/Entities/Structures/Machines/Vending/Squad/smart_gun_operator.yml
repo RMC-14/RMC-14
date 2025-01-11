@@ -18,7 +18,7 @@
     - name: Smart Gun Set (Mandatory)
       takeAll: CMSmartGunSet
       entries:
-      - id: RMCSGOEquipmentCaseCamo
+      - id: CMSmartGunOperatorEquipmentCase
     - name: Gun Attachments
       choices: { CMGunAttachments: 1 }
       entries:
@@ -79,11 +79,11 @@
         points: 15
     - name: Binoculars
       entries:
-      - id: RMCBinocularsCamo
+      - id: RMCBinoculars
         points: 5
-      - id: RMCRangefinderCamo
+      - id: RMCRangefinder
         points: 10
-      - id: RMCLaserDesignatorCamo
+      - id: RMCLaserDesignator
         points: 15
     - name: Helmet Optics
       entries: [ ]
@@ -132,7 +132,7 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: RMCBeltSGOCamoFilled
+      - id: CMBeltSmartGunOperator
       - id: RMCBeltSmartGunOperatorPistolFilled
     - name: Pouches
       choices: { RMCPouch: 2 }

@@ -659,7 +659,7 @@ public sealed class CMGunSystem : EntitySystem
         return false;
     }
 
-    private bool TryGetGunUser(EntityUid gun, out Entity<HandsComponent> user)
+    public bool TryGetGunUser(EntityUid gun, out Entity<HandsComponent> user)
     {
         if (_container.TryGetContainingContainer((gun, null), out var container) &&
             TryComp(container.Owner, out HandsComponent? hands))

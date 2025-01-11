@@ -1,3 +1,4 @@
+using Content.Client._RMC14.Commendations;
 using Content.Client.Info;
 using Content.Client.Info.PlaytimeStats;
 using Content.Client.Resources;
@@ -65,6 +66,9 @@ namespace Content.Client.Lobby.UI
             RulesButton.OnPressed += _ => new RulesAndInfoWindow().Open();
 
             StatsButton.OnPressed += _ => new PlaytimeStatsWindow().OpenCentered();
+
+            CommendationsButton.OnPressed += _ =>
+                IoCManager.Resolve<CommendationsManager>().OpenWindow();
         }
 
         /// <summary>

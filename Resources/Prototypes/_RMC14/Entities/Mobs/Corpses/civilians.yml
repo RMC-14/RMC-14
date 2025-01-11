@@ -273,7 +273,7 @@
   equipment:
     head: ArmorHelmetPMCCorporate
     jumpsuit: RMCJumpsuitVeteranPMCCorporate
-    outerClothing: RMCArmorM4PMCCorporate
+    outerClothing: CMArmorM4PMCCorporate
     back: CMBackpackMarine
     gloves: RMCHandsVeteran
     shoes: RMCBootsCorporate

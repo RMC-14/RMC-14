@@ -985,6 +985,64 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("profile_role_loadout", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCCommendation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("rmc_commendations_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("GiverId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("giver_id");
+
+                    b.Property<string>("GiverName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("giver_name");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<Guid>("ReceiverId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("receiver_id");
+
+                    b.Property<string>("ReceiverName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("receiver_name");
+
+                    b.Property<int>("RoundId")
+                        .HasColumnType("integer")
+                        .HasColumnName("round_id");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("text");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer")
+                        .HasColumnName("type");
+
+                    b.HasKey("Id")
+                        .HasName("PK_rmc_commendations");
+
+                    b.HasIndex("GiverId");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("RoundId")
+                        .HasDatabaseName("IX_rmc_commendations_round_id");
+
+                    b.ToTable("rmc_commendations", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCDiscordAccount", b =>
                 {
                     b.Property<decimal>("Id")
@@ -2016,6 +2074,38 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Profile");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCCommendation", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "Giver")
+                        .WithMany("CommendationsGiven")
+                        .HasForeignKey("GiverId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_commendations_player_giver_id");
+
+                    b.HasOne("Content.Server.Database.Player", "Receiver")
+                        .WithMany("CommendationsReceived")
+                        .HasForeignKey("ReceiverId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_commendations_player_receiver_id");
+
+                    b.HasOne("Content.Server.Database.Round", "Round")
+                        .WithMany("Commendations")
+                        .HasForeignKey("RoundId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_commendations_round_round_id");
+
+                    b.Navigation("Giver");
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Round");
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCLinkedAccount", b =>
                 {
                     b.HasOne("Content.Server.Database.RMCDiscordAccount", "Discord")
@@ -2381,6 +2471,10 @@ namespace Content.Server.Database.Migrations.Postgres
 
                     b.Navigation("AdminWatchlistsReceived");
 
+                    b.Navigation("CommendationsGiven");
+
+                    b.Navigation("CommendationsReceived");
+
                     b.Navigation("JobWhitelists");
 
                     b.Navigation("LinkedAccount");
@@ -2449,6 +2543,8 @@ namespace Content.Server.Database.Migrations.Postgres
             modelBuilder.Entity("Content.Server.Database.Round", b =>
                 {
                     b.Navigation("AdminLogs");
+
+                    b.Navigation("Commendations");
                 });
 
             modelBuilder.Entity("Content.Server.Database.Server", b =>

@@ -345,6 +345,17 @@ namespace Content.Server.Database
 
         Task<bool> RemoveRoleTimerExclusion(Guid player, string tracker);
 
+        Task AddCommendation(Guid giver,
+            Guid receiver,
+            string giverName,
+            string receiverName,
+            string name,
+            string text,
+            CommendationType type,
+            int round);
+
+        Task<List<RMCCommendation>> GetCommendationsReceived(Guid player);
+
         #endregion
 
         #region DB Notifications
@@ -1118,6 +1129,25 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.RemoveRoleTimerExclusion(player, tracker));
+        }
+
+        public Task AddCommendation(Guid giver,
+            Guid receiver,
+            string giverName,
+            string receiverName,
+            string name,
+            string text,
+            CommendationType type,
+            int round)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddCommendation(giver, receiver, giverName, receiverName, name, text, type, round));
+        }
+
+        public Task<List<RMCCommendation>> GetCommendationsReceived(Guid player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCommendations(player));
         }
 
         // Wrapper functions to run DB commands from the thread pool.

@@ -33,7 +33,7 @@
       - id: RMCKitEngineering
     - name: Armors
       entries:
-      - id: RMCArmorM4Camo
+      - id: CMArmorM4
         points: 16
     - name: Clothing Items
       entries:
@@ -57,9 +57,9 @@
     #  points: 5
     - name: Binoculars
       entries:
-      - id: RMCRangefinderCamo
+      - id: RMCRangefinder
         points: 3
-      - id: RMCLaserDesignatorCamo
+      - id: RMCLaserDesignator
         points: 5
     - name: Helmet Optics
       entries: [ ]
@@ -215,23 +215,23 @@
       takeAll: CMStandard
       entries:
       - id: CMVendorBundleSquadLeaderApparel
-      - id: RMCArmorB12Camo
+      - id: CMArmorB12
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
-      - id: RMCBackpackMarineCamo
+      - id: CMBackpackMarine
       - id: RMCScabbardMacheteFilled
-      - id: RMCSatchelMarineCamo
+      - id: CMSatchelMarine
         recommended: true
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: RMCBeltUtilityGeneralCamo
-      - id: RMCBeltMarineCamo
+      - id: RMCBeltUtilityGeneral
+      - id: CMBeltMarine
         recommended: true
-      - id: RMCBeltMedicBagCamo
+      - id: CMBeltMedicBag
       - id: CMBeltMedical
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
@@ -292,7 +292,7 @@
     bundle:
     - RMCExplosiveBreachingCharge # TODO RMC14 plastic explosives
     - RMCPackFlareCAS
-    - RMCLaserDesignatorCamo
+    - RMCLaserDesignator
     - CMFireExtinguisher
 
 - type: entity
@@ -307,7 +307,7 @@
     - 0,0,9,1
   - type: StorageFill
     contents:
-    - id: WeaponRifleM4SPRCamo
+    - id: WeaponRifleM4SPR
     - id: RMCAttachmentS84xTelescopicScope
     - id: RMCAttachmentSuppressor
     - id: RMCAttachmentExtendedBarrel
@@ -326,7 +326,7 @@
     - 0,0,9,1
   - type: StorageFill
     contents:
-    - id: WeaponRifleM54CCamo
+    - id: WeaponRifleM54C
     - id: RMCAttachmentAngledGrip
     - id: RMCAttachmentSuppressor
     - id: RMCAttachmentExtendedBarrel

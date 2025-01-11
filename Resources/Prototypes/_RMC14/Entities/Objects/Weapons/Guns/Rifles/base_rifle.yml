@@ -33,8 +33,10 @@
         shotsToMaxScatter: 4
   - type: Wieldable
   - type: WieldableSpeedModifiers
-    baseWalk: 0.8
-    baseSprint: 0.69
+    base: 0.666
+    light: 0.921
+    medium: 0.865
+    heavy: 0.865
   - type: WieldDelay
     baseDelay: 0.6
   - type: Item
@@ -71,6 +73,7 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1
     accuracyMultiplierUnwielded: 0.65
+  - type: GunGroupPenalty
 
 - type: entity
   parent: BaseMagazineRifle

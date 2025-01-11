@@ -21,7 +21,7 @@ maxplayers = 500
 soft_max_players = 350
 panic_bunker.enabled = false
 round_end_pvs_overrides = false
-round_restart_time = 300
+round_restart_time = 180
 lobbyduration = 180
 
 [ghost]

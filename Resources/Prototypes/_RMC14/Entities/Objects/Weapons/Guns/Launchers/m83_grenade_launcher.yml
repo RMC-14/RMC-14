@@ -34,65 +34,10 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: 0.0, 0.185
-
-#camo variants
-- type: entity
-  parent: WeaponLauncherM83
-  id: WeaponLauncherM83Camo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: WeaponLauncherM83Jungle
-      Desert: WeaponLauncherM83
-      Snow: CamoTestSnow
-      Classic: CamoTestClassic
-      Urban: CamoTestUrban
-      
-- type: entity
-  parent: WeaponLauncherM83
-  id: WeaponLauncherM83Jungle
-  suffix: Jungle
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/jungle.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/jungle.rsi
-
-- type: entity
-  parent: WeaponLauncherM83
-  id: WeaponLauncherM83Snow
-  suffix: Snow
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/snow.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/snow.rsi
-
-- type: entity
-  parent: WeaponLauncherM83
-  id: WeaponLauncherM83Classic
-  suffix: Classic
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/classic.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/classic.rsi
-
-- type: entity
-  parent: WeaponLauncherM83
-  id: WeaponLauncherM83Urban
-  suffix: Urban
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/urban.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/urban.rsi
-
-
-
-
-
-
-
-
+      Jungle: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/urban.rsi

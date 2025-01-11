@@ -53,7 +53,7 @@
 #    - Welding mask (3750 metal, 1250 glass)
     - CMSheetGlassReinforced
     - CMRodMetal
-#    - Kitchen knife (15000 metal)
+    - RMCKitchenKnife
 #    - Tape recorder (75 metal, 37 glass)
 #    - Airlock electronics (62 metal, 62 glass)
 #    - Fire alarm electronics (62 metal, 62 glass)
@@ -62,7 +62,7 @@
     - RMCTablePartTan
     - RMCTablePartAlmayer
     - RMCTablePartReinforced
-#    - Rack parts (4687 metal)
+    - RMCRackParts
     - CMScalpel
     - CMCircularSaw
     - CMSurgicalDrill

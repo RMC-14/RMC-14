@@ -21,13 +21,13 @@
       choices: { SquadSpecKit: 1 }
       sharedSpecLimit: 2 # 2 as requested until Pyro is added
       entries:
-      - id: RMCDemoSpecEquipmentCaseCamo
-      - id: RMCGrenadeSpecEquipmentCaseCamo
+      - id: RMCDemoSpecEquipmentCase
+      - id: RMCGrenadeSpecEquipmentCase
       #  points: 0
       #- id: PyroSet
       #  points: 0
-      - id: RMCScoutSpecEquipmentCaseCamo
-      - id: RMCSniperEquipmentCaseCamo
+      - id: RMCScoutSpecEquipmentCase
+      - id: CMSniperEquipmentCase
     - name: Extra Scout Ammunition
       entries:
       - id: RMCMagazineRifleM4SPRA19Impact
@@ -111,14 +111,14 @@
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
-      - id: RMCBackpackMarineCamo
-      - id: RMCSatchelMarineCamo
+      - id: CMBackpackMarine
+      - id: CMSatchelMarine
         recommended: true
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: RMCBeltUtilityGeneralCamo
-      - id: RMCBeltMarineCamo
+      - id: RMCBeltUtilityGeneral
+      - id: CMBeltMarine
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
@@ -206,9 +206,9 @@
         points: 5
     - name: Binoculars
       entries:
-      - id: RMCBinocularsCamo
+      - id: RMCBinoculars
         points: 5
-      - id: RMCLaserDesignatorCamo
+      - id: RMCLaserDesignator
         points: 15
     - name: Helmet Optics
       entries: [ ]

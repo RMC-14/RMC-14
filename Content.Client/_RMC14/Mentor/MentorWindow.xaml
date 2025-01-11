@@ -9,22 +9,29 @@
             <PanelContainer.PanelOverride>
                 <graphics:StyleBoxFlat BackgroundColor="#202028" />
             </PanelContainer.PanelOverride>
-            <ScrollContainer HScrollEnabled="False" VScrollEnabled="False"
-                             HorizontalExpand="True" VerticalExpand="True">
-                    <BoxContainer Orientation="Vertical" HorizontalExpand="True"
-                                  VerticalExpand="True">
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True"
+                              VerticalExpand="True">
+                    <ScrollContainer HScrollEnabled="False" VScrollEnabled="True"
+                                     HorizontalExpand="True" VerticalExpand="True">
                         <BoxContainer Name="Players" Access="Public" Orientation="Vertical"
                                       VerticalExpand="True" />
-                        <Button Name="DeMentorButton" Access="Public" Text="De-Mentor"
-                                StyleClasses="OpenBoth" />
-                    </BoxContainer>
-            </ScrollContainer>
+                    </ScrollContainer>
+                    <Button Name="DeMentorButton" Access="Public" Text="De-Mentor"
+                            StyleClasses="OpenBoth" />
+                </BoxContainer>
         </PanelContainer>
         <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True"
                       SizeFlagsStretchRatio="3">
             <OutputPanel Name="Messages" Access="Public"
                          VerticalExpand="True" />
-            <LineEdit Name="Chat" Access="Public" HorizontalExpand="True" Editable="False" />
+            <RichTextLabel Name="TypingIndicator" Access="Public" />
+            <RichTextLabel Name="ClaimIndicator" Access="Public" />
+            <BoxContainer Orientation="Horizontal">
+                <LineEdit Name="Chat" Access="Public" HorizontalExpand="True"
+                          Editable="False" />
+                <Button Name="ClaimButton" Access="Public" Text="Claim"
+                        StyleClasses="OpenBoth" Visible="False" />
+            </BoxContainer>
         </BoxContainer>
     </BoxContainer>
 </controls:MentorWindow>

@@ -18,8 +18,10 @@
   - type: WieldDelay
     baseDelay: 0.6
   - type: WieldableSpeedModifiers
-    baseWalk: 0.842
-    baseSprint: 0.748
+    base: 0.666
+    light: 0.921
+    medium: 0.865
+    heavy: 0.865
   - type: AmmoCounter
   - type: Gun
     selectedMode: SemiAuto

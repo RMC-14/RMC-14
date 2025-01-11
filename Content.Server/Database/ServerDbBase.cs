@@ -1915,6 +1915,39 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             return true;
         }
 
+        public async Task AddCommendation(Guid giver,
+            Guid receiver,
+            string giverName,
+            string receiverName,
+            string name,
+            string text,
+            CommendationType type,
+            int round)
+        {
+            await using var db = await GetDb();
+            db.DbContext.RMCCommendations.Add(new RMCCommendation
+            {
+                GiverId = giver,
+                ReceiverId = receiver,
+                GiverName = giverName,
+                ReceiverName = receiverName,
+                Name = name,
+                Text = text,
+                Type = type,
+                RoundId = round,
+            });
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<RMCCommendation>> GetCommendations(Guid player)
+        {
+            await using var db = await GetDb();
+            return  await db.DbContext.RMCCommendations
+                .Where(c => c.ReceiverId == player)
+                .ToListAsync();
+        }
+
         #endregion
 
         // SQLite returns DateTime as Kind=Unspecified, Npgsql actually knows for sure it's Kind=Utc.

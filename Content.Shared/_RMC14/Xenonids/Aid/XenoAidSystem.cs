@@ -105,7 +105,7 @@ public sealed class XenoAidSystem : EntitySystem
                 var selfMsg = Loc.GetString("rmc-xeno-heal-self", ("target", target));
                 _popup.PopupClient(selfMsg, target, xeno);
 
-                var targetMsg = Loc.GetString("rmc-xeno-heal-target", ("target", target));
+                var targetMsg = Loc.GetString("rmc-xeno-heal-target", ("target", xeno));
                 _popup.PopupEntity(targetMsg, target, target);
 
                 var othersMsg = Loc.GetString("rmc-xeno-heal-others", ("user", xeno), ("target", target));

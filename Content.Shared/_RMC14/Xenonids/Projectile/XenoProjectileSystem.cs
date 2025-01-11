@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Weapons.Ranged;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.FixedPoint;
@@ -50,7 +51,8 @@ public sealed class XenoProjectileSystem : EntitySystem
         if (args.Cancelled || ent.Comp.DeleteOnFriendlyXeno)
             return;
 
-        if (_hive.FromSameHive(ent.Owner, args.OtherEntity))
+        if (_hive.FromSameHive(ent.Owner, args.OtherEntity) && 
+            (HasComp<XenoComponent>(args.OtherEntity) || HasComp<HiveCoreComponent>(args.OtherEntity)))
             args.Cancelled = true;
     }
 

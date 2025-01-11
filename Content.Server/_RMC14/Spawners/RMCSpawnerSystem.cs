@@ -44,8 +44,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
         var timedQuery = EntityQueryEnumerator<TimedDespawnOnLandingComponent>();
         while (timedQuery.MoveNext(out var uid, out var comp))
         {
-            EnsureComp<TimedDespawnComponent>(uid).Lifetime = comp.Lifetime;
-            RemCompDeferred<TimedDespawnOnLandingComponent>(uid);
+            StartDespawnOnLanding((uid, comp));
         }
 
         var deleteQuery = EntityQueryEnumerator<DeleteOnLandingComponent>();
@@ -64,10 +63,24 @@ public sealed class RMCSpawnerSystem : EntitySystem
         EnsureComp<TimedDespawnComponent>(ent).Lifetime = (float) time.TotalSeconds;
     }
 
+    public void StartDespawnOnLanding(Entity<TimedDespawnOnLandingComponent> landing)
+    {
+        EnsureComp<TimedDespawnComponent>(landing).Lifetime = landing.Comp.Lifetime;
+        RemCompDeferred<TimedDespawnOnLandingComponent>(landing);
+    }
+
     public override void Update(float frameTime)
     {
         _spawners.Clear();
         _corpseSpawners.Clear();
+
+        var roundDuration = _gameTicker.RoundDuration();
+        var timedQuery = EntityQueryEnumerator<TimedDespawnOnLandingComponent>();
+        while (timedQuery.MoveNext(out var uid, out var comp))
+        {
+            if (roundDuration >= comp.StartDespawnAt)
+                StartDespawnOnLanding((uid, comp));
+        }
 
         var corpseSpawnersQuery = EntityQueryEnumerator<CorpseSpawnerComponent>();
         while (corpseSpawnersQuery.MoveNext(out var uid, out var comp))

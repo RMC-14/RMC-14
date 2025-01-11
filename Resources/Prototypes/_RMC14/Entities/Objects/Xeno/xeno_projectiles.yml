@@ -49,7 +49,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
     layers:
-    - state: neurotoxin
+    - state: xeno_acid
       shader: unshaded
   - type: Projectile
     impactEffect: null
@@ -72,7 +72,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
     layers:
-    - state: neurotoxin
+    - state: xeno_acid
       shader: unshaded
   - type: Projectile
     impactEffect: null
@@ -112,6 +112,30 @@
   - type: DrainOnHit
   - type: ProjectileMaxRange
     max: 6
+
+- type: entity
+  id: XenoQueenNeuroSpitProjectile
+  parent: [XenoSpitImpactSounds, XenoBaseProjectile]
+  name: neurotoxic spit
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: neurotoxin
+      shader: unshaded
+  - type: XenoSlowingSpitProjectile
+    armorResistsKnockdown: false
+    slow: 0
+    paralyze: 4
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: true
+  - type: ProjectileMaxRange
+    max: 4
+  - type: RMCProjectileAccuracy
+    accuracy: 125
+
 
 - type: entity
   id: XenoScatteredSpitProjectile
@@ -269,6 +293,8 @@
         Heat: 30
   - type: RMCProjectileAccuracy
     accuracy: 110
+  - type: ProjectileMaxRange
+    max: 3
 
 - type: entity
   parent: XenoAcidBallSpitProjectile
@@ -276,10 +302,16 @@
   categories:
   - HideSpawnMenu
   components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 30
   - type: XenoProjectileShieldOnHit
   - type: PreventCollideWithDead
   - type: RMCProjectileAccuracy
     accuracy: 160
+  - type: ProjectileMaxRange
+    max: 7
 
 - type: entity
   parent: XenoSpitProjectile
@@ -290,7 +322,7 @@
   - type: Projectile
     damage:
       types:
-        Heat: 25
+        Heat: 30
 
 - type: entity
   id: XenoAcidBallProjectile
