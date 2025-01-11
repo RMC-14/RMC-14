@@ -416,9 +416,9 @@
   suffix: None
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
   - type: RMCMapToSquad
     deleteWithNoSquad: false
     map:
@@ -438,9 +438,9 @@
   suffix: Alpha
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
 
 - type: entity
   parent: RMCHeadBeretSquadAlpha
@@ -449,9 +449,9 @@
   suffix: Bravo
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
 
 - type: entity
   parent: RMCHeadBeretSquadAlpha
@@ -460,9 +460,9 @@
   suffix: Charlie
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
 
 - type: entity
   parent: RMCHeadBeretSquadAlpha
@@ -471,9 +471,9 @@
   suffix: Delta
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
 
 - type: entity
   parent: RMCHeadBeretSquadAlpha
@@ -482,9 +482,9 @@
   suffix: Echo
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
 
 - type: entity
   parent: RMCHeadBeretSquadAlpha
@@ -493,9 +493,9 @@
   suffix: Foxtrot
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
 
 - type: entity
   parent: RMCHeadBeretSquadAlpha
@@ -504,6 +504,6 @@
   suffix: Intel
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
