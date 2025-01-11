@@ -195,7 +195,7 @@
 
 - type: entity
   id: RMCCartridgePistol9mmRubber
-  name: Rubber cartridge (9mm)
+  name: rubber cartridge (9mm)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
