@@ -81,9 +81,9 @@
     state: trackon-southwest
   name: Marine Squad Tracker
   description: Tracks the Squad Leader.
-#  clickEvent: !type:SelectTrackerAlertEvent
   minSeverity: 0
   maxSeverity: 10
+  clickEvent: !type:SquadLeaderTrackerClickedEvent
 
 - type: alert
   id: MarineTacMapAlert

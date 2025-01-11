@@ -155,7 +155,7 @@
       - PowerCell
       - CMFireExtinguisherPortable
       - RMCExplosiveBreachingCharge
-      - RodMetal1 
+      - RodMetal1
 #     - # TODO nailgun, circuit board, plastic explosives, stock parts
       components:
       - Welder
@@ -382,6 +382,8 @@
     sprite: _RMC14/Objects/Clothing/Belt/mortar/jungle-classic.rsi
   - type: Storage
     maxItemSize: Huge
+    grid:
+    - 0,0,9,1
     whitelist:
       components:
       - MortarShell
@@ -396,7 +398,7 @@
         components:
         - Gun
     - popup: rmc-storage-limit-max-shells
-      count: 6
+      count: 4
       whitelist:
         components:
         - MortarShell
