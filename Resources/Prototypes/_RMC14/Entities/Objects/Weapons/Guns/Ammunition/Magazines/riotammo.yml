@@ -1,7 +1,7 @@
 - type: entity
   parent: CMMagazineRifleM54C
   id: RMCMagazineRifleM54CRubber
-  name: "M54C Rubber magazine (10x24mm)"
+  name: "M54C rubber magazine (10x24mm)"
   description: "A magazine of less-lethal rubber 10x24mm rounds for use in the M54C battle rifle."
   components:
   - type: Tag
