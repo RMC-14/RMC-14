@@ -47,7 +47,7 @@
   equipment:
     jumpsuit: CMJumpsuitQM
     shoes: CMBootsBlack
-    head: CMHeadCapCargo
+    head: RMCHeadCapQuartermaster
     gloves: CMHandsInsulated
     id: CMIDCardQuartermaster
     ears: CMHeadsetQM
