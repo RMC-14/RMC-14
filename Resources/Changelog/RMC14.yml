@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: FungiFellow
-  changes:
-  - message: Animals no longer Suffocate
-    type: Fix
-  id: 692
-  time: '2024-09-14T01:13:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4004
 - author: Vermidia
   changes:
   - message: Defenders with lowered crests will no longer be affected by ammo stuns
@@ -4972,5 +4965,20 @@
   id: 1191
   time: '2025-01-11T08:30:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5251
+- author: J C Denton
+  changes:
+  - message: Fixed XO and ASO not starting with a rangefinder in their pouch, and
+      the XO not starting with 2 large pouches.
+    type: Fix
+  - message: Fixed SO not starting with a rangefinder in their hand and two large
+      pouches.
+    type: Fix
+  - message: Fixed SEA not spawning with a flash, large pouch, whistle, and binoculars.
+    type: Fix
+  - message: Fixed the QM's starting pocket contents being swapped.
+    type: Fix
+  id: 1192
+  time: '2025-01-11T08:39:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5101
 Name: RMC14
 Order: -1
