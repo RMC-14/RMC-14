@@ -8,15 +8,8 @@
   },
   "states": [
     {
-      "name": "badge",
-      "directions": 4
-    },
-    {
       "name": "equipped-HELMET",
       "directions": 4
-    },
-    {
-      "name": "icon-badge"
     },
     {
       "name": "icon"

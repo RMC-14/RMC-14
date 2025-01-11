@@ -2,14 +2,19 @@
 using System.Linq;
 using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Pointing;
+using Content.Shared._RMC14.Roles;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Clothing;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
+using Content.Shared.Hands;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
@@ -21,8 +26,11 @@ using Content.Shared.Radio.Components;
 using Content.Shared.Radio.EntitySystems;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
+using Content.Shared.Storage;
+using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Marines.Squads;
 
@@ -30,10 +38,13 @@ public sealed class SquadSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly EncryptionKeySystem _encryptionKey = default!;
     [Dependency] private readonly SharedIdCardSystem _id = default!;
+    [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedMarineSystem _marine = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly SharedMarineOrdersSystem _marineOrders = default!;
@@ -43,6 +54,7 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedRMCBanSystem _rmcBan = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
+    [Dependency] private readonly SharedStorageSystem _storage = default!;
 
     private static readonly ProtoId<JobPrototype> SquadLeaderJob = "CMSquadLeader";
 
@@ -54,12 +66,14 @@ public sealed class SquadSystem : EntitySystem
     private EntityQuery<SquadArmorWearerComponent> _squadArmorWearerQuery;
     private EntityQuery<SquadMemberComponent> _squadMemberQuery;
     private EntityQuery<SquadTeamComponent> _squadTeamQuery;
+    private EntityQuery<RMCMapToSquadComponent> _mapToSquadQuery;
 
     public override void Initialize()
     {
         _squadArmorWearerQuery = GetEntityQuery<SquadArmorWearerComponent>();
         _squadMemberQuery = GetEntityQuery<SquadMemberComponent>();
         _squadTeamQuery = GetEntityQuery<SquadTeamComponent>();
+        _mapToSquadQuery = GetEntityQuery<RMCMapToSquadComponent>();
 
         SubscribeLocalEvent<SquadArmorComponent, GetEquipmentVisualsEvent>(OnSquadArmorGetVisuals, after: [typeof(ClothingSystem)]);
 
@@ -186,6 +200,66 @@ public sealed class SquadSystem : EntitySystem
             leader.Headset = null;
             Dirty(ent.Comp.Leader, leader);
         }
+    }
+
+    private void SearchForMappedItems(Entity<SquadMemberComponent> ent, EntityUid squad)
+    {
+        var user = ent.Owner;
+
+        if (_inventory.TryGetContainerSlotEnumerator(ent.Owner, out var slots, SlotFlags.All))
+        {
+            while (slots.MoveNext(out var slot))
+            {
+                if (slot.ContainedEntity != null)
+                {
+                    var slotEntity = slot.ContainedEntity.Value;
+
+                    if (_mapToSquadQuery.TryComp(slotEntity, out var mapToSquad))
+                    {
+                        MapToSquad((slotEntity, mapToSquad), user, squad);
+                    }
+                    else if (TryComp<StorageComponent>(slotEntity, out var storage))
+                    {
+                        foreach (var contained in storage.Container.ContainedEntities)
+                        {
+                            if (!_mapToSquadQuery.TryComp(contained, out var mapToSquadStorage))
+                                continue;
+
+                            MapToSquad((contained, mapToSquadStorage), user, squad);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void MapToSquad(Entity<RMCMapToSquadComponent> ent, EntityUid user, EntityUid squad)
+    {
+        if (_net.IsClient)
+            return;
+
+        EntProtoId? item = null;
+
+        if (CompOrNull<MetaDataComponent>(squad)?.EntityPrototype is { } squadPrototype &&
+            ent.Comp.Map.TryGetValue(squadPrototype.ID, out var mapped))
+        {
+            item = mapped;
+        }
+
+        if (item.HasValue)
+        {
+            var newItem = SpawnNextToOrDrop(item, user);
+
+            if (TryComp<ClothingComponent>(newItem, out var clothing))
+            {
+                if (!_cmInventory.TryEquipClothing(user, (newItem, clothing)))
+                {
+                    _hands.TryPickupAnyHand(user, newItem);
+                }
+            }
+        }
+
+        QueueDel(ent);
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
@@ -335,6 +409,9 @@ public sealed class SquadSystem : EntitySystem
 
         if (Prototype(team)?.ID is { } squadProto)
             _appearance.SetData(marine, SquadVisuals.Squad, squadProto);
+
+        // Search for any squad-specific items to map
+        SearchForMappedItems((marine, member), member.Squad.Value);
     }
 
     private void MarineSetTitle(EntityUid marine, string title)
