@@ -900,8 +900,8 @@
       - id: RMCM1984BeltFilled
         name: M1984 service pistol
         recommended: true
-      - id: RMCMK80BeltFilled
-        name: MK80 pistol
+      - id: CMM77BeltFilled
+        name: M77 pistol
         recommended: true
       - id: RMCM44BeltFilled
         name: M44 revolver
