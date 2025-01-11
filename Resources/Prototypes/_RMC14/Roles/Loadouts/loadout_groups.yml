@@ -63,10 +63,11 @@
   id: MasksRMC
   name: rmc-loadout-group-masks
   minLimit: 0
-  maxLimit: 2
+  maxLimit: 8
   loadouts:
   - CoifRMC
   - GasMaskRMC
+  - MaskScarfSquadRMC
   - MaskScarfRedRMC
   - MaskScarfBlackRMC
   - MaskScarfGrayRMC

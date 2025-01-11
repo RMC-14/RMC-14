@@ -424,10 +424,10 @@
       SquadAlpha: RMCHeadBeretSquadAlpha
       SquadBravo: RMCHeadBeretSquadBravo
       SquadCharlie: RMCHeadBeretSquadCharlie
-      SquadDelta: CMHeadBandDelta
-      SquadEcho: CMHeadBandEcho
-      SquadFoxtrot: CMHeadBandFoxtrot
-      # TODO SquadIntel: CMHeadBandIntel
+      SquadDelta: RMCHeadBeretSquadDelta
+      SquadEcho: RMCHeadBeretSquadEcho
+      SquadFoxtrot: RMCHeadBeretSquadFoxtrot
+      # TODO SquadIntel: RMCHeadBeretSquadIntel
 
 - type: entity
   parent: CMHeadBeret
@@ -457,6 +457,50 @@
   id: RMCHeadBeretSquadCharlie
   description: Still has some morning toast crumbs on it.
   suffix: Charlie
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+
+- type: entity
+  parent: RMCHeadBeretSquadAlpha
+  id: RMCHeadBeretSquadDelta
+  description: Hard to consider protection, but these types of people don't seek protection.
+  suffix: Delta
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+
+- type: entity
+  parent: RMCHeadBeretSquadAlpha
+  id: RMCHeadBeretSquadEcho
+  description: Tightly Woven, as it should be.
+  suffix: Echo
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+
+- type: entity
+  parent: RMCHeadBeretSquadAlpha
+  id: RMCHeadBeretSquadFoxtrot
+  description: Looks and feels starched, cold to the touch.
+  suffix: Foxtrot
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi
+
+- type: entity
+  parent: RMCHeadBeretSquadAlpha
+  id: RMCHeadBeretSquadIntel
+  description: Looks more intellegent than the person wearing it.
+  suffix: Intel
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_squad.rsi

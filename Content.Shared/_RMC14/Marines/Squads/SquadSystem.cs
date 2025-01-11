@@ -28,6 +28,7 @@ using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Marines.Squads;
 
@@ -35,6 +36,7 @@ public sealed class SquadSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly EncryptionKeySystem _encryptionKey = default!;
     [Dependency] private readonly SharedIdCardSystem _id = default!;
     [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
@@ -199,19 +201,30 @@ public sealed class SquadSystem : EntitySystem
 
     private void OnStartingGear(Entity<SquadMemberComponent> ent, ref RMCStartingGearEquippedEvent args)
     {
-        var squad = ent.Comp.Squad;
-
-        if (squad == null)
+        if (_net.IsClient)
             return;
+
+        var squad = ent.Comp.Squad;
 
         if (!TryComp<RMCMapToSquadComponent>(args.Item, out var mapToSquad))
             return;
 
-        MapToSquad((args.Item, mapToSquad), Transform(args.Item).ParentUid, ent, squad.Value);
+        var item = args.Item;
+
+        if (squad == null)
+        {
+            QueueDel(item);
+            return;
+        }
+
+        MapToSquad((item, mapToSquad), Transform(item).ParentUid, ent.Owner, squad.Value);
     }
 
     private void MapToSquad(Entity<RMCMapToSquadComponent> ent, EntityUid equipee, EntityUid user, EntityUid squad)
     {
+        if (_net.IsClient)
+            return;
+
         EntProtoId? item = null;
 
         if (CompOrNull<MetaDataComponent>(squad)?.EntityPrototype is { } squadPrototype &&
