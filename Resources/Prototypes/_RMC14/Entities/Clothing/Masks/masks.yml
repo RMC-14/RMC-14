@@ -71,7 +71,7 @@
 
 # Coifs
 - type: entity
-  parent: [CMBaseMask, BaseFoldable]
+  parent: [ClothingMaskBase, BaseFoldable]
   id: CMMaskCoif
   name: heat absorbent coif
   description: A close-fitting cap that covers the top, back, and sides of the head. Can also be adjusted to cover the lower part of the face so it keeps the user warm in harsh conditions.
@@ -84,6 +84,7 @@
     - state: icon
       map: ["foldedLayer"]
       visible: false
+  - type: HideLayerClothing
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/coif.rsi
   - type: IdentityBlocker
