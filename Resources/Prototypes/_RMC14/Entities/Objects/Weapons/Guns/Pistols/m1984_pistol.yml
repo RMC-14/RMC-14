@@ -26,6 +26,7 @@
           tags:
           - CMMagazinePistolM1984
           - RMCMagazinePistolM1984AP
+          - RMCMagazinePistolM1984Rubber
         startingItem: CMMagazinePistolM1984
   - type: AttachableHolder
     slots:

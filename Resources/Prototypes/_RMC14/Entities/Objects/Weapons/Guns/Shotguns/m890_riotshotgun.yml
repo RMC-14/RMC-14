@@ -1,8 +1,8 @@
 ﻿- type: entity
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
-  name: M890 tactical shotgun
-  id: WeaponShotgunM890
-  description: A unique corporate made semi-automatic shotgun with a rapid fire rate and an attached Underslung Grenade Launcher. Holds 8 shotgun shells in the chamber.
+  name: M890 tactical riot shotgun
+  id: RMCWeaponShotgunM890Riot
+  description: A unique corporate made semi-automatic riot shotgun with a rapid fire rate. Holds 8 Beanbag shells in the chamber. Specially made for crowd control during tough situations.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890.rsi
@@ -24,7 +24,7 @@
     cycleable: false
     whitelist:
       tags:
-      - RMCShellShotgun
+      - RMCShellShotgunBeanbag
     capacity: 8
   - type: AttachableHolder
     slots:
@@ -33,7 +33,6 @@
           tags:
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentRecoilCompensator
-          - RMCM5Bayonet
       rmc-aslot-rail:
         whitelist:
           tags:
