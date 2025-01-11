@@ -34,21 +34,18 @@
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
-        startingAttachable: RMCAttachmentSuppressor
         whitelist:
           tags:
           - RMCAttachmentRecoilCompensator
           - RMCAttachmentBarrelCharger
           - RMCAttachmentSuppressor
       rmc-aslot-rail:
-        startingAttachable: RMCAttachmentS6ReflexSight
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
       rmc-aslot-underbarrel:
-        startingAttachable: RMCAttachmentLaserSight
         whitelist:
           tags:
           - RMCAttachmentLaserSight
