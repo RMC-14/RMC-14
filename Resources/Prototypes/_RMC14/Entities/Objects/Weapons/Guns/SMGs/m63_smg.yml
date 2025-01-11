@@ -56,7 +56,7 @@
           - CMMagazineSMGM63
           - CMMagazineSMGM63AP
           - CMMagazineSMGM63Ext
-          - RMCMagazineSMGM63rubber
+          - RMCMagazineSMGM63Rubber
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
