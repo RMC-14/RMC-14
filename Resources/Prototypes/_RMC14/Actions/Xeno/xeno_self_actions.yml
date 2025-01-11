@@ -265,7 +265,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: burrow
     event: !type:XenoBurrowActionEvent
-    range: 8
+    range: 15
     repeat: true
     deselectOnMiss: false
     checkCanAccess: false
