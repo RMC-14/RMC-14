@@ -46,11 +46,12 @@
   id: EyewearRMC
   name: rmc-loadout-group-eyewear
   minLimit: 0
-  maxLimit: 9
+  maxLimit: 12
   loadouts:
   - AviatorsRMC
   - EyepatchRMC
   - GlassesRPGRMC
+  - GlassesPrescriptionRMC
   - GogglesRMC
   - GogglesPrescriptionRMC
   - GogglesBlackRMC
