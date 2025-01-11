@@ -267,7 +267,7 @@
 
 - type: entity
   parent: CMVendor
-  id: CMVendorSecArmory
+  id: RMCVendorSecArmory
   name: Riot Tech
   description: A Police Riot equipment vendor.
   suffix: Military Police
