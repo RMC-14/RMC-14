@@ -66,9 +66,17 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
     private void OnSquadMemberAdded(ref SquadMemberAddedEvent ev)
     {
         AddFireteamMember(ev.Squad.Comp.Fireteams, ev.Member);
-        ev.Squad.Comp.Fireteams.SquadLeader = _squad.TryGetSquadLeader(ev.Squad, out var leader)
-            ? Name(leader)
-            : null;
+
+        if (_squad.TryGetSquadLeader(ev.Squad, out var leader))
+        {
+            ev.Squad.Comp.Fireteams.SquadLeader = Name(leader);
+            ev.Squad.Comp.Fireteams.SquadLeaderId = GetNetEntity(leader);
+        }
+        else
+        {
+            ev.Squad.Comp.Fireteams.SquadLeader = null;
+            ev.Squad.Comp.Fireteams.SquadLeaderId = null;
+        }
     }
 
     private void OnSquadMemberRemoved(ref SquadMemberRemovedEvent ev)
@@ -260,6 +268,9 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         if (!_squad.AreInSameSquad(user, target))
             return false;
 
+        if (HasComp<SquadLeaderComponent>(target))
+            return false;
+
         return true;
     }
 
@@ -279,9 +290,16 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
         Array.Clear(squad.Comp.Fireteams.Fireteams);
         squad.Comp.Fireteams.Unassigned.Clear();
-        squad.Comp.Fireteams.SquadLeader = _squad.TryGetSquadLeader((squad, squad.Comp), out var leader)
-            ? Name(leader)
-            : null;
+        if (_squad.TryGetSquadLeader((squad, squad.Comp), out var leader))
+        {
+            squad.Comp.Fireteams.SquadLeader = Name(leader);
+            squad.Comp.Fireteams.SquadLeaderId = GetNetEntity(leader);
+        }
+        else
+        {
+            squad.Comp.Fireteams.SquadLeader = null;
+            squad.Comp.Fireteams.SquadLeaderId = null;
+        }
 
         foreach (var member in squad.Comp.Members)
         {

@@ -13,5 +13,8 @@ public partial record FireteamData
     public string? SquadLeader;
 
     [DataField]
+    public NetEntity? SquadLeaderId;
+
+    [DataField]
     public Dictionary<NetEntity, SquadLeaderTrackerMarine> Unassigned = new();
 }

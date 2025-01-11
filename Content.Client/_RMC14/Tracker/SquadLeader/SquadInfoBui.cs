@@ -102,6 +102,9 @@ public sealed class SquadInfoBui(EntityUid owner, Enum uiKey) : BoundUserInterfa
         unassignedContainer.ActionsLabel.Text = Loc.GetString("rmc-squad-info-actions");
         foreach (var (_, unassigned) in tracker.Fireteams.Unassigned)
         {
+            if (tracker.Fireteams.SquadLeaderId == unassigned.Id)
+                continue;
+
             var row = new SquadInfoRow();
             row.NameLabel.Text = $"[bold]{FormattedMessage.EscapeText(unassigned.Name)}[/bold]";
             unassignedContainer.MembersContainer.AddChild(row);
