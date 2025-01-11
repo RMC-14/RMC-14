@@ -92,7 +92,7 @@
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-      - CMCartridge10x20mmrubber
+      - RMCCartridge10x20mmrubber
     proto: RMCCartridge10x20mmrubber
     capacity: 48
   - type: Sprite
