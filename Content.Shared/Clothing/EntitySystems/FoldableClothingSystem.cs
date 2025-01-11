@@ -68,6 +68,6 @@ public sealed class FoldableClothingSystem : EntitySystem
 
         }
 
-        _clothingSystem.CheckEquipmentForLayerHide(ent.Owner, Transform(uid).ParentUid); // RMC14
+        _clothingSystem.CheckEquipmentForLayerHide(ent.Owner, Transform(ent.Owner).ParentUid); // RMC14
     }
 }
