@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Added miscellaneous items to the XO weapon rack.
-    type: Add
-  id: 708
-  time: '2024-09-19T20:16:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4075
 - author: Vermidia
   changes:
   - message: Dropship fabricator printing is much faster
@@ -5113,5 +5106,12 @@
   id: 1207
   time: '2025-01-11T22:23:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5354
+- author: CyberTropic
+  changes:
+  - message: Added digital clocks that can tell round time!
+    type: Add
+  id: 1208
+  time: '2025-01-11T22:35:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5246
 Name: RMC14
 Order: -1
