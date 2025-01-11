@@ -1,0 +1,7 @@
+- type: gamePreset
+  id: PlanetaryWarfare
+  name: pw-title
+  showInVote: true
+  description: pw-description
+  rules:
+    - PlanetaryWarfareRule
