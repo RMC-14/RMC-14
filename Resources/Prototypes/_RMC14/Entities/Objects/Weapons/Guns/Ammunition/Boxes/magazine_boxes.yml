@@ -519,7 +519,7 @@
 
 - type: entity
   parent: RMCBoxMagazineBase
-  id: RMCBoxMagazinePistolM1984AP
+  id: RMCBoxMagazinePistolM1984APEmpty
   name: magazine box (AP M1984 x 16)
   components:
   - type: Construction
