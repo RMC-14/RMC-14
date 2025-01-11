@@ -508,7 +508,6 @@
 - type: entity
   parent: RMCBoxMagazinePistolM1984Empty
   id: RMCBoxMagazinePistolM1984
-  name: magazine box (M1984 x 16)
   components:
   - type: CMItemSlots
     startingItem: CMMagazinePistolM1984
@@ -537,6 +536,11 @@
       map: [ "lid" ]
     - state: lid_type_ap
       map: [ "lid_stripe" ]
+
+- type: entity
+  parent: RMCBoxMagazinePistolM1984APEmpty
+  id: RMCBoxMagazinePistolM1984AP
+  components:
   - type: CMItemSlots
     startingItem: RMCMagazinePistolM1984AP
     count: 16
