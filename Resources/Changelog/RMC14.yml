@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fix medical HUD showing DNR even if you can still return to your body
-    type: Fix
-  id: 700
-  time: '2024-09-14T21:35:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4027
-- author: DrSmugleaf
-  changes:
-  - message: Made the humanoid bullet hitbox slightly smaller (0.35 > 0.25), making
-      humanoids slightly harder to hit with bullets, specially when one is far behind
-      you. You will still shoot someone if they are too close behind you, to prevent
-      stacking. This change doesn't affect xenonid projectiles.
-    type: Tweak
-  id: 701
-  time: '2024-09-14T21:41:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4018
 - author: DrSmugleaf
   changes:
   - message: Updated the Roadmap.
@@ -4974,5 +4957,20 @@
   id: 1199
   time: '2025-01-11T15:34:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5348
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added pistol belts to the senior officer vendor.
+    type: Tweak
+  id: 1200
+  time: '2025-01-11T21:45:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5355
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Pickup dropped items hotkey now picks up important items (like guns and
+      melee) before other items.
+    type: Tweak
+  id: 1201
+  time: '2025-01-11T21:45:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5353
 Name: RMC14
 Order: -1
