@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Temporarily doubled sniper spec bullet damage from 70 to 140 until aimed
-      shot is implemented.
-    type: Tweak
-  id: 699
-  time: '2024-09-14T21:35:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4049
 - author: Vermidia
   changes:
   - message: Fix medical HUD showing DNR even if you can still return to your body
@@ -4973,5 +4965,14 @@
   id: 1198
   time: '2025-01-11T13:53:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5248
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added scarves and more coifs to loadouts
+    type: Add
+  - message: Fixed tuck in features helmets not updating while using the verb
+    type: Fix
+  id: 1199
+  time: '2025-01-11T15:34:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5348
 Name: RMC14
 Order: -1
