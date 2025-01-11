@@ -31,7 +31,7 @@
 
 - type: entity
   parent: CMMagazineRifleBase
-  id: RMCMagazineRifleM4SPRrubber
+  id: RMCMagazineRifleM4SPRRubber
   name: "M4SPR rubber magazine (10x24mm)"
   description: "A magazine of less-lethal rubber 10x24mm rounds for use in the M4SPR battle rifle."
   components:
