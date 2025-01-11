@@ -282,7 +282,7 @@
     access: [["CMAccessBrig"]]
 
 - type: vendingMachineInventory
-  id: CMVendorRiot
+  id: RMCVendorRiot
   startingInventory: # TODO RMC14
     Zipties: 40
     RMCGrenadeFlashBang: 20
