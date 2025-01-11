@@ -63,12 +63,14 @@ public sealed class SquadSystem : EntitySystem
     private EntityQuery<SquadArmorWearerComponent> _squadArmorWearerQuery;
     private EntityQuery<SquadMemberComponent> _squadMemberQuery;
     private EntityQuery<SquadTeamComponent> _squadTeamQuery;
+    private EntityQuery<RMCMapToSquadComponent> _mapToSquadQuery;
 
     public override void Initialize()
     {
         _squadArmorWearerQuery = GetEntityQuery<SquadArmorWearerComponent>();
         _squadMemberQuery = GetEntityQuery<SquadMemberComponent>();
         _squadTeamQuery = GetEntityQuery<SquadTeamComponent>();
+        _mapToSquadQuery = GetEntityQuery<RMCMapToSquadComponent>();
 
         SubscribeLocalEvent<SquadArmorComponent, GetEquipmentVisualsEvent>(OnSquadArmorGetVisuals, after: [typeof(ClothingSystem)]);
 
@@ -200,6 +202,7 @@ public sealed class SquadSystem : EntitySystem
     private void SearchForMappedItems(Entity<SquadMemberComponent> ent, EntityUid squad)
     {
         var user = ent.Owner;
+        var storageList = new Dictionary<EntityUid, EntityUid>();
 
         if (_inventory.TryGetContainerSlotEnumerator(ent.Owner, out var slots, SlotFlags.All))
         {
@@ -209,7 +212,7 @@ public sealed class SquadSystem : EntitySystem
                 {
                     var slotEntity = slot.ContainedEntity.Value;
 
-                    if (TryComp<RMCMapToSquadComponent>(slotEntity, out var mapToSquad))
+                    if (_mapToSquadQuery.TryComp(slotEntity, out var mapToSquad))
                     {
                         MapToSquad((slotEntity, mapToSquad), user, squad, null);
                     }
@@ -217,14 +220,25 @@ public sealed class SquadSystem : EntitySystem
                     {
                         foreach (var contained in storage.Container.ContainedEntities)
                         {
-                            if (!TryComp<RMCMapToSquadComponent>(contained, out var mapToSquadStorage))
+                            if (!_mapToSquadQuery.HasComp(contained))
                                 continue;
 
-                            MapToSquad((contained, mapToSquadStorage), user, squad, slotEntity);
+                            storageList.Add(slotEntity, contained);
                         }
                     }
                 }
             }
+        }
+
+        foreach (var entry in storageList)
+        {
+            var storage = entry.Key;
+            var item = entry.Value;
+
+            if (!_mapToSquadQuery.TryComp(item, out var map))
+                continue;
+
+            MapToSquad((item, map), user, squad, storage);
         }
     }
 
