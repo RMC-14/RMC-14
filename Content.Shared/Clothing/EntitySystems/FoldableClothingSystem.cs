@@ -67,5 +67,7 @@ public sealed class FoldableClothingSystem : EntitySystem
                 hideLayerComp.Slots = ent.Comp.UnfoldedHideLayers;
 
         }
+
+        _clothingSystem.CheckEquipmentForLayerHide(ent.Owner, Transform(ent.Owner).ParentUid); // RMC14
     }
 }

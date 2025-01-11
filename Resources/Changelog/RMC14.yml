@@ -1,27 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Made the bonus Requisitions starting money added on top of the regular
-      starting cash properly scale with player count instead of being flat.
-    type: Tweak
-  - message: Getting attacked will now kick you out of the Overwatch console view,
-      making you immediately realize your peril.
-    type: Tweak
-  - message: Hopefully fix the bug that sometimes causes your game to die at the sight
-      of a reactive thermal tarp.
-    type: Fix
-  id: 697
-  time: '2024-09-14T21:26:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4047
-- author: Vermidia
-  changes:
-  - message: Added extra Signal Flare packs to the FTL vendor
-    type: Add
-  id: 698
-  time: '2024-09-14T21:34:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4048
-- author: DrSmugleaf
-  changes:
   - message: Temporarily doubled sniper spec bullet damage from 70 to 140 until aimed
       shot is implemented.
     type: Tweak
@@ -4977,5 +4956,21 @@
   id: 1196
   time: '2025-01-11T08:49:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5081
+- author: Whisper
+  changes:
+  - message: Server rules have been updated. Please check the changelog in the guidebook.
+    type: Tweak
+  id: 1197
+  time: '2025-01-11T13:39:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5347
+- author: blueDev2
+  changes:
+  - message: UGL launched grenades timer starts on landing.
+    type: Add
+  - message: Timer is extended to 1.5 seconds.
+    type: Add
+  id: 1198
+  time: '2025-01-11T13:53:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5248
 Name: RMC14
 Order: -1
