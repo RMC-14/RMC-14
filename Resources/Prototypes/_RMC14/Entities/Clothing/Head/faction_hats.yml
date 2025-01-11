@@ -131,7 +131,7 @@
   description: It's a fancy hat for a not-so-fancy military supply clerk.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/quartermaster_cap.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/quartermaster_cap.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/quartermaster_cap.rsi
 
@@ -142,6 +142,6 @@
   description: A beret with the sergeant insignia emblazoned on it. It symbolizes hard work and shady business.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/beret_quartermaster.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_quartermaster.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_quartermaster.rsi
