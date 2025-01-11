@@ -17,5 +17,5 @@
     - [ CMWeaponPistolM1984, CMMagazinePistolM1984 ]
     # TODO RMC14 S&W .38 model 37 revolver
     primaryWeapons:
-    - [ RMCBeltMarineAR10, WeaponRifleAR10 ]
+    - [ CMBeltMarineAR10, WeaponRifleAR10 ]
     primaryWeaponChance: 0.6

@@ -273,3 +273,4 @@
       components:
       - Xeno
   - type: RMCPickupDroppedItems
+  - type: CommendationReceiver

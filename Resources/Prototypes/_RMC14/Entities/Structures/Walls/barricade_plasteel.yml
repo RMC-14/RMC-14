@@ -62,13 +62,13 @@
     interactSuccessSound:
       collection: FenceRattle
   - type: RMCRepairable
-    heal: -200
+    heal: 200
     skill: RMCSkillConstruction
     delay: 10
     fuelUsed: 2
   - type: NailgunRepairable
     # cm13 max_health%: 0.45
-    repairPlasteel: -400
+    repairPlasteel: 400
   - type: Destructible
     thresholds:
     - trigger:
@@ -187,13 +187,13 @@
     - map: [ "acided" ]
     drawdepth: WallTops
   - type: RMCRepairable
-    heal: -200
+    heal: 200
     skill: RMCSkillConstruction
     delay: 10
     fuelUsed: 2
   - type: NailgunRepairable
     # cm13 max_health%: 0.3
-    repairPlasteel: -240
+    repairPlasteel: 240
   - type: Destructible
     thresholds:
     - trigger:

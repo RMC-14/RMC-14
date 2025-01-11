@@ -142,7 +142,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (!TryComp<MeleeWeaponComponent>(uid, out var melee))
             return;
 
-        if (melee.NextAttack > component.NextFire)
+        if (component.MeleeCooldownOnShoot && melee.NextAttack > component.NextFire)
         {
             component.NextFire = melee.NextAttack;
             Dirty(uid, component);

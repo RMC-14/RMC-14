@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 using Content.Client.Administration.Systems;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Bwoink;
@@ -16,7 +17,9 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Client._RMC14.Mentor;
 
@@ -27,39 +30,66 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [UISystemDependency] private readonly AudioSystem? _audio = default!;
 
     private readonly Dictionary<NetUserId, List<MentorMessage>> _messages = new();
     private readonly Dictionary<NetUserId, string> _destinationNames = new();
+    private readonly Dictionary<NetUserId, (List<string> People, CancellationTokenSource Cancel)> _peopleTyping = new();
+    private readonly Dictionary<NetUserId, List<string>> _claims = new();
 
-    private bool _isMentor;
+    public bool IsMentor { get; private set; }
     private bool _canReMentor;
     private StaffHelpWindow? _staffHelpWindow;
     private MentorHelpWindow? _mentorHelpWindow;
     private MentorWindow? _mentorWindow;
     private string? _mHelpSound;
     private bool _unread;
+    private (TimeSpan Timestamp, bool Typing) _lastTypingUpdateSent;
+
+    public event Action? MentorStatusUpdated;
 
     public override void Initialize()
     {
         _net.RegisterNetMessage<MentorStatusMsg>(OnMentorStatus);
         _net.RegisterNetMessage<MentorMessagesReceivedMsg>(OnMentorHelpReceived);
         _net.RegisterNetMessage<MentorSendMessageMsg>();
-        _net.RegisterNetMessage<MentorHelpMsg>();
+        _net.RegisterNetMessage<MentorHelpClientMsg>();
         _net.RegisterNetMessage<DeMentorMsg>();
         _net.RegisterNetMessage<ReMentorMsg>();
+        _net.RegisterNetMessage<MentorHelpClientTypingUpdatedMsg>();
+        _net.RegisterNetMessage<MentorHelpTypingUpdatedMsg>(OnMentorHelpTypingUpdated);
+        _net.RegisterNetMessage<MentorClientClaimMsg>();
+        _net.RegisterNetMessage<MentorClientUnclaimMsg>();
+        _net.RegisterNetMessage<MentorClaimMsg>(OnMentorClaim);
+        _net.RegisterNetMessage<MentorUnclaimMsg>(OnMentorUnclaim);
+
         _config.OnValueChanged(RMCCVars.RMCMentorHelpSound, v => _mHelpSound = v, true);
     }
 
     private void OnMentorStatus(MentorStatusMsg msg)
     {
-        _isMentor = msg.IsMentor;
+        IsMentor = msg.IsMentor;
         _canReMentor = msg.CanReMentor;
 
-        if (_isMentor)
-            _mentorHelpWindow?.Close();
+        if (IsMentor)
+        {
+            if (_mentorHelpWindow is { IsOpen: true })
+            {
+                _mentorHelpWindow.Close();
+                OpenMentorOrHelpWindow();
+            }
+        }
         else
-            _mentorWindow?.Close();
+        {
+            if (_mentorWindow is { IsOpen: true })
+            {
+                _mentorWindow.Close();
+                OpenMentorOrHelpWindow();
+            }
+        }
+
+        MentorStatusUpdated?.Invoke();
     }
 
     private void OnMentorHelpReceived(MentorMessagesReceivedMsg msg)
@@ -67,10 +97,10 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         var other = false;
         foreach (var message in msg.Messages)
         {
-            if (message.Author != _player.LocalUser)
+            if (message.Author != null && message.Author != _player.LocalUser)
                 other = true;
 
-            if (_isMentor &&
+            if (IsMentor &&
                 _mentorWindow is not { IsOpen: true })
             {
                 _unread = true;
@@ -105,14 +135,80 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
             _audio?.PlayGlobal(_mHelpSound, Filter.Local(), false);
             _clyde.RequestWindowAttention();
 
-            if (!_isMentor)
+            if (!IsMentor)
             {
-                if (OpenWindow(ref _mentorHelpWindow, CreateMentorHelpWindow, () => _mentorHelpWindow = null))
+                if (OpenWindow(ref _mentorHelpWindow,
+                        CreateMentorHelpWindow,
+                        () => _mentorHelpWindow = null,
+                        window => window.Chat,
+                        _ => _player.LocalUser))
                 {
                     _mentorHelpWindow.OpenCentered();
                 }
             }
         }
+    }
+
+    private void OnMentorHelpTypingUpdated(MentorHelpTypingUpdatedMsg message)
+    {
+        var id = new NetUserId(message.Destination);
+        var author = message.Author;
+        if (!message.Typing)
+        {
+            if (_peopleTyping.TryGetValue(id, out var oldTyping))
+                oldTyping.People.Remove(author);
+
+            UpdateTypingIndicator();
+            return;
+        }
+
+        if (!_peopleTyping.TryGetValue(id, out var typing))
+        {
+            typing = (new List<string>(), new CancellationTokenSource());
+            _peopleTyping[id] = typing;
+        }
+
+        if (typing.People.Contains(author))
+            return;
+
+        typing.People.Add(author);
+        typing.Cancel.Cancel();
+        typing.Cancel = new CancellationTokenSource();
+        Timer.Spawn(TimeSpan.FromSeconds(10),
+            () =>
+            {
+                if (_peopleTyping.TryGetValue(id, out typing))
+                    typing.People.Remove(author);
+
+                UpdateTypingIndicator();
+            },
+            typing.Cancel.Token);
+
+        UpdateTypingIndicator();
+    }
+
+    private void OnMentorClaim(MentorClaimMsg message)
+    {
+        var author = message.Author;
+        var destination = new NetUserId(message.Destination);
+        var claims = _claims.GetOrNew(destination);
+        if (!claims.Contains(author))
+            claims.Add(author);
+
+        UpdateClaimIndicator(destination);
+    }
+
+    private void OnMentorUnclaim(MentorUnclaimMsg message)
+    {
+        var destination = new NetUserId(message.Destination);
+        if (!_claims.TryGetValue(destination, out var claims))
+            return;
+
+        claims.Remove(message.Author);
+        if (claims.Count == 0)
+            _claims.Remove(destination);
+
+        UpdateClaimIndicator(destination);
     }
 
     public void OnSystemLoaded(BwoinkSystem system)
@@ -146,7 +242,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         UIManager.ClickSound();
 
         if (_unread)
-            _staffHelpWindow.MentorHelpButton.StyleClasses.Add(StyleNano.StyleClassButtonColorRed);
+            _staffHelpWindow.MentorHelpButton.AddStyleClass(StyleNano.StyleClassButtonColorRed);
 
         _staffHelpWindow.AdminHelpButton.OnPressed += _ =>
         {
@@ -157,30 +253,42 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
 
         _staffHelpWindow.MentorHelpButton.OnPressed += _ =>
         {
-            SetAHelpButtonPressed(false);
-            _unread = false;
-            if (_isMentor)
-            {
-                if (OpenWindow(ref _mentorWindow, CreateMentorWindow, () => _mentorWindow = null))
-                {
-                    foreach (var destination in _messages.Keys)
-                    {
-                        MentorAddPlayerButton(destination);
-                    }
-
-                    _mentorWindow.OpenCentered();
-                }
-            }
-            else
-            {
-                if (OpenWindow(ref _mentorHelpWindow, CreateMentorHelpWindow, () => _mentorHelpWindow = null))
-                {
-                    _mentorHelpWindow.OpenCentered();
-                }
-            }
-
+            OpenMentorOrHelpWindow();
             _staffHelpWindow.Close();
         };
+    }
+
+    private void OpenMentorOrHelpWindow()
+    {
+        SetAHelpButtonPressed(false);
+        _unread = false;
+        if (IsMentor)
+        {
+            if (OpenWindow(ref _mentorWindow,
+                    CreateMentorWindow,
+                    () => _mentorWindow = null,
+                    window => window.Chat,
+                    window => window.SelectedPlayer))
+            {
+                foreach (var destination in _messages.Keys)
+                {
+                    MentorAddPlayerButton(destination);
+                }
+
+                _mentorWindow.OpenCentered();
+            }
+        }
+        else
+        {
+            if (OpenWindow(ref _mentorHelpWindow,
+                    CreateMentorHelpWindow,
+                    () => _mentorHelpWindow = null,
+                    window => window.Chat,
+                    _ => _player.LocalUser))
+            {
+                _mentorHelpWindow.OpenCentered();
+            }
+        }
     }
 
     private MentorHelpWindow CreateMentorHelpWindow()
@@ -194,7 +302,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
             if (string.IsNullOrWhiteSpace(args.Text))
                 return;
 
-            var msg = new MentorHelpMsg() { Message = args.Text };
+            var msg = new MentorHelpClientMsg() { Message = args.Text };
             _net.ClientSendMessage(msg);
         };
 
@@ -219,6 +327,22 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
             var msg = new MentorSendMessageMsg { Message = args.Text, To = window.SelectedPlayer };
             _net.ClientSendMessage(msg);
             window.Chat.Clear();
+        };
+        window.ClaimButton.OnPressed += _ =>
+        {
+            NetMessage message;
+            if (_player.LocalSession is { } session &&
+                _claims.TryGetValue(window.SelectedPlayer, out var claims) &&
+                claims.Contains(session.Name))
+            {
+                message = new MentorClientUnclaimMsg { Destination = window.SelectedPlayer };
+            }
+            else
+            {
+                message = new MentorClientClaimMsg { Destination = window.SelectedPlayer };
+            }
+
+            _net.ClientSendMessage(message);
         };
 
         return window;
@@ -252,6 +376,8 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
             _mentorWindow.SelectedPlayer = player;
             _mentorWindow.Messages.Clear();
             _mentorWindow.Chat.Editable = true;
+            UpdateClaimIndicator(player);
+            UpdateTypingIndicator();
             if (!_messages.TryGetValue(player, out var authorMessages))
                 return;
 
@@ -267,23 +393,67 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         _mentorWindow.PlayerDict[player] = playerButton;
     }
 
-    private bool OpenWindow<T>([NotNullWhen(true)] ref T? window, Func<T> create, Action onClose) where T : DefaultWindow
+    private bool OpenWindow<T>(
+        [NotNullWhen(true)] ref T? window,
+        Func<T> create,
+        Action onClose,
+        Func<T, LineEdit> edit,
+        Func<T, NetUserId?> selectedPlayer
+    ) where T : DefaultWindow
     {
         if (window != null)
             return true;
 
         window = create();
         window.OnClose += onClose;
+
+        var windowCopy = window;
+        edit(window).OnTextChanged += args =>
+        {
+            var destination = selectedPlayer(windowCopy);
+            if (destination == null)
+                return;
+
+            var typing = args.Text.Length > 0;
+            if (_lastTypingUpdateSent.Typing == typing &&
+                _lastTypingUpdateSent.Timestamp + TimeSpan.FromSeconds(1) > _timing.RealTime)
+            {
+                return;
+            }
+
+            _lastTypingUpdateSent = (_timing.RealTime, typing);
+            _net.ClientSendMessage(new MentorHelpClientTypingUpdatedMsg
+            {
+                Destination = destination.Value,
+                Typing = typing,
+            });
+        };
+
         return true;
     }
 
     private FormattedMessage CreateMessageLabel(MentorMessage message)
     {
+        string text;
         var author = message.AuthorName;
-        if (message.IsMentor)
-            author = $"[bold][color=red]{author}[/color][/bold]";
+        if (message.Author == null)
+        {
+            text = $"[italic]{FormattedMessage.EscapeText(message.Text)}[/italic]";
+        }
+        else if (message.Author.Value != message.Destination)
+        {
+            if (message.IsAdmin)
+                author = $"[bold][color=red]{author}[/color][/bold]";
+            else if (message.IsMentor)
+                author = $"[bold][color=orange]{author}[/color][/bold]";
 
-        var text = $"{message.Time:HH:mm} {author}: {FormattedMessage.EscapeText(message.Text)}";
+            text = $"{message.Time:HH:mm} {author}: {FormattedMessage.EscapeText(message.Text)}";
+        }
+        else
+        {
+            text = $"{message.Time:HH:mm} {author}: {FormattedMessage.EscapeText(message.Text)}";
+        }
+
         return FormattedMessage.FromMarkupPermissive(text);
     }
 
@@ -294,5 +464,60 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
 
         if (_aHelp.GameAHelpButton != null)
             _aHelp.GameAHelpButton.Pressed = pressed;
+    }
+
+    private void UpdateTypingIndicator()
+    {
+        if (_mentorWindow is not { IsOpen: true })
+            return;
+
+        var players = string.Empty;
+        var count = 0;
+        if (_peopleTyping.TryGetValue(_mentorWindow.SelectedPlayer, out var typing))
+        {
+            players = string.Join(", ", typing.People);
+            count = typing.People.Count;
+        }
+
+        var msg = new FormattedMessage();
+        msg.PushColor(Color.LightGray);
+        var text = count == 0
+            ? string.Empty
+            : Loc.GetString("bwoink-system-typing-indicator",
+                ("players", players),
+                ("count", count));
+
+        msg.AddText(text);
+        msg.Pop();
+
+        _mentorWindow.TypingIndicator.SetMessage(msg);
+    }
+
+    private void UpdateClaimIndicator(NetUserId destination)
+    {
+        if (_mentorWindow is not { IsOpen: true })
+            return;
+
+        _mentorWindow.ClaimButton.Visible = _mentorWindow.SelectedPlayer != default;
+        _mentorWindow.ClaimButton.Text = "Claim";
+
+        _claims.TryGetValue(destination, out var claims);
+        if (claims != null &&
+            _player.LocalSession != null &&
+            claims.Contains(_player.LocalSession.Name))
+        {
+            _mentorWindow.ClaimButton.Text = "Unclaim";
+        }
+
+        if (_mentorWindow.SelectedPlayer != destination)
+            return;
+
+        if (claims == null || claims.Count == 0)
+        {
+            _mentorWindow.ClaimIndicator.Text = string.Empty;
+            return;
+        }
+
+        _mentorWindow.ClaimIndicator.Text = $"Claimed by {string.Join(", ", claims)}";
     }
 }

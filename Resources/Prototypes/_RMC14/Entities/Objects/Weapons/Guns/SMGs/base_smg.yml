@@ -24,8 +24,10 @@
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 4
   - type: WieldableSpeedModifiers
-    baseWalk: 0.92
-    baseSprint: 0.864
+    base: 0.725
+    light: 1
+    medium: 1
+    heavy: 1
   - type: WieldDelay
     baseDelay: 0.2
   - type: RMCNameItemOnVend
@@ -38,6 +40,7 @@
   - type: GunDualWielding
     weaponGroup: Submachinegun
   - type: GunPointBlank
+  - type: GunGroupPenalty
 
 - type: entity
   parent: BaseCartridgeCaselessRifle

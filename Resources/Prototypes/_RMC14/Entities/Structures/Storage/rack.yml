@@ -50,5 +50,8 @@
   - type: Climbable
   - type: StaticPrice
     price: 22
+  - type: Construction
+    graph: RMCRack
+    node: rack
   - type: DamageMultiplierFlags
     flags: Breaching

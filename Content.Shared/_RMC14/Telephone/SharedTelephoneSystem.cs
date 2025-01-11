@@ -474,22 +474,19 @@ public abstract class SharedTelephoneSystem : EntitySystem
             if (phone.Idle)
                 continue;
 
-            phone.Idle = true;
-            Dirty(uid, phone);
-
             if (dialing.Other is not { } other)
                 continue;
 
-            if (!HasComp<RotaryPhoneDialingComponent>(other) ||
-                !HasComp<RotaryPhoneReceivingComponent>(other))
-            {
+            if (!HasComp<RotaryPhoneReceivingComponent>(other))
                 continue;
-            }
 
             if (!HasPickedUp(other) &&
                 time > phone.LastCall + phone.DialingIdleDelay &&
                 phone.DialingIdleSound is { } sound)
             {
+                phone.Idle = true;
+                Dirty(uid, phone);
+
                 _ambientSound.SetSound(uid, sound);
                 _ambientSound.SetVolume(uid, sound.Params.Volume);
             }

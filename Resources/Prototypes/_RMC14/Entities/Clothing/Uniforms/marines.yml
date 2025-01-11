@@ -9,6 +9,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/standard/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Marine/standard/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Marine/standard/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Marine/standard/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Marine/standard/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Marine/standard/urban.rsi
 
 - type: entity
   parent: RMCMarineUniformBase
@@ -28,6 +35,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/urban.rsi
 
 # Hospital Corpsman
 - type: entity
@@ -39,6 +53,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/medic/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Marine/medic/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Marine/medic/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Marine/medic/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Marine/medic/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Marine/medic/urban.rsi
 
 # RTO / FTL
 - type: entity
@@ -50,6 +71,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/rto/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Marine/rto/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Marine/rto/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Marine/rto/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Marine/rto/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Marine/rto/urban.rsi
 
 # Sniper
 - type: entity
@@ -146,6 +174,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/urban.rsi
 
 - type: entity
   parent: CMJumpsuitCO
@@ -215,6 +250,13 @@
     foldVerbText: rmc-sleeves-verb-fold
   - type: FoldableClothing
     foldedEquippedPrefix: sleeves
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/boiler/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/boiler/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/boiler/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/boiler/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/boiler/urban.rsi
 
 # IO
 - type: entity

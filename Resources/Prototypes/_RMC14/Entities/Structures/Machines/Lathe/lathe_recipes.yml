@@ -168,3 +168,17 @@
   completetime: 4
   materials:
     CMSteel: 400 # 15000
+
+- type: latheRecipe
+  id: RMCRackParts
+  result: RMCRackParts
+  completetime: 4
+  materials:
+    CMSteel: 125 # 2500(4687 metal)
+
+- type: latheRecipe
+  id: RMCKitchenKnife
+  result: RMCKitchenKnife
+  completetime: 4
+  materials:
+    CMSteel: 400 # 15000

@@ -1,15 +1,20 @@
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Item;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ItemCamouflageComponent : Component
 {
-    //you have to add a prototype for each camo type.
-    [DataField(required: true), AutoNetworkedField]
-    public Dictionary<CamouflageType, EntProtoId> CamouflageVariations = new();
+    [DataField, AutoNetworkedField]
+    public Dictionary<CamouflageType, ResPath>? CamouflageVariations;
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<CamouflageType, string>? States;
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<string, Dictionary<CamouflageType, string>>? Layers;
 }
 
 [Serializable, NetSerializable]

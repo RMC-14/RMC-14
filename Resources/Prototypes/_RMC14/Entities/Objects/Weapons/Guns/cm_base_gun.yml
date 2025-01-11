@@ -20,7 +20,6 @@
   - type: WieldDelay
   - type: AltFireMelee
   - type: MeleeWeapon
-    resetOnHandSelected: false
     attackRate: 1
     damage:
       types:
@@ -38,6 +37,7 @@
     resetOnHandSelected: false
   - type: RMCWeaponAccuracy
   - type: GunSkilledAccuracy
+  - type: Appearance
 
 - type: entity
   parent: BaseBullet

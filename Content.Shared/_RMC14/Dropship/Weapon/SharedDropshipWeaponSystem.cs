@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Medical.MedevacStretcher;
+using Content.Shared._RMC14.PowerLoader;
 using Content.Shared._RMC14.Rangefinder;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Coordinates.Helpers;
@@ -57,6 +58,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly PowerLoaderSystem _powerloader = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     private static readonly EntProtoId DropshipTargetMarker = "RMCLaserDropshipTarget";
 
@@ -85,6 +88,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<DropshipTargetComponent, EntityTerminatingEvent>(OnDropshipTargetRemove);
 
         SubscribeLocalEvent<DropshipAmmoComponent, ExaminedEvent>(OnAmmoExamined);
+        SubscribeLocalEvent<DropshipAmmoComponent, PowerLoaderInteractEvent>(OnAmmoInteract);
 
         Subs.BuiEvents<DropshipTerminalWeaponsComponent>(DropshipTerminalWeaponsUi.Key,
             subs =>
@@ -259,6 +263,57 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         }
     }
 
+    private void OnAmmoInteract(Entity<DropshipAmmoComponent> ent, ref PowerLoaderInteractEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!TryComp<DropshipAmmoComponent>(args.Target, out var otherAmmo))
+            return;
+
+        args.Handled = true;
+
+        if (ent.Comp.AmmoType != otherAmmo.AmmoType)
+        {
+            foreach (var buckled in args.Buckled)
+            {
+                _popup.PopupClient(Loc.GetString("rmc-power-loader-wrong-ammo"), args.Target, buckled, PopupType.SmallCaution);
+            }
+            return;
+        }
+
+        if(otherAmmo.Rounds == otherAmmo.MaxRounds)
+        {
+            foreach (var buckled in args.Buckled)
+            {
+                _popup.PopupClient(Loc.GetString("rmc-power-loader-full-ammo", ("ammo", args.Target)), args.Target, buckled, PopupType.SmallCaution);
+            }
+            return;
+        }
+
+        var roundsToFill = Math.Min(ent.Comp.Rounds, otherAmmo.MaxRounds - otherAmmo.Rounds);
+
+        ent.Comp.Rounds -= roundsToFill;
+        otherAmmo.Rounds += roundsToFill;
+
+        _appearance.SetData(ent, DropshipAmmoVisuals.Fill, ent.Comp.Rounds);
+        _appearance.SetData(args.Target, DropshipAmmoVisuals.Fill, otherAmmo.Rounds);
+
+        Dirty(ent);
+        Dirty(args.Target, otherAmmo);
+
+        if (ent.Comp.Rounds <= 0)
+        {
+            QueueDel(args.Used);
+            _container.TryRemoveFromContainer(args.Used, true);
+            _powerloader.TrySyncHands(args.PowerLoader);
+        }
+
+        foreach (var buckled in args.Buckled)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-power-loader-transfer-ammo", ("rounds", roundsToFill), ("ammo", args.Target)), args.Target, buckled);
+        }
+    }
     private void OnWeaponsChangeScreenMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsChangeScreenMsg args)
     {
         if (!Enum.IsDefined(args.Screen))
@@ -423,6 +478,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             return;
 
         ammo.Comp.Rounds -= ammo.Comp.RoundsPerShot;
+        _appearance.SetData(ammo, DropshipAmmoVisuals.Fill, ammo.Comp.Rounds);
         Dirty(ammo);
 
         _audio.PlayPvs(ammo.Comp.SoundCockpit, weapon.Value);

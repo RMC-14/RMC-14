@@ -201,9 +201,8 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
-  - type: WieldSlowdownCompensation
-    walk: 0.08
-    sprint: 0.136
+  - type: RMCArmorSpeedTier
+    speedTier: medium
   - type: RMCNameItemOnVend
     item: Armor
   - type: CMHardArmor

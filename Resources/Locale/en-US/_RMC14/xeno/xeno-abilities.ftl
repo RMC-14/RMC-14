@@ -2,8 +2,12 @@
 cm-xeno-not-enough-plasma = You don't have enough plasma!
 
 # Energy
-rmc-xeno-not-enough-energy = Your health reserves are insufficient!
-rmc-xeno-energy-increase-user = You feel your internal health reserves increase!
+rmc-xeno-not-enough-energy = Your energy reserves are insufficient!
+rmc-xeno-energy-increase-user = You feel your internal energy reserves increase!
+
+# Internal Health
+rmc-xeno-not-enough-internal-health = Your health reserves are insufficient!
+rmc-xeno-internal-health-increase-user = You feel your internal health reserves increase!
 
 # Acid reserves
 rmc-xeno-not-enough-acid = Your don't have enough acid built up!
@@ -41,13 +45,16 @@ rmc-xeno-evolution-start-self = We begin to twist and contort.
 rmc-xeno-evolution-start-others = {$xeno} begins to twist and contort.
 
 # Fortify
-cm-xeno-fortify-cant-headbutt = You can't headbutt while fortifying!
-cm-xeno-fortify-cant-rest = You can't rest while fortifying!
-cm-xeno-fortify-cant-tail-sweep = You can't tail sweep while fortifying!
-cm-xeno-fortify-cant-toggle-crest = You can't lower your crest while fortifying!
+cm-xeno-fortify-cant-headbutt = We can't headbutt while fortifying!
+cm-xeno-fortify-cant-rest = We can't rest while fortifying!
+cm-xeno-fortify-cant-tail-sweep = We can't tail sweep while fortifying!
+cm-xeno-fortify-cant-toggle-crest = We can't lower our crest while fortifying!
+
+# Headbutt
+rmc-xeno-headbutt-too-far = We can't headbutt from this distance with our crest lowered!
 
 # Leap
-cm-xeno-leap-cancelled = You cancel your leap!
+cm-xeno-leap-cancelled = We cancel our leap!
 
 # Plant weeds
 cm-xeno-weeds-source-already-here = There is already a resin node here!
@@ -215,9 +222,41 @@ rmc-xeno-for-the-hive-container = It is too cramped in here to activate this!
 rmc-xeno-for-the-hive-cancel = We remove all our explosive acid before it combusted.
 rmc-xeno-for-the-hive-activate = Our stomach starts turning and twisting, getting ready to compress the built up acid.
 rmc-xeno-for-the-hive-announce = ;FOR THE HIVE!!!
+
 rmc-xeno-for-the-hive-respawn-fail = You couldn't reincarnate!
 rmc-xeno-for-the-hive-respawn-corpse-self = The hive has no core! We manage to emerge from our old husk as a larva!
 rmc-xeno-for-the-hive-respawn-corpse-others = A larva suddenly emerges from a dead husk!
+
+# Generic Respawn
+rmc-xeno-respawn-fail = You couldn't reincarnate!
+rmc-xeno-respawn-corpse-self = The hive has no core! We manage to emerge from our old husk as a larva!
+rmc-xeno-respawn-corpse-others = A larva suddenly emerges from a dead husk!
+
+# Apply Salve
+rmc-xeno-apply-salve-target-not-xeno-failure = The target cannot be healed!
+rmc-xeno-apply-salve-target-self-failure = We can't heal ourself with our own resin salve!
+rmc-xeno-apply-salve-target-hostile-failure = {$target_xeno} is hostile to our hive!
+rmc-xeno-apply-salve-target-too-far-away-failure = We can't apply our resin salve from here!
+rmc-xeno-apply-salve-target-dead-failure = {$target_xeno} is dead!
+rmc-xeno-apply-salve-target-on-fire-failure = Extinguish {$target_xeno} first or the flames will burn our resin salve away!
+rmc-xeno-apply-salve-target-full-health-failure = {$target_xeno} is already at full health!
+
+rmc-xeno-apply-salve-self = We regurgitate our vital fluids and some plasma to create a regenerative resin salve and apply it to {$target_xeno}'s wounds. We feel weakened...
+rmc-xeno-apply-salve-target = {$healer_xeno} covers our wounds with a regenerative resin salve. We feel reinvigorated!
+
+# Sacrafical Heal
+rmc-xeno-sacrifice-heal-will-respawn = We have gained enough energy! We will be reborn when we sacrifice ourself!
+
+rmc-xeno-sacrifice-heal-target-not-xeno-failure = The target cannot be healed!
+rmc-xeno-sacrifice-heal-target-self-failure = We can't heal ourself!
+rmc-xeno-sacrifice-heal-target-hostile-failure = {$target_xeno} is hostile to our hive!
+rmc-xeno-sacrifice-heal-target-low-level-failure = It would be a waste...
+rmc-xeno-sacrifice-heal-target-too-far-away-failure = We need to be closer to {$target_xeno}.
+rmc-xeno-sacrifice-heal-target-dead-failure = {$target_xeno} is dead!
+rmc-xeno-sacrifice-heal-target-full-health-failure = {$target_xeno} is already at full health!
+
+rmc-xeno-sacrifice-heal-target-announcement = {$healer_xeno} sacrifices itself to heal {$target_xeno}!
+rmc-xeno-sacrifice-heal-target-enviorment = {$healer_xeno} explodes in a deluge of regenerative resin salve, covering {$target_xeno} in it!
 
 # Dodge
 rmc-xeno-dodge-self = We can now weave through our enemies!
@@ -231,4 +270,11 @@ rmc-xeno-shield-vanguard-break = We feel our defensive shell shatter!
 # Toggle Cleave
 rmc-xeno-toggle-cleave-root = We will now root our enemies with our cleave.
 rmc-xeno-toggle-cleave-fling = We will now throw our enemies with our cleave.
+
+# Soak
+rmc-xeno-soak-self = We begin to tank incoming damage!
+rmc-xeno-soak-others = {CAPITALIZE(THE($xeno))} begins to tank incoming damage!
+rmc-xeno-soak-end-fail = We stop taking incoming damage.
+rmc-xeno-soak-end-self = We feel enraged after taking in oncoming damage! Our tail slam's cooldown is reset and we heal!
+rmc-xeno-soak-end-others =  {CAPITALIZE(THE($xeno))} gets enraged after being damaged enough!
 

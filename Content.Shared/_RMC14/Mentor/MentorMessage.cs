@@ -7,9 +7,10 @@ namespace Content.Shared._RMC14.Mentor;
 public readonly record struct MentorMessage(
     NetUserId Destination,
     string DestinationName,
-    NetUserId Author,
-    string AuthorName,
+    NetUserId? Author,
+    string? AuthorName,
     string Text,
     DateTime Time,
-    bool IsMentor
+    bool IsMentor,
+    bool IsAdmin
 );

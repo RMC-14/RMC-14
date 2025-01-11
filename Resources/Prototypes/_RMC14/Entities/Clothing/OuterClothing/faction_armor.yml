@@ -13,6 +13,8 @@
     armor: 30 # CLOTHING_ARMOR_HIGH
     bio: 15 # CLOTHING_ARMOR_MEDIUMLOW
     explosionArmor: 40 # CLOTHING_ARMOR_VERYHIGH
+  - type: RMCArmorSpeedTier
+    speedTier: light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
     walkModifier: 0.725
     sprintModifier: 0.725
@@ -23,7 +25,7 @@
 
 # Iron Bear
 - type: entity
-  parent: RMCArmorM4PMC
+  parent: CMArmorM4PMC
   id: CMArmorIronBear
   name: H1 Iron Bears vest
   description: A protective vest worn by Iron Bears mercenaries.
@@ -40,7 +42,7 @@
 
 # Dutch's Dozen
 - type: entity
-  parent: RMCArmorM4PMC
+  parent: CMArmorM4PMC
   id: CMArmorDutchVest
   name: D2 armored vest
   description: A protective vest worn by some seriously experienced mercs.
@@ -64,7 +66,7 @@
 # TODO: remove shoulder light from this
 # TODO: implement storage whitelist for this
 - type: entity
-  parent: RMCArmorM4PMC
+  parent: CMArmorM4PMC
   id: CMArmorDutchJacket
   name: safari jacket
   description: A tailored hunting jacket, cunningly lined with segmented armor plates. Sometimes the game shoots back.
@@ -75,6 +77,8 @@
     armor: 25
     bio: 20
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
+  - type: RMCArmorSpeedTier
+    speedTier: light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
     walkModifier: 0.725
     sprintModifier: 0.725
@@ -92,6 +96,8 @@
     armor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
     bio: 15
     explosionArmor: 20
+  - type: RMCArmorSpeedTier
+    speedTier: light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
     walkModifier: 0.725
     sprintModifier: 0.725
@@ -118,12 +124,11 @@
   - type: CMArmor
     armor: 18 # CLOTHING_ARMOR_MEDIUM (melee); CLOTHING_ARMOR_MEDIUMLOW (bullets)
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
+  - type: RMCArmorSpeedTier
+    speedTier: light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
     walkModifier: 0.725
     sprintModifier: 0.725
-  - type: WieldSlowdownCompensation
-    walk: 0.12
-    sprint: 0.198
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
@@ -139,6 +144,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/vest.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/vest.rsi
+  - type: RMCArmorSpeedTier
+    speedTier: very light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
     walkModifier: 0.897
     sprintModifier: 0.897
@@ -153,6 +160,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/brace.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/brace.rsi
+  - type: RMCArmorSpeedTier
+    speedTier: very light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
     walkModifier: 0.897
     sprintModifier: 0.897
@@ -167,6 +176,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/hauberk.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/hauberk.rsi
+  - type: RMCArmorSpeedTier
+    speedTier: very light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
     walkModifier: 0.897
     sprintModifier: 0.897
@@ -182,7 +193,7 @@
 # Mercenaries
 # TODO: implement storage whitelist for this
 - type: entity
-  parent: [RMCAllowSuitStorageClothingArmorRoyal, RMCArmorM4PMC]
+  parent: [RMCAllowSuitStorageClothingArmorRoyal, CMArmorM4PMC]
   id: RMCArmorMercenary
   name: mercenary K12 ceramic plated armor
   description: A set of grey, heavy ceramic armor with dark blue highlights. It is the standard uniform of an unknown mercenary group working in the sector.
@@ -193,6 +204,8 @@
     armor: 40 # CLOTHING_ARMOR_VERYHIGH
     bio: 20
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
+  - type: RMCArmorSpeedTier
+    speedTier: light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
     walkModifier: 0.725
     sprintModifier: 0.725
@@ -255,7 +268,7 @@
 
 # Riot armor
 - type: entity
-  parent: RMCArmorM4PMC
+  parent: CMArmorM4PMC
   id: RMCArmorPMCRiot
   name: UN-M1 riot armor
   description: Based on the M3 pattern employed by the UNMC, the UN-M1 body armor is employed by security, riot control and union-busting teams. While robust against melee and bullet attacks, it critically lacks coverage of the legs and arms.
@@ -266,6 +279,8 @@
     armor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
     bio: 20
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
+  - type: RMCArmorSpeedTier
+    speedTier: very light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
     walkModifier: 0.725
     sprintModifier: 0.725
@@ -278,6 +293,8 @@
   components:
   - type: CMArmor
     armor: 0
+  - type: RMCArmorSpeedTier
+    speedTier: super light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
     walkModifier: 0.949
     sprintModifier: 0.949
@@ -298,6 +315,8 @@
     armor: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
     bio: 10 # CLOTHING_ARMOR_LOW
+  - type: RMCArmorSpeedTier
+    speedTier: heavy
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_HEAVY
     walkModifier: 0.62
     sprintModifier: 0.62

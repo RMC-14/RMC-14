@@ -4,6 +4,7 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoBurrower
   name: Burrower
   description: A beefy alien with sharp claws.
@@ -38,7 +39,7 @@
     - ActionXenoTremor
     - ActionXenoDevolve
     tier: 2
-    hudOffset: 0,0.56
+    hudOffset: -0.15,0.56
     unlockAt: 420 # 7 minutes
   - type: XenoLight
   - type: XenoDevolve

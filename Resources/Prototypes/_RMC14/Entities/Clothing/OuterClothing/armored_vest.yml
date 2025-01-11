@@ -6,6 +6,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armored_vest.rsi
+  - type: RMCArmorSpeedTier
+    speedTier: light
   - type: ClothingSpeedModifier
     walkModifier: 0.725
     sprintModifier: 0.725

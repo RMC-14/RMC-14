@@ -61,7 +61,7 @@
   id: CMGearASO
   equipment:
     jumpsuit: CMJumpsuitBO
-    outerClothing: RMCCoatASOCamo
+    outerClothing: CMCoatASO
     shoes: CMBootsBlack
     id: CMIDCardASO
     ears: CMHeadsetSeniorCommand

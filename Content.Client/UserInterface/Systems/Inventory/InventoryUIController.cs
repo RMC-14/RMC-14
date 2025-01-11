@@ -349,7 +349,7 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
 
         if (!fits && _entities.TryGetComponent<StorageComponent>(container.ContainedEntity, out var storage))
         {
-            fits = _entities.System<StorageSystem>().CanInsert(container.ContainedEntity.Value, held, out _, storage);
+            fits = _entities.System<StorageSystem>().CanInsert(container.ContainedEntity.Value, held, player.Value, out _, storage);
         }
         else if (!fits && _entities.TryGetComponent<ItemSlotsComponent>(container.ContainedEntity, out var itemSlots))
         {

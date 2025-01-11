@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server.Administration.Logs;
-using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.Vendors;
@@ -29,7 +28,6 @@ public sealed class RMCNamedItemSystem : EntitySystem
         SubscribeLocalEvent<RMCUserNamedItemsComponent, RMCAutomatedVendedUserEvent>(OnAutomatedVenderUser);
         SubscribeLocalEvent<RMCNameItemOnVendComponent, SentryUpgradedEvent>(OnSentryUpgraded);
 
-        SubscribeLocalEvent<RMCNamedItemComponent, ItemCamouflageEvent>(OnItemCamouflage);
         SubscribeLocalEvent<RMCNamedItemComponent, RefreshNameModifiersEvent>(OnItemRefreshNameModifiers);
     }
 
@@ -72,17 +70,6 @@ public sealed class RMCNamedItemSystem : EntitySystem
         var newNameComp = EnsureComp<RMCNameItemOnVendComponent>(args.NewSentry);
         newNameComp.Name = name;
         NameItem(args.User, args.NewSentry, name);
-    }
-
-    private void OnItemCamouflage(Entity<RMCNamedItemComponent> ent, ref ItemCamouflageEvent args)
-    {
-        if (!TryComp(args.Old, out RMCNamedItemComponent? old))
-            return;
-
-        var namedNew = EnsureComp<RMCNamedItemComponent>(args.New);
-        namedNew.Name = old.Name;
-
-        _nameModifier.RefreshNameModifiers(args.New);
     }
 
     private void OnItemRefreshNameModifiers(Entity<RMCNamedItemComponent> ent, ref RefreshNameModifiersEvent args)

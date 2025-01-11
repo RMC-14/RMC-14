@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
+using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Dialog;
 
@@ -29,7 +30,23 @@ public sealed class DialogBui : BoundUserInterface
             _window = null;
         }
 
-        _window ??= this.CreateWindow<RMCDialogOptionsWindow>();
+        if (_window == null)
+        {
+            var newWindow = this.CreateWindow<RMCDialogOptionsWindow>();
+            _window = newWindow;
+
+            newWindow.Search.OnTextChanged += args =>
+            {
+                foreach (var child in newWindow.Options.Children)
+                {
+                    if (child is not Button { Text: not null } button)
+                        continue;
+
+                    button.Visible = button.Text.Contains(args.Text, StringComparison.OrdinalIgnoreCase);
+                }
+            };
+        }
+
         if (!_window.IsOpen)
             _window.OpenCentered();
 
@@ -75,9 +92,21 @@ public sealed class DialogBui : BoundUserInterface
 
         window.Title = string.Empty;
         window.MessageLabel.Text = s.Message.Text;
-        window.MessageLineEdit.OnTextEntered += args => SendPredictedMessage(new DialogInputBuiMsg(args.Text));
         window.CancelButton.OnPressed += _ => Close();
-        window.OkButton.OnPressed += _ => SendPredictedMessage(new DialogInputBuiMsg(window.MessageLineEdit.Text));
+
+        if (s.LargeInput)
+        {
+            window.MessageLineEdit.Visible = false;
+            window.MessageTextEdit.Visible = true;
+            window.OkButton.OnPressed += _ => SendPredictedMessage(new DialogInputBuiMsg(Rope.Collapse(window.MessageTextEdit.TextRope)));
+        }
+        else
+        {
+            window.MessageLineEdit.Visible = true;
+            window.MessageTextEdit.Visible = false;
+            window.MessageLineEdit.OnTextEntered += args => SendPredictedMessage(new DialogInputBuiMsg(args.Text));
+            window.OkButton.OnPressed += _ => SendPredictedMessage(new DialogInputBuiMsg(window.MessageLineEdit.Text));
+        }
     }
 
     private void UpdateConfirm(DialogComponent s)

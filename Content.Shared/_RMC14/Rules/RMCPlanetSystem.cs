@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.CCVar;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -11,14 +12,15 @@ public sealed class RMCPlanetSystem : EntitySystem
 {
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private int _coordinateVariance;
 
-    public ImmutableDictionary<string, RMCPlanetMapPrototypeComponent> PlanetPaths { get; private set; } =
-        ImmutableDictionary<string, RMCPlanetMapPrototypeComponent>.Empty;
+    public ImmutableDictionary<string, EntProtoId<RMCPlanetMapPrototypeComponent>> PlanetPaths { get; private set; } =
+        ImmutableDictionary<string, EntProtoId<RMCPlanetMapPrototypeComponent>>.Empty;
 
     public override void Initialize()
     {
@@ -97,15 +99,34 @@ public sealed class RMCPlanetSystem : EntitySystem
 
     private void ReloadPlanets()
     {
-        var planetPaths = new Dictionary<string, RMCPlanetMapPrototypeComponent>();
+        var planetPaths = new Dictionary<string, EntProtoId<RMCPlanetMapPrototypeComponent>>();
         foreach (var entity in _prototypes.EnumeratePrototypes<EntityPrototype>())
         {
             if (!entity.TryGetComponent(out RMCPlanetMapPrototypeComponent? planetMapPrototype, _compFactory))
                 continue;
 
-            planetPaths[planetMapPrototype.Map.ToRootedPath().ToString()] = planetMapPrototype;
+            planetPaths[planetMapPrototype.Map.ToString()] = entity.ID;
         }
 
         PlanetPaths = planetPaths.ToImmutableDictionary();
+    }
+
+    public List<RMCPlanet> GetCandidates()
+    {
+        var players = _player.PlayerCount;
+        var candidates = new List<RMCPlanet>();
+        foreach (var planet in PlanetPaths.Values)
+        {
+            if (!_prototypes.TryIndex(planet, out var planetProto) ||
+                !planet.TryGet(out var comp, _prototypes, _compFactory))
+            {
+                continue;
+            }
+
+            if (players == 0 || comp.MinPlayers == 0 || players >= comp.MinPlayers)
+                candidates.Add(new RMCPlanet(planetProto, comp));
+        }
+
+        return candidates;
     }
 }

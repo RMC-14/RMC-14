@@ -1,10 +1,12 @@
 - type: entity
+  abstract: true
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
-  id: CMXenoDefender
+  - RMCXenoCommendationReceiver
+  id: CMXenoDefenderBase
   name: Defender
   description: An alien with an armored crest.
   components:
@@ -24,18 +26,8 @@
       600: Dead
   - type: Xeno
     role: CMXenoDefender
-    actionIds:
-    - ActionXenoRest
-    - ActionXenoRegurgitate
-    - ActionXenoWatch
-    - ActionXenoTailStab # TODO RMC14 name it "tail slam"
-    - ActionXenoToggleCrest
-    - ActionXenoHeadbutt
-    - ActionXenoTailSweep
-    - ActionXenoFortify
-    - ActionXenoDevolve
     tier: 1
-    hudOffset: 0,0.2
+    hudOffset: -0.1,0.2
     unlockAt: 240 # 4 minutes
   - type: XenoLight
   - type: XenoDevolve
@@ -58,12 +50,11 @@
   - type: XenoHeadbutt
     damage:
       types:
-        Blunt: 30 # TODO RMC14 penetrating damage
-  - type: XenoAnimateMovement
-  - type: XenoTailSweep
-    damage:
+        Blunt: 30
+    crestedDamageReduction:
       types:
-        Slash: 30
+        Blunt: -10
+  - type: XenoAnimateMovement
   - type: XenoFortify
   - type: MeleeWeapon
     damage:
@@ -100,3 +91,73 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: defender
+
+- type: entity
+  parent: CMXenoDefenderBase
+  id: CMXenoDefender
+  components:
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailSlam
+    - ActionXenoToggleCrest
+    - ActionXenoHeadbutt
+    - ActionXenoTailSweep
+    - ActionXenoFortify
+    - ActionXenoDevolve
+  - type: XenoTailSweep
+    damage:
+      types:
+        Slash: 30
+  - type: XenoEvolution
+    strains:
+    - CMXenoDefenderSteelcrest
+
+- type: entity
+  parent: CMXenoDefenderBase
+  id: CMXenoDefenderSteelcrest
+  suffix: Steelcrest
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Defender/steelcrest_defender.rsi
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailSlam
+    - ActionXenoToggleCrest
+    - ActionXenoHeadbutt
+    - ActionXenoSoak
+    - ActionXenoFortifySteelcrest
+    - ActionXenoDevolve
+    hidden: true
+  - type: XenoStrain
+    name: rmc-xeno-steelcrest-name
+    description: rmc-xeno-steelcrest-description
+    popup: rmc-xeno-steelcrest-popup
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 22.5
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 30
+  - type: XenoFortify
+    frontalArmor: 15
+    armor: 10
+    changeExplosionWeakness: false
+    canHeadbuttFortified: true
+    canMoveFortified: true
+    damageAddedFortified:
+      groups:
+        Brute: -10
+  - type: XenoHeadbutt
+    damage:
+      types:
+        Blunt: 37.5
+  - type: XenoSoak
+

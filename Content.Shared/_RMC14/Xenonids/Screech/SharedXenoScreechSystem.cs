@@ -54,21 +54,20 @@ public sealed class XenoScreechSystem : EntitySystem
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
+        _marines.Clear();
+        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.StunRange, _marines);
+
         _parasites.Clear();
         _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.StunRange, _parasites);
 
+        foreach (var receiver in _marines)
+        {
+            Stun(xeno, receiver, xeno.Comp.StunTime, true);
+        }
+
         foreach (var receiver in _parasites)
         {
-            if (_mobState.IsDead(receiver))
-                continue;
-
-            if (!_examineSystem.InRangeUnOccluded(xeno.Owner, receiver.Owner))
-                continue;
-
-            if (_hive.FromSameHive(xeno.Owner, receiver.Owner))
-                continue;
-
-            _stun.TryStun(receiver, xeno.Comp.StunTime, false);
+            Stun(xeno, receiver, xeno.Comp.StunTime, true);
         }
 
         _marines.Clear();
@@ -79,19 +78,19 @@ public sealed class XenoScreechSystem : EntitySystem
 
         foreach (var receiver in _marines)
         {
-            Stun(xeno, receiver, xeno.Comp.ParalyzeTime);
+            Stun(xeno, receiver, xeno.Comp.ParalyzeTime, false);
         }
 
         foreach (var receiver in _parasites)
         {
-            Stun(xeno, receiver, xeno.Comp.ParalyzeTime);
+            Stun(xeno, receiver, xeno.Comp.ParalyzeTime, false);
         }
 
         if (_net.IsServer)
             SpawnAttachedTo(xeno.Comp.Effect, xeno.Owner.ToCoordinates());
     }
 
-    private void Stun(EntityUid xeno, EntityUid receiver, TimeSpan time)
+    private void Stun(EntityUid xeno, EntityUid receiver, TimeSpan time, bool stun)
     {
         if (_mobState.IsDead(receiver))
             return;
@@ -102,6 +101,9 @@ public sealed class XenoScreechSystem : EntitySystem
         if (_hive.FromSameHive(xeno, receiver))
             return;
 
-        _stun.TryParalyze(receiver, time, true);
+        if (stun)
+            _stun.TryStun(receiver, time, true);
+        else
+            _stun.TryParalyze(receiver, time, true);
     }
 }

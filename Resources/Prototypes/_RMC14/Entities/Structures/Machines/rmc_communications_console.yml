@@ -66,6 +66,8 @@
     interfaces:
       enum.MarineControlComputerUi.Key:
         type: MarineControlComputerBui
+      enum.DialogUiKey.Key:
+        type: DialogBui
   - type: MarineControlComputer
 
 - type: entity

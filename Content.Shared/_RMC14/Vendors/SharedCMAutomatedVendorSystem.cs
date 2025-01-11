@@ -1,6 +1,6 @@
-﻿using System.Numerics;
+using System.Numerics;
+using Content.Shared._RMC14.Holiday;
 using Content.Shared._RMC14.Inventory;
-using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Scaling;
@@ -39,6 +39,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedWebbingSystem _webbing = default!;
+    [Dependency] private readonly SharedRMCHolidaySystem _rmcHoliday = default!;
 
     // TODO RMC14 make this a prototype
     public const string SpecialistPoints = "Specialist";
@@ -52,7 +53,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedHandEvent>(OnRecentlyGotEquipped);
         SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedEvent>(OnRecentlyGotEquipped);
-        SubscribeLocalEvent<RMCRecentlyVendedComponent, ItemCamouflageEvent>(OnRecentlyCamouflage);
 
         Subs.BuiEvents<CMAutomatedVendorComponent>(CMAutomatedVendorUI.Key, subs =>
         {
@@ -150,21 +150,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         RemCompDeferred<WallMountComponent>(ent);
     }
 
-    private void OnRecentlyCamouflage(Entity<RMCRecentlyVendedComponent> ent, ref ItemCamouflageEvent args)
-    {
-        var recently = EnsureComp<RMCRecentlyVendedComponent>(args.New);
-        foreach (var prevent in ent.Comp.PreventCollide)
-        {
-            recently.PreventCollide.Add(prevent);
-        }
-
-        Dirty(args.New, recently);
-
-        var mount = EnsureComp<WallMountComponent>(args.New);
-        mount.Arc = Angle.FromDegrees(360);
-        Dirty(args.New, mount);
-    }
-
     protected virtual void OnVendBui(Entity<CMAutomatedVendorComponent> vendor, ref CMVendorVendBuiMsg args)
     {
         var comp = vendor.Comp;
@@ -220,6 +205,16 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
 
         if (!validJob)
+            return;
+
+        var validHoliday = section.Holidays.Count == 0;
+        foreach (var holiday in section.Holidays)
+        {
+            if (_rmcHoliday.IsActiveHoliday(holiday))
+                validHoliday = true;
+        }
+
+        if (!validHoliday)
             return;
 
         if (section.Choices is { } choices)

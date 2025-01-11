@@ -25,6 +25,7 @@
   - type: Destructible
     thresholds: []
   - type: ChangeItemSizeOnTimerTrigger
+  - type: CancelUseWithCloak
 
 - type: entity
   abstract: true

@@ -18,7 +18,7 @@
     - id: CMWeaponPistolMK80
     - id: CMMagazinePistolMK80
       amount: 2
-    - id: WeaponM96SSniperRifleJungle
+    - id: CMM96SSniperRifle
 #    - id: CMFacepaintSniper
 #    - id: CMSpotter
   - type: CMChangeUserOnVend
@@ -44,7 +44,7 @@
     - 0,0,21,1
   - type: StorageFill
     contents:
-    - id: WeaponLauncherM83Jungle # check IFF
+    - id: WeaponLauncherM83 # check IFF
     - id: RMCBeltGrenadeLargeFilled
     - id: RMCSatchelGrenadeSpec # ID lock
     - id: RMCSatchelGrenadeSpec
@@ -105,7 +105,7 @@
   id: RMCScoutSpecEquipmentCase
   name: scout equipment case
   suffix: Jungle
-  description: "A large case containing an M4RA battle rifle, M3-S light armor and helmet, M4RA battle sight, M68 thermal cloak, V3 reactive thermal tarp, ammunition and additional pieces of equipment.\nNOTE: You cannot put items back inside this case."
+  description: "A large case containing an M4SPR custom battle rifle, M3-S light armor and helmet, M4SPR battle sight, M68 thermal cloak, V3 reactive thermal tarp, ammunition and additional pieces of equipment.\nNOTE: You cannot put items back inside this case."
   components:
   - type: Sprite
     layers:
@@ -132,7 +132,7 @@
     - id: CMWeaponPistolMK80
     - id: CMMagazinePistolMK80
       amount: 2
-    - id: WeaponRifleM4SPRCustomJungle
+    - id: WeaponRifleM4SPRCustom
     - id: RMCThermalTarpFolded
 #    - id: RMCPlasticExplosives
 #      amount: 2
