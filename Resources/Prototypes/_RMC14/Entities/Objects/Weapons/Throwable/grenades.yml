@@ -312,7 +312,7 @@
   id: RMCGrenadeTraining
 
 - type: Tag
-  id: Riotgrenade
+  id: RMCGrenadeRiot
 
 - type: Tag
   id: RMCGrenadeFlashBang
