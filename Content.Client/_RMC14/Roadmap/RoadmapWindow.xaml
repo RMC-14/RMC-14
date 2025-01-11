@@ -13,7 +13,8 @@
                         <Button Name="DiscordButton" Access="Public" Text="{Loc 'rmc-ui-discord'}"
                                 Visible="False" StyleClasses="OpenRight" HorizontalExpand="True" />
                         <Button Name="PatreonButton" Access="Public" Text="{Loc 'rmc-ui-patreon'}"
-                                Visible="False" StyleClasses="OpenLeft" HorizontalExpand="True" />
+                                Visible="False" StyleClasses="OpenBoth" HorizontalExpand="True" />
+                        <Button Name="CreditsButton" Access="Public" Text="Credits" StyleClasses="OpenLeft" />
                     </BoxContainer>
                     <Label HorizontalExpand="True" Align="Right" VerticalAlignment="Bottom"
                            Text="*This is not an exhaustive list" />
