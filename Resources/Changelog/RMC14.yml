@@ -1,32 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Renamed offset calibration to camera offset in the dropship weapons window,
-      added a tooltip to clarify that it does not affect direct bombardment. Also
-      fixed the reset offset button being too small by FIVE PIXELS.
-    type: Tweak
-  id: 686
-  time: '2024-09-12T06:55:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4017
-- author: DrSmugleaf
-  changes:
-  - message: Added LV's missing random fog breaks. Every round that LV is chosen as
-      the planet map, one of three spots in the fog will randomly be chosen to be
-      opened up at round-start, located at the far west of the river, the far east,
-      and the bridge near the middle.
-    type: Add
-  id: 687
-  time: '2024-09-12T08:32:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4020
-- author: DrSmugleaf
-  changes:
-  - message: Fixed mortars making the firing sound when reloading.
-    type: Fix
-  id: 688
-  time: '2024-09-12T13:09:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4021
-- author: DrSmugleaf
-  changes:
   - message: Added poison gas to the landing zones that goes away on first drop.
     type: Add
   id: 689
@@ -4977,5 +4951,27 @@
   id: 1185
   time: '2025-01-11T08:23:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5342
+- author: SG6732
+  changes:
+  - message: Changed the attachment nodes for the XM88 to prevent floating rail attachments.
+    type: Tweak
+  id: 1186
+  time: '2025-01-11T08:26:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5326
+- author: Vermidia
+  changes:
+  - message: Added more words to xeno chat san.
+    type: Add
+  id: 1187
+  time: '2025-01-11T08:25:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5344
+- author: Vermidia
+  changes:
+  - message: Xeno spits have different colors now depending on how much damage they
+      do. Neuro spit is now also yellow.
+    type: Add
+  id: 1188
+  time: '2025-01-11T08:25:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5338
 Name: RMC14
 Order: -1
