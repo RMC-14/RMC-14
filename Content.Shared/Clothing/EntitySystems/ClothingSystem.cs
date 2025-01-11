@@ -127,7 +127,7 @@ public abstract class ClothingSystem : EntitySystem
         foreach (HumanoidVisualLayers appearanceLayer in appearanceLayers) // RMC14
         {
             if (!layers.Contains(appearanceLayer))
-                _humanoidSystem.SetLayerVisibility(equipee, layer, true);
+                _humanoidSystem.SetLayerVisibility(equipee, appearanceLayer, true);
         }
     }
 
