@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed examine sometimes flickering and closing until you examine something
-      around you.
-    type: Fix
-  id: 705
-  time: '2024-09-16T21:09:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4068
 - author: Rainbeon
   changes:
   - message: Changed most Xeno ability descriptions to give more complete and correct
@@ -5076,5 +5068,13 @@
   id: 1204
   time: '2025-01-11T22:12:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5349
+- author: TsjipTsjip
+  changes:
+  - message: Added end-of-round popup with rules. It can be hidden after the first
+      time it appears.
+    type: Add
+  id: 1205
+  time: '2025-01-11T22:15:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5236
 Name: RMC14
 Order: -1
