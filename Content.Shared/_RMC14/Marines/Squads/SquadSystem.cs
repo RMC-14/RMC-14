@@ -13,6 +13,8 @@ using Content.Shared.Chat;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
+using Content.Shared.Hands;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
@@ -42,6 +44,7 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedMarineSystem _marine = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly SharedMarineOrdersSystem _marineOrders = default!;
@@ -202,7 +205,6 @@ public sealed class SquadSystem : EntitySystem
     private void SearchForMappedItems(Entity<SquadMemberComponent> ent, EntityUid squad)
     {
         var user = ent.Owner;
-        var storageList = new Dictionary<EntityUid, EntityUid>();
 
         if (_inventory.TryGetContainerSlotEnumerator(ent.Owner, out var slots, SlotFlags.All))
         {
@@ -214,35 +216,24 @@ public sealed class SquadSystem : EntitySystem
 
                     if (_mapToSquadQuery.TryComp(slotEntity, out var mapToSquad))
                     {
-                        MapToSquad((slotEntity, mapToSquad), user, squad, null);
+                        MapToSquad((slotEntity, mapToSquad), user, squad);
                     }
                     else if (TryComp<StorageComponent>(slotEntity, out var storage))
                     {
                         foreach (var contained in storage.Container.ContainedEntities)
                         {
-                            if (!_mapToSquadQuery.HasComp(contained))
+                            if (!_mapToSquadQuery.TryComp(contained, out var mapToSquadStorage))
                                 continue;
 
-                            storageList.Add(slotEntity, contained);
+                            MapToSquad((contained, mapToSquadStorage), user, squad);
                         }
                     }
                 }
             }
         }
-
-        foreach (var entry in storageList)
-        {
-            var storage = entry.Key;
-            var item = entry.Value;
-
-            if (!_mapToSquadQuery.TryComp(item, out var map))
-                continue;
-
-            MapToSquad((item, map), user, squad, storage);
-        }
     }
 
-    private void MapToSquad(Entity<RMCMapToSquadComponent> ent, EntityUid user, EntityUid squad, EntityUid? storage)
+    private void MapToSquad(Entity<RMCMapToSquadComponent> ent, EntityUid user, EntityUid squad)
     {
         if (_net.IsClient)
             return;
@@ -259,11 +250,13 @@ public sealed class SquadSystem : EntitySystem
         {
             var newItem = SpawnNextToOrDrop(item, user);
 
-            if (storage != null)
-                _storage.Insert(storage.Value, newItem, out _, playSound: false);
-
             if (TryComp<ClothingComponent>(newItem, out var clothing))
-                _cmInventory.TryEquipClothing(user, (newItem, clothing));
+            {
+                if (!_cmInventory.TryEquipClothing(user, (newItem, clothing)))
+                {
+                    _hands.TryPickupAnyHand(user, newItem);
+                }
+            }
         }
 
         QueueDel(ent);
