@@ -53,7 +53,7 @@
       amount: 1
 
 - type: entity
-  id: RMCArmoryLockerRedM4sprFilled
+  id: RMCArmoryLockerRedM4SPRFilled
   parent: RMCLockerGunRed
   suffix: Filled M4SPR
   components:
