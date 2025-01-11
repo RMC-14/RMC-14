@@ -1,5 +1,4 @@
 using System.Linq;
-using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
