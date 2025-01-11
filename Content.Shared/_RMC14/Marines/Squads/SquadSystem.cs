@@ -293,7 +293,8 @@ public sealed class SquadSystem : EntitySystem
             return;
 
         var member = EnsureComp<SquadMemberComponent>(marine);
-        if (_squadTeamQuery.TryComp(member.Squad, out var oldSquad))
+        var oldSquadId = member.Squad;
+        if (_squadTeamQuery.TryComp(oldSquadId, out var oldSquad))
         {
             oldSquad.Members.Remove(marine);
 
@@ -339,6 +340,15 @@ public sealed class SquadSystem : EntitySystem
         var ev = new SquadMemberUpdatedEvent(team);
         RaiseLocalEvent(marine, ref ev);
 
+        if (oldSquadId != null && oldSquad != null)
+        {
+            var removeEv = new SquadMemberRemovedEvent((oldSquadId.Value, oldSquad), marine);
+            RaiseLocalEvent(marine, ref removeEv, true);
+        }
+
+        var addEv = new SquadMemberAddedEvent((team, team.Comp), marine);
+        RaiseLocalEvent(marine, ref addEv, true);
+
         if (Prototype(team)?.ID is { } squadProto)
             _appearance.SetData(marine, SquadVisuals.Squad, squadProto);
     }
@@ -375,6 +385,9 @@ public sealed class SquadSystem : EntitySystem
         {
             var ev = new SquadMemberUpdatedEvent(squad);
             RaiseLocalEvent(member, ref ev);
+
+            var squadEv = new SquadMemberRemovedEvent((squad, squad.Comp), member);
+            RaiseLocalEvent(member, ref squadEv, true);
         }
     }
 
@@ -482,6 +495,41 @@ public sealed class SquadSystem : EntitySystem
             _marineAnnounce.AnnounceSquad($"Attention: A new Squad Leader has been set: {Name(toPromote)}", squadProto.ID);
             _popup.PopupCursor($"{Name(toPromote)} is {Name(squad.Value)}'s new leader!", user, PopupType.Medium);
         }
+    }
+
+    public bool AreInSameSquad(Entity<SquadMemberComponent?> one, Entity<SquadMemberComponent?> two)
+    {
+        if (!Resolve(one, ref one.Comp, false) ||
+            !Resolve(two, ref two.Comp, false))
+        {
+            return false;
+        }
+
+        if (one.Comp.Squad == null)
+            return false;
+
+        return one.Comp.Squad == two.Comp.Squad;
+    }
+
+    public bool TryGetSquadLeader(Entity<SquadTeamComponent> squad, out Entity<SquadLeaderComponent> leader)
+    {
+        var leaders = EntityQueryEnumerator<SquadLeaderComponent, SquadMemberComponent>();
+        while (leaders.MoveNext(out var uid, out var leaderComp, out var member))
+        {
+            if (member.Squad != squad)
+                continue;
+
+            leader = (uid, leaderComp);
+            return true;
+        }
+
+        leader = default;
+        return false;
+    }
+
+    public bool IsSquadLeader(ProtoId<JobPrototype> job)
+    {
+        return job == SquadLeaderJob;
     }
 
     public override void Update(float frameTime)

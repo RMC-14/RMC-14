@@ -20,7 +20,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
-using Content.Shared.Roles;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -59,8 +58,6 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     private readonly ProtoId<DamageGroupPrototype> _bruteGroup = "Brute";
     private readonly ProtoId<DamageGroupPrototype> _burnGroup = "Burn";
     private readonly ProtoId<DamageGroupPrototype> _toxinGroup = "Toxin";
-
-    private readonly ProtoId<DamageGroupPrototype> _squadLeaderJob = "CMSquadLeader";
 
     public override void Initialize()
     {
@@ -579,11 +576,6 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     public bool IsHidden(Entity<OverwatchConsoleComponent> console, NetEntity marine)
     {
         return console.Comp.Hidden.Contains(marine);
-    }
-
-    public bool IsSquadLeader(ProtoId<JobPrototype> job)
-    {
-        return job == _squadLeaderJob;
     }
 
     private void TryLocalUnwatch(Entity<OverwatchWatchingComponent> ent)

@@ -1,4 +1,5 @@
-﻿using Content.Shared.Access;
+﻿using Content.Shared._RMC14.Tracker.SquadLeader;
+using Content.Shared.Access;
 using Content.Shared.Roles;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -37,4 +38,8 @@ public sealed partial class SquadTeamComponent : Component
 
     [DataField]
     public bool CanSupplyDrop = true;
+
+    [DataField]
+    [Access(typeof(SquadLeaderTrackerSystem))]
+    public FireteamData Fireteams = new();
 }

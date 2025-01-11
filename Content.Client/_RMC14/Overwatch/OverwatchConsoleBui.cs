@@ -373,7 +373,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                 string roleAlive;
                 if (displayName)
                 {
-                    if (_overwatchConsole.IsSquadLeader(roleId) &&
+                    if (_squad.IsSquadLeader(roleId) &&
                         squad.Leader != null &&
                         marines.TryFirstOrNull(m => m.Id == squad.Leader.Value, out var leader))
                     {
