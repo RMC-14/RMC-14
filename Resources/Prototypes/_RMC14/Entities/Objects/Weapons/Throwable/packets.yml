@@ -78,7 +78,7 @@
 - type: entity
   parent: BaseStorageItem
   id: RMCPacketGrenadeFlashBang
-  name: Flash-Bang Box
+  name: flash-bang box
   suffix: Filled
   components:
   - type: Sprite
