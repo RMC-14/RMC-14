@@ -125,7 +125,7 @@
 
 # Quartermaster hats
 - type: entity
-  parent: CMHeadBeret
+  parent: CMHeadCapCargo
   id: RMCHeadCapQuartermaster
   name: UNMC quartermaster cap
   description: It's a fancy hat for a not-so-fancy military supply clerk.
