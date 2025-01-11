@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Marines.Squads;
 
 /// <summary>
-/// Component which maps other items when it is equipped via starting gear. Mainly used by squad-specific items in loadouts.
+/// Transforms the entity based on the parent's squad. Mainly used by squad-specific items in loadouts.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SquadSystem))]
