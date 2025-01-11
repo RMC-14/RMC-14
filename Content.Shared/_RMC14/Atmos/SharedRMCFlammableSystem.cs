@@ -552,6 +552,8 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
                     }
                 }
 
+                Ignite(uid, ignite.Intensity, ignite.Duration, ignite.MaxStacks);
+
                 stepping.LastPosition = coords;
                 break;
             }

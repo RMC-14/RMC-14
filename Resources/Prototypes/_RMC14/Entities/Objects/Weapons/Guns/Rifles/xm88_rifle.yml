@@ -91,6 +91,10 @@
       Desert: _RMC14/Objects/Weapons/Guns/Rifles/xm88/desert.rsi
       Urban: _RMC14/Objects/Weapons/Guns/Rifles/xm88/urban.rsi
       Classic: _RMC14/Objects/Weapons/Guns/Rifles/xm88/classic.rsi
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/XM88/xm88-0.rsi
+      state: all
 
 - type: entity
   parent: BulletRifle10x24mm

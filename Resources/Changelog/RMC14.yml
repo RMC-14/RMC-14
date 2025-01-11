@@ -4730,9 +4730,8 @@
   url: https://github.com/RMC-14/RMC-14/pull/5317
 - author: DummeHytteOst
   changes:
-  - message: Fixed the XM88's damage increase on hit being higher than intended (50%
-      > 20%) and the duration until its combo stacks expire being higher than intended
-      (4 > 2).
+  - message: Fixed the XM88's duration until its combo stacks expire being higher
+      than intended (4 > 2).
     type: Fix
   id: 1173
   time: '2025-01-07T09:55:33.0000000+00:00'
