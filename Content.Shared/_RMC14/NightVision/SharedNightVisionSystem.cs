@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Scoping;
 using Content.Shared._RMC14.Visor;
 using Content.Shared.Actions;
 using Content.Shared.Alert;
+using Content.Shared.IgnitionSource;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
@@ -44,6 +45,8 @@ public abstract class SharedNightVisionSystem : EntitySystem
         SubscribeLocalEvent<NightVisionVisorComponent, ActivateVisorEvent>(OnNightVisionActivate);
         SubscribeLocalEvent<NightVisionVisorComponent, DeactivateVisorEvent>(OnNightVisionDeactivate);
         SubscribeLocalEvent<NightVisionVisorComponent, VisorRelayedEvent<ScopedEvent>>(OnNightVisionScoped);
+
+        SubscribeLocalEvent<RMCNightVisionVisibleOnIgniteComponent, IgnitionEvent>(OnNightVisionVisibleIgnition);
     }
 
     private void OnNightVisionStartup(Entity<NightVisionComponent> ent, ref ComponentStartup args)
@@ -175,6 +178,17 @@ public abstract class SharedNightVisionSystem : EntitySystem
     private void OnNightVisionScoped(Entity<NightVisionVisorComponent> ent, ref VisorRelayedEvent<ScopedEvent> args)
     {
         _visor.DeactivateVisor(args.CycleableVisor, ent.Owner, args.Event.User);
+    }
+
+    private void OnNightVisionVisibleIgnition(Entity<RMCNightVisionVisibleOnIgniteComponent> ent, ref IgnitionEvent args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        if (args.Ignite)
+            EnsureComp<RMCNightVisionVisibleComponent>(ent);
+        else
+            RemCompDeferred<RMCNightVisionVisibleComponent>(ent);
     }
 
     public NightVisionState Toggle(Entity<NightVisionComponent?> ent)
