@@ -139,7 +139,7 @@
   name: plasteel
   icon: { sprite: /Textures/_RMC14/Objects/Materials/Sheets/plasteel.rsi, state: plasteel }
   spawn: CMSheetPlasteel
-  maxCount: 40
+  maxCount: 50
 
 - type: entity
   parent: CMSheetMetalBase
