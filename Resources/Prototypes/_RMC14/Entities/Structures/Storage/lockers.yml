@@ -70,7 +70,7 @@
 - type: entity
   parent: CMLockerBase
   id: RMCLockerGunBlue
-  name: Riot control equipment Cabinet
+  name: riot control equipment Cabinet
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/armorylocker.rsi
