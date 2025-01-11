@@ -677,7 +677,7 @@
       - id: RMCGlassesMedicalHUDGlasses
         recommended: true
       - id: CMGlassesSecurity
-      - id: RMCSunglasses
+      - id: RMCSunglassesBig
         recommended: true
       - id: RMCGlassesAviators
     # - name: Patches # TODO RMC14 Make Patches
