@@ -146,7 +146,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         if (!TryGetEntity(args.Marine, out var marine))
             return;
 
-        if (!CanChangeFireteamMember(args.Actor, marine.Value))
+        if (!CanChangeFireteamMember(args.Actor, marine.Value, true))
             return;
 
         RemoveFireteamMember(ent.Comp.Fireteams, args.Marine);
@@ -171,7 +171,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         if (!TryGetEntity(args.Marine, out var marine))
             return;
 
-        if (!CanChangeFireteamMember(args.Actor, marine.Value))
+        if (!CanChangeFireteamMember(args.Actor, marine.Value, false))
             return;
 
         if (!TryComp(marine.Value, out FireteamMemberComponent? member))
@@ -192,7 +192,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         if (!TryGetEntity(args.Marine, out var marineId))
             return;
 
-        if (!CanChangeFireteamMember(args.Actor, marineId.Value))
+        if (!CanChangeFireteamMember(args.Actor, marineId.Value, true))
             return;
 
         if (!TryComp(marineId, out FireteamMemberComponent? member))
@@ -229,7 +229,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         if (!TryGetEntity(fireteam?.Leader?.Id, out var marineId))
             return;
 
-        if (!CanChangeFireteamMember(args.Actor, marineId.Value))
+        if (!CanChangeFireteamMember(args.Actor, marineId.Value, false))
             return;
 
         DemoteFireteamLeader(fireteam, args.Actor);
@@ -260,7 +260,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         );
     }
 
-    private bool CanChangeFireteamMember(EntityUid user, EntityUid target)
+    private bool CanChangeFireteamMember(EntityUid user, EntityUid target, bool add)
     {
         if (!HasComp<SquadLeaderComponent>(user))
             return false;
@@ -268,7 +268,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         if (!_squad.AreInSameSquad(user, target))
             return false;
 
-        if (HasComp<SquadLeaderComponent>(target))
+        if (add && HasComp<SquadLeaderComponent>(target))
             return false;
 
         return true;
