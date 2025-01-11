@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed the health analyzer not showing permanently dead on rotted corpses
-    type: Fix
-  - message: Permanently dead and holocards on the analyzer are now colorful.
-    type: Tweak
-  id: 690
-  time: '2024-09-14T01:09:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4024
-- author: Vermidia
-  changes:
-  - message: Fix larva getting stuck after bursting
-    type: Fix
-  id: 691
-  time: '2024-09-14T01:12:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4034
 - author: FungiFellow
   changes:
   - message: Animals no longer Suffocate
@@ -4974,5 +4958,19 @@
   id: 1189
   time: '2025-01-11T08:28:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5343
+- author: DummeHytteOst
+  changes:
+  - message: Press armor now has a light.
+    type: Add
+  id: 1190
+  time: '2025-01-11T08:30:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5253
+- author: DummeHytteOst
+  changes:
+  - message: The emergency autoinjector has gotten its own injection sound.
+    type: Add
+  id: 1191
+  time: '2025-01-11T08:30:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5251
 Name: RMC14
 Order: -1
