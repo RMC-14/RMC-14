@@ -13,7 +13,7 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgeRifle10x24mmrubber
+      - RMCCartridgeRifle10x24mmRubber
     proto: RMCCartridgeRifle10x24mmRubber
     capacity: 40
   - type: Sprite
@@ -44,7 +44,7 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgeRifle10x24mmrubber
+      - RMCCartridgeRifle10x24mmRubber
     proto: RMCCartridgeRifle10x24mmRubber
     capacity: 25
   - type: Sprite
@@ -61,7 +61,7 @@
     - Cartridge
     - RMCCartridgeRifle10x24mmRubber
   - type: CartridgeAmmo
-    proto: BulletRifle10x24mmrubber
+    proto: BulletRifle10x24mmRubber
 
 - type: entity
   parent: RMCBaseBullet
@@ -92,7 +92,7 @@
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-      - RMCCartridge10x20mmrubber
+      - RMCCartridge10x20mmRubber
     proto: RMCCartridge10x20mmRubber
     capacity: 48
   - type: Sprite
