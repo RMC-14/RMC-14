@@ -1,0 +1,83 @@
+# Rocks
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallHybrisaRock
+  name: rock wall
+  description: Massive columns comprised of anicent sedimentary rocks loom before you.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rock.rsi
+    state: rock
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rock.rsi
+    state: rock
+  - type: IconSmooth
+    key: walls
+    base: rock
+
+- type: entity
+  parent: RMCWallHybrisaRock
+  id: RMCWallHybrisaRockBorder
+  suffix: border
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rock.rsi
+    state: rock_border
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rock.rsi
+    state: rock_border
+  - type: IconSmooth
+    key: walls
+    base: rock_border
+
+# Colony
+
+- type: entity
+  parent: CMWallMetal
+  id: RMCWallHybrisa
+  name: bare metal walls
+  description: A thick and chunky metal wall. The surface is barren and imposing.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_wall.rsi
+    state: strata_bare_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_wall.rsi
+    state: strata_bare_outpost_
+  - type: IconSmooth
+    key: walls
+    base: strata_bare_outpost_
+
+- type: entity
+  parent: CMWallReinforced
+  id: RMCWallHybrisaReinforced
+  name: ribbed metal walls
+  description: A thick and chunky metal wall covered in jagged ribs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall.rsi
+    state: strata_ribbed_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall.rsi
+    state: strata_ribbed_outpost_
+  - type: IconSmooth
+    key: walls
+    base: strata_ribbed_outpost_
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallHybrisaHull
+  name: ribbed metal walls
+  suffix: hull
+  description: A thick and chunky metal wall that is, just by virtue of its placement and imposing presence, entirely indestructible.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall.rsi
+    state: strata_ribbed_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall.rsi
+    state: strata_hull
+  - type: IconSmooth
+    key: walls
+    base: strata_ribbed_outpost_

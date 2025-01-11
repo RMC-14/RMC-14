@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/turf/walls/kutjevorockdark.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "rock"
+    },
+    {
+      "name": "rock0",
+      "directions": 4
+    },
+    {
+      "name": "rock1",
+      "directions": 4
+    },
+    {
+      "name": "rock2",
+      "directions": 4
+    },
+    {
+      "name": "rock3",
+      "directions": 4
+    },
+    {
+      "name": "rock4",
+      "directions": 4
+    },
+    {
+      "name": "rock5",
+      "directions": 4
+    },
+    {
+      "name": "rock6",
+      "directions": 4
+    },
+    {
+      "name": "rock7",
+      "directions": 4
+    },
+    {
+      "name": "rock_border"
+    },
+    {
+      "name": "rock_border0",
+      "directions": 4
+    },
+    {
+      "name": "rock_border1",
+      "directions": 4
+    },
+    {
+      "name": "rock_border2",
+      "directions": 4
+    },
+    {
+      "name": "rock_border3",
+      "directions": 4
+    },
+    {
+      "name": "rock_border4",
+      "directions": 4
+    },
+    {
+      "name": "rock_border5",
+      "directions": 4
+    },
+    {
+      "name": "rock_border6",
+      "directions": 4
+    },
+    {
+      "name": "rock_border7",
+      "directions": 4
+    }
+  ]
+}
