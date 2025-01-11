@@ -208,7 +208,7 @@
 - type: entity
   parent: CMBulletBase
   id: RMCBulletPistol9mmRubber
-  name: Rubber bullet (9mm)
+  name: rubber bullet (9mm)
   components:
   - type: Projectile
     damage:
