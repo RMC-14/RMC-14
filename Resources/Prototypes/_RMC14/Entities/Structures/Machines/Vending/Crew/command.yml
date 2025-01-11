@@ -761,7 +761,7 @@
       - CMChiefMP
       choices: { CMWeapon: 1 }
       entries:
-      - id: CMWeaponPistolMK80   # TODO ADD CASE.
+      - id: CMWeaponPistolM77   # TODO ADD CASE.
       - id: RMCWeaponRevolverM44  # TODO ADD CASE.
       - id: CMWeaponPistolM1984  # TODO ADD CASE.
     - name: Backpack
