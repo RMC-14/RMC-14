@@ -173,9 +173,6 @@ public abstract class SharedStationSpawningSystem : EntitySystem
                             RaiseLocalEvent(slotEnt.Value, ref ev);
                         }
 
-                        var gearEv = new RMCStartingGearEquippedEvent(entity, ent);
-                        RaiseLocalEvent(entity, ref gearEv);
-
                         _storage.Insert(slotEnt.Value, ent, out _, storageComp: storage, playSound: false);
                     }
                 }

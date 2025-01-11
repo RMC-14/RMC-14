@@ -420,7 +420,6 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
   - type: RMCMapToSquad
-    deleteWithNoSquad: false
     map:
       SquadAlpha: RMCHeadBeretSquadAlpha
       SquadBravo: RMCHeadBeretSquadBravo

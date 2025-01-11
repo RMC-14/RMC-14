@@ -58,9 +58,9 @@
   suffix: DO NOT MAP
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/headband/gray.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/headband/squad.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/headband/gray.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/headband/squad.rsi
   - type: RMCMapToSquad
     map:
       SquadAlpha: CMHeadBandAlpha

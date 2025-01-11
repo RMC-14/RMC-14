@@ -86,8 +86,6 @@ public sealed class SquadSystem : EntitySystem
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EncryptionChannelsChangedEvent>(OnSquadLeaderHeadsetChannelsChanged);
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EntityTerminatingEvent>(OnSquadLeaderHeadsetTerminating);
 
-        SubscribeLocalEvent<SquadMemberComponent, RMCStartingGearEquippedEvent>(OnStartingGear);
-
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         RefreshSquadPrototypes();
@@ -199,27 +197,35 @@ public sealed class SquadSystem : EntitySystem
         }
     }
 
-    private void OnStartingGear(Entity<SquadMemberComponent> ent, ref RMCStartingGearEquippedEvent args)
+    private void SearchForMappedItems(Entity<SquadMemberComponent> ent, EntityUid squad)
     {
-        if (_net.IsClient)
-            return;
+        var user = ent.Owner;
 
-        var squad = ent.Comp.Squad;
-
-        if (!TryComp<RMCMapToSquadComponent>(args.Item, out var mapToSquad))
-            return;
-
-        var item = args.Item;
-
-        if (squad == null)
+        if (_inventory.TryGetContainerSlotEnumerator(ent.Owner, out var slots, SlotFlags.All))
         {
-            if (mapToSquad.DeleteWithNoSquad)
-                QueueDel(item);
+            while (slots.MoveNext(out var containerSlot))
+            {
+                if (containerSlot.ContainedEntity != null)
+                {
+                    var containerSlotEntity = containerSlot.ContainedEntity.Value;
 
-            return;
+                    if (TryComp<RMCMapToSquadComponent>(containerSlotEntity, out var mapToSquad))
+                    {
+                        MapToSquad((containerSlotEntity, mapToSquad), user, user, squad);
+                    }
+                    else if (TryComp<StorageComponent>(containerSlotEntity, out var storage))
+                    {
+                        foreach (var contained in storage.Container.ContainedEntities)
+                        {
+                            if (!TryComp<RMCMapToSquadComponent>(contained, out var mapToSquadStorage))
+                                continue;
+
+                            MapToSquad((contained, mapToSquadStorage), containerSlotEntity, user, squad);
+                        }
+                    }
+                }
+            }
         }
-
-        MapToSquad((item, mapToSquad), Transform(item).ParentUid, ent.Owner, squad.Value);
     }
 
     private void MapToSquad(Entity<RMCMapToSquadComponent> ent, EntityUid equipee, EntityUid user, EntityUid squad)
@@ -393,6 +399,9 @@ public sealed class SquadSystem : EntitySystem
 
         if (Prototype(team)?.ID is { } squadProto)
             _appearance.SetData(marine, SquadVisuals.Squad, squadProto);
+
+        // Search for any squad-specific items to map
+        SearchForMappedItems((marine, member), member.Squad.Value);
     }
 
     private void MarineSetTitle(EntityUid marine, string title)

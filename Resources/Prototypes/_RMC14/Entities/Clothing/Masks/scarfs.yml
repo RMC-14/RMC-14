@@ -47,9 +47,9 @@
   suffix: DO NOT MAP
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/gray.rsi
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/squad.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/gray.rsi
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/squad.rsi
   - type: RMCMapToSquad
     map:
       SquadAlpha: RMCMaskScarfAlpha
