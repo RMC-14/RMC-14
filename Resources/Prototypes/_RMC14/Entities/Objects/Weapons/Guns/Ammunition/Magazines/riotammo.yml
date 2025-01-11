@@ -118,11 +118,11 @@
     - Cartridge
     - RMCCartridge10x20mmRubber
   - type: CartridgeAmmo
-    proto: Bullet10x20mmrubber
+    proto: Bullet10x20mmRubber
 
 - type: entity
   parent: RMCBaseBullet
-  id: Bullet10x20mmrubber
+  id: Bullet10x20mmRubber
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
