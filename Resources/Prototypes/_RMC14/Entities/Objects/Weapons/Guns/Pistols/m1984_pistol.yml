@@ -25,6 +25,7 @@
         whitelist:
           tags:
           - CMMagazinePistolM1984
+          - RMCMagazinePistolM1984AP
         startingItem: CMMagazinePistolM1984
   - type: AttachableHolder
     slots:
@@ -67,7 +68,9 @@
         whitelist:
           tags:
           - CMMagazinePistolM1984
+          - RMCMagazinePistolM1984AP 
 
+#9mm
 - type: entity
   parent: CMBaseMagazinePistol
   id: CMMagazinePistolM1984
@@ -92,7 +95,6 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
 
-#9mm
 - type: entity
   parent: CMBulletBase
   id: CMBulletPistol9mm
@@ -148,6 +150,9 @@
   name: M1984 AP magazine (9mm)
   description: A pistol magazine. This one contains armor-piercing bullets, which have noticeably higher stopping power on well-armored targets, and noticeably less on unarmored or lightly-armored targets.
   components:
+  - type: Tag
+    tags:
+    - RMCMagazinePistolM1984AP
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -157,3 +162,6 @@
 
 - type: Tag
   id: CMMagazinePistolM1984
+
+- type: Tag
+  id: RMCMagazinePistolM1984AP
