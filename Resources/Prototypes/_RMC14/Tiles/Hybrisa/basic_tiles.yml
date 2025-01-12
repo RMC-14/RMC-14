@@ -107,22 +107,22 @@
 - type: tile
   parent: RMCPlanetHybrisaAsphalt
   id: RMCPlanetHybrisaAsphaltSidewalkNorth
-  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkcenter_0.png
-
-- type: tile
-  parent: RMCPlanetHybrisaAsphalt
-  id: RMCPlanetHybrisaAsphaltSidewalkSouth
   sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkcenter_1.png
 
 - type: tile
   parent: RMCPlanetHybrisaAsphalt
-  id: RMCPlanetHybrisaAsphaltSidewalkWest
+  id: RMCPlanetHybrisaAsphaltSidewalkSouth
   sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkcenter_2.png
 
 - type: tile
   parent: RMCPlanetHybrisaAsphalt
-  id: RMCPlanetHybrisaAsphaltSidewalkEast
+  id: RMCPlanetHybrisaAsphaltSidewalkWest
   sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkcenter_3.png
+
+- type: tile
+  parent: RMCPlanetHybrisaAsphalt
+  id: RMCPlanetHybrisaAsphaltSidewalkEast
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkcenter_4.png
 
 - type: tile
   parent: CMPlanetBase

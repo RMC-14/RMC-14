@@ -13,52 +13,52 @@
 - type: tile
   parent: RMCFloorHybrisaBlueFull
   id: RMCFloorHybrisaBlueSouth
-  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal1_0.png
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal_1.png
 
 - type: tile
   parent: RMCFloorHybrisaBlueFull
   id: RMCFloorHybrisaBlueNorth
-  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal1_1.png
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal_2.png
 
 - type: tile
   parent: RMCFloorHybrisaBlueFull
   id: RMCFloorHybrisaBlueEast
-  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal1_3.png
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal_3.png
 
 - type: tile
   parent: RMCFloorHybrisaBlueFull
   id: RMCFloorHybrisaBlueWest
-  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal1_4.png
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal_4.png
 
 - type: tile
   parent: RMCFloorHybrisaBlueFull
   id: RMCFloorHybrisaBlueSouthEast
-  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal1_5.png
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal_5.png
 
 - type: tile
   parent: RMCFloorHybrisaBlueFull
   id: RMCFloorHybrisaBlueSouthWest
-  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal1_6.png
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal_6.png
 
 - type: tile
   parent: RMCFloorHybrisaBlueFull
   id: RMCFloorHybrisaBlueNorthEast
-  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal1_7.png
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal_7.png
 
 - type: tile
   parent: RMCFloorHybrisaBlueFull
   id: RMCFloorHybrisaBlueNorthWest
-  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal1_8.png
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal_8.png
 
 - type: tile
   parent: RMCFloorHybrisaBlueFull
   id: RMCFloorHybrisaBlueCornerSouthEast
-  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetalcorner_0.png
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetalcorner_1.png
 
 - type: tile
   parent: RMCFloorHybrisaBlueFull
   id: RMCFloorHybrisaBlueCornerNorthEast
-  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetalcorner_1.png
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetalcorner_2.png
 
 - type: tile
   parent: RMCFloorHybrisaBlueFull
