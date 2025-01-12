@@ -2,6 +2,8 @@ using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
+using Content.Shared.Inventory;
+using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.Timing;
@@ -13,6 +15,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly EvasionSystem _evasionSystem = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -20,9 +23,13 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
 
     private readonly HashSet<Entity<MarineComponent>> _receivers = new();
 
+    private EntityQuery<MoveOrderArmorComponent> _moveOrderArmorQuery;
+
     public override void Initialize()
     {
         base.Initialize();
+
+        _moveOrderArmorQuery = GetEntityQuery<MoveOrderArmorComponent>();
 
         SubscribeLocalEvent<MoveOrderComponent, EntityUnpausedEvent>(OnUnpause);
         SubscribeLocalEvent<FocusOrderComponent, EntityUnpausedEvent>(OnUnpause);
@@ -33,10 +40,12 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         SubscribeLocalEvent<MarineOrdersComponent, MoveActionEvent>(OnAction);
 
         SubscribeLocalEvent<MoveOrderComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovement);
-        SubscribeLocalEvent<HoldOrderComponent, DamageModifyEvent>(OnDamageModify);
-
         SubscribeLocalEvent<MoveOrderComponent, ComponentShutdown>(OnMoveShutdown);
         SubscribeLocalEvent<MoveOrderComponent, EvasionRefreshModifiersEvent>(OnMoveOrderEvasionRefresh);
+        SubscribeLocalEvent<MoveOrderComponent, DidEquipEvent>(OnMoveOrderDidEquip);
+        SubscribeLocalEvent<MoveOrderComponent, DidUnequipEvent>(OnMoveOrderDidUnequip);
+
+        SubscribeLocalEvent<HoldOrderComponent, DamageModifyEvent>(OnDamageModify);
     }
 
     private void OnDamageModify(Entity<HoldOrderComponent> orders, ref DamageModifyEvent args)
@@ -55,16 +64,6 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         }
     }
 
-    private void OnRefreshMovement(Entity<MoveOrderComponent> orders, ref RefreshMovementSpeedModifiersEvent args)
-    {
-        var comp = orders.Comp;
-        if (comp.Received.Count == 0)
-            return;
-
-        var speed = 1 + (comp.MoveSpeedModifier * comp.Received[0].Multiplier).Float();
-        args.ModifySpeed(speed, speed);
-    }
-
     private void OnUnpause<T>(Entity<T> orders, ref EntityUnpausedEvent args) where T : IComponent, IOrderComponent
     {
         var comp = orders.Comp;
@@ -73,6 +72,33 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
             var received = comp.Received[i];
             comp.Received[i] = (received.Multiplier, received.ExpiresAt + args.PausedTime);
         }
+    }
+
+    private void OnRefreshMovement(Entity<MoveOrderComponent> orders, ref RefreshMovementSpeedModifiersEvent args)
+    {
+        var comp = orders.Comp;
+        if (comp.Received.Count == 0)
+            return;
+
+        var hasArmor = false;
+        var armorEnumerator = _inventory.GetSlotEnumerator(orders.Owner, SlotFlags.OUTERCLOTHING);
+        while (armorEnumerator.MoveNext(out var slot))
+        {
+            if (slot.ContainedEntity == null)
+                continue;
+
+            if (_moveOrderArmorQuery.HasComp(slot.ContainedEntity))
+            {
+                hasArmor = true;
+                break;
+            }
+        }
+
+        if (!hasArmor)
+            return;
+
+        var speed = 1 + (comp.MoveSpeedModifier * comp.Received[0].Multiplier).Float();
+        args.ModifySpeed(speed, speed);
     }
 
     private void OnMoveShutdown(Entity<MoveOrderComponent> uid, ref ComponentShutdown ev)
@@ -90,6 +116,16 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
             return;
 
         args.Evasion += entity.Comp.Received[0].Multiplier * entity.Comp.EvasionModifier;
+    }
+
+    private void OnMoveOrderDidEquip(Entity<MoveOrderComponent> ent, ref DidEquipEvent args)
+    {
+        _movementSpeed.RefreshMovementSpeedModifiers(ent);
+    }
+
+    private void OnMoveOrderDidUnequip(Entity<MoveOrderComponent> ent, ref DidUnequipEvent args)
+    {
+        _movementSpeed.RefreshMovementSpeedModifiers(ent);
     }
 
     protected virtual void OnAction(Entity<MarineOrdersComponent> orders, ref FocusActionEvent args)

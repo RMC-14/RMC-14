@@ -13,3 +13,65 @@
         prob: 0.9
       - id: CMMultitool
         prob: 0.5
+
+- type: entity
+  id: RMCArmoryLockerBlueFilled
+  parent: RMCLockerGunBlue
+  suffix: Filled
+  components:
+    - type: StorageFill
+      contents:
+      - id: RMCWeaponLauncherM81
+        amount: 1
+      - id: CMArmorRiot
+        amount: 3
+      - id: ArmorHelmetRiot
+        amount: 3
+      - id: RiotShield
+        amount: 6
+      - id: RMCWeaponShotgunM890Riot
+        amount: 3
+      - id: RMCBoxShotgunBeanbag
+        amount: 3
+      - id: CMMaskGas
+        amount: 3
+      - id: RMCPacketGrenadeFlashBang
+        amount: 1
+
+- type: entity
+  id: RMCArmoryLockerRedM890Filled
+  parent: RMCLockerGunRed
+  suffix: Filled 890Tactical
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponShotgunM890
+      amount: 3
+    - id: RMCBoxShellsBuckshot
+      amount: 1
+    - id: RMCBoxShellsSlugs
+      amount: 1
+
+- type: entity
+  id: RMCArmoryLockerRedM4SPRFilled
+  parent: RMCLockerGunRed
+  suffix: Filled M4SPR
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleM4SPR
+      amount: 4
+    - id: RMCBoxMagazineRifleM4SPR
+      amount: 1
+
+- type: entity
+  id: RMCArmoryLockerRedM63Filled
+  parent: RMCLockerGunRed
+  suffix: Filled M63
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponSMGM63
+      amount: 4
+    - id: RMCBoxMagazineSMGM63
+      amount: 1

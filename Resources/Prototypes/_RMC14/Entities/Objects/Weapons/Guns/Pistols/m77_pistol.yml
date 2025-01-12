@@ -43,6 +43,7 @@
         priority: 2
         whitelist:
           tags:
+          - RMCMagazinePistolM77Rubber
           - CMMagazinePistolM77AP
         startingItem: CMMagazinePistolM77AP
   - type: GunDamageModifier

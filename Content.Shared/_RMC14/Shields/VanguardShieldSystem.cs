@@ -52,8 +52,7 @@ public sealed class VanguardShieldSystem : EntitySystem
         if (shield.ShieldAmount <= 0)
             return;
 
-        // TODO RMC14 halved like armor for now
-        var explosionResist = xeno.Comp.ExplosionResistance / 2;
+        var explosionResist = xeno.Comp.ExplosionResistance;
 
         var resist = (float)Math.Pow(1.1, explosionResist / 5.0); // From armor calcualtion
         args.DamageCoefficient /= resist;

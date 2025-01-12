@@ -1,0 +1,18 @@
+﻿<controls:RMCDialogInputContainer
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Dialog"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    Orientation="Vertical" Margin="5">
+    <Control VerticalExpand="True" MinHeight="25" />
+    <Label Name="MessageLabel" Access="Public" />
+    <ui:BlueHorizontalSeparator />
+    <LineEdit Name="MessageLineEdit" Access="Public" />
+    <TextEdit Name="MessageTextEdit" Access="Public" VerticalExpand="True" MinSize="500 150" />
+    <BoxContainer Orientation="Horizontal" Margin="0 5">
+        <Control HorizontalExpand="True" />
+        <Button Text="Cancel" Name="CancelButton" Access="Public" StyleClasses="OpenBoth" MinWidth="100" Margin="0 0 20 0" />
+        <Button Text="Confirm" Name="OkButton" Access="Public" StyleClasses="OpenBoth" MinWidth="100" />
+        <Control HorizontalExpand="True" />
+    </BoxContainer>
+    <Control VerticalExpand="True" MinHeight="5" />
+</controls:RMCDialogInputContainer>

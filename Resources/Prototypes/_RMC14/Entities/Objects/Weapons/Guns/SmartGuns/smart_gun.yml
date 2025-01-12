@@ -152,6 +152,10 @@
       Snow: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/snow.rsi
       Classic: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/classic.rsi
       Urban: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/urban.rsi
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/smartgun_mouse.rsi
+      state: all
 
 - type: entity
   parent: CMMagazineRifleBase

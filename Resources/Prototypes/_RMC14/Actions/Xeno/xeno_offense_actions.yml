@@ -116,6 +116,11 @@
   id: ActionXenoTailStabCorrosive
   name: Corrosive Tail Stab
   description: Launches an attack towards a given direction. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid into the target, dealing damage over time.[/color]
+  components:
+  - type: WorldTargetAction
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: tail_attack_acid
 
 - type: entity
   parent: ActionXenoTailStab
@@ -550,7 +555,7 @@
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: stomp
+      state: tremor
     event: !type:XenoStompActionEvent
     useDelay: 45
 
@@ -633,37 +638,65 @@
 
 - type: entity
   parent: ActionXenoBase
-  id: ActionXenoCleave
-  name: Cleave
-  description: Root an enemy for a second or fling them depending on the toggle. The effect and distance are doubled if your shield is up.
+  id: ActionXenoCleaveRoot
+  name: Cleave Root
+  description: Root an enemy for a second. The duration is higher if your shield is up.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: prae_cleave_action
+      state: prae_cleave_root
     event: !type:XenoCleaveActionEvent
     range: 1.5
     useDelay: 12
     deselectOnMiss: false
   - type: ActionBlockIfResting
-
+  - type: ActionSharedCooldown
+    id: ActionXenoCleaveRoot
+    ids:
+    - ActionXenoCleaveFling
+    cooldown: 12
+  
 - type: entity
   parent: ActionXenoBase
-  id: ActionXenoToggleCleave
-  name: Toggle Cleave Type
-  description: Toggle between your Cleave rooting enemies or flinging enemies.
+  id: ActionXenoCleaveFling
+  name: Cleave Fling
+  description: Fling an enemy. The distance is doubled if your shield is up.
   components:
-  - type: InstantAction
+  - type: EntityTargetAction
     itemIconStyle: NoItem
-    backgroundOn: null
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: prae_cleave_root
-    iconOn:
-      sprite: _RMC14/Actions/xeno_actions.rsi
       state: prae_cleave_fling
-    event: !type:XenoToggleCleaveActionEvent
+    event: !type:XenoCleaveActionEvent
+      flings: true
+    range: 1.5
+    useDelay: 12
+    deselectOnMiss: false
+  - type: ActionBlockIfResting
+  - type: ActionSharedCooldown
+    id: ActionXenoCleaveFling
+    ids:
+    - ActionXenoCleaveRoot
+    cooldown: 12
+
+#- type: entity
+#  parent: ActionXenoBase
+#  id: ActionXenoToggleCleave
+#  name: Toggle Cleave Type
+#  description: Toggle between your Cleave rooting enemies or flinging enemies.
+#  components:
+#  - type: InstantAction
+#    itemIconStyle: NoItem
+#    backgroundOn: null
+#    icon:
+#      sprite: _RMC14/Actions/xeno_actions.rsi
+#      state: prae_cleave_root
+#    iconOn:
+#      sprite: _RMC14/Actions/xeno_actions.rsi
+#      state: prae_cleave_fling
+#    event: !type:XenoToggleCleaveActionEvent
 
 - type: entity
   id: ActionXenoSpitQueen

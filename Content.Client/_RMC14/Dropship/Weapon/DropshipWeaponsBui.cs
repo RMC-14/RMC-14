@@ -337,12 +337,13 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
                     _eyeLerping.RemoveEye(_oldEye.Value);
 
                 _oldEye = terminal.Target;
-                if (terminal.Target is { } terminalTarget)
+                if (terminal.Target != null &&
+                    _weaponSystem.TryGetTargetEye((Owner, terminal), terminal.Target.Value, out var eyeId))
                 {
-                    if (!EntMan.HasComponent<LerpingEyeComponent>(terminalTarget))
-                        _eyeLerping.AddEye(terminalTarget);
+                    if (!EntMan.HasComponent<LerpingEyeComponent>(eyeId))
+                        _eyeLerping.AddEye(eyeId);
 
-                    if (EntMan.TryGetComponent(terminalTarget, out EyeComponent? eye))
+                    if (EntMan.TryGetComponent(eyeId, out EyeComponent? eye))
                         screen.Viewport.Eye = eye.Eye;
                 }
 

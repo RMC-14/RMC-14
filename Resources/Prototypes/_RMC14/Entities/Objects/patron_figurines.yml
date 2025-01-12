@@ -1027,3 +1027,47 @@
     state: kipped_kipper
   - type: PatronFigurine
     id: f49eb544-509a-4991-a3f6-c05dec083389
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKyrus
+  name: Kyrus figurine
+  description: "Just a simple engineer doing engineer things."
+  components:
+  - type: Sprite
+    state: kyrus
+  - type: PatronFigurine
+    id: 60d42aa6-88d9-4322-b782-109e17d81620
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronTalerynVogsburg
+  name: Taleryn Vogsburg figurine
+  description: "\"My only crime was playing a saz.\" -Taleryn Vogsburg"
+  components:
+  - type: Sprite
+    state: taleryn_vogsburg
+  - type: PatronFigurine
+    id: 4424328e-e2fb-41a8-b572-045186b30245
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronPenelopeCyclopsDavid
+  name: Penelope 'Cyclops' David figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: penelope_cyclops_david
+  - type: PatronFigurine
+    id: 422661bf-d453-4c3e-8aff-e319fd91af91
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronWilliamSpursCrockett
+  name: William 'Spurs' Crockett figurine
+  description: "He has spurs that jingle jangle jingle"
+  components:
+  - type: Sprite
+    state: william_spurs_crockett
+  - type: PatronFigurine
+    id: ac7102b0-d759-4e4d-bbef-1f68b9d2de9b

@@ -1,0 +1,133 @@
+- type: entity
+  parent: RMCWeaponRevolverBase
+  id: RMCWeaponRevolverRSh9
+  name: RSh-9 Assault Revolver
+  description: The RSh-9 Assault Revolver is a highly unusual weapon, originally designed for CQB Room clearing on request for counter-terrorism units. This one uses the smaller 9x39 cartridge instead of the 12.7x55mm Cartridge it was originally chambered in, It is still nothing short of the ultimate man killing device.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/rsh9.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/rsh9.rsi
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/rsh9_fire.ogg
+  - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+      - RMCSpeedLoaderRsh9
+      - RMCCartridgeRevolverRsh9
+    proto: RMCCartridgeRevolverRsh9
+    capacity: 6
+    chambers: [ True, True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null, null ]
+  - type: GunDamageModifier
+    multiplier: 1.1
+  - type: RMCSelectiveFire
+    baseFireRate: 1.2
+    scatterWielded: 8
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.1
+    accuracyMultiplierUnwielded: 0.75
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.81, 0.099
+      rmc-aslot-rail: 0.1573, 0.188
+      rmc-aslot-underbarrel: 0.375, -0.1825
+
+- type: entity
+  id: RMCBaseSpeedLoaderRsh9
+  name: "RSh-9 Speed Loader (9x39)"
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - RMCMagazineRevolver
+    - RMCSpeedLoaderRsh9
+  - type: SpeedLoader
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRevolverRsh9
+    capacity: 6
+  - type: Sprite
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+
+- type: entity
+  parent: RMCBaseSpeedLoaderRsh9
+  id: RMCSpeedLoaderRsh9
+  description: A six round load of 9x39 Armor Penetrating rounds, designed to defeat most modern body-armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/mateba.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: base-5
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: base
+    steps: 6
+    zeroVisible: false
+  - type: BallisticAmmoProvider
+    proto: RMCCartridgeRevolverRsh9
+    capacity: 6
+  - type: Appearance
+
+- type: entity
+  id: RMCCartridgeRevolverRsh9
+  name: cartridge (9x39)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRevolverRsh9
+  - type: CartridgeAmmo
+    proto: RMCBulletRsh9
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletRsh9
+  name: bullet (9x39)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 65
+  - type: CMArmorPiercing
+    amount: 35
+  - type: RMCProjectileAccuracy
+    accuracy: 90
+
+- type: Tag
+  id: RMCSpeedLoaderRsh9
+
+- type: Tag
+  id: RMCCartridgeRevolverRsh9
