@@ -29,7 +29,7 @@
         amount: 3
       - id: RiotShield
         amount: 6
-      - id: WeaponShotgunM890Riot
+      - id: RMCWeaponShotgunM890Riot
         amount: 3
       - id: RMCBoxShotgunBeanbag
         amount: 3
