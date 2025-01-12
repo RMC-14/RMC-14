@@ -62,15 +62,15 @@
       - id: RMCLaserDesignator
         points: 5
     - name: Helmet Optics
-      entries: [ ]
+      entries:
     #- id: CMWeldingVisor
     #  points: 5
     #  recommended: true
     #- id: CMMedicalHelmetOptic
     #  points: 4
     #  recommended: true
-    #- id: CMNightVisionOptic
-    #  points: 20
+      - id: RMCVisorNightVision
+        points: 20
     - name: Engineering Supplies
       entries:
       - id: CMHandsInsulated

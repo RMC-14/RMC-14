@@ -57,6 +57,7 @@
     blacklist:
       components:
       - Xeno
+  - type: Appearance
 
 - type: entity
   parent: RMCHelmetBase
