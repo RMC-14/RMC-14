@@ -5,8 +5,6 @@ concurrency:
 
 on:
   workflow_dispatch:
-  # schedule:
-   # - cron: '0 10 * * *'
 
 jobs:
   build:
@@ -46,10 +44,11 @@ jobs:
       env:
         PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
         GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}
-
-    - name: Publish changelog (Discord)
-      run: Tools/actions_changelogs_since_last_run.py
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DISCORD_WEBHOOK_URL: ${{ secrets.CHANGELOG_DISCORD_WEBHOOK }}
-      continue-on-error: true
+    
+    # WH-14 Changes | We don't need changelog, at least now...
+    # - name: Publish changelog (Discord)
+    #   run: Tools/actions_changelogs_since_last_run.py
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     DISCORD_WEBHOOK_URL: ${{ secrets.CHANGELOG_DISCORD_WEBHOOK }}
+    #   continue-on-error: true
