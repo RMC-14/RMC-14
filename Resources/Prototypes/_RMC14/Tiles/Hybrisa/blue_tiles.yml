@@ -1,0 +1,71 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorHybrisaBlueBase
+  name: tiles-cm-default-blue
+
+- type: tile
+  parent: RMCFloorHybrisaBlueBase
+  id: RMCFloorHybrisaBlueFull
+  name: blue metal tile
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetalfull.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueSouth
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal1_0.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueNorth
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal1_1.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueEast
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal1_3.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueWest
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal1_4.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueSouthEast
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal1_5.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueSouthWest
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal1_6.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueNorthEast
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal1_7.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueNorthWest
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal1_8.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueCornerSouthEast
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetalcorner_0.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueCornerNorthEast
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetalcorner_1.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueCornerNorthWest
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetalcorner_3.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueCornerSouthWest
+  sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetalcorner_4.png

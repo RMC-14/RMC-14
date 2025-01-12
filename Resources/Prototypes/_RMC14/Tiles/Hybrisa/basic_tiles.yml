@@ -55,21 +55,25 @@
   parent: RMCFloorHybrisaBasicBase
   id: RMCFloorHybrisaRampNorth
   name: ramp
+  suffix: north
   sprite: /Textures/_RMC14/Tiles/hybrisa/rampsmaller_north.png
 
 - type: tile
   parent: RMCFloorHybrisaRampNorth
   id: RMCFloorHybrisaRampEast
+  suffix: east
   sprite: /Textures/_RMC14/Tiles/hybrisa/rampsmaller_east.png
 
 - type: tile
   parent: RMCFloorHybrisaRampNorth
   id: RMCFloorHybrisaRampSouth
+  suffix: south
   sprite: /Textures/_RMC14/Tiles/hybrisa/rampsmaller_south.png
 
 - type: tile
   parent: RMCFloorHybrisaRampNorth
   id: RMCFloorHybrisaRampWest
+  suffix: west
   sprite: /Textures/_RMC14/Tiles/hybrisa/rampsmaller_west.png
 
 # Road
@@ -89,6 +93,36 @@
   parent: RMCPlanetHybrisaAsphalt
   id: RMCPlanetHybrisaAsphaltLines4
   sprite: /Textures/_RMC14/Tiles/hybrisa/asphalt_old_roadlines4.png
+
+- type: tile
+  parent: RMCPlanetHybrisaAsphalt
+  id: RMCPlanetHybrisaAsphaltLinesRed
+  sprite: /Textures/_RMC14/Tiles/hybrisa/warning_red_floor.png
+
+- type: tile
+  parent: RMCPlanetHybrisaAsphalt
+  id: RMCPlanetHybrisaAsphaltLinesYellow
+  sprite: /Textures/_RMC14/Tiles/hybrisa/warning_yellow_floor.png
+
+- type: tile
+  parent: RMCPlanetHybrisaAsphalt
+  id: RMCPlanetHybrisaAsphaltSidewalkNorth
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkcenter_0.png
+
+- type: tile
+  parent: RMCPlanetHybrisaAsphalt
+  id: RMCPlanetHybrisaAsphaltSidewalkSouth
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkcenter_1.png
+
+- type: tile
+  parent: RMCPlanetHybrisaAsphalt
+  id: RMCPlanetHybrisaAsphaltSidewalkWest
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkcenter_2.png
+
+- type: tile
+  parent: RMCPlanetHybrisaAsphalt
+  id: RMCPlanetHybrisaAsphaltSidewalkEast
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkcenter_3.png
 
 - type: tile
   parent: CMPlanetBase
