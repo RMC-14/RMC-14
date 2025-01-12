@@ -14,7 +14,7 @@ RELEASE_DIR = "release"
 # CONFIGURATION PARAMETERS
 # Forks should change these to publish to their own infrastructure.
 #
-ROBUST_CDN_URL = "https://cdn.stalkers14.xyz"
+ROBUST_CDN_URL = "https://cdn.stalkers14.xyz/"
 FORK_ID = "warhammer"
 
 def main():
