@@ -14,7 +14,7 @@
             <Label Name="OperationName" Access="Public" />
         </BoxContainer>
         <cc:HSeparator Color="#4972A1" Margin="0 5" />
-        <Button Name="MedalButton" Access="Public" Text="Give a medal" StyleClasses="OpenBoth" />
+        <Button Name="MedalButton" Access="Public" Text="{Loc rmc-groundside-operations-give-medal}" StyleClasses="OpenBoth" />
         <Button Name="TacticalMapButton" Access="Public" Text="{Loc rmc-groundside-operations-tactical-map}" StyleClasses="OpenBoth" />
         <Button Name="OverwatchButton" Access="Public" Text="{Loc rmc-groundside-operations-overwatch}" StyleClasses="OpenBoth" />
         <cc:HSeparator Color="#4972A1" Margin="0 5" />
