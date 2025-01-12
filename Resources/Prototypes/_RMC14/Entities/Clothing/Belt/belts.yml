@@ -533,6 +533,8 @@
       tags:
       - Grenade
   - type: FixedItemSizeStorage
+  - type: ItemCamouflage
+    camouflageVariations: {}
 
 - type: entity
   parent: RMCBeltGrenade
