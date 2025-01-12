@@ -2,9 +2,12 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Power"
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    xmlns:s="clr-namespace:Content.Client.UserInterface.Controls"
     Title="APC" MinSize="450 450">
     <BoxContainer Orientation="Vertical">
-        <RichTextLabel Name="LockedLabel" Access="Public" Visible="True" />
+        <s:StripeBack>
+            <RichTextLabel Name="LockedLabel" Access="Public" Visible="True" />
+        </s:StripeBack>
         <RichTextLabel Name="PowerStatusLabel" Access="Public" Margin="0 10 0 0" />
         <ui:BlueHorizontalSeparator />
         <BoxContainer Orientation="Horizontal" Visible="False">

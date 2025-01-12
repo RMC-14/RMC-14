@@ -14,12 +14,16 @@
     base: 0.5
     light: 0.69
     medium: 0.75
-    heavy: 0.806  
+    heavy: 0.806
   - type: WieldDelay
     baseDelay: 0.8
   - type: GunDualWielding
     weaponGroup: Rifle
   - type: GunPointBlank
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/sniper_mouse.rsi
+      state: all
 
 - type: entity
   parent: CMBaseCartridgeRifle

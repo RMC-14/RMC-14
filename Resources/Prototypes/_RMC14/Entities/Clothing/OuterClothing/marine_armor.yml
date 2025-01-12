@@ -536,28 +536,15 @@
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/smooth/urban.rsi
 
 - type: entity
-  parent: RMCBaseMarineArmor
+  parent: CMArmorM3Light
   id: CMArmorPress
   name: press body armor
   description: Body armor used by war correspondents in battles and wars across the universe.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/press.rsi
-  - type: CMArmor
-    armor: 15
-    bio: 15
-    explosionArmor: 20
-  - type: RMCArmorSpeedTier
-    speedTier: light
-  - type: ClothingSpeedModifier
-    walkModifier: .725
-    sprintModifier: .725
-  - type: Storage
-    grid:
-    - 0,0,3,1 # 2 slots
-  - type: ExplosionResistance
-    damageCoefficient: 0
-    worn: false
+  - type: ItemCamouflage # this is needed, otherwise it looks like M3MediumArmor
+    camouflageVariations: { }
 
 - type: Tag
   id: RMCScoutArmor

@@ -111,6 +111,9 @@ public sealed class DeployableItemSystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract)
             return;
 
+        if (ent.Comp.Position == DeployableItemPosition.None)
+            return;
+
         var user = args.User;
         args.Verbs.Add(new AlternativeVerb
         {

@@ -8,9 +8,6 @@ namespace Content.Shared._RMC14.Xenonids.Cleave;
 public sealed partial class XenoCleaveComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public bool Flings = false;
-
-    [DataField, AutoNetworkedField]
     public TimeSpan RootTime = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]

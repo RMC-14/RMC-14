@@ -155,6 +155,7 @@
       - PowerCell
       - CMFireExtinguisherPortable
       - RMCExplosiveBreachingCharge
+      - RodMetal1
 #     - # TODO nailgun, circuit board, plastic explosives, stock parts
       components:
       - Welder
@@ -192,7 +193,8 @@
       offset: -0.3125, -0.09375
       map: [ "enum.CMHolsterLayers.Fill" ]
       visible: false
-    - state: icon-front
+    - sprite: _RMC14/Objects/Clothing/Belt/combat_utility.rsi
+      state: icon-front
     - state: half
       map: [ "openLayer" ]
     - state: full
@@ -380,6 +382,8 @@
     sprite: _RMC14/Objects/Clothing/Belt/mortar/jungle-classic.rsi
   - type: Storage
     maxItemSize: Huge
+    grid:
+    - 0,0,9,1
     whitelist:
       components:
       - MortarShell
@@ -394,7 +398,7 @@
         components:
         - Gun
     - popup: rmc-storage-limit-max-shells
-      count: 6
+      count: 4
       whitelist:
         components:
         - MortarShell
@@ -461,7 +465,8 @@
       offset: 0.15625, 0.0
       map: [ "enum.CMHolsterLayers.Fill" ]
       visible: false
-    - state: icon-front
+    - sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator_pistol.rsi
+      state: icon-front
     - state: half
       map: [ "openLayer" ]
     - state: full
@@ -527,6 +532,8 @@
       tags:
       - Grenade
   - type: FixedItemSizeStorage
+  - type: ItemCamouflage
+    camouflageVariations: {}
 
 - type: entity
   parent: RMCBeltGrenade
@@ -558,7 +565,8 @@
       offset: -0.1875, 0.0
       map: [ "enum.CMHolsterLayers.Fill" ]
       visible: false
-    - state: icon-front
+    - sprite: _RMC14/Objects/Clothing/Belt/smart_pistol.rsi
+      state: icon-front
     - state: half
       map: [ "openLayer" ]
     - state: full
@@ -613,7 +621,8 @@
       state: m1984 # TODO RMC14 per-gun underlay
       map: [ "enum.CMHolsterLayers.Fill" ]
       visible: false
-    - state: icon-front
+    - sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+      state: icon-front
     - state: half
       map: [ "openLayer" ]
     - state: full
@@ -673,7 +682,8 @@
       state: m44r # TODO RMC14 per-gun underlay
       map: [ "enum.CMHolsterLayers.Fill" ]
       visible: false
-    - state: icon-front
+    - sprite: _RMC14/Objects/Clothing/Belt/holster_revolver.rsi
+      state: icon-front
     - state: half
       map: [ "openLayer" ]
     - state: full

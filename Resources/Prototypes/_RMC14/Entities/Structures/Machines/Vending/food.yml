@@ -11,6 +11,8 @@
   - type: CMAutomatedVendor
     sections:    
     - name: Festive Meals
+      holidays: 
+      - FestiveSeason
       entries:
       - id: RMCMarinePreparedMealCookies
         amount: 25
