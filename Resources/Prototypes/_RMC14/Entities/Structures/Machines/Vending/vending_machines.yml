@@ -275,7 +275,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/sec.rsi
   - type: VendingMachine
-    pack: CMVendorRiot
+    pack: RMCVendorRiot
     denyState: deny-unshaded
     ejectState: eject-unshaded
   - type: AccessReader
@@ -319,7 +319,7 @@
     RMCMagazinePistolM1984Rubber: 20
     RMCMagazinePistolM77Rubber: 20
     RMCMagazineRifleM54CRubber: 20
-    RMCMagazineRifleM4SPRrRubber: 20
+    RMCMagazineRifleM4SPRRubber: 20
     CMShellShotgunBeanbag: 20
     CMFirstAidKitFilled: 2
     CMBurnAidKitFilled: 2 #firstaid fire 2
