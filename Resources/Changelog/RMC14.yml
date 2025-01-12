@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Dropship fabricator printing is much faster
-    type: Tweak
-  id: 709
-  time: '2024-09-20T05:56:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4083
 - author: DummeHytteOst
   changes:
   - message: The lifesaver bag in the CO equipment vendor is now filled.
@@ -5113,5 +5106,23 @@
   id: 1208
   time: '2025-01-11T22:35:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5246
+- author: DrSmugleaf
+  changes:
+  - message: Fixed some belts having error sprites.
+    type: Fix
+  - message: Fixed SLs and FTLs not being able to buy night vision optics.
+    type: Fix
+  - message: Fix the squad info fireteam list not having a scroll bar.
+    type: Fix
+  - message: Fixed helmets not getting camouflage textures.
+    type: Fix
+  - message: Fixed grenade rigs looking like ammo rigs.
+    type: Fix
+  - message: Fixed the riot tech vendor not having items, and the SEA vendor not having
+      M4SPR rubber mags.
+    type: Fix
+  id: 1209
+  time: '2025-01-12T01:36:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5364
 Name: RMC14
 Order: -1
