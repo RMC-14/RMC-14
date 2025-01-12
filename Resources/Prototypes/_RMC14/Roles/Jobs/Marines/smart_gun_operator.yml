@@ -35,7 +35,7 @@
       points: 45
     - type: SquadArmorWearer
     - type: JobPrefix
-      prefix: "SG"
+      prefix: cm-job-prefix-gun-operator
 
 - type: startingGear
   id: CMGearSmartGunOperator

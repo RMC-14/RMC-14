@@ -33,7 +33,7 @@
         RMCSkillFireman: 2
         RMCSkillPolice: 2
     - type: JobPrefix
-      prefix: "MP"
+      prefix: cm-job-prefix-militarypolice
 
 - type: startingGear
   id: CMGearMilitaryPolice
