@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.Damage;
 
 /// <summary>
 /// Mostly the same as DamageModify, but always runs after the original, even if the original doesn't run at all due to ignoring resistances.
-/// For things like shields that need to take some damage no matter what.
+/// For things like shields that need to take some of the damage no matter what.
 /// </summary>
 
 public sealed class DamageModifyAfterResistEvent : EntityEventArgs, IInventoryRelayEvent
