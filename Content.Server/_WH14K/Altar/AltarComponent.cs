@@ -1,5 +1,3 @@
-
-
 namespace Content.Server._WH14K.Altar;
 
 [RegisterComponent]
