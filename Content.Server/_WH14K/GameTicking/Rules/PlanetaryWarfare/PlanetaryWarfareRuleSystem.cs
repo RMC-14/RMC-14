@@ -25,49 +25,52 @@ public sealed partial class PlanetaryWarfareRuleSystem : GameRuleSystem<Planetar
     {
         base.Initialize();
 
-        SubscribeLocalEvent<IGCommandComponent, ComponentRemove>(OnComponentRemove);
-        SubscribeLocalEvent<IGCommandComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<CommandIGComponent, ComponentRemove>(OnComponentRemove);
+        SubscribeLocalEvent<CommandIGComponent, MobStateChangedEvent>(OnMobStateChanged);
     }
 
     protected override void AppendRoundEndText(EntityUid uid, PlanetaryWarfareRuleComponent component, GameRuleComponent gameRule, ref RoundEndTextAppendEvent args)
     {
-        if (component.WinTypePW == WinTypePW.WarpShtormSummoned || component.WinTypePW == WinTypePW.AllCommandDead)
-            args.AddLine(Loc.GetString("pw-chaos-win"));
-
-        else if (component.WinTypePW == WinTypePW.AllAltarExploded)
-            args.AddLine(Loc.GetString("pw-ig-win"));
-
-        if (component.WinTypePW == WinTypePW.AllCommandDead)
-            args.AddLine(Loc.GetString("pw-all-command-dead-desc"));
-
-        else if (component.WinTypePW == WinTypePW.AllAltarExploded)
-            args.AddLine(Loc.GetString("pw-all-altars-exploded-desc"));
-
-        else if (component.WinTypePW == WinTypePW.WarpShtormSummoned)
-            args.AddLine(Loc.GetString("pw-all-warp-shtorm-summoned-desc"));
-
-        var IG = EntityQuery<IGCommandComponent, MindComponent>(true);
-        foreach (var i in IG)
+        switch (component.WinTypePW)
         {
-            if (i.Item2 == null || i.Item2.CharacterName == null || i.Item2.OriginalOwnerUserId == null )
+            case WinTypePW.WarpStormSummoned:
+                args.AddLine(Loc.GetString("pw-chaos-win"));
+                args.AddLine(Loc.GetString("pw-warp-storm-summoned-desc"));
+                break;
+            case WinTypePW.AllCommandDead:
+                args.AddLine(Loc.GetString("pw-chaos-win"));
+                args.AddLine(Loc.GetString("pw-all-command-dead-desc"));
+                break;
+            case WinTypePW.AllAltarExploded:
+                args.AddLine(Loc.GetString("pw-ig-win"));
+                args.AddLine(Loc.GetString("pw-all-altars-exploded-desc"));
+                break;
+            default:
+                break;
+        }
+
+        var igCommand = EntityQuery<CommandIGComponent, MindComponent>(true);
+        foreach (var (ig, mind) in igCommand)
+        {
+            if (mind is null || mind.CharacterName is null || mind.OriginalOwnerUserId is null)
                 return;
 
-            _player.TryGetPlayerData(i.Item2.OriginalOwnerUserId.Value, out var data);
+            _player.TryGetPlayerData(mind.OriginalOwnerUserId.Value, out var data);
 
             if (data == null)
                 return;
             args.AddLine(Loc.GetString("ig-command-list-start"));
 
-            args.AddLine(Loc.GetString("ig-command-list-name-user", ("name", i.Item2.CharacterName), ("user", data.UserName)));
+            args.AddLine(Loc.GetString("ig-command-list-name-user", ("name", mind.CharacterName), ("user", data.UserName)));
         }
     }
 
-    private void OnComponentRemove(EntityUid uid, IGCommandComponent component, ComponentRemove args)
+    private void OnComponentRemove(EntityUid uid, CommandIGComponent component, ComponentRemove args)
     {
         CheckRoundShouldEnd();
     }
 
-    private void OnMobStateChanged(EntityUid uid, IGCommandComponent component, MobStateChangedEvent ev)
+    private void OnMobStateChanged(EntityUid uid, CommandIGComponent component, MobStateChangedEvent ev)
     {
         if (ev.NewMobState == MobState.Dead)
             CheckRoundShouldEnd();
@@ -78,19 +81,19 @@ public sealed partial class PlanetaryWarfareRuleSystem : GameRuleSystem<Planetar
         var query = QueryActiveRules();
         while (query.MoveNext(out var uid, out _, out var pw, out _))
         {
+            WarpStormSummoned((uid, pw));
             AllCommandDead((uid, pw));
             AllAltarExploded((uid, pw));
-            OnWarpShtormSummoned((uid, pw));
         }
     }
 
     private void AllCommandDead(Entity<PlanetaryWarfareRuleComponent> ent)
     {
-        var IG = EntityQuery<IGCommandComponent, MobStateComponent>(true);
+        var igCommand = EntityQuery<CommandIGComponent, MobStateComponent>(true);
 
-        foreach (var i in IG)
+        foreach (var (ig, igMobState) in igCommand)
         {
-            if (i.Item2.CurrentState == MobState.Alive)
+            if (igMobState.CurrentState == MobState.Alive)
             {
                 return;
             }
@@ -102,11 +105,11 @@ public sealed partial class PlanetaryWarfareRuleSystem : GameRuleSystem<Planetar
 
     private void AllAltarExploded(Entity<PlanetaryWarfareRuleComponent> ent)
     {
-        var Altar = EntityQuery<AltarComponent>(true);
+        var altars = EntityQuery<AltarComponent>(true);
 
-        foreach (var a in Altar)
+        foreach (var altar in altars)
         {
-            if (!a.Exploded)
+            if (!altar.Exploded)
             {
                 return;
             }
@@ -116,10 +119,10 @@ public sealed partial class PlanetaryWarfareRuleSystem : GameRuleSystem<Planetar
         _roundEndSystem.EndRound();
     }
 
-    private void OnWarpShtormSummoned(Entity<PlanetaryWarfareRuleComponent> ent)
+    private void WarpStormSummoned(Entity<PlanetaryWarfareRuleComponent> ent)
     {
-        var WarpShtorm = EntityQuery<WarpShtormComponent>();
-        foreach (var ws in WarpShtorm)
+        var warpStorms = EntityQuery<WarpStormComponent>();
+        foreach (var warpStorm in warpStorms)
         {
             var mapQuery = EntityQueryEnumerator<MapLightComponent>();
             while (mapQuery.MoveNext(out var uid, out var map))
@@ -128,7 +131,7 @@ public sealed partial class PlanetaryWarfareRuleSystem : GameRuleSystem<Planetar
                 Dirty(uid, map);
             }
 
-            ent.Comp.WinTypePW = WinTypePW.WarpShtormSummoned;
+            ent.Comp.WinTypePW = WinTypePW.WarpStormSummoned;
             _roundEndSystem.EndRound();
         }
     }

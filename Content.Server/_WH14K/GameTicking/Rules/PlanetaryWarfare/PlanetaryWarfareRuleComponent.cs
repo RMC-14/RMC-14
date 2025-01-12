@@ -1,5 +1,3 @@
-
-
 namespace Content.Server._WH14K.GameTicking.Rules;
 
 [RegisterComponent, Access(typeof(PlanetaryWarfareRuleSystem))]
@@ -12,7 +10,7 @@ public sealed partial class PlanetaryWarfareRuleComponent : Component
 public enum WinTypePW : byte
 {
     AllCommandDead,
-    WarpShtormSummoned,
+    WarpStormSummoned,
     Neutral,
     AllAltarExploded
 }

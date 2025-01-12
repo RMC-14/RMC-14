@@ -10,7 +10,7 @@ public sealed partial class AltarSystem : EntitySystem
         base.Initialize();
     }
 
-    public void AltarExploded(AltarComponent component)
+    private void AltarExploded(AltarComponent component)
     {
         component.Exploded = true;
         _pw.CheckRoundShouldEnd();
