@@ -28,6 +28,14 @@
 
 - type: entity
   parent: RMCEffectHeal
+  id: RMCEffectHealSacrifice
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    color: "#44253D"
+
+- type: entity
+  parent: RMCEffectHeal
   id: RMCEffectHealAilments
   categories: [ HideSpawnMenu ]
   components:
