@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Added handcuff boxes.
-    type: Add
-  id: 714
-  time: '2024-09-21T05:04:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4092
 - author: Vermidia
   changes:
   - message: Added the shotgun sentry upgrade, which uses it's own drums and shoots
@@ -5126,5 +5119,12 @@
   id: 1213
   time: '2025-01-13T04:39:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5372
+- author: CyberTropic
+  changes:
+  - message: Fixed award ribbon order.
+    type: Fix
+  id: 1214
+  time: '2025-01-13T04:41:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5365
 Name: RMC14
 Order: -1
