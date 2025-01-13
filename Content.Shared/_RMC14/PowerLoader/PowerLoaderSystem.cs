@@ -444,6 +444,8 @@ public sealed class PowerLoaderSystem : EntitySystem
         var containedEntity = EntityManager.GetEntity(args.ContainedEntity);
 
         var slot = _container.GetContainer(containerEntity, args.SlotId);
+        if (slot.ContainedEntities.Count > 0)
+            return;
         _container.Insert(containedEntity, slot);
 
         if (user.Comp != null)
@@ -477,6 +479,8 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
 
         var slot = _container.GetContainer(containerEntity, args.SlotId);
+        if (slot.ContainedEntities.Count > 0)
+            return;
         _container.Insert(containedEntity, slot);
 
         if (user.Comp != null)
