@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Content.Shared._RMC14.Scoping;
 using Content.Shared.Actions;
+using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
@@ -30,10 +31,11 @@ public sealed class VisorSystem : EntitySystem
         SubscribeLocalEvent<CycleableVisorComponent, CycleVisorActionEvent>(OnCycleableVisorAction);
         SubscribeLocalEvent<CycleableVisorComponent, InteractUsingEvent>(OnCycleableVisorInteractUsing, before: [typeof(SharedStorageSystem)]);
         SubscribeLocalEvent<CycleableVisorComponent, InventoryRelayedEvent<ScopedEvent>>(OnCycleableVisorScoped);
+        SubscribeLocalEvent<CycleableVisorComponent, ExaminedEvent>(OnCycleableVisorExamined);
 
         SubscribeLocalEvent<VisorComponent, ActivateVisorEvent>(OnVisorActivate);
         SubscribeLocalEvent<VisorComponent, DeactivateVisorEvent>(OnVisorDeactivate);
-        SubscribeLocalEvent<VisorComponent, PowerCellChangedEvent>(OnCycleableVisorPowerCellChanged);
+        SubscribeLocalEvent<VisorComponent, PowerCellChangedEvent>(OnCycleableVisorPowerCellChanged, after: [typeof(SharedPowerCellSystem)]);
     }
 
     private void OnInventoryScoped(Entity<InventoryComponent> ent, ref ScopedEvent args)
@@ -83,6 +85,12 @@ public sealed class VisorSystem : EntitySystem
             containers.TryGetValue(current.Value, out currentContainer) &&
             currentContainer.ContainedEntity is { } newContained)
         {
+            if (!_powerCell.HasDrawCharge(newContained, user: args.Performer))
+            {
+                current = null;
+                return;
+            }
+
             var ev = new ActivateVisorEvent(ent, args.Performer);
             RaiseLocalEvent(newContained, ref ev);
 
@@ -132,6 +140,8 @@ public sealed class VisorSystem : EntitySystem
 
         if (anyRemoved)
             _popup.PopupClient("You remove the inserted visors", args.Target, args.User);
+        else
+            _popup.PopupClient("There are no visors left to take out!", args.Target, args.User);
 
         ent.Comp.CurrentVisor = null;
         Dirty(ent);
@@ -154,9 +164,18 @@ public sealed class VisorSystem : EntitySystem
         args.Args = ev.Event;
     }
 
+    private void OnCycleableVisorExamined(Entity<CycleableVisorComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(CycleableVisorComponent)))
+        {
+            args.PushMarkup("Use a [color=cyan]screwdriver[/color] on this to take out any visors!");
+        }
+    }
+
     private void OnVisorActivate(Entity<VisorComponent> ent, ref ActivateVisorEvent args)
     {
         _powerCell.SetDrawEnabled(ent.Owner, true);
+        _powerCell.QueueUpdate(ent.Owner);
     }
 
     private void OnVisorDeactivate(Entity<VisorComponent> ent, ref DeactivateVisorEvent args)
@@ -166,8 +185,26 @@ public sealed class VisorSystem : EntitySystem
 
     private void OnCycleableVisorPowerCellChanged(Entity<VisorComponent> ent, ref PowerCellChangedEvent args)
     {
-        if (!args.Ejected && _powerCell.HasActivatableCharge(ent))
+        if (!args.Ejected && _powerCell.HasDrawCharge(ent))
             return;
+
+        // power cell draw is completely broken upstream and does not work AT ALL if
+        // the battery and power cell draw component are on different entities
+        // all because client and server systems for power cell draw are DIFFERENT
+        // despite some of the code being the same and copy pasted
+        // and ALL OF THIS being done JUST to avoid networking a SINGLE NUMBER on battery component
+        // so we manually sync the booleans that the client needs not to mispredict
+        // because having 3 times the code and 2 booleans is easier than networking one float
+        // this is fucking dogshit thank you to whichever soldier did this personal shoutout
+        if (TryComp(ent, out PowerCellDrawComponent? powerCellDraw))
+        {
+            var canDraw = !args.Ejected && _powerCell.HasDrawCharge(ent, powerCellDraw);
+            var canUse = !args.Ejected && _powerCell.HasDrawCharge(ent, powerCellDraw);
+
+            powerCellDraw.CanDraw = canDraw;
+            powerCellDraw.CanUse = canUse;
+            Dirty(ent, powerCellDraw);
+        }
 
         if (!_container.TryGetContainingContainer((ent, null), out var visorContainer) ||
             !TryComp(visorContainer.Owner, out CycleableVisorComponent? cycleable))
@@ -177,6 +214,15 @@ public sealed class VisorSystem : EntitySystem
 
         var ev = new DeactivateVisorEvent((visorContainer.Owner, cycleable), null);
         RaiseLocalEvent(ent, ref ev);
+
+        if (cycleable.CurrentVisor is { } current &&
+            current >= 0 &&
+            cycleable.Containers.TryGetValue(current, out var container) &&
+            visorContainer.ID == container)
+        {
+            cycleable.CurrentVisor = null;
+            Dirty(visorContainer.Owner, cycleable);
+        }
     }
 
     private bool AttachVisor(Entity<CycleableVisorComponent> cycleable,

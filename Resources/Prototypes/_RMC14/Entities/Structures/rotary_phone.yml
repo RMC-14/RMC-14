@@ -35,6 +35,8 @@
           Base: { state: rotary_phone }
           Ring: { state: rotary_phone_ring }
           Ear: { state: rotary_phone_ear }
+  - type: WallMount
+    arc: 360
 
 - type: entity
   parent: RMCRotaryPhone
@@ -54,8 +56,6 @@
           Base: { state: wall_phone }
           Ring: { state: wall_phone_ring }
           Ear: { state: wall_phone_ear }
-  - type: WallMount
-    arc: 360
 
 - type: entity
   parent: BaseItem
