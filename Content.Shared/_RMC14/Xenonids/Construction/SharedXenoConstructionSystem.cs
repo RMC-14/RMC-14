@@ -37,6 +37,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Content.Shared.Physics.CollisionGroup;
+using Content.Shared.Tiles;
 
 
 namespace Content.Shared._RMC14.Xenonids.Construction;
@@ -65,6 +66,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
     [Dependency] private readonly TagSystem _tags = default!;
+    [Dependency] private readonly FloorTileSystem _tiles = default!;
 
     private static readonly ImmutableArray<Direction> Directions = Enum.GetValues<Direction>()
         .Where(d => d != Direction.Invalid)
@@ -450,6 +452,31 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
+        if (HasComp<HiveConstructionRequiresSpaceComponent>(target))
+        {
+            var centerTile = _mapSystem.GetTileRef((gridId, grid), target.ToCoordinates()).GridIndices;
+            for (var adjacentX = centerTile.X - 1; adjacentX <= centerTile.X + 1; adjacentX++)
+            {
+                for (var adjacentY = centerTile.Y - 1; adjacentY <= centerTile.Y + 1; adjacentY++)
+                {
+                    if (adjacentX == adjacentY && adjacentX == 0)
+                    {
+                        continue;
+                    }
+
+                    var adjacentTile = new Vector2i(adjacentX, adjacentY);
+                    if (_turf.IsTileBlocked(gridId, adjacentTile, MidImpassable, grid))
+                    {
+                        _popup.PopupClient(
+                        Loc.GetString("rmc-xeno-construction-requires-space", ("choice", target)),
+                        target,
+                        args.User);
+                        return;
+                    }
+                }
+            }
+        }
+
         if (_net.IsClient)
             return;
 
@@ -722,6 +749,32 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 if (_net.IsServer)
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-requires-hive-weeds", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
                 return false;
+            }
+
+            if (choiceProto.HasComponent<HiveConstructionRequiresSpaceComponent>(_compFactory))
+            {
+                var centerTile = _mapSystem.GetTileRef((gridId, grid), target).GridIndices;
+                for (var adjacentX = centerTile.X - 1; adjacentX <= centerTile.X + 1; adjacentX++)
+                {
+                    for (var adjacentY = centerTile.Y - 1; adjacentY <= centerTile.Y + 1; adjacentY++)
+                    {
+                        if (adjacentX == adjacentY && adjacentX == 0)
+                        {
+                            continue;
+                        }
+
+                        var adjacentTile = new Vector2i(adjacentX, adjacentY);
+                        if (_turf.IsTileBlocked(gridId, adjacentTile, MidImpassable, grid))
+                        {
+                            _popup.PopupClient(
+                            Loc.GetString("rmc-xeno-construction-requires-space", ("choice", choiceProto.Name)),
+                            xeno,
+                            xeno,
+                            PopupType.MediumCaution);
+                            return false;
+                        }
+                    }
+                }
             }
 
 

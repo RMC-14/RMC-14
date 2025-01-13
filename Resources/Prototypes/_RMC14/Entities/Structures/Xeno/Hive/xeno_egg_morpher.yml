@@ -45,6 +45,7 @@
         acts: ["Destruction"]
   - type: EggMorpher
   - type: HiveConstructionRequiresHiveWeeds
+  - type: HiveConstructionRequiresSpace
   - type: HiveConstructionLimited
     id: HiveEggMorpherXeno
   - type: UserInterface
@@ -83,6 +84,7 @@
     plasmaCost: 450
     spawn: HiveEggMorpherXeno
   - type: HiveConstructionRequiresHiveWeeds
+  - type: HiveConstructionRequiresSpace
   - type: HiveConstructionLimited
     id: HiveEggMorpherXeno
   - type: WarpPoint
