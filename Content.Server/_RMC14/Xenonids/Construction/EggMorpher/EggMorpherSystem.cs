@@ -94,7 +94,6 @@ public sealed partial class EggMorpherSystem : SharedEggMorpherSystem
             return;
         }
         args.Handled = true;
-        _hand.TryPickup(user, newParasite.Value);
     }
     private void OnInteractUsing(Entity<EggMorpherComponent> eggMorpher, ref InteractUsingEvent args)
     {
