@@ -389,9 +389,9 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         ContainerSlot? slot = null;
         if (args.BeingAttached)
-            CanAttachPopup(ref user, ent, used.Value, out slot);
+            args.CanUse = CanAttachPopup(ref user, ent, used.Value, out slot);
         else
-            CanDetachPopup(ref user, ent, out slot);
+            args.CanUse = CanDetachPopup(ref user, ent, out slot);
 
         if (slot is null)
         {
@@ -444,6 +444,8 @@ public sealed class PowerLoaderSystem : EntitySystem
         var containedEntity = EntityManager.GetEntity(args.ContainedEntity);
 
         var slot = _container.GetContainer(containerEntity, args.SlotId);
+        if (slot.ContainedEntities.Count > 0)
+            return;
         _container.Insert(containedEntity, slot);
 
         if (user.Comp != null)
@@ -477,6 +479,8 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
 
         var slot = _container.GetContainer(containerEntity, args.SlotId);
+        if (slot.ContainedEntities.Count > 0)
+            return;
         _container.Insert(containedEntity, slot);
 
         if (user.Comp != null)
@@ -584,7 +588,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         RaiseLocalEvent(target, slotEv);
         var slot = _container.EnsureContainer<ContainerSlot>(target, slotEv.SlotId);
 
-        if (slot is null)
+        if (slot is null || !slotEv.CanUse)
         {
             return;
         }
