@@ -191,7 +191,7 @@
   id: CMAirlockGlassHybrisa
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Doors/Airlocks/hybrisa_door_glass.rsi.rsi
+    sprite: _RMC14/Structures/Doors/Airlocks/hybrisa_door_glass.rsi
 
 - type: entity
   parent: CMAirlockGlass
