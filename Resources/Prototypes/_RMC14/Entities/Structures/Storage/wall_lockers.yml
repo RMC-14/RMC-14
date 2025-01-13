@@ -1,0 +1,38 @@
+- type: entity
+  id: CMLockerCMDCabinet
+  name: command tablet cabinet
+  suffix: Empty
+  parent: CMLockerBase
+  description: A bulletproof cabinet containing the command tablet for usage by a Commander.
+  # description: A bulletproof cabinet containing the command tablet for usage by the CO and XO. Opens only to them and department heads. (Parity desc, once Senior access is implemented)
+  components:
+  - type: WallMount
+    arc: 175
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Wallmounts/cmdcabinet.rsi
+  - type: EntityStorage
+    isCollidableWhenOpen: true
+    enteringOffset: 0, -0.6
+    enteringRange: 0.03
+  - type: AccessReader
+    access: [["CMAccessCommand"]]
+
+- type: entity
+  id: CMLockerCMDCabinetFilled
+  suffix: Filled
+  parent: CMLockerCMDCabinet
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: CMLockerFillCMDCabinet
+
+# there should be a variant for CL, but it's fill is not yet implemented
+
+- type: entityTable
+  id: CMLockerFillCMDCabinet
+  table: !type:AllSelector
+    children:
+    - id: RMCTabletCO
+

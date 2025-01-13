@@ -430,7 +430,6 @@
   parent: RMCAttachmentScopeBase
   id: RMCAttachmentXS-9
   name: XS-9 targeting relay
-  suffix: Desert
   description: While still in development, the XS-9 Targeting Relay has many features -- most of them disabled for the field testing -- functions slightly better than a standard scope.
   components:
   - type: Sprite
@@ -440,6 +439,7 @@
     - RMCAttachmentRail
     - RMCAttachmentXS-9
   - type: AttachableVisuals
+  - type: Appearance
   - type: AttachableToggleable
     breakOnMove: false
     icon:

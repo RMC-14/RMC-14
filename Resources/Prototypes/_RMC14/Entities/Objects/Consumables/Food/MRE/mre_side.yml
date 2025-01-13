@@ -67,6 +67,8 @@
           Quantity: 2
   - type: Extractable
     grindableSolutionName: food
+  - type: InjectableSolution
+    solution: food
 
 - type: entity
   parent: CMMREFoodSide

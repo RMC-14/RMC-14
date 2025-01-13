@@ -7,6 +7,7 @@ using Content.Shared.Friction;
 using Content.Shared.Gravity;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Weapons.Melee;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
@@ -41,6 +42,7 @@ public sealed class ThrowingSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IConfigurationManager _configManager = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
 
     public override void Initialize()
     {
@@ -216,7 +218,12 @@ public sealed class ThrowingSystem : EntitySystem
             return;
 
         if (recoil)
-            _recoil.KickCamera(user.Value, -direction * 0.04f);
+        {
+            // _recoil.KickCamera(user.Value, -direction * 0.04f);
+            var localPos = Vector2.Transform(transform.LocalPosition + direction, _transform.GetInvWorldMatrix(transform));
+            localPos = transform.LocalRotation.RotateVec(localPos);
+            _melee.DoLunge(user.Value, user.Value, Angle.Zero, localPos, null, predicted: false);
+        }
 
         // Give thrower an impulse in the other direction
         if (pushbackRatio != 0.0f &&

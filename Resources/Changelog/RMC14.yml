@@ -1,90 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: The lifesaver bag in the CO equipment vendor is now filled.
-    type: Fix
-  id: 710
-  time: '2024-09-20T08:42:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4086
-- author: DrSmugleaf
-  changes:
-  - message: Fixed not being able to immediately melee with a gun after shooting it.
-    type: Fix
-  id: 711
-  time: '2024-09-20T20:38:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4087
-- author: Vermidia
-  changes:
-  - message: Scout sight now comes with a medical HUD
-    type: Fix
-  id: 712
-  time: '2024-09-21T05:05:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4090
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Window frames are now deconstructed with a wrench rather than a welder
-    type: Tweak
-  id: 713
-  time: '2024-09-21T05:03:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4071
-- author: DummeHytteOst
-  changes:
-  - message: Added handcuff boxes.
-    type: Add
-  id: 714
-  time: '2024-09-21T05:04:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4092
-- author: Vermidia
-  changes:
-  - message: Added the shotgun sentry upgrade, which uses it's own drums and shoots
-      buckshot, and deals damage to attackers, at the cost of low range and firerate.
-    type: Add
-  id: 715
-  time: '2024-09-21T05:15:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4010
-- author: FungiFellow
-  changes:
-  - message: Targets are now incredibly durable
-    type: Tweak
-  - message: Ported the Armored and Xeno Targets
-    type: Add
-  id: 716
-  time: '2024-09-21T05:17:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4040
-- author: crystalHex
-  changes:
-  - message: Added two new machete scabbards (one for the smart gun operator) and
-      a shotgun scabbard.
-    type: Add
-  id: 717
-  time: '2024-09-21T05:22:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3674
-- author: DrSmugleaf
-  changes:
-  - message: Added the tactical map. This can be used to get a view of the current
-      planet map, and can be updated every 4 minutes by Command and the Queen to give
-      each side drawn directions and a static view of everyone else's position at
-      the time of the update. The tactical map can be opened with an action in your
-      bar, and Command can edit it by opening a map table in CIC.
-    type: Add
-  - message: Removed the auto-balancing system that adjusts marines per xeno depending
-      on round outcomes, as each individual update no longer has as big of an impact
-      on balance as they used to and the biggest difference right now is made by the
-      amount of players in the server.
-    type: Remove
-  - message: Added the missing job slot scaling feature that will adjust how many
-      of each marine role are available depending on how many marines are playing.
-      The scaling depends on the specific role, with the heaviest adjustments happening
-      to still unimplemented roles (mess technician and ordnance technician), but
-      will for example allow up to 5 staff officers with 160 or more marines, with
-      1 + 1 staff officer for each 40 marines, for a range of 2 to 5. The standard
-      4 specs and sgs are available at 60 marines or above, with a minimum of 2 of
-      each being available per round. This scaling won't affect research unlocking
-      spec slots in the future once implemented.
-    type: Fix
-  id: 718
-  time: '2024-09-21T07:08:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4094
 - author: DrSmugleaf
   changes:
   - message: Added Sentry name to the list of Patreon nameable items. The name will
@@ -5124,5 +5038,95 @@
   id: 1209
   time: '2025-01-12T01:36:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5364
+- author: blueDev2
+  changes:
+  - message: Fixed Underbarrel Grenade Launcher grenades not beeping and showing primed
+      status when fired.
+    type: Fix
+  id: 1210
+  time: '2025-01-13T04:15:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5376
+- author: Vermidia
+  changes:
+  - message: Fixed being able to attach a weapon/insert ammo on a dropship weapon
+      point when it already had a weapon/ammo in it.
+    type: Fix
+  id: 1211
+  time: '2025-01-13T04:16:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5373
+- author: Vermidia
+  changes:
+  - message: Fixed visuals of some xeno abilities
+    type: Fix
+  id: 1212
+  time: '2025-01-13T04:37:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5377
+- author: Vermidia
+  changes:
+  - message: Fixed shields not absorbing explosion or fire damage.
+    type: Fix
+  id: 1213
+  time: '2025-01-13T04:39:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5372
+- author: CyberTropic
+  changes:
+  - message: Fixed award ribbon order.
+    type: Fix
+  id: 1214
+  time: '2025-01-13T04:41:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5365
+- author: J C Denton
+  changes:
+  - message: Command tablet cabinet, used for storing the tablet in CIC.
+    type: Add
+  id: 1215
+  time: '2025-01-13T05:09:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5371
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed warden armor not having the same stats as M2 MP armor.
+    type: Fix
+  id: 1216
+  time: '2025-01-13T05:15:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5366
+- author: DrSmugleaf
+  changes:
+  - message: Fixed throwing giving you camera recoil and added a lunge to your character
+      when you throw something.
+    type: Fix
+  - message: Fixed night vision optics lasting for 5 hours instead of 10 minutes.
+      Added examine text to helmets on how to take optics out, which is with a screwdriver.
+    type: Fix
+  - message: Fixed showing non-acting squad leaders buttons to modify fireteams, which
+      do nothing for them.
+    type: Fix
+  - message: Fixed some phones on the Almayer having gone missing.
+    type: Fix
+  - message: Fixed the automated utilities squad vendor not having an engineer kit.
+    type: Fix
+  - message: Fixed dropship rotary phones not being able to be used.
+    type: Fix
+  - message: Fixed night vision optics not being marked as recommended and the SL
+      one costing 20 instead of 25 points.
+    type: Fix
+  - message: Fixed mateba holster not fitting into the suitstorage slot.
+    type: Fix
+  - message: Fixed protein bars, prepared meals, and MRE components not being able
+      to have chems injected with a syringe.
+    type: Fix
+  - message: Updated the description of move order to clarify that it does not speed
+      you up without armor equipped.
+    type: Tweak
+  id: 1217
+  time: '2025-01-13T05:38:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5379
+- author: DrSmugleaf
+  changes:
+  - message: 'Added 3 new player guidebook guides by Kynthos on Discord:  Communications
+      Towers and Sensor Tower, Combat Technician and Maintenance Technician.'
+    type: Add
+  id: 1218
+  time: '2025-01-13T07:52:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5381
 Name: RMC14
 Order: -1

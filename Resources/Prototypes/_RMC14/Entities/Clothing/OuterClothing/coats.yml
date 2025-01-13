@@ -175,13 +175,13 @@
   parent: RMCBaseJacket
   id: CMCoatASO
   name: auxiliary support officer jacket
-  suffix: Jungle
   description: A comfortable vest for officers who are expected to work long hours staring at rows of numbers and inspecting equipment from knives to torpedos to entire dropships.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
+  - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
@@ -262,7 +262,6 @@
 - type: entity
   parent: CMCoatOfficer
   id: RMCCoatService
-  suffix: Jungle
   description: A service jacket typically worn by officers of the UNMC. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
