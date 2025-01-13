@@ -29,8 +29,11 @@ public sealed class RMCTriggerSystem : EntitySystem
                     _trigger.HandleTimerTrigger(projectile, null, ent.Comp.Delay, ent.Comp.BeepInterval, ent.Comp.InitialBeepDelay, ent.Comp.BeepSound);
                     break;
                 case TimerStartMode.OnHitGround:
-                    var primtedAmmoComp = EnsureComp<TriggerOnThrowEndComponent>(projectile);
-                    primtedAmmoComp.Delay = TimeSpan.FromSeconds(ent.Comp.Delay);
+                    var primedAmmoComp = EnsureComp<TriggerOnThrowEndComponent>(projectile);
+                    primedAmmoComp.Delay = TimeSpan.FromSeconds(ent.Comp.Delay);
+                    primedAmmoComp.BeepInterval = ent.Comp.BeepInterval;
+                    primedAmmoComp.InitialBeepDelay = ent.Comp.InitialBeepDelay;
+                    primedAmmoComp.BeepSound = ent.Comp.BeepSound;
                     break;
 
             }
@@ -39,8 +42,7 @@ public sealed class RMCTriggerSystem : EntitySystem
 
     private void OnThrownAmmoStops(Entity<TriggerOnThrowEndComponent> ent, ref StopThrowEvent args)
     {
-        var active = EnsureComp<ActiveTriggerOnThrowEndComponent>(ent);
-        active.TriggerAt = _timing.CurTime + ent.Comp.Delay;
+        _trigger.HandleTimerTrigger(ent, null, ((float)ent.Comp.Delay.TotalSeconds), ent.Comp.BeepInterval, ent.Comp.InitialBeepDelay, ent.Comp.BeepSound);
     }
 
     private void OnTriggerOnFixedDistanceStop(Entity<TriggerOnFixedDistanceStopComponent> ent, ref ProjectileFixedDistanceStopEvent args)
