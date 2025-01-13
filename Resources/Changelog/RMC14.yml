@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: crystalHex
-  changes:
-  - message: Added two new machete scabbards (one for the smart gun operator) and
-      a shotgun scabbard.
-    type: Add
-  id: 717
-  time: '2024-09-21T05:22:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3674
 - author: DrSmugleaf
   changes:
   - message: Added the tactical map. This can be used to get a view of the current
@@ -5123,5 +5115,36 @@
   id: 1216
   time: '2025-01-13T05:15:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5366
+- author: DrSmugleaf
+  changes:
+  - message: Fixed throwing giving you camera recoil and added a lunge to your character
+      when you throw something.
+    type: Fix
+  - message: Fixed night vision optics lasting for 5 hours instead of 10 minutes.
+      Added examine text to helmets on how to take optics out, which is with a screwdriver.
+    type: Fix
+  - message: Fixed showing non-acting squad leaders buttons to modify fireteams, which
+      do nothing for them.
+    type: Fix
+  - message: Fixed some phones on the Almayer having gone missing.
+    type: Fix
+  - message: Fixed the automated utilities squad vendor not having an engineer kit.
+    type: Fix
+  - message: Fixed dropship rotary phones not being able to be used.
+    type: Fix
+  - message: Fixed night vision optics not being marked as recommended and the SL
+      one costing 20 instead of 25 points.
+    type: Fix
+  - message: Fixed mateba holster not fitting into the suitstorage slot.
+    type: Fix
+  - message: Fixed protein bars, prepared meals, and MRE components not being able
+      to have chems injected with a syringe.
+    type: Fix
+  - message: Updated the description of move order to clarify that it does not speed
+      you up without armor equipped.
+    type: Tweak
+  id: 1217
+  time: '2025-01-13T05:38:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5379
 Name: RMC14
 Order: -1
