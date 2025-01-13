@@ -266,6 +266,9 @@ public abstract class SharedTelephoneSystem : EntitySystem
             return;
         }
 
+        rotaryPhone.Other = null;
+        Dirty(rotary, rotaryPhone);
+
         if (user != null)
         {
             if (_hands.TryDropIntoContainer(user.Value, telephone, container))
