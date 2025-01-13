@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Window frames are now deconstructed with a wrench rather than a welder
-    type: Tweak
-  id: 713
-  time: '2024-09-21T05:03:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4071
 - author: DummeHytteOst
   changes:
   - message: Added handcuff boxes.
@@ -5126,5 +5119,12 @@
   id: 1212
   time: '2025-01-13T04:37:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5377
+- author: Vermidia
+  changes:
+  - message: Fixed shields not absorbing explosion or fire damage.
+    type: Fix
+  id: 1213
+  time: '2025-01-13T04:39:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5372
 Name: RMC14
 Order: -1
