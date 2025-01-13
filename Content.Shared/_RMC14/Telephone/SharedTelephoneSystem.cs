@@ -266,9 +266,6 @@ public abstract class SharedTelephoneSystem : EntitySystem
             return;
         }
 
-        rotaryPhone.Other = null;
-        Dirty(rotary, rotaryPhone);
-
         if (user != null)
         {
             if (_hands.TryDropIntoContainer(user.Value, telephone, container))
@@ -460,6 +457,12 @@ public abstract class SharedTelephoneSystem : EntitySystem
 
         if (ent.Comp.Other is { } other)
         {
+            if (TryComp<RotaryPhoneDialingComponent>(other, out var dialing))
+            {
+                dialing.Other = null;
+                Dirty(other, dialing);
+            }
+
             HangUp(ent, other);
 
             if (!HasPickedUp(other))
