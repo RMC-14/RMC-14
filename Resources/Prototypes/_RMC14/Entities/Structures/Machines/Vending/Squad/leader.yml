@@ -70,7 +70,8 @@
     #  points: 4
     #  recommended: true
       - id: RMCVisorNightVision
-        points: 20
+        points: 25
+        recommended: true
     - name: Engineering Supplies
       entries:
       - id: CMHandsInsulated
