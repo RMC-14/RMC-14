@@ -37,8 +37,8 @@
       - CMMagazineSmg
       - CMMagazineSniper
       - Grenade
-#      - # TODO RMC14 mines
-#      - # TODO RMC14 snacks
+      #      - # TODO RMC14 mines
+      #      - # TODO RMC14 snacks
       components:
       - BallisticAmmoProvider
   - type: IgnoreContentsSize
@@ -115,7 +115,7 @@
       - PowerCell
       - CMFireExtinguisherPortable
       - RMCExplosiveBreachingCharge
-#      - # TODO nailgun, circuit board
+      #      - # TODO nailgun, circuit board
       components:
       - Welder
       - PowerCell
@@ -156,7 +156,7 @@
       - CMFireExtinguisherPortable
       - RMCExplosiveBreachingCharge
       - RodMetal1
-#     - # TODO nailgun, circuit board, plastic explosives, stock parts
+      #     - # TODO nailgun, circuit board, plastic explosives, stock parts
       components:
       - Welder
       - PowerCell
@@ -220,7 +220,7 @@
       - PowerCell
       - CMFireExtinguisherPortable
       - RMCShellShotgun
-#      - # TODO nailgun, circuit board
+      #      - # TODO nailgun, circuit board
       components:
       - Welder
       - PowerCell
@@ -301,11 +301,11 @@
       - CMOintment
       - CMTraumaKit
       - CMBurnKit
-#      - # TODO RMC14 splints
+      #      - # TODO RMC14 splints
       - CMAutoInjector
       - CMRollerBed
       - BodyBag
-#      - # TODO RMC14 latex gloves
+      #      - # TODO RMC14 latex gloves
       - Hypospray
       components:
       - Hypospray
@@ -390,7 +390,7 @@
       - MortarShell
       tags:
       - Sidearm
-#      - # TODO RMC14 pistol, revolver, flaregun
+  #      - # TODO RMC14 pistol, revolver, flaregun
   - type: FixedItemSizeStorage
   - type: LimitedStorage
     limits:
@@ -511,6 +511,8 @@
   - type: Tag
     tags:
     - RMCSmartGunSidearmHolster
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: Tag
   id: RMCSmartGunSidearmHolster
@@ -534,7 +536,7 @@
       - Grenade
   - type: FixedItemSizeStorage
   - type: ItemCamouflage
-    camouflageVariations: {}
+    camouflageVariations: { }
 
 - type: entity
   parent: RMCBeltGrenade
@@ -604,6 +606,8 @@
   - type: Tag
     tags:
     - RMCSmartPistolHolster
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: Tag
   id: RMCSmartPistolHolster
@@ -665,6 +669,8 @@
   - type: Tag
     tags:
     - RMCGeneralPistolHolster
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: Tag
   id: RMCGeneralPistolHolster
@@ -721,6 +727,8 @@
   - type: Tag
     tags:
     - RMCGeneralRevolverHolster
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: Tag
   id: RMCGeneralRevolverHolster
