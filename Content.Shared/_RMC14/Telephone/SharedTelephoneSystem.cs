@@ -457,6 +457,12 @@ public abstract class SharedTelephoneSystem : EntitySystem
 
         if (ent.Comp.Other is { } other)
         {
+            if (TryComp<RotaryPhoneDialingComponent>(other, out var dialing))
+            {
+                dialing.Other = null;
+                Dirty(other, dialing);
+            }
+
             HangUp(ent, other);
 
             if (!HasPickedUp(other))
@@ -508,7 +514,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
             {
                 if (time > phone.LastCall + phone.VoicemailDelay && !dialing.DidVoicemail)
                 {
-                    if (HangUpReceiving((other, receiving), receivingPhone.Phone.Value, null));
+                    if (HangUpReceiving((other, receiving), receivingPhone.Phone.Value, null))
                     {
                         StopSound(other);
                         StopSound(uid);

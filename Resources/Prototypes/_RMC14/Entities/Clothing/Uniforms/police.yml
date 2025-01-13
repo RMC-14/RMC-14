@@ -3,7 +3,6 @@
   parent: JumpsuitMarine
   id: CMJumpsuitMP
   name: military police jumpsuit
-  suffix: Jungle
   description: Standard-issue Military Police uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
@@ -23,7 +22,6 @@
   parent: JumpsuitMarine
   id: CMJumpsuitWarden
   name: military warden uniform
-  suffix: Jungle
   description: Standard-issue Military Warden uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite

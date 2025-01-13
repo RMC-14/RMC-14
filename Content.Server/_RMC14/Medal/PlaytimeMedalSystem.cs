@@ -75,13 +75,13 @@ public sealed class PlaytimeMedalSystem : SharedPlaytimeMedalSystem
         else if (!HasComp<SurvivorComponent>(ev.Mob))
         {
             if (time >= _platinumTime)
-                medalId = WhiteRibbon;
-            else if (time >= _goldTime)
-                medalId = YellowRibbon;
-            else if (time >= _silverTime)
-                medalId = RedRibbon;
-            else if (time >= _bronzeTime)
                 medalId = BlueRibbon;
+            else if (time >= _goldTime)
+                medalId = RedRibbon;
+            else if (time >= _silverTime)
+                medalId = YellowRibbon;
+            else if (time >= _bronzeTime)
+                medalId = WhiteRibbon;
         }
 
         if (medalId == null)
