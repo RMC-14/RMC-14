@@ -272,15 +272,13 @@
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/smooth/urban.rsi
 
 - type: entity
-  parent: CMArmorM3Medium
+  parent: CMArmorM2MP
   id: CMArmorM3Warden
   name: M3 pattern warden MP armor
   description: A well-crafted suit of M3 Pattern Armor typically distributed to Wardens. Useful for letting your men know who is in charge.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/jungle.rsi
-  - type: CMArmor
-    bio: 15
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/jungle.rsi
@@ -726,7 +724,7 @@
   parent: [ RMCAllowSuitStorageClothingArmorMP, CMArmorM3Medium ]
   id: CMArmorM2MP
   name: M2 pattern mp armor
-  description: M2 Armor offers higher protection against melee attacks but less protection against projectile attacks
+  description: A standard UNMC M2 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/jungle.rsi
