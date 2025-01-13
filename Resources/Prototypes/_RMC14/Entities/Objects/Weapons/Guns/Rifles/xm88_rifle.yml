@@ -2,7 +2,6 @@
   parent: CMBaseWeaponRifle
   name: XM88 Heavy Rifle
   id: WeaponRifleXM88
-  suffix: Desert
   description: An experimental man-portable anti-materiel rifle chambered in .458 SOCOM. It must be manually chambered for every shot.
   components:
   - type: Sprite

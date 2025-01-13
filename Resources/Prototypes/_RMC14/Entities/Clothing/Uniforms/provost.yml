@@ -10,6 +10,8 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: CMJumpsuitProvost
@@ -19,6 +21,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Provost/ci.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: CMJumpsuitProvost

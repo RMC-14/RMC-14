@@ -135,6 +135,8 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: RMCMarineUniformBase
