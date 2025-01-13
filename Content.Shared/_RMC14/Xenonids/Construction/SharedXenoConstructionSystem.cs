@@ -441,7 +441,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        if (!HasComp<HiveConstructionRequiresHiveWeedsComponent>(target) && _xenoWeeds.IsOnHiveWeeds((gridId, grid), target.ToCoordinates()))
+        if (HasComp<HiveConstructionRequiresHiveWeedsComponent>(target) && !_xenoWeeds.IsOnHiveWeeds((gridId, grid), target.ToCoordinates()))
         {
             _popup.PopupClient(
                 Loc.GetString("rmc-xeno-construction-requires-hive-weeds", ("choice", target)),
