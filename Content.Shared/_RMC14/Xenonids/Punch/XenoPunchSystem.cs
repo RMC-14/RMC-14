@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
@@ -27,6 +28,7 @@ public sealed class XenoPunchSystem : EntitySystem
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
+    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
 
     public override void Initialize()
     {
@@ -69,6 +71,8 @@ public sealed class XenoPunchSystem : EntitySystem
         var target = _transform.GetMapCoordinates(targetId);
         var diff = target.Position - origin.Position;
         diff = diff.Normalized() * xeno.Comp.Range;
+
+        _rmcMelee.DoLunge(xeno, targetId);
 
         _throwing.TryThrow(targetId, diff, 10);
 
