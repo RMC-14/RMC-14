@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: The lifesaver bag in the CO equipment vendor is now filled.
-    type: Fix
-  id: 710
-  time: '2024-09-20T08:42:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4086
-- author: DrSmugleaf
-  changes:
-  - message: Fixed not being able to immediately melee with a gun after shooting it.
-    type: Fix
-  id: 711
-  time: '2024-09-20T20:38:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4087
 - author: Vermidia
   changes:
   - message: Scout sight now comes with a medical HUD
@@ -5124,5 +5110,21 @@
   id: 1209
   time: '2025-01-12T01:36:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5364
+- author: blueDev2
+  changes:
+  - message: Fixed Underbarrel Grenade Launcher grenades not beeping and showing primed
+      status when fired.
+    type: Fix
+  id: 1210
+  time: '2025-01-13T04:15:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5376
+- author: Vermidia
+  changes:
+  - message: Fixed being able to attach a weapon/insert ammo on a dropship weapon
+      point when it already had a weapon/ammo in it.
+    type: Fix
+  id: 1211
+  time: '2025-01-13T04:16:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5373
 Name: RMC14
 Order: -1
