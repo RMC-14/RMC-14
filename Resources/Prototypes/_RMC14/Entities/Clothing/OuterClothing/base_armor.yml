@@ -47,6 +47,7 @@
       - RMCGeneralRevolverHolster
       - RMCXM51Holster
       - RMCMotionDetector
+      - RMCMatebaHolster
       #TODO walkman
 
 - type: entity
@@ -140,6 +141,7 @@
       - RMCSMGPouchHolster
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
+      - RMCMatebaHolster
       #TODO Ceremonial Sword
       - RMCMotionDetector
       #TODO walkman
