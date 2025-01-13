@@ -98,6 +98,14 @@
 
 - type: entity
   parent: CMDoubleDoorBase
+  id: RMCDoubleDoorGlassHybrisa
+  suffix: Hybrisa, Glass
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/Double/hybrisa_glass.rsi
+
+- type: entity
+  parent: CMDoubleDoorBase
   id: CMDoubleDoorGenericSolid
   suffix: Generic, Solid
   components:
