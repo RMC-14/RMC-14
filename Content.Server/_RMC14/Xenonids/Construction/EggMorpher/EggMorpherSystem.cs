@@ -109,6 +109,12 @@ public sealed partial class EggMorpherSystem : SharedEggMorpherSystem
             return;
         }
 
+        if (!_mobState.IsAlive(used))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-dead-child"), eggMorpher, user);
+            return;
+        }
+
         if (comp.MaxParasites <= comp.CurParasites)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-egg-morpher-already-full"), eggMorpher, user);
