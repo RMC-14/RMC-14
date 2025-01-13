@@ -514,7 +514,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
             {
                 if (time > phone.LastCall + phone.VoicemailDelay && !dialing.DidVoicemail)
                 {
-                    if (HangUpReceiving((other, receiving), receivingPhone.Phone.Value, null));
+                    if (HangUpReceiving((other, receiving), receivingPhone.Phone.Value, null))
                     {
                         StopSound(other);
                         StopSound(uid);
