@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Added the shotgun sentry upgrade, which uses it's own drums and shoots
-      buckshot, and deals damage to attackers, at the cost of low range and firerate.
-    type: Add
-  id: 715
-  time: '2024-09-21T05:15:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4010
 - author: FungiFellow
   changes:
   - message: Targets are now incredibly durable
@@ -5126,5 +5118,12 @@
   id: 1214
   time: '2025-01-13T04:41:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5365
+- author: J C Denton
+  changes:
+  - message: Command tablet cabinet, used for storing the tablet in CIC.
+    type: Add
+  id: 1215
+  time: '2025-01-13T05:09:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5371
 Name: RMC14
 Order: -1
