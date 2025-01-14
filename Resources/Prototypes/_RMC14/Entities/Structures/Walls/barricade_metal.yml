@@ -418,6 +418,29 @@
       node: nodeHandrail
 
 - type: entity
+  parent: RMCBarricadeHybrisaCenterRoad
+  id: RMCBarricadeHybrisaCenterRoadAltN
+  suffix: Offset, North
+  components:
+    - type: Sprite
+      offset: 0,0.8
+      layers:
+      - state: centerroadbarrier2
+      - map: [ "acided" ]
+
+- type: entity
+  parent: RMCBarricadeHybrisaCenterRoad
+  id: RMCBarricadeHybrisaCenterRoadAltS
+  suffix: Offset, South
+  components:
+    - type: Sprite
+      offset: 0,-0.1
+      layers:
+      - state: centerroadbarrier2
+      - map: [ "acided" ]
+
+
+- type: entity
   parent: RMCBarricadeHandrail
   id: RMCBarricadeHybrisaPlasticRoadBarrier
   name: plastic road barrier

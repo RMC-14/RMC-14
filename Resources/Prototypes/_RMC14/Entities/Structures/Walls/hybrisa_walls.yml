@@ -81,3 +81,38 @@
   - type: IconSmooth
     key: walls
     base: strata_ribbed_outpost_
+
+# Medical
+
+- type: entity
+  parent: RMCWallHybrisa
+  id: RMCWallHybrisaMedical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_wall_medical.rsi
+    state: strata_bare_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_wall_medical.rsi
+    state: strata_bare_outpost_
+
+- type: entity
+  parent: RMCWallHybrisaReinforced
+  id: RMCWallHybrisaMedicalReinforced
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_medical.rsi
+    state: strata_ribbed_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_medical.rsi
+    state: strata_ribbed_outpost_
+
+- type: entity
+  parent: RMCWallHybrisaHull
+  id: RMCWallHybrisaMedicalHull
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_medical.rsi
+    state: strata_ribbed_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_medical.rsi
+    state: strata_hull

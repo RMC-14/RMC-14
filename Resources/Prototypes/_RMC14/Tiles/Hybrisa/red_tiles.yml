@@ -1,0 +1,26 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorHybrisaRedBase
+  name: tiles-cm-default-red
+
+- type: tile
+  parent: RMCFloorHybrisaRedBase
+  id: RMCFloorHybrisaRedCarpet
+  name: red carpet
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetred.png
+
+- type: tile
+  parent: RMCFloorHybrisaRedCarpet
+  id: RMCFloorHybrisaRedCarpetDeco
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetred_deco.png
+
+- type: tile
+  parent: RMCFloorHybrisaRedCarpet
+  id: RMCFloorHybrisaRedCarpetFaded
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetfadedred.png
+
+- type: tile
+  parent: RMCFloorHybrisaRedCarpet
+  id: RMCFloorHybrisaRedCarpetOrange
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetorangered.png

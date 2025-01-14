@@ -132,3 +132,41 @@
   - type: Construction
     graph: RMCWindowHybrisa
     node: windowHybrisa
+
+# Medical
+
+- type: entity
+  parent: RMCWindowFrameHybrisaReinforced
+  id: RMCWindowFrameHybrisaMedicalReinforced
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame_medical.rsi
+    state: strata_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame_medical.rsi
+    state: strata_frame0
+  - type: IconSmooth
+    key: walls
+    base: hybrisa_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHybrisaMedicalReinforced
+    node: windowFrameHybrisaMedicalReinforced
+
+- type: entity
+  parent: RMCWindowHybrisaReinforced
+  id: RMCWindowHybrisaMedicalReinforced
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/hybrisa_window_medical.rsi
+    state: strata_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/hybrisa_window_medical.rsi
+    state: strata_window0
+  - type: IconSmooth
+    key: walls
+    base: strata_window
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHybrisaMedicalReinforced
+    node: windowHybrisaMedicalReinforced

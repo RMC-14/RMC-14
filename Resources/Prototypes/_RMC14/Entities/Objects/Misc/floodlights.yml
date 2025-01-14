@@ -210,6 +210,7 @@
   - type: Sprite
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/streetlight.rsi
+    offset: 0.0,1
     layers:
       - state: street_on # Temporary until power works.
       - state: street_off
@@ -229,6 +230,7 @@
   - type: Sprite
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/streetlight.rsi
+    offset: 0.0,1
     state: broken
     drawdepth: Mobs
   - type: Construction

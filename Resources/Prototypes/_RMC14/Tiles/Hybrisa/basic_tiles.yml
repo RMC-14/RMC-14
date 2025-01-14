@@ -166,6 +166,16 @@
   sprite: /Textures/_RMC14/Tiles/hybrisa/cement1.png
 
 - type: tile
+  parent: RMCPlanetHybrisaCement
+  id: RMCPlanetHybrisaCement2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/cement2.png
+
+- type: tile
+  parent: RMCPlanetHybrisaCement
+  id: RMCPlanetHybrisaCement3
+  sprite: /Textures/_RMC14/Tiles/hybrisa/cement3.png
+
+- type: tile
   parent: CMPlanetBase
   id: RMCPlanetHybrisaSidewalk
   name: sidewalk
