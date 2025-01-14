@@ -43,6 +43,13 @@
   id: RMCPlanetHybrisaShale3
   sprite: /Textures/_RMC14/Tiles/hybrisa/hybrisa_3.png
 
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetHybrisaUnderground
+  name: floor
+  sprite: /Textures/_RMC14/Tiles/hybrisa/underground.png
+  weedsSpreadable: false
+
 # Metal
 
 - type: tile

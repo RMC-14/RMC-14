@@ -67,6 +67,14 @@
   - type: Sprite
     state: kutjevo_catwalk
 
+- type: entity
+  parent: CMCatwalk
+  id: RMCCatwalkHybrisa
+  name: solid metal grate
+  components:
+  - type: Sprite
+    state: solidgrate1
+
 # Monorail
 
 - type: entity

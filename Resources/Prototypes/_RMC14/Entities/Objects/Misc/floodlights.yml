@@ -199,3 +199,40 @@
   - type: Corrodible
     isCorrodible: false
   - type: Appearance
+
+# Street
+
+- type: entity
+  parent: RMCTallFloodlight
+  id: RMCStreetlight
+  name: colony streetlight
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/Misc/Lights/streetlight.rsi
+    layers:
+      - state: street_on # Temporary until power works.
+      - state: street_off
+        visible: false
+        map: [ "light" ]
+    offset: "0.0,0.5"
+    drawdepth: Mobs
+  - type: Construction
+    graph: RMCStreetlightBroken
+    node: completed
+
+- type: entity
+  parent: RMCFloodlightBroken
+  id: RMCStreetlightBroken
+  name: broken colony streetlight
+  description: A pasted on note says 'To fix, unscrew the panel, crowbar out the damaged assembly, weld it fixed, add 2 cable, then close the panel.'
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/Misc/Lights/streetlight.rsi
+    state: broken
+    offset: "0.0,0.5"
+    drawdepth: Mobs
+  - type: Construction
+    graph: RMCStreetlightBroken
+    node: start

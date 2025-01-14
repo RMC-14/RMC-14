@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/obj/structures/props/fences/dark_fence.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "fence0"
+    },
+    {
+      "name": "fence1"
+    },
+    {
+      "name": "fence2"
+    },
+    {
+      "name": "fence3"
+    },
+    {
+      "name": "fence4"
+    },
+    {
+      "name": "fence5"
+    },
+    {
+      "name": "fence6"
+    },
+    {
+      "name": "fence7"
+    },
+    {
+      "name": "fence8"
+    },
+    {
+      "name": "fence9"
+    },
+    {
+      "name": "fence10"
+    },
+    {
+      "name": "fence11"
+    },
+    {
+      "name": "fence12"
+    },
+    {
+      "name": "fence13"
+    },
+    {
+      "name": "fence14"
+    },
+    {
+      "name": "fence15"
+    },
+    {
+      "name": "brokenfence0"
+    },
+    {
+      "name": "brokenfence1"
+    },
+    {
+      "name": "brokenfence2"
+    },
+    {
+      "name": "brokenfence3"
+    },
+    {
+      "name": "brokenfence4"
+    },
+    {
+      "name": "brokenfence5"
+    },
+    {
+      "name": "brokenfence6"
+    },
+    {
+      "name": "brokenfence7"
+    },
+    {
+      "name": "brokenfence8"
+    },
+    {
+      "name": "brokenfence9"
+    },
+    {
+      "name": "brokenfence10"
+    },
+    {
+      "name": "brokenfence11"
+    },
+    {
+      "name": "brokenfence12"
+    },
+    {
+      "name": "brokenfence13"
+    },
+    {
+      "name": "brokenfence14"
+    },
+    {
+      "name": "brokenfence15"
+    },
+    {
+      "name": "special_brokenfence1"
+    },
+    {
+      "name": "special_brokenfence2"
+    }
+  ]
+}

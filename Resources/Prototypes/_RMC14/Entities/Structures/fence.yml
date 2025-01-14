@@ -81,3 +81,25 @@
   - type: Construction
     graph: CMFence
     node: rmcFenceBroken
+
+- type: entity
+  parent: CMFence
+  id: RMCFenceHybrisa
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/fences.rsi
+    state: fence0
+  - type: Construction
+    graph: RMCFenceHybrisa
+    node: fenceMetalHybrisa
+
+- type: entity
+  parent: RMCFenceBroken
+  id: RMCFenceHybrisaBroken
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/fences.rsi
+    state: fence0
+  - type: Construction
+    graph: RMCFenceHybrisa
+    node: rmcFenceBrokenHybrisa
