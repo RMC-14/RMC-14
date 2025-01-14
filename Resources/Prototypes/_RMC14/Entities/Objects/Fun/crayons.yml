@@ -1,0 +1,89 @@
+- type: entity
+  parent: CrayonBox
+  id: RMCCrayonBox
+  name: box of crayons
+  descriptino: A box of every flavor of crayon.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,5,0  #6 slots
+  - type: StorageFill
+    contents:
+    - id: RMCCrayonRed
+    - id: RMCCrayonOrange
+    - id: RMCCrayonYellow
+    - id: RMCCrayonGreen
+    - id: RMCCrayonBlue
+    - id: RMCCrayonPurple
+    whitelist:
+      tags:
+      - Crayon
+#base      #Todo port crayon related sprites
+- type: entity
+  parent: Crayon
+  id: RMCBaseCrayon
+  abstract: true
+  description: A colorful crayon. Please refrain from eating it or putting it in your nose.
+  components:
+  - type: Crayon
+    capacity: 30
+
+#red
+- type: entity
+  parent: RMCBaseCrayon
+  id: RMCCrayonRed
+  components:
+  - type: Sprite
+    state: red
+  - type: Crayon
+    color: "#DA0000"
+
+#orange
+- type: entity
+  parent: RMCBaseCrayon
+  id: RMCCrayonOrange
+  components:
+  - type: Sprite
+    state: orange
+  - type: Crayon
+    color: "#FF9300"
+
+#yellow
+- type: entity
+  parent: RMCBaseCrayon
+  id: RMCCrayonYellow
+  components:
+  - type: Sprite
+    state: yellow
+  - type: Crayon
+    color: "#FFF200"
+
+#green
+- type: entity
+  parent: RMCBaseCrayon
+  id: RMCCrayonGreen
+  components:
+  - type: Sprite
+    state: green
+  - type: Crayon
+    color: "#A8E61D"
+
+#blue
+- type: entity
+  parent: RMCBaseCrayon
+  id: RMCCrayonBlue
+  components:
+  - type: Sprite
+    state: blue
+  - type: Crayon
+    color: "#00B7EF"
+
+#purple
+- type: entity
+  parent: RMCBaseCrayon
+  id: RMCCrayonPurple
+  components:
+  - type: Sprite
+    state: purple
+  - type: Crayon
+    color: "#DA00FF"
