@@ -35,8 +35,27 @@
           Base: { state: rotary_phone }
           Ring: { state: rotary_phone_ring }
           Ear: { state: rotary_phone_ear }
-  - type: WallMount # TODO RMC14 wall mounted rotary phones
+  - type: WallMount
     arc: 360
+
+- type: entity
+  parent: RMCRotaryPhone
+  id: RMCRotaryPhoneWallmount
+  name: wall-mounted phone
+  description: "It is a wall mounted telephone. The fine text reads: To log your details with the mainframe please insert your keycard into the slot below. Unfortunately the slot is jammed. You can still use the phone, however."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/wallmount_phone.rsi
+    layers:
+      - state: wall_phone
+        map: [ "base" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.RotaryPhoneLayers.Layer:
+        base:
+          Base: { state: wall_phone }
+          Ring: { state: wall_phone_ring }
+          Ear: { state: wall_phone_ear }
 
 - type: entity
   parent: BaseItem

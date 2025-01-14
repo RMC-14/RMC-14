@@ -8,15 +8,17 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 10
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 8
-        - ReagentId: Vitamin
-          Quantity: 2
   - type: Item
     size: Tiny
     sprite: _RMC14/Objects/Consumable/Food/bar.rsi
+  - type: Extractable
+    grindableSolutionName: food
+  - type: InjectableSolution
+    solution: food
 
 - type: entity
   parent: CMBarFoodBase

@@ -123,6 +123,12 @@ public abstract class ClothingSystem : EntitySystem
             }
             _humanoidSystem.SetLayerVisibility(equipee, layer, shouldLayerShow);
         }
+
+        foreach (HumanoidVisualLayers appearanceLayer in appearanceLayers) // RMC14
+        {
+            if (!layers.Contains(appearanceLayer))
+                _humanoidSystem.SetLayerVisibility(equipee, appearanceLayer, true);
+        }
     }
 
     protected virtual void OnGotEquipped(EntityUid uid, ClothingComponent component, GotEquippedEvent args)
@@ -200,7 +206,7 @@ public abstract class ClothingSystem : EntitySystem
         args.Additive += ent.Comp.StripDelay;
     }
 
-    private void CheckEquipmentForLayerHide(EntityUid equipment, EntityUid equipee)
+    public void CheckEquipmentForLayerHide(EntityUid equipment, EntityUid equipee)
     {
         if (TryComp(equipment, out HideLayerClothingComponent? clothesComp) && TryComp(equipee, out HumanoidAppearanceComponent? appearanceComp))
             ToggleVisualLayers(equipee, clothesComp.Slots, appearanceComp.HideLayersOnEquip);

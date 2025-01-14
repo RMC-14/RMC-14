@@ -2,7 +2,6 @@
   name: M54CE2 heavy assault rifle
   parent: CMBaseWeaponRifle
   id: WeaponRifleM54CE2
-  suffix: Desert
   description: A large squad support weapon capable of laying down sustained suppressing fire from a mounted position. While unstable and less accurate, it can be lugged and shot with two hands.
   components:
   - type: Sprite
@@ -108,7 +107,6 @@
 - type: entity
   parent: CMMagazineRifleM54C
   id: CMMagazineRifleM54CE2
-  suffix: Desert
   name: "M54CE2 magazine (10x24mm)"
   components:
   - type: Tag

@@ -636,14 +636,14 @@
       choices: { CMWeapon: 1 }
       entries:
       - id: RMCMK80BeltFilled
-        name: MK80 Pistol
+        name: MK80 pistol
         recommended: true
       - id: RMCM1984BeltFilled
-        name: M1984 Pistol
+        name: M1984 service pistol
       - id: CMM77BeltFilled
-        name: M77 Pistol
+        name: M77 pistol
       - id: RMCM44BeltFilled
-        name: M44 Revolver
+        name: M44 revolver
     - name: Belt
       jobs:
       - CMExecutiveOfficer
@@ -677,7 +677,7 @@
       - id: RMCGlassesMedicalHUDGlasses
         recommended: true
       - id: CMGlassesSecurity
-      - id: RMCSunglasses
+      - id: RMCSunglassesBig
         recommended: true
       - id: RMCGlassesAviators
     # - name: Patches # TODO RMC14 Make Patches
@@ -761,7 +761,7 @@
       - CMChiefMP
       choices: { CMWeapon: 1 }
       entries:
-      - id: CMWeaponPistolMK80   # TODO ADD CASE.
+      - id: CMWeaponPistolM77   # TODO ADD CASE.
       - id: RMCWeaponRevolverM44  # TODO ADD CASE.
       - id: CMWeaponPistolM1984  # TODO ADD CASE.
     - name: Backpack
@@ -897,11 +897,14 @@
       - CMChiefEngineer
       choices: { CMWeapon: 1 }
       entries:
-      - id: CMWeaponPistolMK80 # Todo Pistol belt full
+      - id: RMCM1984BeltFilled
+        name: M1984 service pistol
         recommended: true
-      - id: CMWeaponPistolM1984 # TODO Pistol belt full
+      - id: CMM77BeltFilled
+        name: M77 pistol
         recommended: true
-      - id: RMCWeaponRevolverM44 # TODO pistol belt full
+      - id: RMCM44BeltFilled
+        name: M44 revolver
         recommended: true
     - name: Accessories
       jobs:
@@ -977,9 +980,9 @@
       - CMQuartermaster
       choices: { CMHelmet: 1 }
       entries:
-      # - id: CMHeadCapQM TODO
-          # recommended: true
-      - id: CMHeadBeretTan # TODO QM Beret
+      - id: RMCHeadCapQuartermaster
+        recommended: true
+      - id: RMCHeadBeretQuartermaster
         recommended: true
       - id: CMHeadCapCargo
     - name: Personal Sidearm
@@ -987,11 +990,14 @@
       - CMQuartermaster
       choices: { CMWeapon: 1 }
       entries:
-      - id: CMWeaponPistolM1984 # TODO Belt
+      - id: RMCM1984BeltFilled
+        name: M1984 service pistol
         recommended: true
-      - id: CMWeaponPistolMK80 # TODO BELT
+      - id: CMM77BeltFilled
+        name: M77 pistol
         recommended: true
-      - id: RMCWeaponRevolverM44 # TODO Belt
+      - id: RMCM44BeltFilled
+        name: M44 revolver
         recommended: true
     - name: Combat Equipment
       jobs:
@@ -1194,11 +1200,14 @@
       - CMAuxiliarySupportOfficer
       choices: { CMWeapon: 1 }
       entries:
-      - id: CMWeaponPistolM1984
+      - id: RMCM1984BeltFilled
+        name: M1984 service pistol
         recommended: true
-      - id: CMWeaponPistolMK80 # TODO belt (all of them)
+      - id: CMM77BeltFilled
+        name: M77 pistol
         recommended: true
-      - id: RMCWeaponRevolverM44
+      - id: RMCM44BeltFilled
+        name: M44 revolver
         recommended: true
     - name: Hat
       jobs:

@@ -381,8 +381,8 @@
         amount: 1
     - name: Miscellaneous
       entries:
-      #- id: CMEngineerKit
-      #  amount: 1
+      - id: RMCEngineerKit
+        amount: 1
       #- id: CMMap
       #  amount: 5
       - id: CMFireExtinguisher

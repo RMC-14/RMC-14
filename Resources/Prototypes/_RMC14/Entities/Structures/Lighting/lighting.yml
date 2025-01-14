@@ -282,34 +282,11 @@
       Broken: bulb-broken
       Burned: bulb-burned
   - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 200
-      behaviors: #excess damage, don't spawn entities.
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-    - trigger:
-        !type:DamageTrigger
-        damage: 9 # 9.15 for lesser drone
-      behaviors:
-      - !type:EmptyAllContainersBehaviour
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          CMSheetMetal1:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
+    thresholds: []
   - type: Construction
     graph: CMLightFixture
     node: bulbLight
+  - type: RMCBreakLightOnAttack
 
 - type: entity
   parent: CMLightFixtureSmallAlwaysPowered

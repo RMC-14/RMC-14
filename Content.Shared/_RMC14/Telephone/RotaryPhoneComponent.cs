@@ -29,6 +29,9 @@ public sealed partial class RotaryPhoneComponent : Component
     public SoundSpecifier? GrabSound = new SoundCollectionSpecifier("RMCRadioTelephoneGrab");
 
     [DataField, AutoNetworkedField]
+    public SoundSpecifier? VoicemailSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Phone/voicemail.ogg", AudioParams.Default.WithVolume(-3));
+
+    [DataField, AutoNetworkedField]
     public EntProtoId<TelephoneComponent> PhoneId = "RMCTelephone";
 
     [DataField, AutoNetworkedField]
@@ -48,6 +51,15 @@ public sealed partial class RotaryPhoneComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan DialingIdleDelay = TimeSpan.FromSeconds(3);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan VoicemailDelay = TimeSpan.FromSeconds(30);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan VoicemailTimeoutDelay = TimeSpan.FromSeconds(6);
+
+    [DataField]
+    public EntityUid? VoicemailSoundEntity;
 
     [DataField, AutoNetworkedField]
     public bool Idle;
