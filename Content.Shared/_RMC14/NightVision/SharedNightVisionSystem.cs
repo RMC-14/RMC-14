@@ -243,6 +243,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
         Dirty(item);
 
         _appearance.SetData(item, NightVisionItemVisuals.Active, true);
+        _audio.PlayLocal(item.Comp.SoundOn, item, user);
 
         if (!_timing.ApplyingState)
         {
@@ -270,7 +271,6 @@ public abstract class SharedNightVisionSystem : EntitySystem
             }
         }
 
-        _audio.PlayLocal(item.Comp.SoundOn, item, user);
         _actions.SetToggled(item.Comp.Action, true);
     }
 
@@ -290,7 +290,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
         Dirty(item);
 
         _appearance.SetData(item, NightVisionItemVisuals.Active, false);
-        _audio.PlayLocal(item.Comp.SoundOn, item, user);
+        _audio.PlayLocal(item.Comp.SoundOff, item, user);
 
         if (TryComp(user, out NightVisionComponent? nightVision) &&
             !nightVision.Innate)
