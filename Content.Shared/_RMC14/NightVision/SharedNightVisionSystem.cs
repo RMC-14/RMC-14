@@ -157,10 +157,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
         Dirty(args.CycleableVisor, comp);
 
         if (_inventory.InSlotWithFlags(args.CycleableVisor.Owner, comp.SlotFlags))
-        {
             EnableNightVisionItem((args.CycleableVisor, comp), args.User);
-            _audio.PlayLocal(ent.Comp.SoundOn, ent, args.User);
-        }
     }
 
     private void OnNightVisionDeactivate(Entity<NightVisionVisorComponent> ent, ref DeactivateVisorEvent args)
@@ -172,7 +169,6 @@ public abstract class SharedNightVisionSystem : EntitySystem
             return;
 
         RemComp<NightVisionItemComponent>(args.CycleableVisor);
-        _audio.PlayLocal(ent.Comp.SoundOff, ent, args.User);
     }
 
     private void OnNightVisionScoped(Entity<NightVisionVisorComponent> ent, ref VisorRelayedEvent<ScopedEvent> args)
@@ -274,7 +270,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
             }
         }
 
-
+        _audio.PlayLocal(item.Comp.SoundOn, item, user);
         _actions.SetToggled(item.Comp.Action, true);
     }
 
@@ -294,6 +290,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
         Dirty(item);
 
         _appearance.SetData(item, NightVisionItemVisuals.Active, false);
+        _audio.PlayLocal(item.Comp.SoundOn, item, user);
 
         if (TryComp(user, out NightVisionComponent? nightVision) &&
             !nightVision.Innate)
