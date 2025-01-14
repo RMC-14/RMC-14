@@ -1,5 +1,6 @@
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,4 +23,7 @@ public sealed partial class RecoveryNodeComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan? NextHealAt;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId? HealEffect = "RMCEffectHealQueen";
 }

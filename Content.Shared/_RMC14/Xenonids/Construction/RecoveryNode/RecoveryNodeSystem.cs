@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Rest;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Popups;
 using Robust.Shared.Random;
@@ -73,6 +74,7 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
         var selectedTarget = _random.Pick(possibleTargets);
 
         _heal.Heal(selectedTarget, comp.HealAmount);
+        SpawnAttachedTo(comp.HealEffect, selectedTarget.ToCoordinates());
         _popup.PopupClient(Loc.GetString("rmc-xeno-construction-recovery-node-heal-target"), selectedTarget, selectedTarget);
         return true;
     }
