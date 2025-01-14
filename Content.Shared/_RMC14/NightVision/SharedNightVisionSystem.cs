@@ -255,6 +255,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
                 nightVision = EnsureComp<NightVisionComponent>(user);
                 nightVision.State = NightVisionState.Full;
                 nightVision.Green = item.Comp.Green;
+                nightVision.Mesons = item.Comp.Mesons;
                 nightVision.BlockScopes = item.Comp.BlockScopes;
                 Dirty(user, nightVision);
             }
@@ -264,6 +265,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
                 {
                     State = NightVisionState.Full,
                     Green = item.Comp.Green,
+                    Mesons = item.Comp.Mesons,
                     BlockScopes = item.Comp.BlockScopes,
                 };
 
