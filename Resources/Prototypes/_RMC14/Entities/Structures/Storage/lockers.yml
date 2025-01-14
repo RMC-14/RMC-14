@@ -99,6 +99,16 @@
 
 - type: entity
   parent: CMLockerBase
+  id: CMLockerMedicalWhite
+  name: medical locker
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/medical_white.rsi
+  - type: AccessReader
+    access: [["CMAccessMedical"]]
+
+- type: entity
+  parent: CMLockerBase
   id: CMLockerHydroResearch
   name: hydroponics research locker
   components:

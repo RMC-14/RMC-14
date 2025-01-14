@@ -419,24 +419,13 @@
 
 - type: entity
   parent: RMCBarricadeHybrisaCenterRoad
-  id: RMCBarricadeHybrisaCenterRoadAltN
-  suffix: Offset, North
+  id: RMCBarricadeHybrisaCenterRoadDouble
+  suffix: Double
   components:
     - type: Sprite
-      offset: 0,0.8
+      offset: 0,-0.15
       layers:
-      - state: centerroadbarrier2
-      - map: [ "acided" ]
-
-- type: entity
-  parent: RMCBarricadeHybrisaCenterRoad
-  id: RMCBarricadeHybrisaCenterRoadAltS
-  suffix: Offset, South
-  components:
-    - type: Sprite
-      offset: 0,-0.1
-      layers:
-      - state: centerroadbarrier2
+      - state: centerroadbarrier1
       - map: [ "acided" ]
 
 

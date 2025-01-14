@@ -171,6 +171,10 @@
       "directions": 4
     },
     {
+      "name": "centerroadbarrier1",
+      "directions": 4
+    },
+    {
       "name": "centerroadbarrier2",
       "directions": 4
     }
