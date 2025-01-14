@@ -38,6 +38,7 @@ public sealed partial class EggMorpherSystem : SharedEggMorpherSystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedHandsSystem _hand = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly INetManager _net = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -86,7 +87,32 @@ public sealed partial class EggMorpherSystem : SharedEggMorpherSystem
 
     private void OnInteractHand(Entity<EggMorpherComponent> eggMorpher, ref InteractHandEvent args)
     {
+        var (ent, comp) = eggMorpher;
         var user = args.User;
+
+        if (HasComp<XenoParasiteComponent>(user))
+        {
+            args.Handled = true;
+
+            if (comp.MaxParasites <= comp.CurParasites)
+            {
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-egg-morpher-already-full"), eggMorpher, user);
+                return;
+            }
+
+            if (_mobState.IsDead(user))
+                return;
+
+            if (_net.IsClient)
+                return;
+
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return-self", ("parasite", user)), eggMorpher);
+
+            QueueDel(user);
+            comp.CurParasites++;
+
+            return;
+        }
 
         if (!TryCreateParasiteFromEggMorpher(eggMorpher, out var newParasite))
         {
