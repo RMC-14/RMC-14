@@ -480,11 +480,20 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        EntityUid? floorWeeds = null;
+        if (_prototype.TryIndex(node.Spawn, out var spawnProto) &&
+            spawnProto.HasComponent<XenoWeedsComponent>())
+        {
+            floorWeeds = _xenoWeeds.GetWeedsOnFloor(transform.Coordinates);
+        }
+
         var spawn = Spawn(node.Spawn, transform.Coordinates);
+
         var hive = _hive.GetHive(target);
         _hive.SetHive(spawn, hive);
 
         QueueDel(target);
+        QueueDel(floorWeeds);
 
         _adminLogs.Add(LogType.RMCXenoOrderConstructionComplete, $"Xeno {ToPrettyString(xeno):xeno} completed construction of {ToPrettyString(target):xeno} which turned into {ToPrettyString(spawn):spawn} at {transform.Coordinates}");
     }
