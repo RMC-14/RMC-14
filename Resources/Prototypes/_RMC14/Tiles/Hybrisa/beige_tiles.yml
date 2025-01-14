@@ -30,3 +30,9 @@
   parent: RMCFloorHybrisaBeigeCarpet
   id: RMCFloorHybrisaBeigeCarpetDeco
   sprite: /Textures/_RMC14/Tiles/hybrisa/carpetbeige_deco.png
+
+- type: tile
+  parent: RMCFloorHybrisaBeigeCarpet
+  id: RMCFloorHybrisaBrownPatternCarpet
+  name: brown metal tile
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetpatternbrown.png

@@ -216,7 +216,7 @@
       visible: false
 
 - type: entity
-  parent: RMCRollerBedHospitalBody
+  parent: RMCRollerBedHospital
   id: RMCRollerBedHospitalBloodFolded
   suffix: folded
   components:
@@ -241,7 +241,7 @@
       visible: false
 
 - type: entity
-  parent: RMCRollerBedHospitalBody
+  parent: RMCRollerBedHospital
   id: RMCRollerBedHospitalSheetFolded
   suffix: folded
   components:
@@ -266,7 +266,7 @@
       visible: false
 
 - type: entity
-  parent: RMCRollerBedHospitalBody
+  parent: RMCRollerBedHospital
   id: RMCRollerBedHospitalSheet2Folded
   suffix: folded
   components:

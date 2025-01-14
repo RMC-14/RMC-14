@@ -1,0 +1,16 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorHybrisaGreenBase
+  name: tiles-cm-default-green
+
+- type: tile
+  parent: RMCFloorHybrisaGreenBase
+  id: RMCFloorHybrisaGreenCarpet
+  name: green carpet
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetgreen.png
+
+- type: tile
+  parent: RMCFloorHybrisaGreenCarpet
+  id: RMCFloorHybrisaGreenCarpetDeco
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetgreen_deco.png

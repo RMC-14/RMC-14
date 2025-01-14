@@ -69,3 +69,24 @@
   parent: RMCFloorHybrisaBlueFull
   id: RMCFloorHybrisaBlueCornerSouthWest
   sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetalcorner_4.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueBase
+  id: RMCFloorHybrisaBlueCarpet
+  name: blue carpet
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetblue.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueCarpet
+  id: RMCFloorHybrisaBlueDarkerCarpet
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetdarkerblue.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueCarpet
+  id: RMCFloorHybrisaBlueCarpetDeco
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetblue_deco.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueCarpet
+  id: RMCFloorHybrisaBluePatternCarpet
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetpatternblue.png
