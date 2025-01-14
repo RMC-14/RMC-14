@@ -97,8 +97,7 @@ public sealed class XenoFortifySystem : EntitySystem
     {
         if (xeno.Comp.Fortified)
         {
-            // TODO RMC14 halved like armor for now
-            var armor = xeno.Comp.ExplosionArmor / 2;
+            var armor = xeno.Comp.ExplosionArmor;
 
             if (armor <= 0)
                 return;

@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Tracker.SquadLeader;
+﻿using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Tracker.SquadLeader;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
@@ -25,6 +26,7 @@ public sealed class SquadInfoBui(EntityUid owner, Enum uiKey) : BoundUserInterfa
         if (!EntMan.TryGetComponent(Owner, out SquadLeaderTrackerComponent? tracker))
             return;
 
+        var isSquadLeader = EntMan.HasComponent<SquadLeaderComponent>(Owner);
         var squadLeader = tracker.Fireteams.SquadLeader == null
             ? Loc.GetString("rmc-squad-info-squad-leader-none")
             : Loc.GetString("rmc-squad-info-squad-leader-name", ("leader", tracker.Fireteams.SquadLeader));
@@ -47,7 +49,7 @@ public sealed class SquadInfoBui(EntityUid owner, Enum uiKey) : BoundUserInterfa
             var fireatemIndex = i ;
             container.RemoveLeaderButton.OnPressed +=
                 _ => SendPredictedMessage(new SquadLeaderTrackerDemoteFireteamLeaderMsg(fireatemIndex));
-            container.RemoveLeaderButton.Visible = fireteam.Leader != null;
+            container.RemoveLeaderButton.Visible = fireteam.Leader != null && isSquadLeader;
             container.FireteamLabel.Text = Loc.GetString("rmc-squad-info-fireteam", ("fireteam", i + 1));
 
             foreach (var (_, member) in fireteam.Members)
@@ -70,6 +72,7 @@ public sealed class SquadInfoBui(EntityUid owner, Enum uiKey) : BoundUserInterfa
                     ToolTip = Loc.GetString("rmc-squad-info-promote-team-leader"),
                 };
 
+                promoteButton.Visible = isSquadLeader;
                 promoteButton.OnPressed += _ =>
                     SendPredictedMessage(new SquadLeaderTrackerPromoteFireteamLeaderMsg(member.Id));
 
@@ -86,6 +89,7 @@ public sealed class SquadInfoBui(EntityUid owner, Enum uiKey) : BoundUserInterfa
                     ToolTip = Loc.GetString("rmc-squad-info-unassign-fireteam"),
                 };
 
+                unassignButton.Visible = isSquadLeader;
                 unassignButton.OnPressed += _ =>
                     SendPredictedMessage(new SquadLeaderTrackerUnassignFireteamMsg(member.Id));
 
@@ -121,6 +125,7 @@ public sealed class SquadInfoBui(EntityUid owner, Enum uiKey) : BoundUserInterfa
                 };
 
                 var fireteamIndex = i;
+                button.Visible = isSquadLeader;
                 button.OnPressed += _ =>
                     SendPredictedMessage(new SquadLeaderTrackerAssignFireteamMsg(unassigned.Id, fireteamIndex));
 

@@ -980,9 +980,9 @@
       - CMQuartermaster
       choices: { CMHelmet: 1 }
       entries:
-      # - id: CMHeadCapQM TODO
-          # recommended: true
-      - id: CMHeadBeretTan # TODO QM Beret
+      - id: RMCHeadCapQuartermaster
+        recommended: true
+      - id: RMCHeadBeretQuartermaster
         recommended: true
       - id: CMHeadCapCargo
     - name: Personal Sidearm

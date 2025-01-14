@@ -123,6 +123,12 @@ public abstract class ClothingSystem : EntitySystem
             }
             _humanoidSystem.SetLayerVisibility(equipee, layer, shouldLayerShow);
         }
+
+        foreach (HumanoidVisualLayers appearanceLayer in appearanceLayers) // RMC14
+        {
+            if (!layers.Contains(appearanceLayer))
+                _humanoidSystem.SetLayerVisibility(equipee, appearanceLayer, true);
+        }
     }
 
     protected virtual void OnGotEquipped(EntityUid uid, ClothingComponent component, GotEquippedEvent args)
