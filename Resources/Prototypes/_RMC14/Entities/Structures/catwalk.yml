@@ -75,6 +75,14 @@
   - type: Sprite
     state: solidgrate1
 
+- type: entity
+  parent: CMCatwalk
+  id: RMCCatwalkHybrisaLattice
+  name: structural lattice
+  components:
+  - type: Sprite
+    state: latticefull
+
 # Monorail
 
 - type: entity

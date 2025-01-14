@@ -87,7 +87,7 @@
   id: RMCFenceHybrisa
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/fences.rsi
+    sprite: _RMC14/Structures/hybrisa_fences.rsi
     state: fence0
   - type: Construction
     graph: RMCFenceHybrisa
@@ -98,8 +98,32 @@
   id: RMCFenceHybrisaBroken
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/fences.rsi
+    sprite: _RMC14/Structures/hybrisa_fences.rsi
     state: fence0
   - type: Construction
     graph: RMCFenceHybrisa
     node: rmcFenceBrokenHybrisa
+
+- type: entity
+  parent: CMFence
+  id: RMCFenceHybrisaElectric
+  suffix: electric
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_fences_electric.rsi
+    state: fence0
+  - type: Construction
+    graph: RMCFenceHybrisa
+    node: fenceMetalHybrisaElectric
+
+- type: entity
+  parent: RMCFenceBroken
+  id: RMCFenceHybrisaElectricBroken
+  suffix: electric
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_fences_electric.rsi
+    state: fence0
+  - type: Construction
+    graph: RMCFenceHybrisa
+    node: rmcFenceBrokenHybrisaElectric

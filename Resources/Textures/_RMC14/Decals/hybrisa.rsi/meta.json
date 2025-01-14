@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken/modified from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/effects/hybrisa_decals.dmi",
+  "copyright": "Taken/modified from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/effects/hybrisa_decals.dmi, WEYA logo decals by github noctyrnal",
   "size": {
     "x": 32,
     "y": 32
@@ -153,6 +153,42 @@
     },
     {
       "name": "ZD_W1"
+    },
+    {
+      "name": "W"
+    },
+    {
+      "name": "E"
+    },
+    {
+      "name": "NORTH"
+    },
+    {
+      "name": "NE-out"
+    },
+    {
+      "name": "NW-out"
+    },
+    {
+      "name": "S"
+    },
+    {
+      "name": "SE-out"
+    },
+    {
+      "name": "SW-out"
+    },
+    {
+      "name": "weya_logo1"
+    },
+    {
+      "name": "weya_logo2"
+    },
+    {
+      "name": "weya_logo_worn1"
+    },
+    {
+      "name": "weya_logo_worn2"
     }
   ]
 }

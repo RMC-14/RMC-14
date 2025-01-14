@@ -99,6 +99,22 @@
   - type: Sprite
     state: redcontainerright
 
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerTartarusLeft
+  suffix: Tartarus, Left
+  components:
+  - type: Sprite
+    state: tartarus_l
+
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerTartarusRight
+  suffix: Tartarus, Right
+  components:
+  - type: Sprite
+    state: tartarus_r
+
 # Vertical
 
 - type: entity

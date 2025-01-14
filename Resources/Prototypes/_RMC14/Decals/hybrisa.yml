@@ -223,6 +223,92 @@
     sprite: _RMC14/Decals/hybrisa.rsi
     state: Z_corner
 
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWEYALogo1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: weya_logo1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWEYALogo2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: weya_logo2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWEYALogoWorn1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: weya_logo_worn1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWEYALogoWorn2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: weya_logo_worn2
+
+# Warning Stripes
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningWest
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: W
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningEast
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: E
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningNorth
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: NORTH
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningSouth
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: S
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningNorthEast
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: NE-out
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningNorthWest
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: NW-out
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningSouthEast
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: SE-out
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningSouthWest
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: SW-out
+
 # Trash
 
 - type: decal

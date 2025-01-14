@@ -215,7 +215,6 @@
       - state: street_off
         visible: false
         map: [ "light" ]
-    offset: "0.0,0.5"
     drawdepth: Mobs
   - type: Construction
     graph: RMCStreetlightBroken
@@ -231,7 +230,6 @@
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/streetlight.rsi
     state: broken
-    offset: "0.0,0.5"
     drawdepth: Mobs
   - type: Construction
     graph: RMCStreetlightBroken
