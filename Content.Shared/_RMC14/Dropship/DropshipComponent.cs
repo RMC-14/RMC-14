@@ -64,11 +64,11 @@ public sealed partial class DropshipComponent : Component
     public bool DidExplosion;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan AnnounceCrashTime = TimeSpan.FromSeconds(155);
+    public TimeSpan AnnounceCrashTime = TimeSpan.FromSeconds(25); // 25 seconds before landing
 
     [DataField, AutoNetworkedField]
-    public TimeSpan PlayIncomingSoundTime = TimeSpan.FromSeconds(162);
+    public TimeSpan PlayIncomingSoundTime = TimeSpan.FromSeconds(162); // 18 seconds before landing
 
     [DataField, AutoNetworkedField]
-    public TimeSpan ExplodeTime = TimeSpan.FromSeconds(172);
+    public TimeSpan ExplodeTime = TimeSpan.FromSeconds(172); // 8 seconds before landing
 }
