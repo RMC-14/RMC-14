@@ -1,5 +1,6 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Dropship;
@@ -35,9 +36,42 @@ public sealed partial class DropshipComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan? RechargeTime;
 
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
+    public TimeSpan? HijackLandAt;
+
+    [DataField, AutoNetworkedField]
+    public bool DidCrashStun;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId FireId = "RMCTileFire";
+
+    [DataField, AutoNetworkedField]
+    public int FireRange = 15;
+
     [DataField, AutoNetworkedField]
     public SoundSpecifier CrashWarningSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/ARES/dropship_emergency.ogg", AudioParams.Default.WithVolume(-5));
 
     [DataField, AutoNetworkedField]
+    public SoundSpecifier CrashSound = new SoundPathSpecifier("/Audio/_RMC14/Dropship/dropship_crash.ogg", AudioParams.Default.WithVolume(-5));
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier IncomingSound = new SoundPathSpecifier("/Audio/_RMC14/Dropship/dropship_incoming.ogg", AudioParams.Default.WithVolume(-5));
+
+    [DataField, AutoNetworkedField]
     public bool AnnouncedCrash;
+
+    [DataField, AutoNetworkedField]
+    public bool DidIncomingSound;
+
+    [DataField, AutoNetworkedField]
+    public bool DidExplosion;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan AnnounceCrashTime = TimeSpan.FromSeconds(155);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan PlayIncomingSoundTime = TimeSpan.FromSeconds(162);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan ExplodeTime = TimeSpan.FromSeconds(172);
 }
