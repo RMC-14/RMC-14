@@ -430,7 +430,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
             var destinationCoords = _transform.GetMapCoordinates(dropship.Destination.Value);
             var destinationEntityCoords = _transform.GetMoverCoordinates(dropship.Destination.Value);
 
-            if (dropship.HijackLandAt - dropship.AnnounceCrashTime <= time && !dropship.AnnouncedCrash)
+            if (dropship.HijackLandAt + dropship.AnnounceCrashTime <= time && !dropship.AnnouncedCrash)
             {
                 dropship.AnnouncedCrash = true;
                 Dirty(uid, dropship);
@@ -439,7 +439,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 continue;
             }
 
-            if (dropship.HijackLandAt - dropship.PlayIncomingSoundTime <= time && !dropship.DidIncomingSound)
+            if (dropship.HijackLandAt + dropship.PlayIncomingSoundTime <= time && !dropship.DidIncomingSound)
             {
                 dropship.DidIncomingSound = true;
                 Dirty(uid, dropship);
@@ -448,7 +448,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 continue;
             }
 
-            if (dropship.HijackLandAt - dropship.ExplodeTime <= time && !dropship.DidExplosion)
+            if (dropship.HijackLandAt + dropship.ExplodeTime <= time && !dropship.DidExplosion)
             {
                 dropship.DidExplosion = true;
                 Dirty(uid, dropship);
