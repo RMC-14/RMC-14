@@ -4,6 +4,9 @@
   name: box of crayons
   descriptino: A box of every flavor of crayon.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/paint.rsi
+    state: crayonbox
   - type: Storage
     grid:
     - 0,0,5,0  #6 slots
@@ -18,13 +21,41 @@
     whitelist:
       tags:
       - Crayon
-#base      #Todo port crayon related sprites
+  - type: ItemMapper
+    mapLayers:
+      red:
+        whitelist:
+          tags:
+          - CrayonRed
+      orange:
+        whitelist:
+          tags:
+          - CrayonOrange
+      yellow:
+        whitelist:
+          tags:
+          - CrayonYellow
+      green:
+        whitelist:
+          tags:
+          - CrayonGreen
+      blue:
+        whitelist:
+          tags:
+          - CrayonBlue
+      purple:
+        whitelist:
+          tags:
+          - CrayonPurple
+#base   #Todo shade system for crayons.
 - type: entity
   parent: Crayon
   id: RMCBaseCrayon
   abstract: true
   description: A colorful crayon. Please refrain from eating it or putting it in your nose.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/paint.rsi
   - type: Crayon
     capacity: 30
 
@@ -34,9 +65,16 @@
   id: RMCCrayonRed
   components:
   - type: Sprite
-    state: red
+    state: crayonred
   - type: Crayon
     color: "#DA0000"
+  - type: Tag
+    tags:
+    - Write
+    - Crayon
+    - CrayonRed
+    - Recyclable
+    - Trash
 
 #orange
 - type: entity
@@ -44,9 +82,16 @@
   id: RMCCrayonOrange
   components:
   - type: Sprite
-    state: orange
+    state: crayonorange
   - type: Crayon
     color: "#FF9300"
+  - type: Tag
+    tags:
+    - Write
+    - Crayon
+    - CrayonOrange
+    - Recyclable
+    - Trash
 
 #yellow
 - type: entity
@@ -54,9 +99,16 @@
   id: RMCCrayonYellow
   components:
   - type: Sprite
-    state: yellow
+    state: crayonyellow
   - type: Crayon
     color: "#FFF200"
+  - type: Tag
+    tags:
+    - Write
+    - Crayon
+    - CrayonYellow
+    - Recyclable
+    - Trash
 
 #green
 - type: entity
@@ -64,9 +116,16 @@
   id: RMCCrayonGreen
   components:
   - type: Sprite
-    state: green
+    state: crayongreen
   - type: Crayon
     color: "#A8E61D"
+  - type: Tag
+    tags:
+    - Write
+    - Crayon
+    - CrayonGreen
+    - Recyclable
+    - Trash
 
 #blue
 - type: entity
@@ -74,9 +133,16 @@
   id: RMCCrayonBlue
   components:
   - type: Sprite
-    state: blue
+    state: crayonblue
   - type: Crayon
     color: "#00B7EF"
+  - type: Tag
+    tags:
+    - Write
+    - Crayon
+    - CrayonBlue
+    - Recyclable
+    - Trash
 
 #purple
 - type: entity
@@ -84,6 +150,13 @@
   id: RMCCrayonPurple
   components:
   - type: Sprite
-    state: purple
+    state: crayonpurple
   - type: Crayon
     color: "#DA00FF"
+  - type: Tag
+    tags:
+    - Write
+    - Crayon
+    - CrayonPurple
+    - Recyclable
+    - Trash
