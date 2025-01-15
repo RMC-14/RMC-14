@@ -12,6 +12,7 @@
     sprite: _RMC14/Structures/Furniture/hospital_divider.rsi
     state: hospitalcurtain
     noRot: true
+    drawdepth: Overdoors
   - type: InteractionOutline
   - type: Fixtures
     fixtures:
