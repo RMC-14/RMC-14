@@ -405,6 +405,24 @@
     state: hybrisaplatform3_corner
 
 - type: entity
+  parent: CMPlatform
+  id: RMCPlatformHybrisaThreeStair
+  name: raised metal platform
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: hybrisaplatform3_stair
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformHybrisaThreeStairAlt
+  name: raised metal platform
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: hybrisaplatform3_stair_alt
+
+- type: entity
   parent: RMCPlatformCornerSmall
   id: RMCPlatformHybrisaThreeCornerSmall
   name: raised metal corner

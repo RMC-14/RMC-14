@@ -45,9 +45,20 @@
 
 - type: tile
   parent: CMPlanetBase
-  id: RMCPlanetHybrisaUnderground
+  id: RMCPlanetHybrisaUndergroundWeedable
   name: floor
   sprite: /Textures/_RMC14/Tiles/hybrisa/underground.png
+
+- type: tile
+  parent: RMCPlanetHybrisaUndergroundWeedable
+  id: RMCPlanetHybrisaUnderground
+  name: unweedable floor
+  weedsSpreadable: false
+
+- type: tile
+  parent: RMCPlanetHybrisaDirt
+  id: RMCPlanetHybrisaDirtPlating
+  name: unweedable dirt
   weedsSpreadable: false
 
 # Metal

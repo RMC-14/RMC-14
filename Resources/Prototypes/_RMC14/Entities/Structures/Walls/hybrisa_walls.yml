@@ -87,6 +87,7 @@
 - type: entity
   parent: RMCWallHybrisa
   id: RMCWallHybrisaMedical
+  suffix: medical
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/hybrisa_wall_medical.rsi
@@ -98,6 +99,7 @@
 - type: entity
   parent: RMCWallHybrisaReinforced
   id: RMCWallHybrisaMedicalReinforced
+  suffix: medical
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/hybrisa_rwall_medical.rsi
@@ -109,10 +111,49 @@
 - type: entity
   parent: RMCWallHybrisaHull
   id: RMCWallHybrisaMedicalHull
+  suffix: medical, hull
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/hybrisa_rwall_medical.rsi
     state: strata_ribbed_outpost_
   - type: Icon
     sprite: _RMC14/Structures/Walls/hybrisa_rwall_medical.rsi
+    state: strata_hull
+
+# Engineering
+
+- type: entity
+  parent: RMCWallHybrisa
+  id: RMCWallHybrisaEngi
+  suffix: engineering
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_wall_engineering.rsi
+    state: strata_bare_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_wall_engineering.rsi
+    state: strata_bare_outpost_
+
+- type: entity
+  parent: RMCWallHybrisaReinforced
+  id: RMCWallHybrisaEngiReinforced
+  suffix: engineering
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_engineering.rsi
+    state: strata_ribbed_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_engineering.rsi
+    state: strata_ribbed_outpost_
+
+- type: entity
+  parent: RMCWallHybrisaHull
+  id: RMCWallHybrisaEngiHull
+  suffix: engineering, hull
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_engineering.rsi
+    state: strata_ribbed_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_engineering.rsi
     state: strata_hull
