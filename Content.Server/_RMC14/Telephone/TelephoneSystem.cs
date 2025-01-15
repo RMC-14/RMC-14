@@ -4,7 +4,6 @@ using Content.Server.Radio;
 using Content.Server.Speech;
 using Content.Server.Speech.Components;
 using Content.Shared._RMC14.Communications;
-using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Telephone;
@@ -38,9 +37,6 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
 
     private void OnRadioSendAttempt(ref RadioSendAttemptEvent ev)
     {
-        if (HasComp<DropshipComponent>(ev.RadioSource))
-            return;
-
         if (!_rmcPlanet.IsOnPlanet(ev.RadioSource.ToCoordinates()))
             return;
 
@@ -59,9 +55,6 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
 
     private void OnRadioReceiveAttempt(ref RadioReceiveAttemptEvent ev)
     {
-        if (HasComp<DropshipComponent>(ev.RadioSource))
-            return;
-
         if (!_rmcPlanet.IsOnPlanet(ev.RadioReceiver.ToCoordinates()))
             return;
 
