@@ -271,7 +271,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 _marineAnnounce.AnnounceARES(dropshipId.Value, marineText, dropship.MarineHijackSound, new LocId("rmc-announcement-dropship-message"));
             }
 
-            dropship.HijackLandAt = TimeSpan.FromSeconds(hyperspaceTime.Value);
+            dropship.HijackLandAt = TimeSpan.FromSeconds(Math.Max(hyperspaceTime.Value, _shuttle.DefaultTravelTime));
             Dirty(dropshipId.Value, dropship);
         }
 
