@@ -106,6 +106,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
     [Dependency] private readonly PlayTimeTrackingSystem _playTimeTracking = default!;
     [Dependency] private readonly ScalingSystem _scaling = default!;
+    [Dependency] private readonly ShuttleSystem _shuttle = default!;
     [Dependency] private readonly StationJobsSystem _stationJobs = default!;
     [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
@@ -707,6 +708,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             rule.HijackSongPlayed = true;
             _audio.PlayGlobal(rule.HijackSong, Filter.Broadcast(), true);
             break;
+        }
+
+        var warshipQuery = EntityQueryEnumerator<AlmayerComponent, TransformComponent>();
+        while (warshipQuery.MoveNext(out _, out var xform)) // Stun everyone on the Almayer
+        {
+            _shuttle.DoTheDinosaur(xform);
         }
     }
 

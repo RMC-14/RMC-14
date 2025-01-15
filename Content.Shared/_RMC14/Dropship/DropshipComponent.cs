@@ -40,9 +40,6 @@ public sealed partial class DropshipComponent : Component
     public TimeSpan? HijackLandAt;
 
     [DataField, AutoNetworkedField]
-    public bool DidCrashStun;
-
-    [DataField, AutoNetworkedField]
     public EntProtoId FireId = "RMCTileFire";
 
     [DataField, AutoNetworkedField]

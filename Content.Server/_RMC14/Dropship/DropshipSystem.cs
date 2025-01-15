@@ -271,7 +271,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 _marineAnnounce.AnnounceARES(dropshipId.Value, marineText, dropship.MarineHijackSound, new LocId("rmc-announcement-dropship-message"));
             }
 
-            dropship.HijackLandAt = TimeSpan.FromSeconds(Math.Max(hyperspaceTime.Value, _shuttle.DefaultTravelTime));
+            dropship.HijackLandAt = _timing.CurTime + TimeSpan.FromSeconds(Math.Max(hyperspaceTime.Value, _shuttle.DefaultTravelTime));
             Dirty(dropshipId.Value, dropship);
         }
 
@@ -424,27 +424,13 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
             ftl.VisualizerProto = null;
 
-            if (ftl.State == FTLState.Cooldown && !dropship.DidCrashStun)
-            {
-                dropship.DidCrashStun = true;
-                Dirty(uid, dropship);
-
-                var warshipQuery = EntityQueryEnumerator<AlmayerComponent, TransformComponent>();
-                while (warshipQuery.MoveNext(out _, out var xform)) // Stun everyone on the Almayer
-                {
-                    _shuttle.DoTheDinosaur(xform);
-                }
-
-                continue;
-            }
-
             if (dropship.Destination == null)
                 continue;
 
             var destinationCoords = _transform.GetMapCoordinates(dropship.Destination.Value);
             var destinationEntityCoords = _transform.GetMoverCoordinates(dropship.Destination.Value);
 
-            if (dropship.HijackLandAt + dropship.AnnounceCrashTime <= time && !dropship.AnnouncedCrash)
+            if (dropship.HijackLandAt - dropship.AnnounceCrashTime <= time && !dropship.AnnouncedCrash)
             {
                 dropship.AnnouncedCrash = true;
                 Dirty(uid, dropship);
@@ -453,7 +439,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 continue;
             }
 
-            if (dropship.HijackLandAt + dropship.PlayIncomingSoundTime <= time && !dropship.DidIncomingSound)
+            if (dropship.HijackLandAt - dropship.PlayIncomingSoundTime <= time && !dropship.DidIncomingSound)
             {
                 dropship.DidIncomingSound = true;
                 Dirty(uid, dropship);
@@ -462,7 +448,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 continue;
             }
 
-            if (dropship.HijackLandAt + dropship.ExplodeTime <= time && !dropship.DidExplosion)
+            if (dropship.HijackLandAt - dropship.ExplodeTime <= time && !dropship.DidExplosion)
             {
                 dropship.DidExplosion = true;
                 Dirty(uid, dropship);
