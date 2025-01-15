@@ -223,12 +223,10 @@ public abstract class SharedNightVisionSystem : EntitySystem
         if (item.Comp.User == user && item.Comp.Toggleable)
         {
             DisableNightVisionItem(item, item.Comp.User);
-            _audio.PlayLocal(item.Comp.SoundOff, item, user);
             return;
         }
 
         EnableNightVisionItem(item, user);
-        _audio.PlayLocal(item.Comp.SoundOn, item, user);
     }
 
     private void EnableNightVisionItem(Entity<NightVisionItemComponent> item, EntityUid user)
