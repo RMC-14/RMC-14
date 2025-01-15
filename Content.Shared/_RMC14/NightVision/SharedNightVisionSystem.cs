@@ -172,10 +172,9 @@ public abstract class SharedNightVisionSystem : EntitySystem
             return;
 
         if (TryComp<NightVisionItemComponent>(ent.Owner, out var nightVisionItem))
-        {
             _audio.PlayLocal(nightVisionItem.SoundOff, ent.Owner, args.User);
-            RemCompDeferred(args.CycleableVisor, nightVisionItem);
-        }
+
+        RemComp<NightVisionItemComponent>(args.CycleableVisor);
     }
 
     private void OnNightVisionScoped(Entity<NightVisionVisorComponent> ent, ref VisorRelayedEvent<ScopedEvent> args)
