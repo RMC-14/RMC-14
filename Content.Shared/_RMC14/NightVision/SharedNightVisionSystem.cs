@@ -98,14 +98,6 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
         args.Handled = true;
         ToggleNightVisionItem(ent, args.Performer);
-
-        if (!ent.Comp.Toggleable)
-            return;
-
-        if (ent.Comp.User == args.Performer)
-            _audio.PlayLocal(ent.Comp.SoundOff, ent.Owner, args.Performer);
-        else
-            _audio.PlayLocal(ent.Comp.SoundOn, ent.Owner, args.Performer);
     }
 
     private void OnNightVisionItemGotEquipped(Entity<NightVisionItemComponent> ent, ref GotEquippedEvent args)
@@ -238,10 +230,12 @@ public abstract class SharedNightVisionSystem : EntitySystem
         if (item.Comp.User == user && item.Comp.Toggleable)
         {
             DisableNightVisionItem(item, item.Comp.User);
+            _audio.PlayLocal(item.Comp.SoundOff, item.Owner, user);
             return;
         }
 
         EnableNightVisionItem(item, user);
+        _audio.PlayLocal(item.Comp.SoundOn, item.Owner, user);
     }
 
     private void EnableNightVisionItem(Entity<NightVisionItemComponent> item, EntityUid user)
