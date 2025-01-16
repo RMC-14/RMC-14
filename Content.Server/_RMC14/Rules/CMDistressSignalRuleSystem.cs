@@ -726,7 +726,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             {
                 var map = _transform.GetMapId(uid);
                 var sameMap = Filter.BroadcastMap(map);
-                _rmcCameraShake.ShakeCamera(sameMap, 10, 1);
+                _rmcCameraShake.ShakeCamera(sameMap, 10, 2);
                 didCameraShake = true;
             }
 
