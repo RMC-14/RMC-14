@@ -16,6 +16,10 @@
     - state: icon
       map: ["foldedLayer"]
       visible: false
+  - type: Clothing
+    slots:
+      - mask
+      - neck
 
 - type: entity
   parent: RMCBaseScarfMask
