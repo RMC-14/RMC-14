@@ -24,6 +24,7 @@ using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
+using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
@@ -454,7 +455,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 dropship.DidExplosion = true;
                 Dirty(uid, dropship);
 
-                _sound.PlayGlobalOnStation(dropship.Destination.Value, _audio.GetSound(dropship.CrashSound), new AudioParams{Volume = -5f});
+                _sound.PlayGlobalOnStation(dropship.Destination.Value, _audio.GetSound(dropship.CrashSound), new AudioParams { Volume = -5f });
                 _rmcFlammable.SpawnFireDiamond(dropship.FireId, destinationEntityCoords, dropship.FireRange, 11);
                 _rmcExplosion.QueueExplosion(destinationCoords, "RMCOB", 50000, 1500, 90, uid);
 
