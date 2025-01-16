@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added Sentry name to the list of Patreon nameable items. The name will
-      persist between upgrades.
-    type: Add
-  id: 719
-  time: '2024-09-21T07:08:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4095
-- author: DrSmugleaf
-  changes:
   - message: Fixed a Warrior stopping its pull not cancelling the stun and knockdown
       from it. If a Warrior stops pulling someone after hitting them with a Lunge,
       the target will now correctly instantly get up.
@@ -5128,5 +5120,12 @@
   id: 1218
   time: '2025-01-13T07:52:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5381
+- author: CyberTropic
+  changes:
+  - message: Fixed digital clock showing proper date from the server.
+    type: Fix
+  id: 1219
+  time: '2025-01-16T02:11:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5395
 Name: RMC14
 Order: -1
