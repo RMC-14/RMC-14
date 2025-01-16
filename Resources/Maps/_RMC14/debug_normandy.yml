@@ -1022,7 +1022,7 @@ entities:
         - Left: Forward
         - Right: Reverse
         - Middle: Off
-- proto: WallShuttle
+- proto: CMNormandyWall51
   entities:
   - uid: 4
     components:
