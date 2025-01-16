@@ -125,6 +125,8 @@
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
+    - XenoStickyResin
+    - XenoFastResin
 
 - type: entity
   parent: CMXenoDroneBase

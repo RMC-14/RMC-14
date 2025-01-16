@@ -1,0 +1,84 @@
+﻿- type: entity
+  id: XenoStickyResin
+  name: sticky resin
+  description: A layer of disgusting sticky slime.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        layer:
+        - SlipLayer
+        mask:
+        - ItemMask
+        density: 1000
+        hard: false
+  - type: Clickable
+  - type: CollisionWake
+    enabled: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_floor_resins.rsi
+    drawdepth: FloorObjects
+    state: sticky
+  - type: Damageable
+    damageContainer: StructuralXeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 45
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ImmuneToUnarmed
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: XenoResinBreak
+  - type: XenoConstruct
+    destroyWeeds: false
+  - type: RMCNightVisionVisible
+    priority: -1
+    transparency: 0.2
+  - type: XenoConstructionPlasmaCost
+    plasma: 55
+  - type: XenoConstructionBuildSpeed
+    buildTimeMult: 0.5
+  - type: MeleeReceivedMultiplier
+    otherMultiplier: 10
+    xenoDamage:
+      types:
+        Slash: 45
+
+- type: entity
+  parent: XenoStickyResin
+  id: XenoStickyResinWeak
+  name: weak sticky resin
+  description: A thin and weak layer of disgusting sticky slime. It looks like it's already melting...
+  components:
+  - type: Sprite
+    state: sticky_weak
+  - type: TimedDespawn
+    lifespan: 20
+
+- type: entity
+  parent: XenoStickyResin
+  id: XenoFastResin
+  name: fast resin
+  description: A layer of disgusting sleek slime.
+  components:
+  - type: Sprite
+    state: fast
+  - type: XenoConstructionPlasmaCost
+    plasma: 35
+

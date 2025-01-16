@@ -277,9 +277,11 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             RaiseNetworkEvent(new XenoConstructionAnimationStartEvent(GetNetEntity(effect.Value), GetNetEntity(xeno)), Filter.PvsExcept(effect.Value));
         }
 
+        var buildMult = GetBuildSpeed(choice) ?? 1;
+
         var ev = new XenoSecreteStructureDoAfterEvent(coordinates, choice, GetNetEntity(effect));
         args.Handled = true;
-        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.BuildDelay, ev, xeno)
+        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.BuildDelay * buildMult, ev, xeno)
         {
             BreakOnMove = true
         };
@@ -593,6 +595,17 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             buildChoice.TryGetComponent(out XenoConstructionPlasmaCostComponent? cost, _compFactory))
         {
             return cost.Plasma;
+        }
+
+        return null;
+    }
+
+    public float? GetBuildSpeed(EntProtoId prototype)
+    {
+        if (_prototype.TryIndex(prototype, out var buildChoice) &&
+            buildChoice.TryGetComponent(out XenoConstructionBuildSpeedComponent? speed, _compFactory))
+        {
+            return speed.BuildTimeMult;
         }
 
         return null;

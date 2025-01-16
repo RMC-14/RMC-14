@@ -119,6 +119,8 @@
     - WallXenoResinThick
     - WallXenoMembraneThick
     - DoorXenoResinThick
+    - XenoStickyResin
+    - XenoFastResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
     canUpgrade: true
@@ -161,6 +163,8 @@
     - WallXenoMembrane
     - DoorXenoResin
     - XenoWeedsSource
+    - XenoStickyResin
+    - XenoFastResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
   - type: XenoPlasma
