@@ -1262,7 +1262,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         if (component.EndAtAllClear != null &&
             time >= component.EndAtAllClear)
         {
-            // _roundEnd.EndRound();
+            _roundEnd.EndRound();
             return;
         }
 
@@ -1436,7 +1436,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 rule.EndAtAllClear ??= Timing.CurTime + rule.AllClearEndDelay;
                 break;
             default:
-                // _roundEnd.EndRound();
+                _roundEnd.EndRound();
                 break;
         }
     }
