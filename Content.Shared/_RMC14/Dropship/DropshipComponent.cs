@@ -70,5 +70,5 @@ public sealed partial class DropshipComponent : Component
     public TimeSpan PlayIncomingSoundTime = TimeSpan.FromSeconds(10);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan ExplodeTime = TimeSpan.FromSeconds(2);
+    public TimeSpan ExplodeTime = TimeSpan.FromSeconds(3);
 }
