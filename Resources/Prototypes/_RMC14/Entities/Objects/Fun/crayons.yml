@@ -2,7 +2,7 @@
   parent: CrayonBox
   id: RMCCrayonBox
   name: box of crayons
-  descriptino: A box of every flavor of crayon.
+  description: A box of every flavor of crayon.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/paint.rsi
@@ -10,6 +10,9 @@
   - type: Storage
     grid:
     - 0,0,4,0  #6 slots
+    whitelist:
+      tags:
+      - Crayon
   - type: StorageFill
     contents:
     - id: RMCCrayonRed
@@ -18,9 +21,6 @@
     - id: RMCCrayonGreen
     - id: RMCCrayonBlue
     - id: RMCCrayonPurple
-    whitelist:
-      tags:
-      - Crayon
   - type: ItemMapper
     mapLayers:
       red:
