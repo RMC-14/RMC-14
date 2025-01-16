@@ -104,3 +104,14 @@
   parent: RMCEffectXenoStickyResin
   id: RMCEffectXenoFastResin
   categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: RMCBaseEffectXenoStructure
+  id: RMCEffectXenoWeedsSource
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/alert.rsi
+    layers:
+    - state: alert_greyscale
+      color: "#A800FF7F"

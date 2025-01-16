@@ -7,5 +7,5 @@ namespace Content.Shared._RMC14.Xenonids.Construction;
 public sealed partial class XenoConstructionBuildSpeedComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public float BuildTimeMult = 0.5f;
+    public float BuildTimeMult = 1;
 }

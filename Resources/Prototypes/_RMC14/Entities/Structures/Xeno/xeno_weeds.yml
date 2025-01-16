@@ -122,6 +122,8 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: XenoConstructionPlasmaCost
+    plasma: 215
 
 - type: entity # TODO RMC14 sound
   parent: XenoWeeds

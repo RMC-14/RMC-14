@@ -162,9 +162,9 @@
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
-    - XenoWeedsSource
     - XenoStickyResin
     - XenoFastResin
+    - XenoWeedsSource
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
   - type: XenoPlasma

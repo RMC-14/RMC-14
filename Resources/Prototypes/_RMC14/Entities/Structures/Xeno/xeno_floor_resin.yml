@@ -69,7 +69,7 @@
   - type: Sprite
     state: sticky_weak
   - type: TimedDespawn
-    lifespan: 20
+    lifetime: 20
 
 - type: entity
   parent: XenoStickyResin
