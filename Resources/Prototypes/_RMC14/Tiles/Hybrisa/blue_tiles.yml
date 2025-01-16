@@ -12,6 +12,16 @@
 
 - type: tile
   parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueTile
+  sprite: /Textures/_RMC14/Tiles/hybrisa/tileblue.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueSupermart
+  sprite: /Textures/_RMC14/Tiles/hybrisa/supermartfloor1.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
   id: RMCFloorHybrisaBlueSouth
   sprite: /Textures/_RMC14/Tiles/hybrisa/bluemetal_1.png
 
@@ -90,3 +100,38 @@
   parent: RMCFloorHybrisaBlueCarpet
   id: RMCFloorHybrisaBluePatternCarpet
   sprite: /Textures/_RMC14/Tiles/hybrisa/carpetpatternblue.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueDropship1
+  sprite: /Textures/_RMC14/Tiles/hybrisa/dropshipfloor1.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueDropship2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/dropshipfloor2.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueDropship3
+  sprite: /Textures/_RMC14/Tiles/hybrisa/dropshipfloor3.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueDropship4
+  sprite: /Textures/_RMC14/Tiles/hybrisa/dropshipfloor4.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueDropshipCorner1
+  sprite: /Textures/_RMC14/Tiles/hybrisa/dropshipfloorcorner1.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueDropshipCorner2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/dropshipfloorcorner2.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueDropshipFull
+  sprite: /Textures/_RMC14/Tiles/hybrisa/dropshipfloorfull.png

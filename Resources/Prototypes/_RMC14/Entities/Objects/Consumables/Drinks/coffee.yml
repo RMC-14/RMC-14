@@ -1,8 +1,8 @@
 - type: entity
   parent: DrinkBottlePlasticBaseFull
-  id: CMDrinkWEYAWaterBottle30
-  name: We-Ya bottled spring water
-  description: Overpriced 'Spring' water. Bottled by the We-Ya Corporation.
+  id: RMCDrinkCoffee
+  name: coffee
+  description: Careful, the beverage you're about to enjoy is extremely hot.
   components:
   - type: SolutionContainerManager
     solutions:
@@ -13,7 +13,7 @@
           Quantity: 30
   - type: Drink
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Drinks/we_ya_water_bottle.rsi
+    sprite: _RMC14/Objects/Consumable/Drinks/coffee.rsi
     state: base
     layers: []
   - type: Item
@@ -24,10 +24,20 @@
     damage: {}
   - type: Appearance
   - type: Sealable
-  - type: MREItem
   - type: Destructible
     thresholds: [] # TODO RMC14 destroy on explosion unless inside a container
   - type: InteractedBlacklist
     blacklist:
       components:
       - Xeno
+
+- type: entity
+  parent: RMCDrinkCoffee
+  id: RMCDrinkCoffeeJoe
+  name: Cuppa Joe's coffee
+  description: Have you got the CuppaJoe Smile? Stay perky! Freeze-dried CuppaJoe's Coffee.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/coffee_joe.rsi
+    state: base
+    layers: []

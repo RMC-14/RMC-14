@@ -83,3 +83,442 @@
     state: roadsign_alt_4
   - type: Icon
     state: roadsign_alt_4
+
+# Billboards
+
+- type: entity
+  parent: RMCOverheadRoadsign
+  id: RMCOverheadBillboardBigger1
+  name: billboard
+  description: An advertisement billboard.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/billboards.rsi
+    state: billboard_bigger_1
+    offset: 0.5,0.5
+  - type: Icon
+    sprite: _RMC14/Structures/billboards.rsi
+    state: billboard_bigger_1
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboardBigger2
+  components:
+  - type: Sprite
+    state: billboard_bigger_2
+  - type: Icon
+    state: billboard_bigger_2
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboardBigger3
+  components:
+  - type: Sprite
+    state: billboard_bigger_3
+  - type: Icon
+    state: billboard_bigger_3
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboardBigger4
+  components:
+  - type: Sprite
+    state: billboard_bigger_4
+  - type: Icon
+    state: billboard_bigger_4
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboardBigger5
+  components:
+  - type: Sprite
+    state: billboard_bigger_5
+  - type: Icon
+    state: billboard_bigger_5
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboardBigger6
+  components:
+  - type: Sprite
+    state: billboard_bigger_6
+  - type: Icon
+    state: billboard_bigger_6
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboardBigger7
+  components:
+  - type: Sprite
+    state: billboard_bigger_7
+  - type: Icon
+    state: billboard_bigger_7
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboardBigger8
+  components:
+  - type: Sprite
+    state: billboard_bigger_8
+  - type: Icon
+    state: billboard_bigger_8
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard1A
+  components:
+  - type: Sprite
+    state: billboard1_a
+  - type: Icon
+    state: billboard1_a
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard1B
+  components:
+  - type: Sprite
+    state: billboard1_b
+  - type: Icon
+    state: billboard1_b
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard1C
+  components:
+  - type: Sprite
+    state: billboard1_c
+  - type: Icon
+    state: billboard1_c
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard1D
+  components:
+  - type: Sprite
+    state: billboard1_d
+  - type: Icon
+    state: billboard1_d
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard1E
+  components:
+  - type: Sprite
+    state: billboard1_e
+  - type: Icon
+    state: billboard1_e
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard1F
+  components:
+  - type: Sprite
+    state: billboard1_f
+  - type: Icon
+    state: billboard1_f
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard1G
+  components:
+  - type: Sprite
+    state: billboard1_g
+  - type: Icon
+    state: billboard1_g
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard1H
+  components:
+  - type: Sprite
+    state: billboard1_h
+  - type: Icon
+    state: billboard1_h
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard2A
+  components:
+  - type: Sprite
+    state: billboard2_a
+  - type: Icon
+    state: billboard2_a
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard2B
+  components:
+  - type: Sprite
+    state: billboard2_b
+  - type: Icon
+    state: billboard2_b
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard2C
+  components:
+  - type: Sprite
+    state: billboard2_c
+  - type: Icon
+    state: billboard2_c
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard2D
+  components:
+  - type: Sprite
+    state: billboard2_d
+  - type: Icon
+    state: billboard2_d
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard2E
+  components:
+  - type: Sprite
+    state: billboard2_e
+  - type: Icon
+    state: billboard2_e
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard2F
+  components:
+  - type: Sprite
+    state: billboard2_f
+  - type: Icon
+    state: billboard2_f
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard2G
+  components:
+  - type: Sprite
+    state: billboard2_g
+  - type: Icon
+    state: billboard2_g
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard2H
+  components:
+  - type: Sprite
+    state: billboard2_h
+  - type: Icon
+    state: billboard2_h
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard3A
+  components:
+  - type: Sprite
+    state: billboard3_a
+  - type: Icon
+    state: billboard3_a
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard3B
+  components:
+  - type: Sprite
+    state: billboard3_b
+  - type: Icon
+    state: billboard3_b
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard3C
+  components:
+  - type: Sprite
+    state: billboard3_c
+  - type: Icon
+    state: billboard3_c
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard3D
+  components:
+  - type: Sprite
+    state: billboard3_d
+  - type: Icon
+    state: billboard3_d
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard3E
+  components:
+  - type: Sprite
+    state: billboard3_e
+  - type: Icon
+    state: billboard3_e
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard3F
+  components:
+  - type: Sprite
+    state: billboard3_f
+  - type: Icon
+    state: billboard3_f
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard3G
+  components:
+  - type: Sprite
+    state: billboard3_g
+  - type: Icon
+    state: billboard3_g
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard3H
+  components:
+  - type: Sprite
+    state: billboard3_h
+  - type: Icon
+    state: billboard3_h
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard4A
+  components:
+  - type: Sprite
+    state: billboard4_a
+  - type: Icon
+    state: billboard4_a
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard4B
+  components:
+  - type: Sprite
+    state: billboard4_b
+  - type: Icon
+    state: billboard4_b
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard4C
+  components:
+  - type: Sprite
+    state: billboard4_c
+  - type: Icon
+    state: billboard4_c
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard4D
+  components:
+  - type: Sprite
+    state: billboard4_d
+  - type: Icon
+    state: billboard4_d
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard4E
+  components:
+  - type: Sprite
+    state: billboard4_e
+  - type: Icon
+    state: billboard4_e
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard4F
+  components:
+  - type: Sprite
+    state: billboard4_f
+  - type: Icon
+    state: billboard4_f
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard4G
+  components:
+  - type: Sprite
+    state: billboard4_g
+  - type: Icon
+    state: billboard4_g
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard4H
+  components:
+  - type: Sprite
+    state: billboard4_h
+  - type: Icon
+    state: billboard4_h
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard5A
+  components:
+  - type: Sprite
+    state: billboard5_a
+  - type: Icon
+    state: billboard5_a
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard5B
+  components:
+  - type: Sprite
+    state: billboard5_b
+  - type: Icon
+    state: billboard5_b
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard5C
+  components:
+  - type: Sprite
+    state: billboard5_c
+  - type: Icon
+    state: billboard5_c
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard5D
+  components:
+  - type: Sprite
+    state: billboard5_d
+  - type: Icon
+    state: billboard5_d
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard5E
+  components:
+  - type: Sprite
+    state: billboard5_e
+  - type: Icon
+    state: billboard5_e
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard5F
+  components:
+  - type: Sprite
+    state: billboard5_f
+  - type: Icon
+    state: billboard5_f
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard5G
+  components:
+  - type: Sprite
+    state: billboard5_g
+  - type: Icon
+    state: billboard5_g
+
+- type: entity
+  parent: RMCOverheadBillboardBigger1
+  id: RMCOverheadBillboard5H
+  components:
+  - type: Sprite
+    state: billboard5_h
+  - type: Icon
+    state: billboard5_h

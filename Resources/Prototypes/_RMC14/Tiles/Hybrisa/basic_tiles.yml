@@ -71,6 +71,12 @@
 
 - type: tile
   parent: RMCFloorHybrisaBasicBase
+  id: RMCFloorHybrisaCementFlat
+  name: cement
+  sprite: /Textures/_RMC14/Tiles/hybrisa/cementflat.png
+
+- type: tile
+  parent: RMCFloorHybrisaBasicBase
   id: RMCFloorHybrisaRampNorth
   name: ramp
   suffix: north
