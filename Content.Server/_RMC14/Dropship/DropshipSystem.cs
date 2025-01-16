@@ -454,7 +454,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 dropship.DidExplosion = true;
                 Dirty(uid, dropship);
 
-                _sound.PlayGlobalOnStation(dropship.Destination.Value, _audio.GetSound(dropship.CrashSound));
+                _sound.PlayGlobalOnStation(dropship.Destination.Value, _audio.GetSound(dropship.CrashSound), new AudioParams{Volume = -5f});
                 _rmcFlammable.SpawnFireDiamond(dropship.FireId, destinationEntityCoords, dropship.FireRange, 11);
                 _rmcExplosion.QueueExplosion(destinationCoords, "RMCOB", 50000, 1500, 90, uid);
 
