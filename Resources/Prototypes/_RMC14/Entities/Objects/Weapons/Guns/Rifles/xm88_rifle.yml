@@ -27,9 +27,9 @@
     recoilUnwielded: 5
     scatterWielded: 6
     scatterUnwielded: 20
-    baseFireRate: 0.8
+    baseFireRate: 1
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 1.1
+    accuracyMultiplier: 1.25
     accuracyMultiplierUnwielded: 0.5
   - type: WieldDelay
     baseDelay: 0.4
@@ -104,7 +104,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 104
+        Piercing: 80
   - type: CMArmorPiercing
     amount: 10
   - type: GunStacksProjectile
