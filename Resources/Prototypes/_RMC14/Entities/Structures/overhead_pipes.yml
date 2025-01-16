@@ -20,7 +20,7 @@
 
 - type: entity
   parent: CMOverheadPipe
-  id: CMOverheadPipeCorner
+  id: RMCOverheadPipeCorner
   suffix: Corner
   components:
   - type: Sprite

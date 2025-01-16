@@ -1,0 +1,85 @@
+﻿- type: entity
+  id: RMCOverheadRoadsign
+  name: road sign
+  description: A road sign.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: SpriteFade
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/roadsigns.rsi
+    state: roadsign_1
+    drawdepth: Effects # Goes over OverDoors, IDFK if theres a better solution
+    offset: 0.5,1
+  - type: Icon
+    sprite: _RMC14/Structures/roadsigns.rsi
+    state: roadsign_1
+  - type: Anchorable
+  - type: Clickable
+
+- type: entity
+  parent: RMCOverheadRoadsign
+  id: RMCOverheadRoadsign2
+  components:
+  - type: Sprite
+    state: roadsign_2
+  - type: Icon
+    state: roadsign_2
+
+- type: entity
+  parent: RMCOverheadRoadsign
+  id: RMCOverheadRoadsign3
+  components:
+  - type: Sprite
+    state: roadsign_3
+  - type: Icon
+    state: roadsign_3
+
+- type: entity
+  parent: RMCOverheadRoadsign
+  id: RMCOverheadRoadsign4
+  components:
+  - type: Sprite
+    state: roadsign_4
+  - type: Icon
+    state: roadsign_4
+
+- type: entity
+  parent: RMCOverheadRoadsign
+  id: RMCOverheadRoadsignAlt1
+  components:
+  - type: Sprite
+    state: roadsign_alt_1
+  - type: Icon
+    state: roadsign_alt_1
+
+- type: entity
+  parent: RMCOverheadRoadsign
+  id: RMCOverheadRoadsignAlt2
+  components:
+  - type: Sprite
+    state: roadsign_alt_2
+  - type: Icon
+    state: roadsign_alt_2
+
+- type: entity
+  parent: RMCOverheadRoadsign
+  id: RMCOverheadRoadsignAlt3
+  components:
+  - type: Sprite
+    state: roadsign_alt_3
+  - type: Icon
+    state: roadsign_alt_3
+
+- type: entity
+  parent: RMCOverheadRoadsign
+  id: RMCOverheadRoadsignAlt4
+  components:
+  - type: Sprite
+    state: roadsign_alt_4
+  - type: Icon
+    state: roadsign_alt_4
