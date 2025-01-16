@@ -7,6 +7,8 @@
   name: rubber stamp
   description: A rubber stamp for stamping important documents.
   components:
+  - type: Item
+    heldPrefix: stamp
   - type: Sprite
     sprite: _RMC14/Objects/Misc/paper.rsi
     state: stamp-def

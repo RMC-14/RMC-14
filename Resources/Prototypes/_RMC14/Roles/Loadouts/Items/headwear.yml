@@ -61,3 +61,10 @@
   storage:
     back:
     - CMHeadBandTan
+
+- type: loadout
+  id: SquadHeadbandRMC
+  cost: 3
+  storage:
+    back:
+    - RMCHeadBandSquad

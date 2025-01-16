@@ -309,4 +309,25 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCCommendationMaxLength =
         CVarDef.Create("rmc.commendation_max_length", 1000, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
+    /// <summary>
+    /// Whether the no EORG popup is enabled.
+    /// </summary>
+    public static readonly CVarDef<bool> RMCRoundEndNoEorgPopup =
+        CVarDef.Create("game.round_end_eorg_popup_enabled", true, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
+    /// Skip the no EORG popup.
+    /// </summary>
+    public static readonly CVarDef<bool> RMCSkipRoundEndNoEorgPopup =
+        CVarDef.Create("game.skip_round_end_eorg_popup", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// How long to display the EORG popup for.
+    /// </summary>
+    public static readonly CVarDef<float> RMCRoundEndNoEorgPopupTime =
+        CVarDef.Create("game.round_end_eorg_popup_time", 5f, CVar.SERVER | CVar.REPLICATED);
+
+    public static readonly CVarDef<int> RMCXenoEvolveSameCasteCooldownSeconds =
+        CVarDef.Create("rmc.xeno_evolve_same_caste_cooldown_seconds", 300, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 }

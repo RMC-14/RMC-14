@@ -249,7 +249,7 @@
   startingInventory: # TODO RMC14
     RMCHandcuffs: 8
     Zipties: 10
-    GrenadeFlashBang: 4
+    RMCGrenadeFlashBang: 4
     RMCWeaponTaser: 4
     # Pepper spray 4
     CMStunbaton: 4
@@ -265,6 +265,35 @@
     CMGlassesSecurity: 3
     CMHeadset: 6
 
+- type: entity
+  parent: CMVendor
+  id: RMCVendorSecArmory
+  name: Riot Tech
+  description: A Police Riot equipment vendor.
+  suffix: Military Police
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/sec.rsi
+  - type: VendingMachine
+    pack: RMCVendorRiot
+    denyState: deny-unshaded
+    ejectState: eject-unshaded
+  - type: AccessReader
+    access: [["CMAccessBrig"]]
+
+- type: vendingMachineInventory
+  id: RMCVendorRiot
+  startingInventory: # TODO RMC14
+    Zipties: 40
+    RMCGrenadeFlashBang: 20
+    RMCMagazineSMGM63Rubber: 40
+    ##RMCGrenadeTearGas: 40
+    RMCMagazinePistolM1984Rubber: 40
+    RMCMagazinePistolM77Rubber: 40
+    RMCMagazineRifleM54CRubber: 40
+    RMCMagazineRifleM4SPRRubber: 40
+    CMArmorHelmetM10MP: 8
+    ##RMCBreachingChargeRiot: 6
 
 # Senior Enlisted Advisor
 - type: entity
@@ -286,12 +315,12 @@
 - type: vendingMachineInventory
   id: CMVendorSEA
   startingInventory: # TODO RMC14
-    #m63 rubber ammo 20
-    #pistol rubber ammo 20
-    #M77 rubber ammo 20
-    #rifle rubber ammo 20
-    #m4spr rubber ammo 20
-    #shotgun beanbag 20
+    RMCMagazineSMGM63Rubber: 20
+    RMCMagazinePistolM1984Rubber: 20
+    RMCMagazinePistolM77Rubber: 20
+    RMCMagazineRifleM54CRubber: 20
+    RMCMagazineRifleM4SPRRubber: 20
+    CMShellShotgunBeanbag: 20
     CMFirstAidKitFilled: 2
     CMBurnAidKitFilled: 2 #firstaid fire 2
     #MedkitRadiationFilled: 1 #firstaid rad 1
@@ -387,13 +416,18 @@
   id: CMVendorDinnerware
   startingInventory:
     # TODO RMC14 Tray: 8
-    Fork: 6
-    KitchenKnife: 3
+    RMCFork: 6
+    RMCKitchenKnifeChef: 3
     DrinkGlass: 8
     CMJumpsuitMessTech: 2
-    FoodShakerSalt: 4
-    FoodShakerPepper: 4
-    FoodCondimentBottleEnzyme: 1
+    RMCCondimentSmallSalt: 4
+    RMCCondimentSmallPepper: 4
+    RMCCondimentEnzyme: 1
+    RMCCondiment: 8
+    # TODO RMC14 make next items Mess Tech only
+    RMCSpoon: 2
+    RMCRollingPin: 2
+    RMCKitchenKnifeButcher: 2
 
 
 # BODA
@@ -432,15 +466,14 @@
     FoodContainerEgg: 12
 #    FoodMeatFish: 12
     FoodMeat: 12
-    ReagentContainerCornmeal: 12
-    ReagentContainerRice: 12
-    ReagentContainerMayo: 12
+    DrinkMilkCarton: 12
+    DrinkSoyMilkCarton: 12
+    RMCCondimentEnzyme: 12
     ReagentContainerFlour: 12
-    ReagentContainerSugar: 12
-    ReagentContainerOliveoil: 12
-    FoodCondimentBottleEnzyme: 12
-    FoodShakerSalt: 12
-    FoodShakerPepper: 12
+    RMCCondimentSugar: 12
+    RMCCondimentCornOil: 12
+    RMCCondimentSmallSalt: 12
+    RMCCondimentSmallPepper: 12
     # TODO RMC14 Mint 12
     FoodApple: 12
     FoodBanana: 12

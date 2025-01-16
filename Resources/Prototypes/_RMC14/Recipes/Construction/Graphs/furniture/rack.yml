@@ -1,0 +1,50 @@
+﻿- type: constructionGraph
+  parent: RMC
+  id: RMCRack
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:DestroyEntity {}
+      edges:
+        - to: rack
+          completed:
+            - !type:SnapToGrid { }
+          steps:
+            - tag: RMCRackParts
+              name: rack parts
+              icon:
+                sprite: _RMC14/Objects/Materials/rack_parts.rsi
+                state: icon
+              doAfter: 1
+    - node: rack
+      entity: CMRack
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: RMCRackParts
+              amount: 1
+          steps:
+            - tool: Anchoring
+              doAfter: 1
+
+- type: constructionGraph
+  parent: RMC
+  id: RMCRackParts
+  start: start
+  graph:
+    - node: start
+      actions:
+      - !type:DestroyEntity {}
+    - node: parts
+      entity: RMCRackParts
+      edges:
+      - to: start
+        completed:
+        - !type:SpawnPrototype
+          prototype: CMSheetMetal1
+          amount: 1
+        steps:
+        - tool: Anchoring
+          doAfter: 1
