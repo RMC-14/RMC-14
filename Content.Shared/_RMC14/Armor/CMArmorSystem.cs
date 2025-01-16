@@ -110,9 +110,7 @@ public sealed class CMArmorSystem : EntitySystem
 
     private void OnGetExplosionResistanceRelayed(Entity<CMArmorComponent> ent, ref InventoryRelayedEvent<GetExplosionResistanceEvent> args)
     {
-        // TODO RMC14 unhalve this when we can calculate explosion damage better
-        var armor = ent.Comp.ExplosionArmor / 2;
-
+        var armor = ent.Comp.ExplosionArmor;
         if (armor <= 0)
             return;
 
@@ -122,9 +120,7 @@ public sealed class CMArmorSystem : EntitySystem
 
     private void OnGetExplosionResistance(Entity<CMArmorComponent> armored, ref GetExplosionResistanceEvent args)
     {
-        // TODO RMC14 unhalve this when we can calculate explosion damage better
-        var armor = armored.Comp.ExplosionArmor / 2;
-
+        var armor = armored.Comp.ExplosionArmor;
         if (armor <= 0)
             return;
 

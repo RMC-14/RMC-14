@@ -69,6 +69,27 @@
 
 - type: entity
   parent: CMLockerBase
+  id: RMCLockerGunBlue
+  name: riot control equipment Cabinet
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/armorylocker.rsi
+  - type: AccessReader
+    access: [["CMAccessArmory"]]
+
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerGunRed
+  name: red alert gun cabinet
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/armorylocker.rsi
+  - type: AccessReader
+    access: [["CMAccessArmory"]]
+
+- type: entity
+  parent: CMLockerBase
   id: CMLockerCMP
   name: chief MP's locker
   components:

@@ -27,6 +27,7 @@ public abstract class SharedSupplyDropSystem : EntitySystem
 {
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
@@ -34,6 +35,7 @@ public abstract class SharedSupplyDropSystem : EntitySystem
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly RMCCameraShakeSystem _rmcCameraShake = default!;
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
@@ -169,7 +171,8 @@ public abstract class SharedSupplyDropSystem : EntitySystem
             return false;
 
         if (computer.Comp.Squad is not { } squad ||
-            !_rmcPlanet.TryPlanetToCoordinates(computer.Comp.Coordinates, out var mapCoordinates))
+            !_rmcPlanet.TryPlanetToCoordinates(computer.Comp.Coordinates, out var mapCoordinates) ||
+            !CanSupplyDropSquad(squad))
         {
             _popup.PopupCursor("Supply drop pad is not operational.", user, PopupType.MediumCaution);
             return false;
@@ -247,6 +250,14 @@ public abstract class SharedSupplyDropSystem : EntitySystem
             return;
 
         Dirty(ent);
+    }
+
+    private bool CanSupplyDropSquad(EntProtoId<SquadTeamComponent> squad)
+    {
+        if (!squad.TryGet(out var comp, _prototypes, _compFactory))
+            return true;
+
+        return comp.CanSupplyDrop;
     }
 
     public override void Update(float frameTime)

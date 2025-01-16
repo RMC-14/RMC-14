@@ -10,6 +10,7 @@ using Content.Shared._RMC14.Medical.MedevacStretcher;
 using Content.Shared._RMC14.PowerLoader;
 using Content.Shared._RMC14.Rangefinder;
 using Content.Shared._RMC14.Rules;
+using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
@@ -65,6 +66,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     public bool CasDebug { get; private set; }
     private readonly HashSet<Entity<DamageableComponent>> _damageables = new();
+    private readonly List<EntityUid> _targetsToRemove = new();
     private int _nextId = 1;
 
     public override void Initialize()
@@ -86,6 +88,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<DropshipTargetComponent, MapInitEvent>(OnDropshipTargetMapInit);
         SubscribeLocalEvent<DropshipTargetComponent, ComponentRemove>(OnDropshipTargetRemove);
         SubscribeLocalEvent<DropshipTargetComponent, EntityTerminatingEvent>(OnDropshipTargetRemove);
+
+        SubscribeLocalEvent<DropshipTargetEyeComponent, ComponentRemove>(OnDropshipTargetEyeRemove);
+        SubscribeLocalEvent<DropshipTargetEyeComponent, EntityTerminatingEvent>(OnDropshipTargetEyeRemove);
 
         SubscribeLocalEvent<DropshipAmmoComponent, ExaminedEvent>(OnAmmoExamined);
         SubscribeLocalEvent<DropshipAmmoComponent, PowerLoaderInteractEvent>(OnAmmoInteract);
@@ -122,6 +127,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             return;
 
         dropshipWeaponsTerminal.Comp.Target = newTarget;
+        Dirty(dropshipWeaponsTerminal);
+
         var ev = new DropshipTargetChangedEvent(GetNetEntity(newTarget));
         foreach (var attachmentPoint in dropship.Comp.AttachmentPoints)
         {
@@ -214,9 +221,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void OnDropshipTargetMapInit(Entity<DropshipTargetComponent> ent, ref MapInitEvent args)
     {
-        var eye = EnsureComp<EyeComponent>(ent);
-        _eye.SetDrawFov(ent, false, eye);
-
         var netEnt = GetNetEntity(ent);
         var terminals = EntityQueryEnumerator<DropshipTerminalWeaponsComponent>();
         while (terminals.MoveNext(out var uid, out var terminal))
@@ -252,6 +256,32 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             }
 
             Dirty(uid, terminal);
+        }
+
+        foreach (var (_, eye) in ent.Comp.Eyes)
+        {
+            QueueDel(eye);
+        }
+    }
+
+    private void OnDropshipTargetEyeRemove<T>(Entity<DropshipTargetEyeComponent> ent, ref T args)
+    {
+        if (TerminatingOrDeleted(ent.Comp.Target) ||
+            !TryComp(ent.Comp.Target, out DropshipTargetComponent? target))
+        {
+            return;
+        }
+
+        _targetsToRemove.Clear();
+        foreach (var (terminal, eye) in target.Eyes)
+        {
+            if (eye == ent.Owner)
+                _targetsToRemove.Add(terminal);
+        }
+
+        foreach (var remove in _targetsToRemove)
+        {
+            target.Eyes.Remove(remove);
         }
     }
 
@@ -504,7 +534,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             return;
 
         ent.Comp.NightVision = args.On;
-        if (ent.Comp.Target is { } target)
+        if (EnsureTargetEye(ent, ent.Comp.Target) is { } target)
             _eye.SetDrawLight(target, !ent.Comp.NightVision);
     }
 
@@ -545,7 +575,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         ent.Comp.Offset = newOffset;
 
-        if (ent.Comp.Target is { } target)
+        if (EnsureTargetEye(ent, ent.Comp.Target) is { } target)
             _eye.SetOffset(target, ent.Comp.Offset);
 
         Dirty(ent);
@@ -556,7 +586,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     {
         ent.Comp.Offset = Vector2i.Zero;
 
-        if (ent.Comp.Target is { } target)
+        if (EnsureTargetEye(ent, ent.Comp.Target) is { } target)
             _eye.SetOffset(target, ent.Comp.Offset);
 
         Dirty(ent);
@@ -620,8 +650,13 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     {
         RemovePvsActors(ent);
         SetTarget(ent, target);
-        _eye.SetOffset(target, ent.Comp.Offset);
-        _eye.SetDrawLight(target, !ent.Comp.NightVision);
+
+        if (EnsureTargetEye(ent, ent.Comp.Target) is { } targetEye)
+        {
+            _eye.SetOffset(targetEye, ent.Comp.Offset);
+            _eye.SetDrawLight(targetEye, !ent.Comp.NightVision);
+        }
+
         AddPvsActors(ent);
 
         RefreshWeaponsUI(ent);
@@ -913,5 +948,49 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
             Dirty(uid, terminal);
         }
+    }
+
+    private EntityUid? EnsureTargetEye(Entity<DropshipTerminalWeaponsComponent> terminal, Entity<DropshipTargetComponent?>? targetNullable)
+    {
+        if (targetNullable == null)
+            return null;
+
+        var target = targetNullable.Value;
+        if (!Resolve(target, ref target.Comp, false))
+            return null;
+
+        if (!target.Comp.Eyes.TryGetValue(terminal, out var eye))
+        {
+            if (_net.IsClient)
+                return null;
+
+            eye = Spawn(null, target.Owner.ToCoordinates());
+            target.Comp.Eyes[terminal] = eye;
+            Dirty(target);
+
+            var eyeComp = EnsureComp<EyeComponent>(eye);
+            _eye.SetDrawFov(eye, false, eyeComp);
+
+            var targetEyeComp = EnsureComp<DropshipTargetEyeComponent>(eye);
+            targetEyeComp.Target = target;
+            Dirty(eye, targetEyeComp);
+        }
+
+        return eye;
+    }
+
+    public bool TryGetTargetEye(
+        Entity<DropshipTerminalWeaponsComponent> terminal,
+        Entity<DropshipTargetComponent?> target,
+        out EntityUid eye)
+    {
+        if (Resolve(target, ref target.Comp, false) &&
+            target.Comp.Eyes.TryGetValue(terminal, out eye))
+        {
+            return true;
+        }
+
+        eye = default;
+        return false;
     }
 }

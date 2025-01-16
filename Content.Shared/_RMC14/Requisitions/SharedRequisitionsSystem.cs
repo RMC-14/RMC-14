@@ -15,6 +15,8 @@ public abstract class SharedRequisitionsSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly FixtureSystem _fixtures = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     protected int StartingDollarsPerMarine { get; private set; }
 
@@ -82,5 +84,87 @@ public abstract class SharedRequisitionsSystem : EntitySystem
         Dirty(railing);
 
         UpdateRailing(railing);
+    }
+
+    public void ChangeBudget(int amount)
+    {
+        var accountQuery = EntityQueryEnumerator<RequisitionsAccountComponent>();
+        while (accountQuery.MoveNext(out var uid, out var comp))
+        {
+            comp.Balance += amount;
+            Dirty(uid, comp);
+        }
+
+        SendUIStateAll();
+    }
+
+    protected void SendUIStateAll()
+    {
+        var query = EntityQueryEnumerator<RequisitionsComputerComponent>();
+        while (query.MoveNext(out var uid, out var computer))
+        {
+            SendUIState((uid, computer));
+        }
+    }
+
+    protected void SendUIState(Entity<RequisitionsComputerComponent> computer)
+    {
+        var elevator = GetElevator(computer);
+        var mode = elevator?.Comp.NextMode ?? elevator?.Comp.Mode;
+        var busy = elevator?.Comp.Busy ?? false;
+        var balance = CompOrNull<RequisitionsAccountComponent>(computer.Comp.Account)?.Balance ?? 0;
+        var full = elevator != null && IsFull(elevator.Value);
+
+        var state = new RequisitionsBuiState(mode, busy, balance, full);
+        _ui.SetUiState(computer.Owner, RequisitionsUIKey.Key, state);
+    }
+
+    protected bool IsFull(Entity<RequisitionsElevatorComponent> elevator)
+    {
+        return elevator.Comp.Orders.Count >= GetElevatorCapacity(elevator);
+    }
+
+    protected int GetElevatorCapacity(Entity<RequisitionsElevatorComponent> elevator)
+    {
+        var side = (int) MathF.Floor(elevator.Comp.Radius * 2 + 1);
+        return side * side;
+    }
+
+    protected Entity<RequisitionsElevatorComponent>? GetElevator(Entity<RequisitionsComputerComponent> computer)
+    {
+        var elevators = new List<Entity<RequisitionsElevatorComponent, TransformComponent>>();
+        var query = EntityQueryEnumerator<RequisitionsElevatorComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var elevator, out var xform))
+        {
+            elevators.Add((uid, elevator, xform));
+        }
+
+        if (elevators.Count == 0)
+            return null;
+
+        if (elevators.Count == 1)
+            return elevators[0];
+
+        var computerCoords = _transform.GetMapCoordinates(computer);
+        Entity<RequisitionsElevatorComponent>? closest = null;
+        var closestDistance = float.MaxValue;
+        foreach (var (uid, elevator, xform) in elevators)
+        {
+            var elevatorCoords = _transform.GetMapCoordinates(uid, xform);
+            if (computerCoords.MapId != elevatorCoords.MapId)
+                continue;
+
+            var distance = (elevatorCoords.Position - computerCoords.Position).LengthSquared();
+            if (closestDistance > distance)
+            {
+                closestDistance = distance;
+                closest = (uid, elevator);
+            }
+        }
+
+        if (closest == null)
+            return elevators[0];
+
+        return closest;
     }
 }

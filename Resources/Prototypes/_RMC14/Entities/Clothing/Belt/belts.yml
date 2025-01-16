@@ -37,8 +37,8 @@
       - CMMagazineSmg
       - CMMagazineSniper
       - Grenade
-#      - # TODO RMC14 mines
-#      - # TODO RMC14 snacks
+      #      - # TODO RMC14 mines
+      #      - # TODO RMC14 snacks
       components:
       - BallisticAmmoProvider
   - type: IgnoreContentsSize
@@ -115,7 +115,7 @@
       - PowerCell
       - CMFireExtinguisherPortable
       - RMCExplosiveBreachingCharge
-#      - # TODO nailgun, circuit board
+      #      - # TODO nailgun, circuit board
       components:
       - Welder
       - PowerCell
@@ -155,8 +155,8 @@
       - PowerCell
       - CMFireExtinguisherPortable
       - RMCExplosiveBreachingCharge
-      - RodMetal1 
-#     - # TODO nailgun, circuit board, plastic explosives, stock parts
+      - RodMetal1
+      #     - # TODO nailgun, circuit board, plastic explosives, stock parts
       components:
       - Welder
       - PowerCell
@@ -193,7 +193,8 @@
       offset: -0.3125, -0.09375
       map: [ "enum.CMHolsterLayers.Fill" ]
       visible: false
-    - state: icon-front
+    - sprite: _RMC14/Objects/Clothing/Belt/combat_utility.rsi
+      state: icon-front
     - state: half
       map: [ "openLayer" ]
     - state: full
@@ -219,7 +220,7 @@
       - PowerCell
       - CMFireExtinguisherPortable
       - RMCShellShotgun
-#      - # TODO nailgun, circuit board
+      #      - # TODO nailgun, circuit board
       components:
       - Welder
       - PowerCell
@@ -300,11 +301,11 @@
       - CMOintment
       - CMTraumaKit
       - CMBurnKit
-#      - # TODO RMC14 splints
+      #      - # TODO RMC14 splints
       - CMAutoInjector
       - CMRollerBed
       - BodyBag
-#      - # TODO RMC14 latex gloves
+      #      - # TODO RMC14 latex gloves
       - Hypospray
       components:
       - Hypospray
@@ -382,12 +383,14 @@
     sprite: _RMC14/Objects/Clothing/Belt/mortar/jungle-classic.rsi
   - type: Storage
     maxItemSize: Huge
+    grid:
+    - 0,0,9,1
     whitelist:
       components:
       - MortarShell
       tags:
       - Sidearm
-#      - # TODO RMC14 pistol, revolver, flaregun
+  #      - # TODO RMC14 pistol, revolver, flaregun
   - type: FixedItemSizeStorage
   - type: LimitedStorage
     limits:
@@ -396,7 +399,7 @@
         components:
         - Gun
     - popup: rmc-storage-limit-max-shells
-      count: 6
+      count: 4
       whitelist:
         components:
         - MortarShell
@@ -463,7 +466,8 @@
       offset: 0.15625, 0.0
       map: [ "enum.CMHolsterLayers.Fill" ]
       visible: false
-    - state: icon-front
+    - sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator_pistol.rsi
+      state: icon-front
     - state: half
       map: [ "openLayer" ]
     - state: full
@@ -507,6 +511,8 @@
   - type: Tag
     tags:
     - RMCSmartGunSidearmHolster
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: Tag
   id: RMCSmartGunSidearmHolster
@@ -529,6 +535,8 @@
       tags:
       - Grenade
   - type: FixedItemSizeStorage
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: RMCBeltGrenade
@@ -560,7 +568,8 @@
       offset: -0.1875, 0.0
       map: [ "enum.CMHolsterLayers.Fill" ]
       visible: false
-    - state: icon-front
+    - sprite: _RMC14/Objects/Clothing/Belt/smart_pistol.rsi
+      state: icon-front
     - state: half
       map: [ "openLayer" ]
     - state: full
@@ -597,6 +606,8 @@
   - type: Tag
     tags:
     - RMCSmartPistolHolster
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: Tag
   id: RMCSmartPistolHolster
@@ -615,7 +626,8 @@
       state: m1984 # TODO RMC14 per-gun underlay
       map: [ "enum.CMHolsterLayers.Fill" ]
       visible: false
-    - state: icon-front
+    - sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+      state: icon-front
     - state: half
       map: [ "openLayer" ]
     - state: full
@@ -657,6 +669,8 @@
   - type: Tag
     tags:
     - RMCGeneralPistolHolster
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: Tag
   id: RMCGeneralPistolHolster
@@ -675,7 +689,8 @@
       state: m44r # TODO RMC14 per-gun underlay
       map: [ "enum.CMHolsterLayers.Fill" ]
       visible: false
-    - state: icon-front
+    - sprite: _RMC14/Objects/Clothing/Belt/holster_revolver.rsi
+      state: icon-front
     - state: half
       map: [ "openLayer" ]
     - state: full
@@ -712,6 +727,8 @@
   - type: Tag
     tags:
     - RMCGeneralRevolverHolster
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: Tag
   id: RMCGeneralRevolverHolster

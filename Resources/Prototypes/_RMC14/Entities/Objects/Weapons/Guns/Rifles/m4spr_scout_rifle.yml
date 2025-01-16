@@ -2,7 +2,6 @@
   parent: WeaponRifleM4SPR
   name: M4SPR custom battle rifle
   id: WeaponRifleM4SPRCustom
-  suffix: Desert
   description: An improvement over the already great M4SPR. Able to take A19 rounds, as well as having better control and accuracy at the cost of being harder to use. Can take traditional M4SPR mags, at lower damage.
   components:
   - type: Sprite

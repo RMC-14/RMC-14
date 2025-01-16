@@ -30,7 +30,7 @@
     contributesToVictory: false
     countedInSlots: false
     unlockAt: 0
-    emoteSounds: null
+    emoteSounds: Larva
   - type: XenoPlasma
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
@@ -79,7 +79,8 @@
     slots:
     - Snout
   - type: Speech
-    allowedEmotes: []
+    speechSounds: XenonidLarva
+    allowedEmotes: [ "XenoRoar" ]
   - type: RMCSize
     size: Small
   - type: ParasiteAI
