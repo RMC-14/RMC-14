@@ -1080,16 +1080,18 @@
       jobs:
       - CMCMO
       choices: { CMSuit: 1 }
-      entries: [ ]
-      # TODO - id: RMCSuitLabcoat
-        # recommended: true
-      # TODO - id: RMCSuitMedicalApron
+      entries:
+      - id: RMCLabcoatCMO
+        recommended: true
+      - id: RMCLabcoat
+        recommended: true
+      - id: RMCMedicalApron
     - name: Headwear
       jobs:
       - CMCMO
       choices: { CMHelmet: 1 }
       entries:
-      # - id: RMCCMOPeakedCap TODO
+      - id: CMHeadCapCMO
       - id: CMHeadCapSurgOrange
       - id: CMHeadCapSurgBlue
       - id: CMHeadCapSurgPurple

@@ -41,10 +41,19 @@
       - id: CMScrubsPurple
       - id: RMCScrubsOlive
       - id: RMCScrubsGrey
-#    - name: Suit
-#      choices: { CMSuit: 1 }
-#      entries:
-#      - id: Medical's apron
+    - name: Suit
+      jobs:
+      - CMNurse
+      choices: { CMSuit: 1 }
+      entries:
+      - id: RMCMedicalApron
+    - name: Suit
+      jobs:
+      - CMDoctor
+      choices: { CMSuit: 1 }
+      entries:
+      - id: RMCLabcoat
+      - id: RMCMedicalApron
 #    - name: Snow gear (Snow use only)
 #      takeall: CMSnowgear
 #      entries:
