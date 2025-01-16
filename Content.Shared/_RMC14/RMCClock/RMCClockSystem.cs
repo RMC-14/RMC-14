@@ -17,10 +17,11 @@ public sealed class RMCClockSystem : EntitySystem
     private void OnExamined(Entity<RMCClockComponent> ent, ref ExaminedEvent args)
     {
         var owner = ent.Owner;
-        var date = DateTime.Now.AddYears(100).ToString("dd MMMM, yyyy");
         var worldTime = (EntityQuery<GlobalTimeManagerComponent>().FirstOrDefault()?.TimeOffset ?? TimeSpan.Zero) + _ticker.RoundDuration();
-        var time = worldTime.ToString(@"hh\:mm");
+        var worldDate = (EntityQuery<GlobalTimeManagerComponent>().FirstOrDefault()?.DateOffset ?? DateTime.Today.AddYears(100))
+                        + worldTime;
+        var time = worldDate.ToString("dd MMMM, yyyy - HH:mm");
 
-        args.PushMarkup(Loc.GetString("rmc-clock-examine", ("device", owner), ("date", date), ("time", time)));
+        args.PushMarkup(Loc.GetString("rmc-clock-examine", ("device", owner), ("time", time)));
     }
 }
