@@ -632,7 +632,7 @@ public sealed partial class ShuttleSystem
     /// <summary>
     /// Puts everyone unbuckled on the floor, paralyzed.
     /// </summary>
-    public void DoTheDinosaur(TransformComponent xform)
+    private void DoTheDinosaur(TransformComponent xform)
     {
         // Get enumeration exceptions from people dropping things if we just paralyze as we go
         var toKnock = new ValueList<EntityUid>();

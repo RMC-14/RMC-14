@@ -43,7 +43,7 @@ public sealed partial class DropshipComponent : Component
     public EntProtoId FireId = "RMCTileFire";
 
     [DataField, AutoNetworkedField]
-    public int FireRange = 15;
+    public int FireRange = 12;
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier CrashWarningSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/ARES/dropship_emergency.ogg", AudioParams.Default.WithVolume(-5));
@@ -64,11 +64,11 @@ public sealed partial class DropshipComponent : Component
     public bool DidExplosion;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan AnnounceCrashTime = TimeSpan.FromSeconds(25);
+    public TimeSpan AnnounceCrashTime = TimeSpan.FromSeconds(23);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan PlayIncomingSoundTime = TimeSpan.FromSeconds(18);
+    public TimeSpan PlayIncomingSoundTime = TimeSpan.FromSeconds(16);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan ExplodeTime = TimeSpan.FromSeconds(8);
+    public TimeSpan ExplodeTime = TimeSpan.FromSeconds(3);
 }

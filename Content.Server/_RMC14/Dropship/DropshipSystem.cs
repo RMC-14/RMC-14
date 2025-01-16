@@ -271,7 +271,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 _marineAnnounce.AnnounceARES(dropshipId.Value, marineText, dropship.MarineHijackSound, new LocId("rmc-announcement-dropship-message"));
             }
 
-            dropship.HijackLandAt = _timing.CurTime + TimeSpan.FromSeconds(Math.Max(hyperspaceTime.Value, _shuttle.DefaultTravelTime));
+            // Add 10 seconds to compensate for the arriving times
+            dropship.HijackLandAt = _timing.CurTime + TimeSpan.FromSeconds(hyperspaceTime.Value) + TimeSpan.FromSeconds(10);
             Dirty(dropshipId.Value, dropship);
         }
 
@@ -454,7 +455,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 Dirty(uid, dropship);
 
                 _sound.PlayGlobalOnStation(dropship.Destination.Value, _audio.GetSound(dropship.CrashSound));
-                _rmcFlammable.SpawnFireDiamond(dropship.FireId, destinationEntityCoords, dropship.FireRange);
+                _rmcFlammable.SpawnFireDiamond(dropship.FireId, destinationEntityCoords, dropship.FireRange, 11);
                 _rmcExplosion.QueueExplosion(destinationCoords, "RMCOB", 50000, 1500, 90, uid);
 
                 continue;
