@@ -50,11 +50,17 @@
     - name: Personal Sidearm
       choices: { CMWeapon: 1 }
       entries:
-      - id: RMCWeaponRevolverM44
+      - id: RMCMK80BeltFilled
+        name: MK80 pistol
         recommended: true
-      - id: CMWeaponPistolM1984
+      - id: RMCM1984BeltFilled
+        name: M1984 service pistol
         recommended: true
-      - id: CMWeaponPistolMK80
+      - id: CMM77BeltFilled
+        name: M77 pistol
+        recommended: true
+      - id: RMCM44BeltFilled
+        name: M44 revolver
         recommended: true
     - name: Backpack
       choices: { CMBackpack: 1 }
