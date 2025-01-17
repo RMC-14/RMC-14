@@ -74,7 +74,7 @@
     offsets:
       rmc-aslot-barrel: 0.625, 0.125
       rmc-aslot-rail: -0.03, 0.185
-      rmc-aslot-underbarrel: 0.31, -0.186
+      rmc-aslot-underbarrel: 0.25, -0.125
 
 - type: entity
   parent: CMWeaponPistolM77
