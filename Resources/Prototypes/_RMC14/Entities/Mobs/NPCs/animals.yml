@@ -243,6 +243,63 @@
 
 - type: entity
   parent: MarkerBase
+  id: RMCSpawnRatBlack
+  name: rat spawner
+  suffix: black
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: icon-3
+      sprite: _RMC14/Mobs/Animals/rat.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobRatBlack
+
+- type: entity
+  parent: RMCSpawnRatBlack
+  id: RMCSpawnRatGray
+  suffix: gray
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: icon-2
+      sprite: _RMC14/Mobs/Animals/rat.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobRatGray
+
+- type: entity
+  parent: RMCSpawnRatBlack
+  id: RMCSpawnRatBrown
+  suffix: brown
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: icon-1
+      sprite: _RMC14/Mobs/Animals/rat.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobRatBrown
+
+- type: entity
+  parent: RMCSpawnRatBlack
+  id: RMCSpawnRatWhite
+  suffix: white
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: icon-0
+      sprite: _RMC14/Mobs/Animals/rat.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobRatWhite
+
+- type: entity
+  parent: MarkerBase
   id: CMSpawnMobWiggles
   name: Mr. Wiggles Spawner
   suffix: CM

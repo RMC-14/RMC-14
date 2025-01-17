@@ -160,6 +160,22 @@
 
 - type: entity
   parent: RMCContainerTartarusLeft
+  id: RMCContainerShortRedLeft
+  suffix: Red, Left
+  components:
+  - type: Sprite
+    state: redleft
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerShortRedRight
+  suffix: Red, Right
+  components:
+  - type: Sprite
+    state: redright
+
+- type: entity
+  parent: RMCContainerTartarusLeft
   id: RMCContainerShortTanLeft
   suffix: Tan, Left
   components:
