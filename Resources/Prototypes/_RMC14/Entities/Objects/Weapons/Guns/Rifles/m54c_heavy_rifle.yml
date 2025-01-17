@@ -90,7 +90,7 @@
           - RMCAttachmentBurstFireAssembly
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentVerticalGrip
-  - type: AttachableHolderVisuals # CHANGE THESE WHEN THIS THING GETS ITS OWN SPRITE
+  - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.81, 0.029
       rmc-aslot-rail: 0.125, 0.185
