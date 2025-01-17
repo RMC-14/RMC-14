@@ -77,6 +77,59 @@
     coldDamageThreshold: 0
 
 - type: entity
+  parent: MobMouse
+  id: RMCMobRat
+  suffix: RMC
+  name: rat
+  description: It's a small laboratory rat.
+  components:
+  - type: GhostRole
+    prob: 0
+  - type: CrashLandable
+  - type: PressureImmunity
+  - type: Respirator
+    minSaturation: 5.0
+  - type: Temperature
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
+  - type: Sprite
+    drawdepth: SmallMobs
+    sprite: _RMC14/Mobs/Animals/rat.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: rat-0
+
+- type: entity
+  parent: RMCMobRat
+  id: RMCMobRatBrown
+  suffix: RMC
+  name: rat
+  description: It's a big, disease-ridden rodent.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: rat-1
+
+- type: entity
+  parent: RMCMobRatBrown
+  id: RMCMobRatGray
+  components:
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: rat-2
+
+- type: entity
+  parent: RMCMobRatBrown
+  id: RMCMobRatBlack
+  components:
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: rat-3
+
+- type: entity
   parent: MobCorgiPuppy
   id: CMMobWiggles
   name: Mister Wiggles
