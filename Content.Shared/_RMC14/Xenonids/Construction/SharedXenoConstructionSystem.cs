@@ -3,8 +3,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -21,7 +23,6 @@ using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
-using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Prototypes;
@@ -69,12 +70,15 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         .Where(d => d != Direction.Invalid)
         .ToImmutableArray();
 
-    private EntityQuery<HiveConstructionNodeComponent> _hiveConstructionNodeQuery;
+    private EntityQuery<BlockXenoConstructionComponent> _blockXenoConstructionQuery;
     private EntityQuery<XenoConstructionSupportComponent> _constructionSupportQuery;
     private EntityQuery<XenoConstructionRequiresSupportComponent> _constructionRequiresSupportQuery;
+    private EntityQuery<HiveConstructionNodeComponent> _hiveConstructionNodeQuery;
+    private EntityQuery<SentryComponent> _sentryQuery;
     private EntityQuery<TransformComponent> _transformQuery;
     private EntityQuery<XenoConstructComponent> _xenoConstructQuery;
     private EntityQuery<XenoEggComponent> _xenoEggQuery;
+    private EntityQuery<XenoTunnelComponent> _xenoTunnelQuery;
     private EntityQuery<XenoWeedsComponent> _xenoWeedsQuery;
 
     private const string XenoStructuresAnimation = "RMCEffect";
@@ -83,12 +87,15 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     public override void Initialize()
     {
-        _hiveConstructionNodeQuery = GetEntityQuery<HiveConstructionNodeComponent>();
+        _blockXenoConstructionQuery = GetEntityQuery<BlockXenoConstructionComponent>();
         _constructionSupportQuery = GetEntityQuery<XenoConstructionSupportComponent>();
         _constructionRequiresSupportQuery = GetEntityQuery<XenoConstructionRequiresSupportComponent>();
+        _hiveConstructionNodeQuery = GetEntityQuery<HiveConstructionNodeComponent>();
+        _sentryQuery = GetEntityQuery<SentryComponent>();
         _transformQuery = GetEntityQuery<TransformComponent>();
         _xenoConstructQuery = GetEntityQuery<XenoConstructComponent>();
         _xenoEggQuery = GetEntityQuery<XenoEggComponent>();
+        _xenoTunnelQuery = GetEntityQuery<XenoTunnelComponent>();
         _xenoWeedsQuery = GetEntityQuery<XenoWeedsComponent>();
 
         SubscribeLocalEvent<XenoConstructComponent, MapInitEvent>(OnConstructMapInit);
@@ -665,7 +672,11 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
         while (anchored.MoveNext(out var uid))
         {
-            if (_xenoConstructQuery.HasComp(uid) || _xenoEggQuery.HasComp(uid))
+            if (_xenoConstructQuery.HasComp(uid) ||
+                _xenoEggQuery.HasComp(uid) ||
+                _xenoTunnelQuery.HasComp(uid) ||
+                _sentryQuery.HasComp(uid) ||
+                _blockXenoConstructionQuery.HasComp(uid))
             {
                 _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
                 return false;
@@ -820,7 +831,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
             if (HasComp<XenoConstructComponent>(uid) ||
                 _tags.HasAnyTag(uid.Value, StructureTag, AirlockTag) ||
-                HasComp<StrapComponent>(uid))
+                HasComp<StrapComponent>(uid) ||
+                _xenoTunnelQuery.HasComp(uid) ||
+                _sentryQuery.HasComp(uid) ||
+                _blockXenoConstructionQuery.HasComp(uid))
             {
                 popupType = "rmc-xeno-construction-blocked";
                 return false;
@@ -841,6 +855,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             popupType = "rmc-xeno-construction-must-have-weeds";
             return false;
         }
+
         return true;
     }
 }

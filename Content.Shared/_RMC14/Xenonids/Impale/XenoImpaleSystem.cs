@@ -6,12 +6,12 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Coordinates;
 using Robust.Shared.Timing;
 using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.Weapons.Melee;
 
 namespace Content.Shared._RMC14.Xenonids.Impale;
 
@@ -25,7 +25,7 @@ public sealed class XenoImpaleSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
 
 
     public override void Initialize()
@@ -74,6 +74,8 @@ public sealed class XenoImpaleSystem : EntitySystem
             var filter = Filter.Pvs(target, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno);
             _flash.RaiseEffect(Color.Red, new List<EntityUid> { target }, filter);
         }
+
+        _rmcMelee.DoLunge(xeno, target);
 
         if (_net.IsClient)
             return;

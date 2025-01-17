@@ -19,6 +19,7 @@
     equipSound:
       path: /Audio/_RMC14/Machines/armor_equip.ogg
   - type: PlaytimeMedalHolder
+  - type: MoveOrderArmor
 
 - type: entity
   abstract: true
@@ -46,6 +47,7 @@
       - RMCGeneralRevolverHolster
       - RMCXM51Holster
       - RMCMotionDetector
+      - RMCMatebaHolster
       #TODO walkman
 
 - type: entity
@@ -139,6 +141,7 @@
       - RMCSMGPouchHolster
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
+      - RMCMatebaHolster
       #TODO Ceremonial Sword
       - RMCMotionDetector
       #TODO walkman

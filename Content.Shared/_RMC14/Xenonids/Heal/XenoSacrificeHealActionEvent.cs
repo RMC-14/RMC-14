@@ -22,5 +22,5 @@ public sealed partial class XenoSacrificeHealActionEvent : EntityTargetActionEve
     public TimeSpan RespawnDelay = TimeSpan.FromSeconds(0.5);
 
     [DataField]
-    public EntProtoId HealEffect = "RMCEffectHeal";
+    public EntProtoId HealEffect = "RMCEffectHealSacrifice";
 }

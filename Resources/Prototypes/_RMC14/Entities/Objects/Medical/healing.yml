@@ -96,6 +96,8 @@
     - Brutepack
   - type: Sprite
     state: gauze
+  - type: Item
+    heldPrefix: gauze
   - type: WoundTreater
     wound: Brute
     treats: true
@@ -158,6 +160,8 @@
     - CMSurgicalLine
   - type: Sprite
     state: line_brute
+  - type: Item
+    heldPrefix: line_brute
   - type: WoundTreater
     wound: Brute
     treats: false
@@ -200,6 +204,8 @@
     - CMSynthGraft
   - type: Sprite
     state: line_burn
+  - type: Item
+    heldPrefix: line_burn
   - type: WoundTreater
     wound: Burn
     treats: false
@@ -249,6 +255,8 @@
     - CMBurnKit
   - type: Sprite
     state: burnkit
+  - type: Item
+    heldPrefix: burnkit
   - type: WoundTreater
     wound: Burn
     treats: true
@@ -315,6 +323,8 @@
     - CMTraumaKit
   - type: Sprite
     state: traumakit
+  - type: Item
+    heldPrefix: traumakit
   - type: WoundTreater
     wound: Brute
     treats: true

@@ -194,6 +194,10 @@
       visible: false
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
   - type: RMCXenoDamageVisuals
     prefix: drone
   - type: Xeno

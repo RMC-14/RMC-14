@@ -61,3 +61,7 @@
     price: 500
   - type: RMCNameItemOnVend
     item: PrimaryGun
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
+      state: all

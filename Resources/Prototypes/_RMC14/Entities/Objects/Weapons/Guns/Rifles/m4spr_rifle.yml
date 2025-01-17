@@ -2,7 +2,6 @@
   parent: CMBaseWeaponRifle
   name: M4SPR battle rifle
   id: WeaponRifleM4SPR
-  suffix: Desert
   description: The M4SPR battle rifle is a designated marksman rifle in service with the Marine. Sporting a bullpup configuration, the M4SPR battle rifle is perfect for reconnaissance and fire support teams.
   components:
   - type: Sprite
@@ -85,7 +84,7 @@
           - RMCAttachmentVerticalGrip
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 1.18, 0.0
+      rmc-aslot-barrel: 1.12, 0.0
       rmc-aslot-rail: 0.225, 0.125
       rmc-aslot-underbarrel: 0.62, -0.31
   - type: ItemCamouflage
