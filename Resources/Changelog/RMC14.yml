@@ -1,19 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed a Warrior stopping its pull not cancelling the stun and knockdown
-      from it. If a Warrior stops pulling someone after hitting them with a Lunge,
-      the target will now correctly instantly get up.
-    type: Fix
-  - message: Fixed Warrior Punch and Fling not cancelling pulls if done while pulling
-      the target. Punch and Fling will now correctly break your pull on the target
-      if you happen to be pulling them before using either ability.
-    type: Fix
-  id: 720
-  time: '2024-09-21T07:34:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4097
-- author: DrSmugleaf
-  changes:
   - message: Added gun prediction and lag compensation, aka removes the delay on firing
       due to ping.
     type: Add
@@ -5127,5 +5114,12 @@
   id: 1219
   time: '2025-01-16T02:11:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5395
+- author: blueDev2
+  changes:
+  - message: Healing lessers drones no longer adds energy
+    type: Fix
+  id: 1220
+  time: '2025-01-17T12:03:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5412
 Name: RMC14
 Order: -1
