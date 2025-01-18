@@ -50,11 +50,17 @@
     - name: Personal Sidearm
       choices: { CMWeapon: 1 }
       entries:
-      - id: RMCWeaponRevolverM44
+      - id: RMCMK80BeltFilled
+        name: MK80 pistol
         recommended: true
-      - id: CMWeaponPistolM1984
+      - id: RMCM1984BeltFilled
+        name: M1984 service pistol
         recommended: true
-      - id: CMWeaponPistolMK80
+      - id: CMM77BeltFilled
+        name: M77 pistol
+        recommended: true
+      - id: RMCM44BeltFilled
+        name: M44 revolver
         recommended: true
     - name: Backpack
       choices: { CMBackpack: 1 }
@@ -123,8 +129,11 @@
       - id: CMBeltMarine
         recommended: true
       - id: CMBeltUtilityFilled
+        name: M276 pattern toolbelt rig (Full)
       - id: CMBeltMedicBagFilled
+        name: M276 lifesaver bag (Full)
       - id: CMBeltMedicalFilled
+        name: M276 medical storage rig (Full)
       - id: RMCBeltHolsterSMGPouch
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
       - id: RMCM276ShotgunShellLoadingRig
