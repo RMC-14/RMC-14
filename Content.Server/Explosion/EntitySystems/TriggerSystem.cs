@@ -192,8 +192,9 @@ namespace Content.Server.Explosion.EntitySystems
 
             foreach (var entity in query)
             {
-                if(HasComp<XenoComponent>(entity))
+                if (HasComp<XenoComponent>(entity))
                     continue;
+
                 var transform = Transform(entity);
                 if (!_random.Prob(component.Probability) || !_interaction.InRangeUnobstructed(uid, transform.Coordinates, component.Range))
                     continue;
