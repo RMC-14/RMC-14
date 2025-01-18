@@ -282,7 +282,7 @@
   components:
   - type: AccessReader
     access:
-    - [ [ "CMAccessMarinePrep" ], [ "CMAccessRequisitions" ] ]
+    - [ "CMAccessMarinePrep", "CMAccessRequisitions" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_ammo.rsi
   - type: CMAutomatedVendor
@@ -339,7 +339,7 @@
   components:
   - type: AccessReader
     access:
-    - [ [ "CMAccessMarinePrep" ], [ "CMAccessRequisitions" ] ]
+    - [ "CMAccessMarinePrep", "CMAccessRequisitions" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
@@ -411,7 +411,7 @@
   components:
   - type: AccessReader
     access:
-    - [ [ "CMAccessMarinePrep" ], [ "CMAccessRequisitions" ] ]
+    - [ "CMAccessMarinePrep", "CMAccessRequisitions" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
