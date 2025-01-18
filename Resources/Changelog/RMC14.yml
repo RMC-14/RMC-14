@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: You can now become a parasite by using a right click verb on an egg.
-    type: Add
-  id: 723
-  time: '2024-09-21T08:38:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4013
 - author: Vermidia
   changes:
   - message: All xenos minus parasites can now emote properly
@@ -5116,5 +5109,12 @@
   id: 1222
   time: '2025-01-17T12:06:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5409
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed armor variants not being patreon named.
+    type: Fix
+  id: 1223
+  time: '2025-01-18T03:34:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5415
 Name: RMC14
 Order: -1
