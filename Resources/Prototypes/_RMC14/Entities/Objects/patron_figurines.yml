@@ -1054,7 +1054,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronPenelopeCyclopsDavid
   name: Penelope 'Cyclops' David figurine
-  description: ""
+  description: "Easy to spot, misses a lot."
   components:
   - type: Sprite
     state: penelope_cyclops_david
