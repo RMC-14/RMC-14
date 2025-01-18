@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Removed the Pacifist character trait.
-    type: Remove
-  id: 728
-  time: '2024-09-21T19:20:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4102
-- author: DrSmugleaf
-  changes:
   - message: Fixed being able to place and fire mortars on the warship.
     type: Fix
   id: 729
@@ -5107,5 +5100,13 @@
   id: 1227
   time: '2025-01-18T03:46:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5392
+- author: Vermidia
+  changes:
+  - message: Fixed the xm88 doing too much damage, it's base firerate and accuracy
+      has also been improved (buffed firerate is the same)
+    type: Fix
+  id: 1228
+  time: '2025-01-18T03:47:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5404
 Name: RMC14
 Order: -1
