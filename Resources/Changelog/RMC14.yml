@@ -1,44 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added Sentry name to the list of Patreon nameable items. The name will
-      persist between upgrades.
-    type: Add
-  id: 719
-  time: '2024-09-21T07:08:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4095
-- author: DrSmugleaf
-  changes:
-  - message: Fixed a Warrior stopping its pull not cancelling the stun and knockdown
-      from it. If a Warrior stops pulling someone after hitting them with a Lunge,
-      the target will now correctly instantly get up.
-    type: Fix
-  - message: Fixed Warrior Punch and Fling not cancelling pulls if done while pulling
-      the target. Punch and Fling will now correctly break your pull on the target
-      if you happen to be pulling them before using either ability.
-    type: Fix
-  id: 720
-  time: '2024-09-21T07:34:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4097
-- author: DrSmugleaf
-  changes:
-  - message: Added gun prediction and lag compensation, aka removes the delay on firing
-      due to ping.
-    type: Add
-  - message: Fixed melee attack lag compensation not accounting for your ping, which
-      would make melee attacks done by players with higher ping more unreliable.
-    type: Fix
-  id: 721
-  time: '2024-09-21T08:29:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4096
-- author: lapatison
-  changes:
-  - message: Added M15 fragmentation (hand) grenade. This grenade is stronger than
-      it's counterparts, but can't be used with grenade launchers.
-    type: Add
-  id: 722
-  time: '2024-09-21T08:35:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4031
 - author: Dutch-VanDerLinde
   changes:
   - message: You can now become a parasite by using a right click verb on an egg.
@@ -5128,5 +5088,33 @@
   id: 1218
   time: '2025-01-13T07:52:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5381
+- author: CyberTropic
+  changes:
+  - message: Fixed digital clock showing proper date from the server.
+    type: Fix
+  id: 1219
+  time: '2025-01-16T02:11:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5395
+- author: blueDev2
+  changes:
+  - message: Healing lessers drones no longer adds energy
+    type: Fix
+  id: 1220
+  time: '2025-01-17T12:03:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5412
+- author: SG6732
+  changes:
+  - message: Tweaked the M54CE2 Sprite and attachment node
+    type: Tweak
+  id: 1221
+  time: '2025-01-17T12:05:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5410
+- author: SG6732
+  changes:
+  - message: Fixed underbarrel flashlight grip moving when on.
+    type: Fix
+  id: 1222
+  time: '2025-01-17T12:06:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5409
 Name: RMC14
 Order: -1
