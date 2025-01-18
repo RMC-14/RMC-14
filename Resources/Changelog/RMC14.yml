@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed being able to place and fire mortars on the warship.
-    type: Fix
-  id: 729
-  time: '2024-09-21T19:31:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4105
-- author: DrSmugleaf
-  changes:
   - message: Fixed sentries blocking grenades and bullets even when not aiming at
       them directly.
     type: Fix
@@ -5108,5 +5101,12 @@
   id: 1228
   time: '2025-01-18T03:47:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5404
+- author: SG6732
+  changes:
+  - message: Fixed typo.
+    type: Tweak
+  id: 1229
+  time: '2025-01-18T04:11:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5352
 Name: RMC14
 Order: -1
