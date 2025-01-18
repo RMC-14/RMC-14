@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: All xenos minus parasites can now emote properly
-    type: Fix
-  - message: Xeno death noises are a bit louder now
-    type: Fix
-  - message: Xenos have emote sounds for roaring, growling, hissing, calling for help,
-      or swiping their tails
-    type: Add
-  id: 724
-  time: '2024-09-21T08:40:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4072
 - author: DrSmugleaf
   changes:
   - message: Fixed the hive core not getting automatically destroyed if not on the
@@ -5116,5 +5104,12 @@
   id: 1223
   time: '2025-01-18T03:34:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5415
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed burst animation looping.
+    type: Fix
+  id: 1224
+  time: '2025-01-18T03:42:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5416
 Name: RMC14
 Order: -1
