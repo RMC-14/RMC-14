@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed sentries blocking grenades and bullets even when not aiming at
-      them directly.
-    type: Fix
-  id: 730
-  time: '2024-09-21T19:44:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4106
-- author: DrSmugleaf
-  changes:
   - message: Fixed the M44 revolver not shooting anything.
     type: Fix
   - message: Fixed the grenade launcher's grenades being invisible for the shooter.
@@ -5108,5 +5100,14 @@
   id: 1229
   time: '2025-01-18T04:11:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5352
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed cargo technicians not spawning with a M1984 belt.
+    type: Fix
+  - message: Fixed maint techs spawning with insulated gloves and pouches.
+    type: Fix
+  id: 1230
+  time: '2025-01-18T04:18:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5389
 Name: RMC14
 Order: -1
