@@ -197,7 +197,10 @@
   - RMCMarineSOPGeneral
   - RMCMarineSOPEquipment
   - RMCMarineSOPDepartment
-  - RMCMarineSOPNONMod
+  - RMCMarineSOPNONModDepartment
+  - RMCMarineSOPNONModCommand
+  - RMCMarineSOPNONModDeployment
+  - RMCMarineSOPNONModThirdparty
 
 # General Regulations
 - type: guideEntry
@@ -223,18 +226,7 @@
   text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPDepartment.xml"
   priority: 3
 
-# NON-Modifiable
-- type: guideEntry
-  parent: RMC
-  id: RMCMarineSOPNONMod
-  name: rmc-guide-entry-rules-marine-sop-nonmod
-  text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPNONMod.xml"
-  priority: 4
-  children:
-  - RMCMarineSOPNONModDepartment
-  - RMCMarineSOPNONModCommand
-  - RMCMarineSOPNONModDeployment
-  - RMCMarineSOPNONModThirdparty
+  # NON-Modifiable
 
 # NON-Modifiable Department
 - type: guideEntry
@@ -242,7 +234,7 @@
   id: RMCMarineSOPNONModDepartment
   name: rmc-guide-entry-rules-marine-sop-nonmod-department
   text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPNONModDepartment.xml"
-  priority: 1
+  priority: 4
 
 # NON-Modifiable Command
 - type: guideEntry
@@ -250,7 +242,7 @@
   id: RMCMarineSOPNONModCommand
   name: rmc-guide-entry-rules-marine-sop-nonmod-command
   text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPNONModCommand.xml"
-  priority: 2
+  priority: 5
 
 # NON-Modifiable Deployment Restrictions
 - type: guideEntry
@@ -258,7 +250,7 @@
   id: RMCMarineSOPNONModDeployment
   name: rmc-guide-entry-rules-marine-sop-nonmod-deployment
   text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPNONModDeployment.xml"
-  priority: 3
+  priority: 6
 
 # NON-Modifiable Third Parties
 - type: guideEntry
@@ -266,6 +258,6 @@
   id: RMCMarineSOPNONModThirdparty
   name: rmc-guide-entry-rules-marine-sop-nonmod-thirdparty
   text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPNONModThirdparty.xml"
-  priority: 4
+  priority: 7
 
 

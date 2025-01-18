@@ -14,5 +14,14 @@
   - [textlink="Department" link="RMCMarineSOPDepartment"]
   - [textlink="NON-Modifiable SOP" link="RMCMarineSOPNONMod"]
 
+  ## NON-Modifiable SOP
+
+  The SOP written in these sections may only be modified with PROVOST permission.
+
+  - [textlink="NON-Modifiable Department" link="RMCMarineSOPNONModDepartment"]
+  - [textlink="NON-Modifiable Command SOP" link="RMCMarineSOPNONModCommand"]
+  - [textlink="NON-Modifiable Deployment Restrictions" link="RMCMarineSOPNONModDeployment"]
+  - [textlink="NON-Modifiable Third-Party Personnel" link="RMCMarineSOPNONModThirdparty"]
+
 
 </Document>
