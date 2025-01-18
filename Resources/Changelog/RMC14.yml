@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: All squad roles can now buy smoke grenades.
-    type: Add
-  id: 726
-  time: '2024-09-21T09:45:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4091
-- author: DummeHytteOst
-  changes:
-  - message: Wooden planks can now be bought by requisition.
-    type: Add
-  id: 727
-  time: '2024-09-21T18:32:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4099
 - author: DrSmugleaf
   changes:
   - message: Removed the Pacifist character trait.
@@ -5106,5 +5092,20 @@
   id: 1225
   time: '2025-01-18T03:43:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5405
+- author: blueDev2
+  changes:
+  - message: Fixed most Almayer tiles being able to have Burrower tunnels placed on
+      them.
+    type: Fix
+  id: 1226
+  time: '2025-01-18T03:45:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5278
+- author: blueDev2
+  changes:
+  - message: Prevent parasites from filling up xeno tunnels
+    type: Fix
+  id: 1227
+  time: '2025-01-18T03:46:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5392
 Name: RMC14
 Order: -1
