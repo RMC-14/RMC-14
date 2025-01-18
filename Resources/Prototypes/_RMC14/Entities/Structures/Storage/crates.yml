@@ -134,6 +134,7 @@
         - SmallMobMask
         layer:
         - MachineLayer
+  - type: EntityStorage
   - type: PlaceableSurface
     isPlaceable: false
   - type: Damageable
@@ -157,6 +158,7 @@
         - Paper
   - type: ContainerContainer
     containers:
+      entity_storage: !type:Container
       paper_label: !type:ContainerSlot
   - type: StaticPrice
     price: 50
@@ -164,6 +166,40 @@
   - type: Construction
     graph: RMCCrates
     node: parts
+    containers:
+    - entity_storage
+  - type: StorageFill
+    contents:
+    - id: CMBeltUtilityFilled
+      prob: 0.05
+    - id: CMMultitool
+      prob: 0.1
+    - id: CMCrowbar
+      prob: 0.1
+    - id: RMCFlashlight
+      prob: 0.2
+    - id: CMWelder
+      prob: 0.1
+    - id: CMWirecutter
+      prob: 0.1
+    - id: CMHealthAnalyzer
+      prob: 0.1
+    - id: CMBootsBrownFilled
+      prob: 0.1
+    - id: JumpsuitMarine
+      prob: 0.1
+    - id: CMGrenadeSmoke
+      prob: 0.1
+    - id: FoodBoxDonkpocket
+      prob: 0.1
+    - id: CMMRE
+      prob: 0.1
+    - id: FoodTinMRE
+      prob: 0.25
+    - id: DoorElectronics
+      prob: 0.01
+    - id: Igniter
+      prob: 0.01
 
 
 # Weldable
